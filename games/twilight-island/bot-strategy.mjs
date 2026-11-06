@@ -59,7 +59,7 @@ const power = weapon => weapon.damage / weapon.cooldown;
 function bestWeapon(state) {
   return state.equipment.reduce((a, b) => {
     const score = w => power(w) * (w.kind === 'ranged' ? (state.fightingBoss ? 3 : 1.4) : 1) +
-      (w.leech && state.health <= 4 ? 100 : 0);
+      (w.leech && state.health <= 6 ? 100 : 0);
     return score(b) > score(a) ? b : a;
   });
 }
@@ -68,7 +68,7 @@ function chooseTarget(state, map) {
     .filter(item => item.route).sort((a, b) => a.route.length - b.route.length);
   const coins = reachable(state.coins);
   const hearts = reachable(state.pickups.filter(item => item.type === 'heart'));
-  if (state.health <= 4 && hearts.length) return hearts[0];
+  if (state.health <= 6 && hearts.length) return hearts[0];
   const weapons = reachable(state.pickups.filter(item => item.type === 'weapon'));
   const hasRanged = state.equipment.some(item => item.kind === 'ranged');
   const heldPower = Math.max(...state.equipment.map(power));
@@ -121,6 +121,33 @@ async function attack(ctx, state, weapon, ratio, fps) {
   }
   await ctx.wait(Math.min(400, 1100 / fps));
 }
+// Genuine player UI: the bottom-dock New Person glyph revives on touch.
+async function reviveWithPlayerControls(ctx) {
+  if (ctx.mobile) {
+    for (let attempt = 0; attempt < 6; attempt++) {
+      const buttons = ctx.state().buttons;
+      const glyph = buttons.find(b => /new person|rebirth|возрод/i.test(b.label) && !b.disabled);
+      const build = buttons.find(b => b.id === 'v7Build' && !b.disabled);
+      if (!glyph || !build) break;
+      if (glyph.x > 12 && glyph.x < ctx.viewport.width - 12 &&
+          glyph.y > 12 && glyph.y < ctx.viewport.height - 12) {
+        await ctx.tap(glyph.x, glyph.y);
+        await ctx.wait(200);
+        await ctx.tap(build.x, build.y);
+        await ctx.wait(1200);
+        if (ctx.state().alive) return true;
+      }
+      const y = Math.max(20, Math.min(ctx.viewport.height - 20, glyph.y));
+      await ctx.swipe(ctx.viewport.width - 24, y, 24, y, 440);
+      await ctx.wait(200);
+    }
+  } else {
+    // Original game's R key restarts once its real death screen is ready.
+    await ctx.key('KeyR', 140);
+    await ctx.wait(1200);
+  }
+  return ctx.state().alive;
+}
 export async function playLevel(ctx, level) {
   const map = ctx.info().navigation;
   let stage = -1, bestRemaining = Infinity, progressAt = Date.now(), target = null;
@@ -133,7 +160,11 @@ export async function playLevel(ctx, level) {
       loggedAt = Date.now();
       ctx.log(`observed stage=${state.stage} hp=${state.health} weapon=${state.equipped} progress=${state.progress.toFixed(2)} goal=${state.goal ? state.goal.x.toFixed(2)+','+state.goal.y.toFixed(2) : 'null'} hero=${state.hero.x.toFixed(2)},${state.hero.y.toFixed(2)} height=${state.heroHeight.toFixed(2)}`);
     }
-    if (!state.alive) throw new Error('Hero died during ordinary gameplay');
+    if (!state.alive) {
+      const reborn = await reviveWithPlayerControls(ctx);
+      if (reborn) { stage = -1; target = null; bestRemaining = Infinity; progressAt = Date.now(); enemyHealth.clear(); }
+      continue;
+    }
     if (state.stage !== stage) {
       stage = state.stage; target = null; bestRemaining = Infinity; progressAt = Date.now();
       ctx.log(`island ${level + 1}, objective ${stage + 1}/${state.objectiveCount}: health ${state.health}, weapon ${state.equipped}`);
@@ -150,8 +181,15 @@ export async function playLevel(ctx, level) {
     if (desired.id !== state.equipped) { await swap(ctx, state); continue; }
     const fps = Math.max(1, Math.min(60, state.renderFps || 20)), ratio = Math.min(1, fps * .05);
     const range = desired.kind === 'ranged' ? Math.min(12, desired.reach * .8) : desired.reach + .3;
-    if (state.threat && state.threatDistance < range) {
-      await attack(ctx, state, desired, ratio, fps); continue;
+    const heartRoute = state.health <= 6 && state.pickups.some(item =>
+      item.type === 'heart' && planRoute(map, state.hero, item));
+    if (heartRoute && target?.type !== 'heart') target = null;
+    if (state.threat && state.threatDistance < range && !(state.health < 3 && heartRoute)) {
+      if (state.reloadRemaining > 0 || state.cooldownRemaining > 0.4) {
+        const away = stickToward(state, state.threat);
+        await ctx.joystick(-away.x, -away.y, Math.min(700, 300 / ratio));
+      } else await attack(ctx, state, desired, ratio, fps);
+      continue;
     }
     const updated = refreshTarget(state, target);
     if (!updated) {

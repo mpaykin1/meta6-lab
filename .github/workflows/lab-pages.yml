@@ -29,6 +29,8 @@ jobs:
       - name: Build sandbox site (main + all lab/** previews)
         run: bash scripts/lab/build-site.sh _site
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site

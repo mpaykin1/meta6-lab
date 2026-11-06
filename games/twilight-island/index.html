@@ -888,6 +888,17 @@ function generateWorld(seed) {
   const landCells = [];
   for (let z = 0; z < D; z++) for (let x = 0; x < W; x++) if (reach[ci(x, z)] && stand[ci(x, z)] >= 4) landCells.push([x, z]);
 
+  // Victory unlocks the next ring of discoveries on replay. World geometry and
+  // the 20 original coin/weapon locations are preserved, but the first journey
+  // needs only five nearby coins and one genuinely obtainable weapon.
+  let victories = 0;
+  try { victories = Math.max(0, Math.min(3, Number(localStorage.getItem('meta-games:twilight-island:v1:victories')) || 0)); } catch {}
+  coins.sort((a, b) => Math.hypot(a.x - sx, a.z - sz) - Math.hypot(b.x - sx, b.z - sz));
+  coins.length = Math.min(coins.length, 5 + victories * 5);
+  loot.sort((a, b) => (Number(b.near) - Number(a.near)) ||
+    Math.hypot(a.x - sx, a.z - sz) - Math.hypot(b.x - sx, b.z - sz));
+  loot.length = Math.min(loot.length, 1 + victories * 5);
+
   return {
     seed, vox, hgt, stand, kind, reach, at, ci, piers, trees, rocks, ruins, seaSpots, landCells, coins, hearts, loot,
     tower: { x: tx, z: tz, base: HP, door },
@@ -1710,10 +1721,17 @@ composer.addPass(new OutputPass());
 composer.addPass(finalPass);
 const FX = finalPass.uniforms;
 
-const perf = { scale: 0.8, acc: 0, frames: 0, cool: 0 };
+// Pixel cost and five fullscreen post passes dominated software-rendered CI.
+const glInfo = renderer.getContext();
+const glDebug = glInfo.getExtension('WEBGL_debug_renderer_info');
+const glName = glDebug ? String(glInfo.getParameter(glDebug.UNMASKED_RENDERER_WEBGL)) : '';
+const SOFTWARE_GL = /swiftshader|llvmpipe|software|lavapipe/i.test(glName);
+const perf = { scale: SOFTWARE_GL ? 0.42 : IS_TOUCH ? 0.6 : 0.72, acc: 0, frames: 0, cool: 0 };
+dofH.enabled = dofV.enabled = !SOFTWARE_GL && !IS_TOUCH;
+bloom.enabled = !SOFTWARE_GL; // Shader-sprite glow, fog and atmosphere remain active.
 function resize() {
   const w = Math.max(1, innerWidth), h = Math.max(1, innerHeight);
-  const pr = Math.min(window.devicePixelRatio || 1, 1.75) * perf.scale;
+  const pr = Math.min(window.devicePixelRatio || 1, 1.5) * perf.scale;
   renderer.setPixelRatio(pr);
   renderer.setSize(w, h, false);
   composer.setPixelRatio(pr);
@@ -2420,7 +2438,7 @@ function updateHeroMesh(dt) {
 function hurt(n, fx, fz) {
   if (player.invuln > 0 || G.state !== 'play') return false;
   player.hp = Math.max(0, player.hp - n); G.hits++;
-  player.invuln = 1.5; G.hurt = 1; rig.trauma = Math.min(1, rig.trauma + 0.75);
+  player.invuln = G.total <= 5 ? 2.3 : 1.5; G.hurt = 1; rig.trauma = Math.min(1, rig.trauma + 0.75);
   G.hitstop = Math.max(G.hitstop, 0.06);
   FX.uFlashColor.value.setRGB(1, 0.45, 0.85);
   if (fx !== undefined) {
@@ -2844,6 +2862,12 @@ function showEnd(won) {
   $('btnAgain').focus();
 }
 function restart(newIsland) {
+  if (G.state === 'victory') {
+    try {
+      const key = 'meta-games:twilight-island:v1:victories';
+      localStorage.setItem(key, String(Math.min(3, (Number(localStorage.getItem(key)) || 0) + 1)));
+    } catch {}
+  }
   $('scrEnd').hidden = true; $('scrPause').hidden = true;
   buildWorld(newIsland ? (Math.random() * 1e9) | 0 : G.seed);     // always rebuild: felled trees and blasted leaves grow back
   resetRun();
@@ -3851,7 +3875,7 @@ function spawnFoe(type, x, y, z, rising) {
   const f = {
     type, def, n: def.seg, segs: [], vel: new THREE.Vector3(), kb: new THREE.Vector3(), state: rising ? 'rise' : 'wander', t: 0, alpha: rising ? 0 : 1,
     target: new THREE.Vector3(x, y, z), seed: Math.random() * 50, timer: 0, blink: 0, trail: 0, extent: def.seg * def.spacing + def.rad + 1,
-    hp: def.hp, maxHp: def.hp, flash: 0, stun: 0, slow: 0, burn: 0, burnDps: 0, burnTick: 0, shock: 0, hitT: 0, numAcc: 0, numT: 0, fireT: 3, charge: 0,
+    hp: type === 'warden' && G.total <= 5 ? 170 : def.hp, maxHp: type === 'warden' && G.total <= 5 ? 170 : def.hp, flash: 0, stun: 0, slow: 0, burn: 0, burnDps: 0, burnTick: 0, shock: 0, hitT: 0, numAcc: 0, numT: 0, fireT: 3, charge: 0,
     mode: 'orbit', modeT: 4.5, orbitA: 0, orbitDir: 1, diveTo: new THREE.Vector3(), locked: false, soulAcc: 0,
   };
   for (let k = 0; k < f.n; k++) f.segs.push(new THREE.Vector3(x, y - k * 0.25, z));
@@ -3893,6 +3917,12 @@ function spawnWarden() {
 function wanted(type) {
   if (G.state !== 'play') return 0;
   const c = G.collected;
+  const firstJourney = G.total <= 5;
+  if (firstJourney) {
+    // One combat tutorial enemy; the boss is earned by actually collecting coins.
+    if (type === 'imp') return G.play < 9 || G.kills >= 1 ? 0 : 1;
+    return 0;
+  }
   if (type === 'imp') return G.play < 9 ? 0 : Math.min(4, 1 + Math.floor(c / 5));
   if (type === 'shade') return c < 2 ? 0 : Math.min(3, 1 + Math.floor((c - 2) / 5)) + (G.all ? 1 : 0);
   return 0;
@@ -4775,8 +4805,14 @@ function perfMonitor(dt) {
   if (perf.acc >= 2) {
     const fps = perf.frames / perf.acc; perf.acc = 0; perf.frames = 0;
     let s = perf.scale;
-    if (fps < 48 && s > 0.5) s = Math.max(0.5, Math.round((s - 0.1) * 100) / 100);
-    else if (fps > 58 && s < 0.9) s = Math.min(0.9, Math.round((s + 0.05) * 100) / 100);
+    if (fps < 24) {
+      // Disable expensive full-screen passes before sacrificing world detail.
+      dofH.enabled = dofV.enabled = false;
+      bloom.enabled = false;
+      s = Math.max(0.4, Math.round((s - 0.12) * 100) / 100);
+    } else if (fps < 38) s = Math.max(0.4, Math.round((s - 0.05) * 100) / 100);
+    else if (fps > 58 && s < (SOFTWARE_GL ? 0.52 : 0.82))
+      s = Math.min(SOFTWARE_GL ? 0.52 : 0.82, Math.round((s + 0.05) * 100) / 100);
     if (s !== perf.scale) { perf.scale = s; resize(); }
   }
 }

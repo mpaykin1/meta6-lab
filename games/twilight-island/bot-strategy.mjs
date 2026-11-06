@@ -41,7 +41,8 @@ export function planRoute(map, from, goal, range = 0) {
     route.push({ x: i % width + .5, y: Math.floor(i / width) + .5, height: heights[i] });
   }
   route.reverse();
-  while (route.length > 1 && Math.hypot(route[0].x - from.x, route[0].y - from.y) < .32) route.shift();
+  // The start cell is already occupied: head directly to the next traversable cell.
+  if (route.length > 1) route.shift();
   return route;
 }
 

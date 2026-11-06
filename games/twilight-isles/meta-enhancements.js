@@ -271,7 +271,8 @@
       allowLoot(L) { return !!L.gift || unlocked.has('weapon:'+L.id); },
       allowRelic(R) { return unlocked.has('relic:'+R.id); },
       get unlocks(){return unlocked.size;},
-      get circle(){return circle;}
+      get circle(){return circle;},
+      frame(now) { tick(now); }
     });
     Object.defineProperty(window,'__META_LAYER__',{value:layer, configurable:false, writable:false});
     // A fresh plain-data snapshot on each access. No exposed actions, setters, teleports or combat cheats.
@@ -327,7 +328,6 @@
     $('btnSwim')?.addEventListener('click', onDone);
     let lastTick=0;
     function tick(now) {
-      requestAnimationFrame(tick);
       if (now-lastTick<150) return;
       lastTick=now;
       const G=game.G;
@@ -368,6 +368,6 @@
         if(G.state!=='play' && G.state!=='paused' && !panel.hidden) openMenu(false);
       }
     }
-    requestAnimationFrame(tick);
+    // The game's existing RAF calls layer.frame; no second rendering clock.
   }
 })();

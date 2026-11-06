@@ -20,7 +20,8 @@
       "scope": "browser library; not game artwork",
       "files": [
         "howler.core.min.js",
-        "LICENSE.md"
+        "LICENSE.md",
+        "howler.spatial.min.js"
       ]
     },
     {

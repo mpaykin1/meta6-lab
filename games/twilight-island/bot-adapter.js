@@ -29,7 +29,8 @@
   function buttons() {
     return Object.freeze(Array.from(document.querySelectorAll('button, summary')).flatMap(button => {
       const rect = button.getBoundingClientRect();
-      if (!rect.width || !rect.height || getComputedStyle(button).visibility === 'hidden') return [];
+      if (!rect.width || !rect.height || !button.getClientRects().length ||
+          button.closest('[hidden]') || getComputedStyle(button).visibility === 'hidden') return [];
       return [Object.freeze({ id: button.id || 'menu',
         label: button.getAttribute('aria-label') || button.title || button.textContent.trim(),
         x: rect.left + rect.width / 2, y: rect.top + rect.height / 2,

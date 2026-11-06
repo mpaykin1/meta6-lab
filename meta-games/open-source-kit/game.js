@@ -4,10 +4,10 @@ const stage=document.getElementById('stage');
 const menu=document.getElementById('menu'), panel=document.getElementById('panel');
 menu.onclick=()=>{panel.hidden=!panel.hidden;};
 document.getElementById('close').onclick=()=>{panel.hidden=true;};
-const base=location.protocol==='file:'?'../../games/broken-city/lib/three.module.js':'/meta6-lab/games/broken-city/lib/three.module.js';
+const base=new URL('../../games/broken-city/lib/three.module.js',document.baseURI).href;
 let THREE;
-try{THREE=await import(base);}catch(err){stage.textContent='WebGL-модуль недоступен';return;}
-if(typeof noise==='undefined'||typeof EasyStar==='undefined'||typeof Howl==='undefined'||typeof JoyStick==='undefined'){stage.textContent='Не загружены локальные модули';return;}
+try{THREE=await import(base);}catch(err){stage.textContent='WebGL-модуль недоступен';stage.dataset.error='three-import';console.error(err);return;}
+if(typeof noise==='undefined'||typeof EasyStar==='undefined'||typeof Howl==='undefined'||typeof JoyStick==='undefined'){stage.textContent='Не загружены локальные модули';stage.dataset.error='vendor';return;}
 noise.seed(Math.random());
 const random=(()=>{let s=(Date.now()^Math.floor(Math.random()*4294967295))>>>0;return()=>{s=(s+0x6D2B79F5)>>>0;let t=Math.imul(s^(s>>>15),1|s);t^=t+Math.imul(t^(t>>>7),61|t);return((t^(t>>>14))>>>0)/4294967296;};})();
 const rnd=(a,b)=>a+(b-a)*random();
@@ -92,7 +92,7 @@ astar.calculate();
 if(pathPoints.length&&waypoint.visible){const p=pathPoints[Math.floor(elapsed*4)%pathPoints.length];waypoint.position.copy(p);waypoint.position.y+=.27+Math.sin(elapsed*5)*.1;}
 motes.rotation.y+=dt*.002;water.rotation.z+=dt*.001;
 tmp.set(player.position.x,player.position.y+11.7,player.position.z+19);camera.position.lerp(tmp,1-Math.exp(-dt*2.3));look.set(player.position.x,player.position.y+.4,player.position.z-3);camera.lookAt(look);
-renderer.render(scene,camera);
+renderer.render(scene,camera);stage.dataset.ready='true';
 }
 const resize=()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);};
 addEventListener('resize',resize,{passive:true});player.position.set(0,height(0,0)+1.2,0);camera.position.set(0,17,26);

@@ -1,0 +1,25 @@
+name: OSS island browser smoke
+on:
+  push:
+    branches: [lab/oss-commercial-kit]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --no-package-lock playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - name: Open actual game with browser and validate 4 OSS modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/oss-http.log 2>&1 &
+          sleep 2
+          node meta-games/open-source-kit/smoke.cjs

@@ -89,7 +89,7 @@ core.rotation.x+=dt*.42;core.rotation.y+=dt*.9;halo.rotation.y+=dt*.65;
 for(const b of beacons){b.g.position.y=height(b.x,b.z)+1.5+Math.sin(elapsed*1.8+b.phase)*.21;b.crystal.rotation.y+=dt*.45;b.ring.rotation.z+=dt*.22;if(!b.done&&Math.hypot(player.position.x-b.x,player.position.z-b.z)<1.8)gainBeacon(b);}
 routeClock+=dt;if(routeClock>.9){routeClock=0;const key=xy(player.position.x)+':'+xy(player.position.z)+':'+selected;if(key!==routeFrom)findRoute(player.position.x,player.position.z);}
 astar.calculate();
-if(pathPoints.length&&waypoint.visible){const p=pathPoints[Math.floor(elapsed*4)%pathPoints.length];waypoint.position.copy(p);waypoint.position.y+=.27+Math.sin(elapsed*5)*.1;}
+if(pathPoints.length&&waypoint.visible){const idx=((Math.floor(elapsed*4)%pathPoints.length)+pathPoints.length)%pathPoints.length;const p=pathPoints[idx]||pathPoints[0];if(p){waypoint.position.copy(p);waypoint.position.y+=.27+Math.sin(elapsed*5)*.1;}}
 motes.rotation.y+=dt*.002;water.rotation.z+=dt*.001;
 tmp.set(player.position.x,player.position.y+11.7,player.position.z+19);camera.position.lerp(tmp,1-Math.exp(-dt*2.3));look.set(player.position.x,player.position.y+.4,player.position.z-3);camera.lookAt(look);
 renderer.render(scene,camera);stage.dataset.ready='true';

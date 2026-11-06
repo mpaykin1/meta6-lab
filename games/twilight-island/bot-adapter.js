@@ -103,7 +103,7 @@
       return damage / (w.cd || w.tick || 1);
     };
     let selected = null;
-    if (player.hp <= 4 && hearts.length) selected = hearts[0];
+    if (player.hp <= 6 && hearts.length) selected = hearts[0];
     if (!selected) {
       const hasRanged = arsenal.some(id => game.WEAPONS[id].kind === 'ranged');
       const heldPower = Math.max(...arsenal.map(power));
@@ -156,7 +156,10 @@
         const inCombat = nearestFoe && nearestFoe.segs[0].distanceTo(player.pos) < attackRange;
         // Spatial watchdog is appropriate for walking; during an actual fight
         // the strategy separately requires combat/health progress within 20 seconds.
-        const goal = inCombat ? nearestFoe.segs[0] : navigationFocus(game, navigation(world), player, actualGoal);
+        const waypoint = navigationFocus(game, navigation(world), player, actualGoal);
+        const realHeart = player.hp <= 6 && game.hearts.some(h => h.alive &&
+          Math.hypot(h.x - waypoint.x, h.z - waypoint.z) < 3);
+        const goal = realHeart ? waypoint : inCombat ? nearestFoe.segs[0] : waypoint;
         // The watchdog always observes a real active destination until victory.
 
         const measuredProgress = G.collected + Math.max(0, game.combat.arsenal.length - 1) + G.kills +

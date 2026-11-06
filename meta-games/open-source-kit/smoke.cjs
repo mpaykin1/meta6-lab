@@ -3,7 +3,7 @@ const { chromium } = require('playwright');
  const browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--no-sandbox']});
  const page=await browser.newPage({viewport:{width:1100,height:760}});
  const errors=[];
- page.on('pageerror',e=>errors.push(String(e)));
+ page.on('pageerror',e=>errors.push(e.stack||String(e)));
  page.on('console',msg=>{if(msg.type()==='error')errors.push(msg.text());});
  page.on('response',r=>{if(r.status()>=400)errors.push('HTTP '+r.status()+' '+r.url());});
  await page.goto('http://127.0.0.1:8765/meta-games/open-source-kit/',{waitUntil:'load',timeout:30000});

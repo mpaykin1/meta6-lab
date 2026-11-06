@@ -363,6 +363,59 @@ kbd { font-family: var(--font-ui); font-size: 13px; color: var(--paper); padding
 }
 </style>
 
+<style>
+/* Additive META GAMES presentation: keep the Three.js scene untouched. */
+#coinN, #coinT, #timer, #wName, #wStat, #wAmmo,
+.hotbar .slot span, #boss > span, #dmgLayer .dmg,
+#npcSay, #toast, #wNew { display:none!important; }
+#coins { position:relative; min-width:45px; height:42px; overflow:visible; }
+#coins::after { content:""; position:absolute; height:3px; bottom:0; left:3px;
+  width:var(--meta-coin-fill,0%); max-width:100%; background:#ffd246;
+  box-shadow:0 0 8px #ffd246; transition:width 250ms ease; }
+#minimap { top:calc(var(--hud-pad-t) + 58px); right:var(--hud-pad-r); }
+#metaMenuToggle {
+  position:fixed; z-index:160; top:var(--hud-pad-t); right:var(--hud-pad-r);
+  width:43px; height:42px; padding:0; border:1px solid #eabf69;
+  border-radius:6px; background:#21192cdd; color:#f8eec8;
+  font:30px/1 var(--font-ui); cursor:pointer; display:grid; place-items:center;
+  box-shadow:0 4px 18px #030207a6;
+}
+#metaMenuToggle:focus-visible,#metaClose:focus-visible,.metaAction:focus-visible { outline:3px solid #ffd246; }
+#metaMenu {
+  position:fixed; z-index:170; right:var(--hud-pad-r); top:calc(var(--hud-pad-t) + 50px);
+  width:min(430px,calc(100vw - 24px)); max-height:calc(100dvh - 90px);
+  overflow:auto; box-sizing:border-box; border:2px solid #ad864e;
+  border-radius:8px; padding:22px 19px 24px;
+  background:linear-gradient(160deg,#252036f5,#100e20fb 80%);
+  box-shadow:0 15px 70px #000c; color:#f8eec8;
+  font:16px/1.45 var(--font-ui); overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+#metaMenu h2 { margin:0 42px 24px 0; font-size:23px; letter-spacing:.06em; color:#ffd246; }
+#metaMenu h3 { margin:22px 0 8px; font-size:17px; letter-spacing:.09em; color:#eebf79; }
+#metaMenu p { margin:7px 0; line-height:1.48; }
+#metaMenu .metaEntry { padding:8px 10px; border-left:2px solid #9f7d4c; background:#ffffff0c; }
+#metaClose { position:absolute; top:8px; right:10px; background:transparent; border:0;
+  color:#fff0b0; font:32px/1 var(--font-ui); cursor:pointer; width:40px; height:40px; }
+#metaMenu .metaAction { margin:12px 0 0; min-height:38px; padding:7px 12px; color:#fff4c0;
+  border:1px solid #bc9258; background:#3c3147; border-radius:4px;
+  font:inherit; cursor:pointer; }
+#metaMemory::after { content:attr(data-message); }
+#metaMemory { position:fixed; z-index:125; left:50%; bottom:calc(var(--hud-pad-b) + 112px);
+  transform:translateX(-50%); box-sizing:border-box; width:min(86vw,540px);
+  padding:10px 17px; background:#1a1629dc; border:1px solid #b68f63;
+  box-shadow:0 5px 30px #05030bbd; color:#f8eec8; text-align:center;
+  font:17px/1.28 var(--font-ui); animation:metaAppears 5.2s ease both;
+  pointer-events:none; }
+@keyframes metaAppears { 0%{opacity:0} 10%{opacity:1} 80%{opacity:1} 100%{opacity:0} }
+@media(max-width:600px) {
+  #metaMenuToggle { width:39px; height:39px; font-size:26px; }
+  #minimap { top:calc(var(--hud-pad-t) + 50px); }
+  #metaMenu { left:12px; right:12px; width:auto; top:calc(var(--hud-pad-t) + 48px);
+    max-height:calc(100dvh - 78px); font-size:15px; }
+  #metaMemory { bottom:calc(var(--hud-pad-b) + 142px); font-size:15px; }
+}
+</style>
 <canvas id="c" tabindex="0" aria-label="Twilight Isle — game field"></canvas>
 
 <div class="hud" id="hud" hidden>
@@ -3697,6 +3750,7 @@ function drawMinimap() {
   const blink = Math.floor(G.time * 3) % 2 === 0;
   for (const L of loot) {                 // weapons: a small cross in the colour of their rarity
     if (!L.alive) continue;
+    if (window.__META_LAYER__ && !window.__META_LAYER__.allowLoot(L)) continue;
     const x = Math.floor(L.x), z = Math.floor(L.z);
     mmCtx.fillStyle = RAR[WEAPONS[L.id].rar].css;
     mmCtx.fillRect(x - 1, z, 3, 1); mmCtx.fillRect(x, z - 1, 1, 3);
@@ -4458,6 +4512,7 @@ function startGame() {
   $('touch').hidden = !IS_TOUCH;
   G.state = 'play'; PG.play(true);
   try { RET.onStart(); } catch (e) { console.warn(e); }
+  if (!foes.some(f => f.state !== 'dissolve') && FOES.shade) spawnFoe('shade', player.pos.x + 5, player.pos.y + 1.5, player.pos.z + 4, false);
   rig.blend = 0;
   rig.yawT = rig.yaw = Math.atan2(world.spawn.x - world.beacon.x, world.spawn.z - world.beacon.z);
   rig.pitchT = rig.pitch = 0.62; rig.distT = rig.dist = rig.eff = 11; rig.spin = rig.pspin = 0;
@@ -5562,6 +5617,7 @@ function foeAllowed(def) {
 }
 function spawnDirector(dt) {
   if (G.state !== 'play' || dt <= 0) return;
+  if (window.__META_LAYER__ && G.kills === 0 && foes.some(f => f.state !== 'dissolve' && !f.def.boss)) return;
   const ctx = spawnCtx();
   G.spawnT -= dt;
   if (G.spawnT <= 0) {
@@ -5874,6 +5930,7 @@ function updateLoot() {
   if (G.state !== 'play' || player.respawn > 0) return;
   for (const L of loot) {
     if (!L.alive) continue;
+    if (window.__META_LAYER__ && !window.__META_LAYER__.allowLoot(L)) continue;
     const dx = player.pos.x - L.x, dz = player.pos.z - L.z, dy = player.pos.y + 0.8 - L.y;
     if (Math.hypot(dx, dz) < 0.9 && Math.abs(dy) < 1.5) takeLoot(L);
   }
@@ -6148,6 +6205,7 @@ function renderLoot() {
   const li = lightTint();
   for (const L of loot) {
     if (!L.alive) continue;
+    if (window.__META_LAYER__ && !window.__META_LAYER__.allowLoot(L)) continue;
     const w = WEAPONS[L.id];
     const bob = Math.sin(G.time * 2 + L.phase) * 0.12, sway = Math.sin(G.time * 1.3 + L.phase) * 0.16;
     sprites.add(L.x, L.y + bob, L.z, 1.55, 1.55, sway, w.uv, 0, 0, 1, 1, li, li, li, 0.2 + 0.15 * Math.sin(G.time * 3 + L.phase));
@@ -6419,6 +6477,7 @@ function updateRelics(dt) {
   if (G.state !== 'play' || player.respawn > 0) return;
   for (const R of relicSpots) {
     if (!R.alive) continue;
+    if (window.__META_LAYER__ && !window.__META_LAYER__.allowRelic(R)) continue;
     if (Math.hypot(player.pos.x - R.x, player.pos.z - R.z) < 0.9 && Math.abs(player.pos.y + 0.8 - R.y) < 1.6) takeRelic(R);
   }
   if (STATS.regen > 0 && player.hp < player.maxHp) {
@@ -6451,6 +6510,7 @@ function renderRelics() {
   const li = lightTint();
   for (const R of relicSpots) {
     if (!R.alive) continue;
+    if (window.__META_LAYER__ && !window.__META_LAYER__.allowRelic(R)) continue;
     const r = REG.relics.get(R.id), rc = RAR[r.rar].col;
     const bob = Math.sin(G.time * 1.7 + R.phase) * 0.14;
     sprites.add(R.x, R.y + bob, R.z, 0.95, 0.95, 0, ICON_UV[r.icon], 0, 0, 1, 1, li, li, li, 0.35 + 0.15 * Math.sin(G.time * 3 + R.phase));
@@ -6950,6 +7010,7 @@ function start(data) {
   selectCharacter(readHero());
   emit('boot');
   const biome0 = REG.biomes.has(data.biome) ? data.biome : REG.biomes.has(readBiome()) ? readBiome() : DEFAULT_BIOME;
+  if (!Number.isFinite(data.seed)) data.seed = (DEFAULT_SEED ^ ((Math.random() * 0xffffffff) >>> 0)) >>> 0;
   buildWorld(Number.isFinite(data.seed) ? data.seed : DEFAULT_SEED, biome0);
   resetRun();
   G.state = 'title';
@@ -7851,6 +7912,7 @@ const INV = {
     'World': { fn: () => ({ coins: world.coins.length, hearts: world.hearts.length, loot: world.loot.length }) },
     'Whale (from Сумеречный архипелаг)': { fn: () => ({ segments: ARCH.WHALE.segs.length, fins: ARCH.WHALE.fins.length, eyes: ARCH.WHALE.eyes.length, drapes: ARCH.WHALE.drapes.length, voxels: ARCH.WHALE.voxels > 0 ? 1 : 0 }) },
     'Sparks & lighthouses': { fn: () => ({ colours: Object.keys(ARCH.S.lantern).length, tasks: 4, constraints: 5 }) },
+    'META discoveries & menu': { fn: () => ({ menu: document.getElementById('metaMenuToggle') ? 1 : 0, bot: Object.getOwnPropertyDescriptor(window, '__META_BOT__') ? 1 : 0 }) },
   },
   extra: {
     'R1 instant start': () => typeof RET.firstVisit === 'boolean',
@@ -8097,5 +8159,6 @@ window.__isle = {
 };
 
 </script>
+<script src="./meta-enhancements.js"></script>
 
 </body></html>

@@ -284,7 +284,10 @@ kbd { font-family: var(--font-ui); font-size: 13px; color: var(--paper); padding
 /* OBSERVER V5 EDITOR: exact original island Three.js, deliberately no second canvas. */
 html,body{position:fixed!important;inset:0!important;width:100%;height:100%;height:100dvh!important;overflow:hidden!important;overscroll-behavior:none}
 body{touch-action:none}#c{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
-#hud,.hud,.tools,.touch,#scrTitle,#scrPause,#scrEnd{display:none!important}
+#hud,.hud,.tools,.touch,#scrTitle,#scrPause{display:none!important}
+/* The original end screen must remain accessible: the player needs its real replay button. */
+#scrEnd[hidden]{display:none!important}
+#scrEnd:not([hidden]){display:flex!important;z-index:40}
 #v5Menu{position:fixed;right:max(11px,env(safe-area-inset-right));top:max(9px,env(safe-area-inset-top));z-index:30;
  max-width:min(95vw,360px);font:13px/1.4 "Pixelify Sans",system-ui,sans-serif;color:#f8eec8;touch-action:manipulation}
 #v5Menu>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;width:45px;height:45px;margin-left:auto;

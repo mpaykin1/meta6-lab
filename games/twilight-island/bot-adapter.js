@@ -191,6 +191,8 @@
           enemies: foes.length, weapons: game.combat.arsenal.length,
           buttons: buttons(),
           health: player.hp, equipped: game.combat.cur,
+          reloadRemaining: Math.max(0, game.combat.reload),
+          cooldownRemaining: Math.max(0, game.combat.cd),
           kills: G.kills,
           combatants: Object.freeze(foes.map(foe => Object.freeze({ id: foe.seed, hp: foe.hp }))),
           equipment: Object.freeze(game.combat.arsenal.map(id => {

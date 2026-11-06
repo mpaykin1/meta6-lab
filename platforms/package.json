@@ -6,12 +6,14 @@
   "main": "desktop/main.cjs",
   "scripts": {
     "prepare:web": "node scripts/prepare-web.mjs web",
-    "prepare:steam": "node scripts/prepare-web.mjs steam",
-    "prepare:play": "node scripts/prepare-web.mjs google-play",
+    "prepare:steam": "node scripts/prepare-web.mjs steam --candidate",
+    "prepare:play": "node scripts/prepare-web.mjs google-play --candidate",
     "desktop:dev": "npm run prepare:steam && electron .",
-    "desktop:pack": "npm run prepare:steam && electron-builder --win portable --x64",
+    "desktop:pack": "npm run prepare:steam && electron-builder --win --x64 --dir",
     "android:init": "cap add android",
-    "android:sync": "cap sync android"
+    "android:sync": "cap sync android",
+    "prepare:steam:release": "node scripts/prepare-web.mjs steam --release",
+    "prepare:play:release": "node scripts/prepare-web.mjs google-play --release"
   },
   "dependencies": {
     "@capacitor/core": "8.6.0"
@@ -26,16 +28,20 @@
     "appId": "com.mpaykin.metagames",
     "productName": "META GAMES",
     "asar": true,
-    "directories": { "output": "release" },
+    "directories": {
+      "output": "release"
+    },
     "files": [
       "desktop/**/*",
       "package.json"
     ],
     "extraResources": [
-      { "from": "dist/www", "to": "web" }
+      {
+        "from": "dist/www",
+        "to": "web"
+      }
     ],
     "win": {
-      "target": ["portable"],
       "signAndEditExecutable": false
     }
   }

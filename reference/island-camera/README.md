@@ -1,0 +1,3 @@
+# Эталон камеры — «Остров сумерек» (владелец: «один в один»)
+Источник: артефакт владельца (ostrov-sumerek, engine/47_camera.js, 37_input.js, 00_head.js damp/lerp/angDiff, 30_state.js rayFree, 40_hero.js rig). Это ЕДИНСТВЕННЫЙ образец поведения камеры во всех мирах.
+Ключ: тяжёлая кинематографичная камера — НЕТ мёртвой зоны. Цель взгляда = позиция героя + скорость*0.22 (lead), pos/look плавно догоняют (damp k=5.5 / 8, LERP, FPS-независимо), орбита yaw/pitch с инерцией (spin затухает exp(-3.2dt)), pitch 0.3..1.15, dist→distT, окклюзия (rayFree, lift), дыхание (sin по времени), trauma-тряска. Файлы: 47_camera.js (логика), helpers-and-rig.js (damp, rig, rayFree), 37_input.js (ввод: стик/перетаскивание камеры).

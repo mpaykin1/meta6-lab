@@ -1,0 +1,45 @@
+name: META BOT
+# Каркас Claude (защищён сторожем meta-games-guard). Бот-игрок проходит все уровни игр из games/*.
+# Цель: rules/09-platforma/META_GAMES_PLATFORM.md §8. Контракт: scripts/meta-bot/CONTRACT.md.
+on:
+  pull_request:
+    paths: ['games/**', 'scripts/meta-bot/**', '.github/workflows/meta-bot.yml', 'meta-games/**']
+  push:
+    branches: [main]
+    paths: ['games/**', 'scripts/meta-bot/**', '.github/workflows/meta-bot.yml']
+  schedule:
+    - cron: '23 1 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Self-test of the bot core (must catch cheats, stuck hero, text, repeats)
+        run: node scripts/meta-bot/selftest.mjs
+      - name: Restore FPS history
+        uses: actions/cache/restore@v4
+        with:
+          path: .meta-bot-cache
+          key: meta-bot-fps-${{ github.run_id }}
+          restore-keys: meta-bot-fps-
+      - name: Play all games
+        env:
+          META_BOT_FPS_FILE: .meta-bot-cache/fps.json
+        run: node scripts/meta-bot/run.mjs
+      - name: Save FPS history
+        if: always() && github.ref == 'refs/heads/main'
+        uses: actions/cache/save@v4
+        with:
+          path: .meta-bot-cache
+          key: meta-bot-fps-${{ github.run_id }}

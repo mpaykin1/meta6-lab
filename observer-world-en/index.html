@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#17130d">
+<title>Chain Reaction — Observers</title>
+<style>
+:root{--ink:#f3ead6;--muted:#b9aa90;--panel:rgba(23,18,12,.86);--line:rgba(238,214,174,.18);--red:#df4b3f;--gold:#d7b36a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;position:fixed;inset:0;width:100%;height:100%;height:100dvh;overflow:hidden;overscroll-behavior:none;background:#17130d;color:var(--ink);font-family:Georgia,"Times New Roman",serif;touch-action:none;-webkit-user-select:none;user-select:none}
+#game{position:fixed;inset:0;width:100%;height:100%;display:block;background:#29271d;touch-action:none}
+.ui{background:var(--panel);border:1px solid var(--line);box-shadow:0 14px 44px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#head{position:fixed;left:10px;right:10px;top:max(9px,env(safe-area-inset-top));z-index:5;border-radius:16px;padding:9px 11px;display:flex;align-items:center;gap:12px;pointer-events:none}
+#head strong{font-size:14px;letter-spacing:.03em}#head small{display:block;color:var(--muted);font-size:10px;margin-top:2px}
+#status{margin-left:auto;text-align:right;font-family:ui-sans-serif,system-ui;font-size:9px;color:var(--muted)}#status b{display:block;color:#ff7d6f;font-size:11px}
+#story{position:fixed;left:10px;right:10px;bottom:calc(82px + env(safe-area-inset-bottom));z-index:5;border-radius:17px;padding:11px 13px;max-width:740px;margin:auto;pointer-events:none}
+#story .kicker{font-family:ui-sans-serif,system-ui;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+#storyText{font-size:13px;line-height:1.38;color:#f5eddc}
+#dock{position:fixed;left:7px;right:7px;bottom:max(6px,env(safe-area-inset-bottom));height:68px;z-index:6;border-radius:17px;padding:6px;display:flex;gap:5px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;touch-action:pan-x}
+#dock::-webkit-scrollbar{display:none}.tool{flex:0 0 58px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);color:#f4ead5;border-radius:12px;padding:5px 2px;font-family:inherit;min-height:54px}
+.tool.active{outline:2px solid var(--gold);background:rgba(215,179,106,.15)}.tool .g{display:block;font-size:23px;line-height:1}.tool .n{display:block;margin-top:4px;font:8px ui-sans-serif,system-ui;color:#d8cbb5;white-space:nowrap}
+#hint{position:fixed;right:10px;top:75px;z-index:4;font:9px ui-sans-serif,system-ui;color:#d0c2aa;background:rgba(20,15,10,.58);border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:6px 9px;pointer-events:none}
+#inspectModal{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(8,6,4,.56);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);touch-action:none}
+#inspectModal.show{display:flex}.inspectCard{position:relative;width:min(520px,100%);background:#1c160f;border:1px solid rgba(238,214,174,.24);border-radius:19px;padding:18px 18px 16px;box-shadow:0 28px 80px rgba(0,0,0,.55);user-select:text;-webkit-user-select:text}
+#inspectTitle{padding-right:38px;color:var(--gold);font-size:15px;font-weight:bold;margin-bottom:9px}.inspectText{font-size:14px;line-height:1.48;color:#f6edda}
+#closeInspect{position:absolute;right:9px;top:9px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#f5ead6;font-size:21px;line-height:1;touch-action:manipulation}
+.tool.evolved{border-color:rgba(215,179,106,.38);background:rgba(215,179,106,.09)}
+@media(max-width:700px){#story{bottom:calc(80px + env(safe-area-inset-bottom));padding:10px 11px}#storyText{font-size:12px}#head{padding:8px 10px}#hint{top:70px}.tool{flex-basis:55px}}
+@media(max-height:620px){#story{bottom:72px;padding:8px 10px}#storyText{font-size:11px}#dock{height:60px}.tool{min-height:47px}.tool .g{font-size:20px}}
+</style>
+</head>
+<body>
+<canvas id="game" aria-label="Medieval Chain Reaction World"></canvas>
+<div id="head" class="ui">
+  <div><strong>CHAIN REACTION · OBSERVERS</strong><small>Institute of Historical Observation · Field Team</small></div>
+  <div id="status"><span>population <b id="pop">0</b></span><span>suspicion <b id="sus">0</b></span></div>
+</div>
+<div id="hint">choose a sign → touch the ground · drag the world</div>
+<div id="story" class="ui"><div class="kicker" id="storyKicker">Field Journal</div><div id="storyText">There is no city here yet. Only land, water, and two people the locals may one day take for foreigners. The Institute recommends starting small: give a future settlement a reason to exist—and see what people do with that reason on their own.</div></div>
+<div id="dock" class="ui"></div>
+<div id="inspectModal" aria-hidden="true">
+  <div class="inspectCard ui">
+    <button id="closeInspect" aria-label="Close">×</button>
+    <div id="inspectTitle">Object</div>
+    <div id="inspectText" class="inspectText"></div>
+  </div>
+</div>
+<script>
+(()=>{'use strict';
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d',{alpha:false});
+const dock=document.getElementById('dock'),story=document.getElementById('storyText'),kicker=document.getElementById('storyKicker');
+const popEl=document.getElementById('pop'),susEl=document.getElementById('sus');
+const inspectModal=document.getElementById('inspectModal'),inspectTitle=document.getElementById('inspectTitle'),inspectText=document.getElementById('inspectText'),closeInspect=document.getElementById('closeInspect');
+let W=0,H=0,DPR=Math.min(2,devicePixelRatio||1),time=0;
+const cam={x:0,y:0,zoom:1};
+const S={pop:0,food:8,order:20,suspicion:0,next:1,selected:'well',objects:[],history:[],chapter:0,glyphHits:[]};
+const ACTIONS={
+ well:['井','Well'],settlement:['民','Settlement'],council:['議','Council'],
+ market:['市','Market'],guild:['商','Guild'],tax:['税','Tax'],
+ school:['文','School'],scholarAction:['学','Scholar'],printing:['書','Printing Press'],
+ castle:['城','Castle'],court:['冠','Court'],decree:['令','Decree'],
+ monastery:['寺','Monastery'],relief:['慈','Relief'],doctrine:['教','Doctrine'],
+ guard:['兵','Guard'],patrol:['巡','Patrol'],militia:['隊','Militia'],
+ prison:['獄','Prison'],inquiry:['問','Interrogation'],pardon:['赦','Pardon'],
+ granary:['倉','Granary'],ration:['糧','Ration'],caravan:['車','Caravan'],
+ healer:['薬','Healer'],quarantine:['隔','Quarantine'],hospital:['療','Hospital'],
+ fire:['火','Fire'],brigade:['桶','Fight Fire'],watch:['鐘','Watch'],
+ plague:['疫','Plague'],cordon:['封','Cordon'],burial:['墓','Burial'],
+ observer:['人','Observer'],contact:['信','Contact'],extraction:['門','Extraction']
+};
+const TYPES=['well','market','school','castle','monastery','guard','prison','granary','healer','fire','plague','observer'];
+const NEXT_ACTION={well:'settlement',settlement:'council',market:'guild',guild:'tax',school:'scholarAction',scholarAction:'printing',castle:'court',court:'decree',monastery:'relief',relief:'doctrine',guard:'patrol',patrol:'militia',prison:'inquiry',inquiry:'pardon',granary:'ration',ration:'caravan',healer:'quarantine',quarantine:'hospital',fire:'brigade',brigade:'watch',plague:'cordon',cordon:'burial',observer:'contact',contact:'extraction'};
+const SECONDARY=new Set(Object.keys(ACTIONS).filter(k=>!TYPES.includes(k)));
+const LABEL=Object.fromEntries(Object.entries(ACTIONS).map(([k,v])=>[k,v[1]]));
+const GLYPH=Object.fromEntries(Object.entries(ACTIONS).map(([k,v])=>[k,v[0]]));
+function resize(){W=innerWidth;H=innerHeight;canvas.width=W*DPR;canvas.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);window.scrollTo(0,0)}
+addEventListener('resize',resize,{passive:true});addEventListener('orientationchange',()=>setTimeout(resize,80),{passive:true});resize();
+function rand(n=1){return(Math.sin((S.next*91.17+S.objects.length*17.31))*43758.5453%1+1)%1*n}
+function born(o){return Math.max(0,Math.min(1,(time-o.createdAt)/850))}
+function glyphZ(kind){return ({castle:64,monastery:58,school:48,market:39,well:40,prison:48,granary:43,healer:42,guard:40,observer:42,fire:46,plague:45}[kind]||38)}
+function actionInfo(id){return ACTIONS[id]||['◆',LABEL[id]||id]}
+function w2s(x,y,z=0){return{x:(x-cam.x)*cam.zoom+W/2,y:(y-cam.y)*cam.zoom+H/2-z*cam.zoom}}
+function s2w(x,y){return{x:(x-W/2)/cam.zoom+cam.x,y:(y-H/2)/cam.zoom+cam.y}}
+function shade(hex,f){const n=parseInt(hex.slice(1),16),r=(n>>16)&255,g=(n>>8)&255,b=n&255;return`rgb(${Math.max(0,Math.min(255,r+f))},${Math.max(0,Math.min(255,g+f))},${Math.max(0,Math.min(255,b+f))})`}
+function poly(p,fill,stroke='rgba(0,0,0,.25)'){ctx.beginPath();ctx.moveTo(p[0][0],p[0][1]);for(let i=1;i<p.length;i++)ctx.lineTo(p[i][0],p[i][1]);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.stroke()}}
+function line(a,b,col,w=1){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=col;ctx.lineWidth=w;ctx.stroke()}
+function box(x,y,z,sx,sy,sz,col){const p=w2s(x,y,z),q=cam.zoom,ax=sx*q*.5,ay=sy*q*.26,h=sz*q;const A=[p.x,p.y-ay],B=[p.x+ax,p.y],C=[p.x,p.y+ay],D=[p.x-ax,p.y],At=[A[0],A[1]-h],Bt=[B[0],B[1]-h],Ct=[C[0],C[1]-h],Dt=[D[0],D[1]-h];poly([D,C,Ct,Dt],shade(col,-38));poly([C,B,Bt,Ct],shade(col,-20));poly([Dt,Ct,Bt,At],shade(col,18))}
+function roof(x,y,z,w,d,col='#6d3f32'){const p=w2s(x,y,z),q=cam.zoom,rx=w*q*.58,ry=d*q*.27,rh=10*q;poly([[p.x-rx,p.y],[p.x,p.y-ry-rh],[p.x+rx,p.y]],col);poly([[p.x-rx,p.y],[p.x,p.y+ry],[p.x+rx,p.y],[p.x,p.y-ry-rh]],shade(col,-16))}
+function ground(){ctx.fillStyle='#2f3224';ctx.fillRect(0,0,W,H);let step=70*cam.zoom,ox=((W/2-cam.x*cam.zoom)%step+step)%step,oy=((H/2-cam.y*cam.zoom)%step+step)%step;ctx.strokeStyle='rgba(233,220,178,.035)';ctx.lineWidth=1;for(let x=ox;x<W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}for(let y=oy;y<H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+ const pts=[];for(let i=-6;i<=6;i++){let wx=i*120,wy=Math.sin(i*.7)*46+120,p=w2s(wx,wy);pts.push(p)}ctx.lineCap='round';ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);for(const p of pts.slice(1))ctx.lineTo(p.x,p.y);ctx.strokeStyle='rgba(58,99,101,.75)';ctx.lineWidth=26*cam.zoom;ctx.stroke();ctx.strokeStyle='rgba(120,169,157,.55)';ctx.lineWidth=9*cam.zoom;ctx.stroke();ctx.lineCap='butt';
+ for(let i=0;i<18;i++){let x=-520+i*63,y=-180+Math.sin(i*2.3)*30,p=w2s(x,y);ctx.fillStyle='rgba(64,74,48,.65)';ctx.beginPath();ctx.arc(p.x,p.y,8*cam.zoom,0,7);ctx.fill()}}
+function human(o,red=false){const p=w2s(o.x,o.y,14),q=cam.zoom;if(o.dead){ctx.strokeStyle='#7d2924';ctx.lineWidth=3*q;ctx.beginPath();ctx.moveTo(p.x-7*q,p.y-7*q);ctx.lineTo(p.x+7*q,p.y+7*q);ctx.moveTo(p.x+7*q,p.y-7*q);ctx.lineTo(p.x-7*q,p.y+7*q);ctx.stroke();return}ctx.fillStyle=red?'#df4b3f':'#d0c2a5';ctx.beginPath();ctx.arc(p.x,p.y-5*q,4*q,0,7);ctx.fill();ctx.strokeStyle=red?'#f26457':'#c0b395';ctx.lineWidth=3*q;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x,p.y+12*q);ctx.moveTo(p.x,p.y+4*q);ctx.lineTo(p.x-6*q,p.y+9*q);ctx.moveTo(p.x,p.y+4*q);ctx.lineTo(p.x+6*q,p.y+9*q);ctx.stroke()}
+function hut(o){box(o.x,o.y,0,23,18,14,'#9a7b56');roof(o.x,o.y,14,25,20,'#684638');let p=w2s(o.x+6,o.y+2,7);ctx.fillStyle='#e8a95d';ctx.fillRect(p.x-2,p.y-2,4,4)}
+function drawMilestone(o){const p=w2s(o.x,o.y),q=cam.zoom;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(Math.sin(time*.001+o.id)*.025);ctx.fillStyle='#6f5638';ctx.fillRect(-3*q,-22*q,6*q,25*q);ctx.fillStyle='#c0a05e';ctx.beginPath();ctx.moveTo(2*q,-22*q);ctx.lineTo(20*q,-15*q);ctx.lineTo(2*q,-8*q);ctx.closePath();ctx.fill();ctx.restore()}
+function drawObject(o){if(o.kind==='hut'){hut(o);return}if(o.kind==='observer'){human(o,true);return}if(o.kind==='scholar'){human(o,false);return}if(SECONDARY.has(o.kind)){drawMilestone(o);return}
+ if(o.kind==='well'){let p=w2s(o.x,o.y);ctx.fillStyle='#7b7365';ctx.beginPath();ctx.ellipse(p.x,p.y,16*cam.zoom,8*cam.zoom,0,0,7);ctx.fill();ctx.fillStyle='#223f44';ctx.beginPath();ctx.ellipse(p.x,p.y-2*cam.zoom,10*cam.zoom,4*cam.zoom,0,0,7);ctx.fill();box(o.x-13,o.y,0,3,3,22,'#6e5438');box(o.x+13,o.y,0,3,3,22,'#6e5438');roof(o.x,o.y,22,34,12,'#6d5134');return}
+ if(o.kind==='market'){for(let i=-1;i<=1;i++){box(o.x+i*18,o.y+(i%2)*5,0,14,11,7,i===0?'#b98a4e':'#9f6845');roof(o.x+i*18,o.y+(i%2)*5,7,15,12,i===0?'#8b2f2f':'#d0a052')}return}
+ if(o.kind==='school'){box(o.x,o.y,0,35,25,22,'#a59273');roof(o.x,o.y,22,38,28,'#6d3f32');let p=w2s(o.x,o.y,31);ctx.fillStyle='#d9c39a';ctx.fillRect(p.x-6,p.y-2,12,4);return}
+ if(o.kind==='castle'){box(o.x,o.y,0,50,38,30,'#8b877a');for(const [dx,dy] of [[-25,-18],[25,-18],[-25,18],[25,18]])box(o.x+dx,o.y+dy,0,14,14,43,'#888477');let p=w2s(o.x,o.y,30);ctx.fillStyle='#512d25';ctx.fillRect(p.x-5,p.y,10,18*cam.zoom);return}
+ if(o.kind==='monastery'){box(o.x,o.y,0,40,26,24,'#9d927a');roof(o.x,o.y,24,42,28,'#59483f');box(o.x+19,o.y-8,0,12,12,36,'#8e846f');let p=w2s(o.x+19,o.y-8,39);ctx.strokeStyle='#d0bf93';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(p.x,p.y-8);ctx.lineTo(p.x,p.y+8);ctx.moveTo(p.x-5,p.y-3);ctx.lineTo(p.x+5,p.y-3);ctx.stroke();return}
+ if(o.kind==='guard'){human(o,false);let p=w2s(o.x+6,o.y,10);ctx.strokeStyle='#9e382f';ctx.lineWidth=3*cam.zoom;ctx.beginPath();ctx.moveTo(p.x,p.y-12*cam.zoom);ctx.lineTo(p.x,p.y+9*cam.zoom);ctx.stroke();return}
+ if(o.kind==='prison'){box(o.x,o.y,0,42,30,26,'#716d66');for(let i=-1;i<=1;i++){let p=w2s(o.x+i*8,o.y-11,14);ctx.strokeStyle='#262524';ctx.lineWidth=2*cam.zoom;ctx.beginPath();ctx.moveTo(p.x,p.y-5);ctx.lineTo(p.x,p.y+5);ctx.stroke()}return}
+ if(o.kind==='granary'){box(o.x,o.y,0,38,26,20,'#9d7a4b');roof(o.x,o.y,20,41,29,'#694838');return}
+ if(o.kind==='healer'){box(o.x,o.y,0,30,22,18,'#8d866c');roof(o.x,o.y,18,33,25,'#5d463a');let p=w2s(o.x,o.y,12);ctx.fillStyle='#d8d0b6';ctx.fillRect(p.x-7,p.y-2,14,4);ctx.fillRect(p.x-2,p.y-7,4,14);return}
+ if(o.kind==='fire'){let p=w2s(o.x,o.y);for(let i=0;i<5;i++){let x=p.x+(i-2)*7*cam.zoom,h=(18+8*Math.sin(time*.006+i))*cam.zoom;poly([[x-7*cam.zoom,p.y],[x,p.y-h],[x+7*cam.zoom,p.y]],i%2?'#ff9c3d':'#d94c2f',null)}return}
+ if(o.kind==='plague'){let p=w2s(o.x,o.y),pulse=1+.12*Math.sin(time*.004+o.id);ctx.fillStyle='rgba(120,139,77,.28)';ctx.beginPath();ctx.arc(p.x,p.y,32*cam.zoom*pulse,0,7);ctx.fill();for(let i=0;i<7;i++){ctx.fillStyle=i%2?'#8e9d57':'#667646';ctx.beginPath();ctx.arc(p.x+(i-3)*7*cam.zoom,p.y+Math.sin(i+time*.002)*8*cam.zoom,3*cam.zoom,0,7);ctx.fill()}return}}
+function drawActivity(o){
+ const q=cam.zoom,p=w2s(o.x,o.y),phase=time*.001+o.id;
+ if(o.dead)return;
+ if(o.kind==='well'){for(let i=0;i<2;i++){ctx.strokeStyle='rgba(135,205,216,'+(0.35-i*.12)+')';ctx.beginPath();ctx.ellipse(p.x,p.y-2*q,(10+i*5+Math.sin(phase+i)*2)*q,(4+i*2)*q,0,0,7);ctx.stroke()}}
+ else if(o.kind==='market'){for(let i=0;i<3;i++){let a=phase*.55+i*2.1;human({x:o.x+Math.cos(a)*26,y:o.y+Math.sin(a)*11,dead:false},false)}}
+ else if(o.kind==='school'){let s=w2s(o.x+Math.sin(phase)*16,o.y+12,5);ctx.fillStyle='#e7dcc2';ctx.fillRect(s.x-4*q,s.y-2*q,8*q,4*q)}
+ else if(o.kind==='castle'){let f=w2s(o.x,o.y,50);ctx.strokeStyle='#5f4638';ctx.lineWidth=2*q;ctx.beginPath();ctx.moveTo(f.x,f.y);ctx.lineTo(f.x,f.y-18*q);ctx.stroke();ctx.fillStyle='#a53e35';ctx.beginPath();ctx.moveTo(f.x,f.y-18*q);ctx.lineTo(f.x+(12+Math.sin(phase*3)*3)*q,f.y-14*q);ctx.lineTo(f.x,f.y-10*q);ctx.closePath();ctx.fill()}
+ else if(o.kind==='monastery'){let b=w2s(o.x+19,o.y-8,43);ctx.strokeStyle='rgba(220,198,142,.75)';ctx.lineWidth=2*q;ctx.beginPath();ctx.arc(b.x+Math.sin(phase*2)*2*q,b.y,4*q,0,7);ctx.stroke()}
+ else if(o.kind==='guard'){let g={x:o.x+Math.sin(phase*.8)*18,y:o.y+Math.cos(phase*.8)*5,dead:false};human(g,false)}
+ else if(o.kind==='prison'){let g=w2s(o.x,o.y-12,12);ctx.strokeStyle='rgba(20,20,18,.75)';ctx.lineWidth=3*q;for(let i=-1;i<=1;i++){let dx=(i*7+Math.sin(phase+i)*1.2)*q;ctx.beginPath();ctx.moveTo(g.x+dx,g.y-8*q);ctx.lineTo(g.x+dx,g.y+8*q);ctx.stroke()}}
+ else if(o.kind==='granary'){let c=w2s(o.x+Math.sin(phase*.7)*28,o.y+17,1);ctx.fillStyle='#73553a';ctx.fillRect(c.x-8*q,c.y-4*q,16*q,8*q);ctx.beginPath();ctx.arc(c.x-5*q,c.y+5*q,3*q,0,7);ctx.arc(c.x+5*q,c.y+5*q,3*q,0,7);ctx.fill()}
+ else if(o.kind==='healer'){for(let i=0;i<2;i++)human({x:o.x-18+i*12,y:o.y+18+Math.sin(phase+i)*2,dead:false},false)}
+ else if(o.kind==='fire'){for(let i=0;i<4;i++){let sp=w2s(o.x+(i-1.5)*8,o.y,22+i*7+Math.sin(phase*3+i)*4);ctx.globalAlpha=.10;ctx.fillStyle='#d0c9bc';ctx.beginPath();ctx.arc(sp.x,sp.y,(7+i*2)*q,0,7);ctx.fill();ctx.globalAlpha=1}}
+ else if(o.kind==='observer'){let r=w2s(o.x,o.y,18);ctx.strokeStyle='rgba(242,100,87,'+(.25+.2*Math.sin(phase*3))+')';ctx.beginPath();ctx.arc(r.x,r.y,(10+Math.sin(phase*3)*3)*q,0,7);ctx.stroke()}
+ else if(SECONDARY.has(o.kind)){let m=w2s(o.x,o.y,24);ctx.fillStyle='rgba(215,179,106,'+(.35+.2*Math.sin(phase*2))+')';ctx.beginPath();ctx.arc(m.x,m.y,(5+Math.sin(phase*2))*q,0,7);ctx.fill()}
+}
+function drawBuildEffect(o){
+ const p=born(o);if(p>=1)return;const q=cam.zoom,s=w2s(o.x,o.y);
+ ctx.save();ctx.globalAlpha=.55*(1-p);ctx.strokeStyle='#d7b36a';ctx.lineWidth=2*q;ctx.beginPath();ctx.arc(s.x,s.y,(12+38*p)*q,0,7);ctx.stroke();
+ for(let i=0;i<5;i++){let a=i*1.256+o.id,r=(10+30*p)*q;ctx.fillStyle='#b79b72';ctx.fillRect(s.x+Math.cos(a)*r,s.y+Math.sin(a)*r*.45,2*q,2*q)}ctx.restore()
+}
+function drawGlyph(o){
+ if(o.kind==='hut'||o.kind==='scholar')return;
+ const g=GLYPH[o.kind]||'◆',p=w2s(o.x,o.y,glyphZ(o.kind)),q=Math.max(.8,cam.zoom),r=14*q;
+ ctx.save();ctx.fillStyle=o.kind==='observer'?'rgba(103,28,24,.92)':'rgba(25,19,12,.90)';ctx.strokeStyle=o.kind==='observer'?'rgba(242,100,87,.85)':'rgba(215,179,106,.72)';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(p.x,p.y,r,0,7);ctx.fill();ctx.stroke();ctx.fillStyle=o.kind==='observer'?'#ff8b7f':'#f1dcae';ctx.font=Math.round(15*q)+'px Georgia';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(g,p.x,p.y+1);
+ S.glyphHits.push({id:o.id,x:p.x-r-5,y:p.y-r-5,w:r*2+10,h:r*2+10})
+}
+function render(){time=performance.now();ground();S.glyphHits=[];const sorted=[...S.objects].sort((a,b)=>a.y-b.y);for(const o of sorted){drawObject(o);drawActivity(o);drawBuildEffect(o)}for(const o of sorted)drawGlyph(o);requestAnimationFrame(render)}requestAnimationFrame(render);
+function add(kind,x,y,extra={}){const o={id:S.next++,kind,x,y,dead:false,createdAt:performance.now(),...extra};S.objects.push(o);return o}
+function nearby(kind,x,y,r=150){return S.objects.filter(o=>o.kind===kind&&!o.dead&&Math.hypot(o.x-x,o.y-y)<r)}
+function report(title,text){kicker.textContent=title;story.textContent=text;S.history.push({title,text});popEl.textContent=S.pop;susEl.textContent=S.suspicion}
+function inspectNarrative(o){
+ const guards=nearby('guard',o.x,o.y,190).length,plague=nearby('plague',o.x,o.y,190).length,healers=nearby('healer',o.x,o.y,190).length;
+ const texts={
+ well:'People now meet at the well before they meet in the square: they argue over water, arrange work, and trade news. The settlement is growing around a simple convenience. If water becomes scarce, the right to lower a bucket first may quickly become the right to give orders.',
+ market:'The market already has a life of its own: prices change faster than decrees, merchants hear the news before the guard, and debts bind people more tightly than oaths. If wealth keeps gathering here, guilds, taxes, and people certain the city belongs to them will follow.',
+ school:'At the school, children learn to read accounts and old books, but several pupils are already asking questions no lesson planned for. The authorities still consider this harmless. If pieces of knowledge begin to connect, the city will gain people able to see how order is built—and want to change it.',
+ castle:'The castle gave the city walls, an armoury, and a man for whom the gates now open without questions. In peacetime this is called order. If war or famine comes, the castle’s power will become necessary; the danger is that necessity rarely knows when to end.',
+ monastery:'The monastery feeds the poor and records the names of the dead. People bring it not only prayers but information the authorities hear last. If disasters multiply, gratitude will strengthen the monastery faster than any wall—and mercy will slowly grow into the right to tell people how they ought to live.',
+ guard:'The guard patrols the streets and increasingly remembers faces rather than crimes. People feel safer and speak more quietly. If suspicion of outsiders grows, order will quietly change its purpose: instead of protecting the city, it will begin protecting power from the city itself.',
+ prison:'There are still few prisoners, but enough for everyone else to imagine the doors closing behind them. Punishment is gradually becoming an argument. If people are imprisoned for words and associations, fear will spread faster than the guard, and silence will become the chief proof of loyalty.',
+ granary:'The granary is full, which makes it more unsettling than an empty storehouse. The keys now have a price, the queue has a memory, and the watchman has power. If the harvest fails, the grain will save people; the only question is who decides which people deserve saving.',
+ healer:'It is no longer only the sick who visit the healer: people come to look at a man who is right too often. '+(plague?'The plague has made his knowledge look almost miraculous. ':'')+'If his treatment keeps working better than familiar remedies, gratitude will quickly become a question about where such knowledge came from—and that question is more dangerous than the disease itself.',
+ fire:'The fire is not yet history: people carry water, tear apart roofs, and search for someone to blame at the same time. Fire destroys timber faster than rumour destroys trust. If the flames are stopped, the argument over causes will begin; if not, the city will soon choose between saving property and saving people.',
+ plague:'Disease has already changed the rhythm of the streets: shops close earlier, people avoid acquaintances, and rumours move more freely than trade. '+(healers?'The healer is keeping deaths down, but attracting attention. ':'')+'If fear defeats observation, the city will find culprits faster than it finds the source of infection.',
+ observer:(o.dead?'The Observer is dead, but his involvement has not vanished. Witnesses remember the face, the place of death, and the strange objects found nearby. If the Institute inserts a replacement too quickly, separate rumours will merge into one story—and the locals will begin looking not for a culprit, but for a system.':'The Observer still has cover, but the city is already collecting small inconsistencies. '+(guards?'The guard is close. ':'')+'If interventions continue, the inhabitants will connect miraculous cures, timely warnings, and the appearance of strangers. Then observation will end: the Observer himself will become the main event this world is studying.')
+ };
+ if(texts[o.kind])return texts[o.kind];
+ return 'The sign has already entered the city’s history and no longer exists by itself, but among other people’s interests, fears, and memories. Its original meaning is beginning to change. If a new power, disaster, or idea appears nearby, this object will cause the next event—perhaps not the one it was created for at all.'
+}
+function openInspect(o){inspectTitle.textContent=(GLYPH[o.kind]||'◆')+' '+(LABEL[o.kind]||'Object');inspectText.textContent=inspectNarrative(o);inspectModal.classList.add('show');inspectModal.setAttribute('aria-hidden','false')}
+function hideInspect(){inspectModal.classList.remove('show');inspectModal.setAttribute('aria-hidden','true')}
+closeInspect.addEventListener('click',hideInspect);inspectModal.addEventListener('click',e=>{if(e.target===inspectModal)hideInspect()});
+function huts(x,y,n){for(let i=0;i<n;i++){let a=i/n*Math.PI*2+rand(.7),r=42+rand(45);add('hut',x+Math.cos(a)*r,y+Math.sin(a)*r*.6)}}
+function killObserver(obs,why){obs.dead=true;S.suspicion=Math.max(0,S.suspicion-1);report('Observer Killed',why+' The Institute has not cancelled observation: history did not stop, the inhabitants remember the stranger’s death, and his belongings may become evidence. The next operative will have to enter more carefully—into a world already changed by this death.')}
+function secondaryConsequence(o){
+ const M={
+ settlement:['Settlement','A street has appeared beside the first houses, and with the street came neighbours who already consider this place theirs. People have begun negotiating water and road repairs. If the settlement keeps growing, the next question will not be where to live, but who has the right to decide for everyone else.'],
+ council:['Council','Several elders have gathered for the first time to settle a common matter without weapons. This is not yet government, but decisions are already being remembered. If the council survives its first serious dispute, the city will gain an institution; if not, the vacant place will be taken by whoever has more men.'],
+ guild:['Guild','The merchants agreed on weights, debts, and mutual protection. The market is calmer now, but it is harder for an outsider to enter the trade. If the guild grows stronger, it will begin dictating prices to the city—and then, inevitably, take an interest in laws.'],
+ tax:['Tax','For the first time, part of the goods was taken not in exchange for a service, but because someone above had ordered it. People paid, remembered the amount and the collector’s name. If the money truly goes to the walls, authority will grow stronger; if it disappears on the way, the city will gain a new reason to hate order.'],
+ scholarAction:['Scholar','A man has appeared at the school who no longer repeats what is known, but tests it. Several observations already contradict familiar explanations. If the results become public, the city will gain new knowledge—along with its first serious conflict between evidence and authority.'],
+ printing:['Printing Press','The first dozen identical sheets spread in a single day, and no one knows who read the text last. For the first time, an idea became faster than a person. If printing is not stopped, the argument will become a public phenomenon; if it is stopped, an underground will appear.'],
+ court:['Court','Petitioners, scribes, and people able to turn proximity to the ruler into a profession have gathered around the castle. Decisions now depend not only on law, but on access. If the court expands, the city will gain administration—and a separate market for influence.'],
+ decree:['Decree','The new decree was read aloud in the square. Most obeyed before they understood it: the document had a seal, and guards stood nearby. If the decree proves useful, authority will become habit; if not, the habit will outlast the usefulness.'],
+ relief:['Relief','The monastery gave food to those denied credit by the market. The gratitude was sincere, and therefore politically dangerous. If disasters continue, people will trust the monastery more than the civic authorities—and one day spiritual authority will discover that it can already issue very earthly commands.'],
+ doctrine:['Doctrine','For the first time, a sermon explained disaster not as chance but as the structure of the world. People found events easier to understand and dissent harder to tolerate. If doctrine becomes a rule, the next dispute will no longer be about facts, but about the right to hold the wrong thought.'],
+ patrol:['Patrol','The guards have begun walking the same streets at the same hours. There are fewer criminals, but residents have learned to schedule conversations between patrols. If patrols intensify, order will become more visible; so will everything the authorities would rather not see.'],
+ militia:['Militia','The townspeople were given weapons and ordered to defend their own quarters. They felt useful and, at the same time, discovered their own strength. If the danger disappears, the weapons will remain—along with the question of why they must obey without question those they may no longer fear.'],
+ inquiry:['Interrogation','The first serious interrogation produced several names and no certainty. The investigator wrote down everything, including contradictions. If the authorities mistake testimony for knowledge, the prison will fill quickly; if they begin checking facts, they will discover that fear is a very poor instrument of inquiry.'],
+ pardon:['Pardon','The prisoner was released by the ruler’s personal decision. The crowd rejoiced for the man and remembered the mechanism: law turned out to be a door that could be opened from above. If pardons become political tools, mercy will strengthen the same ruler from whose displeasure it saves people.'],
+ ration:['Ration','Grain is now distributed by list. Hunger has eased, but the list has become more important than money. If supplies last, the city will survive the winter; if not, every scribal error will become a private tragedy, and every privilege evidence of injustice.'],
+ caravan:['Caravan','Carts have left the city in search of new grain. Along with money, they carried rumours of weak reserves. If the caravan returns, the crisis will recede; if it is intercepted, the city will lose more than food—its neighbours will learn how desperately it needs it.'],
+ quarantine:['Quarantine','The sick quarter has been sealed with ropes and guards. Infections have fallen, but healthy people remain inside with no explanation. If quarantine works, it will be forgiven; if it lasts too long, a protective boundary will become a siege of the city’s own population.'],
+ hospital:['Hospital','For the first time, the sick have been gathered in one place not merely for isolation, but for observation and treatment. The physicians are beginning to notice patterns. If their records survive, medicine will become knowledge; if the authorities fear success that comes too quickly, the hospital will become evidence against those who built it.'],
+ brigade:['Firefighting','People formed a chain from water to fire, tore down two roofs, and stopped the flames at an alley. For the first time, the city defeated disaster through organization. If the lesson is remembered, a service will emerge; if forgotten, the next fire will again have to be fought with heroism.'],
+ watch:['Watch','They agreed to keep a night watchman in the tower and ring the bell at the first sign of smoke. Fires will now be noticed earlier. But the same bell gathers people equally well for a fire or a riot—the authorities are already interested in this new way to mobilize the city.'],
+ cordon:['Cordon','The guard has closed the roads out of the infected district. Disease has slowed; trade has almost stopped. If the cordon holds long enough, the epidemic will retreat. If food runs out first, a health measure will become a political crisis and people will begin breaking through.'],
+ burial:['Burial','The dead are now buried beyond the city boundary and counted by name. The disease has become less mysterious and far more frightening: there is an exact number. If the records survive, future physicians will gain data; the present authorities may decide the population has no need for such precision.'],
+ contact:['Contact','A man who knows the Institute’s recognition sign has approached the Observer. The city now contains a communications channel—and one more witness. If it is used often, the network will become more reliable; at the same time, the local guard is more likely to notice people meeting for no obvious reason.'],
+ extraction:['Extraction','The Institute has prepared an extraction route, but readiness itself is already changing the Observer’s behaviour: risk now seems more acceptable. If extraction is used, the city will lose a man but the secret will survive; if it comes too late, the locals will obtain their first proof of alien technology.']
+ };const v=M[o.kind]||['New Action','The city has absorbed another cause whose meaning is not yet clear. People are already adapting. If the action becomes habitual, it will become an institution; if it meets resistance, that conflict will decide what it becomes in history.'];report(v[0],v[1])
+}
+function consequence(o){
+ if(SECONDARY.has(o.kind))return secondaryConsequence(o);
+ if(o.kind==='well'){S.pop+=5;S.food+=2;huts(o.x,o.y,2);report('First Settlers','Two families and an old blacksmith stopped at the well. By evening they had raised shelters and were already arguing over who should draw water first. If a market appears nearby, the camp will become a settlement; if order does not arise by itself, a man with a weapon will soon offer one.')}
+ if(o.kind==='market'){S.pop+=7;huts(o.x,o.y,2);report('Market','Three merchant wagons turned into the new square, and by noon grain was already being traded for iron. Thieves and debt collectors arrived with the merchants. If the market takes root, the settlement will grow rich—and very soon someone will decide that wealth requires an owner.')}
+ if(o.kind==='school'){S.pop+=2;S.suspicion++;add('scholar',o.x+34,o.y+9);report('Scholar','A teacher gathered children in a house near the square, and a week later one pupil began recording prices, illnesses, and deaths. The guard found the notes suspicious. If knowledge continues to accumulate, the city will gain a scholar—and people for whom questions are more dangerous than crimes.')}
+ if(o.kind==='castle'){S.order+=10;report('Authority','A stone tower has been completed on the hill, and armed men have begun calling it a residence. Merchants welcomed order; the poor welcomed new levies. If the garrison grows stronger, the city may survive a raid—but the man who controls the gates may soon control the city itself.')}
+ if(o.kind==='monastery'){S.order+=7;report('Monastery','The monks opened a kitchen and began feeding those for whom the market had no place. Within a month their word carried more weight than the elder’s orders. If famine or disease comes, people will come here for help—and gratitude will quietly turn into political power.')}
+ if(o.kind==='granary'){S.food+=18;report('Granary','The first communal granary was filled before the autumn rains. Bread became cheaper, but an armed watchman appeared at the door. If the harvest fails, this reserve will save the city; if famine lasts, the question of who holds the key will matter more than the grain itself.')}
+ if(o.kind==='healer'){let p=nearby('plague',o.x,o.y,190);S.suspicion++;if(p.length){S.pop+=3;report('Healer','The healer saved several patients by a method no one here understands. By evening dozens were waiting at his door, and the priest demanded an explanation. If the treatment continues, the plague will retreat; with it will grow curiosity about where the healer acquired impossible knowledge.')}else report('Healer','The healer settled near the market and within a week ceased to be a stranger: he delivered children, set dislocations, and asked questions about water that were far too precise. If an epidemic begins, his knowledge will save people; if the authorities notice its origin first, the healer himself will need saving.')}
+ if(o.kind==='plague'){let heal=nearby('healer',o.x,o.y,190).length;S.pop=Math.max(0,S.pop-(heal?2:6));report('Plague',heal?'Disease arrived with a merchant convoy, but the healer immediately separated the sick and ordered the water boiled. Fewer people died than the locals expected. If this continues, the city will survive the outbreak—and inevitably ask why one man knew what everyone else did not.':'Disease arrived with a merchant convoy and reached the poor quarter in three days. Bells now ring more often than shops open. If people blame outsiders, pogroms will begin; if no one understands the source of infection, the market will close next—and food with it.')}
+ if(o.kind==='fire'){let victims=S.objects.filter(x=>!x.dead&&['hut','market','school','granary'].includes(x.kind)&&Math.hypot(x.x-o.x,x.y-o.y)<100);if(victims[0])victims[0].dead=true;S.pop=Math.max(0,S.pop-2);report('Fire','Fire reached the wooden roofs before people could form a chain from the well. One house is already lost; others are being pulled apart beam by beam. If the wind rises, the quarter will burn. If the guard closes the streets, panic may prove more dangerous than the fire itself.')}
+ if(o.kind==='prison'){S.order+=4;let scholars=nearby('scholar',o.x,o.y,180);if(scholars.length)scholars[0].captured=true;report('Prison','The new stone cellar has received its first prisoner—a man who argued too loudly with the tax collector. The townspeople approved of the quiet until the doors closed behind a neighbour they knew. If authority grows used to settling disputes with cells, the next arrivals will be those who ask inconvenient questions.')}
+ if(o.kind==='guard'){S.order+=5;let obs=nearby('observer',o.x,o.y,180);if(obs.length&&S.suspicion>=2){killObserver(obs[0],'The guards waited for the Observer at the edge of the square. He could have escaped, but only by revealing too much. The crossbowman fired almost by accident—and that was enough.');return}report('Guard','A dozen armed men took the gate and announced that they were now responsible for order. The market grew quieter, but people lowered their voices at the sight of red cloaks. If fear proves more convenient than law, the guard will soon protect not the city, but its own necessity.')}
+ if(o.kind==='observer'){report('New Observer','The Institute has inserted a new operative into the city under the guise of a travelling scribe. Rumours already circulate about impossibly successful medicines and strangers appearing before disasters. If he repeats his predecessors’ mistakes, the locals will connect the stories far faster than the Institute expects.')}
+}
+function evolveButton(kind){const next=NEXT_ACTION[kind];if(!next)return;const b=[...dock.children].find(x=>x.dataset.id===kind);if(!b)return;const [g,n]=actionInfo(next);b.dataset.id=next;b.classList.add('evolved');b.innerHTML=`<span class="g">${g}</span><span class="n">${n}</span>`;S.selected=next;for(const x of dock.children)x.classList.toggle('active',x===b)}
+function place(kind,x,y){const o=add(kind,x,y);if(kind==='observer')S.suspicion=Math.max(0,S.suspicion-1);consequence(o);evolveButton(kind)}
+add('observer',-85,25);add('observer',-45,38);
+function buildDock(){for(const id of TYPES){const [g,n]=actionInfo(id),b=document.createElement('button');b.className='tool'+(id===S.selected?' active':'');b.dataset.id=id;b.innerHTML=`<span class="g">${g}</span><span class="n">${n}</span>`;b.addEventListener('click',e=>{e.stopPropagation();const cur=b.dataset.id,[cg,cn]=actionInfo(cur);S.selected=cur;for(const x of dock.children)x.classList.toggle('active',x===b);report('Tool Selected',`Selected sign: “${cn}”. Touch an empty place on the ground. This is not decoration but a cause: after the action, the button itself will advance to the next historical step.`)});dock.appendChild(b)}}buildDock();
+let down=null,moved=false;
+canvas.addEventListener('pointerdown',e=>{canvas.setPointerCapture(e.pointerId);down={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y};moved=false});
+canvas.addEventListener('pointermove',e=>{if(!down)return;let dx=e.clientX-down.x,dy=e.clientY-down.y;if(Math.hypot(dx,dy)>8)moved=true;if(moved){cam.x=down.cx-dx/cam.zoom;cam.y=down.cy-dy/cam.zoom}});
+canvas.addEventListener('pointerup',e=>{if(!down)return;if(!moved){const hit=S.glyphHits.find(h=>e.clientX>=h.x&&e.clientX<=h.x+h.w&&e.clientY>=h.y&&e.clientY<=h.y+h.h);if(hit){const o=S.objects.find(x=>x.id===hit.id);if(o)openInspect(o)}else{const p=s2w(e.clientX,e.clientY);place(S.selected,p.x,p.y)}}down=null});
+canvas.addEventListener('wheel',e=>{e.preventDefault();cam.zoom=Math.max(.65,Math.min(1.65,cam.zoom*(e.deltaY>0?.9:1.1)))},{passive:false});
+document.addEventListener('touchmove',e=>{if(!e.target.closest('#dock'))e.preventDefault()},{passive:false});
+})();
+</script>
+</body>
+</html>

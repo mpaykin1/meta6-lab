@@ -1,0 +1,42 @@
+{
+  "name": "meta-games-native",
+  "version": "0.1.0",
+  "private": true,
+  "description": "META GAMES shared offline game bundle for Android and Steam",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "prepare:web": "node scripts/prepare-web.mjs web",
+    "prepare:steam": "node scripts/prepare-web.mjs steam",
+    "prepare:play": "node scripts/prepare-web.mjs google-play",
+    "desktop:dev": "npm run prepare:steam && electron .",
+    "desktop:pack": "npm run prepare:steam && electron-builder --win portable --x64",
+    "android:init": "cap add android",
+    "android:sync": "cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/core": "8.6.0"
+  },
+  "devDependencies": {
+    "@capacitor/android": "8.6.0",
+    "@capacitor/cli": "8.6.0",
+    "electron": "45.2.2",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "com.mpaykin.metagames",
+    "productName": "META GAMES",
+    "asar": true,
+    "directories": { "output": "release" },
+    "files": [
+      "desktop/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      { "from": "dist/www", "to": "web" }
+    ],
+    "win": {
+      "target": ["portable"],
+      "signAndEditExecutable": false
+    }
+  }
+}

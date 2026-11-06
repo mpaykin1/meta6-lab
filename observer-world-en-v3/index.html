@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#17130d">
+<title>Observer World — Illustrated Musical Edition V3</title>
+<style>
+:root{--ink:#f3ead6;--muted:#b9aa90;--panel:rgba(23,18,12,.86);--line:rgba(238,214,174,.18);--red:#df4b3f;--gold:#d7b36a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;position:fixed;inset:0;width:100%;height:100%;height:100dvh;overflow:hidden;overscroll-behavior:none;background:#17130d;color:var(--ink);font-family:Georgia,"Times New Roman",serif;touch-action:none;-webkit-user-select:none;user-select:none}
+#game{position:fixed;inset:0;width:100%;height:100%;display:block;background:#29271d;touch-action:none}
+.ui{background:var(--panel);border:1px solid var(--line);box-shadow:0 14px 44px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#head{position:fixed;left:10px;right:10px;top:max(9px,env(safe-area-inset-top));z-index:5;border-radius:16px;padding:9px 11px;display:flex;align-items:center;gap:12px;pointer-events:none}
+#head strong{font-size:14px;letter-spacing:.03em}#head small{display:block;color:var(--muted);font-size:10px;margin-top:2px}
+#status{margin-left:auto;text-align:right;font-family:ui-sans-serif,system-ui;font-size:9px;color:var(--muted)}#status b{display:block;color:#ff7d6f;font-size:11px}
+#story{position:fixed;left:10px;right:10px;bottom:calc(82px + env(safe-area-inset-bottom));z-index:5;border-radius:17px;padding:11px 13px;max-width:740px;margin:auto;pointer-events:none}
+#story .kicker{font-family:ui-sans-serif,system-ui;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+#storyText{font-size:13px;line-height:1.38;color:#f5eddc}
+#dock{position:fixed;left:7px;right:7px;bottom:max(6px,env(safe-area-inset-bottom));height:68px;z-index:6;border-radius:17px;padding:6px;display:flex;gap:5px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;touch-action:pan-x}
+#dock::-webkit-scrollbar{display:none}.tool{flex:0 0 58px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);color:#f4ead5;border-radius:12px;padding:5px 2px;font-family:inherit;min-height:54px}
+.tool.active{outline:2px solid var(--gold);background:rgba(215,179,106,.15)}.tool .g{display:block;font-size:23px;line-height:1}.tool .n{display:block;margin-top:4px;font:8px ui-sans-serif,system-ui;color:#d8cbb5;white-space:nowrap}
+#hint{position:fixed;right:10px;top:75px;z-index:4;font:9px ui-sans-serif,system-ui;color:#d0c2aa;background:rgba(20,15,10,.58);border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:6px 9px;pointer-events:none}
+#inspectModal{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(8,6,4,.56);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);touch-action:none}
+#inspectModal.show{display:flex}.inspectCard{position:relative;width:min(520px,100%);background:#1c160f;border:1px solid rgba(238,214,174,.24);border-radius:19px;padding:18px 18px 16px;box-shadow:0 28px 80px rgba(0,0,0,.55);user-select:text;-webkit-user-select:text}
+#inspectTitle{padding-right:38px;color:var(--gold);font-size:15px;font-weight:bold;margin-bottom:9px}.inspectText{font-size:14px;line-height:1.48;color:#f6edda}
+#closeInspect{position:absolute;right:9px;top:9px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#f5ead6;font-size:21px;line-height:1;touch-action:manipulation}
+.tool.evolved{border-color:rgba(215,179,106,.38);background:rgba(215,179,106,.09)}
+#systemBadges{position:fixed;left:10px;top:75px;z-index:7;display:flex;gap:5px;flex-wrap:wrap;max-width:min(72vw,620px);pointer-events:none}
+.sysBadge{font:9px ui-sans-serif,system-ui;color:#cdbfa7;background:rgba(20,15,10,.72);border:1px solid rgba(255,255,255,.10);border-radius:999px;padding:5px 8px;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.sysBadge.live{color:#bde3b0;border-color:rgba(139,207,123,.35)}.sysBadge.warn{color:#ffd08b;border-color:rgba(255,188,92,.35)}
+#battleToast{position:fixed;left:50%;top:112px;transform:translateX(-50%);z-index:8;display:none;width:min(560px,calc(100vw - 24px));border-radius:14px;padding:9px 11px;font:11px/1.35 ui-sans-serif,system-ui;color:#f6ead5;pointer-events:none}
+#battleToast.show{display:block}
+@media(max-width:700px){#systemBadges{top:69px;left:8px;max-width:86vw}.sysBadge{font-size:8px;padding:4px 6px}#battleToast{top:102px;font-size:10px}}
+@media(max-width:700px){#story{bottom:calc(80px + env(safe-area-inset-bottom));padding:10px 11px}#storyText{font-size:12px}#head{padding:8px 10px}#hint{top:70px}.tool{flex-basis:55px}}
+@media(max-height:620px){#story{bottom:72px;padding:8px 10px}#storyText{font-size:11px}#dock{height:60px}.tool{min-height:47px}.tool .g{font-size:20px}}
+#soundPanel{position:fixed;right:10px;top:101px;z-index:12;display:flex;gap:5px;align-items:center;padding:6px;border-radius:12px;touch-action:manipulation;pointer-events:auto}
+#soundButton{color:#f5e8cc;background:#3c3224;border:1px solid #8b7550;border-radius:10px;padding:8px 10px;min-height:36px;min-width:92px;font:11px ui-sans-serif,system-ui;touch-action:manipulation}
+#soundButton[aria-pressed="true"]{background:#304538;border-color:#98bb8c}
+#soundVolume{width:80px;accent-color:#d7b36a;touch-action:manipulation}
+#soundScene{font:9px ui-sans-serif,system-ui;color:#e4d3b2;max-width:88px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+@media(max-width:650px){#soundPanel{top:97px;right:8px}#soundVolume{width:52px}#soundScene{display:none}}
+@media(max-height:480px){#soundPanel{top:67px}}
+
+/* Fullscreen reading: does not change world/camera/sprite scale. */
+.reader-mini{position:absolute;right:8px;top:6px;z-index:8;width:30px;height:29px;padding:0;border-radius:7px;
+ border:1px solid rgba(248,238,200,.4);background:rgba(18,13,28,.92);color:#f8eec8;
+ font:18px ui-sans-serif,system-ui;cursor:pointer;touch-action:manipulation;pointer-events:auto}
+.reader-mini:focus-visible,.reader-action:focus-visible{outline:3px solid #ffd246;outline-offset:2px}
+#story{padding-right:42px!important}#story .reader-mini{top:8px;right:8px}
+#inspectModal .reader-mini{right:50px;top:9px;z-index:25}
+#battleReader{display:none;position:fixed;top:117px;right:12px;z-index:10}
+#battleReader.visible{display:block}
+#readerOverlay{position:fixed;inset:0;z-index:60;background:#120d1c;display:none;
+ padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));
+ touch-action:pan-y;overscroll-behavior:contain}
+#readerOverlay.show{display:flex;flex-direction:column}
+#readerToolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:0 0 auto;
+ background:#292137;border:1px solid #786d65;padding:10px 12px;border-radius:12px}
+#readerToolbar .reader-action{border:1px solid #bfb091;background:#1c1723;color:#fff2d9;border-radius:8px;
+ padding:9px 13px;min-height:42px;font:15px ui-sans-serif,system-ui;touch-action:manipulation}
+#readerTitle{font:700 clamp(16px,3vw,23px) Georgia,serif;color:#ffd246;overflow-wrap:anywhere}
+#readerBody{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+ color:#f8eec8;line-height:1.65;max-width:780px;width:100%;margin:0 auto;padding:clamp(18px,4vw,36px) 10px 42px;
+ font-family:Georgia,"Times New Roman",serif;font-size:var(--reader-size,23px);white-space:pre-wrap;user-select:text;-webkit-user-select:text}
+body.reader-open #readerOverlay{display:flex}
+#head{border-color:rgba(255,210,70,.27)}
+#story,#inspectModal .inspectCard{background:rgba(21,17,27,.91);border-color:rgba(255,210,70,.24)}
+#soundButton[aria-pressed=true]{background:#38334b}
+@media(max-height:480px){#battleReader{top:69px}}
+</style>
+</head>
+<body>
+<canvas id="game" aria-label="Medieval Chain Reaction World"></canvas>
+<div id="head" class="ui">
+  <div><strong>CHAIN REACTION · OBSERVERS V3</strong><small>Twilight Artwork · Living Music · Historical Simulation</small></div>
+  <div id="status"><span>population <b id="pop">0</b></span><span>suspicion <b id="sus">0</b></span></div>
+</div>
+<div id="hint">choose a sign → touch the ground · drag the world</div>
+<div id="systemBadges">
+  <span id="aiBadge" class="sysBadge">AI: checking…</span>
+  <span class="sysBadge live">FX: WS Lab v2</span>
+  <span id="combatBadge" class="sysBadge">combat: dormant</span>
+</div>
+<div id="battleToast" class="ui"></div>
+<button type="button" id="battleReader" class="reader-mini" aria-label="Read the battle story fullscreen" title="Fullscreen text">⛶</button>
+<div id="soundPanel" class="ui" aria-label="Game audio controls">
+ <button id="soundButton" type="button" aria-pressed="false" aria-label="Enable original procedural game music and effects">♫ Sound: Off</button>
+ <input id="soundVolume" type="range" min="0" max="100" step="5" value="48" aria-label="Sound volume">
+ <span id="soundScene" aria-live="polite">Silent</span>
+</div>
+<div id="story" class="ui"><button type="button" id="storyReader" class="reader-mini" aria-label="Expand field journal fullscreen" title="Read fullscreen">⛶</button><div class="kicker" id="storyKicker">Field Journal</div><div id="storyText">There is no city here yet. Only land, water, and two people the locals may one day take for foreigners. The Institute recommends starting small: give a future settlement a reason to exist—and see what people do with that reason on their own.</div></div>
+<div id="dock" class="ui"></div>
+<div id="inspectModal" aria-hidden="true">
+  <div class="inspectCard ui">
+    <button type="button" id="inspectReader" class="reader-mini" aria-label="Expand inspection fullscreen" title="Read fullscreen">⛶</button>
+    <button id="closeInspect" aria-label="Close">×</button>
+    <div id="inspectTitle">Object</div>
+    <div id="inspectText" class="inspectText"></div>
+  </div>
+</div>
+<div id="readerOverlay" role="dialog" aria-modal="true" aria-labelledby="readerTitle" aria-hidden="true">
+ <div id="readerToolbar">
+  <div id="readerTitle">Field Journal</div>
+  <div style="display:flex;gap:6px">
+   <button id="readerMinus" type="button" class="reader-action" aria-label="Make text smaller">A−</button>
+   <button id="readerPlus" type="button" class="reader-action" aria-label="Make text bigger">A+</button>
+   <button id="readerClose" type="button" class="reader-action" aria-label="Close fullscreen reading">✕</button>
+  </div>
+ </div>
+ <article id="readerBody" tabindex="0"></article>
+</div>
+<script src="./island-graphics.js"></script>
+<script src="./audio.js"></script>
+<script>
+(()=>{'use strict';
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d',{alpha:false});
+const dock=document.getElementById('dock'),story=document.getElementById('storyText'),kicker=document.getElementById('storyKicker');
+const popEl=document.getElementById('pop'),susEl=document.getElementById('sus');
+const inspectModal=document.getElementById('inspectModal'),inspectTitle=document.getElementById('inspectTitle'),inspectText=document.getElementById('inspectText'),closeInspect=document.getElementById('closeInspect');
+const aiBadge=document.getElementById('aiBadge'),combatBadge=document.getElementById('combatBadge'),battleToast=document.getElementById('battleToast');
+const AI_URL='https://world-server.mmmpaykin.workers.dev/api/chain-ai';
+let W=0,H=0,DPR=Math.min(2,devicePixelRatio||1),time=0;
+const cam={x:0,y:0,zoom:1};
+const S={pop:0,food:8,order:20,suspicion:0,next:1,selected:'well',objects:[],history:[],chapter:0,glyphHits:[]};
+const ACTIONS={
+ well:['井','Well'],settlement:['民','Settlement'],council:['議','Council'],
+ market:['市','Market'],guild:['商','Guild'],tax:['税','Tax'],
+ school:['文','School'],scholarAction:['学','Scholar'],printing:['書','Printing Press'],
+ castle:['城','Castle'],court:['冠','Court'],decree:['令','Decree'],
+ monastery:['寺','Monastery'],relief:['慈','Relief'],doctrine:['教','Doctrine'],
+ guard:['兵','Guard'],patrol:['巡','Patrol'],militia:['隊','Militia'],
+ prison:['獄','Prison'],inquiry:['問','Interrogation'],pardon:['赦','Pardon'],
+ granary:['倉','Granary'],ration:['糧','Ration'],caravan:['車','Caravan'],
+ healer:['薬','Healer'],quarantine:['隔','Quarantine'],hospital:['療','Hospital'],
+ fire:['火','Fire'],brigade:['桶','Fight Fire'],watch:['鐘','Watch'],
+ plague:['疫','Plague'],cordon:['封','Cordon'],burial:['墓','Burial'],
+ observer:['人','Observer'],contact:['信','Contact'],extraction:['門','Extraction']
+};
+const TYPES=['well','market','school','castle','monastery','guard','prison','granary','healer','fire','plague','observer'];
+const NEXT_ACTION={well:'settlement',settlement:'council',market:'guild',guild:'tax',school:'scholarAction',scholarAction:'printing',castle:'court',court:'decree',monastery:'relief',relief:'doctrine',guard:'patrol',patrol:'militia',prison:'inquiry',inquiry:'pardon',granary:'ration',ration:'caravan',healer:'quarantine',quarantine:'hospital',fire:'brigade',brigade:'watch',plague:'cordon',cordon:'burial',observer:'contact',contact:'extraction'};
+const SECONDARY=new Set(Object.keys(ACTIONS).filter(k=>!TYPES.includes(k)));
+const LABEL=Object.fromEntries(Object.entries(ACTIONS).map(([k,v])=>[k,v[1]]));
+const GLYPH=Object.fromEntries(Object.entries(ACTIONS).map(([k,v])=>[k,v[0]]));
+function resize(){W=innerWidth;H=innerHeight;canvas.width=W*DPR;canvas.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);window.scrollTo(0,0)}
+addEventListener('resize',resize,{passive:true});addEventListener('orientationchange',()=>setTimeout(resize,80),{passive:true});resize();
+function rand(n=1){return(Math.sin((S.next*91.17+S.objects.length*17.31))*43758.5453%1+1)%1*n}
+function born(o){return Math.max(0,Math.min(1,(time-o.createdAt)/850))}
+function glyphZ(kind){return ({castle:64,monastery:58,school:48,market:39,well:40,prison:48,granary:43,healer:42,guard:40,observer:42,fire:46,plague:45}[kind]||38)}
+function actionInfo(id){return ACTIONS[id]||['◆',LABEL[id]||id]}
+function w2s(x,y,z=0){return{x:(x-cam.x)*cam.zoom+W/2,y:(y-cam.y)*cam.zoom+H/2-z*cam.zoom}}
+function s2w(x,y){return{x:(x-W/2)/cam.zoom+cam.x,y:(y-H/2)/cam.zoom+cam.y}}
+function shade(hex,f){const n=parseInt(hex.slice(1),16),r=(n>>16)&255,g=(n>>8)&255,b=n&255;return`rgb(${Math.max(0,Math.min(255,r+f))},${Math.max(0,Math.min(255,g+f))},${Math.max(0,Math.min(255,b+f))})`}
+function poly(p,fill,stroke='rgba(0,0,0,.25)'){ctx.beginPath();ctx.moveTo(p[0][0],p[0][1]);for(let i=1;i<p.length;i++)ctx.lineTo(p[i][0],p[i][1]);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.stroke()}}
+function line(a,b,col,w=1){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=col;ctx.lineWidth=w;ctx.stroke()}
+function box(x,y,z,sx,sy,sz,col){const p=w2s(x,y,z),q=cam.zoom,ax=sx*q*.5,ay=sy*q*.26,h=sz*q;const A=[p.x,p.y-ay],B=[p.x+ax,p.y],C=[p.x,p.y+ay],D=[p.x-ax,p.y],At=[A[0],A[1]-h],Bt=[B[0],B[1]-h],Ct=[C[0],C[1]-h],Dt=[D[0],D[1]-h];poly([D,C,Ct,Dt],shade(col,-38));poly([C,B,Bt,Ct],shade(col,-20));poly([Dt,Ct,Bt,At],shade(col,18))}
+function roof(x,y,z,w,d,col='#6d3f32'){const p=w2s(x,y,z),q=cam.zoom,rx=w*q*.58,ry=d*q*.27,rh=10*q;poly([[p.x-rx,p.y],[p.x,p.y-ry-rh],[p.x+rx,p.y]],col);poly([[p.x-rx,p.y],[p.x,p.y+ry],[p.x+rx,p.y],[p.x,p.y-ry-rh]],shade(col,-16))}
+function ground(){ctx.fillStyle='#2f3224';ctx.fillRect(0,0,W,H);let step=70*cam.zoom,ox=((W/2-cam.x*cam.zoom)%step+step)%step,oy=((H/2-cam.y*cam.zoom)%step+step)%step;ctx.strokeStyle='rgba(233,220,178,.035)';ctx.lineWidth=1;for(let x=ox;x<W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}for(let y=oy;y<H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+ const pts=[];for(let i=-6;i<=6;i++){let wx=i*120,wy=Math.sin(i*.7)*46+120,p=w2s(wx,wy);pts.push(p)}ctx.lineCap='round';ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);for(const p of pts.slice(1))ctx.lineTo(p.x,p.y);ctx.strokeStyle='rgba(58,99,101,.75)';ctx.lineWidth=26*cam.zoom;ctx.stroke();ctx.strokeStyle='rgba(120,169,157,.55)';ctx.lineWidth=9*cam.zoom;ctx.stroke();ctx.lineCap='butt';
+ for(let i=0;i<18;i++){let x=-520+i*63,y=-180+Math.sin(i*2.3)*30,p=w2s(x,y);ctx.fillStyle='rgba(64,74,48,.65)';ctx.beginPath();ctx.arc(p.x,p.y,8*cam.zoom,0,7);ctx.fill()}}
+function human(o,red=false){if(window.IslandVisuals?.human(ctx,o,red,w2s,cam,time))return;const p=w2s(o.x,o.y,14),q=cam.zoom;if(o.dead){ctx.strokeStyle='#7d2924';ctx.lineWidth=3*q;ctx.beginPath();ctx.moveTo(p.x-7*q,p.y-7*q);ctx.lineTo(p.x+7*q,p.y+7*q);ctx.moveTo(p.x+7*q,p.y-7*q);ctx.lineTo(p.x-7*q,p.y+7*q);ctx.stroke();return}ctx.fillStyle=red?'#df4b3f':'#d0c2a5';ctx.beginPath();ctx.arc(p.x,p.y-5*q,4*q,0,7);ctx.fill();ctx.strokeStyle=red?'#f26457':'#c0b395';ctx.lineWidth=3*q;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x,p.y+12*q);ctx.moveTo(p.x,p.y+4*q);ctx.lineTo(p.x-6*q,p.y+9*q);ctx.moveTo(p.x,p.y+4*q);ctx.lineTo(p.x+6*q,p.y+9*q);ctx.stroke()}
+function hut(o){box(o.x,o.y,0,23,18,14,'#9a7b56');roof(o.x,o.y,14,25,20,'#684638');let p=w2s(o.x+6,o.y+2,7);ctx.fillStyle='#e8a95d';ctx.fillRect(p.x-2,p.y-2,4,4)}
+function drawMilestone(o){const p=w2s(o.x,o.y),q=cam.zoom;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(Math.sin(time*.001+o.id)*.025);ctx.fillStyle='#6f5638';ctx.fillRect(-3*q,-22*q,6*q,25*q);ctx.fillStyle='#c0a05e';ctx.beginPath();ctx.moveTo(2*q,-22*q);ctx.lineTo(20*q,-15*q);ctx.lineTo(2*q,-8*q);ctx.closePath();ctx.fill();ctx.restore()}
+function drawObject(o){if(o.kind==='hut'){hut(o);return}if(o.kind==='observer'){human(o,true);return}if(o.kind==='scholar'){human(o,false);return}if(SECONDARY.has(o.kind)){drawMilestone(o);return}
+ if(o.kind==='well'){let p=w2s(o.x,o.y);ctx.fillStyle='#7b7365';ctx.beginPath();ctx.ellipse(p.x,p.y,16*cam.zoom,8*cam.zoom,0,0,7);ctx.fill();ctx.fillStyle='#223f44';ctx.beginPath();ctx.ellipse(p.x,p.y-2*cam.zoom,10*cam.zoom,4*cam.zoom,0,0,7);ctx.fill();box(o.x-13,o.y,0,3,3,22,'#6e5438');box(o.x+13,o.y,0,3,3,22,'#6e5438');roof(o.x,o.y,22,34,12,'#6d5134');return}
+ if(o.kind==='market'){for(let i=-1;i<=1;i++){box(o.x+i*18,o.y+(i%2)*5,0,14,11,7,i===0?'#b98a4e':'#9f6845');roof(o.x+i*18,o.y+(i%2)*5,7,15,12,i===0?'#8b2f2f':'#d0a052')}return}
+ if(o.kind==='school'){box(o.x,o.y,0,35,25,22,'#a59273');roof(o.x,o.y,22,38,28,'#6d3f32');let p=w2s(o.x,o.y,31);ctx.fillStyle='#d9c39a';ctx.fillRect(p.x-6,p.y-2,12,4);return}
+ if(o.kind==='castle'){box(o.x,o.y,0,50,38,30,'#8b877a');for(const [dx,dy] of [[-25,-18],[25,-18],[-25,18],[25,18]])box(o.x+dx,o.y+dy,0,14,14,43,'#888477');let p=w2s(o.x,o.y,30);ctx.fillStyle='#512d25';ctx.fillRect(p.x-5,p.y,10,18*cam.zoom);return}
+ if(o.kind==='monastery'){box(o.x,o.y,0,40,26,24,'#9d927a');roof(o.x,o.y,24,42,28,'#59483f');box(o.x+19,o.y-8,0,12,12,36,'#8e846f');let p=w2s(o.x+19,o.y-8,39);ctx.strokeStyle='#d0bf93';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(p.x,p.y-8);ctx.lineTo(p.x,p.y+8);ctx.moveTo(p.x-5,p.y-3);ctx.lineTo(p.x+5,p.y-3);ctx.stroke();return}
+ if(o.kind==='guard'){human(o,false);let p=w2s(o.x+6,o.y,10);ctx.strokeStyle='#9e382f';ctx.lineWidth=3*cam.zoom;ctx.beginPath();ctx.moveTo(p.x,p.y-12*cam.zoom);ctx.lineTo(p.x,p.y+9*cam.zoom);ctx.stroke();return}
+ if(o.kind==='prison'){box(o.x,o.y,0,42,30,26,'#716d66');for(let i=-1;i<=1;i++){let p=w2s(o.x+i*8,o.y-11,14);ctx.strokeStyle='#262524';ctx.lineWidth=2*cam.zoom;ctx.beginPath();ctx.moveTo(p.x,p.y-5);ctx.lineTo(p.x,p.y+5);ctx.stroke()}return}
+ if(o.kind==='granary'){box(o.x,o.y,0,38,26,20,'#9d7a4b');roof(o.x,o.y,20,41,29,'#694838');return}
+ if(o.kind==='healer'){box(o.x,o.y,0,30,22,18,'#8d866c');roof(o.x,o.y,18,33,25,'#5d463a');let p=w2s(o.x,o.y,12);ctx.fillStyle='#d8d0b6';ctx.fillRect(p.x-7,p.y-2,14,4);ctx.fillRect(p.x-2,p.y-7,4,14);return}
+ if(o.kind==='fire'){let p=w2s(o.x,o.y);for(let i=0;i<5;i++){let x=p.x+(i-2)*7*cam.zoom,h=(18+8*Math.sin(time*.006+i))*cam.zoom;poly([[x-7*cam.zoom,p.y],[x,p.y-h],[x+7*cam.zoom,p.y]],i%2?'#ff9c3d':'#d94c2f',null)}return}
+ if(o.kind==='plague'){let p=w2s(o.x,o.y),pulse=1+.12*Math.sin(time*.004+o.id);ctx.fillStyle='rgba(120,139,77,.28)';ctx.beginPath();ctx.arc(p.x,p.y,32*cam.zoom*pulse,0,7);ctx.fill();for(let i=0;i<7;i++){ctx.fillStyle=i%2?'#8e9d57':'#667646';ctx.beginPath();ctx.arc(p.x+(i-3)*7*cam.zoom,p.y+Math.sin(i+time*.002)*8*cam.zoom,3*cam.zoom,0,7);ctx.fill()}return}}
+function drawActivity(o){
+ const q=cam.zoom,p=w2s(o.x,o.y),phase=time*.001+o.id;
+ if(o.dead)return;
+ if(o.kind==='well'){for(let i=0;i<2;i++){ctx.strokeStyle='rgba(135,205,216,'+(0.35-i*.12)+')';ctx.beginPath();ctx.ellipse(p.x,p.y-2*q,(10+i*5+Math.sin(phase+i)*2)*q,(4+i*2)*q,0,0,7);ctx.stroke()}}
+ else if(o.kind==='market'){for(let i=0;i<3;i++){let a=phase*.55+i*2.1;human({x:o.x+Math.cos(a)*26,y:o.y+Math.sin(a)*11,dead:false},false)}}
+ else if(o.kind==='school'){let s=w2s(o.x+Math.sin(phase)*16,o.y+12,5);ctx.fillStyle='#e7dcc2';ctx.fillRect(s.x-4*q,s.y-2*q,8*q,4*q)}
+ else if(o.kind==='castle'){let f=w2s(o.x,o.y,50);ctx.strokeStyle='#5f4638';ctx.lineWidth=2*q;ctx.beginPath();ctx.moveTo(f.x,f.y);ctx.lineTo(f.x,f.y-18*q);ctx.stroke();ctx.fillStyle='#a53e35';ctx.beginPath();ctx.moveTo(f.x,f.y-18*q);ctx.lineTo(f.x+(12+Math.sin(phase*3)*3)*q,f.y-14*q);ctx.lineTo(f.x,f.y-10*q);ctx.closePath();ctx.fill()}
+ else if(o.kind==='monastery'){let b=w2s(o.x+19,o.y-8,43);ctx.strokeStyle='rgba(220,198,142,.75)';ctx.lineWidth=2*q;ctx.beginPath();ctx.arc(b.x+Math.sin(phase*2)*2*q,b.y,4*q,0,7);ctx.stroke()}
+ else if(o.kind==='guard'){let g={x:o.x+Math.sin(phase*.8)*18,y:o.y+Math.cos(phase*.8)*5,dead:false};human(g,false)}
+ else if(o.kind==='prison'){let g=w2s(o.x,o.y-12,12);ctx.strokeStyle='rgba(20,20,18,.75)';ctx.lineWidth=3*q;for(let i=-1;i<=1;i++){let dx=(i*7+Math.sin(phase+i)*1.2)*q;ctx.beginPath();ctx.moveTo(g.x+dx,g.y-8*q);ctx.lineTo(g.x+dx,g.y+8*q);ctx.stroke()}}
+ else if(o.kind==='granary'){let c=w2s(o.x+Math.sin(phase*.7)*28,o.y+17,1);ctx.fillStyle='#73553a';ctx.fillRect(c.x-8*q,c.y-4*q,16*q,8*q);ctx.beginPath();ctx.arc(c.x-5*q,c.y+5*q,3*q,0,7);ctx.arc(c.x+5*q,c.y+5*q,3*q,0,7);ctx.fill()}
+ else if(o.kind==='healer'){for(let i=0;i<2;i++)human({x:o.x-18+i*12,y:o.y+18+Math.sin(phase+i)*2,dead:false},false)}
+ else if(o.kind==='fire'){for(let i=0;i<4;i++){let sp=w2s(o.x+(i-1.5)*8,o.y,22+i*7+Math.sin(phase*3+i)*4);ctx.globalAlpha=.10;ctx.fillStyle='#d0c9bc';ctx.beginPath();ctx.arc(sp.x,sp.y,(7+i*2)*q,0,7);ctx.fill();ctx.globalAlpha=1}}
+ else if(o.kind==='observer'){let r=w2s(o.x,o.y,18);ctx.strokeStyle='rgba(242,100,87,'+(.25+.2*Math.sin(phase*3))+')';ctx.beginPath();ctx.arc(r.x,r.y,(10+Math.sin(phase*3)*3)*q,0,7);ctx.stroke()}
+ else if(SECONDARY.has(o.kind)){let m=w2s(o.x,o.y,24);ctx.fillStyle='rgba(215,179,106,'+(.35+.2*Math.sin(phase*2))+')';ctx.beginPath();ctx.arc(m.x,m.y,(5+Math.sin(phase*2))*q,0,7);ctx.fill()}
+}
+function drawBuildEffect(o){
+ const p=born(o);if(p>=1)return;const q=cam.zoom,s=w2s(o.x,o.y);
+ ctx.save();ctx.globalAlpha=.55*(1-p);ctx.strokeStyle='#d7b36a';ctx.lineWidth=2*q;ctx.beginPath();ctx.arc(s.x,s.y,(12+38*p)*q,0,7);ctx.stroke();
+ for(let i=0;i<5;i++){let a=i*1.256+o.id,r=(10+30*p)*q;ctx.fillStyle='#b79b72';ctx.fillRect(s.x+Math.cos(a)*r,s.y+Math.sin(a)*r*.45,2*q,2*q)}ctx.restore()
+}
+function drawGlyph(o){
+ if(o.kind==='hut'||o.kind==='scholar')return;
+ const g=GLYPH[o.kind]||'◆',p=w2s(o.x,o.y,glyphZ(o.kind)),q=Math.max(.8,cam.zoom),r=14*q;
+ ctx.save();ctx.fillStyle=o.kind==='observer'?'rgba(103,28,24,.92)':'rgba(25,19,12,.90)';ctx.strokeStyle=o.kind==='observer'?'rgba(242,100,87,.85)':'rgba(215,179,106,.72)';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(p.x,p.y,r,0,7);ctx.fill();ctx.stroke();ctx.fillStyle=o.kind==='observer'?'#ff8b7f':'#f1dcae';ctx.font=Math.round(15*q)+'px Georgia';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(g,p.x,p.y+1);
+ S.glyphHits.push({id:o.id,x:p.x-r-5,y:p.y-r-5,w:r*2+10,h:r*2+10})
+}
+let renderErrors=0,lastSoundUI=0;
+function render(){time=performance.now();try{ground();window.IslandVisuals?.environment(ctx,cam,w2s,time,W,H);S.glyphHits=[];const sorted=S.objects.filter(o=>objectVisible(o,180)).sort((a,b)=>a.y-b.y);for(const o of sorted){drawObject(o);window.IslandVisuals?.decorate(ctx,o,w2s,cam);drawActivity(o);drawBuildEffect(o)}drawCombatLayer();for(const o of sorted)drawGlyph(o);SOUND?.tick(time,{objects:S.objects,combat:COMBAT,order:S.order,suspicion:S.suspicion});if(SOUND?.enabled&&time-lastSoundUI>1200){lastSoundUI=time;updateSoundUI()}}catch(e){renderErrors++;console.error('[OBSERVER V2 RENDER]',e);if(renderErrors<4)showBattleToast('Render recovered after an animation error. World state was preserved.')}finally{requestAnimationFrame(render)}}requestAnimationFrame(render);
+function add(kind,x,y,extra={}){const o={id:S.next++,kind,x,y,dead:false,createdAt:performance.now(),...extra};S.objects.push(o);return o}
+function nearby(kind,x,y,r=150){return S.objects.filter(o=>o.kind===kind&&!o.dead&&Math.hypot(o.x-x,o.y-y)<r)}
+function report(title,text){kicker.textContent=title;story.textContent=text;S.history.push({title,text});popEl.textContent=S.pop;susEl.textContent=S.suspicion}
+function inspectNarrative(o){
+ const guards=nearby('guard',o.x,o.y,190).length,plague=nearby('plague',o.x,o.y,190).length,healers=nearby('healer',o.x,o.y,190).length;
+ const texts={
+ well:'People now meet at the well before they meet in the square: they argue over water, arrange work, and trade news. The settlement is growing around a simple convenience. If water becomes scarce, the right to lower a bucket first may quickly become the right to give orders.',
+ market:'The market already has a life of its own: prices change faster than decrees, merchants hear the news before the guard, and debts bind people more tightly than oaths. If wealth keeps gathering here, guilds, taxes, and people certain the city belongs to them will follow.',
+ school:'At the school, children learn to read accounts and old books, but several pupils are already asking questions no lesson planned for. The authorities still consider this harmless. If pieces of knowledge begin to connect, the city will gain people able to see how order is built—and want to change it.',
+ castle:'The castle gave the city walls, an armoury, and a man for whom the gates now open without questions. In peacetime this is called order. If war or famine comes, the castle’s power will become necessary; the danger is that necessity rarely knows when to end.',
+ monastery:'The monastery feeds the poor and records the names of the dead. People bring it not only prayers but information the authorities hear last. If disasters multiply, gratitude will strengthen the monastery faster than any wall—and mercy will slowly grow into the right to tell people how they ought to live.',
+ guard:'The guard patrols the streets and increasingly remembers faces rather than crimes. People feel safer and speak more quietly. If suspicion of outsiders grows, order will quietly change its purpose: instead of protecting the city, it will begin protecting power from the city itself.',
+ prison:'There are still few prisoners, but enough for everyone else to imagine the doors closing behind them. Punishment is gradually becoming an argument. If people are imprisoned for words and associations, fear will spread faster than the guard, and silence will become the chief proof of loyalty.',
+ granary:'The granary is full, which makes it more unsettling than an empty storehouse. The keys now have a price, the queue has a memory, and the watchman has power. If the harvest fails, the grain will save people; the only question is who decides which people deserve saving.',
+ healer:'It is no longer only the sick who visit the healer: people come to look at a man who is right too often. '+(plague?'The plague has made his knowledge look almost miraculous. ':'')+'If his treatment keeps working better than familiar remedies, gratitude will quickly become a question about where such knowledge came from—and that question is more dangerous than the disease itself.',
+ fire:'The fire is not yet history: people carry water, tear apart roofs, and search for someone to blame at the same time. Fire destroys timber faster than rumour destroys trust. If the flames are stopped, the argument over causes will begin; if not, the city will soon choose between saving property and saving people.',
+ plague:'Disease has already changed the rhythm of the streets: shops close earlier, people avoid acquaintances, and rumours move more freely than trade. '+(healers?'The healer is keeping deaths down, but attracting attention. ':'')+'If fear defeats observation, the city will find culprits faster than it finds the source of infection.',
+ observer:(o.dead?'The Observer is dead, but his involvement has not vanished. Witnesses remember the face, the place of death, and the strange objects found nearby. If the Institute inserts a replacement too quickly, separate rumours will merge into one story—and the locals will begin looking not for a culprit, but for a system.':'The Observer still has cover, but the city is already collecting small inconsistencies. '+(guards?'The guard is close. ':'')+'If interventions continue, the inhabitants will connect miraculous cures, timely warnings, and the appearance of strangers. Then observation will end: the Observer himself will become the main event this world is studying.')
+ };
+ if(texts[o.kind])return texts[o.kind];
+ return 'The sign has already entered the city’s history and no longer exists by itself, but among other people’s interests, fears, and memories. Its original meaning is beginning to change. If a new power, disaster, or idea appears nearby, this object will cause the next event—perhaps not the one it was created for at all.'
+}
+function openInspect(o){inspectTitle.textContent=(GLYPH[o.kind]||'◆')+' '+(LABEL[o.kind]||'Object');inspectText.textContent=inspectNarrative(o);inspectModal.classList.add('show');inspectModal.setAttribute('aria-hidden','false')}
+function hideInspect(){inspectModal.classList.remove('show');inspectModal.setAttribute('aria-hidden','true')}
+closeInspect.addEventListener('click',hideInspect);inspectModal.addEventListener('click',e=>{if(e.target===inspectModal)hideInspect()});
+function huts(x,y,n){for(let i=0;i<n;i++){let a=i/n*Math.PI*2+rand(.7),r=42+rand(45);add('hut',x+Math.cos(a)*r,y+Math.sin(a)*r*.6)}}
+function killObserver(obs,why){obs.dead=true;S.suspicion=Math.max(0,S.suspicion-1);report('Observer Killed',why+' The Institute has not cancelled observation: history did not stop, the inhabitants remember the stranger’s death, and his belongings may become evidence. The next operative will have to enter more carefully—into a world already changed by this death.')}
+function secondaryConsequence(o){
+ const M={
+ settlement:['Settlement','A street has appeared beside the first houses, and with the street came neighbours who already consider this place theirs. People have begun negotiating water and road repairs. If the settlement keeps growing, the next question will not be where to live, but who has the right to decide for everyone else.'],
+ council:['Council','Several elders have gathered for the first time to settle a common matter without weapons. This is not yet government, but decisions are already being remembered. If the council survives its first serious dispute, the city will gain an institution; if not, the vacant place will be taken by whoever has more men.'],
+ guild:['Guild','The merchants agreed on weights, debts, and mutual protection. The market is calmer now, but it is harder for an outsider to enter the trade. If the guild grows stronger, it will begin dictating prices to the city—and then, inevitably, take an interest in laws.'],
+ tax:['Tax','For the first time, part of the goods was taken not in exchange for a service, but because someone above had ordered it. People paid, remembered the amount and the collector’s name. If the money truly goes to the walls, authority will grow stronger; if it disappears on the way, the city will gain a new reason to hate order.'],
+ scholarAction:['Scholar','A man has appeared at the school who no longer repeats what is known, but tests it. Several observations already contradict familiar explanations. If the results become public, the city will gain new knowledge—along with its first serious conflict between evidence and authority.'],
+ printing:['Printing Press','The first dozen identical sheets spread in a single day, and no one knows who read the text last. For the first time, an idea became faster than a person. If printing is not stopped, the argument will become a public phenomenon; if it is stopped, an underground will appear.'],
+ court:['Court','Petitioners, scribes, and people able to turn proximity to the ruler into a profession have gathered around the castle. Decisions now depend not only on law, but on access. If the court expands, the city will gain administration—and a separate market for influence.'],
+ decree:['Decree','The new decree was read aloud in the square. Most obeyed before they understood it: the document had a seal, and guards stood nearby. If the decree proves useful, authority will become habit; if not, the habit will outlast the usefulness.'],
+ relief:['Relief','The monastery gave food to those denied credit by the market. The gratitude was sincere, and therefore politically dangerous. If disasters continue, people will trust the monastery more than the civic authorities—and one day spiritual authority will discover that it can already issue very earthly commands.'],
+ doctrine:['Doctrine','For the first time, a sermon explained disaster not as chance but as the structure of the world. People found events easier to understand and dissent harder to tolerate. If doctrine becomes a rule, the next dispute will no longer be about facts, but about the right to hold the wrong thought.'],
+ patrol:['Patrol','The guards have begun walking the same streets at the same hours. There are fewer criminals, but residents have learned to schedule conversations between patrols. If patrols intensify, order will become more visible; so will everything the authorities would rather not see.'],
+ militia:['Militia','The townspeople were given weapons and ordered to defend their own quarters. They felt useful and, at the same time, discovered their own strength. If the danger disappears, the weapons will remain—along with the question of why they must obey without question those they may no longer fear.'],
+ inquiry:['Interrogation','The first serious interrogation produced several names and no certainty. The investigator wrote down everything, including contradictions. If the authorities mistake testimony for knowledge, the prison will fill quickly; if they begin checking facts, they will discover that fear is a very poor instrument of inquiry.'],
+ pardon:['Pardon','The prisoner was released by the ruler’s personal decision. The crowd rejoiced for the man and remembered the mechanism: law turned out to be a door that could be opened from above. If pardons become political tools, mercy will strengthen the same ruler from whose displeasure it saves people.'],
+ ration:['Ration','Grain is now distributed by list. Hunger has eased, but the list has become more important than money. If supplies last, the city will survive the winter; if not, every scribal error will become a private tragedy, and every privilege evidence of injustice.'],
+ caravan:['Caravan','Carts have left the city in search of new grain. Along with money, they carried rumours of weak reserves. If the caravan returns, the crisis will recede; if it is intercepted, the city will lose more than food—its neighbours will learn how desperately it needs it.'],
+ quarantine:['Quarantine','The sick quarter has been sealed with ropes and guards. Infections have fallen, but healthy people remain inside with no explanation. If quarantine works, it will be forgiven; if it lasts too long, a protective boundary will become a siege of the city’s own population.'],
+ hospital:['Hospital','For the first time, the sick have been gathered in one place not merely for isolation, but for observation and treatment. The physicians are beginning to notice patterns. If their records survive, medicine will become knowledge; if the authorities fear success that comes too quickly, the hospital will become evidence against those who built it.'],
+ brigade:['Firefighting','People formed a chain from water to fire, tore down two roofs, and stopped the flames at an alley. For the first time, the city defeated disaster through organization. If the lesson is remembered, a service will emerge; if forgotten, the next fire will again have to be fought with heroism.'],
+ watch:['Watch','They agreed to keep a night watchman in the tower and ring the bell at the first sign of smoke. Fires will now be noticed earlier. But the same bell gathers people equally well for a fire or a riot—the authorities are already interested in this new way to mobilize the city.'],
+ cordon:['Cordon','The guard has closed the roads out of the infected district. Disease has slowed; trade has almost stopped. If the cordon holds long enough, the epidemic will retreat. If food runs out first, a health measure will become a political crisis and people will begin breaking through.'],
+ burial:['Burial','The dead are now buried beyond the city boundary and counted by name. The disease has become less mysterious and far more frightening: there is an exact number. If the records survive, future physicians will gain data; the present authorities may decide the population has no need for such precision.'],
+ contact:['Contact','A man who knows the Institute’s recognition sign has approached the Observer. The city now contains a communications channel—and one more witness. If it is used often, the network will become more reliable; at the same time, the local guard is more likely to notice people meeting for no obvious reason.'],
+ extraction:['Extraction','The Institute has prepared an extraction route, but readiness itself is already changing the Observer’s behaviour: risk now seems more acceptable. If extraction is used, the city will lose a man but the secret will survive; if it comes too late, the locals will obtain their first proof of alien technology.']
+ };const v=M[o.kind]||['New Action','The city has absorbed another cause whose meaning is not yet clear. People are already adapting. If the action becomes habitual, it will become an institution; if it meets resistance, that conflict will decide what it becomes in history.'];report(v[0],v[1])
+}
+function consequence(o){
+ if(SECONDARY.has(o.kind))return secondaryConsequence(o);
+ if(o.kind==='well'){S.pop+=5;S.food+=2;huts(o.x,o.y,2);report('First Settlers','Two families and an old blacksmith stopped at the well. By evening they had raised shelters and were already arguing over who should draw water first. If a market appears nearby, the camp will become a settlement; if order does not arise by itself, a man with a weapon will soon offer one.')}
+ if(o.kind==='market'){S.pop+=7;huts(o.x,o.y,2);report('Market','Three merchant wagons turned into the new square, and by noon grain was already being traded for iron. Thieves and debt collectors arrived with the merchants. If the market takes root, the settlement will grow rich—and very soon someone will decide that wealth requires an owner.')}
+ if(o.kind==='school'){S.pop+=2;S.suspicion++;add('scholar',o.x+34,o.y+9);report('Scholar','A teacher gathered children in a house near the square, and a week later one pupil began recording prices, illnesses, and deaths. The guard found the notes suspicious. If knowledge continues to accumulate, the city will gain a scholar—and people for whom questions are more dangerous than crimes.')}
+ if(o.kind==='castle'){S.order+=10;report('Authority','A stone tower has been completed on the hill, and armed men have begun calling it a residence. Merchants welcomed order; the poor welcomed new levies. If the garrison grows stronger, the city may survive a raid—but the man who controls the gates may soon control the city itself.')}
+ if(o.kind==='monastery'){S.order+=7;report('Monastery','The monks opened a kitchen and began feeding those for whom the market had no place. Within a month their word carried more weight than the elder’s orders. If famine or disease comes, people will come here for help—and gratitude will quietly turn into political power.')}
+ if(o.kind==='granary'){S.food+=18;report('Granary','The first communal granary was filled before the autumn rains. Bread became cheaper, but an armed watchman appeared at the door. If the harvest fails, this reserve will save the city; if famine lasts, the question of who holds the key will matter more than the grain itself.')}
+ if(o.kind==='healer'){let p=nearby('plague',o.x,o.y,190);S.suspicion++;if(p.length){S.pop+=3;report('Healer','The healer saved several patients by a method no one here understands. By evening dozens were waiting at his door, and the priest demanded an explanation. If the treatment continues, the plague will retreat; with it will grow curiosity about where the healer acquired impossible knowledge.')}else report('Healer','The healer settled near the market and within a week ceased to be a stranger: he delivered children, set dislocations, and asked questions about water that were far too precise. If an epidemic begins, his knowledge will save people; if the authorities notice its origin first, the healer himself will need saving.')}
+ if(o.kind==='plague'){let heal=nearby('healer',o.x,o.y,190).length;S.pop=Math.max(0,S.pop-(heal?2:6));report('Plague',heal?'Disease arrived with a merchant convoy, but the healer immediately separated the sick and ordered the water boiled. Fewer people died than the locals expected. If this continues, the city will survive the outbreak—and inevitably ask why one man knew what everyone else did not.':'Disease arrived with a merchant convoy and reached the poor quarter in three days. Bells now ring more often than shops open. If people blame outsiders, pogroms will begin; if no one understands the source of infection, the market will close next—and food with it.')}
+ if(o.kind==='fire'){let victims=S.objects.filter(x=>!x.dead&&['hut','market','school','granary'].includes(x.kind)&&Math.hypot(x.x-o.x,x.y-o.y)<100);if(victims[0])victims[0].dead=true;S.pop=Math.max(0,S.pop-2);report('Fire','Fire reached the wooden roofs before people could form a chain from the well. One house is already lost; others are being pulled apart beam by beam. If the wind rises, the quarter will burn. If the guard closes the streets, panic may prove more dangerous than the fire itself.')}
+ if(o.kind==='prison'){S.order+=4;let scholars=nearby('scholar',o.x,o.y,180);if(scholars.length)scholars[0].captured=true;report('Prison','The new stone cellar has received its first prisoner—a man who argued too loudly with the tax collector. The townspeople approved of the quiet until the doors closed behind a neighbour they knew. If authority grows used to settling disputes with cells, the next arrivals will be those who ask inconvenient questions.')}
+ if(o.kind==='guard'){S.order+=5;let obs=nearby('observer',o.x,o.y,180);if(obs.length&&S.suspicion>=2){killObserver(obs[0],'The guards waited for the Observer at the edge of the square. He could have escaped, but only by revealing too much. The crossbowman fired almost by accident—and that was enough.');return}report('Guard','A dozen armed men took the gate and announced that they were now responsible for order. The market grew quieter, but people lowered their voices at the sight of red cloaks. If fear proves more convenient than law, the guard will soon protect not the city, but its own necessity.')}
+ if(o.kind==='observer'){report('New Observer','The Institute has inserted a new operative into the city under the guise of a travelling scribe. Rumours already circulate about impossibly successful medicines and strangers appearing before disasters. If he repeats his predecessors’ mistakes, the locals will connect the stories far faster than the Institute expects.')}
+}
+function evolveButton(kind){const next=NEXT_ACTION[kind];if(!next)return;const b=[...dock.children].find(x=>x.dataset.id===kind);if(!b)return;const [g,n]=actionInfo(next);b.dataset.id=next;b.classList.add('evolved');b.innerHTML=`<span class="g">${g}</span><span class="n">${n}</span>`;S.selected=next;for(const x of dock.children)x.classList.toggle('active',x===b)}
+function place(kind,x,y){const o=add(kind,x,y);if(kind==='observer')S.suspicion=Math.max(0,S.suspicion-1);consequence(o);evolveButton(kind)}
+add('observer',-85,25);add('observer',-45,38);
+function buildDock(){for(const id of TYPES){const [g,n]=actionInfo(id),b=document.createElement('button');b.className='tool'+(id===S.selected?' active':'');b.dataset.id=id;b.innerHTML=`<span class="g">${g}</span><span class="n">${n}</span>`;b.addEventListener('click',e=>{e.stopPropagation();SOUND?.event('select');const cur=b.dataset.id,[cg,cn]=actionInfo(cur);S.selected=cur;for(const x of dock.children)x.classList.toggle('active',x===b);report('Tool Selected',`Selected sign: “${cn}”. Touch an empty place on the ground. This is not decoration but a cause: after the action, the button itself will advance to the next historical step.`)});dock.appendChild(b)}}buildDock();
+
+// --- Living History V2: World Server Animation Lab + AGES combat adapters ---
+const FX_VERSION='ws-animation-lab-v2+water-v9+watercolor-brush-smoke+v10-v11-microdetail+living-light';
+const RELEASE_MARKER='OBSERVER_V3_ISLAND_MUSIC_READER_20261016';
+const reducedMotion=()=>Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+const clamp01=v=>Math.max(0,Math.min(1,v));
+const smoothstep=v=>{v=clamp01(v);return v*v*(3-2*v)};
+function h01(i,s=0){let n=Math.imul((i|0)+s+1337,0x45d9f3b);n^=n>>>16;return(n>>>0)/4294967296}
+function objectVisible(o,margin=150){const p=w2s(o.x,o.y,glyphZ(o.kind));return p.x>-margin&&p.x<W+margin&&p.y>-margin&&p.y<H+margin}
+let fxStamp=-1,smokeBudget=0,shimmerBudget=0,swayBudget=0;
+
+function drawBrushSmoke(wx,wy,wz,seed,{count=9,scale=.85,rise=.42,spread=.35,wind=.08,opacity=.16,tint='214,213,194'}={}){
+ if(reducedMotion()||smokeBudget>=40)return;
+ const base=w2s(wx,wy,wz),seconds=time/1000,q=cam.zoom;
+ for(let i=0;i<count&&smokeBudget<40;i++){
+  const phase=h01(i,seed),t=(seconds*.18+phase)%1,fade=Math.sin(Math.PI*t);
+  const side=(h01(i,seed+23)-.5)*spread*34,depth=(h01(i,seed+37)-.5)*spread*8;
+  const dx=side+wind*t*22+Math.sin(t*6+i)*3,dy=-t*rise*52+depth;
+  const s=scale*(.55+t*1.25)*q,alpha=opacity*fade;
+  ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle='rgba('+tint+',1)';
+  ctx.beginPath();ctx.ellipse(base.x+dx*q,base.y+dy*q,Math.max(1.2,s*3.1),Math.max(1,s*1.8),-.18,0,Math.PI*2);ctx.fill();
+  ctx.globalAlpha=alpha*.45;ctx.beginPath();ctx.ellipse(base.x+(dx+3)*q,base.y+(dy-2)*q,Math.max(1,s*2.1),Math.max(1,s*1.2),.25,0,Math.PI*2);ctx.fill();ctx.restore();
+  smokeBudget++;
+ }
+}
+function glowAt(wx,wy,wz,r=18,alpha=.16){
+ const p=w2s(wx,wy,wz),q=cam.zoom,g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r*q);
+ g.addColorStop(0,'rgba(244,188,91,'+alpha+')');g.addColorStop(.45,'rgba(230,146,63,'+(alpha*.45)+')');g.addColorStop(1,'rgba(230,146,63,0)');
+ ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r*q,0,7);ctx.fill()
+}
+function drawAdvancedTerrain(){
+ if(reducedMotion())return;
+ // V9/V2 bounded water shimmer on the same river geometry.
+ for(let i=-5;i<=5&&shimmerBudget<28;i++){
+  const wx=i*120,wy=Math.sin(i*.7)*46+120,p=w2s(wx+22,wy-2),phase=(time*.00037+h01(i,739))%1;
+  const a=.08+.22*smoothstep(1-Math.abs(phase*2-1));ctx.strokeStyle='rgba(197,228,213,'+a.toFixed(3)+')';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(p.x-7*cam.zoom,p.y);ctx.lineTo(p.x+(3+phase*9)*cam.zoom,p.y);ctx.stroke();shimmerBudget++;
+ }
+ // Independent bounded tree sway phases from Animation Lab v2.
+ for(let i=0;i<18&&swayBudget<18;i++){
+  const wx=-520+i*63,wy=-180+Math.sin(i*2.3)*30,p=w2s(wx,wy),gust=Math.sin(time*.00132+h01(i,717)*6.28)*(.8+1.8*h01(i,713)),q=cam.zoom;
+  ctx.save();ctx.translate(p.x,p.y);ctx.rotate(gust*.008);ctx.fillStyle='#4f5138';ctx.fillRect(-1*q,-1*q,2*q,10*q);
+  ctx.fillStyle=i%3?'rgba(88,103,60,.78)':'rgba(104,116,69,.78)';ctx.beginPath();ctx.ellipse(gust*q,-6*q,8*q,6*q,.08,0,7);ctx.fill();ctx.restore();swayBudget++;
+ }
+ // V10/V11 bounded landscape microdetail: faceted stones + moss + meadow flowers.
+ for(let i=0;i<14;i++){
+  const wx=-430+i*71,wy=210+Math.sin(i*1.71)*38,p=w2s(wx,wy),q=cam.zoom,s=3.5+(i%3)*1.4;
+  ctx.fillStyle=i%2?'#676b58':'#5d6254';ctx.beginPath();ctx.moveTo(p.x-s*q,p.y);ctx.lineTo(p.x-1*q,p.y-s*q);ctx.lineTo(p.x+s*q,p.y-1*q);ctx.lineTo(p.x+2*q,p.y+2*q);ctx.closePath();ctx.fill();
+  ctx.fillStyle='rgba(103,124,72,.55)';ctx.fillRect(p.x-2*q,p.y-s*q,4*q,1.3*q);
+ }
+ for(let i=0;i<22;i++){
+  const wx=-480+i*46,wy=48+Math.sin(i*2.41)*74,p=w2s(wx,wy),q=cam.zoom;
+  ctx.fillStyle=i%4===0?'#d7b36a':i%3===0?'#b7776e':'#d1c49b';ctx.fillRect(p.x,p.y,1.6*q,1.6*q)
+ }
+}
+const baseGroundV2=ground;
+ground=function livingHistoryGround(){baseGroundV2();drawAdvancedTerrain()};
+
+function drawMicroPerson(wx,wy,phase,armed=false,tint='#cbbd9d'){
+ const q=cam.zoom,bob=reducedMotion()?0:Math.sin(time*.007+phase)*1.2,p=w2s(wx,wy,12+bob);
+ ctx.fillStyle=tint;ctx.beginPath();ctx.arc(p.x,p.y-5*q,3.2*q,0,7);ctx.fill();ctx.strokeStyle=tint;ctx.lineWidth=2.3*q;
+ ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x,p.y+10*q);ctx.moveTo(p.x,p.y+3*q);ctx.lineTo(p.x-5*q,p.y+7*q);ctx.moveTo(p.x,p.y+3*q);ctx.lineTo(p.x+5*q,p.y+7*q);ctx.stroke();
+ if(armed){ctx.strokeStyle='#d5d1c1';ctx.lineWidth=1.5*q;ctx.beginPath();ctx.moveTo(p.x+4*q,p.y+5*q);ctx.lineTo(p.x+13*q,p.y-4*q);ctx.stroke();ctx.fillStyle='#8d6b42';ctx.fillRect(p.x+3*q,p.y+4*q,4*q,1.5*q)}
+}
+function drawAdvancedObjectFX(o){
+ if(o.dead||reducedMotion())return;
+ const p=w2s(o.x,o.y),q=cam.zoom,ph=time*.001+o.id;
+ switch(o.kind){
+  case 'well': {ctx.strokeStyle='rgba(174,218,219,.52)';ctx.beginPath();ctx.ellipse(p.x,p.y,(11+Math.sin(ph*2)*2)*q,4.5*q,0,0,7);ctx.stroke();let b=w2s(o.x+13,o.y,18);ctx.strokeStyle='#6e5438';ctx.beginPath();ctx.moveTo(b.x,b.y);ctx.lineTo(b.x,b.y+(7+4*Math.sin(ph))*q);ctx.stroke();break}
+  case 'market': drawBrushSmoke(o.x-18,o.y,13,o.id+210,{count:3,scale:.35,rise:.2,spread:.18,opacity:.08,tint:'196,177,145'});break;
+  case 'school': {let s=w2s(o.x+Math.sin(ph)*14,o.y+11,7);ctx.fillStyle='rgba(245,233,202,.75)';ctx.fillRect(s.x-4*q,s.y-1*q,8*q,2*q);glowAt(o.x+5,o.y,17,12,.10);break}
+  case 'castle': drawBrushSmoke(o.x+22,o.y-16,47,o.id+310,{count:4,scale:.45,rise:.32,spread:.24,opacity:.10});glowAt(o.x-18,o.y+8,27,15,.12);break;
+  case 'monastery': drawBrushSmoke(o.x+8,o.y+2,38,o.id+330,{count:6,scale:.42,rise:.34,spread:.24,opacity:.11,tint:'224,214,190'});glowAt(o.x+14,o.y-5,24,13,.11);break;
+  case 'guard': {let s=w2s(o.x+7,o.y,19);ctx.strokeStyle='#d7d2c2';ctx.lineWidth=1.5*q;ctx.beginPath();ctx.moveTo(s.x,s.y+6*q);ctx.lineTo(s.x+11*q,s.y-5*q);ctx.stroke();break}
+  case 'prison': {let l=w2s(o.x,o.y-12,22),a=.15+.12*(Math.sin(ph*3)+1);ctx.fillStyle='rgba(240,184,92,'+a+')';ctx.beginPath();ctx.arc(l.x,l.y,5*q,0,7);ctx.fill();break}
+  case 'granary': {for(let i=0;i<4;i++){let d=w2s(o.x-8+i*5,o.y+13,5);ctx.fillStyle='rgba(218,188,120,'+(.22+.1*Math.sin(ph+i))+')';ctx.fillRect(d.x,d.y,1.5*q,1.5*q)}break}
+  case 'healer': drawBrushSmoke(o.x-5,o.y,28,o.id+390,{count:5,scale:.38,rise:.28,spread:.18,opacity:.11,tint:'204,219,186'});glowAt(o.x+6,o.y,16,12,.12);break;
+  case 'fire': drawBrushSmoke(o.x,o.y,28,o.id+400,{count:18,scale:.72,rise:.68,spread:.58,wind:.06,opacity:.18,tint:'102,99,92'});break;
+  case 'plague': {ctx.fillStyle='rgba(124,146,80,'+(.06+.05*(Math.sin(ph*2)+1))+')';ctx.beginPath();ctx.arc(p.x,p.y,(36+5*Math.sin(ph*1.7))*q,0,7);ctx.fill();break}
+  case 'observer': {let c=w2s(o.x,o.y,17);ctx.strokeStyle='rgba(242,100,87,.35)';ctx.beginPath();ctx.moveTo(c.x-2*q,c.y+1*q);ctx.lineTo(c.x-(7+2*Math.sin(ph*2))*q,c.y+13*q);ctx.stroke();break}
+  case 'settlement': drawBrushSmoke(o.x,o.y,27,o.id+500,{count:7,scale:.45,rise:.36,spread:.28,opacity:.11});break;
+  case 'council': for(let i=0;i<4;i++){let a=i*Math.PI/2+ph*.08;drawMicroPerson(o.x+Math.cos(a)*15,o.y+Math.sin(a)*7,i,false)}break;
+  case 'guild': {drawMicroPerson(o.x-10,o.y+5,1,true,'#c6a36e');drawMicroPerson(o.x+11,o.y-3,2,true,'#c6a36e');break}
+  case 'tax': {for(let i=0;i<4;i++){ctx.fillStyle='rgba(226,186,85,.7)';ctx.beginPath();ctx.arc(p.x+(i-1.5)*4*q,p.y-8*q+Math.sin(ph+i)*2*q,1.4*q,0,7);ctx.fill()}break}
+  case 'scholarAction': {let a=w2s(o.x,o.y,22);ctx.strokeStyle='#e6ddc8';ctx.strokeRect(a.x-6*q,a.y-4*q,12*q,8*q);break}
+  case 'printing': {let a=w2s(o.x,o.y,20),press=(Math.sin(ph*4)+1)*3*q;ctx.fillStyle='#6f5139';ctx.fillRect(a.x-10*q,a.y,20*q,3*q);ctx.fillRect(a.x-2*q,a.y-12*q+press,4*q,12*q);break}
+  case 'court': drawBrushSmoke(o.x+8,o.y,25,o.id+620,{count:3,scale:.28,rise:.18,spread:.14,opacity:.08});break;
+  case 'decree': {let a=w2s(o.x,o.y,23),w=(9+2*Math.sin(ph))*q;ctx.fillStyle='#e8d5ad';ctx.fillRect(a.x-w,a.y-4*q,w*2,8*q);break}
+  case 'relief': drawBrushSmoke(o.x,o.y,21,o.id+650,{count:7,scale:.38,rise:.28,spread:.22,opacity:.12,tint:'224,214,190'});break;
+  case 'doctrine': for(let i=0;i<5;i++)drawMicroPerson(o.x+(i-2)*7,o.y+8+Math.sin(i)*4,i,i===0,'#cbbd9d');break;
+  case 'patrol': {drawMicroPerson(o.x+Math.sin(ph*.8)*16,o.y+Math.cos(ph*.8)*5,3,true);break}
+  case 'militia': {for(let i=0;i<3;i++)drawMicroPerson(o.x+(i-1)*11,o.y+(i%2)*5,i,true,'#b9896f');break}
+  case 'inquiry': {let a=w2s(o.x,o.y,22);ctx.fillStyle='rgba(238,178,78,'+(.13+.08*Math.sin(ph*3))+')';ctx.beginPath();ctx.arc(a.x,a.y,7*q,0,7);ctx.fill();break}
+  case 'pardon': {ctx.strokeStyle='rgba(210,190,145,.6)';ctx.lineWidth=2*q;ctx.strokeRect(p.x-9*q,p.y-17*q,18*q,17*q);break}
+  case 'ration': for(let i=0;i<4;i++)drawMicroPerson(o.x+(i-1.5)*8,o.y+8,i,false);break;
+  case 'caravan': {let a=w2s(o.x+Math.sin(ph*.35)*16,o.y+8,2);ctx.fillStyle='#76593d';ctx.fillRect(a.x-10*q,a.y-5*q,20*q,8*q);ctx.beginPath();ctx.arc(a.x-6*q,a.y+5*q,3*q,0,7);ctx.arc(a.x+6*q,a.y+5*q,3*q,0,7);ctx.fill();break}
+  case 'quarantine': case 'cordon': {ctx.strokeStyle='#bb825e';ctx.lineWidth=2*q;ctx.beginPath();ctx.moveTo(p.x-18*q,p.y-6*q);ctx.lineTo(p.x+18*q,p.y+6*q);ctx.moveTo(p.x-18*q,p.y+6*q);ctx.lineTo(p.x+18*q,p.y-6*q);ctx.stroke();break}
+  case 'hospital': drawBrushSmoke(o.x-4,o.y,24,o.id+760,{count:6,scale:.36,rise:.25,spread:.18,opacity:.10,tint:'204,219,186'});glowAt(o.x+5,o.y,16,14,.13);break;
+  case 'brigade': {for(let i=0;i<3;i++){let a=w2s(o.x+(i-1)*10,o.y+4,8);ctx.strokeStyle='rgba(133,190,206,.7)';ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(a.x+8*q,a.y-7*q);ctx.stroke()}break}
+  case 'watch': drawBrushSmoke(o.x,o.y,30,o.id+790,{count:5,scale:.36,rise:.31,spread:.18,opacity:.12,tint:'115,111,100'});break;
+  case 'burial': drawBrushSmoke(o.x,o.y,20,o.id+820,{count:7,scale:.34,rise:.30,spread:.20,opacity:.12,tint:'224,214,190'});break;
+  case 'contact': {let a=w2s(o.x,o.y,25),pulse=8+3*Math.sin(ph*4);ctx.strokeStyle='rgba(125,183,204,.55)';ctx.beginPath();ctx.arc(a.x,a.y,pulse*q,0,7);ctx.stroke();break}
+  case 'extraction': {let a=w2s(o.x,o.y,24);ctx.strokeStyle='rgba(211,190,132,.65)';ctx.beginPath();ctx.moveTo(a.x-10*q,a.y+8*q);ctx.lineTo(a.x,a.y-10*q);ctx.lineTo(a.x+10*q,a.y+8*q);ctx.stroke();break}
+ }
+}
+const baseActivityV2=drawActivity;
+drawActivity=function livingHistoryActivity(o){
+ if(fxStamp!==time){fxStamp=time;smokeBudget=0;shimmerBudget=0;swayBudget=0}
+ baseActivityV2(o);drawAdvancedObjectFX(o)
+};
+
+// AGES-inspired local combat: bounded actors, one shared RAF, no per-actor timers.
+const FACTION_COLORS={guard:'#a9afb4',militia:'#b9896f',guild:'#c6a36e',zealot:'#907d62',house:'#7d8b9b',rebel:'#b96d62',scholar:'#b7a984'};
+const HOSTILE={guard:new Set(['rebel','militia']),militia:new Set(['guard','house','zealot']),guild:new Set(['rebel']),zealot:new Set(['scholar','rebel','militia']),house:new Set(['rebel','militia']),rebel:new Set(['guard','guild','house','zealot']),scholar:new Set(['zealot'])};
+const COMBAT={actors:[],next:1,lastT:performance.now(),lastNarrated:0,clashes:0,deaths:0,wounds:0,aiRequests:0};
+const SOUND=window.ObserverKriegerAudio?.create()||null;
+const soundButton=document.getElementById('soundButton'),soundVolume=document.getElementById('soundVolume'),soundScene=document.getElementById('soundScene');
+function updateSoundUI(){
+ if(!SOUND){soundButton.textContent='Audio unsupported';soundButton.disabled=true;return}
+ const d=SOUND.diagnostics();soundButton.textContent=d.enabled?'♫ Sound: On':'♫ Sound: Off';
+ soundButton.setAttribute('aria-pressed',String(d.enabled));soundScene.textContent=d.enabled?d.label:'Silent';
+}
+if(SOUND){
+ soundVolume.value=String(Math.round(SOUND.volume*100));
+ soundButton.addEventListener('click',async e=>{
+  e.stopPropagation();const ok=await SOUND.toggle();
+  updateSoundUI();if(ok)SOUND.event('ui')
+ });
+ soundVolume.addEventListener('input',e=>{SOUND.setVolume(Number(e.target.value)/100);updateSoundUI()});
+ document.addEventListener('visibilitychange',()=>SOUND.onVisibility(document.hidden));
+}
+updateSoundUI();
+function spawnActor(faction,x,y,{armed=true,count=1}={}){
+ for(let i=0;i<count&&COMBAT.actors.length<48;i++){
+  const a={id:COMBAT.next++,faction,x:x+(i-(count-1)/2)*11,y:y+(i%2)*6,homeX:x,homeY:y,hp:100,state:'patrol',armed,weaponT:0,attack:0,cool:0,hitFlash:0,bleed:0,dir:i%2?1:-1,seed:COMBAT.next*41};
+  COMBAT.actors.push(a)
+ }
+ combatBadge.textContent='combat: '+COMBAT.actors.length+' actors';combatBadge.classList.add('live')
+}
+function armScenario(kind,x,y){
+ if(kind==='guard')spawnActor('guard',x,y,{count:3});
+ if(kind==='guild')spawnActor('guild',x,y,{count:2});
+ if(kind==='court'||kind==='castle')spawnActor('house',x,y,{count:2});
+ if(kind==='militia'){spawnActor('militia',x,y,{count:4});spawnActor('guard',x+58,y,{count:2})}
+ if(kind==='tax'){spawnActor('rebel',x-24,y+6,{count:3});spawnActor('guard',x+30,y-3,{count:2})}
+ if(kind==='doctrine'){spawnActor('zealot',x-18,y,{count:3});spawnActor('scholar',x+28,y+5,{count:2,armed:false})}
+ if(kind==='cordon'){spawnActor('guard',x-24,y,{count:3});spawnActor('rebel',x+30,y+5,{count:3})}
+ if(kind==='inquiry'||kind==='prison'){spawnActor('guard',x-18,y,{count:2});spawnActor('scholar',x+24,y,{count:1,armed:false})}
+ if(kind==='ration'&&S.food<18){spawnActor('rebel',x-22,y+6,{count:2});spawnActor('guard',x+26,y,{count:2})}
+}
+function nearestHostile(a){
+ let best=null,bd=1e9;for(const b of COMBAT.actors){if(b===a||b.state==='dead'||!HOSTILE[a.faction]?.has(b.faction))continue;const d=Math.hypot(b.x-a.x,b.y-a.y);if(d<bd&&d<155){bd=d;best=b}}
+ return best
+}
+function healerNear(a){return S.objects.find(o=>o.kind==='healer'&&!o.dead&&Math.hypot(o.x-a.x,o.y-a.y)<125)}
+function actorDamage(attacker,target){
+ if(target.state==='dead')return;SOUND?.event('hit');const dmg=28+Math.floor(h01(attacker.id,target.id+900)*18);target.hp-=dmg;target.hitFlash=.22;
+ if(target.hp<=0){target.hp=0;target.state='dead';SOUND?.event('death');COMBAT.deaths++;S.pop=Math.max(0,S.pop-1);S.order=Math.max(0,S.order-3);S.suspicion++;announceClash(attacker,target,'killed')}
+ else if(target.hp<48&&target.state!=='wounded'){target.state='wounded';SOUND?.event('wounded');target.bleed=15+8*h01(target.id,955);COMBAT.wounds++;S.order=Math.max(0,S.order-1);announceClash(attacker,target,'wounded')}
+}
+function updateCombat(now){
+ const dt=Math.min(.05,Math.max(0,(now-COMBAT.lastT)/1000));COMBAT.lastT=now;
+ for(const a of COMBAT.actors){
+  if(a.state==='dead')continue;a.cool=Math.max(0,a.cool-dt);a.hitFlash=Math.max(0,a.hitFlash-dt);a.weaponT+=(a.armed?1:-1)*dt*3;a.weaponT=clamp01(a.weaponT);
+  if(a.state==='wounded'){
+   const h=healerNear(a);if(h){const dx=h.x-a.x,dy=h.y-a.y,d=Math.max(1,Math.hypot(dx,dy));if(d>22){a.x+=dx/d*7*dt;a.y+=dy/d*7*dt}else{a.hp=Math.min(62,a.hp+18*dt);a.bleed+=20*dt;if(a.hp>=58){a.state='patrol';SOUND?.event('healing')}}}
+   else{a.bleed-=dt;if(a.bleed<=0){a.state='dead';SOUND?.event('death');COMBAT.deaths++;S.pop=Math.max(0,S.pop-1);S.order=Math.max(0,S.order-2);announceClash(null,a,'died of wounds')}}
+   continue
+  }
+  const t=nearestHostile(a);
+  if(t){const dx=t.x-a.x,dy=t.y-a.y,d=Math.max(1,Math.hypot(dx,dy));a.dir=dx<0?-1:1;
+   if(d>21){a.state='chase';a.x+=dx/d*13*dt;a.y+=dy/d*13*dt;a.attack=0}
+   else{if(a.state!=='attack')SOUND?.event('swing');a.state='attack';a.attack+=dt*3.2;if(a.attack>=1)a.attack-=1;if(a.attack>.42&&a.attack<.42+dt*3.2&&a.cool<=0){actorDamage(a,t);a.cool=.65}}
+  }else{a.state='patrol';const ph=now*.00055+a.seed;a.x+=(a.homeX+Math.sin(ph)*18-a.x)*dt*.8;a.y+=(a.homeY+Math.cos(ph*.8)*6-a.y)*dt*.8}
+ }
+}
+function drawSwordActor(a){
+ if(window.IslandVisuals?.fighter(ctx,a,w2s,cam,time))return;
+ const q=cam.zoom,p=w2s(a.x,a.y,13),walk=(a.state==='chase'||a.state==='patrol')?Math.sin(time*.009+a.seed)*1.2:0,dir=a.dir||1,col=FACTION_COLORS[a.faction]||'#cbbd9d';
+ ctx.save();ctx.translate(p.x,p.y-walk*q);
+ if(a.state==='dead'){ctx.strokeStyle='#665c51';ctx.lineWidth=3*q;ctx.beginPath();ctx.moveTo(-8*q,5*q);ctx.lineTo(9*q,5*q);ctx.stroke();if(a.armed){ctx.strokeStyle='#c8c4b6';ctx.lineWidth=1.4*q;ctx.beginPath();ctx.moveTo(7*q,6*q);ctx.lineTo(18*q,1*q);ctx.stroke()}ctx.restore();return}
+ if(a.state==='wounded')ctx.rotate(-.18*dir);
+ // Animation Lab v2-like cape/stride.
+ const cape=reducedMotion()?0:Math.sin(time*.0024+a.seed)*2.2;
+ ctx.fillStyle='rgba(72,54,62,.75)';ctx.beginPath();ctx.moveTo(-2*dir*q,0);ctx.lineTo((-5*dir-cape)*q,13*q);ctx.lineTo(2*dir*q,15*q);ctx.closePath();ctx.fill();
+ ctx.fillStyle=col;ctx.beginPath();ctx.arc(0,-5*q,3.7*q,0,7);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2.8*q;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,11*q);ctx.moveTo(0,3*q);ctx.lineTo(-5*dir*q,7*q);ctx.stroke();
+ const attackArc=a.state==='attack'?Math.sin(a.attack*Math.PI)*1.15:0,handX=5*dir*q,handY=6*q;
+ ctx.beginPath();ctx.moveTo(0,3*q);ctx.lineTo(handX,handY);ctx.stroke();
+ if(a.armed&&a.weaponT>0){const ang=(-.72+attackArc*dir),len=14*q*a.weaponT;ctx.save();ctx.translate(handX,handY);ctx.rotate(ang*dir);ctx.strokeStyle='#d7d4c8';ctx.lineWidth=1.8*q;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(len,0);ctx.stroke();ctx.fillStyle='#8d6945';ctx.fillRect(-2*q,-1.5*q,5*q,3*q);ctx.restore()}
+ if(a.hitFlash>0){ctx.fillStyle='rgba(255,100,80,'+Math.min(.7,a.hitFlash*3)+')';ctx.beginPath();ctx.arc(0,4*q,10*q,0,7);ctx.fill()}
+ if(a.hp<100){ctx.fillStyle='rgba(0,0,0,.45)';ctx.fillRect(-9*q,-14*q,18*q,2*q);ctx.fillStyle=a.hp<45?'#c75950':'#cfb36f';ctx.fillRect(-9*q,-14*q,18*q*(a.hp/100),2*q)}
+ ctx.restore()
+}
+function drawCombatLayer(){
+ updateCombat(time);for(const a of COMBAT.actors)if(objectVisible(a,100))drawSwordActor(a)
+}
+function combatFallback(attacker,target,outcome){
+ const a=attacker?attacker.faction:'unknown',b=target.faction;
+ if(outcome==='wounded')return 'Steel was drawn in the street. A '+a+' fighter wounded a '+b+' opponent before the crowd scattered. The injury is now more than a private matter: if the wounded person survives, the grievance survives with them; if not, the body may recruit more people than any speech.'
+ if(outcome==='died of wounds')return 'The wounded '+b+' fighter died before reaching effective help. The clash itself is already over, but the death is only beginning to act on the city. Friends will remember who blocked the road, enemies will call it necessary, and both sides now possess a reason for the next confrontation.'
+ return 'A '+a+' fighter killed a '+b+' opponent during a brief street clash. The body remains where the argument ended. Order has fallen, suspicion has risen, and witnesses are already deciding whether they saw a crime, a defence, or the first act of something larger.'
+}
+function showBattleToast(t){battleToast.textContent=t;battleToast.classList.add('show');setTimeout(()=>battleToast.classList.remove('show'),5200)}
+function aiTextFromPrediction(p){if(!p)return'';return [p.summary,p.immediate?.[0],p.surprise].filter(Boolean).join(' ')}
+async function askLiveAI(text,action,worldContext,fallback,onDone){
+ COMBAT.aiRequests++;aiBadge.textContent='AI: thinking…';aiBadge.classList.remove('live','warn');
+ const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),6500);
+ const semantic=String(action?.kind||'world_event');
+ const safeAction={kind:'idea',name:String(action?.name||LABEL[semantic]||semantic),glyph:String(action?.glyph||'◆'),location:String(action?.location||'Observer World')};
+ const visible=worldContext?.visible||worldContext?.nearbyObjects||{};
+ const normalizedWorld={
+  turn:Number(worldContext?.turn??S.history.length)||0,
+  population:Number(worldContext?.population??S.pop)||0,
+  power:Number(worldContext?.power??worldContext?.order??S.order)||0,
+  water:Number(worldContext?.water??20)||20,
+  food:Number(worldContext?.food??S.food)||0,
+  eco:Number(worldContext?.eco??40)||40,
+  budget:Number(worldContext?.budget??worldContext?.order??S.order)||0,
+  visible
+ };
+ const extra={semanticKind:semantic,suspicion:worldContext?.suspicion??S.suspicion,order:worldContext?.order??S.order,nearbyFactions:worldContext?.nearbyFactions||{},combat:worldContext?.combat||{}};
+ const prompt=text+' Observer World semantic/context: '+JSON.stringify(extra);
+ try{
+  const res=await fetch(AI_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({text:prompt,mode:'predict_action',language:'en',provider:'auto',action:safeAction,worldContext:normalizedWorld}),signal:ctrl.signal});
+  const data=await res.json().catch(()=>({}));if(!res.ok||!data.ok||!data.prediction)throw Error(data.detail||data.error||('HTTP '+res.status));
+  const t=aiTextFromPrediction(data.prediction)||fallback;aiBadge.textContent='AI: '+String(data.provider||'live');aiBadge.classList.add('live');onDone?.(t,data);return t
+ }catch(e){aiBadge.textContent='AI: fallback';aiBadge.classList.add('warn');onDone?.(fallback,{fallback:true,error:String(e.message||e)});return fallback}
+ finally{clearTimeout(timer)}
+}
+async function probeLivingAI(){
+ try{const r=await fetch(AI_URL,{cache:'no-store'}),d=await r.json();const online=Object.entries(d.providers||{}).filter(x=>x[1]).map(x=>x[0]);aiBadge.textContent=online.length?'AI: '+online.length+' online':'AI: no providers';aiBadge.classList.toggle('live',online.length>0);aiBadge.classList.toggle('warn',online.length===0)}
+ catch{aiBadge.textContent='AI: offline';aiBadge.classList.add('warn')}
+}
+function snapshotFor(o){
+ const near={};for(const x of S.objects){if(Math.hypot(x.x-o.x,x.y-o.y)<180)near[x.kind]=(near[x.kind]||0)+1}
+ const factions={};for(const a of COMBAT.actors){if(a.state!=='dead'&&Math.hypot(a.x-o.x,a.y-o.y)<190)factions[a.faction]=(factions[a.faction]||0)+1}
+ return{turn:S.history.length,population:S.pop,food:S.food,order:S.order,suspicion:S.suspicion,nearbyObjects:near,nearbyFactions:factions,combat:{actors:COMBAT.actors.length,wounds:COMBAT.wounds,deaths:COMBAT.deaths}}
+}
+function announceClash(attacker,target,outcome){
+ const now=performance.now();if(now-COMBAT.lastNarrated<2600)return;COMBAT.lastNarrated=now;COMBAT.clashes++;
+ const fallback=combatFallback(attacker,target,outcome);SOUND?.event('clash');report('Street clash',fallback);showBattleToast(fallback);
+ const anchor=attacker||target,ctx=snapshotFor(anchor);
+ askLiveAI('Narrate the current armed clash and its likely historical consequence in concise literary English.',{kind:'street_clash',name:'Street clash',glyph:'⚔',location:'world x '+Math.round(anchor.x)+', y '+Math.round(anchor.y)},ctx,fallback,t=>{report('AI · Street clash',t);showBattleToast(t)});
+}
+const basePlaceV2=place;
+let placeAiSeq=0;
+place=function livingHistoryPlace(kind,x,y){
+ basePlaceV2(kind,x,y);SOUND?.event(kind);armScenario(kind,x,y);persistV2();
+ const seq=++placeAiSeq,fallback=story.textContent,ctx=snapshotFor({x,y});
+ askLiveAI('Interpret this new historical action in the current medieval world. State what changed, how nearby people react, and one plausible next consequence. Keep it compact and literary.',{kind,name:LABEL[kind]||kind,glyph:GLYPH[kind]||'◆',location:'world x '+Math.round(x)+', y '+Math.round(y)},ctx,fallback,t=>{if(seq===placeAiSeq)report('AI · '+(LABEL[kind]||'World event'),t)})
+};
+
+const baseOpenInspectV2=openInspect;
+openInspect=function aiObjectInspect(o){
+ baseOpenInspectV2(o);SOUND?.event('glyph');const fallback=inspectNarrative(o);inspectText.textContent=fallback+'  ·  AI is reading the local state…';
+ const ctx=snapshotFor(o);askLiveAI('Describe what is happening around this '+(LABEL[o.kind]||o.kind)+' now, how people are reacting, and one plausible consequence. Keep it compact and literary.',{kind:o.kind,name:LABEL[o.kind]||o.kind,glyph:GLYPH[o.kind]||'◆',location:'world x '+Math.round(o.x)+', y '+Math.round(o.y)},ctx,fallback,t=>{if(inspectModal.classList.contains('show'))inspectText.textContent=t})
+};
+
+// Lightweight crash/reload continuity for the new branch only.
+const SAVE_KEY='meta6-observer-living-history-v2';
+function persistV2(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({v:2,pop:S.pop,food:S.food,order:S.order,suspicion:S.suspicion,next:S.next,objects:S.objects,history:S.history.slice(-80),combat:COMBAT.actors,nextCombat:COMBAT.next}))}catch{}}
+function restoreV2(){try{const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(!d||d.v!==2)return;Object.assign(S,{pop:d.pop??S.pop,food:d.food??S.food,order:d.order??S.order,suspicion:d.suspicion??S.suspicion,next:d.next??S.next,objects:Array.isArray(d.objects)?d.objects:S.objects,history:Array.isArray(d.history)?d.history:S.history});COMBAT.actors=Array.isArray(d.combat)?d.combat:COMBAT.actors;COMBAT.next=d.nextCombat||COMBAT.next;for(const o of S.objects)if(!o.createdAt)o.createdAt=performance.now()-1000;popEl.textContent=S.pop;susEl.textContent=S.suspicion}catch{}}
+restoreV2();probeLivingAI();
+window.__OBSERVER_WORLD_V2__={ready:true,version:'living-history-v3-illustrated-score',release:RELEASE_MARKER,fx:FX_VERSION,visuals:window.IslandVisuals?.info()||null,aiUrl:AI_URL,combat:COMBAT,audio:SOUND,snapshot:()=>({state:S,combat:COMBAT,fx:{smokeBudget:40,shimmer:28,sway:18}}),save:persistV2};
+if(new URLSearchParams(location.search).get('autotest')==='1'){
+ localStorage.removeItem(SAVE_KEY);
+ // Deterministic browser contract: exercise the exact combat state machine without relying on headless RAF timing.
+ COMBAT.actors.length=0;COMBAT.next=1;COMBAT.wounds=0;COMBAT.deaths=0;COMBAT.clashes=0;COMBAT.lastNarrated=performance.now();
+ spawnActor('guard',-18,4,{count:3});spawnActor('militia',18,4,{count:3});
+ COMBAT.lastT=0;
+ for(let testNow=50;testNow<=4200;testNow+=50)updateCombat(testNow);
+ // Execute the same sword renderer for every actor so browser smoke covers weapon drawing paths too.
+ for(const actor of COMBAT.actors)drawSwordActor(actor);
+ const probe=document.createElement('div');probe.id='v2SelfTest';probe.hidden=true;document.body.appendChild(probe);
+ const armed=COMBAT.actors.filter(a=>a.armed).length;
+ const engaged=COMBAT.actors.filter(a=>['chase','attack','wounded','dead'].includes(a.state)).length;
+ const damaged=COMBAT.actors.filter(a=>a.hp<100).length;
+ const ok=COMBAT.actors.length>=6&&armed>=6&&engaged>=2&&damaged>=1&&window.__OBSERVER_WORLD_V2__?.ready;
+ document.body.dataset.v2Selftest=ok?'pass':'fail';
+ probe.textContent=JSON.stringify({ok,actors:COMBAT.actors.length,armed,engaged,damaged,wounds:COMBAT.wounds,deaths:COMBAT.deaths,fx:FX_VERSION});
+}
+
+
+if(new URLSearchParams(location.search).get('audiotest')==='1'){
+ const ok=!!SOUND&&Object.keys(window.ObserverKriegerAudio.THEMES).length>=7&&
+   Object.keys(window.ObserverKriegerAudio.SOUND_GROUPS).length>=35&&
+   SOUND.diagnostics().contextState==='not-created';
+ document.body.dataset.audioSelftest=ok?'pass':'fail';
+ const mark=document.createElement('span');mark.id='audioSelfTest';mark.hidden=true;
+ mark.textContent=JSON.stringify({ok,themes:Object.keys(window.ObserverKriegerAudio?.THEMES||{}).length,
+ mappings:Object.keys(window.ObserverKriegerAudio?.SOUND_GROUPS||{}).length,
+ audio:SOUND?.diagnostics()});document.body.appendChild(mark);
+}
+
+
+const readerOverlay=document.getElementById('readerOverlay');
+const readerBody=document.getElementById('readerBody');
+const readerTitle=document.getElementById('readerTitle');
+const readerClose=document.getElementById('readerClose');
+const readerPlus=document.getElementById('readerPlus');
+const readerMinus=document.getElementById('readerMinus');
+const storyReader=document.getElementById('storyReader');
+const inspectReader=document.getElementById('inspectReader');
+const battleReader=document.getElementById('battleReader');
+let readerFocus=null,readerSize=23;
+function openReader(title,content){
+ readerFocus=document.activeElement;readerTitle.textContent=String(title||'Field Journal');
+ readerBody.textContent=String(content||'');readerBody.style.setProperty('--reader-size',readerSize+'px');
+ readerBody.scrollTop=0;readerOverlay.classList.add('show');readerOverlay.setAttribute('aria-hidden','false');
+ document.body.classList.add('reader-open');readerClose.focus();
+}
+function closeReader(){
+ readerOverlay.classList.remove('show');readerOverlay.setAttribute('aria-hidden','true');
+ document.body.classList.remove('reader-open');
+ try{readerFocus?.focus()}catch{}
+}
+storyReader.addEventListener('click',e=>{e.stopPropagation();openReader(kicker.textContent,story.textContent)});
+inspectReader.addEventListener('click',e=>{e.stopPropagation();openReader(inspectTitle.textContent,inspectText.textContent)});
+battleReader.addEventListener('click',e=>{e.stopPropagation();openReader('A chapter of conflict',battleToast.textContent)});
+readerClose.addEventListener('click',closeReader);
+readerPlus.addEventListener('click',()=>{readerSize=Math.min(42,readerSize+3);readerBody.style.setProperty('--reader-size',readerSize+'px')});
+readerMinus.addEventListener('click',()=>{readerSize=Math.max(17,readerSize-3);readerBody.style.setProperty('--reader-size',readerSize+'px')});
+readerOverlay.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){e.preventDefault();closeReader()}
+ if(e.key==='Tab'){const controls=[readerClose,readerPlus,readerMinus,readerBody];const a=controls.indexOf(document.activeElement);if(a===-1){e.preventDefault();readerClose.focus()}
+ else if((e.shiftKey&&a===0)||(!e.shiftKey&&a===controls.length-1)){e.preventDefault();(e.shiftKey?readerBody:readerClose).focus()}
+ }
+});
+const oldShowBattleToast=showBattleToast;
+showBattleToast=function(t){
+ oldShowBattleToast(t);battleReader.classList.add('visible');
+ window.setTimeout(()=>battleReader.classList.remove('visible'),5150);
+};
+
+
+if(new URLSearchParams(location.search).get('v3test')==='1'){
+ const rd=!!document.getElementById('readerOverlay')&&!!document.getElementById('storyReader')&&
+  !!document.getElementById('inspectReader')&&!!document.getElementById('battleReader');
+ const art=window.IslandVisuals?.info()||{};
+ const music=window.ObserverKriegerAudio?.THEMES||{};
+ storyReader.click();
+ const opened=readerOverlay.classList.contains('show')&&readerBody.textContent.includes('There is no city');
+ readerPlus.click();const zoomed=readerSize>23;readerClose.click();const closed=!readerOverlay.classList.contains('show');
+ const ok=rd&&opened&&zoomed&&closed&&Object.keys(music).length===7&&!!art.source;
+ document.body.dataset.v3Selftest=ok?'pass':'fail';
+ const probe=document.createElement('span');probe.id='v3SelfTest';probe.hidden=true;
+ probe.textContent=JSON.stringify({ok,reader:rd,opened,zoomed,closed,art,musicThemes:Object.keys(music).length});
+ document.body.appendChild(probe);
+}
+
+let down=null,moved=false;
+canvas.addEventListener('pointerdown',e=>{canvas.setPointerCapture(e.pointerId);down={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y};moved=false});
+canvas.addEventListener('pointermove',e=>{if(!down)return;let dx=e.clientX-down.x,dy=e.clientY-down.y;if(Math.hypot(dx,dy)>8)moved=true;if(moved){cam.x=down.cx-dx/cam.zoom;cam.y=down.cy-dy/cam.zoom}});
+canvas.addEventListener('pointerup',e=>{if(!down)return;if(!moved){const hit=S.glyphHits.find(h=>e.clientX>=h.x&&e.clientX<=h.x+h.w&&e.clientY>=h.y&&e.clientY<=h.y+h.h);if(hit){const o=S.objects.find(x=>x.id===hit.id);if(o)openInspect(o)}else{const p=s2w(e.clientX,e.clientY);place(S.selected,p.x,p.y)}}down=null});
+canvas.addEventListener('pointercancel',()=>{down=null;moved=false});canvas.addEventListener('lostpointercapture',()=>{down=null;moved=false});document.addEventListener('visibilitychange',()=>{down=null;moved=false;if(!document.hidden){COMBAT.lastT=performance.now();resize()}});
+canvas.addEventListener('wheel',e=>{e.preventDefault();cam.zoom=Math.max(.65,Math.min(1.65,cam.zoom*(e.deltaY>0?.9:1.1)))},{passive:false});
+document.addEventListener('touchmove',e=>{if(!e.target.closest('#dock')&&!e.target.closest('#readerOverlay'))e.preventDefault()},{passive:false});
+})();
+</script>
+</body>
+</html>

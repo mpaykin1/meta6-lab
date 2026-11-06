@@ -1,0 +1,12 @@
+p='/home/claude/arc/base/index.html'; s=open(p,encoding='utf8').read()
+def rep(a,b):
+    global s; assert s.count(a)==1,a[:60]; s=s.replace(a,b)
+rep('<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">\n','')
+rep('<script src="https://bridge.playgama.com/v2/stable/playgama-bridge.js"></script>','<script src="playgama-bridge.js"></script>')
+rep('<div id="hint">Tap or hold to fire arrows</div>','<div id="hint">Tap or hold to fire arrows</div>\n  <div id="repel" aria-hidden="true"></div>\n  <div id="arcHud" aria-hidden="true"><div id="lantern"></div><div id="shield" data-n="0"><i></i><i></i><i></i></div></div>')
+rep('<button class="hb" id="bShop">WEAPONS</button>','<button class="hb" id="bShop" aria-label="Weapons"><svg viewBox="0 0 11 11" fill="currentColor" aria-hidden="true"><rect x="2" y="0" width="2" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="2" width="1" height="2"/><rect x="6" y="4" width="1" height="3"/><rect x="5" y="7" width="1" height="2"/><rect x="4" y="9" width="1" height="1"/><rect x="2" y="10" width="2" height="1"/><rect x="2" y="1" width="1" height="9" opacity=".55"/><rect x="3" y="5" width="7" height="1"/><rect x="9" y="4" width="1" height="3"/></svg></button>')
+rep('<button class="btn" id="bRetry">RETRY</button>','<button class="btn" id="bRevive" hidden><i class="rv"></i><span>Revive: watch an ad</span></button><button class="btn" id="bRetry">RETRY</button>')
+css=open('/home/claude/arc/work/extra.css',encoding='utf8').read()
+rep('</style>\n\n<canvas id="c"></canvas>','</style>\n<style>\n'+css+'\n</style>\n\n<canvas id="c"></canvas>')
+rep('<div id="flash"></div>','<div id="flash"></div><div id="fogveil" aria-hidden="true"></div>')
+open(p,'w',encoding='utf8').write(s); print('html ok')

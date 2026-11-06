@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "game_id": "generated-confluence-vault",
+  "seed": "11",
+  "source_commit": "0aff1fd4b46d0c1127ff6836965d9143322bc91e",
+  "entry": "index.html",
+  "status": "packaged_unverified",
+  "validation": {
+    "browser": "not_run",
+    "rights": "not_verified",
+    "publication": "not_published"
+  },
+  "pipeline_sha256": "6325c56441262e14c7b67a00490f8d1ef09c2efe4acf9b0575b83c229314a6b8",
+  "stages": [
+    {
+      "engine": "calc",
+      "status": "skipped_optional"
+    },
+    {
+      "engine": "dramaturgy",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "story",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "mechanics",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "physics",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "visual",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "onboarding",
+      "status": "produced_unverified"
+    }
+  ],
+  "files": [
+    {
+      "path": "data/pipeline.json",
+      "bytes": 18910,
+      "sha256": "5f8cad3a618fa9725d7fc375802abfa64c02d811a50e9024ddd8e725bb39d7a6"
+    },
+    {
+      "path": "data/provenance.json",
+      "bytes": 963,
+      "sha256": "26831483920ef514b96d50b63fef6fc0484832337b36d3a546786e46e3b1701c"
+    },
+    {
+      "path": "game.js",
+      "bytes": 33166,
+      "sha256": "95bbeed5c64b65b04884f54f2e163f0918bed4457479e77da07baa2c2020d411"
+    },
+    {
+      "path": "index.html",
+      "bytes": 19263,
+      "sha256": "f0db87f432aad8351f219fa9bcacec4fdadaaf4b166ad17d1b490663b433e2fe"
+    },
+    {
+      "path": "shaders/atmosphere-fragment.glsl",
+      "bytes": 836,
+      "sha256": "27b752f747ebace3adc8b985afda80db70e196e9745a274f9aa52c52a230d2a4"
+    },
+    {
+      "path": "shaders/atmosphere-vertex.glsl",
+      "bytes": 244,
+      "sha256": "43586b30184e4229874632d0edd1a45db2ae43139520a8944f02a2763f21e7f8"
+    }
+  ],
+  "manifest_sha256": "c3fe001786f21614584a65192512b2d571928ab58ebc1fee645e8e0318144ef5"
+}

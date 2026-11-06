@@ -1,0 +1,48 @@
+name: LAB Pages
+# Файл песочницы (Claude). Сайт: корень = main, каждая ветка lab/<имя> -> /preview/<имя>/.
+on:
+  push:
+    branches: [main, 'lab/**']
+  workflow_run:
+    workflows: ['Sync from meta6']
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: lab-pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Build sandbox site (main + all lab/** previews)
+        run: bash scripts/lab/build-site.sh _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Check that main and every preview answer 200
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://mpaykin1.github.io/meta6-lab'
+          urls=("$base/meta-games/")
+          while read -r p; do [ -n "$p" ] && urls+=("$base/preview/$p/meta-games/"); done < _site/.lab-previews
+          for u in "${urls[@]}"; do
+            ok=0; for i in $(seq 1 30); do
+              if curl -fsS -o /dev/null --max-time 20 "$u?rev=${GITHUB_SHA}"; then ok=1; break; fi; sleep 10; done
+            [ "$ok" = 1 ] && echo "200 $u" || { echo "NOT 200: $u" >&2; exit 1; }
+          done

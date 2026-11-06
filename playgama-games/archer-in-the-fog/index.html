@@ -1,0 +1,120 @@
+<!doctype html><html><head>
+<meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>@font-face{font-family:'Russo One';font-style:normal;font-weight:400;src:url('russo-latin.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Russo One';font-style:normal;font-weight:400;src:url('russo-cyrillic.woff2') format('woff2');font-display:swap}</style>  <script type="module" crossorigin src="./assets/index-xsRfS2lk.js"></script>
+</head><body>
+<title>Archer in the Fog</title>
+
+<style>
+:root{--bg:#5f7fb8;--ink:#ffffff;--ink-dim:#cfe0ff;--panel:rgba(14,22,40,.55);--accent:#8ff3ff;--rage:#ff7a6a;--line:rgba(200,225,255,.35)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#5f7fb8}}
+:root[data-theme="dark"]{--bg:#5f7fb8}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+body{position:fixed;inset:0;font-family:'Russo One',system-ui,sans-serif;color:var(--ink)}
+canvas#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.hud{position:fixed;inset:0;pointer-events:none}
+#top{position:absolute;top:calc(env(safe-area-inset-top) + 14px);left:16px;right:16px;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;transition:opacity .6s}
+#top .lbl{font-size:12px;letter-spacing:.25em;color:var(--ink-dim);text-shadow:0 1px 3px #0008}
+#hp{display:flex;gap:4px}
+#hp i{width:22px;height:10px;background:rgba(10,16,30,.6);border:1px solid var(--line);display:block;transition:background .25s, box-shadow .25s}
+#hp i.on{background:var(--accent);box-shadow:0 0 10px var(--accent)}
+#depth{position:absolute;top:calc(env(safe-area-inset-top) + 14px);left:16px;font-size:12px;letter-spacing:.15em;color:var(--ink-dim);text-shadow:0 1px 3px #0008;opacity:0;transition:opacity .6s}
+#bottom{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 22px);left:50%;transform:translateX(-50%);width:min(70vw,360px);opacity:0;transition:opacity .6s}
+#bottom .lbl{font-size:11px;letter-spacing:.3em;color:var(--ink-dim);text-align:center;margin-bottom:5px;text-shadow:0 1px 3px #0008}
+#rage{height:7px;background:rgba(10,16,30,.6);border:1px solid var(--line);overflow:hidden}
+#rage b{display:block;height:100%;width:0;background:linear-gradient(90deg,#6aa0ff,var(--rage));box-shadow:0 0 12px var(--rage)}
+#cap{position:absolute;left:0;right:0;top:42%;text-align:center;font-size:clamp(30px,9vw,54px);letter-spacing:.02em;color:#fff;
+ -webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:3px 4px 0 #000a;transform:scale(.6);opacity:0;transition:transform .18s cubic-bezier(.2,1.6,.4,1),opacity .15s}
+#cap.show{transform:scale(1);opacity:1}
+#hint{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 112px);text-align:center;font-size:14px;color:var(--ink-dim);text-shadow:0 1px 4px #000a;opacity:0;transition:opacity .8s}
+.ov{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;box-sizing:border-box;transition:opacity .8s}
+.ov.hide,.ov.hide *{opacity:0;pointer-events:none!important}
+#menu h1,#over h1{margin:0;font-weight:400;font-size:clamp(34px,10vw,64px);text-align:center;line-height:1;-webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:4px 5px 0 #0009}
+#menu p,#over p{margin:0 0 10px;color:var(--ink-dim);text-align:center;font-size:14px;max-width:340px;font-family:system-ui,sans-serif;text-shadow:0 1px 4px #000a}
+.btn{pointer-events:auto;font-family:inherit;font-size:18px;letter-spacing:.12em;color:#fff;background:var(--panel);border:1px solid var(--line);padding:14px 30px;min-width:220px;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.btn:active{transform:scale(.97)}
+#gal{justify-content:flex-end;padding-bottom:calc(env(safe-area-inset-bottom) + 24px);pointer-events:none}
+#gal .card{pointer-events:auto;background:var(--panel);border:1px solid var(--line);padding:12px 14px;width:min(92vw,420px);box-sizing:border-box;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#gal .row{display:flex;align-items:center;gap:10px}
+#gal .row .nm{flex:1;text-align:center;font-size:20px}
+#gal .row .n{font-size:11px;color:var(--ink-dim);letter-spacing:.2em}
+#gal .ds{font-family:system-ui,sans-serif;font-size:13px;color:var(--ink-dim);margin-top:6px;text-align:center;min-height:34px}
+.sq{pointer-events:auto;width:44px;height:44px;font-size:20px;color:#fff;background:rgba(10,16,30,.5);border:1px solid var(--line);cursor:pointer;font-family:inherit}
+#galBack{position:fixed;top:calc(env(safe-area-inset-top) + 12px);left:16px;pointer-events:auto;min-width:0;padding:8px 14px;font-size:13px}
+#flash{position:fixed;inset:0;background:#dfeaff;opacity:0;pointer-events:none}
+#res{position:absolute;top:calc(env(safe-area-inset-top) + 12px);right:16px;display:flex;flex-direction:column;align-items:flex-end;gap:3px;opacity:0;transition:opacity .6s;text-shadow:0 1px 3px #000a}
+#hearts{color:#ff5a6a;font-size:16px;letter-spacing:2px;font-family:system-ui,sans-serif}
+#coins{color:#ffd45a;font-size:13px;letter-spacing:.1em}
+#lvl{position:absolute;left:16px;right:16px;top:calc(env(safe-area-inset-top) + 58px);text-align:center;font-size:13px;color:var(--ink-dim);font-family:system-ui,sans-serif;text-shadow:0 1px 4px #000c;opacity:0;transition:opacity .8s}
+.hb{position:absolute;pointer-events:auto;font-family:inherit;font-size:13px;letter-spacing:.08em;color:#fff;background:var(--panel);border:1px solid var(--line);padding:9px 12px;bottom:calc(env(safe-area-inset-bottom) + 62px);opacity:0;transition:opacity .6s, box-shadow .2s;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#bFreeze{right:16px}#bShop{left:16px}
+#bFreeze.on{box-shadow:0 0 14px #8ff3ff;border-color:#8ff3ff;color:#bff8ff}
+#shop .card{pointer-events:auto;background:var(--panel);border:1px solid var(--line);padding:14px;width:min(92vw,420px);box-sizing:border-box;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;flex-direction:column;gap:8px;max-height:80vh;overflow-y:auto}
+#shop .sh-h{display:flex;justify-content:space-between;font-size:18px}
+#shCoins{color:#ffd45a}
+.wp{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);background:rgba(10,16,30,.45);cursor:pointer;text-align:left;color:#fff;font-family:inherit;width:100%}
+.wp .sw{width:14px;height:34px;flex:none}
+.wp .tx{flex:1;min-width:0}.wp .tx b{display:block;font-weight:400;font-size:15px}.wp .tx i{display:block;font-style:normal;font-family:system-ui,sans-serif;font-size:12px;color:var(--ink-dim)}
+.wp .pr{font-size:13px;color:#ffd45a}.wp.eq{border-color:#8ff3ff;box-shadow:0 0 10px rgba(143,243,255,.35)}.wp.no{opacity:.55}
+</style>
+<style>
+/* 2.0 · clean screen: labels hidden, icons instead of emoji, wordless hint, lantern & shield graphics */
+#top .lbl,#bottom .lbl{display:none}
+#hint{font-size:0!important;width:64px;height:64px;left:50%!important;right:auto!important;margin-left:-32px;border-radius:50%;box-shadow:inset 0 0 0 3px rgba(207,224,255,.7);animation:hintp 1.4s ease-in-out infinite}
+#hint::after{content:"";position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#8ff3ff;box-shadow:0 0 18px #8ff3ff}
+@keyframes hintp{0%,100%{transform:scale(.85)}50%{transform:scale(1.08)}}
+#repel{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 118px);display:flex;justify-content:center;gap:6px;opacity:0;transition:opacity .3s;pointer-events:none}
+#repel i{width:16px;height:16px;transform:rotate(45deg);box-shadow:inset 0 0 0 2px #ff7a6a;background:rgba(10,16,30,.5)}
+#repel i.on{background:#ff7a6a;box-shadow:0 0 12px #ff7a6a}
+#hp i.on{background:var(--pc,var(--accent));box-shadow:0 0 10px var(--pc,var(--accent))}
+#arcHud{position:absolute;left:16px;top:calc(env(safe-area-inset-top) + 40px);display:flex;flex-direction:column;gap:6px;opacity:0;transition:opacity .6s;pointer-events:none}
+#lantern{display:flex;gap:4px;align-items:flex-end;height:30px;padding:4px;background:rgba(10,16,30,.5);border:1px solid var(--line)}
+#lantern i{position:relative;display:block;width:6px;height:100%;background:rgba(207,224,255,.12);overflow:hidden}
+#lantern i b{position:absolute;left:0;right:0;bottom:0;height:0;background:var(--c);box-shadow:0 0 8px var(--c);transition:height .25s}
+#lantern i.need{box-shadow:0 0 0 1px var(--c),0 0 10px var(--c)}
+#shield{display:flex;gap:3px}
+#shield i{width:10px;height:12px;clip-path:polygon(50% 0,100% 18%,100% 55%,50% 100%,0 55%,0 18%);background:rgba(88,196,255,.18)}
+#shield[data-n="1"] i:nth-child(-n+1),#shield[data-n="2"] i:nth-child(-n+2),#shield[data-n="3"] i{background:#58c4ff;box-shadow:0 0 8px #58c4ff}
+#fogveil{position:fixed;inset:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 50% 55%,rgba(200,215,245,.9),rgba(95,127,184,.97) 75%)}
+#hearts{display:flex;gap:3px}#hearts .ht{width:14px;height:12px;background:#ff5a6a;clip-path:polygon(50% 100%,0 45%,0 15%,20% 0,40% 0,50% 15%,60% 0,80% 0,100% 15%,100% 45%)}
+#coins .cn{display:inline-block;width:10px;height:10px;margin-right:5px;background:#ffd45a;border-radius:2px;box-shadow:0 0 8px #ffd45a;vertical-align:-1px}
+#bFreeze,#bShop{display:flex;align-items:center;gap:6px}#bFreeze svg,#bShop svg{width:18px;height:18px;display:block}#bFreeze b{font-weight:400}
+#bRevive{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(180deg,#ff6b7a,#c2303f);border-color:#ffb3ba}
+#bRevive .rv{width:16px;height:14px;background:#fff;clip-path:polygon(50% 100%,0 45%,0 15%,20% 0,40% 0,50% 15%,60% 0,80% 0,100% 15%,100% 45%)}
+
+</style>
+
+<canvas id="c"></canvas>
+<div id="flash"></div><div id="fogveil" aria-hidden="true"></div>
+<div class="hud">
+  <div id="depth">TIER 1</div>
+  <div id="top"><div class="lbl">DRAGON</div><div id="hp"></div></div>
+  <div id="cap"></div>
+  <div id="hint">Tap or hold to fire arrows</div>
+  <div id="repel" aria-hidden="true"></div>
+  <div id="arcHud" aria-hidden="true"><div id="lantern"></div><div id="shield" data-n="0"><i></i><i></i><i></i></div></div>
+  <div id="bottom"><div class="lbl">RAGE</div><div id="rage"><b></b></div></div>
+  <div id="res"><span id="hearts"></span><span id="coins">● 0</span></div>
+  <div id="lvl"></div>
+  <button class="hb" id="bShop" aria-label="Weapons"><svg viewBox="0 0 11 11" fill="currentColor" aria-hidden="true"><rect x="2" y="0" width="2" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="2" width="1" height="2"/><rect x="6" y="4" width="1" height="3"/><rect x="5" y="7" width="1" height="2"/><rect x="4" y="9" width="1" height="1"/><rect x="2" y="10" width="2" height="1"/><rect x="2" y="1" width="1" height="9" opacity=".55"/><rect x="3" y="5" width="7" height="1"/><rect x="9" y="4" width="1" height="3"/></svg></button><button class="hb" id="bFreeze">❄ 0</button>
+</div>
+<div id="menu" class="ov">
+  <h1>ARCHER<br>IN THE FOG</h1>
+  <p>Hit the dragon before it gets angry. Otherwise it destroys your tower, and you fall to the next.</p>
+  <button id="lang" class="btn" style="min-width:100px;padding:6px 14px;font-size:13px">EN / РУ</button>
+  <button class="btn" id="bPlay">PLAY</button>
+  <button class="btn" id="bGal">GALLERY</button>
+</div>
+<div id="shop" class="ov hide"><div class="card"><div class="sh-h"><span>WEAPONS</span><span id="shCoins"></span></div><div id="shList" style="display:flex;flex-direction:column;gap:8px"></div><button class="btn" id="shClose">FIGHT</button></div></div>
+<div id="over" class="ov hide"><h1>DRAGON<br>WON</h1><p id="ovStats"></p><button class="btn" id="bRevive" hidden><i class="rv"></i><span>Revive: watch an ad</span></button><button class="btn" id="bRetry">RETRY</button><button class="btn" id="bOvMenu">MENU</button></div>
+<div id="gal" class="ov hide">
+  <button class="btn" id="galBack">← MENU</button>
+  <div class="card">
+    <div class="row"><button class="sq" id="gPrev">◀</button><div class="nm" id="gName"></div><button class="sq" id="gNext">▶</button></div>
+    <div class="ds" id="gDesc"></div>
+    <div class="n" id="gNum" style="text-align:center"></div>
+  </div>
+</div>
+
+<script src="playgama-bridge.js"></script>
+
+</body></html>

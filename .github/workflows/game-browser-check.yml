@@ -1,0 +1,101 @@
+name: game-browser-check
+on:
+  pull_request:
+    paths:
+      - 'ashen-sumerek/**'
+      - 'underwater-sumerek/**'
+      - 'abyss-glow/play/**'
+      - 'automation/asset-quality/abyss_stand_smoke.mjs'
+      - 'games/**'
+      - 'scripts/check-game.cjs'
+      - '.github/workflows/game-browser-check.yml'
+  workflow_dispatch:
+
+jobs:
+  game-browser-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install local Three and Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1 three@0.160.0
+          npx playwright install --with-deps chromium
+      - name: Check all changed games at exact HEAD
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          if [ -n "$BASE_SHA" ] && [ -n "$HEAD_SHA" ]; then
+            # Base checker is trusted; bootstrap PR for the new checker can use its own source.
+            mkdir -p scripts
+            if git cat-file -e "$BASE_SHA:scripts/check-game.cjs" 2>/dev/null; then
+              git show "$BASE_SHA:scripts/check-game.cjs" > scripts/check-game.cjs
+            elif [ ! -f scripts/check-game.cjs ]; then
+              echo 'Missing browser checker in both base and PR' >&2
+              exit 1
+            fi
+            git diff --name-only "$BASE_SHA...$HEAD_SHA" > /tmp/changed-games
+          else
+            printf 'ashen-sumerek/index.html\nunderwater-sumerek/index.html\n' > /tmp/changed-games
+          fi
+          {
+            grep -q '^ashen-sumerek/' /tmp/changed-games && echo 'ashen-sumerek/index.html' || true
+            grep -q '^underwater-sumerek/' /tmp/changed-games && echo 'underwater-sumerek/index.html' || true
+            grep -q '^abyss-glow/play/' /tmp/changed-games && echo 'abyss-glow/play/index.html' || true
+            while IFS= read -r changed; do
+              case "$changed" in
+                games/*)
+                  dir="${changed%/*}"
+                  found=
+                  while [ "$dir" != "." ] && [ "$dir" != "games" ]; do
+                    if [ -f "$dir/index.html" ]; then echo "$dir/index.html"; found=1; break; fi
+                    dir="${dir%/*}"
+                  done
+                  if [ -z "$found" ] && [ -f games/index.html ]; then echo games/index.html; found=1; fi
+                  if [ -z "$found" ]; then echo "No index.html for $changed" >&2; exit 1; fi
+                  ;;
+              esac
+            done < /tmp/changed-games
+          } | sort -u > /tmp/targets
+          node --check scripts/check-game.cjs
+          if [ ! -s /tmp/targets ]; then
+            echo 'Checker syntax OK; no game entrypoint changed, browser assertions not run'
+            exit 0
+          fi
+          while IFS= read -r target; do
+            test -f "$target" || { echo "Missing game: $target"; exit 1; }
+            case "$target" in
+              games/*)
+                echo "Game $target is exercised by the dedicated strict meta-bot.yml workflow (390x844 and desktop, two runs)"
+                ;;
+              abyss-glow/play/index.html)
+                python3 -m http.server 8765 --bind 127.0.0.1 --directory abyss-glow >/tmp/abyss-play-http.log 2>&1 &
+                sleep 2
+                curl --fail --silent --show-error http://127.0.0.1:8765/play/ >/dev/null
+                if [ -n "$BASE_SHA" ] && git cat-file -e "$BASE_SHA:abyss-glow/play/index.html" 2>/dev/null; then
+                  mkdir -p /tmp/abyss-old
+                  git archive "$BASE_SHA" abyss-glow/play abyss-glow/assets | tar -x -C /tmp/abyss-old
+                  python3 -m http.server 8766 --bind 127.0.0.1 --directory /tmp/abyss-old/abyss-glow >/tmp/abyss-old-http.log 2>&1 &
+                  sleep 2
+                  echo 'BASELINE: exact PR base, same Chromium runner'
+                  ABYSS_SMOKE_TARGET=play ABYSS_BASELINE=1 ABYSS_SMOKE_ROOT=/tmp/abyss-old/abyss-glow/play ABYSS_SMOKE_URL=http://127.0.0.1:8766/play/ node automation/asset-quality/abyss_stand_smoke.mjs || echo 'BASELINE comparison failed; exact HEAD check remains mandatory'
+                fi
+                echo 'HEAD: exact PR head Chromium smoke'
+                ABYSS_SMOKE_TARGET=play ABYSS_SMOKE_URL=http://127.0.0.1:8765/play/ node automation/asset-quality/abyss_stand_smoke.mjs
+                ;;
+              *)
+                node scripts/check-game.cjs "$target"
+                ;;
+            esac
+          done < /tmp/targets

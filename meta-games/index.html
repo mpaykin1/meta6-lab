@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#060b14">
+<meta name="description" content="Enter META GAMES: independent browser worlds playable directly on our own website. Twilight islands, ashbound journeys, underwater worlds, veil terraces and connected adventures.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://mpaykin1.github.io/meta6/meta-games/">
+<title>META GAMES — Play Our Worlds</title>
+<style>
+:root{--ink:#dbe9fb;--muted:#9faec9;--gold:#efce91;--surface:#101b2a;--line:#384555;--glow:#83bccc}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:#050a12}
+body{margin:0;min-height:100vh;color:var(--ink);font:15px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#050a12;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid #f5d8a6;outline-offset:4px}
+canvas{display:block}
+.scene{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;background:radial-gradient(circle at 52% 38%,#323b4f 0%,#121f33 22%,#040b15 70%)}
+.scene-vignette{pointer-events:none;position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(4,10,19,.08) 0%,rgba(4,10,19,.04) 50%,#050a12 97%),linear-gradient(90deg,rgba(4,10,19,.48),transparent 70%)}
+.hero{min-height:660px;height:85vh;max-height:920px;position:relative;display:flex;flex-direction:column}
+header{position:relative;z-index:3;width:min(1220px,92%);margin:0 auto;padding:27px 0;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-size:18px;font-weight:800;letter-spacing:.22em;display:flex;align-items:center;gap:12px}
+.brand-symbol{display:grid;place-items:center;width:35px;height:35px;color:var(--gold);border:1px solid #d4b889;border-radius:50%;font-size:20px;box-shadow:0 0 20px #d4b88924}
+.brand b{color:var(--gold)}
+.links{display:flex;align-items:center;gap:25px;color:#c4d1e1;font-size:13px;letter-spacing:.05em}
+.links a:hover{color:#fff}
+.hero-copy{position:relative;z-index:3;width:min(1220px,92%);margin:auto auto 8%;padding-top:80px}
+.eyebrow{color:var(--gold);font-weight:700;letter-spacing:.35em;font-size:11px;text-transform:uppercase}
+h1{font-size:clamp(64px,11vw,154px);font-weight:700;line-height:.83;letter-spacing:-.065em;text-shadow:0 4px 48px #06101f;margin:24px 0 29px}
+h1 span{display:block;color:#d0dded;font-weight:300;letter-spacing:.12em;font-size:.34em;line-height:1.8}
+.hero-copy p{max-width:485px;color:#c0cada;font-size:clamp(16px,1.8vw,19px);line-height:1.8;text-shadow:0 2px 18px #07101a}
+.actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin:30px 0}
+.pill{display:inline-flex;justify-content:center;align-items:center;min-height:46px;padding:10px 23px;border:1px solid #e6c98f;background:#e7ca91;color:#111c24;font-weight:800;letter-spacing:.09em;text-transform:uppercase;font-size:11px;transition:transform .2s,background .2s}
+.pill:hover{transform:translateY(-3px);background:#ffe4ad}
+.pill.alt{background:#111d2a90;color:#d9e7f2;border-color:#7c96a15e}
+.pill.alt:hover{background:#1e3243}
+.terrain{position:absolute;bottom:0;left:-3%;width:106%;height:180px;z-index:2;pointer-events:none;opacity:.85;background:
+linear-gradient(0deg,#050a12 0%,#071322dd 55%,transparent 100%),
+repeating-linear-gradient(104deg,transparent 0 38px,#0b1921 38px 40px,transparent 40px 95px)}
+.terrain:after{content:"";position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(#050a1200,#050a12)}
+main{position:relative;z-index:5;padding:42px 0 94px}
+.container{width:min(1220px,92%);margin:auto}
+.section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin:0 0 30px}
+.section-title h2{font-weight:500;font-size:clamp(30px,5vw,53px);letter-spacing:-.05em;line-height:1;margin:8px 0 0}
+.section-title p{color:var(--muted);margin:0}
+.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.game{border:1px solid #56637755;position:relative;display:flex;flex-direction:column;min-height:440px;background:#0c1420;isolation:isolate;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s}
+.game:hover{transform:translateY(-6px);border-color:#d5bd8b8a;box-shadow:0 20px 70px #030b17b0}
+.art{position:absolute;inset:0 0 86px;z-index:-1;overflow:hidden}
+.art:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 53% 38%,#b5a57b59 0%,#2a3b57 19%,#081726 65%);filter:saturate(1.2)}
+.art:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,#0a1220 88%),repeating-linear-gradient(100deg,transparent 0 58px,#020d1a40 59px 60px)}
+.art .orb{position:absolute;top:16%;left:51%;width:150px;aspect-ratio:1;border-radius:50%;transform:translateX(-50%);background:radial-gradient(circle at 44% 40%,#f9e7ad,#7d8ea9 58%,#162a3f 60%,#0b1c2b 66%);box-shadow:0 0 80px #b2c9bd6a,0 0 140px #9ebcd83d;animation:breath 8s ease-in-out infinite}
+.art .spire{position:absolute;bottom:0;height:49%;width:33%;background:linear-gradient(145deg,#122a39,#030b15);clip-path:polygon(48% 0,62% 28%,76% 38%,100% 100%,0 100%,25% 44%);filter:drop-shadow(0 0 20px #1f5365);left:19%}
+.art .spire:nth-of-type(3){left:62%;height:66%;width:24%;transform:scaleX(-1)}
+.art.ash:before{background:radial-gradient(ellipse at 51% 50%,#a94f3659 0%,#553538 24%,#130e1c 72%)}
+.art.ash .orb{background:radial-gradient(circle at 42% 40%,#fff4aa,#d6724f 45%,#351a20 70%);box-shadow:0 0 95px #e466448a}
+.art.ash .spire{background:linear-gradient(145deg,#593a34,#170e17);clip-path:polygon(49% 0,64% 31%,80% 46%,100% 100%,0 100%,24% 50%)}
+.art.underwater:before{background:radial-gradient(ellipse at 50% 35%,#0c788168 0%,#073d57 27%,#05111e 70%)}
+.art.underwater .orb{width:100px;top:20%;background:radial-gradient(circle at 35% 35%,#b6f8f7,#39b4bd 38%,#08436c 66%);box-shadow:0 0 130px #27e8ea9a;animation:float 8s ease-in-out infinite}
+.art.underwater .spire{clip-path:polygon(38% 0,57% 45%,80% 25%,100% 100%,0 100%);background:linear-gradient(145deg,#125b65,#05202e)}
+.art.worlds:before{background:radial-gradient(ellipse at 50% 35%,#77648a74,#31435d 30%,#070c1d 75%)}
+.art.worlds .orb{background:conic-gradient(from 20deg,#efc17e,#5482a4,#d2a7b3,#efc17e);box-shadow:0 0 100px #b9a4dd8a}
+.art.worlds .spire{background:linear-gradient(145deg,#34365d,#090c1d)}
+.art.veil:before{background:radial-gradient(ellipse at 50% 42%,#2b878b85 0%,#234c6c 25%,#090f29 78%)}
+.art.veil .orb{background:radial-gradient(circle at 43% 38%,#f6e9bf,#8bd8d3 36%,#405e84 62%,#091e32 72%);box-shadow:0 0 92px #73d9de9e,0 0 160px #658cb38a}
+.art.veil .spire{background:linear-gradient(155deg,#3e777b,#101d38);clip-path:polygon(0 100%,10% 67%,31% 67%,31% 45%,58% 45%,58% 24%,77% 24%,77% 8%,100% 8%,100% 100%)}
+.game-content{margin-top:auto;padding:30px 32px;position:relative;z-index:2;background:linear-gradient(transparent,#08111fbb 30%,#080f1c 100%)}
+.game-tag{color:#e2c691;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+.game h3{font-size:clamp(25px,3vw,38px);line-height:1.1;letter-spacing:-.04em;font-weight:600;margin:10px 0}
+.game-desc{max-width:410px;font-size:14px;color:#bdc9d5;margin:10px 0 22px}
+.game-foot{display:flex;align-items:center;justify-content:space-between;padding-top:13px;border-top:1px solid #8191a53b;color:#f4deb0;font-size:12px;text-transform:uppercase;letter-spacing:.17em;font-weight:800}
+.game-foot i{font-size:20px;font-style:normal}
+.bottom{margin-top:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:23px 0;border-top:1px solid #6070883d;color:#96a7bd;font-size:13px}
+.bottom a{color:#d4c39b}
+@keyframes breath{50%{transform:translateX(-50%) scale(1.07);filter:brightness(1.15)}}
+@keyframes float{50%{transform:translate(-50%,8px)}}
+@media(max-width:700px){
+ .hero{min-height:650px;height:82vh}
+ header{padding:20px 0}.brand{font-size:15px}.links{gap:14px;font-size:12px}
+ .hero-copy{margin-bottom:17%;padding-top:0}h1{font-size:clamp(64px,17vw,102px)}
+ .games{grid-template-columns:1fr;gap:18px}
+ .game{min-height:390px}
+ .section-title{flex-direction:column;align-items:flex-start}
+ .bottom{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<section class="hero">
+<canvas class="scene" id="sky" aria-hidden="true"></canvas><div class="scene-vignette"></div>
+<header>
+ <a class="brand" href="./" aria-label="META GAMES home"><span class="brand-symbol">◇</span> META <b>GAMES</b></a>
+ <nav class="links" aria-label="Navigation"><a href="#worlds">Worlds</a><a href="../playgama-catalog/">Full catalog</a><a href="https://github.com/mpaykin1/meta6">Source</a></nav>
+</header>
+<div class="hero-copy">
+ <div class="eyebrow">A universe of connected dreams</div>
+ <h1>META<span>GAMES</span></h1>
+ <p>Step outside the ordinary. Explore shifting realms, lost cities and worlds that remember your choices — directly on our own website.</p>
+ <div class="actions"><a class="pill" href="#worlds">Enter the worlds</a><a class="pill alt" href="../playgama-catalog/">Explore full catalog</a></div>
+</div>
+<div class="terrain"></div>
+</section>
+<main class="container" id="worlds">
+ <div class="section-title"><div><div class="eyebrow">Independent browser play</div><h2>Choose a world</h2></div><p>Ten self-hosted game entrypoints. No Playgama redirect.</p></div>
+ <div class="games">
+ <a class="game" href="../observer-world-en-v7/" aria-label="Play Twilight Island"><div class="art"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 01 · Fantasy / Creation</div><h3>Twilight Island</h3><p class="game-desc">A living island of construction, discovery and mysterious inhabitants.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ <a class="game" href="../ashen-sumerek/" aria-label="Play Ashen Path"><div class="art ash"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 02 · Action / Survival</div><h3>Ashen Path</h3><p class="game-desc">Walk a broken world where danger waits beyond the glow.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ <a class="game" href="../underwater-world/" aria-label="Play Underwater World"><div class="art underwater"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 03 · Underwater / Mystery</div><h3>Underwater World</h3><p class="game-desc">Descend past the light into a strange and restless deep.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ <a class="game" href="../three-worlds-game/" aria-label="Play Three Worlds"><div class="art worlds"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 04 · Connected / Adventure</div><h3>Three Worlds</h3><p class="game-desc">Cross the boundaries between different lives and landscapes.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ <a class="game" href="../games/veil-terraces/" aria-label="Play Veil Terraces"><div class="art veil"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 05 · Exploration / Mystery</div><h3>Veil Terraces</h3><p class="game-desc">Explore endless mist-veiled terraces, cross ancient ruins and reclaim six lost memories.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ <a class="game" href="../games/sumerki-i-pepel-2/" aria-label="Play Twilight and Ash II"><div class="art ash"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 06 · Story / Survival</div><h3>Twilight and Ash II</h3><p class="game-desc">Save the magic tree on a lifeless island: find the seed, water it, defend it until it turns the world over.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ <a class="game" href="../games/twilight-isle-classic/" aria-label="Play Twilight Isle Classic"><div class="art"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 07 · Action / Reference</div><h3>Twilight Isle Classic</h3><p class="game-desc">The original voxel island at dusk: collect the coins, arm yourself and light the lighthouse before night wins.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ <a class="game" href="../games/twilight-isles/" aria-label="Play Twilight Isles"><div class="art underwater"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 08 · Adventure / Reference</div><h3>Twilight Isles</h3><p class="game-desc">Swim an endless archipelago, dodge the breaching whale and light every lighthouse on its own terms.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ <a class="game" href="../games/archer-in-the-fog/" aria-label="Play Archer in the Fog"><div class="art veil"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 09 · Archery / Reference</div><h3>Archer in the Fog</h3><p class="game-desc">Hold a ruined tower above the clouds against a dragon that plunges and ambushes out of the blue fog.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ <a class="game" href="../games/broken-city/" aria-label="Play Broken City"><div class="art worlds"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 10 · Platformer / Reference</div><h3>Broken City</h3><p class="game-desc">A folded comic-noir city hangs overhead: climb falling houses, stomp creepy toys and find out whose night this is.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ </div>
+ <footer class="bottom"><span>© 2026 META GAMES · Independent browser worlds</span><span>All games launch under our GitHub Pages domain. <a href="https://github.com/mpaykin1/meta6">Source repository</a></span></footer>
+</main>
+<script>
+(()=>{
+'use strict';
+const c=document.getElementById('sky');
+const gl=c.getContext('webgl2',{alpha:false,antialias:false,powerPreference:'low-power'});
+if(!gl)return;
+const vertex=`#version 300 es
+precision highp float;
+void main(){vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);gl_Position=vec4(p*2.-1.,0.,1.);}`;
+const fragment=`#version 300 es
+precision highp float;
+out vec4 color;
+uniform vec2 uSize;
+uniform float uTime;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453123);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+1.),f.x),f.y);}
+float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<5;i++){s+=a*noise(p);p=p*2.07+19.3;a*=.5;}return s;}
+void main(){
+ vec2 uv=gl_FragCoord.xy/uSize, p=(gl_FragCoord.xy-.5*uSize)/uSize.y;
+ vec3 bg=mix(vec3(.013,.028,.055),vec3(.035,.078,.12),smoothstep(-.4,.6,p.y));
+ float mist=fbm(vec2(p.x*1.8+uTime*.01,p.y*2.6-uTime*.008));
+ bg+=vec3(.06,.105,.14)*pow(mist,3.)*smoothstep(-.6,.35,p.y);
+ vec2 eclipse=vec2(.28,.12);
+ float r=length(p-eclipse);
+ float ring=exp(-pow((r-.18)*35.,2.))*1.6+exp(-pow((r-.18)*9.,2.))*.17;
+ bg+=vec3(.52,.66,.72)*ring*.34;
+ bg-=vec3(.02,.04,.07)*(1.-smoothstep(.176,.185,r));
+ bg+=vec3(.23,.31,.32)*exp(-r*5.)*.18;
+ float grid=hash(floor(uv*uSize*.54));
+ float stars=step(.9975,grid)*(.18+.4*pow(hash(floor(uv*uSize*.54)+17.),6.));
+ bg+=vec3(.58,.77,.91)*stars*(.75+.25*sin(uTime+grid*33.));
+ float haze=fbm(p*vec2(2.4,8.)+vec2(uTime*.025,-uTime*.016));
+ bg=mix(bg,vec3(.025,.08,.102),haze*.22*(1.-smoothstep(-.4,.75,p.y)));
+ bg*=1.-.3*length(p);
+ bg+=(hash(gl_FragCoord.xy+floor(uTime*20.))-.5)*.016;
+ color=vec4(pow(max(bg,0.),vec3(.92)),1.);
+}`;
+function shader(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;}
+let prog;
+try{prog=gl.createProgram();gl.attachShader(prog,shader(gl.VERTEX_SHADER,vertex));gl.attachShader(prog,shader(gl.FRAGMENT_SHADER,fragment));gl.linkProgram(prog);if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw Error('GL link');}catch{return;}
+gl.useProgram(prog);gl.bindVertexArray(gl.createVertexArray());
+const size=gl.getUniformLocation(prog,'uSize'),time=gl.getUniformLocation(prog,'uTime');
+let frame=0,started=performance.now(),last=0;
+function draw(t){frame=requestAnimationFrame(draw);if(document.hidden||t-last<33)return;last=t;const d=Math.min(devicePixelRatio||1,1.5);const w=Math.min(1920,Math.floor(c.clientWidth*d)),h=Math.min(1280,Math.floor(c.clientHeight*d));if(c.width!==w||c.height!==h){c.width=w;c.height=h;gl.viewport(0,0,w,h);}gl.uniform2f(size,w,h);gl.uniform1f(time,(t-started)/1000);gl.drawArrays(gl.TRIANGLES,0,3);}
+frame=requestAnimationFrame(draw);
+addEventListener('pagehide',()=>cancelAnimationFrame(frame),{once:true});
+})();
+</script>
+</body></html>

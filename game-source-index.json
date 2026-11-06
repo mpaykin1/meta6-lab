@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "1.0.0",
+  "project": "Observer World / Chain Reaction",
+  "owner": "mpaykin1",
+  "canonicalUrl": "https://github.com/mpaykin1/meta6/blob/main/SOURCE_INDEX.md",
+  "repository": "https://github.com/mpaykin1/meta6",
+  "ref": "main",
+  "acceptedBaseline": {
+    "status": "OWNER_PASS",
+    "date": "2026-10-16",
+    "path": "observer-world-en-v2/index.html",
+    "url": "https://mpaykin1.github.io/meta6/observer-world-en-v2/",
+    "verifiedRun": "https://github.com/mpaykin1/meta6/actions/runs/38507248287"
+  },
+  "audioEdition": {
+    "status": "CI_VERIFIED_PENDING_OWNER_PASS",
+    "path": "observer-world-en-v2-audio/index.html",
+    "url": "https://mpaykin1.github.io/meta6/observer-world-en-v2-audio/",
+    "soundEngine": "observer-world-en-v2-audio/audio.js",
+    "soundTest": "observer-world-en-v2-audio/audio.test.cjs",
+    "ci": ".github/workflows/observer-audio-live-gate.yml"
+  },
+  "legacy": {
+    "ru": "observer-world/index.html",
+    "en": "observer-world-en/index.html"
+  },
+  "supportingDocs": [
+    "docs/CANONICAL_INFINITE_IMAGE_SYMBOLIC_INTERACTIVE_NOVEL.md",
+    "docs/FAILURE_OBSERVER_WORLD_LANDSCAPE_CHROME_AND_FREEZE_2026-09-30.md",
+    "docs/SUCCESS_OBSERVER_WORLD_ENGLISH_LOCALIZATION_2026-10-03.md",
+    "docs/SUCCESS_OBSERVER_WORLD_V7_MOBILE_2026-10-16.md"
+  ],
+  "upstream": {
+    "audioEngine": "https://github.com/mpaykin1/World_server/blob/master/games/ostrov-sumerek/engine/32_audio.js",
+    "audioRecipes": "https://github.com/mpaykin1/World_server/blob/master/games/ostrov-sumerek/packs/base/sounds.js",
+    "worldBootstrap": "https://github.com/mpaykin1/World_server/blob/master/AI_START_HERE.md",
+    "issue": "https://github.com/mpaykin1/World_server/issues/80",
+    "techLab": "https://github.com/mpaykin1/world-server-tech-lab/blob/main/LIVE_STATUS.json"
+  },
+  "archive": "https://github.com/mpaykin1/meta6/archive/refs/heads/main.zip",
+  "agentInstructions": [
+    "Fetch this manifest and SOURCE_INDEX.md instead of asking user to reupload sources.",
+    "Use latest main and validate CI/deployed revision.",
+    "Do not overwrite accepted V2; audio variant requires separate owner PASS.",
+    "Game state is browser local; this index does not synchronize chat memory or live user save files."
+  ],
+  "illustratedMusicV3": {
+    "status": "CI_PENDING_OWNER_PASS",
+    "path": "observer-world-en-v3/index.html",
+    "url": "https://mpaykin1.github.io/meta6/observer-world-en-v3/",
+    "music": "observer-world-en-v3/audio.js",
+    "visuals": "observer-world-en-v3/island-graphics.js",
+    "musicTest": "observer-world-en-v3/audio.test.cjs",
+    "visualsTest": "observer-world-en-v3/island-graphics.test.cjs",
+    "ci": ".github/workflows/observer-v3-gate.yml",
+    "originalScaleUnchanged": true,
+    "largeTextReader": true,
+    "assetSourceSHA256": "fdbda0240b53f49d6e34aa0965531856e31a0154f4a12339e1682d60d5fe5c1f"
+  },
+  "miniIslandV4": {
+    "status": "TECHNICAL_GATE_PASS__OWNER_PASS_PENDING",
+    "game": "https://mpaykin1.github.io/meta6/observer-world-en-v4/",
+    "path": "observer-world-en-v4/index.html",
+    "fullOriginals": [
+      {
+        "path": "observer-world-en-v4/reference/ostrov-sumerek-original.html",
+        "gitBlobSHA": "d164562d0c75f4a0265d19ffe127b78a1bd27153",
+        "source": "Остров сумерек(4).html"
+      },
+      {
+        "path": "observer-world-en-v4/reference/ostrov-sumerek-expanded-original.html",
+        "gitBlobSHA": "eb8b736d7f4610584f1afb9f533d328ccfb35831",
+        "source": "Остров сумерек (1)(4).html"
+      }
+    ],
+    "modules": [
+      "observer-world-en-v4/original-assets.js",
+      "observer-world-en-v4/hero-apng.js",
+      "observer-world-en-v4/island-graphics.js",
+      "observer-world-en-v4/living-world.js",
+      "observer-world-en-v4/weapon-catalog.js",
+      "observer-world-en-v4/audio.js"
+    ],
+    "tests": [
+      "observer-world-en-v4/original-assets.test.cjs",
+      "observer-world-en-v4/island-graphics.test.cjs",
+      "observer-world-en-v4/living-world.test.cjs",
+      "observer-world-en-v4/audio.test.cjs"
+    ],
+    "workflow": ".github/workflows/observer-v4-gate.yml",
+    "features": "actual original atlas and full source; 4-frame APNG; 12 music scores with meter; separate Music/SFX; canvas mini-island, three scripted enemies, builder and exploration, partial 21-weapon combat integration",
+    "incomplete": [
+      "full original Three.js rendering",
+      "original all-weapon physics parity",
+      "visual match to original screenshot",
+      "iPhone audio proof",
+      "owner PASS"
+    ]
+  },
+  "original3dBuilderV5": {
+    "status": "CI_LIVE_WEBGL_BUILD_PASS__OWNER_VISUAL_PASS_PENDING",
+    "title": "Observer V5 uses exact original Island of Twilight Three.js engine and camera",
+    "url": "https://mpaykin1.github.io/meta6/observer-world-en-v5/",
+    "fullOriginalRuntime": "observer-world-en-v5/index.html",
+    "builder": "observer-world-en-v5/editor.js",
+    "soundtrack": "observer-world-en-v5/audio.js",
+    "claudeHandoff": "observer-world-en-v5/CLAUDE.md",
+    "originalSourceSHA256": "fdbda0240b53f49d6e34aa0965531856e31a0154f4a12339e1682d60d5fe5c1f",
+    "tests": ".github/workflows/observer-v5-gate.yml",
+    "preserved": [
+      "full shader WebGL Three.js scene",
+      "original perspective camera unchanged",
+      "original 64x64x26 voxel world",
+      "original terrain and water atlas",
+      "native particles/shader effects",
+      "original SFX",
+      "21 weapons and projectiles",
+      "Imp Shade Warden"
+    ],
+    "added": [
+      "3D placeable original-textured buildings",
+      "bottom historical symbol dock",
+      "collapsible menu",
+      "Krieger score",
+      "local building save",
+      "Claude source guide"
+    ],
+    "incomplete": [
+      "owner screenshot comparison",
+      "iPhone 11 visual/audio proof",
+      "AI integration into V5",
+      "full Observer historical/faction parity",
+      "collision mesh for placed buildings"
+    ]
+  },
+  "livingHistoryV6": {
+    "status": "TECHNICAL_CI_SUCCESS__OWNER_PASS_PENDING",
+    "url": "https://mpaykin1.github.io/meta6/observer-world-en-v6/",
+    "graphicalBaseline": "OWNER_PASS_V5",
+    "main": "observer-world-en-v6/index.html",
+    "files": {
+      "editor": "observer-world-en-v6/editor.js",
+      "buildings": "observer-world-en-v6/building-assets.js",
+      "npcs": "observer-world-en-v6/npc-catalog.js",
+      "relations": "observer-world-en-v6/combat-relations.js",
+      "story": "observer-world-en-v6/story-system.js",
+      "audio": "observer-world-en-v6/audio.js",
+      "test": "observer-world-en-v6/v6-systems.test.cjs",
+      "workflow": ".github/workflows/observer-v6-gate.yml",
+      "claude": "observer-world-en-v6/CLAUDE.md"
+    },
+    "features": {
+      "input": "right-click build; left-click original weapon attack; Alt-left inspect; Escape cancel",
+      "buildingTypes": 36,
+      "npcRoles": 16,
+      "glyph": "新",
+      "newWhenAlive": "friendly companion",
+      "newWhenDead": "new controllable Observer same persistent world",
+      "onAttackCompanion": "hostile betrayal",
+      "nativeNpcDamage": true,
+      "fullScreenReader": true
+    },
+    "verifiedRun": "https://github.com/mpaykin1/meta6/actions/runs/38881658462",
+    "verifiedSourceSHA": "d835b44695455b1eb551002e202f314e4a6b71e7"
+  },
+  "smartphoneV7": {
+    "status": "OWNER_PASS",
+    "url": "https://mpaykin1.github.io/meta6/observer-world-en-v7/",
+    "graphicalBaseline": "V5_OWNER_GRAPHICS_PASS",
+    "previousPlayable": "observer-world-en-v6/index.html",
+    "engine": "observer-world-en-v7/index.html",
+    "builder": "observer-world-en-v7/editor.js",
+    "mobileHud": "observer-world-en-v7/mobile-controls.js",
+    "mobileCss": "observer-world-en-v7/mobile-controls.css",
+    "sourceGuide": "observer-world-en-v7/CLAUDE.md",
+    "workflow": ".github/workflows/observer-v7-gate.yml",
+    "verifiedRun": "https://github.com/mpaykin1/meta6/actions/runs/38896347402",
+    "behavior": {
+      "phone": "one joystick + three translucent right buttons + bottom glyph dock",
+      "build": "select glyph then tap terrain near hero then hammer; works with default near-hero position",
+      "destroyTrees": "original voxel fellTree particles and source chunk rebuild; removed tree locations persisted",
+      "terrain": "original surface with plinth supports",
+      "occupiedBuildings": "reject overlap and original protected beacon",
+      "desktop": "unchanged keyboard/mouse"
+    },
+    "manualPhoneVerification": "OWNER_APPROVED_V7__NO_DEVICE_BENCHMARK_CLAIMED",
+    "ownerDecision": {
+      "verdict": "PASS",
+      "date": "2026-10-16",
+      "scope": "V7 smartphone edition with approved touch controls and glyph construction",
+      "source": "explicit user confirmation in ChatGPT",
+      "successRecord": "docs/SUCCESS_OBSERVER_WORLD_V7_MOBILE_2026-10-16.md"
+    }
+  },
+  "latestAcceptedEdition": {
+    "version": "V7",
+    "status": "OWNER_PASS",
+    "date": "2026-10-16",
+    "url": "https://mpaykin1.github.io/meta6/observer-world-en-v7/",
+    "source": "observer-world-en-v7/index.html",
+    "guide": "observer-world-en-v7/CLAUDE.md",
+    "successRecord": "docs/SUCCESS_OBSERVER_WORLD_V7_MOBILE_2026-10-16.md",
+    "verifiedRun": "https://github.com/mpaykin1/meta6/actions/runs/38896347402"
+  }
+}

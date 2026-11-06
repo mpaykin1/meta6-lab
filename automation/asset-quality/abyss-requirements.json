@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "source_md": "rules/08-pravila-otdelnyh-igr/abyss.md",
+  "stages": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "min_creature_types": 14,
+  "requirements": [
+    {
+      "id": "ABYSS-PALETTE",
+      "test": "validate.py:seven_color_palette",
+      "status": "UNKNOWN"
+    },
+    {
+      "id": "ABYSS-BODY",
+      "test": "validate.py:opaque_body_95pct",
+      "status": "UNKNOWN"
+    },
+    {
+      "id": "ABYSS-LAYERS",
+      "test": "validate.py:layer_body/detail/normal/emissive",
+      "status": "UNKNOWN"
+    },
+    {
+      "id": "ABYSS-STAGES",
+      "test": "audit_pack.py:missing_stages",
+      "status": "UNKNOWN"
+    },
+    {
+      "id": "ABYSS-ANIMATION",
+      "test": "live animation screenshot and frame test",
+      "status": "UNKNOWN"
+    },
+    {
+      "id": "ABYSS-LIGHTING",
+      "test": "8-way GLSL live render comparison",
+      "status": "UNKNOWN"
+    },
+    {
+      "id": "ABYSS-FPS",
+      "test": "real-device FPS p50/p95",
+      "status": "UNKNOWN"
+    },
+    {
+      "id": "ABYSS-OWNER",
+      "test": "owner visual acceptance",
+      "status": "UNKNOWN"
+    }
+  ]
+}

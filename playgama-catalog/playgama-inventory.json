@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "source": "Playgama Developer Console (authenticated snapshot)",
+  "verifiedOn": "2026-11-05",
+  "notes": "Sandbox ACTIVE is a publicly playable sandbox, not a published Playgama catalog release. A DRAFT with no active sandbox must not receive a play URL or an indexed game page.",
+  "games": [
+    {
+      "applicationId": "cmvt22v4f0kyxfx0h4rok6gm6",
+      "title": "King of Ash",
+      "slug": "king-of-ash",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "w6vamsre5drpbe",
+        "url": "https://playgama.ai/play/w6vamsre5drpbe"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/35e479d191e84b2da577bab9e693bd6c?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvt2szh40lenfx0h8815tr7o",
+      "title": "Archer in the Fog",
+      "slug": "archer-in-the-fog",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "4kgpul4csofiu3",
+        "url": "https://playgama.ai/play/4kgpul4csofiu3"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/5e6d981431574fb4b87cd8ff3d1e85fe?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvt3143o0mstj00h1q1l7n9p",
+      "title": "Twilight Isle",
+      "slug": "twilight-isle",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "x4kvcijqwdbfpn",
+        "url": "https://playgama.ai/play/x4kvcijqwdbfpn"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/f67bd2837c2949748517e127abe464e9?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvuwa1dq00onkt0hpyrb03vs",
+      "title": "ABYSS GLOW",
+      "slug": "abyss-glow",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "qny3rzouphhwrl",
+        "url": "https://playgama.ai/play/qny3rzouphhwrl"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/422cc08041e7427999814a25f94992c9?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvvarv7r034qj80ha78iq9lo",
+      "title": "Dreamverse",
+      "slug": "dreamverse",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "wc7knrdd42k2ob",
+        "url": "https://playgama.ai/play/wc7knrdd42k2ob"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/557b1bf0bb384e1cb404219dd9fafb08?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvw3cbqr0htyjm0hfg1p2l7h",
+      "title": "Sunken City",
+      "slug": "sunken-city",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "eqsbigfdf7gxsw",
+        "url": "https://playgama.ai/play/eqsbigfdf7gxsw"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/52143ecc423640ddb40dcef889433aba?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvw84s8a0l42jm0hrzxavkmx",
+      "title": "Twilight Archipelago",
+      "slug": "twilight-archipelago",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "a5k5lod5lruyuu",
+        "url": "https://playgama.ai/play/a5k5lod5lruyuu"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/b8ade221261e47baafa4693f66dccbdb?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvvyb14r0ej4j80h9m9phewa",
+      "title": "Rainbow Rush",
+      "slug": "rainbow-rush",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "bfhjwhtbhojsa7",
+        "url": "https://playgama.ai/play/bfhjwhtbhojsa7"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/d9e2835ee67440bdbff66e2b51722b8d?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvv0pyj100dgi60hffte4sfs",
+      "title": "Endless Valleys",
+      "slug": "endless-valleys",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "o2okfeyo4o2jax",
+        "url": "https://playgama.ai/play/o2okfeyo4o2jax"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/24accfaa7f6b4dc09feea70838a7cf5a?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvulpjf30htnlq0hxmb12yil",
+      "title": "Foggy Awakening",
+      "slug": "foggy-awakening",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "43en5yo6pqmnjb",
+        "url": "https://playgama.ai/play/43en5yo6pqmnjb"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/b3a2adc4542e4b7795289227a7f4bb31?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvt8ood402lzjz0hga08tgbb",
+      "title": "ASQURA Office",
+      "slug": "asqura-office",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "nl6bjfgnfvun2d",
+        "url": "https://playgama.ai/play/nl6bjfgnfvun2d"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/1fee1ff6e12e4366a8f3ee8046ad42bc?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvt6v9jw01drjz0hjdtm6l3q",
+      "title": "Twilight Isle Classic",
+      "slug": "twilight-isle-classic",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "rszzimlduq6zw2",
+        "url": "https://playgama.ai/play/rszzimlduq6zw2"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/add4314320ea4daf90ba2e8a78cdaa39?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmvt602o30101l80h8mrnm4fp",
+      "title": "Under and Above",
+      "slug": "under-and-above",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "r5z6f2cvqu75lr",
+        "url": "https://playgama.ai/play/r5z6f2cvqu75lr"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/7aa81b66b52e469cae0e0a2eb2a0790f?width=896",
+      "indexable": true
+    },
+    {
+      "applicationId": "cmw1rydsi0h1viu0hr8dw5w9n",
+      "title": "Broken City",
+      "slug": "broken-city",
+      "formStatus": "DRAFT",
+      "sandbox": {
+        "status": "ACTIVE",
+        "discoveryStatus": "VISIBLE",
+        "siteId": "hsedvjakb2tiyn",
+        "url": "https://playgama.ai/play/hsedvjakb2tiyn"
+      },
+      "coverUrl": "https://static.playgama.com/p-img/pg/preview/c563a434bf84447cbe48ae2c117948d2?width=896",
+      "indexable": true
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "appId": "com.mpaykin.metagames",
+  "appName": "META GAMES",
+  "webDir": "dist/www",
+  "server": {
+    "hostname": "localhost",
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "webContentsDebuggingEnabled": false
+  }
+}

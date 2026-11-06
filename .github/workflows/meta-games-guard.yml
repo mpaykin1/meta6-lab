@@ -1,0 +1,49 @@
+name: META GAMES guard
+# Защищает принятые оригиналы и направление проекта (rules/09-platforma/META_GAMES_PLATFORM.md).
+# PR: красный, если тронут защищённый файл. Push в main: защищённые файлы автоматически возвращаются.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 300
+      - name: Check protected files
+        id: check
+        env:
+          GUARD_RANGE: ${{ github.event_name == 'pull_request' && format('{0}..{1}', github.event.pull_request.base.sha, github.event.pull_request.head.sha) || (github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000' && format('{0}..{1}', github.event.before, github.sha)) || '' }}
+        run: bash scripts/meta-games-guard.sh check
+      - name: Accept Claude edits (update sums)
+        if: success() && steps.check.outputs.accepted == '1' && github.event_name == 'push'
+        run: |
+          git config user.name "meta-games-guard"; git config user.email "actions@github.com"
+          bash scripts/meta-games-guard.sh update
+          git add .github/protected/SHA256SUMS
+          git commit -m "meta-games-guard: принял правки Claude, обновил суммы" && git push || true
+      - name: Restore protected files on main
+        if: failure() && github.event_name != 'pull_request'
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          git config user.name "meta-games-guard"; git config user.email "actions@github.com"
+          if [ -n "${BEFORE:-}" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ] && git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then good=$BEFORE
+          else good=""; for c in $(git rev-list -n 300 HEAD~1); do sums=$(git show "$c:.github/protected/SHA256SUMS" 2>/dev/null) || continue; ok=1
+            while read -r h f; do [ "$(git show "$c:$f" 2>/dev/null | sha256sum | cut -d' ' -f1)" = "$h" ] || { ok=0; break; }; done <<< "$sums"; [ $ok = 1 ] && { good=$c; break; }; done; fi
+          [ -n "$good" ] || { echo "::error::Не найден исправный коммит для восстановления"; exit 1; }
+          # возвращаем только испорченные чужими коммитами файлы и сам список/суммы, правки Claude не трогаем
+          rm -f /tmp/bad; touch /tmp/bad; GUARD_BAD_FILE=/tmp/bad GUARD_RANGE="$good..HEAD" bash scripts/meta-games-guard.sh check || true
+          for f in $(cat /tmp/bad); do if git cat-file -e "$good:$f" 2>/dev/null; then git checkout "$good" -- "$f"; else git rm -q --ignore-unmatch -- "$f"; fi; done
+          for f in .github/protected/paths.txt .github/protected/must-contain.txt .github/protected/SHA256SUMS scripts/meta-games-guard.sh .github/workflows/meta-games-guard.yml; do
+            GUARD_RANGE="$good..HEAD"; for c in $(git rev-list "$GUARD_RANGE" -- "$f"); do git log -1 --format=%B "$c" | grep -q '^Claude-Session: https://claude.ai/' || { git checkout "$good" -- "$f"; break; }; done; done
+          bash scripts/meta-games-guard.sh update
+          git add -A && git commit -m "meta-games-guard: вернул защищённые файлы, изменённые не Claude (к $good)" && git push

@@ -1,0 +1,2 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {DialogueGenerator} from '../dialogue.mjs';
+test('200 encounters contain no duplicate whole phrases, including save/restore',()=>{let d=new DialogueGenerator();const seen=new Set();for(let i=0;i<200;i++){if(i===100)d=new DialogueGenerator(d.serialize());const line=d.next({home:'water',world:'island',weapon:'арбалет'});assert(!seen.has(line));seen.add(line);assert.match(line,/вода/)}assert.equal(seen.size,200)});

@@ -1,0 +1,58 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>meta-bot fixture</title>
+<style>html,body{margin:0;height:100%;overflow:hidden;background:#05080f;touch-action:none}canvas{position:fixed;inset:0;width:100%;height:100%}
+#m{position:fixed;top:10px;right:10px;width:44px;height:44px;border:0;border-radius:10px;background:#18223a;color:#cfe;font-size:22px}
+#bad{position:fixed;left:10px;top:10px;color:#fff;font:14px sans-serif}</style></head><body>
+<canvas id="c"></canvas><button id="m" aria-label="Меню">☰</button>
+<script>
+// Тестовая мини-игра для самопроверки ядра бота. Параметры: ?rot=1 (повёрнутая камера) | ?goals=2 (цель меняется внутри уровня) | ?fight=1 (бой у цели дольше stuckSec, урон в progress) | ?bad=fightstuck (бой без урона) | ?bad=longscroll (экран уезжает после 4 с джойстика в сумме) | ?bad=scroll | ?bad=text | ?bad=stuck | ?bad=repeat | ?bad=cheat
+const bad = new URLSearchParams(location.search).get('bad'), FIGHT = new URLSearchParams(location.search).get('fight') || bad==='fightstuck';
+const c = document.getElementById('c'), x = c.getContext('2d');
+const G = { started:false, level:0, levelDone:false, gameDone:false, hero:{x:0,y:0}, goal:{x:0,y:0}, walls:[], keys:{}, joy:null };
+const LEVELS = 3;
+function rnd(){ return bad==='repeat' ? 0.37 : Math.random(); }
+function build(){ G.hero={x:-6,y:0}; G.goal={x:6, y:(rnd()-.5)*6}; G.walls=[]; for(let i=0;i<4;i++) G.walls.push({x:(rnd()-.5)*8,y:(rnd()-.5)*8}); G.levelDone=false; G.sub=0; G.foe = FIGHT && G.level===0 ? 30 : 0; G.dmg=0; }
+function hash(){ return G.goal.y.toFixed(3)+'|'+G.walls.map(w=>w.x.toFixed(2)+','+w.y.toFixed(2)).join(';'); }
+build();
+if (bad==='text'){ const d=document.createElement('div'); d.id='bad'; d.textContent='Score 0'; document.body.appendChild(d); }
+const near=()=>Math.hypot(G.goal.x-G.hero.x,G.goal.y-G.hero.y)<1.2;
+addEventListener('keydown',e=>{G.keys[e.code]=1; if(!G.started) G.started=true; if(e.code==='Space'&&!e.repeat&&G.foe>0&&bad!=='fightstuck'&&near()){G.foe--;G.dmg++;}}); addEventListener('keyup',e=>{G.keys[e.code]=0;});
+addEventListener('pointerdown',()=>{ if(!G.started) G.started=true; });
+addEventListener('touchstart',e=>{ const t=e.touches[0]; if(!G.started){G.started=true;return;} if(t.clientX>innerWidth/2&&G.foe>0){ if(bad!=='fightstuck'&&near()){G.foe--;G.dmg++;} return; } if(t.clientX<innerWidth/2) G.joy={x0:t.clientX,y0:t.clientY,dx:0,dy:0}; },{passive:true});
+addEventListener('touchmove',e=>{ if(bad==='scroll'){ document.body.style.height='300vh'; document.documentElement.style.overflow='auto'; document.body.style.overflow='auto'; scrollTo(0,200); } if(!G.joy) return; const t=e.touches[0]; G.joy.dx=t.clientX-G.joy.x0; G.joy.dy=t.clientY-G.joy.y0; },{passive:true});
+addEventListener('touchend',()=>{ G.joy=null; if(bad==='scroll') scrollTo(0,0); },{passive:true});
+let last=performance.now();
+function frame(t){ const dt=Math.min(.05,(t-last)/1000); last=t;
+  c.width=innerWidth; c.height=innerHeight;
+  if(G.started && !G.gameDone && bad!=='stuck'){ let vx=(G.keys.KeyD?1:0)-(G.keys.KeyA?1:0), vy=(G.keys.KeyS?1:0)-(G.keys.KeyW?1:0);
+    if(G.joy){ const l=Math.hypot(G.joy.dx,G.joy.dy); if(l>6){ vx=G.joy.dx/l; vy=G.joy.dy/l; } }
+    if(new URLSearchParams(location.search).get('rot')) [vx,vy]=[-vy,vx];
+    G.hero.x+=vx*6*dt; G.hero.y+=vy*6*dt;
+    if(!G.levelDone && G.sub===0 && new URLSearchParams(location.search).get('goals')==='2' && Math.hypot(G.goal.x-G.hero.x,G.goal.y-G.hero.y)<0.6){ G.sub=1; G.goal={x:-6,y:5}; }
+    else if(G.foe>0){ /* бой: враг в точке цели, пока жив — уровень не пройден */ }
+    else if(!G.levelDone && Math.hypot(G.goal.x-G.hero.x,G.goal.y-G.hero.y)<0.6){ G.levelDone=true; if(G.level<LEVELS-1){ setTimeout(()=>{G.level++; build();},300);} else G.gameDone=true; } }
+  if(G.joy) G.joyAcc=(G.joyAcc||0)+dt; if(bad==='longscroll' && G.joyAcc>4) c.style.transform='translateY(30px)';
+  const s=Math.min(c.width,c.height)/20, ox=c.width/2, oy=c.height/2;
+  x.fillStyle='#05080f'; x.fillRect(0,0,c.width,c.height);
+  x.fillStyle='#334'; for(const w of G.walls) x.fillRect(ox+w.x*s-s/2,oy+w.y*s-s/2,s,s);
+  x.fillStyle='#fd7'; x.beginPath(); x.arc(ox+G.goal.x*s,oy+G.goal.y*s,s*.5,0,7); x.fill();
+  x.fillStyle='#7ef'; x.beginPath(); x.arc(ox+G.hero.x*s,oy+G.hero.y*s,s*.4,0,7); x.fill();
+  requestAnimationFrame(frame); }
+requestAnimationFrame(frame);
+window.GAME = G;
+</script>
+<script>
+(function(){ const G=window.GAME;
+  const bot={ version:1, info(){ return {name:'fixture',levels:3}; },
+    state(){ return {started:G.started,level:G.level,levelDone:G.levelDone,gameDone:G.gameDone,alive:true,hero:{...G.hero},goal:{...G.goal},enemies:FIGHT?(G.foe>0?1:0):1,weapons:1,layoutHash:hash(),menuOpen:false, ...(FIGHT?{progress:G.dmg}:{})}; } };
+  if (new URLSearchParams(location.search).get('bad')==='cheat') bot.teleport=()=>{ G.hero={...G.goal}; };
+  if (new URLSearchParams(location.search).get('form')==='data') {
+    // Форма «данные» (как у ChatGPT в PR #279/#280): геттер, уровни с 1, координаты x/z.
+    Object.defineProperty(window,'__META_BOT__',{configurable:false,enumerable:true,get(){ G.started=true;
+      return Object.freeze({level:G.level+1,totalLevels:3,player:{x:G.hero.x,y:0,z:G.hero.y},goal:{x:G.goal.x,y:0,z:G.goal.y},alive:true,completed:G.gameDone,
+        buttons:['w','a','s','d'],combat:false,enemies:0,weapons:0,layout:hash()}); }});
+    return;
+  }
+  Object.freeze(bot); Object.defineProperty(window,'__META_BOT__',{value:bot,writable:false,configurable:false});
+})();
+</script></body></html>

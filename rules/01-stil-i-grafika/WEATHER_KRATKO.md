@@ -1,0 +1,3 @@
+## WEATHER — принятая GRAF 3D-погода (OWNER PASS, 2026-10-17)
+
+Для задач «погода», «листопад», «лепестки», «светлячки» и нового атмосферного освещения **сначала прочитать [weather.md](weather.md) и [graf.md](graf.md) §27**. Автономный 3D HTML с 11 режимами и одной кнопкой доступен в [weather-showcase-graf-20261017/](../../weather-showcase-graf-20261017); постоянная страница: https://mpaykin1.github.io/meta6/weather-showcase-graf-20261017/ . Владелец подтвердил PASS **только Weather Lab**, уроки зафиксированы в [docs/SUCCESS_WEATHER_LAB_2026-10-17.md](../../docs/SUCCESS_WEATHER_LAB_2026-10-17.md). Не менять Observer World V7. При переносе FX в Three.js использовать один штатный renderer, не копировать второй loop. iPhone 11 аппаратно не тестировался.

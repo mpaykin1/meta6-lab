@@ -1,0 +1,18 @@
+# Защищённые пути META GAMES (решение владельца 06.11.2026).
+# Файлы здесь меняет только Claude по прямому слову владельца, обновляя .github/protected/SHA256SUMS.
+# Принятые оригиналы (OWNER PASS / «никогда не менять»):
+observer-world-en-v5
+observer-world-en-v6
+observer-world-en-v7
+abyss-glow/stand
+# Направление проекта:
+rules/09-platforma/META_GAMES_PLATFORM.md
+rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md
+automation/prompts/meta-games-bot-rollout.md
+.github/protected/paths.txt
+.github/protected/must-contain.txt
+.github/workflows/meta-games-guard.yml
+scripts/meta-games-guard.sh
+# Каркас бота-проходчика (пишет Claude, ChatGPT только дописывает games/<игра>/bot-*.{js,mjs,json}):
+scripts/meta-bot
+.github/workflows/meta-bot.yml

@@ -1,0 +1,1771 @@
+[
+  {
+    "path": "audio/library/combat/sword_swing_01.ogg",
+    "category": "combat",
+    "action": "sword_swing",
+    "games": [
+      "King of Ash",
+      "Twilight Isle",
+      "Twilight Isle Classic",
+      "Endless Valleys"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.222,
+    "size": 5911,
+    "sha256": "c2df4f0a66831cacafd33fea9894029815e90ef564ed13dcba1784c9fa414162",
+    "channels": 1,
+    "origin": "drawknife1"
+  },
+  {
+    "path": "audio/library/combat/sword_swing_02.ogg",
+    "category": "combat",
+    "action": "sword_swing",
+    "games": [
+      "King of Ash",
+      "Twilight Isle",
+      "Twilight Isle Classic",
+      "Endless Valleys"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.71,
+    "size": 10358,
+    "sha256": "d410f5074d4ec0daa26741f171913e22bda4d5b93fd9190a7d12aa9d6780ec9f",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/combat/sword_hit_01.ogg",
+    "category": "combat",
+    "action": "sword_hit",
+    "games": [
+      "King of Ash",
+      "Twilight Isle",
+      "Twilight Isle Classic",
+      "Endless Valleys"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.171,
+    "size": 5619,
+    "sha256": "52ac063c10dd1fb45e979928e03b20465f2e5175384dacdd0239747a927d0e97",
+    "channels": 1,
+    "origin": "metalclick"
+  },
+  {
+    "path": "audio/library/combat/sword_hit_02.ogg",
+    "category": "combat",
+    "action": "sword_hit",
+    "games": [
+      "King of Ash",
+      "Twilight Isle",
+      "Twilight Isle Classic",
+      "Endless Valleys"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.55,
+    "size": 8535,
+    "sha256": "429f4d27774ceeff4521eb465b4c9b3b321c56d5cf5b43c5d04b54fcb3ddcda2",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/combat/sword_block_01.ogg",
+    "category": "combat",
+    "action": "sword_block",
+    "games": [
+      "King of Ash"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 1.0,
+    "size": 13517,
+    "sha256": "b6c1b431c49da204561fcc05346c1515da85dddf8b9fec2751f5d93a4aecc936",
+    "channels": 1,
+    "origin": "metalpot1"
+  },
+  {
+    "path": "audio/library/combat/sword_block_02.ogg",
+    "category": "combat",
+    "action": "sword_block",
+    "games": [
+      "King of Ash"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.706,
+    "size": 10465,
+    "sha256": "691219c85696121c71543a9761b0d5496438fa8fa186cac476e6cd03413c4794",
+    "channels": 1,
+    "origin": "metalpot2"
+  },
+  {
+    "path": "audio/library/combat/bow_draw_01.ogg",
+    "category": "combat",
+    "action": "bow_draw",
+    "games": [
+      "Archer in the Fog"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.559,
+    "size": 9019,
+    "sha256": "93707686ae71d352dfb1bd5f76ff699b765c44b9adfa50c0a27ce358e155bcfc",
+    "channels": 1,
+    "origin": "cloth1"
+  },
+  {
+    "path": "audio/library/combat/bow_draw_02.ogg",
+    "category": "combat",
+    "action": "bow_draw",
+    "games": [
+      "Archer in the Fog"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.331,
+    "size": 6951,
+    "sha256": "8b9f8b558ff19f5ffcf79b786f3aedb9392d7a184dec836a01c90d2c2a2548b1",
+    "channels": 1,
+    "origin": "cloth2"
+  },
+  {
+    "path": "audio/library/combat/bow_release_01.ogg",
+    "category": "combat",
+    "action": "bow_release",
+    "games": [
+      "Archer in the Fog"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.254,
+    "size": 6308,
+    "sha256": "4360f185ecc1103413d2231af07a94d202c2a8f03d9420f7c33e349a250c6151",
+    "channels": 1,
+    "origin": "drawknife3"
+  },
+  {
+    "path": "audio/library/combat/bow_release_02.ogg",
+    "category": "combat",
+    "action": "bow_release",
+    "games": [
+      "Archer in the Fog"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.367,
+    "size": 7422,
+    "sha256": "789f0e261e0518b3930ddadb1c84ae7ff634df8f596f2dda32e71343272e778c",
+    "channels": 1,
+    "origin": "knifeslice"
+  },
+  {
+    "path": "audio/library/combat/arrow_hit_01.ogg",
+    "category": "combat",
+    "action": "arrow_hit",
+    "games": [
+      "Archer in the Fog"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.24,
+    "size": 6004,
+    "sha256": "29487adb4e8bb631428f3159d6c26e8aa94963ab52ab69d95d226efef0bae69d",
+    "channels": 1,
+    "origin": "chop"
+  },
+  {
+    "path": "audio/library/combat/arrow_hit_02.ogg",
+    "category": "combat",
+    "action": "arrow_hit",
+    "games": [
+      "Archer in the Fog"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.002,
+    "size": 3788,
+    "sha256": "080cef2f278cd5b3388dfe1ac136886809a490eae53fe55be6bd364e3929f8b0",
+    "channels": 1,
+    "origin": "item_stone_01"
+  },
+  {
+    "path": "audio/library/combat/fireball_01.ogg",
+    "category": "combat",
+    "action": "fireball",
+    "games": [
+      "Archer in the Fog"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.53,
+    "size": 8566,
+    "sha256": "df82e933a42273f38c3b66d7a84b75a400d81044c651d7a202de63c804463b5d",
+    "channels": 1,
+    "origin": "spell_01"
+  },
+  {
+    "path": "audio/library/combat/fireball_02.ogg",
+    "category": "combat",
+    "action": "fireball",
+    "games": [
+      "Archer in the Fog"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.48,
+    "size": 8310,
+    "sha256": "c39e6bf72f615c20b04a116ba2c441308665a985dbbded79e0811130b9772fb7",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/combat/magic_cast_01.ogg",
+    "category": "combat",
+    "action": "magic_cast",
+    "games": [
+      "Twilight Isle"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.643,
+    "size": 9800,
+    "sha256": "156861c770a03aa8a1e38a62278968c933786d48150146ad6e8f37788b62abf0",
+    "channels": 1,
+    "origin": "spell_fire_01"
+  },
+  {
+    "path": "audio/library/combat/magic_cast_02.ogg",
+    "category": "combat",
+    "action": "magic_cast",
+    "games": [
+      "Twilight Isle"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.598,
+    "size": 9174,
+    "sha256": "48ce3b2af680794c15913d0c8ff149e1474d7c9d0781e608bb7cf7d8e9813562",
+    "channels": 1,
+    "origin": "spell_fire_02"
+  },
+  {
+    "path": "audio/library/combat/hurt_01.ogg",
+    "category": "combat",
+    "action": "hurt",
+    "games": [
+      "King of Ash",
+      "Twilight Isle Classic"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.466,
+    "size": 6828,
+    "sha256": "7bd7f20aac3d70175a526d9f605f1f31a4792c8e563f8e9dc5f6bd9f1a461b10",
+    "channels": 1,
+    "origin": "creature_hurt_01"
+  },
+  {
+    "path": "audio/library/combat/hurt_02.ogg",
+    "category": "combat",
+    "action": "hurt",
+    "games": [
+      "King of Ash",
+      "Twilight Isle Classic"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.443,
+    "size": 7329,
+    "sha256": "7afb37fee690ad4f82f2dc80725766b2c03325368fc5d4450dd9d4c3da12c053",
+    "channels": 1,
+    "origin": "creature_hurt_02"
+  },
+  {
+    "path": "audio/library/combat/death_01.ogg",
+    "category": "combat",
+    "action": "death",
+    "games": [
+      "King of Ash"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.73,
+    "size": 6335,
+    "sha256": "b6b33d7b233af51b6cad65a5461e261365f3ebee6064a69637bcf393a4a067bb",
+    "channels": 1,
+    "origin": "creature_die_01"
+  },
+  {
+    "path": "audio/library/combat/death_02.ogg",
+    "category": "combat",
+    "action": "death",
+    "games": [
+      "King of Ash"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.74,
+    "size": 10696,
+    "sha256": "801ef44328e6467a80c3a8faa6753afec5d47dd43d7ba270fb6e164f7dc65614",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/combat/gunshot_01.ogg",
+    "category": "combat",
+    "action": "gunshot",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.754,
+    "size": 11635,
+    "sha256": "5633895519c0feeb8ae67db39ad44a65f6c59806bd62680c00a8dafd132b0a5c",
+    "channels": 1,
+    "origin": "metalpot3"
+  },
+  {
+    "path": "audio/library/combat/gunshot_02.ogg",
+    "category": "combat",
+    "action": "gunshot",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.441,
+    "size": 7971,
+    "sha256": "a188e1d3580b666f22a1d41b52b97e943826617464f46815444a3bf217d17fa3",
+    "channels": 1,
+    "origin": "metal_01"
+  },
+  {
+    "path": "audio/library/combat/gun_reload_01.ogg",
+    "category": "combat",
+    "action": "gun_reload",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.9,
+    "size": 12196,
+    "sha256": "2927f77c38ea2691816b21df212f14248d75bec7e88cd0239abfcde911bf181e",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/combat/gun_reload_02.ogg",
+    "category": "combat",
+    "action": "gun_reload",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.9,
+    "size": 12150,
+    "sha256": "eef0f1d0f2f5976f752e14dcf49e977bce419b9eae927aa6032410ac9db15a5e",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/creatures/skeleton_rattle_01.ogg",
+    "category": "creatures",
+    "action": "skeleton_rattle",
+    "games": [
+      "King of Ash"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.401,
+    "size": 7383,
+    "sha256": "cc16c9713739eea0d5000f50a27f36e4ea5ff12aba6974b7166f61b6b648d6f1",
+    "channels": 1,
+    "origin": "chain_01"
+  },
+  {
+    "path": "audio/library/creatures/skeleton_rattle_02.ogg",
+    "category": "creatures",
+    "action": "skeleton_rattle",
+    "games": [
+      "King of Ash"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.361,
+    "size": 7107,
+    "sha256": "29c247303c6dd29881eb4f34156f57d7b4ebe97eb70b9bb60f5a9e904d7f2914",
+    "channels": 1,
+    "origin": "chain_02"
+  },
+  {
+    "path": "audio/library/creatures/dragon_roar_01.ogg",
+    "category": "creatures",
+    "action": "dragon_roar",
+    "games": [
+      "Archer in the Fog"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 1.65,
+    "size": 19143,
+    "sha256": "fd9410565aa370fe47ecdee74a6b9c707fc3d289053be772308eee9ec500afb1",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/creatures/dragon_roar_02.ogg",
+    "category": "creatures",
+    "action": "dragon_roar",
+    "games": [
+      "Archer in the Fog"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.001,
+    "size": 3786,
+    "sha256": "ba17dd56e9388a88aae51415d12a2e6fa6a2d6dfc70a9b835273beab37993460",
+    "channels": 1,
+    "origin": "creature_monster_02"
+  },
+  {
+    "path": "audio/library/creatures/monster_hurt_01.ogg",
+    "category": "creatures",
+    "action": "monster_hurt",
+    "games": [
+      "Archer in the Fog",
+      "Foggy Awakening",
+      "ABYSS GLOW"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-creature-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.661,
+    "size": 7732,
+    "sha256": "8a40ee56c9167f556caf2d983a3d993fb9595144a70aa7bc8c16de93e9eff55e",
+    "channels": 1,
+    "origin": "grunt_01"
+  },
+  {
+    "path": "audio/library/creatures/monster_hurt_02.ogg",
+    "category": "creatures",
+    "action": "monster_hurt",
+    "games": [
+      "Archer in the Fog",
+      "Foggy Awakening",
+      "ABYSS GLOW"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-creature-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.514,
+    "size": 7899,
+    "sha256": "95649eff8b3b12e86cfc6e899f91d8b7540230575f1d4566228b531bb16bc563",
+    "channels": 1,
+    "origin": "grunt_02"
+  },
+  {
+    "path": "audio/library/creatures/monster_death_01.ogg",
+    "category": "creatures",
+    "action": "monster_death",
+    "games": [
+      "Twilight Isle",
+      "ABYSS GLOW"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.37,
+    "size": 7481,
+    "sha256": "c114e0b169e13d94c9e9452819770e5e488e100b150bf5269758d1f815c616b0",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/creatures/monster_death_02.ogg",
+    "category": "creatures",
+    "action": "monster_death",
+    "games": [
+      "Twilight Isle",
+      "ABYSS GLOW"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.51,
+    "size": 8743,
+    "sha256": "38263879638b4d77190aecaeb6e73228922df13cdd6cec7d1b72d280c05496b4",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/creatures/fish_chirp_01.ogg",
+    "category": "creatures",
+    "action": "fish_chirp",
+    "games": [
+      "Under and Above",
+      "ABYSS GLOW"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-creature-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.852,
+    "size": 12254,
+    "sha256": "28546cf1faa7724d000f2a318ea9e8c0438dc702cc1b70b8b7c86d2e7cc95b6c",
+    "channels": 1,
+    "origin": "burble_01"
+  },
+  {
+    "path": "audio/library/creatures/fish_chirp_02.ogg",
+    "category": "creatures",
+    "action": "fish_chirp",
+    "games": [
+      "Under and Above",
+      "ABYSS GLOW"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-creature-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.672,
+    "size": 10071,
+    "sha256": "c3562ffef5b544224384c06852ccfc9358530525856d754da0b628561a11e7d4",
+    "channels": 1,
+    "origin": "burble_02"
+  },
+  {
+    "path": "audio/library/movement/step_stone_01.ogg",
+    "category": "movement",
+    "action": "step_stone",
+    "games": [
+      "King of Ash",
+      "Twilight Isle Classic",
+      "Under and Above",
+      "Endless Valleys"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.231,
+    "size": 5891,
+    "sha256": "5b2902ed400915c689166a965f12d692afcd2826e980b4dd24fa9f80d5b27bfb",
+    "channels": 1,
+    "origin": "footstep00"
+  },
+  {
+    "path": "audio/library/movement/step_stone_02.ogg",
+    "category": "movement",
+    "action": "step_stone",
+    "games": [
+      "King of Ash",
+      "Twilight Isle Classic",
+      "Under and Above",
+      "Endless Valleys"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.009,
+    "size": 3913,
+    "sha256": "649caae88c33817117bd2233f6f607f34e350a59ad0d73150149039a3110073d",
+    "channels": 1,
+    "origin": "footstep01"
+  },
+  {
+    "path": "audio/library/movement/step_grass_01.ogg",
+    "category": "movement",
+    "action": "step_grass",
+    "games": [
+      "Archer in the Fog",
+      "Twilight Isle",
+      "Twilight Isle Classic",
+      "Endless Valleys"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.461,
+    "size": 7912,
+    "sha256": "d86fea6c57683dfd2a10ab45f6af3b56658fec7b38c09da26478c260667b8cdf",
+    "channels": 1,
+    "origin": "cloth3"
+  },
+  {
+    "path": "audio/library/movement/step_grass_02.ogg",
+    "category": "movement",
+    "action": "step_grass",
+    "games": [
+      "Archer in the Fog",
+      "Twilight Isle",
+      "Twilight Isle Classic",
+      "Endless Valleys"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.374,
+    "size": 7400,
+    "sha256": "36dd6afd0c218492052d7e2a3be8e5b1746187ca400a7dff9f3c3d1e7b8f2907",
+    "channels": 1,
+    "origin": "cloth4"
+  },
+  {
+    "path": "audio/library/movement/step_sand_01.ogg",
+    "category": "movement",
+    "action": "step_sand",
+    "games": [
+      "Twilight Isle"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.231,
+    "size": 5969,
+    "sha256": "7389fd2c143063f3806f4a266701702e996427cc1fed58cf925e89e3fe5feb7c",
+    "channels": 1,
+    "origin": "footstep02"
+  },
+  {
+    "path": "audio/library/movement/step_sand_02.ogg",
+    "category": "movement",
+    "action": "step_sand",
+    "games": [
+      "Twilight Isle"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.256,
+    "size": 6266,
+    "sha256": "1a3dcb71e1e7d8f3b3eb7fba953f3467f4f672353583e68cd459f3820f30ccac",
+    "channels": 1,
+    "origin": "footstep03"
+  },
+  {
+    "path": "audio/library/movement/step_water_01.ogg",
+    "category": "movement",
+    "action": "step_water",
+    "games": [
+      "Under and Above"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.28,
+    "size": 5956,
+    "sha256": "8171d6fc019921e355fdeed274be08dc69347ebde92452afc9bdee30f40ddc3c",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/movement/step_water_02.ogg",
+    "category": "movement",
+    "action": "step_water",
+    "games": [
+      "Under and Above"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.31,
+    "size": 6197,
+    "sha256": "ca70779a11ac0667bc3e3ccef37d37dd0c6790aeacfebb2c27e6a5f4f45d9a15",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/movement/jump_01.ogg",
+    "category": "movement",
+    "action": "jump",
+    "games": [
+      "King of Ash",
+      "Twilight Isle",
+      "Twilight Isle Classic",
+      "Endless Valleys",
+      "Rainbow Rush"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.37,
+    "size": 7305,
+    "sha256": "8a7f56f344e3224a2657ab955ae8aed4546eb86d15aad2e74a76ff96d09ad80c",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/movement/jump_02.ogg",
+    "category": "movement",
+    "action": "jump",
+    "games": [
+      "King of Ash",
+      "Twilight Isle",
+      "Twilight Isle Classic",
+      "Endless Valleys",
+      "Rainbow Rush"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.535,
+    "size": 10381,
+    "sha256": "bbcb329fd7e55dd3c8704b1760c2ac08af4b69dcde796f8af8192ec3699e6afe",
+    "channels": 1,
+    "origin": "clothbelt2"
+  },
+  {
+    "path": "audio/library/movement/land_01.ogg",
+    "category": "movement",
+    "action": "land",
+    "games": [
+      "Endless Valleys",
+      "Rainbow Rush"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.26,
+    "size": 6524,
+    "sha256": "e863443e31ce77890c5c9c45db7356a54d1e1f1e2fe726067606c04ec62e8994",
+    "channels": 1,
+    "origin": "footstep04"
+  },
+  {
+    "path": "audio/library/movement/land_02.ogg",
+    "category": "movement",
+    "action": "land",
+    "games": [
+      "Endless Valleys",
+      "Rainbow Rush"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.237,
+    "size": 6088,
+    "sha256": "648f8947b9ba6c6692bcc018f119ae05fd63acadd5ac663d7815f5a36d9a0f67",
+    "channels": 1,
+    "origin": "footstep05"
+  },
+  {
+    "path": "audio/library/movement/cycle_whoosh_01.ogg",
+    "category": "movement",
+    "action": "cycle_whoosh",
+    "games": [
+      "Rainbow Rush"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.456,
+    "size": 8232,
+    "sha256": "97e6e82dae8c2383b336bf7ed2531c5eb881ef4bca257a61dc8e5d4dfaa72ec3",
+    "channels": 1,
+    "origin": "knifeslice2"
+  },
+  {
+    "path": "audio/library/movement/cycle_whoosh_02.ogg",
+    "category": "movement",
+    "action": "cycle_whoosh",
+    "games": [
+      "Rainbow Rush"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.41,
+    "size": 7624,
+    "sha256": "38b3af5c404d3e4681857377912322b13473c26f664cd3f102c9a1538410a48b",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/wind_01.ogg",
+    "category": "environment",
+    "action": "wind",
+    "games": [
+      "Archer in the Fog",
+      "Twilight Isle",
+      "Under and Above",
+      "Foggy Awakening",
+      "Endless Valleys",
+      "Rainbow Rush"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 4.0,
+    "size": 43770,
+    "sha256": "5bac69e948f0f12fa166772fd7bf33b3481e0a47d2924c9944f381ee4bb51789",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/wind_02.ogg",
+    "category": "environment",
+    "action": "wind",
+    "games": [
+      "Archer in the Fog",
+      "Twilight Isle",
+      "Under and Above",
+      "Foggy Awakening",
+      "Endless Valleys",
+      "Rainbow Rush"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 4.0,
+    "size": 43940,
+    "sha256": "deaac231c6109f75b6c3d8fe15b0821023e0d5de7bc9d987614544562d51937a",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/rain_01.ogg",
+    "category": "environment",
+    "action": "rain",
+    "games": [
+      "Foggy Awakening"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 4.0,
+    "size": 43779,
+    "sha256": "7f4c34ca79dfe9100b4e62de42a89b41c475bfbcae5d855850e12e6da45453db",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/rain_02.ogg",
+    "category": "environment",
+    "action": "rain",
+    "games": [
+      "Foggy Awakening"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 4.0,
+    "size": 43629,
+    "sha256": "3107d6736893f82e8053fb2893a709e50f85e28c1275f79a975071710b143f2e",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/thunder_01.ogg",
+    "category": "environment",
+    "action": "thunder",
+    "games": [
+      "Archer in the Fog",
+      "Foggy Awakening"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 1.65,
+    "size": 19372,
+    "sha256": "8818822793c31e29988023971bfe81f16f4bd4017d8bad7c8a83083ac3178113",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/thunder_02.ogg",
+    "category": "environment",
+    "action": "thunder",
+    "games": [
+      "Archer in the Fog",
+      "Foggy Awakening"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 1.65,
+    "size": 19404,
+    "sha256": "6c95c7966da0c2d843e2b5f5f95f19c985d4946fa735e3c7de4784c34bca4cd8",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/fire_01.ogg",
+    "category": "environment",
+    "action": "fire",
+    "games": [
+      "King of Ash"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 1.381,
+    "size": 16861,
+    "sha256": "f7830056871bccccf4f6add5b8586b649660887119916afddd5f2403933900c8",
+    "channels": 1,
+    "origin": "spell_fire_03"
+  },
+  {
+    "path": "audio/library/environment/fire_02.ogg",
+    "category": "environment",
+    "action": "fire",
+    "games": [
+      "King of Ash"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.99,
+    "size": 13143,
+    "sha256": "b09003a64b644a958066f1db536d434b135c8296128f0ea0eaf4c97a8f961540",
+    "channels": 1,
+    "origin": "spell_fire_04"
+  },
+  {
+    "path": "audio/library/environment/water_01.ogg",
+    "category": "environment",
+    "action": "water",
+    "games": [
+      "Under and Above"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 4.0,
+    "size": 43643,
+    "sha256": "a744cf9b9f579a017faa4612fb0d0967575e05f683cfa7fba39f61e057730022",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/water_02.ogg",
+    "category": "environment",
+    "action": "water",
+    "games": [
+      "Under and Above"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 4.0,
+    "size": 43933,
+    "sha256": "7475cc930872462a57cbc9740ce86237e7a0b618502d9ac76867254cc9fc89f1",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/bubble_01.ogg",
+    "category": "environment",
+    "action": "bubble",
+    "games": [
+      "Under and Above",
+      "ABYSS GLOW"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.9,
+    "size": 12259,
+    "sha256": "e1e1b0409e24093d4e0a94bbe9d91a004bbb5ef0fe9bec94ef7aa414bb4639f4",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/bubble_02.ogg",
+    "category": "environment",
+    "action": "bubble",
+    "games": [
+      "Under and Above",
+      "ABYSS GLOW"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.9,
+    "size": 12293,
+    "sha256": "1667f361a07e2a717d5fb006eee951f8af5083768707cce1d2c1aa48d773b40c",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/deep_hum_01.ogg",
+    "category": "environment",
+    "action": "deep_hum",
+    "games": [
+      "Under and Above",
+      "ABYSS GLOW"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 4.0,
+    "size": 38929,
+    "sha256": "92739110de6cfd1734acb4fb64b964c75eda5329a806aeb67b3f399bed4a5824",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/deep_hum_02.ogg",
+    "category": "environment",
+    "action": "deep_hum",
+    "games": [
+      "Under and Above",
+      "ABYSS GLOW"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 4.0,
+    "size": 38739,
+    "sha256": "5c30f8e5637684004f7b87139c30b00aa7f32fca7f848a135fcb36499afe1d05",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/storm_01.ogg",
+    "category": "environment",
+    "action": "storm",
+    "games": [
+      "Foggy Awakening"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 4.0,
+    "size": 43861,
+    "sha256": "e4e401fcb57c21323593cbfff5256022e2b20a444066d791a1195c656c6959d6",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/environment/storm_02.ogg",
+    "category": "environment",
+    "action": "storm",
+    "games": [
+      "Foggy Awakening"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 4.0,
+    "size": 43880,
+    "sha256": "a1525e24b3176f4dbd28500857917d6a36f4b3c1dc6f6312af46d16dc6a0db27",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/ui/ui_click_01.ogg",
+    "category": "ui",
+    "action": "ui_click",
+    "games": [
+      "King of Ash",
+      "Dreamverse"
+    ],
+    "source": "https://opengameart.org/content/interface-sounds",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.1,
+    "size": 4470,
+    "sha256": "4d6e4ffc3ddfd9fe8494fca96b4f30e14c70e3a4d4b1990e45ea02bea3e7a357",
+    "channels": 1,
+    "origin": "click_001"
+  },
+  {
+    "path": "audio/library/ui/ui_click_02.ogg",
+    "category": "ui",
+    "action": "ui_click",
+    "games": [
+      "King of Ash",
+      "Dreamverse"
+    ],
+    "source": "https://opengameart.org/content/interface-sounds",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.015,
+    "size": 3942,
+    "sha256": "00ceff3a64673bfda56b1361288d2b55917376c8d53b948b9bfc6c2127b166e6",
+    "channels": 1,
+    "origin": "click_002"
+  },
+  {
+    "path": "audio/library/ui/ui_menu_open_01.ogg",
+    "category": "ui",
+    "action": "ui_menu_open",
+    "games": [
+      "Twilight Isle Classic",
+      "Dreamverse"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.119,
+    "size": 5286,
+    "sha256": "bde080531347a14e0ab5599f0dd82ae40d5510f1651b1ad639027e7f2b14751c",
+    "channels": 1,
+    "origin": "bookopen"
+  },
+  {
+    "path": "audio/library/ui/ui_menu_open_02.ogg",
+    "category": "ui",
+    "action": "ui_menu_open",
+    "games": [
+      "Twilight Isle Classic",
+      "Dreamverse"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.71,
+    "size": 10351,
+    "sha256": "b329441ad16a338bf6f46d3c93084ff1b3976dffe6eeeae6c450b4596cee51a6",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/ui/ui_reward_01.ogg",
+    "category": "ui",
+    "action": "ui_reward",
+    "games": [
+      "Dreamverse",
+      "Rainbow Rush"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.31,
+    "size": 7662,
+    "sha256": "a70e38715a863ddac81f9a086656289b9006734cb5ac7b44bc4d83cf6d82c8b5",
+    "channels": 1,
+    "origin": "handlecoins"
+  },
+  {
+    "path": "audio/library/ui/ui_reward_02.ogg",
+    "category": "ui",
+    "action": "ui_reward",
+    "games": [
+      "Dreamverse",
+      "Rainbow Rush"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.62,
+    "size": 9754,
+    "sha256": "2843ce97939fcaa5afc90267ddaee29cb61e69a0ccafe0209190c2adeb800741",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/ui/ui_error_01.ogg",
+    "category": "ui",
+    "action": "ui_error",
+    "games": [
+      "Rainbow Rush"
+    ],
+    "source": "https://opengameart.org/content/interface-sounds",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.165,
+    "size": 5620,
+    "sha256": "17e62162a54e599569f2123098a3b8fdc091e946c66f519dc172810c52bb7e93",
+    "channels": 1,
+    "origin": "error_001"
+  },
+  {
+    "path": "audio/library/ui/ui_error_02.ogg",
+    "category": "ui",
+    "action": "ui_error",
+    "games": [
+      "Rainbow Rush"
+    ],
+    "source": "https://opengameart.org/content/interface-sounds",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.168,
+    "size": 5176,
+    "sha256": "6a2262eb16b94aa07737ac721781f60d4c7f7b3c9cc1a19b009eb296cf80255e",
+    "channels": 1,
+    "origin": "error_002"
+  },
+  {
+    "path": "audio/library/ui/ui_level_up_01.ogg",
+    "category": "ui",
+    "action": "ui_level_up",
+    "games": [
+      "Dreamverse"
+    ],
+    "source": "https://opengameart.org/content/interface-sounds",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.29,
+    "size": 4796,
+    "sha256": "d073c7d0d5f28622a2ac61550e963a31f3fa43c036639e2e7ce09dffbd2d2f20",
+    "channels": 1,
+    "origin": "confirmation_001"
+  },
+  {
+    "path": "audio/library/ui/ui_level_up_02.ogg",
+    "category": "ui",
+    "action": "ui_level_up",
+    "games": [
+      "Dreamverse"
+    ],
+    "source": "https://opengameart.org/content/interface-sounds",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.539,
+    "size": 7176,
+    "sha256": "ba7f5e03c00a7409b553f3d0eae94cb678667ad41dee758b6a4d25595d1aeb26",
+    "channels": 1,
+    "origin": "confirmation_002"
+  },
+  {
+    "path": "audio/library/events/rift_alarm_01.ogg",
+    "category": "events",
+    "action": "rift_alarm",
+    "games": [
+      "ASQURA Office",
+      "Dreamverse"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 1.65,
+    "size": 19088,
+    "sha256": "50250085d4e4569d25815df0a687c1ac806de3db43247cad0b5824b50a8503dd",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/events/rift_alarm_02.ogg",
+    "category": "events",
+    "action": "rift_alarm",
+    "games": [
+      "ASQURA Office",
+      "Dreamverse"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 1.65,
+    "size": 19188,
+    "sha256": "22fe7aa7aadb0d0c7e43ea5f70220100954f7f792fba8dc0fd6442cde4f3cefc",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/events/glitch_01.ogg",
+    "category": "events",
+    "action": "glitch",
+    "games": [
+      "ASQURA Office",
+      "Foggy Awakening",
+      "Dreamverse",
+      "Rainbow Rush"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.23,
+    "size": 5966,
+    "sha256": "3cf1bf2ba4c7e487a8374063c9be9ec3b6799c41a8dcb1e421673f8e36aae0e9",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/events/glitch_02.ogg",
+    "category": "events",
+    "action": "glitch",
+    "games": [
+      "ASQURA Office",
+      "Foggy Awakening",
+      "Dreamverse",
+      "Rainbow Rush"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.5,
+    "size": 8541,
+    "sha256": "6c9c8a5a6cc6701cd83e6bf49622db9f517be518f5d9aa6e6f03f672fcc69025",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/events/portal_01.ogg",
+    "category": "events",
+    "action": "portal",
+    "games": [
+      "Twilight Isle",
+      "Under and Above",
+      "Foggy Awakening",
+      "Dreamverse"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.77,
+    "size": 11020,
+    "sha256": "c2058f845b90f6242fc452750fe78b2820ef8d4c6ca22936a2ec5fbbe3c8b1fc",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/events/portal_02.ogg",
+    "category": "events",
+    "action": "portal",
+    "games": [
+      "Twilight Isle",
+      "Under and Above",
+      "Foggy Awakening",
+      "Dreamverse"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.47,
+    "size": 8170,
+    "sha256": "8b062ded82ea56b32eea83431d17fffd3ae8a890adfe19b5336dc8151fddeb0a",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/events/boss_intro_01.ogg",
+    "category": "events",
+    "action": "boss_intro",
+    "games": [
+      "King of Ash",
+      "ABYSS GLOW",
+      "Dreamverse"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 1.65,
+    "size": 18997,
+    "sha256": "7dbced1bf0aa2594a0b7f45ceb93bae893e79086d4c62e3e7ac4b0d23873fe92",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/events/boss_intro_02.ogg",
+    "category": "events",
+    "action": "boss_intro",
+    "games": [
+      "King of Ash",
+      "ABYSS GLOW",
+      "Dreamverse"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 1.65,
+    "size": 19086,
+    "sha256": "9bcb4bcb2eea2e36b4f73940216664810b3765ed05eecdb7fd34fdda79c7d714",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/events/energy_pulse_01.ogg",
+    "category": "events",
+    "action": "energy_pulse",
+    "games": [
+      "ABYSS GLOW",
+      "Rainbow Rush"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.59,
+    "size": 9476,
+    "sha256": "f629104598fa7e86c5ac9586d6bae0fca2b535af23c504d4313e07241e17b99d",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/events/energy_pulse_02.ogg",
+    "category": "events",
+    "action": "energy_pulse",
+    "games": [
+      "ABYSS GLOW",
+      "Rainbow Rush"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.37,
+    "size": 7451,
+    "sha256": "0d9329764e1ef2d552ddf62938b3bfd2dad38d0026d03cf329e108e2624a6721",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/office/office_keyboard_01.ogg",
+    "category": "office",
+    "action": "office_keyboard",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://opengameart.org/content/interface-sounds",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.01,
+    "size": 3996,
+    "sha256": "cd75a7c9810508888ed950b1aef97d9e7bf3903a8433a6c8245d506592377b93",
+    "channels": 1,
+    "origin": "click_003"
+  },
+  {
+    "path": "audio/library/office/office_keyboard_02.ogg",
+    "category": "office",
+    "action": "office_keyboard",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://opengameart.org/content/interface-sounds",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.025,
+    "size": 4111,
+    "sha256": "7a037b64c20cb3b96fb4f15439d8acaf5d314e1e8491bd1a085f9d9454591ec4",
+    "channels": 1,
+    "origin": "click_004"
+  },
+  {
+    "path": "audio/library/office/office_phone_01.ogg",
+    "category": "office",
+    "action": "office_phone",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.144,
+    "size": 5204,
+    "sha256": "47b4eced133aa15c84ea6631ea48b42dad151c9c3985bcb45b681a94ceda772d",
+    "channels": 1,
+    "origin": "item_stone_02"
+  },
+  {
+    "path": "audio/library/office/office_phone_02.ogg",
+    "category": "office",
+    "action": "office_phone",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://opengameart.org/content/80-cc0-rpg-sfx",
+    "author": "rubberduck",
+    "license": "CC0",
+    "duration": 0.344,
+    "size": 8223,
+    "sha256": "9d5a86eec2ab3a1f3be8d67cceb9653105c391e6a95a3cf69010be9838439f9d",
+    "channels": 1,
+    "origin": "item_stone_03"
+  },
+  {
+    "path": "audio/library/office/office_coffee_01.ogg",
+    "category": "office",
+    "action": "office_coffee",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.33,
+    "size": 6995,
+    "sha256": "abe31ea8d7c503bbe3e8eb44bdde58ec1b1a121ac3b8bb70edc0644205a029c7",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/office/office_coffee_02.ogg",
+    "category": "office",
+    "action": "office_coffee",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.43,
+    "size": 7858,
+    "sha256": "2d22372b89aff29a4c236a4d734db96b137eadc5fec504eef3026e5d21b5b29e",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/office/office_steps_01.ogg",
+    "category": "office",
+    "action": "office_steps",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.228,
+    "size": 6374,
+    "sha256": "2379dbabba3570ce7a115cd8554662f7058cdbd66e059e04a774ac7035d0b696",
+    "channels": 1,
+    "origin": "footstep06"
+  },
+  {
+    "path": "audio/library/office/office_steps_02.ogg",
+    "category": "office",
+    "action": "office_steps",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 0.45,
+    "size": 8061,
+    "sha256": "4082d39c32589917d2132b24843a247bd54ef712ba3ae33a2ba311d191661c9b",
+    "channels": 1,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/office/office_printer_01.ogg",
+    "category": "office",
+    "action": "office_printer",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.036,
+    "size": 4144,
+    "sha256": "39194a987f9df6272412e126a1d8db18db58bfdefaefb019383d0c9291b1a0ef",
+    "channels": 1,
+    "origin": "creak1"
+  },
+  {
+    "path": "audio/library/office/office_printer_02.ogg",
+    "category": "office",
+    "action": "office_printer",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://opengameart.org/content/50-rpg-sound-effects",
+    "author": "Kenney",
+    "license": "CC0",
+    "duration": 0.191,
+    "size": 5531,
+    "sha256": "7c66e7fa857dd2cd9c18d4204cc1ba26e01338884bc1ad36ed4bb93d588040ea",
+    "channels": 1,
+    "origin": "creak2"
+  },
+  {
+    "path": "audio/library/office/office_glass_break_01.ogg",
+    "category": "office",
+    "action": "office_glass_break",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes",
+    "author": "StarNinjas",
+    "license": "CC0",
+    "duration": 0.051,
+    "size": 4410,
+    "sha256": "7b31935f1827b63baa327c6a0697fbaabee793b5f8846c77e7f7816d87cb8ba3",
+    "channels": 1,
+    "origin": "sword_clash.10"
+  },
+  {
+    "path": "audio/library/office/office_glass_break_02.ogg",
+    "category": "office",
+    "action": "office_glass_break",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes",
+    "author": "StarNinjas",
+    "license": "CC0",
+    "duration": 0.878,
+    "size": 11696,
+    "sha256": "1dcf961cca683186cdedf70c3831cd490ed27ba1b9b757a37ea327ffd0de4567",
+    "channels": 1,
+    "origin": "sword_clash.1"
+  },
+  {
+    "path": "audio/library/music/music_arena_01.ogg",
+    "category": "music",
+    "action": "music_arena",
+    "games": [
+      "King of Ash"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 16.0,
+    "size": 69644,
+    "sha256": "e715db1d0850ac066b87a4adea49e95bbc3385e6dd6b728a966a04e10ea02635",
+    "channels": 2,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/music/music_fog_01.ogg",
+    "category": "music",
+    "action": "music_fog",
+    "games": [
+      "Archer in the Fog",
+      "Foggy Awakening"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 16.0,
+    "size": 68940,
+    "sha256": "79f65344b8101b7a3adddaa689cbd5d63857977c579e1c3ef879c541a5c267fe",
+    "channels": 2,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/music/music_twilight_01.ogg",
+    "category": "music",
+    "action": "music_twilight",
+    "games": [
+      "Twilight Isle",
+      "Twilight Isle Classic",
+      "Dreamverse"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 16.0,
+    "size": 75168,
+    "sha256": "33cde1751004f8b17a48d231cf96c1f499540fcab1b83977f36483adad619e96",
+    "channels": 2,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/music/music_underwater_01.ogg",
+    "category": "music",
+    "action": "music_underwater",
+    "games": [
+      "Under and Above"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 16.0,
+    "size": 60299,
+    "sha256": "50316d5d613f7cc41a1b1b33f7ead3d67234887ea636c574a1660f3807abbe67",
+    "channels": 2,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/music/music_office_01.ogg",
+    "category": "music",
+    "action": "music_office",
+    "games": [
+      "ASQURA Office"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 16.0,
+    "size": 73568,
+    "sha256": "a1f2fe0edcdc3f5a346bf68ae8e08afba8c867f9a52cbd66ffd051684ccae913",
+    "channels": 2,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/music/music_abyss_01.ogg",
+    "category": "music",
+    "action": "music_abyss",
+    "games": [
+      "ABYSS GLOW"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 16.0,
+    "size": 61535,
+    "sha256": "4aafc8ebde76fd94cd468a539d4e2b283f11a5652b9e67f4d15ea081fbc85257",
+    "channels": 2,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/music/music_valleys_01.ogg",
+    "category": "music",
+    "action": "music_valleys",
+    "games": [
+      "Endless Valleys"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 16.0,
+    "size": 68421,
+    "sha256": "32ae1ae1a3bf43f9b30f84e988087dc4a8fa55842155b112cc4c466befca1180",
+    "channels": 2,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/music/music_neon_01.ogg",
+    "category": "music",
+    "action": "music_neon",
+    "games": [
+      "Rainbow Rush"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 16.0,
+    "size": 84320,
+    "sha256": "2ebc5f489e8aba9171311f95dd4bc72339a630ea0c984ff347c936c77d35c7db",
+    "channels": 2,
+    "origin": "Original procedural synthesis"
+  },
+  {
+    "path": "audio/library/music/music_ash_01.ogg",
+    "category": "music",
+    "action": "music_ash",
+    "games": [
+      "King of Ash"
+    ],
+    "source": "https://github.com/mpaykin1/meta6/blob/main/audio/build_audio.py",
+    "author": "meta6 original procedural audio / project owner",
+    "license": "CC0",
+    "duration": 16.0,
+    "size": 63698,
+    "sha256": "7baee6924600a6a90cdc2278054fa7fd0ec7abaa7680636d420d2e787edd14e3",
+    "channels": 2,
+    "origin": "Original procedural synthesis"
+  }
+]

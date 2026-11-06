@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "game_id": "witness-vault",
+  "seed": "11",
+  "source_commit": "bf5dcdc74259fb64cf1972d3da5e18d2e50b3d6a",
+  "entry": "index.html",
+  "status": "packaged_unverified",
+  "validation": {
+    "browser": "not_run",
+    "rights": "not_verified",
+    "publication": "not_published"
+  },
+  "pipeline_sha256": "cdad701156b52b813942e34374b7813e6545cd91af5f494c62e36b0c80492b90",
+  "stages": [
+    {
+      "engine": "calc",
+      "status": "skipped_optional"
+    },
+    {
+      "engine": "dramaturgy",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "story",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "mechanics",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "physics",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "visual",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "onboarding",
+      "status": "produced_unverified"
+    }
+  ],
+  "files": [
+    {
+      "path": "data/pipeline.json",
+      "bytes": 17986,
+      "sha256": "0500d69535ffae921664cf4c55c417315cbb7464379d6102820eb14c002ce16c"
+    },
+    {
+      "path": "data/provenance.json",
+      "bytes": 963,
+      "sha256": "6c8d3132b9ea362b8490ff0a785c9156a77855e4e01c715b1718421bd0e0ae4d"
+    },
+    {
+      "path": "game.js",
+      "bytes": 33166,
+      "sha256": "95bbeed5c64b65b04884f54f2e163f0918bed4457479e77da07baa2c2020d411"
+    },
+    {
+      "path": "index.html",
+      "bytes": 17506,
+      "sha256": "bdfe8003e2aac2cd54b4094822159bc16192dec3aec6bb063266e24c035aaa80"
+    },
+    {
+      "path": "shaders/atmosphere-fragment.glsl",
+      "bytes": 836,
+      "sha256": "27b752f747ebace3adc8b985afda80db70e196e9745a274f9aa52c52a230d2a4"
+    },
+    {
+      "path": "shaders/atmosphere-vertex.glsl",
+      "bytes": 244,
+      "sha256": "43586b30184e4229874632d0edd1a45db2ae43139520a8944f02a2763f21e7f8"
+    }
+  ],
+  "manifest_sha256": "7faa03de75e01c82ada3e4790b44317adee72533fef8796eadead00a921fea94"
+}

@@ -1,0 +1,42 @@
+✔ western ash route is traversable with non-flat terrain and exact source factory excludes viewer (7.435761ms)
+✔ independent creatures decide without orbiting the player and cannot cross onto land (8.985137ms)
+✔ original weapon positions and deterministic biome placements (0.503741ms)
+✔ same-seed equal-length creature identities remain independent (0.54044ms)
+✔ 200 encounters contain no duplicate whole phrases, including save/restore (8.247889ms)
+✔ E: one guest arrives in 60 virtual seconds; never two active (4.510252ms)
+✔ D: renderer and Node use identical chunk object placement across 3 seeds (17.446515ms)
+✔ C: actual underwater cathedral/wreck anchors vent away from hero in bounded production pool (2.303707ms)
+✔ standalone export has no external script/style/importmap and every inline script parses (63.015222ms)
+✔ all 19 embedded binary models have valid glTF magic and declared byte length (12.075825ms)
+✔ guest dialogue reflects source world, predicament and relationship (0.993307ms)
+✔ guest comes from a different world (0.203761ms)
+✔ D: ocean bed is seeded and has >3m relief within 40m view (16.259136ms)
+✔ A: boundary floor blends accepted island shore without a step (5.314665ms)
+✔ G: emergent island has a walkable surface and underwater approach (2.882368ms)
+✔ G: distant seeded ocean cells have reachable emergent land (11.66218ms)
+✔ A: actual shared east-coast profile enters water gradually x58..76 in 0.5m steps (0.967008ms)
+✔ A: gradual knee, waist, head immersion is monotonic without frame discontinuities (1.691141ms)
+✔ B: virtual 3-second ascent, smooth inertia, descent after release and bottom clamp (2.827154ms)
+✔ C: bubble emissions exist while wet, remain pooled within 96 and stop dry (0.879444ms)
+✔ E: pure scheduler re-arms after guest completion (game outcomes checked in stage7-playwright.mjs) (4.912916ms)
+✔ E: debug schedule triggers after five seconds without UI (0.387344ms)
+✔ C: existing wreck and cathedral anchors emit distant bubbles, bounded to 96 slots (1.041627ms)
+✔ D: inventory preserves actual model names and exposes missing required categories (0.206185ms)
+✔ standalone index.html equals a fresh offline bundle byte for byte (294.676416ms)
+✔ bathyscaphe rises from seabed through surface into air and descends without losing inventory (10.05116ms)
+✔ ship rejects scenery collisions and altitude remains bounded (0.754901ms)
+✔ separate world heights, seamless seeded deep water and dry ash (21.387853ms)
+✔ underwater integration uses shared floor, safe shore clamp and no extra visible panels (2.635447ms)
+✔ terrain deterministic, negative coordinates and every sampled 16m patch has relief (80.378862ms)
+✔ core preserved and extension continuous at all four boundaries (1.346588ms)
+✔ chunk cache traverses four directions with <=25 live allocations including teleports (1.929808ms)
+✔ world lifecycle, positions and fade are bounded through repeated transitions (1.04346ms)
+✔ surface domain does not suppress seabed outside eastern shore (0.422389ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 649.669304

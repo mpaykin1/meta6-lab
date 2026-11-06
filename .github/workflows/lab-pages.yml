@@ -28,7 +28,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run lab-pages.yml --ref main -R "$GITHUB_REPOSITORY"
   deploy:
-    if: github.ref == 'refs/heads/main'
+    # guard on a main push already has its own push-run of this workflow: skip the duplicate.
+    if: github.ref == 'refs/heads/main' && !(github.event_name == 'workflow_run' && github.event.workflow_run.name == 'META GAMES guard' && github.event.workflow_run.event == 'push')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     environment:

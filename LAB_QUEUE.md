@@ -6,6 +6,17 @@
 
 <!-- карточки ниже -->
 
+### lab/world-doors-progress — Двери между мирами (портал)
+- Игрок: посещённые миры подсвечиваются мягким свечением, прогресс хранится локально.
+- Ветка: lab/world-doors-progress; файлы: meta-games/index.html и world-progress.mjs.
+- Поиграть: https://mpaykin1.github.io/meta6-lab/preview/world-doors-progress/meta-games/
+- Сохранение: только история посещения; игровые победы, инвентарь и уровни пока не синхронизированы.
+- Статус: В РАБОТЕ (проверка публикации и владельца).
+- Михаил: —
+- Claude: —
+
+
+
 ### lab/oss-commercial-kit — Внешние библиотеки + световой остров
 - Игрок: атмосферный 3D-остров, процедурный рельеф, подсвеченный маршрут к кристаллам, звуки и сенсорный джойстик.
 - Поиграть: https://mpaykin1.github.io/meta6-lab/preview/oss-commercial-kit/meta-games/open-source-kit/

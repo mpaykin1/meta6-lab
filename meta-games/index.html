@@ -84,6 +84,9 @@ main{position:relative;z-index:5;padding:42px 0 94px}
  .section-title{flex-direction:column;align-items:flex-start}
  .bottom{flex-wrap:wrap}
 }
+
+.game.world-visited{border-color:#80b8bd80;box-shadow:inset 0 0 0 1px #7bd6d125}
+.game.world-visited .art .orb{filter:hue-rotate(14deg) brightness(1.08)}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -165,5 +168,24 @@ function draw(t){frame=requestAnimationFrame(draw);if(document.hidden||t-last<33
 frame=requestAnimationFrame(draw);
 addEventListener('pagehide',()=>cancelAnimationFrame(frame),{once:true});
 })();
+</script>
+<script type="module">
+import { createWorldProgress } from './world-progress.mjs';
+const cards = [...document.querySelectorAll('a.game[href]')];
+const ids = cards.map(a => {
+  const url = new URL(a.getAttribute('href'), location.href);
+  const pathname = decodeURIComponent(url.pathname).replace(/\/+$/, '');
+  const match = pathname.match(/(?:^|\/)(games\/[^/]+|observer-world-en-v7|ashen-sumerek|underwater-world|three-worlds-game)$/);
+  return match ? match[1].replaceAll('/', '-') : null;
+});
+try {
+  const progress = createWorldProgress(localStorage);
+  const visited = new Set(progress.visited());
+  cards.forEach((card, i) => {
+    if (!ids[i]) return;
+    if (visited.has(ids[i])) card.classList.add('world-visited');
+    card.addEventListener('click', () => progress.enter(ids[i]), { passive: true });
+  });
+} catch { /* Private browsing must never block game navigation. */ }
 </script>
 </body></html>

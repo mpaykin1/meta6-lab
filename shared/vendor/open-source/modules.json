@@ -1,0 +1,50 @@
+{
+  "purpose": "Reusable infrastructure for META GAMES. Keep original licenses; third-party modules do not automatically become game source/asset exemplars.",
+  "modules": [
+    {
+      "name": "noisejs",
+      "source": "https://github.com/josephg/noisejs",
+      "ref": "9c53d7faed1c1a1d4c0927b238ff3def7bb8803b",
+      "license": "ISC",
+      "scope": "browser library; not game artwork",
+      "files": [
+        "perlin.js",
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "howler",
+      "source": "https://github.com/goldfire/howler.js",
+      "ref": "v2.2.4",
+      "license": "MIT",
+      "scope": "browser library; not game artwork",
+      "files": [
+        "howler.core.min.js",
+        "LICENSE.md",
+        "howler.spatial.min.js"
+      ]
+    },
+    {
+      "name": "easystarjs",
+      "source": "https://github.com/prettymuchbryce/easystarjs",
+      "ref": "10615147add3af46f76a5d86ee7b7e7bebf83ac5",
+      "license": "MIT",
+      "scope": "browser library; not game artwork",
+      "files": [
+        "easystar-0.4.4.min.js",
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "joystick",
+      "source": "https://github.com/bobboteck/JoyStick",
+      "ref": "4501b8c9dc6c2a370d65cdcdf0f4df6ba9fef13c",
+      "license": "MIT",
+      "scope": "browser library; not game artwork",
+      "files": [
+        "joy.min.js",
+        "LICENSE"
+      ]
+    }
+  ]
+}

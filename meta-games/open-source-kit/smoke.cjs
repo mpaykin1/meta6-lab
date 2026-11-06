@@ -1,0 +1,26 @@
+const { chromium } = require('playwright');
+(async()=>{
+ const browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--no-sandbox']});
+ const page=await browser.newPage({viewport:{width:1100,height:760}});
+ const errors=[];
+ page.on('pageerror',e=>errors.push(e.stack||String(e)));
+ page.on('console',msg=>{if(msg.type()==='error')errors.push(msg.text());});
+ page.on('response',r=>{if(r.status()>=400)errors.push('HTTP '+r.status()+' '+r.url());});
+ await page.goto('http://127.0.0.1:8765/meta-games/open-source-kit/',{waitUntil:'load',timeout:30000});
+ await page.waitForFunction(()=>document.querySelector('#stage')?.dataset.ready==='true'||!!document.querySelector('#stage')?.dataset.error,{timeout:25000});
+ const before=await page.evaluate(()=>({ready:document.querySelector('#stage').dataset.ready,error:document.querySelector('#stage').dataset.error,canvas:document.querySelectorAll('#stage canvas').length,libs:{noise:typeof noise,EasyStar:typeof EasyStar,Howl:typeof Howl,JoyStick:typeof JoyStick},webgl:!!document.querySelector('#stage canvas')?.getContext('webgl2')||!!document.querySelector('#stage canvas')?.getContext('webgl')}));
+ if(before.ready!=='true'||before.canvas!==1||Object.values(before.libs).some(v=>v==='undefined'))throw Error('Scene or libraries not ready: '+JSON.stringify(before));
+ const start=await page.evaluate(()=>window.__OSS_KIT__.snapshot());
+ if(!start.spatialAudio||start.routePoints<2)throw Error('Audio or A* path unavailable: '+JSON.stringify(start));
+ await page.keyboard.down('d');await page.waitForTimeout(900);await page.keyboard.up('d');
+ const moved=await page.evaluate(()=>window.__OSS_KIT__.snapshot());
+ if(moved.x<=start.x+.1)throw Error('Keyboard does not move player: '+JSON.stringify({start,moved}));
+ await page.locator('#menu').click();
+ if(!await page.locator('#panel').isVisible())throw Error('Menu does not open');
+ await page.locator('#close').click();
+ if(await page.locator('#panel').isVisible())throw Error('Menu does not close');
+ await page.waitForTimeout(800);
+ if(errors.length)throw Error(errors.join('\n'));
+ console.log('PASS scene rendered, 4 libraries loaded, keyboard and menu exercised',JSON.stringify(before));
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

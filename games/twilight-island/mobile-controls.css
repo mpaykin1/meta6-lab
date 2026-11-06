@@ -1,0 +1,51 @@
+
+#v7MobileHud{display:none;pointer-events:none;position:fixed;inset:0;z-index:22;overflow:hidden}
+@media (pointer:coarse) and (max-width:900px){body.v7-touch #v7MobileHud{display:block}}
+html.v7-test-mobile #v7MobileHud{display:block}
+#v7MobileHud *{touch-action:none!important;-webkit-tap-highlight-color:transparent;user-select:none}
+#v7MobileHud button{display:grid;place-items:center;pointer-events:auto;cursor:pointer;border:2px solid rgba(244,229,187,.5);
+ border-radius:50%;box-shadow:inset 0 0 15px #0005,0 2px 7px #0008;padding:0;color:white}
+#v7MobileHud button:focus-visible{outline:3px solid #ffd266;outline-offset:2px}
+#v7MobileHud svg{image-rendering:pixelated;width:63%;height:63%;filter:drop-shadow(1px 2px #0007)}
+#v7MobileHud .v7-action{position:absolute;right:max(13px,env(safe-area-inset-right));opacity:.75;background:rgba(27,25,37,.74)}
+#v7MobileHud .v7-action.is-pressed{opacity:.94;transform:scale(.95)}
+#v7Action{width:clamp(77px,23vw,112px);height:clamp(77px,23vw,112px);bottom:calc(90px + env(safe-area-inset-bottom));background:rgba(211,129,38,.82)!important}
+#v7Action span{position:relative;display:grid;place-items:center;width:90%;height:90%}
+#v7Action svg:first-child{width:75%;height:75%;transform:translate(-7px,7px)}
+#v7Action svg:last-child{position:absolute;width:43%;height:43%;transform:translate(21px,-22px)}
+#v7Build{width:clamp(64px,17vw,86px);height:clamp(64px,17vw,86px);bottom:calc(210px + env(safe-area-inset-bottom))}
+#v7Swap{width:clamp(56px,15vw,76px);height:clamp(56px,15vw,76px);bottom:calc(307px + env(safe-area-inset-bottom))}
+#v7Stick{position:absolute;left:max(12px,env(safe-area-inset-left));bottom:calc(106px + env(safe-area-inset-bottom));
+ width:clamp(124px,38vw,190px);height:clamp(124px,38vw,190px);border:2px solid rgba(255,255,242,.44);
+ border-radius:50%;background:rgba(25,25,32,.25);pointer-events:auto;box-shadow:inset 0 0 40px #0005}
+#v7Stick:before{content:'';position:absolute;inset:18%;border:2px solid rgba(251,247,221,.27);border-radius:50%}
+#v7Knob{position:absolute;left:50%;top:50%;width:45%;height:45%;border-radius:50%;transform:translate(-50%,-50%);
+ pointer-events:none;background:rgba(225,232,216,.45);border:2px solid rgba(255,255,245,.32);box-shadow:0 2px 12px #0007}
+.v7-arrow{position:absolute;color:rgba(255,255,255,.45);font:16px Arial}
+.v7-up{top:4%;left:45%}.v7-down{bottom:4%;left:45%}.v7-left{left:5%;top:43%}.v7-right{right:5%;top:43%}
+body.v7-touch #v5Dock,html.v7-test-mobile #v5Dock{bottom:calc(5px + env(safe-area-inset-bottom))!important;height:68px!important;
+ left:max(5px,env(safe-area-inset-left));right:max(5px,env(safe-area-inset-right));z-index:24;
+ background:rgba(18,18,28,.88);scrollbar-width:none}
+body.v7-touch #v5Dock::-webkit-scrollbar{display:none}
+body.v7-touch #v5Menu,html.v7-test-mobile #v5Menu{z-index:35}
+body.v7-touch #v5Hint,html.v7-test-mobile #v5Hint{display:none!important}
+body.v7-touch #v6Toast,html.v7-test-mobile #v6Toast{top:calc(58px + env(safe-area-inset-top))}
+@media (orientation:landscape) and (max-height:550px){
+ #v7Stick{width:110px;height:110px;bottom:calc(65px + env(safe-area-inset-bottom))}
+ #v7Action{width:78px;height:78px;bottom:calc(66px + env(safe-area-inset-bottom))}
+ #v7Build{width:54px;height:54px;bottom:calc(152px + env(safe-area-inset-bottom))}
+ #v7Swap{width:48px;height:48px;bottom:calc(211px + env(safe-area-inset-bottom))}
+ body.v7-touch #v5Dock{height:54px!important}
+}
+
+/* Original informative HUD can be shown on phones; action controls remain only the three right buttons. */
+body.v7-touch #hud, html.v7-test-mobile #hud{display:block!important;pointer-events:none}
+body.v7-touch #hud .hud-row,html.v7-test-mobile #hud .hud-row{display:flex!important}
+body.v7-touch #hud .minimap,html.v7-test-mobile #hud .minimap{
+ position:absolute;top:calc(59px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right));
+ width:88px!important;height:88px!important;pointer-events:none}
+body.v7-touch #hud .wpanel,html.v7-test-mobile #hud .wpanel{
+ position:absolute!important;left:8px!important;top:calc(66px + env(safe-area-inset-top))!important;
+ bottom:auto!important;max-width:220px!important;transform:scale(.78);transform-origin:top left}
+body.v7-touch #hud .hotbar,html.v7-test-mobile #hud .hotbar{display:none!important}
+body.v7-touch #hud .toast,html.v7-test-mobile #hud .toast{display:none}

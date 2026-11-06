@@ -120,6 +120,7 @@
   // successive read-only snapshots. No enemy or player state is ever modified.
   const observedHP = new WeakMap();
   let observedDamage = 0;
+  let maxObservedProgress = 0;
   function recordDamage(game) {
     const enemies = new Set([...(game.foes || []), game.G.warden].filter(Boolean));
     for (const foe of enemies) {
@@ -155,8 +156,12 @@
         const inCombat = nearestFoe && nearestFoe.segs[0].distanceTo(player.pos) < attackRange;
         // Spatial watchdog is appropriate for walking; during an actual fight
         // the strategy separately requires combat/health progress within 20 seconds.
-        const goal = inCombat ? null : navigationFocus(game, navigation(world), player, actualGoal);
+        const goal = inCombat ? nearestFoe.segs[0] : navigationFocus(game, navigation(world), player, actualGoal);
+        // The watchdog always observes a real active destination until victory.
 
+        const measuredProgress = G.collected + Math.max(0, game.combat.arsenal.length - 1) + G.kills +
+          realDamage / 100 + (G.wardenDown ? 1 : 0);
+        maxObservedProgress = Math.max(maxObservedProgress, measuredProgress);
         const heroScreen = player.pos.clone(); heroScreen.y += .85; heroScreen.project(game.camera);
         const screen = nearestFoe ? nearestFoe.segs[0].clone() : null;
         if (screen) { screen.y = player.pos.y + .85; screen.project(game.camera); }
@@ -164,11 +169,10 @@
           started: ['play', 'paused', 'dead', 'victory'].includes(G.state),
           level: G.state === 'victory' ? 1 : 0,
           stage: G.collected + (G.wardenDown ? 1 : 0), objectiveCount: G.total + 2,
-          progress: G.collected + Math.max(0, game.combat.arsenal.length - 1) + G.kills +
-            realDamage / 100 + (G.wardenDown ? 1 : 0),
+          progress: maxObservedProgress,
           levelDone: G.state === 'victory', gameDone: G.state === 'victory',
           alive: player.hp > 0 && G.state !== 'dead',
-          hero: point(player.pos), goal: goal ? point(goal) : null,
+          hero: point(player.pos), goal: G.state === 'victory' ? null : point(goal || actualGoal),
           destination: point(actualGoal),
           heroHeight: player.pos.y, onGround: player.onGround, cameraYaw: game.rig.yaw,
           renderFps: game.perf.acc > 0 ? game.perf.frames / game.perf.acc : null,

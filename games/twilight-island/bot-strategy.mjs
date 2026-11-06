@@ -122,30 +122,21 @@ async function attack(ctx, state, weapon, ratio, fps) {
   }
   await ctx.wait(Math.min(400, 1100 / fps));
 }
-// Genuine player UI: the bottom-dock New Person glyph revives on touch.
+// Restart through the game's ordinary visible end screen; never mutate game state.
 async function reviveWithPlayerControls(ctx) {
-  if (ctx.mobile) {
-    for (let attempt = 0; attempt < 6; attempt++) {
-      const buttons = ctx.state().buttons;
-      const glyph = buttons.find(b => /new person|rebirth|возрод/i.test(b.label) && !b.disabled);
-      const build = buttons.find(b => b.id === 'v7Build' && !b.disabled);
-      if (!glyph || !build) break;
-      if (glyph.x > 12 && glyph.x < ctx.viewport.width - 12 &&
-          glyph.y > 12 && glyph.y < ctx.viewport.height - 12) {
-        await ctx.tap(glyph.x, glyph.y);
-        await ctx.wait(200);
-        await ctx.tap(build.x, build.y);
-        await ctx.wait(1200);
-        if (ctx.state().alive) return true;
-      }
-      const y = Math.max(20, Math.min(ctx.viewport.height - 20, glyph.y));
-      await ctx.swipe(ctx.viewport.width - 24, y, 24, y, 440);
-      await ctx.wait(200);
+  for (let attempt = 0; attempt < 12; attempt++) {
+    const state = ctx.state();
+    if (state.alive) return true;
+    const again = state.buttons.find(b => b.id === 'btnAgain' && !b.disabled &&
+      b.x > 0 && b.y > 0 && b.x < ctx.viewport.width && b.y < ctx.viewport.height);
+    if (again) {
+      await ctx.tap(again.x, again.y);
+      await ctx.wait(1600);
+      if (ctx.state().alive) return true;
+    } else if (!ctx.mobile) {
+      await ctx.key('KeyR', 140);
     }
-  } else {
-    // Original game's R key restarts once its real death screen is ready.
-    await ctx.key('KeyR', 140);
-    await ctx.wait(1200);
+    await ctx.wait(400);
   }
   return ctx.state().alive;
 }

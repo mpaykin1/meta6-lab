@@ -2474,6 +2474,16 @@ function generateWorld(seed, biomeId = 'dusk') {
   Object.assign(gctx, { reach, coins, hearts, loot, relicSpots, ruins, rocks, piers, seaSpots, landCells });
   emit('world', gctx, 'done');
 
+  // Keep the original complete archipelago assets, but introduce discoveries
+  // over victories. First island: five reachable coins and one visible weapon.
+  let victories = 0;
+  try { victories = Math.max(0, Math.min(3, Number(localStorage.getItem('meta-games:twilight-isles:victories')) || 0)); } catch {}
+  coins.sort((a, b) => Math.hypot(a.x - sx, a.z - sz) - Math.hypot(b.x - sx, b.z - sz));
+  coins.length = Math.min(coins.length, 5 + victories * 5);
+  loot.sort((a, b) => (Number(b.near) - Number(a.near)) ||
+    Math.hypot(a.x - sx, a.z - sz) - Math.hypot(b.x - sx, b.z - sz));
+  loot.length = Math.min(loot.length, 1 + victories * 5);
+
   return {
     seed, biome: biome.id, vox, hgt, stand, kind, reach, at, ci, piers, trees, rocks, ruins, seaSpots, landCells, coins, hearts, loot,
     relicSpots, structures: gctx.structures, gctx,
@@ -3310,7 +3320,7 @@ class Particles {
   clear() { this.n = 0; }
 }
 const glow = new Particles(2400, THREE.AdditiveBlending, 14);
-const dust = new Particles(1200, THREE.NormalBlending, 13);
+const dust = new Particles(800, THREE.NormalBlending, 13);
 
 // fireflies (night) + golden motes (dusk): GPU-animated points
 const FLIES = 640;
@@ -3360,10 +3370,19 @@ composer.addPass(new OutputPass());
 composer.addPass(finalPass);
 const FX = finalPass.uniforms;
 
-const perf = { scale: 0.8, acc: 0, frames: 0, cool: 0 };
+// GPU renderer provenance plus update/render timings: diagnose both software GL
+// fill-rate and scene-update overhead without altering the game's physics.
+const perfGL = renderer.getContext();
+const perfExt = perfGL.getExtension('WEBGL_debug_renderer_info');
+const perfRendererName = perfExt ? String(perfGL.getParameter(perfExt.UNMASKED_RENDERER_WEBGL)) : '';
+const SOFTWARE_GL = /swiftshader|llvmpipe|software|lavapipe/i.test(perfRendererName);
+const perf = { scale: SOFTWARE_GL ? 0.4 : IS_TOUCH ? 0.6 : 0.72, acc: 0, frames: 0,
+  cool: 0, updateMs: 0, renderMs: 0, drawCalls: 0 };
+dofH.enabled = dofV.enabled = !SOFTWARE_GL && !IS_TOUCH;
+bloom.enabled = !SOFTWARE_GL;
 function resize() {
   const w = Math.max(1, innerWidth), h = Math.max(1, innerHeight);
-  const pr = Math.min(window.devicePixelRatio || 1, 1.75) * perf.scale;
+  const pr = Math.min(window.devicePixelRatio || 1, 1.5) * perf.scale;
   renderer.setPixelRatio(pr);
   renderer.setSize(w, h, false);
   composer.setPixelRatio(pr);
@@ -4115,7 +4134,7 @@ function hurt(n, fx, fz) {
   if (player.invuln > 0 || G.state !== 'play') return false;
   if (ARCH.absorb()) return false;
   player.hp = Math.max(0, player.hp - n); G.hits++;
-  player.invuln = 1.5; G.hurt = 1; rig.trauma = Math.min(1, rig.trauma + 0.75);
+  player.invuln = G.total <= 5 ? 2.3 : 1.5; G.hurt = 1; rig.trauma = Math.min(1, rig.trauma + 0.75);
   G.hitstop = Math.max(G.hitstop, 0.06);
   FX.uFlashColor.value.setRGB(1, 0.45, 0.85);
   if (fx !== undefined) {
@@ -4530,6 +4549,10 @@ function setPaused(on) {
 function win() {
   if (G.state !== 'play') return;
   G.state = 'victory'; G.endT = 0; rig.blend = 0; PG.play(false);
+  try {
+    const key = 'meta-games:twilight-isles:victories';
+    localStorage.setItem(key, String(Math.min(3, (Number(localStorage.getItem(key)) || 0) + 1)));
+  } catch {}
   try { ARCH.onLit(); } catch (e) { console.warn(e); }
   rig.vicA = Math.atan2(rig.pos.x - world.beacon.x, rig.pos.z - world.beacon.z);
   beacon.flare = 1.2; G.flash = 0.6; FX.uFlashColor.value.setRGB(1, 0.92, 0.75);
@@ -5530,7 +5553,7 @@ function spawnFoe(type, x, y, z, rising) {
     type, def, body: def.B, brain: def.Br, n: def.seg, segs: [], rads: [], vel: new THREE.Vector3(), kb: new THREE.Vector3(),
     state: rising ? 'rise' : 'wander', t: 0, alpha: rising ? 0 : 1,
     target: new THREE.Vector3(x, y, z), seed: Math.random() * 50, timer: 0, blink: 0, trail: 0, extent: def.seg * def.spacing + def.rad + 1,
-    hp: def.hp, maxHp: def.hp, flash: 0, stun: 0, slow: 0, burn: 0, burnDps: 0, burnTick: 0, shock: 0, hitT: 0, numAcc: 0, numT: 0, soulAcc: 0,
+    hp: def.boss && G.total <= 5 ? Math.min(def.hp, 170) : def.hp, maxHp: def.boss && G.total <= 5 ? Math.min(def.hp, 170) : def.hp, flash: 0, stun: 0, slow: 0, burn: 0, burnDps: 0, burnTick: 0, shock: 0, hitT: 0, numAcc: 0, numT: 0, soulAcc: 0,
     // movement intent written by the brain each frame, executed by the body
     speed: 0, turn: 1.3, ty: y, yk: 2.6, harmful: false, arrive: 0.01,
   };
@@ -6624,6 +6647,9 @@ function updateNPCs(dt) {
     if (near && !n.met) { n.met = true; if (d.onMeet) d.onMeet(n); }
     if (near && !n.near) { n.line = -1; n.lineT = 0; }
     n.near = near;
+    // Distant NPC visual animation is not meaningful while fog hides them.
+    if (dist > (SOFTWARE_GL ? 28 : 58)) { n.mesh.visible = false; continue; }
+    n.mesh.visible = true;
     if (near) {
       n.lineT -= dt;
       if (n.lineT <= 0) {
@@ -6668,7 +6694,7 @@ function updateNpcHud(dt) {
         everyday weather; an event (storm, blizzard …) takes over for a while and blends
         its own palette, post levers and spawn pressure in by its intensity.
 ============================================================================= */
-const PRECIP_N = 2600;
+const PRECIP_N = 2400;
 const PRECIP_VERT = /* glsl */`
 attribute float aRnd;
 uniform float uTime, uFall, uSway, uSize, uScale, uDensity, uBox, uFogD;
@@ -6947,14 +6973,20 @@ function perfMonitor(dt) {
   if (perf.acc >= 2) {
     const fps = perf.frames / perf.acc; perf.acc = 0; perf.frames = 0;
     let s = perf.scale;
-    if (fps < 48 && s > 0.5) s = Math.max(0.5, Math.round((s - 0.1) * 100) / 100);
-    else if (fps > 58 && s < 0.9) s = Math.min(0.9, Math.round((s + 0.05) * 100) / 100);
+    if (fps < 24) {
+      dofH.enabled = dofV.enabled = false;
+      bloom.enabled = false;
+      s = Math.max(0.36, Math.round((s - 0.12) * 100) / 100);
+    } else if (fps < 38) s = Math.max(0.36, Math.round((s - 0.05) * 100) / 100);
+    else if (fps > 58 && s < (SOFTWARE_GL ? 0.5 : 0.82))
+      s = Math.min(SOFTWARE_GL ? 0.5 : 0.82, Math.round((s + 0.05) * 100) / 100);
     if (s !== perf.scale) { perf.scale = s; resize(); }
   }
 }
 function frame(now) {
   requestAnimationFrame(frame);
   if (PG.paused) { last = now; return; }
+  const updateStarted = performance.now();
   const raw = last ? Math.min(0.05, Math.max(0, (now - last) / 1000)) : 0.016;
   last = now;
   // hit-stop: a heavy blow freezes the simulation for a few frames; particles crawl, the camera keeps breathing
@@ -6995,7 +7027,22 @@ function frame(now) {
   updateCombatHud(raw);
   updateNpcHud(raw);
   glow.flush(); dust.flush();
+  // Update only terrain inside the atmospheric draw radius; raycast physics
+  // still works everywhere, including behind the camera.
+  if (SOFTWARE_GL || IS_TOUCH) {
+    const maxD = SOFTWARE_GL ? 48 : 76, max2 = maxD * maxD;
+    const focus = G.state === 'title' ? world.beacon : player.pos;
+    for (let i = 0; i < chunks.length; i++) if (chunks[i]) {
+      const cx = ((i % (W / CH)) + .5) * CH, cz = (Math.floor(i / (W / CH)) + .5) * CH;
+      chunks[i].visible = (cx - focus.x) ** 2 + (cz - focus.z) ** 2 <= max2;
+    }
+  }
+  perf.updateMs = performance.now() - updateStarted;
+  const renderStarted = performance.now();
   composer.render(raw);
+  perf.renderMs = performance.now() - renderStarted;
+  perf.drawCalls = renderer.info.render.calls;
+  window.__META_LAYER__?.frame(now);
   perfMonitor(raw);
   RET.frame(raw);
   ARCH.tick(raw);

@@ -14,9 +14,6 @@ permissions:
   actions: write
 # Окружение github-pages разрешает деплой только из main. Пуш в lab/** не деплоит сам,
 # а перезапускает этот workflow на main (сборка всё равно берёт все ветки lab/**).
-concurrency:
-  group: ${{ github.ref == 'refs/heads/main' && 'lab-pages' || format('lab-pages-kick-{0}', github.run_id) }}
-  cancel-in-progress: ${{ github.ref == 'refs/heads/main' }}
 jobs:
   kick-main:
     if: github.ref != 'refs/heads/main'
@@ -32,6 +29,9 @@ jobs:
     if: github.ref == 'refs/heads/main' && !(github.event_name == 'workflow_run' && github.event.workflow_run.name == 'META GAMES guard' && github.event.workflow_run.event == 'push')
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    concurrency:
+      group: lab-pages
+      cancel-in-progress: true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

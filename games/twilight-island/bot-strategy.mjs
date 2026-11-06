@@ -131,7 +131,7 @@ export async function playLevel(ctx, level) {
     const state = ctx.state();
     if (Date.now() - loggedAt >= 10000) {
       loggedAt = Date.now();
-      ctx.log(`observed stage=${state.stage} hp=${state.health} weapon=${state.equipped} hero=${state.hero.x.toFixed(2)},${state.hero.y.toFixed(2)} height=${state.heroHeight.toFixed(2)}`);
+      ctx.log(`observed stage=${state.stage} hp=${state.health} weapon=${state.equipped} progress=${state.progress.toFixed(2)} goal=${state.goal ? state.goal.x.toFixed(2)+','+state.goal.y.toFixed(2) : 'null'} hero=${state.hero.x.toFixed(2)},${state.hero.y.toFixed(2)} height=${state.heroHeight.toFixed(2)}`);
     }
     if (!state.alive) throw new Error('Hero died during ordinary gameplay');
     if (state.stage !== stage) {

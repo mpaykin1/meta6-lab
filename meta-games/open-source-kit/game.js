@@ -77,6 +77,7 @@ let bytes='';const a=new Uint8Array(buf);for(let i=0;i<a.length;i++)bytes+=Strin
 const chime=new Howl({src:[wav(523.25)],format:['wav'],volume:.18});let soundUnlocked=false;
 function unlock(){if(soundUnlocked)return;soundUnlocked=true;if(window.Howler&&Howler.ctx&&Howler.ctx.state==='suspended')Howler.ctx.resume();}
 function gainBeacon(b){b.done=true;b.crystal.material.emissiveIntensity=.15;b.ring.material.opacity=.13;Howler.pos(player.position.x,0,player.position.z);const soundId=chime.play();chime.pos(b.x,0,b.z,soundId);selected=-1;routeFrom='';findRoute(player.position.x,player.position.z);}
+window.__OSS_KIT__=Object.freeze({snapshot:()=>({x:player.position.x,z:player.position.z,routePoints:pathPoints.length,beaconsCollected:beacons.filter(b=>b.done).length,spatialAudio:typeof chime.pos==='function',renderer:renderer.info.render.calls})});
 const tmp=new THREE.Vector3(),look=new THREE.Vector3();let previous=performance.now(),elapsed=0;
 function tick(now){requestAnimationFrame(tick);const dt=Math.min((now-previous)/1000,.04);previous=now;elapsed+=dt;sky.material.uniforms.uTime.value=elapsed;water.material.color.setHSL(.56,.46+.02*Math.sin(elapsed*.3),.11);
 let dx=(keys.has('d')||keys.has('arrowright')?1:0)-(keys.has('a')||keys.has('arrowleft')?1:0)+input.x;

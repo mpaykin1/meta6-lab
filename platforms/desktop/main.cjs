@@ -52,7 +52,10 @@ app.whenReady().then(async () => {
       callback({ cancel: true });
     }
   });
-  session.defaultSession.setPermissionRequestHandler((_wc, _permission, callback) => callback(false));
+  session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
+    const isLocalGame = webContents.getURL().startsWith(ORIGIN + '/');
+    callback(isLocalGame && (permission === 'fullscreen' || permission === 'pointerLock'));
+  });
 
   const window = new BrowserWindow({
     width: 1280,

@@ -8,10 +8,10 @@
 ### lab/twilight-island-bot — Остров сумерек: честное прохождение острова
 - Что даёт игроку: адаптивная графика на слабых устройствах; бот проверяет реальный маршрут, лечение и возрождение.
 - Поиграть: https://mpaykin1.github.io/meta6-lab/preview/twilight-island-bot/games/twilight-island/
-- Ветка / SHA кода: lab/twilight-island-bot / 776cc4884ea73938aa409904535f6061e3194171
-- Файлы: 15 исходных файлов игры из PR #303 (SHA 5f0882228c16cc04897b9e18b3ea254e38836be2), добавлен adaptive-quality.js (27 строк); изменены index.html (+4), bot-adapter.js (+12), bot-strategy.mjs (+53)
+- Ветка / SHA кода: lab/twilight-island-bot / c6fae56fe49095d7bb1ad4cab5c5903b843ba0b1
+- Файлы (строк): index.html 4947, bot-adapter.js 228, bot-strategy.mjs 215, bot.json 14, adaptive-quality.js 27, audio.js 304, building-assets.js 75, combat-relations.js 152, editor.js 511, inventory.js 36, meta-runtime.css 15, meta-runtime.js 81, mobile-controls.css 51, mobile-controls.js 69, npc-catalog.js 68, story-system.js 84
 - Ассеты: перенесены исходные 15 файлов; новых графических ассетов 0
-- Бот: проверка не завершена; полный остров 1/1 на трёх запусках пока НЕ подтверждён
+- Бот: https://github.com/mpaykin1/meta6-lab/actions/runs/42237557144 (выполняется); 1/1 mobile, desktop и повтор пока НЕ подтверждены
 - FPS: исходный прогон 6.8; новый FPS не измерен, fpsBaseline исходного bot.json = 3.8 (подлежит обновлению по измерению)
 - Запрещённые файлы: https://github.com/mpaykin1/meta6-lab/compare/main...lab/twilight-island-bot
 - Статус: В РАБОТЕ

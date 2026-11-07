@@ -19,13 +19,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'main' }}
           persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Validate repair bot syntax
         run: node --check scripts/repair-bot/repair-json.mjs
+      - name: Check JavaScript syntax
+        run: node scripts/repair-bot/check-js.mjs
       - name: Exercise repair bot on controlled fixture
         run: |
           mkdir -p .repair-fixture

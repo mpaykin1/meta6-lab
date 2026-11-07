@@ -3,6 +3,7 @@
 @media(pointer:coarse){#jump{display:grid;place-items:center}}@media(prefers-reduced-motion:reduce){#veil{transition:none}}
 </style></head><body><canvas id="screen" aria-label="3D game world"></canvas><div id="glass"></div><div id="grain"></div><div id="veil"></div><div id="progress" aria-label="Collected shards"></div><button id="menuButton" aria-label="Open game menu">☰</button><section id="menu"><h1>VEIL TERRACES</h1><p>Collect the six luminous memories scattered across the shifting terraces. Follow the light through the storm. Missing a platform sends you back to the last memory.</p><p><strong>Desktop:</strong> WASD / arrows move, Space jumps, right mouse drag orbits, P opens the menu.</p><p><strong>Mobile:</strong> left thumb moves; right finger orbits; glowing icon jumps.</p><p id="stats"></p><p id="story" hidden></p><button id="resume">RESUME</button> <button id="restart">RESTART</button></section><div id="hint" aria-hidden="true"></div><div id="stick"><div id="nub"></div></div><button id="jump" aria-label="Jump"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="none" stroke="#b4ffdc" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter" d="M7 23 L16 9 L25 23 M10 23 H22 M16 9 V28"/></svg></button><div id="error"></div>
 <script src="../../shared/components/observer-story/story-system.js"></script>
+<script src="../../shared/components/observer-audio/audio.js"></script>
 <script>
 (()=>{'use strict';const $=id=>document.getElementById(id),canvas=$('screen'),gl=canvas.getContext('webgl2',{antialias:false,alpha:false,powerPreference:'high-performance'});if(!gl){$('error').style.display='block';$('error').textContent='WebGL2 is required to play.';return;}
 const META_RUN_SEED=Math.floor(Math.random()*1000000000)+1;const V3=Float32Array,TAU=Math.PI*2,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mix=(a,b,t)=>a+(b-a)*t,smooth=(a,b,x)=>{let t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)},hash=(x,z)=>{let t=Math.sin((x+META_RUN_SEED*.001)*127.1+(z+META_RUN_SEED*.0001)*311.7)*43758.5453;return t-Math.floor(t)};
@@ -102,12 +103,19 @@ const SOUND=(()=>{
   if(idx%4===0)note(m.root*.5,[0,5,7,3][Math.floor(idx/4)%4],3,.011,false,'sine');
   step=(step+1)%120;next=elapsed+.8;
  }
- function collect(n){
-  if(!ac||ac.state!=='running')return;
-  [0,7,12].forEach((v,i)=>note(170+n*13,v,1.2+i*.18,.045/(i+1)));
- }
- return Object.freeze({start,tick,collect});
+ return Object.freeze({start,tick});
 })();
+// Original Observer audio adds the reusable crystal chimes, while the game's ambient score remains unchanged.
+const SHARD_FX=window.ObserverKriegerAudio.create();
+let shardFxUnlocked=false;
+function startGameAudio(){
+ SOUND.start();
+ if(!shardFxUnlocked){
+  shardFxUnlocked=true;
+  SHARD_FX.setFxVolume(.28);
+  SHARD_FX.setFxEnabled(true).then(ok=>{if(!ok)shardFxUnlocked=false}).catch(()=>{shardFxUnlocked=false});
+ }
+}
 const STORY=[
  'I knew these paths before I learned to speak. My small hands followed the light.',
  'Someone counted the steps behind my bedroom door. Every time I turned, the counting stopped.',
@@ -143,9 +151,9 @@ function resize(){const cssW=canvas.clientWidth,cssH=canvas.clientHeight,scale=M
  $('story').textContent=found?storyJournal.readable:'';
  $('stats').textContent=`Memories: ${targets.filter(q=>q.done).length}/6 · Infinite terraces · Original WebGL2 · Best ${best}/6 · v${GAME_VERSION}`;}
 $('menuButton').addEventListener('click',()=>openMenu(!menu));$('resume').addEventListener('click',()=>openMenu(false));$('restart').addEventListener('click',()=>{reset();openMenu(false)});$('jump').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();jumpQueued=true});
-addEventListener('keydown',e=>{SOUND.start();document.body.classList.add('moved');const k=e.key.toLowerCase();if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k))e.preventDefault();keys.add(k);if(k===' '&&!e.repeat)jumpQueued=true;if(k==='p'&&!e.repeat)openMenu(!menu)});addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));addEventListener('blur',()=>keys.clear());
+addEventListener('keydown',e=>{startGameAudio();document.body.classList.add('moved');const k=e.key.toLowerCase();if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k))e.preventDefault();keys.add(k);if(k===' '&&!e.repeat)jumpQueued=true;if(k==='p'&&!e.repeat)openMenu(!menu)});addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));addEventListener('blur',()=>keys.clear());
 function aimJoystick(x,y){let dx=x-touch.ox,dy=y-touch.oy,d=Math.max(1,Math.hypot(dx,dy));touch.mx=clamp(dx/48,-1,1);touch.my=clamp(dy/48,-1,1);if(d>48){touch.mx=dx/d;touch.my=dy/d}nub.style.transform=`translate(${touch.mx*34}px,${touch.my*34}px) rotate(45deg)`}
-addEventListener('pointerdown',()=>SOUND.start(),{passive:true});canvas.addEventListener('pointerdown',e=>{document.body.classList.add('moved');if(e.pointerType==='mouse'){if(e.button===2){touch.orbit=e.pointerId;touch.ox=e.clientX;touch.oy=e.clientY;canvas.setPointerCapture(e.pointerId)}return}canvas.setPointerCapture(e.pointerId);if(e.clientX<innerWidth*.52&&touch.move===null){touch.move=e.pointerId;touch.ox=e.clientX;touch.oy=e.clientY;stick.style.display='block';stick.style.left=(e.clientX-50)+'px';stick.style.top=(e.clientY-50)+'px';aimJoystick(e.clientX,e.clientY)}else if(touch.orbit===null){touch.orbit=e.pointerId;touch.orbitX=e.clientX;touch.orbitY=e.clientY}});
+addEventListener('pointerdown',()=>startGameAudio(),{passive:true});canvas.addEventListener('pointerdown',e=>{document.body.classList.add('moved');if(e.pointerType==='mouse'){if(e.button===2){touch.orbit=e.pointerId;touch.ox=e.clientX;touch.oy=e.clientY;canvas.setPointerCapture(e.pointerId)}return}canvas.setPointerCapture(e.pointerId);if(e.clientX<innerWidth*.52&&touch.move===null){touch.move=e.pointerId;touch.ox=e.clientX;touch.oy=e.clientY;stick.style.display='block';stick.style.left=(e.clientX-50)+'px';stick.style.top=(e.clientY-50)+'px';aimJoystick(e.clientX,e.clientY)}else if(touch.orbit===null){touch.orbit=e.pointerId;touch.orbitX=e.clientX;touch.orbitY=e.clientY}});
 canvas.addEventListener('pointermove',e=>{if(e.pointerId===touch.move)aimJoystick(e.clientX,e.clientY);if(e.pointerId===touch.orbit){let x=touch.orbitX??touch.ox,y=touch.orbitY??touch.oy;yaw+=(e.clientX-x)*.005;pitch=clamp(pitch+(e.clientY-y)*.003,.12,.9);touch.orbitX=e.clientX;touch.orbitY=e.clientY}});
 function endTouch(e){if(e.pointerId===touch.move){touch.move=null;touch.mx=touch.my=0;stick.style.display='none';nub.style.transform='rotate(45deg)'}if(e.pointerId===touch.orbit){touch.orbit=null;touch.orbitX=touch.orbitY=null}}
 canvas.addEventListener('pointerup',endTouch);canvas.addEventListener('pointercancel',endTouch);canvas.addEventListener('contextmenu',e=>e.preventDefault());
@@ -154,7 +162,7 @@ const travel=Math.hypot(p.vx,p.vz)*dt,steps=Math.max(1,Math.ceil(travel/.12));fo
 const floor=surface(p.x,p.z);p.vy-=14*dt;p.y+=p.vy*dt;if(floor!==null&&p.vy<=0&&p.y<=floor+.35){p.y=floor+.35;p.vy=0;p.ground=true;lastSafe={x:p.x,z:p.z}}else p.ground=false;if(p.y<-15){p.x=lastSafe.x;p.z=lastSafe.z;p.y=(surface(p.x,p.z)??0)+2;p.vy=0;p.vx=p.vz=0;}
 for(const q of targets)if(t>=nextShardAt&&!q.done&&(q.id===0||targets[q.id-1].done)&&
  (q.id===0||Math.hypot(p.x-targets[q.id-1].x,p.z-targets[q.id-1].z)>2.1)&&
- Math.hypot(q.x-p.x,q.z-p.z)<1.35&&Math.abs(p.y-q.y)<2){q.done=true;storyJournal.emit('veil-memory',{title:`Memory ${q.id+1}`,text:STORY[q.id]});nextShardAt=t+0.5;const found=targets.filter(t=>t.done).length;if(found>best){best=found;try{localStorage.setItem(META_PROGRESS_KEY,String(best))}catch{}}shards.children[q.id].className='lit';lastSafe={x:p.x,z:p.z};SOUND.collect(found);
+ Math.hypot(q.x-p.x,q.z-p.z)<1.35&&Math.abs(p.y-q.y)<2){q.done=true;storyJournal.emit('veil-memory',{title:`Memory ${q.id+1}`,text:STORY[q.id]});nextShardAt=t+0.5;const found=targets.filter(t=>t.done).length;if(found>best){best=found;try{localStorage.setItem(META_PROGRESS_KEY,String(best))}catch{}}shards.children[q.id].className='lit';lastSafe={x:p.x,z:p.z};SHARD_FX.event('bell',{intensity:.3});
  if(q.id===0){const today=new Date().toISOString().slice(0,10);
   try{if(localStorage.getItem(META_DAILY_KEY)!==today){localStorage.setItem(META_DAILY_KEY,today);boostUntil=t+60}}catch{}
  }

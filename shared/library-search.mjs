@@ -50,7 +50,9 @@ function donors() {
   return candidates.filter(d=>fs.existsSync(path.join(ROOT,d.dir)));
 }
 
+let cachedScan;
 function scan() {
+  if(cachedScan)return cachedScan;
   const items=[];
   for (const donor of donors()) {
     const base=path.join(ROOT,donor.dir);
@@ -83,7 +85,8 @@ function scan() {
     };
     walk(base);
   }
-  return items.sort((a,b)=>a.path.localeCompare(b.path));
+  cachedScan=items.sort((a,b)=>a.path.localeCompare(b.path));
+  return cachedScan;
 }
 
 function allowedSource(file) {

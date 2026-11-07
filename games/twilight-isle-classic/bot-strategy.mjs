@@ -17,7 +17,12 @@ export async function playLevel(ctx, level) {
     const state = ctx.state();
     if (state.gameDone || state.levelDone || state.level > level) return;
     if (!state.alive) {
-      // Let the core observe death or the game's real revival; do not fake a reset.
+      // The game's real free revive appears after its death animation. Use
+      // its visible button just as a player would. If absent, the core must
+      // still observe death and fail after the strict 5-second threshold.
+      if (state.reviveButton) {
+        await ctx.tap(state.reviveButton.x, state.reviveButton.y);
+      }
       await ctx.wait(300);
       continue;
     }

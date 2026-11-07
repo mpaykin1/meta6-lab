@@ -16,7 +16,7 @@
         ...field.truins.slice(0, 8).map(v => ['r', v.x, v.z]),
         ...(field.CR?.chasms || []).slice(0, 8).map(v => ['h', v.zNear, v.zFar])
       ];
-      layoutHash = JSON.stringify([game.li, game.cycle, game.variant, places]);
+      layoutHash = JSON.stringify([game.li, places]); // Only true layout; no cycle/cosmetic entropy.
       layoutKey = key;
     }
     return layoutHash;
@@ -46,7 +46,7 @@
         hero:{x:p.x,y:p.z},goal,
         enemies:debug.BOT.get().shades.reduce((n,e)=>n+(e.visible?1:0),0),
         weapons:playing?1:0,
-        layoutHash:active?fingerprint(debug):'',
+        layoutHash:playing?fingerprint(debug):'',
         menuOpen:!!g.paused || !document.getElementById('menu').classList.contains('hidden'),
         progress, hp:g.cfg?.mode==='lantern'?g.energy:undefined,
         cameraYaw:debug.rig.yaw

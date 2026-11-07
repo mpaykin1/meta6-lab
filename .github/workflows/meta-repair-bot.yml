@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Validate repair bot syntax
+        run: node --check scripts/repair-bot/repair-json.mjs
       - name: Repair deterministic JSON errors
         id: repair
         run: |
@@ -35,11 +37,11 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          branch="lab/repair-bot-json-auto"
+          branch="lab/repair-bot-json-auto-${{ github.run_id }}"
           git checkout -B "$branch"
           git add -- '*.json'
           git commit -m "fix: repair invalid JSON syntax"
-          git push --force-with-lease origin "$branch"
+          git push origin "$branch"
           if ! gh pr list --head "$branch" --base main --state open --json number --jq '.[0].number' | grep -q '[0-9]'; then
             gh pr create --base main --head "$branch" --title "fix: automatic JSON repair" --body "Deterministic UTF-8 BOM and trailing-comma repairs only. Review and CI required before merge."
           fi

@@ -12,6 +12,8 @@ on:
       - 'scripts/lab/readiness-audit.mjs'
       - '.github/workflows/lab-readiness.yml'
   workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
 permissions:
   contents: read
 jobs:

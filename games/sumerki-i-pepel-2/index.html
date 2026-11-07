@@ -11157,6 +11157,57 @@ window.__isle = {
   TREE,
 };
 
+
+/* META BOT v1 — strictly observational adapter for the META GAMES copy.
+   Never alters game state, input, completion, hit points, or generated layout.
+   Coordinates expose x/y for the bot core and x/z for 3D strategies. */
+const metaBotLayout = { world: null, hash: '' };
+function metaBotLayoutHash() {
+  if (!world) return 'world-not-generated';
+  if (metaBotLayout.world !== world) {
+    let h = 2166136261;
+    const mix = n => { h = Math.imul(h ^ (Math.round(n * 100) | 0), 16777619); };
+    // A real stable fingerprint of the current island's spawn, collectibles
+    // and beacon. Unlike a synthetic random hash, repeats remain detectable.
+    for (const p of [world.spawn, world.beacon, world.ring, ...(world.coins || [])]) {
+      if (p) { mix(p.x); mix(p.y || 0); mix(p.z); }
+    }
+    metaBotLayout.hash = String(G.seed) + ':' + (h >>> 0).toString(16);
+    metaBotLayout.world = world;
+  }
+  return metaBotLayout.hash;
+}
+const metaBotAdapter = Object.freeze({
+  version: 1,
+  info() { return { name: 'Сумерки и пепел II', levels: 1 }; },
+  state() {
+    const objective = world ? nearestGoal() : null;
+    const n = foes.reduce((count, foe) => count + (foeAlive(foe) ? 1 : 0), 0);
+    const endVisible = !document.getElementById('scrEnd').hidden;
+    const pauseVisible = !document.getElementById('scrPause').hidden;
+    const complete = G.state === 'victory';
+    return {
+      started: G.state !== 'loading' && G.state !== 'title',
+      level: 0,
+      levelDone: complete,
+      gameDone: complete,
+      alive: G.state !== 'dead' && player.hp > 0,
+      hero: { x: player.pos.x, y: player.pos.z, z: player.pos.z },
+      goal: objective ? { x: objective.x, y: objective.z, z: objective.z } : null,
+      enemies: n,
+      weapons: combat.arsenal.length,
+      layoutHash: metaBotLayoutHash(),
+      menuOpen: pauseVisible || endVisible,
+      progress: G.collected,
+      hp: player.maxHp > 0 ? player.hp / player.maxHp : 0,
+      cameraYaw: rig.yaw
+    };
+  }
+});
+Object.defineProperty(window, '__META_BOT__', {
+  value: metaBotAdapter, writable: false, configurable: false
+});
+
 </script>
 
 </body></html>

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "game_id": "generated-confluence-studio",
+  "seed": "11",
+  "source_commit": "a4d235d51c9b2b9307351387e1e1b78cf96d0e02",
+  "entry": "index.html",
+  "status": "packaged_unverified",
+  "validation": {
+    "browser": "not_run",
+    "rights": "not_verified",
+    "publication": "not_published"
+  },
+  "pipeline_sha256": "cf49db0f112d5a25177224ed6871b24a6f627f31636e3b7b4767a9425709e959",
+  "stages": [
+    {
+      "engine": "calc",
+      "status": "skipped_optional"
+    },
+    {
+      "engine": "dramaturgy",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "story",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "mechanics",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "physics",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "visual",
+      "status": "produced_unverified"
+    },
+    {
+      "engine": "onboarding",
+      "status": "produced_unverified"
+    }
+  ],
+  "files": [
+    {
+      "path": "data/pipeline.json",
+      "bytes": 18056,
+      "sha256": "4e274145063b42a4d909b78a750538eb69b08cb4c0d86ceacebd0c67f5893c54"
+    },
+    {
+      "path": "data/provenance.json",
+      "bytes": 963,
+      "sha256": "3d6d2f3a8537663278bc7641ed448146dc586a42f1a55fc3b2d3e91d9ee74e86"
+    },
+    {
+      "path": "game.js",
+      "bytes": 33166,
+      "sha256": "95bbeed5c64b65b04884f54f2e163f0918bed4457479e77da07baa2c2020d411"
+    },
+    {
+      "path": "index.html",
+      "bytes": 17548,
+      "sha256": "b00a543b3716a36c75ca3dcd9b4b42960e5a7225cefed9b2de4b4a8714814bc7"
+    },
+    {
+      "path": "shaders/atmosphere-fragment.glsl",
+      "bytes": 836,
+      "sha256": "27b752f747ebace3adc8b985afda80db70e196e9745a274f9aa52c52a230d2a4"
+    },
+    {
+      "path": "shaders/atmosphere-vertex.glsl",
+      "bytes": 244,
+      "sha256": "43586b30184e4229874632d0edd1a45db2ae43139520a8944f02a2763f21e7f8"
+    }
+  ],
+  "manifest_sha256": "ecd952002aa02fc346e9fc55b04b1593eb7e80ed5020fd3e7e57f3d4b0f60f14",
+  "source_policy": "original_generated_geometry_only;unverified_external_assets_excluded"
+}

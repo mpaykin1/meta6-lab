@@ -5,7 +5,8 @@
 function create({targetMs=16.67,minScale=.80,maxScale=1}={}){
  let moving=targetMs,scale=maxScale,counter=0,slow=0,fast=0;
  function sample(ms){
-  if(!Number.isFinite(ms)||ms<=0||ms>250)return scale;
+  if(!Number.isFinite(ms)||ms<=0)return scale;
+  ms=Math.min(ms,1000);
   moving=moving*.95+ms*.05;
   if(++counter%30!==0)return scale;
   if(moving>targetMs*1.35){slow++;fast=0}

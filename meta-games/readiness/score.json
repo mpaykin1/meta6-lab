@@ -1,0 +1,25 @@
+{
+  "as_of": "2026-11-07",
+  "method": "30 independently checked binary acceptance gates; unmerged and unverified work scores zero",
+  "areas": [
+    {
+      "name": "MCP",
+      "percent": 20,
+      "passed": 2,
+      "total": 10
+    },
+    {
+      "name": "Библиотека решений",
+      "percent": 40,
+      "passed": 4,
+      "total": 10
+    },
+    {
+      "name": "Бот-проходчик и автоисправления",
+      "percent": 10,
+      "passed": 1,
+      "total": 10
+    }
+  ],
+  "overall_percent": 23
+}

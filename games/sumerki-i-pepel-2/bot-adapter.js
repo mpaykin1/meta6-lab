@@ -38,11 +38,27 @@
       totalLevels: 1
     };
   };
-  const bot = Object.freeze({
-    info: () => Object.freeze({ name: 'sumerki-i-pepel-2', levels: 1 }),
-    state: () => read() || Object.freeze({ started: false, level: 1, levelDone: false, gameDone: false, alive: false })
-  });
+  // Contract v1 reads a frozen snapshot from a non-configurable getter.
+  // Do not expose a callable controller or mutable references to gameplay.
   Object.defineProperty(window, '__META_BOT__', {
-    value: bot, writable: false, configurable: false, enumerable: true
+    configurable: false, enumerable: true,
+    get() {
+      const s = read();
+      if (!s) return Object.freeze({
+        level: 1, totalLevels: 1, player: Object.freeze({x:0,y:0,z:0}),
+        goal: null, alive: false, completed: false,
+        buttons: Object.freeze(['w','a','s','d','Space']),
+        combat: true, enemies: 0, weapons: 0, layout: 'loading'
+      });
+      return Object.freeze({
+        level: s.level, totalLevels: s.totalLevels,
+        player: Object.freeze({...s.player}),
+        goal: s.goal ? Object.freeze({...s.goal}) : null,
+        alive: s.alive, completed: s.completed,
+        buttons: Object.freeze(['w','a','s','d','Space','touch:joystick']),
+        combat: true, enemies: s.enemies.length, weapons: s.weapons,
+        layout: s.layoutHash
+      });
+    }
   });
 })();

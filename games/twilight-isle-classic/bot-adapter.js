@@ -1,6 +1,31 @@
 // META GAMES only. Read the accepted island's real runtime; never write to it.
 (() => {
   'use strict';
+  // Hash actual terrain, placements and landmarks once per generated world.
+  // Based on the independent, read-only layout sampling in PR #99.
+  let layoutWorld = null;
+  let layoutFingerprint = '';
+  function actualLayout(world, biome) {
+    if (!world) return 'loading';
+    if (world !== layoutWorld) {
+      layoutWorld = world;
+      let h = 2166136261;
+      for (const field of [world.stand, world.kind]) {
+        if (!field || !Number.isFinite(field.length)) continue;
+        const stride = Math.max(1, Math.floor(field.length / 128));
+        for (let i = 0; i < field.length; i += stride) {
+          h = Math.imul(h ^ (field[i] | 0), 16777619);
+        }
+      }
+      for (const p of [world.spawn, world.beacon, world.ring]) {
+        if (!p) continue;
+        h = Math.imul(h ^ (Math.floor(p.x * 10) | 0), 16777619);
+        h = Math.imul(h ^ (Math.floor(p.z * 10) | 0), 16777619);
+      }
+      layoutFingerprint = (h >>> 0).toString(16);
+    }
+    return String(biome ?? '') + ':' + layoutFingerprint;
+  }
   const bot = Object.freeze({
     version: 1,
     info() {
@@ -86,7 +111,7 @@
         goal,
         enemies: livingEnemies,
         weapons: arsenal.length,
-        layoutHash: game ? String(game.biome) + ':' + String(game.seed) : 'loading',
+        layoutHash: actualLayout(isle?.world, game?.biome),
         menuOpen: state === 'title' || state === 'paused' || state === 'dead' || won,
         progress: won ? 1 : Math.min(0.99, 0.8 * coinFraction + 0.19 * bossFraction),
         hp: player?.maxHp > 0 ? player.hp / player.maxHp : 1,

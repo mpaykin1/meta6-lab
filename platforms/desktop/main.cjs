@@ -4,6 +4,7 @@ const { app, BrowserWindow, protocol, net, shell, session } = require('electron'
 const path = require('node:path');
 const fs = require('node:fs');
 const { pathToFileURL } = require('node:url');
+const { allowLocalGamePermission } = require('./permissions.cjs');
 
 const ORIGIN = 'app://meta-games';
 protocol.registerSchemesAsPrivileged([
@@ -52,16 +53,9 @@ app.whenReady().then(async () => {
       callback({ cancel: true });
     }
   });
-  session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
-    // Games need fullscreen and mouse capture; do not grant camera, mic or storage permissions.
-    // Never grant a permission to remote pages, popups or non-game content.
-    let local = false;
-    try {
-      const url = new URL(webContents.getURL());
-      local = url.protocol === 'app:' && url.host === 'meta-games' &&
-        url.pathname !== '/' && url.pathname.endsWith('.html');
-    } catch { /* not a local game page */ }
-    callback(local && (permission === 'fullscreen' || permission === 'pointerLock'));
+  session.defaultSession.setPermissionRequestHandler((webContents, permission, callback, details) => {
+    // Directory URLs resolve to index.html in our app:// protocol, and subframes must be local too.
+    callback(allowLocalGamePermission(webContents.getURL(),details?.requestingUrl,permission));
   });
 
   const window = new BrowserWindow({

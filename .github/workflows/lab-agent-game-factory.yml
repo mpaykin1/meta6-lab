@@ -54,6 +54,8 @@ jobs:
         env:
           GAME_SLUG: ${{ inputs.slug || 'confluence-studio' }}
         run: node scripts/lab/verify-agent-game.mjs
+      - name: Verify MCP protocol and anonymous-write isolation
+        run: node scripts/lab/verify-agent-factory-mcp.mjs
       - name: Save only bot-verified game into sandbox branch, never directly into main
         env:
           GH_TOKEN: ${{ github.token }}

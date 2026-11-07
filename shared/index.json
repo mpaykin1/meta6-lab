@@ -2,6 +2,64 @@
   "schema_version": 1,
   "components": [
     {
+      "id": "observer-buildings",
+      "title": "Архитектура 36 типов зданий",
+      "kind": "buildings",
+      "entry": "building-assets.js",
+      "exports": [
+        "ObserverBuildingAssets"
+      ],
+      "needs": [
+        "draw.box",
+        "draw.beam",
+        "draw.roof",
+        "draw.post",
+        "draw.fence",
+        "draw.sign"
+      ],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "twilight-island",
+        "path": "observer-world-en-v7/building-assets.js",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "1eed988695ab64b351c7f5d5d09024756930e280"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "twilight-island"
+      ],
+      "dependency_policy": "host-browser-APIs-only"
+    },
+    {
+      "id": "observer-combat",
+      "title": "NPC: бой, отношения и союзники",
+      "kind": "combat",
+      "entry": "combat-relations.js",
+      "exports": [
+        "ObserverCombatRelations"
+      ],
+      "needs": [
+        "ObserverNpcCatalog",
+        "native",
+        "events",
+        "state"
+      ],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "twilight-island",
+        "path": "observer-world-en-v7/combat-relations.js",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "50d9dc30c8fec014ab8787f7bb45377867b08c83"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "twilight-island"
+      ],
+      "dependency_policy": "host-browser-APIs-only"
+    },
+    {
       "id": "observer-mobile-input",
       "title": "Мобильное управление и иконки",
       "kind": "controls",
@@ -22,6 +80,33 @@
         "path": "observer-world-en-v7/mobile-controls.js",
         "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
         "git_blob_sha": "cd2effafb70e7426e07fdb1b51d28cb9d3cf9754"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "twilight-island"
+      ],
+      "dependency_policy": "host-browser-APIs-only"
+    },
+    {
+      "id": "observer-npc",
+      "title": "NPC: роли, движение и анимация",
+      "kind": "characters",
+      "entry": "npc-catalog.js",
+      "exports": [
+        "ObserverNpcCatalog"
+      ],
+      "needs": [
+        "native.THREE",
+        "native.heroTex",
+        "native.camera"
+      ],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "twilight-island",
+        "path": "observer-world-en-v7/npc-catalog.js",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "a35521324649b736881427f7521f511edef40637"
       },
       "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
       "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",

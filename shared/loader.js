@@ -11,6 +11,7 @@
     'observer-buildings':Object.freeze({file:'components/observer-buildings/building-assets.js',global:'ObserverBuildingAssets'}),
     'observer-npc':Object.freeze({file:'components/observer-npc/npc-catalog.js',global:'ObserverNpcCatalog'}),
     'observer-combat':Object.freeze({file:'components/observer-combat/combat-relations.js',global:'ObserverCombatRelations',depends:['observer-npc']}),
+    'three-worlds-island-weather':Object.freeze({file:'components/three-worlds-island-weather/island-weather.js',module:true,exports:['createIslandWeatherCatalog']}),
     'three-worlds-rift-guard':Object.freeze({file:'components/three-worlds-rift-guard/rift-input-guard.js',module:true,exports:['createRiftInputGuard']}),
     'three-worlds-combat-facing':Object.freeze({file:'components/three-worlds-combat-facing/combat-facing.js',module:true,exports:['chooseCombatTarget','turnWeaponToward','turnHeroToward','angleToTarget']})
   });

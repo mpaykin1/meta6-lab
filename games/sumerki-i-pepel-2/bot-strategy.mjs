@@ -38,7 +38,15 @@ export async function playLevel(ctx, level) {
       await ctx.key('KeyJ', 140);
       if (step % 5 === 0) await ctx.jump();
     } else if (point(s.goal) && typeof ctx.walkToGoal === 'function') {
-      await ctx.walkToGoal(450);
+      try {
+        await ctx.walkToGoal(450);
+      } catch (err) {
+        // A collectible disappearing mid-navigation is normal progress.
+        // Retry using the NEXT real goal, not a fabricated completion.
+        const next = ctx.state();
+        if (point(next?.goal) && next.level === s.level) throw err;
+        await ctx.wait(80);
+      }
     } else {
       // Input-only exploration when no objective is visible.
       const keys = ['KeyW', 'KeyD', 'KeyS', 'KeyA'];

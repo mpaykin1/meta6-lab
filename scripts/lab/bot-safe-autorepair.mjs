@@ -47,7 +47,7 @@ const original=fs.readFileSync(game.file,'utf8');
 const first=bot(game);
 if(first.ok){console.log('BOT_ALREADY_PASS '+game.dir);process.exit(0)}
 // Never guess how to correct gameplay, missing assets, cheats, invisible goals or FPS.
-if(!/FIX[:：]|(?:screen|canvas|экран).{0,120}(?:scroll|сдвинул|прокрут)/i.test(first.output)){
+if(!/(?:screen|canvas|viewport|экран).{0,120}(?:scroll|overflow|сдвинул|прокрут)|(?:scroll|overflow|сдвинул|прокрут).{0,120}(?:screen|canvas|viewport|экран)/i.test(first.output)){
   console.error('BOT_FAIL_NO_SAFE_FIX '+game.dir);
   process.exit(1);
 }

@@ -36,19 +36,35 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Install Chromium for independent gameplay verification
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
       - name: Generate original game candidate with validated existing engine
         env:
           GAME_SLUG: ${{ inputs.slug || 'confluence-studio' }}
           GAME_REQUEST_JSON: ${{ inputs.game_card_json || '{}' }}
-        run: node scripts/lab/agent-game-candidate.cjs
-      - name: Save game into sandbox branch, never directly into main
+        run: |
+          if [ ! -f "meta-games-worlds/generated-${GAME_SLUG}/index.html" ]; then
+            node scripts/lab/agent-game-candidate.cjs
+          else
+            echo "Existing candidate: independent replay required"
+          fi
+      - name: Verify desktop six-scene completion and real mobile touch before promotion
+        env:
+          GAME_SLUG: ${{ inputs.slug || 'confluence-studio' }}
+        run: node scripts/lab/verify-agent-game.mjs
+      - name: Save only bot-verified game into sandbox branch, never directly into main
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_ID: ${{ github.run_id }}
         shell: bash
         run: |
           set -euo pipefail
-          test -n "$(git status --porcelain -- meta-games-worlds/generated-*)"
+          if [ -z "$(git status --porcelain -- meta-games-worlds/generated-*)" ]; then
+            echo "Existing game passed independent bot; no duplicate commit"
+            exit 0
+          fi
           git config user.name 'META GAMES factory'
           git config user.email 'meta-games-factory@users.noreply.github.com'
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then

@@ -34,7 +34,7 @@ jobs:
           SELECTED_GAME: ${{ inputs.game }}
         run: node scripts/lab/bot-safe-autorepair.mjs "${SELECTED_GAME}"
       - name: Open sandbox-only candidate PR after genuine bot success
-        if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
+        if: github.ref == 'refs/heads/lab/bot-safe-autorepair' && (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push')
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_ID: ${{ github.run_id }}
@@ -50,6 +50,17 @@ jobs:
           git config user.email 'meta6-lab-bot@users.noreply.github.com'
           git checkout -b "$branch"
           git add games/
+          git diff --cached --name-only | grep -Eq '^games/[^/]+/index\\.html -m "fix(game): bot-verified viewport behavior"
+          git push origin "$branch"
+          gh pr create --base lab/bot-safe-autorepair --head "$branch" --title "Bot-verified sandbox game repair" --body "Safe fix for viewport only. Same protected META BOT ran before and after; change kept only after full real-input PASS. Main meta6 untouched. Requires owner review before production promotion."
+
+          if git diff --cached --name-only | grep -Ev '^games/[^/]+/index\\.html -m "fix(game): bot-verified viewport behavior"
+          git push origin "$branch"
+          gh pr create --base lab/bot-safe-autorepair --head "$branch" --title "Bot-verified sandbox game repair" --body "Safe fix for viewport only. Same protected META BOT ran before and after; change kept only after full real-input PASS. Main meta6 untouched. Requires owner review before production promotion."
+; then
+            echo 'Unsafe files modified; refusing repair commit'
+            exit 1
+          fi
           git commit -m "fix(game): bot-verified viewport behavior"
           git push origin "$branch"
-          gh pr create --base main --head "$branch" --title "Bot-verified sandbox game repair" --body "Safe fix for viewport only. Same protected META BOT ran before and after; change kept only after full real-input PASS. Main meta6 untouched. Requires owner review before production promotion."
+          gh pr create --base lab/bot-safe-autorepair --head "$branch" --title "Bot-verified sandbox game repair" --body "Safe fix for viewport only. Same protected META BOT ran before and after; change kept only after full real-input PASS. Main meta6 untouched. Requires owner review before production promotion."

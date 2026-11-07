@@ -36,6 +36,11 @@ export async function playLevel(ctx, level) {
       // Classic uses J/K for attack. A hit must register in game state.
       await ctx.key('KeyJ', 190);
     } else if (state.goal) {
+      // A coin can be above a one-block voxel ledge: horizontal arrival
+      // alone does not collect it. Jump with the real input when nearby.
+      const distance = Math.hypot(state.goal.x - state.hero.x,
+                                  state.goal.y - state.hero.y);
+      if (distance < 1.25) await ctx.jump();
       // The existing META BOT calibrates joystick/camera direction.
       await ctx.walkToGoal(450);
       if (step % 8 === 7) await ctx.jump();

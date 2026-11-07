@@ -11,12 +11,26 @@
 ### lab/render-visibility-optimization — ускорение рендеринга
 - Польза: Veil Terraces не отправляет на GPU невидимые чанки, руины и кристаллы; общий модуль готов для других игр.
 - Поиграть после слияния: https://mpaykin1.github.io/meta6-lab/games/veil-terraces/
-- Ветка: `lab/render-visibility-optimization`.
-- Код: `shared/render/visibility.js`, `shared/render/voxel.js`, `games/veil-terraces/index.html`.
-- Технологии: frustum culling в игре; greedy meshing, packed vertices, light lookup — общий код, пока не подключён к воксельным играм.
-- Проверка: ожидается GitHub Actions; статус до зелёного прогона — В РАБОТЕ.
+- Ветка: `lab/render-visibility-optimization`; PR: https://github.com/mpaykin1/meta6-lab/pull/54.
+- Код: `shared/render/visibility.js`, `shared/render/voxel.js`, `games/veil-terraces/index.html`, `scripts/lab/render-bench.mjs`.
+- Технологии: frustum culling в игре; WebGL2 instancing руин, кэш чанков, адаптивное разрешение; voxel greedy/packed/light lookup пока отдельно.
+- Проверка: Actions и реальный WebGL2 benchmark на PR #54; до зелёных прогонов — В РАБОТЕ.
 - Михаил: —; Claude: —
 
+
+### lab/play-connect-earn-home — главная Play / Connect / Earn
+- Польза: три работающие навигационные кнопки; Play открывает 10 игровых ссылок, Connect показывает MCP endpoint и копирование URL, Earn честно заблокирован до готовности и 100 DAU.
+- Ветка: `lab/play-connect-earn-home`.
+- Играть: https://mpaykin1.github.io/meta6-lab/meta-games/
+- Статус: В РАБОТЕ — MCP запись/создание игр, аккаунты, права, аналитика топа, уведомления и боты не реализованы.
+- Михаил: —; Claude: —
+
+### lab/earn-after-100-dau — запрет рекламы до готовности и 100 DAU
+- Польза: сначала готовая платформа и все улучшенные игры, затем реальные 100 активных пользователей в сутки, и только потом рекламный этап.
+- Правило: [PLAY_CONNECT_EARN.md](rules/09-platforma/PLAY_CONNECT_EARN.md) §5.0.
+- Ветка: `lab/earn-after-100-dau`.
+- Статус: В РАБОТЕ — релиз, все улучшенные игры и измеренный порог 100 DAU ещё не подтверждены.
+- Михаил: —; Claude: —
 
 ### lab/play-connect-earn-rules — Play / Connect / Earn
 - Польза: три раздела портала; поиск/игры, MCP-создание, боты, профили, популярность, уведомления, заработок и одночасовое продвижение.
@@ -53,7 +67,7 @@
 - Польза: одобрить игровые улучшения только после полного честного прохождения.
 - Ветка / SHA: meta6 ai/meta-rules-twilight-isles-20261106 / 72b92d5c508571cc4fd69d4aa60c2692940cee16 (только чтение).
 - PR: https://github.com/mpaykin1/meta6/pull/290
-- META BOT: https://github.com/mpaykin1/meta6/actions/runs/42186206581 — FAIL, уровень 1 не завершён за 570 с; завершился playLevel без победы.
+- META BOT: https://github.com/mpaykin1/meta6/actions/runs/42186206581 — FAIL, уровень 1 не завершён за 570 с; ложный возврат playLevel при смерти исправлен в lab PR #2 SHA 2a96b686f28959da60c7ba64ccbdff248ac8d405, полная победа ещё не подтверждена.
 - Статус: В РАБОТЕ — не сливать до зелёного META BOT; прямые исправления/комментарии в meta6 запрещены.
 - Михаил: —
 - Claude: —

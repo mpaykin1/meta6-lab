@@ -325,6 +325,7 @@ kbd { font-family: var(--font-ui); font-size: 13px; color: var(--paper); padding
 <canvas id="c" tabindex="0" aria-label="Остров сумерек — игровое поле"></canvas>
 
 <div class="hud" id="hud" hidden>
+  <button id="metaMenuButton" type="button" aria-label="Меню" title="Меню" style="position:fixed;right:max(12px, env(safe-area-inset-right));top:max(12px, env(safe-area-inset-top));width:42px;height:42px;z-index:90;border:1px solid rgba(200,225,235,.35);border-radius:11px;color:#dbe5ef;background:rgba(10,18,29,.7);font-size:24px;line-height:1;touch-action:manipulation;cursor:pointer">☰</button>
   <div class="hud-row">
     <div class="hearts" id="hearts" aria-label="Здоровье">
       <i class="heart" data-v="2"></i><i class="heart" data-v="2"></i><i class="heart" data-v="2"></i>
@@ -3608,7 +3609,10 @@ function applyPalette(tod, dawn) {
 /* -----------------------------------------------------------------------------
    10 · State
 ----------------------------------------------------------------------------- */
-const DEFAULT_SEED = 1337;
+// A fresh procedural island every run; an explicit ?seed=N reproduces the same world.
+const explicitSeed = Number(new URLSearchParams(location.search).get('seed'));
+const DEFAULT_SEED = Number.isSafeInteger(explicitSeed) && explicitSeed > 0
+  ? explicitSeed : (crypto.getRandomValues(new Uint32Array(1))[0] || 1337);
 const DEFAULT_BIOME = 'dusk';
 const G = {
   state: 'loading', biome: DEFAULT_BIOME, time: 0, play: 0, collected: 0, total: 20, hits: 0, seed: DEFAULT_SEED, sunAz: 0,
@@ -11158,6 +11162,11 @@ window.__isle = {
 };
 
 
+// Functional menu action, using the game's existing real pause and resume state.
+document.getElementById('metaMenuButton').addEventListener('click', () => {
+  if (G.state === 'play') setPaused(true);
+  else if (G.state === 'paused') setPaused(false);
+});
 /* META BOT v1 — strictly observational adapter for the META GAMES copy.
    Never alters game state, input, completion, hit points, or generated layout.
    Coordinates expose x/y for the bot core and x/z for 3D strategies. */

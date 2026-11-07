@@ -363,6 +363,59 @@ kbd { font-family: var(--font-ui); font-size: 13px; color: var(--paper); padding
 }
 </style>
 
+<style>
+/* Additive META GAMES presentation: keep the Three.js scene untouched. */
+#coinN, #coinT, #timer, #wName, #wStat, #wAmmo,
+.hotbar .slot span, #boss > span, #dmgLayer .dmg,
+#npcSay, #toast, #wNew { display:none!important; }
+#coins { position:relative; min-width:45px; height:42px; overflow:visible; }
+#coins::after { content:""; position:absolute; height:3px; bottom:0; left:3px;
+  width:var(--meta-coin-fill,0%); max-width:100%; background:#ffd246;
+  box-shadow:0 0 8px #ffd246; transition:width 250ms ease; }
+#minimap { top:calc(var(--hud-pad-t) + 58px); right:var(--hud-pad-r); }
+#metaMenuToggle {
+  position:fixed; z-index:160; top:var(--hud-pad-t); right:var(--hud-pad-r);
+  width:43px; height:42px; padding:0; border:1px solid #eabf69;
+  border-radius:6px; background:#21192cdd; color:#f8eec8;
+  font:30px/1 var(--font-ui); cursor:pointer; display:grid; place-items:center;
+  box-shadow:0 4px 18px #030207a6;
+}
+#metaMenuToggle:focus-visible,#metaClose:focus-visible,.metaAction:focus-visible { outline:3px solid #ffd246; }
+#metaMenu {
+  position:fixed; z-index:170; right:var(--hud-pad-r); top:calc(var(--hud-pad-t) + 50px);
+  width:min(430px,calc(100vw - 24px)); max-height:calc(100dvh - 90px);
+  overflow:auto; box-sizing:border-box; border:2px solid #ad864e;
+  border-radius:8px; padding:22px 19px 24px;
+  background:linear-gradient(160deg,#252036f5,#100e20fb 80%);
+  box-shadow:0 15px 70px #000c; color:#f8eec8;
+  font:16px/1.45 var(--font-ui); overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+#metaMenu h2 { margin:0 42px 24px 0; font-size:23px; letter-spacing:.06em; color:#ffd246; }
+#metaMenu h3 { margin:22px 0 8px; font-size:17px; letter-spacing:.09em; color:#eebf79; }
+#metaMenu p { margin:7px 0; line-height:1.48; }
+#metaMenu .metaEntry { padding:8px 10px; border-left:2px solid #9f7d4c; background:#ffffff0c; }
+#metaClose { position:absolute; top:8px; right:10px; background:transparent; border:0;
+  color:#fff0b0; font:32px/1 var(--font-ui); cursor:pointer; width:40px; height:40px; }
+#metaMenu .metaAction { margin:12px 0 0; min-height:38px; padding:7px 12px; color:#fff4c0;
+  border:1px solid #bc9258; background:#3c3147; border-radius:4px;
+  font:inherit; cursor:pointer; }
+#metaMemory::after { content:attr(data-message); }
+#metaMemory { position:fixed; z-index:125; left:50%; bottom:calc(var(--hud-pad-b) + 112px);
+  transform:translateX(-50%); box-sizing:border-box; width:min(86vw,540px);
+  padding:10px 17px; background:#1a1629dc; border:1px solid #b68f63;
+  box-shadow:0 5px 30px #05030bbd; color:#f8eec8; text-align:center;
+  font:17px/1.28 var(--font-ui); animation:metaAppears 5.2s ease both;
+  pointer-events:none; }
+@keyframes metaAppears { 0%{opacity:0} 10%{opacity:1} 80%{opacity:1} 100%{opacity:0} }
+@media(max-width:600px) {
+  #metaMenuToggle { width:39px; height:39px; font-size:26px; }
+  #minimap { top:calc(var(--hud-pad-t) + 50px); }
+  #metaMenu { left:12px; right:12px; width:auto; top:calc(var(--hud-pad-t) + 48px);
+    max-height:calc(100dvh - 78px); font-size:15px; }
+  #metaMemory { bottom:calc(var(--hud-pad-b) + 142px); font-size:15px; }
+}
+</style>
 <canvas id="c" tabindex="0" aria-label="Twilight Isle — game field"></canvas>
 
 <div class="hud" id="hud" hidden>
@@ -2412,6 +2465,16 @@ function generateWorld(seed, biomeId = 'dusk') {
   Object.assign(gctx, { reach, coins, hearts, loot, relicSpots, ruins, rocks, piers, seaSpots, landCells });
   emit('world', gctx, 'done');
 
+  // Keep the original complete archipelago assets, but introduce discoveries
+  // over victories. First island: five reachable coins and one visible weapon.
+  let victories = 0;
+  try { victories = Math.max(0, Math.min(3, Number(localStorage.getItem('meta-games:twilight-isles:victories')) || 0)); } catch {}
+  coins.sort((a, b) => Math.hypot(a.x - sx, a.z - sz) - Math.hypot(b.x - sx, b.z - sz));
+  coins.length = Math.min(coins.length, 5 + victories * 5);
+  loot.sort((a, b) => (Number(b.near) - Number(a.near)) ||
+    Math.hypot(a.x - sx, a.z - sz) - Math.hypot(b.x - sx, b.z - sz));
+  loot.length = Math.min(loot.length, 1 + victories * 5);
+
   return {
     seed, biome: biome.id, vox, hgt, stand, kind, reach, at, ci, piers, trees, rocks, ruins, seaSpots, landCells, coins, hearts, loot,
     relicSpots, structures: gctx.structures, gctx,
@@ -3248,7 +3311,7 @@ class Particles {
   clear() { this.n = 0; }
 }
 const glow = new Particles(2400, THREE.AdditiveBlending, 14);
-const dust = new Particles(1200, THREE.NormalBlending, 13);
+const dust = new Particles(800, THREE.NormalBlending, 13);
 
 // fireflies (night) + golden motes (dusk): GPU-animated points
 const FLIES = 640;
@@ -3298,10 +3361,19 @@ composer.addPass(new OutputPass());
 composer.addPass(finalPass);
 const FX = finalPass.uniforms;
 
-const perf = { scale: 0.8, acc: 0, frames: 0, cool: 0 };
+// GPU renderer provenance plus update/render timings: diagnose both software GL
+// fill-rate and scene-update overhead without altering the game's physics.
+const perfGL = renderer.getContext();
+const perfExt = perfGL.getExtension('WEBGL_debug_renderer_info');
+const perfRendererName = perfExt ? String(perfGL.getParameter(perfExt.UNMASKED_RENDERER_WEBGL)) : '';
+const SOFTWARE_GL = /swiftshader|llvmpipe|software|lavapipe/i.test(perfRendererName);
+const perf = { scale: SOFTWARE_GL ? 0.4 : IS_TOUCH ? 0.6 : 0.72, acc: 0, frames: 0,
+  cool: 0, updateMs: 0, renderMs: 0, drawCalls: 0 };
+dofH.enabled = dofV.enabled = !SOFTWARE_GL && !IS_TOUCH;
+bloom.enabled = !SOFTWARE_GL;
 function resize() {
   const w = Math.max(1, innerWidth), h = Math.max(1, innerHeight);
-  const pr = Math.min(window.devicePixelRatio || 1, 1.75) * perf.scale;
+  const pr = Math.min(window.devicePixelRatio || 1, 1.5) * perf.scale;
   renderer.setPixelRatio(pr);
   renderer.setSize(w, h, false);
   composer.setPixelRatio(pr);
@@ -3688,6 +3760,7 @@ function drawMinimap() {
   const blink = Math.floor(G.time * 3) % 2 === 0;
   for (const L of loot) {                 // weapons: a small cross in the colour of their rarity
     if (!L.alive) continue;
+    if (window.__META_LAYER__ && !window.__META_LAYER__.allowLoot(L)) continue;
     const x = Math.floor(L.x), z = Math.floor(L.z);
     mmCtx.fillStyle = RAR[WEAPONS[L.id].rar].css;
     mmCtx.fillRect(x - 1, z, 3, 1); mmCtx.fillRect(x, z - 1, 1, 3);
@@ -4052,7 +4125,7 @@ function hurt(n, fx, fz) {
   if (player.invuln > 0 || G.state !== 'play') return false;
   if (ARCH.absorb()) return false;
   player.hp = Math.max(0, player.hp - n); G.hits++;
-  player.invuln = 1.5; G.hurt = 1; rig.trauma = Math.min(1, rig.trauma + 0.75);
+  player.invuln = G.total <= 5 ? 2.3 : 1.5; G.hurt = 1; rig.trauma = Math.min(1, rig.trauma + 0.75);
   G.hitstop = Math.max(G.hitstop, 0.06);
   FX.uFlashColor.value.setRGB(1, 0.45, 0.85);
   if (fx !== undefined) {
@@ -4449,6 +4522,7 @@ function startGame() {
   $('touch').hidden = !IS_TOUCH;
   G.state = 'play'; PG.play(true);
   try { RET.onStart(); } catch (e) { console.warn(e); }
+  if (!foes.some(f => f.state !== 'dissolve') && FOES.shade) spawnFoe('shade', player.pos.x + 5, player.pos.y + 1.5, player.pos.z + 4, false);
   rig.blend = 0;
   rig.yawT = rig.yaw = Math.atan2(world.spawn.x - world.beacon.x, world.spawn.z - world.beacon.z);
   rig.pitchT = rig.pitch = 0.62; rig.distT = rig.dist = rig.eff = 11; rig.spin = rig.pspin = 0;
@@ -4466,6 +4540,10 @@ function setPaused(on) {
 function win() {
   if (G.state !== 'play') return;
   G.state = 'victory'; G.endT = 0; rig.blend = 0; PG.play(false);
+  try {
+    const key = 'meta-games:twilight-isles:victories';
+    localStorage.setItem(key, String(Math.min(3, (Number(localStorage.getItem(key)) || 0) + 1)));
+  } catch {}
   try { ARCH.onLit(); } catch (e) { console.warn(e); }
   rig.vicA = Math.atan2(rig.pos.x - world.beacon.x, rig.pos.z - world.beacon.z);
   beacon.flare = 1.2; G.flash = 0.6; FX.uFlashColor.value.setRGB(1, 0.92, 0.75);
@@ -5465,7 +5543,7 @@ function spawnFoe(type, x, y, z, rising) {
     type, def, body: def.B, brain: def.Br, n: def.seg, segs: [], rads: [], vel: new THREE.Vector3(), kb: new THREE.Vector3(),
     state: rising ? 'rise' : 'wander', t: 0, alpha: rising ? 0 : 1,
     target: new THREE.Vector3(x, y, z), seed: Math.random() * 50, timer: 0, blink: 0, trail: 0, extent: def.seg * def.spacing + def.rad + 1,
-    hp: def.hp, maxHp: def.hp, flash: 0, stun: 0, slow: 0, burn: 0, burnDps: 0, burnTick: 0, shock: 0, hitT: 0, numAcc: 0, numT: 0, soulAcc: 0,
+    hp: def.boss && G.total <= 5 ? Math.min(def.hp, 170) : def.hp, maxHp: def.boss && G.total <= 5 ? Math.min(def.hp, 170) : def.hp, flash: 0, stun: 0, slow: 0, burn: 0, burnDps: 0, burnTick: 0, shock: 0, hitT: 0, numAcc: 0, numT: 0, soulAcc: 0,
     // movement intent written by the brain each frame, executed by the body
     speed: 0, turn: 1.3, ty: y, yk: 2.6, harmful: false, arrive: 0.01,
   };
@@ -5552,6 +5630,7 @@ function foeAllowed(def) {
 }
 function spawnDirector(dt) {
   if (G.state !== 'play' || dt <= 0) return;
+  if (window.__META_LAYER__ && G.kills === 0 && foes.some(f => f.state !== 'dissolve' && !f.def.boss)) return;
   const ctx = spawnCtx();
   G.spawnT -= dt;
   if (G.spawnT <= 0) {
@@ -5864,6 +5943,7 @@ function updateLoot() {
   if (G.state !== 'play' || player.respawn > 0) return;
   for (const L of loot) {
     if (!L.alive) continue;
+    if (window.__META_LAYER__ && !window.__META_LAYER__.allowLoot(L)) continue;
     const dx = player.pos.x - L.x, dz = player.pos.z - L.z, dy = player.pos.y + 0.8 - L.y;
     if (Math.hypot(dx, dz) < 0.9 && Math.abs(dy) < 1.5) takeLoot(L);
   }
@@ -6138,6 +6218,7 @@ function renderLoot() {
   const li = lightTint();
   for (const L of loot) {
     if (!L.alive) continue;
+    if (window.__META_LAYER__ && !window.__META_LAYER__.allowLoot(L)) continue;
     const w = WEAPONS[L.id];
     const bob = Math.sin(G.time * 2 + L.phase) * 0.12, sway = Math.sin(G.time * 1.3 + L.phase) * 0.16;
     sprites.add(L.x, L.y + bob, L.z, 1.55, 1.55, sway, w.uv, 0, 0, 1, 1, li, li, li, 0.2 + 0.15 * Math.sin(G.time * 3 + L.phase));
@@ -6409,6 +6490,7 @@ function updateRelics(dt) {
   if (G.state !== 'play' || player.respawn > 0) return;
   for (const R of relicSpots) {
     if (!R.alive) continue;
+    if (window.__META_LAYER__ && !window.__META_LAYER__.allowRelic(R)) continue;
     if (Math.hypot(player.pos.x - R.x, player.pos.z - R.z) < 0.9 && Math.abs(player.pos.y + 0.8 - R.y) < 1.6) takeRelic(R);
   }
   if (STATS.regen > 0 && player.hp < player.maxHp) {
@@ -6441,6 +6523,7 @@ function renderRelics() {
   const li = lightTint();
   for (const R of relicSpots) {
     if (!R.alive) continue;
+    if (window.__META_LAYER__ && !window.__META_LAYER__.allowRelic(R)) continue;
     const r = REG.relics.get(R.id), rc = RAR[r.rar].col;
     const bob = Math.sin(G.time * 1.7 + R.phase) * 0.14;
     sprites.add(R.x, R.y + bob, R.z, 0.95, 0.95, 0, ICON_UV[r.icon], 0, 0, 1, 1, li, li, li, 0.35 + 0.15 * Math.sin(G.time * 3 + R.phase));
@@ -6554,6 +6637,9 @@ function updateNPCs(dt) {
     if (near && !n.met) { n.met = true; if (d.onMeet) d.onMeet(n); }
     if (near && !n.near) { n.line = -1; n.lineT = 0; }
     n.near = near;
+    // Distant NPC visual animation is not meaningful while fog hides them.
+    if (dist > (SOFTWARE_GL ? 28 : 58)) { n.mesh.visible = false; continue; }
+    n.mesh.visible = true;
     if (near) {
       n.lineT -= dt;
       if (n.lineT <= 0) {
@@ -6598,7 +6684,7 @@ function updateNpcHud(dt) {
         everyday weather; an event (storm, blizzard …) takes over for a while and blends
         its own palette, post levers and spawn pressure in by its intensity.
 ============================================================================= */
-const PRECIP_N = 2600;
+const PRECIP_N = 2400;
 const PRECIP_VERT = /* glsl */`
 attribute float aRnd;
 uniform float uTime, uFall, uSway, uSize, uScale, uDensity, uBox, uFogD;
@@ -6877,14 +6963,20 @@ function perfMonitor(dt) {
   if (perf.acc >= 2) {
     const fps = perf.frames / perf.acc; perf.acc = 0; perf.frames = 0;
     let s = perf.scale;
-    if (fps < 48 && s > 0.5) s = Math.max(0.5, Math.round((s - 0.1) * 100) / 100);
-    else if (fps > 58 && s < 0.9) s = Math.min(0.9, Math.round((s + 0.05) * 100) / 100);
+    if (fps < 24) {
+      dofH.enabled = dofV.enabled = false;
+      bloom.enabled = false;
+      s = Math.max(0.36, Math.round((s - 0.12) * 100) / 100);
+    } else if (fps < 38) s = Math.max(0.36, Math.round((s - 0.05) * 100) / 100);
+    else if (fps > 58 && s < (SOFTWARE_GL ? 0.5 : 0.82))
+      s = Math.min(SOFTWARE_GL ? 0.5 : 0.82, Math.round((s + 0.05) * 100) / 100);
     if (s !== perf.scale) { perf.scale = s; resize(); }
   }
 }
 function frame(now) {
   requestAnimationFrame(frame);
   if (PG.paused) { last = now; return; }
+  const updateStarted = performance.now();
   const raw = last ? Math.min(0.05, Math.max(0, (now - last) / 1000)) : 0.016;
   last = now;
   // hit-stop: a heavy blow freezes the simulation for a few frames; particles crawl, the camera keeps breathing
@@ -6925,7 +7017,22 @@ function frame(now) {
   updateCombatHud(raw);
   updateNpcHud(raw);
   glow.flush(); dust.flush();
+  // Update only terrain inside the atmospheric draw radius; raycast physics
+  // still works everywhere, including behind the camera.
+  if (SOFTWARE_GL || IS_TOUCH) {
+    const maxD = SOFTWARE_GL ? 48 : 76, max2 = maxD * maxD;
+    const focus = G.state === 'title' ? world.beacon : player.pos;
+    for (let i = 0; i < chunks.length; i++) if (chunks[i]) {
+      const cx = ((i % (W / CH)) + .5) * CH, cz = (Math.floor(i / (W / CH)) + .5) * CH;
+      chunks[i].visible = (cx - focus.x) ** 2 + (cz - focus.z) ** 2 <= max2;
+    }
+  }
+  perf.updateMs = performance.now() - updateStarted;
+  const renderStarted = performance.now();
   composer.render(raw);
+  perf.renderMs = performance.now() - renderStarted;
+  perf.drawCalls = renderer.info.render.calls;
+  window.__META_LAYER__?.frame(now);
   perfMonitor(raw);
   RET.frame(raw);
   ARCH.tick(raw);
@@ -6940,6 +7047,7 @@ function start(data) {
   selectCharacter(readHero());
   emit('boot');
   const biome0 = REG.biomes.has(data.biome) ? data.biome : REG.biomes.has(readBiome()) ? readBiome() : DEFAULT_BIOME;
+  if (!Number.isFinite(data.seed)) data.seed = (DEFAULT_SEED ^ ((Math.random() * 0xffffffff) >>> 0)) >>> 0;
   buildWorld(Number.isFinite(data.seed) ? data.seed : DEFAULT_SEED, biome0);
   resetRun();
   G.state = 'title';
@@ -7841,6 +7949,7 @@ const INV = {
     'World': { fn: () => ({ coins: world.coins.length, hearts: world.hearts.length, loot: world.loot.length }) },
     'Whale (from Сумеречный архипелаг)': { fn: () => ({ segments: ARCH.WHALE.segs.length, fins: ARCH.WHALE.fins.length, eyes: ARCH.WHALE.eyes.length, drapes: ARCH.WHALE.drapes.length, voxels: ARCH.WHALE.voxels > 0 ? 1 : 0 }) },
     'Sparks & lighthouses': { fn: () => ({ colours: Object.keys(ARCH.S.lantern).length, tasks: 4, constraints: 5 }) },
+    'META discoveries & menu': { fn: () => ({ menu: document.getElementById('metaMenuToggle') ? 1 : 0, bot: Object.getOwnPropertyDescriptor(window, '__META_BOT__') ? 1 : 0 }) },
   },
   extra: {
     'R1 instant start': () => typeof RET.firstVisit === 'boolean',
@@ -8087,5 +8196,6 @@ window.__isle = {
 };
 
 </script>
+<script src="./meta-enhancements.js"></script>
 
 </body></html>

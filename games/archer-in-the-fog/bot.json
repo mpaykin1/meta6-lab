@@ -1,0 +1,13 @@
+{
+  "entry": "index.html",
+  "levelTimeoutSec": 180,
+  "stuckSec": 20,
+  "deathSec": 5,
+  "fpsBaseline": 0,
+  "viewports": [
+    "mobile",
+    "desktop"
+  ],
+  "skipChecks": [],
+  "ignoreConsole": []
+}

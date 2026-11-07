@@ -1,0 +1,22 @@
+name: LAB Source Library MCP
+on:
+  push:
+    branches: ['lab/reuse-library-search']
+    paths:
+      - 'shared/library-search.mjs'
+      - 'scripts/lab/verify-library-mcp.mjs'
+      - '.github/workflows/lab-library-mcp.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-discovery:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify six MCP tools, code discovery and path isolation
+        run: node scripts/lab/verify-library-mcp.mjs

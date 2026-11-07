@@ -1,0 +1,842 @@
+{
+ "version": 1,
+ "coverage": "root-level reference files; CLI recursively indexes full sources",
+ "licenseStatus": "unverified_per_component",
+ "sourcePolicy": "only original files from five approved source games; third party code excluded unless individually cleared",
+ "sources": [
+  {
+   "name": "Twilight Island",
+   "path": "observer-world-en-v7"
+  },
+  {
+   "name": "Ashen Path",
+   "path": "ashen-sumerek"
+  },
+  {
+   "name": "Underwater World",
+   "path": "underwater-world"
+  },
+  {
+   "name": "Three Worlds",
+   "path": "three-worlds-game"
+  },
+  {
+   "name": "Veil Terraces",
+   "path": "meta-games-worlds/veil-terraces"
+  }
+ ],
+ "count": 73,
+ "items": [
+  {
+   "sourceGame": "Ashen Path",
+   "path": "ashen-sumerek/ash_engine.js",
+   "gitBlobSha": "6746446bdd398fff9676b5e7dbf6e3d9a6194c9c",
+   "bytes": 20199,
+   "kind": "code",
+   "tags": [],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/ashen-sumerek/ash_engine.js"
+  },
+  {
+   "sourceGame": "Ashen Path",
+   "path": "ashen-sumerek/ash_gpu.js",
+   "gitBlobSha": "bd9d400d63215e5868289d24e91d203dc90eae9a",
+   "bytes": 59323,
+   "kind": "code",
+   "tags": [
+    "render"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/ashen-sumerek/ash_gpu.js"
+  },
+  {
+   "sourceGame": "Ashen Path",
+   "path": "ashen-sumerek/ash_world2.js",
+   "gitBlobSha": "11ea67fad382318bece4387963bd4b8c84ccfccd",
+   "bytes": 25737,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/ashen-sumerek/ash_world2.js"
+  },
+  {
+   "sourceGame": "Ashen Path",
+   "path": "ashen-sumerek/ashen_core.js",
+   "gitBlobSha": "cc926752ff7326fd3d0f9f81863fd7ca78a6d10f",
+   "bytes": 62264,
+   "kind": "code",
+   "tags": [],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/ashen-sumerek/ashen_core.js"
+  },
+  {
+   "sourceGame": "Ashen Path",
+   "path": "ashen-sumerek/ashen-source-a8cc7bde.html",
+   "gitBlobSha": "a5911f6d0a0e36fc4fc0ad581be071dfb6d7882c",
+   "bytes": 858822,
+   "kind": "scene",
+   "tags": [],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/ashen-sumerek/ashen-source-a8cc7bde.html"
+  },
+  {
+   "sourceGame": "Ashen Path",
+   "path": "ashen-sumerek/base-artifact-b94ef394.html",
+   "gitBlobSha": "34b0cde723efabfa780482585b6d731acf70198a",
+   "bytes": 405429,
+   "kind": "scene",
+   "tags": [],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/ashen-sumerek/base-artifact-b94ef394.html"
+  },
+  {
+   "sourceGame": "Ashen Path",
+   "path": "ashen-sumerek/ico_atk.svg",
+   "gitBlobSha": "33a1b4093a35c2806cf079099573f7ebeacf98dc",
+   "bytes": 3501,
+   "kind": "image",
+   "tags": [],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/ashen-sumerek/ico_atk.svg"
+  },
+  {
+   "sourceGame": "Ashen Path",
+   "path": "ashen-sumerek/ico_jump.svg",
+   "gitBlobSha": "f289a852078872eafed725cf9c7e18d11f9d08ce",
+   "bytes": 2493,
+   "kind": "image",
+   "tags": [],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/ashen-sumerek/ico_jump.svg"
+  },
+  {
+   "sourceGame": "Ashen Path",
+   "path": "ashen-sumerek/index.html",
+   "gitBlobSha": "00e6876e77167e06ed383b052e6a74331fba918f",
+   "bytes": 612307,
+   "kind": "scene",
+   "tags": [],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/ashen-sumerek/index.html"
+  },
+  {
+   "sourceGame": "Ashen Path",
+   "path": "ashen-sumerek/pack_ash.js",
+   "gitBlobSha": "99ff8f69606087cd5a95bacb25fd60fcaf0b73f5",
+   "bytes": 25241,
+   "kind": "code",
+   "tags": [],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/ashen-sumerek/pack_ash.js"
+  },
+  {
+   "sourceGame": "Ashen Path",
+   "path": "ashen-sumerek/wsprites.json",
+   "gitBlobSha": "61752cac92e066dd26c19eb2fe478f2e842f2939",
+   "bytes": 37296,
+   "kind": "json",
+   "tags": [],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/ashen-sumerek/wsprites.json"
+  },
+  {
+   "sourceGame": "Veil Terraces",
+   "path": "meta-games-worlds/veil-terraces/index.html",
+   "gitBlobSha": "99243a7d78b4249a13683e881db5000b8e6452a5",
+   "bytes": 19289,
+   "kind": "scene",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/meta-games-worlds/veil-terraces/index.html"
+  },
+  {
+   "sourceGame": "Twilight Island",
+   "path": "observer-world-en-v7/audio.js",
+   "gitBlobSha": "9cc25e92294c03f887bf05cf2f0139b70a0c5390",
+   "bytes": 20702,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "audio"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/observer-world-en-v7/audio.js"
+  },
+  {
+   "sourceGame": "Twilight Island",
+   "path": "observer-world-en-v7/building-assets.js",
+   "gitBlobSha": "1eed988695ab64b351c7f5d5d09024756930e280",
+   "bytes": 6994,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/observer-world-en-v7/building-assets.js"
+  },
+  {
+   "sourceGame": "Twilight Island",
+   "path": "observer-world-en-v7/combat-relations.js",
+   "gitBlobSha": "50d9dc30c8fec014ab8787f7bb45377867b08c83",
+   "bytes": 6768,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "combat"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/observer-world-en-v7/combat-relations.js"
+  },
+  {
+   "sourceGame": "Twilight Island",
+   "path": "observer-world-en-v7/editor.js",
+   "gitBlobSha": "613a9281f880cd4124c6954e7f467b566868b6d4",
+   "bytes": 28097,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/observer-world-en-v7/editor.js"
+  },
+  {
+   "sourceGame": "Twilight Island",
+   "path": "observer-world-en-v7/index.html",
+   "gitBlobSha": "8c02d528e8853e6750a7ff432f823a0b22ac12f4",
+   "bytes": 291950,
+   "kind": "scene",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/observer-world-en-v7/index.html"
+  },
+  {
+   "sourceGame": "Twilight Island",
+   "path": "observer-world-en-v7/mobile-controls.css",
+   "gitBlobSha": "58ab05fd8a99232fc4cd6645c5bbfc14d94b4879",
+   "bytes": 4364,
+   "kind": "css",
+   "tags": [
+    "terrain",
+    "controls"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/observer-world-en-v7/mobile-controls.css"
+  },
+  {
+   "sourceGame": "Twilight Island",
+   "path": "observer-world-en-v7/mobile-controls.js",
+   "gitBlobSha": "cd2effafb70e7426e07fdb1b51d28cb9d3cf9754",
+   "bytes": 4696,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "controls"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/observer-world-en-v7/mobile-controls.js"
+  },
+  {
+   "sourceGame": "Twilight Island",
+   "path": "observer-world-en-v7/npc-catalog.js",
+   "gitBlobSha": "a35521324649b736881427f7521f511edef40637",
+   "bytes": 4673,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/observer-world-en-v7/npc-catalog.js"
+  },
+  {
+   "sourceGame": "Twilight Island",
+   "path": "observer-world-en-v7/story-system.js",
+   "gitBlobSha": "ad99722a173575915184cdc549f7e47d8beb03f6",
+   "bytes": 9833,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "story"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/observer-world-en-v7/story-system.js"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/ash-archipelago.mjs",
+   "gitBlobSha": "fec149c120cf9bf747f4b883c960175a833fe143",
+   "bytes": 1009,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/ash-archipelago.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/ash-assets.mjs",
+   "gitBlobSha": "b44836daaa2f7c635cfe183f76929aa183bd20e1",
+   "bytes": 62011,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/ash-assets.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/ash-quest-props.mjs",
+   "gitBlobSha": "054836d57d1de213ed0bdb83c775c1e465c850b1",
+   "bytes": 2955,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "story"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/ash-quest-props.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/ash-world.mjs",
+   "gitBlobSha": "f2e3aa01c14a17005a8405cf7a54fae44863c36e",
+   "bytes": 3941,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/ash-world.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/audio.js",
+   "gitBlobSha": "9cc25e92294c03f887bf05cf2f0139b70a0c5390",
+   "bytes": 20702,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "audio"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/audio.js"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/building-assets.js",
+   "gitBlobSha": "1eed988695ab64b351c7f5d5d09024756930e280",
+   "bytes": 6994,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/building-assets.js"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/camera-rig.mjs",
+   "gitBlobSha": "0a3e72f54c79e94ec547e6a29f83fa8d6aad7757",
+   "bytes": 4243,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "camera"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/camera-rig.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/combat-facing.mjs",
+   "gitBlobSha": "0515d87cc43a99f8906d62d52dc21114528c2c60",
+   "bytes": 1217,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "combat"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/combat-facing.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/combat-relations.js",
+   "gitBlobSha": "50d9dc30c8fec014ab8787f7bb45377867b08c83",
+   "bytes": 6768,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "combat"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/combat-relations.js"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/creature-brain.mjs",
+   "gitBlobSha": "4f0532ad9cd053367cf40ba558d8877c57596503",
+   "bytes": 2101,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/creature-brain.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/dialogue.mjs",
+   "gitBlobSha": "a9680a2b81c5fccd8208f0a77901531920d4bc1e",
+   "bytes": 2243,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "story"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/dialogue.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/editor.js",
+   "gitBlobSha": "a804c886f32361a12a8bb63bbc53645e4ca2b9e3",
+   "bytes": 28376,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/editor.js"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/guest-roster.mjs",
+   "gitBlobSha": "adbc01eea15adb282bd8a3153d70c19efb7ef6f4",
+   "bytes": 2549,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/guest-roster.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/hero-controls.mjs",
+   "gitBlobSha": "35faf53e30cb5be134ba97dcf2f075c6f742d2c7",
+   "bytes": 7621,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "controls"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/hero-controls.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/index.html",
+   "gitBlobSha": "442d95e912b7e8cbdfe18d7fc1b7f42f495e1afb",
+   "bytes": 13663438,
+   "kind": "scene",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/index.html"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/index.source.html",
+   "gitBlobSha": "71b43d28f9c21dc6f29c0807c1a0a69b602812ae",
+   "bytes": 300666,
+   "kind": "scene",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/index.source.html"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/island-environment.mjs",
+   "gitBlobSha": "42a4cceb15778c35ad949146cd91d601c44a58e6",
+   "bytes": 2725,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/island-environment.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/island-weather-fx.mjs",
+   "gitBlobSha": "a1ead0655cfd67e811e44f82ccbaf3e9c5d32c0a",
+   "bytes": 5278,
+   "kind": "code",
+   "tags": [
+    "light",
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/island-weather-fx.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/island-weather.mjs",
+   "gitBlobSha": "d05a1ea97e999b6d9bbc1d5724b3d3bdd2317355",
+   "bytes": 1569,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/island-weather.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/keeper-bubble.mjs",
+   "gitBlobSha": "3b0e3e1db24f9f88630fea85f6c70bd843251a15",
+   "bytes": 3799,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/keeper-bubble.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/living-island-runtime.mjs",
+   "gitBlobSha": "feef7442bca315806c3fcb552166ebcd86194ea3",
+   "bytes": 3620,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/living-island-runtime.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/living-land.mjs",
+   "gitBlobSha": "911c09f6a979fba723ce10f84fafecceaf6ecc30",
+   "bytes": 1859,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/living-land.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/living-population.mjs",
+   "gitBlobSha": "13734dcda472d62e3e1529fa743c382bb2737ecb",
+   "bytes": 6541,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/living-population.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/mobile-controls.css",
+   "gitBlobSha": "f05ec16e46b7e31471565e90fc7689ca737e722c",
+   "bytes": 4785,
+   "kind": "css",
+   "tags": [
+    "terrain",
+    "controls"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/mobile-controls.css"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/mobile-controls.js",
+   "gitBlobSha": "cff975e260879f8b5bca0724eb813b689cb5922b",
+   "bytes": 7178,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "controls"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/mobile-controls.js"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/npc-catalog.js",
+   "gitBlobSha": "a35521324649b736881427f7521f511edef40637",
+   "bytes": 4673,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/npc-catalog.js"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/ocean-placements.mjs",
+   "gitBlobSha": "eb63132d9de096d09bf17a5fec086e6dd9428277",
+   "bytes": 3627,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/ocean-placements.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/rift-event.mjs",
+   "gitBlobSha": "57bf65b4f450e6c157a7e029842a8267d0eb0d0b",
+   "bytes": 2566,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/rift-event.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/rift-input-guard.mjs",
+   "gitBlobSha": "1c00489127be3d2fb8b291e75548a114cc32ba9f",
+   "bytes": 1025,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "controls"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/rift-input-guard.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/rift-story.mjs",
+   "gitBlobSha": "da37c0d085dea50fbe9e87d6743c9253509195d1",
+   "bytes": 24380,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "story"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/rift-story.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/rift-visibility.mjs",
+   "gitBlobSha": "5e061a94e4fd137213a795062576319a854585a8",
+   "bytes": 1516,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/rift-visibility.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/seabed.mjs",
+   "gitBlobSha": "835fcf880117d0dad50e7a5561078569a62edd46",
+   "bytes": 2883,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/seabed.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/stage7-simulation.mjs",
+   "gitBlobSha": "ca287d008ea2cea3a13dd12a3d7d02bf6be8b3c7",
+   "bytes": 2788,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/stage7-simulation.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/story-system.js",
+   "gitBlobSha": "ad99722a173575915184cdc549f7e47d8beb03f6",
+   "bytes": 9833,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "story"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/story-system.js"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/sunken-atmosphere.mjs",
+   "gitBlobSha": "546ee00e6e515a34dea7175446dfc2c062a536fd",
+   "bytes": 4656,
+   "kind": "code",
+   "tags": [
+    "light",
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/sunken-atmosphere.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/sunken-guest.mjs",
+   "gitBlobSha": "0a1e9cff67dd896a0f4f4ff06de1170ead216eaf",
+   "bytes": 2313,
+   "kind": "code",
+   "tags": [
+    "light",
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/sunken-guest.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/transport.mjs",
+   "gitBlobSha": "7f1678210cc6fee682ad0a1fa8db53c947e7aef2",
+   "bytes": 2694,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/transport.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/underwater-runtime.js",
+   "gitBlobSha": "67cbeda304e9cd7a9a45cd8eb79f427023c9b370",
+   "bytes": 17829,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/underwater-runtime.js"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/voxel-terrain.mjs",
+   "gitBlobSha": "4bbef4e3caccbfb1472ba6d35375da8d622c3de1",
+   "bytes": 3671,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/voxel-terrain.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/water-dive-camera.mjs",
+   "gitBlobSha": "8a72eb01183c62de99b9117ee265e7ede261aec6",
+   "bytes": 797,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "camera"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/water-dive-camera.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/weather-cycle.mjs",
+   "gitBlobSha": "f8e008de0c98f8c3de5439fef966b6205dadd5c4",
+   "bytes": 477,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/weather-cycle.mjs"
+  },
+  {
+   "sourceGame": "Three Worlds",
+   "path": "three-worlds-game/world-core.mjs",
+   "gitBlobSha": "00e21671254eb8bc6b10ceff8b433ef25e653d60",
+   "bytes": 4124,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/three-worlds-game/world-core.mjs"
+  },
+  {
+   "sourceGame": "Underwater World",
+   "path": "underwater-world/audio.js",
+   "gitBlobSha": "9cc25e92294c03f887bf05cf2f0139b70a0c5390",
+   "bytes": 20702,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "audio"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/underwater-world/audio.js"
+  },
+  {
+   "sourceGame": "Underwater World",
+   "path": "underwater-world/building-assets.js",
+   "gitBlobSha": "1eed988695ab64b351c7f5d5d09024756930e280",
+   "bytes": 6994,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/underwater-world/building-assets.js"
+  },
+  {
+   "sourceGame": "Underwater World",
+   "path": "underwater-world/combat-relations.js",
+   "gitBlobSha": "50d9dc30c8fec014ab8787f7bb45377867b08c83",
+   "bytes": 6768,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "combat"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/underwater-world/combat-relations.js"
+  },
+  {
+   "sourceGame": "Underwater World",
+   "path": "underwater-world/editor.js",
+   "gitBlobSha": "a804c886f32361a12a8bb63bbc53645e4ca2b9e3",
+   "bytes": 28376,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/underwater-world/editor.js"
+  },
+  {
+   "sourceGame": "Underwater World",
+   "path": "underwater-world/index.html",
+   "gitBlobSha": "91cf572254d5350987b0fa836e0315f58a36b3cc",
+   "bytes": 293502,
+   "kind": "scene",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/underwater-world/index.html"
+  },
+  {
+   "sourceGame": "Underwater World",
+   "path": "underwater-world/mobile-controls.css",
+   "gitBlobSha": "58ab05fd8a99232fc4cd6645c5bbfc14d94b4879",
+   "bytes": 4364,
+   "kind": "css",
+   "tags": [
+    "terrain",
+    "controls"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/underwater-world/mobile-controls.css"
+  },
+  {
+   "sourceGame": "Underwater World",
+   "path": "underwater-world/mobile-controls.js",
+   "gitBlobSha": "c2ae7dbe480e659022db12c18e22facef8348277",
+   "bytes": 5677,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "controls"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/underwater-world/mobile-controls.js"
+  },
+  {
+   "sourceGame": "Underwater World",
+   "path": "underwater-world/npc-catalog.js",
+   "gitBlobSha": "a35521324649b736881427f7521f511edef40637",
+   "bytes": 4673,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/underwater-world/npc-catalog.js"
+  },
+  {
+   "sourceGame": "Underwater World",
+   "path": "underwater-world/story-system.js",
+   "gitBlobSha": "ad99722a173575915184cdc549f7e47d8beb03f6",
+   "bytes": 9833,
+   "kind": "code",
+   "tags": [
+    "terrain",
+    "story"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/underwater-world/story-system.js"
+  },
+  {
+   "sourceGame": "Underwater World",
+   "path": "underwater-world/underwater-runtime.js",
+   "gitBlobSha": "8c594251efcb62563693f185d04dc3a8e59713e1",
+   "bytes": 14110,
+   "kind": "code",
+   "tags": [
+    "terrain"
+   ],
+   "source": "https://github.com/mpaykin1/meta6/blob/main/underwater-world/underwater-runtime.js"
+  }
+ ]
+}

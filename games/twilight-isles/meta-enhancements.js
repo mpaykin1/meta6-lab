@@ -80,7 +80,9 @@
       const path=[];
       for(let i=end;i!==-1;i=previous[i])path.push(i);
       path.reverse();
-      while(path.length>1&&Math.hypot(path[0]%W+.5-player.x,Math.floor(path[0]/W)+.5-player.z)<.32)path.shift();
+      // The first path cell is the hero's current tile. Steering back to its
+      // centre loops at tile corners; target the next reachable tile instead.
+      if(path.length>1)path.shift();
       const next=path[0];
       return {x:next%W+.5,z:Math.floor(next/W)+.5};
     }
@@ -294,8 +296,10 @@
         const nearestLoot = availableLoot[0];
         const weaponGoal = game.combat.arsenal.length < 3 && nearestLoot &&
           Math.hypot(nearestLoot.x-p.x,nearestLoot.z-p.z) < 12 ? nearestLoot : null;
-        const actualTarget = arch.guideTarget() || (firstEnemy ? firstEnemy.segs[0] :
-          weaponGoal || (choices.length ? choices[0] : boss || w.ring || w.beacon));
+        // Lead the unarmed player to a real unlocked weapon pickup before the
+        // opening shadow. It must still be collected by walking over it.
+        const actualTarget = arch.guideTarget() || (weaponGoal || firstEnemy?.segs[0] ||
+          (choices.length ? choices[0] : boss || w.ring || w.beacon));
         const target = nextTraversablePoint(w, p, actualTarget);
         const foes=game.foes.filter(f=>f && f.state!=='dissolve' && f.hp>0);
         const h=String((G.seed>>>0).toString(16)) + ':' + G.biome + ':' + arch.island.join(',');

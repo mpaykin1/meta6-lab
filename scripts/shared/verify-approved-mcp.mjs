@@ -3,7 +3,7 @@ import {spawn} from 'node:child_process';
 import readline from 'node:readline';
 import {approvedComponents,searchApproved,inspectApproved} from '../../shared/approved/search.mjs';
 const components=approvedComponents();
-assert.equal(components.length,2);
+assert.equal(components.length,5);
 for(const x of components){
  assert.ok(x.bytes>0&&x.lines>0);
  assert.ok(inspectApproved(x.id,1,3).lines.length>0);
@@ -26,10 +26,10 @@ try{
  assert.equal((await ask('initialize',{})).result.serverInfo.name,'meta-games-approved-source');
  assert.equal((await ask('tools/list')).result.tools.length,3);
  const list=await ask('tools/call',{name:'list_approved_components',arguments:{}});
- assert.equal(JSON.parse(list.result.content[0].text).length,2);
+ assert.equal(JSON.parse(list.result.content[0].text).length,5);
  const denied=await ask('tools/call',{name:'inspect_approved_component',arguments:{id:'../AGENTS.md'}});
  assert.ok(denied.error);
  const result=await ask('tools/call',{name:'search_approved_code',arguments:{query:'window'}});
  assert.ok(result.result);
- console.log('APPROVED_SOURCE_MCP_PASS two verified originals; three tools; no unauthorized sources');
+ console.log('APPROVED_SOURCE_MCP_PASS five verified originals; three tools; no unauthorized sources');
 }finally{proc.stdin.end();proc.kill()}

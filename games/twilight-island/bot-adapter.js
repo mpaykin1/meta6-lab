@@ -84,8 +84,9 @@
       const ids = [];
       for (let id = end; id !== -1; id = before[id]) ids.push(id);
       ids.reverse();
-      while (ids.length > 1 &&
-        Math.hypot(ids[0] % width + .5 - player.pos.x, Math.floor(ids[0] / width) + .5 - player.pos.z) < .32) ids.shift();
+      // First path cell is occupied by the player. Steer toward the NEXT
+      // reachable tile; otherwise the watchdog observes an artificial stall.
+      if (ids.length > 1) ids.shift();
       const first = ids[0];
       return { routeLength: ids.length, next: { x: first % width + .5, z: Math.floor(first / width) + .5 } };
     }

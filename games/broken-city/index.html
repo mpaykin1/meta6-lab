@@ -3021,6 +3021,34 @@ function updateEnding(dt, t) {
 }
 
 
+/* META BOT read-only observer: reports the live engine state, never advances gameplay. */
+const metaBotObserver = Object.freeze({
+  info: () => ({name:'broken-city',levels:LEVELS.length}),
+  state: () => {
+    const active = view === 'game';
+    const c = G.cfg;
+    const h = heroState.pos;
+    const ending = G.state === 'ending' || G.state === 'endwait';
+    return {
+      started: active && G.state !== 'title',
+      level: G.li + 1,
+      levelDone: active && (G.state === 'trans' || ending),
+      gameDone: active && ending,
+      alive: G.state !== 'defeat',
+      hero: {x:h.x,y:h.z,z:h.z},
+      goal: c ? {x:0,y:c.goal,z:c.goal} : null,
+      enemies: shades.filter(sh => sh.visible && !sh.userData.copy).map(sh => ({x:sh.position.x,y:sh.position.z,z:sh.position.z})),
+      weapons: [],
+      layoutHash: c ? [G.li,G.cycle,c.mode,c.goal].join(':') : 'title',
+      menuOpen: G.paused || view === 'title' || G.storyOpen === true,
+      progress: c ? Math.max(0,Math.min(1,(4-h.z)/(4-c.goal))) : 0,
+      hp: G.state === 'defeat' ? 0 : 1,
+      cameraYaw: rig.yaw
+    };
+  }
+});
+Object.defineProperty(window,'__META_BOT__',{value:metaBotObserver,writable:false,configurable:false});
+
 /* ============ INV — hidden asset counter (for the agent only, never shown to the player) ============
    Rules: 1) before any edit run window.__INV() and note `now`; 2) before publishing run it again:
    `lost` must be empty and `now` >= previous; 3) on every expansion add new entries to INV.sec and a new

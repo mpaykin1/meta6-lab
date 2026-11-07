@@ -68,18 +68,28 @@ function bestWeapon(state) {
 function chooseTarget(state, map) {
   const reachable = items => items.map(item => ({ ...item, route: planRoute(map, state.hero, item) }))
     .filter(item => item.route).sort((a, b) => a.route.length - b.route.length);
+  const exit = () => ({ ...(state.destination || state.goal), id: 'exit', type: 'exit' });
+  // Once the guardian is defeated, go directly to the real victory ring. Do not
+  // wander to distant hearts and time out after winning the fight.
+  if (state.stage >= state.objectiveCount - 1) return exit();
   const coins = reachable(state.coins);
   const hearts = reachable(state.pickups.filter(item => item.type === 'heart'));
   if (state.health <= 4 && hearts.length) return hearts[0];
   const weapons = reachable(state.pickups.filter(item => item.type === 'weapon'));
   const hasRanged = state.equipment.some(item => item.kind === 'ranged');
+  // The last coins awaken an armed guardian. Seek a real ranged pickup early,
+  // before combat, instead of approaching him with the weak starter stick.
+  const ranged = !hasRanged && weapons.find(item => item.kind === 'ranged' &&
+    (item.route.length <= 24 || (state.fightingBoss && item.route.length <= 48)));
+  if (ranged) return ranged;
   const heldPower = Math.max(...state.equipment.map(power));
   const upgrade = weapons.find(item => item.route.length <= 12 &&
-    (state.equipment.length === 1 || (!hasRanged && item.kind === 'ranged') ||
+    (state.equipment.length === 1 ||
      (item.route.length <= 7 && power(item) > heldPower * 1.2)));
   if (upgrade) return upgrade;
   if (coins.length) return { ...coins[0], type: 'coin' };
-  return { ...(state.destination || state.goal), id: state.fightingBoss ? 'boss' : 'exit', type: state.fightingBoss ? 'boss' : 'exit' };
+  return state.fightingBoss ?
+    { ...(state.destination || state.goal), id: 'boss', type: 'boss' } : exit();
 }
 function refreshTarget(state, target) {
   if (!target) return null;

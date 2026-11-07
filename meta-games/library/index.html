@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>META GAMES • Source Library</title>
+<style>
+:root{color-scheme:dark;--ink:#e0f5f2;--muted:#789895;--aqua:#45e5cb;--edge:#25443f;--bg:#081615}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:radial-gradient(circle at 82% 0%,#103b37 0,transparent 40%),radial-gradient(circle at 10% 80%,#0b2a29,transparent 55%),var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1170px;margin:0 auto;padding:clamp(22px,5vw,64px) clamp(16px,4vw,36px) 75px}
+h1{margin:0;font-size:clamp(35px,5vw,65px);letter-spacing:-.055em;line-height:1.05;font-weight:700}
+small,.muted{color:var(--muted)}.eyebrow{font-size:11px;letter-spacing:.24em;color:var(--aqua);font-weight:700;margin-bottom:18px}
+.heading{display:flex;justify-content:space-between;align-items:start;gap:20px}
+.logo{display:inline-grid;place-items:center;width:42px;height:42px;border:1px solid #488b7f;color:var(--aqua);border-radius:12px;background:#103e37}
+.subtitle{color:#abc9c4;margin:14px 0 34px;max-width:670px;line-height:1.6}
+.controls{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:10px;margin:22px 0 24px}
+input,select{width:100%;border:1px solid var(--edge);border-radius:13px;background:#0a2320;color:var(--ink);font:inherit;padding:16px;outline:0;transition:border-color .2s}
+input:focus,select:focus{border-color:var(--aqua)}input::placeholder{color:#72938e}
+.meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--edge);padding:0 0 16px;font-size:13px;color:#97b6af}
+.meta strong{color:var(--aqua)}
+#results{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,315px),1fr));gap:13px;margin-top:22px}
+.card{padding:19px;border:1px solid var(--edge);border-radius:16px;background:linear-gradient(140deg,rgba(25,61,55,.63),rgba(10,27,25,.96));min-height:200px;display:flex;flex-direction:column;gap:11px;overflow:hidden}
+.card:hover{border-color:#4c9b8e}.top{display:flex;justify-content:space-between;gap:10px;align-items:center;color:#71b9ad;text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:700}
+.tag{background:#1d4b42;border-radius:99px;padding:5px 9px;color:#85e4d3}
+.path{overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;line-height:1.4;font-weight:650}
+.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+a{color:var(--aqua);text-decoration:none}a:hover{text-decoration:underline}
+.note{margin-top:30px;padding:18px 20px;border-left:2px solid #46a792;background:rgba(16,45,41,.64);color:#a4c6be;font-size:13px;line-height:1.65}
+.empty{grid-column:1/-1;padding:55px;text-align:center;color:var(--muted)}
+@media(max-width:580px){.controls{grid-template-columns:1fr}.heading{align-items:center}.logo{flex-shrink:0}.foot{font-size:12px}}
+</style></head>
+<body><main>
+  <div class="heading"><div><div class="eyebrow">META GAMES / SOURCE LIBRARY / DISCOVER</div><h1>Библиотека<br/>готовых решений</h1></div><div class="logo" aria-hidden="true">✧</div></div>
+  <p class="subtitle">Искать готовую механику, шейдер, управление и графику в эталонных играх. Каждый результат ведёт к реальному исходному файлу — без дублирования и переписывания.</p>
+  <div class="controls"><input id="search" type="search" placeholder="Искать: camera, combat, fog, audio..." aria-label="Поиск компонентов" autocomplete="off"/><select id="kind" aria-label="Тип компонента"><option value="">Все типы</option><option value="code">Код</option><option value="scene">Сцены</option><option value="css">Стили</option><option value="image">Изображения</option><option value="model">3D-модели</option><option value="audio">Звук</option><option value="shader">Шейдеры</option></select></div>
+  <div class="meta"><span>Источников: <strong id="games">—</strong> · Индексировано файлов: <strong id="total">—</strong></span><span>Найдено: <strong id="count">—</strong></span></div>
+  <section id="results" aria-live="polite"><div class="empty">Чтение каталога...</div></section>
+  <div class="note">Каталог показывает разрешённые исходные игры, но не утверждает, что все сторонние зависимости проверены. Повторное использование допускается только для оригинальных компонентов; лицензии сторонних файлов проверяются отдельно. Полное рекурсивное индексирование и локальное MCP доступны в <code>shared/library-search.mjs</code>.</div>
+</main>
+<script type="module">
+const $=id=>document.getElementById(id);
+const cards=$('results'), search=$('search'), kind=$('kind');
+const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let files=[];
+function render(){
+ const q=search.value.toLowerCase().trim().split(/\s+/).filter(Boolean), k=kind.value;
+ const out=files.filter(x=>(!k||x.kind===k)&&q.every(t=>(x.path+' '+x.sourceGame+' '+x.tags.join(' ')+' '+x.kind).toLowerCase().includes(t)));
+ $('count').textContent=out.length;
+ cards.innerHTML=out.length?out.slice(0,200).map(x=>'<article class="card"><div class="top"><span>'+escape(x.sourceGame)+'</span><span class="tag">'+escape(x.kind)+'</span></div><div class="path">'+escape(x.path)+'</div><div class="muted">'+escape(x.tags.join(' · ')||'Исходный компонент')+'</div><div class="foot"><small>'+((x.bytes/1024).toFixed(1))+' KB</small><a href="'+escape(x.source)+'" target="_blank" rel="noopener noreferrer">Посмотреть исходник ↗</a></div></article>').join(''):'<div class="empty">Совпадений нет. Измените запрос.</div>';
+}
+try{
+ const r=await fetch('./catalog.json',{cache:'no-cache'});if(!r.ok)throw Error('HTTP '+r.status);
+ const data=await r.json();files=data.items||[];$('games').textContent=data.sources.length;$('total').textContent=files.length;render();
+}catch(e){cards.innerHTML='<div class="empty">Каталог недоступен: '+escape(e.message)+'</div>'}
+search.addEventListener('input',render);kind.addEventListener('change',render);
+</script></body></html>

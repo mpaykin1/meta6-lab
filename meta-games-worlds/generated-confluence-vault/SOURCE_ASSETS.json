@@ -1,0 +1,12 @@
+{
+  "policy": "META_GAMES_SOURCE_ALLOWLIST",
+  "files": [
+    {
+      "output": "index.html",
+      "repository": "mpaykin1/meta6",
+      "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "git_blob_sha": "99243a7d78b4249a13683e881db5000b8e6452a5"
+    }
+  ]
+}

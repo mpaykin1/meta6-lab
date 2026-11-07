@@ -26,6 +26,8 @@ jobs:
           node-version: '22'
       - name: Validate repair bot syntax
         run: node --check scripts/repair-bot/repair-json.mjs
+      - name: Check JavaScript syntax
+        run: node scripts/repair-bot/check-js.mjs
       - name: Exercise repair bot on controlled fixture
         run: |
           mkdir -p .repair-fixture

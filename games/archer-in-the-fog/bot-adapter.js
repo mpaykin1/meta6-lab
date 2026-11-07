@@ -79,7 +79,7 @@
         gameDone: false, // The original game has no finite ending.
         alive,
         hero: { x: hero.x, y: hero.z },
-        goal: { x: target.x, y: target.z },
+        goal: null, // Stationary archer: dragon is a moving combat target, not a walkable goal.
         enemies: alive && g.phase !== 'retreat' ? 1 : 0,
         weapons: alive ? 1 : 0,
         layoutHash: encounterHash,

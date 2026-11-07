@@ -75,6 +75,16 @@
     if (next < 0 || next === here) return goal;
     return { x: (next % width) + .5, y: ((next / width) | 0) + .5 };
   }
+  // Persist a genuine uncollected coin until pickup. Euclidean nearest can
+  // flip on every step and make an otherwise valid route oscillate.
+  let coinWorld = null, trackedCoin = null;
+  function stickToLiveCoin(world, coins, candidate) {
+    if (world !== coinWorld || !trackedCoin?.alive ||
+        !Array.isArray(coins) || !coins.includes(trackedCoin)) {
+      coinWorld = world; trackedCoin = candidate;
+    }
+    return trackedCoin;
+  }
   const bot = Object.freeze({
     version: 1,
     info() { return { name: 'Twilight Island — Observer World V7', levels: 1 }; },
@@ -118,6 +128,7 @@
           }
         }
       }
+      if (state === 'play' && !g?.all) goalPoint = stickToLiveCoin(world, b?.coins, goalPoint);
       // The authentic restart is visible only after the real death screen.
       let retryButton = null;
       if (state === 'dead') {

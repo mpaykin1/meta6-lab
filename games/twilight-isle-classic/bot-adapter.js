@@ -26,6 +26,58 @@
     }
     return String(biome ?? '') + ':' + layoutFingerprint;
   }
+  // Reverse flow field over the accepted game's real traversable voxel grid.
+  // Build asynchronously on a new target; state() only follows cached waypoints.
+  let fieldWorld = null, fieldKey = '', field = null, scheduledKey = '';
+  function scheduleField(world, target) {
+    if (!world?.stand || !world?.reach || !target) return;
+    const width = Math.round(Math.sqrt(world.stand.length));
+    if (width * width !== world.stand.length) return;
+    const tx = Math.floor(target.x), tz = Math.floor(target.y);
+    if (tx < 0 || tz < 0 || tx >= width || tz >= width) return;
+    const key = tx + ':' + tz;
+    if (fieldWorld === world && (fieldKey === key || scheduledKey === key)) return;
+    scheduledKey = key;
+    fieldWorld = world;
+    field = null;
+    setTimeout(() => {
+      if (fieldWorld !== world || scheduledKey !== key) return;
+      const total = width * width, height = world.stand, reach = world.reach;
+      const next = new Int16Array(total), queue = new Int16Array(total);
+      next.fill(-1);
+      let head = 0, tail = 0;
+      const root = tx + tz * width;
+      if (reach[root] > 0 && height[root] < 26) {
+        next[root] = root; queue[tail++] = root;
+        while (head < tail) {
+          const at = queue[head++], x = at % width, z = (at / width) | 0;
+          for (const [dx, dz] of [[1,0],[-1,0],[0,1],[0,-1]]) {
+            const nx = x + dx, nz = z + dz;
+            if (nx < 0 || nz < 0 || nx >= width || nz >= width) continue;
+            const n = nx + nz * width;
+            if (next[n] >= 0 || reach[n] <= 0 || height[n] >= 26 ||
+                Math.abs(height[n] - height[at]) > 1) continue;
+            next[n] = at;
+            queue[tail++] = n;
+          }
+        }
+      }
+      if (fieldWorld === world && scheduledKey === key) {
+        fieldKey = key; field = next;
+      }
+    }, 0);
+  }
+  function routedGoal(world, hero, goal) {
+    if (!world || !goal) return goal;
+    scheduleField(world, goal);
+    const width = Math.round(Math.sqrt(world.stand.length));
+    if (!field || fieldWorld !== world || fieldKey !== Math.floor(goal.x) + ':' + Math.floor(goal.y)) return goal;
+    const x = Math.floor(hero.x), z = Math.floor(hero.y);
+    if (x < 0 || z < 0 || x >= width || z >= width) return goal;
+    const here = x + z * width, next = field[here];
+    if (next < 0 || next === here) return goal;
+    return { x: (next % width) + .5, y: ((next / width) | 0) + .5 };
+  }
   const bot = Object.freeze({
     version: 1,
     info() {
@@ -72,9 +124,10 @@
       const objective = game?.all
         ? (head ?? ring)
         : nearestCoin;
-      const goal = objective
+      const directGoal = objective
         ? { x: objective.x, y: objective.z }
         : null;
+      const goal = game?.all ? directGoal : routedGoal(isle?.world, hero, directGoal);
       const total = Math.max(1, game?.total ?? 1);
       const collected = Math.max(0, game?.collected ?? 0);
       // Only observed coin pickups and actual warden health contribute.

@@ -24,7 +24,7 @@ try{
      combat:typeof combat.create,
      repeated:weather===await MetaShared.use('three-worlds-weather')};
  });
- assert.equal(outcome.all,7);
+ assert.equal(outcome.all,9);
  assert.equal(outcome.rain,true);
  assert.equal(outcome.dry,false);
  assert.equal(outcome.submerged,'sea_mist');
@@ -32,5 +32,5 @@ try{
  assert.equal(outcome.combat,'function');
  assert.equal(outcome.repeated,true);
  assert.deepEqual(errors,[]);
- console.log('SHARED_SEVEN_BROWSER_PASS',JSON.stringify(outcome));
+ console.log('SHARED_NINE_BROWSER_PASS',JSON.stringify(outcome));
 }finally{await browser.close();srv.close()}

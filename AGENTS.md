@@ -4,7 +4,7 @@
 
 Все правила разложены по папкам в [rules/](rules/). **Перед работой открыть нужную папку и прочитать правило целиком** — здесь только суть одной строкой. Пароли правил прежние (`retention`, `postepenno`, `polza`, `vidimo`, `boss`, `universal`, `abyss`, `three-worlds`, `island-biomes`, `graf`, `evolve`, `fix`); по паролю открывать файл из оглавления ниже.
 
-**Обязательно для всех игр:** 01 ЧИСТЫЙ ЭКРАН, 02 ПОСТЕПЕННО, 02 ПОНЯТНАЯ ПОЛЬЗА, 02 БЕЗ ПОВТОРОВ, 03 ЗВУК, 04 ЛОР (почти готовые игры), 05 ВИДИМО И ЭКОНОМНО, все правила папки 06, 07 RETENTION (игры для Playgama).
+**Обязательно для всех игр:** 01 ЧИСТЫЙ ЭКРАН, 02 ПОСТЕПЕННО, 02 ПОНЯТНАЯ ПОЛЬЗА, 02 БЕЗ ПОВТОРОВ, 03 ЗВУК, 04 ЛОР (почти готовые игры), 05 ВИДИМО И ЭКОНОМНО, все правила папки 06, 07 RETENTION (игры для Playgama), 09 БЕЗ РЕКЛАМЫ (все версии META GAMES).
 
 ## 01. Стиль и графика — [rules/01-stil-i-grafika/](rules/01-stil-i-grafika/)
 
@@ -71,6 +71,8 @@ _переиспользовать готовое, брать источник в
 - [NOVYY_UROVEN.md](rules/06-rabota-ii-s-kodom/NOVYY_UROVEN.md) — перед новым уровнем пересчитать всё, что есть: было N — осталось N
 - [NE_MENYAT_NEZAPROSHENNOE.md](rules/06-rabota-ii-s-kodom/NE_MENYAT_NEZAPROSHENNOE.md) — делать только то, что просили
 - [PESOCHNITSA_GPT.md](rules/06-rabota-ii-s-kodom/PESOCHNITSA_GPT.md) — **ПЕСОЧНИЦА:** ChatGPT работает только в `mpaykin1/meta6-lab` (ветка на идею, бот, карточка в LAB_QUEUE.md), в `meta6` — только чтение; забирает в `meta6` только Claude
+- [OTCHETY_DLYA_CLAUDE.md](rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md) — **ОТЧЁТЫ ДЛЯ CLAUDE:** каждый результат — PR со свежим описанием, прогон Actions с понятной причиной провала, карточка LAB_QUEUE; ничего важного только в чате ChatGPT
+- **ОТЧЁТ ВЛАДЕЛЬЦУ = ТОЛЬКО «ОСТАЛОСЬ СДЕЛАТЬ»** (07.11.2026): в чате владельцу — только список того, что ещё не готово, и что мешает; сделанное не перечислять, оно на GitHub. См. §5 [OTCHETY_DLYA_CLAUDE.md](rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md)
 - [automation/prompts/chatgpt-autotask.md](automation/prompts/chatgpt-autotask.md) — правила для автозадач ChatGPT (лежат в automation/)
 
 ## 07. Публикация на Playgama — [rules/07-publikaciya-playgama/](rules/07-publikaciya-playgama/)
@@ -101,6 +103,7 @@ _то, что касается только одной конкретной иг
 _общий склад и конструктор всех игр_
 
 - [META_GAMES_PLATFORM.md](rules/09-platforma/META_GAMES_PLATFORM.md) — **КОНЕЧНАЯ ЦЕЛЬ проекта, сверяться всем ИИ:** склад `shared/`, игры из склада, автоулучшение всех игр по правилам и бот-проходчик уровней, журнал решений владельца (§11)
+- [BEZ_REKLAMY.md](rules/09-platforma/BEZ_REKLAMY.md) — **БЕЗ РЕКЛАМЫ (07.11.2026):** игры в META GAMES (веб, Android, Steam) — без рекламного кода и SDK; реклама только в отдельных версиях для Playgama; 4 игры, загруженные Claude 06.11, очистить
 - [RENDER_OPTIMIZATION_ROADMAP.md](rules/09-platforma/RENDER_OPTIMIZATION_ROADMAP.md) — **цель оптимизации рендеринга всех игр META GAMES:** frustum/backface/cave culling, секции чанков, lightmap, упаковка вершин, batching, GPU-driven по возможности, LOD/HLOD, greedy meshing; адаптация по типу сцены без потери графики.
 - [STEAM_DISTRIBUTION.md](rules/09-platforma/STEAM_DISTRIBUTION.md) — **новая цель 06.11.2026: META GAMES в Steam**, автоматическая сборка каталога новых игр из GitHub, SteamPipe, условия допуска и пошаговая реализация (без изменения защищённой основной цели).
 - [CROSS_PLATFORM_GOAL.md](rules/09-platforma/CROSS_PLATFORM_GOAL.md) — **цель Web + Google Play + Steam:** единые игровые исходники, один общий каталог, Android/Windows-пакеты из `platforms/`, без рекламы в Steam
@@ -111,7 +114,3 @@ _общий склад и конструктор всех игр_
 - [games/sumerki-i-pepel-2/](games/sumerki-i-pepel-2/README.md) — эталонная игра Claude «Сумерки и пепел II» (загружена 06.11.2026) и её честный статус по каждому правилу
 - [games/twilight-isle-classic/](games/twilight-isle-classic/README.md), [games/twilight-isles/](games/twilight-isles/README.md), [games/archer-in-the-fog/](games/archer-in-the-fog/README.md) — эталоны удержания Playgama R1–R11 (загружены 06.11.2026) и статус каждой по всем универсальным правилам; [games/broken-city/](games/broken-city/README.md) — эталон Claude 1.4.0 (образец ЧИСТОГО ЭКРАНА и ЛОРА) со статусом по всем правилам
 - [meta-games-bot-rollout.md](automation/prompts/meta-games-bot-rollout.md) — промпт для ChatGPT на внедрение бота и исправление всех игр
-
-## Claude — публичные результаты ChatGPT (META GAMES)
-
-Перед новым переносом изучить [CLAUDE_REPORTS.md](CLAUDE_REPORTS.md) и [LAB_QUEUE.md](LAB_QUEUE.md). Разработчик ChatGPT не имеет права считать приватный отчёт из чата доступным Claude: результаты, SHA, Actions и ограничения публикуются в описании публичного PR; ссылка на него заносится в LAB_QUEUE. Строго соблюдать [список источников эталонных игр](rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md): игровые ассеты и код только из пяти исходных эталонов или подтверждённых игр Claude. Процедурная генерация без явных эталонных доноров **не удовлетворяет** правилу.

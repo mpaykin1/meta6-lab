@@ -9,13 +9,14 @@
 <!-- карточки ниже -->
 
 ### World_server / PR #621 — MCP: Veil Terraces и исходники
-- Польза: каталог пяти эталонов и два проверенных модуля по HTTP MCP.
+- Польза: публичный MCP отдаёт 5 игр, 2 проверенных оригинальных модуля, не отдаёт 4 неподтверждённых.
 - Поиграть: https://mpaykin1.github.io/meta6/meta-games-worlds/veil-terraces/
-- Ветка / SHA: World_server lab/owner-grant-catalog-20261107 / 2f7a0b5ad39f0f28fa0a1dbb81b77bbbb1c30740.
-- Файлы: World_server ASSET_INDEX, RIGHTS_REVIEW, MCP smoke и проверочные fixtures.
-- PR: https://github.com/mpaykin1/World_server/pull/621
-- Проверки: Cloudflare https://github.com/mpaykin1/World_server/actions/runs/42331036619 ; CI https://github.com/mpaykin1/World_server/actions/runs/42331036596 ; live https://github.com/mpaykin1/World_server/actions/runs/42331036696
-- Статус: В РАБОТЕ — не принимать без merge и фактического HTTPS list_games с veil-terraces.
+- Merge SHA: https://github.com/mpaykin1/World_server/commit/0cf972347edfc11c6aa4b62dbb2228fdd078d59b
+- PR: https://github.com/mpaykin1/World_server/pull/621 (merged)
+- PRE CI: https://github.com/mpaykin1/World_server/actions/runs/42332097936 ; Cloudflare https://github.com/mpaykin1/World_server/actions/runs/42332097917
+- LIVE Render POST MCP: https://github.com/mpaykin1/World_server/actions/runs/42332660062 — PASS 07.11; IDs observer-v7, ashen, three-worlds, underwater, veil-terraces; health games=5, licensed_assets=2, source_sha=merge SHA.
+- Render CD: https://github.com/mpaykin1/World_server/actions/runs/42332660003 — PASS, exact SHA.
+- Статус: ПРИНЯТО — отдельно от ещё незавершённых фабрики create_game, Vault и META BOT.
 - Михаил: —
 - Claude: —
 

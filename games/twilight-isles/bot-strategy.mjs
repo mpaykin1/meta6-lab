@@ -9,7 +9,8 @@ export async function playLevel(ctx,level) {
   let turns=0;
   while(turns++ < 1100) {
     const s=ctx.state();
-    if(s.gameDone || s.levelDone || s.level>level || !s.alive) return;
+    if(s.gameDone || s.levelDone || s.level>level) return;
+    if(!s.alive) throw new Error(`Island ${level+1}: hero died before completing the level; META BOT must not report a pass`);
     if(s.goal) await ctx.walkToGoal(510);
     else await ctx.wait(500);
     if(turns%2===0) {

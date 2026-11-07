@@ -1,6 +1,7 @@
 // Archer plays only via genuine pointer events sent by META BOT input.mjs.
 // Read-only state contains actual onscreen target and the real current challenge.
 export async function start(ctx) {
+  reviveUsed = false; // Each viewport and independent replay is a new run.
   await ctx.wait(2200);
   if (ctx.state().started) return;
   await ctx.key('Enter', 80);

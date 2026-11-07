@@ -8,6 +8,10 @@
 - [PR World_server](https://github.com/mpaykin1/World_server/pulls?q=is%3Apr) — MCP, лицензии и интеграции.
 - [LAB_QUEUE](LAB_QUEUE.md) — короткие карточки готовности каждой идеи; источник для приёмки Claude.
 - [PR #621 — лицензии и каталог MCP](https://github.com/mpaykin1/World_server/pull/621) — 5 игр, 2 проверенных компонента; статус берётся из GitHub.
+- [PR #11 — запрет неэталонных игровых исходников](https://github.com/mpaykin1/meta6-lab/pull/11) — merged; неподтверждённые процедурные кандидаты блокируются.
+- [PR #12 — сверка с точным upstream Git blob](https://github.com/mpaykin1/meta6-lab/pull/12) — merged; лабораторная копия не считается доказательством исходника.
+- [PR #13 — два компонента общей библиотеки](https://github.com/mpaykin1/meta6-lab/pull/13) — байт-в-байт оригиналы из эталонного Twilight Island, пока без игровой интеграции.
+- [World_server MCP #621 CI](https://github.com/mpaykin1/World_server/actions/runs/42326698847) — Cloudflare preview исчерпал лимит; PR не сливать и не считать Render обновлённым до зелёного релиза.
 - [PR #9 — пробная сборка генератора](https://github.com/mpaykin1/meta6-lab/pull/9) — недопустима к переносу до проверки источников и полного META BOT.
 - [PR #8 — безопасный FIX](https://github.com/mpaykin1/meta6-lab/pull/8).
 - [PR #7 — поиск исходников](https://github.com/mpaykin1/meta6-lab/pull/7).

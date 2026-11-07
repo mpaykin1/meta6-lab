@@ -78,6 +78,16 @@
     if (next < 0 || next === here) return goal;
     return { x: (next % width) + .5, y: ((next / width) | 0) + .5 };
   }
+  // Persist a genuine uncollected coin until pickup. Euclidean nearest can
+  // flip on every step and make an otherwise valid route oscillate.
+  let coinWorld = null, trackedCoin = null;
+  function stickToLiveCoin(world, coins, candidate) {
+    if (world !== coinWorld || !trackedCoin?.alive ||
+        !Array.isArray(coins) || !coins.includes(trackedCoin)) {
+      coinWorld = world; trackedCoin = candidate;
+    }
+    return trackedCoin;
+  }
   const bot = Object.freeze({
     version: 1,
     info() {
@@ -123,7 +133,7 @@
       const ring = isle?.world?.ring;
       const objective = game?.all
         ? (head ?? ring)
-        : nearestCoin;
+        : stickToLiveCoin(isle?.world, isle?.coins, nearestCoin);
       const directGoal = objective
         ? { x: objective.x, y: objective.z }
         : null;

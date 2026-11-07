@@ -26,6 +26,14 @@ jobs:
           node-version: '22'
       - name: Validate repair bot syntax
         run: node --check scripts/repair-bot/repair-json.mjs
+      - name: Exercise repair bot on controlled fixture
+        run: |
+          mkdir -p .repair-fixture
+          printf '{"items": [1,2,], "ok": true,}\n' > .repair-fixture/sample.json
+          git add -N .repair-fixture/sample.json
+          node scripts/repair-bot/repair-json.mjs
+          node -e "const fs=require('fs'); const p='.repair-fixture/sample.json'; JSON.parse(fs.readFileSync(p,'utf8'))"
+          rm -rf .repair-fixture
       - name: Repair deterministic JSON errors
         id: repair
         run: |

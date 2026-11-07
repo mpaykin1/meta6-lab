@@ -190,6 +190,29 @@
       "ads": false
     },
     {
+      "id": "three-worlds-island-weather",
+      "title": "Three Worlds original GPU weather palettes",
+      "kind": "weather",
+      "entry": "island-weather.js",
+      "exports": [
+        "createIslandWeatherCatalog"
+      ],
+      "needs": [],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "three-worlds",
+        "path": "three-worlds-game/island-weather.mjs",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "d05a1ea97e999b6d9bbc1d5724b3d3bdd2317355"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "veil-terraces"
+      ],
+      "ads": false
+    },
+    {
       "id": "three-worlds-rift-guard",
       "title": "Three Worlds timed rift input guard",
       "kind": "input",

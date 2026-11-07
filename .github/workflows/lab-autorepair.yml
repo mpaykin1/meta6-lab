@@ -1,0 +1,60 @@
+name: LAB Auto-Repair
+# Sandbox-only: never edits mpaykin1/meta6, accepted originals or META BOT core.
+on:
+  push:
+    branches: ['lab/bot-safe-autorepair']
+    paths: ['scripts/lab/bot-safe-autorepair.mjs', '.github/workflows/lab-autorepair.yml']
+  workflow_dispatch:
+    inputs:
+      game:
+        description: 'Optional working-copy directory games/<id>; empty selects next eligible game'
+        required: false
+        type: string
+  schedule:
+    - cron: '11 2 * * *'
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  repair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install existing META BOT browser
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Run bot, apply a narrowly scoped repair, replay and roll back if not green
+        env:
+          META_BOT_FPS_FILE: .meta-bot-cache/fps.json
+          SELECTED_GAME: ${{ inputs.game }}
+        run: node scripts/lab/bot-safe-autorepair.mjs "${SELECTED_GAME}"
+      - name: Open sandbox-only candidate PR after genuine bot success
+        if: github.ref == 'refs/heads/lab/bot-safe-autorepair' && (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- games/)" ]; then
+            echo 'No repair required or available'
+            exit 0
+          fi
+          branch="lab/bot-repair-$RUN_ID"
+          git config user.name 'meta6-lab bot'
+          git config user.email 'meta6-lab-bot@users.noreply.github.com'
+          git checkout -b "$branch"
+          git add games/
+          git diff --cached --name-only | grep -Eq '^games/[^/]+/index[.]html$'
+          if git diff --cached --name-only | grep -Ev '^games/[^/]+/index[.]html$'; then
+            echo 'Unsafe files modified; refusing repair commit'
+            exit 1
+          fi
+          git commit -m "fix(game): bot-verified viewport behavior"
+          git push origin "$branch"
+          gh pr create --base lab/bot-safe-autorepair --head "$branch" --title "Bot-verified sandbox game repair" --body "Safe viewport fix only. Protected META BOT passed before PR creation. Main meta6 untouched. Requires owner review."

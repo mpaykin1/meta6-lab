@@ -111,3 +111,7 @@ _общий склад и конструктор всех игр_
 - [games/sumerki-i-pepel-2/](games/sumerki-i-pepel-2/README.md) — эталонная игра Claude «Сумерки и пепел II» (загружена 06.11.2026) и её честный статус по каждому правилу
 - [games/twilight-isle-classic/](games/twilight-isle-classic/README.md), [games/twilight-isles/](games/twilight-isles/README.md), [games/archer-in-the-fog/](games/archer-in-the-fog/README.md) — эталоны удержания Playgama R1–R11 (загружены 06.11.2026) и статус каждой по всем универсальным правилам; [games/broken-city/](games/broken-city/README.md) — эталон Claude 1.4.0 (образец ЧИСТОГО ЭКРАНА и ЛОРА) со статусом по всем правилам
 - [meta-games-bot-rollout.md](automation/prompts/meta-games-bot-rollout.md) — промпт для ChatGPT на внедрение бота и исправление всех игр
+
+## Claude — публичные результаты ChatGPT (META GAMES)
+
+Перед новым переносом изучить [CLAUDE_REPORTS.md](CLAUDE_REPORTS.md) и [LAB_QUEUE.md](LAB_QUEUE.md). Разработчик ChatGPT не имеет права считать приватный отчёт из чата доступным Claude: результаты, SHA, Actions и ограничения публикуются в описании публичного PR; ссылка на него заносится в LAB_QUEUE. Строго соблюдать [список источников эталонных игр](rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md): игровые ассеты и код только из пяти исходных эталонов или подтверждённых игр Claude. Процедурная генерация без явных эталонных доноров **не удовлетворяет** правилу.

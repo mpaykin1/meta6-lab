@@ -1,27 +1,39 @@
-// Every action below is a real touch/mouse event. State is read-only.
-// This shooter has no walking mechanic; target the actual dragon on screen.
+// Archer plays only via genuine pointer events sent by META BOT input.mjs.
+// Read-only state contains actual onscreen target and the real current challenge.
 export async function start(ctx) {
   await ctx.wait(2200);
   if (ctx.state().started) return;
-  for (const y of [0.59, 0.64, 0.52]) {
-    if (ctx.state().started) break;
-    await ctx.tap(ctx.viewport.width * 0.5, ctx.viewport.height * y);
+  await ctx.key('Enter', 80);
+  await ctx.wait(800);
+  for (let retry = 0; retry < 3 && !ctx.state().started; retry++) {
+    const start = ctx.state().startScreen;
+    if (start) await ctx.tap(start.x, start.y);
+    else await ctx.tap(ctx.viewport.width * 0.5, ctx.viewport.height * 0.56);
     await ctx.wait(800);
   }
 }
+
+let reviveUsed = false;
 export async function playLevel(ctx, level) {
-  while (!ctx.state().gameDone && ctx.state().level === level) {
+  while (true) {
     const s = ctx.state();
+    if (s.gameDone || s.levelDone || s.level > level) return;
     if (!s.alive) {
-      await ctx.wait(300); // Do not conceal a death: core's 5 s watchdog decides.
+      if (!reviveUsed && s.reviveScreen) {
+        reviveUsed = true;
+        await ctx.tap(s.reviveScreen.x, s.reviveScreen.y);
+      }
+      await ctx.wait(300); // 5-second death watchdog remains in force.
       continue;
     }
-    const a = s.aimScreen;
-    if (a && a.visible) {
-      await ctx.hold(a.x, a.y, 550); // Bow fires through the game's real pointer input.
+    // Real fire challenge awards progress only for shooting down fireballs.
+    // Hold challenge increments its own time counter; sparks must be earned.
+    const point = s.task === 'fire' && s.fireballScreen?.visible
+      ? s.fireballScreen : s.aimScreen;
+    if (point?.visible) {
+      await ctx.hold(point.x, point.y, 550);
     } else {
-      // Dragon temporarily out of view: wait for its actual orbit to bring it back.
-      await ctx.wait(180);
+      await ctx.wait(160);
     }
   }
 }

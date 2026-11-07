@@ -4768,11 +4768,17 @@ function renderArsenal() {
    23 · Main loop (delta-time everywhere; nothing is tied to frame count)
 ----------------------------------------------------------------------------- */
 let last = 0, booted = false;
-function perfMonitor(dt) {
-  if (perf.lock) return;
-  perf.acc += dt; perf.frames++;
-  if (perf.acc >= 2) {
-    const fps = perf.frames / perf.acc; perf.acc = 0; perf.frames = 0;
+function perfMonitor() {
+  // Measure actual frame wall time: physics dt is capped at 50ms and would
+  // falsely report ~20 FPS even on a severely overloaded WebGL device.
+  if (perf.lock) { perf.wallStart = 0; perf.frames = 0; return; }
+  const now = performance.now();
+  if (!perf.wallStart) { perf.wallStart = now; perf.frames = 0; return; }
+  perf.frames++;
+  const seconds = (now - perf.wallStart) / 1000;
+  if (seconds >= 2) {
+    const fps = perf.frames / seconds;
+    perf.wallStart = now; perf.frames = 0;
     let s = perf.scale;
     if (fps < 48 && s > 0.5) s = Math.max(0.5, Math.round((s - 0.1) * 100) / 100);
     else if (fps > 58 && s < 0.9) s = Math.min(0.9, Math.round((s + 0.05) * 100) / 100);

@@ -105,7 +105,7 @@ canvas#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-actio
   <button class="btn" id="bGal">GALLERY</button>
 </div>
 <div id="shop" class="ov hide"><div class="card"><div class="sh-h"><span>WEAPONS</span><span id="shCoins"></span></div><div id="shList" style="display:flex;flex-direction:column;gap:8px"></div><button class="btn" id="shClose">FIGHT</button></div></div>
-<div id="over" class="ov hide"><h1>DRAGON<br>WON</h1><p id="ovStats"></p><button class="btn" id="bRevive" hidden><i class="rv"></i><span>Revive: watch an ad</span></button><button class="btn" id="bRetry">RETRY</button><button class="btn" id="bOvMenu">MENU</button></div>
+<div id="over" class="ov hide"><h1>DRAGON<br>WON</h1><p id="ovStats"></p><button class="btn" id="bRevive" hidden><i class="rv"></i><span>Revive</span></button><button class="btn" id="bRetry">RETRY</button><button class="btn" id="bOvMenu">MENU</button></div>
 <div id="gal" class="ov hide">
   <button class="btn" id="galBack">← MENU</button>
   <div class="card">
@@ -115,6 +115,51 @@ canvas#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-actio
   </div>
 </div>
 
+
+
+<style id="metaArcherClean">
+/* Clean in-play composition: gameplay events remain luminous symbols, not text. */
+#depth,#lvl,#cap{font-size:0!important;-webkit-text-stroke:0!important}
+#cap.show::after{content:"";display:block;margin:0 auto;width:64px;height:64px;
+  background:radial-gradient(circle,#8ff3ff 0 12%,transparent 15% 100%);
+  border:2px solid #d9efff;transform:rotate(45deg);
+  box-shadow:0 0 28px #8ff3ff,0 0 75px #6c8efaa6}
+#coins,#bFreeze{font-size:0!important}
+#bFreeze::before{content:"❄";font-size:21px;line-height:1}
+#mgPauseButton{position:fixed;z-index:36;top:calc(env(safe-area-inset-top) + 12px);
+  right:16px;width:46px;height:46px;display:grid;place-items:center;
+  font:24px system-ui,sans-serif;color:#d9f8ff;cursor:pointer;
+  background:rgba(10,16,30,.56);border:1px solid rgba(200,225,255,.45);
+  box-shadow:0 0 18px #66baff33;backdrop-filter:blur(8px);touch-action:manipulation}
+#mgPauseScreen{position:fixed;z-index:35;inset:0;background:rgba(3,10,30,.87);
+  backdrop-filter:blur(8px);display:grid;place-content:center;gap:20px;
+  justify-items:center}
+#mgPauseScreen[hidden]{display:none!important}
+#mgPauseScreen button{min-width:180px;min-height:48px;padding:9px 20px;
+  background:rgba(10,24,50,.8);border:1px solid #87dfee;
+  box-shadow:0 0 20px #6adcff33;color:#eefcff;font:18px system-ui,sans-serif}
+</style>
+<button id="mgPauseButton" type="button" aria-label="Menu">☰</button>
+<div id="mgPauseScreen" hidden role="dialog" aria-label="Pause menu">
+  <button id="mgResume" type="button">Resume</button>
+  <button id="mgRestart" type="button">Restart</button>
+</div>
+<script>
+(() => {
+  const trigger = document.getElementById('mgPauseButton');
+  const screen = document.getElementById('mgPauseScreen');
+  const resume = document.getElementById('mgResume');
+  function showPause(open) {
+    const g = window.__A?.G;
+    if (!g || g.mode !== 'play' || g.phase === 'over') return;
+    g.paused = open;
+    screen.hidden = !open;
+  }
+  trigger.addEventListener('click', () => showPause(screen.hidden));
+  resume.addEventListener('click', () => showPause(false));
+  document.getElementById('mgRestart').addEventListener('click', () => location.reload());
+})();
+</script>
 
 <script src="./bot-adapter.js"></script>
 

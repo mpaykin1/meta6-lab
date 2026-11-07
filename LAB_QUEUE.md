@@ -54,20 +54,24 @@
 - Claude: —
 
 ### meta6 #290 — Twilight Isles, исправление проходимости
-- Польза: одобрить игровые улучшения только после полного честного прохождения.
-- Ветка / SHA: meta6 ai/meta-rules-twilight-isles-20261106 / 72b92d5c508571cc4fd69d4aa60c2692940cee16 (только чтение).
-- PR: https://github.com/mpaykin1/meta6/pull/290
-- META BOT: https://github.com/mpaykin1/meta6/actions/runs/42186206581 — FAIL, уровень 1 не завершён за 570 с; ложный возврат playLevel при смерти исправлен в lab PR #2 SHA 2a96b686f28959da60c7ba64ccbdff248ac8d405, полная победа ещё не подтверждена.
-- Статус: В РАБОТЕ — не сливать до зелёного META BOT; прямые исправления/комментарии в meta6 запрещены.
+- Польза: пройти остров без гибели и ложной победы, сохранить исходную графику.
+- Поиграть: https://mpaykin1.github.io/meta6-lab/games/twilight-isles/ (основная песочница, не превью ветки).
+- Ветка / SHA: lab/twilight-isles-pass / 95f807d6901f5ebfe220a1006f8b82cde836a94b.
+- PR: https://github.com/mpaykin1/meta6-lab/pull/2; источник meta6 PR #290 только чтение.
+- META BOT: https://github.com/mpaykin1/meta6-lab/actions/runs/42354017653 — FAIL (герой погиб mobile/desktop/replay); https://github.com/mpaykin1/meta6-lab/actions/runs/42356322630 — IN_PROGRESS на новом SHA, PASS нет.
+- Изменены: bot-strategy.mjs (честная смерть), meta-enhancements.js (путь к следующей клетке, доступное оружие в начале).
+- Статус: В РАБОТЕ — дождаться и исправить META BOT; не сливать при FAIL.
 - Михаил: —
 - Claude: —
 
 ### meta6 #291 — Twilight Island, исправление маршрута и прогресса
-- Польза: достижение честной победы на острове без телепортов и обхода проверок.
-- Ветка / SHA: meta6 ai/codex/meta-bot-twilight-island-20261106 / 77add700f428e8c9209e4dd2c58506480c5524f5 (только чтение).
-- PR: https://github.com/mpaykin1/meta6/pull/291 (draft)
-- META BOT: https://github.com/mpaykin1/meta6/actions/runs/42185128729 — FAIL, 20 с progress не растёт и герой гибнет.
-- Статус: В РАБОТЕ — нет полного прохода; исправления в отдельной ветке lab, перенос в meta6 только Claude.
+- Польза: физически собрать монеты, победить босса, дойти до кольца без обхода правил.
+- Поиграть: https://mpaykin1.github.io/meta6-lab/games/twilight-island/ (основная песочница, не превью ветки).
+- Ветка / SHA: lab/twilight-island-pass / d91ce533594870375aedc8b1d420258ba435d8e4.
+- PR: https://github.com/mpaykin1/meta6-lab/pull/1; источник meta6 PR #291 только чтение.
+- META BOT: https://github.com/mpaykin1/meta6-lab/actions/runs/42354623678 — FAIL: оба mobile дошли до босса, но погибли со слабым оружием; desktop убил босса, но ушёл к сердцу вместо кольца. https://github.com/mpaykin1/meta6-lab/actions/runs/42356940858 — IN_PROGRESS на новом SHA.
+- Изменены: bot-strategy.mjs (реальный выбор оружия, приоритет победного кольца), bot-adapter.js (следующая клетка маршрута).
+- Статус: В РАБОТЕ — подтвердить три полных успешных прохода, без подтверждения не сливать.
 - Михаил: —
 - Claude: —
 

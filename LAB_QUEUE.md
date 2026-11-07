@@ -8,6 +8,30 @@
 
 <!-- карточки ниже -->
 
+### lab/render-visibility-optimization — ускорение рендеринга
+- Польза: Veil Terraces не отправляет на GPU невидимые чанки, руины и кристаллы; общий модуль готов для других игр.
+- Поиграть после слияния: https://mpaykin1.github.io/meta6-lab/games/veil-terraces/
+- Ветка: `lab/render-visibility-optimization`; PR: https://github.com/mpaykin1/meta6-lab/pull/54.
+- Код: `shared/render/visibility.js`, `shared/render/voxel.js`, `games/veil-terraces/index.html`, `scripts/lab/render-bench.mjs`.
+- Технологии: frustum culling в игре; WebGL2 instancing руин, кэш чанков, адаптивное разрешение; voxel greedy/packed/light lookup пока отдельно.
+- Проверка: Actions и реальный WebGL2 benchmark на PR #54; до зелёных прогонов — В РАБОТЕ.
+- Михаил: —; Claude: —
+
+
+### lab/play-connect-earn-home — главная Play / Connect / Earn
+- Польза: три работающие навигационные кнопки; Play открывает 10 игровых ссылок, Connect показывает MCP endpoint и копирование URL, Earn честно заблокирован до готовности и 100 DAU.
+- Ветка: `lab/play-connect-earn-home`.
+- Играть: https://mpaykin1.github.io/meta6-lab/meta-games/
+- Статус: В РАБОТЕ — MCP запись/создание игр, аккаунты, права, аналитика топа, уведомления и боты не реализованы.
+- Михаил: —; Claude: —
+
+### lab/earn-after-100-dau — запрет рекламы до готовности и 100 DAU
+- Польза: сначала готовая платформа и все улучшенные игры, затем реальные 100 активных пользователей в сутки, и только потом рекламный этап.
+- Правило: [PLAY_CONNECT_EARN.md](rules/09-platforma/PLAY_CONNECT_EARN.md) §5.0.
+- Ветка: `lab/earn-after-100-dau`.
+- Статус: В РАБОТЕ — релиз, все улучшенные игры и измеренный порог 100 DAU ещё не подтверждены.
+- Михаил: —; Claude: —
+
 ### lab/play-connect-earn-home — главная Play / Connect / Earn
 - Польза: три работающие навигационные кнопки; Play открывает 10 игровых ссылок, Connect показывает MCP endpoint и копирование URL, Earn честно заблокирован до готовности и 100 DAU.
 - Ветка: `lab/play-connect-earn-home`.

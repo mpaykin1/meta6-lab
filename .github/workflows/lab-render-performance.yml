@@ -1,0 +1,45 @@
+name: LAB Render Performance
+on:
+  pull_request:
+    paths:
+      - 'games/veil-terraces/**'
+      - 'shared/render/**'
+      - 'scripts/lab/render-bench.mjs'
+      - '.github/workflows/lab-render-performance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Prepare original game at PR base
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          BASE_SHA="${BASE_SHA:-$(git merge-base HEAD origin/main)}"
+          mkdir -p /tmp/veil-base/games/veil-terraces
+          git show "$BASE_SHA:games/veil-terraces/index.html" >/tmp/veil-base/games/veil-terraces/index.html
+          git show "$BASE_SHA:games/veil-terraces/bot-adapter.js" >/tmp/veil-base/games/veil-terraces/bot-adapter.js
+          # Baseline retains approved audio/story dependencies from the exact base.
+          git archive "$BASE_SHA" shared/components/observer-story shared/components/observer-audio | tar -x -C /tmp/veil-base
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory /tmp/veil-base >/tmp/veil-base-http.log 2>&1 &
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory . >/tmp/veil-head-http.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8765/games/veil-terraces/ >/dev/null
+          curl -fsS http://127.0.0.1:8766/games/veil-terraces/ >/dev/null
+      - name: Compare WebGL2 mobile and desktop performance
+        run: node scripts/lab/render-bench.mjs

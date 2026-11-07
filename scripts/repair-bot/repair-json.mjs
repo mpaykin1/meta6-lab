@@ -17,7 +17,7 @@ for (const name of tracked) {
     if (quoted) {
       output += c;
       if (escaped) escaped = false;
-      else if (c === '\') escaped = true;
+      else if (c === '\\') escaped = true;
       else if (c === '"') quoted = false;
       continue;
     }

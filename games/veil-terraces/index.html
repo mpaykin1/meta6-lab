@@ -141,7 +141,8 @@ let p={x:0,z:0,y:(surface(0,0)??0)+.35,vy:0,vx:0,vz:0,ground:true},lastSafe={x:0
 // Reuse the exact original Observer touch engine through the existing movement and
 // jump physics. The Observer HUD replaces (never duplicates) the legacy visual
 // joystick on mobile; direct canvas pointer input remains available to the bot.
-const sharedTouch=window.ObserverMobileControls.create({
+let sharedTouch={enabled:false};
+try { sharedTouch=window.ObserverMobileControls?.create?.({
   native:{
     mobileMove(dx,dy){touch.mx=clamp(dx,-1,1);touch.my=clamp(dy,-1,1);},
     mobileCombo(active){if(active)jumpQueued=true;},
@@ -150,7 +151,8 @@ const sharedTouch=window.ObserverMobileControls.create({
   },
   onBuild(){}, // Veil has no build mechanic; original icon is hidden.
   onSwap(){}
-});
+}) || sharedTouch; }
+catch(error){console.warn('Observer touch unavailable: using native Veil controls',error);}
 Object.defineProperty(window,'__metaGamesState',{value:()=>Object.freeze({x:p.x,y:p.y,z:p.z,cam:[...camera],chunks:chunks.size,collected:targets.filter(q=>q.done).length,won})});
 
  // META GAMES universal bot API: snapshot only, no commands and no mutable game references.

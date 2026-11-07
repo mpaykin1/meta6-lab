@@ -1,0 +1,723 @@
+{
+  "schema": 2,
+  "as_of": "2026-11-07",
+  "scope": "Production or merged branches only; pending and unmerged score zero",
+  "scoring": "100 defined binary gates, 10 per each of 10 elements. PASS needs merged PR, matching successful named GitHub workflow on exact SHA, and surviving artifact if applicable. This is not an estimate of code completion or human time.",
+  "areas": [
+    {
+      "id": "mcp",
+      "title": "MCP",
+      "gates": [
+        {
+          "id": "public_read_only",
+          "label": "Публичный MCP чтения подтверждён актуальным независимым live-smoke",
+          "status": "pending",
+          "evidence": "https://meta-games-mcp-production.onrender.com/meta-games/mcp"
+        },
+        {
+          "id": "approved_catalog_live",
+          "label": "Проверенный каталог разрешённых игровых исходников опубликован в Render",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/621"
+        },
+        {
+          "id": "external_create_game",
+          "label": "Внешний авторизованный агент создаёт игру через публичный MCP",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/621"
+        },
+        {
+          "id": "agent_auth",
+          "label": "Права на запись ограничены авторизацией и квотами",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/621"
+        },
+        {
+          "id": "source_policy",
+          "label": "Ограничение на доноров внедрено в песочницу",
+          "status": "pass",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/11",
+          "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42327266820",
+          "workflow": "LAB approved-game-sources"
+        },
+        {
+          "id": "source_integrity",
+          "label": "Проверка точных Git blob внедрена в песочницу",
+          "status": "pass",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/12",
+          "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42327583663",
+          "workflow": "LAB approved-game-sources"
+        },
+        {
+          "id": "generated_game_policy",
+          "label": "Игра от генератора соответствует донорской политике",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/9"
+        },
+        {
+          "id": "public_live_smoke",
+          "label": "Проверен актуальный production SHA после релиза каталога",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/621"
+        },
+        {
+          "id": "automatic_bot_gate",
+          "label": "Новая игра проходит полный обязательный META BOT до публикации",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/9"
+        },
+        {
+          "id": "end_to_end",
+          "label": "Внешняя нейросеть создаёт и публикует принятую игру от начала до конца",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/621"
+        }
+      ]
+    },
+    {
+      "id": "library",
+      "title": "Библиотека решений",
+      "gates": [
+        {
+          "id": "source_component_1",
+          "label": "Первый исходный модуль проверен по Git blob",
+          "status": "pass",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/13",
+          "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42327913505",
+          "workflow": "LAB shared-original-components",
+          "artifact": {
+            "repo": "mpaykin1/meta6-lab",
+            "ref": "main",
+            "path": "shared/components/observer-story"
+          }
+        },
+        {
+          "id": "source_component_2",
+          "label": "Второй исходный модуль проверен по Git blob",
+          "status": "pass",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/13",
+          "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42327913505",
+          "workflow": "LAB shared-original-components",
+          "artifact": {
+            "repo": "mpaykin1/meta6-lab",
+            "ref": "main",
+            "path": "shared/components/observer-mobile-input"
+          }
+        },
+        {
+          "id": "merged_index",
+          "label": "Индекс оригинальных компонентов слит в песочницу",
+          "status": "pass",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/13",
+          "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42327913505",
+          "workflow": "LAB shared-original-components",
+          "artifact": {
+            "repo": "mpaykin1/meta6-lab",
+            "ref": "main",
+            "path": "shared/index.json"
+          }
+        },
+        {
+          "id": "loader",
+          "label": "Загрузчик двух оригинальных модулей слит в песочницу",
+          "status": "pass",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/13",
+          "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42327913505",
+          "workflow": "LAB shared-original-components",
+          "artifact": {
+            "repo": "mpaykin1/meta6-lab",
+            "ref": "main",
+            "path": "shared/loader.js"
+          }
+        },
+        {
+          "id": "verified_search_merged",
+          "label": "Поиск только разрешённого кода слит и проверен",
+          "status": "pass",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/17",
+          "artifact": {
+            "repo": "mpaykin1/meta6-lab",
+            "ref": "main",
+            "path": "shared/approved/search.mjs"
+          },
+          "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42330439031",
+          "workflow": "LAB Approved Source MCP Live"
+        },
+        {
+          "id": "game_integration",
+          "label": "Хотя бы одна отдельная игра реально использует общий модуль",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/13"
+        },
+        {
+          "id": "multi_game_integration",
+          "label": "Библиотека используется минимум двумя играми",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/13"
+        },
+        {
+          "id": "public_mcp_catalog",
+          "label": "Разрешённые исходники доступны через production MCP",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/621"
+        },
+        {
+          "id": "asset_provenance",
+          "label": "Ассеты эталонов проверены и индексированы с разрешениями",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/621"
+        },
+        {
+          "id": "time_token_savings",
+          "label": "Измерена экономия токенов и времени на реальных задачах",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/15"
+        }
+      ]
+    },
+    {
+      "id": "bot",
+      "title": "Бот-проходчик",
+      "gates": [
+        {
+          "id": "veil_complete",
+          "label": "Veil Terraces: 6/6 мобильный и 6/6 ПК; третий независимый запуск не подтверждён",
+          "status": "pass",
+          "evidence": "https://github.com/mpaykin1/meta6/pull/292",
+          "run": "https://github.com/mpaykin1/meta6/actions/runs/42171331567",
+          "workflow": "META BOT"
+        },
+        {
+          "id": "safe_repair_branch",
+          "label": "Безопасный ремонт экрана реализован в отдельной ветке",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "actual_repair",
+          "label": "Подтверждено исправление реального сбоя с повторным полным проходом",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "game_2_pass",
+          "label": "Вторая эталонная игра полностью пройдена",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/pull/290"
+        },
+        {
+          "id": "game_3_pass",
+          "label": "Третья эталонная игра полностью пройдена",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/pull/291"
+        },
+        {
+          "id": "all_catalog_pass",
+          "label": "Все эталонные игры проходят без пропусков",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/blob/main/LAB_QUEUE.md"
+        },
+        {
+          "id": "fps_mobile",
+          "label": "FPS на мобильном устройстве проверен для всех игр",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/blob/main/LAB_QUEUE.md"
+        },
+        {
+          "id": "safe_rollback",
+          "label": "Реальный неудачный ремонт откатывается и подтверждён Actions",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "automated_gameplay_fix",
+          "label": "Бот исправляет не только CSS, но и игровые механики с повторным прохождением",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "safe_publication",
+          "label": "Исправленная игра автоматически попадает в очередь только после полного PASS и одобрения",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        }
+      ]
+    },
+    {
+      "id": "portal",
+      "title": "Портал и каталог",
+      "gates": [
+        {
+          "id": "five_world_cards",
+          "label": "Пять миров добавлены в исходный портал",
+          "status": "pass",
+          "evidence": "https://github.com/mpaykin1/meta6/pull/265",
+          "run": "https://github.com/mpaykin1/meta6/actions/runs/41839318649",
+          "workflow": "META GAMES portal",
+          "artifact": {
+            "repo": "mpaykin1/meta6-lab",
+            "ref": "main",
+            "path": "meta-games/index.html"
+          }
+        },
+        {
+          "id": "live_smoke",
+          "label": "Актуальный публичный сайт независимо открыт и проверен",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "all_games",
+          "label": "Все подтверждённые игры находятся в едином каталоге",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "mobile_390",
+          "label": "Каждая игра полностью проверена в 390×844",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "desktop",
+          "label": "Каждая игра полностью проверена на ПК",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "ad_free",
+          "label": "Веб-версии очищены от рекламных SDK",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "graphics",
+          "label": "GPU-портал и шейдеры проверены в живом браузере",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "auto_catalog",
+          "label": "Новые принятые игры автоматически добавляются",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "owner_review",
+          "label": "Все релизные игры подтверждены владельцем",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "rollback",
+          "label": "Отработан откат сломанной публикации",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        }
+      ]
+    },
+    {
+      "id": "factory",
+      "title": "Фабрика игр и 7 движков",
+      "gates": [
+        {
+          "id": "g1_contracts",
+          "label": "Контракты семи движков G1 слиты в World_server",
+          "status": "pass",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/546",
+          "run": "https://github.com/mpaykin1/World_server/actions/runs/41415587848",
+          "workflow": "engines-score",
+          "artifact": {
+            "repo": "mpaykin1/World_server",
+            "ref": "master",
+            "path": "architecture/engines/contracts"
+          }
+        },
+        {
+          "id": "donors",
+          "label": "Генератор использует пять эталонов и подтверждённые игры",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/546"
+        },
+        {
+          "id": "select",
+          "label": "Игровые исходники выбираются из разрешённого каталога",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/546"
+        },
+        {
+          "id": "provenance",
+          "label": "Каждый игровой ассет проверен по точному Git blob",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/546"
+        },
+        {
+          "id": "shared",
+          "label": "Игра действительно собирается из shared-модулей",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/546"
+        },
+        {
+          "id": "variation",
+          "label": "Сюжеты и механики не повторяются между играми",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/546"
+        },
+        {
+          "id": "runnable",
+          "label": "Сгенерированная игра запускается на WebGL",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/546"
+        },
+        {
+          "id": "bot",
+          "label": "Сгенерированная игра проходит общего бота",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/546"
+        },
+        {
+          "id": "approved",
+          "label": "Новая игра получает одобрение владельца",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/546"
+        },
+        {
+          "id": "released",
+          "label": "Внешняя нейросеть создаёт и публикует игру",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/World_server/pull/546"
+        }
+      ]
+    },
+    {
+      "id": "repair",
+      "title": "Автоисправление игр",
+      "gates": [
+        {
+          "id": "merged",
+          "label": "Безопасный авто-ремонт слит в песочницу",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "real_failure",
+          "label": "Настоящая неисправность воспроизведена до исправления",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "small_fix",
+          "label": "Исправление затрагивает только разрешённые файлы",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "mobile_pass",
+          "label": "После исправления бот прошёл на мобильном",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "desktop_pass",
+          "label": "После исправления бот прошёл на ПК",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "second_run",
+          "label": "Независимый повторный запуск прошёл полностью",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "rollback",
+          "label": "Доказан откат неудачного исправления",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "game_logic",
+          "label": "Исправлена реальная игровая механика",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "protected",
+          "label": "Принятые оригиналы остались неизменны",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        },
+        {
+          "id": "release",
+          "label": "Исправленная версия публикуется только после одобрения",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/8"
+        }
+      ]
+    },
+    {
+      "id": "crossworld",
+      "title": "Общие сохранения и двери",
+      "gates": [
+        {
+          "id": "profile",
+          "label": "Игры читают единый профиль",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "shared_save",
+          "label": "Единая схема сохранений используется всеми играми",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "inventory",
+          "label": "Единый инвентарь доступен из всех игр",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "trophies",
+          "label": "Все трофеи отражаются в меню",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "unlock",
+          "label": "Победа в одной игре открывает другой мир",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "items",
+          "label": "Предметы передаются из одной игры в другую",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "collisions",
+          "label": "Обновления игр не уничтожают общие сохранения",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "reload",
+          "label": "Прогресс остаётся после перезагрузки",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "mobile",
+          "label": "Сохранение работает на мобильном устройстве",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "route",
+          "label": "Реальный переход между двумя мирами успешно пройден",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        }
+      ]
+    },
+    {
+      "id": "android",
+      "title": "Android",
+      "gates": [
+        {
+          "id": "wrapper",
+          "label": "Android оболочка собрана и запускается",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/ANDROID_DISTRIBUTION.md"
+        },
+        {
+          "id": "catalog",
+          "label": "Каталог автоматически обновляется из GitHub",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/ANDROID_DISTRIBUTION.md"
+        },
+        {
+          "id": "adfree",
+          "label": "Отсутствуют рекламные SDK",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/ANDROID_DISTRIBUTION.md"
+        },
+        {
+          "id": "touch",
+          "label": "Тач и камера проверены на устройстве",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/ANDROID_DISTRIBUTION.md"
+        },
+        {
+          "id": "safearea",
+          "label": "Проверены ориентация и safe area",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/ANDROID_DISTRIBUTION.md"
+        },
+        {
+          "id": "offline",
+          "label": "Игры доступны офлайн",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/ANDROID_DISTRIBUTION.md"
+        },
+        {
+          "id": "signed_aab",
+          "label": "Проверен подписанный Android App Bundle",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/ANDROID_DISTRIBUTION.md"
+        },
+        {
+          "id": "compatibility",
+          "label": "Проверено несколько версий Android",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/ANDROID_DISTRIBUTION.md"
+        },
+        {
+          "id": "play_testing",
+          "label": "Выполнены условия Play Console и тестирование",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/ANDROID_DISTRIBUTION.md"
+        },
+        {
+          "id": "released",
+          "label": "Официальная версия опубликована в Google Play",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/ANDROID_DISTRIBUTION.md"
+        }
+      ]
+    },
+    {
+      "id": "steam",
+      "title": "Steam",
+      "gates": [
+        {
+          "id": "wrapper",
+          "label": "Windows оболочка собрана и запускается",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/STEAM_DISTRIBUTION.md"
+        },
+        {
+          "id": "catalog",
+          "label": "Каталог автоматически обновляется из GitHub",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/STEAM_DISTRIBUTION.md"
+        },
+        {
+          "id": "adfree",
+          "label": "Отсутствуют рекламные SDK",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/STEAM_DISTRIBUTION.md"
+        },
+        {
+          "id": "controls",
+          "label": "Клавиатура мышь и контроллер проверены",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/STEAM_DISTRIBUTION.md"
+        },
+        {
+          "id": "offline",
+          "label": "Игры доступны офлайн",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/STEAM_DISTRIBUTION.md"
+        },
+        {
+          "id": "saves",
+          "label": "Работают общие сохранения",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/STEAM_DISTRIBUTION.md"
+        },
+        {
+          "id": "build",
+          "label": "Готов стабильный автономный Windows билд",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/STEAM_DISTRIBUTION.md"
+        },
+        {
+          "id": "listing",
+          "label": "Подготовлены материалы карточки Steam",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/STEAM_DISTRIBUTION.md"
+        },
+        {
+          "id": "steamworks",
+          "label": "Steamworks и депо настроены по решению владельца",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/STEAM_DISTRIBUTION.md"
+        },
+        {
+          "id": "released",
+          "label": "Игра официально опубликована в Steam",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/STEAM_DISTRIBUTION.md"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "title": "Лицензии и надёжный выпуск",
+      "gates": [
+        {
+          "id": "licenses",
+          "label": "На все внешние ассеты доказаны коммерческие права",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "donor_license",
+          "label": "Повторное использование исходников документально разрешено",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "auth",
+          "label": "Production запись в MCP ограничена безопасной авторизацией",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "quota",
+          "label": "Квоты и защита от злоупотреблений работают",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "guard",
+          "label": "Сторож без исключений защищает основные оригиналы",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "all_bot",
+          "label": "Все игры проходят обязательные уровни META BOT",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "audit_merged",
+          "label": "Автоматический проверяющий готовность слит в main",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "audit_daily",
+          "label": "Ежедневный пересчёт публикует актуальные проценты",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "owner",
+          "label": "Имеется явное решение владельца для каждого релиза",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        },
+        {
+          "id": "public_sha",
+          "label": "Публичный релиз совпадает с проверенным SHA",
+          "status": "pending",
+          "evidence": "https://github.com/mpaykin1/meta6/blob/main/rules/09-platforma/META_GAMES_PLATFORM.md"
+        }
+      ]
+    }
+  ]
+}

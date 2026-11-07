@@ -1,0 +1,31 @@
+name: LAB Evidence-Based Readiness
+on:
+  push:
+    branches: ['lab/readiness-evidence-gates']
+    paths:
+      - 'meta-games/readiness/**'
+      - 'scripts/lab/readiness-audit.mjs'
+      - '.github/workflows/lab-readiness.yml'
+  pull_request:
+    paths:
+      - 'meta-games/readiness/**'
+      - 'scripts/lab/readiness-audit.mjs'
+      - '.github/workflows/lab-readiness.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify every passing gate against merged GitHub PR and regenerate exact score
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/lab/readiness-audit.mjs --check

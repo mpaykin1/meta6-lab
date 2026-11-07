@@ -2,7 +2,7 @@
   "schema": 1,
   "as_of": "2026-11-07",
   "scope": "verified production or merged sandbox main; unmerged work is not complete",
-  "scoring": "equal-weight binary gates; unknown and pending score zero; numbers measure these 10 acceptance gates only, not overall engineering effort; a URL alone is not proof of a live endpoint",
+  "scoring": "Equal-weight binary acceptance gates. Passing PR evidence is verified merged via GitHub API; functional claims must also be manually checked against linked Actions. Unknown and pending score zero. This is a conservative checklist score, not engineering-effort estimation.",
   "areas": [
     {
       "id": "mcp",
@@ -144,7 +144,7 @@
           "id": "veil_complete",
           "label": "Veil Terraces: полный реальный проход 6+6+6",
           "status": "pass",
-          "evidence": "https://github.com/mpaykin1/meta6-lab/blob/main/CLAUDE_REPORTS.md"
+          "evidence": "https://github.com/mpaykin1/meta6/pull/292"
         },
         {
           "id": "safe_repair_branch",

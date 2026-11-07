@@ -8,6 +8,19 @@
 
 <!-- карточки ниже -->
 
+### lab/immersive-dishonored-principles-20261107 — IM1–IM5 для всех игр
+- Польза: новые уровни рассказывают историю окружением, предлагают альтернативные маршруты, вертикальность, узнаваемую живопись и информативный звук.
+- Правило: [IMMERSIVE_LEVEL_DESIGN.md](rules/02-igrovye-mekhaniki/IMMERSIVE_LEVEL_DESIGN.md); пункт 15 [RULES_CHECKLIST.md](rules/09-platforma/RULES_CHECKLIST.md).
+- Ветка / SHA: `lab/immersive-dishonored-principles-20261107` / `7764f7df208e483be3d45639ee64b0f72f5750aa` (до карточки).
+- PR: https://github.com/mpaykin1/meta6-lab/pull/72
+- Семь движков: https://github.com/mpaykin1/World_server/pull/634
+- Поиграть: не новая игра; изменение спецификаций, без правки игрового кода.
+- Проверка: поведение игр не проверено, META BOT потребуется при внедрении.
+- Статус: В РАБОТЕ — требуется ревью Claude и отдельное внедрение по играм; без автоматического переноса в `meta6`.
+- Михаил: —; Claude: —
+
+
+
 ### lab/play-connect-earn-home — главная Play / Connect / Earn
 - Польза: три работающие навигационные кнопки; Play открывает 10 игровых ссылок, Connect показывает MCP endpoint и копирование URL, Earn честно заблокирован до готовности и 100 DAU.
 - Ветка: `lab/play-connect-earn-home`.

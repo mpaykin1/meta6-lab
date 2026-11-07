@@ -8,6 +8,15 @@
 
 <!-- карточки ниже -->
 
+### lab/render-broken-city-adaptive — адаптивная графика Broken City
+- Польза: Three.js и постобработка уменьшают нагрузку на слабых устройствах без изменения игры.
+- Играть: https://mpaykin1.github.io/meta6-lab/preview/render-broken-city-adaptive/games/broken-city/
+- Ветка: `lab/render-broken-city-adaptive`; PR: https://github.com/mpaykin1/meta6-lab/pull/60
+- Код: `games/broken-city/index.html`, `shared/render/frame-quality.js`.
+- Технологии: адаптивный DPR и размер render target, EMA/hysteresis, WebGL2-профилирование.
+- Проверка: бенчмарк и META BOT ожидаются; слияние только после подтверждения отсутствия регрессий.
+- Статус: В РАБОТЕ; Михаил: —; Claude: —
+
 ### lab/play-connect-earn-home — главная Play / Connect / Earn
 - Польза: три работающие навигационные кнопки; Play открывает 10 игровых ссылок, Connect показывает MCP endpoint и копирование URL, Earn честно заблокирован до готовности и 100 DAU.
 - Ветка: `lab/play-connect-earn-home`.

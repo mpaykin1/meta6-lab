@@ -98,6 +98,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#070d18;touch-action:n
 <div id="menu" class="hidden"></div>
 
 <script type="importmap">{"imports":{"three":"./lib/three.module.js"}}</script>
+<script src="../../shared/render/frame-quality.js"></script>
 <script type="module">
 /* Playgama Bridge (present only in the Playgama build): initialize BEFORE loading the engine */
 const BR = window.bridge || null;
@@ -155,6 +156,8 @@ try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
 } catch (e) { $('loader').remove(); document.body.insertAdjacentHTML('beforeend', '<div id="err">WebGL недоступен</div>'); throw e; }
 const DPR = Math.min(window.devicePixelRatio || 1, 2);
+const qualityController = window.MetaQuality.create({targetMs:16.67,minScale:.65,maxScale:1});
+let qualityScale = 1;
 renderer.setPixelRatio(DPR);
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 const damp = (k, dt) => 1 - Math.exp(-k * dt);
@@ -648,8 +651,9 @@ const gcam = new THREE.PerspectiveCamera(50, 1, .1, 200);
 
 function resize() {
   const w = innerWidth, h = innerHeight;
+  renderer.setPixelRatio(DPR * qualityScale);
   renderer.setSize(w, h, false);
-  const s = .8 * DPR; rt.setSize(Math.max(2, Math.floor(w * s)), Math.max(2, Math.floor(h * s)));
+  const s = .8 * DPR * qualityScale; rt.setSize(Math.max(2, Math.floor(w * s)), Math.max(2, Math.floor(h * s)));
   camera.aspect = gcam.aspect = w / h;
   camera.fov = w < h ? 72 : 58; camera.updateProjectionMatrix(); gcam.updateProjectionMatrix();
 }
@@ -3234,14 +3238,24 @@ window.__INV = function () {
   out.ok = out.lost.length === 0 && now >= prev && out.extra.every(x => x.ok);
   return out;
 };
-window.__G = { memShow, LAY: { gen: barrierLayoutGen, A: barrierLayoutA, make: makeBarrierRuin, surfTop, surfBlocked, setS: v => { SURFS = v; }, getS: () => SURFS, mulberry, curveY }, onRewarded, T12: () => ({ mus: MUS.cur, dg: +MUS.danger.toFixed(2), ac: AC && AC.state, mg: master && master.gain.value, pause: [...PAUSE], snd: G.sound, pm: G.platMute, failed: AUD.failed, aud: AUD.ok, bufs: Object.keys(AUD.buf).length, gift: giftObj.visible, arrow: navArrow.visible, shield: G.shield, defeat: !$("defeat").classList.contains("hidden"), revive: !$("reviveBtn").classList.contains("hidden") }), onDefeat, BOT: { keys, action, cj: comboJump, cs: comboStomp, cb: comboBridge, pathBlock, heightOnPaths, onTrampBridge, get: () => ({ bridges, barriers, paths, cracks, stations, shades, ruins, falls, SURFS, comboChunks, tHouses, truins, toyPool, CR: G.cr }) }, showStory, closeStory, momCard, SURF: () => SURFS, heroBody, rig, G, heroState, loadLevel, startGame, LEVELS, levelDone, TOYS: () => ({ ruins: truins.length, houses: tHouses.filter(h => h.on).map(h => [h.x | 0, h.y | 0, h.z | 0]), toys: toyPool.filter(o => o.userData.on).length, rest: toyPool.filter(o => o.userData.rest).length }) };
+window.__G = { memShow, LAY: { gen: barrierLayoutGen, A: barrierLayoutA, make: makeBarrierRuin, surfTop, surfBlocked, setS: v => { SURFS = v; }, getS: () => SURFS, mulberry, curveY }, T12: () => ({ mus: MUS.cur, dg: +MUS.danger.toFixed(2), ac: AC && AC.state, mg: master && master.gain.value, pause: [...PAUSE], snd: G.sound, pm: G.platMute, failed: AUD.failed, aud: AUD.ok, bufs: Object.keys(AUD.buf).length, gift: giftObj.visible, arrow: navArrow.visible, shield: G.shield, defeat: !$("defeat").classList.contains("hidden"), revive: !$("reviveBtn").classList.contains("hidden") }), onDefeat, BOT: { keys, action, cj: comboJump, cs: comboStomp, cb: comboBridge, pathBlock, heightOnPaths, onTrampBridge, get: () => ({ bridges, barriers, paths, cracks, stations, shades, ruins, falls, SURFS, comboChunks, tHouses, truins, toyPool, CR: G.cr }) }, showStory, closeStory, momCard, SURF: () => SURFS, heroBody, rig, G, heroState, loadLevel, startGame, LEVELS, levelDone, TOYS: () => ({ ruins: truins.length, houses: tHouses.filter(h => h.on).map(h => [h.x | 0, h.y | 0, h.z | 0]), toys: toyPool.filter(o => o.userData.on).length, rest: toyPool.filter(o => o.userData.rest).length }) };
 
 /* ============ LOOP ============ */
 const clock = new THREE.Clock();
 let started = 0, glitch = 0, dripT = 2;
+Object.defineProperty(window, '__META_QUALITY_STATS__', { value: () => Object.freeze({
+  scale: qualityScale, frameMs: qualityController.averageMs,
+  rendererWidth: renderer.domElement.width, rendererHeight: renderer.domElement.height,
+  drawCalls: renderer.info.render.calls, triangles: renderer.info.render.triangles
+}) });
 function frame() {
   requestAnimationFrame(frame);
-  const dt0 = Math.min(clock.getDelta(), .05); if (PAUSE.size && started) return;
+  const frameMs = clock.getDelta() * 1000;
+  if (!document.hidden && !PAUSE.size) {
+    const scale = qualityController.sample(frameMs);
+    if (scale !== qualityScale) { qualityScale = scale; resize(); }
+  }
+  const dt0 = Math.min(frameMs / 1000, .05); if (PAUSE.size && started) return;
   const dt = dt0, t = clock.elapsedTime;
   U.uTime.value = t;
   post.uniforms.uFade.value += (fadeTarget - post.uniforms.uFade.value) * damp(view === 'game' ? (G.state === 'trans' ? 6 : 2.6) : .9, dt);

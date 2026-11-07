@@ -168,7 +168,7 @@
       "id": "three-worlds-weather",
       "title": "Three Worlds deterministic weather event",
       "kind": "weather",
-      "entry": "weather-cycle.mjs",
+      "entry": "weather-cycle.js",
       "exports": [
         "worldWeatherAt",
         "rainEventAt"

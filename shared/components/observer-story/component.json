@@ -1,0 +1,26 @@
+{
+  "id": "observer-story",
+  "title": "История и последствия событий",
+  "kind": "story",
+  "entry": "story-system.js",
+  "exports": [
+    "ObserverStorySystem"
+  ],
+  "needs": [
+    "window"
+  ],
+  "source": {
+    "repository": "mpaykin1/meta6",
+    "game": "twilight-island",
+    "path": "observer-world-en-v7/story-system.js",
+    "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+    "git_blob_sha": "ad99722a173575915184cdc549f7e47d8beb03f6"
+  },
+  "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+  "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+  "used_by": [
+    "twilight-island",
+    "veil-terraces"
+  ],
+  "dependency_policy": "host-browser-APIs-only"
+}

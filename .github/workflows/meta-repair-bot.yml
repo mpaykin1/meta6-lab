@@ -3,6 +3,10 @@ on:
   schedule:
     - cron: '17,47 * * * *'
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/repair-bot/**'
+      - '.github/workflows/meta-repair-bot.yml'
 permissions:
   contents: write
   pull-requests: write
@@ -22,12 +26,20 @@ jobs:
           node-version: '22'
       - name: Validate repair bot syntax
         run: node --check scripts/repair-bot/repair-json.mjs
+      - name: Exercise repair bot on controlled fixture
+        run: |
+          mkdir -p .repair-fixture
+          printf '{"items": [1,2,], "ok": true,}\n' > .repair-fixture/sample.json
+          git add -N .repair-fixture/sample.json
+          node scripts/repair-bot/repair-json.mjs
+          node -e "const fs=require('fs'); const p='.repair-fixture/sample.json'; JSON.parse(fs.readFileSync(p,'utf8'))"
+          rm -rf .repair-fixture
       - name: Repair deterministic JSON errors
         id: repair
         run: |
           node scripts/repair-bot/repair-json.mjs
       - name: Open repair PR only for actual changes
-        if: success()
+        if: success() && github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -39,7 +51,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           branch="lab/repair-bot-json-auto-${{ github.run_id }}"
           git checkout -B "$branch"
-          git add -- '*.json'
+          git add -u -- '*.json'
           git commit -m "fix: repair invalid JSON syntax"
           git push origin "$branch"
           if ! gh pr list --head "$branch" --base main --state open --json number --jq '.[0].number' | grep -q '[0-9]'; then

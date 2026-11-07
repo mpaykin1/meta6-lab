@@ -114,21 +114,21 @@ function search(query,kind,limit=8) {
 }
 
 function searchSource(query,kind,limit=8) {
-  const words=String(query).toLowerCase().split(/[^\\p{L}\\p{N}_]+/u).filter(w=>w.length>1).slice(0,8);
+  const words=String(query).toLowerCase().split(/[^\p{L}\p{N}_]+/u).filter(w=>w.length>1).slice(0,8);
   if(!words.length)return [];
   const out=[];
   for(const item of scan()){
     if(kind&&kind!=='all'&&item.kind!==kind)continue;
     const full=path.join(ROOT,item.path);
     if(!TEXT.has(path.extname(full).toLowerCase())||item.size>300000)continue;
-    const lines=fs.readFileSync(full,'utf8').split(/\\r?\\n/);
+    const lines=fs.readFileSync(full,'utf8').split(/\r?\n/);
     let best=null;
     for(let i=0;i<lines.length;i++){
       const low=lines[i].toLowerCase();
       const hits=words.filter(w=>low.includes(w)).length;
       if(!hits)continue;
       const score=hits*4+(item.tags.some(t=>words.includes(t))?2:0);
-      if(!best||score>best.score)best={score,line:i+1,snippet:lines.slice(Math.max(0,i-1),Math.min(lines.length,i+2)).join('\\n').slice(0,320)};
+      if(!best||score>best.score)best={score,line:i+1,snippet:lines.slice(Math.max(0,i-1),Math.min(lines.length,i+2)).join('\n').slice(0,320)};
       if(hits===words.length)break;
     }
     if(best)out.push({path:item.path,sourceGame:item.sourceGame,kind:item.kind,sha256:item.sha256,...best});

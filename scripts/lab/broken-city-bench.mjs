@@ -30,7 +30,7 @@ try{
   });
   try{
    await page.goto('http://127.0.0.1:'+port+'/games/broken-city/',{waitUntil:'load',timeout:60000});
-   await page.waitForFunction(()=>!!window.__G&&document.getElementById('c')?.width>0,{timeout:90000});
+   await page.waitForFunction(()=>!!window.__G&&document.getElementById('c')?.width>0,null,{timeout:90000});
    await page.waitForTimeout(2500);
    await page.evaluate(()=>{window.__renderPerf.active=true;window.__renderPerf.prev=0;});
    await page.waitForTimeout(6500);

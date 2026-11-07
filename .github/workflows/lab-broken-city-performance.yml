@@ -31,6 +31,15 @@ jobs:
           set -euo pipefail
           mkdir -p /tmp/broken-base
           git archive "$BASE_SHA" games/broken-city | tar -x -C /tmp/broken-base
+          # The pre-existing original main has a ReferenceError on dead ad handler export.
+          # Apply the exact same non-rendering repair to baseline only, for fair FPS comparison.
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('/tmp/broken-base/games/broken-city/index.html')
+          s=p.read_text()
+          assert s.count('}, onRewarded, T12:') == 1, 'unexpected baseline; do not silently patch'
+          p.write_text(s.replace('}, onRewarded, T12:', '}, T12:'))
+          PY
           python3 -m http.server 8765 --bind 127.0.0.1 --directory /tmp/broken-base >/tmp/broken-base-http.log 2>&1 &
           python3 -m http.server 8766 --bind 127.0.0.1 --directory . >/tmp/broken-head-http.log 2>&1 &
           sleep 2

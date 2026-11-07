@@ -50,17 +50,11 @@ jobs:
           git config user.email 'meta6-lab-bot@users.noreply.github.com'
           git checkout -b "$branch"
           git add games/
-          git diff --cached --name-only | grep -Eq '^games/[^/]+/index\\.html -m "fix(game): bot-verified viewport behavior"
-          git push origin "$branch"
-          gh pr create --base lab/bot-safe-autorepair --head "$branch" --title "Bot-verified sandbox game repair" --body "Safe fix for viewport only. Same protected META BOT ran before and after; change kept only after full real-input PASS. Main meta6 untouched. Requires owner review before production promotion."
-
-          if git diff --cached --name-only | grep -Ev '^games/[^/]+/index\\.html -m "fix(game): bot-verified viewport behavior"
-          git push origin "$branch"
-          gh pr create --base lab/bot-safe-autorepair --head "$branch" --title "Bot-verified sandbox game repair" --body "Safe fix for viewport only. Same protected META BOT ran before and after; change kept only after full real-input PASS. Main meta6 untouched. Requires owner review before production promotion."
-; then
+          git diff --cached --name-only | grep -Eq '^games/[^/]+/index[.]html$'
+          if git diff --cached --name-only | grep -Ev '^games/[^/]+/index[.]html$'; then
             echo 'Unsafe files modified; refusing repair commit'
             exit 1
           fi
           git commit -m "fix(game): bot-verified viewport behavior"
           git push origin "$branch"
-          gh pr create --base lab/bot-safe-autorepair --head "$branch" --title "Bot-verified sandbox game repair" --body "Safe fix for viewport only. Same protected META BOT ran before and after; change kept only after full real-input PASS. Main meta6 untouched. Requires owner review before production promotion."
+          gh pr create --base lab/bot-safe-autorepair --head "$branch" --title "Bot-verified sandbox game repair" --body "Safe viewport fix only. Protected META BOT passed before PR creation. Main meta6 untouched. Requires owner review."

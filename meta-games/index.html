@@ -84,6 +84,8 @@ main{position:relative;z-index:5;padding:42px 0 94px}
  .section-title{flex-direction:column;align-items:flex-start}
  .bottom{flex-wrap:wrap}
 }
+.game.world-visited{border-color:#80b8bd80;box-shadow:inset 0 0 0 1px #7bd6d125}
+.game.world-visited .art .orb{filter:hue-rotate(14deg) brightness(1.08)}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -165,5 +167,21 @@ function draw(t){frame=requestAnimationFrame(draw);if(document.hidden||t-last<33
 frame=requestAnimationFrame(draw);
 addEventListener('pagehide',()=>cancelAnimationFrame(frame),{once:true});
 })();
+</script>
+<script type="module">
+import { createWorldProgress } from './world-progress.mjs';
+const cards=[...document.querySelectorAll('a.game[href]')];
+try{
+ const progress=createWorldProgress(localStorage);
+ const seen=new Set(progress.visited());
+ for(const card of cards){
+  const url=new URL(card.getAttribute('href'),location.href);
+  if(url.origin!==location.origin)continue;
+  const id=decodeURIComponent(url.pathname).replace(/\/+$/,'').split('/').filter(Boolean).join('-');
+  if(!id)continue;
+  if(seen.has(id))card.classList.add('world-visited');
+  card.addEventListener('click',()=>progress.enter(id),{passive:true});
+ }
+}catch{ /* Restricted browsing must never block navigation. */ }
 </script>
 </body></html>

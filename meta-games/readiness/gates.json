@@ -101,8 +101,8 @@
         {
           "id": "verified_search_merged",
           "label": "Поиск только разрешённого кода слит и проверен",
-          "status": "pending",
-          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/15"
+          "status": "pass",
+          "evidence": "https://github.com/mpaykin1/meta6-lab/pull/17"
         },
         {
           "id": "game_integration",

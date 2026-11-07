@@ -211,32 +211,20 @@ const ARC2 = (() => {
     $("arcHud").style.opacity = G.mode === "play" && G.phase !== "over" ? 1 : 0;
   }
 
-  /* ---------- R5 revive, R6 ads, U5 progress & daily gift, R1 instant start ---------- */
-  const rewOK = () => { try { return PG.ready && window.bridge.advertisement.isRewardedSupported; } catch (e) { return !1; } };
+  /* ---------- One free revive per run; no advertising or paid platform dependency ---------- */
   function onGameOver() {
     const b = $("bRevive");
-    b.hidden = !(rewOK() && !G.revived); b.disabled = !1;
+    b.hidden = !!G.revived; b.disabled = !!G.revived;
     if (!b.hidden) pg("revive_offered", { depth: G.depth });
     pg("progression_failed", { step_id: "tower", step_index: G.depth, level: G.level, version: GAME_VERSION });
   }
   $("bRevive").onclick = () => {
-    const b = $("bRevive"); if (b.disabled) return; b.disabled = !0;
-    let got = !1, done = !1;
-    const fin = (ok) => {
-      if (done) return; done = !0; b.hidden = !0;
-      if (!ok || G.phase !== "over") return;
-      G.revived = !0; G.lives = 1; G.dead = !1; renderRes();
-      $("over").classList.add("hide"); hud(!0); startRound(); caption("ЕЩЁ ЖИВ");
-      pg("revive_used", { depth: G.depth });
-    };
-    try {
-      window.bridge.advertisement.on(window.bridge.EVENT_NAME.REWARDED_STATE_CHANGED, (st) => {
-        if (st === "rewarded") got = !0;
-        if (st === "closed" || st === "failed") fin(got);
-      });
-      window.bridge.advertisement.showRewarded("revive");
-    } catch (e) { fin(!1); }
-    setTimeout(() => fin(got), 90000);
+    const b = $("bRevive");
+    if (b.disabled || G.revived || G.phase !== "over") return;
+    b.disabled = !0; b.hidden = !0;
+    G.revived = !0; G.lives = 1; G.dead = !1; renderRes();
+    $("over").classList.add("hide"); hud(!0); startRound(); caption("ЕЩЁ ЖИВ");
+    pg("revive_used", { depth: G.depth });
   };
   const today = () => { const d = new Date(); return d.getFullYear() * 1e4 + (d.getMonth() + 1) * 100 + d.getDate(); };
   const _startGame = startGame;
@@ -251,7 +239,7 @@ const ARC2 = (() => {
     pg("progression_started", { step_id: "run", step_index: 1, version: GAME_VERSION });
   }
   function boot() {
-    if (PG.language === "ru") { $("bRevive").lastChild.textContent = "Ожить: смотреть рекламу"; }
+    $("bRevive").lastChild.textContent = PG.language === "ru" ? "Возродиться" : "Revive";
     if (!SAVE.played) setTimeout(() => { if (G.mode === "menu") $("bPlay").onclick(); }, 600);       // first visit: straight into the fight
   }
   return { get camK() { return camK; }, SP, dice, absorb, onRound, onShotDown, onRepel, onDragonHit, pickSpecial, plunge, ambush, tick, onGameOver, onStart, boot, spark, retreat };

@@ -47,6 +47,8 @@ export function contentDigest(directory) {
     const entries = fs.readdirSync(dir,{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name,'en'));
     for (const item of entries) {
       const rel = relative ? relative+'/'+item.name : item.name;
+      // Match native bundle exclusion policy: dependencies and build caches never enter the app.
+      if(new Set(['.git','.github','node_modules','__pycache__','tests','test','evidence','docs','work-notes','.DS_Store']).has(item.name)) continue;
       const full = path.join(dir,item.name);
       if(item.isSymbolicLink()) throw new Error('Symlinked game asset is forbidden: '+rel);
       if(item.isDirectory()) walk(full,rel);

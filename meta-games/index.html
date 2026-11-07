@@ -73,6 +73,24 @@ main{position:relative;z-index:5;padding:42px 0 94px}
 .game-foot i{font-size:20px;font-style:normal}
 .bottom{margin-top:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:23px 0;border-top:1px solid #6070883d;color:#96a7bd;font-size:13px}
 .bottom a{color:#d4c39b}
+
+/* Connect and Earn extend the existing page; no additional renderer or animation loop. */
+.platform-section{scroll-margin-top:32px;margin-top:84px;padding-top:32px;border-top:1px solid #6070884a}
+.platform-section .section-title{margin-bottom:28px}
+.platform-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.platform-card{min-width:0;padding:clamp(24px,4vw,40px);border:1px solid #60788972;background:linear-gradient(140deg,#15273b 0%,#081321 72%);box-shadow:inset 0 1px #bfdce010}
+.platform-card h3{margin:0 0 10px;font-weight:500;font-size:clamp(24px,3vw,32px);letter-spacing:-.04em}
+.platform-card p{color:#bdc9d5;line-height:1.8;margin:0 0 22px}
+.platform-card ol{color:#c5d2dd;padding-left:22px;line-height:1.9;margin:0}
+.platform-card li+li{margin-top:8px}
+.platform-card code{color:#f3d9a8}
+.mcp-address{display:block;width:100%;min-width:0;background:#06131e;border:1px solid #7892a070;color:#d6f7f5;padding:15px;font:12px/1.55 ui-monospace,Menlo,Consolas,monospace;overflow:hidden;text-overflow:ellipsis}
+.mcp-address:focus{outline:2px solid #d2ecdb;outline-offset:2px}
+.platform-actions{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0 0}
+.platform-actions .pill{cursor:pointer}
+.platform-note{font-size:13px;color:#98adc1!important;margin-top:18px!important}
+#play,#connect,#earn{scroll-margin-top:26px}
+@media(max-width:700px){.platform-grid{grid-template-columns:1fr}.platform-section{margin-top:54px}.platform-card{padding:23px}.mcp-address{font-size:11px}.links{gap:13px}}
 @keyframes breath{50%{transform:translateX(-50%) scale(1.07);filter:brightness(1.15)}}
 @keyframes float{50%{transform:translate(-50%,8px)}}
 @media(max-width:700px){
@@ -92,18 +110,18 @@ main{position:relative;z-index:5;padding:42px 0 94px}
 <canvas class="scene" id="sky" aria-hidden="true"></canvas><div class="scene-vignette"></div>
 <header>
  <a class="brand" href="./" aria-label="META GAMES home"><span class="brand-symbol">◇</span> META <b>GAMES</b></a>
- <nav class="links" aria-label="Navigation"><a href="#worlds">Worlds</a><a href="../playgama-catalog/">Full catalog</a><a href="https://github.com/mpaykin1/meta6">Source</a></nav>
+ <nav class="links" aria-label="Navigation"><a href="#play">Play</a><a href="#connect">Connect</a><a href="#earn">Earn</a></nav>
 </header>
 <div class="hero-copy">
  <div class="eyebrow">A universe of connected dreams</div>
  <h1>META<span>GAMES</span></h1>
  <p>Step outside the ordinary. Explore shifting realms, lost cities and worlds that remember your choices — directly on our own website.</p>
- <div class="actions"><a class="pill" href="#worlds">Enter the worlds</a><a class="pill alt" href="../playgama-catalog/">Explore full catalog</a></div>
+ <div class="actions"><a class="pill" href="#play">Play</a><a class="pill alt" href="#connect">Connect</a><a class="pill alt" href="#earn">Earn</a></div>
 </div>
 <div class="terrain"></div>
 </section>
 <main class="container" id="worlds">
- <div class="section-title"><div><div class="eyebrow">Independent browser play</div><h2>Choose a world</h2></div><p>Ten self-hosted game entrypoints. No Playgama redirect.</p></div>
+ <div class="section-title" id="play"><div><div class="eyebrow">Play · Independent browser worlds</div><h2>Choose a world</h2></div><p>Ten self-hosted game entrypoints. No Playgama redirect.</p></div>
  <div class="games">
  <a class="game" href="../observer-world-en-v7/" aria-label="Play Twilight Island"><div class="art"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 01 · Fantasy / Creation</div><h3>Twilight Island</h3><p class="game-desc">A living island of construction, discovery and mysterious inhabitants.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
  <a class="game" href="../ashen-sumerek/" aria-label="Play Ashen Path"><div class="art ash"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 02 · Action / Survival</div><h3>Ashen Path</h3><p class="game-desc">Walk a broken world where danger waits beyond the glow.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
@@ -116,6 +134,47 @@ main{position:relative;z-index:5;padding:42px 0 94px}
  <a class="game" href="../games/archer-in-the-fog/" aria-label="Play Archer in the Fog"><div class="art veil"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 09 · Archery / Reference</div><h3>Archer in the Fog</h3><p class="game-desc">Hold a ruined tower above the clouds against a dragon that plunges and ambushes out of the blue fog.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
  <a class="game" href="../games/broken-city/" aria-label="Play Broken City"><div class="art worlds"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 10 · Platformer / Reference</div><h3>Broken City</h3><p class="game-desc">A folded comic-noir city hangs overhead: climb falling houses, stomp creepy toys and find out whose night this is.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
  </div>
+ 
+ <section class="platform-section" id="connect" aria-labelledby="connect-title">
+  <div class="section-title"><div><div class="eyebrow">Connect · Build with our worlds</div><h2 id="connect-title">Connect your AI</h2></div><p>Discover approved components through the META GAMES MCP endpoint.</p></div>
+  <div class="platform-grid">
+   <div class="platform-card">
+    <h3>MCP connection</h3>
+    <p>Use this endpoint in an MCP-compatible client. Tools and game previews depend on the current live server capabilities and asset-rights validation.</p>
+    <input class="mcp-address" id="mcp-address" aria-label="MCP server URL" value="https://meta-games-mcp-production.onrender.com/meta-games/mcp" readonly>
+    <div class="platform-actions">
+     <button type="button" class="pill" id="copy-mcp">Copy address</button>
+     <a class="pill alt" href="https://meta-games-mcp-production.onrender.com/health" target="_blank" rel="noopener noreferrer">Server health</a>
+    </div>
+    <p class="platform-note" id="mcp-copy-status" role="status" aria-live="polite">Only licensed source components are eligible for reuse.</p>
+   </div>
+   <div class="platform-card">
+    <h3>Build with the library</h3>
+    <ol>
+     <li>Connect an MCP-compatible AI client using the server URL.</li>
+     <li>Discover available tools and search approved assets.</li>
+     <li>Combine compatible components and validate the resulting game package when supported.</li>
+     <li>Open an available preview; publishing requires separate authorization.</li>
+    </ol>
+    <div class="platform-actions"><a class="pill alt" href="https://github.com/mpaykin1/meta6-lab/tree/main/shared/components" target="_blank" rel="noopener noreferrer">Explore shared components</a></div>
+   </div>
+  </div>
+ </section>
+ <section class="platform-section" id="earn" aria-labelledby="earn-title">
+  <div class="section-title"><div><div class="eyebrow">Earn · Creator opportunities</div><h2 id="earn-title">Grow your worlds</h2></div><p>Building a sustainable ecosystem of independent games.</p></div>
+  <div class="platform-grid">
+   <div class="platform-card">
+    <h3>Made to be played</h3>
+    <p>Explore the games, develop new mechanics and share your game link. New creator features, discovery rankings and revenue features are not yet available on this portal.</p>
+    <div class="platform-actions"><a class="pill" href="#play">Explore games</a></div>
+   </div>
+   <div class="platform-card">
+    <h3>Ad-free META GAMES</h3>
+    <p>Games on META GAMES are ad-free. Monetization settings, revenue sharing and creator payouts require an approved policy and working implementation before they can be offered.</p>
+    <div class="platform-actions"><a class="pill alt" href="../playgama-catalog/">Other game releases</a></div>
+   </div>
+  </div>
+ </section>
  <footer class="bottom"><span>© 2026 META GAMES · Independent browser worlds</span><span>All games launch under our GitHub Pages domain. <a href="https://github.com/mpaykin1/meta6">Source repository</a></span></footer>
 </main>
 <script>
@@ -164,6 +223,24 @@ let frame=0,started=performance.now(),last=0;
 function draw(t){frame=requestAnimationFrame(draw);if(document.hidden||t-last<33)return;last=t;const d=Math.min(devicePixelRatio||1,1.5);const w=Math.min(1920,Math.floor(c.clientWidth*d)),h=Math.min(1280,Math.floor(c.clientHeight*d));if(c.width!==w||c.height!==h){c.width=w;c.height=h;gl.viewport(0,0,w,h);}gl.uniform2f(size,w,h);gl.uniform1f(time,(t-started)/1000);gl.drawArrays(gl.TRIANGLES,0,3);}
 frame=requestAnimationFrame(draw);
 addEventListener('pagehide',()=>cancelAnimationFrame(frame),{once:true});
+})();
+</script>
+
+<script>
+(()=>{'use strict';
+ const input=document.getElementById('mcp-address');
+ const button=document.getElementById('copy-mcp');
+ const status=document.getElementById('mcp-copy-status');
+ button.addEventListener('click',async()=>{
+   try{
+     if(!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard unavailable');
+     await navigator.clipboard.writeText(input.value);
+     status.textContent='MCP address copied.';
+   }catch{
+     input.focus();input.select();
+     status.textContent='Select and copy the highlighted address.';
+   }
+ });
 })();
 </script>
 </body></html>

@@ -3032,7 +3032,7 @@ const metaBotObserver = Object.freeze({
     return {
       started: active && G.state !== 'title',
       level: G.li + 1,
-      levelDone: active && (G.state === 'trans' || ending),
+      levelDone: active && ((G.state === 'trans' && G.next !== G.li) || ending),
       gameDone: active && ending,
       alive: G.state !== 'defeat',
       hero: {x:h.x,y:h.z,z:h.z},

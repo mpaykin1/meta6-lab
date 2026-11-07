@@ -476,6 +476,22 @@ const PG = (() => {
     track() {}, flush() {}
   };
   document.addEventListener('visibilitychange', () => api.sync());
+  api.boot = Promise.resolve().then(() => {
+    window.LANG = /^ru/i.test(navigator.language || '') ? 'ru' : 'en';
+    if (window.LANG !== 'ru') return;
+    const R = window.I18N_RU || {}; document.title = 'Остров сумерек';
+    const a = document.getElementById('ttlA'), b = document.getElementById('ttlB');
+    if (a) a.textContent = 'Остров'; if (b) b.textContent = 'сумерек';
+    document.querySelectorAll('[aria-label],[title]').forEach(el => {
+      for (const at of ['aria-label','title']) {
+        const v = el.getAttribute(at); if (v && R[v]) el.setAttribute(at,R[v]);
+      }
+    });
+    const tw = document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT); let n;
+    while ((n = tw.nextNode())) {
+      const t = n.nodeValue.trim(); if (t && R[t] && t !== 'Island') n.nodeValue = n.nodeValue.replace(t,R[t]);
+    }
+  });
   return api;
 })();
 await PG.boot;

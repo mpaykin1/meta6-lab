@@ -10,6 +10,24 @@ import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const read=p=>fs.readFileSync(path.join(root,p));
 const blob=bytes=>createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex');
+const upstream=path.resolve(root,'source-meta6');
+const git=(...args)=>execFileSync('git',['-C',upstream,...args],{encoding:'utf8',maxBuffer:1024*1024}).trim();
+function sourceBytes(ref){
+  // Git verifies that the exact blob belongs to the claimed commit and path;
+  // a modified local copy or forged SHA in a manifest cannot unlock a donor.
+  if(!fs.existsSync(path.join(upstream,'.git')) ||
+     git('rev-parse','--is-inside-work-tree')!=='true')
+    throw Error('Required read-only mpaykin1/meta6 checkout missing at source-meta6');
+  const rev=ref.commit+':'+ref.source_path;
+  const actual=git('rev-parse','--verify',rev);
+  if(actual!==ref.git_blob_sha || git('cat-file','-t',actual)!=='blob')
+    throw Error('Pinned upstream commit does not contain approved source blob: '+ref.source_path);
+  const length=Number(git('cat-file','-s',actual));
+  if(!Number.isSafeInteger(length)||length>8_000_000)throw Error('Oversized source file');
+  const bytes=execFileSync('git',['-C',upstream,'cat-file','blob',actual],{maxBuffer:8_100_000});
+  if(bytes.length!==length||blob(bytes)!==actual)throw Error('Upstream source content mismatch');
+  return bytes;
+}
 const safe=p=>typeof p==='string' && /^[a-zA-Z0-9_./-]+$/.test(p) &&
   !p.startsWith('/') && p.split('/').every(x=>x && x!=='.' && x!=='..');
 const policy=read('rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md').toString('utf8');
@@ -65,16 +83,13 @@ function audit(game){
        !donors.some(prefix=>ref.source_path.startsWith(prefix)) || !approvedCommit(ref) ||
        byOutput.has(ref.output))
       throw Error(game+': unknown, unpinned, duplicate or forbidden game source');
-    const sourcePath=path.join(root,ref.source_path);
-    if(!fs.existsSync(sourcePath) || !fs.statSync(sourcePath).isFile() ||
-       blob(fs.readFileSync(sourcePath))!==ref.git_blob_sha)
-      throw Error(game+': source blob mismatch '+ref.source_path);
-    if(/\.(?:js|mjs|cjs|html|glsl|css)$/i.test(sourcePath) &&
-       thirdPartyMarkers.test(fs.readFileSync(sourcePath,'utf8')))
+    const bytes=sourceBytes(ref);
+    if(/\.(?:js|mjs|cjs|html|glsl|css)$/i.test(ref.source_path) &&
+       thirdPartyMarkers.test(bytes.toString('utf8')))
       throw Error(game+': third-party marker requires rights audit: '+ref.source_path);
     const target=path.join(dir,ref.output);
     if(!fs.existsSync(target) || !fs.statSync(target).isFile() ||
-       !fs.readFileSync(sourcePath).equals(fs.readFileSync(target)))
+       !bytes.equals(fs.readFileSync(target)))
       throw Error(game+': game asset not actually assembled from approved donor '+ref.output);
     byOutput.set(ref.output,ref);
   }

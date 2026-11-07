@@ -48,7 +48,8 @@ jobs:
           if [ ! -f "meta-games-worlds/generated-${GAME_SLUG}/index.html" ]; then
             node scripts/lab/agent-game-candidate.cjs
           else
-            echo "Existing candidate: independent replay required"
+            echo "::error::Existing generated game has no verified SOURCE_ASSETS.json; cannot use it as a META GAMES donor-compliant candidate"
+            exit 1
           fi
       - name: Verify desktop six-scene completion and real mobile touch before promotion
         env:

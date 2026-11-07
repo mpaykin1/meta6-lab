@@ -36,15 +36,29 @@
       const active=!!g.cfg && (playing||g.state==='trans'||g.state==='defeat');
       const next=g.next;
       const advancing=g.state==='trans' && Number.isInteger(next) && next>g.li;
-      const goal=active&&g.cfg ? {x:0,y:g.cfg.goal+4} : null;
+      // Use actual authored route nodes from collapsed house geometry, rather
+      // than always steering through the entire building toward the far finish.
+      const scene = debug.BOT.get();
+      let goal = active && g.cfg ? {x:0,y:g.cfg.goal+4} : null;
+      if (playing && g.cfg.mode === 'toys') {
+        const r = scene.truins.filter(x => x.barrier && Array.isArray(x.route)
+          && x.route.length && x.route[x.route.length-1][1] < p.z - .3)
+          .sort((a,b) => b.z-a.z)[0];
+        if (r && p.z <= r.route[0][1] + 6) {
+          const step = r.route[Math.max(0,Math.min(r.route.length-1,r.ri|0))];
+          goal = {x:step[0],y:step[1]}; // Genuine in-game climb waypoint.
+        } else {
+          goal = {x:p.x*.5,y:Math.max(g.cfg.goal+4,p.z-10)};
+        }
+      }
       const progress=active&&g.cfg ?
         Math.max(0,Math.min(1,(4-p.z)/(4-g.cfg.goal))) : 0;
       return {
-        started:g.state!=='title',level:g.li,
+        started:playing || g.state==='defeat' || g.state==='endwait' || g.state==='ending',level:g.li,
         levelDone:advancing,gameDone:end,
         alive:g.state!=='defeat',
         hero:{x:p.x,y:p.z},goal,
-        enemies:debug.BOT.get().shades.reduce((n,e)=>n+(e.visible?1:0),0),
+        enemies:scene.shades.reduce((n,e)=>n+(e.visible?1:0),0),
         weapons:playing?1:0,
         layoutHash:playing?fingerprint(debug):'',
         menuOpen:!!g.paused || !document.getElementById('menu').classList.contains('hidden'),

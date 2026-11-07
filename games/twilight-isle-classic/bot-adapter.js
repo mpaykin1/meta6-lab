@@ -60,6 +60,22 @@
           ? Math.max(0, Math.min(1, 1 - warden.hp / warden.maxHp))
           : 0;
       const won = state === 'victory';
+      // The ordinary free-revive button appears after the game's real death
+      // animation. Expose only its on-screen coordinates, never call its handler.
+      let reviveButton = null;
+      if (state === 'dead') {
+        const btn = document.getElementById('btnRevive');
+        const end = document.getElementById('scrEnd');
+        if (btn && end && !end.hidden && !btn.hidden && !btn.disabled) {
+          const rect = btn.getBoundingClientRect();
+          if (rect.width > 0 && rect.height > 0) {
+            reviveButton = {
+              x: rect.left + rect.width * 0.5,
+              y: rect.top + rect.height * 0.5
+            };
+          }
+        }
+      }
       return {
         started: state !== 'title' && state !== 'loading',
         level: 0,
@@ -75,7 +91,8 @@
         progress: won ? 1 : Math.min(0.99, 0.8 * coinFraction + 0.19 * bossFraction),
         hp: player?.maxHp > 0 ? player.hp / player.maxHp : 1,
         cameraYaw: isle?.rig?.yaw ?? 0,
-        nearestEnemy
+        nearestEnemy,
+        reviveButton
       };
     }
   });

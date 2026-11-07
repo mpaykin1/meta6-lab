@@ -1,0 +1,45 @@
+name: LAB focused META BOT
+# Supplemental fast feedback. NEVER substitutes protected .github/workflows/meta-bot.yml.
+on:
+  pull_request:
+    paths:
+      - 'games/**'
+      - 'scripts/lab/affected-bot-games.mjs'
+      - '.github/workflows/lab-bot-focused.yml'
+permissions:
+  contents: read
+concurrency:
+  group: lab-focused-bot-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  changed-games:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check selector syntax
+        run: node --check scripts/lab/affected-bot-games.mjs
+      - name: Select actual changed game copies
+        id: scope
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
+            git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          fi
+          node scripts/lab/affected-bot-games.mjs "$BASE_SHA"
+      - name: Install Playwright Chromium
+        if: steps.scope.outputs.games != ''
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Play each changed game completely (mobile, desktop, second run)
+        if: steps.scope.outputs.games != ''
+        env:
+          BOT_GAMES: ${{ steps.scope.outputs.games }}
+        run: node scripts/meta-bot/run.mjs $BOT_GAMES

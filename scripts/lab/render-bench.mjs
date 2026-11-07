@@ -2,6 +2,7 @@ import { chromium } from 'playwright';
 import { appendFileSync } from 'node:fs';
 
 const out = process.env.GITHUB_STEP_SUMMARY;
+const game = process.env.BENCH_GAME || 'veil-terraces';
 const sizes = [
   { name: 'mobile', width: 390, height: 844, deviceScaleFactor: 1 },
   { name: 'desktop', width: 1280, height: 720, deviceScaleFactor: 1 }
@@ -37,7 +38,7 @@ try {
    });
   });
   try {
-   await page.goto('http://127.0.0.1:'+port+'/games/veil-terraces/',{waitUntil:'load',timeout:45000});
+   await page.goto('http://127.0.0.1:'+port+'/games/'+game+'/',{waitUntil:'load',timeout:45000});
    await page.waitForFunction(()=>window.__metaGamesState && window.__metaGamesState().chunks===25,{timeout:45000});
    const webgl=await page.evaluate(()=>!!document.getElementById('screen').getContext('webgl2'));
    if(!webgl)throw Error('WebGL2 disabled');
@@ -57,7 +58,7 @@ try {
  }
 } finally { await browser.close(); }
 console.log(JSON.stringify(results,null,2));
-const lines=['## Veil Terraces — actual Chromium WebGL2 baseline/head', '', '| Device | Version | FPS | frame p95 ms | frame p99 ms | draw/frame | triangles/frame | Errors |','|---|---|---:|---:|---:|---:|---:|---|'];
+const lines=['## '+game+' — actual Chromium WebGL2 baseline/head', '', '| Device | Version | FPS | frame p95 ms | frame p99 ms | draw/frame | triangles/frame | Errors |','|---|---|---:|---:|---:|---:|---:|---|'];
 for(const r of results)lines.push('| '+[r.viewport,r.version,r.fps?.toFixed(1)??'—',r.p95??'—',r.p99??'—',r.draw??'—',r.triangles??'—',r.errors?.join(', ')||'none'].join(' | ')+' |');
 const summary=lines.join('\n')+'\n';
 if(out)appendFileSync(out,summary);

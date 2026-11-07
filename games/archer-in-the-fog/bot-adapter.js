@@ -83,8 +83,9 @@
         enemies: alive && g.phase !== 'retreat' ? 1 : 0,
         weapons: alive ? 1 : 0,
         layoutHash: encounterHash,
-        menuOpen: !playing || !!g.paused ||
-          !document.getElementById('menu')?.classList.contains('hide'),
+        menuOpen: !playing || !!g.paused || g.phase === 'over' ||
+          !document.getElementById('menu')?.classList.contains('hide') ||
+          !document.getElementById('shop')?.classList.contains('hide'),
         progress: Number(g.hits) || 0,
         hp: Math.max(0, Number(g.lives) || 0) / 3,
         cameraYaw: Math.atan2(g.camDir.x, g.camDir.z),

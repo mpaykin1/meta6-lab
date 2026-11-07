@@ -38,9 +38,10 @@ try {
   });
   try {
    await page.goto('http://127.0.0.1:'+port+'/games/veil-terraces/',{waitUntil:'load',timeout:45000});
-   await page.waitForFunction(()=>window.__metaGamesState && window.__metaGamesState().chunks>5,{timeout:45000});
+   await page.waitForFunction(()=>window.__metaGamesState && window.__metaGamesState().chunks===25,{timeout:45000});
    const webgl=await page.evaluate(()=>!!document.getElementById('screen').getContext('webgl2'));
    if(!webgl)throw Error('WebGL2 disabled');
+   await page.waitForTimeout(1000); // compare identical, fully uploaded 25-chunk scenes
    await page.evaluate(()=>{window.__renderBench.active=true;window.__renderBench.prev=0;});
    await page.waitForTimeout(7000);
    const stats=await page.evaluate(()=>window.__renderBench);

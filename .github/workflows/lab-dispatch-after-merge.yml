@@ -1,0 +1,21 @@
+name: LAB dispatch Claude readiness after main updates
+on:
+  push:
+    branches: [main]
+    paths:
+      - "games/**"
+      - "shared/**"
+      - "scripts/lab/LESSONS.md"
+      - ".github/workflows/lab-dispatch-after-merge.yml"
+permissions:
+  contents: read
+  actions: write
+jobs:
+  dispatch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Request protected LAB Progress measurement on merged main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${GITHUB_REPOSITORY}/actions/workflows/lab-progress.yml/dispatches" -f ref=main

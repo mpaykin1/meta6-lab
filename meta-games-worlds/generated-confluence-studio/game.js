@@ -1,0 +1,622 @@
+(function(){const module={exports:{}};
+'use strict';
+// Data-driven choice, evidence and ending mechanics. No enemies or powers are
+// created unless the scenario explicitly defines them.
+const TRACES = Object.freeze(['доверие', 'жертва', 'правда', 'милосердие', 'бездействие']);
+function inputObject(value, path) {
+  if (!value || typeof value !== 'object' || Array.isArray(value))
+    throw new TypeError(path + ' must be an object');
+  return value;
+}
+function inputArray(value, path) {
+  if (!Array.isArray(value)) throw new TypeError(path + ' must be an array');
+  return value;
+}
+function nonempty(value, path) {
+  if (typeof value !== 'string' || !value.trim()) throw new TypeError(path + ' must be a nonempty string');
+  return value;
+}
+function unique(rows, key, path) {
+  const ids = rows.map(row => nonempty(row?.[key], path + '.' + key));
+  if (ids.length !== new Set(ids).size) throw new TypeError(path + ' contains duplicate ' + key);
+}
+function createRuleSet({ scenario, genre, world } = {}) {
+  inputObject(scenario, 'scenario');
+  nonempty(genre, 'genre');
+  if (world !== undefined) inputObject(world, 'world');
+  const scenes = inputArray(scenario.scenes, 'scenario.scenes');
+  const events = inputArray(scenario.events, 'scenario.events');
+  const clues = inputArray(scenario.clues, 'scenario.clues');
+  const choices = inputArray(scenario.choices, 'scenario.choices');
+  const endings = inputArray(scenario.endings, 'scenario.endings');
+  if (!scenes.length || !events.length || !choices.length || endings.length < 2)
+    throw new TypeError('scenario requires scenes, events, choices and two endings');
+  unique(scenes, 'id', 'scenario.scenes');
+  unique(events, 'id', 'scenario.events');
+  unique(clues, 'id', 'scenario.clues');
+  unique(choices, 'id', 'scenario.choices');
+  unique(endings, 'id', 'scenario.endings');
+  const sceneIds = new Set(scenes.map(s => s.id));
+  const clueIds = new Set(clues.map(c => c.id));
+  for (const [i, clue] of clues.entries()) {
+    if (!sceneIds.has(clue.scene)) throw new TypeError('scenario.clues[' + i + '].scene is unknown');
+  }
+  for (const [i, event] of events.entries()) {
+    if (!sceneIds.has(event.scene)) throw new TypeError('scenario.events[' + i + '].scene is unknown');
+    nonempty(event.action, 'scenario.events[' + i + '].action');
+    if (event.prerequisiteClues !== undefined &&
+        (!Array.isArray(event.prerequisiteClues) ||
+          event.prerequisiteClues.some(id => !clueIds.has(id))))
+      throw new TypeError('scenario.events[' + i + '].prerequisiteClues contains unknown clues');
+  }
+  for (const [i, choice] of choices.entries()) {
+    if (!sceneIds.has(choice.scene)) throw new TypeError('scenario.choices[' + i + '].scene is unknown');
+    nonempty(choice.type, 'scenario.choices[' + i + '].type');
+    inputArray(choice.options, 'scenario.choices[' + i + '].options');
+    if (choice.options.length < 2) throw new TypeError('scenario.choices[' + i + '].options need alternatives');
+    unique(choice.options, 'id', 'scenario.choices[' + i + '].options');
+    for (const option of choice.options) {
+      inputObject(option.traceDelta, 'choice.option.traceDelta');
+      if (Object.entries(option.traceDelta).some(([k, v]) =>
+        !TRACES.includes(k) || !Number.isSafeInteger(v) || v < 0 || v > 1))
+        throw new TypeError('choice.option.traceDelta contains an invalid player consequence');
+    }
+  }
+  for (const [i, ending] of endings.entries()) {
+    if (!sceneIds.has(ending.scene)) throw new TypeError('scenario.endings[' + i + '].scene is unknown');
+    inputObject(ending.traceConditions, 'scenario.endings[' + i + '].traceConditions');
+    if (!Object.keys(ending.traceConditions).length ||
+        Object.entries(ending.traceConditions).some(([k, v]) =>
+          !TRACES.includes(k) || !Number.isSafeInteger(v) || v < 1))
+      throw new TypeError('scenario.endings[' + i + '].traceConditions invalid');
+  }
+  const playable = {
+    genre, gameId: scenario.gameId || null,
+    loop: {
+      goal: 'reach:' + endings[0].id,
+      action: events[0].action,
+      risk: 'miss:prerequisite_evidence_or_choice',
+      result: 'scene_event_or_player_trace',
+      consequence: 'gate:available_endings',
+      growth: 'accumulate:player_traces'
+    },
+    weapons: [], foes: [], economy: null,
+    scenes: scenes.map(s => ({ id: s.id, stage: s.stage })),
+    clues: clues.map(c => ({ id: c.id, scene: c.scene })),
+    events: events.map(e => ({ id: e.id, scene: e.scene, action: e.action,
+      prerequisiteClues: [...(e.prerequisiteClues || [])] })),
+    choiceBindings: choices.map(c => ({ id: c.id, scene: c.scene, type: c.type,
+      options: c.options.map(o => ({ id: o.id, traceDelta: { ...o.traceDelta } })) })),
+    endings: endings.map(e => ({ id: e.id, scene: e.scene, type: e.type,
+      traceConditions: { ...e.traceConditions } }))
+  };
+  // Physical constants are authored upstream, never generated by mechanics.
+  // The physics engine performs strict SI validation when the world is present.
+  if (world !== undefined) playable.world = structuredClone(world);
+  return playable;
+}
+function createMechanicsState(ruleSet) {
+  inputObject(ruleSet, 'ruleSet');
+  if (!Array.isArray(ruleSet.scenes) || !ruleSet.scenes.length)
+    throw new TypeError('ruleSet.scenes required');
+  return {
+    currentScene: null, visitedScenes: [], collectedClues: [], triggeredEvents: [],
+    selections: [], traces: Object.fromEntries(TRACES.map(k => [k, 0])),
+    ended: null
+  };
+}
+function advanceMechanics(ruleSet, state, action) {
+  inputObject(ruleSet, 'ruleSet');
+  inputObject(state, 'state');
+  inputObject(action, 'action');
+  if (state.ended !== null) throw new Error('Game already ended');
+  if (action.type !== 'enter' && action.type !== 'choose')
+    throw new TypeError('action.type must be enter or choose');
+  const updated = {
+    ...state, visitedScenes: [...state.visitedScenes],
+    collectedClues: [...state.collectedClues], triggeredEvents: [...state.triggeredEvents],
+    selections: [...state.selections], traces: { ...state.traces }
+  };
+  if (action.type === 'enter') {
+    const expected = ruleSet.scenes[updated.visitedScenes.length]?.id;
+    if (action.sceneId !== expected) throw new Error('Scene order violation');
+    if (updated.currentScene !== null) {
+      const pending = ruleSet.choiceBindings.filter(c =>
+        c.scene === updated.currentScene && !updated.selections.some(s => s.choiceId === c.id));
+      if (pending.length) throw new Error('Required scene choices unresolved');
+    }
+    updated.currentScene = expected;
+    updated.visitedScenes.push(expected);
+    for (const clue of ruleSet.clues.filter(c => c.scene === expected))
+      updated.collectedClues.push(clue.id);
+    for (const event of ruleSet.events.filter(e => e.scene === expected)) {
+      if (event.prerequisiteClues.some(id => !updated.collectedClues.includes(id)))
+        throw new Error('Evidence missing for event ' + event.id);
+      updated.triggeredEvents.push(event.id);
+    }
+    return updated;
+  }
+  const choice = ruleSet.choiceBindings.find(c => c.id === action.choiceId);
+  if (!choice || choice.scene !== updated.currentScene)
+    throw new Error('Choice unavailable in current scene');
+  if (updated.selections.some(s => s.choiceId === choice.id)) throw new Error('Choice already made');
+  const option = choice.options.find(o => o.id === action.optionId);
+  if (!option) throw new Error('Unknown choice option');
+  for (const [key, value] of Object.entries(option.traceDelta))
+    updated.traces[key] += value;
+  updated.selections.push({ choiceId: choice.id, optionId: option.id });
+  return updated;
+}
+function finishMechanics(ruleSet, state, endingId) {
+  inputObject(ruleSet, 'ruleSet');
+  inputObject(state, 'state');
+  if (state.ended !== null || state.visitedScenes.at(-1) !== ruleSet.scenes.at(-1)?.id ||
+      state.visitedScenes.length !== ruleSet.scenes.length)
+    throw new Error('Story must reach the final scene');
+  if (ruleSet.choiceBindings.some(c => !state.selections.some(s => s.choiceId === c.id)))
+    throw new Error('Required scene choices unresolved');
+  const ending = ruleSet.endings.find(e => e.id === endingId);
+  if (!ending) throw new Error('Unknown ending');
+  if (Object.entries(ending.traceConditions).some(([key, threshold]) =>
+      (state.traces[key] || 0) < threshold))
+    throw new Error('Ending not earned by player actions');
+  return { ...state, ended: ending.id, traces: { ...state.traces } };
+}
+module.exports = { createRuleSet, createMechanicsState, advanceMechanics, finishMechanics };
+
+window.EngineMechanics=module.exports;})();
+(function(){const module={exports:{}};
+'use strict';
+// SI-units collision solver. Requires authored geometry; no default infinite floor.
+// Compatible with GameGoldenPhysics: swept movement + finite step candidates.
+function object(value, name) {
+  if (!value || typeof value !== 'object' || Array.isArray(value))
+    throw new TypeError(name + ' must be an object');
+  return value;
+}
+function finite(value, name, min = -Infinity) {
+  if (typeof value !== 'number' || !Number.isFinite(value) || value < min)
+    throw new TypeError(name + ' must be finite and >= ' + min);
+  return value;
+}
+function vector(value, name) {
+  object(value, name);
+  return { x: finite(value.x, name + '.x'), y: finite(value.y, name + '.y'),
+    z: finite(value.z, name + '.z') };
+}
+function createPhysicsConfig(ruleSet) {
+  object(ruleSet, 'ruleSet');
+  const world = object(ruleSet.world, 'ruleSet.world');
+  const gravity = finite(world.gravity, 'ruleSet.world.gravity', 0.000001);
+  const maxStep = finite(world.maxStepMeters, 'ruleSet.world.maxStepMeters', 0);
+  if (maxStep > 2) throw new TypeError('ruleSet.world.maxStepMeters must be <= 2');
+  if (!Array.isArray(world.solidLayers) || !world.solidLayers.length ||
+      world.solidLayers.some(s => typeof s !== 'string' || !s.trim()))
+    throw new TypeError('ruleSet.world.solidLayers must be nonempty');
+  const bodyRadius = finite(world.bodyRadius, 'ruleSet.world.bodyRadius', 0.000001);
+  const bodyHeight = finite(world.bodyHeight, 'ruleSet.world.bodyHeight', 0.000001);
+  if (maxStep > bodyHeight) throw new TypeError('step height cannot exceed body height');
+  return {
+    gravity, step_heights: maxStep ? [maxStep / 2, maxStep] : [0],
+    maxStepMeters: maxStep, bodyRadius, bodyHeight, units: 'SI',
+    collisions: { solid: true, layers: [...new Set(world.solidLayers)] },
+    destruction: world.destruction === true ? { enabled: true } : null
+  };
+}
+function validateSolids(boxes, config) {
+  if (!Array.isArray(boxes) || boxes.length > 5000)
+    throw new TypeError('world.solids must be an array <= 5000');
+  return boxes.map((box, i) => {
+    object(box, 'world.solids[' + i + ']');
+    const min = vector(box.min, 'world.solids[' + i + '].min');
+    const max = vector(box.max, 'world.solids[' + i + '].max');
+    if (!['x', 'y', 'z'].every(a => max[a] > min[a]))
+      throw new TypeError('world.solids[' + i + '] must have positive volume');
+    if (!config.collisions.layers.includes(box.layer))
+      throw new TypeError('world.solids[' + i + '].layer is not solid');
+    return { min, max, layer: box.layer };
+  });
+}
+function overlaps(a, b, low, high) { return a < high && b > low; }
+function collides(pos, config, boxes) {
+  const r = config.bodyRadius, h = config.bodyHeight;
+  return boxes.some(b => overlaps(pos.x - r, pos.x + r, b.min.x, b.max.x) &&
+    overlaps(pos.y, pos.y + h, b.min.y, b.max.y) &&
+    overlaps(pos.z - r, pos.z + r, b.min.z, b.max.z));
+}
+function supported(pos, config, boxes) {
+  const r = config.bodyRadius;
+  return boxes.some(b => Math.abs(pos.y - b.max.y) <= 1e-8 &&
+    overlaps(pos.x - r, pos.x + r, b.min.x, b.max.x) &&
+    overlaps(pos.z - r, pos.z + r, b.min.z, b.max.z));
+}
+function moveHorizontal(pos, axis, delta, config, boxes, canStep) {
+  if (!delta) return { pos, blocked: false, stepped: false };
+  const target = { ...pos, [axis]: pos[axis] + delta };
+  const other = axis === 'x' ? 'z' : 'x', r = config.bodyRadius;
+  const obstacles = boxes.filter(b =>
+    overlaps(pos[other] - r, pos[other] + r, b.min[other], b.max[other]) &&
+    overlaps(pos.y, pos.y + config.bodyHeight, b.min.y, b.max.y) &&
+    (delta > 0 ?
+      pos[axis] + r <= b.min[axis] && target[axis] + r > b.min[axis] :
+      pos[axis] - r >= b.max[axis] && target[axis] - r < b.max[axis]))
+    .sort((a, b) => delta > 0 ? a.min[axis] - b.min[axis] : b.max[axis] - a.max[axis]);
+  let moving = target, stepped = false;
+  for (const block of obstacles) {
+    const height = block.max.y - moving.y;
+    if (canStep && height > 0 && height <= config.maxStepMeters) {
+      const elevated = { ...moving, y: block.max.y };
+      if (!collides(elevated, config, boxes)) {
+        moving = elevated; stepped = true; continue;
+      }
+    }
+    moving = { ...moving, [axis]: delta > 0 ? block.min[axis] - r : block.max[axis] + r };
+    return { pos: moving, blocked: true, stepped };
+  }
+  if (collides(moving, config, boxes)) return { pos, blocked: true, stepped: false };
+  return { pos: moving, blocked: false, stepped };
+}
+function simulatePhysicsStep(config, world, state, dt) {
+  object(config, 'config');
+  object(config.collisions, 'config.collisions');
+  if (config.units !== 'SI' || config.collisions.solid !== true)
+    throw new TypeError('config must preserve solid SI collisions');
+  // Validate at the runtime boundary too: persisted/MCP data may be corrupt.
+  config = createPhysicsConfig({ world: {
+    gravity: config.gravity, maxStepMeters: config.maxStepMeters,
+    solidLayers: config.collisions.layers, bodyRadius: config.bodyRadius,
+    bodyHeight: config.bodyHeight
+  } });
+  object(world, 'world');
+  object(state, 'state');
+  finite(dt, 'dt', 0.000001);
+  if (dt > 0.25) throw new TypeError('dt must be <= 0.25 seconds');
+  const boxes = validateSolids(world.solids, config);
+  let pos = vector(state.position, 'state.position');
+  const velocity = vector(state.velocity, 'state.velocity');
+  if (collides(pos, config, boxes)) throw new Error('Initial body intersects a solid obstacle');
+  const maxDistance = Math.max(Math.abs(velocity.x), Math.abs(velocity.z), Math.abs(velocity.y)) * dt;
+  const substeps = Math.max(1, Math.ceil(maxDistance / 0.08), Math.ceil(dt / (1 / 120)));
+  if (substeps > 1000) throw new RangeError('Movement exceeds safe physics budget');
+  const h = dt / substeps, contacts = { wall: false, step: false, ground: false, ceiling: false };
+  for (let i = 0; i < substeps; i++) {
+    for (const axis of ['x', 'z']) {
+      const canStep = velocity.y <= 0 && supported(pos, config, boxes);
+      const step = moveHorizontal(pos, axis, velocity[axis] * h, config, boxes, canStep);
+      pos = step.pos;
+      contacts.wall ||= step.blocked;
+      contacts.step ||= step.stepped;
+      if (step.blocked) velocity[axis] = 0;
+    }
+    velocity.y -= config.gravity * h;
+    const oldY = pos.y, nextY = oldY + velocity.y * h;
+    if (velocity.y <= 0) {
+      const floors = boxes.filter(b =>
+        overlaps(pos.x - config.bodyRadius, pos.x + config.bodyRadius, b.min.x, b.max.x) &&
+        overlaps(pos.z - config.bodyRadius, pos.z + config.bodyRadius, b.min.z, b.max.z) &&
+        oldY >= b.max.y - 1e-8 && nextY <= b.max.y);
+      if (floors.length) {
+        pos.y = Math.max(...floors.map(b => b.max.y));
+        velocity.y = 0;
+        contacts.ground = true;
+      } else pos.y = nextY;
+    } else {
+      const ceilings = boxes.filter(b =>
+        overlaps(pos.x - config.bodyRadius, pos.x + config.bodyRadius, b.min.x, b.max.x) &&
+        overlaps(pos.z - config.bodyRadius, pos.z + config.bodyRadius, b.min.z, b.max.z) &&
+        oldY + config.bodyHeight <= b.min.y &&
+        nextY + config.bodyHeight >= b.min.y);
+      if (ceilings.length) {
+        pos.y = Math.min(...ceilings.map(b => b.min.y)) - config.bodyHeight;
+        velocity.y = 0;
+        contacts.ceiling = true;
+      } else pos.y = nextY;
+    }
+  }
+  // Ground is a current support condition, not a latched event from an earlier
+  // substep (which could otherwise allow jumping after falling off an edge).
+  contacts.ground = velocity.y === 0 && supported(pos, config, boxes);
+  return { position: pos, velocity, contacts, substeps };
+}
+function followCamera(position, target, damping) {
+  const current = vector(position, 'camera.position');
+  const desired = vector(target, 'camera.target');
+  finite(damping, 'camera.damping', 0);
+  if (damping > 1) throw new TypeError('camera.damping cannot exceed 1');
+  return Object.fromEntries(['x', 'y', 'z'].map(a =>
+    [a, current[a] + (desired[a] - current[a]) * damping]));
+}
+module.exports = { createPhysicsConfig, simulatePhysicsStep, followCamera };
+
+window.EnginePhysics=module.exports;})();
+'use strict';
+(() => {
+  const read = id => document.getElementById(id);
+  const data = JSON.parse(read('game-data').textContent);
+  const { createMechanicsState, advanceMechanics, finishMechanics } = window.EngineMechanics;
+  const { simulatePhysicsStep, followCamera } = window.EnginePhysics;
+  const canvas = read('screen');
+  const gl = canvas.getContext('webgl2', { alpha: false, antialias: true, powerPreference: 'high-performance' });
+  if (!gl) { read('hint').textContent = 'WebGL2 required'; throw new Error('WebGL2 unavailable'); }
+  const errors = [];
+  function shader(kind, source) {
+    const obj = gl.createShader(kind);
+    gl.shaderSource(obj, source); gl.compileShader(obj);
+    if (!gl.getShaderParameter(obj, gl.COMPILE_STATUS)) {
+      const msg = gl.getShaderInfoLog(obj); errors.push(msg); throw new Error(msg);
+    }
+    return obj;
+  }
+  function program(vs, fs) {
+    const obj = gl.createProgram();
+    gl.attachShader(obj, shader(gl.VERTEX_SHADER, vs));
+    gl.attachShader(obj, shader(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(obj);
+    if (!gl.getProgramParameter(obj, gl.LINK_STATUS)) {
+      const msg = gl.getProgramInfoLog(obj); errors.push(msg); throw new Error(msg);
+    }
+    return obj;
+  }
+  const sceneProgram = program(
+    '#version 300 es\nprecision highp float;\nlayout(location=0)in vec3 aPos;\nlayout(location=1)in vec3 aColor;\nuniform vec3 uEye,uRight,uUp,uForward;\nuniform float uAspect,uTan;\nout vec3 vColor;\nout float vDepth;\nvoid main(){vec3 d=aPos-uEye;float z=dot(d,uForward);vec2 q=vec2(dot(d,uRight),dot(d,uUp));gl_Position=vec4(q.x/(uTan*uAspect),q.y/uTan,(z*101.-100.)/99.,z);vColor=aColor;vDepth=max(0.,z);}',
+    '#version 300 es\nprecision highp float;\nin vec3 vColor;in float vDepth;out vec4 color;\nuniform float uTime;uniform vec3 uFog;\nvoid main(){float fog=1.-exp(-vDepth*.018);float pulse=.88+.12*sin(uTime*.65);color=vec4(mix(vColor*pulse,uFog,fog),1.);}'
+  );
+  const skyProgram = program(
+    '#version 300 es\nprecision highp float;\nout vec2 vUv;\nvoid main(){vec2 p=vec2(float(gl_VertexID==1)*4.-1.,float(gl_VertexID==2)*4.-1.);vUv=p*.5+.5;gl_Position=vec4(p,0.,1.);}',
+    '#version 300 es\nprecision highp float;\nin vec2 vUv;out vec4 color;\nuniform float uTime;uniform vec3 uDeep,uMid,uGlow;\nfloat h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}\nvoid main(){vec2 q=vUv;float aurora=pow(max(0.,sin(q.x*7.+sin(q.y*4.+uTime*.09)*1.7+uTime*.12)),8.)*smoothstep(.12,.8,q.y);float stars=step(.9975,h(floor(q*vec2(250.,140.))))*smoothstep(.12,.7,q.y);vec3 col=mix(uDeep,uMid,smoothstep(-.2,1.2,q.y));col+=uGlow*(aurora*.23+stars*.54);col+=uGlow*.09*exp(-pow((q.y-.34)*6.,2.));color=vec4(col,1.);}'
+  );
+  const style = data.visual, fogDef = style.shaders.atmosphere;
+  const fogProgram = program(fogDef.vertexShader, fogDef.fragmentShader);
+  const hex = color => [1, 3, 5].map(k => parseInt(color.slice(k, k + 2), 16) / 255);
+  function uni(programId, name) { return gl.getUniformLocation(programId, name); }
+  const geom = gl.createBuffer(), fullscreen = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, fullscreen);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+    -1,-1,0, 0,0, 3,-1,0, 2,0, -1,3,0, 0,2
+  ]), gl.STATIC_DRAW);
+  const vao = gl.createVertexArray();
+  gl.bindVertexArray(vao);
+  const C = {
+    ground: hex(style.palette[1]), rock: hex(style.palette[0]),
+    glow: hex(style.palette[2]), silver: hex(style.palette[3])
+  };
+  const baked = [], dynamic = [];
+  function vertex(arr, p, color) { arr.push(p[0],p[1],p[2],color[0],color[1],color[2]); }
+  function cube(arr, x1,y1,z1,x2,y2,z2,color) {
+    const v=[[x1,y1,z1],[x2,y1,z1],[x2,y2,z1],[x1,y2,z1],
+      [x1,y1,z2],[x2,y1,z2],[x2,y2,z2],[x1,y2,z2]];
+    const faces=[[0,1,2,3,.55],[5,4,7,6,.75],[4,0,3,7,.57],
+      [1,5,6,2,.71],[3,2,6,7,1],[4,5,1,0,.37]];
+    for(const f of faces) {
+      const tint=color.map(c=>Math.min(1,c*f[4]));
+      for(const id of [f[0],f[1],f[2],f[0],f[2],f[3]])vertex(arr,v[id],tint);
+    }
+  }
+  for(const solid of data.world.solids)
+    cube(baked,solid.min.x,solid.min.y,solid.min.z,solid.max.x,solid.max.y,solid.max.z,C.ground);
+  // The vault's six evidence pylons, rune bands and fragments share real world coordinates.
+  for(const [i,m] of data.world.sceneMarkers.entries()) {
+    const {x,y,z}=m.position;
+    cube(baked,x-.86,y,z-.22,x-.56,y+2.7,z+.22,C.rock);
+    cube(baked,x+.56,y,z-.22,x+.86,y+2.7,z+.22,C.rock);
+    cube(baked,x-.95,y+2.7,z-.29,x+.95,y+3,z+.29,C.silver);
+    cube(baked,x-.19,y+.95,z-.2,x+.19,y+1.8,z+.2,C.glow);
+    if(i%2===0)cube(baked,x-1.85,y,z-1.1,x-1.62,y+1.1,z-.8,C.ground);
+  }
+  let state=createMechanicsState(data.rules), won=false, activeMenu=false, menuScene=null;
+  let player={position:{...data.world.spawn},velocity:{x:0,y:0,z:0}};
+  const cam={x:player.position.x,y:player.position.y+4,z:player.position.z-8};
+  let yaw=0,pitch=.20,grounded=false, jumpQueued=false, useQueued=false;
+  const keys=new Set(), nav={x:0,y:0}, pressed={left:false,right:false};
+  let stickId=null, lookId=null, sx=0,sy=0,lx=0,ly=0,ready=false, time=0;
+  const menu=read('menu'), buttons=read('options');
+  function selectChoice(choice, option) {
+    try {
+      state=advanceMechanics(data.rules,state,{type:'choose',choiceId:choice.id,optionId:option.id});
+      if(!pendingChoice()) { hideMenu(); if(state.currentScene===data.rules.scenes.at(-1).id) endGame(); }
+      else showSceneMenu();
+    } catch(e){errors.push(String(e));}
+  }
+  const pendingChoice=()=>data.rules.choiceBindings.find(c=>
+    c.scene===state.currentScene&&!state.selections.some(s=>s.choiceId===c.id));
+  function hideMenu(){activeMenu=false;menu.classList.remove('open');buttons.replaceChildren();}
+  function button(label,click) {
+    const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',click);
+    buttons.appendChild(b);
+  }
+  function showSceneMenu(){
+    const idx=data.rules.scenes.findIndex(s=>s.id===state.currentScene), scenario=data.scenario.scenes[idx];
+    if(!scenario)throw new Error('Scene missing in canonical Scenario');
+    activeMenu=true;menu.classList.add('open');buttons.replaceChildren();
+    read('title').textContent='CHAPTER '+String(idx+1).padStart(2,'0');
+    read('description').textContent=scenario.synopsis;
+    const choice=pendingChoice();
+    if(choice)for(const option of choice.options) {
+      const original=data.scenario.choices.find(c=>c.id===choice.id)?.options.find(o=>o.id===option.id);
+      button(original?.label||option.id,()=>selectChoice(choice,option));
+    }else button('Continue',()=>{hideMenu();if(idx===5)endGame();});
+  }
+  function endGame(){
+    const target=data.rules.endings.find(e=>Object.entries(e.traceConditions).every(([k,n])=>(state.traces[k]||0)>=n));
+    if(!target){showSceneMenu();return;}
+    try {state=finishMechanics(data.rules,state,target.id);won=true;}catch(e){errors.push(String(e));return;}
+    activeMenu=true;menu.classList.add('open');buttons.replaceChildren();
+    read('title').textContent='THE VAULT REMEMBERS';
+    const ending=data.scenario.endings.find(e=>e.id===target.id);
+    read('description').textContent='A choice became a consequence. '+(ending?.finalLocation||'The vault')+'.';
+    button('Begin a new tale',()=>location.reload());
+  }
+  function interact(){
+    if(activeMenu||won)return;
+    const next=data.rules.scenes[state.visitedScenes.length];
+    if(!next)return;
+    const marker=data.world.sceneMarkers[state.visitedScenes.length].position;
+    if(Math.hypot(player.position.x-marker.x,player.position.z-marker.z)>2.5)return;
+    try {
+      state=advanceMechanics(data.rules,state,{type:'enter',sceneId:next.id});
+      menuScene=next.id;showSceneMenu();
+    }catch(e){errors.push(String(e));}
+  }
+  function fillHud(){
+    const h=read('hud');h.replaceChildren();
+    for(let i=0;i<data.rules.scenes.length;i++){
+      const el=document.createElement('i');
+      if(i<state.visitedScenes.length)el.classList.add('done');
+      h.appendChild(el);
+    }
+  }
+  document.addEventListener('keydown',e=>{
+    if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
+    keys.add(e.code);
+    if(e.code==='Space'&&!e.repeat)jumpQueued=true;
+    if(e.code==='KeyE'&&!e.repeat)useQueued=true;
+  });
+  document.addEventListener('keyup',e=>keys.delete(e.code));
+  function reset(){keys.clear();nav.x=nav.y=0;stickId=lookId=null;read('stick').style.display='none';}
+  window.addEventListener('blur',reset);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)reset();});
+  const stick=read('stick'), knob=read('knob');
+  canvas.addEventListener('pointerdown',e=>{
+    e.preventDefault();canvas.setPointerCapture(e.pointerId);
+    if(e.clientX<innerWidth*.46&&stickId===null){
+      stickId=e.pointerId;sx=e.clientX;sy=e.clientY;stick.style.display='block';
+      stick.style.left=(sx-43)+'px';stick.style.top=(sy-43)+'px';
+    }else if(lookId===null){lookId=e.pointerId;lx=e.clientX;ly=e.clientY;}
+  });
+  canvas.addEventListener('pointermove',e=>{
+    if(e.pointerId===stickId){
+      nav.x=Math.max(-1,Math.min(1,(e.clientX-sx)/57));
+      nav.y=Math.max(-1,Math.min(1,(sy-e.clientY)/57));
+      knob.style.transform='translate('+(nav.x*24)+'px,'+(-nav.y*24)+'px)';
+    }else if(e.pointerId===lookId){
+      yaw+=(e.clientX-lx)*.005;pitch=Math.max(-.15,Math.min(.67,pitch-(e.clientY-ly)*.003));
+      lx=e.clientX;ly=e.clientY;
+    }
+  });
+  function finishPointer(e){
+    if(e.pointerId===stickId){stickId=null;nav.x=nav.y=0;stick.style.display='none';knob.style.transform='';}
+    if(e.pointerId===lookId)lookId=null;
+  }
+  canvas.addEventListener('pointerup',finishPointer);
+  canvas.addEventListener('pointercancel',finishPointer);
+  canvas.addEventListener('wheel',e=>e.preventDefault(),{passive:false});
+  read('jump').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();jumpQueued=true;});
+  read('use').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();useQueued=true;});
+  const V=(x,y,z)=>({x,y,z});
+  function norm(v){
+    const d=Math.hypot(v.x,v.y,v.z)||1;return V(v.x/d,v.y/d,v.z/d);
+  }
+  function cross(a,b){return V(a.y*b.z-a.z*b.y,a.z*b.x-a.x*b.z,a.x*b.y-a.y*b.x);}
+  function basis(){
+    const eye=V(cam.x,cam.y,cam.z), target=V(player.position.x,player.position.y+1.25,player.position.z+1.1);
+    const forward=norm(V(target.x-eye.x,target.y-eye.y,target.z-eye.z));
+    const right=norm(cross(V(0,1,0),forward)), up=norm(cross(forward,right));
+    return{eye,forward,right,up};
+  }
+  function drawMesh(vertices,b){
+    gl.useProgram(sceneProgram);
+    gl.uniform3f(uni(sceneProgram,'uEye'),b.eye.x,b.eye.y,b.eye.z);
+    gl.uniform3f(uni(sceneProgram,'uRight'),b.right.x,b.right.y,b.right.z);
+    gl.uniform3f(uni(sceneProgram,'uUp'),b.up.x,b.up.y,b.up.z);
+    gl.uniform3f(uni(sceneProgram,'uForward'),b.forward.x,b.forward.y,b.forward.z);
+    gl.uniform1f(uni(sceneProgram,'uAspect'),canvas.width/canvas.height);
+    gl.uniform1f(uni(sceneProgram,'uTan'),.78);
+    gl.uniform1f(uni(sceneProgram,'uTime'),time);
+    gl.uniform3fv(uni(sceneProgram,'uFog'),C.ground);
+    gl.bindBuffer(gl.ARRAY_BUFFER,geom);
+    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(vertices),gl.DYNAMIC_DRAW);
+    gl.enableVertexAttribArray(0);gl.enableVertexAttribArray(1);
+    gl.vertexAttribPointer(0,3,gl.FLOAT,false,24,0);
+    gl.vertexAttribPointer(1,3,gl.FLOAT,false,24,12);
+    gl.drawArrays(gl.TRIANGLES,0,vertices.length/6);
+  }
+  function render(){
+    const dpr=Math.min(devicePixelRatio||1,2), w=Math.max(1,Math.round(canvas.clientWidth*dpr)),h=Math.max(1,Math.round(canvas.clientHeight*dpr));
+    if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
+    gl.viewport(0,0,w,h);gl.bindVertexArray(vao);
+    gl.disable(gl.DEPTH_TEST);
+    gl.useProgram(skyProgram);
+    gl.uniform1f(uni(skyProgram,'uTime'),time);
+    gl.uniform3fv(uni(skyProgram,'uDeep'),C.rock);
+    gl.uniform3fv(uni(skyProgram,'uMid'),C.ground);
+    gl.uniform3fv(uni(skyProgram,'uGlow'),C.glow);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+    gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.clear(gl.DEPTH_BUFFER_BIT);
+    dynamic.length=0;
+    const p=player.position,sway=Math.sin(time*7)*Math.min(.09,Math.hypot(player.velocity.x,player.velocity.z)*.012);
+    cube(dynamic,p.x-.24,p.y+.15,p.z-.24,p.x+.24,p.y+1.65+sway,p.z+.24,C.silver);
+    cube(dynamic,p.x-.32,p.y+1.18+sway,p.z-.27,p.x+.32,p.y+1.81+sway,p.z+.27,C.glow);
+    cube(dynamic,p.x-.38,p.y+.33,p.z-.30,p.x-.23,p.y+.95+sway,p.z+.31,C.rock);
+    cube(dynamic,p.x+.23,p.y+.33,p.z-.30,p.x+.38,p.y+.95+sway,p.z+.31,C.rock);
+    for(let i=0;i<data.world.sceneMarkers.length;i++){
+      const v=data.world.sceneMarkers[i].position;
+      const pulse=.11+.15*(1+Math.sin(time*2.2+i));
+      const color=i<state.visitedScenes.length?C.silver:C.glow.map(c=>c*(.6+pulse));
+      cube(dynamic,v.x-.22,v.y+1.1+Math.sin(time+i)*.18,v.z-.22,v.x+.22,v.y+1.57+Math.sin(time+i)*.18,v.z+.22,color);
+    }
+    drawMesh(baked.concat(dynamic),basis());
+    // The GLSL generated by the *visual engine* executes as an actual screen mist pass.
+    gl.disable(gl.DEPTH_TEST);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+    gl.useProgram(fogProgram);
+    gl.bindBuffer(gl.ARRAY_BUFFER,fullscreen);
+    const pos=gl.getAttribLocation(fogProgram,'position'), uv=gl.getAttribLocation(fogProgram,'uv');
+    gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,3,gl.FLOAT,false,20,0);
+    gl.enableVertexAttribArray(uv);gl.vertexAttribPointer(uv,2,gl.FLOAT,false,20,12);
+    gl.uniformMatrix4fv(uni(fogProgram,'modelViewMatrix'),false,new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]));
+    gl.uniformMatrix4fv(uni(fogProgram,'projectionMatrix'),false,new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]));
+    gl.uniform1f(uni(fogProgram,'uTime'),time);
+    gl.uniform1f(uni(fogProgram,'uFogDensity'),style.lighting.fog.density);
+    gl.uniform3fv(uni(fogProgram,'uFogColor'),C.ground);
+    gl.uniform3fv(uni(fogProgram,'uAccentColor'),C.glow);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+    gl.disable(gl.BLEND);
+    const err=gl.getError();if(err!==gl.NO_ERROR&&errors.length<12)errors.push('WebGL error '+err);
+  }
+  let last=0;
+  function tick(now){
+    try {
+      const dt=Math.min(.04,Math.max(.001,(now-last)/1000||.016));last=now;time+=dt;
+      let x=0,z=0;
+      if(keys.has('KeyA')||keys.has('ArrowLeft'))x--;
+      if(keys.has('KeyD')||keys.has('ArrowRight'))x++;
+      if(keys.has('KeyW')||keys.has('ArrowUp'))z++;
+      if(keys.has('KeyS')||keys.has('ArrowDown'))z--;
+      x+=nav.x;z+=nav.y;
+      const length=Math.hypot(x,z)||1;
+      if(!activeMenu&&!won){
+        const speed=3.7;
+        const vx=(x*Math.cos(yaw)+z*Math.sin(yaw))/length*speed;
+        const vz=(z*Math.cos(yaw)-x*Math.sin(yaw))/length*speed;
+        const damp=1-Math.exp(-15*dt);
+        player.velocity.x+=(vx-player.velocity.x)*damp;
+        player.velocity.z+=(vz-player.velocity.z)*damp;
+        if(jumpQueued&&grounded){player.velocity.y=5.2;grounded=false;}
+        try {
+          const next=simulatePhysicsStep(data.physics,{solids:data.world.solids},player,dt);
+          player={position:next.position,velocity:next.velocity};grounded=next.contacts.ground;
+        }catch(e){if(errors.length<12)errors.push(String(e));}
+        if(player.position.y< -10){
+          player={position:{...data.world.spawn},velocity:V(0,0,0)};
+        }
+        if(useQueued)interact();
+      }
+      jumpQueued=useQueued=false;
+      const target=V(player.position.x-Math.sin(yaw)*7*Math.cos(pitch),
+        player.position.y+3.3+7*Math.sin(pitch),
+        player.position.z-Math.cos(yaw)*7*Math.cos(pitch));
+      const next=followCamera(cam,target,1-Math.exp(-4.5*dt));
+      Object.assign(cam,next);
+      fillHud();render();
+      ready=true;
+    }catch(e){if(errors.length<12)errors.push(String(e));}
+    requestAnimationFrame(tick);
+  }
+  window.__metaGamesState=()=>({
+    ready,webgl2:true,x:player.position.x,y:player.position.y,z:player.position.z,
+    camera:{...cam},visited:state.visitedScenes.length,selections:state.selections.length,
+    progress:state.visitedScenes.length,total:data.rules.scenes.length,
+    won,ending:state.ended,menu:activeMenu,errors:[...errors],
+    scrollX:scrollX,scrollY:scrollY
+  });
+  requestAnimationFrame(tick);
+})();

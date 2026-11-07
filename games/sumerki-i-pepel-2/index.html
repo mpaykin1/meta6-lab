@@ -11182,7 +11182,19 @@ const metaBotAdapter = Object.freeze({
   info() { return { name: 'Сумерки и пепел II', levels: 1 }; },
   state() {
     const objective = world ? nearestGoal() : null;
-    const n = foes.reduce((count, foe) => count + (foeAlive(foe) ? 1 : 0), 0);
+    let n = 0, nearestEnemy = null, nearestEnemyDistance2 = Infinity;
+    for (const foe of foes) {
+      if (!foeAlive(foe)) continue;
+      n++;
+      const head = foe.segs?.[0];
+      if (!head) continue;
+      const dx = head.x - player.pos.x, dz = head.z - player.pos.z;
+      const d2 = dx * dx + dz * dz;
+      if (d2 < nearestEnemyDistance2) {
+        nearestEnemyDistance2 = d2;
+        nearestEnemy = { x: head.x, y: head.z, z: head.z };
+      }
+    }
     const endVisible = !document.getElementById('scrEnd').hidden;
     const pauseVisible = !document.getElementById('scrPause').hidden;
     const complete = G.state === 'victory';
@@ -11195,6 +11207,7 @@ const metaBotAdapter = Object.freeze({
       hero: { x: player.pos.x, y: player.pos.z, z: player.pos.z },
       goal: objective ? { x: objective.x, y: objective.z, z: objective.z } : null,
       enemies: n,
+      nearestEnemy,
       weapons: combat.arsenal.length,
       layoutHash: metaBotLayoutHash(),
       menuOpen: pauseVisible || endVisible,

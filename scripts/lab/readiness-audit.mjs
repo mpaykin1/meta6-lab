@@ -42,7 +42,7 @@ async function checkEvidence(gate){
   const a=gate.artifact;
   assert(approvedRepos.has(a.repo)&&['main','master'].includes(a.ref)&&/^[\w./-]+$/.test(a.path)&&!a.path.includes('..'),'Unsafe artifact: '+gate.id);
   const asset=await getJSON('https://api.github.com/repos/'+a.repo+'/contents/'+a.path+'?ref='+a.ref);
-  assert(asset.path===a.path&&['file','dir'].includes(asset.type),'Artifact not present in main/master: '+gate.id);
+  assert((Array.isArray(asset) && asset.length>0) || (!Array.isArray(asset) && asset.path===a.path&&asset.type==='file'),'Artifact not present in main/master: '+gate.id);
  }
  return true;
 }

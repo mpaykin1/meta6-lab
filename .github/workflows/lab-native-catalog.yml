@@ -1,0 +1,62 @@
+name: LAB Native Catalog Candidate
+on:
+  pull_request:
+    paths:
+      - 'platforms/**'
+      - '.github/workflows/lab-native-catalog.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package-catalog:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build actual candidates and reject unapproved store releases
+        working-directory: platforms
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check scripts/build-catalog.mjs
+          node --check scripts/prepare-web.mjs
+          npm run prepare:steam
+          node -e "const fs=require('fs'); const c=require('./dist/www/catalog.json');const m=require('./dist/www/channel.json');if(!m.candidate||m.adsEnabled||c.games.length!==10||m.games.length!==10)process.exit(1);for(const g of c.games){if(!fs.readFileSync('./dist/www/'+g.entry,'utf8').includes('_meta_native.js'))process.exit(1)}"
+          npm run prepare:play
+          node -e "const fs=require('fs');const m=require('./dist/www/channel.json');if(!m.candidate||m.channel!=='google-play'||m.adsEnabled||m.games.length!==10)process.exit(1);"
+          if npm run prepare:steam:release; then echo "Unsafe release without game approval"; exit 1; fi
+          if npm run prepare:play:release; then echo "Unsafe Android release without game approval"; exit 1; fi
+  android-candidate:
+    needs: package-catalog
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build offline Android debug APK candidate
+        working-directory: platforms
+        run: |
+          npm install --no-audit --no-fund
+          npm run prepare:play
+          npx cap add android
+          npx cap sync android
+          cd android
+          ./gradlew assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: meta-games-android-debug-candidate
+          path: platforms/android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error

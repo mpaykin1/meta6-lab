@@ -48,3 +48,12 @@ export function inspectApproved(id,start=1,count=25){
  const size=Math.max(1,Math.min(60,Math.trunc(Number(count)||25)));
  return {id:item.id,source:item.source,lines:lines.slice(from-1,from+size-1).map((text,i)=>({line:from+i,text}))};
 }
+
+// Optional full-source retrieval for game assembly. Re-check the exact Git blob on EVERY call.
+export function getApprovedSource(id){
+ const component=approvedComponents().find(x=>x.id===id);
+ if(!component)throw Error('Not an owner-approved source');
+ const bytes=fs.readFileSync(path.join(root,'components',component.id,component.entry));
+ if(bytes.length>64*1024)throw Error('Approved component exceeds full-source size limit');
+ return {id:component.id,entry:component.entry,source:component.source,code:bytes.toString('utf8')};
+}

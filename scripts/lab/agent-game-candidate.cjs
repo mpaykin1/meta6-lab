@@ -35,7 +35,10 @@ if(data.world!==undefined){
  // The existing generation service independently validates physics, spawn and solids.
  card.world=data.world;
 }
-card.referenceIds=[]; // No unverified external game assets may enter a candidate.
+// META GAMES policy: a procedural original from World_server is NOT a donor.
+// This generator does not yet assemble actual files from approved games.
+// Fail closed rather than publish another plausible-looking noncompliant candidate.
+throw new Error('SOURCE_POLICY_BLOCK: this generator uses procedural World_server geometry instead of game code and assets from the five originals or confirmed Claude games. No new candidate may be created until real SHA-pinned donor reuse is implemented.');
 const seed=Number(data.randomSeed??fixture.randomSeed);
 if(!Number.isSafeInteger(seed)||seed<1||seed>2147483647)throw Error('Invalid randomSeed');
 const head=execFileSync('git',['rev-parse','HEAD'],{cwd:source,encoding:'utf8'}).trim();

@@ -8,6 +8,20 @@
 
 <!-- карточки ниже -->
 
+### lab/shared-owner-approved-components — Первая библиотека эталонного кода
+- Польза: сюжетные события и мобильный ввод берутся из общей библиотеки, оригинальные файлы сохранены без изменений.
+- Поиграть: не отдельная игра; интеграция в игры ещё не завершена.
+- Ветка / SHA кода: lab/shared-owner-approved-components / de6cdfeb80081c17cb8ecd996c0bbd0cd57bf272
+- Исходники: observer-world-en-v7/story-system.js и mobile-controls.js, meta6 ea74a313, Git blob SHA в паспортах.
+- Файлы: shared/components/* (2 модуля+2 паспорта), shared/index.json, shared/loader.js, scripts/shared/build-index.mjs, workflow.
+- Проверки: https://github.com/mpaykin1/meta6-lab/actions/runs/42327859393 (index success), https://github.com/mpaykin1/meta6-lab/actions/runs/42327859314 (guard success).
+- PR: https://github.com/mpaykin1/meta6-lab/pull/13
+- Статус: В РАБОТЕ (игры на shared ещё не переведены; META BOT на интеграцию не запускался).
+- Михаил: —
+- Claude: —
+
+
+
 ### lab/agent-game-candidate — Генерация кандидата нейросетью
 - Результат: авторизованная сборка реальной WebGL-игры из существующих движков World_server, только в песочнице
 - Поиграть: https://mpaykin1.github.io/meta6-lab/preview/agent-game-candidate/meta-games-worlds/generated-confluence-studio/

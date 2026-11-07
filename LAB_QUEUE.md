@@ -8,6 +8,15 @@
 
 <!-- карточки ниже -->
 
+### lab/play-connect-earn-rules — Play / Connect / Earn
+- Польза: три раздела портала; поиск/игры, MCP-создание, боты, профили, популярность, уведомления, заработок и одночасовое продвижение.
+- Правила: [PLAY_CONNECT_EARN.md](rules/09-platforma/PLAY_CONNECT_EARN.md)
+- Ветка: `lab/play-connect-earn-rules`; PR: https://github.com/mpaykin1/meta6-lab/pull/52
+- Поиграть: не новая игра; внедрение интерфейса ещё не выполнено.
+- Проверка: документооборот, META BOT не требуется до появления изменённой игры.
+- Статус: В РАБОТЕ — требования в PR; реализация разделов и юридическое соглашение впереди; конфликт с основным `BEZ_REKLAMY.md` решает Claude.
+- Михаил: —; Claude: —
+
 ### World_server / PR #621 — MCP: Veil Terraces и исходники
 - Польза: публичный MCP отдаёт 5 игр, 2 проверенных оригинальных модуля, не отдаёт 4 неподтверждённых.
 - Поиграть: https://mpaykin1.github.io/meta6/meta-games-worlds/veil-terraces/

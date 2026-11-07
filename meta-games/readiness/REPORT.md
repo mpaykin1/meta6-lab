@@ -37,3 +37,11 @@
 ## Самопроверка
 
 Сверено через GitHub API: [lab #11](https://github.com/mpaykin1/meta6-lab/pull/11), [#12](https://github.com/mpaykin1/meta6-lab/pull/12), [#13](https://github.com/mpaykin1/meta6-lab/pull/13) и [meta6 #292](https://github.com/mpaykin1/meta6/pull/292) — merged; [lab #7](https://github.com/mpaykin1/meta6-lab/pull/7), [#8](https://github.com/mpaykin1/meta6-lab/pull/8), [#9](https://github.com/mpaykin1/meta6-lab/pull/9), [#15](https://github.com/mpaykin1/meta6-lab/pull/15), [World_server #621](https://github.com/mpaykin1/World_server/pull/621) — open. Скрипт проверяет эти состояния при каждом прогоне. Дата проверки: 07.11.2026.
+
+## Повторная самопроверка: исключение ошибок в отчёте
+
+- Код проверяющего скрипта усилен: только три доверенных репозитория, PR должен быть слит именно в указанном репозитории и не позже времени проверки; дата и возраст данных ограничены.
+- CI теперь сравнивает **не только score.json с gates.json**, но и проценты в опубликованном REPORT.md. Несовпадение автоматически блокирует принятие.
+- Добавлен ежедневный запуск независимой проверки **после принятия workflow в default branch**; в открытом PR расписание ещё не действует.
+- Самопроверка выявила ограничение: merged PR — доказательство интеграции кода, но не функционального успеха. Проценты не повышались без нового подтверждённого критерия.
+- Текущая ветка и отчёт: [lab/readiness-evidence-gates / PR #16](https://github.com/mpaykin1/meta6-lab/pull/16). **PR открыт, в main не слит.** Поэтому сама система аудита пока считается экспериментальной, а не production-функцией.

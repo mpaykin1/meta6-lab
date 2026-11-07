@@ -24,6 +24,7 @@ jobs:
         run: |
           set -euo pipefail
           node --check scripts/build-catalog.mjs
+          node scripts/check-native-integrity.mjs
           node --check scripts/prepare-web.mjs
           npm run prepare:steam
           node -e "const fs=require('fs'); const c=require('./dist/www/catalog.json');const m=require('./dist/www/channel.json');if(!m.candidate||m.adsEnabled||c.games.length!==10||m.games.length!==10)process.exit(1);for(const g of c.games){if(!fs.readFileSync('./dist/www/'+g.entry,'utf8').includes('_meta_native.js'))process.exit(1)}"

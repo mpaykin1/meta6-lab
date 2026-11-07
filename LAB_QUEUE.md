@@ -43,7 +43,7 @@
 - Польза: одобрить игровые улучшения только после полного честного прохождения.
 - Ветка / SHA: meta6 ai/meta-rules-twilight-isles-20261106 / 72b92d5c508571cc4fd69d4aa60c2692940cee16 (только чтение).
 - PR: https://github.com/mpaykin1/meta6/pull/290
-- META BOT: https://github.com/mpaykin1/meta6/actions/runs/42186206581 — FAIL, уровень 1 не завершён за 570 с; завершился playLevel без победы.
+- META BOT: https://github.com/mpaykin1/meta6/actions/runs/42186206581 — FAIL, уровень 1 не завершён за 570 с; ложный возврат playLevel при смерти исправлен в lab PR #2 SHA 2a96b686f28959da60c7ba64ccbdff248ac8d405, полная победа ещё не подтверждена.
 - Статус: В РАБОТЕ — не сливать до зелёного META BOT; прямые исправления/комментарии в meta6 запрещены.
 - Михаил: —
 - Claude: —

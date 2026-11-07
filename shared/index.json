@@ -187,7 +187,9 @@
         "git_blob_sha": "0515d87cc43a99f8906d62d52dc21114528c2c60"
       },
       "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
-      "used_by": [],
+      "used_by": [
+        "veil-terraces"
+      ],
       "ads": false
     },
     {

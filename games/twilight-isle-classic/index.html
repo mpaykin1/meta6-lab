@@ -69,6 +69,9 @@ body { margin: 0; font-family: var(--font-ui); -webkit-user-select: none; user-s
 .toast.warn { color: #ffd6f6; text-shadow: 0 3px 0 var(--ink), 0 0 24px rgba(255, 79, 216, .75); }
 @keyframes flick { 0% { opacity: .15 } 7% { opacity: 1 } 11% { opacity: .35 } 16% { opacity: 1 } 58% { opacity: .8 } 62% { opacity: 1 } }
 
+/* Functional in-game pause menu: icon only, anchored in the safe top-right. */
+#btnGameMenu { position: fixed; top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); z-index: 9; width: 44px; height: 44px; font-size: 27px; line-height: 1; background: var(--ink-soft); color: var(--paper); border: 2px solid rgba(248,238,200,.3); cursor: pointer; }
+#btnGameMenu:focus-visible { outline: 2px solid var(--gold); }
 /* ---------- corner tools ---------- */
 .tools { position: fixed; right: var(--hud-pad-r); bottom: var(--hud-pad-b); display: flex; gap: 8px; z-index: 6; }
 .icon-btn { width: 44px; height: 44px; display: grid; place-items: center; padding: 0; cursor: pointer;
@@ -365,6 +368,7 @@ kbd { font-family: var(--font-ui); font-size: 13px; color: var(--paper); padding
 </div>
 
 <div class="tools" id="tools">
+  <button type="button" id="btnGameMenu" aria-label="Game menu" title="Pause / resume">☰</button>
   <button class="icon-btn" id="btnMute" aria-pressed="false" aria-label="Sound" title="Sound (M)">
     <svg class="on" viewBox="0 0 11 11" fill="currentColor" aria-hidden="true"><rect x="1" y="4" width="2" height="3"/><rect x="3" y="3" width="1" height="5"/><rect x="4" y="2" width="1" height="7"/><rect x="5" y="1" width="1" height="9"/><rect x="7" y="4" width="1" height="3"/><rect x="9" y="2" width="1" height="7"/></svg>
     <svg class="off" viewBox="0 0 11 11" fill="currentColor" aria-hidden="true"><rect x="1" y="4" width="2" height="3"/><rect x="3" y="3" width="1" height="5"/><rect x="4" y="2" width="1" height="7"/><rect x="5" y="1" width="1" height="9"/><rect x="7" y="3" width="1" height="1"/><rect x="8" y="4" width="1" height="1"/><rect x="9" y="5" width="1" height="1"/><rect x="8" y="6" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="9" y="3" width="1" height="1"/><rect x="9" y="7" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/></svg>
@@ -4495,6 +4499,11 @@ function toggleFullscreen() {
   } catch (e) { /* fullscreen is optional */ }
 }
 if (!(document.fullscreenEnabled || document.webkitFullscreenEnabled)) $('btnFull').hidden = true;
+$('btnGameMenu').addEventListener('click', () => {
+  if (G.state === 'play') setPaused(true);
+  else if (G.state === 'paused') setPaused(false);
+  else if (G.state === 'title') startGame();
+});
 $('btnStart').addEventListener('click', startGame);
 $('btnResume').addEventListener('click', () => setPaused(false));
 $('btnRestart').addEventListener('click', () => restart(false));

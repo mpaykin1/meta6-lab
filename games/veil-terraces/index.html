@@ -4,6 +4,7 @@
 </style></head><body><canvas id="screen" aria-label="3D game world"></canvas><div id="glass"></div><div id="grain"></div><div id="veil"></div><div id="progress" aria-label="Collected shards"></div><button id="menuButton" aria-label="Open game menu">☰</button><section id="menu"><h1>VEIL TERRACES</h1><p>Collect the six luminous memories scattered across the shifting terraces. Follow the light through the storm. Missing a platform sends you back to the last memory.</p><p><strong>Desktop:</strong> WASD / arrows move, Space jumps, right mouse drag orbits, P opens the menu.</p><p><strong>Mobile:</strong> left thumb moves; right finger orbits; glowing icon jumps.</p><p id="stats"></p><p id="story" hidden></p><button id="resume">RESUME</button> <button id="restart">RESTART</button></section><div id="hint" aria-hidden="true"></div><div id="stick"><div id="nub"></div></div><button id="jump" aria-label="Jump"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="none" stroke="#b4ffdc" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter" d="M7 23 L16 9 L25 23 M10 23 H22 M16 9 V28"/></svg></button><div id="error"></div>
 <script src="../../shared/components/observer-story/story-system.js"></script>
 <script src="../../shared/render/visibility.js"></script>
+<script src="../../shared/render/packed-mesh.js"></script>
 <script>
 (()=>{'use strict';const $=id=>document.getElementById(id),canvas=$('screen'),gl=canvas.getContext('webgl2',{antialias:false,alpha:false,powerPreference:'high-performance'});if(!gl){$('error').style.display='block';$('error').textContent='WebGL2 is required to play.';return;}
 const META_RUN_SEED=Math.floor(Math.random()*1000000000)+1;const V3=Float32Array,TAU=Math.PI*2,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mix=(a,b,t)=>a+(b-a)*t,smooth=(a,b,x)=>{let t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)},hash=(x,z)=>{let t=Math.sin((x+META_RUN_SEED*.001)*127.1+(z+META_RUN_SEED*.0001)*311.7)*43758.5453;return t-Math.floor(t)};
@@ -22,10 +23,11 @@ const meshP=program(meshVS,meshFS),skyTime=gl.getUniformLocation(sky,'t'),u={vp:
 const particlesP=program(`#version 300 es\nprecision highp float;layout(location=0)in vec3 pos;uniform mat4 vp;uniform float time;out float bright;void main(){vec3 p=pos;p.x+=sin(time*.7+pos.z)*.75;p.y+=sin(time*1.3+pos.x)*.55;p.z+=cos(time*.6+pos.x)*.65;vec4 v=vp*vec4(p,1.);gl_Position=v;gl_PointSize=clamp(150./max(3.,v.w),1.,7.);bright=.5+.5*sin(time+pos.z*2.);}`,`#version 300 es\nprecision highp float;in float bright;out vec4 o;void main(){float d=length(gl_PointCoord-.5);float a=smoothstep(.50,.02,d);o=vec4(vec3(.17,.95,.83)*bright,a*.72);}`);
 function vertex(a,x,y,z,nx,ny,nz,r,g,b){a.push(x,y,z,nx,ny,nz,r,g,b)}function tri(a,p,q,r,n,color){vertex(a,...p,...n,...color);vertex(a,...q,...n,...color);vertex(a,...r,...n,...color)}
 function makeBuffer(array){
- const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new V3(array),gl.STATIC_DRAW);
+ const packed=window.MetaPackedMesh.packInterleaved(array);
+ const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,packed.data,gl.STATIC_DRAW);
  const vao=gl.createVertexArray();gl.bindVertexArray(vao);gl.bindBuffer(gl.ARRAY_BUFFER,b);
- for(let i=0;i<3;i++){gl.enableVertexAttribArray(i);gl.vertexAttribPointer(i,3,gl.FLOAT,false,36,i*12)}
- gl.bindVertexArray(null);return {buffer:b,vao,count:array.length/9};
+ window.MetaPackedMesh.setup(gl);
+ gl.bindVertexArray(null);return {buffer:b,vao,count:packed.count,bytes:packed.bytes};
 }
 function bindMesh(mesh){gl.bindVertexArray(mesh.vao)}
 const CHUNK=24,STEP=1.5,chunks=new Map(),renderStats={drawCalls:0,triangles:0,visibleChunks:0,culledChunks:0,visibleProps:0,culledProps:0,instancedRuins:0,qualityScale:1,fps:0,p95Ms:0,p99Ms:0};

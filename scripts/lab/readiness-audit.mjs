@@ -11,16 +11,20 @@ const now=Date.now(),date=Date.parse(data.as_of+'T00:00:00Z');
 assert(Number.isFinite(date)&&date<=now+86400000,'Invalid audit date');
 assert(now-date<=14*86400000,'Stale evidence: refresh audit before claiming current percentages');
 const ids=new Set(),urls=new Map(),rows=[];
+const approvedRepos=new Set(['mpaykin1/meta6','mpaykin1/meta6-lab','mpaykin1/World_server']);
 async function checkEvidence(url){
  const match=/^https:\/\/github\.com\/([^/]+)\/([^/]+)\/pull\/(\d+)$/.exec(url);
  if(!match)throw Error('Passing gate needs a merged GitHub PR: '+url);
+ const repo=match[1]+'/'+match[2];
+ assert(approvedRepos.has(repo),'Untrusted repository evidence: '+repo);
  const key=match.slice(1).join('/');
  if(urls.has(key))return urls.get(key);
  const api='https://api.github.com/repos/'+match[1]+'/'+match[2]+'/pulls/'+match[3];
  const response=await fetch(api,{headers:{Accept:'application/vnd.github+json','User-Agent':'meta-games-readiness-gate','X-GitHub-Api-Version':'2022-11-28'}});
  assert(response.ok,'Cannot independently verify PR '+url+' HTTP '+response.status);
  const pr=await response.json();
- const accepted=pr.merged===true&&Boolean(pr.merged_at);
+ const accepted=pr.merged===true&&Boolean(pr.merged_at)&&Date.parse(pr.merged_at)<=now;
+ assert(pr.base?.repo?.full_name===repo,'PR base repository mismatch');
  urls.set(key,accepted);return accepted;
 }
 for(const area of data.areas){
@@ -45,5 +49,8 @@ const json=JSON.stringify(result,null,2)+'\n';
 const dest=path.join(root,'meta-games/readiness/score.json');
 if(process.argv.includes('--check')){
  assert(fs.existsSync(dest)&&fs.readFileSync(dest,'utf8')===json,'Stale score: regenerate with node scripts/lab/readiness-audit.mjs');
+ const report=fs.readFileSync(path.join(root,'meta-games/readiness/REPORT.md'),'utf8');
+ for(const row of rows)assert(report.includes('| '+row.name+' | '+row.passed+' / 10 | **'+row.percent+'%** |'),'Report contradicts verified gate score: '+row.name);
+ assert(report.includes('**'+total+'%**'),'Report contradicts overall gate score');
 }else fs.writeFileSync(dest,json);
 console.log(rows.map(x=>x.name+' '+x.percent+'%').join('\n')+'\nОбщая готовность '+total+'%');

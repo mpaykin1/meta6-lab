@@ -23,13 +23,18 @@ const registryFile=path.join(root,'shared/claude-game-sources.json');
 const registry=fs.existsSync(registryFile)?JSON.parse(fs.readFileSync(registryFile,'utf8')):{games:[]};
 if(!Array.isArray(registry.games))throw Error('Invalid Claude source registry');
 const claude=registry.games.map(x=>{
-  if(!x || !safe(x.path) || !/^games\/[a-z0-9-]+\/$/.test(x.path) ||
+  if(!x || !safe(x.path?.slice(0,-1)) || !/^games\/[a-z0-9-]+\/$/.test(x.path) ||
      !/^https:\/\/github\.com\/mpaykin1\/meta6\/pull\/\d+$/.test(x.evidence_pr) ||
      !/^[a-f0-9]{40}$/.test(x.commit) || x.author!=='Claude')
     throw Error('Unverified Claude-source registration');
   return x.path;
 });
+const pinnedOriginalCommit='ea74a313bb24eb25575f8021e218083c987bc280';
 const donors=[...canonical,...claude];
+const approvedCommit=(ref)=>canonical.some(prefix=>ref.source_path.startsWith(prefix))
+  ? ref.commit===pinnedOriginalCommit
+  : registry.games.some(x=>ref.source_path.startsWith(x.path)&&ref.commit===x.commit);
+const thirdPartyMarkers=/@license|SPDX-License-Identifier|Copyright \(c\)|cdn\.jsdelivr|unpkg\.com|three\.min\.js|three\.module\.js/i;
 const playable=/\.(?:html|js|mjs|cjs|glsl|wgsl|vert|frag|css|png|webp|jpg|jpeg|glb|gltf|ogg|mp3|wav|svg|json)$/i;
 const metadata=new Set(['manifest.json','SOURCE_ASSETS.json','data/provenance.json','data/pipeline.json']);
 
@@ -57,13 +62,16 @@ function audit(game){
     if(!ref || !safe(ref.output) || !safe(ref.source_path) ||
        ref.repository!=='mpaykin1/meta6' || !/^[a-f0-9]{40}$/.test(ref.git_blob_sha) ||
        !/^[a-f0-9]{40}$/.test(ref.commit) ||
-       !donors.some(prefix=>ref.source_path.startsWith(prefix)) ||
+       !donors.some(prefix=>ref.source_path.startsWith(prefix)) || !approvedCommit(ref) ||
        byOutput.has(ref.output))
       throw Error(game+': unknown, unpinned, duplicate or forbidden game source');
     const sourcePath=path.join(root,ref.source_path);
     if(!fs.existsSync(sourcePath) || !fs.statSync(sourcePath).isFile() ||
        blob(fs.readFileSync(sourcePath))!==ref.git_blob_sha)
       throw Error(game+': source blob mismatch '+ref.source_path);
+    if(/\.(?:js|mjs|cjs|html|glsl|css)$/i.test(sourcePath) &&
+       thirdPartyMarkers.test(fs.readFileSync(sourcePath,'utf8')))
+      throw Error(game+': third-party marker requires rights audit: '+ref.source_path);
     const target=path.join(dir,ref.output);
     if(!fs.existsSync(target) || !fs.statSync(target).isFile() ||
        !fs.readFileSync(sourcePath).equals(fs.readFileSync(target)))

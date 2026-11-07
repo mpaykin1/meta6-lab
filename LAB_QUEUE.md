@@ -8,6 +8,16 @@
 
 <!-- карточки ниже -->
 
+### lab/render-visibility-optimization — ускорение рендеринга
+- Польза: Veil Terraces не отправляет на GPU невидимые чанки, руины и кристаллы; общий модуль готов для других игр.
+- Поиграть после слияния: https://mpaykin1.github.io/meta6-lab/games/veil-terraces/
+- Ветка: `lab/render-visibility-optimization`.
+- Код: `shared/render/visibility.js`, `shared/render/voxel.js`, `games/veil-terraces/index.html`.
+- Технологии: frustum culling в игре; greedy meshing, packed vertices, light lookup — общий код, пока не подключён к воксельным играм.
+- Проверка: ожидается GitHub Actions; статус до зелёного прогона — В РАБОТЕ.
+- Михаил: —; Claude: —
+
+
 ### lab/play-connect-earn-rules — Play / Connect / Earn
 - Польза: три раздела портала; поиск/игры, MCP-создание, боты, профили, популярность, уведомления, заработок и одночасовое продвижение.
 - Правила: [PLAY_CONNECT_EARN.md](rules/09-platforma/PLAY_CONNECT_EARN.md)

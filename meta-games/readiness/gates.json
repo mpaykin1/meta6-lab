@@ -2,7 +2,7 @@
   "schema": 1,
   "as_of": "2026-11-07",
   "scope": "verified production or merged sandbox main; unmerged work is not complete",
-  "scoring": "equal-weight binary gates; unknown and pending score zero; numbers measure these 10 acceptance gates only, not overall engineering effort",
+  "scoring": "equal-weight binary gates; unknown and pending score zero; numbers measure these 10 acceptance gates only, not overall engineering effort; a URL alone is not proof of a live endpoint",
   "areas": [
     {
       "id": "mcp",
@@ -10,8 +10,8 @@
       "gates": [
         {
           "id": "public_read_only",
-          "label": "Публичный MCP отвечает инструментами чтения",
-          "status": "pass",
+          "label": "Публичный MCP чтения подтверждён актуальным независимым live-smoke",
+          "status": "pending",
           "evidence": "https://meta-games-mcp-production.onrender.com/meta-games/mcp"
         },
         {

@@ -52,7 +52,17 @@ app.whenReady().then(async () => {
       callback({ cancel: true });
     }
   });
-  session.defaultSession.setPermissionRequestHandler((_wc, _permission, callback) => callback(false));
+  session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
+    // Games need fullscreen and mouse capture; do not grant camera, mic or storage permissions.
+    // Never grant a permission to remote pages, popups or non-game content.
+    let local = false;
+    try {
+      const url = new URL(webContents.getURL());
+      local = url.protocol === 'app:' && url.host === 'meta-games' &&
+        url.pathname !== '/' && url.pathname.endsWith('.html');
+    } catch { /* not a local game page */ }
+    callback(local && (permission === 'fullscreen' || permission === 'pointerLock'));
+  });
 
   const window = new BrowserWindow({
     width: 1280,

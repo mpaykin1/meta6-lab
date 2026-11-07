@@ -1,0 +1,38 @@
+name: LAB Steam unpacked executable
+on:
+  pull_request:
+    paths:
+      - 'platforms/**'
+      - '.github/workflows/lab-steam-unpacked.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  steam-windows:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Electron runtime syntax
+        run: |
+          node --check platforms/desktop/main.cjs
+          node --check platforms/desktop/preload.cjs
+          node --check platforms/scripts/prepare-web.mjs
+      - name: Compile Steam candidate to an unpacked executable
+        working-directory: platforms
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: |
+          npm install --no-audit --no-fund
+          npm run desktop:pack
+          if (!(Test-Path 'release/win-unpacked/META GAMES.exe')) { throw 'Unpacked Steam executable is missing' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: meta-games-unpacked-steam-candidate
+          path: platforms/release/win-unpacked/
+          if-no-files-found: error

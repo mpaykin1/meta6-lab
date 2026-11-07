@@ -113,6 +113,39 @@ function search(query,kind,limit=8) {
   return ranked.slice(0,Math.max(1,Math.min(25,Number(limit)||8)));
 }
 
+function searchSource(query,kind,limit=8) {
+  const words=String(query).toLowerCase().split(/[^\\p{L}\\p{N}_]+/u).filter(w=>w.length>1).slice(0,8);
+  if(!words.length)return [];
+  const out=[];
+  for(const item of scan()){
+    if(kind&&kind!=='all'&&item.kind!==kind)continue;
+    const full=path.join(ROOT,item.path);
+    if(!TEXT.has(path.extname(full).toLowerCase())||item.size>300000)continue;
+    const lines=fs.readFileSync(full,'utf8').split(/\\r?\\n/);
+    let best=null;
+    for(let i=0;i<lines.length;i++){
+      const low=lines[i].toLowerCase();
+      const hits=words.filter(w=>low.includes(w)).length;
+      if(!hits)continue;
+      const score=hits*4+(item.tags.some(t=>words.includes(t))?2:0);
+      if(!best||score>best.score)best={score,line:i+1,snippet:lines.slice(Math.max(0,i-1),Math.min(lines.length,i+2)).join('\\n').slice(0,320)};
+      if(hits===words.length)break;
+    }
+    if(best)out.push({path:item.path,sourceGame:item.sourceGame,kind:item.kind,sha256:item.sha256,...best});
+  }
+  return out.sort((a,b)=>b.score-a.score||a.path.localeCompare(b.path)).slice(0,Math.max(1,Math.min(20,Number(limit)||8)));
+}
+function duplicateSources() {
+  const hashes=new Map();
+  for(const item of scan()){
+    if(!item.sha256||item.size<100)continue;
+    const found=hashes.get(item.sha256)||[];
+    found.push(item.path);hashes.set(item.sha256,found);
+  }
+  return [...hashes].filter(([_,paths])=>paths.length>1)
+    .map(([sha256,paths])=>({sha256,paths})).slice(0,100);
+}
+
 function inspect(file,start=1,count=30) {
   const {item,absolute}=allowedSource(file);
   if(!TEXT.has(path.extname(file).toLowerCase())||item.size>2_000_000)
@@ -130,7 +163,7 @@ function dependencies(file) {
   for(const m of text.matchAll(/(?:\bimport\s*(?:[^'"]*?\s+from\s*)?|\brequire\s*\(|\bimport\s*\()\s*['"]([^'"]+)['"]/g)) out.add(m[1]);
   return {item,dependencies:[...out].slice(0,80)};
 }
-export const library={donors,scan,search,inspect,dependencies};
+export const library={donors,scan,search,searchSource,duplicateSources,inspect,dependencies};
 
 function reply(id,result,error) {
   const msg={jsonrpc:'2.0',id};
@@ -141,6 +174,8 @@ function reply(id,result,error) {
 const defs=[
   {name:'list_reference_games',description:'List verified source donor directories and their provenance',inputSchema:{type:'object',properties:{}}},
   {name:'search_reusable_code',description:'Find small, relevant original source files without copying whole files or wasting tokens',inputSchema:{type:'object',properties:{query:{type:'string'},kind:{type:'string'},limit:{type:'integer'}},required:['query']}},
+  {name:'search_source_content',description:'Find matching code lines with short token-efficient snippets and exact file checksum',inputSchema:{type:'object',properties:{query:{type:'string'},kind:{type:'string'},limit:{type:'integer'}},required:['query']}},
+  {name:'find_duplicate_sources',description:'Find byte-identical source files to avoid duplicated code and assets',inputSchema:{type:'object',properties:{}}},
   {name:'inspect_source_lines',description:'Read only requested source line window with exact path and checksum',inputSchema:{type:'object',properties:{path:{type:'string'},start:{type:'integer'},count:{type:'integer'}},required:['path']}},
   {name:'inspect_dependencies',description:'List imports of a source module',inputSchema:{type:'object',properties:{path:{type:'string'}},required:['path']}}
 ];
@@ -148,6 +183,8 @@ function callTool(name,args={}) {
   let result;
   if(name==='list_reference_games')result=donors();
   else if(name==='search_reusable_code')result=search(args.query,args.kind,args.limit);
+  else if(name==='search_source_content')result=searchSource(args.query,args.kind,args.limit);
+  else if(name==='find_duplicate_sources')result=duplicateSources();
   else if(name==='inspect_source_lines')result=inspect(args.path,args.start,args.count);
   else if(name==='inspect_dependencies')result=dependencies(args.path);
   else throw Error('Unknown tool '+name);
@@ -174,6 +211,8 @@ if(process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.
     if(cmd==='mcp') await serveMcp();
     else if(cmd==='list') console.log(JSON.stringify(donors(),null,2));
     else if(cmd==='search') console.log(JSON.stringify(search(args.join(' ')),null,2));
+    else if(cmd==='content') console.log(JSON.stringify(searchSource(args.join(' ')),null,2));
+    else if(cmd==='duplicates') console.log(JSON.stringify(duplicateSources(),null,2));
     else if(cmd==='inspect') console.log(JSON.stringify(inspect(args[0],args[1],args[2]),null,2));
     else if(cmd==='deps') console.log(JSON.stringify(dependencies(args[0]),null,2));
     else console.error('Usage: node shared/library-search.mjs mcp|list|search <words>|inspect <path> [start] [count]|deps <path>');

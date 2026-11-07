@@ -2633,7 +2633,7 @@ function placeGoal(goal) {
 }
 function loadLevel(i) {
   clearLevel();
-  G.li = i; const c = G.cfg = LEVELS[i]; G.revUsed = false; G.shield = G.shield || 0; G.lvlHits = 0; G.energy = 1; G.noise = 0; G.check = 4; G.flash = 0;
+  G.li = i; const c = G.cfg = LEVELS[i]; G.shield = G.shield || 0; G.lvlHits = 0; G.energy = 1; G.noise = 0; G.check = 4; G.flash = 0;
   if (c.mode === 'combo') { G.comboDeaths = 0; buildCombo(c); }
   const GAPS = c.gaps && c.gaps.map((gz, k) => gz + (k ? (Math.random() - .5) * 6 : (Math.random() - .5) * 3));
   if (GAPS && c.mode === 'fold') addHint('fold', GAPS[0] + 4.5);
@@ -2759,7 +2759,7 @@ function setButtons() {
 }
 function startGame(fromLevel = 0, fresh = true) {
   audioInit();
-  if (fresh) { G.caught = G.outs = G.hits = 0; }
+  if (fresh) { G.caught = G.outs = G.hits = 0; G.revUsed = false; }
   view = 'game'; G.state = 'trans'; G.timer = 0; G.next = fromLevel; G.transLoaded = false;
   showGallery && gObj && gpivot.remove(gObj);
   setButtons();

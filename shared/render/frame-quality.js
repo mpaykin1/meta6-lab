@@ -8,11 +8,11 @@ function create({targetMs=16.67,minScale=.80,maxScale=1}={}){
   if(!Number.isFinite(ms)||ms<=0)return scale;
   ms=Math.min(ms,1000);
   moving=moving*.95+ms*.05;
-  if(++counter%30!==0)return scale;
+  if(++counter%8!==0)return scale;
   if(moving>targetMs*1.35){slow++;fast=0}
   else if(moving<targetMs*.86){fast++;slow=0}
   else slow=fast=0;
-  if(slow>=2){scale=Math.max(minScale,Math.round((scale-.10)*100)/100);slow=0}
+  if(slow>=2){scale=Math.max(minScale,Math.round((scale-.15)*100)/100);slow=0}
   if(fast>=3){scale=Math.min(maxScale,Math.round((scale+.05)*100)/100);fast=0}
   return scale;
  }

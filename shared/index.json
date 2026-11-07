@@ -165,6 +165,29 @@
       "dependency_policy": "host-browser-APIs-only"
     },
     {
+      "id": "three-worlds-combat-facing",
+      "title": "Three Worlds combat target selection and angular inertia",
+      "kind": "combat",
+      "entry": "combat-facing.js",
+      "exports": [
+        "chooseCombatTarget",
+        "turnWeaponToward",
+        "turnHeroToward",
+        "angleToTarget"
+      ],
+      "needs": [],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "three-worlds",
+        "path": "three-worlds-game/combat-facing.mjs",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "0515d87cc43a99f8906d62d52dc21114528c2c60"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "used_by": [],
+      "ads": false
+    },
+    {
       "id": "three-worlds-rift-guard",
       "title": "Three Worlds timed rift input guard",
       "kind": "input",

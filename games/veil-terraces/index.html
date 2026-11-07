@@ -4,15 +4,17 @@
 </style></head><body><canvas id="screen" aria-label="3D game world"></canvas><div id="glass"></div><div id="grain"></div><div id="veil"></div><div id="progress" aria-label="Collected shards"></div><button id="menuButton" aria-label="Open game menu">☰</button><section id="menu"><h1>VEIL TERRACES</h1><p>Collect the six luminous memories scattered across the shifting terraces. Follow the light through the storm. Missing a platform sends you back to the last memory.</p><p><strong>Desktop:</strong> WASD / arrows move, Space jumps, right mouse drag orbits, P opens the menu.</p><p><strong>Mobile:</strong> left thumb moves; right finger orbits; glowing icon jumps.</p><p id="stats"></p><p id="story" hidden></p><button id="resume">RESUME</button> <button id="restart">RESTART</button></section><div id="hint" aria-hidden="true"></div><div id="stick"><div id="nub"></div></div><button id="jump" aria-label="Jump"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="none" stroke="#b4ffdc" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter" d="M7 23 L16 9 L25 23 M10 23 H22 M16 9 V28"/></svg></button><div id="error"></div>
 <script src="../../shared/components/observer-story/story-system.js"></script>
 <script src="../../shared/components/observer-audio/audio.js"></script>
+<script src="../../shared/render/visibility.js"></script>
+<script src="../../shared/render/packed-mesh.js"></script>
 <script>
 (()=>{'use strict';const $=id=>document.getElementById(id),canvas=$('screen'),gl=canvas.getContext('webgl2',{antialias:false,alpha:false,powerPreference:'high-performance'});if(!gl){$('error').style.display='block';$('error').textContent='WebGL2 is required to play.';return;}
 const META_RUN_SEED=Math.floor(Math.random()*1000000000)+1;const V3=Float32Array,TAU=Math.PI*2,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mix=(a,b,t)=>a+(b-a)*t,smooth=(a,b,x)=>{let t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)},hash=(x,z)=>{let t=Math.sin((x+META_RUN_SEED*.001)*127.1+(z+META_RUN_SEED*.0001)*311.7)*43758.5453;return t-Math.floor(t)};
 function height(x,z){const ridge=2*Math.sin(x*.077)+1.5*Math.cos(z*.084)+1.1*Math.sin(x*.043-z*.059)+.75*Math.sin(x*.21+z*.12);const hole=Math.sin(x*.23)*Math.cos(z*.19)+hash(Math.floor(x*.11),Math.floor(z*.11))*.45;return hole<-0.83?null:Math.round(ridge*2)/2}
 // World-data functions are shared by collision and rendering: no visual/solid mismatch.
 function surface(x,z){const x0=Math.floor(x/STEP)*STEP,z0=Math.floor(z/STEP)*STEP,fx=(x-x0)/STEP,fz=(z-z0)/STEP,h00=height(x0,z0),h10=height(x0+STEP,z0),h01=height(x0,z0+STEP),h11=height(x0+STEP,z0+STEP);if([h00,h10,h01,h11].some(h=>h===null))return null;return fx+fz<=1?h00*(1-fx-fz)+h10*fx+h01*fz:h10*(1-fz)+h01*(1-fx)+h11*(fx+fz-1)}
-function perspective(fov,aspect,near,far){const out=new V3(16),f=1/Math.tan(fov/2);out[0]=f/aspect;out[5]=f;out[10]=(far+near)/(near-far);out[11]=-1;out[14]=2*far*near/(near-far);return out}
-function lookAt(eye,target){let zx=eye[0]-target[0],zy=eye[1]-target[1],zz=eye[2]-target[2],zl=Math.hypot(zx,zy,zz)||1;zx/=zl;zy/=zl;zz/=zl;let xx=zz,xz=-zx,xl=Math.hypot(xx,xz)||1;xx/=xl;xz/=xl;const yx=zy*xz,yz=-zy*xx,yy=zz*xx-zx*xz;let o=new V3(16);o[0]=xx;o[1]=yx;o[2]=zx;o[4]=0;o[5]=yy;o[6]=zy;o[8]=xz;o[9]=yz;o[10]=zz;o[12]=-(xx*eye[0]+xz*eye[2]);o[13]=-(yx*eye[0]+yy*eye[1]+yz*eye[2]);o[14]=-(zx*eye[0]+zy*eye[1]+zz*eye[2]);o[15]=1;return o}
-function multiply(a,b){let o=new V3(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++)o[c*4+r]=a[r]*b[c*4]+a[4+r]*b[c*4+1]+a[8+r]*b[c*4+2]+a[12+r]*b[c*4+3];return o}
+function perspective(fov,aspect,near,far,out=new V3(16)){out.fill(0);const f=1/Math.tan(fov/2);out[0]=f/aspect;out[5]=f;out[10]=(far+near)/(near-far);out[11]=-1;out[14]=2*far*near/(near-far);return out}
+function lookAt(eye,target,o=new V3(16)){o.fill(0);let zx=eye[0]-target[0],zy=eye[1]-target[1],zz=eye[2]-target[2],zl=Math.hypot(zx,zy,zz)||1;zx/=zl;zy/=zl;zz/=zl;let xx=zz,xz=-zx,xl=Math.hypot(xx,xz)||1;xx/=xl;xz/=xl;const yx=zy*xz,yz=-zy*xx,yy=zz*xx-zx*xz;o[0]=xx;o[1]=yx;o[2]=zx;o[4]=0;o[5]=yy;o[6]=zy;o[8]=xz;o[9]=yz;o[10]=zz;o[12]=-(xx*eye[0]+xz*eye[2]);o[13]=-(yx*eye[0]+yy*eye[1]+yz*eye[2]);o[14]=-(zx*eye[0]+zy*eye[1]+zz*eye[2]);o[15]=1;return o}
+function multiply(a,b,o=new V3(16)){for(let c=0;c<4;c++)for(let r=0;r<4;r++)o[c*4+r]=a[r]*b[c*4]+a[4+r]*b[c*4+1]+a[8+r]*b[c*4+2]+a[12+r]*b[c*4+3];return o}
 function model(x=0,y=0,z=0,scale=1,rot=0){let a=new V3(16),c=Math.cos(rot)*scale,s=Math.sin(rot)*scale;a[0]=c;a[2]=-s;a[5]=scale;a[8]=s;a[10]=c;a[12]=x;a[13]=y;a[14]=z;a[15]=1;return a}
 function shader(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}function program(vs,fs){const p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,vs));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p}
 const sky=program(`#version 300 es\nprecision highp float;out vec2 v;void main(){vec2 p=vec2(float(gl_VertexID==1)*4.-1.,float(gl_VertexID==2)*4.-1.);v=p*.5+.5;gl_Position=vec4(p,0.,1.);}`,`#version 300 es\nprecision highp float;in vec2 v;out vec4 o;uniform float t;float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.54);}void main(){vec2 p=v;float glow=pow(max(0.,1.-length((p-vec2(.55,.68))*vec2(1.4,2.6))),3.);float star=step(.996,h(floor(p*vec2(520.,260.))))*(.4+.5*sin(t*.7+p.x*90.));float aur=exp(-pow((p.y-(.58+.08*sin(p.x*7.+t*.08))),2.)*60.)*(.3+.25*sin(p.x*12.+t*.17));vec3 c=mix(vec3(.007,.027,.059),vec3(.055,.14,.19),smoothstep(.1,.9,p.y));c+=vec3(.012,.1,.11)*glow+vec3(.03,.18,.18)*aur+star*vec3(.6,.85,.9);o=vec4(c,1.);}`);
@@ -21,11 +23,75 @@ const meshFS=`#version 300 es\nprecision highp float;in vec3 vN,vC,vP;out vec4 o
 const meshP=program(meshVS,meshFS),skyTime=gl.getUniformLocation(sky,'t'),u={vp:gl.getUniformLocation(meshP,'vp'),m:gl.getUniformLocation(meshP,'m'),time:gl.getUniformLocation(meshP,'time'),eye:gl.getUniformLocation(meshP,'eye'),light:gl.getUniformLocation(meshP,'light')};
 const particlesP=program(`#version 300 es\nprecision highp float;layout(location=0)in vec3 pos;uniform mat4 vp;uniform float time;out float bright;void main(){vec3 p=pos;p.x+=sin(time*.7+pos.z)*.75;p.y+=sin(time*1.3+pos.x)*.55;p.z+=cos(time*.6+pos.x)*.65;vec4 v=vp*vec4(p,1.);gl_Position=v;gl_PointSize=clamp(150./max(3.,v.w),1.,7.);bright=.5+.5*sin(time+pos.z*2.);}`,`#version 300 es\nprecision highp float;in float bright;out vec4 o;void main(){float d=length(gl_PointCoord-.5);float a=smoothstep(.50,.02,d);o=vec4(vec3(.17,.95,.83)*bright,a*.72);}`);
 function vertex(a,x,y,z,nx,ny,nz,r,g,b){a.push(x,y,z,nx,ny,nz,r,g,b)}function tri(a,p,q,r,n,color){vertex(a,...p,...n,...color);vertex(a,...q,...n,...color);vertex(a,...r,...n,...color)}
-function makeBuffer(array){let b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new V3(array),gl.STATIC_DRAW);return {buffer:b,count:array.length/9}}function bindMesh(mesh){gl.bindBuffer(gl.ARRAY_BUFFER,mesh.buffer);for(let i=0;i<3;i++){gl.enableVertexAttribArray(i);gl.vertexAttribPointer(i,3,gl.FLOAT,false,36,i*12)}}
-const CHUNK=24,STEP=1.5,chunks=new Map();function createChunk(cx,cz){let a=[],size=CHUNK/STEP;for(let iz=0;iz<size;iz++)for(let ix=0;ix<size;ix++){let x=cx*CHUNK+ix*STEP,z=cz*CHUNK+iz*STEP,y=height(x,z),yr=height(x+STEP,z),yu=height(x,z+STEP),yd=height(x+STEP,z+STEP);if(y===null||yr===null||yu===null||yd===null)continue;let c=[.09+Math.max(0,y)*.015,.23+Math.max(0,y)*.02,.27+Math.max(0,y)*.017],pts=[[x,y,z],[x+STEP,yr,z],[x,yu,z+STEP],[x+STEP,yd,z+STEP]];tri(a,pts[0],pts[2],pts[1],[0,1,0],c);tri(a,pts[1],pts[2],pts[3],[0,1,0],c);if(y>yr+.03){tri(a,pts[0],[x+STEP,yr,z],pts[1],[0,0,-1],[.05,.17,.20])}if(y>yu+.03){tri(a,pts[0],[x,yu,z+STEP],pts[2],[-1,0,0],[.05,.17,.20])}}return makeBuffer(a)}
-function loadChunks(x,z){let cx=Math.floor(x/CHUNK),cz=Math.floor(z/CHUNK),required=new Set();for(let dz=-2;dz<=2;dz++)for(let dx=-2;dx<=2;dx++){let k=(cx+dx)+','+(cz+dz);required.add(k);if(!chunks.has(k))chunks.set(k,createChunk(cx+dx,cz+dz))}for(const [key,mesh] of chunks)if(!required.has(key)){gl.deleteBuffer(mesh.buffer);chunks.delete(key)}}
+function makeBuffer(array){
+ const packed=window.MetaPackedMesh.packInterleaved(array);
+ const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,packed.data,gl.STATIC_DRAW);
+ const vao=gl.createVertexArray();gl.bindVertexArray(vao);gl.bindBuffer(gl.ARRAY_BUFFER,b);
+ window.MetaPackedMesh.setup(gl);
+ gl.bindVertexArray(null);return {buffer:b,vao,count:packed.count,bytes:packed.bytes};
+}
+function bindMesh(mesh){gl.bindVertexArray(mesh.vao)}
+const CHUNK=24,STEP=1.5,chunks=new Map(),renderStats={drawCalls:0,triangles:0,visibleChunks:0,culledChunks:0,visibleProps:0,culledProps:0,instancedRuins:0,qualityScale:1,fps:0,p95Ms:0,p99Ms:0};
+const frameSamples=new Float32Array(120),frustumPlanes=[],projBuffer=new V3(16),viewBuffer=new V3(16),vpBuffer=new V3(16),targetBuffer=new V3(3),desiredBuffer=new V3(3);
+const qualityBudget=window.MetaRender.frameBudget({targetMs:16.7,minScale:.85,maxScale:1});let qualityScale=1,frameIndex=0;
+Object.defineProperty(window,"__META_RENDER_STATS__",{value:()=>Object.freeze({...renderStats,loadedChunks:chunks.size}),configurable:false});function createChunk(cx,cz){let a=[],size=CHUNK/STEP;for(let iz=0;iz<size;iz++)for(let ix=0;ix<size;ix++){let x=cx*CHUNK+ix*STEP,z=cz*CHUNK+iz*STEP,y=height(x,z),yr=height(x+STEP,z),yu=height(x,z+STEP),yd=height(x+STEP,z+STEP);if(y===null||yr===null||yu===null||yd===null)continue;let c=[.09+Math.max(0,y)*.015,.23+Math.max(0,y)*.02,.27+Math.max(0,y)*.017],pts=[[x,y,z],[x+STEP,yr,z],[x,yu,z+STEP],[x+STEP,yd,z+STEP]];tri(a,pts[0],pts[2],pts[1],[0,1,0],c);tri(a,pts[1],pts[2],pts[3],[0,1,0],c);if(y>yr+.03){tri(a,pts[0],[x+STEP,yr,z],pts[1],[0,0,-1],[.05,.17,.20])}if(y>yu+.03){tri(a,pts[0],[x,yu,z+STEP],pts[2],[-1,0,0],[.05,.17,.20])}}const mesh=makeBuffer(a);mesh.min=[cx*CHUNK,-16,cz*CHUNK];mesh.max=[(cx+1)*CHUNK,22,(cz+1)*CHUNK];return mesh}
+let chunkCenter='',chunkPending=[];
+function loadChunks(x,z){
+ const cx=Math.floor(x/CHUNK),cz=Math.floor(z/CHUNK),center=cx+','+cz;
+ if(center!==chunkCenter){
+  chunkCenter=center;const required=new Set();chunkPending=[];
+  for(let dz=-2;dz<=2;dz++)for(let dx=-2;dx<=2;dx++){
+   const nx=cx+dx,nz=cz+dz,key=nx+','+nz;required.add(key);
+   if(!chunks.has(key))chunkPending.push({nx,nz,key,d2:dx*dx+dz*dz});
+  }
+  chunkPending.sort((a,b)=>b.d2-a.d2);
+  for(const [key,mesh] of chunks)if(!required.has(key)){gl.deleteVertexArray(mesh.vao);gl.deleteBuffer(mesh.buffer);chunks.delete(key)}
+ }
+ // Rebuild only when entering a section, and amortize GPU uploads over frames.
+ for(let i=0;i<3&&chunkPending.length;i++){
+  const next=chunkPending.pop();if(!chunks.has(next.key))chunks.set(next.key,createChunk(next.nx,next.nz));
+ }
+}
 function crystal(){let a=[],up=[0,1,0],down=[0,-1.0,0];const ring=[];for(let i=0;i<6;i++)ring.push([Math.cos(i*TAU/6)*.35,0,Math.sin(i*TAU/6)*.35]);for(let i=0;i<6;i++){let q=ring[i],r=ring[(i+1)%6];tri(a,up,q,r,[q[0],.8,q[2]],[.45,.95,.8]);tri(a,down,r,q,[q[0],-.7,q[2]],[.12,.58,.74]);}return makeBuffer(a)}const shardMesh=crystal();
 function pillar(){const a=[],faces=[[[1,0,0],[0,1,0],[0,0,1]], [[-1,0,0],[0,1,0],[0,0,-1]]];for(let i=0;i<6;i++){const p=i*TAU/6,q=(i+1)*TAU/6,x=Math.cos(p)*.35,z=Math.sin(p)*.35,X=Math.cos(q)*.35,Z=Math.sin(q)*.35;const c=i%2?[.18,.35,.37]:[.10,.23,.3],n=[Math.cos((p+q)/2),.2,Math.sin((p+q)/2)];tri(a,[x,0,z],[X,0,Z],[x,2.5,z],n,c);tri(a,[x,2.5,z],[X,0,Z],[X,2.5,Z],n,c);}return makeBuffer(a)}const ruinMesh=pillar();
+// One dynamic instance buffer replaces individual WebGL draw calls for identical ruins.
+const ruinsVS=meshVS.replace('uniform mat4 vp,m;','uniform mat4 vp;layout(location=3)in vec4 im0;layout(location=4)in vec4 im1;layout(location=5)in vec4 im2;layout(location=6)in vec4 im3;')
+ .replace('vec4 w=m*vec4(p,1.);','mat4 m=mat4(im0,im1,im2,im3);vec4 w=m*vec4(p,1.);');
+const ruinsP=program(ruinsVS,meshFS),ruinsU={vp:gl.getUniformLocation(ruinsP,'vp'),eye:gl.getUniformLocation(ruinsP,'eye'),time:gl.getUniformLocation(ruinsP,'time'),light:gl.getUniformLocation(ruinsP,'light')};
+const ruinsVBO=gl.createBuffer(),ruinsData=new Float32Array(24*16);
+gl.bindBuffer(gl.ARRAY_BUFFER,ruinsVBO);gl.bufferData(gl.ARRAY_BUFFER,ruinsData.byteLength,gl.DYNAMIC_DRAW);
+let ruins=[],ruinsGX=NaN,ruinsGZ=NaN,ruinsMask=-1;
+gl.bindVertexArray(ruinMesh.vao);gl.bindBuffer(gl.ARRAY_BUFFER,ruinsVBO);
+for(let i=0;i<4;i++){gl.enableVertexAttribArray(i+3);gl.vertexAttribPointer(i+3,4,gl.FLOAT,false,64,i*16);gl.vertexAttribDivisor(i+3,1)}
+gl.bindVertexArray(null);
+function updateRuins(){
+ const gx=Math.floor(p.x/9),gz=Math.floor(p.z/9);
+ if(gx===ruinsGX&&gz===ruinsGZ)return;
+ ruinsGX=gx;ruinsGZ=gz;ruins=[];ruinsMask=-1;
+ for(let i=0;i<24;i++){
+  const x=gx*9+Math.cos(i*2.39996)*((i%6)+1)*9,z=gz*9+Math.sin(i*2.39996)*((i%6)+1)*9,y=height(x,z);
+  if(y!==null)ruins.push({id:i,x,y,z,m:model(x,y,z,.7+hash(i,2)*.5,i)});
+ }
+}
+function drawRuins(planes,vp,lightning){
+ updateRuins();let n=0,mask=0;
+ for(const ruin of ruins){
+  if(!window.MetaRender.sphereVisible(planes,ruin.x,ruin.y+2,ruin.z,5)){renderStats.culledProps++;continue}
+  renderStats.visibleProps++;mask|=1<<ruin.id;n++;
+ }
+ if(!n){ruinsMask=0;return}
+ gl.useProgram(ruinsP);gl.uniformMatrix4fv(ruinsU.vp,false,vp);gl.uniform3fv(ruinsU.eye,camera);gl.uniform1f(ruinsU.time,t);gl.uniform1f(ruinsU.light,lightning);
+ bindMesh(ruinMesh);
+ if(mask!==ruinsMask){
+  let ix=0;for(const ruin of ruins)if(mask&(1<<ruin.id))ruinsData.set(ruin.m,ix++*16);
+  gl.bindBuffer(gl.ARRAY_BUFFER,ruinsVBO);
+  gl.bufferSubData(gl.ARRAY_BUFFER,0,ruinsData.subarray(0,n*16));
+  ruinsMask=mask;
+ }
+ gl.drawArraysInstanced(gl.TRIANGLES,0,ruinMesh.count,n);
+ renderStats.drawCalls++;renderStats.triangles+=ruinMesh.count*n/3;renderStats.instancedRuins=n;
+ gl.useProgram(meshP);
+}
 function orb(){let a=[],N=12;for(let i=0;i<N;i++){let t=i*TAU/N,T=(i+1)*TAU/N;tri(a,[0,.68,0],[Math.cos(t)*.29,0,Math.sin(t)*.29],[Math.cos(T)*.29,0,Math.sin(T)*.29],[0,.7,0],[.55,.91,.82]);tri(a,[0,-.38,0],[Math.cos(T)*.29,0,Math.sin(T)*.29],[Math.cos(t)*.29,0,Math.sin(t)*.29],[0,-1,0],[.12,.48,.63])}return makeBuffer(a)}const playerMesh=orb();
 // The accepted six memories and the endless WebGL terrain remain intact.
 // Generate a fresh chain of traversable shard locations on each new attempt.
@@ -105,7 +171,7 @@ const SOUND=(()=>{
  }
  return Object.freeze({start,tick});
 })();
-// Original Observer audio adds the reusable crystal chimes, while the game's ambient score remains unchanged.
+// Observer library provides the existing crystal chimes; the original ambient soundtrack is untouched.
 const SHARD_FX=window.ObserverKriegerAudio.create();
 let shardFxUnlocked=false;
 function startGameAudio(){
@@ -145,7 +211,7 @@ Object.defineProperty(window,'__metaGamesState',{value:()=>Object.freeze({x:p.x,
    });
  }});
 
-function resize(){const cssW=canvas.clientWidth,cssH=canvas.clientHeight,scale=Math.min(devicePixelRatio||1,1.7,Math.sqrt(520000/(cssW*cssH)));let w=Math.max(1,Math.round(cssW*scale)),h=Math.max(1,Math.round(cssH*scale));if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h)}}function reset(){storyJournal=window.ObserverStorySystem.create();targets=generateShards();for(let q of targets)q.done=false;shards.querySelectorAll('i').forEach(e=>e.className='');p={x:0,z:0,y:(surface(0,0)??0)+.35,vx:0,vz:0,vy:0,ground:true};lastSafe={x:0,z:0};won=false;dead=false;nextShardAt=0;boostUntil=0;$('veil').style.opacity='0'}function openMenu(v){menu=v;$('menu').classList.toggle('open',v);
+function resize(){const cssW=canvas.clientWidth,cssH=canvas.clientHeight,scale=Math.min(devicePixelRatio||1,1.7,Math.sqrt(520000/(cssW*cssH)))*qualityScale;let w=Math.max(1,Math.round(cssW*scale)),h=Math.max(1,Math.round(cssH*scale));if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h)}}function reset(){storyJournal=window.ObserverStorySystem.create();targets=generateShards();for(let q of targets)q.done=false;shards.querySelectorAll('i').forEach(e=>e.className='');p={x:0,z:0,y:(surface(0,0)??0)+.35,vx:0,vz:0,vy:0,ground:true};lastSafe={x:0,z:0};won=false;dead=false;nextShardAt=0;boostUntil=0;$('veil').style.opacity='0'}function openMenu(v){menu=v;$('menu').classList.toggle('open',v);
  const found=targets.filter(q=>q.done).length;
  $('story').hidden=found===0;
  $('story').textContent=found?storyJournal.readable:'';
@@ -167,10 +233,44 @@ for(const q of targets)if(t>=nextShardAt&&!q.done&&(q.id===0||targets[q.id-1].do
   try{if(localStorage.getItem(META_DAILY_KEY)!==today){localStorage.setItem(META_DAILY_KEY,today);boostUntil=t+60}}catch{}
  }
 $('veil').style.opacity='.3';setTimeout(()=>$('veil').style.opacity='0',120);if(targets.every(a=>a.done)){won=true;$('veil').style.opacity='.55'}}}
-function draw(mesh,world){if(!mesh.count)return;bindMesh(mesh);gl.uniformMatrix4fv(u.m,false,world);gl.drawArrays(gl.TRIANGLES,0,mesh.count)}const identity=model();
-let particles=[];for(let i=0;i<140;i++){let x=(hash(i,1)-.5)*180,z=(hash(i,2)-.5)*180,y=4+hash(i,3)*13;particles.push(x,y,z)}let pvbo=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,pvbo);gl.bufferData(gl.ARRAY_BUFFER,new V3(particles),gl.STATIC_DRAW);
-function frame(ms){requestAnimationFrame(frame);resize();let dt=clamp((ms-prev)/1000,0,.042);prev=ms;t+=dt;move(dt);SOUND.tick(t,targets.filter(q=>q.done).length,won,menu);loadChunks(p.x,p.z);const target=[p.x,p.y+1.5,p.z],dist=11,desired=[p.x+Math.sin(yaw)*Math.cos(pitch)*dist,p.y+1.5+Math.sin(pitch)*dist,p.z+Math.cos(yaw)*Math.cos(pitch)*dist];const damp=1-Math.exp(-3.5*dt);for(let i=0;i<3;i++)camera[i]=mix(camera[i],desired[i],damp);let proj=perspective(Math.PI/3,canvas.width/canvas.height,.05,160),vp=multiply(proj,lookAt(camera,target));const lightning=Math.pow(Math.max(0,Math.sin(t*1.38)*Math.sin(t*.23)),44)*.38;
-gl.disable(gl.DEPTH_TEST);gl.disable(gl.BLEND);gl.useProgram(sky);gl.uniform1f(skyTime,t);gl.drawArrays(gl.TRIANGLES,0,3);gl.enable(gl.DEPTH_TEST);gl.clear(gl.DEPTH_BUFFER_BIT);gl.useProgram(meshP);gl.uniformMatrix4fv(u.vp,false,vp);gl.uniform3fv(u.eye,camera);gl.uniform1f(u.time,t);gl.uniform1f(u.light,lightning);for(const chunk of chunks.values())draw(chunk,identity);for(let i=0;i<24;i++){let x=Math.floor(p.x/9)*9+Math.cos(i*2.39996)*((i%6)+1)*9,z=Math.floor(p.z/9)*9+Math.sin(i*2.39996)*((i%6)+1)*9,g=height(x,z);if(g!==null)draw(ruinMesh,model(x,g,z,.7+hash(i,2)*.5,i));}for(const q of targets)if(!q.done&&(q.id===0||targets[q.id-1].done))draw(shardMesh,model(q.x,q.y+1.9+Math.sin(t*2+q.id)*.22,q.z,1.15,t*.5+q.id));draw(playerMesh,model(p.x,p.y+0.4+Math.sin(t*4)*.08,p.z,t<boostUntil?1.52:1.25,t*.3));
-gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);gl.depthMask(false);gl.useProgram(particlesP);gl.uniformMatrix4fv(gl.getUniformLocation(particlesP,'vp'),false,vp);gl.uniform1f(gl.getUniformLocation(particlesP,'time'),t);gl.bindBuffer(gl.ARRAY_BUFFER,pvbo);gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,3,gl.FLOAT,false,12,0);gl.drawArrays(gl.POINTS,0,140);gl.depthMask(true);gl.disable(gl.BLEND)}requestAnimationFrame(frame);
+function draw(mesh,world){if(!mesh.count)return;renderStats.drawCalls++;renderStats.triangles+=mesh.count/3;bindMesh(mesh);gl.uniformMatrix4fv(u.m,false,world);gl.drawArrays(gl.TRIANGLES,0,mesh.count)}const identity=model();
+let particles=[];for(let i=0;i<140;i++){let x=(hash(i,1)-.5)*180,z=(hash(i,2)-.5)*180,y=4+hash(i,3)*13;particles.push(x,y,z)}let pvbo=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,pvbo);gl.bufferData(gl.ARRAY_BUFFER,new V3(particles),gl.STATIC_DRAW);const particleU={vp:gl.getUniformLocation(particlesP,'vp'),time:gl.getUniformLocation(particlesP,'time')};
+function frame(ms){
+ requestAnimationFrame(frame);
+ const rawMs=prev?Math.max(0,ms-prev):16.7;
+ qualityBudget.sample(rawMs);
+ frameSamples[frameIndex%frameSamples.length]=rawMs;
+ frameIndex++;
+ if(frameIndex%120===0){
+  const sorted=Array.from(frameSamples).sort((a,b)=>a-b);
+  renderStats.p95Ms=sorted[113];renderStats.p99Ms=sorted[118];
+  const avg=frameSamples.reduce((sum,v)=>sum+v,0)/frameSamples.length;
+  renderStats.fps=avg>0?1000/avg:0;
+ }
+ if(frameIndex%60===0){
+  const next=Math.round(qualityBudget.scale*20)/20;
+  if(Math.abs(next-qualityScale)>=.049)qualityScale=next;
+ }
+ renderStats.qualityScale=qualityScale;
+ resize();const dt=clamp(rawMs/1000,0,.042);prev=ms;t+=dt;
+ move(dt);SOUND.tick(t,targets.filter(q=>q.done).length,won,menu);loadChunks(p.x,p.z);
+ targetBuffer[0]=p.x;targetBuffer[1]=p.y+1.5;targetBuffer[2]=p.z;
+ const dist=11;desiredBuffer[0]=p.x+Math.sin(yaw)*Math.cos(pitch)*dist;desiredBuffer[1]=p.y+1.5+Math.sin(pitch)*dist;desiredBuffer[2]=p.z+Math.cos(yaw)*Math.cos(pitch)*dist;
+ const damp=1-Math.exp(-3.5*dt);for(let i=0;i<3;i++)camera[i]=mix(camera[i],desiredBuffer[i],damp);
+ const proj=perspective(Math.PI/3,canvas.width/canvas.height,.05,160,projBuffer);
+ const vp=multiply(proj,lookAt(camera,targetBuffer,viewBuffer),vpBuffer);
+ const planes=window.MetaRender.frustum(vp,frustumPlanes);
+ renderStats.drawCalls=renderStats.triangles=renderStats.visibleChunks=renderStats.culledChunks=renderStats.visibleProps=renderStats.culledProps=renderStats.instancedRuins=0;
+ const lightning=Math.pow(Math.max(0,Math.sin(t*1.38)*Math.sin(t*.23)),44)*.38;
+ gl.disable(gl.DEPTH_TEST);gl.disable(gl.BLEND);gl.useProgram(sky);gl.uniform1f(skyTime,t);gl.drawArrays(gl.TRIANGLES,0,3);renderStats.drawCalls++;renderStats.triangles++;
+ gl.enable(gl.DEPTH_TEST);gl.clear(gl.DEPTH_BUFFER_BIT);gl.useProgram(meshP);gl.uniformMatrix4fv(u.vp,false,vp);gl.uniform3fv(u.eye,camera);gl.uniform1f(u.time,t);gl.uniform1f(u.light,lightning);
+ for(const chunk of chunks.values()){
+  if(!window.MetaRender.aabbVisible(planes,chunk.min,chunk.max)){renderStats.culledChunks++;continue}
+  renderStats.visibleChunks++;draw(chunk,identity);
+ }
+ drawRuins(planes,vp,lightning);
+ for(const q of targets)if(!q.done&&(q.id===0||targets[q.id-1].done)&&window.MetaRender.sphereVisible(planes,q.x,q.y+1.9,q.z,2.5))draw(shardMesh,model(q.x,q.y+1.9+Math.sin(t*2+q.id)*.22,q.z,1.15,t*.5+q.id));
+ draw(playerMesh,model(p.x,p.y+0.4+Math.sin(t*4)*.08,p.z,t<boostUntil?1.52:1.25,t*.3));
+ gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);gl.depthMask(false);gl.useProgram(particlesP);gl.bindVertexArray(null);gl.uniformMatrix4fv(particleU.vp,false,vp);gl.uniform1f(particleU.time,t);gl.bindBuffer(gl.ARRAY_BUFFER,pvbo);gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,3,gl.FLOAT,false,12,0);gl.drawArrays(gl.POINTS,0,140);renderStats.drawCalls++;gl.depthMask(true);gl.disable(gl.BLEND)}requestAnimationFrame(frame);
 })();
 </script><script src="./bot-adapter.js"></script></body></html>

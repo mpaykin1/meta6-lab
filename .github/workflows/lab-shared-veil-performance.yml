@@ -1,0 +1,44 @@
+name: LAB Shared Veil Render Performance
+on:
+  pull_request:
+    paths:
+      - 'games/veil-terraces-shared/**'
+      - 'shared/render/**'
+      - 'scripts/lab/render-bench.mjs'
+      - '.github/workflows/lab-shared-veil-performance.yml'
+permissions:
+  contents: read
+jobs:
+  benchmark-shared:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Prepare reference game at PR base
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/veil-base/games/veil-terraces-shared /tmp/veil-base/shared/components/observer-story
+          git show "$BASE_SHA:games/veil-terraces-shared/index.html" >/tmp/veil-base/games/veil-terraces-shared/index.html
+          git show "$BASE_SHA:games/veil-terraces-shared/bot-adapter.js" >/tmp/veil-base/games/veil-terraces-shared/bot-adapter.js
+          git show "$BASE_SHA:shared/components/observer-story/story-system.js" >/tmp/veil-base/shared/components/observer-story/story-system.js
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory /tmp/veil-base >/tmp/veil-base-http.log 2>&1 &
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory . >/tmp/veil-head-http.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8765/games/veil-terraces-shared/ >/dev/null
+          curl -fsS http://127.0.0.1:8766/games/veil-terraces-shared/ >/dev/null
+      - name: Compare shared WebGL2 game with original
+        env:
+          BENCH_GAME: veil-terraces-shared
+        run: node scripts/lab/render-bench.mjs

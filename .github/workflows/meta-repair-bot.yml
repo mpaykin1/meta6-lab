@@ -1,0 +1,48 @@
+name: META Repair Bot
+on:
+  schedule:
+    - cron: '17,47 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: meta-repair-bot
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate repair bot syntax
+        run: node --check scripts/repair-bot/repair-json.mjs
+      - name: Repair deterministic JSON errors
+        id: repair
+        run: |
+          node scripts/repair-bot/repair-json.mjs
+      - name: Open repair PR only for actual changes
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then
+            echo "No repair required" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          branch="lab/repair-bot-json-auto-${{ github.run_id }}"
+          git checkout -B "$branch"
+          git add -- '*.json'
+          git commit -m "fix: repair invalid JSON syntax"
+          git push origin "$branch"
+          if ! gh pr list --head "$branch" --base main --state open --json number --jq '.[0].number' | grep -q '[0-9]'; then
+            gh pr create --base main --head "$branch" --title "fix: automatic JSON repair" --body "Deterministic UTF-8 BOM and trailing-comma repairs only. Review and CI required before merge."
+          fi
+          echo "Repair PR prepared" >> "$GITHUB_STEP_SUMMARY"

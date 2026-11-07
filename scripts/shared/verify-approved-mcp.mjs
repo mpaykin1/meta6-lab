@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import readline from 'node:readline';
-import {approvedComponents,searchApproved,inspectApproved} from '../../shared/approved/search.mjs';
+import {approvedComponents,searchApproved,inspectApproved,getApprovedSource} from '../../shared/approved/search.mjs';
 const components=approvedComponents();
 assert.equal(components.length,5);
 for(const x of components){
@@ -24,12 +24,19 @@ function ask(method,params){
 }
 try{
  assert.equal((await ask('initialize',{})).result.serverInfo.name,'meta-games-approved-source');
- assert.equal((await ask('tools/list')).result.tools.length,3);
+ assert.equal((await ask('tools/list')).result.tools.length,4);
  const list=await ask('tools/call',{name:'list_approved_components',arguments:{}});
  assert.equal(JSON.parse(list.result.content[0].text).length,5);
  const denied=await ask('tools/call',{name:'inspect_approved_component',arguments:{id:'../AGENTS.md'}});
  assert.ok(denied.error);
  const result=await ask('tools/call',{name:'search_approved_code',arguments:{query:'window'}});
  assert.ok(result.result);
- console.log('APPROVED_SOURCE_MCP_PASS five verified originals; three tools; no unauthorized sources');
+ const full=await ask('tools/call',{name:'get_approved_component_source',arguments:{id:'observer-buildings'}});
+ const module=JSON.parse(full.result.content[0].text);
+ assert.equal(module.code,getApprovedSource('observer-buildings').code);
+ assert.equal(module.source.git_blob_sha,components.find(x=>x.id==='observer-buildings').source.git_blob_sha);
+ assert.ok(module.code.includes('ObserverBuildingAssets'));
+ const deniedFull=await ask('tools/call',{name:'get_approved_component_source',arguments:{id:'../../AGENTS.md'}});
+ assert.ok(deniedFull.error);
+ console.log('APPROVED_SOURCE_MCP_PASS five verified originals; four tools; no unauthorized sources');
 }finally{proc.stdin.end();proc.kill()}

@@ -156,7 +156,7 @@ try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
 } catch (e) { $('loader').remove(); document.body.insertAdjacentHTML('beforeend', '<div id="err">WebGL недоступен</div>'); throw e; }
 const DPR = Math.min(window.devicePixelRatio || 1, 2);
-const qualityController = window.MetaQuality.create({targetMs:16.67,minScale:.8,maxScale:1});
+const qualityController = window.MetaQuality.create({targetMs:16.67,minScale:.65,maxScale:1});
 let qualityScale = 1;
 renderer.setPixelRatio(DPR);
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace;

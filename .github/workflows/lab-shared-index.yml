@@ -19,3 +19,4 @@ jobs:
           node-version: '22'
       - run: node --check scripts/shared/build-index.mjs
       - run: node scripts/shared/build-index.mjs --check
+      - run: node scripts/shared/verify-approved-mcp.mjs

@@ -3,7 +3,9 @@
   "title": "Оригинальная звуковая система Observer World V7",
   "kind": "audio",
   "entry": "audio.js",
-  "exports": [],
+  "exports": [
+    "ObserverKriegerAudio"
+  ],
   "needs": [
     "Web Audio API"
   ],

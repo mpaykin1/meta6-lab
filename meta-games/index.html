@@ -74,6 +74,8 @@ main{position:relative;z-index:5;padding:42px 0 94px}
 .bottom{margin-top:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:23px 0;border-top:1px solid #6070883d;color:#96a7bd;font-size:13px}
 .bottom a{color:#d4c39b}
 
+.game.world-visited{border-color:#88bca87c}
+.game.world-visited .game-tag:before{content:"◆";display:inline-block;margin-right:9px;color:#95e5ce;text-shadow:0 0 16px #83ffdf}
 /* Connect and Earn extend the existing page; no additional renderer or animation loop. */
 .platform-section{scroll-margin-top:32px;margin-top:84px;padding-top:32px;border-top:1px solid #6070884a}
 .platform-section .section-title{margin-bottom:28px}
@@ -231,6 +233,26 @@ addEventListener('pagehide',()=>cancelAnimationFrame(frame),{once:true});
  const input=document.getElementById('mcp-address');
  const button=document.getElementById('copy-mcp');
  const status=document.getElementById('mcp-copy-status');
+ const VISIT_KEY='meta-games:worlds:v1';
+ const gameLinks=Array.from(document.querySelectorAll('a.game'));
+ function readVisits(){
+   try{
+     const data=JSON.parse(localStorage.getItem(VISIT_KEY)||'[]');
+     return new Set(Array.isArray(data)?data.filter(x=>typeof x==='string'):[]);
+   }catch{return new Set();}
+ }
+ const visited=readVisits();
+ const gameId=link=>new URL(link.getAttribute('href'),document.baseURI).pathname;
+ function renderVisits(){
+   for(const link of gameLinks)link.classList.toggle('world-visited',visited.has(gameId(link)));
+ }
+ renderVisits();
+ for(const link of gameLinks)link.addEventListener('click',()=>{
+   visited.add(gameId(link));
+   try{localStorage.setItem(VISIT_KEY,JSON.stringify([...visited]));}catch{}
+   renderVisits();
+ });
+
  button.addEventListener('click',async()=>{
    try{
      if(!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard unavailable');

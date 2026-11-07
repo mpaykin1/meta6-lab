@@ -3324,6 +3324,31 @@ function frame() {
 setLoad(1);
 frame();
 
+// Read-only META BOT snapshots of actual Broken City simulation data.
+const metaBot = Object.freeze({
+  info() { return Object.freeze({name:'broken-city',totalLevels:LEVELS.length}); },
+  state() {
+    const pos = heroState.pos, cfg = G.cfg, level = G.li + 1;
+    const activeShades = shades.filter(s => s.visible && !s.userData.copy);
+    const progress = cfg && Number.isFinite(cfg.goal)
+      ? Math.max(0,Math.min(1,(4-pos.z)/(4-cfg.goal))) : 0;
+    return Object.freeze({
+      started:view==='game' && G.state!=='title',
+      level,levelDone:G.state==='trans' && G.next>G.li,
+      gameDone:G.state==='ending'||G.state==='endwait',
+      alive:G.state!=='defeat',
+      hero:Object.freeze({x:pos.x,y:pos.y,z:pos.z}),
+      goal:cfg && Number.isFinite(cfg.goal)?Object.freeze({x:0,y:0,z:cfg.goal}):null,
+      enemies:Object.freeze(activeShades.map(s=>Object.freeze({x:s.position.x,y:s.position.y,z:s.position.z}))),
+      weapons:Object.freeze([]),
+      layoutHash:cfg?cfg.mode+':'+level+':'+pits.length+':'+bridges.length:'',
+      menuOpen:view!=='game'||G.paused===true,
+      progress,hp:G.energy,cameraYaw:camera.rotation.y
+    });
+  }
+});
+Object.defineProperty(window,'__META_BOT__',{value:metaBot,writable:false,configurable:false});
+
 </script>
 </body>
 </html>

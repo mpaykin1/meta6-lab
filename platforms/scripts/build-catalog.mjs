@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(scriptDir, '..');
@@ -38,6 +39,27 @@ function relativeGameDirectory(href) {
   return relative.replaceAll(path.sep, '/');
 }
 
+// Content approvals become stale after ANY game asset, code, or configuration changes.
+// SHA-256 is built from each relative file path and content, in stable lexical order.
+export function contentDigest(directory) {
+  const hash = createHash('sha256');
+  function walk(dir, relative='') {
+    const entries = fs.readdirSync(dir,{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name,'en'));
+    for (const item of entries) {
+      const rel = relative ? relative+'/'+item.name : item.name;
+      const full = path.join(dir,item.name);
+      if(item.isSymbolicLink()) throw new Error('Symlinked game asset is forbidden: '+rel);
+      if(item.isDirectory()) walk(full,rel);
+      else if(item.isFile()) {
+        const bytes=fs.readFileSync(full);
+        hash.update(Buffer.from(rel+'\0'+bytes.length+'\0','utf8')).update(bytes);
+      } else throw new Error('Unsupported game asset: '+rel);
+    }
+  }
+  walk(directory);
+  return hash.digest('hex');
+}
+
 export function buildCatalog() {
   const html = fs.readFileSync(portal, 'utf8');
   const previous = fs.existsSync(output) ? JSON.parse(fs.readFileSync(output, 'utf8')) : { games: [] };
@@ -56,7 +78,8 @@ export function buildCatalog() {
     seen.add(id);
     const entry = directory + '/index.html';
     const old = existing.get(id);
-    const sameSource = old?.entry === entry;
+    const digest = contentDigest(path.resolve(repoRoot, directory));
+    const sameSource = old?.entry === entry && old?.contentSha256 === digest;
     const rightsStatus = sameSource && old.rightsStatus === 'approved' ? 'approved' : 'unreviewed';
     const botStatus = sameSource && old.botStatus === 'pass' ? 'pass' : 'pending';
     const verified = rightsStatus === 'approved' && botStatus === 'pass';
@@ -65,6 +88,7 @@ export function buildCatalog() {
       title: attribute(tag, 'aria-label')?.replace(/^Play\s+/i, '') || id,
       version: sameSource && typeof old.version === 'string' ? old.version : 'unverified',
       entry,
+      contentSha256: digest,
       assetManifest: sameSource && typeof old.assetManifest === 'string' ? old.assetManifest : null,
       rightsStatus,
       botStatus,

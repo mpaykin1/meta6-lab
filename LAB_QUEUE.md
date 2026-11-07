@@ -8,6 +8,46 @@
 
 <!-- карточки ниже -->
 
+### World_server / PR #621 — MCP: Veil Terraces и исходники
+- Польза: каталог пяти эталонов и два проверенных модуля по HTTP MCP.
+- Поиграть: https://mpaykin1.github.io/meta6/meta-games-worlds/veil-terraces/
+- Ветка / SHA: World_server lab/owner-grant-catalog-20261107 / 2f7a0b5ad39f0f28fa0a1dbb81b77bbbb1c30740.
+- Файлы: World_server ASSET_INDEX, RIGHTS_REVIEW, MCP smoke и проверочные fixtures.
+- PR: https://github.com/mpaykin1/World_server/pull/621
+- Проверки: Cloudflare https://github.com/mpaykin1/World_server/actions/runs/42331036619 ; CI https://github.com/mpaykin1/World_server/actions/runs/42331036596 ; live https://github.com/mpaykin1/World_server/actions/runs/42331036696
+- Статус: В РАБОТЕ — не принимать без merge и фактического HTTPS list_games с veil-terraces.
+- Михаил: —
+- Claude: —
+
+### lab/approved-donor-confluence-vault — Замена Generated Confluence Vault
+- Польза: заменить запрещённую процедурную игру настоящей игрой из байт-проверенных эталонов.
+- Поиграть: отсутствует; текущий published Vault не соответствует SOURCE_ALLOWLIST.
+- Ветка / SHA: ещё не создана; источник meta6 ea74a313bb24eb25575f8021e218083c987bc280.
+- Допуск: SOURCE_ASSETS.json, upstream blob SHA для каждого игрового файла; все уровни и два запуска META BOT.
+- PR: ещё не открыт; старый процедурный кандидат https://github.com/mpaykin1/meta6-lab/pull/9 заблокирован.
+- Статус: В РАБОТЕ — нет законной donor-сборки и зелёного META BOT; перенос в meta6 только Claude.
+- Михаил: —
+- Claude: —
+
+### meta6 #290 — Twilight Isles, исправление проходимости
+- Польза: одобрить игровые улучшения только после полного честного прохождения.
+- Ветка / SHA: meta6 ai/meta-rules-twilight-isles-20261106 / 72b92d5c508571cc4fd69d4aa60c2692940cee16 (только чтение).
+- PR: https://github.com/mpaykin1/meta6/pull/290
+- META BOT: https://github.com/mpaykin1/meta6/actions/runs/42186206581 — FAIL, уровень 1 не завершён за 570 с; завершился playLevel без победы.
+- Статус: В РАБОТЕ — не сливать до зелёного META BOT; прямые исправления/комментарии в meta6 запрещены.
+- Михаил: —
+- Claude: —
+
+### meta6 #291 — Twilight Island, исправление маршрута и прогресса
+- Польза: достижение честной победы на острове без телепортов и обхода проверок.
+- Ветка / SHA: meta6 ai/codex/meta-bot-twilight-island-20261106 / 77add700f428e8c9209e4dd2c58506480c5524f5 (только чтение).
+- PR: https://github.com/mpaykin1/meta6/pull/291 (draft)
+- META BOT: https://github.com/mpaykin1/meta6/actions/runs/42185128729 — FAIL, 20 с progress не растёт и герой гибнет.
+- Статус: В РАБОТЕ — нет полного прохода; исправления в отдельной ветке lab, перенос в meta6 только Claude.
+- Михаил: —
+- Claude: —
+
+
 ### lab/shared-owner-approved-components — Первая библиотека эталонного кода
 - Польза: сюжетные события и мобильный ввод берутся из общей библиотеки, оригинальные файлы сохранены без изменений.
 - Поиграть: не отдельная игра; интеграция в игры ещё не завершена.

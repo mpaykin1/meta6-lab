@@ -2,15 +2,20 @@
    No GPU extensions or gameplay mutations. */
 (function(root){
 'use strict';
-function frustum(vp){
+function frustum(vp,out){
   if(!vp||vp.length!==16)throw new TypeError('Expected column-major 4x4 view-projection matrix');
-  const p=[];
-  const rows=[[vp[0],vp[4],vp[8],vp[12]],[vp[1],vp[5],vp[9],vp[13]],[vp[2],vp[6],vp[10],vp[14]],[vp[3],vp[7],vp[11],vp[15]]];
-  for(const s of [1,-1])for(const axis of [0,1,2]){
-    const a=rows[3],b=rows[axis],x=a[0]+s*b[0],y=a[1]+s*b[1],z=a[2]+s*b[2],w=a[3]+s*b[3],n=Math.hypot(x,y,z);
-    if(n>1e-12)p.push([x/n,y/n,z/n,w/n]);
+  const planes=out||[];let count=0;
+  // Direct column-major extraction avoids temporary row matrices each frame.
+  for(const sign of [1,-1])for(let axis=0;axis<3;axis++){
+    const x=vp[3]+sign*vp[axis],y=vp[7]+sign*vp[axis+4],
+          z=vp[11]+sign*vp[axis+8],w=vp[15]+sign*vp[axis+12],
+          len=Math.hypot(x,y,z);
+    if(len>1e-12){
+      const p=planes[count]||(planes[count]=[0,0,0,0]);
+      p[0]=x/len;p[1]=y/len;p[2]=z/len;p[3]=w/len;count++;
+    }
   }
-  return p;
+  planes.length=count;return planes;
 }
 function sphereVisible(planes,x,y,z,r){
   if(!Number.isFinite(x+y+z+r)||r<0)return true; // invalid bounds: never accidentally hide gameplay

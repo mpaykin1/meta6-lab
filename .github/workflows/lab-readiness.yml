@@ -26,4 +26,6 @@ jobs:
         with:
           node-version: '22'
       - name: Verify every passing gate against merged GitHub PR and regenerate exact score
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/lab/readiness-audit.mjs --check

@@ -1,6 +1,6 @@
 {
   "as_of": "2026-11-07",
-  "method": "30 independently checked binary acceptance gates; unmerged and unverified work scores zero",
+  "method": "100 independently verified binary acceptance gates; passing PR, exact green CI and surviving paths; unverified work scores zero",
   "areas": [
     {
       "name": "MCP",
@@ -15,11 +15,53 @@
       "total": 10
     },
     {
-      "name": "Бот-проходчик и автоисправления",
+      "name": "Бот-проходчик",
       "percent": 10,
       "passed": 1,
       "total": 10
+    },
+    {
+      "name": "Портал и каталог",
+      "percent": 10,
+      "passed": 1,
+      "total": 10
+    },
+    {
+      "name": "Фабрика игр и 7 движков",
+      "percent": 10,
+      "passed": 1,
+      "total": 10
+    },
+    {
+      "name": "Автоисправление игр",
+      "percent": 0,
+      "passed": 0,
+      "total": 10
+    },
+    {
+      "name": "Общие сохранения и двери",
+      "percent": 0,
+      "passed": 0,
+      "total": 10
+    },
+    {
+      "name": "Android",
+      "percent": 0,
+      "passed": 0,
+      "total": 10
+    },
+    {
+      "name": "Steam",
+      "percent": 0,
+      "passed": 0,
+      "total": 10
+    },
+    {
+      "name": "Лицензии и надёжный выпуск",
+      "percent": 0,
+      "passed": 0,
+      "total": 10
     }
   ],
-  "overall_percent": 27
+  "overall_percent": 10
 }

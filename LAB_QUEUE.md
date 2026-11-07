@@ -8,6 +8,15 @@
 
 <!-- карточки ниже -->
 
+### lab/render-veil-shared-instancing — WebGL2 shared Veil Terraces
+- Польза: вторая версия Veil Terraces ускорена без изменения её сюжетного журнала и управления.
+- Игра: https://mpaykin1.github.io/meta6-lab/preview/render-veil-shared-instancing/games/veil-terraces-shared/
+- Ветка: `lab/render-veil-shared-instancing`; PR: https://github.com/mpaykin1/meta6-lab/pull/59
+- Код: `games/veil-terraces-shared/index.html`, `scripts/lab/render-bench.mjs`, `.github/workflows/lab-shared-veil-performance.yml`.
+- Технологии: frustum, WebGL2 instancing, VAO, кэш чанков и матриц, адаптивное разрешение.
+- Проверка: ожидаются WebGL2 benchmark и META BOT; зависимость — PR #54.
+- Статус: В РАБОТЕ; Михаил: —; Claude: —
+
 ### lab/render-visibility-optimization — ускорение рендеринга
 - Польза: Veil Terraces не отправляет на GPU невидимые чанки, руины и кристаллы; общий модуль готов для других игр.
 - Поиграть после слияния: https://mpaykin1.github.io/meta6-lab/games/veil-terraces/

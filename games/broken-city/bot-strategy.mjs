@@ -11,6 +11,7 @@ export async function start(ctx) {
 export async function playLevel(ctx, level) {
   let step = 0;
   let previousHero = null;
+  let previousGoalDistance = Infinity;
   let blocked = 0;
   let sidestep = 1;
   // These are the actual two different action buttons in Broken City's UI.
@@ -55,11 +56,21 @@ export async function playLevel(ctx, level) {
     }
 
     const h = s.hero;
-    if (h && previousHero) {
-      blocked = Math.hypot(h.x - previousHero.x, h.y - previousHero.y) < 0.1
-        ? blocked + 1 : 0;
+    if (h && s.goal) {
+      // Collision can slide the hero sideways without approaching the objective.
+      // Track actual goal-distance improvement, not just nonzero displacement.
+      const distance = Math.hypot(s.goal.x - h.x, s.goal.y - h.y);
+      const goalChanged = !previousHero || previousHero.goalX !== s.goal.x ||
+        previousHero.goalY !== s.goal.y;
+      blocked = goalChanged || distance < previousGoalDistance - 0.15
+        ? 0 : blocked + 1;
+      previousGoalDistance = distance;
+      previousHero = { x: h.x, y: h.y, goalX: s.goal.x, goalY: s.goal.y };
+    } else {
+      blocked = 0;
+      previousGoalDistance = Infinity;
+      previousHero = null;
     }
-    if (h) previousHero = { x: h.x, y: h.y };
 
     if (s.mode === 'runner') {
       // Runner already moves along -Z. Dodge or jump using its actual action button.

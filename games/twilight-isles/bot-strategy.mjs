@@ -14,6 +14,7 @@ export async function playLevel(ctx,level) {
   let iterations=0,lastProgress=-1,stalls=0;
   let previousGoalDistance=Infinity, noApproach=0, escapeSide=1;
   let lastGoalKey='';
+  let detourRemaining=0;
   // In this game movement is camera-relative. Convert world X/Z into real
   // joystick axes directly; probing four directions is too slow on low FPS.
   const moveWorld = (s, wx, wz, ms) => {
@@ -34,23 +35,26 @@ export async function playLevel(ctx,level) {
       const goalKey=`${s.goal.x.toFixed(1)},${s.goal.y.toFixed(1)}`;
       if (goalKey!==lastGoalKey) {
         noApproach=0;
+        detourRemaining=0;
         previousGoalDistance=Infinity;
         lastGoalKey=goalKey;
       }
       const before=Math.hypot(s.goal.x-s.hero.x,s.goal.y-s.hero.y);
       const wx=(s.goal.x-s.hero.x)/Math.max(0.001,before);
       const wz=(s.goal.y-s.hero.y)/Math.max(0.001,before);
-      if (noApproach>=4) {
-        // Navigate around an obstacle by a genuine camera-correct side step.
+      if (noApproach>=3 && detourRemaining===0) {
+        // Commit to a physical detour rather than alternating sides each frame.
+        detourRemaining=3;
+        escapeSide=-escapeSide;
+      }
+      if (detourRemaining>0) {
         await ctx.jump();
-        // Keep the same detour side for two attempts so movement can clear
-        // the obstacle instead of oscillating on successive frames.
-        await moveWorld(s,-wz*escapeSide,wx*escapeSide,1400);
-        if (iterations%2===0) escapeSide=-escapeSide;
-        noApproach=0;
+        const sideX=-wz*escapeSide, sideZ=wx*escapeSide;
+        // Sideways plus a small forward component clears corners.
+        await moveWorld(s,sideX*0.9+wx*0.35,sideZ*0.9+wz*0.35,1200);
+        detourRemaining--;
       } else {
-        // At observed ~2 FPS, 120/300ms pulses can finish before a rendered movement frame.\n        // Use >=600ms input; actual collision and pickup remain game-controlled.
-        // Keep the actual joystick action; never modify collectible or player state.
+        // At low FPS the input must span at least one simulation frame.
         const pulseMs=before<1.5?600:before<4?700:900;
         await moveWorld(s,wx,wz,pulseMs);
       }
@@ -58,8 +62,8 @@ export async function playLevel(ctx,level) {
       const after=afterState.goal && afterState.hero
         ? Math.hypot(afterState.goal.x-afterState.hero.x,afterState.goal.y-afterState.hero.y)
         : 0;
-      if (after>=before-0.12 && after>=previousGoalDistance-0.12) noApproach++;
-      else noApproach=0;
+      if (after>=before-0.12) noApproach++;
+      else { noApproach=0; detourRemaining=0; }
       previousGoalDistance=after;
       // Physical jumps over terrain; never teleport or change victory flags.
       if (iterations%5===4) await ctx.jump();

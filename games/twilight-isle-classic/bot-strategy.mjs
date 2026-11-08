@@ -61,9 +61,22 @@ export async function playLevel(ctx, level) {
           // Rotate the escape heading across attempts rather than alternating
           // two nearly identical sidesteps at the same blocked voxel lip.
           const angle = (escapeAttempt++ % 8) * Math.PI / 4;
+          const before = ctx.state().hero;
           await ctx.joystick(Math.cos(angle), Math.sin(angle), 850);
           await ctx.jump();
+          const after = ctx.state().hero;
+          const moved = Math.hypot(after.x - before.x, after.y - before.y);
+          // A blocked escape must not immediately retry the same wall-facing
+          // walkToGoal; keep trying real directions until displacement occurs.
+          if (moved < 0.12) {
+            stalledSteps = 3;
+            step++;
+            continue;
+          }
           stalledSteps = 0;
+          lastPosition = after;
+          step++;
+          continue;
         }
       }
       // The existing META BOT calibrates joystick/camera direction.

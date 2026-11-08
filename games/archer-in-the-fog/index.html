@@ -117,5 +117,41 @@ canvas#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-actio
 
 
 
+<style>
+#mgPauseButton{position:fixed;z-index:36;top:calc(env(safe-area-inset-top) + 12px);
+  right:16px;width:46px;height:46px;display:grid;place-items:center;
+  font:24px system-ui,sans-serif;color:#d9f8ff;cursor:pointer;
+  background:rgba(10,16,30,.56);border:1px solid rgba(200,225,255,.45);
+  box-shadow:0 0 18px #66baff33;backdrop-filter:blur(8px);touch-action:manipulation}
+#mgPauseScreen{position:fixed;z-index:35;inset:0;background:rgba(3,10,30,.87);
+  backdrop-filter:blur(8px);display:grid;place-content:center;gap:20px;
+  justify-items:center}
+#mgPauseScreen[hidden]{display:none!important}
+#mgPauseScreen button{min-width:180px;min-height:48px;padding:9px 20px;
+  background:rgba(10,24,50,.8);border:1px solid #87dfee;
+  box-shadow:0 0 20px #6adcff33;color:#eefcff;font:18px system-ui,sans-serif}
+</style>
+<button id="mgPauseButton" type="button" aria-label="Menu">☰</button>
+<div id="mgPauseScreen" hidden role="dialog" aria-label="Pause menu">
+  <button id="mgResume" type="button">Resume</button>
+  <button id="mgRestart" type="button">Restart</button>
+</div>
+<script>
+(() => {
+  const trigger = document.getElementById('mgPauseButton');
+  const screen = document.getElementById('mgPauseScreen');
+  const resume = document.getElementById('mgResume');
+  function showPause(open) {
+    const g = window.__A?.G;
+    if (!g || g.mode !== 'play' || g.phase === 'over') return;
+    g.paused = open;
+    screen.hidden = !open;
+  }
+  trigger.addEventListener('click', () => showPause(screen.hidden));
+  resume.addEventListener('click', () => showPause(false));
+  document.getElementById('mgRestart').addEventListener('click', () => location.reload());
+})();
+</script>
+
 <script src="./bot-adapter.js"></script>
 </body></html>

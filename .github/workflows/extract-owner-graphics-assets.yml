@@ -19,6 +19,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
+      - name: Install PNG atlas cropper
+        run: python3 -m pip install Pillow==11.3.0
       - name: Extract original binaries
         run: python3 reference-games/owner-2026-11-08/sunken-city/extract-assets.py
       - name: Save original binaries on this sandbox branch
@@ -26,11 +28,12 @@ jobs:
           set -euo pipefail
           git add reference-games/owner-2026-11-08/sunken-city/3d
           git add reference-games/owner-2026-11-08/sunken-city/atlases
+          git add reference-games/owner-2026-11-08/sunken-city/sprites
           git add reference-games/owner-2026-11-08/sunken-city/manifest.json
           git add reference-games/owner-2026-11-08/sunken-city/pack-artifacts.json
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "assets: preserve 114 original GLBs and 12 PNG atlases"
+            git commit -m "assets: preserve 114 original GLBs and 12 atlases plus cropped sprites"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi

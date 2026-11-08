@@ -1611,10 +1611,16 @@
         "Web Audio API",
         "pointer gesture on iOS"
       ],
-      "scope": "Short synthesized fallback cues; first user gesture required; no background soundtrack",
+      "scope": "Pre-rendered PCM WAV from the owner reference style, decoded after user gesture, original tone synthesis as fallback",
       "source": "meta-games/library/flail-arena.mjs",
       "visual_origin": "synthetic-non-reference",
-      "note": "Prototype authored by AI, not extracted from approved reference; excluded from approved visual library."
+      "note": "Prototype authored by AI, not extracted from approved reference; excluded from approved visual library.",
+      "assets": [
+        "shared/components/pod-i-nad/audio/whoosh.wav",
+        "shared/components/pod-i-nad/audio/impact-a.wav",
+        "shared/components/pod-i-nad/audio/impact-b.wav",
+        "shared/components/pod-i-nad/audio/defeat.wav"
+      ]
     },
     {
       "id": "pod-i-nad/combat/flail-vfx",
@@ -1643,6 +1649,67 @@
       "source": "meta-games/library/flail-arena.mjs",
       "visual_origin": "synthetic-non-reference",
       "note": "Prototype authored by AI, not extracted from approved reference; excluded from approved visual library."
+    },
+    {
+      "id": "pod-i-nad/model/combat-3d",
+      "name": "3D basalt warriors, armored hero and flail model",
+      "kind": "model",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "3D animated guardian",
+        "armored character",
+        "spiked chain weapon",
+        "3D combat model"
+      ],
+      "tags": [
+        "3d",
+        "model",
+        "character",
+        "guardian",
+        "spiked-flail"
+      ],
+      "entry": "../components/pod-i-nad/models/combat-models.mjs",
+      "export_name": "createCombatModels",
+      "dependencies": [
+        "Three.js r160"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "scope": "Procedural 3D meshes and independently animated character parts, not exported GLB"
+    },
+    {
+      "id": "pod-i-nad/shader/sky-aurora",
+      "name": "Pod i Nad original animated aurora, clouds and starfield",
+      "kind": "shader",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "aurora GLSL",
+        "starfield shader",
+        "animated pixel sky",
+        "sunset",
+        "clouds"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "sky",
+        "aurora",
+        "stars",
+        "clouds"
+      ],
+      "entry": "../components/pod-i-nad/shaders/atmosphere/sky-material.mjs",
+      "export_name": "createSkyDome",
+      "dependencies": [
+        "Three.js r160",
+        "GLSL_HASH"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "SKY_VERT",
+        "SKY_FRAG"
+      ],
+      "scope": "Composes original SKY_VERT/SKY_FRAG and updates aurora in the live 3D combat scene"
     }
   ]
 }

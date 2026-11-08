@@ -2,6 +2,8 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
 import {createFlailCombat} from '../../shared/components/pod-i-nad/animations/flail-combat.mjs';
 import {createFlailImpactFX} from '../../shared/components/pod-i-nad/animations/flail-vfx.mjs';
 import {createFlailAudio} from '../../shared/components/pod-i-nad/animations/flail-audio.mjs';
+import {createSkyDome} from '../../shared/components/pod-i-nad/shaders/atmosphere/sky-material.mjs';
+import {createCombatModels} from '../../shared/components/pod-i-nad/models/combat-models.mjs';
 
 const canvas=document.querySelector('#stage');
 const menu=document.querySelector('#menu');
@@ -12,6 +14,7 @@ const errorBox=document.querySelector('#error');
 const scene=new THREE.Scene();
 scene.background=new THREE.Color(0x07151d);
 scene.fog=new THREE.FogExp2(0x07151d,.037);
+const sky=createSkyDome(THREE,{scene,radius:85,aurora:.6,night:.85});
 const camera=new THREE.PerspectiveCamera(52,1,.1,120);
 let renderer;
 try {
@@ -179,8 +182,8 @@ const linkMat=mat(0xa4c4bc,{metal:.86,rough:.22});
 const links=Array.from({length:8},()=>{
  const mesh=new THREE.Mesh(linkGeo,linkMat);scene.add(mesh);return mesh;
 });
-const ballMat=mat(0x9bd8d4,{emissive:0x1e9b99,glow:.7,metal:.88,rough:.22});
-const ball=new THREE.Mesh(new THREE.IcosahedronGeometry(.29,1),ballMat);
+const combatModels=createCombatModels(THREE);
+const ball=combatModels.createFlailHead();
 scene.add(ball);
 const ballLight=new THREE.PointLight(0x8cfff0,13,4,2);
 scene.add(ballLight);
@@ -329,9 +332,10 @@ function tick(ms){
  if(!alive&&lastCleared<0)lastCleared=t;
  if(lastCleared>=0&&t-lastCleared>4)resetFoes();
  vfx.update(dt);
+ sky.update(t*.23,camera.position);
  renderer.render(scene,camera);
 }
 camera.position.set(9,12,20);
 camera.lookAt(lookAt);
 renderer.setAnimationLoop(tick);
-window.addEventListener('pagehide',()=>{renderer.setAnimationLoop(null);vfx.dispose();void audio.dispose();renderer.dispose();});
+window.addEventListener('pagehide',()=>{renderer.setAnimationLoop(null);vfx.dispose();sky.dispose();combatModels.dispose();void audio.dispose();renderer.dispose();});

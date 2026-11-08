@@ -1,13 +1,16 @@
-// Optional, gesture-unlocked low-volume Web Audio feedback for reusable flail combat.
-// Host may replace these short synthesized effects with licensed audio files later.
+// iOS/Safari-compatible pre-rendered WAV combat effects; procedural fallback until loaded.
+// Owner-authored offline WAV is bundled in ../audio/. Gesture unlock required.
 export function createFlailAudio({volume=0.22}={}) {
   let context=null, master=null, filter=null, compressor=null, muted=false;
   const last={whoosh:-1e4,impact:-1e4,defeat:-1e4};
   const cool={whoosh:.38,impact:.3,defeat:.8};
   const AC=()=>globalThis.AudioContext||globalThis.webkitAudioContext;
+  const files={whoosh:['whoosh.wav'],impact:['impact-a.wav','impact-b.wav'],defeat:['defeat.wav']};
+  const samples=new Map();let loading=null,variant=0;
   async function unlock() {
     if (!AC()) return false;
     if (!context) {
+      try{if(globalThis.navigator?.audioSession)navigator.audioSession.type='playback'}catch{}
       context=new (AC())({latencyHint:'interactive'});
       compressor=context.createDynamicsCompressor();
       compressor.threshold.value=-21;
@@ -21,7 +24,14 @@ export function createFlailAudio({volume=0.22}={}) {
       compressor.connect(master);
       master.connect(context.destination);
     }
-    try { await context.resume(); } catch { return false; }
+    const resume=context.resume();
+    if(!loading)loading=Promise.allSettled(Object.values(files).flat().map(async filename=>{
+      const response=await fetch(new URL('../audio/'+filename,import.meta.url));
+      if(!response.ok)throw Error('Audio HTTP '+response.status);
+      const buffer=await context.decodeAudioData(await response.arrayBuffer());
+      samples.set(filename,buffer);
+    }));
+    try{await resume}catch{return false}
     return context.state==='running';
   }
   function tone(startHz,endHz,duration,level,wave='triangle',at=0) {
@@ -46,6 +56,17 @@ export function createFlailAudio({volume=0.22}={}) {
     const now=context.currentTime;
     if (now-last[kind]<cool[kind]) return false;
     last[kind]=now;
+    const filename=kind==='impact'?files.impact[variant++%files.impact.length]:files[kind][0];
+    const buffer=samples.get(filename);
+    if(buffer){
+      const source=context.createBufferSource(),amp=context.createGain(),drift=Math.random()*2-1;
+      source.buffer=buffer;source.playbackRate.value=1+drift*.06;
+      amp.gain.value=(kind==='whoosh'?.45:.7)*(1+drift*.1);
+      source.connect(amp);amp.connect(filter);
+      source.addEventListener('ended',()=>{source.disconnect();amp.disconnect()},{once:true});
+      source.start(now);
+      return true;
+    }
     const v=.94+Math.random()*.12;
     if (kind==='whoosh') {
       tone(110*v,195*v,.17,.08,'triangle');
@@ -60,6 +81,6 @@ export function createFlailAudio({volume=0.22}={}) {
     return true;
   }
   function setMuted(value) { muted=Boolean(value);if(master)master.gain.value=muted?0:Math.max(0,Math.min(1,volume)); }
-  async function dispose() { if(context){const current=context;context=null;master=null;filter=null;compressor=null;await current.close().catch(()=>{});} }
+  async function dispose() { samples.clear();if(context){const current=context;context=null;master=null;filter=null;compressor=null;await current.close().catch(()=>{});} }
   return {unlock,whoosh:()=>play('whoosh'),impact:()=>play('impact'),defeat:()=>play('defeat'),setMuted,dispose};
 }

@@ -11,13 +11,12 @@ export async function playLevel(ctx, level) {
     const s = ctx.state();
     if (s.gameDone || s.levelDone || s.level > level) return;
     if (!s.alive) { await ctx.wait(300); continue; }
-    const h = s.hero || s.player;
-    const nearest = (s.enemies || []).reduce((a, e) => {
-      const d = Math.hypot(e.x - h.x, e.z - h.z);
-      return !a || d < a.distance ? { ...e, distance: d } : a;
-    }, null);
-    if (nearest && nearest.distance < 2.5) {
-      await ctx.key('Space', 90);
+    // The public META BOT state contains an enemy count, not enemy positions.
+    // Jump at a nearby real target to reach raised voxel platforms.
+    if (s.goal) {
+      const h = s.hero || s.player;
+      const distance = Math.hypot(s.goal.x - h.x, s.goal.y - h.y);
+      if (distance < 2.0) await ctx.jump();
     }
     if (s.goal) await ctx.walkToGoal(450);
     else { await ctx.key('Space', 90); await ctx.wait(200); }

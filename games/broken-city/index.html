@@ -3327,7 +3327,18 @@ function frame() {
       backLight.position.set(0, 5, -9); fillLight.position.set(-3, 2.5, 9);
     } else {
       perfTick(performance.now(), G.state === 'play' && !G.paused && !PAUSE.size);
-      if (G.state === 'play' && !G.paused) { updateGame(dt, t); updateGameCamera(dt, t); tickNav(heroState, t, dt); tickGift(heroState, t, dt); tickMem(heroState, t, dt); }
+      if (G.state === 'play' && !G.paused) {
+         // Keep real-time movement playable when the GPU renders only a few frames per
+         // second. Bounded 50 ms physics steps preserve gravity, jumps and collisions;
+         // this never advances level counters or relaxes the bot's 180 s watchdog.
+         let remaining = Math.min(realDt, .35);
+         while (remaining > 0.00001 && G.state === 'play' && !G.paused) {
+           const step = Math.min(remaining, .05);
+           updateGame(step, t);
+           remaining -= step;
+         }
+         updateGameCamera(dt, t); tickNav(heroState, t, dt); tickGift(heroState, t, dt); tickMem(heroState, t, dt);
+       }
       else if (G.state === 'play') updateGameCamera(dt, t);
       else if (G.state === 'defeat') { navArrow.visible = false; $('stickHint').classList.add('hidden'); }
       else if (G.state === 'trans') { updateTransition(realDt, t); if (G.cfg) updateGameCamera(dt, t); }

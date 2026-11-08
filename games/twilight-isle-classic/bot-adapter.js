@@ -55,8 +55,17 @@
             const nx = x + dx, nz = z + dz;
             if (nx < 0 || nz < 0 || nx >= width || nz >= width) continue;
             const n = nx + nz * width;
-            if (next[n] >= 0 || reach[n] <= 0 || height[n] >= 26 ||
-                Math.abs(height[n] - height[at]) > 1) continue;
+            if (next[n] >= 0 || reach[n] <= 0 || height[n] >= 26) continue;
+            // Reverse search: n -> at must obey the original game's
+            // forward one-/two-block climb and unrestricted drop rules.
+            // A symmetric abs(height difference) <= 1 wrongly disconnects
+            // reachable coins across stairs and long downhill sections.
+            const top = Math.max(height[n], height[at]);
+            if (height[at] - height[n] > 2 || top < 0 || top >= 25) continue;
+            const clearColumn = (cx, cz) =>
+              world.vox[world.at(cx, top, cz)] === 0 &&
+              world.vox[world.at(cx, top + 1, cz)] === 0;
+            if (!clearColumn(x, z) || !clearColumn(nx, nz)) continue;
             next[n] = at;
             queue[tail++] = n;
           }

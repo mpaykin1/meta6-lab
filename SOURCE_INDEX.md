@@ -65,6 +65,7 @@ Source files: [3D game](observer-world-en-v7/index.html) · [historical builder]
 
 | Что | Исходник (GitHub) | Игра |
 |---|---|---|
+| **Сумерки и пепел II (Copy) — отдельно сохранённый эталон владельца (08.11.2026)** | [HTML и метаданные](reference/sumerki-i-pepel-ii-copy-20261108/index.html) · [source.json](reference/sumerki-i-pepel-ii-copy-20261108/source.json) | https://mpaykin1.github.io/meta6-lab/reference/sumerki-i-pepel-ii-copy-20261108/ |
 | **Сумерки и пепел II — эталон Claude (META GAMES, 06.11.2026)** | [games/sumerki-i-pepel-2/index.html](games/sumerki-i-pepel-2/index.html) | https://mpaykin1.github.io/meta6/games/sumerki-i-pepel-2/ |
 | **Twilight Isle Classic 1.1.1 — эталон удержания Claude (META GAMES, 06.11.2026)** | [games/twilight-isle-classic/index.html](games/twilight-isle-classic/index.html) | https://mpaykin1.github.io/meta6/games/twilight-isle-classic/ |
 | **Twilight Isles 2.0.0 — эталон удержания Claude (META GAMES, 06.11.2026)** | [games/twilight-isles/index.html](games/twilight-isles/index.html) | https://mpaykin1.github.io/meta6/games/twilight-isles/ |

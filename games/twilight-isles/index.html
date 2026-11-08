@@ -3307,7 +3307,7 @@ composer.addPass(new OutputPass());
 composer.addPass(finalPass);
 const FX = finalPass.uniforms;
 
-const perf = { scale: 0.8, acc: 0, frames: 0, cool: 0 };
+const perf = { scale: 0.8, acc: 0, frames: 0, cool: 0, lite: false };
 function resize() {
   const w = Math.max(1, innerWidth), h = Math.max(1, innerHeight);
   const pr = Math.min(window.devicePixelRatio || 1, 1.75) * perf.scale;
@@ -6883,20 +6883,28 @@ if (menu.box) menu.box.addEventListener('keydown', (e) => { if (e.code === 'Ente
 ----------------------------------------------------------------------------- */
 let last = 0, booted = false;
 function perfMonitor(dt) {
-  if (perf.lock) return;
+  if (perf.lock || !Number.isFinite(dt) || dt <= 0) return;
   perf.acc += dt; perf.frames++;
   if (perf.acc >= 2) {
     const fps = perf.frames / perf.acc; perf.acc = 0; perf.frames = 0;
     let s = perf.scale;
     if (fps < 48 && s > 0.5) s = Math.max(0.5, Math.round((s - 0.1) * 100) / 100);
     else if (fps > 58 && s < 0.9) s = Math.min(0.9, Math.round((s + 0.05) * 100) / 100);
+    // Software WebGL at 2-3 FPS cannot afford multiple fullscreen post passes.
+    // Preserve the complete scene and real controls; temporarily render directly.
+    if (fps < 14) { perf.lite = true; perf.cool = 0; }
+    else if (perf.lite && fps > 48) {
+      perf.cool += 2;
+      if (perf.cool >= 8) { perf.lite = false; perf.cool = 0; }
+    } else perf.cool = 0;
     if (s !== perf.scale) { perf.scale = s; resize(); }
   }
 }
 function frame(now) {
   requestAnimationFrame(frame);
   if (PG.paused) { last = now; return; }
-  const raw = last ? Math.min(0.05, Math.max(0, (now - last) / 1000)) : 0.016;
+  const elapsed = last ? Math.min(1, Math.max(0, (now - last) / 1000)) : 0.016;
+  const raw = Math.min(0.05, elapsed);
   last = now;
   // hit-stop: a heavy blow freezes the simulation for a few frames; particles crawl, the camera keeps breathing
   const frozen = G.hitstop > 0;
@@ -6936,8 +6944,9 @@ function frame(now) {
   updateCombatHud(raw);
   updateNpcHud(raw);
   glow.flush(); dust.flush();
-  composer.render(raw);
-  perfMonitor(raw);
+  if (perf.lite) renderer.render(scene, camera);
+  else composer.render(raw);
+  perfMonitor(elapsed);
   RET.frame(raw);
   ARCH.tick(raw);
 }

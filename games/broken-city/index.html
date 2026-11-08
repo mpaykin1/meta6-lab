@@ -3030,6 +3030,19 @@ const metaBotObserver = Object.freeze({
     const c = G.cfg;
     const h = heroState.pos;
     const ending = G.state === 'ending' || G.state === 'endwait';
+    const waypointRuin = c && c.mode === 'toys'
+      ? truins.filter(r => r.barrier && r.route && r.route.length
+          && r.route[r.route.length - 1][1] < h.z - .3)
+          .sort((a, b) => b.z - a.z)[0]
+      : null;
+    const point = waypointRuin && h.z <= waypointRuin.route[0][1] + 6
+      ? waypointRuin.route[Math.min(waypointRuin.ri, waypointRuin.route.length - 1)]
+      : null;
+    const waypoint = c && c.mode === 'toys'
+      ? (point
+          ? {x:point[0],z:point[1],jump:!!point[2]}
+          : {x:h.x * .5,z:Math.max(c.goal,h.z - 10),jump:false})
+      : null;
     return {
       started: active && G.state !== 'title',
       level: G.li,
@@ -3044,7 +3057,8 @@ const metaBotObserver = Object.freeze({
       menuOpen: G.paused || view === 'title' || G.storyOpen === true,
       progress: c ? Math.max(0,Math.min(1,(4-h.z)/(4-c.goal))) : 0,
       hp: G.state === 'defeat' ? 0 : 1,
-      cameraYaw: rig.yaw
+      cameraYaw: rig.yaw,
+      waypoint
     };
   }
 });

@@ -61,7 +61,10 @@
       "format_checked": true,
       "runtime": "Three.js GLTFLoader r160",
       "loader_module": "shared/components/pod-i-nad/models/original-glb-loader.mjs",
-      "status": "READY"
+      "status": "READY",
+      "binary_glb_path": "shared/components/pod-i-nad/models/creatures/angler.glb",
+      "binary_glb_sha": "94f3b18f02d85f6a51ec158c855c1e0babd38abb",
+      "binary_bytes": 134236
     },
     {
       "id": "pod-i-nad/model/arch",
@@ -299,7 +302,10 @@
       "format_checked": true,
       "runtime": "Three.js GLTFLoader r160",
       "loader_module": "shared/components/pod-i-nad/models/original-glb-loader.mjs",
-      "status": "READY"
+      "status": "READY",
+      "binary_glb_path": "shared/components/pod-i-nad/models/creatures/eel.glb",
+      "binary_glb_sha": "4b72ae60e02ac6a7c647fa9002f6422237b2d41b",
+      "binary_bytes": 42360
     },
     {
       "id": "pod-i-nad/model/galleon",
@@ -439,7 +445,10 @@
       "format_checked": true,
       "runtime": "Three.js GLTFLoader r160",
       "loader_module": "shared/components/pod-i-nad/models/original-glb-loader.mjs",
-      "status": "READY"
+      "status": "READY",
+      "binary_glb_path": "shared/components/pod-i-nad/models/creatures/jellyfish_teal.glb",
+      "binary_glb_sha": "a70795eaee862a73ee0fce7b134b61a6be856325",
+      "binary_bytes": 80684
     },
     {
       "id": "pod-i-nad/model/jellyfish_violet",
@@ -453,7 +462,10 @@
       "format_checked": true,
       "runtime": "Three.js GLTFLoader r160",
       "loader_module": "shared/components/pod-i-nad/models/original-glb-loader.mjs",
-      "status": "READY"
+      "status": "READY",
+      "binary_glb_path": "shared/components/pod-i-nad/models/creatures/jellyfish_violet.glb",
+      "binary_glb_sha": "c38910b1ecce747048683f531d16bff592184ae3",
+      "binary_bytes": 80724
     },
     {
       "id": "pod-i-nad/model/kelp_mid",
@@ -509,7 +521,10 @@
       "format_checked": true,
       "runtime": "Three.js GLTFLoader r160",
       "loader_module": "shared/components/pod-i-nad/models/original-glb-loader.mjs",
-      "status": "READY"
+      "status": "READY",
+      "binary_glb_path": "shared/components/pod-i-nad/models/creatures/kraken_tentacle.glb",
+      "binary_glb_sha": "55d09340f84a18d4119046240e3cd9c9e210663e",
+      "binary_bytes": 110892
     },
     {
       "id": "pod-i-nad/model/lancet_window",
@@ -593,7 +608,10 @@
       "format_checked": true,
       "runtime": "Three.js GLTFLoader r160",
       "loader_module": "shared/components/pod-i-nad/models/original-glb-loader.mjs",
-      "status": "READY"
+      "status": "READY",
+      "binary_glb_path": "shared/components/pod-i-nad/models/creatures/scout_drone.glb",
+      "binary_glb_sha": "9c55dc2762a494c755b59eea1fc68c57125d0752",
+      "binary_bytes": 59460
     },
     {
       "id": "pod-i-nad/model/sea_fan",

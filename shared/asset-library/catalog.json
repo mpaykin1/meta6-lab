@@ -152,12 +152,13 @@
       "status": "READY",
       "source": "underwater-sumerek/glb/jellyfish_teal.json",
       "source_reference": "glb/jellyfish_teal.json",
-      "asset_path": null,
+      "asset_path": "shared/components/pod-i-nad/models/creatures/jellyfish_teal.glb",
       "loader_id": null,
       "usable": false,
       "source_blob_sha": "616aa0bb245511fc210657acf214476ef948cc7f",
       "definition_index": "shared/components/pod-i-nad/models/model-index.json",
-      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs",
+      "binary_glb_sha": "a70795eaee862a73ee0fce7b134b61a6be856325"
     },
     {
       "id": "pod-i-nad/glsl/sky-vert",
@@ -5025,7 +5026,9 @@
       "source": "underwater-sumerek/glb/angler.json",
       "source_blob_sha": "22c536017f26c4a0e10da1ca175d92654916e6cd",
       "definition_index": "shared/components/pod-i-nad/models/model-index.json",
-      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs",
+      "asset_path": "shared/components/pod-i-nad/models/creatures/angler.glb",
+      "binary_glb_sha": "94f3b18f02d85f6a51ec158c855c1e0babd38abb"
     },
     {
       "id": "pod-i-nad/model/arch",
@@ -5383,7 +5386,9 @@
       "source": "underwater-sumerek/glb/eel.json",
       "source_blob_sha": "6cf962148a1bd6542eb04eaa81629522be91d403",
       "definition_index": "shared/components/pod-i-nad/models/model-index.json",
-      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs",
+      "asset_path": "shared/components/pod-i-nad/models/creatures/eel.glb",
+      "binary_glb_sha": "4b72ae60e02ac6a7c647fa9002f6422237b2d41b"
     },
     {
       "id": "pod-i-nad/model/galleon",
@@ -5594,7 +5599,9 @@
       "source": "underwater-sumerek/glb/jellyfish_violet.json",
       "source_blob_sha": "6b334eefcb620ed8c767e081ec6ee3547c4ce506",
       "definition_index": "shared/components/pod-i-nad/models/model-index.json",
-      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs",
+      "asset_path": "shared/components/pod-i-nad/models/creatures/jellyfish_violet.glb",
+      "binary_glb_sha": "c38910b1ecce747048683f531d16bff592184ae3"
     },
     {
       "id": "pod-i-nad/model/kelp_mid",
@@ -5679,7 +5686,9 @@
       "source": "underwater-sumerek/glb/kraken_tentacle.json",
       "source_blob_sha": "a9156d58e3120aff381b8bf2a45ad2e8ad1b6318",
       "definition_index": "shared/components/pod-i-nad/models/model-index.json",
-      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs",
+      "asset_path": "shared/components/pod-i-nad/models/creatures/kraken_tentacle.glb",
+      "binary_glb_sha": "55d09340f84a18d4119046240e3cd9c9e210663e"
     },
     {
       "id": "pod-i-nad/model/lancet_window",
@@ -5806,7 +5815,9 @@
       "source": "underwater-sumerek/glb/scout_drone.json",
       "source_blob_sha": "eda25ef7ad7a344a9afeac3f0c3870b54ac6d882",
       "definition_index": "shared/components/pod-i-nad/models/model-index.json",
-      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs",
+      "asset_path": "shared/components/pod-i-nad/models/creatures/scout_drone.glb",
+      "binary_glb_sha": "9c55dc2762a494c755b59eea1fc68c57125d0752"
     },
     {
       "id": "pod-i-nad/model/sea_fan",

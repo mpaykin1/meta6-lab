@@ -96,8 +96,11 @@ export async function playLevel(ctx, level) {
         await jump(s.mode);
         blocked = 0;
       }
+      // The real route marks gaps with jump=1: take off BEFORE walking into
+      // the gap. Jumping after a long low-FPS joystick hold is too late.
+      if (s.mode === 'toys' && s.goal.jump) await jump(s.mode);
       await moveToward(s);
-      if (s.mode === 'toys' && (s.goal.jump || step % 3 === 0)) await jump(s.mode);
+      if (s.mode === 'toys' && !s.goal.jump && step % 3 === 0) await jump(s.mode);
       if (s.mode === 'fold' && blocked >= 2) {
         if (ctx.mobile) await tapAction();
         else await ctx.key('Space', 90);

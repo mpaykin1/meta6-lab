@@ -20,43 +20,16 @@ function caption(r) {
   ((capQ = r.split(" ")), (capT = 0), showWord());
 }''')
 
-# ---------- META GAMES local-only persistence, no SDK and no advertising ----------
-rep('''let pgSaved = null;
-try {
-  (await window.bridge.initialize(),
-    (PG.ready = !0),
-    (PG.language = (window.bridge.platform.language || "en").slice(0, 2).toLowerCase()),
-    (PG.audio = window.bridge.platform.isAudioEnabled !== !1));
-  const r = await window.bridge.storage.get(["luchnik_save"]);
-  ((pgSaved = r && r[0] ? JSON.parse(r[0]) : null),
-    window.bridge.platform.on(window.bridge.EVENT_NAME.PAUSE_STATE_CHANGED, (e) => {
-      ((PG.paused = !!e), typeof AU < "u" && AU.ctx && (PG.paused ? AU.ctx.suspend() : PG.audio && !document.hidden && AU.ctx.resume()));
-    }),
-    window.bridge.platform.on(window.bridge.EVENT_NAME.AUDIO_STATE_CHANGED, (e) => {
-      ((PG.audio = !!e), typeof AU < "u" && AU.ctx && (PG.audio ? !PG.paused && !document.hidden && AU.ctx.resume() : AU.ctx.suspend()));
-    }));
-} catch (r) {
-  console.warn("Bridge initialization:", r);
-}''', '''let pgSaved = null;
-PG.language = (navigator.language || "en").slice(0, 2).toLowerCase();
-try { pgSaved = JSON.parse(localStorage.getItem("luchnik_save") || "null"); }
-catch (error) { console.warn("Local save:", error); }''')
-rep('''function save() {
-  PG.ready && window.bridge.storage.set(["luchnik_save"], [JSON.stringify(SAVE)]).catch(() => {});
-}''', '''function save() {
-  try { localStorage.setItem("luchnik_save", JSON.stringify(SAVE)); }
-  catch (error) { console.warn("Local save:", error); }
-}''')
-rep('''function pgInterstitial() {
-  PG.ready &&
-    window.bridge.advertisement.isInterstitialSupported &&
-    Promise.resolve(window.bridge.advertisement.showInterstitial("game_over")).catch(() => {});
-}''', '')
+# ---------- R5/R6: interstitial on Retry/Menu (not over the result), rewarded revive once per run ----------
 rep('''function gameOver() {
   (pgInterstitial(),
     (G.phase = "over"),''', '''function gameOver() {
   (ARC2.onGameOver(),
     (G.phase = "over"),''')
+rep('''$("bRetry").onclick = () => startGame();''', '''$("bRetry").onclick = () => (pgInterstitial(), startGame());''')
+rep('''$("bOvMenu").onclick = () => {
+  ($("over").classList.add("hide"),''', '''$("bOvMenu").onclick = () => {
+  (pgInterstitial(), $("over").classList.add("hide"),''')
 
 # ---------- R7: icons instead of emoji/text ----------
 rep('''function renderRes() {
@@ -138,6 +111,7 @@ rep('''    (G.orbitDir = Math.random() < 0.5 ? 1 : -1));
 }''')
 rep('''frame();
 PG.ready && requestAnimationFrame(() => window.bridge.platform.sendMessage("game_ready"));''', '''frame();
+PG.ready && requestAnimationFrame(() => window.bridge.platform.sendMessage("game_ready"));
 ARC2.boot();''')
 
 # ---------- the module ----------
@@ -161,8 +135,8 @@ rep2('''    (G.revived = !1),''', '''    (G.revived = !1),
 rep2('''    extra: [
       ["игрок не видит счётчик", () => !document.querySelector("[data-inv]")],''', '''    extra: [
       ["R1 мгновенный старт для новичка", () => t(ARC2.boot, "SAVE.played")],
-      ["META бесплатное возрождение", () => !!$("bRevive")],
-      ["META без рекламных перерывов", () => t(gameOver, "onGameOver")],
+      ["R5 воскрешение за рекламу", () => !!$("bRevive")],
+      ["R6 реклама на «Снова», не на экране поражения", () => t(gameOver, "onGameOver") && !t(gameOver, "pgInterstitial")],
       ["R7 кнопки-значки, без эмодзи", () => !$("bFreeze").textContent.includes("❄") && !!$("bShop").querySelector("svg")],
       ["внешних загрузок нет (Bridge и шрифт локально)", () => ![...document.scripts].some((x) => x.src && new URL(x.src).host !== location.host) && !document.querySelector('link[href*="googleapis"]')],
       ["игрок не видит счётчик", () => !document.querySelector("[data-inv]")],''')

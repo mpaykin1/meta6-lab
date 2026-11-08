@@ -1,0 +1,56 @@
+{
+  "assetId": "13.01",
+  "assetName": "Hero Diesel Locomotive R1",
+  "assetType": "3D_GLTF2_BINARY",
+  "modelFile": "hero_locomotive_R1.glb",
+  "referenceId": "R1",
+  "referenceFile": "assets/train-in-the-fog/references/photo_2026-11-08_12-38-30.jpg",
+  "referenceSpec": "docs/games/train-in-the-fog/REFERENCE_FRAMES_R1_R2_R3_RU.md",
+  "format": "glTF 2.0 GLB",
+  "coordinateSystem": "metres, Y-up, front = -Z",
+  "sourceFormat": "GLB scene geometry editable via glTF import in modelling tools; native Blender project not created",
+  "geometry": {
+    "triangles": 5278,
+    "materials": 13,
+    "meshPrimitives": 17,
+    "nodes": 8,
+    "wheelAxleNodes": 6,
+    "meshes": 3
+  },
+  "pbrTextures": {
+    "embeddedPNG": 6,
+    "maps": [
+      "paint grunge albedo",
+      "steel scratches albedo",
+      "rust albedo",
+      "wood albedo",
+      "normal",
+      "metallic-roughness"
+    ]
+  },
+  "embeddedAnimations": [
+    "Rolling_axles"
+  ],
+  "emissiveSurfaces": [
+    "white top headlight",
+    "two warm marker lamps",
+    "warm cab windows",
+    "closed circular glass lenses on all three headlights",
+    "subtle warm reflective top strip on cab windscreens"
+  ],
+  "collisions": "compound bounding box metadata; gameplay physics not yet wired",
+  "heroPreview": "WebGL2 rendered preview in index.html; visual approval compared to user R1 sketch remains pending",
+  "artReview": "NOT_VERIFIED",
+  "readyForProduction": false,
+  "knownLimitations": [
+    "visual silhouette against R1 sketch has not been rendered and compared",
+    "proper soft volumetric beam/fog/rain/wet reflections are scene shader effects, not part of standalone locomotive",
+    "native editable 3D modelling source is not included",
+    "mobile performance and game integration not tested"
+  ],
+  "buildDate": "2026-11-08",
+  "viewerFile": "index.html",
+  "viewerStatus": "Published HTML uses built-in Canvas2D software 3D rasterizer of actual embedded GLB triangles to avoid invisible WebGL model; verified JS syntax and model projection, live visual validation pending",
+  "viewerIsOfflineStandalone": true,
+  "viewerRenderer": "Canvas2D depth-sorted triangle projection of embedded GLB, not a prerendered picture"
+}

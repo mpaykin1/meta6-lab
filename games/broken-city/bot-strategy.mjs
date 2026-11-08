@@ -13,7 +13,6 @@ export async function playLevel(ctx, level) {
   let previousHero = null;
   let previousGoalDistance = Infinity;
   let blocked = 0;
-  let sidestep = 1;
   // These are the actual two different action buttons in Broken City's UI.
   // The separate #bJump exists only in the combo/cradle modes.
   const tapAction = () => ctx.tap(ctx.viewport.width - 61, ctx.viewport.height - 73);
@@ -22,19 +21,29 @@ export async function playLevel(ctx, level) {
     : mode === 'combo' || mode === 'cradle'
       ? ctx.tap(ctx.viewport.width - 62, ctx.viewport.height - 72)
       : tapAction();
-  // Convert world-space goal vector to the real camera-relative joystick.
-  // Avoid four-direction calibration: on low-FPS WebGL it samples almost no
-  // simulation frames and may produce a degenerate movement basis.
+  // The first two authored ruin waypoints lead onto a very narrow staircase.
+  // Align X on the street *before* walking into the wall; diagonal input hits
+  // an impassable high step, then slides sideways without approaching the goal.
   const moveToward = s => {
-    const dx = s.goal.x - s.hero.x;
-    const dz = s.goal.y - s.hero.y;
+    let dx = s.goal.x - s.hero.x;
+    let dz = s.goal.y - s.hero.y;
+    const enteringStairs = s.mode === 'toys' &&
+      Number.isInteger(s.goal.routeIndex) && s.goal.routeIndex <= 1;
+    if (enteringStairs && Math.abs(dx) > 0.65 && Math.abs(dz) < 9) dz = 0;
+    const distance = Math.hypot(dx, dz);
     const yaw = Number.isFinite(s.cameraYaw) ? s.cameraYaw : 0;
     const right = dx * Math.cos(yaw) - dz * Math.sin(yaw);
     const forward = -dx * Math.sin(yaw) - dz * Math.cos(yaw);
     const length = Math.hypot(right, forward) || 1;
-    // A touch shorter than a slow software-rendered frame can be missed
-    // entirely. Hold genuine input across a render without altering game speed.
-    return ctx.joystick(right / length, -forward / length, ctx.mobile ? 3500 : 1400);
+    // With 0.5 FPS a 3.5 s full-speed touch jumps several metres past a
+    // 0.35 m waypoint. Reduce stick magnitude near it; preserve enough hold
+    // time for a genuine WebGL frame. Desktop uses shorter keyboard pulses.
+    const strength = ctx.mobile
+      ? Math.max(0.20, Math.min(1, distance / 4))
+      : 1;
+    const duration = ctx.mobile ? 3500 : distance < 2 ? 450 : 950;
+    return ctx.joystick(right / length * strength,
+      -forward / length * strength, duration);
   };
   const stomp = () => ctx.mobile
     ? ctx.tap(ctx.viewport.width - 153, ctx.viewport.height - 61)
@@ -81,15 +90,14 @@ export async function playLevel(ctx, level) {
       await ctx.wait(200);
     } else if (s.goal) {
       // The observer returns read-only, authored waypoints (ruins, bridges, lamps).
-      if (blocked >= 3 && s.mode === 'toys') {
-        await ctx.joystick(sidestep, 0, ctx.mobile ? 3500 : 1400);
-        sidestep = -sidestep;
+      if (s.mode === 'toys' && blocked >= 2) {
+        // A physical jump can clear a real low stair. Never substitute a
+        // synthetic waypoint or mutate game state to satisfy the bot.
         await jump(s.mode);
         blocked = 0;
-      } else {
-        await moveToward(s);
       }
-      if (s.mode === 'toys' && step % 3 === 0) await jump(s.mode);
+      await moveToward(s);
+      if (s.mode === 'toys' && (s.goal.jump || step % 3 === 0)) await jump(s.mode);
       if (s.mode === 'fold' && blocked >= 2) {
         if (ctx.mobile) await tapAction();
         else await ctx.key('Space', 90);

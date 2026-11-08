@@ -6868,7 +6868,7 @@ function start(data) {
   selectCharacter(readHero());
   emit('boot');
   const biome0 = REG.biomes.has(data.biome) ? data.biome : REG.biomes.has(readBiome()) ? readBiome() : DEFAULT_BIOME;
-  buildWorld(Number.isFinite(data.seed) ? data.seed : DEFAULT_SEED, biome0);
+  buildWorld(Number.isFinite(data.seed) ? data.seed : ((Math.random() * 1e9) | 0), biome0);
   resetRun();
   G.state = 'title';
   renderMenu();

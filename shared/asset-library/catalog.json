@@ -1486,7 +1486,30 @@
       ],
       "dependencies": [],
       "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
-      "scope": "static flail pose only; spring chain physics not ported"
+      "scope": "static flail pose only; separate flail-physics module now available"
+    },
+    {
+      "id": "pod-i-nad/animation/flail-physics",
+      "name": "Original flail spring-damped motion and chain points",
+      "kind": "animation",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "flail physics",
+        "spring chain",
+        "weapon animation"
+      ],
+      "tags": [
+        "physics",
+        "animation",
+        "flail",
+        "chain"
+      ],
+      "entry": "../components/pod-i-nad/animations/flail-physics.mjs",
+      "export_name": "createFlailPhysics",
+      "dependencies": [],
+      "scope": "movement and chain positions only; damage/collision/audio external",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
     }
   ]
 }

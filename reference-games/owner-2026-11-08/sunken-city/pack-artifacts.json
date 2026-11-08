@@ -1,0 +1,766 @@
+{
+  "schema_version": 1,
+  "original_html_sha256": "431841ee19b61280f6d92d761f566abc30e6862af22c7a1672fbc983b2078116",
+  "source": "sunken-city-showcase/parts/01-10.htmlpart",
+  "assets": [
+    {
+      "source": "atlas/thumb_0.png",
+      "path": "sunken-city/atlases/thumb_0.png",
+      "bytes": 199944,
+      "sha256": "12ff03f82d9b94e957e000dbf697cbfa9e7f3a4a025e21cdf54eacb398eff9f8"
+    },
+    {
+      "source": "atlas/d2_0.png",
+      "path": "sunken-city/atlases/d2_0.png",
+      "bytes": 264689,
+      "sha256": "7db64c5cd3e013ed88d5ecfabbe592ca58e315081ab6a3e565c9d49c2cc55929"
+    },
+    {
+      "source": "atlas/iso_0.png",
+      "path": "sunken-city/atlases/iso_0.png",
+      "bytes": 432122,
+      "sha256": "8f5173c7a7bb879d3a15ad4284ce363ab18261d1667917585ab781ab230d495a"
+    },
+    {
+      "source": "atlas/iso_1.png",
+      "path": "sunken-city/atlases/iso_1.png",
+      "bytes": 849662,
+      "sha256": "85560a14593c516bd0df97d5ca25f4a240f87a15d5927694412786196009e90c"
+    },
+    {
+      "source": "atlas/iso_2.png",
+      "path": "sunken-city/atlases/iso_2.png",
+      "bytes": 818063,
+      "sha256": "d6719d2226502c01723ee22e7205652ad53b281c231aeafd76c2900f558d8e98"
+    },
+    {
+      "source": "atlas/stack_0.png",
+      "path": "sunken-city/atlases/stack_0.png",
+      "bytes": 99755,
+      "sha256": "b8b1098ac1718c912b6d591caebf2a4bea17ed688bcb1fef4408e94cacf31c8b"
+    },
+    {
+      "source": "atlas/stack_1.png",
+      "path": "sunken-city/atlases/stack_1.png",
+      "bytes": 142190,
+      "sha256": "53e3200f3b31d47ad7d6e25d7c0a4b6cf35facbe232dbd20eb651c270736199c"
+    },
+    {
+      "source": "atlas/stack_2.png",
+      "path": "sunken-city/atlases/stack_2.png",
+      "bytes": 274346,
+      "sha256": "f4d001d18fc21b743dc1d4db87df27d817d7b4771e70594ca3ce47535ed7808e"
+    },
+    {
+      "source": "atlas/stack_3.png",
+      "path": "sunken-city/atlases/stack_3.png",
+      "bytes": 441935,
+      "sha256": "0190f3e5616dc8a30f1c5b31b6dc3ea64fcfc6942797ae62a5c4bbe2b28dc315"
+    },
+    {
+      "source": "atlas/stack_4.png",
+      "path": "sunken-city/atlases/stack_4.png",
+      "bytes": 401837,
+      "sha256": "75c8d86eff33388bd0e7f599432591852c21fac943b1b25e2aa1ee0d01a2ef26"
+    },
+    {
+      "source": "atlas/tile_0.png",
+      "path": "sunken-city/atlases/tile_0.png",
+      "bytes": 78135,
+      "sha256": "5bdd2f7cbf6e2236a5176007b43b6465fb5d2589d60eaf544bdba5d15db7afe2"
+    },
+    {
+      "source": "atlas/tile_1.png",
+      "path": "sunken-city/atlases/tile_1.png",
+      "bytes": 73318,
+      "sha256": "f70eb038e6bd128986065dbeaa78c17c7e6860df86ee5172bf7f4bd94fa1be5b"
+    },
+    {
+      "source": "glb/air_bubble.json",
+      "path": "sunken-city/3d/glb/air_bubble.glb",
+      "bytes": 45056,
+      "sha256": "6831c1e827db50698edc6b4a1c205cf2a5b68193d57ddc3ce78eff84380843b3"
+    },
+    {
+      "source": "glb/anchor.json",
+      "path": "sunken-city/3d/glb/anchor.glb",
+      "bytes": 59408,
+      "sha256": "416c12ad00687cdc95809b65aa2f887a63a6c65f5861a1e29e46f445d6ce4477"
+    },
+    {
+      "source": "glb/anemone.json",
+      "path": "sunken-city/3d/glb/anemone.glb",
+      "bytes": 62060,
+      "sha256": "7261a87a80171a4303f2544e9286d52484df341e8fd75895328ab252ed000ecc"
+    },
+    {
+      "source": "glb/angel_statue.json",
+      "path": "sunken-city/3d/glb/angel_statue.glb",
+      "bytes": 64504,
+      "sha256": "90d219dd5a5aa22912e51fb930559c7d43dc17e480ca43b62ee354247a952857"
+    },
+    {
+      "source": "glb/angler.json",
+      "path": "sunken-city/3d/glb/angler.glb",
+      "bytes": 134236,
+      "sha256": "3d7c837b0ecf179d57aa66501bd8c8d3a4e351508768c5b6627758b66ce638d5"
+    },
+    {
+      "source": "glb/arch.json",
+      "path": "sunken-city/3d/glb/arch.glb",
+      "bytes": 207904,
+      "sha256": "bd5df7c604c294e05518a996931a0452298735fb941ef5b5466d42ef98812670"
+    },
+    {
+      "source": "glb/barrel.json",
+      "path": "sunken-city/3d/glb/barrel.glb",
+      "bytes": 46236,
+      "sha256": "429aee339338a0bdb2733c61c1b4190391592dbb7c9f436e517524e9a94d4e3f"
+    },
+    {
+      "source": "glb/bathyscaphe.json",
+      "path": "sunken-city/3d/glb/bathyscaphe.glb",
+      "bytes": 150824,
+      "sha256": "bac908bc6f0e61db3940dc61474eea8f7a5dec987f575146c9c938e16588460c"
+    },
+    {
+      "source": "glb/bridge.json",
+      "path": "sunken-city/3d/glb/bridge.glb",
+      "bytes": 450404,
+      "sha256": "8f47cf078e5a8478433753525262bba0f96c4c1b7b73a0e139a7b4007209dcb5"
+    },
+    {
+      "source": "glb/bridge_broken.json",
+      "path": "sunken-city/3d/glb/bridge_broken.glb",
+      "bytes": 568608,
+      "sha256": "749961528677895ad3a36fb9a1135c7fdd619ceec0eb17a978d9880d55b7d9d7"
+    },
+    {
+      "source": "glb/bubble.json",
+      "path": "sunken-city/3d/glb/bubble.glb",
+      "bytes": 35484,
+      "sha256": "864175eb7e2fe70cb8fce7623c0989acd6106b54d4e6c076005bf1da05f15d6d"
+    },
+    {
+      "source": "glb/bubble_gun.json",
+      "path": "sunken-city/3d/glb/bubble_gun.glb",
+      "bytes": 39132,
+      "sha256": "a615842b38da11e5a2b83da51196cca0467fa791c996b2205c8ea6d5530ecc51"
+    },
+    {
+      "source": "glb/cannon.json",
+      "path": "sunken-city/3d/glb/cannon.glb",
+      "bytes": 32372,
+      "sha256": "6abcb113b66431054ac92f4c320fc63c530382ed5bad68c37655b67282e1a0b1"
+    },
+    {
+      "source": "glb/cathedral_bell.json",
+      "path": "sunken-city/3d/glb/cathedral_bell.glb",
+      "bytes": 187672,
+      "sha256": "2809e00ba77ea5c2cae87c940c758016739a4678427d361c29d097cc8f6f03b9"
+    },
+    {
+      "source": "glb/cathedral_tower.json",
+      "path": "sunken-city/3d/glb/cathedral_tower.glb",
+      "bytes": 922996,
+      "sha256": "1329170cab76855a333aff51c5909d4f29ce6ab76da49e30b2393693201b9ad0"
+    },
+    {
+      "source": "glb/column.json",
+      "path": "sunken-city/3d/glb/column.glb",
+      "bytes": 45940,
+      "sha256": "9d67a2dfeef92ceb7513b5e11d4df229845c95f63a3d20074f8b5bd16877d519"
+    },
+    {
+      "source": "glb/column_broken.json",
+      "path": "sunken-city/3d/glb/column_broken.glb",
+      "bytes": 78344,
+      "sha256": "ac496617495d3cb89fa975dc7251cf5ceb69a8b891547daac94d2d798bd277fc"
+    },
+    {
+      "source": "glb/coral_blade.json",
+      "path": "sunken-city/3d/glb/coral_blade.glb",
+      "bytes": 15372,
+      "sha256": "cc74c11fc0e49ec84a769d9a9c0f37610cf745125e53705d752551b93961de2f"
+    },
+    {
+      "source": "glb/coral_brain.json",
+      "path": "sunken-city/3d/glb/coral_brain.glb",
+      "bytes": 46700,
+      "sha256": "29c50d0e56bc756d8eca2f8e81f83ffdbae686bc838ab7183f0482a8f5942963"
+    },
+    {
+      "source": "glb/coral_branch_orange.json",
+      "path": "sunken-city/3d/glb/coral_branch_orange.glb",
+      "bytes": 51036,
+      "sha256": "ed08220362fd1d57f6e5c205ecf6bfc43a994ac62354058194a0869dcf40bd54"
+    },
+    {
+      "source": "glb/coral_branch_pink.json",
+      "path": "sunken-city/3d/glb/coral_branch_pink.glb",
+      "bytes": 51580,
+      "sha256": "821531a9e5d1116dac2e031e13f8e9f203058da63539a2f6601490bfad9a35f9"
+    },
+    {
+      "source": "glb/coral_branch_violet.json",
+      "path": "sunken-city/3d/glb/coral_branch_violet.glb",
+      "bytes": 51036,
+      "sha256": "e4be5e509c9bccc0d2b478ed007b4041074b4831bb99edb89a2096a24c22492d"
+    },
+    {
+      "source": "glb/crate.json",
+      "path": "sunken-city/3d/glb/crate.glb",
+      "bytes": 5192,
+      "sha256": "14a77ac895bc96f720760cdf0a735896a13211901ea06f1fd070048898b1f5b9"
+    },
+    {
+      "source": "glb/diving_helmet.json",
+      "path": "sunken-city/3d/glb/diving_helmet.glb",
+      "bytes": 68316,
+      "sha256": "c4a1dd6c6d7c99add9e4f34a3f4c45d4de7ebab52bfa1355d91ee152e5340759"
+    },
+    {
+      "source": "glb/dome_section.json",
+      "path": "sunken-city/3d/glb/dome_section.glb",
+      "bytes": 571452,
+      "sha256": "99a409bdf620fbf6950fc090d90a239f1d7812b6b93d1951c9b6f1b063c3d5cd"
+    },
+    {
+      "source": "glb/doubloon.json",
+      "path": "sunken-city/3d/glb/doubloon.glb",
+      "bytes": 9580,
+      "sha256": "c09330adc9aee22c4404cb093fc71266a694e671605765fdc6251a00e7e18e21"
+    },
+    {
+      "source": "glb/eel.json",
+      "path": "sunken-city/3d/glb/eel.glb",
+      "bytes": 42360,
+      "sha256": "c7730a6b7fe9b37e2fc072a91ad88493338b58bf0a2817a4035d8758af70b426"
+    },
+    {
+      "source": "glb/galleon.json",
+      "path": "sunken-city/3d/glb/galleon.glb",
+      "bytes": 1399396,
+      "sha256": "cb34cef6ff9ef21741344cb7334104171782d66f13ffba17c58a3ce824e20963"
+    },
+    {
+      "source": "glb/gargoyle.json",
+      "path": "sunken-city/3d/glb/gargoyle.glb",
+      "bytes": 54828,
+      "sha256": "d9a959653823ff68b3cf4b62ff060e1c47e8cfd82137deccc5b63b4916c89a5d"
+    },
+    {
+      "source": "glb/glow_fish_amber.json",
+      "path": "sunken-city/3d/glb/glow_fish_amber.glb",
+      "bytes": 18312,
+      "sha256": "d3c4b8684d4f16585e9817d971ab3a6c3f7ad0dcb85a1d32bf3805a64d4b8383"
+    },
+    {
+      "source": "glb/glow_fish_emerald.json",
+      "path": "sunken-city/3d/glb/glow_fish_emerald.glb",
+      "bytes": 18320,
+      "sha256": "0ee74603869b2a7dcbc0d4f870084c280c9a629b488ad315e3802873fb6573a3"
+    },
+    {
+      "source": "glb/glow_fish_teal.json",
+      "path": "sunken-city/3d/glb/glow_fish_teal.glb",
+      "bytes": 18308,
+      "sha256": "2843d92921ca0da5d0f827b8825946c015d7863e11444cd1dc8a758c8b8e0ca7"
+    },
+    {
+      "source": "glb/glow_fish_violet.json",
+      "path": "sunken-city/3d/glb/glow_fish_violet.glb",
+      "bytes": 18316,
+      "sha256": "c2fb66fb81bb91e425c5f41ade91ec9b2a1dbae3c9284ddd817adb2f0cb05fab"
+    },
+    {
+      "source": "glb/hand_sonar.json",
+      "path": "sunken-city/3d/glb/hand_sonar.glb",
+      "bytes": 30940,
+      "sha256": "ac9439f363ba4d327b338e561fa25756ff61268d487927bcf55ef2d51ed40b81"
+    },
+    {
+      "source": "glb/harpoon.json",
+      "path": "sunken-city/3d/glb/harpoon.glb",
+      "bytes": 6696,
+      "sha256": "5a47714056f76f0d8371935c567ee33472985d9e3e3faa6997d9eb84da6fc37a"
+    },
+    {
+      "source": "glb/harpoon_gun.json",
+      "path": "sunken-city/3d/glb/harpoon_gun.glb",
+      "bytes": 10400,
+      "sha256": "36dc2b533bffb2d0ccb2cc1b06542d5061f0f3783011f7e7deea3f3937dfed64"
+    },
+    {
+      "source": "glb/hermit_crab.json",
+      "path": "sunken-city/3d/glb/hermit_crab.glb",
+      "bytes": 73160,
+      "sha256": "a3937e88316fd8a467aa68096d5f5e76871d2163ca1d990fcdb19059d6f41073"
+    },
+    {
+      "source": "glb/hot_vent.json",
+      "path": "sunken-city/3d/glb/hot_vent.glb",
+      "bytes": 168976,
+      "sha256": "6801dfdc08c094b08818705f1302053cad08a5497c6b54a7fef3bb842da3b3a6"
+    },
+    {
+      "source": "glb/iron_gate.json",
+      "path": "sunken-city/3d/glb/iron_gate.glb",
+      "bytes": 113572,
+      "sha256": "4a9cb064126c785bc8b113e0da5b773736c0d08c333fe0a042b1d1a2d0a2de28"
+    },
+    {
+      "source": "glb/jellyfish_teal.json",
+      "path": "sunken-city/3d/glb/jellyfish_teal.glb",
+      "bytes": 80684,
+      "sha256": "ae715999c74c38c8d5b1363b924058b31a3f52f489a08c47dcde6aef7f96f539"
+    },
+    {
+      "source": "glb/jellyfish_violet.json",
+      "path": "sunken-city/3d/glb/jellyfish_violet.glb",
+      "bytes": 80724,
+      "sha256": "1bcb542396d434950dc7604d1f2889bc7b3013f0b1811bd615cbb040af2f9664"
+    },
+    {
+      "source": "glb/kelp_mid.json",
+      "path": "sunken-city/3d/glb/kelp_mid.glb",
+      "bytes": 48080,
+      "sha256": "5f3bbd56c5b4cb880e2c2626623e38a1f3f3cf3728cb715a73d83e70787459ad"
+    },
+    {
+      "source": "glb/kelp_short.json",
+      "path": "sunken-city/3d/glb/kelp_short.glb",
+      "bytes": 29224,
+      "sha256": "7f2160b873a930ee33ec57d1a9313a60582ec98818c62eacc89b343aad4132c7"
+    },
+    {
+      "source": "glb/kelp_tall.json",
+      "path": "sunken-city/3d/glb/kelp_tall.glb",
+      "bytes": 72880,
+      "sha256": "1e8ded4300836b21783555f3db253e943ad226ab768e250d2be77d57d4173b6c"
+    },
+    {
+      "source": "glb/kraken_tentacle.json",
+      "path": "sunken-city/3d/glb/kraken_tentacle.glb",
+      "bytes": 110892,
+      "sha256": "c7a6bbb580f295a2b64b35102a3a5641a6663d5239dcfd42fd7158702748d29d"
+    },
+    {
+      "source": "glb/lancet_window.json",
+      "path": "sunken-city/3d/glb/lancet_window.glb",
+      "bytes": 46556,
+      "sha256": "1092153f26bee48d9ed684ffb17f2f6e782d1bb0844e6f4370266676494a9db1"
+    },
+    {
+      "source": "glb/lantern_fish.json",
+      "path": "sunken-city/3d/glb/lantern_fish.glb",
+      "bytes": 22884,
+      "sha256": "2763680b61b03d9895847a9f869c1b7ca9be542f563027c652eb66bd19fa98cc"
+    },
+    {
+      "source": "glb/manta.json",
+      "path": "sunken-city/3d/glb/manta.glb",
+      "bytes": 41784,
+      "sha256": "853c648531a312322809774091c6eca54343c09f86deee038c4fafb7498c0085"
+    },
+    {
+      "source": "glb/moss_clump_amber.json",
+      "path": "sunken-city/3d/glb/moss_clump_amber.glb",
+      "bytes": 25936,
+      "sha256": "4528ac8cfc21b0e39c1dc60413351fe1c454987760187a899d4a090dd9ae48c1"
+    },
+    {
+      "source": "glb/moss_clump_azure.json",
+      "path": "sunken-city/3d/glb/moss_clump_azure.glb",
+      "bytes": 25940,
+      "sha256": "a31c568759fc3abe861adf57d1cdce442093a300a08cfca8f97602578d4af211"
+    },
+    {
+      "source": "glb/moss_clump_crimson.json",
+      "path": "sunken-city/3d/glb/moss_clump_crimson.glb",
+      "bytes": 27780,
+      "sha256": "63978eed8b06e9e0b496c7d692d4b72238453bada2023462e231f1e1fa7641a5"
+    },
+    {
+      "source": "glb/moss_clump_emerald.json",
+      "path": "sunken-city/3d/glb/moss_clump_emerald.glb",
+      "bytes": 27784,
+      "sha256": "7bb24beeffb84bb7f12843d734fbd55b3639da7bfa19512da827883dfe596691"
+    },
+    {
+      "source": "glb/moss_clump_teal.json",
+      "path": "sunken-city/3d/glb/moss_clump_teal.glb",
+      "bytes": 24364,
+      "sha256": "d9e24602d05d93257bf6b8cd5b7bdefe64c8a0bcce7b5f5e32a6e3f3afa864bd"
+    },
+    {
+      "source": "glb/moss_clump_violet.json",
+      "path": "sunken-city/3d/glb/moss_clump_violet.glb",
+      "bytes": 25472,
+      "sha256": "1dbb0f515397c25186ad33acd8381387a9f26aa9255ab259953fdcb49879e939"
+    },
+    {
+      "source": "glb/nautilus.json",
+      "path": "sunken-city/3d/glb/nautilus.glb",
+      "bytes": 47824,
+      "sha256": "6df00e0db2bc9f043a61fb7c38de9274179b3cf76af552e6fa6222a75ff10707"
+    },
+    {
+      "source": "glb/pearl_clam.json",
+      "path": "sunken-city/3d/glb/pearl_clam.glb",
+      "bytes": 31844,
+      "sha256": "146cabcbed6678d79144bcaa1bc764a02ae6eba03d6b6809e6d96c123643704d"
+    },
+    {
+      "source": "glb/scout_drone.json",
+      "path": "sunken-city/3d/glb/scout_drone.glb",
+      "bytes": 59460,
+      "sha256": "54e10bca1e5281f603193ea96d51e61516d6a057d18e21ede9111296caaab5d9"
+    },
+    {
+      "source": "glb/sea_fan.json",
+      "path": "sunken-city/3d/glb/sea_fan.glb",
+      "bytes": 27196,
+      "sha256": "cc08b3ce8761bba234a4ce312dee4342545c983898c518b1e6068ce2a1045468"
+    },
+    {
+      "source": "glb/sea_mine.json",
+      "path": "sunken-city/3d/glb/sea_mine.glb",
+      "bytes": 44992,
+      "sha256": "f6ab0bda6bc9fd5c834c87b05ab501734bf469a97beed17068b05861b5f6357a"
+    },
+    {
+      "source": "glb/sea_scooter.json",
+      "path": "sunken-city/3d/glb/sea_scooter.glb",
+      "bytes": 37756,
+      "sha256": "a1aa36b7e81276d16d978bfc4f77e05a4e3328175b1477de3ab802cb4594d8fd"
+    },
+    {
+      "source": "glb/seagrass.json",
+      "path": "sunken-city/3d/glb/seagrass.glb",
+      "bytes": 55824,
+      "sha256": "c20813167455360ba4b09002a216f7e577cc2ace461301a0397bad3e460f5798"
+    },
+    {
+      "source": "glb/seahorse.json",
+      "path": "sunken-city/3d/glb/seahorse.glb",
+      "bytes": 28520,
+      "sha256": "3d0cf77e02c94534305609b75997b437c5469bbcbe03eaac97ddeb55dc2513e1"
+    },
+    {
+      "source": "glb/ship_wheel.json",
+      "path": "sunken-city/3d/glb/ship_wheel.glb",
+      "bytes": 27652,
+      "sha256": "da8e594d1f1d4134fcd40e0e1ec9349329a587bc0dba28100d537da8148f4e36"
+    },
+    {
+      "source": "glb/shock_spear.json",
+      "path": "sunken-city/3d/glb/shock_spear.glb",
+      "bytes": 17172,
+      "sha256": "c5f6c0fe38c74d9d06c54180f2d625998f2c4e9a3f180256b5f47ac9b8947b92"
+    },
+    {
+      "source": "glb/siphonophore.json",
+      "path": "sunken-city/3d/glb/siphonophore.glb",
+      "bytes": 34996,
+      "sha256": "158d5fd2413bb31b85b03bdbfec12d11c2e262c9eeb808a4e3b472228ddc5a11"
+    },
+    {
+      "source": "glb/stairs.json",
+      "path": "sunken-city/3d/glb/stairs.glb",
+      "bytes": 153460,
+      "sha256": "cc28dcf657000f67684a6ed9c984210e5f173726a84327bf77b87e195c7214b0"
+    },
+    {
+      "source": "glb/starfish.json",
+      "path": "sunken-city/3d/glb/starfish.glb",
+      "bytes": 13740,
+      "sha256": "d5e4de91ae742b05e6be4c363177524e2b747ff30ed1de3f88bdec4bacfdbf09"
+    },
+    {
+      "source": "glb/street_lamp.json",
+      "path": "sunken-city/3d/glb/street_lamp.glb",
+      "bytes": 33456,
+      "sha256": "80d2da737c5eea06372b36c04b7feb137b442b681e2aca2c2697cbdb02238520"
+    },
+    {
+      "source": "glb/submarine.json",
+      "path": "sunken-city/3d/glb/submarine.glb",
+      "bytes": 106580,
+      "sha256": "19c0b6b0fc7f759a777076df7bfa636225e91de21676191d16ca1e927d964609"
+    },
+    {
+      "source": "glb/submarine_wreck.json",
+      "path": "sunken-city/3d/glb/submarine_wreck.glb",
+      "bytes": 459928,
+      "sha256": "0aa60dac26742b7573e86ada5a9e5cef466a8b673e465af78727acbd9b4ad80a"
+    },
+    {
+      "source": "glb/torpedo.json",
+      "path": "sunken-city/3d/glb/torpedo.glb",
+      "bytes": 31300,
+      "sha256": "d0e6ec6c96836db41ad844bc604a95a991204743b10557d384ee8aac1e52fd7c"
+    },
+    {
+      "source": "glb/treasure_chest.json",
+      "path": "sunken-city/3d/glb/treasure_chest.glb",
+      "bytes": 18428,
+      "sha256": "e4d5a0cd25d00de012e95fe83eab5de902d0f4b56e2c97a61912a62caf983ef7"
+    },
+    {
+      "source": "glb/trident.json",
+      "path": "sunken-city/3d/glb/trident.glb",
+      "bytes": 12012,
+      "sha256": "298b48e33e9dc0e20c1ce717e28212540282a97a5654e2c311fc89f535bcd2c6"
+    },
+    {
+      "source": "glb/tube_sponge.json",
+      "path": "sunken-city/3d/glb/tube_sponge.glb",
+      "bytes": 56704,
+      "sha256": "2e35762da8ea3731cb53b994da23f21487371656d00bb5fe1b827add7e64e283"
+    },
+    {
+      "source": "glb/viaduct.json",
+      "path": "sunken-city/3d/glb/viaduct.glb",
+      "bytes": 694780,
+      "sha256": "88354040cc1d32f996fd89abf784f86edb416016fc4f180c129cb2f8741447a7"
+    },
+    {
+      "source": "glb/whale_skeleton.json",
+      "path": "sunken-city/3d/glb/whale_skeleton.glb",
+      "bytes": 586320,
+      "sha256": "21ff5247155de0b47c421246e8347912fa0c32d06757d6512595acf3dbd6a08e"
+    },
+    {
+      "source": "blocks/bone.json",
+      "path": "sunken-city/3d/blocks/bone.glb",
+      "bytes": 2212,
+      "sha256": "978cbe32dce5c954b4c3ad24d6197c3f0209994e8a4597e45c326d17d6fafdda"
+    },
+    {
+      "source": "blocks/brass.json",
+      "path": "sunken-city/3d/blocks/brass.glb",
+      "bytes": 2032,
+      "sha256": "bac9be4f7af4b4aecf0135d92e2f1984a59ed45dedeb1876660011d1211289c5"
+    },
+    {
+      "source": "blocks/brick.json",
+      "path": "sunken-city/3d/blocks/brick.glb",
+      "bytes": 3160,
+      "sha256": "d3e1b572bdbbcb8ec2d9b35925ce63ba6cbfbb7855fd46447b8111ae536213b6"
+    },
+    {
+      "source": "blocks/brick_dark.json",
+      "path": "sunken-city/3d/blocks/brick_dark.glb",
+      "bytes": 2176,
+      "sha256": "cb9a2bbefefa87f8f7d8b3a3d09b25d82541353f8286f03125421c4bbf1fe4f9"
+    },
+    {
+      "source": "blocks/caustics.json",
+      "path": "sunken-city/3d/blocks/caustics.glb",
+      "bytes": 3864,
+      "sha256": "d701536344f95ebb907664b49ac0aca5e0bcdbf983ff6857c92ced8e0e19c7f5"
+    },
+    {
+      "source": "blocks/column.json",
+      "path": "sunken-city/3d/blocks/column.glb",
+      "bytes": 3000,
+      "sha256": "4a763b628bb6251f6a2bfaa0bedd57559a54606f58f8e5170bf12693a7ed7055"
+    },
+    {
+      "source": "blocks/coral_orange.json",
+      "path": "sunken-city/3d/blocks/coral_orange.glb",
+      "bytes": 2184,
+      "sha256": "c7dd9795d2f324f53b7450c48e60564c33f9eb622ea6b6a2571f2ad374c76a32"
+    },
+    {
+      "source": "blocks/coral_pink.json",
+      "path": "sunken-city/3d/blocks/coral_pink.glb",
+      "bytes": 2220,
+      "sha256": "4b2dd7909c158945984c35826f023d4ac6a0540afea893c41ff94b7d5e7f1af3"
+    },
+    {
+      "source": "blocks/coral_violet.json",
+      "path": "sunken-city/3d/blocks/coral_violet.glb",
+      "bytes": 2268,
+      "sha256": "68723cc3047da5baa4a9a2f3e7d26a34d3f27e9fa56047e8d9b4e36489b06aab"
+    },
+    {
+      "source": "blocks/dome.json",
+      "path": "sunken-city/3d/blocks/dome.glb",
+      "bytes": 2448,
+      "sha256": "f659b927e709c3931fb64db97fa887eeaefe107dbb3274fb146ba4745d713134"
+    },
+    {
+      "source": "blocks/glass_amber.json",
+      "path": "sunken-city/3d/blocks/glass_amber.glb",
+      "bytes": 2884,
+      "sha256": "f55b04d8e5dbae0c68b130eab9c0178847ae39b217a9d0569dea6ede0ce93beb"
+    },
+    {
+      "source": "blocks/glass_azure.json",
+      "path": "sunken-city/3d/blocks/glass_azure.glb",
+      "bytes": 3024,
+      "sha256": "03ac3dac6d7b93bd8f1766b35d14ebaac4b7f88b92a74f01275f13f8ed206293"
+    },
+    {
+      "source": "blocks/glass_rose.json",
+      "path": "sunken-city/3d/blocks/glass_rose.glb",
+      "bytes": 2900,
+      "sha256": "83a50ffa9d7578004c844b79a268bad9b32c0a9bf23932a0239342cfc36694db"
+    },
+    {
+      "source": "blocks/gold.json",
+      "path": "sunken-city/3d/blocks/gold.glb",
+      "bytes": 2168,
+      "sha256": "da604a8bdb709e1f06ed9fb12259887fff20ae72baeaceb585f74a02bc41c141"
+    },
+    {
+      "source": "blocks/hull_copper.json",
+      "path": "sunken-city/3d/blocks/hull_copper.glb",
+      "bytes": 2028,
+      "sha256": "c4d830c3984511ef0966929ea82adc3f2416cf378d1be0f9713f23f522e8faec"
+    },
+    {
+      "source": "blocks/moss_amber.json",
+      "path": "sunken-city/3d/blocks/moss_amber.glb",
+      "bytes": 2796,
+      "sha256": "260554c65b0bf47d6f4400f40e8586b2f47c59d757fc701845c7405861295617"
+    },
+    {
+      "source": "blocks/moss_azure.json",
+      "path": "sunken-city/3d/blocks/moss_azure.glb",
+      "bytes": 2808,
+      "sha256": "e84ee7193d18ea82547f4c4061c55cec073367ba6134979313425e1328632445"
+    },
+    {
+      "source": "blocks/moss_crimson.json",
+      "path": "sunken-city/3d/blocks/moss_crimson.glb",
+      "bytes": 2776,
+      "sha256": "ef3d6c4413f2abafc695a9db3848b3eb7a8202bf936b0e2224354a82dd0270c7"
+    },
+    {
+      "source": "blocks/moss_emerald.json",
+      "path": "sunken-city/3d/blocks/moss_emerald.glb",
+      "bytes": 2792,
+      "sha256": "db83706347e4c679bc4d698b756ca52f5679437c32cc3a464b431c586b327294"
+    },
+    {
+      "source": "blocks/moss_teal.json",
+      "path": "sunken-city/3d/blocks/moss_teal.glb",
+      "bytes": 2864,
+      "sha256": "5048fc9598e3f006ce3d18dfa2c002815d3289c3d61967649c6a77b392ec03b1"
+    },
+    {
+      "source": "blocks/moss_violet.json",
+      "path": "sunken-city/3d/blocks/moss_violet.glb",
+      "bytes": 2780,
+      "sha256": "cc747eb47276ba08ee89378dff1a17c1581df89c8c9e1ada02b1ede7b5d768f2"
+    },
+    {
+      "source": "blocks/mossy_amber.json",
+      "path": "sunken-city/3d/blocks/mossy_amber.glb",
+      "bytes": 5912,
+      "sha256": "2baabe7ab5783cb591c5413acaf93ba85464eeddd4761f5fd3e7d564c590e07b"
+    },
+    {
+      "source": "blocks/mossy_azure.json",
+      "path": "sunken-city/3d/blocks/mossy_azure.glb",
+      "bytes": 5916,
+      "sha256": "eaf9b3022912f3a8bd3b69868dc672310e15d8cf557265b451629d83471b5844"
+    },
+    {
+      "source": "blocks/mossy_crimson.json",
+      "path": "sunken-city/3d/blocks/mossy_crimson.glb",
+      "bytes": 5888,
+      "sha256": "bced413ddb099037137c69a7a9c87f64b97d5e15041253f13f46f56ff44def80"
+    },
+    {
+      "source": "blocks/mossy_emerald.json",
+      "path": "sunken-city/3d/blocks/mossy_emerald.glb",
+      "bytes": 5908,
+      "sha256": "868f9f984f6a0768766f578b25ba78361eb4df6849595f4df87ae04b8364915c"
+    },
+    {
+      "source": "blocks/mossy_teal.json",
+      "path": "sunken-city/3d/blocks/mossy_teal.glb",
+      "bytes": 5960,
+      "sha256": "dcdd266914b84eac59144da2bd5bdd1aca41fd8e1ec7cd1bb714ddcbc27e9534"
+    },
+    {
+      "source": "blocks/mossy_violet.json",
+      "path": "sunken-city/3d/blocks/mossy_violet.glb",
+      "bytes": 5896,
+      "sha256": "5cdd062613c8a0a2e9ba4a591f798afb1b4d3d2df361f9291523fead5ac36795"
+    },
+    {
+      "source": "blocks/paving.json",
+      "path": "sunken-city/3d/blocks/paving.glb",
+      "bytes": 2028,
+      "sha256": "22af5be0fee328cccf7f7e217aedd6215914fc89208d0643005e449a68692c98"
+    },
+    {
+      "source": "blocks/planks.json",
+      "path": "sunken-city/3d/blocks/planks.glb",
+      "bytes": 2060,
+      "sha256": "e23cb7d978196acda68af3a82e0c2642fa4d48185148a70452e8c9ceea016605"
+    },
+    {
+      "source": "blocks/planks_rot.json",
+      "path": "sunken-city/3d/blocks/planks_rot.glb",
+      "bytes": 2320,
+      "sha256": "3a330ac87a457d9936e8a0e1bdea99e142524697ddf88f48c04febb7b0df960d"
+    },
+    {
+      "source": "blocks/rock.json",
+      "path": "sunken-city/3d/blocks/rock.glb",
+      "bytes": 2144,
+      "sha256": "462e8ff048ff4c385fa81ae36a856a1a1e647611e31b5c4ae78677270c8d3677"
+    },
+    {
+      "source": "blocks/rust.json",
+      "path": "sunken-city/3d/blocks/rust.glb",
+      "bytes": 2148,
+      "sha256": "f6f12f79f6044c9ccaf90d760ebd4f74e80b3003fb816e4ad927b50bf6dbc502"
+    },
+    {
+      "source": "blocks/sail.json",
+      "path": "sunken-city/3d/blocks/sail.glb",
+      "bytes": 2048,
+      "sha256": "d8be3b39c01ec9c3e1013ec679ddf7356f351f4358079ed8887d21f9ae6940d0"
+    },
+    {
+      "source": "blocks/sand.json",
+      "path": "sunken-city/3d/blocks/sand.glb",
+      "bytes": 3244,
+      "sha256": "a568d0b90131d98316e14124050937e2327ad456db49f294df8f053af3c3b4cf"
+    },
+    {
+      "source": "blocks/sand_shells.json",
+      "path": "sunken-city/3d/blocks/sand_shells.glb",
+      "bytes": 3244,
+      "sha256": "bee7453f29a155d2fe7936d5864c4eb19bc29094bbaa64b7ba7f3a2602469dcd"
+    },
+    {
+      "source": "blocks/silt.json",
+      "path": "sunken-city/3d/blocks/silt.glb",
+      "bytes": 2104,
+      "sha256": "8ee73ffae7adadef3d4c346e0639fe1053d7f3d95dc2aedfe6199d72d7023a17"
+    },
+    {
+      "source": "blocks/tracery.json",
+      "path": "sunken-city/3d/blocks/tracery.glb",
+      "bytes": 3048,
+      "sha256": "3b04760ca423a09922114b0f465a432ee31b900f7e41219f36f9d47cb3b0e372"
+    },
+    {
+      "source": "blocks/vent.json",
+      "path": "sunken-city/3d/blocks/vent.glb",
+      "bytes": 3856,
+      "sha256": "edb1a98a41c41793a97eb4c7b99323992d38873c38005a54d5ea703cd038c3b3"
+    }
+  ],
+  "total_glb": 114,
+  "total_atlases": 12,
+  "note": "Original extracted bytes. Full 1405-file ZIP contains additional standalone PNG, VOX, OBJ, MTL and scripts."
+}

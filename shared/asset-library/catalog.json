@@ -993,6 +993,266 @@
       "dependencies": [
         "original game uniforms and shader composition"
       ]
+    },
+    {
+      "id": "pod-i-nad/texture/atlas",
+      "name": "Original atlas pixel texture",
+      "kind": "texture",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "original pixel art",
+        "texture",
+        "sprite",
+        "atlas"
+      ],
+      "tags": [
+        "png",
+        "nearest",
+        "pixel-art",
+        "atlas"
+      ],
+      "entry": "../components/pod-i-nad/textures/embedded-assets.mjs",
+      "export_name": "loadTexture",
+      "asset_key": "atlas",
+      "dependencies": [
+        "Three.js TextureLoader"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/texture/weapons",
+      "name": "Original weapons pixel texture",
+      "kind": "texture",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "original pixel art",
+        "texture",
+        "sprite",
+        "weapons"
+      ],
+      "tags": [
+        "png",
+        "nearest",
+        "pixel-art",
+        "weapons"
+      ],
+      "entry": "../components/pod-i-nad/textures/embedded-assets.mjs",
+      "export_name": "loadTexture",
+      "asset_key": "weapons",
+      "dependencies": [
+        "Three.js TextureLoader"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/texture/heroes/wanderer",
+      "name": "Original heroes.wanderer pixel texture",
+      "kind": "texture",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "original pixel art",
+        "texture",
+        "sprite",
+        "heroes.wanderer"
+      ],
+      "tags": [
+        "png",
+        "nearest",
+        "pixel-art",
+        "heroes.wanderer"
+      ],
+      "entry": "../components/pod-i-nad/textures/embedded-assets.mjs",
+      "export_name": "loadTexture",
+      "asset_key": "heroes.wanderer",
+      "dependencies": [
+        "Three.js TextureLoader"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/texture/heroes/keeper_old",
+      "name": "Original heroes.keeper_old pixel texture",
+      "kind": "texture",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "original pixel art",
+        "texture",
+        "sprite",
+        "heroes.keeper_old"
+      ],
+      "tags": [
+        "png",
+        "nearest",
+        "pixel-art",
+        "heroes.keeper_old"
+      ],
+      "entry": "../components/pod-i-nad/textures/embedded-assets.mjs",
+      "export_name": "loadTexture",
+      "asset_key": "heroes.keeper_old",
+      "dependencies": [
+        "Three.js TextureLoader"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/texture/heroes/fisher",
+      "name": "Original heroes.fisher pixel texture",
+      "kind": "texture",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "original pixel art",
+        "texture",
+        "sprite",
+        "heroes.fisher"
+      ],
+      "tags": [
+        "png",
+        "nearest",
+        "pixel-art",
+        "heroes.fisher"
+      ],
+      "entry": "../components/pod-i-nad/textures/embedded-assets.mjs",
+      "export_name": "loadTexture",
+      "asset_key": "heroes.fisher",
+      "dependencies": [
+        "Three.js TextureLoader"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/texture/heroes/keeper",
+      "name": "Original heroes.keeper pixel texture",
+      "kind": "texture",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "original pixel art",
+        "texture",
+        "sprite",
+        "heroes.keeper"
+      ],
+      "tags": [
+        "png",
+        "nearest",
+        "pixel-art",
+        "heroes.keeper"
+      ],
+      "entry": "../components/pod-i-nad/textures/embedded-assets.mjs",
+      "export_name": "loadTexture",
+      "asset_key": "heroes.keeper",
+      "dependencies": [
+        "Three.js TextureLoader"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/texture/hero",
+      "name": "Original hero pixel texture",
+      "kind": "texture",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "original pixel art",
+        "texture",
+        "sprite",
+        "hero"
+      ],
+      "tags": [
+        "png",
+        "nearest",
+        "pixel-art",
+        "hero"
+      ],
+      "entry": "../components/pod-i-nad/textures/embedded-assets.mjs",
+      "export_name": "loadTexture",
+      "asset_key": "hero",
+      "dependencies": [
+        "Three.js TextureLoader"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/texture/coin",
+      "name": "Original coin pixel texture",
+      "kind": "texture",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "original pixel art",
+        "texture",
+        "sprite",
+        "coin"
+      ],
+      "tags": [
+        "png",
+        "nearest",
+        "pixel-art",
+        "coin"
+      ],
+      "entry": "../components/pod-i-nad/textures/embedded-assets.mjs",
+      "export_name": "loadTexture",
+      "asset_key": "coin",
+      "dependencies": [
+        "Three.js TextureLoader"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/texture/hearts",
+      "name": "Original hearts pixel texture",
+      "kind": "texture",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "original pixel art",
+        "texture",
+        "sprite",
+        "hearts"
+      ],
+      "tags": [
+        "png",
+        "nearest",
+        "pixel-art",
+        "hearts"
+      ],
+      "entry": "../components/pod-i-nad/textures/embedded-assets.mjs",
+      "export_name": "loadTexture",
+      "asset_key": "hearts",
+      "dependencies": [
+        "Three.js TextureLoader"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/texture/water",
+      "name": "Original water pixel texture",
+      "kind": "texture",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "original pixel art",
+        "texture",
+        "sprite",
+        "water"
+      ],
+      "tags": [
+        "png",
+        "nearest",
+        "pixel-art",
+        "water"
+      ],
+      "entry": "../components/pod-i-nad/textures/embedded-assets.mjs",
+      "export_name": "loadTexture",
+      "asset_key": "water",
+      "dependencies": [
+        "Three.js TextureLoader"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
     }
   ]
 }

@@ -10,6 +10,9 @@ export async function playLevel(ctx, level) {
   let step = 0;
   let previousProgress = -1;
   let stagnantSteps = 0;
+  let lastHero = null;
+  let blockedSteps = 0;
+  let detourSide = 1;
   while (true) {
     const s = ctx.state();
     if (s.gameDone || s.levelDone || s.level > level) return;
@@ -32,7 +35,20 @@ export async function playLevel(ctx, level) {
         stagnantSteps++;
       }
     }
-    if (s.goal) await ctx.walkToGoal(450);
+    // Detect physical stalls against real ruins, not synthetic progress.
+    const h = s.hero;
+    if (h && Number.isFinite(h.x) && Number.isFinite(h.z)) {
+      const moved = lastHero && Math.hypot(h.x - lastHero.x, h.z - lastHero.z);
+      blockedSteps = moved !== null && moved < 0.16 ? blockedSteps + 1 : 0;
+      lastHero = {x: h.x, z: h.z};
+    }
+    if (mode === 'toys' && blockedSteps >= 3) {
+      await ctx.key(detourSide > 0 ? 'KeyD' : 'KeyA', 650);
+      await ctx.key('Space', 90);
+      await ctx.key('KeyW', 450);
+      detourSide = -detourSide;
+      blockedSteps = 0;
+    } else if (s.goal) await ctx.walkToGoal(450);
     else await ctx.key('KeyW', 250);
     // Space is the real action() for folding, lantern stomps and jumps.
     await ctx.key('Space', 90);

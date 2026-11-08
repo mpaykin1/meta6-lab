@@ -40,7 +40,10 @@ export async function playLevel(ctx,level) {
         escapeSide=-escapeSide;
         noApproach=0;
       } else {
-        await moveWorld(s,wx,wz,900);
+        // Close to a collectible, use a short pulse to avoid overshooting its pickup radius.
+        // Keep the actual joystick action; never modify collectible or player state.
+        const pulseMs=before<1.5?120:before<4?300:900;
+        await moveWorld(s,wx,wz,pulseMs);
       }
       const afterState=ctx.state();
       const after=afterState.goal && afterState.hero

@@ -1,5 +1,14 @@
 // Navigate with actual player input and genuine, read-only ruin waypoints.
 // Never modify game progression, collisions, level completion or timeouts.
+// The core probes the hidden #bJump at startup and cannot subsequently discover
+// the visible mobile action button. Both #actBtn (toys/runner/fold/lantern)
+// and #bJump (combo/cradle) share this bottom-right physical hit target.
+// Use the game's genuine touch controls, never synthetic completion.
+async function pressJump(ctx) {
+  if (ctx.mobile) return ctx.tap(ctx.viewport.width - 62, ctx.viewport.height - 72);
+  return ctx.key('Space', 120);
+}
+
 export async function start(ctx) {
   await ctx.wait(2200);
   // "started" becomes true only after the real transition enters play.
@@ -88,15 +97,15 @@ export async function playLevel(ctx, level) {
       // Follow the engine's real route even when its point is temporarily
       // farther from the final lamp. Do not fake a nearer final goal.
       if (mode === 'toys' && distance < 0.55 && target.jump) {
-        await ctx.jump();
+        await pressJump(ctx);
       }
       await ctx.joystick(ix, -iz, mode === 'toys' ? 950 : 600);
     }
 
     if (mode === 'toys' && (s.waypoint?.jump || physicalStalls >= 2 || steps % 4 === 0)) {
-      await ctx.jump(); // Actual mobile jump button; Space on desktop.
+      await pressJump(ctx); // Actual mobile jump button; Space on desktop.
     } else if (mode !== 'toys') {
-      await ctx.key('Space', 90);
+      await pressJump(ctx);
     }
 
     if (mode === 'combo' || mode === 'cradle') {

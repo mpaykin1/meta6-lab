@@ -5,6 +5,7 @@ No dependencies. All binary data comes from the immutable source HTML parts.
 from __future__ import annotations
 import base64, gzip, hashlib, json, re
 from pathlib import Path
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 SHOWCASE = ROOT / "sunken-city-showcase"
@@ -64,6 +65,33 @@ def main() -> None:
         raise ValueError("Missing original pack manifest")
     manifest = json.loads(show.group(1))
     (DEST / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Restore cropped original sprites losslessly in pixel space.
+    atlases = {}
+    atlas_root = DEST / "atlases"
+    for group, pages in manifest["atlases"].items():
+        for page_no, relative in enumerate(pages):
+            atlases[group, page_no] = Image.open(atlas_root / Path(relative).name).convert("RGBA")
+    sprite_count = 0
+    for name, rect in manifest["rects"].items():
+        group, page, x, y, w, h = rect
+        atlas = atlases[group, page]
+        if min(x, y, w, h) < 0 or x + w > atlas.width or y + h > atlas.height:
+            raise ValueError(f"Invalid atlas rectangle {name}")
+        relative = name if name.endswith(".png") else name + ".png"
+        dest = DEST / "sprites" / relative
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        image = atlas.crop((x, y, x + w, y + h))
+        image.save(dest, format="PNG", compress_level=9)
+        entries.append({
+            "source": "rects/" + name,
+            "path": dest.relative_to(ROOT).as_posix(),
+            "bytes": dest.stat().st_size,
+            "sha256": hashlib.sha256(dest.read_bytes()).hexdigest(),
+        })
+        sprite_count += 1
+    if sprite_count != 951:
+        raise ValueError(f"Expected 951 sprite crops, got {sprite_count}")
+
     inventory = {
         "schema_version": 1,
         "original_html_sha256": digest,
@@ -71,10 +99,11 @@ def main() -> None:
         "assets": entries,
         "total_glb": 114,
         "total_atlases": 12,
+        "total_sprites": sprite_count,
         "note": "Original extracted bytes. Full 1405-file ZIP contains additional standalone PNG, VOX, OBJ, MTL and scripts.",
     }
     (DEST / "pack-artifacts.json").write_text(json.dumps(inventory, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Extracted {len(entries)} original assets")
+    print(f"Extracted 114 GLB models, 12 atlas PNGs, and {sprite_count} pixel-exact atlas sprite crops")
 
 
 if __name__ == "__main__":

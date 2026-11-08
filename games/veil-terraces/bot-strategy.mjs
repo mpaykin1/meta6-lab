@@ -20,7 +20,12 @@ export async function playLevel(ctx, level) {
       // Re-evaluate the real goal and obstacles after a short navigation interval.
       await ctx.walkToGoal(450);
     } else {
-      await ctx.key('Space', 100);
+      // Explore with real movement when a level temporarily has no exposed goal.
+      // Alternate short lateral sweeps; do not mutate the game's state or progress.
+      const direction = Math.floor(Date.now() / 1200) % 2 ? 'KeyA' : 'KeyD';
+      await ctx.key('KeyW', 180);
+      await ctx.key(direction, 120);
+      await ctx.key('Space', 80);
       await ctx.wait(150);
     }
   }

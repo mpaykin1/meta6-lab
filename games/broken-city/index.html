@@ -3237,7 +3237,10 @@ const clock = new THREE.Clock();
 let started = 0, glitch = 0, dripT = 2;
 function frame() {
   requestAnimationFrame(frame);
-  const dt0 = Math.min(clock.getDelta(), .05); if (PAUSE.size && started) return;
+  // Preserve real simulation time on low-FPS WebGL: render at the available FPS,
+  // but never silently discard the rest of the elapsed frame during gameplay.
+  const elapsed = Math.min(clock.getDelta(), .5);
+  const dt0 = Math.min(elapsed, .05); if (PAUSE.size && started) return;
   const dt = dt0, t = clock.elapsedTime;
   U.uTime.value = t;
   post.uniforms.uFade.value += (fadeTarget - post.uniforms.uFade.value) * damp(view === 'game' ? (G.state === 'trans' ? 6 : 2.6) : .9, dt);
@@ -3282,10 +3285,21 @@ function frame() {
       backLight.position.set(0, 5, -9); fillLight.position.set(-3, 2.5, 9);
     } else {
       perfTick(performance.now(), G.state === 'play' && !G.paused && !PAUSE.size);
-      if (G.state === 'play' && !G.paused) { updateGame(dt, t); updateGameCamera(dt, t); tickNav(heroState, t, dt); tickGift(heroState, t, dt); tickMem(heroState, t, dt); }
+      if (G.state === 'play' && !G.paused) {
+        // Catch up the *authored* movement/physics in <=50 ms substeps.
+        // This keeps obstacle collision and jump physics unchanged at 2 FPS.
+        let remaining = elapsed;
+        while (remaining > 0.000001 && G.state === 'play') {
+          const step = Math.min(0.05, remaining);
+          updateGame(step, t - remaining + step);
+          remaining -= step;
+        }
+        updateGameCamera(dt, t); tickNav(heroState, t, dt);
+        tickGift(heroState, t, dt); tickMem(heroState, t, dt);
+      }
       else if (G.state === 'play') updateGameCamera(dt, t);
       else if (G.state === 'defeat') { navArrow.visible = false; $('stickHint').classList.add('hidden'); }
-      else if (G.state === 'trans') { updateTransition(dt, t); if (G.cfg) updateGameCamera(dt, t); }
+      else if (G.state === 'trans') { updateTransition(elapsed, t); if (G.cfg) updateGameCamera(dt, t); }
       else if (G.state === 'ending' || G.state === 'endwait') updateEnding(dt, t);
       backLight.position.set(0, 5, heroState.pos.z - 9); fillLight.position.set(-3, 2.5, heroState.pos.z + 9);
       fog.position.z = heroState.pos.z; dust.position.z = heroState.pos.z;

@@ -1,5 +1,5 @@
 // Real player controls, using the existing shared core's calibrated path finding.
-// Read one consistent game snapshot per decision; never synthesize progress.
+// Short inputs near memories prevent one held gesture from crossing two levels.
 export async function start(ctx) {
   await ctx.wait(2200);
   if (!ctx.state().started) {
@@ -8,16 +8,16 @@ export async function start(ctx) {
   }
 }
 export async function playLevel(ctx, level) {
-  // Track real approach progress; detour before the core's 20-second stuck alarm.
   let previousGoal = null;
   let bestDistance = Infinity;
   let improvingAt = Date.now();
   let detours = 0;
+  // The game temporarily locks input when collecting a memory; let it settle.
+  await ctx.wait(350);
   while (true) {
     const state = ctx.state();
     if (state.level !== level || state.levelDone || state.gameDone) return;
     if (!state.alive) {
-      // Let the game handle its real respawn; the core still detects prolonged death.
       await ctx.wait(300);
       continue;
     }
@@ -35,23 +35,24 @@ export async function playLevel(ctx, level) {
         improvingAt = Date.now();
       }
       if (Date.now() - improvingAt > 4200) {
-        // A real sideways joystick movement can go around an intervening terrace.
-        // Keep detecting a genuine level transition between every input.
-        const side = detours++ % 2 ? -1 : 1;
-        await ctx.joystick(side, 0, 620);
-        if (ctx.state().level !== level) return;
+        if (distance > 3.2) {
+          const side = detours++ % 2 ? -1 : 1;
+          await ctx.joystick(side, 0, 250);
+          if (ctx.state().level !== level) return;
+        }
         await ctx.jump();
         if (ctx.state().level !== level) return;
         improvingAt = Date.now();
       }
-      // Re-evaluate the real goal and obstacles after a short navigation interval.
-      await ctx.walkToGoal(450);
+      // Each near-goal input is shorter than the interval needed to cross
+      // the next memory: the core checks the real state between gestures.
+      await ctx.walkToGoal(distance < 3.5 ? 110 : 350);
+      if (ctx.state().level !== level) return;
     } else if (ctx.mobile) {
-      // Preserve the previously passing mobile input: chained movement crossed a level boundary.
       await ctx.key('Space', 100);
+      if (ctx.state().level !== level) return;
       await ctx.wait(150);
     } else {
-      // Desktop-only exploration with real controls; recheck the level between inputs.
       const direction = Math.floor(Date.now() / 1200) % 2 ? 'KeyA' : 'KeyD';
       await ctx.key('KeyW', 180);
       if (ctx.state().level !== level) return;

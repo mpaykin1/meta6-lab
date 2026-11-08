@@ -1,4 +1,5 @@
 // Real player controls, using the existing shared core's calibrated path finding.
+// Read one consistent game snapshot per decision; never synthesize progress.
 export async function start(ctx) {
   await ctx.wait(2200);
   if (!ctx.state().started) {
@@ -7,10 +8,20 @@ export async function start(ctx) {
   }
 }
 export async function playLevel(ctx, level) {
-  while (ctx.state().level === level &&
-         !ctx.state().levelDone && !ctx.state().gameDone) {
-    if (!ctx.state().alive) { await ctx.wait(1000); continue; }
-    if (ctx.state().goal) await ctx.walkToGoal();
-    else await ctx.key('Space', 100);
+  while (true) {
+    const state = ctx.state();
+    if (state.level !== level || state.levelDone || state.gameDone) return;
+    if (!state.alive) {
+      // Let the game handle its real respawn; the core still detects prolonged death.
+      await ctx.wait(300);
+      continue;
+    }
+    if (state.goal) {
+      // Re-evaluate the real goal and obstacles after a short navigation interval.
+      await ctx.walkToGoal(450);
+    } else {
+      await ctx.key('Space', 100);
+      await ctx.wait(150);
+    }
   }
 }

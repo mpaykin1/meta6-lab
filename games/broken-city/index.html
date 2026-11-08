@@ -100,7 +100,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#070d18;touch-action:n
 <script type="importmap">{"imports":{"three":"./lib/three.module.js"}}</script>
 <script type="module">
 /* Playgama Bridge (present only in the Playgama build): initialize BEFORE loading the engine */
-const BR = null; // META GAMES standalone: no advertising bridge.
+const BR = window.bridge || null;
 const GAME_VERSION = '1.4.0';
 const TIMEOUT = (p, ms) => Promise.race([p, new Promise(r => setTimeout(r, ms))]);
 if (BR) { try { await TIMEOUT(BR.initialize(), 2000); } catch (e) { console.warn('bridge', e); } }
@@ -2078,21 +2078,23 @@ function onDefeat(reason) {
   if (G.state !== 'play') return;
   TEL('progression_failed', { step_id: 'level_' + (G.li + 1), step_index: G.li + 1, mode: G.cfg.mode, reason });
   G.state = 'defeat'; keys.KeyW = keys.KeyA = keys.KeyS = keys.KeyD = false; setButtons();
-  const can = !G.revUsed;
+  let can = false; try { can = !!BR && !G.revUsed && BR.advertisement.isRewardedSupported !== false; } catch (e) { }
   $('reviveBtn').classList.toggle('hidden', !can); if (can) TEL('revive_offered', { step_index: G.li + 1 });
   $('defeat').classList.remove('hidden');
 }
-$('reviveBtn').innerHTML = pix(ICONS.heart, '#ffb13b') + `<span>${T('Ожить — бесплатно', 'Revive — free')}</span>`;
+$('reviveBtn').innerHTML = pix(ICONS.heart, '#ffb13b') + `<span>${T('Ожить — смотреть рекламу', 'Revive — watch an ad')}</span>`;
 $('retryBtn').innerHTML = pix(ICONS.replay);
-$('retryBtn').onclick = () => { audioInit(); $('defeat').classList.add('hidden'); TEL('progression_started', { step_id: 'level_' + (G.li + 1), step_index: G.li + 1, retry: 1 }); restartLevel(); };
-$('reviveBtn').onclick = () => {
-  if (G.revUsed || G.state !== 'defeat') return;
-  G.revUsed = true; G.lvlHits = 0; G.shield = 1;
-  $('defeat').classList.add('hidden'); G.state = 'play';
-  setButtons(); glitchKick = 1;
-  TEL('revive_used', { step_index: G.li + 1 });
-};
-
+$('retryBtn').onclick = () => { audioInit(); $('defeat').classList.add('hidden'); showAd('retry'); TEL('progression_started', { step_id: 'level_' + (G.li + 1), step_index: G.li + 1, retry: 1 }); restartLevel(); };
+$('reviveBtn').onclick = () => { if (!BR || G.revUsed) return; G.revWait = true; G.revGot = false; try { BR.advertisement.showRewarded('revive'); } catch (e) { G.revWait = false; } };
+function onRewarded(st) {
+  setPause('ad', st === 'opened');
+  if (!G.revWait) return;
+  if (st === 'rewarded') G.revGot = true;
+  if (st === 'closed' || st === 'failed') { G.revWait = false;
+    if (G.revGot && G.state === 'defeat') { G.revUsed = true; G.lvlHits = 0; G.shield = 1; $('defeat').classList.add('hidden'); G.state = 'play'; setButtons(); glitchKick = 1; TEL('revive_used', { step_index: G.li + 1 }); }
+    else if (st === 'failed') $('reviveBtn').classList.add('hidden'); }
+}
+if (BR) { try { BR.advertisement.on(BR.EVENT_NAME.REWARDED_STATE_CHANGED, onRewarded); } catch (e) { } }
 // R9: pause on P (Esc belongs to the browser)
 addEventListener('keydown', e => { if (e.code === 'KeyP' && view === 'game' && !e.repeat) $('menuBtn').click(); });
 
@@ -2335,7 +2337,7 @@ const ENDINGS = { exit: T('Выход в свет', 'Out into the light'), lamp:
 const store = BR
   ? { get(k, d) { return SAVE[k] === undefined ? d : SAVE[k]; }, set(k, v) { SAVE[k] = v; try { BR.storage.set(['brokencity'], [JSON.stringify(SAVE)]).catch(() => {}); } catch (e) { } } }
   : { get(k, d) { try { const v = localStorage.getItem('bc_' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem('bc_' + k, JSON.stringify(v)); } catch (e) { } } };
-const G = { revUsed: false, state: 'title', li: 0, cfg: null, caught: 0, outs: 0, hits: 0, lvlHits: 0, variant: 0, energy: 1, noise: 0, check: 4, eyeOn: false,
+const G = { state: 'title', li: 0, cfg: null, caught: 0, outs: 0, hits: 0, lvlHits: 0, variant: 0, energy: 1, noise: 0, check: 4, eyeOn: false,
   found: store.get('endings', {}), sound: store.get('sound', true), timer: 0, ending: null, speed: 0, paused: false, nearBridge: null, flash: 0, roll: 0, rollV: 0 };
 G.memSeen = new Set(store.get('memSeen', [])); G.stickOk = store.get('stickOk', false); G.cycle = store.get('cycle', 1); G.storyMax = store.get('storyMax', 0); redrawChalk(G.cycle);
 
@@ -2447,7 +2449,9 @@ if (BR) {
   try { G.platMute = BR.platform.isAudioEnabled === false; } catch (e) { }
   try { BR.platform.on(BR.EVENT_NAME.AUDIO_STATE_CHANGED, on => { G.platMute = !on; applyAudio(); }); } catch (e) { }
   try { BR.platform.on(BR.EVENT_NAME.PAUSE_STATE_CHANGED, p => setPause('platform', !!p)); } catch (e) { }
+  try { const ad = st => setPause('ad', st === 'opened'); ad(BR.advertisement.interstitialState); BR.advertisement.on(BR.EVENT_NAME.INTERSTITIAL_STATE_CHANGED, ad); } catch (e) { }
 }
+function showAd(place) { if (BR) { try { BR.advertisement.showInterstitial(place); } catch (e) { } } }
 
 
 /* ============ COMBO MODE — three buttons, two combos, a level generator that keeps getting harder ============
@@ -2633,7 +2637,7 @@ function placeGoal(goal) {
 }
 function loadLevel(i) {
   clearLevel();
-  G.li = i; const c = G.cfg = LEVELS[i]; G.shield = G.shield || 0; G.lvlHits = 0; G.energy = 1; G.noise = 0; G.check = 4; G.flash = 0;
+  G.li = i; const c = G.cfg = LEVELS[i]; G.revUsed = false; G.shield = G.shield || 0; G.lvlHits = 0; G.energy = 1; G.noise = 0; G.check = 4; G.flash = 0;
   if (c.mode === 'combo') { G.comboDeaths = 0; buildCombo(c); }
   const GAPS = c.gaps && c.gaps.map((gz, k) => gz + (k ? (Math.random() - .5) * 6 : (Math.random() - .5) * 3));
   if (GAPS && c.mode === 'fold') addHint('fold', GAPS[0] + 4.5);
@@ -2759,7 +2763,7 @@ function setButtons() {
 }
 function startGame(fromLevel = 0, fresh = true) {
   audioInit();
-  if (fresh) { G.caught = G.outs = G.hits = 0; G.revUsed = false; }
+  if (fresh) { G.caught = G.outs = G.hits = 0; }
   view = 'game'; G.state = 'trans'; G.timer = 0; G.next = fromLevel; G.transLoaded = false;
   showGallery && gObj && gpivot.remove(gObj);
   setButtons();
@@ -2849,7 +2853,7 @@ $('modeBtn').onclick = () => setMode('scene');
 $('prevBtn').onclick = () => showGallery(gIndex - 1);
 $('nextBtn').onclick = () => showGallery(gIndex + 1);
 $('modeBtn').innerHTML = pix(ICONS.film); $('playBtn').innerHTML = pix(ICONS.play); $('playBtn').onclick = () => startGame(0, true);
-$('replayBtn').innerHTML = pix(ICONS.replay); $('replayBtn').onclick = () => { G.variant = 0; hero.userData.bill.material.map = heroTex; startGame(0, true); };
+$('replayBtn').innerHTML = pix(ICONS.replay); $('replayBtn').onclick = () => { showAd('replay'); G.variant = 0; hero.userData.bill.material.map = heroTex; startGame(0, true); };
 $('soundBtn').onclick = () => { audioInit(); G.sound = !G.sound; store.set('sound', G.sound); applyAudio(); setButtons(); };
 
 /* ============ GAME: per-frame update ============ */
@@ -2989,7 +2993,7 @@ function updateTransition(dt, t) {
   G.timer += dt;
   if (G.timer < .7) fadeTarget = 0;
   else if (!G.transLoaded) {
-    G.transLoaded = true; const nm = LEVELS[G.next].mode; showCard(MODE_ICON[nm]); 
+    G.transLoaded = true; const nm = LEVELS[G.next].mode; showCard(MODE_ICON[nm]); showAd('level');
     loadLevel(G.next); updateGameCamera(1, t); rig.pos.copy(camera.position);
   } else if (G.timer > 2.0) { hideCard(); fadeTarget = 1; G.state = 'play'; glitchKick = 1; setButtons(); }
 }
@@ -3012,7 +3016,7 @@ function updateEnding(dt, t) {
   } else {
     glitchKick = Math.max(glitchKick, 1.2); G.rollV += dt * .6;
     if (G.timer > 2.6) fadeTarget = 0;
-    if (G.timer > 2.8 && !G.storyShown) { G.storyShown = true; G.holdLoop = true; showStory('loop', () => { G.holdLoop = false; }); }
+    if (G.timer > 2.8 && !G.storyShown) { G.storyShown = true; G.holdLoop = true; showStory('loop', () => { G.holdLoop = false; showAd('replay'); }); }
     if (G.holdLoop) G.timer = Math.min(G.timer, 3.3);
     if (G.timer > 3.4 && !G.holdLoop) { G.variant ^= 1; shades[0].userData.body.material.map = shadeSheet; G.caught = G.outs = G.hits = 0; view = 'game'; G.state = 'trans'; G.timer = .7; G.next = 0; G.transLoaded = false; setButtons(); return; }
   }
@@ -3165,7 +3169,7 @@ const INV = {
       ['R1 мгновенный старт для новичка', () => /store.get\('visited'/.test(frame.toString()) ? 1 : 0, 1],
       ['R3 стрелка к цели + подсказка джойстика', () => (navArrow.isMesh ? 1 : 0) + ($('stickHint') ? 1 : 0), 2],
       ['R4 ежедневный подарок (пуговица) + щит', () => (giftObj.isGroup ? 1 : 0) + (shieldFx.isSprite ? 1 : 0), 2],
-      ['R5 экран поражения: бесплатное воскрешение, ещё раз', () => ['reviveBtn', 'retryBtn'].filter(id => $(id)).length, 2],
+      ['R5 экран поражения: воскрешение за рекламу, ещё раз', () => ['reviveBtn', 'retryBtn'].filter(id => $(id)).length, 2],
       ['R8 события: старт, уровень, провал, концовка, подарок, воскрешение, производительность', () => 7, 7],
       ['Звуковые файлы (эффекты + музыка)', () => new Set([...Object.values(AUD_FILES).flat(), ...Object.values(MUS_TRACKS), 'm_tension']).size, 32],
       ['Музыкальные пьесы по настроению + слой тревоги', () => Object.keys(MUS_TRACKS).length + 1, 6],
@@ -3230,7 +3234,7 @@ window.__INV = function () {
   out.ok = out.lost.length === 0 && now >= prev && out.extra.every(x => x.ok);
   return out;
 };
-window.__G = { memShow, LAY: { gen: barrierLayoutGen, A: barrierLayoutA, make: makeBarrierRuin, surfTop, surfBlocked, setS: v => { SURFS = v; }, getS: () => SURFS, mulberry, curveY }, T12: () => ({ mus: MUS.cur, dg: +MUS.danger.toFixed(2), ac: AC && AC.state, mg: master && master.gain.value, pause: [...PAUSE], snd: G.sound, pm: G.platMute, failed: AUD.failed, aud: AUD.ok, bufs: Object.keys(AUD.buf).length, gift: giftObj.visible, arrow: navArrow.visible, shield: G.shield, defeat: !$("defeat").classList.contains("hidden"), revive: !$("reviveBtn").classList.contains("hidden") }), onDefeat, BOT: { keys, action, cj: comboJump, cs: comboStomp, cb: comboBridge, pathBlock, heightOnPaths, onTrampBridge, get: () => ({ bridges, barriers, paths, cracks, stations, shades, ruins, falls, SURFS, comboChunks, tHouses, truins, toyPool, CR: G.cr }) }, showStory, closeStory, momCard, SURF: () => SURFS, heroBody, rig, G, heroState, loadLevel, startGame, LEVELS, levelDone, TOYS: () => ({ ruins: truins.length, houses: tHouses.filter(h => h.on).map(h => [h.x | 0, h.y | 0, h.z | 0]), toys: toyPool.filter(o => o.userData.on).length, rest: toyPool.filter(o => o.userData.rest).length }) };
+window.__G = { memShow, LAY: { gen: barrierLayoutGen, A: barrierLayoutA, make: makeBarrierRuin, surfTop, surfBlocked, setS: v => { SURFS = v; }, getS: () => SURFS, mulberry, curveY }, onRewarded, T12: () => ({ mus: MUS.cur, dg: +MUS.danger.toFixed(2), ac: AC && AC.state, mg: master && master.gain.value, pause: [...PAUSE], snd: G.sound, pm: G.platMute, failed: AUD.failed, aud: AUD.ok, bufs: Object.keys(AUD.buf).length, gift: giftObj.visible, arrow: navArrow.visible, shield: G.shield, defeat: !$("defeat").classList.contains("hidden"), revive: !$("reviveBtn").classList.contains("hidden") }), onDefeat, BOT: { keys, action, cj: comboJump, cs: comboStomp, cb: comboBridge, pathBlock, heightOnPaths, onTrampBridge, get: () => ({ bridges, barriers, paths, cracks, stations, shades, ruins, falls, SURFS, comboChunks, tHouses, truins, toyPool, CR: G.cr }) }, showStory, closeStory, momCard, SURF: () => SURFS, heroBody, rig, G, heroState, loadLevel, startGame, LEVELS, levelDone, TOYS: () => ({ ruins: truins.length, houses: tHouses.filter(h => h.on).map(h => [h.x | 0, h.y | 0, h.z | 0]), toys: toyPool.filter(o => o.userData.on).length, rest: toyPool.filter(o => o.userData.rest).length }) };
 
 /* ============ LOOP ============ */
 const clock = new THREE.Clock();

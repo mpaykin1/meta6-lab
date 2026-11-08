@@ -4964,6 +4964,37 @@ window.__isle = {
 };
 window.dispatchEvent(new Event('observer-v7-ready'));
 
+
+/* META BOT: immutable live snapshot for the original game, without gameplay commands. */
+Object.defineProperty(window, '__META_BOT__', {
+  configurable: false, enumerable: true, writable: false,
+  value: Object.freeze({
+    version: 1,
+    info() { return { name: "Underwater World", levels: 1 }; },
+    state() {
+      const done = G.state === 'victory';
+      const nextCoin = coins.filter(c => c.alive).reduce((b, c) =>
+        !b || Math.hypot(c.x - player.pos.x, c.z - player.pos.z) <
+              Math.hypot(b.x - player.pos.x, b.z - player.pos.z) ? c : b, null);
+      const boss = G.warden && foeAlive(G.warden) ? G.warden.segs[0] : null;
+      const next = nextCoin || boss || (world ? world.ring : null);
+      return {
+        started: ['play', 'paused', 'victory', 'dead'].includes(G.state),
+        level: 0, levelDone: done, gameDone: done,
+        alive: G.state !== 'dead' && player.hp > 0,
+        hero: { x: player.pos.x, y: player.pos.z },
+        goal: next ? { x: next.x, y: next.z } : null,
+        enemies: foes.filter(foeAlive).length,
+        weapons: combat.arsenal.length,
+        layoutHash: JSON.stringify({
+          seed: G.seed, biome: G.biome,
+          coins: world ? world.coins.map(c => [c.x, c.z]) : []
+        }),
+        menuOpen: G.state === 'paused'
+      };
+    }
+  })
+});
 </script>
 
 </body></html>

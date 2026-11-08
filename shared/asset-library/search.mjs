@@ -27,7 +27,8 @@ export async function findComponents(query,options={}) {
 export async function resolveComponent(id,{loader=globalThis.MetaShared}={}) {
   const item=(await getCatalog()).components.find(c=>c.id===id);
   if (!item) throw new Error('Unknown component: '+id);
-  if (item.status!=='READY'||!item.loader_id) throw new Error('Component is not READY: '+id);
+  if (item.status!=='READY') throw new Error('Component is not READY: '+id);
+  if (item.entry) return import(new URL(item.entry,import.meta.url).href);
   if (!loader?.use) throw new Error('Load shared/loader.js before resolving components');
   return loader.use(item.loader_id);
 }

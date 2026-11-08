@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "description": "Owner-supplied exact HTML graphical/animation reference sources for META GAMES",
+  "source_policy": "rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+  "games": [
+    {
+      "id": "abyss-glow",
+      "title": "ABYSS GLOW",
+      "source": "games/abyss-glow/index.html",
+      "guide": "games/abyss-glow/README.md",
+      "source_sha256": "d968e47997dbd1cf843fdc73fed94e682217e6d5c833a0c8d602ec5b064f94e5",
+      "engine": "bundled Three.js / WebGL2 / GLSL",
+      "rendering": [
+        "normal-mapped sprite atlas",
+        "GPU instancing",
+        "dynamic fish light",
+        "volumetric depth fog",
+        "bloom blur",
+        "depth-of-field/grain/glitch composite"
+      ],
+      "assets": [
+        {
+          "path": "games/abyss-glow/assets/abyss_0.png",
+          "size": [
+            2048,
+            512
+          ],
+          "kind": "diffuse-atlas"
+        },
+        {
+          "path": "games/abyss-glow/assets/abyss_0_n.png",
+          "size": [
+            2048,
+            512
+          ],
+          "kind": "normal-atlas"
+        },
+        {
+          "path": "games/abyss-glow/assets/bake_fish.png",
+          "size": [
+            448,
+            448
+          ],
+          "kind": "diffuse-bake"
+        },
+        {
+          "path": "games/abyss-glow/assets/bake_fish_n.png",
+          "size": [
+            448,
+            448
+          ],
+          "kind": "normal-bake"
+        }
+      ],
+      "runtime": "self-contained file:// HTML",
+      "third_party": [
+        "Three.js (MIT, notice retained)"
+      ],
+      "owner_reference": true,
+      "owner_pass_for_changes": false
+    },
+    {
+      "id": "asqura-office",
+      "title": "ASQURA Office",
+      "source": "games/asqura-office/index.html",
+      "guide": "games/asqura-office/README.md",
+      "source_sha256": "8b675a4980a797f5688b3a380bb1ce7f31c4ac9feae5268048817b0b4b9f13f4",
+      "engine": "Canvas 2D / procedural pixel 2.5D",
+      "rendering": [
+        "isometric projection",
+        "14x22 chibi animation",
+        "procedural architecture",
+        "depth layering",
+        "vignette and grain",
+        "Web Audio"
+      ],
+      "assets": [],
+      "runtime": "file:// HTML; external Google Fonts optional",
+      "third_party": [
+        "Press Start 2P from Google Fonts"
+      ],
+      "owner_reference": true,
+      "owner_pass_for_changes": false
+    },
+    {
+      "id": "twilight-isle-owner-20261108",
+      "title": "Остров сумерек — эталон владельца 08.11.2026",
+      "source": "reference/sumerek-golden/ostrov-sumerek-owner-20261108.html",
+      "guide": "reference/sumerek-golden/README.md",
+      "companion": "reference/sumerek-golden/ostrov-sumerek-owner-20261108.md",
+      "source_sha256": "fdbda0240b53f49d6e34aa0965531856e31a0154f4a12339e1682d60d5fe5c1f",
+      "engine": "Three.js r160 / WebGL / GLSL",
+      "rendering": [
+        "16×16 voxel island",
+        "2.5D HD sprite billboards",
+        "NEAREST-filtered pixel textures",
+        "shader-based fog and lighting",
+        "UnrealBloomPass / post-processing composer",
+        "procedural particles and camera rig"
+      ],
+      "assets": [],
+      "embedded_assets": "PNG sprites and atlases in HTML data URIs",
+      "runtime": "file:// possible with network; requires jsDelivr for Three.js and Google Fonts for optional font",
+      "third_party": [
+        "Three.js r160 from jsDelivr (MIT library; confirm notices)",
+        "Pixelify Sans via Google Fonts",
+        "Voxel Mini-Pack provenance and usage rights require review"
+      ],
+      "owner_reference": true,
+      "owner_pass_for_changes": false,
+      "rights_review_required": true
+    },
+    {
+      "id": "sumerki-i-pepel-owner-20261108",
+      "title": "Сумерки и пепел — эталон владельца 08.11.2026",
+      "source": "reference/sumerek-golden/sumerki-i-pepel-owner-20261108-fdc87038.html",
+      "guide": "reference/sumerek-golden/README.md",
+      "source_sha256": "fdc8703869bc4fdbaeac4e68f2d1bbb2eee6fd4cb5f098f437e505401784319c",
+      "engine": "Three.js r160 / WebGL / voxel pixel art",
+      "rendering": [
+        "procedural voxel island and perspective scene",
+        "embedded pixel-art atlas and sprite billboards",
+        "UnrealBloomPass and shader post-processing",
+        "animated particles and camera"
+      ],
+      "assets": [],
+      "embedded_assets": "PNG sprites/atlases in HTML data URIs",
+      "runtime": "single HTML; Three.js CDN required",
+      "third_party": [
+        "Three.js r160 from jsDelivr",
+        "Pixelify Sans from Google Fonts"
+      ],
+      "owner_reference": true,
+      "owner_pass_for_changes": false,
+      "rights_review_required": true
+    }
+  ]
+}

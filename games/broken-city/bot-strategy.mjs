@@ -99,7 +99,15 @@ export async function playLevel(ctx, level) {
       if (mode === 'toys' && distance < 0.55 && target.jump) {
         await pressJump(ctx);
       }
-      await ctx.joystick(ix, -iz, mode === 'toys' ? 950 : 600);
+      // Toy-scale ruins have narrow walkable steps. A fixed 950 ms
+      // joystick hold can cross a 0.35 m waypoint between WebGL frames,
+      // leaving the arrow and the bot oscillating around the same step.
+      // Keep long runs between buildings; shorten the real input hold
+      // near each waypoint. Never alter game state or progress.
+      const holdMs = mode === 'toys'
+        ? Math.max(220, Math.min(950, Math.round(distance * 650)))
+        : 600;
+      await ctx.joystick(ix, -iz, holdMs);
     }
 
     if (mode === 'toys' && (s.waypoint?.jump || physicalStalls >= 2 || steps % 4 === 0)) {

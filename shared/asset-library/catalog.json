@@ -1779,6 +1779,36 @@
         "Original runtime palette top/horizon/bottom/sunColor supplied by caller"
       ],
       "notes": "Original shader, original 500-radius dome, original uniform layout. No invented palette; caller must supply source-derived colors."
+    },
+    {
+      "id": "pod-i-nad/palettes/original-phases",
+      "name": "Original Pod i Nad dusk/twilight/night/dawn palettes",
+      "kind": "shader",
+      "purpose": [
+        "original lighting palette",
+        "sky colors",
+        "water colors",
+        "fog colors",
+        "night lighting",
+        "dusk lighting",
+        "dawn",
+        "aurora"
+      ],
+      "tags": [
+        "palette",
+        "lighting",
+        "fog",
+        "water",
+        "sky",
+        "approved-reference"
+      ],
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_reference": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source": "shared/components/pod-i-nad/shaders/atmosphere/original-palettes.mjs",
+      "loader_id": "pod-i-nad-original-palettes",
+      "export_name": "getOriginalPalette",
+      "notes": "Exact PALETTES literal; runtime interpolation, biome and event palette blending not yet extracted."
     }
   ]
 }

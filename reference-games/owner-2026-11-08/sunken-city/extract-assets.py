@@ -75,7 +75,9 @@ def main() -> None:
     for name, rect in manifest["rects"].items():
         group, page, x, y, w, h = rect
         atlas = atlases[group, page]
-        if min(x, y, w, h) < 0 or x + w > atlas.width or y + h > atlas.height:
+        # Seven source atlas rectangles extend exactly one transparent pixel beyond the PNG edge.
+        # Pillow pads that missing transparent row, reproducing the original ZIP sprites pixel-for-pixel.
+        if min(x, y) < 0 or min(w, h) <= 0 or x + w > atlas.width + 1 or y + h > atlas.height + 1:
             raise ValueError(f"Invalid atlas rectangle {name}")
         relative = name if name.endswith(".png") else name + ".png"
         dest = DEST / "sprites" / relative

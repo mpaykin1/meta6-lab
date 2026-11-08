@@ -1537,23 +1537,22 @@
     },
     {
       "id": "pod-i-nad/combat/flail-combat",
-      "name": "Integrated flail combat with health, impulse and FX hooks",
+      "name": "Reusable flail movement, collision, damage and knockback",
       "kind": "combat",
       "status": "READY",
       "usable": true,
       "purpose": [
-        "flail weapon",
-        "enemy health damage",
+        "flail combat",
+        "enemy damage",
         "knockback",
-        "sound callbacks",
-        "impact effects"
+        "weapon physics",
+        "boss fight"
       ],
       "tags": [
         "combat",
-        "physics",
         "flail",
         "damage",
-        "effects"
+        "hit events"
       ],
       "entry": "../components/pod-i-nad/animations/flail-combat.mjs",
       "export_name": "createFlailCombat",
@@ -1561,7 +1560,64 @@
         "flail-physics.mjs",
         "flail-hit-detection.mjs"
       ],
-      "scope": "Mutates foe.hp/velocity; onImpact/onWhoosh/onDefeat hooks; host supplies rendering and audio",
+      "scope": "Updates enemy HP and velocity; Three.js renderer and audio/VFX are optional separate components",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "demo": "meta-games/library/flail-combat.html"
+    },
+    {
+      "id": "pod-i-nad/combat/flail-audio",
+      "name": "Soft flail whoosh, hit and defeat audio",
+      "kind": "audio",
+      "purpose": [
+        "sword impact sound",
+        "flail whoosh",
+        "combat audio",
+        "weapon sound"
+      ],
+      "tags": [
+        "audio",
+        "sfx",
+        "combat",
+        "web-audio"
+      ],
+      "status": "READY",
+      "usable": true,
+      "entry": "../components/pod-i-nad/animations/flail-audio.mjs",
+      "export_name": "createFlailAudio",
+      "dependencies": [
+        "Web Audio API",
+        "pointer gesture on iOS"
+      ],
+      "scope": "Short synthesized fallback cues; first user gesture required; no background soundtrack",
+      "demo": "meta-games/library/flail-combat.html",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/combat/flail-vfx",
+      "name": "Additive sparks and shockwave rings",
+      "kind": "effect",
+      "purpose": [
+        "impact particle effect",
+        "glowing sparks",
+        "shockwave",
+        "combat VFX"
+      ],
+      "tags": [
+        "particles",
+        "glsl",
+        "three.js",
+        "impact"
+      ],
+      "status": "READY",
+      "usable": true,
+      "entry": "../components/pod-i-nad/animations/flail-vfx.mjs",
+      "export_name": "createFlailImpactFX",
+      "dependencies": [
+        "Three.js r160 WebGL renderer",
+        "THREE.Scene"
+      ],
+      "scope": "GPU points with reusable buffer and ring pool; call burst/update/dispose",
+      "demo": "meta-games/library/flail-combat.html",
       "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
     }
   ]

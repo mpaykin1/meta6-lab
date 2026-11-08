@@ -1,6 +1,6 @@
 <!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pod i Nad · Original mist</title><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#030d18}canvas{display:block}aside{position:fixed;bottom:14px;left:14px;color:#c9e8ef;background:#06131cba;border:1px solid #3d6975;padding:10px 14px;border-radius:9px;font:13px system-ui}</style><aside>«Под и над» · оригинальный GLSL-туман · движение камеры: мышь / палец</aside><script type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-import {createMistLayers} from '../../../shared/components/pod-i-nad/shaders/atmosphere/mist-material.mjs';
+import {createMistLayers} from '../../shared/components/pod-i-nad/shaders/atmosphere/mist-material.mjs';
 const scene=new THREE.Scene();scene.background=new THREE.Color('#061321');scene.fog=new THREE.FogExp2('#061321',0.015);
 const camera=new THREE.PerspectiveCamera(62,innerWidth/innerHeight,0.1,400);
 const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);document.body.prepend(renderer.domElement);

@@ -3046,7 +3046,7 @@ const metaBotObserver = Object.freeze({
           : {x:h.x * .5,z:Math.max(c.goal,h.z - 10),jump:false})
       : null;
     return {
-      started: active && G.state !== 'title',
+      started: active && (G.state === 'play' || G.state === 'ending' || G.state === 'endwait'),
       level: G.li,
       levelDone: active && ((G.state === 'trans' && G.next !== G.li) || ending),
       gameDone: active && ending,
@@ -3282,7 +3282,7 @@ const clock = new THREE.Clock();
 let started = 0, glitch = 0, dripT = 2;
 function frame() {
   requestAnimationFrame(frame);
-  const dt0 = Math.min(clock.getDelta(), .05); if (PAUSE.size && started) return;
+  const realDt = clock.getDelta(), dt0 = Math.min(realDt, .05); if (PAUSE.size && started) return;
   const dt = dt0, t = clock.elapsedTime;
   U.uTime.value = t;
   post.uniforms.uFade.value += (fadeTarget - post.uniforms.uFade.value) * damp(view === 'game' ? (G.state === 'trans' ? 6 : 2.6) : .9, dt);
@@ -3330,7 +3330,7 @@ function frame() {
       if (G.state === 'play' && !G.paused) { updateGame(dt, t); updateGameCamera(dt, t); tickNav(heroState, t, dt); tickGift(heroState, t, dt); tickMem(heroState, t, dt); }
       else if (G.state === 'play') updateGameCamera(dt, t);
       else if (G.state === 'defeat') { navArrow.visible = false; $('stickHint').classList.add('hidden'); }
-      else if (G.state === 'trans') { updateTransition(dt, t); if (G.cfg) updateGameCamera(dt, t); }
+      else if (G.state === 'trans') { updateTransition(realDt, t); if (G.cfg) updateGameCamera(dt, t); }
       else if (G.state === 'ending' || G.state === 'endwait') updateEnding(dt, t);
       backLight.position.set(0, 5, heroState.pos.z - 9); fillLight.position.set(-3, 2.5, heroState.pos.z + 9);
       fog.position.z = heroState.pos.z; dust.position.z = heroState.pos.z;

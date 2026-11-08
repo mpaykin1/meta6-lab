@@ -33,6 +33,7 @@ import {createFlailCombat} from '../../shared/components/pod-i-nad/animations/fl
 import {createCombatAudio} from '../../shared/components/pod-i-nad/animations/flail-audio.mjs';
 import {createCombatEffects} from '../../shared/components/pod-i-nad/animations/flail-impact-fx.mjs';
 import {createCombatModels} from '../../shared/components/pod-i-nad/models/combat-models.mjs';
+import {createSkyDome} from '../../shared/components/pod-i-nad/shaders/atmosphere/sky-material.mjs';
 
 const mobile=matchMedia('(pointer:coarse)').matches, count=document.querySelector('#count');
 const soundButton=document.querySelector('#sound'),error=document.querySelector('#error');
@@ -46,6 +47,7 @@ document.body.prepend(renderer.domElement);
 const scene=new THREE.Scene();
 scene.background=new THREE.Color(0x050c15);
 scene.fog=new THREE.FogExp2(0x071824,.052);
+const sky=createSkyDome(THREE,{scene,radius:78,night:.8,aurora:.65});
 const camera=new THREE.PerspectiveCamera(54,innerWidth/innerHeight,.1,110);
 const cameraAim=new THREE.Vector3(0,.9,0);
 camera.position.set(0,7.8,10.5);
@@ -241,6 +243,7 @@ renderer.setAnimationLoop((ms)=>{
   hitPulse=Math.max(0,hitPulse-dt);shake=Math.max(0,shake-dt*.65);
   effects.update(dt);
   fireflies.rotation.y+=dt*.005;
+  sky.update(elapsed*.24,camera.position);
   const targetPos=new THREE.Vector3(player.x,7.6,player.z+10);
   const jitter=shake*Math.sin(elapsed*85);
   targetPos.x+=jitter;targetPos.y+=jitter*.3;

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "role": "graphics-animation-source-references",
+  "date": "2026-11-08",
+  "repository": "mpaykin1/meta6-lab",
+  "folder": "reference-games/owner-2026-11-08/",
+  "immutable_originals": true,
+  "source_allowlist_note": "Owner explicitly authorized these uploaded files; third-party rights are not automatically approved.",
+  "games": [
+    {
+      "id": "abyss-glow",
+      "title": "ABYSS GLOW",
+      "entrypoint": "reference-games/owner-2026-11-08/abyss-glow/index.html",
+      "original_sha256": "d968e47997dbd1cf843fdc73fed94e682217e6d5c833a0c8d602ec5b064f94e5",
+      "original_blob_sha": "fb2c4c575497c027377cf5d07c32e1a35f9380ab",
+      "techniques": "WebGL2, GPU, underwater, bloom, glow, touch",
+      "runtime_dependencies": "offline HTML + embedded sprite atlas",
+      "owner_authorized": true,
+      "source_type": "owner-uploaded-2026-11-08",
+      "rights_verified": false
+    },
+    {
+      "id": "asqura-office",
+      "title": "ASQURA Office",
+      "entrypoint": "reference-games/owner-2026-11-08/asqura-office/index.html",
+      "original_sha256": "8b675a4980a797f5688b3a380bb1ce7f31c4ac9feae5268048817b0b4b9f13f4",
+      "original_blob_sha": "1aa09aee6c5db53c9af0a723fb0400df6972f7b9",
+      "techniques": "Canvas pixel characters, animation, audio, dialogue",
+      "runtime_dependencies": "Google Fonts external",
+      "owner_authorized": true,
+      "source_type": "owner-uploaded-2026-11-08",
+      "rights_verified": false
+    },
+    {
+      "id": "demon-hand",
+      "title": "Демоническая кисть",
+      "entrypoint": "reference-games/owner-2026-11-08/demon-hand/index.html",
+      "original_sha256": "5747638b0153e8aef2e755d0a3f8059f28af25e199eed9fcf4ad4804381a8425",
+      "original_blob_sha": "1fa1da27ed6d14e113662e468509ed8fd2b115f3",
+      "techniques": "Custom WebGL2, GLSL ES 300, joint articulation, lighting, OBJ export",
+      "runtime_dependencies": "self-contained",
+      "owner_authorized": true,
+      "source_type": "owner-uploaded-2026-11-08",
+      "rights_verified": false
+    },
+    {
+      "id": "underup",
+      "title": "Под и над",
+      "entrypoint": "reference-games/owner-2026-11-08/underup/index.html",
+      "original_sha256": "91642018b3e589173171340298f72320f747d3b401021a939030f6f922ede5e5",
+      "original_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "techniques": "Three.js r160, sprite billboards, bloom, DOF, camera rig",
+      "runtime_dependencies": "Three.js jsdelivr runtime importmap",
+      "owner_authorized": true,
+      "source_type": "owner-uploaded-2026-11-08",
+      "rights_verified": false
+    },
+    {
+      "id": "sunken-city-showcase",
+      "title": "Затонувший город · интерактивный каталог",
+      "entrypoint": "reference-games/owner-2026-11-08/sunken-city-showcase/index.html",
+      "original_sha256": "431841ee19b61280f6d92d761f566abc30e6862af22c7a1672fbc983b2078116",
+      "original_blob_sha": null,
+      "techniques": "Bundled Three.js, voxel 3D, sprite atlas, bloom, depth of field, GLB scene, 76 models",
+      "runtime_dependencies": "Original ~9.5MB text split into 10 exact ordered parts; JS loader reassembles",
+      "owner_authorized": true,
+      "source_type": "owner-uploaded-2026-11-08",
+      "rights_verified": false
+    },
+    {
+      "id": "twilight-island-arsenal",
+      "title": "Остров сумерек · арсенал",
+      "entrypoint": "reference-games/owner-2026-11-08/twilight-island-arsenal/index.html",
+      "original_sha256": "fdbda0240b53f49d6e34aa0965531856e31a0154f4a12339e1682d60d5fe5c1f",
+      "original_blob_sha": "eb8b736d7f4610584f1afb9f533d328ccfb35831",
+      "techniques": "2.5D sprites, Three.js, bloom, DOF, weapons, physics",
+      "runtime_dependencies": "Three.js jsdelivr runtime importmap",
+      "owner_authorized": true,
+      "source_type": "owner-uploaded-2026-11-08",
+      "rights_verified": false
+    },
+    {
+      "id": "twilight-island-classic",
+      "title": "Остров сумерек · классика",
+      "entrypoint": "reference-games/owner-2026-11-08/twilight-island-classic/index.html",
+      "original_sha256": "6856c60e616aa8c1ae8a7292b2e1e7570d663ae287f335623322e3be66e869cd",
+      "original_blob_sha": "d164562d0c75f4a0265d19ffe127b78a1bd27153",
+      "techniques": "3D island, sprites, camera, 16x16 voxel art, post FX",
+      "runtime_dependencies": "Three.js jsdelivr runtime importmap",
+      "owner_authorized": true,
+      "source_type": "owner-uploaded-2026-11-08",
+      "rights_verified": false
+    },
+    {
+      "id": "ashen-path-asset-pack",
+      "title": "Пепельный путь · ассеты",
+      "entrypoint": "reference-games/owner-2026-11-08/ashen-path-asset-pack/index.html",
+      "original_sha256": "1bbf2d7f172021c31be9b1520eb5ba9e6a65da3843170f6a2280e743dc5e4ea6",
+      "original_blob_sha": "a5911f6d0a0e36fc4fc0ad581be071dfb6d7882c",
+      "techniques": "Voxel instancing, sprite stacks, GPU grass, nearest textures, custom materials",
+      "runtime_dependencies": "bundled Three.js, Google Fonts external",
+      "owner_authorized": true,
+      "source_type": "owner-uploaded-2026-11-08",
+      "rights_verified": false
+    },
+    {
+      "id": "twilight-and-ash",
+      "title": "Сумерки и пепел",
+      "entrypoint": "reference-games/owner-2026-11-08/twilight-and-ash/index.html",
+      "original_sha256": "fdc8703869bc4fdbaeac4e68f2d1bbb2eee6fd4cb5f098f437e505401784319c",
+      "original_blob_sha": "fdb0e6e423a1f20cc38840fbb237ef41df69d32f",
+      "techniques": "Three.js diorama, shader-based materials, bloom and DOF, animation",
+      "runtime_dependencies": "Three.js jsdelivr runtime importmap",
+      "owner_authorized": true,
+      "source_type": "owner-uploaded-2026-11-08",
+      "rights_verified": false
+    },
+    {
+      "id": "twilight-and-ash-2",
+      "title": "Сумерки и пепел II",
+      "entrypoint": "reference-games/owner-2026-11-08/twilight-and-ash-2/index.html",
+      "original_sha256": "94e3eb8bd2a4a38cb220a73de937f9098ba4b8117a24fccb2e62accf41a28fc0",
+      "original_blob_sha": "156a0939d22aa51957249b113a25705451bd0910",
+      "techniques": "Expanded 3D diorama, animated sprites, bloom, DOF, audio",
+      "runtime_dependencies": "Three.js jsdelivr runtime importmap",
+      "owner_authorized": true,
+      "source_type": "owner-uploaded-2026-11-08",
+      "rights_verified": false
+    }
+  ],
+  "associated_asset_pack": {
+    "name": "sunken-city-pack(2).zip",
+    "files": 1405,
+    "glb": 114,
+    "vox": 76,
+    "obj": 76,
+    "png": 1025,
+    "transferred_to_github": false
+  }
+}

@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Демоническая кисть — суставная модель</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;color:#ede5df;font:13px system-ui;background:#09090d}
+body{background:radial-gradient(ellipse at 50% 40%,#27212c,#101117 55%,#050609)}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+header{position:absolute;top:24px;left:26px;pointer-events:none}
+small{color:#bc7770;letter-spacing:3px;font-size:10px}
+h1{font-size:23px;font-weight:400;margin:10px 0}
+.sub{color:#9a929d;font-size:12px}
+.panel{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:min(450px,calc(100% - 28px));background:#14131bdf;border:1px solid #ffffff19;border-radius:15px;padding:18px;backdrop-filter:blur(15px)}
+.row{display:flex;align-items:center;gap:14px}
+.row label{white-space:nowrap}
+input{width:100%;accent-color:#c36c60}
+.actions{display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:12px}
+.hint{color:#99909c;font-size:10px;line-height:1.6}
+button{color:#eee1d9;background:#ffffff09;border:1px solid #ffffff26;border-radius:8px;padding:9px 12px;cursor:pointer}
+button:hover{background:#ffffff19}
+#error{display:none;position:absolute;inset:35% 20px auto;text-align:center;white-space:pre-wrap;color:#ffb4aa}
+#contact{color:#b88d7f;font-size:10px;margin-top:10px;min-height:14px}
+</style>
+
+<canvas id="scene"></canvas>
+<header>
+<small>INFERNAL ANATOMY / 02</small>
+<h1>Демоническая кисть</h1>
+<div class="sub">Три сустава · противопоставление большого пальца</div>
+</header>
+
+<div class="panel">
+<div class="row">
+<label for="curl">Сжать кисть</label>
+<input id="curl" type="range" min="0" max="100" value="0">
+</div>
+<div id="contact">Художественная суставная модель</div>
+<div class="actions">
+<div class="hint">
+Потяни — вращение · колесо / щипок — масштаб<br>
+OBJ сохраняет текущую позу без скелета
+</div>
+<button id="export">Скачать OBJ</button>
+</div>
+</div>
+<div id="error"></div>
+
+<script>
+(()=>{
+'use strict';
+
+const canvas=document.getElementById('scene');
+const error=document.getElementById('error');
+
+function fail(message){
+ error.style.display='block';
+ error.textContent=message;
+}
+
+const gl=canvas.getContext('webgl2',{
+ alpha:true,
+ antialias:true,
+ premultipliedAlpha:false
+});
+
+if(!gl){
+ fail('Необходим WebGL 2.0.');
+ return;
+}
+
+const vs=`#version 300 es
+precision highp float;
+
+layout(location=0) in vec3 position;
+layout(location=1) in vec3 normal;
+layout(location=2) in float material;
+
+uniform highp vec3 eye;
+uniform vec3 right,up,forward;
+uniform float aspect,zoom;
+
+out highp vec3 P;
+out highp vec3 N;
+out mediump float M;
+
+void main(){
+ P=position;
+ N=normal;
+ M=material;
+ vec3 d=position-eye;
+ float z=dot(d,forward);
+ gl_Position=vec4(
+  dot(d,right)*zoom/aspect,
+  dot(d,up)*zoom,
+  (60.1/59.9)*z-12./59.9,
+  z
+ );
+}`;
+
+const fs=`#version 300 es
+precision mediump float;
+
+in highp vec3 P;
+in highp vec3 N;
+in mediump float M;
+uniform highp vec3 eye;
+out vec4 color;
+
+highp float hash(highp vec3 p){
+ p=fract(p*.1031);
+ p+=dot(p,p.yzx+33.33);
+ return fract((p.x+p.y)*p.z);
+}
+
+float noise(highp vec3 p){
+ highp vec3 i=floor(p),f=fract(p);
+ f=f*f*(3.-2.*f);
+ return mix(
+  mix(
+   mix(hash(i),hash(i+vec3(1,0,0)),f.x),
+   mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),
+   f.y
+  ),
+  mix(
+   mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),
+   mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),
+   f.y
+  ),f.z
+ );
+}
+
+vec3 aces(vec3 x){
+ return clamp(
+  (x*(2.51*x+.03))/(x*(2.43*x+.59)+.14),
+  0.,1.
+ );
+}
+
+void main(){
+ vec3 n=normalize(N);
+ vec3 v=normalize(eye-P);
+ if(dot(n,v)<0.)n=-n;
+
+ float grain=noise(P*42.);
+ vec3 albedo=vec3(.115,.077,.095);
+ vec3 emission=vec3(0);
+ float rough=.6;
+
+ if(M<.5){
+  albedo*=.7+.8*noise(P*4.);
+  float folds=pow(
+   .5+.5*sin(P.y*45.+noise(P*6.)*6.),12.
+  );
+  albedo*=1.-.23*folds;
+  float line=abs(sin(
+   P.y*10.+sin(P.x*9.)+noise(P*5.)*4.
+  ));
+  float crack=(1.-smoothstep(.02,.07,line))
+   *smoothstep(.55,.78,noise(P*3.+12.));
+  emission=vec3(.8,.018,.004)*crack;
+ }else if(M<1.5){
+  albedo=mix(
+   vec3(.37,.235,.16),
+   vec3(.82,.71,.52),
+   .65
+  );
+  albedo*=.82+.18*grain+.04*sin(P.y*70.);
+  rough=.31;
+ }else if(M<2.5){
+  albedo=vec3(.14,.09,.11)*(.7+.5*grain);
+  rough=.4;
+ }else{
+  albedo=vec3(.18,.008,.006);
+  emission=vec3(.35,.008,.002);
+ }
+
+ vec3 l=normalize(vec3(-3.,5.,5.)-P);
+ vec3 rim=normalize(vec3(4.,2.,-4.)-P);
+ vec3 blue=normalize(vec3(-4.,0.,-3.)-P);
+
+ vec3 light=vec3(.25,.22,.3);
+ light+=vec3(2.4,1.9,1.6)*max(dot(n,l),0.);
+ light+=vec3(.9,.11,.08)*max(dot(n,rim),0.);
+ light+=vec3(.2,.4,.75)*max(dot(n,blue),0.);
+
+ float spec=pow(
+  max(dot(n,normalize(l+v)),0.),
+  mix(90.,18.,rough)
+ );
+
+ vec3 c=albedo*light;
+ c+=vec3(.5,.43,.4)*spec*.5+emission;
+ c+=pow(1.-max(dot(n,v),0.),3.)*vec3(.035,.025,.06);
+
+ color=vec4(pow(aces(c),vec3(1./2.2)),1.);
+}`;
+
+function compile(type,source){
+ const s=gl.createShader(type);
+ gl.shaderSource(s,source);
+ gl.compileShader(s);
+ if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){
+  throw Error(gl.getShaderInfoLog(s));
+ }
+ return s;
+}
+
+let program;
+try{
+ program=gl.createProgram();
+ const a=compile(gl.VERTEX_SHADER,vs);
+ const b=compile(gl.FRAGMENT_SHADER,fs);
+ gl.attachShader(program,a);
+ gl.attachShader(program,b);
+ gl.linkProgram(program);
+ if(!gl.getProgramParameter(program,gl.LINK_STATUS)){
+  throw Error(gl.getProgramInfoLog(program));
+ }
+ gl.deleteShader(a);
+ gl.deleteShader(b);
+}catch(e){
+ fail(e.message);
+ return;
+}
+
+const add=(a,b)=>a.map((v,i)=>v+b[i]);
+const sub=(a,b)=>a.map((v,i)=>v-b[i]);
+const mul=(a,s)=>a.map(v=>v*s);
+
+const cross=(a,b)=>[
+ a[1]*b[2]-a[2]*b[1],
+ a[2]*b[0]-a[0]*b[2],
+ a[0]*b[1]-a[1]*b[0]
+];
+
+const norm=a=>mul(a,1/(Math.hypot(...a)||1));
+const dot=(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0);
+const clamp=x=>Math.max(0,Math.min(1,x));
+
+function smooth(a,b,x){
+ x=clamp((x-a)/(b-a));
+ return x*x*(3-2*x);
+}
+
+function rotate(p,axis,a){
+ const c=Math.cos(a),s=Math.sin(a);
+ return add(
+  add(mul(p,c),mul(cross(axis,p),s)),
+  mul(axis,dot(axis,p)*(1-c))
+ );
+}
+
+const X=[1,0,0],Y=[0,1,0],Z=[0,0,1];
+const digits=[],vertices=[],triangles=[];
+
+function vertex(p,n,m,f){
+ vertices.push({p,n,m,f});
+ return vertices.length-1;
+}
+
+function face(a,b,c){
+ triangles.push(a,b,c);
+}
+
+function ellipsoid(center,scale,m=0,f=-1,nu=28,nv=18){
+ const grid=[];
+ for(let j=0;j<=nv;j++){
+  const v=j/nv*Math.PI,row=[];
+  for(let i=0;i<=nu;i++){
+   const u=i/nu*Math.PI*2;
+   const q=[
+    Math.sin(v)*Math.cos(u),
+    Math.cos(v),
+    Math.sin(v)*Math.sin(u)
+   ];
+   row.push(vertex(
+    add(center,q.map((x,k)=>x*scale[k])),
+    norm(q.map((x,k)=>x/scale[k])),
+    m,f
+   ));
+  }
+  grid.push(row);
+ }
+ for(let j=0;j<nv;j++){
+  for(let i=0;i<nu;i++){
+   face(grid[j][i],grid[j+1][i],grid[j][i+1]);
+   face(grid[j][i+1],grid[j+1][i],grid[j+1][i+1]);
+  }
+ }
+}
+
+function cat(a,b,c,d,t){
+ return a.map((_,i)=>.5*(
+  2*b[i]+(-a[i]+c[i])*t+
+  (2*a[i]-5*b[i]+4*c[i]-d[i])*t*t+
+  (-a[i]+3*b[i]-3*c[i]+d[i])*t*t*t
+ ));
+}
+
+function sweep(points,radii,m=0,f=-1,sides=16,steps=32,flat=1){
+ function sample(t){
+  const q=Math.min(.999999,Math.max(0,t))*(points.length-1);
+  const i=Math.floor(q);
+  return cat(
+   points[Math.max(0,i-1)],
+   points[i],
+   points[Math.min(points.length-1,i+1)],
+   points[Math.min(points.length-1,i+2)],
+   q-i
+  );
+ }
+ const rows=[];
+
+ for(let j=0;j<=steps;j++){
+  const t=j/steps,p=sample(t);
+  const tangent=norm(sub(sample(t+.001),sample(t-.001)));
+  const a=norm(cross(tangent,Math.abs(tangent[2])>.94?X:Z));
+  const b=norm(cross(tangent,a));
+  const q=t*(radii.length-1);
+  const k=Math.min(radii.length-2,Math.floor(q));
+  const r=radii[k]*(1-(q-k))+radii[k+1]*(q-k);
+  const row=[];
+
+  for(let i=0;i<=sides;i++){
+   const angle=i/sides*Math.PI*2;
+   const c=Math.cos(angle),s=Math.sin(angle);
+   row.push(vertex(
+    add(p,add(mul(a,c*r),mul(b,s*r*flat))),
+    norm(add(mul(a,c),mul(b,s/flat))),
+    m,f
+   ));
+  }
+  rows.push(row);
+ }
+
+ for(let j=0;j<steps;j++){
+  for(let i=0;i<sides;i++){
+   face(rows[j][i],rows[j][i+1],rows[j+1][i]);
+   face(rows[j][i+1],rows[j+1][i+1],rows[j+1][i]);
+  }
+ }
+
+ for(const [j,sign] of [[0,-1],[steps,1]]){
+  const t=j/steps,p=sample(t);
+  const n=mul(norm(sub(sample(t+.001),sample(t-.001))),sign);
+  const center=vertex(p,n,m,f);
+  for(let i=0;i<sides;i++){
+   face(center,rows[j][i],rows[j][i+1]);
+  }
+ }
+
+ return sample;
+}
+
+// Ладонь и запястье.
+sweep(
+ [[.10,-2.65,-.10],[.05,-2.1,-.04],[0,-1.45,0],[0,-.9,0]],
+ [.39,.43,.48,.57],0,-1,24,28,.78
+);
+ellipsoid([0,-.20,0],[1.02,1.25,.36],0,-1,40,26);
+ellipsoid([-.62,-.47,.17],[.45,.62,.29]);
+ellipsoid([.53,-.58,.04],[.46,.58,.30]);
+
+const bases=[
+ [-.76,.74,0],
+ [-.23,.94,0],
+ [.34,.87,0],
+ [.83,.57,0]
+];
+const lengths=[1.65,1.85,1.72,1.38];
+
+// Четыре пальца: MCP, PIP, DIP.
+for(let i=0;i<4;i++){
+ const [x,y]=bases[i];
+ const L=lengths[i],s=(i-1.5)*.09;
+ const r=i===3?.16:.19;
+ const p=[
+  [x,y,0],
+  [x+s,y+L*.46,.045],
+  [x+s*1.5,y+L*.77,.10],
+  [x+s*1.6,y+L,.19]
+ ];
+
+ const joints=[p[0],p[1],p[2]];
+
+ const sample=sweep(
+  [[x,y-.19,0],...p],
+  [r*1.1,r,r*.9,r*.72,r*.59],
+  0,i,18,38,.93
+ );
+
+ const tip=p[3];
+ const claw=[
+  tip,
+  [tip[0]+s*.2,tip[1]+.35,tip[2]+.03],
+  [tip[0]+s*.3,tip[1]+.67,tip[2]+.23],
+  [tip[0],tip[1]+.73,tip[2]+.53]
+ ];
+
+ const nailSample=sweep(
+  claw,[r*.68,r*.49,r*.24,.002],
+  1,i,18,30,.68
+ );
+
+ digits.push({joints,p,r,probe:[],limit:1});
+
+ for(let k=0;k<=20;k++){
+  const t=k/20;
+  digits[i].probe.push({
+   p:sample(t),
+   r:r*(1-.45*t)
+  });
+  digits[i].probe.push({
+   p:nailSample(t),
+   r:r*.6*(1-t)
+  });
+ }
+
+ for(let j=1;j<=2;j++){
+  const q=p[j];
+
+  ellipsoid(
+   [q[0],q[1],q[2]-.06],
+   [r*1.08,r*.83,r*.78],
+   2,i,18,12
+  );
+
+  for(let c=0;c<2;c++){
+   sweep([
+    [q[0]-r*.7,q[1]+c*.045,q[2]+r*.6],
+    [q[0],q[1]+c*.045-.025,q[2]+r*.96],
+    [q[0]+r*.7,q[1]+c*.045,q[2]+r*.6]
+   ],[.008,.011,.008],2,i,6,10);
+  }
+ }
+
+ sweep([
+  [x,y+.08,-.13],
+  [x+s*.5,y+.28,-.29],
+  [x+s,y+.43,-.40]
+ ],[.105,.067,.002],1,i,12,18,.75);
+
+ sweep([
+  [.02,-1.4,-.28],
+  [x*.4,-.60,-.35],
+  [x*.85,.25,-.34],
+  [x,y-.05,-.18]
+ ],[.03,.045,.05,.075],2,-1,8,22);
+}
+
+// Большой палец: CMC, MCP, IP.
+const thumb=[
+ [-.72,-.65,.10],
+ [-1.24,-.14,.15],
+ [-1.59,.29,.22],
+ [-1.70,.70,.38]
+];
+
+digits.push({
+ joints:thumb.slice(0,3),
+ p:thumb,r:.21,probe:[],limit:1
+});
+
+sweep(
+ [[-.66,-.72,.10],...thumb],
+ [.27,.29,.245,.19,.125],
+ 0,4,20,36
+);
+ellipsoid([-1.54,.29,.15],[.22,.20,.17],2,4,18,12);
+sweep([
+ thumb[3],
+ [-1.86,.97,.46],
+ [-1.91,1.23,.66],
+ [-1.79,1.36,.91]
+],[.13,.105,.06,.002],1,4,18,28,.72);
+
+// Панцирь и светящиеся каналы.
+for(let i=0;i<3;i++){
+ ellipsoid(
+  [.04,-1.5-i*.3,-.21],
+  [.51-i*.025,.21,.19],
+  2,-1,24,14
+ );
+}
+
+for(const s of [-1,1]){
+ sweep([
+  [s*.39,-1.55,-.09],
+  [s*.66,-1.36,-.18],
+  [s*.79,-.95,-.26]
+ ],[.13,.09,.002],2,-1,14,22);
+
+ sweep([
+  [s*.14,-1.65,-.38],
+  [s*.25,-1.15,-.37],
+  [s*.34,-.7,-.37],
+  [s*.43,-.22,-.34]
+ ],[.01,.015,.012,.002],3,-1,7,22);
+}
+
+// Плавные веса возле суставов.
+function weights(p,id){
+ const j=digits[id].joints;
+
+ if(id<4){
+  return [
+   smooth(j[0][1]-.17,j[0][1]+.13,p[1]),
+   smooth(j[1][1]-.12,j[1][1]+.12,p[1]),
+   smooth(j[2][1]-.10,j[2][1]+.10,p[1])
+  ];
+ }
+
+ const axis=norm(sub(thumb[3],thumb[0]));
+ return j.map((q,i)=>smooth(
+  -.12,i===0?.20:.12,dot(sub(p,q),axis)
+ ));
+}
+
+for(const v of vertices){
+ if(v.f>=0)v.w=weights(v.p,v.f);
+}
+
+function angles(id,c){
+ if(id===4){
+  const t=smooth(.20,1,c);
+  return [t*.91,t*.70,t*.90];
+ }
+
+ const t=clamp(c*(1+id*.045));
+ const pip=t*1.48;
+
+ // DIP связан с PIP; мизинец сгибается немного раньше.
+ return [t*1.22,pip,pip*.64];
+}
+
+function deform(p,n,id,w,c){
+ if(id<0)return {p,n};
+
+ const j=digits[id].joints;
+ const a=angles(id,c);
+ let q=p.slice(),v=n.slice();
+
+ if(id<4){
+  // Дочерние фаланги наследуют движения родительских.
+  for(let k=2;k>=0;k--){
+   const angle=a[k]*w[k];
+   q=add(j[k],rotate(sub(q,j[k]),X,angle));
+   v=rotate(v,X,angle);
+  }
+ }else{
+  const axes=[
+   norm([.28,.72,-.64]),
+   norm([.40,.25,-.88]),
+   norm([.45,.12,-.88])
+  ];
+  for(let k=2;k>=0;k--){
+   q=add(j[k],rotate(sub(q,j[k]),axes[k],a[k]*w[k]));
+   v=rotate(v,axes[k],a[k]*w[k]);
+  }
+ }
+
+ return {p:q,n:norm(v)};
+}
+
+// Приближённый ограничитель контакта пальцев и когтей с ладонью.
+function touchesPalm(id,c){
+ const d=digits[id];
+
+ for(const probe of d.probe){
+  if(probe.p[1]<d.joints[0][1]+.30)continue;
+
+  const p=deform(
+   probe.p,[0,0,1],id,weights(probe.p,id),c
+  ).p;
+
+  const margin=probe.r*.72;
+  const q=
+   (p[0]/(1.02+margin))**2+
+   ((p[1]+.2)/(1.25+margin))**2+
+   (p[2]/(.36+margin))**2;
+
+  if(q<1)return true;
+ }
+ return false;
+}
+
+for(let id=0;id<4;id++){
+ for(let step=1;step<=80;step++){
+  if(!touchesPalm(id,step/80))continue;
+
+  let lo=(step-1)/80,hi=step/80;
+
+  for(let n=0;n<8;n++){
+   const mid=(lo+hi)/2;
+   if(touchesPalm(id,mid))hi=mid;
+   else lo=mid;
+  }
+
+  digits[id].limit=lo;
+  break;
+ }
+}
+
+// Индексированная геометрия.
+const mesh=new Float32Array(vertices.length*7);
+const indices=new Uint32Array(triangles);
+
+const vao=gl.createVertexArray();
+gl.bindVertexArray(vao);
+
+const buffer=gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+gl.bufferData(gl.ARRAY_BUFFER,mesh.byteLength,gl.DYNAMIC_DRAW);
+
+for(const [loc,size,offset]of [[0,3,0],[1,3,3],[2,1,6]]){
+ gl.enableVertexAttribArray(loc);
+ gl.vertexAttribPointer(loc,size,gl.FLOAT,false,28,offset*4);
+}
+
+const ib=gl.createBuffer();
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);
+gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,indices,gl.STATIC_DRAW);
+
+gl.useProgram(program);
+const U={};
+for(const name of ['eye','right','up','forward','aspect','zoom']){
+ U[name]=gl.getUniformLocation(program,name);
+}
+
+gl.enable(gl.DEPTH_TEST);
+gl.disable(gl.CULL_FACE);
+gl.clearColor(0,0,0,0);
+
+function updatePose(c){
+ for(let i=0;i<vertices.length;i++){
+  const v=vertices[i];
+  const amount=v.f<0?0:Math.min(c,digits[v.f].limit);
+  const d=deform(v.p,v.n,v.f,v.w,amount);
+  const k=i*7;
+
+  mesh.set(d.p,k);
+  mesh.set(d.n,k+3);
+  mesh[k+6]=v.m;
+ }
+
+ gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+ gl.bufferSubData(gl.ARRAY_BUFFER,0,mesh);
+
+ const contact=digits.slice(0,4).some(d=>c>d.limit+.003);
+ document.getElementById('contact').textContent=contact
+  ?'Сгибание ограничено контактом длинных когтей с ладонью'
+  :'Художественная суставная модель';
+}
+
+let bend=0,targetBend=0,lastBend=-1;
+
+document.getElementById('curl').addEventListener('input',e=>{
+ targetBend=Number(e.target.value)/100;
+});
+
+// Инерционная камера.
+let yaw=-.42,pitch=.10;
+let targetYaw=yaw,targetPitch=pitch;
+let distance=8.4,targetDistance=8.4;
+const pointers=new Map();
+let pinch=0;
+
+canvas.addEventListener('pointerdown',e=>{
+ canvas.setPointerCapture(e.pointerId);
+ pointers.set(e.pointerId,[e.clientX,e.clientY]);
+ pinch=0;
+});
+
+canvas.addEventListener('pointermove',e=>{
+ if(!pointers.has(e.pointerId))return;
+
+ const old=pointers.get(e.pointerId);
+ pointers.set(e.pointerId,[e.clientX,e.clientY]);
+
+ if(pointers.size===1){
+  targetYaw-=(e.clientX-old[0])*.008;
+  targetPitch=Math.max(-1.15,Math.min(
+   1.15,targetPitch+(e.clientY-old[1])*.006
+  ));
+ }else{
+  const p=[...pointers.values()];
+  const d=Math.hypot(
+   p[0][0]-p[1][0],p[0][1]-p[1][1]
+  );
+  if(pinch&&d>0){
+   targetDistance=Math.max(4.4,Math.min(
+    14,targetDistance*pinch/d
+   ));
+  }
+  pinch=d;
+ }
+});
+
+for(const event of ['pointerup','pointercancel','lostpointercapture']){
+ canvas.addEventListener(event,e=>{
+  pointers.delete(e.pointerId);
+  pinch=0;
+ });
+}
+
+canvas.addEventListener('wheel',e=>{
+ e.preventDefault();
+ targetDistance=Math.max(4.4,Math.min(
+  14,targetDistance+e.deltaY*.008
+ ));
+},{passive:false});
+
+function resize(){
+ const s=Math.min(
+  devicePixelRatio||1,
+  1080/Math.max(innerWidth,innerHeight)
+ );
+ canvas.width=Math.max(1,Math.round(innerWidth*s));
+ canvas.height=Math.max(1,Math.round(innerHeight*s));
+ gl.viewport(0,0,canvas.width,canvas.height);
+}
+
+addEventListener('resize',resize);
+resize();
+
+let previous=performance.now(),lost=false;
+
+canvas.addEventListener('webglcontextlost',e=>{
+ e.preventDefault();
+ lost=true;
+ fail('Контекст WebGL потерян. Обнови страницу.');
+});
+
+function frame(now){
+ if(lost)return;
+
+ const dt=Math.min(.05,(now-previous)/1000);
+ previous=now;
+ const e=1-Math.exp(-dt*10);
+
+ yaw+=(targetYaw-yaw)*e;
+ pitch+=(targetPitch-pitch)*e;
+ distance+=(targetDistance-distance)*e;
+ bend+=(targetBend-bend)*e;
+
+ if(Math.abs(bend-targetBend)<.0001)bend=targetBend;
+
+ // Геометрия обновляется только при изменении позы.
+ if(bend!==lastBend){
+  updatePose(bend);
+  lastBend=bend;
+ }
+
+ const target=[0,.45,.1];
+ const eye=add(target,[
+  Math.sin(yaw)*Math.cos(pitch)*distance,
+  Math.sin(pitch)*distance,
+  Math.cos(yaw)*Math.cos(pitch)*distance
+ ]);
+
+ const forward=norm(sub(target,eye));
+ const right=norm(cross(forward,Y));
+ const up=cross(right,forward);
+
+ gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+ gl.uniform3fv(U.eye,eye);
+ gl.uniform3fv(U.forward,forward);
+ gl.uniform3fv(U.right,right);
+ gl.uniform3fv(U.up,up);
+ gl.uniform1f(U.aspect,canvas.width/canvas.height);
+ gl.uniform1f(U.zoom,2.15);
+
+ gl.drawElements(
+  gl.TRIANGLES,indices.length,gl.UNSIGNED_INT,0
+ );
+
+ requestAnimationFrame(frame);
+}
+
+requestAnimationFrame(frame);
+
+// Экспорт текущей позы.
+document.getElementById('export').addEventListener('click',()=>{
+ updatePose(bend);
+
+ const out=[
+  '# Demonic hand: current static pose; no rig',
+  'o Demonic_Hand'
+ ];
+
+ for(let i=0;i<mesh.length;i+=7){
+  out.push('v '+Array.from(
+   mesh.subarray(i,i+3),v=>v.toFixed(6)
+  ).join(' '));
+ }
+
+ out.push('s 1');
+
+ for(let i=0;i<indices.length;i+=3){
+  out.push('f '+[
+   indices[i]+1,
+   indices[i+1]+1,
+   indices[i+2]+1
+  ].join(' '));
+ }
+
+ const url=URL.createObjectURL(
+  new Blob([out.join('\n')],{type:'text/plain'})
+ );
+
+ const a=document.createElement('a');
+ a.href=url;
+ a.download='demonic-hand-articulated.obj';
+ document.body.appendChild(a);
+ a.click();
+ a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),10000);
+});
+})();
+</script>
+</html>

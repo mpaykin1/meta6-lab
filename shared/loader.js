@@ -13,7 +13,17 @@
     'observer-combat':Object.freeze({file:'components/observer-combat/combat-relations.js',global:'ObserverCombatRelations',depends:['observer-npc']}),
     'three-worlds-island-weather':Object.freeze({file:'components/three-worlds-island-weather/island-weather.js',module:true,exports:['createIslandWeatherCatalog']}),
     'three-worlds-rift-guard':Object.freeze({file:'components/three-worlds-rift-guard/rift-input-guard.js',module:true,exports:['createRiftInputGuard']}),
-    'three-worlds-combat-facing':Object.freeze({file:'components/three-worlds-combat-facing/combat-facing.js',module:true,exports:['chooseCombatTarget','turnWeaponToward','turnHeroToward','angleToTarget']})
+    'three-worlds-combat-facing':Object.freeze({file:'components/three-worlds-combat-facing/combat-facing.js',module:true,exports:['chooseCombatTarget','turnWeaponToward','turnHeroToward','angleToTarget']}),
+    // Derived owner-provided library; provenance is in pod-i-nad/library.json.
+    'pod-i-nad-flail-combat':Object.freeze({file:'components/pod-i-nad/animations/flail-combat.mjs',module:true,exports:['createFlailCombat']}),
+    'pod-i-nad-flail-physics':Object.freeze({file:'components/pod-i-nad/animations/flail-physics.mjs',module:true,exports:['createFlailPhysics']}),
+    'pod-i-nad-flail-hits':Object.freeze({file:'components/pod-i-nad/animations/flail-hit-detection.mjs',module:true,exports:['createFlailHitDetector']}),
+    'pod-i-nad-flail-vfx':Object.freeze({file:'components/pod-i-nad/animations/flail-vfx.mjs',module:true,exports:['createFlailImpactFX']}),
+    'pod-i-nad-flail-audio':Object.freeze({file:'components/pod-i-nad/animations/flail-audio.mjs',module:true,exports:['createFlailAudio']}),
+    'pod-i-nad-combat-poses':Object.freeze({file:'components/pod-i-nad/animations/combat-poses.mjs',module:true,exports:['sampleCombatPose']}),
+    'pod-i-nad-water':Object.freeze({file:'components/pod-i-nad/shaders/water/water-material.mjs',module:true,exports:['createWaterMaterial']}),
+    'pod-i-nad-mist':Object.freeze({file:'components/pod-i-nad/shaders/atmosphere/mist-material.mjs',module:true,exports:['createMistMaterial','createMistLayers']}),
+    'pod-i-nad-textures':Object.freeze({file:'components/pod-i-nad/textures/embedded-assets.mjs',module:true,exports:['loadTexture']})
   });
   const cache=new Map();
   function use(id) {

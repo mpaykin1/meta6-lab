@@ -224,3 +224,5 @@ iPhone 11: 30–60 FPS, адаптивный render resolution; atlas ≤2048; a
 
 
 **Покадровое описание R1/R2/R3:** [REFERENCE_FRAMES_R1_R2_R3_RU.md](../games/train-in-the-fog/REFERENCE_FRAMES_R1_R2_R3_RU.md). **Все три JPG загружены и проверены на GitHub**; версии 720 × 1280 — уменьшенные копии исходных эскизов. Визуальная приёмка 3D-моделей до сравнительных игровых кадров **не подтверждена**.
+
+**Машиночитаемая привязка всех 640 ID к трём референсам:** [reference-manifest.json](../../assets/train-in-the-fog/references/reference-manifest.json). Поле `artReview: NOT_VERIFIED` относится к моделям, пока нет сравнительных игровых кадров; наличие JPG подтверждено.

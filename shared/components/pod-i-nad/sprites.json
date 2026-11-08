@@ -1,0 +1,691 @@
+{
+  "schema_version": 1,
+  "source_reference": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+  "source_sha256": "91642018b3e589173171340298f72320f747d3b401021a939030f6f922ede5e5",
+  "visual_origin": "approved-reference",
+  "atlas_grid": [
+    8,
+    3
+  ],
+  "atlas_names": [
+    "grass",
+    "dirt",
+    "stone",
+    "wood",
+    "sand",
+    "leaves",
+    "water",
+    "brick",
+    "grass_side",
+    "bark",
+    "log_top",
+    "snow",
+    "frozen_dirt",
+    "snow_side",
+    "ice",
+    "packed_snow",
+    "frost_brick",
+    "pine_needles"
+  ],
+  "weapon_metadata": {
+    "size": [
+      256,
+      128
+    ],
+    "weapons": {
+      "fists": {
+        "cell": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          10,
+          15
+        ],
+        "tip": [
+          21,
+          15
+        ],
+        "base": 0
+      },
+      "stick": {
+        "cell": [
+          32,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          22
+        ],
+        "tip": [
+          27,
+          4
+        ],
+        "base": 45
+      },
+      "dagger": {
+        "cell": [
+          64,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          22
+        ],
+        "tip": [
+          23,
+          8
+        ],
+        "base": 45
+      },
+      "sword": {
+        "cell": [
+          96,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          7,
+          25
+        ],
+        "tip": [
+          28,
+          4
+        ],
+        "base": 45
+      },
+      "katana": {
+        "cell": [
+          128,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          6,
+          25
+        ],
+        "tip": [
+          29,
+          2
+        ],
+        "base": 45
+      },
+      "axe": {
+        "cell": [
+          160,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          8,
+          25
+        ],
+        "tip": [
+          15,
+          4
+        ],
+        "base": 45
+      },
+      "hammer": {
+        "cell": [
+          192,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          8,
+          25
+        ],
+        "tip": [
+          22,
+          10
+        ],
+        "base": 45
+      },
+      "spear": {
+        "cell": [
+          224,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          22
+        ],
+        "tip": [
+          30,
+          1
+        ],
+        "base": 45
+      },
+      "scythe": {
+        "cell": [
+          0,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          10,
+          23
+        ],
+        "tip": [
+          5,
+          12
+        ],
+        "base": 45
+      },
+      "flamesword": {
+        "cell": [
+          32,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          7,
+          25
+        ],
+        "tip": [
+          28,
+          4
+        ],
+        "base": 45
+      },
+      "flail": {
+        "cell": [
+          64,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          6,
+          26
+        ],
+        "tip": [
+          22,
+          10
+        ],
+        "base": 45
+      },
+      "sling": {
+        "cell": [
+          96,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          7,
+          16
+        ],
+        "tip": [
+          24,
+          16
+        ],
+        "muzzle": [
+          25,
+          16
+        ],
+        "base": 0
+      },
+      "bow": {
+        "cell": [
+          128,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          20,
+          16
+        ],
+        "tip": [
+          29,
+          16
+        ],
+        "muzzle": [
+          30,
+          16
+        ],
+        "base": 0
+      },
+      "bow_drawn": {
+        "cell": [
+          160,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          20,
+          16
+        ],
+        "tip": [
+          24,
+          16
+        ],
+        "muzzle": [
+          25,
+          16
+        ],
+        "base": 0
+      },
+      "xbow": {
+        "cell": [
+          192,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          19
+        ],
+        "tip": [
+          29,
+          14
+        ],
+        "muzzle": [
+          30,
+          14
+        ],
+        "base": 0
+      },
+      "pistol": {
+        "cell": [
+          224,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          18
+        ],
+        "tip": [
+          27,
+          12
+        ],
+        "muzzle": [
+          28,
+          11.5
+        ],
+        "base": 0
+      },
+      "shotgun": {
+        "cell": [
+          0,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          10,
+          16
+        ],
+        "tip": [
+          30,
+          12
+        ],
+        "muzzle": [
+          31,
+          12
+        ],
+        "base": 0
+      },
+      "smg": {
+        "cell": [
+          32,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          11,
+          18
+        ],
+        "tip": [
+          28,
+          12
+        ],
+        "muzzle": [
+          29,
+          12.5
+        ],
+        "base": 0
+      },
+      "saw": {
+        "cell": [
+          64,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          20
+        ],
+        "tip": [
+          29,
+          14
+        ],
+        "muzzle": [
+          29,
+          14.5
+        ],
+        "base": 0
+      },
+      "bomb": {
+        "cell": [
+          96,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          13,
+          20
+        ],
+        "tip": [
+          28,
+          14
+        ],
+        "muzzle": [
+          29,
+          14
+        ],
+        "base": 0
+      },
+      "tesla": {
+        "cell": [
+          128,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          8,
+          19
+        ],
+        "tip": [
+          27,
+          14
+        ],
+        "muzzle": [
+          28,
+          14
+        ],
+        "base": 0
+      },
+      "laser": {
+        "cell": [
+          160,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          11,
+          19
+        ],
+        "tip": [
+          29,
+          14
+        ],
+        "muzzle": [
+          30,
+          14.5
+        ],
+        "base": 0
+      },
+      "boomerang": {
+        "cell": [
+          192,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          8,
+          18
+        ],
+        "tip": [
+          27,
+          18
+        ],
+        "muzzle": [
+          17,
+          11
+        ],
+        "base": 0
+      }
+    },
+    "proj": {
+      "pebble": [
+        0,
+        96,
+        16,
+        16
+      ],
+      "arrow": [
+        16,
+        96,
+        16,
+        16
+      ],
+      "bolt": [
+        32,
+        96,
+        16,
+        16
+      ],
+      "saw": [
+        48,
+        96,
+        16,
+        16
+      ],
+      "bomb": [
+        64,
+        96,
+        16,
+        16
+      ],
+      "ball": [
+        80,
+        96,
+        16,
+        16
+      ],
+      "casing": [
+        96,
+        96,
+        16,
+        16
+      ],
+      "boomerang": [
+        112,
+        96,
+        16,
+        16
+      ]
+    },
+    "icons": {
+      "gull_feather": [
+        128,
+        96,
+        16,
+        16
+      ],
+      "tide_charm": [
+        144,
+        96,
+        16,
+        16
+      ],
+      "iron_grip": [
+        160,
+        96,
+        16,
+        16
+      ],
+      "hawk_eye": [
+        176,
+        96,
+        16,
+        16
+      ],
+      "soul_jar": [
+        192,
+        96,
+        16,
+        16
+      ],
+      "magnet_coin": [
+        208,
+        96,
+        16,
+        16
+      ],
+      "heart_seed": [
+        224,
+        96,
+        16,
+        16
+      ],
+      "lantern_shard": [
+        240,
+        96,
+        16,
+        16
+      ],
+      "storm_glass": [
+        0,
+        112,
+        16,
+        16
+      ],
+      "rime_charm": [
+        16,
+        112,
+        16,
+        16
+      ]
+    }
+  },
+  "assets": [
+    {
+      "id": "atlas",
+      "path": "textures/atlas.png",
+      "git_blob_sha": "3d86887bc3350b3fd475c24de74c5e0b9fb0c704",
+      "format": "png",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_symbol": "ASSETS.atlas",
+      "dependencies": []
+    },
+    {
+      "id": "weapons",
+      "path": "textures/weapons.png",
+      "git_blob_sha": "d70099503e7f639c364750eeb4ed0bfb33d8bae1",
+      "format": "png",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_symbol": "ASSETS.weapons",
+      "dependencies": []
+    },
+    {
+      "id": "hero",
+      "path": "sprites/heroes/hero.png",
+      "git_blob_sha": "1301b3204cedf8cbea1bd6145f95d051ba88ae3d",
+      "format": "png",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_symbol": "ASSETS.hero",
+      "dependencies": []
+    },
+    {
+      "id": "coin",
+      "path": "sprites/ui/coin.png",
+      "git_blob_sha": "d74877a868c9516744e069c224e9caa5b8871cae",
+      "format": "png",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_symbol": "ASSETS.coin",
+      "dependencies": []
+    },
+    {
+      "id": "hearts",
+      "path": "sprites/ui/hearts.png",
+      "git_blob_sha": "0dc50be9cc0d6306b5a2b30921b2c543f7134109",
+      "format": "png",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_symbol": "ASSETS.hearts",
+      "dependencies": []
+    },
+    {
+      "id": "water",
+      "path": "textures/water.png",
+      "git_blob_sha": "6bb25fdcc4c84a8bb8aeb34e237754dc775d600f",
+      "format": "png",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_symbol": "ASSETS.water",
+      "dependencies": []
+    },
+    {
+      "id": "hero_wanderer",
+      "path": "sprites/heroes/wanderer.png",
+      "git_blob_sha": "1301b3204cedf8cbea1bd6145f95d051ba88ae3d",
+      "format": "png",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_symbol": "ASSETS.heroes.wanderer",
+      "dependencies": []
+    },
+    {
+      "id": "hero_keeper_old",
+      "path": "sprites/heroes/keeper_old.png",
+      "git_blob_sha": "d99ae143bc247e68df38b3fd5d934db6d34a1a4e",
+      "format": "png",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_symbol": "ASSETS.heroes.keeper_old",
+      "dependencies": []
+    },
+    {
+      "id": "hero_fisher",
+      "path": "sprites/heroes/fisher.png",
+      "git_blob_sha": "393b94b054cf003cbf577470a4a3e5bccf9ffbe6",
+      "format": "png",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_symbol": "ASSETS.heroes.fisher",
+      "dependencies": []
+    },
+    {
+      "id": "hero_keeper",
+      "path": "sprites/heroes/keeper.png",
+      "git_blob_sha": "18d126d928cd05cdf5d0a1dddab13d121e261be6",
+      "format": "png",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_symbol": "ASSETS.heroes.keeper",
+      "dependencies": []
+    }
+  ]
+}

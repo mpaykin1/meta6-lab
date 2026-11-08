@@ -3239,7 +3239,11 @@ function frame() {
   requestAnimationFrame(frame);
   // Preserve real simulation time on low-FPS WebGL: render at the available FPS,
   // but never silently discard the rest of the elapsed frame during gameplay.
-  const elapsed = Math.min(clock.getDelta(), .5);
+  // A software-rendered WebGL frame may take several seconds. Simulate that
+  // real time in the existing 50 ms physics substeps instead of slowing gameplay.
+  // In background tabs, do not accumulate and replay missed gameplay.
+  const frameGap = clock.getDelta();
+  const elapsed = Math.min(frameGap, document.hidden ? .05 : 3.5);
   const dt0 = Math.min(elapsed, .05); if (PAUSE.size && started) return;
   const dt = dt0, t = clock.elapsedTime;
   U.uTime.value = t;

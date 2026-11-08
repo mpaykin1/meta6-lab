@@ -14,18 +14,24 @@ export async function getOriginalModelBytes(name){
   const rec=(await listOriginalModels()).find(m=>m.name===name&&m.present);
   if(!rec)throw Error('Unknown approved GLB: '+name);
   if(!byteCache.has(name)){
-    const task=fetch(new URL(name+'.json',modelDir))
-      .then(r=>{if(!r.ok)throw Error('GLB JSON '+name+' HTTP '+r.status);return r.json()})
-      .then(data=>{
-        if(typeof data.glb!=='string'||!data.glb.startsWith('Z2xURg'))throw Error('Bad GLB content for '+name);
-        const str=atob(data.glb);
-        const bytes=new Uint8Array(str.length);
-        for(let i=0;i<str.length;i++)bytes[i]=str.charCodeAt(i);
-        if(bytes.length<12)throw Error('GLB truncated: '+name);
-        const dv=new DataView(bytes.buffer);
-        if(dv.getUint32(0,true)!==0x46546c67||dv.getUint32(4,true)!==2||dv.getUint32(8,true)!==bytes.length)throw Error('Invalid GLB header: '+name);
-        return bytes.buffer;
-      }).catch(e=>{byteCache.delete(name);throw e});
+    const task=(rec.binary_glb_path
+      ? fetch(new URL(rec.binary_glb_path,new URL('../../../../',import.meta.url)))
+          .then(r=>{if(!r.ok)throw Error('GLB binary '+name+' HTTP '+r.status);return r.arrayBuffer()})
+      : fetch(new URL(name+'.json',modelDir))
+          .then(r=>{if(!r.ok)throw Error('GLB JSON '+name+' HTTP '+r.status);return r.json()})
+          .then(data=>{
+            if(typeof data.glb!=='string'||!data.glb.startsWith('Z2xURg'))throw Error('Bad GLB content for '+name);
+            const str=atob(data.glb),bytes=new Uint8Array(str.length);
+            for(let i=0;i<str.length;i++)bytes[i]=str.charCodeAt(i);
+            return bytes.buffer;
+          })
+    ).then(buffer=>{
+      if(buffer.byteLength<12)throw Error('GLB truncated: '+name);
+      const dv=new DataView(buffer);
+      if(dv.getUint32(0,true)!==0x46546c67||dv.getUint32(4,true)!==2||dv.getUint32(8,true)!==buffer.byteLength)
+        throw Error('Invalid GLB header: '+name);
+      return buffer;
+    }).catch(e=>{byteCache.delete(name);throw e});
     byteCache.set(name,task);
   }
   return (await byteCache.get(name)).slice(0);

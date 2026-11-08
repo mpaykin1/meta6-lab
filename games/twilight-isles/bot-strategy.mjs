@@ -13,6 +13,7 @@ export async function start(ctx) {
 export async function playLevel(ctx,level) {
   let iterations=0,lastProgress=-1,stalls=0;
   let previousGoalDistance=Infinity, noApproach=0, escapeSide=1;
+  let lastGoalKey='';
   // In this game movement is camera-relative. Convert world X/Z into real
   // joystick axes directly; probing four directions is too slow on low FPS.
   const moveWorld = (s, wx, wz, ms) => {
@@ -30,14 +31,22 @@ export async function playLevel(ctx,level) {
       await ctx.key('KeyJ',200);
       if (s.hp<0.35) await ctx.jump();
     } else if (s.goal) {
+      const goalKey=`${s.goal.x.toFixed(1)},${s.goal.y.toFixed(1)}`;
+      if (goalKey!==lastGoalKey) {
+        noApproach=0;
+        previousGoalDistance=Infinity;
+        lastGoalKey=goalKey;
+      }
       const before=Math.hypot(s.goal.x-s.hero.x,s.goal.y-s.hero.y);
       const wx=(s.goal.x-s.hero.x)/Math.max(0.001,before);
       const wz=(s.goal.y-s.hero.y)/Math.max(0.001,before);
       if (noApproach>=4) {
         // Navigate around an obstacle by a genuine camera-correct side step.
         await ctx.jump();
-        await moveWorld(s,-wz*escapeSide,wx*escapeSide,900);
-        escapeSide=-escapeSide;
+        // Keep the same detour side for two attempts so movement can clear
+        // the obstacle instead of oscillating on successive frames.
+        await moveWorld(s,-wz*escapeSide,wx*escapeSide,1400);
+        if (iterations%2===0) escapeSide=-escapeSide;
         noApproach=0;
       } else {
         // At observed ~2 FPS, 120/300ms pulses can finish before a rendered movement frame.\n        // Use >=600ms input; actual collision and pickup remain game-controlled.

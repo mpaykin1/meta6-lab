@@ -24,7 +24,7 @@ jobs:
         run: |
           set -euo pipefail
           # .github/workflows is kept whole: GITHUB_TOKEN may not push workflow changes; Claude updates sandbox workflows by hand.
-          KEEP=(LAB_QUEUE.md LAB_README.md scripts/lab .github/workflows shared scripts/shared scripts/repair-bot games/veil-terraces)
+          KEEP=(LAB_QUEUE.md LAB_README.md scripts/lab .github/workflows shared scripts/shared scripts/repair-bot games/veil-terraces games/twilight-isles)
           mkdir -p /tmp/keep
           for k in "${KEEP[@]}"; do [ -e "$k" ] && { mkdir -p "/tmp/keep/$(dirname "$k")"; cp -a "$k" "/tmp/keep/$k"; }; done
           git clone --depth 1 https://github.com/mpaykin1/meta6 /tmp/m6

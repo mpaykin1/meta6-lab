@@ -8,6 +8,8 @@ export async function start(ctx) {
 }
 export async function playLevel(ctx, level) {
   let step = 0;
+  let previousProgress = -1;
+  let stagnantSteps = 0;
   while (true) {
     const s = ctx.state();
     if (s.gameDone || s.levelDone || s.level > level) return;
@@ -21,15 +23,27 @@ export async function playLevel(ctx, level) {
       continue;
     }
     const mode = String(s.layoutHash || '').split(':')[2];
+    const progress = Number(s.progress);
+    if (Number.isFinite(progress)) {
+      if (progress > previousProgress + 0.002) {
+        stagnantSteps = 0;
+        previousProgress = progress;
+      } else {
+        stagnantSteps++;
+      }
+    }
     if (s.goal) await ctx.walkToGoal(450);
     else await ctx.key('KeyW', 250);
-    // Space invokes the real action() for folding bridges, lantern stomps,
-    // runner jumps and combo jumps. Combo/cradle also require separate
-    // stomp (E) and bridge (Q) controls; Space alone cannot use them.
+    // Space is the real action() for folding, lantern stomps and jumps.
     await ctx.key('Space', 90);
     if (mode === 'combo' || mode === 'cradle') {
       if (step % 3 === 0) await ctx.key('KeyE', 90);
-      if (step % 5 === 0) await ctx.key('KeyQ', 90);
+      // Bridge is a toggle: repeatedly pressing Q while moving closes it
+      // again. Only retry it when measured forward progress has stalled.
+      if (stagnantSteps >= 5) {
+        await ctx.key('KeyQ', 90);
+        stagnantSteps = 0;
+      }
     }
     step++;
   }

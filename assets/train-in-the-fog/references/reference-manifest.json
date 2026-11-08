@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "status": "reference binaries VERIFIED; actual asset screenshots NOT_VERIFIED",
+  "status": "R1 reference images VERIFIED; 13.01 hero GLB CREATED but art review NOT_VERIFIED",
   "referencePolicy": "styleReferenceIds establish visual style; NOT proof each listed asset appears in the frames",
   "sourceList": "docs/games/train-in-the-fog/ASSET_LIST_640_RU.md",
   "sourceSpecification": "docs/standards/META_GAMES_AUTONOMOUS_ASSET_PACK_SPEC_V1_RU.md",
@@ -2201,7 +2201,11 @@
         "R2",
         "R3"
       ],
-      "artReview": "NOT_VERIFIED"
+      "artReview": "NOT_VERIFIED",
+      "modelFile": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1.glb",
+      "previewPage": "assets/train-in-the-fog/hero-r1/index.html",
+      "assetManifest": "assets/train-in-the-fog/hero-r1/asset-manifest.json",
+      "modelStatus": "GLB_CREATED_BINARY_VALIDATED"
     },
     {
       "id": "13.02",

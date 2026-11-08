@@ -50,9 +50,9 @@
   ],
   "buildDate": "2026-11-08",
   "viewerFile": "index.html",
-  "viewerStatus": "Published HTML uses built-in Canvas2D software 3D rasterizer of actual embedded GLB triangles to avoid invisible WebGL model; verified JS syntax and model projection, live visual validation pending",
+  "viewerStatus": "Owner approved R1 visible-v2, same page copied to index.html; improved animated variants need visual review",
   "viewerIsOfflineStandalone": true,
-  "viewerRenderer": "Canvas2D depth-sorted triangle projection of embedded GLB, not a prerendered picture",
+  "viewerRenderer": "Canvas2D GLB triangle rasterizer, owner-approved geometry visible",
   "ownerApproval": "PASS (2026-11-08)",
   "approvedViewerFile": "r1-visible-v2.html",
   "optimizedRuntimeFile": "hero_locomotive_R1_optimized.glb",
@@ -74,6 +74,13 @@
       "Rolling_axles",
       "Headlight_soft_sweep"
     ],
-    "visualBaseline": "original hero_locomotive_R1.glb kept unchanged"
-  }
+    "visualBaseline": "original hero_locomotive_R1.glb kept unchanged",
+    "mobileBytes": 388992,
+    "mobileReductionPercent": 43.8
+  },
+  "visualApprovedModel": "hero_locomotive_R1.glb",
+  "canonicalViewer": "index.html",
+  "mobileVariantFile": "hero_locomotive_R1_mobile.glb",
+  "optimizedViewer": "r1-optimized-animated.html",
+  "mobileViewer": "r1-mobile-animated.html"
 }

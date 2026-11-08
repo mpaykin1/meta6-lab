@@ -1,7 +1,7 @@
 {
   "assetId": "13.01",
   "artReference": "R1",
-  "status": "OPTIMIZED_BINARY_READY; VISUAL_PARITY_NOT_VERIFIED",
+  "status": "ORIGINAL_OWNER_PASS; OPTIMIZED_AND_MOBILE_FILES_CREATED; VISUAL_PARITY_NOT_VERIFIED",
   "originalPath": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1.glb",
   "optimizedPath": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1_optimized.glb",
   "originalBytes": 691748,
@@ -30,5 +30,14 @@
     "visual parity with approved viewer not independently tested",
     "performance on iPhone not measured"
   ],
-  "baselineOwnerApproved": true
+  "baselineOwnerApproved": true,
+  "mobilePath": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1_mobile.glb",
+  "mobileViewerPath": "assets/train-in-the-fog/hero-r1/r1-mobile-animated.html",
+  "optimizedViewerPath": "assets/train-in-the-fog/hero-r1/r1-optimized-animated.html",
+  "mobileBytes": 388992,
+  "mobileReductionPercent": 43.8,
+  "mobileEmbeddedPbrTextures": "6 bilinear downsampled 64x64 RGB textures (original embedded maps unchanged in original and standard optimized GLB)",
+  "ownerApprovedViewer": "assets/train-in-the-fog/hero-r1/index.html",
+  "ownerApprovedAsset": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1.glb",
+  "animatedViewerStatus": "standalone software 3D renderer with time-dependent rolling axles and headlight/marker lighting; source JS syntax and triangle display check passed; live browser appearance not verified"
 }

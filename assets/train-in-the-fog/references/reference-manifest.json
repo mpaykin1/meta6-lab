@@ -2211,7 +2211,10 @@
       "optimizedModelFile": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1_optimized.glb",
       "optimizedArtParity": "NOT_VERIFIED",
       "ownerApprovalDate": "2026-11-08",
-      "note": "User explicitly approved visible train (PASS); baseline preserved. New optimized variant needs own visual approval."
+      "note": "User explicitly approved visible train (PASS); baseline preserved. New optimized variant needs own visual approval.",
+      "mobileModelFile": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1_mobile.glb",
+      "standardOptimizedViewer": "assets/train-in-the-fog/hero-r1/r1-optimized-animated.html",
+      "mobileAnimatedViewer": "assets/train-in-the-fog/hero-r1/r1-mobile-animated.html"
     },
     {
       "id": "13.02",

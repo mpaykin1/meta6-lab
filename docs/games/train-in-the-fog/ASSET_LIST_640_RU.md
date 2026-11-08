@@ -850,3 +850,5 @@
 **Покадровое описание R1/R2/R3:** [REFERENCE_FRAMES_R1_R2_R3_RU.md](REFERENCE_FRAMES_R1_R2_R3_RU.md). **Все три JPG загружены и проверены на GitHub**; версии 720 × 1280 — уменьшенные копии исходных эскизов. Визуальная приёмка 3D-моделей до сравнительных игровых кадров **не подтверждена**.
 
 **Машиночитаемая привязка всех 640 ID к трём референсам:** [reference-manifest.json](../../../assets/train-in-the-fog/references/reference-manifest.json). Поле `artReview: NOT_VERIFIED` относится к моделям, пока нет сравнительных игровых кадров; наличие JPG подтверждено.
+
+**Утверждённый эталон R1 (13.01):** [модель PASS](../../assets/train-in-the-fog/hero-r1/hero_locomotive_R1.glb) · [просмотрщик](../../assets/train-in-the-fog/hero-r1/index.html) · [оптимизированный GLB](../../assets/train-in-the-fog/hero-r1/hero_locomotive_R1_optimized.glb) · [мобильный GLB](../../assets/train-in-the-fog/hero-r1/hero_locomotive_R1_mobile.glb). Одобрен только оригинальный вид; оптимизированные варианты ещё не получили отдельную художественную приёмку.

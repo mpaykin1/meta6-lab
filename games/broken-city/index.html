@@ -3042,8 +3042,8 @@ const metaBotObserver = Object.freeze({
       : null;
     const waypoint = c && c.mode === 'toys'
       ? (point
-          ? {x:point[0],z:point[1],jump:!!point[2]}
-          : {x:h.x * .5,z:Math.max(c.goal,h.z - 10),jump:false})
+          ? {x:point[0],z:point[1],jump:!!point[2],routeIndex:waypointRuin.ri}
+          : {x:h.x * .5,z:Math.max(c.goal,h.z - 10),jump:false,routeIndex:-1})
       : null;
     return {
       started: active && (G.state === 'play' || G.state === 'ending' || G.state === 'endwait'),

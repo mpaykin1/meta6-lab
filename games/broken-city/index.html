@@ -1907,7 +1907,13 @@ function tickToyHouses(dt, t, hs) {
     h.dropT -= dt; if (h.dropT <= 0) { h.dropT = .45 + Math.random() * .5; if (h.y < 20) spawnToy(TOY_BAG[(Math.random() * TOY_BAG.length) | 0], h.x + (Math.random() - .5) * 2, h.y - h.bottom * HS + .3, h.z + (Math.random() - .5) * 2 * HS, (Math.random() - .5) * 2, h.vy * .8, (Math.random() - .5) * 2); }
     if (h.barrier && h.y - h.bottom * HS <= gy) {
       h.on = false; h.g.visible = false; h.ring.visible = false; h.barrier = false;
-      const F = Math.random() < .5 ? 1 : -1, ru = makeBarrierRuin(h.z, F, (Math.random() * 1e9) | 0, Math.random() < .15 ? barrierLayoutA : barrierLayoutGen); world.add(ru.g);
+      const plan = G.firstBarrierSpec;
+      G.firstBarrierSpec = null;
+      const F = plan ? plan.side : (Math.random() < .5 ? 1 : -1);
+      const seed = plan ? plan.seed : ((Math.random() * 1e9) | 0);
+      const layoutFn = plan ? (plan.useA ? barrierLayoutA : barrierLayoutGen)
+        : (Math.random() < .15 ? barrierLayoutA : barrierLayoutGen);
+      const ru = makeBarrierRuin(h.z, F, seed, layoutFn); world.add(ru.g);
       const XR = (a, b2) => [Math.min(F * a, F * b2), Math.max(F * a, F * b2)], zn = (xr, z0, z1) => ({ x0: xr[0], x1: xr[1], z0: h.z + z0, z1: h.z + z1 });
       for (let k = 0; k + 1 < ru.route.length; k++) { const a = ru.route[k], b2 = ru.route[k + 1]; CLEAR.push({ x0: Math.min(a[0], b2[0]) - .75, x1: Math.max(a[0], b2[0]) + .75, z0: Math.min(a[1], b2[1]) - .45, z1: Math.max(a[1], b2[1]) + .45 }); }
       SURFS.push(...ru.surfs); truins.push({ g: ru.g, z: h.z, em: ru.em, glows: ru.glows, puffs: ru.puffs, surfs: ru.surfs, emT: 0, barrier: true, route: ru.route, ri: 0, chalk: [ru.chalk[0], h.z + ru.chalk[1]] });
@@ -1938,7 +1944,18 @@ function toysBlock(hs, px0, pz0) {
   for (const r of truins) { const inside = (x, z) => Math.abs(x - r.x) < r.w / 2 + .2 && Math.abs(z - r.z) < r.d / 2 + .2;
     if (hs.pos.y < r.top - .45 && inside(hs.pos.x, hs.pos.z)) { if (!inside(px0, hs.pos.z)) hs.pos.x = px0; else if (!inside(hs.pos.x, pz0)) hs.pos.z = pz0; else { hs.pos.x = px0; hs.pos.z = pz0; } hs.vel.multiplyScalar(.5); } }
 }
-function toysStart() { memClear(); G.tfT = 1.1; G.tfN = 0; G.focusK = 0; G.nextBarrier = -27; toyBg.visible = true; toyBg.children.forEach(m => m.position.z = G.cfg.goal + m.userData.dz); }
+function toysStart() {
+  memClear(); G.tfT = 1.1; G.tfN = 0; G.focusK = 0; G.nextBarrier = -27;
+  // Choose the actual first climb before gameplay starts. The same seed and
+  // layout are used when the authored falling house becomes a walkable ruin.
+  G.firstBarrierSpec = {
+    side: Math.random() < .5 ? 1 : -1,
+    useA: Math.random() < .15,
+    seed: (Math.random() * 1e9) | 0
+  };
+  toyBg.visible = true;
+  toyBg.children.forEach(m => m.position.z = G.cfg.goal + m.userData.dz);
+}
 function toysUpdate(hs, t, dt) {
   const c = G.cfg;
   G.tfT -= dt;
@@ -3382,6 +3399,11 @@ const metaBot = Object.freeze({
     if (playing && !metaBotWasPlaying) {
       metaBotLayoutHash = JSON.stringify([
         G.li, c.mode,
+        // Genuine, already selected first ruin geometry (not a synthetic ID).
+        // Fixed layout A ignores its seed; compare only its mirrored side.
+        G.firstBarrierSpec
+          ? [G.firstBarrierSpec.side, G.firstBarrierSpec.useA ? 'A' : G.firstBarrierSpec.seed]
+          : null,
         bridges.map(b => [b.userData.gz, b.userData.gapLen]),
         stations.map(s => [s.userData.z, s.userData.side]),
         pits.map(p => [p.position.x, p.position.z]),

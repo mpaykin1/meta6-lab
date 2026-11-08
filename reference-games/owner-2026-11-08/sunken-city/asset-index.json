@@ -1,0 +1,2505 @@
+{
+  "schema_version": 1,
+  "title": "Затонувший город — исходный каталог ассетов",
+  "source_game": "sunken-city-showcase",
+  "source_sha256": "431841ee19b61280f6d92d761f566abc30e6862af22c7a1672fbc983b2078116",
+  "source_zip": {
+    "filename": "sunken-city-pack(2).zip",
+    "sha256": "b207bd471d63211a594a8515dfd73e571ea0ac0aecee9148b20d294cff4af820",
+    "total_files": 1405,
+    "formats": {
+      "glb": 114,
+      "vox": 76,
+      "obj": 76,
+      "mtl": 76,
+      "png": 1025,
+      "py": 35,
+      "json": 2,
+      "md": 1
+    },
+    "uploaded_to_github": false
+  },
+  "source_routes": {
+    "html": "../sunken-city-showcase/index.html",
+    "encoded_model": "pack:glb/{id}.json",
+    "atlas": "pack:atlas/{name}.png"
+  },
+  "models": [
+    {
+      "id": "glow_fish_teal",
+      "name": "Светящаяся рыбка, бирюзовая",
+      "category": "creature",
+      "description": "Мелкая стайная рыба: светится полоса, хвост и спинной плавник.",
+      "voxels": 163,
+      "parts": 3,
+      "clips": {
+        "swim": {
+          "frames": 8,
+          "fps": 10,
+          "sprite2d": {
+            "png": "2d/anim/glow_fish_teal_swim.png",
+            "glow": "2d/anim/glow_fish_teal_swim_glow.png",
+            "w": 22,
+            "h": 14
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/glow_fish_teal_swim.png",
+            "glow": "2.5d/iso_anim/glow_fish_teal_swim_glow.png",
+            "w": 27,
+            "h": 23,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "glow_fish_violet",
+      "name": "Светящаяся рыбка, лиловая",
+      "category": "creature",
+      "description": "Мелкая стайная рыба: светится полоса, хвост и спинной плавник.",
+      "voxels": 163,
+      "parts": 3,
+      "clips": {
+        "swim": {
+          "frames": 8,
+          "fps": 10,
+          "sprite2d": {
+            "png": "2d/anim/glow_fish_violet_swim.png",
+            "glow": "2d/anim/glow_fish_violet_swim_glow.png",
+            "w": 22,
+            "h": 14
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/glow_fish_violet_swim.png",
+            "glow": "2.5d/iso_anim/glow_fish_violet_swim_glow.png",
+            "w": 27,
+            "h": 23,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "glow_fish_amber",
+      "name": "Светящаяся рыбка, янтарная",
+      "category": "creature",
+      "description": "Мелкая стайная рыба: светится полоса, хвост и спинной плавник.",
+      "voxels": 163,
+      "parts": 3,
+      "clips": {
+        "swim": {
+          "frames": 8,
+          "fps": 10,
+          "sprite2d": {
+            "png": "2d/anim/glow_fish_amber_swim.png",
+            "glow": "2d/anim/glow_fish_amber_swim_glow.png",
+            "w": 22,
+            "h": 14
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/glow_fish_amber_swim.png",
+            "glow": "2.5d/iso_anim/glow_fish_amber_swim_glow.png",
+            "w": 27,
+            "h": 23,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "glow_fish_emerald",
+      "name": "Светящаяся рыбка, изумрудная",
+      "category": "creature",
+      "description": "Мелкая стайная рыба: светится полоса, хвост и спинной плавник.",
+      "voxels": 163,
+      "parts": 3,
+      "clips": {
+        "swim": {
+          "frames": 8,
+          "fps": 10,
+          "sprite2d": {
+            "png": "2d/anim/glow_fish_emerald_swim.png",
+            "glow": "2d/anim/glow_fish_emerald_swim_glow.png",
+            "w": 22,
+            "h": 14
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/glow_fish_emerald_swim.png",
+            "glow": "2.5d/iso_anim/glow_fish_emerald_swim_glow.png",
+            "w": 27,
+            "h": 23,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "lantern_fish",
+      "name": "Рыба-фонарь",
+      "category": "creature",
+      "description": "Глубоководная рыба с рядами огоньков-фотофоров: свет бежит от головы к хвосту.",
+      "voxels": 196,
+      "parts": 4,
+      "clips": {
+        "swim": {
+          "frames": 8,
+          "fps": 10,
+          "sprite2d": {
+            "png": "2d/anim/lantern_fish_swim.png",
+            "glow": "2d/anim/lantern_fish_swim_glow.png",
+            "w": 26,
+            "h": 14
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/lantern_fish_swim.png",
+            "glow": "2.5d/iso_anim/lantern_fish_swim_glow.png",
+            "w": 34,
+            "h": 26,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "angler",
+      "name": "Удильщик с лампочкой",
+      "category": "creature",
+      "description": "Хищник глубины: на удилище — старая лампа накаливания, нить светится, приманка качается.",
+      "voxels": 3512,
+      "parts": 7,
+      "clips": {
+        "idle": {
+          "frames": 8,
+          "fps": 8,
+          "sprite2d": {
+            "png": "2d/anim/angler_idle.png",
+            "glow": "2d/anim/angler_idle_glow.png",
+            "w": 45,
+            "h": 38
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/angler_idle.png",
+            "glow": "2.5d/iso_anim/angler_idle_glow.png",
+            "w": 66,
+            "h": 57,
+            "dirs": 8
+          }
+        },
+        "bite": {
+          "frames": 6,
+          "fps": 12,
+          "sprite2d": {
+            "png": "2d/anim/angler_bite.png",
+            "glow": "2d/anim/angler_bite_glow.png",
+            "w": 43,
+            "h": 40
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/angler_bite.png",
+            "glow": "2.5d/iso_anim/angler_bite_glow.png",
+            "w": 64,
+            "h": 60,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "eel",
+      "name": "Электрический угорь",
+      "category": "creature",
+      "description": "Длинное тело волной, по бокам — светящиеся разряды, которые бегут вдоль спины.",
+      "voxels": 566,
+      "parts": 8,
+      "clips": {
+        "swim": {
+          "frames": 8,
+          "fps": 10,
+          "sprite2d": {
+            "png": "2d/anim/eel_swim.png",
+            "glow": "2d/anim/eel_swim_glow.png",
+            "w": 49,
+            "h": 15
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/eel_swim.png",
+            "glow": "2.5d/iso_anim/eel_swim_glow.png",
+            "w": 66,
+            "h": 41,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "jellyfish_violet",
+      "name": "Медуза-колокол, лиловая",
+      "category": "creature",
+      "description": "Колокол сжимается и раскрывается, щупальца отстают волной.",
+      "voxels": 481,
+      "parts": 19,
+      "clips": {
+        "pulse": {
+          "frames": 8,
+          "fps": 8,
+          "sprite2d": {
+            "png": "2d/anim/jellyfish_violet_pulse.png",
+            "glow": "2d/anim/jellyfish_violet_pulse_glow.png",
+            "w": 22,
+            "h": 29
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/jellyfish_violet_pulse.png",
+            "glow": "2.5d/iso_anim/jellyfish_violet_pulse_glow.png",
+            "w": 35,
+            "h": 36,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "jellyfish_teal",
+      "name": "Медуза-колокол, бирюзовая",
+      "category": "creature",
+      "description": "Колокол сжимается и раскрывается, щупальца отстают волной.",
+      "voxels": 481,
+      "parts": 19,
+      "clips": {
+        "pulse": {
+          "frames": 8,
+          "fps": 8,
+          "sprite2d": {
+            "png": "2d/anim/jellyfish_teal_pulse.png",
+            "glow": "2d/anim/jellyfish_teal_pulse_glow.png",
+            "w": 22,
+            "h": 29
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/jellyfish_teal_pulse.png",
+            "glow": "2.5d/iso_anim/jellyfish_teal_pulse_glow.png",
+            "w": 35,
+            "h": 36,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "manta",
+      "name": "Скат-манта",
+      "category": "creature",
+      "description": "Плывёт взмахами крыльев: волна идёт от тела к кончикам.",
+      "voxels": 504,
+      "parts": 8,
+      "clips": {
+        "glide": {
+          "frames": 8,
+          "fps": 8,
+          "sprite2d": {
+            "png": "2d/anim/manta_glide.png",
+            "glow": "2d/anim/manta_glide_glow.png",
+            "w": 36,
+            "h": 38
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/manta_glide.png",
+            "glow": "2.5d/iso_anim/manta_glide_glow.png",
+            "w": 69,
+            "h": 47,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "seahorse",
+      "name": "Морской конёк",
+      "category": "creature",
+      "description": "Покачивается, хвост закручивается, спинной плавник трепещет.",
+      "voxels": 207,
+      "parts": 4,
+      "clips": {
+        "idle": {
+          "frames": 8,
+          "fps": 8,
+          "sprite2d": {
+            "png": "2d/anim/seahorse_idle.png",
+            "glow": "2d/anim/seahorse_idle_glow.png",
+            "w": 17,
+            "h": 26
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/seahorse_idle.png",
+            "glow": "2.5d/iso_anim/seahorse_idle_glow.png",
+            "w": 20,
+            "h": 30,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "nautilus",
+      "name": "Наутилус",
+      "category": "creature",
+      "description": "Спиральная раковина с огнями в камерах, щупальца шевелятся.",
+      "voxels": 1270,
+      "parts": 6,
+      "clips": {
+        "idle": {
+          "frames": 8,
+          "fps": 8,
+          "sprite2d": {
+            "png": "2d/anim/nautilus_idle.png",
+            "glow": "2d/anim/nautilus_idle_glow.png",
+            "w": 28,
+            "h": 24
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/nautilus_idle.png",
+            "glow": "2.5d/iso_anim/nautilus_idle_glow.png",
+            "w": 37,
+            "h": 35,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "hermit_crab",
+      "name": "Рак-отшельник в водолазном шлеме",
+      "category": "creature",
+      "description": "Живёт в старом медном шлеме: в иллюминаторе горит свет, ножки семенят.",
+      "voxels": 1398,
+      "parts": 12,
+      "clips": {
+        "walk": {
+          "frames": 8,
+          "fps": 12,
+          "sprite2d": {
+            "png": "2d/anim/hermit_crab_walk.png",
+            "glow": "2d/anim/hermit_crab_walk_glow.png",
+            "w": 26,
+            "h": 23
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/hermit_crab_walk.png",
+            "glow": "2.5d/iso_anim/hermit_crab_walk_glow.png",
+            "w": 34,
+            "h": 33,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "kraken_tentacle",
+      "name": "Щупальце кракена",
+      "category": "creature",
+      "description": "Поднимается из бездны и медленно ищет добычу; присоски светятся.",
+      "voxels": 3204,
+      "parts": 8,
+      "clips": {
+        "sway": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/kraken_tentacle_sway.png",
+            "glow": "2d/anim/kraken_tentacle_sway_glow.png",
+            "w": 30,
+            "h": 66
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/kraken_tentacle_sway.png",
+            "glow": "2.5d/iso_anim/kraken_tentacle_sway_glow.png",
+            "w": 38,
+            "h": 78,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "siphonophore",
+      "name": "Сифонофора-гирлянда",
+      "category": "creature",
+      "description": "Колония-гирлянда: бусины светятся по очереди, цепочка извивается.",
+      "voxels": 156,
+      "parts": 10,
+      "clips": {
+        "drift": {
+          "frames": 10,
+          "fps": 10,
+          "sprite2d": {
+            "png": "2d/anim/siphonophore_drift.png",
+            "glow": "2d/anim/siphonophore_drift_glow.png",
+            "w": 51,
+            "h": 22
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/siphonophore_drift.png",
+            "glow": "2.5d/iso_anim/siphonophore_drift_glow.png",
+            "w": 67,
+            "h": 48,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "kelp_tall",
+      "name": "Ламинария высокая",
+      "category": "flora",
+      "description": "Ламинария: стебель с газовыми пузырями и лентами листьев, качается в течении.",
+      "voxels": 884,
+      "parts": 8,
+      "clips": {
+        "sway": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/kelp_tall_sway.png",
+            "w": 30,
+            "h": 70
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/kelp_tall_sway.png",
+            "w": 38,
+            "h": 79,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "kelp_mid",
+      "name": "Ламинария",
+      "category": "flora",
+      "description": "Ламинария: стебель с газовыми пузырями и лентами листьев, качается в течении.",
+      "voxels": 587,
+      "parts": 5,
+      "clips": {
+        "sway": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/kelp_mid_sway.png",
+            "w": 29,
+            "h": 47
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/kelp_mid_sway.png",
+            "w": 37,
+            "h": 54,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "kelp_short",
+      "name": "Ламинария низкая",
+      "category": "flora",
+      "description": "Ламинария: стебель с газовыми пузырями и лентами листьев, качается в течении.",
+      "voxels": 325,
+      "parts": 3,
+      "clips": {
+        "sway": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/kelp_short_sway.png",
+            "w": 23,
+            "h": 31
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/kelp_short_sway.png",
+            "w": 29,
+            "h": 36,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "seagrass",
+      "name": "Морская трава",
+      "category": "flora",
+      "description": "Пучок травы: каждая травинка гнётся своей волной.",
+      "voxels": 189,
+      "parts": 28,
+      "clips": {
+        "sway": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/seagrass_sway.png",
+            "w": 19,
+            "h": 20
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/seagrass_sway.png",
+            "w": 23,
+            "h": 28,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "moss_clump_teal",
+      "name": "Сияющий мох, бирюзовый",
+      "category": "flora",
+      "description": "Подушка светящегося мха: дышит светом.",
+      "voxels": 379,
+      "parts": 1,
+      "clips": {
+        "pulse": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/moss_clump_teal_pulse.png",
+            "glow": "2d/anim/moss_clump_teal_pulse_glow.png",
+            "w": 19,
+            "h": 12
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/moss_clump_teal_pulse.png",
+            "glow": "2.5d/iso_anim/moss_clump_teal_pulse_glow.png",
+            "w": 25,
+            "h": 19,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "moss_clump_violet",
+      "name": "Сияющий мох, лиловый",
+      "category": "flora",
+      "description": "Подушка светящегося мха: дышит светом.",
+      "voxels": 380,
+      "parts": 1,
+      "clips": {
+        "pulse": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/moss_clump_violet_pulse.png",
+            "glow": "2d/anim/moss_clump_violet_pulse_glow.png",
+            "w": 19,
+            "h": 12
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/moss_clump_violet_pulse.png",
+            "glow": "2.5d/iso_anim/moss_clump_violet_pulse_glow.png",
+            "w": 27,
+            "h": 19,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "moss_clump_amber",
+      "name": "Сияющий мох, янтарный",
+      "category": "flora",
+      "description": "Подушка светящегося мха: дышит светом.",
+      "voxels": 364,
+      "parts": 1,
+      "clips": {
+        "pulse": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/moss_clump_amber_pulse.png",
+            "glow": "2d/anim/moss_clump_amber_pulse_glow.png",
+            "w": 19,
+            "h": 12
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/moss_clump_amber_pulse.png",
+            "glow": "2.5d/iso_anim/moss_clump_amber_pulse_glow.png",
+            "w": 26,
+            "h": 19,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "moss_clump_crimson",
+      "name": "Сияющий мох, алый",
+      "category": "flora",
+      "description": "Подушка светящегося мха: дышит светом.",
+      "voxels": 383,
+      "parts": 1,
+      "clips": {
+        "pulse": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/moss_clump_crimson_pulse.png",
+            "glow": "2d/anim/moss_clump_crimson_pulse_glow.png",
+            "w": 20,
+            "h": 12
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/moss_clump_crimson_pulse.png",
+            "glow": "2.5d/iso_anim/moss_clump_crimson_pulse_glow.png",
+            "w": 26,
+            "h": 19,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "moss_clump_emerald",
+      "name": "Сияющий мох, изумрудный",
+      "category": "flora",
+      "description": "Подушка светящегося мха: дышит светом.",
+      "voxels": 383,
+      "parts": 1,
+      "clips": {
+        "pulse": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/moss_clump_emerald_pulse.png",
+            "glow": "2d/anim/moss_clump_emerald_pulse_glow.png",
+            "w": 20,
+            "h": 12
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/moss_clump_emerald_pulse.png",
+            "glow": "2.5d/iso_anim/moss_clump_emerald_pulse_glow.png",
+            "w": 26,
+            "h": 19,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "moss_clump_azure",
+      "name": "Сияющий мох, лазурный",
+      "category": "flora",
+      "description": "Подушка светящегося мха: дышит светом.",
+      "voxels": 364,
+      "parts": 1,
+      "clips": {
+        "pulse": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/moss_clump_azure_pulse.png",
+            "glow": "2d/anim/moss_clump_azure_pulse_glow.png",
+            "w": 19,
+            "h": 12
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/moss_clump_azure_pulse.png",
+            "glow": "2.5d/iso_anim/moss_clump_azure_pulse_glow.png",
+            "w": 26,
+            "h": 19,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "coral_branch_pink",
+      "name": "Ветвистый коралл, розовый",
+      "category": "flora",
+      "description": "Ветви с полипами, кончики светятся.",
+      "voxels": 319,
+      "parts": 1,
+      "clips": {
+        "glow": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/coral_branch_pink_glow.png",
+            "glow": "2d/anim/coral_branch_pink_glow_glow.png",
+            "w": 18,
+            "h": 18
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/coral_branch_pink_glow.png",
+            "glow": "2.5d/iso_anim/coral_branch_pink_glow_glow.png",
+            "w": 34,
+            "h": 29,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "coral_branch_orange",
+      "name": "Ветвистый коралл, оранжевый",
+      "category": "flora",
+      "description": "Ветви с полипами, кончики светятся.",
+      "voxels": 313,
+      "parts": 1,
+      "clips": {
+        "glow": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/coral_branch_orange_glow.png",
+            "glow": "2d/anim/coral_branch_orange_glow_glow.png",
+            "w": 22,
+            "h": 17
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/coral_branch_orange_glow.png",
+            "glow": "2.5d/iso_anim/coral_branch_orange_glow_glow.png",
+            "w": 35,
+            "h": 29,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "coral_branch_violet",
+      "name": "Ветвистый коралл, фиолетовый",
+      "category": "flora",
+      "description": "Ветви с полипами, кончики светятся.",
+      "voxels": 313,
+      "parts": 1,
+      "clips": {
+        "glow": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/coral_branch_violet_glow.png",
+            "glow": "2d/anim/coral_branch_violet_glow_glow.png",
+            "w": 22,
+            "h": 17
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/coral_branch_violet_glow.png",
+            "glow": "2.5d/iso_anim/coral_branch_violet_glow_glow.png",
+            "w": 35,
+            "h": 29,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "coral_brain",
+      "name": "Коралл-мозговик",
+      "category": "flora",
+      "description": "Полусфера с извилистыми бороздами.",
+      "voxels": 1288,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "tube_sponge",
+      "name": "Трубчатая губка",
+      "category": "flora",
+      "description": "Трубки с сияющими краями — свет дышит волной от трубки к трубке.",
+      "voxels": 896,
+      "parts": 6,
+      "clips": {
+        "pulse": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/tube_sponge_pulse.png",
+            "glow": "2d/anim/tube_sponge_pulse_glow.png",
+            "w": 19,
+            "h": 25
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/tube_sponge_pulse.png",
+            "glow": "2.5d/iso_anim/tube_sponge_pulse_glow.png",
+            "w": 27,
+            "h": 32,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "anemone",
+      "name": "Анемон",
+      "category": "flora",
+      "description": "Венчик щупалец со светящимися кончиками, колышется.",
+      "voxels": 414,
+      "parts": 31,
+      "clips": {
+        "wave": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/anemone_wave.png",
+            "glow": "2d/anim/anemone_wave_glow.png",
+            "w": 26,
+            "h": 21
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/anemone_wave.png",
+            "glow": "2.5d/iso_anim/anemone_wave_glow.png",
+            "w": 33,
+            "h": 29,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "sea_fan",
+      "name": "Морской веер",
+      "category": "flora",
+      "description": "Горгонария: кружевной веер на стебле, покачивается.",
+      "voxels": 102,
+      "parts": 1,
+      "clips": {
+        "sway": {
+          "frames": 8,
+          "fps": 5,
+          "sprite2d": {
+            "png": "2d/anim/sea_fan_sway.png",
+            "glow": "2d/anim/sea_fan_sway_glow.png",
+            "w": 31,
+            "h": 24
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/sea_fan_sway.png",
+            "glow": "2.5d/iso_anim/sea_fan_sway_glow.png",
+            "w": 34,
+            "h": 26,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "arch",
+      "name": "Стрельчатая арка",
+      "category": "city",
+      "description": "Портал с колоннами, архивольтом и щипцом; мох на карнизах.",
+      "voxels": 51639,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "column",
+      "name": "Колонна",
+      "category": "city",
+      "description": "Колонна с базой и капителью.",
+      "voxels": 11992,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "column_broken",
+      "name": "Обломок колонны",
+      "category": "city",
+      "description": "Обломок с упавшим барабаном.",
+      "voxels": 5671,
+      "parts": 2,
+      "clips": {}
+    },
+    {
+      "id": "viaduct",
+      "name": "Виадук",
+      "category": "city",
+      "description": "Две стрельчатые арки на трёх опорах, аркада парапета, фонари; кладка в мхе.",
+      "voxels": 184444,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "bridge",
+      "name": "Мост с балюстрадой",
+      "category": "city",
+      "description": "Горбатый мост, балюстрада с четырёхлистниками, фонари на устоях.",
+      "voxels": 42091,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "bridge_broken",
+      "name": "Обрушенный мост",
+      "category": "city",
+      "description": "Пролёт обрушился, края осыпаются.",
+      "voxels": 36886,
+      "parts": 2,
+      "clips": {}
+    },
+    {
+      "id": "cathedral_tower",
+      "name": "Башня собора",
+      "category": "city",
+      "description": "Башня с контрфорсами, стрельчатыми витражами, розой, звонницей и шпилем.",
+      "voxels": 518995,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "lancet_window",
+      "name": "Стрельчатое окно-витраж",
+      "category": "city",
+      "description": "Двойное окно с трилистником, свинцовые переплёты.",
+      "voxels": 11399,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "stairs",
+      "name": "Лестница",
+      "category": "city",
+      "description": "Широкие ступени собора, выщербленные и в мхе.",
+      "voxels": 35211,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "gargoyle",
+      "name": "Горгулья",
+      "category": "city",
+      "description": "Каменная горгулья на консоли: крылья сложены, глаза тлеют.",
+      "voxels": 1474,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "angel_statue",
+      "name": "Статуя ангела",
+      "category": "city",
+      "description": "Ангел на постаменте в мхе; над головой светится нимб.",
+      "voxels": 1433,
+      "parts": 2,
+      "clips": {
+        "glow": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/angel_statue_glow.png",
+            "glow": "2d/anim/angel_statue_glow_glow.png",
+            "w": 21,
+            "h": 29
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/angel_statue_glow.png",
+            "glow": "2.5d/iso_anim/angel_statue_glow_glow.png",
+            "w": 35,
+            "h": 40,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "street_lamp",
+      "name": "Фонарь с медузой",
+      "category": "city",
+      "description": "Кованый фонарь: внутри живая медуза, свет качается и дышит.",
+      "voxels": 820,
+      "parts": 2,
+      "clips": {
+        "glow": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/street_lamp_glow.png",
+            "glow": "2d/anim/street_lamp_glow_glow.png",
+            "w": 21,
+            "h": 53
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/street_lamp_glow.png",
+            "glow": "2.5d/iso_anim/street_lamp_glow_glow.png",
+            "w": 33,
+            "h": 61,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "cathedral_bell",
+      "name": "Колокол",
+      "category": "city",
+      "description": "Бронзовый колокол в патине на балке; раскачивается.",
+      "voxels": 2245,
+      "parts": 2,
+      "clips": {
+        "swing": {
+          "frames": 8,
+          "fps": 5,
+          "sprite2d": {
+            "png": "2d/anim/cathedral_bell_swing.png",
+            "w": 39,
+            "h": 34
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/cathedral_bell_swing.png",
+            "w": 49,
+            "h": 49,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "iron_gate",
+      "name": "Кованые ворота",
+      "category": "city",
+      "description": "Стрельчатые ворота с копьями прутьев, ржавчина и мох.",
+      "voxels": 3272,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "dome_section",
+      "name": "Купол города",
+      "category": "city",
+      "description": "Четверть стеклянного купола: латунные рёбра, слабое сияние стекла.",
+      "voxels": 9548,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "galleon",
+      "name": "Затонувший галеон",
+      "category": "wreck",
+      "description": "Корпус лёг на борт: пробоина, сломанные мачты, рваный парус, медь ниже ватерлинии.",
+      "voxels": 38351,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "submarine_wreck",
+      "name": "Затонувшая подлодка",
+      "category": "wreck",
+      "description": "Ржавый корпус, рубка, перископ, гнутый винт, слабый свет в иллюминаторах.",
+      "voxels": 69773,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "anchor",
+      "name": "Якорь с цепью",
+      "category": "wreck",
+      "description": "Адмиралтейский якорь, ржавчина, цепь уходит вверх.",
+      "voxels": 1252,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "treasure_chest",
+      "name": "Сундук с жемчугом",
+      "category": "wreck",
+      "description": "Окованный сундук: крышка открывается, внутри золото и светящийся жемчуг.",
+      "voxels": 2186,
+      "parts": 2,
+      "clips": {
+        "open": {
+          "frames": 8,
+          "fps": 8,
+          "sprite2d": {
+            "png": "2d/anim/treasure_chest_open.png",
+            "w": 21,
+            "h": 26
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/treasure_chest_open.png",
+            "glow": "2.5d/iso_anim/treasure_chest_open_glow.png",
+            "w": 37,
+            "h": 38,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "barrel",
+      "name": "Бочка",
+      "category": "wreck",
+      "description": "Дубовая бочка, железные обручи.",
+      "voxels": 1512,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "crate",
+      "name": "Ящик",
+      "category": "wreck",
+      "description": "Дощатый ящик с железными уголками.",
+      "voxels": 2744,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "ship_wheel",
+      "name": "Штурвал",
+      "category": "wreck",
+      "description": "Восемь рукоятей, медная ступица; медленно поворачивается.",
+      "voxels": 448,
+      "parts": 1,
+      "clips": {
+        "turn": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/ship_wheel_turn.png",
+            "w": 31,
+            "h": 31
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/ship_wheel_turn.png",
+            "w": 31,
+            "h": 33,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "cannon",
+      "name": "Корабельная пушка",
+      "category": "wreck",
+      "description": "Чугунный ствол на лафете с колёсами.",
+      "voxels": 1396,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "whale_skeleton",
+      "name": "Скелет кита",
+      "category": "wreck",
+      "description": "Череп, позвоночник дугой, рёбра; на костях светится мох.",
+      "voxels": 9788,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "sea_mine",
+      "name": "Морская мина",
+      "category": "wreck",
+      "description": "Рогатая мина качается на цепи; на макушке мигает огонь.",
+      "voxels": 968,
+      "parts": 6,
+      "clips": {
+        "bob": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/sea_mine_bob.png",
+            "glow": "2d/anim/sea_mine_bob_glow.png",
+            "w": 27,
+            "h": 39
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/sea_mine_bob.png",
+            "glow": "2.5d/iso_anim/sea_mine_bob_glow.png",
+            "w": 35,
+            "h": 48,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "diving_helmet",
+      "name": "Водолазный шлем",
+      "category": "wreck",
+      "description": "Медный шлем: три иллюминатора, болты, нагрудник.",
+      "voxels": 2596,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "hot_vent",
+      "name": "Гидротермальный источник",
+      "category": "wreck",
+      "description": "Каменная труба, в трещинах — жар; свет дышит.",
+      "voxels": 4437,
+      "parts": 1,
+      "clips": {
+        "glow": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/hot_vent_glow.png",
+            "glow": "2d/anim/hot_vent_glow_glow.png",
+            "w": 24,
+            "h": 41
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/hot_vent_glow.png",
+            "glow": "2.5d/iso_anim/hot_vent_glow_glow.png",
+            "w": 37,
+            "h": 52,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "bathyscaphe",
+      "name": "Батискаф",
+      "category": "vehicle",
+      "description": "Поплавок с бензином, гондола с иллюминаторами, прожекторы, винт; покачивается на ходу.",
+      "voxels": 10269,
+      "parts": 2,
+      "clips": {
+        "cruise": {
+          "frames": 8,
+          "fps": 12,
+          "sprite2d": {
+            "png": "2d/anim/bathyscaphe_cruise.png",
+            "glow": "2d/anim/bathyscaphe_cruise_glow.png",
+            "w": 56,
+            "h": 40
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/bathyscaphe_cruise.png",
+            "glow": "2.5d/iso_anim/bathyscaphe_cruise_glow.png",
+            "w": 77,
+            "h": 59,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "scout_drone",
+      "name": "Батискаф-разведчик",
+      "category": "vehicle",
+      "description": "Шар-разведчик с огромной линзой и двумя движками; зависает и осматривается.",
+      "voxels": 1421,
+      "parts": 5,
+      "clips": {
+        "hover": {
+          "frames": 8,
+          "fps": 10,
+          "sprite2d": {
+            "png": "2d/anim/scout_drone_hover.png",
+            "glow": "2d/anim/scout_drone_hover_glow.png",
+            "w": 23,
+            "h": 22
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/scout_drone_hover.png",
+            "glow": "2.5d/iso_anim/scout_drone_hover_glow.png",
+            "w": 42,
+            "h": 29,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "submarine",
+      "name": "Подводная лодка",
+      "category": "vehicle",
+      "description": "Маленькая лодка: рубка, перископ, рули глубины, горящие иллюминаторы.",
+      "voxels": 9299,
+      "parts": 2,
+      "clips": {
+        "cruise": {
+          "frames": 8,
+          "fps": 12,
+          "sprite2d": {
+            "png": "2d/anim/submarine_cruise.png",
+            "glow": "2d/anim/submarine_cruise_glow.png",
+            "w": 70,
+            "h": 32
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/submarine_cruise.png",
+            "glow": "2.5d/iso_anim/submarine_cruise_glow.png",
+            "w": 96,
+            "h": 58,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "sea_scooter",
+      "name": "Подводный скутер",
+      "category": "vehicle",
+      "description": "Буксировщик водолаза: винт в кольце, фара, ручки.",
+      "voxels": 1427,
+      "parts": 2,
+      "clips": {
+        "run": {
+          "frames": 8,
+          "fps": 14,
+          "sprite2d": {
+            "png": "2d/anim/sea_scooter_run.png",
+            "w": 33,
+            "h": 17
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/sea_scooter_run.png",
+            "glow": "2.5d/iso_anim/sea_scooter_run_glow.png",
+            "w": 45,
+            "h": 37,
+            "dirs": 8
+          }
+        }
+      }
+    },
+    {
+      "id": "harpoon_gun",
+      "name": "Гарпунное ружьё",
+      "category": "weapon",
+      "description": "Деревянный приклад, латунный ствол, гарпун заряжен, линь смотан.",
+      "voxels": 467,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "harpoon",
+      "name": "Гарпун",
+      "category": "weapon",
+      "description": "Снаряд: зазубренный наконечник, кольцо для линя.",
+      "voxels": 54,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "trident",
+      "name": "Трезубец",
+      "category": "weapon",
+      "description": "Медное древко, три зубца с сияющими остриями; свет пульсирует.",
+      "voxels": 94,
+      "parts": 1,
+      "clips": {
+        "glow": {
+          "frames": 8,
+          "fps": 8,
+          "sprite2d": {
+            "png": "2d/anim/trident_glow.png",
+            "glow": "2d/anim/trident_glow_glow.png",
+            "w": 51,
+            "h": 16
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/trident_glow.png",
+            "glow": "2.5d/iso_anim/trident_glow_glow.png",
+            "w": 52,
+            "h": 35,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "bubble_gun",
+      "name": "Пузырная пушка",
+      "category": "weapon",
+      "description": "Латунный раструб, стеклянный бак со светящимися пузырями.",
+      "voxels": 1081,
+      "parts": 1,
+      "clips": {
+        "fire": {
+          "frames": 6,
+          "fps": 12,
+          "sprite2d": {
+            "png": "2d/anim/bubble_gun_fire.png",
+            "w": 37,
+            "h": 19
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/bubble_gun_fire.png",
+            "w": 44,
+            "h": 37,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "bubble",
+      "name": "Пузырь-снаряд",
+      "category": "weapon",
+      "description": "Светящийся пузырь: дрожит в полёте.",
+      "voxels": 281,
+      "parts": 1,
+      "clips": {
+        "wobble": {
+          "frames": 8,
+          "fps": 10,
+          "sprite2d": {
+            "png": "2d/anim/bubble_wobble.png",
+            "glow": "2d/anim/bubble_wobble_glow.png",
+            "w": 15,
+            "h": 15
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/bubble_wobble.png",
+            "glow": "2.5d/iso_anim/bubble_wobble_glow.png",
+            "w": 21,
+            "h": 19,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "shock_spear",
+      "name": "Электро-острога",
+      "category": "weapon",
+      "description": "Железное древко, медные витки катушки, на острие трещит разряд.",
+      "voxels": 224,
+      "parts": 1,
+      "clips": {
+        "charge": {
+          "frames": 8,
+          "fps": 12,
+          "sprite2d": {
+            "png": "2d/anim/shock_spear_charge.png",
+            "glow": "2d/anim/shock_spear_charge_glow.png",
+            "w": 51,
+            "h": 10
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/shock_spear_charge.png",
+            "glow": "2.5d/iso_anim/shock_spear_charge_glow.png",
+            "w": 53,
+            "h": 31,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "torpedo",
+      "name": "Торпеда",
+      "category": "weapon",
+      "description": "Снаряд: красная боеголовка, стабилизаторы, винт крутится.",
+      "voxels": 956,
+      "parts": 2,
+      "clips": {
+        "run": {
+          "frames": 8,
+          "fps": 16,
+          "sprite2d": {
+            "png": "2d/anim/torpedo_run.png",
+            "w": 39,
+            "h": 16
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/torpedo_run.png",
+            "w": 46,
+            "h": 32,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "hand_sonar",
+      "name": "Ручной сонар",
+      "category": "weapon",
+      "description": "Латунная тарелка с сияющим ядром: импульс расходится кольцами.",
+      "voxels": 338,
+      "parts": 1,
+      "clips": {
+        "ping": {
+          "frames": 8,
+          "fps": 8,
+          "sprite2d": {
+            "png": "2d/anim/hand_sonar_ping.png",
+            "w": 16,
+            "h": 19
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/hand_sonar_ping.png",
+            "glow": "2.5d/iso_anim/hand_sonar_ping_glow.png",
+            "w": 28,
+            "h": 27,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "coral_blade",
+      "name": "Коралловый клинок",
+      "category": "weapon",
+      "description": "Клинок из розового коралла, рукоять из кости, кромка светится.",
+      "voxels": 107,
+      "parts": 1,
+      "clips": {}
+    },
+    {
+      "id": "pearl_clam",
+      "name": "Жемчужина в раковине",
+      "category": "pickup",
+      "description": "Створки приоткрываются, жемчужина мерцает.",
+      "voxels": 396,
+      "parts": 2,
+      "clips": {
+        "open": {
+          "frames": 8,
+          "fps": 6,
+          "sprite2d": {
+            "png": "2d/anim/pearl_clam_open.png",
+            "w": 17,
+            "h": 15
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/pearl_clam_open.png",
+            "glow": "2.5d/iso_anim/pearl_clam_open_glow.png",
+            "w": 23,
+            "h": 22,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "doubloon",
+      "name": "Дублон",
+      "category": "pickup",
+      "description": "Золотая монета с крестом: вращается.",
+      "voxels": 136,
+      "parts": 1,
+      "clips": {
+        "spin": {
+          "frames": 8,
+          "fps": 10,
+          "sprite2d": {
+            "png": "2d/anim/doubloon_spin.png",
+            "w": 15,
+            "h": 17
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/doubloon_spin.png",
+            "w": 21,
+            "h": 19,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "air_bubble",
+      "name": "Пузырь воздуха",
+      "category": "pickup",
+      "description": "Глоток воздуха: колышется и дрожит.",
+      "voxels": 352,
+      "parts": 1,
+      "clips": {
+        "wobble": {
+          "frames": 8,
+          "fps": 8,
+          "sprite2d": {
+            "png": "2d/anim/air_bubble_wobble.png",
+            "w": 17,
+            "h": 17
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/air_bubble_wobble.png",
+            "w": 23,
+            "h": 21,
+            "dirs": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "starfish",
+      "name": "Морская звезда",
+      "category": "pickup",
+      "description": "Лечит: пять лучей с огоньками, пульсирует.",
+      "voxels": 168,
+      "parts": 1,
+      "clips": {
+        "pulse": {
+          "frames": 8,
+          "fps": 8,
+          "sprite2d": {
+            "png": "2d/anim/starfish_pulse.png",
+            "w": 21,
+            "h": 19
+          },
+          "isometric": {
+            "png": "2.5d/iso_anim/starfish_pulse.png",
+            "glow": "2.5d/iso_anim/starfish_pulse_glow.png",
+            "w": 30,
+            "h": 20,
+            "dirs": 4
+          }
+        }
+      }
+    }
+  ],
+  "tiles": [
+    {
+      "id": "brick",
+      "name": "Готическая кладка",
+      "group": "city",
+      "png": "tiles/brick.png"
+    },
+    {
+      "id": "brick_dark",
+      "name": "Кладка в водорослях",
+      "group": "city",
+      "png": "tiles/brick_dark.png"
+    },
+    {
+      "id": "brick_moss_teal",
+      "name": "Кладка, бирюзовый мох",
+      "group": "city",
+      "png": "tiles/brick_moss_teal.png",
+      "glow": "tiles/brick_moss_teal_glow.png"
+    },
+    {
+      "id": "moss_teal",
+      "name": "Сияющий мох, бирюзовый",
+      "group": "city",
+      "png": "tiles/moss_teal.png",
+      "glow": "tiles/moss_teal_glow.png"
+    },
+    {
+      "id": "brick_moss_violet",
+      "name": "Кладка, лиловый мох",
+      "group": "city",
+      "png": "tiles/brick_moss_violet.png",
+      "glow": "tiles/brick_moss_violet_glow.png"
+    },
+    {
+      "id": "moss_violet",
+      "name": "Сияющий мох, лиловый",
+      "group": "city",
+      "png": "tiles/moss_violet.png",
+      "glow": "tiles/moss_violet_glow.png"
+    },
+    {
+      "id": "brick_moss_amber",
+      "name": "Кладка, янтарный мох",
+      "group": "city",
+      "png": "tiles/brick_moss_amber.png",
+      "glow": "tiles/brick_moss_amber_glow.png"
+    },
+    {
+      "id": "moss_amber",
+      "name": "Сияющий мох, янтарный",
+      "group": "city",
+      "png": "tiles/moss_amber.png",
+      "glow": "tiles/moss_amber_glow.png"
+    },
+    {
+      "id": "brick_moss_crimson",
+      "name": "Кладка, алый мох",
+      "group": "city",
+      "png": "tiles/brick_moss_crimson.png",
+      "glow": "tiles/brick_moss_crimson_glow.png"
+    },
+    {
+      "id": "moss_crimson",
+      "name": "Сияющий мох, алый",
+      "group": "city",
+      "png": "tiles/moss_crimson.png",
+      "glow": "tiles/moss_crimson_glow.png"
+    },
+    {
+      "id": "brick_moss_emerald",
+      "name": "Кладка, изумрудный мох",
+      "group": "city",
+      "png": "tiles/brick_moss_emerald.png",
+      "glow": "tiles/brick_moss_emerald_glow.png"
+    },
+    {
+      "id": "moss_emerald",
+      "name": "Сияющий мох, изумрудный",
+      "group": "city",
+      "png": "tiles/moss_emerald.png",
+      "glow": "tiles/moss_emerald_glow.png"
+    },
+    {
+      "id": "brick_moss_azure",
+      "name": "Кладка, лазурный мох",
+      "group": "city",
+      "png": "tiles/brick_moss_azure.png",
+      "glow": "tiles/brick_moss_azure_glow.png"
+    },
+    {
+      "id": "moss_azure",
+      "name": "Сияющий мох, лазурный",
+      "group": "city",
+      "png": "tiles/moss_azure.png",
+      "glow": "tiles/moss_azure_glow.png"
+    },
+    {
+      "id": "paving",
+      "name": "Плиты мостовой",
+      "group": "city",
+      "png": "tiles/paving.png"
+    },
+    {
+      "id": "tracery",
+      "name": "Резной фриз",
+      "group": "city",
+      "png": "tiles/tracery.png"
+    },
+    {
+      "id": "column",
+      "name": "Колонна",
+      "group": "city",
+      "png": "tiles/column.png"
+    },
+    {
+      "id": "glass_rose",
+      "name": "Витраж розы",
+      "group": "city",
+      "png": "tiles/glass_rose.png",
+      "glow": "tiles/glass_rose_glow.png"
+    },
+    {
+      "id": "glass_azure",
+      "name": "Витраж лазурный",
+      "group": "city",
+      "png": "tiles/glass_azure.png",
+      "glow": "tiles/glass_azure_glow.png"
+    },
+    {
+      "id": "glass_amber",
+      "name": "Витраж янтарный",
+      "group": "city",
+      "png": "tiles/glass_amber.png",
+      "glow": "tiles/glass_amber_glow.png"
+    },
+    {
+      "id": "sand",
+      "name": "Песок дна",
+      "group": "ground",
+      "png": "tiles/sand.png"
+    },
+    {
+      "id": "sand_shells",
+      "name": "Песок с ракушками",
+      "group": "ground",
+      "png": "tiles/sand_shells.png"
+    },
+    {
+      "id": "silt",
+      "name": "Ил",
+      "group": "ground",
+      "png": "tiles/silt.png"
+    },
+    {
+      "id": "rock",
+      "name": "Базальт",
+      "group": "ground",
+      "png": "tiles/rock.png"
+    },
+    {
+      "id": "coral_pink",
+      "name": "Коралл розовый",
+      "group": "ground",
+      "png": "tiles/coral_pink.png"
+    },
+    {
+      "id": "coral_orange",
+      "name": "Коралл оранжевый",
+      "group": "ground",
+      "png": "tiles/coral_orange.png"
+    },
+    {
+      "id": "coral_violet",
+      "name": "Коралл фиолетовый",
+      "group": "ground",
+      "png": "tiles/coral_violet.png"
+    },
+    {
+      "id": "bone",
+      "name": "Китовая кость",
+      "group": "ground",
+      "png": "tiles/bone.png"
+    },
+    {
+      "id": "gold",
+      "name": "Россыпь дублонов",
+      "group": "ground",
+      "png": "tiles/gold.png"
+    },
+    {
+      "id": "planks",
+      "name": "Доски корабля",
+      "group": "ship",
+      "png": "tiles/planks.png"
+    },
+    {
+      "id": "planks_rot",
+      "name": "Гнилые доски",
+      "group": "ship",
+      "png": "tiles/planks_rot.png"
+    },
+    {
+      "id": "hull_copper",
+      "name": "Медная обшивка",
+      "group": "ship",
+      "png": "tiles/hull_copper.png"
+    },
+    {
+      "id": "rust",
+      "name": "Ржавые листы",
+      "group": "ship",
+      "png": "tiles/rust.png"
+    },
+    {
+      "id": "brass",
+      "name": "Латунь с заклёпками",
+      "group": "ship",
+      "png": "tiles/brass.png"
+    },
+    {
+      "id": "sail",
+      "name": "Рваная парусина",
+      "group": "ship",
+      "png": "tiles/sail.png"
+    },
+    {
+      "id": "dome",
+      "name": "Стекло купола",
+      "group": "ship",
+      "png": "tiles/dome.png",
+      "glow": "tiles/dome_glow.png"
+    }
+  ],
+  "animated_tiles": [
+    {
+      "id": "caustics",
+      "name": "Каустика на песке",
+      "frames": 8,
+      "fps": 8,
+      "png": "tiles/anim/caustics.png",
+      "glow": "tiles/anim/caustics_glow.png"
+    },
+    {
+      "id": "moss_teal_pulse",
+      "name": "Дышащий мох, бирюзовый",
+      "frames": 8,
+      "fps": 8,
+      "png": "tiles/anim/moss_teal_pulse.png",
+      "glow": "tiles/anim/moss_teal_pulse_glow.png"
+    },
+    {
+      "id": "moss_violet_pulse",
+      "name": "Дышащий мох, лиловый",
+      "frames": 8,
+      "fps": 8,
+      "png": "tiles/anim/moss_violet_pulse.png",
+      "glow": "tiles/anim/moss_violet_pulse_glow.png"
+    },
+    {
+      "id": "moss_amber_pulse",
+      "name": "Дышащий мох, янтарный",
+      "frames": 8,
+      "fps": 8,
+      "png": "tiles/anim/moss_amber_pulse.png",
+      "glow": "tiles/anim/moss_amber_pulse_glow.png"
+    },
+    {
+      "id": "moss_crimson_pulse",
+      "name": "Дышащий мох, алый",
+      "frames": 8,
+      "fps": 8,
+      "png": "tiles/anim/moss_crimson_pulse.png",
+      "glow": "tiles/anim/moss_crimson_pulse_glow.png"
+    },
+    {
+      "id": "moss_emerald_pulse",
+      "name": "Дышащий мох, изумрудный",
+      "frames": 8,
+      "fps": 8,
+      "png": "tiles/anim/moss_emerald_pulse.png",
+      "glow": "tiles/anim/moss_emerald_pulse_glow.png"
+    },
+    {
+      "id": "moss_azure_pulse",
+      "name": "Дышащий мох, лазурный",
+      "frames": 8,
+      "fps": 8,
+      "png": "tiles/anim/moss_azure_pulse.png",
+      "glow": "tiles/anim/moss_azure_pulse_glow.png"
+    },
+    {
+      "id": "glass_rose_shimmer",
+      "name": "Витраж: свет проходит",
+      "frames": 8,
+      "fps": 8,
+      "png": "tiles/anim/glass_rose_shimmer.png",
+      "glow": "tiles/anim/glass_rose_shimmer_glow.png"
+    },
+    {
+      "id": "vent",
+      "name": "Гидротермальный источник",
+      "frames": 8,
+      "fps": 8,
+      "png": "tiles/anim/vent.png",
+      "glow": "tiles/anim/vent_glow.png"
+    },
+    {
+      "id": "surface",
+      "name": "Поверхность снизу",
+      "frames": 8,
+      "fps": 8,
+      "png": "tiles/anim/surface.png",
+      "glow": "tiles/anim/surface_glow.png"
+    },
+    {
+      "id": "bubbles",
+      "name": "Пузыри (оверлей)",
+      "frames": 8,
+      "fps": 8,
+      "png": "tiles/anim/bubbles.png"
+    }
+  ],
+  "autotiles": [
+    {
+      "id": "sand",
+      "name": "Песчаное дно",
+      "png": "tiles/autotile/sand.png",
+      "rule": "индекс = N·1 + E·2 + S·4 + W·8 (1 — сторона открыта)"
+    },
+    {
+      "id": "rock",
+      "name": "Скала",
+      "png": "tiles/autotile/rock.png",
+      "rule": "индекс = N·1 + E·2 + S·4 + W·8 (1 — сторона открыта)"
+    },
+    {
+      "id": "brick",
+      "name": "Кладка",
+      "png": "tiles/autotile/brick.png",
+      "rule": "индекс = N·1 + E·2 + S·4 + W·8 (1 — сторона открыта)"
+    },
+    {
+      "id": "mossy",
+      "name": "Кладка в мхе",
+      "png": "tiles/autotile/mossy.png",
+      "rule": "индекс = N·1 + E·2 + S·4 + W·8 (1 — сторона открыта)"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "brick",
+      "name": "Готическая кладка",
+      "png": "2.5d/iso_tiles/brick.png",
+      "glb": "3d/blocks/brick.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "brick_dark",
+      "name": "Кладка в водорослях",
+      "png": "2.5d/iso_tiles/brick_dark.png",
+      "glb": "3d/blocks/brick_dark.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "mossy_teal",
+      "name": "Кладка, бирюзовый мох",
+      "png": "2.5d/iso_tiles/mossy_teal.png",
+      "glow": "2.5d/iso_tiles/mossy_teal_glow.png",
+      "glb": "3d/blocks/mossy_teal.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "mossy_violet",
+      "name": "Кладка, лиловый мох",
+      "png": "2.5d/iso_tiles/mossy_violet.png",
+      "glow": "2.5d/iso_tiles/mossy_violet_glow.png",
+      "glb": "3d/blocks/mossy_violet.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "mossy_amber",
+      "name": "Кладка, янтарный мох",
+      "png": "2.5d/iso_tiles/mossy_amber.png",
+      "glow": "2.5d/iso_tiles/mossy_amber_glow.png",
+      "glb": "3d/blocks/mossy_amber.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "mossy_crimson",
+      "name": "Кладка, алый мох",
+      "png": "2.5d/iso_tiles/mossy_crimson.png",
+      "glow": "2.5d/iso_tiles/mossy_crimson_glow.png",
+      "glb": "3d/blocks/mossy_crimson.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "mossy_emerald",
+      "name": "Кладка, изумрудный мох",
+      "png": "2.5d/iso_tiles/mossy_emerald.png",
+      "glow": "2.5d/iso_tiles/mossy_emerald_glow.png",
+      "glb": "3d/blocks/mossy_emerald.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "mossy_azure",
+      "name": "Кладка, лазурный мох",
+      "png": "2.5d/iso_tiles/mossy_azure.png",
+      "glow": "2.5d/iso_tiles/mossy_azure_glow.png",
+      "glb": "3d/blocks/mossy_azure.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "moss_teal",
+      "name": "Сияющий мох, бирюзовый",
+      "png": "2.5d/iso_tiles/moss_teal.png",
+      "glow": "2.5d/iso_tiles/moss_teal_glow.png",
+      "glb": "3d/blocks/moss_teal.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "moss_violet",
+      "name": "Сияющий мох, лиловый",
+      "png": "2.5d/iso_tiles/moss_violet.png",
+      "glow": "2.5d/iso_tiles/moss_violet_glow.png",
+      "glb": "3d/blocks/moss_violet.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "moss_amber",
+      "name": "Сияющий мох, янтарный",
+      "png": "2.5d/iso_tiles/moss_amber.png",
+      "glow": "2.5d/iso_tiles/moss_amber_glow.png",
+      "glb": "3d/blocks/moss_amber.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "moss_crimson",
+      "name": "Сияющий мох, алый",
+      "png": "2.5d/iso_tiles/moss_crimson.png",
+      "glow": "2.5d/iso_tiles/moss_crimson_glow.png",
+      "glb": "3d/blocks/moss_crimson.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "moss_emerald",
+      "name": "Сияющий мох, изумрудный",
+      "png": "2.5d/iso_tiles/moss_emerald.png",
+      "glow": "2.5d/iso_tiles/moss_emerald_glow.png",
+      "glb": "3d/blocks/moss_emerald.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "moss_azure",
+      "name": "Сияющий мох, лазурный",
+      "png": "2.5d/iso_tiles/moss_azure.png",
+      "glow": "2.5d/iso_tiles/moss_azure_glow.png",
+      "glb": "3d/blocks/moss_azure.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "paving",
+      "name": "Плиты мостовой",
+      "png": "2.5d/iso_tiles/paving.png",
+      "glb": "3d/blocks/paving.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "tracery",
+      "name": "Резной фриз",
+      "png": "2.5d/iso_tiles/tracery.png",
+      "glb": "3d/blocks/tracery.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "column",
+      "name": "Колонна",
+      "png": "2.5d/iso_tiles/column.png",
+      "glb": "3d/blocks/column.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "glass_rose",
+      "name": "Витраж розы",
+      "png": "2.5d/iso_tiles/glass_rose.png",
+      "glow": "2.5d/iso_tiles/glass_rose_glow.png",
+      "glb": "3d/blocks/glass_rose.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "glass_azure",
+      "name": "Витраж лазурный",
+      "png": "2.5d/iso_tiles/glass_azure.png",
+      "glow": "2.5d/iso_tiles/glass_azure_glow.png",
+      "glb": "3d/blocks/glass_azure.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "glass_amber",
+      "name": "Витраж янтарный",
+      "png": "2.5d/iso_tiles/glass_amber.png",
+      "glow": "2.5d/iso_tiles/glass_amber_glow.png",
+      "glb": "3d/blocks/glass_amber.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "sand",
+      "name": "Песок дна",
+      "png": "2.5d/iso_tiles/sand.png",
+      "glb": "3d/blocks/sand.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "sand_shells",
+      "name": "Песок с ракушками",
+      "png": "2.5d/iso_tiles/sand_shells.png",
+      "glb": "3d/blocks/sand_shells.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "silt",
+      "name": "Ил",
+      "png": "2.5d/iso_tiles/silt.png",
+      "glb": "3d/blocks/silt.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "rock",
+      "name": "Базальт",
+      "png": "2.5d/iso_tiles/rock.png",
+      "glb": "3d/blocks/rock.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "coral_pink",
+      "name": "Коралл розовый",
+      "png": "2.5d/iso_tiles/coral_pink.png",
+      "glb": "3d/blocks/coral_pink.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "coral_orange",
+      "name": "Коралл оранжевый",
+      "png": "2.5d/iso_tiles/coral_orange.png",
+      "glb": "3d/blocks/coral_orange.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "coral_violet",
+      "name": "Коралл фиолетовый",
+      "png": "2.5d/iso_tiles/coral_violet.png",
+      "glb": "3d/blocks/coral_violet.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "bone",
+      "name": "Китовая кость",
+      "png": "2.5d/iso_tiles/bone.png",
+      "glb": "3d/blocks/bone.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "gold",
+      "name": "Россыпь дублонов",
+      "png": "2.5d/iso_tiles/gold.png",
+      "glb": "3d/blocks/gold.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "planks",
+      "name": "Доски корабля",
+      "png": "2.5d/iso_tiles/planks.png",
+      "glb": "3d/blocks/planks.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "planks_rot",
+      "name": "Гнилые доски",
+      "png": "2.5d/iso_tiles/planks_rot.png",
+      "glb": "3d/blocks/planks_rot.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "hull_copper",
+      "name": "Медная обшивка",
+      "png": "2.5d/iso_tiles/hull_copper.png",
+      "glb": "3d/blocks/hull_copper.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "rust",
+      "name": "Ржавые листы",
+      "png": "2.5d/iso_tiles/rust.png",
+      "glb": "3d/blocks/rust.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "brass",
+      "name": "Латунь",
+      "png": "2.5d/iso_tiles/brass.png",
+      "glb": "3d/blocks/brass.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "sail",
+      "name": "Парусина",
+      "png": "2.5d/iso_tiles/sail.png",
+      "glb": "3d/blocks/sail.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "dome",
+      "name": "Стекло купола",
+      "png": "2.5d/iso_tiles/dome.png",
+      "glow": "2.5d/iso_tiles/dome_glow.png",
+      "glb": "3d/blocks/dome.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "caustics",
+      "name": "Песок в каустике",
+      "png": "2.5d/iso_tiles/caustics.png",
+      "glow": "2.5d/iso_tiles/caustics_glow.png",
+      "glb": "3d/blocks/caustics.glb",
+      "w": 35,
+      "h": 35
+    },
+    {
+      "id": "vent",
+      "name": "Горячий источник",
+      "png": "2.5d/iso_tiles/vent.png",
+      "glow": "2.5d/iso_tiles/vent_glow.png",
+      "glb": "3d/blocks/vent.glb",
+      "w": 35,
+      "h": 35
+    }
+  ],
+  "animated_blocks": [
+    {
+      "id": "caustics",
+      "name": "Каустика на песке",
+      "frames": 8,
+      "fps": 8,
+      "w": 35,
+      "h": 35,
+      "png": "2.5d/iso_tiles/anim/caustics.png",
+      "glow": "2.5d/iso_tiles/anim/caustics_glow.png"
+    },
+    {
+      "id": "moss_teal_pulse",
+      "name": "Дышащий мох, бирюзовый",
+      "frames": 8,
+      "fps": 8,
+      "w": 35,
+      "h": 35,
+      "png": "2.5d/iso_tiles/anim/moss_teal_pulse.png",
+      "glow": "2.5d/iso_tiles/anim/moss_teal_pulse_glow.png"
+    },
+    {
+      "id": "moss_violet_pulse",
+      "name": "Дышащий мох, лиловый",
+      "frames": 8,
+      "fps": 8,
+      "w": 35,
+      "h": 35,
+      "png": "2.5d/iso_tiles/anim/moss_violet_pulse.png",
+      "glow": "2.5d/iso_tiles/anim/moss_violet_pulse_glow.png"
+    },
+    {
+      "id": "moss_amber_pulse",
+      "name": "Дышащий мох, янтарный",
+      "frames": 8,
+      "fps": 8,
+      "w": 35,
+      "h": 35,
+      "png": "2.5d/iso_tiles/anim/moss_amber_pulse.png",
+      "glow": "2.5d/iso_tiles/anim/moss_amber_pulse_glow.png"
+    },
+    {
+      "id": "moss_crimson_pulse",
+      "name": "Дышащий мох, алый",
+      "frames": 8,
+      "fps": 8,
+      "w": 35,
+      "h": 35,
+      "png": "2.5d/iso_tiles/anim/moss_crimson_pulse.png",
+      "glow": "2.5d/iso_tiles/anim/moss_crimson_pulse_glow.png"
+    },
+    {
+      "id": "moss_emerald_pulse",
+      "name": "Дышащий мох, изумрудный",
+      "frames": 8,
+      "fps": 8,
+      "w": 35,
+      "h": 35,
+      "png": "2.5d/iso_tiles/anim/moss_emerald_pulse.png",
+      "glow": "2.5d/iso_tiles/anim/moss_emerald_pulse_glow.png"
+    },
+    {
+      "id": "moss_azure_pulse",
+      "name": "Дышащий мох, лазурный",
+      "frames": 8,
+      "fps": 8,
+      "w": 35,
+      "h": 35,
+      "png": "2.5d/iso_tiles/anim/moss_azure_pulse.png",
+      "glow": "2.5d/iso_tiles/anim/moss_azure_pulse_glow.png"
+    },
+    {
+      "id": "glass_rose_shimmer",
+      "name": "Витраж: свет проходит",
+      "frames": 8,
+      "fps": 8,
+      "w": 35,
+      "h": 35,
+      "png": "2.5d/iso_tiles/anim/glass_rose_shimmer.png",
+      "glow": "2.5d/iso_tiles/anim/glass_rose_shimmer_glow.png"
+    },
+    {
+      "id": "vent",
+      "name": "Гидротермальный источник",
+      "frames": 8,
+      "fps": 8,
+      "w": 35,
+      "h": 35,
+      "png": "2.5d/iso_tiles/anim/vent.png",
+      "glow": "2.5d/iso_tiles/anim/vent_glow.png"
+    }
+  ],
+  "effects": [
+    {
+      "id": "bubble_burst",
+      "name": "Пузырь лопается",
+      "frames": 8,
+      "fps": 12,
+      "w": 16,
+      "h": 16,
+      "png": "2d/fx/bubble_burst.png"
+    },
+    {
+      "id": "arc",
+      "name": "Электрическая дуга",
+      "frames": 8,
+      "fps": 16,
+      "w": 32,
+      "h": 16,
+      "png": "2d/fx/arc.png",
+      "glow": "2d/fx/arc_glow.png"
+    },
+    {
+      "id": "sonar",
+      "name": "Импульс сонара",
+      "frames": 8,
+      "fps": 10,
+      "w": 48,
+      "h": 48,
+      "png": "2d/fx/sonar.png",
+      "glow": "2d/fx/sonar_glow.png"
+    },
+    {
+      "id": "silt",
+      "name": "Облако ила",
+      "frames": 8,
+      "fps": 10,
+      "w": 24,
+      "h": 16,
+      "png": "2d/fx/silt.png"
+    },
+    {
+      "id": "ink",
+      "name": "Чернильное облако",
+      "frames": 8,
+      "fps": 8,
+      "w": 24,
+      "h": 24,
+      "png": "2d/fx/ink.png"
+    },
+    {
+      "id": "lure_flash",
+      "name": "Вспышка приманки",
+      "frames": 6,
+      "fps": 12,
+      "w": 16,
+      "h": 16,
+      "png": "2d/fx/lure_flash.png",
+      "glow": "2d/fx/lure_flash_glow.png"
+    },
+    {
+      "id": "torpedo_trail",
+      "name": "След торпеды",
+      "frames": 8,
+      "fps": 16,
+      "w": 32,
+      "h": 8,
+      "png": "2d/fx/torpedo_trail.png"
+    },
+    {
+      "id": "heal",
+      "name": "Лечение",
+      "frames": 8,
+      "fps": 10,
+      "w": 16,
+      "h": 16,
+      "png": "2d/fx/heal.png",
+      "glow": "2d/fx/heal_glow.png"
+    },
+    {
+      "id": "hit",
+      "name": "Удар",
+      "frames": 6,
+      "fps": 14,
+      "w": 16,
+      "h": 16,
+      "png": "2d/fx/hit.png",
+      "glow": "2d/fx/hit_glow.png"
+    }
+  ],
+  "parallax": {
+    "0_abyss": "2.5d/parallax/0_abyss.png",
+    "1_far_city": "2.5d/parallax/1_far_city.png",
+    "2_mid_ruins": "2.5d/parallax/2_mid_ruins.png",
+    "3_near_reef": "2.5d/parallax/3_near_reef.png",
+    "4_front": "2.5d/parallax/4_front.png",
+    "anim_rays": "2.5d/parallax/anim_rays.png",
+    "anim_snow": "2.5d/parallax/anim_snow.png",
+    "anim_bubbles": "2.5d/parallax/anim_bubbles.png"
+  },
+  "asset_policy": "For third-party dependencies check rights; owner-authorized original models are donor candidates."
+}

@@ -81,6 +81,29 @@
       ],
       "owner_reference": true,
       "owner_pass_for_changes": false
+    },
+    {
+      "id": "demonic-hand",
+      "title": "Демоническая кисть / Demonic Hand",
+      "source": "meta-games/references/demonic-hand/index.html",
+      "source_original_filename": "demonhand(1).html",
+      "source_sha256": "5747638b0153e8aef2e755d0a3f8059f28af25e199eed9fcf4ad4804381a8425",
+      "engine": "self-contained WebGL2 / GLSL ES 3.00 / procedural mesh",
+      "rendering": [
+        "procedural indexed mesh and organic sweep surfaces",
+        "skinned-like CPU joint deformation of MCP/PIP/DIP + opposing thumb",
+        "animated pose with contact-limited finger flexion",
+        "noise-based skin and crack-emission GLSL shading",
+        "multi-color diffuse/rim lighting and ACES tonemapping",
+        "inertial pointer orbit, pinch/wheel camera zoom"
+      ],
+      "assets": [],
+      "runtime": "self-contained file:// HTML; WebGL2 required",
+      "interaction": "finger curl slider, mouse/touch orbit, wheel/pinch zoom, OBJ export of current static pose (not rigged)",
+      "third_party": [],
+      "owner_reference": true,
+      "owner_pass_for_changes": false,
+      "reuse_scope": "Owner explicitly provided file as META GAMES reference on 2026-11-08; preserve original source byte-for-byte"
     }
   ]
 }

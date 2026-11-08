@@ -19,6 +19,7 @@
     'pod-i-nad-flail-physics':Object.freeze({file:'components/pod-i-nad/animations/flail-physics.mjs',module:true,exports:['createFlailPhysics']}),
     'pod-i-nad-flail-hits':Object.freeze({file:'components/pod-i-nad/animations/flail-hit-detection.mjs',module:true,exports:['createFlailHitDetector']}),
     'pod-i-nad-combat-poses':Object.freeze({file:'components/pod-i-nad/animations/combat-poses.mjs',module:true,exports:['sampleCombatPose']}),
+    'pod-i-nad-original-sky':Object.freeze({file:'components/pod-i-nad/shaders/atmosphere/original-sky-material.mjs',module:true,exports:['ORIGINAL_SKY','createOriginalSkyMaterial','createOriginalSky']}),
     'pod-i-nad-original-glsl':Object.freeze({file:'components/pod-i-nad/shaders/original-glsl.mjs',module:true,exports:['shaderNames','originalShaderSources','shaderPairs','getOriginalGLSL','getOriginalShaderPair']}),
     'pod-i-nad-water':Object.freeze({file:'components/pod-i-nad/shaders/water/water-material.mjs',module:true,exports:['createWaterMaterial']}),
     'pod-i-nad-mist':Object.freeze({file:'components/pod-i-nad/shaders/atmosphere/mist-material.mjs',module:true,exports:['createMistMaterial','createMistLayers']}),

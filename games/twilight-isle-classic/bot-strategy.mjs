@@ -36,7 +36,14 @@ export async function playLevel(ctx, level) {
       await ctx.joystick(step % 2 ? -1 : 1, 0.6, 320);
       await ctx.key('KeyJ', 110);
     } else if (foe && foe.distance < 2.5) {
-      // Classic uses J/K for attack. A hit must register in game state.
+      // Face the actual enemy with normal controls before the melee attack.
+      // Standing still and striking a target behind the hero cannot hit it.
+      const yaw = Number.isFinite(state.cameraYaw) ? state.cameraYaw : 0;
+      const dx = foe.x - state.hero.x, dz = foe.y - state.hero.y;
+      const sx = Math.cos(yaw) * dx - Math.sin(yaw) * dz;
+      const sy = Math.sin(yaw) * dx + Math.cos(yaw) * dz;
+      const len = Math.hypot(sx, sy) || 1;
+      await ctx.joystick(sx / len, sy / len, 230);
       await ctx.key('KeyJ', 190);
     } else if (state.goal) {
       // A coin can be above a one-block voxel ledge: horizontal arrival
@@ -54,7 +61,10 @@ export async function playLevel(ctx, level) {
         escapeAttempt = 0;
       }
       lastPosition = position;
-      if (distance < 1.25 || stalledSteps >= 3) {
+      const climbRequired = state.grounded &&
+        ((state.stepRise >= 1.5 && distance < 2.5) ||
+         (state.coinAbove && distance < 2.5));
+      if (distance < 1.25 || stalledSteps >= 3 || climbRequired) {
         await ctx.jump();
         // Side-step through real controls to avoid repeating the blocked line.
         if (stalledSteps >= 3) {

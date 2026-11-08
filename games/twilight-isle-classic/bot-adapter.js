@@ -84,16 +84,60 @@
     const x = Math.floor(hero.x), z = Math.floor(hero.y);
     if (x < 0 || z < 0 || x >= width || z >= width) return goal;
     const here = x + z * width, next = field[here];
-    if (next < 0 || next === here) return goal;
+    if (next < 0) {
+      // The actual directed voxel graph has no route from this position to
+      // the selected coin. Reject only this candidate; never fake a pickup.
+      if (trackedCoin) {
+        inaccessibleCoins.add(trackedCoin);
+        retryFrom ??= { x: hero.x, y: hero.y };
+        trackedCoin = null;
+      }
+      return null;
+    }
+    if (next === here) return goal;
     return { x: (next % width) + .5, y: ((next / width) | 0) + .5 };
   }
-  // Persist a genuine uncollected coin until pickup. Euclidean nearest can
-  // flip on every step and make an otherwise valid route oscillate.
-  let coinWorld = null, trackedCoin = null;
-  function stickToLiveCoin(world, coins, candidate) {
-    if (world !== coinWorld || !trackedCoin?.alive ||
-        !Array.isArray(coins) || !coins.includes(trackedCoin)) {
-      coinWorld = world; trackedCoin = candidate;
+  // Keep a real coin target, but never chase it through an impassable
+  // one-way drop. Spawn reachability does not imply reachability from the
+  // hero's current cell after descending a cliff.
+  let coinWorld = null, trackedCoin = null, liveCount = -1, retryFrom = null;
+  const inaccessibleCoins = new Set();
+  function stickToLiveCoin(world, coins, candidate, hero) {
+    if (!Array.isArray(coins)) return null;
+    if (world !== coinWorld) {
+      coinWorld = world;
+      trackedCoin = null;
+      liveCount = -1;
+      inaccessibleCoins.clear();
+      retryFrom = null;
+    }
+    const count = coins.reduce((n, c) => n + (c.alive ? 1 : 0), 0);
+    if (count !== liveCount) {
+      liveCount = count;
+      inaccessibleCoins.clear();
+      retryFrom = null;
+    }
+    // After genuine exploration has changed the starting area, recheck
+    // formerly unreachable coins against the new directed terrain graph.
+    if (retryFrom && Math.hypot(hero.x - retryFrom.x, hero.y - retryFrom.y) > 4) {
+      inaccessibleCoins.clear();
+      retryFrom = null;
+    }
+    if (!trackedCoin?.alive || !coins.includes(trackedCoin) ||
+        inaccessibleCoins.has(trackedCoin)) {
+      trackedCoin = candidate?.alive && !inaccessibleCoins.has(candidate)
+        ? candidate : null;
+      let best = trackedCoin
+        ? Math.hypot(trackedCoin.x - hero.x, trackedCoin.z - hero.y)
+        : Infinity;
+      for (const coin of coins) {
+        if (!coin.alive || inaccessibleCoins.has(coin)) continue;
+        const distance = Math.hypot(coin.x - hero.x, coin.z - hero.y);
+        if (distance < best) {
+          best = distance;
+          trackedCoin = coin;
+        }
+      }
     }
     return trackedCoin;
   }
@@ -142,7 +186,7 @@
       const ring = isle?.world?.ring;
       const objective = game?.all
         ? (head ?? ring)
-        : stickToLiveCoin(isle?.world, isle?.coins, nearestCoin);
+        : stickToLiveCoin(isle?.world, isle?.coins, nearestCoin, hero);
       const directGoal = objective
         ? { x: objective.x, y: objective.z }
         : null;

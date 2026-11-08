@@ -2677,19 +2677,34 @@ const rig = { yaw: 0, pitch: .28, dist: 6.8, pos: new V3(0, 3, 12), look: new V3
 /* ============ INPUT ============ */
 const keys = {};
 addEventListener('keydown', e => {
+  capturePlayerInput();
   keys[e.code] = true;
   if (view === 'gallery') { if (e.key === 'ArrowRight') showGallery(gIndex + 1); if (e.key === 'ArrowLeft') showGallery(gIndex - 1); }
   if (e.code === 'Space' && view === 'game') { e.preventDefault(); action(); }
   if (view === 'game' && G.state === 'play' && !G.paused && G.cfg && (G.cfg.mode === 'combo' || G.cfg.mode === 'cradle')) { if (e.code === 'KeyE' || e.code === 'KeyF') comboStomp(); if (e.code === 'KeyQ' || e.code === 'KeyR') comboBridge(); }
 });
-addEventListener('keyup', e => { keys[e.code] = false; });
+addEventListener('keyup', e => { capturePlayerInput(); keys[e.code] = false; });
 addEventListener('keydown', () => audioInit(), { once: false });
 const stick = { id: null, cx: 0, cy: 0, vx: 0, vy: 0 };
+// Preserve real held input when GPU frames are slower than touch/key events.
+const inputHistory = { last: performance.now(), xMs: 0, zMs: 0, runningMs: 0 };
+let frameMovement = null;
+function capturePlayerInput() {
+  const now = performance.now();
+  const ms = Math.max(0, Math.min(5000, now - inputHistory.last));
+  const ix = stick.vx + (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
+  const iz = -stick.vy + (keys.KeyW || keys.ArrowUp ? 1 : 0) - (keys.KeyS || keys.ArrowDown ? 1 : 0);
+  inputHistory.xMs += ix * ms;
+  inputHistory.zMs += iz * ms;
+  if (Math.hypot(ix, iz) > .97) inputHistory.runningMs += ms;
+  inputHistory.last = now;
+}
 const camP = { id: null, lx: 0, ly: 0, sx: 0, sy: 0, st: 0 };
 canvas.addEventListener('pointerdown', e => {
   audioInit();
   if (view === 'game' && G.state === 'play' && e.pointerType !== 'mouse' && e.clientX < innerWidth * .5 && stick.id === null) {
     if (!G.stickOk) { G.stickOk = true; store.set('stickOk', true); }
+    capturePlayerInput();
     stick.id = e.pointerId; stick.cx = e.clientX; stick.cy = e.clientY; stick.vx = stick.vy = 0;
     $('stickBase').style.cssText = $('stickKnob').style.cssText = `display:block;left:${e.clientX}px;top:${e.clientY}px`;
   } else if (camP.id === null) { camP.id = e.pointerId; camP.lx = camP.sx = e.clientX; camP.ly = camP.sy = e.clientY; camP.st = performance.now(); }
@@ -2698,7 +2713,7 @@ canvas.addEventListener('pointerdown', e => {
 canvas.addEventListener('pointermove', e => {
   if (e.pointerId === stick.id) {
     let dx = e.clientX - stick.cx, dy = e.clientY - stick.cy; const l = Math.hypot(dx, dy), m = 56;
-    if (l > m) { dx *= m / l; dy *= m / l; } stick.vx = dx / m; stick.vy = dy / m;
+    if (l > m) { dx *= m / l; dy *= m / l; } capturePlayerInput(); stick.vx = dx / m; stick.vy = dy / m;
     $('stickKnob').style.left = (stick.cx + dx) + 'px'; $('stickKnob').style.top = (stick.cy + dy) + 'px'; return;
   }
   if (e.pointerId !== camP.id) return;
@@ -2708,7 +2723,7 @@ canvas.addEventListener('pointermove', e => {
   else if (view === 'game' && G.cfg && G.cfg.mode !== 'runner') { rig.oyaw = -dx * .008; rig.opitch = dy * .006; rig.yaw += rig.oyaw; rig.pitch = THREE.MathUtils.clamp(rig.pitch + rig.opitch, -.05, 1.0); }
 });
 function endPointer(e) {
-  if (e.pointerId === stick.id) { stick.id = null; stick.vx = stick.vy = 0; $('stickBase').style.display = $('stickKnob').style.display = 'none'; }
+  if (e.pointerId === stick.id) { capturePlayerInput(); stick.id = null; stick.vx = stick.vy = 0; $('stickBase').style.display = $('stickKnob').style.display = 'none'; }
   if (e.pointerId === camP.id) {
     if (view === 'game' && G.cfg && G.cfg.mode === 'runner' && performance.now() - camP.st < 450) {
       const dx = e.clientX - camP.sx, dy = e.clientY - camP.sy;
@@ -2859,10 +2874,14 @@ const fwd = new V3(), right = new V3(), tv = new V3();
 function updateGame(dt, t) {
   const c = G.cfg, hs = heroState, m = c.mode;
   // --- input (camera-relative)
-  let ix = stick.vx, iz = -stick.vy;
-  if (keys.KeyA || keys.ArrowLeft) ix -= 1; if (keys.KeyD || keys.ArrowRight) ix += 1;
-  if (keys.KeyW || keys.ArrowUp) iz += 1; if (keys.KeyS || keys.ArrowDown) iz -= 1;
-  const mag = Math.min(1, Math.hypot(ix, iz)); const running = mag > .97 || keys.ShiftLeft || keys.ShiftRight;
+  let ix = frameMovement ? frameMovement.ix : stick.vx;
+  let iz = frameMovement ? frameMovement.iz : -stick.vy;
+  if (!frameMovement) {
+    if (keys.KeyA || keys.ArrowLeft) ix -= 1; if (keys.KeyD || keys.ArrowRight) ix += 1;
+    if (keys.KeyW || keys.ArrowUp) iz += 1; if (keys.KeyS || keys.ArrowDown) iz -= 1;
+  }
+  const mag = Math.min(1, Math.hypot(ix, iz));
+  const running = mag > .97 || (frameMovement && frameMovement.runningMs > 0) || keys.ShiftLeft || keys.ShiftRight;
   if (m !== 'runner') {
     fwd.set(-Math.sin(rig.yaw), 0, -Math.cos(rig.yaw)); right.set(-fwd.z, 0, fwd.x);
     tv.set(0, 0, 0).addScaledVector(fwd, iz).addScaledVector(right, ix); if (tv.lengthSq() > 1) tv.normalize();
@@ -3282,7 +3301,12 @@ const clock = new THREE.Clock();
 let started = 0, glitch = 0, dripT = 2;
 function frame() {
   requestAnimationFrame(frame);
-  const realDt = clock.getDelta(), dt0 = Math.min(realDt, .05); if (PAUSE.size && started) return;
+  const realDt = clock.getDelta(), dt0 = Math.min(realDt, .05);
+  capturePlayerInput();
+  const elapsedMs = Math.max(1, realDt * 1000);
+  frameMovement = { ix: inputHistory.xMs / elapsedMs, iz: inputHistory.zMs / elapsedMs, runningMs: inputHistory.runningMs };
+  inputHistory.xMs = inputHistory.zMs = inputHistory.runningMs = 0;
+  if (PAUSE.size && started) return;
   const dt = dt0, t = clock.elapsedTime;
   U.uTime.value = t;
   post.uniforms.uFade.value += (fadeTarget - post.uniforms.uFade.value) * damp(view === 'game' ? (G.state === 'trans' ? 6 : 2.6) : .9, dt);
@@ -3328,10 +3352,10 @@ function frame() {
     } else {
       perfTick(performance.now(), G.state === 'play' && !G.paused && !PAUSE.size);
       if (G.state === 'play' && !G.paused) {
-         // Keep real-time movement playable when the GPU renders only a few frames per
+         // Keep real touch/key movement playable when the GPU renders only a few frames per
          // second. Bounded 50 ms physics steps preserve gravity, jumps and collisions;
-         // this never advances level counters or relaxes the bot's 180 s watchdog.
-         let remaining = Math.min(realDt, .35);
+         // real input integration never relaxes the bot's 180 s watchdog.
+         let remaining = Math.min(realDt, 2.0);
          while (remaining > 0.00001 && G.state === 'play' && !G.paused) {
            const step = Math.min(remaining, .05);
            updateGame(step, t);

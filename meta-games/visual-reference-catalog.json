@@ -83,32 +83,56 @@
       "owner_pass_for_changes": false
     },
     {
+      "id": "twilight-isle-owner-20261108",
+      "title": "Остров сумерек — эталон владельца 08.11.2026",
+      "source": "reference/sumerek-golden/ostrov-sumerek-owner-20261108.html",
+      "guide": "reference/sumerek-golden/README.md",
+      "companion": "reference/sumerek-golden/ostrov-sumerek-owner-20261108.md",
+      "source_sha256": "fdbda0240b53f49d6e34aa0965531856e31a0154f4a12339e1682d60d5fe5c1f",
+      "engine": "Three.js r160 / WebGL / GLSL",
+      "rendering": [
+        "16×16 voxel island",
+        "2.5D HD sprite billboards",
+        "NEAREST-filtered pixel textures",
+        "shader-based fog and lighting",
+        "UnrealBloomPass / post-processing composer",
+        "procedural particles and camera rig"
+      ],
+      "assets": [],
+      "embedded_assets": "PNG sprites and atlases in HTML data URIs",
+      "runtime": "file:// possible with network; requires jsDelivr for Three.js and Google Fonts for optional font",
+      "third_party": [
+        "Three.js r160 from jsDelivr (MIT library; confirm notices)",
+        "Pixelify Sans via Google Fonts",
+        "Voxel Mini-Pack provenance and usage rights require review"
+      ],
+      "owner_reference": true,
+      "owner_pass_for_changes": false,
+      "rights_review_required": true
+    },
+    {
       "id": "sumerki-i-pepel-owner-20261108",
-      "title": "Сумерки и пепел — эталон владельца",
+      "title": "Сумерки и пепел — эталон владельца 08.11.2026",
       "source": "reference/sumerek-golden/sumerki-i-pepel-owner-20261108-fdc87038.html",
       "guide": "reference/sumerek-golden/README.md",
       "source_sha256": "fdc8703869bc4fdbaeac4e68f2d1bbb2eee6fd4cb5f098f437e505401784319c",
-      "engine": "Three.js r160 / WebGL / procedural 3D + pixel sprite assets",
+      "engine": "Three.js r160 / WebGL / voxel pixel art",
       "rendering": [
         "procedural voxel island and perspective scene",
         "embedded pixel-art atlas and sprite billboards",
-        "UnrealBloomPass and custom postprocessing",
-        "dynamic particles, enemies, and camera"
+        "UnrealBloomPass and shader post-processing",
+        "animated particles and camera"
       ],
-      "assets": [
-        {
-          "path": "reference/sumerek-golden/sumerki-i-pepel-owner-20261108-fdc87038.html",
-          "kind": "embedded-data-uri-sprites-and-atlases"
-        }
-      ],
-      "runtime": "single HTML; internet required for Three.js CDN (Google Fonts optional)",
+      "assets": [],
+      "embedded_assets": "PNG sprites/atlases in HTML data URIs",
+      "runtime": "single HTML; Three.js CDN required",
       "third_party": [
-        "Three.js modules loaded from jsDelivr CDN",
+        "Three.js r160 from jsDelivr",
         "Pixelify Sans from Google Fonts"
       ],
       "owner_reference": true,
       "owner_pass_for_changes": false,
-      "rights_verified": false
+      "rights_review_required": true
     }
   ]
 }

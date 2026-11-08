@@ -1534,6 +1534,35 @@
       "dependencies": [],
       "scope": "hit events only; damage application and audiovisual effects are host callbacks",
       "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/combat/flail-combat",
+      "name": "Integrated flail combat with health, impulse and FX hooks",
+      "kind": "combat",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "flail weapon",
+        "enemy health damage",
+        "knockback",
+        "sound callbacks",
+        "impact effects"
+      ],
+      "tags": [
+        "combat",
+        "physics",
+        "flail",
+        "damage",
+        "effects"
+      ],
+      "entry": "../components/pod-i-nad/animations/flail-combat.mjs",
+      "export_name": "createFlailCombat",
+      "dependencies": [
+        "flail-physics.mjs",
+        "flail-hit-detection.mjs"
+      ],
+      "scope": "Mutates foe.hp/velocity; onImpact/onWhoosh/onDefeat hooks; host supplies rendering and audio",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
     }
   ]
 }

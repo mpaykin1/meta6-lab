@@ -1,4 +1,254 @@
-<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>META GAMES · Цепное оружие</title><style>body{margin:0;background:#06131c;color:#d4e9e9;font:16px system-ui;overflow:hidden}canvas{display:block;width:100vw;height:100dvh;touch-action:none}aside{position:absolute;top:14px;left:14px;background:#102c37d9;border:1px solid #497b85;padding:14px;border-radius:12px}a{color:#99e5d6}button{padding:10px;background:#295b68;color:white;border:1px solid #7eb8bd;border-radius:8px}</style><aside><a href="./index.html">← Библиотека</a><p>Цепное оружие · попадания и урон</p><button id="restart">Новые противники</button><p id="info"></p></aside><canvas id="scene"></canvas><script type="module">
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#050b13">
+<title>META GAMES · Цепное оружие · 3D</title>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#030811;color:#c5eadf;font:14px system-ui,-apple-system,sans-serif}
+  canvas{position:fixed;inset:0;display:block;width:100%;height:100%;touch-action:none;outline:none}
+  #hud{position:fixed;inset:env(safe-area-inset-top) 12px auto 12px;display:flex;align-items:center;gap:9px;pointer-events:none;z-index:2}
+  #hud a,#hud button{pointer-events:auto;color:#c2e8e5;background:#0a1a24b8;border:1px solid #538b9155;border-radius:12px;text-decoration:none;min-width:41px;height:41px;display:grid;place-items:center;backdrop-filter:blur(7px)}
+  #hud button{font:22px system-ui;cursor:pointer}
+  #hud strong{letter-spacing:.12em;font-weight:500;background:#07131bb8;border:1px solid #538b9144;border-radius:12px;padding:11px 15px}
+  #hud .space{flex:1}
+  #hint{position:fixed;bottom:calc(13px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);text-align:center;pointer-events:none;font-size:12px;letter-spacing:.055em;text-shadow:0 1px 5px #000;color:#b4ced1c9;white-space:nowrap}
+  #error{display:none;position:fixed;inset:30% 8%;z-index:10;color:#f1d6ca;background:#291315df;border:1px solid #ad6a6a;padding:24px;border-radius:12px}
+</style>
+</head>
+<body>
+<div id="hud">
+  <a href="./index.html" aria-label="В библиотеку" title="В библиотеку">‹</a>
+  <strong id="count">5 / 5</strong><div class="space"></div>
+  <button id="sound" aria-label="Звук" title="Звук">♫</button>
+  <button id="restart" aria-label="Начать заново" title="Начать заново">↻</button>
+</div>
+<div id="hint">ПАЛЕЦ — ДВИЖЕНИЕ И АТАКА · WASD — ХОДЬБА · ПРОБЕЛ — УДАР</div>
+<div id="error"></div>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 import {createFlailCombat} from '../../shared/components/pod-i-nad/animations/flail-combat.mjs';
-const c=document.querySelector('canvas'),g=c.getContext('2d'),info=document.querySelector('#info');let w=0,h=0,foes=[],impacts=[];const player={x:0,y:0,z:0};let held=true;function reset(){foes=[0,1,2,3,4].map((i)=>({hp:100,alive:true,rad:.4,position:{x:Math.cos(i*Math.PI*2/5)*1.5,y:.8,z:Math.sin(i*Math.PI*2/5)*1.5},velocity:{x:0,z:0}}));impacts=[]}reset();document.querySelector('#restart').onclick=reset;function resize(){const d=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*d;c.height=h*d;g.setTransform(d,0,0,d,0,0)}addEventListener('resize',resize);resize();const combat=createFlailCombat({reach:1.8,damage:22,tick:.3,onImpact(hit){impacts.push({x:hit.position.x,z:hit.position.z,t:performance.now()})}});let prev=0;function frame(ms){const dt=prev?Math.min((ms-prev)/1000,.05):.016;prev=ms;const scale=Math.min(w,h)*.18,cx=w*.5,cy=h*.56;const project=p=>[cx+p.x*scale,cy+p.z*scale];const a=ms*.00025;const out=combat.update(dt,{attack:held,player,aim:{x:Math.cos(a),z:Math.sin(a)},foes});g.fillStyle='#06131c';g.fillRect(0,0,w,h);g.strokeStyle='#244c59';for(let i=-6;i<=6;i++){g.beginPath();g.moveTo(cx+i*scale,0);g.lineTo(cx+i*scale,h);g.moveTo(0,cy+i*scale);g.lineTo(w,cy+i*scale);g.stroke()}for(const foe of foes){const [x,y]=project(foe.position);g.fillStyle=foe.hp?'#d65d73':'#3c5260';g.beginPath();g.arc(x,y,scale*.35,0,7);g.fill();g.fillStyle='#a5d9d5';g.fillRect(x-scale*.35,y-scale*.55,scale*.7*(foe.hp/100),4)}g.fillStyle='#f3d69a';g.beginPath();g.arc(cx,cy,scale*.22,0,7);g.fill();g.strokeStyle='#b9dce4';g.lineWidth=4;g.beginPath();const points=[{x:0,z:0},...out.chain,out.state.ball];points.forEach((p,i)=>{const [x,y]=project(p);if(i===0)g.moveTo(x,y);else g.lineTo(x,y)});g.stroke();const [bx,by]=project(out.state.ball);g.fillStyle='#d9faff';g.beginPath();g.arc(bx,by,scale*.16,0,7);g.fill();impacts=impacts.filter(e=>ms-e.t<300);for(const e of impacts){const [x,y]=project(e);g.strokeStyle='#fff4b0';g.lineWidth=3;g.beginPath();g.arc(x,y,scale*(.1+(ms-e.t)/400),0,7);g.stroke()}info.textContent='Живых противников: '+foes.filter(f=>f.hp>0).length+' / 5';requestAnimationFrame(frame)}requestAnimationFrame(frame);
-</script></html>
+import {createCombatAudio} from '../../shared/components/pod-i-nad/animations/flail-audio.mjs';
+import {createCombatEffects} from '../../shared/components/pod-i-nad/animations/flail-impact-fx.mjs';
+import {createCombatModels} from '../../shared/components/pod-i-nad/models/combat-models.mjs';
+
+const mobile=matchMedia('(pointer:coarse)').matches, count=document.querySelector('#count');
+const soundButton=document.querySelector('#sound'),error=document.querySelector('#error');
+const renderer=new THREE.WebGLRenderer({alpha:false,antialias:!mobile,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobile?1.4:2));
+renderer.setSize(innerWidth,innerHeight);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.28;
+document.body.prepend(renderer.domElement);
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x050c15);
+scene.fog=new THREE.FogExp2(0x071824,.052);
+const camera=new THREE.PerspectiveCamera(54,innerWidth/innerHeight,.1,110);
+const cameraAim=new THREE.Vector3(0,.9,0);
+camera.position.set(0,7.8,10.5);
+scene.add(new THREE.HemisphereLight(0x86d8dc,0x10131e,1.85));
+const moon=new THREE.DirectionalLight(0xc9ddea,3.3);moon.position.set(-5,10,-6);scene.add(moon);
+const warm=new THREE.PointLight(0xeb9a59,15,14,2);warm.position.set(0,3.7,-4);scene.add(warm);
+const floorMaterial=new THREE.MeshStandardMaterial({color:0x19313b,metalness:.18,roughness:.94,flatShading:true});
+const obsidian=new THREE.MeshStandardMaterial({color:0x1e323b,roughness:.94,metalness:.26,flatShading:true});
+const bronze=new THREE.MeshStandardMaterial({color:0x5f5647,roughness:.69,metalness:.39,flatShading:true});
+const lineMat=new THREE.MeshBasicMaterial({color:0x57bcae,transparent:true,opacity:.26,side:THREE.DoubleSide});
+function place(geom,mat,x,y,z){
+  const m=new THREE.Mesh(geom,mat);m.position.set(x,y,z);scene.add(m);return m;
+}
+const under=place(new THREE.CylinderGeometry(5.8,6.4,.6,64),obsidian,0,-.32,0);
+const disc=place(new THREE.CylinderGeometry(5.35,5.5,.18,64),floorMaterial,0,-.02,0);
+const abyss=place(new THREE.PlaneGeometry(180,180),new THREE.MeshStandardMaterial({color:0x050b12,roughness:1}),0,-.67,0);abyss.rotation.x=-Math.PI/2;
+for(const r of [1.15,2.65,4.25,5.15]){
+  const ring=place(new THREE.RingGeometry(r,r+.018,128),lineMat,0,.076,0);ring.rotation.x=-Math.PI/2;
+}
+const tileGeo=new THREE.BoxGeometry(.6,.08,.64),rocksGeo=new THREE.DodecahedronGeometry(.3,0);
+const tileCount=92,tiles=new THREE.InstancedMesh(tileGeo,bronze,tileCount);
+const temp=new THREE.Object3D();
+for(let i=0;i<tileCount;i++){
+  const a=(i*2.399963),r=2.6+((i*17)%29)/13.0;
+  temp.position.set(Math.cos(a)*r,.05,Math.sin(a)*r);
+  temp.rotation.set(0,a,.02*Math.sin(i*17));temp.scale.set(.48+(i%5)*.12,1,.48+(i%7)*.1);
+  temp.updateMatrix();tiles.setMatrixAt(i,temp.matrix);
+}
+scene.add(tiles);
+const farRocks=new THREE.InstancedMesh(rocksGeo,obsidian,95);
+for(let i=0;i<95;i++){
+  const a=i*2.399963,r=6.7+(i%17)*.76;
+  temp.position.set(Math.cos(a)*r,(i%5)*.11-.48,Math.sin(a)*r);
+  temp.rotation.set(i*.33,i*1.7,i*.73);
+  temp.scale.set(.8+(i%7)*.45,1+(i%4)*1.4,.7+(i%6)*.4);
+  temp.updateMatrix();farRocks.setMatrixAt(i,temp.matrix);
+}
+scene.add(farRocks);
+for(let i=0;i<11;i++){
+  const a=i*Math.PI*2/11,r=8.2+(i%3)*.8;
+  const col=place(new THREE.CylinderGeometry(.24,.48,3.6+(i%4)*.7,6),obsidian,Math.cos(a)*r,1.2,Math.sin(a)*r);
+  col.rotation.z=(i%2?1:-1)*.13;
+  const cap=new THREE.Mesh(new THREE.BoxGeometry(1,.22,1),bronze);
+  cap.position.y=2.1;col.add(cap);
+}
+const fireflyGeometry=new THREE.BufferGeometry(),fireflyPos=new Float32Array(240*3);
+for(let i=0;i<240;i++){const a=i*11.74,r=Math.sqrt((i*67%239)/239)*16;fireflyPos[i*3]=Math.cos(a)*r;fireflyPos[i*3+1]=.2+((i*41)%37)*.18;fireflyPos[i*3+2]=Math.sin(a)*r}
+fireflyGeometry.setAttribute('position',new THREE.BufferAttribute(fireflyPos,3));
+const fireflies=new THREE.Points(fireflyGeometry,new THREE.PointsMaterial({size:.043,color:0x6fcae3,transparent:true,opacity:.52,depthWrite:false,blending:THREE.AdditiveBlending}));
+scene.add(fireflies);
+const models=createCombatModels(THREE),hero=models.createHero(),ball=models.createFlailHead(),links=models.createChain(9);
+scene.add(hero.group,ball,...links);
+const effects=createCombatEffects(THREE,scene);
+const audio=createCombatAudio();
+let foes=[],foeVisuals=[],started=false,aim={x:1,z:0},pressed=false,autoAttack=true,last=0,elapsed=0,hitPulse=0,shake=0;
+const player={x:0,y:0,z:0};
+const keySet=new Set(),touches=new Map();
+const combat=createFlailCombat({
+  reach:2.1,damage:23,knockback:.8,tick:.36,ballRadius:.55,
+  onImpact(hit){effects.spawn(hit.position,{damage:hit.damage});audio.play('impact');hitPulse=.27;shake=Math.min(.35,shake+.13);const visual=foeVisuals[foes.indexOf(hit.foe)];if(visual)visual.hurt=.28},
+  onWhoosh(){audio.play('whoosh')},
+  onDefeat({hit}){effects.spawn(hit.position,{fatal:true});audio.play('defeat');shake=.4}
+});
+function reset(){
+  for(const v of foeVisuals){scene.remove(v.model.group);v.model.glow.dispose();v.barMaterial.dispose();v.barBackground.geometry.dispose();v.barFill.geometry.dispose()}
+  foes=[];foeVisuals=[];player.x=0;player.z=0;aim={x:1,z:0};
+  combat.reset();effects.clear();hitPulse=0;shake=0;started=false;autoAttack=true;
+  for(let i=0;i<5;i++){
+    const angle=i*Math.PI*2/5+.2,foe={hp:100,alive:true,dead:false,rad:.46,
+      position:{x:Math.cos(angle)*2.07,y:.9,z:Math.sin(angle)*2.07},velocity:{x:0,z:0}};
+    const model=models.createEnemy({color:[0xf28862,0xffa66d,0xeb6c70,0xf2ae67,0xda677e][i]});
+    scene.add(model.group);const barMaterial=new THREE.MeshBasicMaterial({color:0x8bf3dd,side:THREE.DoubleSide});
+    const bg=new THREE.Mesh(new THREE.PlaneGeometry(.81,.07),new THREE.MeshBasicMaterial({color:0x101b25,side:THREE.DoubleSide}));
+    const fg=new THREE.Mesh(new THREE.PlaneGeometry(.76,.046),barMaterial);
+    bg.position.y=2.05;fg.position.set(0,2.06,.007);model.group.add(bg,fg);
+    const v={model,barMaterial,barBackground:bg,barFill:fg,hurt:0,death:0,seed:i*.8};
+    foes.push(foe);foeVisuals.push(v);
+  }
+  count.textContent='5 / 5';
+}
+reset();
+document.querySelector('#restart').addEventListener('click',()=>{audio.unlock();reset()});
+soundButton.addEventListener('click',()=>{audio.unlock();audio.setMuted(!audio.muted);soundButton.textContent=audio.muted?'♪':'♫'});
+function gesture(){started=true;autoAttack=false;audio.unlock()}
+renderer.domElement.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='mouse'&&e.button!==0)return;
+  gesture();renderer.domElement.setPointerCapture(e.pointerId);
+  touches.set(e.pointerId,{originX:e.clientX,originY:e.clientY,x:e.clientX,y:e.clientY});
+  pressed=true;pointerAim(e.clientX,e.clientY);
+});
+renderer.domElement.addEventListener('pointermove',e=>{
+  const p=touches.get(e.pointerId);
+  if(p){p.x=e.clientX;p.y=e.clientY;pointerAim(e.clientX,e.clientY)}
+});
+function release(e){touches.delete(e.pointerId);pressed=touches.size>0}
+renderer.domElement.addEventListener('pointerup',release);
+renderer.domElement.addEventListener('pointercancel',release);
+renderer.domElement.addEventListener('contextmenu',e=>e.preventDefault());
+function pointerAim(x,y){
+  const dx=x-innerWidth*.5,dy=y-innerHeight*.55,m=Math.hypot(dx,dy)||1;
+  aim={x:dx/m,z:dy/m};
+}
+addEventListener('keydown',e=>{
+  if(['Space','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();
+  if(!keySet.has(e.code))gesture();
+  keySet.add(e.code);
+});
+addEventListener('keyup',e=>keySet.delete(e.code));
+addEventListener('blur',()=>{keySet.clear();pressed=false;touches.clear()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){audio.setMuted(true)}else{audio.setMuted(soundButton.textContent==='♪')}});
+const trailGeom=new THREE.BufferGeometry(),trailPos=new Float32Array(32*3);
+trailGeom.setAttribute('position',new THREE.BufferAttribute(trailPos,3));
+const trail=new THREE.Line(trailGeom,new THREE.LineBasicMaterial({color:0x7ae8de,transparent:true,opacity:.38,blending:THREE.AdditiveBlending,depthWrite:false}));
+scene.add(trail);let trailCount=0;
+function resize(){
+  camera.aspect=innerWidth/Math.max(1,innerHeight);camera.updateProjectionMatrix();
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobile?1.4:2));renderer.setSize(innerWidth,innerHeight);
+}
+addEventListener('resize',resize);
+let hintHidden=false;
+renderer.setAnimationLoop((ms)=>{
+  const dt=last?Math.min((ms-last)*.001,.05):.016;last=ms;elapsed+=dt;
+  if(!hintHidden&&(started||elapsed>10)){document.querySelector('#hint').style.opacity='.35';hintHidden=true}
+  const kMove=(code)=>keySet.has(code)?1:0;
+  let dx=kMove('KeyD')+kMove('ArrowRight')-kMove('KeyA')-kMove('ArrowLeft');
+  let dz=kMove('KeyS')+kMove('ArrowDown')-kMove('KeyW')-kMove('ArrowUp');
+  if(touches.size){
+    const p=touches.values().next().value;
+    const px=(p.x-p.originX)/85,py=(p.y-p.originY)/85;
+    dx+=Math.max(-1,Math.min(1,px));dz+=Math.max(-1,Math.min(1,py));
+  }
+  const moving=Math.hypot(dx,dz)>.08;
+  if(moving){
+    const length=Math.max(1,Math.hypot(dx,dz));
+    player.x+=dx/length*dt*2.7;player.z+=dz/length*dt*2.7;
+    const r=Math.hypot(player.x,player.z),limit=4.5;
+    if(r>limit){player.x*=limit/r;player.z*=limit/r}
+    if(!touches.size)aim={x:dx/length,z:dz/length};
+  }
+  const attacking=autoAttack||pressed||keySet.has('Space');
+  const out=combat.update(dt,{attack:attacking,player,aim,foes});
+  hero.group.position.set(player.x,.055,player.z);
+  hero.group.rotation.y=Math.atan2(aim.x,aim.z);
+  hero.update(elapsed,moving);
+  const chain=[{x:player.x+.35,y:1.22,z:player.z+.15},...out.chain,out.state.ball];
+  const chainStep=Math.max(1,(chain.length-1)/links.length);
+  for(let i=0;i<links.length;i++){
+    const a=chain[Math.min(chain.length-1,Math.floor(i*chainStep))];
+    const b=chain[Math.min(chain.length-1,Math.floor((i+.7)*chainStep))]||out.state.ball;
+    const link=links[i];link.visible=out.state.on;
+    link.position.set(a.x,a.y,a.z);
+    const forward=new THREE.Vector3(b.x-a.x,b.y-a.y,b.z-a.z);
+    if(forward.lengthSq()>.00001){forward.normalize();link.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),forward)}
+  }
+  ball.visible=out.state.on;
+  ball.position.set(out.state.ball.x,out.state.ball.y,out.state.ball.z);
+  ball.rotation.set(ms*.0013,ms*.0019,ms*.0011);
+  if(out.state.on){
+    trailCount=Math.min(32,trailCount+1);
+    trailPos.copyWithin(3,0,93);
+    trailPos[0]=out.state.ball.x;trailPos[1]=out.state.ball.y;trailPos[2]=out.state.ball.z;
+  }else{trailCount=0}
+  trail.visible=trailCount>2;
+  trailGeom.setDrawRange(0,trailCount);
+  trailGeom.attributes.position.needsUpdate=true;
+  let living=0;
+  for(let i=0;i<foes.length;i++){
+    const foe=foes[i],v=foeVisuals[i],p=foe.position;
+    if(foe.hp>0){
+      living++;
+      const vx=player.x-p.x,vz=player.z-p.z,dist=Math.hypot(vx,vz)||1;
+      const follow=dist>2.25?.48:dist<1.43?-.36:0;
+      p.x+=vx/dist*follow*dt;p.z+=vz/dist*follow*dt;
+      p.x+=foe.velocity.x*dt;p.z+=foe.velocity.z*dt;
+      foe.velocity.x*=Math.exp(-dt*5);foe.velocity.z*=Math.exp(-dt*5);
+      v.model.group.position.set(p.x,0,p.z);
+      v.model.group.lookAt(player.x,0,player.z);
+      v.model.update(elapsed,v.seed,v.hurt/.28);
+      v.barFill.scale.x=Math.max(.0001,foe.hp/100);
+      v.barFill.position.x=-(1-foe.hp/100)*.38;
+      v.hurt=Math.max(0,v.hurt-dt);
+      v.model.body.rotation.z=Math.sin(elapsed*45)*v.hurt*.4;
+    }else{
+      v.death+=dt;
+      const t=Math.min(1,v.death/.6);
+      v.model.group.scale.setScalar(Math.max(.001,1-t));
+      v.model.group.rotation.y+=dt*3;
+      v.model.group.position.y=-t*.2;
+    }
+  }
+  count.textContent=living+' / 5';
+  count.style.color=living===0?'#ffd9a1':'#c5eadf';
+  hitPulse=Math.max(0,hitPulse-dt);shake=Math.max(0,shake-dt*.65);
+  effects.update(dt);
+  fireflies.rotation.y+=dt*.005;
+  const targetPos=new THREE.Vector3(player.x,7.6,player.z+10);
+  const jitter=shake*Math.sin(elapsed*85);
+  targetPos.x+=jitter;targetPos.y+=jitter*.3;
+  camera.position.lerp(targetPos,1-Math.exp(-dt*2.8));
+  cameraAim.lerp(new THREE.Vector3(player.x,.84,player.z),1-Math.exp(-dt*3.2));
+  camera.lookAt(cameraAim);
+  renderer.render(scene,camera);
+});
+</script>
+</body>
+</html>

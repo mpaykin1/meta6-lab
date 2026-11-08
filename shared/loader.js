@@ -59,6 +59,11 @@
     promise.catch(()=>cache.delete(id));
     return promise;
   }
-  Object.defineProperty(root,'MetaShared',{value:Object.freeze({use,available:Object.keys(entries)}),
+  // Only original byte-for-byte source components belong to shared/index.json.
+  // Derived owner-reference adapters stay discoverable separately; use(id)
+  // still resolves both registries without claiming derived files are originals.
+  const available=Object.freeze(Object.keys(entries).filter(id=>!id.startsWith('pod-i-nad-')));
+  const derived=Object.freeze(Object.keys(entries).filter(id=>id.startsWith('pod-i-nad-')));
+  Object.defineProperty(root,'MetaShared',{value:Object.freeze({use,available,derived}),
     writable:false,configurable:false});
 })(window);

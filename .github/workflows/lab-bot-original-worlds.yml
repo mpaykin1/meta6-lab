@@ -1,0 +1,31 @@
+name: LAB META BOT - original worlds
+on:
+  pull_request:
+    paths:
+      - 'observer-world-en-v7/**'
+      - 'underwater-world/**'
+      - 'ashen-sumerek/**'
+      - '.github/workflows/lab-bot-original-worlds.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '39 2 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: lab-bot-original-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  original-worlds:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Play original worlds with real input
+        run: node scripts/meta-bot/run.mjs observer-world-en-v7 underwater-world ashen-sumerek

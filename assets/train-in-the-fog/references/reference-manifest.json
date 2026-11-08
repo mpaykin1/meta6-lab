@@ -2574,7 +2574,12 @@
         "R2",
         "R3"
       ],
-      "artReview": "NOT_VERIFIED"
+      "artReview": "NOT_VERIFIED",
+      "modelFile": "assets/train-in-the-fog/coaches-r1/coach_15_01_passenger.glb",
+      "previewPage": "assets/train-in-the-fog/coaches-r1/passenger.html",
+      "assetManifest": "assets/train-in-the-fog/coaches-r1/asset-manifest.json",
+      "modelStatus": "BINARY_GLTF_VALIDATED_VISIBLE_TRIANGLES_TESTED",
+      "artStyleBasis": "owner-approved R1 locomotive"
     },
     {
       "id": "15.02",
@@ -2583,7 +2588,12 @@
         "R2",
         "R3"
       ],
-      "artReview": "NOT_VERIFIED"
+      "artReview": "NOT_VERIFIED",
+      "modelFile": "assets/train-in-the-fog/coaches-r1/coach_15_02_vintage.glb",
+      "previewPage": "assets/train-in-the-fog/coaches-r1/vintage.html",
+      "assetManifest": "assets/train-in-the-fog/coaches-r1/asset-manifest.json",
+      "modelStatus": "BINARY_GLTF_VALIDATED_VISIBLE_TRIANGLES_TESTED",
+      "artStyleBasis": "owner-approved R1 locomotive"
     },
     {
       "id": "15.03",
@@ -2592,7 +2602,12 @@
         "R2",
         "R3"
       ],
-      "artReview": "NOT_VERIFIED"
+      "artReview": "NOT_VERIFIED",
+      "modelFile": "assets/train-in-the-fog/coaches-r1/coach_15_03_sleeper.glb",
+      "previewPage": "assets/train-in-the-fog/coaches-r1/sleeper.html",
+      "assetManifest": "assets/train-in-the-fog/coaches-r1/asset-manifest.json",
+      "modelStatus": "BINARY_GLTF_VALIDATED_VISIBLE_TRIANGLES_TESTED",
+      "artStyleBasis": "owner-approved R1 locomotive"
     },
     {
       "id": "15.04",

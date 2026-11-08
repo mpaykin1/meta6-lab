@@ -76,6 +76,7 @@ body { margin: 0; font-family: var(--font-ui); -webkit-user-select: none; user-s
 .icon-btn:hover { box-shadow: inset 0 0 0 2px var(--gold); color: var(--gold); }
 .icon-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 .icon-btn svg { width: 22px; height: 22px; shape-rendering: crispEdges; }
+.menu-button { position: fixed; top: var(--hud-pad-t); right: var(--hud-pad-r); z-index: 7; }
 .icon-btn[aria-pressed="true"] .on { display: none; }
 .icon-btn[aria-pressed="false"] .off { display: none; }
 
@@ -400,6 +401,9 @@ kbd { font-family: var(--font-ui); font-size: 13px; color: var(--paper); padding
 </div>
 <div class="crossfade" id="crossFade" aria-hidden="true"></div>
 
+<button class="icon-btn menu-button" id="btnMenu" type="button" aria-label="Menu" title="Menu">
+  <svg viewBox="0 0 11 11" fill="currentColor" aria-hidden="true"><rect x="1" y="2" width="9" height="2"/><rect x="1" y="5" width="9" height="2"/><rect x="1" y="8" width="9" height="2"/></svg>
+</button>
 <div class="tools" id="tools">
   <button class="icon-btn" id="btnMute" aria-pressed="false" aria-label="Sound" title="Sound (M)">
     <svg class="on" viewBox="0 0 11 11" fill="currentColor" aria-hidden="true"><rect x="1" y="4" width="2" height="3"/><rect x="3" y="3" width="1" height="5"/><rect x="4" y="2" width="1" height="7"/><rect x="5" y="1" width="1" height="9"/><rect x="7" y="4" width="1" height="3"/><rect x="9" y="2" width="1" height="7"/></svg>
@@ -4578,6 +4582,7 @@ $('btnNew').addEventListener('click', () => restart(true));
 $('btnSwim').addEventListener('click', () => {  ARCH.swimOn(); });
 $('btnMute').addEventListener('click', () => { SFX.init(); toggleMute(); });
 $('btnFull').addEventListener('click', toggleFullscreen);
+$('btnMenu').addEventListener('click', () => setPaused(G.state === 'play'));
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) { if (G.state === 'play') setPaused(true); if (SFX.ctx) SFX.ctx.suspend(); }
   else if (SFX.ctx) SFX.ctx.resume();

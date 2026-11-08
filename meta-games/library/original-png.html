@@ -1,0 +1,30 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07131b"><title>Эталонные PNG · META GAMES</title><style>
+html,body{margin:0;background:#07131b;color:#d5e9e7;font:15px system-ui,sans-serif}main{max-width:1080px;margin:auto;padding:20px}h1{font-size:25px}p{color:#9cbdbd}a{color:#92ded6}#assets{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px}.asset{background:#11252c;border:1px solid #33505a;border-radius:10px;overflow:hidden}.preview{height:125px;display:flex;align-items:center;justify-content:center;background:repeating-conic-gradient(#18323a 0 25%,#12262c 0 50%) 50%/22px 22px}.preview img{max-width:95%;max-height:112px;object-fit:contain;image-rendering:pixelated}.meta{padding:10px;overflow-wrap:anywhere;font-size:12px}.meta strong{display:block;font-size:14px;margin-bottom:4px}.meta a{display:block;margin-top:6px}input{background:#122a32;color:white;border:1px solid #4b7881;padding:12px;border-radius:8px;width:min(100%,420px);box-sizing:border-box;margin:8px 0 20px}
+</style></head><body><main><a href="./index.html">← Библиотека</a><h1>Оригинальные ассеты «Под и над»</h1><p id="count">Загрузка каталога…</p><input id="query" type="search" placeholder="Найти оружие, текстуру, героя…" aria-label="Поиск по оригинальным ассетам"><section id="assets" aria-live="polite"></section></main><script type="module">
+const root='../../shared/components/pod-i-nad/';
+const out=document.querySelector('#assets'),count=document.querySelector('#count'),input=document.querySelector('#query');
+try {
+ const response=await fetch(root+'sprites.json');
+ if(!response.ok)throw Error('HTTP '+response.status);
+ const catalog=await response.json();
+ const records=catalog.assets.filter(x=>x.path&&x.visual_origin==='approved-reference');
+ function render(){
+  const q=input.value.trim().toLowerCase();
+  const matching=records.filter(x=>(x.id+' '+x.path).toLowerCase().includes(q));
+  out.replaceChildren();
+  const fragment=document.createDocumentFragment();
+  for(const item of matching){
+   const card=document.createElement('article');card.className='asset';
+   const preview=document.createElement('div');preview.className='preview';
+   const image=document.createElement('img');image.src=root+item.path;image.alt='Оригинальный ассет '+item.id;image.loading='lazy';preview.append(image);
+   const meta=document.createElement('div');meta.className='meta';
+   const name=document.createElement('strong');name.textContent=item.id;meta.append(name);
+   const detail=document.createElement('span');detail.textContent=(item.width?item.width+'×'+item.height+' · ':'')+'PNG · SHA-256 '+item.sha256.slice(0,12);meta.append(detail);
+   const link=document.createElement('a');link.href=root+item.path;link.textContent='Открыть оригинальный PNG';link.target='_blank';link.rel='noopener';meta.append(link);
+   card.append(preview,meta);fragment.append(card);
+  }
+  out.append(fragment);count.textContent='Оригинальные PNG: '+records.length+' · найдено: '+matching.length;
+ }
+ input.addEventListener('input',render);render();
+}catch(error){count.textContent='Каталог не загружен: '+error.message}
+</script></body></html>

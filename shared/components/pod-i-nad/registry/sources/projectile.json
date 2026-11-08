@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "projectile",
+  "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+  "definitions": [
+    {
+      "id": "pod-i-nad/registry/projectile/pebble",
+      "source": "defineProjectile('pebble', {\n  draw(p, li) { sprites.add(p.pos.x, p.pos.y, p.pos.z, 0.5, 0.5, p.age * 9, PUV.pebble, 0, 0, 1, 1, li, li, li, 0); },\n  impact(p) { const q = p.pos; for (let k = 0; k < 4; k++) dust.emit(q.x, q.y, q.z, rr(-1.5, 1.5), rr(0.5, 2), rr(-1.5, 1.5), rr(0.3, 0.5), 0.07, 0.05, C.smokeLight, 0.9, 10, 0.5, 1); },\n})",
+      "source_line_start": 1193,
+      "source_line_end": 1196
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/arrow",
+      "source": "defineProjectile('arrow', {\n  draw(p, li) { sprites.add(p.pos.x, p.pos.y, p.pos.z, 0.95, 0.95, screenAngleOf(p.stuck > 0 ? p.stuckDir : p.vel), PUV.arrow, 0.4, 0, 1, 1, li, li, li, 0); },\n  trail(p) { if (p.charge > 0.85) glow.emit(p.pos.x, p.pos.y, p.pos.z, 0, 0, 0, 0.25, 0.08, 0.02, C.white, 0.6, 0, 0, 1); return 0.05; },\n})",
+      "source_line_start": 1197,
+      "source_line_end": 1200
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/bolt",
+      "source": "defineProjectile('bolt', {\n  stickDust: 'spray', stickGlow: 'ice',\n  draw(p, li) { sprites.add(p.pos.x, p.pos.y, p.pos.z, 0.95, 0.95, screenAngleOf(p.stuck > 0 ? p.stuckDir : p.vel), PUV.bolt, 0.4, 0, 1, 1, li, li, li, 0.5); },\n  trail(p) { glow.emit(p.pos.x, p.pos.y, p.pos.z, rr(-0.3, 0.3), rr(-0.3, 0.3), rr(-0.3, 0.3), rr(0.2, 0.4), 0.09, 0.02, C.ice, 0.8, 0, 2, 2); return 0.025; },\n})",
+      "source_line_start": 1201,
+      "source_line_end": 1205
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/saw",
+      "source": "defineProjectile('saw', {\n  alwaysRicochet: true, passOrbs: true, loudRicochet: true,\n  draw(p, li) { sprites.add(p.pos.x, p.pos.y, p.pos.z, 0.9, 0.9, -p.age * 22, PUV.saw, 0, 0, 1, 1, li, li, li, 0.15); },\n  trail(p) { glow.emit(p.pos.x, p.pos.y, p.pos.z, rr(-1, 1), rr(0, 1.5), rr(-1, 1), rr(0.1, 0.25), 0.06, 0.02, C.spark, 0.9, 6, 1, 1); return 0.05; },\n})",
+      "source_line_start": 1206,
+      "source_line_end": 1210
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/bomb",
+      "source": "defineProjectile('bomb', {\n  splash: 1.6,\n  draw(p, li) { sprites.add(p.pos.x, p.pos.y, p.pos.z, 0.7, 0.7, -p.age * 5 * Math.sign(p.vel.x || 1), PUV.bomb, 0, 0, 1, 1, li, li, li, p.life < 0.5 && Math.floor(p.life * 16) % 2 ? 1.2 : 0); },\n  trail(p) {\n    const q = p.pos;\n    glow.emit(q.x, q.y + 0.3, q.z, rr(-0.3, 0.3), rr(0.5, 1.2), rr(-0.3, 0.3), rr(0.15, 0.3), 0.08, 0.02, C.spark, 1, 3, 1, 1);\n    dust.emit(q.x, q.y + 0.2, q.z, 0, 0.5, 0, 0.6, 0.12, 0.3, C.smokeLight, 0.35, -0.2, 1, 0);\n    return 0.03;\n  },\n})",
+      "source_line_start": 1211,
+      "source_line_end": 1220
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/bullet",
+      "source": "defineProjectile('bullet', { impact: bulletImpact, tracer: bulletTracer })",
+      "source_line_start": 1233,
+      "source_line_end": 1233
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/pellet",
+      "source": "defineProjectile('pellet', { impact: bulletImpact, tracer: bulletTracer })",
+      "source_line_start": 1234,
+      "source_line_end": 1234
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/orb",
+      "source": "defineProjectile('orb', {\n  noWater: true,\n  draw(p) { glow.spark(p.pos.x, p.pos.y, p.pos.z, 0.34, C.orbCore, 1, 0); glow.spark(p.pos.x, p.pos.y, p.pos.z, 1.1, C.orbHalo, 0.45, 0); },\n  trail(p) { glow.emit(p.pos.x, p.pos.y, p.pos.z, 0, 0, 0, rr(0.3, 0.5), 0.3, 0.05, C.orbHalo, 0.6, 0, 0, 0); return 0.04; },\n  impact: (p) => orbBurst(p.pos),\n  expire: (p) => orbBurst(p.pos),\n})",
+      "source_line_start": 1236,
+      "source_line_end": 1242
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/boomerang",
+      "source": "defineProjectile('boomerang', {\n  noWater: true,\n  through: (p) => p.ret && (p.retT || 0) > 0.5,\n  steer(p, h) {\n    if (!p.ret) {\n      p.vel.applyAxisAngle(UPV, 1.3 * h);                       // the curl of the throw\n      if (p.age > 0.55) p.ret = true;\n      return;\n    }\n    p.retT = (p.retT || 0) + h;\n    _home.set(player.pos.x, player.pos.y + 0.9, player.pos.z).sub(p.pos);\n    const d = _home.length(), sp = Math.min(24, 9 + p.retT * 14);\n    if (d < 0.9) { catchBoomerang(p); return; }\n    // far: a wide, inertial turn toward the hand; close: straight in (no orbiting around the hero)\n    p.vel.lerp(_home.multiplyScalar(sp / d), d < 3 ? 1 : damp(5, h));\n  },\n  draw(p, li) { sprites.add(p.pos.x, p.pos.y, p.pos.z, 0.85, 0.85, -p.age * 21, PUV.boomerang, 0, 0, 1, 1, li, li, li, p.ret ? 0.25 : 0.1); },\n  trail(p) {\n    glow.emit(p.pos.x, p.pos.y, p.pos.z, rr(-0.3, 0.3), rr(-0.2, 0.3), rr(-0.3, 0.3), rr(0.15, 0.3), 0.07, 0.02, p.ret && p.retT > 0.5 ? C.zapGlow : C.spark, 0.7, 0, 2, 1);\n    p.wh = (p.wh ?? 0) - 0.03;\n    if (p.wh <= 0) { p.wh = 0.22; playSound('boom_whoosh', { vol: 0.5 }); }\n    return 0.03;\n  },\n  expire: catchBoomerang,                                        // after its flight time it is back in the hand anyway\n})",
+      "source_line_start": 1784,
+      "source_line_end": 1808
+    }
+  ]
+}

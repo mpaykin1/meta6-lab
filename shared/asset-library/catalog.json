@@ -1779,6 +1779,2954 @@
         "Original runtime palette top/horizon/bottom/sunColor supplied by caller"
       ],
       "notes": "Original shader, original 500-radius dome, original uniform layout. No invented palette; caller must supply source-derived colors."
+    },
+    {
+      "id": "pod-i-nad/registry/anim/punch",
+      "name": "punch",
+      "kind": "anim",
+      "purpose": [
+        "punch",
+        "punch",
+        "anim",
+        "base"
+      ],
+      "tags": [
+        "anim",
+        "base",
+        "punch"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineAnim('punch')"
+      ],
+      "code_lookup": "pod-i-nad/registry/anim/punch",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/anim/jab",
+      "name": "jab",
+      "kind": "anim",
+      "purpose": [
+        "jab",
+        "jab",
+        "anim",
+        "base"
+      ],
+      "tags": [
+        "anim",
+        "base",
+        "jab"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineAnim('jab')"
+      ],
+      "code_lookup": "pod-i-nad/registry/anim/jab",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/anim/stab",
+      "name": "stab",
+      "kind": "anim",
+      "purpose": [
+        "stab",
+        "stab",
+        "anim",
+        "base"
+      ],
+      "tags": [
+        "anim",
+        "base",
+        "stab"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineAnim('stab')"
+      ],
+      "code_lookup": "pod-i-nad/registry/anim/stab",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/anim/slash",
+      "name": "slash",
+      "kind": "anim",
+      "purpose": [
+        "slash",
+        "slash",
+        "anim",
+        "base"
+      ],
+      "tags": [
+        "anim",
+        "base",
+        "slash"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineAnim('slash')"
+      ],
+      "code_lookup": "pod-i-nad/registry/anim/slash",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/anim/chop",
+      "name": "chop",
+      "kind": "anim",
+      "purpose": [
+        "chop",
+        "chop",
+        "anim",
+        "base"
+      ],
+      "tags": [
+        "anim",
+        "base",
+        "chop"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineAnim('chop')"
+      ],
+      "code_lookup": "pod-i-nad/registry/anim/chop",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/anim/slam",
+      "name": "slam",
+      "kind": "anim",
+      "purpose": [
+        "slam",
+        "slam",
+        "anim",
+        "base"
+      ],
+      "tags": [
+        "anim",
+        "base",
+        "slam"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineAnim('slam')"
+      ],
+      "code_lookup": "pod-i-nad/registry/anim/slam",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/anim/thrust",
+      "name": "thrust",
+      "kind": "anim",
+      "purpose": [
+        "thrust",
+        "thrust",
+        "anim",
+        "base"
+      ],
+      "tags": [
+        "anim",
+        "base",
+        "thrust"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineAnim('thrust')"
+      ],
+      "code_lookup": "pod-i-nad/registry/anim/thrust",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/anim/spin",
+      "name": "spin",
+      "kind": "anim",
+      "purpose": [
+        "spin",
+        "spin",
+        "anim",
+        "base"
+      ],
+      "tags": [
+        "anim",
+        "base",
+        "spin"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineAnim('spin')"
+      ],
+      "code_lookup": "pod-i-nad/registry/anim/spin",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/anim/flail",
+      "name": "flail",
+      "kind": "anim",
+      "purpose": [
+        "flail",
+        "flail",
+        "anim",
+        "base"
+      ],
+      "tags": [
+        "anim",
+        "base",
+        "flail"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineAnim('flail')"
+      ],
+      "code_lookup": "pod-i-nad/registry/anim/flail",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/biome/dusk",
+      "name": "Сумеречный остров",
+      "kind": "biome",
+      "purpose": [
+        "dusk",
+        "Сумеречный остров",
+        "biome",
+        "base"
+      ],
+      "tags": [
+        "biome",
+        "base",
+        "dusk",
+        "Сумеречный остров"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBiome('dusk')"
+      ],
+      "code_lookup": "pod-i-nad/registry/biome/dusk",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/grass",
+      "name": "Трава",
+      "kind": "block",
+      "purpose": [
+        "grass",
+        "Трава",
+        "block",
+        "base"
+      ],
+      "tags": [
+        "block",
+        "base",
+        "grass",
+        "Трава"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('grass')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/grass",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/dirt",
+      "name": "Земля",
+      "kind": "block",
+      "purpose": [
+        "dirt",
+        "Земля",
+        "block",
+        "base"
+      ],
+      "tags": [
+        "block",
+        "base",
+        "dirt",
+        "Земля"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('dirt')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/dirt",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/stone",
+      "name": "Камень",
+      "kind": "block",
+      "purpose": [
+        "stone",
+        "Камень",
+        "block",
+        "base"
+      ],
+      "tags": [
+        "block",
+        "base",
+        "stone",
+        "Камень"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('stone')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/stone",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/plank",
+      "name": "Доски",
+      "kind": "block",
+      "purpose": [
+        "plank",
+        "Доски",
+        "block",
+        "base"
+      ],
+      "tags": [
+        "block",
+        "base",
+        "plank",
+        "Доски"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('plank')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/plank",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/sand",
+      "name": "Песок",
+      "kind": "block",
+      "purpose": [
+        "sand",
+        "Песок",
+        "block",
+        "base"
+      ],
+      "tags": [
+        "block",
+        "base",
+        "sand",
+        "Песок"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('sand')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/sand",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/leaves",
+      "name": "Листва",
+      "kind": "block",
+      "purpose": [
+        "leaves",
+        "Листва",
+        "block",
+        "base"
+      ],
+      "tags": [
+        "block",
+        "base",
+        "leaves",
+        "Листва"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('leaves')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/leaves",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/brick",
+      "name": "Кирпич",
+      "kind": "block",
+      "purpose": [
+        "brick",
+        "Кирпич",
+        "block",
+        "base"
+      ],
+      "tags": [
+        "block",
+        "base",
+        "brick",
+        "Кирпич"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('brick')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/brick",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/bark",
+      "name": "Ствол",
+      "kind": "block",
+      "purpose": [
+        "bark",
+        "Ствол",
+        "block",
+        "base"
+      ],
+      "tags": [
+        "block",
+        "base",
+        "bark",
+        "Ствол"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('bark')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/bark",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/body/serpent",
+      "name": "serpent",
+      "kind": "body",
+      "purpose": [
+        "serpent",
+        "serpent",
+        "body",
+        "base"
+      ],
+      "tags": [
+        "body",
+        "base",
+        "serpent"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBody('serpent')"
+      ],
+      "code_lookup": "pod-i-nad/registry/body/serpent",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/brain/stalker",
+      "name": "stalker",
+      "kind": "brain",
+      "purpose": [
+        "stalker",
+        "stalker",
+        "brain",
+        "base"
+      ],
+      "tags": [
+        "brain",
+        "base",
+        "stalker"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBrain('stalker')"
+      ],
+      "code_lookup": "pod-i-nad/registry/brain/stalker",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/brain/warden",
+      "name": "warden",
+      "kind": "brain",
+      "purpose": [
+        "warden",
+        "warden",
+        "brain",
+        "base"
+      ],
+      "tags": [
+        "brain",
+        "base",
+        "warden"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBrain('warden')"
+      ],
+      "code_lookup": "pod-i-nad/registry/brain/warden",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/imp",
+      "name": "Бесёнок",
+      "kind": "enemy",
+      "purpose": [
+        "imp",
+        "Бесёнок",
+        "enemy",
+        "base"
+      ],
+      "tags": [
+        "enemy",
+        "base",
+        "imp",
+        "Бесёнок"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('imp')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/imp",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/shade",
+      "name": "Тень",
+      "kind": "enemy",
+      "purpose": [
+        "shade",
+        "Тень",
+        "enemy",
+        "base"
+      ],
+      "tags": [
+        "enemy",
+        "base",
+        "shade",
+        "Тень"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('shade')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/shade",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/warden",
+      "name": "Страж маяка",
+      "kind": "enemy",
+      "purpose": [
+        "warden",
+        "Страж маяка",
+        "enemy",
+        "base"
+      ],
+      "tags": [
+        "enemy",
+        "base",
+        "warden",
+        "Страж маяка"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('warden')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/warden",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/event/storm",
+      "name": "Гроза",
+      "kind": "event",
+      "purpose": [
+        "storm",
+        "Гроза",
+        "event",
+        "base"
+      ],
+      "tags": [
+        "event",
+        "base",
+        "storm",
+        "Гроза"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEvent('storm')"
+      ],
+      "code_lookup": "pod-i-nad/registry/event/storm",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/event/sea_fog",
+      "name": "Морок",
+      "kind": "event",
+      "purpose": [
+        "sea_fog",
+        "Морок",
+        "event",
+        "base"
+      ],
+      "tags": [
+        "event",
+        "base",
+        "sea_fog",
+        "Морок"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEvent('sea_fog')"
+      ],
+      "code_lookup": "pod-i-nad/registry/event/sea_fog",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/event/starfall",
+      "name": "Звездопад",
+      "kind": "event",
+      "purpose": [
+        "starfall",
+        "Звездопад",
+        "event",
+        "base"
+      ],
+      "tags": [
+        "event",
+        "base",
+        "starfall",
+        "Звездопад"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEvent('starfall')"
+      ],
+      "code_lookup": "pod-i-nad/registry/event/starfall",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/fire/proj",
+      "name": "proj",
+      "kind": "fire",
+      "purpose": [
+        "proj",
+        "proj",
+        "fire",
+        "base"
+      ],
+      "tags": [
+        "fire",
+        "base",
+        "proj"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineFire('proj')"
+      ],
+      "code_lookup": "pod-i-nad/registry/fire/proj",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/fire/chain",
+      "name": "chain",
+      "kind": "fire",
+      "purpose": [
+        "chain",
+        "chain",
+        "fire",
+        "base"
+      ],
+      "tags": [
+        "fire",
+        "base",
+        "chain"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineFire('chain')"
+      ],
+      "code_lookup": "pod-i-nad/registry/fire/chain",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/fire/beam",
+      "name": "beam",
+      "kind": "fire",
+      "purpose": [
+        "beam",
+        "beam",
+        "fire",
+        "base"
+      ],
+      "tags": [
+        "fire",
+        "base",
+        "beam"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineFire('beam')"
+      ],
+      "code_lookup": "pod-i-nad/registry/fire/beam",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/flora/round_tree",
+      "name": "Лиственное дерево",
+      "kind": "flora",
+      "purpose": [
+        "round_tree",
+        "Лиственное дерево",
+        "flora",
+        "base"
+      ],
+      "tags": [
+        "flora",
+        "base",
+        "round_tree",
+        "Лиственное дерево"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineFlora('round_tree')"
+      ],
+      "code_lookup": "pod-i-nad/registry/flora/round_tree",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/character/wanderer",
+      "name": "Странник",
+      "kind": "character",
+      "purpose": [
+        "wanderer",
+        "Странник",
+        "character",
+        "base"
+      ],
+      "tags": [
+        "character",
+        "base",
+        "wanderer",
+        "Странник"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineCharacter('wanderer')"
+      ],
+      "code_lookup": "pod-i-nad/registry/character/wanderer",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/npc/keeper_ghost",
+      "name": "Призрак смотрителя",
+      "kind": "npc",
+      "purpose": [
+        "keeper_ghost",
+        "Призрак смотрителя",
+        "npc",
+        "base"
+      ],
+      "tags": [
+        "npc",
+        "base",
+        "keeper_ghost",
+        "Призрак смотрителя"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineNPC('keeper_ghost')"
+      ],
+      "code_lookup": "pod-i-nad/registry/npc/keeper_ghost",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/npc/fisher",
+      "name": "Рыбак",
+      "kind": "npc",
+      "purpose": [
+        "fisher",
+        "Рыбак",
+        "npc",
+        "base"
+      ],
+      "tags": [
+        "npc",
+        "base",
+        "fisher",
+        "Рыбак"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineNPC('fisher')"
+      ],
+      "code_lookup": "pod-i-nad/registry/npc/fisher",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/pebble",
+      "name": "pebble",
+      "kind": "projectile",
+      "purpose": [
+        "pebble",
+        "pebble",
+        "projectile",
+        "base"
+      ],
+      "tags": [
+        "projectile",
+        "base",
+        "pebble"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineProjectile('pebble')"
+      ],
+      "code_lookup": "pod-i-nad/registry/projectile/pebble",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/arrow",
+      "name": "arrow",
+      "kind": "projectile",
+      "purpose": [
+        "arrow",
+        "arrow",
+        "projectile",
+        "base"
+      ],
+      "tags": [
+        "projectile",
+        "base",
+        "arrow"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineProjectile('arrow')"
+      ],
+      "code_lookup": "pod-i-nad/registry/projectile/arrow",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/bolt",
+      "name": "bolt",
+      "kind": "projectile",
+      "purpose": [
+        "bolt",
+        "bolt",
+        "projectile",
+        "base"
+      ],
+      "tags": [
+        "projectile",
+        "base",
+        "bolt"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineProjectile('bolt')"
+      ],
+      "code_lookup": "pod-i-nad/registry/projectile/bolt",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/saw",
+      "name": "saw",
+      "kind": "projectile",
+      "purpose": [
+        "saw",
+        "saw",
+        "projectile",
+        "base"
+      ],
+      "tags": [
+        "projectile",
+        "base",
+        "saw"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineProjectile('saw')"
+      ],
+      "code_lookup": "pod-i-nad/registry/projectile/saw",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/bomb",
+      "name": "bomb",
+      "kind": "projectile",
+      "purpose": [
+        "bomb",
+        "bomb",
+        "projectile",
+        "base"
+      ],
+      "tags": [
+        "projectile",
+        "base",
+        "bomb"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineProjectile('bomb')"
+      ],
+      "code_lookup": "pod-i-nad/registry/projectile/bomb",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/bullet",
+      "name": "bullet",
+      "kind": "projectile",
+      "purpose": [
+        "bullet",
+        "bullet",
+        "projectile",
+        "base"
+      ],
+      "tags": [
+        "projectile",
+        "base",
+        "bullet"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineProjectile('bullet')"
+      ],
+      "code_lookup": "pod-i-nad/registry/projectile/bullet",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/pellet",
+      "name": "pellet",
+      "kind": "projectile",
+      "purpose": [
+        "pellet",
+        "pellet",
+        "projectile",
+        "base"
+      ],
+      "tags": [
+        "projectile",
+        "base",
+        "pellet"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineProjectile('pellet')"
+      ],
+      "code_lookup": "pod-i-nad/registry/projectile/pellet",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/orb",
+      "name": "orb",
+      "kind": "projectile",
+      "purpose": [
+        "orb",
+        "orb",
+        "projectile",
+        "base"
+      ],
+      "tags": [
+        "projectile",
+        "base",
+        "orb"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineProjectile('orb')"
+      ],
+      "code_lookup": "pod-i-nad/registry/projectile/orb",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/relic/gull_feather",
+      "name": "Перо чайки",
+      "kind": "relic",
+      "purpose": [
+        "gull_feather",
+        "Перо чайки",
+        "relic",
+        "base"
+      ],
+      "tags": [
+        "relic",
+        "base",
+        "gull_feather",
+        "Перо чайки"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRelic('gull_feather')"
+      ],
+      "code_lookup": "pod-i-nad/registry/relic/gull_feather",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/relic/tide_charm",
+      "name": "Оберег прилива",
+      "kind": "relic",
+      "purpose": [
+        "tide_charm",
+        "Оберег прилива",
+        "relic",
+        "base"
+      ],
+      "tags": [
+        "relic",
+        "base",
+        "tide_charm",
+        "Оберег прилива"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRelic('tide_charm')"
+      ],
+      "code_lookup": "pod-i-nad/registry/relic/tide_charm",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/relic/iron_grip",
+      "name": "Железная хватка",
+      "kind": "relic",
+      "purpose": [
+        "iron_grip",
+        "Железная хватка",
+        "relic",
+        "base"
+      ],
+      "tags": [
+        "relic",
+        "base",
+        "iron_grip",
+        "Железная хватка"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRelic('iron_grip')"
+      ],
+      "code_lookup": "pod-i-nad/registry/relic/iron_grip",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/relic/hawk_eye",
+      "name": "Соколиный глаз",
+      "kind": "relic",
+      "purpose": [
+        "hawk_eye",
+        "Соколиный глаз",
+        "relic",
+        "base"
+      ],
+      "tags": [
+        "relic",
+        "base",
+        "hawk_eye",
+        "Соколиный глаз"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRelic('hawk_eye')"
+      ],
+      "code_lookup": "pod-i-nad/registry/relic/hawk_eye",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/relic/soul_jar",
+      "name": "Сосуд душ",
+      "kind": "relic",
+      "purpose": [
+        "soul_jar",
+        "Сосуд душ",
+        "relic",
+        "base"
+      ],
+      "tags": [
+        "relic",
+        "base",
+        "soul_jar",
+        "Сосуд душ"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRelic('soul_jar')"
+      ],
+      "code_lookup": "pod-i-nad/registry/relic/soul_jar",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/relic/magnet_coin",
+      "name": "Монета-магнит",
+      "kind": "relic",
+      "purpose": [
+        "magnet_coin",
+        "Монета-магнит",
+        "relic",
+        "base"
+      ],
+      "tags": [
+        "relic",
+        "base",
+        "magnet_coin",
+        "Монета-магнит"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRelic('magnet_coin')"
+      ],
+      "code_lookup": "pod-i-nad/registry/relic/magnet_coin",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/relic/heart_seed",
+      "name": "Семя сердца",
+      "kind": "relic",
+      "purpose": [
+        "heart_seed",
+        "Семя сердца",
+        "relic",
+        "base"
+      ],
+      "tags": [
+        "relic",
+        "base",
+        "heart_seed",
+        "Семя сердца"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRelic('heart_seed')"
+      ],
+      "code_lookup": "pod-i-nad/registry/relic/heart_seed",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/relic/lantern_shard",
+      "name": "Осколок маяка",
+      "kind": "relic",
+      "purpose": [
+        "lantern_shard",
+        "Осколок маяка",
+        "relic",
+        "base"
+      ],
+      "tags": [
+        "relic",
+        "base",
+        "lantern_shard",
+        "Осколок маяка"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRelic('lantern_shard')"
+      ],
+      "code_lookup": "pod-i-nad/registry/relic/lantern_shard",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/relic/storm_glass",
+      "name": "Штормовое стекло",
+      "kind": "relic",
+      "purpose": [
+        "storm_glass",
+        "Штормовое стекло",
+        "relic",
+        "base"
+      ],
+      "tags": [
+        "relic",
+        "base",
+        "storm_glass",
+        "Штормовое стекло"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRelic('storm_glass')"
+      ],
+      "code_lookup": "pod-i-nad/registry/relic/storm_glass",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/none",
+      "name": "none",
+      "kind": "ricochet",
+      "purpose": [
+        "none",
+        "none",
+        "ricochet",
+        "base"
+      ],
+      "tags": [
+        "ricochet",
+        "base",
+        "none"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRicochet('none')"
+      ],
+      "code_lookup": "pod-i-nad/registry/ricochet/none",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/mirror",
+      "name": "mirror",
+      "kind": "ricochet",
+      "purpose": [
+        "mirror",
+        "mirror",
+        "ricochet",
+        "base"
+      ],
+      "tags": [
+        "ricochet",
+        "base",
+        "mirror"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRicochet('mirror')"
+      ],
+      "code_lookup": "pod-i-nad/registry/ricochet/mirror",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/scatter",
+      "name": "scatter",
+      "kind": "ricochet",
+      "purpose": [
+        "scatter",
+        "scatter",
+        "ricochet",
+        "base"
+      ],
+      "tags": [
+        "ricochet",
+        "base",
+        "scatter"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRicochet('scatter')"
+      ],
+      "code_lookup": "pod-i-nad/registry/ricochet/scatter",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/damped",
+      "name": "damped",
+      "kind": "ricochet",
+      "purpose": [
+        "damped",
+        "damped",
+        "ricochet",
+        "base"
+      ],
+      "tags": [
+        "ricochet",
+        "base",
+        "damped"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRicochet('damped')"
+      ],
+      "code_lookup": "pod-i-nad/registry/ricochet/damped",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/roll",
+      "name": "roll",
+      "kind": "ricochet",
+      "purpose": [
+        "roll",
+        "roll",
+        "ricochet",
+        "base"
+      ],
+      "tags": [
+        "ricochet",
+        "base",
+        "roll"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRicochet('roll')"
+      ],
+      "code_lookup": "pod-i-nad/registry/ricochet/roll",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/stick",
+      "name": "stick",
+      "kind": "ricochet",
+      "purpose": [
+        "stick",
+        "stick",
+        "ricochet",
+        "base"
+      ],
+      "tags": [
+        "ricochet",
+        "base",
+        "stick"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRicochet('stick')"
+      ],
+      "code_lookup": "pod-i-nad/registry/ricochet/stick",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/sound/thunder",
+      "name": "thunder",
+      "kind": "sound",
+      "purpose": [
+        "thunder",
+        "thunder",
+        "sound",
+        "base"
+      ],
+      "tags": [
+        "sound",
+        "base",
+        "thunder"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineSound('thunder')"
+      ],
+      "code_lookup": "pod-i-nad/registry/sound/thunder",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/sound/ghost_voice",
+      "name": "ghost_voice",
+      "kind": "sound",
+      "purpose": [
+        "ghost_voice",
+        "ghost_voice",
+        "sound",
+        "base"
+      ],
+      "tags": [
+        "sound",
+        "base",
+        "ghost_voice"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineSound('ghost_voice')"
+      ],
+      "code_lookup": "pod-i-nad/registry/sound/ghost_voice",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/sound/fisher_voice",
+      "name": "fisher_voice",
+      "kind": "sound",
+      "purpose": [
+        "fisher_voice",
+        "fisher_voice",
+        "sound",
+        "base"
+      ],
+      "tags": [
+        "sound",
+        "base",
+        "fisher_voice"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineSound('fisher_voice')"
+      ],
+      "code_lookup": "pod-i-nad/registry/sound/fisher_voice",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/sound/wish",
+      "name": "wish",
+      "kind": "sound",
+      "purpose": [
+        "wish",
+        "wish",
+        "sound",
+        "base"
+      ],
+      "tags": [
+        "sound",
+        "base",
+        "wish"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineSound('wish')"
+      ],
+      "code_lookup": "pod-i-nad/registry/sound/wish",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/sound/meteor",
+      "name": "meteor",
+      "kind": "sound",
+      "purpose": [
+        "meteor",
+        "meteor",
+        "sound",
+        "base"
+      ],
+      "tags": [
+        "sound",
+        "base",
+        "meteor"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineSound('meteor')"
+      ],
+      "code_lookup": "pod-i-nad/registry/sound/meteor",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/fists",
+      "name": "Кулаки",
+      "kind": "weapon",
+      "purpose": [
+        "fists",
+        "Кулаки",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "fists",
+        "Кулаки"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('fists')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/fists",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/stick",
+      "name": "Палка",
+      "kind": "weapon",
+      "purpose": [
+        "stick",
+        "Палка",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "stick",
+        "Палка"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('stick')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/stick",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/dagger",
+      "name": "Кинжал",
+      "kind": "weapon",
+      "purpose": [
+        "dagger",
+        "Кинжал",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "dagger",
+        "Кинжал"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('dagger')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/dagger",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/sword",
+      "name": "Меч",
+      "kind": "weapon",
+      "purpose": [
+        "sword",
+        "Меч",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "sword",
+        "Меч"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('sword')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/sword",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/katana",
+      "name": "Катана",
+      "kind": "weapon",
+      "purpose": [
+        "katana",
+        "Катана",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "katana",
+        "Катана"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('katana')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/katana",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/axe",
+      "name": "Топор",
+      "kind": "weapon",
+      "purpose": [
+        "axe",
+        "Топор",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "axe",
+        "Топор"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('axe')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/axe",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/hammer",
+      "name": "Боевой молот",
+      "kind": "weapon",
+      "purpose": [
+        "hammer",
+        "Боевой молот",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "hammer",
+        "Боевой молот"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('hammer')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/hammer",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/spear",
+      "name": "Копьё",
+      "kind": "weapon",
+      "purpose": [
+        "spear",
+        "Копьё",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "spear",
+        "Копьё"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('spear')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/spear",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/scythe",
+      "name": "Коса жнеца",
+      "kind": "weapon",
+      "purpose": [
+        "scythe",
+        "Коса жнеца",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "scythe",
+        "Коса жнеца"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('scythe')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/scythe",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/flamesword",
+      "name": "Пламень",
+      "kind": "weapon",
+      "purpose": [
+        "flamesword",
+        "Пламень",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "flamesword",
+        "Пламень"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('flamesword')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/flamesword",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/flail",
+      "name": "Цеп",
+      "kind": "weapon",
+      "purpose": [
+        "flail",
+        "Цеп",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "flail",
+        "Цеп"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('flail')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/flail",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/sling",
+      "name": "Рогатка",
+      "kind": "weapon",
+      "purpose": [
+        "sling",
+        "Рогатка",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "sling",
+        "Рогатка"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('sling')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/sling",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/bow",
+      "name": "Лук",
+      "kind": "weapon",
+      "purpose": [
+        "bow",
+        "Лук",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "bow",
+        "Лук"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('bow')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/bow",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/xbow",
+      "name": "Морозный арбалет",
+      "kind": "weapon",
+      "purpose": [
+        "xbow",
+        "Морозный арбалет",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "xbow",
+        "Морозный арбалет"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('xbow')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/xbow",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/pistol",
+      "name": "Револьвер",
+      "kind": "weapon",
+      "purpose": [
+        "pistol",
+        "Револьвер",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "pistol",
+        "Револьвер"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('pistol')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/pistol",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/shotgun",
+      "name": "Дробовик",
+      "kind": "weapon",
+      "purpose": [
+        "shotgun",
+        "Дробовик",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "shotgun",
+        "Дробовик"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('shotgun')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/shotgun",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/smg",
+      "name": "Трещотка",
+      "kind": "weapon",
+      "purpose": [
+        "smg",
+        "Трещотка",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "smg",
+        "Трещотка"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('smg')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/smg",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/saw",
+      "name": "Пилобой",
+      "kind": "weapon",
+      "purpose": [
+        "saw",
+        "Пилобой",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "saw",
+        "Пилобой"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('saw')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/saw",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/bomb",
+      "name": "Бомбарда",
+      "kind": "weapon",
+      "purpose": [
+        "bomb",
+        "Бомбарда",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "bomb",
+        "Бомбарда"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('bomb')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/bomb",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/tesla",
+      "name": "Тесла-жезл",
+      "kind": "weapon",
+      "purpose": [
+        "tesla",
+        "Тесла-жезл",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "tesla",
+        "Тесла-жезл"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('tesla')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/tesla",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/laser",
+      "name": "Призма",
+      "kind": "weapon",
+      "purpose": [
+        "laser",
+        "Призма",
+        "weapon",
+        "base"
+      ],
+      "tags": [
+        "weapon",
+        "base",
+        "laser",
+        "Призма"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('laser')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/laser",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weather/rain",
+      "name": "rain",
+      "kind": "weather",
+      "purpose": [
+        "rain",
+        "rain",
+        "weather",
+        "base"
+      ],
+      "tags": [
+        "weather",
+        "base",
+        "rain"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeather('rain')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weather/rain",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weather/snow",
+      "name": "snow",
+      "kind": "weather",
+      "purpose": [
+        "snow",
+        "snow",
+        "weather",
+        "base"
+      ],
+      "tags": [
+        "weather",
+        "base",
+        "snow"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeather('snow')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weather/snow",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weather/ash",
+      "name": "ash",
+      "kind": "weather",
+      "purpose": [
+        "ash",
+        "ash",
+        "weather",
+        "base"
+      ],
+      "tags": [
+        "weather",
+        "base",
+        "ash"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeather('ash')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weather/ash",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weather/embers",
+      "name": "embers",
+      "kind": "weather",
+      "purpose": [
+        "embers",
+        "embers",
+        "weather",
+        "base"
+      ],
+      "tags": [
+        "weather",
+        "base",
+        "embers"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeather('embers')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weather/embers",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weather/spores",
+      "name": "spores",
+      "kind": "weather",
+      "purpose": [
+        "spores",
+        "spores",
+        "weather",
+        "base"
+      ],
+      "tags": [
+        "weather",
+        "base",
+        "spores"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeather('spores')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weather/spores",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weather/stardust",
+      "name": "stardust",
+      "kind": "weather",
+      "purpose": [
+        "stardust",
+        "stardust",
+        "weather",
+        "base"
+      ],
+      "tags": [
+        "weather",
+        "base",
+        "stardust"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeather('stardust')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weather/stardust",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weather/sea_mist",
+      "name": "sea_mist",
+      "kind": "weather",
+      "purpose": [
+        "sea_mist",
+        "sea_mist",
+        "weather",
+        "base"
+      ],
+      "tags": [
+        "weather",
+        "base",
+        "sea_mist"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeather('sea_mist')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weather/sea_mist",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/biome/frost",
+      "name": "Ледяной фьорд",
+      "kind": "biome",
+      "purpose": [
+        "frost",
+        "Ледяной фьорд",
+        "biome",
+        "frost"
+      ],
+      "tags": [
+        "biome",
+        "frost",
+        "frost",
+        "Ледяной фьорд"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBiome('frost')"
+      ],
+      "code_lookup": "pod-i-nad/registry/biome/frost",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/snow",
+      "name": "Снег",
+      "kind": "block",
+      "purpose": [
+        "snow",
+        "Снег",
+        "block",
+        "frost"
+      ],
+      "tags": [
+        "block",
+        "frost",
+        "snow",
+        "Снег"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('snow')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/snow",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/frozen_dirt",
+      "name": "Мёрзлая земля",
+      "kind": "block",
+      "purpose": [
+        "frozen_dirt",
+        "Мёрзлая земля",
+        "block",
+        "frost"
+      ],
+      "tags": [
+        "block",
+        "frost",
+        "frozen_dirt",
+        "Мёрзлая земля"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('frozen_dirt')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/frozen_dirt",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/ice",
+      "name": "Лёд",
+      "kind": "block",
+      "purpose": [
+        "ice",
+        "Лёд",
+        "block",
+        "frost"
+      ],
+      "tags": [
+        "block",
+        "frost",
+        "ice",
+        "Лёд"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('ice')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/ice",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/packed_snow",
+      "name": "Утоптанный снег",
+      "kind": "block",
+      "purpose": [
+        "packed_snow",
+        "Утоптанный снег",
+        "block",
+        "frost"
+      ],
+      "tags": [
+        "block",
+        "frost",
+        "packed_snow",
+        "Утоптанный снег"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('packed_snow')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/packed_snow",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/frost_brick",
+      "name": "Ледяной кирпич",
+      "kind": "block",
+      "purpose": [
+        "frost_brick",
+        "Ледяной кирпич",
+        "block",
+        "frost"
+      ],
+      "tags": [
+        "block",
+        "frost",
+        "frost_brick",
+        "Ледяной кирпич"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('frost_brick')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/frost_brick",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/block/pine_needles",
+      "name": "Хвоя",
+      "kind": "block",
+      "purpose": [
+        "pine_needles",
+        "Хвоя",
+        "block",
+        "frost"
+      ],
+      "tags": [
+        "block",
+        "frost",
+        "pine_needles",
+        "Хвоя"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBlock('pine_needles')"
+      ],
+      "code_lookup": "pod-i-nad/registry/block/pine_needles",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/frost_imp",
+      "name": "Ледяной бесёнок",
+      "kind": "enemy",
+      "purpose": [
+        "frost_imp",
+        "Ледяной бесёнок",
+        "enemy",
+        "frost"
+      ],
+      "tags": [
+        "enemy",
+        "frost",
+        "frost_imp",
+        "Ледяной бесёнок"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('frost_imp')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/frost_imp",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/frost_warden",
+      "name": "Ледяной страж",
+      "kind": "enemy",
+      "purpose": [
+        "frost_warden",
+        "Ледяной страж",
+        "enemy",
+        "frost"
+      ],
+      "tags": [
+        "enemy",
+        "frost",
+        "frost_warden",
+        "Ледяной страж"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('frost_warden')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/frost_warden",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/event/blizzard",
+      "name": "Метель",
+      "kind": "event",
+      "purpose": [
+        "blizzard",
+        "Метель",
+        "event",
+        "frost"
+      ],
+      "tags": [
+        "event",
+        "frost",
+        "blizzard",
+        "Метель"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEvent('blizzard')"
+      ],
+      "code_lookup": "pod-i-nad/registry/event/blizzard",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/event/aurora",
+      "name": "Северное сияние",
+      "kind": "event",
+      "purpose": [
+        "aurora",
+        "Северное сияние",
+        "event",
+        "frost"
+      ],
+      "tags": [
+        "event",
+        "frost",
+        "aurora",
+        "Северное сияние"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEvent('aurora')"
+      ],
+      "code_lookup": "pod-i-nad/registry/event/aurora",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/flora/pine",
+      "name": "Ель",
+      "kind": "flora",
+      "purpose": [
+        "pine",
+        "Ель",
+        "flora",
+        "frost"
+      ],
+      "tags": [
+        "flora",
+        "frost",
+        "pine",
+        "Ель"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineFlora('pine')"
+      ],
+      "code_lookup": "pod-i-nad/registry/flora/pine",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/relic/rime_charm",
+      "name": "Иней",
+      "kind": "relic",
+      "purpose": [
+        "rime_charm",
+        "Иней",
+        "relic",
+        "frost"
+      ],
+      "tags": [
+        "relic",
+        "frost",
+        "rime_charm",
+        "Иней"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRelic('rime_charm')"
+      ],
+      "code_lookup": "pod-i-nad/registry/relic/rime_charm",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/sound/step_snow",
+      "name": "step_snow",
+      "kind": "sound",
+      "purpose": [
+        "step_snow",
+        "step_snow",
+        "sound",
+        "frost"
+      ],
+      "tags": [
+        "sound",
+        "frost",
+        "step_snow"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineSound('step_snow')"
+      ],
+      "code_lookup": "pod-i-nad/registry/sound/step_snow",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/sound/step_ice",
+      "name": "step_ice",
+      "kind": "sound",
+      "purpose": [
+        "step_ice",
+        "step_ice",
+        "sound",
+        "frost"
+      ],
+      "tags": [
+        "sound",
+        "frost",
+        "step_ice"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineSound('step_ice')"
+      ],
+      "code_lookup": "pod-i-nad/registry/sound/step_ice",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/body/jelly",
+      "name": "jelly",
+      "kind": "body",
+      "purpose": [
+        "jelly",
+        "jelly",
+        "body",
+        "deep"
+      ],
+      "tags": [
+        "body",
+        "deep",
+        "jelly"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBody('jelly')"
+      ],
+      "code_lookup": "pod-i-nad/registry/body/jelly",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/brain/drifter",
+      "name": "drifter",
+      "kind": "brain",
+      "purpose": [
+        "drifter",
+        "drifter",
+        "brain",
+        "deep"
+      ],
+      "tags": [
+        "brain",
+        "deep",
+        "drifter"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBrain('drifter')"
+      ],
+      "code_lookup": "pod-i-nad/registry/brain/drifter",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/lantern_jelly",
+      "name": "Медуза-фонарик",
+      "kind": "enemy",
+      "purpose": [
+        "lantern_jelly",
+        "Медуза-фонарик",
+        "enemy",
+        "deep"
+      ],
+      "tags": [
+        "enemy",
+        "deep",
+        "lantern_jelly",
+        "Медуза-фонарик"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('lantern_jelly')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/lantern_jelly",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/rose_jelly",
+      "name": "Медуза-огонёк",
+      "kind": "enemy",
+      "purpose": [
+        "rose_jelly",
+        "Медуза-огонёк",
+        "enemy",
+        "deep"
+      ],
+      "tags": [
+        "enemy",
+        "deep",
+        "rose_jelly",
+        "Медуза-огонёк"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('rose_jelly')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/rose_jelly",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/sound/jelly_sting",
+      "name": "jelly_sting",
+      "kind": "sound",
+      "purpose": [
+        "jelly_sting",
+        "jelly_sting",
+        "sound",
+        "deep"
+      ],
+      "tags": [
+        "sound",
+        "deep",
+        "jelly_sting"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineSound('jelly_sting')"
+      ],
+      "code_lookup": "pod-i-nad/registry/sound/jelly_sting",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/character/keeper",
+      "name": "Смотритель",
+      "kind": "character",
+      "purpose": [
+        "keeper",
+        "Смотритель",
+        "character",
+        "keeper"
+      ],
+      "tags": [
+        "character",
+        "keeper",
+        "keeper",
+        "Смотритель"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineCharacter('keeper')"
+      ],
+      "code_lookup": "pod-i-nad/registry/character/keeper",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/boomerang",
+      "name": "boomerang",
+      "kind": "projectile",
+      "purpose": [
+        "boomerang",
+        "boomerang",
+        "projectile",
+        "keeper"
+      ],
+      "tags": [
+        "projectile",
+        "keeper",
+        "boomerang"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineProjectile('boomerang')"
+      ],
+      "code_lookup": "pod-i-nad/registry/projectile/boomerang",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/boomerang",
+      "name": "boomerang",
+      "kind": "ricochet",
+      "purpose": [
+        "boomerang",
+        "boomerang",
+        "ricochet",
+        "keeper"
+      ],
+      "tags": [
+        "ricochet",
+        "keeper",
+        "boomerang"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineRicochet('boomerang')"
+      ],
+      "code_lookup": "pod-i-nad/registry/ricochet/boomerang",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/sound/boom_whoosh",
+      "name": "boom_whoosh",
+      "kind": "sound",
+      "purpose": [
+        "boom_whoosh",
+        "boom_whoosh",
+        "sound",
+        "keeper"
+      ],
+      "tags": [
+        "sound",
+        "keeper",
+        "boom_whoosh"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineSound('boom_whoosh')"
+      ],
+      "code_lookup": "pod-i-nad/registry/sound/boom_whoosh",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/sound/boom_catch",
+      "name": "boom_catch",
+      "kind": "sound",
+      "purpose": [
+        "boom_catch",
+        "boom_catch",
+        "sound",
+        "keeper"
+      ],
+      "tags": [
+        "sound",
+        "keeper",
+        "boom_catch"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineSound('boom_catch')"
+      ],
+      "code_lookup": "pod-i-nad/registry/sound/boom_catch",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/boomerang",
+      "name": "Бумеранг",
+      "kind": "weapon",
+      "purpose": [
+        "boomerang",
+        "Бумеранг",
+        "weapon",
+        "keeper"
+      ],
+      "tags": [
+        "weapon",
+        "keeper",
+        "boomerang",
+        "Бумеранг"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineWeapon('boomerang')"
+      ],
+      "code_lookup": "pod-i-nad/registry/weapon/boomerang",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/biome/sunken",
+      "name": "Затонувший город",
+      "kind": "biome",
+      "purpose": [
+        "sunken",
+        "Затонувший город",
+        "biome",
+        "sunken"
+      ],
+      "tags": [
+        "biome",
+        "sunken",
+        "sunken",
+        "Затонувший город"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBiome('sunken')"
+      ],
+      "code_lookup": "pod-i-nad/registry/biome/sunken",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/body/swimmer",
+      "name": "swimmer",
+      "kind": "body",
+      "purpose": [
+        "swimmer",
+        "swimmer",
+        "body",
+        "sunken"
+      ],
+      "tags": [
+        "body",
+        "sunken",
+        "swimmer"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBody('swimmer')"
+      ],
+      "code_lookup": "pod-i-nad/registry/body/swimmer",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/brain/swimmer",
+      "name": "swimmer",
+      "kind": "brain",
+      "purpose": [
+        "swimmer",
+        "swimmer",
+        "brain",
+        "sunken"
+      ],
+      "tags": [
+        "brain",
+        "sunken",
+        "swimmer"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineBrain('swimmer')"
+      ],
+      "code_lookup": "pod-i-nad/registry/brain/swimmer",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_eel",
+      "name": "Угорь",
+      "kind": "enemy",
+      "purpose": [
+        "uw_eel",
+        "Угорь",
+        "enemy",
+        "sunken"
+      ],
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_eel",
+        "Угорь"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('uw_eel')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/uw_eel",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_jelly_t",
+      "name": "Медуза",
+      "kind": "enemy",
+      "purpose": [
+        "uw_jelly_t",
+        "Медуза",
+        "enemy",
+        "sunken"
+      ],
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_jelly_t",
+        "Медуза"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('uw_jelly_t')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/uw_jelly_t",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_jelly_v",
+      "name": "Фиолетовая медуза",
+      "kind": "enemy",
+      "purpose": [
+        "uw_jelly_v",
+        "Фиолетовая медуза",
+        "enemy",
+        "sunken"
+      ],
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_jelly_v",
+        "Фиолетовая медуза"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('uw_jelly_v')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/uw_jelly_v",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_drone",
+      "name": "Дрон-разведчик",
+      "kind": "enemy",
+      "purpose": [
+        "uw_drone",
+        "Дрон-разведчик",
+        "enemy",
+        "sunken"
+      ],
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_drone",
+        "Дрон-разведчик"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('uw_drone')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/uw_drone",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_angler",
+      "name": "Удильщик",
+      "kind": "enemy",
+      "purpose": [
+        "uw_angler",
+        "Удильщик",
+        "enemy",
+        "sunken"
+      ],
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_angler",
+        "Удильщик"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('uw_angler')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/uw_angler",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_kraken",
+      "name": "Хранитель глубин",
+      "kind": "enemy",
+      "purpose": [
+        "uw_kraken",
+        "Хранитель глубин",
+        "enemy",
+        "sunken"
+      ],
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_kraken",
+        "Хранитель глубин"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "defineEnemy('uw_kraken')"
+      ],
+      "code_lookup": "pod-i-nad/registry/enemy/uw_kraken",
+      "definition_index": "shared/components/pod-i-nad/registry/index.json"
     }
   ]
 }

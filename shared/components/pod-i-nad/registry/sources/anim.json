@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "anim",
+  "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+  "definitions": [
+    {
+      "id": "pod-i-nad/registry/anim/punch",
+      "source": "defineAnim('punch', {\n  trail: 'streak', lunge: [2.2, 3.4], swing: 0.6,\n  pose(w, t, step, fin) {\n    if (fin) { const k = easeOut(span(t, 0.12, 0.55)); return { ang: lerp(-65, 70, k), push: 0.3 + 0.3 * Math.sin(k * Math.PI), active: t > 0.18 && t < 0.58 }; }\n    const k = t < 0.2 ? -0.15 * span(t, 0, 0.2) : t < 0.45 ? lerp(-0.15, 0.6, easeOut(span(t, 0.2, 0.45))) : lerp(0.6, 0, easeInOut(span(t, 0.45, 1)));\n    return { ang: step % 2 ? 8 : -8, push: k, active: t > 0.24 && t < 0.56 };\n  },\n})",
+      "source_line_start": 621,
+      "source_line_end": 628
+    },
+    {
+      "id": "pod-i-nad/registry/anim/jab",
+      "source": "defineAnim('jab', {\n  trail: 'streak', lunge: [2.2, 3.4], swing: 1,\n  pose(w, t) {\n    const k = t < 0.2 ? -0.2 * span(t, 0, 0.2) : t < 0.42 ? lerp(-0.2, 0.75, easeOut(span(t, 0.2, 0.42))) : lerp(0.75, 0, easeInOut(span(t, 0.42, 1)));\n    return { ang: 0, push: k, active: t > 0.24 && t < 0.55 };\n  },\n})",
+      "source_line_start": 629,
+      "source_line_end": 635
+    },
+    {
+      "id": "pod-i-nad/registry/anim/stab",
+      "source": "defineAnim('stab', {\n  trail: 'streak', lunge: [2.2, 3.4], swing: 0.6,\n  pose(w, t, step) {\n    const k = t < 0.3 ? lerp(0, 0.55, easeOut(span(t, 0, 0.3))) : lerp(0.55, 0, easeInOut(span(t, 0.3, 1)));\n    return { ang: [-14, 10, 0][step % 3], push: k, active: t > 0.12 && t < 0.5 };\n  },\n})",
+      "source_line_start": 636,
+      "source_line_end": 642
+    },
+    {
+      "id": "pod-i-nad/registry/anim/slash",
+      "source": "defineAnim('slash', {\n  trail: 'arc', lunge: [2.2, 3.4], swing: 1,\n  pose(w, t, step, fin) {\n    let a0 = 115, a1 = -75;\n    if (fin && w.fin && w.fin.over) { a0 = 165; a1 = -55; } else if (step % 2) { a0 = -75; a1 = 115; }\n    const sg = Math.sign(a1 - a0);\n    let ang;\n    if (t < 0.18) ang = a0 - sg * 14 * easeOut(span(t, 0, 0.18));\n    else if (t < 0.5) ang = lerp(a0 - sg * 14, a1, easeOut(span(t, 0.18, 0.5)));\n    else ang = a1 + sg * 6 * easeInOut(span(t, 0.5, 1));\n    return { ang, push: 0.12, active: t > 0.2 && t < 0.48 };\n  },\n})",
+      "source_line_start": 643,
+      "source_line_end": 655
+    },
+    {
+      "id": "pod-i-nad/registry/anim/chop",
+      "source": "defineAnim('chop', {\n  trail: 'arc', lunge: [0.8, 0.8], swing: 2,\n  pose(w, t) {\n    let ang;\n    if (t < 0.45) ang = lerp(70, 150, easeInOut(span(t, 0, 0.45)));\n    else if (t < 0.58) ang = lerp(150, -55, easeIn(span(t, 0.45, 0.58)));\n    else ang = -55 + 8 * easeInOut(span(t, 0.58, 1));\n    return { ang, push: 0.1, active: t > 0.5 && t < 0.66 };\n  },\n})",
+      "source_line_start": 656,
+      "source_line_end": 665
+    },
+    {
+      "id": "pod-i-nad/registry/anim/slam",
+      "source": "defineAnim('slam', {\n  trail: 'arc', lunge: [0.8, 0.8], swing: 2, trailWindow: [0.48, 0.64],\n  impactAt: 0.6, impact: (a) => slamImpact(a),\n  pose(w, t) {\n    let ang;\n    if (t < 0.5) ang = lerp(70, 172, easeInOut(span(t, 0, 0.5)));\n    else if (t < 0.6) ang = lerp(172, -70, easeIn(span(t, 0.5, 0.6)));\n    else ang = -70 + 6 * Math.sin(span(t, 0.6, 1) * Math.PI);\n    return { ang, push: 0.15, active: false };\n  },\n})",
+      "source_line_start": 666,
+      "source_line_end": 676
+    },
+    {
+      "id": "pod-i-nad/registry/anim/thrust",
+      "source": "defineAnim('thrust', {\n  trail: 'streak', lunge: [4.5, 4.5], swing: 1,\n  pose(w, t) {\n    const k = t < 0.25 ? lerp(0, -0.4, easeOut(span(t, 0, 0.25))) : t < 0.42 ? lerp(-0.4, 1.15, easeOut(span(t, 0.25, 0.42))) : lerp(1.15, 0, easeInOut(span(t, 0.42, 1)));\n    return { ang: 0, push: k, active: t > 0.28 && t < 0.52 };\n  },\n})",
+      "source_line_start": 677,
+      "source_line_end": 683
+    },
+    {
+      "id": "pod-i-nad/registry/anim/spin",
+      "source": "defineAnim('spin', {\n  trail: 'arc', lunge: [0.8, 0.8], swing: 1.5,\n  pose(w, t) {\n    const k = easeInOut(span(t, 0.05, 0.9));\n    return { ang: 90 - 420 * k, push: 0.15, active: t > 0.12 && t < 0.88 };\n  },\n})",
+      "source_line_start": 684,
+      "source_line_end": 690
+    },
+    {
+      "id": "pod-i-nad/registry/anim/flail",
+      "source": "defineAnim('flail', {\n  trail: 'arc', hold: true,\n  update: (dt, w) => updateFlail(dt, w),\n  render: (w, hand, draw, li) => renderFlailHeld(w, hand, draw, li),\n  meter: () => ({ fill: combat.flail.spin, text: combat.flail.on ? 'вращение' : 'держи атаку' }),\n  pose: () => ({ ang: 60, push: 0, active: false }),\n})",
+      "source_line_start": 692,
+      "source_line_end": 698
+    }
+  ]
+}

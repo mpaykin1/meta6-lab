@@ -52,7 +52,6 @@ export function createOriginalSkyFromPalette(THREE,{phase='dusk',...options}={})
   sunColor:palette.keyCol,night:palette.stars,
   sunVisibility:palette.sunVis,aurora:palette.aurora,
   auroraA:palette.auroraA,auroraB:palette.auroraB,
-  sunDirection:[Math.cos(palette.sunEl),Math.sin(palette.sunEl),0],
   ...options
  });
 }

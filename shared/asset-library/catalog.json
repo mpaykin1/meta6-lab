@@ -1604,8 +1604,7 @@
         "combat",
         "web-audio"
       ],
-      "status": "READY",
-      "usable": true,
+      "status": "NOT_READY",
       "entry": "../components/pod-i-nad/animations/flail-audio.mjs",
       "export_name": "createFlailAudio",
       "dependencies": [
@@ -1613,9 +1612,9 @@
         "pointer gesture on iOS"
       ],
       "scope": "Short synthesized fallback cues; first user gesture required; no background soundtrack",
-      "demo": "meta-games/library/flail-combat.html",
-      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
-      "loader_id": "pod-i-nad-flail-audio"
+      "source": "meta-games/library/flail-arena.mjs",
+      "visual_origin": "synthetic-non-reference",
+      "note": "Prototype authored by AI, not extracted from approved reference; excluded from approved visual library."
     },
     {
       "id": "pod-i-nad/combat/flail-vfx",
@@ -1633,8 +1632,7 @@
         "three.js",
         "impact"
       ],
-      "status": "READY",
-      "usable": true,
+      "status": "NOT_READY",
       "entry": "../components/pod-i-nad/animations/flail-vfx.mjs",
       "export_name": "createFlailImpactFX",
       "dependencies": [
@@ -1642,9 +1640,9 @@
         "THREE.Scene"
       ],
       "scope": "GPU points with reusable buffer and ring pool; call burst/update/dispose",
-      "demo": "meta-games/library/flail-combat.html",
-      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
-      "loader_id": "pod-i-nad-flail-vfx"
+      "source": "meta-games/library/flail-arena.mjs",
+      "visual_origin": "synthetic-non-reference",
+      "note": "Prototype authored by AI, not extracted from approved reference; excluded from approved visual library."
     }
   ]
 }

@@ -11,10 +11,11 @@
   "sourceFormat": "GLB scene geometry editable via glTF import in modelling tools; native Blender project not created",
   "geometry": {
     "triangles": 5278,
-    "materials": 12,
-    "meshPrimitives": 14,
+    "materials": 13,
+    "meshPrimitives": 17,
     "nodes": 8,
-    "wheelAxleNodes": 6
+    "wheelAxleNodes": 6,
+    "meshes": 3
   },
   "pbrTextures": {
     "embeddedPNG": 6,
@@ -33,10 +34,12 @@
   "emissiveSurfaces": [
     "white top headlight",
     "two warm marker lamps",
-    "warm cab windows"
+    "warm cab windows",
+    "closed circular glass lenses on all three headlights",
+    "subtle warm reflective top strip on cab windscreens"
   ],
   "collisions": "compound bounding box metadata; gameplay physics not yet wired",
-  "heroPreview": "not rendered",
+  "heroPreview": "WebGL2 rendered preview in index.html; visual approval compared to user R1 sketch remains pending",
   "artReview": "NOT_VERIFIED",
   "readyForProduction": false,
   "knownLimitations": [
@@ -47,6 +50,6 @@
   ],
   "buildDate": "2026-11-08",
   "viewerFile": "index.html",
-  "viewerStatus": "HTML file uploaded to main; GitHub Pages live delivery not yet verified",
+  "viewerStatus": "Single-file HTML with embedded up-to-date GLB; published in GitHub main; live GitHub Pages hosting not independently checked",
   "viewerIsOfflineStandalone": true
 }

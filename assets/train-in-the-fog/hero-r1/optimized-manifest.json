@@ -1,0 +1,34 @@
+{
+  "assetId": "13.01",
+  "artReference": "R1",
+  "status": "OPTIMIZED_BINARY_READY; VISUAL_PARITY_NOT_VERIFIED",
+  "originalPath": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1.glb",
+  "optimizedPath": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1_optimized.glb",
+  "originalBytes": 691748,
+  "optimizedBytes": 536440,
+  "compressionPercent": 22.5,
+  "meshes": "3 preserved",
+  "triangles": 5378,
+  "materials": 13,
+  "embeddedPBRTextures": 6,
+  "staticBaked": [
+    "approximate ambient vertex occlusion",
+    "existing painted texture albedo",
+    "existing normal map",
+    "existing metallic roughness map"
+  ],
+  "dynamic": {
+    "KHR_lights_punctual": 4,
+    "animations": [
+      "Rolling_axles",
+      "Headlight_soft_sweep"
+    ]
+  },
+  "limits": [
+    "normal map is procedural from original, not high-poly derived",
+    "photorealistic raycast AO not performed; baked AO is a vertex heuristic",
+    "visual parity with approved viewer not independently tested",
+    "performance on iPhone not measured"
+  ],
+  "baselineOwnerApproved": true
+}

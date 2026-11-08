@@ -40,7 +40,7 @@
   ],
   "collisions": "compound bounding box metadata; gameplay physics not yet wired",
   "heroPreview": "WebGL2 rendered preview in index.html; visual approval compared to user R1 sketch remains pending",
-  "artReview": "NOT_VERIFIED",
+  "artReview": "ACCEPTED_BY_OWNER",
   "readyForProduction": false,
   "knownLimitations": [
     "visual silhouette against R1 sketch has not been rendered and compared",
@@ -52,5 +52,28 @@
   "viewerFile": "index.html",
   "viewerStatus": "Published HTML uses built-in Canvas2D software 3D rasterizer of actual embedded GLB triangles to avoid invisible WebGL model; verified JS syntax and model projection, live visual validation pending",
   "viewerIsOfflineStandalone": true,
-  "viewerRenderer": "Canvas2D depth-sorted triangle projection of embedded GLB, not a prerendered picture"
+  "viewerRenderer": "Canvas2D depth-sorted triangle projection of embedded GLB, not a prerendered picture",
+  "ownerApproval": "PASS (2026-11-08)",
+  "approvedViewerFile": "r1-visible-v2.html",
+  "optimizedRuntimeFile": "hero_locomotive_R1_optimized.glb",
+  "optimizedRuntimeArtReview": "NOT_VERIFIED",
+  "optimizations": {
+    "staticBaking": "approximate vertex AO baked into COLOR_0",
+    "textures": "six original embedded PBR PNG retained unchanged",
+    "normals": "8-bit normalized",
+    "texcoords": "16-bit normalized for in-range UVs; floating point retained for tiled UVs",
+    "indices": "16-bit",
+    "originalBytes": 691748,
+    "optimizedBytes": 536440,
+    "reductionPercent": 22.5,
+    "extensions": [
+      "KHR_lights_punctual"
+    ],
+    "dynamicLights": 4,
+    "animations": [
+      "Rolling_axles",
+      "Headlight_soft_sweep"
+    ],
+    "visualBaseline": "original hero_locomotive_R1.glb kept unchanged"
+  }
 }

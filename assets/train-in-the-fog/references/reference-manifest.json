@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "status": "R1 reference images VERIFIED; 13.01 hero GLB CREATED but art review NOT_VERIFIED",
+  "status": "R1 hero 13.01 original accepted by owner; optimized runtime GLB uploaded, parity validation pending; all others unverified",
   "referencePolicy": "styleReferenceIds establish visual style; NOT proof each listed asset appears in the frames",
   "sourceList": "docs/games/train-in-the-fog/ASSET_LIST_640_RU.md",
   "sourceSpecification": "docs/standards/META_GAMES_AUTONOMOUS_ASSET_PACK_SPEC_V1_RU.md",
@@ -2201,11 +2201,17 @@
         "R2",
         "R3"
       ],
-      "artReview": "NOT_VERIFIED",
+      "artReview": "ACCEPTED_BY_OWNER",
       "modelFile": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1.glb",
       "previewPage": "assets/train-in-the-fog/hero-r1/index.html",
       "assetManifest": "assets/train-in-the-fog/hero-r1/asset-manifest.json",
-      "modelStatus": "GLB_CREATED_BINARY_VALIDATED"
+      "modelStatus": "GLB_CREATED_BINARY_VALIDATED",
+      "approvedModelFile": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1.glb",
+      "approvedViewer": "assets/train-in-the-fog/hero-r1/r1-visible-v2.html",
+      "optimizedModelFile": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1_optimized.glb",
+      "optimizedArtParity": "NOT_VERIFIED",
+      "ownerApprovalDate": "2026-11-08",
+      "note": "User explicitly approved visible train (PASS); baseline preserved. New optimized variant needs own visual approval."
     },
     {
       "id": "13.02",

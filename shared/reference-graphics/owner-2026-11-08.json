@@ -135,6 +135,15 @@
     "vox": 76,
     "obj": 76,
     "png": 1025,
-    "transferred_to_github": false
+    "transferred_to_github": false,
+    "zip_sha256": "b207bd471d63211a594a8515dfd73e571ea0ac0aecee9148b20d294cff4af820",
+    "original_zip_on_github": false,
+    "source_html_embeds_114_glb": true,
+    "extracted_glb": 114,
+    "atlas_png": 12,
+    "atlas_derived_png": 951,
+    "extracted_assets_path": "reference-games/owner-2026-11-08/sunken-city/",
+    "asset_index_path": "reference-games/owner-2026-11-08/sunken-city/asset-index.json",
+    "asset_inventory_path": "reference-games/owner-2026-11-08/sunken-city/pack-artifacts.json"
   }
 }

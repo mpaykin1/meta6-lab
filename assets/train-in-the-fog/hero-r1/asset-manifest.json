@@ -50,6 +50,7 @@
   ],
   "buildDate": "2026-11-08",
   "viewerFile": "index.html",
-  "viewerStatus": "Single-file HTML with embedded up-to-date GLB; published in GitHub main; live GitHub Pages hosting not independently checked",
-  "viewerIsOfflineStandalone": true
+  "viewerStatus": "Published HTML uses built-in Canvas2D software 3D rasterizer of actual embedded GLB triangles to avoid invisible WebGL model; verified JS syntax and model projection, live visual validation pending",
+  "viewerIsOfflineStandalone": true,
+  "viewerRenderer": "Canvas2D depth-sorted triangle projection of embedded GLB, not a prerendered picture"
 }

@@ -1938,7 +1938,7 @@ function toysBlock(hs, px0, pz0) {
   for (const r of truins) { const inside = (x, z) => Math.abs(x - r.x) < r.w / 2 + .2 && Math.abs(z - r.z) < r.d / 2 + .2;
     if (hs.pos.y < r.top - .45 && inside(hs.pos.x, hs.pos.z)) { if (!inside(px0, hs.pos.z)) hs.pos.x = px0; else if (!inside(hs.pos.x, pz0)) hs.pos.z = pz0; else { hs.pos.x = px0; hs.pos.z = pz0; } hs.vel.multiplyScalar(.5); } }
 }
-function toysStart() { memClear(); G.tfT = 1.1; G.tfN = 0; G.focusK = 0; G.nextBarrier = -27; toyBg.visible = true; toyBg.children.forEach(m => m.position.z = G.cfg.goal + m.userData.dz); }
+function toysStart() { memClear(); G.tfT = 1.1; G.tfN = 0; G.focusK = 0; G.nextBarrier = -27 - Math.random() * 4; toyBg.visible = true; toyBg.children.forEach(m => m.position.z = G.cfg.goal + m.userData.dz); }
 function toysUpdate(hs, t, dt) {
   const c = G.cfg;
   G.tfT -= dt;
@@ -3346,7 +3346,7 @@ Object.defineProperty(window, '__META_BOT__', {
         enemies: shades.filter(s => s.visible).length,
         weapons: 0,
         layoutHash: JSON.stringify({
-          level: G.li, variant: G.variant,
+          level: G.li, variant: G.variant, firstBarrier: G.nextBarrier,
           paths: paths.map(p => [p.az, p.bz, p.x, p.z]).slice(0, 64),
           barriers: barriers.map(b => [b.z, b.x]).slice(0, 64),
           cracks: cracks.map(c => c.userData.z).slice(0, 64)

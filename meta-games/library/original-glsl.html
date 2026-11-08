@@ -1,0 +1,25 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07131b"><title>Оригинальные GLSL · META GAMES</title><style>
+body{margin:0;background:#07131b;color:#d4eae6;font:15px system-ui,sans-serif}main{max-width:1000px;margin:auto;padding:22px}a{color:#92ded6}h1{font-size:24px}p{color:#9ebdbb}input{background:#152d36;color:white;border:1px solid #426e77;border-radius:8px;padding:12px;width:min(100%,500px);box-sizing:border-box;margin:12px 0}article{border:1px solid #34535b;border-radius:10px;margin:12px 0;padding:15px;background:#10242b}header{display:flex;justify-content:space-between;align-items:center;gap:10px}h2{font-size:17px;margin:0}small{color:#9cbab8}button{background:#224750;color:#e4f8f3;border:1px solid #508b91;border-radius:8px;padding:9px 13px}pre{overflow:auto;white-space:pre;font:12px ui-monospace,monospace;background:#07171c;border-radius:8px;padding:12px;max-height:360px}details{margin-top:10px}summary{cursor:pointer;color:#a7e7d9}</style></head><body><main><a href="./index.html">← Библиотека</a><h1>Оригинальные GLSL-шейдеры «Под и над»</h1><p id="count">Загрузка…</p><input id="q" type="search" placeholder="Найти шейдер по имени, этапу или GLSL-коду" aria-label="Поиск по шейдерам"><section id="results"></section></main><script type="module">
+const out=document.querySelector('#results'),q=document.querySelector('#q'),count=document.querySelector('#count');
+try {
+ const response=await fetch('../../shared/components/pod-i-nad/shaders.json');
+ if(!response.ok)throw Error('HTTP '+response.status);
+ const catalog=await response.json();
+ function render(){
+  const search=q.value.toLowerCase().trim();
+  const found=catalog.shaders.filter(s=>(s.id+' '+s.stage+' '+s.glsl).toLowerCase().includes(search));
+  const fragment=document.createDocumentFragment();
+  for(const s of found){
+   const card=document.createElement('article'),header=document.createElement('header'),h=document.createElement('h2');
+   h.textContent=s.source_symbol;header.append(h);
+   const button=document.createElement('button');button.type='button';button.textContent='Копировать GLSL';
+   button.addEventListener('click',()=>{navigator.clipboard.writeText(s.glsl).then(()=>button.textContent='Скопировано').catch(()=>button.textContent='Копирование недоступно')});header.append(button);
+   const desc=document.createElement('small');desc.textContent=s.stage+' · '+s.status+(s.template_variables.length?' · зависимости: '+s.template_variables.join(', '):'');
+   const details=document.createElement('details'),summary=document.createElement('summary'),pre=document.createElement('pre');
+   summary.textContent='Открыть исходный GLSL';pre.textContent=s.glsl;details.append(summary,pre);card.append(header,desc,details);fragment.append(card);
+  }
+  out.replaceChildren(fragment);count.textContent='Оригинальные фрагменты: '+catalog.count+' · найдено: '+found.length+' · шаблоны сохраняют исходные переменные';
+ }
+ q.addEventListener('input',render);render();
+}catch(error){count.textContent='Не удалось загрузить каталог: '+error.message}
+</script></body></html>

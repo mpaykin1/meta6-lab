@@ -1653,6 +1653,41 @@
       ],
       "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
       "scope": "Procedural geometry; original reference-inspired, not an extracted GLB"
+    },
+    {
+      "id": "pod-i-nad/shader/sky-aurora",
+      "name": "Animated pixel sky, aurora, sun, clouds and stars",
+      "kind": "shader",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "sky shader",
+        "night stars",
+        "aurora borealis",
+        "pixel clouds",
+        "animated atmosphere"
+      ],
+      "tags": [
+        "shader",
+        "GLSL",
+        "Three.js",
+        "sky",
+        "aurora",
+        "pixel",
+        "night"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "SKY_VERT",
+        "SKY_FRAG"
+      ],
+      "entry": "../components/pod-i-nad/shaders/atmosphere/sky-material.mjs",
+      "export_name": "createSkyDome",
+      "dependencies": [
+        "Three.js r160",
+        "original GLSL_HASH"
+      ],
+      "scope": "Original GLSL adapted to a reusable Three.js sky dome; animated in combat arena"
     }
   ]
 }

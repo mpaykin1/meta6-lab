@@ -1510,6 +1510,30 @@
       "dependencies": [],
       "scope": "movement and chain positions only; damage/collision/audio external",
       "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/combat/flail-hit-detection",
+      "name": "Flail segment collision and hit cooldown",
+      "kind": "combat",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "flail hit detection",
+        "enemy segment collision",
+        "weapon damage",
+        "knockback"
+      ],
+      "tags": [
+        "physics",
+        "combat",
+        "collision",
+        "flail"
+      ],
+      "entry": "../components/pod-i-nad/animations/flail-hit-detection.mjs",
+      "export_name": "createFlailHitDetector",
+      "dependencies": [],
+      "scope": "hit events only; damage application and audiovisual effects are host callbacks",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
     }
   ]
 }

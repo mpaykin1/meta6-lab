@@ -1,0 +1,55 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#06111a"><title>Оригинальные 3D-модели Под и над · META GAMES</title><style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#06111a;color:#e9f7ed;font:14px system-ui,sans-serif}a{color:#95e5df}header{position:fixed;z-index:3;top:max(12px,env(safe-area-inset-top));left:clamp(10px,3vw,28px);max-width:min(390px,90vw);padding:14px 16px;background:#091b26e8;border:1px solid #376a75;border-radius:12px;box-shadow:0 6px 32px #0007}h1{font-size:20px;margin:7px 0}p{color:#b6cfd1;line-height:1.45;font-size:13px;margin:8px 0}select{width:100%;background:#142e38;color:white;border:1px solid #63969e;border-radius:8px;padding:9px;font:inherit}small{color:#9ebbbd}#stage{display:block;width:100%;height:100vh;height:100dvh;touch-action:none}#status{font-size:12px;word-break:break-word;min-height:28px}#source{display:block;margin-top:9px}
+</style></head><body><header><a href="./index.html">← Библиотека</a><h1>58 оригинальных 3D-моделей</h1><select id="model" aria-label="Выбрать оригинальную модель"></select><p id="status">Инициализация…</p><small>Пальцем или мышью поворачивайте модель. Анимации воспроизводятся из исходного GLB.</small><a id="source" target="_blank" rel="noopener noreferrer">Исходник модели на GitHub</a></header><canvas id="stage"></canvas>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {listOriginalModels,createOriginalModel} from '../../shared/components/pod-i-nad/models/original-glb-loader.mjs';
+const canvas=document.querySelector('#stage'),select=document.querySelector('#model'),status=document.querySelector('#status'),sourceLink=document.querySelector('#source');
+const scene=new THREE.Scene();scene.background=new THREE.Color('#06111a');
+const camera=new THREE.PerspectiveCamera(42,1,.02,2500);
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));renderer.outputColorSpace=THREE.SRGBColorSpace;
+scene.add(new THREE.HemisphereLight(0xa9dfff,0x101e38,2.1));
+const key=new THREE.DirectionalLight(0xd9fbff,2.5);key.position.set(8,14,12);scene.add(key);
+const edge=new THREE.DirectionalLight(0x7e78ff,2.2);edge.position.set(-9,7,-11);scene.add(edge);
+const group=new THREE.Group();scene.add(group);
+let model=null,distance=5,azimuth=.65,elevation=.3,requestId=0,drag=null;
+function resize(){const width=canvas.clientWidth,height=canvas.clientHeight;renderer.setSize(width,height,false);camera.aspect=width/Math.max(1,height);camera.updateProjectionMatrix()}
+window.addEventListener('resize',resize);resize();
+function moveCamera(){camera.position.set(Math.sin(azimuth)*Math.cos(elevation)*distance,Math.sin(elevation)*distance,Math.cos(azimuth)*Math.cos(elevation)*distance);camera.lookAt(0,0,0)}
+canvas.addEventListener('pointerdown',e=>{drag={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId)});
+canvas.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;azimuth+=(e.clientX-drag.x)*.008;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-drag.y)*.006,-1.35,1.35);drag.x=e.clientX;drag.y=e.clientY});
+canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('pointercancel',()=>drag=null);
+canvas.addEventListener('wheel',e=>{distance=THREE.MathUtils.clamp(distance*Math.exp(e.deltaY*.001),.15,1000)},{passive:true});
+const loader=new GLTFLoader();
+async function show(name){
+  const token=++requestId;
+  status.textContent='Загрузка оригинального GLB: '+name+'…';
+  sourceLink.href='https://github.com/mpaykin1/meta6-lab/blob/main/underwater-sumerek/glb/'+encodeURIComponent(name)+'.json';
+  if(model){model.dispose();model=null}
+  try{
+    const next=await createOriginalModel(name,{THREE,loader,scene:group});
+    if(token!==requestId){next.dispose();return}
+    model=next;
+    const box=new THREE.Box3().setFromObject(next.root);
+    if(box.isEmpty())throw Error('GLB не содержит видимой геометрии');
+    const center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());
+    next.root.position.sub(center);
+    distance=Math.max(size.x,size.y,size.z)*1.9;
+    distance=Math.max(.5,distance);azimuth=.65;elevation=.3;
+    status.textContent=name+' · клипов анимации: '+next.animations.length+' · Three.js GLB';
+  }catch(e){status.textContent='Ошибка '+name+': '+(e?.message||e)}
+}
+try{
+  const records=await listOriginalModels();
+  for(const m of records){const option=document.createElement('option');option.value=m.name;option.textContent=m.name+(m.format_checked?' ✓':'');select.append(option)}
+  select.addEventListener('change',()=>show(select.value));
+  const requested=new URLSearchParams(location.search).get('model');
+  const initial=records.some(m=>m.name===requested)?requested:(records.some(m=>m.name==='jellyfish_teal')?'jellyfish_teal':records[0]?.name);
+  if(initial){select.value=initial;show(initial)}
+}catch(e){status.textContent='Ошибка каталога: '+e}
+const clock=new THREE.Clock();
+function frame(){requestAnimationFrame(frame);const dt=Math.min(.05,clock.getDelta());if(model)model.update(dt);moveCamera();renderer.render(scene,camera)}
+frame();
+</script></body></html>

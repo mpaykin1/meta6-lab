@@ -135,25 +135,29 @@
     },
     {
       "id": "pod-i-nad/model/jellyfish_teal",
-      "name": "Jellyfish teal model reference",
+      "name": "jellyfish_teal",
       "kind": "model",
       "purpose": [
-        "jellyfish",
-        "underwater creature",
-        "animated sea life"
+        "underwater",
+        "sunken city",
+        "3d",
+        "jellyfish_teal"
       ],
       "tags": [
-        "model",
+        "3d",
         "glb",
-        "jellyfish",
-        "underwater"
+        "underwater",
+        "jellyfish_teal"
       ],
-      "status": "SOURCE_ONLY",
-      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "status": "READY",
+      "source": "underwater-sumerek/glb/jellyfish_teal.json",
       "source_reference": "glb/jellyfish_teal.json",
       "asset_path": null,
       "loader_id": null,
-      "usable": false
+      "usable": false,
+      "source_blob_sha": "616aa0bb245511fc210657acf214476ef948cc7f",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json",
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
     },
     {
       "id": "pod-i-nad/glsl/sky-vert",
@@ -4937,6 +4941,1228 @@
         "Original sun azimuth and moon direction supplied by caller"
       ],
       "notes": "Original smooth/mixInto phase interpolation, event palette overlay, biome overrides and uniforms mapping. Does not recreate full original event scheduler."
+    },
+    {
+      "id": "pod-i-nad/model/anchor",
+      "name": "anchor",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "anchor"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "anchor"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/anchor.json",
+      "source_blob_sha": "f5a05ea819fce6210dcf187bcea61c1cebd71fd3",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/anemone",
+      "name": "anemone",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "anemone"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "anemone"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/anemone.json",
+      "source_blob_sha": "5e6306a982e9597f063d2d648ab4c5ff69ba3b02",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/angel_statue",
+      "name": "angel_statue",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "angel_statue"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "angel_statue"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/angel_statue.json",
+      "source_blob_sha": "d5cb60ff82e60f5c5535a8d002dd4bedbedfff78",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/angler",
+      "name": "angler",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "angler"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "angler"
+      ],
+      "status": "READY",
+      "source": "underwater-sumerek/glb/angler.json",
+      "source_blob_sha": "22c536017f26c4a0e10da1ca175d92654916e6cd",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json",
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
+    },
+    {
+      "id": "pod-i-nad/model/arch",
+      "name": "arch",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "arch"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "arch"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/arch.json",
+      "source_blob_sha": "5eb63ea54354d0309dc1f07e19fa3207c744f008",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/barrel",
+      "name": "barrel",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "barrel"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "barrel"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/barrel.json",
+      "source_blob_sha": "7906d39504663ffb7f03ae5bf79cba72e2fb0de1",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/bathyscaphe",
+      "name": "bathyscaphe",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "bathyscaphe"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "bathyscaphe"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/bathyscaphe.json",
+      "source_blob_sha": "74aa9dd255dbe407b54c9cb3a8a950dbcc5fbd47",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/bridge",
+      "name": "bridge",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "bridge"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "bridge"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/bridge.json",
+      "source_blob_sha": "bb1147ef01b8cb9c2180c2f420c9bbead0b5fc86",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/bridge_broken",
+      "name": "bridge_broken",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "bridge_broken"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "bridge_broken"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/bridge_broken.json",
+      "source_blob_sha": "a985f0686b58dcab3d13febf1809a95af4ec144b",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/cannon",
+      "name": "cannon",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "cannon"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "cannon"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/cannon.json",
+      "source_blob_sha": "42db301f8221c343de12e30315683a4b9d7cfb24",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/cathedral_bell",
+      "name": "cathedral_bell",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "cathedral_bell"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "cathedral_bell"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/cathedral_bell.json",
+      "source_blob_sha": "ef98d990e2e9e57dcb6b501f54cc76511913bd6f",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/cathedral_tower",
+      "name": "cathedral_tower",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "cathedral_tower"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "cathedral_tower"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/cathedral_tower.json",
+      "source_blob_sha": "75b400ba376cf27a3267354f0377832579fa4607",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/column",
+      "name": "column",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "column"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "column"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/column.json",
+      "source_blob_sha": "1da1f980fa5269e692e997b1f652c933852ee727",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/column_broken",
+      "name": "column_broken",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "column_broken"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "column_broken"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/column_broken.json",
+      "source_blob_sha": "e98e6466b74d8e53a2ea3c4fec7e138a510d1cdd",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/coral_brain",
+      "name": "coral_brain",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "coral_brain"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "coral_brain"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/coral_brain.json",
+      "source_blob_sha": "4d5e55eec8c80b89f131b4b7027f0e469efc9224",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/coral_branch_orange",
+      "name": "coral_branch_orange",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "coral_branch_orange"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "coral_branch_orange"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/coral_branch_orange.json",
+      "source_blob_sha": "e78260cff891c21151f42398afbbb42253720799",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/coral_branch_pink",
+      "name": "coral_branch_pink",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "coral_branch_pink"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "coral_branch_pink"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/coral_branch_pink.json",
+      "source_blob_sha": "b46f2e83b855a60a15ac05a2ef54da8ed0bb0fde",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/coral_branch_violet",
+      "name": "coral_branch_violet",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "coral_branch_violet"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "coral_branch_violet"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/coral_branch_violet.json",
+      "source_blob_sha": "59bbf0ce651002263fd14c3c6abda19656023f3e",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/crate",
+      "name": "crate",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "crate"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "crate"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/crate.json",
+      "source_blob_sha": "f0eb1113383a810263a97cf776f7fe3fa70bf882",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/diving_helmet",
+      "name": "diving_helmet",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "diving_helmet"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "diving_helmet"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/diving_helmet.json",
+      "source_blob_sha": "9e0ebfa40023d74d9fa18263dc8cc04490fbd2b6",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/eel",
+      "name": "eel",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "eel"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "eel"
+      ],
+      "status": "READY",
+      "source": "underwater-sumerek/glb/eel.json",
+      "source_blob_sha": "6cf962148a1bd6542eb04eaa81629522be91d403",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json",
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
+    },
+    {
+      "id": "pod-i-nad/model/galleon",
+      "name": "galleon",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "galleon"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "galleon"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/galleon.json",
+      "source_blob_sha": "4ccc16161d53342bbbcb5bbde0d017e2a57bf106",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/gargoyle",
+      "name": "gargoyle",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "gargoyle"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "gargoyle"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/gargoyle.json",
+      "source_blob_sha": "a914924041a253e61a8e778fef26302d26b5df0d",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/glow_fish_amber",
+      "name": "glow_fish_amber",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "glow_fish_amber"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "glow_fish_amber"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/glow_fish_amber.json",
+      "source_blob_sha": "96596ef0156afbdb59d9d1406eaeeba6c3d02bc9",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/glow_fish_emerald",
+      "name": "glow_fish_emerald",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "glow_fish_emerald"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "glow_fish_emerald"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/glow_fish_emerald.json",
+      "source_blob_sha": "f896b8305d8bcec191eb1ef59a8c5cf62115a574",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/glow_fish_teal",
+      "name": "glow_fish_teal",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "glow_fish_teal"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "glow_fish_teal"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/glow_fish_teal.json",
+      "source_blob_sha": "d12167c950156be5b1cb2b0c3d4d5457b0e21c80",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/glow_fish_violet",
+      "name": "glow_fish_violet",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "glow_fish_violet"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "glow_fish_violet"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/glow_fish_violet.json",
+      "source_blob_sha": "ea55fe75162041bd7b6b83663c096def0f3cfd17",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/hermit_crab",
+      "name": "hermit_crab",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "hermit_crab"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "hermit_crab"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/hermit_crab.json",
+      "source_blob_sha": "8d23c2f5231deba409e89b4ea3093df8ea56cfcf",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/hot_vent",
+      "name": "hot_vent",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "hot_vent"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "hot_vent"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/hot_vent.json",
+      "source_blob_sha": "d1ceb7cddcc7ab8c7ddc0ed32716eb78081540a3",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/iron_gate",
+      "name": "iron_gate",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "iron_gate"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "iron_gate"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/iron_gate.json",
+      "source_blob_sha": "b375b07430598bb1ec70e8de3d3ef0fb5589b90d",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/jellyfish_violet",
+      "name": "jellyfish_violet",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "jellyfish_violet"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "jellyfish_violet"
+      ],
+      "status": "READY",
+      "source": "underwater-sumerek/glb/jellyfish_violet.json",
+      "source_blob_sha": "6b334eefcb620ed8c767e081ec6ee3547c4ce506",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json",
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
+    },
+    {
+      "id": "pod-i-nad/model/kelp_mid",
+      "name": "kelp_mid",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "kelp_mid"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "kelp_mid"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/kelp_mid.json",
+      "source_blob_sha": "21caa41113681b7ca9f01750ca38194f7869cfff",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/kelp_short",
+      "name": "kelp_short",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "kelp_short"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "kelp_short"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/kelp_short.json",
+      "source_blob_sha": "4b33375d418eede8f882443290ced416f8c9c340",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/kelp_tall",
+      "name": "kelp_tall",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "kelp_tall"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "kelp_tall"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/kelp_tall.json",
+      "source_blob_sha": "adfdf209e90d3a0440fab6295886bb046f6f8104",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/kraken_tentacle",
+      "name": "kraken_tentacle",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "kraken_tentacle"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "kraken_tentacle"
+      ],
+      "status": "READY",
+      "source": "underwater-sumerek/glb/kraken_tentacle.json",
+      "source_blob_sha": "a9156d58e3120aff381b8bf2a45ad2e8ad1b6318",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json",
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
+    },
+    {
+      "id": "pod-i-nad/model/lancet_window",
+      "name": "lancet_window",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "lancet_window"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "lancet_window"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/lancet_window.json",
+      "source_blob_sha": "c3d0dbda1cbdbb7a6f6da92ef7cd72bc15f40371",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/lantern_fish",
+      "name": "lantern_fish",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "lantern_fish"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "lantern_fish"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/lantern_fish.json",
+      "source_blob_sha": "9ff770caf3779bb11da563ab52981ddf7232fe68",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/manta",
+      "name": "manta",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "manta"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "manta"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/manta.json",
+      "source_blob_sha": "7b38a8f8ef3de94dae9bafeff3df2cdae92159b2",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/nautilus",
+      "name": "nautilus",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "nautilus"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "nautilus"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/nautilus.json",
+      "source_blob_sha": "eb596191dcd72712689e3d8262413c410312edc2",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/pearl_clam",
+      "name": "pearl_clam",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "pearl_clam"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "pearl_clam"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/pearl_clam.json",
+      "source_blob_sha": "746a481a27dfd33433f6ea04ebc200f3f3ec49ec",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/scout_drone",
+      "name": "scout_drone",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "scout_drone"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "scout_drone"
+      ],
+      "status": "READY",
+      "source": "underwater-sumerek/glb/scout_drone.json",
+      "source_blob_sha": "eda25ef7ad7a344a9afeac3f0c3870b54ac6d882",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json",
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs"
+    },
+    {
+      "id": "pod-i-nad/model/sea_fan",
+      "name": "sea_fan",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "sea_fan"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "sea_fan"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/sea_fan.json",
+      "source_blob_sha": "c05cd6f9d5c481a4c54422498ddc6acf90c613c7",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/sea_mine",
+      "name": "sea_mine",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "sea_mine"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "sea_mine"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/sea_mine.json",
+      "source_blob_sha": "9e9decb164796766ab285cde586ffa068a0d4d1e",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/sea_scooter",
+      "name": "sea_scooter",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "sea_scooter"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "sea_scooter"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/sea_scooter.json",
+      "source_blob_sha": "b35197337e3b54ac66c69fe45dff1810cda0502e",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/seagrass",
+      "name": "seagrass",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "seagrass"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "seagrass"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/seagrass.json",
+      "source_blob_sha": "c68bf74dc4a27c19f135a68dd37edc481030cb1f",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/seahorse",
+      "name": "seahorse",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "seahorse"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "seahorse"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/seahorse.json",
+      "source_blob_sha": "4164041b9380cac5efff6a2496786b047e8fb7ee",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/ship_wheel",
+      "name": "ship_wheel",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "ship_wheel"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "ship_wheel"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/ship_wheel.json",
+      "source_blob_sha": "787f52aacc3101a239f1cfc212bf6e580b9e759a",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/siphonophore",
+      "name": "siphonophore",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "siphonophore"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "siphonophore"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/siphonophore.json",
+      "source_blob_sha": "b0ffca7fbc2a260c9d21c94b3886b74460d32102",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/stairs",
+      "name": "stairs",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "stairs"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "stairs"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/stairs.json",
+      "source_blob_sha": "c1e6e546463bc5c5928b7a1bd60f55371d5cc4a2",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/starfish",
+      "name": "starfish",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "starfish"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "starfish"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/starfish.json",
+      "source_blob_sha": "23749981eb3f27ab3cabbcc8889e9215c91dd53b",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/street_lamp",
+      "name": "street_lamp",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "street_lamp"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "street_lamp"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/street_lamp.json",
+      "source_blob_sha": "eb166ff421168f2b11911ec7da9521e7a6b55280",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/submarine",
+      "name": "submarine",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "submarine"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "submarine"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/submarine.json",
+      "source_blob_sha": "7d1a78ba7b5c704f5e3a66c5102aa982a5ddf8d9",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/submarine_wreck",
+      "name": "submarine_wreck",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "submarine_wreck"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "submarine_wreck"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/submarine_wreck.json",
+      "source_blob_sha": "ae1b399fc4d700a322ceba682465c85edca6f586",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/treasure_chest",
+      "name": "treasure_chest",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "treasure_chest"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "treasure_chest"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/treasure_chest.json",
+      "source_blob_sha": "c82d4716cfc3da6f40d5acfed8ef9c577d81a04f",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/tube_sponge",
+      "name": "tube_sponge",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "tube_sponge"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "tube_sponge"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/tube_sponge.json",
+      "source_blob_sha": "ff94de43da58bac36fe1dbee68879401d0e92504",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/viaduct",
+      "name": "viaduct",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "viaduct"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "viaduct"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/viaduct.json",
+      "source_blob_sha": "53f0483481ab7890503465ab3c3a4659f036ed0e",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/whale_skeleton",
+      "name": "whale_skeleton",
+      "kind": "model",
+      "purpose": [
+        "underwater",
+        "sunken city",
+        "3d",
+        "whale_skeleton"
+      ],
+      "tags": [
+        "3d",
+        "glb",
+        "underwater",
+        "whale_skeleton"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "underwater-sumerek/glb/whale_skeleton.json",
+      "source_blob_sha": "1c3800a78b17e11cb86ca6110083fe538e7a573d",
+      "definition_index": "shared/components/pod-i-nad/models/model-index.json"
+    },
+    {
+      "id": "pod-i-nad/model/original-glb-loader",
+      "name": "Original underwater GLB loader",
+      "kind": "model-loader",
+      "purpose": [
+        "load GLB",
+        "underwater creature",
+        "animation",
+        "model"
+      ],
+      "tags": [
+        "glb",
+        "loader",
+        "model",
+        "threejs"
+      ],
+      "status": "READY",
+      "entry": "../components/pod-i-nad/models/original-glb-loader.mjs",
+      "source": "underwater-sumerek/glb/"
     }
   ]
 }

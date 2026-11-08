@@ -3322,6 +3322,49 @@ function frame() {
   if (!started) { started = 1; $('loader').remove(); toTitle(); if (!store.get('visited', false)) { store.set('visited', true); startGame(0, true); } requestAnimationFrame(() => requestAnimationFrame(() => { if (BR) { try { BR.platform.sendMessage('game_ready'); } catch (e) { } } })); }
 }
 setLoad(1);
+
+/* META BOT — read-only view of the real Broken City simulation. */
+let metaBotWasPlaying = false;
+let metaBotLayoutHash = '';
+const metaBot = Object.freeze({
+  version: 1,
+  info() { return { name: 'Broken City', levels: LEVELS.length }; },
+  state() {
+    const playing = view === 'game' && G.state === 'play';
+    const c = G.cfg;
+    const pos = heroState.pos;
+    // Cache real generated obstacles per level; moving enemies are not a layout.
+    if (playing && !metaBotWasPlaying) {
+      metaBotLayoutHash = JSON.stringify([
+        G.li, c.mode,
+        bridges.map(b => [b.userData.gz, b.userData.gapLen]),
+        stations.map(s => [s.userData.z, s.userData.side]),
+        pits.map(p => [p.position.x, p.position.z]),
+        cracks.map(p => [p.position.x, p.position.z]),
+        truins.filter(r => r.on).map(r => [r.x, r.z])
+      ]);
+    }
+    metaBotWasPlaying = playing;
+    const ending = view === 'game' && (G.state === 'ending' || G.state === 'endwait');
+    return {
+      started: view === 'game' && G.state !== 'title',
+      level: G.li,
+      levelDone: view === 'game' && G.state === 'trans' && Number.isInteger(G.next) && G.next > G.li,
+      gameDone: ending,
+      alive: G.state !== 'defeat',
+      hero: { x: pos.x, y: pos.z },
+      goal: playing && c ? { x: 0, y: c.goal + 5 } : null,
+      enemies: shades.reduce((n, s) => n + Number(s.visible && !s.userData.copy), 0),
+      weapons: playing ? 1 : 0,
+      layoutHash: metaBotLayoutHash,
+      menuOpen: view !== 'game' || G.paused || !!G.storyOpen,
+      cameraYaw: rig.yaw
+    };
+  }
+});
+Object.defineProperty(window, '__META_BOT__', {
+  value: metaBot, writable: false, configurable: false
+});
 frame();
 
 </script>

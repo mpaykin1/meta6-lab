@@ -2,7 +2,7 @@ name: Materialize approved Pod i Nad assets
 on:
   push:
     branches:
-      - lab/pod-i-nad-materialize-png
+      - main
     paths:
       - '.github/workflows/materialize-pod-i-nad.yml'
       - 'scripts/asset-library/extract-pod-i-nad.py'

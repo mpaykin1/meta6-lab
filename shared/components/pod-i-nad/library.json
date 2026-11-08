@@ -1,0 +1,12 @@
+{
+  "id": "pod-i-nad",
+  "registry": "derived-owner-reference",
+  "title": "Под и над — reusable original owner components",
+  "catalog": "shared/asset-library/catalog.json",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "path": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+    "sha256": "91642018b3e589173171340298f72320f747d3b401021a939030f6f922ede5e5"
+  },
+  "notes": "Derived library, not an unchanged licensed source file. Keep out of original-source shared/index.json; searchable via shared/asset-library/catalog.json and MetaShared module loader."
+}

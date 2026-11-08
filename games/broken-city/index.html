@@ -3324,6 +3324,38 @@ function frame() {
 setLoad(1);
 frame();
 
+
+/* META BOT: read-only observation of actual level, hero, and geometry. No gameplay commands. */
+Object.defineProperty(window, '__META_BOT__', {
+  configurable: false, enumerable: true, writable: false,
+  value: Object.freeze({
+    version: 1,
+    info() { return { name: 'Broken City', levels: LEVELS.length }; },
+    state() {
+      const done = G.state === 'ending' || G.state === 'endwait';
+      const transitioning = G.state === 'trans' && G.next > G.li;
+      const pos = heroState.pos, cfg = G.cfg;
+      return {
+        started: view === 'game' && !['title','loading'].includes(G.state),
+        level: G.li,
+        levelDone: transitioning || done,
+        gameDone: done,
+        alive: G.state !== 'defeat',
+        hero: { x: pos.x, y: pos.z },
+        goal: cfg ? { x: 0, y: cfg.goal } : null,
+        enemies: shades.filter(s => s.visible).length,
+        weapons: 0,
+        layoutHash: JSON.stringify({
+          level: G.li, variant: G.variant,
+          paths: paths.map(p => [p.az, p.bz, p.x, p.z]).slice(0, 64),
+          barriers: barriers.map(b => [b.z, b.x]).slice(0, 64),
+          cracks: cracks.map(c => c.userData.z).slice(0, 64)
+        }),
+        menuOpen: !document.getElementById('menu').classList.contains('hidden') || G.paused
+      };
+    }
+  })
+});
 </script>
 </body>
 </html>

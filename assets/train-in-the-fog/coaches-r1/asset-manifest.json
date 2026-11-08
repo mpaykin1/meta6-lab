@@ -1,0 +1,90 @@
+{
+  "standard": "CINEMATIC VOXEL NOIR — R1",
+  "referenceId": "R1",
+  "ownerApprovedSource": "assets/train-in-the-fog/hero-r1/hero_locomotive_R1.glb",
+  "sourceUnmodified": true,
+  "artReview": "NOT_VERIFIED: new coaches require viewer inspection and owner acceptance",
+  "models": [
+    {
+      "id": "15.01",
+      "name": "пассажирский",
+      "file": "coach_15_01_passenger.glb",
+      "bytes": 428140,
+      "triangles": 6484,
+      "windowBaysPerSide": 10,
+      "collision": {
+        "shape": "box",
+        "sizeMetres": [
+          3.35,
+          4.8,
+          13.5
+        ]
+      },
+      "materials": "13 inherited from approved locomotive R1",
+      "embeddedPBRTextures": 6,
+      "textureResolution": "64x64 mobile maps inherited from source R1",
+      "animations": [
+        "4 articulated rotating wheel axles"
+      ],
+      "dynamicLighting": "4 warm KHR_lights_punctual point lights",
+      "baked": "approximate vertex shading",
+      "artReview": "NOT_VERIFIED",
+      "integration": "GLB playable in glTF 2.0 engine; game wiring pending"
+    },
+    {
+      "id": "15.02",
+      "name": "старый пассажирский",
+      "file": "coach_15_02_vintage.glb",
+      "bytes": 441868,
+      "triangles": 6748,
+      "windowBaysPerSide": 8,
+      "collision": {
+        "shape": "box",
+        "sizeMetres": [
+          3.35,
+          4.8,
+          13.5
+        ]
+      },
+      "materials": "13 inherited from approved locomotive R1",
+      "embeddedPBRTextures": 6,
+      "textureResolution": "64x64 mobile maps inherited from source R1",
+      "animations": [
+        "4 articulated rotating wheel axles"
+      ],
+      "dynamicLighting": "4 warm KHR_lights_punctual point lights",
+      "baked": "approximate vertex shading",
+      "artReview": "NOT_VERIFIED",
+      "integration": "GLB playable in glTF 2.0 engine; game wiring pending"
+    },
+    {
+      "id": "15.03",
+      "name": "спальный",
+      "file": "coach_15_03_sleeper.glb",
+      "bytes": 421528,
+      "triangles": 6340,
+      "windowBaysPerSide": 7,
+      "collision": {
+        "shape": "box",
+        "sizeMetres": [
+          3.35,
+          4.8,
+          13.5
+        ]
+      },
+      "materials": "13 inherited from approved locomotive R1",
+      "embeddedPBRTextures": 6,
+      "textureResolution": "64x64 mobile maps inherited from source R1",
+      "animations": [
+        "4 articulated rotating wheel axles"
+      ],
+      "dynamicLighting": "4 warm KHR_lights_punctual point lights",
+      "baked": "approximate vertex shading",
+      "artReview": "NOT_VERIFIED",
+      "integration": "GLB playable in glTF 2.0 engine; game wiring pending"
+    }
+  ],
+  "viewer": "index.html",
+  "format": "glTF 2.0 binary, Y up, front = -Z",
+  "constraints": "Do not modify golden R1. Keep original approved model immutable. Check GLB rendering without light/fog before art approval."
+}

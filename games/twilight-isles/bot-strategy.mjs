@@ -40,9 +40,9 @@ export async function playLevel(ctx,level) {
         escapeSide=-escapeSide;
         noApproach=0;
       } else {
-        // Close to a collectible, use a short pulse to avoid overshooting its pickup radius.
+        // At observed ~2 FPS, 120/300ms pulses can finish before a rendered movement frame.\n        // Use >=600ms input; actual collision and pickup remain game-controlled.
         // Keep the actual joystick action; never modify collectible or player state.
-        const pulseMs=before<1.5?120:before<4?300:900;
+        const pulseMs=before<1.5?600:before<4?700:900;
         await moveWorld(s,wx,wz,pulseMs);
       }
       const afterState=ctx.state();

@@ -1,4 +1,39 @@
-<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>META GAMES · Цепное оружие</title><style>body{margin:0;background:#06131c;color:#d4e9e9;font:16px system-ui;overflow:hidden}canvas{display:block;width:100vw;height:100dvh;touch-action:none}aside{position:absolute;top:14px;left:14px;background:#102c37d9;border:1px solid #497b85;padding:14px;border-radius:12px}a{color:#99e5d6}button{padding:10px;background:#295b68;color:white;border:1px solid #7eb8bd;border-radius:8px}</style><aside><a href="./index.html">← Библиотека</a><p>Цепное оружие · попадания и урон</p><button id="restart">Новые противники</button><p id="info"></p></aside><canvas id="scene"></canvas><script type="module">
-import {createFlailCombat} from '../../shared/components/pod-i-nad/animations/flail-combat.mjs';
-const c=document.querySelector('canvas'),g=c.getContext('2d'),info=document.querySelector('#info');let w=0,h=0,foes=[],impacts=[];const player={x:0,y:0,z:0};let held=true;function reset(){foes=[0,1,2,3,4].map((i)=>({hp:100,alive:true,rad:.4,position:{x:Math.cos(i*Math.PI*2/5)*1.5,y:.8,z:Math.sin(i*Math.PI*2/5)*1.5},velocity:{x:0,z:0}}));impacts=[]}reset();document.querySelector('#restart').onclick=reset;function resize(){const d=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*d;c.height=h*d;g.setTransform(d,0,0,d,0,0)}addEventListener('resize',resize);resize();const combat=createFlailCombat({reach:1.8,damage:22,tick:.3,onImpact(hit){impacts.push({x:hit.position.x,z:hit.position.z,t:performance.now()})}});let prev=0;function frame(ms){const dt=prev?Math.min((ms-prev)/1000,.05):.016;prev=ms;const scale=Math.min(w,h)*.18,cx=w*.5,cy=h*.56;const project=p=>[cx+p.x*scale,cy+p.z*scale];const a=ms*.00025;const out=combat.update(dt,{attack:held,player,aim:{x:Math.cos(a),z:Math.sin(a)},foes});g.fillStyle='#06131c';g.fillRect(0,0,w,h);g.strokeStyle='#244c59';for(let i=-6;i<=6;i++){g.beginPath();g.moveTo(cx+i*scale,0);g.lineTo(cx+i*scale,h);g.moveTo(0,cy+i*scale);g.lineTo(w,cy+i*scale);g.stroke()}for(const foe of foes){const [x,y]=project(foe.position);g.fillStyle=foe.hp?'#d65d73':'#3c5260';g.beginPath();g.arc(x,y,scale*.35,0,7);g.fill();g.fillStyle='#a5d9d5';g.fillRect(x-scale*.35,y-scale*.55,scale*.7*(foe.hp/100),4)}g.fillStyle='#f3d69a';g.beginPath();g.arc(cx,cy,scale*.22,0,7);g.fill();g.strokeStyle='#b9dce4';g.lineWidth=4;g.beginPath();const points=[{x:0,z:0},...out.chain,out.state.ball];points.forEach((p,i)=>{const [x,y]=project(p);if(i===0)g.moveTo(x,y);else g.lineTo(x,y)});g.stroke();const [bx,by]=project(out.state.ball);g.fillStyle='#d9faff';g.beginPath();g.arc(bx,by,scale*.16,0,7);g.fill();impacts=impacts.filter(e=>ms-e.t<300);for(const e of impacts){const [x,y]=project(e);g.strokeStyle='#fff4b0';g.lineWidth=3;g.beginPath();g.arc(x,y,scale*(.1+(ms-e.t)/400),0,7);g.stroke()}info.textContent='Живых противников: '+foes.filter(f=>f.hp>0).length+' / 5';requestAnimationFrame(frame)}requestAnimationFrame(frame);
-</script></html>
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07151d">
+<title>META GAMES — Цепь затонувшего храма</title>
+<style>
+  html,body{margin:0;width:100%;height:100%;background:#07151d;overflow:hidden}
+  body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#d7f6ed}
+  #stage{position:fixed;inset:0;width:100vw;height:100dvh;display:block;touch-action:none;outline:none}
+  #vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 47%,transparent 34%,#010610b0 100%);mix-blend-mode:multiply}
+  #mist{position:fixed;inset:0;pointer-events:none;opacity:.35;background:radial-gradient(ellipse at 20% 90%,#1f61744c,transparent 52%),radial-gradient(ellipse at 90% 20%,#4d3c7555,transparent 58%)}
+  #menu-button{position:fixed;top:max(12px,env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));width:44px;height:44px;color:#b7ede8;background:#071821b0;border:1px solid #3b7c83;border-radius:10px;font-size:23px;z-index:5;cursor:pointer;backdrop-filter:blur(10px)}
+  #menu{position:fixed;top:calc(max(12px,env(safe-area-inset-top)) + 53px);right:max(14px,env(safe-area-inset-right));width:min(290px,calc(100vw - 36px));background:#071923ec;border:1px solid #367886;border-radius:14px;padding:16px;z-index:6;box-shadow:0 18px 65px #0008;backdrop-filter:blur(15px)}
+  [hidden]{display:none!important}
+  #menu p{color:#b2d4d4;font-size:14px;line-height:1.6;margin:5px 0 14px}
+  #menu h1{font-size:17px;letter-spacing:.04em;margin:0 0 12px}
+  #menu button,#menu a{display:block;width:100%;box-sizing:border-box;text-align:center;font:inherit;font-size:14px;color:#d4f2eb;text-decoration:none;background:#153441;border:1px solid #4d7d87;border-radius:9px;padding:10px 12px;margin-top:9px;cursor:pointer}
+  #error{position:fixed;inset:25% 10%;z-index:10;text-align:center;background:#111d28;padding:28px}
+  @media(prefers-reduced-motion:reduce){#mist{opacity:.17}}
+</style>
+</head>
+<body>
+<canvas id="stage" aria-label="3D-сцена с цепным оружием и каменными стражами"></canvas>
+<div id="mist" aria-hidden="true"></div>
+<div id="vignette" aria-hidden="true"></div>
+<button id="menu-button" type="button" aria-label="Открыть меню" aria-controls="menu" aria-expanded="false">☰</button>
+<nav id="menu" hidden>
+  <h1>Цепь затонувшего храма</h1>
+  <p>Удерживайте палец или кнопку мыши на сцене — оружие раскручивается. Перемещайте палец, чтобы менять направление. На ПК работает пробел. Разбейте пять каменных стражей.</p>
+  <button id="restart" type="button">Возродить стражей</button>
+  <button id="audio" type="button">Выключить звук</button>
+  <a href="./index.html">Библиотека компонентов</a>
+</nav>
+<div id="error" role="alert" hidden></div>
+<script type="module" src="./flail-arena.mjs"></script>
+</body>
+</html>

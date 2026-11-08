@@ -19,6 +19,7 @@
     'pod-i-nad-flail-physics':Object.freeze({file:'components/pod-i-nad/animations/flail-physics.mjs',module:true,exports:['createFlailPhysics']}),
     'pod-i-nad-flail-hits':Object.freeze({file:'components/pod-i-nad/animations/flail-hit-detection.mjs',module:true,exports:['createFlailHitDetector']}),
     'pod-i-nad-combat-poses':Object.freeze({file:'components/pod-i-nad/animations/combat-poses.mjs',module:true,exports:['sampleCombatPose']}),
+    'pod-i-nad-original-palette-cycle':Object.freeze({file:'components/pod-i-nad/shaders/atmosphere/original-palette-cycle.mjs',module:true,exports:['createOriginalPaletteCycle','applyOriginalAtmosphere']}),
     'pod-i-nad-original-palettes':Object.freeze({file:'components/pod-i-nad/shaders/atmosphere/original-palettes.mjs',module:true,exports:['originalPalettes','getOriginalPalette','createOriginalPaletteColors']}),
     'pod-i-nad-original-sky':Object.freeze({file:'components/pod-i-nad/shaders/atmosphere/original-sky-material.mjs',module:true,exports:['ORIGINAL_SKY','createOriginalSkyMaterial','createOriginalSky','createOriginalSkyFromPalette']}),
     'pod-i-nad-original-glsl':Object.freeze({file:'components/pod-i-nad/shaders/original-glsl.mjs',module:true,exports:['shaderNames','originalShaderSources','shaderPairs','getOriginalGLSL','getOriginalShaderPair']}),

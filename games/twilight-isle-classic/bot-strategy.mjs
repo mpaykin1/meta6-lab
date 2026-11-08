@@ -13,6 +13,8 @@ export async function start(ctx) {
 
 export async function playLevel(ctx, level) {
   let step = 0;
+  let lastPosition = null;
+  let stalledSteps = 0;
   while (true) {
     const state = ctx.state();
     if (state.gameDone || state.levelDone || state.level > level) return;
@@ -40,7 +42,24 @@ export async function playLevel(ctx, level) {
       // alone does not collect it. Jump with the real input when nearby.
       const distance = Math.hypot(state.goal.x - state.hero.x,
                                   state.goal.y - state.hero.y);
-      if (distance < 1.25) await ctx.jump();
+      // Track actual displacement rather than assuming walkToGoal succeeded.
+      // A voxel lip can leave the hero close to the coin but unable to touch it.
+      const position = {x: state.hero.x, y: state.hero.y};
+      if (lastPosition && Math.hypot(position.x - lastPosition.x,
+                                      position.y - lastPosition.y) < 0.12) {
+        stalledSteps++;
+      } else {
+        stalledSteps = 0;
+      }
+      lastPosition = position;
+      if (distance < 1.25 || stalledSteps >= 3) {
+        await ctx.jump();
+        // Side-step through real controls to avoid repeating the blocked line.
+        if (stalledSteps >= 3) {
+          await ctx.joystick(step % 2 ? -0.7 : 0.7, 0.45, 260);
+          stalledSteps = 0;
+        }
+      }
       // The existing META BOT calibrates joystick/camera direction.
       await ctx.walkToGoal(450);
       if (step % 8 === 7) await ctx.jump();

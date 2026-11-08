@@ -1,0 +1,36 @@
+name: Restore owner Sunken City GLB and atlas assets
+on:
+  push:
+    branches:
+      - lab/owner-graphics-animation-references-20261108
+    paths:
+      - reference-games/owner-2026-11-08/sunken-city/extract-assets.py
+      - .github/workflows/extract-owner-graphics-assets.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Extract original binaries
+        run: python3 reference-games/owner-2026-11-08/sunken-city/extract-assets.py
+      - name: Save original binaries on this sandbox branch
+        run: |
+          set -euo pipefail
+          git add reference-games/owner-2026-11-08/sunken-city/3d
+          git add reference-games/owner-2026-11-08/sunken-city/atlases
+          git add reference-games/owner-2026-11-08/sunken-city/manifest.json
+          git add reference-games/owner-2026-11-08/sunken-city/pack-artifacts.json
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "assets: preserve 114 original GLBs and 12 PNG atlases"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi

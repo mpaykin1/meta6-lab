@@ -1,5 +1,6 @@
 // Approved Pod i Nad sky shader, geometry and uniforms, without invented palette.
 import {getOriginalShaderPair} from '../original-glsl.mjs';
+import {getOriginalPalette} from './original-palettes.mjs';
 export const ORIGINAL_SKY=Object.freeze({
  source:'reference/sumerek-golden/pod-i-nad-68b2ecd3.html',
  geometry:{type:'SphereGeometry',radius:500,widthSegments:32,heightSegments:16},
@@ -42,4 +43,15 @@ export function createOriginalSky(THREE,options={}){
  const mesh=new THREE.Mesh(geometry,component.material);
  mesh.renderOrder=-10;mesh.frustumCulled=false;
  return {...component,mesh,dispose(){geometry.dispose();component.dispose()}};
+}
+
+export function createOriginalSkyFromPalette(THREE,{phase='dusk',...options}={}){
+ const palette=getOriginalPalette(phase);
+ return createOriginalSky(THREE,{
+  top:palette.skyTop,horizon:palette.skyHor,bottom:palette.fog,
+  sunColor:palette.keyCol,night:palette.stars,
+  sunVisibility:palette.sunVis,aurora:palette.aurora,
+  auroraA:palette.auroraA,auroraB:palette.auroraB,
+  ...options
+ });
 }

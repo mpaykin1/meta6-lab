@@ -3372,7 +3372,9 @@ function metaBotGoal(c, h) {
       && r.route[r.route.length - 1][1] < h.z - 0.3).sort((a, b) => b.z - a.z)[0];
     if (ruin && h.z <= ruin.route[0][1] + 6) {
       const point = ruin.route[Math.max(0, Math.min(ruin.route.length - 1, ruin.ri | 0))];
-      return { x: point[0], y: point[1] };
+      // Real route segment metadata: lets the bot approach the stair entrance
+      // on-axis, without ever modifying the game's route progress.
+      return { x: point[0], y: point[1], routeIndex: ruin.ri | 0, jump: !!point[2] };
     }
   } else if (c.mode === 'cradle' && G.cr) {
     const chasm = G.cr.chasms.find(x => x.state !== 'bridge' && x.zFar < h.z);

@@ -6174,6 +6174,69 @@
       "status": "READY",
       "entry": "../components/pod-i-nad/models/original-glb-loader.mjs",
       "source": "underwater-sumerek/glb/"
+    },
+    {
+      "id": "three-worlds/weather/atlas/maple-8dir-8f",
+      "name": "Original Three Worlds maple 2.5D PNG atlas (8 × 8 tiles)",
+      "kind": "texture",
+      "purpose": [
+        "maple leaf",
+        "original sprite atlas",
+        "autumn weather",
+        "2.5D leaf animation",
+        "UV tiles"
+      ],
+      "tags": [
+        "maple",
+        "original",
+        "png",
+        "sprite",
+        "atlas",
+        "weather",
+        "2.5d",
+        "uv",
+        "autumn"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "asset_path": "shared/asset-library/atlases/three-worlds-maple-8dir-8f.png",
+      "entry": "./atlases/maple-uv.mjs",
+      "exports": [
+        "GRID",
+        "tileUV",
+        "loadOriginalMapleTexture",
+        "selectTile"
+      ],
+      "source": "mpaykin1/meta6:three-worlds-game/assets/weather/atlases/2_5d__atlases__maple_8dir_8f.png",
+      "source_origin": {
+        "repository": "mpaykin1/meta6",
+        "commit": "cb6da0ad05447504e06bd7810a007d075c3a10ff",
+        "path": "three-worlds-game/assets/weather/atlases/2_5d__atlases__maple_8dir_8f.png",
+        "git_blob_sha": "5c305f59b049e8ace959a85a9c7495ed2daa893a",
+        "url": "https://github.com/mpaykin1/meta6/blob/cb6da0ad05447504e06bd7810a007d075c3a10ff/three-worlds-game/assets/weather/atlases/2_5d__atlases__maple_8dir_8f.png"
+      },
+      "png": {
+        "width": 512,
+        "height": 512,
+        "colorType": 6,
+        "grid": {
+          "columns": 8,
+          "rows": 8,
+          "tileWidth": 64,
+          "tileHeight": 64,
+          "totalTiles": 64
+        },
+        "grid_mapping": "direction/frame axis not yet confirmed"
+      },
+      "extracted": true,
+      "browser_verified": false,
+      "rights_review": "owner-permitted source; third-party provenance not independently reviewed",
+      "remaining": [
+        "verify PNG loading and UV display in live browser",
+        "verify direction/frame axis in source renderer",
+        "finish third-party rights check"
+      ],
+      "next_step": "Verify published PNG in browser; do not mark READY without successful rendering"
     }
   ]
 }

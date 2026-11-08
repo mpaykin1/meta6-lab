@@ -19,12 +19,17 @@ export async function playLevel(ctx, level) {
     if (state.goal) {
       // Re-evaluate the real goal and obstacles after a short navigation interval.
       await ctx.walkToGoal(450);
+    } else if (ctx.mobile) {
+      // Preserve the previously passing mobile input: chained movement crossed a level boundary.
+      await ctx.key('Space', 100);
+      await ctx.wait(150);
     } else {
-      // Explore with real movement when a level temporarily has no exposed goal.
-      // Alternate short lateral sweeps; do not mutate the game's state or progress.
+      // Desktop-only exploration with real controls; recheck the level between inputs.
       const direction = Math.floor(Date.now() / 1200) % 2 ? 'KeyA' : 'KeyD';
       await ctx.key('KeyW', 180);
+      if (ctx.state().level !== level) return;
       await ctx.key(direction, 120);
+      if (ctx.state().level !== level) return;
       await ctx.key('Space', 80);
       await ctx.wait(150);
     }

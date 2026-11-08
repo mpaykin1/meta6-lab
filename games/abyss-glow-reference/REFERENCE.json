@@ -1,0 +1,69 @@
+{
+  "id": "abyss-glow-reference",
+  "name": "ABYSS GLOW",
+  "role": "graphics-animation-reference",
+  "source": "ABYSS_GLOW_offline(3).html",
+  "source_origin": "User-supplied original file 2026-11-08",
+  "source_sha256": "d968e47997dbd1cf843fdc73fed94e682217e6d5c833a0c8d602ec5b064f94e5",
+  "original_html": "index.html",
+  "original_html_preserved": true,
+  "original_assets_extracted_without_removing_embedded_copies": true,
+  "rendering": {
+    "engine": "bundled Three.js WebGL/WebGL2",
+    "layers": [
+      "underwater depth fog",
+      "midground textured scene",
+      "foreground fish and light-driven particles",
+      "GPU postprocessing"
+    ],
+    "techniques": [
+      "instanced geometry",
+      "GLSL shader materials",
+      "multiple render targets",
+      "depth of field",
+      "ACES color tonemapping"
+    ]
+  },
+  "animation": {
+    "input": "touch/pointer controls",
+    "subject": "swimming fish",
+    "system": "frame-based realtime scene updates"
+  },
+  "assets": [
+    {
+      "path": "assets/abyss_0.png",
+      "size_bytes": 216705,
+      "width": 2048,
+      "height": 512,
+      "sha256": "d06ab9a64125deaa5bd51ebef0d2eb05a933e2aae263992bbbceee43e81d9041",
+      "git_blob_sha": "5a647e5e70b07bdea6f1f88fdd858233dfdcdecb"
+    },
+    {
+      "path": "assets/abyss_0_n.png",
+      "size_bytes": 560452,
+      "width": 2048,
+      "height": 512,
+      "sha256": "0e0bbece838f577fda13c69daa96205a1dac9269dd259d1e1db3a8c8d7cbe49b",
+      "git_blob_sha": "cbb00ddf4cd1f0fc115fcc3a3092a59744fac780"
+    },
+    {
+      "path": "assets/bake_fish.png",
+      "size_bytes": 10343,
+      "width": 448,
+      "height": 448,
+      "sha256": "248efcf1bcb1062275002276ec57900759d5960665dae9a8164447a918115cc8",
+      "git_blob_sha": "a5fdb66e7e78a3cc43038662d369f483619f2e85"
+    },
+    {
+      "path": "assets/bake_fish_n.png",
+      "size_bytes": 66080,
+      "width": 448,
+      "height": 448,
+      "sha256": "552b840421b463e583796b858fd3bb5a1a44cd67100f537fbf2fc59b848e49ed",
+      "git_blob_sha": "920a5c9b23d8247cfd4b86b9508280eeef084109"
+    }
+  ],
+  "license_policy": "Owner explicitly authorized using the supplied game's own graphics and animation as a benchmark; third-party dependency licenses must be respected.",
+  "release_status": "REFERENCE_ONLY",
+  "note": "Preserved original source; extracted PNG files are byte-identical to embedded assets, not replacements."
+}

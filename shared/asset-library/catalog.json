@@ -1563,6 +1563,96 @@
       ],
       "scope": "Mutates foe.hp/velocity; onImpact/onWhoosh/onDefeat hooks; host supplies rendering and audio",
       "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/audio/flail-fx",
+      "name": "Original-style pre-rendered flail combat sound pack",
+      "kind": "audio",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "flail whoosh",
+        "impact sound",
+        "enemy defeat sound",
+        "iOS Safari audio"
+      ],
+      "tags": [
+        "audio",
+        "wav",
+        "impact",
+        "sound",
+        "iPhone"
+      ],
+      "entry": "../components/pod-i-nad/animations/flail-audio.mjs",
+      "export_name": "createCombatAudio",
+      "assets": [
+        "shared/components/pod-i-nad/audio/whoosh.wav",
+        "shared/components/pod-i-nad/audio/impact-a.wav",
+        "shared/components/pod-i-nad/audio/impact-b.wav",
+        "shared/components/pod-i-nad/audio/defeat.wav"
+      ],
+      "dependencies": [
+        "Web Audio API",
+        "first pointer or keyboard gesture"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "scope": "Pre-rendered PCM WAV; requires user gesture to unlock browser playback"
+    },
+    {
+      "id": "pod-i-nad/effects/flail-impact-3d",
+      "name": "GPU-instanced impact sparks and shockwaves",
+      "kind": "effect",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "hit particles",
+        "shockwave",
+        "dynamic flash",
+        "enemy defeat"
+      ],
+      "tags": [
+        "3D",
+        "fx",
+        "particles",
+        "sparks",
+        "impact"
+      ],
+      "entry": "../components/pod-i-nad/animations/flail-impact-fx.mjs",
+      "export_name": "createCombatEffects",
+      "dependencies": [
+        "Three.js r160",
+        "WebGL2"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "scope": "Instanced particles and pooled light flashes with spawn/update/clear/dispose"
+    },
+    {
+      "id": "pod-i-nad/model/combat-characters-3d",
+      "name": "Procedural basalt guardians, hero and spiked flail",
+      "kind": "model",
+      "status": "READY",
+      "usable": true,
+      "purpose": [
+        "3D enemy model",
+        "hero model",
+        "3D flail model",
+        "chain weapon",
+        "procedural prefab"
+      ],
+      "tags": [
+        "3D",
+        "model",
+        "guardian",
+        "flail",
+        "procedural"
+      ],
+      "entry": "../components/pod-i-nad/models/combat-models.mjs",
+      "export_name": "createCombatModels",
+      "dependencies": [
+        "Three.js r160"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "scope": "Procedural geometry; original reference-inspired, not an extracted GLB"
     }
   ]
 }

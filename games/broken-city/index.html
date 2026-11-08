@@ -3329,7 +3329,9 @@ let metaBotLayoutHash = '';
 // Follow the game's authored navigation cues without calling navTarget(), which mutates route progress.
 function metaBotGoal(c, h) {
   if (!c || c.mode === 'runner') return null;
-  const forward = { x: h.x * 0.5, y: Math.max(c.goal + 5, h.z - 10) };
+  // Use the level's actual fixed finish coordinate while no authored waypoint is active.
+  // A goal derived from hero.z stays a constant distance ahead and falsely triggers stuck.
+  const forward = { x: 0, y: c.goal };
   if (c.mode === 'toys') {
     const ruin = truins.filter(r => r.route && r.route.length
       && r.route[r.route.length - 1][1] < h.z - 0.3).sort((a, b) => b.z - a.z)[0];

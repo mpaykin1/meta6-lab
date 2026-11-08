@@ -11,6 +11,17 @@ export async function start(ctx) {
   }
 }
 
+// A 40ms mobile tap / 90ms desktop key can land between WebGL frames at 3 FPS.
+// Hold the game's real control long enough for input sampling; never mutate state.
+async function jumpThroughInput(ctx, state) {
+  const duration = 450;
+  if (ctx.mobile && state.jumpButton) {
+    await ctx.hold(state.jumpButton.x, state.jumpButton.y, duration);
+  } else {
+    await ctx.key('Space', duration);
+  }
+}
+
 export async function playLevel(ctx, level) {
   let step = 0;
   let lastPosition = null;
@@ -65,7 +76,7 @@ export async function playLevel(ctx, level) {
         ((state.stepRise >= 1.5 && distance < 2.5) ||
          (state.coinAbove && distance < 2.5));
       if (distance < 1.25 || stalledSteps >= 3 || climbRequired) {
-        await ctx.jump();
+        await jumpThroughInput(ctx, state);
         // Side-step through real controls to avoid repeating the blocked line.
         if (stalledSteps >= 3) {
           // Rotate the escape heading across attempts rather than alternating
@@ -73,7 +84,7 @@ export async function playLevel(ctx, level) {
           const angle = (escapeAttempt++ % 8) * Math.PI / 4;
           const before = ctx.state().hero;
           await ctx.joystick(Math.cos(angle), Math.sin(angle), 850);
-          await ctx.jump();
+          await jumpThroughInput(ctx, ctx.state());
           const after = ctx.state().hero;
           const moved = Math.hypot(after.x - before.x, after.y - before.y);
           // A blocked escape must not immediately retry the same wall-facing
@@ -102,11 +113,13 @@ export async function playLevel(ctx, level) {
       const stickY = sy * worldX + cy * worldZ;
       const length = Math.hypot(stickX, stickY) || 1;
       await ctx.joystick(stickX / length, stickY / length, 450);
-      if (step % 8 === 7) await ctx.jump();
+      if (step % 8 === 7 && ctx.state().grounded) {
+        await jumpThroughInput(ctx, ctx.state());
+      }
     } else {
       // Search by real movement only when the game has no visible objective.
       await ctx.joystick(Math.cos(step * 0.6), Math.sin(step * 0.6), 350);
-      if (step % 4 === 0) await ctx.jump();
+      if (step % 4 === 0) await jumpThroughInput(ctx, ctx.state());
     }
     step++;
   }

@@ -4,7 +4,7 @@ on:
     - cron: '17,47 * * * *'
   workflow_dispatch:
   push:
-    branches: [main, lab/repair-bot-smoke]
+    branches: [main]
     paths:
       - 'scripts/repair-bot/**'
       - '.github/workflows/meta-repair-bot.yml'
@@ -53,7 +53,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'push' && github.ref_name == 'lab/repair-bot-smoke' && github.ref_name || 'main' }}
+          ref: main
           persist-credentials: true
       - uses: actions/setup-node@v4
         with:
@@ -90,10 +90,16 @@ jobs:
           git checkout -b "$branch"
           git commit -m "fix: deterministic JSON syntax repair"
           git push origin "$branch"
-          if ! gh pr create --base main --head "$branch" \
+          pr_output="$(gh pr create --base main --head "$branch" \
             --title "fix: repair JSON syntax automatically" \
-            --body "Deterministic JSON repair. No automatic merge. If games/** changed, META BOT must pass on this PR."; then
-            echo "::error title=META Repair Bot::Cannot create PR. Check Actions setting allowing GitHub Actions to create pull requests."
-            exit 1
+            --body "Deterministic JSON repair. No automatic merge. If games/** changed, META BOT must pass on this PR." 2>&1)" && {
+            echo "Created repair PR: $pr_output" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          }
+          if [[ "$pr_output" == *"GitHub Actions is not permitted to create or approve pull requests"* ]]; then
+            echo "::warning title=META Repair Bot::PR creation forbidden to GITHUB_TOKEN; branch pushed for scheduled GitHub-app PR bridge."
+            echo "Repair branch $branch awaits PR bridge; no merge performed." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
           fi
-          echo "Created repair PR from $branch" >> "$GITHUB_STEP_SUMMARY"
+          echo "::error title=META Repair Bot::$pr_output"
+          exit 1

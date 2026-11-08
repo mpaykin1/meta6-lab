@@ -76,10 +76,35 @@ export async function playLevel(ctx, level) {
         await ctx.wait(100);
         continue;
       }
-      const dx = target.x - h.x;
-      const dz = tz - h.z;
+      let dx = target.x - h.x;
+      let dz = tz - h.z;
       const distance = Math.hypot(dx, dz);
       const yaw = Number.isFinite(s.cameraYaw) ? s.cameraYaw : 0;
+
+      // The first genuine ruin waypoint is the foot of a narrow staircase
+      // in front of a full-width solid wall. Do not approach diagonally:
+      // first retreat to its entry apron (if the hero overshot it), then
+      // align with the stair X, and only then proceed towards the steps.
+      // This changes input only, never the geometry or actual route.
+      if (mode === 'toys' && s.waypoint?.routeIndex === 0) {
+        if (h.z < tz - 0.4) {
+          dx = 0;
+          dz = tz - h.z + 0.6;
+        } else if (Math.abs(dx) > 0.35) {
+          dz = 0;
+        }
+      }
+
+      // A failed climb can put the hero against the solid face even while
+      // the desired route is correct. Back out through real controls to
+      // regain an approach angle; the game's 20s stuck check stays active.
+      if (mode === 'toys' && physicalStalls >= 3 && s.waypoint?.routeIndex >= 0) {
+        await ctx.joystick(-Math.sin(yaw), Math.cos(yaw), 750);
+        physicalStalls = 0;
+        lastHero = null;
+        steps++;
+        continue;
+      }
 
       // Game updateGame(): fwd=(-sin(yaw),-cos(yaw)),
       // right=(cos(yaw),-sin(yaw)), stick.vy is inverted.

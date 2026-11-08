@@ -12,6 +12,7 @@ export async function start(ctx) {
 }
 export async function playLevel(ctx,level) {
   let iterations=0,lastProgress=-1,stalls=0;
+  let previousGoalDistance=Infinity, noApproach=0, escapeSide=1;
   while (true) {
     const s=ctx.state();
     if (s.gameDone||s.levelDone||s.level>level) return;
@@ -22,7 +23,23 @@ export async function playLevel(ctx,level) {
       await ctx.key('KeyJ',200);
       if (s.hp<0.35) await ctx.jump();
     } else if (s.goal) {
-      await ctx.walkToGoal(450);
+      const before=Math.hypot(s.goal.x-s.hero.x,s.goal.y-s.hero.y);
+      if (noApproach>=4) {
+        // Escape an obstacle with genuine lateral movement before retrying the goal.
+        await ctx.joystick(escapeSide,0,620);
+        await ctx.jump();
+        escapeSide=-escapeSide;
+        noApproach=0;
+      } else {
+        await ctx.walkToGoal(450);
+      }
+      const afterState=ctx.state();
+      const after=afterState.goal && afterState.hero
+        ? Math.hypot(afterState.goal.x-afterState.hero.x,afterState.goal.y-afterState.hero.y)
+        : 0;
+      if (after>=before-0.12 && after>=previousGoalDistance-0.12) noApproach++;
+      else noApproach=0;
+      previousGoalDistance=after;
       // Physical jumps over terrain; never teleport or change victory flags.
       if (iterations%5===4) await ctx.jump();
     } else {

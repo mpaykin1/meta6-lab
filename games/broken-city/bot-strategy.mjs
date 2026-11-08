@@ -129,8 +129,13 @@ export async function playLevel(ctx, level) {
       // leaving the arrow and the bot oscillating around the same step.
       // Keep long runs between buildings; shorten the real input hold
       // near each waypoint. Never alter game state or progress.
+      // Alignment uses a lateral-only vector; the original diagonal distance
+      // is not a safe hold duration and can overshoot the narrow stair entry.
+      const alignedDistance = Math.hypot(dx, dz);
       const holdMs = mode === 'toys'
-        ? Math.max(220, Math.min(950, Math.round(distance * 650)))
+        ? Math.max(120, Math.min(
+            s.waypoint?.routeIndex === 0 && Math.abs(target.x - h.x) > 0.35 ? 250 : 950,
+            Math.round(alignedDistance * 350)))
         : 600;
       await ctx.joystick(ix, -iz, holdMs);
     }

@@ -96,7 +96,7 @@ export async function playLevel(ctx, level) {
 
       // Follow the engine's real route even when its point is temporarily
       // farther from the final lamp. Do not fake a nearer final goal.
-      if (mode === 'toys' && distance < 0.55 && target.jump) {
+      if (mode === 'toys' && target.jump && distance < 2.5) {
         await pressJump(ctx);
       }
       // Toy-scale ruins have narrow walkable steps. A fixed 950 ms

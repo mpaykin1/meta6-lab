@@ -14,6 +14,7 @@ export async function playLevel(ctx, level) {
   let blockedSteps = 0;
   let detourSide = 1;
   let detourAnchor = null;
+  let lateralAttempts = 0;
   while (true) {
     const s = ctx.state();
     if (s.gameDone || s.levelDone || s.level > level) return;
@@ -46,15 +47,22 @@ export async function playLevel(ctx, level) {
     if (mode === 'toys' && (blockedSteps >= 3 || detourAnchor !== null)) {
       // A ruin spans more than one short sidestep. Keep moving sideways
       // until real x displacement reaches the edge, then try forward.
-      if (detourAnchor === null) detourAnchor = h?.x ?? 0;
+      if (detourAnchor === null) { detourAnchor = h?.x ?? 0; lateralAttempts = 0; }
       const lateral = Math.abs((h?.x ?? detourAnchor) - detourAnchor);
-      if (lateral < 5) {
+      if (lateral < 5 && lateralAttempts < 5) {
         await ctx.key(detourSide > 0 ? 'KeyD' : 'KeyA', 700);
+        lateralAttempts++;
+      } else if (lateral < 5) {
+        // Real displacement never reached the edge: reverse instead of looping forever.
+        detourSide = -detourSide;
+        detourAnchor = h?.x ?? 0;
+        lateralAttempts = 0;
       } else {
         await ctx.key('Space', 90);
         await ctx.key('KeyW', 900);
         detourSide = -detourSide;
         detourAnchor = null;
+        lateralAttempts = 0;
       }
       blockedSteps = 0;
     } else if (s.goal) await ctx.walkToGoal(450);

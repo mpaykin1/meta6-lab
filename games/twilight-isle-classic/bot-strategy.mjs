@@ -15,6 +15,7 @@ export async function playLevel(ctx, level) {
   let step = 0;
   let lastPosition = null;
   let stalledSteps = 0;
+  let escapeAttempt = 0;
   while (true) {
     const state = ctx.state();
     if (state.gameDone || state.levelDone || state.level > level) return;
@@ -50,13 +51,18 @@ export async function playLevel(ctx, level) {
         stalledSteps++;
       } else {
         stalledSteps = 0;
+        escapeAttempt = 0;
       }
       lastPosition = position;
       if (distance < 1.25 || stalledSteps >= 3) {
         await ctx.jump();
         // Side-step through real controls to avoid repeating the blocked line.
         if (stalledSteps >= 3) {
-          await ctx.joystick(step % 2 ? -0.7 : 0.7, 0.45, 260);
+          // Rotate the escape heading across attempts rather than alternating
+          // two nearly identical sidesteps at the same blocked voxel lip.
+          const angle = (escapeAttempt++ % 8) * Math.PI / 4;
+          await ctx.joystick(Math.cos(angle), Math.sin(angle), 850);
+          await ctx.jump();
           stalledSteps = 0;
         }
       }

@@ -6950,6 +6950,20 @@ function frame(now) {
   RET.frame(raw);
   ARCH.tick(raw);
 }
+// New cold starts get new, genuine world layouts. Explicit seed inputs remain
+// reproducible for reference scenes and the existing island debug tools.
+function freshIslandSeed() {
+  const key = 'isle.lastSeed';
+  let previous = NaN;
+  try {
+    const value = PG.store.getItem(key);
+    if (value !== null) previous = Number(value);
+  } catch (e) { /* storage may be unavailable */ }
+  let seed = (Math.random() * 0x100000000) >>> 0;
+  if (seed === previous) seed = (seed + 1) >>> 0;
+  try { PG.store.setItem(key, String(seed)); } catch (e) { /* private mode */ }
+  return seed;
+}
 function start(data) {
   if (booted) return;
   booted = true;
@@ -6960,7 +6974,7 @@ function start(data) {
   selectCharacter(readHero());
   emit('boot');
   const biome0 = REG.biomes.has(data.biome) ? data.biome : REG.biomes.has(readBiome()) ? readBiome() : DEFAULT_BIOME;
-  buildWorld(Number.isFinite(data.seed) ? data.seed : DEFAULT_SEED, biome0);
+  buildWorld(Number.isFinite(data.seed) ? data.seed : freshIslandSeed(), biome0);
   resetRun();
   G.state = 'title';
   renderMenu();

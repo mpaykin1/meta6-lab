@@ -176,7 +176,7 @@ for(let i=0;i<5;i++){
 }
 const linkGeo=new THREE.CylinderGeometry(.052,.052,1,6);
 const linkMat=mat(0xa4c4bc,{metal:.86,rough:.22});
-const links=Array.from({length:9},()=>{
+const links=Array.from({length:8},()=>{
  const mesh=new THREE.Mesh(linkGeo,linkMat);scene.add(mesh);return mesh;
 });
 const ballMat=mat(0x9bd8d4,{emissive:0x1e9b99,glow:.7,metal:.88,rough:.22});

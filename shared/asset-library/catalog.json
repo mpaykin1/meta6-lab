@@ -99,27 +99,37 @@
     },
     {
       "id": "pod-i-nad/shader/water",
-      "name": "Original WATER shader (extraction pending)",
+      "name": "Pod i Nad original animated water",
       "kind": "shader",
       "purpose": [
-        "water",
+        "animated water",
         "water shader",
-        "animated ocean"
+        "ocean surface",
+        "voxel water"
       ],
       "tags": [
         "shader",
         "glsl",
         "water"
       ],
-      "status": "SOURCE_ONLY",
+      "status": "READY",
       "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
       "source_symbol": [
         "WATER_VERT",
         "WATER_FRAG"
       ],
       "source_sha256": "91642018b3e589173171340298f72320f747d3b401021a939030f6f922ede5e5",
-      "loader_id": null,
-      "usable": false
+      "usable": true,
+      "entry": "../components/pod-i-nad/shaders/water/water-material.mjs",
+      "exports": [
+        "createWaterMaterial",
+        "composeWaterFragment"
+      ],
+      "dependencies": [
+        "Three.js r160",
+        "original water atlas texture",
+        "voxel heightmap texture"
+      ]
     },
     {
       "id": "pod-i-nad/model/jellyfish_teal",

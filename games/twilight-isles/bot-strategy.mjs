@@ -13,6 +13,13 @@ export async function start(ctx) {
 export async function playLevel(ctx,level) {
   let iterations=0,lastProgress=-1,stalls=0;
   let previousGoalDistance=Infinity, noApproach=0, escapeSide=1;
+  // In this game movement is camera-relative. Convert world X/Z into real
+  // joystick axes directly; probing four directions is too slow on low FPS.
+  const moveWorld = (s, wx, wz, ms) => {
+    const yaw=Number.isFinite(s.cameraYaw)?s.cameraYaw:0;
+    const c=Math.cos(yaw), t=Math.sin(yaw);
+    return ctx.joystick(c*wx-t*wz, t*wx+c*wz, ms);
+  };
   while (true) {
     const s=ctx.state();
     if (s.gameDone||s.levelDone||s.level>level) return;
@@ -24,14 +31,16 @@ export async function playLevel(ctx,level) {
       if (s.hp<0.35) await ctx.jump();
     } else if (s.goal) {
       const before=Math.hypot(s.goal.x-s.hero.x,s.goal.y-s.hero.y);
+      const wx=(s.goal.x-s.hero.x)/Math.max(0.001,before);
+      const wz=(s.goal.y-s.hero.y)/Math.max(0.001,before);
       if (noApproach>=4) {
-        // Escape an obstacle with genuine lateral movement before retrying the goal.
-        await ctx.joystick(escapeSide,0,620);
+        // Navigate around an obstacle by a genuine camera-correct side step.
         await ctx.jump();
+        await moveWorld(s,-wz*escapeSide,wx*escapeSide,900);
         escapeSide=-escapeSide;
         noApproach=0;
       } else {
-        await ctx.walkToGoal(450);
+        await moveWorld(s,wx,wz,900);
       }
       const afterState=ctx.state();
       const after=afterState.goal && afterState.hero

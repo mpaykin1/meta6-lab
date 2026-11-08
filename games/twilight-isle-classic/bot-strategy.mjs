@@ -79,8 +79,19 @@ export async function playLevel(ctx, level) {
           continue;
         }
       }
-      // The existing META BOT calibrates joystick/camera direction.
-      await ctx.walkToGoal(450);
+      // Classic's updatePlayer uses camera-relative axes:
+      // worldX = cos(yaw)*stickX + sin(yaw)*stickY
+      // worldZ = -sin(yaw)*stickX + cos(yaw)*stickY.
+      // Apply the exact inverse with real controls. Short timed calibration
+      // can measure zero movement in low-FPS software-rendered Chromium.
+      const yaw = Number.isFinite(state.cameraYaw) ? state.cameraYaw : 0;
+      const cy = Math.cos(yaw), sy = Math.sin(yaw);
+      const worldX = state.goal.x - state.hero.x;
+      const worldZ = state.goal.y - state.hero.y;
+      const stickX = cy * worldX - sy * worldZ;
+      const stickY = sy * worldX + cy * worldZ;
+      const length = Math.hypot(stickX, stickY) || 1;
+      await ctx.joystick(stickX / length, stickY / length, 450);
       if (step % 8 === 7) await ctx.jump();
     } else {
       // Search by real movement only when the game has no visible objective.

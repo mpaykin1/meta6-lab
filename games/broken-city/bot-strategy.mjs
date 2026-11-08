@@ -2,9 +2,16 @@
 // Never modify game progression, collisions, level completion or timeouts.
 export async function start(ctx) {
   await ctx.wait(2200);
-  if (!ctx.state().started) {
-    await ctx.tap(ctx.viewport.width / 2, ctx.viewport.height / 2);
-    await ctx.wait(800);
+  // "started" becomes true only after the real transition enters play.
+  // At low WebGL frame rates, never begin the level watchdog during loading.
+  let pressedPlay = false;
+  const deadline = Date.now() + 48000;
+  while (!ctx.state().started && Date.now() < deadline) {
+    if (ctx.state().menuOpen && !pressedPlay) {
+      await ctx.tap(ctx.viewport.width / 2, ctx.viewport.height / 2);
+      pressedPlay = true;
+    }
+    await ctx.wait(350);
   }
 }
 

@@ -153,3 +153,11 @@ Source files: [3D game](observer-world-en-v7/index.html) · [historical builder]
 **Строгий принцип:** не называть V4 завершённым объединением двух игр, пока эти пункты не закрыты и не показана работа в живом браузере/на устройстве.
 
 Полный список файлов и испытаний лежит в данной папке. Любому новому чату достаточно начать с этого `SOURCE_INDEX.md`; повторно просить пользователя присылать оригинальные игры нельзя.
+
+
+## Эталон владельца: Пепельный путь — ассет-пак (08.11.2026)
+
+- [Открыть исходный 3D-просмотрщик](https://mpaykin1.github.io/meta6-lab/games/ashen-path-asset-pack/)
+- [Полный исходный HTML](games/ashen-path-asset-pack/index.html) · [сопроводительный Markdown](games/ashen-path-asset-pack/source.md)
+- [Эталон для повторного использования](games/ashen-path-asset-pack/README.md) · [машинная карточка](shared/references/ashen-path-asset-pack.json)
+- SHA-256 HTML: `1bbf2d7f172021c31be9b1520eb5ba9e6a65da3843170f6a2280e743dc5e4ea6`. Пользователь передал файл и прямо назначил его эталоном; текущие игры не заменены.

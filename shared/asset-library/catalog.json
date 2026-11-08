@@ -4757,6 +4757,42 @@
       "loader_id": "pod-i-nad-original-palettes",
       "export_name": "getOriginalPalette",
       "notes": "Exact PALETTES literal; runtime interpolation, biome and event palette blending not yet extracted."
+    },
+    {
+      "id": "pod-i-nad/atmosphere/original-palette-cycle",
+      "name": "Original Pod i Nad day-night and event palette cycle",
+      "kind": "shader",
+      "purpose": [
+        "dynamic sky lighting",
+        "day night cycle",
+        "weather palette",
+        "original fog colors",
+        "original water palette",
+        "sunset transition",
+        "aurora transition",
+        "biome lighting"
+      ],
+      "tags": [
+        "original",
+        "lighting",
+        "palette",
+        "water",
+        "mist",
+        "sky",
+        "threejs"
+      ],
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_reference": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source": "shared/components/pod-i-nad/shaders/atmosphere/original-palette-cycle.mjs",
+      "loader_id": "pod-i-nad-original-palette-cycle",
+      "export_name": "createOriginalPaletteCycle",
+      "dependencies": [
+        "Three.js Color",
+        "original-palettes.mjs",
+        "Original sun azimuth and moon direction supplied by caller"
+      ],
+      "notes": "Original smooth/mixInto phase interpolation, event palette overlay, biome overrides and uniforms mapping. Does not recreate the full original event scheduler."
     }
   ]
 }

@@ -75,8 +75,12 @@ export async function playLevel(ctx, level) {
       const climbRequired = state.grounded &&
         ((state.stepRise >= 1.5 && distance < 2.5) ||
          (state.coinAbove && distance < 2.5));
-      if (distance < 1.25 || stalledSteps >= 3 || climbRequired) {
-        await jumpThroughInput(ctx, state);
+      // Do not jump merely because a floor-level coin is nearby. The real
+      // pickup requires the player's vertical center within 1.15 voxels;
+      // jumping at every close waypoint can repeatedly miss that window.
+      // Jump only for a measured ledge/raised coin or a genuine stall.
+      if (stalledSteps >= 3 || climbRequired) {
+        if (state.grounded) await jumpThroughInput(ctx, state);
         // Side-step through real controls to avoid repeating the blocked line.
         if (stalledSteps >= 3) {
           // Rotate the escape heading across attempts rather than alternating

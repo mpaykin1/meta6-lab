@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "description": "Owner-supplied exact HTML graphical/animation reference sources for META GAMES",
+  "source_policy": "rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+  "games": [
+    {
+      "id": "abyss-glow",
+      "title": "ABYSS GLOW",
+      "source": "games/abyss-glow/index.html",
+      "guide": "games/abyss-glow/README.md",
+      "source_sha256": "d968e47997dbd1cf843fdc73fed94e682217e6d5c833a0c8d602ec5b064f94e5",
+      "engine": "bundled Three.js / WebGL2 / GLSL",
+      "rendering": [
+        "normal-mapped sprite atlas",
+        "GPU instancing",
+        "dynamic fish light",
+        "volumetric depth fog",
+        "bloom blur",
+        "depth-of-field/grain/glitch composite"
+      ],
+      "assets": [
+        {
+          "path": "games/abyss-glow/assets/abyss_0.png",
+          "size": [
+            2048,
+            512
+          ],
+          "kind": "diffuse-atlas"
+        },
+        {
+          "path": "games/abyss-glow/assets/abyss_0_n.png",
+          "size": [
+            2048,
+            512
+          ],
+          "kind": "normal-atlas"
+        },
+        {
+          "path": "games/abyss-glow/assets/bake_fish.png",
+          "size": [
+            448,
+            448
+          ],
+          "kind": "diffuse-bake"
+        },
+        {
+          "path": "games/abyss-glow/assets/bake_fish_n.png",
+          "size": [
+            448,
+            448
+          ],
+          "kind": "normal-bake"
+        }
+      ],
+      "runtime": "self-contained file:// HTML",
+      "third_party": [
+        "Three.js (MIT, notice retained)"
+      ],
+      "owner_reference": true,
+      "owner_pass_for_changes": false
+    },
+    {
+      "id": "asqura-office",
+      "title": "ASQURA Office",
+      "source": "games/asqura-office/index.html",
+      "guide": "games/asqura-office/README.md",
+      "source_sha256": "8b675a4980a797f5688b3a380bb1ce7f31c4ac9feae5268048817b0b4b9f13f4",
+      "engine": "Canvas 2D / procedural pixel 2.5D",
+      "rendering": [
+        "isometric projection",
+        "14x22 chibi animation",
+        "procedural architecture",
+        "depth layering",
+        "vignette and grain",
+        "Web Audio"
+      ],
+      "assets": [],
+      "runtime": "file:// HTML; external Google Fonts optional",
+      "third_party": [
+        "Press Start 2P from Google Fonts"
+      ],
+      "owner_reference": true,
+      "owner_pass_for_changes": false
+    }
+  ]
+}

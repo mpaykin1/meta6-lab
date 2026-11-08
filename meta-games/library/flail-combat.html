@@ -1,39 +1,8 @@
 <!doctype html>
-<html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07151d">
-<title>META GAMES — Цепь затонувшего храма</title>
-<style>
-  html,body{margin:0;width:100%;height:100%;background:#07151d;overflow:hidden}
-  body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#d7f6ed}
-  #stage{position:fixed;inset:0;width:100vw;height:100dvh;display:block;touch-action:none;outline:none}
-  #vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 47%,transparent 34%,#010610b0 100%);mix-blend-mode:multiply}
-  #mist{position:fixed;inset:0;pointer-events:none;opacity:.35;background:radial-gradient(ellipse at 20% 90%,#1f61744c,transparent 52%),radial-gradient(ellipse at 90% 20%,#4d3c7555,transparent 58%)}
-  #menu-button{position:fixed;top:max(12px,env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));width:44px;height:44px;color:#b7ede8;background:#071821b0;border:1px solid #3b7c83;border-radius:10px;font-size:23px;z-index:5;cursor:pointer;backdrop-filter:blur(10px)}
-  #menu{position:fixed;top:calc(max(12px,env(safe-area-inset-top)) + 53px);right:max(14px,env(safe-area-inset-right));width:min(290px,calc(100vw - 36px));background:#071923ec;border:1px solid #367886;border-radius:14px;padding:16px;z-index:6;box-shadow:0 18px 65px #0008;backdrop-filter:blur(15px)}
-  [hidden]{display:none!important}
-  #menu p{color:#b2d4d4;font-size:14px;line-height:1.6;margin:5px 0 14px}
-  #menu h1{font-size:17px;letter-spacing:.04em;margin:0 0 12px}
-  #menu button,#menu a{display:block;width:100%;box-sizing:border-box;text-align:center;font:inherit;font-size:14px;color:#d4f2eb;text-decoration:none;background:#153441;border:1px solid #4d7d87;border-radius:9px;padding:10px 12px;margin-top:9px;cursor:pointer}
-  #error{position:fixed;inset:25% 10%;z-index:10;text-align:center;background:#111d28;padding:28px}
-  @media(prefers-reduced-motion:reduce){#mist{opacity:.17}}
-</style>
-</head>
-<body>
-<canvas id="stage" aria-label="3D-сцена с цепным оружием и каменными стражами"></canvas>
-<div id="mist" aria-hidden="true"></div>
-<div id="vignette" aria-hidden="true"></div>
-<button id="menu-button" type="button" aria-label="Открыть меню" aria-controls="menu" aria-expanded="false">☰</button>
-<nav id="menu" hidden>
-  <h1>Цепь затонувшего храма</h1>
-  <p>Удерживайте палец или кнопку мыши на сцене — оружие раскручивается. Перемещайте палец, чтобы менять направление. На ПК работает пробел. Разбейте пять каменных стражей.</p>
-  <button id="restart" type="button">Возродить стражей</button>
-  <button id="audio" type="button">Выключить звук</button>
-  <a href="./index.html">Библиотека компонентов</a>
-</nav>
-<div id="error" role="alert" hidden></div>
-<script type="module" src="./flail-arena.mjs"></script>
-</body>
-</html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08151b"><title>META GAMES — Эталон цепного оружия</title>
+<style>html,body{margin:0;min-height:100%;background:#08151b;color:#d4eee9;font-family:system-ui,-apple-system,sans-serif}main{max-width:680px;margin:12vh auto;padding:24px}h1{font-size:clamp(24px,5vw,36px);font-weight:600}p{line-height:1.6;color:#a5c7c5}a{color:#9ce4d8}nav{display:flex;flex-direction:column;gap:16px;margin-top:28px}nav a{padding:16px 18px;border:1px solid #47716e;border-radius:12px;background:#112831;text-decoration:none;font-size:17px}</style></head>
+<body><main><h1>Цепное оружие — оригинальный эталон</h1>
+<p>Самодельная демонстрация удалена из публичного просмотра: она не использовала графику оригинальной игры. Здесь доступны только оригинальный эталон и библиотека извлечённых компонентов. Боевые алгоритмы сохранены в библиотеке отдельно.</p>
+<nav><a href="../../reference/sumerek-golden/pod-i-nad-68b2ecd3.html">Открыть оригинальную игру «Под и над»</a><a href="./index.html">Библиотека ассетов и компонентов</a></nav>
+</main></body></html>

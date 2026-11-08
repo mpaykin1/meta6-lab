@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "components": [
+    {
+      "id": "observer-audio",
+      "title": "Оригинальная звуковая система Observer World V7",
+      "kind": "audio",
+      "entry": "audio.js",
+      "exports": [
+        "ObserverKriegerAudio"
+      ],
+      "needs": [
+        "Web Audio API"
+      ],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "twilight-island",
+        "path": "observer-world-en-v7/audio.js",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "9cc25e92294c03f887bf05cf2f0139b70a0c5390"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "veil-terraces"
+      ],
+      "ads": false
+    },
+    {
+      "id": "observer-buildings",
+      "title": "Архитектура 36 типов зданий",
+      "kind": "buildings",
+      "entry": "building-assets.js",
+      "exports": [
+        "ObserverBuildingAssets"
+      ],
+      "needs": [
+        "draw.box",
+        "draw.beam",
+        "draw.roof",
+        "draw.post",
+        "draw.fence",
+        "draw.sign"
+      ],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "twilight-island",
+        "path": "observer-world-en-v7/building-assets.js",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "1eed988695ab64b351c7f5d5d09024756930e280"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "twilight-island",
+        "veil-terraces"
+      ],
+      "dependency_policy": "host-browser-APIs-only"
+    },
+    {
+      "id": "observer-combat",
+      "title": "NPC: бой, отношения и союзники",
+      "kind": "combat",
+      "entry": "combat-relations.js",
+      "exports": [
+        "ObserverCombatRelations"
+      ],
+      "needs": [
+        "ObserverNpcCatalog",
+        "native",
+        "events",
+        "state"
+      ],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "twilight-island",
+        "path": "observer-world-en-v7/combat-relations.js",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "50d9dc30c8fec014ab8787f7bb45377867b08c83"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "twilight-island"
+      ],
+      "dependency_policy": "host-browser-APIs-only"
+    },
+    {
+      "id": "observer-mobile-input",
+      "title": "Мобильное управление и иконки",
+      "kind": "controls",
+      "entry": "mobile-controls.js",
+      "exports": [
+        "ObserverMobileControls"
+      ],
+      "needs": [
+        "window",
+        "native.mobileMove",
+        "native.mobileCombo",
+        "native.mobileSwap",
+        "native.mobileRelease"
+      ],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "twilight-island",
+        "path": "observer-world-en-v7/mobile-controls.js",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "cd2effafb70e7426e07fdb1b51d28cb9d3cf9754"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "twilight-island",
+        "veil-terraces"
+      ],
+      "dependency_policy": "host-browser-APIs-only"
+    },
+    {
+      "id": "observer-npc",
+      "title": "NPC: роли, движение и анимация",
+      "kind": "characters",
+      "entry": "npc-catalog.js",
+      "exports": [
+        "ObserverNpcCatalog"
+      ],
+      "needs": [
+        "native.THREE",
+        "native.heroTex",
+        "native.camera"
+      ],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "twilight-island",
+        "path": "observer-world-en-v7/npc-catalog.js",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "a35521324649b736881427f7521f511edef40637"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "twilight-island"
+      ],
+      "dependency_policy": "host-browser-APIs-only"
+    },
+    {
+      "id": "observer-story",
+      "title": "История и последствия событий",
+      "kind": "story",
+      "entry": "story-system.js",
+      "exports": [
+        "ObserverStorySystem"
+      ],
+      "needs": [
+        "window"
+      ],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "twilight-island",
+        "path": "observer-world-en-v7/story-system.js",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "ad99722a173575915184cdc549f7e47d8beb03f6"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "twilight-island",
+        "veil-terraces"
+      ],
+      "dependency_policy": "host-browser-APIs-only"
+    },
+    {
+      "id": "three-worlds-combat-facing",
+      "title": "Three Worlds combat target selection and angular inertia",
+      "kind": "combat",
+      "entry": "combat-facing.js",
+      "exports": [
+        "chooseCombatTarget",
+        "turnWeaponToward",
+        "turnHeroToward",
+        "angleToTarget"
+      ],
+      "needs": [],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "three-worlds",
+        "path": "three-worlds-game/combat-facing.mjs",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "0515d87cc43a99f8906d62d52dc21114528c2c60"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "used_by": [
+        "veil-terraces"
+      ],
+      "ads": false
+    },
+    {
+      "id": "three-worlds-island-weather",
+      "title": "Three Worlds original GPU weather palettes",
+      "kind": "weather",
+      "entry": "island-weather.js",
+      "exports": [
+        "createIslandWeatherCatalog"
+      ],
+      "needs": [],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "three-worlds",
+        "path": "three-worlds-game/island-weather.mjs",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "d05a1ea97e999b6d9bbc1d5724b3d3bdd2317355"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "veil-terraces"
+      ],
+      "ads": false
+    },
+    {
+      "id": "three-worlds-rift-guard",
+      "title": "Three Worlds timed rift input guard",
+      "kind": "input",
+      "entry": "rift-input-guard.js",
+      "exports": [
+        "createRiftInputGuard"
+      ],
+      "needs": [],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "three-worlds",
+        "path": "three-worlds-game/rift-input-guard.mjs",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "1c00489127be3d2fb8b291e75548a114cc32ba9f"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "veil-terraces"
+      ],
+      "ads": false
+    },
+    {
+      "id": "three-worlds-weather",
+      "title": "Three Worlds deterministic weather event",
+      "kind": "weather",
+      "entry": "weather-cycle.js",
+      "exports": [
+        "worldWeatherAt",
+        "rainEventAt"
+      ],
+      "needs": [],
+      "source": {
+        "repository": "mpaykin1/meta6",
+        "game": "three-worlds",
+        "path": "three-worlds-game/weather-cycle.mjs",
+        "commit": "ea74a313bb24eb25575f8021e218083c987bc280",
+        "git_blob_sha": "f8e008de0c98f8c3de5439fef966b6205dadd5c4"
+      },
+      "license": "LicenseRef-Owner-Grant-META-GAMES-2026-11-06",
+      "license_evidence": "https://github.com/mpaykin1/meta6/blob/ea74a313bb24eb25575f8021e218083c987bc280/rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+      "used_by": [
+        "veil-terraces"
+      ],
+      "ads": false
+    }
+  ]
+}

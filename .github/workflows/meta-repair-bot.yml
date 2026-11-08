@@ -3,19 +3,53 @@ on:
   schedule:
     - cron: '17,47 * * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/repair-bot/**'
+      - '.github/workflows/meta-repair-bot.yml'
   pull_request:
     paths:
       - 'scripts/repair-bot/**'
       - '.github/workflows/meta-repair-bot.yml'
+
 permissions:
-  contents: write
-  pull-requests: write
-concurrency:
-  group: meta-repair-bot
-  cancel-in-progress: false
+  contents: read
+
 jobs:
+  validate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate bot source syntax
+        run: |
+          node --check scripts/repair-bot/repair-json.mjs
+          node --check scripts/repair-bot/selftest.mjs
+          node --check scripts/repair-bot/check-js.mjs
+      - name: Exercise isolated repair scenario
+        run: node scripts/repair-bot/selftest.mjs
+      - name: Check repair bot JavaScript
+        run: node scripts/repair-bot/check-js.mjs
+
   repair:
-    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+    concurrency:
+      group: meta-repair-bot-writer
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,37 +58,42 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate repair bot syntax
-        run: node --check scripts/repair-bot/repair-json.mjs
-      - name: Exercise repair bot on controlled fixture
+      - name: Verify repair code before editing
         run: |
-          mkdir -p .repair-fixture
-          printf '{"items": [1,2,], "ok": true,}\n' > .repair-fixture/sample.json
-          git add -N .repair-fixture/sample.json
-          node scripts/repair-bot/repair-json.mjs
-          node -e "const fs=require('fs'); const p='.repair-fixture/sample.json'; JSON.parse(fs.readFileSync(p,'utf8'))"
-          rm -rf .repair-fixture
-      - name: Repair deterministic JSON errors
-        id: repair
+          node scripts/repair-bot/check-js.mjs
+          node scripts/repair-bot/selftest.mjs
+      - name: Repair tracked JSON
         run: |
-          node scripts/repair-bot/repair-json.mjs
-      - name: Open repair PR only for actual changes
-        if: success() && github.event_name != 'pull_request'
+          set -euo pipefail
+          if ! node scripts/repair-bot/repair-json.mjs; then
+            echo "::error title=META Repair Bot::Some JSON files remain invalid; no changes published"
+            exit 1
+          fi
+      - name: Create PR only if actual JSON files changed
         env:
           GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
-          if git diff --quiet; then
-            echo "No repair required" >> "$GITHUB_STEP_SUMMARY"
+          set -euo pipefail
+          if git diff --quiet -- '*.json'; then
+            echo "No JSON repairs required" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git add -u -- '*.json'
+          if git diff --cached --quiet; then
+            echo "No staged JSON repairs" >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           branch="lab/repair-bot-json-auto-${{ github.run_id }}"
-          git checkout -B "$branch"
-          git add -u -- '*.json'
-          git commit -m "fix: repair invalid JSON syntax"
+          git checkout -b "$branch"
+          git commit -m "fix: deterministic JSON syntax repair"
           git push origin "$branch"
-          if ! gh pr list --head "$branch" --base main --state open --json number --jq '.[0].number' | grep -q '[0-9]'; then
-            gh pr create --base main --head "$branch" --title "fix: automatic JSON repair" --body "Deterministic UTF-8 BOM and trailing-comma repairs only. Review and CI required before merge."
+          if ! gh pr create --base main --head "$branch" \
+            --title "fix: repair JSON syntax automatically" \
+            --body "Deterministic JSON repair. No automatic merge. If games/** changed, META BOT must pass on this PR."; then
+            echo "::error title=META Repair Bot::Cannot create PR. Check Actions setting allowing GitHub Actions to create pull requests."
+            exit 1
           fi
-          echo "Repair PR prepared" >> "$GITHUB_STEP_SUMMARY"
+          echo "Created repair PR from $branch" >> "$GITHUB_STEP_SUMMARY"

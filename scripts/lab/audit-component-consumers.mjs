@@ -25,7 +25,7 @@ const gameRoots = game => [resolve(root, 'games', game), resolve(root, game)];
 // Preserve offsets of JS code while hiding comments and string/template literals.
 // This prevents a fake import in a comment or text string becoming evidence.
 function codeMask(source) {
-  const out = [...source];
+  const out = source.split('');
   const hide = at => { if (out[at] !== '\n' && out[at] !== '\r') out[at] = ' '; };
   let i = 0;
   while (i < source.length) {

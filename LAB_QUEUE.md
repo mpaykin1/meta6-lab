@@ -135,3 +135,13 @@
 - Михаил: —
 - Claude: —
 
+
+
+### lab/ashen-path-asset-pack-original-1108 — эталон «Пепельный путь»
+- Польза: доступен оригинальный интерактивный воксельный ассет-пак, его анимации, модели и исходный код.
+- Открыть: https://mpaykin1.github.io/meta6-lab/games/ashen-path-asset-pack/
+- Ветка: `lab/ashen-path-asset-pack-original-1108`.
+- Исходники: `games/ashen-path-asset-pack/index.html`, `source.md`, `README.md`.
+- Каталог: `shared/references/ashen-path-asset-pack.json`.
+- Статус: ИСХОДНИК В БИБЛИОТЕКЕ; мобильная проверка не заявлена.
+- Михаил: передан владельцем как эталон 08.11.2026.

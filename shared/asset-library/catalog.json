@@ -1253,6 +1253,258 @@
         "Three.js TextureLoader"
       ],
       "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/animation/punch",
+      "name": "Original punch combat animation",
+      "kind": "animation",
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "purpose": [
+        "melee combat",
+        "weapon animation",
+        "punch"
+      ],
+      "tags": [
+        "combat",
+        "pose",
+        "original",
+        "punch"
+      ],
+      "entry": "../components/pod-i-nad/animations/original-combat-anims.mjs",
+      "export_name": "findAnimationSource",
+      "source_symbol": [
+        "punch"
+      ],
+      "dependencies": [
+        "original combat helpers",
+        "animation runtime"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/animation/jab",
+      "name": "Original jab combat animation",
+      "kind": "animation",
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "purpose": [
+        "melee combat",
+        "weapon animation",
+        "jab"
+      ],
+      "tags": [
+        "combat",
+        "pose",
+        "original",
+        "jab"
+      ],
+      "entry": "../components/pod-i-nad/animations/original-combat-anims.mjs",
+      "export_name": "findAnimationSource",
+      "source_symbol": [
+        "jab"
+      ],
+      "dependencies": [
+        "original combat helpers",
+        "animation runtime"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/animation/stab",
+      "name": "Original stab combat animation",
+      "kind": "animation",
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "purpose": [
+        "melee combat",
+        "weapon animation",
+        "stab"
+      ],
+      "tags": [
+        "combat",
+        "pose",
+        "original",
+        "stab"
+      ],
+      "entry": "../components/pod-i-nad/animations/original-combat-anims.mjs",
+      "export_name": "findAnimationSource",
+      "source_symbol": [
+        "stab"
+      ],
+      "dependencies": [
+        "original combat helpers",
+        "animation runtime"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/animation/slash",
+      "name": "Original slash combat animation",
+      "kind": "animation",
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "purpose": [
+        "melee combat",
+        "weapon animation",
+        "slash"
+      ],
+      "tags": [
+        "combat",
+        "pose",
+        "original",
+        "slash"
+      ],
+      "entry": "../components/pod-i-nad/animations/original-combat-anims.mjs",
+      "export_name": "findAnimationSource",
+      "source_symbol": [
+        "slash"
+      ],
+      "dependencies": [
+        "original combat helpers",
+        "animation runtime"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/animation/chop",
+      "name": "Original chop combat animation",
+      "kind": "animation",
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "purpose": [
+        "melee combat",
+        "weapon animation",
+        "chop"
+      ],
+      "tags": [
+        "combat",
+        "pose",
+        "original",
+        "chop"
+      ],
+      "entry": "../components/pod-i-nad/animations/original-combat-anims.mjs",
+      "export_name": "findAnimationSource",
+      "source_symbol": [
+        "chop"
+      ],
+      "dependencies": [
+        "original combat helpers",
+        "animation runtime"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/animation/slam",
+      "name": "Original slam combat animation",
+      "kind": "animation",
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "purpose": [
+        "melee combat",
+        "weapon animation",
+        "slam"
+      ],
+      "tags": [
+        "combat",
+        "pose",
+        "original",
+        "slam"
+      ],
+      "entry": "../components/pod-i-nad/animations/original-combat-anims.mjs",
+      "export_name": "findAnimationSource",
+      "source_symbol": [
+        "slam"
+      ],
+      "dependencies": [
+        "original combat helpers",
+        "animation runtime"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/animation/thrust",
+      "name": "Original thrust combat animation",
+      "kind": "animation",
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "purpose": [
+        "melee combat",
+        "weapon animation",
+        "thrust"
+      ],
+      "tags": [
+        "combat",
+        "pose",
+        "original",
+        "thrust"
+      ],
+      "entry": "../components/pod-i-nad/animations/original-combat-anims.mjs",
+      "export_name": "findAnimationSource",
+      "source_symbol": [
+        "thrust"
+      ],
+      "dependencies": [
+        "original combat helpers",
+        "animation runtime"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/animation/spin",
+      "name": "Original spin combat animation",
+      "kind": "animation",
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "purpose": [
+        "melee combat",
+        "weapon animation",
+        "spin"
+      ],
+      "tags": [
+        "combat",
+        "pose",
+        "original",
+        "spin"
+      ],
+      "entry": "../components/pod-i-nad/animations/original-combat-anims.mjs",
+      "export_name": "findAnimationSource",
+      "source_symbol": [
+        "spin"
+      ],
+      "dependencies": [
+        "original combat helpers",
+        "animation runtime"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+    },
+    {
+      "id": "pod-i-nad/animation/flail",
+      "name": "Original flail combat animation",
+      "kind": "animation",
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "purpose": [
+        "melee combat",
+        "weapon animation",
+        "flail"
+      ],
+      "tags": [
+        "combat",
+        "pose",
+        "original",
+        "flail"
+      ],
+      "entry": "../components/pod-i-nad/animations/original-combat-anims.mjs",
+      "export_name": "findAnimationSource",
+      "source_symbol": [
+        "flail"
+      ],
+      "dependencies": [
+        "original combat helpers",
+        "animation runtime"
+      ],
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
     }
   ]
 }

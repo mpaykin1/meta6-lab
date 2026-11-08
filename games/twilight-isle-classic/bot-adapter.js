@@ -186,6 +186,20 @@
           }
         }
       }
+      // The visible mobile jump control must be held through at least one
+      // render frame on software WebGL (~3 FPS); a 40ms tap can be missed.
+      // Report only screen coordinates, never invoke a game callback.
+      let jumpButton = null;
+      if (state === 'play') {
+        const button = document.getElementById('btnJump');
+        if (button && !button.hidden) {
+          const rect = button.getBoundingClientRect();
+          if (rect.width > 0 && rect.height > 0) {
+            jumpButton = { x: rect.left + rect.width / 2,
+                           y: rect.top + rect.height / 2 };
+          }
+        }
+      }
       return {
         started: state !== 'title' && state !== 'loading',
         level: 0,
@@ -203,6 +217,7 @@
         cameraYaw: isle?.rig?.yaw ?? 0,
         stepRise,
         coinAbove,
+        jumpButton,
         grounded: !!player?.onGround,
         nearestEnemy,
         reviveButton

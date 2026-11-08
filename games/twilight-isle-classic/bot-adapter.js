@@ -147,6 +147,19 @@
         ? { x: objective.x, y: objective.z }
         : null;
       const goal = game?.all ? directGoal : routedGoal(isle?.world, hero, directGoal);
+      // The accepted game's auto-step climbs only one voxel (tryStep).
+      // A two-voxel rise requires an actual jump while approaching the next cell.
+      const terrain = isle?.world?.stand;
+      const width = Math.round(Math.sqrt(terrain?.length ?? 0));
+      const hx = Math.floor(hero.x), hz = Math.floor(hero.y);
+      const gx = Math.floor(goal?.x ?? -1), gz = Math.floor(goal?.y ?? -1);
+      const inGrid = (x, z) => x >= 0 && z >= 0 && x < width && z < width;
+      const stepRise = terrain && inGrid(hx, hz) && inGrid(gx, gz)
+        ? Math.max(0, terrain[gx + gz * width] - terrain[hx + hz * width])
+        : 0;
+      const coinAbove = !game?.all && trackedCoin?.alive &&
+        Math.hypot(trackedCoin.x - hero.x, trackedCoin.z - hero.y) < 2.5 &&
+        trackedCoin.y - (pos?.y ?? 0) > 1.4;
       const total = Math.max(1, game?.total ?? 1);
       const collected = Math.max(0, game?.collected ?? 0);
       // Only observed coin pickups and actual warden health contribute.
@@ -188,6 +201,9 @@
         progress: won ? 1 : Math.min(0.99, 0.8 * coinFraction + 0.19 * bossFraction),
         hp: player?.maxHp > 0 ? player.hp / player.maxHp : 1,
         cameraYaw: isle?.rig?.yaw ?? 0,
+        stepRise,
+        coinAbove,
+        grounded: !!player?.onGround,
         nearestEnemy,
         reviveButton
       };

@@ -152,6 +152,847 @@
       "asset_path": null,
       "loader_id": null,
       "usable": false
+    },
+    {
+      "id": "pod-i-nad/glsl/sky-vert",
+      "name": "Original SKY_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "sky vert",
+        "shader source",
+        "sky"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "sky"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "SKY_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/sky-frag",
+      "name": "Original SKY_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "sky frag",
+        "shader source",
+        "sky"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "sky"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "SKY_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/pick-vert",
+      "name": "Original PICK_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "pick vert",
+        "shader source",
+        "pick"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "pick"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "PICK_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/pick-frag",
+      "name": "Original PICK_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "pick frag",
+        "shader source",
+        "pick"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "pick"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "PICK_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/halo-frag",
+      "name": "Original HALO_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "halo frag",
+        "shader source",
+        "halo"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "halo"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "HALO_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/beam-frag",
+      "name": "Original BEAM_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "beam frag",
+        "shader source",
+        "beam"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "beam"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "BEAM_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/shade-vert",
+      "name": "Original SHADE_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "shade vert",
+        "shader source",
+        "shade"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "shade"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "SHADE_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/shade-frag",
+      "name": "Original SHADE_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "shade frag",
+        "shader source",
+        "shade"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "shade"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "SHADE_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/aura-frag",
+      "name": "Original AURA_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "aura frag",
+        "shader source",
+        "aura"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "aura"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "AURA_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/part-vert",
+      "name": "Original PART_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "part vert",
+        "shader source",
+        "part"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "part"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "PART_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/part-frag",
+      "name": "Original PART_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "part frag",
+        "shader source",
+        "part"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "part"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "PART_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/fly-vert",
+      "name": "Original FLY_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "fly vert",
+        "shader source",
+        "fly"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "fly"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "FLY_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/fly-frag",
+      "name": "Original FLY_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "fly frag",
+        "shader source",
+        "fly"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "fly"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "FLY_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/flame-vert",
+      "name": "Original FLAME_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "flame vert",
+        "shader source",
+        "flame"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "flame"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "FLAME_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/flame-frag",
+      "name": "Original FLAME_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "flame frag",
+        "shader source",
+        "flame"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "flame"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "FLAME_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/ring-vert",
+      "name": "Original RING_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "ring vert",
+        "shader source",
+        "ring"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "ring"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "RING_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/ring-frag",
+      "name": "Original RING_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "ring frag",
+        "shader source",
+        "ring"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "ring"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "RING_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/lbeam-vert",
+      "name": "Original LBEAM_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "lbeam vert",
+        "shader source",
+        "lbeam"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "lbeam"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "LBEAM_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/lbeam-frag",
+      "name": "Original LBEAM_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "lbeam frag",
+        "shader source",
+        "lbeam"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "lbeam"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "LBEAM_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/uv-vert",
+      "name": "Original UV_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "uv vert",
+        "shader source",
+        "uv"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "uv"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "UV_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/shadow-frag",
+      "name": "Original SHADOW_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "shadow frag",
+        "shader source",
+        "shadow"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "shadow"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "SHADOW_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/sprite-vert",
+      "name": "Original SPRITE_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "sprite vert",
+        "shader source",
+        "sprite"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "sprite"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "SPRITE_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/sprite-frag",
+      "name": "Original SPRITE_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "sprite frag",
+        "shader source",
+        "sprite"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "sprite"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "SPRITE_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/rib-vert",
+      "name": "Original RIB_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "rib vert",
+        "shader source",
+        "rib"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "rib"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "RIB_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/rib-frag",
+      "name": "Original RIB_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "rib frag",
+        "shader source",
+        "rib"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "rib"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "RIB_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/npc-vert",
+      "name": "Original NPC_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "npc vert",
+        "shader source",
+        "npc"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "npc"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "NPC_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/npc-frag",
+      "name": "Original NPC_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "npc frag",
+        "shader source",
+        "npc"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "npc"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "NPC_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/precip-vert",
+      "name": "Original PRECIP_VERT GLSL source",
+      "kind": "shader",
+      "category": "vertex",
+      "purpose": [
+        "precip vert",
+        "shader source",
+        "precip"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "vertex",
+        "precip"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "PRECIP_VERT"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
+    },
+    {
+      "id": "pod-i-nad/glsl/precip-frag",
+      "name": "Original PRECIP_FRAG GLSL source",
+      "kind": "shader",
+      "category": "fragment",
+      "purpose": [
+        "precip frag",
+        "shader source",
+        "precip"
+      ],
+      "tags": [
+        "glsl",
+        "shader",
+        "fragment",
+        "precip"
+      ],
+      "status": "SOURCE_ONLY",
+      "usable": false,
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "PRECIP_FRAG"
+      ],
+      "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+      "entry": "../components/pod-i-nad/shaders/original-shaders.mjs",
+      "export_name": "getSourceShader",
+      "dependencies": [
+        "original game uniforms and shader composition"
+      ]
     }
   ]
 }

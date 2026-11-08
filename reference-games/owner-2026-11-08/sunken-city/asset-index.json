@@ -50,7 +50,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/glow_fish_teal.glb"
     },
     {
       "id": "glow_fish_violet",
@@ -77,7 +78,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/glow_fish_violet.glb"
     },
     {
       "id": "glow_fish_amber",
@@ -104,7 +106,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/glow_fish_amber.glb"
     },
     {
       "id": "glow_fish_emerald",
@@ -131,7 +134,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/glow_fish_emerald.glb"
     },
     {
       "id": "lantern_fish",
@@ -158,7 +162,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/lantern_fish.glb"
     },
     {
       "id": "angler",
@@ -202,7 +207,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/angler.glb"
     },
     {
       "id": "eel",
@@ -229,7 +235,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/eel.glb"
     },
     {
       "id": "jellyfish_violet",
@@ -256,7 +263,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/jellyfish_violet.glb"
     },
     {
       "id": "jellyfish_teal",
@@ -283,7 +291,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/jellyfish_teal.glb"
     },
     {
       "id": "manta",
@@ -310,7 +319,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/manta.glb"
     },
     {
       "id": "seahorse",
@@ -337,7 +347,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/seahorse.glb"
     },
     {
       "id": "nautilus",
@@ -364,7 +375,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/nautilus.glb"
     },
     {
       "id": "hermit_crab",
@@ -391,7 +403,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/hermit_crab.glb"
     },
     {
       "id": "kraken_tentacle",
@@ -418,7 +431,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/kraken_tentacle.glb"
     },
     {
       "id": "siphonophore",
@@ -445,7 +459,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/siphonophore.glb"
     },
     {
       "id": "kelp_tall",
@@ -470,7 +485,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/kelp_tall.glb"
     },
     {
       "id": "kelp_mid",
@@ -495,7 +511,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/kelp_mid.glb"
     },
     {
       "id": "kelp_short",
@@ -520,7 +537,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/kelp_short.glb"
     },
     {
       "id": "seagrass",
@@ -545,7 +563,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/seagrass.glb"
     },
     {
       "id": "moss_clump_teal",
@@ -572,7 +591,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/moss_clump_teal.glb"
     },
     {
       "id": "moss_clump_violet",
@@ -599,7 +619,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/moss_clump_violet.glb"
     },
     {
       "id": "moss_clump_amber",
@@ -626,7 +647,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/moss_clump_amber.glb"
     },
     {
       "id": "moss_clump_crimson",
@@ -653,7 +675,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/moss_clump_crimson.glb"
     },
     {
       "id": "moss_clump_emerald",
@@ -680,7 +703,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/moss_clump_emerald.glb"
     },
     {
       "id": "moss_clump_azure",
@@ -707,7 +731,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/moss_clump_azure.glb"
     },
     {
       "id": "coral_branch_pink",
@@ -734,7 +759,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/coral_branch_pink.glb"
     },
     {
       "id": "coral_branch_orange",
@@ -761,7 +787,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/coral_branch_orange.glb"
     },
     {
       "id": "coral_branch_violet",
@@ -788,7 +815,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/coral_branch_violet.glb"
     },
     {
       "id": "coral_brain",
@@ -797,7 +825,8 @@
       "description": "Полусфера с извилистыми бороздами.",
       "voxels": 1288,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/coral_brain.glb"
     },
     {
       "id": "tube_sponge",
@@ -824,7 +853,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/tube_sponge.glb"
     },
     {
       "id": "anemone",
@@ -851,7 +881,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/anemone.glb"
     },
     {
       "id": "sea_fan",
@@ -878,7 +909,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/sea_fan.glb"
     },
     {
       "id": "arch",
@@ -887,7 +919,8 @@
       "description": "Портал с колоннами, архивольтом и щипцом; мох на карнизах.",
       "voxels": 51639,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/arch.glb"
     },
     {
       "id": "column",
@@ -896,7 +929,8 @@
       "description": "Колонна с базой и капителью.",
       "voxels": 11992,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/column.glb"
     },
     {
       "id": "column_broken",
@@ -905,7 +939,8 @@
       "description": "Обломок с упавшим барабаном.",
       "voxels": 5671,
       "parts": 2,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/column_broken.glb"
     },
     {
       "id": "viaduct",
@@ -914,7 +949,8 @@
       "description": "Две стрельчатые арки на трёх опорах, аркада парапета, фонари; кладка в мхе.",
       "voxels": 184444,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/viaduct.glb"
     },
     {
       "id": "bridge",
@@ -923,7 +959,8 @@
       "description": "Горбатый мост, балюстрада с четырёхлистниками, фонари на устоях.",
       "voxels": 42091,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/bridge.glb"
     },
     {
       "id": "bridge_broken",
@@ -932,7 +969,8 @@
       "description": "Пролёт обрушился, края осыпаются.",
       "voxels": 36886,
       "parts": 2,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/bridge_broken.glb"
     },
     {
       "id": "cathedral_tower",
@@ -941,7 +979,8 @@
       "description": "Башня с контрфорсами, стрельчатыми витражами, розой, звонницей и шпилем.",
       "voxels": 518995,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/cathedral_tower.glb"
     },
     {
       "id": "lancet_window",
@@ -950,7 +989,8 @@
       "description": "Двойное окно с трилистником, свинцовые переплёты.",
       "voxels": 11399,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/lancet_window.glb"
     },
     {
       "id": "stairs",
@@ -959,7 +999,8 @@
       "description": "Широкие ступени собора, выщербленные и в мхе.",
       "voxels": 35211,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/stairs.glb"
     },
     {
       "id": "gargoyle",
@@ -968,7 +1009,8 @@
       "description": "Каменная горгулья на консоли: крылья сложены, глаза тлеют.",
       "voxels": 1474,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/gargoyle.glb"
     },
     {
       "id": "angel_statue",
@@ -995,7 +1037,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/angel_statue.glb"
     },
     {
       "id": "street_lamp",
@@ -1022,7 +1065,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/street_lamp.glb"
     },
     {
       "id": "cathedral_bell",
@@ -1047,7 +1091,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/cathedral_bell.glb"
     },
     {
       "id": "iron_gate",
@@ -1056,7 +1101,8 @@
       "description": "Стрельчатые ворота с копьями прутьев, ржавчина и мох.",
       "voxels": 3272,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/iron_gate.glb"
     },
     {
       "id": "dome_section",
@@ -1065,7 +1111,8 @@
       "description": "Четверть стеклянного купола: латунные рёбра, слабое сияние стекла.",
       "voxels": 9548,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/dome_section.glb"
     },
     {
       "id": "galleon",
@@ -1074,7 +1121,8 @@
       "description": "Корпус лёг на борт: пробоина, сломанные мачты, рваный парус, медь ниже ватерлинии.",
       "voxels": 38351,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/galleon.glb"
     },
     {
       "id": "submarine_wreck",
@@ -1083,7 +1131,8 @@
       "description": "Ржавый корпус, рубка, перископ, гнутый винт, слабый свет в иллюминаторах.",
       "voxels": 69773,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/submarine_wreck.glb"
     },
     {
       "id": "anchor",
@@ -1092,7 +1141,8 @@
       "description": "Адмиралтейский якорь, ржавчина, цепь уходит вверх.",
       "voxels": 1252,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/anchor.glb"
     },
     {
       "id": "treasure_chest",
@@ -1118,7 +1168,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/treasure_chest.glb"
     },
     {
       "id": "barrel",
@@ -1127,7 +1178,8 @@
       "description": "Дубовая бочка, железные обручи.",
       "voxels": 1512,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/barrel.glb"
     },
     {
       "id": "crate",
@@ -1136,7 +1188,8 @@
       "description": "Дощатый ящик с железными уголками.",
       "voxels": 2744,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/crate.glb"
     },
     {
       "id": "ship_wheel",
@@ -1161,7 +1214,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/ship_wheel.glb"
     },
     {
       "id": "cannon",
@@ -1170,7 +1224,8 @@
       "description": "Чугунный ствол на лафете с колёсами.",
       "voxels": 1396,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/cannon.glb"
     },
     {
       "id": "whale_skeleton",
@@ -1179,7 +1234,8 @@
       "description": "Череп, позвоночник дугой, рёбра; на костях светится мох.",
       "voxels": 9788,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/whale_skeleton.glb"
     },
     {
       "id": "sea_mine",
@@ -1206,7 +1262,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/sea_mine.glb"
     },
     {
       "id": "diving_helmet",
@@ -1215,7 +1272,8 @@
       "description": "Медный шлем: три иллюминатора, болты, нагрудник.",
       "voxels": 2596,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/diving_helmet.glb"
     },
     {
       "id": "hot_vent",
@@ -1242,7 +1300,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/hot_vent.glb"
     },
     {
       "id": "bathyscaphe",
@@ -1269,7 +1328,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/bathyscaphe.glb"
     },
     {
       "id": "scout_drone",
@@ -1296,7 +1356,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/scout_drone.glb"
     },
     {
       "id": "submarine",
@@ -1323,7 +1384,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/submarine.glb"
     },
     {
       "id": "sea_scooter",
@@ -1349,7 +1411,8 @@
             "dirs": 8
           }
         }
-      }
+      },
+      "glb": "3d/glb/sea_scooter.glb"
     },
     {
       "id": "harpoon_gun",
@@ -1358,7 +1421,8 @@
       "description": "Деревянный приклад, латунный ствол, гарпун заряжен, линь смотан.",
       "voxels": 467,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/harpoon_gun.glb"
     },
     {
       "id": "harpoon",
@@ -1367,7 +1431,8 @@
       "description": "Снаряд: зазубренный наконечник, кольцо для линя.",
       "voxels": 54,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/harpoon.glb"
     },
     {
       "id": "trident",
@@ -1394,7 +1459,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/trident.glb"
     },
     {
       "id": "bubble_gun",
@@ -1419,7 +1485,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/bubble_gun.glb"
     },
     {
       "id": "bubble",
@@ -1446,7 +1513,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/bubble.glb"
     },
     {
       "id": "shock_spear",
@@ -1473,7 +1541,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/shock_spear.glb"
     },
     {
       "id": "torpedo",
@@ -1498,7 +1567,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/torpedo.glb"
     },
     {
       "id": "hand_sonar",
@@ -1524,7 +1594,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/hand_sonar.glb"
     },
     {
       "id": "coral_blade",
@@ -1533,7 +1604,8 @@
       "description": "Клинок из розового коралла, рукоять из кости, кромка светится.",
       "voxels": 107,
       "parts": 1,
-      "clips": {}
+      "clips": {},
+      "glb": "3d/glb/coral_blade.glb"
     },
     {
       "id": "pearl_clam",
@@ -1559,7 +1631,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/pearl_clam.glb"
     },
     {
       "id": "doubloon",
@@ -1584,7 +1657,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/doubloon.glb"
     },
     {
       "id": "air_bubble",
@@ -1609,7 +1683,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/air_bubble.glb"
     },
     {
       "id": "starfish",
@@ -1635,7 +1710,8 @@
             "dirs": 4
           }
         }
-      }
+      },
+      "glb": "3d/glb/starfish.glb"
     }
   ],
   "tiles": [
@@ -1994,7 +2070,8 @@
       "png": "2.5d/iso_tiles/brick.png",
       "glb": "3d/blocks/brick.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/brick.glb"
     },
     {
       "id": "brick_dark",
@@ -2002,7 +2079,8 @@
       "png": "2.5d/iso_tiles/brick_dark.png",
       "glb": "3d/blocks/brick_dark.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/brick_dark.glb"
     },
     {
       "id": "mossy_teal",
@@ -2011,7 +2089,8 @@
       "glow": "2.5d/iso_tiles/mossy_teal_glow.png",
       "glb": "3d/blocks/mossy_teal.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/mossy_teal.glb"
     },
     {
       "id": "mossy_violet",
@@ -2020,7 +2099,8 @@
       "glow": "2.5d/iso_tiles/mossy_violet_glow.png",
       "glb": "3d/blocks/mossy_violet.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/mossy_violet.glb"
     },
     {
       "id": "mossy_amber",
@@ -2029,7 +2109,8 @@
       "glow": "2.5d/iso_tiles/mossy_amber_glow.png",
       "glb": "3d/blocks/mossy_amber.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/mossy_amber.glb"
     },
     {
       "id": "mossy_crimson",
@@ -2038,7 +2119,8 @@
       "glow": "2.5d/iso_tiles/mossy_crimson_glow.png",
       "glb": "3d/blocks/mossy_crimson.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/mossy_crimson.glb"
     },
     {
       "id": "mossy_emerald",
@@ -2047,7 +2129,8 @@
       "glow": "2.5d/iso_tiles/mossy_emerald_glow.png",
       "glb": "3d/blocks/mossy_emerald.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/mossy_emerald.glb"
     },
     {
       "id": "mossy_azure",
@@ -2056,7 +2139,8 @@
       "glow": "2.5d/iso_tiles/mossy_azure_glow.png",
       "glb": "3d/blocks/mossy_azure.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/mossy_azure.glb"
     },
     {
       "id": "moss_teal",
@@ -2065,7 +2149,8 @@
       "glow": "2.5d/iso_tiles/moss_teal_glow.png",
       "glb": "3d/blocks/moss_teal.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/moss_teal.glb"
     },
     {
       "id": "moss_violet",
@@ -2074,7 +2159,8 @@
       "glow": "2.5d/iso_tiles/moss_violet_glow.png",
       "glb": "3d/blocks/moss_violet.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/moss_violet.glb"
     },
     {
       "id": "moss_amber",
@@ -2083,7 +2169,8 @@
       "glow": "2.5d/iso_tiles/moss_amber_glow.png",
       "glb": "3d/blocks/moss_amber.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/moss_amber.glb"
     },
     {
       "id": "moss_crimson",
@@ -2092,7 +2179,8 @@
       "glow": "2.5d/iso_tiles/moss_crimson_glow.png",
       "glb": "3d/blocks/moss_crimson.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/moss_crimson.glb"
     },
     {
       "id": "moss_emerald",
@@ -2101,7 +2189,8 @@
       "glow": "2.5d/iso_tiles/moss_emerald_glow.png",
       "glb": "3d/blocks/moss_emerald.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/moss_emerald.glb"
     },
     {
       "id": "moss_azure",
@@ -2110,7 +2199,8 @@
       "glow": "2.5d/iso_tiles/moss_azure_glow.png",
       "glb": "3d/blocks/moss_azure.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/moss_azure.glb"
     },
     {
       "id": "paving",
@@ -2118,7 +2208,8 @@
       "png": "2.5d/iso_tiles/paving.png",
       "glb": "3d/blocks/paving.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/paving.glb"
     },
     {
       "id": "tracery",
@@ -2126,7 +2217,8 @@
       "png": "2.5d/iso_tiles/tracery.png",
       "glb": "3d/blocks/tracery.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/tracery.glb"
     },
     {
       "id": "column",
@@ -2134,7 +2226,8 @@
       "png": "2.5d/iso_tiles/column.png",
       "glb": "3d/blocks/column.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/column.glb"
     },
     {
       "id": "glass_rose",
@@ -2143,7 +2236,8 @@
       "glow": "2.5d/iso_tiles/glass_rose_glow.png",
       "glb": "3d/blocks/glass_rose.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/glass_rose.glb"
     },
     {
       "id": "glass_azure",
@@ -2152,7 +2246,8 @@
       "glow": "2.5d/iso_tiles/glass_azure_glow.png",
       "glb": "3d/blocks/glass_azure.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/glass_azure.glb"
     },
     {
       "id": "glass_amber",
@@ -2161,7 +2256,8 @@
       "glow": "2.5d/iso_tiles/glass_amber_glow.png",
       "glb": "3d/blocks/glass_amber.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/glass_amber.glb"
     },
     {
       "id": "sand",
@@ -2169,7 +2265,8 @@
       "png": "2.5d/iso_tiles/sand.png",
       "glb": "3d/blocks/sand.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/sand.glb"
     },
     {
       "id": "sand_shells",
@@ -2177,7 +2274,8 @@
       "png": "2.5d/iso_tiles/sand_shells.png",
       "glb": "3d/blocks/sand_shells.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/sand_shells.glb"
     },
     {
       "id": "silt",
@@ -2185,7 +2283,8 @@
       "png": "2.5d/iso_tiles/silt.png",
       "glb": "3d/blocks/silt.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/silt.glb"
     },
     {
       "id": "rock",
@@ -2193,7 +2292,8 @@
       "png": "2.5d/iso_tiles/rock.png",
       "glb": "3d/blocks/rock.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/rock.glb"
     },
     {
       "id": "coral_pink",
@@ -2201,7 +2301,8 @@
       "png": "2.5d/iso_tiles/coral_pink.png",
       "glb": "3d/blocks/coral_pink.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/coral_pink.glb"
     },
     {
       "id": "coral_orange",
@@ -2209,7 +2310,8 @@
       "png": "2.5d/iso_tiles/coral_orange.png",
       "glb": "3d/blocks/coral_orange.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/coral_orange.glb"
     },
     {
       "id": "coral_violet",
@@ -2217,7 +2319,8 @@
       "png": "2.5d/iso_tiles/coral_violet.png",
       "glb": "3d/blocks/coral_violet.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/coral_violet.glb"
     },
     {
       "id": "bone",
@@ -2225,7 +2328,8 @@
       "png": "2.5d/iso_tiles/bone.png",
       "glb": "3d/blocks/bone.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/bone.glb"
     },
     {
       "id": "gold",
@@ -2233,7 +2337,8 @@
       "png": "2.5d/iso_tiles/gold.png",
       "glb": "3d/blocks/gold.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/gold.glb"
     },
     {
       "id": "planks",
@@ -2241,7 +2346,8 @@
       "png": "2.5d/iso_tiles/planks.png",
       "glb": "3d/blocks/planks.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/planks.glb"
     },
     {
       "id": "planks_rot",
@@ -2249,7 +2355,8 @@
       "png": "2.5d/iso_tiles/planks_rot.png",
       "glb": "3d/blocks/planks_rot.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/planks_rot.glb"
     },
     {
       "id": "hull_copper",
@@ -2257,7 +2364,8 @@
       "png": "2.5d/iso_tiles/hull_copper.png",
       "glb": "3d/blocks/hull_copper.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/hull_copper.glb"
     },
     {
       "id": "rust",
@@ -2265,7 +2373,8 @@
       "png": "2.5d/iso_tiles/rust.png",
       "glb": "3d/blocks/rust.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/rust.glb"
     },
     {
       "id": "brass",
@@ -2273,7 +2382,8 @@
       "png": "2.5d/iso_tiles/brass.png",
       "glb": "3d/blocks/brass.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/brass.glb"
     },
     {
       "id": "sail",
@@ -2281,7 +2391,8 @@
       "png": "2.5d/iso_tiles/sail.png",
       "glb": "3d/blocks/sail.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/sail.glb"
     },
     {
       "id": "dome",
@@ -2290,7 +2401,8 @@
       "glow": "2.5d/iso_tiles/dome_glow.png",
       "glb": "3d/blocks/dome.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/dome.glb"
     },
     {
       "id": "caustics",
@@ -2299,7 +2411,8 @@
       "glow": "2.5d/iso_tiles/caustics_glow.png",
       "glb": "3d/blocks/caustics.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/caustics.glb"
     },
     {
       "id": "vent",
@@ -2308,7 +2421,8 @@
       "glow": "2.5d/iso_tiles/vent_glow.png",
       "glb": "3d/blocks/vent.glb",
       "w": 35,
-      "h": 35
+      "h": 35,
+      "source_glb": "3d/blocks/vent.glb"
     }
   ],
   "animated_blocks": [
@@ -2501,5 +2615,13 @@
     "anim_snow": "2.5d/parallax/anim_snow.png",
     "anim_bubbles": "2.5d/parallax/anim_bubbles.png"
   },
-  "asset_policy": "For third-party dependencies check rights; owner-authorized original models are donor candidates."
+  "asset_policy": "For third-party dependencies check rights; owner-authorized original models are donor candidates.",
+  "extracted_assets_on_github": {
+    "glb": 114,
+    "atlases": 12,
+    "atlas_derived_png": 951,
+    "source": "sunken-city/pack-artifacts.json",
+    "original_glb_paths": "sunken-city/3d/{glb|blocks}/{id}.glb",
+    "sprites_root": "sunken-city/sprites/"
+  }
 }

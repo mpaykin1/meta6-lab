@@ -1749,6 +1749,36 @@
       ],
       "scope": "Verbatim source GLSL. Only original template substitutions; not a standalone rendering engine.",
       "demo": "meta-games/library/original-glsl.html"
+    },
+    {
+      "id": "pod-i-nad/shader/original-sky-material",
+      "name": "Original Pod i Nad sky dome material",
+      "kind": "shader",
+      "purpose": [
+        "original sky",
+        "aurora",
+        "night sky",
+        "sky dome",
+        "source-faithful atmosphere"
+      ],
+      "tags": [
+        "glsl",
+        "sky",
+        "aurora",
+        "threejs",
+        "approved-reference"
+      ],
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "source_reference": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source": "shared/components/pod-i-nad/shaders/atmosphere/original-sky-material.mjs",
+      "loader_id": "pod-i-nad-original-sky",
+      "export_name": "createOriginalSky",
+      "dependencies": [
+        "Three.js",
+        "Original runtime palette top/horizon/bottom/sunColor supplied by caller"
+      ],
+      "notes": "Original shader, original 500-radius dome, original uniform layout. No invented palette; caller must supply source-derived colors."
     }
   ]
 }

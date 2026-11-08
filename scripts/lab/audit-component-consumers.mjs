@@ -78,8 +78,8 @@ function htmlRefs(source) {
   const refs = [];
   for (const tag of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi)) {
     const attrs = tag[1];
-    const src = attrs.match(/(?:^|\s)src\s*=\s*(['"])(.*?)\1/i);
-    if (src) { refs.push(src[2]); continue; }
+    const src = attrs.match(/(?:^|\s)src\s*=\s*(?:([\'"])(.*?)\1|([^\s>]+))/i);
+    if (src) { refs.push(src[2] || src[3]); continue; }
     const type = attrs.match(/(?:^|\s)type\s*=\s*(['"])(.*?)\1/i)?.[2]?.toLowerCase();
     if (!type || type === 'module' || /^(?:application|text)\/(?:java|ecma)script$/.test(type)) {
       refs.push(...jsRefs(tag[2]));

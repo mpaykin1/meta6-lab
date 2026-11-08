@@ -31,7 +31,9 @@ export async function playLevel(ctx, level) {
     const right = dx * Math.cos(yaw) - dz * Math.sin(yaw);
     const forward = -dx * Math.sin(yaw) - dz * Math.cos(yaw);
     const length = Math.hypot(right, forward) || 1;
-    return ctx.joystick(right / length, -forward / length, 1100);
+    // A touch shorter than a slow software-rendered frame can be missed
+    // entirely. Hold genuine input across a render without altering game speed.
+    return ctx.joystick(right / length, -forward / length, ctx.mobile ? 3500 : 1400);
   };
   const stomp = () => ctx.mobile
     ? ctx.tap(ctx.viewport.width - 153, ctx.viewport.height - 61)
@@ -69,7 +71,7 @@ export async function playLevel(ctx, level) {
     } else if (s.goal) {
       // The observer returns read-only, authored waypoints (ruins, bridges, lamps).
       if (blocked >= 3 && s.mode === 'toys') {
-        await ctx.joystick(sidestep, 0, 520);
+        await ctx.joystick(sidestep, 0, ctx.mobile ? 3500 : 1400);
         sidestep = -sidestep;
         await jump(s.mode);
         blocked = 0;

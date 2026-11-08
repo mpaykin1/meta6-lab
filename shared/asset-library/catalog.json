@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "description": "Searchable META GAMES component registry; ready entries resolve through existing shared/loader.js; source-only entries are not runnable.",
+  "components": [
+    {
+      "id": "observer-audio",
+      "name": "Observer procedural audio",
+      "kind": "audio",
+      "purpose": [
+        "procedural music",
+        "sound effects",
+        "web audio",
+        "music"
+      ],
+      "tags": [
+        "audio",
+        "music",
+        "sound"
+      ],
+      "status": "READY",
+      "loader_id": "observer-audio",
+      "source": "shared/components/observer-audio/audio.js"
+    },
+    {
+      "id": "observer-npc",
+      "name": "Animated 2.5D NPCs",
+      "kind": "animation",
+      "purpose": [
+        "npc animation",
+        "animated characters",
+        "billboard",
+        "character"
+      ],
+      "tags": [
+        "animation",
+        "npc",
+        "character",
+        "sprite"
+      ],
+      "status": "READY",
+      "loader_id": "observer-npc",
+      "source": "shared/components/observer-npc/npc-catalog.js"
+    },
+    {
+      "id": "three-worlds-island-weather",
+      "name": "Island weather palettes",
+      "kind": "weather",
+      "purpose": [
+        "weather",
+        "rain",
+        "fog",
+        "atmosphere",
+        "sky"
+      ],
+      "tags": [
+        "weather",
+        "fog",
+        "atmosphere"
+      ],
+      "status": "READY",
+      "loader_id": "three-worlds-island-weather",
+      "source": "shared/components/three-worlds-island-weather/island-weather.js"
+    },
+    {
+      "id": "pod-i-nad/shader/mist",
+      "name": "Original MIST shader (extraction pending)",
+      "kind": "shader",
+      "purpose": [
+        "underwater fog",
+        "volumetric mist",
+        "fog",
+        "atmosphere"
+      ],
+      "tags": [
+        "shader",
+        "glsl",
+        "fog",
+        "underwater"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "MIST_VERT",
+        "MIST_FRAG"
+      ],
+      "source_sha256": "91642018b3e589173171340298f72320f747d3b401021a939030f6f922ede5e5",
+      "loader_id": null,
+      "dependencies": [
+        "Three.js r160",
+        "original shader composition"
+      ],
+      "usable": false
+    },
+    {
+      "id": "pod-i-nad/shader/water",
+      "name": "Original WATER shader (extraction pending)",
+      "kind": "shader",
+      "purpose": [
+        "water",
+        "water shader",
+        "animated ocean"
+      ],
+      "tags": [
+        "shader",
+        "glsl",
+        "water"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_symbol": [
+        "WATER_VERT",
+        "WATER_FRAG"
+      ],
+      "source_sha256": "91642018b3e589173171340298f72320f747d3b401021a939030f6f922ede5e5",
+      "loader_id": null,
+      "usable": false
+    },
+    {
+      "id": "pod-i-nad/model/jellyfish_teal",
+      "name": "Jellyfish teal model reference",
+      "kind": "model",
+      "purpose": [
+        "jellyfish",
+        "underwater creature",
+        "animated sea life"
+      ],
+      "tags": [
+        "model",
+        "glb",
+        "jellyfish",
+        "underwater"
+      ],
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_reference": "glb/jellyfish_teal.json",
+      "asset_path": null,
+      "loader_id": null,
+      "usable": false
+    }
+  ]
+}

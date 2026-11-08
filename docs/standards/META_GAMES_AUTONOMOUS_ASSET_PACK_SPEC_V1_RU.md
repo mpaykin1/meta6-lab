@@ -1,0 +1,137 @@
+# META GAMES — Эталон спецификации автономного игрового ZIP (v1.0)
+
+Статус: **нормативный стандарт для новых игр META GAMES**. Дата: 2026-11-08. Применяется к 2D, 2.5D, 3D voxel/pixel-art играм, в том числе Train in the Fog.
+
+## 1. Результат
+Один ZIP с папкой игры, исходными редактируемыми ассетами, оптимизированными runtime-ассетами, анимациями, материалами, коллизиями, сценами, звуком, сюжетом и **работающим автономным index.html**. После распаковки открывается двойным нажатием без сервера, CDN, API и сети. Архив только с картинками **не считается готовой игрой**.
+
+Плановый масштаб Train in the Fog: **640 уникальных базовых ассетов**, ориентировочно **2500–4000 файлов/кадров с вариантами**. Эти цифры — целевой объём контента, а не универсальный минимум для всех игр. Уникальные объекты, кадры анимации, ракурсы и LOD считать отдельно.
+
+## 2. Каноническая структура
+```text
+META_GAMES_TRAIN_COMPLETE.zip
+└── META_GAMES_TRAIN/
+    ├── index.html
+    ├── manifest.json
+    ├── asset-manifest.json
+    ├── game-config.json
+    ├── js/
+    │   ├── main.js
+    │   ├── engine.js
+    │   ├── renderer.js
+    │   ├── input.js
+    │   ├── physics.js
+    │   ├── player.js
+    │   ├── enemies.js
+    │   ├── ai.js
+    │   ├── combat.js
+    │   ├── audio.js
+    │   ├── ui.js
+    │   ├── events.js
+    │   ├── animation.js
+    │   ├── asset-loader.js
+    │   ├── lighting.js
+    │   ├── weather.js
+    │   ├── camera.js
+    │   ├── world.js
+    │   └── functions.js
+    ├── vendor/
+    ├── assets/
+    │   ├── sprites/{characters,enemies,animals,vegetation,props,effects}/
+    │   ├── spritesheets/{player,npc,creatures,train,environment}/
+    │   ├── voxel/{locomotive,wagons,buildings,railway,environment}/
+    │   ├── models/{glb,metadata}/
+    │   ├── textures/{albedo,normal,roughness,metalness,emissive,opacity,atlases}/
+    │   ├── backgrounds/{far,middle,near}/
+    │   ├── tilesets/{ground,rails,platforms,interiors}/
+    │   ├── particles/{rain,fog,smoke,sparks,dust}/
+    │   ├── ui/{icons,panels,fonts}/
+    │   └── audio/{music,ambient,sfx,voices}/
+    ├── shaders/{fog,rain,bloom,lighting,water,reflections}.glsl
+    ├── data/{assets,animations,materials,collisions,scenes,world,dialogues,quests,lore}.json
+    ├── source-assets/
+    └── licenses/assets.json
+```
+Папки в фигурных скобках обозначают отдельные каталоги, не буквальные имена. В runtime допустима другая физическая структура, если реестр и пути корректны.
+
+## 3. Форматы
+| Сущность | Runtime | Исходник/метаданные |
+|---|---|---|
+| 2D sprites | PNG RGBA8 sRGB, WebP lossless | PNG + JSON |
+| 2D animation | PNG spritesheet | JSON frames/FPS/events |
+| 2.5D characters | PNG directional sheets | JSON, опционально GLB |
+| Voxel meshes | glTF 2.0 GLB | VOX + GLB |
+| 3D animation | GLB clips | animation metadata |
+| PBR textures | PNG/WebP | albedo, normal, roughness, metallic, emissive, alpha, AO |
+| Backgrounds/tiles | PNG/WebP | parallax and tile metadata |
+| Shaders | GLSL ES 3.00 | embedded at build time |
+| Sound/music | OGG, fallback MP3 | audio manifest |
+| Fonts | WOFF2 or bitmap atlas | license |
+| Physics/levels/story | embedded JSON-compatible data | JSON UTF-8 |
+
+## 4. Pixel-art
+- PNG RGBA8, sRGB, прозрачность без фоновых прямоугольников; nearest filtering, integer pixel alignment.
+- Tiles: 16×16, 32×32, 64×64; characters: 64×96 или 96×128; props: 128/256; UI: 32/64/128.
+- Атлас для мобильного профиля до 2048×2048; padding/extrusion 2–4 px против bleeding.
+- Pivot у персонажа — ступни, normalized [0.5,1.0]; у предметов — явная опора; единый pixelsPerUnit (начальное значение 32).
+- Стабильный bounding box и pivot между кадрами. Никакого случайного bilinear smoothing.
+
+## 5. Animation
+Для каждого клипа: id, assetId, sheet/model, frameWidth, frameHeight, frames/rects, fps, loop, pivot, events, transition states.
+Рекомендации: idle 8 FPS/8–16 кадров; walk 12/8–12; run 16/8–16; jump 12/8–12; ghost 12/12–24; doors 12/8–16; rain 12–24/8–16.
+2.5D directional sets: N, NE, E, SE, S, SW, W, NW; mirror только при отсутствии асимметричных деталей. Для GLB — именованные animation clips и контролируемые transitions.
+```json
+{"id":"ANIM_PLAYER_WALK","asset":"CHR_PLAYER_001","sheet":"assets/spritesheets/player/walk.png","frameWidth":96,"frameHeight":128,"columns":8,"rows":1,"frames":8,"fps":12,"loop":true,"pivot":[0.5,1],"events":[{"frame":2,"event":"footstep"},{"frame":6,"event":"footstep"}]}
+```
+
+## 6. Voxel/3D
+- GLB glTF 2.0, Y-up, правосторонняя система, объект смотрит вдоль -Z, 1 unit = 1 метр, origin у основания; текстуры внутри GLB.
+- GLB без обязательных внешних Draco/KTX2-декодеров, если они не включены локально.
+- Ориентиры на объект: small prop 50–500 tris; tree 300–2000; character 1000–5000; wagon 3000–12000; locomotive 8000–25000; building 2000–15000.
+- LOD по необходимости, отдельно простые collision primitives, не использовать подробную render mesh как обязательную физическую форму.
+- Поезд: независимые колёса/тележки, двери, дворники, сцепки, фары, звуковые sockets, посадка, камера машиниста, повреждения.
+```json
+{"id":"TRAIN_LOCOMOTIVE_001","type":"model","path":"assets/models/glb/locomotive.glb","units":"meters","forward":"-Z","scale":[1,1,1],"collision":"locomotive_collision","animations":["wheels_rotate","doors_open","doors_close","wipers","engine_idle"],"sockets":{"headlight":[0,3.1,-7.2],"driver_camera":[0,2.7,-2.1],"front_coupler":[0,0.8,-7.8],"rear_coupler":[0,0.8,7.8]}}
+```
+
+## 7. Materials, lighting, weather
+PBR channels: baseColor, normal, roughness, metallic, emissive, alpha, AO. Стартовые metallic/roughness: wet rails 0.9/0.15; rusty metal 0.7/0.8; wet concrete 0/0.3; old wood 0/0.85; glass 0/0.05; painted locomotive 0.4/0.35. Эти значения художественные пресеты, не физическая гарантия.
+Headlight: spotlight + emissive + volumetric cone/fog shader + bloom + wet rail reflections; у ламп отдельные light sockets. Эффект volumetric нужно реализовать в renderer: одного JSON-флага недостаточно.
+Rain: instanced particles, puddle ripples, droplets on branches/lens, mist; dynamic weather profiles. Mobile: 1–2 shadow-casting lights максимум, остальные emissive/glow.
+
+## 8. 2.5D scene layers
+Четыре обязательных слоя: background (sky, distant hills/forest), midground (train, rails, station), foreground (wet grass, branches, puddles), screen_fx (fog, rain, bloom, vignette, UI). У каждого: parallax, draw order, camera offset, scale, lighting/fog policy. `depth` в метаданных 2D означает draw order, не обязательно мировую Z-координату.
+
+## 9. Physics/interactions
+Объект классифицируется как static/dynamic/trigger/decorative/interactive. Коллизии: box/capsule/sphere/compound/convex, размеры в метрах, center, solid, collision layer/mask, trigger event. Отдельные входы в вагоны, лестницы, платформы, двери, стрелки, опасности, навигация NPC, точки взаимодействия.
+```json
+{"id":"COL_STATION_BENCH_001","asset":"PROP_BENCH_001","shape":"box","center":[0,0.45,0],"size":[1.8,0.9,0.6],"solid":true,"interactable":true,"interaction":"inspect_bench"}
+```
+
+## 10. Registry and stable naming
+Файл `asset-manifest.json`: schemaVersion, packId, assets[].id/category/type/path/required/animated, plus optional size, pivot, material, collision, animations, sockets, tags, source/license. ID не меняется при замене изображения.
+```json
+{"schemaVersion":"1.0","packId":"meta_games_train","baseAssetTarget":640,"coordinateSystem":"right-handed-y-up","unitScale":1,"assets":[{"id":"TRAIN_LOCOMOTIVE_001","category":"train","format":"glb","path":"assets/models/glb/locomotive.glb","required":true,"animated":true},{"id":"CHR_PLAYER_001","category":"characters","format":"png","path":"assets/sprites/characters/player.png","required":true,"animated":false}]}
+```
+Файлы: lowercase ASCII snake_case, например `train_locomotive_001.glb`, `player_walk_ne_sheet.png`, `station_platform_001_collision.json`. Пути относительные, регистр строго совпадает, никаких placeholder/URL.
+
+## 11. file:// offline guarantee
+Нельзя полагаться на `fetch()` локальных JSON/GLB, ES module imports, внешние CDN или локальный сервер: браузеры ограничивают `file://`. В сборке встраивать JS, JSON, GLSL и GLB bytes как данные в `index.html`/синхронно подключённые classic scripts; декодировать GLB из ArrayBuffer в памяти через локально встроенный loader либо заранее преобразовать в JS-геометрию. PNG/audio допускается грузить относительными путями через HTMLImageElement/Audio при проверке на целевых браузерах. Для максимальной переносимости можно встроить и их. Не использовать внешние network dependencies.
+
+## 12. Mobile budgets (ориентиры, не гарантии)
+iPhone 11: 30–60 FPS, адаптивный render resolution; atlas ≤2048; active particles ~500–2000; visible triangles ~100k–300k; draw calls желательно ≤100–150; shadowed lights 0–2. Ограничивать overdraw, postprocessing и GPU memory; audio запускать после пользовательского жеста.
+
+## 13. Acceptance
+1. Все заявленные файлы существуют, не пустые, читаются и имеют реальные пиксели/геометрию/клипы.
+2. Реестр разрешается полностью, нет duplicate ID, broken paths, dangling dependencies.
+3. Размеры, pivots, координаты, ориентации, collisions и sockets согласованы.
+4. Анимации проигрываются без скачков, работают события и переходы.
+5. Реально работают поезд, движение игрока, управление пальцем/клавиатурой, взаимодействия, сцены, погода, свет, сюжет.
+6. После распаковки `index.html` работает **без сервера и интернета** на целевых платформах. Проверять отдельно iOS Safari и desktop browsers: открытие локальных файлов на iOS зависит от приложения и его политики.
+7. Нет placeholder UI, пустых карточек, неработающих кликов; читаемый полный лор открывается в полноэкранном режиме.
+8. Архив сохраняет исходные ассеты и лицензии; визуальная сборка воспроизводима.
+
+## 14. Художественный эталон Train in the Fog
+Кинематографичный тёмный pixel/voxel art: густой объёмный туман, холодная синевато-серая палитра, тёплые окна, мокрые рельсы, отражения в лужах, прожектор локомотива, лесные силуэты, дождь, минималистичный интерфейс. Не подменять художественные объекты простыми заглушками.
+
+**Правило:** при создании новых игр использовать этот стандарт как контракт форматов и приёмки, адаптируя количество ассетов и игровые механики под проект.

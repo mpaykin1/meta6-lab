@@ -3383,6 +3383,7 @@ const metaBot = Object.freeze({
       weapons: playing ? 1 : 0,
       layoutHash: metaBotLayoutHash,
       menuOpen: view !== 'game' || G.paused || !!G.storyOpen,
+      mode: c ? c.mode : null,
       cameraYaw: rig.yaw
     };
   }

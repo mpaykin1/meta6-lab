@@ -1,0 +1,8 @@
+{
+  "name": "meta-games-mcp-connect-check",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2"
+  }
+}

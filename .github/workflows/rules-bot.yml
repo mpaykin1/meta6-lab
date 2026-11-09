@@ -1,0 +1,77 @@
+name: RULES BOT — trainer only
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'games/rules-trainer/**'
+      - 'scripts/rules-bot/**'
+      - '.github/workflows/rules-bot.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  trainer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install free Playwright Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Run only games/rules-trainer (phone and desktop)
+        run: node scripts/rules-bot/run.mjs --out "$RUNNER_TEMP/rules-trainer"
+      - name: Verify no regression of previous green rules
+        if: always() && github.event_name == 'pull_request'
+        run: |
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          if git cat-file -e origin/main:games/rules-trainer/index.html 2>/dev/null; then
+            mkdir -p games/.rules-bot-mutation-baseline
+            git show origin/main:games/rules-trainer/index.html > games/.rules-bot-mutation-baseline/index.html
+            node scripts/rules-bot/regression.mjs "$RUNNER_TEMP/rules-trainer.json"
+          else
+            echo 'First trainer PR; main has no previous baseline'
+          fi
+      - name: K5 clean-screen mutations
+        if: always()
+        run: node scripts/rules-bot/mutate-01-clean-screen.mjs
+      - name: K5 sound-filter mutations
+        if: always()
+        run: node scripts/rules-bot/mutate-s12-master-filter.mjs
+      - name: Upload result artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rules-trainer
+          path: |
+            ${{ runner.temp }}/rules-trainer.md
+            ${{ runner.temp }}/rules-trainer.json
+      - name: Step summary
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/rules-trainer.md" ]; then cat "$RUNNER_TEMP/rules-trainer.md" >> "$GITHUB_STEP_SUMMARY"; fi
+      - name: Append table to PR description
+        if: always() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ ! -s "$RUNNER_TEMP/rules-trainer.md" ]; then exit 0; fi
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import {execFileSync} from 'node:child_process';
+          const pr=JSON.parse(execFileSync('gh',['api','repos/'+process.env.REPO+'/pulls/'+process.env.PR_NUMBER],{encoding:'utf8'}));
+          const begin='<!-- RULES_BOT_TABLE_START -->',end='<!-- RULES_BOT_TABLE_END -->';
+          const old=(pr.body||'').replace(new RegExp(begin+'[\\s\\S]*?'+end,'g'),'').trim();
+          const table=fs.readFileSync(process.env.RUNNER_TEMP+'/rules-trainer.md','utf8');
+          execFileSync('gh',['api','-X','PATCH','repos/'+process.env.REPO+'/pulls/'+process.env.PR_NUMBER,'-f','body='+old+'\n\n'+begin+'\n'+table+end],{stdio:'inherit'});
+          JS

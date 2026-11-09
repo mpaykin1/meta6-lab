@@ -9,6 +9,16 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
+### lab/rules-bot-trainer — B6/B7: правила на тренировочной игре
+- Польза: браузер проверяет чистый экран и звуковой фильтр на 390×844 и ПК, ошибка делает PR красным.
+- Поиграть после merge: https://mpaykin1.github.io/meta6-lab/games/rules-trainer/
+- Ветка: `lab/rules-bot-trainer`; PR: https://github.com/mpaykin1/meta6-lab/pull/204
+- Исходник: `games/broken-city/index.html`; медиа берётся из оригинального `games/broken-city/` без изменений.
+- Таблица: в PR #204 и артефакте workflow RULES BOT; ловушки: 3 экран + 3 звук.
+- 12 правил чек-листа и другие 20 пунктов звука ещё не реализованы; остальные игры не запускаются.
+- Статус: В РАБОТЕ; запуск на все игры — только после разрешения владельца.
+- Михаил: решения «запускай на все игры» пока нет.
+
 ### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
 - Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
 - Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/

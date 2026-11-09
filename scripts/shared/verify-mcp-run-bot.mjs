@@ -38,6 +38,7 @@ async function wrapper(){
   "process.exit(1);",
   "}",
   "if(page==='ZERO')process.exit(0);",
+  "if(page==='MIXED'){console.log('▶ games/veil-terraces');console.log('  ✅ mobile: уровней 6, пройдено 6, FPS 57.7');console.log('  ✅ desktop: уровней 6, пройдено 6, FPS 58.1');process.exit(1);}",
   "console.log('▶ games/veil-terraces');",
   "console.log('  ✅ mobile: уровней 6, пройдено 6, FPS 57.7');",
   "console.log('  ✅ desktop: уровней 6, пройдено 6, FPS 58.1');"
@@ -69,6 +70,10 @@ async function wrapper(){
  const zero=await mod.runBot({id:'veil-terraces'},fakeGames);
  assert.equal(zero.passed,false,'Zero-result deception passed');
  assert.match(zero.errors[0]?.message||'',/не вернул результаты/);
+ // Bot crashed after printing green lines: exit code must win (OSHIBKI, Claude trap exitcode).
+ writeFileSync(join(game,'index.html'),'MIXED');
+ const mixed=await mod.runBot({id:'veil-terraces'},fakeGames);
+ assert.equal(mixed.passed,false,'Non-zero bot exit passed');
  writeFileSync(join(game,'index.html'),'SLOW');
  const pending=mod.runBot({id:'veil-terraces'},fakeGames);
  await sleep(80);

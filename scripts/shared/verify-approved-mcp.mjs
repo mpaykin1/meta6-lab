@@ -24,7 +24,7 @@ function ask(method,params){
 }
 try{
  assert.equal((await ask('initialize',{})).result.serverInfo.name,'meta-games-approved-source');
- assert.equal((await ask('tools/list')).result.tools.length,8);
+ assert.equal((await ask('tools/list')).result.tools.length,9);
  const list=await ask('tools/call',{name:'list_approved_components',arguments:{}});
  assert.equal(JSON.parse(list.result.content[0].text).length,10);
  const denied=await ask('tools/call',{name:'inspect_approved_component',arguments:{id:'../AGENTS.md'}});

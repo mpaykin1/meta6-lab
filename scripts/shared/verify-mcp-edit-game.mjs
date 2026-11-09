@@ -45,6 +45,8 @@ function fixture(){
  const dir=mkdtempSync(join(tmpdir(),'mcp-edit-fixture-'));
  const approved=join(dir,'shared/approved');mkdirSync(join(approved,'tools'),{recursive:true});
  cpSync(join(root,'shared/approved/mcp.mjs'),join(approved,'mcp.mjs'));
+ // Other MCP tool modules live beside edit-game (run-bot, library…): copy them all, then the module under test.
+ cpSync(join(root,'shared/approved/tools'),join(approved,'tools'),{recursive:true});
  cpSync(editModule,join(approved,'tools/edit-game.mjs'));
  writeFileSync(join(approved,'search.mjs'),['export const approvedComponents=()=>[];',
   'export const searchApproved=()=>[];', 'export const inspectApproved=()=>({});',

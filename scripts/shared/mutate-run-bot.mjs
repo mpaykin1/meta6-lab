@@ -31,6 +31,7 @@ const muts=[
  {name:'discard-snapshots',why:/Bot snapshot parsing failed|snapshot/,change:s=>replaceRequired(s,
   "snapshot:message.match(/\\[снимок:[^\\]]+\\]/u)?.[0]??null",
   'snapshot:null')},
+ {name:'ignore-exit-code',why:/Non-zero bot exit passed/,change:s=>replaceRequired(s,'result.code===0&&','')},
  {name:'no-time-limit',why:/Missing hard 5-minute deadline/,change:s=>replaceRequired(s,
   'export const MAX_RUN_MS=300_000;','export const MAX_RUN_MS=600_000;')},
  {name:'no-lock',why:/Concurrent call accepted|Cross-instance lock ignored/,change:s=>{

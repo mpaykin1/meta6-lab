@@ -99,7 +99,10 @@ export async function playLevel(ctx, level) {
       // the desired route is correct. Back out through real controls to
       // regain an approach angle; the game's 20s stuck check stays active.
       if (mode === 'toys' && physicalStalls >= 3 && s.waypoint?.routeIndex >= 0) {
-        await ctx.joystick(0, 1, 750);
+        // Retreat in world +Z, regardless of camera yaw. The previous
+        // fixed stick vector could drive sideways into the same wall.
+        const retreatYaw = Number.isFinite(s.cameraYaw) ? s.cameraYaw : 0;
+        await ctx.joystick(-Math.sin(retreatYaw), Math.cos(retreatYaw), 750);
         physicalStalls = 0;
         lastHero = null;
         steps++;

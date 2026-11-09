@@ -47,7 +47,12 @@ export async function verifyOne({ browser, baseUrl, game, replacement = null }) 
     assert.ok(shape.info.name && Number.isInteger(shape.info.levels) &&
       shape.info.levels > 0, game + ': invalid info()');
 
-    await page.locator('#btnStart').click({ timeout: 20000 });
+    // Fresh visitors are auto-started by the real retention layer; its title button is hidden.
+    // Returning visitors can still start using the real Enter keyboard shortcut.
+    await page.waitForTimeout(850);
+    if (!(await page.evaluate(() => window.__META_BOT__.state().started))) {
+      await page.keyboard.press('Enter');
+    }
     await page.waitForFunction(() => window.__META_BOT__.state().started,
       null, { timeout: 15000 });
     const snapshot = () => page.evaluate(() => {

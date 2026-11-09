@@ -118,8 +118,12 @@ export async function playLevel(ctx, level) {
       const length = Math.hypot(stickX, stickY) || 1;
       // At the pickup radius, a fixed 450ms move can overshoot the coin
       // between low-FPS frames. Shorten only the real joystick hold.
-      const moveMs = Math.max(100, Math.min(450, Math.round(distance * 180)));
-      await ctx.joystick(stickX / length, stickY / length, moveMs);
+      // At ~5 FPS a 100ms pulse may never be sampled. Hold through at
+      // least one render interval, but scale input strength near the coin
+      // so the longer pulse does not overshoot its genuine pickup radius.
+      const moveMs = Math.max(260, Math.min(450, Math.round(distance * 180)));
+      const strength = Math.max(0.22, Math.min(1, distance / 1.5));
+      await ctx.joystick(stickX / length * strength, stickY / length * strength, moveMs);
       if (step % 8 === 7 && ctx.state().grounded) {
         await jumpThroughInput(ctx, ctx.state());
       }

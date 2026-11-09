@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
+import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 const dir=path.resolve(process.argv[2]||'skins/packs/rusty-robot'),errors=new Set();
 const fail=(id,msg)=>{errors.add(id);console.error(id+': '+msg);};
@@ -40,14 +41,53 @@ function compareZip(){
 let manifest;
 try{manifest=JSON.parse(fs.readFileSync(path.join(dir,'skin.json'),'utf8'));}catch(e){fail('S1','manifest unreadable: '+e.message);process.exit(1);}
 if(manifest.format!=='meta6-skin/1'||manifest.name!==path.basename(dir))fail('S1','format/name mismatch');
+
+const stageFlag=process.argv.indexOf('--stage');
+const stage=stageFlag<0?null:Number(process.argv[stageFlag+1]);
+if(stageFlag>=0&&(stageFlag!==3||!Number.isInteger(stage)||stage<0||stage>7||process.argv.length!==5)){
+ fail('STAGE','use exactly: validate-skin-pack.mjs <folder> --stage N (N=0..7)');
+ process.exit(1);
+}
+if(stage!==null){
+ const record=path.join(dir,'STAGE.md');
+ const recordText=fs.existsSync(record)?fs.readFileSync(record,'utf8'):'';
+ if(!recordText.includes('этап '+stage+' сделан'))fail('STAGE','STAGE.md missing current completed stage '+stage);
+ for(let i=0;i<=stage;i++){
+  const file='stages/'+i+'.png';
+  if(!exists(file)){fail('STAGE','missing comparison '+file);continue;}
+  try{const im=decode(path.join(dir,file));if(im.w<640||im.h<480)fail('STAGE','comparison too small '+file);}
+  catch(e){fail('STAGE','invalid comparison '+file+': '+e.message);}
+ }
+ if(stage===0){
+  const readme=exists('README.md')?fs.readFileSync(path.join(dir,'README.md'),'utf8'):'';
+  if(readme.split('\n').filter(l=>l.startsWith('| ')&&l.includes(' | ')).length<30)fail('STAGE','stage 0 requires full detail table and 12 source colour samples');
+  if(!readme.includes('Палитра')||!readme.includes('Точка'))fail('STAGE','stage 0 palette source points missing');
+  const ref=path.join(dir,'reference.png');
+  if(!fs.existsSync(ref))fail('STAGE','original sketch missing');
+  else{
+   const bytes=fs.readFileSync(ref),head=Buffer.from('blob '+bytes.length+'\0');
+   const h=crypto.createHash('sha1').update(head).update(bytes).digest('hex');
+   if(h!=='f66ad0f0cf976b86600e91efd3e819cb81afe8d1')fail('STAGE','original owner sketch hash mismatch');
+  }
+ }
+ if(stage>=1&&!exists('textures/metal.png'))fail('STAGE','material texture missing');
+ if(stage>=2&&!(manifest.parts||[]).some(p=>p.layer==='3d'))fail('STAGE','silhouette 3d parts absent');
+ if(stage>=3&&!['gear','piston','cable'].every(k=>(manifest.parts||[]).some(p=>p.kind===k)))fail('STAGE','mechanics absent');
+ if(stage>=4&&!['core','slit','orb'].every(k=>(manifest.parts||[]).some(p=>p.kind===k)))fail('STAGE','illumination absent');
+ if(stage>=5&&!(manifest.parts||[]).some(p=>(p.anim||[]).some(a=>a.type==='chain')))fail('STAGE','cable inertia absent');
+ if(stage>=6&&!(manifest.parts||[]).some(p=>(p.anim||[]).some(a=>a.type==='flipbook')))fail('STAGE','arc flipbooks absent');
+ if(errors.size){console.error('VIOLATIONS '+[...errors].sort().join(', '));process.exit(1);}
+ if(stage<7){console.log('STAGE '+stage+' PASS: staged checks; full S1–S12 mandatory at stage 7.');process.exit(0);}
+}
+
 for(const file of ['skin.json','reference.png','preview.png','README.md'])if(!exists(file))fail('S2','missing '+file);
 compareZip();
 const used=new Set(),allImages=walk(dir).filter(f=>f.endsWith('.png'));
 for(const t of manifest.textures||[]){addFile(used,t.file,'S2');if(t.emit)addFile(used,t.emit,'S2');if(!['sphere','box6','cyl','plane'].includes(t.uv))fail('S2','invalid uv '+t.uv);}
 for(const p of manifest.parts||[])if(p.file)addFile(used,p.file,'S2');
 for(const name of used)if(!exists(name))fail('S2','missing image '+name);
-for(const name of allImages)if(!used.has(name)&&!['reference.png','preview.png'].includes(name))fail('S2','unreferenced PNG '+name);
-for(const name of walk(dir))if(!name.match(/^(skin\.json|reference\.png|preview\.png|README\.md|(textures|parts|sheets)\/[\w.-]+\.png)$/))fail('S2','unauthorized file '+name);
+for(const name of allImages)if(!used.has(name)&&!['reference.png','preview.png'].includes(name)&&!/^stages\/[0-7]\.png$/.test(name))fail('S2','unreferenced PNG '+name);
+for(const name of walk(dir))if(!name.match(/^(skin\.json|reference\.png|preview\.png|README\.md|STAGE\.md|stages\/[0-7]\.png|(textures|parts|sheets)\/[\w.-]+\.png)$/))fail('S2','unauthorized file '+name);
 const palette=(manifest.palette||[]).map(hex=>typeof hex==='string'&&/^#[0-9a-fA-F]{6}$/.test(hex)?[parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16)]:null);
 if(palette.length<6||palette.length>16||palette.some(x=>!x)||new Set((manifest.palette||[]).map(x=>x.toLowerCase())).size!==palette.length)fail('S5','palette must contain 6–16 distinct #RRGGBB colors');
 const imageData=new Map();

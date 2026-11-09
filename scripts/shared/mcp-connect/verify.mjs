@@ -44,7 +44,7 @@ async function run(){
     const gameTool=actual.find(x=>x.name==='list_games');
     assert.ok(gameTool,'list_games missing from MCP tools/list');
     const call=await client.callTool({name:'list_games',arguments:{}});
-    assert.equal(call.isError,true===false,'list_games must not return MCP error');
+    assert.notEqual(call.isError,true,'list_games must not return MCP error');
     assert.ok(Array.isArray(call.content)&&call.content[0]?.type==='text','list_games has no text content');
     const games=JSON.parse(call.content[0].text);
     assert.ok(Array.isArray(games)&&games.length>0,'list_games returned no games');

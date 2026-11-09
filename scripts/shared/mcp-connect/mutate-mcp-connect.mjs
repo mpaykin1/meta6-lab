@@ -6,7 +6,7 @@ import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const root=fileURLToPath(new URL('../../../',import.meta.url));
-const verify=join(root,'scripts/shared/mcp-connect/verify.mjs');
+const verify=join(root,'scripts/shared/mcp-connect/verify-basic.mjs');
 const pageFile=join(root,'meta-games/connect/index.html');
 const configFile=join(root,'meta-games/connect/config.mjs');
 const manifestFile=join(root,'meta-games/connect/tools.json');
@@ -17,12 +17,19 @@ const baseline=check([]);
 assert.equal(baseline.status,0,'Baseline M6 SDK check failed:\n'+baseline.stdout+baseline.stderr);
 const page=readFileSync(pageFile,'utf8');
 const config=readFileSync(configFile,'utf8');
+const generator=readFileSync(join(root,'scripts/shared/mcp-connect/generate.mjs'),'utf8');
 const manifest=JSON.parse(readFileSync(manifestFile,'utf8'));
 const assertReplace=(s,oldText,newText)=>{
   assert.ok(s.includes(oldText),'Mutation anchor not found: '+oldText);
   return s.replace(oldText,newText);
 };
 const mutations=[
+  {
+    name:'test-specific-generator-deception',file:'generate.mjs',
+    expected:'Generator must not behave differently for test-specific modes',
+    content:assertReplace(generator,'writeFileSync(target,json);',
+      "if(process.argv.includes('--check')){}\\nwriteFileSync(target,json);")
+  },
   {
     name:'manifest-missing-tool',file:'tools.json',expected:'Manifest tools do not match',
     content:JSON.stringify({tools:manifest.tools.slice(0,-1)},null,2)
@@ -47,11 +54,12 @@ for(const m of mutations){
   try{
     const path=join(tmp,m.file);
     writeFileSync(path,m.content);
-    const result=check(['--'+(m.file==='tools.json'?'manifest':m.file==='config.mjs'?'config':'page'),path]);
+    const flag=m.file==='tools.json'?'manifest':m.file==='config.mjs'?'config':m.file==='generate.mjs'?'generator':'page';
+    const result=check(['--'+flag,path]);
     assert.equal(result.status,1,'Mutation escaped verification: '+m.name+'\n'+result.stdout+result.stderr);
     assert.ok(result.stderr.includes(m.expected),
       'Mutation caught for wrong reason: '+m.name+'\n'+result.stdout+result.stderr);
     console.log('M6_MUTATION_CAUGHT '+m.name);
   }finally{rmSync(tmp,{recursive:true,force:true})}
 }
-console.log('M6_MUTATIONS_PASS four faults, including hardcoded-tools deception');
+console.log('M6_MUTATIONS_PASS five faults, including hardcoded-tools and test-specific-generator deception');

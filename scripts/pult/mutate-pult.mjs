@@ -8,6 +8,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
 const verify = join(root, 'scripts/pult/verify-pult.mjs');
+const builderSource = readFileSync(join(root, 'scripts/pult/build.mjs'), 'utf8');
+assert.doesNotMatch(builderSource, /process\.env\.GITHUB_[A-Z_]+/, 'No GitHub Actions/test dependent behaviour (K4.1)');
 const page = readFileSync(join(root, 'meta-games/pult/index.html'), 'utf8');
 const finish = readFileSync(join(root, 'rules/09-platforma/FINISH.md'), 'utf8');
 const snapshot = /<script id="pult-data" type="application\/json">([\s\S]*?)<\/script>/;

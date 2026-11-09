@@ -3,7 +3,7 @@ export const serverRelativePath = 'shared/approved/mcp.mjs';
 
 export function buildClientConfigs(cloneDirectory) {
   const dir = String(cloneDirectory || '').trim().replace(/[\\/]+$/, '');
-  if (!/^(?:\/|[a-zA-Z]:[\\/])/.test(dir) || /[\r\n"'<>]/.test(dir)) {
+  if (!/^(?:\/|[a-zA-Z]:[\\/])/.test(dir) || /[\r\n"'<>`$;&|()]/.test(dir)) {
     throw new Error('Укажите абсолютный путь к локальной папке meta6-lab.');
   }
   const slash = dir.includes('\\') ? '\\' : '/';

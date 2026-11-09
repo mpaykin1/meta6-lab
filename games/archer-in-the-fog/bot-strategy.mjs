@@ -29,8 +29,11 @@ export async function playLevel(ctx, level) {
     }
     // Real fire challenge awards progress only for shooting down fireballs.
     // Hold challenge increments its own time counter; sparks must be earned.
-    const point = s.task === 'fire' && s.fireballScreen?.visible
-      ? s.fireballScreen : s.aimScreen;
+    // During the fire challenge, shooting the dragon cannot clear the task.
+    // Wait for an actual visible projectile instead of wasting shots.
+    const point = s.task === 'fire'
+      ? (s.fireballScreen?.visible ? s.fireballScreen : null)
+      : s.aimScreen;
     if (point?.visible) {
       await ctx.hold(point.x, point.y, 550);
     } else {

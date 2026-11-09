@@ -36,6 +36,10 @@
     "glow": {
       "emissive": "#ffbf69",
       "blend": "additive"
+    },
+    "electric": {
+      "emissive": "#cbbcff",
+      "blend": "additive"
     }
   },
   "textures": [
@@ -68,7 +72,7 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "head",
-      "file": "parts/plate.png",
+      "file": "textures/rust.png",
       "size": [
         0.74,
         0.74
@@ -109,7 +113,7 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "body",
-      "file": "parts/panel.png",
+      "file": "textures/rust.png",
       "size": [
         0.66,
         0.8
@@ -151,7 +155,7 @@
       "kind": "piston",
       "layer": "3d",
       "bone": "armL",
-      "file": "parts/piston.png",
+      "file": "textures/metal.png",
       "size": [
         0.19,
         0.49
@@ -194,7 +198,7 @@
       "kind": "piston",
       "layer": "3d",
       "bone": "legL",
-      "file": "parts/piston.png",
+      "file": "textures/metal.png",
       "size": [
         0.19,
         0.5
@@ -236,7 +240,7 @@
       "kind": "piston",
       "layer": "3d",
       "bone": "armR",
-      "file": "parts/piston.png",
+      "file": "textures/metal.png",
       "size": [
         0.19,
         0.49
@@ -279,7 +283,7 @@
       "kind": "piston",
       "layer": "3d",
       "bone": "legR",
-      "file": "parts/piston.png",
+      "file": "textures/metal.png",
       "size": [
         0.19,
         0.5
@@ -363,7 +367,7 @@
       "kind": "gear",
       "layer": "3d",
       "bone": "body",
-      "file": "parts/gear.png",
+      "file": "textures/metal.png",
       "size": [
         0.36,
         0.36
@@ -1576,7 +1580,7 @@
         0
       ],
       "depth": 3,
-      "material": "glow",
+      "material": "electric",
       "anim": [
         {
           "type": "flipbook",
@@ -1615,7 +1619,7 @@
         0
       ],
       "depth": 3,
-      "material": "glow",
+      "material": "electric",
       "anim": [
         {
           "type": "flipbook",
@@ -1654,7 +1658,7 @@
         0
       ],
       "depth": 3,
-      "material": "glow",
+      "material": "electric",
       "anim": [
         {
           "type": "flipbook",

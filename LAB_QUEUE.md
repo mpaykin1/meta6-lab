@@ -9,6 +9,15 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
+### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
+- Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/
+- Источник: `games/asqura-ilya-reference/index.html`, blob `b7b7167b3fb48776b2c82433087cb13e867e5abb`.
+- Каталог: `shared/references/asqura-ilya-reference.json`; 3D требует CDN Three.js r128.
+- Ветка: `lab/asqura-ilya-reference-1109`; PR — см. ветку.
+- Статус: В РАБОТЕ — Pages и бот ещё не подтверждены.
+- Михаил: запросил включение в эталоны; оценку игры не дал.
+
 ### lab/rainbow-acceleration-reference-1109 — «Радужный разгон»
 - Польза: неизменённый авторский эталон, 28 объектов галереи, игровые трассы, шейдеры, анимации и FX.
 - Играть после merge: https://mpaykin1.github.io/meta6-lab/games/rainbow-acceleration/

@@ -3,9 +3,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(process.argv.includes('--root') ? process.argv[process.argv.indexOf('--root') + 1] : fileURLToPath(new URL('../..', import.meta.url)));
-const REPO = process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab';
-const API = (process.env.GITHUB_API_URL || 'https://api.github.com').replace(/\/$/, '');
-const TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || '';
+const REPO = 'mpaykin1/meta6-lab';
+const API = 'https://api.github.com';
+const TOKEN = process.env.GH_TOKEN || '';
 const SITE = 'https://mpaykin1.github.io/meta6-lab';
 const HOURS = 72;
 const esc = value => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');

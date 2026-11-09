@@ -51,7 +51,7 @@ const mutations=[
   const target=/function listGameFiles\(id\)\{[\s\S]*?\n\}\n\nfunction checkedGameFile/;
   assert.match(s,target,'listGameFiles function not found');
   return s.replace(target,
-   'function listGameFiles(id){\n const snapshot='+JSON.stringify(staticSnapshot)+';\n return snapshot[id]||[];\n}\n\nfunction checkedGameFile');
+   'function listGameFiles(id){\n gameDirectory(id);\n const snapshot='+JSON.stringify(staticSnapshot)+';\n return snapshot[id]||[];\n}\n\nfunction checkedGameFile');
  }},
  {name:'cwd-dependent',expected:'list_game_files call failed',transform:s=>
   replaceRequired(s,"const repositoryRoot=realpathSync(fileURLToPath(new URL('../../',import.meta.url)));",

@@ -3,8 +3,11 @@ on:
   pull_request:
     branches: [main]
     types: [opened, synchronize, reopened, edited, ready_for_review]
+  push:
+    branches: [lab/kontur-guard]
 permissions:
   contents: read
+  pull-requests: read
 jobs:
   mutate-kontur-guard:
     name: mutate-kontur-guard
@@ -12,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -25,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -33,5 +36,20 @@ jobs:
           node-version: '22'
       - name: Fetch current main
         run: git fetch --no-tags origin main:refs/remotes/origin/main
+      - name: Recover real PR payload for branch-only verification
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl --fail --silent --show-error --location \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H 'Accept: application/vnd.github+json' \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls" |
+            jq -e 'map(select(.state == "open")) | first | {pull_request:{title:.title,body:(.body // "")}}' > "${RUNNER_TEMP}/kontur-pr-event.json"
       - name: Check PR policy and every permanent mutation
-        run: node scripts/kontur/guard.mjs
+        run: |
+          if [ "${GITHUB_EVENT_NAME}" = "push" ]; then
+            node scripts/kontur/guard.mjs --event-file "${RUNNER_TEMP}/kontur-pr-event.json"
+          else
+            node scripts/kontur/guard.mjs
+          fi

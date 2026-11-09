@@ -7,7 +7,7 @@ export function buildClientConfigs(cloneDirectory) {
     throw new Error('Укажите абсолютный путь к локальной папке meta6-lab.');
   }
   const slash = dir.includes('\\') ? '\\' : '/';
-  const file = dir + slash + serverRelativePath.replaceAll('/', slash);
+  const file = dir + (dir.endsWith(slash) ? '' : slash) + serverRelativePath.replaceAll('/', slash);
   const launch = {command: 'node', args: [file]};
   return {
     launch,

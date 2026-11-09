@@ -14,6 +14,7 @@ on:
       - 'shared/approved/**'
       - 'scripts/shared/verify-mcp-edit-game.mjs'
       - 'scripts/shared/mutate-mcp-edit-game.mjs'
+      - 'scripts/shared/crosscheck-mcp-edit-game.mjs'
       - '.github/workflows/lab-mcp-edit-game.yml'
 permissions:
   contents: read

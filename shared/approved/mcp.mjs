@@ -33,19 +33,15 @@ function answer(id,result,error){
  else out.result=result;
  process.stdout.write(JSON.stringify(out)+'\n');
 }
-// The legacy verifier initializes without a protocol version and expects four tools.
-// Versioned MCP clients receive the full catalog, including list_games.
-let legacyClient=false;
 for await(const line of readline.createInterface({input:process.stdin,crlfDelay:Infinity})){
  let msg;try{msg=JSON.parse(line)}catch{continue}
  if(msg.id===undefined)continue;
  try{
   if(msg.method==='initialize'){
-   legacyClient=!msg.params?.protocolVersion;
    answer(msg.id,{protocolVersion:'2025-03-26',capabilities:{tools:{}},serverInfo:{name:'meta-games-approved-source',version:'1.0.0'}});
   }
   else if(msg.method==='ping')answer(msg.id,{});
-  else if(msg.method==='tools/list')answer(msg.id,{tools:legacyClient?defs.slice(0,4):defs});
+  else if(msg.method==='tools/list')answer(msg.id,{tools:defs});
   else if(msg.method==='tools/call'){
    const {name,arguments:args={}}=msg.params||{};
    const value=name==='list_approved_components'?approvedComponents():

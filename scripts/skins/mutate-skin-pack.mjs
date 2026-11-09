@@ -43,4 +43,14 @@ for(const [name,id,mutate,repack] of cases){
   console.log('TRAP PASS '+name+' → '+id);
  }finally{fs.rmSync(root,{recursive:true,force:true});}
 }
-console.log('All',cases.length,'independent mutation traps passed');
+const wf=path.resolve('.github/workflows/skin-pack.yml');
+const guard=path.resolve('scripts/skins/verify-skin-browser-ci.mjs');
+const temp=fs.mkdtempSync(path.join(os.tmpdir(),'skin-runner-'));
+try{
+ const broken=path.join(temp,'skin-pack.yml');
+ fs.writeFileSync(broken,fs.readFileSync(wf,'utf8').replace('runs-on: ubuntu-24.04','runs-on: ubuntu-latest'));
+ const r=run(['node',guard,broken]);
+ if(r.status===0||!(r.stderr+r.stdout).includes('SKIN_CI_RUNNER'))throw Error('MUTATION ESCAPED: unsupported-ubuntu-latest-runner');
+ console.log('TRAP PASS unsupported-ubuntu-latest-runner → SKIN_CI_RUNNER');
+}finally{fs.rmSync(temp,{recursive:true,force:true});}
+console.log('All',cases.length+1,'independent mutation traps passed');

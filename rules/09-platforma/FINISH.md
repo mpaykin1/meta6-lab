@@ -44,7 +44,7 @@ Steam, Google Play, Earn / реклама / порог 100 DAU, аккаунты
 
 ## Запланировано
 
-После итогов экзаменов автозадач (проверка Claude) владелец запускает общий промпт для всех 5 автозадач: [automation/prompts/MG_PYAT_AVTOZADACH.md](../../automation/prompts/MG_PYAT_AVTOZADACH.md). До слова Claude «можно запускать» — не запускать.
+После итогов экзаменов автозадач (проверка Claude) владелец запускает общий промпт для всех 5 автозадач: [automation/prompts/MG_PYAT_AVTOZADACH.md](../../automation/prompts/MG_PYAT_AVTOZADACH.md). Запущен 09.11.2026.
 
 ## Порядок работы
 

@@ -4415,7 +4415,7 @@ function win() {
 }
 function die() {
   if (G.state !== 'play') return;
-  G.state = 'dead'; G.endT = 0; PG.play(false);
+  G.state = 'dead'; G.endT = 0; G.deadAt = performance.now(); PG.play(false);
   SFX.die(); stopBeam(); releaseAll();
   $('touch').hidden = true;
   emit('die');
@@ -4454,7 +4454,7 @@ function updateFlow(dt) {
     G.endT += dt;
     G.timeScale += (0.25 - G.timeScale) * damp(3, dt);
     G.desat = Math.min(0.85, G.desat + dt * 0.6);
-    if (G.endT > 2.4 && $('scrEnd').hidden) showEnd(false);
+    if (performance.now() - G.deadAt > 1200 && $('scrEnd').hidden) showEnd(false);
   } else if (G.state === 'victory') {
     G.endT += dt;
     if (G.endT > 4.2 && $('scrEnd').hidden) showEnd(true);

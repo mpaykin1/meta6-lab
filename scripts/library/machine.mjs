@@ -87,7 +87,7 @@ function scan(root,file,game,assets,solutions){
     const key=kind+'|'+name+'|'+lines.join(':');
     if(seen.has(key))return;seen.add(key);
     const rk=lines.join(':');
-    if(!memo.has(rk))memo.set(rk,hash(rangeBytes(text,...lines)));
+    if(!memo.has(rk))memo.set(rk,hash(Buffer.from(text.slice(offsets[lines[0]-1],lines[1]<offsets.length?offsets[lines[1]]:text.length),'utf8')));
     target.push({id:hash([game,source_path,kind,name,...lines].join('\0')).slice(0,24),game,kind,name,purpose,source_path,lines,sha256:memo.get(rk)});
   };
   const ext=path.extname(file).toLowerCase();

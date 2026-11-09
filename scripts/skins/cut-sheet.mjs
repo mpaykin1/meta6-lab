@@ -10,6 +10,7 @@ const id = path.basename(source);
 const file = path.join(source, 'parts-sheet.png');
 const mdFile = path.join(source, 'parts-sheet.md');
 const out = path.join(source, 'cut');
+const verifyOnly = process.argv.includes('--verify');
 const fail = message => { throw Error('НОЖНИЦЫ: ' + message); };
 const sha = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const isPower2 = v => v > 0 && (v & (v - 1)) === 0;
@@ -151,6 +152,21 @@ async function writeCrop(entry,rect,mask,pixels,w,h,palette,filename,side){
 }
 async function main(){
   if(!fs.existsSync(file)||!fs.existsSync(mdFile))fail('нет parts-sheet.png или parts-sheet.md в '+source);
+  if(verifyOnly){
+    const metaPath=path.join(out,'cut-manifest.json');
+    if(!fs.existsSync(metaPath))fail('нет cut-manifest.json: выходные файлы не проверены');
+    const meta=JSON.parse(fs.readFileSync(metaPath,'utf8'));
+    if(meta.sourceSheetSha256!==sha(file)||meta.sourceTableSha256!==sha(mdFile))fail('ОБМАН: вырезки не соответствуют текущему листу или таблице');
+    for(const [rel,digest] of Object.entries(meta.assetHashes||{})){
+      const abs=path.resolve(out,rel);
+      if(!abs.startsWith(out+path.sep)||!fs.existsSync(abs)||sha(abs)!==digest)fail('ОБМАН: старая/подменённая вырезка '+rel);
+    }
+    if(!Object.keys(meta.assetHashes||{}).length)fail('в манифесте нет контрольных сумм вырезок');
+    const prev=path.join(source,'cut-preview.png');
+    if(!fs.existsSync(prev)||sha(prev)!==meta.previewSha256)fail('ОБМАН: предпросмотр не соответствует исходному листу');
+    console.log('НОЖНИЦЫ: хеши источников, вырезок и превью совпадают');
+    return;
+  }
   const md=fs.readFileSync(mdFile,'utf8'),{entries,rows}=readParts(md);
   const palette=readPalette(md).map(colors);
   const {data,info}=await sharp(file,{limitInputPixels:64e6}).ensureAlpha().raw().toBuffer({resolveWithObject:true});
@@ -199,14 +215,19 @@ async function main(){
           await writeCrop(entry,rects[f],mask,data,w,h,palette,path.join(tmp,rel),32);
           rels.push(rel);
         }
+        const frameHashes=rels.map(p=>sha(path.join(tmp,p)));
+        if(new Set(frameHashes).size!==frameHashes.length)fail('повторяющиеся кадры разряда: '+entry.name);
         manifest.push({...entry,files:rels,frames,rect:rects});
       }
     }
-    fs.writeFileSync(path.join(tmp,'cut-manifest.json'),JSON.stringify({format:'meta6-cut/1',sourceSheetSha256:sha(file),sourceTableSha256:sha(mdFile),width:w,height:h,palette:palette.map(c=>'#'+c.map(x=>x.toString(16).padStart(2,'0')).join('')),parts:manifest},null,2)+'\n');
+    const assetHashes=Object.fromEntries(manifest.flatMap(p=>(p.file?[p.file]:p.files).map(f=>[f,sha(path.join(tmp,f))])));
+    const metadata={format:'meta6-cut/1',sourceSheetSha256:sha(file),sourceTableSha256:sha(mdFile),width:w,height:h,palette:palette.map(c=>'#'+c.map(x=>x.toString(16).padStart(2,'0')).join('')),parts:manifest,assetHashes};
     const tiles=manifest.flatMap(p=>p.file?[p.file]:p.files);
     const cols=6,tw=96,th=96,rowsCount=Math.ceil(tiles.length/cols),comps=[];
     for(let i=0;i<tiles.length;i++)comps.push({input:await sharp(path.join(tmp,tiles[i])).resize(72,72,{fit:'contain',kernel:'nearest'}).toBuffer(),left:(i%cols)*tw+12,top:Math.floor(i/cols)*th+12});
     const preview=await sharp({create:{width:cols*tw,height:rowsCount*th,channels:4,background:'#101820'}}).composite(comps).png().toBuffer();
+    metadata.previewSha256=crypto.createHash('sha256').update(preview).digest('hex');
+    fs.writeFileSync(path.join(tmp,'cut-manifest.json'),JSON.stringify(metadata,null,2)+'\n');
     fs.rmSync(out,{recursive:true,force:true});fs.renameSync(tmp,out);
     fs.writeFileSync(path.join(source,'cut-preview.png'),preview);
     console.log('НОЖНИЦЫ: '+manifest.length+' деталей, '+tiles.length+' вырезок, фон/ореолы удалены; '+path.relative(process.cwd(),path.join(source,'cut-preview.png')));

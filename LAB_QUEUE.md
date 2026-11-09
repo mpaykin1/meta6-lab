@@ -8,6 +8,17 @@
 
 <!-- карточки ниже -->
 
+### lab/sumerki-i-pepel-2-uploaded-reference — эталон «Сумерки и пепел II (Copy)»
+- Польза: исходная игра, графика и шейдеры доступны как неизменённый эталон для библиотеки.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/sumerki-i-pepel-2-copy/
+- Источник: `games/sumerki-i-pepel-2-copy/index.html`, blob `90d83a77049e8edb7aab847ecbbf4e9723a3c2e5`.
+- Каталог: `shared/references/sumerki-i-pepel-2-copy.json`.
+- Ветка: `lab/sumerki-i-pepel-2-uploaded-reference`; PR: https://github.com/mpaykin1/meta6-lab/pull/179
+- Статус: В РАБОТЕ — оригинал сохранён; прохождение ботом и мобильная совместимость не подтверждены.
+- Михаил: запросил загрузку как эталона, вердикта «нравится» о запуске не было; Claude: —.
+
+
+
 ### lab/play-connect-earn-home — главная Play / Connect / Earn
 - Польза: три работающие навигационные кнопки; Play открывает 10 игровых ссылок, Connect показывает MCP endpoint и копирование URL, Earn честно заблокирован до готовности и 100 DAU.
 - Ветка: `lab/play-connect-earn-home`.

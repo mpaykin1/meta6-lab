@@ -19,6 +19,61 @@
     }
     return nearest;
   }
+  // Read-only grid navigation through cells the world generator marked reachable.
+  // Goals are real walkable waypoints on the route to a real uncollected coin.
+  const route = { seed: null, coin: null, path: [], step: 1 };
+  function navigate(world, player, coin) {
+    const reach = world.reach, stand = world.stand;
+    const side = reach && Math.sqrt(reach.length);
+    if (!reach || !stand || !Number.isInteger(side)) return coin;
+    const clampCell = v => Math.max(0, Math.min(side - 1, Math.floor(v)));
+    const start = clampCell(player.x) + side * clampCell(player.z);
+    const end = clampCell(coin.x) + side * clampCell(coin.z);
+    const offPath = route.path.length && route.step < route.path.length &&
+      Math.hypot(player.x - (route.path[route.step] % side + 0.5),
+        player.z - (Math.floor(route.path[route.step] / side) + 0.5)) > 4;
+    if (route.seed !== world.seed || route.coin !== coin || !route.path.length || offPath) {
+      route.seed = world.seed; route.coin = coin; route.path = []; route.step = 1;
+      const prev = new Int32Array(reach.length); prev.fill(-1);
+      let origin = start;
+      if (!reach[origin]) {
+        let distance = Infinity;
+        for (let dz = -6; dz <= 6; dz++) for (let dx = -6; dx <= 6; dx++) {
+          const x = clampCell(player.x + dx), z = clampCell(player.z + dz);
+          const i = x + side * z, d = Math.hypot(player.x - x - 0.5, player.z - z - 0.5);
+          if (reach[i] && d < distance) { origin = i; distance = d; }
+        }
+      }
+      if (reach[origin] && reach[end]) {
+        const queue = new Int32Array(reach.length); let head = 0, tail = 1;
+        queue[0] = origin; prev[origin] = origin;
+        while (head < tail && prev[end] === -1) {
+          const i = queue[head++], x = i % side, z = Math.floor(i / side);
+          for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+            const X = x + dx, Z = z + dz;
+            if (X < 0 || Z < 0 || X >= side || Z >= side) continue;
+            const j = X + side * Z;
+            if (!reach[j] || prev[j] !== -1 || Math.abs(stand[j] - stand[i]) > 2) continue;
+            prev[j] = i; queue[tail++] = j;
+          }
+        }
+        if (prev[end] !== -1) {
+          let i = end;
+          while (i !== origin) { route.path.push(i); i = prev[i]; }
+          route.path.push(origin);
+          route.path.reverse();
+        }
+      }
+    }
+    if (!route.path.length) return coin;
+    while (route.step < route.path.length - 1) {
+      const i = route.path[route.step];
+      if (Math.hypot(player.x - (i % side + 0.5), player.z - (Math.floor(i / side) + 0.5)) >= 1.2) break;
+      route.step++;
+    }
+    const i = route.path[Math.min(route.path.length - 1, route.step + 1)];
+    return { x: i % side + 0.5, z: Math.floor(i / side) + 0.5 };
+  }
   const bot = Object.freeze({
     version: 1,
     info() { return { name: document.title, levels: 1 }; }, // one beacon mission per island run
@@ -26,11 +81,11 @@
       const api = game();
       const { G, player, world, combat } = api;
       const p = player.pos;
-      const coin = nearestLiveCoin(api.coins, p);
+      const coin = !G.all && route.coin?.alive ? route.coin : nearestLiveCoin(api.coins, p);
       const guardian = G.warden;
       const guardianHead = guardian && guardian.hp > 0 &&
         guardian.state !== 'dissolve' && guardian.segs?.[0];
-      const target = !G.all ? coin : (guardianHead || world.ring);
+      const target = !G.all && coin ? navigate(world, p, coin) : (guardianHead || world.ring);
       const goal = target ? { x: target.x, y: target.z } : null;
       const layoutHash = [
         world.seed, world.biome,

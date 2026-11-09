@@ -18,12 +18,12 @@
 | **MCP** | | | |
 | M1 | `list_games` возвращает все игры витрины, список читается из `meta-games/index.html` (не захардкожен) | `scripts/shared/verify-mcp-list-games.mjs` + `mutate-mcp-list-games.mjs` (6 ловушек) | ЗЕЛЁНАЯ — [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036), PR #178 |
 | M2 | `read_game`: чтение исходников любой игры из `list_games` (`list_game_files` + `read_game_file`) | `scripts/shared/verify-mcp-read-game.mjs` + `mutate-read-game.mjs` (6 ловушек) | ЗЕЛЁНАЯ — [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685), PR #185 |
-| M3 | `edit_game`: правка игры только в песочнице; результат — ветка + PR, никогда не `main` | — | НЕТ |
-| M4 | `run_bot`: запуск бота по игре через MCP, возврат результата | — | НЕТ |
-| M5 | Защита: запись вне `meta6-lab` и вне папки игры отклоняется | — | НЕТ |
+| M3 | `edit_game`: правка игры только в песочнице; результат — ветка + PR, никогда не `main` | `scripts/shared/verify-mcp-edit-game.mjs` + `mutate-mcp-edit-game.mjs` | ЗЕЛЁНАЯ — [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211) |
+| M4 | `run_bot`: запуск бота по игре через MCP, возврат результата | `scripts/shared/verify-mcp-run-bot.mjs` + `mutate-run-bot.mjs` (7 ловушек) | ЗЕЛЁНАЯ — [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211) |
+| M5 | Защита: запись вне `meta6-lab` и вне папки игры отклоняется | `scripts/shared/verify-mcp-edit-game.mjs` (15 атак) + `crosscheck-mcp-edit-game.mjs` | ЗЕЛЁНАЯ — [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211) |
 | M6 | Connect: страница с инструкцией подключения + тест реального внешнего MCP-клиента | — | НЕТ |
 | **БОТ** | | | |
-| B1 | Бот открывает каждую игру из `list_games` без ошибок консоли | — | НЕТ |
+| B1 | Бот открывает каждую игру из `list_games` без ошибок консоли | `scripts/platform/verify-bot-open-all.mjs` + `mutate-bot-open-all.mjs` | ЗЕЛЁНАЯ — [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082) |
 | B2 | Герой двигается от ввода | — | НЕТ |
 | B3 | Застревание героя замечено и исправлено сразу (без ожидания таймаута) | — | НЕТ |
 | B4 | Смерть героя замечена и обработана | — | НЕТ |
@@ -36,9 +36,9 @@
 | L3 | Каждый компонент загружается в браузерном тесте | — | НЕТ |
 | L4 | Демо-игра собрана только из библиотеки и проходит B1–B5 | — | НЕТ |
 | **ПЛАТФОРМА** | | | |
-| P1 | Витрина открывает все игры (HTTP 200 + отрисован canvas) | — | НЕТ |
+| P1 | Витрина открывает все игры (HTTP 200 + отрисован canvas) | `scripts/platform/verify-storefront.mjs` + `mutate-storefront.mjs` | ЗЕЛЁНАЯ — [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308) |
 
-**Готово: 2 из 18.**
+**Готово: 7 из 18.**
 
 ## ЗАМОРОЖЕНО до закрытия финиша
 

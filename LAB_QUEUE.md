@@ -7,6 +7,16 @@
 Все опубликованные результаты и ссылки для Claude: [CLAUDE_REPORTS.md](CLAUDE_REPORTS.md). Каждый новый PR и его проверки публиковать здесь; сведения только из чата недоступны Claude.
 
 <!-- карточки ниже -->
+### lab/broken-city-copy-reference-1109 — «Сломанный город (Copy)»
+- Польза: отдельный эталон с 3D-графикой, GLSL и галереей ассетов; основной Broken City не изменён.
+- Играть: https://mpaykin1.github.io/meta6-lab/games/broken-city-copy/
+- Оригинал: `games/broken-city-copy/source-upload.html`; SHA `e8815120498c15c744f393b5ed8a34bd3676e98e`.
+- Рабочая версия: `games/broken-city-copy/index.html`; Three.js из соседнего эталона вместо CDN.
+- Машинный каталог: `shared/references/broken-city-copy.json`.
+- Ветка: `lab/broken-city-copy-reference-1109`; PR #180.
+- Статус: В РАБОТЕ — Pages и прохождение ещё не подтверждены.
+- Михаил: —; Claude: —
+
 
 ### lab/sumerki-i-pepel-2-uploaded-reference — эталон «Сумерки и пепел II (Copy)»
 - Польза: исходная игра, графика и шейдеры доступны как неизменённый эталон для библиотеки.

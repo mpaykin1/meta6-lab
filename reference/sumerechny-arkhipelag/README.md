@@ -1,8 +1,8 @@
 # Сумеречный архипелаг — эталон META GAMES LAB
 
-- [Открыть игровую сцену](https://mpaykin1.github.io/meta6-lab/games/sumerechny-arkhipelag/) — после включения ветки в main и публикации Pages.
+- [Открыть игровую сцену](https://mpaykin1.github.io/meta6-lab/reference/sumerechny-arkhipelag/) — после включения ветки в main и публикации Pages.
 - [Исходный HTML](source-upload.html) — пользовательский файл **без изменений**, Git blob `cb77ce47588c38f3d52ab5db2211e26f9aa26562`, SHA-256 `7d0c4f3eb93fdd02942ce0ee4276cb7e0fe70b82e39a179d2f85ccbc1e0ffafc`, 194583 байта.
-- [Версия для META GAMES LAB](index.html) — идентичная игровая графика и логика; импорты Three.js r160 и Pixelify Sans перенаправлены на уже существующие локальные файлы `../twilight-isles/`, вызовы межстраничной рекламы удалены.
+- [Версия для META GAMES LAB](index.html) — идентичная игровая графика и логика; импорты Three.js r160 и Pixelify Sans перенаправлены на уже существующие локальные файлы `../../games/twilight-isles/`, вызовы межстраничной рекламы удалены.
 - [Машинная запись](../../shared/references/sumerechny-arkhipelag.json).
 
 ## Эталонные составляющие

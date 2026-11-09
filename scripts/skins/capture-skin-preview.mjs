@@ -17,7 +17,12 @@ try{
   await page.waitForFunction(()=>!!(window.__SKIN||window.__SKIN_ERROR),undefined,{timeout:45000});
   const result=await page.evaluate(()=>({error:window.__SKIN_ERROR||null,parts:window.__SKIN?.manifest.parts.length||0}));
   if(result.error||result.parts<30)throw Error('Skin not applied '+name+': '+JSON.stringify(result));
-  await page.evaluate(()=>document.querySelectorAll('.hint,#fade,#joy').forEach(el=>el.style.display='none'));
+  await page.evaluate(()=>{
+   document.querySelectorAll('.hint,#fade,#joy').forEach(el=>el.style.display='none');
+   const canvas=document.querySelector('canvas#gl');
+   canvas.style.transform='scale(2.25)';
+   canvas.style.transformOrigin='50% 42%';
+  });
   let distance=Math.abs(yaw/.006);
   while(distance>0.1){
    const step=Math.min(165,distance);

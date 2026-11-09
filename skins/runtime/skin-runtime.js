@@ -28,7 +28,8 @@ async function load(url,THREE){
    side:THREE.DoubleSide,blending:additive?THREE.AdditiveBlending:THREE.NormalBlending};
   if(additive)return new THREE.MeshBasicMaterial({...opts,color:def.emissive||0xffffff});
   return new THREE.MeshLambertMaterial({...opts,roughness:def.rough??.9,
-   emissive:new THREE.Color(def.emissive||0x000000),emissiveMap:emit||null});
+   emissive:new THREE.Color(def.emissive||(name==='metal'?0xb18b68:0xffaa5e)),
+   emissiveMap:emit||map||null,emissiveIntensity:name==='metal'?.38:.68});
  }
  function geometry(p){
   const d=p.dims||[.12,.12,.12];

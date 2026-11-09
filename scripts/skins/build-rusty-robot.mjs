@@ -87,20 +87,20 @@ function a(type,extra={}){
 }a.n=0;
 const parts=[];
 function put(id,kind,layer,bone,img,offset,size,anims=[],opts={}){
- parts.push({id,kind,layer,bone,file:img.startsWith('sheets/')?img:'parts/'+img+'.png',
+ parts.push({id,kind,layer,bone,file:img.startsWith('sheets/')||img.startsWith('textures/')?img:'parts/'+img+'.png',
  size,pivot:[.5,.5],offset,rotation:opts.rotation||[0,0,0],depth:opts.depth||3,
  material:opts.material||'rust',anim:anims,...(layer==='3d'?{primitive:opts.primitive||'box',dims:opts.dims||[size[0],size[1],.12]}:{})});
 }
 const back=.37;
-put('skull-shell','plate','3d','head','plate',[0,0,0],[.74,.74],[a('bob',{amp:.01})],{primitive:'sphere',dims:[.75,.75,.75]});
-put('torso-casing','plate','3d','body','panel',[0,0,0],[.66,.8],[a('pulse',{pulseLink:.45})],{dims:[.62,.78,.51]});
+put('skull-shell','plate','3d','head','textures/rust.png',[0,0,0],[.74,.74],[a('bob',{amp:.01})],{primitive:'sphere',dims:[.75,.75,.75]});
+put('torso-casing','plate','3d','body','textures/rust.png',[0,0,0],[.66,.8],[a('pulse',{pulseLink:.45})],{dims:[.62,.78,.51]});
 for(const s of [-1,1]){
  const side=s<0?'L':'R';
- put('upper-arm-'+side,'piston','3d','arm'+side,'piston',[0,-.27,0],[.19,.49],[a('swing',{amp:.03,inertia:.12,speedLink:.8})],{primitive:'cylinder',dims:[.20,.54,.2]});
- put('shin-'+side,'piston','3d','leg'+side,'piston',[0,-.3,0],[.19,.5],[a('bob',{amp:.012,speedLink:1.2})],{primitive:'cylinder',dims:[.19,.55,.19]});
+ put('upper-arm-'+side,'piston','3d','arm'+side,'textures/metal.png',[0,-.27,0],[.19,.49],[a('swing',{amp:.03,inertia:.12,speedLink:.8})],{primitive:'cylinder',dims:[.20,.54,.2]});
+ put('shin-'+side,'piston','3d','leg'+side,'textures/metal.png',[0,-.3,0],[.19,.5],[a('bob',{amp:.012,speedLink:1.2})],{primitive:'cylinder',dims:[.19,.55,.19]});
 }
 put('crown-antenna','orb','3d','antenna','orb',[0,.07,0],[.16,.16],[a('pulse',{pulseLink:.65})],{primitive:'sphere',dims:[.15,.15,.15],material:'glow'});
-put('rear-engine','gear','3d','body','gear',[0,.10,.34],[.36,.36],[a('rotate',{speedLink:.5})],{primitive:'cylinder',dims:[.29,.12,.12],rotation:[Math.PI/2,0,0]});
+put('rear-engine','gear','3d','body','textures/metal.png',[0,.10,.34],[.36,.36],[a('rotate',{speedLink:.5})],{primitive:'cylinder',dims:[.29,.12,.12],rotation:[Math.PI/2,0,0]});
 put('chest-plating','plate','2.5d','body','plate',[-.06,.17,-.3],[.57,.41],[a('flap',{amp:.024})]);
 put('open-furnace','core','2.5d','body','core',[0,-.12,-.316],[.19,.43],[a('pulse',{pulseLink:1.8})],{material:'glow',depth:2});
 put('chest-gear-large','gear','2.5d','body','gear',[.19,.15,-.33],[.26,.26],[a('rotate',{speedLink:.9})]);
@@ -133,9 +133,9 @@ put('rear-leg-hatch','panel','2.5d','legR','stripe',[0,-.27,.14],[.17,.29],[a('f
 put('head-top-beacon','orb','2d','head','orb',[0,.72,0],[.19,.19],[a('bob',{amp:.038}),a('pulse',{pulseLink:1.5})],{material:'glow'});
 put('beacon-dot-1','orb','2d','head','orb',[0,.49,0],[.065,.07],[a('bob',{amp:.04})],{material:'glow'});
 put('beacon-dot-2','orb','2d','head','orb',[0,.33,0],[.045,.05],[a('bob',{amp:.02})],{material:'glow'});
-put('arc-head','arc','2d','head','sheets/arc.png',[.38,.04,-.14],[.37,.22],[a('flipbook',{frames:8,fps:12,duty:.65,pulseLink:1.5})],{material:'glow'});
-put('arc-right-hand','arc','2d','armR','sheets/spark.png',[.21,-.46,-.13],[.32,.3],[a('flipbook',{frames:8,fps:15,duty:.8,pulseLink:1.6})],{material:'glow'});
-put('arc-left-hand','arc','2d','armL','sheets/arc.png',[-.22,-.47,-.13],[.26,.27],[a('flipbook',{frames:8,fps:17,duty:.77,pulseLink:1.7})],{material:'glow'});
+put('arc-head','arc','2d','head','sheets/arc.png',[.38,.04,-.14],[.37,.22],[a('flipbook',{frames:8,fps:12,duty:.65,pulseLink:1.5})],{material:'electric'});
+put('arc-right-hand','arc','2d','armR','sheets/spark.png',[.21,-.46,-.13],[.32,.3],[a('flipbook',{frames:8,fps:15,duty:.8,pulseLink:1.6})],{material:'electric'});
+put('arc-left-hand','arc','2d','armL','sheets/arc.png',[-.22,-.47,-.13],[.26,.27],[a('flipbook',{frames:8,fps:17,duty:.77,pulseLink:1.7})],{material:'electric'});
 put('steam-spurt','smoke','2d','head','sheets/smoke.png',[-.27,.22,.12],[.27,.24],[a('flipbook',{frames:8,fps:9,duty:.8})],{material:'glow'});
 put('ember-left','orb','2d','body','spark',[-.28,-.24,-.2],[.08,.09],[a('orbit',{amp:.1}),a('pulse',{pulseLink:.5})],{material:'glow'});
 put('ember-right','orb','2d','body','spark',[.28,-.21,-.2],[.08,.09],[a('orbit',{amp:.08})],{material:'glow'});
@@ -145,7 +145,7 @@ const used=new Set(parts.map(x=>x.file));used.add('textures/rust.png');used.add(
 for(const name of drawNames){const p=path.join(OUT,'parts',name+'.png');if(!used.has('parts/'+name+'.png'))fs.rmSync(p);}
 const manifest={format:'meta6-skin/1',name:'rusty-robot',reference:'reference.png',palette:P,
  hideBase:['head','body','armL','armR','legL','legR'],
- materials:{rust:{rough:.94,metal:.26},metal:{rough:.72,metal:.68},glow:{emissive:'#ffbf69',blend:'additive'}},
+ materials:{rust:{rough:.94,metal:.26},metal:{rough:.72,metal:.68},glow:{emissive:'#ffbf69',blend:'additive'},electric:{emissive:'#cbbcff',blend:'additive'}},
  textures:[{id:'head-rust',file:'textures/rust.png',emit:'textures/rust_emit.png',uv:'sphere',material:'rust',apply:'antenna'},
  {id:'metal',file:'textures/metal.png',uv:'cyl',material:'metal',apply:'root'},
  {id:'luminescent',file:'textures/glow_emit.png',uv:'plane',material:'glow',apply:'root'}],parts};

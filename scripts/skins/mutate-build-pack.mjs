@@ -42,6 +42,6 @@ await test('старый PNG в готовом пакете',t=>{
  const m=JSON.parse(fs.readFileSync(path.join(t.pack,'skin.json'),'utf8'));
  const rel=Object.keys(m.source.assets).find(x=>x.startsWith('parts/'));
  fs.writeFileSync(path.join(t.pack,rel),'old asset from another build');
- fs.copyFileSync(path.join(originalPack,'preview.png'),path.join(t.pack,'preview.png'));
+ fs.copyFileSync(path.join(t.src,'cut-preview.png'),path.join(t.pack,'preview.png'));
 },{afterBuild:true,finish:true});
 console.log('К5: шесть ловушек сборщика сработали');

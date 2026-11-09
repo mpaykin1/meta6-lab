@@ -12,7 +12,7 @@ export function searchLibrary(filters={},root=ROOT){
     if(game&&entry.game!==game)return false;
     if(kind&&entry.kind!==kind)return false;
     if(purpose&&!entry.purpose.some(value=>value.toLowerCase().includes(purpose.toLowerCase())))return false;
-    if(q&&!([entry.game,entry.kind,entry.source_path,...entry.purpose].join(' ').toLowerCase().includes(q.toLowerCase())))return false;
+    if(q&&!([entry.game,entry.kind,entry.name||'',entry.source_path,...entry.purpose].join(' ').toLowerCase().includes(q.toLowerCase())))return false;
     return true;
   });
   return {total:matches.length,offset,results:matches.slice(offset,offset+limit)};

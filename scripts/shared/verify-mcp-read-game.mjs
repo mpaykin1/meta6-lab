@@ -98,7 +98,7 @@ async function verifyGames(ask){
   const original=readFileSync(join(directory,'index.html'),'utf8');
   const chunks=asLines(original);
   const actual=await call(ask,'read_game_file',{id:game.id,file:'index.html'});
-  assert.equal(actual.text,chunks.slice(0,400).join(''),'Index content mismatch: '+game.id);
+  assert.ok(actual.text===chunks.slice(0,400).join(''),'Index content mismatch: '+game.id);
   assert.equal(actual.totalLines,chunks.length,'Index totalLines mismatch: '+game.id);
   assert.equal(actual.bytes,Buffer.byteLength(original),'Index bytes mismatch: '+game.id);
   assert.equal(actual.start,1,'Default start mismatch');

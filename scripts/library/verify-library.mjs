@@ -45,11 +45,15 @@ function expectedGames(root){
   for(const source_root of canonical)found.push({game:'reference-'+source_root.replaceAll('/','--'),source_root});
   return found.sort((a,b)=>a.game.localeCompare(b.game,'en'));
 }
+const sourceCache=new Map();
 function lineBuffer(file,lines){
   if(!Array.isArray(lines)||lines.length!==2||lines.some(n=>!Number.isInteger(n)))fail('missing line bounds '+file);
-  const bytes=fs.readFileSync(file),starts=[0];
-  for(let i=0;i<bytes.length;i++)if(bytes[i]===10)starts.push(i+1);
-  const [a,b]=lines;
+  if(!sourceCache.has(file)){
+    const bytes=fs.readFileSync(file),starts=[0];
+    for(let i=0;i<bytes.length;i++)if(bytes[i]===10)starts.push(i+1);
+    sourceCache.set(file,{bytes,starts});
+  }
+  const {bytes,starts}=sourceCache.get(file),[a,b]=lines;
   if(a<1||b<a||b>starts.length)fail('invalid code range '+file+':'+lines);
   return bytes.subarray(starts[a-1],b<starts.length?starts[b]:bytes.length);
 }

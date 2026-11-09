@@ -116,7 +116,10 @@ export async function playLevel(ctx, level) {
       const stickX = cy * worldX - sy * worldZ;
       const stickY = sy * worldX + cy * worldZ;
       const length = Math.hypot(stickX, stickY) || 1;
-      await ctx.joystick(stickX / length, stickY / length, 450);
+      // At the pickup radius, a fixed 450ms move can overshoot the coin
+      // between low-FPS frames. Shorten only the real joystick hold.
+      const moveMs = Math.max(100, Math.min(450, Math.round(distance * 180)));
+      await ctx.joystick(stickX / length, stickY / length, moveMs);
       if (step % 8 === 7 && ctx.state().grounded) {
         await jumpThroughInput(ctx, ctx.state());
       }

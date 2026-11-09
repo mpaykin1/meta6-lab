@@ -61,52 +61,48 @@ function isMagenta(r,g,b){
 function detectRows(mask,w,h,n) {
   const activity=new Int32Array(h);
   for(let y=0;y<h;y++)for(let x=0;x<w;x++)activity[y]+=mask[y*w+x];
-  const minRun=Math.max(4,Math.round(h*.004));
   const first=activity.findIndex(v=>v>0),last=activity.findLastIndex(v=>v>0);
   if(first<0)fail('на листе нет деталей: проверьте розовый фон');
-  const gaps=[];let start=-1;
-  for(let y=first;y<=last+1;y++){
-    if(y<=last && activity[y]===0){if(start<0)start=y;}
-    else if(start>=0){if(y-start>=minRun)gaps.push({a:start,b:y,width:y-start});start=-1;}
-  }
-  // Пять авторских рядов: выбираем именно разделительные полосы фона.
-  let candidates=gaps.sort((a,b)=>b.width-a.width).slice(0,n-1).sort((a,b)=>a.a-b.a);
-  if(candidates.length!==n-1) {
-    // Тонкие провода могут пересечь визуальный зазор и обнулить его длину:
-    // восстанавливаем разделители из минимумов проекции вместо жёсткого "0 px".
-    const low=Math.max(2,Math.floor(w*.005)),soft=[];
+  const minBand=Math.max(24,Math.floor((last-first+1)/(n*2)));
+  const thresholds=[0,Math.max(1,Math.floor(w*.002)),Math.max(2,Math.floor(w*.006))];
+  const gaps=[];
+  for(const threshold of thresholds){
     let a=-1;
     for(let y=first;y<=last+1;y++){
-      if(y<=last&&activity[y]<=low){if(a<0)a=y;}
-      else if(a>=0){if(y-a>=minRun)soft.push({a,b:y,width:y-a});a=-1;}
+      if(y<=last&&activity[y]<=threshold){if(a<0)a=y;}
+      else if(a>=0){const width=y-a;if(width>=4)gaps.push({a,b:y,width,threshold});a=-1;}
     }
-    const picked=[];
-    for(const g of [...soft,...gaps].sort((a,b)=>b.width-a.width)){
-      const mid=(g.a+g.b)/2;
-      if(picked.every(v=>Math.abs(mid-(v.a+v.b)/2)>=h*.09))picked.push(g);
-      if(picked.length===n-1)break;
-    }
-    if(picked.length<n-1){
-      const span=last-first;
-      for(let i=1;i<n;i++){
-        const desired=first+span*i/n;
-        let best=-1,cost=Infinity;
-        for(let y=Math.max(first+5,Math.floor(desired-span*.13));y<Math.min(last-5,desired+span*.13);y++){
-          const score=activity[y]+Math.abs(y-desired)*w*.0007;
-          if(picked.every(v=>Math.abs(y-(v.a+v.b)/2)>=h*.08) && score<cost){cost=score;best=y;}
-        }
-        if(best>=0)picked.push({a:best,b:best,width:0});
-        if(picked.length===n-1)break;
-      }
-    }
-    candidates=picked.sort((a,b)=>a.a-b.a);
   }
-  if(candidates.length!==n-1)fail('не найдены '+n+' рядов; видимые пустые промежутки: '+gaps.map(g=>g.a+'-'+g.b).join(', '));
-  const edges=[first,...candidates.map(g=>Math.floor((g.a+g.b)/2)),last+1];
-  const bands=[];
+  // Реальные промежутки важнее размера ряда; исключаем ложные
+  // узкие "пятые ряды" из случайных пикселей у нижней рамки.
+  const picked=[];
+  for(const g of gaps.sort((a,b)=>b.width-a.width||a.threshold-b.threshold)){
+    const mid=Math.round((g.a+g.b)/2);
+    if(mid-first<minBand||last-mid<minBand)continue;
+    if(picked.every(p=>Math.abs(p-mid)>=minBand))picked.push(mid);
+    if(picked.length===n-1)break;
+  }
+  while(picked.length<n-1){
+    const boundaries=[first,...picked.slice().sort((a,b)=>a-b),last+1];
+    const intervals=boundaries.slice(0,-1).map((a,i)=>({a,b:boundaries[i+1]}))
+      .filter(v=>v.b-v.a>=minBand*2)
+      .sort((a,b)=>(b.b-b.a)-(a.b-a.a));
+    if(!intervals.length)fail('невозможно отделить '+n+' рядов: на рисунке пересекаются детали');
+    const {a,b}=intervals[0],middle=(a+b)/2;
+    let best=-1,cost=Infinity;
+    for(let y=a+minBand;y<b-minBand;y++){
+      const smooth=(activity[Math.max(first,y-2)]+activity[y-1]+activity[y]+activity[y+1]+activity[Math.min(last,y+2)])/5;
+      const score=smooth + (Math.abs(y-middle)/(b-a))*w*.008;
+      if(score<cost){cost=score;best=y;}
+    }
+    if(best<0)fail('невозможно обнаружить межрядный зазор');
+    picked.push(best);
+  }
+  const edges=[first,...picked.sort((a,b)=>a-b),last+1],bands=[];
   for(let i=0;i<n;i++){
     const y0=edges[i],y1=edges[i+1];
-    if(y1<=y0||!activity.slice(y0,y1).some(Boolean))fail('пустой ряд '+(i+1));
+    if(y1-y0<minBand||!activity.slice(y0,y1).some(Boolean))
+      fail('ряд '+(i+1)+' пуст или слишком узок ('+(y1-y0)+' px)');
     bands.push({y0,y1});
   }
   return bands;

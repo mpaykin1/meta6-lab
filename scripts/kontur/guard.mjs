@@ -18,13 +18,15 @@ export function parseDiff(diff){
  let file=null, hunk=null, nextLine=0;
  for(const line of diff.split(/\r?\n/)){
   if(line.startsWith('diff --git ')){
-   file={path:'',hunks:[],added:[],removed:[]};
+   // Keep the old path so deleted files are still checked (OSHIBKI #5).
+   const named=/^diff --git a\/(\S+) b\//.exec(line);
+   file={path:named?named[1]:'',deleted:false,hunks:[],added:[],removed:[]};
    files.push(file);
    hunk=null;
   }else if(file && line.startsWith('+++ b/')){
    file.path=line.slice(6);
   }else if(file && line.startsWith('+++ /dev/null')){
-   file.path='';
+   file.deleted=true;
   }else if(file && line.startsWith('@@ ')){
    const match=/^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/.exec(line);
    if(!match)throw Error('Malformed unified diff hunk: '+line);
@@ -68,9 +70,9 @@ function dangerousLine(text){
  if(/^(?:\/\/|\/\*|\*|<!--|#)/.test(line))return null;
  const legacy=/\b(?:legacy[\w$]*|isTest[\w$]*)\b/i.exec(line);
  if(legacy)return 'запрещён тестовый/legacy-флаг '+legacy[0]+' (К4.1)';
- if(/\bprocess\s*(?:\.\s*env|\[\s*['"]env['"]\s*\])\s*(?:\.\s*CI|\[\s*['"]CI['"]\s*\])/.test(line)){
-  return 'ветвление по process.env.CI (К4.1)';
- }
+ // Any CI/test environment detection, not only CI (OSHIBKI #6).
+ const envFlag=/\bprocess\s*(?:\.\s*env|\[\s*['"]env['"]\s*\])\s*(?:\.\s*|\[\s*['"])(CI|GITHUB_[A-Z_]*|RUNNER_[A-Z_]*|NODE_ENV|JEST_[A-Z_]*|VITEST[A-Z_]*|NODE_TEST[A-Z_]*)\b/.exec(line);
+ if(envFlag)return 'ветвление по окружению CI/тестов process.env.'+envFlag[1]+' (К4.1)';
  return null;
 }
 
@@ -100,6 +102,9 @@ export function checkDiff(diff,title='',body=''){
  const errors=[];
  const changedMarker=/^ПРОВЕРКА ИЗМЕНЕНА:\s*\S/m.test(body);
  for(const file of files){
+  if(controlledCheck(file.path) && file.deleted && !changedMarker){
+   errors.push(file.path+': удалён файл проверки/ловушки; add PR description line ПРОВЕРКА ИЗМЕНЕНА: <что и почему> (К6)');
+  }
   if(controlledCheck(file.path) && !changedMarker){
    for(const hunk of file.hunks){
     const reduced=loweredAssert(hunk);

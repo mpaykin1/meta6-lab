@@ -36,6 +36,20 @@ const scenarios=[
   reason:/OSHIBKI\.md/
  },
  {
+  name:'trap-file-deleted',
+  title:'Cleanup',
+  body:'',
+  patch:'diff --git a/scripts/shared/mutate-example.mjs b/scripts/shared/mutate-example.mjs\ndeleted file mode 100644\n--- a/scripts/shared/mutate-example.mjs\n+++ /dev/null\n@@ -1,2 +0,0 @@\n-import assert from \'node:assert/strict\';\n-assert.equal(result.status,1);\n',
+  reason:/удалён файл проверки/
+ },
+ {
+  name:'github-actions-env-deception',
+  title:'MCP tools',
+  body:'',
+  patch:diff('shared/approved/mcp.mjs',['-const tools=[];','+if(process.env.GITHUB_ACTIONS){defs.length=4}']),
+  reason:/GITHUB_ACTIONS/
+ },
+ {
   name:'honest-change',
   title:'MCP: new method',
   body:'New method, no old assertions affected.',
@@ -66,7 +80,7 @@ try{
   }
   console.log('KONTUR_MUTATION_CAUGHT '+id);
  }
- console.log('MUTATE_KONTUR_GUARD_PASS all three traps caught and honest case accepted');
+ console.log('MUTATE_KONTUR_GUARD_PASS all five traps caught and honest case accepted');
 }finally{
  rmSync(workspace,{recursive:true,force:true});
 }

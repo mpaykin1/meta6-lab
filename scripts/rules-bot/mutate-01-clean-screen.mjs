@@ -10,6 +10,8 @@ const scenarios=[
  {id:'pseudo-content-deception',signature:'Постоянный текст',edit:s=>s.replace('</head>','<style>body::after{content:"CSS HUD 888";position:fixed;left:25%;top:30%;color:white;font-size:23px;z-index:9999}</style></head>')},
  {id:'canvas-text-overlay',signature:'canvas',edit:s=>s.replace('</body>','<script>const c=document.createElement("canvas");c.style="position:fixed;left:20%;top:30%;z-index:9999;background:black;width:220px;height:90px";document.body.append(c);const g=c.getContext("2d");g.fillStyle="white";g.font="22px sans-serif";g.fillText("ЭКРАННЫЙ ТЕКСТ",10,45)</script></body>')}
 ];
+const healthy=await audit({ids:['01-clean-screen']});
+if(healthy.length!==2||healthy.some(x=>x.status!=='ВЫПОЛНЕНО'))throw Error('Чистый тренажёр ложноположительно красный: '+formatReport(healthy));
 for(const scenario of scenarios){
  const dir=fs.mkdtempSync(path.join(root,'games/.rules-bot-mutation-'));
  try{

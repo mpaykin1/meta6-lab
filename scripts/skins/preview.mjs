@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import {chromium} from 'playwright';
 const src=path.resolve(process.argv[2]||'skins/sources/rusty-robot');
 const id=path.basename(src);
-const pack=path.resolve('skins/packs',id);
+const pack=path.resolve(process.argv[3]&&!process.argv[3].startsWith('--')?process.argv[3]:path.join('skins/packs',id));
 const preview=path.join(pack,'preview.png');
 const side=path.join(src,'side-by-side.png');
 const metaFile=path.join(src,'preview-meta.json');

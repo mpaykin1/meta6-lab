@@ -35,7 +35,7 @@ jobs:
       - name: Install pinned official MCP SDK (only CI verifier needs npm)
         run: npm install --prefix scripts/shared/mcp-connect --no-package-lock --no-audit --no-fund
       - name: Verify tools were generated from actual tools/list
-        run: node scripts/shared/mcp-connect/generate.mjs --check
+        run: node scripts/shared/mcp-connect/generate.mjs && git diff --exit-code -- meta-games/connect/tools.json
       - name: Official SDK external stdio client and list_games
         run: node scripts/shared/mcp-connect/verify.mjs
       - name: Negative mutation tests, including hardcoded-list deception

@@ -1,10 +1,10 @@
 # Ржавый робот — поэтапная сборка
 
-- этап 0 сделан
-- SHA: https://github.com/mpaykin1/meta6-lab/commit/7449406c16977125dcba5e9d3237959aea4406e5
-- Прогон: https://github.com/mpaykin1/meta6-lab/actions/runs/42664680345
+- этап 0 сделан (правка)
+- SHA правки README: https://github.com/mpaykin1/meta6-lab/commit/b815ef7ae9c838f397823cf07189cfd7f0f5eae6
+- Прогон: ожидается новый skin-pack CI после коммита STAGE.md
 - Картинка: https://github.com/mpaykin1/meta6-lab/blob/lab/skin-rusty-robot/skins/packs/rusty-robot/stages/0.png
-- Таблица 26 деталей и 12 образцов палитры: README.md
+- 14 выносок эскиза, 16 точных уточнений и 12 неизменённых образцов палитры: README.md
 - Эскиз: reference.png, Git blob f66ad0f0cf976b86600e91efd3e819cb81afe8d1
 - Статус: сдано на проверку Claude, следующий этап запрещён до комментария принятия.
 

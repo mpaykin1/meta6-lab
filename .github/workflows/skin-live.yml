@@ -1,0 +1,40 @@
+name: Rusty robot — public Pages HTTP and browser
+on:
+  push:
+    branches: ['lab/skin-rusty-robot']
+    paths:
+      - 'skins/packs/rusty-robot/**'
+      - 'skins/packs/rusty-robot.zip'
+      - '.github/workflows/skin-live.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-skin:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait until Pages serves this exact skin pack (not a stale preview)
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://mpaykin1.github.io/meta6-lab/preview/skin-rusty-robot'
+          game="$base/games/skin-trainer/?skin=../../skins/packs/rusty-robot/"
+          for attempt in $(seq 1 50); do
+            if curl -fsSL --max-time 12 -o /dev/null "$game" &&
+               curl -fsSL --max-time 12 "$base/skins/packs/rusty-robot/skin.json" | cmp - skins/packs/rusty-robot/skin.json &&
+               curl -fsSL --max-time 12 "$base/skins/packs/rusty-robot/preview.png" | cmp - skins/packs/rusty-robot/preview.png; then
+              echo "PUBLIC_PAGES_HTTP_200_AND_EXACT_PACK PASS attempt $attempt: $game"
+              exit 0
+            fi
+            sleep 8
+          done
+          echo "PUBLIC_PAGES_NOT_DEPLOYED: Page or assets missing/stale" >&2
+          exit 1
+      - name: Install Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Confirm published skin visible and console clean
+        run: node scripts/platform/verify-public-skin.mjs

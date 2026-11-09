@@ -41,19 +41,20 @@ for x,y in ((8,8),(55,8),(8,55),(55,55)):
  d.line([(x-2,y-2),(x,y-2)],fill=C["#eb8b4b"],width=1)
 metal=Image.new("RGBA",(64,64),C["#20141e"])
 m=ImageDraw.Draw(metal)
-# Four close-set ribbed vertical piston cylinders; gaps are deep black.
-for x,w in ((3,12),(18,12),(34,12),(50,11)):
- m.rectangle((x,0,x+w,63),fill=C["#35242a"])
- m.rectangle((x+1,0,x+3,63),fill=C["#4d3a3c"])
- m.rectangle((x+4,0,x+5,63),fill=C["#83482d"])
- m.rectangle((x+w-3,0,x+w,63),fill=C["#20141e"])
- # Repeating horizontal collars only inside each cylinder, never across gaps.
- for y in (5,15,25,35,45,55):
-  m.rectangle((x,y,x+w-2,y+3),fill=C["#4d3a3c"])
-  m.line([(x,y),(x+w-3,y)],fill=C["#83482d"],width=1)
-  m.rectangle((x+w-3,y+1,x+w,y+4),fill=C["#20141e"])
- # Heavy dark piston socket at the base.
- m.rectangle((x+2,59,x+w-2,63),fill=C["#35242a"])
+# Four close-set ribbed piston cylinders built as stacks of rounded rings
+# (sketch: "stack of rings"), lit from the left, shadowed right, black gaps.
+def band(y0,y1,x,cols):
+ cx=x
+ for col,w in cols:
+  m.rectangle((cx,y0,cx+w-1,y1),fill=C[col]); cx+=w
+for x in (1,17,33,49):
+ for y in range(0,64,8):
+  # neck between rings: narrower core, 4 rows
+  band(y+4,y+7,x+2,(("#83482d",2),("#4d3a3c",4),("#35242a",2),("#20141e",2)))
+  # ring top: lit rim, full 14 px width
+  band(y,y+1,x,(("#a65333",2),("#d27238",2),("#83482d",4),("#4d3a3c",4),("#35242a",2)))
+  # ring underside: dark curve
+  band(y+2,y+3,x,(("#613528",2),("#83482d",2),("#4d3a3c",4),("#35242a",4),("#20141e",2)))
 root.joinpath("textures").mkdir(exist_ok=True)
 rust.save(root/"textures/rust.png",optimize=True)
 metal.save(root/"textures/metal.png",optimize=True)

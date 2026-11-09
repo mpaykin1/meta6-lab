@@ -53,7 +53,7 @@ w,h=source.size
 plate=source.crop(tuple(map(round,(w*.39,h*.49,w*.59,h*.61))))
 mechanics=source.crop(tuple(map(round,(w*.47,h*.57,w*.66,h*.70))))
 W,H=1660,930
-out=Image.new("RGB",(W,H),(29,30,34));g=ImageDraw.Draw(out)
+out=Image.new("RGBA",(W,H),(29,30,34,255));g=ImageDraw.Draw(out)
 font="/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 head=ImageFont.truetype(font,28);body=ImageFont.truetype(font,19);small=ImageFont.truetype(font,15)
 g.text((36,23),"ЭТАП 1 · РЖАВАЯ БРОНЯ / ТЁМНАЯ МЕХАНИКА",font=head,fill="#efdfc8")
@@ -76,5 +76,6 @@ for i,(name,tex) in enumerate((("RUST · КРУПНЫЕ ПЛАСТИНЫ",rust),
  g=ImageDraw.Draw(out)
  g.text((742,y+302),"64×64  →  ×4",font=small,fill="#e4d3be")
  g.text((1129,y+302),"2×2 ПОВТОР · ×2",font=small,fill="#e4d3be")
-out.save(root/"stages/1.png",optimize=True)
+out.save(root/"stages/1.png",format="PNG",optimize=True)
+assert Image.open(root/"stages/1.png").mode=="RGBA"
 print("STAGE 1 MATERIALS GENERATED: rust.png, metal.png, stages/1.png")

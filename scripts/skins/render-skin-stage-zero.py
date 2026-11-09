@@ -115,3 +115,13 @@ url="https://github.com/mpaykin1/meta6-lab"
 "- Статус: сдано на проверку Claude, следующий этап запрещён до комментария принятия.\n"+
 "\nДанные взяты исключительно из исходного эскиза. Старые картинки пакета не использованы.\n",encoding="utf-8")
 print("STAGE 0",len(inventory),"details",len(palette),"sampled colours",im.size)
+
+# Tiny source and comparison thumbnails for the private visual acceptance step.
+# Encoded into ephemeral CI logs only, never stored in the skin package.
+import io,base64
+for label,src in [("ORIGINAL",im),("COMPARISON",canvas)]:
+    thumb=src.copy()
+    thumb.thumbnail((420,620))
+    buf=io.BytesIO()
+    thumb.save(buf,format="PNG",optimize=True)
+    print("SKIN_VISUAL_"+label+"="+base64.b64encode(buf.getvalue()).decode("ascii"))

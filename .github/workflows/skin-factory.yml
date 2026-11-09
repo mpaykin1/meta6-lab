@@ -33,6 +33,8 @@ jobs:
           node scripts/skins/cut-sheet.mjs skins/sources/rusty-robot --verify
       - name: Проверить испорченные листы и подменённые файлы
         run: node scripts/skins/mutate-cut-sheet.mjs skins/sources/rusty-robot
+      - name: Собрать реальный пакет из новых PNG
+        run: node scripts/skins/build-pack.mjs skins/sources/rusty-robot
       - name: Сохранить вырезки и визуальную сверку
         if: always()
         uses: actions/upload-artifact@v4
@@ -41,4 +43,5 @@ jobs:
           path: |
             skins/sources/rusty-robot/cut-preview.png
             skins/sources/rusty-robot/cut/**
+            skins/packs/rusty-robot/skin.json
           if-no-files-found: warn

@@ -4,6 +4,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {ROOT,buildLibrary,LIMIT} from './machine.mjs';
+import {searchLibrary} from './search.mjs';
 
 const sum=buffer=>crypto.createHash('sha256').update(buffer).digest('hex');
 const extSet=new Set(['.glb','.gltf','.png','.webp','.jpg','.jpeg','.mp3','.ogg','.wav','.json','.svg','.bin','.woff','.woff2','.ttf','.otf']);
@@ -107,8 +108,8 @@ export function verifyLibrary(root=ROOT,{live=true}={}){
         if(a.kind!=='solution'&&!['inline-style','inline-svg','data-uri','base64-data','source-table','embedded-shader'].includes(a.kind))fail('invalid embedded asset '+a.kind);
       }
       if(a.kind==='solution'&&!Array.isArray(a.purpose))fail('missing purpose '+a.id);
-      const {id,game,kind,purpose,source_path,lines,file}=a;
-      entries.push({id,game,kind,purpose:purpose||[],source_path,...(lines?{lines}:{}),...(file?{file}:{})});
+      const {id,game,kind,name,purpose,source_path,lines,file,sha256}=a;
+      entries.push({id,game,kind,...(name?{name}:{}),purpose:purpose||[],source_path,sha256,...(lines?{lines}:{}),...(file?{file}:{})});
     }
     const counts={assets:manifest.assets.length,file_assets:files.length,solutions:manifest.solutions.length};
     if(JSON.stringify(manifest.counts)!==JSON.stringify(counts))fail('count mismatch '+exp.game);
@@ -147,7 +148,8 @@ function liveDiscovery(){
     const manifest=read(path.join(root,'shared/library/future-game.json'));
     const dynamic=read(path.join(root,'shared/library/index.json'));
     if(manifest.assets.filter(a=>a.bytes!==undefined).length!==1||manifest.solutions.length<1||
-      !dynamic.games.some(x=>x.game==='future-game')||!dynamic.entries.some(x=>x.game==='future-game'))
+      !dynamic.games.some(x=>x.game==='future-game')||!dynamic.entries.some(x=>x.game==='future-game')||
+      !searchLibrary({game:'future-game',kind:'solution',purpose:'combat'},root).results.some(e=>e.game==='future-game'))
       fail('extractor silently ignored a newly added game');
     fs.rmSync(newDir,{recursive:true,force:true});
     buildLibrary(root);verifyLibrary(root,{live:false});

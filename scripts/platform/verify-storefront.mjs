@@ -107,7 +107,15 @@ async function checkCanvas(page) {
       faults.push('canvas '+i+' has zero/tiny size');continue;
     }
     try {
-      const png=await canvas.screenshot({timeout:6000});
+      // An animated canvas is never geometrically stable. locator.screenshot()
+      // waits for stability and falsely times out; screenshot the visible
+      // canvas rectangle directly without stopping render animation.
+      const viewport=page.viewportSize();
+      const x=Math.max(0,rect.x),y=Math.max(0,rect.y);
+      const width=Math.min(viewport.width,rect.x+rect.width)-x;
+      const height=Math.min(viewport.height,rect.y+rect.height)-y;
+      if(width<8||height<8){faults.push('canvas '+i+' outside viewport');continue;}
+      const png=await page.screenshot({clip:{x,y,width,height},timeout:10000});
       const colors=pixelColors(png);
       if(colors.bins>=4 && colors.nonDominant>=0.005)return {index:i,width:dimensions.w,height:dimensions.h,...colors};
       faults.push('canvas '+i+' uniform/blank (bins='+colors.bins+', variation='+colors.nonDominant.toFixed(4)+')');

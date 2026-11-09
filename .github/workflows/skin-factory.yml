@@ -7,6 +7,8 @@ on:
       - 'skins/sources/*/parts-sheet.md'
       - 'scripts/skins/cut-sheet.mjs'
       - 'scripts/skins/mutate-cut-sheet.mjs'
+      - 'scripts/skins/build-pack.mjs'
+      - 'scripts/skins/mutate-build-pack.mjs'
       - '.github/workflows/skin-factory.yml'
   pull_request:
     paths:
@@ -35,6 +37,8 @@ jobs:
         run: node scripts/skins/mutate-cut-sheet.mjs skins/sources/rusty-robot
       - name: Собрать реальный пакет из новых PNG
         run: node scripts/skins/build-pack.mjs skins/sources/rusty-robot
+      - name: Проверить ловушки сборщика (включая обман старым файлом)
+        run: node scripts/skins/mutate-build-pack.mjs skins/sources/rusty-robot
       - name: Сохранить вырезки и визуальную сверку
         if: always()
         uses: actions/upload-artifact@v4

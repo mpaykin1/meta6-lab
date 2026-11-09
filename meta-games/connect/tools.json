@@ -1,6 +1,38 @@
 {
   "tools": [
     {
+      "name": "edit_game",
+      "description": "Create one exact text edit in a listed games/ file as a separate local git commit and mcp-edit branch; optional PR only when a GitHub token is configured",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "old_text": {
+            "type": "string"
+          },
+          "new_text": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "file",
+          "old_text",
+          "new_text",
+          "message"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "list_approved_components",
       "description": "Exact original source modules with verified upstream Git blob",
       "inputSchema": {
@@ -102,6 +134,27 @@
         "required": [
           "id",
           "file"
+        ]
+      }
+    },
+    {
+      "name": "run_bot",
+      "description": "Run Claude META BOT (full mobile, desktop and second run; max 300 seconds, one run at a time)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "full"
+            ]
+          }
+        },
+        "required": [
+          "id"
         ]
       }
     },

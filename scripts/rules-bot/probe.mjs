@@ -15,7 +15,13 @@ function installCapture(){
  for(const method of ['fillText','strokeText']){
   const before=CanvasRenderingContext2D.prototype[method];
   CanvasRenderingContext2D.prototype[method]=function(...args){
-   text.push({label:String(args[0]),time:performance.now()});return before.apply(this,args);
+   const c=this.canvas, rect=c?.getBoundingClientRect();
+   if(c?.isConnected && rect && rect.width>1 && rect.height>1
+     && rect.right>0 && rect.bottom>0 && rect.left<innerWidth && rect.top<innerHeight
+     && getComputedStyle(c).display!=='none' && getComputedStyle(c).visibility!=='hidden'
+     && Number(getComputedStyle(c).opacity||1)>.05)
+     text.push({label:String(args[0]),time:performance.now()});
+   return before.apply(this,args);
   };
  }
  Object.defineProperty(window,'__RULES_CAPTURE__',{value:{edges,text},writable:false});

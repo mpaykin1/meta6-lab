@@ -1,0 +1,82 @@
+name: Skin pack — S1–S12 and Chrome preview
+on:
+  push:
+    branches: ['lab/skin-rusty-robot']
+    paths:
+      - 'scripts/skins/**'
+      - 'skins/runtime/**'
+      - '.github/workflows/skin-pack.yml'
+  pull_request:
+    paths:
+      - 'skins/**'
+      - 'scripts/skins/**'
+      - 'games/skin-trainer/**'
+      - '.github/workflows/skin-pack.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  skin-pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Generate assets from owner-approved source
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/skins/build-rusty-robot.mjs
+          curl -fL --retry 3 --max-time 120 'https://raw.githubusercontent.com/mpaykin1/meta6/a8acdab/reference/skins/rusty-robot.png' -o skins/packs/rusty-robot/reference.png
+          test "$(git hash-object skins/packs/rusty-robot/reference.png)" = f66ad0f0cf976b86600e91efd3e819cb81afe8d1
+      - name: Validate committed pack before regenerating preview
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/skins/validate-skin-pack.mjs skins/packs/rusty-robot
+          node scripts/skins/mutate-skin-pack.mjs
+      - name: Install free headless Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Launch training game and capture front / side / rear
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/skin-trainer-http.log 2>&1 &
+          node scripts/skins/capture-skin-preview.mjs
+      - name: Rebuild ZIP after Chrome preview
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd skins/packs
+          rm -f rusty-robot.zip
+          zip -qrX rusty-robot.zip rusty-robot
+      - name: Validate generated pack and all mutations
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/skins/validate-skin-pack.mjs skins/packs/rusty-robot
+          node scripts/skins/mutate-skin-pack.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rusty-robot-chrome-three-views
+          path: skins/packs/rusty-robot/preview.png
+          if-no-files-found: error
+      - name: Commit only generated skin assets (never main)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/lab/skin-rusty-robot'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add skins/packs/rusty-robot skins/packs/rusty-robot.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "skin: generated approved reference, S1–S12 pack and Chrome three-view preview"
+            git push origin HEAD:lab/skin-rusty-robot
+          fi

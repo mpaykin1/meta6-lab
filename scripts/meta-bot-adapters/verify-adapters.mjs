@@ -27,7 +27,7 @@ export async function verifyOne({ browser, baseUrl, game, replacement = null }) 
       waitUntil: 'load', timeout: 60000
     });
     await page.waitForFunction(() => !!window.__META_BOT__ && !!window.__isle?.world
-      && window.__isle.G.state === 'title', null, { timeout: 60000 });
+      && ['title', 'play'].includes(window.__isle.G.state), null, { timeout: 60000 });
     const shape = await page.evaluate(() => {
       const d = Object.getOwnPropertyDescriptor(window, '__META_BOT__');
       const bot = window.__META_BOT__;

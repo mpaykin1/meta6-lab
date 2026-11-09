@@ -1,0 +1,44 @@
+name: Skin factory — cut and mutation gates
+on:
+  push:
+    branches: ['lab/skin-factory']
+    paths:
+      - 'skins/sources/*/parts-sheet.png'
+      - 'skins/sources/*/parts-sheet.md'
+      - 'scripts/skins/cut-sheet.mjs'
+      - 'scripts/skins/mutate-cut-sheet.mjs'
+      - '.github/workflows/skin-factory.yml'
+  pull_request:
+    paths:
+      - 'skins/sources/*/parts-sheet.png'
+      - 'skins/sources/*/parts-sheet.md'
+      - 'scripts/skins/cut-sheet.mjs'
+      - 'scripts/skins/mutate-cut-sheet.mjs'
+      - '.github/workflows/skin-factory.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cut:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Установить бесплатный обработчик PNG
+        run: npm install --no-save --no-package-lock sharp@0.34.4
+      - name: Вырезать настоящие детали по таблице
+        run: |
+          set -euo pipefail
+          node scripts/skins/cut-sheet.mjs skins/sources/rusty-robot
+          node scripts/skins/cut-sheet.mjs skins/sources/rusty-robot --verify
+      - name: Проверить испорченные листы и подменённые файлы
+        run: node scripts/skins/mutate-cut-sheet.mjs skins/sources/rusty-robot
+      - name: Сохранить вырезки и визуальную сверку
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cut-preview-rusty-robot
+          path: |
+            skins/sources/rusty-robot/cut-preview.png
+            skins/sources/rusty-robot/cut/**
+          if-no-files-found: warn

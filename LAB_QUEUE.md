@@ -9,6 +9,17 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
+### lab/skin-rusty-robot — скин «Ржавый робот»
+- Играть: https://mpaykin1.github.io/meta6-lab/preview/skin-rusty-robot/games/skin-trainer/?skin=../../skins/packs/rusty-robot/
+- Источник: `mpaykin1/meta6@a8acdab`, эскиз — blob `f66ad0f`; блокинг игры не менялся.
+- Ветка: `lab/skin-rusty-robot`; пакет: коммит `0d880b70409688288991b77803134ef323c68896`.
+- ZIP: https://github.com/mpaykin1/meta6-lab/blob/lab/skin-rusty-robot/skins/packs/rusty-robot.zip
+- Проверка S1–S12 и 12 мутаций + Chrome: https://github.com/mpaykin1/meta6-lab/actions/runs/42656857700 — PASS.
+- Проверка публичного Pages: https://github.com/mpaykin1/meta6-lab/actions/runs/42657554966 — ожидает итог.
+- PR: https://github.com/mpaykin1/meta6-lab/pull/203
+- Статус: В РАБОТЕ — HTTP 200 и отрисовка с публичного Pages ещё не подтверждены.
+- Михаил: —
+
 ### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
 - Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
 - Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/

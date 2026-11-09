@@ -1,0 +1,38 @@
+{
+  "worlds": [
+    {
+      "x": 145,
+      "biome": "ash",
+      "dry": 61,
+      "objects": 8,
+      "treeNodes": 0,
+      "ashPopulation": 21
+    },
+    {
+      "x": 365,
+      "biome": "island",
+      "dry": 64,
+      "objects": 8,
+      "treeNodes": 69,
+      "ashPopulation": 0
+    },
+    {
+      "x": -92,
+      "biome": "ash",
+      "dry": 64,
+      "objects": 8,
+      "treeNodes": 0,
+      "ashPopulation": 63
+    }
+  ],
+  "guest": {
+    "first": 50.8,
+    "visible": true,
+    "sourceParts": 1,
+    "home": "island",
+    "world": "ash"
+  },
+  "errors": [],
+  "ownerPass": "UNKNOWN",
+  "pass": "TECHNICAL_ASSERTIONS_PASS (owner verdict pending)"
+}

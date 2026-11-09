@@ -31,6 +31,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Install Chromium for permanent browser mutations
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
       - name: Fetch current main
         run: git fetch --no-tags origin main:refs/remotes/origin/main
       - name: Check PR policy and every permanent mutation

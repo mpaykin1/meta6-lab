@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#060b14">
+<meta name="description" content="META GAMES Connect — подключение локального MCP к Claude Desktop, Claude Code и Cursor без платного хостинга.">
+<title>META GAMES — Connect</title>
+<style>
+:root{color-scheme:dark;--ink:#dbe9fb;--muted:#aab8cc;--gold:#efce91;--line:#384555;--surface:#101b2a}
+*{box-sizing:border-box}html{background:#050a12}body{margin:0;color:var(--ink);font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(ellipse 80% 600px at 50% -180px,#29475a88,transparent),#050a12}
+a{color:#efce91}a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+header,main,footer{width:min(1100px,92%);margin:auto}header{padding:25px 0;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #52667a55}
+.brand{text-decoration:none;color:var(--ink);letter-spacing:.22em;font-weight:800}.brand b{color:var(--gold)}.brand em{display:inline-grid;place-items:center;width:34px;height:34px;font-style:normal;border:1px solid var(--gold);border-radius:50%;margin-right:10px;color:var(--gold)}
+nav a{text-decoration:none;color:#c4d1e1;margin-left:20px}nav a:hover{color:#fff}
+main{padding:72px 0 86px}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:.34em;font-weight:800;text-transform:uppercase}
+h1{font-size:clamp(55px,10vw,110px);letter-spacing:-.065em;line-height:.95;margin:20px 0 26px}h1 span{font-weight:300;color:#b9ccd9}
+.lead{color:#c0cada;font-size:18px;max-width:720px}h2{font-size:clamp(23px,4vw,34px);font-weight:600;letter-spacing:-.035em;margin:0 0 16px}
+section{margin:46px 0}p{max-width:760px}small,.muted{color:var(--muted)}
+.card{border:1px solid #4e607266;background:linear-gradient(130deg,#142233e8,#0b1522e8);padding:27px;position:relative}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+pre{overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;padding:18px;background:#050c15;border:1px solid #36485b;font:13px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;color:#d9e9f6;margin:12px 0}
+input{display:block;width:100%;padding:14px;color:var(--ink);background:#070e19;border:1px solid #75869a;font:inherit;margin:10px 0}
+button{cursor:pointer;background:#e7ca91;color:#111c24;border:1px solid #e6c98f;padding:10px 18px;font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+button:hover{background:#ffe4ad}button:disabled{opacity:.42;cursor:not-allowed}
+.tool-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;padding:0;list-style:none}
+.tool-list li{border-left:2px solid #d4b889;padding:10px 15px;background:#101b2a}
+.tool-list strong{color:#f2d7a6;font:600 14px ui-monospace,Consolas,monospace;overflow-wrap:anywhere}
+.tool-list p{margin:4px 0 0;color:#aebcd0;font-size:13px}
+.status{min-height:24px;color:#d5ba83}
+footer{padding:28px 0;color:#8e9db3;border-top:1px solid #52667a55}
+@media(max-width:700px){.grid,.tool-list{grid-template-columns:1fr}main{padding-top:42px}.card{padding:18px}nav a{margin-left:10px}}
+</style>
+</head>
+<body>
+<header><a class="brand" href="../"><em>◇</em>META <b>GAMES</b></a><nav><a href="../">Play</a><a href="https://github.com/mpaykin1/meta6-lab">GitHub</a></nav></header>
+<main>
+<div class="eyebrow">Connect / Local MCP</div><h1>Connect<span> worlds.</span></h1>
+<p class="lead">Подключите игры и исходники META GAMES к своему ИИ через локальный MCP. Бесплатно: сервер запускается на вашем компьютере через stdio, без облачного сервера и API-ключей.</p>
+<section class="card">
+<h2>1. Скачайте проект</h2>
+<p>Нужны <a href="https://nodejs.org/">Node.js</a> и Git. Выполните команду в терминале:</p>
+<pre id="clone-command">git clone https://github.com/mpaykin1/meta6-lab.git
+cd meta6-lab
+node shared/approved/mcp.mjs</pre>
+<button type="button" data-copy="clone-command">Скопировать команды</button>
+<p class="muted">Последняя строка запускает MCP в терминале; остановите её Ctrl+C. В самом ИИ-клиенте MCP запускается автоматически. Никакие npm-пакеты для сервера не требуются.</p>
+</section>
+<section>
+<h2>2. Укажите путь к папке</h2>
+<label for="clone-path">Абсолютный путь к папке <code>meta6-lab</code> после клонирования</label>
+<input id="clone-path" autocomplete="off" spellcheck="false" placeholder="/home/you/meta6-lab или C:\Users\you\meta6-lab" aria-describedby="path-help">
+<p id="path-help" class="muted">Не путь к файлу, а к папке проекта. Конфигурации ниже будут собраны автоматически. Путь остаётся в вашем браузере.</p>
+<p id="path-status" class="status" role="status" aria-live="polite"></p>
+</section>
+<section>
+<h2>3. Подключите своего клиента</h2>
+<div class="grid">
+<article class="card">
+<h2>Claude Desktop</h2>
+<p>Откройте <code>claude_desktop_config.json</code>: Windows — <code>%APPDATA%\Claude\</code>, macOS — <code>~/Library/Application Support/Claude/</code>. Добавьте запись в <code>mcpServers</code> и перезапустите приложение.</p>
+<pre id="desktop-code" aria-label="Claude Desktop JSON"></pre><button type="button" data-copy="desktop-code" disabled>Скопировать JSON</button>
+</article>
+<article class="card">
+<h2>Cursor</h2>
+<p>Добавьте конфигурацию в <code>.cursor/mcp.json</code> проекта или в настройки MCP Cursor, затем включите сервер.</p>
+<pre id="cursor-code" aria-label="Cursor JSON"></pre><button type="button" data-copy="cursor-code" disabled>Скопировать JSON</button>
+</article>
+<article class="card">
+<h2>Claude Code</h2>
+<p>Выполните команду в терминале. Затем откройте <code>/mcp</code> для проверки соединения.</p>
+<pre id="claude-code" aria-label="Claude Code command"></pre><button type="button" data-copy="claude-code" disabled>Скопировать команду</button>
+</article>
+<article class="card">
+<h2>VS Code и другие MCP-клиенты</h2>
+<p>Для VS Code — <code>.vscode/mcp.json</code>. Для других stdio-клиентов используйте ту же команду <code>node</code> и абсолютный путь к <code>shared/approved/mcp.mjs</code>.</p>
+<pre id="vscode-code" aria-label="VS Code JSON"></pre><button type="button" data-copy="vscode-code" disabled>Скопировать JSON</button>
+</article>
+</div>
+</section>
+<section>
+<h2>Инструменты сервера</h2>
+<p class="muted">Список получен напрямую из <code>tools/list</code> локального MCP при сборке страницы. В браузере MCP-процесс не запускается.</p>
+<ul class="tool-list" id="tools" aria-live="polite"><li>Загрузка инструментов…</li></ul>
+<p class="status" id="tools-status" role="status"></p>
+</section>
+</main><footer>META GAMES · локальный MCP · <a href="../">Вернуться к играм</a></footer>
+<script type="module">
+import {buildClientConfigs} from './config.mjs';
+const input=document.getElementById('clone-path');
+const pathStatus=document.getElementById('path-status');
+const blocks=[['desktop-code','desktop'],['cursor-code','cursor'],['claude-code','claudeCode'],['vscode-code','vscode']];
+function update(){
+  try{
+    const configs=buildClientConfigs(input.value);
+    for(const [id,key] of blocks){
+      const value=configs[key];
+      document.getElementById(id).textContent=typeof value==='string'?value:JSON.stringify(value,null,2);
+      document.querySelector('[data-copy="'+id+'"]').disabled=false;
+    }
+    pathStatus.textContent='Конфигурация готова для копирования.';
+  }catch(e){
+    for(const [id] of blocks){
+      document.getElementById(id).textContent='Укажите абсолютный путь к папке meta6-lab.';
+      document.querySelector('[data-copy="'+id+'"]').disabled=true;
+    }
+    pathStatus.textContent=input.value?e.message:'';
+  }
+}
+input.addEventListener('input',update);
+update();
+for(const button of document.querySelectorAll('[data-copy]')){
+  button.addEventListener('click',async()=>{
+    const text=document.getElementById(button.dataset.copy).textContent;
+    try{await navigator.clipboard.writeText(text);button.textContent='Скопировано';setTimeout(()=>button.textContent=button.dataset.copy==='clone-command'?'Скопировать команды':'Скопировать',1400)}
+    catch{pathStatus.textContent='Копирование недоступно: выделите текст и скопируйте вручную.'}
+  });
+}
+async function loadTools(){
+  const box=document.getElementById('tools');
+  try{
+    const response=await fetch('./tools.json');
+    if(!response.ok)throw Error('HTTP '+response.status);
+    const data=await response.json();
+    if(!Array.isArray(data.tools)||!data.tools.length)throw Error('Пустой список инструментов');
+    box.replaceChildren();
+    for(const tool of data.tools){
+      const item=document.createElement('li');
+      const name=document.createElement('strong');name.textContent=tool.name;
+      const detail=document.createElement('p');detail.textContent=tool.description||'';
+      item.append(name,detail);box.append(item);
+    }
+  }catch(e){box.replaceChildren();document.getElementById('tools-status').textContent='Не удалось загрузить список: '+e.message}
+}
+loadTools();
+</script>
+</body></html>

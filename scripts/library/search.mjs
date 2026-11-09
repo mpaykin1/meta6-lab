@@ -17,7 +17,8 @@ export function searchLibrary(filters={},root=ROOT){
   });
   return {total:matches.length,offset,results:matches.slice(offset,offset+limit)};
 }
-if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+const isDirectCLI=Boolean(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url));
+if(isDirectCLI){
   try{
     const filters={};
     for(const arg of process.argv.slice(2)){

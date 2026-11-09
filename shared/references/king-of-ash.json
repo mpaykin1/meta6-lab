@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "id": "king-of-ash",
+  "title": "Король Пепла",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES LAB",
+  "date_added": "2026-11-09",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "path": "games/king-of-ash/index.html",
+    "git_blob_sha": "1a1f6d32310ec84d8c542262a74e4ed71ee60f59",
+    "sha256": "b7974de741daa0c4add652bcc86ab2116ef20a8139309b7f03d3a3a3ce14fc6f",
+    "size_bytes": 137116,
+    "filename": "Король Пепла.html",
+    "preserved_unchanged": true
+  },
+  "viewer": {
+    "path": "games/king-of-ash/index.html",
+    "url": "https://mpaykin1.github.io/meta6-lab/games/king-of-ash/",
+    "availability": "after-merge-to-main",
+    "runtime": "Three.js 0.160.0 via jsdelivr CDN; Google Fonts via googleapis; requires network",
+    "entrypoint": "index.html"
+  },
+  "gallery": {
+    "count": 34,
+    "source_symbol": "GALLERY",
+    "preview_expression": "window.__T.galShow(index)",
+    "items": [
+      {
+        "index": 0,
+        "id": "king-of-ash-01",
+        "name": "Король",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 1,
+        "id": "king-of-ash-02",
+        "name": "Рывок‑выпад",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 2,
+        "id": "king-of-ash-03",
+        "name": "Перекат",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 3,
+        "id": "king-of-ash-04",
+        "name": "Штопор",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 4,
+        "id": "king-of-ash-05",
+        "name": "Сальто‑апперкот",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 5,
+        "id": "king-of-ash-06",
+        "name": "Сальто и удар",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 6,
+        "id": "king-of-ash-07",
+        "name": "Вертушка",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 7,
+        "id": "king-of-ash-08",
+        "name": "Колесо",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 8,
+        "id": "king-of-ash-09",
+        "name": "Торнадо",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 9,
+        "id": "king-of-ash-10",
+        "name": "Блок → фляк",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 10,
+        "id": "king-of-ash-11",
+        "name": "Пике",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 11,
+        "id": "king-of-ash-12",
+        "name": "Гнев небес",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 12,
+        "id": "king-of-ash-13",
+        "name": "Раскол земли",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 13,
+        "id": "king-of-ash-14",
+        "name": "Королевская волна",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 14,
+        "id": "king-of-ash-15",
+        "name": "Эгида",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 15,
+        "id": "king-of-ash-16",
+        "name": "Танец клинка",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 16,
+        "id": "king-of-ash-17",
+        "name": "Скелет",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 17,
+        "id": "king-of-ash-18",
+        "name": "Скелет",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 18,
+        "id": "king-of-ash-19",
+        "name": "Щитоносец",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 19,
+        "id": "king-of-ash-20",
+        "name": "Громила",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 20,
+        "id": "king-of-ash-21",
+        "name": "Огненный череп",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 21,
+        "id": "king-of-ash-22",
+        "name": "Распад",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 22,
+        "id": "king-of-ash-23",
+        "name": "Пиксельный портрет",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 23,
+        "id": "king-of-ash-24",
+        "name": "Комикс‑вспышки и цифры",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 24,
+        "id": "king-of-ash-25",
+        "name": "Линии скорости и пепел",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 25,
+        "id": "king-of-ash-26",
+        "name": "Бумажный скелет",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 26,
+        "id": "king-of-ash-27",
+        "name": "Бумажный скелет",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 27,
+        "id": "king-of-ash-28",
+        "name": "Толпа на трибунах",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 28,
+        "id": "king-of-ash-29",
+        "name": "Пиксельный огонь и флаги",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 29,
+        "id": "king-of-ash-30",
+        "name": "Облака‑параллакс",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 30,
+        "id": "king-of-ash-31",
+        "name": "Груды костей",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 31,
+        "id": "king-of-ash-32",
+        "name": "Колизей",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 32,
+        "id": "king-of-ash-33",
+        "name": "Жаровни и знамёна",
+        "kind": "in-game-gallery-entry"
+      },
+      {
+        "index": 33,
+        "id": "king-of-ash-34",
+        "name": "Гроза",
+        "kind": "in-game-gallery-entry"
+      }
+    ]
+  },
+  "rights": {
+    "owner_supplied": true,
+    "authorship_unverified": true,
+    "third_party_dependencies_present": true,
+    "third_party_reuse_not_approved": true
+  }
+}

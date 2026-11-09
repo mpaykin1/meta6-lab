@@ -15,8 +15,8 @@
 - Готово по §7: разбор 26 деталей, 12 цветов с точками забора из эскиза, выноски на оригинале.
 - Карта и таблица: https://github.com/mpaykin1/meta6-lab/blob/lab/skin-rusty-robot/skins/packs/rusty-robot/stages/0.png
 - STAGE.md: https://github.com/mpaykin1/meta6-lab/blob/lab/skin-rusty-robot/skins/packs/rusty-robot/STAGE.md
-- CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42664350726 — **STAGE 0 PASS**, ловушки флага PASS.
-- SHA генератора: `c4ffa0de4c95477421caf373919ce35718b17cc9`; сгенерированный пакет — `f4a0318515fbf6fc02f20867577e4a20df4ee445`.
+- CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42664680345 — **STAGE 0 PASS**, ловушки флага PASS.
+- SHA генератора: `7449406c16977125dcba5e9d3237959aea4406e5`; сгенерированный пакет — `735e5874038538ddd1b127b00c47e6257b7342cb`.
 - Дальше: **СТОП** до комментария `СКИН-ПРОВЕРКА: этап 0 принят`. Старый ZIP и старая графика от предыдущего кандидата не приняты.
 - Михаил: этапы принимает Claude, владелец смотрит итог после этапа 7.
 

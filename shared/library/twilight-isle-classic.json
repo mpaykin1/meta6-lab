@@ -7,23 +7,21 @@
       "id": "9f0d22e8643a37fe789d0dd1",
       "game": "twilight-isle-classic",
       "kind": "font",
-      "file": "shared/library/assets/twilight-isle-classic/fonts/pixelify-sans-cyrillic-wght-normal.woff2",
+      "file": "games/twilight-isle-classic/fonts/pixelify-sans-cyrillic-wght-normal.woff2",
       "source_path": "games/twilight-isle-classic/fonts/pixelify-sans-cyrillic-wght-normal.woff2",
       "bytes": 5064,
       "sha256": "a9101c1c351ac29a794b88679caced6062f453fcab9c031ffd84074896f886e9",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/twilight-isle-classic/fonts/pixelify-sans-cyrillic-wght-normal.woff2"
+      "storage": "reference"
     },
     {
       "id": "8135ac6a0d4a672b2f58f7f3",
       "game": "twilight-isle-classic",
       "kind": "font",
-      "file": "shared/library/assets/twilight-isle-classic/fonts/pixelify-sans-latin-wght-normal.woff2",
+      "file": "games/twilight-isle-classic/fonts/pixelify-sans-latin-wght-normal.woff2",
       "source_path": "games/twilight-isle-classic/fonts/pixelify-sans-latin-wght-normal.woff2",
       "bytes": 12016,
       "sha256": "4a5633a0c9c1b73abd133a56d3716c2d8df2ed03cb987346f72194aeb224f382",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/twilight-isle-classic/fonts/pixelify-sans-latin-wght-normal.woff2"
+      "storage": "reference"
     },
     {
       "id": "02ea1605799104be82f0f5ad",

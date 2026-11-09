@@ -7,23 +7,21 @@
       "id": "08000e58764d47991156156e",
       "game": "twilight-isles",
       "kind": "font",
-      "file": "shared/library/assets/twilight-isles/fonts/pixelify-sans-cyrillic-wght-normal.woff2",
+      "file": "games/twilight-isles/fonts/pixelify-sans-cyrillic-wght-normal.woff2",
       "source_path": "games/twilight-isles/fonts/pixelify-sans-cyrillic-wght-normal.woff2",
       "bytes": 5064,
       "sha256": "a9101c1c351ac29a794b88679caced6062f453fcab9c031ffd84074896f886e9",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/twilight-isles/fonts/pixelify-sans-cyrillic-wght-normal.woff2"
+      "storage": "reference"
     },
     {
       "id": "1458666a15b279780d82f9c8",
       "game": "twilight-isles",
       "kind": "font",
-      "file": "shared/library/assets/twilight-isles/fonts/pixelify-sans-latin-wght-normal.woff2",
+      "file": "games/twilight-isles/fonts/pixelify-sans-latin-wght-normal.woff2",
       "source_path": "games/twilight-isles/fonts/pixelify-sans-latin-wght-normal.woff2",
       "bytes": 12016,
       "sha256": "4a5633a0c9c1b73abd133a56d3716c2d8df2ed03cb987346f72194aeb224f382",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/twilight-isles/fonts/pixelify-sans-latin-wght-normal.woff2"
+      "storage": "reference"
     },
     {
       "id": "072226e9bc9eb535f34840a0",
@@ -464,12 +462,11 @@
       "id": "240c3327cd83fa9ea147d58b",
       "game": "twilight-isles",
       "kind": "json-data",
-      "file": "shared/library/assets/twilight-isles/playgama-bridge-config.json",
+      "file": "games/twilight-isles/playgama-bridge-config.json",
       "source_path": "games/twilight-isles/playgama-bridge-config.json",
       "bytes": 48,
       "sha256": "9ae1f4f599d77df0bae3098d9fcaee8e93f0c05ab295bfc4cecb0c0eb8bec7bc",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/twilight-isles/playgama-bridge-config.json"
+      "storage": "reference"
     },
     {
       "id": "0b9bf96a76432450e3d965d1",

@@ -277,210 +277,191 @@
       "id": "84b739590f782f75012a7839",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/angel_statue.glb",
+      "file": "underwater-world/models/angel_statue.glb",
       "source_path": "underwater-world/models/angel_statue.glb",
       "bytes": 64504,
       "sha256": "90d219dd5a5aa22912e51fb930559c7d43dc17e480ca43b62ee354247a952857",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/angel_statue.glb"
+      "storage": "reference"
     },
     {
       "id": "050fbf680d848ba0ee6c171d",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/angler.glb",
+      "file": "underwater-world/models/angler.glb",
       "source_path": "underwater-world/models/angler.glb",
       "bytes": 134236,
       "sha256": "3d7c837b0ecf179d57aa66501bd8c8d3a4e351508768c5b6627758b66ce638d5",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/angler.glb"
+      "storage": "reference"
     },
     {
       "id": "f0e22057d8b69241805c5f55",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/arch.glb",
+      "file": "underwater-world/models/arch.glb",
       "source_path": "underwater-world/models/arch.glb",
       "bytes": 207904,
       "sha256": "bd5df7c604c294e05518a996931a0452298735fb941ef5b5466d42ef98812670",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/arch.glb"
+      "storage": "reference"
     },
     {
       "id": "36ac03e9e3d981e0f7f273d2",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/bathyscaphe.glb",
+      "file": "underwater-world/models/bathyscaphe.glb",
       "source_path": "underwater-world/models/bathyscaphe.glb",
       "bytes": 150824,
       "sha256": "bac908bc6f0e61db3940dc61474eea8f7a5dec987f575146c9c938e16588460c",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/bathyscaphe.glb"
+      "storage": "reference"
     },
     {
       "id": "043574f1f2d40bfeb5d631bc",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/cathedral_bell.glb",
+      "file": "underwater-world/models/cathedral_bell.glb",
       "source_path": "underwater-world/models/cathedral_bell.glb",
       "bytes": 187672,
       "sha256": "2809e00ba77ea5c2cae87c940c758016739a4678427d361c29d097cc8f6f03b9",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/cathedral_bell.glb"
+      "storage": "reference"
     },
     {
       "id": "f1a9bbbbf3e9f90484edcee4",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/cathedral_tower.glb",
+      "file": "underwater-world/models/cathedral_tower.glb",
       "source_path": "underwater-world/models/cathedral_tower.glb",
       "bytes": 922996,
       "sha256": "1329170cab76855a333aff51c5909d4f29ce6ab76da49e30b2393693201b9ad0",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/cathedral_tower.glb"
+      "storage": "reference"
     },
     {
       "id": "0996eb4bcc71669242b21fee",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/coral_branch_orange.glb",
+      "file": "underwater-world/models/coral_branch_orange.glb",
       "source_path": "underwater-world/models/coral_branch_orange.glb",
       "bytes": 51036,
       "sha256": "ed08220362fd1d57f6e5c205ecf6bfc43a994ac62354058194a0869dcf40bd54",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/coral_branch_orange.glb"
+      "storage": "reference"
     },
     {
       "id": "fb8a05ad91fadc506eca04ba",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/coral_branch_violet.glb",
+      "file": "underwater-world/models/coral_branch_violet.glb",
       "source_path": "underwater-world/models/coral_branch_violet.glb",
       "bytes": 51036,
       "sha256": "e4be5e509c9bccc0d2b478ed007b4041074b4831bb99edb89a2096a24c22492d",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/coral_branch_violet.glb"
+      "storage": "reference"
     },
     {
       "id": "cd7666c7d98a166fc57708f3",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/diving_helmet.glb",
+      "file": "underwater-world/models/diving_helmet.glb",
       "source_path": "underwater-world/models/diving_helmet.glb",
       "bytes": 68316,
       "sha256": "c4a1dd6c6d7c99add9e4f34a3f4c45d4de7ebab52bfa1355d91ee152e5340759",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/diving_helmet.glb"
+      "storage": "reference"
     },
     {
       "id": "196827ae2d3878724d585d08",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/glow_fish_teal.glb",
+      "file": "underwater-world/models/glow_fish_teal.glb",
       "source_path": "underwater-world/models/glow_fish_teal.glb",
       "bytes": 18308,
       "sha256": "2843d92921ca0da5d0f827b8825946c015d7863e11444cd1dc8a758c8b8e0ca7",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/glow_fish_teal.glb"
+      "storage": "reference"
     },
     {
       "id": "64780b0f32ed98d3072a100f",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/glow_fish_violet.glb",
+      "file": "underwater-world/models/glow_fish_violet.glb",
       "source_path": "underwater-world/models/glow_fish_violet.glb",
       "bytes": 18316,
       "sha256": "c2fb66fb81bb91e425c5f41ade91ec9b2a1dbae3c9284ddd817adb2f0cb05fab",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/glow_fish_violet.glb"
+      "storage": "reference"
     },
     {
       "id": "1e8285527a84a1b900de7d0b",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/kelp_tall.glb",
+      "file": "underwater-world/models/kelp_tall.glb",
       "source_path": "underwater-world/models/kelp_tall.glb",
       "bytes": 72880,
       "sha256": "1e8ded4300836b21783555f3db253e943ad226ab768e250d2be77d57d4173b6c",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/kelp_tall.glb"
+      "storage": "reference"
     },
     {
       "id": "162b7dd754d3e36c9f44d296",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/manta.glb",
+      "file": "underwater-world/models/manta.glb",
       "source_path": "underwater-world/models/manta.glb",
       "bytes": 41784,
       "sha256": "853c648531a312322809774091c6eca54343c09f86deee038c4fafb7498c0085",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/manta.glb"
+      "storage": "reference"
     },
     {
       "id": "801b047e9d669483b2a42074",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/seagrass.glb",
+      "file": "underwater-world/models/seagrass.glb",
       "source_path": "underwater-world/models/seagrass.glb",
       "bytes": 55824,
       "sha256": "c20813167455360ba4b09002a216f7e577cc2ace461301a0397bad3e460f5798",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/seagrass.glb"
+      "storage": "reference"
     },
     {
       "id": "2b953dc222cc926157387521",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/seahorse.glb",
+      "file": "underwater-world/models/seahorse.glb",
       "source_path": "underwater-world/models/seahorse.glb",
       "bytes": 28520,
       "sha256": "3d0cf77e02c94534305609b75997b437c5469bbcbe03eaac97ddeb55dc2513e1",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/seahorse.glb"
+      "storage": "reference"
     },
     {
       "id": "7b47a19ed65473531ba06583",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/ship_wheel.glb",
+      "file": "underwater-world/models/ship_wheel.glb",
       "source_path": "underwater-world/models/ship_wheel.glb",
       "bytes": 27652,
       "sha256": "da8e594d1f1d4134fcd40e0e1ec9349329a587bc0dba28100d537da8148f4e36",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/ship_wheel.glb"
+      "storage": "reference"
     },
     {
       "id": "74ac37b5a977bfca3748cb2d",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/street_lamp.glb",
+      "file": "underwater-world/models/street_lamp.glb",
       "source_path": "underwater-world/models/street_lamp.glb",
       "bytes": 33456,
       "sha256": "80d2da737c5eea06372b36c04b7feb137b442b681e2aca2c2697cbdb02238520",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/street_lamp.glb"
+      "storage": "reference"
     },
     {
       "id": "5f582bef199203e2784f901f",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/submarine_wreck.glb",
+      "file": "underwater-world/models/submarine_wreck.glb",
       "source_path": "underwater-world/models/submarine_wreck.glb",
       "bytes": 459928,
       "sha256": "0aa60dac26742b7573e86ada5a9e5cef466a8b673e465af78727acbd9b4ad80a",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/submarine_wreck.glb"
+      "storage": "reference"
     },
     {
       "id": "c32503e74977e81ffd9b0293",
       "game": "reference-underwater-world",
       "kind": "model",
-      "file": "shared/library/assets/reference-underwater-world/models/treasure_chest.glb",
+      "file": "underwater-world/models/treasure_chest.glb",
       "source_path": "underwater-world/models/treasure_chest.glb",
       "bytes": 18428,
       "sha256": "e4d5a0cd25d00de012e95fe83eab5de902d0f4b56e2c97a61912a62caf983ef7",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-underwater-world/models/treasure_chest.glb"
+      "storage": "reference"
     }
   ],
   "solutions": [

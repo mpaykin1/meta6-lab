@@ -4,6 +4,7 @@ on:
     branches: ['lab/skin-rusty-robot']
     paths:
       - 'scripts/skins/**'
+      - 'skins/packs/rusty-robot/STAGE.md'
       - '.github/workflows/skin-pack.yml'
   pull_request:
     paths:

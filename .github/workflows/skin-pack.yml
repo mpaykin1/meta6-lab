@@ -1,10 +1,9 @@
-name: Skin pack — S1–S12 and Chrome preview
+name: Skin pack — staged validation and Chrome preview
 on:
   push:
     branches: ['lab/skin-rusty-robot']
     paths:
       - 'scripts/skins/**'
-      - 'skins/runtime/**'
       - '.github/workflows/skin-pack.yml'
   pull_request:
     paths:
@@ -23,64 +22,79 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Generate assets from owner-approved source
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+      - name: Determine accepted stage (stage 0 if no record)
         shell: bash
         run: |
           set -euo pipefail
-          node scripts/skins/build-rusty-robot.mjs
-          curl -fL --retry 3 --max-time 120 'https://raw.githubusercontent.com/mpaykin1/meta6/a8acdab/reference/skins/rusty-robot.png' -o skins/packs/rusty-robot/reference.png
-          test "$(git hash-object skins/packs/rusty-robot/reference.png)" = f66ad0f0cf976b86600e91efd3e819cb81afe8d1
-          mkdir -p reference/skins
-          cp skins/packs/rusty-robot/reference.png reference/skins/rusty-robot.png
-      - name: Validate committed pack before regenerating preview
-        if: github.event_name == 'pull_request'
-        shell: bash
+          f=skins/packs/rusty-robot/STAGE.md
+          if [ -f "$f" ]; then
+            n="$(sed -n 's/^- этап \([0-7]\) сделан.*$/\1/p' "$f" | head -1)"
+            test -n "$n"
+          else
+            n=0
+          fi
+          echo "SKIN_STAGE=$n" >> "$GITHUB_ENV"
+      - name: Install image processing for original-sketch comparison
+        if: github.event_name == 'push' && env.SKIN_STAGE == '0'
         run: |
-          set -euo pipefail
-          node scripts/skins/validate-skin-pack.mjs skins/packs/rusty-robot
-          node scripts/skins/mutate-skin-pack.mjs
+          python3 -m venv /tmp/skin-stage-venv
+          /tmp/skin-stage-venv/bin/pip install -q Pillow
+      - name: Stage 0 — analyse owner reference (not generated skin art)
+        if: github.event_name == 'push' && env.SKIN_STAGE == '0'
+        run: |
+          /tmp/skin-stage-venv/bin/python scripts/skins/render-skin-stage-zero.py
+      - name: Validate only milestone reached (0–6)
+        if: env.SKIN_STAGE != '7'
+        run: |
+          node scripts/skins/validate-skin-pack.mjs skins/packs/rusty-robot --stage "$SKIN_STAGE"
+          node scripts/skins/mutate-skin-stage.mjs "$SKIN_STAGE"
       - name: Guard pinned Playwright-compatible runner
         run: node scripts/skins/verify-skin-browser-ci.mjs
+      - name: Validate S1–S12 on completed stage 7
+        if: env.SKIN_STAGE == '7'
+        run: |
+          node scripts/skins/validate-skin-pack.mjs skins/packs/rusty-robot --stage 7
+          node scripts/skins/mutate-skin-pack.mjs
       - name: Install free headless Chromium
+        if: env.SKIN_STAGE == '7'
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1 sharp@0.34.4
           npx playwright install --with-deps chromium
       - name: Launch training game and capture front / side / rear
-        shell: bash
+        if: env.SKIN_STAGE == '7'
         run: |
           set -euo pipefail
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/skin-trainer-http.log 2>&1 &
           node scripts/skins/capture-skin-preview.mjs
-      - name: Rebuild ZIP after Chrome preview
-        if: github.event_name != 'pull_request'
-        shell: bash
+      - name: Rebuild final ZIP after Chrome preview
+        if: env.SKIN_STAGE == '7' && github.event_name != 'pull_request'
         run: |
-          set -euo pipefail
           cd skins/packs
           rm -f rusty-robot.zip
           zip -qrX rusty-robot.zip rusty-robot
-      - name: Validate generated pack and all mutations
-        if: github.event_name != 'pull_request'
-        shell: bash
+      - name: Revalidate stage 7 and all mutation traps
+        if: env.SKIN_STAGE == '7' && github.event_name != 'pull_request'
         run: |
-          set -euo pipefail
-          node scripts/skins/validate-skin-pack.mjs skins/packs/rusty-robot
+          node scripts/skins/validate-skin-pack.mjs skins/packs/rusty-robot --stage 7
           node scripts/skins/mutate-skin-pack.mjs
       - uses: actions/upload-artifact@v4
+        if: env.SKIN_STAGE == '7'
         with:
           name: rusty-robot-chrome-three-views
           path: skins/packs/rusty-robot/preview.png
           if-no-files-found: error
-      - name: Commit only generated skin assets (never main)
+      - name: Commit generated stage data to PR branch (not main)
         if: github.event_name == 'push' && github.ref == 'refs/heads/lab/skin-rusty-robot'
-        shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skins/packs/rusty-robot skins/packs/rusty-robot.zip reference/skins/rusty-robot.png
+          if [ "$SKIN_STAGE" = 0 ]; then
+            git add skins/packs/rusty-robot/STAGE.md skins/packs/rusty-robot/README.md skins/packs/rusty-robot/skin.json skins/packs/rusty-robot/stages/0.png
+          else
+            git add skins/packs/rusty-robot/preview.png skins/packs/rusty-robot.zip
+          fi
           if ! git diff --cached --quiet; then
-            git commit -m "skin: generated approved reference, S1–S12 pack and Chrome three-view preview"
+            git commit -m "skin: stage $SKIN_STAGE deliverables for Claude"
             git push origin HEAD:lab/skin-rusty-robot
           fi

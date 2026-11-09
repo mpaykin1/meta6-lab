@@ -11,3 +11,4 @@
 | P1 | lab/p1-storefront | автозадача (экзамен) | 2026-11-09 14:55 |
 | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | чат ChatGPT | 2026-11-09 15:15 |
 | L1 ч.1 (станок библиотеки) | lab/library-machine | чат ChatGPT | 2026-11-09 15:25 |
+| B1 ч.1 (каждая игра из list_games открывается без ошибок консоли) | lab/auto-b1-20261109 | автозадача | 2026-11-09 15:39 |

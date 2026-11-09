@@ -33,7 +33,7 @@ const scratch=mkdtempSync(join(tmpdir(),'p1-storefront-mutate-'));
 const htmlFile=join(scratch,'meta-games/index.html');
 const gameFile=join(scratch,'games/valid/index.html');
 const game2File=join(scratch,'games/second/index.html');
-const validGame="<!doctype html><html><body style=\"margin:0;background:#090b10\"><canvas id=\"game\" width=\"256\" height=\"144\" style=\"width:100vw;height:100vh\"></canvas><script>\nconst ctx=document.querySelector('canvas').getContext('2d');\nconst colors=['#d82d39','#268adc','#ead27a','#28bd79','#ac4ce0','#ee8b31'];\ncolors.forEach((c,i)=>{ctx.fillStyle=c;ctx.fillRect(i*43,0,44,144);});\n</script></body></html>";
+const validGame="<!doctype html><html><body style=\"margin:0;background:#090b10\"><canvas id=\"game\" width=\"256\" height=\"144\" style=\"width:100vw;height:100vh\"></canvas><script>\nconst ctx=document.querySelector('canvas').getContext('2d');\nconst colors=['#d82d39','#268adc','#ead27a','#28bd79','#ac4ce0','#ee8b31'];\ncolors.forEach((c,i)=>{ctx.fillStyle=c;ctx.fillRect(i*43,0,44,144);});\n</script></body></html>".replace('<body','<head><link rel="icon" href="data:,"></head><body');
 const index="<!doctype html><body><div class=\"games\">\n<a class=\"game\" href=\"../games/valid/\"><h3>Valid one</h3></a>\n<a class=\"game\" href=\"../games/second/\"><h3>Valid two</h3></a>\n</div></body>";
 
 function run(file,flags=[]) {
@@ -67,12 +67,15 @@ try {
     "document.querySelector('canvas').animate([{transform:'translateX(0px)'},{transform:'translateX(180px)'}],{duration:300,iterations:Infinity,direction:'alternate'});</script>");
   writeFileSync(gameFile,animated);
   requirePass('moving animated canvas must be sampled without waiting for stability',checker);
-  const unstableAnchor='const png=await page.screenshot({clip:{x,y,width,height},timeout:10000});';
+  const unstableAnchor="const colors=pixelColors(Buffer.from(capture.data,'base64'));";
   assert.ok(checkerSource.includes(unstableAnchor),'Animation regression mutation anchor not found');
   const unstableMutant=join(dirname(checker),'verify-storefront-unstable-'+randomUUID()+'.mjs');
   try {
-    writeFileSync(unstableMutant,checkerSource.replace(unstableAnchor,
-      'const png=await canvas.screenshot({timeout:6000});'));
+    assert.ok(checkerSource.includes('if(direct.bins>=4 && direct.nonDominant>=0.005)'));
+    writeFileSync(unstableMutant,checkerSource
+      .replace('if(direct.bins>=4 && direct.nonDominant>=0.005)','if(false)')
+      .replace(unstableAnchor,
+        'const colors=pixelColors(await canvas.screenshot({timeout:6000}));'));
     requireFailure('unstable animated canvas screenshot',unstableMutant);
   } finally {rmSync(unstableMutant,{force:true});}
   writeFileSync(gameFile,validGame);

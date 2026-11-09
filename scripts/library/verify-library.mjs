@@ -66,7 +66,7 @@ export function verifyLibrary(root=ROOT,{live=true}={}){
   const present=fs.readdirSync(directory).filter(x=>x.endsWith('.json')&&x!=='index.json').sort();
   const wanted=expected.map(x=>x.game+'.json').sort();
   if(JSON.stringify(present)!==JSON.stringify(wanted))fail('stale or missing manifest');
-  const entries=[],copyPaths=new Set(),ids=new Set(),summary=[];
+  const entries=[],copyPaths=new Set(),copyHashes=new Set(),ids=new Set(),summary=[];
   let copiedBytes=0;
   for(const exp of expected){
     const manifest=read(path.join(directory,exp.game+'.json'));
@@ -94,6 +94,8 @@ export function verifyLibrary(root=ROOT,{live=true}={}){
           if(!a.copy_path||a.file!==a.copy_path||!a.copy_path.startsWith('shared/library/assets/'+exp.game+'/'))fail('copy path incorrect '+a.id);
           if(copyPaths.has(a.copy_path))fail('duplicate copy '+a.copy_path);
           copyPaths.add(a.copy_path);
+          if(copyHashes.has(a.sha256))fail('duplicate binary content '+a.source_path);
+          copyHashes.add(a.sha256);
           const copy=safe(root,a.copy_path);
           if(!fs.existsSync(copy)||sum(fs.readFileSync(copy))!==a.sha256)fail('copy not identical to source '+a.copy_path);
           copiedBytes+=a.bytes;

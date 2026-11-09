@@ -6,7 +6,7 @@ import {execFileSync,spawnSync} from 'node:child_process';
 import crypto from 'node:crypto';
 import sharp from 'sharp';
 const src=path.resolve(process.argv[2]||'skins/sources/rusty-robot');
-const id=path.basename(src),cut=path.join(src,'cut'),target=path.resolve('skins/packs',id);
+const id=path.basename(src),cut=path.join(src,'cut'),target=path.resolve(process.argv[3]&&!process.argv[3].startsWith('--')?process.argv[3]:path.join('skins/packs',id));
 const finish=process.argv.includes('--finalize');
 const fail=m=>{throw Error('СБОРКА СКИНА: '+m);};
 const sha=f=>crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
@@ -121,6 +121,14 @@ async function buildFlipbook(frames,destination){
 async function main(){
  if(finish){
   if(!fs.existsSync(path.join(target,'preview.png')))fail('нет настоящего Chrome-превью; окончательная сборка запрещена');
+  const m=JSON.parse(fs.readFileSync(path.join(target,'skin.json'),'utf8'));
+  if(m.source?.sheetSha256!==sha(path.join(src,'parts-sheet.png'))||m.source?.tableSha256!==sha(path.join(src,'parts-sheet.md')))
+    fail('ОБМАН: пакет собран из устаревшего листа');
+  if(!Object.keys(m.source?.assets||{}).length)fail('ОБМАН: отсутствуют контрольные суммы скина');
+  for(const [rel,h] of Object.entries(m.source.assets||{})){
+    const abs=path.resolve(target,rel);
+    if(!abs.startsWith(target+path.sep)||!fs.existsSync(abs)||sha(abs)!==h)fail('ОБМАН: старый либо подменённый файл пакета '+rel);
+  }
   const zip=path.join(path.dirname(target),id+'.zip');
   fs.rmSync(zip,{force:true});
   execFileSync('zip',['-qrX',path.basename(zip),id],{cwd:path.dirname(target)});
@@ -163,19 +171,26 @@ async function main(){
    await sharp(path.join(tmp,source)).flatten({background:meta.palette[3]}).ensureAlpha().resize(64,64,{kernel:'nearest'})
      .png({palette:false}).toFile(path.join(tmp,'textures',name));
   }
-  const ownerReference=fs.existsSync(path.join(src,'sketch.png'))?path.join(src,'sketch.png'):path.join(old,'reference.png');
+  const originalPack=path.resolve('skins/packs',id);
+  const ownerReference=fs.existsSync(path.join(src,'sketch.png'))?path.join(src,'sketch.png'):
+    fs.existsSync(path.join(old,'reference.png'))?path.join(old,'reference.png'):path.join(originalPack,'reference.png');
   if(!fs.existsSync(ownerReference))fail('отсутствует оригинальный эскиз reference.png/sketch.png');
   fs.copyFileSync(ownerReference,path.join(tmp,'reference.png'));
-  const record=path.join(old,'STAGE.md');
+  const record=fs.existsSync(path.join(old,'STAGE.md'))?path.join(old,'STAGE.md'):path.join(originalPack,'STAGE.md');
   if(fs.existsSync(record)){
    fs.copyFileSync(record,path.join(tmp,'STAGE.md'));
-   for(const n of [0,1])if(fs.existsSync(path.join(old,'stages',n+'.png')))fs.copyFileSync(path.join(old,'stages',n+'.png'),path.join(tmp,'stages',n+'.png'));
+   for(const n of [0,1]){
+      const image=fs.existsSync(path.join(old,'stages',n+'.png'))?path.join(old,'stages',n+'.png'):path.join(originalPack,'stages',n+'.png');
+      if(fs.existsSync(image))fs.copyFileSync(image,path.join(tmp,'stages',n+'.png'));
+    }
   }
   const materials={'metal':{rough:.88,metal:.32},'rust-transparent':{rough:.94,metal:.24},'glow':{emissive:meta.palette.at(-2),blend:'additive'}};
+  const outputHashes=Object.fromEntries(['parts','sheets','textures'].flatMap(sub=>
+    fs.readdirSync(path.join(tmp,sub)).filter(f=>f.endsWith('.png')).map(f=>[sub+'/'+f,sha(path.join(tmp,sub,f))])));
   const manifest={
    format:'meta6-skin/1',name:id,reference:'reference.png',palette:meta.palette,hideBase:['body','head','armL','armR','legL','legR'],materials,
    textures:[{id:'rust',file:'textures/rust.png',uv:'box6',material:'metal',apply:'root'},{id:'metal',file:'textures/metal.png',uv:'cyl',material:'metal',apply:'root'}],
-   parts:entries,source:{sheetSha256:meta.sourceSheetSha256,tableSha256:meta.sourceTableSha256}};
+   parts:entries,source:{sheetSha256:meta.sourceSheetSha256,tableSha256:meta.sourceTableSha256,assets:outputHashes}};
   fs.writeFileSync(path.join(tmp,'skin.json'),JSON.stringify(manifest,null,2)+'\n');
   fs.writeFileSync(path.join(tmp,'README.md'),[
    '# '+id,'Пакет meta6-skin/1 из авторского листа деталей.',

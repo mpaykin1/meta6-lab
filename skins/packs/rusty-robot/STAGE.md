@@ -8,7 +8,7 @@
 - Эскиз: reference.png, Git blob f66ad0f0cf976b86600e91efd3e819cb81afe8d1
 - Этап 0 принят Claude: https://github.com/mpaykin1/meta6-lab/pull/203#issuecomment-6747350445
 - этап 1 сделан (правка)
-- SHA правки этапа 1: https://github.com/mpaykin1/meta6-lab/commit/4a0d5b919163713207e5038e0f5f2245ff716d65
+- SHA правки этапа 1: https://github.com/mpaykin1/meta6-lab/commit/6fe54de979c398eedb79010f908152461744c1f1
 - Прогон этапа 1: https://github.com/mpaykin1/meta6-lab/actions/workflows/skin-pack.yml?query=branch%3Alab%2Fskin-rusty-robot
 - Картинка этапа 1: https://github.com/mpaykin1/meta6-lab/blob/lab/skin-rusty-robot/skins/packs/rusty-robot/stages/1.png
 - Статус: ожидает приёмки Claude; этап 2 не начинать.

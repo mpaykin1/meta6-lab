@@ -1,0 +1,46 @@
+name: META GAMES MCP run_bot M4
+on:
+  push:
+    branches: ['lab/mcp-run-bot']
+  pull_request:
+    paths:
+      - 'shared/approved/**'
+      - 'scripts/shared/verify-mcp-run-bot.mjs'
+      - 'scripts/shared/mutate-run-bot.mjs'
+      - 'scripts/shared/verify-approved-mcp.mjs'
+      - '.github/workflows/mcp-run-bot.yml'
+permissions:
+  contents: read
+concurrency:
+  group: mcp-run-bot-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verifier-and-mutations:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: MCP run_bot contract
+        run: node scripts/shared/verify-mcp-run-bot.mjs
+      - name: Six permanent fault injections
+        run: node scripts/shared/mutate-run-bot.mjs
+      - name: Existing MCP contract
+        run: node scripts/shared/verify-approved-mcp.mjs
+  real-veil-and-broken-copy:
+    needs: verifier-and-mutations
+    runs-on: ubuntu-24.04
+    timeout-minutes: 21
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium for unchanged Claude bot
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Compare direct bot with MCP and reject broken temporary game
+        run: node scripts/shared/verify-mcp-run-bot.mjs --real

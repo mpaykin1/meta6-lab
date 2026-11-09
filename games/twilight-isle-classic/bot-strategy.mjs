@@ -122,7 +122,11 @@ export async function playLevel(ctx, level) {
       // least one render interval, but scale input strength near the coin
       // so the longer pulse does not overshoot its genuine pickup radius.
       const moveMs = Math.max(260, Math.min(450, Math.round(distance * 180)));
-      const strength = Math.max(0.22, Math.min(1, distance / 1.5));
+      // Keyboard input in META BOT is digital: below 0.3 on BOTH axes
+      // no key is pressed at all. Preserve analog fine control on mobile,
+      // but keep desktop diagonal movement above the 0.3 threshold.
+      const strength = Math.max(ctx.mobile ? 0.22 : 0.52,
+                                Math.min(1, distance / 1.5));
       await ctx.joystick(stickX / length * strength, stickY / length * strength, moveMs);
       if (step % 8 === 7 && ctx.state().grounded) {
         await jumpThroughInput(ctx, ctx.state());

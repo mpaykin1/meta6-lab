@@ -7,7 +7,7 @@
 | Пункт | Ветка | Кто | С какого времени (UTC) |
 |---|---|---|---|
 | M6 | lab/mcp-connect | автозадача | 2026-11-09 15:30 |
-| К7 | lab/kontur-k7-review | автозадача | 2026-11-09 15:30 |
+| К7 | lab/kontur-k7-review | ВОЗВРАЩЁН Claude (ложные срабатывания, см. комментарий в PR #193) — попытка 1 из 2 | 2026-11-09 17:50 |
 | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | чат ChatGPT | 2026-11-09 15:15 |
 | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | автозадача | 2026-11-09 15:45 |
 | Пульт владельца | lab/owner-pult | чат ChatGPT | 2026-11-09 16:35 |

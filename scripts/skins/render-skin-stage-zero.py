@@ -109,6 +109,14 @@ for i,(fx,fy) in enumerate(anchors):
     d.line((x-27,y-19,x,y),fill="#ffc782",width=2)
     d.ellipse((x-51,y-44,x-12,y-5),fill="#282a30",outline="#ffd294",width=2)
     d.text((x-45,y-37),str(i+1).zfill(2),font=sm,fill="#f9d09b")
+# Palette swatches are attached to the actual sampled source pixels on the sketch.
+for i,(sx,sy) in enumerate(points):
+    if not(crop_box[0]<=sx<crop_box[2] and crop_box[1]<=sy<crop_box[3]):
+        continue
+    x=int(ox+(sx-crop_box[0])/(crop_box[2]-crop_box[0])*view.width)
+    y=int(oy+(sy-crop_box[1])/(crop_box[3]-crop_box[1])*view.height)
+    d.line((x,y,x+16,y+14),fill="#f4e2ca",width=1)
+    d.rectangle((x+13,y+10,x+28,y+25),fill=colors[i]+(255,),outline="#fff2dd",width=1)
 d.text((1006,156),"ДЕТАЛИ / ПРИВЯЗКА К СИЛУЭТУ",font=md,fill="#f4d3a6")
 for i,name in enumerate(labels):
     y=200+i*38

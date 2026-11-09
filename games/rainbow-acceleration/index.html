@@ -642,8 +642,36 @@ function loop(){requestAnimationFrame(loop);
   if(fps<48&&lowH>200){lowH=Math.max(200,Math.round(lowH*.86));resize();good=0;}
   else if(fps>57&&lowH<maxH){if(++good>2){lowH=Math.min(maxH,Math.round(lowH*1.1));resize();good=0;}}}
 }
+
+/* Read-only META BOT bridge: real rider position, live track endpoint and input state. */
+const rrBotSource = Object.freeze({
+  info: () => ({ name: 'rainbow-acceleration', levels: 1 }),
+  state: () => {
+    const end = seg && seg.F[seg.n - 1].p;
+    const begin = seg && seg.F[0].p;
+    return {
+      started: mode === 'ride',
+      level: 0,
+      levelDone: false, // endless ride has no finish line
+      gameDone: false,
+      alive: true, // falling triggers the authored airborne recovery, not death
+      hero: { x: pos.x, y: pos.z, z: pos.z },
+      goal: end ? { x: end.x, y: end.z, z: end.z } : null,
+      enemies: 0,
+      weapons: 0,
+      layoutHash: [seg?.name, begin?.x, begin?.z, end?.x, end?.z].join(':'),
+      menuOpen: mode !== 'ride',
+      lane: X,
+      velocity: spd,
+      segmentDistance: S,
+      segmentLength: seg?.len || 0
+    };
+  }
+});
+Object.defineProperty(window, '__RR_BOT_SOURCE__', { value: rrBotSource, writable: false, configurable: false });
 window.__rr={get state(){return{mode,state,spd,S,X,seg:seg&&seg.name,chain:chain.length,grave:grave.length,lowH,RW,RH,best}},setMode,showAsset,n:ASSETS.length};
 loop();
 })();
 </script>
+<script src="bot-adapter.js"></script>
 </body></html>

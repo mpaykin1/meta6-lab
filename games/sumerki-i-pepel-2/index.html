@@ -3608,7 +3608,7 @@ function applyPalette(tod, dawn) {
 /* -----------------------------------------------------------------------------
    10 · State
 ----------------------------------------------------------------------------- */
-const DEFAULT_SEED = 1337;
+const DEFAULT_SEED = (Math.random() * 0x100000000) >>> 0; // new world layout each independent run
 const DEFAULT_BIOME = 'dusk';
 const G = {
   state: 'loading', biome: DEFAULT_BIOME, time: 0, play: 0, collected: 0, total: 20, hits: 0, seed: DEFAULT_SEED, sunAz: 0,
@@ -11158,5 +11158,6 @@ window.__isle = {
 };
 
 </script>
+<script src="bot-adapter.js"></script>
 
 </body></html>

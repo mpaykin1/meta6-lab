@@ -3025,6 +3025,46 @@ function updateEnding(dt, t) {
 }
 
 
+
+/* META BOT observation bridge. Values come from this frame's real engine state;
+   movement and progression stay exclusively in the game input/physics loop. */
+const bcBotSource = Object.freeze({
+  info: () => ({ name: 'broken-city', levels: LEVELS.length }),
+  state: () => {
+    const active = view === 'game', c = G.cfg, h = heroState.pos;
+    const ending = G.state === 'ending' || G.state === 'endwait';
+    const ruin = c && c.mode === 'toys'
+      ? truins.filter(r => r.barrier && r.route?.length && r.route.at(-1)[1] < h.z - .3)
+          .sort((a, b) => b.z - a.z)[0] : null;
+    const p = ruin && h.z <= ruin.route[0][1] + 6
+      ? ruin.route[Math.min(ruin.ri, ruin.route.length - 1)] : null;
+    const waypoint = p ? { x: p[0], y: p[1], z: p[1], jump: !!p[2], routeIndex: ruin.ri } : null;
+    const target = waypoint || (c ? { x: 0, y: c.goal, z: c.goal } : null);
+    const layout = c ? [
+      G.li, G.cycle, c.mode, c.goal,
+      ...(c.gaps || []),
+      ...truins.filter(r => r.barrier).flatMap(r => [r.z, ...(r.route || []).flat()])
+    ].join(':') : 'title';
+    return {
+      started: active && ['play', 'ending', 'endwait'].includes(G.state),
+      level: G.li,
+      levelDone: active && ((G.state === 'trans' && G.next !== G.li) || ending),
+      gameDone: active && ending,
+      alive: G.state !== 'defeat',
+      hero: { x: h.x, y: h.z, z: h.z },
+      goal: target,
+      enemies: shades.filter(sh => sh.visible && !sh.userData.copy).length,
+      weapons: 0,
+      layoutHash: layout,
+      menuOpen: G.paused || view !== 'game' || G.storyOpen === true,
+      cameraYaw: rig.yaw,
+      waypoint,
+      mode: c?.mode || null
+    };
+  }
+});
+Object.defineProperty(window, '__BC_BOT_SOURCE__', { value: bcBotSource, writable: false, configurable: false });
+
 /* ============ INV — hidden asset counter (for the agent only, never shown to the player) ============
    Rules: 1) before any edit run window.__INV() and note `now`; 2) before publishing run it again:
    `lost` must be empty and `now` >= previous; 3) on every expansion add new entries to INV.sec and a new
@@ -3329,5 +3369,6 @@ setLoad(1);
 frame();
 
 </script>
+<script src="bot-adapter.js"></script>
 </body>
 </html>

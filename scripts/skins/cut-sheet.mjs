@@ -212,12 +212,13 @@ async function main(){
   }
   if(border/total<.92||background/(w*h)<.20)fail('фон не розовый: доля розового на краях '+Math.round(100*border/total)+' %, на листе '+Math.round(100*background/(w*h))+' %');
   const bands=detectRows(mask,w,h,rows.length),found=[];
+  console.log('НОЖНИЦЫ: полосы рядов '+bands.map((b,i)=>(i+1)+':'+b.y0+'-'+b.y1).join(' '));
   const radius=Math.max(2,Math.min(11,Math.round(Math.min(w,h)*.005)));
   for(let ri=0;ri<rows.length;ri++){
     const row=rows[ri],expected=entries.filter(e=>e.row===row).reduce((n,e)=>n+expectedFrames(e),0);
     const comps=mergeNearby(components(mask,w,bands[ri].y0,bands[ri].y1),radius);
     comps.sort((a,b)=>a.x0-b.x0||a.y0-b.y0);
-    if(comps.length!==expected)fail('ряд '+row+': найдено '+comps.length+' отдельных изображений, по таблице нужно '+expected+'. Проверьте пропущенные/лишние детали, подписи, касания, ореолы и разрывы. Области: '+comps.map(p=>p.x0+'-'+p.x1).join(', '));
+    if(comps.length!==expected)fail('ряд '+row+': найдено '+comps.length+' отдельных изображений, по таблице нужно '+expected+'. Проверьте пропущенные/лишние детали, подписи, касания, ореолы и разрывы. Области: '+comps.map(p=>'('+p.x0+','+p.y0+'-'+p.x1+','+p.y1+')').join(', '));
     let cursor=0;
     for(const e of entries.filter(e=>e.row===row)){
       const n=expectedFrames(e);

@@ -229,7 +229,7 @@ async function main(){
   try{
     for(let i=0;i<found.length;i++){
       const {entry,rects}=found[i],frames=rects.length;
-      const name=String(i+1).padStart(2,'0')+'-'+safeName(entry.name).slice(0,64);
+      const name='part-'+String(i+1).padStart(2,'0');
       if(frames===1){
         const rel='parts/'+name+'.png';
         await writeCrop(entry,rects[0],mask,data,w,h,palette,path.join(tmp,rel),64);

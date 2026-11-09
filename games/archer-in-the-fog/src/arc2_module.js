@@ -180,14 +180,20 @@ const ARC2 = (() => {
   /* ---------- per frame ---------- */
   const veil = $("fogveil");
   let perf = { f: [], act: 0, start: performance.now() };
+  let lastHoldClock = performance.now();
   function tick(raw, t, e) {
+    // Survival is measured in real seconds, not in FPS-clamped simulation ticks.
+    // Reset the clock every frame to exclude pauses and background time.
+    const now = performance.now();
+    const holdDelta = Math.min(1.25, Math.max(0, (now - lastHoldClock) / 1000));
+    lastHoldClock = now;
     const sp = G.phase === "plunge" || G.phase === "ambush";
     camK = damp(camK, sp ? 1 : 0, 2.2, raw);
     if (G.phase !== "plunge") { shadow.visible = !1; shadowMat.uniforms.uRim.value = 0; }
     if (G.phase !== "ambush") { if (!dragon.root.visible && G.mode === "play") hideBody(!1); setEyes(0); G.fogBoost = Math.max(0, (G.fogBoost || 0) - raw * 1.2); }
     flyTick(t);
-    if (G.task === "hold" && G.phase === "fight") {      // survive: the progress fills by itself
-      holdT += t; const k = Math.min(10, Math.floor(holdT / (D0.T / 10)));
+    if (G.task === "hold" && G.phase === "fight" && !G.paused && !PG.paused && !document.hidden) {
+      holdT += holdDelta; const k = Math.min(10, Math.floor(holdT / (D0.T / 10)));
       if (k !== G.hits) { G.hits = k; renderHP(); if (k >= 10) retreat(); }
     }
     // U4: a fog veil swallows the fall between towers

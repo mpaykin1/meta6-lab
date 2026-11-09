@@ -17,6 +17,24 @@
 - Статус: В РАБОТЕ — Pages / отрисовка и права сторонних зависимостей не подтверждены.
 - Михаил: запросил загрузить как эталон; визуальный PASS не заявлялся.
 
+### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
+- Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/
+- Источник: `games/asqura-ilya-reference/index.html`, blob `b7b7167b3fb48776b2c82433087cb13e867e5abb`.
+- Каталог: `shared/references/asqura-ilya-reference.json`; 3D требует CDN Three.js r128.
+- Ветка: `lab/asqura-ilya-reference-1109`; PR — см. ветку.
+- Статус: В РАБОТЕ — Pages и бот ещё не подтверждены.
+- Михаил: запросил включение в эталоны; оценку игры не дал.
+
+### lab/rainbow-acceleration-reference-1109 — «Радужный разгон»
+- Польза: неизменённый авторский эталон, 28 объектов галереи, игровые трассы, шейдеры, анимации и FX.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/rainbow-acceleration/
+- Исходник: `games/rainbow-acceleration/source-upload.html` (blob `8ebdbe4bb14291c77fb209a2f04a6a6c8920480b`).
+- Просмотр: `games/rainbow-acceleration/index.html` (локальный Three.js вместо CDN).
+- Каталог: `shared/references/rainbow-acceleration.json` (28 ассетов).
+- Ветка: `lab/rainbow-acceleration-reference-1109`.
+- Статус: В РАБОТЕ — PR и публикация Pages ещё не подтверждены; Михаил: вердикта «нравится» о запуске нет.
+
 ### lab/broken-city-copy-reference-1109 — «Сломанный город (Copy)»
 - Польза: отдельный эталон с 3D-графикой, GLSL и галереей ассетов; основной Broken City не изменён.
 - Играть: https://mpaykin1.github.io/meta6-lab/games/broken-city-copy/

@@ -62,6 +62,18 @@ try {
   requireFailure('single-color canvas',checker);
   writeFileSync(gameFile,validGame);
 
+  // Fault 2: a colorful UI strip must never count as the game canvas.
+  // The large game canvas underneath is intentionally uniform black.
+  const uiOnly='<!doctype html><html><body style="margin:0;background:#000">'
+    +'<canvas width="80" height="12" style="position:absolute;top:0;left:0;width:80px;height:12px;z-index:2"></canvas>'
+    +'<canvas width="256" height="144" style="display:block;width:100vw;height:100vh;background:#000"></canvas>'
+    +'<script>const c=document.querySelectorAll("canvas");const ui=c[0].getContext("2d");'
+    +'["#db4141","#2c8bd7","#cce25f","#6be0b4","#b046dd","#eea358"].forEach((color,i)=>{ui.fillStyle=color;ui.fillRect(i*14,0,14,12)});'
+    +'const game=c[1].getContext("2d");game.fillStyle="#000";game.fillRect(0,0,256,144);</script></body></html>';
+  writeFileSync(gameFile,uiOnly);
+  requireFailure('small colorful UI is not a rendered game canvas',checker);
+  writeFileSync(gameFile,validGame);
+
   // Fault 2: HTML returns 200 but has no canvas.
   writeFileSync(game2File,'<!doctype html><title>Missing canvas</title><p>No game</p>');
   requireFailure('no canvas despite HTTP 200',checker);

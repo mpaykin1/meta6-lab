@@ -1,0 +1,74 @@
+name: Library Machine
+on:
+  push:
+    paths:
+      - 'games/**'
+      - 'observer-world-en-v7/**'
+      - 'ashen-sumerek/**'
+      - 'underwater-world/**'
+      - 'three-worlds-game/**'
+      - 'meta-games-worlds/veil-terraces/**'
+      - 'rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md'
+      - 'scripts/library/**'
+      - 'shared/library/**'
+      - '.github/workflows/library-machine.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'games/**'
+      - 'observer-world-en-v7/**'
+      - 'ashen-sumerek/**'
+      - 'underwater-world/**'
+      - 'three-worlds-game/**'
+      - 'meta-games-worlds/veil-terraces/**'
+      - 'rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md'
+      - 'scripts/library/**'
+      - 'shared/library/**'
+      - '.github/workflows/library-machine.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: library-machine-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  library-machine:
+    name: library-machine
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Extract all sources from disk and allowlist
+        run: node scripts/library/extract-all.mjs
+      - name: Verify independent file inventory, hashes and live additions/removals
+        run: node scripts/library/verify-library.mjs
+      - name: Run five persistent deceptive mutations
+        run: node scripts/library/mutate-library.mjs
+      - name: Check PR catalog is committed
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code -- shared/library
+      - name: Commit newly extracted assets on the feature branch
+        if: github.event_name == 'push' && github.ref != 'refs/heads/main'
+        run: |
+          git add -A shared/library
+          if git diff --cached --quiet; then echo 'Library unchanged'; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "library: index original game assets and solutions"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+      - name: Propose catalog update from main in a separate PR
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          add-paths: shared/library
+          commit-message: 'library: index original game assets and solutions'
+          branch: lab/library-machine-sync
+          title: 'Library Machine: sync newly uploaded game sources'
+          body: 'Automatic exact-source library manifests and SHA-256 copies, max 50 MiB. Requires Claude review; no automatic merge.'

@@ -4,7 +4,7 @@ import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
 export const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
-export const LIMIT=50*1024*1024;
+export const LIMIT=50*1000*1000;
 export const ASSET_EXT=new Set(['.glb','.gltf','.png','.webp','.jpg','.jpeg','.mp3','.ogg','.wav','.json','.svg','.bin','.woff','.woff2','.ttf','.otf']);
 const CODE_EXT=new Set(['.js','.mjs','.cjs','.ts','.html','.htm','.css','.glsl','.vert','.frag']);
 const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
@@ -133,8 +133,8 @@ function inspect(root,entry){
 export function buildLibrary(root=ROOT){
   const manifests=discover(root).map(g=>inspect(root,g)),target=path.join(root,'shared/library'),assetDir=path.join(target,'assets');
   const candidates=manifests.flatMap(m=>m.assets.filter(a=>a.bytes!==undefined)).sort((a,b)=>a.bytes-b.bytes||a.source_path.localeCompare(b.source_path,'en'));
-  let copied=0;const selected=new Set();
-  for(const a of candidates)if(copied+a.bytes<=LIMIT){selected.add(a.id);copied+=a.bytes;}
+  let copied=0;const selected=new Set(),copiedHashes=new Set();
+  for(const a of candidates)if(!copiedHashes.has(a.sha256)&&copied+a.bytes<=LIMIT){selected.add(a.id);copiedHashes.add(a.sha256);copied+=a.bytes;}
   fs.rmSync(assetDir,{recursive:true,force:true});fs.mkdirSync(assetDir,{recursive:true});
   for(const m of manifests){
     for(const a of m.assets){

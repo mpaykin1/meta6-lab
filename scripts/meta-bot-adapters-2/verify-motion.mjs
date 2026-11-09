@@ -12,7 +12,7 @@ const pos = async page => page.evaluate(() => {
   let real;
   if (window.__isle) real = window.__isle.player.pos;
   else if (window.__G) real = window.__G.heroState.pos;
-  else if (window.__rr) real = { x: b.hero.x, z: b.hero.y };
+  else if (window.__rr) { const live = window.__rr.state; real = { x: b.hero.x, z: b.hero.y }; if (Math.abs(live.X - b.lane) > 1e-6 || Math.abs(live.S - b.segmentDistance) > 1e-6) throw new Error('rainbow observer is not reading real steering/track state'); }
   else throw new Error('independent engine position unavailable');
   if (Math.hypot(b.hero.x - real.x, b.hero.y - real.z) > 1e-6) throw new Error('observer is not tracking real player');
   return { x: b.hero.x, y: b.hero.y, lane: b.lane, started: b.started };
@@ -25,14 +25,14 @@ try {
     page.on('pageerror', e => errors.push(String(e.message || e)));
     try {
       await page.goto(server.url + '/games/' + id + '/index.html', { waitUntil: 'load', timeout: 60000 });
-      await page.waitForFunction(() => { try { return !!window.__META_BOT__?.state?.()?.hero; } catch { return false; } }, { timeout: 60000 });
+      await page.waitForFunction(() => { try { return !!window.__META_BOT__?.state?.()?.hero; } catch { return false; } }, null, { timeout: 60000 });
       if (id === 'rainbow-acceleration') await page.locator('#bRide').click();
       else if (id === 'sumerki-i-pepel-2') {
         await page.locator('#btnStart').waitFor({ state: 'visible', timeout: 45000 });
         await page.locator('#btnStart').click();
       } else {
         const started = await page.evaluate(() => window.__META_BOT__.state().started);
-        if (!started) { await page.locator('#playBtn').click({ timeout: 10000 }); }
+        if (!started && await page.evaluate(() => window.__G?.G?.state === 'title')) { await page.locator('#playBtn').click({ timeout: 10000 }); }
       }
       await page.waitForFunction(() => window.__META_BOT__.state().started, null, { timeout: 35000 });
       const a = await pos(page);

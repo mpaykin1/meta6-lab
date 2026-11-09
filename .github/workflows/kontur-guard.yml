@@ -1,0 +1,37 @@
+name: KONTUR Guard
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+permissions:
+  contents: read
+jobs:
+  mutate-kontur-guard:
+    name: mutate-kontur-guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/kontur/mutate-kontur-guard.mjs
+  kontur-guard:
+    name: kontur-guard
+    needs: mutate-kontur-guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch current main
+        run: git fetch --no-tags origin main:refs/remotes/origin/main
+      - name: Check PR policy and every permanent mutation
+        run: node scripts/kontur/guard.mjs

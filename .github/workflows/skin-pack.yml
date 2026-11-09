@@ -35,7 +35,7 @@ jobs:
           fi
           echo "SKIN_STAGE=$n" >> "$GITHUB_ENV"
       - name: Install image processing for original-sketch comparison
-        if: github.event_name == 'push' && env.SKIN_STAGE == '0'
+        if: github.event_name == 'push' && (env.SKIN_STAGE == '0' || env.SKIN_STAGE == '1')
         run: |
           python3 -m venv /tmp/skin-stage-venv
           /tmp/skin-stage-venv/bin/pip install -q Pillow
@@ -43,6 +43,9 @@ jobs:
         if: github.event_name == 'push' && env.SKIN_STAGE == '0'
         run: |
           /tmp/skin-stage-venv/bin/python scripts/skins/render-skin-stage-zero.py
+      - name: Stage 1 — generate two material textures and sketch comparison
+        if: github.event_name == 'push' && env.SKIN_STAGE == '1'
+        run: /tmp/skin-stage-venv/bin/python scripts/skins/render-skin-stage-one.py
       - name: Validate only milestone reached (0–6)
         if: env.SKIN_STAGE != '7'
         run: |
@@ -91,6 +94,8 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           if [ "$SKIN_STAGE" = 0 ]; then
             git add skins/packs/rusty-robot/STAGE.md skins/packs/rusty-robot/README.md skins/packs/rusty-robot/skin.json skins/packs/rusty-robot/stages/0.png
+          elif [ "$SKIN_STAGE" = 1 ]; then
+            git add skins/packs/rusty-robot/textures/rust.png skins/packs/rusty-robot/textures/metal.png skins/packs/rusty-robot/stages/1.png
           else
             git add skins/packs/rusty-robot/preview.png skins/packs/rusty-robot.zip
           fi

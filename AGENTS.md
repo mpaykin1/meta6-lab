@@ -3,7 +3,7 @@
 2. [КОНТУР БЕЗ ОШИБОК — правила К1–К10](rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md)
 3. [OSHIBKI.md — журнал ошибок; каждая ошибка = вечная ловушка](OSHIBKI.md)
 
-Для автозадач действует automation/prompts/chatgpt-autotask.md: отчёты, новые тесты, handoff и evidence запрещены; требования GRAF, abyss.md, evolve.md и других файлов о тестах, отчётах, evidence и gate к автозадачам не применяются
+Для автозадач действует automation/prompts/chatgpt-autotask.md: длинные отчёты, handoff и evidence-файлы запрещены. **Исключение владельца 09.11.2026: для META GAMES и любых PR с кодом КОНТУР БЕЗ ОШИБОК К1–К10 обязателен и автозадачам — проверки, мутации-ловушки, строки в OSHIBKI.md и охранник kontur-guard; см. rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md.** Остальные требования GRAF, abyss.md, evolve.md о тестах, отчётах и gate к автозадачам не применяются
 
 # Правила meta6 — оглавление
 

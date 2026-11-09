@@ -154,7 +154,7 @@ export function buildLibrary(root=ROOT){
   for(const m of manifests)save(path.join(target,m.game+'.json'),m);
   const index={schema_version:1,copy_limit_bytes:LIMIT,copied_bytes:copied,
     games:manifests.map(m=>({game:m.game,source_root:m.source_root,manifest:'shared/library/'+m.game+'.json',...m.counts})),
-    entries:manifests.flatMap(m=>[...m.assets,...m.solutions].map(({id,game,kind,purpose,source_path,lines,file})=>({id,game,kind,purpose:purpose||[],source_path,...(lines?{lines}:{}),...(file?{file}:{})})))};
+    entries:manifests.flatMap(m=>[...m.assets,...m.solutions].map(({id,game,kind,name,purpose,source_path,lines,file,sha256})=>({id,game,kind,...(name?{name}:{}),purpose:purpose||[],source_path,sha256,...(lines?{lines}:{}),...(file?{file}:{})})))};
   save(path.join(target,'index.json'),index);
   return index;
 }

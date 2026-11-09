@@ -91,8 +91,14 @@ export async function playLevel(ctx, level) {
     } else if (s.goal) {
       // The observer returns read-only, authored waypoints (ruins, bridges, lamps).
       if (s.mode === 'toys' && blocked >= 2) {
-        // A physical jump can clear a real low stair. Never substitute a
-        // synthetic waypoint or mutate game state to satisfy the bot.
+        // Repeated jumping against a vertical face cannot clear the stair.
+        // Back away using the real controls, then approach the authored
+        // waypoint again; the observer and game state remain read-only.
+        const yaw = Number.isFinite(s.cameraYaw) ? s.cameraYaw : 0;
+        const retreatX = Math.sin(yaw);
+        const retreatY = -Math.cos(yaw);
+        await ctx.joystick(retreatX * 0.65, retreatY * 0.65,
+          ctx.mobile ? 1200 : 450);
         await jump(s.mode);
         blocked = 0;
       }

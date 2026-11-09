@@ -14,7 +14,7 @@
 - Источник: `games/sumerki-i-pepel-2-copy/index.html`, blob `90d83a77049e8edb7aab847ecbbf4e9723a3c2e5`.
 - Каталог: `shared/references/sumerki-i-pepel-2-copy.json`.
 - Ветка: `lab/sumerki-i-pepel-2-uploaded-reference`; PR: https://github.com/mpaykin1/meta6-lab/pull/179
-- Статус: В РАБОТЕ — merge и запуск на Pages не подтверждены; бот не запускался.
+- Статус: В РАБОТЕ — оригинал сохранён; прохождение ботом и мобильная совместимость не подтверждены.
 - Михаил: запросил загрузку как эталона, вердикта «нравится» о запуске не было; Claude: —.
 
 

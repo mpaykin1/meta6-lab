@@ -15,3 +15,4 @@
 | L1 ч.1 (станок библиотеки) | lab/library-machine | чат ChatGPT | 2026-11-09 15:25 |
 | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | автозадача | 2026-11-09 15:45 |
 | B1 ч.1 (каждая игра из list_games открывается без ошибок консоли) | lab/auto-b1-20261109 | автозадача | 2026-11-09 15:39 |
+| Пульт владельца | lab/owner-pult | чат ChatGPT | 2026-11-09 16:35 |

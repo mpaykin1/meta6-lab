@@ -114,8 +114,8 @@ const defs=[
  {name:'get_approved_component_source',description:'Get complete original, hash-checked JavaScript source for deliberate integration in a sandbox game; prefer search for discovery',inputSchema:{type:'object',properties:{id:{type:'string'}},required:['id']}},
  {name:'list_game_files',description:'List recursive relative game files and byte lengths for a game from list_games',inputSchema:{type:'object',properties:{id:{type:'string'}},required:['id']}},
  {name:'read_game_file',description:'Read a precise text line window from an allowlisted game; binary assets are rejected with byte size',inputSchema:{type:'object',properties:{id:{type:'string'},file:{type:'string'},start:{type:'integer',minimum:1},count:{type:'integer',minimum:1,maximum:10000}},required:['id','file']}},
- {name:'list_games',description:'List all self-hosted games directly from the META GAMES homepage',inputSchema:{type:'object',properties:{}}},
- {name:'run_bot',description:'Run Claude META BOT (full mobile, desktop and second run; max 300 seconds, one run at a time)',inputSchema:{type:'object',properties:{id:{type:'string'},mode:{type:'string',enum:['full']}},required:['id']}}
+ {name:'run_bot',description:'Run Claude META BOT (full mobile, desktop and second run; max 300 seconds, one run at a time)',inputSchema:{type:'object',properties:{id:{type:'string'},mode:{type:'string',enum:['full']}},required:['id']}},
+ {name:'list_games',description:'List all self-hosted games directly from the META GAMES homepage',inputSchema:{type:'object',properties:{}}}
 ];
 function answer(id,result,error){
  const out={jsonrpc:'2.0',id};

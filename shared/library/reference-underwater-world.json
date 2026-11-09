@@ -1,0 +1,5672 @@
+{
+  "schema_version": 1,
+  "game": "reference-underwater-world",
+  "source_root": "underwater-world",
+  "assets": [
+    {
+      "id": "26cd2eae803d5d397c7e0307",
+      "game": "reference-underwater-world",
+      "kind": "source-table",
+      "name": "TILE",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/building-assets.js",
+      "lines": [
+        6,
+        6
+      ],
+      "sha256": "d89028b4a375b5d54fcaf2dd7fcae9f4aee566a26b64c4aa38c3e37e46a1f9ad"
+    },
+    {
+      "id": "17a6b7b66aea4795098286b0",
+      "game": "reference-underwater-world",
+      "kind": "source-table",
+      "name": "FOE",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3856,
+        3860
+      ],
+      "sha256": "ae2b1468b6d2f62a4bfe1a3fd128f797c8cc79cd344afa40b4e43e3fe9d8b353"
+    },
+    {
+      "id": "217ec586bd828175f4849c43",
+      "game": "reference-underwater-world",
+      "kind": "source-table",
+      "name": "WEAPONS",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3074,
+        3096
+      ],
+      "sha256": "4f0d628c707759c270e371e7a796f52b7a92c1acf4414cefe18c52c70f66027e"
+    },
+    {
+      "id": "37d3f07f620ae272328ce970",
+      "game": "reference-underwater-world",
+      "kind": "source-table",
+      "name": "FACE_TILES",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        550,
+        550
+      ],
+      "sha256": "8dda32f994109662367ed69e909269335fd57d15b5c4ebe1c02cd38ed61ad0ae"
+    },
+    {
+      "id": "3c8da46b77f7bb9acd2dcf5a",
+      "game": "reference-underwater-world",
+      "kind": "source-table",
+      "name": "PALETTES",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1735,
+        1764
+      ],
+      "sha256": "826644f34b6bd0820533c4edb25b0e252e89575a2bcaa913e9ebf19e06dbd76d"
+    },
+    {
+      "id": "79602c356a9af57640454ead",
+      "game": "reference-underwater-world",
+      "kind": "data-uri",
+      "name": "data@50683",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        494,
+        494
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "8d4d8b11ab175884164cacc7",
+      "game": "reference-underwater-world",
+      "kind": "inline-svg",
+      "name": "svg@28486",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        361,
+        361
+      ],
+      "sha256": "1b421839d4ed646479caf2583c4164d65e622ea03a94faa33c1f400044fa61e9"
+    },
+    {
+      "id": "9bc3959d80139e779252b5f2",
+      "game": "reference-underwater-world",
+      "kind": "data-uri",
+      "name": "data@46315",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        494,
+        494
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "a3556251c47f485f6c23918d",
+      "game": "reference-underwater-world",
+      "kind": "data-uri",
+      "name": "data@52143",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        494,
+        494
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "a3bb8cbd9677514175d2d2f6",
+      "game": "reference-underwater-world",
+      "kind": "data-uri",
+      "name": "data@52717",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        494,
+        494
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "b4424426dca234602632aa36",
+      "game": "reference-underwater-world",
+      "kind": "inline-style",
+      "name": "style@2451",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        26,
+        325
+      ],
+      "sha256": "181a2b242be80a678fa439270375af5911269c22727424d87380491bcd8a2841"
+    },
+    {
+      "id": "cd426bfe77adcfb41d1baf82",
+      "game": "reference-underwater-world",
+      "kind": "inline-style",
+      "name": "style@130",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1,
+        21
+      ],
+      "sha256": "280d786ad0f507423b87eac2ff1775dc80441a37e96836f17b6b415fe9dc0492"
+    },
+    {
+      "id": "d42a5795e92cbe2bc25d1770",
+      "game": "reference-underwater-world",
+      "kind": "inline-svg",
+      "name": "svg@27489",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        357,
+        357
+      ],
+      "sha256": "3d2613c34c7a63a7ff844b518142c03096b968b426581aa0733a7102f6e4c6d8"
+    },
+    {
+      "id": "d55f44108d71ed2a2b2c38c3",
+      "game": "reference-underwater-world",
+      "kind": "inline-svg",
+      "name": "svg@27815",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        358,
+        358
+      ],
+      "sha256": "b8f9173f58902f1815f5dc8a3a414a3c6ceb41cbe0339cdc3f6b5f091232de7b"
+    },
+    {
+      "id": "e324482f1782820f46083d73",
+      "game": "reference-underwater-world",
+      "kind": "data-uri",
+      "name": "data@35874",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        494,
+        494
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "e887b906cccc12ce61420a3b",
+      "game": "reference-underwater-world",
+      "kind": "data-uri",
+      "name": "data@53342",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        494,
+        494
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "5e552cd83c00606750cd2868",
+      "game": "reference-underwater-world",
+      "kind": "inline-style",
+      "name": "mobile-controls.css",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "underwater-world/mobile-controls.css",
+      "lines": [
+        1,
+        51
+      ],
+      "sha256": "ab2e313c597be9dd108b6e23004d6a6f362cd4b415bb212a125fa2b90b50cb6b"
+    },
+    {
+      "id": "a6c7ef6ade49e91e58cacec0",
+      "game": "reference-underwater-world",
+      "kind": "inline-svg",
+      "name": "svg@339",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        6,
+        6
+      ],
+      "sha256": "766ae2403d93b39e0b46504ba2d2263ed62e6db03a6544f664656d1e05aa57eb"
+    },
+    {
+      "id": "84b739590f782f75012a7839",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/angel_statue.glb",
+      "source_path": "underwater-world/models/angel_statue.glb",
+      "bytes": 64504,
+      "sha256": "90d219dd5a5aa22912e51fb930559c7d43dc17e480ca43b62ee354247a952857",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/angel_statue.glb"
+    },
+    {
+      "id": "050fbf680d848ba0ee6c171d",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/angler.glb",
+      "source_path": "underwater-world/models/angler.glb",
+      "bytes": 134236,
+      "sha256": "3d7c837b0ecf179d57aa66501bd8c8d3a4e351508768c5b6627758b66ce638d5",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/angler.glb"
+    },
+    {
+      "id": "f0e22057d8b69241805c5f55",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/arch.glb",
+      "source_path": "underwater-world/models/arch.glb",
+      "bytes": 207904,
+      "sha256": "bd5df7c604c294e05518a996931a0452298735fb941ef5b5466d42ef98812670",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/arch.glb"
+    },
+    {
+      "id": "36ac03e9e3d981e0f7f273d2",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/bathyscaphe.glb",
+      "source_path": "underwater-world/models/bathyscaphe.glb",
+      "bytes": 150824,
+      "sha256": "bac908bc6f0e61db3940dc61474eea8f7a5dec987f575146c9c938e16588460c",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/bathyscaphe.glb"
+    },
+    {
+      "id": "043574f1f2d40bfeb5d631bc",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/cathedral_bell.glb",
+      "source_path": "underwater-world/models/cathedral_bell.glb",
+      "bytes": 187672,
+      "sha256": "2809e00ba77ea5c2cae87c940c758016739a4678427d361c29d097cc8f6f03b9",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/cathedral_bell.glb"
+    },
+    {
+      "id": "f1a9bbbbf3e9f90484edcee4",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/cathedral_tower.glb",
+      "source_path": "underwater-world/models/cathedral_tower.glb",
+      "bytes": 922996,
+      "sha256": "1329170cab76855a333aff51c5909d4f29ce6ab76da49e30b2393693201b9ad0",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/cathedral_tower.glb"
+    },
+    {
+      "id": "0996eb4bcc71669242b21fee",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/coral_branch_orange.glb",
+      "source_path": "underwater-world/models/coral_branch_orange.glb",
+      "bytes": 51036,
+      "sha256": "ed08220362fd1d57f6e5c205ecf6bfc43a994ac62354058194a0869dcf40bd54",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/coral_branch_orange.glb"
+    },
+    {
+      "id": "fb8a05ad91fadc506eca04ba",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/coral_branch_violet.glb",
+      "source_path": "underwater-world/models/coral_branch_violet.glb",
+      "bytes": 51036,
+      "sha256": "e4be5e509c9bccc0d2b478ed007b4041074b4831bb99edb89a2096a24c22492d",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/coral_branch_violet.glb"
+    },
+    {
+      "id": "cd7666c7d98a166fc57708f3",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/diving_helmet.glb",
+      "source_path": "underwater-world/models/diving_helmet.glb",
+      "bytes": 68316,
+      "sha256": "c4a1dd6c6d7c99add9e4f34a3f4c45d4de7ebab52bfa1355d91ee152e5340759",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/diving_helmet.glb"
+    },
+    {
+      "id": "196827ae2d3878724d585d08",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/glow_fish_teal.glb",
+      "source_path": "underwater-world/models/glow_fish_teal.glb",
+      "bytes": 18308,
+      "sha256": "2843d92921ca0da5d0f827b8825946c015d7863e11444cd1dc8a758c8b8e0ca7",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/glow_fish_teal.glb"
+    },
+    {
+      "id": "64780b0f32ed98d3072a100f",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/glow_fish_violet.glb",
+      "source_path": "underwater-world/models/glow_fish_violet.glb",
+      "bytes": 18316,
+      "sha256": "c2fb66fb81bb91e425c5f41ade91ec9b2a1dbae3c9284ddd817adb2f0cb05fab",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/glow_fish_violet.glb"
+    },
+    {
+      "id": "1e8285527a84a1b900de7d0b",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/kelp_tall.glb",
+      "source_path": "underwater-world/models/kelp_tall.glb",
+      "bytes": 72880,
+      "sha256": "1e8ded4300836b21783555f3db253e943ad226ab768e250d2be77d57d4173b6c",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/kelp_tall.glb"
+    },
+    {
+      "id": "162b7dd754d3e36c9f44d296",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/manta.glb",
+      "source_path": "underwater-world/models/manta.glb",
+      "bytes": 41784,
+      "sha256": "853c648531a312322809774091c6eca54343c09f86deee038c4fafb7498c0085",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/manta.glb"
+    },
+    {
+      "id": "801b047e9d669483b2a42074",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/seagrass.glb",
+      "source_path": "underwater-world/models/seagrass.glb",
+      "bytes": 55824,
+      "sha256": "c20813167455360ba4b09002a216f7e577cc2ace461301a0397bad3e460f5798",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/seagrass.glb"
+    },
+    {
+      "id": "2b953dc222cc926157387521",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/seahorse.glb",
+      "source_path": "underwater-world/models/seahorse.glb",
+      "bytes": 28520,
+      "sha256": "3d0cf77e02c94534305609b75997b437c5469bbcbe03eaac97ddeb55dc2513e1",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/seahorse.glb"
+    },
+    {
+      "id": "7b47a19ed65473531ba06583",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/ship_wheel.glb",
+      "source_path": "underwater-world/models/ship_wheel.glb",
+      "bytes": 27652,
+      "sha256": "da8e594d1f1d4134fcd40e0e1ec9349329a587bc0dba28100d537da8148f4e36",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/ship_wheel.glb"
+    },
+    {
+      "id": "74ac37b5a977bfca3748cb2d",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/street_lamp.glb",
+      "source_path": "underwater-world/models/street_lamp.glb",
+      "bytes": 33456,
+      "sha256": "80d2da737c5eea06372b36c04b7feb137b442b681e2aca2c2697cbdb02238520",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/street_lamp.glb"
+    },
+    {
+      "id": "5f582bef199203e2784f901f",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/submarine_wreck.glb",
+      "source_path": "underwater-world/models/submarine_wreck.glb",
+      "bytes": 459928,
+      "sha256": "0aa60dac26742b7573e86ada5a9e5cef466a8b673e465af78727acbd9b4ad80a",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/submarine_wreck.glb"
+    },
+    {
+      "id": "c32503e74977e81ffd9b0293",
+      "game": "reference-underwater-world",
+      "kind": "model",
+      "file": "shared/library/assets/reference-underwater-world/models/treasure_chest.glb",
+      "source_path": "underwater-world/models/treasure_chest.glb",
+      "bytes": 18428,
+      "sha256": "e4d5a0cd25d00de012e95fe83eab5de902d0f4b56e2c97a61912a62caf983ef7",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/reference-underwater-world/models/treasure_chest.glb"
+    }
+  ],
+  "solutions": [
+    {
+      "id": "08307bd4358e132c817927f7",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "tick",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        255,
+        264
+      ],
+      "sha256": "c02b7deb55a1952fa16b0f3e819c3201a858514d75b6ae91b10d95c02b6044b9"
+    },
+    {
+      "id": "168746f4a15196e0fbbc9f53",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "setFxEnabled",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        139,
+        147
+      ],
+      "sha256": "4e6d51ed4b018077a91329ac57ed0511bebdc07f5d35c13ce4b03d80d2c0deeb"
+    },
+    {
+      "id": "223fba6159767b68de15b334",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "bus",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        52,
+        52
+      ],
+      "sha256": "644046eac1d7c0e35b0eac5f02efb5d13ef1d07f482603e2e978d9c4ca03a2aa"
+    },
+    {
+      "id": "2647316c732c62b4c52f97f1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "setMusicVolume",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        136,
+        138
+      ],
+      "sha256": "7c80ed26aa067b03600b989a1143647522a23a6ffdc990d17ff9cbe98d067f1a"
+    },
+    {
+      "id": "2943826108e16e3640cdb292",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "variantFor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        48,
+        51
+      ],
+      "sha256": "c406c3de2e3a36af38dae004db0f2f2650f625de2bb580c35a9fea8f53f1de12"
+    },
+    {
+      "id": "2b8307076fca87075a196731",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "onVisibility",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        295,
+        299
+      ],
+      "sha256": "2cb42cfef7997419455d082af85898daf78df0c9fc25009201e56fc8e431f5f2"
+    },
+    {
+      "id": "315106ea5182243ec19d1321",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "diagnostics",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        300,
+        300
+      ],
+      "sha256": "cef51f2ade312142a69d9a3b52a1125a5c94635182c995be02930668ee68c39f"
+    },
+    {
+      "id": "3175d55043c5b1e3f271eee4",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "stopMusicClock",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        106,
+        109
+      ],
+      "sha256": "a5957acf1d00e09dd6d1c4aff3c67897a47fff03f45e94217c377c2608f20074"
+    },
+    {
+      "id": "498f2a10317d4dc53eaad906",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "module:audio.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        1,
+        304
+      ],
+      "sha256": "fac1fe1502510c73c3ec55dbc2757ea6e7c563739856af8d6f9b6a4fefeda280"
+    },
+    {
+      "id": "5003f506142408c231bdee69",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "musicNote",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        191,
+        214
+      ],
+      "sha256": "11ce0b60ede124c498440947f1c0a9b8faf18b87ab674739792dc9497c2c5e92"
+    },
+    {
+      "id": "719a8bc2e6adfcbcced68803",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "create",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        33,
+        302
+      ],
+      "sha256": "0ee43a5246dde038eac8ec1b44f909c260afc0edb454256e7a637008c6669dc7"
+    },
+    {
+      "id": "79cd67402a1dcd4ef8623fa8",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "now",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        45,
+        51
+      ],
+      "sha256": "7d5db9847808177b1a56cf418523c3103065e7eaae55d13fd3426c97d6d02006"
+    },
+    {
+      "id": "7b75e935ed04856de44bb085",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "noise",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        64,
+        75
+      ],
+      "sha256": "544eb4294ce3ed53e2030249f04a08b1b237d0bfdbe36934d62bd9e680d54530"
+    },
+    {
+      "id": "825669a097afb4edc3c05eb4",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "musicMeter",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        152,
+        157
+      ],
+      "sha256": "772e01a2d065a9353fd5a8062a4cc860465c0a1bfd02c6627215b3c76c7f8b22"
+    },
+    {
+      "id": "853e0247691efb9328b0a4cd",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "forceTheme",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        151,
+        151
+      ],
+      "sha256": "4192b62e672546a03631fb3505a2186e42c2a78fb479dc46ec72058b15b3fbe8"
+    },
+    {
+      "id": "8fbe9b8768a0950b4c0ae263",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        119,
+        127
+      ],
+      "sha256": "e805ab3e6bc07707dffe92760e03a9db63d95c9f4c3f42b8bad9eec204cf9a5e"
+    },
+    {
+      "id": "992982afe6cbedbd61b9dbd2",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "beat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        215,
+        254
+      ],
+      "sha256": "6c838f01c53d97f0c6b582b54d28f7500bfa34f499c1792f501588eab4f251f8"
+    },
+    {
+      "id": "9eaa286c5c52cc62696ea14a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "midi",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        47,
+        51
+      ],
+      "sha256": "1ec749729a74777d534adc2098309968a38978d1da6125b67990d87707a85708"
+    },
+    {
+      "id": "a00ead09f3248273b7ba94cd",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "classify",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        159,
+        159
+      ],
+      "sha256": "91d632a00282a6ea45a0ea72f97cf1fafd15e0d5bc69a91886f997caeefee8d3"
+    },
+    {
+      "id": "a359a831c967d91ceea615dc",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "finite",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        46,
+        51
+      ],
+      "sha256": "b15d86976f57ba577473e10f6843b2f077615cda85f0d15216867ffa705ba7a1"
+    },
+    {
+      "id": "a5ac11144a3429579696861c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "oscillator",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        53,
+        63
+      ],
+      "sha256": "b398609626a8625c2b79ab55e56ede8744a611b4e58081ddff6e6c824178ca6b"
+    },
+    {
+      "id": "a78720cd028a3481aeda5c6f",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "setVolume",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        158,
+        158
+      ],
+      "sha256": "b1d3f174dd9c64a07e15770a10f2540082139402396f66ecfee7c552edab7da7"
+    },
+    {
+      "id": "dfd8f6f87715d15a9bbde29f",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "setFxVolume",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        148,
+        150
+      ],
+      "sha256": "856ac66004ed9f68494a0ced2048c60fd14cbcd9cc3cbfc8121419dd809e7561"
+    },
+    {
+      "id": "e447b90c11196c4ad76d3eb9",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateBuses",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        98,
+        105
+      ],
+      "sha256": "6325366840a8edeac0d7a17c9a35f50e851959aa356194c9abcf3763407d024a"
+    },
+    {
+      "id": "e65eb902b59682a959a7dc90",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "setEnabled",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        128,
+        134
+      ],
+      "sha256": "4d941b58bfb37b387e08d0e0170414c6087c9fcf6120226e6c788649400dd23f"
+    },
+    {
+      "id": "e6d1f61c1d3ad8783cef3fd1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "toggle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        135,
+        135
+      ],
+      "sha256": "86ca63cf8b3e27108e697f7eee3f2d9de9d4ed392873b95621fdf500eae02893"
+    },
+    {
+      "id": "e7b7bb34a3c7dc3bc9fbcbae",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "armMusicClock",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        110,
+        118
+      ],
+      "sha256": "e011076792b7d9c7a304b144e48d04de65bbe91a3c345e5b98d807c906bcd4fa"
+    },
+    {
+      "id": "e84b16b9c3cc49782f9f27a9",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "init",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        76,
+        97
+      ],
+      "sha256": "de66be2f50ab8d8f32d60f789c8415ba5860e894de92f2b37b601633823a5f45"
+    },
+    {
+      "id": "ef3f1b62001cdffd56926b69",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "event",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        265,
+        265
+      ],
+      "sha256": "81b40ddb517bda3bbdef419d593224039e1bf83b04ec957389703c13e565ab5e"
+    },
+    {
+      "id": "2f503463a92c33e5fcc8803a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "build",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/building-assets.js",
+      "lines": [
+        21,
+        73
+      ],
+      "sha256": "2e7a98f97dac8f937b95025363016acd30c0d141492ab28af83a3dede4dcc027"
+    },
+    {
+      "id": "81aa9a54930331e12302e999",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "hut",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/building-assets.js",
+      "lines": [
+        25,
+        25
+      ],
+      "sha256": "ce34760b1ad54f701e2fe31ff17effbca6f040a5dd122fa933d594d853cbf605"
+    },
+    {
+      "id": "9a4483bef8d0d6fb66108224",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "flags",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/building-assets.js",
+      "lines": [
+        26,
+        26
+      ],
+      "sha256": "0c8769e0305f70a10b6863df8200cf4cad29437b7a8b39e2f76455c39c8b62fc"
+    },
+    {
+      "id": "a3ff83a1df8f92501311c619",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "cross",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/building-assets.js",
+      "lines": [
+        27,
+        27
+      ],
+      "sha256": "141e509befdc129987b50ac1e96bf86de62daf0be3b30629d6ccd0536bfd206b"
+    },
+    {
+      "id": "b89a8b63cc2320a86042dc44",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "module:building-assets.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "underwater-world/building-assets.js",
+      "lines": [
+        1,
+        75
+      ],
+      "sha256": "39df909749039ce66e94a7e71b4a80d15932207bb2a780341f007703ded63f68"
+    },
+    {
+      "id": "012b138ea4b1d1f17b695c37",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "npcAttack",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        79,
+        90
+      ],
+      "sha256": "6b8ff7d0d4571c4594db31a526109ca0ce164da426e19c03fda75757d07093fd"
+    },
+    {
+      "id": "08d89957629ad9940e765400",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "strike",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        60,
+        78
+      ],
+      "sha256": "3c61566158d986105f6255703de6f9ffe3df5553a934def49e0a1c284e4d8f6e"
+    },
+    {
+      "id": "255d540fbeaf4635fb135a90",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "newPerson",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        33,
+        46
+      ],
+      "sha256": "99333f0d6dfd608c4012db82b8c375894903379abe67b902d362d838eb75dbc0"
+    },
+    {
+      "id": "346a6e23ec68c3fe2e6012a7",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "roleFromBuilding",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        23,
+        32
+      ],
+      "sha256": "ed761c337bf409b58a7282961ccac47b441aec8c931d2c19ba129803381a8f11"
+    },
+    {
+      "id": "3588e7f5738fef2e74a5fddf",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "step",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        91,
+        100
+      ],
+      "sha256": "74c3d82f47fb471e66bf72cd8397fddaff74ea9210c082fb634ab96c732f2be8"
+    },
+    {
+      "id": "35ae6bfb05c1b3cf613839d0",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "snapshot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        147,
+        147
+      ],
+      "sha256": "0f38109f5fbbe6595a5e651d10a18486b66c5ee9a16f2f9b8dbe0acd13a2ba47"
+    },
+    {
+      "id": "404fbede9f48ceb31f82455d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "module:combat-relations.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        1,
+        152
+      ],
+      "sha256": "e8bc2eaac89262bcd9477fe35e2109534e11c7f6098e406962ce8ef5755b5cdd"
+    },
+    {
+      "id": "59a623a325dc4a01cb1e139c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "remove",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        20,
+        22
+      ],
+      "sha256": "04f6c4ae5222e3fca36593b6c27ed4ec955cb1ac37802b1fbbf3a4bd41d19617"
+    },
+    {
+      "id": "779bbc1aed7499f276449b91",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "spawn",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        10,
+        19
+      ],
+      "sha256": "1338346a672d89d317199e5b90e4740e8cf327028c8cff2c857fb1dbc450d124"
+    },
+    {
+      "id": "79b9b9efc5f248f6f84e90e3",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "dist",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        6,
+        8
+      ],
+      "sha256": "7482680c7ee42a70150e659369e7884aa6ada74bac39aef74269c897445bdfb0"
+    },
+    {
+      "id": "afc37e36be3c361b2cd2ee35",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "reviveState",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        144,
+        146
+      ],
+      "sha256": "cfdc584172889a37c352b1764163152f1a26fb3bd593aa5759dc839cea3ec0da"
+    },
+    {
+      "id": "bfcf427e60330ece644ee157",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "here",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        7,
+        8
+      ],
+      "sha256": "dcb044085736503f8524f85431b8d51facb5f4381857ad96646c9d2f3f8628d8"
+    },
+    {
+      "id": "cd7d3f55756d85f44f5055cd",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "tell",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        9,
+        9
+      ],
+      "sha256": "6d55d4289599a8dd349f7f1150144f1bc57d0fa6c6f2698a30dacedd9c694dc2"
+    },
+    {
+      "id": "d523ea3802a87b01b29abb2f",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "nearAim",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        47,
+        59
+      ],
+      "sha256": "d31e41e621267ba2dbb52549e2e565e15246905c92a35274fb16337f0c6b2bdb"
+    },
+    {
+      "id": "df151c100b40cb9e685020c1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "create",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        3,
+        3
+      ],
+      "sha256": "600abb726d7a537497c629ebff2cc4301622b827209cd9d86ba5631dfa7d1be7"
+    },
+    {
+      "id": "ee59f4740c46b4d747efc098",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "update",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        101,
+        143
+      ],
+      "sha256": "7c78883bab982a490e79ce4225eacf19eefe5ec31acf246dc5283604395d1306"
+    },
+    {
+      "id": "f5322847bbcba9f15c1bb6ee",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "pos",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        8,
+        8
+      ],
+      "sha256": "f6ea682ae93a503d5bd0f96fbfd97e4c7a625851ae36359aa40b0d9f96b567bd"
+    },
+    {
+      "id": "01553032104cba6f92383101",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "buildSelectedMobile",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        195,
+        205
+      ],
+      "sha256": "230a4fc5d3245249cb97c9ad0e0aab18175d3077912786d7ab01197e1b2290c9"
+    },
+    {
+      "id": "097a2cc8f66a6fef1b4f752b",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "mobilePlacementPoint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        178,
+        183
+      ],
+      "sha256": "d1bbca16448c76d3626485e54a4f8c232319235899bc869fb76f36899e1749ee"
+    },
+    {
+      "id": "10b59a302c91b9cbe7e42be9",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "setMobilePoint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        184,
+        190
+      ],
+      "sha256": "9eb97e1fccd980e756cd546e66eba607bb8624f50200517b64d4b205351bd384"
+    },
+    {
+      "id": "1dad0b2d38d23ed9c895ec45",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "restore",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        47,
+        54
+      ],
+      "sha256": "388c1735ff9d05edf0b82b786c46b8931123dd627bfb1090a6ff7e2b160aa173"
+    },
+    {
+      "id": "21d2866b2727782f02ac88d7",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "beam",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        86,
+        91
+      ],
+      "sha256": "e7f77683af6ad9b4eb4aa07d9c545daccb957bda494a3df89cd24cbdc2c46263"
+    },
+    {
+      "id": "2275f268f694129c836ba7e8",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "selectGround",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        162,
+        168
+      ],
+      "sha256": "3e8fb0daa021f00166ee4697e52161add17abce0b224e810a2756afb88be03a4"
+    },
+    {
+      "id": "30153aaa08531124e0816155",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "box",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        83,
+        85
+      ],
+      "sha256": "ef1a29e924820b96a12944c9803647145d348b01caec68817d591853a73ec6f3"
+    },
+    {
+      "id": "38f73bc6672258f17c3eaad5",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "openReader",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        206,
+        210
+      ],
+      "sha256": "10984686801840e1199d640972d481b4ff36e71ee77055fac9393948b073390b"
+    },
+    {
+      "id": "3d90e0fb234a26ccf6342156",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "defaultMobilePoint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        191,
+        194
+      ],
+      "sha256": "98377982e632413bbe32bef3fafaa466587539df347bf73679015f4116930a37"
+    },
+    {
+      "id": "3dc5f9001027e7c88e3f07e2",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "activateBuild",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        155,
+        161
+      ],
+      "sha256": "95ffcac8f7ddf6672a7271528b2c53842e99424bd64c478091fe5bb7b7c4a671"
+    },
+    {
+      "id": "5572a8fbe6eb06b4899728a6",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "inspectWorld",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        211,
+        227
+      ],
+      "sha256": "f7d5d3f37413ac94d9086cef624b67154ece60d46e954ee6b59686ea95c259e3"
+    },
+    {
+      "id": "581c1458d69cff3acea6d5d3",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "onPlace",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        98,
+        154
+      ],
+      "sha256": "49ed3170bf8d4d1537ee90b112321c93f18d80228294cf424d02781129eb0bf7"
+    },
+    {
+      "id": "5845297f7adc6eb027907e09",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "roof",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        88,
+        91
+      ],
+      "sha256": "c8db88ffa98a3ba9a4dc616ec2db52e65ba0ec5ec536b4504059551552a0fced"
+    },
+    {
+      "id": "638cd908c54be82e92d3850a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "$",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        31,
+        33
+      ],
+      "sha256": "9851195f1e3408d808926ebdd0c9fcd5d45eebb7ed0f31acfd508bed57b6cad3"
+    },
+    {
+      "id": "6ccc4e3f9742342b4b32f4bf",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "module:editor.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        1,
+        512
+      ],
+      "sha256": "5fe547e147d721f58d486ab2ee1b12e0d073e96f0f4b2a4aa3154c6380852a8d"
+    },
+    {
+      "id": "6ce8c2ddef63a4b3d1de8b13",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "addCube",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        63,
+        67
+      ],
+      "sha256": "8f6ce80fc0d7ceb38b8754389fbcc4e9109bf41ff0603c4758ff7c8e74a6e3c0"
+    },
+    {
+      "id": "78ca8efc16fbe0ef459c56f4",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "ensureMobileMarker",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        169,
+        177
+      ],
+      "sha256": "ab07d58bc6ae012c6a68eeac47ef6628adcd51a59c281b9f255e068219160e42"
+    },
+    {
+      "id": "8f14343caa358e30afaabe1b",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "persist",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        43,
+        46
+      ],
+      "sha256": "212d7c8e261bc2a52e6dbc658ea227077351a70998bcb81b07ab230e5f12b6e0"
+    },
+    {
+      "id": "94397fdab87ea7592c410489",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "tell",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        36,
+        42
+      ],
+      "sha256": "9701b3067c1682009c79d915b0d59b36e1c727e0fb937c3b861936a25674d1a7"
+    },
+    {
+      "id": "9d27b7067afd5741b283b0d6",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "post",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        87,
+        91
+      ],
+      "sha256": "02c07c132f0590cdfb1be49b0f23fd8b7e8d796a7e9b1e3a47b55c0c18652a60"
+    },
+    {
+      "id": "a0568bde24ac216c2f01220d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        276,
+        507
+      ],
+      "sha256": "e396d8eb7e57781014b9ac87be692a1e904e38a926d1b45c3816ddffd9e66e37"
+    },
+    {
+      "id": "a31dd2bdaa2e379c70083beb",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "tileGeometry",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        55,
+        62
+      ],
+      "sha256": "bef8cfd52184b23706a42d110c88d6ed0b601847f7e83f60397fda6bb4f4db96"
+    },
+    {
+      "id": "b58ff7d15b5374b86860b0a5",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "support",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        75,
+        79
+      ],
+      "sha256": "36f1915e78451a2badecfa15d6a30b6ab496f9117715607acd113dcb6e044810"
+    },
+    {
+      "id": "d1f6b3fa05734b7cbac80070",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "p",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        398,
+        400
+      ],
+      "sha256": "b73847a69306e54b61e0f4429d587fea018688d81198fc1f7d10bd79dc6bee26"
+    },
+    {
+      "id": "df78eb9116ce4fc0c429427d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "probe",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        510,
+        510
+      ],
+      "sha256": "a076f1852086d3657f8cbcc92b4ec042803cc35cd594d71afeabaa1272b51a9e"
+    },
+    {
+      "id": "dfa2d0be467f1f68310b30b9",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "interceptCanvas",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        228,
+        274
+      ],
+      "sha256": "e050ecad103d093a686f92c95f72dbe290581c4de862526a365131505bda56b6"
+    },
+    {
+      "id": "e8f6875bcf4a67778589cbe5",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "fence",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        93,
+        93
+      ],
+      "sha256": "9029e4a0a500ceffee0c6908366e9a5f475eb6bfe128d3be1fb39ee89cf4b387"
+    },
+    {
+      "id": "f9e4f369ff5053c2ab012d1b",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "addBuilding",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        68,
+        97
+      ],
+      "sha256": "2501093a06efeab78189178c6f2d7dac225eb40484b5606036f45c263a9b531d"
+    },
+    {
+      "id": "fb550c8456095bceba3e5acc",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "sign",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/editor.js",
+      "lines": [
+        92,
+        93
+      ],
+      "sha256": "425303c1ca3190aaddeb11117d3e040f42d70790645907ca3e25401e94ab2b00"
+    },
+    {
+      "id": "0010e0d0ef7b3a0b32590681",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "endPointer",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2199,
+        2203
+      ],
+      "sha256": "a5bbc88e9d79a24b60a635f53bc6498a68099c40db37343fc0810bc69a04acb6"
+    },
+    {
+      "id": "00f5de7ea70227383bd35049",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "pickupMat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1578,
+        1581
+      ],
+      "sha256": "e7f8f5748a1f2bc04f5013d48549a3720be43c1314ebda938240a06454c82165"
+    },
+    {
+      "id": "011d698a160b04e17e0ef8c3",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "spawnOrb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4185,
+        4188
+      ],
+      "sha256": "fa7ccb0156aa516aadfbb08b3a24060ce58ed1c208648965d856fb508681bd48"
+    },
+    {
+      "id": "011ddcc73c0e42bc1995f174",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "renderHeld",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4384,
+        4469
+      ],
+      "sha256": "4a38807d49c0d75256894bb43846315e768edf771bf0da2dc62223409300c2b6"
+    },
+    {
+      "id": "02da4b081dfb523745d3a6f7",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "btn",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2230,
+        2232
+      ],
+      "sha256": "2d30ead891a59da47cc29ad9867721f3d5d4d40c329d3faaee6dca8120c0bb21"
+    },
+    {
+      "id": "05081b62b9804bd15929a41a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "wardenFire",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4189,
+        4209
+      ],
+      "sha256": "75aa6796b32e0a4e7b1c8deb83d343cffe17cf4d605e1d8b0f2f6abd402a7b3c"
+    },
+    {
+      "id": "062ef61aefab63a6fd576689",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "mixInto",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1768,
+        1775
+      ],
+      "sha256": "5e86ad9b9155a05d24448f765ccd50bdbcfba2be196f4a503f2c286ea887c1be"
+    },
+    {
+      "id": "0a1c025c49a6101cff0b4146",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateFx",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4597,
+        4609
+      ],
+      "sha256": "94359b02b3be1be7964a05534b078fdf6d33e4cf9595c258caaea1ae54803941"
+    },
+    {
+      "id": "0bb612face454b149b71bc36",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateLeaves",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2733,
+        2742
+      ],
+      "sha256": "ac5f9ae0787c4b3b17dddcd1ca9945dfbc73012d87a0ae234a46be6d77dc3ebf"
+    },
+    {
+      "id": "0c8102c1758d5de8550d56df",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "SpriteBatch",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2964,
+        2990
+      ],
+      "sha256": "023616ec507724485b50aa4a2f41f10097f9863a4f97c2997641a039013dca49"
+    },
+    {
+      "id": "0cbc749a373c4e2e04be5caf",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "killFoe",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3961,
+        3979
+      ],
+      "sha256": "34649f0ac160be97e940ef509515f81478ddefb74be59b34b8b728ce9c104a7f"
+    },
+    {
+      "id": "0ce5a1b808246b3b0839c2b7",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "muzzleWorld",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4378,
+        4382
+      ],
+      "sha256": "415de1e8fcafa8fa0549ff52d156961067be3e32a2c575d9f63f236d32497d77"
+    },
+    {
+      "id": "0db355d274c50ce808c15ff4",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "trailSample",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4471,
+        4477
+      ],
+      "sha256": "629eb5c19475ffd24941b69dc8f2ef1c49c0e4eaca23eef4247253afb8edb52a"
+    },
+    {
+      "id": "0ea00e82ee546e542f4ee45c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updatePlayer",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2331,
+        2406
+      ],
+      "sha256": "f6e699f1456d0bfcf2d169bfb43fc797df17ccf7c17a217b95ad2b530ea9e38f"
+    },
+    {
+      "id": "0f05ea3e9ab99ac6d0c65f86",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateMuteBtn",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2898,
+        2898
+      ],
+      "sha256": "e80b1b6c94e875bec2a3fd774c2a8ca8798d37db3bc506d4e46ff7f9b46a2b94"
+    },
+    {
+      "id": "0f5d6667d7e2f52b48c8f6a1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "physicsStep",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2279,
+        2295
+      ],
+      "sha256": "cbe432ab68d572310905d7ace0f83db467033e9af0760ec978c7b014ac44185d"
+    },
+    {
+      "id": "11507228d8fc6df4b14d87c1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "angDiff",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        506,
+        515
+      ],
+      "sha256": "8b3f03d993958b4e03019831dcd73236bc8669540f6c9966972a84bac78240a7"
+    },
+    {
+      "id": "117e03e5502e77649503ca4a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "spawnFromSea",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3889,
+        3897
+      ],
+      "sha256": "2ec360b26a94a8ce2ef2b46959b889348796d955b2c8b96d94efc8f8536baf54"
+    },
+    {
+      "id": "1372f07d4063ae7cc937cb4c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "tryChop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3397,
+        3407
+      ],
+      "sha256": "c2476857e8171d7e7da0f4a157a892a6795736f608766bf48e0740ab1baa55d0"
+    },
+    {
+      "id": "13c1e08c2acf90af2c372bab",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "orbitBy",
+      "purpose": [
+        "camera"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2143,
+        2150
+      ],
+      "sha256": "bc6dda7ff082a91b6e42a1f278bb467ccd3626b3c5b2fa38dbfbbd9a37e5ba6a"
+    },
+    {
+      "id": "16941da9a489ac82889129be",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "toast",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2027,
+        2034
+      ],
+      "sha256": "4dc064b6afb1cb3ff81d702f7c986112a3daebc232d38c175d520e5828eb5265"
+    },
+    {
+      "id": "186d73c914651d9414f50ec9",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "free",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        715,
+        716
+      ],
+      "sha256": "32ed866776db3726554406f4affaa3e3cab0c99c63b34a83876d696712d5f1a1"
+    },
+    {
+      "id": "19428792a5d21f4617725f06",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "frame",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4800,
+        4845
+      ],
+      "sha256": "8ae8664078d780bd2fb390cac38848c3cd5c35e86e5a6ee92c47932e2f45bd9f"
+    },
+    {
+      "id": "1c8a79fc200db3590b35cbf1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateCamera",
+      "purpose": [
+        "camera"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2613,
+        2688
+      ],
+      "sha256": "5452aa6bde622100f38f8a36a4cedc46b5af5decf244cd440788d5e1d1f88e65"
+    },
+    {
+      "id": "1d2b157f1397077722bf2ac0",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "setPaused",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2816,
+        2822
+      ],
+      "sha256": "ddf3198494fd778d6416c665200fc99158ce97c3a74ca4c779f2b8c0cbfe4b3a"
+    },
+    {
+      "id": "1e5f7c0441f60d57546fe7e0",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "slamImpact",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3374,
+        3396
+      ],
+      "sha256": "a357461197b2a15ffe26c4387b6b10379b250f43cee7f71ec494b58a155fa075"
+    },
+    {
+      "id": "225f1769a67b4560cee59ead",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "inline-script@35038",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        481,
+        4967
+      ],
+      "sha256": "a49b37a213c187e278dca4c38bf91fc16d4ee31800f78f3bd01caff1e01e0a6c"
+    },
+    {
+      "id": "22e27bac0682f4822e7b4dc2",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "buildPickups",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2453,
+        2481
+      ],
+      "sha256": "25e0efe96f257109e18d984487ca8eedfbb7af43c286dec0f0effcd92a22f8c2"
+    },
+    {
+      "id": "24aa7241e1167f327f3f0fdc",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateFlow",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2869,
+        2879
+      ],
+      "sha256": "c3bc935c127494a9a3cd91a14f6d37efb57eac122766a02bd1b99c46136f86b3"
+    },
+    {
+      "id": "24ef449a273c786e06e7c676",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "startReload",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3216,
+        3221
+      ],
+      "sha256": "f8e325ebc4c90ab2f5023da857c7b50fdf37a1220197cc04b1b2d40acac32ef4"
+    },
+    {
+      "id": "24f852b80b9ebd46b548e070",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "at",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        570,
+        570
+      ],
+      "sha256": "fe2af4a63dbf00fabd7fdf1bb907f6c488a8f4619650727d186a14908764730d"
+    },
+    {
+      "id": "273d1ac1d4f4c8c2dd2a2189",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "hudWeapon",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4673,
+        4693
+      ],
+      "sha256": "55ca1fd51ebd95632f408e0f9af1577ca2aa72e66c73f1c6e49e14f2ed3fbb50"
+    },
+    {
+      "id": "287981342982664f4b2d0382",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "muzzleFlash",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3525,
+        3534
+      ],
+      "sha256": "2a1354058687264535977860902fbecf46bc66f3822a196ea52240e00bca7659"
+    },
+    {
+      "id": "29463a18923e24ad7efbf31e",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1714,
+        1727
+      ],
+      "sha256": "edb441f5f5a1a38ae1eeaf8245649a71e5ccc177cb2045f97ee6bbd9afc435f7"
+    },
+    {
+      "id": "299a2c1026dde3b1dcc62e41",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "onJumpPress",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2110,
+        2110
+      ],
+      "sha256": "91d1f7e5ea083297388b007b68a7f64a3212d93466a0ede57b2d55d1dc166e71"
+    },
+    {
+      "id": "2abd205c6b2f0ce9b4696341",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "easeOut",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3143,
+        3187
+      ],
+      "sha256": "6dae768db6a83a58b3ee735d096600912fb4d821ffd9ba8812854db4c8ef4b46"
+    },
+    {
+      "id": "2e5b89cd9ed83a0c9164f8d7",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "rr",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        505,
+        515
+      ],
+      "sha256": "3f08033cdc063f4feee817412e83d03a545bc3c9930a40fbc6e39ca9ce2f2614"
+    },
+    {
+      "id": "2e7a06ed1865025c0ee9e5b3",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "orbBurst",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3724,
+        3726
+      ],
+      "sha256": "d57a12f232c344365a452ff83fdb4a250b2cc8aefdaae07898bc28b9a5694818"
+    },
+    {
+      "id": "31a927dffd3c55e1e12637cf",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "dz",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2228,
+        2232
+      ],
+      "sha256": "1b8e61f1d9436ed2ce1142c31aabcca54d12ad0d7c1a81996f6367fbcdd7c528"
+    },
+    {
+      "id": "32ac2574482f9e7b61454d5d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "setCoinsHud",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2041,
+        2044
+      ],
+      "sha256": "e2d50785e0f891329521961f8136cecd2aaf320684f768127d949c8607007b9d"
+    },
+    {
+      "id": "32faf7d611bf060c9020c76c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateBeacon",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2576,
+        2607
+      ],
+      "sha256": "21d225aeef428bb160cd98dc74ce218db284235e2555fc7756884fd4e49a135e"
+    },
+    {
+      "id": "3364aecabe7e948d12637802",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "handWorld",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4363,
+        4367
+      ],
+      "sha256": "3d45be932093a9b3221335eebc3d458becd1d1133ac9517780726714be273848"
+    },
+    {
+      "id": "33a7d4f21caedb325a281457",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "trailPoint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4479,
+        4487
+      ],
+      "sha256": "2d709fa69ef249c5cf7f5e73d179d42ea291bd5bb2d4ed810bfe75165bc4cd83"
+    },
+    {
+      "id": "352a997a8f80dc4631b2c1cd",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "nearestGoal",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2544,
+        2549
+      ],
+      "sha256": "6ad9f3761facec25103c24103b0f04cd38208933bae2a8432dd744e0e1daf1c0"
+    },
+    {
+      "id": "35ac4f446b831109171d712c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "onJumpRelease",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2111,
+        2111
+      ],
+      "sha256": "2f727ad55422cbb1b1d8bfc06e4561a29f6ce229d3f40981e389330e6de098f5"
+    },
+    {
+      "id": "35da02d115178ef8d7bca27e",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "advanceMelee",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3329,
+        3337
+      ],
+      "sha256": "f5221dca0c76110abf81e0a6fd5a95df8c8dabeec5f24995402b3eeb1173a708"
+    },
+    {
+      "id": "35ddb7b4ab5ee38a2063ff63",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "spread",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        824,
+        834
+      ],
+      "sha256": "3ae6c0235d8b6d1f34278ac8ee9f72b1810f1b84e9f2b3be6fb054ef1b846393"
+    },
+    {
+      "id": "37e03bb916c75cafacc560e0",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "rebuildDirty",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4283,
+        4287
+      ],
+      "sha256": "e09d3e794ac922f61d6305f11b2056b0b55a8d1322ee1a1cbd9632bf19d8240c"
+    },
+    {
+      "id": "38866123f4dea4539dc51c34",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "collectHeart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2530,
+        2538
+      ],
+      "sha256": "ee9ff1793e36c84a38ba393a43d8960bb4db6320d81513f1b509e968786dc3a7"
+    },
+    {
+      "id": "39c60e88d9a45186a0291e0a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "meleeSweep",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3338,
+        3362
+      ],
+      "sha256": "bff77d7106b60dd8575c945b7b5259fb6002fe0375a4a41983ec07cadcffbb23"
+    },
+    {
+      "id": "39f26de27725f33649bc863a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "ring3",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4515,
+        4524
+      ],
+      "sha256": "311f9b7efbbd61273bbdfaaee443f36246d4c8ecd4e74f9bd6ff8289d894192b"
+    },
+    {
+      "id": "3a3e72ce3559d08ddfdb05c3",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "smooth",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        503,
+        503
+      ],
+      "sha256": "f8284f4ae532715c77f80d0242ce71cbbed8b1adaae4508af978302aac295793"
+    },
+    {
+      "id": "3a74fcb43152726148aa76ee",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "bestKey",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2759,
+        2759
+      ],
+      "sha256": "839b60696c4057208afb085254241388dd47f8e1392827f59da5ded4bb3e2efd"
+    },
+    {
+      "id": "3ab5e3e239fc7c695182e0e8",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "readBest",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2760,
+        2760
+      ],
+      "sha256": "a0193cd3d6732dddaeb935b096c783ab7d4fee59005bfa2bccb227105d79637f"
+    },
+    {
+      "id": "3b5dca695264df58a824b359",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "makeHeightTexture",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        966,
+        976
+      ],
+      "sha256": "fe7c37ad8ee0b9bb515f93ae8843c0ff971018b0cec801a727445ee831d086ef"
+    },
+    {
+      "id": "3c66a4f17e422ae173c127eb",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "prepPal",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1765,
+        1765
+      ],
+      "sha256": "dabf361f21661a78c18659f8c52f151114633405beb45aab93c139dc7654af5f"
+    },
+    {
+      "id": "3dcaa1b8a0947bad329fa67c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "projHit",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3652,
+        3697
+      ],
+      "sha256": "1e1ad816e353f49d71b3cb57af7e879c935a775afd554b3e4401f4498899fdb9"
+    },
+    {
+      "id": "3ea300c0abb79655bbb06174",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "at",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        914,
+        914
+      ],
+      "sha256": "fe2af4a63dbf00fabd7fdf1bb907f6c488a8f4619650727d186a14908764730d"
+    },
+    {
+      "id": "40de157770631d9f6a302926",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "span",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3146,
+        3187
+      ],
+      "sha256": "8a5179286757532d05c589a1f2965ce427622f32cf699736de1706f129e5fd22"
+    },
+    {
+      "id": "42e15166634b03d4c0169a80",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "makeInstGeo",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1462,
+        1476
+      ],
+      "sha256": "85c562775e5442227fe4de498c7952420b17a108fb1d0ae0a1657cd80e331f77"
+    },
+    {
+      "id": "443448b1aceb028ed63baa21",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "spawnFoe",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3865,
+        3877
+      ],
+      "sha256": "e55f2d5b6a780c99f739787486a38c127e5da290c0d7809a129010c3dc955327"
+    },
+    {
+      "id": "465b56e8a406b4f4100776d0",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "addCoin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        818,
+        818
+      ],
+      "sha256": "48ef93bc0822021d1284444f9a76cb272e89ab4017f9bcc220f1585710084ff2"
+    },
+    {
+      "id": "4878c2092b1b99b4ca508d74",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "screenAngleOf",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3139,
+        3142
+      ],
+      "sha256": "b4a9e522e9e8bdb86450e18448cbb6c17da6dfebe5391ce1eeccc766e17f7e0e"
+    },
+    {
+      "id": "48c609a244f116c3480e6099",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "explode",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3698,
+        3723
+      ],
+      "sha256": "687bc527ddcd4975d048ccd93a50fc1e7cffc42ef378b46004e3f2991e18d6b1"
+    },
+    {
+      "id": "48c8e7e752be1736ed29e350",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "ripple",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1538,
+        1541
+      ],
+      "sha256": "c08db2b707a7a74fc2a9b34435d26e816485664a9d2553fe451a42d4c3481466"
+    },
+    {
+      "id": "49802c34524ad09619725a3c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "mouseButtons",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2153,
+        2159
+      ],
+      "sha256": "dcaec963cf0f82bdab2e420ae4fff84bac01b593a09334b867e446f249042d95"
+    },
+    {
+      "id": "4b169a04d5b276d14ef3d424",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "okCell",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        789,
+        793
+      ],
+      "sha256": "3dad9fc50942a93e50639eaff695de1cdf8feff1d181c7fec00b03fb5c34667e"
+    },
+    {
+      "id": "4c5e751a82c358bba38e090c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "startGame",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2802,
+        2814
+      ],
+      "sha256": "aef8e8116ed76ae020b2b31c4bec190613fc81ac8c6b461f223fb6d23f24c95f"
+    },
+    {
+      "id": "4d1dd84df3f014615ebce26a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "markDirty",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4279,
+        4282
+      ],
+      "sha256": "a2aaf1658a52c91513c07e7f85445d7e92eb57509e34d69943b8d215557e2936"
+    },
+    {
+      "id": "4fdadadc7f589fb76c4ea61c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "blockAt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1830,
+        1835
+      ],
+      "sha256": "f857096771c335140a317040a2d4f44d29c1ca55c3704b1771a4997a120157dc"
+    },
+    {
+      "id": "51d55ab9fc85a171b7b59e2e",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "pollPad",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2221,
+        2247
+      ],
+      "sha256": "d838605986650a40e621e85424163be10687a37e9694e6fdf891738c738a22ae"
+    },
+    {
+      "id": "52569d967fb37a75dee6d8ae",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "projWall",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3593,
+        3630
+      ],
+      "sha256": "1c9b935b3c35b2a3fd91d04bb0b9bdf37eeec8fbe5a933de3b53030c19d6865d"
+    },
+    {
+      "id": "5348cfad02458784b2c1c70e",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "teslaChain",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3765,
+        3802
+      ],
+      "sha256": "9cc874e8944d68bc23c264b6f8486cb87d2800472457f794ea9db0b4aa60184e"
+    },
+    {
+      "id": "572c8ed32bd4ebe25074565d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "ci",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        571,
+        571
+      ],
+      "sha256": "129c443b7762f417d9fc5fc5939bd941462d1bf2228b6eccd3f55703eb4b6ff3"
+    },
+    {
+      "id": "5a9c4384785ec5c451f9bef6",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "mk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1605,
+        1605
+      ],
+      "sha256": "ad269ff5335ec28fa16bccaed4a2017080eb53882807c853be45fb2933ec11fd"
+    },
+    {
+      "id": "5b9b74a26d71efac22fa75ff",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "onLand",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2311,
+        2319
+      ],
+      "sha256": "fefdac2a9dec8d14de92fdf0c554ca24d78c39fa78b4563a4516da6673c7ca87"
+    },
+    {
+      "id": "5bd5e1bc7510f7f24a571d64",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "easeIn",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3144,
+        3187
+      ],
+      "sha256": "6e0533a2aad602092a50899b53f23898c050f0943a02ed55d8dc9d9b9adc8571"
+    },
+    {
+      "id": "5dcab2ac4ba05226834cda09",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "renderFoes",
+      "purpose": [
+        "combat",
+        "shader"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4225,
+        4257
+      ],
+      "sha256": "d46ab0576a3e89997fd292ed02b9c2a959bc7d05727d338e2ff0a911147b614d"
+    },
+    {
+      "id": "5dd6b4afcaae75b9020dd0b0",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateHearts",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2035,
+        2040
+      ],
+      "sha256": "1ed3689ec57de51bb4317c5941ecefc925df8300e21e9cc9f43fac7ce7d439e4"
+    },
+    {
+      "id": "6049a1d5c2d33e5ee610adee",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "equip",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3202,
+        3210
+      ],
+      "sha256": "ede8e8063bb16d61de2d8a6e38d6b238dec34fcdc173da94f99204965755cd36"
+    },
+    {
+      "id": "60595d4379271d75bc457a4d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "lootAt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        849,
+        849
+      ],
+      "sha256": "1a9037f4222bd83f6617a34098636da7a32f9aa62d8340b8b3dbb93fc421b9a2"
+    },
+    {
+      "id": "6080d20aabbc8e32b097281d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "restart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2862,
+        2868
+      ],
+      "sha256": "cdc755366134860af8e7676dddc72edf9e5d2a9eaee5a664e375d495c6e12b42"
+    },
+    {
+      "id": "627eeac73462981fc9c577a7",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "beamDamage",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3834,
+        3849
+      ],
+      "sha256": "1206c9c99f12eb7f038f3d7527e46922bf0d3d508be9faeade7f9dce9600ab5c"
+    },
+    {
+      "id": "628af9304c4cc605cc038e9c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "ricochetFx",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3631,
+        3634
+      ],
+      "sha256": "d81b87fb6523e166cfb041f8e8ed2d3cac1c0aa957e5e839b240f186c1450e57"
+    },
+    {
+      "id": "63dcf3787ad4948add7acc4d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "buildChunks",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4265,
+        4271
+      ],
+      "sha256": "aa2e03149161eafa68e043ce39b40191e120535f29ac58cff6f4b0f410be0633"
+    },
+    {
+      "id": "65138ac05865f7a19e01fa65",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateBeam",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3803,
+        3832
+      ],
+      "sha256": "6a8cb98b16f61c046e07ea0efbc2ddb04fa9d5080d6253fa8b1ca87968a1f5a7"
+    },
+    {
+      "id": "658f4b77fa876c4b7426ff34",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "syncPickups",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2482,
+        2489
+      ],
+      "sha256": "70dd1b545b00422ea64a0053a8bb76f5e1f9a5fb25edad9a93303d6346cecd2e"
+    },
+    {
+      "id": "666bdcc8b2f2ce5a7b496bc0",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "spawnShot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3508,
+        3519
+      ],
+      "sha256": "db83f1f38c683ead7c59cb3f2fc50d90e8a73ff5e025debbd9896bb57acfb3b6"
+    },
+    {
+      "id": "67a495471648870dee544381",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "stopBeam",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2815,
+        2815
+      ],
+      "sha256": "66355685e73763ab27fae4321b63c31330f925660e4ad25918dc9b0e6a8d5d3f"
+    },
+    {
+      "id": "6917032772c393bb468858c6",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "hash3",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        516,
+        520
+      ],
+      "sha256": "cb3a723698bb0bd1d8876e6aea6bff545ac529f4657e357ded25be48621f6276"
+    },
+    {
+      "id": "6b083610cddb7655f14407cc",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "rectUV",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3066,
+        3073
+      ],
+      "sha256": "a15ede87dfbde4359b6adea378482b587893fe84d424f363a412bc40271d2168"
+    },
+    {
+      "id": "6b57e4b66d817dfbf8ae34df",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "solid",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        915,
+        955
+      ],
+      "sha256": "392a637aeb1c2f9d963d05b080e62e84e4febba021073c7d97292bbed7b0c531"
+    },
+    {
+      "id": "6d28c5631b73e87b0d87627f",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "terrainTop",
+      "purpose": [
+        "weather",
+        "level-generation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1849,
+        1853
+      ],
+      "sha256": "14f622ede25c67a47280fab6f249b08566663a8400ae2f7a84e3b1e35c85929c"
+    },
+    {
+      "id": "7042c7de5d460a2238e0ea02",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateEnvironment",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2722,
+        2730
+      ],
+      "sha256": "1a09c999575fff66061566273fceaf5a9d31c6734402514984b59136d596df5d"
+    },
+    {
+      "id": "71622acc70af951e1a456e1d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "taken",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        848,
+        849
+      ],
+      "sha256": "f23b0db4c6b2295ee616cfc9b5e11f08014da2ead74b7792d4b522a41ad3031a"
+    },
+    {
+      "id": "73df645d000203f03187a292",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "projMove",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3573,
+        3592
+      ],
+      "sha256": "737b34d346f74d351c65fc66ab17cb699d191befac1c57505ce12a5639da9c95"
+    },
+    {
+      "id": "741e384959c4137fb5a66100",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "lightTint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4383,
+        4383
+      ],
+      "sha256": "ec1042e4f806fa891a94ec4e65c74b6c069975f34c3ce8a4dd1afea39f7ceb2a"
+    },
+    {
+      "id": "74ea3ed2efb8e8786b6a3538",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "makeNoise",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        521,
+        539
+      ],
+      "sha256": "3a302c457889a55bc29fdd3f4a8aa3c5cc099651e589b46a2a1f74cbfe304143"
+    },
+    {
+      "id": "74fb48436bfd4a2d28cbcaaf",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "footstep",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2300,
+        2310
+      ],
+      "sha256": "d10e76c6505d45eab7f823d0e2960489bc18b029110e527a30f2f29b04347f07"
+    },
+    {
+      "id": "76dc906de5e657f2ab0070ba",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "fogShader",
+      "purpose": [
+        "weather",
+        "shader"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1457,
+        1461
+      ],
+      "sha256": "f2788e780e429bf5f324edfaad61cb819f0614063f513b9da277c4f8f83e67d9"
+    },
+    {
+      "id": "77236a3d9cd7ee88e022660d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "solidAt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1836,
+        1841
+      ],
+      "sha256": "a6d4df160a1154e82b59d948a09eb531194a0526f22e8278d0538b821f2615dc"
+    },
+    {
+      "id": "793b7f4c3855ced8604df212",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateCombatHud",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4725,
+        4763
+      ],
+      "sha256": "9a9761786ac7f3185253cdd7390100d0f2a21d9e40520be21a949505d39ab934"
+    },
+    {
+      "id": "7a5eded14e4f7bbc9e7d4f64",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateWisp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2550,
+        2574
+      ],
+      "sha256": "e7b3ace82e16ffaef813f9853bca74558fb70c285390c0315817fdfc4d4fe094"
+    },
+    {
+      "id": "7a62d7c2e93989845802bc1b",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateHeroMesh",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2407,
+        2429
+      ],
+      "sha256": "dc41a92d8824984ad4b9c020fea6ecb4793e8fe086ddfbfa0c8f1e2caccace3b"
+    },
+    {
+      "id": "7c229079bd50510513098b59",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "curWeapon",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3138,
+        3142
+      ],
+      "sha256": "cdbe62e068174212431ac5d2b2363e93c76a637706ef9222e2cbdbe4f9e03e8a"
+    },
+    {
+      "id": "7deca20a671a7113a31d8269",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "renderSouls",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4004,
+        4011
+      ],
+      "sha256": "35902fa56d8444e5f4a20e1c8252b1bbd70010c2b3e9c04c57547ec73ff1a3f8"
+    },
+    {
+      "id": "8178720c758e8228dc24c8e2",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "marchVoxel",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3745,
+        3764
+      ],
+      "sha256": "7f016edb75df66e9a6f9107a34e02b077e28eb8c2191f0355c21b067ce5b5d5c"
+    },
+    {
+      "id": "846effa77c52db2d980a89a0",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateCombat",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3226,
+        3258
+      ],
+      "sha256": "fc89424cf1f7d3a81631f455c7ff4dbe73aa5cf3ab78c9c0c0ad7e77092137cb"
+    },
+    {
+      "id": "85de7f5ec4b876134b14a865",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "buildTerrainGeometry",
+      "purpose": [
+        "weather",
+        "level-generation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        912,
+        965
+      ],
+      "sha256": "f51f632e748a6b39734ff8134947f1013427b807b6d0271bd9c2d35729053376"
+    },
+    {
+      "id": "86802ef4fd8492987e048e6c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateLoot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4337,
+        4344
+      ],
+      "sha256": "650190aa0e7798dc1f1cc50fefd9e6f5dcdc6a133eb88a55faf3402882576200"
+    },
+    {
+      "id": "86913a914320ba34a9757d19",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "respawnAtSafe",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2327,
+        2330
+      ],
+      "sha256": "c42d01330ac97c5a4856d4b8230db64c79ccb8f6b168f8980b72a9f2e757f10b"
+    },
+    {
+      "id": "870f1a491acb6a54bb76d735",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "rangedInput",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3459,
+        3482
+      ],
+      "sha256": "f3525e7ed86429a7f72b64e48dbd26f271690b8c3e25cdcb3e8a4b14a129ed11"
+    },
+    {
+      "id": "87be1500b138ae71f5bfde0e",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "releaseAll",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2105,
+        2109
+      ],
+      "sha256": "4faebac1f97205ed2c8dd62834354eb8a1db37ed8c7f29a20c0eef1b1ac00b7b"
+    },
+    {
+      "id": "890b26f301e91593a2962629",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "resetCombat",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3192,
+        3201
+      ],
+      "sha256": "f4aa52ac31ee01a318d3a962cf670801b047c988c8cb7d2d2b9f9294bd6d3e72"
+    },
+    {
+      "id": "892f7e32408340931c532ac7",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "inline-script@34826",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        475,
+        480
+      ],
+      "sha256": "0f6545321812fd2f9cd2265dd237aab06b5c2001e850086f5bf301b3adb3c25f"
+    },
+    {
+      "id": "893efaa5e7173b89f441fe5e",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "applyPalette",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1777,
+        1803
+      ],
+      "sha256": "c499d14b787aceb00458a6c6c7038807f74eb0bf2a29b5a34c771544358434d3"
+    },
+    {
+      "id": "8986a0739bfbaa3e6425f21f",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "wanted",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3910,
+        3916
+      ],
+      "sha256": "38be79013c64b322ce86173c978f454b6382baa5e2119297415ae511aa8fc309"
+    },
+    {
+      "id": "8af716a9a8c17744a479ed42",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "bossThink",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4121,
+        4163
+      ],
+      "sha256": "aae8cc03fc3ff7e1360fabb5842c0b39b93d15f40d7ed461313a21d8bf0abcfc"
+    },
+    {
+      "id": "8c7339e5f89c0ac534b2686b",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "toggleFullscreen",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2903,
+        2916
+      ],
+      "sha256": "8d92dbbb57f17821fd35b14194f7cde813e612459915519d1921bf166a8a689e"
+    },
+    {
+      "id": "8ddd1e72d6624f35ad3f74e9",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "damageFoe",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3917,
+        3917
+      ],
+      "sha256": "1b0b3046b6808ffe1c2e28fb08c0121967263f102e0d77f44ea28ebc25bd5800"
+    },
+    {
+      "id": "91cfcdaa3e972fde35f2cb84",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "fellTree",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4289,
+        4312
+      ],
+      "sha256": "dde52c29c67f766193238c16109728310ede95e3a8638aa954d7ec5b09fdc2f8"
+    },
+    {
+      "id": "92d7797878f31f419b8119fe",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "inline-script@30926",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        416,
+        422
+      ],
+      "sha256": "5fad9607c5827c034b7c4283297d48cf1f2c81ca07d623314486e2ade38782af"
+    },
+    {
+      "id": "933697e62685dee9902eb71d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "cycleWeapon",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3211,
+        3215
+      ],
+      "sha256": "676b38f07ba20c9f798542c4d5ac43a6c18c1b2d6225741f28fa8e22ce8d83b0"
+    },
+    {
+      "id": "95442d62bc1d70b7be79d0f4",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "boxSolid",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1837,
+        1841
+      ],
+      "sha256": "b81d011307be5143025cddb6cf917cc0bcc4b78f0052358e3efa26719cfb373b"
+    },
+    {
+      "id": "9658c95368152e0f1cf2cad2",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "canCoin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        812,
+        817
+      ],
+      "sha256": "5fb5394e4733de728f9f2f8643c6936df32440e14a8291833d4e08c7b7411065"
+    },
+    {
+      "id": "97d29397d0d5d756412c24ec",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "renderLoot",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4632,
+        4641
+      ],
+      "sha256": "c1998504aef0a3d5f60213574147d48123f956182cced5d6f72ccad4cae38088"
+    },
+    {
+      "id": "98eded71a5976b4fa6548f7c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "renderArsenal",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4764,
+        4782
+      ],
+      "sha256": "cabe7fcec1efd1d248aab9051d757039ab482d2c70d70b59ec71c9ac8c4fda86"
+    },
+    {
+      "id": "996b9c5bacb00eb1dfa712f6",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "underGrassToDirt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        716,
+        716
+      ],
+      "sha256": "1042cb573b2fc0f6aba2b9d7ad672bcb2252a10515cb01bfc08f5d2c76dcc592"
+    },
+    {
+      "id": "99e68805a1619ce140407064",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "leaf",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        778,
+        778
+      ],
+      "sha256": "37f630692c4b771b49e3d4059c4aead5b91199e2e5b9a88a5d2533ef2e5fea73"
+    },
+    {
+      "id": "9b7e75334c4997ad0abe2807",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "surfaceUnder",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2296,
+        2299
+      ],
+      "sha256": "b44f6f9943a6c14353fd0615fcd7a0d1127f0e61c100f0f5514d8603236cd808"
+    },
+    {
+      "id": "9c4de5a270020d2533bdf15f",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "vIdx",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4288,
+        4312
+      ],
+      "sha256": "a5a62ec3b5fa32a8c7414339ea5e505d0bfae3fc04c0a62142b4997e7ff212a7"
+    },
+    {
+      "id": "9e1bc981833065e8cf88ceb1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "dirAt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2644,
+        2650
+      ],
+      "sha256": "9bf05f46c0634dbf02c48dc565584b0f301502d1bc1cd65ec83a9f961be2334c"
+    },
+    {
+      "id": "9ead218ee6847de74a93bc98",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateHUD",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2880,
+        2893
+      ],
+      "sha256": "2d8780bd27d2994715b8c78f011b475a9d21be6fe1c3902c5d27919405ae42f2"
+    },
+    {
+      "id": "9f23cea741f539b8be2932cf",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "RI",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        568,
+        568
+      ],
+      "sha256": "0ecb61bd78c7f0052ca4e3083d923dc1450a7385ec1b17bb1a469721c13fe1fd"
+    },
+    {
+      "id": "9f281c63fc40dcae3e7ec9f2",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "carvePath",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        636,
+        647
+      ],
+      "sha256": "9fdbe0ddf86d8b3310811a40d676533d4e8619b9566315f66271d6f744f41707"
+    },
+    {
+      "id": "a05b853a38043a88483e55ff",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "die",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2836,
+        2841
+      ],
+      "sha256": "2d49551743c9b00863795b0c9f4d2ea4e75470a3f0d9b2e24cd25860a9b1d50f"
+    },
+    {
+      "id": "a0bac28ce63af880b1cb61e3",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "generateWorld",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        564,
+        898
+      ],
+      "sha256": "a9d85327753ec86b874d152fb116aae29b5729837bc875e33b0e5dcade333946"
+    },
+    {
+      "id": "a1510be953bdccbb72ff71a1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "glowMat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1584,
+        1587
+      ],
+      "sha256": "04d5ab0b7ed3c716fc1daabe3c0a61e902fbb2ab57a149509c129614f2f5a1b8"
+    },
+    {
+      "id": "a332c671a843427ada3bc371",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "impact",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3635,
+        3645
+      ],
+      "sha256": "64734de07cd198703896204a4c3d584b9a3d9af38d66332a2fdab4fa6c9d0e3a"
+    },
+    {
+      "id": "a53f2a8a11f698fefd82a971",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "mk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3012,
+        3012
+      ],
+      "sha256": "73528f4f382100f01b2aea305cb08a6ac42fa3af0423d71ca02fff2114962222"
+    },
+    {
+      "id": "a543703a552ebebe2a32cc76",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "setAttack",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2097,
+        2104
+      ],
+      "sha256": "e87a2e5882e0957adfde020474beb41b5c203b23de10d9e11bba7d39bab11784"
+    },
+    {
+      "id": "a58727129e802f5906af0b06",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "blastLeaves",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4314,
+        4326
+      ],
+      "sha256": "4ec9457d6df947f5653fdf930541b5284e6ee72b11543775481fc6d7abd816c5"
+    },
+    {
+      "id": "ac387480f8e4eeae624164e4",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "clamp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        501,
+        503
+      ],
+      "sha256": "cd921c999a51857c3db949e68cb990e54aafb9d2267889becda5a60d71adb870"
+    },
+    {
+      "id": "ac898123dc9f70bc070738f8",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "easeInOut",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3145,
+        3187
+      ],
+      "sha256": "a3ba438478c5f167ed6d0669141d5fb148cd13266eca33bef93191efe63bdcab"
+    },
+    {
+      "id": "ace43401272920d9b5bb6971",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "cursorAim",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2160,
+        2160
+      ],
+      "sha256": "d0e2d87f2359b5dcba0a3d25dfd1cdf9690999bd1675112f9946ef675a666cf6"
+    },
+    {
+      "id": "ad47ed657ec0185175426392",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "flashLight",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3521,
+        3524
+      ],
+      "sha256": "74eaf2adb63ace61bfeebfc43d72808e2ebe5f887ffaa98b05d1f64c5a3669c9"
+    },
+    {
+      "id": "ae9b002e81af6f6048b92efb",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "perfMonitor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4789,
+        4799
+      ],
+      "sha256": "2654d4cc984bb7bd908dbfd2201759214c97cc90b5565a4f2dcede6fb94e6892"
+    },
+    {
+      "id": "af058a009271600368be0009",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateAim",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3148,
+        3187
+      ],
+      "sha256": "b08bd0ef455ed18f57a54c610b36fad305b59e7ad304fdbb0188293133e9017f"
+    },
+    {
+      "id": "af2d330ff3f364f185290a00",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "buildWorld",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2761,
+        2781
+      ],
+      "sha256": "3954c4d9e18c58d36222e07aa317fd46cb40db4a3db63eef105b11cefd923324"
+    },
+    {
+      "id": "afa11cb68a1ff691675114d2",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "renderFx",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4541,
+        4596
+      ],
+      "sha256": "76dd4fcdd81c83e594b49db2510027151371af823dc651e9ebb7200884ce461f"
+    },
+    {
+      "id": "afbc3dd000cf6ef9a59ef9fe",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "parryOrbs",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3363,
+        3373
+      ],
+      "sha256": "3ec4be04ae56b825c57c2c177d1695b2152eb57cbb238a1ab2fc108ebcb77b11"
+    },
+    {
+      "id": "b0a97e914ca1364d5c603009",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "dmgNumber",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4714,
+        4719
+      ],
+      "sha256": "08b84818fc616016f716521573a26267ae21992643e745396e928706742f6770"
+    },
+    {
+      "id": "b0be395f91f0c973dd1f777d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "clear2",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        794,
+        808
+      ],
+      "sha256": "1d153f5400260479f1253e992321fb6ed9fcefd4e53fcf81e935ab9d68de4f84"
+    },
+    {
+      "id": "b373d80a40bb019fa355e50b",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4846,
+        4867
+      ],
+      "sha256": "d944a3d1593fe0243204874ce9e55bbce4f17ce222c1c9a4debfb9667735c0d1"
+    },
+    {
+      "id": "b4214ba7696bf17c54359a7e",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateProjectiles",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3546,
+        3572
+      ],
+      "sha256": "b91302c1dfa7e968948de31331cf062bf3be17facc5eac126eb3d50a690b0960"
+    },
+    {
+      "id": "b536ab7c21e5cd497e1cbc82",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updatePickups",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2490,
+        2511
+      ],
+      "sha256": "7525e38da0e8f02f52dad54922ce464243476c633aa58420f0580832ee772bcb"
+    },
+    {
+      "id": "b7b6d4c30e732bc980e4eef3",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "renderProjectiles",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4610,
+        4631
+      ],
+      "sha256": "cfd1b287fd4c0deb2dec45806d7d008551833b377f77446e5ac538d44b43169a"
+    },
+    {
+      "id": "b944db50ef99b39cc608bb06",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "Particles",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1596,
+        1661
+      ],
+      "sha256": "4c2135601c63add0ccbdbd5557b1ea6949952bb5125fbec5ae3f76f7301cfa43"
+    },
+    {
+      "id": "b970822d6def7462c8945b39",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "iconStyle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4669,
+        4672
+      ],
+      "sha256": "e4da1d8aade837045b8cd68de88d1de5c998e57796872396d871c8a37ef69521"
+    },
+    {
+      "id": "b9aa5bd8519751f04eeeb6a3",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "fmtTime",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2026,
+        2026
+      ],
+      "sha256": "1a82fc3672154633914fdab9a703b4a0a858ca5d0b6a6637eac24213371f4df9"
+    },
+    {
+      "id": "b9b570526c6972967d03b6c3",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "ejectCasing",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3535,
+        3539
+      ],
+      "sha256": "80b2b9fdb999aa481c7e3d8a64b7d65568af123da7d677b5235c39a5d829fdad"
+    },
+    {
+      "id": "b9fe3016ae222413c2284dd5",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "rebuildChunk",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4272,
+        4278
+      ],
+      "sha256": "307b7f460ade292643b87e95b978cfb914768910b1c6f0e5def2dc6e44c79de7"
+    },
+    {
+      "id": "ba79b76f81136ee528a53766",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "drown",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2320,
+        2326
+      ],
+      "sha256": "28d3e4cd58f0a5807961ee21db01b312b5c4c5520ce9e35655bbc6057e5e572a"
+    },
+    {
+      "id": "baaad74d19733b5b60f43b0f",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "spawnWarden",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3898,
+        3909
+      ],
+      "sha256": "ff263ff48d381aa90f30f4dcef749ad3a60be7bc558e2237789ec90eb2359c93"
+    },
+    {
+      "id": "bb11679ab3f955ad3370b903",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "placeFlies",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2743,
+        2754
+      ],
+      "sha256": "12e62e421459d4bd6f2ab0d3921cd19d7ba1cee6c289881eabcd002043da6ab9"
+    },
+    {
+      "id": "bd098b6d439b15491e858b8a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "toggleMute",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2899,
+        2902
+      ],
+      "sha256": "66418d68f8ff27f073f4393df8a6644733c92d426745309c7c73fb20c29c504e"
+    },
+    {
+      "id": "bf220b23136030a4d3128739",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "R",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        567,
+        567
+      ],
+      "sha256": "de99b4128f445d2d5aaeef4fdad253c4bfa44a188e30989dbb2d7e35fe0e6bf8"
+    },
+    {
+      "id": "bf73fd9e13d665a749dea727",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "inb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        572,
+        585
+      ],
+      "sha256": "ec3f79296a875d084743af30f9e4175e3942efd91f7888e5c7f7b2868c218eda"
+    },
+    {
+      "id": "c13ac151a8f3358c62219986",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "spritePoint",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4368,
+        4377
+      ],
+      "sha256": "ae2f596b1bb8e709cd5a64a1943b7f9b3df80f622c078d1e730c4a744f79361e"
+    },
+    {
+      "id": "c191b5865ba693fe3c99d4a1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "groundBelow",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1844,
+        1848
+      ],
+      "sha256": "c14abac75cebc1bef42c8519465d87c3703ad6abc1e315eb73a267fedacd8f75"
+    },
+    {
+      "id": "c3ec5f52fd445b0509d1d2bb",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "isAtkKey",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2113,
+        2135
+      ],
+      "sha256": "84521459f9b357ea9f398ac61917062f08ddcb004881eb13d565f8def774d785"
+    },
+    {
+      "id": "c4196d8ef4d3b792c93fc1a2",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "col3",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3067,
+        3073
+      ],
+      "sha256": "5045e600aa666e09d091fdc8339b86ce3b18aad2b27d06da0eab5433b2970675"
+    },
+    {
+      "id": "c454fab6b11868f4b10db813",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "loadTexture",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1430,
+        1442
+      ],
+      "sha256": "b18005d4b5e1e4e8c01cd48a4ff1c6baf69240f5518ec5d52de2dfb4c56a839e"
+    },
+    {
+      "id": "c4b1e3c0c6113c6986824b03",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "hits",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1843,
+        1848
+      ],
+      "sha256": "e775f8b6b94f2695283e28ec3351c8d6cc68688fab94f6866892d7534423655f"
+    },
+    {
+      "id": "c595383f3d89942105d71606",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "showNew",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4653,
+        4662
+      ],
+      "sha256": "023eb79389244b5ec3c71c7ff57397657664642bae43d9663058a3691a043a22"
+    },
+    {
+      "id": "c7d41a79574c5b970f222508",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "jagged",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4526,
+        4540
+      ],
+      "sha256": "a34c295a4bdcc0d5069f4ffec1d5e74ad41b83e43824624b114164e523d78162"
+    },
+    {
+      "id": "cbfcb4f473c4ff90c3672841",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "seaSpot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3878,
+        3888
+      ],
+      "sha256": "19af3898bc9568005dcf9fd3fb451444578b61dfa0ddac05fb005aaf79f95c87"
+    },
+    {
+      "id": "cc15ef73eaa302b29d44c68b",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "lerp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        502,
+        503
+      ],
+      "sha256": "04105f696252bde182bcb4ca468683c9d92322298c2816547ca9fc666f8923d3"
+    },
+    {
+      "id": "cca5f4ccb2322c5a285b519a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "renderTrail",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4488,
+        4514
+      ],
+      "sha256": "39520916d361c239d3eca67761ca878716207a24d9f80cd275660f6d2612406a"
+    },
+    {
+      "id": "cd2dad95e7320e0570b7d8b9",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateSouls",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3983,
+        4003
+      ],
+      "sha256": "440c3d0e34ccc9f8da15148e526f36c2eae183bdb690510c6781a1e89c7c58a7"
+    },
+    {
+      "id": "cd7bd973d8b51f2bb9dab8b3",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "bossImpact",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4164,
+        4184
+      ],
+      "sha256": "8cf99f81e4a5cf3d9fe459a7c0f2e58adca78196340d332124f8bd8d37c3eeec"
+    },
+    {
+      "id": "cdbe342a119ce1a22894575c",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateDash",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3408,
+        3426
+      ],
+      "sha256": "d7d23a616a0b81d7955c8e449b672cfd96978e4f2fb44dd52b5ed65ab1df39ae"
+    },
+    {
+      "id": "cddd05063a2531fe31c85f0b",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "sets",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4668,
+        4672
+      ],
+      "sha256": "619692b5bff5e97ca4d2c8981d20691c92e6eee3854d28b221ad95f0379b4d13"
+    },
+    {
+      "id": "cf959e47fd26ee9abe661809",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "fireRanged",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3483,
+        3507
+      ],
+      "sha256": "49bc73442b9527083a7b138d243da6cc7900b41bb0899d6e6789e9af19e34665"
+    },
+    {
+      "id": "d62ee42f366303d0088cd6db",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "project",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4721,
+        4724
+      ],
+      "sha256": "850969197d145f10fed46dc2854496a42347a61d55855e396db9f32338167cc1"
+    },
+    {
+      "id": "d6ccea659182c336ddebca6a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "win",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2823,
+        2835
+      ],
+      "sha256": "4287a584b5b2f220269766a93b46f7a5dac37c16267072b3defe1cf8d66a57dc"
+    },
+    {
+      "id": "d74c2ae4355c962bbb396030",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "tryStep",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2269,
+        2278
+      ],
+      "sha256": "bf4bd8ae7e2d116040f879bae7fe29c9357eff524ed040ef1c7059751e2eb7e3"
+    },
+    {
+      "id": "db24de801ae0c78da01ac13b",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "mulberry32",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        508,
+        515
+      ],
+      "sha256": "b38f72435ebd57853cdebe1bc955e0c91736cc758daeb72e49509b21ac6bce94"
+    },
+    {
+      "id": "ddfb40c9d68bd8d1865c2419",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "$",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1411,
+        1420
+      ],
+      "sha256": "d12888b43a3bf9e503354b217e8bc361e18254db48ff57155ae9e6abd58d93e2"
+    },
+    {
+      "id": "de4873e11757030595773678",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "engaged",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3222,
+        3225
+      ],
+      "sha256": "272ab85837fa8a6346bc8c026d3d09004cafb3e8d10d4ae6e45db9e37c1f656d"
+    },
+    {
+      "id": "df7638c4db848f3ec2b6dffc",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "Ribbons",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3005,
+        3058
+      ],
+      "sha256": "5fba503784b7422b3cc0c7ffd85f4371830c9cff913a35e93b685c5339a14edc"
+    },
+    {
+      "id": "e00747960be9f5407897ac04",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "setHeroFrame",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1565,
+        1569
+      ],
+      "sha256": "eec585a81defa920205d6b65f2b8e96c914c58067507e652c873f8cce2fbe918"
+    },
+    {
+      "id": "e04f74603034398c93032471",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "fade",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4493,
+        4493
+      ],
+      "sha256": "1e4e40265ec4cf40983bc2b8de8cf9a14a0999d68b0be053601a571a0114b70c"
+    },
+    {
+      "id": "e14322a39bc1a18977fb7600",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updatePost",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2693,
+        2721
+      ],
+      "sha256": "295290895691feab74f632076c226c29d2e128dd8dfff3d49a0e74d6c9568cb4"
+    },
+    {
+      "id": "e14f170363e6d1c1fe394f63",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "projTrail",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3727,
+        3740
+      ],
+      "sha256": "1303c783810048978b1cefa0615f79fe07519f19d6da7e108b463561c9735a33"
+    },
+    {
+      "id": "e192de3e9a03011288eedbb8",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "drawMinimap",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2058,
+        2086
+      ],
+      "sha256": "640408dc541b3e3c2d9cfc4b889d4b44d3079bed1c9150cb72b9c9dfe68e9fe8"
+    },
+    {
+      "id": "e1fd72e0d90184b70fe658c5",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "drawMinimapBase",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2048,
+        2057
+      ],
+      "sha256": "fe817863d7e749af0305200814fea52f170560837b212d0643817ec270b69cef"
+    },
+    {
+      "id": "e3f7914b463d9db8b865e0a6",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "resetRun",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2782,
+        2801
+      ],
+      "sha256": "9256cf9ca2c03b0e56b0faaba884812f393ee28230c8401fc8cb71820755bd06"
+    },
+    {
+      "id": "e470f3145edd45291d00eab0",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "takeLoot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4345,
+        4356
+      ],
+      "sha256": "bc5bfd6e84a13a1c9219879b05fcc01cb9c06c8320c45e2c5fb2b360097a2b0e"
+    },
+    {
+      "id": "e4d4d336ce0fb421e31724e6",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "hurt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2430,
+        2446
+      ],
+      "sha256": "6ba45041eea1485d5820d34dfd9bba90f33c3476c2f8d6ece0a7489eddd13625"
+    },
+    {
+      "id": "e58fc3de0a6578693e121a7a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateFoes",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4012,
+        4120
+      ],
+      "sha256": "938e59522495e1f3553b9462933d8f87081e2dd3bee24b8d825fbee58d77dabe"
+    },
+    {
+      "id": "e918c2955fb571b0b326a461",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateFlail",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3427,
+        3458
+      ],
+      "sha256": "6186d0eb2c9f8ea70cbb0c2349795407bde25c40f10be9070067d8804bdee1c3"
+    },
+    {
+      "id": "eb573367bc8b060b7b241879",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "make",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2455,
+        2476
+      ],
+      "sha256": "9fc6ede6d97ec3cb706cc3d959eb6261d12fe6a5bdfa725528646f7c1525a0d8"
+    },
+    {
+      "id": "eb5b0f8bfd5fe11f6d348c6a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "poseOf",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3262,
+        3311
+      ],
+      "sha256": "a2ba311f826ad566b0acb1d611b3c6b30dc58225e5adf1d9fd4d137c1d24351e"
+    },
+    {
+      "id": "ec2edd357749119cbbf7e69f",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "breakOrb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3646,
+        3651
+      ],
+      "sha256": "2d305da1e5a533bf67429a7011c9671beff8ae9bf33cf2c019b0a99685c4290b"
+    },
+    {
+      "id": "eda5c67a96390c8aad927c17",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "foeAlive",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3863,
+        3877
+      ],
+      "sha256": "6137f72b5c80c00d9f68735e9226aa5773dc3738db5e3d353e1e80476c93a180"
+    },
+    {
+      "id": "f00974bff23178bbe5d64975",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "showEnd",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2842,
+        2861
+      ],
+      "sha256": "423f7bd0b634abea74b832aec82837aced3b1e2576d65c3acfbb1add184fd393"
+    },
+    {
+      "id": "f0e3b4bca0172df160067bc5",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "n2",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        526,
+        533
+      ],
+      "sha256": "e1ff7ec86396b8aeb8012c4cd2b8f422bb4cef3a1476b741f826343c44d7c1d1"
+    },
+    {
+      "id": "f2096ee1be099bfe1492b6c6",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "damp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        504,
+        515
+      ],
+      "sha256": "d92e02f52933a8bb6a5d84005fb277cd8631bded5ab77c371676fd16903390a5"
+    },
+    {
+      "id": "f2368fcf9217cbbda58f3d59",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "rayFree",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1854,
+        1860
+      ],
+      "sha256": "d599a614a2714006e37dff34783f3bd1d53e300137e9398f6a3a64aad05b033c"
+    },
+    {
+      "id": "f5f40698cbd565f5e7d5175b",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "dropSoul",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3980,
+        3982
+      ],
+      "sha256": "5d8011d11b74a111925ece033614bea72a24e082550d44308781aaebb905c95f"
+    },
+    {
+      "id": "f75f6528f9b6174f3f950cb0",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "buildLoot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4332,
+        4336
+      ],
+      "sha256": "838520e538bbe9315762c4ee87de0ac32965e53423385bf4c323ea204bdd4b53"
+    },
+    {
+      "id": "fd451349a680888110930e74",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "updateWeaponMeter",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        4694,
+        4708
+      ],
+      "sha256": "46eac67050acbb92960b4724d9eb451c00b73e453ffee943e20bfdde66818346"
+    },
+    {
+      "id": "fd9d96217daa5904cd50dd6e",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "collectCoin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        2513,
+        2529
+      ],
+      "sha256": "c72a7124a5b45d34696785434c8c903d852b4fe9cfb7505aa6253230f07fe4e1"
+    },
+    {
+      "id": "fda46ab4438c226b2ab56609",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "startMelee",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3312,
+        3328
+      ],
+      "sha256": "d0a80021c7e92419e68694753611a56b0408e52145b03c8890ade312a36de713"
+    },
+    {
+      "id": "fdcbc09c555de8722fc20fd5",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "segRad",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        3864,
+        3877
+      ],
+      "sha256": "8af88483d946ab8db17610444fa8f0adc587700c80775822dc54edb220973cc3"
+    },
+    {
+      "id": "fe33350049331b6256dad85f",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "bed",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/index.html",
+      "lines": [
+        1879,
+        1887
+      ],
+      "sha256": "f8166cc2ab77ed9f999b4a877c8f4f0c1f580541b3cd9d1aec3f8fe25864d462"
+    },
+    {
+      "id": "1a323c7476a0550942974de9",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "move",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        31,
+        37
+      ],
+      "sha256": "8319975f3b4d0c3635f334d9f0cfee076b47a8775466db116afbb1205e0f651e"
+    },
+    {
+      "id": "243f921ae846f7a20b3155e0",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "glyph",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        6,
+        12
+      ],
+      "sha256": "df665519a2f8cc6d1d584e0bf2e92397b4e060a2716c5d7eb72f1a41ee6f1c86"
+    },
+    {
+      "id": "2da2839a114ed739af26223d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "create",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        13,
+        13
+      ],
+      "sha256": "908cec31137fe336ed60f0ee08606fa190d19b068b25f95b00eec5a37e3b7cc4"
+    },
+    {
+      "id": "4541d0571f751d08591b14e6",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "module:mobile-controls.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        1,
+        82
+      ],
+      "sha256": "c1e2ec79d7de0fb98a8a69f9337e454bfd88d58dfbd211d8f18c3988a5638da4"
+    },
+    {
+      "id": "57730d34af9bbc7ca0cee914",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "enabled",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        5,
+        12
+      ],
+      "sha256": "54ec7996c00007d59f0e95422cdec0a220ea4e3f1e4a603c514b820cd90a498a"
+    },
+    {
+      "id": "76702bfa2389cc1f882eced7",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "zero",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        30,
+        30
+      ],
+      "sha256": "5744cab86a5bc7f1574fa64abf865f35d2d50b9c9bf37d309ed41ca8ba555c04"
+    },
+    {
+      "id": "bd71106a7947804050b32180",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "forced",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        4,
+        12
+      ],
+      "sha256": "54ae146380ab32a7802a1c587b972563b1e908f9fbaa200440348250d5df8602"
+    },
+    {
+      "id": "c6ab5992a69da33c917da4ab",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "stopStick",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        38,
+        40
+      ],
+      "sha256": "87a074e4d7ee5cc182e0ceb152d9e1289e34092df5f7bd7bbdae79ce608c442e"
+    },
+    {
+      "id": "d33ea0cf5ad9a2172318bef2",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "hide",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        73,
+        73
+      ],
+      "sha256": "b0c4c2ca1f0ddda53fd5f0810201251df561b133976980589e5c7461dc08e9a7"
+    },
+    {
+      "id": "e08c2a6c1bb1c3102322b9e4",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "stopAction",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        47,
+        50
+      ],
+      "sha256": "e993705351ba3779bd5a5599a18280e001f94ff8e9026e89e16ef1cc86a27f41"
+    },
+    {
+      "id": "e782e9a96ad4b5553e6d4c5d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "eat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        29,
+        29
+      ],
+      "sha256": "a0fea7f3f814e2a9c6d9ca60d39fafe50a69256a69711c629b3e9d2254e0b49c"
+    },
+    {
+      "id": "e8107eb59642dde588bcbccf",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "release",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/mobile-controls.js",
+      "lines": [
+        72,
+        72
+      ],
+      "sha256": "0631a96e575baae0c17592bd1644ad0fc4d436038a37a98015c0f1e76b4778e9"
+    },
+    {
+      "id": "205d63c778efedc681f015c7",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "dispose",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "underwater-world/npc-catalog.js",
+      "lines": [
+        61,
+        66
+      ],
+      "sha256": "534c6bb33155a7f65b2bde4bc60c5479a2d6c515b572245c6856b2bcabe55bec"
+    },
+    {
+      "id": "4f2cbe4b301b84a782af3414",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "module:npc-catalog.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "underwater-world/npc-catalog.js",
+      "lines": [
+        1,
+        68
+      ],
+      "sha256": "7ac397f0146f8a5b8004d216336a6818d2b164d1df3b93ac30c2f08418d3ce88"
+    },
+    {
+      "id": "7713540877a02a1e8a671ffa",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "createMesh",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/npc-catalog.js",
+      "lines": [
+        32,
+        44
+      ],
+      "sha256": "b58f21ba858384cd036d6c7eb9d63a2ea0ce719919c9055514cc290a4eb508cd"
+    },
+    {
+      "id": "932b955e7d6882587a3a188a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "animate",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "underwater-world/npc-catalog.js",
+      "lines": [
+        45,
+        60
+      ],
+      "sha256": "53132113b873363493e89062e94918c51417db3d1954e88b1d0acb96fc8d8b65"
+    },
+    {
+      "id": "171590db5c735aca422843be",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "emit",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/story-system.js",
+      "lines": [
+        60,
+        60
+      ],
+      "sha256": "e0394fc2ea1fc9be92b5dfb1c4d907ac3bfab43478628bb3e11ef128f77703c8"
+    },
+    {
+      "id": "b6e43ed9f5851da4e675a9be",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "restore",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/story-system.js",
+      "lines": [
+        78,
+        78
+      ],
+      "sha256": "0482587b84e7402600b269e0a4aa3ac4ef82971dc5e780ac35763d2077b1b495"
+    },
+    {
+      "id": "bdb3f26eb1042c96e92ff2a9",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "inspect",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/story-system.js",
+      "lines": [
+        68,
+        77
+      ],
+      "sha256": "b68e6bdc2e23548d43ed8857de4fdf13e251dce4195219bd15acfcac16aee148"
+    },
+    {
+      "id": "d68665bfa33b2422eb765de1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "create",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/story-system.js",
+      "lines": [
+        58,
+        58
+      ],
+      "sha256": "ab726eaab8b376b7fcdb48b1355fe5db408ec9faf78a9228af4c7fde636cea6a"
+    },
+    {
+      "id": "fe35ee73c5c29d6c3ffa5dfd",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "module:story-system.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "underwater-world/story-system.js",
+      "lines": [
+        1,
+        84
+      ],
+      "sha256": "73ace5b80a62593ec6a6866e23fda75f3a2e50adee85206dd81e9448927549fc"
+    },
+    {
+      "id": "1ea4c2dbc43ba1a87aec1628",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "boot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/tests/playwright-smoke.mjs",
+      "lines": [
+        7,
+        29
+      ],
+      "sha256": "b2f4b8248a79d7fb2fb48433d1ec7249b891b54a68370db991ebec12f42b67ab"
+    },
+    {
+      "id": "71d8ee9f372648810b9c9dc1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "module:playwright-smoke.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "underwater-world/tests/playwright-smoke.mjs",
+      "lines": [
+        1,
+        160
+      ],
+      "sha256": "76fbf86ae28e33565cfd5cdea0fc28bdcecd1dee22b302b20dd0fb38a2189497"
+    },
+    {
+      "id": "0cbf5a8110c47302b2d8f800",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "fbm",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        8,
+        17
+      ],
+      "sha256": "976463ff267dc173ab721b9cc16277d3535dbc51d722774f8395eafa7bbfb384"
+    },
+    {
+      "id": "0d1f056801b8d244a201e274",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "inside",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        29,
+        32
+      ],
+      "sha256": "7d4789481a98007fbd7c1a77bd483284c06d1567d283fe8940a9de5ccf130dfa"
+    },
+    {
+      "id": "0f01e69ca8d4777885980fec",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "marker",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        186,
+        190
+      ],
+      "sha256": "e46618869bfbedeeb9ccea6ac82242a9573b9757d461f3ed068177971e45d4eb"
+    },
+    {
+      "id": "22605fcaf25eb42dfdc5e0b1",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "canFire",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        148,
+        151
+      ],
+      "sha256": "69b1094f4a9ad63df4e21349514d33bac92282fdcd414414ea9a87e0fbd454dd"
+    },
+    {
+      "id": "2d0b9d7e8f1e1c223e54a3f2",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "onShot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        152,
+        161
+      ],
+      "sha256": "b8ef61177f5b4233f82674da2f6ce9e91af5a9d06af779510b1b962ea5d8d590"
+    },
+    {
+      "id": "2ec1ac97e583d1f6e8746bd4",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "clamp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        3,
+        4
+      ],
+      "sha256": "c49e6842701b6972a1f96eb67913018c53bd698547044dff8e157f6f98cad1c7"
+    },
+    {
+      "id": "3162a2e70c239977aadf8427",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "seabedHeight",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        9,
+        17
+      ],
+      "sha256": "d5d625b778d52915a678e6f158e88a2814389cccd2f79bfd549ea18303234250"
+    },
+    {
+      "id": "3633556be992e6c53b03e5ae",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "drawMiniMap",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        179,
+        195
+      ],
+      "sha256": "01b6dbe81f0fed423806d9d1817466c4fa618fcf41d135183a37725c557e0286"
+    },
+    {
+      "id": "44413e72134a46ae76d5f928",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "questSave",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        162,
+        162
+      ],
+      "sha256": "1fbb32aaa1f1736ec05cae902001fd84d7eb62ebe34cd13bf82a0d752f1010ab"
+    },
+    {
+      "id": "4560684d42ba89d3962b32bf",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "update",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        196,
+        231
+      ],
+      "sha256": "935d133216e8b80f9b14d27e39b40d3fb24e17e16bffcb116a12d7ead908b8b8"
+    },
+    {
+      "id": "45e440779b8bd87836d85698",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "physicsStep",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        134,
+        142
+      ],
+      "sha256": "be2f2249f081d4e16db3c94fba8aecd3691e6cae539ddaf94251645e1c3243e1"
+    },
+    {
+      "id": "50fcc12a3d2b9147e310de4d",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "isSubmerged",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        133,
+        133
+      ],
+      "sha256": "55facd0b062d06ce622a32c12853b29d3c91d22aec1e95858c7b7c2006780b97"
+    },
+    {
+      "id": "520fd0f3e74ac08d9363dd00",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "within",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        25,
+        236
+      ],
+      "sha256": "8cefdadaa792ee5f687bf874590231e203dca9bb89386c7d2edc9cab6c572e07"
+    },
+    {
+      "id": "6c12ed2ffe449f645c5d23bc",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "floor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        30,
+        32
+      ],
+      "sha256": "3d79db6fcc436ead4fe1cb63f339edca5b1d5d18e5baa46c0a97a61d963097eb"
+    },
+    {
+      "id": "7396810c95db28a348a4faec",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "createUnderwaterWorld",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        26,
+        236
+      ],
+      "sha256": "ee916e22532544f1516bd5e30ea2ff37c9c64fadd2f3fad66702472fe78c8f8e"
+    },
+    {
+      "id": "75739afcc59498870f089e37",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "hash",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        5,
+        5
+      ],
+      "sha256": "6f5f573a7af5b4abe156dffdb3de9ba4f9ba85e77c16a6fe0e36d37714389c48"
+    },
+    {
+      "id": "7ebbf3c491a87ca35c2d18e7",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "addModel",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        58,
+        68
+      ],
+      "sha256": "6e2a54878ca7fe9f50456811f51ec3ee4aae999681821960fff71cdfb0e79b4b"
+    },
+    {
+      "id": "842732d0836b12d9aa277d66",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "smooth",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        4,
+        4
+      ],
+      "sha256": "d0332f493f9f188838eec304087f7a3fd699c1fee4a87b31f21e863849375915"
+    },
+    {
+      "id": "a8e4ce4bb2c7382ca862b1c8",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "interact",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        163,
+        178
+      ],
+      "sha256": "ee13bd39326c83481a39d43ec0b4a76e7dcc6ca4b394af2c2f6db6116bb94906"
+    },
+    {
+      "id": "c6c2e8368cd1e0b969001677",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "model",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        48,
+        57
+      ],
+      "sha256": "e30c87ee2fe9004c6a765643ddc0c9dc46851d4e9416e8972d7cc38ae397b148"
+    },
+    {
+      "id": "ca340b9a7e10ad7a6c7bda7a",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "chunk",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        80,
+        120
+      ],
+      "sha256": "16377b8bed3227201d66c75ef5c83897380e9fd77ccdec1a9bd12dc58911e9bf"
+    },
+    {
+      "id": "caf4d0ef690b8e1f6ff6ca24",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "toggleBathyscaphe",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        143,
+        147
+      ],
+      "sha256": "4e2ac34b86da96c6b4d92f647e6c677aaa81c439114d66f24d33d46cdd23b549"
+    },
+    {
+      "id": "f00562234ffccd0522b1a416",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "noise",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        6,
+        7
+      ],
+      "sha256": "2a4101966aa7ec9dfc44372a5467afed8d7dff7841f291b29a57a0d6a0a2dbb7"
+    },
+    {
+      "id": "f73d0b306b0de18c64c59a3b",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "module:underwater-runtime.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        1,
+        236
+      ],
+      "sha256": "01afb34b0ec6b9dd9e9eb78d09a16c5d2be5aab1531c1df6a538023a381e098a"
+    },
+    {
+      "id": "f8ee16702eca99bf65514d31",
+      "game": "reference-underwater-world",
+      "kind": "solution",
+      "name": "ensure",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "underwater-world/underwater-runtime.js",
+      "lines": [
+        121,
+        132
+      ],
+      "sha256": "60a7de4f1f5f856ea411d46b52abd7bfd357dec4da1ef8407dfa317b9bf52aa7"
+    }
+  ],
+  "counts": {
+    "assets": 37,
+    "file_assets": 19,
+    "solutions": 345
+  }
+}

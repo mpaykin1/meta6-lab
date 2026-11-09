@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "endless-valleys-golden-knight",
+  "title": "Бесконечные долины — золотой рыцарь",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES LAB",
+  "date_added": "2026-11-09",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "path": "games/endless-valleys-golden-knight/index.html",
+    "git_blob_sha": "7ef996e06d09dd34740c65b5ef56f13a4ca089ed",
+    "sha256": "368b567d99d5e39be9bfed03b182b157566e5805d9386a0c16ae4b16e2faf61b",
+    "size_bytes": 181687
+  },
+  "viewer_url": "https://mpaykin1.github.io/meta6-lab/games/endless-valleys-golden-knight/",
+  "technologies": [
+    "Three.js r128 via CDN",
+    "WebGL2",
+    "GLSL 300 es shaders",
+    "procedural stepped terrain",
+    "voxel landscapes",
+    "gold-leaf knight shader",
+    "enemy and combat animation",
+    "fog and palette restoration",
+    "keyboard and touch controls"
+  ],
+  "dependencies": [
+    {
+      "name": "Three.js",
+      "version": "r128",
+      "source": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+      "bundled": false
+    },
+    {
+      "name": "Pixelify Sans",
+      "source": "Google Fonts",
+      "bundled": false
+    }
+  ],
+  "reuse": {
+    "owner_supplied": true,
+    "owner_designated_reference": true,
+    "third_party_rights_verified": false,
+    "requires_dependency_license_review": true,
+    "description": "Preserve exact uploaded source. Extract only original material with confirmed rights."
+  },
+  "original_preserved": true,
+  "modularized": false,
+  "render_verified": false,
+  "notes": "Playable HTML needs WebGL2 and an active connection for its original external dependencies; GitHub Pages viewer URL is live only after merge and deployment."
+}

@@ -35,7 +35,9 @@ export async function playLevel(ctx, level) {
       ? (s.fireballScreen?.visible ? s.fireballScreen : null)
       : s.aimScreen;
     if (point?.visible) {
-      await ctx.hold(point.x, point.y, 550);
+      // Fireballs move quickly: reacquire their live screen position after each short shot.
+      // Keep the original hold for the slower dragon target.
+      await ctx.hold(point.x, point.y, s.task === 'fire' ? 110 : 550);
     } else {
       await ctx.wait(160);
     }

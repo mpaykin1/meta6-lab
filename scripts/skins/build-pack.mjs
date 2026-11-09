@@ -13,6 +13,7 @@ const sha=f=>crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex'
 const boneOf={'голова':'head','тело':'body','левая рука':'armL','правая рука':'armR','левая нога':'legL','правая нога':'legR','над головой':'head'};
 function kindOf(n) {
  n=n.toLowerCase();
+ if(/провод/.test(n))return 'cable';
  if(/разряд|дуга|искр/.test(n))return 'arc';
  if(/глаз|линз/.test(n))return 'lens';
  if(/шестерн/.test(n))return 'gear';

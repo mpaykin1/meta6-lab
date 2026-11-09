@@ -9,16 +9,16 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
-### lab/skin-rusty-robot — скин «Ржавый робот»
-- Играть: https://mpaykin1.github.io/meta6-lab/preview/skin-rusty-robot/games/skin-trainer/?skin=../../skins/packs/rusty-robot/
-- Источник: `mpaykin1/meta6@a8acdab`, эскиз — blob `f66ad0f`; блокинг игры не менялся.
-- Ветка: `lab/skin-rusty-robot`; пакет: коммит `0d880b70409688288991b77803134ef323c68896`.
-- ZIP: https://github.com/mpaykin1/meta6-lab/blob/lab/skin-rusty-robot/skins/packs/rusty-robot.zip
-- Проверка S1–S12 и 12 мутаций + Chrome: https://github.com/mpaykin1/meta6-lab/actions/runs/42656857700 — PASS.
-- Проверка публичного Pages: https://github.com/mpaykin1/meta6-lab/actions/runs/42657554966 — ожидает итог.
-- PR: https://github.com/mpaykin1/meta6-lab/pull/203
-- Статус: В РАБОТЕ — HTTP 200 и отрисовка с публичного Pages ещё не подтверждены.
-- Михаил: —
+### lab/skin-rusty-robot — скин «Ржавый робот», этап 0
+- Приёмка: только Claude, PR https://github.com/mpaykin1/meta6-lab/pull/203
+- Источник: `mpaykin1/meta6@a8acdab`, эскиз Git blob `f66ad0f0cf976b86600e91efd3e819cb81afe8d1`; старый рисунок скина не использован.
+- Готово по §7: разбор 26 деталей, 12 цветов с точками забора из эскиза, выноски на оригинале.
+- Карта и таблица: https://github.com/mpaykin1/meta6-lab/blob/lab/skin-rusty-robot/skins/packs/rusty-robot/stages/0.png
+- STAGE.md: https://github.com/mpaykin1/meta6-lab/blob/lab/skin-rusty-robot/skins/packs/rusty-robot/STAGE.md
+- CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42664350726 — **STAGE 0 PASS**, ловушки флага PASS.
+- SHA генератора: `c4ffa0de4c95477421caf373919ce35718b17cc9`; сгенерированный пакет — `f4a0318515fbf6fc02f20867577e4a20df4ee445`.
+- Дальше: **СТОП** до комментария `СКИН-ПРОВЕРКА: этап 0 принят`. Старый ZIP и старая графика от предыдущего кандидата не приняты.
+- Михаил: этапы принимает Claude, владелец смотрит итог после этапа 7.
 
 ### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
 - Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.

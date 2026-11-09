@@ -31,7 +31,7 @@ permissions:
   pull-requests: write
 concurrency:
   group: library-machine-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   library-machine:
     name: library-machine

@@ -11,12 +11,12 @@ export async function playLevel(ctx, level) {
     if (!s.started) { await ctx.wait(300); continue; }
     const lane = Number(s.lane);
     if (!Number.isFinite(lane)) { await ctx.wait(200); continue; }
-    const correction = lane > .55 ? -1 : lane < -.55 ? 1 : 0;
+    const correction = lane > .55 ? 1 : lane < -.55 ? -1 : 0;
     if (ctx.mobile) {
       if (correction) await ctx.joystick(correction, 0, 230);
       else await ctx.wait(230);
     } else {
-      if (correction) await ctx.key(correction < 0 ? 'KeyA' : 'KeyD', 200);
+      if (correction) await ctx.key(correction > 0 ? 'KeyD' : 'KeyA', 200);
       else await ctx.wait(230);
     }
   }

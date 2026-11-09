@@ -21,7 +21,7 @@ function independentCount(markdown, count, stage) {
     assert.ok(!seen.has(cells[0]), 'Duplicate finish ID: ' + cells[0]);
     seen.add(cells[0]);
     const state = cells[stage === 1 ? 3 : 2] || '';
-    if (/\bЗЕЛЁНАЯ\b/.test(state) && /https:\/\/github\.com\/[^\s)]+\/actions\/runs\/\d+/.test(state)) green++;
+    if (/ЗЕЛЁНАЯ/.test(state) && /https:\/\/github\.com\/[^\s)]+\/actions\/runs\/\d+/.test(state)) green++;
   }
   assert.equal(seen.size, count, 'Wrong number of FINISH entries');
   return green;

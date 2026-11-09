@@ -9,6 +9,15 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
+### lab/rainbow-acceleration-reference-1109 — «Радужный разгон»
+- Польза: неизменённый авторский эталон, 28 объектов галереи, игровые трассы, шейдеры, анимации и FX.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/rainbow-acceleration/
+- Исходник: `games/rainbow-acceleration/source-upload.html` (blob `8ebdbe4bb14291c77fb209a2f04a6a6c8920480b`).
+- Просмотр: `games/rainbow-acceleration/index.html` (локальный Three.js вместо CDN).
+- Каталог: `shared/references/rainbow-acceleration.json` (28 ассетов).
+- Ветка: `lab/rainbow-acceleration-reference-1109`.
+- Статус: В РАБОТЕ — PR и публикация Pages ещё не подтверждены; Михаил: вердикта «нравится» о запуске нет.
+
 ### lab/broken-city-copy-reference-1109 — «Сломанный город (Copy)»
 - Польза: отдельный эталон с 3D-графикой, GLSL и галереей ассетов; основной Broken City не изменён.
 - Играть: https://mpaykin1.github.io/meta6-lab/games/broken-city-copy/

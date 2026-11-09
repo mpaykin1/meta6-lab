@@ -4,6 +4,7 @@ import {readFileSync,readdirSync,statSync,lstatSync,realpathSync} from 'node:fs'
 import {resolve,relative,isAbsolute,win32,join,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {approvedComponents,searchApproved,inspectApproved,getApprovedSource} from './search.mjs';
+import {editGame} from './tools/edit-game.mjs';
 
 function listGames(){
  const html=readFileSync(new URL('../../meta-games/index.html',import.meta.url),'utf8');
@@ -107,6 +108,7 @@ function readGameFile(id,file,start=1,count=400){
 }
 
 const defs=[
+ {name:'edit_game',description:'Create one exact text edit in a listed games/ file as a separate local git commit and mcp-edit branch; optional PR only when a GitHub token is configured',inputSchema:{type:'object',properties:{id:{type:'string'},file:{type:'string'},old_text:{type:'string'},new_text:{type:'string'},message:{type:'string'}},required:['id','file','old_text','new_text','message'],additionalProperties:false}},
  {name:'list_approved_components',description:'Exact original source modules with verified upstream Git blob',inputSchema:{type:'object',properties:{}}},
  {name:'search_approved_code',description:'Search approved code and return small matching line snippets',inputSchema:{type:'object',properties:{query:{type:'string'},limit:{type:'integer'}},required:['query']}},
  {name:'inspect_approved_component',description:'Read a small window of original approved code',inputSchema:{type:'object',properties:{id:{type:'string'},start:{type:'integer'},count:{type:'integer'}},required:['id']}},
@@ -132,7 +134,8 @@ for await(const line of readline.createInterface({input:process.stdin,crlfDelay:
   else if(msg.method==='tools/list')answer(msg.id,{tools:defs});
   else if(msg.method==='tools/call'){
    const {name,arguments:args={}}=msg.params||{};
-   const value=name==='list_approved_components'?approvedComponents():
+   const value=name==='edit_game'?await editGame(args,{repositoryRoot,listGames}):
+    name==='list_approved_components'?approvedComponents():
     name==='search_approved_code'?searchApproved(args.query,args.limit):
     name==='inspect_approved_component'?inspectApproved(args.id,args.start,args.count):
     name==='get_approved_component_source'?getApprovedSource(args.id):

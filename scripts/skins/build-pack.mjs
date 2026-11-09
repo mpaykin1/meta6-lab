@@ -160,7 +160,7 @@ async function main(){
   const rusty=files.find(x=>x.entry.row===1&&x.entry.place===1)||files[0];
   const metal=files.find(x=>kindOf(x.entry.name)==='gear')||files[0];
   for(const [name,source] of [['rust.png',rusty.file],['metal.png',metal.file]]){
-   await sharp(path.join(tmp,source)).flatten({background:meta.palette[3]}).resize(64,64,{kernel:'nearest'})
+   await sharp(path.join(tmp,source)).flatten({background:meta.palette[3]}).ensureAlpha().resize(64,64,{kernel:'nearest'})
      .png({palette:false}).toFile(path.join(tmp,'textures',name));
   }
   const ownerReference=fs.existsSync(path.join(src,'sketch.png'))?path.join(src,'sketch.png'):path.join(old,'reference.png');

@@ -40,6 +40,22 @@ try {
   requirePass('Unmodified game fixture',checker);
   requirePass('Dynamic storefront discovery',checker,['--probe']);
 
+  // Regression trap (OSHIBKI #4): continuous canvas movement must not
+  // falsely fail because a Playwright element screenshot waits for stability.
+  const animated=validGame.replace('</script>',
+    "document.querySelector('canvas').animate([{transform:'translateX(0px)'},{transform:'translateX(180px)'}],{duration:300,iterations:Infinity,direction:'alternate'});</script>");
+  writeFileSync(gameFile,animated);
+  requirePass('moving animated canvas must be sampled without waiting for stability',checker);
+  const unstableAnchor='const png=await page.screenshot({clip:{x,y,width,height},timeout:10000});';
+  assert.ok(checkerSource.includes(unstableAnchor),'Animation regression mutation anchor not found');
+  const unstableMutant=join(dirname(checker),'verify-storefront-unstable-'+randomUUID()+'.mjs');
+  try {
+    writeFileSync(unstableMutant,checkerSource.replace(unstableAnchor,
+      'const png=await canvas.screenshot({timeout:6000});'));
+    requireFailure('unstable animated canvas screenshot',unstableMutant);
+  } finally {rmSync(unstableMutant,{force:true});}
+  writeFileSync(gameFile,validGame);
+
   // Fault 1: a canvas exists and has nonzero size, but is uniformly painted.
   writeFileSync(gameFile,validGame.replace('colors.forEach((c,i)=>{ctx.fillStyle=c;ctx.fillRect(i*43,0,44,144);});',
     "ctx.fillStyle='#2c3749';ctx.fillRect(0,0,256,144);"));

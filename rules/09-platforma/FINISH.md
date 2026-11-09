@@ -13,7 +13,7 @@
 |---|---|---|---|
 | **MCP** | | | |
 | M1 | `list_games` возвращает все игры витрины, список читается из `meta-games/index.html` (не захардкожен) | `scripts/shared/verify-mcp-list-games.mjs` + `mutate-mcp-list-games.mjs` (6 ловушек) | ЗЕЛЁНАЯ — [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036), PR #178 |
-| M2 | `read_game`: чтение исходников любой игры из `list_games` | — | НЕТ |
+| M2 | `read_game`: чтение исходников любой игры из `list_games` (`list_game_files` + `read_game_file`) | `scripts/shared/verify-mcp-read-game.mjs` + `mutate-read-game.mjs` (6 ловушек) | ЗЕЛЁНАЯ — [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685), PR #185 |
 | M3 | `edit_game`: правка игры только в песочнице; результат — ветка + PR, никогда не `main` | — | НЕТ |
 | M4 | `run_bot`: запуск бота по игре через MCP, возврат результата | — | НЕТ |
 | M5 | Защита: запись вне `meta6-lab` и вне папки игры отклоняется | — | НЕТ |
@@ -34,7 +34,7 @@
 | **ПЛАТФОРМА** | | | |
 | P1 | Витрина открывает все игры (HTTP 200 + отрисован canvas) | — | НЕТ |
 
-**Готово: 1 из 18.**
+**Готово: 2 из 18.**
 
 ## ЗАМОРОЖЕНО до закрытия финиша
 

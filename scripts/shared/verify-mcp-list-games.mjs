@@ -40,7 +40,8 @@ function checkFolder(game,repositoryRoot){
 }
 
 async function queryServer(serverFile,repositoryRoot,initialization,expected,clientName){
- const proc=spawn(process.execPath,[serverFile],{cwd:repositoryRoot,stdio:['pipe','pipe','pipe']});
+ // MCP clients start servers from any folder: never run from the repository root (OSHIBKI #3).
+ const proc=spawn(process.execPath,[serverFile],{cwd:mkdtempSync(join(tmpdir(),'mcp-cwd-')),stdio:['pipe','pipe','pipe']});
  let stderr='';
  proc.stderr.setEncoding('utf8');
  proc.stderr.on('data',chunk=>{stderr+=chunk});

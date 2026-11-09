@@ -52,7 +52,8 @@ const mutations=[
   const withFlag=replaceRequired(text,'const defs=[','let legacyProbe=false;\nconst defs=[');
   const withInit=replaceRequired(withFlag,"if(msg.method==='initialize'){\n   answer(","if(msg.method==='initialize'){\n   legacyProbe=!msg.params?.protocolVersion;\n   answer(");
   return replaceRequired(withInit,"else if(msg.method==='tools/list')answer(msg.id,{tools:defs});","else if(msg.method==='tools/list')answer(msg.id,{tools:legacyProbe?defs.slice(0,4):defs});");
- }}
+ }},
+ {name:'cwd-dependent',expected:'MCP_LIST_GAMES_FAIL',transform:text=>replaceRequired(text,"new URL('../../meta-games/index.html',import.meta.url)","process.cwd()+'/meta-games/index.html'")}
 ];
 for(const mutation of mutations){
  const damaged=mutation.transform(source);
@@ -68,4 +69,4 @@ for(const mutation of mutations){
   rmSync(mutant,{force:true});
  }
 }
-console.log('MCP_LIST_GAMES_MUTATION_PASS all five faults rejected');
+console.log('MCP_LIST_GAMES_MUTATION_PASS all six faults rejected');

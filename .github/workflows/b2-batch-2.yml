@@ -28,6 +28,8 @@ jobs:
           done
       - name: Read-only snapshots, CI and non-CI
         run: node scripts/meta-bot-adapters-2/verify-sources.mjs
+      - name: Rainbow corrective input and three regression mutations
+        run: node scripts/meta-bot-adapters-2/verify-steering.mjs
       - name: Four real mutations including CI deception
         run: node scripts/meta-bot-adapters-2/mutate-adapters.mjs
   movement:

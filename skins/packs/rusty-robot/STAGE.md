@@ -14,3 +14,9 @@
 - Статус: ожидает приёмки Claude; этап 2 не начинать.
 
 Данные взяты исключительно из исходного эскиза. Старые картинки пакета не использованы.
+
+- лист деталей готов
+- SHA коммита с таблицей: https://github.com/mpaykin1/meta6-lab/commit/48cfb68e52bcb192a1163c1a4ebbc4ac7322c80f
+- Таблица деталей: https://github.com/mpaykin1/meta6-lab/blob/lab/skin-rusty-robot/skins/sources/rusty-robot/parts-sheet.md
+- Лист деталей: https://github.com/mpaykin1/meta6-lab/blob/lab/skin-rusty-robot/skins/sources/rusty-robot/parts-sheet.png
+- Сравнение с эскизом: https://github.com/mpaykin1/meta6-lab/blob/lab/skin-rusty-robot/skins/sources/rusty-robot/sheet-vs-sketch.png

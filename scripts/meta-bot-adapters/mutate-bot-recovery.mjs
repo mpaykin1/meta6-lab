@@ -16,11 +16,11 @@ const functionSource = (html, name, params = '') => {
   return matched[0];
 };
 function checkMenu(html) {
-  assert.match(html, /<button\\b[^>]*id="btnMenu"[^>]*aria-label="Menu"[^>]*>☰<\\/button>/,
+  assert.match(html, /<button\b[^>]*id="btnMenu"[^>]*aria-label="Menu"[^>]*>☰<\/button>/,
     'visible named menu button required');
-  assert.match(html, /#btnMenu\\s*\\{[^}]*top:[^;}]+;[^}]*right:/,
+  assert.match(html, /#btnMenu\s*\{[^}]*top:[^;}]+;[^}]*right:/,
     'menu must remain at the top right');
-  const handler = html.match(/\\$\\('btnMenu'\\)\\.addEventListener\\('click',[^\\n]+\\);/);
+  const handler = html.match(/\$\('btnMenu'\)\.addEventListener\('click',[^\n]+\);/);
   assert.ok(handler, 'menu must have click handler');
   const G = { state: 'play' }; let listener = null;
   const sandbox = {
@@ -60,7 +60,7 @@ function checkPerformance(html) {
   for (let k = 0; k < 12; k++) { now += 333; monitor(0.05); }
   assert.equal(perf.lowFx, true, 'real 3 FPS must activate lower-cost render path');
   assert.ok(perf.scale < 0.65 && resized > 0, 'real 3 FPS must reduce render resolution');
-  assert.match(html, /if \\(perf\\.lowFx\\) renderer\\.render\\(scene, camera\\);/,
+  assert.match(html, /if \(perf\.lowFx\) renderer\.render\(scene, camera\);/,
     'low-FPS branch must actually skip the expensive composer');
   // Recovery is based on live FPS, not a forced low-quality test mode.
   for (let k = 0; k < 300; k++) { now += 16.7; monitor(0.0167); }
@@ -101,10 +101,11 @@ function checkRoute(adapter) {
   assert.ok(completed, 'real reachable coin must be reachable through the public goal sequence');
 }
 function checkStrategy(source) {
-  assert.match(source, /if \\(!state\\.alive\\)/, 'strategy must detect actual death');
-  assert.match(source, /await ctx\\.key\\('Enter', 120\\)/, 'strategy must use real visible restart input');
-  assert.match(source, /await ctx\\.jump\\(\\)/, 'strategy must jump across real terraces');
-  assert.doesNotMatch(source, /__isle|page\\.evaluate|forceWin|teleport\\(/, 'strategy cannot cheat');
+  const dead = source.match(/if \(!state\.alive\)\s*\{([\s\S]*?)^\s*\}/m)?.[1];
+  assert.ok(dead, 'strategy must detect actual death');
+  assert.match(dead, /await ctx\.key\('Enter', 120\)/, 'strategy must use real visible restart input');
+  assert.match(source, /await ctx\.jump\(\)/, 'strategy must jump across real terraces');
+  assert.doesNotMatch(source, /__isle|page\.evaluate|forceWin|teleport\(/, 'strategy cannot cheat');
 }
 const mutate = (source, label, a, b, checker) => {
   assert.ok(source.includes(a), label + ': missing mutation anchor');
@@ -136,7 +137,7 @@ for (const game of games) {
     'if (prev[j] !== -1', checkRoute);
   mutate(adapter, game + '/fake-hero', 'hero: { x: p.x, y: p.z }',
     'hero: { x: 0, y: 0 }', checkRoute);
-  mutate(strategy, game + '/no-restart', "await ctx.key('Enter', 120);",
-    'await ctx.wait(120);', checkStrategy);
+  mutate(strategy, game + '/no-restart', "      await ctx.key('Enter', 120);\n      await ctx.wait(250);",
+    "      await ctx.wait(120);\n      await ctx.wait(250);", checkStrategy);
 }
 console.log('MUTATE_BOT_RECOVERY_PASS: navigation, menu, death and FPS traps caught');

@@ -55,7 +55,9 @@ const mutations=[
  }},
  {name:'cwd-dependent',expected:'list_game_files call failed',transform:s=>
   replaceRequired(s,"const repositoryRoot=realpathSync(fileURLToPath(new URL('../../',import.meta.url)));",
-   "const repositoryRoot=process.cwd();")}
+   "const repositoryRoot=process.cwd();")},
+ {name:'no-recursion',expected:'does not match recursive disk walk',transform:s=>
+  replaceRequired(s,"if(entry.isDirectory())walk(full);","if(false)walk(full);")}
 ];
 for(const mutation of mutations){
  const damaged=mutation.transform(source);
@@ -70,4 +72,4 @@ for(const mutation of mutations){
   console.log('MUTATION_CAUGHT '+mutation.name);
  }finally{rmSync(mutant,{force:true})}
 }
-console.log('MCP_READ_GAME_MUTATION_PASS five faults including hardcoded list and cwd deception');
+console.log('MCP_READ_GAME_MUTATION_PASS six faults including hardcoded list and cwd deception');

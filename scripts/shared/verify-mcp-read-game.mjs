@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFileSync,writeFileSync,copyFileSync,cpSync,mkdirSync,mkdtempSync,rmSync,statSync,symlinkSync} from 'node:fs';
+import {readFileSync,writeFileSync,copyFileSync,cpSync,mkdirSync,mkdtempSync,rmSync,statSync,symlinkSync,readdirSync} from 'node:fs';
 import {spawn} from 'node:child_process';
 import {join,resolve} from 'node:path';
 import {tmpdir} from 'node:os';
@@ -95,6 +95,17 @@ async function verifyGames(ask){
    unique.add(entry.file);
    assert.equal(entry.bytes,statSync(join(directory,entry.file)).size,'File size mismatch: '+entry.file);
   }
+  // Independent recursive walk of the disk: every nested file must be listed (OSHIBKI #4).
+  const onDisk=[];
+  (function walk(folder,prefix){
+   for(const entry of readdirSync(folder,{withFileTypes:true})){
+    if(entry.isSymbolicLink())continue;
+    const rel=prefix?prefix+'/'+entry.name:entry.name;
+    if(entry.isDirectory())walk(join(folder,entry.name),rel);
+    else if(entry.isFile())onDisk.push(rel);
+   }
+  })(directory,'');
+  assert.deepEqual([...unique].sort(),onDisk.sort(),'list_game_files does not match recursive disk walk: '+game.id);
   const original=readFileSync(join(directory,'index.html'),'utf8');
   const chunks=asLines(original);
   const actual=await call(ask,'read_game_file',{id:game.id,file:'index.html'});

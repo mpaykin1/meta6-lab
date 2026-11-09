@@ -1,11 +1,32 @@
 import assert from 'node:assert/strict';
-import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {randomUUID} from 'node:crypto';
+import {createRequire} from 'node:module';
 
+// KONTUR guard invokes every permanent mutation on fresh Node runners.
+// Bootstrap the free test dependencies instead of silently skipping traps.
+const repositoryRoot=fileURLToPath(new URL('../../',import.meta.url));
+const require=createRequire(import.meta.url);
+let missingPackages=false;
+try {require.resolve('playwright');require.resolve('pngjs');}
+catch {missingPackages=true;}
+if(missingPackages) {
+  const install=spawnSync('npm',['install','--no-save','--no-package-lock',
+    'playwright@1.56.1','pngjs@7.0.0'],{cwd:repositoryRoot,stdio:'inherit',timeout:90000});
+  assert.equal(install.status,0,'Permanent mutation could not install browser test libraries');
+}
+const {chromium}=require('playwright');
+if(!existsSync(chromium.executablePath()) &&
+   !existsSync('/usr/bin/google-chrome') &&
+   !existsSync('/opt/google/chrome/chrome')) {
+  const install=spawnSync('npx',['--no-install','playwright','install','chromium'],
+    {cwd:repositoryRoot,stdio:'inherit',timeout:90000});
+  assert.equal(install.status,0,'Permanent mutation could not install Chromium');
+}
 const checker=fileURLToPath(new URL('./verify-storefront.mjs',import.meta.url));
 const checkerSource=readFileSync(checker,'utf8');
 const scratch=mkdtempSync(join(tmpdir(),'p1-storefront-mutate-'));

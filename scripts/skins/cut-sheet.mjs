@@ -70,8 +70,38 @@ function detectRows(mask,w,h,n) {
     else if(start>=0){if(y-start>=minRun)gaps.push({a:start,b:y,width:y-start});start=-1;}
   }
   // Пять авторских рядов: выбираем именно разделительные полосы фона.
-  const candidates=gaps.sort((a,b)=>b.width-a.width).slice(0,n-1).sort((a,b)=>a.a-b.a);
-  if(candidates.length!==n-1)fail('не найдено '+n+' отдельных рядов, найдено '+(candidates.length+1)+'. Проверьте промежутки и ореолы');
+  let candidates=gaps.sort((a,b)=>b.width-a.width).slice(0,n-1).sort((a,b)=>a.a-b.a);
+  if(candidates.length!==n-1) {
+    // Тонкие провода могут пересечь визуальный зазор и обнулить его длину:
+    // восстанавливаем разделители из минимумов проекции вместо жёсткого "0 px".
+    const low=Math.max(2,Math.floor(w*.005)),soft=[];
+    let a=-1;
+    for(let y=first;y<=last+1;y++){
+      if(y<=last&&activity[y]<=low){if(a<0)a=y;}
+      else if(a>=0){if(y-a>=minRun)soft.push({a,b:y,width:y-a});a=-1;}
+    }
+    const picked=[];
+    for(const g of [...soft,...gaps].sort((a,b)=>b.width-a.width)){
+      const mid=(g.a+g.b)/2;
+      if(picked.every(v=>Math.abs(mid-(v.a+v.b)/2)>=h*.09))picked.push(g);
+      if(picked.length===n-1)break;
+    }
+    if(picked.length<n-1){
+      const span=last-first;
+      for(let i=1;i<n;i++){
+        const desired=first+span*i/n;
+        let best=-1,cost=Infinity;
+        for(let y=Math.max(first+5,Math.floor(desired-span*.13));y<Math.min(last-5,desired+span*.13);y++){
+          const score=activity[y]+Math.abs(y-desired)*w*.0007;
+          if(picked.every(v=>Math.abs(y-(v.a+v.b)/2)>=h*.08) && score<cost){cost=score;best=y;}
+        }
+        if(best>=0)picked.push({a:best,b:best,width:0});
+        if(picked.length===n-1)break;
+      }
+    }
+    candidates=picked.sort((a,b)=>a.a-b.a);
+  }
+  if(candidates.length!==n-1)fail('не найдены '+n+' рядов; видимые пустые промежутки: '+gaps.map(g=>g.a+'-'+g.b).join(', '));
   const edges=[first,...candidates.map(g=>Math.floor((g.a+g.b)/2)),last+1];
   const bands=[];
   for(let i=0;i<n;i++){

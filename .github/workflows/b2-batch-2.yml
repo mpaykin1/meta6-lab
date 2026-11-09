@@ -1,0 +1,47 @@
+name: B2 batch 2 — actual bot movement and honesty
+on:
+  push:
+    branches: [lab/bot-batch-2]
+  pull_request:
+    paths:
+      - 'games/broken-city/**'
+      - 'games/rainbow-acceleration/**'
+      - 'games/sumerki-i-pepel-2/**'
+      - 'scripts/meta-bot-adapters-2/**'
+      - '.github/workflows/b2-batch-2.yml'
+permissions:
+  contents: read
+jobs:
+  honesty:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Adapter and strategy syntax
+        run: |
+          for id in broken-city rainbow-acceleration sumerki-i-pepel-2; do
+            node --check games/$id/bot-adapter.js
+            node --check games/$id/bot-strategy.mjs
+            node --check scripts/meta-bot-adapters-2/verify-sources.mjs
+          done
+      - name: Read-only snapshots, CI and non-CI
+        run: node scripts/meta-bot-adapters-2/verify-sources.mjs
+      - name: Four real mutations including CI deception
+        run: node scripts/meta-bot-adapters-2/mutate-adapters.mjs
+  movement:
+    needs: honesty
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Real input moves actual hero; observer matches engine
+        run: node scripts/meta-bot-adapters-2/verify-motion.mjs

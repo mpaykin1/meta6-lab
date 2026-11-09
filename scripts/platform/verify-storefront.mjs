@@ -103,8 +103,15 @@ async function checkCanvas(page) {
     const canvas=canvases.nth(i);
     const dimensions=await canvas.evaluate(c=>({w:c.width,h:c.height}));
     const rect=await canvas.boundingBox();
-    if(!rect || rect.width<8 || rect.height<8 || dimensions.w<8 || dimensions.h<8) {
-      faults.push('canvas '+i+' has zero/tiny size');continue;
+    const vp=page.viewportSize();
+    const aspect=dimensions.w/dimensions.h;
+    // Ignore tiny UI/sprite canvases: P1 requires the actual game surface.
+    // Pixel-art render targets can be low-resolution, provided they are
+    // displayed across a substantial part of the viewport.
+    if(!rect || dimensions.h<32 || dimensions.w<64 ||
+       aspect<0.4 || aspect>4 ||
+       rect.width*rect.height<vp.width*vp.height*0.15) {
+      faults.push('canvas '+i+' is a small UI/sprite surface');continue;
     }
     try {
       // An animated canvas is never geometrically stable. locator.screenshot()

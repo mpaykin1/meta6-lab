@@ -1,0 +1,2979 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Сумеречный архипелаг</title>
+
+<style>
+@font-face{font-family:"Pixelify Sans";src:url("../twilight-isles/fonts/pixelify-sans-latin-wght-normal.woff2") format("woff2");font-style:normal;font-weight:400 700;font-display:swap}
+@font-face{font-family:"Pixelify Sans";src:url("../twilight-isles/fonts/pixelify-sans-cyrillic-wght-normal.woff2") format("woff2");font-style:normal;font-weight:400 700;font-display:swap;unicode-range:U+0400-052F,U+20BD,U+2116}
+:root{--ink:#120d1c;--ink-soft:rgba(18,13,28,.72);--paper:#f8eec8;--paper-dim:#b9ad93;--gold:#ffc845;--ember:#ff8a3d;--px:3;
+  --font:"Pixelify Sans","Lucida Console","Courier New",monospace}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--ink);color:var(--paper);font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;outline:none}
+#load{position:fixed;inset:0;display:grid;place-items:center;background:var(--ink);z-index:30;transition:opacity .8s}
+#load i{display:block;width:min(260px,60vw);height:10px;box-shadow:inset 0 0 0 2px rgba(248,238,200,.35)}
+#load b{display:block;height:100%;width:8%;background:var(--gold);box-shadow:0 0 18px var(--ember);transition:width .3s}
+#load .err{font-size:18px;max-width:32ch;text-align:center}
+#hud{position:fixed;inset:0;pointer-events:none;z-index:5}
+.tl{position:absolute;left:calc(14px + env(safe-area-inset-left));top:calc(12px + env(safe-area-inset-top));display:flex;flex-direction:column;gap:8px}
+.hearts{display:flex;gap:2px}
+.heart{display:block;width:calc(16px*var(--px));height:calc(16px*var(--px));background-image:var(--img-hearts);background-size:calc(48px*var(--px)) calc(16px*var(--px));image-rendering:pixelated;filter:drop-shadow(0 3px 0 var(--ink))}
+.heart[data-v="2"]{background-position:0 0}.heart[data-v="1"]{background-position:calc(-16px*var(--px)) 0}.heart[data-v="0"]{background-position:calc(-32px*var(--px)) 0}
+.heart.hit{animation:hit .5s steps(2) 1}@keyframes hit{50%{transform:translateY(-6px) scale(1.15)}}
+.coins{display:flex;align-items:center;gap:8px}
+.coin{display:block;width:calc(14px*var(--px));height:calc(14px*var(--px));background-image:var(--img-coin);background-size:calc(56px*var(--px)) calc(14px*var(--px));image-rendering:pixelated;animation:spin .6s steps(4) infinite;filter:drop-shadow(0 3px 0 var(--ink)) drop-shadow(0 0 8px rgba(255,170,60,.6))}
+@keyframes spin{to{background-position:calc(-56px*var(--px)) 0}}
+.bar{width:120px;height:10px;background:var(--ink-soft);box-shadow:inset 0 0 0 2px rgba(248,238,200,.3)}
+.bar b{display:block;height:100%;width:0;background:linear-gradient(var(--gold),#e8902e);box-shadow:0 0 12px rgba(255,170,60,.7);transition:width .5s}
+.tr{position:absolute;right:calc(12px + env(safe-area-inset-right));top:calc(12px + env(safe-area-inset-top));display:flex;gap:10px;align-items:flex-start;pointer-events:auto}
+.sbar{display:block;width:120px;height:7px;background:var(--ink-soft);box-shadow:inset 0 0 0 2px rgba(248,238,200,.25)}
+#sbar{display:block;height:100%;width:100%;background:linear-gradient(#8fe4ff,#3a9bd8);box-shadow:0 0 10px rgba(90,200,255,.6);transition:width .2s}
+#sbar.low{background:linear-gradient(#ff9a9a,#d84a4a);animation:blink .5s steps(2) infinite}@keyframes blink{50%{opacity:.4}}
+#lh{display:flex;gap:4px}#lh i{display:block;width:10px;height:14px;background:#3a2c55;box-shadow:0 0 0 2px var(--ink);clip-path:polygon(50% 0,100% 45%,80% 100%,20% 100%,0 45%)}
+#lh i.on{background:linear-gradient(#fff2b0,#ffb03d 50%,#ff6a2a);filter:drop-shadow(0 0 6px #ffb03d)}
+.rel{display:flex;gap:6px}.rel i{display:block;width:22px;height:22px;border-radius:50%;box-shadow:0 0 0 2px var(--ink),0 0 12px currentColor}
+#rFins{background:radial-gradient(#c6f4ff,#3fb2c2);color:#3fd8e2}#rBub{background:radial-gradient(#ffffff,#7fc8f0);color:#9fdcff}
+#hint{position:absolute;left:18%;bottom:22%;width:64px;height:64px;pointer-events:none;animation:sw 1.8s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(255,200,69,.8))}
+@keyframes sw{0%{transform:translate(0,0);opacity:0}20%{opacity:1}70%{transform:translate(0,-60px);opacity:1}100%{transform:translate(0,-60px);opacity:0}}
+#mm{width:104px;height:104px;image-rendering:pixelated;background:var(--ink);box-shadow:0 0 0 3px #26324e,0 0 0 5px var(--ink),0 6px 0 5px rgba(0,0,0,.35)}
+.ib{width:48px;height:48px;border:0;padding:0;border-radius:10px;background:var(--ink-soft);box-shadow:inset 0 0 0 2px rgba(248,238,200,.4),0 4px 0 rgba(0,0,0,.45);display:grid;place-items:center;cursor:pointer;pointer-events:auto;touch-action:none}
+.ib svg{width:26px;height:26px;image-rendering:pixelated}
+#pad{position:absolute;right:calc(18px + env(safe-area-inset-right));bottom:calc(22px + env(safe-area-inset-bottom));width:230px;height:210px;pointer-events:none}
+.tb{position:absolute;border:0;padding:0;border-radius:50%;pointer-events:auto;touch-action:none;display:grid;place-items:center;cursor:pointer;
+  box-shadow:inset 0 -6px 0 rgba(0,0,0,.22),inset 0 4px 0 rgba(255,255,255,.35),0 6px 0 rgba(0,0,0,.45),0 0 26px rgba(255,140,60,.25)}
+.tb svg{width:46%;height:46%;image-rendering:pixelated}
+.tb.on{transform:translateY(3px) scale(.96)}
+#bAtk{right:0;bottom:46px;width:112px;height:112px;background:radial-gradient(circle at 45% 35%,#ffa25a,#f0731f 70%)}
+#bJmp{right:122px;bottom:0;width:88px;height:88px;background:radial-gradient(circle at 45% 35%,#ffe27a,#f2bd1d 70%)}
+#bAtk::after{content:"";position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(rgba(255,240,200,.9) calc(var(--cd,1)*360deg),transparent 0);
+  -webkit-mask:radial-gradient(closest-side,transparent 88%,#000 90%);mask:radial-gradient(closest-side,transparent 88%,#000 90%);opacity:.85}
+#bMute{position:absolute;right:0;bottom:-6px;width:44px;height:44px;border-radius:8px}
+#menu{position:fixed;inset:0;z-index:20;background:rgba(12,8,22,.78);backdrop-filter:blur(3px);display:flex;justify-content:center;align-items:flex-start;overflow:auto;padding:calc(24px + env(safe-area-inset-top)) 16px 30px}
+.card{width:min(560px,100%);display:flex;flex-direction:column;gap:12px}
+.card h2{margin:4px 0 0;font-size:30px;color:var(--gold);text-shadow:0 4px 0 var(--ink),0 0 24px rgba(255,138,61,.5);letter-spacing:.04em}
+.card h3{margin:10px 0 0;font-size:18px;color:var(--paper-dim);font-weight:500}
+.mb{font:600 19px var(--font);color:var(--paper);background:var(--ink-soft);border:0;padding:12px 16px;text-align:left;cursor:pointer;box-shadow:inset 0 0 0 2px rgba(248,238,200,.35);display:flex;gap:12px;align-items:center}
+.mb:hover,.mb:focus-visible{box-shadow:inset 0 0 0 2px var(--gold);outline:none}
+.mb small{display:block;font-size:14px;font-weight:400;color:var(--paper-dim)}
+.mb .sw{width:30px;height:30px;flex:none;image-rendering:pixelated;box-shadow:0 0 0 2px var(--ink)}
+.mb.gold{background:var(--gold);color:var(--ink)}
+.help{font-size:15px;line-height:1.5;color:var(--paper);background:var(--ink-soft);padding:12px 16px}
+#play{position:fixed;inset:0;z-index:15;display:grid;place-items:center;background:radial-gradient(transparent 30%,rgba(10,6,20,.55));cursor:pointer}
+#play div{width:110px;height:110px;border-radius:50%;background:var(--gold);display:grid;place-items:center;box-shadow:0 8px 0 rgba(0,0,0,.45),0 0 50px rgba(255,138,61,.7);animation:pl 2.4s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.07);box-shadow:0 8px 0 rgba(0,0,0,.45),0 0 80px rgba(255,79,216,.55)}}
+@media (max-width:700px){:root{--px:2}#mm{width:76px;height:76px}#pad{transform:scale(.86);transform-origin:100% 100%}}
+</style></head><body>
+<canvas id="c" tabindex="0" aria-label="Игра"></canvas>
+<div id="load"><i><b id="lbar"></b></i></div>
+<div id="hud" hidden>
+  <div class="tl"><div class="hearts" id="hearts"></div><div class="coins"><i class="coin"></i><span class="bar"><b id="cbar"></b></span></div><span class="sbar"><b id="sbar"></b></span><div id="lh"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="rel"><i id="rFins" hidden></i><i id="rBub" hidden></i></div></div>
+  <svg id="hint" hidden viewBox="0 0 12 12" shape-rendering="crispEdges"><path fill="#120d1c" d="M4 1h2v4h1v-1h1v1h1v1h1v4H9v1H4v-1H3V8H2V6h2z"/><path fill="#ffe2ae" d="M5 2v5h1V5h1v2h1V6h1v4H5V9H4V8H3V7h2V2z"/></svg>
+  <div class="tr"><canvas id="mm" width="104" height="104" aria-label="Карта"></canvas>
+    <button class="ib" id="bMenu" aria-label="Меню"><svg viewBox="0 0 8 8" shape-rendering="crispEdges"><path fill="#f8eec8" d="M1 1h6v1H1zM1 3.5h6v1H1zM1 6h6v1H1z"/></svg></button></div>
+  <div id="pad">
+    <button class="tb" id="bJmp" aria-label="Прыжок"><svg viewBox="0 0 9 9" shape-rendering="crispEdges"><path fill="#120d1c" d="M4 1h1v1h1v1h1v1H5v4H4V4H2V3h1V2h1z"/></svg></button>
+    <button class="tb" id="bAtk" aria-label="Удар"><svg viewBox="0 0 10 10" shape-rendering="crispEdges"><path fill="#120d1c" d="M2 3h6v1h1v4H8v1H3V8H2V7H1V4h1z"/><path fill="#ffd9b0" d="M3 4h5v3H7v1H4V7H3z"/><path fill="#c97a4a" d="M4 4h1v2H4zM6 4h1v2H6z"/></svg></button>
+    <button class="ib" id="bMute" aria-label="Звук"><svg viewBox="0 0 9 9" shape-rendering="crispEdges"><path fill="#f8eec8" d="M1 3h2l2-2h1v7H5L3 6H1z"/><path id="wav" fill="#f8eec8" d="M7 3h1v3H7z"/></svg></button>
+  </div>
+</div>
+<div id="play" hidden aria-label="Играть" role="button"><div><svg width="46" height="46" viewBox="0 0 8 8" shape-rendering="crispEdges"><path fill="#120d1c" d="M2 1h1v1h1v1h1v1h1v1H5v1H4v1H3v1H2z"/></svg></div></div>
+<div id="menu" hidden><div class="card">
+  <h2 id="mTitle">Сумеречный архипелаг</h2>
+  <button class="mb gold" id="mResume">Продолжить</button>
+  <div class="help" id="mGoal"></div>
+  <h3 id="hIsles">Острова</h3>
+  <div id="mIsles" style="display:flex;flex-direction:column;gap:8px"></div>
+  <h3 id="hWhale">Кит</h3>
+  <button class="mb" id="mWhale">Позвать кита</button>
+  <button class="mb" id="mTide">Новый прилив</button>
+  <h3 id="hCtrl">Управление</h3>
+  <div class="help" id="mHelp"></div>
+</div></div>
+<script type="importmap">{"imports":{"three":"../twilight-isles/lib/three.module.js","three/addons/":"../twilight-isles/lib/jsm/"}}</script>
+<script type="module">
+// =============================================================================
+//  ОСТРОВ СУМЕРЕК · АРХИПЕЛАГ — ассет-пак расширения
+//  острова с разными ландшафтами · заплыв между ними · кит (3D + 2.5D + 2D)
+//  код рендера, воды, неба и пост-обработки — из «Острова сумерек» без изменений
+// =============================================================================
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+const ASSETS = {"atlas": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAwCAYAAADZ9HK+AAASZ0lEQVR42u1ce1BUV57+VNSWGGlooVGx1W6NoBNFxUaSdSQKZqNmTVIaw5hx2EkpZmI2ceLujM66ZlNr2K1JjWviVBA3U5ZrYhLdPGYnOkFASEzQFhXjg2e3dANK0zy6xSASGfeP5nc459x7+zFslakUv6ou7z3n3Nvd9/s9vt93Goc89NrCu+izqeYR+KrwFh7OGIU6Rw8Nw+3ohdE8DLy5Hb0AgPmXOmE26ti4ZdJ9OG5rE8Zo3O78FrIlrdvBjmtr67E/P0+Yj44xAgC2bN2sWBcdY8TudVHC+oKiBpRc8eL1Fx9EKGZOncuO293N7DjGGB/S9Y/sO4pWmxe62FF4dL0eANizczt6cfPqbXR7bmHltnGKa+scPfDe+CfEWkwAgLQfxaLskgcA4LG7Qnr/vJY3Nefu3/AyOvP/M+B8hPyBeGfQOnc7evFwxih8VXhLAfRxW1vQDy07SW1tPZz1LkyabMLO3/67ADABX1tbL9wje8NG7M/Pg72ul429c6wJ6TP07HzbWxfx3GMTgjgAEJeUgaqSg8I4OYPsCHFJGWipLGTnrTYvO/58nxeWJZEsOAh8+flSQLkdvRg51g92l7MOzmLxs0VOmopYiwlpP4oFAJRd8sBjdzGHISdxNPmE647V+fDCIhMcdidi++bZWN/autZbmGN3+h1gdYYehwu9DFg10L8q9H8Ro3kYNm0wYE++H2iHuxtmo45FOIHqcHf7H3DfOUW/w93N5hzubiT1vdekySYBaAIYAAqPf8HmyZz1LuG+AATw7XXtCvD5tfR557mbUVmxB/MzlgprzxQWYFHWJuYY5Ag8+OQkY616ljXtRV0C6ACwcts41Dl64Hb0ModptfnnJizrB7vLWadwUI/dhfeLi9kaOTsUXGhWXDNNPwIFF5oxZ0n/PI3JFgEAhwu9DFwCnMqB0TyMeSuVAVovP1xyBh54OepDNQKYdw5+7kTBUUTHGFFyRT1VvnOsKeD9S674v8OWmVaYZgI3W8X7JCUnostTA9NMK84UFqjew33dK4APAKOnjAQA/Dp3PM47uljk8+DrYv1BZlkSCe8N/73UwOczgZaNWfm45pzd3hh0PkJrkiKeTOYAqulU4gJ81GmBL6d2Ap4ApnneIWgOQMi1XosfyMDzRnOUHVyXbWzO1Oc4m+YcZkCvztDjvKMLn77uDQo+ANiLumCYL2aAQGCrOcqCUWeEmn5/yRHNazvTVyk4wbCJj0x6dap5BNo7eoWJv18dA2eHyAFozVTzCDQ47gAAFg4ZygDv8H0ngA8AMfoROFvTKdw702qAo8nvYP/7RTmS56XAWe+Cz+vDiYKjqLfXMoBPnSxF8rwUfPLhIdTba9lccso8VF6qwH3fdgF/6UVH+62ArzfercPkWB3qPd1YkmrEtrcuovdmD1IWJgZ1nJ4uH3q6fIidPANRcRNQ881lRI0Zjp4uH967WusvBx296MFf/Gl1wkicOdIJRA/F6gw9hkcD1V/eFMCnLHHyz1EYro8BAAzXxyDWYkLGj6dieuJ4tN8Zjq4Onyb4ADC7pRwdnbdx5qoXusRpiL9xDddqGtHZdgOdbTfwP8U1SJ45HidPXEaXaQruu1oFR5MPHZ230dF5G0Ms2Q/dlVO8zPr5csB3AACwxvMdO3a4u5FpNbCIz7QaWGnQsq9b7irInZzqqRtYuepJRab48Qibor7LTsiXqZIrXoEbZK7NQGVFFZKSRUeQx9TWAMA/Xz0hRPnMZwzs+NX/srBMQNnAXtR//uh6PZydv1MwfgJ60uLFAgF09nGB9/Kfxx8vtfudbdOj7Lo5v3wenQf2a7P+ddk4/7u3hbEhD7228K5am6da8xy9ijHeAeQHz4Oi5QQjkx/DiYKjDHg+1fMpP3vDRtW52qKPMRB7/+DPwlovdwHPFH0upPixVj075ls/uTUkM8x/VQCdSgCVA7Vx3n6R5BnQ948AIDD/QK0fzwXYnOc7zYgLBDzxhTON11SJH9m1vnm1OQB47rEJOG5rg6utO2jLFwzYqpKDcF/3wjhOr6kD8OBTHSfWr4sdxcCn6OdJdZ2jh7WGVA5kQPlzNU4gnz814puwar5CB3A7ejHVDAF03hnUop5I4sMZo4DTIsD61KdhtzfCe/Z4SGRRywj46isViI4x4kTBUTyydBkbH58wnrF9k0GnqQXIzii/d2ZfO9fu9rd7xnF6ocVLTH9WATpvj67X4/N9/ee62FFCByAH0ugpI5nD/Dp3PHbvEu/3zD+s8WemNz9gY3+3ch4A4I+fnlX9DPsPlyN7dQqu1TT2f9cmH+6fOJ/pAAoRinQAEnT4LCCnfFojdwVfFd7CNi7yCXwAaIq0YEKXHZlWg6oySEYAO+tdDFwa52v//vw8xgd4R0ifoWdZxu78VnAGOQO52roVTkhAm2ZaFZ/Nddmm0AFknoAofzvH13a5AwCU6Z+chE/zkxYvZsBPWrwYzuJixFpMDPhYi0nBF06euIypY0fh5InL6p2PSu+v4AC8l1IGkPUAuRUk8ei55mGCDjByykx/bS4/C5NBB7NRpxp5JMQcvHgL0TFGdLS7VSVgXgaWpeJHli4LiwOYDDrBCQBgx5ZUzM9YqtoOjh5rEto/Kg9CDb50QUH6eEWQ5wa8Mkj8oLziZXQ56/Be/vP4yYa3VdO9zAP4rBBzfM+AOABzALejlyl8PNC8bKmmB6T3lQC+7yeRhVIxvw/Ac4XjtjZU3olTAC1r/iQPA8C0aZMFRzjw8gNh9/5aewFqVllRpakDAMD83DwF45cVQar38rllSSSGx+5h7F5LA5DlYNo3AIBl+34WlvYvz0fwqV4GnwDXAn+qeYSCAzjc3SzytYghrwdUfg2sXPUkA1ZLDZSFo/69gHbN+4eyN2BODRwhScmJiIx9AC2VhUKZoDGKcDnt80SP5wcygTTMdwVV+5zFxWyfgNaRPHzV5sILi0x+6ZfT/uV9Aa35CJnkUSmgyKdUr0UE10jRTymf1/v5vQLljuAY7M/PY22eLPvym0WhGr2HvDeQPkOv2A/QavH4vp/G+DJBxwQqpX1SA8HtDcjiz3lHF+aYI3He0YXyCgRV/9Q6ADqeViNq/HLNl/cA5PkhluyH7spybzi6wBquDeQ3fNTYPjkDzWdaDXCOXyXUdbnfJ+KnZtExRtzncw2oBu7Ykqoq8AQzcpBnij5nIMv6vxbxI/CJA4TK9tUsO7JsYBxg19eP3+VbFgDCBww25tnZjJIrXhZtct9PaiC/Rt6QkZl7qOZq68YHNmUfbHd19Ee5KZodJ4z1v09ja/9nfHvzOpRX+jeO4g2jAQDNbTcV94w3jMYFewuWp03z36PFn0Z3vvspuy/dO5zzsvY77Dgtxr8188TuLwEAqdYHkD7dID6zanFPJbreiaTpE9l3/dNx8XkEmgOACErvfKrnxSB5jj+vc/QgPQhAoTDzUHUC2bnoWjVgedBpvPTcdVRWN2BF5iw2X17ZBLe3C0Z9ZEDwAWC2pZ+wXrC3sHP5fcM5L6n1YWtaf8eTW+bGQI1AV7OqK3YkzrCw86HU9h0u9AoiEH8sixrkDLSGIpsiOpgFIofEF9Reao5B4OcdsqlGPx9xFlM0VmTOQsJYHXsBEMBPSZogAE/gKzZh+sDn328gxwT+aVsNfvXTNADAaVuNZvTzTiMDXFndoPl8efABIIIXeNyO8I/XQPvnXsFImhb4Wps7NKcmL1NUL5o7TjMbkMPwmSDeMBrNbTcRbxiNn+fux+sbVgkZAQAS4qLQ2OJDQlyUYowHUn7wdlcHKqsbkDR9ogJ4GicgKfIdtlPIsZ2C2bqAlYWy9juK1M+XDnpfiylaAXAwG8qTP2Oph5FBtTF5LR1rARpMm+c5gdwpyNHPj/OZoLG1G42t3ewBl567zrIBH+X8+kVzx2FjlpVdQ1H+h63ZiDeMxmxLHHMIPuU3tvgY6Es370ZCXBR7+JXVDcjbniM4gTwmr1VL+1mb1sFsXQCH7RQctlPILXMz8E/banDaVoNDew4g58VdigzBB4PFFM1egcrDUGOpx8/6Sz0wGXQMcHmMzgl8k0GnuU/ACz2hmKwZ8IDzwPPzvBPYXR1YNHccEsbqYDFFY2OWVQE8b7yTaFlz2038YWu2QPgEgWnXS/7S0wdw3vYczLbEMWDlMR70vO05WJ42DZXVDZi19reKe6daH0DWpnXI2rQOh/YcUJQDs3UBc5KQSq6KE5AjDE2foYex1MOikYAlkM1GHXMCmiPyRQ7x15gaXyCgKaMsXTIRS5dMVJ0LBVQtUshHCZ/WCXh5jGp+QlyUYm552jQGNPEJHny6lgedOom87TkwWxcwkNUsa9M65hSpVr/q+clLC4W5gdhQPhWbjTpkWg0C+DSuBno47RsvC4diS5dMREFRAwqKGpgTBPJwIniyM5AT8J0CHxGNLT5csLegue0mmttuYlv+EZRXNmFb/hFFR9DY4sPSzbsBAJ+V1QrZgb8+b3sOdn94VLh+tiUOjS0+lgU+K6tljmC2LmDpnV6ByN4Tu79kzjBQi1Bj5iaDTvPXPAS6/Ps/u/NbYWeONIBQCeBfa3KPTXU9UCskG0/4Xt+wSviXQIw3jEZCXBQrCwSe2vVGfaTm9eQ0/PVkn7y0kGkA5AS5ANKnG1BS3eZ3hjSjwBmSpk8MyPrV7OOPS5A4w4Kk6RP9GYA3ferTmLvs8YBAye2Y1tpwfgWstolDJaCgKPgXVKvpdlcHY/1q82o8IVDrR9mCP///vJ7AVzO5W5Bbv3BM0AH49krez+ej2GzUsVc4Sl04RpmEPg+VALU5GXhe3CGjlpAvDzJv4CNUTQOgF60jLkBt4UCvD8VIIcwtcyuUQbXePpAyKncDEXwUO2xvC/v5twPU+HB7/0AtIJUNXgOQgebfiy9NKzJnafb8asqfzB34np8idHnaNNXoVovogV7P13K1to4iv6z9Dg7tOYBDGuSPL3lqgGutHcq3WZlWAyZ02VFbflZI9XwtDybIBNMBAv12kO//1dpAGg/0vovmjmORD4C1hLL6x5OzlKQJjMQRWaNUzWsBJADx/w70ehYQ0w2M3ZMSKIs+e9/azFpDvnOQ+U5ldQN7KTaxuLnK6gYlB6D9/PQZegFsNZNJnryW5wDU9gXKGuQEvKPxn0ELfALW7upQrff8Od8VkDPQfgDP/KmFI9JHdZ26ABKHBnp9+nQDS+tl7Xf8SuCLuwTwqQSQffPuPwoaQcBdSxUn4DlDhJx6w9/PB9vpC7cklFzxBvwNX7DNIBlkigQ+Ihpbu7Exy6ooE1QeeCZPzJ2XebUEIHlzaKDX833/aVtNv8jz0zSWAUgRJCK4963N6Kn3BNzsCUoCg0Ul/8edvFM43N0h9/ThEkW6v/zSuraxtVuzzgfSDlZkzlLd/SuvbBLYOp+yZWAHer1WzSclkM8GagQwXEIo25B/+bc9d7UmPz3yMbZs3Yxnn17OdtUaW7tRUlwEAHgjdxcahvb/2Vd8ihm+Ri9uNYs/03rwqWR4XP6/gpTn28/ZhmDQ7plFAIH/IAMAduz8vWJevmb1K4tRdbUdzeUOxdqLH1UIztF29jQAwDAvdRCBe+0AZScDbygUHv8i6E0IfMoC5AQ0njglBlVX2xFrGgOPS4/Sc9fx1PonBp/+98CGzE5ecncgN6AS8OBTySj5zV5/vVv+GFasTWZO4XHd6APfXwYWLpqMqqvtuPhRxWAJuNcO8N8f/Ik5wBu5u7By1ZP419+8INT8hLE67Nj5ewUnKCkuwkv/8Rq72Uf7PsHa7T9nNZ5S/cycLPgavYhK0DPwyTGu5L8/6AD3sgSo/QcM2et/FTInGBUfg1vN7Vj9ymLsOPaqQPBKz13HL/b+ktV+OSsM2vfAAWQyFy4nIPDVOABf5/k1fEcwaD8gDqBW49XawUEO8D3KAGo1f9/edwQdQMveyN2laPX4Gh+fYsblvYcAABvf24qqq+1YuGiyoBu0n7MNonCvdYBgNV/+mz2eMxAHAMDATt+Zw7JB6bnrOFT1JnOKL0vr2bqZOVmDCPwQdACe9FHdJ+GHzvkSQeRw0H5AHEBN+CFdgBQ/Xg2k46ajfx7kAPeaA5Cpaf8HP/wMsk7Am3tKI/J+kstSP4FPkb7j2KtsLXUHg1Lw97ANDEf754/r4WV1nmp8rGkMEqfEMPD51pAvFatfWYy9awdJ4D0tAZl/+ywrAS3N15GcMk9zcUX5WcTFi//rdc/fRApR73HdYKofyb9abSEwuBv4g+AA8SlmQevnt3xlAUjeLRx0gHtr/wdVGpffCBg38AAAAABJRU5ErkJggg==", "atlasNames": ["grass", "dirt", "stone", "wood", "sand", "leaves", "water", "brick", "grass_side", "bark", "log_top", "snow", "frozen_dirt", "snow_side", "ice", "packed_snow", "frost_brick", "pine_needles"], "atlasGrid": [8, 3], "coin": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAQCAYAAACm53kpAAABW0lEQVR42mNgGAUjGzDikvBWE/qPzN966x0jKQZTqh/ZDEr0ErKfBZfGLWtMUMR9Qs4Q7RhvNaH/2PST4hFvNaH/W051MBxuq2Ng2CBEul4i7WfC0HjzLdzzh5dcYji85BIDLEDKA9gwQhar5TffYugnRi81ACzgGHR3Yrgfm/0YKYDhsjtcEwwcXnKJwTZGj3hXoJmBbh7R4NEasgPicLkkUfYz4Uo2Knq8DLZVTQy2MXoMKnq8cHFSYtK2qgliDimBR0WA7AeCAYAvtO5c+gzx0AB5hJaAaaRXgxgBgC+WScnLA51aiLWfCbme9Ak5A9csqafIcLitDsPTnRt+EawKYXoOt9UxSOopDlggwPyAD7Dgi2VYKCJXJ0SXwkg1x+EllxhOXPlHP58/WgO33zZGD6/bGXE1hMoD2DBinpSGEDb95DRmuisuMBy884dkvcTaP+KbwqNgpAMANRbYfFHFLHUAAAAASUVORK5CYII=", "hearts": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAABg0lEQVR42u2VMUvDQBiG39MOQlwkKBqpg0MWxU2HVgShderg3qHgvyi451+Ii79CJ8EO1qnoEouERtOSkq2I2zklvbtcLpcWxCHvdh/33L3fd9/dAaVKLSXCDmrre5Qd92YjooqLWpa3TJubF0QuUcUBoMJu/nR1xi1Yv3mkAHB3tM/F2wNQ0YSKN07n8XAyRm2Y5i3TpgfHJ3xGfVAAYOPhZAwANE6CpDZvNoD7hwTwXj65NV+/fgAAThRwFc7iL1xu40TG8D3hWfPxvK3tHW6+yE99H0HkkgoXbTaAVgeec5vZc4e7a0kSKUn48HtVu59Zk6LhLK1wo1YHXv1cCWSa1+RVEqte6BKzbSC2jap98vhLyQmw7SO7A3nVj9tH+gqJF1bHvIoXE5CZL5IEaz7VQr3ZiLQHHwuZV/E65uPn8a3/rFV56T/AVrJrWlwsz3wWf71haJkXT2KzWs01n77ETCWdKFjIvIwvYj4+ianv55rXqqT4i/4lb5k2FX/hUv9Nv8K/FRRcU6KYAAAAAElFTkSuQmCC", "water": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAQCAYAAACm53kpAAACIUlEQVR42tVXLW/CQBh+uqDwtXQJKIKbQi1pgt3UsoUfQIKZwvEjlmBICJoMCfhaFGIJshVX22QS26kjb6/38V63Jdup9prnnveevp9Bf3Yow24HADAchDieCwBAkeXwWQ+PdwCA/e6EJkva4MtL+d8XWwBAO+qxcUF/digB4CLS2sd21EPY7WA4CAEAx3OBIstrxobdTuVZJEnFEFUcm1jUDomnfDp7XHgb/1UAnQjyALlvU9YmoE4ozhkmPpM9HLxqz43tAvQgrlttVtPKe5HluIgUF5F6Xd62dPZw8UWWYz0fXe2peYDrojaV/yM+uH16KynIFmMmlVVSU4xz8aaE+Bv8wf3yozQRRXFcEUMmt81qiv35EwDwvthCFZDGmMTvdyes5yOMJ0sAwMvrsxZvqw70AlEcAwBEkljxVAyKl/y1KkATXzvqaffpiuK4YhzFyG9UmItIEcVxrVKY+OmiAroStSkctCHgSjg+McU9x4XbrKYYT5bf5nfhW+oGdc0mTQ51TVoK1Zg2eZTkp3+ay68LWVffEPRnh5K6rDRcPuvc2OcvcMrnT+Clx+jwtj7mKoDuAFsjZEouXONNyY2Ll/w0OXPx1CtaYbcDIVJrvKmupR4mGJ0iFaxSHTRh4TMrFEw85S+yHEfVA7htrs4rXHg5H9DWWA07Dj+dDdT+xAevHYY4MeozZbkEbIJXuz7fHOMU4C+MtE35XdnetL4ABT3ujEkQefgAAAAASUVORK5CYII=", "hero": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAAAYCAYAAAAF6fiUAAAD9UlEQVR42u1ZTUhUURT+3jgwopXRWwhPYTL1GVhExJgg6KKmpX8QgqtJAhfugxa6EXLVJogIQmYltLFy0SIjmSFhcCgQFHL8faFPIkfwZ2Qs6LUY75v7rvf9zPhUZDwwMHPvnPOd755z/84FzuVcClmE4zAqibLGa1eTCeEkSJ0lfMFtApIoa6HGMgBAtb9Ub19UUgjHthzbKBR8wU0CtC6Ro9goBHzBLQKSKGvNVT4AwLXyYssssbJRaPge1sDSr7Thz4tKSv8AQKixzHSKEmFtEOkf6ENfW4tp9hQivtfMAC+K/QN92JyeQTg2xl0fo8hmQbNUjpuB63p/4OkY+qZnHG1ihYTvPQ4Codt+gy4r8aFWBJ6OafRULlR8r1sEaBKAghBgsBEfatWJ2J0o8sUHgOjyPs4SvulmYuaEFQGyNnZrPrRcLDX03agoRtOcanuUywef4E7WSZhZSyOykzoz+F7WyOsLVxBZSuHv7w18//TVEQFaFwAiO6lDjr/8kbS99kmirOWKL4myRgLeNKeiW/NxbTvFB4DKJZwYvkATpwePjWBkJ4URYd/Sgd7dTb398qPn2FMWUOKvwZ6ygLQyD8/iZ9MM1Ac/R3x64NRkQiDfc8HnJZBb+EQmg2v6DKJteMkA6oN30PXx4TODAUKAt/uPiLI2spt1zu6YxiOg+8DgswNod0OlByEXbEMCCfnjA8C/6vuG/hJ/DZrGgT9fXh36r0dNJgQSWdLJRo82zCNH67IyLkeQVuYtB4H2gSVABqHYX5tXXcYOn2D37m5a8nAazOFO2RAoOoC2xThJlDWyWwcTLXoQiHL41k/0jCYcbWRXL2XjNPmhCk1ty1jZFmyv8sOdMnpGE4YkSCvz+Pa4hDuF3cSn9Qn+ZHANd97sZbLVYglllyOn+MJRDZg5UR9ogFQpZbLw3fucillu4Ac72qGuqgCA2fhUTtVQNwJYH2jIfLcZAy9vSkqirJXW3dUNhF4AK9srRyrnOtUl+LX3OjK/V1U8eHJy+ETc5h/saCeBMNwfvOdPIu6/BZDsn41PYTZuDAArHjsDZOoEO9odnW5o/XwJUNmiLx/1gQbH+GZkT0NItlesT6BifcK8FkSLuDFt+M1TtLpFYmMa0eV9BIrK8nKaxWP9sa3Hr08gHNsCqeucZPYT/mYy2CWh/y30ZchrVtN2omwmmXrIYeecnCAMjyGxLUN/c5UPUdjbCTN6TvF5Qa8omnNsI1sLM2a/mkwI4dhBO/Oe4LFygg3GopLCYJdk+WQXXT58Www1llnq8YRg8Xyywuc9mDRX+Sz1nCShUw7kLsErVPLaTY+hVjfLXI5zueqdNr7dTd7th/3/gJtR5LK992wAAAAASUVORK5CYII="};
+const lbar = document.getElementById('lbar');
+const setLoad = (p) => { lbar.style.width = Math.round(p * 100) + '%'; };
+setLoad(0.15);
+
+/* ---------- math kit (из игры) ---------- */
+const TAU = Math.PI * 2;
+const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+const lerp = (a, b, t) => a + (b - a) * t;
+const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+const damp = (k, dt) => 1 - Math.exp(-k * dt);
+const rr = (a, b) => a + (b - a) * Math.random();
+const angDiff = (a, b) => Math.atan2(Math.sin(b - a), Math.cos(b - a));
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function hash3(x, y, z) {
+  let h = Math.imul(x, 374761393) + Math.imul(y, 668265263) + Math.imul(z, 1274126177);
+  h = Math.imul(h ^ (h >>> 13), 1103515245);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+}
+function makeNoise(rand) {
+  const perm = new Uint8Array(512), val = new Float32Array(256), p = [];
+  for (let i = 0; i < 256; i++) { p.push(i); val[i] = rand(); }
+  for (let i = 255; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); const t = p[i]; p[i] = p[j]; p[j] = t; }
+  for (let i = 0; i < 512; i++) perm[i] = p[i & 255];
+  const n2 = (x, y) => {
+    const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+    const X = xi & 255, Y = yi & 255;
+    const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+    const a = val[perm[perm[X] + Y]], b = val[perm[perm[X + 1] + Y]];
+    const c = val[perm[perm[X] + Y + 1]], d = val[perm[perm[X + 1] + Y + 1]];
+    return lerp(lerp(a, b, u), lerp(c, d, u), v);
+  };
+  return (x, y, oct = 4) => {
+    let s = 0, amp = 0.5, f = 1, norm = 0;
+    for (let o = 0; o < oct; o++) { s += amp * n2(x * f, y * f); norm += amp; amp *= 0.5; f *= 2.03; }
+    return s / norm;
+  };
+}
+
+/* ---------- мир: одна большая воксельная сетка на весь архипелаг ---------- */
+const W = 256, D = 256, H = 40;
+const SEA = 3.8;
+let SEAL = SEA;                  // уровень воды с приливом
+const TL = {}; ASSETS.atlasNames.forEach((n, i) => { TL[n] = i; });
+const ATLAS_GRID = ASSETS.atlasGrid;
+// блоки пака: тайлы атласа игры + оттенок (новые материалы — рычагами палитры, не новыми текстурами)
+const BLOCK_DEFS = [
+  ['grass', ['grass', 'grass_side', 'dirt'], [1, 1, 1]],
+  ['dirt', 'dirt', [1, 1, 1]],
+  ['stone', 'stone', [1, 1, 1]],
+  ['sand', 'sand', [1, 1, 1]],
+  ['brick', 'brick', [1, 1, 1]],
+  ['plank', 'wood', [1, 1, 1]],
+  ['bark', ['log_top', 'bark', 'log_top'], [1, 1, 1]],
+  ['leaves', 'leaves', [1, 1, 1], { leafy: 1 }],
+  ['snow', ['snow', 'snow_side', 'frozen_dirt'], [1, 1, 1]],
+  ['packed_snow', 'packed_snow', [1, 1, 1]],
+  ['ice', 'ice', [1, 1, 1]],
+  ['pine', 'pine_needles', [1, 1, 1], { leafy: 1 }],
+  ['redrock', 'sand', [1.12, 0.6, 0.44]],
+  ['redrock2', 'dirt', [1.3, 0.72, 0.5]],
+  ['redtop', ['sand', 'dirt', 'dirt'], [1.18, 0.78, 0.5]],
+  ['scorched', 'stone', [0.4, 0.34, 0.36]],
+  ['ash', 'sand', [0.48, 0.44, 0.47]],
+  ['charred', ['log_top', 'bark', 'log_top'], [0.3, 0.24, 0.24]],
+  ['ember', 'stone', [1.5, 0.55, 0.22], { glow: 0.9 }],
+  ['lava', 'sand', [1.7, 0.62, 0.18], { glow: 1.6 }],
+  ['basalt', 'stone', [0.36, 0.34, 0.44]],
+  ['moss', ['grass', 'stone', 'stone'], [0.78, 0.98, 0.78]],
+  ['mossrock', 'stone', [0.76, 0.92, 0.74]],
+  ['palm', 'leaves', [0.92, 1.15, 0.66], { leafy: 1 }],
+  ['jungle', 'leaves', [0.7, 1.0, 0.72], { leafy: 1 }],
+  ['ruin', 'brick', [0.82, 0.86, 0.72]],
+  ['gold', 'sand', [1.6, 1.1, 0.35], { glow: 0.9 }],
+  ['crystal', 'ice', [0.85, 0.5, 1.7], { glow: 1.25 }],
+  ['amethyst', 'stone', [0.62, 0.5, 0.82]],
+  ['coral', 'sand', [1.45, 0.62, 0.66]],
+];
+const BLK = [null], B = {};
+for (const [id, t, tint, ex = {}] of BLOCK_DEFS) {
+  const f = typeof t === 'string' ? [t, t, t] : t;
+  B[id] = BLK.length;
+  BLK.push({ id, faces: f.map((n) => TL[n] ?? 0), tint: new THREE.Color(tint[0], tint[1], tint[2]), leafy: ex.leafy || 0, glow: ex.glow || 0 });
+}
+const vox = new Uint8Array(W * D * H);
+const at = (x, y, z) => x + W * (z + D * y);
+const ci = (x, z) => x + z * W;
+const inb = (x, z) => x >= 0 && z >= 0 && x < W && z < D;
+const stand = new Int16Array(W * D);       // высота, на которой стоит герой (первая свободная ниша от дна)
+const isleOf = new Int8Array(W * D).fill(-1);
+const solid = (x, y, z) => (y < 0 ? true : (!inb(x, z) || y >= H) ? false : vox[at(x, y, z)] !== 0);
+const get = (x, y, z) => (inb(x, z) && y >= 0 && y < H ? vox[at(x, y, z)] : 0);
+const set = (x, y, z, b) => { if (inb(x, z) && y >= 0 && y < H) vox[at(x, y, z)] = b; };
+/* -----------------------------------------------------------------------------
+   5 · GLSL
+----------------------------------------------------------------------------- */
+const GLSL_HASH = /* glsl */`
+float h12(vec2 p){ vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
+float vnoise(vec2 p){ vec2 i = floor(p), f = fract(p); vec2 u = f * f * (3.0 - 2.0 * f);
+  return mix(mix(h12(i), h12(i + vec2(1.0, 0.0)), u.x), mix(h12(i + vec2(0.0, 1.0)), h12(i + vec2(1.0, 1.0)), u.x), u.y); }
+float fbm(vec2 p){ float s = 0.0, a = 0.5; for (int i = 0; i < 4; i++) { s += a * vnoise(p); p = p * 2.03 + 17.17; a *= 0.5; } return s; }
+`;
+const FOG_ATTEN = /* glsl */`
+  #ifdef USE_FOG
+    a *= exp(-fogDensity * fogDensity * vFogDepth * vFogDepth);
+  #endif
+`;
+
+const WATER_VERT = /* glsl */`
+varying vec3 vWorld;
+#include <fog_pars_vertex>
+void main() {
+  vec4 wp = modelMatrix * vec4(position, 1.0);
+  vWorld = wp.xyz;
+  vec4 mvPosition = viewMatrix * wp;
+  gl_Position = projectionMatrix * mvPosition;
+  #include <fog_vertex>
+}`;
+const WATER_FRAG = /* glsl */`
+uniform sampler2D uTex;
+uniform sampler2D uHeight;
+uniform float uTime, uSea;
+uniform vec3 uDeep, uShallow, uFoam, uSky, uSunCol, uSunDir;
+uniform vec4 uRipples[8];
+varying vec3 vWorld;
+#include <fog_pars_fragment>
+${GLSL_HASH}
+void main() {
+  vec2 wp = vWorld.xz;
+  vec2 pp = (floor(wp * 16.0) + 0.5) / 16.0;                  // effects live on the 16-texel grid
+  float ground = texture2D(uHeight, pp / vec2(${W}.0, ${D}.0)).r * 16.0;
+  float depth = uSea - ground;
+  float dist = length(vWorld - cameraPosition);
+  float frame = mod(floor(uTime * 4.0), 4.0);
+  vec3 tex = texture2D(uTex, vec2((fract(wp.x) + frame) * 0.25, fract(wp.y))).rgb;
+  float tl = dot(tex, vec3(0.3, 0.5, 0.2));
+  vec3 col = mix(uShallow, uDeep, smoothstep(0.25, 2.6, depth));
+  float detail = 1.0 - smoothstep(26.0, 64.0, dist);
+  col *= mix(1.0, 0.62 + tl * 1.45, detail);
+  float shore = 1.0 - smoothstep(0.05, 1.3, depth);
+  float band = fract(depth * 1.35 - uTime * 0.3 + h12(floor(pp * 2.0)) * 0.12);
+  float foam = shore * step(0.74, band) * detail + smoothstep(0.32, 0.02, depth);
+  for (int i = 0; i < 8; i++) {
+    vec4 r = uRipples[i];
+    float age = uTime - r.z;
+    if (r.w > 0.0 && age > 0.0 && age < 1.5) {
+      float ring = abs(length(pp - r.xy) - age * 1.4);
+      foam += step(ring, 0.06) * (1.0 - age / 1.5) * r.w;
+    }
+  }
+  foam = clamp(foam, 0.0, 1.0);
+  vec3 V = normalize(cameraPosition - vWorld);
+  float fres = pow(1.0 - clamp(V.y, 0.0, 1.0), 3.0);
+  col = mix(col, uSky, fres * 0.4);
+  col += uSunCol * smoothstep(0.3, 0.5, tl) * detail * 0.14;   // pixel crests catch the key light
+  vec3 Rf = reflect(-V, vec3(0.0, 1.0, 0.0));
+  float sd = max(dot(Rf, uSunDir), 0.0);
+  float glint = step(0.975, h12(pp * 3.7 + floor(uTime * 5.0))) * pow(sd, 40.0);
+  col += uSunCol * (pow(sd, 160.0) * 1.2 + glint * 3.5);
+  col = mix(col, uFoam, foam * 0.9);
+  float alpha = mix(0.42, 0.93, smoothstep(0.1, 2.0, depth));
+  alpha = max(alpha, foam * 0.95);
+  gl_FragColor = vec4(col, alpha);
+  #include <fog_fragment>
+}`;
+
+const SKY_VERT = /* glsl */`
+varying vec3 vDir;
+void main() { vDir = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
+const SKY_FRAG = /* glsl */`
+uniform vec3 uTop, uHorizon, uBottom, uSunCol, uSunDir, uMoonDir, uAuroraA, uAuroraB;
+uniform float uTime, uNight, uSunVis, uAurora;
+varying vec3 vDir;
+${GLSL_HASH}
+void main() {
+  vec3 d = normalize(vDir);
+  float h = d.y;
+  vec3 col = mix(uHorizon, uTop, pow(clamp(h, 0.0, 1.0), 0.42));
+  col = mix(col, uBottom, smoothstep(0.0, -0.22, h));
+  float s = max(dot(d, uSunDir), 0.0);
+  col += uSunCol * uSunVis * (pow(s, 1400.0) * 40.0 + pow(s, 60.0) * 0.9 + pow(s, 7.0) * 0.35);
+  if (h > -0.03) {                                    // pixel-stepped dusk clouds
+    vec2 cp = floor(d.xz / (h + 0.18) * 22.0) / 22.0;
+    float c = fbm(cp * vec2(0.9, 2.6) + vec2(uTime * 0.006, 0.0));
+    float m = smoothstep(0.55, 0.78, c) * smoothstep(-0.02, 0.06, h) * (1.0 - smoothstep(0.26, 0.55, h));
+    vec3 lit = mix(uHorizon * 0.55, uSunCol * 1.15, pow(s, 3.0) * uSunVis + 0.15);
+    col = mix(col, lit, m * 0.75);
+  }
+  if (uAurora > 0.001 && h > 0.0) {                  // aurora: pixel-stepped curtains swaying along the horizon
+    float az = atan(d.z, d.x);
+    float qa = floor(az * 120.0) / 120.0, qh = floor(h * 120.0) / 120.0;
+    float e = 0.06 + 0.045 * sin(qa * 3.0 + uTime * 0.11) + 0.025 * sin(qa * 7.0 - uTime * 0.23) + 0.015 * sin(qa * 13.0 + uTime * 0.4);
+    float above = qh - e;
+    float curtain = above > 0.0 ? exp(-above * 4.5) : exp(above * 50.0);    // hangs low: seen behind the island, not only overhead
+    float rays = 0.55 + 0.45 * sin(qa * 70.0 + sin(qa * 9.0 + uTime * 0.3) * 4.0 + uTime * 0.5);
+    float vis = (0.5 + 0.5 * sin(qa * 2.0 - uTime * 0.05)) * smoothstep(0.0, 0.05, h);
+    col += mix(uAuroraA, uAuroraB, clamp(above * 5.0, 0.0, 1.0)) * curtain * rays * vis * uAurora * 1.6;
+  }
+  vec3 sd = d * 160.0;
+  vec3 cell = floor(sd);
+  float r = fract(sin(dot(cell, vec3(12.9898, 78.233, 37.719))) * 43758.5453);
+  float tw = 0.55 + 0.45 * sin(uTime * (1.5 + r * 4.0) + r * 60.0);
+  float star = step(0.986, r) * smoothstep(0.02, 0.2, h) * step(length(fract(sd) - 0.5), 0.32);
+  col += vec3(0.85, 0.9, 1.0) * star * tw * uNight * 2.2;
+  float m2 = dot(d, uMoonDir);
+  col += vec3(0.8, 0.85, 1.0) * uNight * (step(0.99955, m2) * 2.4 + pow(max(m2, 0.0), 90.0) * 0.4);
+  gl_FragColor = vec4(col, 1.0);
+}`;
+
+const MIST_VERT = /* glsl */`
+varying vec3 vWorld; varying float vDepth;
+void main() { vec4 wp = modelMatrix * vec4(position, 1.0); vWorld = wp.xyz; vec4 mv = viewMatrix * wp; vDepth = -mv.z; gl_Position = projectionMatrix * mv; }`;
+const MIST_FRAG = /* glsl */`
+uniform sampler2D uHeight;
+uniform float uTime, uAlpha, uLayer;
+uniform vec3 uColor;
+uniform vec2 uDrift;
+varying vec3 vWorld; varying float vDepth;
+${GLSL_HASH}
+void main() {
+  vec2 cell = floor(vWorld.xz * 4.0) / 4.0;                   // quarter-block mist pixels
+  float n = smoothstep(0.42, 0.8, fbm(cell * 0.07 + uDrift * uTime));
+  float ground = texture2D(uHeight, cell / vec2(${W}.0, ${D}.0)).r * 16.0;
+  float clear = smoothstep(uLayer - 0.15, uLayer - 0.75, ground);
+  float a = n * clear * smoothstep(3.0, 11.0, vDepth) * (1.0 - smoothstep(70.0, 150.0, vDepth)) * uAlpha;
+  if (a < 0.003) discard;
+  gl_FragColor = vec4(uColor, a);
+}`;
+
+const PICK_VERT = /* glsl */`
+attribute vec3 aPos; attribute float aPhase; attribute float aAlive;
+uniform float uTime, uFrames, uCells, uFps, uBob, uSize;
+uniform vec3 uRight;
+varying vec2 vUv; varying float vAlive;
+#include <fog_pars_vertex>
+void main() {
+  float bob = sin(uTime * 2.3 + aPhase * 6.2831) * uBob;
+  vec3 c = aPos + vec3(0.0, bob, 0.0);
+  float s = uSize * aAlive;
+  vec3 wp = c + uRight * (position.x * s) + vec3(0.0, position.y * s, 0.0);
+  vec4 mvPosition = viewMatrix * vec4(wp, 1.0);
+  gl_Position = projectionMatrix * mvPosition;
+  float fr = mod(floor(uTime * uFps + aPhase * 13.0), uFrames);
+  vUv = vec2((uv.x + fr) / uCells, uv.y);
+  vAlive = aAlive;
+  #include <fog_vertex>
+}`;
+const PICK_FRAG = /* glsl */`
+uniform sampler2D uMap; uniform float uGlow;
+varying vec2 vUv; varying float vAlive;
+#include <fog_pars_fragment>
+void main() {
+  vec4 c = texture2D(uMap, vUv);
+  if (c.a < 0.5 || vAlive < 0.01) discard;
+  float l = dot(c.rgb, vec3(0.3, 0.55, 0.15));
+  gl_FragColor = vec4(c.rgb * (1.0 + uGlow * l * l * 3.0), 1.0);
+  #include <fog_fragment>
+}`;
+const HALO_FRAG = /* glsl */`
+uniform vec3 uColor; uniform float uIntensity, uTime;
+varying vec2 vUv; varying float vAlive;
+#include <fog_pars_fragment>
+void main() {
+  vec2 p = vUv * 2.0 - 1.0;
+  float a = pow(max(0.0, 1.0 - length(p)), 2.4) * uIntensity * vAlive * (0.85 + 0.15 * sin(uTime * 3.1));
+  ${FOG_ATTEN}
+  if (a < 0.002) discard;
+  gl_FragColor = vec4(uColor, a);
+}`;
+const BEAM_FRAG = /* glsl */`
+uniform vec3 uColor; uniform float uIntensity, uTime;
+varying vec2 vUv; varying float vAlive;
+#include <fog_pars_fragment>
+void main() {
+  float x = abs(vUv.x * 2.0 - 1.0);
+  float a = pow(1.0 - vUv.y, 1.6) * pow(1.0 - x, 2.0) * uIntensity * vAlive;
+  a *= 0.75 + 0.25 * sin(uTime * 2.6 + vUv.y * 9.0);
+  #ifdef USE_FOG
+    a *= exp(-fogDensity * fogDensity * vFogDepth * vFogDepth * 0.45);
+  #endif
+  if (a < 0.002) discard;
+  gl_FragColor = vec4(uColor, a);
+}`;
+
+// segmented foes: one billboard per body segment. aFx = (hit flash, frost, burn, shock), aKind = 0 shade · 1 imp · 2 warden
+/* -----------------------------------------------------------------------------
+   5b · Shaders, part two: foes (smoke / jelly bodies, auras), particles, fireflies,
+        beacon flame, ring, light beams, shadow, depth of field and the final grade
+----------------------------------------------------------------------------- */
+const SHADE_VERT = /* glsl */`
+attribute vec3 aPos; attribute float aRad; attribute float aAlpha; attribute float aSeed; attribute vec4 aFx; attribute float aKind;
+uniform vec3 uRight, uUp; uniform float uScale;
+varying vec2 vUv; varying float vAlpha; varying float vSeed; varying vec4 vFx; varying float vKind;
+#include <fog_pars_vertex>
+void main() {
+  float s = aRad * 2.0 * uScale * (1.0 + aFx.x * 0.1);       // a hit makes the segment swell for a moment
+  vec3 wp = aPos + uRight * (position.x * s) + uUp * (position.y * s);
+  vec4 mvPosition = viewMatrix * vec4(wp, 1.0);
+  gl_Position = projectionMatrix * mvPosition;
+  vUv = uv; vAlpha = aAlpha; vSeed = aSeed; vFx = aFx; vKind = aKind;
+  #include <fog_vertex>
+}`;
+const SHADE_FRAG = /* glsl */`
+uniform float uTime; uniform vec3 uCoreK[16]; uniform vec3 uRimK[16]; uniform vec4 uShapeK[16];
+varying vec2 vUv; varying float vAlpha; varying float vSeed; varying vec4 vFx; varying float vKind;
+#include <fog_pars_fragment>
+void main() {
+  int k = int(vKind + 0.5);
+  vec4 shp = uShapeK[k];                                      // spikes, pixel grid, aura gain, style
+  vec2 q = (floor(vUv * shp.y) + 0.5) / shp.y;                // pixel-art silhouette
+  vec2 p = q * 2.0 - 1.0;
+  float r = length(p), an = atan(p.y, p.x);
+  float rimK, a = vAlpha;
+  if (shp.w > 0.5) {
+    // style 1 · jelly bell: a dome with a frilled, rippling skirt; light glows through it
+    float pulse = 0.07 * sin(uTime * 3.0 + vSeed);
+    vec2 b = vec2(p.x * (1.0 + pulse), p.y + 0.16);
+    float dome = length(vec2(b.x, b.y * (b.y > 0.0 ? 1.15 : 2.8)));
+    float skirt = -0.44 + 0.07 * sin(p.x * 13.0 + uTime * 6.0 + vSeed * 3.0);
+    if (dome > 0.86 || p.y < skirt || vAlpha < 0.01) discard;
+    rimK = smoothstep(0.5, 0.84, dome);
+    a *= mix(0.6, 0.95, rimK);
+  } else {
+    // style 0 · smoke blob: a wobbling, bristling edge (spikes for the warden)
+    float spikes = shp.x * pow(abs(sin(an * 4.0 + vSeed)), 6.0);
+    float edge = 0.84 + 0.09 * sin(an * 5.0 + uTime * 4.0 + vSeed * 7.0) + 0.05 * sin(an * 9.0 - uTime * 6.5 + vSeed) + spikes;
+    if (r > edge || vAlpha < 0.01) discard;
+    rimK = smoothstep(edge - 0.34, edge - 0.04, r);
+  }
+  vec3 col = mix(uCoreK[k], uRimK[k], rimK);
+  if (shp.w > 0.5) col += uRimK[k] * smoothstep(0.34, 0.0, length(p - vec2(0.0, 0.2))) * 1.4;   // the bell's glowing heart
+  // status effects: frost tints the whole body, burning and shock light up the rim
+  col = mix(col, vec3(0.3, 0.55, 0.8) * (0.45 + 0.55 * rimK), vFx.y * 0.8);
+  float flick = 0.6 + 0.4 * sin(uTime * 24.0 + vSeed * 5.0 + an * 3.0);
+  col += vec3(1.0, 0.42, 0.08) * vFx.z * rimK * flick * 1.7;
+  col += vec3(0.4, 0.95, 1.0) * vFx.w * rimK * step(0.5, fract(uTime * 17.0 + vSeed + an * 0.8)) * 2.2;
+  col = mix(col, vec3(1.0, 0.86, 0.95) * 1.15, vFx.x * 0.7);
+  gl_FragColor = vec4(col, a);
+  #include <fog_fragment>
+}`;
+const AURA_FRAG = /* glsl */`
+uniform float uTime; uniform vec3 uAuraK[16]; uniform vec4 uShapeK[16];
+varying vec2 vUv; varying float vAlpha; varying float vSeed; varying vec4 vFx; varying float vKind;
+#include <fog_pars_fragment>
+void main() {
+  int k = int(vKind + 0.5);
+  float r = length(vUv * 2.0 - 1.0);
+  vec3 c = uAuraK[k];
+  c = mix(c, vec3(1.0, 0.45, 0.1), vFx.z * 0.75);
+  c = mix(c, vec3(0.35, 0.8, 1.0), max(vFx.y, vFx.w) * 0.7);
+  float a = smoothstep(1.0, 0.4, r) * 0.3 * vAlpha * (0.8 + 0.2 * sin(uTime * 5.0 + vSeed * 3.0)) * (1.0 + vFx.x * 0.8) * uShapeK[k].z;
+  #ifdef USE_FOG
+    a *= exp(-fogDensity * fogDensity * vFogDepth * vFogDepth * 0.6);
+  #endif
+  if (a < 0.003) discard;
+  gl_FragColor = vec4(c, a);
+}`;
+
+const PART_VERT = /* glsl */`
+attribute float aSize; attribute float aAlpha; attribute vec3 aColor; attribute float aShape;
+uniform float uScale, uFogD;
+varying vec3 vColor; varying float vAlpha; varying float vShape;
+void main() {
+  vec4 mv = modelViewMatrix * vec4(position, 1.0);
+  gl_Position = projectionMatrix * mv;
+  float d = max(-mv.z, 0.1);
+  gl_PointSize = clamp(aSize * uScale / d, 1.0, 220.0);
+  vColor = aColor; vShape = aShape;
+  vAlpha = aAlpha * exp(-uFogD * uFogD * d * d * 0.7);
+}`;
+const PART_FRAG = /* glsl */`
+varying vec3 vColor; varying float vAlpha; varying float vShape;
+void main() {
+  vec2 p = gl_PointCoord * 2.0 - 1.0;
+  float a;
+  if (vShape < 0.5) a = pow(max(0.0, 1.0 - length(p)), 1.6);
+  else if (vShape < 1.5) a = 1.0;
+  else { vec2 ap = abs(p); a = max(max(step(ap.x, 0.2) * step(ap.y, 0.95), step(ap.y, 0.2) * step(ap.x, 0.95)), step(max(ap.x, ap.y), 0.36)); }
+  a *= vAlpha;
+  if (a < 0.004) discard;
+  gl_FragColor = vec4(vColor, a);
+}`;
+
+const FLY_VERT = /* glsl */`
+attribute float aPhase; attribute float aKind; attribute float aSpeed;
+uniform float uTime, uScale, uFogD, uFly, uMote;
+uniform vec3 uFlyCol, uMoteCol;
+varying vec3 vColor; varying float vAlpha;
+void main() {
+  float t = uTime * aSpeed + aPhase * 6.2831;
+  vec3 p = position;
+  float a;
+  if (aKind > 0.5) {
+    p += vec3(sin(t * 0.7) * 1.3 + sin(t * 1.9) * 0.3, sin(t * 1.1) * 0.55, cos(t * 0.6) * 1.3 + cos(t * 1.7) * 0.3);
+    a = uFly * pow(0.5 + 0.5 * sin(t * 2.7 + aPhase * 20.0), 4.0);
+    vColor = uFlyCol;
+  } else {
+    p += vec3(sin(t * 0.31) * 1.8, sin(t * 0.23) * 0.7 + 0.25 * sin(t * 1.3), cos(t * 0.27) * 1.8);
+    a = uMote * (0.35 + 0.35 * sin(t * 1.7));
+    vColor = uMoteCol;
+  }
+  vec4 mv = modelViewMatrix * vec4(p, 1.0);
+  gl_Position = projectionMatrix * mv;
+  float d = max(-mv.z, 0.1);
+  gl_PointSize = clamp((aKind > 0.5 ? 0.22 : 0.09) * uScale / d, 1.0, 64.0);
+  vAlpha = a * exp(-uFogD * uFogD * d * d * 0.6);
+}`;
+const FLY_FRAG = /* glsl */`
+varying vec3 vColor; varying float vAlpha;
+void main() {
+  float a = pow(max(0.0, 1.0 - length(gl_PointCoord * 2.0 - 1.0)), 1.8) * vAlpha;
+  if (a < 0.004) discard;
+  gl_FragColor = vec4(vColor, a);
+}`;
+
+const FLAME_VERT = /* glsl */`
+uniform vec3 uRight; uniform vec2 uSize;
+varying vec2 vUv;
+void main() {
+  vec3 wp = (modelMatrix * vec4(0.0, 0.0, 0.0, 1.0)).xyz + uRight * position.x * uSize.x + vec3(0.0, position.y * uSize.y, 0.0);
+  vUv = uv;
+  gl_Position = projectionMatrix * viewMatrix * vec4(wp, 1.0);
+}`;
+const FLAME_FRAG = /* glsl */`
+uniform float uTime, uLevel;
+varying vec2 vUv;
+${GLSL_HASH}
+void main() {
+  vec2 q = (floor(vUv * vec2(10.0, 16.0)) + 0.5) / vec2(10.0, 16.0);
+  float y = q.y;
+  float n = vnoise(vec2(q.x * 5.0, y * 4.0 - uTime * 4.5));
+  float w = (1.0 - y) * (0.55 + 0.45 * n);
+  float x = abs(q.x - 0.5) * 2.0;
+  if (x > w || y + n * 0.25 > 0.97 || uLevel < 0.01) discard;
+  float heat = (1.0 - y) * (1.0 - x / max(w, 0.001));
+  vec3 col = mix(vec3(1.0, 0.22, 0.04), vec3(1.0, 0.8, 0.3), smoothstep(0.12, 0.55, heat));
+  col = mix(col, vec3(1.0, 1.0, 0.85), smoothstep(0.55, 0.9, heat));
+  gl_FragColor = vec4(col * (2.0 + 3.0 * uLevel), 1.0);
+}`;
+
+const RING_VERT = /* glsl */`
+varying vec2 vLocal;
+void main() { vLocal = position.xy; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
+const RING_FRAG = /* glsl */`
+uniform float uTime, uOn;
+varying vec2 vLocal;
+void main() {
+  vec2 q = floor(vLocal * 16.0) / 16.0;
+  float an = atan(q.y, q.x);
+  float dash = step(0.5, fract(an / 6.2831 * 12.0 - uTime * 0.5));
+  float r = length(q);
+  float a = (0.25 + 0.75 * dash) * step(0.72, r) * step(r, 1.12) * (0.1 + 0.9 * uOn) * (0.7 + 0.3 * sin(uTime * 4.0));
+  if (a < 0.01) discard;
+  gl_FragColor = vec4(vec3(1.0, 0.75, 0.3) * 2.2, a);
+}`;
+
+const LBEAM_VERT = /* glsl */`
+varying float vT; varying vec3 vN; varying vec3 vView; varying float vDepth;
+void main() {
+  vT = uv.y;
+  vec4 wp = modelMatrix * vec4(position, 1.0);
+  vN = normalize(mat3(modelMatrix) * normal);
+  vView = normalize(cameraPosition - wp.xyz);
+  vec4 mv = viewMatrix * wp; vDepth = -mv.z;
+  gl_Position = projectionMatrix * mv;
+}`;
+const LBEAM_FRAG = /* glsl */`
+uniform float uI; uniform vec3 uColor;
+varying float vT; varying vec3 vN; varying vec3 vView; varying float vDepth;
+void main() {
+  float f = abs(dot(normalize(vN), normalize(vView)));
+  float a = pow(f, 1.8) * pow(1.0 - vT, 1.25) * uI;
+  if (a < 0.003) discard;
+  gl_FragColor = vec4(uColor, a);
+}`;
+
+const UV_VERT = /* glsl */`
+varying vec2 vUv;
+void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
+const SHADOW_FRAG = /* glsl */`
+uniform float uA;
+varying vec2 vUv;
+void main() {
+  vec2 q = (floor(vUv * 12.0) + 0.5) / 12.0;
+  float a = (1.0 - smoothstep(0.5, 1.0, length(q * 2.0 - 1.0))) * uA;
+  if (a < 0.01) discard;
+  gl_FragColor = vec4(0.06, 0.03, 0.1, a);
+}`;
+
+const DOFShader = {
+  uniforms: {
+    tDiffuse: { value: null }, uDir: { value: new THREE.Vector2(1, 0) }, uRes: { value: new THREE.Vector2(1, 1) },
+    uFocus: { value: 0.5 }, uBand: { value: 0.16 }, uAmount: { value: 1.6 },
+  },
+  vertexShader: UV_VERT,
+  fragmentShader: /* glsl */`
+    uniform sampler2D tDiffuse; uniform vec2 uDir, uRes; uniform float uFocus, uBand, uAmount;
+    varying vec2 vUv;
+    void main() {
+      float k = max(0.0, abs(vUv.y - uFocus) - uBand) * uAmount;
+      vec2 st = uDir / uRes * k * 6.0;
+      vec4 s = texture2D(tDiffuse, vUv) * 0.2270270270;
+      s += (texture2D(tDiffuse, vUv + st * 1.3846153846) + texture2D(tDiffuse, vUv - st * 1.3846153846)) * 0.3162162162;
+      s += (texture2D(tDiffuse, vUv + st * 3.2307692308) + texture2D(tDiffuse, vUv - st * 3.2307692308)) * 0.0702702703;
+      gl_FragColor = s;
+    }`,
+};
+const FinalShader = {
+  uniforms: {
+    tDiffuse: { value: null }, uRes: { value: new THREE.Vector2(1, 1) }, uTime: { value: 0 },
+    uAberr: { value: 0.0015 }, uGrain: { value: 0.05 }, uGlitch: { value: 0 }, uVignette: { value: 0.35 },
+    uDanger: { value: 0 }, uFlash: { value: 0 }, uFade: { value: 0 }, uDesat: { value: 0 }, uBars: { value: 0 },
+    uFlashColor: { value: new THREE.Color(1, 0.6, 0.85) }, uDangerColor: { value: new THREE.Color(0.32, 0.03, 0.36) },
+    uLift: { value: new THREE.Color(0.02, 0.0, 0.035) }, uGain: { value: new THREE.Color(1, 1, 1) },
+  },
+  vertexShader: UV_VERT,
+  fragmentShader: /* glsl */`
+    uniform sampler2D tDiffuse; uniform vec2 uRes;
+    uniform float uTime, uAberr, uGrain, uGlitch, uVignette, uDanger, uFlash, uFade, uDesat, uBars;
+    uniform vec3 uFlashColor, uDangerColor, uLift, uGain;
+    varying vec2 vUv;
+    float h12(vec2 p){ vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
+    void main() {
+      vec2 uv = vUv;
+      float tt = floor(uTime * 18.0);
+      float band = floor(uv.y * 42.0);
+      float g = step(1.0 - uGlitch * 0.45, h12(vec2(band, tt)));
+      float shift = (h12(vec2(tt, band * 1.7)) - 0.5) * 0.09 * uGlitch * g;
+      uv.x += shift;
+      vec2 c = uv - 0.5;
+      vec2 off = c * dot(c, c) * uAberr * 4.0 + vec2(shift * 0.35, 0.0);
+      vec3 col;
+      col.r = texture2D(tDiffuse, uv + off).r;
+      col.g = texture2D(tDiffuse, uv).g;
+      col.b = texture2D(tDiffuse, uv - off).b;
+      float l = dot(col, vec3(0.299, 0.587, 0.114));
+      col = mix(col, vec3(l), uDesat);
+      col = col * uGain + uLift * (1.0 - l);
+      vec2 q = c * vec2(uRes.x / uRes.y, 1.0);
+      float v = smoothstep(0.95, 0.28, length(q));
+      col *= mix(1.0 - uVignette, 1.0, v);
+      col = mix(col, uDangerColor, (1.0 - v) * uDanger * 0.6);
+      float n = h12(gl_FragCoord.xy + fract(uTime * 7.13) * 917.0) - 0.5;
+      col += n * uGrain * (1.15 - l);
+      col = mix(col, uFlashColor, uFlash);
+      col *= uFade;
+      float bars = step(vUv.y, uBars) + step(1.0 - uBars, vUv.y);
+      col = mix(col, vec3(0.0), clamp(bars, 0.0, 1.0));
+      gl_FragColor = vec4(col, 1.0);
+    }`,
+};
+
+/* ---------- острова: каждый тип — свой генератор ландшафта ---------- */
+const SEED = 20261031;
+const rootRand = mulberry32(SEED);
+const fbm = makeNoise(rootRand);
+const ISLES = [];
+function defIsle(id, name, desc, swatch, R, gen, extra = {}) { ISLES.push(Object.assign({ id, name, desc, swatch, R, gen, coins: [] }, extra)); }
+
+// столбец: песок у воды, иначе верх / почва / глубинный камень
+function column(x, z, h, top, soil, deep, beach = B.sand) {
+  if (!inb(x, z)) return;
+  h = clamp(h | 0, 1, H - 2);
+  for (let y = 0; y < h; y++) {
+    let b;
+    if (h <= 4) b = y >= h - 3 ? beach : deep;
+    else if (y === h - 1) b = top;
+    else b = y >= h - 3 ? soil : deep;
+    vox[at(x, y, z)] = b;
+  }
+}
+const topY = (x, z) => { for (let y = H - 1; y >= 0; y--) if (vox[at(x, y, z)]) return y + 1; return 0; };
+// маска острова: шумный круг; 1 в сердце, 0 у края
+function isleMask(I, x, z, wob = 0.45, a = 0.55) {
+  const dx = (x + 0.5 - I.cx) / I.R, dz = (z + 0.5 - I.cz) / I.R;
+  const r = Math.hypot(dx, dz);
+  const d = r + (fbm(x * 0.07 + I.ox, z * 0.07 + I.oz, 3) - 0.5) * wob;
+  return { r, m: 1 - smooth(a, 1.0, d), ang: Math.atan2(dz, dx) };
+}
+function forBox(I, pad, fn) {
+  const R = I.R + pad;
+  for (let z = Math.max(0, (I.cz - R) | 0); z < Math.min(D, (I.cz + R) | 0); z++)
+    for (let x = Math.max(0, (I.cx - R) | 0); x < Math.min(W, (I.cx + R) | 0); x++) fn(x, z);
+}
+// ни одна ступень не выше maxStep — по острову можно пройти с прыжком
+function relax(I, hg, maxStep) {
+  const R = I.R + 6, x0 = Math.max(1, (I.cx - R) | 0), x1 = Math.min(W - 1, (I.cx + R) | 0), z0 = Math.max(1, (I.cz - R) | 0), z1 = Math.min(D - 1, (I.cz + R) | 0);
+  for (let it = 0; it < 60; it++) {
+    let ch = false;
+    for (let z = z0; z < z1; z++) for (let x = x0; x < x1; x++) {
+      const i = ci(x, z);
+      const m = Math.min(hg[i - 1], hg[i + 1], hg[i - W], hg[i + W]);
+      if (hg[i] > m + maxStep) { hg[i] = m + maxStep; ch = true; }
+    }
+    if (!ch) break;
+  }
+}
+const HG = new Int16Array(W * D).fill(1);
+
+/* деревья (как в игре: ствол + шар кроны), сосны, пальмы, кактусы */
+function roundTree(x, z, rnd, crown = B.leaves, trunk = B.bark, big = 1) {
+  const g = topY(x, z), th = Math.round((3 + rnd() * 2) * big);
+  for (let y = g; y < g + th; y++) set(x, y, z, trunk);
+  const r = (1.6 + rnd() * 0.6) * big, cy = g + th + 0.4;
+  for (let a = -3; a <= 3; a++) for (let b = -2; b <= 3; b++) for (let c = -3; c <= 3; c++) {
+    const d = Math.hypot(a, b * 1.15, c) + hash3(x + a, b, z + c) * 0.7;
+    if (d < r + 0.3 && !get(x + a, Math.round(cy + b), z + c)) set(x + a, Math.round(cy + b), z + c, crown);
+  }
+}
+function pineTree(x, z, rnd, h0 = 5) {
+  const g = topY(x, z), th = h0 + ((rnd() * 3) | 0);
+  for (let y = g; y < g + th; y++) set(x, y, z, B.bark);
+  for (let y = g + 2; y <= g + th + 1; y++) {
+    const r = Math.max(0, (g + th + 1 - y) * 0.42 + ((y - g) % 2 ? 0.2 : 0.7));
+    for (let a = -3; a <= 3; a++) for (let c = -3; c <= 3; c++) if (Math.hypot(a, c) <= r && !get(x + a, y, z + c)) set(x + a, y, z + c, B.pine);
+  }
+  set(x, g + th + 2, z, B.pine);
+}
+function palmTree(x, z, rnd) {
+  const g = topY(x, z), th = 5 + ((rnd() * 2) | 0);
+  const lx = rnd() < 0.5 ? 1 : -1, lz = rnd() < 0.5 ? 1 : -1;
+  let px = x, pz = z;
+  for (let k = 0; k < th; k++) { if (k === 3) px += lx; if (k === 5) pz += lz; set(px, g + k, pz, B.bark); }
+  const ty = g + th;
+  set(px, ty, pz, B.palm);
+  for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]]) {
+    for (let s = 1; s <= 3; s++) set(px + dx * s, ty - (s === 3 ? 1 : 0), pz + dz * s, B.palm);
+  }
+}
+function cactus(x, z, rnd) {
+  const g = topY(x, z), th = 2 + ((rnd() * 2) | 0);
+  for (let y = g; y < g + th; y++) set(x, y, z, B.jungle);
+  if (th > 2) { const dx = rnd() < 0.5 ? 1 : -1; set(x + dx, g + 1, z, B.jungle); set(x + dx, g + 2, z, B.jungle); }
+}
+function scatter(I, count, minM, spacing, fn, rnd, ok) {
+  const placed = [];
+  for (let t = 0; t < 900 && placed.length < count; t++) {
+    const a = rnd() * TAU, r = Math.sqrt(rnd()) * I.R;
+    const x = Math.round(I.cx + Math.cos(a) * r), z = Math.round(I.cz + Math.sin(a) * r);
+    if (!inb(x, z) || HG[ci(x, z)] < minM) continue;
+    if (ok && !ok(x, z)) continue;
+    if (placed.some((p) => Math.hypot(p[0] - x, p[1] - z) < spacing)) continue;
+    let flat = true;
+    for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) if (Math.abs(HG[ci(x + dx, z + dz)] - HG[ci(x, z)]) > 1) flat = false;
+    if (!flat) continue;
+    placed.push([x, z]); fn(x, z, rnd);
+  }
+  return placed;
+}
+
+/* 0 · Сумеречный остров — дом: травяные холмы, пляж, кирпичный маяк */
+defIsle('dusk', 'Сумеречный остров', 'дом: травяные холмы и кирпичный маяк', '#5ea443', 21, (I, rnd) => {
+  forBox(I, 4, (x, z) => {
+    const { m } = isleMask(I, x, z);
+    const hills = smooth(0.25, 0.75, fbm(x * 0.055 + I.oz, z * 0.055 + I.ox, 4));
+    HG[ci(x, z)] = Math.max(1, Math.round(1 + m * (0.42 + 0.8 * hills) * 8.4));
+  });
+  for (let a = -3; a <= 3; a++) for (let b = -3; b <= 3; b++) if (Math.hypot(a, b) < 3.4) HG[ci(I.cx + a, I.cz + b)] = Math.max(9, HG[ci(I.cx + a, I.cz + b)]);
+  relax(I, HG, 1);
+  forBox(I, 4, (x, z) => column(x, z, HG[ci(x, z)], B.grass, B.dirt, B.stone));
+  const base = HG[ci(I.cx, I.cz)];
+  for (let a = -3; a <= 3; a++) for (let b = -3; b <= 3; b++) if (Math.hypot(a, b) < 3.4) set(I.cx + a, base - 1, I.cz + b, B.stone);
+  for (let y = base; y < base + 8; y++) for (let a = -1; a <= 1; a++) for (let b = -1; b <= 1; b++) set(I.cx + a, y, I.cz + b, B.brick);
+  for (const [a, b] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) set(I.cx + a, base + 8, I.cz + b, B.brick);
+  set(I.cx, base + 8, I.cz, B.gold);
+  I.beacon = new THREE.Vector3(I.cx + 0.5, base + 9.4, I.cz + 0.5);
+  scatter(I, 14, 6, 4.3, (x, z, r) => roundTree(x, z, r), rnd, (x, z) => Math.hypot(x - I.cx, z - I.cz) > 5);
+});
+
+/* 1 · Каньон — красные террасы, ущелье с рекой насквозь */
+defIsle('canyon', 'Каньон', 'красные террасы, ущелье с рекой насквозь', '#c4643f', 23, (I, rnd) => {
+  const gorge = (x, z) => { const t = z - I.cz; return Math.abs(x + 0.5 - (I.cx + 5 * Math.sin(t * 0.11) + 2 * Math.sin(t * 0.27))); };
+  forBox(I, 4, (x, z) => {
+    const { m } = isleMask(I, x, z, 0.35, 0.62);
+    let h = m <= 0 ? 1 : Math.max(1, Math.round(1 + m * 3.2));
+    if (m > 0.3) h = 4 + Math.floor(smooth(0.3, 0.95, m + (fbm(x * 0.09, z * 0.09, 2) - 0.5) * 0.25) * 5) * 2;
+    const g = gorge(x, z);
+    if (h > 3) { if (g < 2.4) h = 2; else if (g < 3.7) h = Math.min(h, 6); else if (g < 5) h = Math.min(h, 10); }
+    HG[ci(x, z)] = h;
+  });
+  forBox(I, 4, (x, z) => {
+    const h = HG[ci(x, z)];
+    if (h <= 4) { column(x, z, h, B.sand, B.sand, B.redrock); return; }
+    const off = Math.floor(fbm(x * 0.05 + 9, z * 0.05, 2) * 3);
+    for (let y = 0; y < h; y++) {
+      const band = (y + off) % 4;
+      vox[at(x, y, z)] = y === h - 1 ? B.redtop : band === 0 ? B.redrock2 : band === 2 ? B.sand : B.redrock;
+    }
+  });
+  // мост из досок над ущельем
+  const bz = I.cz + 6, bx = Math.round(I.cx + 5 * Math.sin(6 * 0.11) + 2 * Math.sin(6 * 0.27));
+  for (let x = bx - 6; x <= bx + 6; x++) if (HG[ci(x, bz)] < 10) { set(x, 10 - (Math.abs(x - bx) < 3 ? 1 : 0), bz, B.plank); set(x, 10, bz + 1, 0); }
+  scatter(I, 16, 5, 3.2, (x, z, r) => cactus(x, z, r), rnd, (x, z) => gorge(x, z) > 5);
+});
+
+/* 2 · Воронка от взрыва — выжженная чаша, тлеющие угли, поваленные наружу деревья */
+defIsle('crater', 'Воронка от взрыва', 'выжженная чаша, угли тлеют, деревья повалены взрывом', '#4a3f45', 22, (I, rnd) => {
+  forBox(I, 4, (x, z) => {
+    const { m, r } = isleMask(I, x, z, 0.3, 0.6);
+    let h = 1 + m * 4.4;
+    const rim = 6.5 * Math.exp(-(((r - 0.5) / 0.13) ** 2)) * (0.75 + 0.5 * fbm(x * 0.2, z * 0.2, 2));
+    if (r < 0.5) h = Math.max(h, 4 + 6 * (r / 0.5) ** 2.2); else h += rim * smooth(0, 0.3, m);
+    HG[ci(x, z)] = Math.max(1, Math.round(h));
+  });
+  relax(I, HG, 2);
+  forBox(I, 4, (x, z) => {
+    const h = HG[ci(x, z)], { r, ang } = isleMask(I, x, z);
+    const streak = fbm(ang * 9 + 30, 3.3, 3) > 0.52;          // лучи пепла от центра
+    const burnt = r < 0.62 || (streak && r < 0.95);
+    column(x, z, h, burnt ? (fbm(x * 0.3, z * 0.3, 2) > 0.55 ? B.ash : B.scorched) : B.grass, burnt ? B.scorched : B.dirt, B.stone, burnt ? B.ash : B.sand);
+    if (r < 0.36 && h > 3 && hash3(x, 7, z) > 0.86) set(x, h - 1, z, B.ember);
+  });
+  for (let a = -1; a <= 1; a++) for (let b = -1; b <= 1; b++) set(I.cx + a, HG[ci(I.cx + a, I.cz + b)] - 1, I.cz + b, B.ember);
+  // поваленные стволы: лежат вдоль радиуса, вершиной от центра
+  for (let k = 0; k < 11; k++) {
+    const a = rnd() * TAU, r0 = I.R * rr(0.62, 0.82), len = 3 + ((rnd() * 3) | 0);
+    for (let s = 0; s < len; s++) {
+      const x = Math.round(I.cx + Math.cos(a) * (r0 + s)), z = Math.round(I.cz + Math.sin(a) * (r0 + s));
+      if (inb(x, z) && HG[ci(x, z)] >= 4) set(x, topY(x, z), z, B.charred);
+    }
+  }
+  // обугленные пни и обломки камня
+  scatter(I, 9, 5, 3, (x, z, r) => { const g = topY(x, z); const t = 1 + ((r() * 3) | 0); for (let y = g; y < g + t; y++) set(x, y, z, B.charred); }, rnd, (x, z) => Math.hypot(x - I.cx, z - I.cz) > I.R * 0.55);
+  scatter(I, 14, 4, 2.5, (x, z, r) => { const g = topY(x, z); set(x, g, z, r() < 0.5 ? B.scorched : B.stone); if (r() < 0.4) set(x + 1, g, z, B.scorched); if (r() < 0.3) set(x, g + 1, z, B.basalt); }, rnd);
+  I.glowAt = new THREE.Vector3(I.cx + 0.5, 5, I.cz + 0.5);
+});
+
+/* 3 · Гора — снежная вершина, каменные склоны, сосны внизу */
+defIsle('mountain', 'Гора', 'снежная вершина, каменные склоны, сосны у подножия', '#e8eef7', 24, (I, rnd) => {
+  forBox(I, 4, (x, z) => {
+    const { m } = isleMask(I, x, z, 0.4, 0.5);
+    const ridge = 1 - Math.abs(fbm(x * 0.06 + 50, z * 0.06, 3) * 2 - 1);
+    HG[ci(x, z)] = Math.max(1, Math.round(1 + Math.pow(m, 1.35) * 25 * (0.7 + 0.45 * ridge)));
+  });
+  relax(I, HG, 2);
+  forBox(I, 4, (x, z) => {
+    const h = HG[ci(x, z)], n = fbm(x * 0.25, z * 0.25, 2);
+    const top = h >= 19 ? B.snow : h >= 16 ? (n > 0.5 ? B.snow : B.stone) : h >= 11 ? (n > 0.62 ? B.grass : B.stone) : B.grass;
+    column(x, z, h, top, top === B.grass ? B.dirt : B.stone, B.stone);
+    if (top === B.snow && h > 21) set(x, h - 2, z, B.packed_snow);
+  });
+  scatter(I, 16, 5, 3.4, (x, z, r) => pineTree(x, z, r), rnd, (x, z) => HG[ci(x, z)] < 13);
+});
+
+/* 4 · Вулкан — базальтовый конус, лавовое озеро и потоки */
+defIsle('volcano', 'Вулкан', 'базальтовый конус, лавовое озеро и огненные реки', '#ff6a2a', 22, (I, rnd) => {
+  const flows = [rnd() * TAU, rnd() * TAU, rnd() * TAU];
+  forBox(I, 4, (x, z) => {
+    const { m, r } = isleMask(I, x, z, 0.3, 0.45);
+    let h = 1 + Math.pow(m, 1.1) * 20;
+    if (r < 0.17) h = Math.min(h, 1 + 20 * Math.pow(1 - smooth(0.45, 1, 0.17), 1.1) - 3);
+    HG[ci(x, z)] = Math.max(1, Math.round(h));
+  });
+  relax(I, HG, 2);
+  let peak = 0; forBox(I, 0, (x, z) => { peak = Math.max(peak, HG[ci(x, z)]); });
+  forBox(I, 4, (x, z) => {
+    const h = HG[ci(x, z)], { r, ang } = isleMask(I, x, z);
+    let lava = r < 0.17 && h > 6;
+    for (const f of flows) if (Math.abs(angDiff(ang, f)) < 0.07 + 0.05 * fbm(r * 9, f, 2) && r < 0.85 && h > 4) lava = true;
+    column(x, z, h, lava ? B.lava : (fbm(x * 0.3, z * 0.3, 2) > 0.58 ? B.ash : B.basalt), B.basalt, B.basalt, B.ash);
+    if (!lava && h < 7 && fbm(x * 0.2 + 3, z * 0.2, 2) > 0.62) set(x, h - 1, z, B.moss);
+  });
+  I.glowAt = new THREE.Vector3(I.cx + 0.5, peak + 1, I.cz + 0.5);
+  I.smoke = true;
+});
+
+/* 5 · Скалы и арка — морские столбы и каменная арка над водой */
+defIsle('stacks', 'Скалы и арка', 'морские столбы, каменная арка над водой', '#8fb98a', 23, (I, rnd) => {
+  forBox(I, 4, (x, z) => {
+    const { m } = isleMask(I, x, z, 0.5, 0.35);
+    const hills = fbm(x * 0.08, z * 0.08 + 7, 3);
+    HG[ci(x, z)] = Math.max(1, Math.round(1 + Math.pow(m, 0.8) * (4 + hills * 3) * smooth(0, 1, I.R * 0.62 / Math.max(1, Math.hypot(x - I.cx, z - I.cz)))));
+  });
+  relax(I, HG, 1);
+  forBox(I, 4, (x, z) => column(x, z, HG[ci(x, z)], B.moss, B.mossrock, B.mossrock));
+  const stacks = [];
+  for (let k = 0; k < 7; k++) {
+    const a = k / 7 * TAU + rr(-0.2, 0.2), d = I.R * rr(0.68, 0.98), rad = rr(1.5, 2.8), ht = Math.round(rr(8, 16));
+    const sx = I.cx + Math.cos(a) * d, sz = I.cz + Math.sin(a) * d;
+    stacks.push({ x: sx, z: sz, rad, ht });
+    for (let y = 0; y < ht; y++) {
+      const rj = rad * (0.85 + 0.3 * fbm(y * 0.4 + k * 10, k, 2)) * (y > ht - 3 ? 0.8 : 1);
+      for (let a2 = -4; a2 <= 4; a2++) for (let b2 = -4; b2 <= 4; b2++) if (Math.hypot(a2, b2) <= rj) set(Math.round(sx + a2), y, Math.round(sz + b2), y === ht - 1 ? B.moss : B.mossrock);
+    }
+  }
+  // арка: полукруг камня между двумя соседними столбами
+  const arch = (A, Bp, top) => {
+    const n = 60;
+    for (let i = 0; i <= n; i++) {
+      const t = i / n, x = lerp(A.x, Bp.x, t), z = lerp(A.z, Bp.z, t);
+      const y = lerp(Math.min(A.ht, Bp.ht) - 3, top, Math.sin(t * Math.PI));
+      for (let a2 = -1; a2 <= 1; a2++) for (let b2 = -1; b2 <= 1; b2++) for (let c2 = 0; c2 <= 1; c2++) set(Math.round(x + a2), Math.round(y + c2), Math.round(z + b2), c2 === 1 && a2 === 0 && b2 === 0 ? B.moss : B.mossrock);
+    }
+  };
+  arch(stacks[0], stacks[1], 15); arch(stacks[3], stacks[4], 13);
+  scatter(I, 8, 5, 4, (x, z, r) => roundTree(x, z, r, B.leaves, B.bark, 0.85), rnd);
+});
+
+/* 6 · Атолл — кольцо песка, бирюзовая лагуна с кораллами, пальмы */
+defIsle('atoll', 'Атолл', 'кольцо пляжа, бирюзовая лагуна, кораллы и пальмы', '#4fd8d0', 23, (I, rnd) => {
+  forBox(I, 4, (x, z) => {
+    const { r, ang } = isleMask(I, x, z);
+    const rw = 0.72 + (fbm(ang * 3 + 5, 1, 2) - 0.5) * 0.12;
+    let h = 1 + 4.4 * Math.exp(-(((r - rw) / 0.11) ** 2));
+    if (r < rw) h = Math.max(h, 2.4);
+    if (r < 0.14) h = 4.6;
+    if (Math.abs(angDiff(ang, 0.6)) < 0.13 || Math.abs(angDiff(ang, 3.9)) < 0.11) h = Math.min(h, 2.4);   // протоки в лагуну
+    HG[ci(x, z)] = Math.max(1, Math.round(h + (fbm(x * 0.3, z * 0.3, 2) - 0.5) * 0.8));
+  });
+  forBox(I, 4, (x, z) => {
+    const h = HG[ci(x, z)];
+    column(x, z, h, B.sand, B.sand, B.sand, B.sand);
+    if (h <= 3 && isleMask(I, x, z).r < 0.68 && hash3(x, 3, z) > 0.8) { set(x, h, z, B.coral); if (hash3(x, 4, z) > 0.6) set(x, h + 1, z, B.coral); }
+  });
+  palmTree(I.cx, I.cz, rnd);
+  scatter(I, 14, 4, 3.2, (x, z, r) => palmTree(x, z, r), rnd, (x, z) => HG[ci(x, z)] >= 5);
+});
+
+/* 7 · Зиккурат — ступенчатая пирамида в джунглях, золотой алтарь на вершине */
+defIsle('ziggurat', 'Зиккурат', 'ступенчатая пирамида в джунглях, золотой алтарь', '#d9b45a', 23, (I, rnd) => {
+  forBox(I, 4, (x, z) => {
+    const { m } = isleMask(I, x, z);
+    const hills = smooth(0.25, 0.75, fbm(x * 0.06 + 3, z * 0.06, 4));
+    HG[ci(x, z)] = Math.max(1, Math.round(1 + m * (0.45 + 0.5 * hills) * 8));
+  });
+  for (let a = -10; a <= 10; a++) for (let b = -10; b <= 10; b++) HG[ci(I.cx + a, I.cz + b)] = Math.max(6, Math.min(7, HG[ci(I.cx + a, I.cz + b)]));
+  relax(I, HG, 1);
+  forBox(I, 4, (x, z) => column(x, z, HG[ci(x, z)], B.grass, B.dirt, B.stone));
+  const g = 7;
+  for (let k = 0; k < 5; k++) {
+    const s = 8 - k * 1.7;
+    for (let a = -Math.ceil(s); a <= Math.ceil(s); a++) for (let b = -Math.ceil(s); b <= Math.ceil(s); b++) {
+      if (Math.max(Math.abs(a), Math.abs(b)) > s) continue;
+      for (let y = g + k * 2 - 1; y < g + k * 2 + 1; y++) set(I.cx + a, y, I.cz + b, (y === g + k * 2 && hash3(a, y, b) > 0.55) ? B.moss : (hash3(a, y + 9, b) > 0.8 ? B.ruin : B.brick));
+    }
+  }
+  // лестница на южной стороне: ступень 1 блок
+  for (let s = 0; s < 10; s++) for (let a = -1; a <= 1; a++) for (let y = g - 1; y < g + s; y++) set(I.cx + a, y, I.cz + 10 - s, y === g + s - 1 ? B.ruin : B.brick);
+  const ty = g + 9;
+  for (const [a, b] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) for (let y = ty; y < ty + 3; y++) set(I.cx + a * 1, y, I.cz + b * 1, B.ruin);
+  set(I.cx, ty, I.cz, B.gold);
+  for (let a = -1; a <= 1; a++) for (let b = -1; b <= 1; b++) set(I.cx + a, ty + 3, I.cz + b, B.ruin);
+  I.glowAt = new THREE.Vector3(I.cx + 0.5, ty + 1, I.cz + 0.5);
+  scatter(I, 20, 5, 3.6, (x, z, r) => roundTree(x, z, r, B.jungle, B.bark, 1.15), rnd, (x, z) => Math.max(Math.abs(x - I.cx), Math.abs(z - I.cz)) > 10);
+});
+
+/* 8 · Кристальный разлом — остров расколот трещиной, из стен растут светящиеся кристаллы */
+defIsle('rift', 'Кристальный разлом', 'остров расколот надвое, в трещине светятся кристаллы', '#b27bff', 22, (I, rnd) => {
+  const ra = rnd() * Math.PI, nx = -Math.sin(ra), nz = Math.cos(ra);
+  const rd = (x, z) => Math.abs((x + 0.5 - I.cx) * nx + (z + 0.5 - I.cz) * nz + (fbm(x * 0.1, z * 0.1, 2) - 0.5) * 3);
+  forBox(I, 4, (x, z) => {
+    const { m } = isleMask(I, x, z);
+    const hills = smooth(0.2, 0.8, fbm(x * 0.06 + 8, z * 0.06, 4));
+    let h = Math.max(1, Math.round(1 + m * (0.55 + 0.7 * hills) * 11));
+    if (h > 3 && rd(x, z) < 2.3) h = 2;
+    HG[ci(x, z)] = h;
+  });
+  forBox(I, 4, (x, z) => {
+    const h = HG[ci(x, z)], n = fbm(x * 0.22, z * 0.22, 2);
+    column(x, z, h, n > 0.5 ? B.amethyst : B.grass, B.amethyst, B.stone);
+  });
+  for (let t = 0; t < 900; t++) {                     // кристаллы на стенах разлома
+    const x = Math.round(I.cx + rr(-I.R, I.R)), z = Math.round(I.cz + rr(-I.R, I.R));
+    if (!inb(x, z) || HG[ci(x, z)] < 5) continue;
+    const d = rd(x, z);
+    if (d > 3.6 || hash3(x, 1, z) < 0.5) continue;
+    const y0 = 3 + ((rnd() * (HG[ci(x, z)] - 3)) | 0), len = 1 + ((rnd() * 3) | 0);
+    for (let k = 0; k < len; k++) set(x, y0 + k, z, B.crystal);
+  }
+  scatter(I, 10, 5, 3.5, (x, z, r) => { const g = topY(x, z); const t = 1 + ((r() * 4) | 0); for (let y = g; y < g + t; y++) set(x, y, z, B.crystal); if (t > 2) set(x + 1, g, z, B.crystal); }, rnd, (x, z) => rd(x, z) > 4);
+  I.glowAt = new THREE.Vector3(I.cx + 0.5, 6, I.cz + 0.5);
+  I.motes = true;
+});
+
+/* раскладка: дом в центре, восемь островов кольцом */
+ISLES[0].cx = 128; ISLES[0].cz = 128;
+for (let k = 1; k < ISLES.length; k++) {
+  const a = (k - 1) / (ISLES.length - 1) * TAU + 0.35, d = 80 + (k % 2) * 6;
+  ISLES[k].cx = Math.round(128 + Math.cos(a) * d); ISLES[k].cz = Math.round(128 + Math.sin(a) * d);
+}
+
+function generateArchipelago() {
+  for (let z = 0; z < D; z++) for (let x = 0; x < W; x++) vox[at(x, 0, z)] = B.sand;   // морское дно
+  ISLES.forEach((I, k) => {
+    I.ox = rootRand() * 300; I.oz = rootRand() * 300;
+    I.gen(I, mulberry32(SEED + k * 977));
+    forBox(I, 2, (x, z) => { if (Math.hypot(x - I.cx, z - I.cz) < I.R + 2) isleOf[ci(x, z)] = k; });
+  });
+  // высота стояния: первая ниша в два блока над твёрдым (под аркой — земля под аркой)
+  for (let z = 0; z < D; z++) for (let x = 0; x < W; x++) {
+    let s = 1;
+    for (let y = 1; y < H - 2; y++) if (vox[at(x, y - 1, z)] && !vox[at(x, y, z)] && !vox[at(x, y + 1, z)]) { s = y; break; }
+    stand[ci(x, z)] = s;
+  }
+}
+
+/* ---------- проходимость, монеты, расстояние до суши ---------- */
+const reach = new Uint8Array(W * D);
+const landDist = new Uint8Array(W * D);
+const COINS = [];
+function analyseWorld() {
+  const q = [];
+  for (let i = 0; i < W * D; i++) if (stand[i] < SEA) { reach[i] = 1; q.push(i); }
+  for (let k = 0; k < q.length; k++) {
+    const i = q[k], x = i % W, z = (i / W) | 0, si = stand[i] < SEA ? SEA - 0.55 : stand[i];
+    for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const X = x + dx, Z = z + dz;
+      if (!inb(X, Z)) continue;
+      const j = ci(X, Z);
+      if (reach[j]) continue;
+      if (stand[j] - si <= 2.05) { reach[j] = 1; q.push(j); }
+    }
+  }
+  // BFS расстояния до суши (кит выныривает только в открытом море)
+  landDist.fill(255);
+  const q2 = [];
+  for (let i = 0; i < W * D; i++) if (stand[i] >= 4) { landDist[i] = 0; q2.push(i); }
+  for (let k = 0; k < q2.length; k++) {
+    const i = q2[k], x = i % W, z = (i / W) | 0;
+    for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const X = x + dx, Z = z + dz;
+      if (!inb(X, Z)) continue;
+      const j = ci(X, Z);
+      if (landDist[j] > landDist[i] + 1) { landDist[j] = landDist[i] + 1; q2.push(j); }
+    }
+  }
+  // по 10 монет на каждый новый остров: равномерно, только на достижимой суше
+  ISLES.forEach((I, k) => {
+    if (k === 0) return;
+    const cand = [];
+    for (let z = (I.cz - I.R) | 0; z < I.cz + I.R; z++) for (let x = (I.cx - I.R) | 0; x < I.cx + I.R; x++) {
+      if (!inb(x, z)) continue;
+      const i = ci(x, z);
+      if (isleOf[i] !== k || !reach[i] || stand[i] < 4 || stand[i] > H - 4) continue;
+      if (vox[at(x, stand[i] + 2, z)]) continue;
+      cand.push([x, z]);
+    }
+    const r = mulberry32(SEED + k);
+    while (I.coins.length < 10 && cand.length) {
+      let best = null, bd = -1;
+      for (let t = 0; t < 40; t++) {
+        const c = cand[(r() * cand.length) | 0];
+        let d = 99;
+        for (const o of I.coins) d = Math.min(d, Math.hypot(o[0] - c[0], o[1] - c[1]));
+        d += stand[ci(c[0], c[1])] * 0.15;                     // вершины чуть желаннее
+        if (d > bd) { bd = d; best = c; }
+      }
+      I.coins.push(best);
+      COINS.push({ x: best[0] + 0.5, y: stand[ci(best[0], best[1])] + 0.62, z: best[1] + 0.5, alive: 1, isle: k, t: 0 });
+    }
+  });
+}
+function groundAt(x, z) { const X = Math.floor(x), Z = Math.floor(z); return inb(X, Z) ? stand[ci(X, Z)] : 1; }
+
+/* ---------- мешер игры: отсечённые грани, UV атласа, AO по вершинам (+ оттенок, свечение, качание листвы) ---------- */
+const FACES = [
+  { n: [1, 0, 0], k: 1, v: [[1, 0, 0], [1, 1, 0], [1, 1, 1], [1, 0, 1]], uv: [[1, 0], [1, 1], [0, 1], [0, 0]] },
+  { n: [-1, 0, 0], k: 1, v: [[0, 0, 1], [0, 1, 1], [0, 1, 0], [0, 0, 0]], uv: [[1, 0], [1, 1], [0, 1], [0, 0]] },
+  { n: [0, 1, 0], k: 0, v: [[0, 1, 0], [0, 1, 1], [1, 1, 1], [1, 1, 0]], uv: [[0, 1], [0, 0], [1, 0], [1, 1]] },
+  { n: [0, -1, 0], k: 2, v: [[0, 0, 0], [1, 0, 0], [1, 0, 1], [0, 0, 1]], uv: [[0, 0], [1, 0], [1, 1], [0, 1]] },
+  { n: [0, 0, 1], k: 1, v: [[1, 0, 1], [1, 1, 1], [0, 1, 1], [0, 0, 1]], uv: [[1, 0], [1, 1], [0, 1], [0, 0]] },
+  { n: [0, 0, -1], k: 1, v: [[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], uv: [[1, 0], [1, 1], [0, 1], [0, 0]] },
+];
+function buildTerrainGeometry(x0, z0, x1, z1) {
+  const pos = [], nrm = [], uvs = [], col = [], idx = [], ex = [];
+  const AO = [0.36, 0.58, 0.8, 1.0];
+  const COLS = ATLAS_GRID[0], TU = 1 / ATLAS_GRID[0], TV = 1 / ATLAS_GRID[1], E = 0.0006;
+  let vc = 0;
+  for (let y = 0; y < H; y++) for (let z = z0; z < z1; z++) for (let x = x0; x < x1; x++) {
+    const b = vox[at(x, y, z)];
+    if (!b) continue;
+    const bd = BLK[b];
+    const tint = 0.94 + 0.1 * hash3(x, y, z);
+    for (let f = 0; f < 6; f++) {
+      const F = FACES[f], nx = F.n[0], ny = F.n[1], nz = F.n[2];
+      if (solid(x + nx, y + ny, z + nz)) continue;
+      if (y === 0 && ny < 0) continue;
+      const tile = F.k === 0 ? bd.faces[0] : F.k === 2 ? bd.faces[2] : bd.faces[1];
+      const u0 = (tile % COLS) * TU + E, v0 = 1 - (Math.floor(tile / COLS) + 1) * TV + E, du = TU - 2 * E, dv = TV - 2 * E;
+      const lx = x + nx, ly = y + ny, lz = z + nz;
+      const ao = [0, 0, 0, 0];
+      for (let k = 0; k < 4; k++) {
+        const c = F.v[k];
+        const ox = nx ? 0 : (c[0] ? 1 : -1), oy = ny ? 0 : (c[1] ? 1 : -1), oz = nz ? 0 : (c[2] ? 1 : -1);
+        let s1, s2;
+        if (nx) { s1 = solid(lx, ly + oy, lz); s2 = solid(lx, ly, lz + oz); }
+        else if (ny) { s1 = solid(lx + ox, ly, lz); s2 = solid(lx, ly, lz + oz); }
+        else { s1 = solid(lx + ox, ly, lz); s2 = solid(lx, ly + oy, lz); }
+        const cr = solid(lx + ox, ly + oy, lz + oz);
+        ao[k] = s1 && s2 ? 0 : 3 - (s1 + s2 + cr);
+        pos.push(x + c[0], y + c[1], z + c[2]);
+        nrm.push(nx, ny, nz);
+        uvs.push(u0 + F.uv[k][0] * du, v0 + F.uv[k][1] * dv);
+        const wet = y + c[1] < SEA ? 0.78 : 1;
+        const s = AO[ao[k]] * tint;
+        col.push(s * wet * (wet < 1 ? 0.86 : 1) * bd.tint.r, s * wet * (wet < 1 ? 0.95 : 1) * bd.tint.g, s * wet * bd.tint.b);
+        ex.push(bd.glow, bd.leafy * (c[1] ? 1 : 0.4));
+      }
+      if (ao[0] + ao[2] > ao[1] + ao[3]) idx.push(vc + 1, vc + 2, vc + 3, vc + 1, vc + 3, vc);
+      else idx.push(vc, vc + 1, vc + 2, vc, vc + 2, vc + 3);
+      vc += 4;
+    }
+  }
+  if (!vc) return null;
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute('normal', new THREE.Float32BufferAttribute(nrm, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+  g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+  g.setAttribute('aEx', new THREE.Float32BufferAttribute(ex, 2));
+  g.setIndex(vc > 65535 ? new THREE.Uint32BufferAttribute(idx, 1) : new THREE.Uint16BufferAttribute(idx, 1));
+  g.computeBoundingSphere();
+  return g;
+}
+
+/* ---------- рендерер, сцена, текстуры (как в игре) ---------- */
+const $ = (id) => document.getElementById(id);
+const canvas = $('c');
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const IS_TOUCH = matchMedia('(pointer: coarse)').matches || (navigator.maxTouchPoints > 1 && matchMedia('(hover: none)').matches);
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance', stencil: false }); }
+catch (err) { $('load').innerHTML = '<div class="err">Нужен браузер с WebGL</div>'; throw err; }
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x000000, 0.02);
+const camera = new THREE.PerspectiveCamera(46, innerWidth / innerHeight, 0.1, 900);
+function loadTexture(uri) {
+  return new Promise((res, rej) => {
+    const img = new Image();
+    img.onload = () => { const t = new THREE.Texture(img); t.magFilter = t.minFilter = THREE.NearestFilter; t.generateMipmaps = false; t.colorSpace = THREE.SRGBColorSpace; t.needsUpdate = true; res(t); };
+    img.onerror = rej; img.src = uri;
+  });
+}
+const [atlasTex, coinTex, waterTex, heroTex] = await Promise.all([ASSETS.atlas, ASSETS.coin, ASSETS.water, ASSETS.hero].map(loadTexture));
+document.documentElement.style.setProperty('--img-hearts', `url("${ASSETS.hearts}")`);
+document.documentElement.style.setProperty('--img-coin', `url("${ASSETS.coin}")`);
+setLoad(0.3);
+
+const U = {
+  time: { value: 0 }, right: { value: new THREE.Vector3(1, 0, 0) }, camRight: { value: new THREE.Vector3(1, 0, 0) },
+  camUp: { value: new THREE.Vector3(0, 1, 0) }, pScale: { value: 400 }, fogD: { value: 0.02 },
+};
+function fogShader(opts) {
+  const uniforms = THREE.UniformsUtils.clone(THREE.UniformsLib.fog);
+  Object.assign(uniforms, opts.uniforms);
+  return new THREE.ShaderMaterial({ ...opts, uniforms, fog: true });
+}
+
+// небо
+const skyU = {
+  uTop: { value: new THREE.Color() }, uHorizon: { value: new THREE.Color() }, uBottom: { value: new THREE.Color() },
+  uSunCol: { value: new THREE.Color() }, uSunDir: { value: new THREE.Vector3(0, 0.2, -1) }, uMoonDir: { value: new THREE.Vector3(0, 0.6, 1) },
+  uTime: U.time, uNight: { value: 0 }, uSunVis: { value: 1 },
+  uAurora: { value: 0 }, uAuroraA: { value: new THREE.Color('#3dffa8') }, uAuroraB: { value: new THREE.Color('#b56bff') },
+};
+const sky = new THREE.Mesh(new THREE.SphereGeometry(500, 32, 16),
+  new THREE.ShaderMaterial({ uniforms: skyU, vertexShader: SKY_VERT, fragmentShader: SKY_FRAG, side: THREE.BackSide, depthWrite: false, depthTest: false }));
+sky.renderOrder = -10; sky.frustumCulled = false; scene.add(sky);
+
+const hemi = new THREE.HemisphereLight(0xffffff, 0x222222, 1.5);
+const keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
+const isleLights = [new THREE.PointLight(0xff7a30, 0, 34, 1.1), new THREE.PointLight(0xb27bff, 0, 26, 1.1), new THREE.PointLight(0xffa04a, 0, 40, 1.05)];
+scene.add(hemi, keyLight, keyLight.target, ...isleLights);
+
+// материал ландшафта: атлас игры + свечение блоков (лава, угли, кристаллы) + дыхание листвы
+const terrainMat = new THREE.MeshLambertMaterial({ map: atlasTex, vertexColors: true });
+terrainMat.onBeforeCompile = (sh) => {
+  sh.uniforms.uTime = U.time;
+  sh.vertexShader = sh.vertexShader
+    .replace('#include <common>', '#include <common>\nattribute vec2 aEx;\nuniform float uTime;\nvarying float vGlow;\nvarying vec3 vWP;')
+    .replace('#include <begin_vertex>', `#include <begin_vertex>
+      vec3 wpos = (modelMatrix * vec4(transformed, 1.0)).xyz;
+      float sw = aEx.y * (sin(uTime * 1.3 + wpos.x * 0.35 + wpos.z * 0.2) * 0.6 + sin(uTime * 2.7 + wpos.z * 0.5) * 0.4);
+      transformed.x += sw * 0.07; transformed.z += sw * 0.05;
+      vGlow = aEx.x; vWP = wpos;`);
+  sh.fragmentShader = sh.fragmentShader
+    .replace('#include <common>', '#include <common>\nuniform float uTime;\nvarying float vGlow;\nvarying vec3 vWP;')
+    .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+      if (vGlow > 0.0) {
+        float fl = 0.72 + 0.18 * sin(uTime * 2.1 + vWP.x * 1.7 + vWP.z * 1.3) + 0.1 * sin(uTime * 5.3 + vWP.y * 3.0);
+        totalEmissiveRadiance += diffuseColor.rgb * vGlow * fl * 1.4;
+      }`);
+};
+const terrain = new THREE.Group(); scene.add(terrain);
+function buildChunks() {
+  const CH = 32;
+  for (let z0 = 0; z0 < D; z0 += CH) for (let x0 = 0; x0 < W; x0 += CH) {
+    const g = buildTerrainGeometry(x0, z0, x0 + CH, z0 + CH);
+    if (g) terrain.add(new THREE.Mesh(g, terrainMat));
+  }
+}
+function makeHeightTexture() {
+  const data = new Uint8Array(W * D * 4);
+  for (let i = 0; i < W * D; i++) { const v = Math.min(255, Math.round(Math.min(stand[i], 16) / 16 * 255)); data[i * 4] = data[i * 4 + 1] = data[i * 4 + 2] = v; data[i * 4 + 3] = 255; }
+  const t = new THREE.DataTexture(data, W, D, THREE.RGBAFormat);
+  t.magFilter = t.minFilter = THREE.LinearFilter; t.needsUpdate = true;
+  return t;
+}
+
+// вода (шейдер игры)
+const waterU = {
+  uTex: { value: waterTex }, uHeight: { value: null }, uTime: U.time, uSea: { value: SEA },
+  uDeep: { value: new THREE.Color() }, uShallow: { value: new THREE.Color() }, uFoam: { value: new THREE.Color() },
+  uSky: { value: new THREE.Color() }, uSunCol: { value: new THREE.Color() }, uSunDir: { value: new THREE.Vector3(0, 1, 0) },
+  uRipples: { value: Array.from({ length: 8 }, () => new THREE.Vector4(0, 0, -99, 0)) },
+};
+const water = new THREE.Mesh(new THREE.PlaneGeometry(1400, 1400).rotateX(-Math.PI / 2),
+  fogShader({ uniforms: waterU, vertexShader: WATER_VERT, fragmentShader: WATER_FRAG, transparent: true, depthWrite: false }));
+water.position.set(W / 2, SEA, D / 2); water.renderOrder = 1; scene.add(water);
+let rippleIdx = 0;
+function ripple(x, z, s = 1) { waterU.uRipples.value[rippleIdx++ % 8].set(x, z, U.time.value, s); }
+
+// низкий морской туман
+const mistColor = new THREE.Color(), mistAlpha = { value: 0.2 };
+const mists = [[0.12, 0.012, 0.006], [0.55, -0.009, 0.011], [1.0, 0.007, -0.01]].map(([dy, ax, az], k) => {
+  const u = { uHeight: { value: null }, uTime: U.time, uAlpha: mistAlpha, uLayer: { value: SEA + dy }, uColor: { value: mistColor }, uDrift: { value: new THREE.Vector2(ax, az) } };
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(300, 300).rotateX(-Math.PI / 2),
+    new THREE.ShaderMaterial({ uniforms: u, vertexShader: MIST_VERT, fragmentShader: MIST_FRAG, transparent: true, depthWrite: false }));
+  m.position.set(W / 2, SEA + dy, D / 2); m.renderOrder = 8 + k; scene.add(m); return m;
+});
+
+// герой: билборд из листа героя игры
+const heroGeo = new THREE.PlaneGeometry(1, 1.5); heroGeo.translate(0, 0.75, 0);
+{ const n = heroGeo.attributes.normal; for (let i = 0; i < n.count; i++) n.setXYZ(i, 0, 0.55, 0.835); }
+const heroMat = new THREE.MeshLambertMaterial({ map: heroTex, emissive: 0xffffff, emissiveMap: heroTex, emissiveIntensity: 0.12, alphaTest: 0.5 });
+const hero = new THREE.Mesh(heroGeo, heroMat);
+hero.rotation.order = 'YXZ'; hero.renderOrder = 2; scene.add(hero);
+function setHeroFrame(f, facing) {
+  const w = 1 / 6, e = w * 0.002;
+  if (facing >= 0) { heroTex.repeat.x = w - 2 * e; heroTex.offset.x = f * w + e; }
+  else { heroTex.repeat.x = -(w - 2 * e); heroTex.offset.x = (f + 1) * w - e; }
+}
+setHeroFrame(4, 1);
+const shadowU = { uA: { value: 0.5 } };
+const heroShadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2),
+  new THREE.ShaderMaterial({ uniforms: shadowU, vertexShader: UV_VERT, fragmentShader: SHADOW_FRAG, transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }));
+heroShadow.renderOrder = 2; scene.add(heroShadow);
+
+// монеты: инстанс-билборды игры + ореол + луч
+function makeInstGeo(base, count, attrs) {
+  const g = new THREE.InstancedBufferGeometry();
+  g.index = base.index; g.setAttribute('position', base.attributes.position); g.setAttribute('uv', base.attributes.uv);
+  const out = {};
+  for (const name in attrs) { const [arr, size] = attrs[name]; const a = new THREE.InstancedBufferAttribute(arr, size); a.setUsage(THREE.DynamicDrawUsage); g.setAttribute(name, a); out[name] = a; }
+  g.instanceCount = count; return { geo: g, attrs: out };
+}
+const pickupMat = (map, frames, cells, fps, size, glow, bob) => fogShader({
+  uniforms: { uMap: { value: map }, uTime: U.time, uRight: U.right, uFrames: { value: frames }, uCells: { value: cells }, uFps: { value: fps }, uBob: { value: bob }, uSize: { value: size }, uGlow: { value: glow } },
+  vertexShader: PICK_VERT, fragmentShader: PICK_FRAG,
+});
+const glowMat = (frag, size, bob, color, intensity) => fogShader({
+  uniforms: { uTime: U.time, uRight: U.right, uFrames: { value: 1 }, uCells: { value: 1 }, uFps: { value: 0 }, uBob: { value: bob }, uSize: { value: size }, uColor: { value: new THREE.Color(...color) }, uIntensity: { value: intensity } },
+  vertexShader: PICK_VERT, fragmentShader: frag, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+});
+const coinMat = pickupMat(coinTex, 4, 4, 8, 0.95, 1.2, 0.12);
+const coinHaloMat = glowMat(HALO_FRAG, 2.6, 0.12, [1.0, 0.68, 0.22], 0.35);
+const coinBeamMat = glowMat(BEAM_FRAG, 1.0, 0.0, [1.0, 0.78, 0.35], 0.2);
+const quadBase = new THREE.PlaneGeometry(1, 1);
+const beamBase = new THREE.PlaneGeometry(0.5, 7); beamBase.translate(0, 3.0, 0);
+let coinObj = null;
+function buildCoins() {
+  const n = COINS.length, P = new Float32Array(n * 3), Ph = new Float32Array(n), A = new Float32Array(n);
+  COINS.forEach((c, i) => { P[i * 3] = c.x; P[i * 3 + 1] = c.y; P[i * 3 + 2] = c.z; Ph[i] = Math.random(); A[i] = 1; });
+  const mk = (base, mat, order) => { const inst = makeInstGeo(base, n, { aPos: [P, 3], aPhase: [Ph, 1], aAlive: [A, 1] }); const m = new THREE.Mesh(inst.geo, mat); m.frustumCulled = false; m.renderOrder = order; scene.add(m); return inst; };
+  coinObj = { a: A, insts: [mk(quadBase, coinMat, 3), mk(quadBase, coinHaloMat, 12), mk(beamBase, coinBeamMat, 11)] };
+}
+function syncCoins() { coinObj.insts.forEach((i) => { i.attrs.aAlive.needsUpdate = true; }); }
+
+// частицы (класс игры; пол — поверхность моря: капли падают в воду)
+class Particles {
+  constructor(max, blending, order) {
+    this.max = max; this.n = 0;
+    this.p = new Float32Array(max * 3); this.c = new Float32Array(max * 3); this.v = new Float32Array(max * 3);
+    this.s = new Float32Array(max); this.a = new Float32Array(max); this.sh = new Float32Array(max);
+    this.life = new Float32Array(max); this.full = new Float32Array(max); this.g = new Float32Array(max);
+    this.dr = new Float32Array(max); this.s0 = new Float32Array(max); this.s1 = new Float32Array(max); this.a0 = new Float32Array(max); this.wet = new Uint8Array(max);
+    const geo = new THREE.BufferGeometry();
+    const mk = (arr, n) => { const a = new THREE.BufferAttribute(arr, n); a.setUsage(THREE.DynamicDrawUsage); return a; };
+    this.attrs = [mk(this.p, 3), mk(this.c, 3), mk(this.s, 1), mk(this.a, 1), mk(this.sh, 1)];
+    ['position', 'aColor', 'aSize', 'aAlpha', 'aShape'].forEach((nm, i) => geo.setAttribute(nm, this.attrs[i]));
+    geo.setDrawRange(0, 0); this.geo = geo;
+    this.points = new THREE.Points(geo, new THREE.ShaderMaterial({ uniforms: { uScale: U.pScale, uFogD: U.fogD }, vertexShader: PART_VERT, fragmentShader: PART_FRAG, transparent: true, depthWrite: false, blending }));
+    this.points.frustumCulled = false; this.points.renderOrder = order; scene.add(this.points);
+  }
+  emit(x, y, z, vx, vy, vz, life, s0, s1, col, alpha, grav = 0, drag = 0, shape = 0, wet = 0) {
+    if (this.n >= this.max) return;
+    const i = this.n++, i3 = i * 3;
+    this.p[i3] = x; this.p[i3 + 1] = y; this.p[i3 + 2] = z; this.v[i3] = vx; this.v[i3 + 1] = vy; this.v[i3 + 2] = vz;
+    this.c[i3] = col.r; this.c[i3 + 1] = col.g; this.c[i3 + 2] = col.b;
+    this.life[i] = life; this.full[i] = life; this.s0[i] = s0; this.s1[i] = s1; this.s[i] = s0;
+    this.a0[i] = alpha; this.a[i] = alpha; this.g[i] = grav; this.dr[i] = drag; this.sh[i] = shape; this.wet[i] = wet;
+  }
+  kill(i) {
+    const j = --this.n; if (i === j) return;
+    const i3 = i * 3, j3 = j * 3;
+    for (const arr of [this.p, this.c, this.v]) { arr[i3] = arr[j3]; arr[i3 + 1] = arr[j3 + 1]; arr[i3 + 2] = arr[j3 + 2]; }
+    for (const arr of [this.s, this.a, this.sh, this.life, this.full, this.g, this.dr, this.s0, this.s1, this.a0, this.wet]) arr[i] = arr[j];
+  }
+  update(dt) {
+    let i = 0;
+    while (i < this.n) {
+      this.life[i] -= dt;
+      const i3 = i * 3;
+      if (this.wet[i] && this.v[i3 + 1] < 0 && this.p[i3 + 1] < SEAL) { if (Math.random() < 0.04) ripple(this.p[i3], this.p[i3 + 2], 0.35); this.life[i] = 0; }
+      if (this.life[i] <= 0) { this.kill(i); continue; }
+      const t = this.life[i] / this.full[i], k = 1 / (1 + this.dr[i] * dt);
+      this.v[i3 + 1] -= this.g[i] * dt;
+      this.v[i3] *= k; this.v[i3 + 1] *= k; this.v[i3 + 2] *= k;
+      this.p[i3] += this.v[i3] * dt; this.p[i3 + 1] += this.v[i3 + 1] * dt; this.p[i3 + 2] += this.v[i3 + 2] * dt;
+      this.s[i] = lerp(this.s1[i], this.s0[i], t); this.a[i] = this.a0[i] * Math.min(1, t * 3);
+      i++;
+    }
+  }
+  flush() { this.geo.setDrawRange(0, this.n); for (const a of this.attrs) a.needsUpdate = true; }
+}
+const glow = new Particles(2600, THREE.AdditiveBlending, 14);
+const dust = new Particles(3200, THREE.NormalBlending, 13);
+const C = {
+  spray: new THREE.Color('#e8f6ff'), foam: new THREE.Color('#ffffff'), sprayB: new THREE.Color('#9fd6f0'), deepB: new THREE.Color('#5aa2cf'),
+  gold: new THREE.Color(1.6, 1.1, 0.4), ember: new THREE.Color(2.2, 0.9, 0.3), smoke: new THREE.Color('#3b3340'), crystal: new THREE.Color(1.3, 0.8, 2.4),
+  mist: new THREE.Color(1.3, 1.4, 1.6), bubble: new THREE.Color(1.2, 1.5, 1.7), red: new THREE.Color(2.2, 0.35, 0.3),
+};
+
+// светлячки и золотые пылинки сумерек (GPU)
+const FLIES = 900;
+const flyGeo = new THREE.BufferGeometry();
+const flyBase = new Float32Array(FLIES * 3), flyPhase = new Float32Array(FLIES), flyKind = new Float32Array(FLIES), flySpeed = new Float32Array(FLIES);
+for (let i = 0; i < FLIES; i++) {
+  const I = ISLES[i % ISLES.length], a = Math.random() * TAU, r = Math.sqrt(Math.random()) * I.R;
+  flyBase[i * 3] = I.cx + Math.cos(a) * r; flyBase[i * 3 + 2] = I.cz + Math.sin(a) * r; flyBase[i * 3 + 1] = 0;
+  flyPhase[i] = Math.random(); flyKind[i] = i % 3 === 0 ? 1 : 0; flySpeed[i] = rr(0.6, 1.3);
+}
+flyGeo.setAttribute('position', new THREE.BufferAttribute(flyBase, 3)); flyGeo.setAttribute('aPhase', new THREE.BufferAttribute(flyPhase, 1));
+flyGeo.setAttribute('aKind', new THREE.BufferAttribute(flyKind, 1)); flyGeo.setAttribute('aSpeed', new THREE.BufferAttribute(flySpeed, 1));
+const flyU = { uTime: U.time, uScale: U.pScale, uFogD: U.fogD, uFly: { value: 0.25 }, uMote: { value: 1 }, uFlyCol: { value: new THREE.Color(0.75, 1.0, 0.35).multiplyScalar(2.2) }, uMoteCol: { value: new THREE.Color(1.0, 0.82, 0.55) } };
+const flies = new THREE.Points(flyGeo, new THREE.ShaderMaterial({ uniforms: flyU, vertexShader: FLY_VERT, fragmentShader: FLY_FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+flies.frustumCulled = false; flies.renderOrder = 15; scene.add(flies);
+function placeFlies() {
+  for (let i = 0; i < FLIES; i++) { const x = flyBase[i * 3], z = flyBase[i * 3 + 2]; flyBase[i * 3 + 1] = Math.max(SEA, groundAt(x, z)) + rr(0.6, 3.2); }
+  flyGeo.attributes.position.needsUpdate = true;
+}
+
+// огонь маяка (шейдер пламени игры)
+const flameU = { uTime: U.time, uLevel: { value: 0.85 }, uRight: U.right, uSize: { value: new THREE.Vector2(0.9, 1.4) } };
+const flameGeo = new THREE.PlaneGeometry(1, 1); flameGeo.translate(0, 0.5, 0);
+const flame = new THREE.Mesh(flameGeo, new THREE.ShaderMaterial({ uniforms: flameU, vertexShader: FLAME_VERT, fragmentShader: FLAME_FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+flame.frustumCulled = false; flame.renderOrder = 16; scene.add(flame);
+
+/* ---------- пост-обработка игры: bloom → tilt-shift → тон → аберрация/зерно/глитч ---------- */
+const composer = new EffectComposer(renderer);
+const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 0.6, 0.55, 0.8);
+const dofH = new ShaderPass(DOFShader), dofV = new ShaderPass(DOFShader);
+dofH.uniforms.uDir.value.set(1, 0); dofV.uniforms.uDir.value.set(0, 1);
+const finalPass = new ShaderPass(FinalShader);
+composer.addPass(new RenderPass(scene, camera)); composer.addPass(bloom); composer.addPass(dofH); composer.addPass(dofV);
+composer.addPass(new OutputPass()); composer.addPass(finalPass);
+const FX = finalPass.uniforms;
+const perf = { scale: 0.8, acc: 0, frames: 0, cool: 0 };
+function resize() {
+  const w = Math.max(1, innerWidth), h = Math.max(1, innerHeight);
+  const pr = Math.min(window.devicePixelRatio || 1, 1.75) * perf.scale;
+  renderer.setPixelRatio(pr); renderer.setSize(w, h, false); composer.setPixelRatio(pr); composer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.fov = camera.aspect < 1 ? Math.min(72, THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(19)) / camera.aspect))) : 46;
+  camera.updateProjectionMatrix();
+  const rw = Math.round(w * pr), rh = Math.round(h * pr);
+  dofH.uniforms.uRes.value.set(rw, rh); dofV.uniforms.uRes.value.set(rw, rh); FX.uRes.value.set(rw, rh);
+  U.pScale.value = rh / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
+}
+addEventListener('resize', resize); resize();
+
+/* ---------- палитра игры: сумерки, дышащие к «синему часу» ---------- */
+const PALETTES = {
+  dusk: { skyTop: '#2c3c7e', skyHor: '#ffaf78', fog: '#d99a86', fogD: 0.0125, keyCol: '#ffc48a', keyI: 2.7, sunEl: 0.16, sunVis: 1, hemiSky: '#ffd9bf', hemiGnd: '#4b3552', hemiI: 1.6,
+    deep: '#245a98', shallow: '#4fc4cf', foam: '#fff2dc', wSky: '#f6b48e', bloom: 0.5, exposure: 1.0, motes: 1, flies: 0, mist: 0.05, mistCol: '#ffd6c2', stars: 0, grain: 0.045, vig: 0.32, gain: [1.03, 1.0, 0.95], lift: [0.03, 0.0, 0.04] },
+  twi: { skyTop: '#1b2056', skyHor: '#d0687c', fog: '#7a4a72', fogD: 0.017, keyCol: '#ff8a66', keyI: 1.6, sunEl: 0.03, sunVis: 0.85, hemiSky: '#a58ed6', hemiGnd: '#2a2038', hemiI: 1.15,
+    deep: '#15294f', shallow: '#2d7c98', foam: '#f7dbe9', wSky: '#c27a96', bloom: 0.68, exposure: 1.02, motes: 0.45, flies: 0.55, mist: 0.1, mistCol: '#b88fbd', stars: 0.35, grain: 0.055, vig: 0.4, gain: [1.0, 0.97, 1.02], lift: [0.04, 0.0, 0.06] },
+};
+const prep = (p) => { const o = {}; for (const k in p) o[k] = typeof p[k] === 'string' ? new THREE.Color(p[k]) : Array.isArray(p[k]) ? p[k].slice() : p[k]; return o; };
+const PAL = { dusk: prep(PALETTES.dusk), twi: prep(PALETTES.twi) }, pal = prep(PALETTES.dusk);
+function mixInto(out, a, b, t) { for (const k in out) { const v = out[k]; if (v && v.isColor) v.copy(a[k]).lerp(b[k], t); else if (Array.isArray(v)) for (let i = 0; i < v.length; i++) v[i] = lerp(a[k][i], b[k][i], t); else out[k] = lerp(a[k], b[k], t); } }
+const sunDir = new THREE.Vector3(), moonDir = new THREE.Vector3(0.3, 0.7, 0.6).normalize();
+const sunAz = -2.2;
+function applyPalette(tod, dread) {
+  mixInto(pal, PAL.dusk, PAL.twi, tod);
+  sunDir.set(Math.cos(pal.sunEl) * Math.cos(sunAz), Math.sin(pal.sunEl), Math.cos(pal.sunEl) * Math.sin(sunAz));
+  scene.fog.color.copy(pal.fog).lerp(PAL.twi.deep, dread * 0.35); scene.fog.density = pal.fogD * (1 + dread * 0.25); U.fogD.value = scene.fog.density;
+  skyU.uTop.value.copy(pal.skyTop); skyU.uHorizon.value.copy(pal.skyHor); skyU.uBottom.value.copy(scene.fog.color);
+  skyU.uSunCol.value.copy(pal.keyCol); skyU.uSunDir.value.copy(sunDir); skyU.uSunVis.value = pal.sunVis; skyU.uNight.value = pal.stars; skyU.uMoonDir.value.copy(moonDir);
+  keyLight.color.copy(pal.keyCol); keyLight.intensity = pal.keyI;
+  hemi.color.copy(pal.hemiSky); hemi.groundColor.copy(pal.hemiGnd); hemi.intensity = pal.hemiI;
+  waterU.uDeep.value.copy(pal.deep).lerp(PAL.twi.deep, dread * 0.5); waterU.uShallow.value.copy(pal.shallow); waterU.uFoam.value.copy(pal.foam);
+  waterU.uSky.value.copy(pal.wSky); waterU.uSunCol.value.copy(pal.keyCol); waterU.uSunDir.value.copy(sunDir);
+  renderer.toneMappingExposure = pal.exposure;
+  mistColor.copy(pal.mistCol); mistAlpha.value = pal.mist;
+  flyU.uFly.value = 0.25 + pal.flies; flyU.uMote.value = pal.motes;
+  coinHaloMat.uniforms.uIntensity.value = 0.32 + tod * 0.15; coinBeamMat.uniforms.uIntensity.value = 0.12 + tod * 0.12;
+  bloom.strength = pal.bloom;
+  FX.uGrain.value = pal.grain * (REDUCED ? 0.5 : 1);
+  FX.uGain.value.setRGB(pal.gain[0], pal.gain[1], pal.gain[2]); FX.uLift.value.setRGB(pal.lift[0], pal.lift[1], pal.lift[2]);
+}
+
+/* =============================================================================
+   КИТ — 3D воксельное тело из 7 сегментов (волна идёт по позвоночнику)
+         + 2.5D: грудные плавники, хвостовой плавник, спинной — стопки пиксельных слоёв
+         + 2D: глаза, водяные пелены, стекающие с боков, короны брызг
+============================================================================= */
+const OUTLINE = '#1a1326';
+function pixTex(w, h, shape) {
+  // shape(x, y) → цвет или null; затем обводка 1 px (как у спрайтов игры)
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const g = cv.getContext('2d');
+  const grid = [];
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) grid.push(shape(x, y));
+  const has = (x, y) => x >= 0 && y >= 0 && x < w && y < h && grid[y * w + x];
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const c = grid[y * w + x];
+    if (c) { g.fillStyle = c; g.fillRect(x, y, 1, 1); }
+    else if (has(x - 1, y) || has(x + 1, y) || has(x, y - 1) || has(x, y + 1)) { g.fillStyle = OUTLINE; g.fillRect(x, y, 1, 1); }
+  }
+  const t = new THREE.CanvasTexture(cv);
+  t.magFilter = t.minFilter = THREE.NearestFilter; t.generateMipmaps = false; t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+const hpx = (x, y, s = 0) => hash3(x, y, s + 77);
+
+// --- 2.5D: грудной плавник горбача (длинный, с шишками по переднему краю) ---
+function finShape(layer) {
+  return (x, y) => {
+    const W2 = 64, t = x / (W2 - 1);
+    const c = 7.5 + 1.6 * Math.sin(t * 2.4);
+    let top = c - (5.4 * Math.pow(1 - t, 0.55) + 0.7), bot = c + (3.6 * Math.pow(1 - t, 0.7) + 0.6);
+    if (x % 7 < 2 && t < 0.92) top -= 1;                    // бугорки переднего края
+    const grow = layer === 0 ? 1 : layer === 1 ? 0.4 : 0;
+    if (y < top - grow || y > bot + grow || t > 0.985) return null;
+    if (layer === 0) return '#151d3a';
+    if (layer === 1) return '#2c3f78';
+    const k = (y - top) / Math.max(1, bot - top);
+    if (k < 0.55) return hpx(x, y) > 0.86 - t * 0.3 ? '#7f9fd4' : (hpx(x, y, 3) > 0.93 ? '#bfd0ea' : '#eef4fb');
+    if (k < 0.8) return hpx(x, y, 1) > 0.5 ? '#5b7cbd' : '#dfe8f4';
+    return t > 0.7 ? '#24356a' : '#3a5596';
+  };
+}
+// --- 2.5D: хвостовой плавник (сверху тёмный, снизу белый в пятнах) ---
+function flukeShape(layer) {
+  return (x, y) => {
+    const u = Math.abs(x - 23.5) / 24;
+    const yL = 6 + 9 * Math.pow(u, 1.5);
+    let yT = yL + 7 * Math.pow(1 - u, 0.6) + 1.4;
+    if (hpx(x, 5) > 0.62) yT -= 1;                           // зазубренный задний край
+    if (u < 0.08) yT -= 3;                                  // выемка посередине
+    const stock = u < 0.13 && y < yL + 2;
+    const grow = layer === 0 ? 1 : 0;
+    if (!(stock || (y >= yL - grow && y <= yT + grow)) || u > 0.99) return null;
+    if (layer === 0) return '#121a34';
+    if (layer === 1) return hpx(x, y, 2) > 0.8 ? '#1e2a52' : '#2a3a70';
+    const k = (y - yL) / Math.max(1, yT - yL);
+    if (hpx(x, y, 9) > 0.9) return '#f2f6fb';
+    return k > 0.75 ? '#3f5ca0' : hpx(x, y, 4) > 0.55 ? '#e9eff7' : '#c9d6ea';
+  };
+}
+function dorsalShape(layer) {
+  return (x, y) => {
+    const t = x / 15, top = 9 - 7 * Math.sin(Math.min(1, t * 1.2) * Math.PI * 0.62) + t * 3;
+    if (y < top - (layer ? 0 : 1) || y > 9) return null;
+    return layer ? (hpx(x, y) > 0.85 ? '#4a64a6' : '#24316a') : '#141b38';
+  };
+}
+const eyeTex = pixTex(10, 8, (x, y) => {
+  const dx = x - 4.5, dy = y - 3.5, r = Math.hypot(dx, dy * 1.25);
+  if (r > 3.6) return null;
+  if (r > 2.7) return '#2a2b45';
+  if (x === 5 && y === 2) return '#ffffff';
+  return r < 1.9 ? '#0d0b18' : '#c9cfdc';
+});
+const finTex = [0, 1, 2].map((l) => pixTex(64, 16, finShape(l)));
+const flukeTex = [0, 1, 2].map((l) => pixTex(48, 24, flukeShape(l)));
+const dorsalTex = [0, 1].map((l) => pixTex(16, 10, dorsalShape(l)));
+// 2D: колонна брызг для «короны» (кадры: подъём / пик)
+const crownTex = [0, 1].map((v) => pixTex(16, 40, (x, y) => {
+  const col = Math.floor(x / 2), h = 40 - (8 + hpx(col, v, 5) * 26) * (v ? 1 : 0.7);
+  if (y < h || x % 2 === 1 && hpx(x, y, v) > 0.6) { if (y < h && y > h - 3 && hpx(x, y, 7 + v) > 0.55) return '#ffffff'; return null; }
+  if (hpx(x, y, 11) > 0.9) return null;
+  return y < h + 4 ? '#ffffff' : hpx(x, y, 3) > 0.5 ? '#d8f0ff' : '#9fd2ee';
+}));
+
+// освещённый пиксельный спрайт / воксель — один шейдер на всё тело кита
+const whaleU = {
+  uKeyDir: { value: new THREE.Vector3(0, 1, 0) }, uKeyCol: { value: new THREE.Color() }, uSky: { value: new THREE.Color() }, uGnd: { value: new THREE.Color() },
+  uRim: { value: new THREE.Color('#ffd0a8') }, uSea: { value: SEA }, uWet: { value: 0.6 }, uFlash: { value: 0 },
+};
+const LIT_VERT = /* glsl */`
+varying vec3 vN, vW; varying vec2 vUv;
+#ifdef USE_COLOR
+varying vec3 vCol;
+#endif
+#include <fog_pars_vertex>
+void main() {
+  vec4 wp = modelMatrix * vec4(position, 1.0);
+  vW = wp.xyz; vN = normalize(mat3(modelMatrix) * normal); vUv = uv;
+  #ifdef USE_COLOR
+  vCol = color;
+  #endif
+  vec4 mvPosition = viewMatrix * wp;
+  gl_Position = projectionMatrix * mvPosition;
+  #include <fog_vertex>
+}`;
+const LIT_FRAG = /* glsl */`
+uniform vec3 uKeyDir, uKeyCol, uSky, uGnd, uRim; uniform float uSea, uWet, uFlash;
+uniform sampler2D uMap; uniform float uTex;
+varying vec3 vN, vW; varying vec2 vUv;
+#ifdef USE_COLOR
+varying vec3 vCol;
+#endif
+#include <fog_pars_fragment>
+void main() {
+  vec3 base;
+  float bev = 1.0;
+  #ifdef USE_COLOR
+    base = vCol;
+    float e = min(min(vUv.x, 1.0 - vUv.x), min(vUv.y, 1.0 - vUv.y));
+    bev = e < 0.09 ? (vUv.y > 0.5 || vUv.x < 0.5 ? 1.12 : 0.74) : 1.0;     // фаска вокселя: свет сверху-слева
+  #else
+    vec4 t = texture2D(uMap, vUv);
+    if (t.a < 0.5) discard;
+    base = t.rgb;
+  #endif
+  vec3 N = normalize(vN);
+  if (!gl_FrontFacing) N = -N;
+  vec3 V = normalize(cameraPosition - vW);
+  float dif = max(dot(N, uKeyDir), 0.0);
+  vec3 amb = mix(uGnd, uSky, N.y * 0.5 + 0.5);
+  float rim = pow(1.0 - max(dot(N, V), 0.0), 3.0);
+  float sp = pow(max(dot(reflect(-uKeyDir, N), V), 0.0), 20.0) * uWet;
+  vec3 col = base * bev * (amb * 0.62 + uKeyCol * dif * 0.95) + uRim * rim * 0.55 * (0.4 + uWet) + uKeyCol * sp * 0.55;
+  float uw = smoothstep(uSea + 0.15, uSea - 1.6, vW.y);
+  col = mix(col, col * vec3(0.3, 0.5, 0.72) + vec3(0.02, 0.06, 0.1), uw);
+  col += vec3(1.0, 0.85, 0.7) * uFlash;
+  gl_FragColor = vec4(col, 1.0);
+  #include <fog_fragment>
+}`;
+const whaleVoxMat = fogShader({ uniforms: whaleU, vertexShader: LIT_VERT, fragmentShader: LIT_FRAG, vertexColors: true });
+const spriteMat = (tex) => fogShader({ uniforms: Object.assign({ uMap: { value: tex }, uTex: { value: 1 } }, whaleU), vertexShader: LIT_VERT, fragmentShader: LIT_FRAG, side: THREE.DoubleSide });
+// пелена воды, стекающая с боков (2D, аддитивно)
+const drapeU = { uTime: U.time, uA: { value: 0 } };
+const drapeMat = new THREE.ShaderMaterial({
+  uniforms: drapeU, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide,
+  vertexShader: UV_VERT,
+  fragmentShader: /* glsl */`
+    uniform float uTime, uA; varying vec2 vUv;
+    float h12(vec2 p){ vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
+    void main() {
+      vec2 q = floor(vUv * vec2(28.0, 18.0));
+      float s = fract(q.y / 18.0 + uTime * (0.55 + h12(vec2(q.x, 1.0)) * 0.6) + h12(vec2(q.x, 7.0)));
+      float a = step(0.78, s) * step(0.55, h12(vec2(q.x, 3.0))) * (1.0 - abs(vUv.x * 2.0 - 1.0)) * uA;
+      a *= smoothstep(0.0, 0.25, vUv.y);
+      if (a < 0.01) discard;
+      gl_FragColor = vec4(vec3(0.75, 0.9, 1.0) * 1.1, a * 0.22);
+    }`,
+});
+
+// квад в плоскости XZ: корень в начале координат, длина вдоль +x
+function quadXZ(len, wid, x0 = 0) {
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute([x0, 0, -wid / 2, x0, 0, wid / 2, x0 + len, 0, wid / 2, x0 + len, 0, -wid / 2], 3));
+  g.setAttribute('normal', new THREE.Float32BufferAttribute([0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0], 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 0, 0, 1, 0, 1, 1], 2));
+  g.setIndex([0, 1, 2, 0, 2, 3]);
+  return g;
+}
+// стопка слоёв = 2.5D: тёмный силуэт сзади, средний тон, рисунок спереди
+function quadFluke(len, wid) {
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute([0, 0, -wid / 2, 0, 0, wid / 2, -len, 0, wid / 2, -len, 0, -wid / 2], 3));
+  g.setAttribute('normal', new THREE.Float32BufferAttribute([0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0], 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 1, 1, 1, 0, 0, 0], 2));
+  g.setIndex([0, 2, 1, 0, 3, 2]);
+  return g;
+}
+function layered(texs, len, wid, x0, gap, fluke = false) {
+  const grp = new THREE.Group();
+  texs.forEach((t, i) => {
+    const s = 1 + (texs.length - 1 - i) * 0.035;
+    const m = new THREE.Mesh(fluke ? quadFluke(len * s, wid * s) : quadXZ(len * s, wid * s, x0 * s), spriteMat(t));
+    m.position.y = (i - (texs.length - 1)) * gap; m.renderOrder = 3;
+    grp.add(m);
+  });
+  // рисунок и с изнанки: плавник читается с любой стороны
+  const back = new THREE.Mesh(fluke ? quadFluke(len, wid) : quadXZ(len, wid, x0), spriteMat(texs[texs.length - 1]));
+  back.position.y = -texs.length * gap; back.renderOrder = 3; grp.add(back);
+  return grp;
+}
+
+const WHALE = (() => {
+  const L = 15.4, VS = 0.24, NX = 64, NY = 24, NZ = 24;
+  const SEG_U = [1, 0.78, 0.62, 0.48, 0.34, 0.22, 0.1, 0];
+  const radius = (u) => 0.28 + 2.05 * smooth(0, 0.62, u) * (1 - 0.48 * smooth(0.84, 1.0, u));
+  const occ = new Uint8Array(NX * NY * NZ), idx = (x, y, z) => x + NX * (y + NY * z);
+  const cell = (ix, iy, iz) => { const u = (ix + 0.5) * VS / L, r = radius(u); return { u, r, x: (ix + 0.5) * VS, y: (iy - NY / 2 + 0.5) * VS, z: (iz - NZ / 2 + 0.5) * VS }; };
+  const inside = (ix, iy, iz) => {
+    const { u, r, y, z } = cell(ix, iy, iz);
+    let ry = r * 0.9, rz = r;
+    if (u < 0.25) { rz *= 0.72; ry *= 1.08; }
+    if (y < 0) ry *= 0.93;
+    if (u > 0.82 && y > 0) ry *= 0.86;
+    return (y / ry) ** 2 + (z / rz) ** 2 <= 1;
+  };
+  for (let z = 0; z < NZ; z++) for (let y = 0; y < NY; y++) for (let x = 0; x < NX; x++) if (inside(x, y, z)) occ[idx(x, y, z)] = 1;
+  // бугорки на голове
+  for (let z = 1; z < NZ - 1; z++) for (let x = 0; x < NX; x++) {
+    const u = (x + 0.5) * VS / L; if (u < 0.84) continue;
+    for (let y = NY - 2; y > 0; y--) if (occ[idx(x, y, z)]) { if (hash3(x, y, z) > 0.8) occ[idx(x, y + 1, z)] = 2; break; }
+  }
+  const getO = (x, y, z) => (x < 0 || y < 0 || z < 0 || x >= NX || y >= NY || z >= NZ ? 0 : occ[idx(x, y, z)]);
+  const segOf = (u) => { for (let k = 0; k < 7; k++) if (u >= SEG_U[k + 1]) return k; return 6; };
+  const jointU = [0.62, 0.78, 0.62, 0.48, 0.34, 0.22, 0.1];
+  const col = new THREE.Color();
+  const pick = (ix, iy, iz, o) => {
+    const { u, r, y, z } = cell(ix, iy, iz);
+    const ny = y / (r * 0.9), h = hash3(ix, iy, iz);
+    const mouthY = -0.12 * r - (u - 0.76) * 0.9;
+    if (o === 2) return '#18203f';
+    if (u > 0.76 && Math.abs(y - mouthY) < VS * 0.62 && Math.abs(z) > 0.45 * r) return h > 0.5 ? '#d9874f' : '#c06a3e';
+    if (u > 0.76 && y < mouthY) return h > 0.8 ? '#bcc9dc' : '#e8eef6';
+    if (ny < -0.36) { if (u > 0.4 && u < 0.86) return iz % 2 ? '#d6e0ee' : '#7f95b8'; return h > 0.85 ? '#a9b9d2' : '#d9e2ef'; }
+    if (ny < -0.08) return h > 0.5 ? '#dfe8f2' : '#5f7db8';
+    if (ny < 0.35) { if (h > 0.92) return '#eef3f9'; if (h < 0.05) return '#d27d4c'; if (h < 0.2) return '#2b3d73'; return h > 0.6 ? '#405c9e' : '#37508e'; }
+    return h > 0.95 ? '#5873b3' : h > 0.5 ? '#26336a' : '#1e2850';
+  };
+  const FV = [
+    [[1, 0, 0], [[1, 0, 0], [1, 1, 0], [1, 1, 1], [1, 0, 1]]], [[-1, 0, 0], [[0, 0, 1], [0, 1, 1], [0, 1, 0], [0, 0, 0]]],
+    [[0, 1, 0], [[0, 1, 0], [0, 1, 1], [1, 1, 1], [1, 1, 0]]], [[0, -1, 0], [[0, 0, 0], [1, 0, 0], [1, 0, 1], [0, 0, 1]]],
+    [[0, 0, 1], [[1, 0, 1], [1, 1, 1], [0, 1, 1], [0, 0, 1]]], [[0, 0, -1], [[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]]],
+  ];
+  const UVQ = [0, 0, 0, 1, 1, 1, 1, 0];
+  const geos = Array.from({ length: 7 }, () => ({ pos: [], nrm: [], uv: [], col: [], idx: [], n: 0 }));
+  let voxels = 0;
+  for (let z = 0; z < NZ; z++) for (let y = 0; y < NY; y++) for (let x = 0; x < NX; x++) {
+    const o = occ[idx(x, y, z)]; if (!o) continue;
+    const { u } = cell(x, y, z), k = segOf(u), G = geos[k], ox = (jointU[k]) * L;
+    let any = false;
+    col.set(pick(x, y, z, o));
+    for (const [n, vs] of FV) {
+      const X = x + n[0], Y = y + n[1], Z = z + n[2];
+      if (getO(X, Y, Z) && segOf((X + 0.5) * VS / L) === k) continue;
+      any = true;
+      for (let v = 0; v < 4; v++) {
+        G.pos.push((x + vs[v][0]) * VS - ox, (y + vs[v][1] - NY / 2) * VS, (z + vs[v][2] - NZ / 2) * VS);
+        G.nrm.push(n[0], n[1], n[2]); G.uv.push(UVQ[v * 2], UVQ[v * 2 + 1]); G.col.push(col.r, col.g, col.b);
+      }
+      G.idx.push(G.n, G.n + 1, G.n + 2, G.n, G.n + 2, G.n + 3); G.n += 4;
+    }
+    if (any) voxels++;
+  }
+  const root = new THREE.Group();
+  const segs = [];
+  let parent = root;
+  geos.forEach((G, k) => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(G.pos, 3)); g.setAttribute('normal', new THREE.Float32BufferAttribute(G.nrm, 3));
+    g.setAttribute('uv', new THREE.Float32BufferAttribute(G.uv, 2)); g.setAttribute('color', new THREE.Float32BufferAttribute(G.col, 3));
+    g.setIndex(G.idx); g.computeBoundingSphere();
+    const grp = new THREE.Group();
+    grp.position.x = k === 0 ? 0 : (jointU[k] - jointU[k - 1]) * L;
+    const m = new THREE.Mesh(g, whaleVoxMat); m.renderOrder = 2; m.frustumCulled = false;
+    grp.add(m); parent.add(grp); parent = grp; segs.push(grp);
+  });
+  // 2.5D грудные плавники
+  const fins = [-1, 1].map((s) => {
+    const base = new THREE.Group();
+    const u = 0.73, r = radius(u);
+    base.position.set((u - 0.78) * L, -0.42 * r, s * 0.9 * r);
+    base.rotation.y = s * (Math.PI - 0.5) * -1;
+    const flap = new THREE.Group(); base.add(flap);
+    const blade = layered(finTex, 5.8, 1.45, 0, 0.045); blade.rotation.x = s * 0.95; flap.add(blade);
+    segs[1].add(base);
+    return { base, flap, s };
+  });
+  // 2.5D хвостовой плавник
+  const flukeG = new THREE.Group();
+  flukeG.position.x = (0 - 0.1) * L + 0.05;
+  const fl = layered(flukeTex, 2.7, 5.4, 0, 0.05, true); flukeG.add(fl);
+  segs[6].add(flukeG);
+  // спинной плавник
+  const dors = new THREE.Group();
+  { const u = 0.36, r = radius(u); dors.position.set((u - 0.34) * L, 0.86 * r, 0); }
+  dorsalTex.forEach((t, i) => { const m = new THREE.Mesh(quadXZ(1.6, 1.0, -0.8), spriteMat(t)); m.rotation.x = Math.PI / 2; m.position.y = 0.45; m.position.z = (i - 1) * 0.06; m.renderOrder = 3; dors.add(m); });
+  segs[3].add(dors);
+  // 2D глаза
+  const eyes = [-1, 1].map((s) => {
+    const u = 0.835, r = radius(u);
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.5), spriteMat(eyeTex));
+    m.position.set((u - 0.62) * L, -0.02 * r, s * (r * 0.93 + 0.04)); m.rotation.y = s > 0 ? 0 : Math.PI; m.renderOrder = 4;
+    segs[0].add(m); return m;
+  });
+  // 2D пелены стекающей воды на боках
+  const drapes = [];
+  for (const k of [0, 1, 2, 3]) for (const s of [-1, 1]) {
+    const u0 = SEG_U[k + 1], u1 = SEG_U[k], um = (u0 + u1) / 2, r = radius(um);
+    const m = new THREE.Mesh(new THREE.PlaneGeometry((u1 - u0) * L * 1.02, r * 1.9), drapeMat);
+    m.position.set((um - jointU[k]) * L, -0.05, s * (r + 0.1)); m.rotation.y = s > 0 ? 0 : Math.PI; m.renderOrder = 19;
+    segs[k].add(m); drapes.push(m);
+  }
+  root.visible = false;
+  root.scale.setScalar(1.3);
+  scene.add(root);
+  return { root, segs, fins, flukeG, dors, eyes, drapes, L, SC: 1.3, radius, voxels, jointU, SEG_U,
+    parts: { segments: 7, voxels, finLayers: 3, flukeLayers: 3, dorsalLayers: 2, eyes: 2, drapes: drapes.length } };
+})();
+
+/* ---------- знаки на воде: тень падения (тёмная + пульсирующий край), волна, корона брызг ---------- */
+const markU = { uTime: U.time, uA: { value: 0 }, uRim: { value: 0 }, uRound: { value: 0 } };
+const markMat = new THREE.ShaderMaterial({
+  uniforms: markU, transparent: true, depthWrite: false, vertexShader: UV_VERT,
+  fragmentShader: /* glsl */`
+    uniform float uTime, uA, uRim, uRound; varying vec2 vUv;
+    void main() {
+      vec2 q = (floor(vUv * vec2(56.0, 18.0)) + 0.5) / vec2(56.0, 18.0) * 2.0 - 1.0;
+      q.x = mix(q.x * (q.x > 0.0 ? 1.0 : 0.92), q.x, uRound);
+      float w = mix(1.0 - 0.45 * smoothstep(-0.2, -1.0, q.x), 1.0, uRound);   // к хвосту тень уже
+      float d = length(vec2(q.x, q.y / w));
+      float fill = 1.0 - smoothstep(0.62, 1.0, d);
+      float rim = smoothstep(0.84, 0.95, d) * (1.0 - smoothstep(0.95, 1.02, d));
+      float pulse = 0.55 + 0.45 * sin(uTime * 9.0 - d * 6.0);
+      vec3 col = mix(vec3(0.03, 0.03, 0.09), vec3(1.6, 0.42, 0.25), rim * uRim);
+      float a = max(fill * uA * 0.72, rim * uRim * pulse);
+      if (a < 0.01) discard;
+      gl_FragColor = vec4(col, a);
+    }`,
+});
+const mark = new THREE.Mesh(new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2), markMat);
+mark.renderOrder = 6; mark.visible = false; scene.add(mark);
+const waveU = { uTime: U.time, uA: { value: 0 }, uR: { value: 1 } };
+const wave = new THREE.Mesh(new THREE.RingGeometry(0.86, 1, 96, 1).rotateX(-Math.PI / 2), new THREE.ShaderMaterial({
+  uniforms: waveU, transparent: true, depthWrite: false, vertexShader: UV_VERT,
+  fragmentShader: /* glsl */`uniform float uA; varying vec2 vUv;
+    void main() { float a = uA * (0.6 + 0.4 * step(0.5, fract(vUv.x * 40.0))); if (a < 0.01) discard; gl_FragColor = vec4(vec3(1.0, 1.04, 1.08), a * 0.7); }`,
+}));
+wave.renderOrder = 7; wave.visible = false; scene.add(wave);
+// корона: кольцо вертикальных 2D-колонн брызг, растут и опадают (2.5D в сумме)
+const CROWN_N = 26;
+const crown = new THREE.Group(); crown.visible = false; scene.add(crown);
+const crownCols = [];
+for (let i = 0; i < CROWN_N; i++) {
+  const mat = new THREE.MeshBasicMaterial({ map: crownTex[i % 2], transparent: true, alphaTest: 0.5, side: THREE.DoubleSide, color: new THREE.Color(1.15, 1.2, 1.25), fog: true });
+  const g = new THREE.PlaneGeometry(1, 1); g.translate(0, 0.5, 0);
+  const m = new THREE.Mesh(g, mat); m.renderOrder = 18; crown.add(m); crownCols.push(m);
+}
+
+/* =============================================================================
+   звук (Web Audio): прибой, всплески, монеты, низкий рёв кита в замедлении
+============================================================================= */
+const SFX = {
+  ctx: null, out: null, lp: null, muted: false,
+  init() {
+    if (this.ctx) { this.ctx.resume(); return; }
+    try { this.ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return; }
+    const c = this.ctx;
+    this.out = c.createGain(); this.out.gain.value = this.muted ? 0 : 0.8;
+    this.lp = c.createBiquadFilter(); this.lp.type = 'lowpass'; this.lp.frequency.value = 18000;
+    this.out.connect(this.lp); this.lp.connect(c.destination);
+    const len = c.sampleRate * 2, buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    this.noiseBuf = buf;
+    // прибой: шум сквозь полосовой фильтр, громкость дышит
+    const n = c.createBufferSource(); n.buffer = buf; n.loop = true;
+    const bp = c.createBiquadFilter(); bp.type = 'lowpass'; bp.frequency.value = 520;
+    const g = c.createGain(); g.gain.value = 0.05;
+    const lfo = c.createOscillator(); lfo.frequency.value = 0.11; const lg = c.createGain(); lg.gain.value = 0.035;
+    lfo.connect(lg); lg.connect(g.gain); n.connect(bp); bp.connect(g); g.connect(this.out); n.start(); lfo.start();
+  },
+  setMuted(m) { this.muted = m; if (this.out) this.out.gain.setTargetAtTime(m ? 0 : 0.8, this.ctx.currentTime, 0.05); },
+  slow(k) { if (this.lp) this.lp.frequency.setTargetAtTime(lerp(18000, 900, k), this.ctx.currentTime, 0.2); },
+  noise(dur, f0, f1, gain, type = 'lowpass', q = 0.8, delay = 0) {
+    if (!this.ctx) return; const c = this.ctx, t = c.currentTime + delay;
+    const s = c.createBufferSource(); s.buffer = this.noiseBuf; s.playbackRate.value = 0.8 + Math.random() * 0.4;
+    const f = c.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(Math.max(20, f1), t + dur);
+    const g = c.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(gain, t + Math.min(0.04, dur * 0.2)); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(this.out); s.start(t, Math.random()); s.stop(t + dur + 0.05);
+  },
+  tone(f0, f1, dur, type, gain, delay = 0) {
+    if (!this.ctx) return; const c = this.ctx, t = c.currentTime + delay;
+    const o = c.createOscillator(); o.type = type; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+    const g = c.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(gain, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(this.out); o.start(t); o.stop(t + dur + 0.05);
+  },
+  coin() { this.tone(988, 990, 0.09, 'square', 0.06); this.tone(1319, 1320, 0.22, 'square', 0.06, 0.08); },
+  swim() { this.noise(0.22, 1400, 400, 0.05, 'bandpass', 1.2); },
+  step() { this.noise(0.07, 900, 300, 0.035, 'lowpass'); },
+  jump() { this.tone(300, 520, 0.12, 'square', 0.04); },
+  strike() { this.noise(0.18, 3000, 600, 0.08, 'bandpass', 0.9); },
+  splash(k = 1) { this.noise(0.5 + k * 0.5, 2600, 220, 0.12 * k, 'lowpass'); this.noise(0.25 * k, 5000, 1500, 0.05 * k, 'highpass', 0.5); },
+  rumble() { this.tone(42, 30, 2.4, 'sine', 0.22); this.noise(2.2, 160, 60, 0.12, 'lowpass'); },
+  boom() { this.tone(70, 26, 2.2, 'sine', 0.5); this.noise(2.4, 900, 80, 0.38, 'lowpass'); this.noise(1.4, 4000, 400, 0.12, 'bandpass', 0.6, 0.05); },
+  hit() { this.tone(140, 50, 0.35, 'square', 0.12); this.noise(0.3, 700, 120, 0.15); },
+  // рёв кита: два расстроенных «пила» + суб, формантный фильтр плывёт вверх-вниз, вибрато
+  roar(dur = 5.2) {
+    if (!this.ctx) return; const c = this.ctx, t = c.currentTime;
+    const g = c.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.42, t + 1.1); g.gain.setValueAtTime(0.42, t + dur - 1.6); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    const form = c.createBiquadFilter(); form.type = 'bandpass'; form.Q.value = 3.2;
+    form.frequency.setValueAtTime(170, t); form.frequency.exponentialRampToValueAtTime(520, t + dur * 0.45); form.frequency.exponentialRampToValueAtTime(130, t + dur);
+    const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1100;
+    const vib = c.createOscillator(); vib.frequency.value = 4.6; const vg = c.createGain(); vg.gain.value = 1.6; vib.connect(vg);
+    const voices = [[44, 'sawtooth', 1], [44.7, 'sawtooth', 1], [22, 'sine', 1.4], [132, 'triangle', 0.25]];
+    for (const [f, type, amp] of voices) {
+      const o = c.createOscillator(); o.type = type;
+      o.frequency.setValueAtTime(f, t); o.frequency.exponentialRampToValueAtTime(f * 1.32, t + dur * 0.45); o.frequency.exponentialRampToValueAtTime(f * 0.88, t + dur);
+      vg.connect(o.frequency);
+      const a = c.createGain(); a.gain.value = amp * 0.5;
+      o.connect(a); a.connect(type === 'sine' ? lp : form); o.start(t); o.stop(t + dur + 0.1);
+    }
+    form.connect(lp); lp.connect(g); g.connect(this.out); vib.start(t); vib.stop(t + dur + 0.1);
+    // высокий стон поверх (песня горбача)
+    this.tone(180, 260, dur * 0.5, 'sine', 0.05, 0.4); this.tone(260, 150, dur * 0.45, 'sine', 0.04, 0.4 + dur * 0.5);
+  },
+  spout() { this.noise(1.1, 1800, 500, 0.06, 'bandpass', 0.7); },
+};
+
+/* =============================================================================
+   ввод: клавиатура, мышь, касания (левый палец — идти, правый — камера)
+============================================================================= */
+const keys = new Set();
+const inp = { mx: 0, mz: 0, jump: false, strike: false, camDX: 0, camDY: 0, camIdle: 9 };
+addEventListener('keydown', (e) => {
+  if (e.repeat) return;
+  keys.add(e.code);
+  if (e.code === 'Space') inp.jump = true;
+  if (e.code === 'KeyJ' || e.code === 'KeyF' || e.code === 'ShiftLeft') inp.strike = true;
+  if (e.code === 'KeyP' || e.code === 'Backquote' || e.code === 'Tab') { e.preventDefault(); toggleMenu(); }
+  if (e.code === 'KeyM') { SFX.init(); toggleMute(); }
+  if (e.code.startsWith('Arrow') || e.code === 'Space') e.preventDefault();
+});
+addEventListener('keyup', (e) => keys.delete(e.code));
+addEventListener('blur', () => keys.clear());
+const touches = new Map();
+let mouseDrag = null;
+canvas.addEventListener('pointerdown', (e) => {
+  SFX.init();
+  canvas.setPointerCapture(e.pointerId);
+  if (e.pointerType === 'mouse') { mouseDrag = { x: e.clientX, y: e.clientY, moved: 0 }; return; }
+  const left = e.clientX < innerWidth * 0.45;
+  touches.set(e.pointerId, { kind: left ? 'move' : 'cam', x0: e.clientX, y0: e.clientY, x: e.clientX, y: e.clientY });
+});
+canvas.addEventListener('pointermove', (e) => {
+  if (e.pointerType === 'mouse' && mouseDrag) {
+    const dx = e.clientX - mouseDrag.x, dy = e.clientY - mouseDrag.y;
+    mouseDrag.x = e.clientX; mouseDrag.y = e.clientY; mouseDrag.moved += Math.abs(dx) + Math.abs(dy);
+    inp.camDX += dx; inp.camDY += dy; return;
+  }
+  const t = touches.get(e.pointerId); if (!t) return;
+  if (t.kind === 'cam') { inp.camDX += (e.clientX - t.x) * 1.3; inp.camDY += (e.clientY - t.y) * 1.3; }
+  t.x = e.clientX; t.y = e.clientY;
+});
+const endPtr = (e) => {
+  if (e.pointerType === 'mouse') { if (mouseDrag && mouseDrag.moved < 6) inp.strike = true; mouseDrag = null; return; }
+  touches.delete(e.pointerId);
+};
+canvas.addEventListener('pointerup', endPtr); canvas.addEventListener('pointercancel', endPtr);
+canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+canvas.addEventListener('wheel', (e) => { rig.distT = clamp(rig.distT + e.deltaY * 0.01, 7, 22); }, { passive: true });
+function hold(id, on) {
+  const b = $(id);
+  b.addEventListener('pointerdown', (e) => { e.preventDefault(); e.stopPropagation(); SFX.init(); b.classList.add('on'); on(); });
+  const up = () => b.classList.remove('on');
+  b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up); b.addEventListener('pointerleave', up);
+}
+hold('bJmp', () => { inp.jump = true; });
+hold('bAtk', () => { inp.strike = true; });
+function readMove() {
+  let x = 0, z = 0;
+  if (keys.has('KeyW') || keys.has('ArrowUp')) z += 1;
+  if (keys.has('KeyS') || keys.has('ArrowDown')) z -= 1;
+  if (keys.has('KeyD') || keys.has('ArrowRight')) x += 1;
+  if (keys.has('KeyA') || keys.has('ArrowLeft')) x -= 1;
+  for (const t of touches.values()) if (t.kind === 'move') {
+    const dx = t.x - t.x0, dy = t.y - t.y0, l = Math.hypot(dx, dy);
+    if (l > 8) { const k = Math.min(1, l / 60) / l; x += dx * k; z -= dy * k; }
+  }
+  const l = Math.hypot(x, z); if (l > 1) { x /= l; z /= l; }
+  inp.mx = x; inp.mz = z;
+}
+
+/* =============================================================================
+   состояние игры, герой, камера
+============================================================================= */
+const G = { state: 'load', time: 0, wts: 1, slow: 0, fade: 0, fadeT: 1, flash: 0, glitch: 0, shake: 0, collected: 0, tod: 0, paused: false, fps: 60 };
+const P = {
+  pos: new THREE.Vector3(), vis: new THREE.Vector3(), vel: new THREE.Vector3(), vy: 0, onGround: false, inWater: false,
+  hp: 6, st: 1, fire: 0, fins: false, shield: false, invuln: 0, dunk: 0, facing: 1, frame: 4, anim: 0, dashT: 0, cd: 0, wakeT: 0, stepT: 0, punch: 0, lastIsle: 0,
+};
+const rig = { yaw: 0.6, yawT: 0.6, pitch: 0.52, pitchT: 0.52, dist: 12, distT: 12, pos: new THREE.Vector3(), look: new THREE.Vector3() };
+function beachOf(k, toward) {
+  const I = ISLES[k];
+  let best = null, bd = 1e9;
+  for (let z = (I.cz - I.R - 3) | 0; z < I.cz + I.R + 3; z++) for (let x = (I.cx - I.R - 3) | 0; x < I.cx + I.R + 3; x++) {
+    if (!inb(x, z)) continue;
+    const i = ci(x, z);
+    if (isleOf[i] !== k || stand[i] < 4 || stand[i] > 5 || !reach[i]) continue;
+    const d = Math.hypot(x - toward[0], z - toward[1]);
+    if (d < bd) { bd = d; best = [x, z]; }
+  }
+  return best || [I.cx, I.cz];
+}
+function placeHero(x, z) {
+  const g = groundAt(x, z);
+  P.pos.set(x, g < SEAL ? SEAL - 0.55 : g, z); P.vis.copy(P.pos); P.vel.set(0, 0, 0); P.vy = 0;
+}
+const tmpV = new THREE.Vector3(), tmpW = new THREE.Vector3(), camR = new THREE.Vector3();
+function hurt(dmg, from) {
+  if (P.invuln > 0 || G.state !== 'play') return;
+  if (P.shield) { P.shield = false; P.invuln = 1.5; G.flash = 0.25; FX.uFlashColor.value.setRGB(0.7, 0.9, 1); SFX.pop(); bubbleBurst(); return; }
+  P.hp = Math.max(0, P.hp - dmg); P.invuln = 2; P.dunk = 1.3;
+  G.glitch = 0.8; G.flash = 0.28; FX.uFlashColor.value.setRGB(1, 0.25, 0.3); G.shake = Math.max(G.shake, 1.2);
+  SFX.hit(); updateHearts(true);
+  if (from) { tmpV.subVectors(P.pos, from).setY(0).normalize(); P.vel.addScaledVector(tmpV, 9); }
+  if (P.hp <= 0) { G.state = 'down'; G.fadeT = 0; G.downT = 0; }
+}
+function updateHero(dt) {
+  readMove();
+  const sy = Math.sin(rig.yaw), cy = Math.cos(rig.yaw);
+  const wx = -sy * inp.mz + cy * inp.mx, wz = -cy * inp.mz - sy * inp.mx;
+  const g0 = groundAt(P.pos.x, P.pos.z);
+  const waterCol = g0 < SEAL - 0.3, swimY = SEAL - 0.55;
+  P.inWater = waterCol && P.pos.y <= swimY + 0.25;
+  const speed = (P.inWater ? 3.5 * (P.fins ? 1.3 : 1) * (P.st <= 0.02 ? 0.72 : 1) : 5.2);
+  const dashK = P.dashT > 0 ? P.dashT / 0.5 : 0;
+  const k = damp(P.inWater ? 3.2 : 11, dt);
+  P.vel.x = lerp(P.vel.x, wx * speed, k); P.vel.z = lerp(P.vel.z, wz * speed, k);
+  P.dashT = Math.max(0, P.dashT - dt); P.cd = Math.max(0, P.cd - dt);
+  const mvx = (P.vel.x + P.dashDir.x * 9 * dashK) * dt, mvz = (P.vel.z + P.dashDir.z * 9 * dashK) * dt;
+  const canStep = (nx, nz) => {
+    if (nx < 3 || nz < 3 || nx > W - 3 || nz > D - 3) return false;
+    const g = groundAt(nx, nz);
+    if (P.inWater) return g <= SEAL + 1.75;
+    return g <= P.pos.y + (P.onGround ? 1.05 : 0.2);
+  };
+  const r = 0.28;
+  if (canStep(P.pos.x + mvx + Math.sign(mvx) * r, P.pos.z)) P.pos.x += mvx; else P.vel.x *= 0.2;
+  if (canStep(P.pos.x, P.pos.z + mvz + Math.sign(mvz) * r)) P.pos.z += mvz; else P.vel.z *= 0.2;
+  const g = groundAt(P.pos.x, P.pos.z);
+  const water = g < SEAL - 0.3;
+  if (inp.jump) {
+    if (P.onGround) { P.vy = 8.6; P.onGround = false; SFX.jump(); }
+    else if (P.inWater) { P.vy = 6.4; SFX.splash(0.35); sprayRing(P.pos.x, P.pos.z, 14, 0.7); }
+  }
+  inp.jump = false;
+  if (water && P.pos.y <= swimY + 0.02 && P.vy <= 0) {
+    P.pos.y = lerp(P.pos.y, swimY, damp(8, dt)); P.vy = 0; P.onGround = false;
+  } else {
+    P.vy -= 26 * dt; P.pos.y += P.vy * dt;
+    const floor = water ? swimY : g;
+    if (P.pos.y <= floor) {
+      if (!P.onGround && P.vy < -6) { if (water) { SFX.splash(0.5); sprayRing(P.pos.x, P.pos.z, 18, 0.9); ripple(P.pos.x, P.pos.z, 1); } else SFX.step(); }
+      P.pos.y = floor; P.vy = 0; P.onGround = !water;
+    } else if (P.onGround && P.pos.y - g < 0.6 && P.vy <= 0) { P.pos.y = g; }
+    else P.onGround = false;
+  }
+  if (P.onGround && g > P.pos.y) P.pos.y = g;
+  // удар: на суше — кулак, в воде — мощный гребок-рывок (спасает из-под кита)
+  if (inp.strike && P.cd <= 0 && (!(P.inWater || water) || P.st >= 0.2)) {
+    if (P.inWater || water) P.st = Math.max(0, P.st - 0.34);
+    P.cd = 1.3; P.punch = 0.3; SFX.strike();
+    const fl = Math.hypot(P.vel.x, P.vel.z);
+    if (fl > 0.2) P.dashDir.set(P.vel.x / fl, 0, P.vel.z / fl); else P.dashDir.set(-sy, 0, -cy);
+    if (P.inWater || water) { P.dashT = 0.5; sprayRing(P.pos.x, P.pos.z, 26, 1.2); ripple(P.pos.x, P.pos.z, 1.2); SFX.splash(0.5); }
+    else for (let i = 0; i < 14; i++) glow.emit(P.pos.x + P.dashDir.x * 0.8, P.pos.y + 0.9, P.pos.z + P.dashDir.z * 0.8, rr(-2, 2) + P.dashDir.x * 3, rr(-1, 2), rr(-2, 2) + P.dashDir.z * 3, rr(0.2, 0.4), 0.2, 0.02, C.gold, 1, 0, 3, 0);
+  }
+  inp.strike = false;
+  P.invuln = Math.max(0, P.invuln - dt);
+  if (P.onGround && P.hp < 6) { P.regen = (P.regen || 0) + dt; if (P.regen > 10) { P.regen = 0; P.hp++; updateHearts(false); } } P.dunk = Math.max(0, P.dunk - dt); P.punch = Math.max(0, P.punch - dt);
+  // визуал: инерционное следование, кадры ходьбы / гребков
+  P.vis.x = lerp(P.vis.x, P.pos.x, damp(30, dt)); P.vis.z = lerp(P.vis.z, P.pos.z, damp(30, dt)); P.vis.y = lerp(P.vis.y, P.pos.y, damp(16, dt));
+  const sp = Math.hypot(P.vel.x, P.vel.z) + dashK * 6;
+  camR.set(Math.cos(rig.yaw), 0, -Math.sin(rig.yaw));
+  const side = P.vel.x * camR.x + P.vel.z * camR.z;
+  if (Math.abs(side) > 0.3) P.facing = Math.sign(side);
+  P.anim += dt * (P.inWater ? 3 + sp * 0.8 : sp * 2.1);
+  if (P.inWater) P.frame = sp > 0.4 ? [0, 2, 3, 5][(P.anim | 0) % 4] : [0, 2][((G.time * 1.4) | 0) % 2];
+  else if (!P.onGround) P.frame = 5;
+  else P.frame = sp > 0.5 ? (P.anim | 0) % 6 : 4;
+  if (P.onGround && sp > 0.5) { P.stepT -= dt * sp; if (P.stepT <= 0) { P.stepT = 1.6; SFX.step(); } }
+  if (P.inWater) {
+    P.wakeT -= dt;
+    if (P.wakeT <= 0) {
+      P.wakeT = sp > 0.5 ? 0.32 : 1.2; ripple(P.pos.x, P.pos.z, sp > 0.5 ? 0.7 : 0.35);
+      if (sp > 0.5) { SFX.swim(); for (let i = 0; i < 6; i++) dust.emit(P.pos.x + rr(-0.3, 0.3), SEAL + 0.05, P.pos.z + rr(-0.3, 0.3), rr(-1, 1), rr(1.5, 3.2), rr(-1, 1), rr(0.35, 0.6), 0.09, 0.05, C.spray, 0.9, 14, 0.5, 1, 1); }
+    }
+  }
+  const isle = isleOf[ci(P.pos.x | 0, P.pos.z | 0)]; if (isle >= 0 && !P.inWater) P.lastIsle = isle;
+}
+P.dashDir = new THREE.Vector3(1, 0, 0);
+function sprayRing(x, z, n, k) {
+  for (let i = 0; i < n; i++) { const a = rr(0, TAU), s = rr(0.6, 2) * k; dust.emit(x + Math.cos(a) * 0.3, SEAL + 0.05, z + Math.sin(a) * 0.3, Math.cos(a) * s, rr(2, 5) * k, Math.sin(a) * s, rr(0.4, 0.8), 0.1, 0.05, i % 3 ? C.spray : C.sprayB, 0.95, 16, 0.4, 1, 1); }
+}
+function drawHero(dt) {
+  const bob = P.inWater ? Math.sin(G.time * 2.4) * 0.06 : 0;
+  const dunk = P.dunk > 0 ? -Math.sin(Math.min(1, P.dunk / 1.3) * Math.PI) * 1.25 : 0;
+  hero.position.set(P.vis.x, P.vis.y + bob + dunk, P.vis.z);
+  hero.rotation.y = rig.yaw; hero.rotation.x = -0.12;
+  const breath = 1 + Math.sin(G.time * 2.2) * 0.02, pk = P.punch > 0 ? 1 + Math.sin(P.punch / 0.3 * Math.PI) * 0.12 : 1;
+  hero.scale.set(pk, breath / pk, 1);
+  heroMat.visible = !(P.invuln > 0 && ((G.time * 14) | 0) % 2 === 0 && P.dunk <= 0);
+  hero.visible = heroMat.visible;
+  setHeroFrame(P.frame, P.facing);
+  const g = groundAt(P.vis.x, P.vis.z);
+  heroShadow.visible = g >= SEAL - 0.3;
+  heroShadow.position.set(P.vis.x, g + 0.02, P.vis.z);
+  const hgt = Math.max(0, P.vis.y - g); heroShadow.scale.setScalar(0.9 / (1 + hgt * 0.25)); shadowU.uA.value = 0.5 / (1 + hgt * 0.4);
+}
+function updateCamera(dt) {
+  rig.yawT -= inp.camDX * 0.006; rig.pitchT = clamp(rig.pitchT + inp.camDY * 0.004, 0.18, 1.1);
+  if (Math.abs(inp.camDX) + Math.abs(inp.camDY) > 0) inp.camIdle = 0; else inp.camIdle += dt;
+  inp.camDX = inp.camDY = 0;
+  const sp = Math.hypot(P.vel.x, P.vel.z);
+  if (inp.camIdle > 2.2 && sp > 1 && WV.mode !== 'breach') {           // мягкий доворот за движением
+    const behind = Math.atan2(-P.vel.x, -P.vel.z);
+    rig.yawT += angDiff(rig.yawT, behind) * damp(0.5, dt);
+  }
+  let distT = rig.distT, pitchT = rig.pitchT;
+  tmpV.set(P.vis.x, P.vis.y + 1.1, P.vis.z).addScaledVector(P.vel, 0.3);
+  if (WV.mode === 'breach' || WV.mode === 'warn' || WV.mode === 'tail') {
+    // кадр как на эскизе: герой на переднем плане, кит встаёт из воды за ним
+    const k = WV.mode === 'warn' ? smooth(0, 1.4, WV.warnT) : 1 - smooth(2.7, 3.7, WV.t);
+    distT = lerp(distT, 27, k); pitchT = lerp(pitchT, 0.24, k);
+    const want = Math.atan2(P.pos.x - WV.S.x, P.pos.z - WV.S.y);
+    if (WV.t < 2.3) rig.yawT += angDiff(rig.yawT, want) * damp(1.6 * k, dt);
+    tmpW.set((WV.S.x + WV.T.x) / 2, SEAL + 5.5, (WV.S.y + WV.T.y) / 2);
+    tmpV.lerp(tmpW, 0.42 * k);
+  }
+  rig.yaw += angDiff(rig.yaw, rig.yawT) * damp(7, dt);
+  rig.pitch = lerp(rig.pitch, pitchT, damp(5, dt)); rig.dist = lerp(rig.dist, distT, damp(2.2, dt));
+  const cp = Math.cos(rig.pitch);
+  // камера не уходит в скалы: луч от героя к камере, при препятствии — ближе
+  let dist = rig.dist;
+  const ox = Math.sin(rig.yaw) * cp, oy = Math.sin(rig.pitch), oz = Math.cos(rig.yaw) * cp;
+  for (let s = 1; s < rig.dist; s += 0.4) {
+    if (solid(Math.floor(tmpV.x + ox * s), Math.floor(tmpV.y + oy * s), Math.floor(tmpV.z + oz * s))) { dist = Math.max(2.5, s - 0.7); break; }
+  }
+  rig.eff = lerp(rig.eff || dist, dist, damp(dist < (rig.eff || dist) ? 12 : 2, dt));
+  tmpW.set(tmpV.x + ox * rig.eff, tmpV.y + oy * rig.eff, tmpV.z + oz * rig.eff);
+  tmpW.y = Math.max(tmpW.y, Math.max(SEAL + 0.7, groundAt(tmpW.x, tmpW.z) + 1.4));
+  if (rig.pos.lengthSq() === 0) { rig.pos.copy(tmpW); rig.look.copy(tmpV); }
+  rig.pos.lerp(tmpW, damp(3.6, dt)); rig.look.lerp(tmpV, damp(6.5, dt));
+  G.shake = Math.max(0, G.shake - dt * 1.4);
+  const s = G.shake * G.shake * 0.35, t = G.time;
+  camera.position.set(rig.pos.x + (Math.sin(t * 37) + Math.sin(t * 23)) * s, rig.pos.y + Math.sin(t * 41) * s * 1.3, rig.pos.z + Math.cos(t * 29) * s);
+  camera.lookAt(rig.look);
+  // шумное «дыхание» камеры
+  camera.rotation.z += Math.sin(G.time * 0.37) * 0.004;
+  U.right.value.set(Math.cos(rig.yaw), 0, -Math.sin(rig.yaw));
+  U.camRight.value.setFromMatrixColumn(camera.matrixWorld, 0); U.camUp.value.setFromMatrixColumn(camera.matrixWorld, 1);
+}
+
+/* =============================================================================
+   КИТ: поведение — выныривание в замедленной съёмке, падение на героя; дальние фонтаны
+============================================================================= */
+// ключи прыжка (время кита τ): путь вдоль S→T, высота, тангаж, крен, изгиб
+const BREACH = [
+  [0.0, 0.0, -9.5, 1.38, 0.5, 0.0],
+  [0.45, 1.3, SEAL - 1.5, 1.32, 0.6, 0.0],
+  [1.05, 3.2, SEAL + 6.0, 1.08, 0.75, -0.03],
+  [1.45, 5.0, SEAL + 7.3, 0.6, 1.0, -0.07],
+  [1.85, 7.3, SEAL + 4.9, 0.08, 1.45, -0.05],
+  [2.2, 9.0, SEAL + 0.2, -0.14, 1.8, 0.02],
+  [2.8, 10.2, SEAL - 2.6, -0.36, 2.0, 0.04],
+  [3.8, 11.4, -9, -0.75, 2.1, 0.02],
+];
+const ROAM = [
+  [0, 0, -6, 0.2, 0, 0], [2.4, 6, SEAL - 0.85, 0.06, 0, 0], [5.2, 13.5, SEAL - 0.7, 0, 0.05, 0],
+  [7.6, 19.5, SEAL - 0.9, -0.12, 0, 0], [9.0, 22.5, SEAL - 2.6, -0.62, 0, 0.05], [10.6, 25, -8, -0.95, 0, 0],
+];
+// кубический Эрмит по неравномерным ключам — без рывков на стыках фаз
+function sampleKeys(K, t, out) {
+  if (t <= K[0][0]) { for (let j = 1; j < 6; j++) out[j - 1] = K[0][j]; return out; }
+  const n = K.length - 1;
+  if (t >= K[n][0]) { for (let j = 1; j < 6; j++) out[j - 1] = K[n][j]; return out; }
+  let i = 0; while (K[i + 1][0] < t) i++;
+  const a = K[i], b = K[i + 1], pa = K[Math.max(0, i - 1)], pb = K[Math.min(n, i + 2)];
+  const h = b[0] - a[0], s = (t - a[0]) / h, s2 = s * s, s3 = s2 * s;
+  for (let j = 1; j < 6; j++) {
+    const ma = (b[j] - pa[j]) / (b[0] - pa[0] || 1) * h, mb = (pb[j] - a[j]) / (pb[0] - a[0] || 1) * h;
+    out[j - 1] = (2 * s3 - 3 * s2 + 1) * a[j] + (s3 - 2 * s2 + s) * ma + (-2 * s3 + 3 * s2) * b[j] + (s3 - s2) * mb;
+  }
+  return out;
+}
+const WV = { mode: 'idle', t: 0, warnT: 0, cool: 7, swimT: 0, roamT: 9, S: new THREE.Vector2(), T: new THREE.Vector2(), fwd: new THREE.Vector2(1, 0), locked: false, flags: {}, beat: 0, crownT: -1, waveT: -1, impact: new THREE.Vector2(), spoutT: [] };
+const KV = [0, 0, 0, 0, 0];
+const isOpenSea = (x, z, d = 3) => inb(x | 0, z | 0) && landDist[ci(x | 0, z | 0)] >= d;
+function startBreach(force) {
+  WV.T.set(P.pos.x + P.vel.x * 0.8, P.pos.z + P.vel.z * 0.8);
+  let ok = false;
+  for (let k = 0; k < 16 && !ok; k++) {
+    // кит выныривает со стороны, противоположной солнцу: камера за героем видит его в тёплом свете
+    const a = Math.atan2(sunDir.z, sunDir.x) + (k < 8 ? rr(-0.7, 0.7) : rr(-Math.PI, Math.PI)); WV.fwd.set(Math.cos(a), Math.sin(a));
+    WV.S.set(WV.T.x - WV.fwd.x * 9, WV.T.y - WV.fwd.y * 9);
+    ok = isOpenSea(WV.S.x, WV.S.y, 3) || force;
+  }
+  WV.mode = 'warn'; WV.warnT = 0; WV.t = 0; WV.locked = false; WV.flags = {}; WV.decoy = litCount() >= 1; WV.decoyA = 0; WV.decoyOff = (Math.random() < 0.5 ? -1 : 1) * rr(6, 8);
+  WHALE.root.visible = true; mark.visible = true; markU.uA.value = 0; markU.uRim.value = 0; markU.uRound.value = 1;
+  SFX.rumble();
+}
+function startRoam() {
+  for (let k = 0; k < 12; k++) {
+    const a = rr(0, TAU), d = rr(34, 52), x = P.pos.x + Math.cos(a) * d, z = P.pos.z + Math.sin(a) * d;
+    const h = a + Math.PI / 2 + rr(-0.6, 0.6), fx = Math.cos(h), fz = Math.sin(h);
+    if (!isOpenSea(x, z, 6) || !isOpenSea(x + fx * 25, z + fz * 25, 6)) continue;
+    WV.mode = 'roam'; WV.t = 0; WV.S.set(x, z); WV.fwd.set(fx, fz); WV.T.set(x + fx * 25, z + fz * 25); WV.flags = {};
+    WHALE.root.visible = true; return;
+  }
+  WV.roamT = 6;
+}
+function bodyPoint(f, out) {     // точка на оси тела: f=1 нос, f=0 конец хвоста (без изгиба)
+  const x = (f - 0.62) * WHALE.L;
+  return out.set(x, 0, 0).applyMatrix4(WHALE.root.matrixWorld);
+}
+const _bp = new THREE.Vector3(), _bp2 = new THREE.Vector3();
+function bodySpray(n, wet) {
+  WHALE.root.updateMatrixWorld();
+  for (let i = 0; i < n; i++) {
+    const f = rr(0.05, 0.95);
+    bodyPoint(f, _bp);
+    const r = WHALE.radius(f) * 0.9 * WHALE.SC, a = rr(0, TAU);
+    _bp.x += Math.cos(a) * r * 0.6; _bp.z += Math.sin(a) * r * 0.6; _bp.y += rr(-r, r) * 0.6;
+    if (_bp.y < SEAL) continue;
+    dust.emit(_bp.x, _bp.y, _bp.z, rr(-0.8, 0.8), rr(-1.5, 0.5), rr(-0.8, 0.8), rr(0.9, 1.8), rr(0.08, 0.17), 0.05, Math.random() < 0.7 ? C.spray : C.sprayB, 0.95, 9, 0.2, 1, wet);
+  }
+}
+function bigSplash(x, z, power, along) {
+  const n = Math.round(260 * power);
+  for (let i = 0; i < n; i++) {
+    const f = along ? rr(-0.6, 0.4) : 0;
+    const bx = x + (along ? WV.fwd.x * f * WHALE.L * WHALE.SC : 0), bz = z + (along ? WV.fwd.y * f * WHALE.L * WHALE.SC : 0);
+    const a = rr(0, TAU), out = rr(1, 7) * power, up = rr(4, 15) * power;
+    dust.emit(bx + Math.cos(a) * rr(0, 2.2), SEAL + 0.1, bz + Math.sin(a) * rr(0, 2.2), Math.cos(a) * out, up, Math.sin(a) * out, rr(1.2, 2.6), rr(0.12, 0.34), 0.06, i % 4 ? C.spray : C.sprayB, 1, 13, 0.25, 1, 1);
+  }
+  for (let i = 0; i < 40 * power; i++) {
+    const a = rr(0, TAU);
+    glow.emit(x + Math.cos(a) * rr(0, 3), SEAL + rr(0, 2), z + Math.sin(a) * rr(0, 3), Math.cos(a) * rr(1, 4), rr(2, 7), Math.sin(a) * rr(1, 4), rr(1.4, 2.6), rr(0.4, 0.9), rr(1.2, 2.2), C.mist, 0.08, 1.5, 0.6, 0, 1);
+  }
+  for (let k = 0; k < 3; k++) ripple(x + rr(-1, 1), z + rr(-1, 1), 1.5);
+}
+function impact() {
+  WHALE.root.updateMatrixWorld();
+  const head = bodyPoint(0.98, _bp).clone(), tail = bodyPoint(0.06, _bp2).clone();
+  const ax = tail.x - head.x, az = tail.z - head.z, L2 = ax * ax + az * az;
+  const t = clamp(((P.pos.x - head.x) * ax + (P.pos.z - head.z) * az) / L2, 0, 1);
+  const cx = head.x + ax * t, cz = head.z + az * t, d = Math.hypot(P.pos.x - cx, P.pos.z - cz);
+  const mid = (head.x + tail.x) / 2, midz = (head.z + tail.z) / 2;
+  WV.impact.set(mid, midz);
+  bigSplash(mid, midz, 1.5, true);
+  WV.crownT = 0; WV.waveT = 0;
+  SFX.boom(); SFX.splash(2);
+  G.shake = Math.max(G.shake, d < 9 ? 1.5 : 0.8); G.flash = 0.22; FX.uFlashColor.value.setRGB(1, 0.98, 0.95);
+  if (d < 3.1 && P.pos.y < SEAL + 2.6) hurt(2, tmpW.set(cx, SEAL, cz));
+  else if (d < 9) { tmpV.set(P.pos.x - cx, 0, P.pos.z - cz).normalize(); P.vel.addScaledVector(tmpV, (9 - d) * 1.1); G.glitch = Math.max(G.glitch, 0.35); }
+}
+function updateWhale(dtReal) {
+  const inSea = P.inWater && isOpenSea(P.pos.x, P.pos.z, 7);
+  if (WV.mode === 'idle' || WV.mode === 'roam') {
+    WV.cool -= dtReal;
+    WV.swimT = inSea ? WV.swimT + dtReal : Math.max(0, WV.swimT - dtReal * 0.5);
+    if (WV.swimT > 3 && WV.cool <= 0 && G.state === 'play' && !G.won) { if (litCount() >= 2 && Math.random() < 0.42) startTail(); else startBreach(false); }
+  }
+  if (WV.mode === 'idle') {
+    WV.roamT -= dtReal;
+    if (WV.roamT <= 0) { WV.roamT = rr(14, 22); if (P.inWater || landDist[ci(P.pos.x | 0, P.pos.z | 0)] < 4) startRoam(); }
+  }
+  // замедление: кит в рапиде, герой — с прежней скоростью
+  let slowT = 0;
+  if (WV.mode === 'breach') slowT = smooth(0.35, 0.6, WV.t) * (1 - smooth(2.2, 2.6, WV.t));
+  if (WV.mode === 'tail') slowT = smooth(1.3, 1.7, WV.t) * (1 - smooth(2.3, 2.6, WV.t)) * 0.8;
+  G.slow = lerp(G.slow, slowT, damp(slowT > G.slow ? 3 : 2.2, dtReal));
+  G.wts = lerp(1, 0.3, G.slow);
+  SFX.slow(G.slow);
+  const dtW = dtReal * G.wts;
+  WV.beat += dtW;
+  const R = WHALE.root;
+  if (WV.mode === 'warn') {
+    WV.warnT += dtReal;
+    WV.T.lerp(tmpW.set(P.pos.x, P.pos.z, 0), damp(1.4, dtReal));
+    // тёмная туша поднимается из глубины: круглая тень и пузыри
+    mark.position.set(WV.S.x, SEAL + 0.03, WV.S.y); mark.scale.set(6 * smooth(0, 1.8, WV.warnT) + 1, 1, 6 * smooth(0, 1.8, WV.warnT) + 1);
+    markU.uA.value = smooth(0, 1.6, WV.warnT) * 0.9; markU.uRound.value = 1; markU.uRim.value = 0;
+    if (Math.random() < 0.6) glow.emit(WV.S.x + rr(-2, 2), SEAL + 0.05, WV.S.y + rr(-2, 2), 0, rr(0.3, 0.9), 0, rr(0.3, 0.7), 0.16, 0.05, C.bubble, 0.7, 0, 0, 0);
+    if (Math.random() < 0.12) ripple(WV.S.x + rr(-2, 2), WV.S.y + rr(-2, 2), 0.5);
+    sampleKeys(BREACH, 0, KV);
+    placeWhale(KV, WV.S, WV.T);
+    if (WV.warnT >= 1.8) { WV.mode = 'breach'; WV.t = 0; }
+  } else if (WV.mode === 'breach') {
+    WV.t += dtW;
+    if (!WV.locked) {
+      const tgx = P.pos.x + P.vel.x * 0.5, tgz = P.pos.z + P.vel.z * 0.5;
+      if (isOpenSea(tgx, tgz, 1)) WV.T.lerp(tmpW.set(tgx, tgz, 0), damp(1.1, dtReal));
+      if (WV.t >= 1.4) { WV.locked = true; SFX.tone(70, 60, 0.5, 'sine', 0.15); }
+    }
+    sampleKeys(BREACH, WV.t, KV);
+    placeWhale(KV, WV.S, WV.T);
+    // тень места падения: тянется за героем, после «захвата» край вспыхивает
+    const show = smooth(0.5, 1.0, WV.t) * (1 - smooth(2.2, 2.5, WV.t));
+    WHALE.root.updateMatrixWorld();
+    const mx = WV.T.x - WV.fwd.x * WHALE.L * WHALE.SC * 0.08, mz = WV.T.y - WV.fwd.y * WHALE.L * WHALE.SC * 0.08;
+    mark.position.set(mx, SEAL + 0.03, mz); mark.rotation.y = Math.atan2(-WV.fwd.y, WV.fwd.x);
+    const grow = smooth(0.5, 2.0, WV.t);
+    mark.scale.set(WHALE.L * WHALE.SC * (0.6 + 0.45 * grow), 1, 4.6 * WHALE.SC * (0.6 + 0.45 * grow));
+    markU.uRound.value = 0; markU.uA.value = show * (0.5 + 0.5 * grow); markU.uRim.value = WV.locked ? show : show * 0.35;
+    updateDecoy(show, grow, dtReal);
+    if (WV.t > 0.45 && !WV.flags.surf) { WV.flags.surf = 1; bodyPoint(0.9, _bp); bigSplash(_bp.x, _bp.z, 0.9, false); SFX.roar(5.6); SFX.splash(1.3); G.shake = Math.max(G.shake, 0.6); }
+    if (WV.t > 0.45 && WV.t < 2.25) bodySpray(9, 1);
+    if (WV.t >= 2.2 && !WV.flags.hit) { WV.flags.hit = 1; impact(); }
+    if (WV.t >= 3.8) endWhale(whaleCool());
+  } else if (WV.mode === 'tail') {
+    WV.t += dtW; updateTail(dtReal);
+  } else if (WV.mode === 'roam') {
+    WV.t += dtW;
+    sampleKeys(ROAM, WV.t, KV);
+    placeWhale(KV, WV.S, null);
+    for (const st of [3.4, 6.2]) if (WV.t > st && !WV.flags[st]) {
+      WV.flags[st] = 1; WHALE.root.updateMatrixWorld(); bodyPoint(0.9, _bp);
+      for (let i = 0; i < 90; i++) dust.emit(_bp.x + rr(-0.2, 0.2), SEAL + 0.6, _bp.z + rr(-0.2, 0.2), rr(-0.6, 0.6), rr(5, 9), rr(-0.6, 0.6), rr(1.2, 2.2), rr(0.12, 0.3), 0.6, C.spray, 0.75, 4, 1.4, 0, 1);
+      if (P.pos.distanceTo(_bp) < 60) SFX.spout();
+    }
+    if (WV.t > 2 && WV.t < 9 && Math.random() < 0.25) { WHALE.root.updateMatrixWorld(); bodyPoint(rr(0.2, 0.9), _bp); ripple(_bp.x, _bp.z, 0.4); }
+    if (WV.t >= 10.6) endWhale(WV.cool);
+  }
+  if (WV.mode === 'idle') { mark.visible = false; }
+  // жизнь кита: волна по сегментам, взмахи плавников, моргание
+  if (R.visible) {
+    const ph = WV.beat, breach = WV.mode === 'breach' || WV.mode === 'warn';
+    const amp = breach ? 0.05 + 0.04 * smooth(1.2, 1.8, WV.t) : 0.11;
+    for (let k = 1; k < 7; k++) WHALE.segs[k].rotation.z = KV[4] * (k < 4 ? 1 : -0.6) + Math.sin(ph * 2.3 - k * 0.8) * amp * (k / 6) * 1.4;
+    WHALE.segs.forEach((s, k) => { if (k) s.rotation.y = Math.sin(ph * 0.9 - k * 0.7) * 0.025 * (k / 6); });
+    WHALE.flukeG.rotation.z = Math.sin(ph * 2.3 - 7 * 0.8) * amp * 1.6;
+    const wing = breach ? smooth(0.6, 1.4, WV.t) * (1 - smooth(2.0, 2.4, WV.t)) : 0;
+    for (const f of WHALE.fins) {
+      f.flap.rotation.z = lerp(-0.42, 0.35, wing) + Math.sin(ph * (breach ? 1.6 : 1.1) + f.s) * (0.12 + wing * 0.25);
+      f.flap.rotation.x = Math.sin(ph * 1.3 + f.s * 2) * 0.08;
+    }
+    const blink = (Math.sin(ph * 0.7) > 0.985) ? 0.15 : 1;
+    WHALE.eyes.forEach((e) => { e.scale.y = lerp(e.scale.y, blink, damp(20, dtReal)); });
+    drapeU.uA.value = breach ? smooth(0.45, 0.65, WV.t) * (1 - smooth(2.0, 2.3, WV.t)) : 0;
+    whaleU.uWet.value = 0.45 + drapeU.uA.value * 0.5;
+  }
+  // корона брызг и волна-кольцо (во времени кита: застывают в рапиде)
+  if (WV.crownT >= 0) {
+    WV.crownT += dtW;
+    const t = WV.crownT, up = smooth(0, 0.35, t), down = smooth(0.5, 1.6, t);
+    crown.visible = t < 1.7;
+    crown.position.set(WV.impact.x, SEAL - 0.1, WV.impact.y);
+    crownCols.forEach((m, i) => {
+      const a = i / CROWN_N * TAU, ex = Math.cos(a) * (WHALE.L * WHALE.SC * 0.5 + 1.5 * t), ez = Math.sin(a) * (3.2 + 1.2 * t);
+      const ca = Math.cos(-crown.rotation.y);
+      m.position.set(ex, 0, ez);
+      m.rotation.y = -a + Math.PI / 2;
+      const h = (4 + 3.5 * hash3(i, 3, 1)) * up * (1 - down * 0.9);
+      m.scale.set(1.3 + 0.4 * hash3(i, 1, 1), Math.max(0.01, h), 1);
+      m.rotation.z = Math.cos(a) * 0.25 * up;
+    });
+    crown.rotation.y = Math.atan2(-WV.fwd.y, WV.fwd.x);
+    if (t > 1.7) WV.crownT = -1;
+  }
+  if (WV.waveT >= 0) {
+    WV.waveT += dtW;
+    const t = WV.waveT;
+    wave.visible = t < 2.4; wave.position.set(WV.impact.x, SEAL + 0.04, WV.impact.y);
+    const r = 2 + t * 9; wave.scale.set(r, 1, r); waveU.uA.value = (1 - smooth(0.2, 2.4, t)) * 0.9;
+    if (t > 2.4) WV.waveT = -1;
+  }
+}
+function placeWhale(kv, S, T) {
+  const R = WHALE.root;
+  if (T) { tmpV.set(T.x - S.x, 0, T.y - S.y); const l = tmpV.length() || 1; WV.fwd.set(tmpV.x / l, tmpV.z / l); }
+  const f = T ? kv[0] / 9 : 0;
+  const x = T ? lerp(S.x, T.x, f) : S.x + WV.fwd.x * kv[0], z = T ? lerp(S.y, T.y, f) : S.y + WV.fwd.y * kv[0];
+  R.position.set(x, kv[1] + (SEAL - SEA), z);
+  R.rotation.order = 'YZX';
+  R.rotation.set(kv[3], Math.atan2(-WV.fwd.y, WV.fwd.x), kv[2]);
+}
+function endWhale(cool) { WV.mode = 'idle'; WV.cool = cool; WV.swimT = 0; WHALE.root.visible = false; mark.visible = false; decoy.visible = false; }
+
+/* =============================================================================
+   монеты, огни островов, HUD, мини-карта, меню
+============================================================================= */
+const heartsEl = $('hearts');
+function updateHearts(hit) {
+  const n = 3; if (heartsEl.children.length !== n) { heartsEl.replaceChildren(...Array.from({ length: n }, () => { const d = document.createElement('i'); d.className = 'heart'; return d; })); }
+  [...heartsEl.children].forEach((h, i) => { const v = clamp(P.hp - i * 2, 0, 2); h.dataset.v = v; if (hit) { h.classList.remove('hit'); void h.offsetWidth; h.classList.add('hit'); } });
+}
+function updateCoins(dt) {
+  for (let i = 0; i < COINS.length; i++) {
+    const c = COINS[i]; if (!c.alive) continue;
+    const dx = c.x - P.pos.x, dy = c.y - 0.4 - P.pos.y, dz = c.z - P.pos.z;
+    if (dx * dx + dz * dz < 0.8 && Math.abs(dy) < 1.4) {
+      c.alive = 0; coinObj.a[i] = 0; syncCoins(); G.collected++; SFX.coin();
+      for (let k = 0; k < 24; k++) glow.emit(c.x, c.y, c.z, rr(-2.5, 2.5), rr(1, 5), rr(-2.5, 2.5), rr(0.4, 0.9), 0.24, 0.03, C.gold, 1, 6, 1.2, 2);
+      $('cbar').style.width = (G.collected / COINS.length * 100).toFixed(1) + '%';
+      if (G.collected === COINS.length) { G.flash = 0.5; FX.uFlashColor.value.setRGB(1, 0.9, 0.6); for (let k = 0; k < 120; k++) glow.emit(P.pos.x, P.pos.y + 1, P.pos.z, rr(-5, 5), rr(3, 9), rr(-5, 5), rr(1, 2), 0.3, 0.05, k % 2 ? C.gold : C.ember, 1, 4, 0.8, 2); }
+    }
+  }
+}
+let fxAcc = 0;
+function isleLife(dt) {
+  fxAcc += dt;
+  const volc = ISLES.find((I) => I.id === 'volcano'), rift = ISLES.find((I) => I.id === 'rift'), home = ISLES[0], crater = ISLES.find((I) => I.id === 'crater');
+  isleLights[0].position.copy(volc.glowAt); isleLights[0].intensity = 26 * (0.8 + 0.2 * Math.sin(G.time * 3.1) * Math.sin(G.time * 1.7));
+  isleLights[1].position.copy(rift.glowAt); isleLights[1].intensity = 16 * (0.85 + 0.15 * Math.sin(G.time * 1.3));
+  isleLights[2].position.copy(home.beacon); isleLights[2].intensity = 30 * (0.85 + 0.15 * Math.sin(G.time * 2.3));
+  flame.position.copy(home.beacon).add(tmpV.set(0, -0.6, 0));
+  if (fxAcc < 0.05) return;
+  fxAcc = 0;
+  const near = (I, r) => Math.hypot(P.pos.x - I.cx, P.pos.z - I.cz) < r;
+  if (near(volc, 120)) {
+    for (let k = 0; k < 2; k++) dust.emit(volc.glowAt.x + rr(-2, 2), volc.glowAt.y, volc.glowAt.z + rr(-2, 2), rr(-0.3, 0.6), rr(1.4, 2.6), rr(-0.3, 0.3), rr(5, 8), rr(0.6, 1), rr(2.6, 4.2), C.smoke, 0.5, -0.05, 0.08, 0);
+    glow.emit(volc.glowAt.x + rr(-1.5, 1.5), volc.glowAt.y - 0.5, volc.glowAt.z + rr(-1.5, 1.5), rr(-1, 1), rr(2, 5), rr(-1, 1), rr(0.8, 1.6), 0.14, 0.04, C.ember, 1, 3, 0.2, 2);
+  }
+  if (near(crater, 80)) glow.emit(crater.cx + rr(-6, 6), 5 + rr(0, 1), crater.cz + rr(-6, 6), rr(-0.3, 0.3), rr(0.4, 1.4), rr(-0.3, 0.3), rr(1, 2.2), 0.12, 0.03, C.ember, 1, -0.2, 0.3, 2);
+  if (near(rift, 80)) glow.emit(rift.cx + rr(-14, 14), rr(4, 9), rift.cz + rr(-14, 14), rr(-0.2, 0.2), rr(0.2, 0.7), rr(-0.2, 0.2), rr(2, 4), 0.16, 0.05, C.crystal, 1, -0.05, 0.2, 2);
+}
+// мини-карта: основа рисуется один раз, поверх — герой, кит, монеты
+const mm = $('mm'), mmx = mm.getContext('2d');
+const mmBase = document.createElement('canvas'); mmBase.width = W; mmBase.height = D;
+function drawMinimapBase() {
+  const g = mmBase.getContext('2d'), img = g.createImageData(W, D), c = new THREE.Color();
+  for (let z = 0; z < D; z++) for (let x = 0; x < W; x++) {
+    const s = stand[ci(x, z)], o = (z * W + x) * 4;
+    if (s < SEAL) { const d = landDist[ci(x, z)]; c.set(d < 3 ? '#3fb2c2' : '#1c4277'); }
+    else { let b = 0; for (let y = s - 1; y >= 0; y--) if (vox[at(x, y, z)]) { b = vox[at(x, y, z)]; break; } c.copy(BLK[b].tint).multiply(new THREE.Color(b === B.grass || b === B.moss ? '#5ea443' : b === B.sand ? '#e9cf8f' : b === B.snow ? '#eef3fb' : b === B.lava ? '#ff7a2a' : b === B.crystal ? '#c08cff' : '#9a8f86')); c.multiplyScalar(0.8 + Math.min(s, 20) * 0.02); }
+    img.data[o] = Math.min(255, c.r * 255); img.data[o + 1] = Math.min(255, c.g * 255); img.data[o + 2] = Math.min(255, c.b * 255); img.data[o + 3] = 255;
+  }
+  g.putImageData(img, 0, 0);
+}
+function drawMinimap() {
+  const s = mm.width / W;
+  mmx.imageSmoothingEnabled = false; mmx.drawImage(mmBase, 0, 0, mm.width, mm.height);
+  mmx.fillStyle = '#ffc845';
+  for (const c of COINS) if (c.alive) mmx.fillRect(c.x * s - 1, c.z * s - 1, 2, 2);
+  if (WV.mode === 'breach' || WV.mode === 'warn' || WV.mode === 'tail') { mmx.fillStyle = (G.time * 6 | 0) % 2 ? '#ff4f6a' : '#2a1030'; mmx.fillRect(WV.T.x * s - 3, WV.T.y * s - 3, 6, 6); }
+  for (const L of LH) { mmx.fillStyle = '#120d1c'; mmx.fillRect(L.x * s - 3, L.z * s - 3, 6, 6); mmx.fillStyle = L.lit ? '#ffc845' : ((G.time * 2 | 0) % 2 ? '#c47bff' : '#6a4a9a'); mmx.fillRect(L.x * s - 2, L.z * s - 2, 4, 4); }
+  mmx.fillStyle = '#120d1c'; mmx.fillRect(P.pos.x * s - 3, P.pos.z * s - 3, 6, 6);
+  mmx.fillStyle = '#ffffff'; mmx.fillRect(P.pos.x * s - 2, P.pos.z * s - 2, 4, 4);
+}
+// меню
+function toggleMenu(force) {
+  const m = $('menu'), open = force ?? m.hidden;
+  if (G.state === 'load' || G.state === 'title') return;
+  m.hidden = !open; G.paused = open; keys.clear();
+  if (open) { refreshMenu(); $('mResume').focus();  } else canvas.focus();
+}
+$('bMenu').addEventListener('click', () => toggleMenu());
+$('mResume').addEventListener('click', () => toggleMenu(false));
+function travel(fn) { G.travel = fn; G.fadeT = 0; G.state = 'travel'; }
+$('mWhale').addEventListener('click', () => {
+  toggleMenu(false);
+  travel(() => {
+    let best = null, bd = 1e9;
+    for (let z = 8; z < D - 8; z += 2) for (let x = 8; x < W - 8; x += 2) {
+      if (landDist[ci(x, z)] < 10) continue;
+      const d = Math.hypot(x - P.pos.x, z - P.pos.z); if (d < bd) { bd = d; best = [x, z]; }
+    }
+    placeHero(best[0] + 0.5, best[1] + 0.5); endWhale(0); WV.swimT = 2.2; WV.cool = 0;
+  });
+});
+function toggleMute() { SFX.setMuted(!SFX.muted); $('wav').style.display = SFX.muted ? 'none' : ''; SAVE.muted = SFX.muted; writeSave(); }
+$('bMute').addEventListener('click', () => { SFX.init(); toggleMute(); });
+$('mTide').addEventListener('click', () => { toggleMenu(false); newTide(); });
+$('mHelp').innerHTML = IS_TOUCH
+  ? 'Левый палец — плыть и идти · правый палец — камера<br>Жёлтая — прыжок · оранжевая — удар; в воде это мощный гребок-рывок<br>Когда на воде темнеет тень — это кит. Красный край тени: он падает сюда — уплывай!'
+  : 'WASD / стрелки — идти и плыть · мышь (тянуть) — камера · колесо — дальше/ближе<br>Пробел — прыжок · J, клик или Shift — удар; в воде это мощный гребок-рывок · M — звук · Esc — меню<br>Когда на воде темнеет тень — это кит. Красный край тени: он падает сюда — уплывай!';
+function buildMenu() {
+  $('mIsles').replaceChildren(...ISLES.map((I, k) => {
+    const b = document.createElement('button'); b.className = 'mb';
+    const sw = document.createElement('i'); sw.className = 'sw'; sw.style.background = I.swatch;
+    const tx = document.createElement('span'); const nm = LANG === 'ru' ? [I.name, I.desc] : ISLE_EN[I.id]; const L = LH.find((o) => o.isle === k);
+    tx.innerHTML = `${L ? (L.lit ? '★ ' : '☆ ') : ''}${nm[0]}<small>${nm[1]}${L ? ' · ' + tr('conds')[L.cond] : ''}</small>`;
+    b.append(sw, tx);
+    b.addEventListener('click', () => { toggleMenu(false); travel(() => { const bc = beachOf(k, [128, 128]); const g = groundAt(bc[0] + 0.5, bc[1] + 0.5); placeHero(bc[0] + 0.5, bc[1] + 0.5); rig.yawT = rig.yaw = Math.atan2(bc[0] - I.cx, bc[1] - I.cz); rig.pos.set(0, 0, 0); endWhale(6); }); });
+    return b;
+  }));
+}
+
+/* =============================================================================
+   кадр
+============================================================================= */
+const clock = new THREE.Clock();
+function frame() {
+  requestAnimationFrame(frame);
+  const dtR = Math.min(0.05, clock.getDelta());
+  G.fps = lerp(G.fps, 1 / Math.max(1e-3, dtR), 0.05);
+  perf.acc += dtR; perf.frames++; perf.cool -= dtR;
+  if (perf.acc > 2) { const f = perf.frames / perf.acc; perf.acc = 0; perf.frames = 0; if (f < 38 && perf.scale > 0.55 && perf.cool <= 0) { perf.scale -= 0.1; perf.cool = 4; resize(); } }
+  if (!G.paused) step(dtR);
+  composer.render();
+}
+function step(dtR) {
+  G.time += dtR;
+  if (G.state === 'play' || G.state === 'down' || G.state === 'travel') {
+    if (G.state === 'play') updateHero(dtR);
+    updateWhale(dtR);
+    updateSystems(dtR);
+    updateCoins(dtR);
+  }
+  if (G.state === 'down') {
+    G.downT += dtR; G.fade = 1 - smooth(0.6, 1.8, G.downT);
+    if (G.downT > 2 && !G.adDown) { G.adDown = 1;  }
+    if (G.downT > 2) { G.adDown = 0; const bc = beachOf(0, [128, 200]); placeHero(bc[0] + 0.5, bc[1] + 0.5); P.hp = 6; P.invuln = 2; updateHearts(false); endWhale(10); G.state = 'play'; G.fadeT = 0; }
+  } else if (G.state === 'travel') {
+    G.fadeT += dtR; G.fade = 1 - smooth(0, 0.6, G.fadeT);
+    if (G.fadeT > 0.65 && G.travel) { G.travel(); G.travel = null; }
+    if (G.fadeT > 0.7) { G.state = 'play'; G.fadeT = 0; }
+  } else { G.fadeT += dtR; G.fade = smooth(0, 1.6, G.fadeT); }
+  U.time.value += dtR * G.wts;
+  G.tod = G.won ? 0 : 0.12 + 0.12 * Math.sin(G.time * 0.025) + litCount() * 0.02;
+  const dread = Math.max(markU.uA.value * (WV.mode === 'idle' ? 0 : 1), G.slow);
+  applyPalette(G.tod, dread); if (G.dawn > 0.001) applyDawn(G.dawn);
+  updateCamera(dtR);
+  drawHero(dtR);
+  isleLife(dtR * G.wts);
+  glow.update(dtR * G.wts); dust.update(dtR * G.wts); glow.flush(); dust.flush();
+  whaleU.uKeyDir.value.copy(sunDir); whaleU.uKeyCol.value.copy(pal.keyCol); whaleU.uSky.value.copy(pal.hemiSky); whaleU.uGnd.value.copy(pal.hemiGnd);
+  whaleU.uRim.value.copy(pal.skyHor).multiplyScalar(0.55);
+  keyLight.position.copy(P.pos).addScaledVector(sunDir, 60); keyLight.target.position.copy(P.pos);
+  // пост: в рапиде — аберрация, полосы кадра, лёгкое обесцвечивание; удар — глитч
+  G.flash = Math.max(0, G.flash - dtR * 1.4); G.glitch = Math.max(0, G.glitch - dtR * 1.1);
+  FX.uTime.value = G.time;
+  FX.uAberr.value = 0.0015 + G.slow * 0.0045 + G.glitch * 0.004;
+  FX.uGlitch.value = G.glitch * 0.9 + G.slow * 0.06 * (0.5 + 0.5 * Math.sin(G.time * 3.7));
+  FX.uBars.value = G.slow * 0.075;
+  FX.uDesat.value = G.slow * 0.18;
+  FX.uVignette.value = pal.vig + G.slow * 0.2;
+  FX.uDanger.value = (WV.locked && WV.mode === 'breach' ? markU.uRim.value * 0.5 : 0) + (P.hp <= 2 ? 0.25 + 0.15 * Math.sin(G.time * 4) : 0);
+  FX.uFlash.value = G.flash; FX.uFade.value = G.fade;
+  dofV.uniforms.uAmount.value = dofH.uniforms.uAmount.value = 0.8 * (1 - G.slow * 0.8);
+  bloom.strength = pal.bloom + G.slow * 0.25 + G.flash;
+  water.position.set(P.pos.x, SEAL, P.pos.z); waterU.uSea.value = SEAL;
+  mists.forEach((m, k) => { m.position.set(P.pos.x, SEAL + [0.12, 0.55, 1.0][k], P.pos.z); m.material.uniforms.uLayer.value = SEAL + [0.12, 0.55, 1.0][k]; });
+  sky.position.copy(camera.position);
+  $('bAtk').style.setProperty('--cd', (1 - P.cd / 1.3).toFixed(3));
+  G.mmT = (G.mmT || 0) - dtR; if (G.mmT <= 0) { G.mmT = 0.1; drawMinimap(); }
+}
+
+
+/* =============================================================================
+   ИГРА: прилив, выносливость, морские монеты, маяки, огонь воронки, реликвии,
+         хвост кита, водоворот, гейзер, ложная тень, музыка, сохранение, финал
+============================================================================= */
+const BR = window.bridge && window.__bridgeOK ? window.bridge : null;
+
+/* ---------- язык: только из платформы (Playgama), в артефакте — русский ---------- */
+let LANG = BR ? (String(BR.platform.language || 'en').slice(0, 2) === 'ru' ? 'ru' : 'en') : 'ru';
+const TXT = {
+  ru: {
+    title: 'Сумеречный архипелаг', resume: 'Продолжить', isles: 'Острова — нажми, чтобы приплыть', whale: 'Кит',
+    call: 'Позвать кита', callSub: 'герой окажется в открытом море — уплывай из-под тени', ctrl: 'Управление',
+    tide: 'Новый прилив', tideSub: 'маяки гаснут, монеты возвращаются (рекорд сохранится)',
+    goal: 'Цель: зажги маяки на всех восьми островах. Пока горят не все, кит злится всё сильнее.',
+    lights: 'Маяки', best: 'Рекорд', none: '—', dawn: 'Рассвет! Все маяки горят — кит ушёл в глубину.',
+    helpT: 'Левый палец — плыть и идти · правый палец — камера<br>Жёлтая — прыжок · оранжевая — удар; в воде это гребок-рывок, он тратит силы (синяя полоска)<br>Силы восстанавливаются только на суше<br>Тень на воде — это кит. Красный край: он падает сюда — уплывай!',
+    helpD: 'WASD / стрелки — идти и плыть · мышь (тянуть) — камера · колесо — ближе/дальше<br>Пробел — прыжок · J, клик или Shift — удар; в воде это гребок-рывок, он тратит силы (синяя полоска) · M — звук · P — меню<br>Силы восстанавливаются только на суше<br>Тень на воде — это кит. Красный край: он падает сюда — уплывай!',
+    conds: { coins: 'собери все монеты острова', summit: 'поднимись к маяку', fire: 'принеси огонь из воронки' },
+  },
+  en: {
+    title: 'Twilight Archipelago', resume: 'Resume', isles: 'Islands — tap to swim there', whale: 'Whale',
+    call: 'Call the whale', callSub: 'you appear in open sea — swim out of the shadow', ctrl: 'Controls',
+    tide: 'New tide', tideSub: 'lighthouses go dark, coins return (your record stays)',
+    goal: 'Goal: light the lighthouses on all eight islands. Until they all burn, the whale grows angrier.',
+    lights: 'Lighthouses', best: 'Best', none: '—', dawn: 'Dawn! Every lighthouse burns — the whale has gone deep.',
+    helpT: 'Left finger — walk and swim · right finger — camera<br>Yellow — jump · orange — strike; in water it is a dash stroke that costs stamina (blue bar)<br>Stamina recovers only on land<br>A shadow on the water is the whale. Red rim: it lands there — swim away!',
+    helpD: 'WASD / arrows — walk and swim · drag mouse — camera · wheel — zoom<br>Space — jump · J, click or Shift — strike; in water it is a dash stroke that costs stamina (blue bar) · M — sound · P — menu<br>Stamina recovers only on land<br>A shadow on the water is the whale. Red rim: it lands there — swim away!',
+    conds: { coins: 'collect all coins of the island', summit: 'climb up to the lighthouse', fire: 'bring fire from the crater' },
+  },
+};
+const ISLE_EN = {
+  dusk: ['Twilight Isle', 'home: grassy hills and a brick lighthouse'], canyon: ['Canyon', 'red terraces, a river gorge right through'],
+  crater: ['Blast Crater', 'scorched bowl, smouldering embers, trees knocked flat'], mountain: ['Mountain', 'snowy peak, stone slopes, pines below'],
+  volcano: ['Volcano', 'basalt cone, lava lake and fire rivers'], stacks: ['Sea Stacks', 'stone pillars and an arch over the water'],
+  atoll: ['Atoll', 'ring of beach, turquoise lagoon, corals and palms'], ziggurat: ['Ziggurat', 'stepped pyramid in the jungle, golden altar'],
+  rift: ['Crystal Rift', 'an island split in two, crystals glowing in the crack'],
+};
+const tr = (k) => (TXT[LANG] || TXT.en)[k] ?? TXT.en[k];
+
+/* ---------- сохранение: одним ключом через Bridge (в артефакте — localStorage) ---------- */
+const SAVE = { best: null, wins: 0, lit: [], coins: [], relics: [] };
+async function loadSave() {
+  try {
+    let raw = null;
+    if (BR) { const d = await BR.storage.get(['arch_save']); raw = d && d[0]; }
+    else raw = localStorage.getItem('arch.save');
+    if (raw) Object.assign(SAVE, typeof raw === 'string' ? JSON.parse(raw) : raw);
+  } catch (e) { /* без сохранения игра идёт с нуля */ }
+}
+function writeSave() {
+  SAVE.lit = LH.map((L) => (L.lit ? 1 : 0));
+  SAVE.coins = COINS.map((c) => (c.alive ? 0 : 1)).join('');
+  SAVE.relics = RELICS.map((r) => (r.alive ? 0 : 1));
+  const v = JSON.stringify(SAVE);
+  try { if (BR) BR.storage.set(['arch_save'], [v]).catch(() => {}); else localStorage.setItem('arch.save', v); } catch (e) { /* хранилище закрыто */ }
+}
+
+/* ---------- прилив: вода поднимается и опускается, пляжи уходят под воду ---------- */
+function updateTide() { SEAL = SEA + 0.6 - 0.6 * Math.cos(G.time * TAU / 110); }
+
+/* ---------- морские монеты: только вплавь, там, где охотится кит ---------- */
+function addSeaCoins() {
+  const r = mulberry32(SEED + 555), cand = [];
+  for (let z = 10; z < D - 10; z += 2) for (let x = 10; x < W - 10; x += 2) if (landDist[ci(x, z)] >= 8 && Math.hypot(x - 128, z - 128) < 112) cand.push([x, z]);
+  const sea = [];
+  while (sea.length < 24 && cand.length) {
+    let best = null, bd = -1;
+    for (let t = 0; t < 40; t++) { const c = cand[(r() * cand.length) | 0]; let d = 99; for (const o of sea) d = Math.min(d, Math.hypot(o[0] - c[0], o[1] - c[1])); if (d > bd) { bd = d; best = c; } }
+    sea.push(best);
+    COINS.push({ x: best[0] + 0.5, y: SEA + 0.45, z: best[1] + 0.5, alive: 1, isle: -1, sea: 1 });
+  }
+}
+let seaCoinT = 0;
+function updateSeaCoins(dt) {
+  seaCoinT -= dt; if (seaCoinT > 0) return; seaCoinT = 0.15;
+  const P3 = coinObj.insts[0].attrs.aPos.array;
+  COINS.forEach((c, i) => { if (c.sea) { c.y = SEAL + 0.45; P3[i * 3 + 1] = c.y; } });
+  coinObj.insts.forEach((ins) => { ins.attrs.aPos.needsUpdate = true; });
+}
+
+/* ---------- маяки: по одному на каждом новом острове, у каждого своё условие ---------- */
+const LH = [];
+const COND = { canyon: 'coins', atoll: 'coins', rift: 'coins', stacks: 'coins', mountain: 'summit', volcano: 'summit', ziggurat: 'summit', crater: 'fire' };
+function placeLighthouses() {
+  ISLES.forEach((I, k) => {
+    if (!k) return;
+    let best = null, bh = -1;
+    for (let z = (I.cz - I.R) | 0; z < I.cz + I.R; z++) for (let x = (I.cx - I.R) | 0; x < I.cx + I.R; x++) {
+      if (!inb(x, z)) continue;
+      const i = ci(x, z);
+      if (isleOf[i] !== k || !reach[i] || stand[i] < 5 || stand[i] > H - 9) continue;
+      if (I.coins.some((c) => c[0] === x && c[1] === z)) continue;
+      let nb = 0;
+      for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const j = ci(x + dx, z + dz); if (reach[j] && Math.abs(stand[j] - stand[i]) <= 1) nb++; }
+      if (nb < 2) continue;
+      const s = stand[i] - Math.hypot(x - I.cx, z - I.cz) * (I.id === 'canyon' || I.id === 'rift' ? 0.3 : 0.08);
+      if (s > bh) { bh = s; best = [x, z]; }
+    }
+    if (!best) return;
+    const [x, z] = best, g = stand[ci(x, z)];
+    for (let y = g; y < g + 4; y++) set(x, y, z, y === g + 3 ? B.ruin : B.brick);
+    set(x, g + 4, z, B.gold);
+    stand[ci(x, z)] = g + 5;
+    LH.push({ isle: k, id: I.id, cond: COND[I.id] || 'summit', x: x + 0.5, z: z + 0.5, y: g + 5, lit: false, glow: 0 });
+  });
+}
+const lhFlames = [], lhBeamA = new Float32Array(8), lhBeamP = new Float32Array(24), lhBeamPh = new Float32Array(8);
+let lhBeam = null;
+const lhBeamMat = glowMat(BEAM_FRAG, 1.6, 0.0, [0.75, 0.55, 1.0], 0.5);
+const lhBeamGeo = new THREE.PlaneGeometry(0.9, 26); lhBeamGeo.translate(0, 13, 0);
+function buildLighthouseFx() {
+  LH.forEach((L, i) => {
+    const u = { uTime: U.time, uLevel: { value: 0.1 }, uRight: U.right, uSize: { value: new THREE.Vector2(1.0, 1.6) } };
+    const m = new THREE.Mesh(flameGeo, new THREE.ShaderMaterial({ uniforms: u, vertexShader: FLAME_VERT, fragmentShader: FLAME_FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+    m.position.set(L.x, L.y - 0.1, L.z); m.frustumCulled = false; m.renderOrder = 16; scene.add(m); lhFlames.push(u);
+    lhBeamP[i * 3] = L.x; lhBeamP[i * 3 + 1] = L.y; lhBeamP[i * 3 + 2] = L.z; lhBeamPh[i] = i / 8; lhBeamA[i] = 1;
+  });
+  const inst = makeInstGeo(lhBeamGeo, LH.length, { aPos: [lhBeamP, 3], aPhase: [lhBeamPh, 1], aAlive: [lhBeamA, 1] });
+  const m = new THREE.Mesh(inst.geo, lhBeamMat); m.frustumCulled = false; m.renderOrder = 11; scene.add(m); lhBeam = inst;
+}
+const litCount = () => LH.reduce((n, L) => n + (L.lit ? 1 : 0), 0);
+function lightUp(L, silent) {
+  if (L.lit) return;
+  L.lit = true; L.glow = 1;
+  if (silent) return;
+  for (let k = 0; k < 90; k++) glow.emit(L.x, L.y + 0.4, L.z, rr(-4, 4), rr(2, 8), rr(-4, 4), rr(0.8, 1.6), 0.22, 0.04, k % 2 ? C.gold : C.ember, 1, 4, 0.8, 2);
+  G.flash = Math.max(G.flash, 0.3); FX.uFlashColor.value.setRGB(1, 0.85, 0.55);
+  SFX.chord(); G.shake = Math.max(G.shake, 0.4);
+  if (BR) try { BR.platform.sendMessage('level_completed', { world: 'archipelago', level: String(litCount()) }); } catch (e) { /* не важно */ }
+  writeSave(); 
+  if (litCount() === LH.length) winGame();
+}
+function updateLighthouses(dt) {
+  const n = litCount();
+  LH.forEach((L, i) => {
+    const near = Math.hypot(P.pos.x - L.x, P.pos.z - L.z) < 2.3 && Math.abs(P.pos.y - (L.y - 5)) < 2.6;
+    if (!L.lit) {
+      if (L.cond === 'coins' && COINS.every((c) => c.isle !== L.isle || !c.alive)) lightUp(L);
+      if (L.cond === 'summit' && near) lightUp(L);
+      if (L.cond === 'fire' && near && P.fire > 0) { P.fire = 0; lightUp(L); }
+    }
+    L.glow = Math.max(0, L.glow - dt * 0.5);
+    lhFlames[i].uLevel.value = L.lit ? 0.95 + 0.05 * Math.sin(G.time * 3 + i) : 0.12 + 0.05 * Math.sin(G.time * 2 + i);
+    lhBeamA[i] = L.lit ? 1.6 : 0.55;
+  });
+  lhBeam.attrs.aAlive.needsUpdate = true;
+  lhBeamMat.uniforms.uColor.value.setRGB(1, 0.78, 0.45);
+  lhBeamMat.uniforms.uIntensity.value = 0.35;
+  // HUD: восемь огоньков
+  const pips = $('lh').children;
+  for (let i = 0; i < pips.length; i++) pips[i].classList.toggle('on', !!(LH[i] && LH[i].lit));
+  G.level = n;
+}
+
+/* ---------- огонь из воронки: коснись углей — неси пламя к маяку воронки за 30 с ---------- */
+function updateFire(dt) {
+  const cr = ISLES.find((I) => I.id === 'crater');
+  if (Math.hypot(P.pos.x - cr.cx - 0.5, P.pos.z - cr.cz - 0.5) < 2.2 && !LH.find((L) => L.id === 'crater').lit) {
+    if (P.fire <= 0) { SFX.chord(); for (let k = 0; k < 30; k++) glow.emit(P.pos.x, P.pos.y + 1, P.pos.z, rr(-2, 2), rr(1, 4), rr(-2, 2), rr(0.5, 1), 0.2, 0.03, C.ember, 1, 2, 1, 2); }
+    P.fire = 30;
+  }
+  if (P.fire > 0) {
+    P.fire -= dt;
+    if (P.inWater) P.fire -= dt * 2;          // вода гасит огонь быстрее
+    if (Math.random() < 0.7) glow.emit(P.vis.x + rr(-0.15, 0.15), P.vis.y + 1.5, P.vis.z + rr(-0.15, 0.15), rr(-0.3, 0.3), rr(1, 2), rr(-0.3, 0.3), rr(0.3, 0.6), 0.16, 0.03, C.ember, 1, -0.5, 0.5, 2);
+  }
+}
+
+/* ---------- выносливость: рывок тратит, суша восстанавливает ---------- */
+function updateStamina(dt) {
+  if (P.inWater) P.st = Math.max(0, P.st - dt * 0.008);
+  else if (P.onGround) P.st = Math.min(1, P.st + dt * 0.45);
+  const b = $('sbar'); b.style.width = (P.st * 100).toFixed(1) + '%';
+  b.classList.toggle('low', P.st < 0.2);
+}
+
+/* ---------- реликвии в открытом море: ласты (быстрее плыть), пузырь (спасает от одного удара) ---------- */
+function relicTex(kind) {
+  return pixTex(16, 16, (x, y) => {
+    if (kind === 'fins') {
+      const l = Math.abs(x - 4.5) < 3 && y > 2 && y < 14 - Math.abs(x - 4.5), r = Math.abs(x - 11.5) < 3 && y > 2 && y < 14 - Math.abs(x - 11.5);
+      if (!(l || r)) return null; return y < 5 ? '#c6f4ff' : (x + y) % 3 ? '#3fb2c2' : '#2a7f9e';
+    }
+    const d = Math.hypot(x - 7.5, y - 7.5); if (d > 6.5) return null;
+    if (d > 5.4) return '#bfe9ff'; if (x > 3 && x < 6 && y > 3 && y < 6) return '#ffffff'; return (x + y) % 4 ? '#7fc8f0' : '#a6dcf7';
+  });
+}
+const RELICS = [];
+let relicObjs = [];
+function placeRelics() {
+  const r = mulberry32(SEED + 99);
+  for (const kind of ['fins', 'bubble', 'bubble']) {
+    for (let t = 0; t < 400; t++) {
+      const x = 20 + ((r() * (W - 40)) | 0), z = 20 + ((r() * (D - 40)) | 0);
+      if (landDist[ci(x, z)] < 11 || RELICS.some((o) => Math.hypot(o.x - x, o.z - z) < 40)) continue;
+      RELICS.push({ kind, x: x + 0.5, z: z + 0.5, alive: 1 }); break;
+    }
+  }
+  relicObjs = RELICS.map((o) => {
+    const grp = new THREE.Group();
+    const s = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.3), new THREE.MeshBasicMaterial({ map: relicTex(o.kind), alphaTest: 0.5, transparent: true, color: new THREE.Color(1.5, 1.5, 1.5), fog: true }));
+    const h = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), new THREE.ShaderMaterial({ uniforms: { uTime: U.time, uC: { value: o.kind === 'fins' ? new THREE.Color(0.3, 1.6, 1.8) : new THREE.Color(1.2, 1.4, 2.2) } }, vertexShader: UV_VERT,
+      fragmentShader: 'uniform float uTime; uniform vec3 uC; varying vec2 vUv; void main(){ float d=length(vUv*2.0-1.0); float a=pow(max(0.0,1.0-d),2.2)*(0.55+0.25*sin(uTime*3.0)); if(a<0.01) discard; gl_FragColor=vec4(uC,a); }',
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+    grp.add(h, s); s.renderOrder = 5; h.renderOrder = 12; scene.add(grp); return grp;
+  });
+}
+function updateRelics(dt) {
+  RELICS.forEach((o, i) => {
+    const g = relicObjs[i]; g.visible = !!o.alive; if (!o.alive) return;
+    g.position.set(o.x, SEAL + 0.9 + Math.sin(G.time * 2 + i) * 0.15, o.z); g.quaternion.copy(camera.quaternion);
+    if (Math.random() < 0.2) glow.emit(o.x + rr(-0.6, 0.6), SEAL + rr(0.4, 1.4), o.z + rr(-0.6, 0.6), 0, rr(0.3, 0.8), 0, rr(0.6, 1.2), 0.12, 0.03, o.kind === 'fins' ? C.bubble : C.crystal, 1, 0, 0.2, 2);
+    if (Math.hypot(P.pos.x - o.x, P.pos.z - o.z) < 1.3) {
+      o.alive = 0; SFX.chord();
+      if (o.kind === 'fins') P.fins = true; else P.shield = true;
+      for (let k = 0; k < 50; k++) glow.emit(o.x, SEAL + 1, o.z, rr(-3, 3), rr(1, 6), rr(-3, 3), rr(0.6, 1.2), 0.2, 0.04, C.bubble, 1, 4, 0.8, 2);
+      G.flash = 0.2; FX.uFlashColor.value.setRGB(0.6, 0.95, 1); writeSave();
+    }
+  });
+  $('rFins').hidden = !P.fins; $('rBub').hidden = !P.shield;
+  shieldMesh.visible = !!P.shield;
+  if (P.shield) { shieldMesh.position.set(P.vis.x, P.vis.y + 0.75, P.vis.z); shieldMesh.quaternion.copy(camera.quaternion); shieldMesh.scale.setScalar(1 + Math.sin(G.time * 3) * 0.04); }
+}
+const shieldMesh = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 2.2), new THREE.ShaderMaterial({ uniforms: { uTime: U.time }, vertexShader: UV_VERT,
+  fragmentShader: 'uniform float uTime; varying vec2 vUv; void main(){ vec2 q=(floor(vUv*24.0)+0.5)/24.0*2.0-1.0; float d=length(q); float a=smoothstep(0.78,0.92,d)*(1.0-smoothstep(0.92,1.0,d))*0.8+ (d<0.92?0.06:0.0); if(a<0.01) discard; gl_FragColor=vec4(vec3(0.7,1.1,1.6)*1.3,a); }',
+  transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+shieldMesh.renderOrder = 19; shieldMesh.visible = false; scene.add(shieldMesh);
+function bubbleBurst() { for (let k = 0; k < 60; k++) glow.emit(P.pos.x, P.pos.y + 0.8, P.pos.z, rr(-4, 4), rr(-1, 4), rr(-4, 4), rr(0.5, 1), 0.2, 0.05, C.bubble, 1, 2, 1, 0); }
+
+/* ---------- ложная тень: на втором маяке кит путает — одна из двух теней пустая ---------- */
+const decoy = new THREE.Mesh(mark.geometry, markMat.clone());
+decoy.material.uniforms.uTime = U.time; decoy.renderOrder = 6; decoy.visible = false; scene.add(decoy);
+function updateDecoy(show, grow, dt) {
+  if (!WV.decoy) { decoy.visible = false; return; }
+  WV.decoyA = WV.locked ? Math.max(0, WV.decoyA - dt * 2.5) : Math.min(1, WV.decoyA + dt * 2);
+  decoy.visible = WV.decoyA > 0.01;
+  const px = -WV.fwd.y, pz = WV.fwd.x, off = WV.decoyOff + Math.sin(G.time * 0.8) * 1.5;
+  decoy.position.set(mark.position.x + px * off, SEAL + 0.03, mark.position.z + pz * off);
+  decoy.rotation.copy(mark.rotation); decoy.scale.copy(mark.scale);
+  const u = decoy.material.uniforms;
+  u.uRound.value = 0; u.uA.value = markU.uA.value * WV.decoyA; u.uRim.value = markU.uRim.value * WV.decoyA;
+}
+
+/* ---------- удар хвостом: хвост встаёт из воды башней и падает плашмя ---------- */
+const TAIL = [
+  [0, 0, -14, -1.45, 0, 0], [1.0, 0, SEA - 2.8, -1.38, 0, 0], [1.75, 0, SEA - 2.5, -1.28, 0.12, 0.03],
+  [2.3, 0, SEA - 2.9, -0.2, 0.12, -0.05], [3.3, 0, SEA - 6, -0.5, 0.1, 0], [4.4, 0, -14, -1.0, 0, 0],
+];
+function startTail() {
+  const a = rr(0, TAU);
+  WV.fwd.set(Math.cos(a), Math.sin(a));
+  WV.T.set(P.pos.x + P.vel.x * 0.6, P.pos.z + P.vel.z * 0.6);
+  WV.mode = 'tail'; WV.t = 0; WV.locked = false; WV.flags = {}; WV.decoy = false;
+  WHALE.root.visible = true; mark.visible = true; markU.uRound.value = 1; markU.uA.value = 0; markU.uRim.value = 0;
+  SFX.rumble();
+}
+function updateTail(dtReal) {
+  if (!WV.locked) {
+    if (isOpenSea(P.pos.x, P.pos.z, 1)) WV.T.lerp(tmpW.set(P.pos.x + P.vel.x * 0.4, P.pos.z + P.vel.z * 0.4, 0), damp(1.3, dtReal));
+    if (WV.t >= 1.25) { WV.locked = true; SFX.tone(70, 60, 0.5, 'sine', 0.15); }
+  }
+  const reach = WHALE.L * WHALE.SC * 0.7;
+  WV.S.set(WV.T.x + WV.fwd.x * reach, WV.T.y + WV.fwd.y * reach);
+  sampleKeys(TAIL, WV.t, KV); placeWhale(KV, WV.S, null);
+  const show = smooth(0.3, 0.9, WV.t) * (1 - smooth(2.3, 2.6, WV.t));
+  mark.position.set(WV.T.x, SEAL + 0.03, WV.T.y); mark.scale.set(7.5, 1, 7.5); mark.rotation.y = 0;
+  markU.uRound.value = 1; markU.uA.value = show * 0.75; markU.uRim.value = WV.locked ? show : show * 0.3;
+  if (WV.t > 0.8 && !WV.flags.up) { WV.flags.up = 1; bigSplash(WV.S.x - WV.fwd.x * 3, WV.S.y - WV.fwd.y * 3, 0.7, false); SFX.roar(4.2); }
+  if (WV.t > 0.9 && WV.t < 2.3) bodySpray(6, 1);
+  if (WV.t >= 2.3 && !WV.flags.hit) {
+    WV.flags.hit = 1;
+    const d = Math.hypot(P.pos.x - WV.T.x, P.pos.z - WV.T.y);
+    WV.impact.set(WV.T.x, WV.T.y); bigSplash(WV.T.x, WV.T.y, 1.1, false); WV.crownT = 0; WV.waveT = 0;
+    SFX.boom(); SFX.splash(1.6); G.shake = Math.max(G.shake, d < 9 ? 1.3 : 0.6);
+    if (d < 3.4 && P.pos.y < SEAL + 2.4) hurt(2, tmpW.set(WV.T.x, SEAL, WV.T.y));
+    else if (d < 9) { tmpV.set(P.pos.x - WV.T.x, 0, P.pos.z - WV.T.y).normalize(); P.vel.addScaledVector(tmpV, (9 - d) * 1.3); }
+  }
+  if (WV.t >= 4.4) endWhale(whaleCool());
+}
+const whaleCool = () => lerp(15, 6, clamp(litCount() / 8, 0, 1)) + rr(0, 3);
+
+/* ---------- водоворот (с 3-го маяка) и гейзер (с 4-го) ---------- */
+const swirlU = { uTime: U.time, uA: { value: 0 } };
+const swirl = new THREE.Mesh(new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2), new THREE.ShaderMaterial({
+  uniforms: swirlU, transparent: true, depthWrite: false, vertexShader: UV_VERT,
+  fragmentShader: /* glsl */`uniform float uTime, uA; varying vec2 vUv;
+    void main() {
+      vec2 q = (floor(vUv * 64.0) + 0.5) / 64.0 * 2.0 - 1.0;
+      float r = length(q), a = atan(q.y, q.x);
+      float arms = step(0.62, fract(a / 6.2831 * 4.0 + r * 3.2 - uTime * 0.9));
+      float edge = 1.0 - smoothstep(0.75, 1.0, r);
+      float hole = 1.0 - smoothstep(0.05, 0.3, r);
+      vec3 col = mix(vec3(0.85, 0.95, 1.0) * 1.2, vec3(0.02, 0.04, 0.12), hole);
+      float al = max(arms * edge * 0.6 * (1.0 - hole), hole * 0.85) * uA;
+      if (al < 0.01) discard;
+      gl_FragColor = vec4(col, al);
+    }`,
+}));
+swirl.renderOrder = 6; swirl.visible = false; scene.add(swirl);
+const HZ = { t: 10, wp: null, gy: null };
+function updateHazards(dt) {
+  const lv = litCount();
+  const inSea = P.inWater && isOpenSea(P.pos.x, P.pos.z, 7);
+  if (inSea && !G.won && lv >= 3) HZ.t -= dt;
+  if (HZ.t <= 0) {
+    HZ.t = lerp(20, 9, clamp((lv - 3) / 5, 0, 1)) + rr(0, 4);
+    if (lv >= 4 && Math.random() < 0.45) HZ.gy = { x: P.pos.x, z: P.pos.z, t: 0, done: false };
+    else if (!HZ.wp) { const a = Math.atan2(P.vel.z, P.vel.x) + rr(-0.5, 0.5); HZ.wp = { x: P.pos.x + Math.cos(a) * 6, z: P.pos.z + Math.sin(a) * 6, t: 0, life: 14, hold: 0 }; SFX.noise(3, 300, 80, 0.15, 'lowpass'); }
+  }
+  // водоворот: тянет к центру и крутит; в самом центре — удар
+  const W1 = HZ.wp;
+  swirl.visible = !!W1;
+  if (W1) {
+    W1.t += dt;
+    const R = 7.5 * smooth(0, 1.5, W1.t) * (1 - smooth(W1.life - 1.5, W1.life, W1.t)) + 0.01;
+    swirl.position.set(W1.x, SEAL + 0.04, W1.z); swirl.scale.set(R * 2, 1, R * 2); swirlU.uA.value = Math.min(1, R / 5);
+    const dx = W1.x - P.pos.x, dz = W1.z - P.pos.z, d = Math.hypot(dx, dz);
+    if (d < R && P.inWater) {
+      const k = 1 - d / R;
+      P.pos.x += (dx / d * 2.4 * k - dz / d * 2.8 * k) * dt; P.pos.z += (dz / d * 2.4 * k + dx / d * 2.8 * k) * dt;
+      if (d < 1.3) { W1.hold += dt; if (W1.hold > 1.1) { W1.hold = 0; hurt(1); P.vel.set(-dx / d * 9, 0, -dz / d * 9); P.vy = 9; } }
+    }
+    if (Math.random() < 0.5) { const a = rr(0, TAU), rr2 = rr(1, R); dust.emit(W1.x + Math.cos(a) * rr2, SEAL + 0.05, W1.z + Math.sin(a) * rr2, -Math.sin(a) * 3, rr(0.5, 1.5), Math.cos(a) * 3, rr(0.4, 0.8), 0.1, 0.05, C.spray, 0.8, 6, 0.5, 1, 1); }
+    if (W1.t > W1.life) HZ.wp = null;
+  }
+  // гейзер: тень с красным краем под героем, затем столб воды подкидывает вверх
+  const Gy = HZ.gy;
+  if (Gy) {
+    Gy.t += dt;
+    if (Gy.t < 0.9) { Gy.x = lerp(Gy.x, P.pos.x, damp(2, dt)); Gy.z = lerp(Gy.z, P.pos.z, damp(2, dt)); }
+    if (WV.mode === 'idle') {
+      mark.visible = Gy.t < 1.7; mark.position.set(Gy.x, SEAL + 0.03, Gy.z); mark.scale.set(4.2, 1, 4.2); mark.rotation.y = 0;
+      markU.uRound.value = 1; markU.uA.value = smooth(0, 0.6, Gy.t) * 0.6; markU.uRim.value = Gy.t > 0.9 ? 1 : 0.3;
+    }
+    if (Math.random() < 0.6) glow.emit(Gy.x + rr(-1, 1), SEAL + 0.05, Gy.z + rr(-1, 1), 0, rr(0.3, 0.9), 0, rr(0.3, 0.6), 0.16, 0.05, C.bubble, 0.7, 0, 0, 0);
+    if (Gy.t > 1.6 && !Gy.done) {
+      Gy.done = true; SFX.splash(1.4); SFX.spout(); ripple(Gy.x, Gy.z, 1.5);
+      for (let i = 0; i < 220; i++) dust.emit(Gy.x + rr(-0.6, 0.6), SEAL + 0.2, Gy.z + rr(-0.6, 0.6), rr(-1.2, 1.2), rr(9, 18), rr(-1.2, 1.2), rr(1.4, 2.4), rr(0.12, 0.3), 0.06, i % 3 ? C.spray : C.sprayB, 1, 12, 0.3, 1, 1);
+      if (Math.hypot(P.pos.x - Gy.x, P.pos.z - Gy.z) < 2.2) { P.vy = 15; P.onGround = false; hurt(1); }
+    }
+    if (Gy.t > 2.2) { HZ.gy = null; if (WV.mode === 'idle') mark.visible = false; }
+  }
+}
+
+/* ---------- музыка: тихий пентатонический фон, напряжение растёт, когда рядом кит; песни китов вдали ---------- */
+const MUS = { t: 2, song: 18, drone: null, dg: null, df: null, tension: 0 };
+function musicInit() {
+  if (!SFX.ctx || MUS.drone) return;
+  const c = SFX.ctx;
+  MUS.delay = c.createDelay(1.5); MUS.delay.delayTime.value = 0.42; const fb = c.createGain(); fb.gain.value = 0.42;
+  MUS.wet = c.createGain(); MUS.wet.gain.value = 0.5; MUS.delay.connect(fb); fb.connect(MUS.delay); MUS.delay.connect(MUS.wet); MUS.wet.connect(SFX.out);
+  MUS.df = c.createBiquadFilter(); MUS.df.type = 'lowpass'; MUS.df.frequency.value = 300;
+  MUS.dg = c.createGain(); MUS.dg.gain.value = 0.0;
+  for (const f of [55, 55.4, 82.4]) { const o = c.createOscillator(); o.type = 'sawtooth'; o.frequency.value = f; o.connect(MUS.df); o.start(); }
+  MUS.df.connect(MUS.dg); MUS.dg.connect(SFX.out); MUS.drone = true;
+}
+const PENTA = [220, 246.9, 293.7, 329.6, 392, 440, 493.9, 587.3];
+function note(f, t0, dur, g, type = 'triangle') {
+  const c = SFX.ctx, o = c.createOscillator(), a = c.createGain();
+  o.type = type; o.frequency.value = f;
+  a.gain.setValueAtTime(0.0001, t0); a.gain.exponentialRampToValueAtTime(g, t0 + 0.08); a.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  o.connect(a); a.connect(SFX.out); a.connect(MUS.delay); o.start(t0); o.stop(t0 + dur + 0.1);
+}
+function updateMusic(dt) {
+  if (!SFX.ctx || SFX.muted) return;
+  musicInit();
+  const c = SFX.ctx, now = c.currentTime;
+  const tension = WV.mode === 'breach' || WV.mode === 'warn' || WV.mode === 'tail' ? 1 : (HZ.wp || HZ.gy ? 0.6 : 0);
+  MUS.tension = lerp(MUS.tension, tension, damp(1.5, dt));
+  MUS.dg.gain.setTargetAtTime(0.012 + MUS.tension * 0.05, now, 0.3);
+  MUS.df.frequency.setTargetAtTime(220 + MUS.tension * 900 + litCount() * 30, now, 0.3);
+  MUS.t -= dt;
+  if (MUS.t <= 0) {
+    MUS.t = G.won ? 1.6 : 2.4 - MUS.tension;
+    const base = (G.time / 9 | 0) % 2 ? 0 : 2;
+    for (let k = 0; k < 3; k++) note(PENTA[(base + k * 2 + ((Math.random() * 2) | 0)) % PENTA.length] * (G.won ? 1 : 0.5), now + k * 0.35, 2.2, 0.035);
+  }
+  MUS.song -= dt;
+  if (MUS.song <= 0) {             // песня кита вдали
+    MUS.song = rr(30, 55);
+    const o = c.createOscillator(), a = c.createGain(); o.type = 'sine';
+    const f0 = rr(160, 260);
+    o.frequency.setValueAtTime(f0, now); o.frequency.exponentialRampToValueAtTime(f0 * 1.6, now + 1.6); o.frequency.exponentialRampToValueAtTime(f0 * 0.7, now + 3.4);
+    a.gain.setValueAtTime(0.0001, now); a.gain.exponentialRampToValueAtTime(0.05, now + 0.8); a.gain.exponentialRampToValueAtTime(0.0001, now + 3.6);
+    o.connect(a); a.connect(MUS.delay); o.start(now); o.stop(now + 3.8);
+  }
+}
+SFX.chord = function () { if (!this.ctx) return; const t = this.ctx.currentTime; [392, 493.9, 587.3, 784].forEach((f, i) => note(f, t + i * 0.09, 1.6, 0.06, 'square')); };
+SFX.pop = function () { this.tone(900, 300, 0.18, 'sine', 0.12); this.noise(0.2, 3000, 800, 0.08, 'bandpass', 1); };
+
+/* ---------- финал: все маяки горят — рассвет, кит уходит ---------- */
+const PAL_DAWN = prep({ skyTop: '#3b66b9', skyHor: '#ffd2a2', fog: '#efc0aa', hemiSky: '#ffe8d0', keyCol: '#ffe2ae', deep: '#255290', shallow: '#56cad2', wSky: '#ffd2b2' });
+function applyDawn(k) {
+  scene.fog.color.lerp(PAL_DAWN.fog, k); skyU.uTop.value.lerp(PAL_DAWN.skyTop, k); skyU.uHorizon.value.lerp(PAL_DAWN.skyHor, k); skyU.uBottom.value.copy(scene.fog.color);
+  hemi.color.lerp(PAL_DAWN.hemiSky, k); keyLight.color.lerp(PAL_DAWN.keyCol, k); skyU.uSunCol.value.lerp(PAL_DAWN.keyCol, k);
+  waterU.uDeep.value.lerp(PAL_DAWN.deep, k); waterU.uShallow.value.lerp(PAL_DAWN.shallow, k); waterU.uSky.value.lerp(PAL_DAWN.wSky, k);
+}
+function winGame() {
+  if (G.won) return;
+  G.won = true; G.dawnT = 0;
+  const t = G.time - (G.runStart || 0);
+  if (SAVE.best === null || t < SAVE.best) SAVE.best = t;
+  SAVE.wins = (SAVE.wins || 0) + 1;
+  writeSave();
+  if (WV.mode !== 'idle') endWhale(9999); WV.cool = 9999;
+  HZ.wp = null; HZ.gy = null;
+  for (let k = 0; k < 200; k++) glow.emit(P.pos.x + rr(-6, 6), P.pos.y + rr(1, 6), P.pos.z + rr(-6, 6), rr(-2, 2), rr(1, 5), rr(-2, 2), rr(1.5, 3), 0.3, 0.05, k % 2 ? C.gold : C.ember, 1, -0.3, 0.3, 2);
+  G.flash = 0.6; FX.uFlashColor.value.setRGB(1, 0.9, 0.7);
+  if (BR) try { BR.platform.sendMessage('player_got_achievement'); } catch (e) { /* не важно */ }
+}
+function newTide() {
+  LH.forEach((L) => { L.lit = false; });
+  COINS.forEach((c, i) => { c.alive = 1; coinObj.a[i] = 1; }); syncCoins(); G.collected = 0;
+  RELICS.forEach((r) => { r.alive = 1; }); P.fins = false; P.shield = false; P.fire = 0;
+  G.won = false; G.dawn = 0; G.runStart = G.time; WV.cool = 8; HZ.t = 10;
+  $('cbar').style.width = '0%';
+  writeSave(); 
+  travel(() => { const bc = beachOf(0, [128, 200]); placeHero(bc[0] + 0.5, bc[1] + 0.5); });
+}
+
+/* ---------- обучение графикой: светящаяся рука-свайп, пока герой не пошёл ---------- */
+function updateHint(dt) {
+  const h = $('hint');
+  if (!G.moved && Math.hypot(P.vel.x, P.vel.z) > 1) G.moved = true;
+  h.toggleAttribute('hidden', !!G.moved || G.state !== 'play');
+}
+
+function updateSystems(dt) {
+  updateTide();
+  updateStamina(dt);
+  updateSeaCoins(dt);
+  updateLighthouses(dt);
+  updateFire(dt);
+  updateRelics(dt);
+  updateHazards(dt * G.wts);
+  updateMusic(dt);
+  updateHint(dt);
+  if (G.won) G.dawn = Math.min(1, (G.dawn || 0) + dt * 0.15);
+}
+
+/* меню: язык, рекорд, маяки и их условия, новый прилив */
+function fmtT(t) { const m = (t / 60) | 0, s = (t % 60) | 0; return `${m}:${String(s).padStart(2, '0')}`; }
+function refreshMenu() {
+  $('mTitle').textContent = tr('title'); $('mResume').textContent = tr('resume');
+  $('hIsles').textContent = tr('isles'); $('hWhale').textContent = tr('whale'); $('hCtrl').textContent = tr('ctrl');
+  $('mWhale').innerHTML = `${tr('call')}<small>${tr('callSub')}</small>`;
+  $('mTide').innerHTML = `${tr('tide')}<small>${tr('tideSub')}</small>`;
+  $('mHelp').innerHTML = IS_TOUCH ? tr('helpT') : tr('helpD');
+  $('mGoal').innerHTML = (G.won ? tr('dawn') + '<br>' : '') + tr('goal') + `<br>${tr('lights')}: ${litCount()} / ${LH.length} · ${tr('best')}: ${SAVE.best != null ? fmtT(SAVE.best) : tr('none')}`;
+  buildMenu();
+}
+/* =============================================================================
+   скрытый счётчик содержимого (для агента, не для игрока): ничего не потерять при расширении
+============================================================================= */
+const INV = {
+  sec: {
+    islands: () => ISLES.map((I) => I.id),
+    blocks: () => BLK.slice(1).map((b) => b.id),
+    coins: () => COINS.length,
+    seaCoins: () => COINS.filter((c) => c.sea).length,
+    lighthouses: () => LH.map((L) => L.id + ':' + L.cond),
+    relics: () => RELICS.map((r) => r.kind),
+    whale: () => WHALE.parts,
+    whaleBehaviours: () => ['warn: тень и пузыри', 'breach: рапид 0.3×, рёв', 'захват цели', 'ложная тень', 'падение: корона, волна, удар', 'хвост: башня и удар плашмя', 'roam: спина и фонтаны'],
+    hazards: () => ['прилив', 'водоворот', 'гейзер'],
+    systems: () => ['выносливость', 'огонь воронки', 'реликвии', 'финал-рассвет', 'новый прилив', 'сохранение', 'реген сердец на суше', 'усложнение по маякам'],
+    fx: () => ['вода игры', 'туман игры', 'небо игры', 'светлячки', 'пламя маяка', 'лучи маяков', 'дым вулкана', 'угли воронки', 'искры разлома', 'брызги-кубы', 'пелены воды', 'корона брызг', 'волна-кольцо', 'тень падения', 'спираль водоворота', 'пузырь-щит'],
+    sounds: () => Object.keys(SFX).filter((k) => typeof SFX[k] === 'function' && !['init', 'setMuted', 'slow', 'noise', 'tone'].includes(k)).concat(['музыка', 'песня кита', 'дрон напряжения']),
+    post: () => ['bloom', 'tilt-shift', 'aberration', 'grain', 'glitch', 'vignette', 'letterbox', 'desat', 'dawn grade'],
+    hud: () => ['сердца', 'монеты', 'выносливость', '8 огней маяков', 'реликвии', 'карта', 'меню', 'прыжок', 'удар', 'звук', 'подсказка-рука'],
+  },
+  hist: [['+ архипелаг v1: 9 островов (8 новых типов), заплыв, кит 3D+2.5D+2D', 84], ['+ v2: маяки, прилив, хвост, водоворот, гейзер, ложная тень, реликвии, выносливость, музыка, финал', 0]],
+};
+window.__PACK = () => {
+  const now = {}; let total = 0;
+  for (const k in INV.sec) { const v = INV.sec[k](); now[k] = v; total += Array.isArray(v) ? v.length : typeof v === 'number' ? 1 : Object.keys(v).length; }
+  const last = INV.hist[INV.hist.length - 1]; if (!last[1]) last[1] = total;
+  return { total, now, hist: INV.hist, lost: INV.hist.filter((h) => h[1] > total) };
+};
+window.__arch = { bloom, dofH, dofV, FX, scene, rig, P, WV, G, ISLES, COINS, LH, RELICS, HZ, WHALE, SAVE, startBreach, startTail, placeHero, beachOf, stand, landDist, groundAt, step, toggleMenu, lightUp, litCount };
+
+/* =============================================================================
+   запуск
+============================================================================= */
+await loadSave();
+generateArchipelago(); setLoad(0.5);
+analyseWorld(); addSeaCoins(); placeLighthouses(); placeRelics(); setLoad(0.62);
+buildChunks(); setLoad(0.85);
+const heightTex = makeHeightTexture();
+waterU.uHeight.value = heightTex; for (const m of mists) m.material.uniforms.uHeight.value = heightTex;
+buildCoins(); buildLighthouseFx(); placeFlies(); drawMinimapBase(); updateHearts(false);
+// восстановить прогресс
+LH.forEach((L, i) => { if (SAVE.lit && SAVE.lit[i]) lightUp(L, true); });
+if (typeof SAVE.coins === 'string') COINS.forEach((c, i) => { if (SAVE.coins[i] === '1') { c.alive = 0; coinObj.a[i] = 0; G.collected++; } });
+syncCoins(); $('cbar').style.width = (G.collected / COINS.length * 100).toFixed(1) + '%';
+if (Array.isArray(SAVE.relics)) RELICS.forEach((r, i) => { if (SAVE.relics[i]) { r.alive = 0; if (r.kind === 'fins') P.fins = true; } });
+if (litCount() === LH.length) { G.won = true; G.dawn = 1; WV.cool = 9999; }
+if (SAVE.muted) { SFX.muted = true; $('wav').style.display = 'none'; }
+if (BR) {
+  try { if (BR.platform.isAudioEnabled === false) { G.platformMute = true; SFX.setMuted(true); } } catch (e) { /* */ }
+  try { BR.platform.on(BR.EVENT_NAME.AUDIO_STATE_CHANGED, (on) => { G.platformMute = !on; SFX.setMuted(!on || !!SAVE.muted); }); } catch (e) { /* */ }
+  try { BR.platform.on(BR.EVENT_NAME.PAUSE_STATE_CHANGED, (p) => { G.extPause = p; G.paused = p || !$('menu').hidden; if (SFX.ctx) { if (p) SFX.ctx.suspend(); else SFX.ctx.resume(); } }); } catch (e) { /* */ }
+}
+document.addEventListener('visibilitychange', () => { if (!SFX.ctx) return; if (document.hidden) SFX.ctx.suspend(); else if (!G.extPause) SFX.ctx.resume(); });
+document.title = tr('title');
+refreshMenu();
+{ const bc = beachOf(0, [128, 200]); placeHero(bc[0] + 0.5, bc[1] + 0.5); rig.yawT = rig.yaw = Math.atan2(bc[0] + 0.5 - 128, bc[1] + 0.5 - 128); }
+setLoad(1);
+G.state = 'title';
+$('load').style.opacity = 0; setTimeout(() => { $('load').hidden = true; }, 800);
+$('play').hidden = false;
+const begin = () => {
+  if (G.state !== 'title') return;
+  SFX.init(); if (G.platformMute || SAVE.muted) SFX.setMuted(true);
+  $('play').hidden = true; $('hud').hidden = false; G.state = 'play'; G.fadeT = 0.6; G.runStart = G.time; canvas.focus();
+  if (BR) try { BR.platform.sendMessage('level_started', { world: 'archipelago', level: '1' }); } catch (e) { /* */ }
+};
+$('play').addEventListener('click', begin);
+addEventListener('keydown', (e) => { if (G.state === 'title' && (e.code === 'Enter' || e.code === 'Space')) begin(); });
+if (new URLSearchParams(location.search).has('auto')) begin();
+frame();
+requestAnimationFrame(() => requestAnimationFrame(() => { if (BR) try { BR.platform.sendMessage('game_ready'); } catch (e) { /* */ } }));
+
+</script>
+</body></html>

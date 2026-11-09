@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "sumerechny-arkhipelag",
+  "title": "Сумеречный архипелаг",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES LAB",
+  "date_added": "2026-11-09",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "path": "games/sumerechny-arkhipelag/source-upload.html",
+    "git_blob_sha": "cb77ce47588c38f3d52ab5db2211e26f9aa26562",
+    "sha256": "7d0c4f3eb93fdd02942ce0ee4276cb7e0fe70b82e39a179d2f85ccbc1e0ffafc",
+    "size_bytes": 194583,
+    "sidecar_path": "games/sumerechny-arkhipelag/README.md"
+  },
+  "viewer_path": "games/sumerechny-arkhipelag/index.html",
+  "viewer_url": "https://mpaykin1.github.io/meta6-lab/games/sumerechny-arkhipelag/",
+  "runtime": {
+    "three": "r160 local via games/twilight-isles/lib/",
+    "fonts": "local via games/twilight-isles/fonts/",
+    "ads": false
+  },
+  "technologies": [
+    "Three.js",
+    "WebGL",
+    "GLSL",
+    "voxel archipelago",
+    "pixel texture atlas",
+    "sky and water shaders",
+    "procedural atmosphere",
+    "whale animation",
+    "postprocessing",
+    "keyboard and touch controls"
+  ],
+  "reuse": {
+    "owner_supplied": true,
+    "owner_designated_reference": true,
+    "third_party_rights_verified": false,
+    "requires_dependency_license_review": true,
+    "description": "Use owner-original source, track each borrowed component and verify third-party rights."
+  },
+  "original_preserved": true,
+  "modularized": false
+}

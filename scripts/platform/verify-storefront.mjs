@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
-import {readFileSync, statSync, createReadStream} from 'node:fs';
+import {readFileSync, statSync, createReadStream, existsSync} from 'node:fs';
 import {resolve, dirname, join, extname, sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {chromium} from 'playwright';
@@ -145,10 +145,14 @@ async function run() {
   const server=createServer(serve);
   await new Promise((res,rej)=>{server.once('error',rej);server.listen(0,'127.0.0.1',res)});
   const address='http://127.0.0.1:'+server.address().port;
-  const browser=await chromium.launch({headless:true,args:[
+  // GitHub runners have system Chrome; use it when the Playwright-downloaded
+  // Chromium is absent (e.g. on the permanent guard mutation runner).
+  const launch={headless:true,args:[
     '--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader',
     '--ignore-gpu-blocklist','--disable-dev-shm-usage'
-  ]});
+  ]};
+  if(!existsSync(chromium.executablePath()))launch.channel='chrome';
+  const browser=await chromium.launch(launch);
   let failures=0;
   try {
     for(const game of games) {

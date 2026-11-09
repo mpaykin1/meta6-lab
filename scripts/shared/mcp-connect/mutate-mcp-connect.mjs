@@ -25,6 +25,10 @@ const assertReplace=(s,oldText,newText)=>{
 };
 const mutations=[
   {
+    name:'sdk-dependency-in-client-config',file:'config.mjs',expected:'Cannot find package',
+    content:"import '@modelcontextprotocol/sdk/client/index.js';\n"+config
+  },
+  {
     name:'test-specific-generator-deception',file:'generate.mjs',
     expected:'Generator must not behave differently for test-specific modes',
     content:assertReplace(generator,'writeFileSync(target,json);',
@@ -62,4 +66,4 @@ for(const m of mutations){
     console.log('M6_MUTATION_CAUGHT '+m.name);
   }finally{rmSync(tmp,{recursive:true,force:true})}
 }
-console.log('M6_MUTATIONS_PASS five faults, including hardcoded-tools and test-specific-generator deception');
+console.log('M6_MUTATIONS_PASS six faults, including hardcoded-tools and test-specific-generator deception');

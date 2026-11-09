@@ -37,12 +37,17 @@ try {
       await page.waitForFunction(() => window.__META_BOT__.state().started, null, { timeout: 35000 });
       const a = await pos(page);
       if (id === 'rainbow-acceleration') {
-        await page.keyboard.down('a'); await page.waitForTimeout(650); await page.keyboard.up('a');
+        // Short pulses avoid crossing the authored road edge and triggering airborne recovery.
+        await page.keyboard.down('a'); await page.waitForTimeout(180); await page.keyboard.up('a');
         const b = await pos(page);
-        await page.keyboard.down('d'); await page.waitForTimeout(1100); await page.keyboard.up('d');
+        assert.ok(b.lane > a.lane + .02, id + ': KeyA did not move real rider left');
+        await page.locator('#bBack').click();
+        await page.locator('#bRide').click();
+        await page.waitForFunction(() => window.__META_BOT__.state().started);
         const c = await pos(page);
-        assert.ok(b.lane > a.lane + .08, id + ': KeyA did not move real rider left');
-        assert.ok(c.lane < b.lane - .08, id + ': KeyD did not move real rider right');
+        await page.keyboard.down('d'); await page.waitForTimeout(180); await page.keyboard.up('d');
+        const d = await pos(page);
+        assert.ok(d.lane < c.lane - .02, id + ': KeyD did not move real rider right');
       } else {
         await page.keyboard.down('w'); await page.waitForTimeout(2200); await page.keyboard.up('w');
         const b = await pos(page);

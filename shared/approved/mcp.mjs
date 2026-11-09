@@ -111,9 +111,9 @@ const defs=[
  {name:'search_approved_code',description:'Search approved code and return small matching line snippets',inputSchema:{type:'object',properties:{query:{type:'string'},limit:{type:'integer'}},required:['query']}},
  {name:'inspect_approved_component',description:'Read a small window of original approved code',inputSchema:{type:'object',properties:{id:{type:'string'},start:{type:'integer'},count:{type:'integer'}},required:['id']}},
  {name:'get_approved_component_source',description:'Get complete original, hash-checked JavaScript source for deliberate integration in a sandbox game; prefer search for discovery',inputSchema:{type:'object',properties:{id:{type:'string'}},required:['id']}},
- {name:'list_games',description:'List all self-hosted games directly from the META GAMES homepage',inputSchema:{type:'object',properties:{}}},
  {name:'list_game_files',description:'List recursive relative game files and byte lengths for a game from list_games',inputSchema:{type:'object',properties:{id:{type:'string'}},required:['id']}},
- {name:'read_game_file',description:'Read a precise text line window from an allowlisted game; binary assets are rejected with byte size',inputSchema:{type:'object',properties:{id:{type:'string'},file:{type:'string'},start:{type:'integer',minimum:1},count:{type:'integer',minimum:1,maximum:10000}},required:['id','file']}}
+ {name:'read_game_file',description:'Read a precise text line window from an allowlisted game; binary assets are rejected with byte size',inputSchema:{type:'object',properties:{id:{type:'string'},file:{type:'string'},start:{type:'integer',minimum:1},count:{type:'integer',minimum:1,maximum:10000}},required:['id','file']}},
+ {name:'list_games',description:'List all self-hosted games directly from the META GAMES homepage',inputSchema:{type:'object',properties:{}}}
 ];
 function answer(id,result,error){
  const out={jsonrpc:'2.0',id};

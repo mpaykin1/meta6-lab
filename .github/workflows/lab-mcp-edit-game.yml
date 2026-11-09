@@ -1,0 +1,31 @@
+name: LAB MCP Edit Game M3 M5
+on:
+  push:
+    branches: ['lab/mcp-edit-game']
+    paths:
+      - 'shared/approved/**'
+      - 'scripts/shared/verify-mcp-edit-game.mjs'
+      - 'scripts/shared/mutate-mcp-edit-game.mjs'
+      - '.github/workflows/lab-mcp-edit-game.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'shared/approved/**'
+      - 'scripts/shared/verify-mcp-edit-game.mjs'
+      - 'scripts/shared/mutate-mcp-edit-game.mjs'
+      - '.github/workflows/lab-mcp-edit-game.yml'
+permissions:
+  contents: read
+jobs:
+  verify-mcp-edit-game:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/shared/verify-mcp-edit-game.mjs
+      - run: node scripts/shared/mutate-mcp-edit-game.mjs

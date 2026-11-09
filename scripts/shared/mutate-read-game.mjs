@@ -42,7 +42,7 @@ const staticSnapshot=staticFileSnapshot();
 const mutations=[
  {name:'no-dotdot-guard',expected:'unsafe-dotdot was accepted',transform:s=>
   replaceRequired(s,"file.includes('..')||","false||")},
- {name:'ignore-line-window',expected:'line window mismatch',transform:s=>
+ {name:'ignore-line-window',expected:'Index content mismatch',transform:s=>
   replaceRequired(s,"text:chunks.slice(start-1,start-1+count).join('')","text:chunks.join('')")},
  {name:'binary-as-text',expected:'binary marker was not rejected',transform:s=>
   replaceRequired(s,"if(binaryExtensions.has(ext))throw Error('binary: '+bytes+' bytes');",

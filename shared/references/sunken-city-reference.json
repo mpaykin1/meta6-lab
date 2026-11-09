@@ -1,0 +1,23 @@
+{
+  "id": "sunken-city-reference",
+  "title": "Затонувший город",
+  "kind": "owner-uploaded-reference",
+  "source_archive": "reference-archives/zatonuvshiy-gorod-2026-11-09.zip",
+  "source_sha256": "7ad5111ec22d9d6f3183b0807a735d05f150e03bf57b8e9083be50e413fafcf3",
+  "source_file_count": 184,
+  "entry": "games/sunken-city-reference/index.html",
+  "manifest": "games/sunken-city-reference/showcase.json",
+  "groups": {
+    "models": "games/sunken-city-reference/glb/",
+    "blocks": "games/sunken-city-reference/blocks/",
+    "atlases": "games/sunken-city-reference/atlas/",
+    "sounds": "games/sunken-city-reference/sounds/"
+  },
+  "counts": {
+    "models": 76,
+    "tiles": 36,
+    "blocks": 38,
+    "atlases": 5
+  },
+  "reuse": "Owner-provided reference; verify third-party dependency rights separately"
+}

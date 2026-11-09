@@ -9,6 +9,14 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
+### lab/sunken-city-reference-1109 — «Затонувший город»
+- Эталон: исходный ZIP, 184 файла без перерисовки.
+- Сцена: https://mpaykin1.github.io/meta6-lab/games/sunken-city-reference/ (после merge).
+- Исходник: reference-archives/zatonuvshiy-gorod-2026-11-09.zip.
+- Каталог: shared/references/sunken-city-reference.json; подробности в showcase.json.
+- Статус: В РАБОТЕ — Pages / отрисовка и права сторонних зависимостей не подтверждены.
+- Михаил: запросил загрузить как эталон; визуальный PASS не заявлялся.
+
 ### lab/broken-city-copy-reference-1109 — «Сломанный город (Copy)»
 - Польза: отдельный эталон с 3D-графикой, GLSL и галереей ассетов; основной Broken City не изменён.
 - Играть: https://mpaykin1.github.io/meta6-lab/games/broken-city-copy/

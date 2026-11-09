@@ -57,12 +57,12 @@ try {
   writeFileSync(htmlFile,index);
 
   // Fault 4, OBMAN: a checker hardcodes the game list instead of reading HTML.
-  const anchor='const games = parseStorefront(html);';
+  const anchor='  const games=[];';
   assert.ok(checkerSource.includes(anchor),'Hardcode mutation anchor disappeared');
   const mutant=join(dirname(checker),'verify-storefront-mutant-'+randomUUID()+'.mjs');
   try {
     writeFileSync(mutant,checkerSource.replace(anchor,
-      "const games = [{title:'Valid one',path:'/games/valid/'},{title:'Valid two',path:'/games/second/'}];"));
+      "return [{title:'Valid one',path:'/games/valid/'},{title:'Valid two',path:'/games/second/'}];\n  const games=[];"));
     requireFailure('hardcoded storefront list (obman)',mutant,['--probe']);
   } finally {rmSync(mutant,{force:true});}
   console.log('P1 STOREFRONT MUTATIONS PASS (4 faults rejected)');

@@ -9,6 +9,16 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
+### lab/king-of-ash-original-upload-1109 — эталон «Король Пепла»
+- Польза: точная копия авторского HTML и 34 элемента галереи игровых ассетов.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/king-of-ash/
+- Исходник: `games/king-of-ash/index.html`, blob `1a1f6d32310ec84d8c542262a74e4ed71ee60f59`.
+- Каталог: `shared/references/king-of-ash.json`.
+- Ветка: `lab/king-of-ash-original-upload-1109`.
+- Статус: В РАБОТЕ — Pages и бот ещё не подтверждены, Three.js и шрифт требуют интернет.
+- Михаил: запросил загрузку как эталона; вердикта о прохождении нет.
+
+
 ### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
 - Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
 - Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/

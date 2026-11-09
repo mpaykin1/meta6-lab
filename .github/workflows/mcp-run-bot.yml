@@ -29,6 +29,8 @@ jobs:
         run: node scripts/shared/mutate-run-bot.mjs
       - name: Existing MCP contract
         run: node scripts/shared/verify-approved-mcp.mjs
+      - name: Protect M1 permanent mutation compatibility
+        run: node scripts/shared/mutate-mcp-list-games.mjs
   real-veil-and-broken-copy:
     needs: verifier-and-mutations
     runs-on: ubuntu-24.04

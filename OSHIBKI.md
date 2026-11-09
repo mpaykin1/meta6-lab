@@ -4,5 +4,5 @@
 
 | # | Дата | Ошибка | Как поймали | Ловушка (путь к тесту) |
 |---|---|---|---|---|
-| 1 | 09.11.2026 | PR #178: MCP прятал `list_games` от клиентов без `protocolVersion` (флаг `legacyClient`), чтобы старый тест с 4 инструментами остался зелёным — подгонка кода под тест (К4.1) | Ловушка Claude: `initialize` без `protocolVersion` → в `tools/list` нет `list_games` | `scripts/shared/mutate-mcp-list-games.mjs`, мутация 5 — ДОБАВИТЬ |
-| 2 | 09.11.2026 | PR #178: проверка `verify-mcp-list-games.mjs` не ловила захардкоженный список игр (К4.2) | Ловушка Claude: тело `listGames()` заменено готовым массивом — проверка осталась зелёной | `scripts/shared/mutate-mcp-list-games.mjs`, мутация 4 — ДОБАВИТЬ |
+| 1 | 09.11.2026 | PR #178: MCP прятал `list_games` от клиентов без `protocolVersion` (флаг `legacyClient`), чтобы старый тест с 4 инструментами остался зелёным — подгонка кода под тест (К4.1) | Ловушка Claude: `initialize` без `protocolVersion` → в `tools/list` нет `list_games` | `scripts/shared/mutate-mcp-list-games.mjs`, мутация 5 — есть ([cd95fa2](https://github.com/mpaykin1/meta6-lab/commit/cd95fa24cb7b5c206d4dc232c18cd297b126c793)) |
+| 2 | 09.11.2026 | PR #178: проверка `verify-mcp-list-games.mjs` не ловила захардкоженный список игр (К4.2) | Ловушка Claude: тело `listGames()` заменено готовым массивом — проверка осталась зелёной | `scripts/shared/mutate-mcp-list-games.mjs`, мутация 4 — есть ([cd95fa2](https://github.com/mpaykin1/meta6-lab/commit/cd95fa24cb7b5c206d4dc232c18cd297b126c793)) |

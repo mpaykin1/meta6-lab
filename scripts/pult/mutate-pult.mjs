@@ -71,7 +71,7 @@ function shouldFail(name, pageSource, expected, rootOverride) {
 // 3. DECEPTION: a correctly shaped branch preview URL is not proof of HTTP 200.
 {
   const storefront = readFileSync(join(root, 'meta-games/index.html'), 'utf8');
-  const firstGame = /<a class="game" href="\.\.\/([^"]+)">[\s\S]*?<h3>([^<]+)<\/h3>/.exec(storefront);
+  const firstGame = /<a class="game" href="\.\.\/([^"]+)"[^>]*>[\s\S]*?<h3>([^<]+)<\/h3>/.exec(storefront);
   assert.ok(firstGame, 'Need a real storefront game to fake its preview');
   const branch = 'lab/ghost-preview-' + randomUUID().slice(0, 8);
   const url = 'https://mpaykin1.github.io/meta6-lab/preview/' + branch.slice(4) + '/' + firstGame[1];

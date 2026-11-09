@@ -12,6 +12,7 @@
 - Существующие `shared/index.json` и `shared/asset-library/catalog.json` не перезаписываются.
 - Добавить тип файла: расширение в `ASSET_EXT` в `scripts/library/machine.mjs` и независимую проверку расширения в `verify-library.mjs`.
 - Добавить решение: правило распознавания в `scan()` и purpose-тег в `tags()`; новые данные обязаны ссылаться на исходные строки.
+- Поиск без чтения целой игры: `node scripts/library/search.mjs --game=veil-terraces --kind=solution --purpose=camera`.
 - Проверка: `node scripts/library/verify-library.mjs`.
 - Мутации (включая подмену другой игрой): `node scripts/library/mutate-library.mjs`.
 - GitHub Actions: `library-machine.yml` индексирует новые игры на ветке и предлагает отдельный PR для изменений после merge в main.

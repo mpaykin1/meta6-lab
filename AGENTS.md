@@ -1,3 +1,8 @@
+## ПРОЧИТАТЬ ПЕРЕД ЛЮБОЙ РАБОТОЙ (09.11.2026)
+1. [ФИНИШ — 18 проверок, без которых проект не готов](rules/09-platforma/FINISH.md)
+2. [КОНТУР БЕЗ ОШИБОК — правила К1–К10](rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md)
+3. [OSHIBKI.md — журнал ошибок; каждая ошибка = вечная ловушка](OSHIBKI.md)
+
 Для автозадач действует automation/prompts/chatgpt-autotask.md: отчёты, новые тесты, handoff и evidence запрещены; требования GRAF, abyss.md, evolve.md и других файлов о тестах, отчётах, evidence и gate к автозадачам не применяются
 
 # Правила meta6 — оглавление

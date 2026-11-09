@@ -63,12 +63,19 @@
       const aimScreen = project(anticipated);
       let fireballScreen = null;
       if (g.task === 'fire') {
+        // Incoming projectiles can be unordered. Prioritize the nearest
+        // visible threat instead of whichever projectile was spawned first.
+        let nearestDistance = Infinity;
         for (const f of a.incoming || []) {
-          const lead = Math.min(0.25, hero.distanceTo(hero.clone().set(f.x,f.y,f.z)) / 62);
+          const distance = Math.hypot(f.x - hero.x, f.y - hero.y, f.z - hero.z);
+          const lead = Math.min(0.25, distance / 62);
           const candidate = project({
             x: f.x + f.vx * lead, y: f.y + f.vy * lead, z: f.z + f.vz * lead
           });
-          if (candidate?.visible) { fireballScreen = candidate; break; }
+          if (candidate?.visible && distance < nearestDistance) {
+            nearestDistance = distance;
+            fireballScreen = candidate;
+          }
         }
       }
       return {

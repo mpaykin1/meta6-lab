@@ -6,6 +6,7 @@ on:
       - 'shared/approved/**'
       - 'scripts/shared/verify-mcp-edit-game.mjs'
       - 'scripts/shared/mutate-mcp-edit-game.mjs'
+      - 'scripts/shared/crosscheck-mcp-edit-game.mjs'
       - '.github/workflows/lab-mcp-edit-game.yml'
   pull_request:
     branches: [main]
@@ -29,3 +30,4 @@ jobs:
           node-version: '22'
       - run: node scripts/shared/verify-mcp-edit-game.mjs
       - run: node scripts/shared/mutate-mcp-edit-game.mjs
+      - run: node scripts/shared/crosscheck-mcp-edit-game.mjs

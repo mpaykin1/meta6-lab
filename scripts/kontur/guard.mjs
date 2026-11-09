@@ -20,9 +20,11 @@ export function parseDiff(diff){
   if(line.startsWith('diff --git ')){
    // Keep the old path so deleted files are still checked (OSHIBKI #5).
    const named=/^diff --git a\/(\S+) b\//.exec(line);
-   file={path:named?named[1]:'',deleted:false,hunks:[],added:[],removed:[]};
+   file={path:named?named[1]:'',deleted:false,newFile:false,hunks:[],added:[],removed:[]};
    files.push(file);
    hunk=null;
+  }else if(file && (line.startsWith('new file mode ') || line==='--- /dev/null')){
+   file.newFile=true;
   }else if(file && line.startsWith('+++ b/')){
    file.path=line.slice(6);
   }else if(file && line.startsWith('+++ /dev/null')){
@@ -83,6 +85,58 @@ function dangerousBranch(text){
  return 'особое ветвление по имени теста/клиента (К4.1)';
 }
 
+
+// K7: repeat class #1/#6. Detect aliases that escape simple process.env.CI matching.
+function k7EnvironmentDeception(text){
+ const reference=/\b(?:process\s*(?:\?\.|\.)\s*env|process\s*\[\s*['"]env['"]\s*\]|import\s*\.\s*meta\s*\.\s*env)\s*(?:\?\.|\.|\[\s*['"])\s*(CI|GITHUB_[A-Z_]*|RUNNER_[A-Z_]*|NODE_ENV|JEST_[A-Z_]*|VITEST[A-Z_]*|NODE_TEST[A-Z_]*)\b/i.exec(text);
+ if(reference)return 'K7: тестовое/CI окружение через обходной синтаксис '+reference[1]+' (OSHIBKI #1,#6)';
+ const destructured=/\b(?:const|let|var)\s*\{[^}]{0,240}\b(CI|GITHUB_[A-Z_]*|RUNNER_[A-Z_]*|NODE_ENV|JEST_[A-Z_]*|VITEST[A-Z_]*|NODE_TEST[A-Z_]*)\b[^}]*\}\s*=\s*process\s*(?:\?\.|\.)\s*env\b/i.exec(text);
+ if(destructured)return 'K7: деструктуризация CI-флага '+destructured[1]+' (OSHIBKI #1,#6)';
+ if(/\b(?:testMode|ciMode|testClient|mockClient|onlyInCI)\b/.test(text))
+  return 'K7: скрытый переключатель поведения для теста/клиента (OSHIBKI #1,#6)';
+ return null;
+}
+
+// K7: repeat class #2/#4. Reject static inventory and disabled nested discovery in MCP.
+function k7Inventory(file){
+ if(!/^shared\/approved\/[^/]+\.[cm]?js$/.test(file.path))return [];
+ const issues=[];
+ for(const hunk of file.hunks){
+  const added=hunk.added.map(line=>line.text).join('\n');
+  const inventory=/\b(?:listGames|listGameFiles|listAssets|searchAssets|listComponents)\b/.test(added);
+  const literal=/\breturn\s*\[\s*\{\s*(?:id|title|file|path)\s*:/.test(added);
+  const snapshot=/\b(?:const|let|var)\s+(?:\w*snapshot\w*|hardcoded\w*|staticGames|staticFiles)\s*=\s*[\[{]/i.test(added);
+  if(literal || (inventory && (snapshot || /\breturn\s*\[\s*(?:\{|['"`])/.test(added)))){
+   issues.push(file.path+': K7: статический список вместо данных источника (OSHIBKI #2,#4)');
+  }
+  if(/\bif\s*\(\s*false\s*\)\s*(?:walk|recurse|visit|traverse)\s*\(/.test(added) ||
+     /\bif\s*\([^)]*\bisDirectory\s*\(\s*\)[^)]*&&\s*false/.test(added) ||
+     (inventory && /\b(?:games|files|assets)\s*\.\s*slice\s*\(\s*0\s*,\s*\d+\s*\)/.test(added))){
+   issues.push(file.path+': K7: отключён вложенный обход или усечён список (OSHIBKI #2,#4)');
+  }
+  if(/\bprocess\s*\.\s*cwd\s*\(\s*\)/.test(added)){
+   issues.push(file.path+': K7: путь MCP зависит от cwd вместо пути модуля (OSHIBKI #3)');
+  }
+ }
+ return issues;
+}
+
+// K7: repeat class #2/#3/#4/#5. New verifiers require a live sabotage suite.
+function k7VerifierCoverage(file,files){
+ if(!file.newFile || !/^scripts\/(?:[^/]+\/)*verify-[^/]+\.mjs$/.test(file.path))return [];
+ const pair=file.path.replace(/(^|\/)verify-([^/]+)$/, '$1mutate-$2');
+ const mutant=files.find(candidate=>candidate.path===pair && !candidate.deleted && candidate.added.length);
+ if(!mutant)return [file.path+': K7: новый verify без парного mutate с ловушками (OSHIBKI #2,#3,#4,#5)'];
+ const text=mutant.added.map(line=>line.text).join('\n');
+ const names=[...text.matchAll(/\bname\s*:\s*['"`]([^'"`]+)['"`]/g)].map(match=>match[1]);
+ if(names.length<3)return [pair+': K7: менее трёх названных мутаций (К5; OSHIBKI #2,#3,#4,#5)'];
+ if(!names.some(name=>/hardcod|snapshot|decept|client|(?:^|-)ci(?:-|$)|cwd|fake/i.test(name)))
+  return [pair+': K7: нет ловушки-обмана (К5; OSHIBKI #2,#3,#4,#5)'];
+ if(!/(?:\bpass\s*:\s*true\b|assert\.(?:equal|strictEqual)\(\s*(?:baseline|honest)\.status\s*,\s*0\s*[,)]?)/.test(text))
+  return [pair+': K7: нет честного положительного контроля (К5; OSHIBKI #2,#3,#4,#5)'];
+ return [];
+}
+
 function hasJournalTrap(files){
  const journal=files.find(file=>file.path==='OSHIBKI.md');
  if(!journal)return false;
@@ -115,12 +169,16 @@ export function checkDiff(diff,title='',body=''){
     }
    }
   }
+  errors.push(...k7Inventory(file));
+  errors.push(...k7VerifierCoverage(file,files));
   if(codePath(file.path) && !exemptCode(file.path)){
    for(let i=0;i<file.added.length;i++){
     const entry=file.added[i];
     const message=dangerousLine(entry.text);
     if(message)errors.push(file.path+':'+entry.line+': '+message);
-    const segment=file.added.slice(i,i+4).map(x=>x.text).join(' ');
+    const segment=file.added.slice(i,i+5).map(x=>x.text).join(' ');
+    const evasion=k7EnvironmentDeception(segment);
+    if(evasion)errors.push(file.path+':'+entry.line+': '+evasion);
     if(/^\s*(?:if|switch)\s*\(|\bif\s*\(/.test(entry.text)){
      const branch=dangerousBranch(segment);
      if(branch)errors.push(file.path+':'+entry.line+': '+branch);

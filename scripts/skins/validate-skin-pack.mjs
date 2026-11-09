@@ -70,7 +70,23 @@ if(stage!==null){
    if(h!=='f66ad0f0cf976b86600e91efd3e819cb81afe8d1')fail('STAGE','original owner sketch hash mismatch');
   }
  }
- if(stage>=1&&!exists('textures/metal.png'))fail('STAGE','material texture missing');
+ if(stage>=1){
+  for(const file of ['textures/rust.png','textures/metal.png']){
+   if(!exists(file)){fail('STAGE','missing stage-1 material '+file);continue;}
+   try{
+    const im=decode(path.join(dir,file));
+    if(im.w!==64||im.h!==64)fail('STAGE','material must be exactly 64x64: '+file);
+    const colors=new Set();
+    for(let j=0;j<im.pixels.length;j+=4){
+     if(im.pixels[j+3]!==255)fail('STAGE','material must be opaque: '+file);
+     const col='#'+Buffer.from(im.pixels.subarray(j,j+3)).toString('hex');
+     colors.add(col);
+     if(!(manifest.palette||[]).includes(col))fail('STAGE','material uses unapproved colour '+col);
+    }
+    if(colors.size>12)fail('STAGE','too many material colours: '+file);
+   }catch(e){fail('STAGE','invalid stage-1 PNG '+file+': '+e.message);}
+  }
+ }
  if(stage>=2&&!(manifest.parts||[]).some(p=>p.layer==='3d'))fail('STAGE','silhouette 3d parts absent');
  if(stage>=3&&!['gear','piston','cable'].every(k=>(manifest.parts||[]).some(p=>p.kind===k)))fail('STAGE','mechanics absent');
  if(stage>=4&&!['core','slit','orb'].every(k=>(manifest.parts||[]).some(p=>p.kind===k)))fail('STAGE','illumination absent');

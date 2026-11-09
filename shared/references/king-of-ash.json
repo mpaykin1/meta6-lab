@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "king-of-ash",
+  "title": "Король Пепла",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES LAB",
+  "date_added": "2026-11-09",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "original_filename": "Король Пепла (Copy).html",
+    "path": "reference/king-of-ash/index.html",
+    "git_blob_sha": "40514e8e256753531c0851a91acfb0add8a5cde2",
+    "sha256": "6b9de5201fa8a0ff5bbc5a7eae10ef1d849d531f2e1832a72532ee6073c380a8",
+    "size_bytes": 65343
+  },
+  "viewer_path": "reference/king-of-ash/index.html",
+  "viewer_url": "https://mpaykin1.github.io/meta6-lab/reference/king-of-ash/",
+  "technologies": [
+    "Canvas 2D pixel art (240x400)",
+    "WebGL 1 / GLSL postprocessing",
+    "Procedural Web Audio",
+    "Touch gesture combat",
+    "Skeleton enemy animation",
+    "Particle effects",
+    "Asset gallery"
+  ],
+  "runtime": {
+    "external_dependencies": [
+      "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    ],
+    "ads": false,
+    "offline_font_fallback": "Courier New"
+  },
+  "reuse": {
+    "owner_supplied": true,
+    "owner_designated_reference": true,
+    "third_party_rights_verified": false,
+    "requires_dependency_license_review": true
+  },
+  "original_preserved": true,
+  "modularized": false
+}

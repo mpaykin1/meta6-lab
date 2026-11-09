@@ -10,39 +10,50 @@ assert required.issubset(set(palette)), "Approved palette changed"
 C={s:tuple(bytes.fromhex(s[1:]))+(255,) for s in palette}
 rust=Image.new("RGBA",(64,64),C["#a65333"])
 d=ImageDraw.Draw(rust)
-# The broad rust plane covers >60% of the area in three solid approved colours.
-d.polygon([(0,0),(63,0),(63,19),(55,20),(46,24),(33,19),(24,29),(0,25)],fill=C["#d27238"])
-d.polygon([(0,39),(13,35),(22,40),(34,38),(43,44),(63,39),(63,64),(0,64)],fill=C["#a65333"])
-d.polygon([(0,0),(63,0),(63,2),(6,2),(3,6),(0,6)],fill=C["#eb8b4b"])
-d.line([(0,3),(59,3)],fill=C["#eb8b4b"],width=1)
-d.polygon([(60,7),(63,4),(63,63),(5,63),(5,61),(57,60),(61,53)],fill=C["#613528"])
-d.line([(0,60),(57,60)],fill=C["#83482d"],width=2)
-# Two intentional fine cracks, no random pixels or grain.
-d.line([(19,13),(23,19),(21,26),(27,30),(26,36)],fill=C["#613528"],width=1)
-d.line([(47,36),(43,42),(46,48),(40,52)],fill=C["#83482d"],width=1)
-for x,y in [(8,8),(55,8),(8,55),(55,55)]:
- d.ellipse((x-3,y-3,x+3,y+3),fill=C["#35242a"],outline=C["#613528"],width=1)
- d.point((x-1,y-2),fill=C["#eb8b4b"])
- d.point((x,y-2),fill=C["#eb8b4b"])
+# Large flat iron-oxide areas, irregular hand-cut plate, no per-pixel noise.
+d.polygon([(0,0),(63,0),(63,17),(53,21),(40,17),(29,23),(14,20),(0,26)],fill=C["#d27238"])
+d.polygon([(0,47),(12,42),(23,46),(37,40),(51,46),(63,43),(63,63),(0,63)],fill=C["#a65333"])
+# Deliberate oxide islands: 2–6 px shapes, roughly one fifth of the plate.
+spots=[(10,12,5,4),(22,8,6,4),(36,11,5,5),(51,9,6,5),(6,27,6,5),(17,29,5,6),
+       (33,26,6,5),(47,28,6,6),(57,36,5,5),(12,45,5,5),(27,50,6,5),
+       (43,51,5,6),(54,55,6,5),(24,18,4,4),(39,37,5,5),(5,52,4,5),
+       (50,19,5,4),(18,55,4,4),(33,58,5,4),(5,7,4,4),(57,5,4,4)]
+for i,(x,y,w,h) in enumerate(spots):
+ shade=C["#613528"] if i%4==0 else C["#83482d"]
+ d.polygon([(x,y+1),(x+1,y),(x+w-2,y),(x+w,y+2),(x+w-1,y+h),(x+2,y+h),(x,y+h-2)],fill=shade)
+# Downward corrosion runs, broad enough to read at 64px.
+for x,y,length in ((13,32,9),(37,18,11),(53,42,10)):
+ d.rectangle((x,y,x+1,min(59,y+length)),fill=C["#83482d"])
+ d.rectangle((x+2,y+3,x+3,min(59,y+length-2)),fill=C["#613528"])
+# Chipped orange edge and deep lower/right recess.
+d.line([(0,1),(16,1),(20,3),(31,1),(45,2),(57,1)],fill=C["#eb8b4b"],width=2)
+d.polygon([(0,14),(2,12),(2,19),(0,21)],fill=C["#eb8b4b"])
+d.polygon([(0,36),(3,34),(3,40),(0,43)],fill=C["#eb8b4b"])
+d.polygon([(59,5),(63,2),(63,63),(7,63),(7,61),(57,60),(61,52)],fill=C["#613528"])
+d.line([(1,59),(7,61),(31,61),(43,60)],fill=C["#83482d"],width=2)
+# One structural jagged fracture with a narrow illuminated broken edge.
+fracture=[(20,17),(24,23),(22,30),(30,36),(27,43),(34,49)]
+d.line([(x-2,y-1) for x,y in fracture],fill=C["#eb8b4b"],width=2)
+d.line(fracture,fill=C["#613528"],width=3)
+# Four dark iron rivets and small warm edge glints.
+for x,y in ((8,8),(55,8),(8,55),(55,55)):
+ d.ellipse((x-3,y-3,x+3,y+3),fill=C["#35242a"],outline=C["#613528"])
+ d.line([(x-2,y-2),(x,y-2)],fill=C["#eb8b4b"],width=1)
 metal=Image.new("RGBA",(64,64),C["#20141e"])
 m=ImageDraw.Draw(metal)
-# All edges repeat seamlessly. Dark recesses between big pipes.
-m.rectangle((0,0,63,63),fill=C["#20141e"])
-for x in (7,27,48):
- m.rectangle((x-3,0,x+5,63),fill=C["#35242a"])
- m.rectangle((x-2,0,x-1,63),fill=C["#4d3a3c"])
- m.rectangle((x+3,0,x+5,63),fill=C["#20141e"])
-for y in (15,46):
- m.rectangle((0,y-4,63,y+4),fill=C["#35242a"])
- m.line((0,y-3,63,y-3),fill=C["#4d3a3c"],width=2)
- m.line((0,y+3,63,y+3),fill=C["#20141e"],width=2)
-for x,y in ((13,15),(42,15),(13,46),(42,46)):
- m.ellipse((x-5,y-5,x+5,y+5),fill=C["#4d3a3c"],outline=C["#20141e"],width=1)
- m.rectangle((x-2,y-1,x+2,y+1),fill=C["#35242a"])
- m.line((x-3,y-3,x-1,y-3),fill=C["#83482d"],width=1)
-# Additional broad diagonal piston rod, with a two-tone edge.
-m.polygon([(17,29),(21,27),(45,37),(43,40)],fill=C["#4d3a3c"])
-m.line([(19,28),(44,38)],fill=C["#83482d"],width=1)
+# Four close-set ribbed vertical piston cylinders; gaps are deep black.
+for x,w in ((3,12),(18,12),(34,12),(50,11)):
+ m.rectangle((x,0,x+w,63),fill=C["#35242a"])
+ m.rectangle((x+1,0,x+3,63),fill=C["#4d3a3c"])
+ m.rectangle((x+4,0,x+5,63),fill=C["#83482d"])
+ m.rectangle((x+w-3,0,x+w,63),fill=C["#20141e"])
+ # Repeating horizontal collars only inside each cylinder, never across gaps.
+ for y in (5,15,25,35,45,55):
+  m.rectangle((x,y,x+w-2,y+3),fill=C["#4d3a3c"])
+  m.line([(x,y),(x+w-3,y)],fill=C["#83482d"],width=1)
+  m.rectangle((x+w-3,y+1,x+w,y+4),fill=C["#20141e"])
+ # Heavy dark piston socket at the base.
+ m.rectangle((x+2,59,x+w-2,63),fill=C["#35242a"])
 root.joinpath("textures").mkdir(exist_ok=True)
 rust.save(root/"textures/rust.png",optimize=True)
 metal.save(root/"textures/metal.png",optimize=True)

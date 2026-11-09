@@ -1,0 +1,42 @@
+name: MCP Connect M6
+on:
+  push:
+    branches:
+      - lab/mcp-connect
+    paths:
+      - 'meta-games/connect/**'
+      - 'scripts/shared/mcp-connect/**'
+      - '.github/workflows/mcp-connect-m6.yml'
+      - 'shared/approved/**'
+      - 'meta-games/index.html'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'meta-games/connect/**'
+      - 'scripts/shared/mcp-connect/**'
+      - '.github/workflows/mcp-connect-m6.yml'
+      - 'shared/approved/**'
+      - 'meta-games/index.html'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  external-mcp-client:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned official MCP SDK (only CI verifier needs npm)
+        run: npm install --prefix scripts/shared/mcp-connect --no-package-lock --no-audit --no-fund
+      - name: Verify tools were generated from actual tools/list
+        run: node scripts/shared/mcp-connect/generate.mjs --check
+      - name: Official SDK external stdio client and list_games
+        run: node scripts/shared/mcp-connect/verify.mjs
+      - name: Negative mutation tests, including hardcoded-list deception
+        run: node scripts/shared/mcp-connect/mutate-mcp-connect.mjs

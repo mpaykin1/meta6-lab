@@ -77,6 +77,20 @@ function animation(e,k,i){
  return [];
 }
 function assertSource(meta){
+ const md=fs.readFileSync(path.join(src,'parts-sheet.md'),'utf8');
+ const table=md.split(/\r?\n/).map(line=>line.split('|').slice(1,-1).map(x=>x.trim()))
+  .filter(c=>c.length>=5&&/^\d+$/.test(c[0])&&/^\d+$/.test(c[1]))
+  .map(c=>({row:+c[0],place:+c[1],name:c[2],bone:c[3],motion:c[4]}))
+  .sort((a,b)=>a.row-b.row||a.place-b.place);
+ if(meta.parts?.length!==table.length||table.some((e,i)=>Object.keys(e).some(k=>meta.parts[i]?.[k]!==e[k])))
+   fail('ОБМАН: список вырезанных деталей не соответствует parts-sheet.md');
+ const colours=[...new Set([...md.matchAll(/#[a-fA-F0-9]{6}\b/g)].map(m=>m[0].toLowerCase()))];
+ const readme=path.join(src,'README.md');
+ if(colours.length<6&&fs.existsSync(readme))colours.push(...[...fs.readFileSync(readme,'utf8').matchAll(/#[a-fA-F0-9]{6}\b/g)].map(m=>m[0].toLowerCase()));
+ const approved=path.resolve('skins/packs',id,'skin.json');
+ if(colours.length<6&&fs.existsSync(approved))colours.push(...JSON.parse(fs.readFileSync(approved,'utf8')).palette.map(x=>x.toLowerCase()));
+ if(meta.palette.join('|')!==[...new Set(colours)].join('|'))
+   fail('ОБМАН: палитра вырезок отличается от источника');
  if(meta.format!=='meta6-cut/1'||meta.sourceSheetSha256!==sha(path.join(src,'parts-sheet.png'))||
  meta.sourceTableSha256!==sha(path.join(src,'parts-sheet.md')))fail('ОБМАН: лист или таблица изменены после ножниц');
  for(const [f,digest] of Object.entries(meta.assetHashes||{})){

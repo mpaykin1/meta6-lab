@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import zlib from 'node:zlib';
+import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 const src=path.resolve(process.argv[2]||'skins/packs/rusty-robot');
 const validator=path.resolve('scripts/skins/validate-skin-pack.mjs');
@@ -21,6 +22,7 @@ function makeTwoFrameSheet(file){
  fs.writeFileSync(file,Buffer.concat([b.subarray(0,8),chunk('IHDR',ih),chunk('IDAT',zlib.deflateSync(raw,{level:9})),chunk('IEND',Buffer.alloc(0))]));
 }
 const cases=[
+ ['preview-over-3mb-budget','S1',(d)=>fs.writeFileSync(path.join(d,'preview.png'),crypto.randomBytes(2300000)),true],
  ['stale-zip-deception','S1',(d)=>json(d,m=>{m.palette.reverse();}),false],
  ['missing-declared-asset','S2',(d)=>fs.rmSync(path.join(d,'parts','gear.png')),true],
  ['opaque-part-corners','S3',(d)=>fs.copyFileSync(path.join(d,'textures','metal.png'),path.join(d,'parts','plate.png')),true],

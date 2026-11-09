@@ -31,6 +31,8 @@ jobs:
           node scripts/skins/build-rusty-robot.mjs
           curl -fL --retry 3 --max-time 120 'https://raw.githubusercontent.com/mpaykin1/meta6/a8acdab/reference/skins/rusty-robot.png' -o skins/packs/rusty-robot/reference.png
           test "$(git hash-object skins/packs/rusty-robot/reference.png)" = f66ad0f0cf976b86600e91efd3e819cb81afe8d1
+          mkdir -p reference/skins
+          cp skins/packs/rusty-robot/reference.png reference/skins/rusty-robot.png
       - name: Validate committed pack before regenerating preview
         if: github.event_name == 'pull_request'
         shell: bash
@@ -42,7 +44,7 @@ jobs:
         run: node scripts/skins/verify-skin-browser-ci.mjs
       - name: Install free headless Chromium
         run: |
-          npm install --no-save --no-package-lock playwright@1.56.1
+          npm install --no-save --no-package-lock playwright@1.56.1 sharp@0.34.4
           npx playwright install --with-deps chromium
       - name: Launch training game and capture front / side / rear
         shell: bash
@@ -77,7 +79,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skins/packs/rusty-robot skins/packs/rusty-robot.zip
+          git add skins/packs/rusty-robot skins/packs/rusty-robot.zip reference/skins/rusty-robot.png
           if ! git diff --cached --quiet; then
             git commit -m "skin: generated approved reference, S1–S12 pack and Chrome three-view preview"
             git push origin HEAD:lab/skin-rusty-robot

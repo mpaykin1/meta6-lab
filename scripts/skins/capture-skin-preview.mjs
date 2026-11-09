@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import {chromium} from 'playwright';
+import sharp from 'sharp';
 const BASE='http://127.0.0.1:8765/games/skin-trainer/?skin=../../skins/packs/rusty-robot/';
 const browser=await chromium.launch({headless:true,args:[
  '--no-sandbox','--disable-dev-shm-usage','--enable-webgl',
@@ -43,6 +44,8 @@ try{
   }
   return c.toDataURL('image/png').split(',')[1];
  },screenshots);
- fs.writeFileSync('skins/packs/rusty-robot/preview.png',Buffer.from(merged,'base64'));
+ await sharp(Buffer.from(merged,'base64')).resize({width:1152,kernel:'nearest'})
+  .png({palette:true,colours:96,dither:0,compressionLevel:9,effort:9})
+  .toFile('skins/packs/rusty-robot/preview.png');
  console.log('Front / side / back screenshot written; no console errors.');
 }finally{await browser.close();}

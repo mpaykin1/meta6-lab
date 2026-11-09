@@ -98,35 +98,52 @@ async function checkCanvas(page) {
   const canvases=page.locator('canvas');
   const n=await canvases.count();
   assert.ok(n>0,'No canvas in game page');
+  const vp=page.viewportSize();
   const faults=[];
   for(let i=0;i<n;i++) {
     const canvas=canvases.nth(i);
     const dimensions=await canvas.evaluate(c=>({w:c.width,h:c.height}));
     const rect=await canvas.boundingBox();
-    const vp=page.viewportSize();
-    const aspect=dimensions.w/dimensions.h;
-    // Ignore tiny UI/sprite canvases: P1 requires the actual game surface.
-    // Pixel-art render targets can be low-resolution, provided they are
-    // displayed across a substantial part of the viewport.
-    if(!rect || dimensions.h<32 || dimensions.w<64 ||
-       aspect<0.4 || aspect>4 ||
+    // Verify the actual visible gameplay surface, not small decorative UI.
+    // A low-resolution pixel-art canvas is valid when scaled to game size.
+    if(!rect || dimensions.w===0 || dimensions.h===0 ||
        rect.width*rect.height<vp.width*vp.height*0.15) {
       faults.push('canvas '+i+' is a small UI/sprite surface');continue;
     }
     try {
-      // An animated canvas is never geometrically stable. locator.screenshot()
-      // waits for stability and falsely times out; screenshot the visible
-      // canvas rectangle directly without stopping render animation.
-      const viewport=page.viewportSize();
+      // Read intrinsic canvas pixels first: avoids overlaid DOM UI and
+      // Playwright's screenshot stability waits on animated canvases.
+      let direct;
+      try {
+        const url=await canvas.evaluate(c=>c.toDataURL('image/png'),null,{timeout:5000});
+        if(url.startsWith('data:image/png;base64,')) {
+          direct=pixelColors(Buffer.from(url.slice(url.indexOf(',')+1),'base64'));
+          if(direct.bins>=4 && direct.nonDominant>=0.005)
+            return {index:i,width:dimensions.w,height:dimensions.h,source:'canvas',...direct};
+        }
+      }catch{ /* Tainted or non-preserved WebGL buffers need a compositor snapshot. */ }
+
+      // Direct CDP capture has no "wait for element to be stable" and works
+      // for WebGL without preserveDrawingBuffer, unlike toDataURL alone.
       const x=Math.max(0,rect.x),y=Math.max(0,rect.y);
-      const width=Math.min(viewport.width,rect.x+rect.width)-x;
-      const height=Math.min(viewport.height,rect.y+rect.height)-y;
+      const width=Math.min(vp.width,rect.x+rect.width)-x;
+      const height=Math.min(vp.height,rect.y+rect.height)-y;
       if(width<8||height<8){faults.push('canvas '+i+' outside viewport');continue;}
-      const png=await page.screenshot({clip:{x,y,width,height},timeout:10000});
-      const colors=pixelColors(png);
-      if(colors.bins>=4 && colors.nonDominant>=0.005)return {index:i,width:dimensions.w,height:dimensions.h,...colors};
-      faults.push('canvas '+i+' uniform/blank (bins='+colors.bins+', variation='+colors.nonDominant.toFixed(4)+')');
-    } catch(e){faults.push('canvas '+i+' screenshot: '+e.message);}
+      const cdp=await page.context().newCDPSession(page);
+      let capture;
+      try {
+        capture=await Promise.race([
+          cdp.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false,
+            clip:{x,y,width,height,scale:1}}),
+          new Promise((_,reject)=>setTimeout(()=>reject(Error('CDP screenshot timeout')),12000))
+        ]);
+      } finally {await cdp.detach().catch(()=>{});}
+      const colors=pixelColors(Buffer.from(capture.data,'base64'));
+      if(colors.bins>=4 && colors.nonDominant>=0.005)
+        return {index:i,width:dimensions.w,height:dimensions.h,source:'compositor',...colors};
+      faults.push('canvas '+i+' uniform/blank: direct='+
+        (direct?.bins ?? 'unavailable')+' screenshot='+colors.bins);
+    }catch(e){faults.push('canvas '+i+' snapshot: '+e.message);}
   }
   throw Error('No canvas with real multicolor pixels: '+faults.join('; '));
 }

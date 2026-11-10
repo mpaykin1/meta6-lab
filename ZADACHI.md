@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | PR #190: разрешить конфликт с main и повторить CI | МГЛ | MG-строитель-1 | `lab/bot-batch-1` | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | 2026-11-10 16:08 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | feat(portal): Play / Connect / Earn navigation and functional MCP address control | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/platform-play-connect-earn-20261107` | [#87](https://github.com/mpaykin1/meta6-lab/pull/87) | 2026-11-07 14:41 | 2026-11-10 12:45 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Импорт пяти коммерчески разрешённых CC0 asset packs в библиотеку | МГЛ | чат ChatGPT | `lab/import-five-cc0-packs` | [#233](https://github.com/mpaykin1/meta6-lab/pull/233) | 2026-11-10 10:06 | 2026-11-10 10:38 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Рабочий чат МГ/МГЛ | МГЛ | чат ChatGPT | `lab/chat-rabota` | [#229](https://github.com/mpaykin1/meta6-lab/pull/229) | 2026-11-10 08:52 | 2026-11-10 10:37 |

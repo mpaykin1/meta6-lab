@@ -48,7 +48,7 @@
 - SHA: `db1b688ec0a7fce09603d717fd08fbe90c888bfd` · последний коммит: 2026-11-10T09:18:30Z
 - Проблема: Красная проверка: kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/42789619878/job/129742144319)
 - Задание: Исправь kontur-guard по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42789619878/job/129742144319 и повтори CI.
-- Взял: —
+- Взял: MG-строитель-3 2026-11-10T10:28:19Z
 
 ### PR #3
 - PR: https://github.com/mpaykin1/meta6-lab/pull/3

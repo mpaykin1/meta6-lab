@@ -1,7 +1,6 @@
 # DOVODKA — журнал доводчика
 СЕЙЧАС ДЕЛАЮ: [МГЛ PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) · попытка 2/2, HEAD `6d3bb2055de85e8fa621fc1c2e4dad74746f55fa` · убедиться в META BOT + B2 integrity desktop/mobile; если красно → Claude · 2026-11-10 09:15 UTC
 ## ОСТАЛОСЬ (сверху самое срочное)
-- [МГЛ #226](https://github.com/mpaykin1/meta6-lab/pull/226) — 🔁 НЕ ДОДЕЛАНО: чистая замена #124, ожидается CI на a2261bb
 - [МГЛ #124](https://github.com/mpaykin1/meta6-lab/pull/124) — 🛑 guard FAILURE: исторический 7057ad0 изменил .github/protected; уникальные изменения перенесены в [#226](https://github.com/mpaykin1/meta6-lab/pull/226); закрыть #124 после успешного слияния замены
 - [МГЛ #125](https://github.com/mpaykin1/meta6-lab/pull/125) — 🛑 завис: Lore: alternative Last Seed mythology and inspiration bank
 - [МГЛ #126](https://github.com/mpaykin1/meta6-lab/pull/126) — 🛑 завис: Эталон: универсальный промпт Sketch → HTML Game → ZIP

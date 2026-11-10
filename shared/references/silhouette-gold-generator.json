@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "id": "silhouette-gold-generator",
+  "title": "Силуэтный генератор · сусальное золото",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES LAB",
+  "date_added": "2026-11-09",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "original_filename": "Силуэтный генератор · сусальное золото.html",
+    "path": "reference/silhouette-gold-generator/index.html",
+    "git_blob_sha": "1529d6691ebf762bbfce9a6d39f31186a89ba3ab",
+    "sha256": "710b1ccbd3254003c4877558cdf44e032c0885afe623a02b9b623c3c2b0b3690",
+    "size_bytes": 76698
+  },
+  "viewer": {
+    "path": "reference/silhouette-gold-generator/index.html",
+    "url": "https://mpaykin1.github.io/meta6-lab/reference/silhouette-gold-generator/",
+    "availability": "after-merge-to-main"
+  },
+  "asset_count": 14,
+  "assets": [
+    {
+      "id": "flyinghero",
+      "index": 0,
+      "title": "Летящий герой",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "flyinghero"
+    },
+    {
+      "id": "reptile",
+      "index": 1,
+      "title": "Наземная рептилия",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "reptile"
+    },
+    {
+      "id": "fish",
+      "index": 2,
+      "title": "Рыба",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "fish"
+    },
+    {
+      "id": "dragon",
+      "index": 3,
+      "title": "Летающий дракон",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "dragon"
+    },
+    {
+      "id": "dragon_fire",
+      "index": 4,
+      "title": "Огнедышащий дракон",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "dragon_fire"
+    },
+    {
+      "id": "human",
+      "index": 5,
+      "title": "Человек / хранитель",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "human"
+    },
+    {
+      "id": "human_sword",
+      "index": 6,
+      "title": "Человек с мечом",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "human_sword"
+    },
+    {
+      "id": "human_torch",
+      "index": 7,
+      "title": "Человек с GLSL-факелом",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "human_torch"
+    },
+    {
+      "id": "human_gun",
+      "index": 8,
+      "title": "Человек с фантастическим оружием",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "human_gun"
+    },
+    {
+      "id": "croc_teeth",
+      "index": 9,
+      "title": "Крокодил с зубастой пастью",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "croc_teeth"
+    },
+    {
+      "id": "ship",
+      "index": 10,
+      "title": "Космический корабль",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "ship"
+    },
+    {
+      "id": "steampunk_vehicle",
+      "index": 11,
+      "title": "Стимпанк-машина",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "steampunk_vehicle"
+    },
+    {
+      "id": "creature",
+      "index": 12,
+      "title": "Существо / гуманоидный монстр",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "creature"
+    },
+    {
+      "id": "monster",
+      "index": 13,
+      "title": "Монстр",
+      "kind": "procedurally-generated-rig",
+      "source_select_value": "monster"
+    }
+  ],
+  "technologies": [
+    "Three.js r128 via CDN",
+    "WebGL and custom GLSL shaders",
+    "procedural 3D silhouettes",
+    "animated gilding and metal engraving",
+    "2.5D instanced gold-leaf flakes",
+    "interactive animation and attacks",
+    "mouse and touch gestures",
+    "HTML and JSON export"
+  ],
+  "runtime": {
+    "external_dependencies": [
+      "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+    ],
+    "offline": false,
+    "ads": false
+  },
+  "reuse": {
+    "owner_supplied": true,
+    "owner_designated_reference": true,
+    "third_party_rights_verified": false,
+    "requires_dependency_license_review": true,
+    "description": "Store the provided file unchanged; verify third-party dependencies before reuse."
+  },
+  "original_preserved": true,
+  "modularized": false
+}

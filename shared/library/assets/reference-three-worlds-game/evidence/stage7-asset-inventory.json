@@ -1,0 +1,41 @@
+{
+  "basis": "Repository three-worlds-game/models GLB directory, not a claim that all assets rendered",
+  "modelsPresent": [
+    "angel_statue",
+    "angler",
+    "arch",
+    "bathyscaphe",
+    "cathedral_bell",
+    "cathedral_tower",
+    "coral_branch_orange",
+    "coral_branch_violet",
+    "diving_helmet",
+    "glow_fish_teal",
+    "glow_fish_violet",
+    "kelp_tall",
+    "manta",
+    "seagrass",
+    "seahorse",
+    "ship_wheel",
+    "street_lamp",
+    "submarine_wreck",
+    "treasure_chest"
+  ],
+  "requiredButMissingModels": [
+    "galleon",
+    "whale_skeleton",
+    "anchor",
+    "cannon",
+    "kraken_tentacle",
+    "sun_rays",
+    "marine_snow",
+    "plankton"
+  ],
+  "renderedCategoryCounting": "Runtime underwater.population(radius).present reports actual loaded/nearby model names per seed in stage7-browser.json; absent categories remain MISSING",
+  "seedCoverage": [
+    1,
+    1337,
+    90210
+  ],
+  "verification": "PENDING: regenerate browser report on latest head"
+}

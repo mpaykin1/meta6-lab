@@ -8,12 +8,12 @@
   "status": "owner-designated-reference",
   "source": {
     "repository": "mpaykin1/meta6-lab",
-    "path": "games/endless-valleys-golden-knight/index.html",
+    "path": "reference/endless-valleys-golden-knight/index.html",
     "git_blob_sha": "7ef996e06d09dd34740c65b5ef56f13a4ca089ed",
     "sha256": "368b567d99d5e39be9bfed03b182b157566e5805d9386a0c16ae4b16e2faf61b",
     "size_bytes": 181687
   },
-  "viewer_url": "https://mpaykin1.github.io/meta6-lab/games/endless-valleys-golden-knight/",
+  "viewer_url": "https://mpaykin1.github.io/meta6-lab/reference/endless-valleys-golden-knight/",
   "technologies": [
     "Three.js r128 via CDN",
     "WebGL2",
@@ -48,5 +48,5 @@
   "original_preserved": true,
   "modularized": false,
   "render_verified": false,
-  "notes": "Playable HTML needs WebGL2 and an active connection for its original external dependencies; GitHub Pages viewer URL is live only after merge and deployment."
+  "notes": "Owner-supplied HTML preserved byte-for-byte in reference/. WebGL2 and network-dependent external Three.js/Google Fonts require review; no render or playthrough PASS yet."
 }

@@ -1,6 +1,9 @@
 name: Sync from meta6
-# Файл песочницы (Claude). Раз в сутки делает main песочницы равным mpaykin1/meta6 main
-# (основной проект главнее), сохраняя только файлы песочницы из списка LAB_KEEP.
+# Файл песочницы (Claude). Раз в сутки переносит в main песочницы ТОЛЬКО то, что изменилось
+# в mpaykin1/meta6 с прошлой синхронизации (основной проект главнее).
+# 10.11.2026: прежний rsync --delete удалял принятую в песочнице работу (OSHIBKI №15).
+# Теперь: scripts/lab/sync-from-meta6.sh — файлы только песочницы не трогаются,
+# правки обеих сторон остаются в версии песочницы и выводятся как конфликты.
 on:
   schedule:
     - cron: '41 2 * * *'
@@ -18,28 +21,24 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 1
-      - name: Overlay meta6/main, keep sandbox files
+          fetch-depth: 500
+      - name: Self-test sync script (4 traps)
+        run: bash scripts/lab/test-sync-from-meta6.sh
+      - name: Apply meta6 changes since last sync
         shell: bash
         run: |
           set -euo pipefail
-          # .github/workflows is kept whole: GITHUB_TOKEN may not push workflow changes; Claude updates sandbox workflows by hand.
-          KEEP=(LAB_QUEUE.md LAB_README.md scripts/lab .github/workflows shared scripts/shared scripts/repair-bot games/veil-terraces)
-          mkdir -p /tmp/keep
-          for k in "${KEEP[@]}"; do [ -e "$k" ] && { mkdir -p "/tmp/keep/$(dirname "$k")"; cp -a "$k" "/tmp/keep/$k"; }; done
-          git clone --depth 1 https://github.com/mpaykin1/meta6 /tmp/m6
+          git clone -q --filter=blob:none https://github.com/mpaykin1/meta6 /tmp/m6
           M6=$(git -C /tmp/m6 rev-parse HEAD)
-          rsync -a --delete --exclude='.git/' /tmp/m6/ ./
-          cp -a /tmp/keep/. ./
-          rm -rf .github/workflows && cp -a /tmp/keep/.github/workflows .github/
+          export SYNC_CONFLICTS=/tmp/conflicts.txt
+          bash scripts/lab/sync-from-meta6.sh . /tmp/m6 | tee /tmp/sync.log
           for w in meta-bot.yml meta-games-guard.yml game-browser-check.yml; do
             cmp -s "/tmp/m6/.github/workflows/$w" ".github/workflows/$w" || echo "::warning::$w differs from meta6 — Claude must update it in the sandbox"; done
-          { cat LAB_README.md; echo; cat README.md; } > README.tmp && mv README.tmp README.md
+          { echo "### Sync from meta6"; cat /tmp/sync.log; } >> "$GITHUB_STEP_SUMMARY"
           git config user.name 'meta6-lab sync'
           git config user.email 'actions@users.noreply.github.com'
           git add -A
-          if git diff --cached --quiet; then echo "Already equal to meta6 $M6"; exit 0; fi
-          printf 'sync: meta6 main %s\n\nmeta6: https://github.com/mpaykin1/meta6/commit/%s\n\nClaude-Session: https://claude.ai/code/session_018qWQn3qSNGzHkn68j4ecKk\n' "${M6:0:8}" "$M6" > /tmp/msg
+          if git diff --cached --quiet; then echo "Nothing to commit"; exit 0; fi
+          printf 'sync: meta6 main %s\n\nmeta6: https://github.com/mpaykin1/meta6/commit/%s\n\n%s\n' "${M6:0:8}" "$M6" "$(cat /tmp/sync.log)" > /tmp/msg
           git commit -q -F /tmp/msg
           git push origin HEAD:main
-          echo "Synced to meta6 $M6"

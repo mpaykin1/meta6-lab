@@ -1,0 +1,5058 @@
+{
+  "schema_version": 1,
+  "game": "reference-observer-world-en-v7",
+  "source_root": "observer-world-en-v7",
+  "assets": [
+    {
+      "id": "d5e1b7533bff628fce69efac",
+      "game": "reference-observer-world-en-v7",
+      "kind": "source-table",
+      "name": "TILE",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/building-assets.js",
+      "lines": [
+        6,
+        6
+      ],
+      "sha256": "d89028b4a375b5d54fcaf2dd7fcae9f4aee566a26b64c4aa38c3e37e46a1f9ad"
+    },
+    {
+      "id": "0055b1405fc0604114c34ca8",
+      "game": "reference-observer-world-en-v7",
+      "kind": "source-table",
+      "name": "FOE",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3838,
+        3842
+      ],
+      "sha256": "ae2b1468b6d2f62a4bfe1a3fd128f797c8cc79cd344afa40b4e43e3fe9d8b353"
+    },
+    {
+      "id": "19933b95079d957b37637cac",
+      "game": "reference-observer-world-en-v7",
+      "kind": "inline-svg",
+      "name": "svg@28486",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        361,
+        361
+      ],
+      "sha256": "1b421839d4ed646479caf2583c4164d65e622ea03a94faa33c1f400044fa61e9"
+    },
+    {
+      "id": "286946c05f3b78c429b59191",
+      "game": "reference-observer-world-en-v7",
+      "kind": "source-table",
+      "name": "PALETTES",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1734,
+        1763
+      ],
+      "sha256": "826644f34b6bd0820533c4edb25b0e252e89575a2bcaa913e9ebf19e06dbd76d"
+    },
+    {
+      "id": "3e9ca77b94ac832ec13eeef9",
+      "game": "reference-observer-world-en-v7",
+      "kind": "inline-svg",
+      "name": "svg@27815",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        358,
+        358
+      ],
+      "sha256": "b8f9173f58902f1815f5dc8a3a414a3c6ceb41cbe0339cdc3f6b5f091232de7b"
+    },
+    {
+      "id": "41dcba8f97ca5e2a08fe7343",
+      "game": "reference-observer-world-en-v7",
+      "kind": "data-uri",
+      "name": "data@50618",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        493,
+        493
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "50fe5cc8b103a50bf1f566b5",
+      "game": "reference-observer-world-en-v7",
+      "kind": "data-uri",
+      "name": "data@53277",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        493,
+        493
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "90efd9b10d2db366db285c65",
+      "game": "reference-observer-world-en-v7",
+      "kind": "source-table",
+      "name": "FACE_TILES",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        549,
+        549
+      ],
+      "sha256": "8dda32f994109662367ed69e909269335fd57d15b5c4ebe1c02cd38ed61ad0ae"
+    },
+    {
+      "id": "971c56bcc1d5342948af10c8",
+      "game": "reference-observer-world-en-v7",
+      "kind": "inline-style",
+      "name": "style@2451",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        26,
+        325
+      ],
+      "sha256": "181a2b242be80a678fa439270375af5911269c22727424d87380491bcd8a2841"
+    },
+    {
+      "id": "a26c1b413c86129ddab663d4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "data-uri",
+      "name": "data@52078",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        493,
+        493
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "ac6b243d9b41c14d1ea14266",
+      "game": "reference-observer-world-en-v7",
+      "kind": "inline-style",
+      "name": "style@130",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1,
+        21
+      ],
+      "sha256": "280d786ad0f507423b87eac2ff1775dc80441a37e96836f17b6b415fe9dc0492"
+    },
+    {
+      "id": "b7665d4a05da8d6012085483",
+      "game": "reference-observer-world-en-v7",
+      "kind": "inline-svg",
+      "name": "svg@27489",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        357,
+        357
+      ],
+      "sha256": "3d2613c34c7a63a7ff844b518142c03096b968b426581aa0733a7102f6e4c6d8"
+    },
+    {
+      "id": "d3f0a9d96aaea4cc9bda2101",
+      "game": "reference-observer-world-en-v7",
+      "kind": "source-table",
+      "name": "WEAPONS",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3057,
+        3079
+      ],
+      "sha256": "4f0d628c707759c270e371e7a796f52b7a92c1acf4414cefe18c52c70f66027e"
+    },
+    {
+      "id": "f3671739890bc1304fde43bb",
+      "game": "reference-observer-world-en-v7",
+      "kind": "data-uri",
+      "name": "data@35809",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        493,
+        493
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "f7f5f3f2511e29bf284d2aec",
+      "game": "reference-observer-world-en-v7",
+      "kind": "data-uri",
+      "name": "data@52652",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        493,
+        493
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "fe4d6a3aacbd6c44023a9851",
+      "game": "reference-observer-world-en-v7",
+      "kind": "data-uri",
+      "name": "data@46250",
+      "purpose": [
+        "embedded-asset"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        493,
+        493
+      ],
+      "sha256": "6af8981c87fdc4a77c24b4d6226affcef596c1b6667558b8f0f2beca92592a02"
+    },
+    {
+      "id": "ba614c0544b5c8407a6bd99a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "inline-style",
+      "name": "mobile-controls.css",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.css",
+      "lines": [
+        1,
+        51
+      ],
+      "sha256": "ab2e313c597be9dd108b6e23004d6a6f362cd4b415bb212a125fa2b90b50cb6b"
+    },
+    {
+      "id": "deead1b67bf4aa46d198063a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "inline-svg",
+      "name": "svg@339",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        6,
+        6
+      ],
+      "sha256": "766ae2403d93b39e0b46504ba2d2263ed62e6db03a6544f664656d1e05aa57eb"
+    }
+  ],
+  "solutions": [
+    {
+      "id": "08499d49fd4c8b5f9f56a38f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "beat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        215,
+        254
+      ],
+      "sha256": "6c838f01c53d97f0c6b582b54d28f7500bfa34f499c1792f501588eab4f251f8"
+    },
+    {
+      "id": "0be4d999ff5538ce6fedcef0",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "armMusicClock",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        110,
+        118
+      ],
+      "sha256": "e011076792b7d9c7a304b144e48d04de65bbe91a3c345e5b98d807c906bcd4fa"
+    },
+    {
+      "id": "2bb3b19fdd3c94cdbc231076",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "now",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        45,
+        51
+      ],
+      "sha256": "7d5db9847808177b1a56cf418523c3103065e7eaae55d13fd3426c97d6d02006"
+    },
+    {
+      "id": "325ff09a246690221bc84c42",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "musicNote",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        191,
+        214
+      ],
+      "sha256": "11ce0b60ede124c498440947f1c0a9b8faf18b87ab674739792dc9497c2c5e92"
+    },
+    {
+      "id": "32df498ffdefe53e24ef5a8b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "onVisibility",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        295,
+        299
+      ],
+      "sha256": "2cb42cfef7997419455d082af85898daf78df0c9fc25009201e56fc8e431f5f2"
+    },
+    {
+      "id": "3adfa1b21115d62b89e70390",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "noise",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        64,
+        75
+      ],
+      "sha256": "544eb4294ce3ed53e2030249f04a08b1b237d0bfdbe36934d62bd9e680d54530"
+    },
+    {
+      "id": "48d38b9aba46b45779609bcc",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "setMusicVolume",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        136,
+        138
+      ],
+      "sha256": "7c80ed26aa067b03600b989a1143647522a23a6ffdc990d17ff9cbe98d067f1a"
+    },
+    {
+      "id": "4a618cb3cfdd5763d34f01f4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "toggle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        135,
+        135
+      ],
+      "sha256": "86ca63cf8b3e27108e697f7eee3f2d9de9d4ed392873b95621fdf500eae02893"
+    },
+    {
+      "id": "4fd704730254165991fcee59",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "bus",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        52,
+        52
+      ],
+      "sha256": "644046eac1d7c0e35b0eac5f02efb5d13ef1d07f482603e2e978d9c4ca03a2aa"
+    },
+    {
+      "id": "5c6ef8c162227257d657544e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "create",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        33,
+        302
+      ],
+      "sha256": "0ee43a5246dde038eac8ec1b44f909c260afc0edb454256e7a637008c6669dc7"
+    },
+    {
+      "id": "5df258e29c72455693b3e385",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "finite",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        46,
+        51
+      ],
+      "sha256": "b15d86976f57ba577473e10f6843b2f077615cda85f0d15216867ffa705ba7a1"
+    },
+    {
+      "id": "607e1dfd013b21350fd7e158",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "midi",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        47,
+        51
+      ],
+      "sha256": "1ec749729a74777d534adc2098309968a38978d1da6125b67990d87707a85708"
+    },
+    {
+      "id": "73ab904796447be601ef3a90",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "musicMeter",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        152,
+        157
+      ],
+      "sha256": "772e01a2d065a9353fd5a8062a4cc860465c0a1bfd02c6627215b3c76c7f8b22"
+    },
+    {
+      "id": "82acd2b772f4b9454f5f4ec8",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "variantFor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        48,
+        51
+      ],
+      "sha256": "c406c3de2e3a36af38dae004db0f2f2650f625de2bb580c35a9fea8f53f1de12"
+    },
+    {
+      "id": "8519be86f2a992a7ad766976",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "diagnostics",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        300,
+        300
+      ],
+      "sha256": "cef51f2ade312142a69d9a3b52a1125a5c94635182c995be02930668ee68c39f"
+    },
+    {
+      "id": "a4d161323d4a153fa7b95437",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "module:audio.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        1,
+        304
+      ],
+      "sha256": "fac1fe1502510c73c3ec55dbc2757ea6e7c563739856af8d6f9b6a4fefeda280"
+    },
+    {
+      "id": "c751bd367ca3addac0f4d3cc",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "oscillator",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        53,
+        63
+      ],
+      "sha256": "b398609626a8625c2b79ab55e56ede8744a611b4e58081ddff6e6c824178ca6b"
+    },
+    {
+      "id": "ce3de178319a970acb134241",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "setEnabled",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        128,
+        134
+      ],
+      "sha256": "4d941b58bfb37b387e08d0e0170414c6087c9fcf6120226e6c788649400dd23f"
+    },
+    {
+      "id": "d5b8f664860b649b640bfa59",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "tick",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        255,
+        264
+      ],
+      "sha256": "c02b7deb55a1952fa16b0f3e819c3201a858514d75b6ae91b10d95c02b6044b9"
+    },
+    {
+      "id": "dba5f9704ecda5882c36afc6",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "setFxEnabled",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        139,
+        147
+      ],
+      "sha256": "4e6d51ed4b018077a91329ac57ed0511bebdc07f5d35c13ce4b03d80d2c0deeb"
+    },
+    {
+      "id": "dcc35ed9de7075fe493625ef",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "setFxVolume",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        148,
+        150
+      ],
+      "sha256": "856ac66004ed9f68494a0ced2048c60fd14cbcd9cc3cbfc8121419dd809e7561"
+    },
+    {
+      "id": "ddff15584bb46641e8dbe6df",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "stopMusicClock",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        106,
+        109
+      ],
+      "sha256": "a5957acf1d00e09dd6d1c4aff3c67897a47fff03f45e94217c377c2608f20074"
+    },
+    {
+      "id": "e3cc1e29a9033913238f5729",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "setVolume",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        158,
+        158
+      ],
+      "sha256": "b1d3f174dd9c64a07e15770a10f2540082139402396f66ecfee7c552edab7da7"
+    },
+    {
+      "id": "ea51a4379a30b3a90fba4053",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        119,
+        127
+      ],
+      "sha256": "e805ab3e6bc07707dffe92760e03a9db63d95c9f4c3f42b8bad9eec204cf9a5e"
+    },
+    {
+      "id": "ec3b0af9705b47c8e79b409a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateBuses",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        98,
+        105
+      ],
+      "sha256": "6325366840a8edeac0d7a17c9a35f50e851959aa356194c9abcf3763407d024a"
+    },
+    {
+      "id": "f0e8fe03216ffb0e92b20ddb",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "event",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        265,
+        265
+      ],
+      "sha256": "81b40ddb517bda3bbdef419d593224039e1bf83b04ec957389703c13e565ab5e"
+    },
+    {
+      "id": "f86b42812c9e91d9a9febaf9",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "init",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        76,
+        97
+      ],
+      "sha256": "de66be2f50ab8d8f32d60f789c8415ba5860e894de92f2b37b601633823a5f45"
+    },
+    {
+      "id": "fbcb9da1674beeb65c07c94c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "forceTheme",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        151,
+        151
+      ],
+      "sha256": "4192b62e672546a03631fb3505a2186e42c2a78fb479dc46ec72058b15b3fbe8"
+    },
+    {
+      "id": "fff19419d861c9d512bfe4d6",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "classify",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        159,
+        159
+      ],
+      "sha256": "91d632a00282a6ea45a0ea72f97cf1fafd15e0d5bc69a91886f997caeefee8d3"
+    },
+    {
+      "id": "015ddc35041b47f5d17d124a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "build",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/building-assets.js",
+      "lines": [
+        21,
+        73
+      ],
+      "sha256": "2e7a98f97dac8f937b95025363016acd30c0d141492ab28af83a3dede4dcc027"
+    },
+    {
+      "id": "109122169c7c38e9ef1ab38e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "flags",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/building-assets.js",
+      "lines": [
+        26,
+        26
+      ],
+      "sha256": "0c8769e0305f70a10b6863df8200cf4cad29437b7a8b39e2f76455c39c8b62fc"
+    },
+    {
+      "id": "747a7036c2efe3b06b6f5521",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "module:building-assets.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "observer-world-en-v7/building-assets.js",
+      "lines": [
+        1,
+        75
+      ],
+      "sha256": "39df909749039ce66e94a7e71b4a80d15932207bb2a780341f007703ded63f68"
+    },
+    {
+      "id": "d0bfa5a217b58230dbb19b4a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "cross",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/building-assets.js",
+      "lines": [
+        27,
+        27
+      ],
+      "sha256": "141e509befdc129987b50ac1e96bf86de62daf0be3b30629d6ccd0536bfd206b"
+    },
+    {
+      "id": "ed9ef12617ab0e235a1edaac",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "hut",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/building-assets.js",
+      "lines": [
+        25,
+        25
+      ],
+      "sha256": "ce34760b1ad54f701e2fe31ff17effbca6f040a5dd122fa933d594d853cbf605"
+    },
+    {
+      "id": "0e0e3906fcb5ea85fff6dd6b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "here",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        7,
+        8
+      ],
+      "sha256": "dcb044085736503f8524f85431b8d51facb5f4381857ad96646c9d2f3f8628d8"
+    },
+    {
+      "id": "2402b51bc0b9c49ea811d4f9",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "newPerson",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        33,
+        46
+      ],
+      "sha256": "99333f0d6dfd608c4012db82b8c375894903379abe67b902d362d838eb75dbc0"
+    },
+    {
+      "id": "2a18be465ecdf6e88bd693ff",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "roleFromBuilding",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        23,
+        32
+      ],
+      "sha256": "ed761c337bf409b58a7282961ccac47b441aec8c931d2c19ba129803381a8f11"
+    },
+    {
+      "id": "346f564249d0925688136234",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "module:combat-relations.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        1,
+        152
+      ],
+      "sha256": "e8bc2eaac89262bcd9477fe35e2109534e11c7f6098e406962ce8ef5755b5cdd"
+    },
+    {
+      "id": "3f6945c703ce0ebe63c25035",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "snapshot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        147,
+        147
+      ],
+      "sha256": "0f38109f5fbbe6595a5e651d10a18486b66c5ee9a16f2f9b8dbe0acd13a2ba47"
+    },
+    {
+      "id": "4e4d37b7655e86e891efe65c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "step",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        91,
+        100
+      ],
+      "sha256": "74c3d82f47fb471e66bf72cd8397fddaff74ea9210c082fb634ab96c732f2be8"
+    },
+    {
+      "id": "64a7e62d181478df1cb76144",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "strike",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        60,
+        78
+      ],
+      "sha256": "3c61566158d986105f6255703de6f9ffe3df5553a934def49e0a1c284e4d8f6e"
+    },
+    {
+      "id": "67d2df9c866c61b15e65f456",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "reviveState",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        144,
+        146
+      ],
+      "sha256": "cfdc584172889a37c352b1764163152f1a26fb3bd593aa5759dc839cea3ec0da"
+    },
+    {
+      "id": "6e71685a2eadfc460abd68e1",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "dist",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        6,
+        8
+      ],
+      "sha256": "7482680c7ee42a70150e659369e7884aa6ada74bac39aef74269c897445bdfb0"
+    },
+    {
+      "id": "74c0d02aa6e342a9daae1a64",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "spawn",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        10,
+        19
+      ],
+      "sha256": "1338346a672d89d317199e5b90e4740e8cf327028c8cff2c857fb1dbc450d124"
+    },
+    {
+      "id": "83f327728c11a9daa269b3cd",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "pos",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        8,
+        8
+      ],
+      "sha256": "f6ea682ae93a503d5bd0f96fbfd97e4c7a625851ae36359aa40b0d9f96b567bd"
+    },
+    {
+      "id": "b42ceb53127aa6d72f8c9bed",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "nearAim",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        47,
+        59
+      ],
+      "sha256": "d31e41e621267ba2dbb52549e2e565e15246905c92a35274fb16337f0c6b2bdb"
+    },
+    {
+      "id": "d53b079815c921df15b12701",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "create",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        3,
+        3
+      ],
+      "sha256": "600abb726d7a537497c629ebff2cc4301622b827209cd9d86ba5631dfa7d1be7"
+    },
+    {
+      "id": "de6c2e3368d6da25a745db8b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "tell",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        9,
+        9
+      ],
+      "sha256": "6d55d4289599a8dd349f7f1150144f1bc57d0fa6c6f2698a30dacedd9c694dc2"
+    },
+    {
+      "id": "e8c037d33d7b36e424d34f8e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "update",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        101,
+        143
+      ],
+      "sha256": "7c78883bab982a490e79ce4225eacf19eefe5ec31acf246dc5283604395d1306"
+    },
+    {
+      "id": "ea269630a0f3b814a8fbe2f6",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "npcAttack",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        79,
+        90
+      ],
+      "sha256": "6b8ff7d0d4571c4594db31a526109ca0ce164da426e19c03fda75757d07093fd"
+    },
+    {
+      "id": "fe584721d7b31d293e9cb54f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "remove",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        20,
+        22
+      ],
+      "sha256": "04f6c4ae5222e3fca36593b6c27ed4ec955cb1ac37802b1fbbf3a4bd41d19617"
+    },
+    {
+      "id": "1f709e19e94761a7d2d19b68",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "probe",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        508,
+        508
+      ],
+      "sha256": "a076f1852086d3657f8cbcc92b4ec042803cc35cd594d71afeabaa1272b51a9e"
+    },
+    {
+      "id": "23ce97338dde8df85b019114",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "activateBuild",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        155,
+        161
+      ],
+      "sha256": "95ffcac8f7ddf6672a7271528b2c53842e99424bd64c478091fe5bb7b7c4a671"
+    },
+    {
+      "id": "266ce8c74b9b24992940cf7a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "roof",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        88,
+        91
+      ],
+      "sha256": "c8db88ffa98a3ba9a4dc616ec2db52e65ba0ec5ec536b4504059551552a0fced"
+    },
+    {
+      "id": "2aa34ba0d9bbee9dd7f8a190",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "module:editor.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        1,
+        510
+      ],
+      "sha256": "d940c4b8ea2420befd47cbee1efb3026184cdae41a25e497998822351b1f03f8"
+    },
+    {
+      "id": "372556d8e9d74b8ebed7c988",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        276,
+        505
+      ],
+      "sha256": "748714e710441e24eb88c4768e7b3a4fdadc78a8de959eb16746ad69fc8e80f0"
+    },
+    {
+      "id": "3d94e5080b0b0cdfc2cd277d",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "onPlace",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        98,
+        154
+      ],
+      "sha256": "49ed3170bf8d4d1537ee90b112321c93f18d80228294cf424d02781129eb0bf7"
+    },
+    {
+      "id": "439cb049d27d4afeb0880423",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "$",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        31,
+        33
+      ],
+      "sha256": "9851195f1e3408d808926ebdd0c9fcd5d45eebb7ed0f31acfd508bed57b6cad3"
+    },
+    {
+      "id": "62b2475d5e8d77e8efe34915",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "tell",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        36,
+        42
+      ],
+      "sha256": "9701b3067c1682009c79d915b0d59b36e1c727e0fb937c3b861936a25674d1a7"
+    },
+    {
+      "id": "72155d1b9befdf2f23065f6b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "mobilePlacementPoint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        178,
+        183
+      ],
+      "sha256": "d1bbca16448c76d3626485e54a4f8c232319235899bc869fb76f36899e1749ee"
+    },
+    {
+      "id": "7b4c988ba29bc61ce041c3c2",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "support",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        75,
+        79
+      ],
+      "sha256": "36f1915e78451a2badecfa15d6a30b6ab496f9117715607acd113dcb6e044810"
+    },
+    {
+      "id": "7c31d8ed998e8d5963033f16",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "restore",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        47,
+        54
+      ],
+      "sha256": "388c1735ff9d05edf0b82b786c46b8931123dd627bfb1090a6ff7e2b160aa173"
+    },
+    {
+      "id": "844e6d513962d0bf6b19fa47",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "interceptCanvas",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        228,
+        274
+      ],
+      "sha256": "e050ecad103d093a686f92c95f72dbe290581c4de862526a365131505bda56b6"
+    },
+    {
+      "id": "98bd2236979289eceb546339",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "setMobilePoint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        184,
+        190
+      ],
+      "sha256": "9eb97e1fccd980e756cd546e66eba607bb8624f50200517b64d4b205351bd384"
+    },
+    {
+      "id": "9c345bf39c6c0149059c730e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "defaultMobilePoint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        191,
+        194
+      ],
+      "sha256": "98377982e632413bbe32bef3fafaa466587539df347bf73679015f4116930a37"
+    },
+    {
+      "id": "9dd93676e9332b04b701c577",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "ensureMobileMarker",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        169,
+        177
+      ],
+      "sha256": "ab07d58bc6ae012c6a68eeac47ef6628adcd51a59c281b9f255e068219160e42"
+    },
+    {
+      "id": "a3291e96c6b1f9801a383501",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "tileGeometry",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        55,
+        62
+      ],
+      "sha256": "bef8cfd52184b23706a42d110c88d6ed0b601847f7e83f60397fda6bb4f4db96"
+    },
+    {
+      "id": "a3c25f8ed2de6fd6bf8bbec9",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "openReader",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        206,
+        210
+      ],
+      "sha256": "10984686801840e1199d640972d481b4ff36e71ee77055fac9393948b073390b"
+    },
+    {
+      "id": "a4ae005eaebd7d1dbd437490",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "post",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        87,
+        91
+      ],
+      "sha256": "02c07c132f0590cdfb1be49b0f23fd8b7e8d796a7e9b1e3a47b55c0c18652a60"
+    },
+    {
+      "id": "a741f142c0fd2d47fb48ce66",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "selectGround",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        162,
+        168
+      ],
+      "sha256": "3e8fb0daa021f00166ee4697e52161add17abce0b224e810a2756afb88be03a4"
+    },
+    {
+      "id": "a7765aacb3b81c7c1e30607a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "addCube",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        63,
+        67
+      ],
+      "sha256": "8f6ce80fc0d7ceb38b8754389fbcc4e9109bf41ff0603c4758ff7c8e74a6e3c0"
+    },
+    {
+      "id": "b23b2a904e4b71959e03e651",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "beam",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        86,
+        91
+      ],
+      "sha256": "e7f77683af6ad9b4eb4aa07d9c545daccb957bda494a3df89cd24cbdc2c46263"
+    },
+    {
+      "id": "b339a3b95cc3aad3323017ee",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "box",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        83,
+        85
+      ],
+      "sha256": "ef1a29e924820b96a12944c9803647145d348b01caec68817d591853a73ec6f3"
+    },
+    {
+      "id": "b6e9f57b9e601f2ce691accf",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "persist",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        43,
+        46
+      ],
+      "sha256": "212d7c8e261bc2a52e6dbc658ea227077351a70998bcb81b07ab230e5f12b6e0"
+    },
+    {
+      "id": "bfc7a6049d3eeec6890089c4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "buildSelectedMobile",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        195,
+        205
+      ],
+      "sha256": "230a4fc5d3245249cb97c9ad0e0aab18175d3077912786d7ab01197e1b2290c9"
+    },
+    {
+      "id": "d174d1037c0263179baf094f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "sign",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        92,
+        93
+      ],
+      "sha256": "425303c1ca3190aaddeb11117d3e040f42d70790645907ca3e25401e94ab2b00"
+    },
+    {
+      "id": "d79e7b69f39212ff0d41f0cb",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "fence",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        93,
+        93
+      ],
+      "sha256": "9029e4a0a500ceffee0c6908366e9a5f475eb6bfe128d3be1fb39ee89cf4b387"
+    },
+    {
+      "id": "d86b71c7fe619a6d6a76e40d",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "inspectWorld",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        211,
+        227
+      ],
+      "sha256": "f7d5d3f37413ac94d9086cef624b67154ece60d46e954ee6b59686ea95c259e3"
+    },
+    {
+      "id": "e6a25ffbcbc51be9257c7d18",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "p",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        398,
+        400
+      ],
+      "sha256": "b73847a69306e54b61e0f4429d587fea018688d81198fc1f7d10bd79dc6bee26"
+    },
+    {
+      "id": "e78669fccdee8fe8aa28638f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "addBuilding",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/editor.js",
+      "lines": [
+        68,
+        97
+      ],
+      "sha256": "2501093a06efeab78189178c6f2d7dac225eb40484b5606036f45c263a9b531d"
+    },
+    {
+      "id": "031182c100343e7f326d6319",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateDash",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3391,
+        3409
+      ],
+      "sha256": "d7d23a616a0b81d7955c8e449b672cfd96978e4f2fb44dd52b5ed65ab1df39ae"
+    },
+    {
+      "id": "04a69b1162fa4958fdc5024b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "at",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        569,
+        569
+      ],
+      "sha256": "fe2af4a63dbf00fabd7fdf1bb907f6c488a8f4619650727d186a14908764730d"
+    },
+    {
+      "id": "05985ba71f1705973620b4e5",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "applyPalette",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1776,
+        1802
+      ],
+      "sha256": "c499d14b787aceb00458a6c6c7038807f74eb0bf2a29b5a34c771544358434d3"
+    },
+    {
+      "id": "05bc1e94366be3e591b957e7",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "flashLight",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3503,
+        3506
+      ],
+      "sha256": "74eaf2adb63ace61bfeebfc43d72808e2ebe5f887ffaa98b05d1f64c5a3669c9"
+    },
+    {
+      "id": "05e65ab90881fc916211c4ea",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "startGame",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2785,
+        2797
+      ],
+      "sha256": "aef8e8116ed76ae020b2b31c4bec190613fc81ac8c6b461f223fb6d23f24c95f"
+    },
+    {
+      "id": "08b1ce829d708423ebd2f414",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "projWall",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3575,
+        3612
+      ],
+      "sha256": "1c9b935b3c35b2a3fd91d04bb0b9bdf37eeec8fbe5a933de3b53030c19d6865d"
+    },
+    {
+      "id": "08d8a2acf5ec6056f43150e8",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "nearestGoal",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2533,
+        2538
+      ],
+      "sha256": "6ad9f3761facec25103c24103b0f04cd38208933bae2a8432dd744e0e1daf1c0"
+    },
+    {
+      "id": "0b0ad811e697aca4e9c92055",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "trailSample",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4453,
+        4459
+      ],
+      "sha256": "629eb5c19475ffd24941b69dc8f2ef1c49c0e4eaca23eef4247253afb8edb52a"
+    },
+    {
+      "id": "0cfe1faa576981270860e72b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "iconStyle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4651,
+        4654
+      ],
+      "sha256": "e4da1d8aade837045b8cd68de88d1de5c998e57796872396d871c8a37ef69521"
+    },
+    {
+      "id": "0d76abe19388c124ab155c5c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "surfaceUnder",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2285,
+        2288
+      ],
+      "sha256": "b44f6f9943a6c14353fd0615fcd7a0d1127f0e61c100f0f5514d8603236cd808"
+    },
+    {
+      "id": "0db67a83fd3288186c8e30b5",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "frame",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4782,
+        4822
+      ],
+      "sha256": "f7210ca3e5e99bf0e9f4dccc825a6b40fee1f42832a7536afa14e058a2451aa7"
+    },
+    {
+      "id": "0ea16befef5b4f9759d0c4cd",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "renderLoot",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4614,
+        4623
+      ],
+      "sha256": "c1998504aef0a3d5f60213574147d48123f956182cced5d6f72ccad4cae38088"
+    },
+    {
+      "id": "0fa0d635d58ce12d26f7fc36",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "spawnFoe",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3847,
+        3859
+      ],
+      "sha256": "e55f2d5b6a780c99f739787486a38c127e5da290c0d7809a129010c3dc955327"
+    },
+    {
+      "id": "11d19a6eb82533b8f8c30ce9",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateFlail",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3410,
+        3441
+      ],
+      "sha256": "6186d0eb2c9f8ea70cbb0c2349795407bde25c40f10be9070067d8804bdee1c3"
+    },
+    {
+      "id": "124041a07cd7f3e948fb491f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "rectUV",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3049,
+        3056
+      ],
+      "sha256": "a15ede87dfbde4359b6adea378482b587893fe84d424f363a412bc40271d2168"
+    },
+    {
+      "id": "13fc6cd806634a8b3dec40c1",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "dropSoul",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3962,
+        3964
+      ],
+      "sha256": "5d8011d11b74a111925ece033614bea72a24e082550d44308781aaebb905c95f"
+    },
+    {
+      "id": "142ae9663235ffee743fcecc",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "readBest",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2743,
+        2743
+      ],
+      "sha256": "a0193cd3d6732dddaeb935b096c783ab7d4fee59005bfa2bccb227105d79637f"
+    },
+    {
+      "id": "1776f4e6e04b77e78a573ee3",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "trailPoint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4461,
+        4469
+      ],
+      "sha256": "2d709fa69ef249c5cf7f5e73d179d42ea291bd5bb2d4ed810bfe75165bc4cd83"
+    },
+    {
+      "id": "17a3454b3afcbcc0d684d14d",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "clear2",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        793,
+        807
+      ],
+      "sha256": "1d153f5400260479f1253e992321fb6ed9fcefd4e53fcf81e935ab9d68de4f84"
+    },
+    {
+      "id": "192184202fa0a41186725de7",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "drown",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2309,
+        2315
+      ],
+      "sha256": "28d3e4cd58f0a5807961ee21db01b312b5c4c5520ce9e35655bbc6057e5e572a"
+    },
+    {
+      "id": "1b1913572cb550c69b1b90db",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "btn",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2226,
+        2228
+      ],
+      "sha256": "2d30ead891a59da47cc29ad9867721f3d5d4d40c329d3faaee6dca8120c0bb21"
+    },
+    {
+      "id": "1b4516af1139d0dba167230c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateBeacon",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2565,
+        2596
+      ],
+      "sha256": "21d225aeef428bb160cd98dc74ce218db284235e2555fc7756884fd4e49a135e"
+    },
+    {
+      "id": "1b85abeada2c7a25254f18a8",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateCamera",
+      "purpose": [
+        "camera"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2602,
+        2671
+      ],
+      "sha256": "0f0548440c15a6cf2db2e7b5c7ec730269172607ba0621e87762dc05a4af7e8d"
+    },
+    {
+      "id": "1bfadbc6f4142ad20c043de4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "free",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        714,
+        715
+      ],
+      "sha256": "32ed866776db3726554406f4affaa3e3cab0c99c63b34a83876d696712d5f1a1"
+    },
+    {
+      "id": "1e7d69da250e0d0f22094d87",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "renderHeld",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4366,
+        4451
+      ],
+      "sha256": "4a38807d49c0d75256894bb43846315e768edf771bf0da2dc62223409300c2b6"
+    },
+    {
+      "id": "220cf8e9f7a4f9567af807bd",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "addCoin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        817,
+        817
+      ],
+      "sha256": "48ef93bc0822021d1284444f9a76cb272e89ab4017f9bcc220f1585710084ff2"
+    },
+    {
+      "id": "2281aaddbd120ce924488f72",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "pollPad",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2217,
+        2243
+      ],
+      "sha256": "d838605986650a40e621e85424163be10687a37e9694e6fdf891738c738a22ae"
+    },
+    {
+      "id": "240df991b3636cd51455ca96",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "glowMat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1583,
+        1586
+      ],
+      "sha256": "04d5ab0b7ed3c716fc1daabe3c0a61e902fbb2ab57a149509c129614f2f5a1b8"
+    },
+    {
+      "id": "24429a80d056928f4dbdb38a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "dz",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2224,
+        2228
+      ],
+      "sha256": "1b8e61f1d9436ed2ce1142c31aabcca54d12ad0d7c1a81996f6367fbcdd7c528"
+    },
+    {
+      "id": "249a60daee873741006cfffd",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "renderSouls",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3986,
+        3993
+      ],
+      "sha256": "35902fa56d8444e5f4a20e1c8252b1bbd70010c2b3e9c04c57547ec73ff1a3f8"
+    },
+    {
+      "id": "2a109634c0fe426de8f55b8d",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "pickupMat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1577,
+        1580
+      ],
+      "sha256": "e7f8f5748a1f2bc04f5013d48549a3720be43c1314ebda938240a06454c82165"
+    },
+    {
+      "id": "2b4836d8fbbd002a66bb5287",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "buildWorld",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2744,
+        2764
+      ],
+      "sha256": "3954c4d9e18c58d36222e07aa317fd46cb40db4a3db63eef105b11cefd923324"
+    },
+    {
+      "id": "2b8a6c730c3f71eadbd1f35e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "ejectCasing",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3517,
+        3521
+      ],
+      "sha256": "80b2b9fdb999aa481c7e3d8a64b7d65568af123da7d677b5235c39a5d829fdad"
+    },
+    {
+      "id": "2cd3620c2d944e9380af6e87",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "mk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2995,
+        2995
+      ],
+      "sha256": "73528f4f382100f01b2aea305cb08a6ac42fa3af0423d71ca02fff2114962222"
+    },
+    {
+      "id": "2e8be71a5f93a28d67a8e0f9",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "onLand",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2300,
+        2308
+      ],
+      "sha256": "fefdac2a9dec8d14de92fdf0c554ca24d78c39fa78b4563a4516da6673c7ca87"
+    },
+    {
+      "id": "30a2270eeff7134270d8801a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "smooth",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        502,
+        502
+      ],
+      "sha256": "f8284f4ae532715c77f80d0242ce71cbbed8b1adaae4508af978302aac295793"
+    },
+    {
+      "id": "3224b275c84dd8d5840b61b4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "inline-script@30926",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        416,
+        422
+      ],
+      "sha256": "5fad9607c5827c034b7c4283297d48cf1f2c81ca07d623314486e2ade38782af"
+    },
+    {
+      "id": "327c4d7830fb6c4cbfb38090",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "spawnOrb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4167,
+        4170
+      ],
+      "sha256": "fa7ccb0156aa516aadfbb08b3a24060ce58ed1c208648965d856fb508681bd48"
+    },
+    {
+      "id": "3346f848dc256b958431787c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "seaSpot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3860,
+        3870
+      ],
+      "sha256": "19af3898bc9568005dcf9fd3fb451444578b61dfa0ddac05fb005aaf79f95c87"
+    },
+    {
+      "id": "35bf0c5020e5bc0e0505de3c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "marchVoxel",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3727,
+        3746
+      ],
+      "sha256": "7f016edb75df66e9a6f9107a34e02b077e28eb8c2191f0355c21b067ce5b5d5c"
+    },
+    {
+      "id": "3611e6c74867af4d47254a88",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "mouseButtons",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2149,
+        2155
+      ],
+      "sha256": "dcaec963cf0f82bdab2e420ae4fff84bac01b593a09334b867e446f249042d95"
+    },
+    {
+      "id": "370bb094e6ec5a0e51fcd6de",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateFoes",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3994,
+        4102
+      ],
+      "sha256": "938e59522495e1f3553b9462933d8f87081e2dd3bee24b8d825fbee58d77dabe"
+    },
+    {
+      "id": "39062200f72e24a3c731442d",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "collectHeart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2519,
+        2527
+      ],
+      "sha256": "ee9ff1793e36c84a38ba393a43d8960bb4db6320d81513f1b509e968786dc3a7"
+    },
+    {
+      "id": "3a27378d225bbc47ae1c1a8a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "beamDamage",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3816,
+        3831
+      ],
+      "sha256": "1206c9c99f12eb7f038f3d7527e46922bf0d3d508be9faeade7f9dce9600ab5c"
+    },
+    {
+      "id": "3a60d66565c3800e0a77d120",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "mk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1604,
+        1604
+      ],
+      "sha256": "ad269ff5335ec28fa16bccaed4a2017080eb53882807c853be45fb2933ec11fd"
+    },
+    {
+      "id": "3c7427769bf449ef842e73f1",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "meleeSweep",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3321,
+        3345
+      ],
+      "sha256": "bff77d7106b60dd8575c945b7b5259fb6002fe0375a4a41983ec07cadcffbb23"
+    },
+    {
+      "id": "3d1a3140dde28a507cfe577e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "cycleWeapon",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3194,
+        3198
+      ],
+      "sha256": "676b38f07ba20c9f798542c4d5ac43a6c18c1b2d6225741f28fa8e22ce8d83b0"
+    },
+    {
+      "id": "3e60a704bac42a1a860669a3",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "inline-script@35038",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        481,
+        4938
+      ],
+      "sha256": "5a20b497d3a9ebfa81b030febef90bc667dce2d6cda530a6d4f9a15b7b9364c5"
+    },
+    {
+      "id": "3f0bb8e2c09977725e4015a6",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "bossThink",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4103,
+        4145
+      ],
+      "sha256": "aae8cc03fc3ff7e1360fabb5842c0b39b93d15f40d7ed461313a21d8bf0abcfc"
+    },
+    {
+      "id": "3f98d33c4e51ba106ab97010",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updatePlayer",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2320,
+        2395
+      ],
+      "sha256": "993c8d833a82b414a4a4153d802f7797c5e9fb3c5691a8f47964fb79ad782f18"
+    },
+    {
+      "id": "436ef3287d42d8eeb2cd7c50",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "footstep",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2289,
+        2299
+      ],
+      "sha256": "d10e76c6505d45eab7f823d0e2960489bc18b029110e527a30f2f29b04347f07"
+    },
+    {
+      "id": "448cb1352808984be6b065de",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "loadTexture",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1429,
+        1441
+      ],
+      "sha256": "b18005d4b5e1e4e8c01cd48a4ff1c6baf69240f5518ec5d52de2dfb4c56a839e"
+    },
+    {
+      "id": "45ea22546013e9f25355b62c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "span",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3129,
+        3170
+      ],
+      "sha256": "8a5179286757532d05c589a1f2965ce427622f32cf699736de1706f129e5fd22"
+    },
+    {
+      "id": "4605865011581f385a77c66f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "wanted",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3892,
+        3898
+      ],
+      "sha256": "38be79013c64b322ce86173c978f454b6382baa5e2119297415ae511aa8fc309"
+    },
+    {
+      "id": "4898d774fdecc5ca36f4140d",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "fogShader",
+      "purpose": [
+        "weather",
+        "shader"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1456,
+        1460
+      ],
+      "sha256": "f2788e780e429bf5f324edfaad61cb819f0614063f513b9da277c4f8f83e67d9"
+    },
+    {
+      "id": "48ba48c012688c1d1b94f261",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "rebuildChunk",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4254,
+        4260
+      ],
+      "sha256": "307b7f460ade292643b87e95b978cfb914768910b1c6f0e5def2dc6e44c79de7"
+    },
+    {
+      "id": "49883c3dcb3b7e7a10db1802",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "inline-script@34826",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        475,
+        480
+      ],
+      "sha256": "0f6545321812fd2f9cd2265dd237aab06b5c2001e850086f5bf301b3adb3c25f"
+    },
+    {
+      "id": "4cd051a6df85e5b92233efc9",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updatePost",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2676,
+        2704
+      ],
+      "sha256": "295290895691feab74f632076c226c29d2e128dd8dfff3d49a0e74d6c9568cb4"
+    },
+    {
+      "id": "4ce09c8963b02ccde33fc810",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "toggleFullscreen",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2886,
+        2899
+      ],
+      "sha256": "8d92dbbb57f17821fd35b14194f7cde813e612459915519d1921bf166a8a689e"
+    },
+    {
+      "id": "4d2496e6ac96a8a8efc82bd2",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateCombat",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3209,
+        3241
+      ],
+      "sha256": "fc89424cf1f7d3a81631f455c7ff4dbe73aa5cf3ab78c9c0c0ad7e77092137cb"
+    },
+    {
+      "id": "4d72351e4993d3b823703187",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "groundBelow",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1842,
+        1846
+      ],
+      "sha256": "c14abac75cebc1bef42c8519465d87c3703ad6abc1e315eb73a267fedacd8f75"
+    },
+    {
+      "id": "4e792acf781b088d3b7b1015",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "respawnAtSafe",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2316,
+        2319
+      ],
+      "sha256": "c42d01330ac97c5a4856d4b8230db64c79ccb8f6b168f8980b72a9f2e757f10b"
+    },
+    {
+      "id": "4fd9f2c9d7511d8f896fb688",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "perfMonitor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4771,
+        4781
+      ],
+      "sha256": "2654d4cc984bb7bd908dbfd2201759214c97cc90b5565a4f2dcede6fb94e6892"
+    },
+    {
+      "id": "5042ebfbe5d93b59800f6af6",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "carvePath",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        635,
+        646
+      ],
+      "sha256": "9fdbe0ddf86d8b3310811a40d676533d4e8619b9566315f66271d6f744f41707"
+    },
+    {
+      "id": "51a21c7a208728ea0e86d46d",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "startReload",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3199,
+        3204
+      ],
+      "sha256": "f8e325ebc4c90ab2f5023da857c7b50fdf37a1220197cc04b1b2d40acac32ef4"
+    },
+    {
+      "id": "525d42385694aec433d09bf7",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "spritePoint",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4350,
+        4359
+      ],
+      "sha256": "ae2f596b1bb8e709cd5a64a1943b7f9b3df80f622c078d1e730c4a744f79361e"
+    },
+    {
+      "id": "536c5348725f022823911e05",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "setAttack",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2095,
+        2102
+      ],
+      "sha256": "e87a2e5882e0957adfde020474beb41b5c203b23de10d9e11bba7d39bab11784"
+    },
+    {
+      "id": "5568d8246777e80e6d974f00",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "setHeroFrame",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1564,
+        1568
+      ],
+      "sha256": "eec585a81defa920205d6b65f2b8e96c914c58067507e652c873f8cce2fbe918"
+    },
+    {
+      "id": "566da189c1becfc1ec54cecd",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "curWeapon",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3121,
+        3125
+      ],
+      "sha256": "cdbe62e068174212431ac5d2b2363e93c76a637706ef9222e2cbdbe4f9e03e8a"
+    },
+    {
+      "id": "58f6ca58de472a65b85dd249",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "hurt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2419,
+        2435
+      ],
+      "sha256": "6ba45041eea1485d5820d34dfd9bba90f33c3476c2f8d6ece0a7489eddd13625"
+    },
+    {
+      "id": "5932fd9826d68db25f946c21",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "releaseAll",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2103,
+        2107
+      ],
+      "sha256": "4faebac1f97205ed2c8dd62834354eb8a1db37ed8c7f29a20c0eef1b1ac00b7b"
+    },
+    {
+      "id": "5a4851694c71ac777da169aa",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "buildPickups",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2442,
+        2470
+      ],
+      "sha256": "25e0efe96f257109e18d984487ca8eedfbb7af43c286dec0f0effcd92a22f8c2"
+    },
+    {
+      "id": "5bf2bc24338748ea5eb40e49",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "endPointer",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2195,
+        2199
+      ],
+      "sha256": "a5bbc88e9d79a24b60a635f53bc6498a68099c40db37343fc0810bc69a04acb6"
+    },
+    {
+      "id": "5d0cb584cd469088c0194228",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "tryChop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3380,
+        3390
+      ],
+      "sha256": "c2476857e8171d7e7da0f4a157a892a6795736f608766bf48e0740ab1baa55d0"
+    },
+    {
+      "id": "5d11f08c14091c5addd7dcc8",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "underGrassToDirt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        715,
+        715
+      ],
+      "sha256": "1042cb573b2fc0f6aba2b9d7ad672bcb2252a10515cb01bfc08f5d2c76dcc592"
+    },
+    {
+      "id": "5e8bb61ef93fc56495a9ec83",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "bossImpact",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4146,
+        4166
+      ],
+      "sha256": "8cf99f81e4a5cf3d9fe459a7c0f2e58adca78196340d332124f8bd8d37c3eeec"
+    },
+    {
+      "id": "5ef487e2cd56236f2106a922",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "fireRanged",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3466,
+        3489
+      ],
+      "sha256": "288b72f3ba76f26530497bc5f83d17e3fdbafb78c0b988c82b08d24feeac81ca"
+    },
+    {
+      "id": "5fcab6cc5cc4131541eb998f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "handWorld",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4345,
+        4349
+      ],
+      "sha256": "3d45be932093a9b3221335eebc3d458becd1d1133ac9517780726714be273848"
+    },
+    {
+      "id": "6240de19f488cbc4c1332e2c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateHeroMesh",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2396,
+        2418
+      ],
+      "sha256": "dc41a92d8824984ad4b9c020fea6ecb4793e8fe086ddfbfa0c8f1e2caccace3b"
+    },
+    {
+      "id": "644f9302899f3aab0eda3d86",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "inb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        571,
+        584
+      ],
+      "sha256": "ec3f79296a875d084743af30f9e4175e3942efd91f7888e5c7f7b2868c218eda"
+    },
+    {
+      "id": "64edd50eee04293989c77db2",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "clamp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        500,
+        502
+      ],
+      "sha256": "cd921c999a51857c3db949e68cb990e54aafb9d2267889becda5a60d71adb870"
+    },
+    {
+      "id": "663baa2f141db58f1e7755b0",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "easeInOut",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3128,
+        3170
+      ],
+      "sha256": "a3ba438478c5f167ed6d0669141d5fb148cd13266eca33bef93191efe63bdcab"
+    },
+    {
+      "id": "674b10ca88505eace415ef2e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "ricochetFx",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3613,
+        3616
+      ],
+      "sha256": "d81b87fb6523e166cfb041f8e8ed2d3cac1c0aa957e5e839b240f186c1450e57"
+    },
+    {
+      "id": "68cc61bc8a3444f58471121b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "collectCoin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2502,
+        2518
+      ],
+      "sha256": "c72a7124a5b45d34696785434c8c903d852b4fe9cfb7505aa6253230f07fe4e1"
+    },
+    {
+      "id": "694eb6e4f663466a42428155",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateFlow",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2852,
+        2862
+      ],
+      "sha256": "c3bc935c127494a9a3cd91a14f6d37efb57eac122766a02bd1b99c46136f86b3"
+    },
+    {
+      "id": "6a59916de983c059dc54c05a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "markDirty",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4261,
+        4264
+      ],
+      "sha256": "a2aaf1658a52c91513c07e7f85445d7e92eb57509e34d69943b8d215557e2936"
+    },
+    {
+      "id": "6b112d0176d203c48750c3cd",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "boxSolid",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1835,
+        1839
+      ],
+      "sha256": "b81d011307be5143025cddb6cf917cc0bcc4b78f0052358e3efa26719cfb373b"
+    },
+    {
+      "id": "6b3bb95489c7a3a27c198e3a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "leaf",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        777,
+        777
+      ],
+      "sha256": "37f630692c4b771b49e3d4059c4aead5b91199e2e5b9a88a5d2533ef2e5fea73"
+    },
+    {
+      "id": "6d09941492ab97bd4a16b9ac",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "die",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2819,
+        2824
+      ],
+      "sha256": "2d49551743c9b00863795b0c9f4d2ea4e75470a3f0d9b2e24cd25860a9b1d50f"
+    },
+    {
+      "id": "6dcb0423d11697b25a53928f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "muzzleWorld",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4360,
+        4364
+      ],
+      "sha256": "415de1e8fcafa8fa0549ff52d156961067be3e32a2c575d9f63f236d32497d77"
+    },
+    {
+      "id": "6eea3d64e9b265c0a227dba4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "rr",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        504,
+        514
+      ],
+      "sha256": "3f08033cdc063f4feee817412e83d03a545bc3c9930a40fbc6e39ca9ce2f2614"
+    },
+    {
+      "id": "6fd387ddaa52caca8813a10f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "equip",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3185,
+        3193
+      ],
+      "sha256": "ede8e8063bb16d61de2d8a6e38d6b238dec34fcdc173da94f99204965755cd36"
+    },
+    {
+      "id": "717656e176ce87355e47a8fd",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "fade",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4475,
+        4475
+      ],
+      "sha256": "1e4e40265ec4cf40983bc2b8de8cf9a14a0999d68b0be053601a571a0114b70c"
+    },
+    {
+      "id": "718b40ad3b0f5e207d43a3ac",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "ring3",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4497,
+        4506
+      ],
+      "sha256": "311f9b7efbbd61273bbdfaaee443f36246d4c8ecd4e74f9bd6ff8289d894192b"
+    },
+    {
+      "id": "73868b42bf95ee2d5d7bfb27",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "fellTree",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4271,
+        4294
+      ],
+      "sha256": "dde52c29c67f766193238c16109728310ede95e3a8638aa954d7ec5b09fdc2f8"
+    },
+    {
+      "id": "73beb4e565360f5655e1d026",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "showEnd",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2825,
+        2844
+      ],
+      "sha256": "423f7bd0b634abea74b832aec82837aced3b1e2576d65c3acfbb1add184fd393"
+    },
+    {
+      "id": "74f1f61fda45a5864249a7a6",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "engaged",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3205,
+        3208
+      ],
+      "sha256": "272ab85837fa8a6346bc8c026d3d09004cafb3e8d10d4ae6e45db9e37c1f656d"
+    },
+    {
+      "id": "755323eff6ed24cc652feac2",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "col3",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3050,
+        3056
+      ],
+      "sha256": "5045e600aa666e09d091fdc8339b86ce3b18aad2b27d06da0eab5433b2970675"
+    },
+    {
+      "id": "785f4c3112137aaba8747ec7",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "dirAt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2633,
+        2639
+      ],
+      "sha256": "9bf05f46c0634dbf02c48dc565584b0f301502d1bc1cd65ec83a9f961be2334c"
+    },
+    {
+      "id": "78674c9566d4572bbdffa94e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4823,
+        4844
+      ],
+      "sha256": "d944a3d1593fe0243204874ce9e55bbce4f17ce222c1c9a4debfb9667735c0d1"
+    },
+    {
+      "id": "79a93c72a434e71d080e83a4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "renderTrail",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4470,
+        4496
+      ],
+      "sha256": "39520916d361c239d3eca67761ca878716207a24d9f80cd275660f6d2612406a"
+    },
+    {
+      "id": "7a16ef449a9bc11d68a2cd18",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "angDiff",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        505,
+        514
+      ],
+      "sha256": "8b3f03d993958b4e03019831dcd73236bc8669540f6c9966972a84bac78240a7"
+    },
+    {
+      "id": "7d7f2af26636af0260046f50",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "renderFoes",
+      "purpose": [
+        "combat",
+        "shader"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4207,
+        4239
+      ],
+      "sha256": "d46ab0576a3e89997fd292ed02b9c2a959bc7d05727d338e2ff0a911147b614d"
+    },
+    {
+      "id": "7de19b4ca7a746e3f6e91f72",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "make",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2444,
+        2465
+      ],
+      "sha256": "9fc6ede6d97ec3cb706cc3d959eb6261d12fe6a5bdfa725528646f7c1525a0d8"
+    },
+    {
+      "id": "7f272251acfd05e55a0bf9a3",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateProjectiles",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3528,
+        3554
+      ],
+      "sha256": "b91302c1dfa7e968948de31331cf062bf3be17facc5eac126eb3d50a690b0960"
+    },
+    {
+      "id": "7f2cc9ca426cf1a646552c1b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "lootAt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        848,
+        848
+      ],
+      "sha256": "1a9037f4222bd83f6617a34098636da7a32f9aa62d8340b8b3dbb93fc421b9a2"
+    },
+    {
+      "id": "828c325baba41e0489d7be1d",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "prepPal",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1764,
+        1764
+      ],
+      "sha256": "dabf361f21661a78c18659f8c52f151114633405beb45aab93c139dc7654af5f"
+    },
+    {
+      "id": "83200d3dcceeaeead09b92f4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateMuteBtn",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2881,
+        2881
+      ],
+      "sha256": "e80b1b6c94e875bec2a3fd774c2a8ca8798d37db3bc506d4e46ff7f9b46a2b94"
+    },
+    {
+      "id": "844692a4a8e3358276397d3c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "lightTint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4365,
+        4365
+      ],
+      "sha256": "ec1042e4f806fa891a94ec4e65c74b6c069975f34c3ce8a4dd1afea39f7ceb2a"
+    },
+    {
+      "id": "844f57d1a74ba344e3bb3f35",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateLoot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4319,
+        4326
+      ],
+      "sha256": "650190aa0e7798dc1f1cc50fefd9e6f5dcdc6a133eb88a55faf3402882576200"
+    },
+    {
+      "id": "849b83369ec56cda8187b2da",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "projMove",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3555,
+        3574
+      ],
+      "sha256": "737b34d346f74d351c65fc66ab17cb699d191befac1c57505ce12a5639da9c95"
+    },
+    {
+      "id": "86c1475f50707f1b47b759c2",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "makeHeightTexture",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        965,
+        975
+      ],
+      "sha256": "fe7c37ad8ee0b9bb515f93ae8843c0ff971018b0cec801a727445ee831d086ef"
+    },
+    {
+      "id": "8892b69aba4cbb415cbea109",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateWeaponMeter",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4676,
+        4690
+      ],
+      "sha256": "46eac67050acbb92960b4724d9eb451c00b73e453ffee943e20bfdde66818346"
+    },
+    {
+      "id": "89e9f4e081c6d4984a23b0eb",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "orbitBy",
+      "purpose": [
+        "camera"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2139,
+        2146
+      ],
+      "sha256": "bc6dda7ff082a91b6e42a1f278bb467ccd3626b3c5b2fa38dbfbbd9a37e5ba6a"
+    },
+    {
+      "id": "8e2cbe6a19b1d352381c053a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "parryOrbs",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3346,
+        3356
+      ],
+      "sha256": "3ec4be04ae56b825c57c2c177d1695b2152eb57cbb238a1ab2fc108ebcb77b11"
+    },
+    {
+      "id": "9060bb7706ab37780c987d86",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "ripple",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1537,
+        1540
+      ],
+      "sha256": "c08db2b707a7a74fc2a9b34435d26e816485664a9d2553fe451a42d4c3481466"
+    },
+    {
+      "id": "910eca736af414dadc86934f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "lerp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        501,
+        502
+      ],
+      "sha256": "04105f696252bde182bcb4ca468683c9d92322298c2816547ca9fc666f8923d3"
+    },
+    {
+      "id": "918a7803efffa317a4364a7e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "setPaused",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2799,
+        2805
+      ],
+      "sha256": "ddf3198494fd778d6416c665200fc99158ce97c3a74ca4c779f2b8c0cbfe4b3a"
+    },
+    {
+      "id": "924a428c20c9a35e8dba5092",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "terrainTop",
+      "purpose": [
+        "weather",
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1847,
+        1851
+      ],
+      "sha256": "20f2d622cf898e1fb5501f9abbd0c31db9de77a2ced1700c4626a18df0159ed5"
+    },
+    {
+      "id": "939381827f5ab372763a9c19",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "makeInstGeo",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1461,
+        1475
+      ],
+      "sha256": "85c562775e5442227fe4de498c7952420b17a108fb1d0ae0a1657cd80e331f77"
+    },
+    {
+      "id": "944c2ee0c5ba1ac71828dcf2",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateHearts",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2033,
+        2038
+      ],
+      "sha256": "1ed3689ec57de51bb4317c5941ecefc925df8300e21e9cc9f43fac7ce7d439e4"
+    },
+    {
+      "id": "9547c5b9d50a41a882f515e7",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "solid",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        914,
+        954
+      ],
+      "sha256": "392a637aeb1c2f9d963d05b080e62e84e4febba021073c7d97292bbed7b0c531"
+    },
+    {
+      "id": "97aa9b55ae5ddb5025ba4384",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1713,
+        1726
+      ],
+      "sha256": "edb441f5f5a1a38ae1eeaf8245649a71e5ccc177cb2045f97ee6bbd9afc435f7"
+    },
+    {
+      "id": "98697f4ca0691b8263db7937",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "dmgNumber",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4696,
+        4701
+      ],
+      "sha256": "08b84818fc616016f716521573a26267ae21992643e745396e928706742f6770"
+    },
+    {
+      "id": "9a9b42fb1de1f39f3b05fdf9",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "renderFx",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4523,
+        4578
+      ],
+      "sha256": "76dd4fcdd81c83e594b49db2510027151371af823dc651e9ebb7200884ce461f"
+    },
+    {
+      "id": "9b0897a96386999441562562",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "sets",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4650,
+        4654
+      ],
+      "sha256": "619692b5bff5e97ca4d2c8981d20691c92e6eee3854d28b221ad95f0379b4d13"
+    },
+    {
+      "id": "9b4dfdb0f142e11d5a09115f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "killFoe",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3943,
+        3961
+      ],
+      "sha256": "34649f0ac160be97e940ef509515f81478ddefb74be59b34b8b728ce9c104a7f"
+    },
+    {
+      "id": "9be837ed417c13dc0fd643fe",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "rebuildDirty",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4265,
+        4269
+      ],
+      "sha256": "e09d3e794ac922f61d6305f11b2056b0b55a8d1322ee1a1cbd9632bf19d8240c"
+    },
+    {
+      "id": "9c7528895745499ca422d0a6",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateHUD",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2863,
+        2876
+      ],
+      "sha256": "2d8780bd27d2994715b8c78f011b475a9d21be6fe1c3902c5d27919405ae42f2"
+    },
+    {
+      "id": "9f173afeee381e24007f2d0e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "syncPickups",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2471,
+        2478
+      ],
+      "sha256": "70dd1b545b00422ea64a0053a8bb76f5e1f9a5fb25edad9a93303d6346cecd2e"
+    },
+    {
+      "id": "9f98fab7229f0e7623dd1f1c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "$",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1410,
+        1419
+      ],
+      "sha256": "d12888b43a3bf9e503354b217e8bc361e18254db48ff57155ae9e6abd58d93e2"
+    },
+    {
+      "id": "a195841c3350e57d514457c3",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "cursorAim",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2156,
+        2156
+      ],
+      "sha256": "d0e2d87f2359b5dcba0a3d25dfd1cdf9690999bd1675112f9946ef675a666cf6"
+    },
+    {
+      "id": "a1bbc58393432986addf95ef",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "renderProjectiles",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4592,
+        4613
+      ],
+      "sha256": "cfd1b287fd4c0deb2dec45806d7d008551833b377f77446e5ac538d44b43169a"
+    },
+    {
+      "id": "a37e029067293482efe6c3fb",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateSouls",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3965,
+        3985
+      ],
+      "sha256": "440c3d0e34ccc9f8da15148e526f36c2eae183bdb690510c6781a1e89c7c58a7"
+    },
+    {
+      "id": "a51322529081a800c2766129",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "easeIn",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3127,
+        3170
+      ],
+      "sha256": "6e0533a2aad602092a50899b53f23898c050f0943a02ed55d8dc9d9b9adc8571"
+    },
+    {
+      "id": "a5cf51aa46f5f35c87256ba1",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "isAtkKey",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2111,
+        2131
+      ],
+      "sha256": "896e28de0b235a565e7276b2b60c96a1160ddc0e03425550dba14e8a89212db1"
+    },
+    {
+      "id": "a7136957244b3938b93301de",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateFx",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4579,
+        4591
+      ],
+      "sha256": "94359b02b3be1be7964a05534b078fdf6d33e4cf9595c258caaea1ae54803941"
+    },
+    {
+      "id": "a7ec0f6a43869d8121ede1cb",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "segRad",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3846,
+        3859
+      ],
+      "sha256": "8af88483d946ab8db17610444fa8f0adc587700c80775822dc54edb220973cc3"
+    },
+    {
+      "id": "a83caff4bf4aef530cb314d2",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "screenAngleOf",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3122,
+        3125
+      ],
+      "sha256": "b4a9e522e9e8bdb86450e18448cbb6c17da6dfebe5391ce1eeccc766e17f7e0e"
+    },
+    {
+      "id": "a90a7e4fe703d543a877cbfb",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "drawMinimapBase",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2046,
+        2055
+      ],
+      "sha256": "fe817863d7e749af0305200814fea52f170560837b212d0643817ec270b69cef"
+    },
+    {
+      "id": "a941794e05c6a115e95fb70c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "bed",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1877,
+        1885
+      ],
+      "sha256": "f8166cc2ab77ed9f999b4a877c8f4f0c1f580541b3cd9d1aec3f8fe25864d462"
+    },
+    {
+      "id": "a961adb1ffad86ee630c5d2e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "explode",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3680,
+        3705
+      ],
+      "sha256": "687bc527ddcd4975d048ccd93a50fc1e7cffc42ef378b46004e3f2991e18d6b1"
+    },
+    {
+      "id": "acee65c9bc11dafc00d52e3f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "rangedInput",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3442,
+        3465
+      ],
+      "sha256": "f3525e7ed86429a7f72b64e48dbd26f271690b8c3e25cdcb3e8a4b14a129ed11"
+    },
+    {
+      "id": "af93ec9ec436a44b305851f6",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "muzzleFlash",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3507,
+        3516
+      ],
+      "sha256": "2a1354058687264535977860902fbecf46bc66f3822a196ea52240e00bca7659"
+    },
+    {
+      "id": "afc7a595207bf732c0473243",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "foeAlive",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3845,
+        3859
+      ],
+      "sha256": "6137f72b5c80c00d9f68735e9226aa5773dc3738db5e3d353e1e80476c93a180"
+    },
+    {
+      "id": "afcdf931a4b9575fade8b0d5",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "generateWorld",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        563,
+        897
+      ],
+      "sha256": "a9d85327753ec86b874d152fb116aae29b5729837bc875e33b0e5dcade333946"
+    },
+    {
+      "id": "b0386f2ba3b6c574a710ee45",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "breakOrb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3628,
+        3633
+      ],
+      "sha256": "2d305da1e5a533bf67429a7011c9671beff8ae9bf33cf2c019b0a99685c4290b"
+    },
+    {
+      "id": "b47769ff60d257e12ac14bcd",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "onJumpPress",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2108,
+        2108
+      ],
+      "sha256": "91d1f7e5ea083297388b007b68a7f64a3212d93466a0ede57b2d55d1dc166e71"
+    },
+    {
+      "id": "b6019278905c27de4a5061a3",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "setCoinsHud",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2039,
+        2042
+      ],
+      "sha256": "e2d50785e0f891329521961f8136cecd2aaf320684f768127d949c8607007b9d"
+    },
+    {
+      "id": "b60f044d7378fbefee07a90d",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "Ribbons",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2988,
+        3041
+      ],
+      "sha256": "5fba503784b7422b3cc0c7ffd85f4371830c9cff913a35e93b685c5339a14edc"
+    },
+    {
+      "id": "b66326d32fa8241a535c428a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "project",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4703,
+        4706
+      ],
+      "sha256": "850969197d145f10fed46dc2854496a42347a61d55855e396db9f32338167cc1"
+    },
+    {
+      "id": "b8a0df5d1c8d5a0de9eac5e2",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "takeLoot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4327,
+        4338
+      ],
+      "sha256": "bc5bfd6e84a13a1c9219879b05fcc01cb9c06c8320c45e2c5fb2b360097a2b0e"
+    },
+    {
+      "id": "b9500d68df78f06748fc6976",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "physicsStep",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2269,
+        2284
+      ],
+      "sha256": "59143b87917e218b9d8ecef93b6e5c738579b12fc845f472e15fa22ececfd363"
+    },
+    {
+      "id": "bbcf0d10f801c9336bebc88f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "fmtTime",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2024,
+        2024
+      ],
+      "sha256": "1a82fc3672154633914fdab9a703b4a0a858ca5d0b6a6637eac24213371f4df9"
+    },
+    {
+      "id": "bd09ab09cba421ee8871a9db",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "jagged",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4508,
+        4522
+      ],
+      "sha256": "a34c295a4bdcc0d5069f4ffec1d5e74ad41b83e43824624b114164e523d78162"
+    },
+    {
+      "id": "bd32353f4482f364964c9883",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "taken",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        847,
+        848
+      ],
+      "sha256": "f23b0db4c6b2295ee616cfc9b5e11f08014da2ead74b7792d4b522a41ad3031a"
+    },
+    {
+      "id": "bdd06f9179a570677a76295d",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "easeOut",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3126,
+        3170
+      ],
+      "sha256": "6dae768db6a83a58b3ee735d096600912fb4d821ffd9ba8812854db4c8ef4b46"
+    },
+    {
+      "id": "be433b4e42e9794ab7c5f9e4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "buildTerrainGeometry",
+      "purpose": [
+        "weather",
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        911,
+        964
+      ],
+      "sha256": "f51f632e748a6b39734ff8134947f1013427b807b6d0271bd9c2d35729053376"
+    },
+    {
+      "id": "bf87143d93c862852cbb6444",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateCombatHud",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4707,
+        4745
+      ],
+      "sha256": "9a9761786ac7f3185253cdd7390100d0f2a21d9e40520be21a949505d39ab934"
+    },
+    {
+      "id": "bff23ab1e34333f89d2e21c1",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "startMelee",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3295,
+        3311
+      ],
+      "sha256": "d0a80021c7e92419e68694753611a56b0408e52145b03c8890ade312a36de713"
+    },
+    {
+      "id": "c3f4efe6c7e7e8e2b853eb55",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "canCoin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        811,
+        816
+      ],
+      "sha256": "5fb5394e4733de728f9f2f8643c6936df32440e14a8291833d4e08c7b7411065"
+    },
+    {
+      "id": "c453bbcfad318b2284ecd1ec",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "SpriteBatch",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2947,
+        2973
+      ],
+      "sha256": "023616ec507724485b50aa4a2f41f10097f9863a4f97c2997641a039013dca49"
+    },
+    {
+      "id": "c9a0e1e9e03ae1e3f5d9c972",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "damageFoe",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3899,
+        3899
+      ],
+      "sha256": "1b0b3046b6808ffe1c2e28fb08c0121967263f102e0d77f44ea28ebc25bd5800"
+    },
+    {
+      "id": "ca1c3afc012d1468576327e5",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "renderArsenal",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4746,
+        4764
+      ],
+      "sha256": "cabe7fcec1efd1d248aab9051d757039ab482d2c70d70b59ec71c9ac8c4fda86"
+    },
+    {
+      "id": "cadf92a5eb91eac465354859",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "wardenFire",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4171,
+        4191
+      ],
+      "sha256": "75aa6796b32e0a4e7b1c8deb83d343cffe17cf4d605e1d8b0f2f6abd402a7b3c"
+    },
+    {
+      "id": "cb09beb42f83a6c2e6aafac7",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "buildLoot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4314,
+        4318
+      ],
+      "sha256": "838520e538bbe9315762c4ee87de0ac32965e53423385bf4c323ea204bdd4b53"
+    },
+    {
+      "id": "cb7d33af77ed34163d73fc52",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "Particles",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1595,
+        1660
+      ],
+      "sha256": "4c2135601c63add0ccbdbd5557b1ea6949952bb5125fbec5ae3f76f7301cfa43"
+    },
+    {
+      "id": "cbf3d0a7defd811f2521715a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "placeFlies",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2726,
+        2737
+      ],
+      "sha256": "12e62e421459d4bd6f2ab0d3921cd19d7ba1cee6c289881eabcd002043da6ab9"
+    },
+    {
+      "id": "cc99f89b01ef26a8701e52ce",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "toast",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2025,
+        2032
+      ],
+      "sha256": "4dc064b6afb1cb3ff81d702f7c986112a3daebc232d38c175d520e5828eb5265"
+    },
+    {
+      "id": "cdc79ca0f82bfb8fb9a57a70",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "spawnWarden",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3880,
+        3891
+      ],
+      "sha256": "ff263ff48d381aa90f30f4dcef749ad3a60be7bc558e2237789ec90eb2359c93"
+    },
+    {
+      "id": "cee1781a9c420e29e6a054bf",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "toggleMute",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2882,
+        2885
+      ],
+      "sha256": "66418d68f8ff27f073f4393df8a6644733c92d426745309c7c73fb20c29c504e"
+    },
+    {
+      "id": "d0e26edb09e7da7f660ff8b8",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "projTrail",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3709,
+        3722
+      ],
+      "sha256": "1303c783810048978b1cefa0615f79fe07519f19d6da7e108b463561c9735a33"
+    },
+    {
+      "id": "d1718fc66d4107240517ef14",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "R",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        566,
+        566
+      ],
+      "sha256": "de99b4128f445d2d5aaeef4fdad253c4bfa44a188e30989dbb2d7e35fe0e6bf8"
+    },
+    {
+      "id": "d293fe3e4d61948b4d96c49b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "mixInto",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1767,
+        1774
+      ],
+      "sha256": "5e86ad9b9155a05d24448f765ccd50bdbcfba2be196f4a503f2c286ea887c1be"
+    },
+    {
+      "id": "d2c924a6604de9f9aba41fc4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updatePickups",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2479,
+        2500
+      ],
+      "sha256": "7525e38da0e8f02f52dad54922ce464243476c633aa58420f0580832ee772bcb"
+    },
+    {
+      "id": "d2d42ebc983825ab826e6328",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "win",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2806,
+        2818
+      ],
+      "sha256": "4287a584b5b2f220269766a93b46f7a5dac37c16267072b3defe1cf8d66a57dc"
+    },
+    {
+      "id": "d2ee2e51c46d0da2b6091f1e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "onJumpRelease",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2109,
+        2109
+      ],
+      "sha256": "2f727ad55422cbb1b1d8bfc06e4561a29f6ce229d3f40981e389330e6de098f5"
+    },
+    {
+      "id": "d3fcdb45a9be8f21abd0ef30",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "mulberry32",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        507,
+        514
+      ],
+      "sha256": "b38f72435ebd57853cdebe1bc955e0c91736cc758daeb72e49509b21ac6bce94"
+    },
+    {
+      "id": "d55309a8cd07f3bd11bbb39a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "restart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2845,
+        2851
+      ],
+      "sha256": "cdc755366134860af8e7676dddc72edf9e5d2a9eaee5a664e375d495c6e12b42"
+    },
+    {
+      "id": "d5c261c0b908564c60486ec5",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "ci",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        570,
+        570
+      ],
+      "sha256": "129c443b7762f417d9fc5fc5939bd941462d1bf2228b6eccd3f55703eb4b6ff3"
+    },
+    {
+      "id": "d5d87f146149aa7f88cd2590",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "teslaChain",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3747,
+        3784
+      ],
+      "sha256": "9cc874e8944d68bc23c264b6f8486cb87d2800472457f794ea9db0b4aa60184e"
+    },
+    {
+      "id": "d7e7afccb223b9f9a3cc4977",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "spawnShot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3490,
+        3501
+      ],
+      "sha256": "db83f1f38c683ead7c59cb3f2fc50d90e8a73ff5e025debbd9896bb57acfb3b6"
+    },
+    {
+      "id": "da3f732c027fbda896ecec10",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateLeaves",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2716,
+        2725
+      ],
+      "sha256": "ac5f9ae0787c4b3b17dddcd1ca9945dfbc73012d87a0ae234a46be6d77dc3ebf"
+    },
+    {
+      "id": "dc07bced863cb840d13780a4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "drawMinimap",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2056,
+        2084
+      ],
+      "sha256": "640408dc541b3e3c2d9cfc4b889d4b44d3079bed1c9150cb72b9c9dfe68e9fe8"
+    },
+    {
+      "id": "dcb5a1dab5cb4fe492df5b78",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "resetRun",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2765,
+        2784
+      ],
+      "sha256": "9256cf9ca2c03b0e56b0faaba884812f393ee28230c8401fc8cb71820755bd06"
+    },
+    {
+      "id": "e01643229c465b321ebc1ba8",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "spawnFromSea",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3871,
+        3879
+      ],
+      "sha256": "2ec360b26a94a8ce2ef2b46959b889348796d955b2c8b96d94efc8f8536baf54"
+    },
+    {
+      "id": "e0bc7605dae872a4a5698eca",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "makeNoise",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        520,
+        538
+      ],
+      "sha256": "3a302c457889a55bc29fdd3f4a8aa3c5cc099651e589b46a2a1f74cbfe304143"
+    },
+    {
+      "id": "e1c7ea62cdd654c51b0f1645",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "spread",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        823,
+        833
+      ],
+      "sha256": "3ae6c0235d8b6d1f34278ac8ee9f72b1810f1b84e9f2b3be6fb054ef1b846393"
+    },
+    {
+      "id": "e3766976606a759734d3da64",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "tryStep",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2259,
+        2268
+      ],
+      "sha256": "bf4bd8ae7e2d116040f879bae7fe29c9357eff524ed040ef1c7059751e2eb7e3"
+    },
+    {
+      "id": "e4c7fde9c86aaaefb596f9df",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "hits",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1841,
+        1846
+      ],
+      "sha256": "e775f8b6b94f2695283e28ec3351c8d6cc68688fab94f6866892d7534423655f"
+    },
+    {
+      "id": "e57574368ed90b300dc07579",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "hudWeapon",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4655,
+        4675
+      ],
+      "sha256": "55ca1fd51ebd95632f408e0f9af1577ca2aa72e66c73f1c6e49e14f2ed3fbb50"
+    },
+    {
+      "id": "e5761744553eba25186dc806",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "n2",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        525,
+        532
+      ],
+      "sha256": "e1ff7ec86396b8aeb8012c4cd2b8f422bb4cef3a1476b741f826343c44d7c1d1"
+    },
+    {
+      "id": "e777044bdb68d09e28aa570c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "hash3",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        515,
+        519
+      ],
+      "sha256": "cb3a723698bb0bd1d8876e6aea6bff545ac529f4657e357ded25be48621f6276"
+    },
+    {
+      "id": "e916ceadf86c8e0e65910105",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "impact",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3617,
+        3627
+      ],
+      "sha256": "64734de07cd198703896204a4c3d584b9a3d9af38d66332a2fdab4fa6c9d0e3a"
+    },
+    {
+      "id": "e932a4074c21c6bb00a4eb9b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "vIdx",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4270,
+        4294
+      ],
+      "sha256": "a5a62ec3b5fa32a8c7414339ea5e505d0bfae3fc04c0a62142b4997e7ff212a7"
+    },
+    {
+      "id": "e93c7f0ae9a7b260c12e0817",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "projHit",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3634,
+        3679
+      ],
+      "sha256": "1e1ad816e353f49d71b3cb57af7e879c935a775afd554b3e4401f4498899fdb9"
+    },
+    {
+      "id": "e95d24ca3026bdc76c579c43",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "poseOf",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3245,
+        3294
+      ],
+      "sha256": "a2ba311f826ad566b0acb1d611b3c6b30dc58225e5adf1d9fd4d137c1d24351e"
+    },
+    {
+      "id": "ea21121deccdd84dc1541edf",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateBeam",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3785,
+        3814
+      ],
+      "sha256": "6a8cb98b16f61c046e07ea0efbc2ddb04fa9d5080d6253fa8b1ca87968a1f5a7"
+    },
+    {
+      "id": "ea4537f807faa14f26714419",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "bestKey",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2742,
+        2742
+      ],
+      "sha256": "839b60696c4057208afb085254241388dd47f8e1392827f59da5ded4bb3e2efd"
+    },
+    {
+      "id": "eac865d11d13c31551fd74a4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "solidAt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1834,
+        1839
+      ],
+      "sha256": "a6d4df160a1154e82b59d948a09eb531194a0526f22e8278d0538b821f2615dc"
+    },
+    {
+      "id": "ec531c17cdfff47a8a0becd2",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "resetCombat",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3175,
+        3184
+      ],
+      "sha256": "f4aa52ac31ee01a318d3a962cf670801b047c988c8cb7d2d2b9f9294bd6d3e72"
+    },
+    {
+      "id": "ed99398e213b3c163f4364ce",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "blockAt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1829,
+        1833
+      ],
+      "sha256": "a952b56b9a5d2d3d4d819bb010cba1383f5d93357b601e2cb10e71443d60bc34"
+    },
+    {
+      "id": "eee4004c7d97e7d7ef4f1c68",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "blastLeaves",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4296,
+        4308
+      ],
+      "sha256": "4ec9457d6df947f5653fdf930541b5284e6ee72b11543775481fc6d7abd816c5"
+    },
+    {
+      "id": "ef6ce4c10cdb1b2d579cd85b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "damp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        503,
+        514
+      ],
+      "sha256": "d92e02f52933a8bb6a5d84005fb277cd8631bded5ab77c371676fd16903390a5"
+    },
+    {
+      "id": "f08e53ab83aebc4d74c051bf",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "showNew",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4635,
+        4644
+      ],
+      "sha256": "023eb79389244b5ec3c71c7ff57397657664642bae43d9663058a3691a043a22"
+    },
+    {
+      "id": "f0fc6e233869e4dead010b4a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "okCell",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        788,
+        792
+      ],
+      "sha256": "3dad9fc50942a93e50639eaff695de1cdf8feff1d181c7fec00b03fb5c34667e"
+    },
+    {
+      "id": "f128080eda19c4c31576b76c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateEnvironment",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2705,
+        2713
+      ],
+      "sha256": "1a09c999575fff66061566273fceaf5a9d31c6734402514984b59136d596df5d"
+    },
+    {
+      "id": "f23612d986fc27c388da6c9e",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "slamImpact",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3357,
+        3379
+      ],
+      "sha256": "a357461197b2a15ffe26c4387b6b10379b250f43cee7f71ec494b58a155fa075"
+    },
+    {
+      "id": "f360615fd459fc464916027f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "rayFree",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        1852,
+        1858
+      ],
+      "sha256": "d599a614a2714006e37dff34783f3bd1d53e300137e9398f6a3a64aad05b033c"
+    },
+    {
+      "id": "f3d317acecc554441681034f",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateWisp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2539,
+        2563
+      ],
+      "sha256": "e7b3ace82e16ffaef813f9853bca74558fb70c285390c0315817fdfc4d4fe094"
+    },
+    {
+      "id": "f74e83d8cb0dc274295b6dc2",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "at",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        913,
+        913
+      ],
+      "sha256": "fe2af4a63dbf00fabd7fdf1bb907f6c488a8f4619650727d186a14908764730d"
+    },
+    {
+      "id": "f7e0031dcaa695b891b0e843",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "orbBurst",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3706,
+        3708
+      ],
+      "sha256": "d57a12f232c344365a452ff83fdb4a250b2cc8aefdaae07898bc28b9a5694818"
+    },
+    {
+      "id": "fb6dc397046c2d928c8ecd90",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "updateAim",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3131,
+        3170
+      ],
+      "sha256": "b08bd0ef455ed18f57a54c610b36fad305b59e7ad304fdbb0188293133e9017f"
+    },
+    {
+      "id": "fb76e08fd6cf017dd6eaa8d4",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "RI",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        567,
+        567
+      ],
+      "sha256": "0ecb61bd78c7f0052ca4e3083d923dc1450a7385ec1b17bb1a469721c13fe1fd"
+    },
+    {
+      "id": "fbcb1e411d505c26a9a03f89",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "stopBeam",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        2798,
+        2798
+      ],
+      "sha256": "66355685e73763ab27fae4321b63c31330f925660e4ad25918dc9b0e6a8d5d3f"
+    },
+    {
+      "id": "fd4b32cc914ff821b73a18f5",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "advanceMelee",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        3312,
+        3320
+      ],
+      "sha256": "f5221dca0c76110abf81e0a6fd5a95df8c8dabeec5f24995402b3eeb1173a708"
+    },
+    {
+      "id": "ff6549d0f594a64525e00b54",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "buildChunks",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "observer-world-en-v7/index.html",
+      "lines": [
+        4247,
+        4253
+      ],
+      "sha256": "aa2e03149161eafa68e043ce39b40191e120535f29ac58cff6f4b0f410be0633"
+    },
+    {
+      "id": "388cb090f051f4d433ec7e88",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "zero",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        30,
+        30
+      ],
+      "sha256": "5744cab86a5bc7f1574fa64abf865f35d2d50b9c9bf37d309ed41ca8ba555c04"
+    },
+    {
+      "id": "5755dfd1e68c26f7df35fb21",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "enabled",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        5,
+        12
+      ],
+      "sha256": "54ec7996c00007d59f0e95422cdec0a220ea4e3f1e4a603c514b820cd90a498a"
+    },
+    {
+      "id": "80c44daadb1faa65001210f1",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "forced",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        4,
+        12
+      ],
+      "sha256": "54ae146380ab32a7802a1c587b972563b1e908f9fbaa200440348250d5df8602"
+    },
+    {
+      "id": "a52f103c02473bf60dcfc097",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "stopAction",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        47,
+        50
+      ],
+      "sha256": "e993705351ba3779bd5a5599a18280e001f94ff8e9026e89e16ef1cc86a27f41"
+    },
+    {
+      "id": "a8e13898973a3c4b00c12c72",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "eat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        29,
+        29
+      ],
+      "sha256": "a0fea7f3f814e2a9c6d9ca60d39fafe50a69256a69711c629b3e9d2254e0b49c"
+    },
+    {
+      "id": "bc24fc851128859851dcecb7",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "move",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        31,
+        37
+      ],
+      "sha256": "8319975f3b4d0c3635f334d9f0cfee076b47a8775466db116afbb1205e0f651e"
+    },
+    {
+      "id": "e1403998cea0b1813cdd759b",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "hide",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        60,
+        60
+      ],
+      "sha256": "b0c4c2ca1f0ddda53fd5f0810201251df561b133976980589e5c7461dc08e9a7"
+    },
+    {
+      "id": "e3d1ca6d557aad79ffbd5091",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "glyph",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        6,
+        12
+      ],
+      "sha256": "df665519a2f8cc6d1d584e0bf2e92397b4e060a2716c5d7eb72f1a41ee6f1c86"
+    },
+    {
+      "id": "e3f3b40f3b207f808a7e6af3",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "module:mobile-controls.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        1,
+        69
+      ],
+      "sha256": "621d8219117cd76dbb69ea177e4d2ee1b03c48464330d1f0aaafbff660dcbd06"
+    },
+    {
+      "id": "e963982a40f42ad3300711a1",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "stopStick",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        38,
+        40
+      ],
+      "sha256": "87a074e4d7ee5cc182e0ceb152d9e1289e34092df5f7bd7bbdae79ce608c442e"
+    },
+    {
+      "id": "efbc07174795efef065b181c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "release",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        59,
+        59
+      ],
+      "sha256": "3cf20061eaaf984b02534bbc0c5d5626274e9e82746c79aee09dc32379cb7ad5"
+    },
+    {
+      "id": "f2b21208ab85ed4edf130ed6",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "create",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/mobile-controls.js",
+      "lines": [
+        13,
+        13
+      ],
+      "sha256": "908cec31137fe336ed60f0ee08606fa190d19b068b25f95b00eec5a37e3b7cc4"
+    },
+    {
+      "id": "08d3813235708852972a5006",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "createMesh",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/npc-catalog.js",
+      "lines": [
+        32,
+        44
+      ],
+      "sha256": "b58f21ba858384cd036d6c7eb9d63a2ea0ce719919c9055514cc290a4eb508cd"
+    },
+    {
+      "id": "2a5a894f60fc935ac5b50fc5",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "module:npc-catalog.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "observer-world-en-v7/npc-catalog.js",
+      "lines": [
+        1,
+        68
+      ],
+      "sha256": "7ac397f0146f8a5b8004d216336a6818d2b164d1df3b93ac30c2f08418d3ce88"
+    },
+    {
+      "id": "9be9c6550825dff9625f1f1a",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "dispose",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "observer-world-en-v7/npc-catalog.js",
+      "lines": [
+        61,
+        66
+      ],
+      "sha256": "534c6bb33155a7f65b2bde4bc60c5479a2d6c515b572245c6856b2bcabe55bec"
+    },
+    {
+      "id": "e8428e46f762bc73f1b8a4f1",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "animate",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "observer-world-en-v7/npc-catalog.js",
+      "lines": [
+        45,
+        60
+      ],
+      "sha256": "53132113b873363493e89062e94918c51417db3d1954e88b1d0acb96fc8d8b65"
+    },
+    {
+      "id": "0b5f72094576b26c44ca05c9",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "emit",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/story-system.js",
+      "lines": [
+        60,
+        60
+      ],
+      "sha256": "e0394fc2ea1fc9be92b5dfb1c4d907ac3bfab43478628bb3e11ef128f77703c8"
+    },
+    {
+      "id": "1c39e99a72ab4207ce88de74",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "inspect",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/story-system.js",
+      "lines": [
+        68,
+        77
+      ],
+      "sha256": "b68e6bdc2e23548d43ed8857de4fdf13e251dce4195219bd15acfcac16aee148"
+    },
+    {
+      "id": "2a50f244a1ae161e66932e6c",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "module:story-system.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "observer-world-en-v7/story-system.js",
+      "lines": [
+        1,
+        84
+      ],
+      "sha256": "73ace5b80a62593ec6a6866e23fda75f3a2e50adee85206dd81e9448927549fc"
+    },
+    {
+      "id": "680e2fa0a5ae8371884ed9a5",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "create",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/story-system.js",
+      "lines": [
+        58,
+        58
+      ],
+      "sha256": "ab726eaab8b376b7fcdb48b1355fe5db408ec9faf78a9228af4c7fde636cea6a"
+    },
+    {
+      "id": "fa6ab9262cd31a2f84efb4fd",
+      "game": "reference-observer-world-en-v7",
+      "kind": "solution",
+      "name": "restore",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "observer-world-en-v7/story-system.js",
+      "lines": [
+        78,
+        78
+      ],
+      "sha256": "0482587b84e7402600b269e0a4aa3ac4ef82971dc5e780ac35763d2077b1b495"
+    }
+  ],
+  "counts": {
+    "assets": 18,
+    "file_assets": 0,
+    "solutions": 318
+  }
+}

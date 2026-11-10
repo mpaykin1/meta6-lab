@@ -1,0 +1,371 @@
+{
+  "browserLockPass": true,
+  "cameraCanonPass": true,
+  "mobilePass": true,
+  "worldLifePass": true,
+  "riftPass": true,
+  "desktopPass": "NOT_RUN",
+  "realPagesPass": "NOT_RUN",
+  "ownerPass": "UNKNOWN",
+  "proof": {
+    "before": {
+      "scroll": [
+        0,
+        0
+      ],
+      "r": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "top": 0,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      },
+      "camera": [
+        70.31949864919673,
+        22.90221738835186,
+        34.414702694398926
+      ],
+      "hero": [
+        44.5,
+        4,
+        49.5
+      ],
+      "Gstate": "play",
+      "lock": {
+        "yaw": 0.3392926144540447,
+        "pitch": 0.62,
+        "dist": 11,
+        "pos": [
+          70.31422665663621,
+          22.896338022136216,
+          34.414702694398926
+        ],
+        "look": [
+          39.13584345576628,
+          13.488562808696058,
+          34.301556458004455
+        ],
+        "eff": 11,
+        "lift": 0,
+        "spin": 0,
+        "pspin": 0,
+        "blend": 0.04000000000000001
+      },
+      "width": 390,
+      "height": 844,
+      "inner": [
+        390,
+        844
+      ]
+    },
+    "during": {
+      "scroll": [
+        0,
+        0
+      ],
+      "r": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "top": 0,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      },
+      "camera": [
+        56.91807263907647,
+        15.890211237017086,
+        48.45100824160873
+      ],
+      "hero": [
+        45.44103187980219,
+        4,
+        48.940434699365184
+      ],
+      "input": {
+        "stickId": 2,
+        "camId": null,
+        "vx": 0.7142857142857143,
+        "vy": -0.10714285714285714
+      },
+      "lock": {
+        "yaw": 0.3392926144540447,
+        "pitch": 0.62,
+        "dist": 11,
+        "pos": [
+          56.891967737786395,
+          15.86185531668969,
+          48.45100824160873
+        ],
+        "look": [
+          43.54008665670094,
+          7.428541150994819,
+          44.73149944905254
+        ],
+        "eff": 11,
+        "lift": 0,
+        "spin": 0,
+        "pspin": 0,
+        "blend": 0.31332000000000043
+      },
+      "width": 390,
+      "height": 844
+    },
+    "after": {
+      "scroll": [
+        0,
+        0
+      ],
+      "input": {
+        "stickId": null,
+        "camId": null,
+        "vx": 0,
+        "vy": 0
+      },
+      "r": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "top": 0,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      }
+    },
+    "worldSamples": [
+      {
+        "x": 20,
+        "biome": "island",
+        "ground": 7,
+        "game": "play",
+        "wet": false,
+        "ship": false,
+        "sector": "0:0:island",
+        "npc": 2,
+        "enemy": 2,
+        "loot": [
+          "stick",
+          "sling",
+          "bow",
+          "spear",
+          "shotgun",
+          "flail",
+          "bomb",
+          "scythe",
+          "fists",
+          "dagger",
+          "sword",
+          "katana",
+          "axe",
+          "hammer",
+          "spear",
+          "scythe",
+          "flamesword",
+          "flail",
+          "sling",
+          "bow",
+          "xbow",
+          "pistol",
+          "shotgun",
+          "smg",
+          "saw",
+          "bomb",
+          "tesla",
+          "laser"
+        ],
+        "owned": [
+          "fists"
+        ],
+        "expected": [
+          "fists",
+          "dagger",
+          "sword",
+          "katana",
+          "axe",
+          "hammer",
+          "spear",
+          "scythe",
+          "flamesword",
+          "flail",
+          "sling",
+          "bow",
+          "xbow",
+          "pistol",
+          "shotgun",
+          "smg",
+          "saw",
+          "bomb",
+          "tesla",
+          "laser"
+        ]
+      },
+      {
+        "x": 145,
+        "biome": "ash",
+        "ground": 10,
+        "game": "play",
+        "wet": false,
+        "ship": false,
+        "sector": "3:0:ash",
+        "npc": 2,
+        "enemy": 2,
+        "loot": [
+          "fists",
+          "dagger",
+          "sword",
+          "katana",
+          "axe",
+          "hammer",
+          "spear",
+          "scythe",
+          "flamesword",
+          "flail",
+          "sling",
+          "bow",
+          "xbow",
+          "pistol",
+          "shotgun",
+          "smg",
+          "saw",
+          "bomb",
+          "tesla",
+          "laser"
+        ],
+        "owned": [
+          "fists"
+        ],
+        "expected": [
+          "fists",
+          "dagger",
+          "sword",
+          "katana",
+          "axe",
+          "hammer",
+          "spear",
+          "scythe",
+          "flamesword",
+          "flail",
+          "sling",
+          "bow",
+          "xbow",
+          "pistol",
+          "shotgun",
+          "smg",
+          "saw",
+          "bomb",
+          "tesla",
+          "laser"
+        ]
+      },
+      {
+        "x": -92,
+        "biome": "ash",
+        "ground": 12,
+        "game": "play",
+        "wet": false,
+        "ship": false,
+        "sector": "-3:0:ash",
+        "npc": 2,
+        "enemy": 2,
+        "loot": [
+          "pistol",
+          "xbow",
+          "katana",
+          "saw",
+          "flamesword",
+          "laser",
+          "fists",
+          "dagger",
+          "sword",
+          "katana",
+          "axe",
+          "hammer",
+          "spear",
+          "scythe",
+          "flamesword",
+          "flail",
+          "sling",
+          "bow",
+          "xbow",
+          "pistol",
+          "shotgun",
+          "smg",
+          "saw",
+          "bomb",
+          "tesla",
+          "laser"
+        ],
+        "owned": [
+          "fists"
+        ],
+        "expected": [
+          "fists",
+          "dagger",
+          "sword",
+          "katana",
+          "axe",
+          "hammer",
+          "spear",
+          "scythe",
+          "flamesword",
+          "flail",
+          "sling",
+          "bow",
+          "xbow",
+          "pistol",
+          "shotgun",
+          "smg",
+          "saw",
+          "bomb",
+          "tesla",
+          "laser"
+        ]
+      }
+    ],
+    "event": {
+      "phase": "dialogue",
+      "history": [
+        "warning",
+        "opening",
+        "emerging",
+        "dialogue"
+      ],
+      "locked": true,
+      "visible": true,
+      "parts": 1,
+      "distance": 2.6,
+      "alignment": 1,
+      "modal": true,
+      "labels": [
+        "Помочь",
+        "Отказаться"
+      ]
+    },
+    "riftInFrame": {
+      "x": 0.012757979762668514,
+      "y": 0.15372308603265214,
+      "z": 0.9852029663350351,
+      "visible": true
+    },
+    "complete": {
+      "locked": false,
+      "phase": "idle",
+      "relation": "friend"
+    },
+    "second": {
+      "phase": "dialogue",
+      "cycle": 1,
+      "visible": true
+    },
+    "refusal": {
+      "phase": "idle",
+      "relation": "hostile",
+      "locked": false
+    }
+  }
+}

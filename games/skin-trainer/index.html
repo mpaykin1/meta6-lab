@@ -94,14 +94,14 @@ function feedHint(side,dist){
 /* ================= THREE: СЦЕНА ================= */
 const cv=document.getElementById('gl');
 const R=new THREE.WebGLRenderer({canvas:cv,antialias:false,powerPreference:'high-performance'});
-R.setPixelRatio(1);
+R.setPixelRatio(Math.min(devicePixelRatio||1,2));
 const scene=new THREE.Scene();
 const FOG=new THREE.Color(0x2a2030);
 scene.background=FOG;scene.fog=new THREE.FogExp2(FOG,0.045);
 const cam=new THREE.PerspectiveCamera(60,1,0.1,200);
 
-scene.add(new THREE.HemisphereLight(0x9a88b8,0x201418,0.9));
-const moon=new THREE.DirectionalLight(0xffd6b0,0.5);moon.position.set(-5,10,-6);scene.add(moon);
+scene.add(new THREE.HemisphereLight(0xffe6d2,0x352535,1.5));
+const moon=new THREE.DirectionalLight(0xffe3c4,1.35);moon.position.set(-5,10,-6);scene.add(moon);
 
 // земля — процедурный шейдер
 const ground=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.ShaderMaterial({
@@ -213,14 +213,14 @@ const post=new THREE.ShaderMaterial({uniforms:{tD:{value:null},uT:{value:0},uAb:
   float row=floor(uv.y*90.);if(h(vec2(row,floor(uT*14.)))<uGl*.25)uv.x+=(h(vec2(row,uT))-.5)*.04*uGl;
   vec2 d=uv-.5;float r=dot(d,d);
   vec3 c;c.r=texture2D(tD,uv+d*uAb*r*8.).r;c.g=texture2D(tD,uv).g;c.b=texture2D(tD,uv-d*uAb*r*8.).b;
-  vec3 b=texture2D(tD,uv,3.).rgb;c+=max(b-.35,0.)*.6;              // мягкое свечение
-  c+=(h(uv*vec2(1733.,977.)+fract(uT))-.5)*.07;                    // зерно
-  c*=1.-r*1.3;                                                      // виньетка
+  vec3 b=texture2D(tD,uv,3.).rgb;c+=max(b-.65,0.)*.18;              // мягкое свечение
+  c+=(h(uv*vec2(1733.,977.)+fract(uT))-.5)*.012;                    // зерно
+  c*=1.-r*.65;                                                      // виньетка
   gl_FragColor=vec4(c,1.);}`});
 pScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2),post));
 
 function resize(){const w=innerWidth,h=innerHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();
-  RT.dispose();RT=new THREE.WebGLRenderTarget(Math.floor(w*.8),Math.floor(h*.8),{minFilter:THREE.LinearFilter});}
+  RT.dispose();RT=new THREE.WebGLRenderTarget(Math.floor(w),Math.floor(h),{minFilter:THREE.LinearFilter});}
 addEventListener('resize',resize);resize();
 
 /* ================= УПРАВЛЕНИЕ ================= */
@@ -289,7 +289,7 @@ function loop(){requestAnimationFrame(loop);
 
   // камера: тяжёлая, запаздывающая
   // При активном скине герой должен занимать экран, иначе теряются детали.
-  const dist=(window.__SKIN?3.6:6)+pitch*(window.__SKIN?.7:1.5);
+  const dist=(window.__SKIN?2.85:6)+pitch*(window.__SKIN?.48:1.5);
   const want=new THREE.Vector3(hero.position.x+Math.sin(yaw)*Math.cos(pitch)*dist,1.4+Math.sin(pitch)*dist,hero.position.z+Math.cos(yaw)*Math.cos(pitch)*dist);
   want.x+=Math.sin(t*.4)*.08;want.y+=Math.sin(t*.53)*.06;
   camPos.lerp(want,1-Math.exp(-dt*4));cam.position.copy(camPos);

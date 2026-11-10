@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | A1: STATUS.md — автоматический краткий статус МГЛ | МГЛ | чат ChatGPT | `lab/status-a1-20261110` | — | 2026-11-10 05:07 | — |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | M6 | МГЛ | MG-строитель-3 | `lab/mcp-connect` | [#192](https://github.com/mpaykin1/meta6-lab/pull/192) | 2026-11-09 22:25 | 2026-11-09 22:26 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/skin-rusty-robot` | [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | 2026-11-09 16:21 | 2026-11-09 19:38 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Пульт владельца | МГЛ | чат ChatGPT | `lab/owner-pult` | [#205](https://github.com/mpaykin1/meta6-lab/pull/205) | 2026-11-09 16:35 | 2026-11-09 17:01 |

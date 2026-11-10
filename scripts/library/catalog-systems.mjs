@@ -103,15 +103,10 @@ export function buildCatalog(root=ROOT,requested){
  for(const e of entries){
   const code=e.lines.map(r=>cache.get(r.source_path).split('\n').slice(r.start-1,r.end).join('\n')).join('\n');
   e.depends_on=entries.filter(other=>other.game===e.game&&other.id!==e.id&&other._names.some(n=>code.includes(n+'('))).map(x=>x.id);
-  delete e._names;
  }
+ for(const e of entries)delete e._names;
  const result={schema_version:1,minimum_system_lines:MIN_SYSTEM_LINES,game_count:sources.length,solution_count:entries.length,solutions:entries};
  const dest=path.join(root,'shared/library/catalog-solutions.json');
  fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,JSON.stringify(result,null,2)+'\n');
  return result;
-}
-if(process.argv[1]&&path.resolve(process.argv[1])===new URL(import.meta.url).pathname){
- const a=process.argv.find(x=>x.startsWith('--games='));
- const result=buildCatalog(ROOT,a?a.slice(8).split(','):undefined);
- console.log('Catalog: '+result.solution_count+' systems / '+result.game_count+' games');
 }

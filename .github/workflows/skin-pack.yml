@@ -70,6 +70,13 @@ jobs:
           set -euo pipefail
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/skin-trainer-http.log 2>&1 &
           node scripts/skins/capture-skin-preview.mjs
+      - name: Real Chromium turntable and negative mutation checks
+        if: env.SKIN_STAGE == '7'
+        run: |
+          set -euo pipefail
+          node scripts/skins/verify-turntable.mjs skins/sources/rusty-robot
+          node scripts/skins/verify-turntable.mjs skins/sources/rusty-robot --verify
+          node scripts/skins/mutate-turntable.mjs skins/sources/rusty-robot
       - name: Rebuild final ZIP after Chrome preview
         if: env.SKIN_STAGE == '7' && github.event_name != 'pull_request'
         run: |
@@ -85,7 +92,9 @@ jobs:
         if: env.SKIN_STAGE == '7'
         with:
           name: rusty-robot-chrome-three-views
-          path: skins/packs/rusty-robot/preview.png
+          path: |
+            skins/packs/rusty-robot/preview.png
+            skins/packs/rusty-robot/turntable.png
           if-no-files-found: error
       - name: Commit generated stage data to PR branch (not main)
         if: github.event_name == 'push' && github.ref == 'refs/heads/lab/skin-rusty-robot'
@@ -98,7 +107,7 @@ jobs:
           elif [ "$SKIN_STAGE" = 1 ]; then
             git add skins/packs/rusty-robot/textures/rust.png skins/packs/rusty-robot/textures/metal.png skins/packs/rusty-robot/stages/1.png
           else
-            git add skins/packs/rusty-robot/preview.png skins/packs/rusty-robot.zip
+            git add skins/packs/rusty-robot/preview.png skins/packs/rusty-robot/turntable.png skins/packs/rusty-robot.zip
           fi
           if ! git diff --cached --quiet; then
             git commit -m "skin: stage $SKIN_STAGE deliverables for Claude"

@@ -252,7 +252,9 @@ gl.useProgram(prog);gl.bindVertexArray(gl.createVertexArray());
 const size=gl.getUniformLocation(prog,'uSize'),time=gl.getUniformLocation(prog,'uTime');
 let frame=0,started=performance.now(),last=0;
 function draw(t){frame=requestAnimationFrame(draw);if(document.hidden||t-last<33)return;last=t;const d=Math.min(devicePixelRatio||1,1.5);const w=Math.min(1920,Math.floor(c.clientWidth*d)),h=Math.min(1280,Math.floor(c.clientHeight*d));if(c.width!==w||c.height!==h){c.width=w;c.height=h;gl.viewport(0,0,w,h);}gl.uniform2f(size,w,h);gl.uniform1f(time,(t-started)/1000);gl.drawArrays(gl.TRIANGLES,0,3);}
-frame=requestAnimationFrame(draw);
+const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+if(reducedMotion.matches){draw(performance.now());cancelAnimationFrame(frame);}
+else frame=requestAnimationFrame(draw);
 addEventListener('pagehide',()=>cancelAnimationFrame(frame),{once:true});
 })();
 </script>

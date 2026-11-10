@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T14:51:03.127Z",
+  "generated_at": "2026-11-10T15:34:24.754Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -132,7 +132,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-2",
       "branch": "lab/bot-batch-2",
-      "status": "ошибка",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 200,
       "pr_state": "open",
@@ -149,7 +149,7 @@
       "project": "МГЛ",
       "owner": "автозадача",
       "branch": "lab/bot-batch-2",
-      "status": "ошибка",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 200,
       "pr_state": "open",
@@ -234,7 +234,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/library-catalog",
-      "status": "ошибка",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 209,
       "pr_state": "open",
@@ -243,7 +243,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/209",
       "taken_at": "2026-11-10 05:59",
       "last_commit_at": "2026-11-10 08:49",
-      "remaining": "Исправить красные проверки: catalog"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 14,
@@ -251,7 +251,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/library-catalog",
-      "status": "ошибка",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 209,
       "pr_state": "open",
@@ -260,7 +260,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/209",
       "taken_at": "2026-11-09 16:55",
       "last_commit_at": "2026-11-10 08:49",
-      "remaining": "Исправить красные проверки: catalog"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 15,
@@ -268,7 +268,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/render-visibility-optimization",
-      "status": "зависла",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 54,
       "pr_state": "open",
@@ -277,7 +277,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/54",
       "taken_at": "2026-11-10 05:53",
       "last_commit_at": "2026-11-10 08:48",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 16,
@@ -285,7 +285,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/zadachi-tolkach",
-      "status": "зависла",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 221,
       "pr_state": "open",
@@ -294,7 +294,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/221",
       "taken_at": "2026-11-10 05:39",
       "last_commit_at": "2026-11-10 08:48",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 17,
@@ -302,7 +302,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/render-visibility-optimization",
-      "status": "зависла",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 54,
       "pr_state": "open",
@@ -311,7 +311,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/54",
       "taken_at": "2026-11-07 08:04",
       "last_commit_at": "2026-11-10 08:48",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 18,
@@ -319,7 +319,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/abyss-glow-owner-reference-20261108",
-      "status": "ошибка",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 134,
       "pr_state": "open",
@@ -336,7 +336,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-3",
       "branch": "lab/asqura-single-graphics-reference-20261108",
-      "status": "зависла",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 133,
       "pr_state": "open",
@@ -353,7 +353,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/asqura-single-graphics-reference-20261108",
-      "status": "зависла",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 133,
       "pr_state": "open",
@@ -370,7 +370,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/asqura-single-graphics-reference-20261108",
-      "status": "зависла",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 133,
       "pr_state": "open",
@@ -506,7 +506,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/render-broken-city-safe-1110",
-      "status": "зависла",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 225,
       "pr_state": "open",
@@ -515,7 +515,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/225",
       "taken_at": "2026-11-10 06:26",
       "last_commit_at": "2026-11-10 06:41",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 30,
@@ -608,7 +608,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/pr54-59-60-finish",
-      "status": "зависла",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 54,
       "pr_state": "open",
@@ -617,7 +617,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/54",
       "taken_at": "2026-11-10 06:02",
       "last_commit_at": "2026-11-10 06:21",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 36,
@@ -880,7 +880,7 @@
       "project": "МГЛ",
       "owner": "MG-ремонтник",
       "branch": "lab/bot-batch-1",
-      "status": "в работе",
+      "status": "конфликт",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 190,
       "pr_state": "open",
@@ -889,7 +889,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/190",
       "taken_at": "2026-11-10 14:48",
       "last_commit_at": "2026-11-10 14:49",
-      "remaining": "Довести PR до зелёных проверок и слияния"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 52,
@@ -897,7 +897,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/bot-batch-1",
-      "status": "в работе",
+      "status": "конфликт",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 190,
       "pr_state": "open",
@@ -906,7 +906,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/190",
       "taken_at": "2026-11-09 15:15",
       "last_commit_at": "2026-11-10 14:49",
-      "remaining": "Довести PR до зелёных проверок и слияния"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 53,
@@ -914,7 +914,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/bot-batch-1",
-      "status": "в работе",
+      "status": "конфликт",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 190,
       "pr_state": "open",
@@ -923,7 +923,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/190",
       "taken_at": "2026-11-10 08:48",
       "last_commit_at": "2026-11-10 14:49",
-      "remaining": "Довести PR до зелёных проверок и слияния"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 54,
@@ -999,7 +999,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-2",
       "branch": "lab/bot-batch-2",
-      "status": "ошибка",
+      "status": "конфликт",
       "original_status": "🙋 НУЖЕН CLAUDE: защищённый workflow и повторно красный META BOT",
       "pr": 200,
       "pr_state": "open",
@@ -1016,7 +1016,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/abyss-glow-owner-reference-20261108",
-      "status": "ошибка",
+      "status": "конфликт",
       "original_status": "🙋 НУЖЕН CLAUDE: оригинальный LEGACY_LIGHTS отклоняет KONTUR Guard",
       "pr": 134,
       "pr_state": "open",

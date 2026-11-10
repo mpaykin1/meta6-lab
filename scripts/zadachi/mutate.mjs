@@ -18,7 +18,8 @@ const M=[
  ['1.3 отсутствует строка «Чинить сейчас»', '**Чинить сейчас:**', '**Не чинить:**'],
  ['1.4 МГ ошибочно считается МГЛ', "r.project==='МГ'?", 'false?'],
  ['1.5 дубли не объединяются', 'if(!id||!dedup.has(id))', 'if(true)'],
- ['1.6 старый дубль не помечается', 'p?.duplicateOf&&age>=2880', 'false&&age>=2880']
+ ['1.6 старый дубль не помечается', 'p?.duplicateOf&&age>=2880', 'false&&age>=2880'],
+ ['1.6 supersedes ошибочно не связывается с прежним PR', 'if(old&&old.state===\'open\')old.supersededBy=next.number', 'if(false)old.supersededBy=next.number']
 ];
 const dir=mkdtempSync(join(tmpdir(),'zadachi-'));let failed=0;
 for(const [name,from,to] of M){

@@ -25,7 +25,7 @@ function blocks(text,file){
  const found=[];
  if(/\.html?$/.test(file)){
   const rx=/<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
-  for(const m of text.matchAll(rx))if(!/\bsrc\s*=/.test(m[1])&&!/@license|SPDX-License-Identifier|three\.js\s+r\d+/i.test(m[2].slice(0,4096)))found.push({text:m[2],offset:m.index+m[0].indexOf(m[2])});
+  for(const m of text.matchAll(rx))if(!/\bsrc\s*=/.test(m[1])&&!/@license|SPDX-License-Identifier/i.test(m[2].slice(0,4096)))found.push({text:m[2],offset:m.index+m[0].indexOf(m[2])});
  }else found.push({text,offset:0});
  return found;
 }

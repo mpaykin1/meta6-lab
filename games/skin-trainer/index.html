@@ -96,6 +96,8 @@ const cv=document.getElementById('gl');
 const R=new THREE.WebGLRenderer({canvas:cv,antialias:false,powerPreference:'high-performance'});
 R.setPixelRatio(Math.min(devicePixelRatio||1,2));
 const scene=new THREE.Scene();
+// Public 360° skin gallery: ?skin=...&turntable=1 (the same real WebGL hero). 
+const turntableMode=new URLSearchParams(location.search).get('turntable')==='1';
 const FOG=new THREE.Color(0x2a2030);
 scene.background=FOG;scene.fog=new THREE.FogExp2(FOG,0.045);
 const cam=new THREE.PerspectiveCamera(60,1,0.1,200);
@@ -226,7 +228,7 @@ addEventListener('resize',resize);resize();
 /* ================= УПРАВЛЕНИЕ ================= */
 const joyEl=document.getElementById('joy'),joyK=joyEl.querySelector('i');
 let moveId=null,mx0=0,my0=0,mvx=0,mvy=0,camId=null,cx=0,cy=0;
-let yaw=0,pitch=.32,yawT=0,pitchT=.32;
+let yaw=turntableMode?Math.PI:0,pitch=turntableMode?.12:.32,yawT=yaw,pitchT=pitch;
 const keys={};
 cv.addEventListener('pointerdown',e=>{
   if(e.clientX<innerWidth*.5&&moveId===null){moveId=e.pointerId;mx0=e.clientX;my0=e.clientY;mvx=mvy=0;
@@ -249,9 +251,16 @@ cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
 addEventListener('keydown',e=>{keys[e.code]=1;});addEventListener('keyup',e=>{keys[e.code]=0;});
 
 /* ================= ЦИКЛ ================= */
+if(turntableMode){
+  [ground,grass,tree,dust,sparks,...fogPlanes].forEach(obj=>obj.visible=false);
+  scene.background=new THREE.Color(0x111720);scene.fog=null;
+  document.querySelectorAll('.hint,#fade,#joy').forEach(el=>el.style.display='none');
+  R.setPixelRatio(1);
+}
 const clock=new THREE.Clock();
 const vel=new THREE.Vector3(),camPos=new THREE.Vector3(0,3,6),look=new THREE.Vector3();
 let walk=0,heroYaw=0,lean=0;
+window.SkinTurntable={setAngle(degrees){yaw=yawT=Math.PI-degrees*Math.PI/180;camPos.set(hero.position.x,2,hero.position.z+2.8);},setVisible(visible){hero.visible=Boolean(visible);},ready(){return Boolean(window.__SKIN&&!window.__SKIN_ERROR);}};
 setTimeout(()=>{document.getElementById('fade').style.opacity=0;},100);
 
 function loop(){requestAnimationFrame(loop);
@@ -289,9 +298,9 @@ function loop(){requestAnimationFrame(loop);
 
   // камера: тяжёлая, запаздывающая
   // При активном скине герой должен занимать экран, иначе теряются детали.
-  const dist=(window.__SKIN?2.85:6)+pitch*(window.__SKIN?.48:1.5);
+  const dist=turntableMode?2.85:(window.__SKIN?2.85:6)+pitch*(window.__SKIN?.48:1.5);
   const want=new THREE.Vector3(hero.position.x+Math.sin(yaw)*Math.cos(pitch)*dist,1.4+Math.sin(pitch)*dist,hero.position.z+Math.cos(yaw)*Math.cos(pitch)*dist);
-  want.x+=Math.sin(t*.4)*.08;want.y+=Math.sin(t*.53)*.06;
+  if(!turntableMode){want.x+=Math.sin(t*.4)*.08;want.y+=Math.sin(t*.53)*.06;}
   camPos.lerp(want,1-Math.exp(-dt*4));cam.position.copy(camPos);
   look.lerp(new THREE.Vector3(hero.position.x,1.5,hero.position.z),1-Math.exp(-dt*6));cam.lookAt(look);
 
@@ -316,8 +325,9 @@ function loop(){requestAnimationFrame(loop);
   post.uniforms.uT.value=t;post.uniforms.uAb.value=.003+pulse*.01+Math.sin(t*.7)*.001;
   post.uniforms.uGl.value=pulse*.8+(Math.random()<.004?.6:0);
 
-  R.setRenderTarget(RT);R.render(scene,cam);R.setRenderTarget(null);
-  post.uniforms.tD.value=RT.texture;R.render(pScene,pCam);
+  if(turntableMode){R.setRenderTarget(null);R.render(scene,cam);}
+  else{R.setRenderTarget(RT);R.render(scene,cam);R.setRenderTarget(null);
+   post.uniforms.tD.value=RT.texture;R.render(pScene,pCam);}
 }
 loop();
 })();

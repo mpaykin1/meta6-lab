@@ -42,9 +42,12 @@ r = st([row('взято', 'red', 'lab/red', '2026-11-10 11:50')],
   {pulls: {'lab/red': pr(32, {failedChecks: ['lint / validate']})}});
 ok('красная проверка и имя проверки', /❌ КРАСНЫЕ ПРОВЕРКИ: lint \/ validate/.test(r.red.status));
 
-r = st([row('взято', 'merged-red', 'lab/merged-red', '2026-11-10 07:00')],
-  {pulls: {'lab/merged-red': pr(33, {state: 'closed', merged: true, failedChecks: ['lint']})}});
-ok('слияние приоритетнее красной проверки', /✅ ГОТОВО/.test(r['merged-red'].status));
+const mergedRed = apply(doc([row('взято', 'merged-red', 'lab/merged-red', '2026-11-10 07:00')]),
+  {repo: 'o/r', pulls: {'lab/merged-red': pr(33, {state: 'closed', merged: true,
+    failedChecks: ['lint']})}}, now);
+r = Object.fromEntries(parseRows(mergedRed).map(x => [x.task, x]));
+ok('слияние приоритетнее красной проверки, она не попала в красный счётчик',
+  /✅ ГОТОВО/.test(r['merged-red'].status) && /❌ красные 0/.test(mergedRed));
 
 const mgOut = apply(doc([]), {repo: 'o/r', mgRepo: 'o/meta6',
   mgPulls: {'lab/mg': pr(34, {mergeable: true})}}, now);

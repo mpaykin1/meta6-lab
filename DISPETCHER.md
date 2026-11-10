@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 19 · конфликт 0 · красные проверки 4 · нужен Claude 13
+Итог: зависло 22 · конфликт 0 · красные проверки 4 · нужен Claude 13
 
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132
@@ -70,6 +70,14 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/177
 - Ветка: `lab/automation-efficiency-rules-20261109`
 - SHA: `4856765c6735f11be2e9365018e56ca44ef0f2a3` · последний коммит: 2026-11-09T09:13:32Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
+### PR #191
+- PR: https://github.com/mpaykin1/meta6-lab/pull/191
+- Ветка: `lab/sunken-city-reference-1109`
+- SHA: `393db848e9befdd1025e2f1b3bc061d1fafbf6b5` · последний коммит: 2026-11-10T10:27:48Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
@@ -166,6 +174,22 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/228
 - Ветка: `lab/game-design-expertise-audit-20261110`
 - SHA: `14d15c7ee2e23679d74b3290cf794d0ab1c96605` · последний коммит: 2026-11-10T09:11:18Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
+### PR #231
+- PR: https://github.com/mpaykin1/meta6-lab/pull/231
+- Ветка: `lab/dispetcher-mergeable-null-1110`
+- SHA: `710b10da752cd9de09b35a50468c7ac0544ff78c` · последний коммит: 2026-11-10T10:07:11Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
+### PR #232
+- PR: https://github.com/mpaykin1/meta6-lab/pull/232
+- Ветка: `lab/creator-features-copy-1110`
+- SHA: `7ce072e6557df728760b92fc57eb95d3fd23f570` · последний коммит: 2026-11-10T10:29:47Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —

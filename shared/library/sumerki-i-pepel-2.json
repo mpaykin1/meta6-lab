@@ -4,6 +4,16 @@
   "source_root": "games/sumerki-i-pepel-2",
   "assets": [
     {
+      "id": "23a3feed65da7f382ba4ec84",
+      "game": "sumerki-i-pepel-2",
+      "kind": "json-data",
+      "file": "games/sumerki-i-pepel-2/bot.json",
+      "source_path": "games/sumerki-i-pepel-2/bot.json",
+      "bytes": 433,
+      "sha256": "0d489d8b31fa51dc98e7d7c485c8cac0422efb8e394072d241850f2b2c8e4f6b",
+      "storage": "reference"
+    },
+    {
       "id": "01e9cd7b553dfc743f0aab01",
       "game": "sumerki-i-pepel-2",
       "kind": "inline-style",
@@ -17,6 +27,21 @@
         323
       ],
       "sha256": "78ec682971ffcb39cfa28ab0dee3b84b292312ea5e6fada7b8bc1a0fe565d8a7"
+    },
+    {
+      "id": "034d66940b4db60b21668a8c",
+      "game": "sumerki-i-pepel-2",
+      "kind": "inline-svg",
+      "name": "svg@708304",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/index.html",
+      "lines": [
+        10618,
+        10618
+      ],
+      "sha256": "0155def0088919086a6bd14662b36706163de203d4b3da5d25eb03cc4deafcec"
     },
     {
       "id": "067346a45f504d958590ae95",
@@ -64,6 +89,21 @@
       "sha256": "4ae5c685466d1fc6f848b83fe4b59f3ef6fd2043c6971f05eaeeb4923c79a9eb"
     },
     {
+      "id": "0c65b66300d8be37188da677",
+      "game": "sumerki-i-pepel-2",
+      "kind": "inline-svg",
+      "name": "svg@715339",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/index.html",
+      "lines": [
+        10712,
+        10712
+      ],
+      "sha256": "4c4b32cb0b399cee2b2c1334c024e13ad1b59a52a62cc0b5d1c885bb5c487bf2"
+    },
+    {
       "id": "0d94ad0b078710f994d066f8",
       "game": "sumerki-i-pepel-2",
       "kind": "inline-svg",
@@ -107,21 +147,6 @@
         447
       ],
       "sha256": "261bdcc636645c43c9ed2365d2f3f6e51e863801f1019b656ed49fc249d1e078"
-    },
-    {
-      "id": "2d228ca3b913dadabee1e22a",
-      "game": "sumerki-i-pepel-2",
-      "kind": "inline-svg",
-      "name": "svg@708232",
-      "purpose": [
-        "svg"
-      ],
-      "source_path": "games/sumerki-i-pepel-2/index.html",
-      "lines": [
-        10618,
-        10618
-      ],
-      "sha256": "0155def0088919086a6bd14662b36706163de203d4b3da5d25eb03cc4deafcec"
     },
     {
       "id": "335f7cadfb554b00ec193e07",
@@ -454,21 +479,6 @@
       "sha256": "dcd9903b734553b61a0a9536699218d1ed2d05becdb17c7fda3f0cd0596bbaf8"
     },
     {
-      "id": "f62802e3f9a233fbfd4ed558",
-      "game": "sumerki-i-pepel-2",
-      "kind": "inline-svg",
-      "name": "svg@715267",
-      "purpose": [
-        "svg"
-      ],
-      "source_path": "games/sumerki-i-pepel-2/index.html",
-      "lines": [
-        10712,
-        10712
-      ],
-      "sha256": "4c4b32cb0b399cee2b2c1334c024e13ad1b59a52a62cc0b5d1c885bb5c487bf2"
-    },
-    {
       "id": "f65e2363db7be764ccc9e724",
       "game": "sumerki-i-pepel-2",
       "kind": "data-uri",
@@ -485,6 +495,126 @@
     }
   ],
   "solutions": [
+    {
+      "id": "1e2ddec0244942543503e933",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "navigate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-adapter.js",
+      "lines": [
+        5,
+        79
+      ],
+      "sha256": "6bce6be4226deb0be2016398d34800d3651be7769ffaf572c4c040c72809ca0d"
+    },
+    {
+      "id": "2fa46831537ac33105317226",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "nearWater",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-adapter.js",
+      "lines": [
+        32,
+        39
+      ],
+      "sha256": "21df922426b51c277d536be2a89459376c595a9f288732a6d35830d2959674c0"
+    },
+    {
+      "id": "8579c13c1e6730db71759df7",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "module:bot-adapter.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-adapter.js",
+      "lines": [
+        1,
+        113
+      ],
+      "sha256": "8e52b44f843aa6bbe6fa82b514359cc2adbfebad7ad2a577eed1c61a7a20e3a1"
+    },
+    {
+      "id": "8e1f5ec98c0ecda8ef5f70aa",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "clampCell",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-adapter.js",
+      "lines": [
+        9,
+        9
+      ],
+      "sha256": "ced20e598eba55084cc92ee8a132a049240dba1c88a8da4db29efce343436607"
+    },
+    {
+      "id": "c07f1f03232855f6cf60452d",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "search",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-adapter.js",
+      "lines": [
+        40,
+        55
+      ],
+      "sha256": "2e1dbec1c8d17b5bf7b0d1e45dcf7c58963dc9b4c3cfca296b2f89c6241b3a74"
+    },
+    {
+      "id": "463fe7c86ee1767f5c8c93bb",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "playLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-strategy.mjs",
+      "lines": [
+        7,
+        18
+      ],
+      "sha256": "cb69b4d0b32fde6192d9f6a4b3cde41e42e8609d0ae7f237d73777ac8e98d332"
+    },
+    {
+      "id": "51e53a5a1d00225dd9a47769",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "module:bot-strategy.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-strategy.mjs",
+      "lines": [
+        1,
+        18
+      ],
+      "sha256": "e107f5cd11ae53e632f253677b1170de7e9fcd929d168f2641ad29de76eeb334"
+    },
+    {
+      "id": "657c170758e8ddb2f02c357f",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-strategy.mjs",
+      "lines": [
+        2,
+        6
+      ],
+      "sha256": "79b5f9dde9f221bb4eba2ccaa429bd51434f78d723e79bf1626342dba4ca1406"
+    },
     {
       "id": "0057d24701636f47210bc0ce",
       "game": "sumerki-i-pepel-2",
@@ -1579,7 +1709,7 @@
         435,
         11160
       ],
-      "sha256": "aed3d090d6e38c1526beb9b45b88139c109fa8f00fb72f83cd3b0ba7a2fdcc0f"
+      "sha256": "edd300713c043bb904a29a1dc06cafce5e5a5200e83786dc653e9668ce0ed6a8"
     },
     {
       "id": "1a8ff1f31595b32febb39005",
@@ -9329,8 +9459,8 @@
     }
   ],
   "counts": {
-    "assets": 32,
-    "file_assets": 0,
-    "solutions": 589
+    "assets": 33,
+    "file_assets": 1,
+    "solutions": 597
   }
 }

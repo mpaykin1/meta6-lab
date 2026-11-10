@@ -4,6 +4,17 @@
   "source_root": "games/rainbow-acceleration",
   "assets": [
     {
+      "id": "677b28c379a328b4f3d86ba6",
+      "game": "rainbow-acceleration",
+      "kind": "json-data",
+      "file": "shared/library/assets/rainbow-acceleration/bot.json",
+      "source_path": "games/rainbow-acceleration/bot.json",
+      "bytes": 433,
+      "sha256": "0d489d8b31fa51dc98e7d7c485c8cac0422efb8e394072d241850f2b2c8e4f6b",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/rainbow-acceleration/bot.json"
+    },
+    {
       "id": "00fad7f72c883d3c8153beb0",
       "game": "rainbow-acceleration",
       "kind": "source-table",
@@ -65,6 +76,66 @@
     }
   ],
   "solutions": [
+    {
+      "id": "9f60026065535d0758577ce5",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "module:bot-adapter.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/rainbow-acceleration/bot-adapter.js",
+      "lines": [
+        1,
+        18
+      ],
+      "sha256": "b38517228cff50a2edf4f9e2fff40536728b4b8ea7759b8cc63029708f5439e5"
+    },
+    {
+      "id": "25b576fd9c635c866f1866da",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "playLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/rainbow-acceleration/bot-strategy.mjs",
+      "lines": [
+        7,
+        23
+      ],
+      "sha256": "3bef8f2e8963669e75e26706174ecc5e7ac9cdbe85c6bb02f18d681595f286dd"
+    },
+    {
+      "id": "3b7e1d19c14f4d153f6da8e7",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/rainbow-acceleration/bot-strategy.mjs",
+      "lines": [
+        2,
+        6
+      ],
+      "sha256": "ed9a7f4c25f43e1f0350a6a5c5cfdef2b6101f4261a7547c7acaa6facfcc0e65"
+    },
+    {
+      "id": "b63af844e35f62de717f0aa8",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "module:bot-strategy.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/rainbow-acceleration/bot-strategy.mjs",
+      "lines": [
+        1,
+        23
+      ],
+      "sha256": "9428ce702cc9a3c9c0538846bd76b1fa1152f00c510b4a779c245620ea696f96"
+    },
     {
       "id": "0054a26a7638528b884a1ce2",
       "game": "rainbow-acceleration",
@@ -291,21 +362,6 @@
       "sha256": "b3f44ef9aa1e83912f3a4c5dc6cd59018c7820f90c0b92ed5c7f274dc5dc131e"
     },
     {
-      "id": "30d529d02b0cc53bb7fcbdb7",
-      "game": "rainbow-acceleration",
-      "kind": "solution",
-      "name": "inline-script@3013",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/rainbow-acceleration/index.html",
-      "lines": [
-        35,
-        648
-      ],
-      "sha256": "c2317a0b9d18819c8e339d3af89e4f5317d0ee6d3c9e634838d7fc3b09af42b9"
-    },
-    {
       "id": "3166f70cb5ab20f51b4165c4",
       "game": "rainbow-acceleration",
       "kind": "solution",
@@ -514,6 +570,21 @@
         255
       ],
       "sha256": "beee0924d493ea0639796e842327d528dba1e14645e42536b84cf9a72a20e620"
+    },
+    {
+      "id": "5f6a8303f75e9b3f16794a4d",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "inline-script@3013",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/rainbow-acceleration/index.html",
+      "lines": [
+        35,
+        674
+      ],
+      "sha256": "74b730a5771a071893fc8bca1cb92be7d09deebc740401ea94ea2194e6bd2d18"
     },
     {
       "id": "62a08b413e0e4f3941fb6667",
@@ -1897,8 +1968,8 @@
     }
   ],
   "counts": {
-    "assets": 4,
-    "file_assets": 0,
-    "solutions": 122
+    "assets": 5,
+    "file_assets": 1,
+    "solutions": 126
   }
 }

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "copy_limit_bytes": 50000000,
-  "copied_bytes": 49666370,
+  "copied_bytes": 49667191,
   "games": [
     {
       "game": "archer-in-the-fog",
@@ -23,9 +23,9 @@
       "game": "broken-city",
       "source_root": "games/broken-city",
       "manifest": "shared/library/broken-city.json",
-      "assets": 83,
-      "file_assets": 78,
-      "solutions": 991
+      "assets": 84,
+      "file_assets": 79,
+      "solutions": 996
     },
     {
       "game": "broken-city-copy",
@@ -39,9 +39,9 @@
       "game": "rainbow-acceleration",
       "source_root": "games/rainbow-acceleration",
       "manifest": "shared/library/rainbow-acceleration.json",
-      "assets": 4,
-      "file_assets": 0,
-      "solutions": 122
+      "assets": 5,
+      "file_assets": 1,
+      "solutions": 126
     },
     {
       "game": "reference-ashen-sumerek",
@@ -84,12 +84,20 @@
       "solutions": 345
     },
     {
+      "game": "skin-trainer",
+      "source_root": "games/skin-trainer",
+      "manifest": "shared/library/skin-trainer.json",
+      "assets": 3,
+      "file_assets": 0,
+      "solutions": 11
+    },
+    {
       "game": "sumerki-i-pepel-2",
       "source_root": "games/sumerki-i-pepel-2",
       "manifest": "shared/library/sumerki-i-pepel-2.json",
-      "assets": 32,
-      "file_assets": 0,
-      "solutions": 589
+      "assets": 33,
+      "file_assets": 1,
+      "solutions": 597
     },
     {
       "game": "sumerki-i-pepel-2-copy",
@@ -23135,6 +23143,15 @@
       "file": "shared/library/assets/broken-city/audio/ui_reward_01.ogg"
     },
     {
+      "id": "2e67de2d91e2f5309169ffda",
+      "game": "broken-city",
+      "kind": "json-data",
+      "purpose": [],
+      "source_path": "games/broken-city/bot.json",
+      "sha256": "c121316e3cb71d6db440b29248aec4c081566855d79a74f8f571c7444b4e4e0c",
+      "file": "shared/library/assets/broken-city/bot.json"
+    },
+    {
       "id": "b483e2955d66f378fde8bcf9",
       "game": "broken-city",
       "kind": "font",
@@ -23225,6 +23242,81 @@
       "lines": [
         1595,
         1620
+      ]
+    },
+    {
+      "id": "a9e52d8011405fc5dcf907c3",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "module:bot-adapter.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/broken-city/bot-adapter.js",
+      "sha256": "9a66781feb2afa2c6fef4d6e0c249fa1f8095979ef9564b5bbcc0d05102e63a3",
+      "lines": [
+        1,
+        18
+      ]
+    },
+    {
+      "id": "173b630597400397bc4f712a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "pressJump",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/bot-strategy.mjs",
+      "sha256": "80c6da7ca62bc7a8417b66986dfc17e88a90c290609f7c36c1ffa471cba4bd8f",
+      "lines": [
+        7,
+        10
+      ]
+    },
+    {
+      "id": "4654f8a96a3dab8d57b54254",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "module:bot-strategy.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/broken-city/bot-strategy.mjs",
+      "sha256": "275ed561b578d710bc4ac4283eb1ec4b53baba1bc8c75ace3423b12cceea160d",
+      "lines": [
+        1,
+        161
+      ]
+    },
+    {
+      "id": "ec9000c0629851f4147798c9",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/bot-strategy.mjs",
+      "sha256": "64662c8c43850b2af444a2e230db4a265b918d950e389177d9242d1b073dcb2d",
+      "lines": [
+        12,
+        25
+      ]
+    },
+    {
+      "id": "f45dc4e071fd0eb296873b66",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "playLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/broken-city/bot-strategy.mjs",
+      "sha256": "18399fd510beb1ae15ef0212df93837fbde757bfd09550f500ab644f30cf13d9",
+      "lines": [
+        27,
+        161
       ]
     },
     {
@@ -23480,6 +23572,21 @@
       "lines": [
         1744,
         1779
+      ]
+    },
+    {
+      "id": "13124ecb923e9e70e5f68f90",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "inline-script@9693",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "sha256": "6af11d3571141ae43f616273ce1fa6ec82e3f539a2ffb0967e98f5cb2a113c5d",
+      "lines": [
+        101,
+        3370
       ]
     },
     {
@@ -23798,21 +23905,6 @@
       ]
     },
     {
-      "id": "28a4fd9b90ba5716fa1d4ff4",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "inline-script@9693",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "sha256": "edad139d9ca2eccf71c9cde17ca3b7877580aa857fc6a9fb449ede11e1ad4a8d",
-      "lines": [
-        101,
-        3331
-      ]
-    },
-    {
       "id": "28a69cccb030e9a86add61d0",
       "game": "broken-city",
       "kind": "solution",
@@ -23960,21 +24052,6 @@
       "lines": [
         1525,
         1559
-      ]
-    },
-    {
-      "id": "35c4e57069592509abacadc0",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "frame",
-      "purpose": [
-        "animation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "sha256": "e46a88609b3f95fe65cdc5d03aec1e3ff4f6f8fa20dc51e0eb1f8ce7c44fa53e",
-      "lines": [
-        3242,
-        3327
       ]
     },
     {
@@ -25895,6 +25972,21 @@
       "lines": [
         2476,
         2476
+      ]
+    },
+    {
+      "id": "aa906d3a5ca4bd58e80ad4a7",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "frame",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "sha256": "e46a88609b3f95fe65cdc5d03aec1e3ff4f6f8fa20dc51e0eb1f8ce7c44fa53e",
+      "lines": [
+        3281,
+        3366
       ]
     },
     {
@@ -41731,6 +41823,15 @@
       ]
     },
     {
+      "id": "677b28c379a328b4f3d86ba6",
+      "game": "rainbow-acceleration",
+      "kind": "json-data",
+      "purpose": [],
+      "source_path": "games/rainbow-acceleration/bot.json",
+      "sha256": "0d489d8b31fa51dc98e7d7c485c8cac0422efb8e394072d241850f2b2c8e4f6b",
+      "file": "shared/library/assets/rainbow-acceleration/bot.json"
+    },
+    {
       "id": "00fad7f72c883d3c8153beb0",
       "game": "rainbow-acceleration",
       "kind": "source-table",
@@ -41788,6 +41889,66 @@
       "lines": [
         132,
         143
+      ]
+    },
+    {
+      "id": "9f60026065535d0758577ce5",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "module:bot-adapter.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/rainbow-acceleration/bot-adapter.js",
+      "sha256": "b38517228cff50a2edf4f9e2fff40536728b4b8ea7759b8cc63029708f5439e5",
+      "lines": [
+        1,
+        18
+      ]
+    },
+    {
+      "id": "25b576fd9c635c866f1866da",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "playLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/rainbow-acceleration/bot-strategy.mjs",
+      "sha256": "3bef8f2e8963669e75e26706174ecc5e7ac9cdbe85c6bb02f18d681595f286dd",
+      "lines": [
+        7,
+        23
+      ]
+    },
+    {
+      "id": "3b7e1d19c14f4d153f6da8e7",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/rainbow-acceleration/bot-strategy.mjs",
+      "sha256": "ed9a7f4c25f43e1f0350a6a5c5cfdef2b6101f4261a7547c7acaa6facfcc0e65",
+      "lines": [
+        2,
+        6
+      ]
+    },
+    {
+      "id": "b63af844e35f62de717f0aa8",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "module:bot-strategy.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/rainbow-acceleration/bot-strategy.mjs",
+      "sha256": "9428ce702cc9a3c9c0538846bd76b1fa1152f00c510b4a779c245620ea696f96",
+      "lines": [
+        1,
+        23
       ]
     },
     {
@@ -42016,21 +42177,6 @@
       ]
     },
     {
-      "id": "30d529d02b0cc53bb7fcbdb7",
-      "game": "rainbow-acceleration",
-      "kind": "solution",
-      "name": "inline-script@3013",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/rainbow-acceleration/index.html",
-      "sha256": "c2317a0b9d18819c8e339d3af89e4f5317d0ee6d3c9e634838d7fc3b09af42b9",
-      "lines": [
-        35,
-        648
-      ]
-    },
-    {
       "id": "3166f70cb5ab20f51b4165c4",
       "game": "rainbow-acceleration",
       "kind": "solution",
@@ -42238,6 +42384,21 @@
       "lines": [
         252,
         255
+      ]
+    },
+    {
+      "id": "5f6a8303f75e9b3f16794a4d",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "inline-script@3013",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/rainbow-acceleration/index.html",
+      "sha256": "74b730a5771a071893fc8bca1cb92be7d09deebc740401ea94ea2194e6bd2d18",
+      "lines": [
+        35,
+        674
       ]
     },
     {
@@ -103828,6 +103989,225 @@
       ]
     },
     {
+      "id": "47910d23c89a372e3f719049",
+      "game": "skin-trainer",
+      "kind": "inline-style",
+      "name": "style@211",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "696cbeb1133c25af1a0bc3bb09f86ef3ed5141138111f710e26c78d3972c3148",
+      "lines": [
+        7,
+        19
+      ]
+    },
+    {
+      "id": "5684a1671f939264757bf817",
+      "game": "skin-trainer",
+      "kind": "inline-svg",
+      "name": "svg@2495",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "b930e4d88fac39bfdb3b24b2a1ca067b31ba0962981bef0df92769a16a432773",
+      "lines": [
+        40,
+        50
+      ]
+    },
+    {
+      "id": "59ac9a01a22406a8a0a3c0ef",
+      "game": "skin-trainer",
+      "kind": "inline-svg",
+      "name": "svg@1403",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "d463a05b44923b364f4d675940c6993fb7c1900132cb1742bde787ef8afa73ff",
+      "lines": [
+        25,
+        37
+      ]
+    },
+    {
+      "id": "043fccd69f4e798990262bc1",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "burst",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "c68bca86f405971ac83c10fc62d185d1ad4e6f469e2f2828faa93b63c4e0611a",
+      "lines": [
+        199,
+        203
+      ]
+    },
+    {
+      "id": "15966a15fbbe434a48556793",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "loop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "8eca3b74a29500b9b0039f8da964bd4242324d92dfd77ba20dcfa7c0a5a9dc11",
+      "lines": [
+        257,
+        320
+      ]
+    },
+    {
+      "id": "53929871b96aa6366b53bff3",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "lem",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "42fe0fbe4b7a2240848b634a5416a1ebdb07079a02a88d3ffcdc19f987548a76",
+      "lines": [
+        62,
+        62
+      ]
+    },
+    {
+      "id": "6b6b05e9fd90c2b8d8f11e9e",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "912b6d0994aa9bbced15c77fbf8bf2174e241c073660299c7133c3b5b6fe642a",
+      "lines": [
+        222,
+        223
+      ]
+    },
+    {
+      "id": "913269e0dae30849283392c3",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "inline-script@3719",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "c0323bf6b2f68a4a9225b990c6449fde8be65c49ebe01161676da6a011814a23",
+      "lines": [
+        58,
+        323
+      ]
+    },
+    {
+      "id": "93ff821df089300e790c1b0f",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "radialTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "5dbe07a5a2f3f5d49b76639c38857d6235a120cad4db7710e1443ebd0b8ab068",
+      "lines": [
+        189,
+        191
+      ]
+    },
+    {
+      "id": "9a2f5638465fbf2132d2388c",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "limb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "f32e26d98ccf120cad838d21336c57b1c5c8d8c0930a8f2ec847842e2f86cacf",
+      "lines": [
+        175,
+        175
+      ]
+    },
+    {
+      "id": "a289f96e95531cd34c97d7ef",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "makeHint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "6cd7c6491636b23b8ab13af58240118439e3073a29623ed73a1cadbdde29318b",
+      "lines": [
+        66,
+        70
+      ]
+    },
+    {
+      "id": "a8fa2685d66c2be99760f011",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "updateHints",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "eddaad41020b66204166fd370f78984ce755eaaa847fc824c360f79785111f42",
+      "lines": [
+        76,
+        87
+      ]
+    },
+    {
+      "id": "c2ba4af4f87ea9b795ce5ee2",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "up",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "67ac1bbeae83d2e0e6f8f2c2c7f8e3e0bc3962226c19e6a90cc4b61d382b90e6",
+      "lines": [
+        246,
+        247
+      ]
+    },
+    {
+      "id": "c59f5dfc31709b4c960e7239",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "feedHint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "e4ce6b8e70b7b50436e9a03f13e0a3a50384731b8d0e6a9a37ee751d9d0f2328",
+      "lines": [
+        88,
+        92
+      ]
+    },
+    {
+      "id": "23a3feed65da7f382ba4ec84",
+      "game": "sumerki-i-pepel-2",
+      "kind": "json-data",
+      "purpose": [],
+      "source_path": "games/sumerki-i-pepel-2/bot.json",
+      "sha256": "0d489d8b31fa51dc98e7d7c485c8cac0422efb8e394072d241850f2b2c8e4f6b",
+      "file": "games/sumerki-i-pepel-2/bot.json"
+    },
+    {
       "id": "01e9cd7b553dfc743f0aab01",
       "game": "sumerki-i-pepel-2",
       "kind": "inline-style",
@@ -103840,6 +104220,21 @@
       "lines": [
         6,
         323
+      ]
+    },
+    {
+      "id": "034d66940b4db60b21668a8c",
+      "game": "sumerki-i-pepel-2",
+      "kind": "inline-svg",
+      "name": "svg@708304",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/index.html",
+      "sha256": "0155def0088919086a6bd14662b36706163de203d4b3da5d25eb03cc4deafcec",
+      "lines": [
+        10618,
+        10618
       ]
     },
     {
@@ -103888,6 +104283,21 @@
       ]
     },
     {
+      "id": "0c65b66300d8be37188da677",
+      "game": "sumerki-i-pepel-2",
+      "kind": "inline-svg",
+      "name": "svg@715339",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/index.html",
+      "sha256": "4c4b32cb0b399cee2b2c1334c024e13ad1b59a52a62cc0b5d1c885bb5c487bf2",
+      "lines": [
+        10712,
+        10712
+      ]
+    },
+    {
       "id": "0d94ad0b078710f994d066f8",
       "game": "sumerki-i-pepel-2",
       "kind": "inline-svg",
@@ -103930,21 +104340,6 @@
       "lines": [
         447,
         447
-      ]
-    },
-    {
-      "id": "2d228ca3b913dadabee1e22a",
-      "game": "sumerki-i-pepel-2",
-      "kind": "inline-svg",
-      "name": "svg@708232",
-      "purpose": [
-        "svg"
-      ],
-      "source_path": "games/sumerki-i-pepel-2/index.html",
-      "sha256": "0155def0088919086a6bd14662b36706163de203d4b3da5d25eb03cc4deafcec",
-      "lines": [
-        10618,
-        10618
       ]
     },
     {
@@ -104278,21 +104673,6 @@
       ]
     },
     {
-      "id": "f62802e3f9a233fbfd4ed558",
-      "game": "sumerki-i-pepel-2",
-      "kind": "inline-svg",
-      "name": "svg@715267",
-      "purpose": [
-        "svg"
-      ],
-      "source_path": "games/sumerki-i-pepel-2/index.html",
-      "sha256": "4c4b32cb0b399cee2b2c1334c024e13ad1b59a52a62cc0b5d1c885bb5c487bf2",
-      "lines": [
-        10712,
-        10712
-      ]
-    },
-    {
       "id": "f65e2363db7be764ccc9e724",
       "game": "sumerki-i-pepel-2",
       "kind": "data-uri",
@@ -104305,6 +104685,126 @@
       "lines": [
         447,
         447
+      ]
+    },
+    {
+      "id": "1e2ddec0244942543503e933",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "navigate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-adapter.js",
+      "sha256": "6bce6be4226deb0be2016398d34800d3651be7769ffaf572c4c040c72809ca0d",
+      "lines": [
+        5,
+        79
+      ]
+    },
+    {
+      "id": "2fa46831537ac33105317226",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "nearWater",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-adapter.js",
+      "sha256": "21df922426b51c277d536be2a89459376c595a9f288732a6d35830d2959674c0",
+      "lines": [
+        32,
+        39
+      ]
+    },
+    {
+      "id": "8579c13c1e6730db71759df7",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "module:bot-adapter.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-adapter.js",
+      "sha256": "8e52b44f843aa6bbe6fa82b514359cc2adbfebad7ad2a577eed1c61a7a20e3a1",
+      "lines": [
+        1,
+        113
+      ]
+    },
+    {
+      "id": "8e1f5ec98c0ecda8ef5f70aa",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "clampCell",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-adapter.js",
+      "sha256": "ced20e598eba55084cc92ee8a132a049240dba1c88a8da4db29efce343436607",
+      "lines": [
+        9,
+        9
+      ]
+    },
+    {
+      "id": "c07f1f03232855f6cf60452d",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "search",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-adapter.js",
+      "sha256": "2e1dbec1c8d17b5bf7b0d1e45dcf7c58963dc9b4c3cfca296b2f89c6241b3a74",
+      "lines": [
+        40,
+        55
+      ]
+    },
+    {
+      "id": "463fe7c86ee1767f5c8c93bb",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "playLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-strategy.mjs",
+      "sha256": "cb69b4d0b32fde6192d9f6a4b3cde41e42e8609d0ae7f237d73777ac8e98d332",
+      "lines": [
+        7,
+        18
+      ]
+    },
+    {
+      "id": "51e53a5a1d00225dd9a47769",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "module:bot-strategy.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-strategy.mjs",
+      "sha256": "e107f5cd11ae53e632f253677b1170de7e9fcd929d168f2641ad29de76eeb334",
+      "lines": [
+        1,
+        18
+      ]
+    },
+    {
+      "id": "657c170758e8ddb2f02c357f",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/bot-strategy.mjs",
+      "sha256": "79b5f9dde9f221bb4eba2ccaa429bd51434f78d723e79bf1626342dba4ca1406",
+      "lines": [
+        2,
+        6
       ]
     },
     {
@@ -105397,7 +105897,7 @@
         "game-runtime"
       ],
       "source_path": "games/sumerki-i-pepel-2/index.html",
-      "sha256": "aed3d090d6e38c1526beb9b45b88139c109fa8f00fb72f83cd3b0ba7a2fdcc0f",
+      "sha256": "edd300713c043bb904a29a1dc06cafce5e5a5200e83786dc653e9668ce0ed6a8",
       "lines": [
         435,
         11160

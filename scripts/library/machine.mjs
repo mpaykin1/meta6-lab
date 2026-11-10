@@ -150,7 +150,7 @@ export function buildLibrary(root=ROOT){
   }
   fs.mkdirSync(target,{recursive:true});
   const current=new Set(manifests.map(m=>m.game+'.json'));
-  for(const file of fs.readdirSync(target))if(file.endsWith('.json')&&file!=='index.json'&&!current.has(file))fs.rmSync(path.join(target,file));
+  for(const file of fs.readdirSync(target))if(file.endsWith('.json')&&file!=='index.json'&&file!=='catalog-solutions.json'&&!current.has(file))fs.rmSync(path.join(target,file));
   for(const m of manifests)save(path.join(target,m.game+'.json'),m);
   const index={schema_version:1,copy_limit_bytes:LIMIT,copied_bytes:copied,
     games:manifests.map(m=>({game:m.game,source_root:m.source_root,manifest:'shared/library/'+m.game+'.json',...m.counts})),

@@ -8,7 +8,8 @@ async function moduleFrom(text) {
   return import('data:text/javascript;base64,' + Buffer.from(text).toString('base64'));
 }
 
-async function suite(m) {
+async function suite(m, candidate) {
+  assert.doesNotMatch(candidate, /process\.env\.GITHUB_/);
   assert.equal(m.runVerdict({ conclusion: 'failure' }), 'красный');
   assert.equal(m.runVerdict({ conclusion: 'success' }), 'зелёный');
   assert.equal(m.runVerdict({ conclusion: 'cancelled' }), 'нет данных');
@@ -86,6 +87,10 @@ const mutations = {
     '    // Сбой одного источника не должен искажать другие секции.\n    return UNKNOWN;',
     '    // Сбой одного источника не должен искажать другие секции.\n    throw _error;'
   ],
+  'raw-github-env-rejected': [
+    'process.env.STATUS_RUN_URL || UNKNOWN',
+    'process.env.GITHUB_RUN_ID || UNKNOWN'
+  ],
   'duplicate-error-number-hidden': [
     '!oldRows.has(row)',
     'false'
@@ -103,7 +108,7 @@ const mutations = {
 
 let failures = 0;
 try {
-  await suite(await moduleFrom(source));
+  await suite(await moduleFrom(source), source);
   console.log('GREEN original build.mjs: all assertions');
 } catch (error) {
   console.error('RED original build.mjs:', error);
@@ -118,7 +123,7 @@ for (const [name, [from, to]] of Object.entries(mutations)) {
   }
   const mutant = source.replace(from, to);
   try {
-    await suite(await moduleFrom(mutant));
+    await suite(await moduleFrom(mutant), mutant);
     console.error('FAIL mutation stayed GREEN: ' + name);
     failures++;
   } catch (error) {

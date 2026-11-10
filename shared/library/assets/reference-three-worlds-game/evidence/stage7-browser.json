@@ -1,0 +1,710 @@
+{
+  "base": "http://127.0.0.1:8765/three-worlds-game/",
+  "environment": "Chromium emulated WebGL; GPU/iPhone unverified",
+  "frameLuma": {
+    "stage7-shore": 10.715691381816951,
+    "stage7-wade-knee": 29.448726501775997,
+    "stage7-wade-waist": 36.47004519687321,
+    "stage7-wade-head": 92.08700195731434,
+    "stage7-depth": 107.90966985646214,
+    "stage7-emergent-island": 76.62305851583551
+  },
+  "shoreNaturalLuma": 10.715691381816951,
+  "wade": [
+    {
+      "name": "stage7-wade-knee",
+      "x": 60,
+      "luma": 29.448726501775997,
+      "depth": 0.12294151130903207,
+      "y": 11.512307645077774
+    },
+    {
+      "name": "stage7-wade-waist",
+      "x": 66,
+      "luma": 36.47004519687321,
+      "depth": 0.9423609036590751,
+      "y": 3.403203431369267
+    },
+    {
+      "name": "stage7-wade-head",
+      "x": 72,
+      "luma": 92.08700195731434,
+      "depth": 1,
+      "y": 2.83677658252632
+    }
+  ],
+  "shore": {
+    "ground": 3.0055555555555555,
+    "edge": 2.8066666666666666,
+    "depth": 1
+  },
+  "realShore": [
+    {
+      "x": 58,
+      "floor": 4,
+      "depth": 0
+    },
+    {
+      "x": 58.5,
+      "floor": 3.9005555555555556,
+      "depth": 0
+    },
+    {
+      "x": 59,
+      "floor": 3.801111111111111,
+      "depth": 0
+    },
+    {
+      "x": 59.5,
+      "floor": 3.7016666666666667,
+      "depth": 0
+    },
+    {
+      "x": 60,
+      "floor": 3.602222222222222,
+      "depth": 0
+    },
+    {
+      "x": 60.5,
+      "floor": 3.5027777777777778,
+      "depth": 0
+    },
+    {
+      "x": 61,
+      "floor": 3.4033333333333333,
+      "depth": 0
+    },
+    {
+      "x": 61.5,
+      "floor": 3.303888888888889,
+      "depth": 0.010590849336991332
+    },
+    {
+      "x": 62,
+      "floor": 3.2044444444444444,
+      "depth": 0.0401326017375399
+    },
+    {
+      "x": 62.5,
+      "floor": 3.105,
+      "depth": 0.07883101851851854
+    },
+    {
+      "x": 63,
+      "floor": 3.0055555555555555,
+      "depth": 0.12668609967992667
+    },
+    {
+      "x": 63.5,
+      "floor": 2.906111111111111,
+      "depth": 0.16440329218107
+    },
+    {
+      "x": 64,
+      "floor": 2.8066666666666666,
+      "depth": 0.20123456790123442
+    },
+    {
+      "x": 64.5,
+      "floor": 2.707222222222222,
+      "depth": 0.2380658436213992
+    },
+    {
+      "x": 65,
+      "floor": 2.6077777777777778,
+      "depth": 0.27489711934156363
+    },
+    {
+      "x": 65.5,
+      "floor": 2.5083333333333333,
+      "depth": 0.3117283950617284
+    },
+    {
+      "x": 66,
+      "floor": 2.408888888888889,
+      "depth": 0.34855967078189287
+    },
+    {
+      "x": 66.5,
+      "floor": 2.3094444444444444,
+      "depth": 0.38539094650205763
+    },
+    {
+      "x": 67,
+      "floor": 2.21,
+      "depth": 0.42222222222222205
+    },
+    {
+      "x": 67.5,
+      "floor": 2.110555555555556,
+      "depth": 0.45905349794238653
+    },
+    {
+      "x": 68,
+      "floor": 2.011111111111111,
+      "depth": 0.4958847736625513
+    },
+    {
+      "x": 68.5,
+      "floor": 1.9116666666666666,
+      "depth": 0.5327160493827161
+    },
+    {
+      "x": 69,
+      "floor": 1.8122222222222222,
+      "depth": 0.5695473251028805
+    },
+    {
+      "x": 69.5,
+      "floor": 1.7127777777777777,
+      "depth": 0.6063786008230453
+    },
+    {
+      "x": 70,
+      "floor": 1.6133333333333333,
+      "depth": 0.6432098765432097
+    },
+    {
+      "x": 70.5,
+      "floor": 1.5138888888888888,
+      "depth": 0.6800411522633745
+    },
+    {
+      "x": 71,
+      "floor": 1.4144444444444444,
+      "depth": 0.7168724279835389
+    },
+    {
+      "x": 71.5,
+      "floor": 1.315,
+      "depth": 0.7537037037037037
+    },
+    {
+      "x": 72,
+      "floor": 1.2155555555555555,
+      "depth": 0.7905349794238682
+    },
+    {
+      "x": 72.5,
+      "floor": 1.116111111111111,
+      "depth": 0.827366255144033
+    },
+    {
+      "x": 73,
+      "floor": 1.0166666666666666,
+      "depth": 0.8641975308641974
+    },
+    {
+      "x": 73.5,
+      "floor": 0.9172222222222222,
+      "depth": 0.9010288065843621
+    },
+    {
+      "x": 74,
+      "floor": 0.8177777777777777,
+      "depth": 0.9378600823045266
+    },
+    {
+      "x": 74.5,
+      "floor": 0.7183333333333333,
+      "depth": 0.9746913580246913
+    },
+    {
+      "x": 75,
+      "floor": 0.6188888888888888,
+      "depth": 1
+    },
+    {
+      "x": 75.5,
+      "floor": 0.5194444444444444,
+      "depth": 1
+    },
+    {
+      "x": 76,
+      "floor": 0.41999999999999993,
+      "depth": 1
+    }
+  ],
+  "play": [
+    {
+      "second": 0,
+      "name": "play/00",
+      "depth": 0.11458057290054137,
+      "population": {
+        "present": [
+          "angel_statue",
+          "angler",
+          "arch",
+          "cathedral_bell",
+          "cathedral_tower",
+          "coral_branch_orange",
+          "coral_branch_violet",
+          "glow_fish_teal",
+          "glow_fish_violet",
+          "kelp_tall",
+          "manta",
+          "seagrass",
+          "seahorse",
+          "street_lamp",
+          "treasure_chest"
+        ],
+        "missing": [
+          "galleon",
+          "whale_skeleton",
+          "anchor",
+          "cannon",
+          "kraken_tentacle",
+          "sun_rays",
+          "marine_snow",
+          "plankton"
+        ],
+        "ruins": 7,
+        "wrecks": 0,
+        "fish": 20,
+        "plants": 15
+      },
+      "bubbles": 11,
+      "guest": false
+    },
+    {
+      "second": 10,
+      "name": "play/01",
+      "depth": 0.6481481481481481,
+      "population": {
+        "present": [
+          "angel_statue",
+          "angler",
+          "arch",
+          "cathedral_bell",
+          "cathedral_tower",
+          "coral_branch_orange",
+          "coral_branch_violet",
+          "glow_fish_teal",
+          "glow_fish_violet",
+          "kelp_tall",
+          "manta",
+          "seagrass",
+          "seahorse",
+          "street_lamp",
+          "submarine_wreck",
+          "treasure_chest"
+        ],
+        "missing": [
+          "galleon",
+          "whale_skeleton",
+          "anchor",
+          "cannon",
+          "kraken_tentacle",
+          "sun_rays",
+          "marine_snow",
+          "plankton"
+        ],
+        "ruins": 8,
+        "wrecks": 1,
+        "fish": 22,
+        "plants": 18
+      },
+      "bubbles": 24,
+      "guest": false
+    },
+    {
+      "second": 20,
+      "name": "play/02",
+      "depth": 0.6481481481481481,
+      "population": {
+        "present": [
+          "angel_statue",
+          "angler",
+          "arch",
+          "cathedral_bell",
+          "cathedral_tower",
+          "coral_branch_orange",
+          "coral_branch_violet",
+          "glow_fish_teal",
+          "glow_fish_violet",
+          "kelp_tall",
+          "manta",
+          "seagrass",
+          "seahorse",
+          "street_lamp",
+          "submarine_wreck",
+          "treasure_chest"
+        ],
+        "missing": [
+          "galleon",
+          "whale_skeleton",
+          "anchor",
+          "cannon",
+          "kraken_tentacle",
+          "sun_rays",
+          "marine_snow",
+          "plankton"
+        ],
+        "ruins": 8,
+        "wrecks": 1,
+        "fish": 22,
+        "plants": 18
+      },
+      "bubbles": 19,
+      "guest": false
+    },
+    {
+      "second": 30,
+      "name": "play/03",
+      "depth": 0.6481481481481481,
+      "population": {
+        "present": [
+          "angel_statue",
+          "angler",
+          "arch",
+          "cathedral_bell",
+          "cathedral_tower",
+          "coral_branch_orange",
+          "coral_branch_violet",
+          "glow_fish_teal",
+          "glow_fish_violet",
+          "kelp_tall",
+          "manta",
+          "seagrass",
+          "seahorse",
+          "street_lamp",
+          "submarine_wreck",
+          "treasure_chest"
+        ],
+        "missing": [
+          "galleon",
+          "whale_skeleton",
+          "anchor",
+          "cannon",
+          "kraken_tentacle",
+          "sun_rays",
+          "marine_snow",
+          "plankton"
+        ],
+        "ruins": 8,
+        "wrecks": 1,
+        "fish": 22,
+        "plants": 18
+      },
+      "bubbles": 20,
+      "guest": false
+    },
+    {
+      "second": 40,
+      "name": "play/04",
+      "depth": 0.7918670420002482,
+      "population": {
+        "present": [
+          "angel_statue",
+          "angler",
+          "arch",
+          "cathedral_bell",
+          "cathedral_tower",
+          "coral_branch_orange",
+          "coral_branch_violet",
+          "glow_fish_teal",
+          "glow_fish_violet",
+          "kelp_tall",
+          "manta",
+          "seagrass",
+          "seahorse",
+          "street_lamp",
+          "submarine_wreck",
+          "treasure_chest"
+        ],
+        "missing": [
+          "galleon",
+          "whale_skeleton",
+          "anchor",
+          "cannon",
+          "kraken_tentacle",
+          "sun_rays",
+          "marine_snow",
+          "plankton"
+        ],
+        "ruins": 11,
+        "wrecks": 2,
+        "fish": 31,
+        "plants": 22
+      },
+      "bubbles": 26,
+      "guest": true
+    },
+    {
+      "second": 50,
+      "name": "play/05",
+      "depth": 0.9384824097764332,
+      "population": {
+        "present": [
+          "angel_statue",
+          "angler",
+          "arch",
+          "cathedral_bell",
+          "cathedral_tower",
+          "coral_branch_orange",
+          "coral_branch_violet",
+          "glow_fish_teal",
+          "glow_fish_violet",
+          "kelp_tall",
+          "manta",
+          "seagrass",
+          "seahorse",
+          "street_lamp",
+          "submarine_wreck",
+          "treasure_chest"
+        ],
+        "missing": [
+          "galleon",
+          "whale_skeleton",
+          "anchor",
+          "cannon",
+          "kraken_tentacle",
+          "sun_rays",
+          "marine_snow",
+          "plankton"
+        ],
+        "ruins": 11,
+        "wrecks": 2,
+        "fish": 33,
+        "plants": 27
+      },
+      "bubbles": 27,
+      "guest": true
+    },
+    {
+      "second": 60,
+      "name": "play/06",
+      "depth": 1,
+      "population": {
+        "present": [
+          "angel_statue",
+          "angler",
+          "arch",
+          "cathedral_bell",
+          "cathedral_tower",
+          "coral_branch_orange",
+          "coral_branch_violet",
+          "glow_fish_teal",
+          "glow_fish_violet",
+          "kelp_tall",
+          "manta",
+          "seagrass",
+          "seahorse",
+          "street_lamp",
+          "submarine_wreck",
+          "treasure_chest"
+        ],
+        "missing": [
+          "galleon",
+          "whale_skeleton",
+          "anchor",
+          "cannon",
+          "kraken_tentacle",
+          "sun_rays",
+          "marine_snow",
+          "plankton"
+        ],
+        "ruins": 13,
+        "wrecks": 2,
+        "fish": 38,
+        "plants": 28
+      },
+      "bubbles": 27,
+      "guest": true
+    }
+  ],
+  "populationBySeed": [
+    {
+      "present": [
+        "angel_statue",
+        "angler",
+        "arch",
+        "cathedral_bell",
+        "cathedral_tower",
+        "coral_branch_orange",
+        "coral_branch_violet",
+        "glow_fish_teal",
+        "glow_fish_violet",
+        "kelp_tall",
+        "manta",
+        "seagrass",
+        "seahorse",
+        "street_lamp",
+        "submarine_wreck",
+        "treasure_chest"
+      ],
+      "missing": [
+        "galleon",
+        "whale_skeleton",
+        "anchor",
+        "cannon",
+        "kraken_tentacle",
+        "sun_rays",
+        "marine_snow",
+        "plankton"
+      ],
+      "ruins": 18,
+      "wrecks": 2,
+      "fish": 42,
+      "plants": 26,
+      "seed": 1,
+      "relief": 5.263699365128627
+    },
+    {
+      "present": [
+        "angel_statue",
+        "angler",
+        "arch",
+        "cathedral_bell",
+        "cathedral_tower",
+        "coral_branch_orange",
+        "coral_branch_violet",
+        "glow_fish_teal",
+        "glow_fish_violet",
+        "kelp_tall",
+        "manta",
+        "seagrass",
+        "seahorse",
+        "street_lamp",
+        "submarine_wreck",
+        "treasure_chest"
+      ],
+      "missing": [
+        "galleon",
+        "whale_skeleton",
+        "anchor",
+        "cannon",
+        "kraken_tentacle",
+        "sun_rays",
+        "marine_snow",
+        "plankton"
+      ],
+      "ruins": 13,
+      "wrecks": 2,
+      "fish": 39,
+      "plants": 28,
+      "seed": 1337,
+      "relief": 5.315195140320518
+    },
+    {
+      "present": [
+        "angel_statue",
+        "angler",
+        "arch",
+        "cathedral_bell",
+        "cathedral_tower",
+        "coral_branch_orange",
+        "coral_branch_violet",
+        "glow_fish_teal",
+        "glow_fish_violet",
+        "kelp_tall",
+        "manta",
+        "seagrass",
+        "seahorse",
+        "street_lamp",
+        "submarine_wreck",
+        "treasure_chest"
+      ],
+      "missing": [
+        "galleon",
+        "whale_skeleton",
+        "anchor",
+        "cannon",
+        "kraken_tentacle",
+        "sun_rays",
+        "marine_snow",
+        "plankton"
+      ],
+      "ruins": 16,
+      "wrecks": 1,
+      "fish": 39,
+      "plants": 23,
+      "seed": 90210,
+      "relief": 5.411453292575743
+    }
+  ],
+  "bubbles": 90,
+  "dualTouch": {
+    "yaw": -1.7838074698855468,
+    "stickId": 2,
+    "camId": 3,
+    "vx": 0.8928571428571429
+  },
+  "camera": {
+    "before": {
+      "yaw": 0.3392926144540447,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 800,
+        "top": 0,
+        "right": 1280,
+        "bottom": 800,
+        "left": 0
+      },
+      "scrollX": 0,
+      "scrollY": 0
+    },
+    "after": {
+      "yaw": -0.5607073855459553,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 800,
+        "top": 0,
+        "right": 1280,
+        "bottom": 800,
+        "left": 0
+      },
+      "scrollX": 0,
+      "scrollY": 0
+    }
+  },
+  "kill": {
+    "ended": true,
+    "seed": 90210,
+    "cycle": 1,
+    "remaining": 65.84348108255654
+  },
+  "reward": {
+    "ended": true,
+    "seed": 90210,
+    "cycle": 2,
+    "remaining": 63.78999750952062
+  },
+  "path": {
+    "steps": 514,
+    "x": 142.07101087470284,
+    "z": 32,
+    "y": 14.260425457275762,
+    "sea": 3.8,
+    "health": 6,
+    "trace": [
+      [
+        90.39,
+        0.3
+      ],
+      [
+        99.13,
+        0.17
+      ],
+      [
+        107.87,
+        1.16
+      ],
+      [
+        117.94,
+        5.18
+      ],
+      [
+        132.04,
+        10.72
+      ]
+    ],
+    "ground": 14.260425457275762
+  },
+  "errors": [],
+  "result": "BROWSER_GATES_OK (NOT OWNER PASS)"
+}

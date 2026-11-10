@@ -5,7 +5,7 @@
 #bad{position:fixed;left:10px;top:10px;color:#fff;font:14px sans-serif}</style></head><body>
 <canvas id="c"></canvas><button id="m" aria-label="Меню">☰</button>
 <script>
-// Тестовая мини-игра для самопроверки ядра бота. Параметры: ?rot=1 (повёрнутая камера) | ?goals=2 (цель меняется внутри уровня) | ?fight=1 (бой у цели дольше stuckSec, урон в progress) | ?bad=fightstuck (бой без урона) | ?bad=longscroll (экран уезжает после 4 с джойстика в сумме) | ?bad=scroll | ?bad=text | ?bad=stuck | ?bad=repeat | ?bad=cheat
+// Тестовая мини-игра для самопроверки ядра бота. Параметры: ?rot=1 (повёрнутая камера) | ?goals=2 (цель меняется внутри уровня) | ?fight=1 (бой у цели дольше stuckSec, урон в progress) | ?bad=fightstuck (бой без урона) | ?bad=longscroll (экран уезжает после 4 с джойстика в сумме) | ?bad=scroll | ?bad=text | ?bad=stuck | ?bad=dead (герой погиб) | ?bad=nogoal (нет цели, герой стоит) | ?bad=repeat | ?bad=cheat
 const bad = new URLSearchParams(location.search).get('bad'), FIGHT = new URLSearchParams(location.search).get('fight') || bad==='fightstuck';
 const c = document.getElementById('c'), x = c.getContext('2d');
 const G = { started:false, level:0, levelDone:false, gameDone:false, hero:{x:0,y:0}, goal:{x:0,y:0}, walls:[], keys:{}, joy:null };
@@ -24,7 +24,7 @@ addEventListener('touchend',()=>{ G.joy=null; if(bad==='scroll') scrollTo(0,0); 
 let last=performance.now();
 function frame(t){ const dt=Math.min(.05,(t-last)/1000); last=t;
   c.width=innerWidth; c.height=innerHeight;
-  if(G.started && !G.gameDone && bad!=='stuck'){ let vx=(G.keys.KeyD?1:0)-(G.keys.KeyA?1:0), vy=(G.keys.KeyS?1:0)-(G.keys.KeyW?1:0);
+  if(G.started && !G.gameDone && bad!=='stuck' && bad!=='nogoal'){ let vx=(G.keys.KeyD?1:0)-(G.keys.KeyA?1:0), vy=(G.keys.KeyS?1:0)-(G.keys.KeyW?1:0);
     if(G.joy){ const l=Math.hypot(G.joy.dx,G.joy.dy); if(l>6){ vx=G.joy.dx/l; vy=G.joy.dy/l; } }
     if(new URLSearchParams(location.search).get('rot')) [vx,vy]=[-vy,vx];
     G.hero.x+=vx*6*dt; G.hero.y+=vy*6*dt;
@@ -44,7 +44,7 @@ window.GAME = G;
 <script>
 (function(){ const G=window.GAME;
   const bot={ version:1, info(){ return {name:'fixture',levels:3}; },
-    state(){ return {started:G.started,level:G.level,levelDone:G.levelDone,gameDone:G.gameDone,alive:true,hero:{...G.hero},goal:{...G.goal},enemies:FIGHT?(G.foe>0?1:0):1,weapons:1,layoutHash:hash(),menuOpen:false, ...(FIGHT?{progress:G.dmg}:{})}; } };
+    state(){ return {started:G.started,level:G.level,levelDone:G.levelDone,gameDone:G.gameDone,alive:!(bad==='dead'&&G.started),hero:{...G.hero},goal:bad==='nogoal'?null:{...G.goal},enemies:FIGHT?(G.foe>0?1:0):1,weapons:1,layoutHash:hash(),menuOpen:false, ...(FIGHT?{progress:G.dmg}:{})}; } };
   if (new URLSearchParams(location.search).get('bad')==='cheat') bot.teleport=()=>{ G.hero={...G.goal}; };
   if (new URLSearchParams(location.search).get('form')==='data') {
     // Форма «данные» (как у ChatGPT в PR #279/#280): геттер, уровни с 1, координаты x/z.

@@ -12,7 +12,7 @@ const browser = await chromium.launch({
 const percentile = (s, q) => s[Math.min(s.length-1,Math.ceil(s.length*q)-1)];
 const results = [];
 try {
- for (const size of sizes) for (const [version,port] of [['base',8765],['head',8766]]) {
+ for (const size of sizes) for (const [version,port] of [['base',8765],['head',8766],['head',8766],['base',8765],['base',8765],['head',8766]]) {
   const page = await browser.newPage({ viewport:size, deviceScaleFactor:1 });
   const errors = [];
   page.on('pageerror', e=>errors.push(e.message));
@@ -64,10 +64,16 @@ if(out)appendFileSync(out,summary);
 else console.log(summary);
 let failed=false;
 for(const size of sizes){
- const base=results.find(r=>r.viewport===size.name&&r.version==='base');
- const head=results.find(r=>r.viewport===size.name&&r.version==='head');
- if(!base?.fps||!head?.fps||base.errors.length||head.errors.length){failed=true;console.log('::error title=Benchmark unavailable::'+size.name+' WebGL2 run failed');continue;}
- if(head.draw>base.draw*1.05){failed=true;console.log('::error title=Draw call regression::'+size.name+': '+head.draw+' > '+base.draw);}
- if(head.p95>base.p95*1.25){failed=true;console.log('::error title=Frame time regression::'+size.name+': '+head.p95+'ms > '+base.p95+'ms');}
+ const runs=results.filter(r=>r.viewport===size.name);
+ const base=runs.filter(r=>r.version==='base').sort((a,b)=>a.p95-b.p95);
+ const head=runs.filter(r=>r.version==='head').sort((a,b)=>a.p95-b.p95);
+ if(base.length!==3||head.length!==3||runs.some(r=>!r.fps||r.errors.length)){
+  failed=true;console.log('::error title=Benchmark unavailable::'+size.name+' missing WebGL2 runs');continue;
+ }
+ const bp=base[1].p95,hp=head[1].p95;
+ const bd=base.map(r=>r.draw).sort((a,b)=>a-b)[1],hd=head.map(r=>r.draw).sort((a,b)=>a-b)[1];
+ console.log(size.name+' median p95 '+bp+' -> '+hp+'ms; draws '+bd+' -> '+hd);
+ if(hd>bd*1.05){failed=true;console.log('::error title=Draw call regression::'+size.name+': '+hd+' > '+bd);}
+ if(hp>bp*1.25){failed=true;console.log('::error title=Frame time regression::'+size.name+': '+hp+'ms > '+bp+'ms');}
 }
 if(failed)process.exitCode=1;

@@ -4,7 +4,6 @@ const { app, BrowserWindow, protocol, net, shell, session } = require('electron'
 const path = require('node:path');
 const fs = require('node:fs');
 const { pathToFileURL } = require('node:url');
-const { allowLocalGamePermission } = require('./permissions.cjs');
 
 const ORIGIN = 'app://meta-games';
 protocol.registerSchemesAsPrivileged([
@@ -53,10 +52,7 @@ app.whenReady().then(async () => {
       callback({ cancel: true });
     }
   });
-  session.defaultSession.setPermissionRequestHandler((webContents, permission, callback, details) => {
-    // Directory URLs resolve to index.html in our app:// protocol, and subframes must be local too.
-    callback(allowLocalGamePermission(webContents.getURL(),details?.requestingUrl,permission));
-  });
+  session.defaultSession.setPermissionRequestHandler((_wc, _permission, callback) => callback(false));
 
   const window = new BrowserWindow({
     width: 1280,

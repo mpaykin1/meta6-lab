@@ -3,7 +3,7 @@ import {spawn} from 'node:child_process';
 import readline from 'node:readline';
 import {approvedComponents,searchApproved,inspectApproved,getApprovedSource} from '../../shared/approved/search.mjs';
 const components=approvedComponents();
-assert.equal(components.length,5);
+assert.equal(components.length,10);
 for(const x of components){
  assert.ok(x.bytes>0&&x.lines>0);
  assert.ok(inspectApproved(x.id,1,3).lines.length>0);
@@ -24,9 +24,9 @@ function ask(method,params){
 }
 try{
  assert.equal((await ask('initialize',{})).result.serverInfo.name,'meta-games-approved-source');
- assert.equal((await ask('tools/list')).result.tools.length,4);
+ assert.equal((await ask('tools/list')).result.tools.length,9);
  const list=await ask('tools/call',{name:'list_approved_components',arguments:{}});
- assert.equal(JSON.parse(list.result.content[0].text).length,5);
+ assert.equal(JSON.parse(list.result.content[0].text).length,10);
  const denied=await ask('tools/call',{name:'inspect_approved_component',arguments:{id:'../AGENTS.md'}});
  assert.ok(denied.error);
  const result=await ask('tools/call',{name:'search_approved_code',arguments:{query:'window'}});
@@ -38,5 +38,5 @@ try{
  assert.ok(module.code.includes('ObserverBuildingAssets'));
  const deniedFull=await ask('tools/call',{name:'get_approved_component_source',arguments:{id:'../../AGENTS.md'}});
  assert.ok(deniedFull.error);
- console.log('APPROVED_SOURCE_MCP_PASS five verified originals; four tools; no unauthorized sources');
+ console.log('APPROVED_SOURCE_MCP_PASS ten verified originals; four tools; no unauthorized sources');
 }finally{proc.stdin.end();proc.kill()}

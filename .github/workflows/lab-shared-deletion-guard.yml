@@ -1,0 +1,41 @@
+name: LAB shared library deletion guard
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  protect-shared:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reject accidental removal of approved shared source
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${BASE_SHA}" || -z "${HEAD_SHA}" ]]; then
+            echo "Manual run: no PR diff to inspect."
+            exit 0
+          fi
+          git fetch --no-tags origin "${BASE_SHA}" "${HEAD_SHA}"
+          if ! git cat-file -e "${BASE_SHA}:shared/index.json" 2>/dev/null; then
+            echo "Base has no shared/index.json; restoration is allowed."
+            exit 0
+          fi
+          removed=$(git diff --name-only --diff-filter=D "${BASE_SHA}" "${HEAD_SHA}" -- shared/ || true)
+          if [[ -n "${removed}" ]]; then
+            echo "::error title=Approved library deletion::Protected shared files deleted:"
+            echo "${removed}"
+            exit 1
+          fi
+          if ! git cat-file -e "${HEAD_SHA}:shared/index.json" 2>/dev/null; then
+            echo "::error title=Library index missing::shared/index.json must remain present"
+            exit 1
+          fi
+          echo "Approved shared library files preserved."

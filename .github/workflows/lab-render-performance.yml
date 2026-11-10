@@ -31,11 +31,9 @@ jobs:
         run: |
           set -euo pipefail
           BASE_SHA="${BASE_SHA:-$(git merge-base HEAD origin/main)}"
-          mkdir -p /tmp/veil-base/games/veil-terraces
-          git show "$BASE_SHA:games/veil-terraces/index.html" >/tmp/veil-base/games/veil-terraces/index.html
-          git show "$BASE_SHA:games/veil-terraces/bot-adapter.js" >/tmp/veil-base/games/veil-terraces/bot-adapter.js
-          # Baseline retains approved audio/story dependencies from the exact base.
-          git archive "$BASE_SHA" shared/components/observer-story shared/components/observer-audio | tar -x -C /tmp/veil-base
+          mkdir -p /tmp/veil-base
+          # Keep the complete game and approved Observer dependencies from the same base.
+          git archive "$BASE_SHA" games/veil-terraces shared/components | tar -x -C /tmp/veil-base
           python3 -m http.server 8765 --bind 127.0.0.1 --directory /tmp/veil-base >/tmp/veil-base-http.log 2>&1 &
           python3 -m http.server 8766 --bind 127.0.0.1 --directory . >/tmp/veil-head-http.log 2>&1 &
           sleep 2

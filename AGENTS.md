@@ -1,7 +1,8 @@
 ## ПРОЧИТАТЬ ПЕРЕД ЛЮБОЙ РАБОТОЙ (09.11.2026)
 1. [ФИНИШ — 18 проверок, без которых проект не готов](rules/09-platforma/FINISH.md)
-2. [КОНТУР БЕЗ ОШИБОК — правила К1–К10](rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md)
+2. [КОНТУР БЕЗ ОШИБОК — правила К1–К12](rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md)
 3. [OSHIBKI.md — журнал ошибок; каждая ошибка = вечная ловушка](OSHIBKI.md)
+4. **Сначала этап 0** [плана разработки](rules/09-platforma/PLAN_RAZRABOTKI.md) (ремонт: пункты 0.9–0.11 = ошибки OSHIBKI №17–№23), потом новые пункты финиша. Правила качества кода — К12 контура (10.11.2026).
 
 Для автозадач действует automation/prompts/chatgpt-autotask.md: длинные отчёты, handoff и evidence-файлы запрещены. **Исключение владельца 09.11.2026: для META GAMES и любых PR с кодом КОНТУР БЕЗ ОШИБОК К1–К10 обязателен и автозадачам — проверки, мутации-ловушки, строки в OSHIBKI.md и охранник kontur-guard; см. rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md.** Остальные требования GRAF, abyss.md, evolve.md о тестах, отчётах и gate к автозадачам не применяются
 

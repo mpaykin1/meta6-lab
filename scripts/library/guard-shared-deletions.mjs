@@ -7,7 +7,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const git=(...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8'}).trim();
 const exists=(sha,p)=>{try{git('cat-file','-e',sha+':'+p);return true;}catch{return false;}};
 export function classifyRemoval(p){
-  if(!/^shared\\/library\\/[a-z0-9][a-z0-9-]*-copy\\.json$/.test(p))return null;
+  if(!p.startsWith('shared/library/')||!p.endsWith('-copy.json')||!/^[a-z0-9][a-z0-9-]*-copy$/.test(p.slice(15,-5)))return null;
   const name=p.slice('shared/library/'.length,-'.json'.length);
   return {name,archive:'archive/library-duplicates-2026-11-10/'+name+'.json'};
 }

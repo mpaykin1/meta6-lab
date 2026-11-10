@@ -22,7 +22,9 @@ function regions(bytes,background){
   const k=j*3;
   const delta=Math.hypot(bytes[k]-background[k],bytes[k+1]-background[k+1],
     bytes[k+2]-background[k+2]);
-  mask[j]=delta>20?1:0;
+  // The required #1a0f14 hull differs from #111720 by ~17 RGB units.
+  // Segment the hull as part of the body; excluding it invents fake joint gaps.
+  mask[j]=delta>12?1:0;
  }
  const seen=new Uint8Array(mask.length),parts=[];
  for(let j=0;j<mask.length;j++){

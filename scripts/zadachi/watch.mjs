@@ -114,8 +114,8 @@ export function apply(text,data,now) {
  const when=r=>Number.isFinite(parseT(r.last))?parseT(r.last):parseT(r.taken)||0;
  unique.sort((x,y)=>rank(x.status)-rank(y.status)||when(y)-when(x));
  const n=re=>unique.filter(r=>re.test(r.status)).length;
- const push=unique.filter(r=>/ЗАВИС|нет данных/.test(r.status)),fix=unique.filter(r=>/^⚔|^❌|ЗАКРЫТЬ/.test(r.status));
- const summary='**Итог:** 🛑 зависло '+push.length+' · ⚠ молчит '+n(/молчит/)+' · 🔨 в работе '+n(/В РАБОТЕ/)+' · 🙋 нужен Claude '+n(/НУЖЕН CLAUDE/)+' · 💤 заброшено '+n(/ЗАБРОШЕНО/)+' · ⚔ конфликт '+n(/КОНФЛИКТ/)+' · ❌ красные '+n(/КРАСНЫЕ/)+' · ✖ закрыто '+n(/ЗАКРЫТО/)+' · ✅ готово '+n(/ГОТОВО/);
+ const push=unique.filter(r=>/ЗАВИС|нет данных/.test(r.status)),fix=unique.filter(r=>/^⚔|^❌/.test(r.status));
+ const summary='**Итог:** 🛑 зависло '+push.length+' · ⚠ молчит '+n(/молчит/)+' · 🔨 в работе '+n(/В РАБОТЕ/)+' · 🙋 нужен Claude '+n(/НУЖЕН CLAUDE/)+' · 💤 заброшено '+n(/ЗАБРОШЕНО/)+' · ⚔ конфликт '+n(/КОНФЛИКТ/)+' · ❌ красные '+n(/КРАСНЫЕ/)+' · ✖ закрыть '+n(/ЗАКРЫТЬ/)+' · ✖ закрыто '+n(/ЗАКРЫТО/)+' · ✅ готово '+n(/ГОТОВО/);
  const line=r=>r.task+' ('+(noBranch(r.branch)?r.who:tick+r.branch+tick)+')';
  const repair='**Чинить сейчас:** '+(fix.length?fix.map(line).join('; '):'никого');
  const toPush='**Толкнуть сейчас:** '+(push.length?push.map(line).join('; '):'никого');

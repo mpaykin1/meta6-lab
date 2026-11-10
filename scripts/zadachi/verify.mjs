@@ -54,6 +54,14 @@ const duplicateDoc = doc([
 ]);
 const dedupRows = parseRows(apply(duplicateDoc, {repo:'o/r',pulls:{'lab/dup':pr(92)}}, now));
 ok('1.5 одна строка на ветку, все исполнители', dedupRows.length === 1 && dedupRows[0].who.includes('чат ChatGPT') && dedupRows[0].who.includes('MG-строитель-1'));
+
+const commonPrDoc=doc([
+ '| взято | prA | МГЛ | чат ChatGPT | lab/one | [#77](https://github.com/o/r/pull/77) | 2026-11-10 07:00 | — |',
+ '| взято | prB | МГЛ | MG-строитель-4 | lab/two | [#77](https://github.com/o/r/pull/77) | 2026-11-10 08:00 | — |'
+]);
+const byPr=parseRows(apply(commonPrDoc,{repo:'o/r',pulls:{}},now));
+ok('1.5 одинаковый PR при разных ветках объединён',byPr.length===1&&byPr[0].who.includes('MG-строитель-4'));
+
 r = st([row('взято', 'obsolete', 'lab/old', '2026-11-07 07:00')], {pulls:{'lab/old':pr(93, {lastCommit:now-73*H, duplicateOf:94})}});
 ok('1.6 устаревший подтверждённый дубль', /^✖ ЗАКРЫТЬ: дубль #94/.test(r.obsolete.status));
 const rich = apply(doc([row('взято','conflict','lab/dirty','2026-11-10 07:00'),row('взято','red','lab/red','2026-11-10 07:00')]),{repo:'o/r',pulls:{'lab/dirty':pr(20,{mergeable_state:'dirty'}),'lab/red':pr(21,{checkRuns:[{name:'x',conclusion:'timed_out'}]})}},now);

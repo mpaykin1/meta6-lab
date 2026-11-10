@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-10T08:59:54.732Z",
+  "generated_at": "2026-11-10T09:03:31.084Z",
   "sha": {
-    "lab": "7d59fcfb63408c3aba2c1e2e105a82fb3d92d136",
+    "lab": "bcd6651dcdf4184585c3517327867f2d584737f1",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42786734788",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42787385414",
   "review": {
     "protected": [
       {
@@ -44,13 +44,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "Investigation snapshot",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42786226409",
-        "step": "Refresh investigation snapshot from GitHub"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -280,7 +274,7 @@
   },
   "changes": {
     "lab": {
-      "count": 218,
+      "count": 221,
       "folders": ".github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1"
     },
     "mg": {

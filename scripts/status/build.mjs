@@ -2,9 +2,9 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
-const LAB = process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab';
+const LAB = process.env.STATUS_REPO || 'mpaykin1/meta6-lab';
 const MG = 'mpaykin1/meta6';
-const TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || '';
+const TOKEN = process.env.STATUS_TOKEN || process.env.GH_TOKEN || '';
 const UNKNOWN = 'нет данных';
 const ROOT = 'https://api.github.com';
 const LINK = 'https://github.com/';
@@ -395,8 +395,7 @@ export async function build() {
     generated_at: new Date().toISOString(),
     sha: { lab: labSha, mg: mgSha },
     checked: { lab: labChecked || UNKNOWN, mg: mgChecked || UNKNOWN },
-    run: process.env.GITHUB_RUN_ID ?
-      LINK + LAB + '/actions/runs/' + process.env.GITHUB_RUN_ID : UNKNOWN,
+    run: process.env.STATUS_RUN_URL || UNKNOWN,
     review: { protected: prData.protectedItems, redLab, redMg, sliyanie: sl, stalled: st },
     finish: finishSummary(json('progress.json')),
     pr: prData,

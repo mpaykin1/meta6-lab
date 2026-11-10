@@ -3,7 +3,7 @@ import {pathToFileURL} from 'node:url';
 import {resolve, dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url));
-const {apply, parseRows, START, END, resolveMergeability} = await import(pathToFileURL(resolve(process.argv[2] || resolve(here, 'watch.mjs'))).href);
+const {apply, parseRows, START, END, resolveMergeability, collect} = await import(pathToFileURL(resolve(process.argv[2] || resolve(here, 'watch.mjs'))).href);
 const now = Date.parse('2026-11-10T12:00:00Z'), H = 3600e3;
 const row = (status, task, branch, taken) => `| ${status} | ${task} | МГЛ | чат ChatGPT | ${branch} | — | ${taken} | — |`;
 const doc = rows => `# t\nСторож проверил: —\n${START}\n| Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |\n|---|---|---|---|---|---|---|---|\n${rows.join('\n')}\n${END}\nхвост\n`;
@@ -54,6 +54,37 @@ const mgOut = apply(doc([]), {repo: 'o/r', mgRepo: 'o/meta6',
 const mgRow = parseRows(mgOut).find(x => x.branch === 'lab/mg');
 ok('открытый PR из meta6 появляется как МГ и с правильной ссылкой',
   !!mgRow && mgRow.project === 'МГ' && /o\/meta6\/pull\/34/.test(mgRow.pr));
+
+// API-fixture: verifies the collector actually requests meta6 and its check-runs.
+const apiPaths = [];
+const apiFixture = path => {
+  apiPaths.push(path);
+  if (path === 'repos/o/meta6/pulls?state=open&per_page=100&page=1') {
+    return [{
+      number: 41, title: 'MG open PR', state: 'open', merged_at: null,
+      created_at: '2026-11-10T11:50:00Z', head: {ref: 'lab/mg-live', sha: 'mgsha41'},
+    }];
+  }
+  if (path === 'repos/o/meta6/pulls/41') {
+    return {mergeable: true, mergeable_state: 'clean'};
+  }
+  if (path.includes('/check-runs?')) return {check_runs: [
+    {name: 'meta6-build', conclusion: 'failure'},
+  ]};
+  if (path.includes('/commits?sha=')) {
+    return [{commit: {committer: {date: '2026-11-10T11:55:00Z'}}}];
+  }
+  return [];
+};
+const collected = collect([], {
+  repo: 'o/r', mgRepo: 'o/meta6', api: apiFixture, zanyato: [],
+});
+const actualMg = parseRows(apply(doc([]), collected, now))
+  .find(x => x.branch === 'lab/mg-live');
+ok('collector: GET meta6 open PR + check-runs and render МГ red status',
+  apiPaths.some(x => x === 'repos/o/meta6/pulls/41') &&
+  apiPaths.some(x => x.startsWith('repos/o/meta6/commits/mgsha41/check-runs?')) &&
+  actualMg?.project === 'МГ' && /КРАСНЫЕ ПРОВЕРКИ: meta6-build/.test(actualMg.status));
 
 let attempts = 0, waits = [];
 const unresolved = typeof resolveMergeability === 'function' ?

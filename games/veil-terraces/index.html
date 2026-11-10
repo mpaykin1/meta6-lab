@@ -50,7 +50,7 @@ function makeBuffer(array){
 function bindMesh(mesh){gl.bindVertexArray(mesh.vao)}
 const CHUNK=24,STEP=1.5,chunks=new Map(),renderStats={drawCalls:0,triangles:0,visibleChunks:0,culledChunks:0,visibleProps:0,culledProps:0,instancedRuins:0,qualityScale:1,fps:0,p95Ms:0,p99Ms:0};
 const frameSamples=new Float32Array(120),frustumPlanes=[],projBuffer=new V3(16),viewBuffer=new V3(16),vpBuffer=new V3(16),targetBuffer=new V3(3),desiredBuffer=new V3(3);
-const qualityBudget=window.MetaRender.frameBudget({targetMs:16.7,minScale:.85,maxScale:1});let qualityScale=1,frameIndex=0;
+const qualityBudget=window.MetaRender.frameBudget({targetMs:16.7,minScale:(Math.min(innerWidth,innerHeight)<650?.65:.85),maxScale:1});let qualityScale=1,frameIndex=0;
 Object.defineProperty(window,"__META_RENDER_STATS__",{value:()=>Object.freeze({...renderStats,loadedChunks:chunks.size}),configurable:false});function createChunk(cx,cz){let a=[],size=CHUNK/STEP;for(let iz=0;iz<size;iz++)for(let ix=0;ix<size;ix++){let x=cx*CHUNK+ix*STEP,z=cz*CHUNK+iz*STEP,y=height(x,z),yr=height(x+STEP,z),yu=height(x,z+STEP),yd=height(x+STEP,z+STEP);if(y===null||yr===null||yu===null||yd===null)continue;let c=[.09+Math.max(0,y)*.015,.23+Math.max(0,y)*.02,.27+Math.max(0,y)*.017],pts=[[x,y,z],[x+STEP,yr,z],[x,yu,z+STEP],[x+STEP,yd,z+STEP]];tri(a,pts[0],pts[2],pts[1],[0,1,0],c);tri(a,pts[1],pts[2],pts[3],[0,1,0],c);if(y>yr+.03){tri(a,pts[0],[x+STEP,yr,z],pts[1],[0,0,-1],[.05,.17,.20])}if(y>yu+.03){tri(a,pts[0],[x,yu,z+STEP],pts[2],[-1,0,0],[.05,.17,.20])}}const mesh=makeBuffer(a);mesh.min=[cx*CHUNK,-16,cz*CHUNK];mesh.max=[(cx+1)*CHUNK,22,(cz+1)*CHUNK];return mesh}
 let chunkCenter='',chunkPending=[];
 function loadChunks(x,z){
@@ -258,7 +258,7 @@ Object.defineProperty(window,'__metaGamesState',{value:()=>Object.freeze({x:p.x,
    });
  }});
 
-function resize(){const cssW=canvas.clientWidth,cssH=canvas.clientHeight,scale=Math.min(devicePixelRatio||1,1.7,Math.sqrt(520000/(cssW*cssH)))*qualityScale;let w=Math.max(1,Math.round(cssW*scale)),h=Math.max(1,Math.round(cssH*scale));if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h)}}function reset(){shardInputGuard.set(false);narrative=window.ObserverStorySystem.create();targets=generateShards();for(let q of targets)q.done=false;shards.querySelectorAll('i').forEach(e=>e.className='');p={x:0,z:0,y:(surface(0,0)??0)+.35,vx:0,vz:0,vy:0,ground:true};lastSafe={x:0,z:0};won=false;dead=false;nextShardAt=0;boostUntil=0;$('veil').style.opacity='0'}function openMenu(v){menu=v;$('menu').classList.toggle('open',v);
+function resize(){const cssW=canvas.clientWidth,cssH=canvas.clientHeight,scale=Math.min(devicePixelRatio||1,(Math.min(cssW,cssH)<650?1.5:1.7),Math.sqrt(520000/(cssW*cssH)))*qualityScale;let w=Math.max(1,Math.round(cssW*scale)),h=Math.max(1,Math.round(cssH*scale));if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h)}}function reset(){shardInputGuard.set(false);narrative=window.ObserverStorySystem.create();targets=generateShards();for(let q of targets)q.done=false;shards.querySelectorAll('i').forEach(e=>e.className='');p={x:0,z:0,y:(surface(0,0)??0)+.35,vx:0,vz:0,vy:0,ground:true};lastSafe={x:0,z:0};won=false;dead=false;nextShardAt=0;boostUntil=0;$('veil').style.opacity='0'}function openMenu(v){menu=v;$('menu').classList.toggle('open',v);
  const found=targets.filter(q=>q.done).length;
  $('story').hidden=found===0;
  $('story').textContent=found?narrative.entries.map(note=>note.long).join(' '):'';

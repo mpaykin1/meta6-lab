@@ -31,7 +31,7 @@ export function render(cards,claude=[],previous='',now=Date.now()){
  return s;
 }
 export function assertNotEmpty(tasksMarkdown,cards){
- if(/🛑|ЗАВИС/.test(tasksMarkdown)&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
+ if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
 }
 async function main(){
  const tasks=parseTasks(await fs.readFile('ZADACHI.md','utf8'));

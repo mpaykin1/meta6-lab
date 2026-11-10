@@ -6,12 +6,16 @@ import {fileURLToPath} from 'node:url';
 const DEFAULT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (root, name) => fs.readFileSync(path.join(root, name), 'utf8');
 const json = (root, name) => JSON.parse(read(root, name));
-const firstNumber = cell => {
-  const match = /\[(\d+)\]\(https:\/\/github\.com\//.exec(cell);
-  return match ? Number(match[1]) : 0;
-};
-const allNumbers = cell => [...cell.matchAll(/\[(\d+)\]\(https:\/\/github\.com\//g)]
+// Only pinned source commits count as numerical evidence; bare 0 cannot pass.
+const provenNumber = /\[(\d+)\]\(https:\/\/github\.com\/mpaykin1\/meta6-lab\/blob\/[a-f0-9]{7,40}\/[^)]+\)/g;
+const allNumbers = cell => [...cell.matchAll(provenNumber)]
   .map(match => Number(match[1]));
+const firstNumber = cell => {
+  const proven = allNumbers(cell);
+  if (proven.length) return proven[0];
+  if (/\d/.test(cell)) throw Error('BIBLIOTEKA invalid: number without pinned source link');
+  return 0; // "—" and "не подтверждено" are not measured results.
+};
 const check = (condition, message) => assert.ok(condition, 'BIBLIOTEKA invalid: ' + message);
 
 export function verifyBiblioteka(root = DEFAULT_ROOT, {strict = false} = {}) {

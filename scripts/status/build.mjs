@@ -23,7 +23,7 @@ export function prState(pr) {
 
 export function isProtectedFile(file) {
   return /^(scripts\/(meta-bot|meta-progress|kontur)\/|\.github\/workflows\/)/.test(file) ||
-    /(^|\/)(meta-games-guard[^/]*|selftest[^/]*|test[^/]*\.(mjs|js|py))$/.test(file);
+    /(^|\/)(meta-games-guard[^/]*|selftest[^/]*|test[^/]*\.(mjs|js|py)|verify-[^/]*|mutate-[^/]*|[^/]*\.spec\.(mjs|js|ts))$/.test(file);
 }
 
 export function progressMark(progress, id) {
@@ -136,6 +136,37 @@ async function prFiles(number) {
   return data.map(row => row.filename);
 }
 
+async function graphqlConflictCount() {
+  let after = null;
+  let conflicts = 0;
+  for (let page = 0; page < 10; page++) {
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        authorization: 'Bearer ' + TOKEN,
+        accept: 'application/vnd.github+json',
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: 'query($after:String){repository(owner:"mpaykin1",name:"meta6-lab"){' +
+          'pullRequests(first:100,states:OPEN,after:$after){nodes{mergeable}' +
+          'pageInfo{hasNextPage,endCursor}}}}',
+        variables: { after }
+      }),
+      signal: AbortSignal.timeout(20000)
+    });
+    if (!response.ok) throw new Error('GraphQL ' + response.status);
+    const result = await response.json();
+    const prs = result.data?.repository?.pullRequests;
+    if (!prs || result.errors?.length) throw new Error('GraphQL pull requests unavailable');
+    if (prs.nodes.some(pr => pr.mergeable === 'UNKNOWN')) throw new Error('Mergeability unknown');
+    conflicts += prs.nodes.filter(pr => pr.mergeable === 'CONFLICTING').length;
+    if (!prs.pageInfo.hasNextPage) return conflicts;
+    after = prs.pageInfo.endCursor;
+  }
+  throw new Error('Too many pull request pages');
+}
+
 async function prSummary(all, since) {
   if (!Array.isArray(all)) return { open: UNKNOWN, conflicts: UNKNOWN, merged: UNKNOWN,
     closed: UNKNOWN, mergedItems: [], protectedItems: [] };
@@ -143,12 +174,7 @@ async function prSummary(all, since) {
   const newer = since ? all.filter(pr => pr.closed_at && Date.parse(pr.closed_at) > Date.parse(since)) : [];
   const merged = newer.filter(pr => prState(pr) === 'merged');
   const closed = newer.filter(pr => prState(pr) === 'closed');
-  let conflicts = 0;
-  let unknownMergeability = 0;
-  for (const pr of open) {
-    if (pr.mergeable_state === 'dirty' || pr.mergeable === false) conflicts++;
-    else if (pr.mergeable_state == null && pr.mergeable == null) unknownMergeability++;
-  }
+  const conflicts = await safeSection(graphqlConflictCount);
   const protectedItems = [];
   for (const pr of merged) {
     const paths = await safeSection(() => prFiles(pr.number));
@@ -163,7 +189,7 @@ async function prSummary(all, since) {
   }
   return {
     open: open.length,
-    conflicts: unknownMergeability ? UNKNOWN : conflicts,
+    conflicts,
     merged: since ? merged.length : UNKNOWN,
     closed: since ? closed.length : UNKNOWN,
     mergedItems: merged.map(pr => ({
@@ -231,10 +257,12 @@ async function lastBotGameStates() {
   if (!run) return {};
   const jobs = await request('/repos/' + LAB + '/actions/runs/' + run.id + '/jobs?per_page=50');
   const gameResults = {};
+  let readable = false;
   for (const job of jobs.jobs || []) {
     const log = await safeSection(() =>
       request('/repos/' + LAB + '/actions/jobs/' + job.id + '/logs', 'text'));
     if (log === UNKNOWN) continue;
+    readable = true;
     let current = null;
     for (const line of log.split('\n')) {
       const name = line.match(/▶\s+(games\/[a-z0-9-]+)/i);
@@ -243,6 +271,7 @@ async function lastBotGameStates() {
       if (current && result) gameResults[current].push(result[1] === '✅');
     }
   }
+  if (!readable) throw new Error('META BOT logs unavailable');
   return gameResults;
 }
 

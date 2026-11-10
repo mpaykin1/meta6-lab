@@ -24,7 +24,7 @@
 - SHA: `6d3bb2055de85e8fa621fc1c2e4dad74746f55fa` · последний коммит: 2026-11-10T09:15:20Z
 - Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42789178253/job/129737932502)
 - Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42789178253/job/129737932502 и повтори CI.
-- Взял: —
+- Взял: MG-строитель-2 2026-11-10T10:19:40Z
 
 ### PR #208
 - PR: https://github.com/mpaykin1/meta6-lab/pull/208

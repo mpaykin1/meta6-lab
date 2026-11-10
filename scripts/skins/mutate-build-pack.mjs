@@ -43,5 +43,6 @@ await test('старый PNG в готовом пакете',t=>{
  const rel=Object.keys(m.source.assets).find(x=>x.startsWith('parts/'));
  fs.writeFileSync(path.join(t.pack,rel),'old asset from another build');
  fs.copyFileSync(path.join(t.src,'cut-preview.png'),path.join(t.pack,'preview.png'));
+ fs.copyFileSync(path.join(t.src,'cut-preview.png'),path.join(t.pack,'turntable.png'));
 },{afterBuild:true,finish:true});
 console.log('К5: шесть ловушек сборщика сработали');

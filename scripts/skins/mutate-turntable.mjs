@@ -29,7 +29,8 @@ function fixture(){
   parts.push({id:prefix,layer:'3d',kind:'plate',bone,
    primitive:bone==='head'?'sphere':'box',dims,offset,rotation:[0,0,0],
    material:'rust',outline:true,faces:Object.fromEntries(
-    ['right','left','top','bottom','back','front'].map(side=>[side,'textures/'+prefix+'-'+side+'.png']))});
+    ['right','left','top','bottom','back','front',...(bone==='head'?['panorama']:[])].map(side=>
+     [side,'textures/'+prefix+'-'+side+'.png']))});
   parts.push({id:prefix+'-front-art',layer:'2.5d',kind:'plate',bone,
     file:'parts/'+bone+'.png'});
  }

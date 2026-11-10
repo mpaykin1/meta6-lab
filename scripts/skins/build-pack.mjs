@@ -199,6 +199,24 @@ async function bakeFaces(tmp,bone,source,palette){
  return faces;
 }
 
+async function bakeSpherePanorama(tmp,faces){
+ // True 360-degree painted material: preserve six independently baked surfaces.
+ // SphereGeometry U positions: left 0, back .25, right .50, front .75.
+ const strips=[];
+ for(const [index,face] of ['left','back','right','front'].entries()){
+  const input=await sharp(path.join(tmp,faces[face])).resize(64,64,{kernel:'nearest'}).png().toBuffer();
+  strips.push({input,left:index*64,top:32});
+ }
+ for(const [face,top] of [['top',0],['bottom',96]]){
+  const input=await sharp(path.join(tmp,faces[face])).resize(256,32,{kernel:'nearest'}).png().toBuffer();
+  strips.push({input,left:0,top});
+ }
+ const rel='textures/volume-head-panorama.png';
+ await sharp({create:{width:256,height:128,channels:4,background:'#1a0f14'}})
+  .composite(strips).png({palette:false}).toFile(path.join(tmp,rel));
+ return rel;
+}
+
 async function main(){
  if(finish){
   if(!fs.existsSync(path.join(target,'preview.png'))||!fs.existsSync(path.join(target,'turntable.png')))
@@ -258,6 +276,7 @@ async function main(){
     const source=owned.find(p=>p.kind==='plate')||owned[0];
     const reference=source.file;
     const faces=await bakeFaces(tmp,bone,reference,meta.palette);
+    if(bone==='head')faces.panorama=await bakeSpherePanorama(tmp,faces);
     const solid={id:'volume-'+bone,kind:'plate',layer:'3d',bone,
       primitive:bone==='head'?'sphere':'box',dims:spec.dims,size:spec.dims.slice(0,2),
       offset:spec.offset,rotation:[0,0,0],depth:3,material:'rust',faces,

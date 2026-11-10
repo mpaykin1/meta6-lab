@@ -82,7 +82,16 @@ async function load(url,THREE){
      materials=order.map(face=>new THREE.MeshBasicMaterial({
       map:cache.get(p.faces[face]),color:0xffffff,side:THREE.FrontSide}));
      mat.dispose();mat=materials[0];
-     mesh=new THREE.Mesh(geometry(p),p.primitive==="sphere"?materials[5]:materials);
+     if(p.primitive==="sphere"){
+      // Head receives its own right/left/back/top/bottom artwork, not the front
+      // face pasted onto the full sphere. The atlas is baked by build-pack.
+      const tex360=cache.get(p.faces.panorama);
+      if(!tex360)throw Error("Missing sphere panorama: "+p.id);
+      tex360.wrapS=THREE.RepeatWrapping;tex360.offset.x=.125;tex360.needsUpdate=true;
+      for(const m of materials)m.dispose();
+      mat=new THREE.MeshBasicMaterial({map:tex360,color:0xffffff,side:THREE.FrontSide});
+      materials=[mat];mesh=new THREE.Mesh(geometry(p),mat);
+     }else mesh=new THREE.Mesh(geometry(p),materials);
     }else{
      mesh=new THREE.Mesh(geometry(p),mat);
     }

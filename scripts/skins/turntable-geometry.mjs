@@ -28,6 +28,8 @@ export function inspectGeometry(manifest){
    fail('emissiveMap or glow on armor '+bone);
   if(!p.faces||DIM.some(f=>!p.faces[f]||!p.faces[f].startsWith('textures/')))
    fail('missing baked independent faces '+bone);
+  if(bone==='head'&&!p.faces.panorama?.startsWith('textures/'))
+   fail('sphere must carry a separate 360 degree texture atlas');
   const front=manifest.parts.find(x=>x.id===p.id+'-front-art');
   if(!front?.file||front.layer!=='2.5d')fail('front artwork must be embossed '+bone);
   if(['left','right','back'].some(f=>p.faces[f]===front.file||

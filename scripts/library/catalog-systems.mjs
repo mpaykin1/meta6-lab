@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import {createRequire} from 'node:module';
 import {ROOT,discover,walk,rangeBytes} from './machine.mjs';
 import {isOriginalGameSource,codeSourceType,MIN_SYSTEM_LINES} from './source-policy.mjs';
+import {linkedAssets} from './asset-links.mjs';
 
 const acorn=createRequire(new URL('./mcp-test/package.json',import.meta.url))('acorn');
 const scanErrors=[];
@@ -149,9 +150,39 @@ export function buildCatalog(root=ROOT,requested){
   const code=e.lines.map(r=>cache.get(r.source_path).split('\n').slice(r.start-1,r.end).join('\n')).join('\n');
   e.depends_on=entries.filter(other=>other.game===e.game&&other.id!==e.id&&other._names.some(n=>code.includes(n+'('))).map(x=>x.id);
  }
+
+ const dest=path.join(root,'shared/library/catalog-solutions.json');
+ // Preserve an unextractable legacy system as an explicitly non-standalone record,
+ // provided its exact original bytes still match. Never silently lose provenance.
+ const previous=fs.existsSync(dest)?JSON.parse(fs.readFileSync(dest,'utf8')).solutions||[]:[];
+ const existing=new Set(entries.map(e=>e.id));
+ for(const old of previous){
+  if(existing.has(old.id)||!sources.some(source=>source.game===old.game))continue;
+  try{
+   const bytes=Buffer.concat(old.lines.map(r=>rangeBytes(
+    fs.readFileSync(path.join(root,r.source_path),'utf8'),r.start,r.end)));
+   if(digest(bytes)!==old.sha256)continue;
+   entries.push({...old,load_ok:false,standalone:false,load_evidence:null,
+    load_error:'No complete standalone Acorn declaration could be extracted from original ranges',
+    _names:[]});
+   existing.add(old.id);
+  }catch(error){
+   scanErrors.push({source_path:old.source_path,reason:'Stale legacy range: '+error.message});
+  }
+ }
+ const assetIndex=path.join(root,'shared/library/index.json');
+ const indexedAssets=fs.existsSync(assetIndex)?
+  JSON.parse(fs.readFileSync(assetIndex,'utf8')).entries||[]:[];
+ for(const entry of entries){
+  const code=entry.lines.map(r=>rangeBytes(
+   fs.readFileSync(path.join(root,r.source_path),'utf8'),r.start,r.end).toString('utf8')).join('\n');
+  const links=linkedAssets(code,entry.game,indexedAssets);
+  entry.asset_ids=links.ids;
+  entry.unresolved_assets=links.unresolved;
+  if(entry.standalone===undefined)entry.standalone=true;
+ }
  for(const e of entries)delete e._names;
  const result={schema_version:1,minimum_system_lines:MIN_SYSTEM_LINES,game_count:sources.length,solution_count:entries.length,scan_errors:scanErrors,solutions:entries};
- const dest=path.join(root,'shared/library/catalog-solutions.json');
  fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,JSON.stringify(result,null,2)+'\n');
  return result;
 }

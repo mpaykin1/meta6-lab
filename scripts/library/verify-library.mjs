@@ -66,9 +66,20 @@ export function verifyLibrary(root=ROOT,{live=true}={}){
   const expected=expectedGames(root);
   if(!Array.isArray(index.games)||JSON.stringify(index.games.map(x=>x.game).sort())!==JSON.stringify(expected.map(x=>x.game).sort()))fail('missing, extra or hardcoded games in global index');
   if(index.copy_limit_bytes!==LIMIT)fail('copy budget changed');
-  const present=fs.readdirSync(directory).filter(x=>x.endsWith('.json')&&x!=='index.json'&&!x.endsWith('-copy.json')).sort();
-  const wanted=expected.map(x=>x.game+'.json').sort();
-  if(JSON.stringify(present)!==JSON.stringify(wanted))fail('stale or missing manifest');
+  const protectedFiles=fs.readdirSync(directory).filter(x=>x.endsWith('-copy.json')).sort();
+  const excluded=protectedFiles.map(file=>{
+    const game=file.slice(0,-5),duplicateOf=game.slice(0,-5),archive=read(path.join(directory,file));
+    if(archive.game!==game||archive.source_root!=='games/'+game||
+      !expected.some(item=>item.game===duplicateOf))fail('invalid protected duplicate manifest: '+file);
+    return {game,duplicateOf,manifest:'shared/library/'+file,excluded:true};
+  });
+  if(JSON.stringify(index.excluded_games)!==JSON.stringify(excluded))fail('stale protected-copy exclusion list');
+  const present=fs.readdirSync(directory).filter(x=>x.endsWith('.json')&&x!=='index.json').sort();
+  const wanted=[...expected.map(x=>x.game+'.json'),...protectedFiles].sort();
+  if(JSON.stringify(present)!==JSON.stringify(wanted))fail('stale, removed or unregistered manifest');
+  if(index.games.some(x=>excluded.some(e=>e.game===x.game))||
+    index.entries.some(x=>excluded.some(e=>e.game===x.game)))
+    fail('excluded copy leaked into the published library');
   const entries=[],copyPaths=new Set(),copyHashes=new Set(),ids=new Set(),summary=[];
   let copiedBytes=0;
   for(const exp of expected){

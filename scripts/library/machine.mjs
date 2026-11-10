@@ -151,10 +151,17 @@ export function buildLibrary(root=ROOT){
     m.counts={assets:m.assets.length,file_assets:m.assets.filter(a=>a.bytes!==undefined).length,solutions:m.solutions.length};
   }
   fs.mkdirSync(target,{recursive:true});
-  const current=new Set(manifests.map(m=>m.game+'.json'));
-  for(const file of fs.readdirSync(target))if(file.endsWith('.json')&&file!=='index.json'&&!file.endsWith('-copy.json')&&!current.has(file))fs.rmSync(path.join(target,file));
+  const archive=fs.readdirSync(target).filter(file=>file.endsWith('-copy.json')).sort().map(file=>{
+    const game=file.slice(0,-5),duplicateOf=game.slice(0,-5);
+    const archived=JSON.parse(fs.readFileSync(path.join(target,file),'utf8'));
+    if(archived.game!==game||archived.source_root!=='games/'+game||
+      !manifests.some(item=>item.game===duplicateOf))throw Error('Invalid protected copy manifest: '+file);
+    return {game,duplicateOf,manifest:'shared/library/'+file,excluded:true};
+  });
+  const current=new Set([...manifests.map(m=>m.game+'.json'),...archive.map(x=>path.basename(x.manifest))]);
+  for(const file of fs.readdirSync(target))if(file.endsWith('.json')&&file!=='index.json'&&!current.has(file))fs.rmSync(path.join(target,file));
   for(const m of manifests)save(path.join(target,m.game+'.json'),m);
-  const index={schema_version:1,copy_limit_bytes:LIMIT,copied_bytes:copied,
+  const index={schema_version:1,copy_limit_bytes:LIMIT,copied_bytes:copied,excluded_games:archive,
     games:manifests.map(m=>({game:m.game,source_root:m.source_root,manifest:'shared/library/'+m.game+'.json',...m.counts})),
     entries:manifests.flatMap(m=>[...m.assets,...m.solutions].map(({id,game,kind,name,purpose,source_path,lines,file,sha256})=>({id,game,kind,...(name?{name}:{}),purpose:purpose||[],source_path,sha256,...(lines?{lines}:{}),...(file?{file}:{})})))};
   save(path.join(target,'index.json'),index);

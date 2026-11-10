@@ -42,7 +42,7 @@ jobs:
         run: node scripts/library/extract-all.mjs
       - name: Verify independent file inventory, hashes and live additions/removals
         run: node scripts/library/verify-library.mjs
-      - name: Run five persistent deceptive mutations
+      - name: Run persistent mutations, including protected archives and catalog exclusions
         run: node scripts/library/mutate-library.mjs
       - name: Check PR catalog is committed
         if: github.event_name == 'pull_request'

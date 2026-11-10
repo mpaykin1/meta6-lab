@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {ROOT,buildLibrary} from './machine.mjs';
 import {makeFixture,verifyLibrary} from './verify-library.mjs';
+import {searchLibrary} from './search.mjs';
 
 const read=file=>JSON.parse(fs.readFileSync(file,'utf8'));
 const write=(file,data)=>fs.writeFileSync(file,JSON.stringify(data,null,2)+'\n');
@@ -60,6 +61,36 @@ const scenarios=[
     // A protected copy manifest may stay on disk. It must never enter the global search index.
     const ix=path.join(root,'shared/library/index.json'),index=read(ix);
     index.entries.push({...index.entries[0],game:'base-copy'});
+    write(ix,index);
+  }],
+  ['deception-archived-copy-leaked-to-catalog',root=>{
+    fs.cpSync(path.join(root,'games/base'),path.join(root,'games/base-copy'),{recursive:true});
+    const source=read(path.join(root,'shared/library/base.json'));
+    write(path.join(root,'shared/library/base-copy.json'),
+      {...source,game:'base-copy',source_root:'games/base-copy'});
+    buildLibrary(root);
+    const ix=path.join(root,'shared/library/index.json'),index=read(ix);
+    if(searchLibrary({game:'base-copy'},root).total!==0)
+      throw Error('Excluded archived copy visible before mutation');
+    index.entries.push({...index.entries[0],game:'base-copy'});
+    write(ix,index);
+  }],
+  ['protected-shared-copy-manifest-removed',root=>{
+    fs.cpSync(path.join(root,'games/base'),path.join(root,'games/base-copy'),{recursive:true});
+    const source=read(path.join(root,'shared/library/base.json'));
+    const archive=path.join(root,'shared/library/base-copy.json');
+    write(archive,{...source,game:'base-copy',source_root:'games/base-copy'});
+    buildLibrary(root);
+    fs.rmSync(archive);
+  }],
+  ['deception-excluded-copy-flag-disabled',root=>{
+    fs.cpSync(path.join(root,'games/base'),path.join(root,'games/base-copy'),{recursive:true});
+    const source=read(path.join(root,'shared/library/base.json'));
+    write(path.join(root,'shared/library/base-copy.json'),
+      {...source,game:'base-copy',source_root:'games/base-copy'});
+    buildLibrary(root);
+    const ix=path.join(root,'shared/library/index.json'),index=read(ix);
+    index.excluded_games[0].excluded=false;
     write(ix,index);
   }],
   ['missing-file-asset-with-cleaned-index',root=>{

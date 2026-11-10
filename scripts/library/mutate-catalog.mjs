@@ -12,6 +12,12 @@ const scenarios=[
  ['missing-dependency',(root,entry)=>{entry.depends_on=['demo:missing'];}],
  ['truncated-sha',(root,entry)=>{entry.lines[0].end=29;}],
  ['assemble-writes-main',(root,entry)=>{entry.assembly_target='main';}],
+ ['matched-hash-but-invalid-syntax',(root,entry)=>{
+  const file=path.join(root,'games/demo/index.js');
+  const changed=sample.replace('function cameraStep0()','function cameraStep0(');
+  fs.writeFileSync(file,changed);
+  entry.sha256=sha(Buffer.from(changed));
+ }],
  ['missing-referenced-asset',(root,entry)=>{entry.asset_ids=[];}],
  ['invented-asset',(root,entry)=>{entry.asset_ids=['fake-id'];}],
  ['deceptive-all-unloadable',(root,entry,catalog)=>{

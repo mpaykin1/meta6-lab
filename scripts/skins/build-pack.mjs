@@ -197,6 +197,13 @@ async function main(){
   if(!fs.existsSync(path.join(target,'preview.png'))||!fs.existsSync(path.join(target,'turntable.png')))
     fail('нет настоящего Chrome-превью и листа turntable.png; ZIP запрещён');
   const m=JSON.parse(fs.readFileSync(path.join(target,'skin.json'),'utf8'));
+  const turnMeta=path.join(src,'turntable-meta.json');
+  if(!fs.existsSync(turnMeta))fail('нет подтверждённых восьми ракурсов Chrome');
+  const capture=JSON.parse(fs.readFileSync(turnMeta,'utf8'));
+  if(capture.manifest!==sha(path.join(target,'skin.json'))||
+   capture.image!==sha(path.join(target,'turntable.png'))||
+   capture.views?.join(',')!=='0,45,90,135,180,225,270,315')
+   fail('устаревший, чужой или неподтверждённый Chrome turntable');
   if(m.source?.sheetSha256!==sha(path.join(src,'parts-sheet.png'))||m.source?.tableSha256!==sha(path.join(src,'parts-sheet.md')))
     fail('ОБМАН: пакет собран из устаревшего листа');
   if(!Object.keys(m.source?.assets||{}).length)fail('ОБМАН: отсутствуют контрольные суммы скина');

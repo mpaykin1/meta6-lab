@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "sunken-city-owner-reference",
+  "name": "Затонувший город",
+  "type": "owner-supplied-graphics-animation-reference",
+  "source_uploads": [
+    "water(1).html",
+    "Затонувший город(3).md"
+  ],
+  "source_sha256": "431841ee19b61280f6d92d761f566abc30e6862af22c7a1672fbc983b2078116",
+  "source_bytes": 9460050,
+  "assembly": "19 ordered JavaScript chunks containing lossless slices of the original standalone HTML; index.html reconstructs it in-browser for offline and hosted playback.",
+  "entry": "index.html",
+  "lore": "lore.md",
+  "source_parts": "chunks/",
+  "owner_authorization": "2026-11-08: uploaded by owner explicitly as META GAMES reference",
+  "third_party_rights": "unreviewed; retain upstream copyright/licensing notices; do not assume redistribution of third-party assets is separately licensed",
+  "do_not_modify_original": true
+}

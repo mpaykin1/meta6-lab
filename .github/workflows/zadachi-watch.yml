@@ -1,0 +1,48 @@
+name: ZADACHI watch
+# Файл Claude, 10.11.2026. Сторож без ИИ: ведёт ZADACHI.md — таблицу всех задач ChatGPT по МГ и МГЛ.
+# Статус берётся из GitHub (PR слит / закрыт / время последнего коммита), а не со слов агента.
+# ChatGPT этот файл и scripts/zadachi/ не меняет.
+on:
+  schedule:
+    - cron: '11,41 * * * *'
+  push:
+    branches: [main]
+    paths: ['ZADACHI.md']
+  pull_request_target:
+    types: [opened, closed]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: read
+concurrency:
+  group: zadachi-watch
+  cancel-in-progress: false
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Self-test and traps
+        run: node scripts/zadachi/verify.mjs && node scripts/zadachi/mutate.mjs
+      - name: Update ZADACHI.md from GitHub
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            node scripts/zadachi/watch.mjs | tee /tmp/z.log
+            tail -1 /tmp/z.log >> "$GITHUB_STEP_SUMMARY"
+            git diff --quiet && { echo "no changes"; exit 0; }
+            git config user.name 'zadachi-watch'; git config user.email 'actions@users.noreply.github.com'
+            git commit -qam "ZADACHI: $(tail -1 /tmp/z.log | tr -d '*' | cut -c1-110)"
+            git push -q origin HEAD:main && exit 0
+            git fetch -q origin main && git reset -q --hard origin/main
+          done
+          exit 1

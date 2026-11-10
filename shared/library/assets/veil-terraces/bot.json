@@ -1,0 +1,25 @@
+{
+  "entry": "index.html",
+  "levelTimeoutSec": 180,
+  "stuckSec": 20,
+  "fpsBaseline": 0,
+  "viewports": [
+    "mobile",
+    "desktop"
+  ],
+  "skipChecks": [],
+  "moveKeys": {
+    "up": "KeyW",
+    "down": "KeyS",
+    "left": "KeyA",
+    "right": "KeyD"
+  },
+  "joystick": {
+    "x": 0.18,
+    "y": 0.8,
+    "r": 0.09
+  },
+  "jumpKey": "Space",
+  "jumpButton": null,
+  "ignoreConsole": []
+}

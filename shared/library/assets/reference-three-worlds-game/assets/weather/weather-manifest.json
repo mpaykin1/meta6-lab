@@ -1,0 +1,1984 @@
+{
+ "presets": [
+  {
+   "id": "autumn_leaves",
+   "name": "Осенний листопад",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#1e274d",
+    "skyHorizon": "#bb6f79",
+    "ambient": "#8497b8",
+    "sun": "#ffcc83",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "maple",
+    "spriteAtlas": "2d/atlases/maple_8f.png",
+    "2_5d": "2_5d/atlases/maple_8dir_8f.png",
+    "3d": "3d/glb/autumn_leaf.glb",
+    "particles": {
+     "mobile": 36,
+     "desktop": 126
+    },
+    "screenEffect": "",
+    "direction": "swirl",
+    "glow": false,
+    "groundDecal": "leaf_litter"
+   },
+   "event": "weather:autumn_leaves",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "flower_wind_white",
+   "name": "Белый цветочный ветер",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "rose_white",
+    "spriteAtlas": "2d/atlases/rose_white_8f.png",
+    "2_5d": "2_5d/atlases/rose_white_8dir_8f.png",
+    "3d": "3d/glb/rose_petal.glb",
+    "particles": {
+     "mobile": 42,
+     "desktop": 150
+    },
+    "screenEffect": "",
+    "direction": "swirl",
+    "glow": false
+   },
+   "event": "weather:flower_wind_white",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "flower_wind_red",
+   "name": "Красный цветочный ветер",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "rose_red",
+    "spriteAtlas": "2d/atlases/rose_red_8f.png",
+    "2_5d": "2_5d/atlases/rose_red_8dir_8f.png",
+    "3d": "3d/glb/rose_petal.glb",
+    "particles": {
+     "mobile": 42,
+     "desktop": 150
+    },
+    "screenEffect": "",
+    "direction": "swirl",
+    "glow": false
+   },
+   "event": "weather:flower_wind_red",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "flower_wind_black",
+   "name": "Чёрный цветочный ветер",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "rose_black",
+    "spriteAtlas": "2d/atlases/rose_black_8f.png",
+    "2_5d": "2_5d/atlases/rose_black_8dir_8f.png",
+    "3d": "3d/glb/rose_petal.glb",
+    "particles": {
+     "mobile": 42,
+     "desktop": 150
+    },
+    "screenEffect": "",
+    "direction": "swirl",
+    "glow": false
+   },
+   "event": "weather:flower_wind_black",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "flower_wind_pink",
+   "name": "Розовый цветочный ветер",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "rose_pink",
+    "spriteAtlas": "2d/atlases/rose_pink_8f.png",
+    "2_5d": "2_5d/atlases/rose_pink_8dir_8f.png",
+    "3d": "3d/glb/rose_petal.glb",
+    "particles": {
+     "mobile": 42,
+     "desktop": 150
+    },
+    "screenEffect": "",
+    "direction": "swirl",
+    "glow": false
+   },
+   "event": "weather:flower_wind_pink",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "flower_wind_rainbow",
+   "name": "Разноцветный цветочный ветер",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "rose_rainbow",
+    "spriteAtlas": "2d/atlases/rose_rainbow_8f.png",
+    "2_5d": "2_5d/atlases/rose_rainbow_8dir_8f.png",
+    "3d": "3d/glb/rose_petal.glb",
+    "particles": {
+     "mobile": 42,
+     "desktop": 150
+    },
+    "screenEffect": "",
+    "direction": "swirl",
+    "glow": false
+   },
+   "event": "weather:flower_wind_rainbow",
+   "gameplayHook": "wet"
+  },
+  {
+   "id": "snowfall",
+   "name": "Снегопад",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#1d3454",
+    "skyHorizon": "#c8def4",
+    "ambient": "#8497b8",
+    "sun": "#bcd4e8",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "snow",
+    "spriteAtlas": "2d/atlases/snow_8f.png",
+    "2_5d": "2_5d/atlases/snow_8dir_8f.png",
+    "3d": "3d/glb/ice_crystal.glb",
+    "particles": {
+     "mobile": 36,
+     "desktop": 126
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false,
+    "groundDecal": "snow_cover"
+   },
+   "event": "weather:snowfall",
+   "gameplayHook": "temperature"
+  },
+  {
+   "id": "sea_fog",
+   "name": "Морской туман",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#1e274d",
+    "skyHorizon": "#bb6f79",
+    "ambient": "#8497b8",
+    "sun": "#ffcc83",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "bubble",
+    "spriteAtlas": "2d/atlases/bubble_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "fog_banks",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:sea_fog",
+   "gameplayHook": "visibility"
+  },
+  {
+   "id": "sunbeams",
+   "name": "Солнечные лучи",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#1e274d",
+    "skyHorizon": "#bb6f79",
+    "ambient": "#8497b8",
+    "sun": "#ffcc83",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "pollen",
+    "spriteAtlas": "2d/atlases/pollen_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "godrays",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:sunbeams",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "hail",
+   "name": "Град",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#1e274d",
+    "skyHorizon": "#bb6f79",
+    "ambient": "#8497b8",
+    "sun": "#ffcc83",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "hail",
+    "spriteAtlas": "2d/atlases/hail_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:hail",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "strong_wind",
+   "name": "Сильный ветер",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#1e274d",
+    "skyHorizon": "#bb6f79",
+    "ambient": "#8497b8",
+    "sun": "#ffcc83",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "dust",
+    "spriteAtlas": "2d/atlases/dust_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:strong_wind",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "overcast",
+   "name": "Пасмурное небо",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#1e274d",
+    "skyHorizon": "#bb6f79",
+    "ambient": "#8497b8",
+    "sun": "#ffcc83",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "rain",
+    "spriteAtlas": "2d/atlases/rain_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 48,
+     "desktop": 168
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:overcast",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "after_rain",
+   "name": "После ливня",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#254361",
+    "skyHorizon": "#f1ad7b",
+    "ambient": "#8497b8",
+    "sun": "#fff1b2",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "rain",
+    "spriteAtlas": "2d/atlases/rain_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 48,
+     "desktop": 168
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false,
+    "groundDecal": "wet_stone"
+   },
+   "event": "weather:after_rain",
+   "gameplayHook": "wet"
+  },
+  {
+   "id": "sea_storm",
+   "name": "Морская буря",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#1e274d",
+    "skyHorizon": "#bb6f79",
+    "ambient": "#8497b8",
+    "sun": "#ffcc83",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "bubble",
+    "spriteAtlas": "2d/atlases/bubble_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:sea_storm",
+   "gameplayHook": "visibility"
+  },
+  {
+   "id": "rainbow",
+   "name": "Радуга",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#1e274d",
+    "skyHorizon": "#bb6f79",
+    "ambient": "#8497b8",
+    "sun": "#ffcc83",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "silver",
+    "spriteAtlas": "2d/atlases/silver_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "rainbow_arc",
+    "direction": "fall",
+    "glow": false,
+    "groundDecal": "puddle"
+   },
+   "event": "weather:rainbow",
+   "gameplayHook": "wet"
+  },
+  {
+   "id": "frost_morning",
+   "name": "Морозное утро",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#29485a",
+    "skyHorizon": "#abc1d4",
+    "ambient": "#8497b8",
+    "sun": "#d8f9ff",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "snow",
+    "spriteAtlas": "2d/atlases/snow_8f.png",
+    "2_5d": "2_5d/atlases/snow_8dir_8f.png",
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false,
+    "groundDecal": "ice_crust"
+   },
+   "event": "weather:frost_morning",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "cloud_shadows",
+   "name": "Тени облаков",
+   "category": "realistic",
+   "durationSeconds": [
+    55,
+    210
+   ],
+   "transitionSeconds": 4,
+   "weight": 7,
+   "ambientLighting": {
+    "skyTop": "#1e274d",
+    "skyHorizon": "#bb6f79",
+    "ambient": "#8497b8",
+    "sun": "#ffcc83",
+    "fog": "#606378",
+    "fogDensity": 0.016,
+    "exposure": 1.0
+   },
+   "effects": {
+    "sprite": "dust",
+    "spriteAtlas": "2d/atlases/dust_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "cloud_shadow",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:cloud_shadows",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "aurora",
+   "name": "Северное сияние",
+   "category": "rare",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 3,
+   "ambientLighting": {
+    "skyTop": "#08152e",
+    "skyHorizon": "#208d87",
+    "ambient": "#7299aa",
+    "sun": "#6af0cd",
+    "fog": "#443d64",
+    "fogDensity": 0.022,
+    "exposure": 0.94
+   },
+   "effects": {
+    "sprite": "green",
+    "spriteAtlas": "2d/atlases/green_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "aurora_curtain",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:aurora",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "eclipse",
+   "name": "Солнечное затмение",
+   "category": "rare",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 3,
+   "ambientLighting": {
+    "skyTop": "#080a18",
+    "skyHorizon": "#8d4054",
+    "ambient": "#7299aa",
+    "sun": "#eed7a4",
+    "fog": "#443d64",
+    "fogDensity": 0.022,
+    "exposure": 0.94
+   },
+   "effects": {
+    "sprite": "shadow",
+    "spriteAtlas": "2d/atlases/shadow_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "eclipse_disc",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:eclipse",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "thunderstorm",
+   "name": "Гроза",
+   "category": "rare",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 3,
+   "ambientLighting": {
+    "skyTop": "#121d43",
+    "skyHorizon": "#794a81",
+    "ambient": "#7299aa",
+    "sun": "#df85bd",
+    "fog": "#443d64",
+    "fogDensity": 0.022,
+    "exposure": 0.94
+   },
+   "effects": {
+    "sprite": "lightning",
+    "spriteAtlas": "2d/atlases/lightning_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/storm_crystal.glb",
+    "particles": {
+     "mobile": 48,
+     "desktop": 168
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true,
+    "lightning": {
+     "cadenceSeconds": [
+      3,
+      8
+     ],
+     "bolts": 3,
+     "stormFlash": true,
+     "integrateExistingLightningGenerator": true
+    }
+   },
+   "event": "weather:thunderstorm",
+   "gameplayHook": "visibility"
+  },
+  {
+   "id": "blood_moon",
+   "name": "Кровавая луна",
+   "category": "rare",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 3,
+   "ambientLighting": {
+    "skyTop": "#200d2b",
+    "skyHorizon": "#8f263e",
+    "ambient": "#7299aa",
+    "sun": "#fd6187",
+    "fog": "#443d64",
+    "fogDensity": 0.022,
+    "exposure": 0.94
+   },
+   "effects": {
+    "sprite": "ember",
+    "spriteAtlas": "2d/atlases/ember_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/blood_moon.glb",
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:blood_moon",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "shooting_stars",
+   "name": "Падающие звёзды",
+   "category": "rare",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 3,
+   "ambientLighting": {
+    "skyTop": "#121d43",
+    "skyHorizon": "#794a81",
+    "ambient": "#7299aa",
+    "sun": "#df85bd",
+    "fog": "#443d64",
+    "fogDensity": 0.022,
+    "exposure": 0.94
+   },
+   "effects": {
+    "sprite": "star",
+    "spriteAtlas": "2d/atlases/star_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/meteor.glb",
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:shooting_stars",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "sandstorm",
+   "name": "Пыльная буря",
+   "category": "rare",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 3,
+   "ambientLighting": {
+    "skyTop": "#121d43",
+    "skyHorizon": "#794a81",
+    "ambient": "#7299aa",
+    "sun": "#df85bd",
+    "fog": "#443d64",
+    "fogDensity": 0.022,
+    "exposure": 0.94
+   },
+   "effects": {
+    "sprite": "dust",
+    "spriteAtlas": "2d/atlases/dust_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:sandstorm",
+   "gameplayHook": "visibility"
+  },
+  {
+   "id": "volcanic_ash",
+   "name": "Вулканический пепел",
+   "category": "rare",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 3,
+   "ambientLighting": {
+    "skyTop": "#121d43",
+    "skyHorizon": "#794a81",
+    "ambient": "#7299aa",
+    "sun": "#df85bd",
+    "fog": "#443d64",
+    "fogDensity": 0.022,
+    "exposure": 0.94
+   },
+   "effects": {
+    "sprite": "ash",
+    "spriteAtlas": "2d/atlases/ash_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false,
+    "groundDecal": "ash_layer"
+   },
+   "event": "weather:volcanic_ash",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "ball_lightning",
+   "name": "Шаровая молния",
+   "category": "rare",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 3,
+   "ambientLighting": {
+    "skyTop": "#121d43",
+    "skyHorizon": "#794a81",
+    "ambient": "#7299aa",
+    "sun": "#df85bd",
+    "fog": "#443d64",
+    "fogDensity": 0.022,
+    "exposure": 0.94
+   },
+   "effects": {
+    "sprite": "lightning",
+    "spriteAtlas": "2d/atlases/lightning_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/storm_crystal.glb",
+    "particles": {
+     "mobile": 48,
+     "desktop": 168
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true,
+    "lightning": {
+     "cadenceSeconds": [
+      3,
+      8
+     ],
+     "bolts": 1,
+     "stormFlash": true,
+     "integrateExistingLightningGenerator": true
+    }
+   },
+   "event": "weather:ball_lightning",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "dry_storm",
+   "name": "Сухая гроза",
+   "category": "rare",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 3,
+   "ambientLighting": {
+    "skyTop": "#121d43",
+    "skyHorizon": "#794a81",
+    "ambient": "#7299aa",
+    "sun": "#df85bd",
+    "fog": "#443d64",
+    "fogDensity": 0.022,
+    "exposure": 0.94
+   },
+   "effects": {
+    "sprite": "lightning",
+    "spriteAtlas": "2d/atlases/lightning_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 48,
+     "desktop": 168
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true,
+    "lightning": {
+     "cadenceSeconds": [
+      3,
+      8
+     ],
+     "bolts": 3,
+     "stormFlash": true,
+     "integrateExistingLightningGenerator": true
+    }
+   },
+   "event": "weather:dry_storm",
+   "gameplayHook": "visibility"
+  },
+  {
+   "id": "light_pillars",
+   "name": "Световые столбы",
+   "category": "rare",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 3,
+   "ambientLighting": {
+    "skyTop": "#121d43",
+    "skyHorizon": "#794a81",
+    "ambient": "#7299aa",
+    "sun": "#df85bd",
+    "fog": "#443d64",
+    "fogDensity": 0.022,
+    "exposure": 0.94
+   },
+   "effects": {
+    "sprite": "silver",
+    "spriteAtlas": "2d/atlases/silver_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "light_pillars",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:light_pillars",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "glowing_rain",
+   "name": "Светящийся дождь",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "blue_magic",
+    "spriteAtlas": "2d/atlases/blue_magic_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:glowing_rain",
+   "gameplayHook": "wet"
+  },
+  {
+   "id": "reverse_rain",
+   "name": "Обратный дождь",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "droplet",
+    "spriteAtlas": "2d/atlases/droplet_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 48,
+     "desktop": 168
+    },
+    "screenEffect": "",
+    "direction": "rise",
+    "glow": false
+   },
+   "event": "weather:reverse_rain",
+   "gameplayHook": "wet"
+  },
+  {
+   "id": "living_fog",
+   "name": "Живой туман",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "shadow",
+    "spriteAtlas": "2d/atlases/shadow_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "fog_shapes",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:living_fog",
+   "gameplayHook": "visibility"
+  },
+  {
+   "id": "crystal_snow",
+   "name": "Кристаллический снег",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "crystal",
+    "spriteAtlas": "2d/atlases/crystal_8f.png",
+    "2_5d": "2_5d/atlases/crystal_8dir_8f.png",
+    "3d": "3d/glb/ice_crystal.glb",
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true,
+    "groundDecal": "ice_crust"
+   },
+   "event": "weather:crystal_snow",
+   "gameplayHook": "temperature"
+  },
+  {
+   "id": "black_snow",
+   "name": "Чёрный снег",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "black_snow",
+    "spriteAtlas": "2d/atlases/black_snow_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false,
+    "groundDecal": "ash_layer"
+   },
+   "event": "weather:black_snow",
+   "gameplayHook": "temperature"
+  },
+  {
+   "id": "moon_shadows",
+   "name": "Лунные тени",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "shadow",
+    "spriteAtlas": "2d/atlases/shadow_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:moon_shadows",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "ash_sunset",
+   "name": "Пепельный закат",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#2a1222",
+    "skyHorizon": "#b54636",
+    "ambient": "#8672bb",
+    "sun": "#fa865d",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "ash",
+    "spriteAtlas": "2d/atlases/ash_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:ash_sunset",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "silent_storm",
+   "name": "Беззвучная гроза",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "lightning",
+    "spriteAtlas": "2d/atlases/lightning_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 48,
+     "desktop": 168
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true,
+    "lightning": {
+     "cadenceSeconds": [
+      3,
+      8
+     ],
+     "bolts": 3,
+     "stormFlash": false,
+     "integrateExistingLightningGenerator": true
+    }
+   },
+   "event": "weather:silent_storm",
+   "gameplayHook": "visibility"
+  },
+  {
+   "id": "luminous_waves",
+   "name": "Светящиеся волны",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "bubble",
+    "spriteAtlas": "2d/atlases/bubble_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:luminous_waves",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "firefly_storm",
+   "name": "Светлячковый шторм",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "firefly",
+    "spriteAtlas": "2d/atlases/firefly_8f.png",
+    "2_5d": "2_5d/atlases/firefly_8dir_8f.png",
+    "3d": null,
+    "particles": {
+     "mobile": 36,
+     "desktop": 126
+    },
+    "screenEffect": "",
+    "direction": "swirl",
+    "glow": true
+   },
+   "event": "weather:firefly_storm",
+   "gameplayHook": "visibility"
+  },
+  {
+   "id": "silver_rain",
+   "name": "Серебряный дождь",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "silver",
+    "spriteAtlas": "2d/atlases/silver_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:silver_rain",
+   "gameplayHook": "wet"
+  },
+  {
+   "id": "memory_light",
+   "name": "Свет памяти",
+   "category": "mystical",
+   "durationSeconds": [
+    30,
+    130
+   ],
+   "transitionSeconds": 4,
+   "weight": 2,
+   "ambientLighting": {
+    "skyTop": "#121032",
+    "skyHorizon": "#613778",
+    "ambient": "#8672bb",
+    "sun": "#d6a3f2",
+    "fog": "#382a60",
+    "fogDensity": 0.026,
+    "exposure": 0.91
+   },
+   "effects": {
+    "sprite": "rune",
+    "spriteAtlas": "2d/atlases/rune_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:memory_light",
+   "gameplayHook": "ambient"
+  },
+  {
+   "id": "sky_cracks",
+   "name": "Трещины в небе",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#1c0a35",
+    "skyHorizon": "#ad45d8",
+    "ambient": "#8b6db0",
+    "sun": "#e5a5ff",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "void",
+    "spriteAtlas": "2d/atlases/void_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/rift_shard.glb",
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "sky_cracks",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:sky_cracks",
+   "gameplayHook": "world-anomaly"
+  },
+  {
+   "id": "three_suns",
+   "name": "Три солнца",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#4c235e",
+    "skyHorizon": "#eda46a",
+    "ambient": "#8b6db0",
+    "sun": "#fff2bc",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "star",
+    "spriteAtlas": "2d/atlases/star_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/blood_moon.glb",
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "multiple_suns",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:three_suns",
+   "gameplayHook": "world-anomaly"
+  },
+  {
+   "id": "ink_storm",
+   "name": "Чернильная буря",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#0b0c19",
+    "skyHorizon": "#341b37",
+    "ambient": "#8b6db0",
+    "sun": "#9677a8",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "ink",
+    "spriteAtlas": "2d/atlases/ink_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false,
+    "groundDecal": "ash_layer"
+   },
+   "event": "weather:ink_storm",
+   "gameplayHook": "visibility"
+  },
+  {
+   "id": "sky_jellyfish",
+   "name": "Небесные медузы",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "blue_magic",
+    "spriteAtlas": "2d/atlases/blue_magic_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/sky_jellyfish.glb",
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:sky_jellyfish",
+   "gameplayHook": "world-anomaly"
+  },
+  {
+   "id": "star_rain",
+   "name": "Звёздный ливень",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "star",
+    "spriteAtlas": "2d/atlases/star_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/meteor.glb",
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:star_rain",
+   "gameplayHook": "wet"
+  },
+  {
+   "id": "reality_rift",
+   "name": "Разлом реальности",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "void",
+    "spriteAtlas": "2d/atlases/void_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/rift_shard.glb",
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "sky_rift",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:reality_rift",
+   "gameplayHook": "world-anomaly"
+  },
+  {
+   "id": "time_rain",
+   "name": "Дождь из времени",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "rune",
+    "spriteAtlas": "2d/atlases/rune_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:time_rain",
+   "gameplayHook": "wet"
+  },
+  {
+   "id": "gravity_blizzard",
+   "name": "Гравитационная метель",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "snow",
+    "spriteAtlas": "2d/atlases/snow_8f.png",
+    "2_5d": "2_5d/atlases/snow_8dir_8f.png",
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "swirl",
+    "glow": false
+   },
+   "event": "weather:gravity_blizzard",
+   "gameplayHook": "world-anomaly"
+  },
+  {
+   "id": "lightning_trees",
+   "name": "Молнии-деревья",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "lightning",
+    "spriteAtlas": "2d/atlases/lightning_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/lightning_tree.glb",
+    "particles": {
+     "mobile": 48,
+     "desktop": 168
+    },
+    "screenEffect": "lightning_tree",
+    "direction": "fall",
+    "glow": true,
+    "lightning": {
+     "cadenceSeconds": [
+      3,
+      8
+     ],
+     "bolts": 3,
+     "stormFlash": true,
+     "integrateExistingLightningGenerator": true
+    }
+   },
+   "event": "weather:lightning_trees",
+   "gameplayHook": "world-anomaly"
+  },
+  {
+   "id": "living_constellations",
+   "name": "Живые созвездия",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "star",
+    "spriteAtlas": "2d/atlases/star_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:living_constellations",
+   "gameplayHook": "world-anomaly"
+  },
+  {
+   "id": "sky_ocean",
+   "name": "Океан в небе",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "bubble",
+    "spriteAtlas": "2d/atlases/bubble_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/sky_jellyfish.glb",
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "overhead_ocean",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:sky_ocean",
+   "gameplayHook": "world-anomaly"
+  },
+  {
+   "id": "source_less_night",
+   "name": "Ночь без солнца и луны",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#060514",
+    "skyHorizon": "#19152f",
+    "ambient": "#8b6db0",
+    "sun": "#9d8ac8",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "firefly",
+    "spriteAtlas": "2d/atlases/firefly_8f.png",
+    "2_5d": "2_5d/atlases/firefly_8dir_8f.png",
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "glow_only",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:source_less_night",
+   "gameplayHook": "world-anomaly"
+  },
+  {
+   "id": "color_storm",
+   "name": "Цветовая буря",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "rose_rainbow",
+    "spriteAtlas": "2d/atlases/rose_rainbow_8f.png",
+    "2_5d": "2_5d/atlases/rose_rainbow_8dir_8f.png",
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "chromatic_wave",
+    "direction": "swirl",
+    "glow": false
+   },
+   "event": "weather:color_storm",
+   "gameplayHook": "visibility"
+  },
+  {
+   "id": "broken_time",
+   "name": "Распад времени",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "void",
+    "spriteAtlas": "2d/atlases/void_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "time_bands",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:broken_time",
+   "gameplayHook": "world-anomaly"
+  },
+  {
+   "id": "shadow_rain",
+   "name": "Дождь из теней",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "shadow",
+    "spriteAtlas": "2d/atlases/shadow_8f.png",
+    "2_5d": null,
+    "3d": null,
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": false
+   },
+   "event": "weather:shadow_rain",
+   "gameplayHook": "wet"
+  },
+  {
+   "id": "inverted_world",
+   "name": "Вывернутый мир",
+   "category": "fantastic",
+   "durationSeconds": [
+    18,
+    80
+   ],
+   "transitionSeconds": 4,
+   "weight": 1,
+   "ambientLighting": {
+    "skyTop": "#110d2b",
+    "skyHorizon": "#743a76",
+    "ambient": "#8b6db0",
+    "sun": "#e77aca",
+    "fog": "#372345",
+    "fogDensity": 0.029,
+    "exposure": 0.96
+   },
+   "effects": {
+    "sprite": "blue_magic",
+    "spriteAtlas": "2d/atlases/blue_magic_8f.png",
+    "2_5d": null,
+    "3d": "3d/glb/rift_shard.glb",
+    "particles": {
+     "mobile": 24,
+     "desktop": 84
+    },
+    "screenEffect": "",
+    "direction": "fall",
+    "glow": true
+   },
+   "event": "weather:inverted_world",
+   "gameplayHook": "world-anomaly"
+  }
+ ],
+ "version": "1.0.0"
+}

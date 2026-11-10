@@ -99,7 +99,7 @@ export function verifyBiblioteka(root = DEFAULT_ROOT, {strict = false} = {}) {
       const code = (solution.lines || []).map(segment => {
         const file = path.resolve(root, segment.source_path);
         check(file.startsWith(root + path.sep), 'source escaped root');
-        return fs.readFileSync(file, 'utf8').split('\\n').slice(segment.start - 1, segment.end).join('\\n');
+        return fs.readFileSync(file, 'utf8').split('\n').slice(segment.start - 1, segment.end).join('\n');
       }).join('\\n');
       const {ids, unresolved} = linkedAssets(code, solution.game, index.entries);
       check(JSON.stringify([...new Set(solution.asset_ids || [])].sort()) === JSON.stringify(ids),

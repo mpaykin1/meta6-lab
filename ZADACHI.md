@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Исправить мобильное застревание Лучника в тумане PR #132 | МГЛ | MG-ремонтник | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-10 16:54 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | feat(portal): Play / Connect / Earn navigation and functional MCP address control | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/platform-play-connect-earn-20261107` | [#87](https://github.com/mpaykin1/meta6-lab/pull/87) | 2026-11-07 14:41 | 2026-11-10 12:45 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | PR #58: разрешить конфликт с main | МГЛ | MG-ремонтник | `lab/approved-donor-confluence-vault-20261107` | [#58](https://github.com/mpaykin1/meta6-lab/pull/58) | 2026-11-10 10:56 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | PR #49: устранить конфликт с main | МГЛ | MG-строитель-4 | `lab/veil-weather-connected-20261107` | [#49](https://github.com/mpaykin1/meta6-lab/pull/49) | 2026-11-10 10:39 | — |

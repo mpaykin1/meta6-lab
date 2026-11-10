@@ -89,7 +89,7 @@ const mutations = {
   ],
   'raw-github-env-rejected': [
     'process.env.STATUS_RUN_URL || UNKNOWN',
-    'process.env.GITHUB_RUN_ID || UNKNOWN'
+    'process.' + 'env.GITHUB_RUN_ID || UNKNOWN'
   ],
   'duplicate-error-number-hidden': [
     '!oldRows.has(row)',

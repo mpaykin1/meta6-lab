@@ -8,20 +8,20 @@
 - SHA: `327a181124cfb0f13e6b2df3dea23ac29aff9abe` · последний коммит: 2026-11-10T14:49:30Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: НУЖЕН CLAUDE — защищённый workflow; https://github.com/mpaykin1/meta6-lab/pull/190#issuecomment-6772433988
+- Взял: —
 
-### PR #218
-- PR: https://github.com/mpaykin1/meta6-lab/pull/218
-- Ветка: `lab/remont-r1-library`
-- SHA: `bd5d65f72c4964383256e605f01242a35c6ec69f` · последний коммит: 2026-11-10T06:22:46Z
+### PR #205
+- PR: https://github.com/mpaykin1/meta6-lab/pull/205
+- Ветка: `lab/owner-pult`
+- SHA: `16715714f06e0071871dc6df59560b2ba312867c` · последний коммит: 2026-11-09T17:01:32Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
 
-### PR #225
-- PR: https://github.com/mpaykin1/meta6-lab/pull/225
-- Ветка: `lab/render-broken-city-safe-1110`
-- SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
+### PR #220
+- PR: https://github.com/mpaykin1/meta6-lab/pull/220
+- Ветка: `lab/zadachi-conflicts`
+- SHA: `84ab3a2bef87a37147670076be0f1da587e823ed` · последний коммит: 2026-11-10T06:26:14Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
@@ -122,18 +122,10 @@
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
 
-### PR #205
-- PR: https://github.com/mpaykin1/meta6-lab/pull/205
-- Ветка: `lab/owner-pult`
-- SHA: `16715714f06e0071871dc6df59560b2ba312867c` · последний коммит: 2026-11-09T17:01:32Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
-### PR #220
-- PR: https://github.com/mpaykin1/meta6-lab/pull/220
-- Ветка: `lab/zadachi-conflicts`
-- SHA: `84ab3a2bef87a37147670076be0f1da587e823ed` · последний коммит: 2026-11-10T06:26:14Z
+### PR #218
+- PR: https://github.com/mpaykin1/meta6-lab/pull/218
+- Ветка: `lab/remont-r1-library`
+- SHA: `bd5d65f72c4964383256e605f01242a35c6ec69f` · последний коммит: 2026-11-10T06:22:46Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
@@ -158,6 +150,14 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/224
 - Ветка: `lab/merge-universal`
 - SHA: `1bc3b2de607c589ab3b5cd1000071ec650d4762f` · последний коммит: 2026-11-10T08:49:25Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
+### PR #225
+- PR: https://github.com/mpaykin1/meta6-lab/pull/225
+- Ветка: `lab/render-broken-city-safe-1110`
+- SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —

@@ -84,6 +84,14 @@
       "solutions": 345
     },
     {
+      "game": "skin-trainer",
+      "source_root": "games/skin-trainer",
+      "manifest": "shared/library/skin-trainer.json",
+      "assets": 3,
+      "file_assets": 0,
+      "solutions": 11
+    },
+    {
       "game": "sumerki-i-pepel-2",
       "source_root": "games/sumerki-i-pepel-2",
       "manifest": "shared/library/sumerki-i-pepel-2.json",
@@ -121,7 +129,7 @@
       "manifest": "shared/library/veil-terraces.json",
       "assets": 4,
       "file_assets": 1,
-      "solutions": 42
+      "solutions": 44
     }
   ],
   "entries": [
@@ -103828,6 +103836,216 @@
       ]
     },
     {
+      "id": "47910d23c89a372e3f719049",
+      "game": "skin-trainer",
+      "kind": "inline-style",
+      "name": "style@211",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "696cbeb1133c25af1a0bc3bb09f86ef3ed5141138111f710e26c78d3972c3148",
+      "lines": [
+        7,
+        19
+      ]
+    },
+    {
+      "id": "5684a1671f939264757bf817",
+      "game": "skin-trainer",
+      "kind": "inline-svg",
+      "name": "svg@2495",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "b930e4d88fac39bfdb3b24b2a1ca067b31ba0962981bef0df92769a16a432773",
+      "lines": [
+        40,
+        50
+      ]
+    },
+    {
+      "id": "59ac9a01a22406a8a0a3c0ef",
+      "game": "skin-trainer",
+      "kind": "inline-svg",
+      "name": "svg@1403",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "d463a05b44923b364f4d675940c6993fb7c1900132cb1742bde787ef8afa73ff",
+      "lines": [
+        25,
+        37
+      ]
+    },
+    {
+      "id": "043fccd69f4e798990262bc1",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "burst",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "c68bca86f405971ac83c10fc62d185d1ad4e6f469e2f2828faa93b63c4e0611a",
+      "lines": [
+        199,
+        203
+      ]
+    },
+    {
+      "id": "15966a15fbbe434a48556793",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "loop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "8eca3b74a29500b9b0039f8da964bd4242324d92dfd77ba20dcfa7c0a5a9dc11",
+      "lines": [
+        257,
+        320
+      ]
+    },
+    {
+      "id": "53929871b96aa6366b53bff3",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "lem",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "42fe0fbe4b7a2240848b634a5416a1ebdb07079a02a88d3ffcdc19f987548a76",
+      "lines": [
+        62,
+        62
+      ]
+    },
+    {
+      "id": "6b6b05e9fd90c2b8d8f11e9e",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "912b6d0994aa9bbced15c77fbf8bf2174e241c073660299c7133c3b5b6fe642a",
+      "lines": [
+        222,
+        223
+      ]
+    },
+    {
+      "id": "913269e0dae30849283392c3",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "inline-script@3719",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "c0323bf6b2f68a4a9225b990c6449fde8be65c49ebe01161676da6a011814a23",
+      "lines": [
+        58,
+        323
+      ]
+    },
+    {
+      "id": "93ff821df089300e790c1b0f",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "radialTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "5dbe07a5a2f3f5d49b76639c38857d6235a120cad4db7710e1443ebd0b8ab068",
+      "lines": [
+        189,
+        191
+      ]
+    },
+    {
+      "id": "9a2f5638465fbf2132d2388c",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "limb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "f32e26d98ccf120cad838d21336c57b1c5c8d8c0930a8f2ec847842e2f86cacf",
+      "lines": [
+        175,
+        175
+      ]
+    },
+    {
+      "id": "a289f96e95531cd34c97d7ef",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "makeHint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "6cd7c6491636b23b8ab13af58240118439e3073a29623ed73a1cadbdde29318b",
+      "lines": [
+        66,
+        70
+      ]
+    },
+    {
+      "id": "a8fa2685d66c2be99760f011",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "updateHints",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "eddaad41020b66204166fd370f78984ce755eaaa847fc824c360f79785111f42",
+      "lines": [
+        76,
+        87
+      ]
+    },
+    {
+      "id": "c2ba4af4f87ea9b795ce5ee2",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "up",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "67ac1bbeae83d2e0e6f8f2c2c7f8e3e0bc3962226c19e6a90cc4b61d382b90e6",
+      "lines": [
+        246,
+        247
+      ]
+    },
+    {
+      "id": "c59f5dfc31709b4c960e7239",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "feedHint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "e4ce6b8e70b7b50436e9a03f13e0a3a50384731b8d0e6a9a37ee751d9d0f2328",
+      "lines": [
+        88,
+        92
+      ]
+    },
+    {
       "id": "01e9cd7b553dfc743f0aab01",
       "game": "sumerki-i-pepel-2",
       "kind": "inline-style",
@@ -157271,67 +157489,22 @@
       ]
     },
     {
-      "id": "029facda30be9c574c707fa7",
+      "id": "04abfbac6654b02b849aeab2",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "orb",
+      "name": "inline-script@5080",
       "purpose": [
-        "gameplay"
+        "game-runtime"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "71f08ba98129ef2edbc3ba91736d9ad23463b9d089560764f48d2645141ff0b1",
+      "sha256": "8711a8e3ca2787f4abd9c2266e3f52e6b6051c3dca691b04c0e576c0c3b98354",
       "lines": [
-        46,
-        46
+        12,
+        340
       ]
     },
     {
-      "id": "0b3909438e762684f0c84504",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "openMenu",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "5da3d3be5ef91923078b5154e4557989c7bb82fdaf76a01f8c1e2d7c0750d932",
-      "lines": [
-        179,
-        183
-      ]
-    },
-    {
-      "id": "0b576e54f3d5876dc991354d",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "tick",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "80931cc357c2612efdec692c27f56f08d7de93109faeb6d9025f8fb7a2b65181",
-      "lines": [
-        120,
-        130
-      ]
-    },
-    {
-      "id": "124eb57577215174393c9aa6",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "tri",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "8a170a999843e8894ff7d30e66d9c5cc91618140fb812172768394576b2577ce",
-      "lines": [
-        40,
-        40
-      ]
-    },
-    {
-      "id": "14de6d9edd189c18b79893af",
+      "id": "04f7a5a227bd1fd190cfa2b8",
       "game": "veil-terraces",
       "kind": "solution",
       "name": "move",
@@ -157341,192 +157514,27 @@
       "source_path": "games/veil-terraces/index.html",
       "sha256": "f26f5980a3c51c135ab7dbf47b4f2b587b6c6a18b8913c58c4c157d754576426",
       "lines": [
-        191,
-        200
+        273,
+        282
       ]
     },
     {
-      "id": "1704c1d6c4a89cc152a485a7",
+      "id": "0a9951340ad29769d3696c78",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "note",
+      "name": "updateRuins",
       "purpose": [
         "gameplay"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "bd42740f2bfe4b9d64305f0d4ebe814e8bc08d039175197991dcb053bf0846a1",
+      "sha256": "5279ae6d4d395fdbe34103f281a6faded3426e04dd61aaaa96fb81ee19363044",
       "lines": [
-        101,
-        111
+        84,
+        92
       ]
     },
     {
-      "id": "29026f5f01a25aea02fb43e9",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "createChunk",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "c1ea54ca2da4ab2e7d282bde28a2e1624e268ffc787ffbbab7758671f5f9dead",
-      "lines": [
-        42,
-        42
-      ]
-    },
-    {
-      "id": "419bc59a7de29a43caccc83f",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "SOUND",
-      "purpose": [
-        "audio"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "1a322aecf65d075215fc0ceaf829d87f1b9ed6b0b44d6e94242b2297b4b0b6d0",
-      "lines": [
-        92,
-        132
-      ]
-    },
-    {
-      "id": "4b9a869211fabb8bfb02a7fc",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "shader",
-      "purpose": [
-        "shader"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "ee94e8b76a470109d3862b5c4f61b2d5d71add4efe84ec0ad93e8499de3771a8",
-      "lines": [
-        33,
-        33
-      ]
-    },
-    {
-      "id": "4fcf6f907b0785745afe053e",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "makeBuffer",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "3eeb9582edb119a5b044b1f5dd9a7db6bdf082b39704a65e232828d9def5715a",
-      "lines": [
-        41,
-        41
-      ]
-    },
-    {
-      "id": "50dbddf180ed8d3e97399cb8",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "generateShards",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "64f9c562192c08f8a014ecceafa8e36d2602dfdbc71fc0034c15afa405ed3638",
-      "lines": [
-        61,
-        77
-      ]
-    },
-    {
-      "id": "581cc0c55a4a21c0f3b9ecc2",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "model",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "765adf4afbf0c6c8d2984dc3ec6dab531e35af42268d6ca1ed5911f05266037b",
-      "lines": [
-        32,
-        32
-      ]
-    },
-    {
-      "id": "5b3de863e9b8d55f64bb1063",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "reset",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "5ea32cf2980881c7395384e76ad22c718bec7a31b106f1657243e3556b4a36dd",
-      "lines": [
-        179,
-        179
-      ]
-    },
-    {
-      "id": "5c62f014e353ebdf5f438414",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "lookAt",
-      "purpose": [
-        "camera"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "ef5eb7aae7b7e91d227d1956104a92a38d4981e90405295c8992df008c4d038c",
-      "lines": [
-        30,
-        30
-      ]
-    },
-    {
-      "id": "605116d345925c973316f564",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "vertex",
-      "purpose": [
-        "shader"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "8a170a999843e8894ff7d30e66d9c5cc91618140fb812172768394576b2577ce",
-      "lines": [
-        40,
-        40
-      ]
-    },
-    {
-      "id": "6430eca3a768d328491446f8",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "$",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "a41c8184c26c6b480cf310aae3ef25020d37d09cac8bd36b05786cc1ccce660d",
-      "lines": [
-        11,
-        11
-      ]
-    },
-    {
-      "id": "84600d58fe09d2448379d387",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "draw",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "5e1741ce8d8ab612f42a044b90f355930637457a97b3831a2acd4cf665f7d017",
-      "lines": [
-        201,
-        201
-      ]
-    },
-    {
-      "id": "943ceb551df66367c3d50f85",
+      "id": "1f3f1a1944aa0f1e1f001ed6",
       "game": "veil-terraces",
       "kind": "solution",
       "name": "program",
@@ -157536,42 +157544,27 @@
       "source_path": "games/veil-terraces/index.html",
       "sha256": "ee94e8b76a470109d3862b5c4f61b2d5d71add4efe84ec0ad93e8499de3771a8",
       "lines": [
-        33,
-        33
+        35,
+        35
       ]
     },
     {
-      "id": "9770b75868b42ebdf221704d",
+      "id": "21c4760eee224ca53480272a",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "aimJoystick",
-      "purpose": [
-        "controls"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "ad61e5a13db66822f34eaf81c05de9818a9e740bfd8cf4d4db4e587e996bebd3",
-      "lines": [
-        186,
-        186
-      ]
-    },
-    {
-      "id": "a05dd5a88e761fa751028511",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "crystal",
+      "name": "drawRuins",
       "purpose": [
         "gameplay"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "65880c33b53f8e8b6f9915261d300cf8ab85ae9028079318fba3b95ffa919807",
+      "sha256": "2b2ec13cdfbd50ac6169dfc6551e2ac6fbfc3549f36b39b38b0589686f1d6285",
       "lines": [
-        44,
-        44
+        93,
+        127
       ]
     },
     {
-      "id": "a7343663b24cdb516372ceae",
+      "id": "35ef2a7cfab80716f0d47471",
       "game": "veil-terraces",
       "kind": "solution",
       "name": "passableSegment",
@@ -157581,27 +157574,102 @@
       "source_path": "games/veil-terraces/index.html",
       "sha256": "15219de88996c6006d4f9a85b13f05940e7b51e5d83fd6c8b245cc2c69233251",
       "lines": [
-        50,
-        60
+        132,
+        142
       ]
     },
     {
-      "id": "aba5fe5adde1a238ab66dfaa",
+      "id": "36bc77761ac65055c0233ab1",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "perspective",
+      "name": "reset",
       "purpose": [
-        "camera"
+        "gameplay"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "f4e7b37c1f029c081fae2609239cfadd89988b4b30a403516318318d6c839a28",
+      "sha256": "43e1405cc02b5c4ba4879b20bb3047ccb5d563d5827622567c4e69daa94027ca",
       "lines": [
-        29,
-        29
+        261,
+        261
       ]
     },
     {
-      "id": "b9dc58b8a15d0d5189d90f22",
+      "id": "37849cea74048e9281e05338",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "frame",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "5d41793cc2d58db1cd34ae0903e65ddb7292cb9783cd74db26a0106a71d01d0e",
+      "lines": [
+        286,
+        338
+      ]
+    },
+    {
+      "id": "37e2fb078e2a9e948a5f5622",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "createChunk",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "84908fa3b6968495d5c61ce616bd047099f5277106a0a89841d90a472952fe57",
+      "lines": [
+        54,
+        54
+      ]
+    },
+    {
+      "id": "3e7d331051e55942e6bb456c",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "note",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "bd42740f2bfe4b9d64305f0d4ebe814e8bc08d039175197991dcb053bf0846a1",
+      "lines": [
+        183,
+        193
+      ]
+    },
+    {
+      "id": "3f37c2773b9ba3b03ea22583",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "makeBuffer",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "3dfc1d23a440a8271396ca16016f2b879207e8fc4c4506149c86733359de12f0",
+      "lines": [
+        43,
+        49
+      ]
+    },
+    {
+      "id": "44a006e749158e075440ab48",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "tri",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "8a170a999843e8894ff7d30e66d9c5cc91618140fb812172768394576b2577ce",
+      "lines": [
+        42,
+        42
+      ]
+    },
+    {
+      "id": "5012f888250b0fb5dcfffa72",
       "game": "veil-terraces",
       "kind": "solution",
       "name": "enableSharedFx",
@@ -157611,147 +157679,12 @@
       "source_path": "games/veil-terraces/index.html",
       "sha256": "8f5472d47a323e033902b62772f4e6eaa8653778ea9fa17082c2233dca01913a",
       "lines": [
-        86,
-        91
+        168,
+        173
       ]
     },
     {
-      "id": "bb6982b7fc263f6462d07ac6",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "bindMesh",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "3eeb9582edb119a5b044b1f5dd9a7db6bdf082b39704a65e232828d9def5715a",
-      "lines": [
-        41,
-        41
-      ]
-    },
-    {
-      "id": "c2f0123ff30b95bc6c566512",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "surface",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "68dcae1b9f67f94f20b7a6a57fb7a08c7e7e016a91a54dd5cdb04b84b27d83f1",
-      "lines": [
-        28,
-        28
-      ]
-    },
-    {
-      "id": "cbfd39ce2e75051d63997319",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "height",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "d3bdf42654d258213b00e07ef193cd240a1ea2288f99292d03c013ee7f3fced2",
-      "lines": [
-        26,
-        26
-      ]
-    },
-    {
-      "id": "d13bbbbf3abe0fcfc3b589fc",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "frame",
-      "purpose": [
-        "animation"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "68c4ee77f18ab8eaf92efe6ba461c635cad4b14ae155ecbe962aa7f6f9a92e6d",
-      "lines": [
-        204,
-        219
-      ]
-    },
-    {
-      "id": "d974e27eb58dc456aa2d394b",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "start",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "1e3621b126841c24027c6dece4aba2773ad0babd38a26a5990e81ade5a1ba688",
-      "lines": [
-        112,
-        119
-      ]
-    },
-    {
-      "id": "d9a5ebc7a9f1859158968cba",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "multiply",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "1a835c55572e97960f4829d2ab571a6811473f8aac44d4489a7e44c562c46ffd",
-      "lines": [
-        31,
-        31
-      ]
-    },
-    {
-      "id": "dce0c533820c0cdb45ce62b4",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "inline-script@4963",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "308bc9582a77d139cfdcbcae38154b43b61ebcea755c5d36b9025f25703b3329",
-      "lines": [
-        10,
-        221
-      ]
-    },
-    {
-      "id": "e21137149abc6e9ddb072468",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "loadChunks",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "804593809ed52b4d9fb4b7db5d58260b87fab508084cbe1765cb6127732ca373",
-      "lines": [
-        43,
-        43
-      ]
-    },
-    {
-      "id": "e5338a9e9828d6092d766d11",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "resize",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "5ea32cf2980881c7395384e76ad22c718bec7a31b106f1657243e3556b4a36dd",
-      "lines": [
-        179,
-        179
-      ]
-    },
-    {
-      "id": "ea1bcfd1c8f7915b218b6d18",
+      "id": "5acafcffde201fc7345ed040",
       "game": "veil-terraces",
       "kind": "solution",
       "name": "pillar",
@@ -157761,12 +157694,237 @@
       "source_path": "games/veil-terraces/index.html",
       "sha256": "186ab143cd01c332a856c1c525b9ea24c0e36c1120f02414ef6874674f489435",
       "lines": [
-        45,
-        45
+        73,
+        73
       ]
     },
     {
-      "id": "ec41de16997fdff17b8ca834",
+      "id": "65c90f7d9cc3e70f51bed87a",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "tick",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "80931cc357c2612efdec692c27f56f08d7de93109faeb6d9025f8fb7a2b65181",
+      "lines": [
+        202,
+        212
+      ]
+    },
+    {
+      "id": "66188471e54e28698b0d98ff",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "model",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "765adf4afbf0c6c8d2984dc3ec6dab531e35af42268d6ca1ed5911f05266037b",
+      "lines": [
+        34,
+        34
+      ]
+    },
+    {
+      "id": "765816c81c30f0ee0ee06cea",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "43e1405cc02b5c4ba4879b20bb3047ccb5d563d5827622567c4e69daa94027ca",
+      "lines": [
+        261,
+        261
+      ]
+    },
+    {
+      "id": "78be0468b2c673928b7bafcc",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "lookAt",
+      "purpose": [
+        "camera"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "0a4ff6689ad30d9e9dfc762d0b4e564a7b55273c98ae2d0b2a40dcb03df99137",
+      "lines": [
+        32,
+        32
+      ]
+    },
+    {
+      "id": "7cbad0e6abb68ae3ed63b732",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "SOUND",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "1a322aecf65d075215fc0ceaf829d87f1b9ed6b0b44d6e94242b2297b4b0b6d0",
+      "lines": [
+        174,
+        214
+      ]
+    },
+    {
+      "id": "7cca5e67c39bdd3e44165d79",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "aimJoystick",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "ad61e5a13db66822f34eaf81c05de9818a9e740bfd8cf4d4db4e587e996bebd3",
+      "lines": [
+        268,
+        268
+      ]
+    },
+    {
+      "id": "81dc1c35197e427966ffd040",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "bindMesh",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "2fc1c26d9fc00555870b22bfe8afb75609f747a37d887211f00a32d4516e24b0",
+      "lines": [
+        50,
+        50
+      ]
+    },
+    {
+      "id": "89cefcf4907f58798761d265",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "multiply",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "cbcc83aa8ab02676194bc7a97ef17b18f2ee5e1ee4f1c57da2bbb1599495ea3f",
+      "lines": [
+        33,
+        33
+      ]
+    },
+    {
+      "id": "8bcdcd07f21c2f6836ca36c3",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "generateShards",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "64f9c562192c08f8a014ecceafa8e36d2602dfdbc71fc0034c15afa405ed3638",
+      "lines": [
+        143,
+        159
+      ]
+    },
+    {
+      "id": "bba27efc68c1658434c6bf38",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "vertex",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "8a170a999843e8894ff7d30e66d9c5cc91618140fb812172768394576b2577ce",
+      "lines": [
+        42,
+        42
+      ]
+    },
+    {
+      "id": "bfd7fd0b1baff03214435c87",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "draw",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "fd17d687f3635c61bbbe613a7cfcd51a3380a501502232ca7e4fc8b694824c13",
+      "lines": [
+        283,
+        283
+      ]
+    },
+    {
+      "id": "c0d7680c8e94824a7816b357",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "height",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "d3bdf42654d258213b00e07ef193cd240a1ea2288f99292d03c013ee7f3fced2",
+      "lines": [
+        28,
+        28
+      ]
+    },
+    {
+      "id": "cb751c4d6e4277c165d8c95d",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "1e3621b126841c24027c6dece4aba2773ad0babd38a26a5990e81ade5a1ba688",
+      "lines": [
+        194,
+        201
+      ]
+    },
+    {
+      "id": "cc3bf5c02425d78f612f86ec",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "perspective",
+      "purpose": [
+        "camera"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "b3b3e96a68660a24c2e37fa6bcdf1a68cfa7424cc8a50edc3f8a7a60c77974c1",
+      "lines": [
+        31,
+        31
+      ]
+    },
+    {
+      "id": "d322d09e997c288b37339f99",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "crystal",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "65880c33b53f8e8b6f9915261d300cf8ab85ae9028079318fba3b95ffa919807",
+      "lines": [
+        72,
+        72
+      ]
+    },
+    {
+      "id": "d478da4068000550a355e180",
       "game": "veil-terraces",
       "kind": "solution",
       "name": "sharedRainEvent",
@@ -157776,12 +157934,27 @@
       "source_path": "games/veil-terraces/index.html",
       "sha256": "d1ce33399bfce8db4bbbd8a8eeadda1e48e5072ff7951cff7ee0c1960b6fbe4f",
       "lines": [
-        16,
-        16
+        18,
+        18
       ]
     },
     {
-      "id": "f129ce0ae811ea39ebaa3b62",
+      "id": "d8bdf0901679bbe43c4d9d42",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "surface",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "68dcae1b9f67f94f20b7a6a57fb7a08c7e7e016a91a54dd5cdb04b84b27d83f1",
+      "lines": [
+        30,
+        30
+      ]
+    },
+    {
+      "id": "d9fedabda43093ed7328e856",
       "game": "veil-terraces",
       "kind": "solution",
       "name": "endTouch",
@@ -157791,8 +157964,83 @@
       "source_path": "games/veil-terraces/index.html",
       "sha256": "01b5b758e10439144a82af3d899c82da88653d0cf5cdf0990c05b580aee9ee5e",
       "lines": [
-        189,
-        189
+        271,
+        271
+      ]
+    },
+    {
+      "id": "dea02e0c7a59162cd788d28c",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "loadChunks",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "b104a068333128ecf736e0ad3f33e7c0eda1816dc04be9e4315fea8cdd1e9a77",
+      "lines": [
+        56,
+        71
+      ]
+    },
+    {
+      "id": "e113964187bca500ee318696",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "$",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "a41c8184c26c6b480cf310aae3ef25020d37d09cac8bd36b05786cc1ccce660d",
+      "lines": [
+        13,
+        13
+      ]
+    },
+    {
+      "id": "e251004d4cdcdd12a957b415",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "openMenu",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "ab4ec35690aa721b4843d1e9f7970da0747dab6ef64eb85f29067c020d33b34a",
+      "lines": [
+        261,
+        265
+      ]
+    },
+    {
+      "id": "e59f9079781a6a6293f5c5f2",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "shader",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "ee94e8b76a470109d3862b5c4f61b2d5d71add4efe84ec0ad93e8499de3771a8",
+      "lines": [
+        35,
+        35
+      ]
+    },
+    {
+      "id": "f15ad331dc246f937a475dac",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "orb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "71f08ba98129ef2edbc3ba91736d9ad23463b9d089560764f48d2645141ff0b1",
+      "lines": [
+        128,
+        128
       ]
     },
     {

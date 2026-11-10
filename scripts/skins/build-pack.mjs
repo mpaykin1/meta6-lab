@@ -138,9 +138,51 @@ async function buildFlipbook(frames,destination){
  await sharp({create:{width:256,height:32,channels:4,background:'#00000000'}}).composite(composites)
    .png({palette:false}).toFile(destination);
 }
+
+const VOLUMES={
+ body:{dims:[.74,.94,.70],offset:[0,.05,0]},
+ head:{dims:[.82,.82,.82],offset:[0,0,0]},
+ armL:{dims:[.34,.74,.42],offset:[.075,-.24,0]},
+ armR:{dims:[.34,.74,.42],offset:[-.075,-.24,0]},
+ legL:{dims:[.32,.74,.43],offset:[0,-.32,0]},
+ legR:{dims:[.32,.74,.43],offset:[0,-.32,0]}
+};
+async function bakeFaces(tmp,bone,source,palette){
+ const {data,info}=await sharp(path.join(tmp,source)).resize(64,64,{kernel:'nearest',fit:'contain',
+  background:'#00000000'}).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+ const tones=palette.map(hex=>[1,3,5].map(n=>parseInt(hex.slice(n,n+2),16)));
+ const nearest=(rgb)=>tones.reduce((a,c)=>Math.hypot(...c.map((v,i)=>v-rgb[i]))<
+  Math.hypot(...a.map((v,i)=>v-rgb[i]))?c:a,tones[0]);
+ const tone=(rgb,f)=>nearest(rgb.map(v=>Math.max(0,Math.min(255,Math.round(v*f)))));
+ const fall=tones.find(x=>x[0]>x[1]*1.4&&x[0]>90)||tones[5]||tones[0];
+ const black=tones[1]||tones[0],rivet=tones.at(-3)||tones.at(-1);
+ const faces={};
+ for(const [face,factor,edge] of [['right',.75,63],['left',1.15,0],['top',1.15,0],
+   ['bottom',.75,63],['back',.9,0],['front',1,63]]){
+  const dst=Buffer.alloc(64*64*4);
+  for(let y=0;y<64;y++)for(let x=0;x<64;x++){
+   const sampleX=face==='back'?(y%2?0:63):edge;
+   const idx=(y*64+sampleX)*info.channels;
+   const srcRgb=data[idx+3]>32?[data[idx],data[idx+1],data[idx+2]]:fall;
+   let rgb=tone(srcRgb,factor);
+   // AO at mechanical joints, a dark side seam, pale upper lip, rivets.
+   if(y>=59||y<=1||x<=1||x>=62||((face==='left'||face==='right'||face==='back')&&x===5))rgb=black;
+   if(y===2&&x>2&&x<62)rgb=tone(srcRgb,1.15);
+   if((face==='left'||face==='right'||face==='back')&&(x===3||x===60)&&
+       [10,23,36,49].some(yy=>Math.abs(yy-y)<=1))rgb=rivet;
+   const out=(y*64+x)*4;dst[out]=rgb[0];dst[out+1]=rgb[1];dst[out+2]=rgb[2];dst[out+3]=255;
+  }
+  const rel='textures/volume-'+bone+'-'+face+'.png';
+  await sharp(dst,{raw:{width:64,height:64,channels:4}}).png({palette:false}).toFile(path.join(tmp,rel));
+  faces[face]=rel;
+ }
+ return faces;
+}
+
 async function main(){
  if(finish){
-  if(!fs.existsSync(path.join(target,'preview.png')))fail('нет настоящего Chrome-превью; окончательная сборка запрещена');
+  if(!fs.existsSync(path.join(target,'preview.png'))||!fs.existsSync(path.join(target,'turntable.png')))
+    fail('нет настоящего Chrome-превью и листа turntable.png; ZIP запрещён');
   const m=JSON.parse(fs.readFileSync(path.join(target,'skin.json'),'utf8'));
   if(m.source?.sheetSha256!==sha(path.join(src,'parts-sheet.png'))||m.source?.tableSha256!==sha(path.join(src,'parts-sheet.md')))
     fail('ОБМАН: пакет собран из устаревшего листа');
@@ -179,63 +221,53 @@ async function main(){
     for(let v=0;v<3;v++)entries.push(addPart(e,destination,i+1+v,v));
    }else fail('нет вырезанной картинки: '+e.name);
   }
-  // 3D броня обязана быть непрозрачной: альфа исходных PNG содержит сквозные
-  // выломы. На 3D-меше она делала всё тело/голову невидимыми.
-  // Сохраняем художественную вырезку отдельной передней накладкой, а объём
-  // покрываем плотной текстурой, полученной из того же авторского листа.
-  for(const solid of [...entries].filter(p=>p.layer==='3d')){
-    const original=solid.file;
-    const thickness=solid.dims?.[2]||.22;
-    // Непрозрачный объём — лишь подложка; рисунок всегда остаётся отдельным PNG.
-    solid.file=undefined;
-    solid.material='rust';
-    entries.push({...solid,id:solid.id+'-front-art',kind:solid.kind,
-      file:original,layer:'2.5d',depth:1,primitive:undefined,dims:undefined,
-      offset:[solid.offset[0],solid.offset[1],solid.offset[2]-thickness/2-.014],
-      material:'rust-transparent',anim:[]});
-  }
-  // Боковые поверхности получают авторские рисунки, а не голые торцы.
-  // Используем ТОЛЬКО те же вырезки из parts-sheet.png, без нового арта.
-  // Локальная плоскость повернута к боковой камере; фронтальные накладки
-  // не трогаем, так как фронт уже принят владельцем.
-  for(const solid of [...entries].filter(p=>p.layer==='3d')){
-    const front=entries.find(p=>p.id===solid.id+'-front-art');
-    if(!front?.file)fail('нет авторской вырезки для боковой поверхности '+solid.id);
-    const halfWidth=(solid.dims?.[0]||.24)/2;
-    const halfDepth=(solid.dims?.[2]||.22)/2;
-    for(const side of [-1,1]){
-      entries.push({...front,id:solid.id+(side<0?'-side-left':'-side-right'),
-        size:[Math.max(.13,halfDepth*2),front.size[1]],
-        offset:[solid.offset[0]+side*(halfWidth+.009),solid.offset[1],solid.offset[2]],
-        rotation:[0,side*Math.PI/2,0],depth:1,profileVolume:.12,anim:[]});
+  // A complete body volume per bone; never use rotated copies of front artwork.
+  // The source drawings remain on the front as shallow embossed decals.
+  const original=[...entries];
+  const volumes=[];
+  for(const bone of Object.keys(VOLUMES)){
+    const spec=VOLUMES[bone],owned=original.filter(p=>p.bone===bone&&p.file);
+    if(!owned.length)fail('не хватает исходных рисунков для объёмной кости '+bone);
+    const source=owned.find(p=>p.kind==='plate')||owned[0];
+    const reference=source.file;
+    const faces=await bakeFaces(tmp,bone,reference,meta.palette);
+    const solid={id:'volume-'+bone,kind:'plate',layer:'3d',bone,
+      primitive:bone==='head'?'sphere':'box',dims:spec.dims,size:spec.dims.slice(0,2),
+      offset:spec.offset,rotation:[0,0,0],depth:3,material:'rust',faces,
+      outline:true,anim:[]};
+    volumes.push(solid);
+    const frontY=bone==='body'?.04:bone==='head'?0:-.22;
+    entries.push({id:solid.id+'-front-art',kind:source.kind,layer:'2.5d',bone,
+      file:reference,size:bone==='head'?[.72,.68]:bone==='body'?[.66,.77]:
+        bone.startsWith('arm')?[.29,.55]:[.28,.59],
+      pivot:[.5,.5],offset:[spec.offset[0],frontY,spec.offset[2]-spec.dims[2]/2-.022],
+      rotation:[0,0,0],depth:3,material:'rust-transparent',anim:[]});
+    // Original author's bolt, not a mirrored full-front picture, may decorate rear.
+    const rivet=owned.find(p=>p.kind==='bolt');
+    if(rivet){
+      entries.push({...rivet,id:solid.id+'-rear-bolt',layer:'2.5d',
+        size:[.09,.09],offset:[spec.offset[0],frontY,spec.dims[2]/2+.028],
+        rotation:[0,Math.PI,0],depth:2,material:'rust-transparent',anim:[]});
     }
   }
-  // Детали механики (шестерни, провода, свет), не являющиеся бронёй,
-  // ранее исчезали при повороте: все они были только фронтальными плоскостями.
-  // Выводим те же исходные PNG на боковые стороны существующего объёма.
-  // Фронтальные экземпляры остаются байт-в-байт неизменными.
-  for(const part of [...entries].filter(p=>p.file&&p.layer==='2.5d'&&!/-front-art$|-side-left$|-side-right$/.test(p.id))){
-    const solid=entries.find(p=>p.layer==='3d'&&p.bone===part.bone);
-    const halfWidth=(solid?.dims?.[0]||.25)/2;
-    const x=solid?.offset?.[0]||0;
-    for(const sign of [-1,1]){
-      entries.push({...part,id:part.id+(sign<0?'-profile-left':'-profile-right'),
-        layer:'2.5d',size:[Math.max(.12,(solid?.dims?.[2]||.22)*.8),part.size[1]],
-        offset:[x+sign*(halfWidth+.018),part.offset[1],part.offset[2]+.14],
-        rotation:[0,sign*Math.PI/2,0],depth:1,profileVolume:.085,anim:[]});
-    }
+  // Source images which formerly served as paper-thin "3d" parts become decals.
+  for(const part of original.filter(p=>p.layer==='3d')){
+    const v=volumes.find(x=>x.bone===part.bone);
+    part.layer='2.5d';delete part.primitive;delete part.dims;
+    part.material='rust-transparent';
+    part.offset=[part.offset[0],part.offset[1],
+      v.offset[2]-v.dims[2]/2-.035];
   }
-  // На левой ноге только одна авторская деталь — используем ту же броню
-  // с обратной стороны, не придумывая и не рисуя другой элемент.
-  const left=entries.find(p=>p.bone==='legL'&&p.layer==='3d');
-  if(left)entries.push({...left,id:left.id+'-rear',offset:[left.offset[0],left.offset[1],.17],rotation:[0,Math.PI,0],anim:[],layer:'2.5d',depth:2,material:'rust-transparent'});
-  // Повторно используем реальные детали для видимых сзади суставов и света.
-  for(const bone of ['armL','armR','legL','legR']){
-    const base=entries.find(p=>p.bone===bone&&p.layer==='3d')||entries.find(p=>p.bone===bone);
-    if(!base)fail('нет авторской детали для кости '+bone);
-    if(base.layer!=='3d')entries.push({...base,id:base.id+'-solid',layer:'3d',primitive:'box',dims:[.23,.36,.34],material:'metal',anim:[]});
-    const rear=entries.find(p=>p.bone===bone&&p.layer==='3d');
-    entries.push({...rear,id:rear.id+'-back',layer:'2.5d',offset:[rear.offset[0],rear.offset[1],.25],material:'rust-transparent',anim:[]});
+  entries.push(...volumes);
+  // Four genuinely rear-facing details, but never a full-front picture pasted on a side.
+  for(const bone of ['body','armL','armR','legL','legR']){
+    const v=volumes.find(x=>x.bone===bone);
+    const srcPart=original.find(p=>p.bone===bone&&p.kind==='bolt'&&p.file);
+    if(srcPart)continue;
+    const small=original.find(p=>p.bone===bone&&p.file&&p.kind!=='arc'&&p.kind!=='core');
+    if(small)entries.push({...small,id:'rear-detail-'+bone,layer:'2.5d',size:[.09,.09],
+      offset:[v.offset[0],v.offset[1],v.dims[2]/2+.028],
+      rotation:[0,Math.PI,0],depth:2,material:'rust-transparent',anim:[]});
   }
   const lights=entries.filter(p=>['arc','orb','slit','core','lens'].includes(p.kind));
   for(const p of lights.slice(0,Math.max(0,5-entries.filter(x=>x.material==='glow').length)))
@@ -270,11 +302,13 @@ async function main(){
   const materials={'metal':{rough:.88,metal:.32},'rust':{rough:.92,metal:.24,color:rustTone},
    'rust-transparent':{rough:.94,metal:.24},
    'glow':{emissive:warm,blend:'additive'}};
+  const surfaceTextures=volumes.flatMap(v=>Object.entries(v.faces).map(([face,file])=>
+    ({id:v.id+'-'+face,file,uv:'plane',material:'rust'})));
   const outputHashes=Object.fromEntries(['parts','sheets','textures'].flatMap(sub=>
     fs.readdirSync(path.join(tmp,sub)).filter(f=>f.endsWith('.png')).map(f=>[sub+'/'+f,sha(path.join(tmp,sub,f))])));
   const manifest={
    format:'meta6-skin/1',name:id,reference:'reference.png',palette:meta.palette,hideBase:['body','head','armL','armR','legL','legR'],materials,
-   textures:[{id:'rust',file:'textures/rust.png',uv:'box6',material:'metal',apply:'root'},{id:'metal',file:'textures/metal.png',uv:'cyl',material:'metal',apply:'root'}],
+   textures:[{id:'rust',file:'textures/rust.png',uv:'box6',material:'metal',apply:'root'},{id:'metal',file:'textures/metal.png',uv:'cyl',material:'metal',apply:'root'},...surfaceTextures],
    parts:entries,source:{sheetSha256:meta.sourceSheetSha256,tableSha256:meta.sourceTableSha256,assets:outputHashes}};
   fs.writeFileSync(path.join(tmp,'skin.json'),JSON.stringify(manifest,null,2)+'\n');
   fs.writeFileSync(path.join(tmp,'README.md'),[

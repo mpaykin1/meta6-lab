@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Разобрать устаревший PR #8 Auto-Repair | МГЛ | MG-ремонтник | `lab/bot-safe-autorepair` | [#8](https://github.com/mpaykin1/meta6-lab/pull/8) | 2026-11-10 07:48 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Сократить контекст Claude: STATUS, короткие Actions, PROMPT_BASE, ловушки | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/claude-context-compact-v2` | [#212](https://github.com/mpaykin1/meta6-lab/pull/212) | 2026-11-10 04:14 | 2026-11-10 04:50 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Restore original Ashen Path asset pack reference after sync | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/ashen-path-asset-pack-restore-1109` | [#208](https://github.com/mpaykin1/meta6-lab/pull/208) | 2026-11-09 16:54 | 2026-11-10 04:35 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Compact agent context: STATUS, rules, CI summaries and traps | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/claude-context-compact` | [#211](https://github.com/mpaykin1/meta6-lab/pull/211) | 2026-11-10 04:06 | 2026-11-10 04:07 |

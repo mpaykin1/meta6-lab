@@ -22,6 +22,9 @@ on:
       - 'scripts/skins/mutate-cut-sheet.mjs'
       - '.github/workflows/skin-factory.yml'
   workflow_dispatch:
+concurrency:
+  group: skin-factory-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: write
   pull-requests: write

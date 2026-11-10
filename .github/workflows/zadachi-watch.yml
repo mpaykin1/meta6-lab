@@ -34,6 +34,17 @@ jobs:
           node-version: '22'
       - name: ZADACHI regression tests and mutation traps
         run: node scripts/zadachi/verify.mjs && node scripts/zadachi/mutate.mjs
+      - name: Old watcher must fail the new regression tests
+        shell: bash
+        run: |
+          git fetch --no-tags origin 83accb97c6b03d61cc7eb8eff38c7b0446521f7d
+          git show 83accb97c6b03d61cc7eb8eff38c7b0446521f7d:scripts/zadachi/watch.mjs > /tmp/old-zadachi-watch.mjs
+          if node scripts/zadachi/verify.mjs /tmp/old-zadachi-watch.mjs > /tmp/zadachi-old.log 2>&1; then
+            echo "::error::Old watcher unexpectedly passed new regression tests"
+            exit 1
+          fi
+          grep -q ZADACHI_VERIFY_FAIL /tmp/zadachi-old.log
+
   watch:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest

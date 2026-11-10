@@ -296,11 +296,19 @@ async function newErrors(baseline) {
   if (!baseline || current === null) return UNKNOWN;
   const oldFile = await request('/repos/' + LAB + '/contents/OSHIBKI.md?ref=' + baseline);
   const oldText = Buffer.from(oldFile.content || '', 'base64').toString('utf8');
-  const oldIds = new Set([...oldText.matchAll(/^\|\s*#?(\d+)\s*\|/gm)].map(m => m[1]));
-  return current.split('\n').filter(line => {
-    const match = line.match(/^\|\s*#?(\d+)\s*\|/);
-    return match && !oldIds.has(match[1]);
-  });
+  return newErrorRows(oldText, current);
+}
+
+export function newErrorRows(before, current) {
+  if (before === null || current === null) return UNKNOWN;
+  const oldRows = new Set(before.split('\n').filter(row => /^\|\s*\d+\s*\|/.test(row)));
+  return current.split('\n').filter(row =>
+    /^\|\s*\d+\s*\|/.test(row) && !oldRows.has(row));
+}
+
+export function normalizeChanges(value) {
+  return value && Number.isInteger(value.count) && typeof value.folders === 'string'
+    ? value : { count: UNKNOWN, folders: UNKNOWN };
 }
 
 function shortLine(line, max = 280) {
@@ -392,7 +400,7 @@ export async function build() {
     review: { protected: prData.protectedItems, redLab, redMg, sliyanie: sl, stalled: st },
     finish: finishSummary(json('progress.json')),
     pr: prData,
-    changes: { lab: changeLab, mg: changeMg },
+    changes: { lab: normalizeChanges(changeLab), mg: normalizeChanges(changeMg) },
     games,
     errors
   };

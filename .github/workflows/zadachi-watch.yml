@@ -1,7 +1,7 @@
 name: ZADACHI watch
 # Файл Claude, 10.11.2026. Сторож без ИИ: ведёт ZADACHI.md — таблицу всех задач ChatGPT по МГ и МГЛ.
 # Статус берётся из GitHub (PR слит / закрыт / время последнего коммита), а не со слов агента.
-# ChatGPT этот файл и scripts/zadachi/ не меняет.
+# Изменения сторожа разрешены владельцем в задаче 10.11.2026.
 on:
   schedule:
     - cron: '11,41 * * * *'
@@ -10,15 +10,35 @@ on:
     paths: ['ZADACHI.md']
   pull_request_target:
     types: [opened, closed]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/zadachi/**'
+      - '.github/workflows/zadachi-watch.yml'
+      - 'rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md'
+      - 'automation/prompts/MG_PYAT_AVTOZADACH.md'
   workflow_dispatch:
 permissions:
   contents: write
   pull-requests: read
+  checks: read
 concurrency:
-  group: zadachi-watch
+  group: zadachi-watch-${{ github.event_name == 'pull_request' && github.event.pull_request.number || 'main' }}
   cancel-in-progress: false
 jobs:
+  verify:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Regression cases and mutation traps
+        run: node scripts/zadachi/verify.mjs && node scripts/zadachi/mutate.mjs
   watch:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:

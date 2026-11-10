@@ -67,7 +67,7 @@
 | #16 | код | `lab/readiness-evidence-gates` | Evidence-gated META GAMES readiness: 10 elements, same-SHA C | open | |
 | #15 | код | `lab/shared-owner-approved-components` | Approved original-source library: token-efficient MCP search | closed | |
 | #9 | код | `lab/agent-game-candidate` | [BLOCKED — source policy] Procedural World_server candidate  | closed | закрыт stale: политика исходников, [PR #9](https://github.com/mpaykin1/meta6-lab/pull/9) |
-| #8 | код | `lab/bot-safe-autorepair` | Sandbox auto-repair: real META BOT replay, safe viewport fix | open | |
+| #8 | код | `lab/bot-safe-autorepair` | Sandbox auto-repair: real META BOT replay, safe viewport fix | closed | закрыт stale: конфликт с main, защищённый workflow, [PR #8](https://github.com/mpaykin1/meta6-lab/pull/8) |
 | #7 | код | `lab/reuse-library-search` | Reusable code library: source search, browser index, local M | closed | |
 | #6 | код | `lab/world-doors-progress` | lab: persistent visited-world doors without touching accepte | closed | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42285373653), [PR #6](https://github.com/mpaykin1/meta6-lab/pull/6) |
 | #5 | код | `lab/oss-commercial-kit` | lab: коммерчески разрешённые OSS-модули и игровая сцена | closed | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42286065563), [PR #5](https://github.com/mpaykin1/meta6-lab/pull/5) |

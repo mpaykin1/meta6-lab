@@ -1,5 +1,5 @@
 # DOVODKA — журнал доводчика
-СЕЙЧАС ДЕЛАЮ: —
+СЕЙЧАС ДЕЛАЮ: [МГЛ PR #113](https://github.com/mpaykin1/meta6-lab/pull/113) · ветка `lab/cycle2-broken-city-bot-config-20261107` · шаг сравнить с #200 и красные CI · с 2026-11-10 05:56 UTC
 ## ОСТАЛОСЬ (сверху самое срочное)
 - [МГЛ #113](https://github.com/mpaykin1/meta6-lab/pull/113) — 🛑 завис: feat(bot): Broken City honest run configuration
 - [МГЛ #116](https://github.com/mpaykin1/meta6-lab/pull/116) — 🛑 завис: feat(bot): Broken City real-input strategy scaffold

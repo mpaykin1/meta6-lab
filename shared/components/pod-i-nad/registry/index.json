@@ -1,0 +1,2361 @@
+{
+  "schema_version": 1,
+  "source": {
+    "path": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+    "sha256": "91642018b3e589173171340298f72320f747d3b401021a939030f6f922ede5e5",
+    "git_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897"
+  },
+  "policy": "SOURCE_ONLY — exact original definition; requires original game runtime",
+  "packs": [
+    "base",
+    "frost",
+    "deep",
+    "keeper",
+    "sunken"
+  ],
+  "count": 125,
+  "kinds": {
+    "anim": 9,
+    "biome": 3,
+    "block": 14,
+    "body": 3,
+    "brain": 4,
+    "enemy": 13,
+    "event": 5,
+    "fire": 3,
+    "flora": 2,
+    "character": 2,
+    "npc": 2,
+    "projectile": 9,
+    "relic": 10,
+    "ricochet": 7,
+    "sound": 10,
+    "weapon": 22,
+    "weather": 7
+  },
+  "entries": [
+    {
+      "id": "pod-i-nad/registry/anim/punch",
+      "name": "punch",
+      "kind": "anim",
+      "source_symbol": "defineAnim",
+      "source_key": "punch",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 621,
+      "source_line_end": 628,
+      "source_file": "shared/components/pod-i-nad/registry/sources/anim.json",
+      "tags": [
+        "anim",
+        "base",
+        "punch"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/anim/jab",
+      "name": "jab",
+      "kind": "anim",
+      "source_symbol": "defineAnim",
+      "source_key": "jab",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 629,
+      "source_line_end": 635,
+      "source_file": "shared/components/pod-i-nad/registry/sources/anim.json",
+      "tags": [
+        "anim",
+        "base",
+        "jab"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/anim/stab",
+      "name": "stab",
+      "kind": "anim",
+      "source_symbol": "defineAnim",
+      "source_key": "stab",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 636,
+      "source_line_end": 642,
+      "source_file": "shared/components/pod-i-nad/registry/sources/anim.json",
+      "tags": [
+        "anim",
+        "base",
+        "stab"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/anim/slash",
+      "name": "slash",
+      "kind": "anim",
+      "source_symbol": "defineAnim",
+      "source_key": "slash",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 643,
+      "source_line_end": 655,
+      "source_file": "shared/components/pod-i-nad/registry/sources/anim.json",
+      "tags": [
+        "anim",
+        "base",
+        "slash"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/anim/chop",
+      "name": "chop",
+      "kind": "anim",
+      "source_symbol": "defineAnim",
+      "source_key": "chop",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 656,
+      "source_line_end": 665,
+      "source_file": "shared/components/pod-i-nad/registry/sources/anim.json",
+      "tags": [
+        "anim",
+        "base",
+        "chop"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/anim/slam",
+      "name": "slam",
+      "kind": "anim",
+      "source_symbol": "defineAnim",
+      "source_key": "slam",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 666,
+      "source_line_end": 676,
+      "source_file": "shared/components/pod-i-nad/registry/sources/anim.json",
+      "tags": [
+        "anim",
+        "base",
+        "slam"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/anim/thrust",
+      "name": "thrust",
+      "kind": "anim",
+      "source_symbol": "defineAnim",
+      "source_key": "thrust",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 677,
+      "source_line_end": 683,
+      "source_file": "shared/components/pod-i-nad/registry/sources/anim.json",
+      "tags": [
+        "anim",
+        "base",
+        "thrust"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/anim/spin",
+      "name": "spin",
+      "kind": "anim",
+      "source_symbol": "defineAnim",
+      "source_key": "spin",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 684,
+      "source_line_end": 690,
+      "source_file": "shared/components/pod-i-nad/registry/sources/anim.json",
+      "tags": [
+        "anim",
+        "base",
+        "spin"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/anim/flail",
+      "name": "flail",
+      "kind": "anim",
+      "source_symbol": "defineAnim",
+      "source_key": "flail",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 692,
+      "source_line_end": 698,
+      "source_file": "shared/components/pod-i-nad/registry/sources/anim.json",
+      "tags": [
+        "anim",
+        "base",
+        "flail"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/biome/dusk",
+      "name": "Сумеречный остров",
+      "kind": "biome",
+      "source_symbol": "defineBiome",
+      "source_key": "dusk",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 705,
+      "source_line_end": 720,
+      "source_file": "shared/components/pod-i-nad/registry/sources/biome.json",
+      "tags": [
+        "biome",
+        "base",
+        "dusk",
+        "Сумеречный остров"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/grass",
+      "name": "Трава",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "grass",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 728,
+      "source_line_end": 728,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "base",
+        "grass",
+        "Трава"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/dirt",
+      "name": "Земля",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "dirt",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 729,
+      "source_line_end": 729,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "base",
+        "dirt",
+        "Земля"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/stone",
+      "name": "Камень",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "stone",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 730,
+      "source_line_end": 730,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "base",
+        "stone",
+        "Камень"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/plank",
+      "name": "Доски",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "plank",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 731,
+      "source_line_end": 731,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "base",
+        "plank",
+        "Доски"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/sand",
+      "name": "Песок",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "sand",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 732,
+      "source_line_end": 732,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "base",
+        "sand",
+        "Песок"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/leaves",
+      "name": "Листва",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "leaves",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 733,
+      "source_line_end": 733,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "base",
+        "leaves",
+        "Листва"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/brick",
+      "name": "Кирпич",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "brick",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 734,
+      "source_line_end": 734,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "base",
+        "brick",
+        "Кирпич"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/bark",
+      "name": "Ствол",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "bark",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 735,
+      "source_line_end": 735,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "base",
+        "bark",
+        "Ствол"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/body/serpent",
+      "name": "serpent",
+      "kind": "body",
+      "source_symbol": "defineBody",
+      "source_key": "serpent",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 758,
+      "source_line_end": 793,
+      "source_file": "shared/components/pod-i-nad/registry/sources/body.json",
+      "tags": [
+        "body",
+        "base",
+        "serpent"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/brain/stalker",
+      "name": "stalker",
+      "kind": "brain",
+      "source_symbol": "defineBrain",
+      "source_key": "stalker",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 807,
+      "source_line_end": 833,
+      "source_file": "shared/components/pod-i-nad/registry/sources/brain.json",
+      "tags": [
+        "brain",
+        "base",
+        "stalker"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/brain/warden",
+      "name": "warden",
+      "kind": "brain",
+      "source_symbol": "defineBrain",
+      "source_key": "warden",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 917,
+      "source_line_end": 952,
+      "source_file": "shared/components/pod-i-nad/registry/sources/brain.json",
+      "tags": [
+        "brain",
+        "base",
+        "warden"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/imp",
+      "name": "Бесёнок",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "imp",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 963,
+      "source_line_end": 969,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "base",
+        "imp",
+        "Бесёнок"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/shade",
+      "name": "Тень",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "shade",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 970,
+      "source_line_end": 980,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "base",
+        "shade",
+        "Тень"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/warden",
+      "name": "Страж маяка",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "warden",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 981,
+      "source_line_end": 999,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "base",
+        "warden",
+        "Страж маяка"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/event/storm",
+      "name": "Гроза",
+      "kind": "event",
+      "source_symbol": "defineEvent",
+      "source_key": "storm",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1010,
+      "source_line_end": 1028,
+      "source_file": "shared/components/pod-i-nad/registry/sources/event.json",
+      "tags": [
+        "event",
+        "base",
+        "storm",
+        "Гроза"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/event/sea_fog",
+      "name": "Морок",
+      "kind": "event",
+      "source_symbol": "defineEvent",
+      "source_key": "sea_fog",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1030,
+      "source_line_end": 1041,
+      "source_file": "shared/components/pod-i-nad/registry/sources/event.json",
+      "tags": [
+        "event",
+        "base",
+        "sea_fog",
+        "Морок"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/event/starfall",
+      "name": "Звездопад",
+      "kind": "event",
+      "source_symbol": "defineEvent",
+      "source_key": "starfall",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1066,
+      "source_line_end": 1090,
+      "source_file": "shared/components/pod-i-nad/registry/sources/event.json",
+      "tags": [
+        "event",
+        "base",
+        "starfall",
+        "Звездопад"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/fire/proj",
+      "name": "proj",
+      "kind": "fire",
+      "source_symbol": "defineFire",
+      "source_key": "proj",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1099,
+      "source_line_end": 1109,
+      "source_file": "shared/components/pod-i-nad/registry/sources/fire.json",
+      "tags": [
+        "fire",
+        "base",
+        "proj"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/fire/chain",
+      "name": "chain",
+      "kind": "fire",
+      "source_symbol": "defineFire",
+      "source_key": "chain",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1110,
+      "source_line_end": 1110,
+      "source_file": "shared/components/pod-i-nad/registry/sources/fire.json",
+      "tags": [
+        "fire",
+        "base",
+        "chain"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/fire/beam",
+      "name": "beam",
+      "kind": "fire",
+      "source_symbol": "defineFire",
+      "source_key": "beam",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1111,
+      "source_line_end": 1111,
+      "source_file": "shared/components/pod-i-nad/registry/sources/fire.json",
+      "tags": [
+        "fire",
+        "base",
+        "beam"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/flora/round_tree",
+      "name": "Лиственное дерево",
+      "kind": "flora",
+      "source_symbol": "defineFlora",
+      "source_key": "round_tree",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1120,
+      "source_line_end": 1138,
+      "source_file": "shared/components/pod-i-nad/registry/sources/flora.json",
+      "tags": [
+        "flora",
+        "base",
+        "round_tree",
+        "Лиственное дерево"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/character/wanderer",
+      "name": "Странник",
+      "kind": "character",
+      "source_symbol": "defineCharacter",
+      "source_key": "wanderer",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1146,
+      "source_line_end": 1153,
+      "source_file": "shared/components/pod-i-nad/registry/sources/character.json",
+      "tags": [
+        "character",
+        "base",
+        "wanderer",
+        "Странник"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/npc/keeper_ghost",
+      "name": "Призрак смотрителя",
+      "kind": "npc",
+      "source_symbol": "defineNPC",
+      "source_key": "keeper_ghost",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1162,
+      "source_line_end": 1173,
+      "source_file": "shared/components/pod-i-nad/registry/sources/npc.json",
+      "tags": [
+        "npc",
+        "base",
+        "keeper_ghost",
+        "Призрак смотрителя"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/npc/fisher",
+      "name": "Рыбак",
+      "kind": "npc",
+      "source_symbol": "defineNPC",
+      "source_key": "fisher",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1174,
+      "source_line_end": 1184,
+      "source_file": "shared/components/pod-i-nad/registry/sources/npc.json",
+      "tags": [
+        "npc",
+        "base",
+        "fisher",
+        "Рыбак"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/pebble",
+      "name": "pebble",
+      "kind": "projectile",
+      "source_symbol": "defineProjectile",
+      "source_key": "pebble",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1193,
+      "source_line_end": 1196,
+      "source_file": "shared/components/pod-i-nad/registry/sources/projectile.json",
+      "tags": [
+        "projectile",
+        "base",
+        "pebble"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/arrow",
+      "name": "arrow",
+      "kind": "projectile",
+      "source_symbol": "defineProjectile",
+      "source_key": "arrow",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1197,
+      "source_line_end": 1200,
+      "source_file": "shared/components/pod-i-nad/registry/sources/projectile.json",
+      "tags": [
+        "projectile",
+        "base",
+        "arrow"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/bolt",
+      "name": "bolt",
+      "kind": "projectile",
+      "source_symbol": "defineProjectile",
+      "source_key": "bolt",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1201,
+      "source_line_end": 1205,
+      "source_file": "shared/components/pod-i-nad/registry/sources/projectile.json",
+      "tags": [
+        "projectile",
+        "base",
+        "bolt"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/saw",
+      "name": "saw",
+      "kind": "projectile",
+      "source_symbol": "defineProjectile",
+      "source_key": "saw",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1206,
+      "source_line_end": 1210,
+      "source_file": "shared/components/pod-i-nad/registry/sources/projectile.json",
+      "tags": [
+        "projectile",
+        "base",
+        "saw"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/bomb",
+      "name": "bomb",
+      "kind": "projectile",
+      "source_symbol": "defineProjectile",
+      "source_key": "bomb",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1211,
+      "source_line_end": 1220,
+      "source_file": "shared/components/pod-i-nad/registry/sources/projectile.json",
+      "tags": [
+        "projectile",
+        "base",
+        "bomb"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/bullet",
+      "name": "bullet",
+      "kind": "projectile",
+      "source_symbol": "defineProjectile",
+      "source_key": "bullet",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1233,
+      "source_line_end": 1233,
+      "source_file": "shared/components/pod-i-nad/registry/sources/projectile.json",
+      "tags": [
+        "projectile",
+        "base",
+        "bullet"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/pellet",
+      "name": "pellet",
+      "kind": "projectile",
+      "source_symbol": "defineProjectile",
+      "source_key": "pellet",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1234,
+      "source_line_end": 1234,
+      "source_file": "shared/components/pod-i-nad/registry/sources/projectile.json",
+      "tags": [
+        "projectile",
+        "base",
+        "pellet"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/orb",
+      "name": "orb",
+      "kind": "projectile",
+      "source_symbol": "defineProjectile",
+      "source_key": "orb",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1236,
+      "source_line_end": 1242,
+      "source_file": "shared/components/pod-i-nad/registry/sources/projectile.json",
+      "tags": [
+        "projectile",
+        "base",
+        "orb"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/relic/gull_feather",
+      "name": "Перо чайки",
+      "kind": "relic",
+      "source_symbol": "defineRelic",
+      "source_key": "gull_feather",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1252,
+      "source_line_end": 1252,
+      "source_file": "shared/components/pod-i-nad/registry/sources/relic.json",
+      "tags": [
+        "relic",
+        "base",
+        "gull_feather",
+        "Перо чайки"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/relic/tide_charm",
+      "name": "Оберег прилива",
+      "kind": "relic",
+      "source_symbol": "defineRelic",
+      "source_key": "tide_charm",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1253,
+      "source_line_end": 1253,
+      "source_file": "shared/components/pod-i-nad/registry/sources/relic.json",
+      "tags": [
+        "relic",
+        "base",
+        "tide_charm",
+        "Оберег прилива"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/relic/iron_grip",
+      "name": "Железная хватка",
+      "kind": "relic",
+      "source_symbol": "defineRelic",
+      "source_key": "iron_grip",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1254,
+      "source_line_end": 1254,
+      "source_file": "shared/components/pod-i-nad/registry/sources/relic.json",
+      "tags": [
+        "relic",
+        "base",
+        "iron_grip",
+        "Железная хватка"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/relic/hawk_eye",
+      "name": "Соколиный глаз",
+      "kind": "relic",
+      "source_symbol": "defineRelic",
+      "source_key": "hawk_eye",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1255,
+      "source_line_end": 1255,
+      "source_file": "shared/components/pod-i-nad/registry/sources/relic.json",
+      "tags": [
+        "relic",
+        "base",
+        "hawk_eye",
+        "Соколиный глаз"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/relic/soul_jar",
+      "name": "Сосуд душ",
+      "kind": "relic",
+      "source_symbol": "defineRelic",
+      "source_key": "soul_jar",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1256,
+      "source_line_end": 1256,
+      "source_file": "shared/components/pod-i-nad/registry/sources/relic.json",
+      "tags": [
+        "relic",
+        "base",
+        "soul_jar",
+        "Сосуд душ"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/relic/magnet_coin",
+      "name": "Монета-магнит",
+      "kind": "relic",
+      "source_symbol": "defineRelic",
+      "source_key": "magnet_coin",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1257,
+      "source_line_end": 1257,
+      "source_file": "shared/components/pod-i-nad/registry/sources/relic.json",
+      "tags": [
+        "relic",
+        "base",
+        "magnet_coin",
+        "Монета-магнит"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/relic/heart_seed",
+      "name": "Семя сердца",
+      "kind": "relic",
+      "source_symbol": "defineRelic",
+      "source_key": "heart_seed",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1258,
+      "source_line_end": 1258,
+      "source_file": "shared/components/pod-i-nad/registry/sources/relic.json",
+      "tags": [
+        "relic",
+        "base",
+        "heart_seed",
+        "Семя сердца"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/relic/lantern_shard",
+      "name": "Осколок маяка",
+      "kind": "relic",
+      "source_symbol": "defineRelic",
+      "source_key": "lantern_shard",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1259,
+      "source_line_end": 1259,
+      "source_file": "shared/components/pod-i-nad/registry/sources/relic.json",
+      "tags": [
+        "relic",
+        "base",
+        "lantern_shard",
+        "Осколок маяка"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/relic/storm_glass",
+      "name": "Штормовое стекло",
+      "kind": "relic",
+      "source_symbol": "defineRelic",
+      "source_key": "storm_glass",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1260,
+      "source_line_end": 1276,
+      "source_file": "shared/components/pod-i-nad/registry/sources/relic.json",
+      "tags": [
+        "relic",
+        "base",
+        "storm_glass",
+        "Штормовое стекло"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/none",
+      "name": "none",
+      "kind": "ricochet",
+      "source_symbol": "defineRicochet",
+      "source_key": "none",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1284,
+      "source_line_end": 1284,
+      "source_file": "shared/components/pod-i-nad/registry/sources/ricochet.json",
+      "tags": [
+        "ricochet",
+        "base",
+        "none"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/mirror",
+      "name": "mirror",
+      "kind": "ricochet",
+      "source_symbol": "defineRicochet",
+      "source_key": "mirror",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1285,
+      "source_line_end": 1289,
+      "source_file": "shared/components/pod-i-nad/registry/sources/ricochet.json",
+      "tags": [
+        "ricochet",
+        "base",
+        "mirror"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/scatter",
+      "name": "scatter",
+      "kind": "ricochet",
+      "source_symbol": "defineRicochet",
+      "source_key": "scatter",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1290,
+      "source_line_end": 1294,
+      "source_file": "shared/components/pod-i-nad/registry/sources/ricochet.json",
+      "tags": [
+        "ricochet",
+        "base",
+        "scatter"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/damped",
+      "name": "damped",
+      "kind": "ricochet",
+      "source_symbol": "defineRicochet",
+      "source_key": "damped",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1295,
+      "source_line_end": 1305,
+      "source_file": "shared/components/pod-i-nad/registry/sources/ricochet.json",
+      "tags": [
+        "ricochet",
+        "base",
+        "damped"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/roll",
+      "name": "roll",
+      "kind": "ricochet",
+      "source_symbol": "defineRicochet",
+      "source_key": "roll",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1306,
+      "source_line_end": 1317,
+      "source_file": "shared/components/pod-i-nad/registry/sources/ricochet.json",
+      "tags": [
+        "ricochet",
+        "base",
+        "roll"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/stick",
+      "name": "stick",
+      "kind": "ricochet",
+      "source_symbol": "defineRicochet",
+      "source_key": "stick",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1318,
+      "source_line_end": 1325,
+      "source_file": "shared/components/pod-i-nad/registry/sources/ricochet.json",
+      "tags": [
+        "ricochet",
+        "base",
+        "stick"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/sound/thunder",
+      "name": "thunder",
+      "kind": "sound",
+      "source_symbol": "defineSound",
+      "source_key": "thunder",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1336,
+      "source_line_end": 1340,
+      "source_file": "shared/components/pod-i-nad/registry/sources/sound.json",
+      "tags": [
+        "sound",
+        "base",
+        "thunder"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/sound/ghost_voice",
+      "name": "ghost_voice",
+      "kind": "sound",
+      "source_symbol": "defineSound",
+      "source_key": "ghost_voice",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1341,
+      "source_line_end": 1341,
+      "source_file": "shared/components/pod-i-nad/registry/sources/sound.json",
+      "tags": [
+        "sound",
+        "base",
+        "ghost_voice"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/sound/fisher_voice",
+      "name": "fisher_voice",
+      "kind": "sound",
+      "source_symbol": "defineSound",
+      "source_key": "fisher_voice",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1342,
+      "source_line_end": 1342,
+      "source_file": "shared/components/pod-i-nad/registry/sources/sound.json",
+      "tags": [
+        "sound",
+        "base",
+        "fisher_voice"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/sound/wish",
+      "name": "wish",
+      "kind": "sound",
+      "source_symbol": "defineSound",
+      "source_key": "wish",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1343,
+      "source_line_end": 1343,
+      "source_file": "shared/components/pod-i-nad/registry/sources/sound.json",
+      "tags": [
+        "sound",
+        "base",
+        "wish"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/sound/meteor",
+      "name": "meteor",
+      "kind": "sound",
+      "source_symbol": "defineSound",
+      "source_key": "meteor",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1344,
+      "source_line_end": 1344,
+      "source_file": "shared/components/pod-i-nad/registry/sources/sound.json",
+      "tags": [
+        "sound",
+        "base",
+        "meteor"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/fists",
+      "name": "Кулаки",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "fists",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1358,
+      "source_line_end": 1359,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "fists",
+        "Кулаки"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/stick",
+      "name": "Палка",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "stick",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1360,
+      "source_line_end": 1361,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "stick",
+        "Палка"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/dagger",
+      "name": "Кинжал",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "dagger",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1362,
+      "source_line_end": 1363,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "dagger",
+        "Кинжал"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/sword",
+      "name": "Меч",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "sword",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1364,
+      "source_line_end": 1365,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "sword",
+        "Меч"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/katana",
+      "name": "Катана",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "katana",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1366,
+      "source_line_end": 1367,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "katana",
+        "Катана"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/axe",
+      "name": "Топор",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "axe",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1368,
+      "source_line_end": 1369,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "axe",
+        "Топор"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/hammer",
+      "name": "Боевой молот",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "hammer",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1370,
+      "source_line_end": 1371,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "hammer",
+        "Боевой молот"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/spear",
+      "name": "Копьё",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "spear",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1372,
+      "source_line_end": 1373,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "spear",
+        "Копьё"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/scythe",
+      "name": "Коса жнеца",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "scythe",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1374,
+      "source_line_end": 1375,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "scythe",
+        "Коса жнеца"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/flamesword",
+      "name": "Пламень",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "flamesword",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1376,
+      "source_line_end": 1377,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "flamesword",
+        "Пламень"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/flail",
+      "name": "Цеп",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "flail",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1378,
+      "source_line_end": 1379,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "flail",
+        "Цеп"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/sling",
+      "name": "Рогатка",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "sling",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1393,
+      "source_line_end": 1394,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "sling",
+        "Рогатка"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/bow",
+      "name": "Лук",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "bow",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1395,
+      "source_line_end": 1396,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "bow",
+        "Лук"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/xbow",
+      "name": "Морозный арбалет",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "xbow",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1397,
+      "source_line_end": 1398,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "xbow",
+        "Морозный арбалет"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/pistol",
+      "name": "Револьвер",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "pistol",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1399,
+      "source_line_end": 1400,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "pistol",
+        "Револьвер"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/shotgun",
+      "name": "Дробовик",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "shotgun",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1401,
+      "source_line_end": 1402,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "shotgun",
+        "Дробовик"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/smg",
+      "name": "Трещотка",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "smg",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1403,
+      "source_line_end": 1404,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "smg",
+        "Трещотка"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/saw",
+      "name": "Пилобой",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "saw",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1405,
+      "source_line_end": 1406,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "saw",
+        "Пилобой"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/bomb",
+      "name": "Бомбарда",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "bomb",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1407,
+      "source_line_end": 1408,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "bomb",
+        "Бомбарда"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/tesla",
+      "name": "Тесла-жезл",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "tesla",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1409,
+      "source_line_end": 1410,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "tesla",
+        "Тесла-жезл"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/laser",
+      "name": "Призма",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "laser",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1411,
+      "source_line_end": 1412,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "base",
+        "laser",
+        "Призма"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weather/rain",
+      "name": "rain",
+      "kind": "weather",
+      "source_symbol": "defineWeather",
+      "source_key": "rain",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1422,
+      "source_line_end": 1422,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weather.json",
+      "tags": [
+        "weather",
+        "base",
+        "rain"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weather/snow",
+      "name": "snow",
+      "kind": "weather",
+      "source_symbol": "defineWeather",
+      "source_key": "snow",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1423,
+      "source_line_end": 1423,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weather.json",
+      "tags": [
+        "weather",
+        "base",
+        "snow"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weather/ash",
+      "name": "ash",
+      "kind": "weather",
+      "source_symbol": "defineWeather",
+      "source_key": "ash",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1424,
+      "source_line_end": 1424,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weather.json",
+      "tags": [
+        "weather",
+        "base",
+        "ash"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weather/embers",
+      "name": "embers",
+      "kind": "weather",
+      "source_symbol": "defineWeather",
+      "source_key": "embers",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1425,
+      "source_line_end": 1425,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weather.json",
+      "tags": [
+        "weather",
+        "base",
+        "embers"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weather/spores",
+      "name": "spores",
+      "kind": "weather",
+      "source_symbol": "defineWeather",
+      "source_key": "spores",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1426,
+      "source_line_end": 1426,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weather.json",
+      "tags": [
+        "weather",
+        "base",
+        "spores"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weather/stardust",
+      "name": "stardust",
+      "kind": "weather",
+      "source_symbol": "defineWeather",
+      "source_key": "stardust",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1427,
+      "source_line_end": 1427,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weather.json",
+      "tags": [
+        "weather",
+        "base",
+        "stardust"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weather/sea_mist",
+      "name": "sea_mist",
+      "kind": "weather",
+      "source_symbol": "defineWeather",
+      "source_key": "sea_mist",
+      "pack": "base",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1428,
+      "source_line_end": 1428,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weather.json",
+      "tags": [
+        "weather",
+        "base",
+        "sea_mist"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/biome/frost",
+      "name": "Ледяной фьорд",
+      "kind": "biome",
+      "source_symbol": "defineBiome",
+      "source_key": "frost",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1442,
+      "source_line_end": 1475,
+      "source_file": "shared/components/pod-i-nad/registry/sources/biome.json",
+      "tags": [
+        "biome",
+        "frost",
+        "frost",
+        "Ледяной фьорд"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/snow",
+      "name": "Снег",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "snow",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1483,
+      "source_line_end": 1483,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "frost",
+        "snow",
+        "Снег"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/frozen_dirt",
+      "name": "Мёрзлая земля",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "frozen_dirt",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1484,
+      "source_line_end": 1484,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "frost",
+        "frozen_dirt",
+        "Мёрзлая земля"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/ice",
+      "name": "Лёд",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "ice",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1485,
+      "source_line_end": 1485,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "frost",
+        "ice",
+        "Лёд"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/packed_snow",
+      "name": "Утоптанный снег",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "packed_snow",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1486,
+      "source_line_end": 1486,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "frost",
+        "packed_snow",
+        "Утоптанный снег"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/frost_brick",
+      "name": "Ледяной кирпич",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "frost_brick",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1487,
+      "source_line_end": 1487,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "frost",
+        "frost_brick",
+        "Ледяной кирпич"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/block/pine_needles",
+      "name": "Хвоя",
+      "kind": "block",
+      "source_symbol": "defineBlock",
+      "source_key": "pine_needles",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1488,
+      "source_line_end": 1488,
+      "source_file": "shared/components/pod-i-nad/registry/sources/block.json",
+      "tags": [
+        "block",
+        "frost",
+        "pine_needles",
+        "Хвоя"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/frost_imp",
+      "name": "Ледяной бесёнок",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "frost_imp",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1497,
+      "source_line_end": 1501,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "frost",
+        "frost_imp",
+        "Ледяной бесёнок"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/frost_warden",
+      "name": "Ледяной страж",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "frost_warden",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1502,
+      "source_line_end": 1517,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "frost",
+        "frost_warden",
+        "Ледяной страж"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/event/blizzard",
+      "name": "Метель",
+      "kind": "event",
+      "source_symbol": "defineEvent",
+      "source_key": "blizzard",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1524,
+      "source_line_end": 1540,
+      "source_file": "shared/components/pod-i-nad/registry/sources/event.json",
+      "tags": [
+        "event",
+        "frost",
+        "blizzard",
+        "Метель"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/event/aurora",
+      "name": "Северное сияние",
+      "kind": "event",
+      "source_symbol": "defineEvent",
+      "source_key": "aurora",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1541,
+      "source_line_end": 1551,
+      "source_file": "shared/components/pod-i-nad/registry/sources/event.json",
+      "tags": [
+        "event",
+        "frost",
+        "aurora",
+        "Северное сияние"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/flora/pine",
+      "name": "Ель",
+      "kind": "flora",
+      "source_symbol": "defineFlora",
+      "source_key": "pine",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1559,
+      "source_line_end": 1575,
+      "source_file": "shared/components/pod-i-nad/registry/sources/flora.json",
+      "tags": [
+        "flora",
+        "frost",
+        "pine",
+        "Ель"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/relic/rime_charm",
+      "name": "Иней",
+      "kind": "relic",
+      "source_symbol": "defineRelic",
+      "source_key": "rime_charm",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1582,
+      "source_line_end": 1582,
+      "source_file": "shared/components/pod-i-nad/registry/sources/relic.json",
+      "tags": [
+        "relic",
+        "frost",
+        "rime_charm",
+        "Иней"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/sound/step_snow",
+      "name": "step_snow",
+      "kind": "sound",
+      "source_symbol": "defineSound",
+      "source_key": "step_snow",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1593,
+      "source_line_end": 1593,
+      "source_file": "shared/components/pod-i-nad/registry/sources/sound.json",
+      "tags": [
+        "sound",
+        "frost",
+        "step_snow"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/sound/step_ice",
+      "name": "step_ice",
+      "kind": "sound",
+      "source_symbol": "defineSound",
+      "source_key": "step_ice",
+      "pack": "frost",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1594,
+      "source_line_end": 1594,
+      "source_file": "shared/components/pod-i-nad/registry/sources/sound.json",
+      "tags": [
+        "sound",
+        "frost",
+        "step_ice"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/body/jelly",
+      "name": "jelly",
+      "kind": "body",
+      "source_symbol": "defineBody",
+      "source_key": "jelly",
+      "pack": "deep",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1628,
+      "source_line_end": 1676,
+      "source_file": "shared/components/pod-i-nad/registry/sources/body.json",
+      "tags": [
+        "body",
+        "deep",
+        "jelly"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/brain/drifter",
+      "name": "drifter",
+      "kind": "brain",
+      "source_symbol": "defineBrain",
+      "source_key": "drifter",
+      "pack": "deep",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1684,
+      "source_line_end": 1719,
+      "source_file": "shared/components/pod-i-nad/registry/sources/brain.json",
+      "tags": [
+        "brain",
+        "deep",
+        "drifter"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/lantern_jelly",
+      "name": "Медуза-фонарик",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "lantern_jelly",
+      "pack": "deep",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1727,
+      "source_line_end": 1733,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "deep",
+        "lantern_jelly",
+        "Медуза-фонарик"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/rose_jelly",
+      "name": "Медуза-огонёк",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "rose_jelly",
+      "pack": "deep",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1734,
+      "source_line_end": 1740,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "deep",
+        "rose_jelly",
+        "Медуза-огонёк"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/sound/jelly_sting",
+      "name": "jelly_sting",
+      "kind": "sound",
+      "source_symbol": "defineSound",
+      "source_key": "jelly_sting",
+      "pack": "deep",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1746,
+      "source_line_end": 1746,
+      "source_file": "shared/components/pod-i-nad/registry/sources/sound.json",
+      "tags": [
+        "sound",
+        "deep",
+        "jelly_sting"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/character/keeper",
+      "name": "Смотритель",
+      "kind": "character",
+      "source_symbol": "defineCharacter",
+      "source_key": "keeper",
+      "pack": "keeper",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1760,
+      "source_line_end": 1768,
+      "source_file": "shared/components/pod-i-nad/registry/sources/character.json",
+      "tags": [
+        "character",
+        "keeper",
+        "keeper",
+        "Смотритель"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/projectile/boomerang",
+      "name": "boomerang",
+      "kind": "projectile",
+      "source_symbol": "defineProjectile",
+      "source_key": "boomerang",
+      "pack": "keeper",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1784,
+      "source_line_end": 1808,
+      "source_file": "shared/components/pod-i-nad/registry/sources/projectile.json",
+      "tags": [
+        "projectile",
+        "keeper",
+        "boomerang"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/boomerang",
+      "name": "boomerang",
+      "kind": "ricochet",
+      "source_symbol": "defineRicochet",
+      "source_key": "boomerang",
+      "pack": "keeper",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1815,
+      "source_line_end": 1820,
+      "source_file": "shared/components/pod-i-nad/registry/sources/ricochet.json",
+      "tags": [
+        "ricochet",
+        "keeper",
+        "boomerang"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/sound/boom_whoosh",
+      "name": "boom_whoosh",
+      "kind": "sound",
+      "source_symbol": "defineSound",
+      "source_key": "boom_whoosh",
+      "pack": "keeper",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1826,
+      "source_line_end": 1826,
+      "source_file": "shared/components/pod-i-nad/registry/sources/sound.json",
+      "tags": [
+        "sound",
+        "keeper",
+        "boom_whoosh"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/sound/boom_catch",
+      "name": "boom_catch",
+      "kind": "sound",
+      "source_symbol": "defineSound",
+      "source_key": "boom_catch",
+      "pack": "keeper",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1827,
+      "source_line_end": 1827,
+      "source_file": "shared/components/pod-i-nad/registry/sources/sound.json",
+      "tags": [
+        "sound",
+        "keeper",
+        "boom_catch"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/weapon/boomerang",
+      "name": "Бумеранг",
+      "kind": "weapon",
+      "source_symbol": "defineWeapon",
+      "source_key": "boomerang",
+      "pack": "keeper",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1835,
+      "source_line_end": 1846,
+      "source_file": "shared/components/pod-i-nad/registry/sources/weapon.json",
+      "tags": [
+        "weapon",
+        "keeper",
+        "boomerang",
+        "Бумеранг"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/biome/sunken",
+      "name": "Затонувший город",
+      "kind": "biome",
+      "source_symbol": "defineBiome",
+      "source_key": "sunken",
+      "pack": "sunken",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1860,
+      "source_line_end": 1909,
+      "source_file": "shared/components/pod-i-nad/registry/sources/biome.json",
+      "tags": [
+        "biome",
+        "sunken",
+        "sunken",
+        "Затонувший город"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/body/swimmer",
+      "name": "swimmer",
+      "kind": "body",
+      "source_symbol": "defineBody",
+      "source_key": "swimmer",
+      "pack": "sunken",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1918,
+      "source_line_end": 1918,
+      "source_file": "shared/components/pod-i-nad/registry/sources/body.json",
+      "tags": [
+        "body",
+        "sunken",
+        "swimmer"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/brain/swimmer",
+      "name": "swimmer",
+      "kind": "brain",
+      "source_symbol": "defineBrain",
+      "source_key": "swimmer",
+      "pack": "sunken",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1919,
+      "source_line_end": 1926,
+      "source_file": "shared/components/pod-i-nad/registry/sources/brain.json",
+      "tags": [
+        "brain",
+        "sunken",
+        "swimmer"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_eel",
+      "name": "Угорь",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "uw_eel",
+      "pack": "sunken",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1929,
+      "source_line_end": 1931,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_eel",
+        "Угорь"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_jelly_t",
+      "name": "Медуза",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "uw_jelly_t",
+      "pack": "sunken",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1932,
+      "source_line_end": 1934,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_jelly_t",
+        "Медуза"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_jelly_v",
+      "name": "Фиолетовая медуза",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "uw_jelly_v",
+      "pack": "sunken",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1935,
+      "source_line_end": 1937,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_jelly_v",
+        "Фиолетовая медуза"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_drone",
+      "name": "Дрон-разведчик",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "uw_drone",
+      "pack": "sunken",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1938,
+      "source_line_end": 1940,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_drone",
+        "Дрон-разведчик"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_angler",
+      "name": "Удильщик",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "uw_angler",
+      "pack": "sunken",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1941,
+      "source_line_end": 1944,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_angler",
+        "Удильщик"
+      ]
+    },
+    {
+      "id": "pod-i-nad/registry/enemy/uw_kraken",
+      "name": "Хранитель глубин",
+      "kind": "enemy",
+      "source_symbol": "defineEnemy",
+      "source_key": "uw_kraken",
+      "pack": "sunken",
+      "status": "SOURCE_ONLY",
+      "source": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+      "source_line_start": 1945,
+      "source_line_end": 1953,
+      "source_file": "shared/components/pod-i-nad/registry/sources/enemy.json",
+      "tags": [
+        "enemy",
+        "sunken",
+        "uw_kraken",
+        "Хранитель глубин"
+      ]
+    }
+  ]
+}

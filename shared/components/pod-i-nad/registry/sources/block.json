@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "kind": "block",
+  "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+  "definitions": [
+    {
+      "id": "pod-i-nad/registry/block/grass",
+      "source": "defineBlock('grass', { name: 'Трава', tiles: { top: 'grass', side: 'grass_side', bottom: 'dirt' }, sideCovered: 'dirt', mm: '#3f8a3f', step: 'soft', dust: '#7a5236' })",
+      "source_line_start": 728,
+      "source_line_end": 728
+    },
+    {
+      "id": "pod-i-nad/registry/block/dirt",
+      "source": "defineBlock('dirt', { name: 'Земля', tiles: 'dirt', mm: '#8c5e38', step: 'soft', dust: '#7a5236' })",
+      "source_line_start": 729,
+      "source_line_end": 729
+    },
+    {
+      "id": "pod-i-nad/registry/block/stone",
+      "source": "defineBlock('stone', { name: 'Камень', tiles: 'stone', mm: '#7c8292', step: 'stone' })",
+      "source_line_start": 730,
+      "source_line_end": 730
+    },
+    {
+      "id": "pod-i-nad/registry/block/plank",
+      "source": "defineBlock('plank', { name: 'Доски', tiles: 'wood', mm: '#b07f48', step: 'wood' })",
+      "source_line_start": 731,
+      "source_line_end": 731
+    },
+    {
+      "id": "pod-i-nad/registry/block/sand",
+      "source": "defineBlock('sand', { name: 'Песок', tiles: 'sand', mm: '#d8bc7c', step: 'soft', dust: '#d9bf86' })",
+      "source_line_start": 732,
+      "source_line_end": 732
+    },
+    {
+      "id": "pod-i-nad/registry/block/leaves",
+      "source": "defineBlock('leaves', { name: 'Листва', tiles: 'leaves', mm: '#24613a', leafy: true, tint: [0.86, 0.22], step: 'soft' })",
+      "source_line_start": 733,
+      "source_line_end": 733
+    },
+    {
+      "id": "pod-i-nad/registry/block/brick",
+      "source": "defineBlock('brick', { name: 'Кирпич', tiles: 'brick', mm: '#b04a3a', step: 'stone' })",
+      "source_line_start": 734,
+      "source_line_end": 734
+    },
+    {
+      "id": "pod-i-nad/registry/block/bark",
+      "source": "defineBlock('bark', { name: 'Ствол', tiles: { top: 'log_top', side: 'bark', bottom: 'log_top' }, mm: '#6a4a30', trunk: true, step: 'wood' })",
+      "source_line_start": 735,
+      "source_line_end": 735
+    },
+    {
+      "id": "pod-i-nad/registry/block/snow",
+      "source": "defineBlock('snow', { name: 'Снег', tiles: { top: 'snow', side: 'snow_side', bottom: 'frozen_dirt' }, sideCovered: 'frozen_dirt', mm: '#dfe7f5', step: 'snow', dust: '#e3ebf7' })",
+      "source_line_start": 1483,
+      "source_line_end": 1483
+    },
+    {
+      "id": "pod-i-nad/registry/block/frozen_dirt",
+      "source": "defineBlock('frozen_dirt', { name: 'Мёрзлая земля', tiles: 'frozen_dirt', mm: '#5e4646', step: 'soft', dust: '#7a5c55' })",
+      "source_line_start": 1484,
+      "source_line_end": 1484
+    },
+    {
+      "id": "pod-i-nad/registry/block/ice",
+      "source": "defineBlock('ice', { name: 'Лёд', tiles: 'ice', mm: '#8fc4e8', step: 'ice', slip: 0.85, tint: [0.98, 0.04] })",
+      "source_line_start": 1485,
+      "source_line_end": 1485
+    },
+    {
+      "id": "pod-i-nad/registry/block/packed_snow",
+      "source": "defineBlock('packed_snow', { name: 'Утоптанный снег', tiles: 'packed_snow', mm: '#b3bfdc', step: 'snow', dust: '#c0cde6' })",
+      "source_line_start": 1486,
+      "source_line_end": 1486
+    },
+    {
+      "id": "pod-i-nad/registry/block/frost_brick",
+      "source": "defineBlock('frost_brick', { name: 'Ледяной кирпич', tiles: 'frost_brick', mm: '#8e9ab4', step: 'stone' })",
+      "source_line_start": 1487,
+      "source_line_end": 1487
+    },
+    {
+      "id": "pod-i-nad/registry/block/pine_needles",
+      "source": "defineBlock('pine_needles', { name: 'Хвоя', tiles: 'pine_needles', mm: '#1f4d4a', leafy: true, tint: [0.86, 0.22], step: 'soft' })",
+      "source_line_start": 1488,
+      "source_line_end": 1488
+    }
+  ]
+}

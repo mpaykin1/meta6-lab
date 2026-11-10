@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "broken-city-zip-2026-11-09",
+  "title": "Сломанный город — эталон из ZIP",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES",
+  "date_added": "2026-11-09",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "path": "reference/broken-city-2026-11-09/original.html",
+    "git_blob_sha": "686cd5402c59e1f08d306c4acba6a5833db8e966",
+    "sha256": "b96ea8d3c76aab4690ce30dfd28b3f7e30dfa28cd84799b9e7c200858c01dfd9",
+    "size_bytes": 315719
+  },
+  "archive": {
+    "filename": "Сломанный город.zip",
+    "sha256": "0a9c27d4314cd48a57fb79a1a427fd3c93fcd6833d446e21a012be3ccf2b7d2f",
+    "size_bytes": 7260555,
+    "file_count": 79,
+    "contents": {
+      "index.html": 1,
+      "audio": 76,
+      "fonts": 2
+    },
+    "archive_file_mapped_to": "reference/broken-city-2026-11-09/original.html"
+  },
+  "playable": {
+    "entry": "reference/broken-city-2026-11-09/index.html",
+    "canonical_game": "games/broken-city/index.html",
+    "three_js_local": "games/broken-city/lib/three.module.js",
+    "external_import_replaced_for_offline_play": true
+  },
+  "viewer_url": "https://mpaykin1.github.io/meta6-lab/reference/broken-city-2026-11-09/",
+  "technologies": [
+    "Three.js r160",
+    "WebGL",
+    "procedural city",
+    "particle effects",
+    "audio",
+    "keyboard and touch controls"
+  ],
+  "reuse": {
+    "owner_supplied": true,
+    "owner_designated_reference": true,
+    "third_party_rights_verified": false,
+    "requires_dependency_license_review": true,
+    "description": "Preserve owner-supplied original verbatim and reuse only subject to rights."
+  },
+  "original_preserved": true,
+  "modularized": false,
+  "provenance": "Original archive index and all 78 binary assets match existing games/broken-city Git blobs. Executable index differs only by local Three.js import map."
+}

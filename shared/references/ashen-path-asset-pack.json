@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "ashen-path-asset-pack",
+  "title": "Пепельный путь — ассет-пак",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES",
+  "date_added": "2026-11-08",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "path": "games/ashen-path-asset-pack/index.html",
+    "git_blob_sha": "a5911f6d0a0e36fc4fc0ad581be071dfb6d7882c",
+    "sha256": "1bbf2d7f172021c31be9b1520eb5ba9e6a65da3843170f6a2280e743dc5e4ea6",
+    "size_bytes": 858822,
+    "sidecar_path": "games/ashen-path-asset-pack/source.md"
+  },
+  "viewer_url": "https://mpaykin1.github.io/meta6-lab/games/ashen-path-asset-pack/",
+  "technologies": [
+    "Three.js r160 (embedded)",
+    "WebGL",
+    "procedural voxels",
+    "animated models",
+    "camera controls",
+    "rain",
+    "pixel postprocessing"
+  ],
+  "reuse": {
+    "owner_supplied": true,
+    "owner_designated_reference": true,
+    "third_party_rights_verified": false,
+    "requires_dependency_license_review": true,
+    "description": "Reuse original owner-controlled content; honor third-party licenses and keep exact source available."
+  },
+  "original_preserved": true,
+  "modularized": false
+}

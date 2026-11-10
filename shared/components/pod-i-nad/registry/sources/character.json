@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "character",
+  "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+  "definitions": [
+    {
+      "id": "pod-i-nad/registry/character/wanderer",
+      "source": "defineCharacter('wanderer', {\n  name: 'Странник',\n  desc: 'Пришёл с моря с пустыми руками. Ни в чём не лучший — и ни в чём не хуже.',\n  perk: 'без слабостей',\n  art: 'wanderer',\n  stats: { hp: 6 },\n  start: ['fists'],\n})",
+      "source_line_start": 1146,
+      "source_line_end": 1153
+    },
+    {
+      "id": "pod-i-nad/registry/character/keeper",
+      "source": "defineCharacter('keeper', {\n  name: 'Смотритель',\n  desc: 'Младший смотритель маяка. Фонарь на поясе освещает путь, бумеранг всегда возвращается в руку.',\n  perk: 'фонарь и бумеранг',\n  art: 'keeper',\n  stats: { hp: 6, speed: 0.95, ranged: 1.1, wisp: 1.25 },\n  start: ['boomerang', 'fists'],\n  lantern: { x: 11, y: 19, col: 'goldHot', halo: 'wispHalo' },\n})",
+      "source_line_start": 1760,
+      "source_line_end": 1768
+    }
+  ]
+}

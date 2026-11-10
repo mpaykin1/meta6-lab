@@ -126,6 +126,7 @@
 - **06.11.2026** — по прямому слову владельца («загрузить эти проекты как эталонные … с информацией о всех универсальных правилах, которые нам ещё предстоит внедрить») Claude перенёс как есть три игры, уже исправленные по RETENTION R1–R11: [games/twilight-isle-classic/](../../games/twilight-isle-classic/README.md) (1.1.1), [games/twilight-isles/](../../games/twilight-isles/README.md) (2.0.0), [games/archer-in-the-fog/](../../games/archer-in-the-fog/README.md) (2.0.0) — те же сборки, что в песочнице Playgama. Карточки Realm 07–09 на платформе; статус по каждому правилу — в README игр и в [RULES_CHECKLIST.md](RULES_CHECKLIST.md). Перенос остальных игр из артефактов по-прежнему на паузе.
 - **06.11.2026** — промпт для ChatGPT на внедрение (бот + исправление игр): [automation/prompts/meta-games-bot-rollout.md](../../automation/prompts/meta-games-bot-rollout.md). Ответ ChatGPT начинается строкой «ДЛЯ CLAUDE НА ПРОВЕРКУ»; Claude проверяет по разделам 7–10.
 - Порядок работ: сначала бот → потом игры из артефактов в meta6 (по слову владельца) → потом автоулучшение всех игр.
+- **10.11.2026 (владелец):** все игры, залитые в META GAMES LAB, — эталоны библиотеки. Опись: [docs/INVENTORY_LAB_GAMES_2026-11-10.md](../../docs/INVENTORY_LAB_GAMES_2026-11-10.md) — 24 игры; L1 считается по ней.
 
 ## 12. Защита направления проекта (поставил Claude 06.11.2026)
 - **Сторож** `.github/workflows/meta-games-guard.yml` + `scripts/meta-games-guard.sh` проверяет каждый PR, каждый push в main и раз в сутки:

@@ -1,0 +1,32 @@
+name: Materialize approved Pod i Nad assets
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/materialize-pod-i-nad.yml'
+      - 'scripts/asset-library/extract-pod-i-nad.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  extract-original:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PNG extractor dependency
+        run: python -m pip install --disable-pip-version-check Pillow==11.3.0
+      - name: Materialize original assets without modifying reference
+        run: python scripts/asset-library/extract-pod-i-nad.py
+      - name: Commit actual PNG assets and machine catalog
+        run: |
+          git add shared/components/pod-i-nad/textures shared/components/pod-i-nad/sprites shared/components/pod-i-nad/sprites.json
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'feat(asset-library): materialize verified original Pod i Nad PNGs'
+            git push
+          fi

@@ -8,7 +8,7 @@
 - SHA: `650ae1ebf6793bd31be220e232309dceb1a8e20e` · последний коммит: 2026-11-08T15:04:21Z
 - Проблема: Красная проверка: bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42492922303/job/128768971831), browser (https://github.com/mpaykin1/meta6-lab/actions/runs/42492922266/job/128768971779)
 - Задание: Исправь bot по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42492922303/job/128768971831 и повтори CI.
-- Взял: —
+- Взял: MG-ремонтник 2026-11-10T09:58:00Z
 
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132

@@ -3,7 +3,7 @@ import {pathToFileURL} from 'node:url';
 import {resolve, dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url));
-const {apply, parseRows, START, END} = await import(pathToFileURL(resolve(process.argv[2] || resolve(here, 'watch.mjs'))).href);
+const {apply, parseRows, markSuperseded, START, END} = await import(pathToFileURL(resolve(process.argv[2] || resolve(here, 'watch.mjs'))).href);
 const now = Date.parse('2026-11-10T12:00:00Z'), H = 3600e3;
 const row = (status, task, branch, taken) => `| ${status} | ${task} | МГЛ | чат ChatGPT | ${branch} | — | ${taken} | — |`;
 const doc = rows => `# t\nСторож проверил: —\n${START}\n| Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |\n|---|---|---|---|---|---|---|---|\n${rows.join('\n')}\n${END}\nхвост\n`;
@@ -64,6 +64,11 @@ ok('1.5 одинаковый PR при разных ветках объедин�
 
 r = st([row('взято', 'obsolete', 'lab/old', '2026-11-07 07:00')], {pulls:{'lab/old':pr(93, {lastCommit:now-73*H, duplicateOf:94})}});
 ok('1.6 устаревший подтверждённый дубль', /^✖ ЗАКРЫТЬ: дубль #94/.test(r.obsolete.status));
+
+const supersession={'old':{repo:'o/r',number:43,state:'open'},'new':{repo:'o/r',number:49,state:'open',supersedes:43}};
+markSuperseded(supersession);
+ok('1.6 замена относится к старому PR, а не к новому', supersession.old.supersededBy===49&&!supersession.new.supersededBy);
+
 const rich = apply(doc([row('взято','conflict','lab/dirty','2026-11-10 07:00'),row('взято','red','lab/red','2026-11-10 07:00')]),{repo:'o/r',pulls:{'lab/dirty':pr(20,{mergeable_state:'dirty'}),'lab/red':pr(21,{checkRuns:[{name:'x',conclusion:'timed_out'}]})}},now);
 ok('1.3 итог и списки чинить/толкнуть', /⚔.*1/.test(rich) && /❌.*1/.test(rich) && /\*\*Чинить сейчас:/.test(rich) && /\*\*Толкнуть сейчас:/.test(rich));
 

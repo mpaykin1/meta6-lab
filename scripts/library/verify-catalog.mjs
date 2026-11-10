@@ -1,9 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import {createRequire} from 'node:module';
 import {ROOT,rangeBytes} from './machine.mjs';
 import {isOriginalGameSource,MIN_SYSTEM_LINES} from './source-policy.mjs';
 import {linkedAssets} from './asset-links.mjs';
+const acorn=createRequire(new URL('./mcp-test/package.json',import.meta.url))('acorn');
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 export function verifyCatalog(root=ROOT){
  const file=path.join(root,'shared/library/catalog-solutions.json');
@@ -32,6 +34,14 @@ export function verifyCatalog(root=ROOT){
   }
   if(total<MIN_SYSTEM_LINES)throw Error('Tiny function is not a system: '+s.id);
   if(sha(Buffer.concat(chunks))!==s.sha256)throw Error('Truncated or modified source: '+s.id);
+  if(s.standalone!==false){
+   try{
+    acorn.parse(Buffer.concat(chunks).toString('utf8'),{
+     ecmaVersion:'latest',sourceType:'module',allowReturnOutsideFunction:true,
+     allowAwaitOutsideFunction:true
+    });
+   }catch(error){throw Error('AST-incomplete original subsystem '+s.id+': '+error.message);}
+  }
   if(!s.how_to_connect?.entrypoint)throw Error('Missing entrypoint: '+s.id);
   if(s.load_ok===true&&!s.load_evidence?.chromium_run)throw Error('Unverified load_ok: '+s.id);
   if(!Array.isArray(s.depends_on))throw Error('Missing dependencies: '+s.id);

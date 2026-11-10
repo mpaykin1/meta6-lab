@@ -34,6 +34,22 @@ const scenarios=[
     fs.writeFileSync(path.join(next,'new.png'),Buffer.from([137,80,78,71,13,10,26,10,4,5,6]));
     // A hardcoded index deliberately remains unchanged.
   }],
+  ['deception-frozen-index-for-skin-trainer',root=>{
+    const next=path.join(root,'games/skin-trainer');
+    fs.mkdirSync(next,{recursive:true});
+    fs.writeFileSync(path.join(next,'index.html'),'<style>canvas{color:orange}</style><script>function walkRobot(){return true;}</script>');
+    fs.writeFileSync(path.join(next,'skin.png'),Buffer.from([137,80,78,71,13,10,26,10,3,2,1]));
+    // A newly added source must invalidate an unrebuilt index, including a skin training game.
+  }],
+  ['deception-copy-game-forced-into-index',root=>{
+    const dir=path.join(root,'games/base-copy');
+    fs.mkdirSync(dir,{recursive:true});
+    fs.writeFileSync(path.join(dir,'index.html'),'<style>canvas{color:grey}</style><script>function copy(){return 1;}</script>');
+    const indexFile=path.join(root,'shared/library/index.json');
+    const index=read(indexFile);
+    index.games.push({...index.games.find(g=>g.game==='base'),game:'base-copy',source_root:'games/base-copy',manifest:'shared/library/base-copy.json'});
+    write(indexFile,index);
+  }],
   ['missing-file-asset-with-cleaned-index',root=>{
     const mf=path.join(root,'shared/library/base.json'),ix=path.join(root,'shared/library/index.json');
     const m=read(mf),index=read(ix),removed=m.assets.find(a=>a.bytes!==undefined);

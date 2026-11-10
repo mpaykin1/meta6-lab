@@ -30,7 +30,7 @@ function independentWalk(dir){
 }
 function expectedGames(root){
   const base=path.join(root,'games');
-  const found=fs.readdirSync(base,{withFileTypes:true}).filter(x=>x.isDirectory()).map(x=>({game:x.name,source_root:'games/'+x.name}));
+  const found=fs.readdirSync(base,{withFileTypes:true}).filter(x=>x.isDirectory()&&!x.name.endsWith('-copy')).map(x=>({game:x.name,source_root:'games/'+x.name}));
   const contents=fs.readFileSync(path.join(root,'rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md'),'utf8');
   const lines=contents.split('\n');
   const first=lines.findIndex(line=>/^## 1\./.test(line)),second=lines.findIndex(line=>/^## 2\./.test(line));

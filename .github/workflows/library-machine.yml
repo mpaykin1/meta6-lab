@@ -1,21 +1,14 @@
 name: Library Machine
 on:
+  # Every main push must validate the library, even when a file was added outside games/.
   push:
-    paths:
-      - 'games/**'
-      - 'observer-world-en-v7/**'
-      - 'ashen-sumerek/**'
-      - 'underwater-world/**'
-      - 'three-worlds-game/**'
-      - 'meta-games-worlds/veil-terraces/**'
-      - 'rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md'
-      - 'scripts/library/**'
-      - 'shared/library/**'
-      - '.github/workflows/library-machine.yml'
+    branches: [main, 'lab/**']
   pull_request:
     branches: [main]
     paths:
       - 'games/**'
+      - 'reference/**'
+      - 'references/**'
       - 'observer-world-en-v7/**'
       - 'ashen-sumerek/**'
       - 'underwater-world/**'

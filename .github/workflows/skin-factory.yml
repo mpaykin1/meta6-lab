@@ -54,7 +54,7 @@ jobs:
         run: |
           set -euo pipefail
           while IFS= read -r src; do node scripts/skins/cut-sheet.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt"
-          while IFS= read -r src; do node scripts/skins/cut-sheet.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt" --verify
+          while IFS= read -r src; do node scripts/skins/cut-sheet.mjs "$src" --verify; done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Проверить испорченные листы и подменённые файлы
         run: |
           set -euo pipefail
@@ -76,7 +76,7 @@ jobs:
       - name: Сделать 3D-превью и сравнение с эскизом
         run: |
           while IFS= read -r src; do node scripts/skins/preview.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt"
-          while IFS= read -r src; do node scripts/skins/preview.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt" --verify
+          while IFS= read -r src; do node scripts/skins/preview.mjs "$src" --verify; done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Проверить обман старым превью
         run: |
           set -euo pipefail
@@ -84,7 +84,7 @@ jobs:
             node scripts/skins/mutate-preview.mjs "$src"
           done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Создать ZIP и проверить все S1–S12
-        run: while IFS= read -r src; do node scripts/skins/build-pack.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt" --finalize
+        run: while IFS= read -r src; do node scripts/skins/build-pack.mjs "$src" --finalize; done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Опубликовать скин и изображение в ветке PR
         if: ${{ success() && github.event_name == 'push' && startsWith(github.ref, 'refs/heads/lab/skin-factory') }}
         run: |

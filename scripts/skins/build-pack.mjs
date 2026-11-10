@@ -39,13 +39,13 @@ function pose(e,k,index,variant=0){
  const bone=boneOf[e.bone],name=e.name.toLowerCase();
  let size=[.20,.20],offset=[0,0,-.29],dims;
  if(bone==='head'){
-   if(k==='plate'){size=[.72,.68];offset=[0,0,-.02];dims=[.74,.72,.62];}
+   if(k==='plate'){size=[.72,.68];offset=[0,0,-.02];dims=[.74,.72,.74];}
    else if(k==='lens'){size=[.20,.20];offset=[-.10,.09,-.36];}
    else if(k==='gear'){size=[.22,.22];offset=[.16,-.02,-.32];}
    else if(e.bone==='над головой'){size=[.10,.10];offset=[(e.place-7)*.04,.67-(e.place-6)*.13,-.05];}
    else {size=[.18,.28];offset=[k==='cable'?.23:-.2,-.22,-.26];}
  }else if(bone==='body'){
-   if(k==='plate'){size=[.64,.74];offset=[0,.06,-.04];dims=[.62,.77,.48];}
+   if(k==='plate'){size=[.64,.74];offset=[0,.06,-.04];dims=[.62,.77,.68];}
    else if(k==='core'){size=[.18,.30];offset=[0,.03,-.36];}
    else if(k==='slit'){size=[.26,.22];offset=[-.14,.17,-.365];}
    else if(k==='gear'){size=[.26,.26];offset=[.15,.16,-.35];}
@@ -56,13 +56,13 @@ function pose(e,k,index,variant=0){
  }else if(bone==='armL'||bone==='armR'){
    const sign=bone==='armL'?-1:1;
    if(e.row===3){size=[.31,.22];offset=[0,-.02,-.12];}
-   else if(e.row===4 && /предплеч/.test(name)){size=[.23,.51];offset=[sign*.015,-.27,-.025];dims=[.22,.52,.20];}
+   else if(e.row===4 && /предплеч/.test(name)){size=[.23,.51];offset=[sign*.015,-.27,-.025];dims=[.22,.52,.36];}
    else if(k==='arc'){size=[.28,.28];offset=[sign*(.05+variant*.025),-.48+variant*.025,-.25];}
    else if(k==='cable'){size=[.16,.36];offset=[sign*.09,-.27,-.17];}
    else {size=[.16,.16];offset=[0,-.03,-.20];}
  }else if(bone==='legL'||bone==='legR'){
    if(k==='slit'||e.motion==='светится'){size=[.12,.23];offset=[0,-.36,-.16];}
-   else {size=[.25,.58];offset=[0,-.30,-.015];dims=[.24,.58,.22];}
+   else {size=[.25,.58];offset=[0,-.30,-.015];dims=[.24,.58,.38];}
  }
  if(variant)offset=[offset[0]+variant*.025,offset[1]+variant*.025,offset[2]-variant*.006];
  return {size,offset,dims};
@@ -233,7 +233,7 @@ async function main(){
   for(const bone of ['armL','armR','legL','legR']){
     const base=entries.find(p=>p.bone===bone&&p.layer==='3d')||entries.find(p=>p.bone===bone);
     if(!base)fail('нет авторской детали для кости '+bone);
-    if(base.layer!=='3d')entries.push({...base,id:base.id+'-solid',layer:'3d',primitive:'box',dims:[.23,.36,.2],material:'metal',anim:[]});
+    if(base.layer!=='3d')entries.push({...base,id:base.id+'-solid',layer:'3d',primitive:'box',dims:[.23,.36,.34],material:'metal',anim:[]});
     const rear=entries.find(p=>p.bone===bone&&p.layer==='3d');
     entries.push({...rear,id:rear.id+'-back',layer:'2.5d',offset:[rear.offset[0],rear.offset[1],.25],material:'rust-transparent',anim:[]});
   }

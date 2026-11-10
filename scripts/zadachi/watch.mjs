@@ -112,17 +112,17 @@ export function resolveMergeability(fetchOne, pause = ms => execFileSync('sleep'
   return {...(result || {}), mergeable: null, mergeable_state: null};
 }
 
-function collect(rows) {
-  const repo = process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab';
-  const mgRepo = process.env.MG_REPOSITORY || 'mpaykin1/meta6';
-  const api = p => {
+export function collect(rows, options = {}) {
+  const repo = options.repo || process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab';
+  const mgRepo = options.mgRepo || process.env.MG_REPOSITORY || 'mpaykin1/meta6';
+  const api = options.api || (p => {
     try {
       return JSON.parse(execFileSync('gh', ['api', p], {maxBuffer: 64e6}).toString());
     } catch (error) {
       console.error('ZADACHI API unavailable:', p, error.message);
       return null;
     }
-  };
+  });
   const last = (repository, ref) => {
     const c = api(`repos/${repository}/commits?sha=${encodeURIComponent(ref)}&per_page=1`);
     return c?.[0] ? Date.parse(c[0].commit.committer.date) : undefined;
@@ -131,10 +131,16 @@ function collect(rows) {
   const put = (repository, p, withCommit) => {
     const open = p.state === 'open';
     const detail = open ? resolveMergeability(
-      () => api(`repos/${repository}/pulls/${p.number}`)) : p;
-    const checks = open ? api(
-      `repos/${repository}/commits/${p.head.sha}/check-runs?per_page=100`) : null;
-    const failedChecks = [...new Set((checks?.check_runs || [])
+      () => api(`repos/${repository}/pulls/${p.number}`), options.pause) : p;
+    const checkRuns = [];
+    if (open) for (let page = 1; page <= 10; page++) {
+      const checks = api(
+        `repos/${repository}/commits/${p.head.sha}/check-runs?per_page=100&page=${page}`);
+      if (!checks?.check_runs) break;
+      checkRuns.push(...checks.check_runs);
+      if (checks.check_runs.length < 100) break;
+    }
+    const failedChecks = [...new Set(checkRuns
       .filter(c => ['failure', 'timed_out', 'cancelled'].includes(c.conclusion))
       .map(c => clean(c.name)))];
     const item = {
@@ -168,8 +174,8 @@ function collect(rows) {
       if (t) branches[`${repository}:${r.branch}`] = t;
     }
   }
-  const zanyato = [], zf = 'rules/09-platforma/ZANYATO.md';
-  if (existsSync(zf)) for (const line of readFileSync(zf, 'utf8').split('\n')) {
+  const zanyato = options.zanyato ?? [], zf = 'rules/09-platforma/ZANYATO.md';
+  if (options.zanyato === undefined && existsSync(zf)) for (const line of readFileSync(zf, 'utf8').split('\n')) {
     const c = line.split('|').map(s => s.trim());
     if (c.length >= 6 && /^lab\//.test(c[2])) {
       zanyato.push({item: c[1], branch: c[2], who: c[3], at: c[4].replace(' UTC', '')});

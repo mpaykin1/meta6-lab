@@ -11,6 +11,9 @@ on:
       - 'scripts/skins/mutate-build-pack.mjs'
       - 'scripts/skins/preview.mjs'
       - 'scripts/skins/mutate-preview.mjs'
+      - 'scripts/skins/verify-visual-fidelity.mjs'
+      - 'scripts/skins/mutate-visual-fidelity.mjs'
+      - 'skins/runtime/skin-runtime.js'
       - 'scripts/skins/verify-skin-factory-workflow.mjs'
       - 'scripts/skins/mutate-skin-factory-workflow.mjs'
       - '.github/workflows/skin-factory.yml'
@@ -86,6 +89,13 @@ jobs:
         run: |
           while IFS= read -r src; do node scripts/skins/preview.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt"
           while IFS= read -r src; do node scripts/skins/preview.mjs "$src" --verify; done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Визуальное соответствие эскизу — без потери фактуры и силуэта
+        run: |
+          set -euo pipefail
+          node scripts/skins/mutate-visual-fidelity.mjs
+          while IFS= read -r src; do
+            node scripts/skins/verify-visual-fidelity.mjs "$src"
+          done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Проверить обман старым превью
         run: |
           set -euo pipefail

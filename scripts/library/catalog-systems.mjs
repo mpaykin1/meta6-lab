@@ -1,9 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import {createRequire} from 'node:module';
 import {ROOT,discover,walk,rangeBytes} from './machine.mjs';
 import {isOriginalGameSource,codeSourceType,MIN_SYSTEM_LINES} from './source-policy.mjs';
 
+const acorn=createRequire(new URL('./mcp-test/package.json',import.meta.url))('acorn');
+const scanErrors=[];
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 const categories={
 camera:/camera|follow|lookAt|orbit|viewport/i,
@@ -46,15 +49,46 @@ function endBrace(s,pos){
 }
 function functions(text,file){
  const found=[];
- const rx=/\b(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\(|\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?(?:\([^)]*\)|[A-Za-z_$][\w$]*)\s*=>|\bclass\s+([A-Za-z_$][\w$]*)/g;
- for(const block of blocks(text,file))for(const m of block.text.matchAll(rx)){
-  const name=m[1]||m[2]||m[3],brace=block.text.indexOf('{',m.index+m[0].length);
-  if(brace<0||brace-m.index>400)continue;
-  const end=endBrace(block.text,brace);
-  if(end<0)continue;
-  const a=block.offset+m.index,b=block.offset+end;
-  const start=text.slice(0,a).split('\n').length,stop=text.slice(0,b-1).split('\n').length;
-  found.push({name,start,end:stop,code:block.text.slice(m.index,end),source_path:file});
+ for(const block of blocks(text,file)){
+  let program;
+  try{
+   program=acorn.parse(block.text,{
+    ecmaVersion:'latest',sourceType:'module',allowReturnOutsideFunction:true,
+    allowAwaitOutsideFunction:true,allowHashBang:true
+   });
+  }catch(error){
+   scanErrors.push({source_path:file,offset:block.offset,reason:'Acorn: '+error.message});
+   continue;
+  }
+  for(const statement of program.body){
+   const node=statement.type==='ExportNamedDeclaration'||statement.type==='ExportDefaultDeclaration'
+    ?statement.declaration||statement:statement;
+   const candidates=[];
+   if(node.type==='FunctionDeclaration'||node.type==='ClassDeclaration'){
+    if(node.id?.name)candidates.push({name:node.id.name,kind:'callable'});
+   }else if(node.type==='VariableDeclaration'){
+    for(const decl of node.declarations){
+     if(decl.id?.type==='Identifier'&&['ArrowFunctionExpression','FunctionExpression','ClassExpression']
+      .includes(decl.init?.type))candidates.push({name:decl.id.name,kind:'callable'});
+    }
+   }else if(statement.type==='ImportDeclaration'){
+    candidates.push({name:'__import_'+statement.start,kind:'import'});
+   }
+   for(const candidate of candidates){
+    const startOffset=block.offset+statement.start,endOffset=block.offset+statement.end;
+    // Ranges are line-based. Never include an HTML script tag or half of a statement.
+    const before=text.slice(text.lastIndexOf('\\n',startOffset-1)+1,startOffset);
+    const nextNewline=text.indexOf('\\n',endOffset);
+    const after=text.slice(endOffset,nextNewline<0?text.length:nextNewline);
+    if(/<\\/?script|<\\/|\\u003cscript/i.test(before+after)){
+     scanErrors.push({source_path:file,offset:startOffset,reason:'HTML tag shares declaration line'});
+     continue;
+    }
+    const start=text.slice(0,startOffset).split('\\n').length;
+    const end=text.slice(0,Math.max(startOffset,endOffset-1)).split('\\n').length;
+    found.push({...candidate,start,end,code:text.slice(startOffset,endOffset),source_path:file});
+   }
+  }
  }
  return found;
 }
@@ -69,6 +103,7 @@ function mergeRanges(nodes){
  return ranges;
 }
 export function buildCatalog(root=ROOT,requested){
+ scanErrors.length=0;
  const sources=discover(root).filter(x=>!/-copy$/i.test(x.game)&&(!requested||requested.includes(x.game)));
  // Identical -copy game directories are not independent owner-created systems.
  if(requested&&sources.length!==new Set(requested).size)throw Error('Unknown game');
@@ -90,7 +125,7 @@ export function buildCatalog(root=ROOT,requested){
    }
   }
   for(const [system,rx] of Object.entries(categories)){
-   const primary=nodes.filter(n=>rx.test(n.name));
+   const primary=nodes.filter(n=>n.kind==='callable'&&rx.test(n.name));
    if(!primary.length)continue;
    const names=new Map(nodes.map(n=>[n.name,n]));
    const selected=new Map(primary.map(n=>[n.source_path+':'+n.start,n]));
@@ -98,7 +133,10 @@ export function buildCatalog(root=ROOT,requested){
     const helper=names.get(m[1]);
     if(helper&&(!Object.entries(categories).some(([k,r])=>k!==system&&r.test(helper.name))))selected.set(helper.source_path+':'+helper.start,helper);
    }
-   const chosen=[...selected.values()],lines=mergeRanges(chosen);
+   const chosen=[...selected.values()];
+   for(const node of nodes)if(node.kind==='import'&&chosen.some(n=>n.source_path===node.source_path))
+    chosen.push(node);
+   const lines=mergeRanges(chosen);
    if(lines.reduce((n,r)=>n+r.end-r.start+1,0)<MIN_SYSTEM_LINES)continue;
    const bytes=Buffer.concat(lines.map(r=>rangeBytes(cache.get(r.source_path),r.start,r.end)));
    const code=chosen.map(n=>n.code).join('\n');
@@ -112,7 +150,7 @@ export function buildCatalog(root=ROOT,requested){
   e.depends_on=entries.filter(other=>other.game===e.game&&other.id!==e.id&&other._names.some(n=>code.includes(n+'('))).map(x=>x.id);
  }
  for(const e of entries)delete e._names;
- const result={schema_version:1,minimum_system_lines:MIN_SYSTEM_LINES,game_count:sources.length,solution_count:entries.length,solutions:entries};
+ const result={schema_version:1,minimum_system_lines:MIN_SYSTEM_LINES,game_count:sources.length,solution_count:entries.length,scan_errors:scanErrors,solutions:entries};
  const dest=path.join(root,'shared/library/catalog-solutions.json');
  fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,JSON.stringify(result,null,2)+'\n');
  return result;

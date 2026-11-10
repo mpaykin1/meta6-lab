@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Диспетчер МГ/МГЛ + автозадачи берут зависшее | МГЛ | чат ChatGPT | `lab/dispetcher` | PR | 2026-11-10 08:53 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | L1: Library Machine — индекс нового эталона skin-trainer | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/library-machine-sync` | [#213](https://github.com/mpaykin1/meta6-lab/pull/213) | 2026-11-10 04:23 | 2026-11-10 05:50 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Portal Visits: исправить устаревшее ожидание 12 миров | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/portal-visits-catalog-sync` | [#215](https://github.com/mpaykin1/meta6-lab/pull/215) | 2026-11-10 04:51 | 2026-11-10 05:49 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Разобрать устаревший красный PR #137 | МГЛ | MG-строитель-3 | `lab/demonic-hand-webgl2-reference` | [#137](https://github.com/mpaykin1/meta6-lab/pull/137) | 2026-11-10 05:32 | — |

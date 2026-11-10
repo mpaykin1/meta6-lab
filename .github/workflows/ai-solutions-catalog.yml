@@ -40,6 +40,7 @@ jobs:
           node --check scripts/library/mutate-catalog-build.mjs
           node --check shared/approved/tools/library.mjs
           node --check scripts/library/mcp-test/client.mjs
+          node --check scripts/library/verify-load.mjs
       - name: Run deceptive catalog mutations
         run: |
           node scripts/library/mutate-catalog.mjs
@@ -50,11 +51,16 @@ jobs:
         run: node scripts/library/verify-catalog.mjs
       - name: Show system counts by game
         run: node -e "const c=require('./shared/library/catalog-solutions.json');for(const g of new Set(c.solutions.map(s=>s.game)))console.log(g,c.solutions.filter(s=>s.game===g).length)"
+      - name: Install official MCP SDK and GLTFLoader
+        run: npm install --prefix scripts/library/mcp-test --ignore-scripts --no-audit --no-fund
       - name: Official MCP SDK stdio integration
         if: github.event_name == 'pull_request'
-        run: |
-          npm install --prefix scripts/library/mcp-test --ignore-scripts --no-audit --no-fund
-          node scripts/library/mcp-test/client.mjs
+        run: node scripts/library/mcp-test/client.mjs
+      - name: Run real headless Chromium solution and GLB probes
+        run: node scripts/library/verify-load.mjs --write
+      - name: Strict L3 acceptance: all systems and models must actually load
+        if: github.event_name == 'pull_request'
+        run: node scripts/library/verify-load.mjs --verify --require-all
       - name: Commit generated catalog only to the feature branch
         if: github.event_name == 'push' && github.ref == 'refs/heads/lab/library-catalog'
         run: |

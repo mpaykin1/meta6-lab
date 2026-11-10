@@ -58,12 +58,6 @@ jobs:
           node scripts/library/mutate-catalog-build.mjs
       - name: Build systems catalog for all available allowlisted games
         run: node scripts/library/catalog-cli.mjs
-      - name: Verify catalog
-        run: node scripts/library/verify-catalog.mjs
-      - name: Reject stale per-game BIBLIOTEKA counts and run four mutations
-        run: |
-          node scripts/library/verify-biblioteka.mjs
-          node scripts/library/mutate-biblioteka.mjs
       - name: Show system counts by game
         run: node -e "const c=require('./shared/library/catalog-solutions.json');for(const g of new Set(c.solutions.map(s=>s.game)))console.log(g,c.solutions.filter(s=>s.game===g).length)"
       - name: Install Chromium for real browser verification
@@ -72,6 +66,14 @@ jobs:
         run: node scripts/library/mutate-verify-load.mjs
       - name: Run real headless Chromium solution and GLB probes
         run: node scripts/library/verify-load.mjs --write
+      # The catalog verifier requires Chromium load evidence. Running it before
+      # the browser probe made CI fail before the evidence could be generated.
+      - name: Verify catalog after Chromium probes
+        run: node scripts/library/verify-catalog.mjs
+      - name: Reject stale per-game BIBLIOTEKA counts and run four mutations
+        run: |
+          node scripts/library/verify-biblioteka.mjs
+          node scripts/library/mutate-biblioteka.mjs
       - name: 'Strict L3 acceptance: all systems and models must actually load'
         if: github.event_name == 'pull_request'
         run: node scripts/library/verify-load.mjs --verify --require-all

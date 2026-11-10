@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T07:51:22.143Z",
+  "generated_at": "2026-11-10T07:52:35.536Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -1339,7 +1339,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/platform-play-connect-earn-20261107",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 87,
       "pr_state": "open",
@@ -1348,7 +1348,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/87",
       "taken_at": "2026-11-07 14:41",
       "last_commit_at": "2026-11-07 14:44",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 79,
@@ -1441,7 +1441,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/approved-donor-confluence-vault-20261107",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 58,
       "pr_state": "open",
@@ -1450,7 +1450,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/58",
       "taken_at": "2026-11-07 08:13",
       "last_commit_at": "2026-11-07 08:14",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 85,
@@ -1475,7 +1475,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/veil-weather-connected-20261107",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "💤 ЗАБРОШЕНО 3 дн — продолжить или закрыть",
       "pr": 49,
       "pr_state": "open",
@@ -1484,7 +1484,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/49",
       "taken_at": "2026-11-07 07:31",
       "last_commit_at": "2026-11-07 07:31",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 87,

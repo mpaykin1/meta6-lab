@@ -44,6 +44,13 @@ try{
    const d=samples.dt.filter(x=>x>0&&x<1000).sort((a,b)=>a-b);
    const calls=samples.draw.slice(1).sort((a,b)=>a-b);
    if(d.length<8||!calls.length)throw Error('Insufficient frames '+d.length);
+   // A rendered canvas alone does not prove the GPU context survived the run.
+   const glState=await page.evaluate(()=>{
+     const canvas=document.getElementById('c');
+     const gl=canvas?.getContext('webgl2');
+     return {exists:!!gl,lost:gl?.isContextLost?.()??true,viewport:[canvas?.width??0,canvas?.height??0]};
+   });
+   if(!glState.exists||glState.lost||glState.viewport.some(v=>v<1))throw Error('WebGL2 context missing/lost after benchmark');
    const fps=1000/(d.reduce((a,b)=>a+b,0)/d.length);
    results.push({size:size.name,version,fps,p95:ps(d,.95),draw:ps(calls,.5),frames:d.length,errors,quality:await page.evaluate(()=>window.__META_QUALITY_STATS__?.().scale??1)});
   }catch(e){errors.push(e.message);results.push({size:size.name,version,errors});}

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {linkedAssets} from './asset-links.mjs';
 
 const DEFAULT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (root, name) => fs.readFileSync(path.join(root, name), 'utf8');
@@ -95,14 +96,17 @@ export function verifyBiblioteka(root = DEFAULT_ROOT, {strict = false} = {}) {
 
   if (strict) {
     for (const solution of solutions) {
-      if ((solution.asset_ids || []).length > 0) continue;
       const code = (solution.lines || []).map(segment => {
         const file = path.resolve(root, segment.source_path);
         check(file.startsWith(root + path.sep), 'source escaped root');
-        return fs.readFileSync(file, 'utf8').split('\n').slice(segment.start - 1, segment.end).join('\n');
-      }).join('\n');
-      check(!/['"`][^'"\n]+\.(?:glb|gltf|png|jpe?g|webp|svg|mp3|ogg|wav)(?:\?[^'"\n]*)?['"`]/i.test(code),
-        'unlinked asset reference: ' + solution.id);
+        return fs.readFileSync(file, 'utf8').split('\\n').slice(segment.start - 1, segment.end).join('\\n');
+      }).join('\\n');
+      const {ids, unresolved} = linkedAssets(code, solution.game, index.entries);
+      check(JSON.stringify([...new Set(solution.asset_ids || [])].sort()) === JSON.stringify(ids),
+        'missing or invented asset_ids: ' + solution.id);
+      check(unresolved.length === 0,
+        'unresolved referenced assets: ' + solution.id + ' ' +
+        unresolved.map(item => item.reference).join(', '));
     }
   }
   return totals;

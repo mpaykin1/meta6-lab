@@ -29,12 +29,18 @@
       "rough": 0.88,
       "metal": 0.32
     },
+    "rust": {
+      "rough": 0.92,
+      "metal": 0.24,
+      "emissive": "#a65333"
+    },
     "rust-transparent": {
       "rough": 0.94,
-      "metal": 0.24
+      "metal": 0.24,
+      "emissive": "#a65333"
     },
     "glow": {
-      "emissive": "#6e487f",
+      "emissive": "#fdd471",
       "blend": "additive"
     }
   },
@@ -60,7 +66,7 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "head",
-      "file": "parts/part-01.png",
+      "file": "textures/rust.png",
       "size": [
         0.72,
         0.68
@@ -80,7 +86,7 @@
         0
       ],
       "depth": 3,
-      "material": "metal",
+      "material": "rust",
       "anim": [
         {
           "type": "swing",
@@ -368,7 +374,7 @@
       "kind": "slit",
       "layer": "3d",
       "bone": "body",
-      "file": "parts/part-09.png",
+      "file": "textures/rust.png",
       "size": [
         0.26,
         0.22
@@ -388,7 +394,7 @@
         0
       ],
       "depth": 3,
-      "material": "metal",
+      "material": "rust",
       "anim": [
         {
           "type": "swing",
@@ -534,7 +540,7 @@
       ],
       "offset": [
         0.15,
-        -0.2,
+        0.16,
         -0.35
       ],
       "rotation": [
@@ -608,9 +614,9 @@
         0.5
       ],
       "offset": [
-        0,
-        -0.24,
-        -0.35
+        0.1,
+        -0.26,
+        -0.37
       ],
       "rotation": [
         0,
@@ -787,7 +793,7 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "armL",
-      "file": "parts/part-20.png",
+      "file": "textures/rust.png",
       "size": [
         0.23,
         0.51
@@ -807,7 +813,7 @@
         0
       ],
       "depth": 3,
-      "material": "metal",
+      "material": "rust",
       "anim": [
         {
           "type": "swing",
@@ -831,7 +837,7 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "armR",
-      "file": "parts/part-21.png",
+      "file": "textures/rust.png",
       "size": [
         0.23,
         0.51
@@ -851,7 +857,7 @@
         0
       ],
       "depth": 3,
-      "material": "metal",
+      "material": "rust",
       "anim": [
         {
           "type": "swing",
@@ -953,7 +959,7 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "legL",
-      "file": "parts/part-24.png",
+      "file": "textures/rust.png",
       "size": [
         0.25,
         0.58
@@ -973,7 +979,7 @@
         0
       ],
       "depth": 3,
-      "material": "metal",
+      "material": "rust",
       "anim": [
         {
           "type": "swing",
@@ -997,7 +1003,7 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "legR",
-      "file": "parts/part-25.png",
+      "file": "textures/rust.png",
       "size": [
         0.25,
         0.58
@@ -1017,7 +1023,7 @@
         0
       ],
       "depth": 3,
-      "material": "metal",
+      "material": "rust",
       "anim": [
         {
           "type": "swing",
@@ -1339,11 +1345,179 @@
       ]
     },
     {
-      "id": "part-24-rear",
+      "id": "part-01-front-art",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "head",
+      "file": "parts/part-01.png",
+      "size": [
+        0.72,
+        0.68
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        0,
+        0,
+        -0.34400000000000003
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-09-front-art",
+      "kind": "slit",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-09.png",
+      "size": [
+        0.26,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.14,
+        0.17,
+        -0.479
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-20-front-art",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "armL",
+      "file": "parts/part-20.png",
+      "size": [
+        0.23,
+        0.51
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        -0.015,
+        -0.27,
+        -0.139
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-21-front-art",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "armR",
+      "file": "parts/part-21.png",
+      "size": [
+        0.23,
+        0.51
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0.015,
+        -0.27,
+        -0.139
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-24-front-art",
       "kind": "plate",
       "layer": "2.5d",
       "bone": "legL",
       "file": "parts/part-24.png",
+      "size": [
+        0.25,
+        0.58
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0,
+        -0.3,
+        -0.139
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-25-front-art",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "legR",
+      "file": "parts/part-25.png",
+      "size": [
+        0.25,
+        0.58
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0,
+        -0.3,
+        -0.139
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-24-rear",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "legL",
+      "file": "textures/rust.png",
       "size": [
         0.25,
         0.58
@@ -1377,7 +1551,7 @@
       "kind": "plate",
       "layer": "2.5d",
       "bone": "armL",
-      "file": "parts/part-20.png",
+      "file": "textures/rust.png",
       "size": [
         0.23,
         0.51
@@ -1411,7 +1585,7 @@
       "kind": "plate",
       "layer": "2.5d",
       "bone": "armR",
-      "file": "parts/part-21.png",
+      "file": "textures/rust.png",
       "size": [
         0.23,
         0.51
@@ -1445,7 +1619,7 @@
       "kind": "plate",
       "layer": "2.5d",
       "bone": "legL",
-      "file": "parts/part-24.png",
+      "file": "textures/rust.png",
       "size": [
         0.25,
         0.58
@@ -1479,7 +1653,7 @@
       "kind": "plate",
       "layer": "2.5d",
       "bone": "legR",
-      "file": "parts/part-25.png",
+      "file": "textures/rust.png",
       "size": [
         0.25,
         0.58

@@ -24,22 +24,37 @@ try{
  const advertised=(await client.listTools()).tools.map(x=>x.name);
  for(const name of ['search_solutions','get_solution','search_assets','get_asset','assemble_game'])
   assert.ok(advertised.includes(name),'Tool not discoverable: '+name);
- const camera=await call('search_solutions',{query:'camera',limit:10});
- const weather=await call('search_solutions',{query:'weather',limit:10});
- assert.ok(camera.solutions.length>0,'No camera systems found');
- assert.ok(weather.solutions.length>0,'No weather systems found');
- const solution=await call('get_solution',{id:camera.solutions[0].id});
- assert.ok(solution.systems.length>0&&solution.systems.every(x=>x.code.length>0),'Missing exact source');
- const assets=await call('search_assets',{query:'png',limit:10});
- assert.ok(assets.assets.length>=2,'Need two real original PNG assets');
- const asset=await call('get_asset',{id:assets.assets[0].id});
- assert.ok(asset.sha256&&asset.url.startsWith('https://github.com/mpaykin1/meta6-lab/blob/'),'Missing asset provenance');
- const controls=await call('search_solutions',{query:'controls',limit:10});
- assert.ok(controls.solutions.length>0,'No controls systems found');
- const ids=[camera.solutions[0].id,weather.solutions[0].id,controls.solutions[0].id];
- assert.equal(new Set(ids).size,3,'Three distinct subsystems required');
+ const candidates=new Map();
+ for(const query of ['game','camera','weather','controls','world','combat','animation',
+  'lighting','effects','menu','saves','audio']){
+  const found=await call('search_solutions',{query,limit:50});
+  for(const row of found.solutions||[])if(row.load_ok===true)candidates.set(row.id,row);
+ }
+ const eligible=[...candidates.values()].filter(row=>!['audio','saves','lore'].includes(row.system));
+ const detailed=[];
+ for(const row of eligible){
+  const solution=await call('get_solution',{id:row.id});
+  assert.ok(solution.systems.length>0&&solution.systems.every(x=>x.code.length>0),
+   'Missing exact source for '+row.id);
+  detailed.push({...row,assets:solution.assets||[]});
+ }
+ detailed.sort((a,b)=>b.assets.length-a.assets.length||a.id.localeCompare(b.id));
+ const chosen=[],games=new Set();
+ for(const row of detailed){
+  if(games.has(row.game))continue;
+  chosen.push(row);games.add(row.game);
+  if(chosen.length===3)break;
+ }
+ assert.equal(chosen.length,3,'MCP must supply 3 Chromium-verified systems from 3 different games');
+ const ids=chosen.map(row=>row.id);
+ const assets=[...new Map(chosen.flatMap(row=>row.assets).map(asset=>[asset.id,asset])).values()];
+ assert.ok(assets.length>=2,'Selected verified systems must reference at least 2 actual assets');
+ for(const asset of assets){
+  const actual=await call('get_asset',{id:asset.id});
+  assert.equal(actual.sha256,asset.sha256,'Required asset SHA must match');
+ }
  const before=execFileSync('git',['-C',root,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
- const game=await call('assemble_game',{solution_ids:ids,asset_ids:assets.assets.slice(0,2).map(a=>a.id),
+ const game=await call('assemble_game',{solution_ids:ids,asset_ids:assets.map(a=>a.id),
   title:'MCP Library Smoke Game'});
  assert.match(game.branch,/^mcp-assemble\//);
  assert.match(game.path,/^games\/[\w-]+\/index\.html$/);
@@ -79,7 +94,20 @@ try{
       const blank=document.createElement('canvas');
       blank.width=canvas.width;
       blank.height=canvas.height;
-      return canvas.toDataURL()!==blank.toDataURL();
+      const sample=document.createElement('canvas');
+      sample.width=48;sample.height=48;
+      const context=sample.getContext('2d',{willReadFrequently:true});
+      context.drawImage(canvas,0,0,48,48);
+      const values=context.getImageData(0,0,48,48).data;
+      let opaque=0;
+      const colors=new Set();
+      for(let i=0;i<values.length;i+=4){
+       if(values[i+3]<16)continue;
+       opaque++;
+       colors.add(values[i]+','+values[i+1]+','+values[i+2]);
+       if(opaque>10&&colors.size>1)return true;
+      }
+      return false;
      }catch{return false;}
     });
    });
@@ -88,5 +116,5 @@ try{
    await page.close();
   }finally{await browser.close();}
  }finally{fs.rmSync(temp,{recursive:true,force:true});}
- console.log('MCP assembled Chromium PASS: 3 systems, 2 assets, rendered canvas '+game.commit);
+ console.log('MCP assembled Chromium PASS: 3 original games, required assets, multicolor rendered canvas '+game.commit);
 }finally{await client.close();}

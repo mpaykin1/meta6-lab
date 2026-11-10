@@ -1,5 +1,5 @@
 # DOVODKA — журнал доводчика
-СЕЙЧАС ДЕЛАЮ: [МГЛ PR #226](https://github.com/mpaykin1/meta6-lab/pull/226) · чистая замена PR #124, SHA `a2261bb9f8cf7351929d8c8e7940badaf5b14285` · CI в очереди, слияние только после зелёных проверок
+СЕЙЧАС ДЕЛАЮ: [МГЛ PR #124](https://github.com/mpaykin1/meta6-lab/pull/124) · HEAD при проверке `db294c11a0ce305f83f9ff7eda063e3353bded9e` · проверок success на текущем head нет; слияние не разрешено · 2026-11-10 08:50 UTC
 ## ОСТАЛОСЬ (сверху самое срочное)
 - [МГЛ #226](https://github.com/mpaykin1/meta6-lab/pull/226) — 🔁 НЕ ДОДЕЛАНО: чистая замена #124, ожидается CI на a2261bb
 - [МГЛ #124](https://github.com/mpaykin1/meta6-lab/pull/124) — 🛑 guard FAILURE: исторический 7057ad0 изменил .github/protected; уникальные изменения перенесены в [#226](https://github.com/mpaykin1/meta6-lab/pull/226); закрыть #124 после успешного слияния замены
@@ -92,9 +92,16 @@
 - [МГЛ main — красные прогоны](https://github.com/mpaykin1/meta6-lab/actions?query=branch%3Amain+is%3Afailure) — за последние 24 часа: разобраться с B1, Library Machine, ZADACHI watch, META BOT и LAB Pages
 - [МГ main — красный Development memory integrity](https://github.com/mpaykin1/meta6/actions/runs/42639155804) — выяснить, исправлен ли более новым main; в МГ только чтение
 - [FINISH.md](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/FINISH.md) — 11/18 пунктов не зелёные: M6; B2–B7; L1–L4
+## ИСКЛЮЧЕНЫ ИЗ ОЧЕРЕДИ (закрыты Claude, не возобновлять)
+- [#100](https://github.com/mpaykin1/meta6-lab/pull/100) — закрыт без слияния; [решение Claude](https://github.com/mpaykin1/meta6-lab/pull/100#issuecomment-6762390507) · дубль #190
+- [#113](https://github.com/mpaykin1/meta6-lab/pull/113) — закрыт без слияния; [решение Claude](https://github.com/mpaykin1/meta6-lab/pull/113#issuecomment-6762391282) · дубль #200
+- [#116](https://github.com/mpaykin1/meta6-lab/pull/116) — закрыт без слияния; [решение Claude](https://github.com/mpaykin1/meta6-lab/pull/116#issuecomment-6762391982) · дубль #200
+- [#122](https://github.com/mpaykin1/meta6-lab/pull/122) — закрыт без слияния; [решение Claude](https://github.com/mpaykin1/meta6-lab/pull/122#issuecomment-6762392611) · защищённая игра и дубли #190/#200
+
 ## ЖУРНАЛ (новые строки сверху, старые не удалять)
 | Время UTC | PR / задача | Репо | Что было не так | Что сделал | Доказательство | Итог |
 |---|---|---|---|---|---|---|
+| 2026-11-10 08:50 | #100, #113, #116, #122 | МГЛ | Закрытые дубли ошибочно считались блокерами старой доводки | Исключил из активной очереди (при наличии), зафиксировал окончательные решения Claude; старые строки истории сохранены | [#100](https://github.com/mpaykin1/meta6-lab/pull/100#issuecomment-6762390507), [#113](https://github.com/mpaykin1/meta6-lab/pull/113#issuecomment-6762391282), [#116](https://github.com/mpaykin1/meta6-lab/pull/116#issuecomment-6762391982), [#122](https://github.com/mpaykin1/meta6-lab/pull/122#issuecomment-6762392611) | ✅ ЗАКРЫТЫ CLAUDE |
 | 2026-11-10 | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) → [#226](https://github.com/mpaykin1/meta6-lab/pull/226) | МГЛ | Красный guard: исторический коммит 7057ad0 изменил .github/protected, merge main не устраняет | Создана чистая ветка от main и PR #226 с 3 нужными файлами без защищённой истории | [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42785590584), [a2261bb](https://github.com/mpaykin1/meta6-lab/commit/a2261bb9f8cf7351929d8c8e7940badaf5b14285) | 🔁 НЕ ДОДЕЛАНО: CI #226 |
 | 2026-11-10 | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) | МГЛ | Устранено отставание от main (127 коммитов); сохранены все 10 622 прежние записи и добавлены 14 skin-trainer, навигация лора | Собран merge с двумя родителями, обновлён head; diff только 3 ожидаемых файла | [db294c1](https://github.com/mpaykin1/meta6-lab/commit/db294c11a0ce305f83f9ff7eda063e3353bded9e), [CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42785583625) | 🔁 НЕ ДОДЕЛАНО: CI ещё не завершён |
 | 2026-11-10 06:30 | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) | МГЛ | Ветка обновлена другим агентом после 7057ad0: текущий SHA a7993bc, появились shared/library/index.json и skin-trainer.json; CI на новом HEAD пока отсутствует | Повторно сверил HEAD и diff, заблокировал преждевременное слияние, добавил постоянные правила доводчика | [текущий SHA](https://github.com/mpaykin1/meta6-lab/commit/a7993bcc183513822b20a57e737eaf932835902d), [правило](https://github.com/mpaykin1/meta6-lab/commit/14cae7376f9ab721d302d37d92ea55d426d6ff28) | 🔁 НЕ ДОДЕЛАНО |

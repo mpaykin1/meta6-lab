@@ -235,7 +235,7 @@ async function main(){
       const name='part-'+String(i+1).padStart(2,'0');
       if(frames===1){
         const rel='parts/'+name+'.png';
-        await writeCrop(entry,rects[0],mask,data,w,h,palette,path.join(tmp,rel),64);
+        await writeCrop(entry,rects[0],mask,data,w,h,palette,path.join(tmp,rel),128);
         manifest.push({...entry,file:rel,frames,rect:rects[0]});
       }else{
         // Исходные 6 кадров хранятся без выдуманных рисунков; атлас строит сборщик.

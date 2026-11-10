@@ -7,8 +7,8 @@ import {isOriginalGameSource,codeSourceType,MIN_SYSTEM_LINES} from './source-pol
 const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 const categories={
 camera:/camera|follow|lookAt|orbit|viewport/i,
-controls:/control|input|touch|pointer|key(?:down|up)|joystick/i,
-combat:/attack|weapon|bullet|projectile|shoot|damage|hit/i,
+controls:/control|input|touch|pointer|key(?:down|up)|joystick|move|steer|drag/i,
+combat:/combat|attack|weapon|bullet|projectile|shoot|damage|hit|archer|dragon|arc2/i,
 enemies:/enemy|boss|brain|patrol|foe|chase/i,
 world:/terrain|world|biome|level|generate|island|noise/i,
 weather:/weather|fog|rain|cloud|wind|storm|snow/i,
@@ -17,7 +17,7 @@ audio:/audio|music|sound|sfx|chord/i,
 saves:/save|load|storage|checkpoint|progress/i,
 menu:/menu|hud|overlay|gallery|dialog|button/i,
 effects:/particle|smoke|spark|dust|debris|explosion|fx/i,
-animation:/anim|sprite|pose|tween|rig/i,
+animation:/anim|sprite|pose|tween|rig|frame|tick/i,
 lore:/lore|story|quest|dialogue|narrat/i
 };
 const russian={camera:'Камера',controls:'Управление',combat:'Бой',enemies:'Враги и ИИ',world:'Генерация мира',weather:'Погода',lighting:'Свет и рендер',audio:'Звук',saves:'Сохранения',menu:'Меню',effects:'Эффекты',animation:'Анимация',lore:'Лор'};
@@ -25,7 +25,7 @@ function blocks(text,file){
  const found=[];
  if(/\.html?$/.test(file)){
   const rx=/<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
-  for(const m of text.matchAll(rx))if(!/\bsrc\s*=/.test(m[1]))found.push({text:m[2],offset:m.index+m[0].indexOf(m[2])});
+  for(const m of text.matchAll(rx))if(!/\bsrc\s*=/.test(m[1])&&!/@license|SPDX-License-Identifier|three\.js\s+r\d+/i.test(m[2].slice(0,4096)))found.push({text:m[2],offset:m.index+m[0].indexOf(m[2])});
  }else found.push({text,offset:0});
  return found;
 }
@@ -69,7 +69,8 @@ function mergeRanges(nodes){
  return ranges;
 }
 export function buildCatalog(root=ROOT,requested){
- const sources=discover(root).filter(x=>!requested||requested.includes(x.game));
+ const sources=discover(root).filter(x=>!/-copy$/i.test(x.game)&&(!requested||requested.includes(x.game)));
+ // Identical -copy game directories are not independent owner-created systems.
  if(requested&&sources.length!==new Set(requested).size)throw Error('Unknown game');
  const entries=[],cache=new Map();
  for(const source of sources){
@@ -81,6 +82,12 @@ export function buildCatalog(root=ROOT,requested){
    if(!isOriginalGameSource(rel,text))continue;
    cache.set(rel,text);
    nodes.push(...functions(text,rel));
+   // Entire original standalone upgrade modules are usable subsystem boundaries.
+   // Avoid slicing an IIFE into helpers without the module's initialization.
+   const fileSystem=/arc2[_-]module|weapon[_-]module|combat[_-]module/i.test(path.basename(rel))?'combat':null;
+   if(fileSystem&&text.split('\n').length>=MIN_SYSTEM_LINES){
+    nodes.push({name:'weaponModule',start:1,end:text.split('\n').length,code:text,source_path:rel});
+   }
   }
   for(const [system,rx] of Object.entries(categories)){
    const primary=nodes.filter(n=>rx.test(n.name));

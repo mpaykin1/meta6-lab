@@ -10,6 +10,7 @@ import {verifyCatalog} from './verify-catalog.mjs';
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const filename=path.join(ROOT,'shared/library/catalog-solutions.json');
 const data=JSON.parse(fs.readFileSync(filename,'utf8'));
+const storedResults=JSON.stringify(data.solutions.map(s=>[s.id,s.load_ok,s.load_error,s.load_evidence]));
 const known=new Map(data.solutions.map(s=>[s.id,s]));
 const evidence='chromium-original-source-load-v1';
 const modelDir=path.join(ROOT,'scripts/library/mcp-test/node_modules/three');
@@ -145,6 +146,7 @@ try{
  const files=index.entries.filter(x=>x.source_path?.toLowerCase().endsWith('.glb')&&x.kind==='model'&&!seen.has(x.sha256)&&seen.add(x.sha256));
  if(files.length){
   const page=await browser.newPage();
+  await page.route('**/*',route=>new URL(route.request().url()).origin===origin?route.continue():route.abort());
   await page.goto(origin+'/');
   for(const asset of files){
    const result=await probeModel(asset,page);
@@ -155,6 +157,7 @@ try{
  }
  data.model_load=models;
  data.load_evidence_type=evidence;
+ if(process.argv.includes('--verify')&&storedResults!==JSON.stringify(data.solutions.map(s=>[s.id,s.load_ok,s.load_error,s.load_evidence])))throw Error('Recorded load_ok or evidence disagrees with real Chromium execution');
  if(process.argv.includes('--write'))fs.writeFileSync(filename,JSON.stringify(data,null,2)+'\n');
  verifyCatalog(ROOT);
  const byGame=new Map();
@@ -165,4 +168,5 @@ try{
  }
  for(const [game,counts] of byGame)console.log('GAME '+game+' N='+counts.total+' M='+counts.ok+' K='+counts.failed);
  console.log('MODELS total='+models.length+' ok='+models.filter(m=>m.ok).length+' failed='+models.filter(m=>!m.ok).length);
+ if(process.argv.includes('--require-all')&&(outcomes.some(x=>!x.ok)||models.some(x=>!x.ok)))throw Error('L3 incomplete: not every original subsystem/model loads and has a real effect');
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve))}

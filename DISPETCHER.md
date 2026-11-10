@@ -1,28 +1,19 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 16 · конфликт 10 · красные проверки 2 · нужен Claude 12
-
-### PR #49
-- PR: https://github.com/mpaykin1/meta6-lab/pull/49
-- Ветка: `lab/veil-weather-connected-20261107`
-- SHA: `d73385da47eacaf1e1c6232463f6e4dec9099d44` · последний коммит: 2026-11-07T07:31:14Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-строитель-4 2026-11-10T10:39:01Z
-
-### PR #58
-- PR: https://github.com/mpaykin1/meta6-lab/pull/58
-- Ветка: `lab/approved-donor-confluence-vault-20261107`
-- SHA: `406336fdbea4b172952e9abc2f89c6bd2d8d8476` · последний коммит: 2026-11-07T08:14:46Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-ремонтник 2026-11-10T10:56:23Z
-- Результат: закрыт как устаревший, https://github.com/mpaykin1/meta6-lab/pull/58#issuecomment-6765573633
+Итог: зависло 15 · конфликт 10 · красные проверки 4 · нужен Claude 12
 
 ### PR #87
 - PR: https://github.com/mpaykin1/meta6-lab/pull/87
 - Ветка: `lab/platform-play-connect-earn-20261107`
 - SHA: `0859d03f53007101c76c8f900964192c0764d139` · последний коммит: 2026-11-07T14:44:44Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: —
+
+### PR #133
+- PR: https://github.com/mpaykin1/meta6-lab/pull/133
+- Ветка: `lab/asqura-single-graphics-reference-20261108`
+- SHA: `633ad10443f9c5e9f1132b6d91d68ad3955b0159` · последний коммит: 2026-11-10T07:09:23Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
@@ -39,14 +30,6 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/172
 - Ветка: `lab/pod-i-nad-palette-cycle`
 - SHA: `dabac477b77931eadfb200a5529afd2f40c021bd` · последний коммит: 2026-11-08T19:48:38Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: —
-
-### PR #190
-- PR: https://github.com/mpaykin1/meta6-lab/pull/190
-- Ветка: `lab/bot-batch-1`
-- SHA: `697a026662cde89c7028b709e38513d5915a03de` · последний коммит: 2026-11-10T09:12:48Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
@@ -75,10 +58,26 @@
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
 
-### PR #221
-- PR: https://github.com/mpaykin1/meta6-lab/pull/221
-- Ветка: `lab/zadachi-tolkach`
-- SHA: `757890f0aa4809e92d3466c55a1db98269f133e6` · последний коммит: 2026-11-10T08:48:21Z
+### PR #218
+- PR: https://github.com/mpaykin1/meta6-lab/pull/218
+- Ветка: `lab/remont-r1-library`
+- SHA: `bd5d65f72c4964383256e605f01242a35c6ec69f` · последний коммит: 2026-11-10T06:22:46Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: —
+
+### PR #220
+- PR: https://github.com/mpaykin1/meta6-lab/pull/220
+- Ветка: `lab/zadachi-conflicts`
+- SHA: `84ab3a2bef87a37147670076be0f1da587e823ed` · последний коммит: 2026-11-10T06:26:14Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: —
+
+### PR #225
+- PR: https://github.com/mpaykin1/meta6-lab/pull/225
+- Ветка: `lab/render-broken-city-safe-1110`
+- SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
@@ -90,6 +89,30 @@
 - Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42596607316/job/129090670043), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42596607205/job/129090665983)
 - Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42596607316/job/129090670043 и повтори CI.
 - Взял: MG-строитель-1 2026-11-10T10:06:12Z
+
+### PR #190
+- PR: https://github.com/mpaykin1/meta6-lab/pull/190
+- Ветка: `lab/bot-batch-1`
+- SHA: `697a026662cde89c7028b709e38513d5915a03de` · последний коммит: 2026-11-10T09:12:48Z
+- Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42788810398/job/129736704050), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42788809840/job/129736691483)
+- Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42788810398/job/129736704050 и повтори CI.
+- Взял: —
+
+### PR #219
+- PR: https://github.com/mpaykin1/meta6-lab/pull/219
+- Ветка: `lab/status-a1-20261110`
+- SHA: `4634c05ecc9ad59290ae403c46e167057e556576` · последний коммит: 2026-11-10T10:34:34Z
+- Проблема: Красная проверка: kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42800339516/job/129775902899)
+- Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42800339516/job/129775902899 и повтори CI.
+- Взял: чат ChatGPT — Рабочий чат МГ/МГЛ 2026-11-10T10:24:35Z
+
+### PR #233
+- PR: https://github.com/mpaykin1/meta6-lab/pull/233
+- Ветка: `lab/import-five-cc0-packs`
+- SHA: `0ae6fcc6008e59f9304e65f1f8f5ee67ecac3827` · последний коммит: 2026-11-10T10:38:05Z
+- Проблема: Красная проверка: kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42800819832/job/129777533806)
+- Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42800819832/job/129777533806 и повтори CI.
+- Взял: —
 
 ### PR #3
 - PR: https://github.com/mpaykin1/meta6-lab/pull/3
@@ -103,14 +126,6 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/54
 - Ветка: `lab/render-visibility-optimization`
 - SHA: `85014fa83b66c717fb585738045616fa421464ff` · последний коммит: 2026-11-10T08:48:54Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
-### PR #133
-- PR: https://github.com/mpaykin1/meta6-lab/pull/133
-- Ветка: `lab/asqura-single-graphics-reference-20261108`
-- SHA: `633ad10443f9c5e9f1132b6d91d68ad3955b0159` · последний коммит: 2026-11-10T07:09:23Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
@@ -135,38 +150,6 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/201
 - Ветка: `lab/reference-foggy-awakening-scene-1`
 - SHA: `e12b75439b0ea173cc9bb87712d158139567923a` · последний коммит: 2026-11-09T15:53:28Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
-### PR #218
-- PR: https://github.com/mpaykin1/meta6-lab/pull/218
-- Ветка: `lab/remont-r1-library`
-- SHA: `bd5d65f72c4964383256e605f01242a35c6ec69f` · последний коммит: 2026-11-10T06:22:46Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
-### PR #219
-- PR: https://github.com/mpaykin1/meta6-lab/pull/219
-- Ветка: `lab/status-a1-20261110`
-- SHA: `88c4fa259b9b3fd576ebfdb21f4fa163128dfc0c` · последний коммит: 2026-11-10T10:28:55Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: чат ChatGPT — Рабочий чат МГ/МГЛ 2026-11-10T10:24:35Z
-
-### PR #220
-- PR: https://github.com/mpaykin1/meta6-lab/pull/220
-- Ветка: `lab/zadachi-conflicts`
-- SHA: `84ab3a2bef87a37147670076be0f1da587e823ed` · последний коммит: 2026-11-10T06:26:14Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
-### PR #225
-- PR: https://github.com/mpaykin1/meta6-lab/pull/225
-- Ветка: `lab/render-broken-city-safe-1110`
-- SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —

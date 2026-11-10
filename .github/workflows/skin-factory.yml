@@ -1,7 +1,7 @@
 name: Skin factory — cut and mutation gates
 on:
   push:
-    branches: ['lab/skin-factory', 'lab/skin-factory-*']
+    branches: ['lab/skin-*']
     paths:
       - 'skins/sources/*/parts-sheet.png'
       - 'skins/sources/*/parts-sheet.md'
@@ -86,14 +86,14 @@ jobs:
       - name: Создать ZIP и проверить все S1–S12
         run: while IFS= read -r src; do node scripts/skins/build-pack.mjs "$src" --finalize; done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Опубликовать скин и изображение в ветке PR
-        if: ${{ success() && github.event_name == 'push' && startsWith(github.ref, 'refs/heads/lab/skin-factory') }}
+        if: ${{ success() && github.event_name == 'push' && startsWith(github.ref, 'refs/heads/lab/skin-') }}
         run: |
           set -euo pipefail
           git config user.name 'META GAMES Skin Factory'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add skins/packs/ skins/sources/*/cut-preview.png skins/sources/*/side-by-side.png
           if ! git diff --cached --quiet; then
-            git commit -m "skin factory: publish generated rusty robot pack and visual comparison"
+            git commit -m "skin factory: publish generated skin packs and visual comparisons"
             git push origin HEAD:"$GITHUB_REF_NAME"
           fi
       - name: Сохранить вырезки и визуальную сверку
@@ -111,7 +111,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Комментарий в PR с картинкой и ссылкой на игру
-        if: ${{ always() && github.event_name == 'push' && startsWith(github.ref, 'refs/heads/lab/skin-factory') }}
+        if: ${{ always() && github.event_name == 'push' && startsWith(github.ref, 'refs/heads/lab/skin-') }}
         uses: actions/github-script@v7
         with:
           script: |

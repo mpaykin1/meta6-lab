@@ -37,42 +37,74 @@ export function parseRows(text) {
 }
 
 // data: {repo, pulls: {branch: {number, title, state, merged, sha, created, lastCommit}}, branches: {branch: ms}, zanyato: [{item, branch, who, at}]}
-export function apply(text, data, now) {
-  const rows = parseRows(text), seen = new Set(rows.map(r => r.branch).filter(b => !noBranch(b)));
-  for (const z of data.zanyato || []) if (!seen.has(z.branch)) {
-    seen.add(z.branch);
-    rows.push({status: '', task: clean(z.item), project: 'МГЛ', who: clean(z.who.replace(/^свободно \(зависло[^,]*, было: (.*)\)$/, '$1').replace(/\s*⚠.*$/, '')) || 'ChatGPT', branch: z.branch, pr: '—', taken: z.at, last: '—'});
-  }
-  for (const [branch, p] of Object.entries(data.pulls || {})) if (p.state === 'open' && !seen.has(branch)) {
-    seen.add(branch);
-    rows.push({status: '', task: clean(p.title), project: 'МГЛ', who: 'ChatGPT (сам не записал — добавил сторож)', branch, pr: '—', taken: fmt(p.created), last: '—'});
-  }
-  for (const r of rows) {
-    const p = noBranch(r.branch) ? null : (data.pulls || {})[r.branch];
-    if (p) r.pr = `[#${p.number}](https://github.com/${data.repo}/pull/${p.number})`;
-    const t = p?.lastCommit ?? (data.branches || {})[r.branch];
-    if (Number.isFinite(t)) r.last = fmt(t);
-    if (p?.merged) r.status = `✅ ГОТОВО · слито ${String(p.sha || '').slice(0, 7)}`;
-    else if (p && p.state === 'closed') r.status = '✖ ЗАКРЫТО без слияния';
-    else if (/НУЖЕН CLAUDE/i.test(r.status)) r.status = '🙋 ' + r.status.replace(/^🙋\s*/, '');
-    else if (noBranch(r.branch) && /ГОТОВО/.test(r.status) && /https?:\/\//.test(r.status)) { /* задача без ветки: готово только со ссылкой-доказательством */ }
-    else r.status = ageStatus((now - (Number.isFinite(t) ? t : parseT(r.taken))) / 60000);
-    r.task = clean(r.task); r.who = clean(r.who) || 'ChatGPT'; r.project = clean(r.project) || 'МГЛ';
-  }
-  const key = r => Number.isFinite(parseT(r.last)) ? parseT(r.last) : parseT(r.taken) || 0;
-  rows.sort((x, y) => rank(x.status) - rank(y.status) || key(y) - key(x));
-  let done = 0;
-  const kept = rows.filter(r => rank(r.status) < 6 || ++done <= DONE_KEEP);
-  const n = re => kept.filter(r => re.test(r.status)).length;
-  const push = kept.filter(r => rank(r.status) === 0);
-  const summary = `**Итог:** 🛑 зависло ${push.length} · ⚠ молчит ${n(/молчит/)} · 🔨 в работе ${n(/В РАБОТЕ/)} · 🙋 нужен Claude ${n(/НУЖЕН CLAUDE/)} · 💤 заброшено ${n(/ЗАБРОШЕНО/)} · ✅ готово ${n(/ГОТОВО/)}`;
-  const pushList = push.length ? '**Толкнуть сейчас:** ' + push.map(r => `${r.task} (${noBranch(r.branch) ? r.who : '`' + r.branch + '`'})`).join('; ') : '**Толкнуть сейчас:** никого';
-  const table = [HEAD, SEP, ...kept.map(r => `| ${r.status} | ${r.task} | ${r.project} | ${r.who} | ${noBranch(r.branch) ? '—' : '`' + r.branch + '`'} | ${r.pr || '—'} | ${r.taken || '—'} | ${r.last || '—'} |`)].join('\n');
-  const body = `${START}\n${summary}\n\n${pushList}\n\n${table}\n${END}`;
-  const a = text.indexOf(START), b = text.indexOf(END) + END.length;
-  let out = text.slice(0, a) + body + text.slice(b);
-  if (out !== text) out = out.replace(/^Сторож проверил: .*$/m, `Сторож проверил: ${fmt(now)} UTC`);
-  return out;
+
+const repoFor=(r,d)=>r.project==='МГ'?(d.mgRepo||'mpaykin1/meta6'):d.repo;
+function pullFor(r,d) {
+ const p=d.pulls?.[repoFor(r,d)+'::'+r.branch]||d.pulls?.[r.branch];
+ return p && (!p.repo||p.repo===repoFor(r,d))?p:null;
+}
+export function failedChecks(p) {
+ const latest=new Map();
+ for(const c of p?.checkRuns||[]) {
+  const name=clean(c.name),when=Date.parse(c.started_at||c.completed_at||'')||0;
+  if(name && (!latest.has(name)||latest.get(name).when<=when))latest.set(name,{conclusion:c.conclusion,when});
+ }
+ return [...latest].filter(([,v])=>['failure','timed_out','cancelled'].includes(v.conclusion)).map(([n])=>n);
+}
+export function apply(text,data,now) {
+ const rows=parseRows(text),tick=String.fromCharCode(96);
+ const seen=new Set(rows.filter(r=>!noBranch(r.branch)).map(r=>repoFor(r,data)+'::'+r.branch));
+ for(const z of data.zanyato||[]){
+  const id=data.repo+'::'+z.branch;if(seen.has(id))continue;seen.add(id);
+  rows.push({status:'',task:clean(z.item),project:'МГЛ',who:clean(z.who.replace(/^свободно \(зависло[^,]*, было: (.*)\)$/,'$1').replace(/\s*⚠.*$/,''))||'ChatGPT',branch:z.branch,pr:'—',taken:z.at,last:'—'});
+ }
+ for(const [id,p] of Object.entries(data.pulls||{})) {
+  const rp=p.repo||(id.includes('::')?id.split('::')[0]:data.repo);
+  const branch=p.branch||(id.includes('::')?id.split('::').slice(1).join('::'):id);
+  if(p.state!=='open'||seen.has(rp+'::'+branch))continue;seen.add(rp+'::'+branch);
+  rows.push({status:'',task:clean(p.title),project:rp===(data.mgRepo||'mpaykin1/meta6')?'МГ':'МГЛ',who:'ChatGPT (сам не записал — добавил сторож)',branch,pr:'—',taken:fmt(p.created),last:'—'});
+ }
+ for(const r of rows) {
+  const p=noBranch(r.branch)?null:pullFor(r,data),rp=repoFor(r,data);
+  if(p)r.pr='[#'+p.number+'](https://github.com/'+rp+'/pull/'+p.number+')';
+  const t=p?.lastCommit??data.branches?.[rp+'::'+r.branch]??data.branches?.[r.branch];
+  if(Number.isFinite(t))r.last=fmt(t);
+  const age=(now-(Number.isFinite(t)?t:parseT(r.taken)))/60000;
+  if(p?.merged)r.status='✅ ГОТОВО · слито '+String(p.sha||'').slice(0,7);
+  else if(p&&p.state==='closed')r.status='✖ ЗАКРЫТО без слияния';
+  else if(/НУЖЕН CLAUDE/i.test(r.status))r.status='🙋 '+r.status.replace(/^🙋\s*/,'');
+  else if(p?.duplicateOf&&age>=2880)r.status='✖ ЗАКРЫТЬ: дубль #'+p.duplicateOf;
+  else if(p?.supersededBy&&age>=2880)r.status='✖ ЗАКРЫТЬ: заменён #'+p.supersededBy;
+  else if(p?.mergeable_state==='dirty')r.status='⚔ КОНФЛИКТ';
+  else if(p&&failedChecks(p).length)r.status='❌ КРАСНЫЕ: '+failedChecks(p).join(', ');
+  else if(noBranch(r.branch)&&/ГОТОВО/.test(r.status)&&/https?:\/\//.test(r.status)){}
+  else r.status=ageStatus(age);
+  r.task=clean(r.task);r.who=clean(r.who)||'ChatGPT';r.project=clean(r.project)||'МГЛ';
+ }
+ const dedup=new Map(),unique=[];
+ for(const r of rows){
+  const href=/https:\/\/github\.com\/[^\s)]+\/pull\/\d+/.exec(r.pr||'')?.[0];
+  const id=!noBranch(r.branch)?repoFor(r,data)+'::'+r.branch:href;
+  if(!id||!dedup.has(id)){unique.push(r);if(id)dedup.set(id,r);continue;}
+  const old=dedup.get(id);
+  old.who=[...new Set((old.who+', '+r.who).split(/,\s*/).filter(Boolean))].join(', ');
+  if(/НУЖЕН CLAUDE/.test(r.status)&&!/ГОТОВО|ЗАКРЫТО/.test(old.status))old.status=r.status;
+  if(parseT(r.taken)<parseT(old.taken))old.taken=r.taken;
+ }
+ const rank=s=>/ЗАВИС|нет данных/.test(s)?0:/^⚔|^❌|ЗАКРЫТЬ/.test(s)?1:/молчит/.test(s)?2:/В РАБОТЕ/.test(s)?3:/НУЖЕН CLAUDE/.test(s)?4:/ЗАБРОШЕНО/.test(s)?5:/ЗАКРЫТО/.test(s)?6:/ГОТОВО/.test(s)?7:8;
+ const when=r=>Number.isFinite(parseT(r.last))?parseT(r.last):parseT(r.taken)||0;
+ unique.sort((x,y)=>rank(x.status)-rank(y.status)||when(y)-when(x));
+ const n=re=>unique.filter(r=>re.test(r.status)).length;
+ const push=unique.filter(r=>/ЗАВИС|нет данных/.test(r.status)),fix=unique.filter(r=>/^⚔|^❌|ЗАКРЫТЬ/.test(r.status));
+ const summary='**Итог:** 🛑 зависло '+push.length+' · ⚠ молчит '+n(/молчит/)+' · 🔨 в работе '+n(/В РАБОТЕ/)+' · 🙋 нужен Claude '+n(/НУЖЕН CLAUDE/)+' · 💤 заброшено '+n(/ЗАБРОШЕНО/)+' · ⚔ конфликт '+n(/КОНФЛИКТ/)+' · ❌ красные '+n(/КРАСНЫЕ/)+' · ✖ закрыто '+n(/ЗАКРЫТО/)+' · ✅ готово '+n(/ГОТОВО/);
+ const line=r=>r.task+' ('+(noBranch(r.branch)?r.who:tick+r.branch+tick)+')';
+ const repair='**Чинить сейчас:** '+(fix.length?fix.map(line).join('; '):'никого');
+ const toPush='**Толкнуть сейчас:** '+(push.length?push.map(line).join('; '):'никого');
+ const table=[HEAD,SEP,...unique.map(r=>'| '+r.status+' | '+r.task+' | '+r.project+' | '+r.who+' | '+(noBranch(r.branch)?'—':tick+r.branch+tick)+' | '+(r.pr||'—')+' | '+(r.taken||'—')+' | '+(r.last||'—')+' |')].join('\n');
+ const body=START+'\n'+summary+'\n\n'+repair+'\n\n'+toPush+'\n\n'+table+'\n'+END;
+ let out=text.slice(0,text.indexOf(START))+body+text.slice(text.indexOf(END)+END.length);
+ if(out!==text)out=out.replace(/^Сторож проверил: .*$/m,'Сторож проверил: '+fmt(now)+' UTC');
+ return out;
 }
 
 function collect(rows) {

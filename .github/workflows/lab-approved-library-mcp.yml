@@ -1,0 +1,40 @@
+name: LAB Approved Source MCP Live
+on:
+  push:
+    branches: ['lab/approved-library-mcp-live', 'lab/mcp-list-games', 'lab/mcp-read-game']
+    paths:
+      - 'shared/approved/**'
+      - 'meta-games/index.html'
+      - 'scripts/shared/verify-approved-mcp.mjs'
+      - 'scripts/shared/verify-mcp-list-games.mjs'
+      - 'scripts/shared/mutate-mcp-list-games.mjs'
+      - 'scripts/shared/verify-mcp-read-game.mjs'
+      - 'scripts/shared/mutate-read-game.mjs'
+      - '.github/workflows/lab-approved-library-mcp.yml'
+  pull_request:
+    paths:
+      - 'shared/approved/**'
+      - 'meta-games/index.html'
+      - 'scripts/shared/verify-approved-mcp.mjs'
+      - 'scripts/shared/verify-mcp-list-games.mjs'
+      - 'scripts/shared/mutate-mcp-list-games.mjs'
+      - 'scripts/shared/verify-mcp-read-game.mjs'
+      - 'scripts/shared/mutate-read-game.mjs'
+      - '.github/workflows/lab-approved-library-mcp.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/shared/build-index.mjs --check
+      - run: node scripts/shared/verify-approved-mcp.mjs
+      - run: node scripts/shared/verify-mcp-list-games.mjs
+      - run: node scripts/shared/mutate-mcp-list-games.mjs
+      - run: node scripts/shared/verify-mcp-read-game.mjs
+      - run: node scripts/shared/mutate-read-game.mjs

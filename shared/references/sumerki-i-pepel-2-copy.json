@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "sumerki-i-pepel-2-copy",
+  "title": "Сумерки и пепел II (Copy)",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES",
+  "date_added": "2026-11-09",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "path": "games/sumerki-i-pepel-2-copy/index.html",
+    "git_blob_sha": "90d83a77049e8edb7aab847ecbbf4e9723a3c2e5",
+    "sha256": "59a2831229367c7517e3892f9b867190424baa3971f021362c0adcd50a24ed5a",
+    "size_bytes": 681450,
+    "sidecar_path": "games/sumerki-i-pepel-2-copy/README.md"
+  },
+  "viewer_url": "https://mpaykin1.github.io/meta6-lab/games/sumerki-i-pepel-2-copy/",
+  "technologies": [
+    "Three.js r160 via CDN",
+    "WebGL",
+    "voxel island",
+    "GLSL shaders",
+    "postprocessing",
+    "sprite atlases",
+    "keyboard and touch controls"
+  ],
+  "reuse": {
+    "owner_supplied": true,
+    "owner_designated_reference": true,
+    "third_party_rights_verified": false,
+    "requires_dependency_license_review": true,
+    "description": "Use as an exact reference; only reuse original material where rights allow."
+  },
+  "original_preserved": true,
+  "modularized": false
+}

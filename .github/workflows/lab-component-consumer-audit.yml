@@ -1,0 +1,25 @@
+name: LAB component consumer audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lab/audit-component-consumers.mjs'
+      - 'shared/**'
+      - 'games/**'
+      - '.github/workflows/lab-component-consumer-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  component-consumers:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate audit JavaScript syntax
+        run: node --check scripts/lab/audit-component-consumers.mjs
+      - name: Run static consumer audit against full repository
+        run: node scripts/lab/audit-component-consumers.mjs

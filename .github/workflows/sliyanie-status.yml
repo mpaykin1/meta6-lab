@@ -1,0 +1,50 @@
+name: sliyanie-status
+# Claude, 10.11.2026. Бот без ИИ: пишет в automation/SLIYANIE.md настоящее состояние каждого PR
+# (merged / closed / open, dirty = конфликт) — прогресс задания «Слить всё» не теряется при зависании ChatGPT.
+on:
+  schedule:
+    - cron: '17 * * * *'
+  pull_request_target:
+    types: [closed]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: read
+concurrency:
+  group: sliyanie-status
+  cancel-in-progress: false
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Self-test (3 traps)
+        run: python3 scripts/lab/test-sliyanie-status.py
+      - name: Read PR states from GitHub and update SLIYANIE.md
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [ -f automation/SLIYANIE.md ] || { echo "no automation/SLIYANIE.md"; exit 0; }
+          echo '{' > /tmp/st.json; first=1
+          for n in $(grep -oE '^\| #[0-9]+' automation/SLIYANIE.md | tr -d '|# '); do
+            j=$(gh api "repos/${{ github.repository }}/pulls/$n" 2>/dev/null || echo '{}')
+            st=$(echo "$j" | jq -r 'if .merged_at then "merged" elif .state=="closed" then "closed" elif .state=="open" then (if .mergeable_state=="dirty" then "open dirty" else "open" end) else "нет данных" end')
+            [ $first = 1 ] || echo ',' >> /tmp/st.json; first=0
+            printf '"%s": "%s"' "$n" "$st" >> /tmp/st.json
+          done
+          echo '}' >> /tmp/st.json
+          for attempt in 1 2 3; do
+            python3 scripts/lab/sliyanie-status.py automation/SLIYANIE.md < /tmp/st.json
+            grep '^Итог:' automation/SLIYANIE.md >> "$GITHUB_STEP_SUMMARY"
+            git diff --quiet && { echo "no changes"; exit 0; }
+            git config user.name 'sliyanie-status bot'; git config user.email 'actions@users.noreply.github.com'
+            git commit -qam "sliyanie-status: $(grep '^Итог:' automation/SLIYANIE.md | cut -c1-90)"
+            git push origin HEAD:main && exit 0
+            git fetch -q origin main && git reset -q --hard origin/main
+          done
+          exit 1

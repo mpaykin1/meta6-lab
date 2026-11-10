@@ -1,0 +1,21 @@
+name: LAB Measure After Merge
+# Dispatch the protected Claude progress workflow; never calculate/readiness here.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'games/**'
+      - 'shared/**'
+      - '.github/workflows/lab-measure-after-merge.yml'
+permissions:
+  actions: write
+  contents: read
+jobs:
+  dispatch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Trigger canonical LAB Progress
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run lab-progress.yml --ref main --repo mpaykin1/meta6-lab

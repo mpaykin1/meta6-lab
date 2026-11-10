@@ -1,0 +1,35 @@
+name: LAB approved-game-sources
+on:
+  pull_request:
+    paths:
+      - 'meta-games-worlds/generated-*/**'
+      - 'scripts/lab/source-policy-gate.mjs'
+      - 'shared/claude-game-sources.json'
+      - '.github/workflows/lab-approved-game-sources.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Read-only checkout of canonical game donors from meta6
+        uses: actions/checkout@v4
+        with:
+          repository: mpaykin1/meta6
+          ref: main
+          path: source-meta6
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify candidate game files are from allowed source games
+        run: |
+          node --check scripts/lab/source-policy-gate.mjs
+          node scripts/lab/source-policy-gate.mjs --changed "${{ github.event.pull_request.base.sha || github.sha }}"

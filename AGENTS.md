@@ -1,10 +1,19 @@
-Для автозадач действует automation/prompts/chatgpt-autotask.md: отчёты, новые тесты, handoff и evidence запрещены; требования GRAF, abyss.md, evolve.md и других файлов о тестах, отчётах, evidence и gate к автозадачам не применяются
+## ТАБЛИЦА ЗАДАЧ (правило владельца, 10.11.2026)
+Каждая задача, за которую берётся ChatGPT (чат или автозадача) по МГ и МГЛ, сразу записывается строкой в [ZADACHI.md](https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md) (корень meta6-lab). Статус ставит сторож `ZADACHI watch` по данным GitHub: ✅ готово (PR слит), 🛑 ЗАВИС — толкнуть (нет коммитов 3+ часа). Без строки работу не начинать. Полное правило: [rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md](rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md).
+
+## ПРОЧИТАТЬ ПЕРЕД ЛЮБОЙ РАБОТОЙ (09.11.2026)
+1. [ФИНИШ — 18 проверок, без которых проект не готов](rules/09-platforma/FINISH.md)
+2. [КОНТУР БЕЗ ОШИБОК — правила К1–К12](rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md)
+3. [OSHIBKI.md — журнал ошибок; каждая ошибка = вечная ловушка](OSHIBKI.md)
+4. **Сначала этап 0** [плана разработки](rules/09-platforma/PLAN_RAZRABOTKI.md) (ремонт: пункты 0.9–0.11 = ошибки OSHIBKI №17–№23), потом новые пункты финиша. Правила качества кода — К12 контура (10.11.2026).
+
+Для автозадач действует automation/prompts/chatgpt-autotask.md: длинные отчёты, handoff и evidence-файлы запрещены. **Исключение владельца 09.11.2026: для META GAMES и любых PR с кодом КОНТУР БЕЗ ОШИБОК К1–К10 обязателен и автозадачам — проверки, мутации-ловушки, строки в OSHIBKI.md и охранник kontur-guard; см. rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md.** Остальные требования GRAF, abyss.md, evolve.md о тестах, отчётах и gate к автозадачам не применяются
 
 # Правила meta6 — оглавление
 
 Все правила разложены по папкам в [rules/](rules/). **Перед работой открыть нужную папку и прочитать правило целиком** — здесь только суть одной строкой. Пароли правил прежние (`retention`, `postepenno`, `polza`, `vidimo`, `boss`, `universal`, `abyss`, `three-worlds`, `island-biomes`, `graf`, `evolve`, `fix`); по паролю открывать файл из оглавления ниже.
 
-**Обязательно для всех игр:** 01 ЧИСТЫЙ ЭКРАН, 02 ПОСТЕПЕННО, 02 ПОНЯТНАЯ ПОЛЬЗА, 02 БЕЗ ПОВТОРОВ, 03 ЗВУК, 04 ЛОР (почти готовые игры), 05 ВИДИМО И ЭКОНОМНО, все правила папки 06, 07 RETENTION (игры для Playgama).
+**Обязательно для всех игр:** 01 ЧИСТЫЙ ЭКРАН, 02 ПОСТЕПЕННО, 02 ПОНЯТНАЯ ПОЛЬЗА, 02 БЕЗ ПОВТОРОВ, 03 ЗВУК, 04 ЛОР (почти готовые игры), 05 ВИДИМО И ЭКОНОМНО, все правила папки 06, 07 RETENTION (игры для Playgama), 09 БЕЗ РЕКЛАМЫ (все версии META GAMES).
 
 ## 01. Стиль и графика — [rules/01-stil-i-grafika/](rules/01-stil-i-grafika/)
 
@@ -16,6 +25,7 @@ _как игра выглядит: графика, свет, погода, чи�
 - [graf.md](rules/01-stil-i-grafika/graf.md) — GRAF — полный стандарт графики и анимации
 - [weather.md](rules/01-stil-i-grafika/weather.md) — погода: принятая версия и как её переносить
 - [graf-mobile-follow-camera.md](rules/01-stil-i-grafika/graf-mobile-follow-camera.md) — камера на телефоне следует за героем
+- [SKINY.md](rules/01-stil-i-grafika/SKINY.md) — **СКИНЫ (09.11.2026):** примитивный герой + ZIP-пакет `meta6-skin/1` (текстуры, запекание, детали, анимированные 2D/2.5D) = детальный персонаж; учебная игра games/skin-trainer, эскиз reference/skins/rusty-robot.png
 
 ## 02. Игровые механики — [rules/02-igrovye-mekhaniki/](rules/02-igrovye-mekhaniki/)
 
@@ -71,6 +81,9 @@ _переиспользовать готовое, брать источник в
 - [NOVYY_UROVEN.md](rules/06-rabota-ii-s-kodom/NOVYY_UROVEN.md) — перед новым уровнем пересчитать всё, что есть: было N — осталось N
 - [NE_MENYAT_NEZAPROSHENNOE.md](rules/06-rabota-ii-s-kodom/NE_MENYAT_NEZAPROSHENNOE.md) — делать только то, что просили
 - [PESOCHNITSA_GPT.md](rules/06-rabota-ii-s-kodom/PESOCHNITSA_GPT.md) — **ПЕСОЧНИЦА:** ChatGPT работает только в `mpaykin1/meta6-lab` (ветка на идею, бот, карточка в LAB_QUEUE.md), в `meta6` — только чтение; забирает в `meta6` только Claude
+- [TABLITSA_ZADACH.md](rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md) — **ТАБЛИЦА ЗАДАЧ (10.11.2026):** каждая взятая ChatGPT задача — строка в ZADACHI.md; сторож показывает готово / завис
+- [OTCHETY_DLYA_CLAUDE.md](rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md) — **ОТЧЁТЫ ДЛЯ CLAUDE:** каждый результат — PR со свежим описанием, прогон Actions с понятной причиной провала, карточка LAB_QUEUE; ничего важного только в чате ChatGPT
+- **ОТЧЁТ ВЛАДЕЛЬЦУ = ТОЛЬКО «ОСТАЛОСЬ СДЕЛАТЬ»** (07.11.2026): в чате владельцу — только список того, что ещё не готово, и что мешает; сделанное не перечислять, оно на GitHub. См. §5 [OTCHETY_DLYA_CLAUDE.md](rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md)
 - [automation/prompts/chatgpt-autotask.md](automation/prompts/chatgpt-autotask.md) — правила для автозадач ChatGPT (лежат в automation/)
 
 ## 07. Публикация на Playgama — [rules/07-publikaciya-playgama/](rules/07-publikaciya-playgama/)
@@ -101,6 +114,7 @@ _то, что касается только одной конкретной иг
 _общий склад и конструктор всех игр_
 
 - [META_GAMES_PLATFORM.md](rules/09-platforma/META_GAMES_PLATFORM.md) — **КОНЕЧНАЯ ЦЕЛЬ проекта, сверяться всем ИИ:** склад `shared/`, игры из склада, автоулучшение всех игр по правилам и бот-проходчик уровней, журнал решений владельца (§11)
+- [BEZ_REKLAMY.md](rules/09-platforma/BEZ_REKLAMY.md) — **БЕЗ РЕКЛАМЫ (07.11.2026):** игры в META GAMES (веб, Android, Steam) — без рекламного кода и SDK; реклама только в отдельных версиях для Playgama; 4 игры, загруженные Claude 06.11, очистить
 - [RENDER_OPTIMIZATION_ROADMAP.md](rules/09-platforma/RENDER_OPTIMIZATION_ROADMAP.md) — **цель оптимизации рендеринга всех игр META GAMES:** frustum/backface/cave culling, секции чанков, lightmap, упаковка вершин, batching, GPU-driven по возможности, LOD/HLOD, greedy meshing; адаптация по типу сцены без потери графики.
 - [STEAM_DISTRIBUTION.md](rules/09-platforma/STEAM_DISTRIBUTION.md) — **новая цель 06.11.2026: META GAMES в Steam**, автоматическая сборка каталога новых игр из GitHub, SteamPipe, условия допуска и пошаговая реализация (без изменения защищённой основной цели).
 - [CROSS_PLATFORM_GOAL.md](rules/09-platforma/CROSS_PLATFORM_GOAL.md) — **цель Web + Google Play + Steam:** единые игровые исходники, один общий каталог, Android/Windows-пакеты из `platforms/`, без рекламы в Steam

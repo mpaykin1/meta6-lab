@@ -1,0 +1,55 @@
+name: LAB Progress
+# Файл Claude. Измеряет готовность META GAMES скриптом Claude (scripts/meta-progress/progress.mjs)
+# и проверяет честность отчёта ChatGPT (verify-report.mjs). ChatGPT этот файл не меняет.
+# Отчёт ChatGPT = комментарий в issue «Готовность META GAMES — отчёт», первая строка «ОТЧЁТ GPT».
+on:
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+  issue_comment:
+    types: [created, edited]
+permissions:
+  contents: read
+  actions: read
+  issues: write
+concurrency:
+  group: lab-progress
+  cancel-in-progress: false
+jobs:
+  progress:
+    if: github.event_name != 'issue_comment' || (startsWith(github.event.comment.body, 'ОТЧЁТ GPT') && contains(github.event.issue.labels.*.name, 'progress'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main, fetch-depth: 1 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: Measure readiness
+        run: node scripts/meta-progress/progress.mjs
+      - name: Find or create the progress issue
+        id: issue
+        run: |
+          N=$(gh issue list --label progress --state open --json number -q '.[0].number')
+          if [ -z "$N" ]; then
+            gh label create progress --color 0e8a16 --force >/dev/null 2>&1 || true
+            N=$(gh issue create -t "Готовность META GAMES — отчёт" -l progress -b "Сюда LAB Progress пишет измеренные проценты, а ChatGPT — отчёт (первая строка «ОТЧЁТ GPT»). Правило: rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md" | grep -o '[0-9]*$')
+          fi
+          echo "n=$N" >> "$GITHUB_OUTPUT"
+      - name: Post measured readiness
+        if: github.event_name != 'issue_comment'
+        run: |
+          { echo "**ИЗМЕРЕНО** · прогон ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} · коммит ${{ github.sha }}"; echo; cat progress.md; } > body.md
+          gh issue comment "${{ steps.issue.outputs.n }}" -F body.md
+      - name: Verify ChatGPT report honesty
+        if: github.event_name == 'issue_comment'
+        env:
+          REPORT: ${{ github.event.comment.body }}
+        run: |
+          printf '%s\n' "$REPORT" > report.md
+          set +e; node scripts/meta-progress/verify-report.mjs report.md progress.json; code=$?; set -e
+          { echo "**ПРОВЕРКА ЧЕСТНОСТИ** отчёта ${{ github.event.comment.html_url }} · прогон ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; echo; cat honesty.md; echo; cat progress.md; } > body.md
+          gh issue comment "${{ github.event.issue.number }}" -F body.md
+          exit $code

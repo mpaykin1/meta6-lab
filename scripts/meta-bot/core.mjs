@@ -12,7 +12,7 @@ const VIEWPORTS = {
   desktop: { viewport: { width: 1280, height: 720 }, isMobile: false, hasTouch: false, deviceScaleFactor: 1 }
 };
 const LAUNCH = { args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--autoplay-policy=no-user-gesture-required'] };
-const DEFAULTS = { entry: 'index.html', levelTimeoutSec: 180, stuckSec: 20, startTimeoutSec: 60, fpsBaseline: 0, viewports: ['mobile', 'desktop'], skipChecks: [], ignoreConsole: [] };
+const DEFAULTS = { entry: 'index.html', levelTimeoutSec: 180, stuckSec: 20, deathSec: 5, startTimeoutSec: 60, fpsBaseline: 0, viewports: ['mobile', 'desktop'], skipChecks: [], ignoreConsole: [] };
 
 // Стратегия по умолчанию, если у игры нет bot-strategy.mjs: подождать загрузку и идти к цели.
 const DEFAULT_STRATEGY = {
@@ -153,19 +153,31 @@ export async function runOnce({ baseUrl, gameDir, repoRoot, viewportName, cfg, s
       // Прогресс внутри уровня: ближе к цели, смена цели, или рост необязательного state().progress
       // (настоящие собранные вещи / урон врагу — длинный бой у цели не «застревание»; бой без урона — застревание).
       let best = Infinity, bestAt = Date.now(), done = false, lastGoal = null, prog = null;
+      // Быстрый отказ (07.11.2026): ошибка ловится сразу, а не по таймауту уровня. В каждой ошибке — снимок состояния для починки.
+      let deadSince = null, still = null, stillAt = Date.now();
+      const r1 = v => typeof v === 'number' ? Math.round(v * 10) / 10 : v;
+      const snap = () => { const s = latest; return `[снимок: уровень ${s.level + 1}, герой (${r1(s.hero?.x)}, ${r1(s.hero?.y)}), цель ${s.goal ? `(${r1(s.goal.x)}, ${r1(s.goal.y)})` : 'нет'}, жив ${s.alive}, врагов ${s.enemies}, оружия ${s.weapons}${typeof s.progress === 'number' ? ', progress ' + s.progress : ''}]`; };
       const isDone = () => (done = done || latest.levelDone || latest.gameDone || latest.level > i);
       const dist = s => s.goal ? Math.hypot(s.goal.x - s.hero.x, s.goal.y - s.hero.y) : null;
       await timed(() => strategy.playLevel(ctx, i), cfg.levelTimeoutSec, `уровень ${i + 1}`, () => {
         if (isDone()) return null; const d = dist(latest);
+        if (latest.alive === false) { deadSince = deadSince ?? Date.now();
+          if (Date.now() - deadSince > cfg.deathSec * 1000) return `уровень ${i + 1}: герой погиб и не вернулся за ${cfg.deathSec} с ${snap()}`; }
+        else deadSince = null;
+        // Нет точки цели и нет progress: прогрессом считается движение героя или убыль врагов; иначе — застревание.
+        if (d === null && prog === null && typeof latest.progress !== 'number') {
+          const h = latest.hero || {}, e = latest.enemies;
+          if (!still || Math.hypot((h.x ?? 0) - still.x, (h.y ?? 0) - still.y) > 1 || e < still.e) { still = { x: h.x ?? 0, y: h.y ?? 0, e }; stillAt = Date.now(); }
+          return Date.now() - stillAt > cfg.stuckSec * 1000 ? `уровень ${i + 1}: герой застрял (${cfg.stuckSec} с: нет цели, нет progress, герой не двигается и врагов не меньше) ${snap()}` : null; }
         if (typeof latest.progress === 'number') { if (prog !== null && latest.progress > prog) { best = d ?? Infinity; bestAt = Date.now(); } prog = prog === null ? latest.progress : Math.max(prog, latest.progress); }
-        if (d === null) return prog !== null && Date.now() - bestAt > cfg.stuckSec * 1000 ? `уровень ${i + 1}: герой застрял (${cfg.stuckSec} с без прогресса: progress не растёт)` : null;
+        if (d === null) return prog !== null && Date.now() - bestAt > cfg.stuckSec * 1000 ? `уровень ${i + 1}: герой застрял (${cfg.stuckSec} с без прогресса: progress не растёт) ${snap()}` : null;
         // Цель внутри уровня сменилась (новая точка) — отсчёт застревания начинается заново.
         const g = latest.goal; if (!lastGoal || Math.hypot(g.x - lastGoal.x, g.y - lastGoal.y) > Math.max(1, 0.1 * d)) { lastGoal = { ...g }; best = d; bestAt = Date.now(); }
         if (d < best - 0.01) { best = d; bestAt = Date.now(); }
-        return Date.now() - bestAt > cfg.stuckSec * 1000 ? `уровень ${i + 1}: герой застрял (${cfg.stuckSec} с без приближения к цели)` : null;
+        return Date.now() - bestAt > cfg.stuckSec * 1000 ? `уровень ${i + 1}: герой застрял (${cfg.stuckSec} с без приближения к цели) ${snap()}` : null;
       });
       await readState();
-      if (!isDone()) throw new Error(`уровень ${i + 1}: playLevel закончился, а уровень не пройден`);
+      if (!isDone()) throw new Error(`уровень ${i + 1}: playLevel закончился, а уровень не пройден ${snap()}`);
       res.passed++;
       if (i === info.levels - 1) break;
       const t1 = Date.now(); while (latest.level <= i && !latest.gameDone) { if (Date.now() - t1 > 15000) throw new Error(`после уровня ${i + 1} следующий не начался`); await new Promise(r => setTimeout(r, 100)); }

@@ -1,0 +1,42 @@
+/* Thin visual adapter for the unchanged owner-granted ObserverMobileControls module.
+   Veil Terraces retains all desktop controls and its original game physics. */
+@media (pointer:coarse) and (max-width:900px) {
+  body.v7-touch #v7MobileHud {position:fixed;inset:0;z-index:5;pointer-events:none}
+  body.v7-touch #v7Stick {
+    position:absolute;left:calc(19vw - 51px);top:calc(80dvh - 51px);
+    width:102px;height:102px;touch-action:none;pointer-events:auto;
+    border:1px solid #90fae799;border-radius:50%;
+    background:radial-gradient(circle,#153f426e,#071a2860);
+    box-shadow:inset 0 0 26px #56e5d533,0 0 19px #42e9d329;
+    user-select:none
+  }
+  body.v7-touch #v7Knob {
+    position:absolute;left:50%;top:50%;width:34px;height:34px;
+    transform:translate(-50%,-50%);border-radius:7px;
+    background:#a0fcdfd4;box-shadow:0 0 16px #77ffcc;
+    pointer-events:none
+  }
+  body.v7-touch .v7-arrow {
+    position:absolute;opacity:.5;font-size:11px;color:#d9fff7;
+    pointer-events:none
+  }
+  body.v7-touch .v7-up {top:6px;left:47%}
+  body.v7-touch .v7-down {bottom:6px;left:47%}
+  body.v7-touch .v7-left {left:7px;top:44%}
+  body.v7-touch .v7-right {right:7px;top:44%}
+  body.v7-touch #v7Action {
+    position:absolute;right:24px;bottom:max(45px,env(safe-area-inset-bottom));
+    width:63px;height:63px;pointer-events:auto;touch-action:none;
+    display:grid;place-items:center;
+    border:1px solid #a8ffed99;border-radius:12px;
+    transform:rotate(45deg);background:#0b2c42cc;
+    box-shadow:0 0 26px #20aabb5d
+  }
+  body.v7-touch #v7Action span {display:block;transform:rotate(-45deg)}
+  body.v7-touch #v7Action svg {width:32px;height:32px}
+  body.v7-touch #v7Action svg:first-child {display:none}
+  body.v7-touch #v7Action.is-pressed {box-shadow:0 0 34px #9dffe0bb}
+  body.v7-touch #v7Build,body.v7-touch #v7Swap,
+  body.v7-touch #jump,body.v7-touch #hint,
+  body.v7-touch #stick {display:none!important}
+}

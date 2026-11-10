@@ -1,0 +1,64 @@
+name: Investigation snapshot
+# GitHub is the sole persistence and publishing platform.
+on:
+  schedule:
+    - cron: '13 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'ZADACHI.md'
+      - 'OSHIBKI.md'
+      - 'automation/SLIYANIE.md'
+      - 'rules/09-platforma/FINISH.md'
+      - 'scripts/investigation/**'
+      - '.github/workflows/investigation-snapshot.yml'
+  pull_request:
+    paths:
+      - 'reports/investigation/**'
+      - 'scripts/investigation/**'
+      - '.github/workflows/investigation-snapshot.yml'
+permissions:
+  contents: write
+  actions: read
+  checks: read
+  pull-requests: read
+concurrency:
+  group: investigation-snapshot-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.sha || 'main' }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Refresh investigation snapshot from GitHub
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            node --check scripts/investigation/build.mjs
+            node scripts/investigation/build.mjs
+            test -s reports/investigation/data.json
+            exit 0
+          fi
+          git config user.name 'investigation-snapshot'
+          git config user.email 'actions@users.noreply.github.com'
+          for attempt in 1 2 3; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            node scripts/investigation/build.mjs
+            git add reports/investigation/data.json
+            if git diff --cached --quiet; then echo "Snapshot unchanged"; exit 0; fi
+            git commit -qm 'investigation: refresh public GitHub-only snapshot'
+            if git push -q origin HEAD:main; then exit 0; fi
+          done
+          echo 'Snapshot push failed after 3 attempts' >&2
+          exit 1

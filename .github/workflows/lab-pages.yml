@@ -4,20 +4,34 @@ on:
   push:
     branches: [main, 'lab/**']
   workflow_run:
-    workflows: ['Sync from meta6']
+    workflows: ['Sync from meta6', 'META GAMES guard']
     types: [completed]
   workflow_dispatch:
 permissions:
   contents: read
   pages: write
   id-token: write
-concurrency:
-  group: lab-pages
-  cancel-in-progress: true
+  actions: write
+# Окружение github-pages разрешает деплой только из main. Пуш в lab/** не деплоит сам,
+# а перезапускает этот workflow на main (сборка всё равно берёт все ветки lab/**).
 jobs:
+  kick-main:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Rebuild the site from main (includes this branch preview)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run lab-pages.yml --ref main -R "$GITHUB_REPOSITORY"
   deploy:
+    # guard on a main push already has its own push-run of this workflow: skip the duplicate.
+    if: github.ref == 'refs/heads/main' && !(github.event_name == 'workflow_run' && github.event.workflow_run.name == 'META GAMES guard' && github.event.workflow_run.event == 'push')
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    concurrency:
+      group: lab-pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

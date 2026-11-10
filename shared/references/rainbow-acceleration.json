@@ -1,0 +1,352 @@
+{
+  "schema_version": 1,
+  "id": "rainbow-acceleration",
+  "title": "Радужный разгон — ассет-пак",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES LAB",
+  "date_added": "2026-11-09",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "path": "games/rainbow-acceleration/source-upload.html",
+    "git_blob_sha": "8ebdbe4bb14291c77fb209a2f04a6a6c8920480b",
+    "sha256": "1b6772084b6c40982c3d4cf0f42173227cca922119b9d4d62a5f1a8207a4dab1",
+    "size_bytes": 52959
+  },
+  "viewer": {
+    "path": "games/rainbow-acceleration/index.html",
+    "url": "https://mpaykin1.github.io/meta6-lab/games/rainbow-acceleration/",
+    "availability": "after-merge-to-main",
+    "local_dependency": "games/broken-city/lib/three.module.js",
+    "original_runtime": "Three.js r128 CDN",
+    "viewer_runtime": "local repository Three.js module; source otherwise unchanged"
+  },
+  "asset_count": 28,
+  "assets": [
+    {
+      "id": "rainbow-01",
+      "index": 0,
+      "name": "Велосипедист · 3D (IK педалей, волосы-мазки)",
+      "kind": "animated-character-3d",
+      "source_symbol": "makeRider",
+      "preview_expression": "window.__rr.showAsset(0)"
+    },
+    {
+      "id": "rainbow-02",
+      "index": 1,
+      "name": "Велосипедист · 2D спрайт, 8 кадров",
+      "kind": "spritesheet-2d",
+      "source_symbol": "makeSprite2D",
+      "preview_expression": "window.__rr.showAsset(1)"
+    },
+    {
+      "id": "rainbow-03",
+      "index": 2,
+      "name": "Дорога · Старт",
+      "kind": "track-geometry",
+      "source_symbol": "pieceMesh(DEFS.intro())",
+      "preview_expression": "window.__rr.showAsset(2)"
+    },
+    {
+      "id": "rainbow-04",
+      "index": 3,
+      "name": "Дорога · Волна",
+      "kind": "track-geometry",
+      "source_symbol": "pieceMesh(DEFS.wave())",
+      "preview_expression": "window.__rr.showAsset(3)"
+    },
+    {
+      "id": "rainbow-05",
+      "index": 4,
+      "name": "Дорога · Мёбиус-виток",
+      "kind": "track-geometry",
+      "source_symbol": "pieceMesh(DEFS.mobius())",
+      "preview_expression": "window.__rr.showAsset(4)"
+    },
+    {
+      "id": "rainbow-06",
+      "index": 5,
+      "name": "Дорога · Мёртвая петля",
+      "kind": "track-geometry",
+      "source_symbol": "pieceMesh(DEFS.loop())",
+      "preview_expression": "window.__rr.showAsset(5)"
+    },
+    {
+      "id": "rainbow-07",
+      "index": 6,
+      "name": "Дорога · Штопор",
+      "kind": "track-geometry",
+      "source_symbol": "pieceMesh(DEFS.cork())",
+      "preview_expression": "window.__rr.showAsset(6)"
+    },
+    {
+      "id": "rainbow-08",
+      "index": 7,
+      "name": "Дорога · Воронка",
+      "kind": "track-geometry",
+      "source_symbol": "pieceMesh(DEFS.funnel())",
+      "preview_expression": "window.__rr.showAsset(7)"
+    },
+    {
+      "id": "rainbow-09",
+      "index": 8,
+      "name": "Дорога · Бесконечность ∞",
+      "kind": "track-geometry",
+      "source_symbol": "pieceMesh(DEFS.eight())",
+      "preview_expression": "window.__rr.showAsset(8)"
+    },
+    {
+      "id": "rainbow-10",
+      "index": 9,
+      "name": "Дорога · Змей",
+      "kind": "track-geometry",
+      "source_symbol": "pieceMesh(DEFS.serpent())",
+      "preview_expression": "window.__rr.showAsset(9)"
+    },
+    {
+      "id": "rainbow-11",
+      "index": 10,
+      "name": "Дорога · Трамплин",
+      "kind": "track-geometry",
+      "source_symbol": "pieceMesh(DEFS.kicker())",
+      "preview_expression": "window.__rr.showAsset(10)"
+    },
+    {
+      "id": "rainbow-12",
+      "index": 11,
+      "name": "Дорога · Посадочная полоса",
+      "kind": "track-geometry",
+      "source_symbol": "pieceMesh(DEFS.land(.35))",
+      "preview_expression": "window.__rr.showAsset(11)"
+    },
+    {
+      "id": "rainbow-13",
+      "index": 12,
+      "name": "Лента Мёбиуса",
+      "kind": "environment-geometry",
+      "source_symbol": "B.mobius",
+      "preview_expression": "window.__rr.showAsset(12)"
+    },
+    {
+      "id": "rainbow-14",
+      "index": 13,
+      "name": "Лемниската-лента",
+      "kind": "environment-geometry",
+      "source_symbol": "B.lemniscate",
+      "preview_expression": "window.__rr.showAsset(13)"
+    },
+    {
+      "id": "rainbow-15",
+      "index": 14,
+      "name": "Треугольник Пенроуза",
+      "kind": "environment-geometry",
+      "source_symbol": "B.penrose",
+      "preview_expression": "window.__rr.showAsset(14)"
+    },
+    {
+      "id": "rainbow-16",
+      "index": 15,
+      "name": "Невозможный куб",
+      "kind": "environment-geometry",
+      "source_symbol": "B.cube",
+      "preview_expression": "window.__rr.showAsset(15)"
+    },
+    {
+      "id": "rainbow-17",
+      "index": 16,
+      "name": "Бесконечная лестница",
+      "kind": "environment-geometry",
+      "source_symbol": "B.stairs",
+      "preview_expression": "window.__rr.showAsset(16)"
+    },
+    {
+      "id": "rainbow-18",
+      "index": 17,
+      "name": "Летающий остров",
+      "kind": "environment-geometry",
+      "source_symbol": "B.island",
+      "preview_expression": "window.__rr.showAsset(17)"
+    },
+    {
+      "id": "rainbow-19",
+      "index": 18,
+      "name": "Акведук в пустоте",
+      "kind": "environment-geometry",
+      "source_symbol": "B.aqueduct",
+      "preview_expression": "window.__rr.showAsset(18)"
+    },
+    {
+      "id": "rainbow-20",
+      "index": 19,
+      "name": "Портал-дверь в галактику",
+      "kind": "environment-geometry",
+      "source_symbol": "B.portal",
+      "preview_expression": "window.__rr.showAsset(19)"
+    },
+    {
+      "id": "rainbow-21",
+      "index": 20,
+      "name": "Планета с кольцом",
+      "kind": "environment-geometry",
+      "source_symbol": "B.planet",
+      "preview_expression": "window.__rr.showAsset(20)"
+    },
+    {
+      "id": "rainbow-22",
+      "index": 21,
+      "name": "Кристалл",
+      "kind": "environment-geometry",
+      "source_symbol": "B.crystal",
+      "preview_expression": "window.__rr.showAsset(21)"
+    },
+    {
+      "id": "rainbow-23",
+      "index": 22,
+      "name": "Колодец-вихрь",
+      "kind": "environment-geometry",
+      "source_symbol": "B.vortex",
+      "preview_expression": "window.__rr.showAsset(22)"
+    },
+    {
+      "id": "rainbow-24",
+      "index": 23,
+      "name": "Кристалл-ускоритель",
+      "kind": "environment-geometry",
+      "source_symbol": "B.gem",
+      "preview_expression": "window.__rr.showAsset(23)"
+    },
+    {
+      "id": "rainbow-25",
+      "index": 24,
+      "name": "Облака-мазки",
+      "kind": "volumetric-clouds",
+      "source_symbol": "makeClouds",
+      "preview_expression": "window.__rr.showAsset(24)"
+    },
+    {
+      "id": "rainbow-26",
+      "index": 25,
+      "name": "Звёзды и искры",
+      "kind": "star-particles",
+      "source_symbol": "makeStars",
+      "preview_expression": "window.__rr.showAsset(25)"
+    },
+    {
+      "id": "rainbow-27",
+      "index": 26,
+      "name": "FX · Брызги краски",
+      "kind": "paint-particles",
+      "source_symbol": "burst/emit",
+      "preview_expression": "window.__rr.showAsset(26)"
+    },
+    {
+      "id": "rainbow-28",
+      "index": 27,
+      "name": "FX · Скоростной шлейф",
+      "kind": "speed-trail",
+      "source_symbol": "makeTrail",
+      "preview_expression": "window.__rr.showAsset(27)"
+    }
+  ],
+  "code_components": [
+    {
+      "id": "neon-brush-glsl",
+      "kind": "shader",
+      "symbols": [
+        "BVS",
+        "BFS",
+        "brush",
+        "faceMat"
+      ]
+    },
+    {
+      "id": "ribbon-parallel-transport",
+      "kind": "geometry",
+      "symbols": [
+        "framesFrom",
+        "ribbonGeo",
+        "closedBand"
+      ]
+    },
+    {
+      "id": "procedural-road-segments",
+      "kind": "track",
+      "symbols": [
+        "DEFS",
+        "pieceLocal",
+        "toWorld",
+        "makeSeg"
+      ]
+    },
+    {
+      "id": "rider-pedaling-ik",
+      "kind": "animation",
+      "symbols": [
+        "makeRider",
+        "ik",
+        "setLimb"
+      ]
+    },
+    {
+      "id": "rider-8-frame-atlas",
+      "kind": "sprite",
+      "symbols": [
+        "bakeSprite",
+        "makeSprite2D"
+      ]
+    },
+    {
+      "id": "points-splash",
+      "kind": "particles",
+      "symbols": [
+        "pointsMat",
+        "emit",
+        "burst",
+        "updSpl"
+      ]
+    },
+    {
+      "id": "speed-trail",
+      "kind": "fx",
+      "symbols": [
+        "makeTrail"
+      ]
+    },
+    {
+      "id": "low-res-postfx",
+      "kind": "postprocessing",
+      "symbols": [
+        "post",
+        "resize",
+        "QUAL"
+      ]
+    },
+    {
+      "id": "procedural-audio",
+      "kind": "audio",
+      "symbols": [
+        "initAudio",
+        "ping",
+        "nextChord"
+      ]
+    }
+  ],
+  "runtime_api": {
+    "entry": "window.__rr",
+    "fields": [
+      "state",
+      "setMode",
+      "showAsset",
+      "n"
+    ]
+  },
+  "reuse": {
+    "owner_supplied": true,
+    "owner_designated_reference": true,
+    "third_party_rights_verified": false,
+    "requires_dependency_license_review": true,
+    "description": "Owner-submitted source is preserved byte-for-byte. Review third-party dependencies before reuse or redistribution."
+  },
+  "original_preserved": true,
+  "modularized": false
+}

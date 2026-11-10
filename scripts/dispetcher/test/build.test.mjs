@@ -30,4 +30,5 @@ test('FINISH tasks precede non-FINISH tasks within a priority group',()=>{
 test('trap: stalled ZADACHI cannot produce empty dispatcher',()=>{
  assert.throws(()=>assertNotEmpty('| 🛑 ЗАВИС | stalled |',[]),/Empty dispatcher/);
  assert.doesNotThrow(()=>assertNotEmpty('| ✅ ГОТОВО | done |',[]));
+ assert.doesNotThrow(()=>assertNotEmpty('Статус: 🛑 ЗАВИС означает ожидание, но строк нет',[]));
 });

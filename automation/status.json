@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-10T06:51:19.969Z",
+  "generated_at": "2026-11-10T06:55:40.714Z",
   "sha": {
-    "lab": "10099fbecf574f8bb876a624c634174bf2ae9da5",
+    "lab": "4f636c04a658f2fc58ab3096f6e845bae347ae60",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
@@ -45,13 +45,7 @@
       }
     ],
     "redLab": [],
-    "redMg": [
-      {
-        "workflow": "Development memory integrity",
-        "url": "https://github.com/mpaykin1/meta6/actions/runs/42639155804",
-        "step": "Ensure live task prompt still routes to the memory"
-      }
-    ],
+    "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
       "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
@@ -275,8 +269,8 @@
   },
   "changes": {
     "lab": {
-      "count": 117,
-      "folders": ".github:4, AGENTS.md:1, automation:3, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1"
+      "count": 122,
+      "folders": ".github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1"
     },
     "mg": {
       "count": 2,

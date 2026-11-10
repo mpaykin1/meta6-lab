@@ -77,15 +77,15 @@ function functions(text,file){
    for(const candidate of candidates){
     const startOffset=block.offset+statement.start,endOffset=block.offset+statement.end;
     // Ranges are line-based. Never include an HTML script tag or half of a statement.
-    const before=text.slice(text.lastIndexOf('\\n',startOffset-1)+1,startOffset);
-    const nextNewline=text.indexOf('\\n',endOffset);
+    const before=text.slice(text.lastIndexOf('\n',startOffset-1)+1,startOffset);
+    const nextNewline=text.indexOf('\n',endOffset);
     const after=text.slice(endOffset,nextNewline<0?text.length:nextNewline);
-    if(/<\\/?script|<\\/|\\u003cscript/i.test(before+after)){
+    if(/<\/?script/i.test(before+after)){
      scanErrors.push({source_path:file,offset:startOffset,reason:'HTML tag shares declaration line'});
      continue;
     }
-    const start=text.slice(0,startOffset).split('\\n').length;
-    const end=text.slice(0,Math.max(startOffset,endOffset-1)).split('\\n').length;
+    const start=text.slice(0,startOffset).split('\n').length;
+    const end=text.slice(0,Math.max(startOffset,endOffset-1)).split('\n').length;
     found.push({...candidate,start,end,code:text.slice(startOffset,endOffset),source_path:file});
    }
   }

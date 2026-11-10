@@ -1,0 +1,195 @@
+name: Skin factory — cut and mutation gates
+on:
+  push:
+    branches: ['lab/skin-*']
+    paths:
+      - 'skins/sources/*/parts-sheet.png'
+      - 'skins/sources/*/parts-sheet.md'
+      - 'scripts/skins/cut-sheet.mjs'
+      - 'scripts/skins/mutate-cut-sheet.mjs'
+      - 'scripts/skins/build-pack.mjs'
+      - 'scripts/skins/verify-turntable.mjs'
+      - 'scripts/skins/mutate-turntable.mjs'
+      - 'scripts/skins/turntable-thresholds.mjs'
+      - 'scripts/skins/turntable-geometry.mjs'
+      - 'scripts/skins/turntable-albedo.mjs'
+      - 'scripts/skins/mutate-turntable-albedo.mjs'
+      - 'scripts/skins/mutate-build-pack.mjs'
+      - 'scripts/skins/preview.mjs'
+      - 'scripts/skins/mutate-preview.mjs'
+      - 'scripts/skins/verify-visual-fidelity.mjs'
+      - 'scripts/skins/mutate-visual-fidelity.mjs'
+      - 'skins/runtime/skin-runtime.js'
+      - 'games/skin-trainer/index.html'
+      - 'scripts/skins/verify-skin-factory-workflow.mjs'
+      - 'scripts/skins/mutate-skin-factory-workflow.mjs'
+      - '.github/workflows/skin-factory.yml'
+  pull_request:
+    paths:
+      - 'skins/sources/*/parts-sheet.png'
+      - 'skins/sources/*/parts-sheet.md'
+      - 'scripts/skins/**'
+      - 'skins/runtime/skin-runtime.js'
+      - 'games/skin-trainer/index.html'
+      - '.github/workflows/skin-factory.yml'
+  workflow_dispatch:
+concurrency:
+  group: skin-factory-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+jobs:
+  cut:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Установить бесплатный обработчик PNG
+        run: npm install --no-save --no-package-lock sharp@0.34.4
+      - name: Проверить контракт запуска и ловушки workflow
+        run: |
+          node scripts/skins/verify-skin-factory-workflow.mjs
+          node scripts/skins/mutate-skin-factory-workflow.mjs
+      - name: Найти все готовые листы с таблицей
+        run: |
+          set -euo pipefail
+          : > "$RUNNER_TEMP/skin-sources.txt"
+          for src in skins/sources/*; do
+            test -d "$src" || continue
+            if test -f "$src/parts-sheet.png" || test -f "$src/parts-sheet.md"; then
+              if ! test -f "$src/parts-sheet.png" || ! test -f "$src/parts-sheet.md"; then
+                echo "::error title=Неполный лист::Нужны parts-sheet.png И parts-sheet.md: $src"
+                exit 1
+              fi
+              echo "$src" >> "$RUNNER_TEMP/skin-sources.txt"
+            fi
+          done
+          if ! test -s "$RUNNER_TEMP/skin-sources.txt"; then
+            echo "::error::Нет источников parts-sheet.png + parts-sheet.md"
+            exit 1
+          fi
+      - name: Вырезать настоящие детали по таблице
+        run: |
+          set -euo pipefail
+          while IFS= read -r src; do node scripts/skins/cut-sheet.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt"
+          while IFS= read -r src; do node scripts/skins/cut-sheet.mjs "$src" --verify; done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Проверить испорченные листы и подменённые файлы
+        run: |
+          set -euo pipefail
+          while IFS= read -r src; do
+            node scripts/skins/mutate-cut-sheet.mjs "$src"
+          done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Собрать реальный пакет из новых PNG
+        run: while IFS= read -r src; do node scripts/skins/build-pack.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Проверить ловушки сборщика (включая обман старым файлом)
+        run: |
+          set -euo pipefail
+          while IFS= read -r src; do
+            node scripts/skins/mutate-build-pack.mjs "$src"
+          done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Установить Chromium для настоящей игры
+        run: |
+          npm install --no-save --no-package-lock sharp@0.34.4 playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Сделать 3D-превью и сравнение с эскизом
+        run: |
+          while IFS= read -r src; do node scripts/skins/preview.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt"
+          while IFS= read -r src; do node scripts/skins/preview.mjs "$src" --verify; done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Восьмиракурсный turntable в настоящем Chrome + вечные ловушки
+        run: |
+          set -euo pipefail
+          while IFS= read -r src; do
+            node scripts/skins/verify-turntable.mjs "$src"
+            node scripts/skins/verify-turntable.mjs "$src" --verify
+            node scripts/skins/mutate-turntable.mjs "$src"
+            node scripts/skins/mutate-turntable-albedo.mjs "$src"
+          done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Визуальное соответствие эскизу — без потери фактуры и силуэта
+        run: |
+          set -euo pipefail
+          node scripts/skins/mutate-visual-fidelity.mjs
+          while IFS= read -r src; do
+            node scripts/skins/verify-visual-fidelity.mjs "$src"
+          done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Проверить обман старым превью
+        run: |
+          set -euo pipefail
+          while IFS= read -r src; do
+            node scripts/skins/mutate-preview.mjs "$src"
+          done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Создать ZIP и проверить все S1–S12
+        run: while IFS= read -r src; do node scripts/skins/build-pack.mjs "$src" --finalize; done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Опубликовать скин и изображение в ветке PR
+        if: ${{ success() && github.event_name == 'push' && startsWith(github.ref, 'refs/heads/lab/skin-') }}
+        run: |
+          set -euo pipefail
+          git config user.name 'META GAMES Skin Factory'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add skins/packs/ skins/sources/*/cut-preview.png skins/sources/*/side-by-side.png skins/sources/*/turntable-meta.json
+          if ! git diff --cached --quiet; then
+            git commit -m "skin factory: publish generated skin packs and visual comparisons"
+            git push origin HEAD:"$GITHUB_REF_NAME"
+          fi
+      - name: Сохранить вырезки и визуальную сверку
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: skin-factory-outputs
+          path: |
+            skins/sources/*/cut-preview.png
+            skins/sources/*/cut/**
+            skins/packs/*/**
+            skins/packs/*.zip
+            skins/sources/*/side-by-side.png
+            skins/sources/*/turntable-meta.json
+            skins/packs/*/turntable.png
+            skins/sources/*/preview-meta.json
+          if-no-files-found: warn
+
+      - name: Комментарий в PR с картинкой и ссылкой на игру
+        if: ${{ always() && github.event_name == 'push' && startsWith(github.ref, 'refs/heads/lab/skin-') }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const branch = context.ref.replace('refs/heads/', '');
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', head: context.repo.owner + ':' + branch
+            });
+            if (!prs.data.length) return;
+            const branchSha = (await github.rest.repos.getBranch({
+              owner: context.repo.owner, repo: context.repo.repo, branch
+            })).data.commit.sha;
+            const run = 'https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId;
+            const ok = '${{ job.status }}' === 'success';
+            const ids = fs.readdirSync('skins/sources', {withFileTypes: true}).filter(e =>
+              e.isDirectory() && fs.existsSync('skins/sources/' + e.name + '/parts-sheet.png') &&
+              fs.existsSync('skins/sources/' + e.name + '/parts-sheet.md')).map(e => e.name);
+            const lines = ['### Фабрика скинов — сравнение с эскизом'];
+            for (const id of ids) {
+              const png = 'skins/sources/' + id + '/side-by-side.png';
+              const image = 'https://raw.githubusercontent.com/' + context.repo.owner + '/' + context.repo.repo +
+                '/' + branchSha + '/' + png;
+              const play = 'https://raw.githack.com/' + context.repo.owner + '/' + context.repo.repo +
+                '/' + branchSha + '/games/skin-trainer/index.html?skin=../../skins/packs/' + id + '/';
+              const turntable = 'skins/packs/' + id + '/turntable.png';
+              const turntableUrl = 'https://raw.githubusercontent.com/' + context.repo.owner + '/' +
+                context.repo.repo + '/' + branchSha + '/' + turntable;
+              lines.push('#### ' + id);
+              lines.push(ok && fs.existsSync(turntable) ? '![Восемь ракурсов 3D](' + turntableUrl + ')' :
+                'НЕТ turntable.png: сдача заблокирована.');
+              lines.push(ok && fs.existsSync(png) ? '![Эскиз | герой в скине](' + image + ')' :
+                'Сравнение не создано или прогон красный — проверьте ошибку в Actions.');
+              lines.push('[Играть в Skin Trainer](' + play + ')');
+            }
+            lines.push(ok && ids.every(id => fs.existsSync('skins/packs/' + id + '/turntable.png')) ?
+              'S1–S12, 8 ракурсов и ловушки: SUCCESS.' :
+              'Проблемы: красный прогон, см. упавший шаг; публикация заблокирована.');
+            lines.push('[Прогон Actions](' + run + ')');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: prs.data[0].number, body: lines.join('\n\n')
+            });

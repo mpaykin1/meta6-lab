@@ -96,14 +96,14 @@ if(stage!==null){
  if(stage<7){console.log('STAGE '+stage+' PASS: staged checks; full S1–S12 mandatory at stage 7.');process.exit(0);}
 }
 
-for(const file of ['skin.json','reference.png','preview.png','README.md'])if(!exists(file))fail('S2','missing '+file);
+for(const file of ['skin.json','reference.png','preview.png','turntable.png','README.md'])if(!exists(file))fail('S2','missing '+file);
 compareZip();
 const used=new Set(),allImages=walk(dir).filter(f=>f.endsWith('.png'));
 for(const t of manifest.textures||[]){addFile(used,t.file,'S2');if(t.emit)addFile(used,t.emit,'S2');if(!['sphere','box6','cyl','plane'].includes(t.uv))fail('S2','invalid uv '+t.uv);}
 for(const p of manifest.parts||[])if(p.file)addFile(used,p.file,'S2');
 for(const name of used)if(!exists(name))fail('S2','missing image '+name);
-for(const name of allImages)if(!used.has(name)&&!['reference.png','preview.png'].includes(name)&&!/^stages\/[0-7]\.png$/.test(name))fail('S2','unreferenced PNG '+name);
-for(const name of walk(dir))if(!name.match(/^(skin\.json|reference\.png|preview\.png|README\.md|STAGE\.md|stages\/[0-7]\.png|(textures|parts|sheets)\/[\w.-]+\.png)$/))fail('S2','unauthorized file '+name);
+for(const name of allImages)if(!used.has(name)&&!['reference.png','preview.png','turntable.png'].includes(name)&&!/^stages\/[0-7]\.png$/.test(name))fail('S2','unreferenced PNG '+name);
+for(const name of walk(dir))if(!name.match(/^(skin\.json|reference\.png|preview\.png|turntable\.png|README\.md|STAGE\.md|stages\/[0-7]\.png|(textures|parts|sheets)\/[\w.-]+\.png)$/))fail('S2','unauthorized file '+name);
 const palette=(manifest.palette||[]).map(hex=>typeof hex==='string'&&/^#[0-9a-fA-F]{6}$/.test(hex)?[parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16)]:null);
 if(palette.length<6||palette.length>16||palette.some(x=>!x)||new Set((manifest.palette||[]).map(x=>x.toLowerCase())).size!==palette.length)fail('S5','palette must contain 6–16 distinct #RRGGBB colors');
 const imageData=new Map();

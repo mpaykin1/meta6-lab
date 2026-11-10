@@ -21,6 +21,7 @@ _как игра выглядит: графика, свет, погода, чи�
 - [graf.md](rules/01-stil-i-grafika/graf.md) — GRAF — полный стандарт графики и анимации
 - [weather.md](rules/01-stil-i-grafika/weather.md) — погода: принятая версия и как её переносить
 - [graf-mobile-follow-camera.md](rules/01-stil-i-grafika/graf-mobile-follow-camera.md) — камера на телефоне следует за героем
+- [SKINY.md](rules/01-stil-i-grafika/SKINY.md) — **СКИНЫ (09.11.2026):** примитивный герой + ZIP-пакет `meta6-skin/1` (текстуры, запекание, детали, анимированные 2D/2.5D) = детальный персонаж; учебная игра games/skin-trainer, эскиз reference/skins/rusty-robot.png
 
 ## 02. Игровые механики — [rules/02-igrovye-mekhaniki/](rules/02-igrovye-mekhaniki/)
 

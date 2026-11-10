@@ -8,7 +8,7 @@
 - SHA: `327a181124cfb0f13e6b2df3dea23ac29aff9abe` · последний коммит: 2026-11-10T14:49:30Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-строитель-1 2026-11-10T16:08:00Z
+- Взял: НУЖЕН CLAUDE — защищённый workflow; https://github.com/mpaykin1/meta6-lab/pull/190#issuecomment-6772433988
 
 ### PR #218
 - PR: https://github.com/mpaykin1/meta6-lab/pull/218

@@ -1,6 +1,5 @@
 import { execFileSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 
 export const WORKFLOW_NAME = "A1 STATUS";
 
@@ -62,10 +61,11 @@ export function renderStatus({ rows, runs, sha, lastChange, repository }) {
   return lines.join("\n") + "\n";
 }
 
-async function main() {
-  const repository = process.env.GITHUB_REPOSITORY;
-  const token = process.env.GITHUB_TOKEN;
-  if (!repository || !token) throw new Error("GITHUB_REPOSITORY and GITHUB_TOKEN required");
+export async function updateStatus({ repository, token }) {
+  if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repository ?? "")) {
+    throw new Error("Valid GitHub repository required");
+  }
+  if (!token) throw new Error("GitHub API token required");
   const git = (...args) => execFileSync("git", args, { encoding: "utf8" }).trim();
   // Ignore our own status commits: the last meaningful change must remain stable.
   const commit = git("log", "-1", "--format=%H%n%cI", "--invert-grep",
@@ -96,9 +96,3 @@ async function main() {
   process.stdout.write(status);
 }
 
-if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
-  main().catch((error) => {
-    process.stderr.write(String(error.stack ?? error) + "\n");
-    process.exitCode = 1;
-  });
-}

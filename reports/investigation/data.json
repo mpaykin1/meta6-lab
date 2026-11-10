@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T09:00:58.688Z",
+  "generated_at": "2026-11-10T09:10:51.835Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -64,7 +64,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/status-a1-20261110",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 219,
       "pr_state": "open",
@@ -73,7 +73,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/219",
       "taken_at": "2026-11-10 05:07",
       "last_commit_at": "2026-11-10 05:16",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: kontur-guard, browser-open-all"
     },
     {
       "id": 4,
@@ -166,12 +166,12 @@
       "project": "МГЛ",
       "owner": "MG-строитель-2",
       "branch": "lab/bot-batch-2",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 200,
       "pr_state": "open",
-      "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42747922299/job/129604441238",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/200",
       "taken_at": "2026-11-10 05:20",
       "last_commit_at": "2026-11-10 03:12",
@@ -183,12 +183,12 @@
       "project": "МГЛ",
       "owner": "автозадача",
       "branch": "lab/bot-batch-2",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 200,
       "pr_state": "open",
-      "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42747922299/job/129604441238",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/200",
       "taken_at": "2026-11-09 15:45",
       "last_commit_at": "2026-11-10 03:12",
@@ -200,7 +200,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/rules-bot-trainer",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 204,
       "pr_state": "open",
@@ -209,7 +209,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/204",
       "taken_at": "2026-11-09 16:36",
       "last_commit_at": "2026-11-10 02:51",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 12,
@@ -217,7 +217,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-3",
       "branch": "lab/mcp-connect",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 192,
       "pr_state": "open",
@@ -226,7 +226,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/192",
       "taken_at": "2026-11-09 22:25",
       "last_commit_at": "2026-11-09 22:26",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: bot, browser"
     },
     {
       "id": 13,
@@ -234,7 +234,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 203,
       "pr_state": "open",
@@ -243,7 +243,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-09 16:21",
       "last_commit_at": "2026-11-09 19:38",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 14,
@@ -251,7 +251,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/owner-pult",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 205,
       "pr_state": "open",
@@ -260,7 +260,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/205",
       "taken_at": "2026-11-09 16:35",
       "last_commit_at": "2026-11-09 17:01",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 15,
@@ -847,11 +847,11 @@
       "owner": "чат ChatGPT",
       "branch": "lab/dispetcher",
       "status": "в работе",
-      "original_status": "🔨 В РАБОТЕ",
+      "original_status": "НУЖЕН CLAUDE: изменения workflow нельзя сливать автоматически",
       "pr": 227,
       "pr_state": "open",
       "check": "pending",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42787222737/job/129731372971",
+      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42788522351/job/129735894949",
       "url": "https://github.com/mpaykin1/meta6-lab/pull/227",
       "taken_at": "2026-11-10 08:53",
       "last_commit_at": "2026-11-10 08:58",
@@ -863,16 +863,16 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/bot-batch-1",
-      "status": "ошибка",
+      "status": "в работе",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 190,
       "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42786665195/job/129729922251",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/190",
       "taken_at": "2026-11-10 08:48",
       "last_commit_at": "2026-11-10 08:57",
-      "remaining": "Исправить красные проверки: kontur-guard, verify-adapters"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 51,
@@ -880,16 +880,16 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/bot-batch-1",
-      "status": "ошибка",
+      "status": "в работе",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 190,
       "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42786665195/job/129729922251",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/190",
       "taken_at": "2026-11-09 15:15",
       "last_commit_at": "2026-11-10 08:57",
-      "remaining": "Исправить красные проверки: kontur-guard, verify-adapters"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 52,

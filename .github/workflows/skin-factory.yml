@@ -11,6 +11,8 @@ on:
       - 'scripts/skins/mutate-build-pack.mjs'
       - 'scripts/skins/preview.mjs'
       - 'scripts/skins/mutate-preview.mjs'
+      - 'scripts/skins/verify-skin-factory-workflow.mjs'
+      - 'scripts/skins/mutate-skin-factory-workflow.mjs'
       - '.github/workflows/skin-factory.yml'
   pull_request:
     paths:
@@ -32,6 +34,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Установить бесплатный обработчик PNG
         run: npm install --no-save --no-package-lock sharp@0.34.4
+      - name: Проверить контракт запуска и ловушки workflow
+        run: |
+          node scripts/skins/verify-skin-factory-workflow.mjs
+          node scripts/skins/mutate-skin-factory-workflow.mjs
       - name: Найти все готовые листы с таблицей
         run: |
           set -euo pipefail

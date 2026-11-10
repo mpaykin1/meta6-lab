@@ -21,7 +21,7 @@
   }
   // Read-only grid navigation through cells the world generator marked reachable.
   // Goals are real walkable waypoints on the route to a real uncollected coin.
-  const route = { seed: null, coin: null, path: [], step: 1 };
+  const route = { seed: null, coin: null, path: [], step: 0 };
   function navigate(world, player, coin) {
     const reach = world.reach, stand = world.stand;
     const side = reach && Math.sqrt(reach.length);
@@ -36,7 +36,7 @@
       Math.hypot(player.x - (nextCell % side + 0.5),
         player.z - (Math.floor(nextCell / side) + 0.5)) > 2.2;
     if (route.seed !== world.seed || route.coin !== coin || !route.path.length || offPath) {
-      route.seed = world.seed; route.coin = coin; route.path = []; route.step = 1;
+      route.seed = world.seed; route.coin = coin; route.path = []; route.step = 0;
       const prev = new Int32Array(reach.length); prev.fill(-1);
       let origin = start;
       if (!reach[origin]) {

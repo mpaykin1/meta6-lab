@@ -82,14 +82,22 @@ export function apply(text,data,now) {
   r.task=clean(r.task);r.who=clean(r.who)||'ChatGPT';r.project=clean(r.project)||'МГЛ';
  }
  const dedup=new Map(),unique=[];
+ const addWho=(left,right)=>[...new Set((left+', '+right).split(/,\s*/).filter(Boolean))].join(', ');
  for(const r of rows){
   const href=/https:\/\/github\.com\/[^\s)]+\/pull\/\d+/.exec(r.pr||'')?.[0];
-  const id=!noBranch(r.branch)?repoFor(r,data)+'::'+r.branch:href;
-  if(!id||!dedup.has(id)){unique.push(r);if(id)dedup.set(id,r);continue;}
-  const old=dedup.get(id);
-  old.who=[...new Set((old.who+', '+r.who).split(/,\s*/).filter(Boolean))].join(', ');
+  const keys=[...(!noBranch(r.branch)?[repoFor(r,data)+'::'+r.branch]:[]),...(href?['PR::'+href]:[])];
+  const matches=[...new Set(keys.map(k=>dedup.get(k)).filter(Boolean))];
+  if(!matches.length){unique.push(r);for(const k of keys)dedup.set(k,r);continue;}
+  const old=matches[0];
+  old.who=addWho(old.who,r.who);
   if(/НУЖЕН CLAUDE/.test(r.status)&&!/ГОТОВО|ЗАКРЫТО/.test(old.status))old.status=r.status;
   if(parseT(r.taken)<parseT(old.taken))old.taken=r.taken;
+  for(const other of matches.slice(1)){
+   old.who=addWho(old.who,other.who);
+   const index=unique.indexOf(other);if(index>=0)unique.splice(index,1);
+   for(const [k,v] of dedup)if(v===other)dedup.set(k,old);
+  }
+  for(const k of keys)dedup.set(k,old);
  }
  const rank=s=>/ЗАВИС|нет данных/.test(s)?0:/^⚔|^❌|ЗАКРЫТЬ/.test(s)?1:/молчит/.test(s)?2:/В РАБОТЕ/.test(s)?3:/НУЖЕН CLAUDE/.test(s)?4:/ЗАБРОШЕНО/.test(s)?5:/ЗАКРЫТО/.test(s)?6:/ГОТОВО/.test(s)?7:8;
  const when=r=>Number.isFinite(parseT(r.last))?parseT(r.last):parseT(r.taken)||0;

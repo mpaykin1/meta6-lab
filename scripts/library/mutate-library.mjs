@@ -57,6 +57,10 @@ const scenarios=[
     mf.game='base-copy';
     mf.source_root='games/base-copy';
     write(path.join(root,'shared/library/base-copy.json'),mf);
+    // A protected copy manifest may stay on disk. It must never enter the global search index.
+    const ix=path.join(root,'shared/library/index.json'),index=read(ix);
+    index.entries.push({...index.entries[0],game:'base-copy'});
+    write(ix,index);
   }],
   ['missing-file-asset-with-cleaned-index',root=>{
     const mf=path.join(root,'shared/library/base.json'),ix=path.join(root,'shared/library/index.json');

@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Закрыть устаревший красный PR #1 Twilight Island | МГЛ | MG-ремонтник | lab/twilight-island-pass | [#1](https://github.com/mpaykin1/meta6-lab/pull/1) | 2026-11-10 04:47 | — |
 | взято | Бот «СВОДКА ДЛЯ CLAUDE» | МГЛ | чат ChatGPT | `lab/status-dlya-claude` | — | 2026-11-10 04:44 | — |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | M6 | МГЛ | MG-строитель-3 | `lab/mcp-connect` | [#192](https://github.com/mpaykin1/meta6-lab/pull/192) | 2026-11-09 22:25 | 2026-11-09 22:26 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/skin-rusty-robot` | [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | 2026-11-09 16:21 | 2026-11-09 19:38 |

@@ -4,6 +4,9 @@ import {readFileSync,readdirSync,statSync,lstatSync,realpathSync} from 'node:fs'
 import {resolve,relative,isAbsolute,win32,join,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {approvedComponents,searchApproved,inspectApproved,getApprovedSource} from './search.mjs';
+import {editGame} from './tools/edit-game.mjs';
+import {runBot} from './tools/run-bot.mjs';
+import {libraryDefs,callLibraryTool} from './tools/library.mjs';
 
 function listGames(){
  const html=readFileSync(new URL('../../meta-games/index.html',import.meta.url),'utf8');
@@ -107,12 +110,15 @@ function readGameFile(id,file,start=1,count=400){
 }
 
 const defs=[
+ ...libraryDefs,
+ {name:'edit_game',description:'Create one exact text edit in a listed games/ file as a separate local git commit and mcp-edit branch; optional PR only when a GitHub token is configured',inputSchema:{type:'object',properties:{id:{type:'string'},file:{type:'string'},old_text:{type:'string'},new_text:{type:'string'},message:{type:'string'}},required:['id','file','old_text','new_text','message'],additionalProperties:false}},
  {name:'list_approved_components',description:'Exact original source modules with verified upstream Git blob',inputSchema:{type:'object',properties:{}}},
  {name:'search_approved_code',description:'Search approved code and return small matching line snippets',inputSchema:{type:'object',properties:{query:{type:'string'},limit:{type:'integer'}},required:['query']}},
  {name:'inspect_approved_component',description:'Read a small window of original approved code',inputSchema:{type:'object',properties:{id:{type:'string'},start:{type:'integer'},count:{type:'integer'}},required:['id']}},
  {name:'get_approved_component_source',description:'Get complete original, hash-checked JavaScript source for deliberate integration in a sandbox game; prefer search for discovery',inputSchema:{type:'object',properties:{id:{type:'string'}},required:['id']}},
  {name:'list_game_files',description:'List recursive relative game files and byte lengths for a game from list_games',inputSchema:{type:'object',properties:{id:{type:'string'}},required:['id']}},
  {name:'read_game_file',description:'Read a precise text line window from an allowlisted game; binary assets are rejected with byte size',inputSchema:{type:'object',properties:{id:{type:'string'},file:{type:'string'},start:{type:'integer',minimum:1},count:{type:'integer',minimum:1,maximum:10000}},required:['id','file']}},
+ {name:'run_bot',description:'Run Claude META BOT (full mobile, desktop and second run; max 300 seconds, one run at a time)',inputSchema:{type:'object',properties:{id:{type:'string'},mode:{type:'string',enum:['full']}},required:['id']}},
  {name:'list_games',description:'List all self-hosted games directly from the META GAMES homepage',inputSchema:{type:'object',properties:{}}}
 ];
 function answer(id,result,error){
@@ -132,7 +138,10 @@ for await(const line of readline.createInterface({input:process.stdin,crlfDelay:
   else if(msg.method==='tools/list')answer(msg.id,{tools:defs});
   else if(msg.method==='tools/call'){
    const {name,arguments:args={}}=msg.params||{};
-   const value=name==='list_approved_components'?approvedComponents():
+   const value=libraryDefs.some(tool=>tool.name===name)?await callLibraryTool(name,args,repositoryRoot):
+    name==='edit_game'?await editGame(args,{repositoryRoot,listGames}):
+    name==='run_bot'?await runBot(args,listGames()):
+    name==='list_approved_components'?approvedComponents():
     name==='search_approved_code'?searchApproved(args.query,args.limit):
     name==='inspect_approved_component'?inspectApproved(args.id,args.start,args.count):
     name==='get_approved_component_source'?getApprovedSource(args.id):

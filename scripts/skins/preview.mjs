@@ -64,7 +64,7 @@ async function main(){
    await page.evaluate(()=>{
     document.querySelectorAll('.hint,#fade,#joy').forEach(el=>el.style.display='none');
     const cv=document.querySelector('canvas#gl');
-    cv.style.transform='scale(2.25)';cv.style.transformOrigin='50% 42%';
+    cv.style.transform='scale(1.6)';cv.style.transformOrigin='50% 42%';
    });
    let move=Math.abs(yaw/.006);
    while(move>.1){const dx=Math.min(move,165);await page.mouse.move(470,310);await page.mouse.down();await page.mouse.move(470-dx,310,{steps:6});await page.mouse.up();move-=dx;}

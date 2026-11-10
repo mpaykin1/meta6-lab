@@ -1,0 +1,41 @@
+name: LAB Broken City WebGL Performance
+on:
+  pull_request:
+    paths:
+      - 'games/broken-city/**'
+      - 'shared/render/frame-quality.js'
+      - 'scripts/lab/broken-city-bench.mjs'
+      - '.github/workflows/lab-broken-city-performance.yml'
+permissions:
+  contents: read
+jobs:
+  performance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Prepare source versions
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/broken-base
+          git archive "$BASE_SHA" games/broken-city | tar -x -C /tmp/broken-base
+          # Use the current unmodified main as the baseline; the old ad-handler error is fixed.
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory /tmp/broken-base >/tmp/broken-base-http.log 2>&1 &
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory . >/tmp/broken-head-http.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8765/games/broken-city/ >/dev/null
+          curl -fsS http://127.0.0.1:8766/games/broken-city/ >/dev/null
+      - name: Measure WebGL2 original and adaptive renderer
+        run: node scripts/lab/broken-city-bench.mjs

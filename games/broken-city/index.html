@@ -98,6 +98,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#070d18;touch-action:n
 <div id="menu" class="hidden"></div>
 
 <script type="importmap">{"imports":{"three":"./lib/three.module.js"}}</script>
+<script src="../../shared/render/frame-quality.js"></script>
 <script type="module">
 /* Playgama Bridge (present only in the Playgama build): initialize BEFORE loading the engine */
 const BR = window.bridge || null;
@@ -155,6 +156,9 @@ try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
 } catch (e) { $('loader').remove(); document.body.insertAdjacentHTML('beforeend', '<div id="err">WebGL недоступен</div>'); throw e; }
 const DPR = Math.min(window.devicePixelRatio || 1, 2);
+const qualityController = window.MetaQuality.create({ targetMs: 16.67, minScale: .65, maxScale: 1 });
+const pointScale = { value: DPR };
+let qualityScale = 1;
 renderer.setPixelRatio(DPR);
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 const damp = (k, dt) => 1 - Math.exp(-k * dt);
@@ -359,7 +363,7 @@ function fogMat(intensity, speed) {
 }
 function dustMat(size) {
   return new THREE.ShaderMaterial({
-    uniforms: { uTime: U.uTime, uPR: { value: DPR }, uSize: { value: size } }, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    uniforms: { uTime: U.uTime, uPR: pointScale, uSize: { value: size } }, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
     vertexShader: `attribute float aSeed; uniform float uTime; uniform float uPR; uniform float uSize; varying float vA;
       void main(){ vec3 p=position; float t=uTime;
         p.x += sin(t*.31+aSeed*6.28)*1.6 + sin(t*.07+aSeed*3.)*3.;
@@ -648,8 +652,12 @@ const gcam = new THREE.PerspectiveCamera(50, 1, .1, 200);
 
 function resize() {
   const w = innerWidth, h = innerHeight;
+  const pixelRatio = DPR * qualityScale;
+  renderer.setPixelRatio(pixelRatio);
   renderer.setSize(w, h, false);
-  const s = .8 * DPR; rt.setSize(Math.max(2, Math.floor(w * s)), Math.max(2, Math.floor(h * s)));
+  rt.setSize(Math.max(2, Math.floor(w * .8 * pixelRatio)), Math.max(2, Math.floor(h * .8 * pixelRatio)));
+  post.uniforms.uCell.value = 4.5 * pixelRatio;
+  pointScale.value = pixelRatio;
   camera.aspect = gcam.aspect = w / h;
   camera.fov = w < h ? 72 : 58; camera.updateProjectionMatrix(); gcam.updateProjectionMatrix();
 }
@@ -1684,7 +1692,7 @@ const SPK = 600, spkPos = new Float32Array(SPK * 3), spkLife = new Float32Array(
 const spkGeo = new THREE.BufferGeometry();
 spkGeo.setAttribute('position', new THREE.BufferAttribute(spkPos, 3).setUsage(THREE.DynamicDrawUsage)); spkGeo.setAttribute('aLife', new THREE.BufferAttribute(spkLife, 1).setUsage(THREE.DynamicDrawUsage));
 const sparks = new THREE.Points(spkGeo, new THREE.ShaderMaterial({
-  uniforms: { uPR: { value: DPR } }, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  uniforms: { uPR: pointScale }, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
   vertexShader: `attribute float aLife; uniform float uPR; varying float vL; void main(){ vL=aLife; vec4 mv=modelViewMatrix*vec4(position,1.);
     gl_PointSize=(.6+aLife*2.2)*uPR*(11./max(-mv.z,1.)); gl_Position=aLife>0.?projectionMatrix*mv:vec4(3.,3.,3.,1.); }`,
   fragmentShader: `varying float vL; void main(){ float d=length(gl_PointCoord-.5); float a=smoothstep(.5,.0,d); gl_FragColor=vec4(mix(vec3(1.,.42,.08),vec3(1.,.96,.75),vL*vL)*a*1.7,1.); }`
@@ -3239,9 +3247,19 @@ window.__G = { memShow, LAY: { gen: barrierLayoutGen, A: barrierLayoutA, make: m
 /* ============ LOOP ============ */
 const clock = new THREE.Clock();
 let started = 0, glitch = 0, dripT = 2;
+Object.defineProperty(window, '__META_QUALITY_STATS__', { value: () => Object.freeze({
+  scale: qualityScale, frameMs: qualityController.averageMs,
+  rendererWidth: renderer.domElement.width, rendererHeight: renderer.domElement.height,
+  drawCalls: renderer.info.render.calls, triangles: renderer.info.render.triangles
+}) });
 function frame() {
   requestAnimationFrame(frame);
-  const dt0 = Math.min(clock.getDelta(), .05); if (PAUSE.size && started) return;
+  const frameMs = clock.getDelta() * 1000;
+  if (!document.hidden && !PAUSE.size) {
+    const nextScale = qualityController.sample(frameMs);
+    if (nextScale !== qualityScale) { qualityScale = nextScale; resize(); }
+  }
+  const dt0 = Math.min(frameMs / 1000, .05); if (PAUSE.size && started) return;
   const dt = dt0, t = clock.elapsedTime;
   U.uTime.value = t;
   post.uniforms.uFade.value += (fadeTarget - post.uniforms.uFade.value) * damp(view === 'game' ? (G.state === 'trans' ? 6 : 2.6) : .9, dt);

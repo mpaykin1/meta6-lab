@@ -63,7 +63,7 @@
 | #58 | код | `lab/approved-donor-confluence-vault-20261107` | Vault: replace prohibited procedural payload with SHA-pinned | open dirty | |
 | #54 | код | `lab/render-visibility-optimization` | META GAMES LAB: shared voxel optimization + live frustum cul | open | |
 | #49 | код | `lab/veil-weather-connected-20261107` | Playable Veil uses exact original Three Worlds weather; regi | open dirty | |
-| #43 | код | `lab/veil-weather-original-20261107` | Use exact original Three Worlds weather in playable Veil Ter | open dirty | |
+| #43 | код | `lab/veil-weather-original-20261107` | Use exact original Three Worlds weather in playable Veil Ter | open dirty | закрыт stale: заменён PR #49; https://github.com/mpaykin1/meta6-lab/pull/43 |
 | #16 | код | `lab/readiness-evidence-gates` | Evidence-gated META GAMES readiness: 10 elements, same-SHA C | open | |
 | #15 | код | `lab/shared-owner-approved-components` | Approved original-source library: token-efficient MCP search | closed | |
 | #9 | код | `lab/agent-game-candidate` | [BLOCKED — source policy] Procedural World_server candidate  | closed | закрыт stale: политика исходников, [PR #9](https://github.com/mpaykin1/meta6-lab/pull/9) |

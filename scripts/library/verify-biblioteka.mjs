@@ -21,6 +21,8 @@ export function verifyBiblioteka(root = DEFAULT_ROOT, {strict = false} = {}) {
   check(Array.isArray(catalog.solutions), 'missing systems catalog');
   check(Array.isArray(index.entries), 'missing asset index');
   const solutions = catalog.solutions;
+  if (strict) check(solutions.some(item => item.load_ok === true),
+    'all load_ok=false — cannot accept a nonfunctional catalog');
   check(solutions.length === catalog.solution_count, 'wrong catalog solution_count');
   const byGame = new Map();
   for (const item of solutions) {
@@ -88,7 +90,6 @@ export function verifyBiblioteka(root = DEFAULT_ROOT, {strict = false} = {}) {
   'machine summary disagrees with catalog');
 
   if (strict) {
-    check(totals.loaded > 0, 'all load_ok=false — cannot accept a nonfunctional catalog');
     for (const solution of solutions) {
       if ((solution.asset_ids || []).length > 0) continue;
       const code = (solution.lines || []).map(segment => {

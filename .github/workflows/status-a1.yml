@@ -9,6 +9,7 @@ on:
     paths:
       - '.github/workflows/status-a1.yml'
       - 'scripts/status/status-a1.mjs'
+      - 'scripts/status/run-status-a1.mjs'
       - 'scripts/status/verify-a1.mjs'
       - 'scripts/status/mutate-status-a1.mjs'
       - 'STATUS.md'
@@ -46,7 +47,7 @@ jobs:
           git config user.name 'meta6-status-bot'
           git config user.email 'actions@users.noreply.github.com'
           for attempt in 1 2 3; do
-            node scripts/status/status-a1.mjs
+            printf '%s' "$GITHUB_TOKEN" | node scripts/status/run-status-a1.mjs
             git add STATUS.md
             if git diff --cached --quiet; then exit 0; fi
             git commit -m 'chore(status-a1): refresh'

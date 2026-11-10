@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {chromium} from 'playwright';
 import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {StdioClientTransport} from '@modelcontextprotocol/sdk/client/stdio.js';
 import {execFileSync} from 'node:child_process';
@@ -48,5 +49,44 @@ try{
  const actualFiles=execFileSync('git',['-C',root,'ls-tree','-r','--name-only',game.commit],{encoding:'utf8'});
  assert.ok(actualFiles.split('\n').filter(x=>x.startsWith(game.path.replace(/index\.html$/,'systems/'))).length>=3,
   'Assembly did not copy the requested original systems');
- console.log('MCP SDK PASS camera, weather, controls, exact code, asset, branch-only scaffold '+game.commit);
+ // Verify the exact newly assembled files, not merely the git tree or a fake test page.
+ const temp=fs.mkdtempSync(path.join(os.tmpdir(),'meta-mcp-assembled-'));
+ try{
+  const folder=path.posix.dirname(game.path)+'/';
+  const relativeFiles=actualFiles.split('\n').filter(file=>file.startsWith(folder));
+  assert.ok(relativeFiles.length>=6,'Missing assembled game files');
+  for(const name of relativeFiles){
+   assert.ok(!name.split('/').includes('..'),'Unsafe assembled filename');
+   const destination=path.join(temp,name);
+   fs.mkdirSync(path.dirname(destination),{recursive:true});
+   fs.writeFileSync(destination,execFileSync('git',['-C',root,'show',game.commit+':'+name]));
+  }
+  const browser=await chromium.launch({headless:true});
+  try{
+   const page=await browser.newPage({viewport:{width:960,height:540}});
+   const browserErrors=[];
+   page.on('pageerror',error=>browserErrors.push(error.message));
+   page.on('console',message=>{
+    if(message.type()==='error')browserErrors.push(message.text());
+   });
+   page.on('requestfailed',request=>browserErrors.push(request.url()+' '+request.failure()?.errorText));
+   await page.goto(pathToFileURL(path.join(temp,game.path)).href,{waitUntil:'load'});
+   await page.waitForTimeout(1000);
+   const image=await page.evaluate(()=>{
+    return [...document.querySelectorAll('canvas')].some(canvas=>{
+     if(canvas.width<128||canvas.height<128)return false;
+     try{
+      const blank=document.createElement('canvas');
+      blank.width=canvas.width;
+      blank.height=canvas.height;
+      return canvas.toDataURL()!==blank.toDataURL();
+     }catch{return false;}
+    });
+   });
+   assert.deepEqual(browserErrors,[],'MCP assembled game has browser errors');
+   assert.ok(image,'MCP assembled game has an empty canvas');
+   await page.close();
+  }finally{await browser.close();}
+ }finally{fs.rmSync(temp,{recursive:true,force:true});}
+ console.log('MCP assembled Chromium PASS: 3 systems, 2 assets, rendered canvas '+game.commit);
 }finally{await client.close();}

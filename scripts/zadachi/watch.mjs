@@ -43,16 +43,16 @@ export function parseRows(text) {
 // data: {repo, pulls: {branch: {number, title, state, merged, sha, created, lastCommit}}, branches: {branch: ms}, zanyato: [{item, branch, who, at}]}
 export function apply(text, data, now) {
   const rows = parseRows(text);
-  const key = (project, branch) => `${project}:${branch}`;
-  const seen = new Set(rows.filter(r => !noBranch(r.branch)).map(r => key(r.project, r.branch)));
-  for (const z of data.zanyato || []) if (!seen.has(key('МГЛ', z.branch))) {
-    seen.add(key('МГЛ', z.branch));
+  const identityKey = (project, branch) => `${project}:${branch}`;
+  const seen = new Set(rows.filter(r => !noBranch(r.branch)).map(r => identityKey(r.project, r.branch)));
+  for (const z of data.zanyato || []) if (!seen.has(identityKey('МГЛ', z.branch))) {
+    seen.add(identityKey('МГЛ', z.branch));
     rows.push({status: '', task: clean(z.item), project: 'МГЛ', who: clean(z.who.replace(/^свободно \(зависло[^,]*, было: (.*)\)$/, '$1').replace(/\s*⚠.*$/, '')) || 'ChatGPT', branch: z.branch, pr: '—', taken: z.at, last: '—'});
   }
   for (const [project, source] of [['МГЛ', data.pulls], ['МГ', data.mgPulls]]) {
     for (const [branch, p] of Object.entries(source || {})) {
-      if (p.state !== 'open' || seen.has(key(project, branch))) continue;
-      seen.add(key(project, branch));
+      if (p.state !== 'open' || seen.has(identityKey(project, branch))) continue;
+      seen.add(identityKey(project, branch));
       rows.push({
         status: '', task: clean(p.title), project,
         who: 'ChatGPT (сам не записал — добавил сторож)', branch,

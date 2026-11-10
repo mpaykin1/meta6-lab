@@ -83,7 +83,7 @@
 | ⚠ молчит больше часа | CI #222 и разбор PR #208/#201/#200 для 5 автозадач | МГЛ | чат ChatGPT | `lab/ci-ochered-concurrency` | [#222](https://github.com/mpaykin1/meta6-lab/pull/222) | 2026-11-10 08:57 | 2026-11-10 08:53 |
 | ⚠ молчит больше часа | Доводчик: чистый PR #226 вместо защищённой истории #124 | МГЛ | чат ChatGPT | `lab/lore-atlas-clean-guard` | [#226](https://github.com/mpaykin1/meta6-lab/pull/226) | 2026-11-10 08:50 | 2026-11-10 08:49 |
 | ⚠ молчит больше часа | Разобрать устаревший PR #8 Auto-Repair | МГЛ | MG-ремонтник | `lab/bot-safe-autorepair` | [#8](https://github.com/mpaykin1/meta6-lab/pull/8) | 2026-11-10 07:48 | — |
-| 🔨 В РАБОТЕ | Импорт пяти коммерчески разрешённых CC0 asset packs в библиотеку | МГЛ | чат ChatGPT | `lab/import-five-cc0-packs` | — | 2026-11-10 10:06 | 2026-11-10 10:32 |
+| 🔨 В РАБОТЕ | Импорт пяти коммерчески разрешённых CC0 asset packs в библиотеку | МГЛ | чат ChatGPT | `lab/import-five-cc0-packs` | [#233](https://github.com/mpaykin1/meta6-lab/pull/233) | 2026-11-10 10:06 | 2026-11-10 10:32 |
 | 🔨 В РАБОТЕ | Описание возможностей META GAMES для разработчиков | МГЛ | чат ChatGPT | `lab/creator-features-copy-1110` | [#232](https://github.com/mpaykin1/meta6-lab/pull/232) | 2026-11-10 10:25 | 2026-11-10 10:29 |
 | 🔨 В РАБОТЕ | Диспетчер: повторный запрос mergeable=null и сохранение прежнего конфликта | МГЛ | чат ChatGPT | `lab/dispetcher-mergeable-null-1110` | [#231](https://github.com/mpaykin1/meta6-lab/pull/231) | 2026-11-10 10:05 | 2026-11-10 10:07 |
 | 🙋 НУЖЕН CLAUDE: ложное срабатывание защищённого kontur-guard | Исправить красный kontur-guard PR #229 | МГЛ | MG-строитель-3 | `lab/chat-rabota` | [#229](https://github.com/mpaykin1/meta6-lab/pull/229) | 2026-11-10 10:28 | 2026-11-10 10:30 |

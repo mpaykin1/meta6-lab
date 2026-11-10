@@ -11,7 +11,8 @@ const catalog = fs.readFileSync(path.join(root, 'shared/library/catalog-solution
 const index = fs.readFileSync(path.join(root, 'shared/library/index.json'), 'utf8');
 const scenarios = [
   ['wrong-total', data => {
-    data.ledger = data.ledger.replace(/\[100\]\(https:\/\/github\.com/g, '[101](https://github.com');
+    const count = JSON.parse(catalog).solution_count;
+    data.ledger = data.ledger.replace('**[' + count + '](', '**[' + (count + 1) + '](');
     assert.notEqual(data.ledger, ledger, 'fixture lacks total marker');
   }],
   ['copy-as-exemplar', data => {
@@ -20,14 +21,14 @@ const scenarios = [
   }],
   ['deceptive-fake-positive', data => {
     const parsed = JSON.parse(data.catalog);
-    parsed.solutions[0].load_ok = true;
+    parsed.solutions[0].load_ok = !parsed.solutions[0].load_ok;
     data.catalog = JSON.stringify(parsed);
   }],
   ['all-systems-unloadable', data => {
     data.strict = true;
     const parsed = JSON.parse(data.catalog);
-    assert(parsed.solutions.every(solution => !solution.load_ok),
-      'Strict negative fixture requires all systems to fail');
+    for (const solution of parsed.solutions) solution.load_ok = false;
+    data.catalog = JSON.stringify(parsed);
   }]
 ];
 let passed = 0;

@@ -159,25 +159,32 @@ async function bakeFaces(tmp,bone,source,palette){
  const fall=tones.find(x=>x[0]>=200&&x[0]<=240&&x[0]>x[1]*1.45)||
   tones.reduce((a,c)=>c[0]>a[0]&&c[0]<235?c:a,tones[0]);
  const black=tones[1]||tones[0],rivet=tones.at(-3)||tones.at(-1);
- function coloredEdge(y,right){
-  let first=null;
+ function coloredEdge(y,right,depthX){
+  let first=null,at=0;
   for(let x=right?63:0;right?x>=0:x<64;right?x--:x++){
    const k=(y*64+x)*info.channels;
    if(data[k+3]>128){
     const rgb=[data[k],data[k+1],data[k+2]];
-    if(rgb[0]>80&&rgb[0]>rgb[1]*1.2){first=rgb;break;}
+    if(rgb[0]>80&&rgb[0]>rgb[1]*1.2){first=rgb;at=x;break;}
    }
   }
-  // Sample painterly colors of the original contour, not magenta transparency.
-  return first?first.map((v,i)=>Math.round(v*.05+fall[i]*.95)):fall;
+  if(!first)return fall;
+  // Extrude a narrow strip from the owner's edge, never the full front image.
+  // Retain painted rust wear and scratches rather than a flat brown swatch.
+  const inset=Math.min(12,Math.floor(depthX*.18)+Math.floor(y/7)%3);
+  const x=Math.max(0,Math.min(63,at+(right?-inset:inset)));
+  const k=(y*64+x)*info.channels;
+  const sample=data[k+3]>128&&data[k]>80&&data[k]>data[k+1]*1.2?
+   [data[k],data[k+1],data[k+2]]:first;
+  return sample.map((v,i)=>Math.round(v*.72+first[i]*.18+fall[i]*.10));
  }
  const faces={};
  for(const [face,factor,edge] of [['right',.75,63],['left',1.15,0],['top',1.15,0],
    ['bottom',.75,63],['back',.9,0],['front',1,63]]){
   const dst=Buffer.alloc(64*64*4);
   for(let y=0;y<64;y++)for(let x=0;x<64;x++){
-   const srcRgb=coloredEdge(y,face==='right'||(face==='back'&&y%2===0));
-   let rgb=tone(srcRgb,factor);
+   const srcRgb=coloredEdge(y,face==='right'||(face==='back'&&y%2===0),x);
+   let rgb=tone(srcRgb,(x%11===0&&y%9>3)?factor*.85:factor);
    // AO at mechanical joints, a dark side seam, pale upper lip, rivets.
    if(y>=59||y<=1||x<=1||x>=62||((face==='left'||face==='right'||face==='back')&&x===5))rgb=black;
    if(y===2&&x>2&&x<62)rgb=tone(srcRgb,1.15);

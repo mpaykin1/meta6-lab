@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | PR #203: устранить конфликт с main | МГЛ | MG-ремонтник | `lab/skin-rusty-robot` | [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | 2026-11-10 15:58 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | PR #58: разрешить конфликт с main | МГЛ | MG-ремонтник | `lab/approved-donor-confluence-vault-20261107` | [#58](https://github.com/mpaykin1/meta6-lab/pull/58) | 2026-11-10 10:56 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | PR #49: устранить конфликт с main | МГЛ | MG-строитель-4 | `lab/veil-weather-connected-20261107` | [#49](https://github.com/mpaykin1/meta6-lab/pull/49) | 2026-11-10 10:39 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Импорт пяти коммерчески разрешённых CC0 asset packs в библиотеку | МГЛ | чат ChatGPT | `lab/import-five-cc0-packs` | [#233](https://github.com/mpaykin1/meta6-lab/pull/233) | 2026-11-10 10:06 | 2026-11-10 10:38 |

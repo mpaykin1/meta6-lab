@@ -72,10 +72,13 @@ function animation(e,k,i){
  if(e.motion==='светится')return [{type:'pulse',amp:.13,...common,pulseLink:.65}];
  if(e.motion==='вращается')return [{type:'rotate',axis:'z',amp:.07,...common,speedLink:.7}];
  if(e.motion==='качается'){
-   if(k==='cable' && i%2===0)return [{type:'chain',amp:.06,segments:4,lag:.6,...common,speedLink:.6}];
+   if(k==='cable')return [{type:'chain',amp:.06,segments:4,lag:.6,...common,speedLink:.6}];
    return [{type:'swing',amp:.07,inertia:.2,...common,speedLink:.6}];
  }
- return [];
+ // Пассивное покачивание бронепластин и механических элементов на движущемся герое.
+ if(['gear','piston'].includes(k))return [{type:'rotate',axis:'z',amp:.025,...common,speedLink:.45}];
+ if(k==='cable')return [{type:'chain',amp:.035,segments:4,lag:.5,...common,speedLink:.4}];
+ return [{type:'swing',amp:.012,...common,speedLink:.3}];
 }
 function assertSource(meta){
  const md=fs.readFileSync(path.join(src,'parts-sheet.md'),'utf8');
@@ -178,6 +181,20 @@ async function main(){
   // с обратной стороны, не придумывая и не рисуя другой элемент.
   const left=entries.find(p=>p.bone==='legL'&&p.layer==='3d');
   if(left)entries.push({...left,id:left.id+'-rear',offset:[left.offset[0],left.offset[1],.17],rotation:[0,Math.PI,0],anim:[],layer:'2.5d',depth:2,material:'rust-transparent'});
+  // Повторно используем реальные детали для видимых сзади суставов и света.
+  for(const bone of ['armL','armR','legL','legR']){
+    const base=entries.find(p=>p.bone===bone&&p.layer==='3d')||entries.find(p=>p.bone===bone);
+    if(!base)fail('нет авторской детали для кости '+bone);
+    if(base.layer!=='3d')entries.push({...base,id:base.id+'-solid',layer:'3d',primitive:'box',dims:[.23,.36,.2],material:'metal',anim:[]});
+    const rear=entries.find(p=>p.bone===bone&&p.layer==='3d');
+    entries.push({...rear,id:rear.id+'-back',layer:'2.5d',offset:[rear.offset[0],rear.offset[1],.25],material:'rust-transparent',anim:[]});
+  }
+  const lights=entries.filter(p=>['arc','orb','slit','core','lens'].includes(p.kind));
+  for(const p of lights.slice(0,Math.max(0,5-entries.filter(x=>x.material==='glow').length)))
+    entries.push({...p,id:p.id+'-light',offset:[p.offset[0]+.03,p.offset[1],p.offset[2]-.012],material:'glow',layer:'2d'});
+  const chains=entries.filter(p=>(p.anim||[]).some(a=>a.type==='chain'));
+  for(const p of chains.slice(0,Math.max(0,2-chains.length)))
+    entries.push({...p,id:p.id+'-inertia',offset:[p.offset[0]+.03,p.offset[1],p.offset[2]-.02],anim:p.anim.map(a=>({...a,freq:a.freq+.017,phase:(a.phase+.31)%1}))});
   const required=['plate','gear','cable','arc','slit','core','lens','orb','bolt','panel','piston'];
   for(const k of required)if(!entries.some(p=>p.kind===k))fail('нет обязательного вида детали '+k+' в parts-sheet.md');
   const rusty=files.find(x=>x.entry.row===1&&x.entry.place===1)||files[0];

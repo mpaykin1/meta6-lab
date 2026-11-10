@@ -3,6 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {chromium} from 'playwright';
 import {serve} from '../meta-bot/server.mjs';
+import {validatePortalLinks} from './portal-link-guard.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const srv=await serve(root);
 const browser=await chromium.launch({headless:true,args:['--disable-gpu','--no-sandbox']});
@@ -12,7 +13,8 @@ try{
  await page.goto(srv.url+'/meta-games/',{waitUntil:'domcontentloaded'});
  await page.evaluate(()=>localStorage.removeItem('meta-games:worlds:v1'));
  await page.reload({waitUntil:'domcontentloaded'});
- assert.equal(await page.locator('a.game').count(),12);
+ const hrefs=await page.locator('a.game').evaluateAll(links=>links.map(a=>a.getAttribute('href')));
+ validatePortalLinks(hrefs);
  await page.locator('a.game').first().click();
  await page.waitForURL(/observer-world-en-v7/);
  const stored=await page.evaluate(()=>localStorage.getItem('meta-games:worlds:v1'));

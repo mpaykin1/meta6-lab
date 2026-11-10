@@ -45,6 +45,14 @@ try {
    await page.evaluate(()=>{window.__renderBench.active=true;window.__renderBench.prev=0;});
    await page.waitForTimeout(7000);
    const stats=await page.evaluate(()=>window.__renderBench);
+   // Reject lost GPU contexts: successful initial context creation is not enough.
+   const contextState=await page.evaluate(()=>{
+     const canvas=document.getElementById('screen');
+     const gl=canvas?.getContext('webgl2');
+     return {exists:!!gl,lost:gl?.isContextLost?.()??true,width:canvas?.width??0,height:canvas?.height??0};
+   });
+   if(!contextState.exists||contextState.lost||contextState.width<1||contextState.height<1)
+    throw Error('WebGL2 context missing/lost during benchmark');
    const dt=stats.dt.filter(t=>t>0&&t<1000).sort((a,b)=>a-b);
    const draw=stats.draw.slice(1).sort((a,b)=>a-b);
    const tri=stats.tri.slice(1).sort((a,b)=>a-b);

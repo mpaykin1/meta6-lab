@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-10T09:04:31.021Z | МГЛ: 36bb90f9f8f4d15384914b181d010a3ac1ef1593 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | нет данных
+UTC: 2026-11-10T09:09:20.351Z | МГЛ: 06beacfb90959e821de76588d9a131a24ca38cba | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42788259526
 ## ПРОВЕРИТЬ CLAUDE
 - PR #216 06a8b61ec198ba43bb93a69efb2aeca7246383ee: .github/workflows/status-dlya-claude.yml, scripts/status/selftest.mjs
 - PR #223 0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66: .github/workflows/investigation-snapshot.yml
@@ -52,20 +52,20 @@ P1 — нет данных: нет данных
 #215 Portal Visits: исправить устаревшее ожидание 12 миров | 2e73930d862d7de10a85c186e3c3517e5c58c98d
 #217 Fix: Veil Shared CI проверяет существующую игру | d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 224 коммитов | .github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1
+МГЛ: 226 коммитов | .github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1
 МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
 ## ИГРЫ
-archer-in-the-fog — нет данных | витрина: да
-asqura-ilya-reference — нет данных | витрина: нет
-broken-city — нет данных | витрина: да
-broken-city-copy — нет данных | витрина: да
-rainbow-acceleration — нет данных | витрина: нет
-skin-trainer — нет данных | витрина: нет
-sumerki-i-pepel-2 — нет данных | витрина: да
-sumerki-i-pepel-2-copy — нет данных | витрина: нет
-twilight-isle-classic — нет данных | витрина: да
-twilight-isles — нет данных | витрина: да
-veil-terraces — нет данных | витрина: да
+archer-in-the-fog — не запускалась | витрина: да
+asqura-ilya-reference — не запускалась | витрина: нет
+broken-city — не запускалась | витрина: да
+broken-city-copy — не запускалась | витрина: да
+rainbow-acceleration — не запускалась | витрина: нет
+skin-trainer — не запускалась | витрина: нет
+sumerki-i-pepel-2 — не запускалась | витрина: да
+sumerki-i-pepel-2-copy — не запускалась | витрина: нет
+twilight-isle-classic — не запускалась | витрина: да
+twilight-isles — не запускалась | витрина: да
+veil-terraces — прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 18 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
 | 17 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)

@@ -40,7 +40,7 @@
 - SHA: `0ae6fcc6008e59f9304e65f1f8f5ee67ecac3827` · последний коммит: 2026-11-10T10:38:05Z
 - Проблема: Красная проверка: kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42800819832/job/129777533806)
 - Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42800819832/job/129777533806 и повтори CI.
-- Взял: —
+- Взял: MG-строитель-3 2026-11-10T12:30:41Z
 
 ### PR #234
 - PR: https://github.com/mpaykin1/meta6-lab/pull/234

@@ -155,7 +155,7 @@ let renderer;
 try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
 } catch (e) { $('loader').remove(); document.body.insertAdjacentHTML('beforeend', '<div id="err">WebGL недоступен</div>'); throw e; }
-const DPR = Math.min(window.devicePixelRatio || 1, 2);
+const DPR = Math.min(window.devicePixelRatio || 1, Math.min(innerWidth, innerHeight) < 650 ? 1.5 : 2);
 const qualityController = window.MetaQuality.create({ targetMs: 16.67, minScale: .65, maxScale: 1 });
 const pointScale = { value: DPR };
 let qualityScale = 1;

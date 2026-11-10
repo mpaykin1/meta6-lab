@@ -8,8 +8,10 @@ on:
       - 'scripts/skins/cut-sheet.mjs'
       - 'scripts/skins/mutate-cut-sheet.mjs'
       - 'scripts/skins/build-pack.mjs'
-      - 'scripts/skins/verify-side-profile.mjs'
-      - 'scripts/skins/mutate-side-profile.mjs'
+      - 'scripts/skins/verify-turntable.mjs'
+      - 'scripts/skins/mutate-turntable.mjs'
+      - 'scripts/skins/turntable-thresholds.mjs'
+      - 'scripts/skins/turntable-geometry.mjs'
       - 'scripts/skins/mutate-build-pack.mjs'
       - 'scripts/skins/preview.mjs'
       - 'scripts/skins/mutate-preview.mjs'
@@ -24,8 +26,9 @@ on:
     paths:
       - 'skins/sources/*/parts-sheet.png'
       - 'skins/sources/*/parts-sheet.md'
-      - 'scripts/skins/cut-sheet.mjs'
-      - 'scripts/skins/mutate-cut-sheet.mjs'
+      - 'scripts/skins/**'
+      - 'skins/runtime/skin-runtime.js'
+      - 'games/skin-trainer/index.html'
       - '.github/workflows/skin-factory.yml'
   workflow_dispatch:
 concurrency:
@@ -78,13 +81,6 @@ jobs:
           done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Собрать реальный пакет из новых PNG
         run: while IFS= read -r src; do node scripts/skins/build-pack.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt"
-      - name: Проверить боковые поверхности и три мутации
-        run: |
-          set -euo pipefail
-          while IFS= read -r src; do
-            node scripts/skins/verify-side-profile.mjs "$src"
-            node scripts/skins/mutate-side-profile.mjs "$src"
-          done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Проверить ловушки сборщика (включая обман старым файлом)
         run: |
           set -euo pipefail
@@ -99,6 +95,14 @@ jobs:
         run: |
           while IFS= read -r src; do node scripts/skins/preview.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt"
           while IFS= read -r src; do node scripts/skins/preview.mjs "$src" --verify; done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Восьмиракурсный turntable в настоящем Chrome + вечные ловушки
+        run: |
+          set -euo pipefail
+          while IFS= read -r src; do
+            node scripts/skins/verify-turntable.mjs "$src"
+            node scripts/skins/verify-turntable.mjs "$src" --verify
+            node scripts/skins/mutate-turntable.mjs "$src"
+          done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Визуальное соответствие эскизу — без потери фактуры и силуэта
         run: |
           set -euo pipefail
@@ -120,7 +124,7 @@ jobs:
           set -euo pipefail
           git config user.name 'META GAMES Skin Factory'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skins/packs/ skins/sources/*/cut-preview.png skins/sources/*/side-by-side.png
+          git add skins/packs/ skins/sources/*/cut-preview.png skins/sources/*/side-by-side.png skins/sources/*/turntable-meta.json
           if ! git diff --cached --quiet; then
             git commit -m "skin factory: publish generated skin packs and visual comparisons"
             git push origin HEAD:"$GITHUB_REF_NAME"
@@ -136,6 +140,8 @@ jobs:
             skins/packs/*/**
             skins/packs/*.zip
             skins/sources/*/side-by-side.png
+            skins/sources/*/turntable-meta.json
+            skins/packs/*/turntable.png
             skins/sources/*/preview-meta.json
           if-no-files-found: warn
 
@@ -166,12 +172,18 @@ jobs:
                 '/' + branchSha + '/' + png;
               const play = 'https://raw.githack.com/' + context.repo.owner + '/' + context.repo.repo +
                 '/' + branchSha + '/games/skin-trainer/index.html?skin=../../skins/packs/' + id + '/';
+              const turntable = 'skins/packs/' + id + '/turntable.png';
+              const turntableUrl = 'https://raw.githubusercontent.com/' + context.repo.owner + '/' +
+                context.repo.repo + '/' + branchSha + '/' + turntable;
               lines.push('#### ' + id);
+              lines.push(ok && fs.existsSync(turntable) ? '![Восемь ракурсов 3D](' + turntableUrl + ')' :
+                'НЕТ turntable.png: сдача заблокирована.');
               lines.push(ok && fs.existsSync(png) ? '![Эскиз | герой в скине](' + image + ')' :
                 'Сравнение не создано или прогон красный — проверьте ошибку в Actions.');
               lines.push('[Играть в Skin Trainer](' + play + ')');
             }
-            lines.push(ok ? 'S1–S12 и все мутационные ловушки: SUCCESS.' :
+            lines.push(ok && ids.every(id => fs.existsSync('skins/packs/' + id + '/turntable.png')) ?
+              'S1–S12, 8 ракурсов и ловушки: SUCCESS.' :
               'Проблемы: красный прогон, см. упавший шаг; публикация заблокирована.');
             lines.push('[Прогон Actions](' + run + ')');
             await github.rest.issues.createComment({

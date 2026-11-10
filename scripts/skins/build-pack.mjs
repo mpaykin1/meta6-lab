@@ -180,7 +180,7 @@ async function bakeFaces(tmp,bone,source,palette){
  }
  const faces={};
  for(const [face,factor,edge] of [['right',.75,63],['left',1.15,0],['top',1.15,0],
-   ['bottom',.75,63],['back',.9,0],['front',1,63]]){
+   ['bottom',.75,63],['back',.9,0],['front',1.55,63]]){
   const dst=Buffer.alloc(64*64*4);
   for(let y=0;y<64;y++)for(let x=0;x<64;x++){
    const srcRgb=coloredEdge(y,face==='right'||(face==='back'&&y%2===0),x);

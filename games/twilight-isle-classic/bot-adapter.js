@@ -29,9 +29,13 @@
     const clampCell = v => Math.max(0, Math.min(side - 1, Math.floor(v)));
     const start = clampCell(player.x) + side * clampCell(player.z);
     const end = clampCell(coin.x) + side * clampCell(coin.z);
-    const offPath = route.path.length && route.step < route.path.length &&
-      Math.hypot(player.x - (route.path[route.step] % side + 0.5),
-        player.z - (Math.floor(route.path[route.step] / side) + 0.5)) > 4;
+    // Knockback, a fall or a slide can leave the hero beside a cliff the old route
+    // crosses: re-plan from where the hero really is as soon as the next waypoint
+    // is no longer adjacent.
+    const nextCell = route.path[Math.min(route.path.length - 1, route.step + 1)];
+    const offPath = route.path.length && nextCell !== undefined &&
+      Math.hypot(player.x - (nextCell % side + 0.5),
+        player.z - (Math.floor(nextCell / side) + 0.5)) > 2.2;
     if (route.seed !== world.seed || route.coin !== coin || !route.path.length || offPath) {
       route.seed = world.seed; route.coin = coin; route.path = []; route.step = 1;
       const prev = new Int32Array(reach.length); prev.fill(-1);
@@ -44,7 +48,17 @@
           if (reach[i] && d < distance) { origin = i; distance = d; }
         }
       }
-      if (reach[origin] && reach[end]) {
+      // Cells beside deep water (stand < 3): a held jump there drops the hero into the sea.
+      const nearWater = j => {
+        const x = j % side, z = Math.floor(j / side);
+        for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) {
+          const X = x + dx, Z = z + dz;
+          if (X >= 0 && Z >= 0 && X < side && Z < side && stand[X + side * Z] < 3) return true;
+        }
+        return false;
+      };
+      const search = safe => {
+        prev.fill(-1);
         const queue = new Int32Array(reach.length); let head = 0, tail = 1;
         queue[0] = origin; prev[origin] = origin;
         while (head < tail && prev[end] === -1) {
@@ -54,9 +68,14 @@
             if (X < 0 || Z < 0 || X >= side || Z >= side) continue;
             const j = X + side * Z;
             if (!reach[j] || prev[j] !== -1 || Math.abs(stand[j] - stand[i]) > 2) continue;
+            if (safe && j !== end && nearWater(j)) continue;
             prev[j] = i; queue[tail++] = j;
           }
         }
+      };
+      if (reach[origin] && reach[end]) {
+        search(true);
+        if (prev[end] === -1) search(false);
         if (prev[end] !== -1) {
           let i = end;
           while (i !== origin) { route.path.push(i); i = prev[i]; }
@@ -66,12 +85,16 @@
       }
     }
     if (!route.path.length) return coin;
-    while (route.step < route.path.length - 1) {
-      const i = route.path[route.step];
-      if (Math.hypot(player.x - (i % side + 0.5), player.z - (Math.floor(i / side) + 0.5)) >= 1.2) break;
-      route.step++;
+    // Advance by the waypoint the hero is actually heading to (step + 1), not the one
+    // already behind: a hero standing on the current goal must get the next goal.
+    // Skip ahead to the farthest of the next few waypoints the hero already touches.
+    for (let k = Math.min(route.path.length - 1, route.step + 4); k > route.step; k--) {
+      const i = route.path[k];
+      if (Math.hypot(player.x - (i % side + 0.5), player.z - (Math.floor(i / side) + 0.5)) < 0.75) { route.step = k; break; }
     }
-    const i = route.path[Math.min(route.path.length - 1, route.step + 1)];
+    // Last waypoint: aim at the real coin itself so the pickup radius is hit.
+    if (route.step + 1 >= route.path.length) return coin;
+    const i = route.path[route.step + 1];
     return { x: i % side + 0.5, z: Math.floor(i / side) + 0.5 };
   }
   const bot = Object.freeze({
@@ -87,6 +110,11 @@
         guardian.state !== 'dissolve' && guardian.segs?.[0];
       const target = !G.all && coin ? navigate(world, p, coin) : (guardianHead || world.ring);
       const goal = target ? { x: target.x, y: target.z } : null;
+      // Read-only terrain hint for the strategy: the next step is higher than the hero's
+      // column (terrace, rock top, pier, lighthouse ring), so a real held jump is needed.
+      const col = (x, z) => world.stand[Math.floor(x) + Math.sqrt(world.stand.length) * Math.floor(z)];
+      const climb = !!target && (col(target.x, target.z) > col(p.x, p.z) ||
+        (typeof target.y === 'number' && target.y > p.y + 1));
       const layoutHash = [
         world.seed, world.biome,
         world.spawn.x, world.spawn.z,
@@ -101,6 +129,7 @@
         alive: G.state !== 'dead' && player.hp > 0,
         hero: { x: p.x, y: p.z },
         goal,
+        climb,
         enemies: api.foes.filter(f => f.hp > 0 && f.state !== 'dissolve').length,
         weapons: combat.arsenal.length,
         layoutHash,

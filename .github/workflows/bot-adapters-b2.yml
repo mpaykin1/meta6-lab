@@ -31,5 +31,11 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Verify actual movement and snapshot contract
         run: node scripts/meta-bot-adapters/verify-adapters.mjs
+      - name: Waypoint trap (next goal, real coin, re-plan) — rejects the old adapter
+        run: |
+          node scripts/meta-bot-adapters/trap-waypoint-advance.mjs
+          # mutation: the pre-fix waypoint loop must be caught
+          sed 's/< 0.75) { route.step = k; break; }/< 0) { route.step = k; break; }/' games/twilight-isle-classic/bot-adapter.js > /tmp/mut.js
+          if node scripts/meta-bot-adapters/trap-waypoint-advance.mjs /tmp/mut.js; then echo '::error::waypoint trap missed the mutation'; exit 1; fi
       - name: Reject four mutations per adapter
         run: node scripts/meta-bot-adapters/mutate-adapters.mjs

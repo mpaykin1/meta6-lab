@@ -29,9 +29,12 @@
     const clampCell = v => Math.max(0, Math.min(side - 1, Math.floor(v)));
     const start = clampCell(player.x) + side * clampCell(player.z);
     const end = clampCell(coin.x) + side * clampCell(coin.z);
-    const offPath = route.path.length && route.step < route.path.length &&
-      Math.hypot(player.x - (route.path[route.step] % side + 0.5),
-        player.z - (Math.floor(route.path[route.step] / side) + 0.5)) > 4;
+    // Re-plan from where the hero really is once the next waypoint is no longer adjacent
+    // (knockback, a fall or a slide off the old route).
+    const nextCell = route.path[Math.min(route.path.length - 1, route.step + 1)];
+    const offPath = route.path.length && nextCell !== undefined &&
+      Math.hypot(player.x - (nextCell % side + 0.5),
+        player.z - (Math.floor(nextCell / side) + 0.5)) > 2.2;
     if (route.seed !== world.seed || route.coin !== coin || !route.path.length || offPath) {
       route.seed = world.seed; route.coin = coin; route.path = []; route.step = 1;
       const prev = new Int32Array(reach.length); prev.fill(-1);
@@ -66,12 +69,15 @@
       }
     }
     if (!route.path.length) return coin;
-    while (route.step < route.path.length - 1) {
-      const i = route.path[route.step];
-      if (Math.hypot(player.x - (i % side + 0.5), player.z - (Math.floor(i / side) + 0.5)) >= 1.2) break;
-      route.step++;
+    // Advance by the waypoint the hero is heading to (step + 1), not the one behind:
+    // a hero standing on the current goal must get the next goal.
+    for (let k = Math.min(route.path.length - 1, route.step + 4); k > route.step; k--) {
+      const i = route.path[k];
+      if (Math.hypot(player.x - (i % side + 0.5), player.z - (Math.floor(i / side) + 0.5)) < 0.75) { route.step = k; break; }
     }
-    const i = route.path[Math.min(route.path.length - 1, route.step + 1)];
+    // Last waypoint: aim at the real coin itself so the pickup radius is hit.
+    if (route.step + 1 >= route.path.length) return coin;
+    const i = route.path[route.step + 1];
     return { x: i % side + 0.5, z: Math.floor(i / side) + 0.5 };
   }
   const bot = Object.freeze({

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Обучение управлению — восьмёрки</title>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#000;touch-action:none;-webkit-user-select:none;user-select:none}
+canvas#gl{position:fixed;inset:0;width:100%;height:100%;display:block}
+#fade{position:fixed;inset:0;background:#000;pointer-events:none;transition:opacity 2.4s ease}
+.hint{position:fixed;width:150px;height:110px;pointer-events:none;opacity:0;transform:scale(.85);transition:opacity .9s ease,transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.hint.on{opacity:1;transform:scale(1)}
+.hint.done{opacity:0;transform:scale(1.35);transition:opacity .7s ease,transform .9s ease}
+#hL{left:6%;bottom:9%}
+#hR{right:6%;bottom:22%}
+.hint svg{width:100%;height:100%;overflow:visible}
+#joy{position:fixed;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;border:2px solid rgba(255,220,170,.25);pointer-events:none;opacity:0;transition:opacity .3s}
+#joy i{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px;border-radius:50%;background:radial-gradient(circle,rgba(255,230,190,.8),rgba(255,160,80,.15));box-shadow:0 0 18px rgba(255,170,90,.6)}
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+
+<!-- восьмёрка: движение -->
+<div class="hint" id="hL"><svg viewBox="-75 -45 150 110">
+  <defs><filter id="glw"><feGaussianBlur stdDeviation="3"/></filter></defs>
+  <path class="lem" fill="none" stroke="rgba(255,240,220,.9)" stroke-width="9" stroke-linecap="round"/>
+  <path class="lem" fill="none" stroke="rgba(255,190,120,.5)" stroke-width="14" filter="url(#glw)"/>
+  <circle class="dot" r="7" fill="#fff"/>
+  <circle class="dotg" r="16" fill="rgba(255,190,110,.55)" filter="url(#glw)"/>
+  <g class="hand"><path d="M0,0 l0,-22 a5,5 0 0 1 10,0 l0,16 l0,-6 a5,5 0 0 1 10,0 l0,8 a5,5 0 0 1 10,0 l0,6 c0,14 -6,24 -18,24 l-6,0 c-6,0 -9,-3 -13,-8 l-10,-14 a5,5 0 0 1 8,-6 z" fill="#fff" stroke="#333" stroke-width="2" transform="translate(-4,6) scale(.9)"/></g>
+  <!-- иконка: шагающий человечек -->
+  <g transform="translate(0,52)" fill="none" stroke="rgba(255,240,220,.85)" stroke-width="3.5" stroke-linecap="round">
+    <circle cx="2" cy="-12" r="3.5" fill="rgba(255,240,220,.85)" stroke="none"/>
+    <path d="M1,-7 L-1,3 M-1,3 L-6,10 M-1,3 L5,10 M0,-5 L-6,0 M0,-5 L7,-1"/>
+  </g>
+</svg></div>
+
+<!-- восьмёрка: камера -->
+<div class="hint" id="hR"><svg viewBox="-75 -45 150 110">
+  <path class="lem" fill="none" stroke="rgba(220,240,255,.9)" stroke-width="9" stroke-linecap="round"/>
+  <path class="lem" fill="none" stroke="rgba(120,190,255,.5)" stroke-width="14" filter="url(#glw)"/>
+  <circle class="dot" r="7" fill="#fff"/>
+  <circle class="dotg" r="16" fill="rgba(130,200,255,.55)" filter="url(#glw)"/>
+  <g class="hand"><path d="M0,0 l0,-22 a5,5 0 0 1 10,0 l0,16 l0,-6 a5,5 0 0 1 10,0 l0,8 a5,5 0 0 1 10,0 l0,6 c0,14 -6,24 -18,24 l-6,0 c-6,0 -9,-3 -13,-8 l-10,-14 a5,5 0 0 1 8,-6 z" fill="#fff" stroke="#333" stroke-width="2" transform="translate(-4,6) scale(.9)"/></g>
+  <!-- иконка: глаз/камера -->
+  <g transform="translate(0,48)" fill="none" stroke="rgba(220,240,255,.85)" stroke-width="3.5" stroke-linecap="round">
+    <path d="M-13,0 Q0,-11 13,0 Q0,11 -13,0 Z"/><circle r="3.5" fill="rgba(220,240,255,.85)" stroke="none"/>
+  </g>
+</svg></div>
+
+<div id="joy"><i></i></div>
+<div id="fade"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- SKIN: общий движок скинов meta6 (rules/01-stil-i-grafika/SKINY.md). Без ?skin=… игра идёт как в оригинале. -->
+<script src="../../skins/runtime/skin-runtime.js"></script>
+<script>
+(()=>{
+/* ================= ВОСЬМЁРКИ-ПОДСКАЗКИ ================= */
+const A=58;                                 // размер лемнискаты
+function lem(t){const s=Math.sin(t),c=Math.cos(t),d=1+s*s;return [A*c/d, A*s*c/d];}
+let dPath='';for(let i=0;i<=120;i++){const p=lem(i/120*Math.PI*2);dPath+=(i?'L':'M')+p[0].toFixed(2)+','+p[1].toFixed(2);}
+document.querySelectorAll('.lem').forEach(e=>e.setAttribute('d',dPath+'Z'));
+
+function makeHint(id,phase){
+  const el=document.getElementById(id);
+  return {el,dot:el.querySelector('.dot'),glow:el.querySelector('.dotg'),hand:el.querySelector('.hand'),
+    phase,hx:0,hy:0,progress:0,done:false};
+}
+const hints={L:makeHint('hL',0),R:makeHint('hR',Math.PI*.6)};
+const NEED=260;                              // сколько пикселей надо провести пальцем
+setTimeout(()=>{hints.L.el.classList.add('on')},1600);
+setTimeout(()=>{hints.R.el.classList.add('on')},2300);
+
+function updateHints(t,dt){
+  for(const k in hints){const h=hints[k];if(h.done)continue;
+    const tt=t*1.6+h.phase;                        // гармоничное движение точки
+    const [x,y]=lem(tt);
+    h.dot.setAttribute('cx',x);h.dot.setAttribute('cy',y);
+    h.glow.setAttribute('cx',x);h.glow.setAttribute('cy',y);
+    h.glow.setAttribute('r',14+Math.sin(t*5+h.phase)*3);
+    const k2=1-Math.exp(-dt*7);                    // рука догоняет точку с инерцией
+    h.hx+=(x-h.hx)*k2;h.hy+=(y-h.hy)*k2;
+    h.hand.setAttribute('transform',`translate(${h.hx.toFixed(1)},${h.hy.toFixed(1)}) rotate(${(Math.sin(t*2.1)*8).toFixed(1)})`);
+  }
+}
+function feedHint(side,dist){
+  const h=hints[side];if(h.done)return;
+  h.progress+=dist;
+  if(h.progress>NEED){h.done=true;h.el.classList.remove('on');h.el.classList.add('done');burst(side);}
+}
+
+/* ================= THREE: СЦЕНА ================= */
+const cv=document.getElementById('gl');
+const R=new THREE.WebGLRenderer({canvas:cv,antialias:false,powerPreference:'high-performance'});
+R.setPixelRatio(1);
+const scene=new THREE.Scene();
+const FOG=new THREE.Color(0x2a2030);
+scene.background=FOG;scene.fog=new THREE.FogExp2(FOG,0.045);
+const cam=new THREE.PerspectiveCamera(60,1,0.1,200);
+
+scene.add(new THREE.HemisphereLight(0x9a88b8,0x201418,0.9));
+const moon=new THREE.DirectionalLight(0xffd6b0,0.5);moon.position.set(-5,10,-6);scene.add(moon);
+
+// земля — процедурный шейдер
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.ShaderMaterial({
+  uniforms:{fogC:{value:FOG},uT:{value:0}},
+  vertexShader:`varying vec3 vW;void main(){vec4 w=modelMatrix*vec4(position,1.);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`,
+  fragmentShader:`uniform vec3 fogC;uniform float uT;varying vec3 vW;
+  float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}
+  float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+1.),f.x),f.y);}
+  void main(){float v=n(vW.xz*.4)*.6+n(vW.xz*1.7)*.4;
+   vec3 c=mix(vec3(.10,.09,.12),vec3(.22,.17,.2),v);
+   float d=length(vW.xz-vec2(0.,-28.));c+=vec3(1.,.55,.25)*.25*exp(-d*.12)*(.8+.2*sin(uT*1.3));
+   float dist=length(vW-cameraPosition);c=mix(c,fogC,1.-exp(-dist*dist*.0018));
+   gl_FragColor=vec4(c,1.);}`
+}));
+ground.rotation.x=-Math.PI/2;scene.add(ground);
+
+// трава — инстансинг
+const GR=2400,grassGeo=new THREE.ConeGeometry(.04,.5,3);grassGeo.translate(0,.25,0);
+const grassMat=new THREE.MeshLambertMaterial({color:0x4a3d4e});
+const grass=new THREE.InstancedMesh(grassGeo,grassMat,GR);
+const m4=new THREE.Matrix4(),q=new THREE.Quaternion(),sv=new THREE.Vector3(),pv=new THREE.Vector3();
+for(let i=0;i<GR;i++){const r=Math.sqrt(Math.random())*40,a=Math.random()*6.283;
+  pv.set(Math.cos(a)*r,0,Math.sin(a)*r);q.setFromEuler(new THREE.Euler((Math.random()-.5)*.4,Math.random()*6,(Math.random()-.5)*.4));
+  const s=.6+Math.random()*1.2;sv.set(s,s*(.7+Math.random()),s);m4.compose(pv,q,sv);grass.setMatrixAt(i,m4);}
+grassMat.onBeforeCompile=sh=>{sh.uniforms.uT={value:0};grassMat.userData.sh=sh;
+  sh.vertexShader='uniform float uT;\n'+sh.vertexShader.replace('#include <begin_vertex>',
+  `#include <begin_vertex>
+   vec4 ip=instanceMatrix*vec4(0.,0.,0.,1.);
+   float sw=sin(uT*1.7+ip.x*.6+ip.z*.4)*.18*position.y;transformed.x+=sw;transformed.z+=sw*.5;`);};
+scene.add(grass);
+
+// фокальная точка — светящееся дерево вдали
+const tree=new THREE.Group();tree.position.set(0,0,-28);scene.add(tree);
+const barkM=new THREE.MeshLambertMaterial({color:0x1a1216});
+const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.25,.6,6,6),barkM);trunk.position.y=3;tree.add(trunk);
+for(let i=0;i<6;i++){const b=new THREE.Mesh(new THREE.CylinderGeometry(.06,.18,3,5),barkM);
+  b.position.set(0,4.5+i*.3,0);b.rotation.set(Math.sin(i*2)*.9,i,Math.cos(i*2)*.9);b.translateY(1.3);tree.add(b);}
+const core=new THREE.Mesh(new THREE.SphereGeometry(.7,16,12),new THREE.MeshBasicMaterial({color:0xffb070}));core.position.y=5.6;tree.add(core);
+const halo=new THREE.Sprite(new THREE.SpriteMaterial({map:radialTex(),color:0xff9a50,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true}));
+halo.scale.set(9,9,1);halo.position.y=5.6;tree.add(halo);
+const treeL=new THREE.PointLight(0xff9050,2,30,1.6);treeL.position.y=5;tree.add(treeL);
+
+// пыль — частицы
+const DU=650,dG=new THREE.BufferGeometry(),dP=new Float32Array(DU*3),dS=new Float32Array(DU);
+for(let i=0;i<DU;i++){dP[i*3]=(Math.random()-.5)*40;dP[i*3+1]=Math.random()*6;dP[i*3+2]=(Math.random()-.5)*40;dS[i]=Math.random()*6.28;}
+dG.setAttribute('position',new THREE.BufferAttribute(dP,3));
+const dust=new THREE.Points(dG,new THREE.PointsMaterial({size:.09,map:radialTex(),color:0xffd2a0,transparent:true,opacity:.7,blending:THREE.AdditiveBlending,depthWrite:false}));
+scene.add(dust);
+
+// туманные плоскости
+const fogMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,uniforms:{uT:{value:0}},
+  vertexShader:`varying vec2 vU;void main(){vU=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+  fragmentShader:`uniform float uT;varying vec2 vU;
+  float h(vec2 p){return fract(sin(dot(p,vec2(12.9,78.2)))*43758.5);}
+  float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+1.),f.x),f.y);}
+  void main(){vec2 p=vU*4.;float v=n(p+vec2(uT*.08,0.))*.6+n(p*2.3-vec2(uT*.05,uT*.03))*.4;
+   float e=smoothstep(0.,.3,vU.x)*smoothstep(1.,.7,vU.x)*smoothstep(0.,.4,vU.y)*smoothstep(1.,.5,vU.y);
+   gl_FragColor=vec4(vec3(.55,.45,.55),v*e*.35);}`});
+const fogPlanes=[];
+for(let i=0;i<5;i++){const f=new THREE.Mesh(new THREE.PlaneGeometry(40,6),fogMat);f.position.set((Math.random()-.5)*10,1.6,-6-i*5);scene.add(f);fogPlanes.push(f);}
+
+// герой — сегментная фигура из примитивов
+const hero=new THREE.Group();scene.add(hero);
+const skin=new THREE.MeshLambertMaterial({color:0xd9733a,emissive:0x401808});
+const body=new THREE.Mesh(new THREE.CylinderGeometry(.28,.32,.8,10),skin);
+body.position.y=1.0;hero.add(body);
+const head=new THREE.Mesh(new THREE.SphereGeometry(.36,16,12),skin);head.position.y=1.75;hero.add(head);
+const eyeM=new THREE.MeshBasicMaterial({color:0xfff0c0});
+const eyes=[];
+[-.12,.12].forEach(x=>{const e=new THREE.Mesh(new THREE.SphereGeometry(.05,8,6),eyeM);e.position.set(x,1.8,-.32);hero.add(e);eyes.push(e);});
+function limb(x,y,len){const g=new THREE.Group();g.position.set(x,y,0);const m=new THREE.Mesh(new THREE.CylinderGeometry(.08,.07,len,6),skin);m.position.y=-len/2;g.add(m);hero.add(g);return g;}
+const legL=limb(-.15,.62,.6),legR=limb(.15,.62,.6),armL=limb(-.38,1.32,.55),armR=limb(.38,1.32,.55);
+const antenna=[],antennaMeshes=[];{let prev=head;for(let s=0;s<4;s++){const g=new THREE.Group();g.position.y=s?.14:.3;const m=new THREE.Mesh(new THREE.SphereGeometry(.035,6,4),skin);g.add(m);antennaMeshes.push(m);prev.add(g);antenna.push(g);prev=g;}
+ const tip=new THREE.Mesh(new THREE.SphereGeometry(.07,8,6),new THREE.MeshBasicMaterial({color:0xffc080}));tip.position.y=.08;prev.add(tip);antennaMeshes.push(tip);}
+const heroL=new THREE.PointLight(0xffa060,.8,5,2);heroL.position.y=1.5;hero.add(heroL);
+
+/* SKIN: скелет героя для движка скинов (кости и базовые меши). Сам герой не меняется. */
+const RIG={root:hero,
+  bones:{root:hero,body,head,armL,armR,legL,legR,antenna:antenna[antenna.length-1]},
+  base:{body:[body],head:[head,...eyes],armL:[armL.children[0]],armR:[armR.children[0]],legL:[legL.children[0]],legR:[legR.children[0]],antenna:antennaMeshes}};
+let SKIN=null;
+{const u=new URLSearchParams(location.search).get('skin');
+ if(u&&window.SkinRuntime)SkinRuntime.load(u,THREE).then(s=>{SKIN=s;s.apply(RIG);window.__SKIN=s;}).catch(e=>{console.error('[skin]',e);window.__SKIN_ERROR=String(e);});}
+
+function radialTex(){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');
+  const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.4,'rgba(255,255,255,.35)');gr.addColorStop(1,'rgba(255,255,255,0)');
+  g.fillStyle=gr;g.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);}
+
+// вспышка искр при выполнении подсказки
+const SP=120,sG=new THREE.BufferGeometry(),sPos=new Float32Array(SP*3),sVel=new Float32Array(SP*3);let sLife=0;
+sG.setAttribute('position',new THREE.BufferAttribute(sPos,3));
+const sparks=new THREE.Points(sG,new THREE.PointsMaterial({size:.12,map:radialTex(),color:0xffc890,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false}));
+scene.add(sparks);
+let pulse=0;
+function burst(side){sparks.material.color.set(side==='L'?0xffb070:0x90c8ff);
+  for(let i=0;i<SP;i++){sPos[i*3]=hero.position.x;sPos[i*3+1]=1.2;sPos[i*3+2]=hero.position.z;
+    const a=Math.random()*6.283,u=Math.random()*2-1,s=1.5+Math.random()*2.5,r=Math.sqrt(1-u*u);
+    sVel[i*3]=Math.cos(a)*r*s;sVel[i*3+1]=Math.abs(u)*s+1;sVel[i*3+2]=Math.sin(a)*r*s;}
+  sLife=1;pulse=1;}
+
+/* ================= ПОСТ-ОБРАБОТКА ================= */
+let RT=new THREE.WebGLRenderTarget(2,2);
+const pScene=new THREE.Scene(),pCam=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+const post=new THREE.ShaderMaterial({uniforms:{tD:{value:null},uT:{value:0},uAb:{value:.003},uGl:{value:0},uRes:{value:new THREE.Vector2()}},
+ vertexShader:`varying vec2 vU;void main(){vU=uv;gl_Position=vec4(position.xy,0.,1.);}`,
+ fragmentShader:`uniform sampler2D tD;uniform float uT,uAb,uGl;varying vec2 vU;
+ float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+ void main(){vec2 uv=vU;
+  float row=floor(uv.y*90.);if(h(vec2(row,floor(uT*14.)))<uGl*.25)uv.x+=(h(vec2(row,uT))-.5)*.04*uGl;
+  vec2 d=uv-.5;float r=dot(d,d);
+  vec3 c;c.r=texture2D(tD,uv+d*uAb*r*8.).r;c.g=texture2D(tD,uv).g;c.b=texture2D(tD,uv-d*uAb*r*8.).b;
+  vec3 b=texture2D(tD,uv,3.).rgb;c+=max(b-.35,0.)*.6;              // мягкое свечение
+  c+=(h(uv*vec2(1733.,977.)+fract(uT))-.5)*.07;                    // зерно
+  c*=1.-r*1.3;                                                      // виньетка
+  gl_FragColor=vec4(c,1.);}`});
+pScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2),post));
+
+function resize(){const w=innerWidth,h=innerHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();
+  RT.dispose();RT=new THREE.WebGLRenderTarget(Math.floor(w*.8),Math.floor(h*.8),{minFilter:THREE.LinearFilter});}
+addEventListener('resize',resize);resize();
+
+/* ================= УПРАВЛЕНИЕ ================= */
+const joyEl=document.getElementById('joy'),joyK=joyEl.querySelector('i');
+let moveId=null,mx0=0,my0=0,mvx=0,mvy=0,camId=null,cx=0,cy=0;
+let yaw=0,pitch=.32,yawT=0,pitchT=.32;
+const keys={};
+cv.addEventListener('pointerdown',e=>{
+  if(e.clientX<innerWidth*.5&&moveId===null){moveId=e.pointerId;mx0=e.clientX;my0=e.clientY;mvx=mvy=0;
+    joyEl.style.left=mx0+'px';joyEl.style.top=my0+'px';joyEl.style.opacity=1;}
+  else if(camId===null){camId=e.pointerId;cx=e.clientX;cy=e.clientY;}
+  cv.setPointerCapture(e.pointerId);
+});
+let lastMX=0,lastMY=0;
+cv.addEventListener('pointermove',e=>{
+  if(e.pointerId===moveId){let dx=e.clientX-mx0,dy=e.clientY-my0;const l=Math.hypot(dx,dy),M=50;
+    if(l>M){dx*=M/l;dy*=M/l;}
+    feedHint('L',Math.hypot(dx/M-mvx,dy/M-mvy)*40);
+    mvx=dx/M;mvy=dy/M;joyK.style.transform=`translate(${dx}px,${dy}px)`;}
+  else if(e.pointerId===camId){const dx=e.clientX-cx,dy=e.clientY-cy;cx=e.clientX;cy=e.clientY;
+    yawT-=dx*.006;pitchT=Math.max(-.1,Math.min(1.1,pitchT+dy*.004));feedHint('R',Math.hypot(dx,dy));}
+});
+function up(e){if(e.pointerId===moveId){moveId=null;mvx=mvy=0;joyEl.style.opacity=0;joyK.style.transform='';}
+  if(e.pointerId===camId)camId=null;}
+cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+addEventListener('keydown',e=>{keys[e.code]=1;});addEventListener('keyup',e=>{keys[e.code]=0;});
+
+/* ================= ЦИКЛ ================= */
+const clock=new THREE.Clock();
+const vel=new THREE.Vector3(),camPos=new THREE.Vector3(0,3,6),look=new THREE.Vector3();
+let walk=0,heroYaw=0,lean=0;
+setTimeout(()=>{document.getElementById('fade').style.opacity=0;},100);
+
+function loop(){requestAnimationFrame(loop);
+  const dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime;
+  updateHints(t,dt);
+
+  // ввод
+  let ix=mvx,iy=mvy;
+  if(keys.KeyA||keys.ArrowLeft)ix-=1;if(keys.KeyD||keys.ArrowRight)ix+=1;
+  if(keys.KeyW||keys.ArrowUp)iy-=1;if(keys.KeyS||keys.ArrowDown)iy+=1;
+  if(ix||iy)feedHint('L',dt*60*(keys.KeyW||keys.KeyA||keys.KeyS||keys.KeyD||keys.ArrowUp||keys.ArrowDown||keys.ArrowLeft||keys.ArrowRight?2:0));
+  const il=Math.min(1,Math.hypot(ix,iy));
+
+  // камера с инерцией
+  const ck=1-Math.exp(-dt*6);yaw+=(yawT-yaw)*ck;pitch+=(pitchT-pitch)*ck;
+
+  // движение героя относительно камеры, с ускорением/торможением
+  const fx=Math.sin(yaw),fz=Math.cos(yaw);
+  const tx=(ix*fz+iy*fx)*4.2,tz=(-ix*fx+iy*fz)*4.2;
+  const vk=1-Math.exp(-dt*(il?5:3.5));vel.x+=(tx-vel.x)*vk;vel.z+=(tz-vel.z)*vk;
+  hero.position.x+=vel.x*dt;hero.position.z+=vel.z*dt;
+  const hl=Math.hypot(hero.position.x,hero.position.z);if(hl>36){hero.position.x*=36/hl;hero.position.z*=36/hl;}
+  const sp=Math.hypot(vel.x,vel.z);
+  if(sp>.2){const ty=Math.atan2(-vel.x,-vel.z);let d=ty-heroYaw;d=Math.atan2(Math.sin(d),Math.cos(d));heroYaw+=d*(1-Math.exp(-dt*8));lean+=(d*.4-lean)*(1-Math.exp(-dt*5));}
+  else lean*=1-Math.min(1,dt*4);
+  hero.rotation.y=heroYaw;hero.rotation.z=lean*.3;
+
+  // процедурная походка + дыхание
+  walk+=dt*sp*2.4;const sw=Math.sin(walk)*Math.min(1,sp/3);
+  legL.rotation.x=sw*.7;legR.rotation.x=-sw*.7;armL.rotation.x=-sw*.6;armR.rotation.x=sw*.6;
+  const br=Math.sin(t*2)*.02;body.scale.set(1+br,1-br,1+br);
+  hero.children[0].position.y=1.0+Math.abs(Math.sin(walk))*.06*Math.min(1,sp/3);
+  head.position.y=1.75+Math.abs(Math.sin(walk+.4))*.05*Math.min(1,sp/3)+br;
+  antenna.forEach((a,i)=>{a.rotation.x=Math.sin(t*3-i*.7)*.15+sw*.12*(i+1)*.5-sp*.03*(i+1);a.rotation.z=Math.sin(t*2.3-i*.9)*.1+lean*.3;});
+
+  // камера: тяжёлая, запаздывающая
+  const dist=6+pitch*1.5;
+  const want=new THREE.Vector3(hero.position.x+Math.sin(yaw)*Math.cos(pitch)*dist,1.4+Math.sin(pitch)*dist,hero.position.z+Math.cos(yaw)*Math.cos(pitch)*dist);
+  want.x+=Math.sin(t*.4)*.08;want.y+=Math.sin(t*.53)*.06;
+  camPos.lerp(want,1-Math.exp(-dt*4));cam.position.copy(camPos);
+  look.lerp(new THREE.Vector3(hero.position.x,1.5,hero.position.z),1-Math.exp(-dt*6));cam.lookAt(look);
+
+  // жизнь мира
+  ground.material.uniforms.uT.value=t;fogMat.uniforms.uT.value=t;
+  if(grassMat.userData.sh)grassMat.userData.sh.uniforms.uT.value=t;
+  const fl=.85+Math.sin(t*1.3)*.1+Math.sin(t*7.1)*.04;
+  treeL.intensity=2*fl+pulse*2;halo.material.opacity=.7*fl;core.scale.setScalar(1+Math.sin(t*1.3)*.05);
+  fogPlanes.forEach((f,i)=>{f.position.x=Math.sin(t*.07+i)*4;f.lookAt(cam.position.x,f.position.y,cam.position.z);});
+  for(let i=0;i<DU;i++){dP[i*3+1]+=Math.sin(t*.6+dS[i])*.002+.0015;dP[i*3]+=Math.cos(t*.3+dS[i])*.003;if(dP[i*3+1]>6)dP[i*3+1]=0;}
+  dG.attributes.position.needsUpdate=true;
+
+  if(sLife>0){sLife-=dt*.8;for(let i=0;i<SP;i++){sVel[i*3+1]-=dt*3;sVel[i*3]*=.985;sVel[i*3+2]*=.985;
+      sPos[i*3]+=sVel[i*3]*dt;sPos[i*3+1]+=sVel[i*3+1]*dt;sPos[i*3+2]+=sVel[i*3+2]*dt;}
+    sG.attributes.position.needsUpdate=true;sparks.material.opacity=Math.max(0,sLife);}
+  pulse*=1-Math.min(1,dt*2);
+  heroL.intensity=.8+pulse*2;
+
+  // SKIN: детали скина живут от времени, скорости героя и вспышек
+  if(SKIN)SKIN.update(t,dt,{speed:Math.min(1,sp/4.2),pulse,lean,walk});
+
+  post.uniforms.uT.value=t;post.uniforms.uAb.value=.003+pulse*.01+Math.sin(t*.7)*.001;
+  post.uniforms.uGl.value=pulse*.8+(Math.random()<.004?.6:0);
+
+  R.setRenderTarget(RT);R.render(scene,cam);R.setRenderTarget(null);
+  post.uniforms.tD.value=RT.texture;R.render(pScene,pCam);
+}
+loop();
+})();
+</script>
+</body>
+</html>

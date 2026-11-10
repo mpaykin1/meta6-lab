@@ -1,0 +1,40 @@
+name: storefront-p1
+on:
+  pull_request:
+    paths:
+      - 'meta-games/index.html'
+      - 'observer-world-en-v7/**'
+      - 'ashen-sumerek/**'
+      - 'underwater-world/**'
+      - 'three-worlds-game/**'
+      - 'games/**'
+      - 'scripts/platform/verify-storefront.mjs'
+      - 'scripts/platform/mutate-storefront.mjs'
+      - '.github/workflows/storefront-p1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-storefront:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install headless Chromium and PNG decoder
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1 pngjs@7.0.0
+          npx playwright install --with-deps chromium
+      - name: Syntax and mutation traps (includes hardcode obman)
+        run: |
+          node --check scripts/platform/verify-storefront.mjs
+          node --check scripts/platform/mutate-storefront.mjs
+          node scripts/platform/mutate-storefront.mjs
+      - name: P1 every storefront game (200, errors, drawn canvas)
+        run: node scripts/platform/verify-storefront.mjs

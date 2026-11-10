@@ -1,3 +1,6 @@
+## ТАБЛИЦА ЗАДАЧ (правило владельца, 10.11.2026)
+Каждая задача, за которую берётся ChatGPT (чат или автозадача) по МГ и МГЛ, сразу записывается строкой в [ZADACHI.md](https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md) (корень meta6-lab). Статус ставит сторож `ZADACHI watch` по данным GitHub: ✅ готово (PR слит), 🛑 ЗАВИС — толкнуть (нет коммитов 3+ часа). Без строки работу не начинать. Полное правило: [rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md](rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md).
+
 ## ПРОЧИТАТЬ ПЕРЕД ЛЮБОЙ РАБОТОЙ (09.11.2026)
 1. [ФИНИШ — 18 проверок, без которых проект не готов](rules/09-platforma/FINISH.md)
 2. [КОНТУР БЕЗ ОШИБОК — правила К1–К12](rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md)
@@ -78,6 +81,7 @@ _переиспользовать готовое, брать источник в
 - [NOVYY_UROVEN.md](rules/06-rabota-ii-s-kodom/NOVYY_UROVEN.md) — перед новым уровнем пересчитать всё, что есть: было N — осталось N
 - [NE_MENYAT_NEZAPROSHENNOE.md](rules/06-rabota-ii-s-kodom/NE_MENYAT_NEZAPROSHENNOE.md) — делать только то, что просили
 - [PESOCHNITSA_GPT.md](rules/06-rabota-ii-s-kodom/PESOCHNITSA_GPT.md) — **ПЕСОЧНИЦА:** ChatGPT работает только в `mpaykin1/meta6-lab` (ветка на идею, бот, карточка в LAB_QUEUE.md), в `meta6` — только чтение; забирает в `meta6` только Claude
+- [TABLITSA_ZADACH.md](rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md) — **ТАБЛИЦА ЗАДАЧ (10.11.2026):** каждая взятая ChatGPT задача — строка в ZADACHI.md; сторож показывает готово / завис
 - [OTCHETY_DLYA_CLAUDE.md](rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md) — **ОТЧЁТЫ ДЛЯ CLAUDE:** каждый результат — PR со свежим описанием, прогон Actions с понятной причиной провала, карточка LAB_QUEUE; ничего важного только в чате ChatGPT
 - **ОТЧЁТ ВЛАДЕЛЬЦУ = ТОЛЬКО «ОСТАЛОСЬ СДЕЛАТЬ»** (07.11.2026): в чате владельцу — только список того, что ещё не готово, и что мешает; сделанное не перечислять, оно на GitHub. См. §5 [OTCHETY_DLYA_CLAUDE.md](rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md)
 - [automation/prompts/chatgpt-autotask.md](automation/prompts/chatgpt-autotask.md) — правила для автозадач ChatGPT (лежат в automation/)

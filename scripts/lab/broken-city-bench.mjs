@@ -64,5 +64,10 @@ for(const size of sizes){
  console.log(size.name+' BASE '+baseAvg.toFixed(2)+' HEAD '+headAvg.toFixed(2)+' fps; calls '+baseDraw+' -> '+headDraw);
  if(headAvg<baseAvg*.8){failed=true;console.log('::error title=FPS regression::'+size.name+' FPS '+headAvg+' vs '+baseAvg)}
  if(headDraw>baseDraw*1.05){failed=true;console.log('::error title=Draw regression::'+size.name+' calls '+headDraw+' vs '+baseDraw)}
+ const headP95=Math.max(...runs.filter(r=>r.version==='head').map(r=>r.p95??Infinity));
+ if(size.name==='mobile'&&(!Number.isFinite(headP95)||headP95>20)){
+  failed=true;console.log('::error title=Mobile p95 budget::'+headP95+'ms exceeds 20ms');
+ }
+ if(headDraw>40){failed=true;console.log('::error title=Draw-call budget::'+headDraw+' exceeds 40');}
 }
 if(failed)process.exitCode=1;

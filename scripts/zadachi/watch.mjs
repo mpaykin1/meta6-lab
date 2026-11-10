@@ -91,7 +91,8 @@ export function apply(text, data, now) {
   const summary = `**Итог:** ⚔ конфликт ${n(/КОНФЛИКТ/)} · ❌ красные ${n(/КРАСНЫЕ ПРОВЕРКИ/)} · 🛑 зависло ${push.length} · ⚠ молчит ${n(/молчит/)} · 🔨 в работе ${n(/В РАБОТЕ/)} · 🙋 нужен Claude ${n(/НУЖЕН CLAUDE/)} · 💤 заброшено ${n(/ЗАБРОШЕНО/)} · ✅ готово ${n(/ГОТОВО/)}`;
   const pushList = push.length ? '**Толкнуть сейчас:** ' + push.map(r => `${r.task} (${noBranch(r.branch) ? r.who : '`' + r.branch + '`'})`).join('; ') : '**Толкнуть сейчас:** никого';
   const fixList = fix.length ? '**Чинить сейчас:** ' + fix.map(r =>
-    `${r.pr} (${r.project}, \`${r.branch}\`)`).join('; ') : '**Чинить сейчас:** никого';
+    `${r.pr} (${r.project}, \`${r.branch}\`, ${/КОНФЛИКТ/.test(r.status) ? '⚔ конфликт' : '❌ красные'})`)
+    .join('; ') : '**Чинить сейчас:** никого';
   const table = [HEAD, SEP, ...kept.map(r => `| ${r.status} | ${r.task} | ${r.project} | ${r.who} | ${noBranch(r.branch) ? '—' : '`' + r.branch + '`'} | ${r.pr || '—'} | ${r.taken || '—'} | ${r.last || '—'} |`)].join('\n');
   const body = `${START}\n${summary}\n\n${fixList}\n\n${pushList}\n\n${table}\n${END}`;
   const a = text.indexOf(START), b = text.indexOf(END) + END.length;

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-10T09:58:05.894Z",
+  "generated_at": "2026-11-10T09:58:32.330Z",
   "sha": {
-    "lab": "b339f2c98a5aa9c54ff2281b4c6c6ebe0edfa6ef",
+    "lab": "f4bab4c47f8992c739e120e0bb1283ad47bbb628",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
@@ -61,8 +61,8 @@
     "redLab": [
       {
         "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42793385251",
-        "step": "Commit queue"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42795095911",
+        "step": "Run node scripts/dispetcher/run.mjs"
       }
     ],
     "redMg": [],
@@ -323,7 +323,7 @@
   },
   "changes": {
     "lab": {
-      "count": 273,
+      "count": 275,
       "folders": ".github:5, AGENTS.md:1, automation:7, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:11, shared:2, ZADACHI.md:1"
     },
     "mg": {

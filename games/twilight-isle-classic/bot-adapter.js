@@ -97,6 +97,58 @@
     const i = route.path[route.step + 1];
     return { x: i % side + 0.5, z: Math.floor(i / side) + 0.5 };
   }
+  // Read-only tactical targets: live enemy heads and optional exposed heart pickups.
+  // The game exposes no live hearts today; world.hearts is only a spawn blueprint.
+  function threats(foes, player) {
+    return (Array.isArray(foes) ? foes : [])
+      .filter(f => f.hp > 0 && f.state !== 'dissolve')
+      .map(f => {
+        const pos = f.pos ?? f.segs?.[0] ?? f;
+        const d = Math.hypot(pos.x - player.x, pos.z - player.z);
+        return { pos, d };
+      })
+      .filter(f => Number.isFinite(f.d))
+      .sort((a, b) => a.d - b.d);
+  }
+  function liveHeart(api, player) {
+    const hearts = Array.isArray(api.hearts) ? api.hearts :
+      (Array.isArray(api.heartsP) ? api.heartsP : []);
+    return hearts.filter(h => h.alive && Number.isFinite(h.x) && Number.isFinite(h.z))
+      .map(h => ({ h, d: Math.hypot(h.x - player.x, h.z - player.z) }))
+      .sort((a, b) => a.d - b.d)[0]?.h ?? null;
+  }
+  function safeRetreat(world, player, foes) {
+    const { reach, stand } = world;
+    const side = Math.sqrt(reach?.length ?? 0);
+    if (!Number.isInteger(side) || !side || !stand) return null;
+    const wet = (x, z) => {
+      for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) {
+        const X = x + dx, Z = z + dz;
+        if (X < 0 || Z < 0 || X >= side || Z >= side ||
+            stand[X + side * Z] < 3) return true;
+      }
+      return false;
+    };
+    const px = Math.floor(player.x), pz = Math.floor(player.z);
+    if (!foes.length && !wet(px, pz)) return null;
+    const danger = (x, z) => foes.length ?
+      Math.min(...foes.map(f => Math.hypot(f.pos.x - x, f.pos.z - z))) : 0;
+    const currentDanger = danger(player.x, player.z);
+    let best = null, score = -Infinity;
+    for (let dz = -5; dz <= 5; dz++) for (let dx = -5; dx <= 5; dx++) {
+      const x = px + dx, z = pz + dz;
+      if (x < 0 || z < 0 || x >= side || z >= side) continue;
+      const d = Math.hypot(x + 0.5 - player.x, z + 0.5 - player.z);
+      if (d < 0.75 || d > 5 || !reach[x + side * z] ||
+          stand[x + side * z] < 3 || wet(x, z)) continue;
+      const away = danger(x + 0.5, z + 0.5);
+      if (foes.length && away < currentDanger + 0.75) continue;
+      const quality = away - d * 0.5;
+      if (quality > score) { score = quality; best = { x: x + 0.5, z: z + 0.5 }; }
+    }
+    return best;
+  }
+  const retreat = { seed: null, goal: null };
   const bot = Object.freeze({
     version: 1,
     info() { return { name: document.title, levels: 1 }; }, // one beacon mission per island run
@@ -108,7 +160,21 @@
       const guardian = G.warden;
       const guardianHead = guardian && guardian.hp > 0 &&
         guardian.state !== 'dissolve' && guardian.segs?.[0];
-      const target = !G.all && coin ? navigate(world, p, coin) : (guardianHead || world.ring);
+      const nearbyFoes = threats(api.foes, p);
+      const nearestFoe = nearbyFoes[0];
+      // In the authored game, enemy position is the first segment (segs[0]).
+      const fight = nearestFoe && nearestFoe.d < 3 ? nearestFoe.pos : null;
+      const heart = player.hp <= 2 ? liveHeart(api, p) : null;
+      const candidate = player.hp <= 2 && !heart ? safeRetreat(world, p, nearbyFoes) : null;
+      if (!candidate) retreat.goal = null;
+      else if (retreat.seed !== world.seed || !retreat.goal ||
+          Math.hypot(retreat.goal.x - p.x, retreat.goal.z - p.z) < 0.75) {
+        retreat.seed = world.seed;
+        retreat.goal = candidate;
+      }
+      const survival = heart || retreat.goal;
+      const target = fight || (survival ? navigate(world, p, survival) :
+        (!G.all && coin ? navigate(world, p, coin) : (guardianHead || world.ring)));
       const goal = target ? { x: target.x, y: target.z } : null;
       // Read-only terrain hint for the strategy: the next step is higher than the hero's
       // column (terrace, rock top, pier, lighthouse ring), so a real held jump is needed.

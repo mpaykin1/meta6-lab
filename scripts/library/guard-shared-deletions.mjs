@@ -20,7 +20,7 @@ export function check(base,head){
   if(!exists(head,'shared/index.json'))throw Error('Missing protected head shared/index.json');
   const index=JSON.parse(git('show',head+':shared/library/index.json'));
   if(!Array.isArray(index.games)||!Array.isArray(index.entries))throw Error('Invalid library index');
-  const removed=git('diff','--name-only','--diff-filter=D',base,head,'--','shared/').split('\\n').filter(Boolean);
+  const removed=git('diff','--name-only','--diff-filter=D',base,head,'--','shared/').split(String.fromCharCode(10)).filter(Boolean);
   for(const p of removed){
     const item=classifyRemoval(p);
     let validManifest=false;

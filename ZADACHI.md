@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Библиотека игр: эталоны, системы, ассеты и MCP | МГЛ | чат ChatGPT | `lab/library-catalog` | [#209](https://github.com/mpaykin1/meta6-lab/pull/209) | 2026-11-10 05:59 | — |
 | взято | Доводчик: PR #124, лор Древа миров | МГЛ | чат ChatGPT | `lab/seed-of-last-world-canon` | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) | 2026-11-10 05:59 | — |
 | НУЖЕН CLAUDE: [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42457034492), перенос в актуальные PR | Доводчик: PR #122 — адаптеры бота | МГЛ | чат ChatGPT | `lab/meta-bot-real-game-hooks-1108` | [#122](https://github.com/mpaykin1/meta6-lab/pull/122) | 2026-11-10 05:57 | — |
 | НУЖЕН CLAUDE: [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42640999824), перенос в актуальные PR | Доводчик: PR #116 — Broken City | МГЛ | чат ChatGPT | `lab/cycle1-broken-city-bot-strategy-1108` | [#116](https://github.com/mpaykin1/meta6-lab/pull/116) | 2026-11-10 05:57 | — |
@@ -51,7 +52,6 @@
 | ⚠ молчит больше часа | Restore original Ashen Path asset pack reference after sync | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/ashen-path-asset-pack-restore-1109` | [#208](https://github.com/mpaykin1/meta6-lab/pull/208) | 2026-11-09 16:54 | 2026-11-10 04:35 |
 | ⚠ молчит больше часа | Довести PR #200 (B2 ч.2) до зелёных проверок и слияния | МГЛ | MG-строитель-2 | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-10 05:20 | 2026-11-10 03:12 |
 | ⚠ молчит больше часа | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | МГЛ | автозадача | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-09 15:45 | 2026-11-10 03:12 |
-| 🔨 В РАБОТЕ | Библиотека игр: эталоны, системы, ассеты и MCP | МГЛ | чат ChatGPT | `lab/library-catalog` | [#209](https://github.com/mpaykin1/meta6-lab/pull/209) | 2026-11-10 05:51 | 2026-11-10 05:55 |
 | 🔨 В РАБОТЕ | Сторож таблицы: конфликты, красные проверки и МГ | МГЛ | чат ChatGPT | `lab/zadachi-conflicts` | [#220](https://github.com/mpaykin1/meta6-lab/pull/220) | 2026-11-10 05:36 | 2026-11-10 05:55 |
 | 🔨 В РАБОТЕ | Сторож таблицы и толкач | МГЛ | чат ChatGPT | `lab/zadachi-tolkach` | [#221](https://github.com/mpaykin1/meta6-lab/pull/221) | 2026-11-10 05:39 | 2026-11-10 05:55 |
 | 🔨 В РАБОТЕ | L1 ч.3 + L3 каталог для ИИ | МГЛ | чат ChatGPT | `lab/library-catalog` | [#209](https://github.com/mpaykin1/meta6-lab/pull/209) | 2026-11-09 16:55 | 2026-11-10 05:55 |

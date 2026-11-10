@@ -1,10 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-10T09:10:10.913Z | МГЛ: 9a79c20dc201d8a3532e8b7d35469e432a1f4bd7 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42788367719
+UTC: 2026-11-10T09:15:16.442Z | МГЛ: 50eff30a9bfc9a343d805a6c9b3b6df7607b0ae5 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42788772156
 ## ПРОВЕРИТЬ CLAUDE
 - PR #216 06a8b61ec198ba43bb93a69efb2aeca7246383ee: .github/workflows/status-dlya-claude.yml, scripts/status/selftest.mjs
 - PR #223 0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66: .github/workflows/investigation-snapshot.yml
 - PR #215 2e73930d862d7de10a85c186e3c3517e5c58c98d: .github/workflows/lab-portal-visits.yml, scripts/lab/mutate-portal-links.mjs
 - PR #217 d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3: .github/workflows/lab-veil-shared.yml, scripts/lab/mutate-veil-workflow-target.mjs, scripts/lab/verify-veil-workflow-target.mjs
+- МГЛ: ZADACHI watch | https://github.com/mpaykin1/meta6-lab/actions/runs/42788259479 | Update ZADACHI.md from GitHub
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
@@ -46,13 +47,13 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 42 | конфликт: нет данных | слито: 4 | закрыто: 35
+открыто: 43 | конфликт: нет данных | слито: 4 | закрыто: 35
 #216 СВОДКА ДЛЯ CLAUDE: facts-only GitHub Actions bot | 06a8b61ec198ba43bb93a69efb2aeca7246383ee
 #223 Investigation: GitHub Pages dashboard + hourly GitHub-only t | 0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66
 #215 Portal Visits: исправить устаревшее ожидание 12 миров | 2e73930d862d7de10a85c186e3c3517e5c58c98d
 #217 Fix: Veil Shared CI проверяет существующую игру | d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 228 коммитов | .github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1
+МГЛ: 234 коммитов | .github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1
 МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

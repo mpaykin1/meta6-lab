@@ -16,7 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
-| взято | Исправить красные проверки PR #131 | МГЛ | MG-ремонтник | `lab/owner-graphics-animation-references-20261108` | [#131](https://github.com/mpaykin1/meta6-lab/pull/131) | 2026-11-10 09:58 | — |
+| НУЖЕН CLAUDE: защищённый workflow и красный бот | Исправить красные проверки PR #131 | МГЛ | MG-ремонтник | `lab/owner-graphics-animation-references-20261108` | [#131](https://github.com/mpaykin1/meta6-lab/pull/131) | 2026-11-10 09:58 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Доводчик: PR #124, лор Древа миров | МГЛ | чат ChatGPT | `lab/seed-of-last-world-canon` | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) | 2026-11-10 05:59 | 2026-11-10 08:48 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Разбор открытых PR: проверки, дубли и безопасное слияние | МГЛ | чат ChatGPT | — | — | 2026-11-10 06:43 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Broken City: чистый PR оптимизации вместо #60 | МГЛ | чат ChatGPT | `lab/render-broken-city-safe-1110` | [#225](https://github.com/mpaykin1/meta6-lab/pull/225) | 2026-11-10 06:26 | 2026-11-10 06:41 |

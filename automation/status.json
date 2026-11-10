@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-10T09:15:16.442Z",
+  "generated_at": "2026-11-10T09:19:49.835Z",
   "sha": {
-    "lab": "50eff30a9bfc9a343d805a6c9b3b6df7607b0ae5",
+    "lab": "f161a5ddf6f6716509d315dada3f6ddc3a50c0e1",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42788772156",
+  "run": "нет данных",
   "review": {
     "protected": [
       {
@@ -44,13 +44,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "ZADACHI watch",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42788259479",
-        "step": "Update ZADACHI.md from GitHub"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -217,11 +211,16 @@
     ]
   },
   "pr": {
-    "open": 43,
+    "open": 42,
     "conflicts": "нет данных",
-    "merged": 4,
-    "closed": 35,
+    "merged": 5,
+    "closed": 36,
     "mergedItems": [
+      {
+        "number": 226,
+        "title": "ЛОР: Древо миров и каталог skin-trainer — чистая история без",
+        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8"
+      },
       {
         "number": 216,
         "title": "СВОДКА ДЛЯ CLAUDE: facts-only GitHub Actions bot",
@@ -280,8 +279,8 @@
   },
   "changes": {
     "lab": {
-      "count": 234,
-      "folders": ".github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1"
+      "count": 245,
+      "folders": ".github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, shared:2, ZADACHI.md:1"
     },
     "mg": {
       "count": 2,
@@ -291,57 +290,57 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "прошла",
+      "bot": "нет данных",
       "storefront": "да"
     }
   ],

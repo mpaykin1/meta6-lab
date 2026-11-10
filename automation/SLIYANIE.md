@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 68, слито 0, закрыто 2, открыто 66 — бот, 2026-11-10 04:51 UTC
+Итог: всего 68, слито 0, закрыто 4, открыто 64 — бот, 2026-11-10 05:02 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -18,8 +18,8 @@
 | #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | |
 | #133 | эталон | `lab/asqura-single-graphics-reference-20261108` | ASQURA Office — первый эталон графики и анимации | open | |
 | #213 | код | `lab/library-machine-sync` | L1: Library Machine — индекс нового эталона skin-trainer | open | |
-| #212 | код | `lab/claude-context-compact-v2` | Сократить контекст Claude: STATUS, короткие Actions, PROMPT_ | open | |
-| #211 | код | `lab/claude-context-compact` | Compact agent context: STATUS, rules, CI summaries and traps | open | |
+| #212 | код | `lab/claude-context-compact-v2` | Сократить контекст Claude: STATUS, короткие Actions, PROMPT_ | closed | |
+| #211 | код | `lab/claude-context-compact` | Compact agent context: STATUS, rules, CI summaries and traps | closed | |
 | #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open | |
 | #209 | код | `lab/library-catalog` | L1 ч.3 + L3: каталог игровых систем для MCP ИИ | open dirty | |
 | #205 | код | `lab/owner-pult` | Пульт владельца — прогресс и свежие игры | open | |

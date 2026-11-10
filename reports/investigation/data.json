@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T13:33:08.386Z",
+  "generated_at": "2026-11-10T13:35:36.700Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -1322,7 +1322,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/platform-play-connect-earn-20261107",
-      "status": "конфликт",
+      "status": "в работе",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 87,
       "pr_state": "open",
@@ -1331,7 +1331,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/87",
       "taken_at": "2026-11-07 14:41",
       "last_commit_at": "2026-11-10 12:45",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 78,
@@ -1339,7 +1339,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-2",
       "branch": "lab/platform-play-connect-earn-20261107",
-      "status": "конфликт",
+      "status": "в работе",
       "original_status": "🙋 НУЖЕН CLAUDE: конфликт ветки требует git merge; доступный GitHub-коннектор не поддерживает merge веток",
       "pr": 87,
       "pr_state": "open",
@@ -1348,7 +1348,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/87",
       "taken_at": "2026-11-10 11:20",
       "last_commit_at": "2026-11-10 12:45",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 79,

@@ -1,5 +1,5 @@
 # DOVODKA — журнал доводчика
-СЕЙЧАС ДЕЛАЮ: —
+СЕЙЧАС ДЕЛАЮ: [МГЛ PR #124](https://github.com/mpaykin1/meta6-lab/pull/124) · ветка `lab/seed-of-last-world-canon` · шаг перенести отсутствующую навигацию, обновить main, проверить CI · с 2026-11-10 05:59 UTC
 ## ОСТАЛОСЬ (сверху самое срочное)
 - [МГЛ #124](https://github.com/mpaykin1/meta6-lab/pull/124) — 🛑 завис: ЛОР: Зерно последнего мира — эталон и карта мультивселенной META GAMES
 - [МГЛ #125](https://github.com/mpaykin1/meta6-lab/pull/125) — 🛑 завис: Lore: alternative Last Seed mythology and inspiration bank

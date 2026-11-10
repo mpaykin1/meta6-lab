@@ -460,7 +460,15 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 const PG = (() => {
   const br = null; // META GAMES has no platform SDK. let inited = false, readyQ = false, readySent = false, playing = false;
   let platPause = false, hidden = false, adPause = false, audioOn = true, saveT = null;
-  const SAVE_KEY = 'isle_save'; let data = {};
+  const SAVE_KEY = 'isle_save';
+  let data = {};
+  try {
+    const saved = localStorage.getItem(SAVE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) data = parsed;
+    }
+  } catch (error) { console.warn('Cannot read local save', error); }
   const send = (m) => { try { if (br && inited) br.platform.sendMessage(m).catch(() => {}); } catch (e) {} };
   const api = { paused: false,
     applyAudio() { try { const c = typeof SFX !== 'undefined' && SFX.ctx; if (!c) return;
@@ -472,7 +480,12 @@ const PG = (() => {
     get canRevive() { return true; },
     revive() { return Promise.resolve(true); },
     track(name, d) { try { if (br && inited && br.analytics && br.analytics.send) br.analytics.send(name, d || undefined); } catch (e) {} },
-    flush() { try { if (br && inited) br.storage.set([SAVE_KEY], [JSON.stringify(data)]).catch(() => {}); } catch (e) {} },
+    flush() {
+      try {
+        if (br && inited) br.storage.set([SAVE_KEY], [JSON.stringify(data)]).catch(console.warn);
+        else localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+      } catch (error) { console.warn('Cannot save game', error); }
+    },
     // synchronous localStorage-like view over one Bridge save blob (loaded once at boot, all keys in one call)
     store: {
       getItem(k) { return Object.prototype.hasOwnProperty.call(data, k) ? data[k] : null; },

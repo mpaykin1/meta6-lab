@@ -32,5 +32,30 @@ ok('без ветки готово только со ссылкой; НУЖЕН 
 const out = apply(doc([row('взято', 'b', 'lab/b', '2026-11-10 11:00'), row('взято', 'a', 'lab/a', '2026-11-10 07:00')]), {repo: 'o/r', pulls: {'lab/a': pr(1, {lastCommit: now - 4 * H}), 'lab/b': pr(2)}}, now);
 ok('зависшие наверху, итог и список «толкнуть»', out.indexOf('| a |') < out.indexOf('| b |') && /зависло 1 · /.test(out) && /Толкнуть сейчас:\*\* a \(`lab\/a`\)/.test(out) && out.endsWith('хвост\n') && /Сторож проверил: 2026-11-10 12:00 UTC/.test(out));
 ok('повторный прогон ничего не меняет', apply(out, {repo: 'o/r', pulls: {'lab/a': pr(1, {lastCommit: now - 4 * H}), 'lab/b': pr(2)}}, now) === out);
+
+// 1.1–1.6: новые регрессии, которые обязаны падать на старом стороже.
+const src = (await import('node:fs')).readFileSync(resolve(process.argv[2] || resolve(here, 'watch.mjs')), 'utf8');
+ok('1.1 GitHub check-runs API', src.includes('/check-runs'));
+ok('1.1 GitHub mergeable_state и повторное получение', /mergeable_state/.test(src) && /3000/.test(src));
+r = st([row('взято', 'conflict', 'lab/dirty', '2026-11-10 07:00')], {pulls: {'lab/dirty': pr(20, {mergeable_state: 'dirty', lastCommit: now - 7 * H})}});
+ok('1.2 конфликт имеет приоритет над временем', /^⚔ КОНФЛИКТ/.test(r.conflict.status));
+r = st([row('взято', 'red', 'lab/red', '2026-11-10 07:00')], {pulls: {'lab/red': pr(21, {mergeable_state: 'clean', checkRuns: [{name: 'KONTUR Guard', conclusion: 'failure'}, {name: 'Portal Visited', conclusion: 'cancelled'}]})}});
+ok('1.2 красные проверки с именами', /^❌ КРАСНЫЕ:/.test(r.red.status) && /KONTUR Guard/.test(r.red.status) && /Portal Visited/.test(r.red.status));
+r = st([row('НУЖЕН CLAUDE: ручная проверка', 'claude', 'lab/claude', '2026-11-10 07:00')], {pulls: {'lab/claude': pr(22, {mergeable_state:'dirty',checkRuns:[{name:'red',conclusion:'failure'}]})}});
+ok('1.2 CLAUDE сохраняется до проверки конфликтов', /^🙋 НУЖЕН CLAUDE/.test(r.claude.status));
+const mgRow = '| взято | mg | МГ | MG-ремонтник | lab/mg | — | 2026-11-10 07:00 | — |';
+r = st([mgRow], {mgRepo:'mpaykin1/meta6', pulls: {'lab/mg': pr(91,{repo:'mpaykin1/meta6'})}});
+ok('1.4 МГ PR с правильной ссылкой', r.mg.project === 'МГ' && r.mg.pr.includes('mpaykin1/meta6/pull/91'));
+const duplicateDoc = doc([
+  '| взято | alpha | МГЛ | чат ChatGPT | lab/dup | — | 2026-11-10 07:00 | — |',
+  '| взято | alpha | МГЛ | MG-строитель-1 | lab/dup | — | 2026-11-10 08:00 | — |',
+]);
+const dedupRows = parseRows(apply(duplicateDoc, {repo:'o/r',pulls:{'lab/dup':pr(92)}}, now));
+ok('1.5 одна строка на ветку, все исполнители', dedupRows.length === 1 && dedupRows[0].who.includes('чат ChatGPT') && dedupRows[0].who.includes('MG-строитель-1'));
+r = st([row('взято', 'obsolete', 'lab/old', '2026-11-07 07:00')], {pulls:{'lab/old':pr(93, {lastCommit:now-73*H, duplicateOf:94})}});
+ok('1.6 устаревший подтверждённый дубль', /^✖ ЗАКРЫТЬ: дубль #94/.test(r.obsolete.status));
+const rich = apply(doc([row('взято','conflict','lab/dirty','2026-11-10 07:00'),row('взято','red','lab/red','2026-11-10 07:00')]),{repo:'o/r',pulls:{'lab/dirty':pr(20,{mergeable_state:'dirty'}),'lab/red':pr(21,{checkRuns:[{name:'x',conclusion:'timed_out'}]})}},now);
+ok('1.3 итог и списки чинить/толкнуть', /⚔.*1/.test(rich) && /❌.*1/.test(rich) && /\*\*Чинить сейчас:/.test(rich) && /\*\*Толкнуть сейчас:/.test(rich));
+
 console.log(fail ? `ZADACHI_VERIFY_FAIL ${fail}` : 'ZADACHI_VERIFY_OK');
 process.exit(fail ? 1 : 0);

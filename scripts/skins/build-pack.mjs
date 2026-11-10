@@ -263,13 +263,12 @@ async function main(){
         rotation:[0,Math.PI,0],depth:2,material:'rust-transparent',anim:[]});
     }
   }
-  // Source images which formerly served as paper-thin "3d" parts become decals.
+  // The original 3D source pieces are now represented by their true
+  // volume + one curved/embossed front-art layer. Keeping them as extra
+  // 2D planes causes the notorious square head and side flap to reappear.
   for(const part of original.filter(p=>p.layer==='3d')){
-    const v=volumes.find(x=>x.bone===part.bone);
-    part.layer='2.5d';delete part.primitive;delete part.dims;
-    part.material='rust-transparent';
-    part.offset=[part.offset[0],part.offset[1],
-      v.offset[2]-v.dims[2]/2-.035];
+    const index=entries.indexOf(part);
+    if(index>=0)entries.splice(index,1);
   }
   entries.push(...volumes);
   // Four genuinely rear-facing details, but never a full-front picture pasted on a side.

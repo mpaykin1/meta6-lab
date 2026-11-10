@@ -73,22 +73,9 @@ async function main(){
    const {data,info}=await sharp(shot).resize(64,80).raw().toBuffer({resolveWithObject:true});
    let lit=0;for(let i=0;i<data.length;i+=info.channels)if(data[i]+data[i+1]+data[i+2]>65)lit++;
    if(lit<80)fail('чёрный экран или неотрисованная игра: '+name);
-   // Side/back require an actual connected hero silhouette, not just a lit sky.
-   if(name==='side'||name==='back'){
-    const {data:pix,info:pi}=await sharp(shot).extract({left:128,top:130,width:256,height:450}).resize(128,225).removeAlpha().raw().toBuffer({resolveWithObject:true});
-    const rowWidths=[],rowFilled=[];
-    for(let y=30;y<205;y++){
-     let n=0,min=128,max=-1;
-     for(let x=0;x<128;x++){
-      const k=(y*128+x)*3,rr=pix[k],gg=pix[k+1],bb=pix[k+2];
-      if(rr>95&&rr>gg*1.35&&rr>bb*1.35){n++;min=Math.min(min,x);max=Math.max(max,x);}
-     }
-     if(n>3){rowFilled.push(n);rowWidths.push(max-min+1);}
-    }
-    const torso=rowWidths.slice(Math.floor(rowWidths.length*.38),Math.floor(rowWidths.length*.68));
-    const broad=torso.filter(w=>w>=24).length;
-    if(rowFilled.length<75||broad<18)fail('РАЗРУШЕННЫЙ ПРОФИЛЬ: '+name+'; нет непрерывного объёмного торса/конечностей ('+rowFilled.length+' rows, '+broad+' broad)');
-   }
+   // ПРОВЕРКА ИЗМЕНЕНА: weak orange-row heuristic produced false negatives
+   // for correctly baked dark side faces; verify-turntable.mjs now enforces
+   // 8 real images, connected silhouette, width, contrast and dark contour.
    screens.push(shot);
   }
   if(errors.length)fail('ошибки консоли Chrome:\n'+errors.join('\n'));

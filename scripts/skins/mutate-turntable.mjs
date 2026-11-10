@@ -7,7 +7,8 @@ import {inspectGeometry} from './turntable-geometry.mjs';
 import {LIMITS} from './turntable-thresholds.mjs';
 
 const minimum={sideTorsoWidth:.5,bodyDepthToWidth:.6,sideFaceHashSimilarity:.9,
- outlineCoverage:.8,silhouetteContrast:2.5,maximumLargeComponents:1};
+ outlineCoverage:.8,silhouetteContrast:2.5,maximumLargeComponents:1,
+ largeComponentFraction:.015,outlineColor:'#1a0f14'};
 for(const [key,floor] of Object.entries(minimum)){
  if(LIMITS[key]!==floor)throw Error('UNAUTHORIZED TURNTABLE THRESHOLD CHANGE: '+key);
 }

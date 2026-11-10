@@ -62,7 +62,7 @@
 | ⚠ молчит больше часа | lab: Twilight Island — бот проходит весь остров | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/twilight-island-bot` | [#3](https://github.com/mpaykin1/meta6-lab/pull/3) | 2026-11-06 14:45 | 2026-11-10 06:25 |
 | ⚠ молчит больше часа | РЕМОНТ R1: пересборка библиотеки и исключение копий | МГЛ | чат ChatGPT | `lab/remont-r1-library` | [#218](https://github.com/mpaykin1/meta6-lab/pull/218) | 2026-11-10 05:03 | 2026-11-10 06:22 |
 | ⚠ молчит больше часа | PR #54, #59, #60: конфликты, производительность, CI и слияние | МГЛ | чат ChatGPT | `lab/pr54-59-60-finish` | [#54](https://github.com/mpaykin1/meta6-lab/pull/54), [#59](https://github.com/mpaykin1/meta6-lab/pull/59), [#60](https://github.com/mpaykin1/meta6-lab/pull/60) | 2026-11-10 06:02 | 2026-11-10 06:21 |
-| 🔨 В РАБОТЕ | Рабочий чат МГ/МГЛ | МГЛ | чат ChatGPT | `lab/chat-rabota` | — | 2026-11-10 08:52 | 2026-11-10 09:16 |
+| 🔨 В РАБОТЕ | Рабочий чат МГ/МГЛ | МГЛ | чат ChatGPT | `lab/chat-rabota` | [#229](https://github.com/mpaykin1/meta6-lab/pull/229) | 2026-11-10 08:52 | 2026-11-10 09:16 |
 | 🔨 В РАБОТЕ | Довести PR #200 (B2 ч.2) до зелёных проверок и слияния | МГЛ | MG-строитель-2 | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-10 05:20 | 2026-11-10 09:15 |
 | 🔨 В РАБОТЕ | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | МГЛ | автозадача | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-09 15:45 | 2026-11-10 09:15 |
 | 🔨 В РАБОТЕ | Доводка PR #124, #190, #200 и очередь DOVODKA | МГЛ | чат ChatGPT | `lab/bot-batch-1` | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | 2026-11-10 08:48 | 2026-11-10 09:12 |

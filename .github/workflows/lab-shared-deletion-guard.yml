@@ -28,14 +28,6 @@ jobs:
             echo "Base has no shared/index.json; restoration is allowed."
             exit 0
           fi
-          removed=$(git diff --name-only --diff-filter=D "${BASE_SHA}" "${HEAD_SHA}" -- shared/ || true)
-          if [[ -n "${removed}" ]]; then
-            echo "::error title=Approved library deletion::Protected shared files deleted:"
-            echo "${removed}"
-            exit 1
-          fi
-          if ! git cat-file -e "${HEAD_SHA}:shared/index.json" 2>/dev/null; then
-            echo "::error title=Library index missing::shared/index.json must remain present"
-            exit 1
-          fi
-          echo "Approved shared library files preserved."
+          node scripts/library/guard-shared-deletions.mjs "${BASE_SHA}" "${HEAD_SHA}"
+          node scripts/library/mutate-shared-deletions.mjs
+          echo "Approved shared library files preserved; stale generated copies verified."

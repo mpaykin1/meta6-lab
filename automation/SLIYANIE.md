@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 68, слито 0, закрыто 1, открыто 67 — бот, 2026-11-10 04:41 UTC
+Итог: всего 68, слито 0, закрыто 4, открыто 64 — бот, 2026-11-10 05:11 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -11,17 +11,17 @@
 | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | жду прогон [KONTUR Guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42757252697), [B1](https://github.com/mpaykin1/meta6-lab/actions/runs/42757215058); PR [#207](https://github.com/mpaykin1/meta6-lab/pull/207) |
 | #206 | эталон | `lab/king-of-ash-reference-1109` | Эталон: Король Пепла (оригинальный HTML) | closed | закрыт: дубль, сохранён [PR #207](https://github.com/mpaykin1/meta6-lab/pull/207), [PR #206](https://github.com/mpaykin1/meta6-lab/pull/206) |
 | #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | жду прогон [KONTUR Guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42757617454), [B1](https://github.com/mpaykin1/meta6-lab/actions/runs/42757543335), [PR #202](https://github.com/mpaykin1/meta6-lab/pull/202) |
-| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | open | в работе 2026-11-10 04:45 UTC |
-| #191 | эталон | `lab/sunken-city-reference-1109` | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и катало | open | |
-| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | |
+| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | open | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |
+| #191 | эталон | `lab/sunken-city-reference-1109` | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и катало | open | в работе 2026-11-10 04:47 UTC |
+| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | блокировано: 135 коммитов позади main, меняет LAB_QUEUE.md, нет обязательных зелёных CI; [разбор](https://github.com/mpaykin1/meta6-lab/pull/189#issuecomment-6759536405) |
 | #137 | эталон | `lab/demonic-hand-webgl2-reference` | Add Demonic Hand as owner-approved WebGL2 reference | open | |
 | #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | |
 | #133 | эталон | `lab/asqura-single-graphics-reference-20261108` | ASQURA Office — первый эталон графики и анимации | open | |
 | #213 | код | `lab/library-machine-sync` | L1: Library Machine — индекс нового эталона skin-trainer | open | |
-| #212 | код | `lab/claude-context-compact-v2` | Сократить контекст Claude: STATUS, короткие Actions, PROMPT_ | open | |
-| #211 | код | `lab/claude-context-compact` | Compact agent context: STATUS, rules, CI summaries and traps | open | |
+| #212 | код | `lab/claude-context-compact-v2` | Сократить контекст Claude: STATUS, короткие Actions, PROMPT_ | closed | |
+| #211 | код | `lab/claude-context-compact` | Compact agent context: STATUS, rules, CI summaries and traps | closed | |
 | #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open | |
-| #209 | код | `lab/library-catalog` | L1 ч.3 + L3: каталог игровых систем для MCP ИИ | open | |
+| #209 | код | `lab/library-catalog` | L1 ч.3 + L3: каталог игровых систем для MCP ИИ | open dirty | |
 | #205 | код | `lab/owner-pult` | Пульт владельца — прогресс и свежие игры | open | |
 | #204 | код | `lab/rules-bot-trainer` | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | open | |
 | #203 | код | `lab/skin-rusty-robot` | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | open | |
@@ -74,7 +74,7 @@
 | #4 | код | `lab/native-catalog-and-steam` | lab: native catalog and safe Steam/Android candidates | open | |
 | #3 | код | `lab/twilight-island-bot` | lab: Twilight Island — бот проходит весь остров | open | |
 | #2 | код | `lab/twilight-isles-pass` | lab: Twilight Isles GPU optimization, single RAF, first-isla | open | |
-| #1 | код | `lab/twilight-island-pass` | lab: Twilight Island bot pass — combined #291 and #303 | open | |
+| #1 | код | `lab/twilight-island-pass` | lab: Twilight Island bot pass — combined #291 and #303 | closed | закрыт stale: красный META BOT, нет коммитов >48 ч — [PR #1](https://github.com/mpaykin1/meta6-lab/pull/1), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42356940858) |
 
 ## Библиотека
 

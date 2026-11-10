@@ -10,14 +10,6 @@
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: MG-строитель-1 2026-11-10T22:05:00Z
 
-### PR #204
-- PR: https://github.com/mpaykin1/meta6-lab/pull/204
-- Ветка: `lab/rules-bot-trainer`
-- SHA: `4feb49cfa3cc6810a0d49c8489796a54b4e97a90` · последний коммит: 2026-11-10T02:51:45Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-строитель-3 2026-11-10T23:30:33Z
-
 ### PR #205
 - PR: https://github.com/mpaykin1/meta6-lab/pull/205
 - Ветка: `lab/owner-pult`
@@ -171,6 +163,7 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
+- [#204](https://github.com/mpaykin1/meta6-lab/pull/204) Защищённые workflow; конфликт с main, CI и независимая проверка (комментарий 6782217739)
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
 - [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
 - [#191](https://github.com/mpaykin1/meta6-lab/pull/191) Эталон «Затонувший город»: исходный ZIP, 3D-витрина и каталог ассетов

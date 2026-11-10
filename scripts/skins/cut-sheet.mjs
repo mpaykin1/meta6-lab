@@ -161,10 +161,13 @@ function nearestPalette(r,g,b,palette){
   return best;
 }
 async function writeCrop(entry,rect,mask,pixels,w,h,palette,filename,side){
-  const pad=Math.max(3,Math.floor(Math.max(rect.x1-rect.x0,rect.y1-rect.y0)*.07));
+  // Отступ в пикселях выходной текстуры, НЕ исходного листа: иначе
+  // большой шлем 311px превращался в точку 22px на спрайте 64px.
+  const pad=Math.max(2,Math.round(side*.055));
   const ww=rect.x1-rect.x0+1,hh=rect.y1-rect.y0+1;
   const scale=Math.min((side-2*pad)/ww,(side-2*pad)/hh);
   const targetW=Math.max(1,Math.floor(ww*scale)),targetH=Math.max(1,Math.floor(hh*scale));
+  if(Math.max(targetW,targetH)<side*.75)fail('вырезка слишком мала: неверный отступ или масштаб для '+entry.name);
   const buf=Buffer.alloc(ww*hh*4);
   for(let y=0;y<hh;y++)for(let x=0;x<ww;x++){
     const gx=x+rect.x0,gy=y+rect.y0,pos=gy*w+gx,p=pos*4,k=(y*ww+x)*4;

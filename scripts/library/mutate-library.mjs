@@ -34,6 +34,30 @@ const scenarios=[
     fs.writeFileSync(path.join(next,'new.png'),Buffer.from([137,80,78,71,13,10,26,10,4,5,6]));
     // A hardcoded index deliberately remains unchanged.
   }],
+  ['deception-frozen-index-for-a-copy-like-real-game',root=>{
+    const next=path.join(root,'games/base-copycat');
+    fs.mkdirSync(next,{recursive:true});
+    fs.writeFileSync(path.join(next,'index.html'),
+      '<style>canvas{color:orange}</style><script>function moveEnemy(){return 1;}</script>');
+    fs.writeFileSync(path.join(next,'sprite.png'),Buffer.from([137,80,78,71,13,10,26,10,6,6,6]));
+    // A broad '-copy' substring filter must not hide a legitimate new game.
+  }],
+  ['deception-copy-folder-forged-into-global-index',root=>{
+    fs.cpSync(path.join(root,'games/base'),path.join(root,'games/base-copy'),{recursive:true});
+    buildLibrary(root);
+    const ix=path.join(root,'shared/library/index.json');
+    const index=read(ix),base=index.games.find(game=>game.game==='base');
+    index.games.push({...base,game:'base-copy',source_root:'games/base-copy'});
+    write(ix,index);
+  }],
+  ['copy-folder-forged-manifest',root=>{
+    fs.cpSync(path.join(root,'games/base'),path.join(root,'games/base-copy'),{recursive:true});
+    buildLibrary(root);
+    const mf=read(path.join(root,'shared/library/base.json'));
+    mf.game='base-copy';
+    mf.source_root='games/base-copy';
+    write(path.join(root,'shared/library/base-copy.json'),mf);
+  }],
   ['missing-file-asset-with-cleaned-index',root=>{
     const mf=path.join(root,'shared/library/base.json'),ix=path.join(root,'shared/library/index.json');
     const m=read(mf),index=read(ix),removed=m.assets.find(a=>a.bytes!==undefined);

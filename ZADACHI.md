@@ -7,7 +7,7 @@
 - **Статус ставит сторож, а не ChatGPT** (GitHub Actions `ZADACHI watch`, каждые 30 минут, без ИИ): 🔨 В РАБОТЕ — коммит был меньше часа назад; ⚠ молчит — больше часа; 🛑 ЗАВИС — больше 3 часов, **надо толкнуть**; 💤 ЗАБРОШЕНО — больше 2 суток; ✅ ГОТОВО — PR слит; ✖ ЗАКРЫТО — PR закрыт без слияния; 🙋 НУЖЕН CLAUDE.
 - Задачу, которую ChatGPT не записал, сторож добавляет сам из открытых PR.
 
-Сторож проверил: 2026-11-10 10:05 UTC
+Сторож проверил: 2026-11-10 10:08 UTC
 
 <!-- ZADACHI:START -->
 **Итог:** 🛑 зависло 58 · ⚠ молчит 7 · 🔨 в работе 3 · 🙋 нужен Claude 7 · 💤 заброшено 40 · ✅ готово 6
@@ -54,7 +54,7 @@
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Q1: restore library live index, exclude copy games | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/q1-library-quality-20261110` | [#214](https://github.com/mpaykin1/meta6-lab/pull/214) | 2026-11-10 04:37 | 2026-11-10 04:49 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Закрыть устаревший красный PR #1 Twilight Island | МГЛ | MG-ремонтник | `lab/twilight-island-pass` | [#1](https://github.com/mpaykin1/meta6-lab/pull/1) | 2026-11-10 04:47 | — |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Restore original Ashen Path asset pack reference after sync | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/ashen-path-asset-pack-restore-1109` | [#208](https://github.com/mpaykin1/meta6-lab/pull/208) | 2026-11-09 16:54 | 2026-11-10 04:35 |
-| 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Compact agent context: STATUS, rules, CI summaries and traps | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/claude-context-compact` | [#211](https://github.com/mpaykin1/meta6-lab/pull/211) | 2026-11-10 04:06 | 2026-11-10 04:07 |
+| 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | Compact agent context: STATUS, rules, CI summaries and traps | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/claude-context-compact` | [#211](https://github.com/mpaykin1/meta6-lab/pull/211) | 2026-11-10 04:06 | 2026-11-10 04:07 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/rules-bot-trainer` | [#204](https://github.com/mpaykin1/meta6-lab/pull/204) | 2026-11-09 16:36 | 2026-11-10 02:51 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | M6 | МГЛ | MG-строитель-3 | `lab/mcp-connect` | [#192](https://github.com/mpaykin1/meta6-lab/pull/192) | 2026-11-09 22:25 | 2026-11-09 22:26 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/skin-rusty-robot` | [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | 2026-11-09 16:21 | 2026-11-09 19:38 |

@@ -35,6 +35,7 @@ jobs:
             n=0
           fi
           echo "SKIN_STAGE=$n" >> "$GITHUB_ENV"
+          if [ "$n" -ge 2 ]; then echo "SKIN_3D=true" >> "$GITHUB_ENV"; fi
       - name: Install image processing for original-sketch comparison
         if: github.event_name == 'push' && (env.SKIN_STAGE == '0' || env.SKIN_STAGE == '1')
         run: |
@@ -60,18 +61,18 @@ jobs:
           node scripts/skins/validate-skin-pack.mjs skins/packs/rusty-robot --stage 7
           node scripts/skins/mutate-skin-pack.mjs
       - name: Install free headless Chromium
-        if: env.SKIN_STAGE == '7'
+        if: env.SKIN_STAGE == '7' || env.SKIN_3D == 'true'
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1 sharp@0.34.4
           npx playwright install --with-deps chromium
       - name: Launch training game and capture front / side / rear
-        if: env.SKIN_STAGE == '7'
+        if: env.SKIN_STAGE == '7' || env.SKIN_3D == 'true'
         run: |
           set -euo pipefail
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/skin-trainer-http.log 2>&1 &
           node scripts/skins/capture-skin-preview.mjs
       - name: Real Chromium turntable and negative mutation checks
-        if: env.SKIN_STAGE == '7'
+        if: env.SKIN_STAGE == '7' || env.SKIN_3D == 'true'
         run: |
           set -euo pipefail
           node scripts/skins/verify-turntable.mjs skins/sources/rusty-robot
@@ -90,7 +91,7 @@ jobs:
           node scripts/skins/validate-skin-pack.mjs skins/packs/rusty-robot --stage 7
           node scripts/skins/mutate-skin-pack.mjs
       - uses: actions/upload-artifact@v4
-        if: env.SKIN_STAGE == '7'
+        if: env.SKIN_STAGE == '7' || env.SKIN_3D == 'true'
         with:
           name: rusty-robot-chrome-three-views
           path: |

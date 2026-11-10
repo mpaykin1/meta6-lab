@@ -8,6 +8,9 @@ export function validateWorkflow(text) {
   const problems=[];
   const requireText=(needle,reason)=>{if(!text.includes(needle))problems.push(reason);};
   requireText("branches: ['lab/skin-*']", 'запуск не охватывает остальные ветки скинов');
+  requireText('cancel-in-progress: true','без отмены старые прогоны пушат устаревшие пакеты');
+  requireText('group: skin-factory-${{ github.workflow }}-${{ github.ref }}',
+    'не разделены очереди разных веток и workflow');
   for(const ext of ['png','md'])
     requireText("'skins/sources/*/parts-sheet."+ext+"'",'нет trigger для parts-sheet.'+ext);
   requireText('for src in skins/sources/*; do','жёстко задан один скин вместо каталога источников');

@@ -94,11 +94,12 @@ function drawRuins(planes,vp,lightning){
  updateRuins();let count=0,mask=0;
  const landmarks=[];
  for(const ruin of ruins){
+  // Unique Observer landmarks have no guaranteed tight bounds: never cull by pillar radius.
+  if(ruin.id%6===0){landmarks.push(ruin);renderStats.visibleProps++;continue;}
   if(!window.MetaRender.sphereVisible(planes,ruin.x,ruin.y+2,ruin.z,5)){
    renderStats.culledProps++;continue;
   }
   renderStats.visibleProps++;
-  if(ruin.id%6===0){landmarks.push(ruin);continue;}
   mask|=1<<ruin.id;count++;
  }
  if(count){

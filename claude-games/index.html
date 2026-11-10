@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070810">
+<meta name="description" content="Игры META GAMES и Claude без рекламы. Мистические миры, приключения и экшен прямо в браузере, без установки и рекламных пауз.">
+<title>META GAMES · Игры без рекламы</title>
+<style>
+
+:root{color-scheme:dark;--bg:#070810;--ink:#f5f1e8;--gold:#f7c17e;--muted:#b1acb8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 15% -10%,#67305c60,transparent 55%),radial-gradient(ellipse at 90% 15%,#e1654333,transparent 50%),linear-gradient(180deg,#161021 0%,#080910 72%);opacity:1}
+body:after{content:"";position:fixed;inset:0;z-index:9;opacity:.11;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath filter='url(%23n)' opacity='.5' d='M0 0h120v120H0z'/%3E%3C/svg%3E")}
+header{max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:26px clamp(18px,5vw,64px);position:relative;z-index:2}
+.brand{display:flex;gap:12px;align-items:center;letter-spacing:.15em;font-size:clamp(17px,2vw,23px);font-weight:900}.crown{color:var(--gold);font-size:28px}.header-caption{font-size:11px;text-transform:uppercase;letter-spacing:.3em;color:#bdb5c4}
+.hero{max-width:1320px;margin:0 auto;padding:clamp(58px,7vw,105px) clamp(18px,5vw,64px) 50px;position:relative}
+.hero .orb{position:absolute;right:9%;top:0;border-radius:50%;width:clamp(220px,36vw,500px);aspect-ratio:1;background:radial-gradient(circle at 34% 30%,#ffc58c99,#e65a6960 25%,#9b407d20 50%,transparent 69%);filter:blur(6px);opacity:.65;pointer-events:none}
+.eyebrow{font-size:12px;letter-spacing:.34em;color:var(--gold);font-weight:700;text-transform:uppercase;margin:0 0 16px;position:relative}
+h1{font-size:clamp(56px,10vw,140px);line-height:.88;max-width:980px;letter-spacing:-.065em;margin:0;position:relative;font-weight:900}
+h1 span{color:var(--gold)}
+.lead{max-width:580px;font-size:clamp(18px,2.4vw,24px);color:#d2c4d0;margin:30px 0 30px;position:relative}
+.stats{display:flex;gap:22px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:14px;text-transform:uppercase;letter-spacing:.16em;position:relative}
+.stats b{font-size:27px;color:var(--gold);margin-right:4px}
+.line{height:1px;background:linear-gradient(90deg,transparent,#a76c6380,transparent);max-width:1200px;margin:0 auto}
+.section{max-width:1320px;margin:auto;padding:50px clamp(18px,5vw,64px) 110px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:22px;flex-wrap:wrap;margin-bottom:30px}
+.section-head h2{font-size:clamp(29px,4vw,52px);line-height:1;margin:0;letter-spacing:-.035em}
+.section-head p{color:var(--muted);margin:0;font-size:13px;letter-spacing:.09em}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.game-card{display:block;overflow:hidden;border:1px solid #b4a0b034;border-radius:18px;background:linear-gradient(145deg,#28202d,#15151d 65%);min-width:0;transition:transform .23s ease,border-color .23s ease,box-shadow .23s ease;box-shadow:0 15px 30px #0004}
+.game-card:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.game-card:hover{transform:translateY(-7px);border-color:#f3b57788;box-shadow:0 20px 40px #000a,0 0 26px #e2674a28}
+.art{position:relative;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(130deg,#563244,#28203b)}
+.art img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.game-card:hover img{transform:scale(1.05)}
+.art:after{content:"";position:absolute;inset:25% 0 0;background:linear-gradient(transparent,#0b0b12a0);pointer-events:none}
+.play-icon{position:absolute;z-index:1;right:15px;bottom:12px;display:grid;place-items:center;width:43px;height:43px;border:1px solid #f6d5a7aa;border-radius:100%;background:#120c18bf;color:#ffd197;font-size:17px;padding-left:3px}
+.game-info{padding:22px 22px 24px}.tag{color:var(--gold);font-size:10px;letter-spacing:.17em;text-transform:uppercase;margin:0 0 6px;font-weight:800}
+h3{font-size:clamp(19px,2.1vw,25px);line-height:1.12;margin:0 0 12px;letter-spacing:-.025em}.desc{min-height:46px;color:#b9b2c0;font-size:13px;margin:0 0 16px}
+.play-link{font-weight:900;color:#fff1db;display:flex;justify-content:space-between;align-items:center;letter-spacing:.17em;font-size:11px}.play-link span{font-size:23px;line-height:1;color:var(--gold)}
+footer{text-align:center;border-top:1px solid #f8d9be22;padding:33px 22px 50px;color:#9b94a5;font-size:12px}
+footer strong{display:block;color:#d9b18b;letter-spacing:.2em;margin-bottom:7px}
+@media(max-width:940px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding-top:80px}.header-caption{display:none}}
+@media(max-width:600px){.grid{grid-template-columns:1fr;gap:17px}.game-info{padding:20px}.desc{min-height:0}.hero{padding-top:68px;padding-bottom:45px}.stats{gap:14px}.section{padding-top:35px}.art{aspect-ratio:16/9}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+.language-nav{display:flex;align-items:center;gap:5px;flex-wrap:wrap}.language-nav a{padding:6px 9px;border:1px solid #d6aa7539;border-radius:8px;font-size:11px;font-weight:750;letter-spacing:.03em;color:#d5c9d7}.language-nav a:hover,.language-nav a:focus-visible{border-color:#f7c17e;color:#fff}.language-nav a[aria-current="page"]{background:#f7c17e22;border-color:#f7c17e;color:#f7c17e}@media(max-width:600px){.brand{font-size:16px;gap:5px;letter-spacing:.07em}.crown{font-size:21px}.language-nav a{font-size:10px;padding:5px 6px}.language-nav{gap:3px}header{gap:8px}}
+.details-link{display:block;color:#f7c17e;font-size:12px;font-weight:750;margin:0 0 13px;text-decoration:underline;text-underline-offset:3px}.details-link:focus-visible{outline:2px solid #f7c17e}
+.genre-nav{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 30px}.genre-nav span{color:#b1acb8;font-size:13px}.genre-nav a{display:inline-block;border:1px solid #f7c17e70;border-radius:30px;padding:7px 13px;color:#f7c17e;font-size:13px;font-weight:700}.genre-nav a:hover,.genre-nav a:focus-visible{background:#f7c17e22}
+.game-card>.art{display:block;text-decoration:none;line-height:0}.game-card>.art .play-icon{line-height:1}.game-card .play-link{text-decoration:none}.game-card .play-link:hover,.game-card .play-link:focus-visible{color:#f7c17e}.soon-card{max-width:650px;padding:24px;border:1px solid #f7c17e36;border-radius:18px;background:linear-gradient(125deg,#262131,#11121d)}.soon-card h3{font-size:28px;margin:4px 0}.soon-card p{color:#b9b2c0}.soon-label{font-size:11px;letter-spacing:.18em;color:#f7c17e}.details-link{display:block;color:#f7c17e;font-size:12px;font-weight:750;margin:0 0 13px;text-decoration:underline;text-underline-offset:3px}
+:root{--gold:#f6c18a}
+header{gap:18px;flex-wrap:wrap}
+.header-caption{margin-left:auto}
+.hero{min-height:420px;overflow:hidden}
+.hero .orb{animation:float 11s ease-in-out infinite}
+.hero h1{position:relative;z-index:1}
+.hero h1 span{color:var(--gold)}
+.hero .lead{max-width:730px}
+.stats span:first-child b{color:var(--gold)}
+.section{padding-top:54px}
+.section-head{align-items:end}
+.section-head p{max-width:520px}
+.catalog-controls{display:flex;gap:13px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin:12px 0 26px}
+.search{min-width:min(100%,265px);width:min(410px,100%);height:48px;background:#14121d;border:1px solid #73617a70;color:var(--ink);padding:0 17px;border-radius:8px;font:inherit;outline:none}
+.search:focus{border-color:var(--gold);box-shadow:0 0 0 3px #f6c18a22}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filter{font:600 12px/1.2 inherit;font-family:inherit;letter-spacing:.04em;padding:11px 14px;background:#17121f;color:#c8bece;border:1px solid #6f586b55;border-radius:100px;cursor:pointer}
+.filter:hover,.filter[aria-pressed="true"]{color:#100d14;border-color:var(--gold);background:var(--gold)}
+.game-card{position:relative;transition:transform .25s,border-color .25s}
+.game-card:hover{transform:translateY(-5px)}
+.game-card[hidden]{display:none!important}
+.art{overflow:hidden;background:radial-gradient(circle at 58% 24%,#6b728c,#1c263a 38%,#090b17 80%);isolation:isolate}
+.art:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#090b189e,transparent 56%);pointer-events:none}
+.art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s}
+.game-card:hover .art img{transform:scale(1.07)}
+.art-fallback{position:absolute;inset:0;overflow:hidden;display:block;background:linear-gradient(165deg,#544165 0%,#1e233d 45%,#080d1c 100%)}
+.art-fallback .moon{position:absolute;top:11%;left:55%;width:32%;aspect-ratio:1;border-radius:50%;background:#d7b9ad;box-shadow:0 0 45px #dec3a577,0 0 115px #bfa2aa55}
+.art-fallback .hill{position:absolute;bottom:-30%;left:-15%;width:140%;height:66%;background:#11192c;transform:rotate(-12deg);border-radius:50%}
+.art-fallback .hill.h2{left:28%;bottom:-38%;background:#080d1b;transform:rotate(16deg)}
+.art-fallback .tower{position:absolute;left:27%;bottom:24%;height:40%;width:8%;background:#131727;clip-path:polygon(30% 0%,70% 0%,70% 15%,100% 15%,100% 100%,0 100%,0 15%,30% 15%);box-shadow:0 0 30px #01050c}
+.game-card:nth-child(3n) .art-fallback{filter:hue-rotate(32deg)}
+.game-card:nth-child(4n) .art-fallback{filter:hue-rotate(135deg)}
+.cover-number{position:absolute;z-index:2;top:13px;left:16px;color:#ffebd9bb;letter-spacing:.1em;font-size:12px;font-weight:800}
+.game-actions{display:flex;align-items:center;gap:12px;justify-content:space-between}
+.game-actions .play-link{flex:1;text-align:center}
+.favorite{width:42px;height:42px;border:1px solid #8b79955e;border-radius:8px;background:#21192c;color:#eadce9;font-size:26px;cursor:pointer}
+.favorite[aria-pressed="true"]{color:#f6c18a;border-color:#f6c18a}
+.safety-note{display:inline-flex;gap:9px;align-items:center;font-size:13px;color:#e9d6bd;letter-spacing:.04em}
+.safety-note:before{content:"";height:8px;width:8px;border-radius:50%;background:#83d5ad;box-shadow:0 0 14px #83d5ad}
+.empty{padding:30px;text-align:center;color:#b2aab9}
+footer{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+@keyframes float{50%{transform:translateY(-17px)}}
+@media(max-width:700px){.header-caption{font-size:10px;letter-spacing:.1em}.hero{min-height:360px}.catalog-controls{align-items:stretch}.search{width:100%}.filters{justify-content:flex-start}.section-head{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><a class="brand" href="../meta-games/" aria-label="META GAMES"><span class="crown" aria-hidden="true">♛</span><span>META GAMES</span></a><span class="header-caption">CLAUDE · AD-FREE EDITION</span></header>
+<main>
+<section class="hero"><div class="orb" aria-hidden="true"></div>
+<p class="eyebrow">СОБСТВЕННЫЕ ИГРЫ · БЕЗ РЕКЛАМНЫХ ПАУЗ</p>
+<h1>ENTER THE<br><span>DREAMVERSE.</span></h1>
+<p class="lead">Наши миры, созданные с Claude. Мистика, древние острова, туман, свет и приключения. Запускай игру прямо на META GAMES — без переходов на Playgama.</p>
+<div class="stats"><span><b>10</b> миров в каталоге</span><span>Один мир историй</span><span>Игра без рекламы</span></div>
+</section>
+<div class="line"></div>
+<section class="section" id="games">
+<div class="section-head"><h2>ВЫБЕРИ СВОЙ МИР</h2><p>Все игровые ссылки ведут только на собственные версии в META GAMES Lab.</p></div>
+<div class="catalog-controls">
+<input id="search" class="search" type="search" aria-label="Найти игру" placeholder="Найти игру или мир..." autocomplete="off">
+<div class="filters" role="group" aria-label="Фильтр игр">
+<button class="filter" type="button" data-filter="all" aria-pressed="true">Все</button>
+<button class="filter" type="button" data-filter="adventure" aria-pressed="false">Приключения</button>
+<button class="filter" type="button" data-filter="action" aria-pressed="false">Экшен</button>
+<button class="filter" type="button" data-filter="mystery" aria-pressed="false">Мистика</button>
+<button class="filter" type="button" data-filter="favorites" aria-pressed="false">♡ Избранное</button>
+</div>
+</div>
+<div class="grid" id="catalog">
+<article class="game-card" data-kind="adventure" data-title="twilight island" data-index="0">
+ <a class="art" href="../observer-world-en-v7/" aria-label="Играть в Twilight Island" title="Twilight Island"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">01</span></a>
+ <div class="game-info"><p class="tag">Realm 01 · Fantasy / Creation</p><h3>Twilight Island</h3><p class="desc">A living island of construction, discovery and mysterious inhabitants.</p>
+ <div class="game-actions"><a class="play-link" href="../observer-world-en-v7/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Twilight Island в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
+<article class="game-card" data-kind="action" data-title="ashen path" data-index="1">
+ <a class="art" href="../ashen-sumerek/" aria-label="Играть в Ashen Path" title="Ashen Path"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">02</span></a>
+ <div class="game-info"><p class="tag">Realm 02 · Action / Survival</p><h3>Ashen Path</h3><p class="desc">Walk a broken world where danger waits beyond the glow.</p>
+ <div class="game-actions"><a class="play-link" href="../ashen-sumerek/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Ashen Path в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
+<article class="game-card" data-kind="mystery" data-title="underwater world" data-index="2">
+ <a class="art" href="../underwater-world/" aria-label="Играть в Underwater World" title="Underwater World"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">03</span></a>
+ <div class="game-info"><p class="tag">Realm 03 · Underwater / Mystery</p><h3>Underwater World</h3><p class="desc">Descend past the light into a strange and restless deep.</p>
+ <div class="game-actions"><a class="play-link" href="../underwater-world/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Underwater World в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
+<article class="game-card" data-kind="adventure" data-title="three worlds" data-index="3">
+ <a class="art" href="../three-worlds-game/" aria-label="Играть в Three Worlds" title="Three Worlds"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">04</span></a>
+ <div class="game-info"><p class="tag">Realm 04 · Connected / Adventure</p><h3>Three Worlds</h3><p class="desc">Cross the boundaries between different lives and landscapes.</p>
+ <div class="game-actions"><a class="play-link" href="../three-worlds-game/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Three Worlds в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
+<article class="game-card" data-kind="adventure" data-title="veil terraces" data-index="4">
+ <a class="art" href="../games/veil-terraces/" aria-label="Играть в Veil Terraces" title="Veil Terraces"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">05</span></a>
+ <div class="game-info"><p class="tag">Realm 05 · Exploration / Mystery</p><h3>Veil Terraces</h3><p class="desc">Explore endless mist-veiled terraces, cross ancient ruins and reclaim six lost memories.</p>
+ <div class="game-actions"><a class="play-link" href="../games/veil-terraces/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Veil Terraces в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
+<article class="game-card" data-kind="adventure" data-title="twilight and ash ii" data-index="5">
+ <a class="art" href="../games/sumerki-i-pepel-2/" aria-label="Играть в Twilight and Ash II" title="Twilight and Ash II"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">06</span></a>
+ <div class="game-info"><p class="tag">Realm 06 · Story / Survival</p><h3>Twilight and Ash II</h3><p class="desc">Save the magic tree on a lifeless island: find the seed, water it, defend it until it turns the world over.</p>
+ <div class="game-actions"><a class="play-link" href="../games/sumerki-i-pepel-2/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Twilight and Ash II в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
+<article class="game-card" data-kind="action" data-title="twilight isle classic" data-index="6">
+ <a class="art" href="../games/twilight-isle-classic/" aria-label="Играть в Twilight Isle Classic" title="Twilight Isle Classic"><img src="https://static.playgama.com/p-img/pg/preview/add4314320ea4daf90ba2e8a78cdaa39?width=640" alt="Twilight Isle Classic — обложка игры" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">07</span></a>
+ <div class="game-info"><p class="tag">Realm 07 · Action / Reference</p><h3>Twilight Isle Classic</h3><p class="desc">The original voxel island at dusk: collect the coins, arm yourself and light the lighthouse before night wins.</p>
+ <div class="game-actions"><a class="play-link" href="../games/twilight-isle-classic/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Twilight Isle Classic в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
+<article class="game-card" data-kind="adventure" data-title="twilight isles" data-index="7">
+ <a class="art" href="../games/twilight-isles/" aria-label="Играть в Twilight Isles" title="Twilight Isles"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">08</span></a>
+ <div class="game-info"><p class="tag">Realm 08 · Adventure / Reference</p><h3>Twilight Isles</h3><p class="desc">Swim an endless archipelago, dodge the breaching whale and light every lighthouse on its own terms.</p>
+ <div class="game-actions"><a class="play-link" href="../games/twilight-isles/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Twilight Isles в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
+<article class="game-card" data-kind="action" data-title="archer in the fog" data-index="8">
+ <a class="art" href="../games/archer-in-the-fog/" aria-label="Играть в Archer in the Fog" title="Archer in the Fog"><img src="https://static.playgama.com/p-img/pg/preview/5e6d981431574fb4b87cd8ff3d1e85fe?width=640" alt="Archer in the Fog — обложка игры" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">09</span></a>
+ <div class="game-info"><p class="tag">Realm 09 · Archery / Reference</p><h3>Archer in the Fog</h3><p class="desc">Hold a ruined tower above the clouds against a dragon that plunges and ambushes out of the blue fog.</p>
+ <div class="game-actions"><a class="play-link" href="../games/archer-in-the-fog/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Archer in the Fog в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
+<article class="game-card" data-kind="action" data-title="broken city" data-index="9">
+ <a class="art" href="../games/broken-city/" aria-label="Играть в Broken City" title="Broken City"><img src="https://static.playgama.com/p-img/pg/preview/c563a434bf84447cbe48ae2c117948d2?width=640" alt="Broken City — обложка игры" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">10</span></a>
+ <div class="game-info"><p class="tag">Realm 10 · Platformer / Reference</p><h3>Broken City</h3><p class="desc">A folded comic-noir city hangs overhead: climb falling houses, stomp creepy toys and find out whose night this is.</p>
+ <div class="game-actions"><a class="play-link" href="../games/broken-city/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Broken City в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
+</div>
+<p class="empty" id="empty" hidden>Игры по этому запросу не найдены.</p>
+</section>
+</main>
+<footer><strong>META GAMES</strong><span class="safety-note">Без рекламы и рекламных наград</span><span>© 2026 · META GAMES LAB</span></footer>
+<script>
+(() => {
+  "use strict";
+  const cards = Array.from(document.querySelectorAll(".game-card"));
+  const filters = Array.from(document.querySelectorAll(".filter"));
+  const search = document.getElementById("search");
+  const empty = document.getElementById("empty");
+  const key = "meta-games:claude-favorites:v1";
+  let favorites = new Set();
+  try {
+    const saved = JSON.parse(localStorage.getItem(key) || "[]");
+    if (Array.isArray(saved)) favorites = new Set(saved.filter(Number.isInteger));
+  } catch (error) {
+    console.warn("Не удалось загрузить избранное", error);
+  }
+  let active = "all";
+  const save = () => {
+    try { localStorage.setItem(key, JSON.stringify([...favorites])); }
+    catch (error) { console.warn("Не удалось сохранить избранное", error); }
+  };
+  const refresh = () => {
+    const needle = search.value.trim().toLocaleLowerCase();
+    let count = 0;
+    for (const card of cards) {
+      const category = card.dataset.kind;
+      const index = Number(card.dataset.index);
+      const favorite = favorites.has(index);
+      const button = card.querySelector(".favorite");
+      button.setAttribute("aria-pressed", String(favorite));
+      button.textContent = favorite ? "♥" : "♡";
+      const group = active === "all" || active === category || (active === "favorites" && favorite);
+      const text = card.textContent.toLocaleLowerCase();
+      const visible = group && (!needle || text.includes(needle));
+      card.hidden = !visible;
+      if (visible) count++;
+    }
+    empty.hidden = count !== 0;
+  };
+  for (const filter of filters) {
+    filter.addEventListener("click", () => {
+      active = filter.dataset.filter;
+      filters.forEach(button => button.setAttribute("aria-pressed", String(button === filter)));
+      refresh();
+    });
+  }
+  for (const card of cards) {
+    card.querySelector(".favorite").addEventListener("click", () => {
+      const index = Number(card.dataset.index);
+      if (favorites.has(index)) favorites.delete(index);
+      else favorites.add(index);
+      save();
+      refresh();
+    });
+  }
+  search.addEventListener("input", refresh);
+  refresh();
+})();
+</script>
+</body>
+</html>

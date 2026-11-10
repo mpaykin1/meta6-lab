@@ -632,6 +632,51 @@
   ],
   "solutions": [
     {
+      "id": "245915f40a03f7fe419c8a9e",
+      "game": "twilight-isles",
+      "kind": "solution",
+      "name": "wet",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/twilight-isles/bot-adapter.js",
+      "lines": [
+        107,
+        114
+      ],
+      "sha256": "410e1b07f564cd983fe47438c4d1e50839b72d4ca7909967cb47a31b1439c6c7"
+    },
+    {
+      "id": "253228aea08076651c6f3d13",
+      "game": "twilight-isles",
+      "kind": "solution",
+      "name": "module:bot-adapter.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/twilight-isles/bot-adapter.js",
+      "lines": [
+        1,
+        187
+      ],
+      "sha256": "c906f0f7b7834e447bc1ca2fe2ef921dff28b5a88a80a086cafa852336338c0b"
+    },
+    {
+      "id": "2ed4dc2527b39ccf34b9185e",
+      "game": "twilight-isles",
+      "kind": "solution",
+      "name": "liveHeart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/twilight-isles/bot-adapter.js",
+      "lines": [
+        96,
+        102
+      ],
+      "sha256": "850548506e48e53fe431254c621e7b71ee10d324f48f22386d694140d2a0be02"
+    },
+    {
       "id": "813815c0696c9d5d7f3a45f9",
       "game": "twilight-isles",
       "kind": "solution",
@@ -662,19 +707,19 @@
       "sha256": "e511186bb0751f8a0e17ed736d6812f3e05d2d0776bfda5d9803046b6e04ed78"
     },
     {
-      "id": "b44ecf370c7638f20013fb9f",
+      "id": "bc1c27a9dfeb2731b4327b23",
       "game": "twilight-isles",
       "kind": "solution",
-      "name": "module:bot-adapter.js",
+      "name": "danger",
       "purpose": [
-        "game-module"
+        "gameplay"
       ],
       "source_path": "games/twilight-isles/bot-adapter.js",
       "lines": [
-        1,
-        121
+        117,
+        131
       ],
-      "sha256": "61df4c07bee8a72ab4066fe53a3d7fcf427e6c67ed854a20cda62c86672164a5"
+      "sha256": "727aaabf964b0178dd65a3ed7e5eb13e1fef4d2186bee9a15a781fd1d32e5cf2"
     },
     {
       "id": "c09c25c6c860d5b711d6d321",
@@ -692,6 +737,21 @@
       "sha256": "0ca990e5e84d4464603f1c8df924e934ef2b91cd6398520a7dd643e0c37da5cc"
     },
     {
+      "id": "c121d1f15f412761c138edef",
+      "game": "twilight-isles",
+      "kind": "solution",
+      "name": "safeRetreat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/twilight-isles/bot-adapter.js",
+      "lines": [
+        103,
+        133
+      ],
+      "sha256": "9a430ed1a91836f7afadd94146d8de098c925b352199e3e6fd8f132bfb64d8eb"
+    },
+    {
       "id": "f80ae5d1a73e1d48aa986f18",
       "game": "twilight-isles",
       "kind": "solution",
@@ -705,6 +765,21 @@
         11
       ],
       "sha256": "f77d2b9f99838b5819c1a19ed49cb138e152f1c8d15dd0eae1559528cf8a74ed"
+    },
+    {
+      "id": "f8372f93afd843b1d9ed4716",
+      "game": "twilight-isles",
+      "kind": "solution",
+      "name": "threats",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/twilight-isles/bot-adapter.js",
+      "lines": [
+        85,
+        95
+      ],
+      "sha256": "1e99c0a67179ea71dcf48d8a12c8cb7ebf201862c97d701bc744346cd8bfa1ad"
     },
     {
       "id": "2b829a952d6c2549112e26e7",
@@ -18648,6 +18723,6 @@
   "counts": {
     "assets": 43,
     "file_assets": 4,
-    "solutions": 1200
+    "solutions": 1205
   }
 }

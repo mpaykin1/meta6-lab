@@ -558,6 +558,21 @@
   ],
   "solutions": [
     {
+      "id": "0954438dc27ea5fd400b4a8a",
+      "game": "twilight-isle-classic",
+      "kind": "solution",
+      "name": "module:bot-adapter.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/twilight-isle-classic/bot-adapter.js",
+      "lines": [
+        1,
+        210
+      ],
+      "sha256": "830c0b1437ee23b290f4a03832a7552af735f63235418941ccde8a33d221083c"
+    },
+    {
       "id": "20a4d0d7933e36d6dcfac5ea",
       "game": "twilight-isle-classic",
       "kind": "solution",
@@ -573,19 +588,94 @@
       "sha256": "21df922426b51c277d536be2a89459376c595a9f288732a6d35830d2959674c0"
     },
     {
-      "id": "2a9a5a1c0594249b6345b94b",
+      "id": "21e9cca2c38e90f8915db4b5",
       "game": "twilight-isle-classic",
       "kind": "solution",
-      "name": "module:bot-adapter.js",
+      "name": "danger",
       "purpose": [
-        "game-module"
+        "gameplay"
       ],
       "source_path": "games/twilight-isle-classic/bot-adapter.js",
       "lines": [
-        1,
-        144
+        134,
+        148
       ],
-      "sha256": "79e63e060dec7bfa6faf4fac482adcf1c405e9c4cee12096165b70a4203f5502"
+      "sha256": "727aaabf964b0178dd65a3ed7e5eb13e1fef4d2186bee9a15a781fd1d32e5cf2"
+    },
+    {
+      "id": "3f4de960de15656e8ef85d47",
+      "game": "twilight-isle-classic",
+      "kind": "solution",
+      "name": "liveHeart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/twilight-isle-classic/bot-adapter.js",
+      "lines": [
+        113,
+        119
+      ],
+      "sha256": "850548506e48e53fe431254c621e7b71ee10d324f48f22386d694140d2a0be02"
+    },
+    {
+      "id": "42142e26629990b1f12409d2",
+      "game": "twilight-isle-classic",
+      "kind": "solution",
+      "name": "col",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/twilight-isle-classic/bot-adapter.js",
+      "lines": [
+        181,
+        188
+      ],
+      "sha256": "d1247d30b18b323db461c26cdc614552f6e256890c78f29adada2fbe25af8b5b"
+    },
+    {
+      "id": "52d028606dd15b62da76fd71",
+      "game": "twilight-isle-classic",
+      "kind": "solution",
+      "name": "threats",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/twilight-isle-classic/bot-adapter.js",
+      "lines": [
+        102,
+        112
+      ],
+      "sha256": "1e99c0a67179ea71dcf48d8a12c8cb7ebf201862c97d701bc744346cd8bfa1ad"
+    },
+    {
+      "id": "7fcf04d37b413b7642395520",
+      "game": "twilight-isle-classic",
+      "kind": "solution",
+      "name": "safeRetreat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/twilight-isle-classic/bot-adapter.js",
+      "lines": [
+        120,
+        150
+      ],
+      "sha256": "9a430ed1a91836f7afadd94146d8de098c925b352199e3e6fd8f132bfb64d8eb"
+    },
+    {
+      "id": "8314f069a6431f91a240fefd",
+      "game": "twilight-isle-classic",
+      "kind": "solution",
+      "name": "wet",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/twilight-isle-classic/bot-adapter.js",
+      "lines": [
+        124,
+        131
+      ],
+      "sha256": "410e1b07f564cd983fe47438c4d1e50839b72d4ca7909967cb47a31b1439c6c7"
     },
     {
       "id": "8349846e08e44ec0b95395d1",
@@ -631,21 +721,6 @@
         29
       ],
       "sha256": "ced20e598eba55084cc92ee8a132a049240dba1c88a8da4db29efce343436607"
-    },
-    {
-      "id": "ecd32cfc9673d44d0564799d",
-      "game": "twilight-isle-classic",
-      "kind": "solution",
-      "name": "col",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/twilight-isle-classic/bot-adapter.js",
-      "lines": [
-        115,
-        122
-      ],
-      "sha256": "d1247d30b18b323db461c26cdc614552f6e256890c78f29adada2fbe25af8b5b"
     },
     {
       "id": "fcdbc44d1c395f910ed6849d",
@@ -17674,6 +17749,6 @@
   "counts": {
     "assets": 38,
     "file_assets": 4,
-    "solutions": 1140
+    "solutions": 1145
   }
 }

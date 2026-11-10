@@ -1531,7 +1531,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-01-side-right",
@@ -1559,7 +1560,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-09-side-left",
@@ -1587,7 +1589,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-09-side-right",
@@ -1615,7 +1618,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-20-side-left",
@@ -1643,7 +1647,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-20-side-right",
@@ -1671,7 +1676,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-21-side-left",
@@ -1699,7 +1705,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-21-side-right",
@@ -1727,7 +1734,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-24-side-left",
@@ -1755,7 +1763,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-24-side-right",
@@ -1783,7 +1792,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-25-side-left",
@@ -1811,7 +1821,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-25-side-right",
@@ -1839,7 +1850,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.12
     },
     {
       "id": "part-02-profile-left",
@@ -1867,7 +1879,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-02-profile-right",
@@ -1895,7 +1908,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-03-profile-left",
@@ -1923,7 +1937,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-03-profile-right",
@@ -1951,7 +1966,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-04-profile-left",
@@ -1979,7 +1995,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-04-profile-right",
@@ -2007,7 +2024,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-05-profile-left",
@@ -2035,7 +2053,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-05-profile-right",
@@ -2063,7 +2082,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-11-profile-left",
@@ -2091,7 +2111,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-11-profile-right",
@@ -2119,7 +2140,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-13-profile-left",
@@ -2147,7 +2169,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-13-profile-right",
@@ -2175,7 +2198,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-14-profile-left",
@@ -2203,7 +2227,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-14-profile-right",
@@ -2231,7 +2256,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-15-profile-left",
@@ -2259,7 +2285,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-15-profile-right",
@@ -2287,7 +2314,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-16-profile-left",
@@ -2315,7 +2343,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-16-profile-right",
@@ -2343,7 +2372,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-17-profile-left",
@@ -2371,7 +2401,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-17-profile-right",
@@ -2399,7 +2430,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-18-profile-left",
@@ -2427,7 +2459,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-18-profile-right",
@@ -2455,7 +2488,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-19-profile-left",
@@ -2483,7 +2517,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-19-profile-right",
@@ -2511,7 +2546,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-22-profile-left",
@@ -2539,7 +2575,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-22-profile-right",
@@ -2567,7 +2604,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-23-profile-left",
@@ -2595,7 +2633,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-23-profile-right",
@@ -2623,7 +2662,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-27-profile-left",
@@ -2651,7 +2691,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-27-profile-right",
@@ -2679,7 +2720,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-28-profile-left",
@@ -2707,7 +2749,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-28-profile-right",
@@ -2735,7 +2778,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-29-profile-left",
@@ -2763,7 +2807,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-29-profile-right",
@@ -2791,7 +2836,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-30-profile-left",
@@ -2819,7 +2865,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-30-profile-right",
@@ -2847,7 +2894,8 @@
       ],
       "depth": 1,
       "material": "rust-transparent",
-      "anim": []
+      "anim": [],
+      "profileVolume": 0.085
     },
     {
       "id": "part-24-rear",

@@ -8,15 +8,15 @@
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
 | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |
-| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | жду прогон [KONTUR Guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42757252697), [B1](https://github.com/mpaykin1/meta6-lab/actions/runs/42757215058); PR [#207](https://github.com/mpaykin1/meta6-lab/pull/207) |
+| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | в работе: свежий main, исходник и паспорт, [SHA 40b5090](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1), [CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42771433576) |
 | #206 | эталон | `lab/king-of-ash-reference-1109` | Эталон: Король Пепла (оригинальный HTML) | closed | закрыт: дубль, сохранён [PR #207](https://github.com/mpaykin1/meta6-lab/pull/207), [PR #206](https://github.com/mpaykin1/meta6-lab/pull/206) |
-| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | жду прогон [KONTUR Guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42757617454), [B1](https://github.com/mpaykin1/meta6-lab/actions/runs/42757543335), [PR #202](https://github.com/mpaykin1/meta6-lab/pull/202) |
+| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | в работе: свежий main, один исходный HTML, [SHA ac1a411](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15), [CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42771311983) |
 | #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | open | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |
 | #191 | эталон | `lab/sunken-city-reference-1109` | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и катало | open | в работе 2026-11-10 04:47 UTC |
-| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | блокировано: 135 коммитов позади main, меняет LAB_QUEUE.md, нет обязательных зелёных CI; [разбор](https://github.com/mpaykin1/meta6-lab/pull/189#issuecomment-6759536405) |
+| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | в работе: свежий main, только исходник и паспорт, [SHA b10c103](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7), [CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42771623047) |
 | #137 | эталон | `lab/demonic-hand-webgl2-reference` | Add Demonic Hand as owner-approved WebGL2 reference | closed | | закрыт stale: конфликт с main, красный [Portal Visited](https://github.com/mpaykin1/meta6-lab/actions/runs/42496471465), [PR #137](https://github.com/mpaykin1/meta6-lab/pull/137) |
-| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | |
-| #133 | эталон | `lab/asqura-single-graphics-reference-20261108` | ASQURA Office — первый эталон графики и анимации | open | |
+| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | в работе: эталон только reference/, [SHA d407c98](https://github.com/mpaykin1/meta6-lab/commit/d407c9874da27dff343e4657dd8e931a4c202751), [CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42770958074) |
+| #133 | эталон | `lab/asqura-single-graphics-reference-20261108` | ASQURA Office — первый эталон графики и анимации | open | в работе: эталон только reference/, [SHA 902805d](https://github.com/mpaykin1/meta6-lab/commit/902805dc3edfc225a2eccd67df467093655abc74), [CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42771125580) |
 | #213 | код | `lab/library-machine-sync` | L1: Library Machine — индекс нового эталона skin-trainer | closed | |
 | #212 | код | `lab/claude-context-compact-v2` | Сократить контекст Claude: STATUS, короткие Actions, PROMPT_ | closed | |
 | #211 | код | `lab/claude-context-compact` | Compact agent context: STATUS, rules, CI summaries and traps | closed | |
@@ -69,11 +69,11 @@
 | #9 | код | `lab/agent-game-candidate` | [BLOCKED — source policy] Procedural World_server candidate  | closed | закрыт stale: политика исходников, [PR #9](https://github.com/mpaykin1/meta6-lab/pull/9) |
 | #8 | код | `lab/bot-safe-autorepair` | Sandbox auto-repair: real META BOT replay, safe viewport fix | open | |
 | #7 | код | `lab/reuse-library-search` | Reusable code library: source search, browser index, local M | closed | |
-| #6 | код | `lab/world-doors-progress` | lab: persistent visited-world doors without touching accepte | open | |
-| #5 | код | `lab/oss-commercial-kit` | lab: коммерчески разрешённые OSS-модули и игровая сцена | open | |
-| #4 | код | `lab/native-catalog-and-steam` | lab: native catalog and safe Steam/Android candidates | open dirty | |
+| #6 | код | `lab/world-doors-progress` | lab: persistent visited-world doors without touching accepte | open | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42285373653), [PR #6](https://github.com/mpaykin1/meta6-lab/pull/6) |
+| #5 | код | `lab/oss-commercial-kit` | lab: коммерчески разрешённые OSS-модули и игровая сцена | open | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42286065563), [PR #5](https://github.com/mpaykin1/meta6-lab/pull/5) |
+| #4 | код | `lab/native-catalog-and-steam` | lab: native catalog and safe Steam/Android candidates | open dirty | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42285011814), [PR #4](https://github.com/mpaykin1/meta6-lab/pull/4) |
 | #3 | код | `lab/twilight-island-bot` | lab: Twilight Island — бот проходит весь остров | open | |
-| #2 | код | `lab/twilight-isles-pass` | lab: Twilight Isles GPU optimization, single RAF, first-isla | open | |
+| #2 | код | `lab/twilight-isles-pass` | lab: Twilight Isles GPU optimization, single RAF, first-isla | open | закрыт stale: 48ч+ без коммита, [красный bot](https://github.com/mpaykin1/meta6-lab/actions/runs/42356322630), [PR #2](https://github.com/mpaykin1/meta6-lab/pull/2) |
 | #1 | код | `lab/twilight-island-pass` | lab: Twilight Island bot pass — combined #291 and #303 | closed | закрыт stale: красный META BOT, нет коммитов >48 ч — [PR #1](https://github.com/mpaykin1/meta6-lab/pull/1), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42356940858) |
 
 ## Библиотека

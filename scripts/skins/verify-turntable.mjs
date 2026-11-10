@@ -88,7 +88,7 @@ function outlineFraction(img,main){
    const xx=x+dx,yy=y+dy;
    if(xx<0||xx>=256||yy<0||yy>=320)continue;
    const k=(yy*256+xx)*3;
-   if(Math.abs(img[k]-26)+Math.abs(img[k+1]-15)+Math.abs(img[k+2]-20)<38){
+   if(Math.abs(img[k]-26)+Math.abs(img[k+1]-15)+Math.abs(img[k+2]-20)<=12){
     dark=true;break;
    }
   }

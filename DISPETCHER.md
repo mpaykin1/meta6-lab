@@ -40,7 +40,7 @@
 - SHA: `ea42a0c576e7798017481b6ca7890f53401bbc16` · последний коммит: 2026-11-10T05:16:36Z
 - Проблема: Красная проверка: kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/42761118793/job/129650326103), browser-open-all (https://github.com/mpaykin1/meta6-lab/actions/runs/42761118981/job/129649711612)
 - Задание: Исправь kontur-guard по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42761118793/job/129650326103 и повтори CI.
-- Взял: —
+- Взял: чат ChatGPT — Рабочий чат МГ/МГЛ 2026-11-10T10:24:35Z
 
 ### PR #229
 - PR: https://github.com/mpaykin1/meta6-lab/pull/229

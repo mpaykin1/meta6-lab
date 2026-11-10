@@ -1,16 +1,23 @@
 {
-  "generated_at": "2026-11-10T09:30:26.879Z",
+  "generated_at": "2026-11-10T09:34:18.887Z",
   "sha": {
-    "lab": "f7537015aa68485ac465bc9b52fda6a9c5e0d031",
+    "lab": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42790555009",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42791770811",
   "review": {
     "protected": [
+      {
+        "number": 230,
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
       {
         "number": 227,
         "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
@@ -59,7 +66,7 @@
       },
       {
         "workflow": "Investigation snapshot",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42789487864",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42790554713",
         "step": "Refresh investigation snapshot from GitHub"
       }
     ],
@@ -229,11 +236,16 @@
     ]
   },
   "pr": {
-    "open": 42,
+    "open": 41,
     "conflicts": "нет данных",
-    "merged": 6,
+    "merged": 7,
     "closed": 36,
     "mergedItems": [
+      {
+        "number": 230,
+        "title": "Dispatcher: retry queue push when main moves",
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88"
+      },
       {
         "number": 227,
         "title": "MG Dispatcher: automated PR triage queue",
@@ -266,6 +278,13 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 230,
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
       {
         "number": 227,
         "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
@@ -309,7 +328,7 @@
   },
   "changes": {
     "lab": {
-      "count": 255,
+      "count": 257,
       "folders": ".github:5, AGENTS.md:1, automation:7, BIBLIOTEKA.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:11, shared:2, ZADACHI.md:1"
     },
     "mg": {
@@ -382,6 +401,7 @@
     "| 26 | 10.11.2026 | Ошибка GitHub Compare возвращала строку «нет данных», а сводка печатала undefined коммитов | Подмена сравнения на исключение API | `scripts/status/selftest.mjs`: `failed-compare-disguised-as-zero` |",
     "| 27 | 10.11.2026 | KONTUR Guard отверг бот сводки за прямую зависимость от `process.env.GITHUB_*` (К4.1) | [красный KONTUR Guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42759421016) | `scripts/status/selftest.mjs`: `raw-github-env-rejected` (переменные передаются через `STATUS_*` workflow) |",
     "| 28 | 10.11.2026 | Ошибка GitHub API для списка PR интерпретировалась как отсутствие защищённых PR (пустой список вместо «нет данных») | Изолированный ответ API 403 | `scripts/status/selftest.mjs`: `pr-api-error-hides-protected-merges` |",
-    "| 29 | 10.11.2026 | Диспетчер: KONTUR Guard отклонил условное чтение `process.env.GITHUB_*` и ветвление по `process.argv` в модуле библиотеки | [KONTUR Guard 42787965154](https://github.com/mpaykin1/meta6-lab/actions/runs/42787965154) | Разделён модуль `build.mjs` и `run.mjs`, авторизация без ветвления по среде; существующая вечная ловушка `scripts/kontur/mutate-kontur-guard.mjs` и `scripts/dispetcher/test/build.test.mjs` |"
+    "| 29 | 10.11.2026 | Диспетчер: KONTUR Guard отклонил условное чтение `process.env.GITHUB_*` и ветвление по `process.argv` в модуле библиотеки | [KONTUR Guard 42787965154](https://github.com/mpaykin1/meta6-lab/actions/runs/42787965154) | Разделён модуль `build.mjs` и `run.mjs`, авторизация без ветвления по среде; существующая вечная ловушка `scripts/kontur/mutate-kontur-guard.mjs` и `scripts/dispetcher/test/build.test.mjs` |",
+    "| 30 | 10.11.2026 | Диспетчер: первый прогон на main упал — пока строилась очередь, в main пришёл чужой коммит и `git push` отклонён (fetch first), DISPETCHER.md не появился | [прогон 42790554576](https://github.com/mpaykin1/meta6-lab/actions/runs/42790554576) | Шаг `Commit queue` в `.github/workflows/dispetcher.yml`: до 5 попыток — свежий main, пересборка очереди, повторный push; проверка `scripts/dispetcher/test/build.test.mjs`: `trap: workflow retries push when main moved` |"
   ]
 }

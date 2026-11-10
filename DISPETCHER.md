@@ -2,14 +2,6 @@
 
 Итог: зависло 15 · конфликт 0 · красные проверки 3 · нужен Claude 18
 
-### PR #87
-- PR: https://github.com/mpaykin1/meta6-lab/pull/87
-- Ветка: `lab/platform-play-connect-earn-20261107`
-- SHA: `d66f304967540ca9b9c144140ea51c971b3e2365` · последний коммит: 2026-11-10T22:15:48Z
-- Проблема: Красная проверка: bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169)
-- Задание: Исправь bot по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169 и повтори CI.
-- Взял: MG-строитель-4 2026-11-10T23:37:00Z
-
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132
 - Ветка: `lab/cycle5-archer-meta-adfree-1108`
@@ -171,6 +163,7 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
+- [#87](https://github.com/mpaykin1/meta6-lab/pull/87) bot selftest: смена цели вызывает ложное застревание; защищённое ядро, https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
 - [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
 - [#191](https://github.com/mpaykin1/meta6-lab/pull/191) Эталон «Затонувший город»: исходный ZIP, 3D-витрина и каталог ассетов

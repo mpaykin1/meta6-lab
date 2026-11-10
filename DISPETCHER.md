@@ -2,14 +2,6 @@
 
 Итог: зависло 19 · конфликт 0 · красные проверки 8 · нужен Claude 7
 
-### PR #131
-- PR: https://github.com/mpaykin1/meta6-lab/pull/131
-- Ветка: `lab/owner-graphics-animation-references-20261108`
-- SHA: `650ae1ebf6793bd31be220e232309dceb1a8e20e` · последний коммит: 2026-11-08T15:04:21Z
-- Проблема: Красная проверка: bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42492922303/job/128768971831), browser (https://github.com/mpaykin1/meta6-lab/actions/runs/42492922266/job/128768971779)
-- Задание: Исправь bot по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42492922303/job/128768971831 и повтори CI.
-- Взял: MG-ремонтник 2026-11-10T09:58:00Z
-
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132
 - Ветка: `lab/cycle5-archer-meta-adfree-1108`
@@ -211,6 +203,7 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
+- [#131](https://github.com/mpaykin1/meta6-lab/pull/131) Защищённый workflow; bot level 2 застрял; ветка устарела на 482 коммита
 - [#192](https://github.com/mpaykin1/meta6-lab/pull/192) M6
 - [#134](https://github.com/mpaykin1/meta6-lab/pull/134) ABYSS GLOW — второй эталон графики и анимации
 - [#202](https://github.com/mpaykin1/meta6-lab/pull/202) Эталон: Лучник в тумане — исходный HTML владельца

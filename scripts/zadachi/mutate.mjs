@@ -8,7 +8,7 @@ const here = dirname(fileURLToPath(import.meta.url)), src = readFileSync(resolve
 const M = [
   ['порог зависания 3 ч убран', 'if (minutes < 180)', 'if (minutes < 99999)'],
   ['закрытый PR считается готовым', "r.status = '✖ ЗАКРЫТО без слияния'", "r.status = '✅ ГОТОВО · слито'"],
-  ['сторож не добавляет незаписанные PR', "if (p.state !== 'open' || seen.has(key(project, branch))) continue;", 'if (true) continue;'],
+  ['сторож не добавляет незаписанные PR', "if (p.state !== 'open' || seen.has(identityKey(project, branch))) continue;", 'if (true) continue;'],
   ['зависшие не поднимаются наверх', 'rank(x.status) - rank(y.status) ||', ''],
   ['обман: верить «ГОТОВО» без слияния', 'noBranch(r.branch) && /ГОТОВО/.test(r.status)', '/ГОТОВО/.test(r.status)'],
   ['игнорировать конфликт', "p?.mergeable_state === 'dirty'", "p?.mergeable_state === 'clean'"],

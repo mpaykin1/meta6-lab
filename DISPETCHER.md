@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 16 · конфликт 6 · красные проверки 2 · нужен Claude 17
+Итог: зависло 16 · конфликт 3 · красные проверки 2 · нужен Claude 17
 
 ### PR #87
 - PR: https://github.com/mpaykin1/meta6-lab/pull/87
@@ -18,14 +18,6 @@
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: MG-строитель-1 2026-11-10T22:05:00Z
 
-### PR #204
-- PR: https://github.com/mpaykin1/meta6-lab/pull/204
-- Ветка: `lab/rules-bot-trainer`
-- SHA: `4feb49cfa3cc6810a0d49c8489796a54b4e97a90` · последний коммит: 2026-11-10T02:51:45Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: —
-
 ### PR #205
 - PR: https://github.com/mpaykin1/meta6-lab/pull/205
 - Ветка: `lab/owner-pult`
@@ -34,27 +26,11 @@
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
 
-### PR #218
-- PR: https://github.com/mpaykin1/meta6-lab/pull/218
-- Ветка: `lab/remont-r1-library`
-- SHA: `bd5d65f72c4964383256e605f01242a35c6ec69f` · последний коммит: 2026-11-10T06:22:46Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: —
-
-### PR #225
-- PR: https://github.com/mpaykin1/meta6-lab/pull/225
-- Ветка: `lab/render-broken-city-safe-1110`
-- SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: —
-
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132
 - Ветка: `lab/cycle5-archer-meta-adfree-1108`
 - SHA: `0578f035b4e0092de6a3aa5ef788d66413e07e4e` · последний коммит: 2026-11-10T21:49:15Z
-- Проблема: Красная проверка: mutate-kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/42908743176/job/130153488252), mutate-kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/42908732928/job/130153466790), library-machine (https://github.com/mpaykin1/meta6-lab/actions/runs/42908732957/job/130153452894), verify-storefront (https://github.com/mpaykin1/meta6-lab/actions/runs/42908732934/job/130153452132)
+- Проблема: Красная проверка: mutate-kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/42908743176/job/130153488252), mutate-kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/42908732928/job/130153466790), library-machine (https://github.com/mpaykin1/meta6-lab/actions/runs/42908732957/job/130153452894), changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42908733024/job/130153452778), verify-storefront (https://github.com/mpaykin1/meta6-lab/actions/runs/42908732934/job/130153452132)
 - Задание: Исправь mutate-kontur-guard по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42908743176/job/130153488252 и повтори CI.
 - Взял: MG-ремонтник 2026-11-10T21:48:19Z
 
@@ -90,6 +66,22 @@
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
 
+### PR #204
+- PR: https://github.com/mpaykin1/meta6-lab/pull/204
+- Ветка: `lab/rules-bot-trainer`
+- SHA: `4feb49cfa3cc6810a0d49c8489796a54b4e97a90` · последний коммит: 2026-11-10T02:51:45Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
+### PR #218
+- PR: https://github.com/mpaykin1/meta6-lab/pull/218
+- Ветка: `lab/remont-r1-library`
+- SHA: `bd5d65f72c4964383256e605f01242a35c6ec69f` · последний коммит: 2026-11-10T06:22:46Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
 ### PR #221
 - PR: https://github.com/mpaykin1/meta6-lab/pull/221
 - Ветка: `lab/zadachi-tolkach`
@@ -102,6 +94,14 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/222
 - Ветка: `lab/ci-ochered-concurrency`
 - SHA: `029164aebd1b34edf406a147b0af7b080f9e16ae` · последний коммит: 2026-11-10T08:53:27Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
+### PR #225
+- PR: https://github.com/mpaykin1/meta6-lab/pull/225
+- Ветка: `lab/render-broken-city-safe-1110`
+- SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —

@@ -1,6 +1,62 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 16 · конфликт 0 · красные проверки 2 · нужен Claude 17
+Итог: зависло 15 · конфликт 6 · красные проверки 3 · нужен Claude 18
+
+### PR #203
+- PR: https://github.com/mpaykin1/meta6-lab/pull/203
+- Ветка: `lab/skin-rusty-robot`
+- SHA: `edf413f27244552cd36889fa1b555a9a062a9b56` · последний коммит: 2026-11-09T19:38:00Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: MG-строитель-1 2026-11-10T22:05:00Z
+
+### PR #204
+- PR: https://github.com/mpaykin1/meta6-lab/pull/204
+- Ветка: `lab/rules-bot-trainer`
+- SHA: `4feb49cfa3cc6810a0d49c8489796a54b4e97a90` · последний коммит: 2026-11-10T02:51:45Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: —
+
+### PR #205
+- PR: https://github.com/mpaykin1/meta6-lab/pull/205
+- Ветка: `lab/owner-pult`
+- SHA: `16715714f06e0071871dc6df59560b2ba312867c` · последний коммит: 2026-11-09T17:01:32Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: —
+
+### PR #218
+- PR: https://github.com/mpaykin1/meta6-lab/pull/218
+- Ветка: `lab/remont-r1-library`
+- SHA: `bd5d65f72c4964383256e605f01242a35c6ec69f` · последний коммит: 2026-11-10T06:22:46Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: —
+
+### PR #221
+- PR: https://github.com/mpaykin1/meta6-lab/pull/221
+- Ветка: `lab/zadachi-tolkach`
+- SHA: `757890f0aa4809e92d3466c55a1db98269f133e6` · последний коммит: 2026-11-10T08:48:21Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: —
+
+### PR #225
+- PR: https://github.com/mpaykin1/meta6-lab/pull/225
+- Ветка: `lab/render-broken-city-safe-1110`
+- SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: —
+
+### PR #87
+- PR: https://github.com/mpaykin1/meta6-lab/pull/87
+- Ветка: `lab/platform-play-connect-earn-20261107`
+- SHA: `d66f304967540ca9b9c144140ea51c971b3e2365` · последний коммит: 2026-11-10T22:15:48Z
+- Проблема: Красная проверка: bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169)
+- Задание: Исправь bot по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169 и повтори CI.
+- Взял: —
 
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132
@@ -24,52 +80,12 @@
 - SHA: `c7e07c9afa9462bc3512edca92696602c2c3a126` · последний коммит: 2026-11-09T15:37:22Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: НУЖЕН CLAUDE — защищённый scripts/kontur/guard.mjs
+- Взял: —
 
 ### PR #201
 - PR: https://github.com/mpaykin1/meta6-lab/pull/201
 - Ветка: `lab/reference-foggy-awakening-scene-1`
 - SHA: `e12b75439b0ea173cc9bb87712d158139567923a` · последний коммит: 2026-11-09T15:53:28Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: НУЖЕН CLAUDE — PR #201 меняет оригинальный ZIP-эталон (reference-uploads/); самостоятельное слияние запрещено
-
-### PR #203
-- PR: https://github.com/mpaykin1/meta6-lab/pull/203
-- Ветка: `lab/skin-rusty-robot`
-- SHA: `edf413f27244552cd36889fa1b555a9a062a9b56` · последний коммит: 2026-11-09T19:38:00Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: MG-строитель-1 2026-11-10T22:05:00Z
-
-### PR #204
-- PR: https://github.com/mpaykin1/meta6-lab/pull/204
-- Ветка: `lab/rules-bot-trainer`
-- SHA: `4feb49cfa3cc6810a0d49c8489796a54b4e97a90` · последний коммит: 2026-11-10T02:51:45Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: НУЖЕН CLAUDE — PR #204 меняет .github/workflows/kontur-guard.yml и rules-bot.yml; самостоятельное слияние запрещено
-
-### PR #205
-- PR: https://github.com/mpaykin1/meta6-lab/pull/205
-- Ветка: `lab/owner-pult`
-- SHA: `16715714f06e0071871dc6df59560b2ba312867c` · последний коммит: 2026-11-09T17:01:32Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
-### PR #218
-- PR: https://github.com/mpaykin1/meta6-lab/pull/218
-- Ветка: `lab/remont-r1-library`
-- SHA: `bd5d65f72c4964383256e605f01242a35c6ec69f` · последний коммит: 2026-11-10T06:22:46Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
-### PR #221
-- PR: https://github.com/mpaykin1/meta6-lab/pull/221
-- Ветка: `lab/zadachi-tolkach`
-- SHA: `757890f0aa4809e92d3466c55a1db98269f133e6` · последний коммит: 2026-11-10T08:48:21Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
@@ -78,14 +94,6 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/222
 - Ветка: `lab/ci-ochered-concurrency`
 - SHA: `029164aebd1b34edf406a147b0af7b080f9e16ae` · последний коммит: 2026-11-10T08:53:27Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
-### PR #225
-- PR: https://github.com/mpaykin1/meta6-lab/pull/225
-- Ветка: `lab/render-broken-city-safe-1110`
-- SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
@@ -163,9 +171,9 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
-- [#191](https://github.com/mpaykin1/meta6-lab/pull/191) Эталон «Затонувший город»: защищённые исходники и обязательная проверка META BOT/CI
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
 - [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
+- [#191](https://github.com/mpaykin1/meta6-lab/pull/191) Эталон «Затонувший город»: исходный ZIP, 3D-витрина и каталог ассетов
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния
 - [#209](https://github.com/mpaykin1/meta6-lab/pull/209) Библиотека игр: эталоны, системы, ассеты и MCP
 - [#54](https://github.com/mpaykin1/meta6-lab/pull/54) Оптимизация всех игр: довести PR #54, #59, #60

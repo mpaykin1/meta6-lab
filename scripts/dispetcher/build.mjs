@@ -25,14 +25,18 @@ export function render(cards,claude=[],previous='',now=Date.now()){
  const counts={stalled:cards.filter(c=>c.stalled).length,conflicts:cards.filter(c=>c.conflict).length,red:cards.filter(c=>c.red).length,claude:claude.length};
  let s='# ДИСПЕТЧЕР МГ/МГЛ\n\nИтог: зависло '+counts.stalled+' · конфликт '+counts.conflicts+' · красные проверки '+counts.red+' · нужен Claude '+counts.claude+'\n\n';
  for(const c of ordered){const claimed=old.get(c.id)||'—';const claim=claimed!=='—'&&!available('Взял: '+claimed,c.lastCommit,now)?claimed:'—';
- s+='### PR #'+c.id+'\n- PR: https://github.com/'+repo+'/pull/'+c.id+'\n- Ветка: `'+c.branch+'`\n- Проблема: '+c.problem+'\n- Задание: '+c.action+'\n- Взял: '+claim+'\n\n';
+ s+='### PR #'+c.id+'\n- PR: https://github.com/'+repo+'/pull/'+c.id+'\n- Ветка: `'+c.branch+'`\n- SHA: `'+c.headSha+'` · последний коммит: '+c.lastCommit+'\n- Проблема: '+c.problem+'\n- Задание: '+c.action+'\n- Взял: '+claim+'\n\n';
  }
  s+='## НУЖЕН CLAUDE\n'+(claude.map(c=>'- [#'+c.id+'](https://github.com/'+repo+'/pull/'+c.id+') '+c.title).join('\n')||'—')+'\n';
  return s;
 }
+export function assertNotEmpty(tasksMarkdown,cards){
+ if(/🛑|ЗАВИС/.test(tasksMarkdown)&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
+}
 async function main(){
  const tasks=parseTasks(await fs.readFile('ZADACHI.md','utf8'));
  const finish=await fs.readFile('rules/09-platforma/FINISH.md','utf8');
+ const finishIds=[...finish.matchAll(/^\|\s*([MBLP]\d+)\s*\|[^|]*\|[^|]*\|\s*НЕТ\b/gm)].map(m=>m[1]);
  let previous='';try{previous=await fs.readFile('DISPETCHER.md','utf8')}catch{}
  const cards=[],claude=[];
  for(const t of tasks){
@@ -43,18 +47,22 @@ async function main(){
  const failed=checks.check_runs.filter(x=>['failure','timed_out','action_required'].includes(x.conclusion)).map(x=>({name:x.name,url:x.html_url}));
  failed.push(...statuses.statuses.filter(x=>['failure','error'].includes(x.state)).map(x=>({name:x.context,url:x.target_url})));
  const conflict=pr.mergeable===false||pr.mergeable_state==='dirty';
- const stale=Date.now()-Date.parse(pr.head.repo?.pushed_at||pr.updated_at)>172800000;
+ const commit=await api('/commits/'+pr.head.sha);
+ const lastCommit=commit.commit.committer.date;
+ const stale=Date.now()-Date.parse(lastCommit)>172800000;
  const stalled=/ЗАВИС/.test(t.status),isClaude=/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(pr.body||'');
- const c={...t,branch:pr.head.ref,conflict,red:failed.length>0,stalled,finish:finish.includes(t.title),lastCommit:pr.head.repo?.pushed_at||pr.updated_at};
+ const label=t.title+' '+(pr.title||'');
+ const isFinish=finishIds.some(id=>new RegExp('(^|[^A-Z0-9])'+id+'([^A-Z0-9]|$)','i').test(label));
+ const c={...t,branch:pr.head.ref,headSha:pr.head.sha,conflict,red:failed.length>0,stalled,finish:isFinish,lastCommit};
  if(isClaude){claude.push(c);continue}
  if(!conflict&&!failed.length&&!stalled&&!stale)continue;
  c.priority=conflict?0:failed.length?1:stalled?2:3;
  c.problem=conflict?'Конфликт с main':failed.length?'Красная проверка: '+failed.map(x=>x.name+' ('+x.url+')').join(', '):stalled?'🛑 ЗАВИС':'💤 ЗАБРОШЕНО более 2 суток';
- c.action=conflict?'Обнови ветку из main, разреши конфликт, затем проверь CI.':failed.length?'Исправь '+failed[0].name+' по логу '+failed[0].url+' и повтори CI.':stalled?'Продолжи работу по PR, проверь CI и доведи до слияния.':c.finish?'Доведи пункт FINISH.md до зелёных проверок.':'Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.';
+ c.action=conflict?'Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.':failed.length?'Исправь '+failed[0].name+' по логу '+failed[0].url+' и повтори CI.':stalled?'Продолжи работу по PR, проверь CI и доведи до слияния.':c.finish?'Доведи пункт FINISH.md до зелёных проверок.':'Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.';
  cards.push(c);
  }
  const output=render(cards,claude,previous);
- if(/ЗАВИС/.test(await fs.readFile('ZADACHI.md','utf8'))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
+ assertNotEmpty(await fs.readFile('ZADACHI.md','utf8'),cards);
  await fs.writeFile('DISPETCHER.md',output);
  console.log(output.slice(0,250));
 }

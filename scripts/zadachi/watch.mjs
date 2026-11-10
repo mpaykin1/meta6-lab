@@ -75,26 +75,88 @@ export function apply(text, data, now) {
   return out;
 }
 
+// Retry GitHub's asynchronous mergeability calculation exactly three times.
+export function resolveMergeability(fetchOne, pause = ms => execFileSync('sleep', [String(ms / 1000)])) {
+  let result;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt) pause(3000);
+    result = fetchOne();
+    if (result?.mergeable !== null && result?.mergeable !== undefined) return result;
+  }
+  // Unknown is not a conflict: fall back to last commit time.
+  return {...(result || {}), mergeable: null, mergeable_state: null};
+}
+
 function collect(rows) {
   const repo = process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab';
-  const api = p => { try { return JSON.parse(execFileSync('gh', ['api', p], {maxBuffer: 64e6}).toString()); } catch { return null; } };
-  const last = ref => { const c = api(`repos/${repo}/commits?sha=${encodeURIComponent(ref)}&per_page=1`); return c?.[0] ? Date.parse(c[0].commit.committer.date) : undefined; };
-  const pulls = {}, branches = {};
-  const put = (p, withCommit) => { pulls[p.head.ref] = {number: p.number, title: p.title, state: p.state, merged: !!p.merged_at, sha: p.merge_commit_sha, created: Date.parse(p.created_at), lastCommit: withCommit ? last(p.head.sha) : undefined}; };
-  for (let page = 1; page < 6; page++) { const l = api(`repos/${repo}/pulls?state=open&per_page=100&page=${page}`) || []; l.forEach(p => put(p, true)); if (l.length < 100) break; }
+  const mgRepo = process.env.MG_REPOSITORY || 'mpaykin1/meta6';
+  const api = p => {
+    try {
+      return JSON.parse(execFileSync('gh', ['api', p], {maxBuffer: 64e6}).toString());
+    } catch (error) {
+      console.error('ZADACHI API unavailable:', p, error.message);
+      return null;
+    }
+  };
+  const last = (repository, ref) => {
+    const c = api(`repos/${repository}/commits?sha=${encodeURIComponent(ref)}&per_page=1`);
+    return c?.[0] ? Date.parse(c[0].commit.committer.date) : undefined;
+  };
+  const pulls = {}, mgPulls = {}, branches = {};
+  const put = (repository, p, withCommit) => {
+    const open = p.state === 'open';
+    const detail = open ? resolveMergeability(
+      () => api(`repos/${repository}/pulls/${p.number}`)) : p;
+    const checks = open ? api(
+      `repos/${repository}/commits/${p.head.sha}/check-runs?per_page=100`) : null;
+    const failedChecks = [...new Set((checks?.check_runs || [])
+      .filter(c => ['failure', 'timed_out', 'cancelled'].includes(c.conclusion))
+      .map(c => clean(c.name)))];
+    const item = {
+      number: p.number, title: p.title, state: p.state, merged: !!p.merged_at,
+      sha: p.merge_commit_sha, repo: repository,
+      mergeable: detail?.mergeable ?? null,
+      mergeable_state: detail?.mergeable_state ?? null,
+      failedChecks, created: Date.parse(p.created_at),
+      lastCommit: withCommit ? last(repository, p.head.sha) : undefined,
+    };
+    (repository === mgRepo ? mgPulls : pulls)[p.head.ref] = item;
+  };
+  for (const repository of [repo, mgRepo]) {
+    for (let page = 1; page < 6; page++) {
+      const l = api(`repos/${repository}/pulls?state=open&per_page=100&page=${page}`) || [];
+      l.forEach(p => put(repository, p, true));
+      if (l.length < 100) break;
+    }
+  }
   for (const r of rows) {
-    if (noBranch(r.branch) || pulls[r.branch] || /ГОТОВО · слито|ЗАКРЫТО без/.test(r.status)) continue;
-    const l = api(`repos/${repo}/pulls?state=all&head=${repo.split('/')[0]}:${encodeURIComponent(r.branch)}&per_page=5`) || [];
+    const repository = r.project === 'МГ' ? mgRepo : repo;
+    const source = r.project === 'МГ' ? mgPulls : pulls;
+    if (noBranch(r.branch) || source[r.branch] ||
+        /ГОТОВО · слито|ЗАКРЫТО без/.test(r.status)) continue;
+    const owner = repository.split('/')[0];
+    const l = api(`repos/${repository}/pulls?state=all&head=${owner}:${encodeURIComponent(r.branch)}&per_page=5`) || [];
     const p = l.find(x => x.merged_at) || l[0];
-    if (p) put(p, !p.merged_at && p.state === 'open'); else { const t = last(r.branch); if (t) branches[r.branch] = t; }
+    if (p) put(repository, p, false);
+    else {
+      const t = last(repository, r.branch);
+      if (t) branches[`${repository}:${r.branch}`] = t;
+    }
   }
   const zanyato = [], zf = 'rules/09-platforma/ZANYATO.md';
   if (existsSync(zf)) for (const line of readFileSync(zf, 'utf8').split('\n')) {
     const c = line.split('|').map(s => s.trim());
-    if (c.length >= 6 && /^lab\//.test(c[2])) zanyato.push({item: c[1], branch: c[2], who: c[3], at: c[4].replace(' UTC', '')});
+    if (c.length >= 6 && /^lab\//.test(c[2])) {
+      zanyato.push({item: c[1], branch: c[2], who: c[3], at: c[4].replace(' UTC', '')});
+    }
   }
-  for (const z of zanyato) if (!pulls[z.branch] && !rows.some(r => r.branch === z.branch)) { const t = last(z.branch); if (t) branches[z.branch] = t; }
-  return {repo, pulls, branches, zanyato};
+  for (const z of zanyato) {
+    if (!pulls[z.branch] && !rows.some(r => r.branch === z.branch && r.project !== 'МГ')) {
+      const t = last(repo, z.branch);
+      if (t) branches[`${repo}:${z.branch}`] = t;
+    }
+  }
+  return {repo, mgRepo, pulls, mgPulls, branches, zanyato};
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] || '').href) {

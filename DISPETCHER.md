@@ -1,14 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 16 · конфликт 1 · красные проверки 5 · нужен Claude 13
-
-### PR #87
-- PR: https://github.com/mpaykin1/meta6-lab/pull/87
-- Ветка: `lab/platform-play-connect-earn-20261107`
-- SHA: `0859d03f53007101c76c8f900964192c0764d139` · последний коммит: 2026-11-07T14:44:44Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-строитель-4 2026-11-10T11:44:00Z
+Итог: зависло 19 · конфликт 0 · красные проверки 4 · нужен Claude 13
 
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132
@@ -16,7 +8,7 @@
 - SHA: `5df13fa89886ff8820e3910f2e2885056e500104` · последний коммит: 2026-11-09T09:51:36Z
 - Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42596607316/job/129090670043), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42596607205/job/129090665983)
 - Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42596607316/job/129090670043 и повтори CI.
-- Взял: MG-строитель-1 2026-11-10T10:06:12Z
+- Взял: —
 
 ### PR #190
 - PR: https://github.com/mpaykin1/meta6-lab/pull/190
@@ -33,14 +25,6 @@
 - Проблема: Красная проверка: kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42800339516/job/129775902899)
 - Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42800339516/job/129775902899 и повтори CI.
 - Взял: чат ChatGPT — Рабочий чат МГ/МГЛ 2026-11-10T10:24:35Z
-
-### PR #233
-- PR: https://github.com/mpaykin1/meta6-lab/pull/233
-- Ветка: `lab/import-five-cc0-packs`
-- SHA: `0ae6fcc6008e59f9304e65f1f8f5ee67ecac3827` · последний коммит: 2026-11-10T10:38:05Z
-- Проблема: Красная проверка: kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42800819832/job/129777533806)
-- Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42800819832/job/129777533806 и повтори CI.
-- Взял: MG-строитель-3 2026-11-10T12:30:41Z
 
 ### PR #234
 - PR: https://github.com/mpaykin1/meta6-lab/pull/234
@@ -154,6 +138,14 @@
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
 
+### PR #222
+- PR: https://github.com/mpaykin1/meta6-lab/pull/222
+- Ветка: `lab/ci-ochered-concurrency`
+- SHA: `029164aebd1b34edf406a147b0af7b080f9e16ae` · последний коммит: 2026-11-10T08:53:27Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
 ### PR #224
 - PR: https://github.com/mpaykin1/meta6-lab/pull/224
 - Ветка: `lab/merge-universal`
@@ -166,6 +158,14 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/225
 - Ветка: `lab/render-broken-city-safe-1110`
 - SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
+### PR #228
+- PR: https://github.com/mpaykin1/meta6-lab/pull/228
+- Ветка: `lab/game-design-expertise-audit-20261110`
+- SHA: `14d15c7ee2e23679d74b3290cf794d0ab1c96605` · последний коммит: 2026-11-10T09:11:18Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
@@ -203,6 +203,7 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
+- [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния
 - [#209](https://github.com/mpaykin1/meta6-lab/pull/209) Библиотека игр: эталоны, системы, ассеты и MCP
 - [#54](https://github.com/mpaykin1/meta6-lab/pull/54) Оптимизация всех игр: довести PR #54, #59, #60
 - [#134](https://github.com/mpaykin1/meta6-lab/pull/134) ABYSS GLOW — второй эталон графики и анимации
@@ -215,4 +216,3 @@
 - [#129](https://github.com/mpaykin1/meta6-lab/pull/129) fix(meta): Twilight Isles 2 plays without ads, with free revival
 - [#131](https://github.com/mpaykin1/meta6-lab/pull/131) META GAMES: 10 эталонов графики и анимации из оригиналов владельца
 - [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
-- [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния

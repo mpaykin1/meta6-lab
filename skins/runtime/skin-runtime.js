@@ -78,6 +78,13 @@ async function load(url,THREE){
    let mesh;
    if(layer==="3d"){
     mesh=new THREE.Mesh(geometry(p),mat);group.add(mesh);
+   }else if(p.profileVolume && tex){
+    // Only side/back profiles use textured volume. Accepted frontal decals
+    // remain unchanged. The author PNG is mapped to the visible side face.
+    const thick=Math.max(.055,Math.min(.18,p.profileVolume));
+    const geo=new THREE.BoxGeometry(d[0],d[1],thick);
+    mesh=new THREE.Mesh(geo,mat);
+    group.add(mesh);
    }else{
     const geo=new THREE.PlaneGeometry(d[0],d[1]);
     const depth=layer==="2.5d"?(p.file?1:Math.min(5,Math.max(1,p.depth||1))):1;

@@ -46,7 +46,11 @@ jobs:
         run: node scripts/library/mutate-library.mjs
       - name: Check PR catalog is committed
         if: github.event_name == 'pull_request'
-        run: git diff --exit-code -- shared/library
+        run: |
+          if ! git diff --quiet -- shared/library; then
+            echo "::error::Library manifests are outdated. Run node scripts/library/extract-all.mjs"
+            exit 1
+          fi
       - name: Commit newly extracted assets on the feature branch
         if: github.event_name == 'push' && github.ref != 'refs/heads/main'
         run: |

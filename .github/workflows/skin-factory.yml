@@ -14,6 +14,7 @@ on:
       - 'scripts/skins/verify-visual-fidelity.mjs'
       - 'scripts/skins/mutate-visual-fidelity.mjs'
       - 'skins/runtime/skin-runtime.js'
+      - 'games/skin-trainer/index.html'
       - 'scripts/skins/verify-skin-factory-workflow.mjs'
       - 'scripts/skins/mutate-skin-factory-workflow.mjs'
       - '.github/workflows/skin-factory.yml'

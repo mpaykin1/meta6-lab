@@ -8,6 +8,8 @@ on:
       - 'scripts/skins/cut-sheet.mjs'
       - 'scripts/skins/mutate-cut-sheet.mjs'
       - 'scripts/skins/build-pack.mjs'
+      - 'scripts/skins/verify-side-profile.mjs'
+      - 'scripts/skins/mutate-side-profile.mjs'
       - 'scripts/skins/mutate-build-pack.mjs'
       - 'scripts/skins/preview.mjs'
       - 'scripts/skins/mutate-preview.mjs'
@@ -76,6 +78,13 @@ jobs:
           done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Собрать реальный пакет из новых PNG
         run: while IFS= read -r src; do node scripts/skins/build-pack.mjs "$src"; done < "$RUNNER_TEMP/skin-sources.txt"
+      - name: Проверить боковые поверхности и три мутации
+        run: |
+          set -euo pipefail
+          while IFS= read -r src; do
+            node scripts/skins/verify-side-profile.mjs "$src"
+            node scripts/skins/mutate-side-profile.mjs "$src"
+          done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Проверить ловушки сборщика (включая обман старым файлом)
         run: |
           set -euo pipefail

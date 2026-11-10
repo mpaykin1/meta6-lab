@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/library/catalog-systems.mjs'
+      - 'scripts/library/asset-links.mjs'
       - 'scripts/library/catalog-cli.mjs'
       - 'scripts/library/mutate-catalog-build.mjs'
       - 'scripts/library/mcp-test/**'
@@ -62,14 +63,14 @@ jobs:
         run: npm exec --prefix scripts/library/mcp-test -- playwright install --with-deps chromium
       - name: Catch deceptive browser loading results
         run: node scripts/library/mutate-verify-load.mjs
-      - name: Official MCP SDK stdio integration
-        if: github.event_name == 'pull_request'
-        run: node scripts/library/mcp-test/client.mjs
       - name: Run real headless Chromium solution and GLB probes
         run: node scripts/library/verify-load.mjs --write
       - name: 'Strict L3 acceptance: all systems and models must actually load'
         if: github.event_name == 'pull_request'
         run: node scripts/library/verify-load.mjs --verify --require-all
+      - name: Official MCP SDK stdio integration
+        if: github.event_name == 'pull_request'
+        run: node scripts/library/mcp-test/client.mjs
       - name: Commit generated catalog only to the feature branch
         if: github.event_name == 'push' && github.ref == 'refs/heads/lab/library-catalog'
         run: |

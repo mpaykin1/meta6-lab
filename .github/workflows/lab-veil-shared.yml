@@ -20,3 +20,9 @@ jobs:
         env:
           META_BOT_FPS_FILE: .meta-bot-cache/fps.json
         run: node scripts/meta-bot/run.mjs games/veil-terraces-shared
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

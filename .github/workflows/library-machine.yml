@@ -72,3 +72,9 @@ jobs:
           branch: lab/library-machine-sync
           title: 'Library Machine: sync newly uploaded game sources'
           body: 'Automatic exact-source library manifests and SHA-256 copies, max 50 MiB. Requires Claude review; no automatic merge.'
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

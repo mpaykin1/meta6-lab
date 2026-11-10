@@ -20,3 +20,9 @@ jobs:
       - run: node --check scripts/shared/build-index.mjs
       - run: node scripts/shared/build-index.mjs --check
       - run: node scripts/shared/verify-approved-runtime.mjs
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

@@ -43,3 +43,9 @@ jobs:
         env:
           BOT_GAMES: ${{ steps.scope.outputs.games }}
         run: node scripts/meta-bot/run.mjs $BOT_GAMES
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

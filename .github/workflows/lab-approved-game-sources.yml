@@ -33,3 +33,9 @@ jobs:
         run: |
           node --check scripts/lab/source-policy-gate.mjs
           node scripts/lab/source-policy-gate.mjs --changed "${{ github.event.pull_request.base.sha || github.sha }}"
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

@@ -40,6 +40,12 @@ jobs:
       - name: Check repair bot JavaScript
         run: node scripts/repair-bot/check-js.mjs
 
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs
   repair:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
@@ -103,3 +109,9 @@ jobs:
           fi
           echo "::error title=META Repair Bot::$pr_output"
           exit 1
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

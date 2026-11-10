@@ -53,3 +53,9 @@ jobs:
           { echo "**ПРОВЕРКА ЧЕСТНОСТИ** отчёта ${{ github.event.comment.html_url }} · прогон ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; echo; cat honesty.md; echo; cat progress.md; } > body.md
           gh issue comment "${{ github.event.issue.number }}" -F body.md
           exit $code
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

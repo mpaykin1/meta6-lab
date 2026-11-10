@@ -32,6 +32,12 @@ jobs:
           node -e "const fs=require('fs');const m=require('./dist/www/channel.json');if(!m.candidate||m.channel!=='google-play'||m.adsEnabled||m.games.length!==10)process.exit(1);"
           if npm run prepare:steam:release; then echo "Unsafe release without game approval"; exit 1; fi
           if npm run prepare:play:release; then echo "Unsafe Android release without game approval"; exit 1; fi
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs
   android-candidate:
     needs: package-catalog
     runs-on: ubuntu-24.04
@@ -61,3 +67,9 @@ jobs:
           name: meta-games-android-debug-candidate
           path: platforms/android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

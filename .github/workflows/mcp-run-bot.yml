@@ -31,6 +31,12 @@ jobs:
         run: node scripts/shared/verify-approved-mcp.mjs
       - name: Protect M1 permanent mutation compatibility
         run: node scripts/shared/mutate-mcp-list-games.mjs
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs
   real-veil-and-broken-copy:
     needs: verifier-and-mutations
     runs-on: ubuntu-24.04
@@ -46,3 +52,9 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Compare direct bot with MCP and reject broken temporary game
         run: node scripts/shared/verify-mcp-run-bot.mjs --real
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

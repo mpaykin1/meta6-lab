@@ -38,3 +38,9 @@ jobs:
           node scripts/platform/mutate-storefront.mjs
       - name: P1 every storefront game (200, errors, drawn canvas)
         run: node scripts/platform/verify-storefront.mjs
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

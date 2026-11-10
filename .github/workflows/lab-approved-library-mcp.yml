@@ -38,3 +38,9 @@ jobs:
       - run: node scripts/shared/mutate-mcp-list-games.mjs
       - run: node scripts/shared/verify-mcp-read-game.mjs
       - run: node scripts/shared/mutate-read-game.mjs
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

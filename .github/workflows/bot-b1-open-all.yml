@@ -20,6 +20,12 @@ jobs:
           node-version: '22'
       - name: Fail on console, pageerror, HTTP 404 and hardcoded catalog
         run: node scripts/platform/mutate-bot-open-all.mjs
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs
   browser-open-all:
     needs: permanent-mutations
     runs-on: ubuntu-24.04
@@ -37,3 +43,9 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Open every MCP list_games entry on desktop and mobile
         run: node scripts/platform/verify-bot-open-all.mjs
+      - name: Write compact checks summary
+        if: always()
+        env:
+          COMPACT_JOB_STATUS: ${{ job.status }}
+          COMPACT_JOB_NAME: ${{ github.job }}
+        run: node scripts/status/write-run-summary.mjs

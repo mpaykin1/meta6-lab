@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const s=process.env.COMPACT_JOB_STATUS||'failure';
+const state=s==='success'?'зелёный':'красный';
+const job=(process.env.COMPACT_JOB_NAME||'checks').replace(/[\r\n|]/g,' ').slice(0,90);
+const repo=process.env.GITHUB_REPOSITORY||'mpaykin1/meta6-lab';
+const url='https://github.com/'+repo+'/actions/runs/'+process.env.GITHUB_RUN_ID;
+const lines=['status: '+state,'workflow/job: '+job,'first_error: '+(s==='success'?'нет':'ошибка в шаге '+job+' (полный лог Actions)'),'run: '+url];
+fs.mkdirSync('reports',{recursive:true});
+fs.writeFileSync('reports/LAST_RUN.md',lines.join('\n')+'\n');
+if(process.env.GITHUB_STEP_SUMMARY)fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,lines.join('\n')+'\n');
+console.log(lines.join(' | '));

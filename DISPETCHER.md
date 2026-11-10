@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 23 · конфликт 0 · красные проверки 3 · нужен Claude 13
+Итог: зависло 22 · конфликт 0 · красные проверки 2 · нужен Claude 13
 
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132
@@ -9,14 +9,6 @@
 - Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42596607316/job/129090670043), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42596607205/job/129090665983)
 - Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42596607316/job/129090670043 и повтори CI.
 - Взял: MG-строитель-1 2026-11-10T13:04:27Z
-
-### PR #190
-- PR: https://github.com/mpaykin1/meta6-lab/pull/190
-- Ветка: `lab/bot-batch-1`
-- SHA: `697a026662cde89c7028b709e38513d5915a03de` · последний коммит: 2026-11-10T09:12:48Z
-- Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42788810398/job/129736704050), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42788809840/job/129736691483)
-- Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42788810398/job/129736704050 и повтори CI.
-- Взял: MG-ремонтник 2026-11-10T14:48:09Z
 
 ### PR #219
 - PR: https://github.com/mpaykin1/meta6-lab/pull/219

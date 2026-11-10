@@ -1,7 +1,6 @@
 # DOVODKA — журнал доводчика
-СЕЙЧАС ДЕЛАЮ: [МГЛ PR #113](https://github.com/mpaykin1/meta6-lab/pull/113) · ветка `lab/cycle2-broken-city-bot-config-20261107` · шаг сравнить с #200 и красные CI · с 2026-11-10 05:56 UTC
+СЕЙЧАС ДЕЛАЮ: —
 ## ОСТАЛОСЬ (сверху самое срочное)
-- [МГЛ #113](https://github.com/mpaykin1/meta6-lab/pull/113) — 🛑 завис: feat(bot): Broken City honest run configuration
 - [МГЛ #116](https://github.com/mpaykin1/meta6-lab/pull/116) — 🛑 завис: feat(bot): Broken City real-input strategy scaffold
 - [МГЛ #122](https://github.com/mpaykin1/meta6-lab/pull/122) — 🛑 завис: feat(meta-bot): honest gameplay adapters for Broken City and three island games
 - [МГЛ #124](https://github.com/mpaykin1/meta6-lab/pull/124) — 🛑 завис: ЛОР: Зерно последнего мира — эталон и карта мультивселенной META GAMES
@@ -97,4 +96,5 @@
 ## ЖУРНАЛ (новые строки сверху, старые не удалять)
 | Время UTC | PR / задача | Репо | Что было не так | Что сделал | Доказательство | Итог |
 |---|---|---|---|---|---|---|
+| 2026-11-10 05:57 | [#113](https://github.com/mpaykin1/meta6-lab/pull/113) | МГЛ | 348 коммитов позади main; провален настоящий бот; конфликтует с #200 | Сверил: стратегия и bot.json идентичны #200, но index.html различается; закрывать как дубль без переноса нельзя | [bot FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/42544601867), [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 🙋 НУЖЕН CLAUDE |
 | 2026-11-10 05:54 | [#100](https://github.com/mpaykin1/meta6-lab/pull/100) | МГЛ | PR отстал от main на 254 коммита, настоящий META BOT провален | Проверил рабочую ветку, актуальный CI и лог; после многократных неуспешных исправлений нужен разбор Claude | [красный bot](https://github.com/mpaykin1/meta6-lab/actions/runs/42598720847), [changed-games](https://github.com/mpaykin1/meta6-lab/actions/runs/42598720807) | 🙋 НУЖЕН CLAUDE |

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import { parseFinish, renderStatus, summarizeRuns } from "./status-a1.mjs";
+import { parseFinish, renderStatus, repositoryFromRemote, summarizeRuns, updateStatus } from "./status-a1.mjs";
 
 const ids = [
   "M1", "M2", "M3", "M4", "M5", "M6", "B1", "B2", "B3",
@@ -66,4 +66,12 @@ test("render keeps all required fields, unfinished checks and at most 20 lines",
 
 test("missing FINISH row must fail instead of silently reporting 100%", () => {
   assert.throws(() => parseFinish(makeFinish().replace(/\| P1 \|[^\n]+/, "")), /18 unique/);
+});
+
+test("A1 uses the actual git origin and requires explicit credentials", async () => {
+  assert.equal(repositoryFromRemote("https://github.com/engineer/new-repo.git"), "engineer/new-repo");
+  assert.equal(repositoryFromRemote("git@github.com:another/test-project.git"), "another/test-project");
+  assert.throws(() => repositoryFromRemote("https://other.host/engineer/new-repo"), /GitHub repository/);
+  await assert.rejects(updateStatus({ repository: "not/a/valid/repo", token: "present" }), /Valid GitHub repository/);
+  await assert.rejects(updateStatus({ repository: "owner/repo", token: "" }), /API token required/);
 });

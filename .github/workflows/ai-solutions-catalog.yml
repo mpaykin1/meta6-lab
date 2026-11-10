@@ -1,0 +1,36 @@
+name: AI Solutions Catalog
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/library/catalog-systems.mjs'
+      - 'scripts/library/source-policy.mjs'
+      - 'scripts/library/verify-catalog.mjs'
+      - 'scripts/library/mutate-catalog.mjs'
+      - 'shared/library/catalog-solutions.json'
+      - '.github/workflows/ai-solutions-catalog.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify extractor syntax
+        run: |
+          node --check scripts/library/catalog-systems.mjs
+          node --check scripts/library/verify-catalog.mjs
+          node --check scripts/library/mutate-catalog.mjs
+      - name: Run deceptive catalog mutations
+        run: node scripts/library/mutate-catalog.mjs
+      - name: Build catalog for first three games
+        run: node scripts/library/catalog-systems.mjs --games=twilight-isle-classic,broken-city,archer-in-the-fog
+      - name: Verify catalog
+        run: node scripts/library/verify-catalog.mjs
+      - name: Show system counts by game
+        run: node -e "const c=require('./shared/library/catalog-solutions.json');for(const g of new Set(c.solutions.map(s=>s.game)))console.log(g,c.solutions.filter(s=>s.game===g).length)"

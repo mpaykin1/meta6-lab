@@ -58,7 +58,7 @@ jobs:
         run: node scripts/library/mcp-test/client.mjs
       - name: Run real headless Chromium solution and GLB probes
         run: node scripts/library/verify-load.mjs --write
-      - name: Strict L3 acceptance: all systems and models must actually load
+      - name: 'Strict L3 acceptance: all systems and models must actually load'
         if: github.event_name == 'pull_request'
         run: node scripts/library/verify-load.mjs --verify --require-all
       - name: Commit generated catalog only to the feature branch

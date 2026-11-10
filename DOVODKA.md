@@ -1,5 +1,5 @@
 # DOVODKA — журнал доводчика
-СЕЙЧАС ДЕЛАЮ: —
+СЕЙЧАС ДЕЛАЮ: [МГЛ PR #116](https://github.com/mpaykin1/meta6-lab/pull/116) · ветка `lab/cycle1-broken-city-bot-strategy-1108` · шаг оценить красный CI и перекрытие · с 2026-11-10 05:57 UTC
 ## ОСТАЛОСЬ (сверху самое срочное)
 - [МГЛ #116](https://github.com/mpaykin1/meta6-lab/pull/116) — 🛑 завис: feat(bot): Broken City real-input strategy scaffold
 - [МГЛ #122](https://github.com/mpaykin1/meta6-lab/pull/122) — 🛑 завис: feat(meta-bot): honest gameplay adapters for Broken City and three island games

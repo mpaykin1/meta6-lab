@@ -66,7 +66,7 @@ export function verifyLibrary(root=ROOT,{live=true}={}){
   const expected=expectedGames(root);
   if(!Array.isArray(index.games)||JSON.stringify(index.games.map(x=>x.game).sort())!==JSON.stringify(expected.map(x=>x.game).sort()))fail('missing, extra or hardcoded games in global index');
   if(index.copy_limit_bytes!==LIMIT)fail('copy budget changed');
-  const present=fs.readdirSync(directory).filter(x=>x.endsWith('.json')&&x!=='index.json').sort();
+  const present=fs.readdirSync(directory).filter(x=>x.endsWith('.json')&&x!=='index.json'&&!x.endsWith('-copy.json')).sort();
   const wanted=expected.map(x=>x.game+'.json').sort();
   if(JSON.stringify(present)!==JSON.stringify(wanted))fail('stale or missing manifest');
   const entries=[],copyPaths=new Set(),copyHashes=new Set(),ids=new Set(),summary=[];

@@ -7,7 +7,7 @@
 const ICON_ICE = '<svg viewBox="0 0 11 11" fill="currentColor" aria-hidden="true"><rect x="5" y="0" width="1" height="11"/><rect x="0" y="5" width="11" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="8" y="8" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="4" y="1" width="3" height="1"/><rect x="4" y="9" width="3" height="1"/><rect x="1" y="4" width="1" height="3"/><rect x="9" y="4" width="1" height="3"/></svg>';
 const GAME_VERSION = "2.0.0";
 const ARC2 = (() => {
-  const pg = (n, d) => { try { PG.ready && window.bridge.analytics && window.bridge.analytics.send(n, d); } catch (e) {} };
+  const pg = () => {};
   const ru = () => PG.language === "ru";
   /* ---------- U1 sparks ---------- */
   const COLS = ["harvest", "precision", "element", "agility"];
@@ -212,7 +212,7 @@ const ARC2 = (() => {
   }
 
   /* ---------- R5 revive, R6 ads, U5 progress & daily gift, R1 instant start ---------- */
-  const rewOK = () => { try { return PG.ready && window.bridge.advertisement.isRewardedSupported; } catch (e) { return !1; } };
+  const rewOK = () => true;
   function onGameOver() {
     const b = $("bRevive");
     b.hidden = !(rewOK() && !G.revived); b.disabled = !1;
@@ -220,23 +220,19 @@ const ARC2 = (() => {
     pg("progression_failed", { step_id: "tower", step_index: G.depth, level: G.level, version: GAME_VERSION });
   }
   $("bRevive").onclick = () => {
-    const b = $("bRevive"); if (b.disabled) return; b.disabled = !0;
-    let got = !1, done = !1;
-    const fin = (ok) => {
-      if (done) return; done = !0; b.hidden = !0;
-      if (!ok || G.phase !== "over") return;
-      G.revived = !0; G.lives = 1; G.dead = !1; renderRes();
-      $("over").classList.add("hide"); hud(!0); startRound(); caption("ЕЩЁ ЖИВ");
-      pg("revive_used", { depth: G.depth });
-    };
-    try {
-      window.bridge.advertisement.on(window.bridge.EVENT_NAME.REWARDED_STATE_CHANGED, (st) => {
-        if (st === "rewarded") got = !0;
-        if (st === "closed" || st === "failed") fin(got);
-      });
-      window.bridge.advertisement.showRewarded("revive");
-    } catch (e) { fin(!1); }
-    setTimeout(() => fin(got), 90000);
+    const b = $("bRevive");
+    if (b.disabled || G.revived || G.phase !== "over") return;
+    b.disabled = true;
+    b.hidden = true;
+    G.revived = true;
+    G.lives = 1;
+    G.dead = false;
+    renderRes();
+    $("over").classList.add("hide");
+    hud(true);
+    startRound();
+    caption("ЕЩЁ ЖИВ");
+    pg("revive_used", { depth: G.depth });
   };
   const today = () => { const d = new Date(); return d.getFullYear() * 1e4 + (d.getMonth() + 1) * 100 + d.getDate(); };
   const _startGame = startGame;
@@ -251,7 +247,7 @@ const ARC2 = (() => {
     pg("progression_started", { step_id: "run", step_index: 1, version: GAME_VERSION });
   }
   function boot() {
-    if (PG.language === "ru") { $("bRevive").lastChild.textContent = "Ожить: смотреть рекламу"; }
+    if (PG.language === "ru") { $("bRevive").lastChild.textContent = "Ожить бесплатно"; }
     if (!SAVE.played) setTimeout(() => { if (G.mode === "menu") $("bPlay").onclick(); }, 600);       // first visit: straight into the fight
   }
   return { get camK() { return camK; }, SP, dice, absorb, onRound, onShotDown, onRepel, onDragonHit, pickSpecial, plunge, ambush, tick, onGameOver, onStart, boot, spark, retreat };

@@ -121939,7 +121939,7 @@
         "game-module"
       ],
       "source_path": "games/twilight-isle-classic/bot-adapter.js",
-      "sha256": "830c0b1437ee23b290f4a03832a7552af735f63235418941ccde8a33d221083c",
+      "sha256": "dfe9d9706682d63e584c7286f0cf927fc5ae0c3a40ad365df245a733de9d3086",
       "lines": [
         1,
         210
@@ -121988,21 +121988,6 @@
       "lines": [
         113,
         119
-      ]
-    },
-    {
-      "id": "42142e26629990b1f12409d2",
-      "game": "twilight-isle-classic",
-      "kind": "solution",
-      "name": "col",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/twilight-isle-classic/bot-adapter.js",
-      "sha256": "d1247d30b18b323db461c26cdc614552f6e256890c78f29adada2fbe25af8b5b",
-      "lines": [
-        181,
-        188
       ]
     },
     {
@@ -122093,6 +122078,21 @@
       "lines": [
         29,
         29
+      ]
+    },
+    {
+      "id": "b8f4eaed9de80c5be944b00b",
+      "game": "twilight-isle-classic",
+      "kind": "solution",
+      "name": "col",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/twilight-isle-classic/bot-adapter.js",
+      "sha256": "fa52ff5e82d1e57b82230ec399f3d826a80e6427fe9cb87bf5139c42a0732819",
+      "lines": [
+        181,
+        181
       ]
     },
     {

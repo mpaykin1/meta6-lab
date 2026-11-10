@@ -1,0 +1,3677 @@
+{
+  "schema_version": 1,
+  "minimum_system_lines": 25,
+  "game_count": 15,
+  "solution_count": 54,
+  "solutions": [
+    {
+      "id": "asqura-ilya-reference:weather",
+      "game": "asqura-ilya-reference",
+      "system": "weather",
+      "title": "weather",
+      "what_it_does": {
+        "en": "Original weather game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Погода»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 193,
+          "end": 193
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1188,
+          "end": 1205
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1218,
+          "end": 1226
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1421,
+          "end": 1436
+        }
+      ],
+      "sha256": "2630acbd9c24aabf605b5662247d3cb5fd3e7255672ec99465284b4fe2c93b71",
+      "depends_on": [
+        "asqura-ilya-reference:menu"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "drawIndicators",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "drawIndicators(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "asqura-ilya-reference:lighting",
+      "game": "asqura-ilya-reference",
+      "system": "lighting",
+      "title": "lighting",
+      "what_it_does": {
+        "en": "Original lighting game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Свет и рендер»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 198,
+          "end": 199
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 378,
+          "end": 439
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 660,
+          "end": 660
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 926,
+          "end": 926
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1104,
+          "end": 1104
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1168,
+          "end": 1172
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1175,
+          "end": 1187
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1227,
+          "end": 1227
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1278,
+          "end": 1287
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1639,
+          "end": 1646
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1669,
+          "end": 1683
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1685,
+          "end": 1691
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1708,
+          "end": 1708
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1863,
+          "end": 1863
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 2072,
+          "end": 2072
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 2082,
+          "end": 2097
+        }
+      ],
+      "sha256": "ef7bb36213621ee308478d8adf0705a796efc27c3f2643a2ee99a9759300ac3d",
+      "depends_on": [
+        "asqura-ilya-reference:weather",
+        "asqura-ilya-reference:menu"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "glowAt",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "glowAt(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "asqura-ilya-reference:saves",
+      "game": "asqura-ilya-reference",
+      "system": "saves",
+      "title": "saves",
+      "what_it_does": {
+        "en": "Original saves game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Сохранения»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 832,
+          "end": 873
+        }
+      ],
+      "sha256": "1a17adfceb5be6f5b47fb596c2a677d6b99adbe7b3bbe0313332008560936401",
+      "depends_on": [],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "loadThree",
+        "required_globals": [
+          "window",
+          "THREE",
+          "document"
+        ],
+        "dom_ids": [],
+        "example": "loadThree(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "asqura-ilya-reference:menu",
+      "game": "asqura-ilya-reference",
+      "system": "menu",
+      "title": "menu",
+      "what_it_does": {
+        "en": "Original menu game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Меню»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 193,
+          "end": 193
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1188,
+          "end": 1213
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1552,
+          "end": 1552
+        },
+        {
+          "source_path": "games/asqura-ilya-reference/index.html",
+          "start": 1554,
+          "end": 1561
+        }
+      ],
+      "sha256": "ecb2d2e3c1f9f29cfc147c121cdb0595849184096924c11409abc2722ec60f43",
+      "depends_on": [
+        "asqura-ilya-reference:weather"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "drawOverlays",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "drawOverlays(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city:camera",
+      "game": "broken-city",
+      "system": "camera",
+      "title": "camera",
+      "what_it_does": {
+        "en": "Original camera game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Камера»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 160,
+          "end": 161
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1081,
+          "end": 1085
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1724,
+          "end": 1726
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2664,
+          "end": 2674
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2970,
+          "end": 2990
+        }
+      ],
+      "sha256": "1f02827a3a6ea59c02aad5928e11aa47cf696b4aca193e3d0a2dc42430b67273",
+      "depends_on": [
+        "broken-city:world",
+        "broken-city:saves",
+        "broken-city:effects",
+        "broken-city:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "updateGameCamera",
+        "required_globals": [
+          "THREE",
+          "camera"
+        ],
+        "dom_ids": [],
+        "example": "updateGameCamera(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city:controls",
+      "game": "broken-city",
+      "system": "controls",
+      "title": "controls",
+      "what_it_does": {
+        "en": "Original controls game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Управление»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 230,
+          "end": 231
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2712,
+          "end": 2721
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2730,
+          "end": 2745
+        }
+      ],
+      "sha256": "927b9d4516f51fca94330fb8f7584b603f19e8a3cbf6c71320ffab5701565049",
+      "depends_on": [
+        "broken-city:audio",
+        "broken-city:effects"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "endPointer",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "endPointer(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city:world",
+      "game": "broken-city",
+      "system": "world",
+      "title": "world",
+      "what_it_does": {
+        "en": "Original world game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Генерация мира»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 136,
+          "end": 140
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 384,
+          "end": 384
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 691,
+          "end": 718
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 846,
+          "end": 846
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1052,
+          "end": 1057
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1164,
+          "end": 1168
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1724,
+          "end": 1725
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1783,
+          "end": 1783
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1941,
+          "end": 1941
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1967,
+          "end": 1972
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2015,
+          "end": 2015
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2062,
+          "end": 2066
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2161,
+          "end": 2161
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2166,
+          "end": 2166
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2183,
+          "end": 2186
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2192,
+          "end": 2192
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2237,
+          "end": 2250
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2320,
+          "end": 2320
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2407,
+          "end": 2409
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2504,
+          "end": 2507
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2536,
+          "end": 2554
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2606,
+          "end": 2610
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2613,
+          "end": 2622
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2634,
+          "end": 2674
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2779,
+          "end": 2786
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2800,
+          "end": 2808
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2968,
+          "end": 2968
+        }
+      ],
+      "sha256": "6bec162fdb7f3351906635b8de677dc11030b7c04c7bba400d84b38640d034d6",
+      "depends_on": [
+        "broken-city:camera",
+        "broken-city:controls",
+        "broken-city:audio",
+        "broken-city:saves",
+        "broken-city:menu",
+        "broken-city:effects",
+        "broken-city:lore"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "memLevel",
+        "required_globals": [
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "memLevel(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city:audio",
+      "game": "broken-city",
+      "system": "audio",
+      "title": "audio",
+      "what_it_does": {
+        "en": "Original audio game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Звук»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2392,
+          "end": 2396
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2398,
+          "end": 2398
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2401,
+          "end": 2444
+        }
+      ],
+      "sha256": "85d93deae0ba64935780e0846a89ae6ab6415a62704337b737ddddf77676d810",
+      "depends_on": [
+        "broken-city:world",
+        "broken-city:saves",
+        "broken-city:effects"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "audioUnlock",
+        "required_globals": [
+          "window",
+          "AudioContext"
+        ],
+        "dom_ids": [],
+        "example": "audioUnlock(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city:saves",
+      "game": "broken-city",
+      "system": "saves",
+      "title": "saves",
+      "what_it_does": {
+        "en": "Original saves game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Сохранения»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 136,
+          "end": 140
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 149,
+          "end": 149
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 384,
+          "end": 384
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 563,
+          "end": 563
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 691,
+          "end": 718
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 846,
+          "end": 846
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1724,
+          "end": 1725
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1783,
+          "end": 1783
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1941,
+          "end": 1941
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2015,
+          "end": 2015
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2062,
+          "end": 2066
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2192,
+          "end": 2192
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2237,
+          "end": 2250
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2320,
+          "end": 2320
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2361,
+          "end": 2361
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2385,
+          "end": 2391
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2504,
+          "end": 2507
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2536,
+          "end": 2549
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2634,
+          "end": 2674
+        }
+      ],
+      "sha256": "6a774d2640e0188bf9dee3623733363215990a9004715b745c0104dffdd2cea7",
+      "depends_on": [
+        "broken-city:camera",
+        "broken-city:controls",
+        "broken-city:world",
+        "broken-city:menu",
+        "broken-city:effects",
+        "broken-city:lore"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "setLoad",
+        "required_globals": [
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "setLoad(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city:menu",
+      "game": "broken-city",
+      "system": "menu",
+      "title": "menu",
+      "what_it_does": {
+        "en": "Original menu game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Меню»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 108,
+          "end": 109
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 136,
+          "end": 140
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 594,
+          "end": 600
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1322,
+          "end": 1345
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1460,
+          "end": 1469
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1783,
+          "end": 1783
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2750,
+          "end": 2763
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2817,
+          "end": 2839
+        }
+      ],
+      "sha256": "3280440195533cb6336cd0425bfac34ee71fca512755138c0aa2ab847bd2fddd",
+      "depends_on": [
+        "broken-city:world",
+        "broken-city:saves",
+        "broken-city:effects",
+        "broken-city:lore"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "showGallery",
+        "required_globals": [
+          "THREE",
+          "camera",
+          "scene"
+        ],
+        "dom_ids": [],
+        "example": "showGallery(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city:effects",
+      "game": "broken-city",
+      "system": "effects",
+      "title": "effects",
+      "what_it_does": {
+        "en": "Original effects game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Эффекты»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 161,
+          "end": 161
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 360,
+          "end": 380
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 384,
+          "end": 384
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 440,
+          "end": 449
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 451,
+          "end": 459
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1695,
+          "end": 1702
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1704,
+          "end": 1711
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1783,
+          "end": 1783
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2392,
+          "end": 2396
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2439,
+          "end": 2439
+        }
+      ],
+      "sha256": "0a6c0d4c48b4bade4259bd132a6c67f059ab178785c8e195f349a3ceaa0eb099",
+      "depends_on": [
+        "broken-city:world",
+        "broken-city:audio",
+        "broken-city:saves",
+        "broken-city:menu",
+        "broken-city:lore"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "dustMat",
+        "required_globals": [
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "dustMat(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city:animation",
+      "game": "broken-city",
+      "system": "animation",
+      "title": "animation",
+      "what_it_does": {
+        "en": "Original animation game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Анимация»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 160,
+          "end": 161
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 831,
+          "end": 845
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 848,
+          "end": 855
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 859,
+          "end": 891
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 894,
+          "end": 944
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1966,
+          "end": 1966
+        }
+      ],
+      "sha256": "3f3b05313ebe06d9576ce1f1ae70abbba67fb1db1a722ba12ba4fbab7777f261",
+      "depends_on": [
+        "broken-city:camera"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "stompPose",
+        "required_globals": [
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "stompPose(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city:lore",
+      "game": "broken-city",
+      "system": "lore",
+      "title": "lore",
+      "what_it_does": {
+        "en": "Original lore game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Лор»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 136,
+          "end": 140
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 1783,
+          "end": 1783
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2002,
+          "end": 2011
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2138,
+          "end": 2138
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2306,
+          "end": 2313
+        },
+        {
+          "source_path": "games/broken-city/index.html",
+          "start": 2445,
+          "end": 2445
+        }
+      ],
+      "sha256": "22b02d0929b1606dd0d8bec66877e9d4968b70ed704c9b234ec491f3be5acd64",
+      "depends_on": [
+        "broken-city:world",
+        "broken-city:audio",
+        "broken-city:saves",
+        "broken-city:menu",
+        "broken-city:effects"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "tickStory",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "tickStory(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city-copy:camera",
+      "game": "broken-city-copy",
+      "system": "camera",
+      "title": "camera",
+      "what_it_does": {
+        "en": "Original camera game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Камера»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city-copy/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1520,
+          "end": 1537
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 99,
+          "end": 100
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 982,
+          "end": 986
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1256,
+          "end": 1264
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1520,
+          "end": 1537
+        }
+      ],
+      "sha256": "6d14da27d60ca3d6cdf26ca7294154486e0b449eee8d2b83173d4b39f2a23aea",
+      "depends_on": [
+        "broken-city-copy:world",
+        "broken-city-copy:saves",
+        "broken-city-copy:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "updateGameCamera",
+        "required_globals": [
+          "THREE",
+          "camera"
+        ],
+        "dom_ids": [],
+        "example": "updateGameCamera(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city-copy:controls",
+      "game": "broken-city-copy",
+      "system": "controls",
+      "title": "controls",
+      "what_it_does": {
+        "en": "Original controls game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Управление»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city-copy/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1299,
+          "end": 1308
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 169,
+          "end": 170
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1299,
+          "end": 1308
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1313,
+          "end": 1326
+        }
+      ],
+      "sha256": "6d1078c75497de91c3542e6f261f9ce0f2f96162c2f688311b953d1a925ea659",
+      "depends_on": [
+        "broken-city-copy:audio",
+        "broken-city-copy:effects"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "endPointer",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "endPointer(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city-copy:world",
+      "game": "broken-city-copy",
+      "system": "world",
+      "title": "world",
+      "what_it_does": {
+        "en": "Original world game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Генерация мира»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city-copy/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1189,
+          "end": 1191
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1215,
+          "end": 1224
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1240,
+          "end": 1255
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1354,
+          "end": 1359
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1518,
+          "end": 1518
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 79,
+          "end": 83
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 100,
+          "end": 100
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 630,
+          "end": 657
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 784,
+          "end": 784
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 953,
+          "end": 958
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1065,
+          "end": 1069
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1189,
+          "end": 1191
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1215,
+          "end": 1224
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1236,
+          "end": 1264
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1354,
+          "end": 1359
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1371,
+          "end": 1378
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1518,
+          "end": 1518
+        }
+      ],
+      "sha256": "66cfd315f67e8d950f330040cdf56fdad0640ada7f7e1d6514005d8f3514c049",
+      "depends_on": [
+        "broken-city-copy:camera",
+        "broken-city-copy:weather",
+        "broken-city-copy:audio",
+        "broken-city-copy:saves",
+        "broken-city-copy:menu",
+        "broken-city-copy:effects"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "noise",
+        "required_globals": [
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "noise(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city-copy:weather",
+      "game": "broken-city-copy",
+      "system": "weather",
+      "title": "weather",
+      "what_it_does": {
+        "en": "Original weather game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Погода»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city-copy/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 289,
+          "end": 298
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 430,
+          "end": 438
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 100,
+          "end": 100
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 289,
+          "end": 298
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 430,
+          "end": 438
+        }
+      ],
+      "sha256": "9a84b59f9c6615343e23f8ae9f4b7d6f90531ed02523bc7dea715ec7d5f79d52",
+      "depends_on": [
+        "broken-city-copy:world",
+        "broken-city-copy:saves",
+        "broken-city-copy:effects"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "fogMat",
+        "required_globals": [
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "fogMat(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city-copy:audio",
+      "game": "broken-city-copy",
+      "system": "audio",
+      "title": "audio",
+      "what_it_does": {
+        "en": "Original audio game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Звук»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city-copy/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1184,
+          "end": 1212
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1184,
+          "end": 1212
+        }
+      ],
+      "sha256": "6ebc73d066d4e4224d8ec391bc3a053c75d148f61f6de89c7e2604e4ac885b7c",
+      "depends_on": [
+        "broken-city-copy:world"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "audioInit",
+        "required_globals": [
+          "window",
+          "AudioContext"
+        ],
+        "dom_ids": [],
+        "example": "audioInit(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city-copy:saves",
+      "game": "broken-city-copy",
+      "system": "saves",
+      "title": "saves",
+      "what_it_does": {
+        "en": "Original saves game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Сохранения»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city-copy/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 88,
+          "end": 88
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1240,
+          "end": 1255
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 79,
+          "end": 83
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 88,
+          "end": 88
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 100,
+          "end": 100
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 630,
+          "end": 657
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 784,
+          "end": 784
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1236,
+          "end": 1264
+        }
+      ],
+      "sha256": "0406f08874a83d9960cea23a7843383208b0156b6d52f7cf382e1cd3a47dce7e",
+      "depends_on": [
+        "broken-city-copy:camera",
+        "broken-city-copy:world",
+        "broken-city-copy:weather",
+        "broken-city-copy:menu",
+        "broken-city-copy:effects"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "setLoad",
+        "required_globals": [
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "setLoad(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city-copy:menu",
+      "game": "broken-city-copy",
+      "system": "menu",
+      "title": "menu",
+      "what_it_does": {
+        "en": "Original menu game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Меню»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city-copy/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 533,
+          "end": 539
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1331,
+          "end": 1341
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1387,
+          "end": 1403
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 79,
+          "end": 83
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 533,
+          "end": 539
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1331,
+          "end": 1341
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1387,
+          "end": 1403
+        }
+      ],
+      "sha256": "eb68eda2ab09fcc6411af44ba1788f39fe247d1758745aec49d8320b851c9cd7",
+      "depends_on": [
+        "broken-city-copy:world",
+        "broken-city-copy:saves"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "showGallery",
+        "required_globals": [
+          "scene"
+        ],
+        "dom_ids": [],
+        "example": "showGallery(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city-copy:effects",
+      "game": "broken-city-copy",
+      "system": "effects",
+      "title": "effects",
+      "what_it_does": {
+        "en": "Original effects game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Эффекты»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city-copy/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 299,
+          "end": 319
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 379,
+          "end": 388
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 390,
+          "end": 398
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 1212,
+          "end": 1212
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 100,
+          "end": 100
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 299,
+          "end": 319
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 379,
+          "end": 388
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 390,
+          "end": 398
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 1212,
+          "end": 1212
+        }
+      ],
+      "sha256": "731442b52efe9d64358a7cdd49892318ec26731f4736479317561cb9e5a1af62",
+      "depends_on": [
+        "broken-city-copy:world",
+        "broken-city-copy:weather",
+        "broken-city-copy:saves"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "dustMat",
+        "required_globals": [
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "dustMat(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "broken-city-copy:animation",
+      "game": "broken-city-copy",
+      "system": "animation",
+      "title": "animation",
+      "what_it_does": {
+        "en": "Original animation game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Анимация»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/broken-city-copy/index.html",
+      "lines": [
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 786,
+          "end": 793
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 802,
+          "end": 829
+        },
+        {
+          "source_path": "games/broken-city-copy/index.html",
+          "start": 832,
+          "end": 879
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 99,
+          "end": 100
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 770,
+          "end": 783
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 786,
+          "end": 793
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 797,
+          "end": 829
+        },
+        {
+          "source_path": "games/broken-city-copy/source-upload.html",
+          "start": 832,
+          "end": 880
+        }
+      ],
+      "sha256": "e9ed69e3f201da9e013cd7a94ea0bd9bfe3e3961cf8ecd50fcb8bbdc21229965",
+      "depends_on": [
+        "broken-city-copy:camera"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "stompPose",
+        "required_globals": [
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "stompPose(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "rainbow-acceleration:weather",
+      "game": "rainbow-acceleration",
+      "system": "weather",
+      "title": "weather",
+      "what_it_does": {
+        "en": "Original weather game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Погода»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/rainbow-acceleration/index.html",
+      "lines": [
+        {
+          "source_path": "games/rainbow-acceleration/index.html",
+          "start": 273,
+          "end": 277
+        },
+        {
+          "source_path": "games/rainbow-acceleration/index.html",
+          "start": 529,
+          "end": 532
+        },
+        {
+          "source_path": "games/rainbow-acceleration/source-upload.html",
+          "start": 44,
+          "end": 51
+        },
+        {
+          "source_path": "games/rainbow-acceleration/source-upload.html",
+          "start": 235,
+          "end": 235
+        },
+        {
+          "source_path": "games/rainbow-acceleration/source-upload.html",
+          "start": 274,
+          "end": 278
+        },
+        {
+          "source_path": "games/rainbow-acceleration/source-upload.html",
+          "start": 530,
+          "end": 533
+        }
+      ],
+      "sha256": "6acb26214a3c2c06b9e84cb446900c5aca339305049b39e4f799bdd323b111a7",
+      "depends_on": [
+        "rainbow-acceleration:menu"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "makeClouds",
+        "required_globals": [
+          "THREE",
+          "document",
+          "renderer"
+        ],
+        "dom_ids": [],
+        "example": "makeClouds(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "rainbow-acceleration:menu",
+      "game": "rainbow-acceleration",
+      "system": "menu",
+      "title": "menu",
+      "what_it_does": {
+        "en": "Original menu game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Меню»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/rainbow-acceleration/index.html",
+      "lines": [
+        {
+          "source_path": "games/rainbow-acceleration/index.html",
+          "start": 443,
+          "end": 458
+        },
+        {
+          "source_path": "games/rainbow-acceleration/source-upload.html",
+          "start": 44,
+          "end": 51
+        },
+        {
+          "source_path": "games/rainbow-acceleration/source-upload.html",
+          "start": 444,
+          "end": 459
+        }
+      ],
+      "sha256": "678cb76972ff6772d321616aa062ab6617d0bd1a6907f8c4507281bcad2e617e",
+      "depends_on": [
+        "rainbow-acceleration:weather"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "updGallery",
+        "required_globals": [
+          "camera",
+          "THREE",
+          "document",
+          "renderer"
+        ],
+        "dom_ids": [],
+        "example": "updGallery(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "rainbow-acceleration:animation",
+      "game": "rainbow-acceleration",
+      "system": "animation",
+      "title": "animation",
+      "what_it_does": {
+        "en": "Original animation game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Анимация»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/rainbow-acceleration/index.html",
+      "lines": [
+        {
+          "source_path": "games/rainbow-acceleration/index.html",
+          "start": 211,
+          "end": 231
+        },
+        {
+          "source_path": "games/rainbow-acceleration/source-upload.html",
+          "start": 170,
+          "end": 208
+        },
+        {
+          "source_path": "games/rainbow-acceleration/source-upload.html",
+          "start": 212,
+          "end": 232
+        }
+      ],
+      "sha256": "add78a74566c36664199fdbde9f70af6b43e1cbf2f109f60c1ef7480baab01e3",
+      "depends_on": [
+        "rainbow-acceleration:weather",
+        "rainbow-acceleration:menu"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "bakeSprite",
+        "required_globals": [
+          "THREE",
+          "renderer"
+        ],
+        "dom_ids": [],
+        "example": "bakeSprite(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-ashen-sumerek:combat",
+      "game": "reference-ashen-sumerek",
+      "system": "combat",
+      "title": "combat",
+      "what_it_does": {
+        "en": "Original combat game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Бой»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "ashen-sumerek/ash_engine.js",
+      "lines": [
+        {
+          "source_path": "ashen-sumerek/ash_engine.js",
+          "start": 103,
+          "end": 123
+        },
+        {
+          "source_path": "ashen-sumerek/ash_world2.js",
+          "start": 130,
+          "end": 137
+        }
+      ],
+      "sha256": "bc573319477c42cb79efac420421a2161c8f46eab9f4b4727022c186e721184f",
+      "depends_on": [
+        "reference-ashen-sumerek:effects"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "ashShoot",
+        "required_globals": [
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "ashShoot(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-ashen-sumerek:enemies",
+      "game": "reference-ashen-sumerek",
+      "system": "enemies",
+      "title": "enemies",
+      "what_it_does": {
+        "en": "Original enemies game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Враги и ИИ»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "ashen-sumerek/ash_engine.js",
+      "lines": [
+        {
+          "source_path": "ashen-sumerek/ash_engine.js",
+          "start": 8,
+          "end": 11
+        },
+        {
+          "source_path": "ashen-sumerek/ash_engine.js",
+          "start": 35,
+          "end": 100
+        },
+        {
+          "source_path": "ashen-sumerek/ash_world2.js",
+          "start": 122,
+          "end": 129
+        },
+        {
+          "source_path": "ashen-sumerek/ash_world2.js",
+          "start": 281,
+          "end": 281
+        },
+        {
+          "source_path": "ashen-sumerek/ashen_core.js",
+          "start": 6,
+          "end": 9
+        },
+        {
+          "source_path": "ashen-sumerek/ashen_core.js",
+          "start": 196,
+          "end": 201
+        },
+        {
+          "source_path": "ashen-sumerek/ashen_core.js",
+          "start": 270,
+          "end": 284
+        }
+      ],
+      "sha256": "8eb8567d73fa2d9fdfb261bcdef758d68e3c32eca235a2b96b4cb9d35bbd35e1",
+      "depends_on": [
+        "reference-ashen-sumerek:weather",
+        "reference-ashen-sumerek:lighting",
+        "reference-ashen-sumerek:effects",
+        "reference-ashen-sumerek:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "makeAshFoe",
+        "required_globals": [
+          "THREE",
+          "scene",
+          "document"
+        ],
+        "dom_ids": [],
+        "example": "makeAshFoe(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-ashen-sumerek:weather",
+      "game": "reference-ashen-sumerek",
+      "system": "weather",
+      "title": "weather",
+      "what_it_does": {
+        "en": "Original weather game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Погода»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "ashen-sumerek/ash_gpu.js",
+      "lines": [
+        {
+          "source_path": "ashen-sumerek/ash_gpu.js",
+          "start": 265,
+          "end": 265
+        },
+        {
+          "source_path": "ashen-sumerek/ash_gpu.js",
+          "start": 291,
+          "end": 309
+        },
+        {
+          "source_path": "ashen-sumerek/ash_gpu.js",
+          "start": 361,
+          "end": 374
+        },
+        {
+          "source_path": "ashen-sumerek/ash_world2.js",
+          "start": 281,
+          "end": 281
+        },
+        {
+          "source_path": "ashen-sumerek/ashen_core.js",
+          "start": 11,
+          "end": 14
+        }
+      ],
+      "sha256": "a69473bcb22658fe9b8d71171159c347d1ed846aa2e1a6a1c3c1e32bede7d172",
+      "depends_on": [
+        "reference-ashen-sumerek:enemies",
+        "reference-ashen-sumerek:effects",
+        "reference-ashen-sumerek:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "makeFogLayers",
+        "required_globals": [
+          "THREE",
+          "document"
+        ],
+        "dom_ids": [],
+        "example": "makeFogLayers(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-ashen-sumerek:lighting",
+      "game": "reference-ashen-sumerek",
+      "system": "lighting",
+      "title": "lighting",
+      "what_it_does": {
+        "en": "Original lighting game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Свет и рендер»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "ashen-sumerek/ash_engine.js",
+      "lines": [
+        {
+          "source_path": "ashen-sumerek/ash_engine.js",
+          "start": 47,
+          "end": 100
+        },
+        {
+          "source_path": "ashen-sumerek/ash_world2.js",
+          "start": 122,
+          "end": 129
+        },
+        {
+          "source_path": "ashen-sumerek/ashen_core.js",
+          "start": 6,
+          "end": 9
+        }
+      ],
+      "sha256": "799c78af055d1aea0c3b538311c1db4541fade9d9c8b798b309943d6f1a33720",
+      "depends_on": [
+        "reference-ashen-sumerek:enemies",
+        "reference-ashen-sumerek:effects",
+        "reference-ashen-sumerek:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "renderAshFoe",
+        "required_globals": [
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "renderAshFoe(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-ashen-sumerek:effects",
+      "game": "reference-ashen-sumerek",
+      "system": "effects",
+      "title": "effects",
+      "what_it_does": {
+        "en": "Original effects game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Эффекты»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "ashen-sumerek/ash_gpu.js",
+      "lines": [
+        {
+          "source_path": "ashen-sumerek/ash_gpu.js",
+          "start": 15,
+          "end": 15
+        },
+        {
+          "source_path": "ashen-sumerek/ash_gpu.js",
+          "start": 19,
+          "end": 28
+        },
+        {
+          "source_path": "ashen-sumerek/ash_gpu.js",
+          "start": 163,
+          "end": 171
+        },
+        {
+          "source_path": "ashen-sumerek/ash_gpu.js",
+          "start": 265,
+          "end": 265
+        },
+        {
+          "source_path": "ashen-sumerek/ash_gpu.js",
+          "start": 399,
+          "end": 412
+        },
+        {
+          "source_path": "ashen-sumerek/ash_world2.js",
+          "start": 114,
+          "end": 121
+        },
+        {
+          "source_path": "ashen-sumerek/ash_world2.js",
+          "start": 281,
+          "end": 281
+        },
+        {
+          "source_path": "ashen-sumerek/ashen_core.js",
+          "start": 6,
+          "end": 9
+        },
+        {
+          "source_path": "ashen-sumerek/ashen_core.js",
+          "start": 11,
+          "end": 14
+        }
+      ],
+      "sha256": "f9b66180feae46fba0952d8f8b1b31f5a0b187c15fd9a838fb5c2e2cee3220db",
+      "depends_on": [
+        "reference-ashen-sumerek:enemies",
+        "reference-ashen-sumerek:weather",
+        "reference-ashen-sumerek:lighting",
+        "reference-ashen-sumerek:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "buildFxAtlases",
+        "required_globals": [
+          "THREE",
+          "renderer",
+          "document"
+        ],
+        "dom_ids": [],
+        "example": "buildFxAtlases(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-ashen-sumerek:animation",
+      "game": "reference-ashen-sumerek",
+      "system": "animation",
+      "title": "animation",
+      "what_it_does": {
+        "en": "Original animation game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Анимация»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "ashen-sumerek/ash_engine.js",
+      "lines": [
+        {
+          "source_path": "ashen-sumerek/ash_engine.js",
+          "start": 44,
+          "end": 44
+        },
+        {
+          "source_path": "ashen-sumerek/ash_gpu.js",
+          "start": 265,
+          "end": 265
+        },
+        {
+          "source_path": "ashen-sumerek/ash_gpu.js",
+          "start": 377,
+          "end": 397
+        },
+        {
+          "source_path": "ashen-sumerek/ashen_core.js",
+          "start": 6,
+          "end": 9
+        },
+        {
+          "source_path": "ashen-sumerek/ashen_core.js",
+          "start": 285,
+          "end": 285
+        },
+        {
+          "source_path": "ashen-sumerek/ashen_core.js",
+          "start": 374,
+          "end": 378
+        }
+      ],
+      "sha256": "baa78655265799a46f316bcf13defc1b10ac98f26986a99bff04c70fe6fb7cf9",
+      "depends_on": [
+        "reference-ashen-sumerek:enemies",
+        "reference-ashen-sumerek:weather",
+        "reference-ashen-sumerek:lighting",
+        "reference-ashen-sumerek:effects"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "disposeAshFoe",
+        "required_globals": [
+          "scene",
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "disposeAshFoe(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-observer-world-en-v7:combat",
+      "game": "reference-observer-world-en-v7",
+      "system": "combat",
+      "title": "combat",
+      "what_it_does": {
+        "en": "Original combat game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Бой»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        {
+          "source_path": "observer-world-en-v7/combat-relations.js",
+          "start": 60,
+          "end": 90
+        },
+        {
+          "source_path": "observer-world-en-v7/editor.js",
+          "start": 36,
+          "end": 42
+        }
+      ],
+      "sha256": "fa8f8f2bf81c30b0900cfa47da62a9b514931903842c0c770864176d55bdd936",
+      "depends_on": [
+        "reference-observer-world-en-v7:world",
+        "reference-observer-world-en-v7:audio"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "npcAttack",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "npcAttack(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-observer-world-en-v7:world",
+      "game": "reference-observer-world-en-v7",
+      "system": "world",
+      "title": "world",
+      "what_it_does": {
+        "en": "Original world game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Генерация мира»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        {
+          "source_path": "observer-world-en-v7/audio.js",
+          "start": 45,
+          "end": 51
+        },
+        {
+          "source_path": "observer-world-en-v7/audio.js",
+          "start": 64,
+          "end": 75
+        },
+        {
+          "source_path": "observer-world-en-v7/combat-relations.js",
+          "start": 47,
+          "end": 59
+        },
+        {
+          "source_path": "observer-world-en-v7/editor.js",
+          "start": 206,
+          "end": 227
+        },
+        {
+          "source_path": "observer-world-en-v7/editor.js",
+          "start": 276,
+          "end": 505
+        },
+        {
+          "source_path": "observer-world-en-v7/story-system.js",
+          "start": 68,
+          "end": 77
+        }
+      ],
+      "sha256": "37c21327d91680d5b89e8d26ebd0436f4a2449db24b248164795eb68a5b052fb",
+      "depends_on": [
+        "reference-observer-world-en-v7:combat",
+        "reference-observer-world-en-v7:audio",
+        "reference-observer-world-en-v7:effects",
+        "reference-observer-world-en-v7:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "noise",
+        "required_globals": [
+          "THREE",
+          "camera",
+          "scene",
+          "document"
+        ],
+        "dom_ids": [],
+        "example": "noise(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-observer-world-en-v7:audio",
+      "game": "reference-observer-world-en-v7",
+      "system": "audio",
+      "title": "audio",
+      "what_it_does": {
+        "en": "Original audio game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Звук»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        {
+          "source_path": "observer-world-en-v7/audio.js",
+          "start": 45,
+          "end": 51
+        },
+        {
+          "source_path": "observer-world-en-v7/audio.js",
+          "start": 98,
+          "end": 118
+        },
+        {
+          "source_path": "observer-world-en-v7/audio.js",
+          "start": 136,
+          "end": 138
+        },
+        {
+          "source_path": "observer-world-en-v7/audio.js",
+          "start": 152,
+          "end": 157
+        },
+        {
+          "source_path": "observer-world-en-v7/audio.js",
+          "start": 191,
+          "end": 214
+        },
+        {
+          "source_path": "observer-world-en-v7/audio.js",
+          "start": 255,
+          "end": 264
+        },
+        {
+          "source_path": "observer-world-en-v7/editor.js",
+          "start": 276,
+          "end": 505
+        }
+      ],
+      "sha256": "1072319860effddef24cf9e4f80b63a1df1b1823df1351da7408030bb0f995fa",
+      "depends_on": [
+        "reference-observer-world-en-v7:combat",
+        "reference-observer-world-en-v7:world",
+        "reference-observer-world-en-v7:effects",
+        "reference-observer-world-en-v7:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "stopMusicClock",
+        "required_globals": [
+          "localStorage",
+          "scene",
+          "THREE",
+          "document",
+          "camera"
+        ],
+        "dom_ids": [],
+        "example": "stopMusicClock(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-observer-world-en-v7:effects",
+      "game": "reference-observer-world-en-v7",
+      "system": "effects",
+      "title": "effects",
+      "what_it_does": {
+        "en": "Original effects game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Эффекты»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "observer-world-en-v7/audio.js",
+      "lines": [
+        {
+          "source_path": "observer-world-en-v7/audio.js",
+          "start": 46,
+          "end": 51
+        },
+        {
+          "source_path": "observer-world-en-v7/audio.js",
+          "start": 76,
+          "end": 105
+        },
+        {
+          "source_path": "observer-world-en-v7/audio.js",
+          "start": 139,
+          "end": 150
+        }
+      ],
+      "sha256": "71b5e27ab7290501b5dc24b0b9a3633c59644cc597c7d7a481ea2619fb544b05",
+      "depends_on": [
+        "reference-observer-world-en-v7:world",
+        "reference-observer-world-en-v7:audio"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "setFxEnabled",
+        "required_globals": [
+          "localStorage",
+          "AudioContext"
+        ],
+        "dom_ids": [],
+        "example": "setFxEnabled(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-observer-world-en-v7:animation",
+      "game": "reference-observer-world-en-v7",
+      "system": "animation",
+      "title": "animation",
+      "what_it_does": {
+        "en": "Original animation game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Анимация»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "observer-world-en-v7/combat-relations.js",
+      "lines": [
+        {
+          "source_path": "observer-world-en-v7/combat-relations.js",
+          "start": 20,
+          "end": 22
+        },
+        {
+          "source_path": "observer-world-en-v7/npc-catalog.js",
+          "start": 45,
+          "end": 66
+        }
+      ],
+      "sha256": "71655c6477b333bb242931dc1b13af83d78411b08b2c17838f5d6b73a57b2c5b",
+      "depends_on": [],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "animate",
+        "required_globals": [
+          "camera",
+          "scene"
+        ],
+        "dom_ids": [],
+        "example": "animate(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-three-worlds-game:camera",
+      "game": "reference-three-worlds-game",
+      "system": "camera",
+      "title": "camera",
+      "what_it_does": {
+        "en": "Original camera game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Камера»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "three-worlds-game/camera-rig.mjs",
+      "lines": [
+        {
+          "source_path": "three-worlds-game/camera-rig.mjs",
+          "start": 5,
+          "end": 75
+        },
+        {
+          "source_path": "three-worlds-game/hero-controls.mjs",
+          "start": 26,
+          "end": 33
+        },
+        {
+          "source_path": "three-worlds-game/rift-input-guard.mjs",
+          "start": 6,
+          "end": 13
+        },
+        {
+          "source_path": "three-worlds-game/tests/camera-golden.test.mjs",
+          "start": 43,
+          "end": 46
+        },
+        {
+          "source_path": "three-worlds-game/tests/camera-golden.test.mjs",
+          "start": 50,
+          "end": 51
+        },
+        {
+          "source_path": "three-worlds-game/tests/hero-input-golden.test.mjs",
+          "start": 9,
+          "end": 14
+        },
+        {
+          "source_path": "three-worlds-game/tests/island-environment-golden.test.mjs",
+          "start": 11,
+          "end": 32
+        },
+        {
+          "source_path": "three-worlds-game/tests/keeper-original-source-parity.test.mjs",
+          "start": 10,
+          "end": 10
+        },
+        {
+          "source_path": "three-worlds-game/water-dive-camera.mjs",
+          "start": 5,
+          "end": 14
+        },
+        {
+          "source_path": "three-worlds-game/world-core.mjs",
+          "start": 5,
+          "end": 7
+        }
+      ],
+      "sha256": "a396cbe66ed0f681419fd2ae9069b454f3d94ffbdfd8f9d3559594ce8bcd0f03",
+      "depends_on": [
+        "reference-three-worlds-game:enemies",
+        "reference-three-worlds-game:world",
+        "reference-three-worlds-game:weather",
+        "reference-three-worlds-game:saves",
+        "reference-three-worlds-game:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "createCameraRig",
+        "required_globals": [
+          "camera",
+          "scene"
+        ],
+        "dom_ids": [],
+        "example": "createCameraRig(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-three-worlds-game:combat",
+      "game": "reference-three-worlds-game",
+      "system": "combat",
+      "title": "combat",
+      "what_it_does": {
+        "en": "Original combat game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Бой»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "three-worlds-game/combat-facing.mjs",
+      "lines": [
+        {
+          "source_path": "three-worlds-game/combat-facing.mjs",
+          "start": 15,
+          "end": 15
+        },
+        {
+          "source_path": "three-worlds-game/combat-relations.js",
+          "start": 60,
+          "end": 90
+        },
+        {
+          "source_path": "three-worlds-game/editor.js",
+          "start": 36,
+          "end": 42
+        },
+        {
+          "source_path": "three-worlds-game/hero-controls.mjs",
+          "start": 11,
+          "end": 18
+        }
+      ],
+      "sha256": "c67aec3810b3fa645238fcba6149ea813427f2ab0bb68e42ce368f745aad82ab",
+      "depends_on": [
+        "reference-three-worlds-game:world",
+        "reference-three-worlds-game:audio"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "turnWeaponToward",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "turnWeaponToward(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-three-worlds-game:enemies",
+      "game": "reference-three-worlds-game",
+      "system": "enemies",
+      "title": "enemies",
+      "what_it_does": {
+        "en": "Original enemies game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Враги и ИИ»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "three-worlds-game/creature-brain.mjs",
+      "lines": [
+        {
+          "source_path": "three-worlds-game/creature-brain.mjs",
+          "start": 10,
+          "end": 40
+        },
+        {
+          "source_path": "three-worlds-game/tests/owner-2111-voxel-phone.test.mjs",
+          "start": 74,
+          "end": 75
+        },
+        {
+          "source_path": "three-worlds-game/world-core.mjs",
+          "start": 5,
+          "end": 8
+        }
+      ],
+      "sha256": "a723f16368945c6cca4519670f9f1d12b8f3489b49e0693febbed8dff2b76419",
+      "depends_on": [
+        "reference-three-worlds-game:camera",
+        "reference-three-worlds-game:world",
+        "reference-three-worlds-game:weather",
+        "reference-three-worlds-game:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "createBrain",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "createBrain(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-three-worlds-game:world",
+      "game": "reference-three-worlds-game",
+      "system": "world",
+      "title": "world",
+      "what_it_does": {
+        "en": "Original world game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Генерация мира»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "three-worlds-game/ash-world.mjs",
+      "lines": [
+        {
+          "source_path": "three-worlds-game/ash-world.mjs",
+          "start": 8,
+          "end": 8
+        },
+        {
+          "source_path": "three-worlds-game/audio.js",
+          "start": 45,
+          "end": 51
+        },
+        {
+          "source_path": "three-worlds-game/audio.js",
+          "start": 64,
+          "end": 75
+        },
+        {
+          "source_path": "three-worlds-game/combat-relations.js",
+          "start": 20,
+          "end": 22
+        },
+        {
+          "source_path": "three-worlds-game/combat-relations.js",
+          "start": 47,
+          "end": 59
+        },
+        {
+          "source_path": "three-worlds-game/creature-brain.mjs",
+          "start": 2,
+          "end": 2
+        },
+        {
+          "source_path": "three-worlds-game/editor.js",
+          "start": 206,
+          "end": 227
+        },
+        {
+          "source_path": "three-worlds-game/editor.js",
+          "start": 276,
+          "end": 507
+        },
+        {
+          "source_path": "three-worlds-game/hero-controls.mjs",
+          "start": 5,
+          "end": 5
+        },
+        {
+          "source_path": "three-worlds-game/hero-controls.mjs",
+          "start": 36,
+          "end": 41
+        },
+        {
+          "source_path": "three-worlds-game/hero-controls.mjs",
+          "start": 145,
+          "end": 145
+        },
+        {
+          "source_path": "three-worlds-game/island-environment.mjs",
+          "start": 5,
+          "end": 8
+        },
+        {
+          "source_path": "three-worlds-game/island-weather-fx.mjs",
+          "start": 7,
+          "end": 7
+        },
+        {
+          "source_path": "three-worlds-game/island-weather.mjs",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "source_path": "three-worlds-game/living-island-runtime.mjs",
+          "start": 4,
+          "end": 4
+        },
+        {
+          "source_path": "three-worlds-game/living-island-runtime.mjs",
+          "start": 8,
+          "end": 25
+        },
+        {
+          "source_path": "three-worlds-game/living-land.mjs",
+          "start": 6,
+          "end": 12
+        },
+        {
+          "source_path": "three-worlds-game/living-population.mjs",
+          "start": 42,
+          "end": 42
+        },
+        {
+          "source_path": "three-worlds-game/living-population.mjs",
+          "start": 44,
+          "end": 80
+        },
+        {
+          "source_path": "three-worlds-game/ocean-placements.mjs",
+          "start": 19,
+          "end": 52
+        },
+        {
+          "source_path": "three-worlds-game/rift-input-guard.mjs",
+          "start": 6,
+          "end": 13
+        },
+        {
+          "source_path": "three-worlds-game/seabed.mjs",
+          "start": 5,
+          "end": 5
+        },
+        {
+          "source_path": "three-worlds-game/seabed.mjs",
+          "start": 7,
+          "end": 20
+        },
+        {
+          "source_path": "three-worlds-game/seabed.mjs",
+          "start": 30,
+          "end": 39
+        },
+        {
+          "source_path": "three-worlds-game/stage7-simulation.mjs",
+          "start": 3,
+          "end": 20
+        },
+        {
+          "source_path": "three-worlds-game/stage7-simulation.mjs",
+          "start": 37,
+          "end": 43
+        },
+        {
+          "source_path": "three-worlds-game/stage7-simulation.mjs",
+          "start": 47,
+          "end": 47
+        },
+        {
+          "source_path": "three-worlds-game/stage7-simulation.mjs",
+          "start": 50,
+          "end": 55
+        },
+        {
+          "source_path": "three-worlds-game/story-system.js",
+          "start": 68,
+          "end": 77
+        },
+        {
+          "source_path": "three-worlds-game/sunken-atmosphere.mjs",
+          "start": 4,
+          "end": 4
+        },
+        {
+          "source_path": "three-worlds-game/tests/camera-golden.test.mjs",
+          "start": 11,
+          "end": 57
+        },
+        {
+          "source_path": "three-worlds-game/tests/island-environment-golden.test.mjs",
+          "start": 33,
+          "end": 37
+        },
+        {
+          "source_path": "three-worlds-game/tests/keeper-original-source-parity.test.mjs",
+          "start": 10,
+          "end": 10
+        },
+        {
+          "source_path": "three-worlds-game/tests/model-lab-reference-metrics.test.mjs",
+          "start": 6,
+          "end": 13
+        },
+        {
+          "source_path": "three-worlds-game/tests/owner-2111-voxel-phone.test.mjs",
+          "start": 74,
+          "end": 75
+        },
+        {
+          "source_path": "three-worlds-game/tests/owner-218-weather-render.test.mjs",
+          "start": 6,
+          "end": 11
+        },
+        {
+          "source_path": "three-worlds-game/tests/owner-218-weather-render.test.mjs",
+          "start": 16,
+          "end": 19
+        },
+        {
+          "source_path": "three-worlds-game/tests/rift-visibility.test.mjs",
+          "start": 22,
+          "end": 26
+        },
+        {
+          "source_path": "three-worlds-game/underwater-runtime.js",
+          "start": 14,
+          "end": 15
+        },
+        {
+          "source_path": "three-worlds-game/underwater-runtime.js",
+          "start": 24,
+          "end": 265
+        },
+        {
+          "source_path": "three-worlds-game/voxel-terrain.mjs",
+          "start": 8,
+          "end": 11
+        },
+        {
+          "source_path": "three-worlds-game/voxel-terrain.mjs",
+          "start": 16,
+          "end": 27
+        },
+        {
+          "source_path": "three-worlds-game/weather-cycle.mjs",
+          "start": 3,
+          "end": 8
+        },
+        {
+          "source_path": "three-worlds-game/world-core.mjs",
+          "start": 4,
+          "end": 16
+        },
+        {
+          "source_path": "three-worlds-game/world-core.mjs",
+          "start": 50,
+          "end": 57
+        }
+      ],
+      "sha256": "8f3264e700dbc09b2c9b6c1d0b342aa5bc241e0e1574d29ca5f9c40c43214cd9",
+      "depends_on": [
+        "reference-three-worlds-game:camera",
+        "reference-three-worlds-game:combat",
+        "reference-three-worlds-game:enemies",
+        "reference-three-worlds-game:weather",
+        "reference-three-worlds-game:audio",
+        "reference-three-worlds-game:saves",
+        "reference-three-worlds-game:menu",
+        "reference-three-worlds-game:effects",
+        "reference-three-worlds-game:animation",
+        "reference-three-worlds-game:lore"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "createAshWorld",
+        "required_globals": [
+          "THREE",
+          "scene",
+          "camera",
+          "renderer",
+          "localStorage",
+          "document"
+        ],
+        "dom_ids": [],
+        "example": "createAshWorld(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-three-worlds-game:weather",
+      "game": "reference-three-worlds-game",
+      "system": "weather",
+      "title": "weather",
+      "what_it_does": {
+        "en": "Original weather game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Погода»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "three-worlds-game/ash-world.mjs",
+      "lines": [
+        {
+          "source_path": "three-worlds-game/ash-world.mjs",
+          "start": 4,
+          "end": 7
+        },
+        {
+          "source_path": "three-worlds-game/creature-brain.mjs",
+          "start": 10,
+          "end": 40
+        },
+        {
+          "source_path": "three-worlds-game/island-weather-fx.mjs",
+          "start": 7,
+          "end": 7
+        },
+        {
+          "source_path": "three-worlds-game/island-weather.mjs",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "source_path": "three-worlds-game/living-island-runtime.mjs",
+          "start": 57,
+          "end": 57
+        },
+        {
+          "source_path": "three-worlds-game/living-population.mjs",
+          "start": 42,
+          "end": 42
+        },
+        {
+          "source_path": "three-worlds-game/rift-input-guard.mjs",
+          "start": 6,
+          "end": 13
+        },
+        {
+          "source_path": "three-worlds-game/story-system.js",
+          "start": 58,
+          "end": 58
+        },
+        {
+          "source_path": "three-worlds-game/tests/island-environment-golden.test.mjs",
+          "start": 33,
+          "end": 37
+        },
+        {
+          "source_path": "three-worlds-game/tests/owner-2111-voxel-phone.test.mjs",
+          "start": 74,
+          "end": 75
+        },
+        {
+          "source_path": "three-worlds-game/underwater-runtime.js",
+          "start": 197,
+          "end": 247
+        },
+        {
+          "source_path": "three-worlds-game/voxel-terrain.mjs",
+          "start": 8,
+          "end": 11
+        },
+        {
+          "source_path": "three-worlds-game/voxel-terrain.mjs",
+          "start": 16,
+          "end": 27
+        },
+        {
+          "source_path": "three-worlds-game/weather-cycle.mjs",
+          "start": 3,
+          "end": 11
+        },
+        {
+          "source_path": "three-worlds-game/world-core.mjs",
+          "start": 4,
+          "end": 8
+        },
+        {
+          "source_path": "three-worlds-game/world-core.mjs",
+          "start": 40,
+          "end": 49
+        }
+      ],
+      "sha256": "c52ad0397c4cd99eabe916bf6e6d04ea30357eeeb4d1e5c3e6fb3b0a2a3f5d0a",
+      "depends_on": [
+        "reference-three-worlds-game:camera",
+        "reference-three-worlds-game:enemies",
+        "reference-three-worlds-game:world",
+        "reference-three-worlds-game:saves",
+        "reference-three-worlds-game:menu",
+        "reference-three-worlds-game:effects",
+        "reference-three-worlds-game:animation",
+        "reference-three-worlds-game:lore"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "syncAshFog",
+        "required_globals": [
+          "scene",
+          "THREE",
+          "camera"
+        ],
+        "dom_ids": [],
+        "example": "syncAshFog(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-three-worlds-game:audio",
+      "game": "reference-three-worlds-game",
+      "system": "audio",
+      "title": "audio",
+      "what_it_does": {
+        "en": "Original audio game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Звук»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "three-worlds-game/audio.js",
+      "lines": [
+        {
+          "source_path": "three-worlds-game/audio.js",
+          "start": 45,
+          "end": 51
+        },
+        {
+          "source_path": "three-worlds-game/audio.js",
+          "start": 98,
+          "end": 118
+        },
+        {
+          "source_path": "three-worlds-game/audio.js",
+          "start": 136,
+          "end": 138
+        },
+        {
+          "source_path": "three-worlds-game/audio.js",
+          "start": 152,
+          "end": 157
+        },
+        {
+          "source_path": "three-worlds-game/audio.js",
+          "start": 191,
+          "end": 214
+        },
+        {
+          "source_path": "three-worlds-game/editor.js",
+          "start": 276,
+          "end": 507
+        },
+        {
+          "source_path": "three-worlds-game/tests/game-fps-browser.mjs",
+          "start": 122,
+          "end": 127
+        }
+      ],
+      "sha256": "7dcf98743d83e7e64d3f105b6b44f123c71ef53a6ed40ad9f42b3c961b6384ba",
+      "depends_on": [
+        "reference-three-worlds-game:combat",
+        "reference-three-worlds-game:world",
+        "reference-three-worlds-game:weather",
+        "reference-three-worlds-game:saves",
+        "reference-three-worlds-game:effects",
+        "reference-three-worlds-game:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "stopMusicClock",
+        "required_globals": [
+          "localStorage",
+          "scene",
+          "THREE",
+          "document",
+          "camera"
+        ],
+        "dom_ids": [],
+        "example": "stopMusicClock(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-three-worlds-game:saves",
+      "game": "reference-three-worlds-game",
+      "system": "saves",
+      "title": "saves",
+      "what_it_does": {
+        "en": "Original saves game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Сохранения»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "three-worlds-game/ash-assets.mjs",
+      "lines": [
+        {
+          "source_path": "three-worlds-game/ash-assets.mjs",
+          "start": 242,
+          "end": 250
+        },
+        {
+          "source_path": "three-worlds-game/ash-quest-props.mjs",
+          "start": 32,
+          "end": 43
+        },
+        {
+          "source_path": "three-worlds-game/combat-relations.js",
+          "start": 20,
+          "end": 22
+        },
+        {
+          "source_path": "three-worlds-game/rift-input-guard.mjs",
+          "start": 6,
+          "end": 13
+        },
+        {
+          "source_path": "three-worlds-game/tests/model-lab-reference-metrics.test.mjs",
+          "start": 6,
+          "end": 13
+        },
+        {
+          "source_path": "three-worlds-game/underwater-runtime.js",
+          "start": 69,
+          "end": 73
+        },
+        {
+          "source_path": "three-worlds-game/underwater-runtime.js",
+          "start": 163,
+          "end": 163
+        }
+      ],
+      "sha256": "7c2a0796f86e610ce376914b138832b8b8cfc8ff6a36813cedf1f2ac05786a21",
+      "depends_on": [
+        "reference-three-worlds-game:camera",
+        "reference-three-worlds-game:world",
+        "reference-three-worlds-game:weather",
+        "reference-three-worlds-game:animation",
+        "reference-three-worlds-game:lore"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "saveAnchor",
+        "required_globals": [
+          "document",
+          "window",
+          "scene",
+          "THREE",
+          "localStorage"
+        ],
+        "dom_ids": [],
+        "example": "saveAnchor(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-three-worlds-game:menu",
+      "game": "reference-three-worlds-game",
+      "system": "menu",
+      "title": "menu",
+      "what_it_does": {
+        "en": "Original menu game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Меню»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "three-worlds-game/dialogue.mjs",
+      "lines": [
+        {
+          "source_path": "three-worlds-game/dialogue.mjs",
+          "start": 4,
+          "end": 17
+        },
+        {
+          "source_path": "three-worlds-game/rift-story.mjs",
+          "start": 34,
+          "end": 37
+        },
+        {
+          "source_path": "three-worlds-game/rift-story.mjs",
+          "start": 79,
+          "end": 94
+        },
+        {
+          "source_path": "three-worlds-game/voxel-terrain.mjs",
+          "start": 16,
+          "end": 27
+        }
+      ],
+      "sha256": "9c3909226dba4f64400a94bff7784b2b909839462cce8c90d8b573b5b24c59c3",
+      "depends_on": [
+        "reference-three-worlds-game:world",
+        "reference-three-worlds-game:weather",
+        "reference-three-worlds-game:animation",
+        "reference-three-worlds-game:lore"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "DialogueGenerator",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "DialogueGenerator(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-three-worlds-game:effects",
+      "game": "reference-three-worlds-game",
+      "system": "effects",
+      "title": "effects",
+      "what_it_does": {
+        "en": "Original effects game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Эффекты»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "three-worlds-game/audio.js",
+      "lines": [
+        {
+          "source_path": "three-worlds-game/audio.js",
+          "start": 46,
+          "end": 51
+        },
+        {
+          "source_path": "three-worlds-game/audio.js",
+          "start": 76,
+          "end": 105
+        },
+        {
+          "source_path": "three-worlds-game/audio.js",
+          "start": 139,
+          "end": 150
+        },
+        {
+          "source_path": "three-worlds-game/island-weather-fx.mjs",
+          "start": 7,
+          "end": 7
+        }
+      ],
+      "sha256": "61db9ebc5c841f74df316a66126f2b15183b75642268539564b2f28a5444fa67",
+      "depends_on": [
+        "reference-three-worlds-game:world",
+        "reference-three-worlds-game:weather",
+        "reference-three-worlds-game:audio"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "setFxEnabled",
+        "required_globals": [
+          "localStorage",
+          "THREE",
+          "scene",
+          "camera",
+          "AudioContext"
+        ],
+        "dom_ids": [],
+        "example": "setFxEnabled(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-three-worlds-game:animation",
+      "game": "reference-three-worlds-game",
+      "system": "animation",
+      "title": "animation",
+      "what_it_does": {
+        "en": "Original animation game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Анимация»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "three-worlds-game/ash-assets.mjs",
+      "lines": [
+        {
+          "source_path": "three-worlds-game/ash-assets.mjs",
+          "start": 268,
+          "end": 283
+        },
+        {
+          "source_path": "three-worlds-game/ash-assets.mjs",
+          "start": 372,
+          "end": 376
+        },
+        {
+          "source_path": "three-worlds-game/ash-quest-props.mjs",
+          "start": 58,
+          "end": 62
+        },
+        {
+          "source_path": "three-worlds-game/ash-world.mjs",
+          "start": 31,
+          "end": 31
+        },
+        {
+          "source_path": "three-worlds-game/camera-rig.mjs",
+          "start": 5,
+          "end": 5
+        },
+        {
+          "source_path": "three-worlds-game/combat-relations.js",
+          "start": 20,
+          "end": 22
+        },
+        {
+          "source_path": "three-worlds-game/guest-roster.mjs",
+          "start": 8,
+          "end": 28
+        },
+        {
+          "source_path": "three-worlds-game/guest-roster.mjs",
+          "start": 30,
+          "end": 45
+        },
+        {
+          "source_path": "three-worlds-game/island-weather-fx.mjs",
+          "start": 111,
+          "end": 111
+        },
+        {
+          "source_path": "three-worlds-game/keeper-bubble.mjs",
+          "start": 69,
+          "end": 69
+        },
+        {
+          "source_path": "three-worlds-game/living-island-runtime.mjs",
+          "start": 59,
+          "end": 59
+        },
+        {
+          "source_path": "three-worlds-game/living-population.mjs",
+          "start": 42,
+          "end": 42
+        },
+        {
+          "source_path": "three-worlds-game/living-population.mjs",
+          "start": 102,
+          "end": 102
+        },
+        {
+          "source_path": "three-worlds-game/npc-catalog.js",
+          "start": 45,
+          "end": 66
+        },
+        {
+          "source_path": "three-worlds-game/rift-input-guard.mjs",
+          "start": 6,
+          "end": 13
+        },
+        {
+          "source_path": "three-worlds-game/rift-story.mjs",
+          "start": 346,
+          "end": 346
+        },
+        {
+          "source_path": "three-worlds-game/sunken-atmosphere.mjs",
+          "start": 79,
+          "end": 83
+        },
+        {
+          "source_path": "three-worlds-game/sunken-guest.mjs",
+          "start": 4,
+          "end": 4
+        },
+        {
+          "source_path": "three-worlds-game/sunken-guest.mjs",
+          "start": 47,
+          "end": 50
+        },
+        {
+          "source_path": "three-worlds-game/tests/island-environment-golden.test.mjs",
+          "start": 33,
+          "end": 37
+        },
+        {
+          "source_path": "three-worlds-game/transport.mjs",
+          "start": 25,
+          "end": 25
+        },
+        {
+          "source_path": "three-worlds-game/voxel-terrain.mjs",
+          "start": 16,
+          "end": 27
+        },
+        {
+          "source_path": "three-worlds-game/world-core.mjs",
+          "start": 5,
+          "end": 7
+        }
+      ],
+      "sha256": "9835d1b66e498e739d95bfb0b19881b73872728ee3e8aa8bfe95795e93b4121a",
+      "depends_on": [
+        "reference-three-worlds-game:camera",
+        "reference-three-worlds-game:enemies",
+        "reference-three-worlds-game:world",
+        "reference-three-worlds-game:weather",
+        "reference-three-worlds-game:saves",
+        "reference-three-worlds-game:menu",
+        "reference-three-worlds-game:lore"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "animate",
+        "required_globals": [
+          "scene",
+          "camera",
+          "document",
+          "THREE"
+        ],
+        "dom_ids": [],
+        "example": "animate(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-three-worlds-game:lore",
+      "game": "reference-three-worlds-game",
+      "system": "lore",
+      "title": "lore",
+      "what_it_does": {
+        "en": "Original lore game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Лор»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "three-worlds-game/ash-quest-props.mjs",
+      "lines": [
+        {
+          "source_path": "three-worlds-game/ash-quest-props.mjs",
+          "start": 10,
+          "end": 12
+        },
+        {
+          "source_path": "three-worlds-game/dialogue.mjs",
+          "start": 4,
+          "end": 17
+        },
+        {
+          "source_path": "three-worlds-game/rift-story.mjs",
+          "start": 34,
+          "end": 37
+        },
+        {
+          "source_path": "three-worlds-game/rift-story.mjs",
+          "start": 60,
+          "end": 60
+        },
+        {
+          "source_path": "three-worlds-game/rift-story.mjs",
+          "start": 79,
+          "end": 84
+        },
+        {
+          "source_path": "three-worlds-game/underwater-runtime.js",
+          "start": 163,
+          "end": 163
+        },
+        {
+          "source_path": "three-worlds-game/voxel-terrain.mjs",
+          "start": 16,
+          "end": 27
+        }
+      ],
+      "sha256": "8d755099d01a26e1d8580d40842cb3bc4614be6e2efc5e814b91285c66e285e5",
+      "depends_on": [
+        "reference-three-worlds-game:world",
+        "reference-three-worlds-game:weather",
+        "reference-three-worlds-game:saves",
+        "reference-three-worlds-game:menu",
+        "reference-three-worlds-game:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "questProp",
+        "required_globals": [
+          "THREE",
+          "scene",
+          "renderer",
+          "camera",
+          "localStorage"
+        ],
+        "dom_ids": [],
+        "example": "questProp(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-underwater-world:combat",
+      "game": "reference-underwater-world",
+      "system": "combat",
+      "title": "combat",
+      "what_it_does": {
+        "en": "Original combat game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Бой»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        {
+          "source_path": "underwater-world/combat-relations.js",
+          "start": 60,
+          "end": 90
+        },
+        {
+          "source_path": "underwater-world/editor.js",
+          "start": 36,
+          "end": 42
+        }
+      ],
+      "sha256": "fa8f8f2bf81c30b0900cfa47da62a9b514931903842c0c770864176d55bdd936",
+      "depends_on": [
+        "reference-underwater-world:world",
+        "reference-underwater-world:audio"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "npcAttack",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "npcAttack(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-underwater-world:world",
+      "game": "reference-underwater-world",
+      "system": "world",
+      "title": "world",
+      "what_it_does": {
+        "en": "Original world game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Генерация мира»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        {
+          "source_path": "underwater-world/audio.js",
+          "start": 45,
+          "end": 51
+        },
+        {
+          "source_path": "underwater-world/audio.js",
+          "start": 64,
+          "end": 75
+        },
+        {
+          "source_path": "underwater-world/combat-relations.js",
+          "start": 20,
+          "end": 22
+        },
+        {
+          "source_path": "underwater-world/combat-relations.js",
+          "start": 47,
+          "end": 59
+        },
+        {
+          "source_path": "underwater-world/editor.js",
+          "start": 206,
+          "end": 227
+        },
+        {
+          "source_path": "underwater-world/editor.js",
+          "start": 276,
+          "end": 507
+        },
+        {
+          "source_path": "underwater-world/story-system.js",
+          "start": 68,
+          "end": 77
+        },
+        {
+          "source_path": "underwater-world/underwater-runtime.js",
+          "start": 3,
+          "end": 17
+        },
+        {
+          "source_path": "underwater-world/underwater-runtime.js",
+          "start": 25,
+          "end": 236
+        }
+      ],
+      "sha256": "9d9927a686ac4d0bf040a4d4753f62521175882bf5d853112e972a4ec836b77e",
+      "depends_on": [
+        "reference-underwater-world:combat",
+        "reference-underwater-world:audio",
+        "reference-underwater-world:effects",
+        "reference-underwater-world:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "noise",
+        "required_globals": [
+          "THREE",
+          "camera",
+          "scene",
+          "localStorage",
+          "document"
+        ],
+        "dom_ids": [],
+        "example": "noise(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-underwater-world:audio",
+      "game": "reference-underwater-world",
+      "system": "audio",
+      "title": "audio",
+      "what_it_does": {
+        "en": "Original audio game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Звук»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        {
+          "source_path": "underwater-world/audio.js",
+          "start": 45,
+          "end": 51
+        },
+        {
+          "source_path": "underwater-world/audio.js",
+          "start": 98,
+          "end": 118
+        },
+        {
+          "source_path": "underwater-world/audio.js",
+          "start": 136,
+          "end": 138
+        },
+        {
+          "source_path": "underwater-world/audio.js",
+          "start": 152,
+          "end": 157
+        },
+        {
+          "source_path": "underwater-world/audio.js",
+          "start": 191,
+          "end": 214
+        },
+        {
+          "source_path": "underwater-world/audio.js",
+          "start": 255,
+          "end": 264
+        },
+        {
+          "source_path": "underwater-world/editor.js",
+          "start": 276,
+          "end": 507
+        }
+      ],
+      "sha256": "05eaae87326a5dff24101682922c4ce8e0d0f3cf7b8c42c00695ff362ec55d00",
+      "depends_on": [
+        "reference-underwater-world:combat",
+        "reference-underwater-world:world",
+        "reference-underwater-world:effects",
+        "reference-underwater-world:animation"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "stopMusicClock",
+        "required_globals": [
+          "localStorage",
+          "scene",
+          "THREE",
+          "document",
+          "camera"
+        ],
+        "dom_ids": [],
+        "example": "stopMusicClock(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-underwater-world:effects",
+      "game": "reference-underwater-world",
+      "system": "effects",
+      "title": "effects",
+      "what_it_does": {
+        "en": "Original effects game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Эффекты»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "underwater-world/audio.js",
+      "lines": [
+        {
+          "source_path": "underwater-world/audio.js",
+          "start": 46,
+          "end": 51
+        },
+        {
+          "source_path": "underwater-world/audio.js",
+          "start": 76,
+          "end": 105
+        },
+        {
+          "source_path": "underwater-world/audio.js",
+          "start": 139,
+          "end": 150
+        }
+      ],
+      "sha256": "71b5e27ab7290501b5dc24b0b9a3633c59644cc597c7d7a481ea2619fb544b05",
+      "depends_on": [
+        "reference-underwater-world:world",
+        "reference-underwater-world:audio"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "setFxEnabled",
+        "required_globals": [
+          "localStorage",
+          "AudioContext"
+        ],
+        "dom_ids": [],
+        "example": "setFxEnabled(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "reference-underwater-world:animation",
+      "game": "reference-underwater-world",
+      "system": "animation",
+      "title": "animation",
+      "what_it_does": {
+        "en": "Original animation game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Анимация»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "underwater-world/combat-relations.js",
+      "lines": [
+        {
+          "source_path": "underwater-world/combat-relations.js",
+          "start": 20,
+          "end": 22
+        },
+        {
+          "source_path": "underwater-world/npc-catalog.js",
+          "start": 45,
+          "end": 66
+        },
+        {
+          "source_path": "underwater-world/underwater-runtime.js",
+          "start": 30,
+          "end": 32
+        }
+      ],
+      "sha256": "0f5e7771b323374ecd3b46d449ac4af747f68516cfb4af02658ce14906df8521",
+      "depends_on": [
+        "reference-underwater-world:world"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "animate",
+        "required_globals": [
+          "camera",
+          "scene",
+          "localStorage"
+        ],
+        "dom_ids": [],
+        "example": "animate(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "veil-terraces:world",
+      "game": "veil-terraces",
+      "system": "world",
+      "title": "world",
+      "what_it_does": {
+        "en": "Original world game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Генерация мира»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/veil-terraces/bot-strategy.mjs",
+      "lines": [
+        {
+          "source_path": "games/veil-terraces/bot-strategy.mjs",
+          "start": 10,
+          "end": 65
+        },
+        {
+          "source_path": "games/veil-terraces/index.html",
+          "start": 28,
+          "end": 28
+        },
+        {
+          "source_path": "games/veil-terraces/index.html",
+          "start": 50,
+          "end": 77
+        }
+      ],
+      "sha256": "2087ed4bf62fd98ccc8b0f3b929d040db0c850f9f49330cd5cff0124da0dd726",
+      "depends_on": [
+        "veil-terraces:audio"
+      ],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "playLevel",
+        "required_globals": [],
+        "dom_ids": [],
+        "example": "playLevel(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    },
+    {
+      "id": "veil-terraces:audio",
+      "game": "veil-terraces",
+      "system": "audio",
+      "title": "audio",
+      "what_it_does": {
+        "en": "Original audio game subsystem; requires its original initialization and dependencies.",
+        "ru": "Оригинальная система «Звук»; требует исходной инициализации и зависимостей."
+      },
+      "source_path": "games/veil-terraces/index.html",
+      "lines": [
+        {
+          "source_path": "games/veil-terraces/index.html",
+          "start": 92,
+          "end": 132
+        }
+      ],
+      "sha256": "1a322aecf65d075215fc0ceaf829d87f1b9ed6b0b44d6e94242b2297b4b0b6d0",
+      "depends_on": [],
+      "asset_ids": [],
+      "how_to_connect": {
+        "entrypoint": "SOUND",
+        "required_globals": [
+          "window",
+          "AudioContext"
+        ],
+        "dom_ids": [],
+        "example": "SOUND(/* original game parameters */)"
+      },
+      "load_ok": false,
+      "load_error": "Not independently verified in Chromium"
+    }
+  ]
+}

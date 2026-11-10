@@ -25,4 +25,4 @@ jobs:
         env:
           COMPACT_JOB_STATUS: ${{ job.status }}
           COMPACT_JOB_NAME: ${{ github.job }}
-        run: node scripts/status/write-run-summary.mjs
+        run: node scripts/status/write-run-summary.mjs "$COMPACT_JOB_STATUS" "$COMPACT_JOB_NAME" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" "$GITHUB_STEP_SUMMARY"

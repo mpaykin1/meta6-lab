@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | PR #202: чистый эталон Лучник в тумане без генератора библиотеки | МГЛ | чат ChatGPT | lab/archer-in-fog-reference-20261109 | [#202](https://github.com/mpaykin1/meta6-lab/pull/202) | 2026-11-10 06:51 | — |
 | взято | PR #133: перенести ASQURA Office в reference без изменений | МГЛ | чат ChatGPT | lab/asqura-single-graphics-reference-20261108 | [#133](https://github.com/mpaykin1/meta6-lab/pull/133) | 2026-11-10 06:48 | — |
 | взято | PR #134: перенести оригинал ABYSS GLOW в reference без изменений | МГЛ | чат ChatGPT | lab/abyss-glow-owner-reference-20261108 | [#134](https://github.com/mpaykin1/meta6-lab/pull/134) | 2026-11-10 06:46 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Довести PR #200 (B2 ч.2) до зелёных проверок и слияния | МГЛ | MG-строитель-2 | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-10 05:20 | 2026-11-10 03:12 |

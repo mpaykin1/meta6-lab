@@ -139,6 +139,17 @@
       "sha256": "6fb2979e40a8a6cc0908e17fcd2050c6d1341971f7a96547a706b06c04bb0718"
     },
     {
+      "id": "1df92d96c783182ce1bfb402",
+      "game": "archer-in-the-fog",
+      "kind": "json-data",
+      "file": "shared/library/assets/archer-in-the-fog/playgama-bridge-config.json",
+      "source_path": "games/archer-in-the-fog/playgama-bridge-config.json",
+      "bytes": 107,
+      "sha256": "0cff37bdb28aa8ba7bb551dd42549666507a7bb8da72b4b5f3f1d8dbcce47c52",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/archer-in-the-fog/playgama-bridge-config.json"
+    },
+    {
       "id": "9dfa1bda9e98925ad99cdd9f",
       "game": "archer-in-the-fog",
       "kind": "font",
@@ -17227,8 +17238,8 @@
     }
   ],
   "counts": {
-    "assets": 16,
-    "file_assets": 2,
+    "assets": 17,
+    "file_assets": 3,
     "solutions": 1132
   }
 }

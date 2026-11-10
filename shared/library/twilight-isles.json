@@ -457,6 +457,16 @@
         46778
       ],
       "sha256": "ae9ba7dee45e79b16f5a9ef24cda57d000f00eaf05defc3aff53b0dbae56f5d0"
+    },
+    {
+      "id": "240c3327cd83fa9ea147d58b",
+      "game": "twilight-isles",
+      "kind": "json-data",
+      "file": "games/twilight-isles/playgama-bridge-config.json",
+      "source_path": "games/twilight-isles/playgama-bridge-config.json",
+      "bytes": 48,
+      "sha256": "9ae1f4f599d77df0bae3098d9fcaee8e93f0c05ab295bfc4cecb0c0eb8bec7bc",
+      "storage": "reference"
     }
   ],
   "solutions": [
@@ -17710,8 +17720,8 @@
     }
   ],
   "counts": {
-    "assets": 31,
-    "file_assets": 2,
+    "assets": 32,
+    "file_assets": 3,
     "solutions": 1149
   }
 }

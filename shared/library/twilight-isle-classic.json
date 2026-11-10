@@ -382,6 +382,17 @@
         1620
       ],
       "sha256": "d00e82f9a095ecc532ec9c4d1fb2213dac867f7c415cd9d8fc923b2ebae61d1b"
+    },
+    {
+      "id": "f1f7751e409b2a2fd7532312",
+      "game": "twilight-isle-classic",
+      "kind": "json-data",
+      "file": "shared/library/assets/twilight-isle-classic/playgama-bridge-config.json",
+      "source_path": "games/twilight-isle-classic/playgama-bridge-config.json",
+      "bytes": 48,
+      "sha256": "9ae1f4f599d77df0bae3098d9fcaee8e93f0c05ab295bfc4cecb0c0eb8bec7bc",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/twilight-isle-classic/playgama-bridge-config.json"
     }
   ],
   "solutions": [
@@ -16690,8 +16701,8 @@
     }
   ],
   "counts": {
-    "assets": 26,
-    "file_assets": 2,
+    "assets": 27,
+    "file_assets": 3,
     "solutions": 1086
   }
 }

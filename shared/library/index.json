@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "copy_limit_bytes": 50000000,
-  "copied_bytes": 49666215,
+  "copied_bytes": 49666370,
   "games": [
     {
       "game": "archer-in-the-fog",
       "source_root": "games/archer-in-the-fog",
       "manifest": "shared/library/archer-in-the-fog.json",
-      "assets": 16,
-      "file_assets": 2,
+      "assets": 17,
+      "file_assets": 3,
       "solutions": 1132
     },
     {
@@ -111,16 +111,16 @@
       "game": "twilight-isle-classic",
       "source_root": "games/twilight-isle-classic",
       "manifest": "shared/library/twilight-isle-classic.json",
-      "assets": 26,
-      "file_assets": 2,
+      "assets": 27,
+      "file_assets": 3,
       "solutions": 1086
     },
     {
       "game": "twilight-isles",
       "source_root": "games/twilight-isles",
       "manifest": "shared/library/twilight-isles.json",
-      "assets": 31,
-      "file_assets": 2,
+      "assets": 32,
+      "file_assets": 3,
       "solutions": 1149
     },
     {
@@ -267,6 +267,15 @@
         7,
         58
       ]
+    },
+    {
+      "id": "1df92d96c783182ce1bfb402",
+      "game": "archer-in-the-fog",
+      "kind": "json-data",
+      "purpose": [],
+      "source_path": "games/archer-in-the-fog/playgama-bridge-config.json",
+      "sha256": "0cff37bdb28aa8ba7bb551dd42549666507a7bb8da72b4b5f3f1d8dbcce47c52",
+      "file": "shared/library/assets/archer-in-the-fog/playgama-bridge-config.json"
     },
     {
       "id": "9dfa1bda9e98925ad99cdd9f",
@@ -120899,6 +120908,15 @@
       ]
     },
     {
+      "id": "f1f7751e409b2a2fd7532312",
+      "game": "twilight-isle-classic",
+      "kind": "json-data",
+      "purpose": [],
+      "source_path": "games/twilight-isle-classic/playgama-bridge-config.json",
+      "sha256": "9ae1f4f599d77df0bae3098d9fcaee8e93f0c05ab295bfc4cecb0c0eb8bec7bc",
+      "file": "shared/library/assets/twilight-isle-classic/playgama-bridge-config.json"
+    },
+    {
       "id": "007ffa48996a1c534ec9bc26",
       "game": "twilight-isle-classic",
       "kind": "solution",
@@ -137653,6 +137671,15 @@
         46771,
         46778
       ]
+    },
+    {
+      "id": "240c3327cd83fa9ea147d58b",
+      "game": "twilight-isles",
+      "kind": "json-data",
+      "purpose": [],
+      "source_path": "games/twilight-isles/playgama-bridge-config.json",
+      "sha256": "9ae1f4f599d77df0bae3098d9fcaee8e93f0c05ab295bfc4cecb0c0eb8bec7bc",
+      "file": "games/twilight-isles/playgama-bridge-config.json"
     },
     {
       "id": "00339aa9dd7994be8086ea93",

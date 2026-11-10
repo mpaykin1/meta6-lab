@@ -3,12 +3,16 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {ROOT,rangeBytes} from './machine.mjs';
 import {isOriginalGameSource,MIN_SYSTEM_LINES} from './source-policy.mjs';
+import {linkedAssets} from './asset-links.mjs';
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 export function verifyCatalog(root=ROOT){
  const file=path.join(root,'shared/library/catalog-solutions.json');
  const catalog=JSON.parse(fs.readFileSync(file,'utf8'));
  if(!Array.isArray(catalog.solutions)||catalog.solutions.length!==catalog.solution_count)throw Error('Invalid catalog count');
  const ids=new Set();
+ const assetFile=path.join(root,'shared/library/index.json');
+ const indexed=fs.existsSync(assetFile)?JSON.parse(fs.readFileSync(assetFile,'utf8')).entries||[]:null;
+ const indexedById=new Map((indexed||[]).map(asset=>[asset.id,asset]));
  for(const s of catalog.solutions){
   if(!s.id||ids.has(s.id))throw Error('Duplicate solution');
   if(s.assembly_target==='main'||s.assembly_target==='refs/heads/main')throw Error('Assembly must never write to main');
@@ -31,7 +35,25 @@ export function verifyCatalog(root=ROOT){
   if(!s.how_to_connect?.entrypoint)throw Error('Missing entrypoint: '+s.id);
   if(s.load_ok===true&&!s.load_evidence?.chromium_run)throw Error('Unverified load_ok: '+s.id);
   if(!Array.isArray(s.depends_on))throw Error('Missing dependencies: '+s.id);
+  if(!Array.isArray(s.asset_ids))throw Error('Missing asset_ids: '+s.id);
+  if(s.standalone===false&&s.load_ok===true)throw Error('Non-standalone cannot load_ok: '+s.id);
+  if(s.standalone===false&&!s.load_error)throw Error('Non-standalone must state precise reason: '+s.id);
+  if(indexed){
+   const expected=linkedAssets(Buffer.concat(chunks).toString('utf8'),s.game,indexed).ids;
+   const actual=[...new Set(s.asset_ids)].sort();
+   if(actual.length!==s.asset_ids.length)throw Error('Duplicate linked asset: '+s.id);
+   for(const id of actual){
+    const asset=indexedById.get(id);
+    if(!asset||asset.kind==='solution'||asset.game!==s.game)throw Error('Invalid linked asset: '+s.id+' '+id);
+   }
+   if(JSON.stringify(actual)!==JSON.stringify(expected))
+    throw Error('Referenced assets missing or invented for '+s.id+
+     ': expected '+expected.join(',')+', got '+actual.join(','));
+  }
  }
+ if(catalog.load_evidence_type&&catalog.solutions.length>=3&&
+  !catalog.solutions.some(s=>s.load_ok===true))
+  throw Error('No real Chromium-loaded systems: all load_ok=false');
  for(const s of catalog.solutions)for(const d of s.depends_on)if(!ids.has(d))throw Error('Missing dependency '+d);
  return {systems:ids.size};
 }

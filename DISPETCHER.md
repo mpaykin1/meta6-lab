@@ -10,14 +10,6 @@
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: MG-строитель-4 2026-11-10T15:36:00Z
 
-### PR #203
-- PR: https://github.com/mpaykin1/meta6-lab/pull/203
-- Ветка: `lab/skin-rusty-robot`
-- SHA: `edf413f27244552cd36889fa1b555a9a062a9b56` · последний коммит: 2026-11-09T19:38:00Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-ремонтник 2026-11-10T15:58:00Z
-
 ### PR #218
 - PR: https://github.com/mpaykin1/meta6-lab/pull/218
 - Ветка: `lab/remont-r1-library`
@@ -210,7 +202,9 @@
 - Задание: Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.
 - Взял: —
 
+<!-- PR #203 передан Claude; ветка сохранена -->
 ## НУЖЕН CLAUDE
+- [#203](https://github.com/mpaykin1/meta6-lab/pull/203) НУЖЕН CLAUDE: конфликт с main; защищённые workflows и reference/skins/rusty-robot.png; комментарий https://github.com/mpaykin1/meta6-lab/pull/203#issuecomment-6772225054
 - [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния
 - [#209](https://github.com/mpaykin1/meta6-lab/pull/209) Библиотека игр: эталоны, системы, ассеты и MCP

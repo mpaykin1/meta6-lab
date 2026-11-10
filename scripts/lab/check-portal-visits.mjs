@@ -12,7 +12,10 @@ try{
  await page.goto(srv.url+'/meta-games/',{waitUntil:'domcontentloaded'});
  await page.evaluate(()=>localStorage.removeItem('meta-games:worlds:v1'));
  await page.reload({waitUntil:'domcontentloaded'});
- assert.equal(await page.locator('a.game').count(),12);
+ assert.equal(await page.locator('a.game').count(),10);
+ assert.equal(await page.locator('a.game[href*="-copy/"]').count(),0,'Storefront must exclude copied games');
+ const hrefs=await page.locator('a.game').evaluateAll(nodes=>nodes.map(a=>a.getAttribute('href')));
+ assert.equal(new Set(hrefs).size,hrefs.length,'Storefront must not repeat game links');
  await page.locator('a.game').first().click();
  await page.waitForURL(/observer-world-en-v7/);
  const stored=await page.evaluate(()=>localStorage.getItem('meta-games:worlds:v1'));

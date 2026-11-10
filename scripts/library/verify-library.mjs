@@ -30,7 +30,9 @@ function independentWalk(dir){
 }
 function expectedGames(root){
   const base=path.join(root,'games');
-  const found=fs.readdirSync(base,{withFileTypes:true}).filter(x=>x.isDirectory()).map(x=>({game:x.name,source_root:'games/'+x.name}));
+  const found=fs.readdirSync(base,{withFileTypes:true})
+    .filter(x=>x.isDirectory()&&!x.name.endsWith('-copy'))
+    .map(x=>({game:x.name,source_root:'games/'+x.name}));
   const contents=fs.readFileSync(path.join(root,'rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md'),'utf8');
   const lines=contents.split('\n');
   const first=lines.findIndex(line=>/^## 1\./.test(line)),second=lines.findIndex(line=>/^## 2\./.test(line));
@@ -140,6 +142,15 @@ function liveDiscovery(){
   const root=makeFixture();
   try{
     buildLibrary(root);verifyLibrary(root,{live:false});
+    const clone=path.join(root,'games/base-copy');
+    fs.cpSync(path.join(root,'games/base'),clone,{recursive:true});
+    buildLibrary(root);verifyLibrary(root,{live:false});
+    const cleanIndex=read(path.join(root,'shared/library/index.json'));
+    if(cleanIndex.games.some(game=>game.game==='base-copy')||
+      cleanIndex.entries.some(entry=>entry.game==='base-copy')||
+      fs.existsSync(path.join(root,'shared/library/base-copy.json')))
+      fail('copy folder was included as an independent game');
+    fs.rmSync(clone,{recursive:true,force:true});
     const newDir=path.join(root,'games/future-game');
     fs.mkdirSync(newDir,{recursive:true});
     fs.writeFileSync(path.join(newDir,'index.html'),'<style>canvas{color:red}</style><script>function attackEnemy(){return 7;}</script>');

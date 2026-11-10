@@ -70,6 +70,9 @@ async function load(url,THREE){
    const flip=animations.find(a=>a.type==="flipbook");
    if(flip&&tex){tex=tex.clone();tex.repeat.set(1/flip.frames,1);tex.offset.set(0,0);tex.needsUpdate=true;}
    const mat=material(p.material,tex,null);
+   // Авторские PNG показываются одним слоем: повторные полупрозрачные
+   // плоскости создавали z-fighting и уничтожали мелкие механические детали.
+   if(tex){mat.depthWrite=true;mat.polygonOffset=true;mat.polygonOffsetFactor=-1;mat.polygonOffsetUnits=-1;}
    const layer=p.layer||"2.5d";
    const d=p.size||[.12,.12];
    let mesh;
@@ -77,7 +80,7 @@ async function load(url,THREE){
     mesh=new THREE.Mesh(geometry(p),mat);group.add(mesh);
    }else{
     const geo=new THREE.PlaneGeometry(d[0],d[1]);
-    const depth=layer==="2.5d"?Math.min(5,Math.max(1,p.depth||1)):1;
+    const depth=layer==="2.5d"?(p.file?1:Math.min(5,Math.max(1,p.depth||1))):1;
     mesh=new THREE.InstancedMesh(geo,mat,depth);
     mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
     for(let i=0;i<depth;i++){tempM.makeTranslation(0,0,i*.008);mesh.setMatrixAt(i,tempM);}

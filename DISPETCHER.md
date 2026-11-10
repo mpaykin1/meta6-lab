@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 22 · конфликт 0 · красные проверки 4 · нужен Claude 13
+Итог: зависло 23 · конфликт 0 · красные проверки 3 · нужен Claude 13
 
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132
@@ -16,7 +16,7 @@
 - SHA: `697a026662cde89c7028b709e38513d5915a03de` · последний коммит: 2026-11-10T09:12:48Z
 - Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42788810398/job/129736704050), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42788809840/job/129736691483)
 - Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42788810398/job/129736704050 и повтори CI.
-- Взял: MG-строитель-2 2026-11-10T12:21:32Z
+- Взял: —
 
 ### PR #219
 - PR: https://github.com/mpaykin1/meta6-lab/pull/219
@@ -25,14 +25,6 @@
 - Проблема: Красная проверка: kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42800339516/job/129775902899)
 - Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42800339516/job/129775902899 и повтори CI.
 - Взял: чат ChatGPT — Рабочий чат МГ/МГЛ 2026-11-10T10:24:35Z
-
-### PR #234
-- PR: https://github.com/mpaykin1/meta6-lab/pull/234
-- Ветка: `lab/claude-adfree-catalog-1110`
-- SHA: `1841df94a1de50d6b726fd52ae46ff8d4b5263b9` · последний коммит: 2026-11-10T11:35:45Z
-- Проблема: Красная проверка: browser-open-all (https://github.com/mpaykin1/meta6-lab/actions/runs/42808771531/job/129804913981), changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42808771192/job/129804683375), verify-storefront (https://github.com/mpaykin1/meta6-lab/actions/runs/42808771182/job/129804570119)
-- Задание: Исправь browser-open-all по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42808771531/job/129804913981 и повтори CI.
-- Взял: MG-ремонтник 2026-11-10T12:51:00Z
 
 ### PR #3
 - PR: https://github.com/mpaykin1/meta6-lab/pull/3
@@ -56,15 +48,7 @@
 - SHA: `bf60a81cc9254ffe9391581d781765feab323b42` · последний коммит: 2026-11-08T19:46:30Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: MG-ремонтник 2026-11-10T11:49:27Z
-
-### PR #172
-- PR: https://github.com/mpaykin1/meta6-lab/pull/172
-- Ветка: `lab/pod-i-nad-palette-cycle`
-- SHA: `dabac477b77931eadfb200a5529afd2f40c021bd` · последний коммит: 2026-11-08T19:48:38Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: MG-строитель-4 2026-11-10T13:40:09Z
+- Взял: —
 
 ### PR #177
 - PR: https://github.com/mpaykin1/meta6-lab/pull/177
@@ -194,6 +178,14 @@
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
 
+### PR #233
+- PR: https://github.com/mpaykin1/meta6-lab/pull/233
+- Ветка: `lab/import-five-cc0-packs`
+- SHA: `0ae6fcc6008e59f9304e65f1f8f5ee67ecac3827` · последний коммит: 2026-11-10T10:38:05Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
 ### PR #16
 - PR: https://github.com/mpaykin1/meta6-lab/pull/16
 - Ветка: `lab/readiness-evidence-gates`
@@ -227,6 +219,7 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
+- [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния
 - [#209](https://github.com/mpaykin1/meta6-lab/pull/209) Библиотека игр: эталоны, системы, ассеты и MCP
 - [#54](https://github.com/mpaykin1/meta6-lab/pull/54) Оптимизация всех игр: довести PR #54, #59, #60
@@ -239,4 +232,3 @@
 - [#192](https://github.com/mpaykin1/meta6-lab/pull/192) M6
 - [#129](https://github.com/mpaykin1/meta6-lab/pull/129) fix(meta): Twilight Isles 2 plays without ads, with free revival
 - [#131](https://github.com/mpaykin1/meta6-lab/pull/131) META GAMES: 10 эталонов графики и анимации из оригиналов владельца
-- [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ

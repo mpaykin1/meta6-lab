@@ -169,7 +169,7 @@ async function bakeFaces(tmp,bone,source,palette){
    }
   }
   // Sample painterly colors of the original contour, not magenta transparency.
-  return first?first.map((v,i)=>Math.round(v*.35+fall[i]*.65)):fall;
+  return first?first.map((v,i)=>Math.round(v*.05+fall[i]*.95)):fall;
  }
  const faces={};
  for(const [face,factor,edge] of [['right',.75,63],['left',1.15,0],['top',1.15,0],

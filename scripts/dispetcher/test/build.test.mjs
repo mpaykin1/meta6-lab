@@ -1,5 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {render,available,parseTasks,assertNotEmpty} from '../build.mjs';
 test('conflict before red before stalled; dedup',()=>{
  const a=[{id:3,branch:'c',priority:2,stalled:true,problem:'🛑 ЗАВИС',action:'Продолжить',finish:false},{id:2,branch:'b',priority:1,red:true,problem:'Красная проверка',action:'Исправить',finish:false},{id:1,branch:'a',priority:0,conflict:true,problem:'Конфликт',action:'Слить main',finish:true}];
@@ -31,4 +32,11 @@ test('trap: stalled ZADACHI cannot produce empty dispatcher',()=>{
  assert.throws(()=>assertNotEmpty('| 🛑 ЗАВИС | stalled |',[]),/Empty dispatcher/);
  assert.doesNotThrow(()=>assertNotEmpty('| ✅ ГОТОВО | done |',[]));
  assert.doesNotThrow(()=>assertNotEmpty('Статус: 🛑 ЗАВИС означает ожидание, но строк нет',[]));
+});
+test('trap: workflow retries push when main moved',()=>{
+ const y=fs.readFileSync(new URL('../../../.github/workflows/dispetcher.yml',import.meta.url),'utf8');
+ const step=y.slice(y.indexOf('Commit queue'));
+ assert.match(step,/for attempt in 1 2 3 4 5/);
+ assert.match(step,/git reset --hard origin\/main\s+node scripts\/dispetcher\/run\.mjs/);
+ assert.match(step,/GITHUB_TOKEN/);
 });

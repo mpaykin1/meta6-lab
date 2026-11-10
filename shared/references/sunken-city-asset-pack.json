@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "sunken-city-asset-pack",
+  "title": "Затонувший город — эталон графики, анимации и лора",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES",
+  "date_added": "2026-11-08",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "path": "references/sunken-city/index.html",
+    "entry_blob_sha": "88dcb6d3e9688980c79b16c126fc69b9ffb0e57a",
+    "original_file": "water(1).html",
+    "original_sha256": "431841ee19b61280f6d92d761f566abc30e6862af22c7a1672fbc983b2078116",
+    "original_size_bytes": 9460050,
+    "source_chunks": "references/sunken-city/chunks/",
+    "reconstruct": "references/sunken-city/rebuild.mjs",
+    "lore": "references/sunken-city/lore.md"
+  },
+  "viewer_url": "https://mpaykin1.github.io/meta6-lab/preview/sunken-city-reference-20261108/references/sunken-city/",
+  "technologies": [
+    "WebGL",
+    "Three.js (embedded)",
+    "voxel models",
+    "voxel lighting",
+    "underwater effects",
+    "shader-based postprocessing"
+  ],
+  "reuse": {
+    "owner_supplied": true,
+    "owner_designated_reference": true,
+    "third_party_rights_verified": false,
+    "requires_dependency_license_review": true,
+    "description": "May reuse original owner-controlled game code and assets; inspect embedded dependency licenses before third-party redistribution."
+  },
+  "original_preserved": true,
+  "original_reconstructed_losslessly": true,
+  "playable_reference_not_new_game": true
+}

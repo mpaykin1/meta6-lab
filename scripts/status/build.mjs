@@ -322,7 +322,7 @@ function bounded(list, max, link) {
   return a;
 }
 
-function render(data) {
+function render(data, cap = 99) {
   const md = [
     '# СВОДКА ДЛЯ CLAUDE',
     'UTC: ' + data.generated_at + ' | МГЛ: ' + data.sha.lab +
@@ -331,16 +331,16 @@ function render(data) {
   ];
   const review = data.review;
   const tasks = [
-    ...bounded(review.protected, 12, LINK + LAB + '/pulls').map(x =>
+    ...bounded(review.protected, Math.min(12, cap), LINK + LAB + '/pulls').map(x =>
       typeof x === 'string' ? x : 'PR #' + x.number + ' ' + x.sha + ': ' +
         (Array.isArray(x.paths) ? x.paths.join(', ') : UNKNOWN)),
     ...['МГЛ', 'МГ'].flatMap((label, i) =>
-      bounded(i === 0 ? review.redLab : review.redMg, 10,
+      bounded(i === 0 ? review.redLab : review.redMg, Math.min(10, cap),
         LINK + (i === 0 ? LAB : MG) + '/actions').map(x =>
         typeof x === 'string' ? label + ': ' + x :
           label + ': ' + x.workflow + ' | ' + x.url + ' | ' + x.step)),
-    ...bounded(review.sliyanie, 8, LINK + LAB + '/blob/main/automation/SLIYANIE.md'),
-    ...bounded(review.stalled, 8, LINK + LAB + '/blob/main/rules/09-platforma/ZANYATO.md')
+    ...bounded(review.sliyanie, Math.min(8, cap), LINK + LAB + '/blob/main/automation/SLIYANIE.md'),
+    ...bounded(review.stalled, Math.min(8, cap), LINK + LAB + '/blob/main/rules/09-platforma/ZANYATO.md')
   ];
   md.push(...(tasks.length ? tasks.map(x => '- ' + shortLine(x)) : ['ничего']));
   md.push('## ФИНИШ');
@@ -354,7 +354,7 @@ function render(data) {
   const pr = data.pr;
   md.push('открыто: ' + pr.open + ' | конфликт: ' + pr.conflicts +
     ' | слито: ' + pr.merged + ' | закрыто: ' + pr.closed);
-  md.push(...bounded(pr.mergedItems || [], 16, LINK + LAB + '/pulls?q=is%3Apr+is%3Amerged')
+  md.push(...bounded(pr.mergedItems || [], Math.min(16, cap), LINK + LAB + '/pulls?q=is%3Apr+is%3Amerged')
     .map(x => typeof x === 'string' ? x :
       '#' + x.number + ' ' + x.title + ' | ' + x.sha));
   md.push('## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE');
@@ -365,9 +365,9 @@ function render(data) {
   else md.push(...data.games.map(x => x.name + ' — ' + x.bot + ' | витрина: ' + x.storefront));
   md.push('## НОВЫЕ ОШИБКИ');
   if (data.errors === UNKNOWN) md.push(UNKNOWN);
-  else md.push(...(data.errors.length ? bounded(data.errors, 12,
+  else md.push(...(data.errors.length ? bounded(data.errors, Math.min(12, cap),
     LINK + LAB + '/blob/main/OSHIBKI.md').map(x => shortLine(x)) : ['ничего']));
-  return enforceLimit(md.join('\n') + '\n');
+  return md.join('\n') + '\n';
 }
 
 export async function build() {
@@ -404,7 +404,16 @@ export async function build() {
     games,
     errors
   };
-  const markdown = render(data);
+  let markdown;
+  for (const cap of [99, 12, 10, 8, 6, 4, 3, 2, 1, 0]) {
+    try {
+      markdown = enforceLimit(render(data, cap));
+      break;
+    } catch (error) {
+      if (!String(error.message).includes('STATUS exceeds')) throw error;
+    }
+  }
+  if (!markdown) throw new Error('Required STATUS sections exceed 8 KiB / 150 lines');
   fs.mkdirSync('automation', { recursive: true });
   fs.writeFileSync('automation/STATUS.md', markdown);
   fs.writeFileSync('automation/status.json', JSON.stringify(data, null, 2) + '\n');

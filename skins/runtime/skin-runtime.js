@@ -24,12 +24,16 @@ async function load(url,THREE){
  let rig=null;
  function material(name,map,emit){
   const def=manifest.materials?.[name]||{}, additive=def.blend==="additive";
-  const opts={map:map||null,transparent:additive||(!!map&&name!=="rust"),depthWrite:!additive,
-   side:THREE.DoubleSide,blending:additive?THREE.AdditiveBlending:THREE.NormalBlending};
-  if(additive)return new THREE.MeshBasicMaterial({...opts,color:def.emissive||0xffffff});
-  return new THREE.MeshLambertMaterial({...opts,roughness:def.rough??.9,
-   emissive:new THREE.Color(def.emissive||(name==='metal'?0xb18b68:0xffaa5e)),
-   emissiveMap:emit||map||null,emissiveIntensity:name==='metal'?.38:.68});
+  // Художественный PNG должен оставаться цветовой текстурой, а не
+  // превращаться в раскалённую маску свечения. Альфа сохраняет выломы.
+  const opts={map:map||null,transparent:additive||!!map,alphaTest:map?.025:0,
+   depthWrite:!additive,side:THREE.DoubleSide,
+   blending:additive?THREE.AdditiveBlending:THREE.NormalBlending};
+  if(additive)return new THREE.MeshBasicMaterial({...opts,color:0xffffff,
+   opacity:.82,depthWrite:false});
+  return new THREE.MeshLambertMaterial({...opts,color:0xffffff,
+   emissive:new THREE.Color(def.emissive||0x000000),
+   emissiveMap:emit||null,emissiveIntensity:emit?.3:0});
  }
  function geometry(p){
   const d=p.dims||[.12,.12,.12];

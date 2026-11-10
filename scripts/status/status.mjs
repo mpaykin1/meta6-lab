@@ -1,0 +1,23 @@
+import fs from 'node:fs';
+import cp from 'node:child_process';
+const run=(...args)=>cp.execFileSync('git',args,{encoding:'utf8'}).trim();
+const path='STATUS.md';
+const raw=fs.readFileSync(path,'utf8');
+const head=run('rev-parse','HEAD');
+const parent=run('rev-parse','HEAD^');
+const changed=run('diff-tree','--no-commit-id','--name-only','-r',head).split('\n').filter(Boolean);
+const statusOnly=changed.length===1 && changed[0]===path;
+const source=statusOnly?parent:head;
+const lastChange=run('show','-s','--format=%cI',source).replace(/\+00:00$/,'Z');
+const repo=process.env.GITHUB_REPOSITORY||'mpaykin1/meta6-lab';
+const url='https://github.com/'+repo+'/actions/runs/'+(process.env.GITHUB_RUN_ID||'0');
+const text=fs.readFileSync('rules/09-platforma/FINISH.md','utf8');
+const rows=[...text.matchAll(/^\| (M[1-6]|B[1-7]|L[1-4]|P1) \|.*$/gm)].map(m=>m[0]);
+if(rows.length!==18)throw Error('FINISH rows mismatch: '+rows.length);
+const green=rows.filter(r=>/\| ЗЕЛЁНАЯ\s*—\s*\[прогон\]\(https:\/\/github\.com\/[^)]+\/actions\/runs\/\d+\)/.test(r)).length;
+const lines=raw.split(/\r?\n/).filter((s,i,a)=>!(i===a.length-1 && s===''));
+function replace(key,value){const i=lines.findIndex(s=>s.startsWith(key+':'));if(i<0)throw Error('Missing '+key);lines[i]=key+': '+value;}
+replace('last_change',lastChange);replace('last_sha',source);replace('finish',green+'/18');
+if(process.env.GITHUB_RUN_ID)replace('checks','ожидание — '+url);
+fs.writeFileSync(path,lines.join('\n')+'\n');
+console.log('STATUS updated for '+source);

@@ -1,0 +1,43 @@
+name: STATUS compact guard
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: status-compact-main
+  cancel-in-progress: false
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'main' }}
+          fetch-depth: 2
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Permanent status sabotage traps
+        run: node scripts/status/mutate-status.mjs
+      - name: Update generated fields on main
+        if: github.event_name != 'pull_request'
+        run: |
+          node scripts/status/status.mjs
+          if ! git diff --quiet -- STATUS.md; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add STATUS.md
+            git commit -m 'chore(status): refresh compact main state'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Verify compact status
+        if: github.event_name != 'pull_request'
+        run: node scripts/status/verify.mjs

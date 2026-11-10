@@ -1,0 +1,38 @@
+name: Checks compact summary
+on:
+  workflow_run:
+    workflows: ['KONTUR Guard','META BOT','LAB focused META BOT','LAB shared-original-components','LAB Shared Seven Browser','LAB Approved Source MCP Live','LAB component consumer audit','LAB shared library deletion guard','game-browser-check','LAB Native Catalog Candidate','LAB Steam unpacked executable','LAB Veil Shared Narrative Gameplay','META GAMES guard','LAB Progress','META Repair Bot']
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: checks-compact-summary
+  cancel-in-progress: false
+jobs:
+  summary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Fetch first failure and write short summary
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_NAME: ${{ github.event.workflow_run.name }}
+          RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        run: node scripts/status/check-summary.mjs
+      - name: Commit latest summary
+        run: |
+          if ! git diff --quiet -- reports/LAST_RUN.md; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add reports/LAST_RUN.md
+            git commit -m 'chore(reports): latest checks summary'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

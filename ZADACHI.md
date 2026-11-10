@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Разобрать PR #189: эталон Golden Knight, конфликт с main | МГЛ | MG-строитель-1 | `lab/endless-valleys-golden-knight-reference-1109` | [#189](https://github.com/mpaykin1/meta6-lab/pull/189) | 2026-11-10 05:08 | — |
 | взято | A1: STATUS.md — автоматический краткий статус МГЛ | МГЛ | чат ChatGPT | `lab/status-a1-20261110` | — | 2026-11-10 05:07 | — |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | M6 | МГЛ | MG-строитель-3 | `lab/mcp-connect` | [#192](https://github.com/mpaykin1/meta6-lab/pull/192) | 2026-11-09 22:25 | 2026-11-09 22:26 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/skin-rusty-robot` | [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | 2026-11-09 16:21 | 2026-11-09 19:38 |

@@ -109,11 +109,23 @@ async function probeSolution(s){
    return {callable:true,hasValue:value!==undefined};
   },name);
   await page.waitForTimeout(80);
-  const status=await page.evaluate(()=>({draw:window.__metaProbe.draw,audio:window.__metaProbe.audio,storage:localStorage.length}));
+  const status=await page.evaluate(()=>{
+   const nonEmptyCanvas=[...document.querySelectorAll('canvas')].some(canvas=>{
+    if(canvas.width<100||canvas.height<100)return false;
+    try{
+     const blank=document.createElement('canvas');
+     blank.width=canvas.width;
+     blank.height=canvas.height;
+     return canvas.toDataURL()!==blank.toDataURL();
+    }catch(error){return false;}
+   });
+   return {draw:window.__metaProbe.draw,audio:window.__metaProbe.audio,
+    storage:localStorage.length,nonEmptyCanvas};
+  });
   if(errors.length)throw Error(errors[0]);
   if(!result.callable)throw Error('Entrypoint is not a callable browser function');
   const used=s.system==='audio'?status.audio>0:
-    ['saves','lore'].includes(s.system)?result.hasValue||status.storage>0:status.draw>0;
+    ['saves','lore'].includes(s.system)?result.hasValue||status.storage>0:status.draw>0&&status.nonEmptyCanvas;
   if(!used)throw Error('No observable '+(s.system==='audio'?'AudioContext':(['saves','lore'].includes(s.system)?'data':'canvas rendering'))+' from entrypoint');
   return {ok:true,error:null};
  }catch(e){return {ok:false,error:String(e.message||e).slice(0,220)}}

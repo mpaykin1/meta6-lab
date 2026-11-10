@@ -1,0 +1,4289 @@
+{
+  "schema_version": 1,
+  "game": "asqura-ilya-reference",
+  "source_root": "games/asqura-ilya-reference",
+  "assets": [
+    {
+      "id": "38000d28d5d9504097b0cd9c",
+      "game": "asqura-ilya-reference",
+      "kind": "inline-style",
+      "name": "style@972",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        8,
+        141
+      ],
+      "sha256": "237efe8a27340aa709959e839e706cced68266f04f1d17647c4d144cda34bd26"
+    },
+    {
+      "id": "5450cfe0c57111d1f1415c56",
+      "game": "asqura-ilya-reference",
+      "kind": "inline-style",
+      "name": "style@130",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1,
+        1
+      ],
+      "sha256": "bdfa9db9d7c9b0e44f73f2df956c17310614a07299c21c98edcbe1ea3092adb2"
+    },
+    {
+      "id": "eeb43aa420d1ff83d55c84d7",
+      "game": "asqura-ilya-reference",
+      "kind": "source-table",
+      "name": "RITEMS",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1553,
+        1553
+      ],
+      "sha256": "62fb17108c88bdb25e35c348078e2bd99304b611dfa296e63bcb46f0c944272c"
+    }
+  ],
+  "solutions": [
+    {
+      "id": "00425158992e8e25204d6e72",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "render",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1278,
+        1287
+      ],
+      "sha256": "66e8f856645d94bb50ab585c5197952b2fd50742f9c95d6d92e42abbb4b1b8f0"
+    },
+    {
+      "id": "00a43910d984f96e4bcaa110",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "add",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        561,
+        561
+      ],
+      "sha256": "d59bebc1c849f99639e3ca771ed1833cbe134ac8e954317210f2b8d254ae2e7b"
+    },
+    {
+      "id": "012cfdef19f652b2d854c986",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archDone",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2106,
+        2106
+      ],
+      "sha256": "3b733bf59131af5b17fe1da1c6f5b577c9311464110bf387bc728199831c0505"
+    },
+    {
+      "id": "024cff4df21fba2f115aea95",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "add_",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        925,
+        926
+      ],
+      "sha256": "596dccdcb7a682d62415ece1005d08c95175733ecf3339fa203120b1608ee56b"
+    },
+    {
+      "id": "03c8798cfb4b926a6a6ed672",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawSynth",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1015,
+        1019
+      ],
+      "sha256": "c4f5d9a010e4faa7fd5a3b8c497802957d1e1e89b3fbab9b925a82a85f6c2ee7"
+    },
+    {
+      "id": "03ed9ef2779ded235cf494c4",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archCatBox",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2054,
+        2061
+      ],
+      "sha256": "fa56298193241144d0fa7996688d46b638fb3383a6f6c0c81fca8708f3de38b1"
+    },
+    {
+      "id": "043b5d66ee6acfbc3f21719b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "pool",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        590,
+        590
+      ],
+      "sha256": "f3fe061b6503e1b7a52432d78ad8f5ba4d62f640d677afb0504bd76fefd02f1b"
+    },
+    {
+      "id": "0441dad249b142475d91a4a4",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidDrawSwat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1660,
+        1668
+      ],
+      "sha256": "1b4eae9812d01a46b5c5fb23b8e8cf941ebe69d116dd7b58fc07f627db23d396"
+    },
+    {
+      "id": "05dc3c05a313a21041a917bd",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "hand",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        433,
+        433
+      ],
+      "sha256": "80d5881bafd8a87cf4c166c3849150a6d7b0409a7530bcf84fdf33322538bef6"
+    },
+    {
+      "id": "0608ee821aa18cb7482a27ac",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidOrdersUpdate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1562,
+        1569
+      ],
+      "sha256": "37ec6ee2dc761a9b5e0d3537940436d425c54789b789c6e17a070fe591ca7ea2"
+    },
+    {
+      "id": "07e29a28b3c3ac6be27622f6",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archSpill",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1865,
+        1867
+      ],
+      "sha256": "910eb340b5a5c0a00220e00c49e13f1876228552ad17e56b26feda84b382253b"
+    },
+    {
+      "id": "092f408d9aab939e2ef892e7",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidLive",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1529,
+        1531
+      ],
+      "sha256": "5740fa657e5a0a01d3604f24c8a44ca689abdc320ff313942f423e8cd3d49d54"
+    },
+    {
+      "id": "0b1a52df7fe33aea91c0057b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archGo",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2150,
+        2153
+      ],
+      "sha256": "45af63e3676a526ca937c6067830ff1c41d39266e066ba10fc63d5c11be9db1e"
+    },
+    {
+      "id": "0bff366aa5dc31699c6fa5d1",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawCoffee",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        346,
+        352
+      ],
+      "sha256": "323dc354748513025f0640debff21a5c3584afa0559cafb7041dd6fada33c6b9"
+    },
+    {
+      "id": "0d3ff727cbad0c9879f4e88a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "mk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        173,
+        173
+      ],
+      "sha256": "b0e7f3d89ed7bc5f8bd4c7020682da9007015d764afbfa6eb444ac2365d39167"
+    },
+    {
+      "id": "0dda28ec02999546a28471a1",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "update",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1265,
+        1277
+      ],
+      "sha256": "4dfd59ec6e8f75bc470bbaf21c9453fb9fb0ea3b806866deaa033d3a5d46da3c"
+    },
+    {
+      "id": "0ee8804adc11f9e73b352f60",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawOverlays",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1206,
+        1213
+      ],
+      "sha256": "43d0f3522131d0f949d3e81c4ff0274ff79345369699f75c723248efe3ce3555"
+    },
+    {
+      "id": "0f15050187b38cae0fe73022",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "buildCourt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        560,
+        575
+      ],
+      "sha256": "0c09e7d3162cb6054bd4f1395a2f2e2ef6398eb7dac45f2cc2df77206e214bce"
+    },
+    {
+      "id": "10633c8a4e64b40a40b8245a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "UP",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        194,
+        194
+      ],
+      "sha256": "f6246eebde45ba403e7ba601bf30d9c9ddb06f11eb11575e11624dc3ffb3c476"
+    },
+    {
+      "id": "16d68f198dc2dd066f86ed36",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "backT",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        196,
+        196
+      ],
+      "sha256": "7336cb985be1510d1237aa1fae2607f6457c5a3254c02993f69543599561f474"
+    },
+    {
+      "id": "16e0ad7e979d488e10f0cb05",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archSignGlow",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1863,
+        1863
+      ],
+      "sha256": "249eeffe88574d0c60d578da5b37f0880ffe0ef709ee3cc3fd621f77b6206b07"
+    },
+    {
+      "id": "17934fcc1885ea881ffe30a2",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawDesk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        329,
+        341
+      ],
+      "sha256": "9d3606c148213f0301fb98bad788c5448b3eecd9248eddef0ce2cf7165833d4c"
+    },
+    {
+      "id": "17f257638d8bc340aa6a69e5",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archTap",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2147,
+        2149
+      ],
+      "sha256": "0a08dff8c3fa559f1dbe7457366aba5c08905411ac913e4ee7de07a36d143686"
+    },
+    {
+      "id": "1805b6abc535e56282c3451f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "pool",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1055,
+        1055
+      ],
+      "sha256": "f3fe061b6503e1b7a52432d78ad8f5ba4d62f640d677afb0504bd76fefd02f1b"
+    },
+    {
+      "id": "1888835ed4ff509a4da1cb1a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "RWX",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1514,
+        1528
+      ],
+      "sha256": "e5cd8d0feee79e6bcdc4fd37466ee67f5abba859bc71dce8dda3e84a2a9c97ab"
+    },
+    {
+      "id": "18b194b83df2a3275f1e866b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "updParts",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1167,
+        1167
+      ],
+      "sha256": "1b8e1805b85118c883e74061f75eb34ebee3dcd5d3a82cf0820d15af778b030c"
+    },
+    {
+      "id": "18cb430865639184eb502578",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidPickTarget",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1547,
+        1548
+      ],
+      "sha256": "b27b505e8f5aa7fe7f6c562f03b2cf3c4503a05e3b1eb57b1bdf87f27932cace"
+    },
+    {
+      "id": "19a0775884124c336dddb67d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "tapWorker",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1149,
+        1161
+      ],
+      "sha256": "89d6e57863047ef14c5a8adf2cb5a094c6fc3fc9a16bf414ac9cddb01334501a"
+    },
+    {
+      "id": "1ab306d6c85aa0949d7b7f44",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archBoxesR",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2052,
+        2052
+      ],
+      "sha256": "09ffe308dbf5af00e4e1f240916e72a32eac22f6b45a7977cd35544315a334d9"
+    },
+    {
+      "id": "1bc151a39280e31ca61238bf",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "add",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        362,
+        362
+      ],
+      "sha256": "02558fd8b1aac8628a664d45048b1eafac56d16aaf9cb112e1acec475eaa5817"
+    },
+    {
+      "id": "1c006d275716360cc62ce4a4",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "spawn",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1143,
+        1148
+      ],
+      "sha256": "be9586203243d107deb04096e3e922144018ebc2e6a7881ef5d874bc3b8757a7"
+    },
+    {
+      "id": "1c1b97da7e8462c4784028be",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "add",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1026,
+        1026
+      ],
+      "sha256": "778a4b456732db17f18568392690268a4f3151efa0bd63dab51074807a7fdb80"
+    },
+    {
+      "id": "1cb0c619459701e644ea287a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "cabOut",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        682,
+        682
+      ],
+      "sha256": "60f605b4cb0a005e0464c7d5fd85e659b751f953d8462bb7e3aedbac91ca22b3"
+    },
+    {
+      "id": "1cf0560c934e3e9d4565ffa4",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "$",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        170,
+        171
+      ],
+      "sha256": "5b717365190da8476bb53a46e9f92dce6048866b017c625d2376bf8d99460054"
+    },
+    {
+      "id": "1d5245b9971afdc981904c13",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "flame",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        519,
+        522
+      ],
+      "sha256": "935ffc1c97a05f869251746188069ee77a9b2a266c01a8b447facb09b81e2a7a"
+    },
+    {
+      "id": "1d54017c5b4080771eed4c99",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "arm",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        943,
+        943
+      ],
+      "sha256": "3474339f86cc6eae71b41f04c4853a967d7a8f8e35081b44fac026e2c0e5ae4d"
+    },
+    {
+      "id": "1e12a11810145dc279d4838d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "hazStripe",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        928,
+        928
+      ],
+      "sha256": "a815d155374787df102e4a058fa796d7df8570d8e7be49326220dfb303ae2ccb"
+    },
+    {
+      "id": "1f0af4358490c37ce5ec372f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "Q",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1705,
+        1705
+      ],
+      "sha256": "68c5b95c8ebee73744efb2c6ce4fb5ab96fdd5fc8b41a5088b7874b5ed5c9877"
+    },
+    {
+      "id": "1f0bea51bd30ac52ba292e0f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rwinShape",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1421,
+        1426
+      ],
+      "sha256": "193a3da425e144e1fc608e000314c2da33fa272bca2353e2d36bf4f8250ac43a"
+    },
+    {
+      "id": "2078cd1b0ed5100b281b80a7",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "r",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        233,
+        233
+      ],
+      "sha256": "afbd43acd6646fb807af459efa51b2e88c54cea25f9bbb73356137f2d3ddfdf8"
+    },
+    {
+      "id": "21e3901d8c87fc11be6934d0",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archUpdate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2162,
+        2199
+      ],
+      "sha256": "21816cfd5220dc2742ae9dd4c10b6f3d9d04527456b1135a9200c31673f051ae"
+    },
+    {
+      "id": "22cae7d5df36a934500dc693",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archOfficeDoorFx",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1870,
+        1871
+      ],
+      "sha256": "6df2ba173bbbe4ba5104c5ebdffe183437475c363afcfc20b256c3ba242586e6"
+    },
+    {
+      "id": "22fca290c48923ac2635f758",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archScanner",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2026,
+        2034
+      ],
+      "sha256": "079647b207bf887e3c221e62c78dc8f05f5a7f94415058d889f829fc73237c94"
+    },
+    {
+      "id": "2310c6a344b00f3abb4f6ebe",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "updWorker",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        467,
+        480
+      ],
+      "sha256": "2cfd48d363e806ce67358c0a37775c521ff378c49cd128c1e886ad257492cf41"
+    },
+    {
+      "id": "232bcc3b55a92336734bd11a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "seated",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        445,
+        446
+      ],
+      "sha256": "f8b1c22d096af2f1cbb2a7f5396498301f15bb5033632e764ea3768a4bd56ddb"
+    },
+    {
+      "id": "24724f23a549f5205a97eca3",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "bubble",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1188,
+        1203
+      ],
+      "sha256": "36631015542a0c247644012b016dd8d423fe7e1e0882d54799c1999e4a99782a"
+    },
+    {
+      "id": "26f6fe311d53de99212627c6",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "add",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2073,
+        2073
+      ],
+      "sha256": "866b6ba95cf9b2f57abd7d4a66b88c06f1a5719236543119c90f51fd12c7c173"
+    },
+    {
+      "id": "283a0f16e75ca31384a5e9a2",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "R",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        172,
+        173
+      ],
+      "sha256": "f2a73b5d955e246585063ded675c5f076eb736674456b77c6f396c8a6ad54172"
+    },
+    {
+      "id": "28b78992b9dbd3dfc27255b7",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "aInten",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1840,
+        1840
+      ],
+      "sha256": "a04c2f37afbffccaa0c6f7313bace6238c0a73d9924351a7d4f3ef25bc6cfc50"
+    },
+    {
+      "id": "29d3a0bb4dcaf4b1a044c658",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archRing",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1864,
+        1864
+      ],
+      "sha256": "eb1c2992abdf3249e2430201e1c518b00c6199d71fa65372f50624f14247aaae"
+    },
+    {
+      "id": "29fc11d7b8af35b47443337d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archPan",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2146,
+        2146
+      ],
+      "sha256": "45e24b5e7208b9f1a0f93c2f6a45f0b3a30dbbd594a12a2740e871564c0a5102"
+    },
+    {
+      "id": "2a4cf08827a12667ea5a9515",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archBoxes",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2050,
+        2051
+      ],
+      "sha256": "4fcdbd9717364ba37abccfadbe54f13d6500b3d7c95ef68cfccb043701535c4d"
+    },
+    {
+      "id": "2a6d25d1311e23f2a39241fe",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidLaser",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1462,
+        1463
+      ],
+      "sha256": "21b9329a9188adbe2b763dc05656c8646fea80743d2f904e9007d85f7c4d1e12"
+    },
+    {
+      "id": "2a757dd9a755bd522966bc90",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "r",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1124,
+        1124
+      ],
+      "sha256": "eab81be4e3874bcf36771b0ff63bfabc720e0d039ccaf2726358aeaea55bd9d0"
+    },
+    {
+      "id": "2a87473cacde7eee83fdefff",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "puff",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1166,
+        1166
+      ],
+      "sha256": "e465dba867e7a4a20d207dbd54bd12e0b4e421cc02c2a495b4c526baaa7384ef"
+    },
+    {
+      "id": "2ca9861606a156b95731e011",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawPrinter",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        356,
+        358
+      ],
+      "sha256": "abed39970fe8f4450d5f1de9cd62d3f53efc3417e072cc46a60bd2464eaffb06"
+    },
+    {
+      "id": "2cbac12c4748bec05444470f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rideStart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        881,
+        884
+      ],
+      "sha256": "54391b547737d6da004f48662b80587659cf3f9dd32ac9e474a3c570d79ca2da"
+    },
+    {
+      "id": "2d0d069df10247a314adc70d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawOpTable",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1000,
+        1005
+      ],
+      "sha256": "8ce8bfefadc78e55c8e05e8efa60833ae27d2b41b622bd56e0994845990f828d"
+    },
+    {
+      "id": "2e0a94a76bf882e0f5738fa2",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawDust",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1214,
+        1216
+      ],
+      "sha256": "58f5c02f6ed7ec1235252d6cb2e6bfb2b0e31bef9cddc9fba2d1f6644d8e778a"
+    },
+    {
+      "id": "2ebb78a0639f28da1d61e3a6",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archNPC",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2070,
+        2071
+      ],
+      "sha256": "591956d6de19f571a7a2fd8cc476002ce445bdad233543916c0192b946f0825b"
+    },
+    {
+      "id": "2ef82dcdafa02a042b62da8d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "ring",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        653,
+        653
+      ],
+      "sha256": "998086ca3f4607fe59c463542a4754cb63e3d72686e0ed5bfa976914694b47d3"
+    },
+    {
+      "id": "30a528a51a300ba7529f59dc",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawDais",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        546,
+        556
+      ],
+      "sha256": "a4f80f1b3b99ac61d01859536d92c4fcd0820646632749967264d1c3265b4745"
+    },
+    {
+      "id": "30a75ecfb77d4472d343ba6d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "tone",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1237,
+        1237
+      ],
+      "sha256": "ee58cada032ebda19f66266cb7e97dda64e3fd9afaa3bfc6f2f27b18341e0a81"
+    },
+    {
+      "id": "30ebe3f7e02e3143af9a10c6",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawBench",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        529,
+        529
+      ],
+      "sha256": "011ee42fd0a94c9ec3b18b5320e945554a1a89a80550cd09a237dd86645c1971"
+    },
+    {
+      "id": "3102cc5f8e9736cbb2a9d428",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "updTask",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1133,
+        1134
+      ],
+      "sha256": "703c87bebd9ad3f20f9d1b681052e64a8910c3c5a282e4b17c926baf563481e5"
+    },
+    {
+      "id": "3458fb1cbfacd38bd4965a06",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "debris",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        676,
+        678
+      ],
+      "sha256": "bc76fae6788c01c1b2360072b74727bb611068d356ad58d3b066b2fc3606c7db"
+    },
+    {
+      "id": "34d37d31b2d6e28dbb9d1cc8",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawCooler",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        353,
+        355
+      ],
+      "sha256": "2bf97fa6001f77de00b23ae2cf0c7725a8749f459cde72403a5a0ffd03b99bd6"
+    },
+    {
+      "id": "364afd244cd72416ce3a026b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "SEAT",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        323,
+        323
+      ],
+      "sha256": "95dc728017784a790bd42e7f2ab39eb6d6b353b263ddf9da3e23ceb84e06d0f3"
+    },
+    {
+      "id": "39de3c51f25876c6d9e8141e",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "fleur",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        516,
+        516
+      ],
+      "sha256": "1b26ec81892e0d5fc778c19f143661ac9c47666851778a433e9e09b3c4a33471"
+    },
+    {
+      "id": "3ae6fcb5ccd617892517a06c",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidProps",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1669,
+        1669
+      ],
+      "sha256": "9d1915bf06bfc53251e66d805284e4ce2c7687356520697c2a259de87cafec85"
+    },
+    {
+      "id": "3b8d0643ffab12fbe884b84d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "exitSign",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1845,
+        1848
+      ],
+      "sha256": "4b5a896f602e259c1be336fc5f9d46d6ad4a4dc498cc457654f30c367109be26"
+    },
+    {
+      "id": "3e749b32ca9eca900fdd802c",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "near",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        839,
+        839
+      ],
+      "sha256": "ffe14076ab5225a096454253410510b231538460af9f182bc5fbd602622149fc"
+    },
+    {
+      "id": "3f2bf407c6af1d9e3e9ee40b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archDoor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1849,
+        1862
+      ],
+      "sha256": "86e7d0dc1479533470a81d899d312e2d4aeaf81d802b2f2369166040dc85e5af"
+    },
+    {
+      "id": "3f58de274e928dea21dedda3",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "sparks",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1165,
+        1165
+      ],
+      "sha256": "3978d1d86fa2323ac492da0a69852ba4e4f54b6146705fafc9dd8172626f2436"
+    },
+    {
+      "id": "3f771eaddeebb124ef80e1f4",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "candle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        523,
+        523
+      ],
+      "sha256": "6dd6eef1418f2525e603fde3cf663335445c23e86786e12c83cf34f7b99ac560"
+    },
+    {
+      "id": "4059ab740258ec15edcb205b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawFloorLab",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1040,
+        1064
+      ],
+      "sha256": "e04879569d92a7ae6eb917bd1e1d37e26b0e1a747747d1dfe067b9228045f7e1"
+    },
+    {
+      "id": "40644bf668cc9c2aa35237c6",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawWallsLab",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1066,
+        1103
+      ],
+      "sha256": "6c934ecf39cd40c10d94f12f7d168dce829d1f256131bc09f342259025b6f412"
+    },
+    {
+      "id": "40cb04d6659db7fbd243a538",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "aFlash",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1842,
+        1848
+      ],
+      "sha256": "68d8b3604bec1aa1b090101a92d619c70babe10e7183c10fb97d9cc32cecb21d"
+    },
+    {
+      "id": "40dea4affa495ff45c01a62c",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawChandelier",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        649,
+        659
+      ],
+      "sha256": "ca7eb9232ad791eb3c227df506b42c32037f483df1a7addc54de04ce7f2b05b1"
+    },
+    {
+      "id": "411fb9242734cda25038418e",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidHole",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1464,
+        1465
+      ],
+      "sha256": "c5c74c2494eee09b13742ea5dbccc5dc1c80cd44533e8172d0f866b2bf6db4c3"
+    },
+    {
+      "id": "423da82e51e2898191d6610d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "makeWorkers",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        443,
+        444
+      ],
+      "sha256": "21156e5818391f696c04e274d7a03b594549cd4489853a5f6d97dc110f9cc6eb"
+    },
+    {
+      "id": "430ac87ec7831b5d08727c63",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "monster",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        931,
+        959
+      ],
+      "sha256": "8b42adfa133fc8d66c54d5b368b8ae0a8fc3d0b260662bfaffef8a5c6f705c38"
+    },
+    {
+      "id": "440a8e16c10c862fea32e214",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "easeOutBack",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        674,
+        674
+      ],
+      "sha256": "3718a93caa8f6544e06233ed215fead2b0716f56ccb87368c6510a1deecf1e5c"
+    },
+    {
+      "id": "441b514c34bddd709a05ff2e",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidStop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1592,
+        1592
+      ],
+      "sha256": "cd8809bc18572bad70886890b1544f90cde9e132ebd4479434132a314166655b"
+    },
+    {
+      "id": "45c8303317983bc87487f138",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawFloorCourt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        576,
+        599
+      ],
+      "sha256": "0c8d69fe9de630f808d93b3d36331a500857b396381489fe62d0a632909cabce"
+    },
+    {
+      "id": "47f4ef8fe93b38ebb2071070",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawNPC",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        557,
+        559
+      ],
+      "sha256": "c050a0e2d5f45e2d758e7bbc21a8276b6d5f1be5acf9b3c3a92ef83ab5e3a5ac"
+    },
+    {
+      "id": "47f9dd128a804a841dd8da6f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rpSmoke",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1483,
+        1483
+      ],
+      "sha256": "2d4aada671962dc954a1aa6452ced652b5386579693c6d49a9cc5a1603c6d6ae"
+    },
+    {
+      "id": "48be5979ae3adaf1e824e392",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawCabinet",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        359,
+        359
+      ],
+      "sha256": "eb49fd0b2a18cc69d078998de2a5851bad82f99c540cf7b75486e93dae2f0733"
+    },
+    {
+      "id": "48d442ab580b600120a689f5",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "r",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1393,
+        1393
+      ],
+      "sha256": "afbd43acd6646fb807af459efa51b2e88c54cea25f9bbb73356137f2d3ddfdf8"
+    },
+    {
+      "id": "492f384d2a052eea49dcb0ee",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawArchTop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2082,
+        2097
+      ],
+      "sha256": "5046dcbc0a8fc1779ee057366b503b0ce80ddd0423874e2b502b1e872c7e4001"
+    },
+    {
+      "id": "49450e4adf78004fbf7f7281",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archJob",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2109,
+        2133
+      ],
+      "sha256": "efb94e6400c428b3e9356bbc478f7a786aada86c062984ce683b8483633896ef"
+    },
+    {
+      "id": "49723538448998795bb250e3",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawLadder",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1988,
+        1993
+      ],
+      "sha256": "e0600ca9f3b6240c5c1ca2061e046ba15444ef14887034c20b1ab92669abc783"
+    },
+    {
+      "id": "4a8ad00af87f41b459e13a9b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidResolve",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1549,
+        1549
+      ],
+      "sha256": "986d5283faca4bfbc3760b52d5afdb35c68a3d8e36558f8038db6155801f1056"
+    },
+    {
+      "id": "4abcceefa783f32797a97771",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidStars",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1589,
+        1589
+      ],
+      "sha256": "1e9843e95ed05eb46977b81c8bb08e95636c29c5d768fd86829d668d2b3523aa"
+    },
+    {
+      "id": "4bb9057946885b77d4fe3e7b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archCarry",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2136,
+        2141
+      ],
+      "sha256": "acfae7d53ce35b1d1f2ef59065c127bae79b7cc379909e037358c186b7bae445"
+    },
+    {
+      "id": "4be19d41e5b250ce3fd2e2f7",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "hand",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1930,
+        1930
+      ],
+      "sha256": "64d909b83da877f4506ea0ad6677eabde5781af42db524995d5dbe578afc5666"
+    },
+    {
+      "id": "4cc623d5458b4e19ff2c424a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archReset",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2161,
+        2161
+      ],
+      "sha256": "3c7963a1c26cbfdd7101654f6df1f22b64c0df8512fd75177ebf4d1200677a61"
+    },
+    {
+      "id": "4ce7f9d8d081eda0e16245ee",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "chibi",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        230,
+        318
+      ],
+      "sha256": "7c51482ce30e946985fcec4945146d853f3fab11c8df8fa974ddaf9669202a2a"
+    },
+    {
+      "id": "4ead2f75e87dce46da062a6a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archTableSeg",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1996,
+        2007
+      ],
+      "sha256": "b4bf02fbdd26dae87a5f80cace594e3a7c2bb3a5f635c71131d632cea17e41a6"
+    },
+    {
+      "id": "4f670a9660a55ff648866dee",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "r",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1345,
+        1345
+      ],
+      "sha256": "afbd43acd6646fb807af459efa51b2e88c54cea25f9bbb73356137f2d3ddfdf8"
+    },
+    {
+      "id": "503e78cd80e5c3297c50389e",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawCandelabra",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        524,
+        528
+      ],
+      "sha256": "6c9fa96319babe25b3c27ad86716f4e4950b1d52e7485688823e2c017f558c5d"
+    },
+    {
+      "id": "519ecad02483554eb05bd2b9",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawFloorArch",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1874,
+        1901
+      ],
+      "sha256": "412440903918601c8de9e3f09eb48fd2ccb943d0ac668e97426392b18de6f90f"
+    },
+    {
+      "id": "51edcd5d28ba349f9fe1c759",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidTaskIcon",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1489,
+        1492
+      ],
+      "sha256": "f1ecc6fca7ffa648d0e37f8388db02431bf29f2907e4ed709ace332d8e035a44"
+    },
+    {
+      "id": "52a824402ca25e86b0f711f0",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "r",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1489,
+        1489
+      ],
+      "sha256": "7dd2b712003e87dbe0a406909cc58f7b299d35459244fab0830577f241006882"
+    },
+    {
+      "id": "538faf03fc874bd3c65927e2",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "count",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2462,
+        2462
+      ],
+      "sha256": "c2fbe562d01b87bee3440968adbdc0c4dea739f762338cc4786a669ad43b3a43"
+    },
+    {
+      "id": "54764b5e4e8e3aa0deeb7fb9",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archClear",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2100,
+        2100
+      ],
+      "sha256": "a39376a15125688bc57d952866f9fffab4e7f8992783956b1eecc727a4ad1bc9"
+    },
+    {
+      "id": "563e91d379c5d95fe5bb3607",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "loop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1782,
+        1783
+      ],
+      "sha256": "b242a86eb7d95006d4a1c0fcf6872ba8e5d4ef9f3694c6dd9520eece926be1bb"
+    },
+    {
+      "id": "58899c2da22efb4041935666",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidDown",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1398,
+        1404
+      ],
+      "sha256": "a5fef6656da43d750de3e4d0924eb76fbd8f4ab525d80605cae8784a1c306933"
+    },
+    {
+      "id": "59b4ee614bfdb70141ea88a1",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "cand",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        656,
+        656
+      ],
+      "sha256": "699bb51c87f21ff5582145c3d3be861e8f4d6067b5592c7393f8e68bc57381fe"
+    },
+    {
+      "id": "59be7eb59ddaab123c5fda9c",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "chooseFloor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        822,
+        828
+      ],
+      "sha256": "7a6ff752503efaa1d2f9ad6f2ff4fe70c2a8027cd71671fe7fc315ecd419aed4"
+    },
+    {
+      "id": "5a8626801c09bbaeb1816304",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidViewerClose",
+      "purpose": [
+        "camera"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1784,
+        1784
+      ],
+      "sha256": "5d43fdf0f76606c36f48e20a769e52f29f57ce3a3d773273d87bb790c9953e7c"
+    },
+    {
+      "id": "5acbe27c8ca3c463362f6282",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawLabDesk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        991,
+        998
+      ],
+      "sha256": "ba46e0f66aff708cec07a33c09c3cea2cd259cdb6a786bbc16bf244f74da08f6"
+    },
+    {
+      "id": "5bb6ae70927ddd7634da72fa",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawConsole",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        980,
+        990
+      ],
+      "sha256": "c9e8f2a8bf62488caa500a26b850ed18d7636d88a24c9f7dc91ebb65cfec3325"
+    },
+    {
+      "id": "5c5a74b052afea7307d86676",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "tap",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1306,
+        1323
+      ],
+      "sha256": "466993efbe507f3dee6205dfb0638765af207541b289e64847280639f57e3fd9"
+    },
+    {
+      "id": "5ef48f234202199264b82b00",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidEnd",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1532,
+        1536
+      ],
+      "sha256": "047e91fe73871db36cf9b8361c0e875a6f28c9d43c1135e8da4448c2ce1f9300"
+    },
+    {
+      "id": "5fe4fc4a16de10237ebb34e3",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "biohaz",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        927,
+        927
+      ],
+      "sha256": "82d659860adad6e8021465d493b503b5bbe0e6649a0a04087f9fa0e0278714d0"
+    },
+    {
+      "id": "616a0a1782008589d7319fb1",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archSwitch",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2154,
+        2160
+      ],
+      "sha256": "685a6a397a3ebb7b6cad8c69d4e47a61d0827d6c248b50febb6a792fb5e44687"
+    },
+    {
+      "id": "624d99e5fb216f9024c2f80d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawWDesk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        530,
+        536
+      ],
+      "sha256": "72d531cf08fe77b7bd0fb10aedd35fcd37ecfe07cd4f7ff2d6015d23d1e5a84c"
+    },
+    {
+      "id": "6379a6d0cb3bb4ddd1a6dd16",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidMuzzle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1456,
+        1459
+      ],
+      "sha256": "e38659f0e6ef0775f3a688b61b4ad984f797f008f729013accc6baf6a2bf0e86"
+    },
+    {
+      "id": "63a642d3df89d59789c73f6b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "ID",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        198,
+        199
+      ],
+      "sha256": "d64d75989fb919d80d15f92ccfbe3b783c963f0168c8ee6b77a528f1bc3085c0"
+    },
+    {
+      "id": "63ff244284a709ad66b005dd",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "addOb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        325,
+        325
+      ],
+      "sha256": "f0acbac482dd758721eb034f735d9cb34bef4edb68c5dc033a1b27168a2002fd"
+    },
+    {
+      "id": "658250a15c6e0502bc9df04e",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "loadThree",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        832,
+        832
+      ],
+      "sha256": "f1cc99803cfd55353d3af254c806156d3aa48dbec08c2cc21e14a4f6be3ce702"
+    },
+    {
+      "id": "667579695f1a6ba3c107f14d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidUpdate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1594,
+        1638
+      ],
+      "sha256": "941ef6e7ebf654fbe9fc43faf1945774384de0867bdd8f6b6c2ac12d4f3ddabb"
+    },
+    {
+      "id": "6737f714f0d689fdca028f8c",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidRevive",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1537,
+        1538
+      ],
+      "sha256": "6e9b00bcff097e348bb75fa1032f0824d4154949ff64cb991d4044ef3ee5cfcd"
+    },
+    {
+      "id": "680d5627b65a3cc12e9112fb",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidStart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1591,
+        1591
+      ],
+      "sha256": "f8e67296e251bf8afd4325bf2e0df91f2aa516b2590d4190de151b9404453e76"
+    },
+    {
+      "id": "683cac68e54526295d47def8",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawCourtTop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        660,
+        660
+      ],
+      "sha256": "19b71da8501055e895650c0edc15dc4a073364f7c3eeef23cc470ae5dc46a9ab"
+    },
+    {
+      "id": "688cd13fc3e22b3caac5e411",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawBackrest",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        343,
+        343
+      ],
+      "sha256": "9fb4d7cd154aeb4ef3952d675dffbcf816bae8629f8552cecf697f33dad9249d"
+    },
+    {
+      "id": "689215794666f6e21f962387",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidTap",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1551,
+        1551
+      ],
+      "sha256": "0b05065616222f4de8780c5110530f650138045197b5fa7a9988356bc743820f"
+    },
+    {
+      "id": "6a327d75e5648b56031f3019",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archStool",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2008,
+        2008
+      ],
+      "sha256": "da98b01dbfbec290f1997bb470cec6fe4510e1c8b895c0dd51798dc48dfa9e39"
+    },
+    {
+      "id": "6aebffc483392b6cb23311fe",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "arrow",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1847,
+        1847
+      ],
+      "sha256": "4b0a673b0b72a36bee41a904e5890a148313e2c010358b9b8c87b8f0ad0dfe62"
+    },
+    {
+      "id": "6de1132739a6cac2a9681cb0",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "sideT",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        197,
+        197
+      ],
+      "sha256": "d464202a0790c42914980b76d864848847f5eb69f64324327abda8ec4b73f264"
+    },
+    {
+      "id": "6e019dd512dcc33c3508929c",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "auInit",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1231,
+        1236
+      ],
+      "sha256": "b196a180e62ced4804397410c7ab975a823d57e05f830e3d79b6f01e28721aa2"
+    },
+    {
+      "id": "701844e68ddfdcfc4e038946",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawHole",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        694,
+        702
+      ],
+      "sha256": "bb50ea9a0d05b019fb111459640bd2b0a1e9ffdecbdaf73737a64881ce62cd2f"
+    },
+    {
+      "id": "70301c6c3f5838d0a1b6637b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "box",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        200,
+        202
+      ],
+      "sha256": "8adb5b8cbb51562646beab23beeb18e07f0179bc24ec0c380fdb993b0efb9c07"
+    },
+    {
+      "id": "71b29b5f061b3750c1794ab3",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidImpact",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1570,
+        1579
+      ],
+      "sha256": "e70ef0d76b3cf8e3e0564312cf5a92ada5d0752c70edc1a76399625c86a403ef"
+    },
+    {
+      "id": "7226e07d432bdbd586cb2784",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "srng",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1339,
+        1339
+      ],
+      "sha256": "4032d7ddaa9261400c91279b34a7aa42d951dee3745085fc7018adecc76e44cd"
+    },
+    {
+      "id": "7254082f6c438b9eb1963777",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "noise",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1238,
+        1238
+      ],
+      "sha256": "96829f080531744f93c46be0d1200175c7f2430d6154b594236883cc5e3a1f9d"
+    },
+    {
+      "id": "73712a8c846d86da6e8d9c8f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archDesk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2009,
+        2015
+      ],
+      "sha256": "03f4d37ce3115960aabe893f0f407de3405acc7b8fe4ff0164521870fb4aaff3"
+    },
+    {
+      "id": "766d6ed968e07a9d1d391d82",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidItem",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1580,
+        1588
+      ],
+      "sha256": "d6967fba70c636f961b1d882ba5e2a21c85f089754bee2b566bf2472d4f3e81e"
+    },
+    {
+      "id": "7766d26170c79905be435ba4",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawLiftPosts",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        761,
+        767
+      ],
+      "sha256": "a5e0b825cec07aaf621bbdcbb3feba940cb9561a156a7f1b37d0dfd179b94cd6"
+    },
+    {
+      "id": "786c537e4392207a8cb30d1d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidViewer",
+      "purpose": [
+        "camera"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1775,
+        1783
+      ],
+      "sha256": "9c0d7ad6ac6641fe17ca77f98ccfb1e2116768ab815afa94bf7379fdb51ab6ee"
+    },
+    {
+      "id": "791e3327b50e7bbfed5153fa",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archMouse",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2062,
+        2064
+      ],
+      "sha256": "ca912360137f6190af65f2edefcde70d95a4c6d2f659d50cb7a5c7c7ad0acd9c"
+    },
+    {
+      "id": "7a139c6e40176ca43ca48808",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archShredder",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2021,
+        2025
+      ],
+      "sha256": "c4d022a8987eb3911e9eb4527cb81aed5ad689c2bf00590adf709ee3bbe276ce"
+    },
+    {
+      "id": "7a5c60cd5472e4ddd6bce566",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archTapW",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2134,
+        2135
+      ],
+      "sha256": "d49b52ef65ecf0079561c3953c77031da3a522c3791ac2ef287358bac8f65b8d"
+    },
+    {
+      "id": "7b9421796ffc18e8be94e7d6",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "glowAt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        926,
+        926
+      ],
+      "sha256": "684af51aa6c35bf86256548784b1bc209f9d321bc355c834fa922a76438160e8"
+    },
+    {
+      "id": "7c67d9e4331904fb1ba41ab1",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidPost",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1685,
+        1691
+      ],
+      "sha256": "7063caff0db567e4b340b9e3cebac588f7ef6ee01f9d061d37c52d473dc8f773"
+    },
+    {
+      "id": "7ccf7264dc1418721ad11dc7",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawPlant",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        344,
+        345
+      ],
+      "sha256": "454f089efb27f3aa9b6446f0535b13519950f045624ac595accda6332f60c816"
+    },
+    {
+      "id": "7d6f4dfe67722a07ee431f2a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidKill",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1550,
+        1550
+      ],
+      "sha256": "16dfd8de4af147224ef3ee1c934a398b213e864a83273cc909a17b5e2ef2bd38"
+    },
+    {
+      "id": "7f4decd5afce91979a7bdaff",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "liftUpdate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        797,
+        817
+      ],
+      "sha256": "911c4f83864223fc8b15ea7f5b7cddcc272c7ed4cce06031b3ebf2b76133c0aa"
+    },
+    {
+      "id": "84e30721a617846e12e48b7b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawWorker",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1175,
+        1187
+      ],
+      "sha256": "f71055b921c2afd1639b106e13da3bd88c22d5c1e7e44f1ad27aa84d0e902786"
+    },
+    {
+      "id": "84eaab405d53aac4f32cb574",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawWalls",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        399,
+        439
+      ],
+      "sha256": "deb8a9fac985649f7774a8dc6eb3fdd5f561b9f08efacbc6862cdf878326ffdb"
+    },
+    {
+      "id": "8709cfd3177fa59a89e80abb",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "open",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2463,
+        2476
+      ],
+      "sha256": "e8105d91061f068b391875780edc3466d328bb6255a322e99dd806869282d380"
+    },
+    {
+      "id": "88341fa80a3b31ad97adf151",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archStart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2101,
+        2102
+      ],
+      "sha256": "161cce425f0002715d692fab9417fa7b5f9f7d8a1b67b25af8dd6f76d09d804b"
+    },
+    {
+      "id": "89c6085b3b1720f3d1001c4a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidReset",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1515,
+        1528
+      ],
+      "sha256": "33616a67d7be3481b1c7a4fbd5a9406439cf259449384065c43d15c521fd851a"
+    },
+    {
+      "id": "8a5015ae2d9a793893a5825f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawParts",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1168,
+        1172
+      ],
+      "sha256": "8d9bd17ded9fda1b08a2460b38164b7bd24fb3e9b8894305fa2abd9150575293"
+    },
+    {
+      "id": "8a65d9986526e904ada11fa0",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawCab",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        703,
+        728
+      ],
+      "sha256": "58cdbac6347dc48005ecab8d6d1feb0d72f2b962573c1973104d6caa389f7b7f"
+    },
+    {
+      "id": "8b3aa0d301b6a3ef7e6b8c6e",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "cabUpdate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        683,
+        693
+      ],
+      "sha256": "9b4fca473e83b2f1670498875ba229002b893c00fc36f1e999036624607746d1"
+    },
+    {
+      "id": "8bd3fd294167df3b7bc69b9b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "ibox",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1705,
+        1707
+      ],
+      "sha256": "cf68446ce308bf46d8f04fb00848cb7545100dba3d4ce1b187463ece7ec0c293"
+    },
+    {
+      "id": "8c4201f07126b56acbfb2e96",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rpGlass",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1481,
+        1481
+      ],
+      "sha256": "3d4d73dc15455dad6f765278aaf11fe777ee4cdb029f0e6e2b0b1aadbeb9892a"
+    },
+    {
+      "id": "8cb60931296f1ca22820f38d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archScanGo",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2105,
+        2105
+      ],
+      "sha256": "721b3d04b91b2944b87b3398fead1034f5e9ffde2d8f3fafc713b3e155fe4ea2"
+    },
+    {
+      "id": "8ea8180f2c114bb857d08c00",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archExitRect",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2144,
+        2145
+      ],
+      "sha256": "0f1d121d156b312e4ae87150a468ba8d5b92f520752069e3087bdf25116e8ae7"
+    },
+    {
+      "id": "8f04842e6a5bf7848338a03e",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawLabTop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1104,
+        1104
+      ],
+      "sha256": "a7a1b80e0b786c565b8150e8c28d93545001f8ccae24958dbb97e62c3d84d509"
+    },
+    {
+      "id": "8f78fe47a13e03517e9a0ffd",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidBadge",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1405,
+        1417
+      ],
+      "sha256": "1e71383a3bd46d8f09457b3f3c96c3ad3053c73668efe0face6dffabe3a91ed6"
+    },
+    {
+      "id": "8f861598f688a87d65d6b667",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "frame",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1289,
+        1297
+      ],
+      "sha256": "2760a0595dd3cd6455f51b064799f5ec29edcfd003ba195bc7e32ec4cbf912a9"
+    },
+    {
+      "id": "919d35b6e26c66e33358afe6",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawShelfSeg",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1968,
+        1987
+      ],
+      "sha256": "9c7acca0b6171f3f9009f0fa08e2b85e9fe9ad0fbce5edf3733d63a28f845515"
+    },
+    {
+      "id": "95d7e05a10e32ecb2ad398c4",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "buildProps",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        361,
+        374
+      ],
+      "sha256": "e5afac76d73243d186c0fff70f704f35c75ea87cf38659bace649af3ba00d52a"
+    },
+    {
+      "id": "96791e5d15139f70a6409885",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "M",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1367,
+        1367
+      ],
+      "sha256": "03a044109bc360aa89853fa6ff2c4d3024e6a052c1ed49bd760a874128dcba77"
+    },
+    {
+      "id": "96b311e5a86f95925179ef00",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawFloor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        378,
+        398
+      ],
+      "sha256": "14e557adfdd055cb3409bd87533460f375de49994bb32a86404aa82e88b30241"
+    },
+    {
+      "id": "9888e52499cf7f526b1092fe",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "once",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1593,
+        1593
+      ],
+      "sha256": "fc8b73b931d79fb5f2eff1c404cc0cb8e5176a58bf2d8275a6ae6bbb1b223f37"
+    },
+    {
+      "id": "995394960c16822d5e89128d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "P",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        193,
+        193
+      ],
+      "sha256": "a07da2caee6b28dd60cae577c8893d1e29286ac1bd5ff952495696a5da145f46"
+    },
+    {
+      "id": "997fa8315c785c5c167f69f5",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rpStep",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1469,
+        1472
+      ],
+      "sha256": "866f7cd86632212ce804415c562d22ef27d8d76edfab3e9364f2909858cba207"
+    },
+    {
+      "id": "9a811920d348de71017f6c0a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archDoorSpot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2143,
+        2143
+      ],
+      "sha256": "05e662a35f4c39b13d094a00a9fee8d2220ed76c65199e3300b57eab1e6d702b"
+    },
+    {
+      "id": "9b05ee148a283a6fd3e7160d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "cbg",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1704,
+        1704
+      ],
+      "sha256": "ac055abe3b6cb787a2c7945fb33c22ea887e2bf2fdd157ebc37ab3c96e7cb35f"
+    },
+    {
+      "id": "9becefb4bc37f4589a48d8da",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "cX",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        177,
+        177
+      ],
+      "sha256": "fd263370dba50421335c6582c6f5fd2833b820e6acd4ad928299eb7995902036"
+    },
+    {
+      "id": "9eb09dcbeecf13dd2e625452",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "director",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1137,
+        1142
+      ],
+      "sha256": "c8514d0c62cc43dda1dbaebb733f5482a5eb171c9a72463667f8b473eb3b7118"
+    },
+    {
+      "id": "9ff4dd184557a9336e973015",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rpDraw",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1473,
+        1480
+      ],
+      "sha256": "211bda862a441c891dc3937dca68b2e501529538982b6d6518395c1a9d05fd26"
+    },
+    {
+      "id": "a033248c68a5800d1a659dd5",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rpPaper",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1485,
+        1485
+      ],
+      "sha256": "08707d2563ab53945f9370a43e397cf438277d8bced8acc7d878d635e11dc949"
+    },
+    {
+      "id": "a0e5b56003e1fa63fe0c20d3",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "aSway",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1841,
+        1841
+      ],
+      "sha256": "c884299474d7361579967b0077b07326a1eb4b399e50876dadf43ff03c231e77"
+    },
+    {
+      "id": "a13aec23e3ea853ab69768d6",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidBeacon",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1466,
+        1467
+      ],
+      "sha256": "374e47177399d447121ac0285cf68fb163a7ffb1a94b1e71d7b766d13bd8edc0"
+    },
+    {
+      "id": "a22ebd6024e3c879694c2417",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        180,
+        188
+      ],
+      "sha256": "a39c0e3aa0643448007ce375c37be667c2db8802db602595acf0464e95e4fdf6"
+    },
+    {
+      "id": "a35e1b138c479d2c22743fe3",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidRope",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1452,
+        1453
+      ],
+      "sha256": "1170e5fe250cb91557e1abf6faa32f17c4a42387332984db7bab84b21c32d278"
+    },
+    {
+      "id": "a547ecfc6edad8090716b141",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "showPanel",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        819,
+        821
+      ],
+      "sha256": "4988eae7bc657097534d3b05b03d26ecedc1ee1fd33006d09bc4c608c5fae845"
+    },
+    {
+      "id": "a78fb90d4f084dcd83ea8715",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "q",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1170,
+        1170
+      ],
+      "sha256": "f75bfe79dcdb0e66dbe4f205a1256f6b283bc581a73bcc45fe1cdf8216799a70"
+    },
+    {
+      "id": "a985914543c96ed396e59386",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "mkWall",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        841,
+        841
+      ],
+      "sha256": "194c3b846cdd95a26f6240a363f0c8d7b35cef91ef502baa425ce69947e844b9"
+    },
+    {
+      "id": "a9a6d722af92225d801f0d23",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archIntern",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2018,
+        2020
+      ],
+      "sha256": "743309e7c81cc95ca54931fe5330f549c95a742afb186999b09dc548defbd304"
+    },
+    {
+      "id": "ab4d7bf558e7785d1ac255d7",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "cabReset",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        675,
+        675
+      ],
+      "sha256": "90d66f12c61c04301fcb9464e9a0132b2c339381be4e8f949bb9fabebf7891e7"
+    },
+    {
+      "id": "ac6b8d2c36fad3f4f7ba8ab9",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidBeast",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1656,
+        1659
+      ],
+      "sha256": "e5c43f77560761dd55c7a7585e2aa7c9346d01674600ef04562ae74d95ebe386"
+    },
+    {
+      "id": "b1357035cd13ff991352f52f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "toBuf",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        190,
+        190
+      ],
+      "sha256": "0d134b33cc4579fec4967ff4c854b1a4ea7a2ee6d728617c6b93ca6b9d0ad4bb"
+    },
+    {
+      "id": "b2bc3661ba1dcdd18e1a3119",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "step",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2462,
+        2462
+      ],
+      "sha256": "c2fbe562d01b87bee3440968adbdc0c4dea739f762338cc4786a669ad43b3a43"
+    },
+    {
+      "id": "b37f40f43582d1ea7c6a93b6",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawBarrel",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1020,
+        1021
+      ],
+      "sha256": "94032ca2491d5414e7db1736576c1c135125a8de1128302c16e97e4fcecc81fd"
+    },
+    {
+      "id": "b5364cf1b7c14cffd6821970",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidWindow",
+      "purpose": [
+        "weather"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1427,
+        1436
+      ],
+      "sha256": "1002826ee8b596787d09ff7ab7359c369273d81eed7a433e3620c018dbf5589c"
+    },
+    {
+      "id": "b608fb1b7a2d98db962ac782",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "setSound",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1262,
+        1262
+      ],
+      "sha256": "b50b26622600fd116972e1b0f0dad060451c8107e4a58560157571c7d228735d"
+    },
+    {
+      "id": "b7302b9493d71b8e9428dd1d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "kindOf",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1204,
+        1205
+      ],
+      "sha256": "fe1314843f9ffe3e5a67a545a81ab84cc74c5a285c836479c1ca3769e2642d8d"
+    },
+    {
+      "id": "b79f25d279d45d5bee85b4f7",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "shadow",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1708,
+        1708
+      ],
+      "sha256": "49f77d8040627c38577eed2f19984c40e08bb1be7b830e63a4cf92e57dc464fe"
+    },
+    {
+      "id": "b8b2e9cc229878c222ace207",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "liftPool",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        769,
+        769
+      ],
+      "sha256": "45d4c74a2c11d7a2ec42504bc911162d6c5a419c6194cc06cf473844889925e5"
+    },
+    {
+      "id": "b8fa855d3566a4bf3811da46",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "LEAD",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        787,
+        796
+      ],
+      "sha256": "41bced1effded36d2260587aa58d778f67c8807a8efefc3c433f92639dd04328"
+    },
+    {
+      "id": "b9ae6618578ff1e96d3587b9",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "hit",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        326,
+        326
+      ],
+      "sha256": "7e58a4d2a2022f321ab105f4e931278b46404d71cb17633d3975a1ff05b54999"
+    },
+    {
+      "id": "b9b24e98840c3e568312fb77",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidMenuTap",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1552,
+        1552
+      ],
+      "sha256": "049dcd76d78ae4da6d3472aaed12102acc778d6f12852290221b787d439d60c1"
+    },
+    {
+      "id": "ba261619e866d5ad333c3636",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "cabIn",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        679,
+        681
+      ],
+      "sha256": "6c24017c7bc70681a6c8c41a61a3dcb38212b02fa960183eead9e16d5cbfb767"
+    },
+    {
+      "id": "ba2cf7d052369341f3ce33ed",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "pl",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1707,
+        1707
+      ],
+      "sha256": "f95eea5fc5134f83f46e475abd9158da6b71ebc349d3537d97c6ad98acb63015"
+    },
+    {
+      "id": "ba73c0cad01dd8a2a9fa77ff",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawCrate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1022,
+        1022
+      ],
+      "sha256": "33d9c2aef80a0c8d888be08452d5214dfee85b4d056a238aabec4862c603d5e5"
+    },
+    {
+      "id": "baef371390e34cc294533e64",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rideUpdate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        885,
+        901
+      ],
+      "sha256": "4f9edcc6ade94d485bef2929ab8b93e7d8c3c9d5e7bf45fa9d92255c3b006f29"
+    },
+    {
+      "id": "bc43b00e4203108c91055777",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "cY",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        178,
+        178
+      ],
+      "sha256": "139c0c1e9dfc4cc5f6425232ad248e260d96aa3536a7d43d0026daae21a3958a"
+    },
+    {
+      "id": "bead0fc655b24bb8727b360c",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "hazStripeFloor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        979,
+        979
+      ],
+      "sha256": "5103b11f0ec45b5f86a9e758f040b20b56ef8e96970b7f0fb27a1a0a5bae8669"
+    },
+    {
+      "id": "bef7134dc3c58e5923cf846e",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawArm",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1006,
+        1014
+      ],
+      "sha256": "d1dec51cc168c3ade5b51628d9b03b486482cb14a9be1bc2edf721e54b4d8a8a"
+    },
+    {
+      "id": "bf373a1d05d0e762bf8bdb42",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidCower",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1391,
+        1397
+      ],
+      "sha256": "1fac95643c97172951146a1f563afc6ed59312bdec32a6e8bd71ec95564be98d"
+    },
+    {
+      "id": "bf527f5976710369e0b14db3",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "initRide",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        833,
+        873
+      ],
+      "sha256": "aef50fe516da5217e255a1c8d7623adec4f343182d24271803a22eb6e83d1d63"
+    },
+    {
+      "id": "bf75ea016737d5c48b24c4d4",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "glyphs",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        213,
+        213
+      ],
+      "sha256": "d6b8dda56b9f82bf6d72e3e858d1b9037213084cb479a79fb8b02f485ebe39ac"
+    },
+    {
+      "id": "bf9100cee0d84b548a851f98",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rbrShape",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1440,
+        1442
+      ],
+      "sha256": "0d2206c4fde60b4638687fc58879d6033dc544610bd17183bd76257699b5e115"
+    },
+    {
+      "id": "c1869ce3a06ea0cea97e7314",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "liftBubblePos",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1205,
+        1205
+      ],
+      "sha256": "166b2c2fdd2108fc478e517eed2e931db78f8012ea5acfcf844194eea5f0f655"
+    },
+    {
+      "id": "c2d0de87e833512f3b2951d1",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawLabNPC",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1023,
+        1024
+      ],
+      "sha256": "da8c500f10796aced268122a777c2e64475065d49f9edcf696358b67c82c64a1"
+    },
+    {
+      "id": "c351b3e38b73aeb71732478f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archBackrest",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2017,
+        2017
+      ],
+      "sha256": "a4b597085ef4b0c034bc3d09c2071de2961893dded260d10e20e819c974baf07"
+    },
+    {
+      "id": "c61ae8b24c204ab52f4c9da4",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "go",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        446,
+        446
+      ],
+      "sha256": "bdf07db042ff1ec4a68cf1059334d3b981932935db49dc381f0f5a11388d0470"
+    },
+    {
+      "id": "c6c9d178f9f24865293c2b9f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawBuffet",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        539,
+        545
+      ],
+      "sha256": "bf9aa8f47c7b4804af0a424dad20aace0521c9407157696a12ad10dfd757b1a4"
+    },
+    {
+      "id": "c715efa5cd322bf27fb62943",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidGuard",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1651,
+        1655
+      ],
+      "sha256": "6b5e6f8a0af6e4b7b35710ab06f5c93d892b68db4c1c907ee86c58701cd985c7"
+    },
+    {
+      "id": "c7989e6bfcbf91b3bda958af",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidBack",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1639,
+        1646
+      ],
+      "sha256": "fc41ed952fc9644625761e506dd51d284f91cfcddd2b5d2567a5658d108d7608"
+    },
+    {
+      "id": "c8909fa9fd5cfcadba35bfb3",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "invCheck",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2451,
+        2458
+      ],
+      "sha256": "2e0ed267f6ff20a0504e1ee5a310b8f4c373d98cff0047c9ff93e31982244bd1"
+    },
+    {
+      "id": "c8fa607af57e6bf2e1f6bfb4",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "seg",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1008,
+        1008
+      ],
+      "sha256": "e9bb5a4915cf0b9c40fc6cee4c0f17905de0bfff10c45ce978a5ed7810fcf0c4"
+    },
+    {
+      "id": "c8feb6070fbb3d9c42dd6f4f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawPortrait",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1123,
+        1123
+      ],
+      "sha256": "6ab65b46332c0d0301f4e3e89b34df4232a93eb20c82d0bd1fd1f2e5b022c95c"
+    },
+    {
+      "id": "c98d4742f89d5910ffa0034a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "pool",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        392,
+        392
+      ],
+      "sha256": "f3fe061b6503e1b7a52432d78ad8f5ba4d62f640d677afb0504bd76fefd02f1b"
+    },
+    {
+      "id": "ca3a767233cb65f67bfb6485",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "r",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2056,
+        2056
+      ],
+      "sha256": "8724832ba19ca89c51d7529f5faae95e4a587ac8079b1a42c101e3b79c99be38"
+    },
+    {
+      "id": "cac05dbfe5e64b05946e55d1",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawTank",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        960,
+        978
+      ],
+      "sha256": "5e08ee8b6bd71e1cf049c82e89d591bbdcd8031e8c3e0a012a37555759b2636f"
+    },
+    {
+      "id": "cb942464c322074118930725",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "f",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1787,
+        1787
+      ],
+      "sha256": "5e46dc4f8f59d4cea9a57b1ef4e039e1f5ff4ed81f4468a84c9509ab61cb180c"
+    },
+    {
+      "id": "cbb3de50a6b80b4c2d29db01",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "queueLines",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        786,
+        786
+      ],
+      "sha256": "915fd9c53976c9ce9d73159ac53510febf0b9f5dd52a8e90d9c84984be061a94"
+    },
+    {
+      "id": "cbc8b739240a4bbb445f0561",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidBreach",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1443,
+        1451
+      ],
+      "sha256": "597393f04a2f0d01500641dc42d0bf40a0dea8ff0f1a66ae920ba149f1d2bf94"
+    },
+    {
+      "id": "cbf1aaf200d72b0dbb0af226",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archReadTable",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2035,
+        2042
+      ],
+      "sha256": "6395202263a02cd31d32be4f3824d8b42df4599b197852b8a92a698f5c5fce8e"
+    },
+    {
+      "id": "cd4bfc6c380ac678a055d9b4",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidOrder",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1554,
+        1561
+      ],
+      "sha256": "11b372543f5660f4461e880f409599f31370e7d4d00a1c243a99e5792811fbba"
+    },
+    {
+      "id": "cdb03bb1baba62187f5c8a3d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "newGame",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1324,
+        1324
+      ],
+      "sha256": "bbc0652f33fde33cf55206e4163707fbc9d328c50d707f7fe77363de3fcec5fe"
+    },
+    {
+      "id": "ce10008ab1fa5858307dfa18",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "r",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1580,
+        1580
+      ],
+      "sha256": "620d7a1a6f784c914c61a508a087611d5e93ffedc2edfba2094ac643065e867e"
+    },
+    {
+      "id": "cea8a1a890764b6cb43ac9bb",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rpCase",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1482,
+        1482
+      ],
+      "sha256": "4d998ad643599b273e6ec91858f1ffab80f0b3152f25748ebf2a79617d775413"
+    },
+    {
+      "id": "cefe024a261b68505db3659e",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "inline-script@20359",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        168,
+        2484
+      ],
+      "sha256": "aff771cdc46bfc61aa42cd3ec712fd611459d51999705961ae90e9347718ea60"
+    },
+    {
+      "id": "cfd48ba2f1c77f2c47afbacb",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidAI",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1540,
+        1546
+      ],
+      "sha256": "dcfb7e4039e364c5639d34cff4609e711770191f336f6505b637e3602ec8b484"
+    },
+    {
+      "id": "d06cdbe9cfc444441e3d7c68",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "floorT",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        195,
+        195
+      ],
+      "sha256": "79d01110bfea56a6d5cd7ee1cd561312f3faf41ddac14ed31a9e1470526c05ac"
+    },
+    {
+      "id": "d07414585f03cc91b87550b8",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "r",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1386,
+        1386
+      ],
+      "sha256": "47a4e69c46e13c07d76a4583349d075e0f3e3badc1e8d49d2a087958b7e277dc"
+    },
+    {
+      "id": "d1380b499bda146ef2611955",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawLiftWall",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        731,
+        760
+      ],
+      "sha256": "72a4554ea8e1998e0aea1ba02482b98c1459f1cb71b1e936de3475d0367ef55f"
+    },
+    {
+      "id": "d23c584e6d67d5bfbecd9ef2",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "addLiftProps",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        768,
+        768
+      ],
+      "sha256": "34c8106fadaa344f9bf9f3711506d19ec912fd958cabc48d374a2e5347139f87"
+    },
+    {
+      "id": "d2951b9ea2b305fa87593d6f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "moveW",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        458,
+        466
+      ],
+      "sha256": "350c9877c87a4a756af56a80d05aa7f26d798bcae142485f067b6a96bfc49813"
+    },
+    {
+      "id": "d2b3f2f257f39e95cd8012bf",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "buildLab",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1025,
+        1038
+      ],
+      "sha256": "00991c7198a428cea3c339ebb948de031c980ade20e7ca02acd7b1da9d1b5cc1"
+    },
+    {
+      "id": "d724bd9a0d6f7854a6280ce1",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archCart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2065,
+        2069
+      ],
+      "sha256": "6cf561dd89d7957dade2d84304b2b638f716e1072c1b2c0db2ce9e7ed8111625"
+    },
+    {
+      "id": "d81f5c2157f40e862d06d3ef",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "liftHit",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        770,
+        770
+      ],
+      "sha256": "d2ff06d70cabe5a206b5f165e5ae60b0a4a7cfea369823124f0079bf5df5626c"
+    },
+    {
+      "id": "d854f3d7b1aa1ccc605d17d0",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawRiders",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        876,
+        880
+      ],
+      "sha256": "7b01069f66ccf9fe84f3257f1e00fecb17928a8fec031c968c7f6fdc572287d8"
+    },
+    {
+      "id": "dad3c886cea2363ba68c6d4a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawTaskIcon",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1124,
+        1132
+      ],
+      "sha256": "72e806d4a3a2aa950848d1025b9c0513bce8b5aab9797a239680812b8ab093af"
+    },
+    {
+      "id": "db5b52960151fd979084367d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "ell",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        203,
+        203
+      ],
+      "sha256": "2e5e537b45f76593479b32c41f0464703afe9c0bd1bfab43021db11e08fae837"
+    },
+    {
+      "id": "db7088950fd05aff90f16337",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "swat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1342,
+        1378
+      ],
+      "sha256": "c9d0cf64b8ff75172dd024f311c1db623c8be80badc2e4041b2dc244f9538227"
+    },
+    {
+      "id": "db77ead8c65b40cbd4c3737f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawBust",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        537,
+        538
+      ],
+      "sha256": "ac4a0770a71fc8e3ea445b2865f8d8aae9aca9357b2fad80620103c302020a1f"
+    },
+    {
+      "id": "dd4b445894ead52e812b3834",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawStool",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        999,
+        999
+      ],
+      "sha256": "1906086fe62b2bc0394c0ee42f0b304917156a5f50e6ab328ebc1b549bfda78b"
+    },
+    {
+      "id": "dd86a71f6583ad034234378b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "callLift",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        788,
+        796
+      ],
+      "sha256": "c080cbca2c468d5270bf108f227f1b945add3867ebb79b6b5f2c31ca5a394d69"
+    },
+    {
+      "id": "de5ac1b85c9598e5fac18d2f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "close",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2477,
+        2477
+      ],
+      "sha256": "4243c52f3d8dbc16a9b28036e76e74fdccdbc2db94dcfc2f5ff8844875b2d028"
+    },
+    {
+      "id": "e0f2c369466d9e544f83ac7a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidSchedule",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1590,
+        1590
+      ],
+      "sha256": "905539c81c7bcd1c00edd894168cf96ebd6ab88bb71f93320ae88b8ff4777469"
+    },
+    {
+      "id": "e1490e23cda2b857085417c7",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archPaper",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2108,
+        2108
+      ],
+      "sha256": "c4fa483fb0a16a21b0dcb7370f5edcf38b5f61e8cc882262f50c2c5a8203536f"
+    },
+    {
+      "id": "e2df94c506cc3b299f0b38e2",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "q",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1193,
+        1193
+      ],
+      "sha256": "e744e89cb49e4f68802798a4132f892b08fb60c9768705c224a3d5eedb56733d"
+    },
+    {
+      "id": "e3a56eb83fcc3fe37b91b85f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawWallsCourt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        600,
+        648
+      ],
+      "sha256": "41d45658f00f4006399cbe7486f401558a9234c732f951dc0433e292867d07f8"
+    },
+    {
+      "id": "e3e668e7312e0fcbc393cf8f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "done",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1135,
+        1136
+      ],
+      "sha256": "08ba70205ff83b5b7eea8e36f07d07fd77a61ca6a68fcd093797eff3defa3eae"
+    },
+    {
+      "id": "e41175281d8408f7351ffa9b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archFindGo",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2103,
+        2104
+      ],
+      "sha256": "99bb65f776a3bbe243b20bc80caf1d661c94c5e812a06907e541c156fde6b6b4"
+    },
+    {
+      "id": "e423a3136330be7728bcc571",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archChair",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2016,
+        2016
+      ],
+      "sha256": "9f2b8fcd6d4abb05c5295796be3ede368145d976a2d064b584c891d93c80b26f"
+    },
+    {
+      "id": "e4491ee35f296b420455f6a8",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archCabinet",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2043,
+        2049
+      ],
+      "sha256": "e109daf45f36c8601c07a5e655ca4a103f96b9cd05c21c657f7e81f4343abb5b"
+    },
+    {
+      "id": "e49dad78ba28ab0d7ee9d26d",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archFile",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2107,
+        2107
+      ],
+      "sha256": "3feb98fbaaab36958a7b00a44288a03eb16850200eaa016f36c206824583b3b1"
+    },
+    {
+      "id": "e4a5d60979d1eb6522a6a992",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "randFloor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        327,
+        327
+      ],
+      "sha256": "b645587063b59095330fb85c4b83d254943cea2ba863deabd91d272a1b536268"
+    },
+    {
+      "id": "e53cb4934e2712011e75ed84",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "setLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1107,
+        1108
+      ],
+      "sha256": "36f221bbfc91ea28106a04dee5f04d1502fab99293469696c95b53c7e3fd0e92"
+    },
+    {
+      "id": "e5771c56e0ad149d1b011549",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archOfficeDoor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1869,
+        1869
+      ],
+      "sha256": "4e6de533a8d970f0646382e6afd8f37ce9a48a9e2eabde8977a79114d81c80e7"
+    },
+    {
+      "id": "e6530779c043b07474067b0a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "say",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1122,
+        1122
+      ],
+      "sha256": "530eaeabae32da2cddb6b86593b243a98f1ba02574b2c206e225c66b37cd9732"
+    },
+    {
+      "id": "e6b4f834e27d392e5020ed33",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidWorker",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1692,
+        1700
+      ],
+      "sha256": "3d2e1dc186a2e467c0d6368f70b8ba6a5a0125c3a2a68c9d0fca02fc2ff58f48"
+    },
+    {
+      "id": "e6cbd9b639e1902c70a8de46",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "archProps",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2072,
+        2072
+      ],
+      "sha256": "e5701772d9dca27766b4d78b180acbc3f315c45ad55448a3634af1dcf6c0525b"
+    },
+    {
+      "id": "e8aa4de9fd9ddb4067133477",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "resize3",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        874,
+        874
+      ],
+      "sha256": "11947cfe1dbe665e58efdbe3688203eab556d8674920e94b96fd68b4f7fd881a"
+    },
+    {
+      "id": "ed7a8de4dc19c06e53503329",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "post",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1227,
+        1227
+      ],
+      "sha256": "103606ae9e5054f20d6542be4c8611ed238f1cb1380f7d8f76cdd4027f4493cb"
+    },
+    {
+      "id": "ed81e70f5221ee6b992ab69b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "misN",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1119,
+        1121
+      ],
+      "sha256": "91ef6dcb5291f67893b22cf849e3e3eeb601051816dd370870867786984a986f"
+    },
+    {
+      "id": "f1bf2851d692fa948e6a103f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "r",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2137,
+        2137
+      ],
+      "sha256": "be361a594df6501cbbb8d8a427e5e5378611d673fb0be1867b7f5375a133dd18"
+    },
+    {
+      "id": "f29ca948301ec71e3645bbe1",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "poly",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        199,
+        199
+      ],
+      "sha256": "e0fc4af59b2855b09a9cd29735f296ce31bacc783e3915d0a58e0aec7b54edac"
+    },
+    {
+      "id": "f34cb49914f6f0618da56aed",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "buildArch",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        2073,
+        2081
+      ],
+      "sha256": "3a3dd4f88a7efc0278eae338ff62ffe396949ba02e593b9602897692ddfcfe1d"
+    },
+    {
+      "id": "f4cda1136d11f88f4319ed21",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "LOOK",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1106,
+        1108
+      ],
+      "sha256": "e5ad6b04e04a2e708e7e4dbad28e0ebe65989333bbcca59857fc4bfe0d797765"
+    },
+    {
+      "id": "f58fb1bba187ef39c2839aee",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidFront",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1670,
+        1683
+      ],
+      "sha256": "ba47002d10a0c3c0ac3a5ef3cffe29c022acdad2b953e3ebadce71ab0306e6a2"
+    },
+    {
+      "id": "f5ebbfdd20f65adcfc8c196b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "arrive",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        447,
+        457
+      ],
+      "sha256": "b428f5ce9531c19588a6b5c4e1fd168bff2be1c63010ba2fc2f90808e20f893e"
+    },
+    {
+      "id": "f8d36eead0834f9faaa1d928",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidPanic",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1381,
+        1390
+      ],
+      "sha256": "9558ad7c06962c8fb6b94d640fcfcae1e20c27115e44ff75653c219186663bce"
+    },
+    {
+      "id": "f9645b8b4abbdced5dfc1238",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidShotSfx",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1648,
+        1650
+      ],
+      "sha256": "36e3548e90624544b44bf72445870d12a8209ce3f6570837451f61ef6bb16f7f"
+    },
+    {
+      "id": "f9702c560bf0173eeab1055a",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawIndicators",
+      "purpose": [
+        "weather"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1218,
+        1226
+      ],
+      "sha256": "0d66736c693a12539262dd514b8ca905df3da6f46b346b49abc34c234c78ca45"
+    },
+    {
+      "id": "f997b616752e647bbc0c9378",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "pool",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1894,
+        1894
+      ],
+      "sha256": "0602d85fcfed857e36388267ae6933c66ec201ca1458c40bac1fd1baddb3548d"
+    },
+    {
+      "id": "fb18f63367cbff922fe5550f",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "digits",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        667,
+        667
+      ],
+      "sha256": "25456c96e0b39959c4025d129fbb1f594f2528a0eb4fcc11d3283455c8f41319"
+    },
+    {
+      "id": "fb41d0fadc6d5b02c3125763",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawChair",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        342,
+        342
+      ],
+      "sha256": "52f083c14f898dd686a996ae5ca0a190c8477277d854688ed77870e8f90bf0b0"
+    },
+    {
+      "id": "fd82561b799f606cb47e71bb",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rpSpark",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1484,
+        1484
+      ],
+      "sha256": "2ab41fb866745b2a6c1f9b23151364d2746745347cdf3468d045143b7c016187"
+    },
+    {
+      "id": "fdcecca6f9b89d1847003f16",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "drawWallsArch",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1904,
+        1965
+      ],
+      "sha256": "0c8ab2fb260ad6a37efa88b6a1eaecdd417fdfd70c76c35fe0ba26cd1c49309f"
+    },
+    {
+      "id": "fea4557876ea7c601c83bafa",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "raidTracer",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1460,
+        1461
+      ],
+      "sha256": "f13de4a20981d6d50c4bd30617bfec8abcd9d51126848313b922d7eb05525cc8"
+    },
+    {
+      "id": "ffc7c627293aaaee7a8fe19b",
+      "game": "asqura-ilya-reference",
+      "kind": "solution",
+      "name": "rpChunk",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/asqura-ilya-reference/index.html",
+      "lines": [
+        1486,
+        1486
+      ],
+      "sha256": "ca5187796b57fff9c16f4a56cabf5407edd55a1520f4a11b780e86b792541e72"
+    }
+  ],
+  "counts": {
+    "assets": 3,
+    "file_assets": 0,
+    "solutions": 282
+  }
+}

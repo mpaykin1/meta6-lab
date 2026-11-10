@@ -21,6 +21,9 @@ export function verifyCatalog(root=ROOT){
   ids.add(s.id);
   if(!s.source_path||!s.source_path.startsWith('games/'+s.game+'/')&&!s.source_path.startsWith('observer-world-en-v7/')&&!s.source_path.startsWith('ashen-sumerek/')&&!s.source_path.startsWith('underwater-world/')&&!s.source_path.startsWith('three-worlds-game/')&&!s.source_path.startsWith('meta-games-worlds/veil-terraces/'))throw Error('Source not allowlisted');
   if(!Array.isArray(s.lines)||!s.lines.length)throw Error('Missing source ranges');
+  // A byte-identical *-copy directory is never a separate owner-approved game.
+  if(/-copy$/i.test(s.game)||s.lines.some(r=>/(?:^|\/)[^/]+-copy(?:\/|$)/i.test(r.source_path)))
+   throw Error('Copy game cannot be a library exemplar: '+s.id);
   let total=0;
   const chunks=[];
   for(const r of s.lines){

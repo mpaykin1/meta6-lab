@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Довести PR #200 (B2 ч.2) до зелёных проверок и слияния | МГЛ | MG-строитель-2 | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-10 05:20 | — |
 | взято | Синхронизировать PR #189 с main, сохранить эталон Golden Knight и проверить CI | МГЛ | чат ChatGPT | `lab/endless-valleys-golden-knight-reference-1109` | [#189](https://github.com/mpaykin1/meta6-lab/pull/189) | 2026-11-10 05:12 | — |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | M6 | МГЛ | MG-строитель-3 | `lab/mcp-connect` | [#192](https://github.com/mpaykin1/meta6-lab/pull/192) | 2026-11-09 22:25 | 2026-11-09 22:26 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/skin-rusty-robot` | [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | 2026-11-09 16:21 | 2026-11-09 19:38 |

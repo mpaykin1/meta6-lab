@@ -44,6 +44,13 @@ async function suite(m) {
   assert.equal(await m.safeSection(async () => { throw new Error('GitHub API 403'); }),
     'нет данных');
   assert.equal(await m.safeSection(async () => 42), 42);
+  assert.deepEqual(m.newErrorRows('| 18 | старая |', '| 18 | старая |\n| 18 | новая |'),
+    ['| 18 | новая |']);
+  assert.deepEqual(m.newErrorRows(null, '| 18 | новая |'), 'нет данных');
+  assert.deepEqual(m.normalizeChanges('нет данных'),
+    { count: 'нет данных', folders: 'нет данных' });
+  assert.deepEqual(m.normalizeChanges({ count: 2, folders: 'scripts:4' }),
+    { count: 2, folders: 'scripts:4' });
 }
 
 const mutations = {
@@ -78,6 +85,14 @@ const mutations = {
   'api-error-crashes-summary': [
     '    // Сбой одного источника не должен искажать другие секции.\n    return UNKNOWN;',
     '    // Сбой одного источника не должен искажать другие секции.\n    throw _error;'
+  ],
+  'duplicate-error-number-hidden': [
+    '!oldRows.has(row)',
+    'false'
+  ],
+  'failed-compare-disguised-as-zero': [
+    "? value : { count: UNKNOWN, folders: UNKNOWN };",
+    "? value : { count: 0, folders: 'ничего' };"
   ],
   'hardcoded-protected-file-cheat': [
     'export function isProtectedFile(file) {',

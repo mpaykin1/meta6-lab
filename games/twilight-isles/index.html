@@ -496,7 +496,8 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 /* ===== Playgama Bridge: init, language, storage, game_ready, gameplay start/stop, pause/audio, ads ===== */
 const PG = (() => {
-  const br = null; // META GAMES has no platform SDK. let inited = false, readyQ = false, readySent = false, playing = false;
+  const br = null; // META GAMES has no platform SDK.
+  let inited = false, readyQ = false, readySent = false, playing = false;
   let platPause = false, hidden = false, adPause = false, audioOn = true, saveT = null;
   const SAVE_KEY = 'isle_save';
   let data = {};

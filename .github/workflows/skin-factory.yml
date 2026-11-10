@@ -22,6 +22,8 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  pull-requests: write
+  issues: write
 jobs:
   cut:
     runs-on: ubuntu-24.04
@@ -66,3 +68,25 @@ jobs:
             skins/sources/rusty-robot/side-by-side.png
             skins/sources/rusty-robot/preview-meta.json
           if-no-files-found: warn
+
+      - name: Комментарий в PR со сравнением и ссылкой на игру
+        if: ${{ always() && github.event_name == 'pull_request' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const ok = fs.existsSync('skins/sources/rusty-robot/side-by-side.png');
+            const run = 'https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId;
+            const artifact = run + '#artifacts';
+            const problems = ok ? 'Проблемы: см. результат проверок S1–S12 и К5 в прогоне.' : 'Проблема: side-by-side.png не создан, проверьте упавший шаг.';
+            const body = [
+              '### Фабрика скинов — ржавый робот',
+              'Сравнение эскиза и героя: [side-by-side.png и preview.png](' + artifact + ') (артефакт cut-preview-rusty-robot).',
+              'Игра: [Skin Trainer](https://mpaykin1.github.io/meta6-lab/games/skin-trainer/?skin=../../skins/packs/rusty-robot/).',
+              problems,
+              'Прогон: ' + run,
+            ].join('\n\n');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.issue.number, body
+            });

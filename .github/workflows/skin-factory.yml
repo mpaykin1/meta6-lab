@@ -131,6 +131,9 @@ jobs:
               state: 'open', head: context.repo.owner + ':' + branch
             });
             if (!prs.data.length) return;
+            const branchSha = (await github.rest.repos.getBranch({
+              owner: context.repo.owner, repo: context.repo.repo, branch
+            })).data.commit.sha;
             const run = 'https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId;
             const ok = '${{ job.status }}' === 'success';
             const ids = fs.readdirSync('skins/sources', {withFileTypes: true}).filter(e =>
@@ -140,9 +143,9 @@ jobs:
             for (const id of ids) {
               const png = 'skins/sources/' + id + '/side-by-side.png';
               const image = 'https://raw.githubusercontent.com/' + context.repo.owner + '/' + context.repo.repo +
-                '/' + branch + '/' + png;
+                '/' + branchSha + '/' + png;
               const play = 'https://raw.githack.com/' + context.repo.owner + '/' + context.repo.repo +
-                '/' + branch + '/games/skin-trainer/index.html?skin=../../skins/packs/' + id + '/';
+                '/' + branchSha + '/games/skin-trainer/index.html?skin=../../skins/packs/' + id + '/';
               lines.push('#### ' + id);
               lines.push(ok && fs.existsSync(png) ? '![Эскиз | герой в скине](' + image + ')' :
                 'Сравнение не создано или прогон красный — проверьте ошибку в Actions.');

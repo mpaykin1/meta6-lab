@@ -179,7 +179,7 @@
       // Read-only terrain hint for the strategy: the next step is higher than the hero's
       // column (terrace, rock top, pier, lighthouse ring), so a real held jump is needed.
       const col = (x, z) => world.stand[Math.floor(x) + Math.sqrt(world.stand.length) * Math.floor(z)];
-      const climb = !!target && (col(target.x, target.z) > col(p.x, p.z) ||
+      const climb = !!target && !!world.stand && (col(target.x, target.z) > col(p.x, p.z) ||
         (typeof target.y === 'number' && target.y > p.y + 1));
       const layoutHash = [
         world.seed, world.biome,

@@ -1,0 +1,8 @@
+{
+  "name": "meta-games-mcp-library-sdk-check",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0"
+  }
+}

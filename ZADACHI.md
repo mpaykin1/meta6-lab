@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Импорт пяти коммерчески разрешённых CC0 asset packs в библиотеку | МГЛ | чат ChatGPT | `lab/import-five-cc0-packs` | — | 2026-11-10 10:06 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Довести PR #200 (B2 ч.2) до зелёных проверок и слияния | МГЛ | MG-строитель-2 | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-10 05:20 | 2026-11-10 09:15 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | МГЛ | автозадача | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-09 15:45 | 2026-11-10 09:15 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | МГЛ | чат ChatGPT | `lab/bot-batch-1` | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | 2026-11-09 15:15 | 2026-11-10 09:12 |

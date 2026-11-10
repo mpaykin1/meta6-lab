@@ -2,14 +2,6 @@
 
 Итог: зависло 19 · конфликт 0 · красные проверки 8 · нужен Claude 7
 
-### PR #129
-- PR: https://github.com/mpaykin1/meta6-lab/pull/129
-- Ветка: `lab/cycle4-twilight-isles-no-ads-1108`
-- SHA: `d38bd8f7cae9a4b30c3c01ad083866fc5985f29e` · последний коммит: 2026-11-08T21:41:23Z
-- Проблема: Красная проверка: bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42526459029/job/128871055659), changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42526458688/job/128871054551)
-- Задание: Исправь bot по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42526459029/job/128871055659 и повтори CI.
-- Взял: MG-строитель-4 2026-11-10T09:44:34Z
-
 ### PR #131
 - PR: https://github.com/mpaykin1/meta6-lab/pull/131
 - Ветка: `lab/owner-graphics-animation-references-20261108`
@@ -226,3 +218,5 @@
 - [#207](https://github.com/mpaykin1/meta6-lab/pull/207) Эталон: Король Пепла — исходная игра и каталог 34 ассетов
 - [#210](https://github.com/mpaykin1/meta6-lab/pull/210) SKIN FACTORY: ножницы и ловушки для parts-sheet
 - [#209](https://github.com/mpaykin1/meta6-lab/pull/209) Библиотека игр: эталоны, системы, ассеты и MCP
+
+- [#129](https://github.com/mpaykin1/meta6-lab/pull/129) НУЖЕН CLAUDE: защищённый workflow, красный META BOT

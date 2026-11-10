@@ -32,8 +32,8 @@ async function load(url,THREE){
   if(additive)return new THREE.MeshBasicMaterial({...opts,color:0xffffff,
    opacity:.82,depthWrite:false});
   return new THREE.MeshLambertMaterial({...opts,color:def.color||0xffffff,
-   emissive:new THREE.Color(def.emissive||0x000000),
-   emissiveMap:emit||null,emissiveIntensity:emit?.3:0});
+   emissive:new THREE.Color(0x000000),
+   emissiveMap:null,emissiveIntensity:0});
  }
  function geometry(p){
   const d=p.dims||[.12,.12,.12];
@@ -69,22 +69,30 @@ async function load(url,THREE){
    let tex=p.file?cache.get(p.file):null;
    const flip=animations.find(a=>a.type==="flipbook");
    if(flip&&tex){tex=tex.clone();tex.repeat.set(1/flip.frames,1);tex.offset.set(0,0);tex.needsUpdate=true;}
-   const mat=material(p.material,tex,null);
+   let mat=material(p.material,tex,null);
    // Авторские PNG показываются одним слоем: повторные полупрозрачные
    // плоскости создавали z-fighting и уничтожали мелкие механические детали.
    if(tex){mat.depthWrite=true;mat.polygonOffset=true;mat.polygonOffsetFactor=-1;mat.polygonOffsetUnits=-1;}
    const layer=p.layer||"2.5d";
    const d=p.size||[.12,.12];
-   let mesh;
+   let mesh,outline=null,materials=null;
    if(layer==="3d"){
-    mesh=new THREE.Mesh(geometry(p),mat);group.add(mesh);
-   }else if(p.profileVolume && tex){
-    // Only side/back profiles use textured volume. Accepted frontal decals
-    // remain unchanged. The author PNG is mapped to the visible side face.
-    const thick=Math.max(.055,Math.min(.18,p.profileVolume));
-    const geo=new THREE.BoxGeometry(d[0],d[1],thick);
-    mesh=new THREE.Mesh(geo,mat);
+    if(p.faces){
+     const order=["right","left","top","bottom","back","front"];
+     materials=order.map(face=>new THREE.MeshBasicMaterial({
+      map:cache.get(p.faces[face]),color:0xffffff,side:THREE.FrontSide}));
+     mat.dispose();mat=materials[0];
+     mesh=new THREE.Mesh(geometry(p),p.primitive==="sphere"?materials[0]:materials);
+    }else{
+     mesh=new THREE.Mesh(geometry(p),mat);
+    }
     group.add(mesh);
+    if(p.outline!==false){
+     // Inverted hull is geometry, never emissive, independent of scene lights.
+     outline=new THREE.Mesh(geometry(p),new THREE.MeshBasicMaterial({
+      color:0x1a0f14,side:THREE.BackSide,depthWrite:true}));
+     outline.scale.setScalar(1.03);group.add(outline);
+    }
    }else{
     const geo=new THREE.PlaneGeometry(d[0],d[1]);
     const depth=layer==="2.5d"?(p.file?1:Math.min(5,Math.max(1,p.depth||1))):1;
@@ -92,6 +100,14 @@ async function load(url,THREE){
     mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
     for(let i=0;i<depth;i++){tempM.makeTranslation(0,0,i*.008);mesh.setMatrixAt(i,tempM);}
     mesh.instanceMatrix.needsUpdate=true;mesh.frustumCulled=false;group.add(mesh);
+    if(layer==="2.5d" && tex && ["plate","gear","panel","piston"].includes(p.kind)){
+     // 2–4 pixel relief behind each original alpha decal; the front artwork
+     // is only on the forward plane, never copied onto thick side faces.
+     const relief=Math.min(.032,Math.max(.016,(p.depth||3)*.008));
+     const backing=new THREE.Mesh(new THREE.BoxGeometry(d[0]*.94,d[1]*.94,relief),
+      new THREE.MeshBasicMaterial({color:0x613528}));
+     backing.position.z=relief/2+.002;group.add(backing);
+    }
     if(layer==="2d"){
      const q=new THREE.Quaternion();
      mesh.onBeforeRender=function(renderer,scene,camera){
@@ -100,7 +116,7 @@ async function load(url,THREE){
      };
     }
    }
-   entries.push({p,group,mesh,mat,tex,animations,base:[...offset],rot:[...rot],
+   entries.push({p,group,mesh,mat,tex,materials,outline,animations,base:[...offset],rot:[...rot],
     chain:animations.find(a=>a.type==="chain")});
   }
   return this;
@@ -144,7 +160,11 @@ async function load(url,THREE){
    if(e.p.walkLink)g.position.y+=Math.sin(walk+(e.p.anim?.[0]?.phase||0)*Math.PI*2)*speed*.025;
   }
  }
- return {manifest,apply,update,dispose(){for(const e of entries){e.mesh.geometry.dispose();e.mat.dispose();} for(const t of cache.values())t.dispose();}};
+ return {manifest,apply,update,dispose(){for(const e of entries){e.mesh.geometry.dispose();
+   for(const m of e.materials||[e.mat])m.dispose();
+   if(e.outline){e.outline.geometry.dispose();e.outline.material.dispose();}
+   for(const child of e.group.children)if(child!==e.mesh&&child!==e.outline){child.geometry?.dispose();child.material?.dispose();}
+  } for(const t of cache.values())t.dispose();}};
 }
 root.SkinRuntime={load};
 })(typeof window!=="undefined"?window:globalThis);

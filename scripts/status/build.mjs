@@ -23,7 +23,8 @@ export function prState(pr) {
 
 export function isProtectedFile(file) {
   return /^(scripts\/(meta-bot|meta-progress|kontur)\/|\.github\/workflows\/)/.test(file) ||
-    /(^|\/)(meta-games-guard[^/]*|selftest[^/]*|test[^/]*\.(mjs|js|py)|verify-[^/]*|mutate-[^/]*|[^/]*\.spec\.(mjs|js|ts))$/.test(file);
+    /(^|\/)(meta-games-guard[^/]*|selftest[^/]*|test[^/]*\.(mjs|js|py))$/.test(file) ||
+    /(^|\/)(verify-[^/]*|mutate-[^/]*|[^/]*\.spec\.(mjs|js|ts))$/.test(file);
 }
 
 export function progressMark(progress, id) {

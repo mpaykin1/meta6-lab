@@ -3,7 +3,8 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {createServer} from 'node:http';
 import {fileURLToPath} from 'node:url';
-import {chromium} from 'playwright';
+import {createRequire} from 'node:module';
+const {chromium}=createRequire(new URL('./mcp-test/package.json',import.meta.url))('playwright');
 import {rangeBytes,ROOT as DEFAULT_ROOT} from './machine.mjs';
 import {verifyCatalog} from './verify-catalog.mjs';
 

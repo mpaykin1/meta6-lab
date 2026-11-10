@@ -16,7 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
-| взято | Закрыть устаревший PR #43, заменённый PR #49 | МГЛ | MG-строитель-1 | `lab/veil-weather-original-20261107` | [#43](https://github.com/mpaykin1/meta6-lab/pull/43) | 2026-11-10 07:12 | — |
+| ГОТОВО: https://github.com/mpaykin1/meta6-lab/pull/43 | Закрыть устаревший PR #43, заменённый PR #49 | МГЛ | MG-строитель-1 | `lab/veil-weather-original-20261107` | [#43](https://github.com/mpaykin1/meta6-lab/pull/43) | 2026-11-10 07:12 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Довести PR #200 (B2 ч.2) до зелёных проверок и слияния | МГЛ | MG-строитель-2 | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-10 05:20 | 2026-11-10 03:12 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | МГЛ | автозадача | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-09 15:45 | 2026-11-10 03:12 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/rules-bot-trainer` | [#204](https://github.com/mpaykin1/meta6-lab/pull/204) | 2026-11-09 16:36 | 2026-11-10 02:51 |

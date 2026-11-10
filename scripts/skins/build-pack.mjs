@@ -207,7 +207,7 @@ async function main(){
       entries.push({...front,id:solid.id+(side<0?'-side-left':'-side-right'),
         size:[Math.max(.13,halfDepth*2),front.size[1]],
         offset:[solid.offset[0]+side*(halfWidth+.009),solid.offset[1],solid.offset[2]],
-        rotation:[0,side*Math.PI/2,0],depth:1,anim:[]});
+        rotation:[0,side*Math.PI/2,0],depth:1,profileVolume:.12,anim:[]});
     }
   }
   // Детали механики (шестерни, провода, свет), не являющиеся бронёй,
@@ -222,7 +222,7 @@ async function main(){
       entries.push({...part,id:part.id+(sign<0?'-profile-left':'-profile-right'),
         layer:'2.5d',size:[Math.max(.12,(solid?.dims?.[2]||.22)*.8),part.size[1]],
         offset:[x+sign*(halfWidth+.018),part.offset[1],part.offset[2]+.14],
-        rotation:[0,sign*Math.PI/2,0],depth:1,anim:[]});
+        rotation:[0,sign*Math.PI/2,0],depth:1,profileVolume:.085,anim:[]});
     }
   }
   // На левой ноге только одна авторская деталь — используем ту же броню

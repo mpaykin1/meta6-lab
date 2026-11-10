@@ -8,6 +8,9 @@ on:
       - 'scripts/library/catalog-systems.mjs'
       - 'scripts/library/catalog-cli.mjs'
       - 'scripts/library/mutate-catalog-build.mjs'
+      - 'scripts/library/mcp-test/**'
+      - 'shared/approved/tools/library.mjs'
+      - 'shared/approved/mcp.mjs'
       - 'scripts/library/source-policy.mjs'
       - 'scripts/library/verify-catalog.mjs'
       - 'scripts/library/mutate-catalog.mjs'
@@ -23,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.ref_name }}
+          ref: ${{ github.ref }}
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
@@ -35,6 +38,8 @@ jobs:
           node --check scripts/library/mutate-catalog.mjs
           node --check scripts/library/catalog-cli.mjs
           node --check scripts/library/mutate-catalog-build.mjs
+          node --check shared/approved/tools/library.mjs
+          node --check scripts/library/mcp-test/client.mjs
       - name: Run deceptive catalog mutations
         run: |
           node scripts/library/mutate-catalog.mjs
@@ -45,6 +50,11 @@ jobs:
         run: node scripts/library/verify-catalog.mjs
       - name: Show system counts by game
         run: node -e "const c=require('./shared/library/catalog-solutions.json');for(const g of new Set(c.solutions.map(s=>s.game)))console.log(g,c.solutions.filter(s=>s.game===g).length)"
+      - name: Official MCP SDK stdio integration
+        if: github.event_name == 'pull_request'
+        run: |
+          npm install --prefix scripts/library/mcp-test --ignore-scripts --no-audit --no-fund
+          node scripts/library/mcp-test/client.mjs
       - name: Commit generated catalog only to the feature branch
         if: github.event_name == 'push' && github.ref == 'refs/heads/lab/library-catalog'
         run: |

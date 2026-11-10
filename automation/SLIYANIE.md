@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 68, слито 0, закрыто 35, открыто 33 — бот, 2026-11-10 08:13 UTC
+Итог: всего 68, слито 0, закрыто 36, открыто 32 — бот, 2026-11-10 09:19 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -37,7 +37,7 @@
 | #129 | код | `lab/cycle4-twilight-isles-no-ads-1108` | fix(meta): Twilight Isles 2 plays without ads, with free rev | open | |
 | #126 | код | `lab/sketch-to-game-standard` | Эталон: универсальный промпт Sketch → HTML Game → ZIP | open | |
 | #125 | код | `lore/alternative-last-seed-20261108` | Lore: alternative Last Seed mythology and inspiration bank | open | |
-| #124 | код | `lab/seed-of-last-world-canon` | ЛОР: Зерно последнего мира — эталон и карта мультивселенной  | open | |
+| #124 | код | `lab/seed-of-last-world-canon` | ЛОР: Зерно последнего мира — эталон и карта мультивселенной  | closed | |
 | #122 | код | `lab/meta-bot-real-game-hooks-1108` | feat(meta-bot): honest gameplay adapters for Broken City and | closed | |
 | #116 | код | `lab/cycle1-broken-city-bot-strategy-1108` | feat(bot): Broken City real-input strategy scaffold | closed | |
 | #113 | код | `lab/cycle2-broken-city-bot-config-20261107` | feat(bot): Broken City honest run configuration | closed | |

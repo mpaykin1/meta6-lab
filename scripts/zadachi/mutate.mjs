@@ -1,4 +1,4 @@
-// Ловушки (К2): каждая порча watch.mjs обязана ронять verify.mjs. Последняя — «обман» (верить слову «ГОТОВО» без слияния).
+// Ловушки (К2): каждая порча watch.mjs обязана ронять verify.mjs. Новые сценарии охраняют конфликты, checks, приоритет слияния, meta6 и ретраи.
 import {readFileSync, writeFileSync, mkdtempSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import {tmpdir} from 'node:os';
@@ -11,6 +11,11 @@ const M = [
   ['сторож не добавляет незаписанные PR', "if (p.state === 'open' && !seen.has(branch))", 'if (false)'],
   ['зависшие не поднимаются наверх', 'rank(x.status) - rank(y.status) ||', ''],
   ['обман: верить «ГОТОВО» без слияния', 'noBranch(r.branch) && /ГОТОВО/.test(r.status)', '/ГОТОВО/.test(r.status)'],
+  ['игнорировать конфликт', "p?.mergeable_state === 'dirty'", "p?.mergeable_state === 'clean'"],
+  ['скрыть упавшие проверки', 'else if (p?.failedChecks?.length)', 'else if (false)'],
+  ['красный слитый PR перестал считаться ГОТОВО', 'if (p?.merged) r.status =', 'if (false && p?.merged) r.status ='],
+  ['исключить meta6 из реестра', "['МГ', data.mgPulls]", "['МГ', {}]"],
+  ['не повторять запрос mergeable=null', 'attempt < 3', 'attempt < 1'],
 ];
 const dir = mkdtempSync(join(tmpdir(), 'zadachi-')); let bad = 0;
 for (const [name, from, to] of M) {

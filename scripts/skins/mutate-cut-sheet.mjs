@@ -67,4 +67,19 @@ await exercise('подмена готового вырезанного PNG (об
  fs.writeFileSync(path.join(dir,'cut',first),Buffer.from('old cached image'));
 },{verify:true});
 await exercise('исчезновение таблицы',async dir=>fs.writeFileSync(path.join(dir,'parts-sheet.md'),'| ряд | место |\n'));
-console.log('К5: все 6 сценариев ножниц обнаружены');
+// Регрессия: исходный отступ в координатах 1254px сжимал шлем 311px
+// до картинки 22px на холсте 64px, хотя S1–S12 оставались зелёными.
+{
+ const dir=copy();
+ const mutant=path.join(path.dirname(tool),'.cut-sheet-bad-padding-'+process.pid+'.mjs');
+ try{
+  const code=fs.readFileSync(tool,'utf8');
+  const correct='const pad=Math.max(2,Math.round(side*.055));';
+  const old='const pad=Math.max(3,Math.floor(Math.max(rect.x1-rect.x0,rect.y1-rect.y0)*.07));';
+  if(!code.includes(correct))throw Error('ЛОВУШКА: отсутствует защищённая строка масштаба');
+  fs.writeFileSync(mutant,code.replace(correct,old));
+  const r=spawnSync('node',[mutant,dir],{encoding:'utf8',maxBuffer:16e6});
+  expectedFailure('масштаб шлема уменьшен исходными пикселями',r);
+ }finally{fs.rmSync(mutant,{force:true});cleanup(dir);}
+}
+console.log('К5: все 7 сценариев ножниц обнаружены');

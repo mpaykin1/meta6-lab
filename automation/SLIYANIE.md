@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 68, слито 0, закрыто 10, открыто 58 — бот, 2026-11-10 06:33 UTC
+Итог: всего 68, слито 0, закрыто 10, открыто 58 — бот, 2026-11-10 06:51 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -46,13 +46,13 @@
 | #105 | код | `lab/ashen-path-honest-runtime-20261107-2035` | feat(bot): full original Ashen Path META copy with genuine r | open | |
 | #100 | код | `lab/classic-honest-bot-state-20261107-2003` | feat(bot): read-only Classic island state and genuine gamepl | open | |
 | #99 | код | `lab/classic-honest-observer-bot-20261107` | feat(bot): connect Twilight Isle Classic via original read-o | open | |
-| #97 | код | `lab/archer-readonly-bot-20261107-gpt6` | feat(bot): honest Archer in the Fog state and real projected | open | |
+| #97 | код | `lab/archer-readonly-bot-20261107-gpt6` | feat(bot): honest Archer in the Fog state and real projected | open dirty | |
 | #96 | код | `lab/broken-city-honest-bot-20261107-1945` | feat(bot): honest Broken City read-only adapter and gameplay | open | |
 | #95 | код | `lab/broken-city-honest-bot-20261107` | feat(bot): truthful Broken City state adapter and real contr | open | |
 | #92 | код | `lab/sumerki2-honest-combined-controls-20261107` | fix(bot): integrate Sumerki II read-only adapter, honest con | open | |
 | #90 | код | `lab/twilight-isles-bot-real-state-20261107-1831` | feat(meta-bot): honest read-only Twilight Isles state and re | open | |
 | #88 | код | `lab/sumerki2-honest-readonly-adapter-20261107` | feat(bot): real read-only Sumerki II adapter for existing in | open | |
-| #87 | код | `lab/platform-play-connect-earn-20261107` | feat(portal): Play / Connect / Earn navigation and functiona | open | |
+| #87 | код | `lab/platform-play-connect-earn-20261107` | feat(portal): Play / Connect / Earn navigation and functiona | open dirty | |
 | #86 | код | `lab/sumerki2-bot-controls-20261107-1839` | bot: honest Sumerki II input strategy and bounded run contra | open | |
 | #81 | код | `lab/sumerki-bot-controls-20261107-1746` | bot: strict input-only strategy for Sumerki i Pepel 2 | open | |
 | #73 | код | `lab/sumerki-bot-config-20261107` | feat(bot): strict browser enrollment for Sumerki II | open | |
@@ -60,10 +60,10 @@
 | #69 | код | `lab/classic-bot-config-20261107` | feat(bot): configure strict classic game browser checks | open | |
 | #60 | код | `lab/render-broken-city-adaptive` | Perf: adaptive WebGL/Three.js render resolution in Broken Ci | closed | |
 | #59 | код | `lab/render-veil-shared-instancing` | Perf: apply proven WebGL2 instancing to shared Veil Terraces | closed | |
-| #58 | код | `lab/approved-donor-confluence-vault-20261107` | Vault: replace prohibited procedural payload with SHA-pinned | open | |
+| #58 | код | `lab/approved-donor-confluence-vault-20261107` | Vault: replace prohibited procedural payload with SHA-pinned | open dirty | |
 | #54 | код | `lab/render-visibility-optimization` | META GAMES LAB: shared voxel optimization + live frustum cul | open dirty | |
-| #49 | код | `lab/veil-weather-connected-20261107` | Playable Veil uses exact original Three Worlds weather; regi | open | |
-| #43 | код | `lab/veil-weather-original-20261107` | Use exact original Three Worlds weather in playable Veil Ter | open | |
+| #49 | код | `lab/veil-weather-connected-20261107` | Playable Veil uses exact original Three Worlds weather; regi | open dirty | |
+| #43 | код | `lab/veil-weather-original-20261107` | Use exact original Three Worlds weather in playable Veil Ter | open dirty | |
 | #16 | код | `lab/readiness-evidence-gates` | Evidence-gated META GAMES readiness: 10 elements, same-SHA C | open | |
 | #15 | код | `lab/shared-owner-approved-components` | Approved original-source library: token-efficient MCP search | closed | |
 | #9 | код | `lab/agent-game-candidate` | [BLOCKED — source policy] Procedural World_server candidate  | open | |
@@ -71,7 +71,7 @@
 | #7 | код | `lab/reuse-library-search` | Reusable code library: source search, browser index, local M | closed | |
 | #6 | код | `lab/world-doors-progress` | lab: persistent visited-world doors without touching accepte | open | |
 | #5 | код | `lab/oss-commercial-kit` | lab: коммерчески разрешённые OSS-модули и игровая сцена | open | |
-| #4 | код | `lab/native-catalog-and-steam` | lab: native catalog and safe Steam/Android candidates | open | |
+| #4 | код | `lab/native-catalog-and-steam` | lab: native catalog and safe Steam/Android candidates | open dirty | |
 | #3 | код | `lab/twilight-island-bot` | lab: Twilight Island — бот проходит весь остров | open | |
 | #2 | код | `lab/twilight-isles-pass` | lab: Twilight Isles GPU optimization, single RAF, first-isla | open | |
 | #1 | код | `lab/twilight-island-pass` | lab: Twilight Island bot pass — combined #291 and #303 | closed | закрыт stale: красный META BOT, нет коммитов >48 ч — [PR #1](https://github.com/mpaykin1/meta6-lab/pull/1), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42356940858) |

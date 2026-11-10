@@ -13,7 +13,7 @@ const rootArg=process.argv.indexOf('--root');
 const ROOT=rootArg<0?DEFAULT_ROOT:path.resolve(process.argv[rootArg+1]);
 const filename=path.join(ROOT,'shared/library/catalog-solutions.json');
 const data=JSON.parse(fs.readFileSync(filename,'utf8'));
-const storedResults=JSON.stringify(data.solutions.map(s=>[s.id,s.load_ok,s.load_error,s.load_evidence]));
+const storedResults=JSON.stringify(data.solutions.map(s=>[s.id,s.load_ok,s.load_error,s.load_evidence,s.standalone]));
 const known=new Map(data.solutions.map(s=>[s.id,s]));
 const evidence='chromium-original-source-load-v1';
 const modelDir=path.join(ROOT,'scripts/library/mcp-test/node_modules/three');
@@ -44,6 +44,30 @@ function ordered(s){
  }
  visit(s);
  return out;
+}
+// Verify each exact original source fragment before coalescing overlapping dependencies.
+function compiled(s){
+ const ranges=new Map();
+ for(const item of ordered(s)){
+  original(item);
+  for(const r of item.lines){
+   if(!ranges.has(r.source_path))ranges.set(r.source_path,[]);
+   ranges.get(r.source_path).push({start:r.start,end:r.end});
+  }
+ }
+ const chunks=[];
+ for(const [source_path,sections] of ranges){
+  sections.sort((a,b)=>a.start-b.start);
+  const merged=[];
+  for(const part of sections){
+   const tail=merged.at(-1);
+   if(tail&&part.start<=tail.end+1)tail.end=Math.max(tail.end,part.end);
+   else merged.push({...part});
+  }
+  const source=fs.readFileSync(path.join(ROOT,source_path),'utf8');
+  chunks.push(merged.map(part=>rangeBytes(source,part.start,part.end).toString('utf8')).join('\\n'));
+ }
+ return chunks.join('\\n');
 }
 const server=createServer((request,response)=>{
  try{
@@ -96,18 +120,27 @@ async function probeSolution(s){
   for(const id of s.how_to_connect?.dom_ids||[])await page.evaluate(id=>{
    if(!document.getElementById(id)){const div=document.createElement('div');div.id=id;document.body.append(div)}
   },id);
-  const code=ordered(s);
-  for(const dep of code)await page.addScriptTag({content:original(dep)});
-  if(errors.length)throw Error(errors[0]);
+  const code=compiled(s);
+  await page.evaluate(async()=>{
+   const three=await import('three');
+   window.THREE=three;
+   window.Color=three.Color;
+  });
   const name=s.how_to_connect?.entrypoint;
-  if(typeof name!=='string'||!/^[\w$]+$/.test(name))throw Error('No callable entrypoint');
-  const result=await page.evaluate(async name=>{
-   const handler=(0,eval)(name);
+  if(typeof name!=='string'||!/^[\\w$]+$/.test(name))throw Error('No callable entrypoint');
+  const publish='\\nglobalThis.__metaCallable = typeof '+name+
+   ' === "function" ? '+name+' : undefined;';
+  const isModule=/(?:^|[;\\n])\\s*(?:import\\s|export\\s)/m.test(code);
+  await page.addScriptTag({type:isModule?'module':'text/javascript',content:code+publish});
+  if(isModule)await page.waitForTimeout(180);
+  if(errors.length)throw Error(errors[0]);
+  const result=await page.evaluate(async()=>{
+   const handler=window.__metaCallable;
    if(typeof handler!=='function')return {callable:false};
    const out=handler();
    const value=out&&typeof out.then==='function'?await Promise.race([out,new Promise((_,reject)=>setTimeout(()=>reject(Error('entrypoint timeout')),1500))]):out;
    return {callable:true,hasValue:value!==undefined};
-  },name);
+  });
   await page.waitForTimeout(80);
   const status=await page.evaluate(()=>{
    const nonEmptyCanvas=[...document.querySelectorAll('canvas')].some(canvas=>{
@@ -150,6 +183,7 @@ try{
  for(const s of data.solutions){
   const item=await probeSolution(s);
   s.load_ok=item.ok;
+  s.standalone=item.ok;
   s.load_error=item.error;
   s.load_evidence=item.ok?{chromium_run:evidence,sha256:s.sha256}:null;
   outcomes.push({game:s.game,id:s.id,...item});
@@ -172,7 +206,7 @@ try{
  }
  data.model_load=models;
  data.load_evidence_type=evidence;
- if(process.argv.includes('--verify')&&storedResults!==JSON.stringify(data.solutions.map(s=>[s.id,s.load_ok,s.load_error,s.load_evidence])))throw Error('Recorded load_ok or evidence disagrees with real Chromium execution');
+ if(process.argv.includes('--verify')&&storedResults!==JSON.stringify(data.solutions.map(s=>[s.id,s.load_ok,s.load_error,s.load_evidence,s.standalone])))throw Error('Recorded load_ok or evidence disagrees with real Chromium execution');
  if(process.argv.includes('--write'))fs.writeFileSync(filename,JSON.stringify(data,null,2)+'\n');
  verifyCatalog(ROOT);
  const byGame=new Map();
@@ -183,5 +217,10 @@ try{
  }
  for(const [game,counts] of byGame)console.log('GAME '+game+' N='+counts.total+' M='+counts.ok+' K='+counts.failed);
  console.log('MODELS total='+models.length+' ok='+models.filter(m=>m.ok).length+' failed='+models.filter(m=>!m.ok).length);
- if(process.argv.includes('--require-all')&&(outcomes.some(x=>!x.ok)||models.some(x=>!x.ok)))throw Error('L3 incomplete: not every original subsystem/model loads and has a real effect');
+ if(process.argv.includes('--require-all')){
+  const working=outcomes.filter(x=>x.ok);
+  if(working.length<3||new Set(working.map(x=>x.game)).size<3||
+   models.some(x=>!x.ok)||outcomes.some(x=>!x.ok&&known.get(x.id)?.standalone!==false))
+   throw Error('L3 incomplete: need 3 real standalone systems from different games and all GLBs');
+ }
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve))}

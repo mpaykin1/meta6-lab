@@ -46,6 +46,8 @@ jobs:
           node --check shared/approved/tools/library.mjs
           node --check scripts/library/mcp-test/client.mjs
           node --check scripts/library/verify-load.mjs
+      - name: Install parser and MCP browser dependencies
+        run: npm install --prefix scripts/library/mcp-test --ignore-scripts --no-audit --no-fund
       - name: Run deceptive catalog mutations
         run: |
           node scripts/library/mutate-catalog.mjs
@@ -56,8 +58,6 @@ jobs:
         run: node scripts/library/verify-catalog.mjs
       - name: Show system counts by game
         run: node -e "const c=require('./shared/library/catalog-solutions.json');for(const g of new Set(c.solutions.map(s=>s.game)))console.log(g,c.solutions.filter(s=>s.game===g).length)"
-      - name: Install official MCP SDK and GLTFLoader
-        run: npm install --prefix scripts/library/mcp-test --ignore-scripts --no-audit --no-fund
       - name: Install Chromium for real browser verification
         run: npm exec --prefix scripts/library/mcp-test -- playwright install --with-deps chromium
       - name: Catch deceptive browser loading results

@@ -20,7 +20,7 @@
 | #213 | код | `lab/library-machine-sync` | L1: Library Machine — индекс нового эталона skin-trainer | closed | |
 | #212 | код | `lab/claude-context-compact-v2` | Сократить контекст Claude: STATUS, короткие Actions, PROMPT_ | closed | |
 | #211 | код | `lab/claude-context-compact` | Compact agent context: STATUS, rules, CI summaries and traps | closed | |
-| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open | |
+| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |
 | #209 | код | `lab/library-catalog` | L1 ч.3 + L3: каталог игровых систем для MCP ИИ | open | |
 | #205 | код | `lab/owner-pult` | Пульт владельца — прогресс и свежие игры | open | |
 | #204 | код | `lab/rules-bot-trainer` | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | open | |

@@ -36,11 +36,13 @@ ok('повторный прогон ничего не меняет', apply(out, 
 // 1.1–1.6: новые регрессии, которые обязаны падать на старом стороже.
 const src = (await import('node:fs')).readFileSync(resolve(process.argv[2] || resolve(here, 'watch.mjs')), 'utf8');
 ok('1.1 GitHub check-runs API', src.includes('/check-runs'));
-ok('1.1 GitHub mergeable_state и повторное получение', /mergeable_state/.test(src) && /3000/.test(src));
+ok('1.1 GitHub mergeable_state и повторное получение', src.includes('mergeable_state:detailed.mergeable_state') && src.includes('attempt<=3') && src.includes('delay(3000)'));
 r = st([row('взято', 'conflict', 'lab/dirty', '2026-11-10 07:00')], {pulls: {'lab/dirty': pr(20, {mergeable_state: 'dirty', lastCommit: now - 7 * H})}});
 ok('1.2 конфликт имеет приоритет над временем', /^⚔ КОНФЛИКТ/.test(r.conflict.status));
 r = st([row('взято', 'red', 'lab/red', '2026-11-10 07:00')], {pulls: {'lab/red': pr(21, {mergeable_state: 'clean', checkRuns: [{name: 'KONTUR Guard', conclusion: 'failure'}, {name: 'Portal Visited', conclusion: 'cancelled'}]})}});
 ok('1.2 красные проверки с именами', /^❌ КРАСНЫЕ:/.test(r.red.status) && /KONTUR Guard/.test(r.red.status) && /Portal Visited/.test(r.red.status));
+r = st([row('взято', 'cancelled', 'lab/cancelled', '2026-11-10 07:00')], {pulls: {'lab/cancelled': pr(23, {checkRuns: [{name:'Cancelled CI', conclusion:'cancelled'}]})}});
+ok('1.2 отменённая проверка считается красной', /^❌/.test(r.cancelled.status) && /Cancelled CI/.test(r.cancelled.status));
 r = st([row('НУЖЕН CLAUDE: ручная проверка', 'claude', 'lab/claude', '2026-11-10 07:00')], {pulls: {'lab/claude': pr(22, {mergeable_state:'dirty',checkRuns:[{name:'red',conclusion:'failure'}]})}});
 ok('1.2 CLAUDE сохраняется до проверки конфликтов', /^🙋 НУЖЕН CLAUDE/.test(r.claude.status));
 const mgRow = '| взято | mg | МГ | MG-ремонтник | lab/mg | — | 2026-11-10 07:00 | — |';

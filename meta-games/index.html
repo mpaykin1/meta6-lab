@@ -71,6 +71,8 @@ main{position:relative;z-index:5;padding:42px 0 94px}
 .game-desc{max-width:410px;font-size:14px;color:#bdc9d5;margin:10px 0 22px}
 .game-foot{display:flex;align-items:center;justify-content:space-between;padding-top:13px;border-top:1px solid #8191a53b;color:#f4deb0;font-size:12px;text-transform:uppercase;letter-spacing:.17em;font-weight:800}
 .game-foot i{font-size:20px;font-style:normal}
+.game.world-visited{border-color:#86c9b880}
+.game.world-visited .game-foot span::after{content:' · Visited';color:#9fd8c8}
 .bottom{margin-top:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:23px 0;border-top:1px solid #6070883d;color:#96a7bd;font-size:13px}
 .bottom a{color:#d4c39b}
 @keyframes breath{50%{transform:translateX(-50%) scale(1.07);filter:brightness(1.15)}}
@@ -119,6 +121,37 @@ main{position:relative;z-index:5;padding:42px 0 94px}
  </div>
  <footer class="bottom"><span>© 2026 META GAMES · Independent browser worlds</span><span>All games launch under our GitHub Pages domain. <a href="https://github.com/mpaykin1/meta6">Source repository</a></span></footer>
 </main>
+<script>
+(() => {
+  'use strict';
+  const key = 'meta-games:worlds:v1';
+  const cards = [...document.querySelectorAll('a.game')];
+  const safeRead = () => {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || '[]');
+      return Array.isArray(value) ? value.filter(item => typeof item === 'string') : [];
+    } catch (error) {
+      console.warn('Visited worlds unavailable', error);
+      return [];
+    }
+  };
+  const visited = new Set(safeRead());
+  for (const card of cards) {
+    const href = card.getAttribute('href');
+    const world = new URL(href, document.baseURI).pathname.split('/').filter(Boolean).join('/');
+    if (visited.has(world)) card.classList.add('world-visited');
+    card.addEventListener('click', () => {
+      visited.add(world);
+      card.classList.add('world-visited');
+      try {
+        localStorage.setItem(key, JSON.stringify([...visited]));
+      } catch (error) {
+        console.warn('Cannot save visited world', error);
+      }
+    });
+  }
+})();
+</script>
 <script>
 (()=>{
 'use strict';

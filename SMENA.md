@@ -8,7 +8,7 @@
 
 - Карточка диспетчера: **#191**, `lab/sunken-city-reference-1109`, SHA `a65f18c2def89f8acf462ccec3da23d1fe5be041`; захват [1b95ae3](https://github.com/mpaykin1/meta6-lab/commit/1b95ae31a55a7700e61ee60c209f39a5bd23bc92) в 2026-11-10T10:12:26Z, исполнитель чат ChatGPT.
 - Предпосылка выполнена: [PR #227 — MG Dispatcher](https://github.com/mpaykin1/meta6-lab/pull/227) слит Claude, merge `2a4558a4b3993d6d0583c004155508d084eb6496`.
-- Текущая работа: карточка #191, адаптер `window.__META_BOT__` к реальным объектам и игрок через Sonar, [HEAD 924217e](https://github.com/mpaykin1/meta6-lab/commit/924217eb0b4b5cec57d0c6e0b4c551f0e0bf8b92); оригинальный ZIP не менялся; далее только фактический CI и корректировка ошибок в текущем PR. Другие карточки пока не захвачены.
+- Текущая работа: две карточки заняты по диспетчеру: #191 ([захват 1b95ae3](https://github.com/mpaykin1/meta6-lab/commit/1b95ae31a55a7700e61ee60c209f39a5bd23bc92), [код + безопасный main merge 27537b0](https://github.com/mpaykin1/meta6-lab/commit/27537b0c086b567f6f546b066088ccf8ee44f2bd), исходный архив не менялся, protected shared возвращены); #208 ([захват 7ecb6eb](https://github.com/mpaykin1/meta6-lab/commit/7ecb6ebb13090462ddf7d2fc223246c3d5a12904), [KONTUR Guard 42756903905](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905/job/129633324473) требует решения Claude по точному оригиналу с LEGACY_LIGHTS).
 - Запись о задаче уже существует в `ZADACHI.md`: «Рабочий чат МГ/МГЛ» — не дублировать.
 
 ## Правило передачи
@@ -22,3 +22,5 @@
 1. Довести #191 без изменения исходных байтов владельца, не выдавать адаптер за пройденную игру.
 2. После #191 проверить новую очередь и следующую свободную карточку; #200 не захвачен.
 3. Сравнить очередь через два часа только при следующем фактическом запуске.
+
+- Диспетчер mergeable=null: [PR #231](https://github.com/mpaykin1/meta6-lab/pull/231), 12/12 unit + 4 мутанта; rerun dispatch после ошибки API 403; без зелёного CI не сливать.

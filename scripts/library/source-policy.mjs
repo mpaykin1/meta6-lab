@@ -13,9 +13,12 @@ export function isOriginalGameSource(sourcePath,source){
  if(!name||bannedName.test(name)||bundledName.test(name))return false;
  if(thirdPartyHeader.test(source.slice(0,4096)))return false;
  const lines=source.split('\n');
- if(lines.some(line=>line.length>8000))return false;
+ // Some original games embed long base64 textures inside otherwise readable HTML.
+ // Reject minified/vendor-like whole files, not original games with isolated data lines.
  const nonempty=lines.filter(x=>x.trim());
- if(nonempty.length>8&&nonempty.reduce((n,x)=>n+x.length,0)/nonempty.length>600)return false;
+ const average=nonempty.length?nonempty.reduce((n,x)=>n+x.length,0)/nonempty.length:0;
+ if(average>600)return false;
+ if(lines.some(line=>line.length>8000)&&average>180)return false;
  return true;
 }
 

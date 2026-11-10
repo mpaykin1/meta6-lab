@@ -1,0 +1,33 @@
+name: MG Dispatcher
+on:
+  schedule:
+    - cron: '21,51 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [ZADACHI.md]
+permissions:
+  contents: write
+  checks: read
+  pull-requests: read
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: mg-dispatcher
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test scripts/dispetcher/test/*.test.mjs
+      - run: node scripts/dispetcher/build.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit queue
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add DISPETCHER.md
+          git diff --cached --quiet || (git commit -m 'chore: refresh dispatcher queue' && git push)

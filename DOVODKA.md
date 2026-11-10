@@ -1,7 +1,8 @@
 # DOVODKA — журнал доводчика
-СЕЙЧАС ДЕЛАЮ: [МГЛ PR #124](https://github.com/mpaykin1/meta6-lab/pull/124) · HEAD `db294c11a0ce305f83f9ff7eda063e3353bded9e` · main синхронизирован, конфликт исправлен, ожидается CI [run 42785583625](https://github.com/mpaykin1/meta6-lab/actions/runs/42785583625) · 2026-11-10
+СЕЙЧАС ДЕЛАЮ: [МГЛ PR #226](https://github.com/mpaykin1/meta6-lab/pull/226) · чистая замена PR #124, SHA `a2261bb9f8cf7351929d8c8e7940badaf5b14285` · CI в очереди, слияние только после зелёных проверок
 ## ОСТАЛОСЬ (сверху самое срочное)
-- [МГЛ #124](https://github.com/mpaykin1/meta6-lab/pull/124) — 🛑 завис: ЛОР: Зерно последнего мира — эталон и карта мультивселенной META GAMES
+- [МГЛ #226](https://github.com/mpaykin1/meta6-lab/pull/226) — 🔁 НЕ ДОДЕЛАНО: чистая замена #124, ожидается CI на a2261bb
+- [МГЛ #124](https://github.com/mpaykin1/meta6-lab/pull/124) — 🛑 guard FAILURE: исторический 7057ad0 изменил .github/protected; уникальные изменения перенесены в [#226](https://github.com/mpaykin1/meta6-lab/pull/226); закрыть #124 после успешного слияния замены
 - [МГЛ #125](https://github.com/mpaykin1/meta6-lab/pull/125) — 🛑 завис: Lore: alternative Last Seed mythology and inspiration bank
 - [МГЛ #126](https://github.com/mpaykin1/meta6-lab/pull/126) — 🛑 завис: Эталон: универсальный промпт Sketch → HTML Game → ZIP
 - [МГЛ #129](https://github.com/mpaykin1/meta6-lab/pull/129) — 🛑 завис: fix(meta): Twilight Isles 2 plays without ads, with free revival
@@ -94,6 +95,7 @@
 ## ЖУРНАЛ (новые строки сверху, старые не удалять)
 | Время UTC | PR / задача | Репо | Что было не так | Что сделал | Доказательство | Итог |
 |---|---|---|---|---|---|---|
+| 2026-11-10 | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) → [#226](https://github.com/mpaykin1/meta6-lab/pull/226) | МГЛ | Красный guard: исторический коммит 7057ad0 изменил .github/protected, merge main не устраняет | Создана чистая ветка от main и PR #226 с 3 нужными файлами без защищённой истории | [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42785590584), [a2261bb](https://github.com/mpaykin1/meta6-lab/commit/a2261bb9f8cf7351929d8c8e7940badaf5b14285) | 🔁 НЕ ДОДЕЛАНО: CI #226 |
 | 2026-11-10 | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) | МГЛ | Устранено отставание от main (127 коммитов); сохранены все 10 622 прежние записи и добавлены 14 skin-trainer, навигация лора | Собран merge с двумя родителями, обновлён head; diff только 3 ожидаемых файла | [db294c1](https://github.com/mpaykin1/meta6-lab/commit/db294c11a0ce305f83f9ff7eda063e3353bded9e), [CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42785583625) | 🔁 НЕ ДОДЕЛАНО: CI ещё не завершён |
 | 2026-11-10 06:30 | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) | МГЛ | Ветка обновлена другим агентом после 7057ad0: текущий SHA a7993bc, появились shared/library/index.json и skin-trainer.json; CI на новом HEAD пока отсутствует | Повторно сверил HEAD и diff, заблокировал преждевременное слияние, добавил постоянные правила доводчика | [текущий SHA](https://github.com/mpaykin1/meta6-lab/commit/a7993bcc183513822b20a57e737eaf932835902d), [правило](https://github.com/mpaykin1/meta6-lab/commit/14cae7376f9ab721d302d37d92ea55d426d6ff28) | 🔁 НЕ ДОДЕЛАНО |
 | 2026-11-10 06:01 | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) | МГЛ | Два файла в PR: канон уже в main, навигации не было; ветка отстала на 339 коммитов | Обновил ветку настоящим merge commit с двумя родителями, сохранил канон; запускаются обязательные проверки | [SHA 7057ad0](https://github.com/mpaykin1/meta6-lab/commit/7057ad0873ee42fc2333b8febf72afe932ad98ce), [CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42765594788) | 🔁 НЕ ДОДЕЛАНО |

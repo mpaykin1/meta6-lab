@@ -9,7 +9,13 @@ const src=path.resolve(process.argv[2]||'skins/sources/rusty-robot');
 const tool=path.resolve('scripts/skins/cut-sheet.mjs');
 const sheet=path.join(src,'parts-sheet.png');
 const table=path.join(src,'parts-sheet.md');
-const palette=JSON.parse(fs.readFileSync(path.resolve('skins/packs',path.basename(src),'skin.json'),'utf8')).palette;
+// Для нового скина пакет ещё не собран: палитру берём из таблицы/README.
+const paletteFile=path.resolve('skins/packs',path.basename(src),'skin.json');
+let palette=[...new Set([...fs.readFileSync(table,'utf8').matchAll(/#[a-fA-F0-9]{6}\\b/g)].map(m=>m[0].toLowerCase()))];
+if(palette.length<6 && fs.existsSync(path.join(src,'README.md')))
+ palette=[...new Set([...fs.readFileSync(path.join(src,'README.md'),'utf8').matchAll(/#[a-fA-F0-9]{6}\\b/g)].map(m=>m[0].toLowerCase()))];
+if(palette.length<6 && fs.existsSync(paletteFile))palette=JSON.parse(fs.readFileSync(paletteFile,'utf8')).palette;
+if(palette.length<6||palette.length>16)throw Error('ЛОВУШКИ: нет палитры из таблицы или README');
 if(!fs.existsSync(sheet)||!fs.existsSync(table))throw Error('ЛОВУШКИ: нет оригинального листа/таблицы');
 function run(dir,verify=false){
  const r=spawnSync('node',[tool,dir,...(verify?['--verify']:[])],{encoding:'utf8',maxBuffer:16e6});

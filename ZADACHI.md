@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Broken City: чистый PR оптимизации вместо #60 | МГЛ | чат ChatGPT | `lab/render-broken-city-safe-1110` | [#225](https://github.com/mpaykin1/meta6-lab/pull/225) | 2026-11-10 06:26 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Довести PR #200 (B2 ч.2) до зелёных проверок и слияния | МГЛ | MG-строитель-2 | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-10 05:20 | 2026-11-10 03:12 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | МГЛ | автозадача | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-09 15:45 | 2026-11-10 03:12 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/rules-bot-trainer` | [#204](https://github.com/mpaykin1/meta6-lab/pull/204) | 2026-11-09 16:36 | 2026-11-10 02:51 |

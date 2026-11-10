@@ -22,3 +22,24 @@ rejected('размыта детализация',()=>assertVisual(reference,{...
 rejected('пересвет',()=>assertVisual(reference,{...reference,bright:.9}));
 assertVisual(reference,reference);
 console.log('К5: все 8 визуальных ловушек сработали');
+
+// Regression: a successful CI must never ship the old noisy, under-resolved hero.
+import fs from 'node:fs';
+const runtime=fs.readFileSync('skins/runtime/skin-runtime.js','utf8');
+const game=fs.readFileSync('games/skin-trainer/index.html','utf8');
+function assertRenderingContract(rt,html){
+ if(!rt.includes('p.file?1:'))throw Error('RENDER: авторский PNG дублируется и теряет фактуру');
+ if(!html.includes('Math.floor(w),Math.floor(h)'))throw Error('RENDER: постобработка снижает разрешение');
+ if(!html.includes('window.__SKIN?2.85:6'))throw Error('RENDER: герой слишком далеко от камеры');
+ if(html.includes(')*.07;                    // зерно'))throw Error('RENDER: шум скрывает текстуру');
+}
+assertRenderingContract(runtime,game);
+for(const [name,rt,html] of [
+ ['повторные полупрозрачные накладки',runtime.replace('p.file?1:','p.file?3:'),game],
+ ['пониженное разрешение',runtime,game.replace('Math.floor(w),Math.floor(h)','Math.floor(w*.8),Math.floor(h*.8)')],
+ ['слишком далёкая камера',runtime,game.replace('window.__SKIN?2.85:6','window.__SKIN?3.6:6')]
+]){
+ let caught=false;try{assertRenderingContract(rt,html);}catch{caught=true;}
+ if(!caught)throw Error('ЛОВУШКА ПРОПУЩЕНА: '+name);
+ console.log('ЛОВУШКА СРАБОТАЛА: '+name);
+}

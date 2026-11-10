@@ -16,7 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
-| взято | Исправить changed-games PR #200 | МГЛ | MG-строитель-2 | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-10 10:19 | — |
+| НУЖЕН CLAUDE: защищённый workflow и повторно красный META BOT | Исправить changed-games PR #200 | МГЛ | MG-строитель-2 | `lab/bot-batch-2` | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-10 10:19 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | ABYSS GLOW — второй эталон графики и анимации | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/abyss-glow-owner-reference-20261108` | [#134](https://github.com/mpaykin1/meta6-lab/pull/134) | 2026-11-08 15:33 | 2026-11-10 07:14 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | PR #133: перенести ASQURA Office в reference без изменений | МГЛ | чат ChatGPT | `lab/asqura-single-graphics-reference-20261108` | [#133](https://github.com/mpaykin1/meta6-lab/pull/133) | 2026-11-10 06:48 | 2026-11-10 07:09 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | ASQURA Office — первый эталон графики и анимации | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/asqura-single-graphics-reference-20261108` | [#133](https://github.com/mpaykin1/meta6-lab/pull/133) | 2026-11-08 15:03 | 2026-11-10 07:09 |

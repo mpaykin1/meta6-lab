@@ -23,6 +23,8 @@ async function suite(m) {
   assert.equal(m.isProtectedFile('.github/workflows/another.yml'), true);
   assert.equal(m.isProtectedFile('scripts/tool/selftest.mjs'), true);
   assert.equal(m.isProtectedFile('scripts/platform/meta-games-guard.mjs'), true);
+  assert.equal(m.isProtectedFile('scripts/shared/mutate-guard.mjs'), true);
+  assert.equal(m.isProtectedFile('scripts/platform/verify-storefront.mjs'), true);
   assert.equal(m.isProtectedFile('games/veil-terraces/index.html'), false);
 
   assert.throws(() => m.enforceLimit(Array(151).fill('x').join('\n')), /exceeds/);

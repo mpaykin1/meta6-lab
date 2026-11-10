@@ -29,6 +29,11 @@ export function validateWorkflow(text) {
     requireText('node scripts/skins/'+script+' "$src"','не вызывается настоящий '+script);
     requireText('node scripts/skins/mutate-'+script+' "$src"','отключены ловушки для '+script);
   }
+  requireText('node scripts/skins/verify-turntable.mjs "$src"', 'Chrome turntable gate missing');
+  requireText('node scripts/skins/mutate-turntable.mjs "$src"', 'turntable mutations missing');
+  const capture=text.indexOf('node scripts/skins/verify-turntable.mjs "$src"');
+  const zip=text.indexOf('node scripts/skins/build-pack.mjs "$src" --finalize');
+  if(capture<0||zip<0||capture>zip)problems.push('turntable must precede the ZIP');
   requireText('git push origin HEAD:"$GITHUB_REF_NAME"','публикация должна писать в ту же ветку PR');
   requireText("startsWith(github.ref, 'refs/heads/lab/skin-')",'публикация не защищена от записи в main');
   requireText('git add skins/packs/ skins/sources/*/cut-preview.png skins/sources/*/side-by-side.png',

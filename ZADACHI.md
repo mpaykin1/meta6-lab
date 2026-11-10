@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | PR #54, #59, #60: конфликты, производительность, CI и слияние | МГЛ | чат ChatGPT | `lab/pr54-59-60-finish` | [#54](https://github.com/mpaykin1/meta6-lab/pull/54), [#59](https://github.com/mpaykin1/meta6-lab/pull/59), [#60](https://github.com/mpaykin1/meta6-lab/pull/60) | 2026-11-10 06:02 | — |
 | взято | Перенос расследования с Replit на GitHub Pages и ежечасная таблица задач | МГЛ | чат ChatGPT | `lab/investigation-pages` | — | 2026-11-10 06:00 | — |
 | взято | Библиотека игр: эталоны, системы, ассеты и MCP | МГЛ | чат ChatGPT | `lab/library-catalog` | [#209](https://github.com/mpaykin1/meta6-lab/pull/209) | 2026-11-10 05:59 | — |
 | взято | Доводчик: PR #124, лор Древа миров | МГЛ | чат ChatGPT | `lab/seed-of-last-world-canon` | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) | 2026-11-10 05:59 | — |

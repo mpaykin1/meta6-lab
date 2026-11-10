@@ -22,7 +22,7 @@ function kindOf(n) {
  if(/щел/.test(n))return 'slit';
  if(/колба/.test(n))return 'core';
  if(/поршн|механик|труб/.test(n))return 'piston';
- if(/нагрудник/.test(n))return 'plate';
+ if(/^нагрудник/.test(n))return 'plate';
  if(/заклёп/.test(n))return 'bolt';
  if(/полос|панел/.test(n))return 'panel';
  return 'plate';

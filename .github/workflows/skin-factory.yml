@@ -21,7 +21,7 @@ on:
       - '.github/workflows/skin-factory.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
   issues: write
 jobs:
@@ -55,6 +55,19 @@ jobs:
         run: node scripts/skins/mutate-preview.mjs skins/sources/rusty-robot
       - name: Создать ZIP и проверить все S1–S12
         run: node scripts/skins/build-pack.mjs skins/sources/rusty-robot --finalize
+      - name: Опубликовать скин и изображение в ветке PR
+        if: ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/lab/skin-factory' }}
+        run: |
+          set -euo pipefail
+          git config user.name 'META GAMES Skin Factory'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add skins/packs/rusty-robot/ skins/packs/rusty-robot.zip \
+            skins/sources/rusty-robot/cut-preview.png \
+            skins/sources/rusty-robot/side-by-side.png
+          if ! git diff --cached --quiet; then
+            git commit -m "skin factory: publish generated rusty robot pack and visual comparison"
+            git push origin HEAD:lab/skin-factory
+          fi
       - name: Сохранить вырезки и визуальную сверку
         if: always()
         uses: actions/upload-artifact@v4
@@ -69,24 +82,29 @@ jobs:
             skins/sources/rusty-robot/preview-meta.json
           if-no-files-found: warn
 
-      - name: Комментарий в PR со сравнением и ссылкой на игру
-        if: ${{ always() && github.event_name == 'pull_request' }}
+      - name: Комментарий в PR с картинкой и ссылкой на игру
+        if: ${{ always() && github.event_name == 'push' && github.ref == 'refs/heads/lab/skin-factory' }}
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
-            const ok = fs.existsSync('skins/sources/rusty-robot/side-by-side.png');
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', head: context.repo.owner + ':lab/skin-factory'
+            });
+            if (!prs.data.length) return;
+            const image = 'https://raw.githubusercontent.com/' + context.repo.owner + '/' + context.repo.repo +
+              '/lab/skin-factory/skins/sources/rusty-robot/side-by-side.png';
             const run = 'https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId;
-            const artifact = run + '#artifacts';
-            const problems = ok ? 'Проблемы: см. результат проверок S1–S12 и К5 в прогоне.' : 'Проблема: side-by-side.png не создан, проверьте упавший шаг.';
+            const ok = fs.existsSync('skins/sources/rusty-robot/side-by-side.png');
             const body = [
               '### Фабрика скинов — ржавый робот',
-              'Сравнение эскиза и героя: [side-by-side.png и preview.png](' + artifact + ') (артефакт cut-preview-rusty-robot).',
-              'Игра: [Skin Trainer](https://mpaykin1.github.io/meta6-lab/games/skin-trainer/?skin=../../skins/packs/rusty-robot/).',
-              problems,
-              'Прогон: ' + run,
+              ok ? '![Эскиз | герой в скине](' + image + ')' : 'Сравнение не создано — проверьте упавший шаг.',
+              '[Играть в Skin Trainer](https://mpaykin1.github.io/meta6-lab/games/skin-trainer/?skin=../../skins/packs/rusty-robot/)',
+              ok ? 'Проблемы: нет ошибок консоли Chrome; S1–S12 и К5 — в прогоне.' : 'Проблемы: не пройдена сборка или Chrome.',
+              '[Последний прогон](' + run + ')'
             ].join('\n\n');
             await github.rest.issues.createComment({
               owner: context.repo.owner, repo: context.repo.repo,
-              issue_number: context.issue.number, body
+              issue_number: prs.data[0].number, body
             });

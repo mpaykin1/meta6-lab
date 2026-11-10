@@ -1,5 +1,5 @@
 # DOVODKA — журнал доводчика
-СЕЙЧАС ДЕЛАЮ: [МГЛ PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) · попытка 2/2, HEAD `6d3bb2055de85e8fa621fc1c2e4dad74746f55fa` · убедиться в META BOT + B2 integrity desktop/mobile; если красно → Claude · 2026-11-10 09:15 UTC
+СЕЙЧАС ДЕЛАЮ: [МГЛ PR #190](https://github.com/mpaykin1/meta6-lab/pull/190) + [#200](https://github.com/mpaykin1/meta6-lab/pull/200) · текущий META BOT/B2 desktop+mobile + 2-й запуск ещё в работе, ждать ПО ФАКТУ CI следующей сессией; если красное после 2 попыток → 🙋 Claude; зелёное → безопасно merge main и слить · 2026-11-10 09:20 UTC
 ## ОСТАЛОСЬ (сверху самое срочное)
 - [МГЛ #125](https://github.com/mpaykin1/meta6-lab/pull/125) — 🛑 завис: Lore: alternative Last Seed mythology and inspiration bank
 - [МГЛ #126](https://github.com/mpaykin1/meta6-lab/pull/126) — 🛑 завис: Эталон: универсальный промпт Sketch → HTML Game → ZIP

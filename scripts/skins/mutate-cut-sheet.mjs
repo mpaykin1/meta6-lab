@@ -11,9 +11,9 @@ const sheet=path.join(src,'parts-sheet.png');
 const table=path.join(src,'parts-sheet.md');
 // Для нового скина пакет ещё не собран: палитру берём из таблицы/README.
 const paletteFile=path.resolve('skins/packs',path.basename(src),'skin.json');
-let palette=[...new Set([...fs.readFileSync(table,'utf8').matchAll(/#[a-fA-F0-9]{6}\\b/g)].map(m=>m[0].toLowerCase()))];
+let palette=[...new Set([...fs.readFileSync(table,'utf8').matchAll(/#[a-fA-F0-9]{6}\b/g)].map(m=>m[0].toLowerCase()))];
 if(palette.length<6 && fs.existsSync(path.join(src,'README.md')))
- palette=[...new Set([...fs.readFileSync(path.join(src,'README.md'),'utf8').matchAll(/#[a-fA-F0-9]{6}\\b/g)].map(m=>m[0].toLowerCase()))];
+ palette=[...new Set([...fs.readFileSync(path.join(src,'README.md'),'utf8').matchAll(/#[a-fA-F0-9]{6}\b/g)].map(m=>m[0].toLowerCase()))];
 if(palette.length<6 && fs.existsSync(paletteFile))palette=JSON.parse(fs.readFileSync(paletteFile,'utf8')).palette;
 if(palette.length<6||palette.length>16)throw Error('ЛОВУШКИ: нет палитры из таблицы или README');
 if(!fs.existsSync(sheet)||!fs.existsSync(table))throw Error('ЛОВУШКИ: нет оригинального листа/таблицы');

@@ -11,6 +11,7 @@ export function verifyCatalog(root=ROOT){
  const ids=new Set();
  for(const s of catalog.solutions){
   if(!s.id||ids.has(s.id))throw Error('Duplicate solution');
+  if(s.assembly_target==='main'||s.assembly_target==='refs/heads/main')throw Error('Assembly must never write to main');
   ids.add(s.id);
   if(!s.source_path||!s.source_path.startsWith('games/'+s.game+'/')&&!s.source_path.startsWith('observer-world-en-v7/')&&!s.source_path.startsWith('ashen-sumerek/')&&!s.source_path.startsWith('underwater-world/')&&!s.source_path.startsWith('three-worlds-game/')&&!s.source_path.startsWith('meta-games-worlds/veil-terraces/'))throw Error('Source not allowlisted');
   if(!Array.isArray(s.lines)||!s.lines.length)throw Error('Missing source ranges');

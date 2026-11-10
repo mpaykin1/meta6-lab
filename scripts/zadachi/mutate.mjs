@@ -15,6 +15,7 @@ const M = [
   ['скрыть упавшие проверки', 'else if (p?.failedChecks?.length)', 'else if (false)'],
   ['красный слитый PR перестал считаться ГОТОВО', 'if (p?.merged) r.status =', 'if (false && p?.merged) r.status ='],
   ['исключить meta6 из реестра', "['МГ', data.mgPulls]", "['МГ', {}]"],
+  ['не собирать PR meta6 через API', 'for (const repository of [repo, mgRepo])', 'for (const repository of [repo])'],
   ['не повторять запрос mergeable=null', 'attempt < 3', 'attempt < 1'],
 ];
 const dir = mkdtempSync(join(tmpdir(), 'zadachi-')); let bad = 0;

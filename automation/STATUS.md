@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-10T07:16:47.165Z | МГЛ: 436544c281df86881ecb3b5d561fc300dd0652b0 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42774128668
+UTC: 2026-11-10T07:17:11.894Z | МГЛ: 22d7533396a85d721d5dd965b72c055bc6c527c2 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42774179722
 ## ПРОВЕРИТЬ CLAUDE
 - PR #216 06a8b61ec198ba43bb93a69efb2aeca7246383ee: .github/workflows/status-dlya-claude.yml, scripts/status/selftest.mjs
 - PR #223 0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66: .github/workflows/investigation-snapshot.yml
@@ -52,7 +52,7 @@ P1 — нет данных: нет данных
 #215 Portal Visits: исправить устаревшее ожидание 12 миров | 2e73930d862d7de10a85c186e3c3517e5c58c98d
 #217 Fix: Veil Shared CI проверяет существующую игру | d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 162 коммитов | .github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1
+МГЛ: 164 коммитов | .github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1
 МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

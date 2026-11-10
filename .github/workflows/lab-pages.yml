@@ -14,6 +14,9 @@ permissions:
   actions: write
 # Окружение github-pages разрешает деплой только из main. Пуш в lab/** не деплоит сам,
 # а перезапускает этот workflow на main (сборка всё равно берёт все ветки lab/**).
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   kick-main:
     if: github.ref != 'refs/heads/main'

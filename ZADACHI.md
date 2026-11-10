@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Устранить конфликт с main в PR #169 | МГЛ | MG-ремонтник | `lab/pod-i-nad-original-palettes` | [#169](https://github.com/mpaykin1/meta6-lab/pull/169) | 2026-11-10 11:49 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Доводчик: PR #124, лор Древа миров | МГЛ | чат ChatGPT | `lab/seed-of-last-world-canon` | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) | 2026-11-10 05:59 | 2026-11-10 08:48 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Разобрать устаревший PR #8 Auto-Repair | МГЛ | MG-ремонтник | `lab/bot-safe-autorepair` | [#8](https://github.com/mpaykin1/meta6-lab/pull/8) | 2026-11-10 07:48 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | ABYSS GLOW — второй эталон графики и анимации | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/abyss-glow-owner-reference-20261108` | [#134](https://github.com/mpaykin1/meta6-lab/pull/134) | 2026-11-08 15:33 | 2026-11-10 07:14 |

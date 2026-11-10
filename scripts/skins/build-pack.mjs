@@ -194,6 +194,22 @@ async function main(){
       offset:[solid.offset[0],solid.offset[1],solid.offset[2]-thickness/2-.014],
       material:'rust-transparent',anim:[]});
   }
+  // Боковые поверхности получают авторские рисунки, а не голые торцы.
+  // Используем ТОЛЬКО те же вырезки из parts-sheet.png, без нового арта.
+  // Локальная плоскость повернута к боковой камере; фронтальные накладки
+  // не трогаем, так как фронт уже принят владельцем.
+  for(const solid of [...entries].filter(p=>p.layer==='3d')){
+    const front=entries.find(p=>p.id===solid.id+'-front-art');
+    if(!front?.file)fail('нет авторской вырезки для боковой поверхности '+solid.id);
+    const halfWidth=(solid.dims?.[0]||.24)/2;
+    const halfDepth=(solid.dims?.[2]||.22)/2;
+    for(const side of [-1,1]){
+      entries.push({...front,id:solid.id+(side<0?'-side-left':'-side-right'),
+        size:[Math.max(.13,halfDepth*2),front.size[1]],
+        offset:[solid.offset[0]+side*(halfWidth+.009),solid.offset[1],solid.offset[2]],
+        rotation:[0,side*Math.PI/2,0],depth:1,anim:[]});
+    }
+  }
   // На левой ноге только одна авторская деталь — используем ту же броню
   // с обратной стороны, не придумывая и не рисуя другой элемент.
   const left=entries.find(p=>p.bone==='legL'&&p.layer==='3d');

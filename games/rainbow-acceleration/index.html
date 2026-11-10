@@ -642,7 +642,6 @@ function loop(){requestAnimationFrame(loop);
   if(fps<48&&lowH>200){lowH=Math.max(200,Math.round(lowH*.86));resize();good=0;}
   else if(fps>57&&lowH<maxH){if(++good>2){lowH=Math.min(maxH,Math.round(lowH*1.1));resize();good=0;}}}
 }
-
 /* Read-only META BOT bridge: real rider position, live track endpoint and input state. */
 const rrBotSource = Object.freeze({
   info: () => ({ name: 'rainbow-acceleration', levels: 1 }),

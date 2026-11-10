@@ -81,7 +81,8 @@ const mutations = {
   ],
   'hardcoded-protected-file-cheat': [
     'export function isProtectedFile(file) {',
-    "export function isProtectedFile(file) {\n  if (file === '.github/workflows/example.yml') return true;\n  return false;"
+    "export function isProtectedFile(file) {\n" +
+      "  if (file === '.github/workflows/example.yml') return true;\n  return false;"
   ]
 };
 

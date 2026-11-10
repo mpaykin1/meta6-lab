@@ -862,19 +862,19 @@
       "copy_path": "shared/library/assets/broken-city/fonts/pixelify-sans-latin-wght-normal.woff2"
     },
     {
-      "id": "2ecb0c7c07f1fbad463ae80e",
+      "id": "0222b02a26ed45679cf3cf30",
       "game": "broken-city",
-      "kind": "inline-svg",
-      "name": "svg@12703",
+      "kind": "source-table",
+      "name": "LEVELS",
       "purpose": [
-        "svg"
+        "level-generation"
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        139,
-        139
+        2331,
+        2341
       ],
-      "sha256": "962fdaf4baa2553fb7465576e9365c66c651d9d4e94d00b12af7de9d0005a328"
+      "sha256": "e23fe4feee360e39bbd12dbf14eece4b201e1d676748ca077f565794ff534d97"
     },
     {
       "id": "4cde2bb58acb02746e5399b4",
@@ -892,19 +892,19 @@
       "sha256": "d7bd1ffa9bff2c5d883b091949613b9b09a6a2b0056040bd0233674a97e344ba"
     },
     {
-      "id": "5f742877fb9e74864982f2b4",
+      "id": "ecf23644e1cb15588d63b032",
       "game": "broken-city",
-      "kind": "source-table",
-      "name": "LEVELS",
+      "kind": "inline-svg",
+      "name": "svg@12764",
       "purpose": [
-        "level-generation"
+        "svg"
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        2323,
-        2333
+        140,
+        140
       ],
-      "sha256": "e23fe4feee360e39bbd12dbf14eece4b201e1d676748ca077f565794ff534d97"
+      "sha256": "962fdaf4baa2553fb7465576e9365c66c651d9d4e94d00b12af7de9d0005a328"
     },
     {
       "id": "2c8cd4920a3961d5b7c78f37",
@@ -939,3247 +939,7 @@
   ],
   "solutions": [
     {
-      "id": "00cd40a43bd6d20c96db535b",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "snapA",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1840,
-        1840
-      ],
-      "sha256": "d595a2ecea1a5ad11c74b51631dc01410727253bc487db042b99db78a3153ae9"
-    },
-    {
-      "id": "01193439b5b3c8af3c0728c7",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "wallPiece",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2508,
-        2514
-      ],
-      "sha256": "ea1c29996997164a43a0f53e34b7fa0a0b747f5dfd754cde46c9f8f19162b50e"
-    },
-    {
-      "id": "04bc968459cb9c9d6891b5ff",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "locoPose",
-      "purpose": [
-        "animation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        864,
-        882
-      ],
-      "sha256": "696b5ae669d24559d33ca079c36326aac314b780628a48cce3b52588cb1ec7c9"
-    },
-    {
-      "id": "06f741ec3e4a35c1667b8124",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "resize",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        649,
-        655
-      ],
-      "sha256": "c28314a89f640d154a32ce835b8bc8e877f631eca752392eb1bb72dd62382116"
-    },
-    {
-      "id": "0713115b772b655da236673d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "add",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1783,
-        1783
-      ],
-      "sha256": "1b8a1b6e2833ff1e775d7f4540adc7a87075d010d3c69b63ae3e831e5dcb86ea"
-    },
-    {
-      "id": "0826046bc7650f7660a62848",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "curveY",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        384,
-        384
-      ],
-      "sha256": "9e000bd58cf40802311cc0dbb2b9b9510af06cc317b53c7bcd2c72117d5b6b78"
-    },
-    {
-      "id": "0917304d28bbadee252c6054",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeHero",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        461,
-        467
-      ],
-      "sha256": "f41e2385884f2cd3d52ad703a6af9ea6fb14b341c45c78347528cfe17776f0aa"
-    },
-    {
-      "id": "093968c0dd86121015981163",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickHero",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        468,
-        472
-      ],
-      "sha256": "228cf55183bb6de88040e56b649232f43587fbb786510f166b68155b4a5b3412"
-    },
-    {
-      "id": "09f524a1fc7575cc25df7bab",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "spawnToyHouse",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1892,
-        1899
-      ],
-      "sha256": "3de7968cb539d3144bbf1b33e8319f4751ba1eb87da7c160889fc67cbea99af2"
-    },
-    {
-      "id": "0b037007a80565334acf2be7",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "onRewarded",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2089,
-        2096
-      ],
-      "sha256": "4f0b95772d594e8c0d8c3617c93dd5567d093716626a1bb885386f1c67b51423"
-    },
-    {
-      "id": "0b938cdd3b2bb2304947b0b5",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "showGallery",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        594,
-        600
-      ],
-      "sha256": "f0c15522a87fcc4bb261d948dce8e56568aea269f3464964c065c83a989b31ab"
-    },
-    {
-      "id": "0c2ce11435bbea51264da362",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "GSTAR",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1348,
-        1348
-      ],
-      "sha256": "edec96714d7e83ec61531d85573263e72c0b004c493e70b8c56aa16d0a7343d2"
-    },
-    {
-      "id": "0c30852213a73ddb02c89509",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "knockShade",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1219,
-        1226
-      ],
-      "sha256": "1fef5fd964d13d5a72cb683af16a3d62370642994b38e99ffcc469a07bd0faca"
-    },
-    {
-      "id": "0e02e2b3f0c3377e27bbf5eb",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "barrierLayoutA",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1732,
-        1743
-      ],
-      "sha256": "36f02fafa4918038fee0fe57bfd60debc8e1e7d29468ed31efb7c1b1ef1db521"
-    },
-    {
-      "id": "0e8f597be17485e2f1d84806",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "chalkPlane",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1470,
-        1470
-      ],
-      "sha256": "944b6562e8dcb103d1f52572031ad1521ce4f27a603df5216df3f888e964255a"
-    },
-    {
-      "id": "1068f30d71cf10fdcf9f4685",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "shaftMat",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        338,
-        349
-      ],
-      "sha256": "84eec73d34dbcdf8f1a98272ba31608e8871b9c21dcf71cca7a259a67dbb74d6"
-    },
-    {
-      "id": "1224dec0abdfc54c25f2bd2f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "barrierLayoutGen",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1744,
-        1779
-      ],
-      "sha256": "9514097e347a9e89fc3320cfc752b1af5dd7b0745888151b9018cd45eeaffaf8"
-    },
-    {
-      "id": "13dd7f7737b12a71e44db736",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "Helix",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1562,
-        1562
-      ],
-      "sha256": "85bf839ab40a083dcd904ba24374604b16d7dd2ae7e9fb8bfdcb159397e0d8bd"
-    },
-    {
-      "id": "15e917cbb2c5c85ad3ac64aa",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "addPath",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1077,
-        1080
-      ],
-      "sha256": "96a4efdcfad981c0adccd66e0b1fcbcdad8f94942ec4a124e5e0a528a980522f"
-    },
-    {
-      "id": "164b22de84754c8babe8a874",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeDebris",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        440,
-        449
-      ],
-      "sha256": "d88203b88855ea48f7d8950bc2b147f0ad4925b0742d8bf72037a2734a136c41"
-    },
-    {
-      "id": "16a88d4464879a6f583314b4",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "memClear",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2166,
-        2166
-      ],
-      "sha256": "eb44c31528329d5bc07b1347ac65d2b86c2c837b428674b5c040bab44f8efb9f"
-    },
-    {
-      "id": "1779f0ad209e3d515f354868",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickToys",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1849,
-        1885
-      ],
-      "sha256": "8ba6222c209ea4f7d1d64f996930fdac5b602399f004a74587e7daf6f81b6d5c"
-    },
-    {
-      "id": "183220593b077bf4d21cd197",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickBridges",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2581,
-        2591
-      ],
-      "sha256": "2166d4c5fd22690cebaa1e1fff3ebfa99caf278901a33e0f59aa97cd2ce00b1b"
-    },
-    {
-      "id": "1c55cf17e17b56b16dfcfb57",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "TEL",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2015,
-        2015
-      ],
-      "sha256": "387bdccee2df3263b61f11dde6d5faef49420c560de7d84bb05f872ca6f2bf5c"
-    },
-    {
-      "id": "1c70c51cc2980a198c2fa355",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "audioInit",
-      "purpose": [
-        "audio"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2401,
-        2438
-      ],
-      "sha256": "9050d3b58a98950d2d97706d2a02fee358ece58682d6ac3761d56de71bddc08f"
-    },
-    {
-      "id": "1c8fcf7bed035f0d08cc402f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "giftObj",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2055,
-        2059
-      ],
-      "sha256": "170df165c6276cece12c8510592ed42b5ca1aa7ab5d37845972b304389d800ec"
-    },
-    {
-      "id": "1d5a98db7a2c29a95982ecf0",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "closeStory",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2313,
-        2313
-      ],
-      "sha256": "830434e2be065260da25262ef9a6006db7eb2811992b57c3f4dfd849bd873664"
-    },
-    {
-      "id": "1de40eba0c85c67f755e18d6",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeHillPatch",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        402,
-        402
-      ],
-      "sha256": "d1190d5eab34e50719a648ac5920d944d7aa3aad99e954ad4f9ad40c6d8486bf"
-    },
-    {
-      "id": "210a2b394db6f1936148a94b",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "box",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1357,
-        1365
-      ],
-      "sha256": "555e19fa049835f219cc574f3fa8dfe665a9bc686602e6d6b5b50e6cc49b2305"
-    },
-    {
-      "id": "21181e4c21573ffbdda006d8",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "onDefeat",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2077,
-        2084
-      ],
-      "sha256": "e8895e915c78e91e1a59bf73e389dbafa59c95e692379000b45318c179a86ef1"
-    },
-    {
-      "id": "211e08dddeb9fcd1e7af2a58",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "armorCanvas",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        782,
-        802
-      ],
-      "sha256": "0986db83ee9b5d7e76f712e623be8a3da42c9605bd5ed479c41fff673f865f4d"
-    },
-    {
-      "id": "2309d3c0b78c4908d6b882fa",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "L",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1406,
-        1406
-      ],
-      "sha256": "e4b4f7496becb35da437ae586003544bf76261f3d300a6ccefdba4e4ffc6db96"
-    },
-    {
-      "id": "2451140d1b1913a199956a1e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "startJump",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        893,
-        893
-      ],
-      "sha256": "4247f34586dac34c0164a74aebe5a1438bd22854d1ca13c097ac1fdc9c9ac85a"
-    },
-    {
-      "id": "245d3f07063463efe4122319",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "damp",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        160,
-        161
-      ],
-      "sha256": "dcc609a428a933da71280c9891e2775074aea825a805a498eb659c653de8be3e"
-    },
-    {
-      "id": "265cfd2e8212ff15830ec194",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "giftPlace",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2062,
-        2066
-      ],
-      "sha256": "d20ab1fd9caac5b12e796970c1d9d9f9301be8bd2170283448946cd6b6170bab"
-    },
-    {
-      "id": "268088959a5784f648750316",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "surfTop",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1726,
-        1726
-      ],
-      "sha256": "014f1403457be771f4a0002950bb64a99b54fafd156054a09c98177107471287"
-    },
-    {
-      "id": "27048b85ba4f6b180b1a0d6f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "shuffle",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2240,
-        2240
-      ],
-      "sha256": "6fb970a9b1f4416857a81b9ddb09e8061e04d856b9719f035f7ef8f46311b475"
-    },
-    {
-      "id": "276cce35d0feee534b2bc29b",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeLamp",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        422,
-        436
-      ],
-      "sha256": "e1e61735e2d1045f6feebc99f7778ab0361a94c467a60a35041c8951c5105b6a"
-    },
-    {
-      "id": "28a4fd9b90ba5716fa1d4ff4",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "inline-script@9693",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        101,
-        3331
-      ],
-      "sha256": "edad139d9ca2eccf71c9cde17ca3b7877580aa857fc6a9fb449ede11e1ad4a8d"
-    },
-    {
-      "id": "28a69cccb030e9a86add61d0",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "surfBlocked",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1727,
-        1727
-      ],
-      "sha256": "df945e7edb55ff70cfe490cdc245038a0a2b617b38c1ab9ac0504311ee4a65c7"
-    },
-    {
-      "id": "28ae1417caa2496a414ec1dc",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "memQuiet",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2139,
-        2139
-      ],
-      "sha256": "d9d99a8555b67620176ecbbd98442813aec751fd08037fb0cebf3446ba29e084"
-    },
-    {
-      "id": "299f4abb82f1f44c648c01d1",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "amberGlow",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        810,
-        810
-      ],
-      "sha256": "1da011f23789a0b13e913e92db95f0eb3dd7f0af2417ac6147deba6d18451911"
-    },
-    {
-      "id": "2d21131d1b5e8f386d908575",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "inside",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1938,
-        1939
-      ],
-      "sha256": "0eed74d245935a3f47450c35a0b885c0d8678e56a63822b53b7bff4ac0007332"
-    },
-    {
-      "id": "2e79320f7dc4a86d756b69fb",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "oldRuinBlock",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2193,
-        2196
-      ],
-      "sha256": "b62f6d6cce1adf3d8ae0337770d834cdf5ff98f418fe4bf399db0c7473c85756"
-    },
-    {
-      "id": "2fcf2d86884a50df1dadb5f8",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "musTick",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2368,
-        2384
-      ],
-      "sha256": "f301fb288c2e7e4e7804964808ec14cf4d9532b040f3b6c623bb0ee7020e733b"
-    },
-    {
-      "id": "3122eec15d31691e2bf00339",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "loadLevel",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2638,
-        2663
-      ],
-      "sha256": "7c7d810bf77ba0e0dbaed3abcf55ea823bdff95ab5141076772fb1a530b0ad1d"
-    },
-    {
-      "id": "3195040690b2c8f1915e1934",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "addGap",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2516,
-        2516
-      ],
-      "sha256": "b3ef88fec4ca237b32905bce2a8c2d88cb0d23a114992ac7ec9daf2d0e6c12fc"
-    },
-    {
-      "id": "322d64147cc9451bf0b34fed",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "sparkBurst",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1695,
-        1702
-      ],
-      "sha256": "62f979e00cf5a93892046bc761b87dbc4d4a7bd62910ac36f96689dc26788f0e"
-    },
-    {
-      "id": "343439908e16690d7cc6600d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeToyRuin",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1525,
-        1559
-      ],
-      "sha256": "19a5c4cdd9e0c7a21016a871bee2c30f351487864946e18a8825b470091a2acc"
-    },
-    {
-      "id": "35c4e57069592509abacadc0",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "frame",
-      "purpose": [
-        "animation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        3242,
-        3327
-      ],
-      "sha256": "e46a88609b3f95fe65cdc5d03aec1e3ff4f6f8fa20dc51e0eb1f8ce7c44fa53e"
-    },
-    {
-      "id": "3a22123fca4ed0639c17735d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickMem",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2167,
-        2182
-      ],
-      "sha256": "7ea6bc9cd54cfd2131fdfa053c8dc97922e75decb4428c81a3a2d3c7b2d1dfb9"
-    },
-    {
-      "id": "3b06d27367dc8b092860360c",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "spillToys",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1886,
-        1889
-      ],
-      "sha256": "59aa87a3ed8a231b63a5fe19fd47082d23083ade3c1a518355a5796c90a782c2"
-    },
-    {
-      "id": "3c96ba067dcb1112131dbfd9",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "showCard",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2748,
-        2748
-      ],
-      "sha256": "cbaed618cf18a96c7ea327082b8f58e5e0500dd2fa062ceb4a6e83b51b8e6744"
-    },
-    {
-      "id": "3eab2d6cf9f27860ba7859c0",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "burst",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1019,
-        1026
-      ],
-      "sha256": "b958e9f654133536cec9958d4eb99e191c98940599146cbfe1686c5dfd19cd19"
-    },
-    {
-      "id": "3f94f00780f438690f94e56e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "audPlay",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2392,
-        2396
-      ],
-      "sha256": "eea3ad32c4ce1c01cd17b3cc18212280a3c98d67660b5c26a1844aff8b5099e9"
-    },
-    {
-      "id": "3fbd57e6ee8bd7e188c8c5f8",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "ambientUpdate",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2197,
-        2215
-      ],
-      "sha256": "a13d5592c474dc8bd40c6aff7eff677024206b7243ffcc9436db5e8d9f973d0e"
-    },
-    {
-      "id": "408c1942724c0db2209301c3",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "mkCape",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        827,
-        827
-      ],
-      "sha256": "1ecf8543f8230dff82052cc5fee6b5ab32dd517f551a28ae5326ca9c4564a592"
-    },
-    {
-      "id": "40caddbf9c4ea7dbdd835368",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "balcony",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        228,
-        229
-      ],
-      "sha256": "6bb332cb218382b66c13f2d945eff6cb679e19400c3031ec3a5d68dba0b81654"
-    },
-    {
-      "id": "43b5d2b92a06ba9f38d79946",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeBuildings",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        326,
-        335
-      ],
-      "sha256": "0f69e26a38c69576d23cc01bff444dc979a7cb9c7a5edbabe0698a3abe576eb5"
-    },
-    {
-      "id": "43d428f97684128609035fe0",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "audLoad",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2385,
-        2391
-      ],
-      "sha256": "60797d47dd7f514b7173075c1b00d1ea6bc179e424a2c34c11169fd324f097b5"
-    },
-    {
-      "id": "465fdf332a3f8a49529a19fc",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "updateGameCamera",
-      "purpose": [
-        "camera"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2970,
-        2990
-      ],
-      "sha256": "08adfce62d26244155719e814e5caa4e216594838aa7e4da76af95e2da5e72fb"
-    },
-    {
-      "id": "46ab5526b6e94c7588f19a8f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "disposeRuin",
-      "purpose": [
-        "animation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1966,
-        1966
-      ],
-      "sha256": "e799e63bad005659f8d0915106c4fe4776dbbf9767246f0f7aaaddc111c81219"
-    },
-    {
-      "id": "47372650e76fb3061e1fe20d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "$",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        141,
-        145
-      ],
-      "sha256": "251743ca43c74e9318228a0a9a599117eee6038b5bb7381bf5504cb931186210"
-    },
-    {
-      "id": "474665bfef6a223e9c28e799",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "onTrampBridge",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2555,
-        2555
-      ],
-      "sha256": "a81461b1a9afde13a5b563c85e8fc07b786f6caba94d5346d90f319d59a38d8b"
-    },
-    {
-      "id": "477e2b93fbe1213b0c18e98c",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "clothTex",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1303,
-        1306
-      ],
-      "sha256": "5d2531859ed0bfe0cddce872436db1d7ae67212ad57a97ad131d648b466f709a"
-    },
-    {
-      "id": "47e62bdf01f79bc9aadd1e12",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "toysBlock",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1935,
-        1940
-      ],
-      "sha256": "9bd7fd44eef5d79e9bff50fa89a525144525482d7aec2185d7a9e03745423c55"
-    },
-    {
-      "id": "4a806c32245099de6812dc56",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeSlabs",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        404,
-        420
-      ],
-      "sha256": "f9c5d7f8522948ca805710777fbcd8dcc6984843a1dc04f8aa68daca4bcfcfc4"
-    },
-    {
-      "id": "4b1798335c6f998ba960444b",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "finishCircle",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2316,
-        2319
-      ],
-      "sha256": "9503cdea0a8ebd492d0fa5fc89eabe8bd967f82296097f911412148b4894121b"
-    },
-    {
-      "id": "4c3fec40d51c75835a31c76e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "mk",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        964,
-        964
-      ],
-      "sha256": "0abdc3d3d88d2001222605e7a10d14290a2fd4163e8ba809d5fa7fc75c092177"
-    },
-    {
-      "id": "4c6edc5bb63c9a627591f60e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "Parts",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1324,
-        1345
-      ],
-      "sha256": "a720f87c3535dd82333567293f365d9c561f1ec55345ecf56fda1f164a753d4c"
-    },
-    {
-      "id": "4d84e424bb44eca4c3e83b64",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "respawn",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2787,
-        2799
-      ],
-      "sha256": "f2430857f6373351d8fb9d2ad6297dc606ff83f9f57d96930becdef273429ec1"
-    },
-    {
-      "id": "4fe6a84c34403c0554317c87",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "rnd",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        161,
-        161
-      ],
-      "sha256": "9299a13a32bc524e8377f1a2cae4797ef47a691f1879b260479468b62d7e91c1"
-    },
-    {
-      "id": "5130af0dd053f0fb9a8588cf",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "comboBudget",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2477,
-        2477
-      ],
-      "sha256": "7e102ba566bb3538b84fb95bd2362f1f352174810dc0f90e9b837becf7082f07"
-    },
-    {
-      "id": "529a12f9f0583123dc616326",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "addArmor",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        811,
-        830
-      ],
-      "sha256": "5d1ce15a95c6b84dfebe82124147e14ec727a7b64f9a0e022671482f135afd04"
-    },
-    {
-      "id": "52a83059ca7a59f7a0917c25",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "inked",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1292,
-        1292
-      ],
-      "sha256": "20f131556ed1bb62bf78e8fedd14d5493fe73624d614be06afa92d06c86c5ff3"
-    },
-    {
-      "id": "53fc73839a4015aadab2fd39",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "setLighting",
-      "purpose": [
-        "shader"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2624,
-        2633
-      ],
-      "sha256": "53bcb8f29eebb36588a769806de7a0ff382e4e28773fd828a7dd73091a9d498c"
-    },
-    {
-      "id": "54c16624cb016a344382e96c",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "comboBridge",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2568,
-        2572
-      ],
-      "sha256": "9a7882396bce5e4136d590693ef2737ef15e4446929870b6049bb69233cc3817"
-    },
-    {
-      "id": "561d715e62aba71d0db85dc2",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "rebar",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1360,
-        1365
-      ],
-      "sha256": "9c2405f72eb6d2629e8afef0aaa36f132d0249058c29095b4458050ac3800517"
-    },
-    {
-      "id": "5762f227d750ead8b14c3580",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeBody",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        754,
-        754
-      ],
-      "sha256": "0b5452b73c982f41f6973d158f06c12aea3f9737815d8bc559d6a86b5dab1c87"
-    },
-    {
-      "id": "59da6d1ea9d7475e96edd6ca",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeRuin",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1003,
-        1014
-      ],
-      "sha256": "9859b1e48a63b85f0180266453a6c9670b4435956928028b5cf82c94cf101814"
-    },
-    {
-      "id": "5aae071049c1fff4f235c220",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "toysUpdate",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1942,
-        1965
-      ],
-      "sha256": "b4d340d8e9811d1a3279300a2fe64cf3af782edee14e6540f8e3ad51027cce1d"
-    },
-    {
-      "id": "5acede6e4d2c088b4261e18c",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tex",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        175,
-        175
-      ],
-      "sha256": "267c4f162b1bc283c8f9f8862c52a172fe58e9c2889a91abf1580f6b8c78ffd3"
-    },
-    {
-      "id": "5b8d53f25b185faf3b749daa",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "stompImpact",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1257,
-        1269
-      ],
-      "sha256": "eeafd8a1d5df28b754b94fb54ff580a5d34332b2afd6d833082367147b5dd9d9"
-    },
-    {
-      "id": "5b9d39797263e1f677691e4d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "spawnFall",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        995,
-        1002
-      ],
-      "sha256": "3119e52eadcef58971fa39b49f5f1e2b07524546baf79edbd3de23fbdb0ff05c"
-    },
-    {
-      "id": "5c05bea81c913233deb70c2c",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickStory",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2002,
-        2011
-      ],
-      "sha256": "aa4bb7ecae4f8af4e979502db708de554b3cbb36f27ef31f3465713dc7f09a28"
-    },
-    {
-      "id": "5def8c7f3b3d1f4e30fc6e7c",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickFalls",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1027,
-        1051
-      ],
-      "sha256": "a47b52990e57952fcffdc7bb85477dc9303ffe3bbd6643ddb4430fcdce44da5b"
-    },
-    {
-      "id": "5e902a64e96a4971913db058",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "T",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        108,
-        109
-      ],
-      "sha256": "5583762d7535b6d4f399ffac18989b49e941754100523e51e948da66749d7ba6"
-    },
-    {
-      "id": "5f9f6e9fc8047c9368fe3ee4",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "spawnToy",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1841,
-        1847
-      ],
-      "sha256": "0c84a13aad67d638dd9b73aeb9a1966452fcec02ba23444e7477dbc839dfc3ab"
-    },
-    {
-      "id": "5fb35fda91dcd6a6808c3db6",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "sfx",
-      "purpose": [
-        "audio"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2439,
-        2439
-      ],
-      "sha256": "6740d2125b19abf1e69faa110794795585ea7d085da5ce549ffe95ad4d8b9c58"
-    },
-    {
-      "id": "604dd606a17aa03d89da6b1e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "path",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1380,
-        1380
-      ],
-      "sha256": "b4fbb45ea1f961f90f662db00f8fb15b73b336b81a2ce8e5b4de3aa713c84e01"
-    },
-    {
-      "id": "6117d70a358e8ae0981d186e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "spawnRuin",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1015,
-        1018
-      ],
-      "sha256": "87e63f411b17de659188a2c7fab33fcb14226c68cf2274d075d97c3a82e417d4"
-    },
-    {
-      "id": "616cb72c921c59bca292c392",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "pathBlock",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1159,
-        1163
-      ],
-      "sha256": "f0d4d9298fd5542b364afb1a80f43fdc27e3b3a8377679f30b09bdf67e501957"
-    },
-    {
-      "id": "619f79b5dc24ff552b6388e6",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "lerpAngle",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        944,
-        944
-      ],
-      "sha256": "a2e8dcea76fa4bb3ffd9d36d3a43621b6d45173fabb02fcab3dd7fcfc2def6c8"
-    },
-    {
-      "id": "634d26c1f7b3f1709e80d7c1",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeFog",
-      "purpose": [
-        "weather"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        491,
-        499
-      ],
-      "sha256": "d81500429ac36808432f86690bf549d006d435741e79b3259770201ff1abed50"
-    },
-    {
-      "id": "6468f9a5d5b155e38ea458c7",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "ac",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        226,
-        227
-      ],
-      "sha256": "16f36aa7ee1c04784453c332912fbc145dc45a94bc73f01dbb5337580f7cc243"
-    },
-    {
-      "id": "64cfbc39389140499a556c87",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "toysClear",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1967,
-        1972
-      ],
-      "sha256": "a784ed01723b71f0f57518bc0c3d9b8c843d34e29d864c0cfebc45361e6b1be4"
-    },
-    {
-      "id": "656d9364f3367a977c9f4712",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "placeGoal",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2634,
-        2637
-      ],
-      "sha256": "3752d3d954e9acf4e6256c7ed44ab9b49322eef1fea0a2262b8d0dc379faac2b"
-    },
-    {
-      "id": "65b92655b93c4286ab5e68ea",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeBridge",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        699,
-        708
-      ],
-      "sha256": "418b414a99019cb121ec5c36735f360ac8a5a6f2117126eb83d1b4259b32e75d"
-    },
-    {
-      "id": "6698133f873a6b05526146cf",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "WATCH",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1985,
-        1994
-      ],
-      "sha256": "90c2af28f1e3580ea35c910f3a5e34a7da71f4a5823f264b4f70563838a8c656"
-    },
-    {
-      "id": "67d0306543defe7c59cddd81",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "O",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1407,
-        1407
-      ],
-      "sha256": "a3ed4b16f4cac39c1aba7415a880e3309446fe843a6cbcd697f62eab4bbb5525"
-    },
-    {
-      "id": "6b142b73d1792660fd3ddb50",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "restoreTowers",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1067,
-        1067
-      ],
-      "sha256": "6e890c41aeeeffce498a87d8edbb3a8e8ad3d6decf0e8f8d5d28098bf813e0aa"
-    },
-    {
-      "id": "6b3db3006c0c49e2cb43a847",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "hintTex",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2496,
-        2502
-      ],
-      "sha256": "59c3272bee98138dcdac15f2a0b2e80f440905bf8b746df1f4d549f22b72b785"
-    },
-    {
-      "id": "6c191319568af82b7c13cf19",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "toyify",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1321,
-        1321
-      ],
-      "sha256": "f0a1f4af5772b17cf2d40fc849a39718f4740eabf0c009b6e375a330dabbcefe"
-    },
-    {
-      "id": "6ca473efa5ea13fce3ba4555",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "levelDone",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2779,
-        2786
-      ],
-      "sha256": "091a5b28ba9801453017dfea8274f2b4fe2946f56edc98ccbc7c2c2f4e79e5d4"
-    },
-    {
-      "id": "6ca656bfcceb5feb8f2525b5",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "meteorImpact",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2573,
-        2580
-      ],
-      "sha256": "877a746955719a0435fbde8063bfd5438e0ab693b7fef62595c06ad841bc4202"
-    },
-    {
-      "id": "6ce5392dde75a7ce5bd30364",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "perfTick",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2017,
-        2026
-      ],
-      "sha256": "c7b6576b52f15c195b13c42fd4555d331a7df5b09a18e4bc9549bdc589c51fdd"
-    },
-    {
-      "id": "6cf509ffc73b8e6359cee68d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "stompPose",
-      "purpose": [
-        "animation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        848,
-        855
-      ],
-      "sha256": "fc3eca2689d057e48f9bbb7ab84d7319079197234c63adb420e62368bea47b81"
-    },
-    {
-      "id": "6d5ef8765621b4e4b64c1d23",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "surfH",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1725,
-        1725
-      ],
-      "sha256": "5efcfd4c161bc2e94b35dfaf4dd6c0103f1502c3e32d50c6c6d69bd393bd2ab1"
-    },
-    {
-      "id": "6d64a715421752e5053d9a05",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "redrawChalk",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1419,
-        1419
-      ],
-      "sha256": "01d31d50b3dd6a8e43dbc5568046abf591158882de8ab01f835e8c2d1a4e25ea"
-    },
-    {
-      "id": "6e4f9e0c9078c5deb2cfa0ab",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeSkylineCards",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        474,
-        481
-      ],
-      "sha256": "cfaeb894eace189c4feb7d1b29a0c149e5dfffb324bdb46d36ebbc1ff6f2d0ea"
-    },
-    {
-      "id": "6e5070b9115172d8e17adc0f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "detailCard",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        500,
-        504
-      ],
-      "sha256": "02ef7eafad25f735edcd505a25a485e3fb43244aab390acb6494fee8b86c9f03"
-    },
-    {
-      "id": "702ce04f50ed9aca81d9ef26",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "hideTower",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1066,
-        1066
-      ],
-      "sha256": "0e3307c19e4e4bf1a9164994c574ffbc99ea14ad36c0c18b285c94985683500f"
-    },
-    {
-      "id": "70f531180abb0c35444324eb",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "restartLevel",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2968,
-        2968
-      ],
-      "sha256": "12692e92a116f503bc0b6597716a08e4b904e1ced41ca720f77ca228555e5365"
-    },
-    {
-      "id": "7111a5eefe7cf6f641310da1",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "chalkTex",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1418,
-        1418
-      ],
-      "sha256": "c6c4b0325e80cc853aa563f4c0699af21df6060b315692108d6fece97ac14f91"
-    },
-    {
-      "id": "718bca33faf852035dc65467",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "hillH",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        385,
-        385
-      ],
-      "sha256": "e10b32ee511238b5db0bf14891e9ca26c54b5c90b5887133f600a955d90d010c"
-    },
-    {
-      "id": "71db2215a73387b312f156ea",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "cradleStart",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2237,
-        2250
-      ],
-      "sha256": "12ce0cf0a41abef68fe8b726a63f0847c8068424c6e2df5c2f8eb946afe99788"
-    },
-    {
-      "id": "7307296b934e781f6171dccf",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickGift",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2067,
-        2074
-      ],
-      "sha256": "30f179e49e562453a4e27e2d6a26eff0ef69384cfcfb141cfa13e2bbbeea4877"
-    },
-    {
-      "id": "73351b98a4dee5b147593b2f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "X",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1782,
-        1783
-      ],
-      "sha256": "d6fd63716ce23479a58c1036e599e6c2e3648142c5d0f302c7f5c2f4e0d4b006"
-    },
-    {
-      "id": "737cc65f7b663f82b87f05c5",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "crack",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1377,
-        1383
-      ],
-      "sha256": "10941e3e912f075c2a830baacadaf26d9d8a9134d41cc38c4f6a55e8dac45a88"
-    },
-    {
-      "id": "749f1592bcc5101f1c82ac43",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "setButtons",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2750,
-        2763
-      ],
-      "sha256": "69d63865aad5448a119b779ed61533200b83761b434ba4e8c154cd793eb497a8"
-    },
-    {
-      "id": "76cefcf4f877553757a2e593",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "cradleClear",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2288,
-        2288
-      ],
-      "sha256": "0c3dfe4f5abff195ed68c6f9955793df6d84db7801d6c917e0580eec5d278aa9"
-    },
-    {
-      "id": "779d4e3b35b8fadf318ac345",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "momCard",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1995,
-        1997
-      ],
-      "sha256": "c7074060934f2798df7701216e1a9ca20bf912d46a88a7502e827a26d006dfde"
-    },
-    {
-      "id": "78d4f5332c91652231ac49fe",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "cradleBridge",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2260,
-        2263
-      ],
-      "sha256": "7975b71f9ebaac3ec1e619283595ccb549809c7731d13c9de2e90926b2edce6c"
-    },
-    {
-      "id": "7a6889c25b6804b42bbc62e9",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "clearFalls",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1052,
-        1057
-      ],
-      "sha256": "30cf9d3b5fcf05a15984c7990a8375ea0caa51ff1e809186f25ec3fe5af1544e"
-    },
-    {
-      "id": "7ac2560f257c545fafccd7ba",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "gy",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1095,
-        1099
-      ],
-      "sha256": "243c1431e7866903d6656b9f90fe91d6fe8002393ecc42e61dd3ffc22e0b3156"
-    },
-    {
-      "id": "7bf826d427b330eec025cd5f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "puffTex",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1301,
-        1302
-      ],
-      "sha256": "27a85981558f49fc747ad0ed1b84e3de25eddbcebeb62691fccb51eae8d6dcbf"
-    },
-    {
-      "id": "7c005e7ea4215e71dce8dce6",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickCape",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        831,
-        845
-      ],
-      "sha256": "d9c5c6b688a75ce8ab02679c7c303b448f5e6a68ce7aecf71dac743547ddc023"
-    },
-    {
-      "id": "7c4418a27ed37f5b93703b88",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "startCollapse",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1068,
-        1076
-      ],
-      "sha256": "a426c8b51964cb2f4ca9719a957268a2990a6d66c6116e5408d7cfba375901e2"
-    },
-    {
-      "id": "7c6270bd1faa9fa538067cde",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "runnerHit",
-      "purpose": [
-        "combat"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1170,
-        1175
-      ],
-      "sha256": "2236b4f2018c1c49bfa81489db06b8cb614ff1643b318f93bd2a75a4f995d84a"
-    },
-    {
-      "id": "7da8b5ffb9aa62097618cbe6",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "clearComboOnly",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2550,
-        2554
-      ],
-      "sha256": "06791f38d7032e43c3d737982c88ecfbf3c8102777ba8a1d1be8c20a400f2b96"
-    },
-    {
-      "id": "7def5898eb03c3917d058e02",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeDust",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        375,
-        380
-      ],
-      "sha256": "73ff16a27f03a3e331655039187bd43435c792b680409548832e7ab6a236df7c"
-    },
-    {
-      "id": "7f7eaaa881b2b10c9fd7e553",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "genCombo",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2478,
-        2486
-      ],
-      "sha256": "3f77b58a942d316f56c5203132ea96b44ae7428945b8541a057844a1fa1b0365"
-    },
-    {
-      "id": "804700b643f1e5ac3910d054",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "memShow",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2138,
-        2138
-      ],
-      "sha256": "52179b7b7df46e22f652569c2b6cda27a4e951f514439f82c09eeee5d349e565"
-    },
-    {
-      "id": "805bf67b22b3d9e997be5af5",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "faceTex",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1420,
-        1444
-      ],
-      "sha256": "38a3dd243c645b4eb283f9d1d13bcbeb610f31f1965b2988c4bb35e374596998"
-    },
-    {
-      "id": "82160b44d9e0c1732f5f4684",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "hideCard",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2749,
-        2749
-      ],
-      "sha256": "66ec9d9f6f3f12d5becfd373458169d38a76fa2c81b007ab93e6fbf8435b98a8"
-    },
-    {
-      "id": "8255480248da629066493b12",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "dec",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2387,
-        2387
-      ],
-      "sha256": "b535e3b0c6122eb4efff24686cfc3ea754350cc689e6c4b90106aef88dc80f67"
-    },
-    {
-      "id": "828f1d3cdeadd586315c787d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "musPlay",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2362,
-        2367
-      ],
-      "sha256": "58a7ac1a84b0e0956e5f87a3d1d609a41e28a7c069cb3b82c8295463a78fa5b2"
-    },
-    {
-      "id": "82b7eecf972a3fc66195d4a5",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickSparks",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1704,
-        1711
-      ],
-      "sha256": "f96b43842c390b6afe6b04d34d1b73a9efc3aeb4655606148efd6022303aed89"
-    },
-    {
-      "id": "82cb94a877e71215ac12348e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "face",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1788,
-        1788
-      ],
-      "sha256": "f792f561d078f51ad10aa302626726bfeca1abaa1c93f95409b03992bbe60111"
-    },
-    {
-      "id": "872f78013cd5cbe9334a9c84",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "sph",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1358,
-        1365
-      ],
-      "sha256": "f9df554593ceee7221f9c32436b10d97b1a47d290e5a4332dab6e23fc5bdc3e2"
-    },
-    {
-      "id": "87fc7a6868b1414298172955",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "hideChunk",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        992,
-        992
-      ],
-      "sha256": "073c8bd7109e7d11a0b2042ab8129acfa2255a71f34d60256814537fa761af33"
-    },
-    {
-      "id": "8840e150bf4d9572eb7b0822",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "beginEnding",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2800,
-        2808
-      ],
-      "sha256": "82ff9a5d6616569775283a9eb609ae87c877f4fa3bd93cb296b3b424ca9cdfd9"
-    },
-    {
-      "id": "8a12e2eb7858bbc6f72dff09",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "cradleUpdate",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2264,
-        2287
-      ],
-      "sha256": "55f0d834e39877e9cb72b3dc8615f0658b4f2766420f7f6662c287c83448efbc"
-    },
-    {
-      "id": "8aa819b55baff180c0e045aa",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "navTarget",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2031,
-        2043
-      ],
-      "sha256": "84523b62d31d14b602a16cd4f4f84094006f9b97fc2325b25cef10176ceb11d7"
-    },
-    {
-      "id": "8baf1d12e11b8c1c5d81cfe2",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeGround",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        387,
-        401
-      ],
-      "sha256": "5d4e77ccf7d9aad269f08c0981cadcd51eedbe1138bc6390e0f336fa3d71422e"
-    },
-    {
-      "id": "8bcab4d83a7ed2e8ebabfe01",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "drawChalk",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1404,
-        1417
-      ],
-      "sha256": "6ba6497188ed81a8dc74d7d8ed5e732e51de0e7e04bc7fc3831145945e43d4e3"
-    },
-    {
-      "id": "8c2244b4c6897904a1a704e4",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "clearCollapses",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1164,
-        1168
-      ],
-      "sha256": "8315666032fd1ddec4f9f7d9554d7050105db056f4c2a793119197359547d229"
-    },
-    {
-      "id": "8cf33b35f7ca111d85fe0a78",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "wall",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2241,
-        2241
-      ],
-      "sha256": "f4f1df99416a60acd225c15808a0718238e3f460f858737bc0a98188e9a54308"
-    },
-    {
-      "id": "8deea7cdfdec25076ed8c0f0",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "buildMenu",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2817,
-        2838
-      ],
-      "sha256": "d21b07f1ced7c4b12a3082d06e76703928b08a404399f5fd11f2b63db497864e"
-    },
-    {
-      "id": "8e2dad8d6560f389b640d188",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "TINY",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1724,
-        1725
-      ],
-      "sha256": "b3da452253fe62da6c4192a8a4b2931580349f6b7c656b156e3b0f3839c66230"
-    },
-    {
-      "id": "8ea670c40019eae0946dc0fd",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "M4",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1322,
-        1345
-      ],
-      "sha256": "73832071b56e692948b5be88b4f04a4643d93ac79ecbbe9b265bc5c15130071a"
-    },
-    {
-      "id": "907340fd11280b32f810c0c1",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "setLoad",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        149,
-        149
-      ],
-      "sha256": "0b70877f2bdbd0319705cb78784dbe85e9ebf4b7f317c41bc8a5c697c70370b4"
-    },
-    {
-      "id": "908c2f9c336abf0a83ff0f2f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickToyHouses",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1900,
-        1934
-      ],
-      "sha256": "2406d0b6f5bc5583b6b06f55505952362d5283df699221027eaec0801da430da"
-    },
-    {
-      "id": "916125652b2a77a113f74b3c",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "comboLevelDone",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2606,
-        2610
-      ],
-      "sha256": "5f57398bcfef55845625f4ff60d3f0b3f9ea2061b6e142c05d48b4acca51e1c6"
-    },
-    {
-      "id": "91a7cdf646797c6b38d8cdb8",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "startGame",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2764,
-        2770
-      ],
-      "sha256": "9d572df6c801581533b51f94fa47cf3887670e697e11a6fea6af9d39c6548bf2"
-    },
-    {
-      "id": "91df6a0f26ad4a3d463335ae",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "addHint",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2504,
-        2507
-      ],
-      "sha256": "671d5f880da78f4ec2f0640b83e36f97608b8e8c2d75ff3164e1707beb7cc4f0"
-    },
-    {
-      "id": "91eba026a2e2dc072690e5bf",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "buildCombo",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2536,
-        2549
-      ],
-      "sha256": "065385bcdb1d40e3e0d9ea2b90abeeeffb312cfc5d6b3a114f2399379edbc142"
-    },
-    {
-      "id": "92a7374661f763ccd19b6d8f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeToyHouse",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1473,
-        1522
-      ],
-      "sha256": "8b0096f7c5eaad33a641222a9993013a64c4733e85925ee92f0a97014e302c1f"
-    },
-    {
-      "id": "97070ef405cd79231ae5b469",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "applyAudio",
-      "purpose": [
-        "audio"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2440,
-        2444
-      ],
-      "sha256": "d5426b55e50b11e7d387437023fedbdc2b8c6f17f7b024b2cdc17bf489d3ab3c"
-    },
-    {
-      "id": "9c0947e244f1e22ecae20d35",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "noise",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2407,
-        2409
-      ],
-      "sha256": "4920495b514504c87ba8a478e6b3dd6698c0e2af55d2e1b57abd69c53ad6f17d"
-    },
-    {
-      "id": "9c0cb039cf2b033b6a149bc8",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "show",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2751,
-        2751
-      ],
-      "sha256": "3186f82f2fed89c609b24cd4b1d477135308d33ad7789544541922b5c5209c60"
-    },
-    {
-      "id": "9d016e349687e1cfe0260a6d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "slabSpec",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1087,
-        1092
-      ],
-      "sha256": "fbf4284c81309ab4abe5503838a20f01710947b47e8b46f5c54804f9905da38f"
-    },
-    {
-      "id": "9e23df17c06fa331fbf9b5ac",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "setPause",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2445,
-        2445
-      ],
-      "sha256": "56f31e4f9a4b106cac389ce9b1913881020390331ed10da911913b2444ba8110"
-    },
-    {
-      "id": "9ec4012de00713c177c1422e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "fireEscape",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        223,
-        225
-      ],
-      "sha256": "07e47cf9cdc7a86c887bab1684b7182c22db9750f6514c60cee9d9e7ccdc7bd8"
-    },
-    {
-      "id": "9ef15009e75b108168a719a2",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "bone",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        752,
-        752
-      ],
-      "sha256": "8cbf8db2fe9e5ea36bc51c5368b738b2333e1a31893d02f060971fd05a147429"
-    },
-    {
-      "id": "9fa586f48ad489e497052778",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "SKETCH",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        952,
-        981
-      ],
-      "sha256": "36adc9f07ba1d05f9ff4354a9cd93961389e41bc0e0803df3cb4954cb816497f"
-    },
-    {
-      "id": "a0adbf7e1e703e6ee835de58",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "memShade",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2161,
-        2161
-      ],
-      "sha256": "ac1bf73b65b9cbd4f97cc307a93951e2e63d6f14dc2f8976a0f732e88c77b842"
-    },
-    {
-      "id": "a2d4c8e5f993d7cd5990d344",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "validateCombo",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2528,
-        2535
-      ],
-      "sha256": "63600a9ea70d06fc556b2796d174c7749540742c22ae449376ff23affa1275aa"
-    },
-    {
-      "id": "a3827819a322ee1c5b80c331",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "XR",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1911,
-        1911
-      ],
-      "sha256": "78729cde609de4e0ab433fbcb23d079ac52dd6f7a7b084a6fb79e72ddcb5bb83"
-    },
-    {
-      "id": "a3d9bd7b04f3ea185e3e98b9",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "startCracks",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1205,
-        1210
-      ],
-      "sha256": "baa561ca0228fce4687b2845c61d7c21d9438fe5d984f4848d235699ac75c015"
-    },
-    {
-      "id": "a4574d3170df0b0e19dfff1d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "comboStomp",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2563,
-        2567
-      ],
-      "sha256": "a9545ea1addbf235e230b0bea49bc236505fc5578039d5275a8888f38efb6026"
-    },
-    {
-      "id": "a4729ddd4f474f738b20c9e6",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "toyGround",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1848,
-        1848
-      ],
-      "sha256": "926b0cbedd950004b8c181e06d353c0470d50f11e6d447a520a7a2b8451ecfea"
-    },
-    {
-      "id": "a4d2dcc2db29307704f3ca42",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "memTex",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2151,
-        2158
-      ],
-      "sha256": "d08ca7a978bfc01789698c656269cfefc825e4ab84fb7be1a5740a0e7f68ece3"
-    },
-    {
-      "id": "a5082e68a7d746d6e8b080ce",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "pathHeight",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1081,
-        1085
-      ],
-      "sha256": "55eeb5478e23cd663f4ea79e6a4f8cd5ce29b0c71fc7d98a30ca327e49a31448"
-    },
-    {
-      "id": "a5a931864514ceadb3a7bc53",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "drawHeroSheet",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        242,
-        262
-      ],
-      "sha256": "afe8915bdb38de6e24c6a8b22c3585b5e3653e86f46fe8e52588ba036ed2ecc1"
-    },
-    {
-      "id": "a6d689fec75cedfa925e089f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "rockGeo",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1349,
-        1353
-      ],
-      "sha256": "e493a607c0c001c8c4da6acc18e2f99345372026780f5cb32bbd8b397e268e17"
-    },
-    {
-      "id": "a77343e9d9f4ca3856fbf860",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeShade",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        720,
-        726
-      ],
-      "sha256": "491bba38b6257fff07ddb24f7b3afb6544eb4a766fc71becf015e530eb398269"
-    },
-    {
-      "id": "a896637f2478bcc9eb6423a8",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "mulberry",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2476,
-        2476
-      ],
-      "sha256": "0de3e10283f7492ac111b17787e9412683fa9eb9de4acd6bd32df48e734192a8"
-    },
-    {
-      "id": "ab7779cd8c4dd730d57a99ac",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickRagdolls",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1232,
-        1256
-      ],
-      "sha256": "5b56e0c1f8f795ecc1efe1543197733ffe1171dceb1f3441e7c78a79764d151c"
-    },
-    {
-      "id": "abc8fc4353a44048b9e17c40",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeBarrierRuin",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1780,
-        1838
-      ],
-      "sha256": "ee191ee633e9db4f417005cb6bc83907e939161072121d0f85ebd7f166e9752d"
-    },
-    {
-      "id": "aca4fd6680be4d80c8ae427c",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickCollapses",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1121,
-        1140
-      ],
-      "sha256": "81cbdf97c0ec4aa71c4261aaaf1351b3bd7f1f0cf1a1ae8147fe3b6451370c53"
-    },
-    {
-      "id": "acc00e76f11ee887fa9df7ee",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "cycleMods",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2320,
-        2320
-      ],
-      "sha256": "eee7e9987fda6fd726512e3f9b77e6e7c0542f585b845fa9d3e54bd73266241d"
-    },
-    {
-      "id": "af2a202c3601b70c85aa241f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickCap",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2140,
-        2149
-      ],
-      "sha256": "39bc845b90731dadda105a8d83421fd7d667a49e7b336dceeb9185b67185cac6"
-    },
-    {
-      "id": "b02fefcf5078ceff3c7fd75e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "audioUnlock",
-      "purpose": [
-        "audio"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2398,
-        2398
-      ],
-      "sha256": "f371d487d864608356804bb9a38ccf7f9ce13c3c5c987919c9621e8ffc21835e"
-    },
-    {
-      "id": "b16bc85ac3632e429d33e13b",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "bgRuinTex",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1310,
-        1318
-      ],
-      "sha256": "52629275fc5ca841f85439a2926336d13b6f8bcef6290ef2f8b11d572d632a1f"
-    },
-    {
-      "id": "b19e28792ecccfc6e45ac4a6",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "ragdollTarget",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1227,
-        1231
-      ],
-      "sha256": "8f40e557ed9103630e69503e8c1c5481fea5a9b934b99ba4bf567870474c679e"
-    },
-    {
-      "id": "b21860f0c460361eb37ffecc",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "jumpPose",
-      "purpose": [
-        "animation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        883,
-        891
-      ],
-      "sha256": "5c279b8bad936122fe1c11d581c4ffd4dc4bdf5b9c2791e2a89ae036c967ded3"
-    },
-    {
-      "id": "b8796f4aed631bcf76e58fe8",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "clearLevel",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2613,
-        2622
-      ],
-      "sha256": "7660b42a645093b30c59ac91f544efdc521b1b9c21eed8c0a4ee6977b865920c"
-    },
-    {
-      "id": "b87f39f278704f45876da56d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "limb",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        753,
-        753
-      ],
-      "sha256": "9731baa0a34afcc1bc10d159c0973cc60deee20ea21bd8679df27364e843af02"
-    },
-    {
-      "id": "b8952de82d3a094f72b13c4d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "comboShade",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2515,
-        2515
-      ],
-      "sha256": "46a0868cb155f8db600f7c83989a6358a410f7f295e3fb25e9d52afb9011cdfc"
-    },
-    {
-      "id": "b91af690e1feb1f91dd7d1d0",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "wire",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1366,
-        1371
-      ],
-      "sha256": "0d176a1ff26a50b9456ca4f9d10416231fe6fd9e587c37fb70e0aa6a0d1b06ba"
-    },
-    {
-      "id": "b96edfbf25a40ae418086b5e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "groundAt",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2664,
-        2674
-      ],
-      "sha256": "8bff571e80ff68b201f5f0cb87f73cf2bd5b6f0b0fccc669f35719a6b3ef1d16"
-    },
-    {
-      "id": "b99ddff4915dd89ec579c70f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "action",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2730,
-        2745
-      ],
-      "sha256": "aa4a90616904cd11d82ee6ed6caab105906560aba211f3ba36338620ffd4c69f"
-    },
-    {
-      "id": "ba32d8d2a03c3856dd027121",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "comboJump",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2556,
-        2562
-      ],
-      "sha256": "c13ac83c3486a5fd077d568d818efa0640ade8fb72f4ec84cd2157aae25817e8"
-    },
-    {
-      "id": "bc45ce8957bdccc78f824101",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "setHeroOpacity",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        846,
-        846
-      ],
-      "sha256": "16ad917832c26d6f3265903c56044467db6e4f5e4defeddc0050484e21aebca3"
-    },
-    {
-      "id": "bc45df3ac6f012e69a6ab3a4",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "pix",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        136,
-        140
-      ],
-      "sha256": "dc070cde21503509f60e38cff625e19378bd06fb4b737d6a8b35dfdc7361e62f"
-    },
-    {
-      "id": "be1522f4e504325e93ebdfe9",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "memBest",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2137,
-        2137
-      ],
-      "sha256": "e49ed8a288b9c7ef7e7084b1ec2e1c42d64edd19b58badbeedc7062d6daf343c"
-    },
-    {
-      "id": "be41d4bbfda8475644951b01",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makeShaft",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        482,
-        490
-      ],
-      "sha256": "1392e3662b542846ad5c746b13d18c7184a148ab67f4eb19b58c0ea88d69a5bf"
-    },
-    {
-      "id": "bfbe414eac4610b53fd374b6",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "spawnBand",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1093,
-        1120
-      ],
-      "sha256": "e11cc8b564160478a9dc4d6d2a655a4fef7def4645fc9b7e6cb6e5efcb2f7fa9"
-    },
-    {
-      "id": "bfe605396a4dbc721851d045",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "flat",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        563,
-        563
-      ],
-      "sha256": "77a1f857d4935658bc10f9f144c88120e4b4ef63ead9e16c3980f94b4ca3103e"
-    },
-    {
-      "id": "c1298ea43facc0efb96ba56b",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "toysStart",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1941,
-        1941
-      ],
-      "sha256": "d9d79e56a9db9005d37a0356f2d5f6d694e1608781b18bf462ebe55c3c6f3e43"
-    },
-    {
-      "id": "c399dbf3cc17805a847d0f92",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "g1",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        857,
-        857
-      ],
-      "sha256": "fddcc4e9123ba6c89126582a6af85db8782797b6cbea7fbad77401e14148a9bf"
-    },
-    {
-      "id": "c413c702a9b070de1d8f3372",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "legCurve",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        859,
-        863
-      ],
-      "sha256": "39d5412c99407ed7392cd128bbb3e7db992d6a47a472eee1b2baa4662d59d73e"
-    },
-    {
-      "id": "c45247b340b047a3acaf38e0",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "addB",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        519,
-        526
-      ],
-      "sha256": "bb65460aefcae8776ec7356407371d62be0f07bf069fd3f1004e31db77f3317c"
-    },
-    {
-      "id": "c6fcb4a52a5c008b0f69db8a",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "col",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1632,
-        1634
-      ],
-      "sha256": "098ca478c0e54988ad2b55a661040dd35efee1154a4e281efc359f6a5df066e1"
-    },
-    {
-      "id": "c8b0fb6f78cfea659b39a0f4",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "sign",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        230,
-        231
-      ],
-      "sha256": "d7c9ceb33a8dd1cd56d75525a180a28aea11d0dd0c618be81d689543cab37585"
-    },
-    {
-      "id": "cb82dfa7fd285b952b291796",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "useShield",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2075,
-        2075
-      ],
-      "sha256": "d9cc5d9c5e9526384d05c9e9bda26f5dd4c693f17d8e5082b7d6c12bb2d9df1f"
-    },
-    {
-      "id": "cbd98904104ca97cf97b98b6",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "updateEnding",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        3000,
-        3025
-      ],
-      "sha256": "0801cacd7bfba8a5d9297237b89b135d3733e3af8fa3befd77475e25d72dadb3"
-    },
-    {
-      "id": "ccf51c61dca2eef317666ac2",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "musStart",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2361,
-        2361
-      ],
-      "sha256": "e8be416b058ea065a919a7f251dfc2149b1ee593827b660b4b28ccf3c35de7fc"
-    },
-    {
-      "id": "cdfd1c8d19d14801062d2f15",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "emitAt",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1703,
-        1703
-      ],
-      "sha256": "b7ce994ac308b7cd4aaefeb427f9d85cb354f5e30f1170000fb220276ed35999"
-    },
-    {
-      "id": "d08b799ead25a16e02406c9b",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "skylineTex",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        207,
-        217
-      ],
-      "sha256": "6900f8b206bb113efdbfc4b37e66ac8f6bdb6640557148efc4ebb87f4cf6014d"
-    },
-    {
-      "id": "d27cf00ff00b3ca96592f5f8",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "stoneTex",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1293,
-        1299
-      ],
-      "sha256": "efa8519d7c083f4f7cf8f2361af2d8c6cb9acc0e7e6f48b0e4750f1606ac0d98"
-    },
-    {
-      "id": "d43afe2a120094a5792e817f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "toTitle",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2771,
-        2778
-      ],
-      "sha256": "da6d1044f0e96bbd7c0db9b57ef68aeab974e595a4d31f78ea5412e8e40b121d"
-    },
-    {
-      "id": "d46d3c5456a5f46d3e8a5b39",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "endPointer",
-      "purpose": [
-        "controls"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2712,
-        2721
-      ],
-      "sha256": "74dd42d93a36877509fa8e538bcbf2e8b1bf25622986a6522d74e79026321eb7"
-    },
-    {
-      "id": "d4df8e4c673a96093a3b9d60",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "cv",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        174,
-        174
-      ],
-      "sha256": "4b702956d489336ad7c9cb1151ddeb784c17609aacaa3593fbeeb3d19ef25956"
-    },
-    {
-      "id": "d58b5c97210628202f6d86f0",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "heightOnPaths",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1154,
-        1158
-      ],
-      "sha256": "6e90bd180337744ed38dbcfdaa5e5a415d23e5b5be8a1acf675562b4b3ec54bb"
-    },
-    {
-      "id": "d5dc8059bcdc53e70c6db46d",
+      "id": "0041d4ceb05a98e6c56f7148",
       "game": "broken-city",
       "kind": "solution",
       "name": "TIMEOUT",
@@ -4188,43 +948,478 @@
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        105,
-        106
+        106,
+        107
       ],
       "sha256": "841d4a110c1b3750a4069ad3fca33842b697abc6f54ee247524cc9f3d8acbabf"
     },
     {
-      "id": "d78624e09540528127700370",
+      "id": "00c540af7860af6619f9b27c",
       "game": "broken-city",
       "kind": "solution",
-      "name": "crackTex",
+      "name": "makeFog",
+      "purpose": [
+        "weather"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        495,
+        503
+      ],
+      "sha256": "d81500429ac36808432f86690bf549d006d435741e79b3259770201ff1abed50"
+    },
+    {
+      "id": "00e16568e6d7d084ff1010ea",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickSparks",
       "purpose": [
         "gameplay"
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        1375,
-        1402
+        1712,
+        1719
       ],
-      "sha256": "a5217110acaa87f9fd9c7d630c6740d4bc233d49207cb388e95b8ed41f27ea0f"
+      "sha256": "f96b43842c390b6afe6b04d34d1b73a9efc3aeb4655606148efd6022303aed89"
     },
     {
-      "id": "dbfe43bee65ea73c1801c101",
+      "id": "0139c7925eea94d5e6bb8679",
       "game": "broken-city",
       "kind": "solution",
-      "name": "addChasm",
+      "name": "Helix",
       "purpose": [
         "gameplay"
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        2251,
-        2259
+        1570,
+        1570
       ],
-      "sha256": "62e6ff8781472aea80445a4b1d4a2a918146608adaabd06f9d08207e226f6d34"
+      "sha256": "85bf839ab40a083dcd904ba24374604b16d7dd2ae7e9fb8bfdcb159397e0d8bd"
     },
     {
-      "id": "dc8320187a160313bf6904a8",
+      "id": "02eb23ad9b864b1e21def7ea",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "useShield",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2083,
+        2083
+      ],
+      "sha256": "d9cc5d9c5e9526384d05c9e9bda26f5dd4c693f17d8e5082b7d6c12bb2d9df1f"
+    },
+    {
+      "id": "0344d33746fb7623626dd22d",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeToyRuin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1533,
+        1567
+      ],
+      "sha256": "19a5c4cdd9e0c7a21016a871bee2c30f351487864946e18a8825b470091a2acc"
+    },
+    {
+      "id": "04262596ac0ae1216098f3db",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "toysUpdate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1950,
+        1973
+      ],
+      "sha256": "b4d340d8e9811d1a3279300a2fe64cf3af782edee14e6540f8e3ad51027cce1d"
+    },
+    {
+      "id": "04c4f3689f6113e0280b384c",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "comboBridge",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2576,
+        2580
+      ],
+      "sha256": "9a7882396bce5e4136d590693ef2737ef15e4446929870b6049bb69233cc3817"
+    },
+    {
+      "id": "0514e0a2d3a945301db92a31",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "closeMenu",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2847,
+        2847
+      ],
+      "sha256": "dd0953a4678024c020b7f889bcd9b67ca8b351b5906803fd37c521a07a364e10"
+    },
+    {
+      "id": "052d1593d7e97c772e4cd93c",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "TEL",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2023,
+        2023
+      ],
+      "sha256": "387bdccee2df3263b61f11dde6d5faef49420c560de7d84bb05f872ca6f2bf5c"
+    },
+    {
+      "id": "05f5aa8d34f66b84e4c85a1e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "shaftMat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        342,
+        353
+      ],
+      "sha256": "84eec73d34dbcdf8f1a98272ba31608e8871b9c21dcf71cca7a259a67dbb74d6"
+    },
+    {
+      "id": "0837b70e4da1188fec1f757c",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "setPause",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2453,
+        2453
+      ],
+      "sha256": "56f31e4f9a4b106cac389ce9b1913881020390331ed10da911913b2444ba8110"
+    },
+    {
+      "id": "0a04c01a0b9874f1ddc9ef5b",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "cradleStart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2245,
+        2258
+      ],
+      "sha256": "12ce0cf0a41abef68fe8b726a63f0847c8068424c6e2df5c2f8eb946afe99788"
+    },
+    {
+      "id": "0baa7d138b187612356c19ef",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "genCombo",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2486,
+        2494
+      ],
+      "sha256": "3f77b58a942d316f56c5203132ea96b44ae7428945b8541a057844a1fa1b0365"
+    },
+    {
+      "id": "0e0082c0167a5c8264bed94f",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "musStart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2369,
+        2369
+      ],
+      "sha256": "e8be416b058ea065a919a7f251dfc2149b1ee593827b660b4b28ccf3c35de7fc"
+    },
+    {
+      "id": "0f97a91573f3d2abdb349311",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickBridges",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2589,
+        2599
+      ],
+      "sha256": "2166d4c5fd22690cebaa1e1fff3ebfa99caf278901a33e0f59aa97cd2ce00b1b"
+    },
+    {
+      "id": "1002368b9aede0012d822d9e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "audioInit",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2409,
+        2446
+      ],
+      "sha256": "9050d3b58a98950d2d97706d2a02fee358ece58682d6ac3761d56de71bddc08f"
+    },
+    {
+      "id": "1024656face7fa6aabd25659",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "ambientUpdate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2205,
+        2223
+      ],
+      "sha256": "a13d5592c474dc8bd40c6aff7eff677024206b7243ffcc9436db5e8d9f973d0e"
+    },
+    {
+      "id": "113826e8e07b1d7dd100b70a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "dustMat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        364,
+        378
+      ],
+      "sha256": "0e08ef8f8c41831d9ee7be631d724006bf881d1951abc5a7bea00166cb692df6"
+    },
+    {
+      "id": "1263c41f29c242000323fe3c",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "restartLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2976,
+        2976
+      ],
+      "sha256": "12692e92a116f503bc0b6597716a08e4b904e1ced41ca720f77ca228555e5365"
+    },
+    {
+      "id": "12c94cdfcff74fc8db14d371",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickCap",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2148,
+        2157
+      ],
+      "sha256": "39bc845b90731dadda105a8d83421fd7d667a49e7b336dceeb9185b67185cac6"
+    },
+    {
+      "id": "12d4072df52b08ec841794ce",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "curveY",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        388,
+        388
+      ],
+      "sha256": "9e000bd58cf40802311cc0dbb2b9b9510af06cc317b53c7bcd2c72117d5b6b78"
+    },
+    {
+      "id": "161b6c853452fab0539fc74d",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "updateEnding",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        3008,
+        3033
+      ],
+      "sha256": "0801cacd7bfba8a5d9297237b89b135d3733e3af8fa3befd77475e25d72dadb3"
+    },
+    {
+      "id": "16908c240469f5ec7e927b1b",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "onTrampBridge",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2563,
+        2563
+      ],
+      "sha256": "a81461b1a9afde13a5b563c85e8fc07b786f6caba94d5346d90f319d59a38d8b"
+    },
+    {
+      "id": "17fb7789d6977591ef1200e4",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "cradleClear",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2296,
+        2296
+      ],
+      "sha256": "0c3dfe4f5abff195ed68c6f9955793df6d84db7801d6c917e0580eec5d278aa9"
+    },
+    {
+      "id": "1847abf8543a0beb04e29246",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "startCracks",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1213,
+        1218
+      ],
+      "sha256": "baa561ca0228fce4687b2845c61d7c21d9438fe5d984f4848d235699ac75c015"
+    },
+    {
+      "id": "19587c3ba962fac1c0503235",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "onRewarded",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2097,
+        2104
+      ],
+      "sha256": "4f0b95772d594e8c0d8c3617c93dd5567d093716626a1bb885386f1c67b51423"
+    },
+    {
+      "id": "19b19d196f3cbd04ab737373",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makePit",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        699,
+        706
+      ],
+      "sha256": "eac45154ad9fc14682b9b705a18dc568b0a828eeb78985a9595993fd6bcdf93b"
+    },
+    {
+      "id": "1d48f6eeb3f8a0f13861e569",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        653,
+        663
+      ],
+      "sha256": "65d67dc4d3f05fb82711afbe74dada371718ea7f1edea86f6baeb69ef36d9fbb"
+    },
+    {
+      "id": "1dcb7b944259b4ff736954dc",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "navTarget",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2039,
+        2051
+      ],
+      "sha256": "84523b62d31d14b602a16cd4f4f84094006f9b97fc2325b25cef10176ceb11d7"
+    },
+    {
+      "id": "23e5715417730c40086fa244",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeBarrierRuin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1788,
+        1846
+      ],
+      "sha256": "ee191ee633e9db4f417005cb6bc83907e939161072121d0f85ebd7f166e9752d"
+    },
+    {
+      "id": "24a0a10d38f75e9c32f89be9",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "puffTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1309,
+        1310
+      ],
+      "sha256": "27a85981558f49fc747ad0ed1b84e3de25eddbcebeb62691fccb51eae8d6dcbf"
+    },
+    {
+      "id": "24a0abf6094e1355fba43cc1",
       "game": "broken-city",
       "kind": "solution",
       "name": "mk",
@@ -4233,13 +1428,1558 @@
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        1986,
-        1988
+        1994,
+        1996
       ],
       "sha256": "a162798b728e1b76cc545afd01c3614b86cddecb95beab9951e8421f8864feac"
     },
     {
-      "id": "ddd8b8518e56f7886f1e2814",
+      "id": "24e622c302f5404ead6b521b",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "wrapA",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1847,
+        1847
+      ],
+      "sha256": "9040b041b10389ec9dcf93a51821dc629bbe31e6a4b43205a78669cfe8034367"
+    },
+    {
+      "id": "27a555deac4b38d3fe7c75cd",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "$",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        142,
+        146
+      ],
+      "sha256": "251743ca43c74e9318228a0a9a599117eee6038b5bb7381bf5504cb931186210"
+    },
+    {
+      "id": "281d784c62bed2eb0141cbe1",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "cradleBridge",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2268,
+        2271
+      ],
+      "sha256": "7975b71f9ebaac3ec1e619283595ccb549809c7731d13c9de2e90926b2edce6c"
+    },
+    {
+      "id": "2945361a71477c33dd8226a2",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "toTitle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2779,
+        2786
+      ],
+      "sha256": "da6d1044f0e96bbd7c0db9b57ef68aeab974e595a4d31f78ea5412e8e40b121d"
+    },
+    {
+      "id": "2a9861ed31a7a4b033f40f9f",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "animateBody",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        902,
+        951
+      ],
+      "sha256": "db9b1a81361bfb54f78957ab5bf34a265fabdc9602caa485c8fb0acb5b8df009"
+    },
+    {
+      "id": "2bffb96827d13aac3eb72443",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "dec",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2395,
+        2395
+      ],
+      "sha256": "b535e3b0c6122eb4efff24686cfc3ea754350cc689e6c4b90106aef88dc80f67"
+    },
+    {
+      "id": "2c67839209b979de56ac4c22",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "fireEscape",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        227,
+        229
+      ],
+      "sha256": "07e47cf9cdc7a86c887bab1684b7182c22db9750f6514c60cee9d9e7ccdc7bd8"
+    },
+    {
+      "id": "31256cb508e6945d6d9aee1b",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "inked",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1300,
+        1300
+      ],
+      "sha256": "20f131556ed1bb62bf78e8fedd14d5493fe73624d614be06afa92d06c86c5ff3"
+    },
+    {
+      "id": "314460a5161fa011625427c5",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "cycleMods",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2328,
+        2328
+      ],
+      "sha256": "eee7e9987fda6fd726512e3f9b77e6e7c0542f585b845fa9d3e54bd73266241d"
+    },
+    {
+      "id": "3181c67d21c6c574f49d2917",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "audLoad",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2393,
+        2399
+      ],
+      "sha256": "60797d47dd7f514b7173075c1b00d1ea6bc179e424a2c34c11169fd324f097b5"
+    },
+    {
+      "id": "325f2b4e9baed573e2d9c1f3",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "action",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2738,
+        2753
+      ],
+      "sha256": "aa4a90616904cd11d82ee6ed6caab105906560aba211f3ba36338620ffd4c69f"
+    },
+    {
+      "id": "33fd0f54f02dfed45d74e936",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "cyl",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1367,
+        1373
+      ],
+      "sha256": "8b77ea19ca0fcd5cc5fdcfd1c76ed9bed9a967f957f9221b8b214af3d1a51d76"
+    },
+    {
+      "id": "344e5ebfc6559bbb797deac8",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "col",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1640,
+        1642
+      ],
+      "sha256": "098ca478c0e54988ad2b55a661040dd35efee1154a4e281efc359f6a5df066e1"
+    },
+    {
+      "id": "3463ba1e254b46007c5ae2ac",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "box",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1365,
+        1373
+      ],
+      "sha256": "555e19fa049835f219cc574f3fa8dfe665a9bc686602e6d6b5b50e6cc49b2305"
+    },
+    {
+      "id": "351f760cf17b644cfeb382b9",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "clearFalls",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1060,
+        1065
+      ],
+      "sha256": "30cf9d3b5fcf05a15984c7990a8375ea0caa51ff1e809186f25ec3fe5af1544e"
+    },
+    {
+      "id": "37043fc9f31412e0cd6b6bf7",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "musPlay",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2370,
+        2375
+      ],
+      "sha256": "58a7ac1a84b0e0956e5f87a3d1d609a41e28a7c069cb3b82c8295463a78fa5b2"
+    },
+    {
+      "id": "38bb49d4b9a2309065fd97a8",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "memShow",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2146,
+        2146
+      ],
+      "sha256": "52179b7b7df46e22f652569c2b6cda27a4e951f514439f82c09eeee5d349e565"
+    },
+    {
+      "id": "38ca056b1ef6f12bc12332b8",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "barrierLayoutGen",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1752,
+        1787
+      ],
+      "sha256": "9514097e347a9e89fc3320cfc752b1af5dd7b0745888151b9018cd45eeaffaf8"
+    },
+    {
+      "id": "3a5e470df5655fcccafd407f",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeShaft",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        486,
+        494
+      ],
+      "sha256": "1392e3662b542846ad5c746b13d18c7184a148ab67f4eb19b58c0ea88d69a5bf"
+    },
+    {
+      "id": "3ea0606d28bc486dd2e13ee1",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "setLighting",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2632,
+        2641
+      ],
+      "sha256": "53bcb8f29eebb36588a769806de7a0ff382e4e28773fd828a7dd73091a9d498c"
+    },
+    {
+      "id": "3f38bb11046ac9b1dcf41951",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "musTick",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2376,
+        2392
+      ],
+      "sha256": "f301fb288c2e7e4e7804964808ec14cf4d9532b040f3b6c623bb0ee7020e733b"
+    },
+    {
+      "id": "3f86771e742cb71f3214effa",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "closeStory",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2321,
+        2321
+      ],
+      "sha256": "830434e2be065260da25262ef9a6006db7eb2811992b57c3f4dfd849bd873664"
+    },
+    {
+      "id": "401cd4ef42efe7ab2fa266ac",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "limb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        761,
+        761
+      ],
+      "sha256": "9731baa0a34afcc1bc10d159c0973cc60deee20ea21bd8679df27364e843af02"
+    },
+    {
+      "id": "42254b70bfe7aa14143f8505",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "stoneTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1301,
+        1307
+      ],
+      "sha256": "efa8519d7c083f4f7cf8f2361af2d8c6cb9acc0e7e6f48b0e4750f1606ac0d98"
+    },
+    {
+      "id": "4265d9340d63d9511ce4db4d",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeBuildings",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        330,
+        339
+      ],
+      "sha256": "0f69e26a38c69576d23cc01bff444dc979a7cb9c7a5edbabe0698a3abe576eb5"
+    },
+    {
+      "id": "42c8e4eb29d88a839b0635ea",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "addPath",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1085,
+        1088
+      ],
+      "sha256": "96a4efdcfad981c0adccd66e0b1fcbcdad8f94942ec4a124e5e0a528a980522f"
+    },
+    {
+      "id": "44862f9c8ef3725dab31389c",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "levelDone",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2787,
+        2794
+      ],
+      "sha256": "091a5b28ba9801453017dfea8274f2b4fe2946f56edc98ccbc7c2c2f4e79e5d4"
+    },
+    {
+      "id": "45364177a4ca67403dd61576",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "inside",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1946,
+        1947
+      ],
+      "sha256": "0eed74d245935a3f47450c35a0b885c0d8678e56a63822b53b7bff4ac0007332"
+    },
+    {
+      "id": "45b37fe0333403683f3a994a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickDebris",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        455,
+        463
+      ],
+      "sha256": "c5c0d118f69c448ceb1453e9b925900cb814f4612be1aa87948d743bc200f39b"
+    },
+    {
+      "id": "473b1be13aa5a7047b55d7ad",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "showGallery",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        598,
+        604
+      ],
+      "sha256": "f0c15522a87fcc4bb261d948dce8e56568aea269f3464964c065c83a989b31ab"
+    },
+    {
+      "id": "478914f88157a721bd00bd3b",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "XR",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1919,
+        1919
+      ],
+      "sha256": "78729cde609de4e0ab433fbcb23d079ac52dd6f7a7b084a6fb79e72ddcb5bb83"
+    },
+    {
+      "id": "480c2b3011679afa198f3d6c",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "piece",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1104,
+        1107
+      ],
+      "sha256": "7ce71c1029950918f371aac80e24cd71cb38d0a1215e5c5f608e0942bbaf5561"
+    },
+    {
+      "id": "48ae43ff56f2fdfe93ecf17e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "momCard",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2003,
+        2005
+      ],
+      "sha256": "c7074060934f2798df7701216e1a9ca20bf912d46a88a7502e827a26d006dfde"
+    },
+    {
+      "id": "49821d492d98a05a155ee7bd",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "inline-script@9754",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        102,
+        3349
+      ],
+      "sha256": "654dfbd4e4a7ffc1cf514924d3b6b6c273af589de53ac7471bfce331f88f8ca0"
+    },
+    {
+      "id": "4a3056a9b73bf5ccf04ac00c",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "shuffle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2248,
+        2248
+      ],
+      "sha256": "6fb970a9b1f4416857a81b9ddb09e8061e04d856b9719f035f7ef8f46311b475"
+    },
+    {
+      "id": "4c512e967b2a3681a2e5f86b",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "updateGame",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2869,
+        2975
+      ],
+      "sha256": "3dd605ab0d41c4d1d6db177bb09c9217b734972674a17d9f9a7c83c51b8cd2ee"
+    },
+    {
+      "id": "4eb6982d849917f52329e718",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "spawnToy",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1849,
+        1855
+      ],
+      "sha256": "0c84a13aad67d638dd9b73aeb9a1966452fcec02ba23444e7477dbc839dfc3ab"
+    },
+    {
+      "id": "501f015bc178421b0631bd48",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickFalls",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1035,
+        1059
+      ],
+      "sha256": "a47b52990e57952fcffdc7bb85477dc9303ffe3bbd6643ddb4430fcdce44da5b"
+    },
+    {
+      "id": "50e6f71220919aad2f63b66b",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "bgRuinTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1318,
+        1326
+      ],
+      "sha256": "52629275fc5ca841f85439a2926336d13b6f8bcef6290ef2f8b11d572d632a1f"
+    },
+    {
+      "id": "51019267a52cb1b9852bd0f9",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "ragdollTarget",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1235,
+        1239
+      ],
+      "sha256": "8f40e557ed9103630e69503e8c1c5481fea5a9b934b99ba4bf567870474c679e"
+    },
+    {
+      "id": "51710bfae03ec2d3d4321166",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "X",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1741,
+        1741
+      ],
+      "sha256": "c6a61a87918a67acccb6dbffadc5c2ac1450635d0bba43220e66fd4bfd769cdf"
+    },
+    {
+      "id": "524604104c80d7eb30a43164",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "wall",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2249,
+        2249
+      ],
+      "sha256": "f4f1df99416a60acd225c15808a0718238e3f460f858737bc0a98188e9a54308"
+    },
+    {
+      "id": "5496d9b1fdd9e417d01f7760",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "clearCollapses",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1172,
+        1176
+      ],
+      "sha256": "8315666032fd1ddec4f9f7d9554d7050105db056f4c2a793119197359547d229"
+    },
+    {
+      "id": "559bf9056b5881a9c8365abd",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "memLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2191,
+        2194
+      ],
+      "sha256": "eff1ae015cf3955d438ec040b2fb94c8470a57674692ecf80fb3b34cf3fdf27f"
+    },
+    {
+      "id": "55b87c97a40650005ab6a0a7",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "emitAt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1711,
+        1711
+      ],
+      "sha256": "b7ce994ac308b7cd4aaefeb427f9d85cb354f5e30f1170000fb220276ed35999"
+    },
+    {
+      "id": "564405549adedb05220dfb02",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "knockShade",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1227,
+        1234
+      ],
+      "sha256": "1fef5fd964d13d5a72cb683af16a3d62370642994b38e99ffcc469a07bd0faca"
+    },
+    {
+      "id": "5655d4252cda254141cfc786",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickRagdolls",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1240,
+        1264
+      ],
+      "sha256": "5b56e0c1f8f795ecc1efe1543197733ffe1171dceb1f3441e7c78a79764d151c"
+    },
+    {
+      "id": "56a3252fb49f15bcbff05595",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeLamp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        426,
+        440
+      ],
+      "sha256": "e1e61735e2d1045f6feebc99f7778ab0361a94c467a60a35041c8951c5105b6a"
+    },
+    {
+      "id": "578f6b670060a89534d10087",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "buildCombo",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2544,
+        2557
+      ],
+      "sha256": "065385bcdb1d40e3e0d9ea2b90abeeeffb312cfc5d6b3a114f2399379edbc142"
+    },
+    {
+      "id": "57b4f44e38fef426dac2da24",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "GSTAR",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1356,
+        1356
+      ],
+      "sha256": "edec96714d7e83ec61531d85573263e72c0b004c493e70b8c56aa16d0a7343d2"
+    },
+    {
+      "id": "57dc5360a9278994e2468e9c",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "sfx",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2447,
+        2447
+      ],
+      "sha256": "6740d2125b19abf1e69faa110794795585ea7d085da5ce549ffe95ad4d8b9c58"
+    },
+    {
+      "id": "584f9f312ad8cbea77328840",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "drawAsphalt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        181,
+        193
+      ],
+      "sha256": "15b869c0ffb393780e96bf4e9409f94536ccd33935c98233667e30ce09955c40"
+    },
+    {
+      "id": "5959ad85ab3fd5b759435247",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "addArmor",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        819,
+        838
+      ],
+      "sha256": "5d1ce15a95c6b84dfebe82124147e14ec727a7b64f9a0e022671482f135afd04"
+    },
+    {
+      "id": "596cafe41d89132bb5d08160",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "SKETCH",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        960,
+        989
+      ],
+      "sha256": "36adc9f07ba1d05f9ff4354a9cd93961389e41bc0e0803df3cb4954cb816497f"
+    },
+    {
+      "id": "5a7706df151b4d84a6e581cf",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "Parts",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1332,
+        1353
+      ],
+      "sha256": "a720f87c3535dd82333567293f365d9c561f1ec55345ecf56fda1f164a753d4c"
+    },
+    {
+      "id": "5ad30cb502203edd318d908a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "stompPose",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        856,
+        863
+      ],
+      "sha256": "fc3eca2689d057e48f9bbb7ab84d7319079197234c63adb420e62368bea47b81"
+    },
+    {
+      "id": "5adadff43f3a9ecdec46fe1e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "updateCombo",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2600,
+        2613
+      ],
+      "sha256": "bc88644dd160f0bc2f71da927cd3986f9806f1aa64e1971891ea1ecb494e0c6d"
+    },
+    {
+      "id": "5eedfb9770eae92e31b74282",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "surfH",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1733,
+        1733
+      ],
+      "sha256": "5efcfd4c161bc2e94b35dfaf4dd6c0103f1502c3e32d50c6c6d69bd393bd2ab1"
+    },
+    {
+      "id": "5f2fec46a96c79cd341cdb06",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "wallPiece",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2516,
+        2522
+      ],
+      "sha256": "ea1c29996997164a43a0f53e34b7fa0a0b747f5dfd754cde46c9f8f19162b50e"
+    },
+    {
+      "id": "5f58f0195dcffce8d5ae5312",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "respawn",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2795,
+        2807
+      ],
+      "sha256": "f2430857f6373351d8fb9d2ad6297dc606ff83f9f57d96930becdef273429ec1"
+    },
+    {
+      "id": "5f77aa6407b27b8bac899d99",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "validateCombo",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2536,
+        2543
+      ],
+      "sha256": "63600a9ea70d06fc556b2796d174c7749540742c22ae449376ff23affa1275aa"
+    },
+    {
+      "id": "60164277645c884fa4f89f02",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "fogMat",
+      "purpose": [
+        "weather"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        354,
+        363
+      ],
+      "sha256": "6d65ba8c962da9c6ba8a32f7f169e651b518e137ed1738763411ecb616e3adbc"
+    },
+    {
+      "id": "624e9e48774c360134e60f4e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "comboLevelDone",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2614,
+        2618
+      ],
+      "sha256": "5f57398bcfef55845625f4ff60d3f0b3f9ea2061b6e142c05d48b4acca51e1c6"
+    },
+    {
+      "id": "62798e009088dd1db040f171",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeShade",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        728,
+        734
+      ],
+      "sha256": "491bba38b6257fff07ddb24f7b3afb6544eb4a766fc71becf015e530eb398269"
+    },
+    {
+      "id": "629b52b6f7eb65ba395627ef",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "memBest",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2145,
+        2145
+      ],
+      "sha256": "e49ed8a288b9c7ef7e7084b1ec2e1c42d64edd19b58badbeedc7062d6daf343c"
+    },
+    {
+      "id": "62f3a7f1dd860e95587ae116",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "giftPlace",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2070,
+        2074
+      ],
+      "sha256": "d20ab1fd9caac5b12e796970c1d9d9f9301be8bd2170283448946cd6b6170bab"
+    },
+    {
+      "id": "63c6fcbb55b43ad688d960e9",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "memTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2159,
+        2166
+      ],
+      "sha256": "d08ca7a978bfc01789698c656269cfefc825e4ab84fb7be1a5740a0e7f68ece3"
+    },
+    {
+      "id": "649e5893622337d914aebdc4",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "memShade",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2169,
+        2169
+      ],
+      "sha256": "ac1bf73b65b9cbd4f97cc307a93951e2e63d6f14dc2f8976a0f732e88c77b842"
+    },
+    {
+      "id": "64fdc7caa622ca9ace767012",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "applyAudio",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2448,
+        2452
+      ],
+      "sha256": "d5426b55e50b11e7d387437023fedbdc2b8c6f17f7b024b2cdc17bf489d3ab3c"
+    },
+    {
+      "id": "656facd35da1f11ed35ab0be",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "updateGameCamera",
+      "purpose": [
+        "camera"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2978,
+        2998
+      ],
+      "sha256": "08adfce62d26244155719e814e5caa4e216594838aa7e4da76af95e2da5e72fb"
+    },
+    {
+      "id": "658903b728e735f82c491be7",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "sph",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1366,
+        1373
+      ],
+      "sha256": "f9df554593ceee7221f9c32436b10d97b1a47d290e5a4332dab6e23fc5bdc3e2"
+    },
+    {
+      "id": "6844d50910910d7d723adad4",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "surfTop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1734,
+        1734
+      ],
+      "sha256": "014f1403457be771f4a0002950bb64a99b54fafd156054a09c98177107471287"
+    },
+    {
+      "id": "684c08de28af5c104b016ab0",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "addB",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        523,
+        530
+      ],
+      "sha256": "bb65460aefcae8776ec7356407371d62be0f07bf069fd3f1004e31db77f3317c"
+    },
+    {
+      "id": "6a69fa1a84374863e4de693d",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "WATCH",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1993,
+        2002
+      ],
+      "sha256": "90c2af28f1e3580ea35c910f3a5e34a7da71f4a5823f264b4f70563838a8c656"
+    },
+    {
+      "id": "6bd1ddc072e046b503f64d87",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "showAd",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2462,
+        2462
+      ],
+      "sha256": "7089ab9671f7b220ca6f764b3c6fbd3925d310cfc6af45261abbe323bdf42773"
+    },
+    {
+      "id": "6d0579ff23a38ea91a12544e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickHero",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        472,
+        476
+      ],
+      "sha256": "228cf55183bb6de88040e56b649232f43587fbb786510f166b68155b4a5b3412"
+    },
+    {
+      "id": "6d58316f211221e074ad0c68",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "cv",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        178,
+        178
+      ],
+      "sha256": "4b702956d489336ad7c9cb1151ddeb784c17609aacaa3593fbeeb3d19ef25956"
+    },
+    {
+      "id": "6e29a0845d40aae1921ec7e1",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "balcony",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        232,
+        233
+      ],
+      "sha256": "6bb332cb218382b66c13f2d945eff6cb679e19400c3031ec3a5d68dba0b81654"
+    },
+    {
+      "id": "715b3c93cffd163f44695c35",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "rockGeo",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1357,
+        1361
+      ],
+      "sha256": "e493a607c0c001c8c4da6acc18e2f99345372026780f5cb32bbd8b397e268e17"
+    },
+    {
+      "id": "7601a81585bb2faebb2735b2",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "meteorImpact",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2581,
+        2588
+      ],
+      "sha256": "877a746955719a0435fbde8063bfd5438e0ab693b7fef62595c06ad841bc4202"
+    },
+    {
+      "id": "7651f6af46933b5a958b543f",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "stompImpact",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1265,
+        1277
+      ],
+      "sha256": "eeafd8a1d5df28b754b94fb54ff580a5d34332b2afd6d833082367147b5dd9d9"
+    },
+    {
+      "id": "7714327ec984f455a51784a1",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "spillToys",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1894,
+        1897
+      ],
+      "sha256": "59aa87a3ed8a231b63a5fe19fd47082d23083ade3c1a518355a5796c90a782c2"
+    },
+    {
+      "id": "799fed8a8a06bcd983631c47",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "toysClear",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1975,
+        1980
+      ],
+      "sha256": "a784ed01723b71f0f57518bc0c3d9b8c843d34e29d864c0cfebc45361e6b1be4"
+    },
+    {
+      "id": "79c83373cd7488210c28c67d",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "ambientStart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2200,
+        2200
+      ],
+      "sha256": "95695f38e43966a3604cd96c62d1a1f97cf274ddcbf8f2c0619ec4f88d7a7463"
+    },
+    {
+      "id": "7a5c7ed90250aeae37b41eb3",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeBridge",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        707,
+        716
+      ],
+      "sha256": "418b414a99019cb121ec5c36735f360ac8a5a6f2117126eb83d1b4259b32e75d"
+    },
+    {
+      "id": "7ad5312c30c4fe6d335918b4",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "spawnToyHouse",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1900,
+        1907
+      ],
+      "sha256": "3de7968cb539d3144bbf1b33e8319f4751ba1eb87da7c160889fc67cbea99af2"
+    },
+    {
+      "id": "7de0821b06e3ad28a47fa6f1",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "surfBlocked",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1735,
+        1735
+      ],
+      "sha256": "df945e7edb55ff70cfe490cdc245038a0a2b617b38c1ab9ac0504311ee4a65c7"
+    },
+    {
+      "id": "7e11ab81bee2f284c57c802b",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickNav",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2052,
+        2061
+      ],
+      "sha256": "807318823205ba8b4f4dc2e9cf4c58ea0528716c8e75fcf4692414911249352f"
+    },
+    {
+      "id": "7e15645387cdeceac743b1b2",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "memQuiet",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2147,
+        2147
+      ],
+      "sha256": "d9d99a8555b67620176ecbbd98442813aec751fd08037fb0cebf3446ba29e084"
+    },
+    {
+      "id": "7e594dda09c5e74caa6fb48c",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "X",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1790,
+        1791
+      ],
+      "sha256": "d6fd63716ce23479a58c1036e599e6c2e3648142c5d0f302c7f5c2f4e0d4b006"
+    },
+    {
+      "id": "7f0ba062cb3618e553b49beb",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeRuin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1011,
+        1022
+      ],
+      "sha256": "9859b1e48a63b85f0180266453a6c9670b4435956928028b5cf82c94cf101814"
+    },
+    {
+      "id": "7fce277d80789752d73d58e0",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "startJump",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        901,
+        901
+      ],
+      "sha256": "4247f34586dac34c0164a74aebe5a1438bd22854d1ca13c097ac1fdc9c9ac85a"
+    },
+    {
+      "id": "80582b2bf63ca27d845dde2d",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "audioUnlock",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2406,
+        2406
+      ],
+      "sha256": "f371d487d864608356804bb9a38ccf7f9ce13c3c5c987919c9621e8ffc21835e"
+    },
+    {
+      "id": "80618a81069e96219c2100e3",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "redrawChalk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1427,
+        1427
+      ],
+      "sha256": "01d31d50b3dd6a8e43dbc5568046abf591158882de8ab01f835e8c2d1a4e25ea"
+    },
+    {
+      "id": "824a90567c8ee42d45b1e888",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "wire",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1374,
+        1379
+      ],
+      "sha256": "0d176a1ff26a50b9456ca4f9d10416231fe6fd9e587c37fb70e0aa6a0d1b06ba"
+    },
+    {
+      "id": "85a31246f0d3c779334ff8a6",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "hideCard",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2757,
+        2757
+      ],
+      "sha256": "66ec9d9f6f3f12d5becfd373458169d38a76fa2c81b007ab93e6fbf8435b98a8"
+    },
+    {
+      "id": "85f25dceacd46edd660b00d9",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "O",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1415,
+        1415
+      ],
+      "sha256": "a3ed4b16f4cac39c1aba7415a880e3309446fe843a6cbcd697f62eab4bbb5525"
+    },
+    {
+      "id": "86becda50e37400c31ebc026",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "locoPose",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        872,
+        890
+      ],
+      "sha256": "696b5ae669d24559d33ca079c36326aac314b780628a48cce3b52588cb1ec7c9"
+    },
+    {
+      "id": "88b947b71318578a1094c2a3",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "chalkPlane",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1478,
+        1478
+      ],
+      "sha256": "944b6562e8dcb103d1f52572031ad1521ce4f27a603df5216df3f888e964255a"
+    },
+    {
+      "id": "897c832b6a634fbaf8413d6e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "comboJump",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2564,
+        2570
+      ],
+      "sha256": "c13ac83c3486a5fd077d568d818efa0640ade8fb72f4ec84cd2157aae25817e8"
+    },
+    {
+      "id": "8a0541c72e34e5a425a5c074",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "armorCanvas",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        790,
+        810
+      ],
+      "sha256": "0986db83ee9b5d7e76f712e623be8a3da42c9605bd5ed479c41fff673f865f4d"
+    },
+    {
+      "id": "8aa4a6a57520cda2a697627f",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "noise",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2415,
+        2417
+      ],
+      "sha256": "4920495b514504c87ba8a478e6b3dd6698c0e2af55d2e1b57abd69c53ad6f17d"
+    },
+    {
+      "id": "8b631e7b9caee39c073e4d28",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "startGame",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2772,
+        2778
+      ],
+      "sha256": "9d572df6c801581533b51f94fa47cf3887670e697e11a6fea6af9d39c6548bf2"
+    },
+    {
+      "id": "8be0bc83b169574068798594",
       "game": "broken-city",
       "kind": "solution",
       "name": "ad",
@@ -4248,25 +2988,1315 @@
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        2452,
-        2452
+        2460,
+        2460
       ],
       "sha256": "b9c18f2c9c81fd5bb8ae3c94cc8e13ba5953d2655b0db13bc18aff310c1a78d7"
     },
     {
-      "id": "de2f55e5e08c7f93b0f8b865",
+      "id": "8c410ccf82ebfd32efa7d53c",
       "game": "broken-city",
       "kind": "solution",
-      "name": "makeHouseBridge",
+      "name": "drawChalk",
       "purpose": [
         "gameplay"
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        2220,
-        2236
+        1412,
+        1425
       ],
-      "sha256": "b41bb08e1cba8c2d8722b096846f5a2537836e9835d4c204b85c6748af782527"
+      "sha256": "6ba6497188ed81a8dc74d7d8ed5e732e51de0e7e04bc7fc3831145945e43d4e3"
+    },
+    {
+      "id": "8dc7dfb321fdbb8f45ffa9b7",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "spawnFall",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1003,
+        1010
+      ],
+      "sha256": "3119e52eadcef58971fa39b49f5f1e2b07524546baf79edbd3de23fbdb0ff05c"
+    },
+    {
+      "id": "903699bafda77f7823c54073",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "shaderPlane",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        568,
+        568
+      ],
+      "sha256": "3fd550c7a10af440fe2582b41eae4c6044923150858cfde913913caf78fcc84c"
+    },
+    {
+      "id": "909b5bbc9d837e5ed2b35d68",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "mulberry",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2484,
+        2484
+      ],
+      "sha256": "0de3e10283f7492ac111b17787e9412683fa9eb9de4acd6bd32df48e734192a8"
+    },
+    {
+      "id": "918e39e6a042b61c1ceed116",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "snapA",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1848,
+        1848
+      ],
+      "sha256": "d595a2ecea1a5ad11c74b51631dc01410727253bc487db042b99db78a3153ae9"
+    },
+    {
+      "id": "9307777fdb863ca3dbbd725f",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "pix",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        137,
+        141
+      ],
+      "sha256": "dc070cde21503509f60e38cff625e19378bd06fb4b737d6a8b35dfdc7361e62f"
+    },
+    {
+      "id": "93e789a64bdd7187db9f1ecd",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeBody",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        762,
+        762
+      ],
+      "sha256": "0b5452b73c982f41f6973d158f06c12aea3f9737815d8bc559d6a86b5dab1c87"
+    },
+    {
+      "id": "944279d140099bee0d4206b7",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "rebar",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1368,
+        1373
+      ],
+      "sha256": "9c2405f72eb6d2629e8afef0aaa36f132d0249058c29095b4458050ac3800517"
+    },
+    {
+      "id": "94685ea61de2fed0db7ef424",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "damp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        164,
+        165
+      ],
+      "sha256": "dcc609a428a933da71280c9891e2775074aea825a805a498eb659c653de8be3e"
+    },
+    {
+      "id": "94d53ede1b10cc6e6de4a0e2",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "showStory",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2314,
+        2320
+      ],
+      "sha256": "c9c71e504b6732bc8676547c23001e361b84377e54b9485e2340a9f11eb624f8"
+    },
+    {
+      "id": "9530bc29451188c6977fc004",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "endPointer",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2720,
+        2729
+      ],
+      "sha256": "74dd42d93a36877509fa8e538bcbf2e8b1bf25622986a6522d74e79026321eb7"
+    },
+    {
+      "id": "958bc4e29e00bfe22480ea43",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickToys",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1857,
+        1893
+      ],
+      "sha256": "8ba6222c209ea4f7d1d64f996930fdac5b602399f004a74587e7daf6f81b6d5c"
+    },
+    {
+      "id": "9a6c3cf2b94a7f6288fddec0",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickGift",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2075,
+        2082
+      ],
+      "sha256": "30f179e49e562453a4e27e2d6a26eff0ef69384cfcfb141cfa13e2bbbeea4877"
+    },
+    {
+      "id": "9c735662322f9d025e5b1147",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "sign",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        234,
+        235
+      ],
+      "sha256": "d7c9ceb33a8dd1cd56d75525a180a28aea11d0dd0c618be81d689543cab37585"
+    },
+    {
+      "id": "9d39c9a1f178aeca1748d64e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "toyGround",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1856,
+        1856
+      ],
+      "sha256": "926b0cbedd950004b8c181e06d353c0470d50f11e6d447a520a7a2b8451ecfea"
+    },
+    {
+      "id": "9d9b2e587f29771810952f4d",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "flat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        567,
+        567
+      ],
+      "sha256": "77a1f857d4935658bc10f9f144c88120e4b4ef63ead9e16c3980f94b4ca3103e"
+    },
+    {
+      "id": "a10c8f009ab6f6f0fcd906e7",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "nextCollapse",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1149,
+        1161
+      ],
+      "sha256": "d66c8a2e98fd5552de558b394e7d86e8a8db9f8c729930a3510ed7bb2646d0bb"
+    },
+    {
+      "id": "a126833cf950ba135fc42fb2",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeStation",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        717,
+        726
+      ],
+      "sha256": "3ccc7baec2ef89f62822c8a0977c746dc912d1a465a2d3c82c7f9a03cc64e6cf"
+    },
+    {
+      "id": "a1d406ef0b819936efae576a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "aMat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        813,
+        813
+      ],
+      "sha256": "a9499e96a13121a5999202f77f4f4b34c73996c904fbb116da30190d68494d02"
+    },
+    {
+      "id": "a3e87ffd6ebfd06797e8e0d4",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "chalkTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1426,
+        1426
+      ],
+      "sha256": "c6c4b0325e80cc853aa563f4c0699af21df6060b315692108d6fece97ac14f91"
+    },
+    {
+      "id": "a446d060c05ca63843f0a374",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "finishCircle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2324,
+        2327
+      ],
+      "sha256": "9503cdea0a8ebd492d0fa5fc89eabe8bd967f82296097f911412148b4894121b"
+    },
+    {
+      "id": "a45cd94d7c79c31b9bc08eab",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeGround",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        391,
+        405
+      ],
+      "sha256": "5d4e77ccf7d9aad269f08c0981cadcd51eedbe1138bc6390e0f336fa3d71422e"
+    },
+    {
+      "id": "a52d270d506019e786471757",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "toysBlock",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1943,
+        1948
+      ],
+      "sha256": "9bd7fd44eef5d79e9bff50fa89a525144525482d7aec2185d7a9e03745423c55"
+    },
+    {
+      "id": "a634276e5e3bf39b434b553e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "addHint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2512,
+        2515
+      ],
+      "sha256": "671d5f880da78f4ec2f0640b83e36f97608b8e8c2d75ff3164e1707beb7cc4f0"
+    },
+    {
+      "id": "a675a07f7184d72aa0e85140",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "face",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1796,
+        1796
+      ],
+      "sha256": "f792f561d078f51ad10aa302626726bfeca1abaa1c93f95409b03992bbe60111"
+    },
+    {
+      "id": "a7b6b4d0ca604679f805125a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "rubble",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1380,
+        1380
+      ],
+      "sha256": "c792e786f2c50925739bd2aa53533659aab4f70dfd69eb34a23733e6ffee3a55"
+    },
+    {
+      "id": "abb0d661e6305eddff6eed03",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "slabSpec",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1095,
+        1100
+      ],
+      "sha256": "fbf4284c81309ab4abe5503838a20f01710947b47e8b46f5c54804f9905da38f"
+    },
+    {
+      "id": "ada567d9e1930d480d4a55ef",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        179,
+        179
+      ],
+      "sha256": "267c4f162b1bc283c8f9f8862c52a172fe58e9c2889a91abf1580f6b8c78ffd3"
+    },
+    {
+      "id": "adfc15a75ee1de315c74336f",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "beginEnding",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2808,
+        2816
+      ],
+      "sha256": "82ff9a5d6616569775283a9eb609ae87c877f4fa3bd93cb296b3b424ca9cdfd9"
+    },
+    {
+      "id": "ae33be712478f0fe5bd8ac97",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "M4",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1330,
+        1353
+      ],
+      "sha256": "73832071b56e692948b5be88b4f04a4643d93ac79ecbbe9b265bc5c15130071a"
+    },
+    {
+      "id": "aee74f02a0641523f04787e2",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "detailCard",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        504,
+        508
+      ],
+      "sha256": "02ef7eafad25f735edcd505a25a485e3fb43244aab390acb6494fee8b86c9f03"
+    },
+    {
+      "id": "b05c95fd20d89bbad9739d5f",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "setHeroOpacity",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        854,
+        854
+      ],
+      "sha256": "16ad917832c26d6f3265903c56044467db6e4f5e4defeddc0050484e21aebca3"
+    },
+    {
+      "id": "b109033de8915c776058bc82",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "crack",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1385,
+        1391
+      ],
+      "sha256": "10941e3e912f075c2a830baacadaf26d9d8a9134d41cc38c4f6a55e8dac45a88"
+    },
+    {
+      "id": "b1f580b8203642421bad3124",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "toysStart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1949,
+        1949
+      ],
+      "sha256": "d9d79e56a9db9005d37a0356f2d5f6d694e1608781b18bf462ebe55c3c6f3e43"
+    },
+    {
+      "id": "b21fae945e3ca05f346a960d",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "gy",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1103,
+        1107
+      ],
+      "sha256": "243c1431e7866903d6656b9f90fe91d6fe8002393ecc42e61dd3ffc22e0b3156"
+    },
+    {
+      "id": "b2313bbf1fbf164065ed404d",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "g1",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        865,
+        865
+      ],
+      "sha256": "fddcc4e9123ba6c89126582a6af85db8782797b6cbea7fbad77401e14148a9bf"
+    },
+    {
+      "id": "b2f3bbed169ebaa3ade09b8a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeDust",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        379,
+        384
+      ],
+      "sha256": "73ff16a27f03a3e331655039187bd43435c792b680409548832e7ab6a236df7c"
+    },
+    {
+      "id": "b514984ab08bc0c6784155ac",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickCollapses",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1129,
+        1148
+      ],
+      "sha256": "81cbdf97c0ec4aa71c4261aaaf1351b3bd7f1f0cf1a1ae8147fe3b6451370c53"
+    },
+    {
+      "id": "b8dbce56f07902a7f0dbce05",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "barrierLayoutA",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1740,
+        1751
+      ],
+      "sha256": "36f02fafa4918038fee0fe57bfd60debc8e1e7d29468ed31efb7c1b1ef1db521"
+    },
+    {
+      "id": "bc4db8261d48ccc054f9edc8",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "clearComboOnly",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2558,
+        2562
+      ],
+      "sha256": "06791f38d7032e43c3d737982c88ecfbf3c8102777ba8a1d1be8c20a400f2b96"
+    },
+    {
+      "id": "bc87acd42e735c5477f63045",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "disposeRuin",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1974,
+        1974
+      ],
+      "sha256": "e799e63bad005659f8d0915106c4fe4776dbbf9767246f0f7aaaddc111c81219"
+    },
+    {
+      "id": "bdb81b6dfb08f9451dd62799",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeDebris",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        444,
+        453
+      ],
+      "sha256": "d88203b88855ea48f7d8950bc2b147f0ad4925b0742d8bf72037a2734a136c41"
+    },
+    {
+      "id": "bdd095c8263864acb400731a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeSkylineCards",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        478,
+        485
+      ],
+      "sha256": "cfaeb894eace189c4feb7d1b29a0c149e5dfffb324bdb46d36ebbc1ff6f2d0ea"
+    },
+    {
+      "id": "be93ef476421886ef33a99a2",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "loadLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2646,
+        2671
+      ],
+      "sha256": "7c7d810bf77ba0e0dbaed3abcf55ea823bdff95ab5141076772fb1a530b0ad1d"
+    },
+    {
+      "id": "bfab81476457c6b63f59ac18",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "hideChunk",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1000,
+        1000
+      ],
+      "sha256": "073c8bd7109e7d11a0b2042ab8129acfa2255a71f34d60256814537fa761af33"
+    },
+    {
+      "id": "c0b72e5a69cc67137c0ff402",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "arrowTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2036,
+        2036
+      ],
+      "sha256": "261a8deb8ce7f6d776d3be2511935f62d255a0b09039ea98729677ed2be346b6"
+    },
+    {
+      "id": "c0dc8770a47038b581822a6e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "free",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1783,
+        1783
+      ],
+      "sha256": "2b8f58d25961c423c693684e68e029479858b6f4be372b9581ffd65dbe293e13"
+    },
+    {
+      "id": "c1753e32bb9b0a0846e5621a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "toyify",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1329,
+        1329
+      ],
+      "sha256": "f0a1f4af5772b17cf2d40fc849a39718f4740eabf0c009b6e375a330dabbcefe"
+    },
+    {
+      "id": "c27835c6ae5690db1a33943e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "heightOnPaths",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1162,
+        1166
+      ],
+      "sha256": "6e90bd180337744ed38dbcfdaa5e5a415d23e5b5be8a1acf675562b4b3ec54bb"
+    },
+    {
+      "id": "c2b272459d9c3795356b6fe7",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "L",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1414,
+        1414
+      ],
+      "sha256": "e4b4f7496becb35da437ae586003544bf76261f3d300a6ccefdba4e4ffc6db96"
+    },
+    {
+      "id": "c3b9517f40f3e5eda26ef462",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "mk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        972,
+        972
+      ],
+      "sha256": "0abdc3d3d88d2001222605e7a10d14290a2fd4163e8ba809d5fa7fc75c092177"
+    },
+    {
+      "id": "c4d2fbf3220e9d8acc8ee319",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "path",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1388,
+        1388
+      ],
+      "sha256": "b4fbb45ea1f961f90f662db00f8fb15b73b336b81a2ce8e5b4de3aa713c84e01"
+    },
+    {
+      "id": "c51f279d918c9b6767b0847f",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "groundAt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2672,
+        2682
+      ],
+      "sha256": "8bff571e80ff68b201f5f0cb87f73cf2bd5b6f0b0fccc669f35719a6b3ef1d16"
+    },
+    {
+      "id": "c6038311ee1325444d50025a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "faceTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1428,
+        1452
+      ],
+      "sha256": "38a3dd243c645b4eb283f9d1d13bcbeb610f31f1965b2988c4bb35e374596998"
+    },
+    {
+      "id": "c6d5403fa3f8e312c87edbd3",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "hint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2256,
+        2256
+      ],
+      "sha256": "76d011d4563c907233d2d85f3a52a18f9b404f47a4339ab251dcd850bdb55935"
+    },
+    {
+      "id": "c74ce1ce462a13748c62d790",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickStory",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2010,
+        2019
+      ],
+      "sha256": "aa4bb7ecae4f8af4e979502db708de554b3cbb36f27ef31f3465713dc7f09a28"
+    },
+    {
+      "id": "c96ffafc4d493fdc869caece",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "T",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        109,
+        110
+      ],
+      "sha256": "5583762d7535b6d4f399ffac18989b49e941754100523e51e948da66749d7ba6"
+    },
+    {
+      "id": "cb084b79b25e2e8c0a60af47",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "oldRuinBlock",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2201,
+        2204
+      ],
+      "sha256": "b62f6d6cce1adf3d8ae0337770d834cdf5ff98f418fe4bf399db0c7473c85756"
+    },
+    {
+      "id": "ce9a2a0dd150462e096192c8",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "hideTower",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1074,
+        1074
+      ],
+      "sha256": "0e3307c19e4e4bf1a9164994c574ffbc99ea14ad36c0c18b285c94985683500f"
+    },
+    {
+      "id": "d05f4fb213a7e3272c1bd800",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "burst",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1027,
+        1034
+      ],
+      "sha256": "b958e9f654133536cec9958d4eb99e191c98940599146cbfe1686c5dfd19cd19"
+    },
+    {
+      "id": "d097dd737a80745b6ef9c15f",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "comboStomp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2571,
+        2575
+      ],
+      "sha256": "a9545ea1addbf235e230b0bea49bc236505fc5578039d5275a8888f38efb6026"
+    },
+    {
+      "id": "d2955718df288c5c1b4f7b06",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "lerpAngle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        952,
+        952
+      ],
+      "sha256": "a2e8dcea76fa4bb3ffd9d36d3a43621b6d45173fabb02fcab3dd7fcfc2def6c8"
+    },
+    {
+      "id": "d2a14853abfcf9ac108a8f53",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "placeGoal",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2642,
+        2645
+      ],
+      "sha256": "3752d3d954e9acf4e6256c7ed44ab9b49322eef1fea0a2262b8d0dc379faac2b"
+    },
+    {
+      "id": "d348ab775d3e451eb5486a70",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "addChasm",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2259,
+        2267
+      ],
+      "sha256": "62e6ff8781472aea80445a4b1d4a2a918146608adaabd06f9d08207e226f6d34"
+    },
+    {
+      "id": "d3ae2da9c5630b3d3b0c8d28",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "audPlay",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2400,
+        2404
+      ],
+      "sha256": "eea3ad32c4ce1c01cd17b3cc18212280a3c98d67660b5c26a1844aff8b5099e9"
+    },
+    {
+      "id": "d430a954a51b71dc6e861d6b",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickMem",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2175,
+        2190
+      ],
+      "sha256": "7ea6bc9cd54cfd2131fdfa053c8dc97922e75decb4428c81a3a2d3c7b2d1dfb9"
+    },
+    {
+      "id": "d48f734f2433658991ec0262",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "inside",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2202,
+        2203
+      ],
+      "sha256": "9096b26c0962f02261a8b78c2962266e077841143b8fdab1e1646459361ac7ae"
+    },
+    {
+      "id": "d50c32dd971d6919a932e171",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "spawnRuin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1023,
+        1026
+      ],
+      "sha256": "87e63f411b17de659188a2c7fab33fcb14226c68cf2274d075d97c3a82e417d4"
+    },
+    {
+      "id": "d5a1bcf350bcdaa9d1794b76",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "pathBlock",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1167,
+        1171
+      ],
+      "sha256": "f0d4d9298fd5542b364afb1a80f43fdc27e3b3a8377679f30b09bdf67e501957"
+    },
+    {
+      "id": "d60751450cfdd2863f330a76",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickCape",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        839,
+        853
+      ],
+      "sha256": "d9c5c6b688a75ce8ab02679c7c303b448f5e6a68ce7aecf71dac743547ddc023"
+    },
+    {
+      "id": "d79d898dc1edfab0a3e81942",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "perfTick",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2025,
+        2034
+      ],
+      "sha256": "c7b6576b52f15c195b13c42fd4555d331a7df5b09a18e4bc9549bdc589c51fdd"
+    },
+    {
+      "id": "d7d8704944fde172426ea928",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "jumpPose",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        891,
+        899
+      ],
+      "sha256": "5c279b8bad936122fe1c11d581c4ffd4dc4bdf5b9c2791e2a89ae036c967ded3"
+    },
+    {
+      "id": "d7ea64bd244d9b239bef172a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "memClear",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2174,
+        2174
+      ],
+      "sha256": "eb44c31528329d5bc07b1347ac65d2b86c2c837b428674b5c040bab44f8efb9f"
+    },
+    {
+      "id": "d843dbb27823b37d432d8de1",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "amberGlow",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        818,
+        818
+      ],
+      "sha256": "1da011f23789a0b13e913e92db95f0eb3dd7f0af2417ac6147deba6d18451911"
+    },
+    {
+      "id": "d8526e9c6f98ebef86c1f33f",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "hintTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2504,
+        2510
+      ],
+      "sha256": "59c3272bee98138dcdac15f2a0b2e80f440905bf8b746df1f4d549f22b72b785"
+    },
+    {
+      "id": "d992a12517f9e70fb9ddb8b9",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "skylineTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        211,
+        221
+      ],
+      "sha256": "6900f8b206bb113efdbfc4b37e66ac8f6bdb6640557148efc4ebb87f4cf6014d"
+    },
+    {
+      "id": "d9cb172745e0eee5baadc74c",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "crackTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1383,
+        1410
+      ],
+      "sha256": "a5217110acaa87f9fd9c7d630c6740d4bc233d49207cb388e95b8ed41f27ea0f"
+    },
+    {
+      "id": "da121e46e502faa4154c3866",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "startCollapse",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1076,
+        1084
+      ],
+      "sha256": "a426c8b51964cb2f4ca9719a957268a2990a6d66c6116e5408d7cfba375901e2"
+    },
+    {
+      "id": "db09fa88a04bda2064e2c937",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tone",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2418,
+        2420
+      ],
+      "sha256": "e13cf87b234d09c476b7b59456cdb93c3cac4dd899b97fbd06a79d84e3d91643"
+    },
+    {
+      "id": "dca81a608cf9345b3071fae2",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "updateTransition",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        3000,
+        3007
+      ],
+      "sha256": "86ccf8d70ef5bd242d8d7785fcc544ecd8c10f8667e319126f3b85231be6b404"
+    },
+    {
+      "id": "dce1571b1e974066dbbbfe7c",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeSlabs",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        408,
+        424
+      ],
+      "sha256": "f9c5d7f8522948ca805710777fbcd8dcc6984843a1dc04f8aa68daca4bcfcfc4"
+    },
+    {
+      "id": "dd3b87bd709d55844726cf79",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "addGap",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2524,
+        2524
+      ],
+      "sha256": "b3ef88fec4ca237b32905bce2a8c2d88cb0d23a114992ac7ec9daf2d0e6c12fc"
+    },
+    {
+      "id": "de04c1ab7f087152bd1362f5",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "outlineMat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1297,
+        1297
+      ],
+      "sha256": "54a1b3f1dfe6f83606b0cf916b1a685658c4328b97fbacb4c053eb5ef98f05ec"
+    },
+    {
+      "id": "dee6b6ee2695df68527b71b3",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "clothTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1311,
+        1314
+      ],
+      "sha256": "5d2531859ed0bfe0cddce872436db1d7ae67212ad57a97ad131d648b466f709a"
+    },
+    {
+      "id": "df7bf40e78744a6bcfa7d6c3",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "setMode",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2819,
+        2824
+      ],
+      "sha256": "159c97242b16496221045ee3f35a038fea840e6393e423b262b2e82295cd1ea8"
+    },
+    {
+      "id": "e0f9b2eec6b8e369fe1b08a4",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "sparkBurst",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1703,
+        1710
+      ],
+      "sha256": "62f979e00cf5a93892046bc761b87dbc4d4a7bd62910ac36f96689dc26788f0e"
+    },
+    {
+      "id": "e168615480fbc0fa9de6e999",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "TINY",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1732,
+        1733
+      ],
+      "sha256": "b3da452253fe62da6c4192a8a4b2931580349f6b7c656b156e3b0f3839c66230"
     },
     {
       "id": "e1c2c1f81a0b2e303817619c",
@@ -4284,352 +4314,7 @@
       "sha256": "83eec21904094988fd9221205276cf85d3ab529bab0fb0732938ec375fdb0aa4"
     },
     {
-      "id": "e2ae282992e604c23b39bf1f",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "updateCombo",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2592,
-        2605
-      ],
-      "sha256": "bc88644dd160f0bc2f71da927cd3986f9806f1aa64e1971891ea1ecb494e0c6d"
-    },
-    {
-      "id": "e3dc0fd621c81bc8790b8a21",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "inside",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2194,
-        2195
-      ],
-      "sha256": "9096b26c0962f02261a8b78c2962266e077841143b8fdab1e1646459361ac7ae"
-    },
-    {
-      "id": "e3e208768884b4a5fdefd3c2",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "hint",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2248,
-        2248
-      ],
-      "sha256": "76d011d4563c907233d2d85f3a52a18f9b404f47a4339ab251dcd850bdb55935"
-    },
-    {
-      "id": "e5eddc125a62aea74ac82de3",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "showStory",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2306,
-        2312
-      ],
-      "sha256": "c9c71e504b6732bc8676547c23001e361b84377e54b9485e2340a9f11eb624f8"
-    },
-    {
-      "id": "e7a98a85b3286162f051dd31",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "nextCollapse",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1141,
-        1153
-      ],
-      "sha256": "d66c8a2e98fd5552de558b394e7d86e8a8db9f8c729930a3510ed7bb2646d0bb"
-    },
-    {
-      "id": "e8349f646ab6466e3f8d88ac",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "rubble",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1372,
-        1372
-      ],
-      "sha256": "c792e786f2c50925739bd2aa53533659aab4f70dfd69eb34a23733e6ffee3a55"
-    },
-    {
-      "id": "ea755cff61ad8362c71920da",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "makePit",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        691,
-        698
-      ],
-      "sha256": "eac45154ad9fc14682b9b705a18dc568b0a828eeb78985a9595993fd6bcdf93b"
-    },
-    {
-      "id": "ebfb84b2d382a7a4f3e6a1e3",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "ambientStart",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2192,
-        2192
-      ],
-      "sha256": "95695f38e43966a3604cd96c62d1a1f97cf274ddcbf8f2c0619ec4f88d7a7463"
-    },
-    {
-      "id": "ecc2c3fbe82b0a414f87c6f9",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "showAd",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2454,
-        2454
-      ],
-      "sha256": "7089ab9671f7b220ca6f764b3c6fbd3925d310cfc6af45261abbe323bdf42773"
-    },
-    {
-      "id": "ed87ba42c1707efe29037698",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "X",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1733,
-        1733
-      ],
-      "sha256": "c6a61a87918a67acccb6dbffadc5c2ac1450635d0bba43220e66fd4bfd769cdf"
-    },
-    {
-      "id": "ef10470916398d494f6b4108",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tone",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2410,
-        2412
-      ],
-      "sha256": "e13cf87b234d09c476b7b59456cdb93c3cac4dd899b97fbd06a79d84e3d91643"
-    },
-    {
-      "id": "f014983b04dbfd086c720174",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "dustMat",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        360,
-        374
-      ],
-      "sha256": "93cc4b5e6c91c5e5c05fdba1fc21289cd5c73e26b7b555887ba9f616deec27d6"
-    },
-    {
-      "id": "f1634007db11d90811d237f4",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "setMode",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2811,
-        2816
-      ],
-      "sha256": "159c97242b16496221045ee3f35a038fea840e6393e423b262b2e82295cd1ea8"
-    },
-    {
-      "id": "f19b5e34cc8df8623debf2f4",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "closeMenu",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2839,
-        2839
-      ],
-      "sha256": "dd0953a4678024c020b7f889bcd9b67ca8b351b5906803fd37c521a07a364e10"
-    },
-    {
-      "id": "f1e181cf0690c4d08ec54b5d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "arrowTex",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2028,
-        2028
-      ],
-      "sha256": "261a8deb8ce7f6d776d3be2511935f62d255a0b09039ea98729677ed2be346b6"
-    },
-    {
-      "id": "f230ad936effbc91bbb55e7a",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "updateTransition",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2992,
-        2999
-      ],
-      "sha256": "86ccf8d70ef5bd242d8d7785fcc544ecd8c10f8667e319126f3b85231be6b404"
-    },
-    {
-      "id": "f3c7cacdc4e3625684ce601e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "free",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1775,
-        1775
-      ],
-      "sha256": "2b8f58d25961c423c693684e68e029479858b6f4be372b9581ffd65dbe293e13"
-    },
-    {
-      "id": "f41f9c803fb743eb89fe08e6",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "shaderPlane",
-      "purpose": [
-        "shader"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        564,
-        564
-      ],
-      "sha256": "3fd550c7a10af440fe2582b41eae4c6044923150858cfde913913caf78fcc84c"
-    },
-    {
-      "id": "f48165ea7496e2aeafcc5b5d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "wrapA",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1839,
-        1839
-      ],
-      "sha256": "9040b041b10389ec9dcf93a51821dc629bbe31e6a4b43205a78669cfe8034367"
-    },
-    {
-      "id": "f57f7ac282773d89bb34c357",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickNav",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2044,
-        2053
-      ],
-      "sha256": "807318823205ba8b4f4dc2e9cf4c58ea0528716c8e75fcf4692414911249352f"
-    },
-    {
-      "id": "f5f6dd1c49051fd5a6a5f699",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "updateGame",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        2861,
-        2967
-      ],
-      "sha256": "3dd605ab0d41c4d1d6db177bb09c9217b734972674a17d9f9a7c83c51b8cd2ee"
-    },
-    {
-      "id": "f6cf9ef0237916aaaa55b575",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "tickDebris",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        451,
-        459
-      ],
-      "sha256": "c5c0d118f69c448ceb1453e9b925900cb814f4612be1aa87948d743bc200f39b"
-    },
-    {
-      "id": "fa42673ab14ae24d3511c779",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "fogMat",
-      "purpose": [
-        "weather"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        350,
-        359
-      ],
-      "sha256": "6d65ba8c962da9c6ba8a32f7f169e651b518e137ed1738763411ecb616e3adbc"
-    },
-    {
-      "id": "fb01140a132221f72f59e1a3",
+      "id": "e2ddde845c35a9987de05bac",
       "game": "broken-city",
       "kind": "solution",
       "name": "overlayGeo",
@@ -4638,130 +4323,445 @@
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        1460,
-        1469
+        1468,
+        1477
       ],
       "sha256": "b6696a10ac84c015cba31b1f37d6be643755617430136dc6416a260a8cbff200"
     },
     {
-      "id": "fb19d3cdc761826c22b1bc51",
+      "id": "e3702df1d3f079fb1179f990",
       "game": "broken-city",
       "kind": "solution",
-      "name": "aMat",
+      "name": "comboShade",
       "purpose": [
         "gameplay"
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        805,
-        805
+        2523,
+        2523
       ],
-      "sha256": "a9499e96a13121a5999202f77f4f4b34c73996c904fbb116da30190d68494d02"
+      "sha256": "46a0868cb155f8db600f7c83989a6358a410f7f295e3fb25e9d52afb9011cdfc"
     },
     {
-      "id": "fb5adf814524fc7c58e32ab1",
+      "id": "e3e41c3a06b671bc4bea6894",
       "game": "broken-city",
       "kind": "solution",
-      "name": "outlineMat",
+      "name": "hillH",
       "purpose": [
         "gameplay"
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        1289,
-        1289
+        389,
+        389
       ],
-      "sha256": "54a1b3f1dfe6f83606b0cf916b1a685658c4328b97fbacb4c053eb5ef98f05ec"
+      "sha256": "e10b32ee511238b5db0bf14891e9ca26c54b5c90b5887133f600a955d90d010c"
     },
     {
-      "id": "fc7ecc559af67c96204d258a",
+      "id": "e46de709ace38af926309f80",
       "game": "broken-city",
       "kind": "solution",
-      "name": "makeStation",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        709,
-        718
-      ],
-      "sha256": "3ccc7baec2ef89f62822c8a0977c746dc912d1a465a2d3c82c7f9a03cc64e6cf"
-    },
-    {
-      "id": "fc89bfbe3ab952426b32940d",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "piece",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1096,
-        1099
-      ],
-      "sha256": "7ce71c1029950918f371aac80e24cd71cb38d0a1215e5c5f608e0942bbaf5561"
-    },
-    {
-      "id": "fd2f1719e913c774cf7e9294",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "drawAsphalt",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        177,
-        189
-      ],
-      "sha256": "15b869c0ffb393780e96bf4e9409f94536ccd33935c98233667e30ce09955c40"
-    },
-    {
-      "id": "ff09212418424aa5e9f016ef",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "animateBody",
-      "purpose": [
-        "animation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        894,
-        943
-      ],
-      "sha256": "db9b1a81361bfb54f78957ab5bf34a265fabdc9602caa485c8fb0acb5b8df009"
-    },
-    {
-      "id": "ff54f61cb67e784bdfc8cf0e",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "cyl",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        1359,
-        1365
-      ],
-      "sha256": "8b77ea19ca0fcd5cc5fdcfd1c76ed9bed9a967f957f9221b8b214af3d1a51d76"
-    },
-    {
-      "id": "ff6d142c5ae38e10889ae174",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "memLevel",
+      "name": "clearLevel",
       "purpose": [
         "level-generation"
       ],
       "source_path": "games/broken-city/index.html",
       "lines": [
-        2183,
-        2186
+        2621,
+        2630
       ],
-      "sha256": "eff1ae015cf3955d438ec040b2fb94c8470a57674692ecf80fb3b34cf3fdf27f"
+      "sha256": "7660b42a645093b30c59ac91f544efdc521b1b9c21eed8c0a4ee6977b865920c"
+    },
+    {
+      "id": "e4db30f1ee1825a8d4923426",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "pathHeight",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1089,
+        1093
+      ],
+      "sha256": "55eeb5478e23cd663f4ea79e6a4f8cd5ce29b0c71fc7d98a30ca327e49a31448"
+    },
+    {
+      "id": "e88679e757fb3ec3b3757294",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "giftObj",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2063,
+        2067
+      ],
+      "sha256": "170df165c6276cece12c8510592ed42b5ca1aa7ab5d37845972b304389d800ec"
+    },
+    {
+      "id": "e931b8f794ee3c116547bc28",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "onDefeat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2085,
+        2092
+      ],
+      "sha256": "e8895e915c78e91e1a59bf73e389dbafa59c95e692379000b45318c179a86ef1"
+    },
+    {
+      "id": "ea4ba61bffbbf1ba3573b97e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "drawHeroSheet",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        246,
+        266
+      ],
+      "sha256": "afe8915bdb38de6e24c6a8b22c3585b5e3653e86f46fe8e52588ba036ed2ecc1"
+    },
+    {
+      "id": "eaa40c3342f5a3ee897caa0b",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "add",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1791,
+        1791
+      ],
+      "sha256": "1b8a1b6e2833ff1e775d7f4540adc7a87075d010d3c69b63ae3e831e5dcb86ea"
+    },
+    {
+      "id": "eb415664c4796e1c28602000",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "show",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2759,
+        2759
+      ],
+      "sha256": "3186f82f2fed89c609b24cd4b1d477135308d33ad7789544541922b5c5209c60"
+    },
+    {
+      "id": "eb85f2dce24feeee5d582406",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "mkCape",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        835,
+        835
+      ],
+      "sha256": "1ecf8543f8230dff82052cc5fee6b5ab32dd517f551a28ae5326ca9c4564a592"
+    },
+    {
+      "id": "ed4363fb3cfc88fc0047f8e1",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "legCurve",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        867,
+        871
+      ],
+      "sha256": "39d5412c99407ed7392cd128bbb3e7db992d6a47a472eee1b2baa4662d59d73e"
+    },
+    {
+      "id": "ed4954e40c13abe2db230dc9",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "setLoad",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        150,
+        150
+      ],
+      "sha256": "0b70877f2bdbd0319705cb78784dbe85e9ebf4b7f317c41bc8a5c697c70370b4"
+    },
+    {
+      "id": "ee4c8a3335a3c97e3a6046d3",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tickToyHouses",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1908,
+        1942
+      ],
+      "sha256": "2406d0b6f5bc5583b6b06f55505952362d5283df699221027eaec0801da430da"
+    },
+    {
+      "id": "ef2276cb7b4244b7be7a0569",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "comboBudget",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2485,
+        2485
+      ],
+      "sha256": "7e102ba566bb3538b84fb95bd2362f1f352174810dc0f90e9b837becf7082f07"
+    },
+    {
+      "id": "efae8f69a2b125a96005310a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "setButtons",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2758,
+        2771
+      ],
+      "sha256": "69d63865aad5448a119b779ed61533200b83761b434ba4e8c154cd793eb497a8"
+    },
+    {
+      "id": "f0e70bb20f1374a79cdfdea3",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "restoreTowers",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1075,
+        1075
+      ],
+      "sha256": "6e890c41aeeeffce498a87d8edbb3a8e8ad3d6decf0e8f8d5d28098bf813e0aa"
+    },
+    {
+      "id": "f29acaaa05d63f778c170aaf",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "rnd",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        165,
+        165
+      ],
+      "sha256": "9299a13a32bc524e8377f1a2cae4797ef47a691f1879b260479468b62d7e91c1"
+    },
+    {
+      "id": "f354c2197e57094eacca73e4",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeHouseBridge",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2228,
+        2244
+      ],
+      "sha256": "b41bb08e1cba8c2d8722b096846f5a2537836e9835d4c204b85c6748af782527"
+    },
+    {
+      "id": "f3d3331fbe62e1ab24f580f7",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "spawnBand",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1101,
+        1128
+      ],
+      "sha256": "e11cc8b564160478a9dc4d6d2a655a4fef7def4645fc9b7e6cb6e5efcb2f7fa9"
+    },
+    {
+      "id": "f4a48b9dd647edac0c440d6a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeToyHouse",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1481,
+        1530
+      ],
+      "sha256": "8b0096f7c5eaad33a641222a9993013a64c4733e85925ee92f0a97014e302c1f"
+    },
+    {
+      "id": "f60bff44b22fda89c0f1032e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "cradleUpdate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2272,
+        2295
+      ],
+      "sha256": "55f0d834e39877e9cb72b3dc8615f0658b4f2766420f7f6662c287c83448efbc"
+    },
+    {
+      "id": "f871b8a7a32eb3558bebbb15",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "ac",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        230,
+        231
+      ],
+      "sha256": "16f36aa7ee1c04784453c332912fbc145dc45a94bc73f01dbb5337580f7cc243"
+    },
+    {
+      "id": "f945f8eca7832b8efcd236b4",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "runnerHit",
+      "purpose": [
+        "combat"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        1178,
+        1183
+      ],
+      "sha256": "2236b4f2018c1c49bfa81489db06b8cb614ff1643b318f93bd2a75a4f995d84a"
+    },
+    {
+      "id": "f95b01a91b35c70fcd90bcbc",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "buildMenu",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2825,
+        2846
+      ],
+      "sha256": "d21b07f1ced7c4b12a3082d06e76703928b08a404399f5fd11f2b63db497864e"
+    },
+    {
+      "id": "fa0228ba0c06d9864f4fe715",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "frame",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        3255,
+        3345
+      ],
+      "sha256": "56d5b606671b7058f5d3eada541682bf392da15a2d79f5d73d4f256e36556320"
+    },
+    {
+      "id": "fd672183c30c642f27cad217",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "showCard",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        2756,
+        2756
+      ],
+      "sha256": "cbaed618cf18a96c7ea327082b8f58e5e0500dd2fa062ceb4a6e83b51b8e6744"
+    },
+    {
+      "id": "fd8a4fced00c9b5ecb5a2ce4",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeHillPatch",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        406,
+        406
+      ],
+      "sha256": "d1190d5eab34e50719a648ac5920d944d7aa3aad99e954ad4f9ad40c6d8486bf"
+    },
+    {
+      "id": "fe40fb56832c7b5b42d8ec60",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "bone",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        760,
+        760
+      ],
+      "sha256": "8cbf8db2fe9e5ea36bc51c5368b738b2333e1a31893d02f060971fd05a147429"
+    },
+    {
+      "id": "fef52d244dd6905142db1375",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "makeHero",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        465,
+        471
+      ],
+      "sha256": "f41e2385884f2cd3d52ad703a6af9ea6fb14b341c45c78347528cfe17776f0aa"
     },
     {
       "id": "001cb5fc6ea712d124c2d557",

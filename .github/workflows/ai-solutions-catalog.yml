@@ -13,10 +13,14 @@ on:
       - 'shared/approved/mcp.mjs'
       - 'scripts/library/source-policy.mjs'
       - 'scripts/library/verify-catalog.mjs'
+      - 'scripts/library/verify-load.mjs'
       - 'scripts/library/mutate-catalog.mjs'
       - 'shared/library/catalog-solutions.json'
       - '.github/workflows/ai-solutions-catalog.yml'
   workflow_dispatch:
+concurrency:
+  group: ai-solutions-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
@@ -53,6 +57,8 @@ jobs:
         run: node -e "const c=require('./shared/library/catalog-solutions.json');for(const g of new Set(c.solutions.map(s=>s.game)))console.log(g,c.solutions.filter(s=>s.game===g).length)"
       - name: Install official MCP SDK and GLTFLoader
         run: npm install --prefix scripts/library/mcp-test --ignore-scripts --no-audit --no-fund
+      - name: Install Chromium for real browser verification
+        run: npm exec --prefix scripts/library/mcp-test -- playwright install --with-deps chromium
       - name: Official MCP SDK stdio integration
         if: github.event_name == 'pull_request'
         run: node scripts/library/mcp-test/client.mjs

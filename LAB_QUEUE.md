@@ -9,15 +9,6 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
-### lab/endless-valleys-golden-knight-reference-1109 — эталон «Бесконечные долины — золотой рыцарь»
-- Польза: оригинальная 3D-игра с террасированными долинами, шейдерами позолоты, туманом и боевой анимацией.
-- Источник: `reference/endless-valleys-golden-knight/index.html`, blob `7ef996e06d09dd34740c65b5ef56f13a4ca089ed` (неизменённый файл владельца).
-- Каталог: `shared/references/endless-valleys-golden-knight.json`.
-- Играть после merge: https://mpaykin1.github.io/meta6-lab/reference/endless-valleys-golden-knight/
-- Ветка: `lab/endless-valleys-golden-knight-reference-1109`; PR #189.
-- Статус: В РАБОТЕ — оригинал сохранён; Pages, прохождение ботом и работа внешних зависимостей не проверены.
-- Михаил: запросил загрузку как эталона; вердикта по игре нет; Claude: —.
-
 ### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
 - Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
 - Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/

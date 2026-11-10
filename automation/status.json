@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-10T16:09:03.909Z",
+  "generated_at": "2026-11-10T16:13:33.088Z",
   "sha": {
-    "lab": "a617ea8c155d5b60a6142a5db7885d44440d48fc",
+    "lab": "7965b34b65d2d39feb6ff0a594d4c17474ff3ed8",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
@@ -58,13 +58,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "B1 — all games open without console errors",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42850153401",
-        "step": "Open every MCP list_games entry on desktop and mobile"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -324,7 +318,7 @@
   },
   "changes": {
     "lab": {
-      "count": 440,
+      "count": 445,
       "folders": ".github:5, .lab-sync-base:1, AGENTS.md:1, automation:7, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:11, shared:2, ZADACHI.md:1"
     },
     "mg": {

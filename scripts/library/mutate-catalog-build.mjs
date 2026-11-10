@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {buildCatalog} from './catalog-systems.mjs';
+import {isOriginalGameSource} from './source-policy.mjs';
 
 const root=fs.mkdtempSync(path.join(os.tmpdir(),'meta-catalog-build-'));
 try{
@@ -14,7 +15,16 @@ try{
   'function '+name+'(){\n'+prelude+'\n'+Array.from({length:26},(_,n)=>'let part'+n+'='+n+';').join('\n')+'\nreturn 1;\n}\n';
  fs.writeFileSync(path.join(root,'games/demo/game.js'),
   fn('cameraFollow')+'\n'+fn('weatherFog','cameraFollow();'));
+ mkdir('games/owner-html');
+ const ownerHtml='<script type="module">\n// Original world uses Three.js r160 · cinematic post processing\n'+fn('followCamera')+'\n</script>\n';
+ fs.writeFileSync(path.join(root,'games/owner-html/index.html'),ownerHtml);
+ assert(isOriginalGameSource('games/owner-html/index.html',ownerHtml),
+  'Owner-authored HTML referencing Three.js must remain eligible');
+ assert(!isOriginalGameSource('games/owner-html/lib/three.module.js',fn('followCamera')),
+  'Third-party lib paths must remain prohibited');
  const catalog=buildCatalog(root);
+ assert(catalog.solutions.some(x=>x.id==='owner-html:camera'),
+  'Regression: original owner gameplay silently excluded for mentioning Three.js');
  const camera=catalog.solutions.find(x=>x.id==='demo:camera');
  const weather=catalog.solutions.find(x=>x.id==='demo:weather');
  assert(camera&&weather,'Must retain both source systems');

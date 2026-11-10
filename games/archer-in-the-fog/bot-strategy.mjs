@@ -35,9 +35,9 @@ export async function playLevel(ctx, level) {
       ? (s.fireballScreen?.visible ? s.fireballScreen : null)
       : s.aimScreen;
     if (point?.visible) {
-      // Fireballs move quickly: reacquire their live screen position after each short shot.
+      // A 110 ms press can be missed at mobile CI frame rates below 5 FPS.\n      // Use a 320 ms real pointer press, then reacquire the moving projectile.
       // Keep the original hold for the slower dragon target.
-      await ctx.hold(point.x, point.y, s.task === 'fire' ? 110 : 550);
+      await ctx.hold(point.x, point.y, s.task === 'fire' ? 320 : 550);
     } else {
       await ctx.wait(160);
     }

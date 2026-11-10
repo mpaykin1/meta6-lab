@@ -8,7 +8,7 @@
 - SHA: `d38bd8f7cae9a4b30c3c01ad083866fc5985f29e` · последний коммит: 2026-11-08T21:41:23Z
 - Проблема: Красная проверка: bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42526459029/job/128871055659), changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42526458688/job/128871054551)
 - Задание: Исправь bot по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42526459029/job/128871055659 и повтори CI.
-- Взял: —
+- Взял: MG-строитель-4 2026-11-10T09:44:34Z
 
 ### PR #131
 - PR: https://github.com/mpaykin1/meta6-lab/pull/131

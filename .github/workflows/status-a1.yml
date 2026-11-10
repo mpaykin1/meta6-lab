@@ -12,6 +12,7 @@ on:
       - 'scripts/status/run-status-a1.mjs'
       - 'scripts/status/verify-a1.mjs'
       - 'scripts/status/mutate-status-a1.mjs'
+      - 'scripts/status/mutate-a1-runtime.mjs'
       - 'STATUS.md'
   workflow_dispatch:
 permissions:
@@ -37,6 +38,7 @@ jobs:
           node --check scripts/status/status-a1.mjs
           node --test scripts/status/verify-a1.mjs
           node scripts/status/mutate-status-a1.mjs
+          node scripts/status/mutate-a1-runtime.mjs
       - name: Publish short status on main
         if: github.ref == 'refs/heads/main'
         shell: bash

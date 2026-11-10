@@ -404,6 +404,7 @@ export async function build() {
     Buffer.byteLength(markdown) + ' bytes');
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+const launchedFile = process.argv[1] ? pathToFileURL(process.argv[1]).href : '';
+if (import.meta.url === launchedFile) {
   build().catch(error => { console.error(error); process.exitCode = 1; });
 }

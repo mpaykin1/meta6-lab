@@ -51,6 +51,17 @@ export function failedChecks(p) {
  }
  return [...latest].filter(([,v])=>['failure','timed_out','cancelled'].includes(v.conclusion)).map(([n])=>n);
 }
+
+export function markSuperseded(pulls) {
+ const all=Object.values(pulls||{});
+ for(const next of all){
+  if(!next.supersedes||next.supersedes===next.number)continue;
+  const old=all.find(p=>p.repo===next.repo&&p.number===next.supersedes);
+  if(old&&old.state==='open')old.supersededBy=next.number;
+ }
+ return pulls;
+}
+
 export function apply(text,data,now) {
  const rows=parseRows(text),tick=String.fromCharCode(96);
  const seen=new Set(rows.filter(r=>!noBranch(r.branch)).map(r=>repoFor(r,data)+'::'+r.branch));
@@ -167,18 +178,20 @@ async function collect(rows) {
    ]);
    const body=String(detailed.body||'');
    const dup=/(?:duplicate(?: of)?|дубл(?:ь|ирует)(?: PR)?)\s*#(\d+)/i.exec(body);
-   const replaced=/(?:superseded(?: by)?|replaced(?: by)?|замен[её]н(?: на)?)\s*#(\d+)/i.exec(body);
+   const replaced=/(?:superseded by|replaced by|замен[её]н(?: на)?)\s*#(\d+)/i.exec(body);
+   const older=/(?:supersedes|replaces)\s*(?:conflicting\s*)?(?:PR\s*)?#(\d+)/i.exec(body);
    pulls[rp+'::'+p.head.ref]={
     repo:rp,branch:p.head.ref,number:p.number,title:p.title,state:detailed.state,
     merged:!!detailed.merged_at,sha:detailed.merge_commit_sha,created:Date.parse(detailed.created_at),
     lastCommit:Date.parse(commit?.commit?.committer?.date||commit?.commit?.author?.date||p.updated_at),
     mergeable_state:detailed.mergeable_state,
     checkRuns:checks?.check_runs||[],
-    duplicateOf:dup?Number(dup[1]):undefined,supersededBy:replaced?Number(replaced[1]):undefined
+    duplicateOf:dup?Number(dup[1]):undefined,supersededBy:replaced?Number(replaced[1]):undefined,supersedes:older?Number(older[1]):undefined
    };
   }
  });
  await Promise.all(workers);
+ markSuperseded(pulls);
  const zanyato=[],zf='rules/09-platforma/ZANYATO.md';
  if(existsSync(zf))for(const line of readFileSync(zf,'utf8').split('\n')){
   const c=line.split('|').map(x=>x.trim());

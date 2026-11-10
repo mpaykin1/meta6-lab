@@ -151,6 +151,7 @@ export function buildLibrary(root=ROOT){
     m.counts={assets:m.assets.length,file_assets:m.assets.filter(a=>a.bytes!==undefined).length,solutions:m.solutions.length};
   }
   fs.mkdirSync(target,{recursive:true});
+  // Historical duplicates are protected source records, not discoverable games.
   const archive=fs.readdirSync(target).filter(file=>file.endsWith('-copy.json')).sort().map(file=>{
     const game=file.slice(0,-5),duplicateOf=game.slice(0,-5);
     const archived=JSON.parse(fs.readFileSync(path.join(target,file),'utf8'));

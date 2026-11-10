@@ -151,19 +151,32 @@ async function bakeFaces(tmp,bone,source,palette){
  const {data,info}=await sharp(path.join(tmp,source)).resize(64,64,{kernel:'nearest',fit:'contain',
   background:'#00000000'}).ensureAlpha().raw().toBuffer({resolveWithObject:true});
  const tones=palette.map(hex=>[1,3,5].map(n=>parseInt(hex.slice(n,n+2),16)));
- const nearest=(rgb)=>tones.reduce((a,c)=>Math.hypot(...c.map((v,i)=>v-rgb[i]))<
+ const nearest=rgb=>tones.reduce((a,c)=>Math.hypot(...c.map((v,i)=>v-rgb[i]))<
   Math.hypot(...a.map((v,i)=>v-rgb[i]))?c:a,tones[0]);
  const tone=(rgb,f)=>nearest(rgb.map(v=>Math.max(0,Math.min(255,Math.round(v*f)))));
- const fall=tones.find(x=>x[0]>x[1]*1.4&&x[0]>90)||tones[5]||tones[0];
+ // Transparent borders are NOT the material: choose the actual opaque outline
+ // nearest the left/right edge; fall back to a strong warm midtone, not black.
+ const fall=tones.find(x=>x[0]>=160&&x[0]<=225&&x[0]>x[1]*1.45)||
+  tones.reduce((a,c)=>c[0]>a[0]&&c[0]<235?c:a,tones[0]);
  const black=tones[1]||tones[0],rivet=tones.at(-3)||tones.at(-1);
+ function coloredEdge(y,right){
+  let first=null;
+  for(let x=right?63:0;right?x>=0:x<64;right?x--:x++){
+   const k=(y*64+x)*info.channels;
+   if(data[k+3]>128){
+    const rgb=[data[k],data[k+1],data[k+2]];
+    if(rgb[0]>80&&rgb[0]>rgb[1]*1.2){first=rgb;break;}
+   }
+  }
+  // Sample painterly colors of the original contour, not magenta transparency.
+  return first?first.map((v,i)=>Math.round(v*.35+fall[i]*.65)):fall;
+ }
  const faces={};
  for(const [face,factor,edge] of [['right',.75,63],['left',1.15,0],['top',1.15,0],
    ['bottom',.75,63],['back',.9,0],['front',1,63]]){
   const dst=Buffer.alloc(64*64*4);
   for(let y=0;y<64;y++)for(let x=0;x<64;x++){
-   const sampleX=face==='back'?(y%2?0:63):edge;
-   const idx=(y*64+sampleX)*info.channels;
-   const srcRgb=data[idx+3]>32?[data[idx],data[idx+1],data[idx+2]]:fall;
+   const srcRgb=coloredEdge(y,face==='right'||(face==='back'&&y%2===0));
    let rgb=tone(srcRgb,factor);
    // AO at mechanical joints, a dark side seam, pale upper lip, rivets.
    if(y>=59||y<=1||x<=1||x>=62||((face==='left'||face==='right'||face==='back')&&x===5))rgb=black;

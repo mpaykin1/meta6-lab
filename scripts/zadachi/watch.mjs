@@ -107,31 +107,85 @@ export function apply(text,data,now) {
  return out;
 }
 
-function collect(rows) {
-  const repo = process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab';
-  const api = p => { try { return JSON.parse(execFileSync('gh', ['api', p], {maxBuffer: 64e6}).toString()); } catch { return null; } };
-  const last = ref => { const c = api(`repos/${repo}/commits?sha=${encodeURIComponent(ref)}&per_page=1`); return c?.[0] ? Date.parse(c[0].commit.committer.date) : undefined; };
-  const pulls = {}, branches = {};
-  const put = (p, withCommit) => { pulls[p.head.ref] = {number: p.number, title: p.title, state: p.state, merged: !!p.merged_at, sha: p.merge_commit_sha, created: Date.parse(p.created_at), lastCommit: withCommit ? last(p.head.sha) : undefined}; };
-  for (let page = 1; page < 6; page++) { const l = api(`repos/${repo}/pulls?state=open&per_page=100&page=${page}`) || []; l.forEach(p => put(p, true)); if (l.length < 100) break; }
-  for (const r of rows) {
-    if (noBranch(r.branch) || pulls[r.branch] || /ГОТОВО · слито|ЗАКРЫТО без/.test(r.status)) continue;
-    const l = api(`repos/${repo}/pulls?state=all&head=${repo.split('/')[0]}:${encodeURIComponent(r.branch)}&per_page=5`) || [];
-    const p = l.find(x => x.merged_at) || l[0];
-    if (p) put(p, !p.merged_at && p.state === 'open'); else { const t = last(r.branch); if (t) branches[r.branch] = t; }
+
+async function collect(rows) {
+ const repo=process.env.GITHUB_REPOSITORY||'mpaykin1/meta6-lab',mgRepo='mpaykin1/meta6';
+ const {execFile}=await import('node:child_process');
+ const {promisify}=await import('node:util');
+ const {setTimeout:delay}=await import('node:timers/promises');
+ const run=promisify(execFile);
+ const api=async path=>{
+  try {const {stdout}=await run('gh',['api',path],{maxBuffer:64e6});return JSON.parse(stdout);}
+  catch(e){console.error('ZADACHI_API_WARNING '+path+': '+String(e.message).slice(0,180));return null;}
+ };
+ const loadOpen=async rp=>{
+  const found=[];
+  for(let page=1;page<=20;page++){
+   const group=await api('repos/'+rp+'/pulls?state=open&per_page=100&page='+page);
+   if(!Array.isArray(group))break;found.push(...group);if(group.length<100)break;
   }
-  const zanyato = [], zf = 'rules/09-platforma/ZANYATO.md';
-  if (existsSync(zf)) for (const line of readFileSync(zf, 'utf8').split('\n')) {
-    const c = line.split('|').map(s => s.trim());
-    if (c.length >= 6 && /^lab\//.test(c[2])) zanyato.push({item: c[1], branch: c[2], who: c[3], at: c[4].replace(' UTC', '')});
+  return found;
+ };
+ const [lab,mg]=await Promise.all([loadOpen(repo),loadOpen(mgRepo)]);
+ const items=[...lab.map(p=>({rp:repo,p})),...mg.map(p=>({rp:mgRepo,p}))],pulls={},branches={};
+ // History: discover PRs closed since the previous watchdog run.
+ for(const r of rows){
+  if(noBranch(r.branch)||items.some(x=>x.rp===(r.project==='МГ'?mgRepo:repo)&&x.p.head?.ref===r.branch))continue;
+  if(/ГОТОВО · слито|ЗАКРЫТО без/.test(r.status))continue;
+  const rp=r.project==='МГ'?mgRepo:repo;
+  const list=await api('repos/'+rp+'/pulls?state=all&head='+rp.split('/')[0]+':'+encodeURIComponent(r.branch)+'&per_page=5');
+  const p=Array.isArray(list)?(list.find(x=>x.merged_at)||list[0]):null;
+  if(p)items.push({rp,p});
+  else {
+   const c=await api('repos/'+rp+'/commits/'+encodeURIComponent(r.branch));
+   if(c?.commit?.committer?.date)branches[rp+'::'+r.branch]=Date.parse(c.commit.committer.date);
   }
-  for (const z of zanyato) if (!pulls[z.branch] && !rows.some(r => r.branch === z.branch)) { const t = last(z.branch); if (t) branches[z.branch] = t; }
-  return {repo, pulls, branches, zanyato};
+ }
+ let next=0;
+ const workers=Array.from({length:8},async()=>{
+  while(next<items.length){
+   const {rp,p}=items[next++];if(!p.head?.ref)continue;
+   let detailed=p;
+   // GitHub may return mergeable=null until the mergeability computation finishes.
+   for(let attempt=0;attempt<=3;attempt++){
+    const x=await api('repos/'+rp+'/pulls/'+p.number);if(x)detailed=x;
+    if(detailed.mergeable!==null&&detailed.mergeable!==undefined&&detailed.mergeable_state!=null)break;
+    if(attempt<3)await delay(3000);
+   }
+   const sha=p.head.sha;
+   const [checks,commit]=await Promise.all([
+    api('repos/'+rp+'/commits/'+sha+'/check-runs?per_page=100'),
+    api('repos/'+rp+'/commits/'+sha)
+   ]);
+   const body=String(detailed.body||'');
+   const dup=/(?:duplicate(?: of)?|дубл(?:ь|ирует)(?: PR)?)\s*#(\d+)/i.exec(body);
+   const replaced=/(?:superseded(?: by)?|replaced(?: by)?|замен[её]н(?: на)?)\s*#(\d+)/i.exec(body);
+   pulls[rp+'::'+p.head.ref]={
+    repo:rp,branch:p.head.ref,number:p.number,title:p.title,state:detailed.state,
+    merged:!!detailed.merged_at,sha:detailed.merge_commit_sha,created:Date.parse(detailed.created_at),
+    lastCommit:Date.parse(commit?.commit?.committer?.date||commit?.commit?.author?.date||p.updated_at),
+    mergeable_state:detailed.mergeable_state,
+    checkRuns:checks?.check_runs||[],
+    duplicateOf:dup?Number(dup[1]):undefined,supersededBy:replaced?Number(replaced[1]):undefined
+   };
+  }
+ });
+ await Promise.all(workers);
+ const zanyato=[],zf='rules/09-platforma/ZANYATO.md';
+ if(existsSync(zf))for(const line of readFileSync(zf,'utf8').split('\n')){
+  const c=line.split('|').map(x=>x.trim());
+  if(c.length>=6&&/^lab\//.test(c[2]))zanyato.push({item:c[1],branch:c[2],who:c[3],at:c[4].replace(' UTC','')});
+ }
+ for(const z of zanyato)if(!pulls[repo+'::'+z.branch]&&!rows.some(r=>r.branch===z.branch)){
+  const c=await api('repos/'+repo+'/commits/'+encodeURIComponent(z.branch));
+  if(c?.commit?.committer?.date)branches[repo+'::'+z.branch]=Date.parse(c.commit.committer.date);
+ }
+ return {repo,mgRepo,pulls,branches,zanyato};
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] || '').href) {
   const file = 'ZADACHI.md', text = readFileSync(file, 'utf8');
-  const out = apply(text, collect(parseRows(text)), Date.parse(process.env.WATCH_NOW || new Date().toISOString()));
+  const out = apply(text, await collect(parseRows(text)), Date.parse(process.env.WATCH_NOW || new Date().toISOString()));
   if (out !== text) writeFileSync(file, out);
   console.log(out !== text ? 'ZADACHI_UPDATED' : 'ZADACHI_OK');
   console.log((/^\*\*Итог:.*$/m.exec(out) || [''])[0]);

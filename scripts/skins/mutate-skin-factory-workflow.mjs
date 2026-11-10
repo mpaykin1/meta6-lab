@@ -14,7 +14,9 @@ const cases=[
   ['обман: публикация вместо PR в main',s=>s.replace(
     'git push origin HEAD:"$GITHUB_REF_NAME"','git push origin HEAD:main')],
   ['обман: зелёное сообщение при красном прогоне',s=>s.replace(
-    "const ok = '${{ job.status }}' === 'success';","const ok = true;")]
+    "const ok = '${{ job.status }}' === 'success';","const ok = true;")],
+  ['обман: старый прогон публикует устаревший скин',s=>s.replace(
+    'cancel-in-progress: true','cancel-in-progress: false')]
 ];
 for(const [name,change] of cases){
   const mutant=change(source);
@@ -27,4 +29,4 @@ for(const [name,change] of cases){
   if(!rejected)throw new Error('ЛОВУШКА ПРОПУЩЕНА: '+name);
   console.log('ЛОВУШКА СРАБОТАЛА: '+name);
 }
-console.log('К5: все 4 ловушки workflow обнаружены');
+console.log('К5: все 5 ловушек workflow обнаружены');

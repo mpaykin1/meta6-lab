@@ -48,7 +48,7 @@
 - SHA: `1841df94a1de50d6b726fd52ae46ff8d4b5263b9` · последний коммит: 2026-11-10T11:35:45Z
 - Проблема: Красная проверка: browser-open-all (https://github.com/mpaykin1/meta6-lab/actions/runs/42808771531/job/129804913981), changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42808771192/job/129804683375), verify-storefront (https://github.com/mpaykin1/meta6-lab/actions/runs/42808771182/job/129804570119)
 - Задание: Исправь browser-open-all по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42808771531/job/129804913981 и повтори CI.
-- Взял: —
+- Взял: MG-ремонтник 2026-11-10T12:51:00Z
 
 ### PR #3
 - PR: https://github.com/mpaykin1/meta6-lab/pull/3

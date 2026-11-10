@@ -52,15 +52,27 @@ try {
         // A spawn can face a solid ruin wall. Probe independent real key inputs
         // in both axes rather than misclassifying collision as broken controls.
         // All distances come from the engine's live position, not bot progress.
-        let previous = a;
+        // Broken City's tiny-hero biome moves only 0.75 units/sec, and CI WebGL
+        // may render at a few FPS. Observe real play (not the ending transition),
+        // use genuine run+direction keys, and keep the original 0.12m gate.
+        if (id === 'broken-city') {
+          await page.waitForFunction(() => window.__G?.G?.state === 'play',
+            null, { timeout: 35000 });
+          await page.keyboard.down('Shift');
+        }
+        let previous = await pos(page);
         let distance = 0;
-        for (const key of ['w', 's', 'a', 'd']) {
-          await page.keyboard.down(key);
-          await page.waitForTimeout(1200);
-          await page.keyboard.up(key);
-          const current = await pos(page);
-          distance += Math.hypot(current.x - previous.x, current.y - previous.y);
-          previous = current;
+        try {
+          for (const key of ['w', 's', 'a', 'd']) {
+            await page.keyboard.down(key);
+            await page.waitForTimeout(id === 'broken-city' ? 2000 : 1200);
+            await page.keyboard.up(key);
+            const current = await pos(page);
+            distance += Math.hypot(current.x - previous.x, current.y - previous.y);
+            previous = current;
+          }
+        } finally {
+          if (id === 'broken-city') await page.keyboard.up('Shift');
         }
         assert.ok(distance > .12, id + ': hero did not actually move from keyboard in any direction (distance=' + distance.toFixed(3) + ')');
       }

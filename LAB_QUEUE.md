@@ -9,15 +9,6 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
-### lab/render-broken-city-safe-1110 — адаптивное разрешение Broken City
-- Польза: готовый WebGL2/Three.js рендер использует адаптивный DPR и масштабирует частицы и постобработку без изменения механик.
-- Игра после merge: https://mpaykin1.github.io/meta6-lab/games/broken-city/
-- Ветка: `lab/render-broken-city-safe-1110`; PR #225: https://github.com/mpaykin1/meta6-lab/pull/225; заменяет #60.
-- Замер Chromium/SwiftShader: mobile 9.66 → 14.50 FPS, desktop 4.30 → 4.90 FPS, draw calls без роста.
-- CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42765824694 — benchmark PASS; полный набор проверок ещё не подтверждён.
-- Статус: В РАБОТЕ; Михаил: —; Claude: —
-
-
 ### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
 - Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
 - Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/
@@ -195,3 +186,11 @@
 - Каталог: `shared/references/ashen-path-asset-pack.json`.
 - Статус: ИСХОДНИК В БИБЛИОТЕКЕ; мобильная проверка не заявлена.
 - Михаил: передан владельцем как эталон 08.11.2026.
+
+### lab/render-broken-city-safe-1110 — адаптивное разрешение Broken City
+- Польза: готовый WebGL2/Three.js рендер использует адаптивный DPR и масштабирует частицы и постобработку без изменения механик.
+- Игра после merge: https://mpaykin1.github.io/meta6-lab/games/broken-city/
+- Ветка: `lab/render-broken-city-safe-1110`; PR #225: https://github.com/mpaykin1/meta6-lab/pull/225; заменяет #60.
+- Замер Chromium/SwiftShader: mobile 9.66 → 14.50 FPS, desktop 4.30 → 4.90 FPS, draw calls без роста.
+- CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42765824694 — benchmark PASS; полный набор проверок ещё не подтверждён.
+- Статус: В РАБОТЕ; Михаил: —; Claude: —

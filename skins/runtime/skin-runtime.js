@@ -31,7 +31,7 @@ async function load(url,THREE){
    blending:additive?THREE.AdditiveBlending:THREE.NormalBlending};
   if(additive)return new THREE.MeshBasicMaterial({...opts,color:0xffffff,
    opacity:.82,depthWrite:false});
-  return new THREE.MeshLambertMaterial({...opts,color:0xffffff,
+  return new THREE.MeshLambertMaterial({...opts,color:def.color||0xffffff,
    emissive:new THREE.Color(def.emissive||0x000000),
    emissiveMap:emit||null,emissiveIntensity:emit?.3:0});
  }

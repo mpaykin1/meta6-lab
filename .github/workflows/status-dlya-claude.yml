@@ -1,0 +1,72 @@
+name: status-dlya-claude
+on:
+  schedule:
+    - cron: '43 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - '**'
+      - '!automation/STATUS.md'
+      - '!automation/status.json'
+  pull_request:
+    paths:
+      - 'scripts/status/**'
+      - '.github/workflows/status-dlya-claude.yml'
+      - 'automation/CLAUDE_CHECKED.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+  pull-requests: read
+  issues: read
+concurrency:
+  group: status-dlya-claude-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  status:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Selftest and nine mutation traps (offline)
+        run: node scripts/status/selftest.mjs
+      - name: Generate progress.json using the existing Claude script (unchanged)
+        if: github.event_name != 'pull_request'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/meta-progress/progress.mjs
+      - name: Build GitHub facts and compact summary
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/status/build.mjs
+      - name: Commit only changed summary files to main
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "status-dlya-claude bot"
+          git config user.email "actions@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            git add automation/STATUS.md automation/status.json
+            if git diff --cached --quiet; then
+              echo "No status changes"
+              exit 0
+            fi
+            git commit -m "status: refresh facts for Claude"
+            if git push origin HEAD:main; then
+              echo "Status committed to main"
+              exit 0
+            fi
+            git fetch -q origin main
+            git reset --hard origin/main
+            node scripts/status/build.mjs
+          done
+          exit 1

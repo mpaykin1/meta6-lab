@@ -32,12 +32,11 @@
     "rust": {
       "rough": 0.92,
       "metal": 0.24,
-      "emissive": "#a65333"
+      "color": "#a65333"
     },
     "rust-transparent": {
       "rough": 0.94,
-      "metal": 0.24,
-      "emissive": "#a65333"
+      "metal": 0.24
     },
     "glow": {
       "emissive": "#fdd471",
@@ -66,7 +65,6 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "head",
-      "file": "textures/rust.png",
       "size": [
         0.72,
         0.68
@@ -374,7 +372,6 @@
       "kind": "slit",
       "layer": "3d",
       "bone": "body",
-      "file": "textures/rust.png",
       "size": [
         0.26,
         0.22
@@ -793,7 +790,6 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "armL",
-      "file": "textures/rust.png",
       "size": [
         0.23,
         0.51
@@ -837,7 +833,6 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "armR",
-      "file": "textures/rust.png",
       "size": [
         0.23,
         0.51
@@ -959,7 +954,6 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "legL",
-      "file": "textures/rust.png",
       "size": [
         0.25,
         0.58
@@ -1003,7 +997,6 @@
       "kind": "plate",
       "layer": "3d",
       "bone": "legR",
-      "file": "textures/rust.png",
       "size": [
         0.25,
         0.58
@@ -1513,11 +1506,1354 @@
       "anim": []
     },
     {
+      "id": "part-01-side-left",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "head",
+      "file": "parts/part-01.png",
+      "size": [
+        0.62,
+        0.68
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.379,
+        0,
+        -0.02
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-01-side-right",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "head",
+      "file": "parts/part-01.png",
+      "size": [
+        0.62,
+        0.68
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        0.379,
+        0,
+        -0.02
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-09-side-left",
+      "kind": "slit",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-09.png",
+      "size": [
+        0.2,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.259,
+        0.17,
+        -0.365
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-09-side-right",
+      "kind": "slit",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-09.png",
+      "size": [
+        0.2,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.02100000000000002,
+        0.17,
+        -0.365
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-20-side-left",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "armL",
+      "file": "parts/part-20.png",
+      "size": [
+        0.2,
+        0.51
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        -0.134,
+        -0.27,
+        -0.025
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-20-side-right",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "armL",
+      "file": "parts/part-20.png",
+      "size": [
+        0.2,
+        0.51
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0.104,
+        -0.27,
+        -0.025
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-21-side-left",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "armR",
+      "file": "parts/part-21.png",
+      "size": [
+        0.2,
+        0.51
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        -0.104,
+        -0.27,
+        -0.025
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-21-side-right",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "armR",
+      "file": "parts/part-21.png",
+      "size": [
+        0.2,
+        0.51
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0.134,
+        -0.27,
+        -0.025
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-24-side-left",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "legL",
+      "file": "parts/part-24.png",
+      "size": [
+        0.22,
+        0.58
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        -0.129,
+        -0.3,
+        -0.015
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-24-side-right",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "legL",
+      "file": "parts/part-24.png",
+      "size": [
+        0.22,
+        0.58
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0.129,
+        -0.3,
+        -0.015
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-25-side-left",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "legR",
+      "file": "parts/part-25.png",
+      "size": [
+        0.22,
+        0.58
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        -0.129,
+        -0.3,
+        -0.015
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-25-side-right",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "legR",
+      "file": "parts/part-25.png",
+      "size": [
+        0.22,
+        0.58
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0.129,
+        -0.3,
+        -0.015
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-02-profile-left",
+      "kind": "lens",
+      "layer": "2.5d",
+      "bone": "head",
+      "file": "parts/part-02.png",
+      "size": [
+        0.496,
+        0.2
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.388,
+        0.09,
+        -0.21999999999999997
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-02-profile-right",
+      "kind": "lens",
+      "layer": "2.5d",
+      "bone": "head",
+      "file": "parts/part-02.png",
+      "size": [
+        0.496,
+        0.2
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        0.388,
+        0.09,
+        -0.21999999999999997
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-03-profile-left",
+      "kind": "gear",
+      "layer": "2.5d",
+      "bone": "head",
+      "file": "parts/part-03.png",
+      "size": [
+        0.496,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.388,
+        -0.02,
+        -0.18
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-03-profile-right",
+      "kind": "gear",
+      "layer": "2.5d",
+      "bone": "head",
+      "file": "parts/part-03.png",
+      "size": [
+        0.496,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        0.388,
+        -0.02,
+        -0.18
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-04-profile-left",
+      "kind": "cable",
+      "layer": "2.5d",
+      "bone": "head",
+      "file": "parts/part-04.png",
+      "size": [
+        0.496,
+        0.28
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.388,
+        -0.22,
+        -0.12
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-04-profile-right",
+      "kind": "cable",
+      "layer": "2.5d",
+      "bone": "head",
+      "file": "parts/part-04.png",
+      "size": [
+        0.496,
+        0.28
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        0.388,
+        -0.22,
+        -0.12
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-05-profile-left",
+      "kind": "cable",
+      "layer": "2.5d",
+      "bone": "head",
+      "file": "parts/part-05.png",
+      "size": [
+        0.496,
+        0.28
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.388,
+        -0.22,
+        -0.12
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-05-profile-right",
+      "kind": "cable",
+      "layer": "2.5d",
+      "bone": "head",
+      "file": "parts/part-05.png",
+      "size": [
+        0.496,
+        0.28
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        0.388,
+        -0.22,
+        -0.12
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-11-profile-left",
+      "kind": "piston",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-11.png",
+      "size": [
+        0.16000000000000003,
+        0.32
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.268,
+        0.03,
+        -0.2
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-11-profile-right",
+      "kind": "piston",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-11.png",
+      "size": [
+        0.16000000000000003,
+        0.32
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.01200000000000001,
+        0.03,
+        -0.2
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-13-profile-left",
+      "kind": "gear",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-13.png",
+      "size": [
+        0.16000000000000003,
+        0.26
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.268,
+        0.16,
+        -0.20999999999999996
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-13-profile-right",
+      "kind": "gear",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-13.png",
+      "size": [
+        0.16000000000000003,
+        0.26
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.01200000000000001,
+        0.16,
+        -0.20999999999999996
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-14-profile-left",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-14.png",
+      "size": [
+        0.16000000000000003,
+        0.74
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.268,
+        0.06,
+        0.1
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-14-profile-right",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-14.png",
+      "size": [
+        0.16000000000000003,
+        0.74
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.01200000000000001,
+        0.06,
+        0.1
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-15-profile-left",
+      "kind": "panel",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-15.png",
+      "size": [
+        0.16000000000000003,
+        0.27
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.268,
+        -0.26,
+        -0.22999999999999998
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-15-profile-right",
+      "kind": "panel",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-15.png",
+      "size": [
+        0.16000000000000003,
+        0.27
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.01200000000000001,
+        -0.26,
+        -0.22999999999999998
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-16-profile-left",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "armL",
+      "file": "parts/part-16.png",
+      "size": [
+        0.16000000000000003,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        -0.14300000000000002,
+        -0.02,
+        0.020000000000000018
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-16-profile-right",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "armL",
+      "file": "parts/part-16.png",
+      "size": [
+        0.16000000000000003,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0.113,
+        -0.02,
+        0.020000000000000018
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-17-profile-left",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "armR",
+      "file": "parts/part-17.png",
+      "size": [
+        0.16000000000000003,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        -0.113,
+        -0.02,
+        0.020000000000000018
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-17-profile-right",
+      "kind": "plate",
+      "layer": "2.5d",
+      "bone": "armR",
+      "file": "parts/part-17.png",
+      "size": [
+        0.16000000000000003,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0.14300000000000002,
+        -0.02,
+        0.020000000000000018
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-18-profile-left",
+      "kind": "gear",
+      "layer": "2.5d",
+      "bone": "armL",
+      "file": "parts/part-18.png",
+      "size": [
+        0.16000000000000003,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        -0.14300000000000002,
+        -0.02,
+        0.020000000000000018
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-18-profile-right",
+      "kind": "gear",
+      "layer": "2.5d",
+      "bone": "armL",
+      "file": "parts/part-18.png",
+      "size": [
+        0.16000000000000003,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0.113,
+        -0.02,
+        0.020000000000000018
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-19-profile-left",
+      "kind": "gear",
+      "layer": "2.5d",
+      "bone": "armR",
+      "file": "parts/part-19.png",
+      "size": [
+        0.16000000000000003,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        -0.113,
+        -0.02,
+        0.020000000000000018
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-19-profile-right",
+      "kind": "gear",
+      "layer": "2.5d",
+      "bone": "armR",
+      "file": "parts/part-19.png",
+      "size": [
+        0.16000000000000003,
+        0.22
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0.14300000000000002,
+        -0.02,
+        0.020000000000000018
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-22-profile-left",
+      "kind": "cable",
+      "layer": "2.5d",
+      "bone": "armL",
+      "file": "parts/part-22.png",
+      "size": [
+        0.16000000000000003,
+        0.51
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        -0.14300000000000002,
+        -0.27,
+        0.11500000000000002
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-22-profile-right",
+      "kind": "cable",
+      "layer": "2.5d",
+      "bone": "armL",
+      "file": "parts/part-22.png",
+      "size": [
+        0.16000000000000003,
+        0.51
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0.113,
+        -0.27,
+        0.11500000000000002
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-23-profile-left",
+      "kind": "cable",
+      "layer": "2.5d",
+      "bone": "armR",
+      "file": "parts/part-23.png",
+      "size": [
+        0.16000000000000003,
+        0.51
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        -0.113,
+        -0.27,
+        0.11500000000000002
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-23-profile-right",
+      "kind": "cable",
+      "layer": "2.5d",
+      "bone": "armR",
+      "file": "parts/part-23.png",
+      "size": [
+        0.16000000000000003,
+        0.51
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "offset": [
+        0.14300000000000002,
+        -0.27,
+        0.11500000000000002
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-27-profile-left",
+      "kind": "bolt",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-27.png",
+      "size": [
+        0.16000000000000003,
+        0.07
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.268,
+        0.18,
+        0.46
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-27-profile-right",
+      "kind": "bolt",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-27.png",
+      "size": [
+        0.16000000000000003,
+        0.07
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.01200000000000001,
+        0.18,
+        0.46
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-28-profile-left",
+      "kind": "bolt",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-28.png",
+      "size": [
+        0.16000000000000003,
+        0.07
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.268,
+        0.18,
+        0.46
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-28-profile-right",
+      "kind": "bolt",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-28.png",
+      "size": [
+        0.16000000000000003,
+        0.07
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.01200000000000001,
+        0.18,
+        0.46
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-29-profile-left",
+      "kind": "bolt",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-29.png",
+      "size": [
+        0.16000000000000003,
+        0.07
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.268,
+        -0.2,
+        0.46
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-29-profile-right",
+      "kind": "bolt",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-29.png",
+      "size": [
+        0.16000000000000003,
+        0.07
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.01200000000000001,
+        -0.2,
+        0.46
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-30-profile-left",
+      "kind": "bolt",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-30.png",
+      "size": [
+        0.16000000000000003,
+        0.07
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.268,
+        -0.2,
+        0.46
+      ],
+      "rotation": [
+        0,
+        -1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
+      "id": "part-30-profile-right",
+      "kind": "bolt",
+      "layer": "2.5d",
+      "bone": "body",
+      "file": "parts/part-30.png",
+      "size": [
+        0.16000000000000003,
+        0.07
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "offset": [
+        -0.01200000000000001,
+        -0.2,
+        0.46
+      ],
+      "rotation": [
+        0,
+        1.5707963267948966,
+        0
+      ],
+      "depth": 1,
+      "material": "rust-transparent",
+      "anim": []
+    },
+    {
       "id": "part-24-rear",
       "kind": "plate",
       "layer": "2.5d",
       "bone": "legL",
-      "file": "textures/rust.png",
       "size": [
         0.25,
         0.58
@@ -1551,7 +2887,6 @@
       "kind": "plate",
       "layer": "2.5d",
       "bone": "armL",
-      "file": "textures/rust.png",
       "size": [
         0.23,
         0.51
@@ -1585,7 +2920,6 @@
       "kind": "plate",
       "layer": "2.5d",
       "bone": "armR",
-      "file": "textures/rust.png",
       "size": [
         0.23,
         0.51
@@ -1619,7 +2953,6 @@
       "kind": "plate",
       "layer": "2.5d",
       "bone": "legL",
-      "file": "textures/rust.png",
       "size": [
         0.25,
         0.58
@@ -1653,7 +2986,6 @@
       "kind": "plate",
       "layer": "2.5d",
       "bone": "legR",
-      "file": "textures/rust.png",
       "size": [
         0.25,
         0.58
@@ -1687,39 +3019,39 @@
     "sheetSha256": "845f18d4987caf0bea59e9eedb7761b4b3b15eb0dfe0f693fc9a7f27bd293685",
     "tableSha256": "4fbee029ad2d4341533e1b9f48feaca67cab83408c119f8184b0958c4cda479a",
     "assets": {
-      "parts/part-01.png": "e0ad7ba35ccb7ae985d2c53149870f26e2bd8bf8228ddc9400208e9368a75af3",
-      "parts/part-02.png": "0255aaa46ac0aceb68f7b2cba766424fc7736f4bf89c3af015ea78d427b677cb",
-      "parts/part-03.png": "289c1731d72c93d2a3a228c14da9e49d8c9be5132e8361853e955da59ddf610d",
-      "parts/part-04.png": "68e38aefd6696bee548bc49ff80d0d86111b54edaae9af553fec6eae41ba7a57",
-      "parts/part-05.png": "3c25b2cf1b6b887ea1f2df5fbd3c2f5d8b2761dc6faedabf2e8cd11d3482dc9b",
-      "parts/part-06.png": "cee029d0f0c816b554f78fedeb857b237095a6e28a79398ea9326f756b2118ca",
-      "parts/part-07.png": "cce63049f030c9e0b7a2124e0f65a1dec6ea603d5076ff58a34724a1e63af53c",
-      "parts/part-08.png": "f2b7e6fb3e8ecdb6d0692576fa4fcc3e74e2c2fc74c9fb60103ed3870a81319e",
-      "parts/part-09.png": "26c7acf03189eb7144f3b83f2ebdb45fb7cb0eab3e4b827d4df30a571dbfb33c",
-      "parts/part-10.png": "d5a6c2d2e128167217e079e519c607526c6018996094b1bdda39d62b2a176a42",
-      "parts/part-11.png": "18f892eb9d192994a42bcadcd06e17a029838176c383ac9c00d65b1f2dbd16f0",
-      "parts/part-12.png": "e09aa54e8833b9513bc720ebb2ca0015ebbf12dde9357a195925098d1f7e37bc",
-      "parts/part-13.png": "1e8345229daffbcbd3d17b75948a72b4be4dd5e7663a3fac85f705ea74368e62",
-      "parts/part-14.png": "50594ed9d3bc5d31c32a35e73df0ffc77d6bdc6f5ee27bd544546ea66b1115b9",
-      "parts/part-15.png": "99137903947dc8cf00f3412b1404a4f4f3f8519580d52aba4d715c4fece93b46",
-      "parts/part-16.png": "3e08d12bedb44bd68b60e378933bf34cc5c37f763284e5ddbce653832d05f9f7",
-      "parts/part-17.png": "8e2999b0545d3cc495ca5296d0a52b72cf55c5b3dd6200e8507da654dc73b67d",
-      "parts/part-18.png": "e2854c2beff23d4ac0eedc20b48345db4534dabfa5330567bd4a58439ac04056",
-      "parts/part-19.png": "84122cf7334559cc2820c25cbad96491f4dd639855e295bde8dedcb29bcb9c81",
-      "parts/part-20.png": "d57d3e23f8b77f98501db12b227e51b52adc28358987aec77e6f081d8b702b51",
-      "parts/part-21.png": "93f10dbdc2ce880a98a6330325fd8c02c1db149bcfa7d08715f9faeae4de8725",
-      "parts/part-22.png": "c20b3665e0bc455176151586a9004da6bae405e2e29c97450c2c1fde6fe7aa63",
-      "parts/part-23.png": "053b10c8cebb023e5b297fb201e89b4ac58f614eb6acff59bf7bd1c0bee739df",
-      "parts/part-24.png": "2fcb5f22ccc66d013ca746cd48f35c5b0441f7cb466d1d096c0b4ca5213b45d7",
-      "parts/part-25.png": "61f2a4045f606ea2475a447ce62273540b0ac869a72672e67bdb192d7e35f232",
-      "parts/part-26.png": "93096db1537d3b310afdc7930cfe46fff457d2d75b9dd41dfe962980f5feb1e3",
-      "parts/part-27.png": "b2721d2330844b1eef9b26d1f44d8ddac7791d2adffb4cf9a37ad9dd2df9d73a",
-      "parts/part-28.png": "e3dd410c798f140a80367ca42e7fbbc8e318cc3b1c6dee8bbe2d390ea80a7b01",
-      "parts/part-29.png": "375d94276a3a6c0f062ab432c709af6baec4a02a3a5b12908d6f753ae02e501a",
-      "parts/part-30.png": "cae985ccb0c90ae4076ae4623f104eddddf3d89f495f3fd414dc645ce6930d01",
+      "parts/part-01.png": "28ef1b897d340c71bad65812d3eb9bd740e25479cfc87c766eea4c733c748542",
+      "parts/part-02.png": "6727e3afb079730a8a40ede57121d159f7e7e683c5332acdcfeb04aa0e017312",
+      "parts/part-03.png": "5fd870e1797336d57b5e863c32a0a1d24b4dcf12a4fe1b1fef83bf2e33887e10",
+      "parts/part-04.png": "60f25f407bec184ebef962841efb3879df01f64470548a5242d7b59508be66d0",
+      "parts/part-05.png": "4a19e354b3b2dc7b8121c3181562929ac6b9c84b0578affeda0a3c4c973aa86e",
+      "parts/part-06.png": "5159303de0b70d6ac893d049e6addb2056dca0767b502a9c9d14d399ca1a0692",
+      "parts/part-07.png": "53b98f0af79bac0fd0bfd7c53e0185e35773b9ebee9d505563fd8f6bdd57d921",
+      "parts/part-08.png": "8efd736540a56b2dbd077988e747ebdcbb9ebf1888e99c1c7e11f9cfd42121ae",
+      "parts/part-09.png": "5af1d3bfaf1f5c061ff851c4f9daa5778f9dc9443042c6adc587f231e592a4ce",
+      "parts/part-10.png": "a1d7e23019dfd226a611baa1f7c80a2f52c8d10e002e8e076b3a0df02b12f685",
+      "parts/part-11.png": "d3291294c674efefb01704bb06b0880d15eca161f0c9eb39348f3702a6711b84",
+      "parts/part-12.png": "4fd52fe76a4b97e66e3d9fdbb4d82cc5777c653ba15840879ad96870147a5581",
+      "parts/part-13.png": "d4eb2d8fac45a696cefcb2d631b6a187b402270b87b590d2834e37ff7576615d",
+      "parts/part-14.png": "ab06f34ac18e7b0b8dd03785a24bd04ff79cea6d485372e8628d74cdb28bdbbb",
+      "parts/part-15.png": "19aca19749ec0aa4063eb40a3a13a99a9ea38105bb1f15b525c4018d5965c416",
+      "parts/part-16.png": "74c1bc075f99ff624c9d843f09111eef6699e587c2dfc0b042cf5212328655a3",
+      "parts/part-17.png": "4d8c6a219104bf0e5365647a43658847cd7ade21b6114f719650a42efb61a97d",
+      "parts/part-18.png": "21a6c98742c039b8caa0958e34f17dcd8e5179d21956a07fcb5e3d2cb59f2731",
+      "parts/part-19.png": "94cd8d22b557fed70e08a686b4c6f9d4add99d94c8cf688d059c86d7d93b98aa",
+      "parts/part-20.png": "1360b4fd1aaf0d2e52793356ce80f1e2a0296a68176cc6e1c836ff8ea38edea3",
+      "parts/part-21.png": "8d17251eb62bf792e2503851ee65aea807d333d793b309d8fa98252abfabbfd1",
+      "parts/part-22.png": "e2dc1ef4288bf79d41e06e795c42815b41e2f30890d1751743d276a167bf6326",
+      "parts/part-23.png": "8287c786e7a569699fe955946f604e0af311338bf73ccdd5956cacf20be9ed91",
+      "parts/part-24.png": "1eef18c4bd9d1140cb48c87542f48f545e439a56d1b188c2ffb813429034f7ac",
+      "parts/part-25.png": "68a2e26372120a35cdcbb98cd35c85838fa8f2c04cdd652a1d5904316772ab49",
+      "parts/part-26.png": "26797335598d18edcece5b78185de89b2f7cc7e76b7f6a7af4ca3e40cae9f205",
+      "parts/part-27.png": "7ef5e71adc26748954a1242fa60e389558896826e0769c2d0eecf2e739fc4b7c",
+      "parts/part-28.png": "e3d5048418782d55a010960e2bba4ba8a7c22652fcfc07d76f3643e88048f0e1",
+      "parts/part-29.png": "ffedab87a50177e35b3b78657cf88874c544f0f435a7e441e23d1a9a6294ec6e",
+      "parts/part-30.png": "59bc76618106c65d62513677c94f5eb0ecf3df2b60e07be60ed7ae41798eeb5f",
       "sheets/arc-31.png": "8d52b7dccf8f77daffd1a9dd0e5b8160a92338a6d5f032d2af5b3511cb7a1e09",
-      "textures/metal.png": "e3ea74504447ef7f1879584102b49765a736abe65c14f373611889baac6dcba0",
-      "textures/rust.png": "59e4222abbc5e498dcd13ac501fdb186591a6e7bd40dafc9c50056c5308006d4"
+      "textures/metal.png": "eaec879f06f6d7961664ef8aeeb1893413a3ce92ca621c5696a9b91f09f41c29",
+      "textures/rust.png": "f1420f87725af3bbee3e5c09e88ebdb87f477bdb3e0a252a34d4d7cdf515d861"
     }
   }
 }

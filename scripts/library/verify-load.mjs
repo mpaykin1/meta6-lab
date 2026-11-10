@@ -65,9 +65,9 @@ function compiled(s){
    else merged.push({...part});
   }
   const source=fs.readFileSync(path.join(ROOT,source_path),'utf8');
-  chunks.push(merged.map(part=>rangeBytes(source,part.start,part.end).toString('utf8')).join('\\n'));
+  chunks.push(merged.map(part=>rangeBytes(source,part.start,part.end).toString('utf8')).join('\n'));
  }
- return chunks.join('\\n');
+ return chunks.join('\n');
 }
 const server=createServer((request,response)=>{
  try{
@@ -127,10 +127,10 @@ async function probeSolution(s){
    window.Color=three.Color;
   });
   const name=s.how_to_connect?.entrypoint;
-  if(typeof name!=='string'||!/^[\\w$]+$/.test(name))throw Error('No callable entrypoint');
-  const publish='\\nglobalThis.__metaCallable = typeof '+name+
+  if(typeof name!=='string'||!/^[\w$]+$/.test(name))throw Error('No callable entrypoint');
+  const publish='\nglobalThis.__metaCallable = typeof '+name+
    ' === "function" ? '+name+' : undefined;';
-  const isModule=/(?:^|[;\\n])\\s*(?:import\\s|export\\s)/m.test(code);
+  const isModule=/(?:^|[;\n])\s*(?:import\s|export\s)/m.test(code);
   await page.addScriptTag({type:isModule?'module':'text/javascript',content:code+publish});
   if(isModule)await page.waitForTimeout(180);
   if(errors.length)throw Error(errors[0]);

@@ -168,9 +168,9 @@ async function graphqlConflictCount() {
   throw new Error('Too many pull request pages');
 }
 
-async function prSummary(all, since) {
+export async function prSummary(all, since) {
   if (!Array.isArray(all)) return { open: UNKNOWN, conflicts: UNKNOWN, merged: UNKNOWN,
-    closed: UNKNOWN, mergedItems: [], protectedItems: [] };
+    closed: UNKNOWN, mergedItems: UNKNOWN, protectedItems: UNKNOWN };
   const open = all.filter(pr => prState(pr) === 'open');
   const newer = since ? all.filter(pr => pr.closed_at && Date.parse(pr.closed_at) > Date.parse(since)) : [];
   const merged = newer.filter(pr => prState(pr) === 'merged');
@@ -388,7 +388,7 @@ export async function build() {
   ]);
   const pr = await safeSection(() => prSummary(prs, labDate === UNKNOWN ? null : labDate));
   const prData = pr === UNKNOWN ? { open: UNKNOWN, conflicts: UNKNOWN, merged: UNKNOWN,
-    closed: UNKNOWN, mergedItems: [], protectedItems: [] } : pr;
+    closed: UNKNOWN, mergedItems: UNKNOWN, protectedItems: UNKNOWN } : pr;
   const sl = linesContaining(read('automation/SLIYANIE.md'), 'НУЖЕН CLAUDE');
   const st = stalled(read('rules/09-platforma/ZANYATO.md'));
   const data = {

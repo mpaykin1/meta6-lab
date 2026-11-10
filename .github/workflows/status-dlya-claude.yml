@@ -34,7 +34,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Selftest and nine mutation traps (offline)
+      - name: Selftest and permanent mutation traps (offline)
         run: node scripts/status/selftest.mjs
       - name: Generate progress.json using the existing Claude script (unchanged)
         if: github.event_name != 'pull_request'

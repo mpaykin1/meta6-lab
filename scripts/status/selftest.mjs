@@ -45,6 +45,9 @@ async function suite(m, candidate) {
   assert.equal(await m.safeSection(async () => { throw new Error('GitHub API 403'); }),
     'нет данных');
   assert.equal(await m.safeSection(async () => 42), 42);
+  const prError = await m.prSummary('нет данных', null);
+  assert.equal(prError.protectedItems, 'нет данных');
+  assert.equal(prError.mergedItems, 'нет данных');
   assert.deepEqual(m.newErrorRows('| 18 | старая |', '| 18 | старая |\n| 18 | новая |'),
     ['| 18 | новая |']);
   assert.deepEqual(m.newErrorRows(null, '| 18 | новая |'), 'нет данных');
@@ -86,6 +89,10 @@ const mutations = {
   'api-error-crashes-summary': [
     '    // Сбой одного источника не должен искажать другие секции.\n    return UNKNOWN;',
     '    // Сбой одного источника не должен искажать другие секции.\n    throw _error;'
+  ],
+  'pr-api-error-hides-protected-merges': [
+    'closed: UNKNOWN, mergedItems: UNKNOWN, protectedItems: UNKNOWN',
+    'closed: UNKNOWN, mergedItems: UNKNOWN, protectedItems: []'
   ],
   'raw-github-env-rejected': [
     'process.env.STATUS_RUN_URL || UNKNOWN',

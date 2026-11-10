@@ -20,6 +20,18 @@ const scenarios=[
  }],
  ['missing-referenced-asset',(root,entry)=>{entry.asset_ids=[];}],
  ['invented-asset',(root,entry)=>{entry.asset_ids=['fake-id'];}],
+ ['copy-counted-as-exemplar',(root,entry)=>{
+  // The copied source and asset are byte-identical and otherwise valid.
+  fs.cpSync(path.join(root,'games/demo'),path.join(root,'games/demo-copy'),{recursive:true});
+  entry.id='demo-copy:camera';entry.game='demo-copy';
+  entry.source_path='games/demo-copy/index.js';
+  entry.lines[0].source_path='games/demo-copy/index.js';
+  const indexPath=path.join(root,'shared/library/index.json');
+  const index=JSON.parse(fs.readFileSync(indexPath,'utf8'));
+  index.entries[0].game='demo-copy';
+  index.entries[0].source_path='games/demo-copy/fog.png';
+  fs.writeFileSync(indexPath,JSON.stringify(index));
+ }],
  ['deceptive-all-unloadable',(root,entry,catalog)=>{
   catalog.solutions.push({...entry,id:'demo:weather'},{...entry,id:'demo:controls'});
   catalog.solution_count=catalog.solutions.length;

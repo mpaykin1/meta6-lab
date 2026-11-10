@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Доводчик: PR #116 — Broken City | МГЛ | чат ChatGPT | `lab/cycle1-broken-city-bot-strategy-1108` | [#116](https://github.com/mpaykin1/meta6-lab/pull/116) | 2026-11-10 05:57 | — |
 | НУЖЕН CLAUDE: перенести недостающий index.html в [#200](https://github.com/mpaykin1/meta6-lab/pull/200) после [красного бота](https://github.com/mpaykin1/meta6-lab/actions/runs/42544601867) | Доводчик: PR #113, сравнение Broken City и CI | МГЛ | чат ChatGPT | `lab/cycle2-broken-city-bot-config-20261107` | [#113](https://github.com/mpaykin1/meta6-lab/pull/113) | 2026-11-10 05:56 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/rules-bot-trainer` | [#204](https://github.com/mpaykin1/meta6-lab/pull/204) | 2026-11-09 16:36 | 2026-11-10 02:51 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | M6 | МГЛ | MG-строитель-3 | `lab/mcp-connect` | [#192](https://github.com/mpaykin1/meta6-lab/pull/192) | 2026-11-09 22:25 | 2026-11-09 22:26 |

@@ -100,7 +100,7 @@ jobs:
             const body = [
               '### Фабрика скинов — ржавый робот',
               ok ? '![Эскиз | герой в скине](' + image + ')' : 'Сравнение не создано — проверьте упавший шаг.',
-              '[Играть в Skin Trainer](https://mpaykin1.github.io/meta6-lab/games/skin-trainer/?skin=../../skins/packs/rusty-robot/)',
+              '[Играть в Skin Trainer](https://raw.githack.com/mpaykin1/meta6-lab/lab/skin-factory/games/skin-trainer/index.html?skin=../../skins/packs/rusty-robot/)',
               ok ? 'Проблемы: нет ошибок консоли Chrome; S1–S12 и К5 — в прогоне.' : 'Проблемы: не пройдена сборка или Chrome.',
               '[Последний прогон](' + run + ')'
             ].join('\n\n');

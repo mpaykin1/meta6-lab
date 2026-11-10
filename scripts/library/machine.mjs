@@ -27,7 +27,9 @@ export function walk(folder){
 export function discover(root=ROOT){
   const dir=path.join(root,'games');
   if(!fs.existsSync(dir))throw Error('Missing games directory');
-  const games=fs.readdirSync(dir,{withFileTypes:true}).filter(d=>d.isDirectory()).map(d=>({game:d.name,source_root:'games/'+d.name}));
+  const games=fs.readdirSync(dir,{withFileTypes:true})
+    .filter(d=>d.isDirectory()&&!d.name.endsWith('-copy'))
+    .map(d=>({game:d.name,source_root:'games/'+d.name}));
   const rule=fs.readFileSync(path.join(root,'rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md'),'utf8');
   const table=rule.split(/##\s*1\.\s*/)[1]?.split(/##\s*2\.\s*/)[0];
   if(!table)throw Error('Missing allowlist table');

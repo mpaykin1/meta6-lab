@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "asqura-ilya-reference",
+  "title": "ASQURA OFFICE — Ilya version (Copy)",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES LAB",
+  "date_added": "2026-11-09",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "original_filename": "Ilya version (Copy)(1).html",
+    "path": "games/asqura-ilya-reference/index.html",
+    "git_blob_sha": "b7b7167b3fb48776b2c82433087cb13e867e5abb",
+    "sha256": "2f059fd03ccb0fde040eac87583963b4d53575c725a4481b09e1f88b2932504e",
+    "size_bytes": 293170
+  },
+  "viewer_url": "https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/",
+  "technologies": [
+    "Canvas 2D isometric pixel art",
+    "procedural chibi character sprites",
+    "multi-era office/court/future environments",
+    "Three.js r128 via CDN for 3D elevator sequence",
+    "procedural Web Audio sound effects",
+    "keyboard and touch input",
+    "localStorage save state",
+    "built-in window.__INV() content inventory"
+  ],
+  "runtime": {
+    "external_dependencies": [
+      "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+      "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    ],
+    "offline_3d": false,
+    "ads": false
+  },
+  "reuse": {
+    "owner_supplied": true,
+    "owner_designated_reference": true,
+    "third_party_rights_verified": false,
+    "requires_dependency_license_review": true,
+    "description": "Preserve original file; reuse original components only after rights review for third-party dependencies."
+  },
+  "original_preserved": true,
+  "modularized": false
+}

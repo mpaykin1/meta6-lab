@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "id": "gpt-rift-scout-v1",
+  "status": "lab-only-unreviewed",
+  "gameIntegration": false,
+  "source": "GPT-authored SVG atlas study; not copied from an original model",
+  "reference": {
+    "id": "scavenger",
+    "path": "three-worlds-game/ash-assets.mjs",
+    "usagePath": "three-worlds-game/rift-story.mjs",
+    "metrics": {
+      "articulatedParts": 8,
+      "voxelCount": 525,
+      "paletteColors": 14,
+      "animationFrames": 8,
+      "viewDirections": 8,
+      "triangles": 1672,
+      "drawCalls": 8,
+      "fileBytes": 62011,
+      "measurement": "three-worlds-game/tests/model-lab-reference-metrics.test.mjs; source factory evaluated with minimal Vector3/Vector4 stubs, visible voxel faces counted per separately rendered articulated part"
+    }
+  },
+  "candidate": {
+    "path": "three-worlds-game/models-lab/gpt-rift-scout-v1.svg",
+    "metrics": {
+      "articulatedVisualLayers": 15,
+      "voxelCount": "N/A (2.5D vector atlas study)",
+      "paletteColors": 14,
+      "animationFrames": 8,
+      "viewDirections": 8,
+      "triangles": 2,
+      "drawCalls": 1,
+      "fileBytes": 61644
+    },
+    "improvements": [
+      "15 named visual layers versus the reference model's 8 articulated parts",
+      "independent counter-swinging limbs across 8 walk frames",
+      "secondary cloak and scarf motion",
+      "armor seams, stitches, pack, emissive visor and antenna beacon",
+      "brass shoulder rivet and verdigris status light close the measured 14-color reference palette gap",
+      "eight authored facing cues (front plastron, asymmetric pauldrons/profiles, rear harness and pack panel) replace scale-only directional evidence",
+      "animated beacon radius and opacity use five authored states across every 8-frame direction cycle",
+      "45 shared SVG definitions replace 896 repeated geometry instances, reducing raw atlas bytes by 52.83% while CI locks the full raster hash",
+      "compact r* definition IDs and short data-d/data-a/data-f/data-m evidence markers reduce metadata without changing rendered geometry",
+      "CI now renders four deterministic projections from the actual Ash scavenger voxel grids and source palette beside candidate artifacts; this adds review evidence without claiming parity",
+      "a single CI contact sheet places original source projections and candidate idle frames in matching 0/2/4/6 columns for direct review",
+      "a separate CI motion strip exposes all eight front walk frames and records raster plus geometry-signature counts"
+    ],
+    "performanceEvidence": {
+      "labPreviewFrameTimeP50P95": "measured on 179 requestAnimationFrame intervals while cycling 64 atlas cells; see CI scout-render.json",
+      "labPreviewFpsP50P95": "measured in the same Playwright Chromium / SwiftShader run",
+      "gameFpsP50P95": "UNKNOWN (candidate is not integrated into the game)"
+    },
+    "directionEvidence": "64 cells contain one authored facing cue each; 8 unique cue types, each repeated for all 8 animation frames",
+    "motionEvidence": "64 beacon samples plus three-worlds-game/evidence/model-lab/scout-front-motion.png; CI requires at least five unique raster frames and five unique non-beacon geometry signatures across front frames 0-7",
+    "optimizationEvidence": {
+      "baselineFileBytes": 151303,
+      "candidateFileBytes": 61644,
+      "reductionPercent": 59.26,
+      "reusedDefinitions": 45,
+      "useInstances": 896,
+      "baselineAtlasSha256": "69946980330e5e15d640badf5e59584ef0ebb0e91aed48276ef318491c8cec6b",
+      "visualParityWithOwnBaseline": "CI requires pixel-identical full-atlas hash",
+      "visualParityWithOriginal": "UNKNOWN",
+      "referenceFileBytes": 62011,
+      "bytesBelowReference": 367,
+      "metadataCompaction": "compact IDs, evidence markers and SVG leading-zero number syntax; rendered geometry unchanged; full-atlas SHA-256 remains the parity gate"
+    },
+    "referenceVisualEvidence": {
+      "artifact": "three-worlds-game/evidence/model-lab/scout-reference-source.png",
+      "comparisonManifest": "three-worlds-game/evidence/model-lab/scout-comparison.json",
+      "source": "actual scavenger voxel grids and source palette rendered as four deterministic isometric directions",
+      "candidateSamples": "matching cardinal directions 0/2/4/6, all at idle frame 0 with explicit atlas cell coordinates",
+      "visualParity": "UNKNOWN pending Claude review",
+      "contactSheet": "three-worlds-game/evidence/model-lab/scout-side-by-side.png; original source top, candidate idle bottom, directions 0/2/4/6",
+      "motionStrip": "three-worlds-game/evidence/model-lab/scout-front-motion.png; candidate front frames 0-7, lab evidence only"
+    }
+  },
+  "promotionGate": {
+    "claudeReviewRequired": true,
+    "renderedPlaywrightFramesRequired": true,
+    "visualParity": "UNKNOWN",
+    "fpsP50P95": "UNKNOWN",
+    "prohibitedFromGame": true
+  }
+}

@@ -6,16 +6,48 @@
 
 Все опубликованные результаты и ссылки для Claude: [CLAUDE_REPORTS.md](CLAUDE_REPORTS.md). Каждый новый PR и его проверки публиковать здесь; сведения только из чата недоступны Claude.
 
-<!-- карточки ниже -->
+**ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
-### lab/render-broken-city-adaptive — адаптивная графика Broken City
-- Польза: Three.js и постобработка уменьшают нагрузку на слабых устройствах без изменения игры.
-- Играть: https://mpaykin1.github.io/meta6-lab/preview/render-broken-city-adaptive/games/broken-city/
-- Ветка: `lab/render-broken-city-adaptive`; PR: https://github.com/mpaykin1/meta6-lab/pull/60
-- Код: `games/broken-city/index.html`, `shared/render/frame-quality.js`.
-- Технологии: адаптивный DPR и размер render target, EMA/hysteresis, WebGL2-профилирование.
-- Проверка: бенчмарк и META BOT ожидаются; слияние только после подтверждения отсутствия регрессий.
-- Статус: В РАБОТЕ; Михаил: —; Claude: —
+<!-- карточки ниже -->
+### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
+- Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/
+- Источник: `games/asqura-ilya-reference/index.html`, blob `b7b7167b3fb48776b2c82433087cb13e867e5abb`.
+- Каталог: `shared/references/asqura-ilya-reference.json`; 3D требует CDN Three.js r128.
+- Ветка: `lab/asqura-ilya-reference-1109`; PR — см. ветку.
+- Статус: В РАБОТЕ — Pages и бот ещё не подтверждены.
+- Михаил: запросил включение в эталоны; оценку игры не дал.
+
+### lab/rainbow-acceleration-reference-1109 — «Радужный разгон»
+- Польза: неизменённый авторский эталон, 28 объектов галереи, игровые трассы, шейдеры, анимации и FX.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/rainbow-acceleration/
+- Исходник: `games/rainbow-acceleration/source-upload.html` (blob `8ebdbe4bb14291c77fb209a2f04a6a6c8920480b`).
+- Просмотр: `games/rainbow-acceleration/index.html` (локальный Three.js вместо CDN).
+- Каталог: `shared/references/rainbow-acceleration.json` (28 ассетов).
+- Ветка: `lab/rainbow-acceleration-reference-1109`.
+- Статус: В РАБОТЕ — PR и публикация Pages ещё не подтверждены; Михаил: вердикта «нравится» о запуске нет.
+
+### lab/broken-city-copy-reference-1109 — «Сломанный город (Copy)»
+- Польза: отдельный эталон с 3D-графикой, GLSL и галереей ассетов; основной Broken City не изменён.
+- Играть: https://mpaykin1.github.io/meta6-lab/games/broken-city-copy/
+- Оригинал: `games/broken-city-copy/source-upload.html`; SHA `e8815120498c15c744f393b5ed8a34bd3676e98e`.
+- Рабочая версия: `games/broken-city-copy/index.html`; Three.js из соседнего эталона вместо CDN.
+- Машинный каталог: `shared/references/broken-city-copy.json`.
+- Ветка: `lab/broken-city-copy-reference-1109`; PR #180.
+- Статус: В РАБОТЕ — Pages и прохождение ещё не подтверждены.
+- Михаил: —; Claude: —
+
+
+### lab/sumerki-i-pepel-2-uploaded-reference — эталон «Сумерки и пепел II (Copy)»
+- Польза: исходная игра, графика и шейдеры доступны как неизменённый эталон для библиотеки.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/sumerki-i-pepel-2-copy/
+- Источник: `games/sumerki-i-pepel-2-copy/index.html`, blob `90d83a77049e8edb7aab847ecbbf4e9723a3c2e5`.
+- Каталог: `shared/references/sumerki-i-pepel-2-copy.json`.
+- Ветка: `lab/sumerki-i-pepel-2-uploaded-reference`; PR: https://github.com/mpaykin1/meta6-lab/pull/179
+- Статус: В РАБОТЕ — оригинал сохранён; прохождение ботом и мобильная совместимость не подтверждены.
+- Михаил: запросил загрузку как эталона, вердикта «нравится» о запуске не было; Claude: —.
+
+
 
 ### lab/play-connect-earn-home — главная Play / Connect / Earn
 - Польза: три работающие навигационные кнопки; Play открывает 10 игровых ссылок, Connect показывает MCP endpoint и копирование URL, Earn честно заблокирован до готовности и 100 DAU.
@@ -63,20 +95,24 @@
 - Claude: —
 
 ### meta6 #290 — Twilight Isles, исправление проходимости
-- Польза: одобрить игровые улучшения только после полного честного прохождения.
-- Ветка / SHA: meta6 ai/meta-rules-twilight-isles-20261106 / 72b92d5c508571cc4fd69d4aa60c2692940cee16 (только чтение).
-- PR: https://github.com/mpaykin1/meta6/pull/290
-- META BOT: https://github.com/mpaykin1/meta6/actions/runs/42186206581 — FAIL, уровень 1 не завершён за 570 с; ложный возврат playLevel при смерти исправлен в lab PR #2 SHA 2a96b686f28959da60c7ba64ccbdff248ac8d405, полная победа ещё не подтверждена.
-- Статус: В РАБОТЕ — не сливать до зелёного META BOT; прямые исправления/комментарии в meta6 запрещены.
+- Польза: пройти остров без гибели и ложной победы, сохранить исходную графику.
+- Поиграть: https://mpaykin1.github.io/meta6-lab/games/twilight-isles/ (основная песочница, не превью ветки).
+- Ветка / SHA: lab/twilight-isles-pass / 95f807d6901f5ebfe220a1006f8b82cde836a94b.
+- PR: https://github.com/mpaykin1/meta6-lab/pull/2; источник meta6 PR #290 только чтение.
+- META BOT: https://github.com/mpaykin1/meta6-lab/actions/runs/42354017653 — FAIL (герой погиб mobile/desktop/replay); https://github.com/mpaykin1/meta6-lab/actions/runs/42356322630 — IN_PROGRESS на новом SHA, PASS нет.
+- Изменены: bot-strategy.mjs (честная смерть), meta-enhancements.js (путь к следующей клетке, доступное оружие в начале).
+- Статус: В РАБОТЕ — дождаться и исправить META BOT; не сливать при FAIL.
 - Михаил: —
 - Claude: —
 
 ### meta6 #291 — Twilight Island, исправление маршрута и прогресса
-- Польза: достижение честной победы на острове без телепортов и обхода проверок.
-- Ветка / SHA: meta6 ai/codex/meta-bot-twilight-island-20261106 / 77add700f428e8c9209e4dd2c58506480c5524f5 (только чтение).
-- PR: https://github.com/mpaykin1/meta6/pull/291 (draft)
-- META BOT: https://github.com/mpaykin1/meta6/actions/runs/42185128729 — FAIL, 20 с progress не растёт и герой гибнет.
-- Статус: В РАБОТЕ — нет полного прохода; исправления в отдельной ветке lab, перенос в meta6 только Claude.
+- Польза: физически собрать монеты, победить босса, дойти до кольца без обхода правил.
+- Поиграть: https://mpaykin1.github.io/meta6-lab/games/twilight-island/ (основная песочница, не превью ветки).
+- Ветка / SHA: lab/twilight-island-pass / d91ce533594870375aedc8b1d420258ba435d8e4.
+- PR: https://github.com/mpaykin1/meta6-lab/pull/1; источник meta6 PR #291 только чтение.
+- META BOT: https://github.com/mpaykin1/meta6-lab/actions/runs/42354623678 — FAIL: оба mobile дошли до босса, но погибли со слабым оружием; desktop убил босса, но ушёл к сердцу вместо кольца. https://github.com/mpaykin1/meta6-lab/actions/runs/42356940858 — IN_PROGRESS на новом SHA.
+- Изменены: bot-strategy.mjs (реальный выбор оружия, приоритет победного кольца), bot-adapter.js (следующая клетка маршрута).
+- Статус: В РАБОТЕ — подтвердить три полных успешных прохода, без подтверждения не сливать.
 - Михаил: —
 - Claude: —
 
@@ -140,3 +176,13 @@
 - Михаил: —
 - Claude: —
 
+
+
+### lab/ashen-path-asset-pack-original-1108 — эталон «Пепельный путь»
+- Польза: доступен оригинальный интерактивный воксельный ассет-пак, его анимации, модели и исходный код.
+- Открыть: https://mpaykin1.github.io/meta6-lab/games/ashen-path-asset-pack/
+- Ветка: `lab/ashen-path-asset-pack-original-1108`.
+- Исходники: `games/ashen-path-asset-pack/index.html`, `source.md`, `README.md`.
+- Каталог: `shared/references/ashen-path-asset-pack.json`.
+- Статус: ИСХОДНИК В БИБЛИОТЕКЕ; мобильная проверка не заявлена.
+- Михаил: передан владельцем как эталон 08.11.2026.

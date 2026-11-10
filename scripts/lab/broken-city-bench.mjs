@@ -4,11 +4,17 @@ const browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use
 const ps=(s,p)=>s[Math.min(s.length-1,Math.max(0,Math.ceil(s.length*p)-1))];
 const results=[],sizes=[{name:'mobile',width:390,height:844},{name:'desktop',width:1280,height:720}];
 try{
- for(const size of sizes)for(const version of ['base','head','head','base']){
+ for(const size of sizes)for(const version of ['base','head','head','base','base','head']){
   const port=version==='base'?8765:8766;
   const page=await browser.newPage({viewport:{width:size.width,height:size.height},deviceScaleFactor:1});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.addInitScript(()=>{
+    // Use identical procedural world seeds in all six independent browser runs.
+    let randomSeed = 19260511;
+    Math.random = () => {
+      randomSeed = (Math.imul(randomSeed, 1664525) + 1013904223) >>> 0;
+      return randomSeed / 4294967296;
+    };
     let drawCalls=0,triangles=0;
     const drawStats=window.__renderPerf={active:false,dt:[],draw:[],tri:[],prev:0};
     const g=WebGL2RenderingContext.prototype;
@@ -51,9 +57,9 @@ if(process.env.GITHUB_STEP_SUMMARY)appendFileSync(process.env.GITHUB_STEP_SUMMAR
 let failed=false;
 for(const size of sizes){
  const runs=results.filter(r=>r.size===size.name);
- if(runs.length!==4||runs.some(r=>!r.fps||r.errors.length)){failed=true;console.log('::error title=Browser failure::'+size.name+' incomplete run');continue}
+ if(runs.length!==6||runs.some(r=>!r.fps||r.errors.length)){failed=true;console.log('::error title=Browser failure::'+size.name+' incomplete run');continue}
  const base=runs.filter(r=>r.version==='base').map(r=>r.fps).sort((a,b)=>a-b),head=runs.filter(r=>r.version==='head').map(r=>r.fps).sort((a,b)=>a-b);
- const baseAvg=(base[0]+base[1])/2,headAvg=(head[0]+head[1])/2;
+ const baseAvg=base[1],headAvg=head[1];
  const baseDraw=Math.max(...runs.filter(r=>r.version==='base').map(r=>r.draw)),headDraw=Math.max(...runs.filter(r=>r.version==='head').map(r=>r.draw));
  console.log(size.name+' BASE '+baseAvg.toFixed(2)+' HEAD '+headAvg.toFixed(2)+' fps; calls '+baseDraw+' -> '+headDraw);
  if(headAvg<baseAvg*.8){failed=true;console.log('::error title=FPS regression::'+size.name+' FPS '+headAvg+' vs '+baseAvg)}

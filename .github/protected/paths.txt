@@ -16,3 +16,5 @@ scripts/meta-games-guard.sh
 # Каркас бота-проходчика (пишет Claude, ChatGPT только дописывает games/<игра>/bot-*.{js,mjs,json}):
 scripts/meta-bot
 .github/workflows/meta-bot.yml
+# Измерение готовности и проверка честности отчётов (пишет Claude):
+scripts/meta-progress

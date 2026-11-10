@@ -2,11 +2,23 @@
 
 Прочитать [rules/09-platforma/META_GAMES_PLATFORM.md](rules/09-platforma/META_GAMES_PLATFORM.md): склад и конструктор игр, автоулучшение всех игр по правилам с ChatGPT, бот-проходчик уровней, проверка Claude, журнал решений владельца (§11).
 
+## БЕЗ РЕКЛАМЫ — игры META GAMES без встроенной рекламы (07.11.2026)
+
+Все версии игр в META GAMES (веб-каталог, Android, Steam) публикуются без рекламного кода, рекламных SDK и наград «за рекламу». Реклама — только в отдельных версиях для Playgama. Полное правило: [rules/09-platforma/BEZ_REKLAMY.md](rules/09-platforma/BEZ_REKLAMY.md).
+
+## ОТЧЁТ ВЛАДЕЛЬЦУ — только «Осталось сделать» (07.11.2026)
+
+В чате владельцу ChatGPT, Codex и Claude пишут только список того, что ещё не готово, и что мешает. Сделанное не перечислять — оно в PR, прогонах и LAB_QUEUE. Всё готово — «Осталось: ничего». Полное правило: §5 [rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md](rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md).
+
+## ОТЧЁТЫ ДЛЯ CLAUDE — все результаты видны на GitHub (07.11.2026)
+
+Каждая работа ChatGPT и агентов — PR со свежим описанием, прогон Actions с понятной причиной провала, карточка LAB_QUEUE. Ничего важного только в чате. Полное правило: [rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md](rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md).
+
 ## META GAMES — обязательный закрытый список источников (06.11.2026)
 
 Для создания новых игр META GAMES повторно использовать игровые ассеты и код разрешено из пяти исходных эталонов **и всех игр Claude**: Twilight Island (`observer-world-en-v7/`), Ashen Path (`ashen-sumerek/`), Underwater World (`underwater-world/`), Three Worlds (`three-worlds-game/`), Veil Terraces (`meta-games-worlds/veil-terraces/`). **Все созданные и загруженные Claude игры автоматически становятся дополнительными эталонами и кода, и ассетов (уже существующие и будущие), с проверкой происхождения и прав сторонних компонентов.** Полное обязательное правило: [rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md](rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md).
 
-Для автозадач действует automation/prompts/chatgpt-autotask.md: отчёты, новые тесты, handoff и evidence запрещены; требования GRAF, abyss.md, evolve.md и других файлов о тестах, отчётах, evidence и gate к автозадачам не применяются
+Для автозадач действует automation/prompts/chatgpt-autotask.md: длинные отчёты, handoff и evidence-файлы запрещены. **Исключение владельца 09.11.2026: для META GAMES и любых PR с кодом КОНТУР БЕЗ ОШИБОК К1–К10 обязателен и автозадачам — проверки, мутации-ловушки, строки в OSHIBKI.md и охранник kontur-guard; см. rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md.** Остальные требования GRAF, abyss.md, evolve.md о тестах, отчётах и gate к автозадачам не применяются
 ## ЧИСТЫЙ ЭКРАН — никаких лишних надписей в игре (обязательно, все игры, 2026-10-31)
 
 На экране игры остаётся **только графика и кнопки управления**. Всё остальное спрятано в меню, кнопка меню — **в правом верхнем углу** (иконка ☰).

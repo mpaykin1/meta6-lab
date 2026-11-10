@@ -84,10 +84,7 @@ main{position:relative;z-index:5;padding:42px 0 94px}
  .section-title{flex-direction:column;align-items:flex-start}
  .bottom{flex-wrap:wrap}
 }
-.game.world-visited{border-color:#80b8bd80;box-shadow:inset 0 0 0 1px #7bd6d125}
-.game.world-visited .art .orb{filter:hue-rotate(14deg) brightness(1.08)}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
-.main-actions{display:flex;flex-wrap:wrap;gap:12px}.main-actions .pill{min-width:125px;text-align:center}.platform-panel{margin:90px 0 0;padding:clamp(24px,5vw,54px);border:1px solid #5b708655;background:linear-gradient(140deg,#16283b,#09121e 70%);border-radius:18px;scroll-margin-top:20px}.platform-panel h2{font-size:clamp(32px,5vw,52px);font-weight:550;letter-spacing:-.04em;margin:8px 0 16px}.platform-panel>p{max-width:900px;color:#c4d1df}.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:26px}.feature-grid article{padding:22px;background:#07121ec9;border:1px solid #52667c55;border-radius:12px}.feature-grid h3{color:#f1d39e;margin:0 0 8px}.feature-grid p{color:#b8c7d6;margin:0}.endpoint{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:17px;background:#040d17;border-radius:10px;margin-top:25px}.endpoint code{overflow-wrap:anywhere;flex:1;min-width:180px;color:#9fe1df}.endpoint button{cursor:pointer;padding:11px 18px;background:#e6c58d;border:0;border-radius:8px;color:#142031;font-weight:750}.panel-note{font-size:13px;margin-top:22px}@media(max-width:700px){.feature-grid{grid-template-columns:1fr}.platform-panel{margin-top:48px}.main-actions .pill{flex:1;min-width:90px}}
 </style>
 </head>
 <body>
@@ -95,19 +92,18 @@ main{position:relative;z-index:5;padding:42px 0 94px}
 <canvas class="scene" id="sky" aria-hidden="true"></canvas><div class="scene-vignette"></div>
 <header>
  <a class="brand" href="./" aria-label="META GAMES home"><span class="brand-symbol">◇</span> META <b>GAMES</b></a>
- <nav class="links" aria-label="Navigation"><a href="#play">Play</a><a href="#connect">Connect</a><a href="#earn">Earn</a></nav>
+ <nav class="links" aria-label="Navigation"><a href="#worlds">Worlds</a><a href="../playgama-catalog/">Full catalog</a><a href="https://github.com/mpaykin1/meta6">Source</a></nav>
 </header>
 <div class="hero-copy">
  <div class="eyebrow">A universe of connected dreams</div>
  <h1>META<span>GAMES</span></h1>
  <p>Step outside the ordinary. Explore shifting realms, lost cities and worlds that remember your choices — directly on our own website.</p>
- <div class="actions main-actions" aria-label="META GAMES sections"><a class="pill" href="#play">Play</a><a class="pill alt" href="#connect">Connect</a><a class="pill alt" href="#earn">Earn</a></div>
+ <div class="actions"><a class="pill" href="#worlds">Enter the worlds</a><a class="pill alt" href="../playgama-catalog/">Explore full catalog</a></div>
 </div>
 <div class="terrain"></div>
 </section>
-<main class="container" id="play">
- <div id="worlds"></div>
- <div class="section-title"><div><div class="eyebrow">Independent browser play</div><h2>Choose a world</h2></div><p>Play directly. Share any game with a link.</p></div>
+<main class="container" id="worlds">
+ <div class="section-title"><div><div class="eyebrow">Independent browser play</div><h2>Choose a world</h2></div><p>Eleven self-hosted game entrypoints. No Playgama redirect.</p></div>
  <div class="games">
  <a class="game" href="../observer-world-en-v7/" aria-label="Play Twilight Island"><div class="art"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 01 · Fantasy / Creation</div><h3>Twilight Island</h3><p class="game-desc">A living island of construction, discovery and mysterious inhabitants.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
  <a class="game" href="../ashen-sumerek/" aria-label="Play Ashen Path"><div class="art ash"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 02 · Action / Survival</div><h3>Ashen Path</h3><p class="game-desc">Walk a broken world where danger waits beyond the glow.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
@@ -119,20 +115,8 @@ main{position:relative;z-index:5;padding:42px 0 94px}
  <a class="game" href="../games/twilight-isles/" aria-label="Play Twilight Isles"><div class="art underwater"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 08 · Adventure / Reference</div><h3>Twilight Isles</h3><p class="game-desc">Swim an endless archipelago, dodge the breaching whale and light every lighthouse on its own terms.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
  <a class="game" href="../games/archer-in-the-fog/" aria-label="Play Archer in the Fog"><div class="art veil"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 09 · Archery / Reference</div><h3>Archer in the Fog</h3><p class="game-desc">Hold a ruined tower above the clouds against a dragon that plunges and ambushes out of the blue fog.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
  <a class="game" href="../games/broken-city/" aria-label="Play Broken City"><div class="art worlds"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 10 · Platformer / Reference</div><h3>Broken City</h3><p class="game-desc">A folded comic-noir city hangs overhead: climb falling houses, stomp creepy toys and find out whose night this is.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ <a class="game" href="../games/broken-city-copy/" aria-label="Play Broken City Copy"><div class="art worlds"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 11 · 3D / Reference</div><h3>Broken City Copy</h3><p class="game-desc">Explore a folded nocturnal city with procedural architecture, volumetric effects and a dedicated asset gallery.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
  </div>
-<section class="platform-panel" id="connect" aria-labelledby="connect-heading">
- <div class="eyebrow">Build connected worlds</div><h2 id="connect-heading">Connect your AI</h2>
- <p>Connect a compatible MCP client to the META GAMES public endpoint. Explore our game library, reusable assets, engines and improvements. Game creation, publishing and automated bots require authenticated write access and are not yet available through the public read-only MCP.</p>
- <div class="endpoint"><code id="mcp-address">https://meta-games-mcp-production.onrender.com/meta-games/mcp</code><button type="button" id="copy-mcp">Copy MCP URL</button></div>
- <div class="feature-grid"><article><h3>Asset library &amp; engines</h3><p>Discover approved reusable game components and source materials through available MCP tools.</p></article><article><h3>Game improvement bot</h3><p>Automated fixes and shared upgrades — pending secure user access.</p></article><article><h3>Playthrough bot</h3><p>Real gameplay verification before public release — pending user-facing integration.</p></article></div>
- <p class="panel-note">Future creator accounts, game publishing, public profiles and notifications will require sign-in, moderation and explicit intellectual-property terms. No automatic rights transfer is implied by connecting an AI.</p>
-</section>
-<section class="platform-panel" id="earn" aria-labelledby="earn-heading">
- <div class="eyebrow">Creator opportunities</div><h2 id="earn-heading">Earn — coming later</h2>
- <p>Advertising is <strong>disabled across META GAMES</strong>. First we will complete the platform, improve and release every game, and reach <strong>100 verified daily active users</strong>. Advertising will require a separate approval after those milestones.</p>
- <div class="feature-grid"><article><h3>Pause-only advertising</h3><p>Planned: ads only at natural breaks, never during active gameplay.</p></article><article><h3>Optional rewards</h3><p>Planned: players can refuse rewarded ads without losing progress.</p></article><article><h3>One-hour discovery queue</h3><p>Planned: eligible monetized games can enter a one-hour featured placement queue. Not active.</p></article></div>
- <p class="panel-note">Popularity rankings, creator earnings invitations and new-game notifications will launch only with verified usage analytics and real accounts. No ads, earnings or placements are active now.</p>
-</section>
  <footer class="bottom"><span>© 2026 META GAMES · Independent browser worlds</span><span>All games launch under our GitHub Pages domain. <a href="https://github.com/mpaykin1/meta6">Source repository</a></span></footer>
 </main>
 <script>
@@ -182,28 +166,5 @@ function draw(t){frame=requestAnimationFrame(draw);if(document.hidden||t-last<33
 frame=requestAnimationFrame(draw);
 addEventListener('pagehide',()=>cancelAnimationFrame(frame),{once:true});
 })();
-</script>
-<script>
-document.getElementById('copy-mcp')?.addEventListener('click',async()=>{
- const button=document.getElementById('copy-mcp');
- try{await navigator.clipboard.writeText(document.getElementById('mcp-address').textContent);button.textContent='Copied';}
- catch{button.textContent='Select URL to copy';const range=document.createRange();range.selectNodeContents(document.getElementById('mcp-address'));getSelection().removeAllRanges();getSelection().addRange(range);}
-});
-</script>
-<script type="module">
-import { createWorldProgress } from './world-progress.mjs';
-const cards=[...document.querySelectorAll('a.game[href]')];
-try{
- const progress=createWorldProgress(localStorage);
- const seen=new Set(progress.visited());
- for(const card of cards){
-  const url=new URL(card.getAttribute('href'),location.href);
-  if(url.origin!==location.origin)continue;
-  const id=decodeURIComponent(url.pathname).replace(/\/+$/,'').split('/').filter(Boolean).join('-');
-  if(!id)continue;
-  if(seen.has(id))card.classList.add('world-visited');
-  card.addEventListener('click',()=>progress.enter(id),{passive:true});
- }
-}catch{ /* Restricted browsing must never block navigation. */ }
 </script>
 </body></html>

@@ -14,6 +14,21 @@ for(const id of fs.readdirSync(dir).sort()){
   if(!/^[a-z0-9-]+$/.test(id))throw Error('Invalid component ID '+id);
   const folder=path.join(dir,id);
   if(!fs.statSync(folder).isDirectory())throw Error('Unexpected component entry '+id);
+  // The owner-uploaded Pod i Nad library is adapted code, not a verbatim
+  // original from meta6. Keep it outside the immutable-source passport index.
+  if(id==='pod-i-nad') {
+    const manifest=JSON.parse(fs.readFileSync(path.join(folder,'library.json'),'utf8'));
+    const source='reference/sumerek-golden/pod-i-nad-68b2ecd3.html';
+    if(manifest.id!==id || manifest.registry!=='derived-owner-reference' ||
+       manifest.source?.repository!=='mpaykin1/meta6-lab' ||
+       manifest.source.path!==source ||
+       manifest.catalog!=='shared/asset-library/catalog.json' ||
+       !/^[a-f0-9]{64}$/.test(manifest.source.sha256))
+      throw Error('Invalid derived component provenance '+id);
+    const digest=crypto.createHash('sha256').update(fs.readFileSync(path.join(root,source))).digest('hex');
+    if(digest!==manifest.source.sha256)throw Error('Owner reference hash changed: '+id);
+    continue;
+  }
   const meta=JSON.parse(fs.readFileSync(path.join(folder,'component.json'),'utf8'));
   if(meta.id!==id || !/^[a-zA-Z0-9_.-]+\.js$/.test(meta.entry) ||
      meta.source?.repository!=='mpaykin1/meta6' || !/^[a-f0-9]{40}$/.test(meta.source.commit) ||

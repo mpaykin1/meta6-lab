@@ -1,9 +1,12 @@
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {chromium} from 'playwright';
 import {serve} from '../meta-bot/server.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
+const manifest=JSON.parse(readFileSync(path.join(root,'shared/index.json'),'utf8'));
+const expectedIds=manifest.components.map(item=>item.id).sort();
 const srv=await serve(root);
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 try{
@@ -16,15 +19,19 @@ try{
    const weather=await MetaShared.use('three-worlds-weather');
    const audio=await MetaShared.use('observer-audio');
    const combat=await MetaShared.use('observer-combat');
+   const island=await MetaShared.use('three-worlds-island-weather');
    return {ids:MetaShared.available,all:modules.length,
      rain:weather.rainEventAt('island',false,24),
      dry:weather.rainEventAt('island',false,4),
      submerged:weather.worldWeatherAt('water',true,24),
+     island:typeof island.createIslandWeatherCatalog,
      audio:typeof audio.create,
      combat:typeof combat.create,
      repeated:weather===await MetaShared.use('three-worlds-weather')};
  });
- assert.equal(outcome.all,7);
+ assert.deepEqual([...outcome.ids].sort(),expectedIds);
+ assert.equal(outcome.all,expectedIds.length);
+ assert.equal(outcome.island,'function');
  assert.equal(outcome.rain,true);
  assert.equal(outcome.dry,false);
  assert.equal(outcome.submerged,'sea_mist');
@@ -32,5 +39,5 @@ try{
  assert.equal(outcome.combat,'function');
  assert.equal(outcome.repeated,true);
  assert.deepEqual(errors,[]);
- console.log('SHARED_SEVEN_BROWSER_PASS',JSON.stringify(outcome));
+ console.log('SHARED_BROWSER_PASS',JSON.stringify(outcome));
 }finally{await browser.close();srv.close()}

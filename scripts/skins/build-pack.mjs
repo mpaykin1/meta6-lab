@@ -19,6 +19,7 @@ function kindOf(n) {
  if(/шестерн/.test(n))return 'gear';
  if(/провод/.test(n))return 'cable';
  if(/огонёк|точка/.test(n))return 'orb';
+ if(/нагрудник/.test(n))return 'plate';
  if(/щел/.test(n))return 'slit';
  if(/колба/.test(n))return 'core';
  if(/поршн|механик|труб/.test(n))return 'piston';
@@ -47,10 +48,11 @@ function pose(e,k,index,variant=0){
    if(k==='plate'){size=[.64,.74];offset=[0,.06,-.04];dims=[.62,.77,.48];}
    else if(k==='core'){size=[.18,.30];offset=[0,.03,-.36];}
    else if(k==='slit'){size=[.26,.22];offset=[-.14,.17,-.365];}
-   else if(k==='gear'){size=[.26,.26];offset=[.15,-.20,-.35];}
+   else if(k==='gear'){size=[.26,.26];offset=[.15,.16,-.35];}
    else if(k==='piston'){size=[.34,.32];offset=[.02,.03,-.34];}
    else if(k==='bolt'){size=[.07,.07];offset=[(e.place%2?-.16:.16),(e.place<10?.18:-.2),.32];}
-   else {size=[.42,.27];offset=[0,-.24,-.35];}
+   else if(e.row===3&&e.place===1){size=[.32,.30];offset=[-.11,-.2,-.37];}
+   else {size=[.42,.27];offset=[.10,-.26,-.37];}
  }else if(bone==='armL'||bone==='armR'){
    const sign=bone==='armL'?-1:1;
    if(e.row===3){size=[.31,.22];offset=[0,-.02,-.12];}
@@ -177,6 +179,20 @@ async function main(){
     for(let v=0;v<3;v++)entries.push(addPart(e,destination,i+1+v,v));
    }else fail('нет вырезанной картинки: '+e.name);
   }
+  // 3D броня обязана быть непрозрачной: альфа исходных PNG содержит сквозные
+  // выломы. На 3D-меше она делала всё тело/голову невидимыми.
+  // Сохраняем художественную вырезку отдельной передней накладкой, а объём
+  // покрываем плотной текстурой, полученной из того же авторского листа.
+  for(const solid of [...entries].filter(p=>p.layer==='3d')){
+    const original=solid.file;
+    const thickness=solid.dims?.[2]||.22;
+    solid.file='textures/rust.png';
+    solid.material='rust';
+    entries.push({...solid,id:solid.id+'-front-art',kind:solid.kind,
+      file:original,layer:'2.5d',depth:1,primitive:undefined,dims:undefined,
+      offset:[solid.offset[0],solid.offset[1],solid.offset[2]-thickness/2-.014],
+      material:'rust-transparent',anim:[]});
+  }
   // На левой ноге только одна авторская деталь — используем ту же броню
   // с обратной стороны, не придумывая и не рисуя другой элемент.
   const left=entries.find(p=>p.bone==='legL'&&p.layer==='3d');
@@ -216,7 +232,11 @@ async function main(){
       if(fs.existsSync(image))fs.copyFileSync(image,path.join(tmp,'stages',n+'.png'));
     }
   }
-  const materials={'metal':{rough:.88,metal:.32},'rust-transparent':{rough:.94,metal:.24},'glow':{emissive:meta.palette.at(-2),blend:'additive'}};
+  const warm=meta.palette.filter(c=>{const n=parseInt(c.slice(1),16),r=n>>16,g=(n>>8)&255,b=n&255;return r>g&&g>b&&g>120;})
+    .sort((a,b)=>parseInt(b.slice(1),16)-parseInt(a.slice(1),16))[0]||meta.palette.at(-2);
+  const materials={'metal':{rough:.88,metal:.32},'rust':{rough:.92,metal:.24,emissive:'#201009'},
+   'rust-transparent':{rough:.94,metal:.24,emissive:'#201009'},
+   'glow':{emissive:warm,blend:'additive'}};
   const outputHashes=Object.fromEntries(['parts','sheets','textures'].flatMap(sub=>
     fs.readdirSync(path.join(tmp,sub)).filter(f=>f.endsWith('.png')).map(f=>[sub+'/'+f,sha(path.join(tmp,sub,f))])));
   const manifest={

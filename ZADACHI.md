@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Доводчик: PR #124, лор Древа миров | МГЛ | чат ChatGPT | `lab/seed-of-last-world-canon` | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) | 2026-11-10 05:59 | — |
 | НУЖЕН CLAUDE: [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42457034492), перенос в актуальные PR | Доводчик: PR #122 — адаптеры бота | МГЛ | чат ChatGPT | `lab/meta-bot-real-game-hooks-1108` | [#122](https://github.com/mpaykin1/meta6-lab/pull/122) | 2026-11-10 05:57 | — |
 | НУЖЕН CLAUDE: [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42640999824), перенос в актуальные PR | Доводчик: PR #116 — Broken City | МГЛ | чат ChatGPT | `lab/cycle1-broken-city-bot-strategy-1108` | [#116](https://github.com/mpaykin1/meta6-lab/pull/116) | 2026-11-10 05:57 | — |
 | НУЖЕН CLAUDE: перенести недостающий index.html в [#200](https://github.com/mpaykin1/meta6-lab/pull/200) после [красного бота](https://github.com/mpaykin1/meta6-lab/actions/runs/42544601867) | Доводчик: PR #113, сравнение Broken City и CI | МГЛ | чат ChatGPT | `lab/cycle2-broken-city-bot-config-20261107` | [#113](https://github.com/mpaykin1/meta6-lab/pull/113) | 2026-11-10 05:56 | — |

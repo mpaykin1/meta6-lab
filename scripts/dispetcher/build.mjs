@@ -1,8 +1,7 @@
 import fs from 'node:fs/promises';
-const repo=process.env.GITHUB_REPOSITORY||'mpaykin1/meta6-lab';
-const token=process.env.GITHUB_TOKEN;
+const {GITHUB_REPOSITORY: repo='mpaykin1/meta6-lab',GITHUB_TOKEN: token}=process.env;
 const root='https://api.github.com/repos/'+repo;
-const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-dispatcher',...(token?{'Authorization':'Bearer '+token}:{})};
+const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-dispatcher','Authorization':'Bearer '+token};
 async function api(path){const r=await fetch(root+path,{headers});if(!r.ok)throw Error(path+': '+r.status);return r.json();}
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));
@@ -33,7 +32,7 @@ export function render(cards,claude=[],previous='',now=Date.now()){
 export function assertNotEmpty(tasksMarkdown,cards){
  if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
 }
-async function main(){
+export async function main(){
  const tasks=parseTasks(await fs.readFile('ZADACHI.md','utf8'));
  const finish=await fs.readFile('rules/09-platforma/FINISH.md','utf8');
  const finishIds=[...finish.matchAll(/^\|\s*([MBLP]\d+)\s*\|[^|]*\|[^|]*\|\s*НЕТ\b/gm)].map(m=>m[1]);
@@ -66,4 +65,3 @@ async function main(){
  await fs.writeFile('DISPETCHER.md',output);
  console.log(output.slice(0,250));
 }
-if(process.argv[1]&&import.meta.url===new URL('file://'+process.argv[1]).href)main().catch(e=>{console.error(e);process.exitCode=1});

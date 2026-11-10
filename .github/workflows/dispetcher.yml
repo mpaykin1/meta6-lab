@@ -9,10 +9,12 @@ on:
 permissions:
   contents: write
   checks: read
+  statuses: read
   pull-requests: read
 jobs:
   dispatch:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     concurrency:
       group: mg-dispatcher
       cancel-in-progress: false
@@ -26,6 +28,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit queue
+        if: github.ref == 'refs/heads/main'
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com

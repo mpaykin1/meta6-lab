@@ -2,14 +2,6 @@
 
 Итог: зависло 20 · конфликт 6 · красные проверки 2 · нужен Claude 16
 
-### PR #203
-- PR: https://github.com/mpaykin1/meta6-lab/pull/203
-- Ветка: `lab/skin-rusty-robot`
-- SHA: `edf413f27244552cd36889fa1b555a9a062a9b56` · последний коммит: 2026-11-09T19:38:00Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-ремонтник 2026-11-10T18:50:00Z
-
 ### PR #204
 - PR: https://github.com/mpaykin1/meta6-lab/pull/204
 - Ветка: `lab/rules-bot-trainer`
@@ -195,6 +187,7 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
+- [#203](https://github.com/mpaykin1/meta6-lab/pull/203) Конфликт с main; PR изменяет защищённые workflows skin-live.yml и skin-pack.yml, самостоятельное слияние запрещено.
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
 - [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния

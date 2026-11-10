@@ -4,10 +4,12 @@ import crypto from 'node:crypto';
 import {createServer} from 'node:http';
 import {fileURLToPath} from 'node:url';
 import {chromium} from 'playwright';
-import {rangeBytes,ROOT} from './machine.mjs';
+import {rangeBytes,ROOT as DEFAULT_ROOT} from './machine.mjs';
 import {verifyCatalog} from './verify-catalog.mjs';
 
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const rootArg=process.argv.indexOf('--root');
+const ROOT=rootArg<0?DEFAULT_ROOT:path.resolve(process.argv[rootArg+1]);
 const filename=path.join(ROOT,'shared/library/catalog-solutions.json');
 const data=JSON.parse(fs.readFileSync(filename,'utf8'));
 const storedResults=JSON.stringify(data.solutions.map(s=>[s.id,s.load_ok,s.load_error,s.load_evidence]));

@@ -8,7 +8,7 @@
   "status": "owner-designated-reference",
   "source": {
     "repository": "mpaykin1/meta6-lab",
-    "path": "games/king-of-ash/index.html",
+    "path": "reference/king-of-ash/index.html",
     "git_blob_sha": "1a1f6d32310ec84d8c542262a74e4ed71ee60f59",
     "sha256": "b7974de741daa0c4add652bcc86ab2116ef20a8139309b7f03d3a3a3ce14fc6f",
     "size_bytes": 137116,
@@ -16,8 +16,8 @@
     "preserved_unchanged": true
   },
   "viewer": {
-    "path": "games/king-of-ash/index.html",
-    "url": "https://mpaykin1.github.io/meta6-lab/games/king-of-ash/",
+    "path": "reference/king-of-ash/index.html",
+    "url": "https://mpaykin1.github.io/meta6-lab/reference/king-of-ash/",
     "availability": "after-merge-to-main",
     "runtime": "Three.js 0.160.0 via jsdelivr CDN; Google Fonts via googleapis; requires network",
     "entrypoint": "index.html"

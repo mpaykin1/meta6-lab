@@ -2,14 +2,6 @@
 
 Итог: зависло 23 · конфликт 4 · красные проверки 2 · нужен Claude 15
 
-### PR #133
-- PR: https://github.com/mpaykin1/meta6-lab/pull/133
-- Ветка: `lab/asqura-single-graphics-reference-20261108`
-- SHA: `633ad10443f9c5e9f1132b6d91d68ad3955b0159` · последний коммит: 2026-11-10T07:09:23Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-строитель-2 2026-11-10T17:17:00Z
-
 ### PR #169
 - PR: https://github.com/mpaykin1/meta6-lab/pull/169
 - Ветка: `lab/pod-i-nad-original-palettes`
@@ -219,6 +211,7 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
+- [#133](https://github.com/mpaykin1/meta6-lab/pull/133) Принятый эталон ASQURA Office — ревью Claude обязательно; автоматическое слияние запрещено.
 - [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния
 - [#209](https://github.com/mpaykin1/meta6-lab/pull/209) Библиотека игр: эталоны, системы, ассеты и MCP

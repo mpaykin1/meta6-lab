@@ -114,8 +114,8 @@ export function resolveMergeability(fetchOne, pause = ms => execFileSync('sleep'
 }
 
 export function collect(rows, options = {}) {
-  const repo = options.repo || process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab';
-  const mgRepo = options.mgRepo || process.env.MG_REPOSITORY || 'mpaykin1/meta6';
+  const repo = options.repo || 'mpaykin1/meta6-lab';
+  const mgRepo = options.mgRepo || 'mpaykin1/meta6';
   const api = options.api || (p => {
     try {
       return JSON.parse(execFileSync('gh', ['api', p], {maxBuffer: 64e6}).toString());

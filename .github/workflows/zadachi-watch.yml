@@ -1,13 +1,17 @@
 name: ZADACHI watch
 # Файл Claude, 10.11.2026. Сторож без ИИ: ведёт ZADACHI.md — таблицу всех задач ChatGPT по МГ и МГЛ.
 # Статус берётся из GitHub (PR слит / закрыт / время последнего коммита), а не со слов агента.
-# ChatGPT этот файл и scripts/zadachi/ не меняет.
+# Изменения сторожа разрешены владельцем только в этой задаче через PR.
 on:
   schedule:
     - cron: '11,41 * * * *'
   push:
     branches: [main]
     paths: ['ZADACHI.md']
+  pull_request:
+    paths:
+      - 'scripts/zadachi/**'
+      - '.github/workflows/zadachi-watch.yml'
   pull_request_target:
     types: [opened, closed]
   workflow_dispatch:
@@ -18,7 +22,20 @@ concurrency:
   group: zadachi-watch
   cancel-in-progress: false
 jobs:
+  verify:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: ZADACHI regression tests and mutation traps
+        run: node scripts/zadachi/verify.mjs && node scripts/zadachi/mutate.mjs
   watch:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:

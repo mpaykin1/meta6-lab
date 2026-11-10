@@ -18,6 +18,9 @@ on:
       - 'scripts/library/mutate-verify-load.mjs'
       - 'scripts/library/mutate-catalog.mjs'
       - 'shared/library/catalog-solutions.json'
+      - 'BIBLIOTEKA.md'
+      - 'scripts/library/verify-biblioteka.mjs'
+      - 'scripts/library/mutate-biblioteka.mjs'
       - '.github/workflows/ai-solutions-catalog.yml'
   workflow_dispatch:
 concurrency:
@@ -57,6 +60,10 @@ jobs:
         run: node scripts/library/catalog-cli.mjs
       - name: Verify catalog
         run: node scripts/library/verify-catalog.mjs
+      - name: Reject stale per-game BIBLIOTEKA counts and run four mutations
+        run: |
+          node scripts/library/verify-biblioteka.mjs
+          node scripts/library/mutate-biblioteka.mjs
       - name: Show system counts by game
         run: node -e "const c=require('./shared/library/catalog-solutions.json');for(const g of new Set(c.solutions.map(s=>s.game)))console.log(g,c.solutions.filter(s=>s.game===g).length)"
       - name: Install Chromium for real browser verification

@@ -104,7 +104,19 @@ function checkStrategy(source) {
   const dead = source.match(/if \(!state\.alive\)\s*\{([\s\S]*?)^\s*\}/m)?.[1];
   assert.ok(dead, 'strategy must detect actual death');
   assert.match(dead, /await ctx\.key\('Enter', 120\)/, 'strategy must use real visible restart input');
-  assert.match(source, /await ctx\.jump\(\)/, 'strategy must jump across real terraces');
+  // Classic needs an actual held jump (at least 300ms) while walking; Isles uses ctx.jump().
+  // A short tap loses jump height in the authored game and must not satisfy this trap.
+  const held = source.match(/presses\.push\(ctx\.key\('Space',\s*(\d+)\)\)/);
+  const direct = /await ctx\.jump\(\)/.test(source);
+  assert.ok(direct || (held && Number(held[1]) >= 300),
+    'strategy must perform a real high jump across terraces');
+  if (held) {
+    assert.match(source, /const presses = \[ctx\.walkToGoal\(\d+\), ctx\.key\('KeyJ',\s*\d+\)\]/,
+      'held jump must be combined with real movement and attack input');
+    assert.match(source, /await Promise\.all\(presses\)/, 'movement and held jump must run together');
+    assert.doesNotMatch(source, /if\s*\(false\)\s*presses\.push/,
+      'fake disabled held jump cannot satisfy the trap');
+  }
   assert.doesNotMatch(source, /__isle|page\.evaluate|forceWin|teleport\(/, 'strategy cannot cheat');
 }
 const mutate = (source, label, a, b, checker) => {
@@ -139,5 +151,11 @@ for (const game of games) {
     'hero: { x: 0, y: 0 }', checkRoute);
   mutate(strategy, game + '/no-restart', "      await ctx.key('Enter', 120);\n      await ctx.wait(250);",
     "      await ctx.wait(120);\n      await ctx.wait(250);", checkStrategy);
+  if (strategy.includes("presses.push(ctx.key('Space', 340))")) {
+    mutate(strategy, game + '/short-jump', "presses.push(ctx.key('Space', 340))",
+      "presses.push(ctx.key('Space', 20))", checkStrategy);
+    mutate(strategy, game + '/deceptive-disabled-jump', "presses.push(ctx.key('Space', 340))",
+      "if (false) presses.push(ctx.key('Space', 340))", checkStrategy);
+  }
 }
 console.log('MUTATE_BOT_RECOVERY_PASS: navigation, menu, death and FPS traps caught');

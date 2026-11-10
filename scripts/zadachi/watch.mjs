@@ -128,7 +128,7 @@ export function apply(text,data,now) {
 
 
 async function collect(rows) {
- const repo=process.env.GITHUB_REPOSITORY||'mpaykin1/meta6-lab',mgRepo='mpaykin1/meta6';
+ const repo='mpaykin1/meta6-lab',mgRepo='mpaykin1/meta6';
  const {execFile}=await import('node:child_process');
  const {promisify}=await import('node:util');
  const {setTimeout:delay}=await import('node:timers/promises');

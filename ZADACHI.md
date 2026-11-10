@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Закрыть устаревшие PR #2, #4, #5, #6 с красными проверками | МГЛ | чат ChatGPT | — | [#2](https://github.com/mpaykin1/meta6-lab/pull/2) | 2026-11-10 06:56 | — |
 | взято | PR #189: очистить эталон Бесконечные долины для безопасного слияния | МГЛ | чат ChatGPT | lab/endless-valleys-golden-knight-reference-1109 | [#189](https://github.com/mpaykin1/meta6-lab/pull/189) | 2026-11-10 06:53 | — |
 | взято | PR #207: чистый эталон Король Пепла и сохранение авторских файлов | МГЛ | чат ChatGPT | lab/king-of-ash-original-upload-1109 | [#207](https://github.com/mpaykin1/meta6-lab/pull/207) | 2026-11-10 06:52 | — |
 | взято | PR #202: чистый эталон Лучник в тумане без генератора библиотеки | МГЛ | чат ChatGPT | lab/archer-in-fog-reference-20261109 | [#202](https://github.com/mpaykin1/meta6-lab/pull/202) | 2026-11-10 06:51 | — |

@@ -19,10 +19,3 @@ export function verify(status, expectedSha, expectedFinish) {
  assert.ok(lines.slice(j+1).every(s=>s.startsWith('- ')) && lines.slice(i+1,j).every(s=>s.startsWith('- ')), 'extra field');
  return true;
 }
-if (process.argv[1] && import.meta.url === new URL('file://'+process.argv[1]).href) {
- const rev=process.argv[2]||'HEAD';
- const sha=contentRevision(rev);
- const count=finishCount(fs.readFileSync('rules/09-platforma/FINISH.md','utf8'));
- verify(fs.readFileSync('STATUS.md','utf8'),sha,count);
- console.log('STATUS_OK '+sha);
-}

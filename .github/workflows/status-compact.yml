@@ -55,9 +55,10 @@ jobs:
       - name: Validate status against the current main
         run: |
           git fetch origin main
-          node scripts/status/verify.mjs "$(git merge-base HEAD origin/main)"
+          node scripts/status/verify-cli.mjs "$(git merge-base HEAD origin/main)"
       - name: JavaScript syntax for summary pipeline
         run: |
+          node --check scripts/status/verify-cli.mjs
           node --check scripts/status/generate.mjs
           node --check scripts/status/check-summary.mjs
           node --check scripts/status/write-run-summary.mjs
@@ -85,9 +86,9 @@ jobs:
           for attempt in 1 2; do
             git fetch origin main
             git reset --hard origin/main
-            if [ -n "$SOURCE_RUN_ID" ]; then node scripts/status/check-summary.mjs; fi
-            node scripts/status/generate.mjs
-            node scripts/status/verify.mjs HEAD
+            if [ -n "$SOURCE_RUN_ID" ]; then node scripts/status/check-summary.mjs "$GITHUB_REPOSITORY" "$SOURCE_RUN_ID" "$SOURCE_RUN_CONCLUSION" "$SOURCE_RUN_NAME" "$GITHUB_STEP_SUMMARY"; fi
+            node scripts/status/generate.mjs "$GITHUB_REPOSITORY" "$SOURCE_RUN_ID" "$SOURCE_RUN_CONCLUSION"
+            node scripts/status/verify-cli.mjs HEAD
             git add STATUS.md reports/LAST_RUN.md
             if git diff --cached --quiet; then exit 0; fi
             git commit -m 'chore(status): refresh current source and checks'

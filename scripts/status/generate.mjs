@@ -1,11 +1,12 @@
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {contentRevision,finishCount,git} from './revision.mjs';
-const repo=process.env.GITHUB_REPOSITORY||'mpaykin1/meta6-lab';
+const [repo,sourceId,sourceConclusion]=process.argv.slice(2);
+if(!repo)throw Error('Missing repository argument');
 const run=(...a)=>execFileSync('gh',a,{encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();
 function check() {
- if (process.env.SOURCE_RUN_ID && process.env.SOURCE_RUN_CONCLUSION) {
-  return {id:process.env.SOURCE_RUN_ID,conclusion:process.env.SOURCE_RUN_CONCLUSION};
+ if (sourceId && sourceConclusion) {
+  return {id:sourceId,conclusion:sourceConclusion};
  }
  try {
   const data=JSON.parse(run('api','repos/'+repo+'/actions/runs?per_page=50&status=completed'));

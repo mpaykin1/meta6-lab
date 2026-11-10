@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Доводчик: чистый PR #226 вместо защищённой истории #124 | МГЛ | чат ChatGPT | `lab/lore-atlas-clean-guard` | [#226](https://github.com/mpaykin1/meta6-lab/pull/226) | 2026-11-10 08:50 | — |
 | взято | Доводка PR #124, #190, #200 и очередь DOVODKA | МГЛ | чат ChatGPT | `lab/bot-batch-1` | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | 2026-11-10 08:48 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Бот «СВОДКА ДЛЯ CLAUDE» | МГЛ | чат ChatGPT | `lab/status-dlya-claude` | [#216](https://github.com/mpaykin1/meta6-lab/pull/216) | 2026-11-10 04:44 | 2026-11-10 06:20 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Fix: Veil Shared CI проверяет существующую игру | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/fix-veil-shared-workflow-target` | [#217](https://github.com/mpaykin1/meta6-lab/pull/217) | 2026-11-10 04:57 | 2026-11-10 04:57 |

@@ -1,0 +1,85 @@
+{
+  "schema": "meta-games-cc0-imports/v1",
+  "owner_approved": "2026-11-10",
+  "usage": "Commercial games; keep per-pack provenance. No third-party claim of authorship.",
+  "packs": [
+    {
+      "id": "hero-knight",
+      "author": "LuizMelo",
+      "title": "Hero Knight",
+      "original": "https://luizmelo.itch.io/hero-knight",
+      "license": "CC0-1.0",
+      "status": "imported",
+      "path": "hero-knight/Hero Knight.zip",
+      "bytes": 45742,
+      "mirror": {
+        "repo": "Snikrat/noct-crimson-rift",
+        "commit": "8b87b0c314a99483dcf2a48f77a9a72c4d30b5dc",
+        "path": "Hero Knight.zip",
+        "blob_sha": "12de4d8d8b1f48012cc2fcccbab5fe8e25119326"
+      }
+    },
+    {
+      "id": "animated-monsters",
+      "author": "Stealthix",
+      "title": "Animated Monsters",
+      "original": "https://stealthix.itch.io/animated-monsters",
+      "license": "CC0-1.0",
+      "status": "imported",
+      "path": "animated-monsters/monsters.zip",
+      "bytes": 40883,
+      "mirror": {
+        "repo": "FightaHackathon/aetherbound",
+        "commit": "b7b53d9e5e6905869d8892404e92553975c28b78",
+        "path": "assets/vendor-audition/stealthix-Animated-Monsters/monsters.zip",
+        "blob_sha": "3017d61a19079ac645517e686774e50005d1b9f4"
+      }
+    },
+    {
+      "id": "horror-fantasy-assets",
+      "author": "Stealthix",
+      "title": "Horror Fantasy Assets",
+      "original": "https://stealthix.itch.io/horror-interior-assets",
+      "license": "CC0-1.0",
+      "status": "imported",
+      "path": "horror-fantasy-assets/spritesheet.png",
+      "bytes": 6570,
+      "mirror": {
+        "repo": "apushist/The_Train",
+        "commit": "98021cb45d085aef41da06174c433ec0a7126dab",
+        "path": "The_Train/Assets/Textures/ObjectsTextures/Deco/spritesheet.png",
+        "blob_sha": "378206b7746c29f6aa13a86853696d6501282bdb"
+      }
+    },
+    {
+      "id": "tiny-overworld",
+      "author": "ansimuz",
+      "title": "Tiny Overworld",
+      "original": "https://ansimuz.itch.io/tiny-overworld",
+      "license": "CC0 (author-stated Freedom License)",
+      "commercial_use": true,
+      "status": "not_imported",
+      "expected_filename": "Overworld Files.zip",
+      "reason": "Original download is behind itch.io interactive download page; no verified public binary mirror was located.",
+      "author_note": "Do not redistribute under a different license or sell assets individually."
+    },
+    {
+      "id": "interface-sounds",
+      "author": "Kenney",
+      "title": "Interface Sounds",
+      "original": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "status": "imported",
+      "path": "interface-sounds/Audio/",
+      "asset_count": 100,
+      "format": "OGG",
+      "license_file": "interface-sounds/LICENSE.txt",
+      "mirror": {
+        "repo": "GeorgeQLe/assets-sfx-ui",
+        "commit": "760afd035e8fc3cd7fb5bc58d49a967649875e3e",
+        "path": "assets/kenney/interface-sounds/Audio/"
+      }
+    }
+  ],
+  "license_reference": "https://creativecommons.org/publicdomain/zero/1.0/"
+}

@@ -1,5 +1,5 @@
 # DOVODKA — журнал доводчика
-СЕЙЧАС ДЕЛАЮ: —
+СЕЙЧАС ДЕЛАЮ: [МГЛ PR #122](https://github.com/mpaykin1/meta6-lab/pull/122) · ветка `lab/meta-bot-real-game-hooks-1108` · шаг оценить красный CI и перекрытие · с 2026-11-10 05:57 UTC
 ## ОСТАЛОСЬ (сверху самое срочное)
 - [МГЛ #122](https://github.com/mpaykin1/meta6-lab/pull/122) — 🛑 завис: feat(meta-bot): honest gameplay adapters for Broken City and three island games
 - [МГЛ #124](https://github.com/mpaykin1/meta6-lab/pull/124) — 🛑 завис: ЛОР: Зерно последнего мира — эталон и карта мультивселенной META GAMES

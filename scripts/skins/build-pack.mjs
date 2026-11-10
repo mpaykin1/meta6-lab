@@ -186,7 +186,8 @@ async function main(){
   for(const solid of [...entries].filter(p=>p.layer==='3d')){
     const original=solid.file;
     const thickness=solid.dims?.[2]||.22;
-    solid.file='textures/rust.png';
+    // Непрозрачный объём — лишь подложка; рисунок всегда остаётся отдельным PNG.
+    solid.file=undefined;
     solid.material='rust';
     entries.push({...solid,id:solid.id+'-front-art',kind:solid.kind,
       file:original,layer:'2.5d',depth:1,primitive:undefined,dims:undefined,
@@ -235,8 +236,8 @@ async function main(){
   const warm=meta.palette.filter(c=>{const n=parseInt(c.slice(1),16),r=n>>16,g=(n>>8)&255,b=n&255;return r>g&&g>b&&g>120;})
     .sort((a,b)=>parseInt(b.slice(1),16)-parseInt(a.slice(1),16))[0]||meta.palette.at(-2);
   const rustTone=meta.palette.find(c=>{const n=parseInt(c.slice(1),16),r=n>>16,g=(n>>8)&255,b=n&255;return r>=150&&r<210&&g>=75&&g<155&&r>g*1.6&&g>b;})||meta.palette[5];
-  const materials={'metal':{rough:.88,metal:.32},'rust':{rough:.92,metal:.24,emissive:rustTone},
-   'rust-transparent':{rough:.94,metal:.24,emissive:rustTone},
+  const materials={'metal':{rough:.88,metal:.32},'rust':{rough:.92,metal:.24,color:rustTone},
+   'rust-transparent':{rough:.94,metal:.24},
    'glow':{emissive:warm,blend:'additive'}};
   const outputHashes=Object.fromEntries(['parts','sheets','textures'].flatMap(sub=>
     fs.readdirSync(path.join(tmp,sub)).filter(f=>f.endsWith('.png')).map(f=>[sub+'/'+f,sha(path.join(tmp,sub,f))])));

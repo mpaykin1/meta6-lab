@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Разрешить конфликт PR #203 с main | МГЛ | MG-строитель-1 | lab/skin-rusty-robot | https://github.com/mpaykin1/meta6-lab/pull/203 | 2026-11-10 22:05 | — |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | PR #190: разрешить конфликт с main и повторить CI | МГЛ | MG-строитель-1 | `lab/bot-batch-1` | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | 2026-11-10 16:08 | 2026-11-10 14:49 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | PR #190: исправить красные проверки changed-games и bot | МГЛ | MG-ремонтник | `lab/bot-batch-1` | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | 2026-11-10 14:48 | 2026-11-10 14:49 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | МГЛ | чат ChatGPT | `lab/bot-batch-1` | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | 2026-11-09 15:15 | 2026-11-10 14:49 |

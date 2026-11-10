@@ -45,6 +45,9 @@ jobs:
       - name: Build GitHub facts and compact summary
         env:
           GH_TOKEN: ${{ github.token }}
+          STATUS_TOKEN: ${{ github.token }}
+          STATUS_REPO: ${{ github.repository }}
+          STATUS_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: node scripts/status/build.mjs
       - name: Commit only changed summary files to main
         if: github.event_name != 'pull_request'

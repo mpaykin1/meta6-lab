@@ -210,6 +210,21 @@ async function main(){
         rotation:[0,side*Math.PI/2,0],depth:1,anim:[]});
     }
   }
+  // Детали механики (шестерни, провода, свет), не являющиеся бронёй,
+  // ранее исчезали при повороте: все они были только фронтальными плоскостями.
+  // Выводим те же исходные PNG на боковые стороны существующего объёма.
+  // Фронтальные экземпляры остаются байт-в-байт неизменными.
+  for(const part of [...entries].filter(p=>p.file&&p.layer==='2.5d'&&!/-front-art$|-side-left$|-side-right$/.test(p.id))){
+    const solid=entries.find(p=>p.layer==='3d'&&p.bone===part.bone);
+    const halfWidth=(solid?.dims?.[0]||.25)/2;
+    const x=solid?.offset?.[0]||0;
+    for(const sign of [-1,1]){
+      entries.push({...part,id:part.id+(sign<0?'-profile-left':'-profile-right'),
+        layer:'2.5d',size:[Math.max(.12,(solid?.dims?.[2]||.22)*.8),part.size[1]],
+        offset:[x+sign*(halfWidth+.018),part.offset[1],part.offset[2]+.14],
+        rotation:[0,sign*Math.PI/2,0],depth:1,anim:[]});
+    }
+  }
   // На левой ноге только одна авторская деталь — используем ту же броню
   // с обратной стороны, не придумывая и не рисуя другой элемент.
   const left=entries.find(p=>p.bone==='legL'&&p.layer==='3d');

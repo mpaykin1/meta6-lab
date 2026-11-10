@@ -25,7 +25,7 @@
 | #205 | код | `lab/owner-pult` | Пульт владельца — прогресс и свежие игры | open | |
 | #204 | код | `lab/rules-bot-trainer` | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | open | |
 | #203 | код | `lab/skin-rusty-robot` | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | open | |
-| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open | |
+| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open | в работе 2026-11-10 05:20 UTC (MG-строитель-2) |
 | #193 | код | `lab/kontur-k7-review` | K7: guard against repeated regression classes | open | |
 | #192 | код | `lab/mcp-connect` | M6: Connect — локальный MCP, конфиги клиентов и официальный  | open | |
 | #190 | код | `lab/bot-batch-1` | B2 (batch 1): read-only META BOT adapters for two Twilight g | open | |

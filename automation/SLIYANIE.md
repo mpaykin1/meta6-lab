@@ -66,7 +66,7 @@
 | #43 | код | `lab/veil-weather-original-20261107` | Use exact original Three Worlds weather in playable Veil Ter | open dirty | |
 | #16 | код | `lab/readiness-evidence-gates` | Evidence-gated META GAMES readiness: 10 elements, same-SHA C | open | |
 | #15 | код | `lab/shared-owner-approved-components` | Approved original-source library: token-efficient MCP search | closed | |
-| #9 | код | `lab/agent-game-candidate` | [BLOCKED — source policy] Procedural World_server candidate  | open | |
+| #9 | код | `lab/agent-game-candidate` | [BLOCKED — source policy] Procedural World_server candidate  | closed | закрыт stale: политика исходников, [PR #9](https://github.com/mpaykin1/meta6-lab/pull/9) |
 | #8 | код | `lab/bot-safe-autorepair` | Sandbox auto-repair: real META BOT replay, safe viewport fix | open | |
 | #7 | код | `lab/reuse-library-search` | Reusable code library: source search, browser index, local M | closed | |
 | #6 | код | `lab/world-doors-progress` | lab: persistent visited-world doors without touching accepte | open | |

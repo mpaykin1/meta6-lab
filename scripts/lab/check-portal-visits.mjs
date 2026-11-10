@@ -20,6 +20,7 @@ try{
  const stored=await page.evaluate(()=>localStorage.getItem('meta-games:worlds:v1'));
  assert.ok(stored?.includes('observer-world-en-v7'));
  await page.goBack({waitUntil:'domcontentloaded'});
+ await page.reload({waitUntil:'domcontentloaded'});
  await page.waitForFunction(()=>document.querySelector('a.game')?.classList.contains('world-visited'));
  assert.equal(await page.locator('a.game.world-visited').count(),1);
  assert.equal(errors.length,0,errors.join('\n'));

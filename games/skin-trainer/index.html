@@ -288,7 +288,8 @@ function loop(){requestAnimationFrame(loop);
   antenna.forEach((a,i)=>{a.rotation.x=Math.sin(t*3-i*.7)*.15+sw*.12*(i+1)*.5-sp*.03*(i+1);a.rotation.z=Math.sin(t*2.3-i*.9)*.1+lean*.3;});
 
   // камера: тяжёлая, запаздывающая
-  const dist=6+pitch*1.5;
+  // При активном скине герой должен занимать экран, иначе теряются детали.
+  const dist=(window.__SKIN?3.6:6)+pitch*(window.__SKIN?.7:1.5);
   const want=new THREE.Vector3(hero.position.x+Math.sin(yaw)*Math.cos(pitch)*dist,1.4+Math.sin(pitch)*dist,hero.position.z+Math.cos(yaw)*Math.cos(pitch)*dist);
   want.x+=Math.sin(t*.4)*.08;want.y+=Math.sin(t*.53)*.06;
   camPos.lerp(want,1-Math.exp(-dt*4));cam.position.copy(camPos);

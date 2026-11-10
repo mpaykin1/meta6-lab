@@ -49,12 +49,20 @@ try {
         const d = await pos(page);
         assert.ok(d.lane < c.lane - .02, id + ': KeyD did not move real rider right');
       } else {
-        await page.keyboard.down('w'); await page.waitForTimeout(2200); await page.keyboard.up('w');
-        const b = await pos(page);
-        await page.keyboard.down('d'); await page.waitForTimeout(1800); await page.keyboard.up('d');
-        const c = await pos(page);
-        const distance = Math.hypot(b.x - a.x, b.y - a.y) + Math.hypot(c.x - b.x, c.y - b.y);
-        assert.ok(distance > .12, id + ': hero did not actually move from keyboard (distance=' + distance.toFixed(3) + ')');
+        // A spawn can face a solid ruin wall. Probe independent real key inputs
+        // in both axes rather than misclassifying collision as broken controls.
+        // All distances come from the engine's live position, not bot progress.
+        let previous = a;
+        let distance = 0;
+        for (const key of ['w', 's', 'a', 'd']) {
+          await page.keyboard.down(key);
+          await page.waitForTimeout(1200);
+          await page.keyboard.up(key);
+          const current = await pos(page);
+          distance += Math.hypot(current.x - previous.x, current.y - previous.y);
+          previous = current;
+        }
+        assert.ok(distance > .12, id + ': hero did not actually move from keyboard in any direction (distance=' + distance.toFixed(3) + ')');
       }
       assert.equal(errors.length, 0, id + ': game exception: ' + errors.join(' | '));
       console.log('B2 real-input movement OK: ' + id);

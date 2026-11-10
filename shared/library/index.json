@@ -2,6 +2,20 @@
   "schema_version": 1,
   "copy_limit_bytes": 50000000,
   "copied_bytes": 49666370,
+  "excluded_games": [
+    {
+      "game": "broken-city-copy",
+      "duplicateOf": "broken-city",
+      "manifest": "shared/library/broken-city-copy.json",
+      "excluded": true
+    },
+    {
+      "game": "sumerki-i-pepel-2-copy",
+      "duplicateOf": "sumerki-i-pepel-2",
+      "manifest": "shared/library/sumerki-i-pepel-2-copy.json",
+      "excluded": true
+    }
+  ],
   "games": [
     {
       "game": "archer-in-the-fog",

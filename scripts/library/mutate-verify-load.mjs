@@ -13,15 +13,19 @@ const cli=fileURLToPath(new URL('./verify-load.mjs',import.meta.url));
 const scenarios=[
  ['forged-entrypoint',false,'nonexistentFog'],
  ['missing-required-helper',true,'weatherFog'],
- ['fake-canvas-effect',false,'weatherFog']
+ ['fake-canvas-effect',false,'weatherFog'],
+ ['transparent-draw-deception',false,'weatherFog',true]
 ];
-for(const [scenario,missingDependency,entrypoint] of scenarios){
+for(const [scenario,missingDependency,entrypoint,transparentDraw] of scenarios){
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'meta-l3-mutation-'));
  try{
   const sourcePath=path.join(root,'games/demo/game.js');
   fs.mkdirSync(path.dirname(sourcePath),{recursive:true});
   const lines=['function weatherFog(){'];
   if(missingDependency)lines.push('missingDependency();');
+  if(transparentDraw)lines.push('const ctx=document.getElementById("game").getContext("2d");',
+   'ctx.fillStyle="rgba(0,0,0,0)";',
+   'ctx.fillRect(0,0,640,360);');
   while(lines.length<28)lines.push('const value'+lines.length+'='+lines.length+';');
   lines.push('return 7;','}');
   const source=lines.join('\n')+'\n';
@@ -30,7 +34,7 @@ for(const [scenario,missingDependency,entrypoint] of scenarios){
    lines:[{source_path:'games/demo/game.js',start:1,end:lines.length}],
    sha256:sha(rangeBytes(source,1,lines.length)),depends_on:[],
    how_to_connect:{entrypoint},load_ok:true,load_error:null,
-   load_evidence:{chromium_run:'forged-but-plausible',sha256:sha(source)}};
+   load_evidence:{chromium_run:'chromium-original-source-load-v1',sha256:sha(source)}};
   const dir=path.join(root,'shared/library');
   fs.mkdirSync(dir,{recursive:true});
   fs.writeFileSync(path.join(dir,'index.json'),JSON.stringify({entries:[]}));

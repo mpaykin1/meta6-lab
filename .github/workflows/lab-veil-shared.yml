@@ -1,7 +1,7 @@
 name: LAB Veil Shared Narrative Gameplay
 on:
   pull_request:
-    paths: ['games/veil-terraces-shared/**', '.github/workflows/lab-veil-shared.yml']
+    paths: ['games/veil-terraces/**', '.github/workflows/lab-veil-shared.yml']
 permissions:
   contents: read
 jobs:
@@ -16,7 +16,9 @@ jobs:
       - run: |
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
+      - name: Reject stale game targets
+        run: node scripts/lab/verify-veil-workflow-target.mjs
       - name: Play all six levels twice with real player controls
         env:
           META_BOT_FPS_FILE: .meta-bot-cache/fps.json
-        run: node scripts/meta-bot/run.mjs games/veil-terraces-shared
+        run: node scripts/meta-bot/run.mjs games/veil-terraces

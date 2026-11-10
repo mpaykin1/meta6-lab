@@ -10,14 +10,6 @@
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: MG-строитель-2 2026-11-10T18:19:15Z
 
-### PR #205
-- PR: https://github.com/mpaykin1/meta6-lab/pull/205
-- Ветка: `lab/owner-pult`
-- SHA: `16715714f06e0071871dc6df59560b2ba312867c` · последний коммит: 2026-11-09T17:01:32Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-строитель-4 2026-11-10T21:41:00Z
-
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132
 - Ветка: `lab/cycle5-archer-meta-adfree-1108`
@@ -179,6 +171,7 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
+- [#205](https://github.com/mpaykin1/meta6-lab/pull/205) Защищённый workflow owner-pult.yml; требуется ревью Claude
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
 - [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния

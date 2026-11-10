@@ -37,7 +37,8 @@
         "example": "ARC2(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Color is not defined",
+      "load_evidence": null
     },
     {
       "id": "archer-in-the-fog:animation",
@@ -101,7 +102,8 @@
         "example": "flyTick(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Color is not defined",
+      "load_evidence": null
     },
     {
       "id": "asqura-ilya-reference:weather",
@@ -147,7 +149,8 @@
         "example": "drawIndicators(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'kindOf' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "asqura-ilya-reference:lighting",
@@ -255,7 +258,8 @@
         "example": "glowAt(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'kindOf' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "asqura-ilya-reference:saves",
@@ -288,7 +292,8 @@
         "example": "loadThree(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "page.evaluate: ReferenceError: R3 is not defined\n    at loadThree (<anonymous>:1:70)\n    at eval (eval at evaluate (:370:30), <anonymous>:4:14)\n    at UtilityScript.evaluate (<anonymous>:372:16)\n    at UtilityScript.<ano",
+      "load_evidence": null
     },
     {
       "id": "asqura-ilya-reference:menu",
@@ -334,7 +339,8 @@
         "example": "drawOverlays(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'kindOf' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "asqura-ilya-reference:animation",
@@ -382,7 +388,8 @@
         "example": "frame(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'kindOf' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "broken-city:camera",
@@ -439,7 +446,8 @@
         "example": "updateGameCamera(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "broken-city:controls",
@@ -482,7 +490,8 @@
         "example": "endPointer(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "broken-city:world",
@@ -652,7 +661,8 @@
         "example": "memLevel(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "broken-city:audio",
@@ -698,7 +708,8 @@
         "example": "audioUnlock(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "broken-city:saves",
@@ -827,7 +838,8 @@
         "example": "setLoad(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "broken-city:menu",
@@ -901,7 +913,8 @@
         "example": "showGallery(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "broken-city:effects",
@@ -984,7 +997,8 @@
         "example": "dustMat(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'add' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "broken-city:animation",
@@ -1189,7 +1203,8 @@
         "example": "tickDebris(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'add' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "broken-city:lore",
@@ -1250,7 +1265,8 @@
         "example": "tickStory(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "rainbow-acceleration:weather",
@@ -1311,7 +1327,8 @@
         "example": "makeClouds(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "THREE is not defined",
+      "load_evidence": null
     },
     {
       "id": "rainbow-acceleration:menu",
@@ -1358,7 +1375,8 @@
         "example": "updGallery(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "THREE is not defined",
+      "load_evidence": null
     },
     {
       "id": "rainbow-acceleration:animation",
@@ -1439,7 +1457,8 @@
         "example": "framesFrom(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "THREE is not defined",
+      "load_evidence": null
     },
     {
       "id": "reference-ashen-sumerek:camera",
@@ -1530,7 +1549,8 @@
         "example": "serpentFollow(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'frame' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "reference-ashen-sumerek:controls",
@@ -1642,7 +1662,8 @@
         "example": "endPointer(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'frame' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "reference-ashen-sumerek:combat",
@@ -1925,7 +1946,8 @@
         "example": "ashShoot(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'frame' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "reference-ashen-sumerek:enemies",
@@ -2148,7 +2170,8 @@
         "example": "makeAshFoe(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'frame' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "reference-ashen-sumerek:world",
@@ -2410,7 +2433,8 @@
         "example": "makeNoise(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'frame' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "reference-ashen-sumerek:weather",
@@ -2543,7 +2567,8 @@
         "example": "makeFogLayers(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'frame' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "reference-ashen-sumerek:lighting",
@@ -2820,7 +2845,8 @@
         "example": "renderAshFoe(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'frame' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "reference-ashen-sumerek:saves",
@@ -2881,7 +2907,8 @@
         "example": "saveAnchor(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'frame' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "reference-ashen-sumerek:menu",
@@ -3038,7 +3065,8 @@
         "example": "setCoinsHud(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'frame' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "reference-ashen-sumerek:effects",
@@ -3217,7 +3245,8 @@
         "example": "buildFxAtlases(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'frame' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "reference-ashen-sumerek:animation",
@@ -3548,7 +3577,8 @@
         "example": "disposeAshFoe(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'defineFx' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "reference-observer-world-en-v7:camera",
@@ -3608,7 +3638,8 @@
         "example": "orbitBy(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-observer-world-en-v7:controls",
@@ -3699,7 +3730,8 @@
         "example": "remove(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-observer-world-en-v7:combat",
@@ -3862,7 +3894,8 @@
         "example": "npcAttack(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-observer-world-en-v7:enemies",
@@ -3954,7 +3987,8 @@
         "example": "foeAlive(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-observer-world-en-v7:world",
@@ -4094,7 +4128,8 @@
         "example": "noise(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-observer-world-en-v7:weather",
@@ -4145,7 +4180,8 @@
         "example": "buildTerrainGeometry(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-observer-world-en-v7:lighting",
@@ -4283,7 +4319,8 @@
         "example": "fogShader(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-observer-world-en-v7:audio",
@@ -4345,7 +4382,8 @@
         "example": "stopMusicClock(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-observer-world-en-v7:menu",
@@ -4429,7 +4467,8 @@
         "example": "setCoinsHud(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-observer-world-en-v7:effects",
@@ -4544,7 +4583,8 @@
         "example": "setFxEnabled(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-observer-world-en-v7:animation",
@@ -4719,7 +4759,8 @@
         "example": "tick(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:camera",
@@ -4822,7 +4863,8 @@
         "example": "createCameraRig(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:controls",
@@ -4983,7 +5025,8 @@
         "example": "remove(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:combat",
@@ -5195,7 +5238,8 @@
         "example": "chooseCombatTarget(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:enemies",
@@ -5335,7 +5379,8 @@
         "example": "createBrain(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:world",
@@ -5720,7 +5765,8 @@
         "example": "createAshWorld(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:weather",
@@ -5895,7 +5941,8 @@
         "example": "syncAshFog(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:lighting",
@@ -6081,7 +6128,8 @@
         "example": "fogShader(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:audio",
@@ -6149,7 +6197,8 @@
         "example": "stopMusicClock(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:saves",
@@ -6231,7 +6280,8 @@
         "example": "saveAnchor(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:menu",
@@ -6349,7 +6399,8 @@
         "example": "DialogueGenerator(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:effects",
@@ -6492,7 +6543,8 @@
         "example": "setFxEnabled(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:animation",
@@ -6821,7 +6873,8 @@
         "example": "animate(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-three-worlds-game:lore",
@@ -6896,7 +6949,8 @@
         "example": "questProp(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "reference-underwater-world:camera",
@@ -6967,7 +7021,8 @@
         "example": "orbitBy(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-underwater-world:controls",
@@ -7065,7 +7120,8 @@
         "example": "remove(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-underwater-world:combat",
@@ -7235,7 +7291,8 @@
         "example": "npcAttack(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-underwater-world:enemies",
@@ -7338,7 +7395,8 @@
         "example": "foeAlive(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-underwater-world:world",
@@ -7494,7 +7552,8 @@
         "example": "noise(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-underwater-world:weather",
@@ -7555,7 +7614,8 @@
         "example": "buildTerrainGeometry(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-underwater-world:lighting",
@@ -7704,7 +7764,8 @@
         "example": "fogShader(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-underwater-world:audio",
@@ -7766,7 +7827,8 @@
         "example": "stopMusicClock(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-underwater-world:menu",
@@ -7852,7 +7914,8 @@
         "example": "setCoinsHud(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-underwater-world:effects",
@@ -7968,7 +8031,8 @@
         "example": "setFxEnabled(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "reference-underwater-world:animation",
@@ -8159,7 +8223,8 @@
         "example": "tick(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:camera",
@@ -8242,7 +8307,8 @@
         "example": "serpentFollow(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "leaf is not defined",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:controls",
@@ -8345,7 +8411,8 @@
         "example": "endPointer(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "leaf is not defined",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:combat",
@@ -8605,7 +8672,8 @@
         "example": "defineWeapon(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "leaf is not defined",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:enemies",
@@ -8789,7 +8857,8 @@
         "example": "defineBrain(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "leaf is not defined",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:world",
@@ -9057,7 +9126,8 @@
         "example": "makeNoise(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "leaf is not defined",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:weather",
@@ -9167,7 +9237,8 @@
         "example": "defineBrain(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "leaf is not defined",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:lighting",
@@ -9400,7 +9471,8 @@
         "example": "fogShader(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "leaf is not defined",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:saves",
@@ -9452,7 +9524,8 @@
         "example": "loadTexture(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "leaf is not defined",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:menu",
@@ -9585,7 +9658,8 @@
         "example": "setCoinsHud(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "leaf is not defined",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:effects",
@@ -9751,7 +9825,8 @@
         "example": "defineFx(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "leaf is not defined",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:animation",
@@ -10097,7 +10172,8 @@
         "example": "defineAnim(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "leaf is not defined",
+      "load_evidence": null
     },
     {
       "id": "sumerki-i-pepel-2:lore",
@@ -10259,7 +10335,8 @@
         "example": "questOn(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'frame' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isle-classic:camera",
@@ -10324,7 +10401,8 @@
         "example": "serpentFollow(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isle-classic:controls",
@@ -10409,7 +10487,8 @@
         "example": "endPointer(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isle-classic:combat",
@@ -10587,7 +10666,8 @@
         "example": "defineWeapon(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isle-classic:enemies",
@@ -10713,7 +10793,8 @@
         "example": "defineBrain(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isle-classic:world",
@@ -10877,7 +10958,8 @@
         "example": "makeNoise(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isle-classic:weather",
@@ -10949,7 +11031,8 @@
         "example": "defineBrain(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isle-classic:lighting",
@@ -11126,7 +11209,8 @@
         "example": "fogShader(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isle-classic:menu",
@@ -11236,7 +11320,8 @@
         "example": "setCoinsHud(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isle-classic:effects",
@@ -11338,7 +11423,8 @@
         "example": "defineFx(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'clamp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isle-classic:animation",
@@ -11502,7 +11588,8 @@
         "example": "defineAnim(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isles:camera",
@@ -11573,7 +11660,8 @@
         "example": "serpentFollow(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isles:controls",
@@ -11659,7 +11747,8 @@
         "example": "endPointer(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isles:combat",
@@ -11842,7 +11931,8 @@
         "example": "defineWeapon(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isles:enemies",
@@ -11968,7 +12058,8 @@
         "example": "defineBrain(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isles:world",
@@ -12187,7 +12278,8 @@
         "example": "makeNoise(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isles:weather",
@@ -12259,7 +12351,8 @@
         "example": "defineBrain(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isles:lighting",
@@ -12446,7 +12539,8 @@
         "example": "fogShader(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isles:menu",
@@ -12578,7 +12672,8 @@
         "example": "setCoinsHud(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isles:effects",
@@ -12690,7 +12785,8 @@
         "example": "defineFx(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'clamp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "twilight-isles:animation",
@@ -12914,7 +13010,8 @@
         "example": "defineAnim(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Identifier 'lerp' has already been declared",
+      "load_evidence": null
     },
     {
       "id": "veil-terraces:world",
@@ -12955,7 +13052,8 @@
         "example": "playLevel(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected end of input",
+      "load_evidence": null
     },
     {
       "id": "veil-terraces:audio",
@@ -12989,7 +13087,8 @@
         "example": "SOUND(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     },
     {
       "id": "veil-terraces:animation",
@@ -13063,7 +13162,539 @@
         "example": "tick(/* original game parameters */)"
       },
       "load_ok": false,
-      "load_error": "Not independently verified in Chromium"
+      "load_error": "Failed to execute 'appendChild' on 'Node': Unexpected token 'export'",
+      "load_evidence": null
     }
-  ]
+  ],
+  "model_load": [
+    {
+      "id": "d0374295343f49cea7e423b5",
+      "path": "three-worlds-game/models/air_bubble.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "299488f0a444c21b0f0635c9",
+      "path": "three-worlds-game/models/anchor.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "be9ade19987da43fd61c47b7",
+      "path": "three-worlds-game/models/anemone.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "521ceda0f1f3fee83692beff",
+      "path": "three-worlds-game/models/angel_statue.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "3f97de5a1b25e7430708651a",
+      "path": "three-worlds-game/models/angler.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "9e009102bb9d8412ad0f2b5b",
+      "path": "three-worlds-game/models/arch.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "f635851f0d5c209102ba2c87",
+      "path": "three-worlds-game/models/barrel.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "45424c90aa826814ff686873",
+      "path": "three-worlds-game/models/bathyscaphe.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "191b4205c164114953dbaa24",
+      "path": "three-worlds-game/models/bridge_broken.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "3139f1c559664148ec38790f",
+      "path": "three-worlds-game/models/bridge.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "b22d7245d543c3976b34b6e1",
+      "path": "three-worlds-game/models/bubble_gun.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "f51a4a04e7d5ed57aad1628f",
+      "path": "three-worlds-game/models/bubble.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "7bcbe9f616eaa0676dab53b0",
+      "path": "three-worlds-game/models/cannon.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "f35247ea957aaa72a0237c7d",
+      "path": "three-worlds-game/models/cathedral_bell.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "573fbbdd94a81aa7e2c28236",
+      "path": "three-worlds-game/models/cathedral_tower.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "ff401596d96e52f674df317c",
+      "path": "three-worlds-game/models/column_broken.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "efd18260cd0ee93c23c18409",
+      "path": "three-worlds-game/models/column.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "1c7fb3f2e0d598e12fc67a58",
+      "path": "three-worlds-game/models/coral_blade.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "ffe3726c5a17e32716412dd3",
+      "path": "three-worlds-game/models/coral_brain.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "a596dea91631879a6c504394",
+      "path": "three-worlds-game/models/coral_branch_orange.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "7f4b530430a717ec930565d9",
+      "path": "three-worlds-game/models/coral_branch_pink.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "8f329610f12df865cd9cea00",
+      "path": "three-worlds-game/models/coral_branch_violet.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "ed34b7d3860f11cbd248faba",
+      "path": "three-worlds-game/models/crate.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "74fb6aadd7b80763ddf0c35a",
+      "path": "three-worlds-game/models/diving_helmet.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "e899e5706e6c53b5a07318d3",
+      "path": "three-worlds-game/models/dome_section.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "e2c0522af43893844fce026d",
+      "path": "three-worlds-game/models/doubloon.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "0a6d2a5fd86d566166a91686",
+      "path": "three-worlds-game/models/eel.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "c28657fb0ba270394a8a1fc3",
+      "path": "three-worlds-game/models/galleon.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "bd2f62472573f54950cd7221",
+      "path": "three-worlds-game/models/gargoyle.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "019a1d556df321dd7a22621b",
+      "path": "three-worlds-game/models/glow_fish_amber.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "0047cb0be27ee5ead6043e91",
+      "path": "three-worlds-game/models/glow_fish_emerald.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "1653a47230293667f6388a32",
+      "path": "three-worlds-game/models/glow_fish_teal.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "e431400eb1f438577a1f1934",
+      "path": "three-worlds-game/models/glow_fish_violet.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "b130cc8897ccf15aefbb65e9",
+      "path": "three-worlds-game/models/hand_sonar.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "bf291de42290b1735a796b2f",
+      "path": "three-worlds-game/models/harpoon_gun.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "2b8375be45476c227c5c333c",
+      "path": "three-worlds-game/models/harpoon.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "337b02d2493c6e7d3d672a92",
+      "path": "three-worlds-game/models/hermit_crab.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "1aa5c2f190211c099045932d",
+      "path": "three-worlds-game/models/hot_vent.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "ddd9c073d4c61e2cbc63b3e4",
+      "path": "three-worlds-game/models/iron_gate.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "9d02d0b93d214fb31dd5cea6",
+      "path": "three-worlds-game/models/jellyfish_teal.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "b77b6270285a0068b6fddc43",
+      "path": "three-worlds-game/models/jellyfish_violet.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "a8d13f1c59e429dc1c48fd78",
+      "path": "three-worlds-game/models/kelp_mid.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "4f508a4a561c7067079ef178",
+      "path": "three-worlds-game/models/kelp_short.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "1d47e83d42fbcc1cbc2b6d12",
+      "path": "three-worlds-game/models/kelp_tall.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "3ce7ef8adc6c0852776012b4",
+      "path": "three-worlds-game/models/kraken_tentacle.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "142b6dc10d4fd5261348b310",
+      "path": "three-worlds-game/models/lancet_window.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "0ef2ed0259736d1b47ea3a2b",
+      "path": "three-worlds-game/models/lantern_fish.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "f0d2e66ee568ab1830c8bc99",
+      "path": "three-worlds-game/models/manta.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "02299c591798f4d7aa520aca",
+      "path": "three-worlds-game/models/moss_clump_amber.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "1625408587bedbcc8123be38",
+      "path": "three-worlds-game/models/moss_clump_azure.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "e01c274a9cb056d97ce03384",
+      "path": "three-worlds-game/models/moss_clump_crimson.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "e07b6f4009d1903b9419c043",
+      "path": "three-worlds-game/models/moss_clump_emerald.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "5af2a8be83d1b036a14bab86",
+      "path": "three-worlds-game/models/moss_clump_teal.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "549da3ec09df7980f49119c1",
+      "path": "three-worlds-game/models/moss_clump_violet.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "0251184917583b187e27365e",
+      "path": "three-worlds-game/models/nautilus.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "e9e40d555f3cf47118ee0cc7",
+      "path": "three-worlds-game/models/pearl_clam.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "d4a1eb398290b41729829843",
+      "path": "three-worlds-game/models/scout_drone.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "43bb86a615c7e62ebd6b5cdd",
+      "path": "three-worlds-game/models/sea_fan.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "e48f846b653c3b16c2b8eadd",
+      "path": "three-worlds-game/models/sea_mine.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "194c084c3d6ca027f0e040db",
+      "path": "three-worlds-game/models/sea_scooter.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "f15813af08704520bec507d4",
+      "path": "three-worlds-game/models/seagrass.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "b3157742c163d1d6948de5e9",
+      "path": "three-worlds-game/models/seahorse.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "d1272ec045cb52e47168f3d4",
+      "path": "three-worlds-game/models/ship_wheel.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "5e80d63d0efcea130f16f2d5",
+      "path": "three-worlds-game/models/shock_spear.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "e6d11567d13edffeab79b5f5",
+      "path": "three-worlds-game/models/siphonophore.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "2cfaf64d88828e96b1baab9c",
+      "path": "three-worlds-game/models/stairs.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "29bca222ef82baba0acfbe57",
+      "path": "three-worlds-game/models/starfish.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "62202d515f64706e34aa351e",
+      "path": "three-worlds-game/models/street_lamp.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "7750b5c5931dc9491c904ab5",
+      "path": "three-worlds-game/models/submarine_wreck.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "82b017ec82620275575e102d",
+      "path": "three-worlds-game/models/submarine.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "1b3c32b4a6939b7816d72eca",
+      "path": "three-worlds-game/models/torpedo.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "d3b9c92049786d69edf64ade",
+      "path": "three-worlds-game/models/treasure_chest.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "a841965084a8268ead7ad6f7",
+      "path": "three-worlds-game/models/trident.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "12f6e3b9e6b11dadb13a515e",
+      "path": "three-worlds-game/models/tube_sponge.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "31fb372eed8569a361b2325c",
+      "path": "three-worlds-game/models/viaduct.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "1e6244fa8115e887a89eeec0",
+      "path": "three-worlds-game/models/weather_autumn_leaf.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "7962b39e3f41fb0b4ca0dbf8",
+      "path": "three-worlds-game/models/weather_blood_moon.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "568559a14ce29bfa0c9f55e3",
+      "path": "three-worlds-game/models/weather_burning_ember.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "2000da5e107e217cbd519db9",
+      "path": "three-worlds-game/models/weather_floating_lantern.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "0c26edf42d7085f782e22642",
+      "path": "three-worlds-game/models/weather_ice_crystal.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "6fe219c36a22dba46334553e",
+      "path": "three-worlds-game/models/weather_lightning_tree.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "22748fc90bd85703e9d76deb",
+      "path": "three-worlds-game/models/weather_meteor.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "cfcbedb674ad5e3971ac3afd",
+      "path": "three-worlds-game/models/weather_moth.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "b6acfd8a8136421d1341cf67",
+      "path": "three-worlds-game/models/weather_rift_shard.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "ca5815097d6abbc3347ea29d",
+      "path": "three-worlds-game/models/weather_rose_petal.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "c221b15ca540a79c3c917278",
+      "path": "three-worlds-game/models/weather_sky_jellyfish.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "2793fa7ffd729b5cc78af6a1",
+      "path": "three-worlds-game/models/weather_storm_crystal.glb",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "bf959e28711968f0e861579e",
+      "path": "three-worlds-game/models/whale_skeleton.glb",
+      "ok": true,
+      "error": null
+    }
+  ],
+  "load_evidence_type": "chromium-original-source-load-v1"
 }

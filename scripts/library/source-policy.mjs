@@ -11,7 +11,7 @@ export function isOriginalGameSource(sourcePath,source){
  if(parts.some(x=>x==='..'||bannedSegment.test(x)))return false;
  const name=parts.at(-1);
  if(!name||bannedName.test(name)||bundledName.test(name))return false;
- if(thirdPartyHeader.test(source.slice(0,4096)))return false;
+ if((/\.html?$/i.test(sourcePath)?/@license|SPDX-License-Identifier|Copyright\s+\d{4}.*(?:three|mozilla|google|facebook|adobe|microsoft|contributors)/i:thirdPartyHeader).test(source.slice(0,4096)))return false;
  const lines=source.split('\n');
  // Some original games embed long base64 textures inside otherwise readable HTML.
  // Reject minified/vendor-like whole files, not original games with isolated data lines.

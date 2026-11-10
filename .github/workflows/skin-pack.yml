@@ -77,6 +77,7 @@ jobs:
           node scripts/skins/verify-turntable.mjs skins/sources/rusty-robot
           node scripts/skins/verify-turntable.mjs skins/sources/rusty-robot --verify
           node scripts/skins/mutate-turntable.mjs skins/sources/rusty-robot
+          node scripts/skins/mutate-turntable-albedo.mjs skins/sources/rusty-robot
       - name: Rebuild final ZIP after Chrome preview
         if: env.SKIN_STAGE == '7' && github.event_name != 'pull_request'
         run: |

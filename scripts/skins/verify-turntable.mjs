@@ -9,6 +9,7 @@ import sharp from 'sharp';
 import {chromium} from 'playwright';
 import {LIMITS} from './turntable-thresholds.mjs';
 import {inspectGeometry} from './turntable-geometry.mjs';
+import {inspectFaceArtwork} from './turntable-albedo.mjs';
 
 const source=path.resolve(process.argv[2]||'skins/sources/rusty-robot');
 const pack=path.resolve(process.argv[3]&&!process.argv[3].startsWith('--')?
@@ -138,6 +139,7 @@ async function checkFresh(){
 async function capture(){
  const manifest=JSON.parse(fs.readFileSync(path.join(pack,'skin.json'),'utf8'));
  inspectGeometry(manifest);
+ await inspectFaceArtwork(manifest,pack);
  const root=path.resolve('.');
  if(!pack.startsWith(path.join(root,'skins','packs')+path.sep))
   fail('pack for real trainer must reside under skins/packs');

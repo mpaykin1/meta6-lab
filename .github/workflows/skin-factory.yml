@@ -12,6 +12,8 @@ on:
       - 'scripts/skins/mutate-turntable.mjs'
       - 'scripts/skins/turntable-thresholds.mjs'
       - 'scripts/skins/turntable-geometry.mjs'
+      - 'scripts/skins/turntable-albedo.mjs'
+      - 'scripts/skins/mutate-turntable-albedo.mjs'
       - 'scripts/skins/mutate-build-pack.mjs'
       - 'scripts/skins/preview.mjs'
       - 'scripts/skins/mutate-preview.mjs'
@@ -102,6 +104,7 @@ jobs:
             node scripts/skins/verify-turntable.mjs "$src"
             node scripts/skins/verify-turntable.mjs "$src" --verify
             node scripts/skins/mutate-turntable.mjs "$src"
+            node scripts/skins/mutate-turntable-albedo.mjs "$src"
           done < "$RUNNER_TEMP/skin-sources.txt"
       - name: Визуальное соответствие эскизу — без потери фактуры и силуэта
         run: |

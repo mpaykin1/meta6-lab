@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T07:41:58.281Z",
+  "generated_at": "2026-11-10T07:43:08.719Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -472,7 +472,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/render-visibility-optimization",
-      "status": "конфликт",
+      "status": "в работе",
       "original_status": "⚠ молчит больше часа",
       "pr": 54,
       "pr_state": "open",
@@ -481,7 +481,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/54",
       "taken_at": "2026-11-10 05:53",
       "last_commit_at": "2026-11-10 06:40",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 28,
@@ -489,7 +489,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/render-visibility-optimization",
-      "status": "конфликт",
+      "status": "в работе",
       "original_status": "⚠ молчит больше часа",
       "pr": 54,
       "pr_state": "open",
@@ -498,7 +498,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/54",
       "taken_at": "2026-11-07 08:04",
       "last_commit_at": "2026-11-10 06:40",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 29,
@@ -523,7 +523,7 @@
       "project": "МГЛ + МГ",
       "owner": "чат ChatGPT",
       "branch": "lab/merge-universal",
-      "status": "конфликт",
+      "status": "в работе",
       "original_status": "⚠ молчит больше часа",
       "pr": 224,
       "pr_state": "open",
@@ -532,7 +532,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/224",
       "taken_at": "2026-11-10 06:05",
       "last_commit_at": "2026-11-10 06:36",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 31,
@@ -540,7 +540,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/library-catalog",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "⚠ молчит больше часа",
       "pr": 209,
       "pr_state": "open",
@@ -549,7 +549,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/209",
       "taken_at": "2026-11-10 05:59",
       "last_commit_at": "2026-11-10 06:35",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: catalog"
     },
     {
       "id": 32,
@@ -557,7 +557,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/library-catalog",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "⚠ молчит больше часа",
       "pr": 209,
       "pr_state": "open",
@@ -566,7 +566,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/209",
       "taken_at": "2026-11-09 16:55",
       "last_commit_at": "2026-11-10 06:35",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: catalog"
     },
     {
       "id": 33,
@@ -574,7 +574,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/zadachi-tolkach",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "⚠ молчит больше часа",
       "pr": 221,
       "pr_state": "open",
@@ -583,7 +583,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/221",
       "taken_at": "2026-11-10 05:39",
       "last_commit_at": "2026-11-10 06:34",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: kontur-guard"
     },
     {
       "id": 34,
@@ -591,7 +591,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/zadachi-conflicts",
-      "status": "конфликт",
+      "status": "в работе",
       "original_status": "⚠ молчит больше часа",
       "pr": 220,
       "pr_state": "open",
@@ -600,7 +600,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/220",
       "taken_at": "2026-11-10 05:36",
       "last_commit_at": "2026-11-10 06:26",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 35,
@@ -625,7 +625,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/remont-r1-library",
-      "status": "конфликт",
+      "status": "в работе",
       "original_status": "⚠ молчит больше часа",
       "pr": 218,
       "pr_state": "open",
@@ -634,7 +634,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/218",
       "taken_at": "2026-11-10 05:03",
       "last_commit_at": "2026-11-10 06:22",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 37,
@@ -642,7 +642,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/pr54-59-60-finish",
-      "status": "конфликт",
+      "status": "в работе",
       "original_status": "⚠ молчит больше часа",
       "pr": 54,
       "pr_state": "open",
@@ -651,7 +651,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/54",
       "taken_at": "2026-11-10 06:02",
       "last_commit_at": "2026-11-10 06:21",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 38,
@@ -999,7 +999,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/render-broken-city-safe-1110",
-      "status": "конфликт",
+      "status": "в работе",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 225,
       "pr_state": "open",
@@ -1008,7 +1008,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/225",
       "taken_at": "2026-11-10 06:26",
       "last_commit_at": "2026-11-10 06:41",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 59,
@@ -1322,7 +1322,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/platform-play-connect-earn-20261107",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 87,
       "pr_state": "open",
@@ -1331,7 +1331,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/87",
       "taken_at": "2026-11-07 14:41",
       "last_commit_at": "2026-11-07 14:44",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 78,
@@ -1424,7 +1424,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/approved-donor-confluence-vault-20261107",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 58,
       "pr_state": "open",
@@ -1433,7 +1433,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/58",
       "taken_at": "2026-11-07 08:13",
       "last_commit_at": "2026-11-07 08:14",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 84,
@@ -1458,7 +1458,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/veil-weather-connected-20261107",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "💤 ЗАБРОШЕНО 3 дн — продолжить или закрыть",
       "pr": 49,
       "pr_state": "open",
@@ -1467,7 +1467,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/49",
       "taken_at": "2026-11-07 07:31",
       "last_commit_at": "2026-11-07 07:31",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 86,

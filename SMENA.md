@@ -32,3 +32,9 @@
 - Исправление: убраны CI-specific обращения из генератора STATUS, добавлен CLI с явной конфигурацией из Git remote и stdin; три мутации, одна обманная; [коммит ловушек](https://github.com/mpaykin1/meta6-lab/commit/43658a2cfb21d0ec204becc76b336a912e7bd2ce); [коммит CI](https://github.com/mpaykin1/meta6-lab/commit/129438c105595356addcad30ed4c9989a3cef13c).
 - **Сделано / дальше:** PR #219 не слит. На HEAD `88c4fa2` пока нет завершённого KONTUR Guard и прочих обязательных проверок; branch отстаёт от main. Проверить актуальные проверки и конфликты на новом HEAD. Не сливать самостоятельно: затронут workflow, нужен Claude. Ошибка Veil Terraces в browser-open-all отдельная и не исправлена этим PR.
 - Соседние карточки: #191 закреплена ранее за чатом ChatGPT и уже обновлялась другим запуском; #200 захвачена MG-строитель-2 2026-11-10T10:19:40Z. Не перетирать чужую работу.
+
+## Дополнение A1 после устранения конфликта
+
+- [4634c05](https://github.com/mpaykin1/meta6-lab/commit/4634c05ecc9ad59290ae403c46e167057e556576) — двухродительский merge main в `lab/status-a1-20261110`; весь текущий main сохранён, OSHIBKI A1 перенумерована #31. PR #219 перешёл в `mergeable=true` после устранения конфликта.
+- [A1 STATUS 42800345085](https://github.com/mpaykin1/meta6-lab/actions/runs/42800345085): success на HEAD `4634c05`. [KONTUR 42800343788](https://github.com/mpaykin1/meta6-lab/actions/runs/42800343788), [B1 42800344148](https://github.com/mpaykin1/meta6-lab/actions/runs/42800344148): выполнялись при проверке. LAB Pages [42800339516](https://github.com/mpaykin1/meta6-lab/actions/runs/42800339516): `kick-main` 403 GitHub API rate limit, не считать ошибкой A1.
+- **Следующий конкретный шаг:** повторно прочитать HEAD и проверки PR #219; исправить подтверждённый новый дефект при наличии, не сливать самостоятельно из-за workflow; затем вернуться к первой незанятой карточке.

@@ -63,8 +63,9 @@ async function main(){
    if(state.error||state.parts!==m.parts.length)fail('скин не применён ('+name+'): '+JSON.stringify(state));
    await page.evaluate(()=>{
     document.querySelectorAll('.hint,#fade,#joy').forEach(el=>el.style.display='none');
+    // Never enlarge the canvas: the old 1.6x zoom cropped off the legs.
     const cv=document.querySelector('canvas#gl');
-    cv.style.transform='scale(1.6)';cv.style.transformOrigin='50% 42%';
+    cv.style.transform='none';
    });
    let move=Math.abs(yaw/.006);
    while(move>.1){const dx=Math.min(move,165);await page.mouse.move(470,310);await page.mouse.down();await page.mouse.move(470-dx,310,{steps:6});await page.mouse.up();move-=dx;}

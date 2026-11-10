@@ -75,5 +75,9 @@ for(const size of sizes){
  console.log(size.name+' median p95 '+bp+' -> '+hp+'ms; draws '+bd+' -> '+hd);
  if(hd>bd*1.05){failed=true;console.log('::error title=Draw call regression::'+size.name+': '+hd+' > '+bd);}
  if(hp>bp*1.25){failed=true;console.log('::error title=Frame time regression::'+size.name+': '+hp+'ms > '+bp+'ms');}
+ if(size.name==='mobile'&&hp>20){
+  failed=true;console.log('::error title=Mobile p95 budget::'+hp+'ms exceeds 20ms');
+ }
+ if(hd>40){failed=true;console.log('::error title=Draw-call budget::'+hd+' exceeds 40');}
 }
 if(failed)process.exitCode=1;

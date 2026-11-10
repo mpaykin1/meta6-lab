@@ -7,6 +7,9 @@ on:
       - 'scripts/lab/render-bench.mjs'
       - '.github/workflows/lab-render-performance.yml'
   workflow_dispatch:
+concurrency:
+  group: lab-render-performance-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:

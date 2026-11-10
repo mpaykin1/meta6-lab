@@ -19352,29 +19352,13 @@ class OutputPass extends Pass {
 const PG = { ready: !1, paused: !1, audio: !0, language: "en" };
 let pgSaved = null;
 try {
-  (await window.bridge.initialize(),
-    (PG.ready = !0),
-    (PG.language = (window.bridge.platform.language || "en").slice(0, 2).toLowerCase()),
-    (PG.audio = window.bridge.platform.isAudioEnabled !== !1));
-  const r = await window.bridge.storage.get(["luchnik_save"]);
-  ((pgSaved = r && r[0] ? JSON.parse(r[0]) : null),
-    window.bridge.platform.on(window.bridge.EVENT_NAME.PAUSE_STATE_CHANGED, (e) => {
-      ((PG.paused = !!e), typeof AU < "u" && AU.ctx && (PG.paused ? AU.ctx.suspend() : PG.audio && !document.hidden && AU.ctx.resume()));
-    }),
-    window.bridge.platform.on(window.bridge.EVENT_NAME.AUDIO_STATE_CHANGED, (e) => {
-      ((PG.audio = !!e), typeof AU < "u" && AU.ctx && (PG.audio ? !PG.paused && !document.hidden && AU.ctx.resume() : AU.ctx.suspend()));
-    }));
-} catch (r) {
-  console.warn("Bridge initialization:", r);
+  pgSaved = JSON.parse(localStorage.getItem("luchnik_save") || "null");
+} catch (error) {
+  console.warn("Save recovery:", error);
 }
 document.addEventListener("visibilitychange", () => {
   typeof AU < "u" && AU.ctx && (document.hidden ? AU.ctx.suspend() : PG.audio && !PG.paused && AU.ctx.resume());
 });
-function pgInterstitial() {
-  PG.ready &&
-    window.bridge.advertisement.isInterstitialSupported &&
-    Promise.resolve(window.bridge.advertisement.showInterstitial("game_over")).catch(() => {});
-}
 const ruDict = {
     "ARCHER<br>IN THE FOG": "ЛУЧНИК<br>В ТУМАНЕ",
     "Hit the dragon before it gets angry. Otherwise it destroys your tower, and you fall to the next.":
@@ -22537,7 +22521,8 @@ pgSaved && typeof pgSaved == "object" && Object.assign(SAVE, pgSaved);
 Array.isArray(SAVE.owned) || (SAVE.owned = ["bow"]);
 typeof SAVE.coins != "number" && (SAVE.coins = 0);
 function save() {
-  PG.ready && window.bridge.storage.set(["luchnik_save"], [JSON.stringify(SAVE)]).catch(() => {});
+  try { localStorage.setItem("luchnik_save", JSON.stringify(SAVE)); }
+  catch (error) { console.warn("Save failed:", error); }
 }
 const WEAPONS = [
     {
@@ -22722,7 +22707,7 @@ function levelUp() {
     showLvl("Level " + G.level + " · " + THT.name.toLowerCase() + ". " + (G.level > THEMES.length ? "Дракон стал ещё быстрее" : THT.news)));
 }
 function gameOver() {
-  (pgInterstitial(),
+  (
     (G.phase = "over"),
     (G.holding = !1),
     (SAVE.best = Math.max(SAVE.best || 1, G.depth)),
@@ -23166,4 +23151,4 @@ function frame() {
     composer.render());
 }
 frame();
-PG.ready && requestAnimationFrame(() => window.bridge.platform.sendMessage("game_ready"));
+

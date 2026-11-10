@@ -156,7 +156,7 @@ async function bakeFaces(tmp,bone,source,palette){
  const tone=(rgb,f)=>nearest(rgb.map(v=>Math.max(0,Math.min(255,Math.round(v*f)))));
  // Transparent borders are NOT the material: choose the actual opaque outline
  // nearest the left/right edge; fall back to a strong warm midtone, not black.
- const fall=tones.find(x=>x[0]>=160&&x[0]<=225&&x[0]>x[1]*1.45)||
+ const fall=tones.find(x=>x[0]>=200&&x[0]<=240&&x[0]>x[1]*1.45)||
   tones.reduce((a,c)=>c[0]>a[0]&&c[0]<235?c:a,tones[0]);
  const black=tones[1]||tones[0],rivet=tones.at(-3)||tones.at(-1);
  function coloredEdge(y,right){

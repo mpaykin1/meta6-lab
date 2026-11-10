@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Перенос расследования с Replit на GitHub Pages и ежечасная таблица задач | МГЛ | чат ChatGPT | `lab/investigation-pages` | — | 2026-11-10 06:00 | — |
 | взято | Библиотека игр: эталоны, системы, ассеты и MCP | МГЛ | чат ChatGPT | `lab/library-catalog` | [#209](https://github.com/mpaykin1/meta6-lab/pull/209) | 2026-11-10 05:59 | — |
 | взято | Доводчик: PR #124, лор Древа миров | МГЛ | чат ChatGPT | `lab/seed-of-last-world-canon` | [#124](https://github.com/mpaykin1/meta6-lab/pull/124) | 2026-11-10 05:59 | — |
 | НУЖЕН CLAUDE: [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42457034492), перенос в актуальные PR | Доводчик: PR #122 — адаптеры бота | МГЛ | чат ChatGPT | `lab/meta-bot-real-game-hooks-1108` | [#122](https://github.com/mpaykin1/meta6-lab/pull/122) | 2026-11-10 05:57 | — |

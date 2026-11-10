@@ -82,7 +82,7 @@ async function load(url,THREE){
      materials=order.map(face=>new THREE.MeshBasicMaterial({
       map:cache.get(p.faces[face]),color:0xffffff,side:THREE.FrontSide}));
      mat.dispose();mat=materials[0];
-     mesh=new THREE.Mesh(geometry(p),p.primitive==="sphere"?materials[0]:materials);
+     mesh=new THREE.Mesh(geometry(p),p.primitive==="sphere"?materials[5]:materials);
     }else{
      mesh=new THREE.Mesh(geometry(p),mat);
     }
@@ -94,19 +94,34 @@ async function load(url,THREE){
      outline.scale.setScalar(1.03);group.add(outline);
     }
    }else{
-    const geo=new THREE.PlaneGeometry(d[0],d[1]);
-    const depth=layer==="2.5d"?(p.file?1:Math.min(5,Math.max(1,p.depth||1))):1;
-    mesh=new THREE.InstancedMesh(geo,mat,depth);
-    mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-    for(let i=0;i<depth;i++){tempM.makeTranslation(0,0,i*.008);mesh.setMatrixAt(i,tempM);}
-    mesh.instanceMatrix.needsUpdate=true;mesh.frustumCulled=false;group.add(mesh);
-    if(layer==="2.5d" && tex && ["plate","gear","panel","piston"].includes(p.kind)){
-     // 2–4 pixel relief behind each original alpha decal; the front artwork
-     // is only on the forward plane, never copied onto thick side faces.
-     const relief=Math.min(.032,Math.max(.016,(p.depth||3)*.008));
-     const backing=new THREE.Mesh(new THREE.BoxGeometry(d[0]*.94,d[1]*.94,relief),
-      new THREE.MeshBasicMaterial({color:0x613528}));
-     backing.position.z=relief/2+.002;group.add(backing);
+    const headArtwork=p.id==="volume-head-front-art" && p.bone==="head";
+    if(headArtwork && tex){
+     // Bend the original damaged helmet illustration onto the real spherical
+     // head: no flat square, edge-on flap or faux side-panel can ever appear.
+     const geo=new THREE.SphereGeometry(.424,32,18,Math.PI,Math.PI,.13,Math.PI-.26);
+     mat.side=THREE.FrontSide;mat.transparent=true;mat.alphaTest=.10;
+     mesh=new THREE.Mesh(geo,mat);
+     mesh.position.z+=.432;group.add(mesh);
+    }else{
+     const geo=new THREE.PlaneGeometry(d[0],d[1]);
+     const depth=layer==="2.5d"?(p.file?1:Math.min(5,Math.max(1,p.depth||1))):1;
+     mesh=new THREE.InstancedMesh(geo,mat,depth);
+     mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+     for(let i=0;i<depth;i++){tempM.makeTranslation(0,0,i*.008);mesh.setMatrixAt(i,tempM);}
+     mesh.instanceMatrix.needsUpdate=true;mesh.frustumCulled=false;group.add(mesh);
+     if(layer==="2.5d"&&tex&&["plate","gear","panel","piston"].includes(p.kind)){
+      // Albedo alpha is the embossed silhouette. Solid boxes behind transparent
+      // sprite corners were creating the previously rejected square flaps.
+      const relief=Math.min(.032,Math.max(.016,(p.depth||3)*.008));
+      const shadowMat=new THREE.MeshBasicMaterial({map:tex,color:0x613528,transparent:true,
+       alphaTest:.15,side:THREE.DoubleSide,depthWrite:true});
+      const backing=new THREE.Mesh(new THREE.PlaneGeometry(d[0],d[1]),shadowMat);
+      backing.position.z=relief;group.add(backing);
+      const contour=new THREE.Mesh(new THREE.PlaneGeometry(d[0],d[1]),
+       new THREE.MeshBasicMaterial({map:tex,color:0x1a0f14,transparent:true,
+        alphaTest:.15,side:THREE.DoubleSide,depthWrite:true}));
+      contour.scale.set(1.035,1.035,1);contour.position.z=relief+.008;group.add(contour);
+     }
     }
     if(layer==="2d"){
      const q=new THREE.Quaternion();

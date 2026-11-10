@@ -18,14 +18,6 @@
 - Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42800339516/job/129775902899 и повтори CI.
 - Взял: чат ChatGPT — Рабочий чат МГ/МГЛ 2026-11-10T10:24:35Z
 
-### PR #191
-- PR: https://github.com/mpaykin1/meta6-lab/pull/191
-- Ветка: `lab/sunken-city-reference-1109`
-- SHA: `393db848e9befdd1025e2f1b3bc061d1fafbf6b5` · последний коммит: 2026-11-10T10:27:48Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: MG-строитель-3 2026-11-10T22:32:00Z
-
 ### PR #193
 - PR: https://github.com/mpaykin1/meta6-lab/pull/193
 - Ветка: `lab/kontur-k7-review`
@@ -171,6 +163,7 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
+- [#191](https://github.com/mpaykin1/meta6-lab/pull/191) Эталон «Затонувший город»: защищённые исходники и обязательная проверка META BOT/CI
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
 - [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния

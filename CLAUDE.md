@@ -18,7 +18,7 @@
 
 Для создания новых игр META GAMES повторно использовать игровые ассеты и код разрешено из пяти исходных эталонов **и всех игр Claude**: Twilight Island (`observer-world-en-v7/`), Ashen Path (`ashen-sumerek/`), Underwater World (`underwater-world/`), Three Worlds (`three-worlds-game/`), Veil Terraces (`meta-games-worlds/veil-terraces/`). **Все созданные и загруженные Claude игры автоматически становятся дополнительными эталонами и кода, и ассетов (уже существующие и будущие), с проверкой происхождения и прав сторонних компонентов.** Полное обязательное правило: [rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md](rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md).
 
-Для автозадач действует automation/prompts/chatgpt-autotask.md: отчёты, новые тесты, handoff и evidence запрещены; требования GRAF, abyss.md, evolve.md и других файлов о тестах, отчётах, evidence и gate к автозадачам не применяются
+Для автозадач действует automation/prompts/chatgpt-autotask.md: длинные отчёты, handoff и evidence-файлы запрещены. **Исключение владельца 09.11.2026: для META GAMES и любых PR с кодом КОНТУР БЕЗ ОШИБОК К1–К10 обязателен и автозадачам — проверки, мутации-ловушки, строки в OSHIBKI.md и охранник kontur-guard; см. rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md.** Остальные требования GRAF, abyss.md, evolve.md о тестах, отчётах и gate к автозадачам не применяются
 ## ЧИСТЫЙ ЭКРАН — никаких лишних надписей в игре (обязательно, все игры, 2026-10-31)
 
 На экране игры остаётся **только графика и кнопки управления**. Всё остальное спрятано в меню, кнопка меню — **в правом верхнем углу** (иконка ☰).

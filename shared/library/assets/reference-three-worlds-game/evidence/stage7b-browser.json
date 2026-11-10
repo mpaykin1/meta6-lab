@@ -1,0 +1,62 @@
+{
+  "models": {
+    "present": [
+      "anchor",
+      "anemone",
+      "angler",
+      "arch",
+      "barrel",
+      "bridge_broken",
+      "cannon",
+      "cathedral_bell",
+      "cathedral_tower",
+      "column_broken",
+      "coral_brain",
+      "coral_branch_orange",
+      "coral_branch_violet",
+      "crate",
+      "eel",
+      "galleon",
+      "gargoyle",
+      "glow_fish_amber",
+      "glow_fish_emerald",
+      "glow_fish_violet",
+      "hot_vent",
+      "kelp_mid",
+      "kelp_tall",
+      "kraken_tentacle",
+      "manta",
+      "sea_fan",
+      "ship_wheel",
+      "street_lamp",
+      "submarine_wreck",
+      "treasure_chest",
+      "viaduct",
+      "whale_skeleton"
+    ],
+    "missing": [],
+    "ruins": 6,
+    "wrecks": 3,
+    "fish": 18,
+    "plants": 20
+  },
+  "atmosphere": {
+    "rays": 9,
+    "marineSnow": 1700,
+    "plankton": 520
+  },
+  "shaderParticleClouds": 2,
+  "rayMeshCount": 9,
+  "visible": true,
+  "oneRenderer": true,
+  "honest_missing": {
+    "ownerGLB": [],
+    "ownerGLSL": [],
+    "verifiedShaders": [
+      "sun_rays",
+      "marine_snow",
+      "plankton"
+    ]
+  },
+  "result": "CODE_GATES_OK; OWNER_PASS_UNKNOWN; PHYSICAL_GPU_UNKNOWN"
+}

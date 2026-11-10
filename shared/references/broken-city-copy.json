@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "broken-city-copy",
+  "title": "Сломанный город (Copy)",
+  "reference_type": "owner-supplied-original",
+  "collection": "META GAMES LAB",
+  "date_added": "2026-11-09",
+  "status": "owner-designated-reference",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "path": "games/broken-city-copy/source-upload.html",
+    "git_blob_sha": "e8815120498c15c744f393b5ed8a34bd3676e98e",
+    "sha256": "310b6f8dd1f182fe7797d27b7a2f4f83bd25af30ddc6d910497d298496e45efa",
+    "size_bytes": 134040,
+    "sidecar_path": "games/broken-city-copy/README.md"
+  },
+  "viewer_url": "https://mpaykin1.github.io/meta6-lab/games/broken-city-copy/",
+  "technologies": [
+    "Three.js r160 (local runtime import)",
+    "WebGL",
+    "GLSL shaders",
+    "instanced buildings",
+    "pixel sprites",
+    "procedural fog",
+    "postprocessing",
+    "keyboard and touch controls"
+  ],
+  "reuse": {
+    "owner_supplied": true,
+    "owner_designated_reference": true,
+    "third_party_rights_verified": false,
+    "requires_dependency_license_review": true,
+    "description": "Reference source preserved unchanged; extract only material with confirmed rights."
+  },
+  "original_preserved": true,
+  "modularized": false
+}

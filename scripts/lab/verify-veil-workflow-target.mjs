@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+const workflow=fs.readFileSync('.github/workflows/lab-veil-shared.yml','utf8');
+const match=workflow.match(/run: node scripts\/meta-bot\/run\.mjs (games\/[a-z0-9-]+)/);
+assert.ok(match,'Workflow must run the real META BOT');
+const target=match[1];
+assert.equal(target,'games/veil-terraces','Workflow must target approved Veil game');
+assert.ok(fs.existsSync(path.join(target,'index.html')),'Game index missing');
+assert.ok(fs.existsSync(path.join(target,'bot-adapter.js')),'Game bot adapter missing');
+assert.ok(fs.readFileSync(path.join(target,'index.html'),'utf8').includes('__META_BOT__'),'Read-only bot snapshot missing');
+console.log('VEIL_WORKFLOW_TARGET_PASS');

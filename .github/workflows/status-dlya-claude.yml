@@ -43,7 +43,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/meta-progress/progress.mjs
       - name: Build GitHub facts and compact summary
-        if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/status/build.mjs

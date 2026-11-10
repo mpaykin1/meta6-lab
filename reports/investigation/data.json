@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-10T09:58:58.816Z",
+  "generated_at": "2026-11-10T09:59:23.946Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -2095,9 +2095,9 @@
       "number": 42344683879,
       "url": "https://github.com/mpaykin1/World_server/actions/runs/42344683879",
       "title": "automation-watchdog",
-      "state": "нет данных",
-      "sha": null,
-      "updated_at": null
+      "state": "failure",
+      "sha": "0cf972347edfc11c6aa4b62dbb2228fdd078d59b",
+      "updated_at": "2026-11-07T05:55:00Z"
     },
     {
       "label": "META BOT",
@@ -2117,9 +2117,9 @@
       "number": 42332660006,
       "url": "https://github.com/mpaykin1/World_server/actions/runs/42332660006",
       "title": "Quality Canary Deploy",
-      "state": "нет данных",
-      "sha": null,
-      "updated_at": null
+      "state": "failure",
+      "sha": "0cf972347edfc11c6aa4b62dbb2228fdd078d59b",
+      "updated_at": "2026-11-07T03:21:55Z"
     }
   ],
   "errors": [

@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - 'scripts/library/catalog-systems.mjs'
+      - 'scripts/library/catalog-cli.mjs'
+      - 'scripts/library/mutate-catalog-build.mjs'
       - 'scripts/library/source-policy.mjs'
       - 'scripts/library/verify-catalog.mjs'
       - 'scripts/library/mutate-catalog.mjs'
@@ -26,10 +28,14 @@ jobs:
           node --check scripts/library/catalog-systems.mjs
           node --check scripts/library/verify-catalog.mjs
           node --check scripts/library/mutate-catalog.mjs
+          node --check scripts/library/catalog-cli.mjs
+          node --check scripts/library/mutate-catalog-build.mjs
       - name: Run deceptive catalog mutations
-        run: node scripts/library/mutate-catalog.mjs
+        run: |
+          node scripts/library/mutate-catalog.mjs
+          node scripts/library/mutate-catalog-build.mjs
       - name: Build catalog for first three games
-        run: node scripts/library/catalog-systems.mjs --games=twilight-isle-classic,broken-city,archer-in-the-fog
+        run: node scripts/library/catalog-cli.mjs --games=twilight-isle-classic,broken-city,archer-in-the-fog
       - name: Verify catalog
         run: node scripts/library/verify-catalog.mjs
       - name: Show system counts by game

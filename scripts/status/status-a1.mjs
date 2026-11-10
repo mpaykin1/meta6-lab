@@ -3,6 +3,15 @@ import { readFile, writeFile } from "node:fs/promises";
 
 export const WORKFLOW_NAME = "A1 STATUS";
 
+// Repository identity is derived from git origin, never from CI-specific flags.
+export function repositoryFromRemote(remote) {
+  const match = remote.trim().match(
+    /^(?:https:\/\/github\.com\/|git@github\.com:)([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+?)(?:\.git)?\/?$/
+  );
+  if (!match) throw new Error("Origin must point to a GitHub repository");
+  return match[1] + "/" + match[2];
+}
+
 export function parseFinish(markdown) {
   const rows = [];
   for (const line of markdown.split("\n")) {

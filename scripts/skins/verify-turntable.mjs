@@ -104,7 +104,9 @@ export function inspectImage(bytes,bg,angle,hasEffect){
  const detached=image.parts.slice(1).filter(c=>
    c.area>=main.area*LIMITS.largeComponentFraction&&
    !(hasEffect&&c.bright>.55&&c.area<main.area*.08));
- if(detached.length)fail(angle+'°: '+(detached.length+1)+' disconnected substantial pieces');
+ if(detached.length)fail(angle+'°: '+(detached.length+1)+' disconnected substantial pieces: '+
+  JSON.stringify(image.parts.slice(0,6).map(c=>({area:c.area,box:[c.minX,c.minY,c.maxX,c.maxY],
+   bright:+c.bright.toFixed(2)}))));
  let l=0,lb=0;
  for(const p of main.pixels){
   const k=p*3;l+=lum(bytes[k],bytes[k+1],bytes[k+2]);

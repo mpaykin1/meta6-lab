@@ -2,14 +2,6 @@
 
 Итог: зависло 10 · конфликт 7 · непроверено 0 · красные проверки 3 · нужен Claude 21
 
-### PR #203
-- PR: https://github.com/mpaykin1/meta6-lab/pull/203
-- Ветка: `lab/skin-rusty-robot`
-- SHA: `edf413f27244552cd36889fa1b555a9a062a9b56` · последний коммит: 2026-11-09T19:38:00Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-строитель-3 2026-11-11T06:34:00Z
-
 ### PR #205
 - PR: https://github.com/mpaykin1/meta6-lab/pull/205
 - Ветка: `lab/owner-pult`
@@ -123,6 +115,7 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
+- [#203](https://github.com/mpaykin1/meta6-lab/pull/203) Защищённые workflow и эталон; конфликт с main, требуется Claude.
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
 - [#191](https://github.com/mpaykin1/meta6-lab/pull/191) Эталон «Затонувший город»: исходный ZIP, 3D-витрина и каталог ассетов
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния

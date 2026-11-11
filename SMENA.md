@@ -149,3 +149,11 @@
 
 ### Состояние PR #241 2026-11-11T11:31Z
 - SHA [077142ee](https://github.com/mpaykin1/meta6-lab/commit/077142ee8278fd8bb153cf8a026a9c7626860912) после 2 отдельных подтверждённых CI-дефектов: [index job](https://github.com/mpaykin1/meta6-lab/actions/runs/43011648218/job/130492473827), [STOROZHA job](https://github.com/mpaykin1/meta6-lab/actions/runs/43011648388/job/130492561123). Исправлены мутации, восстановлен защищённый verifier; новые shared-original, STOROZHA reference и META GAMES guard — success. Остались незавершённые KONTUR, B1 и browser, новое изменение main с момента merge, независимый reviewer. Не сливать раньше.
+ 
+## Продолжение 11.11.2026 — Archer #132 / текущий рабочий цикл
+
+- Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ, продолжение ранее взятой карточки #132 (не новая задача).
+- Исходный HEAD: `ecfdb2558b76243dc605bc7cee4e5f77b953146d`; мобильный бот [42999845500](https://github.com/mpaykin1/meta6-lab/actions/runs/42999845500) остановился на уровнях 4–5, desktop 7/7.
+- Реальное изменение: [f1455c5](https://github.com/mpaykin1/meta6-lab/commit/f1455c56700c4e8cf9c787ec3dbddaceebdef968) — на устойчивом низком FPS прямая отрисовка активной сцены вместо многопроходного bloom. Регрессионные проверки и 3 мутации: [04306d1](https://github.com/mpaykin1/meta6-lab/commit/04306d117db37bcd4f281ad0ce048e3436c4358e), [bfe0d7d](https://github.com/mpaykin1/meta6-lab/commit/bfe0d7d92bdf333e5db35a4d8d602373cccbd5cb).
+- Синхронизация с main: [dd933de](https://github.com/mpaykin1/meta6-lab/commit/dd933de3b699c93151dee3ff7d3bbab03eeea4f4) — двухродительский merge, защита основного дерева, OSHIBKI #39–41; GitHub compare `behind=0`, `mergeable=true` на момент проверки.
+- Следующий шаг: проверить все обязательные Actions **на `dd933de3b699c93151dee3ff7d3bbab03eeea4f4`** и логи мобильного META BOT, при подтверждённом падении исправить причину; затем независимое ревью. Пока CI queued/in_progress — **не сливать**.

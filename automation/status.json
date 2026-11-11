@@ -1,18 +1,65 @@
 {
-  "generated_at": "2026-11-11T05:15:00.249Z",
+  "generated_at": "2026-11-11T05:31:36.969Z",
   "sha": {
-    "lab": "нет данных",
-    "mg": "нет данных"
+    "lab": "4b548cfc3b67b19695f6928a711ee17639102edd",
+    "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42964220784",
+  "run": "нет данных",
   "review": {
-    "protected": "нет данных",
-    "redLab": "нет данных",
-    "redMg": "нет данных",
+    "protected": [
+      {
+        "number": 230,
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 227,
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 216,
+        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
+        "paths": [
+          ".github/workflows/status-dlya-claude.yml",
+          "scripts/status/selftest.mjs"
+        ]
+      },
+      {
+        "number": 223,
+        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
+      },
+      {
+        "number": 215,
+        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
+      },
+      {
+        "number": 217,
+        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
+      }
+    ],
+    "redLab": [],
+    "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
       "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
@@ -179,23 +226,172 @@
     ]
   },
   "pr": {
-    "open": "нет данных",
+    "open": 42,
     "conflicts": "нет данных",
-    "merged": "нет данных",
-    "closed": "нет данных",
-    "mergedItems": "нет данных",
-    "protectedItems": "нет данных"
+    "merged": 7,
+    "closed": 41,
+    "mergedItems": [
+      {
+        "number": 230,
+        "title": "Dispatcher: retry queue push when main moves",
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88"
+      },
+      {
+        "number": 227,
+        "title": "MG Dispatcher: automated PR triage queue",
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496"
+      },
+      {
+        "number": 226,
+        "title": "ЛОР: Древо миров и каталог skin-trainer — чистая история без",
+        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8"
+      },
+      {
+        "number": 216,
+        "title": "СВОДКА ДЛЯ CLAUDE: facts-only GitHub Actions bot",
+        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee"
+      },
+      {
+        "number": 223,
+        "title": "Investigation: GitHub Pages dashboard + hourly GitHub-only t",
+        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66"
+      },
+      {
+        "number": 215,
+        "title": "Portal Visits: исправить устаревшее ожидание 12 миров",
+        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d"
+      },
+      {
+        "number": 217,
+        "title": "Fix: Veil Shared CI проверяет существующую игру",
+        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3"
+      }
+    ],
+    "protectedItems": [
+      {
+        "number": 230,
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 227,
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 216,
+        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
+        "paths": [
+          ".github/workflows/status-dlya-claude.yml",
+          "scripts/status/selftest.mjs"
+        ]
+      },
+      {
+        "number": 223,
+        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
+      },
+      {
+        "number": 215,
+        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
+      },
+      {
+        "number": 217,
+        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
+      }
+    ]
   },
   "changes": {
     "lab": {
-      "count": "нет данных",
-      "folders": "нет данных"
+      "count": 679,
+      "folders": ".github:5, .lab-sync-base:1, AGENTS.md:1, automation:7, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:11, shared:2, ZADACHI.md:1"
     },
     "mg": {
-      "count": "нет данных",
-      "folders": "нет данных"
+      "count": 2,
+      "folders": "AGENTS.md:1, automation:1, rules:1"
     }
   },
-  "games": "нет данных",
-  "errors": "нет данных"
+  "games": [
+    {
+      "name": "archer-in-the-fog",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "asqura-ilya-reference",
+      "bot": "нет данных",
+      "storefront": "нет"
+    },
+    {
+      "name": "broken-city",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "broken-city-copy",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "rainbow-acceleration",
+      "bot": "нет данных",
+      "storefront": "нет"
+    },
+    {
+      "name": "skin-trainer",
+      "bot": "нет данных",
+      "storefront": "нет"
+    },
+    {
+      "name": "sumerki-i-pepel-2",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "sumerki-i-pepel-2-copy",
+      "bot": "нет данных",
+      "storefront": "нет"
+    },
+    {
+      "name": "twilight-isle-classic",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "twilight-isles",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "veil-terraces",
+      "bot": "нет данных",
+      "storefront": "да"
+    }
+  ],
+  "errors": [
+    "| 18 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая игра, неверная игра, пропавшая команда бота |",
+    "| 17 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дубли, внешние/небезопасные ссылки, неверный первый мир |",
+    "| 24 | 10.11.2026 | Сводка без progress.json или при ошибке GitHub API могла бы выдавать непроверенные пункты как «готово» и прятать красные прогоны; старые варианты #211/#212 не защищали эту сводку полным набором мутаций | Изолированные ответы: отсутствующий JSON, HTTP 403, failure workflow и подмена статуса PR | `scripts/status/selftest.mjs`: `missing-progress-as-ready`, `api-error-crashes-summary`, `red-run-as-green`, `merged-as-open`, `open-as-merged`, `protected-file-ignored`, ограничения размера, `hardcoded-protected-file-cheat` |",
+    "| 25 | 10.11.2026 | Сводка игнорировала новую запись OSHIBKI с уже использованным номером (в main номер 18 повторён) | Сравнение только по номеру ошибочно скрывало новую строку | `scripts/status/selftest.mjs`: `duplicate-error-number-hidden` |",
+    "| 26 | 10.11.2026 | Ошибка GitHub Compare возвращала строку «нет данных», а сводка печатала undefined коммитов | Подмена сравнения на исключение API | `scripts/status/selftest.mjs`: `failed-compare-disguised-as-zero` |",
+    "| 27 | 10.11.2026 | KONTUR Guard отверг бот сводки за прямую зависимость от `process.env.GITHUB_*` (К4.1) | [красный KONTUR Guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42759421016) | `scripts/status/selftest.mjs`: `raw-github-env-rejected` (переменные передаются через `STATUS_*` workflow) |",
+    "| 28 | 10.11.2026 | Ошибка GitHub API для списка PR интерпретировалась как отсутствие защищённых PR (пустой список вместо «нет данных») | Изолированный ответ API 403 | `scripts/status/selftest.mjs`: `pr-api-error-hides-protected-merges` |",
+    "| 29 | 10.11.2026 | Диспетчер: KONTUR Guard отклонил условное чтение `process.env.GITHUB_*` и ветвление по `process.argv` в модуле библиотеки | [KONTUR Guard 42787965154](https://github.com/mpaykin1/meta6-lab/actions/runs/42787965154) | Разделён модуль `build.mjs` и `run.mjs`, авторизация без ветвления по среде; существующая вечная ловушка `scripts/kontur/mutate-kontur-guard.mjs` и `scripts/dispetcher/test/build.test.mjs` |",
+    "| 30 | 10.11.2026 | Диспетчер: первый прогон на main упал — пока строилась очередь, в main пришёл чужой коммит и `git push` отклонён (fetch first), DISPETCHER.md не появился | [прогон 42790554576](https://github.com/mpaykin1/meta6-lab/actions/runs/42790554576) | Шаг `Commit queue` в `.github/workflows/dispetcher.yml`: до 5 попыток — свежий main, пересборка очереди, повторный push; проверка `scripts/dispetcher/test/build.test.mjs`: `trap: workflow retries push when main moved` |"
+  ]
 }

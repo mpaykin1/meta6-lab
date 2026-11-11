@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400"><defs><filter id="blur"><feGaussianBlur stdDeviation="18"/></filter><filter id="glow"><feGaussianBlur stdDeviation="5"/></filter></defs>
+<rect width="640" height="400" fill="#061522"/>
+<circle cx="450" cy="101" r="79" fill="#b0dfd0" opacity=".28" filter="url(#blur)"/>
+<circle cx="450" cy="101" r="39" fill="#cbe9dd" opacity=".65"/>
+<path d="M0 215 93 139 174 191 284 128 377 206 519 135 640 193V400H0Z" fill="#193844"/>
+<path d="M0 292 134 199 221 247 341 161 461 231 572 181 640 242V400H0Z" fill="#102d3c"/>
+<path d="M0 341 187 239 290 270 104 386Z" fill="#416a67" stroke="#81b4aa" stroke-width="3"/>
+<path d="M187 239 266 194 367 232 290 270Z" fill="#749790" stroke="#aed2c3" stroke-width="3"/>
+<path d="M290 270 367 232V319L290 357Z" fill="#1b3b48" stroke="#648b88" stroke-width="3"/>
+<path d="M104 386 290 270V357L213 400H104Z" fill="#183340"/>
+<path d="M267 196 285 159 329 143 351 177 368 231 298 256Z" fill="#2b5057" stroke="#83beb2" stroke-width="3"/>
+<path d="M285 163 285 98 310 84 338 99 339 171" fill="#203743" stroke="#9ed7c6" stroke-width="5"/>
+<path d="M305 159V118l13-7 12 9v39" fill="#90e9d4"/>
+<path d="M305 159V118l13-7 12 9v39" fill="none" stroke="#75fff0" stroke-width="16" opacity=".48" filter="url(#glow)"/>
+<path d="M398 226Q437 297 395 400" fill="none" stroke="#8adad2" stroke-width="17" opacity=".75"/>
+<path d="M401 228Q433 290 408 400" fill="none" stroke="#e5f8e8" stroke-width="4" opacity=".72"/>
+<path d="M184 325l60 -23 13 5 -59 25Z" fill="#b3d9c7" opacity="0.17"/><path d="M203 313l60 -23 13 5 -59 25Z" fill="#b3d9c7" opacity="0.25"/><path d="M222 301l60 -23 13 5 -59 25Z" fill="#b3d9c7" opacity="0.33"/><path d="M241 289l60 -23 13 5 -59 25Z" fill="#b3d9c7" opacity="0.41000000000000003"/><path d="M260 277l60 -23 13 5 -59 25Z" fill="#b3d9c7" opacity="0.49"/><path d="M279 265l60 -23 13 5 -59 25Z" fill="#b3d9c7" opacity="0.5700000000000001"/><path d="M298 253l60 -23 13 5 -59 25Z" fill="#b3d9c7" opacity="0.65"/>
+<circle cx="43" cy="23" r="0.7" fill="#d5fff2" opacity="0.15"/><circle cx="216" cy="120" r="1.7" fill="#d5fff2" opacity="0.25"/><circle cx="389" cy="217" r="2.7" fill="#d5fff2" opacity="0.35"/><circle cx="562" cy="314" r="0.7" fill="#d5fff2" opacity="0.45000000000000007"/><circle cx="97" cy="46" r="1.7" fill="#d5fff2" opacity="0.55"/><circle cx="270" cy="143" r="2.7" fill="#d5fff2" opacity="0.65"/><circle cx="443" cy="240" r="0.7" fill="#d5fff2" opacity="0.15"/><circle cx="616" cy="337" r="1.7" fill="#d5fff2" opacity="0.25"/><circle cx="151" cy="69" r="2.7" fill="#d5fff2" opacity="0.35"/><circle cx="324" cy="166" r="0.7" fill="#d5fff2" opacity="0.45000000000000007"/><circle cx="497" cy="263" r="1.7" fill="#d5fff2" opacity="0.55"/><circle cx="32" cy="360" r="2.7" fill="#d5fff2" opacity="0.65"/><circle cx="205" cy="92" r="0.7" fill="#d5fff2" opacity="0.15"/><circle cx="378" cy="189" r="1.7" fill="#d5fff2" opacity="0.25"/><circle cx="551" cy="286" r="2.7" fill="#d5fff2" opacity="0.35"/><circle cx="86" cy="18" r="0.7" fill="#d5fff2" opacity="0.45000000000000007"/><circle cx="259" cy="115" r="1.7" fill="#d5fff2" opacity="0.55"/><circle cx="432" cy="212" r="2.7" fill="#d5fff2" opacity="0.65"/><circle cx="605" cy="309" r="0.7" fill="#d5fff2" opacity="0.15"/><circle cx="140" cy="41" r="1.7" fill="#d5fff2" opacity="0.25"/><circle cx="313" cy="138" r="2.7" fill="#d5fff2" opacity="0.35"/><circle cx="486" cy="235" r="0.7" fill="#d5fff2" opacity="0.45000000000000007"/><circle cx="21" cy="332" r="1.7" fill="#d5fff2" opacity="0.55"/><circle cx="194" cy="64" r="2.7" fill="#d5fff2" opacity="0.65"/><circle cx="367" cy="161" r="0.7" fill="#d5fff2" opacity="0.15"/><circle cx="540" cy="258" r="1.7" fill="#d5fff2" opacity="0.25"/><circle cx="75" cy="355" r="2.7" fill="#d5fff2" opacity="0.35"/><circle cx="248" cy="87" r="0.7" fill="#d5fff2" opacity="0.45000000000000007"/>
+<path d="M0 260Q211 199 419 258T640 223" fill="none" stroke="#c7f6e5" stroke-width="70" opacity=".17" filter="url(#blur)"/>
+<path d="M0 371Q284 284 640 367" fill="none" stroke="#c7f6e5" stroke-width="87" opacity=".17" filter="url(#blur)"/></svg>

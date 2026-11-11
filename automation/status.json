@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T07:30:19.579Z",
+  "generated_at": "2026-11-11T07:43:34.543Z",
   "sha": {
-    "lab": "ab7359df1c1e88e3c8fa69621d019858a7bd111f",
+    "lab": "eec0667d1efed9611623364bd71c0ce18ec5b897",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42979892509",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42981543763",
   "review": {
     "protected": [
       {
@@ -76,13 +76,8 @@
     "redLab": [
       {
         "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42977839125",
-        "step": "Commit queue"
-      },
-      {
-        "workflow": "Investigation snapshot",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42977839123",
-        "step": "Refresh investigation snapshot from GitHub"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42979892264",
+        "step": "Run node scripts/dispetcher/run.mjs"
       }
     ],
     "redMg": [],
@@ -252,7 +247,7 @@
     ]
   },
   "pr": {
-    "open": 39,
+    "open": 40,
     "conflicts": "нет данных",
     "merged": 14,
     "closed": 42,
@@ -394,7 +389,7 @@
   },
   "changes": {
     "lab": {
-      "count": 818,
+      "count": 822,
       "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:6, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1"
     },
     "mg": {

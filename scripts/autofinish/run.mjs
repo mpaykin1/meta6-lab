@@ -1,12 +1,13 @@
 // Fail-closed PR finisher. Only the trusted main checkout executes this file.
 import {execFileSync} from 'node:child_process';
 const repo=process.env.AUTOFINISH_REPO,token=process.env.AUTOFINISH_TOKEN;
+const updateToken=process.env.AUTOFINISH_UPDATE_TOKEN;
 if(!repo||!token)throw Error('Missing AUTOFINISH credentials');
 const base='https://api.github.com/repos/'+repo;
 const headers={Authorization:'Bearer '+token,Accept:'application/vnd.github+json',
   'X-GitHub-Api-Version':'2022-11-28'};
-async function api(path,method='GET',data){
-  const r=await fetch(base+path,{method,headers,...(data?{body:JSON.stringify(data)}:{})});
+async function api(path,method='GET',data,authorization=token){
+  const r=await fetch(base+path,{method,headers:{...headers,Authorization:'Bearer '+authorization},...(data?{body:JSON.stringify(data)}:{})});
   const raw=await r.text();let json;
   try{json=raw?JSON.parse(raw):{};}catch{json={message:raw.slice(0,200)};}
   if(!r.ok)throw Error(method+' '+path+' HTTP '+r.status+': '+(json.message||''));
@@ -105,9 +106,20 @@ async function finish(pr,main){
   await retryInfrastructure(pr,files);
   const fresh=await api('/pulls/'+pr.number);
   const compare=await api('/compare/'+main+'...'+fresh.head.sha);
-  // Claude 11.11.2026: ветку не обновляем (пуш GITHUB_TOKEN не запускает CI).
-  if(compare.behind_by>0&&(fresh.mergeable_state==='dirty'||fresh.mergeable===false)){
-    console.log('NEEDS_CLAUDE conflict '+fresh.html_url);return;
+  // A stale branch must be synchronized by an independent token: a GITHUB_TOKEN
+  // update would suppress synchronize-triggered CI. Never merge without NEW SHA checks.
+  if(compare.behind_by>0){
+    if(fresh.mergeable_state==='dirty'||fresh.mergeable===false){
+      console.log('NEEDS_CLAUDE conflict '+fresh.html_url);return;
+    }
+    if(!updateToken){
+      console.log('NEEDS_CLAUDE missing AUTOFINISH_UPDATE_TOKEN for '+fresh.html_url);return;
+    }
+    if((await api('/git/ref/heads/main')).object.sha!==main)return;
+    await api('/pulls/'+fresh.number+'/update-branch','PUT',
+      {expected_head_sha:fresh.head.sha},updateToken);
+    console.log('UPDATE_REQUESTED '+fresh.html_url+' old '+fresh.head.sha);
+    return;
   }
   if(fresh.mergeable!==true||!['clean','unstable'].includes(fresh.mergeable_state))return;
   const result=await checks(fresh.head.sha);

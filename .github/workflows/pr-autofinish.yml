@@ -1,7 +1,9 @@
 name: MG PR autofinish
 on:
   schedule:
-    - cron: '7 * * * *'
+    - cron: '7,22,37,52 * * * *'
+  pull_request_target:
+    types: [opened, reopened, synchronize, ready_for_review, closed]
   workflow_dispatch:
 permissions:
   contents: write
@@ -28,4 +30,6 @@ jobs:
         env:
           AUTOFINISH_REPO: ${{ github.repository }}
           AUTOFINISH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # A separate actor is required: GITHUB_TOKEN branch updates do not trigger PR CI.
+          AUTOFINISH_UPDATE_TOKEN: ${{ secrets.AUTOFINISH_UPDATE_TOKEN }}
         run: node scripts/autofinish/run.mjs

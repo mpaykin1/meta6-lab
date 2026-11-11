@@ -1,14 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 15 · конфликт 5 · красные проверки 3 · нужен Claude 21
-
-### PR #203
-- PR: https://github.com/mpaykin1/meta6-lab/pull/203
-- Ветка: `lab/skin-rusty-robot`
-- SHA: `edf413f27244552cd36889fa1b555a9a062a9b56` · последний коммит: 2026-11-09T19:38:00Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: —
+Итог: зависло 10 · конфликт 7 · непроверено 0 · красные проверки 3 · нужен Claude 21
 
 ### PR #205
 - PR: https://github.com/mpaykin1/meta6-lab/pull/205
@@ -16,15 +8,15 @@
 - SHA: `16715714f06e0071871dc6df59560b2ba312867c` · последний коммит: 2026-11-09T17:01:32Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-строитель-3 2026-11-11T03:30:00Z
+- Взял: —
 
-### PR #218
-- PR: https://github.com/mpaykin1/meta6-lab/pull/218
-- Ветка: `lab/remont-r1-library`
-- SHA: `bd5d65f72c4964383256e605f01242a35c6ec69f` · последний коммит: 2026-11-10T06:22:46Z
+### PR #219
+- PR: https://github.com/mpaykin1/meta6-lab/pull/219
+- Ветка: `lab/status-a1-20261110`
+- SHA: `4634c05ecc9ad59290ae403c46e167057e556576` · последний коммит: 2026-11-10T10:34:34Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-строитель-4 2026-11-11T04:41:00Z
+- Взял: чат ChatGPT — Рабочий чат МГ/МГЛ 2026-11-10T10:24:35Z
 
 ### PR #221
 - PR: https://github.com/mpaykin1/meta6-lab/pull/221
@@ -37,17 +29,25 @@
 ### PR #225
 - PR: https://github.com/mpaykin1/meta6-lab/pull/225
 - Ветка: `lab/render-broken-city-safe-1110`
-- SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
+- SHA: `3895b1aabcfbda047aec756873b951ecdf03f4f8` · последний коммит: 2026-11-11T06:12:50Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
 
-### PR #87
-- PR: https://github.com/mpaykin1/meta6-lab/pull/87
-- Ветка: `lab/platform-play-connect-earn-20261107`
-- SHA: `d66f304967540ca9b9c144140ea51c971b3e2365` · последний коммит: 2026-11-10T22:15:48Z
-- Проблема: Красная проверка: bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169)
-- Задание: Исправь bot по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169 и повтори CI.
+### PR #235
+- PR: https://github.com/mpaykin1/meta6-lab/pull/235
+- Ветка: `lab/fix-mobile-screen-all-games-1111`
+- SHA: `5d3fd0654e9554a8015f63c6f62000458779ff9c` · последний коммит: 2026-11-11T05:08:32Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: —
+
+### PR #237
+- PR: https://github.com/mpaykin1/meta6-lab/pull/237
+- Ветка: `lab/chat-pr-queue-1111`
+- SHA: `d0f838f452ac64f8ef296c9faa4c27e35c6a7e50` · последний коммит: 2026-11-11T06:25:01Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
 
 ### PR #132
@@ -58,13 +58,13 @@
 - Задание: Исправь mutate-kontur-guard по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42908743176/job/130153488252 и повтори CI.
 - Взял: MG-ремонтник 2026-11-10T21:48:19Z
 
-### PR #219
-- PR: https://github.com/mpaykin1/meta6-lab/pull/219
-- Ветка: `lab/status-a1-20261110`
-- SHA: `4634c05ecc9ad59290ae403c46e167057e556576` · последний коммит: 2026-11-10T10:34:34Z
-- Проблема: Красная проверка: kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42800339516/job/129775902899)
-- Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42800339516/job/129775902899 и повтори CI.
-- Взял: чат ChatGPT — Рабочий чат МГ/МГЛ 2026-11-10T10:24:35Z
+### PR #87
+- PR: https://github.com/mpaykin1/meta6-lab/pull/87
+- Ветка: `lab/platform-play-connect-earn-20261107`
+- SHA: `faf69f129ae3510a81e59a48328534fed8a5f944` · последний коммит: 2026-11-11T06:23:29Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
 
 ### PR #222
 - PR: https://github.com/mpaykin1/meta6-lab/pull/222
@@ -77,7 +77,7 @@
 ### PR #224
 - PR: https://github.com/mpaykin1/meta6-lab/pull/224
 - Ветка: `lab/merge-universal`
-- SHA: `1e7ac07afadd71920b78e5b19b56a74e96b7a0f3` · последний коммит: 2026-11-10T21:27:55Z
+- SHA: `697454722d7c7fbb944a0b073ccc443e0ded855e` · последний коммит: 2026-11-11T06:24:42Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
@@ -90,34 +90,10 @@
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
 
-### PR #231
-- PR: https://github.com/mpaykin1/meta6-lab/pull/231
-- Ветка: `lab/dispetcher-mergeable-null-1110`
-- SHA: `710b10da752cd9de09b35a50468c7ac0544ff78c` · последний коммит: 2026-11-10T10:07:11Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
-### PR #232
-- PR: https://github.com/mpaykin1/meta6-lab/pull/232
-- Ветка: `lab/creator-features-copy-1110`
-- SHA: `7ce072e6557df728760b92fc57eb95d3fd23f570` · последний коммит: 2026-11-10T10:29:47Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
 ### PR #233
 - PR: https://github.com/mpaykin1/meta6-lab/pull/233
 - Ветка: `lab/import-five-cc0-packs`
 - SHA: `0ae6fcc6008e59f9304e65f1f8f5ee67ecac3827` · последний коммит: 2026-11-10T10:38:05Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
-### PR #234
-- PR: https://github.com/mpaykin1/meta6-lab/pull/234
-- Ветка: `lab/claude-adfree-catalog-1110`
-- SHA: `1b690ccb1a9c2f6fe1f123094e0c243f705f5602` · последний коммит: 2026-11-10T13:56:07Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
@@ -138,25 +114,9 @@
 - Задание: Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.
 - Взял: —
 
-### PR #125
-- PR: https://github.com/mpaykin1/meta6-lab/pull/125
-- Ветка: `lore/alternative-last-seed-20261108`
-- SHA: `7ec77d258ad907f846652f82ce021650fba15c36` · последний коммит: 2026-11-08T07:48:16Z
-- Проблема: 💤 ЗАБРОШЕНО более 2 суток
-- Задание: Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.
-- Взял: —
-
-### PR #126
-- PR: https://github.com/mpaykin1/meta6-lab/pull/126
-- Ветка: `lab/sketch-to-game-standard`
-- SHA: `2151d7ad654ac992c63f382cf74f653ed7387182` · последний коммит: 2026-11-08T09:45:45Z
-- Проблема: 💤 ЗАБРОШЕНО более 2 суток
-- Задание: Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.
-- Взял: —
-
 ## НУЖЕН CLAUDE
+- [#203](https://github.com/mpaykin1/meta6-lab/pull/203) Защищённые workflow и эталон; конфликт с main, требуется Claude.
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
-- [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
 - [#191](https://github.com/mpaykin1/meta6-lab/pull/191) Эталон «Затонувший город»: исходный ZIP, 3D-витрина и каталог ассетов
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния
 - [#209](https://github.com/mpaykin1/meta6-lab/pull/209) Библиотека игр: эталоны, системы, ассеты и MCP
@@ -169,6 +129,7 @@
 - [#210](https://github.com/mpaykin1/meta6-lab/pull/210) SKIN FACTORY: ножницы и ловушки для parts-sheet
 - [#220](https://github.com/mpaykin1/meta6-lab/pull/220) Сторож таблицы: конфликты, красные проверки и МГ
 - [#3](https://github.com/mpaykin1/meta6-lab/pull/3) Разблокировать проверки PR #3 Twilight Island
+- [#218](https://github.com/mpaykin1/meta6-lab/pull/218) РЕМОНТ R1: пересборка библиотеки и исключение копий
 - [#208](https://github.com/mpaykin1/meta6-lab/pull/208) Restore original Ashen Path asset pack reference after sync
 - [#204](https://github.com/mpaykin1/meta6-lab/pull/204) B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер
 - [#192](https://github.com/mpaykin1/meta6-lab/pull/192) M6

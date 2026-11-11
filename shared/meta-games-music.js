@@ -290,6 +290,52 @@
     document.body.appendChild(button);
     updateButton();
   }
+  // Read only public game state when available; no changes to game mechanics.
+  let knownState = '';
+  let knownDanger = false;
+  let knownPause = false;
+  let maxObservedHealth = 0;
+  function observeGameplay() {
+    let state = '';
+    let lowHealth = false;
+    let gamePaused = false;
+    const isle = window.__isle;
+    if (isle && isle.G) {
+      const g = isle.G;
+      state = typeof g.state === 'string' ? g.state.toLowerCase() : '';
+      gamePaused = state === 'paused';
+      const hero = isle.player;
+      if (hero && typeof hero.hp === 'number' && hero.hp > 0) {
+        const possibleMax = hero.maxHp || hero.maxHP || hero.hpMax || hero.hp;
+        maxObservedHealth = Math.max(maxObservedHealth, possibleMax);
+        lowHealth = maxObservedHealth > 0 && hero.hp / maxObservedHealth <= .32;
+      }
+    } else if (window.__rr) {
+      const racing = window.__rr.state;
+      state = racing && typeof racing.state === 'string' ? racing.state.toLowerCase() : '';
+    } else if (typeof window.__abyssStats === 'function') {
+      const abyss = window.__abyssStats();
+      gamePaused = !!(abyss && abyss.paused);
+      state = abyss && abyss.cine ? 'intro' : '';
+    }
+    if (gamePaused !== knownPause) {
+      knownPause = gamePaused;
+      window.MetaGamesMusic.setPaused(gamePaused);
+    }
+    if (state && state !== knownState) {
+      if (state === 'title' || state === 'menu' || state === 'intro') setMood('intro');
+      else if (state === 'play' || state === 'playing' || state === 'game') setMood('explore');
+      else if (state === 'win' || state === 'won' || state === 'victory') setMood('release');
+      else if (state === 'dead' || state === 'defeat') setMood('mystery');
+      knownState = state;
+    }
+    if (lowHealth !== knownDanger) {
+      knownDanger = lowHealth;
+      window.MetaGamesMusic.setDanger(lowHealth);
+    }
+  }
+  window.setInterval(observeGameplay, 950);
+
   function unlock(event) {
     if (event && event.type === 'keydown' &&
         (event.key === 'Tab' || event.key === 'Shift')) return;

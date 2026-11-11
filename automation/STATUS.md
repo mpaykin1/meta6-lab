@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T10:56:27.502Z | МГЛ: a769e843876c1abe2440198d5405b32a70120e6d | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/43007730547
+UTC: 2026-11-11T11:16:16.279Z | МГЛ: 76e3a9719d22749ea8f2f13364dca790a6eeef38 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/43010437096
 ## ПРОВЕРИТЬ CLAUDE
 - PR #238 9546bef2d74794f6ecc717a2f4095682fd2e137f: .github/workflows/journal-projections.yml, .github/workflows/pr-autofinish.yml, .github/workflows/report-completion-guard.yml, .github/workflows/storozha-branches.yml, .github/workflows/storozha-quota.yml, .git… (сокращено)
 - PR #231 8790e6339ccf62af9584a4353749c864d4cf7785: scripts/dispetcher/mutate-mergeable-null.mjs
@@ -55,7 +55,7 @@ P1 — нет данных: нет данных
 #232 META GAMES: возможности платформы для начинающих разработчик | d7c3dac578c1b841fe7d259c944b7d7aec18cf98
 ещё 11: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 884 коммитов | нет данных
+МГЛ: 886 коммитов | нет данных
 МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

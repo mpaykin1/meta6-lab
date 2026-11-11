@@ -87,3 +87,10 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/235; ветка `lab/fix-mobile-screen-all-games-1111`, HEAD `5d3fd0654e9554a8015f63c6f62000458779ff9c`.
 - Merge conflict: общая OSHIBKI.md; сохранить все уникальные строки ветки и main. Изменения правил и эталона требуют независимой проверки Claude перед merge.
 - Следующий шаг: сохранить main, устранить конфликт, запустить CI.
+
+### Итог #235 — конфликт устранён
+- Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ, UTC 2026-11-11T06:39:16.719Z.
+- [Merge 114afaf](https://github.com/mpaykin1/meta6-lab/commit/114afaf9caba91e2304ea0ca58db0cfef83be48a): актуальный main сохранён; OSHIBKI мобильный джойстик #35, Underwater camera #36; `scripts/lab/build-site.sh` сохранил executable bit 100755. [PR #235](https://github.com/mpaykin1/meta6-lab/pull/235) теперь mergeable=true.
+- CI текущего head поставлен в очередь: [Actions PR #235](https://github.com/mpaykin1/meta6-lab/pull/235/checks). queued не считать зелёным.
+- НУЖЕН CLAUDE для разрешённого слияния: PR изменяет AGENTS.md, CLAUDE.md, правила и исходный underwater-world/index.html; самостоятельный merge при этих изменениях запрещён.
+- Следующий шаг: проверить все обязательные CI и настоящую фиксированную мобильную сцену, независимое ревью Claude; не включать рекламу.

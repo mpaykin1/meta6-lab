@@ -38,3 +38,5 @@ bash "$dir/verify-check-page-assets.sh"
 node "$dir/mutate-page-assets.mjs"
 bash "$dir/test-sync-from-meta6.sh"
 python3 "$dir/mutate-new-page-links.py"
+git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+python3 "$dir/verify-new-page-links.py"

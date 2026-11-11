@@ -40,6 +40,13 @@ for ref in $(git for-each-ref --format='%(refname:strip=3)' 'refs/remotes/origin
   git diff --name-only "$base" "origin/$ref" | awk -F/ 'NF==1' | while read -r f; do [ -f "$wt/$f" ] && cp "$wt/$f" "$dest/"; done
   rewrite "$dest"
   grep -rlI 'mpaykin1.github.io/meta6-lab/' "$dest" 2>/dev/null | xargs -r sed -i "s#mpaykin1\.github\.io/meta6-lab/#mpaykin1.github.io/meta6-lab/preview/$safe/#g"
+  # Preview copies are never indexable; catalogue canonical/schema URLs remain permanent.
+  if [[ -d "$dest/claude-games" ]]; then
+    while IFS= read -r -d '' page; do
+      sed -i "s#mpaykin1.github.io/meta6-lab/preview/$safe/claude-games/#mpaykin1.github.io/meta6-lab/claude-games/#g" "$page"
+    done < <(find "$dest/claude-games" -type f \( -name '*.html' -o -name '*.xml' \) -print0)
+  fi
+  node scripts/lab/noindex-preview.mjs "$dest"
   git worktree remove --force "$wt"
   echo "$safe" >> "$OUT/.lab-previews"
 done

@@ -18,10 +18,12 @@
       "status": "pending"
     },
     "2_canonical_and_publish": {
-      "status": "pending"
+      "status": "pending",
+      "details": "Preview: build-time noindex и постоянные canonical/Schema URL; live Pages ещё требует подтверждения."
     },
     "3_content_and_validator": {
-      "status": "pending"
+      "status": "pending",
+      "details": "Главная OG-обложка: собственный репозиторный cover вместо внешней Playgama. Остальные страницы — в очереди."
     },
     "4_indexnow_and_sitemap": {
       "status": "pending"
@@ -39,7 +41,8 @@
   "notes": [
     "Не менять защищённые файлы, эталоны, бота и охранников в обход правил",
     "Без зелёного CI не сливать PR",
-    "Только подтверждённые live URL"
+    "Только подтверждённые live URL",
+    "Заменён preview canonical rewrite и включён robots=noindex для HTML-копий веток."
   ],
   "evidence": []
 }

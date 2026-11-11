@@ -10,12 +10,27 @@ const dir=path.join(root,'shared/components'),target=path.join(root,'shared/inde
 const normalize=s=>s.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/[^\n]*/g,'').replace(/\s+/g,' ');
 const gitBlob=data=>crypto.createHash('sha1').update('blob '+data.length+'\0').update(data).digest('hex');
 const components=[],seen=new Map();
+function checkParents(file){
+  const relative=path.relative(root,file);
+  if(!relative || relative==='..' || relative.startsWith('..'+path.sep) || path.isAbsolute(relative))
+    throw Error('Unsafe component path: '+file);
+  let parent=root;
+  for(const segment of relative.split(path.sep).slice(0,-1)){
+    parent=path.join(parent,segment);
+    const entry=fs.lstatSync(parent);
+    if(entry.isSymbolicLink()||!entry.isDirectory())
+      throw Error('Unsafe component directory: '+parent);
+  }
+}
 function readRegularFile(file){
+  checkParents(file);
   const entry=fs.lstatSync(file);
   if(entry.isSymbolicLink()||!entry.isFile())throw Error('Unsafe component file: '+file);
   return fs.readFileSync(file);
 }
-if(fs.lstatSync(dir).isSymbolicLink())throw Error('Unsafe component directory: '+dir);
+checkParents(dir);
+const dirType=fs.lstatSync(dir);
+if(dirType.isSymbolicLink()||!dirType.isDirectory())throw Error('Unsafe component directory: '+dir);
 for(const id of fs.readdirSync(dir).sort()){
   if(!/^[a-z0-9-]+$/.test(id))throw Error('Invalid component ID '+id);
   const folder=path.join(dir,id);
@@ -53,8 +68,16 @@ for(const id of fs.readdirSync(dir).sort()){
   components.push(meta);
 }
 const output=JSON.stringify({schema_version:1,components},null,2)+'\n';
+checkParents(target);
+const targetType=fs.lstatSync(target,{throwIfNoEntry:false});
+if(targetType && (targetType.isSymbolicLink()||!targetType.isFile()))
+  throw Error('Unsafe index target: '+target);
 if(process.argv.includes('--check')){
-  if(!fs.existsSync(target) || fs.readFileSync(target,'utf8')!==output)
+  if(!targetType || readRegularFile(target).toString('utf8')!==output)
     throw Error('shared/index.json missing or out of date');
-}else fs.writeFileSync(target,output);
+}else{
+  const flags=fs.constants.O_WRONLY|fs.constants.O_CREAT|fs.constants.O_TRUNC|fs.constants.O_NOFOLLOW;
+  const fd=fs.openSync(target,flags,0o644);
+  try{fs.writeFileSync(fd,output);}finally{fs.closeSync(fd);}
+}
 console.log(components.length+' verified, deduplicated owner-approved shared components');

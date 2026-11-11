@@ -32,7 +32,8 @@
       "details": "3 уникальных текста по 150–300 слов, 3 FAQ и FAQPage-разметка для каждой; другие 14 страниц ждут."
     },
     "4_indexnow_and_sitemap": {
-      "status": "pending"
+      "status": "in_progress",
+      "details": "Ключ, IndexNow workflow после успешного LAB Pages, отправка только изменённых URL и sitemap lastmod из git; 200/202 пока не получен, main не опубликован."
     },
     "5_continuous_improvement": {
       "status": "pending"
@@ -48,7 +49,8 @@
     "Не менять защищённые файлы, эталоны, бота и охранников в обход правил",
     "Без зелёного CI не сливать PR",
     "Только подтверждённые live URL",
-    "Заменён preview canonical rewrite и включён robots=noindex для HTML-копий веток."
+    "Заменён preview canonical rewrite и включён robots=noindex для HTML-копий веток.",
+    "Сайт должен быть доступен по постоянному /meta6-lab/claude-games/; IndexNow запускается только после успешного деплоя main."
   ],
   "evidence": []
 }

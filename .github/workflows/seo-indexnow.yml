@@ -1,0 +1,30 @@
+name: SEO IndexNow after LAB Pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'claude-games/**'
+      - '.github/workflows/seo-indexnow.yml'
+  workflow_run:
+    workflows: ['LAB Pages']
+    types: [completed]
+permissions:
+  contents: read
+concurrency:
+  group: seo-indexnow-live
+  cancel-in-progress: false
+jobs:
+  submit-changed-live-urls:
+    if: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Submit only changed published catalogue URLs
+        run: node scripts/lab/post-indexnow.mjs

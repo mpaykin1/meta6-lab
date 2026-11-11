@@ -14,6 +14,7 @@ rewrite() { # абсолютные ссылки meta6 -> meta6-lab
 if [[ -f "claude-games/index.html" ]]; then node scripts/lab/check-claude-only-catalog.mjs; fi
 rsync -a "${EXCL[@]}" ./ "$OUT"/
 rewrite "$OUT"
+if [[ -d "$OUT/claude-games" ]]; then node scripts/lab/update-claude-sitemap.mjs "$OUT/claude-games"; fi
 touch "$OUT/.nojekyll"
 # Чего нет в превью ветки — берётся из main песочницы (GitHub Pages отдаёт корневой 404.html).
 cat > "$OUT/404.html" <<'H'

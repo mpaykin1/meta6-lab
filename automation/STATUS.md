@@ -1,13 +1,13 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T15:32:48.677Z | МГЛ: d873193c04ba25cda07ef920a192ce12fe6e2cbf | МГ: b1e4f1a0c0b6f454291c8872a3463470773479e9 | https://github.com/mpaykin1/meta6-lab/actions/runs/43049325475
+UTC: 2026-11-11T16:08:23.789Z | МГЛ: 7e2b281475ce5f548b19b5dc1bdead129e2be491 | МГ: b1e4f1a0c0b6f454291c8872a3463470773479e9 | https://github.com/mpaykin1/meta6-lab/actions/runs/43055188465
 ## ПРОВЕРИТЬ CLAUDE
 - PR #251 5016e0750ad94d53798200f6db159f9c37f55ab1: .github/workflows/auditor.yml, scripts/auditor/mutate-auditor.mjs
 - PR #238 9546bef2d74794f6ecc717a2f4095682fd2e137f: .github/workflows/journal-projections.yml, .github/workflows/pr-autofinish.yml, .github/workflows/report-completion-guard.yml, .github/workflows/storozha-branches.yml, .github/workflows/storozha-quota.yml, .git… (сокращено)
 - PR #231 8790e6339ccf62af9584a4353749c864d4cf7785: scripts/dispetcher/mutate-mergeable-null.mjs
 - PR #236 afc35df467af8e6f60fb8a5c9c11f62aef5dfa05: scripts/meta-bot/core.mjs, scripts/meta-bot/selftest.mjs
 - ещё 6: https://github.com/mpaykin1/meta6-lab/pulls
+- МГЛ: B1 — all games open without console errors | https://github.com/mpaykin1/meta6-lab/actions/runs/43049325310 | Install Chromium for actual game rendering
 - МГЛ: Investigation snapshot | https://github.com/mpaykin1/meta6-lab/actions/runs/43043564015 | Refresh investigation snapshot from GitHub
-- МГЛ: B1 — all games open without console errors | https://github.com/mpaykin1/meta6-lab/actions/runs/43043563955 | Install Chromium for actual game rendering
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
@@ -17,7 +17,7 @@ UTC: 2026-11-11T15:32:48.677Z | МГЛ: d873193c04ba25cda07ef920a192ce12fe6e2cbf
 - | К7 | lab/kontur-k7-review | свободно (зависло 6 ч, было: ВОЗВРАЩЁН Claude (ложные срабатывания, см. комментарий в PR #193) — попытка 1 из 2) | 2026-11-09 17:50 |
 - | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |
 - | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |
-- ещё 2: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
+- ещё 3: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
 готовы: ничего
 M1 — нет данных: нет данных
@@ -56,7 +56,7 @@ P1 — нет данных: нет данных
 #224 Merge continuity: persistent PR journal and live 83-PR queue | 1f086f4ed7b8d1f3d86d0a93192a033a5568ad74
 ещё 13: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1100 коммитов | нет данных
+МГЛ: 1104 коммитов | нет данных
 МГ: 3 коммитов | AGENTS.md:1, automation:1, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

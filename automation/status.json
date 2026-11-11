@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T15:32:48.677Z",
+  "generated_at": "2026-11-11T16:08:23.789Z",
   "sha": {
-    "lab": "d873193c04ba25cda07ef920a192ce12fe6e2cbf",
+    "lab": "7e2b281475ce5f548b19b5dc1bdead129e2be491",
     "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43049325475",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43055188465",
   "review": {
     "protected": [
       {
@@ -104,14 +104,14 @@
     ],
     "redLab": [
       {
+        "workflow": "B1 — all games open without console errors",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43049325310",
+        "step": "Install Chromium for actual game rendering"
+      },
+      {
         "workflow": "Investigation snapshot",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43043564015",
         "step": "Refresh investigation snapshot from GitHub"
-      },
-      {
-        "workflow": "B1 — all games open without console errors",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43043563955",
-        "step": "Install Chromium for actual game rendering"
       }
     ],
     "redMg": [],
@@ -132,7 +132,8 @@
       "| B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |",
       "| B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |",
       "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |",
-      "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |"
+      "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |",
+      "| B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | проходчик ⚠ нет коммитов 100 мин | 2026-11-11 14:14 UTC |"
     ]
   },
   "finish": {
@@ -467,7 +468,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1100,
+      "count": 1104,
       "folders": "нет данных"
     },
     "mg": {

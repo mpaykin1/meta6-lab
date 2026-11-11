@@ -11,7 +11,7 @@
 <!-- карточки ниже -->
 ### lab/link-guard-recovery-1111 — ССЫЛКА = 200: восстановление и защита (11.11.2026)
 - Шаг 1/6: DONE — [PR #266 закрыт как дубль](https://github.com/mpaykin1/meta6-lab/pull/266), [комментарий](https://github.com/mpaykin1/meta6-lab/pull/266#issuecomment-6801260398).
-- Шаг 2/6: TODO — восстановить coaches-r1 и ashen-path-asset-pack; twilight-island без подтверждённой main-игры убрать из LINKS либо перенести после зелёного CI.
+- Шаг 2/6: PARTIAL — 11 оригинальных файлов coaches-r1/ashen-path-asset-pack восстановлены из 7611501 ([SHA 4204e3f](https://github.com/mpaykin1/meta6-lab/commit/4204e3fdc7398de8a5071a8587010db510e7435e)); осталось защитить sync и решить twilight-island.
 - Шаг 3/6: TODO — обязательный PR workflow с четырьмя проверками сторожа.
 - Шаг 4/6: TODO — рекурсивно проверять локальные JS imports + мутация.
 - Шаг 5/6: TODO — сторож новой игры/демо требует запись в LINKS.txt.

@@ -14,7 +14,7 @@
 | `games/sumerki-i-pepel-2/` | нет | НЕ ПРОВЕРЕНО: нет конфигурации/ручки META BOT | — | — |
 | `games/twilight-isle-classic/` | нет | НЕ ПРОВЕРЕНО: нет конфигурации/ручки META BOT | — | — |
 | `games/twilight-isles/` | нет | НЕ ПРОВЕРЕНО: нет конфигурации/ручки META BOT | — | — |
-| `games/veil-terraces/` | да | FAIL: mobile уровень 5 пропущен; 2-й запуск mobile уровень 3 — застревание 20 с | — | [42982185772](https://github.com/mpaykin1/meta6-lab/actions/runs/42982185772) |
+| `games/veil-terraces/` | да | FAIL на main: mobile уровень 5 пропущен; 2-й запуск mobile уровень 3 — застревание 20 с. Исправление в CI, PASS не подтверждён | [#245](https://github.com/mpaykin1/meta6-lab/pull/245) | [main 42982185772](https://github.com/mpaykin1/meta6-lab/actions/runs/42982185772), [PR 43012496007](https://github.com/mpaykin1/meta6-lab/actions/runs/43012496007) |
 | `observer-world-en-v7/` (витрина: Twilight Island) | нет — вне `games/` | НЕ ПРОВЕРЕНО: `run.mjs` обходит только `games/` | — | — |
 | `ashen-sumerek/` (витрина: Ashen Path) | нет — вне `games/` | НЕ ПРОВЕРЕНО: `run.mjs` обходит только `games/` | — | — |
 | `underwater-world/` (витрина: Underwater World) | нет — вне `games/` | НЕ ПРОВЕРЕНО: `run.mjs` обходит только `games/` | — | — |

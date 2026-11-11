@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T11:35:17.036Z | МГЛ: 85cdbd7f4c2bd9d003902d760d2ca3fc48f91a75 | МГ: b1e4f1a0c0b6f454291c8872a3463470773479e9 | нет данных
+UTC: 2026-11-11T11:36:19.679Z | МГЛ: 137bac06fd94ae585e7ca095abe9a80f35cac2d2 | МГ: b1e4f1a0c0b6f454291c8872a3463470773479e9 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #238 9546bef2d74794f6ecc717a2f4095682fd2e137f: .github/workflows/journal-projections.yml, .github/workflows/pr-autofinish.yml, .github/workflows/report-completion-guard.yml, .github/workflows/storozha-branches.yml, .github/workflows/storozha-quota.yml, .git… (сокращено)
 - PR #231 8790e6339ccf62af9584a4353749c864d4cf7785: scripts/dispetcher/mutate-mergeable-null.mjs
@@ -55,7 +55,7 @@ P1 — нет данных: нет данных
 #125 Lore: alternative Last Seed mythology and inspiration bank | 9f50910368238775bda40729722ec3512f14e623
 ещё 12: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 925 коммитов | нет данных
+МГЛ: 929 коммитов | нет данных
 МГ: 3 коммитов | AGENTS.md:1, automation:1, rules:2
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да

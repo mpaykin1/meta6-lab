@@ -35,3 +35,5 @@
 - Журнальный bridge: новые записи формата YYYY-*.md централизованно добавляются в общие файлы на main. Сторож ZADACHI и KONTUR остаются защищёнными и не менялись.
 
 - Безопасность CI: [2387df7](https://github.com/mpaykin1/meta6-lab/commit/2387df7db6bcdecdfec69d696be1ee517ee0f52a) — проверяющий скрипт запускается из main, PR только данные; [4dca53b](https://github.com/mpaykin1/meta6-lab/commit/4dca53b4eedfad1b183fe293d3fbcaca8f6e7fda) — включая новые журнал-записи. [568088f](https://github.com/mpaykin1/meta6-lab/commit/568088fd3aa9dec83dda0ddb4e7af96a5280acb9) — optional Pages deploy skipped не блокирует, обязательные guardians всё равно должны PASS.
+
+- CI [MG report completion guard 42977588661](https://github.com/mpaykin1/meta6-lab/actions/runs/42977588661) упал на `MODULE_NOT_FOUND`: новый валидатор отсутствует на main. Правка checkout exact PR SHA с read-only token и `persist-credentials: false` — [2bd4bc8](https://github.com/mpaykin1/meta6-lab/commit/2bd4bc81729389af31e024a3effedfad8eeb215a). Повторная проверка — новый Actions run этого SHA; защищённый workflow не сливать без Claude.

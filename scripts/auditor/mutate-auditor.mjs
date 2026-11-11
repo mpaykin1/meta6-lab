@@ -18,8 +18,9 @@ const examplePRs = Array.from({ length: 100 }, (_, i) => ({
   head: { ref: 'lab/unattributed', sha: '0123456789abcdef' }
 }));
 
-async function exercise(script, eventName) {
-  const stats = { pulls: 0, issueUpdates: 0, issueCreates: 0, pins: 0, report: '' };
+async function exercise(script, eventName, pinnedInitially = true, pinAllowed = true) {
+  let isPinned = pinnedInitially;
+  const stats = { pulls: 0, issueUpdates: 0, issueCreates: 0, pins: 0, pinChecks: 0, report: '' };
   const github = {
     rest: {
       repos: {
@@ -34,7 +35,7 @@ async function exercise(script, eventName) {
       issues: {
         listForRepo: async () => ({ data: [
           {
-            number: config.issue_number, title: 'Legacy cycle index',
+            number: config.issue_number, node_id: 'ISSUE253', title: 'Legacy cycle index',
             body: config.roles.map(role => role.role_marker).join(' '),
             html_url: 'https://github.com/example/repo/issues/' + config.issue_number,
             updated_at: '2099-01-01T00:00:00Z'
@@ -56,7 +57,21 @@ async function exercise(script, eventName) {
         }
       }
     },
-    graphql: async () => { stats.pins++; return {}; }
+    graphql: async (query) => {
+      if (query.includes('pinnedIssues')) {
+        stats.pinChecks++;
+        return { repository: { pinnedIssues: {
+          nodes: isPinned ? [{ issue: { number: config.issue_number } }] : []
+        } } };
+      }
+      if (query.includes('pinIssue')) {
+        stats.pins++;
+        if (!pinAllowed) throw new Error('pin blocked by permissions');
+        isPinned = true;
+        return {};
+      }
+      throw new Error('Unexpected GraphQL query');
+    }
   };
   const summary = {
     addRaw(text) { stats.report = text; return this; },
@@ -74,6 +89,17 @@ async function exercise(script, eventName) {
   assert.equal(stats.issueCreates, 0, 'auditor must never create duplicate issues');
   assert.equal(stats.issueUpdates, eventName === 'pull_request' ? 0 : 1,
     'PR preview must be read-only; trusted main must update exactly one Issue');
+  if (eventName === 'pull_request') {
+    assert(stats.report.includes('⚠️ не проверено (PR preview)'),
+      'PR preview must not claim a verified pin');
+    assert.equal(stats.pinChecks, 0, 'PR preview must not run a pin query');
+  } else {
+    const expectedPinned = pinnedInitially || pinAllowed;
+    assert(stats.report.includes(expectedPinned
+      ? '✅ закреплено (GraphQL)' : '❌ не закреплено (GraphQL)'),
+      'reported pin state does not match GraphQL');
+    assert(stats.pinChecks >= 1, 'trusted main must verify pinnedIssues via GraphQL');
+  }
   for (const role of config.roles) {
     assert(stats.report.includes(role.name), 'role is absent from run summary: ' + role.name);
     const line = stats.report.split('\n').find(row => row.startsWith('| ' + role.name + ' |'));
@@ -87,6 +113,8 @@ async function exercise(script, eventName) {
 
 await exercise(original, 'pull_request');
 await exercise(original, 'push');
+await exercise(original, 'push', false, true);
+await exercise(original, 'push', false, false);
 const mutants = [
   {
     name: 'excessive-api-pages',
@@ -120,12 +148,28 @@ const mutants = [
       'i.number !== cfg.issue_number && i.title !== cfg.issue_title',
       'i.number !== cfg.issue_number || i.title !== cfg.issue_title'),
     event: 'push'
+  },
+  {
+    name: 'deception-pinned-true',
+    source: original.replace('nodes.some(n => n.issue?.number === cfg.issue_number)', 'true'),
+    event: 'push', pinnedInitially: false, pinAllowed: false
+  },
+  {
+    name: 'pinned-false',
+    source: original.replace('nodes.some(n => n.issue?.number === cfg.issue_number)', 'false'),
+    event: 'push', pinnedInitially: true
+  },
+  {
+    name: 'pinned-wrong-issue',
+    source: original.replace('n.issue?.number === cfg.issue_number', 'n.issue?.number === 250'),
+    event: 'push', pinnedInitially: true
   }
 ];
 for (const mutant of mutants) {
   assert.notEqual(mutant.source, original, 'mutation not applied: ' + mutant.name);
-  await assert.rejects(exercise(mutant.source, mutant.event),
+  await assert.rejects(exercise(mutant.source, mutant.event,
+    mutant.pinnedInitially ?? true, mutant.pinAllowed ?? true),
     undefined, 'escaped mutant: ' + mutant.name);
   process.stdout.write('TRAP ' + mutant.name + ' PASS\n');
 }
-process.stdout.write('AUDITOR MUTATIONS PASS: 6/6\n');
+process.stdout.write('AUDITOR MUTATIONS PASS: 9/9\n');

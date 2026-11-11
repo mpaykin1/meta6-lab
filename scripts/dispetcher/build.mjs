@@ -35,7 +35,7 @@ export function previousConflict(previous,id){
  if(start<0)return null;
  const block=previous.slice(start+marker.length).split(/\n(?:### PR #|## НУЖЕН CLAUDE)/)[0];
  const problem=block.match(/^- Проблема:\s*([^\n]+)/m);
- return problem?problem[1].includes('Конфликт с main'):null;
+ return problem&&problem[1].includes('Конфликт с main')?true:null;
 }
 export async function resolveConflict(pr,reload,prior,sleep=ms=>new Promise(done=>setTimeout(done,ms))){
  let current=pr, retries=0;

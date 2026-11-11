@@ -40,3 +40,12 @@
 | #133 | lab/asqura-single-graphics-reference-20261108 | НУЖЕН CLAUDE: PR изменяет принятый эталон `reference/asqura-office/index.html` и `reference/asqura-office/REFERENCE.json`; конфликт `OSHIBKI.md`, HEAD `633ad10443f9c5e9f1132b6d91d68ad3955b0159`; проверить источник и защищённые изменения перед решением о слиянии. https://github.com/mpaykin1/meta6-lab/pull/133 | 2026-11-11 |
 
 | #233 | lab/import-five-cc0-packs | НУЖЕН ВЛАДЕЛЕЦ: PR draft, импорт 4/5; оригинальный `Overworld Files.zip` (Tiny Overworld) не получен с интерактивной страницы https://ansimuz.itch.io/tiny-overworld/purchase; не заменять другим архивом и не сливать как 5/5. HEAD `34176a2e47a2195492db486d1440428252d0a34d`, зелёные KONTUR Guard/META GAMES guard на этом SHA. https://github.com/mpaykin1/meta6-lab/pull/233 | 2026-11-11 |
+
+## Ждёт Claude — библиотека
+
+- [PR #209](https://github.com/mpaykin1/meta6-lab/pull/209) — извлечение игровых систем: 0 подтверждённых load_ok; [провал 1](https://github.com/mpaykin1/meta6-lab/actions/runs/42761353151), [провал 2](https://github.com/mpaykin1/meta6-lab/actions/runs/42764324099). Не сливать до независимого Chromium и исправления зависимостей.
+- [PR #218](https://github.com/mpaykin1/meta6-lab/pull/218) — исключение копий из живого индекса уже реализуется там; изменение защищённого workflow и конфликт с main требуют решения Claude, отдельный дубль не создавать.
+
+## Ждёт владельца — библиотека
+
+- Новые оригиналы пока не запрашивать: [Король Пепла, PR #207](https://github.com/mpaykin1/meta6-lab/pull/207), [Золотой рыцарь, PR #189](https://github.com/mpaykin1/meta6-lab/pull/189), [Демоническая рука, закрытый PR #137](https://github.com/mpaykin1/meta6-lab/pull/137) имеют доступные исходные файлы в GitHub-ветках, но **не в main**. Следующий шаг — безопасно подтвердить перенос оригинальных blob, а не выдумывать или просить их повторно.

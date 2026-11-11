@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T10:02:29.834Z",
+  "generated_at": "2026-11-11T10:20:29.833Z",
   "sha": {
-    "lab": "aa33a9fb1f4fb4fc256c29cacacc985008850b9e",
+    "lab": "ce84371fbf245d3ee9bec3cc67a36dceca8017de",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43000175193",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43002736613",
   "review": {
     "protected": [
       {
@@ -244,7 +244,7 @@
     "open": 39,
     "conflicts": "нет данных",
     "merged": 14,
-    "closed": 43,
+    "closed": 44,
     "mergedItems": [
       {
         "number": 224,
@@ -383,8 +383,8 @@
   },
   "changes": {
     "lab": {
-      "count": 869,
-      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:6, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1"
+      "count": 876,
+      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, DLYA_CLAUDE.md:1, docs:6, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1"
     },
     "mg": {
       "count": 2,

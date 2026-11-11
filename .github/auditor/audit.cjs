@@ -62,9 +62,8 @@ async function main({github, context, core}) {
   const onMain = context.ref === 'refs/heads/main' &&
     ['schedule','workflow_dispatch'].includes(context.eventName);
   const start = Date.now() - config.window_minutes * 60 * 1000;
-  const {data: raw} = await github.rest.repos.getContent({owner,repo,path:config.sources.task_table,ref:'main'});
-  if (Array.isArray(raw) || !raw.content) throw new Error('Cannot read ZADACHI.md');
-  const table = Buffer.from(raw.content, 'base64').toString('utf8');
+  // The checked-out ref is main for scheduled/dispatch runs; avoid exhausting GitHub API.
+  const table = fs.readFileSync(config.sources.task_table, 'utf8');
   const rows = parseTable(table);
   const prCache = new Map();
   const lineItems = [], alerts = [], completed = [], findings = [];

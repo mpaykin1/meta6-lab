@@ -31,8 +31,8 @@ function publishNewEntries(name,original,dir,names){
   if(updated!==readFileSync(original,'utf8'))writeFileSync(original,updated);
 }
 
-const validate=process.argv.includes('--validate');
-if(!validate&&!process.argv.includes('--write'))throw Error('Specify --validate or --write');
+export function build(validate){
+if(typeof validate!=='boolean')throw Error('build expects explicit validate flag');
 for(const [name,original] of datasets){
   const dir=join('journal/entries',name);
   if(!existsSync(dir))throw Error('Missing journal directory '+dir);
@@ -55,4 +55,5 @@ for(const [name,original] of datasets){
     console.log('COMPILED '+target+' entries='+names.length);
     publishNewEntries(name,original,dir,names);
   }
+}
 }

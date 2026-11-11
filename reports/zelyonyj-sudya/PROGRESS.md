@@ -22,6 +22,9 @@
 | `underwater-world/` (витрина: Underwater World) | нет — вне `games/` | НЕ ПРОВЕРЕНО: `run.mjs` обходит только `games/` | — | — | 0 — ремонт не начат |
 | `three-worlds-game/` (витрина: Three Worlds) | нет — вне `games/` | НЕ ПРОВЕРЕНО: `run.mjs` обходит только `games/` | — | — | 0 — ремонт не начат |
 
+
+**Сверка подключений 11.11.2026:** на `main` [`8a37e692`](https://github.com/mpaykin1/meta6-lab/commit/8a37e6927b95da79964017afc89084adc74887aa) повторно найдены 11 папок `games/`: у 10 нет `bot.json`, `bot-strategy.mjs` и строки `__META_BOT__` в `index.html`; у `veil-terraces` есть все три. В [`meta-games/index.html`](https://github.com/mpaykin1/meta6-lab/blob/8a37e6927b95da79964017afc89084adc74887aa/meta-games/index.html) также 4 пути игр вне `games/`, не охватываемых `run.mjs`. Новых игр к карте не добавилось.
+
 **Покрытие:** 1 из 15 уникальных игровых путей (11 папок `games/` и ещё 4 игры витрины вне `games/`). **Подтверждённых PASS на main:** 0 из 15. У `veil-terraces` desktop проходил 6/6 в [старом красном прогоне](https://github.com/mpaykin1/meta6-lab/actions/runs/42982185772), но mobile провалился, поэтому это не PASS.
 
 **Порядок ремонта:** `games/veil-terraces/` (PR #245 упёрся в защищённую автоматику и `action_required`; не сливать до устранения), затем 10 неподключённых папок `games/`, затем 4 игровых пути витрины, не охваченные текущим обнаружением. Исключение тестов, порогов и правок `scripts/meta-bot/` нет.

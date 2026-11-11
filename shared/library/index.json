@@ -60,6 +60,14 @@
       "solutions": 1420
     },
     {
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "source_root": "meta-games-worlds/veil-terraces",
+      "manifest": "shared/library/reference-meta-games-worlds--veil-terraces.json",
+      "assets": 2,
+      "file_assets": 0,
+      "solutions": 27
+    },
+    {
       "game": "reference-observer-world-en-v7",
       "source_root": "observer-world-en-v7",
       "manifest": "shared/library/reference-observer-world-en-v7.json",
@@ -66034,6 +66042,441 @@
       "lines": [
         269,
         269
+      ]
+    },
+    {
+      "id": "088b8f1cc33e6754bdf75a0e",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "inline-style",
+      "name": "style@262",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "662aca66aa0afb05f87f4e2a241bedf4712d407db41f64296a720c091ade6c1e",
+      "lines": [
+        1,
+        4
+      ]
+    },
+    {
+      "id": "a4e5d723b5d9814f4e364fdc",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "inline-svg",
+      "name": "svg@3792",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "89b5a1ccc1508e3af59ede39b8738d5938878c7b0d6c997b8ea9efe222233bb1",
+      "lines": [
+        4,
+        4
+      ]
+    },
+    {
+      "id": "212c25889015141d97f7e623",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "crystal",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "65880c33b53f8e8b6f9915261d300cf8ab85ae9028079318fba3b95ffa919807",
+      "lines": [
+        25,
+        25
+      ]
+    },
+    {
+      "id": "2bcb845f7cfa68d7638c04fc",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "surface",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "68dcae1b9f67f94f20b7a6a57fb7a08c7e7e016a91a54dd5cdb04b84b27d83f1",
+      "lines": [
+        10,
+        10
+      ]
+    },
+    {
+      "id": "2c14c7e1fc6cae85adc49f67",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "perspective",
+      "purpose": [
+        "camera"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "f4e7b37c1f029c081fae2609239cfadd89988b4b30a403516318318d6c839a28",
+      "lines": [
+        11,
+        11
+      ]
+    },
+    {
+      "id": "2e8e71c524f71bfadf6ef40b",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "aimJoystick",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "ad61e5a13db66822f34eaf81c05de9818a9e740bfd8cf4d4db4e587e996bebd3",
+      "lines": [
+        35,
+        35
+      ]
+    },
+    {
+      "id": "30bbfa01f06e6a76f4ddcb5b",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "inline-script@4019",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "8a9eaaccf3791f3ca7140e622347241831dfa76a58c3847a1db7ee556fe5d198",
+      "lines": [
+        5,
+        50
+      ]
+    },
+    {
+      "id": "367dd6283906ef6c54b8db28",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "orb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "71f08ba98129ef2edbc3ba91736d9ad23463b9d089560764f48d2645141ff0b1",
+      "lines": [
+        27,
+        27
+      ]
+    },
+    {
+      "id": "3b217498aca582bc4edcb4a9",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "$",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "a41c8184c26c6b480cf310aae3ef25020d37d09cac8bd36b05786cc1ccce660d",
+      "lines": [
+        6,
+        6
+      ]
+    },
+    {
+      "id": "47c5ed182eedda190225dbd7",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "createChunk",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "c1ea54ca2da4ab2e7d282bde28a2e1624e268ffc787ffbbab7758671f5f9dead",
+      "lines": [
+        23,
+        23
+      ]
+    },
+    {
+      "id": "5f6f863c0484232049de824f",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "bindMesh",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "3eeb9582edb119a5b044b1f5dd9a7db6bdf082b39704a65e232828d9def5715a",
+      "lines": [
+        22,
+        22
+      ]
+    },
+    {
+      "id": "6415db512b7ddaa58d8f4c4a",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "tri",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "8a170a999843e8894ff7d30e66d9c5cc91618140fb812172768394576b2577ce",
+      "lines": [
+        21,
+        21
+      ]
+    },
+    {
+      "id": "6b6f0340d964af44dbd954ff",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "reset",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "f76f363ae1c2f88eaed733efd73105b29c6501440a5ad9880e46f547791cd720",
+      "lines": [
+        32,
+        32
+      ]
+    },
+    {
+      "id": "71c1305f9b909bb9dbbddc6e",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "pillar",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "ba626c43b7362fa90a82b326935681fce0462bc0ce194d23d06586a54d85aba8",
+      "lines": [
+        26,
+        26
+      ]
+    },
+    {
+      "id": "77de5db79cafe355cedab0cf",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "move",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "89624f5a43b03575b6492348d9592f095acce1768cd4de16c41ee6a647d853e4",
+      "lines": [
+        40,
+        43
+      ]
+    },
+    {
+      "id": "80c5b42eebe4e6e6e947219d",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "f76f363ae1c2f88eaed733efd73105b29c6501440a5ad9880e46f547791cd720",
+      "lines": [
+        32,
+        32
+      ]
+    },
+    {
+      "id": "8c333f7d66894c3f538751e6",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "frame",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "eaf1614673f655afcf9d0cc495c4244528019e576faa325c65b53e7c7f80995d",
+      "lines": [
+        46,
+        48
+      ]
+    },
+    {
+      "id": "9c267c60ddb1e4bebccfeb76",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "program",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "ee94e8b76a470109d3862b5c4f61b2d5d71add4efe84ec0ad93e8499de3771a8",
+      "lines": [
+        15,
+        15
+      ]
+    },
+    {
+      "id": "a1fe020bc1a9f5c032254d26",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "loadChunks",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "804593809ed52b4d9fb4b7db5d58260b87fab508084cbe1765cb6127732ca373",
+      "lines": [
+        24,
+        24
+      ]
+    },
+    {
+      "id": "a32deac8e575738c577664d8",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "endTouch",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "01b5b758e10439144a82af3d899c82da88653d0cf5cdf0990c05b580aee9ee5e",
+      "lines": [
+        38,
+        38
+      ]
+    },
+    {
+      "id": "a78f5e69eae126a8bd89f917",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "vertex",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "8a170a999843e8894ff7d30e66d9c5cc91618140fb812172768394576b2577ce",
+      "lines": [
+        21,
+        21
+      ]
+    },
+    {
+      "id": "a8001e018309aa1567c8ba11",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "shader",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "ee94e8b76a470109d3862b5c4f61b2d5d71add4efe84ec0ad93e8499de3771a8",
+      "lines": [
+        15,
+        15
+      ]
+    },
+    {
+      "id": "adb54a5a0b56a5bb50b0f3f5",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "draw",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "5e1741ce8d8ab612f42a044b90f355930637457a97b3831a2acd4cf665f7d017",
+      "lines": [
+        44,
+        44
+      ]
+    },
+    {
+      "id": "affb825f44ad2f9304e49765",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "multiply",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "1a835c55572e97960f4829d2ab571a6811473f8aac44d4489a7e44c562c46ffd",
+      "lines": [
+        13,
+        13
+      ]
+    },
+    {
+      "id": "b4892bc53b3e2222eb734af8",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "height",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "d3bdf42654d258213b00e07ef193cd240a1ea2288f99292d03c013ee7f3fced2",
+      "lines": [
+        8,
+        8
+      ]
+    },
+    {
+      "id": "c481fe70723116a517c2bee5",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "model",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "765adf4afbf0c6c8d2984dc3ec6dab531e35af42268d6ca1ed5911f05266037b",
+      "lines": [
+        14,
+        14
+      ]
+    },
+    {
+      "id": "c57f8b09198a635523cda3e7",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "makeBuffer",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "3eeb9582edb119a5b044b1f5dd9a7db6bdf082b39704a65e232828d9def5715a",
+      "lines": [
+        22,
+        22
+      ]
+    },
+    {
+      "id": "f6bd8470965c5fc6f82fd09a",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "lookAt",
+      "purpose": [
+        "camera"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "ef5eb7aae7b7e91d227d1956104a92a38d4981e90405295c8992df008c4d038c",
+      "lines": [
+        12,
+        12
+      ]
+    },
+    {
+      "id": "fe25e08157d4f679f0d5187a",
+      "game": "reference-meta-games-worlds--veil-terraces",
+      "kind": "solution",
+      "name": "openMenu",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "meta-games-worlds/veil-terraces/index.html",
+      "sha256": "f76f363ae1c2f88eaed733efd73105b29c6501440a5ad9880e46f547791cd720",
+      "lines": [
+        32,
+        32
       ]
     },
     {

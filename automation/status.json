@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T14:28:31.127Z",
+  "generated_at": "2026-11-11T14:37:08.988Z",
   "sha": {
-    "lab": "b2e31e3d587a395690287d02c7371c5ef5722b3e",
+    "lab": "052e5253dbec2800dd3f85e94412650ff7e285ea",
     "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43038671686",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43039463321",
   "review": {
     "protected": [
       {
@@ -104,19 +104,14 @@
     ],
     "redLab": [
       {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43037702681",
-        "step": "Commit queue"
+        "workflow": "B1 — all games open without console errors",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43038213868",
+        "step": "Install Chromium for actual game rendering"
       },
       {
         "workflow": "Investigation snapshot",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43037067236",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43037702311",
         "step": "Refresh investigation snapshot from GitHub"
-      },
-      {
-        "workflow": "B1 — all games open without console errors",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43037067213",
-        "step": "Install Chromium for actual game rendering"
       }
     ],
     "redMg": [],
@@ -472,7 +467,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1061,
+      "count": 1068,
       "folders": "нет данных"
     },
     "mg": {

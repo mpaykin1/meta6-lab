@@ -113,7 +113,8 @@ function verify(script){
 
 verify(source);
 const mutations=[
-  ['folder link followed',s=>s.replace('fs.lstatSync(folder)','fs.statSync(folder)')],
+  ['folder link followed',s=>s.replace('fs.lstatSync(folder)','fs.statSync(folder)')
+    .replace('  checkParents(file);','')],
   ['file link followed',s=>s.replace('fs.lstatSync(file)','fs.statSync(file)')],
   ['deceptive privileged ID',s=>s.replace(
     'if(folderType.isSymbolicLink()||!folderType.isDirectory())',

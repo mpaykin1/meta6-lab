@@ -41,6 +41,26 @@ const traps=[
     assert.ok(copies[path].includes(old),'Shipped survival predicate missing');
     copies[path]=copies[path].replace(old,'true');
   }],
+  ['perf-bloom-used-despite-low-fps',copies=>{
+    const path='assets/index-xsRfS2lk.js';
+    const old='if(reduced)renderer.render(renderPass.scene,camera);else composer.render()';
+    assert.ok(copies[path].includes(old),'Adaptive render helper missing');
+    copies[path]=copies[path].replace(old,
+      'if(reduced)composer.render();else composer.render()');
+  }],
+  ['perf-gallery-renders-wrong-scene',copies=>{
+    const path='assets/index-xsRfS2lk.js';
+    const old='renderer.render(renderPass.scene,camera)';
+    assert.ok(copies[path].includes(old),'Active scene selection missing');
+    copies[path]=copies[path].replace(old,'renderer.render(scene,camera)');
+  }],
+  ['perf-deception-only-localhost',copies=>{
+    const path='assets/index-xsRfS2lk.js';
+    const old='if(reduced)renderer.render(renderPass.scene,camera)';
+    assert.ok(copies[path].includes(old),'Adaptive render helper missing');
+    copies[path]=copies[path].replace(old,
+      'if(reduced&&location.hostname==="localhost")renderer.render(renderPass.scene,camera)');
+  }],
   ['ad-sdk-script-restored',copies=>{
     copies['index.html']+=' \n<script src="./playgama-bridge.js"></script>\n';
   }],
@@ -85,4 +105,4 @@ for(const [name,mutate] of traps){
     rmSync(scratch,{recursive:true,force:true});
   }
 }
-console.log('MUTATE_ARCHER_ADFREE_PASS all eight traps caught (including deception)');
+console.log('MUTATE_ARCHER_ADFREE_PASS all eleven traps caught (including deception)');

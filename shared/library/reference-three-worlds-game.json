@@ -3608,6 +3608,21 @@
       "sha256": "6c838f01c53d97f0c6b582b54d28f7500bfa34f499c1792f501588eab4f251f8"
     },
     {
+      "id": "736ec259dd07f2b1f7b3ea40",
+      "game": "reference-three-worlds-game",
+      "kind": "solution",
+      "name": "module:audio.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "three-worlds-game/audio.js",
+      "lines": [
+        1,
+        307
+      ],
+      "sha256": "826cca91842df4da49f20294c1c16df9bf36b2b8e313413e04e01d02920e53ee"
+    },
+    {
       "id": "76634bebaa7bd695db15577c",
       "game": "reference-three-worlds-game",
       "kind": "solution",
@@ -3711,21 +3726,6 @@
         147
       ],
       "sha256": "4e6d51ed4b018077a91329ac57ed0511bebdc07f5d35c13ce4b03d80d2c0deeb"
-    },
-    {
-      "id": "ab32a665273fa030f2588ace",
-      "game": "reference-three-worlds-game",
-      "kind": "solution",
-      "name": "module:audio.js",
-      "purpose": [
-        "game-module"
-      ],
-      "source_path": "three-worlds-game/audio.js",
-      "lines": [
-        1,
-        304
-      ],
-      "sha256": "fac1fe1502510c73c3ec55dbc2757ea6e7c563739856af8d6f9b6a4fefeda280"
     },
     {
       "id": "aca559e3f11b2d76db78c72b",

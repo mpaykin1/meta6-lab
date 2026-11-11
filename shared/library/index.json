@@ -73916,6 +73916,21 @@
       ]
     },
     {
+      "id": "736ec259dd07f2b1f7b3ea40",
+      "game": "reference-three-worlds-game",
+      "kind": "solution",
+      "name": "module:audio.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "three-worlds-game/audio.js",
+      "sha256": "826cca91842df4da49f20294c1c16df9bf36b2b8e313413e04e01d02920e53ee",
+      "lines": [
+        1,
+        307
+      ]
+    },
+    {
       "id": "76634bebaa7bd695db15577c",
       "game": "reference-three-worlds-game",
       "kind": "solution",
@@ -74018,21 +74033,6 @@
       "lines": [
         139,
         147
-      ]
-    },
-    {
-      "id": "ab32a665273fa030f2588ace",
-      "game": "reference-three-worlds-game",
-      "kind": "solution",
-      "name": "module:audio.js",
-      "purpose": [
-        "game-module"
-      ],
-      "source_path": "three-worlds-game/audio.js",
-      "sha256": "fac1fe1502510c73c3ec55dbc2757ea6e7c563739856af8d6f9b6a4fefeda280",
-      "lines": [
-        1,
-        304
       ]
     },
     {
@@ -155487,7 +155487,7 @@
         "game-runtime"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "308bc9582a77d139cfdcbcae38154b43b61ebcea755c5d36b9025f25703b3329",
+      "sha256": "def8789826dea541029b16952e0996be04a8a741c8db4cffa136cf5ffa05e0e4",
       "lines": [
         10,
         221

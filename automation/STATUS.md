@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T01:41:28.125Z | МГЛ: 57d20e23ced18f6796b733a4c1ac2e0bcc437cdf | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | нет данных
+UTC: 2026-11-11T01:41:56.661Z | МГЛ: 03285e0b5c68aa1821a7b4b392ee4465eb81bb62 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #230 eabab1dc976ca4332c3c66cfd9b8bd56f4471b88: .github/workflows/dispetcher.yml
 - PR #227 2a4558a4b3993d6d0583c004155508d084eb6496: .github/workflows/dispetcher.yml
@@ -55,7 +55,7 @@ P1 — нет данных: нет данных
 #216 СВОДКА ДЛЯ CLAUDE: facts-only GitHub Actions bot | 06a8b61ec198ba43bb93a69efb2aeca7246383ee
 ещё 3: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 615 коммитов | .github:5, .lab-sync-base:1, AGENTS.md:1, automation:7, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:11, shared:2, ZADACHI.md:1
+МГЛ: 617 коммитов | .github:5, .lab-sync-base:1, AGENTS.md:1, automation:7, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:11, shared:2, ZADACHI.md:1
 МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да

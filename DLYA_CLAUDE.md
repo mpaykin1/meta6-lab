@@ -3,8 +3,8 @@
 <!-- STOROZHA:PROTECTED:BEGIN -->
 | #248 | lab/pr-autofinish-followup-1111 | .github/workflows/journal-projections.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/pr-autofinish.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #246 | lab/link-guard-200 | .github/workflows/lab-pages.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/link-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
-| #251 | lab/auditor-five-hourly-1111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #252 | lab/auditor-five-tasks-20261111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
+| #251 | lab/auditor-five-hourly-1111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

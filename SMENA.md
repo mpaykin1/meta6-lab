@@ -87,3 +87,7 @@
 - Подтверждены merge PR #229 `40dfc505c5427f8d0b17b679d2f5df74352bc7c1` и PR #236 `afc35df467af8e6f60fb8a5c9c11f62aef5dfa05`.
 - Актуальный PR https://github.com/mpaykin1/meta6-lab/pull/87: head `faf69f129ae3510a81e59a48328534fed8a5f944`, main `036bc0722f98753288326a4523f1c93280ee5321`, behind 30, ahead 6. Сравнён файл `meta-games/index.html` в merge-base/main/head: main и merge-base имеют одинаковый blob `6d7b6f9a13df90fa09dccbe0cb36fca183e4273b`, PR blob `9b857feaf02c1361f1d94126af52fbfbc48944c3`. Других отличий от main по compare нет.
 - Сейчас делаю: реальный двухродительский merge с деревом main и файлом портала из ветки, без force; только если HEAD не изменился. Затем новые CI на SHA, перекрёстная проверка, допустимое слияние, новая свободная карточка.
+
+### PR #87 — merge main в ветку
+- Двухродительский коммит [2a1d22c](https://github.com/mpaykin1/meta6-lab/commit/2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d), родители: PR `faf69f129ae3510a81e59a48328534fed8a5f944` и main `eaaef9d0b4dfe702d21870e5db755b80ec049816`; сохранено дерево main с единственным отличием `meta-games/index.html` (blob `9b857feaf02c1361f1d94126af52fbfbc48944c3`). `update_ref` без force: success. Редактирования `scripts/meta-bot/` нет.
+- Следующий шаг: получить все workflow/checks по новому SHA, проверить реальные выводы и независимое ревью; до полного зелёного CI PR #87 не сливать.

@@ -1,3 +1,7 @@
+## FIX 11.11.2026 · обязательный неподвижный экран для ВСЕХ игр
+
+Джойстик не может сдвигать/прокручивать/увеличивать браузерную страницу, canvas или HUD; жесты телефона не вызывают rubber-band/pull-to-refresh. Мобильная камера в режиме персонажа подчиняется `fix.md` отдельно от HTML. GitHub Pages использует общий `shared/mobile-screen-lock.js` + CSS через `scripts/lab/inject-game-screen.mjs`; в других сборках обеспечить эквивалент. Примеры владельца: https://openttdonline.com/play/ и https://micropolisweb.com/ . Проверить настоящий телефон и не ставить PASS без вердикта владельца.
+
 ## КОНЕЧНАЯ ЦЕЛЬ ПРОЕКТА META GAMES — сверяться в каждом чате
 
 Прочитать [rules/09-platforma/META_GAMES_PLATFORM.md](rules/09-platforma/META_GAMES_PLATFORM.md): склад и конструктор игр, автоулучшение всех игр по правилам с ChatGPT, бот-проходчик уровней, проверка Claude, журнал решений владельца (§11).

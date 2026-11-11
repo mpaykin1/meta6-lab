@@ -28,11 +28,13 @@
 - [x] Шаг 0 · 2026-11-11T13:54:16.807Z — прочитан PROGRESS и обязательные правила; исходник https://github.com/mpaykin1/meta6-lab/blob/main/.github/auditor/PROGRESS.md
 - [ ] Шаг 1 — ещё нет трёх schedule после merge; первый прогон уже в main: https://github.com/mpaykin1/meta6-lab/actions/runs/43031781751 (workflow_dispatch)
 - [x] Шаг 2 (дубликат) · 2026-11-11T13:54:16.807Z — Issue #250 закрыт как duplicate #253: https://github.com/mpaykin1/meta6-lab/issues/250 ; GraphQL-подтверждение pin #253 ещё требуется
-- [ ] Шаг 3 — обнаружено ложное доказательство плана от самого Issue #253; исправление workflow: https://github.com/mpaykin1/meta6-lab/commit/51a1c8b61ce9012bc044bb812d24b6f75071ad19
+- [x] Шаг 3 (исправление подготовлено, требуется merge) · 2026-11-11T13:59:43.736Z — обнаружено ложное доказательство плана от самого Issue #253; исправление workflow: https://github.com/mpaykin1/meta6-lab/commit/51a1c8b61ce9012bc044bb812d24b6f75071ad19
 - [ ] Шаг 4 — нарушения в #253 отсутствуют, но отрицательное утверждение ненадёжно до исправления самоцитирования
-- [ ] Шаг 5 (а) — добавить факт GraphQL-pin к отчёту Issue #253
-- [ ] Шаг 6 — урок и правило после CI
+- [x] Шаг 5 (а, реализация в PR) · 2026-11-11T13:59:43.736Z — GraphQL pinnedIssues, 9 мутаций, [PR #254](https://github.com/mpaykin1/meta6-lab/pull/254); [auditor run #43033906443](https://github.com/mpaykin1/meta6-lab/actions/runs/43033906443) зелёный на SHA `20a0c2f233490222ebe01392780236f234d8b58c`; [STOROZHA #43033906501](https://github.com/mpaykin1/meta6-lab/actions/runs/43033906501) красный (защищённые workflow + тест): **НУЖЕН CLAUDE**
+- [x] Шаг 6 · 2026-11-11T13:59:43.736Z — Урок сохранён ниже; К6 требует строку `ПРОВЕРКА ИЗМЕНЕНА` в [PR #254](https://github.com/mpaykin1/meta6-lab/pull/254) по [KONTUR run #43033906437](https://github.com/mpaykin1/meta6-lab/actions/runs/43033906437)
 - [ ] Шаг 7 — обновить строку в ZADACHI.md после PR
 
 ### Урок
 Само Issue ревизора и устаревшие одноимённые Issue не должны служить источником доказательств планирования ни одной из пяти ролей. Не подтверждённые GraphQL-pin и schedule нельзя маркировать зелёными.
+
+- [x] Уточнение Issue #253 · 2026-11-11T13:59:43.736Z — пять ошибочных `✅ Issue #253` заменены на `⚠️` вручную, [Issue #253](https://github.com/mpaykin1/meta6-lab/issues/253); автоматическое предотвращение в PR #254.

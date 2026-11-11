@@ -1,0 +1,43 @@
+name: Link Guard 200
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_run:
+    workflows: ['LAB Pages']
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+jobs:
+  check:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Check all registered URLs
+        id: links
+        continue-on-error: true
+        run: |
+          mapfile -t urls < <(grep -E '^https://' LINKS.txt | sort -u)
+          bash scripts/lab/link-ok.sh "${urls[@]}"
+      - name: Retry deployment on broken links
+        if: steps.links.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run lab-pages.yml --ref main -R "$GITHUB_REPOSITORY"
+      - name: Diagnose broken links
+        if: steps.links.outcome == 'failure'
+        run: |
+          while IFS= read -r url; do
+            [[ "$url" == https://mpaykin1.github.io/meta6-lab/* ]] || continue
+            path="${url#https://mpaykin1.github.io/meta6-lab/}"
+            path="${path%%\?*}"
+            if [[ "$path" != preview/* ]] && [[ ! -f "$path/index.html" ]] && [[ ! -f "$path" ]]; then
+              echo "::error::Missing in main: $path"
+            fi
+          done < LINKS.txt
+          exit 1

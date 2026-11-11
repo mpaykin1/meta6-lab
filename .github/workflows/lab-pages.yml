@@ -50,6 +50,25 @@ jobs:
           path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Collect public URLs from changed index pages, demos and LINKS
+        id: urls
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://mpaykin1.github.io/meta6-lab'
+          {
+            cat LINKS.txt
+            find _site/demos -name index.html -type f 2>/dev/null | sed -e 's#^_site/#/#' -e "s#^#$base#" || true
+            if [ "${{ github.event_name }}" = push ]; then
+              git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" -- '*/index.html' 2>/dev/null | while read -r f; do
+                [[ -f "_site/$f" ]] && echo "$base/${f%index.html}"
+              done
+            fi
+          } | grep '^https://' | sort -u > /tmp/lab-links.txt
+      - name: Check published public URLs
+        run: |
+          mapfile -t urls < /tmp/lab-links.txt
+          bash scripts/lab/link-ok.sh "${urls[@]}"
       - name: Check that main and every preview answer 200
         shell: bash
         run: |

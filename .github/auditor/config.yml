@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "issue_title": "🤖 Ревизия META GAMES",
+  "issue_number": 250,
+  "window_minutes": 90,
+  "schedule_utc": "13 * * * *",
+  "tasks": [
+    {
+      "id": "b1",
+      "name": "MG-строитель-1",
+      "minute": 5,
+      "branch_prefixes": [
+        "lab/auto-",
+        "lab/"
+      ],
+      "commit_prefixes": [
+        "feat",
+        "fix",
+        "docs",
+        "chore"
+      ],
+      "pr_label_hints": [
+        "mg-builder-1"
+      ]
+    },
+    {
+      "id": "b2",
+      "name": "MG-строитель-2",
+      "minute": 17,
+      "branch_prefixes": [
+        "lab/auto-",
+        "lab/"
+      ],
+      "commit_prefixes": [
+        "feat",
+        "fix",
+        "docs",
+        "chore"
+      ],
+      "pr_label_hints": [
+        "mg-builder-2"
+      ]
+    },
+    {
+      "id": "b3",
+      "name": "MG-строитель-3",
+      "minute": 29,
+      "branch_prefixes": [
+        "lab/auto-",
+        "lab/"
+      ],
+      "commit_prefixes": [
+        "feat",
+        "fix",
+        "docs",
+        "chore"
+      ],
+      "pr_label_hints": [
+        "mg-builder-3"
+      ]
+    },
+    {
+      "id": "b4",
+      "name": "MG-строитель-4",
+      "minute": 41,
+      "branch_prefixes": [
+        "lab/auto-",
+        "lab/"
+      ],
+      "commit_prefixes": [
+        "feat",
+        "fix",
+        "docs",
+        "chore"
+      ],
+      "pr_label_hints": [
+        "mg-builder-4"
+      ]
+    },
+    {
+      "id": "repair",
+      "name": "MG-ремонтник",
+      "minute": 53,
+      "branch_prefixes": [
+        "lab/auto-",
+        "lab/mcp-",
+        "lab/bot-",
+        "lab/library-",
+        "lab/kontur-",
+        "lab/"
+      ],
+      "commit_prefixes": [
+        "fix",
+        "repair",
+        "chore"
+      ],
+      "pr_label_hints": [
+        "mg-repair"
+      ]
+    }
+  ],
+  "sources": {
+    "task_table": "ZADACHI.md",
+    "task_instruction": "automation/prompts/MG_PYAT_AVTOZADACH.md",
+    "repo_rules": "AGENTS.md",
+    "owners_status": "CODEOWNERS отсутствует в корне и .github/ на дату установки"
+  },
+  "protected_paths": [
+    ".github/workflows/**",
+    "scripts/meta-bot/**",
+    "scripts/storozha/**",
+    "scripts/autofinish/**",
+    "scripts/zadachi/**",
+    "scripts/kontur/**",
+    "scripts/meta-games-guard/**",
+    "rules/09-platforma/FINISH.md",
+    "rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md",
+    "rules/09-platforma/ZANYATO.md",
+    "games/broken-city/**",
+    "games/twilight-isles/**",
+    "games/twilight-isle-classic/**",
+    "games/archer-in-the-fog/**"
+  ],
+  "policy": "Только наблюдение; ветка/PR не доказывают выполнение задачи без свежего связанного коммита. Workflow и охранники не сливать без Claude."
+}

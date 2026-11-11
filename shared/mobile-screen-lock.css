@@ -1,0 +1,37 @@
+@media (hover: none) and (pointer: coarse) {
+  html {
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+    scroll-behavior: auto !important;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: var(--meta-screen-height, 100dvh) !important;
+    min-height: 0 !important;
+    max-height: var(--meta-screen-height, 100dvh) !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+  }
+  canvas, #stick, #joystick, #joy, #touch,
+  .joystick, .joy, .stick, [data-joystick],
+  [data-game-controls], [data-game-touch] {
+    touch-action: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+  }
+  [data-scrollable], [data-allow-touch-scroll], dialog,
+  [role="dialog"], .scrollable, .scroll-area,
+  .modal-body, .story-text, .quest-text,
+  textarea, select, [contenteditable="true"] {
+    touch-action: pan-y !important;
+    overscroll-behavior: contain !important;
+  }
+}

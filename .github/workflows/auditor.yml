@@ -1,0 +1,37 @@
+name: META GAMES auditor
+on:
+  schedule:
+    - cron: '13 * * * *' # 20 минут после последней задачи :53
+  workflow_dispatch:
+  push:
+    branches: ['lab/auditor-*']
+    paths:
+      - '.github/auditor/**'
+      - '.github/workflows/auditor.yml'
+  pull_request:
+    paths:
+      - '.github/auditor/**'
+      - '.github/workflows/auditor.yml'
+permissions:
+  contents: read
+  pull-requests: read
+  checks: read
+  actions: read
+  issues: write
+concurrency:
+  group: meta-games-auditor-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Проверка синтаксиса и трёх мутаций
+        run: node --check .github/auditor/audit.cjs && node --test .github/auditor/audit.test.cjs
+      - name: Ревизия пяти задач
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const auditor = require('./.github/auditor/audit.cjs');
+            await auditor.main({ github, context, core });

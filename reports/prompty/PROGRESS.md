@@ -4,14 +4,14 @@
 
 ## Этапы
 - [x] Шаг 0. Прочитаны AGENTS.md, MNOGORAZOVYE_PROMPTY.md, TABLITSA_ZADACH.md, ZADACHI.md; зарегистрирована задача: [201b6b9](https://github.com/mpaykin1/meta6-lab/commit/201b6b9ce852d18bdc90768ff40edbe5b0784caf).
-- [ ] Шаг 1. Сверить полный набор промптов МГЛ, архив, копии МГ и задачи.
+- [x] Шаг 1. Сверены 14 активных + 1 архивный промпт, 166 строк задач, копии МГ; [папка промптов](https://github.com/mpaykin1/meta6-lab/tree/main/automation/prompts), [архив](https://github.com/mpaykin1/meta6-lab/tree/main/automation/prompts/archive), [задачи](https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md).
 - [ ] Шаг 2. Создать полный реестр `automation/PROMPTY.md`.
 - [ ] Шаг 3. Убрать устаревший перечень из `automation/README_RU.md`.
 - [ ] Шаг 4. Выполнить измеримое улучшение одного промпта и многоразовости, обновить статистику.
 - [ ] Шаг 5. Открыть PR, подтвердить проверки и безопасно слить по правилам.
 
 ## Обработано до
-Не установлено: первая инвентаризация ещё не завершена. Исходный HEAD после регистрации задачи: [201b6b9](https://github.com/mpaykin1/meta6-lab/commit/201b6b9ce852d18bdc90768ff40edbe5b0784caf), 2026-11-11T14:48:33.399Z.
+Первичная инвентаризация: HEAD [1c64062](https://github.com/mpaykin1/meta6-lab/commit/1c64062ebfc67c9e28be331b5c9640cf8bfe56e1), 2026-11-11T14:50:38.243Z. Следующий запуск сверяет изменения после этой метки.
 
 ## Развитие
 | Дата UTC | Новых правил | Новых ловушек | Мутантов-беглецов | Повторов ошибок | Ждёт Claude |

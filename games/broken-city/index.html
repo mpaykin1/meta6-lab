@@ -157,6 +157,8 @@ try {
 } catch (e) { $('loader').remove(); document.body.insertAdjacentHTML('beforeend', '<div id="err">WebGL недоступен</div>'); throw e; }
 const DPR = Math.min(window.devicePixelRatio || 1, Math.min(innerWidth, innerHeight) < 650 ? 1.5 : 2);
 const qualityController = window.MetaQuality.create({ targetMs: 16.67, minScale: .65, maxScale: 1 });
+// A hidden tab resumes with an arbitrary clock delta; never treat it as GPU pressure.
+document.addEventListener('visibilitychange', () => qualityController.suspend(), { passive: true });
 const pointScale = { value: DPR };
 let qualityScale = 1;
 renderer.setPixelRatio(DPR);
@@ -3258,7 +3260,7 @@ function frame() {
   if (!document.hidden && !PAUSE.size) {
     const nextScale = qualityController.sample(frameMs);
     if (nextScale !== qualityScale) { qualityScale = nextScale; resize(); }
-  }
+  } else qualityController.suspend();
   const dt0 = Math.min(frameMs / 1000, .05); if (PAUSE.size && started) return;
   const dt = dt0, t = clock.elapsedTime;
   U.uTime.value = t;

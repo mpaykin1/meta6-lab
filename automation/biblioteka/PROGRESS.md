@@ -43,6 +43,8 @@
 
 - 2026-11-11T14:27:41.203Z UTC — [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261) открыт в статусе draft; [связь с задачей](https://github.com/mpaykin1/meta6-lab/commit/a64bcd917d77f2b97c77d3ad518cf51300569db4). Ожидание CI не означает PASS.
 
+- 2026-11-11T14:29:10.586Z UTC — блокеры систем и исключения копий оставлены за существующими [#209](https://github.com/mpaykin1/meta6-lab/pull/209) и [#218](https://github.com/mpaykin1/meta6-lab/pull/218); [обновлён DLYA_CLAUDE.md](https://github.com/mpaykin1/meta6-lab/commit/41bd68d5f5c257565a23914a8fe96c487c585ddb). Оригиналы из PR #207/#189/#137 не объявлены файлами main.
+
 ## Урок
 
 - Латинское название MCP обязано учитываться при проверке нумерованных русских шагов; смешанный алфавит проверять мутациями.

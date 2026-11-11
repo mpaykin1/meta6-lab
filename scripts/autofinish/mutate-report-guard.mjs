@@ -14,3 +14,7 @@ for(const [name,content] of cases){
 assert.deepEqual(violations(diff(
  'Повторный прогон: https://github.com/mpaykin1/meta6-lab/actions/runs/429123')),[]);
 assert.deepEqual(violations(diff('Не слить PR #5 без CI')),[]);
+assert.deepEqual(violations(diff('Исправлен разбор русского слова «слить» в охраннике')),[],
+ 'quoted merge word is not a task');
+assert.equal(violations(diff('- Осталось: слить PR #42')).length,1,
+ 'pending merge still requires evidence');

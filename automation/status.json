@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T15:03:16.353Z",
+  "generated_at": "2026-11-11T15:13:14.170Z",
   "sha": {
-    "lab": "117a939452685ecadd58eb53bd8d7d8599c856a2",
+    "lab": "0dd948b303bc917bff53bf2625e67b9ac242c4ed",
     "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43043639198",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43044597258",
   "review": {
     "protected": [
       {
@@ -104,14 +104,14 @@
     ],
     "redLab": [
       {
+        "workflow": "Investigation snapshot",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43043564015",
+        "step": "Refresh investigation snapshot from GitHub"
+      },
+      {
         "workflow": "B1 — all games open without console errors",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042415577",
         "step": "Install Chromium for actual game rendering"
-      },
-      {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43041939236",
-        "step": "Run node scripts/dispetcher/run.mjs"
       }
     ],
     "redMg": [],
@@ -467,7 +467,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1092,
+      "count": 1096,
       "folders": "нет данных"
     },
     "mg": {

@@ -1,0 +1,1375 @@
+{
+  "schema_version": 1,
+  "source_reference": "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+  "source_sha256": "91642018b3e589173171340298f72320f747d3b401021a939030f6f922ede5e5",
+  "visual_origin": "approved-reference",
+  "atlas_grid": [
+    8,
+    3
+  ],
+  "atlas_names": [
+    "grass",
+    "dirt",
+    "stone",
+    "wood",
+    "sand",
+    "leaves",
+    "water",
+    "brick",
+    "grass_side",
+    "bark",
+    "log_top",
+    "snow",
+    "frozen_dirt",
+    "snow_side",
+    "ice",
+    "packed_snow",
+    "frost_brick",
+    "pine_needles"
+  ],
+  "weapon_metadata": {
+    "size": [
+      256,
+      128
+    ],
+    "weapons": {
+      "fists": {
+        "cell": [
+          0,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          10,
+          15
+        ],
+        "tip": [
+          21,
+          15
+        ],
+        "base": 0
+      },
+      "stick": {
+        "cell": [
+          32,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          22
+        ],
+        "tip": [
+          27,
+          4
+        ],
+        "base": 45
+      },
+      "dagger": {
+        "cell": [
+          64,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          22
+        ],
+        "tip": [
+          23,
+          8
+        ],
+        "base": 45
+      },
+      "sword": {
+        "cell": [
+          96,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          7,
+          25
+        ],
+        "tip": [
+          28,
+          4
+        ],
+        "base": 45
+      },
+      "katana": {
+        "cell": [
+          128,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          6,
+          25
+        ],
+        "tip": [
+          29,
+          2
+        ],
+        "base": 45
+      },
+      "axe": {
+        "cell": [
+          160,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          8,
+          25
+        ],
+        "tip": [
+          15,
+          4
+        ],
+        "base": 45
+      },
+      "hammer": {
+        "cell": [
+          192,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          8,
+          25
+        ],
+        "tip": [
+          22,
+          10
+        ],
+        "base": 45
+      },
+      "spear": {
+        "cell": [
+          224,
+          0,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          22
+        ],
+        "tip": [
+          30,
+          1
+        ],
+        "base": 45
+      },
+      "scythe": {
+        "cell": [
+          0,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          10,
+          23
+        ],
+        "tip": [
+          5,
+          12
+        ],
+        "base": 45
+      },
+      "flamesword": {
+        "cell": [
+          32,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          7,
+          25
+        ],
+        "tip": [
+          28,
+          4
+        ],
+        "base": 45
+      },
+      "flail": {
+        "cell": [
+          64,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          6,
+          26
+        ],
+        "tip": [
+          22,
+          10
+        ],
+        "base": 45
+      },
+      "sling": {
+        "cell": [
+          96,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          7,
+          16
+        ],
+        "tip": [
+          24,
+          16
+        ],
+        "muzzle": [
+          25,
+          16
+        ],
+        "base": 0
+      },
+      "bow": {
+        "cell": [
+          128,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          20,
+          16
+        ],
+        "tip": [
+          29,
+          16
+        ],
+        "muzzle": [
+          30,
+          16
+        ],
+        "base": 0
+      },
+      "bow_drawn": {
+        "cell": [
+          160,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          20,
+          16
+        ],
+        "tip": [
+          24,
+          16
+        ],
+        "muzzle": [
+          25,
+          16
+        ],
+        "base": 0
+      },
+      "xbow": {
+        "cell": [
+          192,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          19
+        ],
+        "tip": [
+          29,
+          14
+        ],
+        "muzzle": [
+          30,
+          14
+        ],
+        "base": 0
+      },
+      "pistol": {
+        "cell": [
+          224,
+          32,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          18
+        ],
+        "tip": [
+          27,
+          12
+        ],
+        "muzzle": [
+          28,
+          11.5
+        ],
+        "base": 0
+      },
+      "shotgun": {
+        "cell": [
+          0,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          10,
+          16
+        ],
+        "tip": [
+          30,
+          12
+        ],
+        "muzzle": [
+          31,
+          12
+        ],
+        "base": 0
+      },
+      "smg": {
+        "cell": [
+          32,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          11,
+          18
+        ],
+        "tip": [
+          28,
+          12
+        ],
+        "muzzle": [
+          29,
+          12.5
+        ],
+        "base": 0
+      },
+      "saw": {
+        "cell": [
+          64,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          9,
+          20
+        ],
+        "tip": [
+          29,
+          14
+        ],
+        "muzzle": [
+          29,
+          14.5
+        ],
+        "base": 0
+      },
+      "bomb": {
+        "cell": [
+          96,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          13,
+          20
+        ],
+        "tip": [
+          28,
+          14
+        ],
+        "muzzle": [
+          29,
+          14
+        ],
+        "base": 0
+      },
+      "tesla": {
+        "cell": [
+          128,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          8,
+          19
+        ],
+        "tip": [
+          27,
+          14
+        ],
+        "muzzle": [
+          28,
+          14
+        ],
+        "base": 0
+      },
+      "laser": {
+        "cell": [
+          160,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          11,
+          19
+        ],
+        "tip": [
+          29,
+          14
+        ],
+        "muzzle": [
+          30,
+          14.5
+        ],
+        "base": 0
+      },
+      "boomerang": {
+        "cell": [
+          192,
+          64,
+          32,
+          32
+        ],
+        "grip": [
+          8,
+          18
+        ],
+        "tip": [
+          27,
+          18
+        ],
+        "muzzle": [
+          17,
+          11
+        ],
+        "base": 0
+      }
+    },
+    "proj": {
+      "pebble": [
+        0,
+        96,
+        16,
+        16
+      ],
+      "arrow": [
+        16,
+        96,
+        16,
+        16
+      ],
+      "bolt": [
+        32,
+        96,
+        16,
+        16
+      ],
+      "saw": [
+        48,
+        96,
+        16,
+        16
+      ],
+      "bomb": [
+        64,
+        96,
+        16,
+        16
+      ],
+      "ball": [
+        80,
+        96,
+        16,
+        16
+      ],
+      "casing": [
+        96,
+        96,
+        16,
+        16
+      ],
+      "boomerang": [
+        112,
+        96,
+        16,
+        16
+      ]
+    },
+    "icons": {
+      "gull_feather": [
+        128,
+        96,
+        16,
+        16
+      ],
+      "tide_charm": [
+        144,
+        96,
+        16,
+        16
+      ],
+      "iron_grip": [
+        160,
+        96,
+        16,
+        16
+      ],
+      "hawk_eye": [
+        176,
+        96,
+        16,
+        16
+      ],
+      "soul_jar": [
+        192,
+        96,
+        16,
+        16
+      ],
+      "magnet_coin": [
+        208,
+        96,
+        16,
+        16
+      ],
+      "heart_seed": [
+        224,
+        96,
+        16,
+        16
+      ],
+      "lantern_shard": [
+        240,
+        96,
+        16,
+        16
+      ],
+      "storm_glass": [
+        0,
+        112,
+        16,
+        16
+      ],
+      "rime_charm": [
+        16,
+        112,
+        16,
+        16
+      ]
+    }
+  },
+  "assets": [
+    {
+      "id": "atlas",
+      "path": "textures/atlas.png",
+      "format": "png",
+      "bytes": 4768,
+      "sha256": "36fb97585ac8c5dbabadd5132163afef94225529ee640d981a445980712411af",
+      "visual_origin": "approved-reference",
+      "status": "READY"
+    },
+    {
+      "id": "weapons",
+      "path": "textures/weapons.png",
+      "format": "png",
+      "bytes": 8685,
+      "sha256": "74cd9c1e3f55d745ed7b2218a0f66a743884c5116c45345cf99a3ef98d1f1297",
+      "visual_origin": "approved-reference",
+      "status": "READY"
+    },
+    {
+      "id": "water",
+      "path": "textures/water.png",
+      "format": "png",
+      "bytes": 602,
+      "sha256": "081f32e07fed1bf00228509ddab372e09a2333de1ea19e5308cbcce6abb0f586",
+      "visual_origin": "approved-reference",
+      "status": "READY"
+    },
+    {
+      "id": "coin",
+      "path": "sprites/ui/coin.png",
+      "format": "png",
+      "bytes": 404,
+      "sha256": "031adcf98f1cdd880c3b4e01073ef1667834c726dc4b5e4fff15a63d723e7592",
+      "visual_origin": "approved-reference",
+      "status": "READY"
+    },
+    {
+      "id": "hearts",
+      "path": "sprites/ui/hearts.png",
+      "format": "png",
+      "bytes": 444,
+      "sha256": "9ce5dbef5c7eb10618f38a41761ff74749a5f8cea4820bf06a7b764b9de12b0b",
+      "visual_origin": "approved-reference",
+      "status": "READY"
+    },
+    {
+      "id": "hero",
+      "path": "sprites/heroes/hero.png",
+      "format": "png",
+      "bytes": 1070,
+      "sha256": "ae21e6a3f291107e0d92757b9f0225a4a01fbe63e6dc3709e17a9bc7af5c2a59",
+      "visual_origin": "approved-reference",
+      "status": "READY"
+    },
+    {
+      "id": "hero_wanderer",
+      "alias_of": "hero",
+      "sha256": "ae21e6a3f291107e0d92757b9f0225a4a01fbe63e6dc3709e17a9bc7af5c2a59",
+      "visual_origin": "approved-reference"
+    },
+    {
+      "id": "hero_keeper_old",
+      "path": "sprites/heroes/keeper_old.png",
+      "format": "png",
+      "bytes": 1173,
+      "sha256": "f2dc01d8cf4f31a4ba21ab5db61e81b4f0a2092187c0a49340c14bc1f5c7d4d7",
+      "visual_origin": "approved-reference",
+      "status": "READY"
+    },
+    {
+      "id": "hero_fisher",
+      "path": "sprites/heroes/fisher.png",
+      "format": "png",
+      "bytes": 1208,
+      "sha256": "714d91c00317d0f93278a403c9439d446e70fa089da0e4da7e52765150e2334f",
+      "visual_origin": "approved-reference",
+      "status": "READY"
+    },
+    {
+      "id": "hero_keeper",
+      "path": "sprites/heroes/keeper.png",
+      "format": "png",
+      "bytes": 1072,
+      "sha256": "50c1c3f517d9df250e9dbda49fb497c96601e9ecc678969d5872cf95b7a6624f",
+      "visual_origin": "approved-reference",
+      "status": "READY"
+    },
+    {
+      "id": "tile/grass",
+      "path": "textures/tiles/grass.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "4d64cf82c6424bab899380c7d10e5e3316ad61de09362b636e34fff00bf3df90",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        0,
+        0,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "tile/dirt",
+      "path": "textures/tiles/dirt.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "5d56961b64a9492386a5fc25b3840bcec099e2ff4ac50ebdd2c79bec3dba420a",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        16,
+        0,
+        32,
+        16
+      ]
+    },
+    {
+      "id": "tile/stone",
+      "path": "textures/tiles/stone.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "615b530f384c6fe5d0497e19afffa34bff2e4a023830664cb06021abb863d294",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        32,
+        0,
+        48,
+        16
+      ]
+    },
+    {
+      "id": "tile/wood",
+      "path": "textures/tiles/wood.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "bd0d0c6d7e81da50b749ec571623cc60d041ceda903202c49bb5fa114a32d352",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        48,
+        0,
+        64,
+        16
+      ]
+    },
+    {
+      "id": "tile/sand",
+      "path": "textures/tiles/sand.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "e150a8d4b1d0b9ff87194820d1685687796845a2591a706f11be801d66489809",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        64,
+        0,
+        80,
+        16
+      ]
+    },
+    {
+      "id": "tile/leaves",
+      "path": "textures/tiles/leaves.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "443ec98725ebc987c193521eae3ffb91973cd19f9d1bbaf278ddb1c311879caf",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        80,
+        0,
+        96,
+        16
+      ]
+    },
+    {
+      "id": "tile/water",
+      "path": "textures/tiles/water.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "9d9778a68f8d2bf9ae39ef0360abf222f5a7dc20b0c82dae1673a46dc57d7a3e",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        96,
+        0,
+        112,
+        16
+      ]
+    },
+    {
+      "id": "tile/brick",
+      "path": "textures/tiles/brick.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "0b80056803cb2795a58079675ca18c77c3d4860f30b6597ac68bafcdb91a25fd",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        112,
+        0,
+        128,
+        16
+      ]
+    },
+    {
+      "id": "tile/grass_side",
+      "path": "textures/tiles/grass_side.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "c084c6808e2ed772d13e1ee7cedb0b81aed94fdf57c27e485c74ec1244a054fa",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        0,
+        16,
+        16,
+        32
+      ]
+    },
+    {
+      "id": "tile/bark",
+      "path": "textures/tiles/bark.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "29177aba0d6b09a946c3cdda32d801996979862c89c8294fbbf99fc395389e0f",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        16,
+        16,
+        32,
+        32
+      ]
+    },
+    {
+      "id": "tile/log_top",
+      "path": "textures/tiles/log_top.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "1fb6be3107d263b1efeb847808e56fb6e16508d1388032a9271137b0efd5f47d",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        32,
+        16,
+        48,
+        32
+      ]
+    },
+    {
+      "id": "tile/snow",
+      "path": "textures/tiles/snow.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "85370bf83a4115834647502713930de3070daea93ab12fd693a4f5195b3883fd",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        48,
+        16,
+        64,
+        32
+      ]
+    },
+    {
+      "id": "tile/frozen_dirt",
+      "path": "textures/tiles/frozen_dirt.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "865a028cc929f268d34f09938a7a4beddb3bb1744f561af501b548669fec272e",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        64,
+        16,
+        80,
+        32
+      ]
+    },
+    {
+      "id": "tile/snow_side",
+      "path": "textures/tiles/snow_side.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "9d422433776f5e334be1f37c9b586cc84cd36017e6d5d6ef4550353f30355410",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        80,
+        16,
+        96,
+        32
+      ]
+    },
+    {
+      "id": "tile/ice",
+      "path": "textures/tiles/ice.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "bc6e6c508dc8389a04cb7fb5a826606c8d184a8e991938f4cbcb601a7058e17a",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        96,
+        16,
+        112,
+        32
+      ]
+    },
+    {
+      "id": "tile/packed_snow",
+      "path": "textures/tiles/packed_snow.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "0384dba2b9048863fcee77b81331fe844df185550ac46dda1aacb9abed02132f",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        112,
+        16,
+        128,
+        32
+      ]
+    },
+    {
+      "id": "tile/frost_brick",
+      "path": "textures/tiles/frost_brick.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "4f9dff61accac8173fc0b0829ad14db9fcd3324c716e11307e9821fa24b8fe1f",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        0,
+        32,
+        16,
+        48
+      ]
+    },
+    {
+      "id": "tile/pine_needles",
+      "path": "textures/tiles/pine_needles.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "sha256": "f79ddbece60b89d3aee05812ebdbaee204e1d511b8c73cc5d244d839ea296bf1",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "atlas",
+      "source_rect": [
+        16,
+        32,
+        32,
+        48
+      ]
+    },
+    {
+      "id": "weapon/fists",
+      "path": "sprites/weapons/fists.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "fecdcaf640063818ccd6a13bf598dad6ce4080a57c5b1166ce31a43753ac67a0",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        0,
+        0,
+        32,
+        32
+      ]
+    },
+    {
+      "id": "weapon/stick",
+      "path": "sprites/weapons/stick.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "dd494cda5b5bb64b120d1405105772795371bac26cc977ccca04a671303f92e6",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        32,
+        0,
+        64,
+        32
+      ]
+    },
+    {
+      "id": "weapon/dagger",
+      "path": "sprites/weapons/dagger.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "c946650b3a09383791de19f7fcc1f9b47d4c45f3c7e6908a497eac01d5725600",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        64,
+        0,
+        96,
+        32
+      ]
+    },
+    {
+      "id": "weapon/sword",
+      "path": "sprites/weapons/sword.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "c1bfe8974808075327af0b006505a6f88da5c27dc2c375f5a383bfe9a0bd436e",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        96,
+        0,
+        128,
+        32
+      ]
+    },
+    {
+      "id": "weapon/katana",
+      "path": "sprites/weapons/katana.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "5f6ea298e09e0cef3d154a7b2374ad77ffe33ce8557c196910c9a72a4fec9352",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        128,
+        0,
+        160,
+        32
+      ]
+    },
+    {
+      "id": "weapon/axe",
+      "path": "sprites/weapons/axe.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "c49f9328fdb2e7bafdffb0598a267ea4fb9536b724beda789eeab62375e7c48a",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        160,
+        0,
+        192,
+        32
+      ]
+    },
+    {
+      "id": "weapon/hammer",
+      "path": "sprites/weapons/hammer.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "afb8bd59aa5992d0521bd04e89a584faa3d6756f91909ddc3a65c484ab33bae1",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        192,
+        0,
+        224,
+        32
+      ]
+    },
+    {
+      "id": "weapon/spear",
+      "path": "sprites/weapons/spear.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "89e4055b8974843afab789aed1bfa2ecf18a4b5b2f5e96e8fed37710e61ab144",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        224,
+        0,
+        256,
+        32
+      ]
+    },
+    {
+      "id": "weapon/scythe",
+      "path": "sprites/weapons/scythe.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "e3dc0ad5e56ccadc94b4d826542f903d9c2b5f37c9177c9fa17e9af8f555ea6a",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        0,
+        32,
+        32,
+        64
+      ]
+    },
+    {
+      "id": "weapon/flamesword",
+      "path": "sprites/weapons/flamesword.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "b4a371849b415f9c515626df99dacd97a25e94e8e9ed323578d6db1db2f98581",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        32,
+        32,
+        64,
+        64
+      ]
+    },
+    {
+      "id": "weapon/flail",
+      "path": "sprites/weapons/flail.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "bf267730540f009fe955f77aefb361be663f89db9d0f65e01a84b0e6f28ed037",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        64,
+        32,
+        96,
+        64
+      ]
+    },
+    {
+      "id": "weapon/sling",
+      "path": "sprites/weapons/sling.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "abb7b0f71b33efdee57d1dc75c711662b1d99a9ccade266ab5a5debea532c3d4",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        96,
+        32,
+        128,
+        64
+      ]
+    },
+    {
+      "id": "weapon/bow",
+      "path": "sprites/weapons/bow.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "40581f1815a4b38eff57bac4576e2704c56758ff3c621c9d3eab5d6e84d43797",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        128,
+        32,
+        160,
+        64
+      ]
+    },
+    {
+      "id": "weapon/bow_drawn",
+      "path": "sprites/weapons/bow_drawn.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "81f2b04e8e09206c1060f11c81a83f6be52967fe9f20d865e2e2b66bb49ccad0",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        160,
+        32,
+        192,
+        64
+      ]
+    },
+    {
+      "id": "weapon/xbow",
+      "path": "sprites/weapons/xbow.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "24b9d2f97986690d7ed55e3af4fda68b9f30fbed68ec8c53f213c1bd0fe9c114",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        192,
+        32,
+        224,
+        64
+      ]
+    },
+    {
+      "id": "weapon/pistol",
+      "path": "sprites/weapons/pistol.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "a11976f67e5fec9667ac642bdd9eef9577adbf5c6016fdf2c27ee32939430298",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        224,
+        32,
+        256,
+        64
+      ]
+    },
+    {
+      "id": "weapon/shotgun",
+      "path": "sprites/weapons/shotgun.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "075795eb32e927d6923ba9cf39af806d65c9d97f98bcaa43900e08bfeca9ba43",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        0,
+        64,
+        32,
+        96
+      ]
+    },
+    {
+      "id": "weapon/smg",
+      "path": "sprites/weapons/smg.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "718b30a919e9fc49b8401681eb90596980ec3c426559d8a877a15a39a9a42851",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        32,
+        64,
+        64,
+        96
+      ]
+    },
+    {
+      "id": "weapon/saw",
+      "path": "sprites/weapons/saw.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "1a3ad836020ee7a3c344360a2f867f0cc4a5308e2597b9c4c7fb41efe3fadfc8",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        64,
+        64,
+        96,
+        96
+      ]
+    },
+    {
+      "id": "weapon/bomb",
+      "path": "sprites/weapons/bomb.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "5b2038e017fca3bfe8a419330ba8a5d85b1ba5dbcde72ecbb4d7c66c3fb8ab9e",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        96,
+        64,
+        128,
+        96
+      ]
+    },
+    {
+      "id": "weapon/tesla",
+      "path": "sprites/weapons/tesla.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "602f93f674010156e4487b4d10eabcf7c2c5032a29a9ac2f7f6be49c058d06df",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        128,
+        64,
+        160,
+        96
+      ]
+    },
+    {
+      "id": "weapon/laser",
+      "path": "sprites/weapons/laser.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "183ceea092665fe4d3cfc0f483ea49c77049d72081759c447473cf132f64edbb",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        160,
+        64,
+        192,
+        96
+      ]
+    },
+    {
+      "id": "weapon/boomerang",
+      "path": "sprites/weapons/boomerang.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "sha256": "500256773574b0fcafd9d022ee2826a21927f9fe41583a3da429c332e7463cec",
+      "status": "READY",
+      "visual_origin": "approved-reference",
+      "derived_from": "weapons",
+      "source_rect": [
+        192,
+        64,
+        224,
+        96
+      ]
+    }
+  ]
+}

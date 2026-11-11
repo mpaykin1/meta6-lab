@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "event",
+  "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+  "definitions": [
+    {
+      "id": "pod-i-nad/registry/event/storm",
+      "source": "defineEvent('storm', {\n  name: 'Гроза',\n  toast: 'Над островом собирается гроза',\n  biomes: ['dusk'],\n  chance: 0.3, duration: [40, 60], cooldown: 70,\n  when: (c) => c.play > 30,\n  weather: { kind: 'rain', density: 1, wind: [1.8, 0.8] },\n  palette: {\n    skyTop: '#10162c', skyHor: '#3b4466', fog: '#2a3049', fogD: 0.03, keyCol: '#9fb2e0', keyI: 0.8, sunVis: 0.25, stars: 0,\n    hemiSky: '#7484b8', hemiGnd: '#1a1626', hemiI: 0.9, deep: '#0c1a30', shallow: '#1f4a66', foam: '#b0c0e2', wSky: '#36405f',\n    bloom: 0.8, exposure: 0.98, motes: 0, flies: 0.1, mist: 0.34, mistCol: '#4f5b7c', grain: 0.07, vig: 0.5,\n    gain: [0.94, 0.98, 1.06], lift: [0.01, 0.02, 0.06],\n  },\n  ambience: { rain: 1, gust: 1, wind: 1.5, waves: 1.5 },\n  spawnMul: 1.25,\n  onTick(dt, k) {\n    if (k > 0.55 && Math.random() < dt * 0.15 * k) skyBolt(player.pos.x + rr(-16, 16), player.pos.z + rr(-16, 16));\n  },\n})",
+      "source_line_start": 1010,
+      "source_line_end": 1028
+    },
+    {
+      "id": "pod-i-nad/registry/event/sea_fog",
+      "source": "defineEvent('sea_fog', {\n  name: 'Морок',\n  toast: 'С моря наползает морок — тени смелеют',\n  warn: true,\n  biomes: ['dusk'],\n  chance: 0.25, duration: [30, 45], cooldown: 80,\n  when: (c) => c.prog > 0.3,\n  weather: { kind: 'sea_mist', density: 0.8, wind: [0.9, 0.3] },\n  palette: { fogD: 0.05, fog: '#7d6f98', skyHor: '#a483a4', mist: 0.55, mistCol: '#b0a2cf', motes: 0.2, vig: 0.52, grain: 0.06, sunVis: 0.4 },\n  ambience: { drone: 1.7, waves: 0.7, wind: 0.6 },\n  spawnMul: { shade: 2 },\n})",
+      "source_line_start": 1030,
+      "source_line_end": 1041
+    },
+    {
+      "id": "pod-i-nad/registry/event/starfall",
+      "source": "defineEvent('starfall', {\n    name: 'Звездопад',\n    toast: 'Звездопад! Загадай желание',\n    biomes: ['dusk'],\n    chance: 0.35, duration: [25, 35], cooldown: 60,\n    when: (c) => c.night,\n    weather: { kind: 'stardust', density: 0.6, wind: [0.2, 0.1] },\n    palette: { stars: 1, skyTop: '#081033', skyHor: '#3a3a78', coinGlow: 2.6, beam: 0.5, halo: 0.7, bloom: 1.0, motes: 0.6 },\n    ambience: { wind: 0.6, drone: 0.7 },\n    onTick(dt, k) {\n      if (Math.random() < dt * 1.4 * k) launch();\n      if (Math.random() < dt * 0.05 * k) fallingStar();\n      for (let i = meteors.length - 1; i >= 0; i--) {\n        const m = meteors[i];\n        m.life -= dt;\n        for (let j = 0; j < 3; j++) {\n          const s = j / 3;\n          glow.emit(m.p.x + m.v.x * dt * s, m.p.y + m.v.y * dt * s, m.p.z + m.v.z * dt * s, 0, 0, 0, rr(0.25, 0.45), 0.36 * Math.min(1, m.life * 2), 0.02, C.goldHot, 1, 0, 0, 0);\n        }\n        m.p.addScaledVector(m.v, dt);\n        if (m.life <= 0) meteors.splice(i, 1);\n      }\n    },\n    onEnd() { meteors.length = 0; },\n  })",
+      "source_line_start": 1066,
+      "source_line_end": 1090
+    },
+    {
+      "id": "pod-i-nad/registry/event/blizzard",
+      "source": "defineEvent('blizzard', {\n  name: 'Метель',\n  toast: 'Начинается метель — ветер сбивает с ног',\n  warn: true,\n  biomes: ['frost'],\n  chance: 0.35, duration: [35, 50], cooldown: 70,\n  when: (c) => c.play > 25,\n  weather: { kind: 'snow', density: 1, wind: [4.5, 1.6] },\n  palette: { fogD: 0.048, fog: '#c9d3ea', skyHor: '#d7def0', skyTop: '#7d8bb5', keyI: 1.2, sunVis: 0.2, mist: 0.45, mistCol: '#eef2fb', grain: 0.06, vig: 0.5, exposure: 1.04, stars: 0, aurora: 0 },\n  ambience: { gust: 1.3, wind: 2.4, waves: 0.8 },\n  spawnMul: 1.3,\n  onTick(dt, k) {\n    // the wind leans on the hero: barely felt on snow, a real slide on the ice shore\n    const gust = 0.7 + 0.3 * Math.sin(G.time * 0.9) * Math.sin(G.time * 0.37 + 2.1);\n    player.vel.x += 3.2 * k * gust * dt * 0.94; player.vel.z += 3.2 * k * gust * dt * 0.33;\n  },\n})",
+      "source_line_start": 1524,
+      "source_line_end": 1540
+    },
+    {
+      "id": "pod-i-nad/registry/event/aurora",
+      "source": "defineEvent('aurora', {\n  name: 'Северное сияние',\n  toast: 'Над фьордом разгорается сияние',\n  biomes: ['frost'],\n  chance: 0.3, duration: [30, 40], cooldown: 60,\n  when: (c) => c.tod > 0.25 && c.tod < 0.7,\n  weather: { kind: 'snow', density: 0.12, wind: [0.2, 0.1] },\n  palette: { aurora: 1, stars: 0.8, skyTop: '#06102a', bloom: 0.9, coinGlow: 2.2, auroraA: '#3dffa8', auroraB: '#7a6bff' },\n  paletteMix: 1,\n  ambience: { wind: 0.5, drone: 0.6 },\n})",
+      "source_line_start": 1541,
+      "source_line_end": 1551
+    }
+  ]
+}

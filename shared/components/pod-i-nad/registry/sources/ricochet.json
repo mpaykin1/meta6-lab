@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "ricochet",
+  "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+  "definitions": [
+    {
+      "id": "pod-i-nad/registry/ricochet/none",
+      "source": "defineRicochet('none', (p) => impact(p))",
+      "source_line_start": 1284,
+      "source_line_end": 1284
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/mirror",
+      "source": "defineRicochet('mirror', (p, comp, sp) => {         // bounces off at grazing angles (or always, for saws)\n  const v = p.vel, grazing = Math.abs(v[comp]) / sp < 0.8;\n  if (p.bounce > 0 && (p.pk.alwaysRicochet || grazing)) { v[comp] *= -1; p.bounce--; ricochetFx(p, comp); return false; }\n  return impact(p);\n})",
+      "source_line_start": 1285,
+      "source_line_end": 1289
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/scatter",
+      "source": "defineRicochet('scatter', (p, comp) => {             // pellets fly off in random directions\n  const v = p.vel;\n  if (p.bounce > 0) { v[comp] *= -0.8; v.applyAxisAngle(UPV, rr(-0.8, 0.8)); p.bounce--; ricochetFx(p, comp, 0.4); return false; }\n  return impact(p);\n})",
+      "source_line_start": 1290,
+      "source_line_end": 1294
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/damped",
+      "source": "defineRicochet('damped', (p, comp, sp) => {          // pebbles lose energy with each bounce\n  const v = p.vel;\n  if (p.bounce > 0 && sp > 3) {\n    v[comp] *= -p.rest;\n    for (const o of ['x', 'y', 'z']) if (o !== comp) v[o] *= 0.8;\n    p.bounce--; SFX.tick();\n    dust.emit(p.pos.x, p.pos.y, p.pos.z, 0, 0.6, 0, 0.35, 0.12, 0.3, C.smokeLight, 0.5, 0, 2, 0);\n    return false;\n  }\n  return impact(p);\n})",
+      "source_line_start": 1295,
+      "source_line_end": 1305
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/roll",
+      "source": "defineRicochet('roll', {                             // bombs bounce, settle and roll with friction\n  friction: 2.4,\n  hit(p, comp, sp) {\n    const v = p.vel;\n    if (comp === 'y' && v.y < 0) {\n      if (Math.abs(v.y) > 3) SFX.tock();\n      v.y = Math.abs(v.y) < 2.2 ? 0 : -v.y * 0.42;\n      v.x *= 0.85; v.z *= 0.85; p.grounded = true;\n    } else { v[comp] *= -0.5; if (sp > 3) SFX.tock(); }\n    return false;\n  },\n})",
+      "source_line_start": 1306,
+      "source_line_end": 1317
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/stick",
+      "source": "defineRicochet('stick', (p) => {                     // arrows and bolts bite into the wall\n  const v = p.vel;\n  p.stuck = 5; p.stuckDir = v.clone(); v.set(0, 0, 0); p.grav = 0;\n  SFX.thunk();\n  for (let k = 0; k < 4; k++) dust.emit(p.pos.x, p.pos.y, p.pos.z, rr(-1, 1), rr(0.5, 2), rr(-1, 1), rr(0.3, 0.5), 0.07, 0.04, p.pk.stickDust ? C[p.pk.stickDust] : C.chip, 0.9, 10, 0.5, 1);\n  if (p.pk.stickGlow) for (let k = 0; k < 6; k++) glow.emit(p.pos.x, p.pos.y, p.pos.z, rr(-1.5, 1.5), rr(0, 2), rr(-1.5, 1.5), rr(0.3, 0.6), 0.09, 0.02, C[p.pk.stickGlow], 1, 6, 1, 2);\n  return false;\n})",
+      "source_line_start": 1318,
+      "source_line_end": 1325
+    },
+    {
+      "id": "pod-i-nad/registry/ricochet/boomerang",
+      "source": "defineRicochet('boomerang', (p, comp) => {\n  p.vel[comp] *= -0.6;\n  p.ret = true;\n  ricochetFx(p, comp, 0.5);\n  return false;\n})",
+      "source_line_start": 1815,
+      "source_line_end": 1820
+    }
+  ]
+}

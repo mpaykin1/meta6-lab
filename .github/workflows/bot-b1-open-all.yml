@@ -1,0 +1,39 @@
+name: B1 — all games open without console errors
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  permanent-mutations:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fail on console, pageerror, HTTP 404 and hardcoded catalog
+        run: node scripts/platform/mutate-bot-open-all.mjs
+  browser-open-all:
+    needs: permanent-mutations
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium for actual game rendering
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Open every MCP list_games entry on desktop and mobile
+        run: node scripts/platform/verify-bot-open-all.mjs

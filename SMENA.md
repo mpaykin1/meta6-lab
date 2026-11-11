@@ -142,3 +142,29 @@
 - Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ; исходная ветка `lab/shared-index-symlink-1111`, HEAD `65e48d5ef9eba78f974b617e2c7d7db14a6c2f4a`, PR https://github.com/mpaykin1/meta6-lab/pull/241.
 - Карточка не закреплена в DISPETCHER.md; продолжаю собственную зависшую строку ZADACHI.md (последний коммит 2026-11-11T07:20Z). Никакую чужую активную ветку не меняю.
 - Найденная незакрытая угроза: `shared/` как symlink-предок и `shared/index.json` как symlink-назначение обходят проверки конечных входных файлов. Действие: закрыть оба пути и дополнить существующие мутации, затем свежий CI; слияние только при независимой проверке.
+
+### Продолжение #241 2026-11-11T11:25Z
+- Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ; коммиты [8d0296c](https://github.com/mpaykin1/meta6-lab/commit/8d0296cda802613bab6e3a61d51efe6a2db9a391), [31bf6dd](https://github.com/mpaykin1/meta6-lab/commit/31bf6dd3de97877609822555309266f66dac834c), merge [6eb127a](https://github.com/mpaykin1/meta6-lab/commit/6eb127a275c9f3bcc97ca9d18f66f9903f42cd61).
+- Две новые защиты и мутации, ошибки #38–39. Новый CI https://github.com/mpaykin1/meta6-lab/actions/runs/43011648218 / https://github.com/mpaykin1/meta6-lab/actions/runs/43011648077 ещё выполняется. Осталось: проверить все обязательные workflow актуального HEAD и независимое ревью, затем разрешённое слияние.
+
+### Состояние PR #241 2026-11-11T11:31Z
+- SHA [077142ee](https://github.com/mpaykin1/meta6-lab/commit/077142ee8278fd8bb153cf8a026a9c7626860912) после 2 отдельных подтверждённых CI-дефектов: [index job](https://github.com/mpaykin1/meta6-lab/actions/runs/43011648218/job/130492473827), [STOROZHA job](https://github.com/mpaykin1/meta6-lab/actions/runs/43011648388/job/130492561123). Исправлены мутации, восстановлен защищённый verifier; новые shared-original, STOROZHA reference и META GAMES guard — success. Остались незавершённые KONTUR, B1 и browser, новое изменение main с момента merge, независимый reviewer. Не сливать раньше.
+ 
+## Продолжение 11.11.2026 — Archer #132 / текущий рабочий цикл
+
+- Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ, продолжение ранее взятой карточки #132 (не новая задача).
+- Исходный HEAD: `ecfdb2558b76243dc605bc7cee4e5f77b953146d`; мобильный бот [42999845500](https://github.com/mpaykin1/meta6-lab/actions/runs/42999845500) остановился на уровнях 4–5, desktop 7/7.
+- Реальное изменение: [f1455c5](https://github.com/mpaykin1/meta6-lab/commit/f1455c56700c4e8cf9c787ec3dbddaceebdef968) — на устойчивом низком FPS прямая отрисовка активной сцены вместо многопроходного bloom. Регрессионные проверки и 3 мутации: [04306d1](https://github.com/mpaykin1/meta6-lab/commit/04306d117db37bcd4f281ad0ce048e3436c4358e), [bfe0d7d](https://github.com/mpaykin1/meta6-lab/commit/bfe0d7d92bdf333e5db35a4d8d602373cccbd5cb).
+- Синхронизация с main: [dd933de](https://github.com/mpaykin1/meta6-lab/commit/dd933de3b699c93151dee3ff7d3bbab03eeea4f4) — двухродительский merge, защита основного дерева, OSHIBKI #39–41; GitHub compare `behind=0`, `mergeable=true` на момент проверки.
+- Следующий шаг: проверить все обязательные Actions **на `dd933de3b699c93151dee3ff7d3bbab03eeea4f4`** и логи мобильного META BOT, при подтверждённом падении исправить причину; затем независимое ревью. Пока CI queued/in_progress — **не сливать**.
+
+## Продолжение Archer — чистый PR #255 (11.11.2026)
+
+- Исходный PR #132 отклонён именно из-за защищённой **истории**: [META GAMES guard 43033158406](https://github.com/mpaykin1/meta6-lab/actions/runs/43033158406) нашёл коммит `182bf01d486b28be5335dc322d94d8b185b0aba7` с `.github/protected` без подписи Claude. Текущий diff не решает проблему истории.
+- Чистый [PR #255](https://github.com/mpaykin1/meta6-lab/pull/255) от `main@e93338ba08b1ee06b08ed39103bc2d15d113ba39`, единственный [commit 343c632](https://github.com/mpaykin1/meta6-lab/commit/343c6326952a18f9a5431f3aa39fa48d0dd947cd), 13 нужных путей, сохранены byte-identical изменения из старой ветки. Без force, без `.github/protected` в истории. Старый PR #132 закрыт без merge после создания замены.
+- [META GAMES guard 43034032750](https://github.com/mpaykin1/meta6-lab/actions/runs/43034032750) — success на новом SHA; Library Machine, shared-original, deletion guard и STOROZHA quota тоже success, остальные проверки продолжаются.
+- **Следующий шаг:** получить итог META BOT mobile/desktop, KONTUR и других проверок на `343c6326952a18f9a5431f3aa39fa48d0dd947cd`; исправить подтверждённое новое падение не изменяя guard/бот/уровни; независимое ревью, оставить draft до реального PASS. Не объявлять игру завершённой до live-подтверждения.
+
+## Захват 2026-11-11T16:07:36.917Z — PR #241, устранение конфликта с main
+- Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ. Собственная существующая задача в ZADACHI.md: L2 shared-index symlink, PR https://github.com/mpaykin1/meta6-lab/pull/241, HEAD `077142ee8278fd8bb153cf8a026a9c7626860912`.
+- Проверено: на предыдущем HEAD CI success, конфликт с новым main; `scripts/shared/build-index.mjs` в main без защиты symlink. Сейчас: объединить актуальный main и ветку через двухродительский коммит, сохранить историю main, устранить конфликт ID OSHIBKI без удаления ловушек, затем проверить свежие CI. Не сливать без независимого ревью.

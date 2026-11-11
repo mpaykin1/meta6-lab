@@ -74,13 +74,6 @@
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: MG-строитель-2 2026-11-11T12:16:00Z
 
-### PR #233
-- PR: https://github.com/mpaykin1/meta6-lab/pull/233
-- Ветка: `lab/import-five-cc0-packs`
-- SHA: `34176a2e47a2195492db486d1440428252d0a34d` · последний коммит: 2026-11-11T07:03:49Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: MG-строитель-4 2026-11-11T13:36:00Z
 
 ### PR #239
 - PR: https://github.com/mpaykin1/meta6-lab/pull/239
@@ -91,6 +84,7 @@
 - Взял: —
 
 ## НУЖЕН CLAUDE
+- [#233](https://github.com/mpaykin1/meta6-lab/pull/233) НУЖЕН ВЛАДЕЛЕЦ: отсутствует оригинальный Tiny Overworld ZIP; 4/5, draft, не сливать
 - [#203](https://github.com/mpaykin1/meta6-lab/pull/203) Устранить конфликт PR #203 с main
 - [#87](https://github.com/mpaykin1/meta6-lab/pull/87) Довести PR #87: Play / Connect / Earn до актуального main
 - [#219](https://github.com/mpaykin1/meta6-lab/pull/219) A1: STATUS.md — автоматический краткий статус МГЛ

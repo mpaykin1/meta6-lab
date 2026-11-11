@@ -1,6 +1,5 @@
 import './mutate-broken-city-quality-resume.mjs';
 import { chromium } from 'playwright';
-import { appendFileSync } from 'node:fs';
 const browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--enable-unsafe-swiftshader']});
 const ps=(s,p)=>s[Math.min(s.length-1,Math.max(0,Math.ceil(s.length*p)-1))];
 const results=[],sizes=[{name:'mobile',width:390,height:844},{name:'desktop',width:1280,height:720}];
@@ -61,7 +60,7 @@ try{
 console.log(JSON.stringify(results,null,2));
 const lines=['## Broken City — exact PR base/head WebGL performance','','| Device | Build | FPS | p95 ms | Draws/frame | Scale | Errors |','|---|---|---:|---:|---:|---:|---|'];
 for(const r of results)lines.push('| '+[r.size,r.version,r.fps?.toFixed(2)??'—',r.p95?.toFixed(1)??'—',r.draw??'—',r.quality??'—',r.errors?.join('; ')||'none'].join(' | ')+' |');
-if(process.env.GITHUB_STEP_SUMMARY)appendFileSync(process.env.GITHUB_STEP_SUMMARY,lines.join('\n')+'\n');
+console.log(lines.join('\n'));
 let failed=false;
 for(const size of sizes){
  const runs=results.filter(r=>r.size===size.name);

@@ -32,7 +32,20 @@ async function exercise(script, eventName) {
         list: async () => { stats.pulls++; return { data: examplePRs }; }
       },
       issues: {
-        listForRepo: async () => ({ data: [] }),
+        listForRepo: async () => ({ data: [
+          {
+            number: config.issue_number, title: 'Legacy cycle index',
+            body: config.roles.map(role => role.role_marker).join(' '),
+            html_url: 'https://github.com/example/repo/issues/' + config.issue_number,
+            updated_at: '2099-01-01T00:00:00Z'
+          },
+          {
+            number: 250, title: config.issue_title,
+            body: config.roles.map(role => role.role_marker).join(' '),
+            html_url: 'https://github.com/example/repo/issues/250',
+            updated_at: '2099-01-01T00:00:00Z'
+          }
+        ] }),
         update: async () => {
           stats.issueUpdates++;
           return { data: { node_id: 'ISSUE123', html_url: 'https://github.com/example/repo/issues/253' } };
@@ -63,6 +76,11 @@ async function exercise(script, eventName) {
     'PR preview must be read-only; trusted main must update exactly one Issue');
   for (const role of config.roles) {
     assert(stats.report.includes(role.name), 'role is absent from run summary: ' + role.name);
+    const line = stats.report.split('\n').find(row => row.startsWith('| ' + role.name + ' |'));
+    assert(line, 'missing report row for ' + role.name);
+    const plan = line.split('|')[3] || '';
+    assert(!plan.includes('Issue #253') && !plan.includes('Issue #250'),
+      'auditor issue is falsely counted as a role planning cycle: ' + role.name);
   }
   return stats;
 }
@@ -85,6 +103,23 @@ const mutants = [
     source: original.replace("if (context.eventName === 'pull_request')",
       "if (false && context.eventName === 'pull_request')"),
     event: 'pull_request'
+  },
+  {
+    name: 'self-issue-as-plan',
+    source: original.replace('i.number !== cfg.issue_number', 'true'),
+    event: 'push'
+  },
+  {
+    name: 'duplicate-audit-as-plan',
+    source: original.replace('i.title !== cfg.issue_title', 'true'),
+    event: 'push'
+  },
+  {
+    name: 'deception-audit-exclusion-or',
+    source: original.replace(
+      'i.number !== cfg.issue_number && i.title !== cfg.issue_title',
+      'i.number !== cfg.issue_number || i.title !== cfg.issue_title'),
+    event: 'push'
   }
 ];
 for (const mutant of mutants) {
@@ -93,4 +128,4 @@ for (const mutant of mutants) {
     undefined, 'escaped mutant: ' + mutant.name);
   process.stdout.write('TRAP ' + mutant.name + ' PASS\n');
 }
-process.stdout.write('AUDITOR MUTATIONS PASS: 3/3\n');
+process.stdout.write('AUDITOR MUTATIONS PASS: 6/6\n');

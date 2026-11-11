@@ -7,7 +7,6 @@
 | #248 | lab/pr-autofinish-followup-1111 | .github/workflows/journal-projections.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/pr-autofinish.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #254 | lab/auditor-truthful-cycle-20261111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/auditor/mutate-auditor.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #234 | lab/claude-adfree-catalog-1110 | reference/abyss-glow-2026-11-09/index.html: существующий эталон нельзя изменять или удалять; reference/sumerechny-arkhipelag/index.html: существующий эталон нельзя изменять или удалять; reference/sunken-city/index.html: существующий эталон нельзя изменять или удалять | 2026-11-11 |
-| #260 | lab/uluchshatel-preflight-20261111 | .github/workflows/uluchshatel-preflight.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

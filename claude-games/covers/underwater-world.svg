@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400"><defs><linearGradient id="a" x2="0" y2="1"><stop stop-color="#19172d"/><stop offset=".7" stop-color="#475875"/><stop offset="1" stop-color="#31556c"/></linearGradient><linearGradient id="w" x2="0" y2="1"><stop stop-color="#417b89"/><stop offset="1" stop-color="#0b293d"/></linearGradient><filter id="f"><feGaussianBlur stdDeviation="15"/></filter></defs>
+<rect width="640" height="400" fill="url(#a)"/>
+<circle cx="483" cy="94" r="59" fill="#f5bc9e" opacity=".73"/>
+<circle cx="483" cy="94" r="94" fill="#ffc9b0" opacity=".19" filter="url(#f)"/>
+<path d="M0 237 81 187 147 222 244 172 351 221 444 183 549 218 640 178V400H0Z" fill="#2d4657"/>
+<rect y="252" width="640" height="148" fill="url(#w)"/>
+<path d="M0 290Q161 269 303 287T640 271M0 334Q157 319 318 339T640 320M0 375Q162 356 318 373T640 360" fill="none" stroke="#a5c6bb" stroke-width="3" opacity=".42"/>
+<path d="M54 280 228 221 421 246 575 283 412 316 216 332Z" fill="#3b6658" stroke="#91b6a0" stroke-width="4"/>
+<path d="M54 280 216 332 412 316 575 283 539 320 422 363 214 376 85 329Z" fill="#234c52" stroke="#608a85" stroke-width="3"/>
+<path d="M74 267l36 -18 38 17 -37 20Z" fill="#416e62" stroke="#a3c6a4" stroke-width="2"/><path d="M113 282l36 -18 38 17 -37 20Z" fill="#56876b" stroke="#a3c6a4" stroke-width="2"/><path d="M152 291l36 -18 38 17 -37 20Z" fill="#6b9a75" stroke="#a3c6a4" stroke-width="2"/><path d="M191 292l36 -18 38 17 -37 20Z" fill="#416e62" stroke="#a3c6a4" stroke-width="2"/><path d="M230 285l36 -18 38 17 -37 20Z" fill="#56876b" stroke="#a3c6a4" stroke-width="2"/><path d="M269 271l36 -18 38 17 -37 20Z" fill="#6b9a75" stroke="#a3c6a4" stroke-width="2"/><path d="M308 255l36 -18 38 17 -37 20Z" fill="#416e62" stroke="#a3c6a4" stroke-width="2"/><path d="M347 244l36 -18 38 17 -37 20Z" fill="#56876b" stroke="#a3c6a4" stroke-width="2"/><path d="M386 241l36 -18 38 17 -37 20Z" fill="#6b9a75" stroke="#a3c6a4" stroke-width="2"/><path d="M425 247l36 -18 38 17 -37 20Z" fill="#416e62" stroke="#a3c6a4" stroke-width="2"/><path d="M464 260l36 -18 38 17 -37 20Z" fill="#56876b" stroke="#a3c6a4" stroke-width="2"/><path d="M503 275l36 -18 38 17 -37 20Z" fill="#6b9a75" stroke="#a3c6a4" stroke-width="2"/><path d="M542 288l36 -18 38 17 -37 20Z" fill="#416e62" stroke="#a3c6a4" stroke-width="2"/>
+<path d="M278 252 300 213 331 200 356 220 367 263 327 281Z" fill="#536c65" stroke="#a5a99b" stroke-width="4"/>
+<path d="M303 220 308 160 323 149 342 162 341 219" fill="#6d645b" stroke="#b4a18d" stroke-width="5"/>
+<path d="M310 171h26v26h-26Z" fill="#ffc86c"/>
+<path d="M310 171h26v26h-26Z" fill="#f8bb5c" opacity=".5" filter="url(#f)"/>
+<path d="M156 257 170 210 183 255M161 224 142 202 166 204 179 190 192 213 175 217" fill="#2b594c" stroke="#7ab18a" stroke-width="5"/>
+<path d="M442 262 450 223 462 262M450 238 432 218 449 220 461 204 476 231 455 229" fill="#2a594e" stroke="#84b59a" stroke-width="5"/>
+<path d="M207 303 223 280 237 302 222 310Z" fill="#f8c96d" stroke="#fce4ac" stroke-width="2"/>
+<path d="M395 302 409 280 421 302 408 311Z" fill="#b4f2ed" stroke="#d7fff7" stroke-width="2"/>
+<g fill="#dcf8e9" opacity=".65"><circle cx="31" cy="12" r="1"/><circle cx="134" cy="71" r="2"/><circle cx="237" cy="130" r="3"/><circle cx="340" cy="189" r="1"/><circle cx="443" cy="248" r="2"/><circle cx="546" cy="307" r="3"/><circle cx="9" cy="366" r="1"/><circle cx="112" cy="55" r="2"/><circle cx="215" cy="114" r="3"/><circle cx="318" cy="173" r="1"/><circle cx="421" cy="232" r="2"/><circle cx="524" cy="291" r="3"/><circle cx="627" cy="350" r="1"/><circle cx="90" cy="39" r="2"/><circle cx="193" cy="98" r="3"/><circle cx="296" cy="157" r="1"/><circle cx="399" cy="216" r="2"/><circle cx="502" cy="275" r="3"/><circle cx="605" cy="334" r="1"/><circle cx="68" cy="23" r="2"/><circle cx="171" cy="82" r="3"/><circle cx="274" cy="141" r="1"/><circle cx="377" cy="200" r="2"/><circle cx="480" cy="259" r="3"/><circle cx="583" cy="318" r="1"/></g>
+<path d="M0 270Q217 238 421 275T640 259" fill="none" stroke="#c4d9d5" stroke-width="45" opacity=".13" filter="url(#f)"/>
+</svg>

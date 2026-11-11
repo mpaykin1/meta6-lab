@@ -106,7 +106,7 @@
 | ⚠ молчит больше часа | fix(meta): Archer in the Fog — no ads, local saves and one free revival | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-08 14:47 | 2026-11-11 10:00 |
 | 🔨 В РАБОТЕ | Безопасность shared-index: запрет символических ссылок | МГЛ | чат ChatGPT — Рабочий чат МГ/МГЛ | `lab/shared-index-symlink-1111` | [#241](https://github.com/mpaykin1/meta6-lab/pull/241) | 2026-11-11 07:12 | 2026-11-11 11:27 |
 | 🔨 В РАБОТЕ | Думай как проверяющий | МГЛ | чат ChatGPT | — | — | 2026-11-11 11:26 | — |
-| 🔨 В РАБОТЕ | Зелёный судья: META BOT зелёный на main | МГЛ | чат ChatGPT | — | — | 2026-11-11 11:21 | — |
+| взято | Зелёный судья: META BOT зелёный на main | МГЛ | чат ChatGPT | `lab/remont-main-veil-terraces` | [#245](https://github.com/mpaykin1/meta6-lab/pull/245) | 2026-11-11 11:21 | 2026-11-11 11:30 |
 | 🔨 В РАБОТЕ | Living Watercolor: публичная демосцена дерева, вулкана и фабрики | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/living-watercolor-public-demo` | [#244](https://github.com/mpaykin1/meta6-lab/pull/244) | 2026-11-11 11:21 | 2026-11-11 11:21 |
 | 🙋 НУЖЕН CLAUDE: защищённые workflow и эталон | PR #203: устранить конфликт с main | МГЛ | MG-строитель-3 | `lab/skin-rusty-robot` | [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | 2026-11-11 06:34 | 2026-11-11 07:10 |
 | 🙋 НУЖЕН CLAUDE: конфликт ветки требует git merge; доступный GitHub-коннектор не поддерживает merge веток | PR #87: устранить конфликт с main | МГЛ | MG-строитель-2 | `lab/platform-play-connect-earn-20261107` | [#87](https://github.com/mpaykin1/meta6-lab/pull/87) | 2026-11-10 11:20 | 2026-11-11 06:54 |

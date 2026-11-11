@@ -31,5 +31,6 @@ jobs:
         env:
           STOROZHA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           STOROZHA_REPO: ${{ github.repository }}
+          STOROZHA_MODE: quota
           STOROZHA_PR_NUMBER: ${{ github.event.pull_request.number }}
         run: node scripts/storozha/weekly-watch.mjs quota

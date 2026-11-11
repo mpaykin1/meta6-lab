@@ -30,4 +30,5 @@ jobs:
         env:
           STOROZHA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           STOROZHA_REPO: ${{ github.repository }}
+          STOROZHA_MODE: maintenance
         run: node scripts/storozha/weekly-watch.mjs maintenance

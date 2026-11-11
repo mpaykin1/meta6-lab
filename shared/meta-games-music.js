@@ -4,23 +4,23 @@
   const script = document.currentScript;
   const game = script && script.dataset.game;
   const presets = {
-    'observer-world-en-v7':       {root: 47, tempo: 72, seed: 11, scale: 'dorian'},
-    'ashen-sumerek':              {root: 41, tempo: 63, seed: 23, scale: 'minor'},
-    'underwater-world':           {root: 43, tempo: 57, seed: 37, scale: 'phrygian'},
-    'three-worlds-game':          {root: 45, tempo: 70, seed: 41, scale: 'dorian'},
-    'veil-terraces':              {root: 50, tempo: 65, seed: 53, scale: 'lydian'},
-    'sumerki-i-pepel-2':          {root: 40, tempo: 61, seed: 61, scale: 'minor'},
-    'twilight-isle-classic':      {root: 48, tempo: 76, seed: 73, scale: 'dorian'},
-    'twilight-isles':             {root: 52, tempo: 78, seed: 83, scale: 'mixolydian'},
-    'archer-in-the-fog':          {root: 43, tempo: 85, seed: 97, scale: 'minor'},
-    'broken-city':                {root: 46, tempo: 69, seed: 101, scale: 'harmonic'},
-    'sumerechny-arkhipelag':      {root: 51, tempo: 74, seed: 113, scale: 'dorian'},
-    'sunken-city':                {root: 42, tempo: 58, seed: 127, scale: 'phrygian'},
-    'rainbow-acceleration':       {root: 55, tempo: 103, seed: 139, scale: 'major'},
-    'asqura-ilya-reference':      {root: 44, tempo: 67, seed: 149, scale: 'harmonic'},
-    'broken-city-copy':           {root: 48, tempo: 71, seed: 157, scale: 'minor'},
-    'pod-i-nad':                  {root: 49, tempo: 75, seed: 163, scale: 'lydian'},
-    'abyss-glow':                 {root: 38, tempo: 54, seed: 173, scale: 'phrygian'}
+    'observer-world-en-v7':       {root: 47, tempo: 72, seed: 11, scale: 'dorian', palette: 'wind'},
+    'ashen-sumerek':              {root: 41, tempo: 63, seed: 23, scale: 'minor', palette: 'ash'},
+    'underwater-world':           {root: 43, tempo: 57, seed: 37, scale: 'phrygian', palette: 'water'},
+    'three-worlds-game':          {root: 45, tempo: 70, seed: 41, scale: 'dorian', palette: 'portal'},
+    'veil-terraces':              {root: 50, tempo: 65, seed: 53, scale: 'lydian', palette: 'glass'},
+    'sumerki-i-pepel-2':          {root: 40, tempo: 61, seed: 61, scale: 'minor', palette: 'choir'},
+    'twilight-isle-classic':      {root: 48, tempo: 76, seed: 73, scale: 'dorian', palette: 'bell'},
+    'twilight-isles':             {root: 52, tempo: 78, seed: 83, scale: 'mixolydian', palette: 'marimba'},
+    'archer-in-the-fog':          {root: 43, tempo: 85, seed: 97, scale: 'minor', palette: 'cello'},
+    'broken-city':                {root: 46, tempo: 69, seed: 101, scale: 'harmonic', palette: 'noir'},
+    'sumerechny-arkhipelag':      {root: 51, tempo: 74, seed: 113, scale: 'dorian', palette: 'mist'},
+    'sunken-city':                {root: 42, tempo: 58, seed: 127, scale: 'phrygian', palette: 'depth'},
+    'rainbow-acceleration':       {root: 55, tempo: 103, seed: 139, scale: 'major', palette: 'pulse'},
+    'asqura-ilya-reference':      {root: 44, tempo: 67, seed: 149, scale: 'harmonic', palette: 'metal'},
+    'broken-city-copy':           {root: 48, tempo: 71, seed: 157, scale: 'minor', palette: 'noir'},
+    'pod-i-nad':                  {root: 49, tempo: 75, seed: 163, scale: 'lydian', palette: 'gold'},
+    'abyss-glow':                 {root: 38, tempo: 54, seed: 173, scale: 'phrygian', palette: 'depth'}
   };
   if (!game || !presets[game] || window.MetaGamesMusic) return;
   const config = presets[game];
@@ -46,10 +46,29 @@
   const duration = 108;
   let ctx, master, duck, active, interval, button;
   let requested = 'intro';
+  let paused = false;
   let resumeMood = 'explore';
   let enabled = true;
   let lastSwitch = 0;
   const scale = scales[config.scale];
+  const palettes = {
+    wind:    {attack: .11, brightness: 3.3, decay: .77},
+    ash:     {attack: .06, brightness: 2.1, decay: .67},
+    water:   {attack: .18, brightness: 2.8, decay: .82},
+    portal:  {attack: .08, brightness: 4.1, decay: .75},
+    glass:   {attack: .018, brightness: 5.2, decay: .48},
+    choir:   {attack: .22, brightness: 2.7, decay: .86},
+    bell:    {attack: .012, brightness: 4.4, decay: .51},
+    marimba: {attack: .017, brightness: 3.6, decay: .43},
+    cello:   {attack: .12, brightness: 2.2, decay: .81},
+    noir:    {attack: .045, brightness: 2.5, decay: .66},
+    mist:    {attack: .16, brightness: 2.8, decay: .85},
+    depth:   {attack: .24, brightness: 1.9, decay: .88},
+    pulse:   {attack: .025, brightness: 4.6, decay: .37},
+    metal:   {attack: .022, brightness: 3.2, decay: .42},
+    gold:    {attack: .04, brightness: 4.8, decay: .63}
+  };
+  const palette = palettes[config.palette];
   const theme = [0, 2 + config.seed % 3, 4 - config.seed % 2, 1 + config.seed % 4];
 
   try {
@@ -58,10 +77,11 @@
     // Private browsing can disable localStorage; music still works in memory.
   }
 
-  function noteAt(degree) {
+  function noteAt(degree, bright) {
     const oct = Math.floor(degree / 7);
     const index = ((degree % 7) + 7) % 7;
-    return config.root + scale[index] + 12 * oct;
+    const notes = bright ? scales.major : scale;
+    return config.root + notes[index] + 12 * oct;
   }
   function hz(midi) {
     return 440 * Math.pow(2, (midi - 69) / 12);
@@ -111,11 +131,11 @@
     osc.type = timbre;
     osc.frequency.setValueAtTime(hz(midi), start);
     filter.type = 'lowpass';
-    filter.frequency.value = Math.min(4300, hz(midi) * (timbre === 'sine' ? 5 : 3.8));
+    filter.frequency.value = Math.min(4300, hz(midi) * palette.brightness);
     const gain = volume * (dissonant ? AUD_VOL.dis : 1);
     amp.gain.setValueAtTime(.0001, start);
-    amp.gain.linearRampToValueAtTime(gain, start + Math.min(.12, sustain * .24));
-    amp.gain.setTargetAtTime(.0001, start + sustain * .65, Math.max(.06, sustain * .14));
+    amp.gain.linearRampToValueAtTime(gain, start + Math.min(palette.attack, sustain * .3));
+    amp.gain.setTargetAtTime(.0001, start + sustain * palette.decay, Math.max(.06, sustain * .13));
     amp.gain.setValueAtTime(.0001, end + .18);
     osc.connect(filter);
     filter.connect(amp);
@@ -136,10 +156,13 @@
     const sectionGain = [.38, .78, .62, .95, .32][stage];
     const t = track.next;
     const beat = track.beat;
+    const phrase = Math.floor(beat / 16);
+    const shift = [0, 2, 1, -2, 3, -1, 0][(phrase + config.seed) % 7];
     const shifted = theme[(beat + (stage === 2 ? 1 : 0)) % theme.length];
-    const variation = stage === 2 ? ((beat % 8 < 4) ? 2 : -1) : 0;
+    const variation = shift + (stage === 2 ? ((beat % 8 < 4) ? 2 : -1) : 0);
     const inversion = track.name === 'mystery' ? -shifted : shifted;
-    const pitch = noteAt(inversion + variation + Math.round(cue.offset / 2) + 7);
+    const pitch = noteAt(inversion + variation + Math.round(cue.offset / 2) + 7,
+      track.name === 'release');
     const thin = beat % cue.density === 0;
     if (thin) {
       const long = beat % 4 === 0 ? 2.2 : .82;
@@ -148,12 +171,12 @@
     }
     if (beat % 4 === 0) {
       const bassDegree = [0, -3, -4, -3][Math.floor(beat / 4) % 4];
-      playNote(track, noteAt(bassDegree + cue.offset - 7), t,
+      playNote(track, noteAt(bassDegree + cue.offset - 7, track.name === 'release'), t,
         beatLength * 3.2, AUD_VOL.bass * sectionGain, 'sine', false);
     }
     if (beat % 8 === 0 && stage > 0 && stage < 4) {
       for (const degree of [0, 2, 4]) {
-        playNote(track, noteAt(degree + cue.offset), t,
+        playNote(track, noteAt(degree + cue.offset, track.name === 'release'), t,
           beatLength * 6, AUD_VOL.pad * sectionGain, 'sine', false);
       }
     }
@@ -193,7 +216,7 @@
     return true;
   }
   function play() {
-    if (!enabled || document.hidden || !createAudio()) return;
+    if (!enabled || paused || document.hidden || !createAudio()) return;
     const resumed = ctx.resume();
     if (resumed && typeof resumed.catch === 'function') {
       resumed.catch(error => console.warn('[META MUSIC] Resume failed:', error));
@@ -282,6 +305,12 @@
       } else if (requested === 'danger') setMood(resumeMood);
     },
     setEnabled,
+    setPaused(on) {
+      paused = !!on;
+      if (paused && ctx) {
+        ctx.suspend().catch(error => console.warn('[META MUSIC] Pause failed:', error));
+      } else if (!paused) play();
+    },
     get mood() { return requested; },
     get enabled() { return enabled; },
     get game() { return game; },
@@ -294,8 +323,16 @@
     document.addEventListener(type, unlock, {capture: true, passive: true});
   }
   document.addEventListener('visibilitychange', onVisibility);
+  window.addEventListener('meta-games-pause', () => window.MetaGamesMusic.setPaused(true));
+  window.addEventListener('meta-games-resume', () => window.MetaGamesMusic.setPaused(false));
+  window.addEventListener('pageshow', () => {
+    if (enabled && !document.hidden) play();
+  });
   window.addEventListener('pagehide', () => {
-    if (interval) window.clearInterval(interval);
+    if (interval) {
+      window.clearInterval(interval);
+      interval = null;
+    }
     if (ctx && ctx.state === 'running') ctx.suspend().catch(error => console.warn(error));
   });
   window.addEventListener('meta-games-mood', event => {

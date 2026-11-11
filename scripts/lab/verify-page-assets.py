@@ -33,5 +33,19 @@ expected = {
 assert expected == set(resources), (expected - set(resources), set(resources) - expected)
 assert all("foreign.invalid" not in resource for resource in resources)
 assert all("ignore.html" not in resource for resource in resources)
+js = """
+import { scene } from './shared/x.js';
+export { sprite } from './shared/nested/y.mjs';
+import './side-effect.js';
+const lazy = import('./dynamic.js');
+// import './commented-out.js';
+import three from 'three';
+import { other } from 'https://foreign.invalid/no.js';
+"""
+imports = set(module.extract_js_imports(js, page + "entry.js"))
+assert imports == {
+    page + "shared/x.js", page + "shared/nested/y.mjs",
+    page + "side-effect.js", page + "dynamic.js",
+}, imports
 assert os.getenv("GITHUB_ACTIONS") == "true", "CI-deception mutation must be covered"
 print("verify-page-assets: PASS")

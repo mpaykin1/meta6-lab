@@ -65,7 +65,7 @@
   }
   document.addEventListener('pointerdown', (event) => {
     if (event.pointerType === 'touch' && event.target instanceof Element &&
-        event.target.closest(control)) active.set(event.pointerId, event.target);
+        !scrollableAncestor(event.target)) active.set(event.pointerId, event.target);
   }, true);
   document.addEventListener('pointerup', dropTouch, true);
   document.addEventListener('pointercancel', dropTouch, true);

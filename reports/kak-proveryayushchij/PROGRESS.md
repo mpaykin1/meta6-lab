@@ -7,7 +7,7 @@
 | SHA | Что было неправильно у ChatGPT | Как Claude исправил | Общее правило | Ловушка есть? |
 |---|---|---|---|---|
 | [e66908da86](https://github.com/mpaykin1/meta6-lab/commit/e66908da86a27943223431c196c8bd3f076f075e) | Не выявлен дефект ChatGPT: новое правило | Добавлены промпт и чек-лист | После завершения очереди проверяющий продолжает поиск регрессий | не подтверждена |
-| [991b6c17c6](https://github.com/mpaykin1/meta6-lab/commit/991b6c17c645c330e0366a5b3c7f7c27a40fdc32) | Лимит PR мог блокировать срочный ремонт красного main | Исключение lab/remont-main-* в quota() | Блокировки обычных PR не должны препятствовать исправлению main | [PR #247](https://github.com/mpaykin1/meta6-lab/pull/247): 3 мутации, CI в работе |
+| [991b6c17c6](https://github.com/mpaykin1/meta6-lab/commit/991b6c17c645c330e0366a5b3c7f7c27a40fdc32) | Лимит PR мог блокировать срочный ремонт красного main | Исключение lab/remont-main-* в quota() | Блокировки обычных PR не должны препятствовать исправлению main | [PR #247](https://github.com/mpaykin1/meta6-lab/pull/247): 3/3 пойманы; KONTUR PASS [43013102513](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102513) |
 | [a769e84387](https://github.com/mpaykin1/meta6-lab/commit/a769e843876c1abe2440198d5405b32a70120e6d) | Не выявлен отдельный дефект: уточнён регламент | Раздел «Неделя без Claude» обновлён | Блокировки защищённого кода передавать Claude без обходов | правило процесса |
 | [693f706412](https://github.com/mpaykin1/meta6-lab/commit/693f7064126642edb9138b7eb06a38eff15e2c52) | Бот перелетал цель и выдавал ложное застревание | Шаг ходьбы ограничен расстоянием до цели | Ограничивать шаг движка текущей дистанцией до цели | да: scripts/meta-bot/selftest.mjs (OSHIBKI №31) |
 | [41b2288d21](https://github.com/mpaykin1/meta6-lab/commit/41b2288d218de457fd3a018519244d06fe531b2a) | Ожидает проверки диффа: РЕМОНТ: файл-память задания ChatGPT по ревью 10.11 (шаги R1–R10, прогресс не теряется при зависании) | — | — | не установлено |
@@ -57,7 +57,7 @@
 | [d3e5ac5687](https://github.com/mpaykin1/meta6-lab/commit/d3e5ac5687df9e70dcfdead9fa49e5f1c503fce9) | Ожидает проверки диффа: lab-pages: try to enable Pages automatically | — | — | не установлено |
 | [0ad4f3719c](https://github.com/mpaykin1/meta6-lab/commit/0ad4f3719cf5efd30a3135efa1d26fe2be8e0ae1) | Ожидает проверки диффа: lab: sandbox = copy of meta6 main ea74a313 + Pages previews, daily sync, LAB_QUEUE | — | — | не установлено |
 | [d1d9910258](https://github.com/mpaykin1/meta6-lab/commit/d1d991025861ce49b18d87340c99177cb9f3796b) | Сторожа обновляли PR через GITHUB_TOKEN; новый CI не запускался | Удалён update-branch из сторожа и автодоводчика | GITHUB_TOKEN не должен обновлять ветки PR вместо автора | да: scripts/storozha/mutate-storozha.mjs (проверить запуск) |
-| [5acb77140d](https://github.com/mpaykin1/meta6-lab/commit/5acb77140d3b050fc64bb227f1bee1fc1cf96e32) | REST-запросы на каждый PR исчерпывали лимит API | Список PR перенесён на GraphQL, автодоводчик реже запускается | Списки PR получать одним GraphQL-запросом; избегать N+1 | [PR #247](https://github.com/mpaykin1/meta6-lab/pull/247): 4 мутации, CI в работе |
+| [5acb77140d](https://github.com/mpaykin1/meta6-lab/commit/5acb77140d3b050fc64bb227f1bee1fc1cf96e32) | REST-запросы на каждый PR исчерпывали лимит API | Список PR перенесён на GraphQL, автодоводчик реже запускается | Списки PR получать одним GraphQL-запросом; избегать N+1 | [PR #247](https://github.com/mpaykin1/meta6-lab/pull/247): 4/4 пойманы; KONTUR PASS [43013102513](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102513) |
 
 Источники: [коммиты Claude в main с 01.11](https://github.com/mpaykin1/meta6-lab/commits/main/?author=Claude) и [PR #238](https://github.com/mpaykin1/meta6-lab/pull/238). 50 коммитов в `main` + 2 проверенных коммита в ветке PR #238. Требуется проверить каждый дифф и дополнить коммиты Claude из других слитых PR.
 
@@ -90,5 +90,7 @@
 | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) (lab/seo-claude-adfree-1111) | — | В очереди; требуется решение, проверки и независимая приёмка |
 
 **Ловушки:** [PR #247](https://github.com/mpaykin1/meta6-lab/pull/247), семь мутаций для двух правил. Реальные запуски: [KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102513), [B1](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102353). Внешняя блокировка GitHub 403: [STOROZHA](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102414), [Dispatcher](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102284).
+
+**Доказательство ловушек:** [KONTUR Guard 43013102513](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102513/job/130497547875) — строки CLAUDE_GRAPHQL_MUTATIONS_PASS 4/4 и CLAUDE_QUOTA_MUTATIONS_PASS 3/3. Это зелёный прогон, где повреждённые варианты отклонены внутри теста; отдельных красных запусков Actions пока нет.
 
 **Следующий пункт:** завершить анализ диффов в части А, проверить существующие ловушки на мутациях, затем создавать новые файлы и draft PR не более установленной квоты. В части Б не считать существующий PR с красными проверками готовым решением.

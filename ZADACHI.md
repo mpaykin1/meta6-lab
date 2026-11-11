@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Разные заставки по реальной графике всех 17 игр Claude | МГЛ | чат ChatGPT | lab/claude-adfree-catalog-1110 | [#234](https://github.com/mpaykin1/meta6-lab/pull/234) | 2026-11-11 04:48 | — |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | Довести PR #87: Play / Connect / Earn до актуального main | МГЛ | MG-строитель-2 | `lab/platform-play-connect-earn-20261107` | [#87](https://github.com/mpaykin1/meta6-lab/pull/87) | 2026-11-10 18:19 | 2026-11-10 22:15 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | feat(portal): Play / Connect / Earn navigation and functional MCP address control | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/platform-play-connect-earn-20261107` | [#87](https://github.com/mpaykin1/meta6-lab/pull/87) | 2026-11-07 14:41 | 2026-11-10 22:15 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | Исправить красные changed-games и bot PR #132 | МГЛ | MG-ремонтник | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-10 21:48 | 2026-11-10 21:49 |

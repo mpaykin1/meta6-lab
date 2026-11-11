@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T12:29:45.295Z | МГЛ: 68de3dd6a540f78c8730386fe2367d7223a99533 | МГ: b1e4f1a0c0b6f454291c8872a3463470773479e9 | https://github.com/mpaykin1/meta6-lab/actions/runs/43020757957
+UTC: 2026-11-11T12:36:35.926Z | МГЛ: 68427de59bbe9facb1f06d1d4b9eaea741a19f3c | МГ: b1e4f1a0c0b6f454291c8872a3463470773479e9 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #238 9546bef2d74794f6ecc717a2f4095682fd2e137f: .github/workflows/journal-projections.yml, .github/workflows/pr-autofinish.yml, .github/workflows/report-completion-guard.yml, .github/workflows/storozha-branches.yml, .github/workflows/storozha-quota.yml, .git… (сокращено)
 - PR #231 8790e6339ccf62af9584a4353749c864d4cf7785: scripts/dispetcher/mutate-mergeable-null.mjs
@@ -55,20 +55,20 @@ P1 — нет данных: нет данных
 #125 Lore: alternative Last Seed mythology and inspiration bank | 9f50910368238775bda40729722ec3512f14e623
 ещё 12: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 989 коммитов | нет данных
+МГЛ: 992 коммитов | нет данных
 МГ: 3 коммитов | AGENTS.md:1, automation:1, rules:2
 ## ИГРЫ
-archer-in-the-fog — не запускалась | витрина: да
-asqura-ilya-reference — не запускалась | витрина: нет
-broken-city — не запускалась | витрина: да
-broken-city-copy — не запускалась | витрина: да
-rainbow-acceleration — не запускалась | витрина: нет
-skin-trainer — не запускалась | витрина: нет
-sumerki-i-pepel-2 — не запускалась | витрина: да
-sumerki-i-pepel-2-copy — не запускалась | витрина: нет
-twilight-isle-classic — не запускалась | витрина: да
-twilight-isles — не запускалась | витрина: да
-veil-terraces — не прошла | витрина: да
+archer-in-the-fog — нет данных | витрина: да
+asqura-ilya-reference — нет данных | витрина: нет
+broken-city — нет данных | витрина: да
+broken-city-copy — нет данных | витрина: да
+rainbow-acceleration — нет данных | витрина: нет
+skin-trainer — нет данных | витрина: нет
+sumerki-i-pepel-2 — нет данных | витрина: да
+sumerki-i-pepel-2-copy — нет данных | витрина: нет
+twilight-isle-classic — нет данных | витрина: да
+twilight-isles — нет данных | витрина: да
+veil-terraces — нет данных | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
 | 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)

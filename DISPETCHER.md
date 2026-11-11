@@ -9,6 +9,7 @@
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: MG-строитель-1 2026-11-11T07:08:00Z
+- НУЖЕН CLAUDE: PR изменяет защищённые `.github/workflows/zadachi-watch.yml` и `scripts/zadachi/`; самостоятельное слияние запрещено.
 
 ### PR #228
 - PR: https://github.com/mpaykin1/meta6-lab/pull/228

@@ -65,7 +65,13 @@ async function retryInfrastructure(pr,changed){
   const runs=await api('/actions/runs?branch='+encodeURIComponent(pr.head.ref)+'&per_page=100');
   for(const r of runs.workflow_runs.filter(x=>x.head_sha===pr.head.sha)){
     if(r.status==='action_required'){
-      console.log('NEEDS_CLAUDE action_required '+r.html_url);continue;
+      if(pr.head.repo?.full_name!==repo||!(await approvedReview(pr))){
+        console.log('NEEDS_CLAUDE action_required '+r.html_url);continue;
+      }
+      try{await api('/actions/runs/'+r.id+'/approve','POST');
+        console.log('APPROVED_TRUSTED '+r.html_url);
+      }catch(e){console.log('NEEDS_CLAUDE approval blocked '+r.html_url+' '+String(e));}
+      continue;
     }
     if(!['failure','cancelled','timed_out'].includes(r.conclusion)||(r.run_attempt||1)>3)continue;
     let infrastructure=['cancelled','timed_out'].includes(r.conclusion);
@@ -139,6 +145,8 @@ async function revertIfRed(main){
 const main=(await api('/git/ref/heads/main')).object.sha;
 try{await revertIfRed(main);}catch(e){console.log('REVERT_BLOCKED '+String(e));}
 const opened=await api('/pulls?state=open&base=main&per_page=100');
-for(const pr of opened){
+const offset=Math.floor(Date.now()/900000)%Math.max(1,opened.length);
+for(let i=0;i<Math.min(20,opened.length);i++){
+  const pr=opened[(offset+i)%opened.length];
   try{await finish(pr,main);}catch(e){console.log('BLOCKED PR #'+pr.number+' '+String(e));}
 }

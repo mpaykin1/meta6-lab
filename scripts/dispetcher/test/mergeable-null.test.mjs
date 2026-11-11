@@ -30,9 +30,18 @@ test('persistent null with no prior evidence remains explicitly unknown',async()
 test('previous status parser is exact PR-id and preserves both true and false',()=>{
  const previous='# ДИСПЕТЧЕР\n\n### PR #10\n- Проблема: Конфликт с main\n- Взял: —\n\n### PR #1\n- Проблема: Красная проверка\n- Взял: —\n\n## НУЖЕН CLAUDE\n';
  assert.equal(previousConflict(previous,10),true);
- assert.equal(previousConflict(previous,1),false);
+ assert.equal(previousConflict(previous,1),null);
  assert.equal(previousConflict(previous,11),null);
 });
 test('trap: four mutations including hardcoded clean status must be caught',async()=>{
  assert.equal(await verifyMutations(),4);
+});
+
+test('old failed CI does not establish a clean merge when GitHub keeps returning null', async()=>{
+ const previous='# ДИСПЕТЧЕР\n\n### PR #42\n- Проблема: Красная проверка: bot\n- Взял: —\n';
+ const prior=previousConflict(previous,42);
+ assert.equal(prior,null);
+ const result=await resolveConflict({mergeable:null},async()=>({mergeable:null}),prior,async()=>{});
+ assert.equal(result.conflict,null);
+ assert.equal(result.unresolved,true);
 });

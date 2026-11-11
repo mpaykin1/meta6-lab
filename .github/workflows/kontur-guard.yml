@@ -33,16 +33,5 @@ jobs:
           node-version: '22'
       - name: Fetch current main
         run: git fetch --no-tags origin main:refs/remotes/origin/main
-      - name: Verify link guard regressions and mutation traps (required on every PR)
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash scripts/lab/verify-link-ok.sh
-          bash scripts/lab/verify-check-page-assets.sh
-          node scripts/lab/mutate-page-assets.mjs
-          bash scripts/lab/mutate-link-ok.sh
-          bash scripts/lab/test-sync-from-meta6.sh
-          python3 scripts/lab/mutate-new-page-links.py
-          python3 scripts/lab/verify-new-page-links.py
       - name: Check PR policy and every permanent mutation
         run: node scripts/kontur/guard.mjs

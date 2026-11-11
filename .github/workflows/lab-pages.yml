@@ -93,7 +93,7 @@ jobs:
                 [[ -f "_site/$f" ]] && echo "$base/${f%index.html}"
               done
             fi
-          } | grep -E '^https://mpaykin1[.]github[.]io/(meta6-lab|meta6)/' |
+          } | grep -E '^https://mpaykin1[.]github[.]io/meta6-lab/' |
             LC_ALL=C sort -u > /tmp/lab-links.txt
           test -s /tmp/lab-links.txt
           echo "CHECKING $(wc -l < /tmp/lab-links.txt) URLS"

@@ -1,16 +1,24 @@
 {
-  "generated_at": "2026-11-11T11:32:46.322Z",
+  "generated_at": "2026-11-11T13:45:11.002Z",
   "sha": {
-    "lab": "5d53248501187c12c56601defdef456b31ec9a47",
+    "lab": "65066d4edf93d0172e7989ee553493209bbf89c0",
     "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43012757418",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43031898982",
   "review": {
     "protected": [
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
       {
         "number": 238,
         "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
@@ -94,13 +102,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "Investigation snapshot",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43012126431",
-        "step": "Refresh investigation snapshot from GitHub"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -268,11 +270,16 @@
     ]
   },
   "pr": {
-    "open": 40,
+    "open": 44,
     "conflicts": "нет данных",
-    "merged": 16,
+    "merged": 17,
     "closed": 44,
     "mergedItems": [
+      {
+        "number": 251,
+        "title": "feat(auditor): бесплатная почасовая ревизия пяти задач META ",
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1"
+      },
       {
         "number": 244,
         "title": "Living Watercolor: публичная демосцена дерева, вулкана и фаб",
@@ -355,6 +362,14 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
       {
         "number": 238,
         "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
@@ -441,7 +456,7 @@
   },
   "changes": {
     "lab": {
-      "count": 918,
+      "count": 1023,
       "folders": "нет данных"
     },
     "mg": {
@@ -520,6 +535,7 @@
     "| 34 | 10.11.2026 | MG Dispatcher принимал GitHub `mergeable=null` за отсутствие конфликта после сдвига main, из-за чего очередь показывала неверный ноль конфликтов | [MG Dispatcher 42791769677](https://github.com/mpaykin1/meta6-lab/actions/runs/42791769677) и анализ `scripts/dispetcher/build.mjs` | `scripts/dispetcher/mutate-mergeable-null.mjs`: 5 мутаций — отсутствие повторов, потеря прежнего конфликта, выдача неизвестного статуса за чистый PR и обман с жёстко заданным `false`, ошибочное признание красного CI доказательством отсутствия конфликта; `scripts/dispetcher/test/mergeable-null.test.mjs` |",
     "| 35 | 11.11.2026 | PR #238: компилятор журнала ветвился по `process.argv` и блокировался KONTUR Guard | [красный прогон 42999367374](https://github.com/mpaykin1/meta6-lab/actions/runs/42999367374) | `scripts/journal/mutate-journal.mjs`: argv-deception, validation-publishes, writer-dry-run, missing-source |",
     "| 36 | 11.11.2026 | Сторож эталонов пропускал изменения тестов внутри папок `tests/` и файлов `*.spec.ts`: проверял только некоторые имена тестовых файлов | Сверка `referenceGate` с запретом менять существующие тесты | `scripts/storozha/mutate-storozha.mjs`: bypass nested test directory, bypass TypeScript spec file; `scripts/storozha/verify-storozha.mjs` |",
-    "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |"
+    "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |",
+    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |"
   ]
 }

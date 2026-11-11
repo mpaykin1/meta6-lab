@@ -136,6 +136,9 @@ async function main({github, context, core}) {
     'Распознано по таблице: **' + recognized + '/5**. Окно: ' + config.window_minutes +
     ' минут. ⚠️ означает недостаток доказательств, а не доказанную ошибку.',
     '## Нарушения и риски', concern, '## Осталось сделать', todo,
+    '## Один безопасный следующий шаг', '- Сверить текущие файлы и CI ' +
+      link('первого PR из таблицы', rows.find((r) => r.pr) ? BASE + '/pull/' + rows.find((r) => r.pr).pr : BASE + '/pulls') +
+      ' вручную, без изменения защищённых путей.',
     '## Активная ревизия', header + (lineItems.join('\n') || '| — | — | — | — | — |'),
     '<details><summary>Завершённое по доступным доказательствам (' +
     completed.length + ')</summary>\n\n' + header + completed.join('\n') + '\n\n</details>',

@@ -1,7 +1,7 @@
 name: STOROZHA PR quota
 # Intentionally no pull_request paths filter: quota MUST check every PR.
 on:
-  pull_request_target:
+  pull_request:
     branches: [main]
     types: [opened, reopened, synchronize, ready_for_review, edited]
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
   storozha-quota:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    if: github.event_name == 'pull_request_target'
+    if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v4
         with:

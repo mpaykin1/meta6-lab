@@ -1,16 +1,45 @@
 {
-  "generated_at": "2026-11-11T07:28:24.445Z",
+  "generated_at": "2026-11-11T13:45:11.002Z",
   "sha": {
-    "lab": "d4117a5327a7ca77354d5071cf07bd8a5cba71ff",
-    "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
+    "lab": "65066d4edf93d0172e7989ee553493209bbf89c0",
+    "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42979698640",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43031898982",
   "review": {
     "protected": [
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
+      {
+        "number": 238,
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
       {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
@@ -73,18 +102,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42977839125",
-        "step": "Commit queue"
-      },
-      {
-        "workflow": "Investigation snapshot",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42977839123",
-        "step": "Refresh investigation snapshot from GitHub"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -94,8 +112,8 @@
       "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | open | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
       "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
-      "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
-      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
+      "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
+      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open dirty | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
       "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
@@ -252,11 +270,26 @@
     ]
   },
   "pr": {
-    "open": 39,
+    "open": 44,
     "conflicts": "нет данных",
-    "merged": 14,
-    "closed": 42,
+    "merged": 17,
+    "closed": 44,
     "mergedItems": [
+      {
+        "number": 251,
+        "title": "feat(auditor): бесплатная почасовая ревизия пяти задач META ",
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1"
+      },
+      {
+        "number": 244,
+        "title": "Living Watercolor: публичная демосцена дерева, вулкана и фаб",
+        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a"
+      },
+      {
+        "number": 238,
+        "title": "META GAMES: guarded PR autofinish, conflict-free journals, s",
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f"
+      },
       {
         "number": 224,
         "title": "Merge continuity: persistent PR journal and live 83-PR queue",
@@ -330,6 +363,35 @@
     ],
     "protectedItems": [
       {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
+      {
+        "number": 238,
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
         "paths": [
@@ -394,12 +456,12 @@
   },
   "changes": {
     "lab": {
-      "count": 813,
-      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:6, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1"
+      "count": 1023,
+      "folders": "нет данных"
     },
     "mg": {
-      "count": 2,
-      "folders": "AGENTS.md:1, automation:1, rules:1"
+      "count": 3,
+      "folders": "AGENTS.md:1, automation:1, rules:2"
     }
   },
   "games": [
@@ -470,6 +532,10 @@
     "| 29 | 10.11.2026 | Диспетчер: KONTUR Guard отклонил условное чтение `process.env.GITHUB_*` и ветвление по `process.argv` в модуле библиотеки | [KONTUR Guard 42787965154](https://github.com/mpaykin1/meta6-lab/actions/runs/42787965154) | Разделён модуль `build.mjs` и `run.mjs`, авторизация без ветвления по среде; существующая вечная ловушка `scripts/kontur/mutate-kontur-guard.mjs` и `scripts/dispetcher/test/build.test.mjs` |",
     "| 30 | 10.11.2026 | Диспетчер: первый прогон на main упал — пока строилась очередь, в main пришёл чужой коммит и `git push` отклонён (fetch first), DISPETCHER.md не появился | [прогон 42790554576](https://github.com/mpaykin1/meta6-lab/actions/runs/42790554576) | Шаг `Commit queue` в `.github/workflows/dispetcher.yml`: до 5 попыток — свежий main, пересборка очереди, повторный push; проверка `scripts/dispetcher/test/build.test.mjs`: `trap: workflow retries push when main moved` |",
     "| 31 | 11.11.2026 | META BOT, ядро: `walkToGoal` шагал фиксированные 450 мс и считал направление по устаревшему положению героя — рядом с целью герой перелетал её и качался вокруг (≈1,36 ед. при шаге 2,7), самотест «цель меняется внутри уровня» падал ложным «застрял» и блокировал PR #87 | [META BOT 42912927017](https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169) | `scripts/meta-bot/selftest.mjs`: «шаг ходьбы у цели не перелетает цель» (`stepMs`: шаг не длиннее пути до цели; свежее состояние перед шагом) |",
-    "| 34 | 10.11.2026 | MG Dispatcher принимал GitHub `mergeable=null` за отсутствие конфликта после сдвига main, из-за чего очередь показывала неверный ноль конфликтов | [MG Dispatcher 42791769677](https://github.com/mpaykin1/meta6-lab/actions/runs/42791769677) и анализ `scripts/dispetcher/build.mjs` | `scripts/dispetcher/mutate-mergeable-null.mjs`: 5 мутаций — отсутствие повторов, потеря прежнего конфликта, выдача неизвестного статуса за чистый PR и обман с жёстко заданным `false`, ошибочное признание красного CI доказательством отсутствия конфликта; `scripts/dispetcher/test/mergeable-null.test.mjs` |"
+    "| 34 | 10.11.2026 | MG Dispatcher принимал GitHub `mergeable=null` за отсутствие конфликта после сдвига main, из-за чего очередь показывала неверный ноль конфликтов | [MG Dispatcher 42791769677](https://github.com/mpaykin1/meta6-lab/actions/runs/42791769677) и анализ `scripts/dispetcher/build.mjs` | `scripts/dispetcher/mutate-mergeable-null.mjs`: 5 мутаций — отсутствие повторов, потеря прежнего конфликта, выдача неизвестного статуса за чистый PR и обман с жёстко заданным `false`, ошибочное признание красного CI доказательством отсутствия конфликта; `scripts/dispetcher/test/mergeable-null.test.mjs` |",
+    "| 35 | 11.11.2026 | PR #238: компилятор журнала ветвился по `process.argv` и блокировался KONTUR Guard | [красный прогон 42999367374](https://github.com/mpaykin1/meta6-lab/actions/runs/42999367374) | `scripts/journal/mutate-journal.mjs`: argv-deception, validation-publishes, writer-dry-run, missing-source |",
+    "| 36 | 11.11.2026 | Сторож эталонов пропускал изменения тестов внутри папок `tests/` и файлов `*.spec.ts`: проверял только некоторые имена тестовых файлов | Сверка `referenceGate` с запретом менять существующие тесты | `scripts/storozha/mutate-storozha.mjs`: bypass nested test directory, bypass TypeScript spec file; `scripts/storozha/verify-storozha.mjs` |",
+    "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |",
+    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |"
   ]
 }

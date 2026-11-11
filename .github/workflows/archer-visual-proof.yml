@@ -3,7 +3,7 @@ on:
   pull_request:
     paths:
       - 'games/archer-in-the-fog/**'
-      - 'scripts/meta-bot/proof/**'
+      - 'scripts/archer-proof/**'
       - 'reports/archer-retention-exp/**'
       - '.github/workflows/archer-visual-proof.yml'
 permissions:
@@ -35,9 +35,9 @@ jobs:
         run: |
           set -euo pipefail
           if git diff --name-only "$ARCHER_BASE_SHA...HEAD" | grep -q '^games/archer-in-the-fog/'; then
-            node scripts/meta-bot/proof/archer.mjs
+            node scripts/archer-proof/archer.mjs
           else
-            node scripts/meta-bot/proof/archer.mjs --selftest
+            node scripts/archer-proof/archer.mjs --selftest
           fi
       - uses: actions/upload-artifact@v4
         if: always()

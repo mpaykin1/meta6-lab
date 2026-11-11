@@ -4,12 +4,12 @@ on:
     branches: [main]
     paths:
       - 'journal/entries/**'
-      - 'scripts/journal/build.mjs'
+      - 'scripts/journal/**'
   pull_request:
     branches: [main]
     paths:
       - 'journal/entries/**'
-      - 'scripts/journal/build.mjs'
+      - 'scripts/journal/**'
       - '.github/workflows/journal-projections.yml'
   workflow_dispatch:
 permissions:
@@ -28,14 +28,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node scripts/journal/build.mjs --validate
+      - run: node scripts/journal/validate.mjs
       - name: Publish compiled views on main
         if: github.event_name != 'pull_request'
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           for attempt in 1 2 3; do
-            node scripts/journal/build.mjs --write
+            node scripts/journal/write.mjs
             git add journal/compiled/ OSHIBKI.md ZADACHI.md SMENA.md docs/progress/
             git diff --cached --quiet && exit 0
             git commit -m "journal: compile append-only entries"

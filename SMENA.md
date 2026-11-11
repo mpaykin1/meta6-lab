@@ -87,3 +87,10 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/219, ветка `lab/status-a1-20261110`, HEAD `4634c05ecc9ad59290ae403c46e167057e556576`.
 - Пересечение с main: только OSHIBKI.md; сохранить уникальные строки, далее двухродительский merge без force. .github/workflows/status-a1.yml требует Claude для слияния.
 - Следующий шаг: синхронизация и новый CI.
+
+### #219 — восстановление с main завершено
+- Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ, UTC 2026-11-11T06:41:58.294Z.
+- [Двухродительский merge 08b7554](https://github.com/mpaykin1/meta6-lab/commit/08b7554f4c75a41fdbac094453372910fc258db9): весь main сохранён, уникальная A1 ошибка перенумерована в OSHIBKI #35. PR [#219](https://github.com/mpaykin1/meta6-lab/pull/219) стал mergeable=true.
+- Новый [CI PR #219](https://github.com/mpaykin1/meta6-lab/pull/219/checks) в очереди — успех не подтверждён.
+- НУЖЕН CLAUDE: PR добавляет защищённый `.github/workflows/status-a1.yml`; после проверки CI и независимого ревью его сливает только Claude.
+- Следующий шаг: прочитать завершённый CI текущего HEAD и исправить реальные дефекты реализации при наличии.

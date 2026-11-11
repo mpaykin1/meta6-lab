@@ -34,7 +34,7 @@ test('previous status parser is exact PR-id and preserves both true and false',(
  assert.equal(previousConflict(previous,11),null);
 });
 test('trap: four mutations including hardcoded clean status must be caught',async()=>{
- assert.equal(await verifyMutations(),4);
+ assert.equal(await verifyMutations(),5);
 });
 
 test('old failed CI does not establish a clean merge when GitHub keeps returning null', async()=>{

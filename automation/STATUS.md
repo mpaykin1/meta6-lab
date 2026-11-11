@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T16:16:46.309Z | МГЛ: bbf3d3497aba0ba481c932f241279917e62124b1 | МГ: 573ec644a032aa3cbf999193c09fa2176ce69a7a | https://github.com/mpaykin1/meta6-lab/actions/runs/43056652107
+UTC: 2026-11-11T16:17:50.433Z | МГЛ: 230f2b7c38356c8835f80c5362eb3ab39503f56e | МГ: 573ec644a032aa3cbf999193c09fa2176ce69a7a | https://github.com/mpaykin1/meta6-lab/actions/runs/43056824760
 ## ПРОВЕРИТЬ CLAUDE
 - PR #265 f0a6d79bdda5416da56a145901e0216808cba97e: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py
 - PR #251 5016e0750ad94d53798200f6db159f9c37f55ab1: .github/workflows/auditor.yml, scripts/auditor/mutate-auditor.mjs
@@ -55,7 +55,7 @@ P1 — нет данных: нет данных
 #238 META GAMES: guarded PR autofinish, conflict-free journals, s | 9546bef2d74794f6ecc717a2f4095682fd2e137f
 ещё 14: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1120 коммитов | нет данных
+МГЛ: 1122 коммитов | нет данных
 МГ: 5 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

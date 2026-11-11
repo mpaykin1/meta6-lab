@@ -14,15 +14,12 @@ export function assessMotion(segments) {
   if (!Array.isArray(segments)) return result('INVALID', {reason: 'segments must be an array'});
   let stationaryMs = 0;
   let sampled = 0;
+  let driftX = 0;
+  let driftY = 0;
   for (const segment of segments) {
     if (!segment || !Number.isFinite(segment.durationMs) || segment.durationMs <= 0) {
       return result('INVALID', {reason: 'invalid input duration'});
     }
-    if (!segment.input) {
-      stationaryMs = 0;
-      continue;
-    }
-    sampled++;
     const {before, after} = segment;
     const from = coordinates(before);
     const to = coordinates(after);
@@ -35,7 +32,17 @@ export function assessMotion(segments) {
     if (before.level !== after.level) {
       return result('LEVEL_CHANGED', {reason: 'level transition is not proof of movement'});
     }
-    const distance = Math.hypot(to.x - from.x, to.y - from.y);
+    if (!segment.input) {
+      driftX = (to.x - from.x) / segment.durationMs;
+      driftY = (to.y - from.y) / segment.durationMs;
+      stationaryMs = 0;
+      continue;
+    }
+    sampled++;
+    const distance = Math.hypot(
+      to.x - from.x - driftX * segment.durationMs,
+      to.y - from.y - driftY * segment.durationMs
+    );
     if (distance > EPSILON) return result('MOVED', {distance, level: after.level});
     stationaryMs += segment.durationMs;
     if (stationaryMs >= STUCK_MS) {

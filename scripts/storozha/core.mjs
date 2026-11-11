@@ -24,7 +24,6 @@ export function conflictFiles(output) {
   for (const line of output.split(/\r?\n/)) {
     const conflict = /^CONFLICT \([^)]+\): (?:Merge conflict in |(.+?) (?:deleted|added) in )(.+)?$/.exec(line);
     if (conflict) paths.push((conflict[2] || conflict[1] || '').trim());
-    const staging = /^\s*[^\s]+\s+[^\s]+\s+[^\s]+\s+([^\s]+)$/.exec(line);
     if (/^CONFLICT /.test(line) && !conflict) {
       const fallback = line.match(/(?: in |^CONFLICT \([^)]+\): )(.+)$/);
       if (fallback) paths.push(fallback[1].trim());
@@ -36,6 +35,13 @@ export function conflictFiles(output) {
 export function alive(pr, now = Date.now()) {
   const timestamp = Date.parse(pr.lastCommitAt || '');
   return Number.isFinite(timestamp) && now - timestamp < THREE_DAYS && timestamp <= now;
+}
+
+export function staleDecision(pr, now = Date.now()) {
+  const date = Date.parse(pr.lastCommitAt || '');
+  const close = pr.state === 'open' && Number.isFinite(date) &&
+    date <= now && now - date >= THREE_DAYS;
+  return {close, deleteBranch: false};
 }
 
 export function quota(prs, number, now = Date.now()) {

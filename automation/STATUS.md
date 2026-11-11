@@ -1,11 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T06:03:43.643Z | МГЛ: 5b5b217d12871307282dd61c967a275a64af19ad | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42969695613
+UTC: 2026-11-11T06:06:34.869Z | МГЛ: 8790e6339ccf62af9584a4353749c864d4cf7785 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42970065037
 ## ПРОВЕРИТЬ CLAUDE
+- PR #231 8790e6339ccf62af9584a4353749c864d4cf7785: scripts/dispetcher/mutate-mergeable-null.mjs
 - PR #236 afc35df467af8e6f60fb8a5c9c11f62aef5dfa05: scripts/meta-bot/core.mjs, scripts/meta-bot/selftest.mjs
 - PR #230 eabab1dc976ca4332c3c66cfd9b8bd56f4471b88: .github/workflows/dispetcher.yml
 - PR #227 2a4558a4b3993d6d0583c004155508d084eb6496: .github/workflows/dispetcher.yml
-- PR #216 06a8b61ec198ba43bb93a69efb2aeca7246383ee: .github/workflows/status-dlya-claude.yml, scripts/status/selftest.mjs
-- ещё 3: https://github.com/mpaykin1/meta6-lab/pulls
+- ещё 4: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
@@ -47,14 +47,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 39 | конфликт: нет данных | слито: 10 | закрыто: 41
+открыто: 38 | конфликт: нет данных | слито: 11 | закрыто: 41
+#231 fix(dispatcher): reliable conflict state when mergeable is n | 8790e6339ccf62af9584a4353749c864d4cf7785
 #126 Эталон: универсальный промпт Sketch → HTML Game → ZIP | 7f5616591ca5baa37186d86621299d32c77230b1
 #236 meta-bot: шаг ходьбы не перелетает цель | afc35df467af8e6f60fb8a5c9c11f62aef5dfa05
 #229 Рабочий чат МГ/МГЛ: цикл и передача смены | 40dfc505c5427f8d0b17b679d2f5df74352bc7c1
-#230 Dispatcher: retry queue push when main moves | eabab1dc976ca4332c3c66cfd9b8bd56f4471b88
-ещё 6: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 7: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 731 коммитов | .github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:13, shared:2, SMENA.md:1, ZADACHI.md:1
+МГЛ: 733 коммитов | .github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1
 МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
@@ -69,8 +69,8 @@ twilight-isle-classic — не запускалась | витрина: да
 twilight-isles — не запускалась | витрина: да
 veil-terraces — прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
-| 18 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
-| 17 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)
+| 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
+| 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)
 | 24 | 10.11.2026 | Сводка без progress.json или при ошибке GitHub API могла бы выдавать непроверенные пункты как «готово» и прятать красные прогоны; старые варианты #211/#212 не защищали эту сводку полным набором мутаций | Изолированные ответы: отсутствующий … (сокращено)
 | 25 | 10.11.2026 | Сводка игнорировала новую запись OSHIBKI с уже использованным номером (в main номер 18 повторён) | Сравнение только по номеру ошибочно скрывало новую строку | `scripts/status/selftest.mjs`: `duplicate-error-number-hidden` |
-ещё 6: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

@@ -16,7 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
-| взято | Ревизор META GAMES: исключить самоцитирование Issue в цикле 1 | МГЛ | чат ChatGPT | `lab/auditor-truthful-cycle-20261111` | — | 2026-11-11 13:51 | — |
+| 🙋 НУЖЕН CLAUDE — защищённый workflow, [STOROZHA ❌](https://github.com/mpaykin1/meta6-lab/actions/runs/43033906501), [ревизор ✅ на SHA 20a0c2f](https://github.com/mpaykin1/meta6-lab/actions/runs/43033906443) | Ревизор META GAMES: исключить самоцитирование Issue в цикле 1 | МГЛ | чат ChatGPT | `lab/auditor-truthful-cycle-20261111` | [#254](https://github.com/mpaykin1/meta6-lab/pull/254) | 2026-11-11 13:51 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Геймдизайн-аудит META GAMES — чистый PR без защищённой истории (#228) | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/game-design-audit-clean-20261111` | [#243](https://github.com/mpaykin1/meta6-lab/pull/243) | 2026-11-11 10:02 | 2026-11-11 10:02 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Исправить красные changed-games и bot PR #132 | МГЛ | MG-ремонтник | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-10 21:48 | 2026-11-11 10:00 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Исправить мобильное застревание Лучника в тумане PR #132 | МГЛ | MG-ремонтник | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-10 16:54 | 2026-11-11 10:00 |

@@ -1,5 +1,5 @@
 // Reject unattempted "remaining" actions in freshly added report lines.
-const pending=/осталось.{0,50}устранить конфликт|дождаться\s+(?:CI|си)|повторн[а-яё]*\s+прогон|(?:^|[^\p{L}])слить(?=[^\p{L}]|$)/iu;
+const pending=/осталось.{0,50}устранить конфликт|дождаться\s+(?:CI|си)|повторн[а-яё]*\s+прогон|^\s*(?:[-*]\s*)?(?:(?:осталось|нужно|дальше)\s*[:—-]?\s*)?слить(?=[^\p{L}]|$)/iu;
 const evidence=/https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/(?:commit\/[a-f0-9]{40}|actions\/runs\/\d+|pull\/\d+#issuecomment-\d+)/i;
 export function violations(diff){
   const lines=diff.split(/\r?\n/),out=[];

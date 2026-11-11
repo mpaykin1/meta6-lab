@@ -86,6 +86,8 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 @keyframes float{50%{transform:translateY(-17px)}}
 @media(max-width:700px){.header-caption{font-size:10px;letter-spacing:.1em}.hero{min-height:360px}.catalog-controls{align-items:stretch}.search{width:100%}.filters{justify-content:flex-start}.section-head{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.game-card[data-featured="seed"] { border-color: rgba(255,210,126,.68); box-shadow: 0 0 32px #ce815421, 0 16px 35px #0007; }
+.game-card[data-featured="seed"] .tag { color: #ffdca5; }
 </style>
 </head>
 <body>
@@ -111,10 +113,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 </div>
 </div>
 <div class="grid" id="catalog">
-<article class="game-card" data-kind="adventure" data-title="twilight and ash ii" data-index="5">
- <a class="art" href="../games/sumerki-i-pepel-2/" aria-label="Играть в Twilight and Ash II" title="Twilight and Ash II"><img src="covers/twilight-ash-ii.svg" alt="Twilight and Ash II — уникальная заставка, соответствующая графике игры" width="640" height="400" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">01</span></a>
- <div class="game-info"><p class="tag">Realm 01 · Story / Survival</p><h3>Twilight and Ash II</h3><p class="desc">Save the magic tree on a lifeless island: find the seed, water it, defend it until it turns the world over.</p>
- <div class="game-actions"><a class="play-link" href="../games/sumerki-i-pepel-2/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Twilight and Ash II в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
+<article class="game-card" data-kind="adventure" data-title="сумерки и пепел ii twilight and ash ii дерево зерно" data-index="5" data-featured="seed">
+ <a class="art" href="../games/sumerki-i-pepel-2/" aria-label="Играть в Сумерки и пепел II — Зерно последнего мира" title="Сумерки и пепел II"><img src="covers/twilight-ash-ii.svg" alt="Сумерки и пепел II — дерево жизни, мистическое зерно, остров в тумане" width="640" height="400" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">01</span></a>
+ <div class="game-info"><p class="tag">Realm 01 · Зерно последнего мира</p><h3>Сумерки и пепел II</h3><p class="desc">Найди мистическое зерно, посади дерево жизни, поливай и защищай росток, пока мёртвый остров не оживёт.</p>
+ <div class="game-actions"><a class="play-link" href="../games/sumerki-i-pepel-2/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Сумерки и пепел II в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
 <article class="game-card" data-kind="adventure" data-title="twilight island" data-index="0">
  <a class="art" href="../observer-world-en-v7/" aria-label="Играть в Twilight Island" title="Twilight Island"><img src="https://static.playgama.com/p-img/pg/preview/f67bd2837c2949748517e127abe464e9?width=640" alt="Twilight Island — обложка игры" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">02</span></a>
  <div class="game-info"><p class="tag">Realm 02 · Fantasy / Creation</p><h3>Twilight Island</h3><p class="desc">A living island of construction, discovery and mysterious inhabitants.</p>

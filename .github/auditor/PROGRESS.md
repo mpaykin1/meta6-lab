@@ -32,9 +32,16 @@
 - [ ] Шаг 4 — нарушения в #253 отсутствуют, но отрицательное утверждение ненадёжно до исправления самоцитирования
 - [x] Шаг 5 (а, реализация в PR) · 2026-11-11T13:59:43.736Z — GraphQL pinnedIssues, 9 мутаций, [PR #254](https://github.com/mpaykin1/meta6-lab/pull/254); [auditor run #43033906443](https://github.com/mpaykin1/meta6-lab/actions/runs/43033906443) зелёный на SHA `20a0c2f233490222ebe01392780236f234d8b58c`; [STOROZHA #43033906501](https://github.com/mpaykin1/meta6-lab/actions/runs/43033906501) красный (защищённые workflow + тест): **НУЖЕН CLAUDE**
 - [x] Шаг 6 · 2026-11-11T13:59:43.736Z — Урок сохранён ниже; К6 требует строку `ПРОВЕРКА ИЗМЕНЕНА` в [PR #254](https://github.com/mpaykin1/meta6-lab/pull/254) по [KONTUR run #43033906437](https://github.com/mpaykin1/meta6-lab/actions/runs/43033906437)
-- [ ] Шаг 7 — обновить строку в ZADACHI.md после PR
+- [x] Шаг 7 · 2026-11-11T14:00:50.241Z — итог/PR/блокер в [ZADACHI.md](https://github.com/mpaykin1/meta6-lab/blob/lab/auditor-truthful-cycle-20261111/ZADACHI.md), [commit d509d4a2](https://github.com/mpaykin1/meta6-lab/commit/d509d4a288e4f129c1b7be616d2e610d874e49e7)
 
 ### Урок
 Само Issue ревизора и устаревшие одноимённые Issue не должны служить источником доказательств планирования ни одной из пяти ролей. Не подтверждённые GraphQL-pin и schedule нельзя маркировать зелёными.
 
 - [x] Уточнение Issue #253 · 2026-11-11T13:59:43.736Z — пять ошибочных `✅ Issue #253` заменены на `⚠️` вручную, [Issue #253](https://github.com/mpaykin1/meta6-lab/issues/253); автоматическое предотвращение в PR #254.
+
+## Продолжение следующего запуска
+
+- Для текущего круга **НУЖЕН CLAUDE**: [PR #254](https://github.com/mpaykin1/meta6-lab/pull/254), защищённый `.github/workflows/auditor.yml` и тест `scripts/auditor/mutate-auditor.mjs` заблокированы [STOROZHA #43033906501](https://github.com/mpaykin1/meta6-lab/actions/runs/43033906501). Запрещено обходить STOROZHA.
+- Schedule: до первого штатного запуска не называть «3/3 зелёных»; [ручной run #43031781751](https://github.com/mpaykin1/meta6-lab/actions/runs/43031781751) не считается schedule.
+- Pin: подтвердить через GraphQL после одобренного workflow, не делать вывод из неоднозначного warning в [run #43031781751](https://github.com/mpaykin1/meta6-lab/actions/runs/43031781751).
+- Следующее саморазвитие по списку: **б) обнаружение автозадачи без улучшений два часа подряд**, отдельный PR после закрытия или решения #254.

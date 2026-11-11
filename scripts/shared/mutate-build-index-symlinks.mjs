@@ -80,8 +80,9 @@ verify(source);
 const mutations=[
   ['folder link followed',s=>s.replace('fs.lstatSync(folder)','fs.statSync(folder)')],
   ['file link followed',s=>s.replace('fs.lstatSync(file)','fs.statSync(file)')],
-  ['deceptive privileged ID',s=>s.replace('folderType.isSymbolicLink()',
-    "(folderType.isSymbolicLink()&&id==='observer-audio')")]
+  ['deceptive privileged ID',s=>s.replace(
+    'if(folderType.isSymbolicLink()||!folderType.isDirectory())',
+    "if((folderType.isSymbolicLink()||!folderType.isDirectory())&&id==='observer-audio')")]
 ];
 for(const [name,mutate] of mutations){
   const broken=mutate(source);

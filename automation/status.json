@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T05:55:26.656Z",
+  "generated_at": "2026-11-11T06:00:29.562Z",
   "sha": {
-    "lab": "7e341aa81bd756ee0a1341e3995f688c0a72978c",
+    "lab": "7f5616591ca5baa37186d86621299d32c77230b1",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42968800969",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42969380587",
   "review": {
     "protected": [
       {
@@ -234,11 +234,16 @@
     ]
   },
   "pr": {
-    "open": 40,
+    "open": 39,
     "conflicts": "нет данных",
-    "merged": 9,
+    "merged": 10,
     "closed": 41,
     "mergedItems": [
+      {
+        "number": 126,
+        "title": "Эталон: универсальный промпт Sketch → HTML Game → ZIP",
+        "sha": "7f5616591ca5baa37186d86621299d32c77230b1"
+      },
       {
         "number": 236,
         "title": "meta-bot: шаг ходьбы не перелетает цель",
@@ -344,8 +349,8 @@
   },
   "changes": {
     "lab": {
-      "count": 723,
-      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:9, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:13, shared:2, SMENA.md:1, ZADACHI.md:1"
+      "count": 725,
+      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:13, shared:2, SMENA.md:1, ZADACHI.md:1"
     },
     "mg": {
       "count": 2,

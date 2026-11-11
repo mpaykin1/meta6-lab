@@ -98,3 +98,5 @@
 - Сверено: [PR #229](https://github.com/mpaykin1/meta6-lab/pull/229) слит `40dfc505c5427f8d0b17b679d2f5df74352bc7c1`; [PR #231](https://github.com/mpaykin1/meta6-lab/pull/231) слит `8790e6339ccf62af9584a4353749c864d4cf7785`. Не повторять инструкцию и mergeable=null.
 - Ветка `lab/chat-rabota` fast-forward без force от `7aa74d3dcfd5b2c30ad59c8c8a82f71d0ff1801b` к `2c8f27fb187dc13f47e3ffbd56d0f54b86482d1c`.
 - Сейчас делаю: проверить актуальные свободные карточки `DISPETCHER.md`; захватить не более двух и продолжить с сохранением прогресса.
+
+- 2026-11-11T07:01:26.889Z: карточка [#237](https://github.com/mpaykin1/meta6-lab/pull/237) захвачена в [DISPETCHER.md](https://github.com/mpaykin1/meta6-lab/commit/bc5c712f9af03856956ce20c31ea919c738b597a). Двухродительская синхронизация и сохранение истории: [4916eb4](https://github.com/mpaykin1/meta6-lab/commit/4916eb457d8a94cf5f0f208f65a7a9c706d9a350); `ZADACHI.md` сохранён из main. Дальше: проверить CI на 4916eb4, независимо сверить diff и право слияния.

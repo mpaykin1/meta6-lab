@@ -38,6 +38,7 @@ const errors = referenceGate(files, existing);
 const row = '| #' + number + ' | ' + pr.head.ref + ' | ' +
   errors.join('; ').replace(/[\r\n|]/g, ' ') + ' | ' +
   new Date().toISOString().slice(0, 10) + ' |';
+if (process.env.STOROZHA_READ_ONLY !== '1') {
 for (let attempt = 0; attempt < 7; attempt++) {
   let current;
   try { current = await api('/contents/DLYA_CLAUDE.md'); }
@@ -69,6 +70,7 @@ for (let attempt = 0; attempt < 7; attempt++) {
   } catch (error) {
     if (attempt === 6 || !/HTTP (409|422)/.test(String(error))) throw error;
   }
+}
 }
 if (errors.length) {
   errors.forEach(error => console.error('::error title=Нужен Claude::' + error));

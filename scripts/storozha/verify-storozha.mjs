@@ -30,8 +30,9 @@ export function verify(c) {
   assert.equal(c.quota(six, 5, t).reject, false, 'The oldest five still pass when six exist');
   assert.equal(c.quota(six, 6, t).reject, true, 'The sixth live PR is red');
   assert.match(c.quota(six, 6, t).message, /#1.*#5/, 'Error tells which old PRs to finish');
-  const old = {...six[0], lastCommitAt: new Date(t - c.THREE_DAYS - 1000).toISOString()};
-  const recent = {...six[0], lastCommitAt: new Date(t - c.THREE_DAYS + 1000).toISOString()};
+  const required72Hours = 72 * 60 * 60 * 1000;
+  const old = {...six[0], lastCommitAt: new Date(t - required72Hours - 1000).toISOString()};
+  const recent = {...six[0], lastCommitAt: new Date(t - required72Hours + 1000).toISOString()};
   assert.equal(c.staleDecision(old, t).close, true, '72+ hours: close abandoned PR');
   assert.equal(c.staleDecision(old, t).deleteBranch, false, 'Never delete a stale PR branch');
   assert.equal(c.staleDecision(recent, t).close, false, 'Recent PR stays open');

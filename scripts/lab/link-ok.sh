@@ -22,6 +22,8 @@ done
 
 check_one() {
   local url="$1" clean sep started remaining max_time code delay
+  # LINKS.txt also contains the approved /meta6/ink/ reference in the primary repo.
+  [[ "$url" == 'https://mpaykin1.github.io/meta6/'* ]] && root='https://mpaykin1.github.io/meta6/'
   [[ "$url" == "$root"* ]] || { echo "NOT 200: $url (outside allowed site)" >&2; return 1; }
   clean="${url%%#*}"
   sep='?'

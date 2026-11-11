@@ -3,6 +3,10 @@ on:
   schedule:
     - cron: '13 * * * *' # 20m after the :53 job; UTC
   workflow_dispatch:
+  pull_request:
+    paths:
+      - .github/workflows/auditor.yml
+      - .github/auditor/config.yml
   push:
     branches: [main]
     paths:
@@ -35,7 +39,9 @@ jobs:
             const link = (name, url) => '[' + clean(name) + '](' + url + ')';
             const fileUrl = path => root + '/blob/main/' + path;
             async function read(path) {
-              const response = await github.rest.repos.getContent({owner, repo, path, ref: 'main'});
+              const ref = context.eventName === 'pull_request' && path === '.github/auditor/config.yml'
+                ? context.payload.pull_request.head.sha : 'main';
+              const response = await github.rest.repos.getContent({owner, repo, path, ref});
               if (!response.data.content) throw new Error('Missing content: ' + path);
               return Buffer.from(response.data.content, 'base64').toString('utf8');
             }
@@ -175,7 +181,8 @@ jobs:
                 if (badChecks.length) refs.push(link('check '+badChecks[0].name,
                   badChecks[0].html_url || pr.html_url));
                 const ci = green ? 'CI ✅' : badChecks.length || badRuns.length ? 'CI ❌' : 'CI ⚠️';
-                evidence.push(refs.join(' · ')+' · '+ci+(ambiguous ? ' · авторство не установлено' : ''));
+                evidence.push(refs.join(' · ')+' · '+ci+(ambiguous ? ' · авторство не установлено' : '')+
+                  (d.errors.length ? ' · Ошибки API: '+clean(d.errors.join('; ')) : ''));
                 if (green && meaningful && !guarded.length && !ambiguous) successes.push(
                   clean(role.name)+': '+refs.join(' · '));
                 if (/(готово|исправлено|слито|проверки прошли|checks passed|merged|PASS)/i.test(pr.body || '') &&
@@ -222,6 +229,9 @@ jobs:
               '_⚠️ означает отсутствие достаточных доказательств, а не установленное нарушение._'
             ].join('\n');
             await core.summary.addRaw(report).write();
+            if (context.eventName === 'pull_request') {
+              core.info('PR preview: no Issue mutation allowed');
+            } else {
             let audit = null;
             for (let page=1;page<=15 && !audit;page++) {
               const result = await github.rest.issues.listForRepo({owner,repo,state:'all',per_page:100,page});
@@ -241,3 +251,4 @@ jobs:
               core.warning('Issue pin unavailable: '+clean(err.message));
             }
             core.info('Audit issue: '+audit.html_url);
+            }

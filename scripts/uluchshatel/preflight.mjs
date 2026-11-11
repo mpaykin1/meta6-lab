@@ -32,20 +32,17 @@ export function blockersFor({ game, branch, prs, lastCommitAt, locks = [], nowMs
   return blockers;
 }
 
-function parseLocks(markdown) {
+function parseLocks(markdown, game) {
   const locks = [];
+  const slug = game.slice('games/'.length);
   for (const line of markdown.split('\n')) {
     if (!line.startsWith('|')) continue;
     const parts = line.split('|').map(value => value.trim());
     const title = parts[1] || '';
     const branch = (parts[2] || '').replaceAll('`', '');
     const owner = parts[3] || '';
-    const match = title.match(/games\/([a-z0-9-]+)|\b(skin-trainer|veil-terraces|broken-city)\b/g);
-    if (!match) continue;
-    for (const token of match) {
-      const slug = token.startsWith('games/') ? token : 'games/' + token;
-      locks.push({ game: slug, branch, free: /свободно/i.test(owner) });
-    }
+    if (!title.split(/[^a-z0-9/-]+/).some(token => token === slug || token === game)) continue;
+    locks.push({ game, branch, free: /свободно/i.test(owner) });
   }
   return locks;
 }
@@ -91,7 +88,7 @@ async function main() {
     repo: pr.head.repo?.full_name,
     files: (await allPages(prefix + '/pulls/' + pr.number + '/files')).map(file => file.filename)
   })));
-  const locks = parseLocks(Buffer.from(lockFile.content, 'base64').toString('utf8'));
+  const locks = parseLocks(Buffer.from(lockFile.content, 'base64').toString('utf8'), game);
   const blockers = blockersFor({
     game,
     branch,

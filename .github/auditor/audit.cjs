@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const config = JSON.parse(fs.readFileSync('.github/auditor/config.yml', 'utf8'));
 const BASE = 'https://github.com/mpaykin1/meta6-lab';
 function matchProtected(path, patterns = config.protected_paths) {
-  return patterns.some((p) => p.endsWith('/**') ? path.startsWith(p.slice(0, -3)) : path === p);
+  return patterns.some((p) => p.endsWith('/**') ? path.startsWith(p.slice(0, -2)) : path === p);
 }
 function parseTable(content) {
   return content.split('\n').flatMap((line, ix) => {

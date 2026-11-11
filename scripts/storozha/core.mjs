@@ -50,7 +50,7 @@ export function quota(prs, number, now = Date.now()) {
   const pr = prs.find(p => p.number === number);
   const selected = living.slice(0, 5);
   const reject = Boolean(pr && Date.parse(pr.created_at) > CUTOFF &&
-    living.length > 5 && !selected.some(p => p.number === number));
+    living.length > 6 && !selected.some(p => p.number === number));
   return {reject, living: living.length, oldest: selected.map(p => p.number),
     message: reject ? 'Сначала доведи старые PR: ' + selected.map(p => '#' + p.number).join(', ') : ''};
 }

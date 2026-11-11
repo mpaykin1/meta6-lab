@@ -65,11 +65,11 @@ export function referenceGate(files, existingPaths) {
       if (status !== 'added') errors.push(p + ': существующий эталон нельзя изменять или удалять');
       else additions.push(p);
     }
-    if (/^\.github\/workflows\//.test(p) ||
-      /^scripts\/(?:meta-bot\/|kontur\/|meta-games-guard\.sh$|storozha\/)/.test(p) &&
-      status !== 'added' ||
-      /(?:^|\/)(?:mutate-|verify-|selftest|test[-.])[^/]*\.[cm]?[jt]s$/.test(p) &&
-      status !== 'added') {
+    const protectedScript = /^scripts\/(?:meta-bot\/|kontur\/|meta-games-guard\.sh$|storozha\/)/.test(p);
+    const protectedTest = /(?:^|\/)(?:__tests?__|tests?|specs?)\//i.test(p) ||
+      /(?:^|\/)(?:mutate-|verify-|selftest|test[-.])[^/]*\.[cm]?[jt]s$/i.test(p) ||
+      /\.(?:test|spec)\.[cm]?[jt]sx?$/i.test(p);
+    if (/^\.github\/workflows\//.test(p) || (protectedScript || protectedTest) && status !== 'added') {
       errors.push(p + ': изменение защищённого workflow/охранника/бота/теста — только Claude');
     }
   }

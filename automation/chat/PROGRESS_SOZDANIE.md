@@ -52,3 +52,6 @@
 
 ### PR #87 — 11.11.2026
 - Взята зависшая задача Play / Connect / Earn: отдельный файл `meta-games/index.html` в main был побайтно идентичен merge-base (`6d7b6f9`); код из старого зелёного PR #87 сохранён побайтно (`9b857fe`) и соединён с актуальным main `3e9de5d` через [merge faf69f1](https://github.com/mpaykin1/meta6-lab/commit/faf69f129ae3510a81e59a48328534fed8a5f944). Внесён только один портал HTML; остальные игры/правила не изменены. Следующее: дождаться same-SHA CI и проверить Pages после слияния.
+
+### PR #224 — 11.11.2026
+- Зависший PR #224: в актуальном main `rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md` сохранил исходный blob `1502eb2`, как в merge-base; объединены неизменённые материалы ветки (#16–20 правил, журнал) с текущим main без потерь через [merge 6974547](https://github.com/mpaykin1/meta6-lab/commit/697454722d7c7fbb944a0b073ccc443e0ded855e). Далее CI на новом HEAD, без зелёного не сливать.

@@ -82,8 +82,12 @@
 - Следующий шаг: получить tree SHA актуального main через Git Data API или авторизованный git-клиент; создать tree от main с `meta-games/index.html` из PR, commit с родителями [head #87, main], обновить ref только fast-forward при expected SHA; затем проверить новый HEAD, все CI, независимое ревью и право на merge. Не считать kick-main HTTP 403 дефектом игрового кода; повторить позже.
 - После #87 вернуться к актуальному DISPETCHER.md и брать первую свободную карточку; запись о ходе каждого шага продолжать здесь.
 
-## 2026-11-11T06:50:31.416Z — PR #228, Рабочий чат МГ/МГЛ
-- Захват в DISPETCHER.md: https://github.com/mpaykin1/meta6-lab/commit/4c43bbad4a772d4ca8fae7947e9124ce3804104e
-- Исходный HEAD: 14d15c7ee2e23679d74b3290cf794d0ab1c96605; PR https://github.com/mpaykin1/meta6-lab/pull/228
-- Действие: синхронизировать ветку документа с main двухродительским merge без изменения игр, workflow, охранников и meta6.
-- Дальше: новый HEAD, CI именно на нём, независимая проверка Claude; draft не сливать автоматически.
+### PR #87 — восстановление и проверка источников 2026-11-11T06:53Z
+- Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ. Задача #87 уже в ZADACHI.md; повторную строку не добавлять.
+- Подтверждены merge PR #229 `40dfc505c5427f8d0b17b679d2f5df74352bc7c1` и PR #236 `afc35df467af8e6f60fb8a5c9c11f62aef5dfa05`.
+- Актуальный PR https://github.com/mpaykin1/meta6-lab/pull/87: head `faf69f129ae3510a81e59a48328534fed8a5f944`, main `036bc0722f98753288326a4523f1c93280ee5321`, behind 30, ahead 6. Сравнён файл `meta-games/index.html` в merge-base/main/head: main и merge-base имеют одинаковый blob `6d7b6f9a13df90fa09dccbe0cb36fca183e4273b`, PR blob `9b857feaf02c1361f1d94126af52fbfbc48944c3`. Других отличий от main по compare нет.
+- Сейчас делаю: реальный двухродительский merge с деревом main и файлом портала из ветки, без force; только если HEAD не изменился. Затем новые CI на SHA, перекрёстная проверка, допустимое слияние, новая свободная карточка.
+
+### PR #87 — merge main в ветку
+- Двухродительский коммит [2a1d22c](https://github.com/mpaykin1/meta6-lab/commit/2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d), родители: PR `faf69f129ae3510a81e59a48328534fed8a5f944` и main `eaaef9d0b4dfe702d21870e5db755b80ec049816`; сохранено дерево main с единственным отличием `meta-games/index.html` (blob `9b857feaf02c1361f1d94126af52fbfbc48944c3`). `update_ref` без force: success. Редактирования `scripts/meta-bot/` нет.
+- Следующий шаг: получить все workflow/checks по новому SHA, проверить реальные выводы и независимое ревью; до полного зелёного CI PR #87 не сливать.

@@ -75,6 +75,8 @@ if(targetType && (targetType.isSymbolicLink()||!targetType.isFile()))
 if(process.argv.includes('--check')){
   if(!targetType || readRegularFile(target).toString('utf8')!==output)
     throw Error('shared/index.json missing or out of date');
+  // --check validates the security contract too; fixture subprocesses run in write mode.
+  await import('./mutate-build-index-symlinks.mjs');
 }else{
   const flags=fs.constants.O_WRONLY|fs.constants.O_CREAT|fs.constants.O_TRUNC|fs.constants.O_NOFOLLOW;
   const fd=fs.openSync(target,flags,0o644);

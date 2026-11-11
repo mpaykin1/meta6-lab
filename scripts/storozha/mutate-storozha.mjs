@@ -54,7 +54,7 @@ for (const [label, needle, replacement] of mutants) {
   caught++;
 }
 const wiring = [
-  ['branch: API accidentally merges instead of updating', 'update-branch', 'merge'],
+  ['branch: watcher starts pushing into PR heads', '// NO_HEAD_PUSH', "await api('/pulls/' + pr.number + '/update-branch', 'PUT'); //"],
   ['branch: errors erase queue', 'if (!process.exitCode) await writeQueue(rows)',
     'if (false) await writeQueue(rows)'],
   ['branch: conflict swallowed', "fresh.mergeable_state === 'dirty'",

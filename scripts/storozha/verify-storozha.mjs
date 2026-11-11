@@ -68,8 +68,9 @@ export function verify(c) {
     baseline), [], 'New test files are allowed without changing existing tests');
 }
 export function verifyWiring(sources) {
-  assert.match(sources.branch, /'\/pulls\/' \+ pr\.number \+ '\/update-branch'/,
-    'Branch watcher must use GitHub update-branch API');
+  assert.doesNotMatch(sources.branch, /update-branch|\/merges'/,
+    'Branch watcher must NOT push into PR heads (GITHUB_TOKEN pushes start no CI)');
+  assert.match(sources.branch, /NO_HEAD_PUSH/, 'NO_HEAD_PUSH note must stay');
   assert.match(sources.branch, /if \(!process\.exitCode\) await writeQueue\(rows\)/,
     'Failed reconciliation must not silently drop conflict entries');
   assert.match(sources.branch, /fresh\.mergeable_state === 'dirty'/,

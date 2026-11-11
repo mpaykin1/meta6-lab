@@ -1,7 +1,7 @@
 name: STOROZHA branch updater
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '17 * * * *'
   workflow_dispatch:
   push:
     branches: [main]

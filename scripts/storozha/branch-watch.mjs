@@ -79,21 +79,10 @@ for (const pr of opened) {
         fresh.head.ref + ' | ' + paths.join(', ') + ' | ' + new Date().toISOString().slice(0, 10) + ' |'});
       continue;
     }
-    const cmp = await api('/compare/' + mainSha + '...' + fresh.head.sha);
-    if (cmp.behind_by > 0) {
-      try {
-        await api('/pulls/' + pr.number + '/update-branch', 'PUT',
-          {expected_head_sha: fresh.head.sha});
-        console.log('UPDATED PR #' + pr.number);
-      } catch (error) {
-        const latest = await api('/pulls/' + pr.number);
-        if (latest.mergeable_state === 'dirty') {
-          const paths = await conflictPaths(latest, mainSha);
-          if (paths.length) rows.push({id: pr.number, text: '| #' + pr.number + ' | ' +
-            latest.head.ref + ' | ' + paths.join(', ') + ' | ' + new Date().toISOString().slice(0, 10) + ' |'});
-        } else throw error;
-      }
-    }
+    // NO_HEAD_PUSH (Claude, 11.11.2026): сторож НЕ вливает main в ветки PR.
+    // Пуш от GITHUB_TOKEN не запускает проверки — PR остался бы без CI,
+    // а «свежий» merge-коммит мешал бы находить заброшенные PR.
+    // Сторож только находит настоящие конфликты и пишет их в DLYA_CLAUDE.md.
     const runs = await api('/actions/runs?branch=' + encodeURIComponent(fresh.head.ref) +
       '&per_page=100');
     for (const run of runs.workflow_runs.filter(run =>

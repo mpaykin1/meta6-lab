@@ -1,7 +1,7 @@
 name: STOROZHA weekly maintenance
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '47 * * * *'
     - cron: '0 3 * * *'
   workflow_dispatch:
   push:

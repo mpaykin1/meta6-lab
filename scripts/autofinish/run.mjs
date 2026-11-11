@@ -105,14 +105,9 @@ async function finish(pr,main){
   await retryInfrastructure(pr,files);
   const fresh=await api('/pulls/'+pr.number);
   const compare=await api('/compare/'+main+'...'+fresh.head.sha);
-  if(compare.behind_by>0){
-    if(fresh.mergeable_state==='dirty'||fresh.mergeable===false){
-      console.log('NEEDS_CLAUDE conflict '+fresh.html_url);return;
-    }
-    if(fresh.mergeable===true){
-      await api('/pulls/'+fresh.number+'/update-branch','PUT',{expected_head_sha:fresh.head.sha});
-      console.log('UPDATED_BRANCH '+fresh.html_url);
-    }return;
+  // Claude 11.11.2026: ветку не обновляем (пуш GITHUB_TOKEN не запускает CI).
+  if(compare.behind_by>0&&(fresh.mergeable_state==='dirty'||fresh.mergeable===false)){
+    console.log('NEEDS_CLAUDE conflict '+fresh.html_url);return;
   }
   if(fresh.mergeable!==true||!['clean','unstable'].includes(fresh.mergeable_state))return;
   const result=await checks(fresh.head.sha);

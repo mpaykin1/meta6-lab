@@ -1,0 +1,74 @@
+{
+  "id": "abyss-glow-2026-11-09",
+  "title": "ABYSS GLOW",
+  "kind": "owner-provided-reference",
+  "origin": {
+    "filename": "ABYSS GLOW.zip",
+    "sha256": "e421a6a2e55680358ff9eed1ca69956a9d7953d2b57cb513e645257c51000026",
+    "received": "2026-11-09",
+    "explicit_owner_reference_request": true
+  },
+  "entrypoints": [
+    "index.html",
+    "office.html"
+  ],
+  "original_files": [
+    {
+      "path": "index.html",
+      "git_blob_sha": "793ec9734b82002ebab9f6a9a2eaa51a86706835"
+    },
+    {
+      "path": "assets/abyss_0.png",
+      "git_blob_sha": "5a647e5e70b07bdea6f1f88fdd858233dfdcdecb"
+    },
+    {
+      "path": "assets/abyss_0_n.png",
+      "git_blob_sha": "cbb00ddf4cd1f0fc115fcc3a3092a59744fac780"
+    },
+    {
+      "path": "assets/bake_fish.png",
+      "git_blob_sha": "a5fdb66e7e78a3cc43038662d369f483619f2e85"
+    },
+    {
+      "path": "assets/bake_fish_n.png",
+      "git_blob_sha": "920a5c9b23d8247cfd4b86b9508280eeef084109"
+    },
+    {
+      "path": "assets/manifest.json",
+      "git_blob_sha": "488627e59409dfab620347d3f51ab3cf795e1221"
+    },
+    {
+      "path": "models/angler.json",
+      "git_blob_sha": "22c536017f26c4a0e10da1ca175d92654916e6cd"
+    },
+    {
+      "path": "models/eel.json",
+      "git_blob_sha": "6cf962148a1bd6542eb04eaa81629522be91d403"
+    },
+    {
+      "path": "models/glow_fish_amber.json",
+      "git_blob_sha": "96596ef0156afbdb59d9d1406eaeeba6c3d02bc9"
+    },
+    {
+      "path": "models/jellyfish_teal.json",
+      "git_blob_sha": "616aa0bb245511fc210657acf214476ef948cc7f"
+    },
+    {
+      "path": "models/kelp_tall.json",
+      "git_blob_sha": "adfdf209e90d3a0440fab6295886bb046f6f8104"
+    },
+    {
+      "path": "models/kraken_tentacle.json",
+      "git_blob_sha": "a9156d58e3120aff381b8bf2a45ad2e8ad1b6318"
+    },
+    {
+      "path": "models/whale_skeleton.json",
+      "git_blob_sha": "1c3800a78b17e11cb86ca6110083fe538e7a573d"
+    },
+    {
+      "path": "office.html",
+      "git_blob_sha": "40ff09e363fd5d0ab526692e1f6040177825713d"
+    }
+  ],
+  "note": "Original contents copied byte-for-byte. External dependencies in office.html require separate rights review before reuse."
+}

@@ -6,6 +6,8 @@
 
 Все опубликованные результаты и ссылки для Claude: [CLAUDE_REPORTS.md](CLAUDE_REPORTS.md). Каждый новый PR и его проверки публиковать здесь; сведения только из чата недоступны Claude.
 
+**ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
+
 <!-- карточки ниже -->
 
 ### lab/immersive-dishonored-principles-20261107 — IM1–IM5 для всех игр
@@ -18,6 +20,43 @@
 - Проверка: поведение игр не проверено, META BOT потребуется при внедрении.
 - Статус: В РАБОТЕ — требуется ревью Claude и отдельное внедрение по играм; без автоматического переноса в `meta6`.
 - Михаил: —; Claude: —
+### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
+- Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/
+- Источник: `games/asqura-ilya-reference/index.html`, blob `b7b7167b3fb48776b2c82433087cb13e867e5abb`.
+- Каталог: `shared/references/asqura-ilya-reference.json`; 3D требует CDN Three.js r128.
+- Ветка: `lab/asqura-ilya-reference-1109`; PR — см. ветку.
+- Статус: В РАБОТЕ — Pages и бот ещё не подтверждены.
+- Михаил: запросил включение в эталоны; оценку игры не дал.
+
+### lab/rainbow-acceleration-reference-1109 — «Радужный разгон»
+- Польза: неизменённый авторский эталон, 28 объектов галереи, игровые трассы, шейдеры, анимации и FX.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/rainbow-acceleration/
+- Исходник: `games/rainbow-acceleration/source-upload.html` (blob `8ebdbe4bb14291c77fb209a2f04a6a6c8920480b`).
+- Просмотр: `games/rainbow-acceleration/index.html` (локальный Three.js вместо CDN).
+- Каталог: `shared/references/rainbow-acceleration.json` (28 ассетов).
+- Ветка: `lab/rainbow-acceleration-reference-1109`.
+- Статус: В РАБОТЕ — PR и публикация Pages ещё не подтверждены; Михаил: вердикта «нравится» о запуске нет.
+
+### lab/broken-city-copy-reference-1109 — «Сломанный город (Copy)»
+- Польза: отдельный эталон с 3D-графикой, GLSL и галереей ассетов; основной Broken City не изменён.
+- Играть: https://mpaykin1.github.io/meta6-lab/games/broken-city-copy/
+- Оригинал: `games/broken-city-copy/source-upload.html`; SHA `e8815120498c15c744f393b5ed8a34bd3676e98e`.
+- Рабочая версия: `games/broken-city-copy/index.html`; Three.js из соседнего эталона вместо CDN.
+- Машинный каталог: `shared/references/broken-city-copy.json`.
+- Ветка: `lab/broken-city-copy-reference-1109`; PR #180.
+- Статус: В РАБОТЕ — Pages и прохождение ещё не подтверждены.
+- Михаил: —; Claude: —
+
+
+### lab/sumerki-i-pepel-2-uploaded-reference — эталон «Сумерки и пепел II (Copy)»
+- Польза: исходная игра, графика и шейдеры доступны как неизменённый эталон для библиотеки.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/sumerki-i-pepel-2-copy/
+- Источник: `games/sumerki-i-pepel-2-copy/index.html`, blob `90d83a77049e8edb7aab847ecbbf4e9723a3c2e5`.
+- Каталог: `shared/references/sumerki-i-pepel-2-copy.json`.
+- Ветка: `lab/sumerki-i-pepel-2-uploaded-reference`; PR: https://github.com/mpaykin1/meta6-lab/pull/179
+- Статус: В РАБОТЕ — оригинал сохранён; прохождение ботом и мобильная совместимость не подтверждены.
+- Михаил: запросил загрузку как эталона, вердикта «нравится» о запуске не было; Claude: —.
 
 
 
@@ -148,3 +187,13 @@
 - Михаил: —
 - Claude: —
 
+
+
+### lab/ashen-path-asset-pack-original-1108 — эталон «Пепельный путь»
+- Польза: доступен оригинальный интерактивный воксельный ассет-пак, его анимации, модели и исходный код.
+- Открыть: https://mpaykin1.github.io/meta6-lab/games/ashen-path-asset-pack/
+- Ветка: `lab/ashen-path-asset-pack-original-1108`.
+- Исходники: `games/ashen-path-asset-pack/index.html`, `source.md`, `README.md`.
+- Каталог: `shared/references/ashen-path-asset-pack.json`.
+- Статус: ИСХОДНИК В БИБЛИОТЕКЕ; мобильная проверка не заявлена.
+- Михаил: передан владельцем как эталон 08.11.2026.

@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "game": "skin-trainer",
+  "source_root": "games/skin-trainer",
+  "assets": [
+    {
+      "id": "47910d23c89a372e3f719049",
+      "game": "skin-trainer",
+      "kind": "inline-style",
+      "name": "style@211",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        7,
+        19
+      ],
+      "sha256": "696cbeb1133c25af1a0bc3bb09f86ef3ed5141138111f710e26c78d3972c3148"
+    },
+    {
+      "id": "5684a1671f939264757bf817",
+      "game": "skin-trainer",
+      "kind": "inline-svg",
+      "name": "svg@2495",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        40,
+        50
+      ],
+      "sha256": "b930e4d88fac39bfdb3b24b2a1ca067b31ba0962981bef0df92769a16a432773"
+    },
+    {
+      "id": "59ac9a01a22406a8a0a3c0ef",
+      "game": "skin-trainer",
+      "kind": "inline-svg",
+      "name": "svg@1403",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        25,
+        37
+      ],
+      "sha256": "d463a05b44923b364f4d675940c6993fb7c1900132cb1742bde787ef8afa73ff"
+    }
+  ],
+  "solutions": [
+    {
+      "id": "043fccd69f4e798990262bc1",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "burst",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        199,
+        203
+      ],
+      "sha256": "c68bca86f405971ac83c10fc62d185d1ad4e6f469e2f2828faa93b63c4e0611a"
+    },
+    {
+      "id": "15966a15fbbe434a48556793",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "loop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        257,
+        320
+      ],
+      "sha256": "8eca3b74a29500b9b0039f8da964bd4242324d92dfd77ba20dcfa7c0a5a9dc11"
+    },
+    {
+      "id": "53929871b96aa6366b53bff3",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "lem",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        62,
+        62
+      ],
+      "sha256": "42fe0fbe4b7a2240848b634a5416a1ebdb07079a02a88d3ffcdc19f987548a76"
+    },
+    {
+      "id": "6b6b05e9fd90c2b8d8f11e9e",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        222,
+        223
+      ],
+      "sha256": "912b6d0994aa9bbced15c77fbf8bf2174e241c073660299c7133c3b5b6fe642a"
+    },
+    {
+      "id": "913269e0dae30849283392c3",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "inline-script@3719",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        58,
+        323
+      ],
+      "sha256": "c0323bf6b2f68a4a9225b990c6449fde8be65c49ebe01161676da6a011814a23"
+    },
+    {
+      "id": "93ff821df089300e790c1b0f",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "radialTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        189,
+        191
+      ],
+      "sha256": "5dbe07a5a2f3f5d49b76639c38857d6235a120cad4db7710e1443ebd0b8ab068"
+    },
+    {
+      "id": "9a2f5638465fbf2132d2388c",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "limb",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        175,
+        175
+      ],
+      "sha256": "f32e26d98ccf120cad838d21336c57b1c5c8d8c0930a8f2ec847842e2f86cacf"
+    },
+    {
+      "id": "a289f96e95531cd34c97d7ef",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "makeHint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        66,
+        70
+      ],
+      "sha256": "6cd7c6491636b23b8ab13af58240118439e3073a29623ed73a1cadbdde29318b"
+    },
+    {
+      "id": "a8fa2685d66c2be99760f011",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "updateHints",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        76,
+        87
+      ],
+      "sha256": "eddaad41020b66204166fd370f78984ce755eaaa847fc824c360f79785111f42"
+    },
+    {
+      "id": "c2ba4af4f87ea9b795ce5ee2",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "up",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        246,
+        247
+      ],
+      "sha256": "67ac1bbeae83d2e0e6f8f2c2c7f8e3e0bc3962226c19e6a90cc4b61d382b90e6"
+    },
+    {
+      "id": "c59f5dfc31709b4c960e7239",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "feedHint",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "lines": [
+        88,
+        92
+      ],
+      "sha256": "e4ce6b8e70b7b50436e9a03f13e0a3a50384731b8d0e6a9a37ee751d9d0f2328"
+    }
+  ],
+  "counts": {
+    "assets": 3,
+    "file_assets": 0,
+    "solutions": 11
+  }
+}

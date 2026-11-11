@@ -1,4 +1,13 @@
-Для автозадач действует automation/prompts/chatgpt-autotask.md: отчёты, новые тесты, handoff и evidence запрещены; требования GRAF, abyss.md, evolve.md и других файлов о тестах, отчётах, evidence и gate к автозадачам не применяются
+## ТАБЛИЦА ЗАДАЧ (правило владельца, 10.11.2026)
+Каждая задача, за которую берётся ChatGPT (чат или автозадача) по МГ и МГЛ, сразу записывается строкой в [ZADACHI.md](https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md) (корень meta6-lab). Статус ставит сторож `ZADACHI watch` по данным GitHub: ✅ готово (PR слит), 🛑 ЗАВИС — толкнуть (нет коммитов 3+ часа). Без строки работу не начинать. Полное правило: [rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md](rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md).
+
+## ПРОЧИТАТЬ ПЕРЕД ЛЮБОЙ РАБОТОЙ (09.11.2026)
+1. [ФИНИШ — 18 проверок, без которых проект не готов](rules/09-platforma/FINISH.md)
+2. [КОНТУР БЕЗ ОШИБОК — правила К1–К12](rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md)
+3. [OSHIBKI.md — журнал ошибок; каждая ошибка = вечная ловушка](OSHIBKI.md)
+4. **Сначала этап 0** [плана разработки](rules/09-platforma/PLAN_RAZRABOTKI.md) (ремонт: пункты 0.9–0.11 = ошибки OSHIBKI №17–№23), потом новые пункты финиша. Правила качества кода — К12 контура (10.11.2026).
+
+Для автозадач действует automation/prompts/chatgpt-autotask.md: длинные отчёты, handoff и evidence-файлы запрещены. **Исключение владельца 09.11.2026: для META GAMES и любых PR с кодом КОНТУР БЕЗ ОШИБОК К1–К10 обязателен и автозадачам — проверки, мутации-ловушки, строки в OSHIBKI.md и охранник kontur-guard; см. rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md.** Остальные требования GRAF, abyss.md, evolve.md о тестах, отчётах и gate к автозадачам не применяются
 
 # Правила meta6 — оглавление
 
@@ -16,6 +25,7 @@ _как игра выглядит: графика, свет, погода, чи�
 - [graf.md](rules/01-stil-i-grafika/graf.md) — GRAF — полный стандарт графики и анимации
 - [weather.md](rules/01-stil-i-grafika/weather.md) — погода: принятая версия и как её переносить
 - [graf-mobile-follow-camera.md](rules/01-stil-i-grafika/graf-mobile-follow-camera.md) — камера на телефоне следует за героем
+- [SKINY.md](rules/01-stil-i-grafika/SKINY.md) — **СКИНЫ (09.11.2026):** примитивный герой + ZIP-пакет `meta6-skin/1` (текстуры, запекание, детали, анимированные 2D/2.5D) = детальный персонаж; учебная игра games/skin-trainer, эскиз reference/skins/rusty-robot.png
 
 ## 02. Игровые механики — [rules/02-igrovye-mekhaniki/](rules/02-igrovye-mekhaniki/)
 
@@ -72,6 +82,7 @@ _переиспользовать готовое, брать источник в
 - [NOVYY_UROVEN.md](rules/06-rabota-ii-s-kodom/NOVYY_UROVEN.md) — перед новым уровнем пересчитать всё, что есть: было N — осталось N
 - [NE_MENYAT_NEZAPROSHENNOE.md](rules/06-rabota-ii-s-kodom/NE_MENYAT_NEZAPROSHENNOE.md) — делать только то, что просили
 - [PESOCHNITSA_GPT.md](rules/06-rabota-ii-s-kodom/PESOCHNITSA_GPT.md) — **ПЕСОЧНИЦА:** ChatGPT работает только в `mpaykin1/meta6-lab` (ветка на идею, бот, карточка в LAB_QUEUE.md), в `meta6` — только чтение; забирает в `meta6` только Claude
+- [TABLITSA_ZADACH.md](rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md) — **ТАБЛИЦА ЗАДАЧ (10.11.2026):** каждая взятая ChatGPT задача — строка в ZADACHI.md; сторож показывает готово / завис
 - [OTCHETY_DLYA_CLAUDE.md](rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md) — **ОТЧЁТЫ ДЛЯ CLAUDE:** каждый результат — PR со свежим описанием, прогон Actions с понятной причиной провала, карточка LAB_QUEUE; ничего важного только в чате ChatGPT
 - **ОТЧЁТ ВЛАДЕЛЬЦУ = ТОЛЬКО «ОСТАЛОСЬ СДЕЛАТЬ»** (07.11.2026): в чате владельцу — только список того, что ещё не готово, и что мешает; сделанное не перечислять, оно на GitHub. См. §5 [OTCHETY_DLYA_CLAUDE.md](rules/06-rabota-ii-s-kodom/OTCHETY_DLYA_CLAUDE.md)
 - [automation/prompts/chatgpt-autotask.md](automation/prompts/chatgpt-autotask.md) — правила для автозадач ChatGPT (лежат в automation/)
@@ -115,3 +126,5 @@ _общий склад и конструктор всех игр_
 - [games/sumerki-i-pepel-2/](games/sumerki-i-pepel-2/README.md) — эталонная игра Claude «Сумерки и пепел II» (загружена 06.11.2026) и её честный статус по каждому правилу
 - [games/twilight-isle-classic/](games/twilight-isle-classic/README.md), [games/twilight-isles/](games/twilight-isles/README.md), [games/archer-in-the-fog/](games/archer-in-the-fog/README.md) — эталоны удержания Playgama R1–R11 (загружены 06.11.2026) и статус каждой по всем универсальным правилам; [games/broken-city/](games/broken-city/README.md) — эталон Claude 1.4.0 (образец ЧИСТОГО ЭКРАНА и ЛОРА) со статусом по всем правилам
 - [meta-games-bot-rollout.md](automation/prompts/meta-games-bot-rollout.md) — промпт для ChatGPT на внедрение бота и исправление всех игр
+
+- **Библиотека игр / MCP:** [BIBLIOTEKA_IGR.md](rules/06-rabota-ii-s-kodom/BIBLIOTEKA_IGR.md) — обязательное продолжение существующего PR, реальные Chromium-проверки, честные счётчики и исправление кодом перед завершением каждого запуска.

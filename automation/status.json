@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T14:51:18.458Z",
+  "generated_at": "2026-11-11T14:59:24.641Z",
   "sha": {
-    "lab": "94269fe7bf65d97e086ac3e6da3793af6a70e711",
+    "lab": "8d745a80238e2e873615bd18eeacf2fe0975e979",
     "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042415979",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042842845",
   "review": {
     "protected": [
       {
@@ -110,7 +110,7 @@
       },
       {
         "workflow": "B1 — all games open without console errors",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43039463374",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43041939203",
         "step": "Install Chromium for actual game rendering"
       }
     ],
@@ -281,7 +281,7 @@
     ]
   },
   "pr": {
-    "open": 51,
+    "open": 53,
     "conflicts": "нет данных",
     "merged": 17,
     "closed": 45,
@@ -467,7 +467,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1082,
+      "count": 1089,
       "folders": "нет данных"
     },
     "mg": {

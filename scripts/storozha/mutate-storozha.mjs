@@ -30,7 +30,12 @@ const mutants = [
   ['reference: workflow bypass', "if (/^\\.github\\/workflows\\//.test(p) ||",
     'if (false ||'],
   ['reference: treat only removed test as protected', "status !== 'added') {",
-    "status === 'deleted') {"]
+    "status === 'deleted') {"],
+  ['reference: bypass nested test directory', 'const protectedTest = /',
+    'const protectedTest = false && /'],
+  ['reference: bypass TypeScript spec file',
+    '/\\.(?:test|spec)\\.[cm]?[jt]sx?$/i.test(p);',
+    '/\\.(?:test)\\.[cm]?[jt]sx?$/i.test(p);']
 ];
 let caught = 0;
 for (const [label, needle, replacement] of mutants) {

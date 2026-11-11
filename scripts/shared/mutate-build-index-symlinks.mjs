@@ -118,7 +118,8 @@ const mutations=[
   ['file link followed',s=>s.replace('fs.lstatSync(file)','fs.statSync(file)')],
   ['deceptive privileged ID',s=>s.replace(
     'if(folderType.isSymbolicLink()||!folderType.isDirectory())',
-    "if((folderType.isSymbolicLink()||!folderType.isDirectory())&&id==='observer-audio')")],
+    "if((folderType.isSymbolicLink()||!folderType.isDirectory())&&id==='observer-audio')")
+    .replace('  checkParents(file);','')],
   ['ancestor link followed',s=>s.replace('checkParents(dir);','').replace('  checkParents(file);','')],
   ['output symlink followed',s=>s
     .replace('fs.lstatSync(target,{throwIfNoEntry:false})',

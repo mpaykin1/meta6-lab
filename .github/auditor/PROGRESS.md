@@ -21,3 +21,18 @@
 - Ревизор в PR: зелёный https://github.com/mpaykin1/meta6-lab/actions/runs/43024276845
 - Защищённый workflow: ожидает Claude https://github.com/mpaykin1/meta6-lab/actions/runs/43024276457
 - Единственный Issue: https://github.com/mpaykin1/meta6-lab/issues/253 (ботом ещё не обновлён).
+
+## Круг 2026-11-11 — truthful-cycle
+
+- Основа main при начале: `799205b7a3bad0dfc937cadf2bbb9e7ade321efd` — https://github.com/mpaykin1/meta6-lab/commit/799205b7a3bad0dfc937cadf2bbb9e7ade321efd
+- [x] Шаг 0 · 2026-11-11T13:54:16.807Z — прочитан PROGRESS и обязательные правила; исходник https://github.com/mpaykin1/meta6-lab/blob/main/.github/auditor/PROGRESS.md
+- [ ] Шаг 1 — ещё нет трёх schedule после merge; первый прогон уже в main: https://github.com/mpaykin1/meta6-lab/actions/runs/43031781751 (workflow_dispatch)
+- [x] Шаг 2 (дубликат) · 2026-11-11T13:54:16.807Z — Issue #250 закрыт как duplicate #253: https://github.com/mpaykin1/meta6-lab/issues/250 ; GraphQL-подтверждение pin #253 ещё требуется
+- [ ] Шаг 3 — обнаружено ложное доказательство плана от самого Issue #253; исправление workflow: https://github.com/mpaykin1/meta6-lab/commit/51a1c8b61ce9012bc044bb812d24b6f75071ad19
+- [ ] Шаг 4 — нарушения в #253 отсутствуют, но отрицательное утверждение ненадёжно до исправления самоцитирования
+- [ ] Шаг 5 (а) — добавить факт GraphQL-pin к отчёту Issue #253
+- [ ] Шаг 6 — урок и правило после CI
+- [ ] Шаг 7 — обновить строку в ZADACHI.md после PR
+
+### Урок
+Само Issue ревизора и устаревшие одноимённые Issue не должны служить источником доказательств планирования ни одной из пяти ролей. Не подтверждённые GraphQL-pin и schedule нельзя маркировать зелёными.

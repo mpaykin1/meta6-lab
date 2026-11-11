@@ -26,7 +26,7 @@
   color-scheme: dark;
 }
 [hidden] { display: none !important; }
-html, body { height: 100%; overflow: hidden; background: var(--ink); color: var(--paper); }
+html, body { position: fixed; inset: 0; width: 100%; height: 100%; height: 100dvh; overflow: hidden; overscroll-behavior: none; background: var(--ink); color: var(--paper); }
 body { margin: 0; font-family: var(--font-ui); -webkit-user-select: none; user-select: none;
   -webkit-tap-highlight-color: transparent; overscroll-behavior: none; }
 #c { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; background: var(--ink); }
@@ -3968,7 +3968,7 @@ addEventListener('keyup', (e) => {
   if (e.code === 'Space') onJumpRelease();
   if (isAtkKey(e.code)) setAttack('key', keys.has('KeyJ') || keys.has('KeyK'));
 });
-addEventListener('blur', () => { keys.clear(); onJumpRelease(); releaseAll(); mouseMask = 0; drag.active = false; });
+addEventListener('blur', () => { keys.clear(); onJumpRelease(); releaseAll(); releaseTouchPointers(); mouseMask = 0; drag.active = false; });
 
 function orbitBy(dx, dy, sens, now) {
   const yv = -dx * sens, pv = dy * sens * 0.7;
@@ -3988,6 +3988,8 @@ function mouseButtons(e) {
   mouseMask = m;
 }
 function cursorAim(e) { aim.cx = e.clientX; aim.cy = e.clientY; aim.cursorT = 3.5; }
+// Native browser pan, pinch and pull-to-refresh must never consume joystick gestures.
+canvas.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
 canvas.addEventListener('pointerdown', (e) => {
   if (G.state === 'title' && e.pointerType === 'touch') return;
   if (e.pointerType === 'touch' && G.state === 'play') {
@@ -3998,6 +4000,7 @@ canvas.addEventListener('pointerdown', (e) => {
     } else if (touch.camId === null) {
       touch.camId = e.pointerId; touch.cx = e.clientX; touch.cy = e.clientY; drag.t = e.timeStamp; drag.vy = drag.vp = 0;
     }
+    e.preventDefault();
     canvas.setPointerCapture(e.pointerId);
     return;
   }
@@ -4026,13 +4029,23 @@ canvas.addEventListener('pointermove', (e) => {
     } else cursorAim(e);
   }
 });
+function releaseTouchPointers() {
+  touch.stickId = touch.camId = null;
+  touch.vx = touch.vy = 0;
+  $('stick').classList.remove('on');
+  rig.spin = rig.pspin = 0;
+}
 function endPointer(e) {
   if (e.pointerId === touch.stickId) { touch.stickId = null; touch.vx = touch.vy = 0; $('stick').classList.remove('on'); }
-  else if (e.pointerId === touch.camId) { touch.camId = null; rig.spin = clamp(drag.vy, -3, 3); rig.pspin = clamp(drag.vp, -1.5, 1.5); }
+  else if (e.pointerId === touch.camId) { touch.camId = null; rig.spin = rig.pspin = 0; }
   else if (e.pointerType !== 'touch') mouseButtons(e.type === 'pointercancel' ? { buttons: 0, pointerId: e.pointerId } : e);
 }
 canvas.addEventListener('pointerup', endPointer);
 canvas.addEventListener('pointercancel', endPointer);
+canvas.addEventListener('lostpointercapture', endPointer);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { releaseTouchPointers(); keys.clear(); releaseAll(); }
+});
 canvas.addEventListener('wheel', (e) => {
   e.preventDefault();
   rig.distT = clamp(rig.distT * (1 + Math.sign(e.deltaY) * 0.09), 5.5, 20);
@@ -4085,6 +4098,9 @@ const player = {
   facing: 1, walk: 0, frame: 4, step: 0, sq: 0, sqV: 0, lean: 0, hp: HP_MAX, maxHp: HP_MAX, invuln: 0,
   safeT: 0, inWater: false, respawn: 0, splashT: 0,
   look: new THREE.Vector3(0, 0, -1),      // last walking direction (horizontal, unit): auto-aim prefers foes in front
+};
+const mobileCameraLock = {
+  active: false, pos: new THREE.Vector3(), look: new THREE.Vector3(),
 };
 const rig = {
   yaw: 0, pitch: 0.62, dist: 11, yawT: 0, pitchT: 0.62, distT: 11, spin: 0, pspin: 0, eff: 11,
@@ -4449,7 +4465,7 @@ function updateCamera(dt) {
     const qe = (keys.has('KeyC') ? 1 : 0) - (keys.has('KeyZ') ? 1 : 0);
     rig.yawT += qe * 1.8 * dt - pad.cx * 2.6 * dt;
     rig.pitchT = clamp(rig.pitchT + pad.cy * 1.4 * dt, 0.3, 1.15);
-    if (G.idle > 7) { const c = nearestGoal(); if (c) rig.yawT += angDiff(rig.yawT, Math.atan2(player.pos.x - c.x, player.pos.z - c.z)) * damp(0.25, dt); }
+    if (G.idle > 7 && !mobileCameraLock.active) { const c = nearestGoal(); if (c) rig.yawT += angDiff(rig.yawT, Math.atan2(player.pos.x - c.x, player.pos.z - c.z)) * damp(0.25, dt); }
   }
   if (!drag.active && touch.camId === null) {
     rig.yawT += rig.spin * dt; rig.spin *= Math.exp(-3.2 * dt);
@@ -4494,14 +4510,35 @@ function updateCamera(dt) {
   const e = rig.blend * rig.blend * (3 - 2 * rig.blend);
   rig.pos.lerp(tmpB, damp(lerp(0.9, kPos, e), dt));
   rig.look.lerp(tmpA, damp(lerp(1.1, kLook, e), dt));
+  // PERSON mode: the phone's frame stays anchored while the hero walks.
+  // Reframe only on entering the screen-edge sector, not on every joystick move.
+  if (IS_TOUCH && G.state === 'play' && G.play > 2.6 && touch.camId === null) {
+    if (!mobileCameraLock.active) {
+      mobileCameraLock.active = true;
+      mobileCameraLock.pos.copy(rig.pos);
+      mobileCameraLock.look.copy(rig.look);
+    }
+    tmpC.copy(player.vis);
+    tmpC.y += 0.95;
+    tmpC.project(camera);
+    if (Math.abs(tmpC.x) > 0.76 || Math.abs(tmpC.y) > 0.72 || tmpC.z > 1) {
+      tmpD.set(player.vis.x, player.vis.y + 0.95, player.vis.z).sub(mobileCameraLock.look);
+      mobileCameraLock.pos.add(tmpD);
+      mobileCameraLock.look.add(tmpD);
+    }
+    rig.pos.copy(mobileCameraLock.pos);
+    rig.look.copy(mobileCameraLock.look);
+  } else {
+    mobileCameraLock.active = false;
+  }
   if (G.danger > 0.55 && G.state === 'play') rig.trauma = Math.max(rig.trauma, (G.danger - 0.55) * 0.4);
   rig.trauma = Math.max(0, rig.trauma - dt * 1.5);
   const sh = (REDUCED ? 0.25 : 1) * rig.trauma * rig.trauma;
-  const dx = Math.sin(t * 0.53) * 0.06 + (Math.sin(t * 37.1) + Math.sin(t * 23.3)) * 0.12 * sh;
-  const dy = Math.sin(t * 0.71) * 0.05 + (Math.sin(t * 41.7) + Math.sin(t * 29.9)) * 0.1 * sh;
+  const dx = mobileCameraLock.active ? 0 : Math.sin(t * 0.53) * 0.06 + (Math.sin(t * 37.1) + Math.sin(t * 23.3)) * 0.12 * sh;
+  const dy = mobileCameraLock.active ? 0 : Math.sin(t * 0.71) * 0.05 + (Math.sin(t * 41.7) + Math.sin(t * 29.9)) * 0.1 * sh;
   camera.position.set(rig.pos.x + dx, rig.pos.y + dy, rig.pos.z);
   camera.lookAt(rig.look);
-  camera.rotateZ(Math.sin(t * 0.37) * 0.004 + Math.sin(t * 31.0) * 0.012 * sh);
+  if (!mobileCameraLock.active) camera.rotateZ(Math.sin(t * 0.37) * 0.004 + Math.sin(t * 31.0) * 0.012 * sh);
   camera.updateMatrixWorld();
   const m = camera.matrixWorld.elements;
   U.camRight.value.set(m[0], m[1], m[2]);
@@ -4657,6 +4694,7 @@ function startGame() {
   G.state = 'play';
   TREE.begin();
   rig.blend = 0;
+  mobileCameraLock.active = false;
   rig.yawT = rig.yaw = Math.atan2(world.spawn.x - world.beacon.x, world.spawn.z - world.beacon.z);
   rig.pitchT = rig.pitch = 0.62; rig.distT = rig.dist = rig.eff = 11; rig.spin = rig.pspin = 0;
   toast(`Собери ${G.total} монет и зажги маяк`, 3600, false, 2);

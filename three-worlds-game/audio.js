@@ -302,3 +302,6 @@
   }
   root.ObserverKriegerAudio=Object.freeze({create,THEMES,SOUND_GROUPS});
 })(window);
+
+/* META GAMES score: independent themed music without replacing existing sound effects. */
+(function(){var s=document.createElement('script');s.src='../shared/meta-games-music.js';s.dataset.game='three-worlds-game';document.head.appendChild(s);})();

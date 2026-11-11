@@ -218,4 +218,5 @@ if(memoryFacing && nextMemory && !won && !menu){
 }
 gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);gl.depthMask(false);gl.useProgram(particlesP);gl.uniformMatrix4fv(particleVPUniform,false,vp);gl.uniform1f(particleTimeUniform,t);gl.bindBuffer(gl.ARRAY_BUFFER,pvbo);gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,3,gl.FLOAT,false,12,0);gl.uniform3fv(particleWeatherUniform,sharedWeatherTint[raining?'rain':'sea_mist']);gl.drawArrays(gl.POINTS,0,140);gl.depthMask(true);gl.disable(gl.BLEND)}requestAnimationFrame(frame);
 })();
-</script><script src="./bot-adapter.js"></script></body></html>
+</script><script src="./bot-adapter.js"></script><script src="../../shared/meta-games-music.js" data-game="veil-terraces"></script>
+</body></html>

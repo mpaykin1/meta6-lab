@@ -33,6 +33,22 @@ const urlList = [...urls].sort();
 if (urlList.some(url => new URL(url).host !== host || !url.startsWith(base.href))) {
   throw Error('Unsafe IndexNow URL');
 }
+// Submit only pages that are truly online after the successful Pages deployment.
+const keyResponse = await fetch(keyLocation, { signal: AbortSignal.timeout(15000) });
+if (keyResponse.status !== 200 || (await keyResponse.text()).trim() !== key) {
+  throw new Error('IndexNow key URL is not publicly reachable or mismatches the key');
+}
+for (const url of urlList) {
+  const live = await fetch(url, { signal: AbortSignal.timeout(15000) });
+  if (live.status !== 200) throw new Error('IndexNow URL is not HTTP 200: ' + url);
+  const html = await live.text();
+  if (!html.includes('<link rel="canonical" href="' + url + '">') ||
+      !html.includes('application/ld+json')) {
+    throw new Error('Published HTML has no matching canonical or JSON-LD: ' + url);
+  }
+}
+console.log('Live canonical, schema, and IndexNow key confirmed for', urlList.length, 'URLs.');
+
 const payload = { host, key, keyLocation, urlList };
 const response = await fetch('https://api.indexnow.org/indexnow', {
   method: 'POST', headers: { 'content-type': 'application/json; charset=utf-8' },

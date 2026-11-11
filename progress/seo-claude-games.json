@@ -29,11 +29,13 @@
         "archer-in-the-fog"
       ],
       "pending_pages": 14,
-      "details": "3 уникальных текста по 150–300 слов, 3 FAQ и FAQPage-разметка для каждой; другие 14 страниц ждут."
+      "details": "3 уникальных текста по 150–300 слов, 3 FAQ и FAQPage-разметка для каждой; другие 14 страниц ждут.",
+      "seo_ci": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
+      "metadata": "23 страницы: title <= 60, description 120–160, Schema.org JSON-LD, alt"
     },
     "4_indexnow_and_sitemap": {
       "status": "in_progress",
-      "details": "Ключ, IndexNow workflow после успешного LAB Pages, отправка только изменённых URL и sitemap lastmod из git; 200/202 пока не получен, main не опубликован."
+      "details": "IndexNow: перед POST требует HTTP 200 ключа и каждой изменённой страницы, точный canonical и JSON-LD; реальное 200/202 ответа API ещё не получено."
     },
     "5_continuous_improvement": {
       "status": "pending"
@@ -52,5 +54,8 @@
     "Заменён preview canonical rewrite и включён robots=noindex для HTML-копий веток.",
     "Сайт должен быть доступен по постоянному /meta6-lab/claude-games/; IndexNow запускается только после успешного деплоя main."
   ],
-  "evidence": []
+  "evidence": [
+    "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
+    "https://github.com/mpaykin1/meta6-lab/commit/b3182119ff6dc16274afb8d47e7aa6a17f449f59"
+  ]
 }

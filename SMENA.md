@@ -115,3 +115,5 @@
 - Журнальный bridge: новые записи формата YYYY-*.md централизованно добавляются в общие файлы на main. Сторож ZADACHI и KONTUR остаются защищёнными и не менялись.
 
 - Защищённый workflow: запись `НУЖЕН CLAUDE` для PR #238 в действующем ZADACHI.md main — [bd9fe9a](https://github.com/mpaykin1/meta6-lab/commit/bd9fe9a2fa1dc72517a9601df59b3897238391d7). Пробный PR [#239](https://github.com/mpaykin1/meta6-lab/pull/239) не сливать вручную. CI-охранник запускает доверенный `main` [2387df7](https://github.com/mpaykin1/meta6-lab/commit/2387df7db6bcdecdfec69d696be1ee517ee0f52a), запись журнала охвачена [4dca53b](https://github.com/mpaykin1/meta6-lab/commit/4dca53b4eedfad1b183fe293d3fbcaca8f6e7fda).
+
+- CI-исправление PR #238: [красный run 42977588661](https://github.com/mpaykin1/meta6-lab/actions/runs/42977588661), отсутствующий в main `scripts/autofinish/mutate-report-guard.mjs`; [правка 2bd4bc8](https://github.com/mpaykin1/meta6-lab/commit/2bd4bc81729389af31e024a3effedfad8eeb215a). Новый workflow запускает код из immutable PR HEAD только с `contents: read` без сохранения учётных данных; до зелёного CI не сливать.

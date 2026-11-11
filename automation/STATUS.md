@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T15:13:14.170Z | МГЛ: 0dd948b303bc917bff53bf2625e67b9ac242c4ed | МГ: b1e4f1a0c0b6f454291c8872a3463470773479e9 | https://github.com/mpaykin1/meta6-lab/actions/runs/43044597258
+UTC: 2026-11-11T15:18:05.166Z | МГЛ: 3b108d274ac3d4352f0b3842f57b989368e18674 | МГ: b1e4f1a0c0b6f454291c8872a3463470773479e9 | https://github.com/mpaykin1/meta6-lab/actions/runs/43046820246
 ## ПРОВЕРИТЬ CLAUDE
 - PR #251 5016e0750ad94d53798200f6db159f9c37f55ab1: .github/workflows/auditor.yml, scripts/auditor/mutate-auditor.mjs
 - PR #238 9546bef2d74794f6ecc717a2f4095682fd2e137f: .github/workflows/journal-projections.yml, .github/workflows/pr-autofinish.yml, .github/workflows/report-completion-guard.yml, .github/workflows/storozha-branches.yml, .github/workflows/storozha-quota.yml, .git… (сокращено)
@@ -56,7 +56,7 @@ P1 — нет данных: нет данных
 #224 Merge continuity: persistent PR journal and live 83-PR queue | 1f086f4ed7b8d1f3d86d0a93192a033a5568ad74
 ещё 13: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1096 коммитов | нет данных
+МГЛ: 1098 коммитов | нет данных
 МГ: 3 коммитов | AGENTS.md:1, automation:1, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

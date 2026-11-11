@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "flora",
+  "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+  "definitions": [
+    {
+      "id": "pod-i-nad/registry/flora/round_tree",
+      "source": "defineFlora('round_tree', {\n  name: 'Лиственное дерево',\n  footprint: 2, minHeight: 5, choppable: true,\n  grow(ctx, x, z, h, opt) {\n    const { rand, inb } = ctx;\n    const trunk = ctx.block(opt.trunk || 'bark'), crown = ctx.block(opt.crown || 'leaves');\n    const th = rand() < 0.35 ? 4 : 3;\n    for (let y = h; y < h + th; y++) ctx.set(x, y, z, trunk);\n    ctx.soilUnder(x, z);\n    const cy = h + th;\n    const leaf = (X, Y, Z) => { if (inb(X, Z) && Y < H && ctx.get(X, Y, Z) === 0) ctx.set(X, Y, Z, crown); };\n    for (let b = -2; b <= 2; b++) for (let a = -2; a <= 2; a++) {\n      const corner = Math.abs(a) === 2 && Math.abs(b) === 2;\n      if (!corner) { leaf(x + a, cy - 1, z + b); leaf(x + a, cy, z + b); } else if (rand() < 0.3) leaf(x + a, cy, z + b);\n    }\n    for (let b = -1; b <= 1; b++) for (let a = -1; a <= 1; a++) if (Math.abs(a) + Math.abs(b) < 2 || rand() < 0.5) leaf(x + a, cy + 1, z + b);\n    return { th, crownY: cy - 1 };\n  },\n})",
+      "source_line_start": 1120,
+      "source_line_end": 1138
+    },
+    {
+      "id": "pod-i-nad/registry/flora/pine",
+      "source": "defineFlora('pine', {\n  name: 'Ель',\n  footprint: 1, minHeight: 5, choppable: true,\n  grow(ctx, x, z, h, opt) {\n    const { rand, inb } = ctx;\n    const trunk = ctx.block(opt.trunk || 'bark'), crown = ctx.block(opt.crown || 'pine_needles');\n    const th = rand() < 0.5 ? 2 : 3;\n    const tiers = rand() < 0.45 ? [2, 1, 2, 1, 1, 0, 0] : [2, 1, 1, 0, 0];    // radius per level above the trunk\n    for (let y = h; y < h + th + tiers.length - 2; y++) ctx.set(x, y, z, trunk);\n    ctx.soilUnder(x, z);\n    const leaf = (X, Y, Z) => { if (inb(X, Z) && Y < H && ctx.get(X, Y, Z) === 0) ctx.set(X, Y, Z, crown); };\n    tiers.forEach((r, i) => {\n      for (let b = -r; b <= r; b++) for (let a = -r; a <= r; a++) if (Math.abs(a) + Math.abs(b) <= r) leaf(x + a, h + th + i, z + b);\n    });\n    return { th, crownY: h + th };\n  },\n})",
+      "source_line_start": 1559,
+      "source_line_end": 1575
+    }
+  ]
+}

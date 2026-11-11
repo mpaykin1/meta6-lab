@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "npc",
+  "source_blob_sha": "a2c0b18293fd870b1437d9efeee9a207711c1897",
+  "definitions": [
+    {
+      "id": "pod-i-nad/registry/npc/keeper_ghost",
+      "source": "defineNPC('keeper_ghost', {\n  name: 'Призрак смотрителя', art: 'keeper_old', ghost: true, tint: '#8fefff', place: 'tower', radius: 3.8, voice: 'ghost_voice',\n  lines: [\n    'Сорок лет я держал здесь огонь. Теперь твой черёд, путник.',\n    (c) => (c.left > 0 ? `Маяк спит. Принеси ему ещё ${c.left} ${c.plural(c.left, 'монету', 'монеты', 'монет')}.` : null),\n    (c) => (c.all && !c.wardenDown ? 'Страж проснулся. Бей, когда он ныряет к земле, — тогда он открыт.' : null),\n    (c) => (c.wardenDown ? 'Страж пал. Встань в круг у двери — и маяк вспомнит свет.' : null),\n    (c) => (c.shrines > 0 ? 'Над алтарями с реликвиями стоит столб света. Его видно издалека.' : null),\n    (c) => (c.event === 'storm' ? 'Гроза… В такие ночи молнии сами находят тени.' : null),\n    'Тени боятся света. Держись огонька, когда стемнеет.',\n  ],\n})",
+      "source_line_start": 1162,
+      "source_line_end": 1173
+    },
+    {
+      "id": "pod-i-nad/registry/npc/fisher",
+      "source": "defineNPC('fisher', {\n  name: 'Рыбак', art: 'fisher', biomes: ['dusk'], radius: 3.2, voice: 'fisher_voice',\n  // on the first pier, two planks out from the shore\n  place: (w) => (w.piers.length ? { x: w.piers[0].lx + w.piers[0].dx * 2 + 0.5, z: w.piers[0].lz + w.piers[0].dz * 2 + 0.5 } : null),\n  lines: [\n    'Клюёт плохо. Тени всю рыбу распугали.',\n    (c) => (c.night ? 'Ночью вода чернеет — оттуда они и лезут.' : 'Как стемнеет, держись подальше от воды.'),\n    'Говорят, на островке за пирсом что-то блестит.',\n    (c) => (c.weapons === 0 ? 'С голыми руками далеко не уйдёшь. Оружие лежит прямо у берега.' : null),\n  ],\n})",
+      "source_line_start": 1174,
+      "source_line_end": 1184
+    }
+  ]
+}

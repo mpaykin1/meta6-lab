@@ -1,0 +1,1 @@
+{"private":true,"scripts":{"build":"node build-offline.cjs"},"devDependencies":{"esbuild":"0.25.12","three":"0.160.0"}}

@@ -71,6 +71,8 @@ main{position:relative;z-index:5;padding:42px 0 94px}
 .game-desc{max-width:410px;font-size:14px;color:#bdc9d5;margin:10px 0 22px}
 .game-foot{display:flex;align-items:center;justify-content:space-between;padding-top:13px;border-top:1px solid #8191a53b;color:#f4deb0;font-size:12px;text-transform:uppercase;letter-spacing:.17em;font-weight:800}
 .game-foot i{font-size:20px;font-style:normal}
+.game.world-visited{border-color:#86c9b880}
+.game.world-visited .game-foot span::after{content:' · Visited';color:#9fd8c8}
 .bottom{margin-top:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:23px 0;border-top:1px solid #6070883d;color:#96a7bd;font-size:13px}
 .bottom a{color:#d4c39b}
 @keyframes breath{50%{transform:translateX(-50%) scale(1.07);filter:brightness(1.15)}}
@@ -103,7 +105,7 @@ main{position:relative;z-index:5;padding:42px 0 94px}
 <div class="terrain"></div>
 </section>
 <main class="container" id="worlds">
- <div class="section-title"><div><div class="eyebrow">Independent browser play</div><h2>Choose a world</h2></div><p>Twelve self-hosted game entrypoints. No Playgama redirect.</p></div>
+ <div class="section-title"><div><div class="eyebrow">Independent browser play</div><h2>Choose a world</h2></div><p>Eleven self-hosted game entrypoints. No Playgama redirect.</p></div>
  <div class="games">
  <a class="game" href="../observer-world-en-v7/" aria-label="Play Twilight Island"><div class="art"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 01 · Fantasy / Creation</div><h3>Twilight Island</h3><p class="game-desc">A living island of construction, discovery and mysterious inhabitants.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
  <a class="game" href="../ashen-sumerek/" aria-label="Play Ashen Path"><div class="art ash"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 02 · Action / Survival</div><h3>Ashen Path</h3><p class="game-desc">Walk a broken world where danger waits beyond the glow.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
@@ -115,11 +117,41 @@ main{position:relative;z-index:5;padding:42px 0 94px}
  <a class="game" href="../games/twilight-isles/" aria-label="Play Twilight Isles"><div class="art underwater"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 08 · Adventure / Reference</div><h3>Twilight Isles</h3><p class="game-desc">Swim an endless archipelago, dodge the breaching whale and light every lighthouse on its own terms.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
  <a class="game" href="../games/archer-in-the-fog/" aria-label="Play Archer in the Fog"><div class="art veil"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 09 · Archery / Reference</div><h3>Archer in the Fog</h3><p class="game-desc">Hold a ruined tower above the clouds against a dragon that plunges and ambushes out of the blue fog.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
  <a class="game" href="../games/broken-city/" aria-label="Play Broken City"><div class="art worlds"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 10 · Platformer / Reference</div><h3>Broken City</h3><p class="game-desc">A folded comic-noir city hangs overhead: climb falling houses, stomp creepy toys and find out whose night this is.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
- <a class="game" href="../games/abyss-glow/" aria-label="Play ABYSS GLOW"><div class="art underwater"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 11 · Underwater / Visual Reference</div><h3>ABYSS GLOW</h3><p class="game-desc">Follow a glowing fish into living darkness: animated creatures, hand-painted atlases and cinematic light.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
- <a class="game" href="../games/asqura-office/" aria-label="Play ASQURA Office"><div class="art worlds"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 12 · Office Simulation / Visual Reference</div><h3>ASQURA Office</h3><p class="game-desc">A lively pixel-art office full of animated workers, stories, mini-tasks and isometric detail.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
+ <a class="game" href="../games/broken-city-copy/" aria-label="Play Broken City Copy"><div class="art worlds"><div class="orb"></div><div class="spire"></div><div class="spire"></div></div><div class="game-content"><div class="game-tag">Realm 11 · 3D / Reference</div><h3>Broken City Copy</h3><p class="game-desc">Explore a folded nocturnal city with procedural architecture, volumetric effects and a dedicated asset gallery.</p><div class="game-foot"><span>Enter game</span><i aria-hidden="true">↗</i></div></div></a>
  </div>
  <footer class="bottom"><span>© 2026 META GAMES · Independent browser worlds</span><span>All games launch under our GitHub Pages domain. <a href="https://github.com/mpaykin1/meta6">Source repository</a></span></footer>
 </main>
+<script>
+(() => {
+  'use strict';
+  const key = 'meta-games:worlds:v1';
+  const cards = [...document.querySelectorAll('a.game')];
+  const safeRead = () => {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || '[]');
+      return Array.isArray(value) ? value.filter(item => typeof item === 'string') : [];
+    } catch (error) {
+      console.warn('Visited worlds unavailable', error);
+      return [];
+    }
+  };
+  const visited = new Set(safeRead());
+  for (const card of cards) {
+    const href = card.getAttribute('href');
+    const world = new URL(href, document.baseURI).pathname.split('/').filter(Boolean).join('/');
+    if (visited.has(world)) card.classList.add('world-visited');
+    card.addEventListener('click', () => {
+      visited.add(world);
+      card.classList.add('world-visited');
+      try {
+        localStorage.setItem(key, JSON.stringify([...visited]));
+      } catch (error) {
+        console.warn('Cannot save visited world', error);
+      }
+    });
+  }
+})();
+</script>
 <script>
 (()=>{
 'use strict';

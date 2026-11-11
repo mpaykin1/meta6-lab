@@ -201,19 +201,5 @@
     "guide": "observer-world-en-v7/CLAUDE.md",
     "successRecord": "docs/SUCCESS_OBSERVER_WORLD_V7_MOBILE_2026-10-16.md",
     "verifiedRun": "https://github.com/mpaykin1/meta6/actions/runs/38896347402"
-  },
-  "ownerApprovedReferences": [
-    {
-      "id": "sumerki-i-pepel-ii-copy-2026-11-08",
-      "title": "Сумерки и пепел II (Copy)",
-      "repository": "mpaykin1/meta6-lab",
-      "path": "reference/sumerki-i-pepel-ii-copy-20261108/index.html",
-      "metadata": "reference/sumerki-i-pepel-ii-copy-20261108/source.json",
-      "game": "https://mpaykin1.github.io/meta6-lab/reference/sumerki-i-pepel-ii-copy-20261108/",
-      "sha256": "94e3eb8bd2a4a38cb220a73de937f9098ba4b8117a24fccb2e62accf41a28fc0",
-      "gitBlobSha": "156a0939d22aa51957249b113a25705451bd0910",
-      "ownerExplicitApproval": "2026-11-08",
-      "preservedOriginal": true
-    }
-  ]
+  }
 }

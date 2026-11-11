@@ -10,6 +10,7 @@
 | #261 | lab/biblioteka-contract-20261111 | scripts/library/verify-library.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #262 | lab/archer-retention-exp-1 | .github/workflows/archer-visual-proof.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #265 | lab/asset-check-bot | .github/workflows/asset-check.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
+| #266 | claude/ink-link200-1111 | .github/workflows/lab-pages.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/link-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

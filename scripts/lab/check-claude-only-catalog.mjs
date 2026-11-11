@@ -51,6 +51,14 @@ if (!existsSync("games/veil-terraces/index.html") ||
   fail("Forbidden game route must be a non-playable catalogue redirect");
 }
 if (DENIED.test(catalogue)) fail("Veil Terraces must not appear in catalogue HTML");
+const storefront = readFileSync("meta-games/index.html", "utf8");
+if (DENIED.test(storefront)) fail("Veil Terraces must not appear on the main storefront");
+for (const match of storefront.matchAll(/<a class="game" href="([^"]+)"/g)) {
+  if (!BASELINE_PATHS.includes(match[1]) && !added.some(game => game.href === match[1])) {
+    fail("Unapproved main storefront game route: " + match[1]);
+  }
+}
+
 const cards = [...catalogue.matchAll(/<article\s+class="game-card"\b[^>]*>[\s\S]*?<\/article>/g)];
 if (cards.length !== allowed.size) fail("Catalogue count differs from Claude-only allowlist");
 const seen = new Set();

@@ -1,12 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T11:49:44.674Z | МГЛ: 57ecf3466a604379a48c494dcd1cd9ecbc74cd3c | МГ: b1e4f1a0c0b6f454291c8872a3463470773479e9 | https://github.com/mpaykin1/meta6-lab/actions/runs/43015101220
+UTC: 2026-11-11T11:50:54.461Z | МГЛ: 65df4fab52c9688d0e6c3806a968351e240c2652 | МГ: b1e4f1a0c0b6f454291c8872a3463470773479e9 | https://github.com/mpaykin1/meta6-lab/actions/runs/43015258721
 ## ПРОВЕРИТЬ CLAUDE
 - PR #238 9546bef2d74794f6ecc717a2f4095682fd2e137f: .github/workflows/journal-projections.yml, .github/workflows/pr-autofinish.yml, .github/workflows/report-completion-guard.yml, .github/workflows/storozha-branches.yml, .github/workflows/storozha-quota.yml, .git… (сокращено)
 - PR #231 8790e6339ccf62af9584a4353749c864d4cf7785: scripts/dispetcher/mutate-mergeable-null.mjs
 - PR #236 afc35df467af8e6f60fb8a5c9c11f62aef5dfa05: scripts/meta-bot/core.mjs, scripts/meta-bot/selftest.mjs
 - PR #230 eabab1dc976ca4332c3c66cfd9b8bd56f4471b88: .github/workflows/dispetcher.yml
 - ещё 5: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/43013084426 | Run node scripts/dispetcher/run.mjs
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
@@ -48,14 +47,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 42 | конфликт: нет данных | слито: 16 | закрыто: 44
+открыто: 42 | конфликт: 21 | слито: 16 | закрыто: 44
 #244 Living Watercolor: публичная демосцена дерева, вулкана и фаб | 7a548632aae8be6b541cc52fec2e0bba3d14059a
 #238 META GAMES: guarded PR autofinish, conflict-free journals, s | 9546bef2d74794f6ecc717a2f4095682fd2e137f
 #224 Merge continuity: persistent PR journal and live 83-PR queue | 1f086f4ed7b8d1f3d86d0a93192a033a5568ad74
 #125 Lore: alternative Last Seed mythology and inspiration bank | 9f50910368238775bda40729722ec3512f14e623
 ещё 12: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 953 коммитов | нет данных
+МГЛ: 955 коммитов | нет данных
 МГ: 3 коммитов | AGENTS.md:1, automation:1, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

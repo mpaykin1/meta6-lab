@@ -68,3 +68,8 @@
 - PR [#126](https://github.com/mpaykin1/meta6-lab/pull/126), исходная ветка `lab/sketch-to-game-standard`, HEAD `2151d7ad654ac992c63f382cf74f653ed7387182`, база main `db713cf4629c0694e4cd3e565bef5fc94ad022a8`.
 - Один новый документ `automation/prompts/SKETCH_TO_GAME_STANDARD_RU.md` отсутствует в main, Git blob `93a8682d5cdac625c990c667bf02f987a288f57d`; сохраняю исходные байты. Цель — двухродительский merge, не переписывание ветки, без изменения других файлов.
 - Дальше: актуальный PR HEAD/CI после merge; без всех зелёных не сливать.
+
+### Результат #126 — синхронизированный оригинал
+- [Двухродительский merge 3405980](https://github.com/mpaykin1/meta6-lab/commit/340598077b3ad39a4e29e65af498cc0368bef44f): `main@db713cf` + `lab/sketch-to-game-standard@2151d7a` → новый HEAD `340598077b3ad39a4e29e65af498cc0368bef44f`. Синхронизация без force и без замены чужих правок; compare: 0 behind, один новый документ; его Git blob `93a8682d5cdac625c990c667bf02f987a288f57d` сохранён.
+- [PR #126](https://github.com/mpaykin1/meta6-lab/pull/126) описан, CI на текущем SHA в очереди: [KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42964148498), [B1](https://github.com/mpaykin1/meta6-lab/actions/runs/42964148481). Дальше — проверить реальные исходы всех обязательных проверок, затем независимая проверка и только разрешённое слияние.
+- За запуск обработаны три карточки: #225, #231, #126. Следующий запуск снова читает актуальный DISPETCHER.md и продолжает с первого свободного пункта, не дублируя готовое.

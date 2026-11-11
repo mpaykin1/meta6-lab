@@ -62,3 +62,9 @@
 - Исправление [b2cf736](https://github.com/mpaykin1/meta6-lab/commit/b2cf73615ad390d587ac961f8661aa0e312f1254): прежняя красная проверка более не доказывает отсутствие конфликта; [ловушка и тесты](https://github.com/mpaykin1/meta6-lab/commit/290eecbf1cd3a398e755300cf8077b0e89c1afd0), 5 мутаций.
 - [MG Dispatcher 42963587611](https://github.com/mpaykin1/meta6-lab/actions/runs/42963587611): 13/13 тестов PASS, но runtime завершился HTTP 403 на запросе `/pulls/87`. Красный прогон не является доказательством дефекта исправления; полный CI не зелёный.
 - Дальше: выяснить 403 (лимит или права), повторить полный CI на актуальном HEAD, затем независимое ревью и разрешённое слияние. [PR #231](https://github.com/mpaykin1/meta6-lab/pull/231) обновлён.
+
+## Захват 11.11.2026 — безопасная синхронизация #126
+- Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ; UTC 2026-11-11T05:11:20.571Z.
+- PR [#126](https://github.com/mpaykin1/meta6-lab/pull/126), исходная ветка `lab/sketch-to-game-standard`, HEAD `2151d7ad654ac992c63f382cf74f653ed7387182`, база main `db713cf4629c0694e4cd3e565bef5fc94ad022a8`.
+- Один новый документ `automation/prompts/SKETCH_TO_GAME_STANDARD_RU.md` отсутствует в main, Git blob `93a8682d5cdac625c990c667bf02f987a288f57d`; сохраняю исходные байты. Цель — двухродительский merge, не переписывание ветки, без изменения других файлов.
+- Дальше: актуальный PR HEAD/CI после merge; без всех зелёных не сливать.

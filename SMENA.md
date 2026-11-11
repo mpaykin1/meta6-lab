@@ -91,3 +91,10 @@
 ### PR #87 — merge main в ветку
 - Двухродительский коммит [2a1d22c](https://github.com/mpaykin1/meta6-lab/commit/2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d), родители: PR `faf69f129ae3510a81e59a48328534fed8a5f944` и main `eaaef9d0b4dfe702d21870e5db755b80ec049816`; сохранено дерево main с единственным отличием `meta-games/index.html` (blob `9b857feaf02c1361f1d94126af52fbfbc48944c3`). `update_ref` без force: success. Редактирования `scripts/meta-bot/` нет.
 - Следующий шаг: получить все workflow/checks по новому SHA, проверить реальные выводы и независимое ревью; до полного зелёного CI PR #87 не сливать.
+
+
+### Продолжение 2026-11-11T06:55:55.015Z — восстановление ветки
+- Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ.
+- Сверено: [PR #229](https://github.com/mpaykin1/meta6-lab/pull/229) слит `40dfc505c5427f8d0b17b679d2f5df74352bc7c1`; [PR #231](https://github.com/mpaykin1/meta6-lab/pull/231) слит `8790e6339ccf62af9584a4353749c864d4cf7785`. Не повторять инструкцию и mergeable=null.
+- Ветка `lab/chat-rabota` fast-forward без force от `7aa74d3dcfd5b2c30ad59c8c8a82f71d0ff1801b` к `2c8f27fb187dc13f47e3ffbd56d0f54b86482d1c`.
+- Сейчас делаю: проверить актуальные свободные карточки `DISPETCHER.md`; захватить не более двух и продолжить с сохранением прогресса.

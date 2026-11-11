@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 15 · конфликт 5 · красные проверки 4 · нужен Claude 21
+Итог: зависло 11 · конфликт 4 · красные проверки 7 · нужен Claude 21
 
 ### PR #203
 - PR: https://github.com/mpaykin1/meta6-lab/pull/203
@@ -8,7 +8,7 @@
 - SHA: `edf413f27244552cd36889fa1b555a9a062a9b56` · последний коммит: 2026-11-09T19:38:00Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: НУЖЕН CLAUDE (защищённые workflows; см. комментарий PR #203)
+- Взял: —
 
 ### PR #205
 - PR: https://github.com/mpaykin1/meta6-lab/pull/205
@@ -16,15 +16,7 @@
 - SHA: `16715714f06e0071871dc6df59560b2ba312867c` · последний коммит: 2026-11-09T17:01:32Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: НУЖЕН CLAUDE (PR #205 меняет защищённый .github/workflows/owner-pult.yml; самостоятельное слияние запрещено)
-
-### PR #218
-- PR: https://github.com/mpaykin1/meta6-lab/pull/218
-- Ветка: `lab/remont-r1-library`
-- SHA: `bd5d65f72c4964383256e605f01242a35c6ec69f` · последний коммит: 2026-11-10T06:22:46Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: НУЖЕН CLAUDE (PR #218 меняет защищённый .github/workflows/library-machine.yml; ветка отстаёт от main на 623 коммита)
+- Взял: —
 
 ### PR #221
 - PR: https://github.com/mpaykin1/meta6-lab/pull/221
@@ -32,22 +24,22 @@
 - SHA: `757890f0aa4809e92d3466c55a1db98269f133e6` · последний коммит: 2026-11-10T08:48:21Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: НУЖЕН CLAUDE (PR #221 меняет защищённые .github/workflows/zadachi-watch.yml и scripts/zadachi/; самостоятельное слияние запрещено)
+- Взял: —
 
 ### PR #225
 - PR: https://github.com/mpaykin1/meta6-lab/pull/225
 - Ветка: `lab/render-broken-city-safe-1110`
-- SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
+- SHA: `95f37363c687799823ebc33bbe162f77d086d088` · последний коммит: 2026-11-11T05:01:36Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: НУЖЕН CLAUDE (PR #225 меняет защищённый .github/workflows/lab-broken-city-performance.yml; самостоятельное слияние запрещено)
+- Взял: —
 
-### PR #87
-- PR: https://github.com/mpaykin1/meta6-lab/pull/87
-- Ветка: `lab/platform-play-connect-earn-20261107`
-- SHA: `d66f304967540ca9b9c144140ea51c971b3e2365` · последний коммит: 2026-11-10T22:15:48Z
-- Проблема: Красная проверка: bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169)
-- Задание: Исправь bot по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169 и повтори CI.
+### PR #126
+- PR: https://github.com/mpaykin1/meta6-lab/pull/126
+- Ветка: `lab/sketch-to-game-standard`
+- SHA: `340598077b3ad39a4e29e65af498cc0368bef44f` · последний коммит: 2026-11-11T05:11:44Z
+- Проблема: Красная проверка: kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42964157683/job/130337368512)
+- Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42964157683/job/130337368512 и повтори CI.
 - Взял: —
 
 ### PR #132
@@ -66,12 +58,36 @@
 - Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42800339516/job/129775902899 и повтори CI.
 - Взял: чат ChatGPT — Рабочий чат МГ/МГЛ 2026-11-10T10:24:35Z
 
+### PR #231
+- PR: https://github.com/mpaykin1/meta6-lab/pull/231
+- Ветка: `lab/dispetcher-mergeable-null-1110`
+- SHA: `014f04e612d8a904358baf52d9b4eb670a96f965` · последний коммит: 2026-11-11T05:06:49Z
+- Проблема: Красная проверка: dispatch (https://github.com/mpaykin1/meta6-lab/actions/runs/42963587611/job/130335559207), kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42963581508/job/130335539387)
+- Задание: Исправь dispatch по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42963587611/job/130335559207 и повтори CI.
+- Взял: —
+
 ### PR #235
 - PR: https://github.com/mpaykin1/meta6-lab/pull/235
 - Ветка: `lab/fix-mobile-screen-all-games-1111`
-- SHA: `b05f1213f2766c3abc9c3f7caafd999a4d454442` · последний коммит: 2026-11-11T04:54:13Z
-- Проблема: Красная проверка: kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/42962295367/job/130331478072), watch (https://github.com/mpaykin1/meta6-lab/actions/runs/42962295203/job/130331422558)
-- Задание: Исправь kontur-guard по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42962295367/job/130331478072 и повтори CI.
+- SHA: `5d3fd0654e9554a8015f63c6f62000458779ff9c` · последний коммит: 2026-11-11T05:08:32Z
+- Проблема: Красная проверка: kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42963773199/job/130336147701)
+- Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42963773199/job/130336147701 и повтори CI.
+- Взял: —
+
+### PR #236
+- PR: https://github.com/mpaykin1/meta6-lab/pull/236
+- Ветка: `lab/claude-bot-overshoot-1111`
+- SHA: `693f7064126642edb9138b7eb06a38eff15e2c52` · последний коммит: 2026-11-11T05:29:51Z
+- Проблема: Красная проверка: kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42966134251/job/130343701445)
+- Задание: Исправь kick-main по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42966134251/job/130343701445 и повтори CI.
+- Взял: —
+
+### PR #87
+- PR: https://github.com/mpaykin1/meta6-lab/pull/87
+- Ветка: `lab/platform-play-connect-earn-20261107`
+- SHA: `d66f304967540ca9b9c144140ea51c971b3e2365` · последний коммит: 2026-11-10T22:15:48Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
 
 ### PR #222
@@ -98,14 +114,6 @@
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
 
-### PR #231
-- PR: https://github.com/mpaykin1/meta6-lab/pull/231
-- Ветка: `lab/dispetcher-mergeable-null-1110`
-- SHA: `710b10da752cd9de09b35a50468c7ac0544ff78c` · последний коммит: 2026-11-10T10:07:11Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
 ### PR #232
 - PR: https://github.com/mpaykin1/meta6-lab/pull/232
 - Ветка: `lab/creator-features-copy-1110`
@@ -118,14 +126,6 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/233
 - Ветка: `lab/import-five-cc0-packs`
 - SHA: `0ae6fcc6008e59f9304e65f1f8f5ee67ecac3827` · последний коммит: 2026-11-10T10:38:05Z
-- Проблема: 🛑 ЗАВИС
-- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: —
-
-### PR #234
-- PR: https://github.com/mpaykin1/meta6-lab/pull/234
-- Ветка: `lab/claude-adfree-catalog-1110`
-- SHA: `9de4e2aa3023fd7d17cbf03d7d207eb4e689f96b` · последний коммит: 2026-11-11T04:56:37Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
@@ -154,17 +154,8 @@
 - Задание: Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.
 - Взял: —
 
-### PR #126
-- PR: https://github.com/mpaykin1/meta6-lab/pull/126
-- Ветка: `lab/sketch-to-game-standard`
-- SHA: `2151d7ad654ac992c63f382cf74f653ed7387182` · последний коммит: 2026-11-08T09:45:45Z
-- Проблема: 💤 ЗАБРОШЕНО более 2 суток
-- Задание: Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.
-- Взял: —
-
 ## НУЖЕН CLAUDE
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
-- [#229](https://github.com/mpaykin1/meta6-lab/pull/229) Рабочий чат МГ/МГЛ
 - [#191](https://github.com/mpaykin1/meta6-lab/pull/191) Эталон «Затонувший город»: исходный ZIP, 3D-витрина и каталог ассетов
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния
 - [#209](https://github.com/mpaykin1/meta6-lab/pull/209) Библиотека игр: эталоны, системы, ассеты и MCP
@@ -177,6 +168,7 @@
 - [#210](https://github.com/mpaykin1/meta6-lab/pull/210) SKIN FACTORY: ножницы и ловушки для parts-sheet
 - [#220](https://github.com/mpaykin1/meta6-lab/pull/220) Сторож таблицы: конфликты, красные проверки и МГ
 - [#3](https://github.com/mpaykin1/meta6-lab/pull/3) Разблокировать проверки PR #3 Twilight Island
+- [#218](https://github.com/mpaykin1/meta6-lab/pull/218) РЕМОНТ R1: пересборка библиотеки и исключение копий
 - [#208](https://github.com/mpaykin1/meta6-lab/pull/208) Restore original Ashen Path asset pack reference after sync
 - [#204](https://github.com/mpaykin1/meta6-lab/pull/204) B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер
 - [#192](https://github.com/mpaykin1/meta6-lab/pull/192) M6

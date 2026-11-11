@@ -37,3 +37,16 @@ for ref in $(git for-each-ref --format='%(refname:strip=3)' 'refs/remotes/origin
   echo "$safe" >> "$OUT/.lab-previews"
 done
 du -sh "$OUT"
+
+# Published registry = owner-provided URLs plus every real index.html in the assembled site.
+# Unlike an index of Git sources, this includes previews copied from lab/* branches.
+{
+  if [[ -f LINKS.txt ]]; then
+    grep -E '^https://mpaykin1[.]github[.]io/meta6-lab/' LINKS.txt || true
+  fi
+  while IFS= read -r -d '' page; do
+    relative="${page#"$OUT"/}"
+    printf 'https://mpaykin1.github.io/meta6-lab/%s\n' "${relative%index.html}"
+  done < <(find "$OUT" -type f -name index.html -print0)
+} | LC_ALL=C sort -u > "$OUT/LINKS.txt"
+echo "Generated $(wc -l < "$OUT/LINKS.txt") public URL candidates"

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task": "SEO: 17 игр META GAMES без рекламы",
+  "repository": "mpaykin1/meta6-lab",
+  "work_branch": "lab/claude-adfree-catalog-1110",
+  "last_processed_head": "c428658122f53e6f8c2a6e593619feab5edd22df",
+  "steps": {
+    "1_restore_protected_and_owner_originals": {
+      "status": "done",
+      "details": "Восстановлены 3 исходных файла точными Git blob SHA из main, проверка CI ещё требуется.",
+      "files": [
+        "observer-world-en-v7/index.html",
+        "rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
+        "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+      ]
+    },
+    "1_fix_bot_and_other_ci": {
+      "status": "pending"
+    },
+    "2_canonical_and_publish": {
+      "status": "pending"
+    },
+    "3_content_and_validator": {
+      "status": "pending"
+    },
+    "4_indexnow_and_sitemap": {
+      "status": "pending"
+    },
+    "5_continuous_improvement": {
+      "status": "pending"
+    }
+  },
+  "next_ideas": [
+    "Уникальные описания 150–300 слов для каждого игрового URL",
+    "Проверка title/description/JSON-LD и внутренних ссылок в CI",
+    "Копии webp из собственных игровых кадров",
+    "IndexNow после деплоя без секретов"
+  ],
+  "notes": [
+    "Не менять защищённые файлы, эталоны, бота и охранников в обход правил",
+    "Без зелёного CI не сливать PR",
+    "Только подтверждённые live URL"
+  ],
+  "evidence": []
+}

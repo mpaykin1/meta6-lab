@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-const source = await readFile(new URL('./preflight.mjs', import.meta.url), 'utf8');
+const source = await readFile(new URL('./claim.mjs', import.meta.url), 'utf8');
 const old = '2026-11-11T10:00:00Z';
 const nowMs = Date.parse('2026-11-11T14:30:00Z');
 const pr = files => ({ number: 210, url: 'https://github.com/mpaykin1/meta6-lab/pull/210',

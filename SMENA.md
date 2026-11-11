@@ -146,3 +146,6 @@
 ### Продолжение #241 2026-11-11T11:25Z
 - Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ; коммиты [8d0296c](https://github.com/mpaykin1/meta6-lab/commit/8d0296cda802613bab6e3a61d51efe6a2db9a391), [31bf6dd](https://github.com/mpaykin1/meta6-lab/commit/31bf6dd3de97877609822555309266f66dac834c), merge [6eb127a](https://github.com/mpaykin1/meta6-lab/commit/6eb127a275c9f3bcc97ca9d18f66f9903f42cd61).
 - Две новые защиты и мутации, ошибки #38–39. Новый CI https://github.com/mpaykin1/meta6-lab/actions/runs/43011648218 / https://github.com/mpaykin1/meta6-lab/actions/runs/43011648077 ещё выполняется. Осталось: проверить все обязательные workflow актуального HEAD и независимое ревью, затем разрешённое слияние.
+
+### Состояние PR #241 2026-11-11T11:31Z
+- SHA [077142ee](https://github.com/mpaykin1/meta6-lab/commit/077142ee8278fd8bb153cf8a026a9c7626860912) после 2 отдельных подтверждённых CI-дефектов: [index job](https://github.com/mpaykin1/meta6-lab/actions/runs/43011648218/job/130492473827), [STOROZHA job](https://github.com/mpaykin1/meta6-lab/actions/runs/43011648388/job/130492561123). Исправлены мутации, восстановлен защищённый verifier; новые shared-original, STOROZHA reference и META GAMES guard — success. Остались незавершённые KONTUR, B1 и browser, новое изменение main с момента merge, независимый reviewer. Не сливать раньше.

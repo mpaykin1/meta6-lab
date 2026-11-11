@@ -14,7 +14,7 @@
 | `games/sumerki-i-pepel-2/` | нет | НЕ ПРОВЕРЕНО: нет конфигурации/ручки META BOT | — | — |
 | `games/twilight-isle-classic/` | нет | НЕ ПРОВЕРЕНО: нет конфигурации/ручки META BOT | — | — |
 | `games/twilight-isles/` | нет | НЕ ПРОВЕРЕНО: нет конфигурации/ручки META BOT | — | — |
-| `games/veil-terraces/` | да | FAIL: mobile уровень 5 пропущен; 2-й запуск mobile уровень 3 — застревание 20 с | — | [42982185772](https://github.com/mpaykin1/meta6-lab/actions/runs/42982185772) |
+| `games/veil-terraces/` | да | FAIL на main [42982185772](https://github.com/mpaykin1/meta6-lab/actions/runs/42982185772); **PR #245 LAB focused BOT PASS 6/6 mobile, 6/6 desktop, 6/6 второй mobile**; общий META BOT PR в работе, после слияния main не проверен. KONTUR PASS; STOROZHA FAIL повторно: GitHub API rate limit HTTP 403, две попытки | [#245](https://github.com/mpaykin1/meta6-lab/pull/245), [Claude blocker](https://github.com/mpaykin1/meta6-lab/blob/main/DLYA_CLAUDE.md) | [focused PASS 43012984307](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984307), [META BOT PR 43012984334](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984334), [KONTUR PASS 43012983970](https://github.com/mpaykin1/meta6-lab/actions/runs/43012983970), [STOROZHA rerun 43012984349](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984349) |
 | `observer-world-en-v7/` (витрина: Twilight Island) | нет — вне `games/` | НЕ ПРОВЕРЕНО: `run.mjs` обходит только `games/` | — | — |
 | `ashen-sumerek/` (витрина: Ashen Path) | нет — вне `games/` | НЕ ПРОВЕРЕНО: `run.mjs` обходит только `games/` | — | — |
 | `underwater-world/` (витрина: Underwater World) | нет — вне `games/` | НЕ ПРОВЕРЕНО: `run.mjs` обходит только `games/` | — | — |

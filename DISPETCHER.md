@@ -16,7 +16,7 @@
 - SHA: `16715714f06e0071871dc6df59560b2ba312867c` · последний коммит: 2026-11-09T17:01:32Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: —
+- Взял: НУЖЕН CLAUDE — конфликт защищённого workflow; https://github.com/mpaykin1/meta6-lab/pull/205
 
 ### PR #221
 - PR: https://github.com/mpaykin1/meta6-lab/pull/221
@@ -24,7 +24,7 @@
 - SHA: `757890f0aa4809e92d3466c55a1db98269f133e6` · последний коммит: 2026-11-10T08:48:21Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: —
+- Взял: НУЖЕН CLAUDE — PR меняет защищённые .github/workflows/zadachi-watch.yml и scripts/zadachi/; https://github.com/mpaykin1/meta6-lab/pull/221
 
 ### PR #225
 - PR: https://github.com/mpaykin1/meta6-lab/pull/225

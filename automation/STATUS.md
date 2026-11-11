@@ -1,12 +1,12 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T05:50:22.485Z | МГЛ: a6415b669a66d274fcb57699d5508116645fdd8a | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42968303810
+UTC: 2026-11-11T06:15:47.019Z | МГЛ: 08c78cfebffce96440de9355c8adf763bf5e4da9 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42971143173
 ## ПРОВЕРИТЬ CLAUDE
+- PR #231 8790e6339ccf62af9584a4353749c864d4cf7785: scripts/dispetcher/mutate-mergeable-null.mjs
 - PR #236 afc35df467af8e6f60fb8a5c9c11f62aef5dfa05: scripts/meta-bot/core.mjs, scripts/meta-bot/selftest.mjs
 - PR #230 eabab1dc976ca4332c3c66cfd9b8bd56f4471b88: .github/workflows/dispetcher.yml
 - PR #227 2a4558a4b3993d6d0583c004155508d084eb6496: .github/workflows/dispetcher.yml
-- PR #216 06a8b61ec198ba43bb93a69efb2aeca7246383ee: .github/workflows/status-dlya-claude.yml, scripts/status/selftest.mjs
-- ещё 3: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: Investigation snapshot | https://github.com/mpaykin1/meta6-lab/actions/runs/42967901650 | Refresh investigation snapshot from GitHub
+- ещё 4: https://github.com/mpaykin1/meta6-lab/pulls
+- МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/42968126105 | Play all games
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
@@ -48,14 +48,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 40 | конфликт: нет данных | слито: 9 | закрыто: 41
+открыто: 37 | конфликт: нет данных | слито: 12 | закрыто: 41
+#232 META GAMES: возможности платформы для начинающих разработчик | d7c3dac578c1b841fe7d259c944b7d7aec18cf98
+#231 fix(dispatcher): reliable conflict state when mergeable is n | 8790e6339ccf62af9584a4353749c864d4cf7785
+#126 Эталон: универсальный промпт Sketch → HTML Game → ZIP | 7f5616591ca5baa37186d86621299d32c77230b1
 #236 meta-bot: шаг ходьбы не перелетает цель | afc35df467af8e6f60fb8a5c9c11f62aef5dfa05
-#229 Рабочий чат МГ/МГЛ: цикл и передача смены | 40dfc505c5427f8d0b17b679d2f5df74352bc7c1
-#230 Dispatcher: retry queue push when main moves | eabab1dc976ca4332c3c66cfd9b8bd56f4471b88
-#227 MG Dispatcher: automated PR triage queue | 2a4558a4b3993d6d0583c004155508d084eb6496
-ещё 5: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 8: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 718 коммитов | .github:6, .lab-sync-base:1, AGENTS.md:1, automation:9, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:13, shared:2, SMENA.md:1, ZADACHI.md:1
+МГЛ: 742 коммитов | .github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:4, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1
 МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
@@ -68,10 +68,10 @@ sumerki-i-pepel-2 — не запускалась | витрина: да
 sumerki-i-pepel-2-copy — не запускалась | витрина: нет
 twilight-isle-classic — не запускалась | витрина: да
 twilight-isles — не запускалась | витрина: да
-veil-terraces — прошла | витрина: да
+veil-terraces — не прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
-| 18 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
-| 17 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)
+| 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
+| 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)
 | 24 | 10.11.2026 | Сводка без progress.json или при ошибке GitHub API могла бы выдавать непроверенные пункты как «готово» и прятать красные прогоны; старые варианты #211/#212 не защищали эту сводку полным набором мутаций | Изолированные ответы: отсутствующий … (сокращено)
 | 25 | 10.11.2026 | Сводка игнорировала новую запись OSHIBKI с уже использованным номером (в main номер 18 повторён) | Сравнение только по номеру ошибочно скрывало новую строку | `scripts/status/selftest.mjs`: `duplicate-error-number-hidden` |
-ещё 6: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

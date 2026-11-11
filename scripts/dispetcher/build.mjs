@@ -21,13 +21,31 @@ export function available(taken,latest,now=Date.now()){
 export function render(cards,claude=[],previous='',now=Date.now()){
  const old=new Map([...previous.matchAll(/### PR #(\d+)[\s\S]*?Взял:\s*([^\n]+)/g)].map(m=>[Number(m[1]),m[2].trim()]));
  const ordered=cards.filter(c=>!c.claude).sort((a,b)=>a.priority-b.priority||Number(b.finish)-Number(a.finish)||a.id-b.id);
- const counts={stalled:cards.filter(c=>c.stalled).length,conflicts:cards.filter(c=>c.conflict).length,red:cards.filter(c=>c.red).length,claude:claude.length};
- let s='# ДИСПЕТЧЕР МГ/МГЛ\n\nИтог: зависло '+counts.stalled+' · конфликт '+counts.conflicts+' · красные проверки '+counts.red+' · нужен Claude '+counts.claude+'\n\n';
+ const counts={stalled:cards.filter(c=>c.stalled).length,conflicts:cards.filter(c=>c.conflict).length,unknown:cards.filter(c=>c.conflictUnknown).length,red:cards.filter(c=>c.red).length,claude:claude.length};
+ let s='# ДИСПЕТЧЕР МГ/МГЛ\n\nИтог: зависло '+counts.stalled+' · конфликт '+counts.conflicts+' · непроверено '+counts.unknown+' · красные проверки '+counts.red+' · нужен Claude '+counts.claude+'\n\n';
  for(const c of ordered){const claimed=old.get(c.id)||'—';const claim=claimed!=='—'&&!available('Взял: '+claimed,c.lastCommit,now)?claimed:'—';
  s+='### PR #'+c.id+'\n- PR: https://github.com/'+repo+'/pull/'+c.id+'\n- Ветка: `'+c.branch+'`\n- SHA: `'+c.headSha+'` · последний коммит: '+c.lastCommit+'\n- Проблема: '+c.problem+'\n- Задание: '+c.action+'\n- Взял: '+claim+'\n\n';
  }
  s+='## НУЖЕН CLAUDE\n'+(claude.map(c=>'- [#'+c.id+'](https://github.com/'+repo+'/pull/'+c.id+') '+c.title).join('\n')||'—')+'\n';
  return s;
+}
+export function previousConflict(previous,id){
+ const marker='### PR #'+id+'\n';
+ const start=previous.indexOf(marker);
+ if(start<0)return null;
+ const block=previous.slice(start+marker.length).split(/\n(?:### PR #|## НУЖЕН CLAUDE)/)[0];
+ const problem=block.match(/^- Проблема:\s*([^\n]+)/m);
+ return problem&&problem[1].includes('Конфликт с main')?true:null;
+}
+export async function resolveConflict(pr,reload,prior,sleep=ms=>new Promise(done=>setTimeout(done,ms))){
+ let current=pr, retries=0;
+ while(current.mergeable===null && retries<3){
+  await sleep(5000);
+  current=await reload();
+  retries++;
+ }
+ if(current.mergeable===null)return {pr:current,conflict:prior,unresolved:true,retries};
+ return {pr:current,conflict:current.mergeable===false||current.mergeable_state==='dirty',unresolved:false,retries};
 }
 export function assertNotEmpty(tasksMarkdown,cards){
  if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
@@ -41,23 +59,25 @@ export async function main(){
  for(const t of tasks){
  let pr;try{pr=await api('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
  if(pr.state!=='open')continue;
+ const resolution=await resolveConflict(pr,()=>api('/pulls/'+t.id),previousConflict(previous,t.id));
+ pr=resolution.pr;
  const checks=await api('/commits/'+pr.head.sha+'/check-runs?per_page=100');
  const statuses=await api('/commits/'+pr.head.sha+'/status');
  const failed=checks.check_runs.filter(x=>['failure','timed_out','action_required'].includes(x.conclusion)).map(x=>({name:x.name,url:x.html_url}));
  failed.push(...statuses.statuses.filter(x=>['failure','error'].includes(x.state)).map(x=>({name:x.context,url:x.target_url})));
- const conflict=pr.mergeable===false||pr.mergeable_state==='dirty';
+ const conflict=resolution.conflict===true,conflictUnknown=resolution.conflict===null;
  const commit=await api('/commits/'+pr.head.sha);
  const lastCommit=commit.commit.committer.date;
  const stale=Date.now()-Date.parse(lastCommit)>172800000;
  const stalled=/ЗАВИС/.test(t.status),isClaude=/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(pr.body||'');
  const label=t.title+' '+(pr.title||'');
  const isFinish=finishIds.some(id=>new RegExp('(^|[^A-Z0-9])'+id+'([^A-Z0-9]|$)','i').test(label));
- const c={...t,branch:pr.head.ref,headSha:pr.head.sha,conflict,red:failed.length>0,stalled,finish:isFinish,lastCommit};
+ const c={...t,branch:pr.head.ref,headSha:pr.head.sha,conflict,conflictUnknown,red:failed.length>0,stalled,finish:isFinish,lastCommit};
  if(isClaude){claude.push(c);continue}
- if(!conflict&&!failed.length&&!stalled&&!stale)continue;
- c.priority=conflict?0:failed.length?1:stalled?2:3;
- c.problem=conflict?'Конфликт с main':failed.length?'Красная проверка: '+failed.map(x=>x.name+' ('+x.url+')').join(', '):stalled?'🛑 ЗАВИС':'💤 ЗАБРОШЕНО более 2 суток';
- c.action=conflict?'Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.':failed.length?'Исправь '+failed[0].name+' по логу '+failed[0].url+' и повтори CI.':stalled?'Продолжи работу по PR, проверь CI и доведи до слияния.':c.finish?'Доведи пункт FINISH.md до зелёных проверок.':'Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.';
+ if(!conflict&&!conflictUnknown&&!failed.length&&!stalled&&!stale)continue;
+ c.priority=(conflict||conflictUnknown)?0:failed.length?1:stalled?2:3;
+ c.problem=conflict?(resolution.unresolved?'Конфликт с main (прошлый статус, mergeable=null)':'Конфликт с main'):conflictUnknown?'Статус конфликта неизвестен: mergeable=null после 3 повторов':failed.length?'Красная проверка: '+failed.map(x=>x.name+' ('+x.url+')').join(', '):stalled?'🛑 ЗАВИС':'💤 ЗАБРОШЕНО более 2 суток';
+ c.action=conflict?'Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.':conflictUnknown?'Проверь конфликт вручную: GitHub не ответил после 3 повторов; не считай PR бесконфликтным.':failed.length?'Исправь '+failed[0].name+' по логу '+failed[0].url+' и повтори CI.':stalled?'Продолжи работу по PR, проверь CI и доведи до слияния.':c.finish?'Доведи пункт FINISH.md до зелёных проверок.':'Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.';
  cards.push(c);
  }
  const output=render(cards,claude,previous);

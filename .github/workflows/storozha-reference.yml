@@ -1,7 +1,7 @@
 name: STOROZHA protected originals and new reference exception
 # A pull_request paths filter is prohibited here: every PR must be checked.
 on:
-  pull_request_target:
+  pull_request:
     branches: [main]
     types: [opened, synchronize, reopened, edited, ready_for_review]
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
   storozha-reference:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    if: github.event_name == 'pull_request_target'
+    if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v4
         with:

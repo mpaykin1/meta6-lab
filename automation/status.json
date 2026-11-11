@@ -1,16 +1,24 @@
 {
-  "generated_at": "2026-11-11T16:14:01.090Z",
+  "generated_at": "2026-11-11T16:15:15.333Z",
   "sha": {
-    "lab": "83a5166f1def55dbe25b6ec234080a7b9b5f19ff",
+    "lab": "f0a6d79bdda5416da56a145901e0216808cba97e",
     "mg": "573ec644a032aa3cbf999193c09fa2176ce69a7a"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43056159001",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43056378720",
   "review": {
     "protected": [
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
@@ -282,11 +290,16 @@
     ]
   },
   "pr": {
-    "open": 56,
+    "open": 55,
     "conflicts": "нет данных",
-    "merged": 17,
+    "merged": 18,
     "closed": 45,
     "mergedItems": [
+      {
+        "number": 265,
+        "title": "ASSET CHECK: бот-проверщик ассет-паков + многоразовый промпт",
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e"
+      },
       {
         "number": 251,
         "title": "feat(auditor): бесплатная почасовая ревизия пяти задач META ",
@@ -374,6 +387,14 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
@@ -468,7 +489,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1115,
+      "count": 1117,
       "folders": "нет данных"
     },
     "mg": {

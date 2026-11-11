@@ -68,13 +68,13 @@ _FPS, экономия, ежедневное развитие, качество 
 - [evolve.md](rules/05-proizvoditelnost-i-razvitie/evolve.md) — EVOLVE — полный контракт саморазвития
 - [model-quality.md](rules/05-proizvoditelnost-i-razvitie/model-quality.md) — качество лабораторных моделей
 
-**META GAMES — разрешённые исходники:** для новых игр код и ассеты пяти исходных эталонов (Twilight Island, Ashen Path, Underwater World, Three Worlds, Veil Terraces) **плюс код и ассеты всех подтверждённых игр Claude (уже загруженных и будущих)**, которые автоматически становятся эталонами. Чужие компоненты требуют проверки прав. Обязательно: [META_GAMES_SOURCE_ALLOWLIST.md](rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md). Правило имеет приоритет над общим REUSE в рамках META GAMES.
+**META GAMES — разрешённые исходники:** для новых игр код и ассеты только подтверждённых эталонов Claude (Twilight Island, Ashen Path, Underwater World, Three Worlds и другие документально подтверждённые игры Claude). **Veil Terraces исключена решением владельца 11.11.2026, не публиковать и не использовать как донор.**, которые автоматически становятся эталонами. Чужие компоненты требуют проверки прав. Обязательно: [META_GAMES_SOURCE_ALLOWLIST.md](rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md). Правило имеет приоритет над общим REUSE в рамках META GAMES.
 
 ## 06. Как ИИ работает с кодом — [rules/06-rabota-ii-s-kodom/](rules/06-rabota-ii-s-kodom/)
 
 _переиспользовать готовое, брать источник владельца, ничего не терять, не менять лишнего_
 
-- [META_GAMES_SOURCE_ALLOWLIST.md](rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md) — пять эталонов и будущие ассеты Claude для META GAMES
+- [META_GAMES_SOURCE_ALLOWLIST.md](rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md) — только подтверждённые эталоны Claude; Veil Terraces исключена
 - [REUSE.md](rules/06-rabota-ii-s-kodom/REUSE.md) — сначала найти готовый код в своих играх, потом писать новый
 - [ISTOCHNIK_OT_VLADELTSA.md](rules/06-rabota-ii-s-kodom/ISTOCHNIK_OT_VLADELTSA.md) — ссылка от владельца — единственный источник
 - [PERENOS_MIROV.md](rules/06-rabota-ii-s-kodom/PERENOS_MIROV.md) — переносить всё целиком, ничего не пересоздавать

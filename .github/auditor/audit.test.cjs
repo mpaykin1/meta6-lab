@@ -45,3 +45,10 @@ test('execution stays unverified if multiple workers touched same branch', () =>
   assert.equal(a.recentOwnWork(target,[target,other],now-10000,pr),false);
   assert.equal(a.recentOwnWork(target,[target],now-10000,pr),true);
 });
+
+test('source task table must not use rate-limited GitHub contents API', () => {
+  const fs = require('node:fs');
+  const source = fs.readFileSync('.github/auditor/audit.cjs', 'utf8');
+  assert.match(source, /fs\.readFileSync\(config\.sources\.task_table/);
+  assert.doesNotMatch(source, /github\.rest\.repos\.getContent/);
+});

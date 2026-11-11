@@ -1,16 +1,24 @@
 {
-  "generated_at": "2026-11-11T11:30:19.882Z",
+  "generated_at": "2026-11-11T16:12:12.572Z",
   "sha": {
-    "lab": "c2da40f157247f5e88fc9623af7c82bbfe13b1c3",
-    "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
+    "lab": "69aff98b1a046a4bf54a1de601a3b709291b4469",
+    "mg": "f4f3727938be7171c593617bfc178598d6fb310c"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43012410572",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43055871609",
   "review": {
     "protected": [
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
       {
         "number": 238,
         "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
@@ -96,8 +104,13 @@
     ],
     "redLab": [
       {
+        "workflow": "B1 — all games open without console errors",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43049325310",
+        "step": "Install Chromium for actual game rendering"
+      },
+      {
         "workflow": "Investigation snapshot",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43011418971",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43043564015",
         "step": "Refresh investigation snapshot from GitHub"
       }
     ],
@@ -109,7 +122,7 @@
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
       "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | open | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
-      "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
+      "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open dirty | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
       "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
       "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open dirty | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
@@ -119,7 +132,8 @@
       "| B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |",
       "| B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |",
       "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |",
-      "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |"
+      "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |",
+      "| B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | проходчик ⚠ нет коммитов 100 мин | 2026-11-11 14:14 UTC |"
     ]
   },
   "finish": {
@@ -268,11 +282,16 @@
     ]
   },
   "pr": {
-    "open": 39,
+    "open": 56,
     "conflicts": "нет данных",
-    "merged": 16,
-    "closed": 44,
+    "merged": 17,
+    "closed": 45,
     "mergedItems": [
+      {
+        "number": 251,
+        "title": "feat(auditor): бесплатная почасовая ревизия пяти задач META ",
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1"
+      },
       {
         "number": 244,
         "title": "Living Watercolor: публичная демосцена дерева, вулкана и фаб",
@@ -355,6 +374,14 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
       {
         "number": 238,
         "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
@@ -441,11 +468,11 @@
   },
   "changes": {
     "lab": {
-      "count": 912,
+      "count": 1110,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 3,
+      "count": 4,
       "folders": "AGENTS.md:1, automation:1, rules:2"
     }
   },
@@ -520,6 +547,7 @@
     "| 34 | 10.11.2026 | MG Dispatcher принимал GitHub `mergeable=null` за отсутствие конфликта после сдвига main, из-за чего очередь показывала неверный ноль конфликтов | [MG Dispatcher 42791769677](https://github.com/mpaykin1/meta6-lab/actions/runs/42791769677) и анализ `scripts/dispetcher/build.mjs` | `scripts/dispetcher/mutate-mergeable-null.mjs`: 5 мутаций — отсутствие повторов, потеря прежнего конфликта, выдача неизвестного статуса за чистый PR и обман с жёстко заданным `false`, ошибочное признание красного CI доказательством отсутствия конфликта; `scripts/dispetcher/test/mergeable-null.test.mjs` |",
     "| 35 | 11.11.2026 | PR #238: компилятор журнала ветвился по `process.argv` и блокировался KONTUR Guard | [красный прогон 42999367374](https://github.com/mpaykin1/meta6-lab/actions/runs/42999367374) | `scripts/journal/mutate-journal.mjs`: argv-deception, validation-publishes, writer-dry-run, missing-source |",
     "| 36 | 11.11.2026 | Сторож эталонов пропускал изменения тестов внутри папок `tests/` и файлов `*.spec.ts`: проверял только некоторые имена тестовых файлов | Сверка `referenceGate` с запретом менять существующие тесты | `scripts/storozha/mutate-storozha.mjs`: bypass nested test directory, bypass TypeScript spec file; `scripts/storozha/verify-storozha.mjs` |",
-    "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |"
+    "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |",
+    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |"
   ]
 }

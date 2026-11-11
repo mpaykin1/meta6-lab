@@ -16,3 +16,7 @@
 
 СЕЙЧАС ДЕЛАЮ: #229 и #231 ожидают независимую перекрёстную проверку и слияние при зелёном CI нового HEAD; #191 ожидает честный META BOT PASS на ПК и телефоне; #208 НУЖЕН CLAUDE — неизменяемый исходный HTML имеет запрещённый LEGACY_LIGHTS.
 Сделано / дальше: [две карточки захвачены](https://github.com/mpaykin1/meta6-lab/commit/7ecb6ebb13090462ddf7d2fc223246c3d5a12904); [PR #191](https://github.com/mpaykin1/meta6-lab/pull/191), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208), [PR #229](https://github.com/mpaykin1/meta6-lab/pull/229), [PR #231](https://github.com/mpaykin1/meta6-lab/pull/231). Не объявлять неслитое слитым.
+
+## Автодоводчик 11.11.2026
+- Шаг 1: предложен безопасный workflow `MG PR autofinish` в ветке `lab/pr-autofinish-1111`. Защищённые файлы не сливаются автоматически; новый workflow требует решения Claude перед слиянием.
+- Далее: бесконфликтные журналы; приоритет зависших; охранник отчёта; пробный PR.

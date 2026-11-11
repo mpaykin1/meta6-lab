@@ -21,12 +21,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: main
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: git fetch --no-tags origin main:refs/remotes/origin/main
+      - name: Fetch untrusted PR diff as data (never execute PR code)
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          git fetch --no-tags origin "refs/pull/${PR_NUMBER}/head:refs/remotes/origin/pr-report-audit"
+          test "$(git rev-parse refs/remotes/origin/pr-report-audit)" = "$PR_HEAD"
       - run: node scripts/autofinish/mutate-report-guard.mjs
-      - run: node scripts/autofinish/report-guard.mjs
+      - name: Validate new report lines using trusted main guard
+        env:
+          REPORT_GUARD_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: node scripts/autofinish/report-guard.mjs

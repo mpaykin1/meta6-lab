@@ -28,6 +28,12 @@ try {
    root.remove(counterfeit);
    counterfeit.geometry.dispose();counterfeit.material.dispose();
    if(!blockedFlat)throw Error('PlaneGeometry mutation survived');
+   const sprite=new THREE.Sprite(new THREE.SpriteMaterial());
+   sprite.name='sprite-counterfeit';root.add(sprite);
+   let blockedSprite=false;
+   try{check(THREE,root);}catch(e){blockedSprite=String(e).includes('sprite-counterfeit');}
+   root.remove(sprite);sprite.material.dispose();
+   if(!blockedSprite)throw Error('Sprite mutation survived');
    // Deliberately sever an arm: the contact guard must reject it.
    const arm=root.getObjectByName('hanging-arm-block');
    if(!arm)throw Error('Arm missing');
@@ -39,7 +45,7 @@ try {
    if(!blockedDetached)throw Error('Disconnected arm mutation survived');
    check(THREE,root);
    return {meshes:baseline.meshes,contacts:baseline.contacts,
-     flatMutationRejected:blockedFlat,detachmentRejected:blockedDetached};
+     flatMutationRejected:blockedFlat,spriteMutationRejected:blockedSprite,detachmentRejected:blockedDetached};
  });
  if(errors.length)throw Error('Page errors: '+errors.join(' | '));
  console.log('RUSTY_ROBOT_SOLID_3D PASS '+JSON.stringify(result));

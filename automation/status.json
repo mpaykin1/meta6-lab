@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T11:28:16.882Z",
+  "generated_at": "2026-11-11T11:28:48.988Z",
   "sha": {
-    "lab": "7b584eddbc0256e25e22f2edfff2de3984f8ee6d",
+    "lab": "e66908da86a27943223431c196c8bd3f076f075e",
     "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43012226096",
   "review": {
     "protected": [
       {
@@ -95,11 +95,6 @@
       }
     ],
     "redLab": [
-      {
-        "workflow": "ZADACHI watch",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43011419195",
-        "step": "Update ZADACHI.md from GitHub"
-      },
       {
         "workflow": "Investigation snapshot",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43011418971",
@@ -446,7 +441,7 @@
   },
   "changes": {
     "lab": {
-      "count": 906,
+      "count": 908,
       "folders": "нет данных"
     },
     "mg": {
@@ -457,57 +452,57 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "нет данных",
+      "bot": "не прошла",
       "storefront": "да"
     }
   ],

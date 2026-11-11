@@ -7,7 +7,7 @@
 - **Статус ставит сторож, а не ChatGPT** (GitHub Actions `ZADACHI watch`, каждые 30 минут, без ИИ): 🔨 В РАБОТЕ — коммит был меньше часа назад; ⚠ молчит — больше часа; 🛑 ЗАВИС — больше 3 часов, **надо толкнуть**; 💤 ЗАБРОШЕНО — больше 2 суток; ✅ ГОТОВО — PR слит; ✖ ЗАКРЫТО — PR закрыт без слияния; 🙋 НУЖЕН CLAUDE.
 - Задачу, которую ChatGPT не записал, сторож добавляет сам из открытых PR.
 
-Сторож проверил: 2026-11-11 05:30 UTC
+Сторож проверил: 2026-11-11 05:36 UTC
 
 <!-- ZADACHI:START -->
 **Итог:** 🛑 зависло 78 · ⚠ молчит 1 · 🔨 в работе 3 · 🙋 нужен Claude 16 · 💤 заброшено 47 · ✅ готово 5
@@ -62,13 +62,13 @@
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Разбор открытых PR: проверки, дубли и безопасное слияние | МГЛ | чат ChatGPT | — | — | 2026-11-10 06:43 | — |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Broken City: чистый PR оптимизации вместо #60 | МГЛ | чат ChatGPT | `lab/render-broken-city-safe-1110` | [#225](https://github.com/mpaykin1/meta6-lab/pull/225) | 2026-11-10 06:26 | 2026-11-10 06:41 |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | SKIN FACTORY: ножницы и ловушки для parts-sheet | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/skin-factory` | [#210](https://github.com/mpaykin1/meta6-lab/pull/210) | 2026-11-09 19:48 | 2026-11-10 06:36 |
-| 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Сторож таблицы: конфликты, красные проверки и МГ | МГЛ | чат ChatGPT | `lab/zadachi-conflicts` | [#220](https://github.com/mpaykin1/meta6-lab/pull/220) | 2026-11-10 05:36 | 2026-11-10 06:26 |
+| 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | Сторож таблицы: конфликты, красные проверки и МГ | МГЛ | чат ChatGPT | `lab/zadachi-conflicts` | [#220](https://github.com/mpaykin1/meta6-lab/pull/220) | 2026-11-10 05:36 | 2026-11-10 06:26 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Разблокировать проверки PR #3 Twilight Island | МГЛ | MG-строитель-2 | `lab/twilight-island-bot` | [#3](https://github.com/mpaykin1/meta6-lab/pull/3) | 2026-11-10 13:20 | 2026-11-10 06:25 |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | РЕМОНТ R1: пересборка библиотеки и исключение копий | МГЛ | чат ChatGPT | `lab/remont-r1-library` | [#218](https://github.com/mpaykin1/meta6-lab/pull/218) | 2026-11-10 05:03 | 2026-11-10 06:22 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | PR #54, #59, #60: конфликты, производительность, CI и слияние | МГЛ | чат ChatGPT | `lab/pr54-59-60-finish` | [#54](https://github.com/mpaykin1/meta6-lab/pull/54), [#59](https://github.com/mpaykin1/meta6-lab/pull/59), [#60](https://github.com/mpaykin1/meta6-lab/pull/60) | 2026-11-10 06:02 | 2026-11-10 06:21 |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | Бот «СВОДКА ДЛЯ CLAUDE» | МГЛ | чат ChatGPT | `lab/status-dlya-claude` | [#216](https://github.com/mpaykin1/meta6-lab/pull/216) | 2026-11-10 04:44 | 2026-11-10 06:20 |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | L1: Library Machine — индекс нового эталона skin-trainer | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/library-machine-sync` | [#213](https://github.com/mpaykin1/meta6-lab/pull/213) | 2026-11-10 04:23 | 2026-11-10 05:50 |
-| 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Разобрать устаревший красный PR #137 | МГЛ | MG-строитель-3 | `lab/demonic-hand-webgl2-reference` | [#137](https://github.com/mpaykin1/meta6-lab/pull/137) | 2026-11-10 05:32 | — |
+| 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | Разобрать устаревший красный PR #137 | МГЛ | MG-строитель-3 | `lab/demonic-hand-webgl2-reference` | [#137](https://github.com/mpaykin1/meta6-lab/pull/137) | 2026-11-10 05:32 | — |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | Сократить контекст Claude: STATUS, короткие Actions, PROMPT_BASE, ловушки | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/claude-context-compact-v2` | [#212](https://github.com/mpaykin1/meta6-lab/pull/212) | 2026-11-10 04:14 | 2026-11-10 04:50 |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | Q1: restore library live index, exclude copy games | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/q1-library-quality-20261110` | [#214](https://github.com/mpaykin1/meta6-lab/pull/214) | 2026-11-10 04:37 | 2026-11-10 04:49 |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | Закрыть устаревший красный PR #1 Twilight Island | МГЛ | MG-ремонтник | `lab/twilight-island-pass` | [#1](https://github.com/mpaykin1/meta6-lab/pull/1) | 2026-11-10 04:47 | — |

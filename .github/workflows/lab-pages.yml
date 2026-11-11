@@ -20,6 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - uses: actions/checkout@v4
+      - name: Verify HTTP 200 checker and mutation traps
+        run: bash scripts/lab/mutate-link-ok.sh
       - name: Rebuild the site from main (includes this branch preview)
         env:
           GH_TOKEN: ${{ github.token }}
@@ -40,6 +43,8 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+      - name: Verify HTTP 200 checker and mutation traps
+        run: bash scripts/lab/mutate-link-ok.sh
       - name: Build sandbox site (main + all lab/** previews)
         run: bash scripts/lab/build-site.sh _site
       - uses: actions/configure-pages@v5
@@ -50,21 +55,23 @@ jobs:
           path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
-      - name: Collect public URLs from changed index pages, demos and LINKS
-        id: urls
+      - name: Collect public URLs from built pages and LINKS
         shell: bash
         run: |
           set -euo pipefail
           base='https://mpaykin1.github.io/meta6-lab'
           {
-            cat LINKS.txt
-            find _site/demos -name index.html -type f 2>/dev/null | sed -e 's#^_site/#/#' -e "s#^#$base#" || true
+            cat _site/LINKS.txt
             if [ "${{ github.event_name }}" = push ]; then
-              git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" -- '*/index.html' 2>/dev/null | while read -r f; do
+              git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" \
+                -- '*/index.html' 2>/dev/null | while read -r f; do
                 [[ -f "_site/$f" ]] && echo "$base/${f%index.html}"
               done
             fi
-          } | grep '^https://' | sort -u > /tmp/lab-links.txt
+          } | grep -E '^https://mpaykin1[.]github[.]io/meta6-lab/' |
+            LC_ALL=C sort -u > /tmp/lab-links.txt
+          test -s /tmp/lab-links.txt
+          echo "CHECKING $(wc -l < /tmp/lab-links.txt) URLS"
       - name: Check published public URLs
         run: |
           mapfile -t urls < /tmp/lab-links.txt

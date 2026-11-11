@@ -73,14 +73,7 @@ header{gap:18px;flex-wrap:wrap}
 .art:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#090b189e,transparent 56%);pointer-events:none}
 .art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s}
 .game-card:hover .art img{transform:scale(1.07)}
-.art-fallback{position:absolute;inset:0;overflow:hidden;display:block;background:linear-gradient(165deg,#544165 0%,#1e233d 45%,#080d1c 100%)}
-.art-fallback .moon{position:absolute;top:11%;left:55%;width:32%;aspect-ratio:1;border-radius:50%;background:#d7b9ad;box-shadow:0 0 45px #dec3a577,0 0 115px #bfa2aa55}
-.art-fallback .hill{position:absolute;bottom:-30%;left:-15%;width:140%;height:66%;background:#11192c;transform:rotate(-12deg);border-radius:50%}
-.art-fallback .hill.h2{left:28%;bottom:-38%;background:#080d1b;transform:rotate(16deg)}
-.art-fallback .tower{position:absolute;left:27%;bottom:24%;height:40%;width:8%;background:#131727;clip-path:polygon(30% 0%,70% 0%,70% 15%,100% 15%,100% 100%,0 100%,0 15%,30% 15%);box-shadow:0 0 30px #01050c}
-.game-card:nth-child(3n) .art-fallback{filter:hue-rotate(32deg)}
-.game-card:nth-child(4n) .art-fallback{filter:hue-rotate(135deg)}
-.cover-number{position:absolute;z-index:2;top:13px;left:16px;color:#ffebd9bb;letter-spacing:.1em;font-size:12px;font-weight:800}
+.game-card:nth-child(3n) .game-card:nth-child(4n) .cover-number{position:absolute;z-index:2;top:13px;left:16px;color:#ffebd9bb;letter-spacing:.1em;font-size:12px;font-weight:800}
 .game-actions{display:flex;align-items:center;gap:12px;justify-content:space-between}
 .game-actions .play-link{flex:1;text-align:center}
 .favorite{width:42px;height:42px;border:1px solid #8b79955e;border-radius:8px;background:#21192c;color:#eadce9;font-size:26px;cursor:pointer}
@@ -123,23 +116,23 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
  <div class="game-info"><p class="tag">Realm 01 · Fantasy / Creation</p><h3>Twilight Island</h3><p class="desc">A living island of construction, discovery and mysterious inhabitants.</p>
  <div class="game-actions"><a class="play-link" href="../observer-world-en-v7/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Twilight Island в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
 <article class="game-card" data-kind="action" data-title="ashen path" data-index="1">
- <a class="art" href="../ashen-sumerek/" aria-label="Играть в Ashen Path" title="Ashen Path"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">02</span></a>
+ <a class="art" href="../ashen-sumerek/" aria-label="Играть в Ashen Path" title="Ashen Path"><img src="covers/ashen-path.svg" alt="Ashen Path — уникальная заставка, соответствующая графике игры" width="640" height="400" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">02</span></a>
  <div class="game-info"><p class="tag">Realm 02 · Action / Survival</p><h3>Ashen Path</h3><p class="desc">Walk a broken world where danger waits beyond the glow.</p>
  <div class="game-actions"><a class="play-link" href="../ashen-sumerek/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Ashen Path в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
 <article class="game-card" data-kind="mystery" data-title="underwater world" data-index="2">
- <a class="art" href="../underwater-world/" aria-label="Играть в Underwater World" title="Underwater World"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">03</span></a>
+ <a class="art" href="../underwater-world/" aria-label="Играть в Underwater World" title="Underwater World"><img src="../three-worlds-game/evidence/stage7-depth.png" alt="Underwater World — уникальная заставка, соответствующая графике игры" width="640" height="400" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">03</span></a>
  <div class="game-info"><p class="tag">Realm 03 · Underwater / Mystery</p><h3>Underwater World</h3><p class="desc">Descend past the light into a strange and restless deep.</p>
  <div class="game-actions"><a class="play-link" href="../underwater-world/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Underwater World в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
 <article class="game-card" data-kind="adventure" data-title="three worlds" data-index="3">
- <a class="art" href="../three-worlds-game/" aria-label="Играть в Three Worlds" title="Three Worlds"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">04</span></a>
+ <a class="art" href="../three-worlds-game/" aria-label="Играть в Three Worlds" title="Three Worlds"><img src="../three-worlds-game/evidence/stage7-rift-guest.png" alt="Three Worlds — уникальная заставка, соответствующая графике игры" width="640" height="400" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">04</span></a>
  <div class="game-info"><p class="tag">Realm 04 · Connected / Adventure</p><h3>Three Worlds</h3><p class="desc">Cross the boundaries between different lives and landscapes.</p>
  <div class="game-actions"><a class="play-link" href="../three-worlds-game/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Three Worlds в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
 <article class="game-card" data-kind="adventure" data-title="veil terraces" data-index="4">
- <a class="art" href="../games/veil-terraces/" aria-label="Играть в Veil Terraces" title="Veil Terraces"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">05</span></a>
+ <a class="art" href="../games/veil-terraces/" aria-label="Играть в Veil Terraces" title="Veil Terraces"><img src="covers/veil-terraces.svg" alt="Veil Terraces — уникальная заставка, соответствующая графике игры" width="640" height="400" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">05</span></a>
  <div class="game-info"><p class="tag">Realm 05 · Exploration / Mystery</p><h3>Veil Terraces</h3><p class="desc">Explore endless mist-veiled terraces, cross ancient ruins and reclaim six lost memories.</p>
  <div class="game-actions"><a class="play-link" href="../games/veil-terraces/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Veil Terraces в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
 <article class="game-card" data-kind="adventure" data-title="twilight and ash ii" data-index="5">
- <a class="art" href="../games/sumerki-i-pepel-2/" aria-label="Играть в Twilight and Ash II" title="Twilight and Ash II"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">06</span></a>
+ <a class="art" href="../games/sumerki-i-pepel-2/" aria-label="Играть в Twilight and Ash II" title="Twilight and Ash II"><img src="covers/twilight-ash-ii.svg" alt="Twilight and Ash II — уникальная заставка, соответствующая графике игры" width="640" height="400" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">06</span></a>
  <div class="game-info"><p class="tag">Realm 06 · Story / Survival</p><h3>Twilight and Ash II</h3><p class="desc">Save the magic tree on a lifeless island: find the seed, water it, defend it until it turns the world over.</p>
  <div class="game-actions"><a class="play-link" href="../games/sumerki-i-pepel-2/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Twilight and Ash II в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
 <article class="game-card" data-kind="action" data-title="twilight isle classic" data-index="6">
@@ -147,7 +140,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
  <div class="game-info"><p class="tag">Realm 07 · Action / Reference</p><h3>Twilight Isle Classic</h3><p class="desc">The original voxel island at dusk: collect the coins, arm yourself and light the lighthouse before night wins.</p>
  <div class="game-actions"><a class="play-link" href="../games/twilight-isle-classic/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Twilight Isle Classic в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
 <article class="game-card" data-kind="adventure" data-title="twilight isles" data-index="7">
- <a class="art" href="../games/twilight-isles/" aria-label="Играть в Twilight Isles" title="Twilight Isles"><span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">08</span></a>
+ <a class="art" href="../games/twilight-isles/" aria-label="Играть в Twilight Isles" title="Twilight Isles"><img src="covers/twilight-isles.svg" alt="Twilight Isles — уникальная заставка, соответствующая графике игры" width="640" height="400" loading="lazy" decoding="async"><span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">08</span></a>
  <div class="game-info"><p class="tag">Realm 08 · Adventure / Reference</p><h3>Twilight Isles</h3><p class="desc">Swim an endless archipelago, dodge the breaching whale and light every lighthouse on its own terms.</p>
  <div class="game-actions"><a class="play-link" href="../games/twilight-isles/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Twilight Isles в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
 <article class="game-card" data-kind="action" data-title="archer in the fog" data-index="8">
@@ -172,7 +165,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
  <div class="game-actions"><a class="play-link" href="../reference/sunken-city/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Затонувший город в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
 <article class="game-card" data-kind="arcade" data-title="радужный разгон" data-index="12">
  <a class="art" href="../games/rainbow-acceleration/" aria-label="Играть в Радужный разгон">
- <span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span>
+ <img src="covers/rainbow-acceleration.svg" alt="Радужный разгон — уникальная заставка, соответствующая графике игры" width="640" height="400" loading="lazy" decoding="async">
  <span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">13</span></a>
  <div class="game-info"><p class="tag">Аркада · Скорость</p><h3>Радужный разгон</h3><p class="desc">Цветные маршруты, движение и ускорение.</p>
  <div class="game-actions"><a class="play-link" href="../games/rainbow-acceleration/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Радужный разгон в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
@@ -184,7 +177,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
  <div class="game-actions"><a class="play-link" href="../games/asqura-ilya-reference/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить ASQURA OFFICE в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>
 <article class="game-card" data-kind="adventure" data-title="сломанный город — другая версия" data-index="14">
  <a class="art" href="../games/broken-city-copy/" aria-label="Играть в Сломанный город — другая версия">
- <span class="art-fallback" aria-hidden="true"><span class="moon"></span><span class="hill h1"></span><span class="hill h2"></span><span class="tower"></span></span>
+ <img src="covers/broken-city-copy.svg" alt="Сломанный город — другая версия — уникальная заставка, соответствующая графике игры" width="640" height="400" loading="lazy" decoding="async">
  <span class="play-icon" aria-hidden="true">▶</span><span class="cover-number">15</span></a>
  <div class="game-info"><p class="tag">3D · Исследование</p><h3>Сломанный город — другая версия</h3><p class="desc">Другая версия города с отдельной сценой и галереей.</p>
  <div class="game-actions"><a class="play-link" href="../games/broken-city-copy/">ИГРАТЬ <span aria-hidden="true">↗</span></a><button class="favorite" type="button" aria-label="Добавить Сломанный город — другая версия в избранное" aria-pressed="false" title="Избранное">♡</button></div></div></article>

@@ -61,7 +61,10 @@
       "status": "not_imported",
       "expected_filename": "Overworld Files.zip",
       "reason": "Original download is behind itch.io interactive download page; no verified public binary mirror was located.",
-      "author_note": "Do not redistribute under a different license or sell assets individually."
+      "author_note": "Do not redistribute under a different license or sell assets individually.",
+      "original_download_page": "https://ansimuz.itch.io/tiny-overworld/purchase",
+      "original_download_size_display": "364 kB",
+      "license_source": "https://ansimuz.itch.io/tiny-overworld/comments"
     },
     {
       "id": "interface-sounds",

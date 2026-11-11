@@ -1,12 +1,7 @@
 name: MG PR autofinish
 on:
   schedule:
-    - cron: '7,37 * * * *'
-  pull_request_target:
-    types: [opened, synchronize, reopened, ready_for_review]
-  push:
-    branches: [main]
-    paths: ['games/**', 'meta-games/**', 'scripts/**', 'shared/**', 'journal/**']
+    - cron: '7 * * * *'
   workflow_dispatch:
 permissions:
   contents: write

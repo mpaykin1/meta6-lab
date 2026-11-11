@@ -150,7 +150,7 @@ const main=(await api('/git/ref/heads/main')).object.sha;
 try{await revertIfRed(main);}catch(e){console.log('REVERT_BLOCKED '+String(e));}
 const opened=await api('/pulls?state=open&base=main&per_page=100');
 const offset=Math.floor(Date.now()/900000)%Math.max(1,opened.length);
-for(let i=0;i<Math.min(20,opened.length);i++){
+for(let i=0;i<Math.min(8,opened.length);i++){
   const pr=opened[(offset+i)%opened.length];
   try{await finish(pr,main);}catch(e){console.log('BLOCKED PR #'+pr.number+' '+String(e));}
 }

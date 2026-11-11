@@ -1,6 +1,7 @@
 // Executed ONLY from trusted main on schedule / manual dispatch.
 import {execFileSync, spawnSync} from 'node:child_process';
 import {conflictFiles, reconcileSection} from './core.mjs';
+import {openPulls} from './gh-list.mjs';
 
 const repo = process.env.STOROZHA_REPO;
 const token = process.env.STOROZHA_TOKEN;
@@ -64,13 +65,15 @@ async function writeQueue(rows) {
 }
 const main = await api('/git/ref/heads/main');
 const mainSha = main.object.sha;
-const opened = await all('/pulls?state=open&base=main');
+const opened = await openPulls(repo, token);
 const rows = [];
+let unsure = false;
 for (const pr of opened) {
   if (pr.head.repo?.full_name !== repo) {
     console.log('External PR not writable: #' + pr.number);
     continue;
   }
+  if (pr.mergeable === 'MERGEABLE') continue;
   try {
     const fresh = await api('/pulls/' + pr.number);
     if (fresh.mergeable_state === 'dirty') {
@@ -79,26 +82,19 @@ for (const pr of opened) {
         fresh.head.ref + ' | ' + paths.join(', ') + ' | ' + new Date().toISOString().slice(0, 10) + ' |'});
       continue;
     }
+    if (!['clean','unstable','blocked','behind','has_hooks'].includes(fresh.mergeable_state)) {
+      // GitHub ещё считает (unknown): очередь в этот раз не трогаем, чтобы строки не мигали.
+      unsure = true;
+    }
     // NO_HEAD_PUSH (Claude, 11.11.2026): сторож НЕ вливает main в ветки PR.
     // Пуш от GITHUB_TOKEN не запускает проверки — PR остался бы без CI,
     // а «свежий» merge-коммит мешал бы находить заброшенные PR.
     // Сторож только находит настоящие конфликты и пишет их в DLYA_CLAUDE.md.
-    const runs = await api('/actions/runs?branch=' + encodeURIComponent(fresh.head.ref) +
-      '&per_page=100');
-    for (const run of runs.workflow_runs.filter(run =>
-      run.head_sha === fresh.head.sha && run.status === 'action_required')) {
-      try {
-        await api('/actions/runs/' + run.id + '/approve', 'POST');
-        console.log('APPROVED action_required run ' + run.html_url);
-      } catch (error) {
-        // An insufficient workflow token cannot approve other people's runs.
-        console.log('APPROVAL REQUIRES OWNER ' + run.html_url + ' ' + String(error));
-      }
-    }
   } catch (error) {
     // Fail closed: a malformed API response must not silently remove a conflict row.
     console.error('PR #' + pr.number + ': ' + String(error));
     process.exitCode = 1;
   }
 }
+if (unsure && !process.exitCode) { console.log('mergeability unknown; queue kept'); process.exit(0); }
 if (!process.exitCode) await writeQueue(rows);

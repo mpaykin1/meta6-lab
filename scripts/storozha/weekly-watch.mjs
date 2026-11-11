@@ -1,6 +1,7 @@
 // Trusted-main only. Periodic stale cleanup + daily short summary, and PR quota status.
 import {alive, quota, reconcileSection, THREE_DAYS, staleDecision} from './core.mjs';
 import {latestBotGames} from './bot-summary.mjs';
+import {openPulls} from './gh-list.mjs';
 
 const repo = process.env.STOROZHA_REPO;
 const token = process.env.STOROZHA_TOKEN;
@@ -30,14 +31,7 @@ async function all(path, maximum = 15) {
   throw Error('Refusing truncated GitHub pagination: ' + path);
 }
 async function enriched() {
-  const prs = await all('/pulls?state=open&base=main');
-  // GET /commits/sha, not PR.updated_at (comments can change it without commits).
-  for (const pr of prs) {
-    const commit = await api('/commits/' + pr.head.sha);
-    pr.lastCommitAt = commit.commit?.committer?.date || commit.commit?.author?.date || '';
-    if (!pr.lastCommitAt) throw Error('Unknown last commit date for PR #' + pr.number);
-  }
-  return prs;
+  return openPulls(repo, token);
 }
 async function updateMain(path, build, message) {
   for (let attempt = 0; attempt < 7; attempt++) {

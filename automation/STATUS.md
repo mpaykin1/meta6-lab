@@ -1,11 +1,12 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T01:18:34.398Z | МГЛ: 2472e1c3fde07caca203a6c7621d06f021263879 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42937910341
+UTC: 2026-11-11T01:28:07.813Z | МГЛ: 6c179e13a6ed4379d2de50276b47aa3f00f8c14e | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42939125824
 ## ПРОВЕРИТЬ CLAUDE
 - PR #230 eabab1dc976ca4332c3c66cfd9b8bd56f4471b88: .github/workflows/dispetcher.yml
 - PR #227 2a4558a4b3993d6d0583c004155508d084eb6496: .github/workflows/dispetcher.yml
 - PR #216 06a8b61ec198ba43bb93a69efb2aeca7246383ee: .github/workflows/status-dlya-claude.yml, scripts/status/selftest.mjs
 - PR #223 0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66: .github/workflows/investigation-snapshot.yml
 - ещё 2: https://github.com/mpaykin1/meta6-lab/pulls
+- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/42937889388 | Run node scripts/dispetcher/run.mjs
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
@@ -54,7 +55,7 @@ P1 — нет данных: нет данных
 #216 СВОДКА ДЛЯ CLAUDE: facts-only GitHub Actions bot | 06a8b61ec198ba43bb93a69efb2aeca7246383ee
 ещё 3: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 608 коммитов | .github:5, .lab-sync-base:1, AGENTS.md:1, automation:7, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:11, shared:2, ZADACHI.md:1
+МГЛ: 611 коммитов | .github:5, .lab-sync-base:1, AGENTS.md:1, automation:7, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:11, shared:2, ZADACHI.md:1
 МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

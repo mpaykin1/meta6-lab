@@ -14,6 +14,9 @@ function verify(parser) {
     [], 'Partial completion is red even if emoji claims success');
   assert.deepEqual(parser('2026Z ▶ games/veil-terraces\n2026Z ✅ mobile: уровней 6, пройдено 6'),
     [], 'One viewport does not prove whole game');
+  assert.deepEqual(parser('2026Z ▶ games/veil-terraces\n2026Z ✅ mobile: уровней 6, пройдено 6' +
+    '\n2026Z ✅ desktop: уровней 6, пройдено 5'),
+    [], 'Partial desktop with misleading green emoji must remain red');
   assert.deepEqual(parser('no META BOT output'), [], 'Cannot hardcode games');
 }
 verify(passedGamesFromLog);

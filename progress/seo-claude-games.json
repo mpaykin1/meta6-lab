@@ -43,7 +43,7 @@
         "underwater-world"
       ],
       "pending_pages": 0,
-      "details": "Тексты 150–300 слов, FAQPage и 3 FAQ для всех 17 страниц; WebP-скриншоты и замена внешних картинок ещё нужны.",
+      "details": "17/17 длинных уникальных текстов и FAQ; SEO-валидатор проходит на предыдущем SHA, последний запуск ожидается; WebP-скриншоты ещё нужны.",
       "seo_ci": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
       "metadata": "23 страницы: title <= 60, description 120–160, Schema.org JSON-LD, alt"
     },
@@ -52,14 +52,20 @@
       "details": "IndexNow: перед POST требует HTTP 200 ключа и каждой изменённой страницы, точный canonical и JSON-LD; реальное 200/202 ответа API ещё не получено."
     },
     "5_continuous_improvement": {
-      "status": "pending"
+      "status": "done",
+      "details": "Все 17 индивидуальных описаний и 3 FAQ на страницу; SEO-валидатор с 3 мутациями; основной код игр не менялся.",
+      "evidence": [
+        "https://github.com/mpaykin1/meta6-lab/commit/33f9708e63230a397ad8158f62b2b584d8e27bbd",
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041"
+      ]
     }
   },
   "next_ideas": [
-    "Добавить 14 отдельных текстов и FAQPage",
-    "Заменить внешние thumbnails на собственные WebP",
-    "CI: Schema JSON-LD, metadata, broken links",
-    "IndexNow и sitemap lastmod"
+    "Получить для каждой из 17 игр реальные 2–3 скриншота WebP из игрового рендера и безопасно заменить внешние обложки",
+    "Сравнить близкие Twilight и Broken City страницы, проставить canonical на основную версию там, где контент действительно дублируется",
+    "Добавить workflow проверку фактических HTTP 200 для всех 23 публичных страниц после merge в main",
+    "Сверить релизный sitemap lastmod с git log и IndexNow HTTP 200/202",
+    "Сделать отдельные подборки для телефонов и атмосферных игр без повторного контента"
   ],
   "notes": [
     "Не менять защищённые файлы, эталоны, бота и охранников в обход правил",
@@ -71,5 +77,6 @@
   "evidence": [
     "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
     "https://github.com/mpaykin1/meta6-lab/commit/b3182119ff6dc16274afb8d47e7aa6a17f449f59"
-  ]
+  ],
+  "last_completed_seo_content_commit": "33f9708e63230a397ad8158f62b2b584d8e27bbd"
 }

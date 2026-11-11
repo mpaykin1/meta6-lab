@@ -19,7 +19,7 @@ concurrency:
   group: mg-journal-projections
   cancel-in-progress: false
 jobs:
-  validate:
+  projection:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 8
@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/journal/validate.mjs
-  projection:
+  publish:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 8

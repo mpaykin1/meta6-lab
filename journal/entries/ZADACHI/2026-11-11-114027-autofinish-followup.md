@@ -1,1 +1,1 @@
-| взято | Доводчик PR: 15 минут, безопасное обновление веток, журналы без конфликтов, порог 1 час | МГЛ | чат ChatGPT | `lab/pr-autofinish-followup-1111` | — | 2026-11-11 11:40 | — |
+| 🙋 НУЖЕН CLAUDE — https://github.com/mpaykin1/meta6-lab/pull/248 | Доводчик PR: 15 минут, безопасное обновление веток, журналы без конфликтов, порог 1 час | МГЛ | чат ChatGPT | `lab/pr-autofinish-followup-1111` | [#248](https://github.com/mpaykin1/meta6-lab/pull/248) | 2026-11-11 11:40 | — |

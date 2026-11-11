@@ -5,7 +5,7 @@
    U4 fog veil while falling · U5 lasting progress + daily gift · R1 instant start · R5 rewarded revive · R8 telemetry
 ============================================================================= */
 const ICON_ICE = '<svg viewBox="0 0 11 11" fill="currentColor" aria-hidden="true"><rect x="5" y="0" width="1" height="11"/><rect x="0" y="5" width="11" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="8" y="8" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="4" y="1" width="3" height="1"/><rect x="4" y="9" width="3" height="1"/><rect x="1" y="4" width="1" height="3"/><rect x="9" y="4" width="1" height="3"/></svg>';
-const GAME_VERSION = "2.0.0";
+const GAME_VERSION = "2.0.1";
 const ARC2 = (() => {
   const pg = (n, d) => { try { PG.ready && window.bridge.analytics && window.bridge.analytics.send(n, d); } catch (e) {} };
   const ru = () => PG.language === "ru";

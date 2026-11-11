@@ -9,7 +9,7 @@ import {fileURLToPath} from 'node:url';
 const here=path.dirname(fileURLToPath(import.meta.url));
 const source=fs.readFileSync(path.join(here,'build-index.mjs'),'utf8');
 const gitBlob=bytes=>crypto.createHash('sha1')
-  .update('blob '+bytes.length+'\\0').update(bytes).digest('hex');
+  .update('blob '+bytes.length+'\0').update(bytes).digest('hex');
 
 function runCase(script,attack){
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'shared-index-symlinks-'));
@@ -21,7 +21,7 @@ function runCase(script,attack){
     fs.mkdirSync(outside,{recursive:true});
     fs.writeFileSync(path.join(scriptDir,'build-index.mjs'),script);
     fs.writeFileSync(path.join(root,'package.json'),JSON.stringify({type:'module'}));
-    const bytes=Buffer.from('export const fixture = 1;\\n');
+    const bytes=Buffer.from('export const fixture = 1;\n');
     const name=attack==='folder'?'linked':'honest';
     const manifest={
       id:name, title:'Fixture', kind:'code', entry:'entry.js',

@@ -125,3 +125,5 @@ _общий склад и конструктор всех игр_
 - [games/sumerki-i-pepel-2/](games/sumerki-i-pepel-2/README.md) — эталонная игра Claude «Сумерки и пепел II» (загружена 06.11.2026) и её честный статус по каждому правилу
 - [games/twilight-isle-classic/](games/twilight-isle-classic/README.md), [games/twilight-isles/](games/twilight-isles/README.md), [games/archer-in-the-fog/](games/archer-in-the-fog/README.md) — эталоны удержания Playgama R1–R11 (загружены 06.11.2026) и статус каждой по всем универсальным правилам; [games/broken-city/](games/broken-city/README.md) — эталон Claude 1.4.0 (образец ЧИСТОГО ЭКРАНА и ЛОРА) со статусом по всем правилам
 - [meta-games-bot-rollout.md](automation/prompts/meta-games-bot-rollout.md) — промпт для ChatGPT на внедрение бота и исправление всех игр
+
+- **Библиотека игр / MCP:** [BIBLIOTEKA_IGR.md](rules/06-rabota-ii-s-kodom/BIBLIOTEKA_IGR.md) — обязательное продолжение существующего PR, реальные Chromium-проверки, честные счётчики и исправление кодом перед завершением каждого запуска.

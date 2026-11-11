@@ -27,3 +27,4 @@
 | #237 | lab/chat-pr-queue-1111 | SMENA.md, automation/chat/PROGRESS_SOZDANIE.md | 2026-11-11 |
 | #241 | lab/shared-index-symlink-1111 | OSHIBKI.md | 2026-11-11 |
 <!-- STOROZHA:CONFLICTS:END -->
+| #242 | lab/seo-claude-adfree-1111 | НУЖЕН CLAUDE: красные verify, bot, guard; SEO PR меняет claude-games/games/*/index.html (17 игр), а базовый PR #234 содержит несовпадение SHA256 защищённого pod-i-nad; не изменять эталон/охранник, проверить базовую ветку и CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117 | 2026-11-11 |

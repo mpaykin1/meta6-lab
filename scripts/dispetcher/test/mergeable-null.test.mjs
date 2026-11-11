@@ -27,13 +27,13 @@ test('persistent null with no prior evidence remains explicitly unknown',async()
  assert.match(output,/непроверено 1/);
  assert.match(output,/Статус конфликта неизвестен/);
 });
-test('previous status parser is exact PR-id and preserves both true and false',()=>{
+test('previous status parser preserves explicit conflict and leaves unrelated errors unknown',()=>{
  const previous='# ДИСПЕТЧЕР\n\n### PR #10\n- Проблема: Конфликт с main\n- Взял: —\n\n### PR #1\n- Проблема: Красная проверка\n- Взял: —\n\n## НУЖЕН CLAUDE\n';
  assert.equal(previousConflict(previous,10),true);
  assert.equal(previousConflict(previous,1),null);
  assert.equal(previousConflict(previous,11),null);
 });
-test('trap: four mutations including hardcoded clean status must be caught',async()=>{
+test('trap: five mutations including forged clean status must be caught',async()=>{
  assert.equal(await verifyMutations(),5);
 });
 

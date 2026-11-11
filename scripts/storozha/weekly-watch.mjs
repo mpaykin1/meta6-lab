@@ -3,7 +3,7 @@ import {alive, quota, reconcileSection, THREE_DAYS, staleDecision} from './core.
 
 const repo = process.env.STOROZHA_REPO;
 const token = process.env.STOROZHA_TOKEN;
-const mode = process.argv[2];
+const mode = process.env.STOROZHA_MODE;
 if (!repo || !token || !/^[\w.-]+\/[\w.-]+$/.test(repo)) throw Error('Missing trusted repo/token');
 if (!['quota', 'maintenance'].includes(mode)) throw Error('Expected quota or maintenance');
 const base = 'https://api.github.com/repos/' + repo;

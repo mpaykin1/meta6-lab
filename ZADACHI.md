@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | PR #201: проверить эталон и ограничения слияния | МГЛ | MG-строитель-2 | `lab/reference-foggy-awakening-scene-1` | [#201](https://github.com/mpaykin1/meta6-lab/pull/201) | 2026-11-11 01:17 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Исправить красные changed-games и bot PR #132 | МГЛ | MG-ремонтник | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-10 21:48 | 2026-11-10 21:49 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Исправить мобильное застревание Лучника в тумане PR #132 | МГЛ | MG-ремонтник | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-10 16:54 | 2026-11-10 21:49 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | fix(meta): Archer in the Fog — no ads, local saves and one free revival | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-08 14:47 | 2026-11-10 21:49 |

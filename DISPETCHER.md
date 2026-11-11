@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 7 · конфликт 3 · непроверено 0 · красные проверки 4 · нужен Claude 30
+Итог: зависло 6 · конфликт 2 · непроверено 0 · красные проверки 6 · нужен Claude 31
 
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132
@@ -17,14 +17,6 @@
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
-
-### PR #237
-- PR: https://github.com/mpaykin1/meta6-lab/pull/237
-- Ветка: `lab/chat-pr-queue-1111`
-- SHA: `2a97259328917f30f944e16376376539d7f7655e` · последний коммит: 2026-11-11T07:11:02Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: чат ChatGPT — Рабочий чат МГ/МГЛ (PR #237), 2026-11-11T12:12:32.341Z
 
 ### PR #234
 - PR: https://github.com/mpaykin1/meta6-lab/pull/234
@@ -56,6 +48,22 @@
 - SHA: `4ab6980f25cbb30c1d58a2c6f71c44de987eb660` · последний коммит: 2026-11-11T11:47:19Z
 - Проблема: Красная проверка: storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43014839244/job/130503201770), kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/43014832312/job/130503176000)
 - Задание: Исправь storozha-reference по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43014839244/job/130503201770 и повтори CI.
+- Взял: —
+
+### PR #249
+- PR: https://github.com/mpaykin1/meta6-lab/pull/249
+- Ветка: `lab/living-watercolor-owner-pass-reference`
+- SHA: `5dad9e729fcc9ff4959c46e5e61aef63446f346f` · последний коммит: 2026-11-11T12:11:02Z
+- Проблема: Красная проверка: guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43018153935/job/130514330810)
+- Задание: Исправь guard по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43018153935/job/130514330810 и повтори CI.
+- Взял: —
+
+### PR #251
+- PR: https://github.com/mpaykin1/meta6-lab/pull/251
+- Ветка: `lab/auditor-five-hourly-1111`
+- SHA: `bda9a36bc4d45b4f96809a4ff11989edfc547e9e` · последний коммит: 2026-11-11T12:53:36Z
+- Проблема: Красная проверка: storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43024275920/job/130535007505), storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43024276457/job/130534889229)
+- Задание: Исправь storozha-reference-queue по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43024275920/job/130535007505 и повтори CI.
 - Взял: —
 
 ### PR #72
@@ -109,6 +117,7 @@
 - [#205](https://github.com/mpaykin1/meta6-lab/pull/205) Пульт владельца
 - [#201](https://github.com/mpaykin1/meta6-lab/pull/201) PR #201: проверить эталон и ограничения слияния
 - [#193](https://github.com/mpaykin1/meta6-lab/pull/193) К7
+- [#252](https://github.com/mpaykin1/meta6-lab/pull/252) Установить независимого бота-ревизора пяти почасовых задач META GAMES
 - [#245](https://github.com/mpaykin1/meta6-lab/pull/245) Зелёный судья: META BOT зелёный на main
 - [#248](https://github.com/mpaykin1/meta6-lab/pull/248) Доводчик PR: 15 минут, безопасное обновление веток, журналы без конфликтов, порог 1 час
 - [#129](https://github.com/mpaykin1/meta6-lab/pull/129) fix(meta): Twilight Isles 2 plays without ads, with free revival

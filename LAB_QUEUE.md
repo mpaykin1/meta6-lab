@@ -11,12 +11,12 @@
 <!-- карточки ниже -->
 ### lab/link-guard-recovery-1111 — ССЫЛКА = 200: восстановление и защита (11.11.2026)
 - Шаг 1/6: DONE — [PR #266 закрыт как дубль](https://github.com/mpaykin1/meta6-lab/pull/266), [комментарий](https://github.com/mpaykin1/meta6-lab/pull/266#issuecomment-6801260398).
-- Шаг 2/6: PARTIAL — 11 оригинальных файлов coaches-r1/ashen-path-asset-pack восстановлены из 7611501 ([SHA 4204e3f](https://github.com/mpaykin1/meta6-lab/commit/4204e3fdc7398de8a5071a8587010db510e7435e)); осталось защитить sync и решить twilight-island.
-- Шаг 3/6: TODO — обязательный PR workflow с четырьмя проверками сторожа.
-- Шаг 4/6: TODO — рекурсивно проверять локальные JS imports + мутация.
-- Шаг 5/6: TODO — сторож новой игры/демо требует запись в LINKS.txt.
-- Шаг 6/6: TODO — дополнительная вечная ловушка и live Actions 200 каждой строки LINKS.txt.
-- Ветка: `lab/link-guard-recovery-1111`; состояние: В РАБОТЕ.
+- Шаг 2/6: CODE — 11 файлов восстановлены [4204e3f](https://github.com/mpaykin1/meta6-lab/commit/4204e3fdc7398de8a5071a8587010db510e7435e); sync защищён [0ff9507](https://github.com/mpaykin1/meta6-lab/commit/0ff9507aa40b1ca5b4fa6f8d3a6c1935cf8138cd); twilight-island убран из LINKS [21b3641](https://github.com/mpaykin1/meta6-lab/commit/21b364123acb818b77dac280945689dd6adedc84).
+- Шаг 3/6: CODE — обязательные PR-проверки на каждом PR подключены в KONTUR Guard [88d72f2](https://github.com/mpaykin1/meta6-lab/commit/88d72f23cc2b7b15f5997d25fda2825e32e12aec).
+- Шаг 4/6: CODE — проверка import/export по JS и мутации [156d830](https://github.com/mpaykin1/meta6-lab/commit/156d83077ab102726c9e18e81da4c94fd34325db).
+- Шаг 5/6: CODE — обязательная регистрация добавленных games/demos/assets index.html [9db8dcf](https://github.com/mpaykin1/meta6-lab/commit/9db8dcf4c87e2473d9f837c1d39ed2d54305e297).
+- Шаг 6/6: CODE — поддержка /meta6/ink/ и защитные случаи [d0f79eb](https://github.com/mpaykin1/meta6-lab/commit/d0f79ebf015286557a0684d12655a04ce5f65d73).
+- Ветка: `lab/link-guard-recovery-1111`; статус: ЖДЁТ PR CI И LIVE 200; main ещё не изменён.
 
 ### lab/living-watercolor-owner-pass-reference — Living Watercolor 3D (OWNER PASS)
 - Польза: одобренный эталон живой 3D-акварели; оригинальный код рендера и генераторов доступен для повторного использования.

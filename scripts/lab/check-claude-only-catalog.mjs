@@ -45,7 +45,11 @@ for (const game of added) {
   if (allowed.has(game.href)) fail("Duplicate source route: " + game.href);
   allowed.add(game.href);
 }
-if (existsSync("games/veil-terraces/index.html")) fail("Excluded Veil Terraces game still published");
+// A static Pages route cannot return HTTP 410: only a non-playable redirect may remain.
+if (!existsSync("games/veil-terraces/index.html") ||
+    !readFileSync("games/veil-terraces/index.html", "utf8").includes('data-game-disabled="veil-terraces"')) {
+  fail("Forbidden game route must be a non-playable catalogue redirect");
+}
 if (DENIED.test(catalogue)) fail("Veil Terraces must not appear in catalogue HTML");
 const cards = [...catalogue.matchAll(/<article\s+class="game-card"\b[^>]*>[\s\S]*?<\/article>/g)];
 if (cards.length !== allowed.size) fail("Catalogue count differs from Claude-only allowlist");

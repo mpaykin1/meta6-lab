@@ -13,12 +13,17 @@ async function api(path,method='GET',data){
   return json;
 }
 const protectedPaths=[/^\.github\//,/^scripts\/meta-bot\//,/^scripts\/kontur\//,
+  /^scripts\/autofinish\//,/^scripts\/storozha\//,
   /^scripts\/zadachi\//,/^scripts\/meta-games-guard\.sh$/, /^reference\//,
   /^rules\/09-platforma\/(?:FINISH|ZANYATO)\.md$/,
   /^rules\/06-rabota-ii-s-kodom\/KONTUR_BEZ_OSHIBOK\.md$/,
   /(?:^|\/)(?:test|verify|mutate|selftest)[^/]*\.[cm]?js$/];
-export const safeFiles=files=>files.length>0&&files.length<500&&
-  files.every(f=>!protectedPaths.some(re=>re.test(f.filename)));
+export const onlyNewReference = files => files.length > 0 &&
+  files.every(f => f.status === 'added' && /^reference\/[^/]+\/.+/.test(f.filename)) &&
+  new Set(files.map(f => f.filename.split('/').slice(0, 2).join('/'))).size === 1;
+export const safeFiles = files => files.length > 0 && files.length < 500 &&
+  files.every(f => !protectedPaths.some(re => re.test(f.filename)) ||
+    (/^reference\//.test(f.filename) && onlyNewReference(files)));
 export function green(checks,statuses,files){
   // GitHub reports the optional Pages deploy as skipped on pull requests.
   // Required guardians must still complete successfully (never merely skipped).
@@ -27,6 +32,7 @@ export function green(checks,statuses,files){
   const names=new Set(checks.filter(c=>c.conclusion==='success').map(c=>c.name));
   if(!['mutate-kontur-guard','kontur-guard','guard'].every(n=>names.has(n)))return false;
   if(files.some(f=>/^(games|meta-games)\//.test(f.filename))&&!names.has('bot'))return false;
+  if(files.some(f=>/^reference\//.test(f.filename))&&!names.has('storozha-reference'))return false;
   return statuses.every(s=>s.state==='success');
 }
 export function independentReview(reviews,pr,verified){

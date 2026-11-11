@@ -87,3 +87,10 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/225; ветка `lab/render-broken-city-safe-1110`, взят HEAD `3895b1aabcfbda047aec756873b951ecdf03f4f8`.
 - Конфликт: OSHIBKI.md; рабочий план — сохранить все уникальные строки main и ветки, перенумеровать запись Broken City при необходимости, двухродительский merge без force. Workflow PR не сливать без Claude.
 - Следующий шаг: сверить актуальный main, собрать объединённое Git tree, создать merge commit, проверить PR/CI.
+
+### Исправление #225 после merge main 11.11
+- UTC: 2026-11-11T06:34:52.802Z, исполнитель — чат ChatGPT — Рабочий чат МГ/МГЛ.
+- Конфликт main устранён двухродительским [f20a93d](https://github.com/mpaykin1/meta6-lab/commit/f20a93d33fe621505dd17af4df8f290bf59708e8); сохранены все веточные файлы и main, запись Broken City перенумерована #35.
+- На новом HEAD META BOT открылся раньше ESM-движка: [42972891568](https://github.com/mpaykin1/meta6-lab/actions/runs/42972891568). Исправлено отложенное объявление реальной read-only ручки: [97200b9](https://github.com/mpaykin1/meta6-lab/commit/97200b9f9e1a9226a65b09b32a575c3271408bab). Ловушки: [91050bd](https://github.com/mpaykin1/meta6-lab/commit/91050bd47e969816747c57bc43fc509356a08cd6), подключение к bench [576066f](https://github.com/mpaykin1/meta6-lab/commit/576066f4490c9ef49b761b046718128a1d981f9c), запись OSHIBKI #36 [33500b9](https://github.com/mpaykin1/meta6-lab/commit/33500b9958270eb0760f6d6e7d5b2915d107eed2).
+- НУЖЕН CLAUDE: [META GAMES guard 42972891723](https://github.com/mpaykin1/meta6-lab/actions/runs/42972891723) отклонил **исторический** dfe311e (изменение .github/protected без подписи Claude). Охранник и историю не ослаблять; PR #225 самостоятельно не сливать.
+- Следующий шаг: CI и бот на HEAD `33500b9958270eb0760f6d6e7d5b2915d107eed2`, решить защищённый коммит через Claude, затем независимая проверка и разрешённый merge.

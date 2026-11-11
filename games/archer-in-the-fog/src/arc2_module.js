@@ -181,6 +181,10 @@ const ARC2 = (() => {
   const veil = $("fogveil");
   let perf = { f: [], act: 0, start: performance.now() };
   let lastHoldClock = performance.now();
+  function countsHoldTime(task, phase, paused, pgPaused, hidden, dead) {
+    const combat = ['fight', 'windup', 'dive', 'tail', 'plunge', 'ambush', 'stagger'];
+    return task === 'hold' && combat.includes(phase) && !paused && !pgPaused && !hidden && !dead;
+  }
   function tick(raw, t, e) {
     // Survival is measured in real seconds, not in FPS-clamped simulation ticks.
     // Reset the clock every frame to exclude pauses and background time.
@@ -192,7 +196,7 @@ const ARC2 = (() => {
     if (G.phase !== "plunge") { shadow.visible = !1; shadowMat.uniforms.uRim.value = 0; }
     if (G.phase !== "ambush") { if (!dragon.root.visible && G.mode === "play") hideBody(!1); setEyes(0); G.fogBoost = Math.max(0, (G.fogBoost || 0) - raw * 1.2); }
     flyTick(t);
-    if (G.task === "hold" && G.phase === "fight" && !G.paused && !PG.paused && !document.hidden) {
+    if (countsHoldTime(G.task, G.phase, G.paused, PG.paused, document.hidden, G.dead)) {
       holdT += holdDelta; const k = Math.min(10, Math.floor(holdT / (D0.T / 10)));
       if (k !== G.hits) { G.hits = k; renderHP(); if (k >= 10) retreat(); }
     }

@@ -19,6 +19,28 @@ const good=run(repo);
 assert.equal(good.status,0,'Baseline Archer must pass:\n'+good.stdout+'\n'+good.stderr);
 
 const traps=[
+
+  ['hold-count-stops-during-ambush',copies=>{
+    const path='src/arc2_module.js',old="'plunge', 'ambush', 'stagger'";
+    assert.ok(copies[path].includes(old),'Survival predicate missing');
+    copies[path]=copies[path].replace(old,"'plunge', 'stagger'");
+  }],
+  ['hold-counts-retreat-as-survival',copies=>{
+    const path='src/arc2_module.js',old="'ambush', 'stagger'];";
+    assert.ok(copies[path].includes(old),'Survival predicate missing');
+    copies[path]=copies[path].replace(old,"'ambush', 'stagger', 'retreat'];");
+  }],
+  ['hold-deception-always-true',copies=>{
+    const path='src/arc2_module.js',old="return task === 'hold' &&";
+    assert.ok(copies[path].includes(old),'Survival predicate missing');
+    copies[path]=copies[path].replace(old,"return true || task === 'hold' &&");
+  }],
+  ['hold-bundle-bypasses-guard',copies=>{
+    const path='assets/index-xsRfS2lk.js';
+    const old='countsHoldTime(G.task,G.phase,G.paused,PG.paused,document.hidden,G.dead)';
+    assert.ok(copies[path].includes(old),'Shipped survival predicate missing');
+    copies[path]=copies[path].replace(old,'true');
+  }],
   ['ad-sdk-script-restored',copies=>{
     copies['index.html']+=' \n<script src="./playgama-bridge.js"></script>\n';
   }],
@@ -63,4 +85,4 @@ for(const [name,mutate] of traps){
     rmSync(scratch,{recursive:true,force:true});
   }
 }
-console.log('MUTATE_ARCHER_ADFREE_PASS all four traps caught (including deception)');
+console.log('MUTATE_ARCHER_ADFREE_PASS all eight traps caught (including deception)');

@@ -1,5 +1,6 @@
 // META GAMES: Archer must not restore any ad SDK or rewarded-ad revive path.
 import assert from 'node:assert/strict';
+import {runInNewContext} from 'node:vm';
 import {existsSync,readFileSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -35,6 +36,29 @@ function verify(){
     'Free revive offer cannot depend on ad support');
   assert.match(source,/G\.revived\s*=\s*!0\s*;/,
     'Revive must be limited to one real use');
+  // Do not lose real survival time while the dragon attacks at low mobile FPS.
+  const combat=['fight','windup','dive','tail','plunge','ambush','stagger'];
+  for(const [name,code] of [['src/arc2_module.js',source],['assets/index-xsRfS2lk.js',bundle]]){
+    const match=code.match(/function countsHoldTime\([^)]*\)\s*\{[\s\S]*?\n  \}/);
+    assert.ok(match,name+' must declare survival-time predicate');
+    const counts=runInNewContext('('+match[0]+')');
+    assert.match(code,/countsHoldTime\(\s*G\.task\s*,\s*G\.phase\s*,\s*G\.paused\s*,\s*PG\.paused\s*,\s*document\.hidden\s*,\s*G\.dead\s*\)/,
+      name+' must use the predicate with live game/visibility state');
+    assert.match(code,/holdT\s*\+=\s*holdDelta/,name+' must count measured elapsed time');
+    for(const phase of combat){
+      assert.equal(counts('hold',phase,false,false,false,false),true,name+' dropped combat phase '+phase);
+    }
+    for(const phase of ['intro','retreat','fall','over','menu']){
+      assert.equal(counts('hold',phase,false,false,false,false),false,name+' counted noncombat '+phase);
+    }
+    for(const args of [
+      ['hits','fight',false,false,false,false],
+      ['hold','fight',true,false,false,false],
+      ['hold','fight',false,true,false,false],
+      ['hold','fight',false,false,true,false],
+      ['hold','fight',false,false,false,true]
+    ])assert.equal(counts(...args),false,name+' counted while inactive/dead or bypassed task');
+  }
   console.log('ARCHER_ADFREE_PASS no ad SDK, source/runtime parity and one free revive');
 }
 try{verify()}catch(error){console.error('ARCHER_ADFREE_REJECT '+error.message);process.exitCode=1;}

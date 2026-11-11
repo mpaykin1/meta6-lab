@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "notes": "JSON is a YAML 1.2 document. Attribution requires explicit role in ZADACHI.md, PR body/title, issue or labels; shared branch prefixes alone do not establish authorship.",
+  "notes": "JSON is valid YAML 1.2. Use only explicit role attribution; shared branch prefixes alone do not prove authorship. Canonical issue #253 is never recreated.",
   "sources": [
     "https://github.com/mpaykin1/meta6-lab/blob/main/automation/prompts/MG_PYAT_AVTOZADACH.md",
     "https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md",
@@ -120,5 +120,6 @@
   ],
   "issue_title": "🤖 Ревизия META GAMES",
   "max_pull_requests": 200,
-  "max_rows_per_role": 30
+  "max_rows_per_role": 30,
+  "issue_number": 253
 }

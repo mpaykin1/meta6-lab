@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-11T06:44:30.618Z",
+  "generated_at": "2026-11-11T06:52:43.159Z",
   "sha": {
-    "lab": "ec85749d0fb487c407ccdae46ca3b6d7d8b96ce4",
+    "lab": "4379b9abb758255e1f18641c621131d03654c41d",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
@@ -241,7 +241,7 @@
     ]
   },
   "pr": {
-    "open": 36,
+    "open": 37,
     "conflicts": "нет данных",
     "merged": 14,
     "closed": 41,
@@ -383,7 +383,7 @@
   },
   "changes": {
     "lab": {
-      "count": 770,
+      "count": 777,
       "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:6, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1"
     },
     "mg": {

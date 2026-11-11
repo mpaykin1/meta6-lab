@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T06:44:30.618Z | МГЛ: ec85749d0fb487c407ccdae46ca3b6d7d8b96ce4 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | нет данных
+UTC: 2026-11-11T06:52:43.159Z | МГЛ: 4379b9abb758255e1f18641c621131d03654c41d | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #231 8790e6339ccf62af9584a4353749c864d4cf7785: scripts/dispetcher/mutate-mergeable-null.mjs
 - PR #236 afc35df467af8e6f60fb8a5c9c11f62aef5dfa05: scripts/meta-bot/core.mjs, scripts/meta-bot/selftest.mjs
@@ -47,14 +47,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 36 | конфликт: нет данных | слито: 14 | закрыто: 41
+открыто: 37 | конфликт: нет данных | слито: 14 | закрыто: 41
 #224 Merge continuity: persistent PR journal and live 83-PR queue | 1f086f4ed7b8d1f3d86d0a93192a033a5568ad74
 #125 Lore: alternative Last Seed mythology and inspiration bank | 9f50910368238775bda40729722ec3512f14e623
 #232 META GAMES: возможности платформы для начинающих разработчик | d7c3dac578c1b841fe7d259c944b7d7aec18cf98
 #231 fix(dispatcher): reliable conflict state when mergeable is n | 8790e6339ccf62af9584a4353749c864d4cf7785
 ещё 10: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 770 коммитов | .github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:6, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1
+МГЛ: 777 коммитов | .github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:6, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1
 МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да

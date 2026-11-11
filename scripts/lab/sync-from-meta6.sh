@@ -7,7 +7,7 @@
 #
 # Стало: переносятся только файлы, которые изменились В META6 с прошлой синхронизации.
 #   * файл изменён только в meta6  → берётся версия meta6 (meta6 главнее);
-#   * файл удалён в meta6          → удаляется и в песочнице (если песочница его не меняла);
+#   * файл удалён в meta6          → сохраняется в песочнице (никакого удаления);
 #   * файл изменили ОБЕ стороны    → остаётся версия песочницы, путь пишется в конфликты
 #                                    (решает Claude при переносе в meta6);
 #   * файл есть только в песочнице → никогда не трогается;
@@ -38,12 +38,13 @@ while IFS=$'\t' read -r st path; do
   case "$path" in .github/workflows/*|.lab-sync-base|README.md|LAB_README.md|LAB_QUEUE.md) skipped=$((skipped+1)); continue;; esac
   if grep -qxF "$path" "$LAB_CHANGED"; then conflicts+=("$path"); continue; fi
   if [ "$st" = "D" ]; then
-    [ -e "$LAB/$path" ] && rm -f "$LAB/$path"
-  else
-    mkdir -p "$LAB/$(dirname "$path")"
-    git -C "$M6" show "HEAD:$path" > "$LAB/$path"
-    [ -x "$M6/$path" ] && chmod +x "$LAB/$path" || true
+    # Deletion upstream is not permission to delete a sandbox-owned or published file.
+    skipped=$((skipped+1))
+    continue
   fi
+  mkdir -p "$LAB/$(dirname "$path")"
+  git -C "$M6" show "HEAD:$path" > "$LAB/$path"
+  [ -x "$M6/$path" ] && chmod +x "$LAB/$path" || true
   applied=$((applied+1))
 done < <(git -C "$M6" diff --name-status --no-renames "$BASE" "$HEAD6")
 

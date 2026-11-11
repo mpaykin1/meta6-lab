@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | PR #203: устранить конфликт с main | МГЛ | MG-строитель-3 | lab/skin-rusty-robot | [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | 2026-11-11 06:34 | — |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Диспетчер: повторный запрос mergeable=null и сохранение прежнего конфликта | МГЛ | чат ChatGPT | `lab/dispetcher-mergeable-null-1110` | [#231](https://github.com/mpaykin1/meta6-lab/pull/231) | 2026-11-10 10:05 | 2026-11-11 05:06 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | Исправить красные changed-games и bot PR #132 | МГЛ | MG-ремонтник | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-10 21:48 | 2026-11-10 21:49 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | Исправить мобильное застревание Лучника в тумане PR #132 | МГЛ | MG-ремонтник | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-10 16:54 | 2026-11-10 21:49 |

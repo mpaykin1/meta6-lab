@@ -28,8 +28,9 @@ export const safeFiles = files => files.length > 0 && files.length < 500 &&
 export function green(checks,statuses,files){
   // GitHub reports the optional Pages deploy as skipped on pull requests.
   // Required guardians must still complete successfully (never merely skipped).
+  const optionalSkipped=new Set(['deploy','publish','storozha-reference','storozha-reference-queue']);
   if(!checks.length||checks.some(c=>c.status!=='completed'||
-    (c.conclusion!=='success'&&!(c.name==='deploy'&&c.conclusion==='skipped'))))return false;
+    (c.conclusion!=='success'&&!(c.conclusion==='skipped'&&optionalSkipped.has(c.name)))))return false;
   const names=new Set(checks.filter(c=>c.conclusion==='success').map(c=>c.name));
   if(!['mutate-kontur-guard','kontur-guard','guard'].every(n=>names.has(n)))return false;
   if(files.some(f=>/^(games|meta-games)\//.test(f.filename))&&!names.has('bot'))return false;

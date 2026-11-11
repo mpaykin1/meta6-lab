@@ -15,6 +15,9 @@ function verify(v){
   requireText(v.runner,'if(!updateToken)','Missing update token must fail closed');
   requireText(v.runner,"update-branch','PUT'",'Explicit branch sync');
   requireText(v.runner,'expected_head_sha:fresh.head.sha','Compare-and-swap branch sync');
+  requireText(v.runner,"const optionalSkipped=new Set(['deploy','publish','storozha-reference','storozha-reference-queue'])",'Only named optional checks can be skipped');
+  requireText(v.runner,'optionalSkipped.has(c.name)','No blanket skipped-check waiver');
+  requireText(v.runner,"!names.has('storozha-reference')",'Reference change requires PASS');
   requireText(v.runner,String.raw`scripts\/journal`,'Journal code must not auto-merge');
   const validate=v.journal.split('  projection:\n')[1]?.split('  publish:\n')[0];
   const publish=v.journal.split('  publish:\n')[1];
@@ -33,7 +36,9 @@ const mutations=[
   ['missing-token bypass','runner','if(!updateToken)','if(false)'],
   ['same GITHUB_TOKEN as update identity','workflow','secrets.AUTOFINISH_UPDATE_TOKEN','secrets.GITHUB_TOKEN'],
   ['PR gets write permissions','journal','permissions:\n  contents: read','permissions:\n  contents: write'],
-  ['PR runs publisher','journal',"if: github.event_name != 'pull_request'","if: true"]
+  ['PR runs publisher','journal',"if: github.event_name != 'pull_request'","if: true"],
+  ['optional publisher skipped blocks all PRs','runner',"['deploy','publish','storozha-reference','storozha-reference-queue']","['deploy']"],
+  ['all skipped checks accepted','runner','optionalSkipped.has(c.name)','true']
 ];
 for(const [name,part,from,to] of mutations){
   requireText(source[part],from,'Missing mutation source '+name);

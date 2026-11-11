@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { serve } from './server.mjs';
-import { checkGame } from './core.mjs';
+import { checkGame, stepMs } from './core.mjs';
 const here = path.dirname(fileURLToPath(import.meta.url)); const repoRoot = path.resolve(here, '../..');
 const gameDir = path.join(here, 'fixture');
 const srv = await serve(repoRoot);
@@ -27,6 +27,11 @@ const cases = [
   { q: '?bad=cheat', expect: /запрещённые ключи/, name: 'чит в ручке пойман' }
 ];
 let ok = true;
+// Ловушка OSHIBKI (11.11.2026): шаг ходьбы у цели не длиннее пути до неё — иначе герой перелетает цель и «застревает» рядом.
+{ const near = stepMs(1.36, 6, 450), far = stepMs(12, 6, 450), unknown = stepMs(1.36, 0, 450);
+  const pass = near * 6 / 1000 <= 1.36 && near >= 60 && far === 450 && unknown === 450;
+  console.log(`${pass ? '✅' : '❌'} шаг ходьбы у цели не перелетает цель${pass ? '' : ` → рядом ${near} мс, далеко ${far} мс, без скорости ${unknown} мс`}`);
+  ok = ok && pass; }
 for (const c of cases) {
   if (c.fps) { const f = path.join(os.tmpdir(), 'meta-bot-fps-selftest.json'); fs.writeFileSync(f, JSON.stringify({ 'fixture:mobile': [c.fps], 'fixture:desktop': [c.fps] })); process.env.META_BOT_FPS_FILE = f; }
   else delete process.env.META_BOT_FPS_FILE;

@@ -20,7 +20,7 @@ def missing_links(paths, links):
 
 def main():
     paths = subprocess.check_output(
-        ["git", "diff", "--name-only", "--diff-filter=A", "origin/main...HEAD"],
+        ["git", "diff", "--name-only", "--diff-filter=A", "origin/main", "HEAD"],
         text=True,
     ).splitlines()
     links = Path("LINKS.txt").read_text(encoding="utf-8").splitlines()

@@ -31,11 +31,17 @@
 - Король Пепла × ИСХОДНИК — **BLOCKED, не PASS**: оригинал [в открытом PR #207](https://github.com/mpaykin1/meta6-lab/pull/207), но не принят в main; не запрашивать повторно файл у владельца. Исходный blob по описанию PR: `1a1f6d32310ec84d8c542262a74e4ed71ee60f59`; сверка с принятым оригиналом и Chromium не подтверждена.
 - Бесконечные долины — Золотой рыцарь × ИСХОДНИК — **BLOCKED, не PASS**: оригинал [в PR #189](https://github.com/mpaykin1/meta6-lab/pull/189), не в main. Для верификации исходника ещё нужен принятый blob и безопасное слияние.
 
+## Текущий PR
+
+- [#261](https://github.com/mpaykin1/meta6-lab/pull/261) — саморазвитие а); рабочая ветка `lab/biblioteka-contract-20261111`; CI финального SHA ещё не подтверждён, слияния нет.
+
 ## Хронология
 
 - 2026-11-11T14:21:09.701Z UTC — захват задачи: [коммит 7e222da5aa9e36a93887c4a9d8fc045b5a604a8c](https://github.com/mpaykin1/meta6-lab/commit/7e222da5aa9e36a93887c4a9d8fc045b5a604a8c). Никакие эталоны не изменены.
 
 - 2026-11-11T14:26:41.373Z UTC — саморазвитие **а)**: [промпт](https://github.com/mpaykin1/meta6-lab/commit/7d6772877919c4298d8f3e441bb007efce71a9d4) + [ловушка и 4 мутации](https://github.com/mpaykin1/meta6-lab/commit/e24017ff33fc3b86c79c45d577891ac4ae89ecf7) + [исправление MCP](https://github.com/mpaykin1/meta6-lab/commit/0653ed0da9c7f4aa07f2f4ab2565a815c9aef511). Локальная проверка структуры и 4 повреждений пройдена; **CI ещё не подтверждён**. Игровые шаги PASS не получены.
+
+- 2026-11-11T14:27:41.203Z UTC — [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261) открыт в статусе draft; [связь с задачей](https://github.com/mpaykin1/meta6-lab/commit/a64bcd917d77f2b97c77d3ad518cf51300569db4). Ожидание CI не означает PASS.
 
 ## Урок
 

@@ -234,7 +234,7 @@ jobs:
             ].join('\n');
             if (context.eventName === 'pull_request') {
               report = report.replace('Срез: ', 'Закрепление Issue #'+cfg.issue_number+
-                ': ⚠️ не проверено (PR preview)\\n\\nСрез: ');
+                ': ⚠️ не проверено (PR preview)\n\nСрез: ');
               core.info('PR preview: no Issue mutation allowed');
             } else {
               // GraphQL is the only source of truth for pinnedIssues; do not assume pinIssue succeeded.
@@ -269,7 +269,7 @@ jobs:
                 core.warning('Issue pin query unavailable: '+clean(err.message));
               }
               report = report.replace('Срез: ', 'Закрепление Issue #'+cfg.issue_number+
-                ': '+pinStatus+'\\n\\nСрез: ');
+                ': '+pinStatus+'\n\nСрез: ');
               const updated = await github.rest.issues.update({
                 owner,repo,issue_number:cfg.issue_number,state:'open',body:report
               });

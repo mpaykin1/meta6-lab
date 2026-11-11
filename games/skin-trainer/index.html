@@ -55,6 +55,7 @@ canvas#gl{position:fixed;inset:0;width:100%;height:100%;display:block}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <!-- SKIN: общий движок скинов meta6 (rules/01-stil-i-grafika/SKINY.md). Без ?skin=… игра идёт как в оригинале. -->
 <script src="../../skins/runtime/skin-runtime.js"></script>
+<script src="../../skins/packs/rusty-robot/model-3d.js"></script>
 <script>
 (()=>{
 /* ================= ВОСЬМЁРКИ-ПОДСКАЗКИ ================= */
@@ -184,7 +185,19 @@ const RIG={root:hero,
   base:{body:[body],head:[head,...eyes],armL:[armL.children[0]],armR:[armR.children[0]],legL:[legL.children[0]],legR:[legR.children[0]],antenna:antennaMeshes}};
 let SKIN=null;
 {const u=new URLSearchParams(location.search).get('skin');
- if(u&&window.SkinRuntime)SkinRuntime.load(u,THREE).then(s=>{SKIN=s;s.apply(RIG);window.__SKIN=s;}).catch(e=>{console.error('[skin]',e);window.__SKIN_ERROR=String(e);});}
+ if(u&&window.SkinRuntime)SkinRuntime.load(u,THREE).then(async s=>{
+    if(s.manifest.name==='rusty-robot' && window.RustyRobot3D){
+      // The original 2D/2.5D runtime is intentionally bypassed for this skin.
+      // All visible robot body pieces come from solid volumetric geometries.
+      for(const m of [body,head,...eyes,armL,armR,legL,legR])m.visible=false;
+      const model=await RustyRobot3D.build(THREE,u);
+      hero.add(model);
+      window.__RUSTY_ROBOT=model;
+      const key=new THREE.DirectionalLight(0xffc69a,1.45);
+      key.position.set(-3,6,-5);scene.add(key);
+    }else s.apply(RIG);
+    SKIN=s;window.__SKIN=s;
+  }).catch(e=>{console.error('[skin]',e);window.__SKIN_ERROR=String(e);});}
 
 function radialTex(){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');
   const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.4,'rgba(255,255,255,.35)');gr.addColorStop(1,'rgba(255,255,255,0)');
@@ -227,6 +240,15 @@ addEventListener('resize',resize);resize();
 const joyEl=document.getElementById('joy'),joyK=joyEl.querySelector('i');
 let moveId=null,mx0=0,my0=0,mvx=0,mvy=0,camId=null,cx=0,cy=0;
 let yaw=0,pitch=.32,yawT=0,pitchT=.32;
+window.__SKIN_VIEW=(angle,up=.16)=>{
+  yaw=yawT=angle;pitch=pitchT=up;
+  window.__SKIN_CAPTURE=true;
+  [ground,grass,tree,dust,sparks,...fogPlanes].forEach(o=>o.visible=false);
+  scene.fog=null;
+  camPos.set(Math.sin(angle)*4.5,1.5+Math.sin(up)*4.5,Math.cos(angle)*4.5);
+  look.set(0,1.5,0);
+  if(window.__RUSTY_ROBOT)RustyRobot3D.validate(THREE,window.__RUSTY_ROBOT);
+};
 const keys={};
 cv.addEventListener('pointerdown',e=>{
   if(e.clientX<innerWidth*.5&&moveId===null){moveId=e.pointerId;mx0=e.clientX;my0=e.clientY;mvx=mvy=0;
@@ -288,7 +310,7 @@ function loop(){requestAnimationFrame(loop);
   antenna.forEach((a,i)=>{a.rotation.x=Math.sin(t*3-i*.7)*.15+sw*.12*(i+1)*.5-sp*.03*(i+1);a.rotation.z=Math.sin(t*2.3-i*.9)*.1+lean*.3;});
 
   // камера: тяжёлая, запаздывающая
-  const dist=6+pitch*1.5;
+  const dist=(window.__SKIN_CAPTURE?4.4:6)+pitch*1.5;
   const want=new THREE.Vector3(hero.position.x+Math.sin(yaw)*Math.cos(pitch)*dist,1.4+Math.sin(pitch)*dist,hero.position.z+Math.cos(yaw)*Math.cos(pitch)*dist);
   want.x+=Math.sin(t*.4)*.08;want.y+=Math.sin(t*.53)*.06;
   camPos.lerp(want,1-Math.exp(-dt*4));cam.position.copy(camPos);

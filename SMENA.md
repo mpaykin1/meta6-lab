@@ -92,6 +92,13 @@
 - Двухродительский коммит [2a1d22c](https://github.com/mpaykin1/meta6-lab/commit/2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d), родители: PR `faf69f129ae3510a81e59a48328534fed8a5f944` и main `eaaef9d0b4dfe702d21870e5db755b80ec049816`; сохранено дерево main с единственным отличием `meta-games/index.html` (blob `9b857feaf02c1361f1d94126af52fbfbc48944c3`). `update_ref` без force: success. Редактирования `scripts/meta-bot/` нет.
 - Следующий шаг: получить все workflow/checks по новому SHA, проверить реальные выводы и независимое ревью; до полного зелёного CI PR #87 не сливать.
 
+### PR #87 — исход CI и защищённая история (2026-11-11T07:05:51.883Z)
+- HEAD: `2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d`; merge только дерева main + `meta-games/index.html` зафиксирован ссылкой https://github.com/mpaykin1/meta6-lab/commit/2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d .
+- Новый guard **FAIL**: https://github.com/mpaykin1/meta6-lab/actions/runs/42975697783/job/130374149800 — исторические коммиты `faf69f129ae3510a81e59a48328534fed8a5f944` и `d66f304967540ca9b9c144140ea51c971b3e2365` меняют `.github/protected` без подписи Claude. Скрипт `scripts/meta-games-guard.sh` проверяет коммиты через `git rev-list "$GUARD_RANGE" -- .github/protected`. Дополнительный non-force merge не исключит эти коммиты из истории; защищённый guard и старые SHA не менять.
+- Новый kick-main https://github.com/mpaykin1/meta6-lab/actions/runs/42975692657 — **success**, предыдущий HTTP 403 был временным; снова запускать старый run на чужом SHA не требуется.
+- PR описание обновлено: https://github.com/mpaykin1/meta6-lab/pull/87 . **НУЖЕН CLAUDE**: безопасно устранить проблему истории (или согласовать чистый PR-перенос), решить замороженный Earn, провести независимое ревью, подтвердить весь CI. Слияние запрещено до зелёного guard/бота.
+- Пересмотрен текущий DISPETCHER.md: #225 и #235 уже в разделе НУЖЕН CLAUDE, #237 занят другим чатом, #221 защищён; следующая безопасная карточка — только после новой проверки статуса и правил источников.
+
 ## Архив очереди из PR #237
 
 ## Очередь PR 11.11.2026 — продолжение рабочего чата

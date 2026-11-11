@@ -66,3 +66,4 @@
 <!-- STOROZHA:STALE:BEGIN -->
 | #131 | lab/owner-graphics-animation-references-20261108 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-11 |
 <!-- STOROZHA:STALE:END -->
+| #190 | lab/bot-batch-1 | НУЖЕН CLAUDE: защищённый `.github/workflows/bot-adapters-b2.yml`; конфликт с main (`OSHIBKI.md`); проверка B2 охватывает 2/3 игр, `archer-in-the-fog` не подтверждён. Самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/190 | 2026-11-11 |

@@ -81,7 +81,7 @@
     const oct = Math.floor(degree / 7);
     const index = ((degree % 7) + 7) % 7;
     const notes = bright ? scales.major : scale;
-    return config.root + notes[index] + 12 * oct;
+    return Math.max(35, Math.min(84, config.root + notes[index] + 12 * oct));
   }
   function hz(midi) {
     return 440 * Math.pow(2, (midi - 69) / 12);
@@ -92,7 +92,11 @@
     if (!AudioContext) return false;
     try {
       if (window.navigator && window.navigator.audioSession) {
-        window.navigator.audioSession.type = 'playback';
+        try {
+          window.navigator.audioSession.type = 'playback';
+        } catch (error) {
+          console.warn('[META MUSIC] iOS audio session mode unavailable:', error);
+        }
       }
       ctx = new AudioContext();
       master = ctx.createGain();
@@ -326,7 +330,7 @@
   window.addEventListener('meta-games-pause', () => window.MetaGamesMusic.setPaused(true));
   window.addEventListener('meta-games-resume', () => window.MetaGamesMusic.setPaused(false));
   window.addEventListener('pageshow', () => {
-    if (enabled && !document.hidden) play();
+    if (ctx && enabled && !document.hidden) play();
   });
   window.addEventListener('pagehide', () => {
     if (interval) {

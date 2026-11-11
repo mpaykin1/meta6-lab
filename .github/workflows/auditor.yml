@@ -71,7 +71,7 @@ jobs:
                 (file.status !== 'added' && cfg.protected_existing_roots.some(prefix => p.startsWith(prefix))));
             }
             const prs = [];
-            for (let page = 1; page <= 2; page++) {
+            for (let page = 1; page <= 1; page++) {
               const {data} = await github.rest.pulls.list({
                 owner,repo,state:'all',sort:'updated',direction:'desc',per_page:100,page
               });
@@ -232,17 +232,10 @@ jobs:
             if (context.eventName === 'pull_request') {
               core.info('PR preview: no Issue mutation allowed');
             } else {
-            let audit = null;
-            for (let page=1;page<=15 && !audit;page++) {
-              const result = await github.rest.issues.listForRepo({owner,repo,state:'all',per_page:100,page});
-              audit = result.data.find(i => !i.pull_request && i.title === cfg.issue_title) || null;
-              if (result.data.length < 100) break;
-            }
-            if (audit) {
-              await github.rest.issues.update({owner,repo,issue_number:audit.number,state:'open',body:report});
-            } else {
-              audit = (await github.rest.issues.create({owner,repo,title:cfg.issue_title,body:report})).data;
-            }
+            const updated = await github.rest.issues.update({
+              owner,repo,issue_number:cfg.issue_number,state:'open',body:report
+            });
+            const audit = updated.data;
             try {
               await github.graphql('mutation($id:ID!){pinIssue(input:{issueId:$id}){issue{id}}}',{
                 id:audit.node_id

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T11:22:52.891Z",
+  "generated_at": "2026-11-11T11:23:42.140Z",
   "sha": {
-    "lab": "fe61012f80dc03291c30ba4e8c1ad5326240e9da",
+    "lab": "7a548632aae8be6b541cc52fec2e0bba3d14059a",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43011419062",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43011530670",
   "review": {
     "protected": [
       {
@@ -268,11 +268,16 @@
     ]
   },
   "pr": {
-    "open": 39,
+    "open": 38,
     "conflicts": "нет данных",
-    "merged": 15,
+    "merged": 16,
     "closed": 44,
     "mergedItems": [
+      {
+        "number": 244,
+        "title": "Living Watercolor: публичная демосцена дерева, вулкана и фаб",
+        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a"
+      },
       {
         "number": 238,
         "title": "META GAMES: guarded PR autofinish, conflict-free journals, s",
@@ -436,7 +441,7 @@
   },
   "changes": {
     "lab": {
-      "count": 894,
+      "count": 896,
       "folders": "нет данных"
     },
     "mg": {

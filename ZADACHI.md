@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | PR #205: разрешить конфликт пульта владельца с main | МГЛ | MG-строитель-4 | `lab/owner-pult` | [#205](https://github.com/mpaykin1/meta6-lab/pull/205) | 2026-11-11 06:43 | — |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | Broken City: чистый PR оптимизации вместо #60 | МГЛ | чат ChatGPT | `lab/render-broken-city-safe-1110` | [#225](https://github.com/mpaykin1/meta6-lab/pull/225) | 2026-11-10 06:26 | 2026-11-11 06:27 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Исправить красные проверки PR #234 | МГЛ | MG-ремонтник | `lab/claude-adfree-catalog-1110` | [#234](https://github.com/mpaykin1/meta6-lab/pull/234) | 2026-11-10 12:51 | 2026-11-11 06:24 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Каталог игр Claude без рекламы | МГЛ | чат ChatGPT | `lab/claude-adfree-catalog-1110` | [#234](https://github.com/mpaykin1/meta6-lab/pull/234) | 2026-11-10 11:13 | 2026-11-11 06:24 |

@@ -32,7 +32,7 @@
 - SHA: `757890f0aa4809e92d3466c55a1db98269f133e6` · последний коммит: 2026-11-10T08:48:21Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-строитель-2 2026-11-11T05:12:00Z
+- Взял: НУЖЕН CLAUDE (PR #221 меняет защищённые .github/workflows/zadachi-watch.yml и scripts/zadachi/; самостоятельное слияние запрещено)
 
 ### PR #225
 - PR: https://github.com/mpaykin1/meta6-lab/pull/225

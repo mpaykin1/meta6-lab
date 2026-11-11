@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T04:53:43.263Z | МГЛ: 866621a4f71c79bcb99749443e8a4b4fb07f12b2 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42962131089
+UTC: 2026-11-11T04:56:14.398Z | МГЛ: b19f0711c294fccd60855102c8671cf4972ad8d9 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42962396575
 ## ПРОВЕРИТЬ CLAUDE
 - PR #230 eabab1dc976ca4332c3c66cfd9b8bd56f4471b88: .github/workflows/dispetcher.yml
 - PR #227 2a4558a4b3993d6d0583c004155508d084eb6496: .github/workflows/dispetcher.yml
@@ -47,14 +47,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 40 | конфликт: нет данных | слито: 7 | закрыто: 41
+открыто: 41 | конфликт: нет данных | слито: 7 | закрыто: 41
 #230 Dispatcher: retry queue push when main moves | eabab1dc976ca4332c3c66cfd9b8bd56f4471b88
 #227 MG Dispatcher: automated PR triage queue | 2a4558a4b3993d6d0583c004155508d084eb6496
 #226 ЛОР: Древо миров и каталог skin-trainer — чистая история без | b18b5a47bff6b40730a059c5483ddc6da938c0c8
 #216 СВОДКА ДЛЯ CLAUDE: facts-only GitHub Actions bot | 06a8b61ec198ba43bb93a69efb2aeca7246383ee
 ещё 3: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 661 коммитов | .github:5, .lab-sync-base:1, AGENTS.md:1, automation:7, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:11, shared:2, ZADACHI.md:1
+МГЛ: 665 коммитов | .github:5, .lab-sync-base:1, AGENTS.md:1, automation:7, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:11, shared:2, ZADACHI.md:1
 МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

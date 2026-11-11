@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T06:06:34.869Z",
+  "generated_at": "2026-11-11T06:12:14.583Z",
   "sha": {
-    "lab": "8790e6339ccf62af9584a4353749c864d4cf7785",
+    "lab": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42970065037",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42970729380",
   "review": {
     "protected": [
       {
@@ -73,7 +73,13 @@
         ]
       }
     ],
-    "redLab": [],
+    "redLab": [
+      {
+        "workflow": "META BOT",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42968126105",
+        "step": "Play all games"
+      }
+    ],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -241,11 +247,16 @@
     ]
   },
   "pr": {
-    "open": 38,
+    "open": 37,
     "conflicts": "нет данных",
-    "merged": 11,
+    "merged": 12,
     "closed": 41,
     "mergedItems": [
+      {
+        "number": 232,
+        "title": "META GAMES: возможности платформы для начинающих разработчик",
+        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98"
+      },
       {
         "number": 231,
         "title": "fix(dispatcher): reliable conflict state when mergeable is n",
@@ -368,8 +379,8 @@
   },
   "changes": {
     "lab": {
-      "count": 733,
-      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1"
+      "count": 738,
+      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:4, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1"
     },
     "mg": {
       "count": 2,
@@ -429,7 +440,7 @@
     },
     {
       "name": "veil-terraces",
-      "bot": "прошла",
+      "bot": "не прошла",
       "storefront": "да"
     }
   ],

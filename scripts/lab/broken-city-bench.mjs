@@ -1,3 +1,4 @@
+import './mutate-broken-city-quality-resume.mjs';
 import { chromium } from 'playwright';
 import { appendFileSync } from 'node:fs';
 const browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--enable-unsafe-swiftshader']});

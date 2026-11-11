@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-11T01:43:52.440Z",
+  "generated_at": "2026-11-11T01:55:03.931Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -1135,7 +1135,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-3",
       "branch": "lab/mcp-connect",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 192,
       "pr_state": "open",
@@ -1144,7 +1144,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/192",
       "taken_at": "2026-11-09 22:25",
       "last_commit_at": "2026-11-09 22:26",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: bot, browser"
     },
     {
       "id": 67,
@@ -1152,7 +1152,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-1",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 203,
       "pr_state": "open",
@@ -1161,7 +1161,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-10 22:05",
       "last_commit_at": "2026-11-09 19:38",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 68,
@@ -1169,7 +1169,7 @@
       "project": "МГЛ",
       "owner": "MG-ремонтник",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 203,
       "pr_state": "open",
@@ -1178,7 +1178,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-10 18:50",
       "last_commit_at": "2026-11-09 19:38",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 69,
@@ -1186,7 +1186,7 @@
       "project": "МГЛ",
       "owner": "MG-ремонтник",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 203,
       "pr_state": "open",
@@ -1195,7 +1195,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-10 15:58",
       "last_commit_at": "2026-11-09 19:38",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 70,
@@ -1203,7 +1203,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 203,
       "pr_state": "open",
@@ -1212,7 +1212,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-09 16:21",
       "last_commit_at": "2026-11-09 19:38",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 71,
@@ -1220,7 +1220,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/owner-pult",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 205,
       "pr_state": "open",
@@ -1229,7 +1229,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/205",
       "taken_at": "2026-11-09 16:35",
       "last_commit_at": "2026-11-09 17:01",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 72,
@@ -1543,7 +1543,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-4",
       "branch": "lab/owner-pult",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🙋 НУЖЕН CLAUDE: защищённый workflow",
       "pr": 205,
       "pr_state": "open",
@@ -1552,7 +1552,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/205",
       "taken_at": "2026-11-11 01:41",
       "last_commit_at": "2026-11-09 17:01",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 91,
@@ -1577,7 +1577,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-4",
       "branch": "lab/cycle4-twilight-isles-no-ads-1108",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🙋 НУЖЕН CLAUDE: защищённый workflow и красный META BOT",
       "pr": 129,
       "pr_state": "open",
@@ -1586,7 +1586,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/129",
       "taken_at": "2026-11-10 09:44",
       "last_commit_at": "2026-11-08 21:41",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: bot, changed-games"
     },
     {
       "id": 93,
@@ -1696,7 +1696,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/cycle4-twilight-isles-no-ads-1108",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 129,
       "pr_state": "open",
@@ -1705,7 +1705,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/129",
       "taken_at": "2026-11-08 12:07",
       "last_commit_at": "2026-11-08 21:41",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: bot, changed-games"
     },
     {
       "id": 100,

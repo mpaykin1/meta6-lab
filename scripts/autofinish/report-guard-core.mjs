@@ -7,7 +7,7 @@ export function violations(diff){
   function flush(){
     for(let i=0;i<added.length;i++){
       const s=added[i];
-      if(!pending.test(s)||/^.{0,15}не\s+слить\b/i.test(s))continue;
+      if(!pending.test(s)||/^.{0,15}не\s+слить(?=[^\p{L}]|$)/i.test(s))continue;
       const neighborhood=added.slice(i,i+3).join('\n');
       if(!evidence.test(neighborhood))out.push(path+': '+s.trim().slice(0,150));
     }

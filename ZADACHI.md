@@ -182,3 +182,6 @@
 
 ## ТОЛКАЧ — запуски (факты из GitHub)
 - 2026-11-11 14:15 UTC · очередь из снимка сторожа: 132 строки 🛑/⚠/💤, 88 ключей PR/ветка, из них 42 открытых PR (МГЛ); 🛑 64 → 84 по двум публикациям сторожа (пересчёт, не результат слияния); слито 0, закрыто 0, исправлено в PR 0, передано Claude 0 · [саморазвитие #257](https://github.com/mpaykin1/meta6-lab/pull/257), [SHA](https://github.com/mpaykin1/meta6-lab/commit/957f5252392a4846bd75919575312d571d4a0e80); ожидается B1/CI; [прогресс толкача создаётся в #256](https://github.com/mpaykin1/meta6-lab/pull/256).
+
+## БОТ-ПРОХОДЧИК — запуски
+- 2026-11-11 14:27 UTC · БОТ-ПРОХОДЧИК: проверено игр 0, технически пройдено 0, исправлено игровых дефектов 0, передано Claude 0 · [B2 PR #258](https://github.com/mpaykin1/meta6-lab/pull/258), [KONTUR на коммите кода](https://github.com/mpaykin1/meta6-lab/actions/runs/43038099712) PASS, финальный HEAD ещё проверяется · [саморазвитие а) PR #259](https://github.com/mpaykin1/meta6-lab/pull/259), [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43037648249).

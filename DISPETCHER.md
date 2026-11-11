@@ -56,7 +56,7 @@
 - SHA: `16715714f06e0071871dc6df59560b2ba312867c` · последний коммит: 2026-11-09T17:01:32Z
 - Проблема: 🛑 ЗАВИС
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
-- Взял: MG-строитель-4 2026-11-11T01:41:00Z
+- Взял: НУЖЕН CLAUDE — PR #205 изменяет защищённый .github/workflows/owner-pult.yml; https://github.com/mpaykin1/meta6-lab/pull/205#issuecomment-6784476048
 
 ### PR #218
 - PR: https://github.com/mpaykin1/meta6-lab/pull/218

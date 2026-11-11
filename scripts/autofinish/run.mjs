@@ -20,8 +20,11 @@ const protectedPaths=[/^\.github\//,/^scripts\/meta-bot\//,/^scripts\/kontur\//,
 export const safeFiles=files=>files.length>0&&files.length<500&&
   files.every(f=>!protectedPaths.some(re=>re.test(f.filename)));
 export function green(checks,statuses,files){
-  if(!checks.length||checks.some(c=>c.status!=='completed'||c.conclusion!=='success'))return false;
-  const names=new Set(checks.map(c=>c.name));
+  // GitHub reports the optional Pages deploy as skipped on pull requests.
+  // Required guardians must still complete successfully (never merely skipped).
+  if(!checks.length||checks.some(c=>c.status!=='completed'||
+    (c.conclusion!=='success'&&!(c.name==='deploy'&&c.conclusion==='skipped'))))return false;
+  const names=new Set(checks.filter(c=>c.conclusion==='success').map(c=>c.name));
   if(!['mutate-kontur-guard','kontur-guard','guard'].every(n=>names.has(n)))return false;
   if(files.some(f=>/^(games|meta-games)\//.test(f.filename))&&!names.has('bot'))return false;
   return statuses.every(s=>s.state==='success');

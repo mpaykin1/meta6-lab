@@ -14,7 +14,7 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132
 - Ветка: `lab/cycle5-archer-meta-adfree-1108`
 - SHA: `6a8f0de72673b4ab6f71e984e11ffa04715b2322` · последний коммит: 2026-11-11T07:36:18Z
-- Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42980721793/job/130390337689), kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42980713803/job/130390214653)
+- Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42980721793/job/130390337689), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42980721812/job/130390241550), kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42980713803/job/130390214653)
 - Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42980721793/job/130390337689 и повтори CI.
 - Взял: чат ChatGPT — Рабочий чат МГ/МГЛ 2026-11-11T07:27:58Z
 
@@ -32,13 +32,13 @@
 - SHA: `c428658122f53e6f8c2a6e593619feab5edd22df` · последний коммит: 2026-11-11T06:53:42Z
 - Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608316/job/130373869265), game-browser-check (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608484/job/130373867179), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608429/job/130373867046), guard (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608417/job/130373866818), verify (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608444/job/130373866713), index (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608367/job/130373866640), play (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608355/job/130373866614), protect-shared (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608299/job/130373866197)
 - Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42975608316/job/130373869265 и повтори CI.
-- Взял: НУЖЕН CLAUDE — изменения принятых эталонов и красный guard; https://github.com/mpaykin1/meta6-lab/pull/234#issuecomment-6790364239
+- Взял: —
 
 ### PR #242
 - PR: https://github.com/mpaykin1/meta6-lab/pull/242
 - Ветка: `lab/seo-claude-adfree-1111`
 - SHA: `4eb9dc08ae3de6675509ad3e0fdec213f14818f2` · последний коммит: 2026-11-11T07:39:38Z
-- Проблема: Красная проверка: verify (https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117/job/130391790428), guard (https://github.com/mpaykin1/meta6-lab/actions/runs/42981201180/job/130391789520), kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42981110878/job/130391502358)
+- Проблема: Красная проверка: verify (https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117/job/130391790428), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42981201239/job/130391789540), guard (https://github.com/mpaykin1/meta6-lab/actions/runs/42981201180/job/130391789520), kick-main (https://github.com/mpaykin1/meta6-lab/actions/runs/42981110878/job/130391502358)
 - Задание: Исправь verify по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117/job/130391790428 и повтори CI.
 - Взял: MG-строитель-2 2026-11-11T08:17:47Z
 
@@ -72,11 +72,11 @@
 - [#205](https://github.com/mpaykin1/meta6-lab/pull/205) Пульт владельца
 - [#201](https://github.com/mpaykin1/meta6-lab/pull/201) PR #201: проверить эталон и ограничения слияния
 - [#193](https://github.com/mpaykin1/meta6-lab/pull/193) К7
+- [#203](https://github.com/mpaykin1/meta6-lab/pull/203) Устранить конфликт PR #203 с main
+- [#87](https://github.com/mpaykin1/meta6-lab/pull/87) Довести PR #87: Play / Connect / Earn до актуального main
 - [#219](https://github.com/mpaykin1/meta6-lab/pull/219) A1: STATUS.md — автоматический краткий статус МГЛ
 - [#235](https://github.com/mpaykin1/meta6-lab/pull/235) Неподвижный экран при джойстике — все игры МГЛ
 - [#225](https://github.com/mpaykin1/meta6-lab/pull/225) Broken City: чистый PR оптимизации вместо #60
-- [#203](https://github.com/mpaykin1/meta6-lab/pull/203) Устранить конфликт PR #203 с main
-- [#87](https://github.com/mpaykin1/meta6-lab/pull/87) Довести PR #87: Play / Connect / Earn до актуального main
 - [#238](https://github.com/mpaykin1/meta6-lab/pull/238) Автодоводчик PR: CI, безопасное слияние, бесконфликтные журналы и зависшие задачи
 - [#129](https://github.com/mpaykin1/meta6-lab/pull/129) fix(meta): Twilight Isles 2 plays without ads, with free revival
 - [#131](https://github.com/mpaykin1/meta6-lab/pull/131) META GAMES: 10 эталонов графики и анимации из оригиналов владельца

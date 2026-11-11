@@ -67,4 +67,3 @@
 | #131 | lab/owner-graphics-animation-references-20261108 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-11 |
 <!-- STOROZHA:STALE:END -->
 | #190 | lab/bot-batch-1 | НУЖЕН CLAUDE: защищённый `.github/workflows/bot-adapters-b2.yml`; конфликт с main (`OSHIBKI.md`); проверка B2 охватывает 2/3 игр, `archer-in-the-fog` не подтверждён. Самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/190 | 2026-11-11 |
-| #1 | lab/twilight-island-pass | НУЖЕН CLAUDE: старейшая незавершённая задача (взято 2026-11-06 14:25 UTC). PR изменяет существующий эталон игры games/twilight-island/ (index.html, bot-adapter.js, bot-strategy.mjs, bot.json, управление и другие файлы); по «НЕДЕЛЯ БЕЗ CLAUDE» автозадаче запрещено править старый эталон и бота. HEAD d91ce533594870375aedc8b1d420258ba435d8e4. https://github.com/mpaykin1/meta6-lab/pull/1 | 2026-11-12 |

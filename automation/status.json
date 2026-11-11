@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T12:49:40.498Z",
+  "generated_at": "2026-11-11T13:10:45.247Z",
   "sha": {
-    "lab": "b90f2ab072b8a5968770506aa976febe3dc2fa0d",
+    "lab": "364c16118d21d434fdb117acd22496c14bdfd0de",
     "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43023646330",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43026677255",
   "review": {
     "protected": [
       {
@@ -94,18 +94,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "ZADACHI watch",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43021888268",
-        "step": "Update ZADACHI.md from GitHub"
-      },
-      {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43021888301",
-        "step": "Run node scripts/dispetcher/run.mjs"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -274,7 +263,7 @@
   },
   "pr": {
     "open": 45,
-    "conflicts": 20,
+    "conflicts": "нет данных",
     "merged": 16,
     "closed": 44,
     "mergedItems": [
@@ -446,7 +435,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1003,
+      "count": 1009,
       "folders": "нет данных"
     },
     "mg": {

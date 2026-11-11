@@ -26,6 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
+      - uses: actions/checkout@v4
+      - name: Verify three auditor mutation traps
+        run: node scripts/auditor/mutate-auditor.mjs
       - name: Audit five agent cycles
         uses: actions/github-script@v7
         with:

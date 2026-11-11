@@ -20,6 +20,14 @@
       "solutions": 282
     },
     {
+      "game": "basement-b2",
+      "source_root": "games/basement-b2",
+      "manifest": "shared/library/basement-b2.json",
+      "assets": 2,
+      "file_assets": 0,
+      "solutions": 55
+    },
+    {
       "game": "broken-city",
       "source_root": "games/broken-city",
       "manifest": "shared/library/broken-city.json",
@@ -21631,6 +21639,861 @@
       "lines": [
         1486,
         1486
+      ]
+    },
+    {
+      "id": "592cf090f1ddb101fffc281b",
+      "game": "basement-b2",
+      "kind": "inline-svg",
+      "name": "svg@4029",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "0f145f0c8a1922589b72ef7ed8d9c3b916e10db5d328484b371f420db946f484",
+      "lines": [
+        52,
+        68
+      ]
+    },
+    {
+      "id": "aee0a596489afd030306bc44",
+      "game": "basement-b2",
+      "kind": "inline-style",
+      "name": "style@229",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "79a032b7b36a3f5978a2659dc191b6aeb549428dd592d5183a474af76f998040",
+      "lines": [
+        7,
+        44
+      ]
+    },
+    {
+      "id": "0289d9681b188ab545127076",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "P",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "3a859d2310ce4e8861c860290fd2498b9d18d0ff6706d06094d1118167ec9839",
+      "lines": [
+        123,
+        123
+      ]
+    },
+    {
+      "id": "0c15d4135112da460ab5d620",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "sparks",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "1ee5bc4f3904af12eceddb5c414a53c2a9d44c16c4c3838bfb689c72841522f2",
+      "lines": [
+        248,
+        248
+      ]
+    },
+    {
+      "id": "0e5b444b8ff50a479c4b4944",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "startSeq",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "42d60c5e5e8e15f9c532fd6903f28978cfff59fdf7b2c92490b15ddc992479e1",
+      "lines": [
+        408,
+        408
+      ]
+    },
+    {
+      "id": "0faf4eb0f9208b53a8cc12ff",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "inline-script@6670",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "03a965a807a42459c21811aee043631b2015af91c6e58299b039109602d43b05",
+      "lines": [
+        78,
+        554
+      ]
+    },
+    {
+      "id": "1042eaa20cc0e2c0704a5816",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "holder",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "1afb398b1b6e6d0edbac6770c0147c3fd27af485f00471dbf7ac6cca4f96ce9a",
+      "lines": [
+        93,
+        93
+      ]
+    },
+    {
+      "id": "1949c8b913e14f5eae4491b2",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "kick",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "12a5ad99e33e6504e1a37f0341e974cc88056cf733f5cab6844ae2ef3afea3be",
+      "lines": [
+        371,
+        371
+      ]
+    },
+    {
+      "id": "1ce4c8612f3ead6c9e63aab7",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "unlock",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "9a430c7d1f636bdd5e3b0f1028f8b54bf6ae6e7ff7975824fee142e302e61a5d",
+      "lines": [
+        452,
+        458
+      ]
+    },
+    {
+      "id": "1dac74cd3f7483d17958ed37",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "stopSeq",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "8df82aee59f3d772bccc0bdceda88788af5828699dfa75ce05635d88c6199a36",
+      "lines": [
+        410,
+        410
+      ]
+    },
+    {
+      "id": "28f90e57151b5b4280d8d13b",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "audible",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "51880f2f6f8e44de1fb48028fb6cedd3791bce8b49ef0d8ab2fb0a636efc343d",
+      "lines": [
+        490,
+        490
+      ]
+    },
+    {
+      "id": "3322cf1fa79baf9d8378670a",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "onCount",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "3a41441444f3122d5db20af3776a769550855be05107eff849fd1d53e22f594a",
+      "lines": [
+        399,
+        399
+      ]
+    },
+    {
+      "id": "384645b31fc8427330e07292",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "need",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "990f0149e95e14d7f9a99f66001b61f16e314d971448012aabf0593209b0f577",
+      "lines": [
+        332,
+        333
+      ]
+    },
+    {
+      "id": "3acac29108714cdf12edba30",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "toggle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "228356d4902b771aef5ba2a6dfe282d9d96a9c2f15351094c391c00376250b84",
+      "lines": [
+        412,
+        418
+      ]
+    },
+    {
+      "id": "46b2b5eb54db326daa6ebacd",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "plane",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "1d63652d171d44407453c03315c35aea57a7ecb86b9e3b23ba65eda339f33758",
+      "lines": [
+        168,
+        168
+      ]
+    },
+    {
+      "id": "479fb46adbb6006d833a34b1",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "clamp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "45b2739ca9376bd5edbec9518fbcb46db498e222e523f77d13414f67f8f48684",
+      "lines": [
+        86,
+        90
+      ]
+    },
+    {
+      "id": "4a8638e9e5d015ae09f47827",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "applyAwake",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "1eaf55b2339b9f9c7ff0c345015c41a2d05794a21efdf5293b3498d720b70fec",
+      "lines": [
+        331,
+        331
+      ]
+    },
+    {
+      "id": "4c8086afee0a0d4c7950a6a1",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "glow",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "f0ff4a0683fe1fb1ebde40283ba9bb357bd5d6a02548f69c100aedec7b6262d7",
+      "lines": [
+        125,
+        125
+      ]
+    },
+    {
+      "id": "4d1956f88a11824f8abeb720",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "H",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "9dfa796f10bbe293ebdd21f7d69e45f76b6a97136a9f42fdfe0c8d8f1ebb1290",
+      "lines": [
+        85,
+        85
+      ]
+    },
+    {
+      "id": "4ee9671dcbb35934fac25286",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "cable",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "92f45273e1e7d207cb3de0d44c5f3d0f63c4e91bba889beb3ed88c985937c29e",
+      "lines": [
+        212,
+        212
+      ]
+    },
+    {
+      "id": "51781f5bd274a7f847d1344d",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "tone",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "06067210a97075b7084205d04d115a2cdede95d3b971fd7047e4606230675f35",
+      "lines": [
+        372,
+        372
+      ]
+    },
+    {
+      "id": "52ebe01c60593583e58af2d5",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "VB",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "0bef54be949e5b24b142de9dd6b4cf7c103cf1b9c5eb6e10496a7bc594e08741",
+      "lines": [
+        114,
+        114
+      ]
+    },
+    {
+      "id": "5656bbfd2a8763627d0dad26",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "tap",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "20c5a85f3453784d162ef4b29c21c3eee109d63bc017217cae2e377f79f9a384",
+      "lines": [
+        469,
+        472
+      ]
+    },
+    {
+      "id": "5d2cec3506be822d62ed0421",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "fallbackSample",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "5b77f765eb9deaad59b19953ebf98423104b959887578b35cadea9a18ed3ddc6",
+      "lines": [
+        357,
+        366
+      ]
+    },
+    {
+      "id": "5f39aa3c42cbd1248eb886ab",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "keyboard",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "5b9451d15389f2b8074fceba5e7dcbdfb7ba17aaa5841ecb60d479f8f307aa9a",
+      "lines": [
+        269,
+        270
+      ]
+    },
+    {
+      "id": "6024bf5be3bf65c9b284dbd9",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "up",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "f6c2d48507945f327dc995487f8110d6905de199a9a34f7d0d0dded1ddca9cce",
+      "lines": [
+        466,
+        466
+      ]
+    },
+    {
+      "id": "639612d0c583ae45a1643877",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "lamp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "7f514e37b1b483f9a3d0d6f2e066bec35de7494327dc449157da4cfe89d994db",
+      "lines": [
+        182,
+        183
+      ]
+    },
+    {
+      "id": "6a2e7c7328e558cb9d2f88d3",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "unlockNext",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "09f10345ca1bed895bdf73c73f2e7adf05b50f820d9dbf6238fdbde72570127c",
+      "lines": [
+        335,
+        336
+      ]
+    },
+    {
+      "id": "6dad99850900e42800d1c8c4",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "ctex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "d18ab76286be2f31f282f9c9d579f1c838226ee23fa56e1d92aa11af4cca8bed",
+      "lines": [
+        99,
+        99
+      ]
+    },
+    {
+      "id": "89c6ab35730389bdc21bf798",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "M",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "2892ba10a7e717cbe509813075d54e03835ef31ecd57fa3f1786f9a39af8bddd",
+      "lines": [
+        122,
+        122
+      ]
+    },
+    {
+      "id": "91fb0b7764e6b6465565c3de",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "bad",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "3d0a4676cce93764f9b5691dddb31e60a5542d3250d72d965b4b861242995acb",
+      "lines": [
+        351,
+        351
+      ]
+    },
+    {
+      "id": "93ee5a07adc7bb1ebadb2fed",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "crt",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "794ecbf86090686bf39eeaa91b6a3224321111eddb941d96ea04cbfeae62913e",
+      "lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "id": "950722affaa915bd376bbb48",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "5ac2cce7585d45413626c136848802415d5fbc731209e18cc30b45e8cedc2cf0",
+      "lines": [
+        441,
+        446
+      ]
+    },
+    {
+      "id": "9913f47ab942828868669fa9",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "chime",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "18a3c57a2ff661cca755681dbd38a6831c176b9621b0fd45644b27b97583f2ad",
+      "lines": [
+        373,
+        373
+      ]
+    },
+    {
+      "id": "9ee575c7b90517aafc1503a8",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "paper",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "3d501ff7b43ba0b2d62c73fbc259cafbc9d1318ce561f0b76e73f7eed093751e",
+      "lines": [
+        251,
+        251
+      ]
+    },
+    {
+      "id": "9ef650b140dd8dd76be1f855",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "dust",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "b55d168c73e51c2ab03691f22c91e343f2032c4e213e3509693caa8e5c92956e",
+      "lines": [
+        240,
+        242
+      ]
+    },
+    {
+      "id": "a7dcf74248ba40e8cb350864",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "save",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "aa0eea4627e8dd7dfcf7471b65a96091c30a8738013bbe798135be6267c1290e",
+      "lines": [
+        330,
+        330
+      ]
+    },
+    {
+      "id": "acf9751a89a89b8cd417dd46",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "toast",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "eb5a3017f0f8b056ac3dacd923aba1c3afd1106a5d1639b653e9cc62c8ba25cc",
+      "lines": [
+        333,
+        333
+      ]
+    },
+    {
+      "id": "ad518cec8e719f6a016452f9",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "TR",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "f9db67d1be2efb102911e5ed14c5a218344d81a8cb61f430abb302eb8b239ef1",
+      "lines": [
+        376,
+        396
+      ]
+    },
+    {
+      "id": "b3c559cc463c11578b3bb7b1",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "ok",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "69fe6eae82f5d492b2cf0a2f9b9068de76b021fccfe263c16d3506475f6f008c",
+      "lines": [
+        353,
+        354
+      ]
+    },
+    {
+      "id": "b5b0ae212d8000514fc9fc20",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "glowTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "5c3e7f6fc72dc9e380b5122bc0be83b62eaaf473e7829813da5f0378d37a4570",
+      "lines": [
+        111,
+        111
+      ]
+    },
+    {
+      "id": "b700e07280cbe4c5f5142358",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "R",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "e3916bb7425daf127c5cd0c99403b0b59f5a6097bf0ece35410951ccf86c5ef9",
+      "lines": [
+        84,
+        84
+      ]
+    },
+    {
+      "id": "bd1e84fc5b8cfa392e8aa1b6",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "initAudio",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "f5be5eaac124b21a5dce2cfd07f30b73c5126abcc33de2688e8473f141e0b9a6",
+      "lines": [
+        341,
+        356
+      ]
+    },
+    {
+      "id": "bd9d865c8163e63792b3683a",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "allOff",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "ca0f10ec37257a2d5de2b51d91938ce2443ada4cd2f7d919618a16c69d3df8ba",
+      "lines": [
+        419,
+        419
+      ]
+    },
+    {
+      "id": "c42d5baf812b86d44175c999",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "stepDur",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "3b3a3788f0e9ce0d3b8b83190480891dfa6ef82db2d59eec2f075b76f4583d05",
+      "lines": [
+        398,
+        399
+      ]
+    },
+    {
+      "id": "c5d1eac76795a194dde2b3cb",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "sched",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "ac4d8240e4a27f2d1e9615aacfc03d3c8203ba4b5de5631212237d8cca69a7cb",
+      "lines": [
+        400,
+        406
+      ]
+    },
+    {
+      "id": "c96bce926a96112b1145d431",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "note",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "a91a2dc8b2013f27e3471ccde8873baf1efab560ac4f656534caf0dc0dbd9912",
+      "lines": [
+        378,
+        396
+      ]
+    },
+    {
+      "id": "cad426a1a2fe78ba22af8110",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "arcFire",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "4d9e8fba0624f6c69beb212b61daaddbd8887b69244f5a68946cb29cd9eb456e",
+      "lines": [
+        260,
+        260
+      ]
+    },
+    {
+      "id": "caffc107d90e163497336c08",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "E",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "eff474299048019cfed29a9877d8bb60a6d75952c0b72979e333ca970b4b9345",
+      "lines": [
+        124,
+        124
+      ]
+    },
+    {
+      "id": "d478360f6e83eb9f87929e97",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "frame",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "a57cf0b4d5c6728bc5c2b51fad6fe5ef57a48cd302254fe74f575e50f6ccca66",
+      "lines": [
+        496,
+        550
+      ]
+    },
+    {
+      "id": "db41655fb4fddaf251d73e23",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "mk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "ecca2788b6439c7f90c89978756ad1058785684730de47e1e062c8cea8488007",
+      "lines": [
+        264,
+        268
+      ]
+    },
+    {
+      "id": "dde4960d8440c09f5957977e",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "a",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "a0dbad7695f1818fc495f2afc18bb6b4e71278ac596815226da25a20f9de1201",
+      "lines": [
+        190,
+        190
+      ]
+    },
+    {
+      "id": "deed3dd03449ec3eec1ff9db",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "play",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "fc699aa6c56cd4ac16337fb8e3cc51bedacffc7f02662f9e0401973df1dfc173",
+      "lines": [
+        367,
+        370
+      ]
+    },
+    {
+      "id": "ea6dee4d2f781616249c21a1",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "done",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "0912262ed8123003a1c35e8714f272329214dc9ca51f4e5e6fb74991479736ec",
+      "lines": [
+        350,
+        350
+      ]
+    },
+    {
+      "id": "ee3726ef39e2bbba74c790da",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "arc",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "c10ea7f085a9a517f329e79fca4a3f2a5de9569518b583f1d3e86da552c176c3",
+      "lines": [
+        256,
+        257
+      ]
+    },
+    {
+      "id": "f0c595cf6e17515a8e129277",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "buildMenu",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "b8bedc5046a89b5af69e925a93f5a1f4cd0f4893b0459088aa4bbff6d6cbeb84",
+      "lines": [
+        476,
+        483
+      ]
+    },
+    {
+      "id": "fb0772fc76af571f43e429f0",
+      "game": "basement-b2",
+      "kind": "solution",
+      "name": "blackout",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/basement-b2/index.html",
+      "sha256": "2afdb96983922f50250898f5f6140dceec30501035e55e3c9efb90b085e4e5ee",
+      "lines": [
+        420,
+        420
       ]
     },
     {

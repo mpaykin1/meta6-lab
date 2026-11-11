@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T14:15:40.413Z",
+  "generated_at": "2026-11-11T14:18:03.159Z",
   "sha": {
-    "lab": "321da5f5e335bba4d57889436b84755213ea7426",
+    "lab": "d363aa2290d2653a533c9683e94f97b38cae9df7",
     "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43036588972",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43037067434",
   "review": {
     "protected": [
       {
@@ -103,6 +103,11 @@
       }
     ],
     "redLab": [
+      {
+        "workflow": "Investigation snapshot",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43036286426",
+        "step": "Refresh investigation snapshot from GitHub"
+      },
       {
         "workflow": "B1 — all games open without console errors",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43034239517",
@@ -462,7 +467,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1046,
+      "count": 1049,
       "folders": "нет данных"
     },
     "mg": {

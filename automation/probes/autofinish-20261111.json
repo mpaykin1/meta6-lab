@@ -1,0 +1,7 @@
+{
+  "schema": "meta-games-autofinish-probe/1",
+  "created_utc": "2026-11-11",
+  "starting_main_sha": "e178381dcb446958f7ddc3afa800e397bf73c880",
+  "goal": "Verify that MG PR autofinish updates a stale branch and merges after all current checks and independent review",
+  "manual_merge_allowed": false
+}

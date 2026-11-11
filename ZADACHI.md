@@ -178,3 +178,6 @@
 | ✖ ЗАКРЫТО без слияния | lab: native catalog and safe Steam/Android candidates | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/native-catalog-and-steam` | [#4](https://github.com/mpaykin1/meta6-lab/pull/4) | 2026-11-06 19:58 | 2026-11-06 20:03 |
 | ✅ ГОТОВО · слито 7a54863 | Living Watercolor: публичная демосцена дерева, вулкана и фабрики | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/living-watercolor-public-demo` | [#244](https://github.com/mpaykin1/meta6-lab/pull/244) | 2026-11-11 11:21 | 2026-11-11 11:21 |
 <!-- ZADACHI:END -->
+
+## ТОЛКАЧ — запуски (факты из GitHub)
+- 2026-11-11 14:15 UTC · очередь из снимка сторожа: 132 строки 🛑/⚠/💤, 88 ключей PR/ветка, из них 42 открытых PR (МГЛ); 🛑 64 → 84 по двум публикациям сторожа (пересчёт, не результат слияния); слито 0, закрыто 0, исправлено в PR 0, передано Claude 0 · [саморазвитие #257](https://github.com/mpaykin1/meta6-lab/pull/257), [SHA](https://github.com/mpaykin1/meta6-lab/commit/957f5252392a4846bd75919575312d571d4a0e80); ожидается B1/CI; [прогресс толкача создаётся в #256](https://github.com/mpaykin1/meta6-lab/pull/256).

@@ -81,6 +81,10 @@ async function pixelDifference(page, selector) {
   await mark.evaluate(el => { el.style.visibility = 'hidden'; });
   const hidden = PNG.sync.read(await page.screenshot({ clip, animations: 'disabled' }));
   await mark.evaluate(el => { el.style.visibility = ''; });
+  await page.evaluate(() => {
+    const canvas = document.querySelector('canvas#c');
+    if (canvas) canvas.style.visibility = '';
+  });
   let count = 0;
   for (let i = 0; i < visible.data.length; i += 4) {
     const d = Math.abs(visible.data[i] - hidden.data[i])
@@ -100,6 +104,29 @@ async function inspect(page) {
     phase: hook?.phase || null,
     version: hook?.version || null
   };
+}
+
+async function threatProof(page) {
+  const triggered = await page.waitForFunction(() => {
+    const g = window.__A?.G;
+    return g?.mode === 'play' && g.rageMax > 0 && g.rage / g.rageMax > 0.75;
+  }, null, { timeout: 25000 }).then(() => true).catch(() => false);
+  if (!triggered) return { state: false, redPixels: 0, visual: false };
+  const hook = await page.evaluate(() => window.__metaBot?.state?.() || null);
+  const mark = page.locator('#archerTarget');
+  if (!(await mark.count()) || !(await mark.isVisible())) {
+    return { state: !!hook?.danger, redPixels: 0, visual: false };
+  }
+  const box = await mark.boundingBox();
+  const clip = { x: Math.floor(box.x), y: Math.floor(box.y),
+    width: Math.floor(box.width), height: Math.floor(box.height) };
+  const screenshot = PNG.sync.read(await page.screenshot({ clip, animations: 'disabled' }));
+  let redPixels = 0;
+  for (let i = 0; i < screenshot.data.length; i += 4) {
+    const r = screenshot.data[i], g = screenshot.data[i + 1], b = screenshot.data[i + 2];
+    if (r > 180 && g < r * 0.7 && b < r * 0.75) redPixels++;
+  }
+  return { state: !!hook?.danger, redPixels, visual: redPixels >= 48 };
 }
 
 async function fpsSample(page) {
@@ -153,9 +180,12 @@ try {
     const after = await inspect(a.page);
     const beforeFps = await fpsSample(b.page);
     const afterFps = await fpsSample(a.page);
+    const beforeThreat = await threatProof(b.page);
+    const afterThreat = await threatProof(a.page);
     const passed = !before.state && !before.visual && after.state && after.visual
+      && !beforeThreat.state && !beforeThreat.visual && afterThreat.state && afterThreat.visual
       && beforeFps <= afterFps && b.errors.length === 0 && a.errors.length === 0;
-    console.log(JSON.stringify({ viewport, before, after, beforeFps, afterFps,
+    console.log(JSON.stringify({ viewport, before, after, beforeThreat, afterThreat, beforeFps, afterFps,
       errorsBefore: b.errors, errorsAfter: a.errors, passed }));
     success &&= passed;
     await b.context.close();

@@ -14,7 +14,7 @@ async function api(path,method='GET',data,authorization=token){
   return json;
 }
 const protectedPaths=[/^\.github\//,/^scripts\/meta-bot\//,/^scripts\/kontur\//,
-  /^scripts\/autofinish\//,/^scripts\/storozha\//,
+  /^scripts\/autofinish\//,/^scripts\/storozha\//,/^scripts\/journal\//,
   /^scripts\/zadachi\//,/^scripts\/meta-games-guard\.sh$/, /^reference\//,
   /^rules\/09-platforma\/(?:FINISH|ZANYATO)\.md$/,
   /^rules\/06-rabota-ii-s-kodom\/KONTUR_BEZ_OSHIBOK\.md$/,

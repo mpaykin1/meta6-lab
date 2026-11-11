@@ -12,25 +12,43 @@ on:
       - 'scripts/journal/**'
       - '.github/workflows/journal-projections.yml'
   workflow_dispatch:
+# PR code is untrusted: it must never execute with the publication token.
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: mg-journal-projections
   cancel-in-progress: false
 jobs:
-  projection:
+  validate:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 8
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'main' }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/journal/validate.mjs
+  projection:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - run: node scripts/journal/validate.mjs
       - name: Publish compiled views on main
-        if: github.event_name != 'pull_request'
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com

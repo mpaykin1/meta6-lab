@@ -60,7 +60,15 @@ jobs:
         if: steps.links.outcome == 'failure'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run lab-pages.yml --ref main -R "$GITHUB_REPOSITORY"
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if gh api --method POST "repos/$GITHUB_REPOSITORY/actions/workflows/lab-pages.yml/dispatches" -f ref=main; then
+              exit 0
+            fi
+            [[ "$attempt" -eq 3 ]] || sleep "$((attempt * 20))"
+          done
+          exit 1
       - name: Check again after republishing
         id: recheck
         if: steps.links.outcome == 'failure' && steps.retry.outcome == 'success'

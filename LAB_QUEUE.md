@@ -9,6 +9,17 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
+### lab/living-watercolor-owner-pass-reference — Living Watercolor 3D (OWNER PASS)
+- Польза: одобренный эталон живой 3D-акварели; оригинальный код рендера и генераторов доступен для повторного использования.
+- Смотреть: https://mpaykin1.github.io/meta6-lab/demos/living-watercolor/
+- Источник: `demos/living-watercolor/` (main), исходники не изменены.
+- Машинный паспорт: `shared/references/living-watercolor.json`, точные blob SHA.
+- Live: https://github.com/mpaykin1/meta6-lab/actions/runs/43015257477/job/130504589418 — HTTP 200.
+- Ветка: `lab/living-watercolor-owner-pass-reference`.
+- Статус: OWNER PASS 11.11.2026; PR на добавление в эталоны; не считать отдельной игрой.
+- Михаил: «Супер. Это пасс!! Добавь это к нам в эталоны на МГЛ».
+
+
 ### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
 - Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
 - Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/

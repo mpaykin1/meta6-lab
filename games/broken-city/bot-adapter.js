@@ -1,18 +1,31 @@
-// Observes the real game engine. This file never writes gameplay state.
+// Read-only observation is published only when the actual game module is ready.
 (() => {
   'use strict';
-  const bot = Object.freeze({
-    version: 1,
-    info() {
-      const src = window.__BC_BOT_SOURCE__;
-      if (!src) throw new Error('META BOT: game engine is not ready');
-      return src.info();
-    },
-    state() {
-      const src = window.__BC_BOT_SOURCE__;
-      if (!src) throw new Error('META BOT: game engine is not ready');
-      return src.state();
+
+  function expose() {
+    const source = window.__BC_BOT_SOURCE__;
+    if (!source || typeof source.info !== 'function' || typeof source.state !== 'function') {
+      return false;
     }
-  });
-  Object.defineProperty(window, '__META_BOT__', { value: bot, writable: false, configurable: false });
+
+    const bot = Object.freeze({
+      version: 1,
+      info() { return window.__BC_BOT_SOURCE__.info(); },
+      state() { return window.__BC_BOT_SOURCE__.state(); }
+    });
+    Object.defineProperty(window, '__META_BOT__', {
+      value: bot,
+      writable: false,
+      configurable: false
+    });
+    return true;
+  }
+
+  // Classic scripts execute during parsing, before the preceding type=module
+  // engine initializes. Do not advertise a ready bot with missing source.
+  if (!expose()) {
+    const interval = setInterval(() => {
+      if (expose()) clearInterval(interval);
+    }, 100);
+  }
 })();

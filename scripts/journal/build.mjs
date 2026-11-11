@@ -7,6 +7,30 @@ const datasets=[
   ['progress/MERGE_PROGRESS','docs/progress/MERGE_PROGRESS.md'],
   ['progress/PR54_59_60','docs/progress/PR54_59_60.md'],
 ];
+// New YYYY-prefixed entries are merged into the root by one writer after merge.
+// Existing rows are never removed; the legacy watch remains authoritative for status.
+function publishNewEntries(name,original,dir,names){
+  if(!existsSync(original))return;
+  const additions=names.filter(n=>/^20\d{2}[-_][^/]*\.md$/.test(n));
+  if(!additions.length)return;
+  let updated=readFileSync(original,'utf8');
+  const key=line=>{
+    const cells=line.trim().split('|').map(s=>s.trim());
+    return cells.length>=9 ? cells[2]+'|'+cells[5].replaceAll(String.fromCharCode(96),'') : '';
+  };
+  for(const filename of additions){
+    const row=readFileSync(join(dir,filename),'utf8');
+    if(!row.trim()||updated.includes(row.trim()))continue;
+    if(name==='ZADACHI'){
+      const id=key(row);
+      if(!id||updated.split('\n').some(line=>key(line)===id))continue;
+      if(!updated.includes('<!-- ZADACHI:END -->'))throw Error('Missing ZADACHI boundary');
+      updated=updated.replace('<!-- ZADACHI:END -->',row.trimEnd()+'\n<!-- ZADACHI:END -->');
+    }else updated=updated.replace(/\s*$/,'\n')+'\n'+row.trimEnd()+'\n';
+  }
+  if(updated!==readFileSync(original,'utf8'))writeFileSync(original,updated);
+}
+
 const validate=process.argv.includes('--validate');
 if(!validate&&!process.argv.includes('--write'))throw Error('Specify --validate or --write');
 for(const [name,original] of datasets){
@@ -29,5 +53,6 @@ for(const [name,original] of datasets){
     mkdirSync(dirname(target),{recursive:true});
     if(!existsSync(target)||readFileSync(target,'utf8')!==joined)writeFileSync(target,joined);
     console.log('COMPILED '+target+' entries='+names.length);
+    publishNewEntries(name,original,dir,names);
   }
 }

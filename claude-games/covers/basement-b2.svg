@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+<title id="title">Подвал B2 — оркестр оргтехники</title>
+<desc id="desc">Тёмный воксельный подвал: копир, светящийся компьютер, принтеры и оборванные провода</desc>
+<rect width="640" height="400" fill="#03070e"/>
+<g transform="translate(34 20) scale(1.1)">
+   <defs><linearGradient id="b2floor" x2="0" y2="1"><stop stop-color="#152e38"/><stop offset="1" stop-color="#050811"/></linearGradient>
+   <filter id="b2glow"><feGaussianBlur stdDeviation="5"/></filter></defs>
+   <path fill="#080f19" d="M0 0H520V255H0z"/><path fill="url(#b2floor)" d="M0 174L520 174V255H0z"/>
+   <path d="M0 176L260 114 520 176M0 210L260 134 520 210M0 244L260 154 520 244" stroke="#29606b" opacity=".45" fill="none"/>
+   <path d="M108 25L108 155M418 21L418 157" stroke="#435160" stroke-width="5"/>
+   <path d="M0 30H520M0 68H520" stroke="#324b59" stroke-width="2"/>
+   <g transform="translate(35 87)"><path d="M0 35h145v96H0z" fill="#36434e"/><path d="M7 47h130v72H7z" fill="#9a9491"/><path d="M16 53h110v25H16z" fill="#272e3a"/><path d="M20 61h64" stroke="#7df3fc" stroke-width="5"/><path d="M18 122h112" stroke="#1b252d" stroke-width="8"/><path d="M74 0h63v34H74z" fill="#605b67"/><circle cx="114" cy="99" r="5" fill="#88f2aa"/></g>
+   <g transform="translate(194 47)"><path fill="#292d42" d="M4 15L145 0l7 137-149 3z"/><path fill="#66727e" d="M14 26l113-7v80l-113 6z"/><path fill="#071b28" d="M23 35l94-6v58l-94 5z"/>
+   <path fill="#82e8ed" opacity=".18" filter="url(#b2glow)" d="M23 35l94-6v58l-94 5z"/><path fill="#a6fff5" d="M31 45l78-5v2l-78 5zm0 12l58-4v2l-58 4zm0 12l69-5v2l-69 5z"/>
+   <path fill="#191c25" d="M-20 149l182-12 21 19-204 16z"/><path stroke="#8d93a3" stroke-width="4" d="M0 154l150-9M10 161l153-9"/><circle cx="132" cy="109" r="5" fill="#ff6c9b"/></g>
+   <g transform="translate(359 111)"><path fill="#5c626e" d="M0 23l116-8 8 88-124 7z"/><path fill="#999a9a" d="M9 36l103-8v31L9 67z"/><path fill="#101820" d="M25 9l69-4v27l-69 4z"/><path fill="#b0a99d" d="M26 66l67-6v43l-67 4z"/><circle cx="107" cy="74" r="4" fill="#74f9db"/></g>
+   <path d="M36 210C90 177 142 250 203 223S307 202 350 243" stroke="#161c24" stroke-width="8" fill="none"/>
+   <path d="M118 0v40l-8 16 17-4-5 15" stroke="#ff9c75" stroke-width="3" fill="none"/>
+   <circle cx="259" cy="22" r="8" fill="#5fe6ed"/><circle cx="259" cy="22" r="23" fill="#5fe6ed" opacity=".22" filter="url(#b2glow)"/>
+   <path d="M0 218H520" stroke="#8edff9" opacity=".28"/>
+  </g>
+<rect y="304" width="640" height="96" fill="#040812" opacity=".95"/>
+<path d="M22 310H618" stroke="#57d5dc" opacity=".3"/>
+<text x="30" y="350" font-size="38" font-weight="900" fill="#d7f8ff" letter-spacing="6" font-family="Courier New,monospace">ПОДВАЛ B2</text>
+<text x="32" y="380" font-size="14" fill="#8edbdc" letter-spacing="2" font-family="Courier New,monospace">ОРКЕСТР МЁРТВОЙ ОРГТЕХНИКИ</text>
+</svg>

@@ -107,9 +107,9 @@ class Traps(unittest.TestCase):
         hard = cp.check(self.d).hard()
         self.assertEqual(hard, [], hard)
 
-    def test_A1_no_manifest(self):
+    def test_I1_images_without_manifest(self):
         (self.d / "atlas.json").unlink()
-        self.assertIn("A1", self.ids())
+        self.assertIn("I1", self.ids())
 
     def test_A2_missing_file(self):
         (self.d / "characters/hero_idle.png").unlink()
@@ -127,17 +127,21 @@ class Traps(unittest.TestCase):
         self.save(m)
         self.assertIn("A4", self.ids())
 
-    def test_A6_no_license(self):
+    def test_C1_no_license(self):
         m = copy.deepcopy(self.man)
         del m["license"]
         self.save(m)
-        self.assertIn("A6", self.ids())
+        self.assertIn("C1", self.ids())
 
-    def test_A7_no_content_flags(self):
+    def test_C2_no_content_flags(self):
         m = copy.deepcopy(self.man)
         del m["content_flags"]
         self.save(m)
-        self.assertIn("A7", self.ids())
+        self.assertIn("C2", self.ids())
+
+    def test_C3_symlink_out_of_pack(self):
+        (self.d / "evil.png").symlink_to("/etc/hostname")
+        self.assertIn("C3", self.ids())
 
     def test_P3_empty_frame(self):
         fr = [figure(i) for i in range(6)]

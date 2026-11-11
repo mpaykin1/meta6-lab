@@ -102,3 +102,8 @@
 ## Захват 2026-11-11T09:56:55.681Z — PR #132 / Archer
 - Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ; карточка #132, ветка `lab/cycle5-archer-meta-adfree-1108`, проверенный HEAD `6a8f0de72673b4ab6f71e984e11ffa04715b2322`.
 - Дефект: [mobile META BOT changed-games](https://github.com/mpaykin1/meta6-lab/actions/runs/42980721793/job/130390337689) остановился на уровне 4 (task=hold); исходник считал время выживания только в фазе fight, игнорируя реальные атаки дракона. Действие: исправить учёт времени реального выживания в combat-фазах без ускорения времени и изменения META BOT, добавить регрессионную ловушку и проверить новый CI.
+
+### Результат #132 2026-11-11T10:01:11.928Z
+- Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ. Реальный патч [2993049a8](https://github.com/mpaykin1/meta6-lab/commit/2993049a8e4b47d82514a02ed99dd7de2b1bb3a8); текущий HEAD `ecfdb2558b76243dc605bc7cee4e5f77b953146d` ([автоиндекс](https://github.com/mpaykin1/meta6-lab/commit/ecfdb2558b76243dc605bc7cee4e5f77b953146d)).
+- Исправлена остановка счётчика выживания в боевых фазах при низком FPS; четыре дополнительные К3 мутации, OSHIBKI #36. Новая очередь CI на bot HEAD `action_required` не даёт права на слияние.
+- Следующий шаг: проверить исходы [focused META BOT на патче](https://github.com/mpaykin1/meta6-lab/actions/runs/42999845500), весь CI на актуальном HEAD и причину `action_required`. Не сливать до доказанного PASS.

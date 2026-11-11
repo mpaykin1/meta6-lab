@@ -16,3 +16,9 @@
 
 СЕЙЧАС ДЕЛАЮ: #229 и #231 ожидают независимую перекрёстную проверку и слияние при зелёном CI нового HEAD; #191 ожидает честный META BOT PASS на ПК и телефоне; #208 НУЖЕН CLAUDE — неизменяемый исходный HTML имеет запрещённый LEGACY_LIGHTS.
 Сделано / дальше: [две карточки захвачены](https://github.com/mpaykin1/meta6-lab/commit/7ecb6ebb13090462ddf7d2fc223246c3d5a12904); [PR #191](https://github.com/mpaykin1/meta6-lab/pull/191), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208), [PR #229](https://github.com/mpaykin1/meta6-lab/pull/229), [PR #231](https://github.com/mpaykin1/meta6-lab/pull/231). Не объявлять неслитое слитым.
+
+## Очередь PR 11.11.2026 — продолжение рабочего чата
+- PR #229 уже слит ранее: [merge 40dfc50](https://github.com/mpaykin1/meta6-lab/commit/40dfc505c5427f8d0b17b679d2f5df74352bc7c1), не повторять.
+- PR #231: [повтор неуспешных jobs](https://github.com/mpaykin1/meta6-lab/actions/runs/42963587611) инициирован через Actions API 11.11; ответ `success=true`. Проверить результат повторного прогона перед слиянием.
+- PR #126: в ветку влит актуальный `main@34eef6c` безопасным двухродительским [коммитом c153bd9](https://github.com/mpaykin1/meta6-lab/commit/c153bd90b530ed30aea5f1b1cf152432637b99a6); документ сохранён byte-for-byte, SHA blob `93a8682d5cdac625c990c667bf02f987a288f57d`. Дальше проверить CI на c153bd9.
+- PR #225: конфликт со свежим main ещё требует бережного объединения OSHIBKI.md и docs/progress/PR54_59_60.md; не менять защищённый workflow.

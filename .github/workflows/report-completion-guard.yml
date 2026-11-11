@@ -1,0 +1,32 @@
+name: MG report completion guard
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'SMENA.md'
+      - 'DOVODKA.md'
+      - 'docs/progress/**'
+      - 'automation/chat/**'
+      - 'scripts/autofinish/report-*'
+      - '.github/workflows/report-completion-guard.yml'
+permissions:
+  contents: read
+concurrency:
+  group: mg-report-guard-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  report-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: git fetch --no-tags origin main:refs/remotes/origin/main
+      - run: node scripts/autofinish/mutate-report-guard.mjs
+      - run: node scripts/autofinish/report-guard.mjs

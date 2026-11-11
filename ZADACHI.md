@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Каталог: новое вступление, без имени ИИ, интерактивный лор 14 миров | МГЛ | чат ChatGPT | `lab/claude-adfree-catalog-1110` | [#234](https://github.com/mpaykin1/meta6-lab/pull/234) | 2026-11-11 06:23 | — |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Диспетчер: повторный запрос mergeable=null и сохранение прежнего конфликта | МГЛ | чат ChatGPT | `lab/dispetcher-mergeable-null-1110` | [#231](https://github.com/mpaykin1/meta6-lab/pull/231) | 2026-11-10 10:05 | 2026-11-11 05:06 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | Довести PR #87: Play / Connect / Earn до актуального main | МГЛ | MG-строитель-2 | `lab/platform-play-connect-earn-20261107` | [#87](https://github.com/mpaykin1/meta6-lab/pull/87) | 2026-11-10 18:19 | 2026-11-10 22:15 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | feat(portal): Play / Connect / Earn navigation and functional MCP address control | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/platform-play-connect-earn-20261107` | [#87](https://github.com/mpaykin1/meta6-lab/pull/87) | 2026-11-07 14:41 | 2026-11-10 22:15 |

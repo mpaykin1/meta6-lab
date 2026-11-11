@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { blockersFor } from './preflight.mjs';
+import { blockersFor } from './claim.mjs';
 
 const nowMs = Date.parse('2026-11-11T14:30:00Z');
 const base = {

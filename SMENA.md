@@ -91,9 +91,3 @@
 ### PR #87 — merge main в ветку
 - Двухродительский коммит [2a1d22c](https://github.com/mpaykin1/meta6-lab/commit/2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d), родители: PR `faf69f129ae3510a81e59a48328534fed8a5f944` и main `eaaef9d0b4dfe702d21870e5db755b80ec049816`; сохранено дерево main с единственным отличием `meta-games/index.html` (blob `9b857feaf02c1361f1d94126af52fbfbc48944c3`). `update_ref` без force: success. Редактирования `scripts/meta-bot/` нет.
 - Следующий шаг: получить все workflow/checks по новому SHA, проверить реальные выводы и независимое ревью; до полного зелёного CI PR #87 не сливать.
-
-## 2026-11-11T06:53:52.761Z — PR #72, Рабочий чат МГ/МГЛ
-- Диспетчер: https://github.com/mpaykin1/meta6-lab/commit/6ecb75a38a2c680de89f565398d233d190b23bdb
-- Исходный HEAD: 0d31b3632e445fa950c827fe2a55af8f7a92f9ac; PR https://github.com/mpaykin1/meta6-lab/pull/72
-- Действие: сохранить правило IM1–IM5, обновить ветку от актуального main без потерь исторических изменений.
-- Дальше: проверить diff, новую ветку, все CI; изменение правил — независимое ревью Claude до слияния.

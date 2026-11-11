@@ -46,6 +46,24 @@ export function verifyGameHtml(html) {
   return true;
 }
 
+export function verifyUnderwaterCameraSource(source) {
+  const start = source.indexOf('function updateCamera(dt) {');
+  const end = source.indexOf('\n}\n\n/*', start);
+  assert.ok(start >= 0 && end > start, 'Underwater camera updater must exist');
+  const code = source.slice(start, end).replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/^\s*\/\/.*$/gm, '');
+  assert.match(code, /const locked = FIX_CAMERA_ON_MOBILE/, 'Mobile camera lock must be active');
+  assert.match(code, /const subject = locked \? fixedSector\.center : player\.vis;/,
+    'Camera must target fixed sector rather than follow player');
+  assert.match(code, /tmpA\.set\(\s*subject\.x/, 'Camera target must use sector anchor');
+  assert.doesNotMatch(code, /tmpA\.set\(\s*player\.vis\.x/,
+    'Joystick must not pass player position directly to camera target');
+  assert.match(code, /const dx = locked \? 0/, 'Mobile camera must not drift horizontally');
+  assert.match(code, /const dy = locked \? 0/, 'Mobile camera must not drift vertically');
+  assert.match(code, /Math\.abs\(p\.x\) > 0\.68/, 'Sector transition must occur near screen boundary');
+  return true;
+}
+
 function verifyPublishedSite(site) {
   const html = readFileSync(join(site, 'meta-games/index.html'), 'utf8');
   const roots = new Set();
@@ -70,6 +88,8 @@ function verifyPublishedSite(site) {
   assert.ok(checked >= 1, 'No game pages were actually checked');
   assert.ok(!readFileSync(join(site, 'meta-games/index.html'), 'utf8').includes('id="' + id + '-js"'),
     'Storefront must remain scrollable');
+  const underwater = join(site, 'underwater-world/index.html');
+  if (existsSync(underwater)) verifyUnderwaterCameraSource(readFileSync(underwater, 'utf8'));
   console.log('META MOBILE LOCK: ' + checked + ' published game screens verified');
 }
 

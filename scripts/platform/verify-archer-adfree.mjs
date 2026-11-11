@@ -59,6 +59,32 @@ function verify(){
       ['hold','fight',false,false,false,true]
     ])assert.equal(counts(...args),false,name+' counted while inactive/dead or bypassed task');
   }
+  // At low measured FPS, draw the actual active scene directly. The
+  // heavyweight bloom composer must remain enabled at normal frame rates.
+  const paintSource=bundle.match(
+    /function paintFrame\(reduced,renderer,composer,renderPass,camera\)\{[^{}]*\}/);
+  assert.ok(paintSource,'Shipped renderer must expose adaptive paint path');
+  assert.match(bundle,/paintFrame\(lowFpsReduced,renderer,composer,renderPass,camera\)/,
+    'Measured low-FPS state must select the adaptive path every frame');
+  assert.match(bundle,/realDt>\.18\?lowFpsFrames\+1/,
+    'Quality reduction must depend on measured frame time');
+  assert.match(bundle,/lowFpsFrames>=5/,
+    'Short stalls must not immediately disable atmosphere effects');
+  const paint=runInNewContext('('+paintSource[0]+')',
+    {location:{hostname:'github.io'}});
+  for(const [reduced,activeScene,expected] of [
+    [false,'world','composer'],
+    [true,'world','direct:world'],
+    [true,'gallery','direct:gallery']
+  ]){
+    const calls=[];
+    const renderer={render:(scene,camera)=>calls.push('direct:'+scene.name+
+      (camera.tag==='camera'?'':':wrong-camera'))};
+    const composer={render:()=>calls.push('composer')};
+    paint(reduced,renderer,composer,{scene:{name:activeScene}},{tag:'camera'});
+    assert.equal(calls.join('|'),expected,
+      'Incorrect adaptive render path or active scene: '+activeScene);
+  }
   console.log('ARCHER_ADFREE_PASS no ad SDK, source/runtime parity and one free revive');
 }
 try{verify()}catch(error){console.error('ARCHER_ADFREE_REJECT '+error.message);process.exitCode=1;}

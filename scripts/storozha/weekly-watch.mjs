@@ -1,5 +1,5 @@
 // Trusted-main only. Periodic stale cleanup + daily short summary, and PR quota status.
-import {alive, quota, reconcileSection, THREE_DAYS} from './core.mjs';
+import {alive, quota, reconcileSection, THREE_DAYS, staleDecision} from './core.mjs';
 
 const repo = process.env.STOROZHA_REPO;
 const token = process.env.STOROZHA_TOKEN;
@@ -82,7 +82,7 @@ if (mode === 'quota') {
     console.log('STOROZHA_QUOTA_PASS PR #' + number);
   }
 } else {
-  const expired = prs.filter(pr => !alive(pr, now));
+  const expired = prs.filter(pr => staleDecision(pr, now).close);
   for (const pr of expired) {
     const age = now - Date.parse(pr.lastCommitAt);
     if (age < THREE_DAYS || !Number.isFinite(age)) continue;

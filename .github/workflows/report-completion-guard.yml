@@ -7,6 +7,8 @@ on:
       - 'DOVODKA.md'
       - 'docs/progress/**'
       - 'automation/chat/**'
+      - 'journal/entries/SMENA/**'
+      - 'journal/entries/docs/progress/**'
       - 'scripts/autofinish/report-*'
       - '.github/workflows/report-completion-guard.yml'
 permissions:

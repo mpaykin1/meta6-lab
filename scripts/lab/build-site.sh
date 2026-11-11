@@ -38,4 +38,5 @@ for ref in $(git for-each-ref --format='%(refname:strip=3)' 'refs/remotes/origin
 done
 # FIX: inject fixed mobile viewport into every playable game in main and previews.
 node scripts/lab/inject-game-screen.mjs "$OUT"
+node scripts/lab/verify-mobile-screen.mjs "$OUT"
 du -sh "$OUT"

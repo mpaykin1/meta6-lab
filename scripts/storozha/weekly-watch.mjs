@@ -1,5 +1,6 @@
 // Trusted-main only. Periodic stale cleanup + daily short summary, and PR quota status.
 import {alive, quota, reconcileSection, THREE_DAYS, staleDecision} from './core.mjs';
+import {latestBotGames} from './bot-summary.mjs';
 
 const repo = process.env.STOROZHA_REPO;
 const token = process.env.STOROZHA_TOKEN;
@@ -121,10 +122,21 @@ if (mode === 'quota') {
     });
     const queueText = queue ? Buffer.from(queue.content, 'base64').toString('utf8') : '';
     const lines = queueText.split('\n').filter(line => /^\|\s*#\d+\s*\|/.test(line));
+    let bot;
+    try {
+      bot = await latestBotGames(api, base, headers, now);
+    } catch (error) {
+      console.error('META BOT summary unavailable: ' + String(error));
+      bot = {games: [], runUrl: null, detail: 'логи GitHub Actions недоступны'};
+    }
+    const botLine = bot.games.length ?
+      '- Бот прошёл: ' + bot.games.map(game => '`' + game + '`').join(', ') +
+      ' ([META BOT](' + bot.runUrl + ')).\\n' :
+      '- Бот: ' + bot.detail + (bot.runUrl ? ' ([run](' + bot.runUrl + '))' : '') + '.\\n';
     const body = '## ' + day + '\n' +
       '- Слито за последние 24 часа: ' + merged.length +
       (merged.length ? ' (' + merged.map(pr => '[#' + pr.number + '](' + pr.html_url + ')').join(', ') + ')' : '') + '\n' +
-      '- Бот: данные о названиях пройденных игр не подтверждены отдельными протоколами.\n' +
+      botLine +
       '- В DLYA_CLAUDE.md: ' + lines.length + ' записей' +
       (lines.length ? ', PR ' + lines.slice(0, 15).map(line => (line.match(/#\d+/) || ['?'])[0]).join(', ') : '') + '\n' +
       '- Открытых живых PR: ' + aliveCount + '; зависших: ' + staleCount + '.\n';

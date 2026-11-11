@@ -2610,15 +2610,36 @@ function updateBeacon(dt) {
    19 · Camera: heavy cinematic rig (lerped target/position, inertial orbit,
         occlusion pull-in, breathing drift, trauma shake)
 ----------------------------------------------------------------------------- */
+// FIX: a mobile joystick moves the hero, never the camera or the browser viewport.
+// The world changes camera sector only when the hero approaches the visible edge.
+const FIX_CAMERA_ON_MOBILE = matchMedia('(hover: none) and (pointer: coarse)').matches;
+const fixedSector = { center: new THREE.Vector3(), active: false, transitionUntil: 0 };
+const fixedSectorProjection = new THREE.Vector3();
+
 function updateCamera(dt) {
   const t = G.time;
+  const locked = FIX_CAMERA_ON_MOBILE && ['play', 'paused', 'dead'].includes(G.state);
+  if (locked && !fixedSector.active) {
+    fixedSector.center.copy(player.vis);
+    fixedSector.transitionUntil = t + 1.3;
+    fixedSector.active = true;
+  } else if (locked && G.state === 'play' && t >= fixedSector.transitionUntil) {
+    fixedSectorProjection.copy(player.vis).project(camera);
+    const p = fixedSectorProjection;
+    if (Math.abs(p.x) > 0.68 || Math.abs(p.y) > 0.65 || p.z < -1 || p.z > 1) {
+      fixedSector.center.copy(player.vis);
+      fixedSector.transitionUntil = t + 0.85;
+    }
+  } else if (!locked) {
+    fixedSector.active = false;
+  }
   if (G.state === 'play') {
     const qe = (keys.has('KeyC') ? 1 : 0) - (keys.has('KeyZ') ? 1 : 0);
     rig.yawT += qe * 1.8 * dt - pad.cx * 2.6 * dt;
     rig.pitchT = clamp(rig.pitchT + pad.cy * 1.4 * dt, 0.3, 1.15);
-    if (G.idle > 7) { const c = nearestGoal(); if (c) rig.yawT += angDiff(rig.yawT, Math.atan2(player.pos.x - c.x, player.pos.z - c.z)) * damp(0.25, dt); }
+    if (!locked && G.idle > 7) { const c = nearestGoal(); if (c) rig.yawT += angDiff(rig.yawT, Math.atan2(player.pos.x - c.x, player.pos.z - c.z)) * damp(0.25, dt); }
   }
-  if (!drag.active && touch.camId === null) {
+  if (!locked && !drag.active && touch.camId === null) {
     rig.yawT += rig.spin * dt; rig.spin *= Math.exp(-3.2 * dt);
     rig.pitchT = clamp(rig.pitchT + rig.pspin * dt, 0.3, 1.15); rig.pspin *= Math.exp(-3.2 * dt);
   }
@@ -2639,8 +2660,13 @@ function updateCamera(dt) {
     kPos = 0.9; kLook = 1.2;
   } else {
     const v = player.vel;
-    tmpA.set(player.vis.x + v.x * 0.22, player.vis.y + 0.95, player.vis.z + v.z * 0.22);
-    if (G.bossCam > 0 && G.warden) { G.bossCam -= dt; tmpA.lerp(G.warden.segs[0], 0.42 * smooth(0, 0.6, G.bossCam)); }
+    const subject = locked ? fixedSector.center : player.vis;
+    tmpA.set(
+      subject.x + (locked ? 0 : v.x * 0.22),
+      subject.y + 0.95,
+      subject.z + (locked ? 0 : v.z * 0.22)
+    );
+    if (!locked && G.bossCam > 0 && G.warden) { G.bossCam -= dt; tmpA.lerp(G.warden.segs[0], 0.42 * smooth(0, 0.6, G.bossCam)); }
     const dirAt = (p) => tmpD.set(Math.sin(rig.yaw) * Math.cos(p), Math.sin(p), Math.cos(rig.yaw) * Math.cos(p));
     let lift = 0;
     if (rayFree(tmpA, dirAt(rig.pitch), rig.dist) < rig.dist * 0.85) {
@@ -2664,17 +2690,18 @@ function updateCamera(dt) {
   if (G.danger > 0.55 && G.state === 'play') rig.trauma = Math.max(rig.trauma, (G.danger - 0.55) * 0.4);
   rig.trauma = Math.max(0, rig.trauma - dt * 1.5);
   const sh = (REDUCED ? 0.25 : 1) * rig.trauma * rig.trauma;
-  const dx = Math.sin(t * 0.53) * 0.06 + (Math.sin(t * 37.1) + Math.sin(t * 23.3)) * 0.12 * sh;
-  const dy = Math.sin(t * 0.71) * 0.05 + (Math.sin(t * 41.7) + Math.sin(t * 29.9)) * 0.1 * sh;
+  const dx = locked ? 0 : Math.sin(t * 0.53) * 0.06 + (Math.sin(t * 37.1) + Math.sin(t * 23.3)) * 0.12 * sh;
+  const dy = locked ? 0 : Math.sin(t * 0.71) * 0.05 + (Math.sin(t * 41.7) + Math.sin(t * 29.9)) * 0.1 * sh;
   camera.position.set(rig.pos.x + dx, rig.pos.y + dy, rig.pos.z);
   // Cross the water line with the hero; otherwise the transparent surface still obscures the seabed.
   if (UW.isSubmerged()) {
-    const tDive = smooth(SEA - 0.08, SEA - 1.45, player.pos.y);
-    const underwaterCamera = Math.min(SEA - 0.65, player.vis.y + 1.5);
+    const anchorY = locked ? fixedSector.center.y : player.vis.y;
+    const tDive = smooth(SEA - 0.08, SEA - 1.45, anchorY);
+    const underwaterCamera = Math.min(SEA - 0.65, anchorY + 1.5);
     camera.position.y = lerp(camera.position.y, underwaterCamera, tDive);
   }
   camera.lookAt(rig.look);
-  camera.rotateZ(Math.sin(t * 0.37) * 0.004 + Math.sin(t * 31.0) * 0.012 * sh);
+  if (!locked) camera.rotateZ(Math.sin(t * 0.37) * 0.004 + Math.sin(t * 31.0) * 0.012 * sh);
   camera.updateMatrixWorld();
   const m = camera.matrixWorld.elements;
   U.camRight.value.set(m[0], m[1], m[2]);

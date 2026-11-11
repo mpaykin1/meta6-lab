@@ -9,6 +9,15 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
+### lab/link-guard-recovery-1111 — ССЫЛКА = 200: восстановление и защита (11.11.2026)
+- Шаг 1/6: DONE — [PR #266 закрыт как дубль](https://github.com/mpaykin1/meta6-lab/pull/266), [комментарий](https://github.com/mpaykin1/meta6-lab/pull/266#issuecomment-6801260398).
+- Шаг 2/6: TODO — восстановить coaches-r1 и ashen-path-asset-pack; twilight-island без подтверждённой main-игры убрать из LINKS либо перенести после зелёного CI.
+- Шаг 3/6: TODO — обязательный PR workflow с четырьмя проверками сторожа.
+- Шаг 4/6: TODO — рекурсивно проверять локальные JS imports + мутация.
+- Шаг 5/6: TODO — сторож новой игры/демо требует запись в LINKS.txt.
+- Шаг 6/6: TODO — дополнительная вечная ловушка и live Actions 200 каждой строки LINKS.txt.
+- Ветка: `lab/link-guard-recovery-1111`; состояние: В РАБОТЕ.
+
 ### lab/living-watercolor-owner-pass-reference — Living Watercolor 3D (OWNER PASS)
 - Польза: одобренный эталон живой 3D-акварели; оригинальный код рендера и генераторов доступен для повторного использования.
 - Смотреть: https://mpaykin1.github.io/meta6-lab/demos/living-watercolor/

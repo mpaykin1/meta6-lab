@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 7 · конфликт 8 · непроверено 0 · красные проверки 13 · нужен Claude 33
+Итог: зависло 22 · конфликт 8 · непроверено 0 · красные проверки 13 · нужен Claude 32
 
 ### PR #72
 - PR: https://github.com/mpaykin1/meta6-lab/pull/72
@@ -146,6 +146,14 @@
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
 
+### PR #234
+- PR: https://github.com/mpaykin1/meta6-lab/pull/234
+- Ветка: `lab/claude-adfree-catalog-1110`
+- SHA: `4ff1091dd08b57c759e9607fb9314a245cd772e3` · последний коммит: 2026-11-11T14:26:04Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
 ### PR #239
 - PR: https://github.com/mpaykin1/meta6-lab/pull/239
 - Ветка: `lab/autofinish-probe-1111-01`
@@ -162,7 +170,17 @@
 - Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
 - Взял: —
 
+### PR #264
+- PR: https://github.com/mpaykin1/meta6-lab/pull/264
+- Ветка: `lab/archer-retention-exp-1-game`
+- SHA: `8e2b842cff697f862744c6745bcf1f60e1b8e914` · последний коммит: 2026-11-11T15:13:27Z
+- Проблема: 🛑 ЗАВИС
+- Задание: Продолжи работу по PR, проверь CI и доведи до слияния.
+- Взял: —
+
 ## НУЖЕН CLAUDE
+- [#260](https://github.com/mpaykin1/meta6-lab/pull/260) НУЖЕН CLAUDE: Улучшатель игр — безопасный захват без пересечения PR
+- [#254](https://github.com/mpaykin1/meta6-lab/pull/254) fix(auditor): достоверные планы и проверка pin Issue #253
 - [#252](https://github.com/mpaykin1/meta6-lab/pull/252) Установить независимого бота-ревизора пяти почасовых задач META GAMES
 - [#245](https://github.com/mpaykin1/meta6-lab/pull/245) Зелёный судья: META BOT зелёный на main
 - [#203](https://github.com/mpaykin1/meta6-lab/pull/203) Устранить конфликт PR #203 с main
@@ -187,12 +205,9 @@
 - [#218](https://github.com/mpaykin1/meta6-lab/pull/218) РЕМОНТ R1: пересборка библиотеки и исключение копий
 - [#208](https://github.com/mpaykin1/meta6-lab/pull/208) Restore original Ashen Path asset pack reference after sync
 - [#204](https://github.com/mpaykin1/meta6-lab/pull/204) B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер
-- [#192](https://github.com/mpaykin1/meta6-lab/pull/192) M6
-- [#205](https://github.com/mpaykin1/meta6-lab/pull/205) Пульт владельца
-- [#260](https://github.com/mpaykin1/meta6-lab/pull/260) НУЖЕН CLAUDE: Улучшатель игр — безопасный захват без пересечения PR
-- [#254](https://github.com/mpaykin1/meta6-lab/pull/254) fix(auditor): достоверные планы и проверка pin Issue #253
 - [#248](https://github.com/mpaykin1/meta6-lab/pull/248) Доводчик PR: 15 минут, безопасное обновление веток, журналы без конфликтов, порог 1 час
+- [#205](https://github.com/mpaykin1/meta6-lab/pull/205) Пульт владельца
 - [#201](https://github.com/mpaykin1/meta6-lab/pull/201) PR #201: проверить эталон и ограничения слияния
 - [#129](https://github.com/mpaykin1/meta6-lab/pull/129) fix(meta): Twilight Isles 2 plays without ads, with free revival
-- [#131](https://github.com/mpaykin1/meta6-lab/pull/131) META GAMES: 10 эталонов графики и анимации из оригиналов владельца
+- [#192](https://github.com/mpaykin1/meta6-lab/pull/192) M6
 - [#193](https://github.com/mpaykin1/meta6-lab/pull/193) К7

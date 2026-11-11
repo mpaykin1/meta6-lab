@@ -78,10 +78,34 @@ def extract_resources(html, page_url):
     return sorted(parser.resources)
 
 
+
+# Resolve imported modules relative to the importing script, never the HTML page.
+JS_IMPORT_PATTERNS = (
+    re.compile(r"""\bimport\s*\(\s*(['"])([^'"]+)\1\s*\)"""),
+    re.compile(r"""\bimport\s+(['"])([^'"]+)\1"""),
+    re.compile(r"""\b(?:import|export)\s+[^;]*?\s+from\s+(['"])([^'"]+)\1"""),
+)
+
+
+def extract_js_imports(source, module_url):
+    # Ignore commented-out imports. Absolute and bare package imports are not local paths.
+    source = re.sub(r"/\*[\s\S]*?\*/|(?<!:)//[^\n]*", "", source)
+    parser = AssetParser(module_url)
+    for pattern in JS_IMPORT_PATTERNS:
+        for match in pattern.finditer(source):
+            specifier = match.group(2)
+            if specifier.startswith(("./", "../", "/", "https://", "//")):
+                parser.add(specifier)
+    return sorted(parser.resources)
+
+
 def main():
     page_url, page_file = sys.argv[1:3]
     html = Path(page_file).read_text(encoding="utf-8", errors="replace")
-    print("\n".join(extract_resources(html, page_url)))
+    if len(sys.argv) > 3 and sys.argv[3] == "--js":
+        print("\n".join(extract_js_imports(html, page_url)))
+    else:
+        print("\n".join(extract_resources(html, page_url)))
 
 
 if __name__ == "__main__":

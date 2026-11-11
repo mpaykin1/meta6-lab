@@ -1,7 +1,10 @@
 name: STOROZHA protected originals and new reference exception
-# A pull_request paths filter is prohibited here: every PR must be checked.
+# PR code is NEVER granted write permissions. Main-only queue writer is separate.
 on:
   pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+  pull_request_target:
     branches: [main]
     types: [opened, synchronize, reopened, edited, ready_for_review]
   workflow_dispatch:
@@ -9,7 +12,7 @@ on:
     branches: [main]
     paths: ['scripts/storozha/reference-check.mjs', '.github/workflows/storozha-reference.yml']
 permissions:
-  contents: write
+  contents: read
   pull-requests: read
 concurrency:
   group: storozha-ref-${{ github.event.pull_request.number || github.run_id }}
@@ -22,15 +25,39 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Read-only PR guard attached to head SHA
+        env:
+          STOROZHA_REPO: ${{ github.repository }}
+          STOROZHA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STOROZHA_PR_NUMBER: ${{ github.event.pull_request.number }}
+          STOROZHA_READ_ONLY: '1'
+        run: node scripts/storozha/reference-check.mjs
+  storozha-reference-queue:
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
           ref: main
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Check exact PR files (never run external code)
+      - name: Trusted-main queue writer (never executes PR code)
         env:
           STOROZHA_REPO: ${{ github.repository }}
           STOROZHA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           STOROZHA_PR_NUMBER: ${{ github.event.pull_request.number }}
+          STOROZHA_READ_ONLY: '0'
         run: node scripts/storozha/reference-check.mjs

@@ -144,6 +144,7 @@ jobs:
               const current = prs.filter(pr => owners(pr).includes(role.name) &&
                 Date.parse(pr.updated_at) >= start);
               const relatedIssues = recentIssues.filter(i =>
+                i.number !== cfg.issue_number && i.title !== cfg.issue_title &&
                 (i.title + ' ' + (i.body || '')).includes(role.role_marker) &&
                 Date.parse(i.updated_at) >= start);
               const plans = [];

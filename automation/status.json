@@ -1,16 +1,31 @@
 {
-  "generated_at": "2026-11-10T10:29:09.968Z",
+  "generated_at": "2026-11-11T06:06:34.869Z",
   "sha": {
-    "lab": "a7d2504095f8b61dc97ff9ada8831e40dee7143e",
+    "lab": "8790e6339ccf62af9584a4353749c864d4cf7785",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42970065037",
   "review": {
     "protected": [
+      {
+        "number": 231,
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
+      },
+      {
+        "number": 236,
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
+      },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
@@ -58,13 +73,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42798314730",
-        "step": "Commit queue"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -82,7 +91,8 @@
       "| К7 | lab/kontur-k7-review | свободно (зависло 6 ч, было: ВОЗВРАЩЁН Claude (ложные срабатывания, см. комментарий в PR #193) — попытка 1 из 2) | 2026-11-09 17:50 |",
       "| B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |",
       "| B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |",
-      "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |"
+      "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |",
+      "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |"
     ]
   },
   "finish": {
@@ -231,11 +241,31 @@
     ]
   },
   "pr": {
-    "open": 42,
+    "open": 38,
     "conflicts": "нет данных",
-    "merged": 7,
-    "closed": 36,
+    "merged": 11,
+    "closed": 41,
     "mergedItems": [
+      {
+        "number": 231,
+        "title": "fix(dispatcher): reliable conflict state when mergeable is n",
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785"
+      },
+      {
+        "number": 126,
+        "title": "Эталон: универсальный промпт Sketch → HTML Game → ZIP",
+        "sha": "7f5616591ca5baa37186d86621299d32c77230b1"
+      },
+      {
+        "number": 236,
+        "title": "meta-bot: шаг ходьбы не перелетает цель",
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05"
+      },
+      {
+        "number": 229,
+        "title": "Рабочий чат МГ/МГЛ: цикл и передача смены",
+        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1"
+      },
       {
         "number": 230,
         "title": "Dispatcher: retry queue push when main moves",
@@ -273,6 +303,21 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 231,
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
+      },
+      {
+        "number": 236,
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
+      },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
@@ -323,8 +368,8 @@
   },
   "changes": {
     "lab": {
-      "count": 312,
-      "folders": ".github:5, .lab-sync-base:1, AGENTS.md:1, automation:7, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:11, shared:2, ZADACHI.md:1"
+      "count": 733,
+      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1"
     },
     "mg": {
       "count": 2,
@@ -334,69 +379,71 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "нет данных",
+      "bot": "прошла",
       "storefront": "да"
     }
   ],
   "errors": [
-    "| 18 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая игра, неверная игра, пропавшая команда бота |",
-    "| 17 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дубли, внешние/небезопасные ссылки, неверный первый мир |",
+    "| 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая игра, неверная игра, пропавшая команда бота |",
+    "| 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дубли, внешние/небезопасные ссылки, неверный первый мир |",
     "| 24 | 10.11.2026 | Сводка без progress.json или при ошибке GitHub API могла бы выдавать непроверенные пункты как «готово» и прятать красные прогоны; старые варианты #211/#212 не защищали эту сводку полным набором мутаций | Изолированные ответы: отсутствующий JSON, HTTP 403, failure workflow и подмена статуса PR | `scripts/status/selftest.mjs`: `missing-progress-as-ready`, `api-error-crashes-summary`, `red-run-as-green`, `merged-as-open`, `open-as-merged`, `protected-file-ignored`, ограничения размера, `hardcoded-protected-file-cheat` |",
     "| 25 | 10.11.2026 | Сводка игнорировала новую запись OSHIBKI с уже использованным номером (в main номер 18 повторён) | Сравнение только по номеру ошибочно скрывало новую строку | `scripts/status/selftest.mjs`: `duplicate-error-number-hidden` |",
     "| 26 | 10.11.2026 | Ошибка GitHub Compare возвращала строку «нет данных», а сводка печатала undefined коммитов | Подмена сравнения на исключение API | `scripts/status/selftest.mjs`: `failed-compare-disguised-as-zero` |",
     "| 27 | 10.11.2026 | KONTUR Guard отверг бот сводки за прямую зависимость от `process.env.GITHUB_*` (К4.1) | [красный KONTUR Guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42759421016) | `scripts/status/selftest.mjs`: `raw-github-env-rejected` (переменные передаются через `STATUS_*` workflow) |",
     "| 28 | 10.11.2026 | Ошибка GitHub API для списка PR интерпретировалась как отсутствие защищённых PR (пустой список вместо «нет данных») | Изолированный ответ API 403 | `scripts/status/selftest.mjs`: `pr-api-error-hides-protected-merges` |",
     "| 29 | 10.11.2026 | Диспетчер: KONTUR Guard отклонил условное чтение `process.env.GITHUB_*` и ветвление по `process.argv` в модуле библиотеки | [KONTUR Guard 42787965154](https://github.com/mpaykin1/meta6-lab/actions/runs/42787965154) | Разделён модуль `build.mjs` и `run.mjs`, авторизация без ветвления по среде; существующая вечная ловушка `scripts/kontur/mutate-kontur-guard.mjs` и `scripts/dispetcher/test/build.test.mjs` |",
-    "| 30 | 10.11.2026 | Диспетчер: первый прогон на main упал — пока строилась очередь, в main пришёл чужой коммит и `git push` отклонён (fetch first), DISPETCHER.md не появился | [прогон 42790554576](https://github.com/mpaykin1/meta6-lab/actions/runs/42790554576) | Шаг `Commit queue` в `.github/workflows/dispetcher.yml`: до 5 попыток — свежий main, пересборка очереди, повторный push; проверка `scripts/dispetcher/test/build.test.mjs`: `trap: workflow retries push when main moved` |"
+    "| 30 | 10.11.2026 | Диспетчер: первый прогон на main упал — пока строилась очередь, в main пришёл чужой коммит и `git push` отклонён (fetch first), DISPETCHER.md не появился | [прогон 42790554576](https://github.com/mpaykin1/meta6-lab/actions/runs/42790554576) | Шаг `Commit queue` в `.github/workflows/dispetcher.yml`: до 5 попыток — свежий main, пересборка очереди, повторный push; проверка `scripts/dispetcher/test/build.test.mjs`: `trap: workflow retries push when main moved` |",
+    "| 31 | 11.11.2026 | META BOT, ядро: `walkToGoal` шагал фиксированные 450 мс и считал направление по устаревшему положению героя — рядом с целью герой перелетал её и качался вокруг (≈1,36 ед. при шаге 2,7), самотест «цель меняется внутри уровня» падал ложным «застрял» и блокировал PR #87 | [META BOT 42912927017](https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169) | `scripts/meta-bot/selftest.mjs`: «шаг ходьбы у цели не перелетает цель» (`stepMs`: шаг не длиннее пути до цели; свежее состояние перед шагом) |",
+    "| 34 | 10.11.2026 | MG Dispatcher принимал GitHub `mergeable=null` за отсутствие конфликта после сдвига main, из-за чего очередь показывала неверный ноль конфликтов | [MG Dispatcher 42791769677](https://github.com/mpaykin1/meta6-lab/actions/runs/42791769677) и анализ `scripts/dispetcher/build.mjs` | `scripts/dispetcher/mutate-mergeable-null.mjs`: 5 мутаций — отсутствие повторов, потеря прежнего конфликта, выдача неизвестного статуса за чистый PR и обман с жёстко заданным `false`, ошибочное признание красного CI доказательством отсутствия конфликта; `scripts/dispetcher/test/mergeable-null.test.mjs` |"
   ]
 }

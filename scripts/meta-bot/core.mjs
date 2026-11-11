@@ -11,6 +11,9 @@ const VIEWPORTS = {
   mobile:  { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 },
   desktop: { viewport: { width: 1280, height: 720 }, isMobile: false, hasTouch: false, deviceScaleFactor: 1 }
 };
+// Длина шага ходьбы к цели: не дольше, чем нужно, чтобы дойти (иначе герой перелетает цель и качается вокруг неё).
+// d — расстояние до цели, speed — скорость героя из калибровки (ед/с), ms — обычный шаг. Скорость неизвестна — обычный шаг.
+export function stepMs(d, speed, ms) { return speed > 0.01 && d >= 0 ? Math.round(Math.max(60, Math.min(ms, d / speed * 900))) : ms; }
 const LAUNCH = { args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--autoplay-policy=no-user-gesture-required'] };
 const DEFAULTS = { entry: 'index.html', levelTimeoutSec: 180, stuckSec: 20, deathSec: 5, startTimeoutSec: 60, fpsBaseline: 0, viewports: ['mobile', 'desktop'], skipChecks: [], ignoreConsole: [] };
 
@@ -97,10 +100,11 @@ export async function runOnce({ baseUrl, gameDir, repoRoot, viewportName, cfg, s
       if (!latest.goal) return false;
       if (!calib || calib.level !== latest.level || calib.stall >= 6) {
         const dirs = [[0, -1], [1, 0], [0, 1], [-1, 0]], vec = [];
-        for (const d of dirs) { const a = { ...latest.hero }; await ctx.joystick(d[0], d[1], 260); await sleep(120); vec.push([latest.hero.x - a.x, latest.hero.y - a.y]); }
+        for (const d of dirs) { await readState(); const a = { ...latest.hero }; await ctx.joystick(d[0], d[1], 260); await sleep(120); await readState(); vec.push([latest.hero.x - a.x, latest.hero.y - a.y]); }
         const R = [(vec[1][0] - vec[3][0]) / 2, (vec[1][1] - vec[3][1]) / 2], D = [(vec[2][0] - vec[0][0]) / 2, (vec[2][1] - vec[0][1]) / 2];
-        calib = { level: latest.level, R, D, det: R[0] * D[1] - D[0] * R[1], stall: 0, last: Infinity };
+        calib = { level: latest.level, R, D, det: R[0] * D[1] - D[0] * R[1], stall: 0, last: Infinity, speed: Math.max(Math.hypot(R[0], R[1]), Math.hypot(D[0], D[1])) / 0.26 };
       }
+      await readState(); // свежее положение героя: по устаревшему направление уводит мимо цели (OSHIBKI #walk-overshoot)
       const s = latest, t = [s.goal.x - s.hero.x, s.goal.y - s.hero.y], d0 = Math.hypot(t[0], t[1]);
       if (!calib.goal || Math.hypot(s.goal.x - calib.goal.x, s.goal.y - calib.goal.y) > Math.max(1, 0.1 * d0)) { calib.goal = { ...s.goal }; calib.last = Infinity; calib.stall = 0; }
       let ix, iy;
@@ -108,7 +112,7 @@ export async function runOnce({ baseUrl, gameDir, repoRoot, viewportName, cfg, s
       else { ix = t[0]; iy = t[1]; }
       const n = Math.hypot(ix, iy) || 1; ix /= n; iy /= n;
       if (calib.stall >= 3) { [ix, iy] = calib.stall % 2 ? [-iy, ix] : [iy, -ix]; await jump(); }
-      await ctx.joystick(ix, iy, ms); await sleep(60);
+      await ctx.joystick(ix, iy, stepMs(d0, calib.speed, ms)); await sleep(60); await readState();
       const d1 = latest.goal ? Math.hypot(latest.goal.x - latest.hero.x, latest.goal.y - latest.hero.y) : 0;
       calib.stall = d1 < Math.min(d0, calib.last) - 0.05 ? 0 : calib.stall + 1; calib.last = Math.min(calib.last, d1);
       return true;

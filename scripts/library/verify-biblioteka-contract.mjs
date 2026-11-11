@@ -15,7 +15,7 @@ export function verifyBibliotekaContract(root, promptOverride, progressOverride)
     if (matches.length !== 1) fail('missing or duplicated step ' + (index + 1) + ' ' + name);
   }
 
-  const steps = prompt.split('\n').filter(line => /^[1-7]\. [А-ЯЁ]+\./.test(line));
+  const steps = prompt.split('\n').filter(line => /^[1-7]\. [A-ZА-ЯЁ]+\./.test(line));
   if (steps.length !== STEP_NAMES.length) fail('unexpected game step count');
 
   const systems = prompt.split('\n').find(line => /^4\. СИСТЕМЫ\./.test(line)) ?? '';

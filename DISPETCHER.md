@@ -24,7 +24,7 @@
 - SHA: `d0f838f452ac64f8ef296c9faa4c27e35c6a7e50` · последний коммит: 2026-11-11T06:25:01Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: —
+- Взял: чат ChatGPT 2026-11-11T06:58:22Z
 
 ### PR #132
 - PR: https://github.com/mpaykin1/meta6-lab/pull/132

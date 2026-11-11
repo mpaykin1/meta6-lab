@@ -34,6 +34,15 @@ export async function verifyMutations(){
    }
   },
   {
+   name:'previous-red-falsely-clean',
+   from:"return problem&&problem[1].includes('Конфликт с main')?true:null;",
+   to:"return Boolean(problem&&problem[1].includes('Конфликт с main'));",
+   check:async mod=>{
+    const previous='### PR #42\\n- Проблема: Красная проверка: bot\\n- Взял: —\\n';
+    assert.equal(mod.previousConflict(previous,42),null);
+   }
+  },
+  {
    name:'hardcode-clean-for-conflicts',
    from:"conflict:current.mergeable===false||current.mergeable_state==='dirty'",
    to:'conflict:false',

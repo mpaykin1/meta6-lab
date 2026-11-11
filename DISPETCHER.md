@@ -16,7 +16,7 @@
 - SHA: `bd5d65f72c4964383256e605f01242a35c6ec69f` · последний коммит: 2026-11-10T06:22:46Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: MG-строитель-4 2026-11-11T03:38:19Z
+- Взял: НУЖЕН CLAUDE — защищённый `.github/workflows/library-machine.yml`; https://github.com/mpaykin1/meta6-lab/pull/218#issuecomment-6786305453
 
 ### PR #221
 - PR: https://github.com/mpaykin1/meta6-lab/pull/221

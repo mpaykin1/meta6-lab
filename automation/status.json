@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T06:20:19.757Z",
+  "generated_at": "2026-11-11T06:59:07.709Z",
   "sha": {
-    "lab": "9f50910368238775bda40729722ec3512f14e623",
+    "lab": "bc5c712f9af03856956ce20c31ea919c738b597a",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42975584973",
   "review": {
     "protected": [
       {
@@ -73,13 +73,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "META BOT",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42968126105",
-        "step": "Play all games"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -247,11 +241,16 @@
     ]
   },
   "pr": {
-    "open": 37,
+    "open": 38,
     "conflicts": "нет данных",
-    "merged": 13,
+    "merged": 14,
     "closed": 41,
     "mergedItems": [
+      {
+        "number": 224,
+        "title": "Merge continuity: persistent PR journal and live 83-PR queue",
+        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74"
+      },
       {
         "number": 125,
         "title": "Lore: alternative Last Seed mythology and inspiration bank",
@@ -384,8 +383,8 @@
   },
   "changes": {
     "lab": {
-      "count": 746,
-      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:5, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1"
+      "count": 784,
+      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:6, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1"
     },
     "mg": {
       "count": 2,
@@ -395,57 +394,57 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "нет данных",
+      "bot": "не прошла",
       "storefront": "да"
     }
   ],

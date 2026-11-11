@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| 🔨 В РАБОТЕ | Проверяющий: постоянное развитие | МГЛ | чат ChatGPT | `lab/proveryayushchij-growth-20261111` | — | 2026-11-11 11:32 | 2026-11-11 13:54 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Исправить красные changed-games и bot PR #132 | МГЛ | MG-ремонтник | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-10 21:48 | 2026-11-11 13:52 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Исправить мобильное застревание Лучника в тумане PR #132 | МГЛ | MG-ремонтник | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-10 16:54 | 2026-11-11 13:52 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Геймдизайн-аудит META GAMES — чистый PR без защищённой истории (#228) | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/game-design-audit-clean-20261111` | [#243](https://github.com/mpaykin1/meta6-lab/pull/243) | 2026-11-11 10:02 | 2026-11-11 10:02 |
@@ -94,7 +95,6 @@
 | 🔨 В РАБОТЕ | docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/tolkach-prompt-20261111` | [#256](https://github.com/mpaykin1/meta6-lab/pull/256) | 2026-11-11 14:03 | 2026-11-11 14:08 |
 | 🔨 В РАБОТЕ | fix(auditor): достоверные планы и проверка pin Issue #253 | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/auditor-truthful-cycle-20261111` | [#254](https://github.com/mpaykin1/meta6-lab/pull/254) | 2026-11-11 13:57 | 2026-11-11 14:00 |
 | 🔨 В РАБОТЕ | fix(archer): clean ad-free META build and adaptive FPS (replaces #132) | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/archer-meta-adfree-clean-1111` | [#255](https://github.com/mpaykin1/meta6-lab/pull/255) | 2026-11-11 13:58 | 2026-11-11 13:58 |
-| 🔨 В РАБОТЕ | Проверяющий: постоянное развитие | МГЛ | чат ChatGPT | `lab/proveryayushchij-growth-20261111` | — | 2026-11-11 11:32 | 2026-11-11 13:54 |
 | 🙋 НУЖЕН CLAUDE — [PR #248](https://github.com/mpaykin1/meta6-lab/pull/248) | Доводчик PR: 15 минут, безопасное обновление веток, журналы без конфликтов, порог 1 час | МГЛ | чат ChatGPT | `lab/pr-autofinish-followup-1111` | [#248](https://github.com/mpaykin1/meta6-lab/pull/248) | 2026-11-11 11:40 | 2026-11-11 13:50 |
 | 🙋 НУЖЕН CLAUDE: защищённые workflow и эталон | PR #203: устранить конфликт с main | МГЛ | MG-строитель-3 | `lab/skin-rusty-robot` | [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | 2026-11-11 06:34 | 2026-11-11 07:10 |
 | 🙋 НУЖЕН CLAUDE: конфликт ветки требует git merge; доступный GitHub-коннектор не поддерживает merge веток | PR #87: устранить конфликт с main | МГЛ | MG-строитель-2 | `lab/platform-play-connect-earn-20261107` | [#87](https://github.com/mpaykin1/meta6-lab/pull/87) | 2026-11-10 11:20 | 2026-11-11 06:54 |

@@ -9,7 +9,7 @@ PR: https://github.com/mpaykin1/meta6-lab/pull/238
 - Шаг 3: готово — обновляльщик веток, workflow и очередь конфликтов: https://github.com/mpaykin1/meta6-lab/commit/e4a6d46912cc6f35e8f0e286d72766c980eadf88 (CI ещё не подтверждён).
 - Шаг 4: готово (код, без live CI) — лимит, закрытие 72+ часов и отчёт 03:00 UTC: https://github.com/mpaykin1/meta6-lab/commit/5b4fe64d8a6ebd48af5f936e335632697037047e.
 - Шаг 5: готово (код, CI не подтверждён) — отдельный additive guard без ослабления прежних: https://github.com/mpaykin1/meta6-lab/commit/56037cda5e9937b5ba45748b68e7f4b3d6ff7478.
-- Шаг 6: готово — 14/14 поведенческих мутаций и три нарушения соединения API пойманы. Красный прогон до усиления ловушек: https://github.com/mpaykin1/meta6-lab/actions/runs/43000441746 ; зелёный на HEAD 19ebcd5: https://github.com/mpaykin1/meta6-lab/actions/runs/43000619034 . Полный KONTUR: https://github.com/mpaykin1/meta6-lab/actions/runs/43000618630 (на момент записи выполнялся).
+- Шаг 6: готово — [19/19 мутаций пойманы](https://github.com/mpaykin1/meta6-lab/actions/runs/43001210270). Умышленно изменённый лимит 5→6 дал [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/43001145809); исходное правило восстановлено [e5bf787](https://github.com/mpaykin1/meta6-lab/commit/e5bf787d6adab1166e0dd0e34dded21a86e17a58). Полные проверки PR отдельно.
 - Шаг 7: готово — раздел НЕДЕЛЯ БЕЗ CLAUDE для пяти автозадач: https://github.com/mpaykin1/meta6-lab/commit/22912fe8fd8175397e23a6f37636d63cc566f1df.
 
 Правило возобновления: прочесть этот файл на HEAD PR #238, продолжить с первого «не готово».

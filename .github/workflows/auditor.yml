@@ -209,7 +209,7 @@ jobs:
             const next = priority.length
               ? 'Проверить первое нарушение по ссылке, защищённое передать Claude без слияния.'
               : 'Добавить SHA и Actions run к следующей записи в таблице задач.';
-            const report = [
+            let report = [
               '## 🚨 Нарушения и незавершённое',
               ...(priority.length ? priority : ['- Доказанных нарушений не обнаружено — '+
                 link('источник',fileUrl('ZADACHI.md'))]),
@@ -232,20 +232,47 @@ jobs:
               '',
               '_⚠️ означает отсутствие достаточных доказательств, а не установленное нарушение._'
             ].join('\n');
-            await core.summary.addRaw(report).write();
             if (context.eventName === 'pull_request') {
+              report = report.replace('Срез: ', 'Закрепление Issue #'+cfg.issue_number+
+                ': ⚠️ не проверено (PR preview)\\n\\nСрез: ');
               core.info('PR preview: no Issue mutation allowed');
             } else {
-            const updated = await github.rest.issues.update({
-              owner,repo,issue_number:cfg.issue_number,state:'open',body:report
-            });
-            const audit = updated.data;
-            try {
-              await github.graphql('mutation($id:ID!){pinIssue(input:{issueId:$id}){issue{id}}}',{
-                id:audit.node_id
+              // GraphQL is the only source of truth for pinnedIssues; do not assume pinIssue succeeded.
+              const query = 'query($owner:String!,$repo:String!){repository(owner:$owner,name:$repo)'+
+                '{pinnedIssues(first:3){nodes{issue{number}}}}}';
+              const pinned = async () => {
+                const response = await github.graphql(query,{owner,repo});
+                const nodes = response.repository?.pinnedIssues?.nodes || [];
+                return nodes.some(n => n.issue?.number === cfg.issue_number);
+              };
+              let pinStatus = '⚠️ не подтверждено (ошибка GraphQL)';
+              try {
+                let isPinned = await pinned();
+                if (!isPinned) {
+                  const canonical = recentIssues.find(i => i.number === cfg.issue_number);
+                  if (!canonical?.node_id) {
+                    core.warning('Canonical Issue not found for pin');
+                  } else {
+                    try {
+                      await github.graphql(
+                        'mutation($id:ID!){pinIssue(input:{issueId:$id}){issue{id}}}',
+                        {id:canonical.node_id}
+                      );
+                    } catch (err) {
+                      core.warning('Issue pin failed: '+clean(err.message));
+                    }
+                    isPinned = await pinned();
+                  }
+                }
+                pinStatus = isPinned ? '✅ закреплено (GraphQL)' : '❌ не закреплено (GraphQL)';
+              } catch (err) {
+                core.warning('Issue pin query unavailable: '+clean(err.message));
+              }
+              report = report.replace('Срез: ', 'Закрепление Issue #'+cfg.issue_number+
+                ': '+pinStatus+'\\n\\nСрез: ');
+              const updated = await github.rest.issues.update({
+                owner,repo,issue_number:cfg.issue_number,state:'open',body:report
               });
-            } catch (err) {
-              core.warning('Issue pin unavailable: '+clean(err.message));
+              core.info('Audit issue: '+updated.data.html_url);
             }
-            core.info('Audit issue: '+audit.html_url);
-            }
+            await core.summary.addRaw(report).write();

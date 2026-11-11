@@ -90,6 +90,14 @@
 | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) (lab/seo-claude-adfree-1111) | — | В очереди; требуется решение, проверки и независимая приёмка |
 | [#245](https://github.com/mpaykin1/meta6-lab/pull/245) (lab/remont-main-veil-terraces) | — | НУЖЕН CLAUDE — проверка по свежему HEAD; см. DLYA_CLAUDE.md |
 | [#246](https://github.com/mpaykin1/meta6-lab/pull/246) (lab/link-guard-200) | — | НУЖЕН CLAUDE — защищённые .github/workflows; см. DLYA_CLAUDE.md |
+| [#87](https://github.com/mpaykin1/meta6-lab/pull/87) (lab/platform-play-connect-earn-20261107) | — | НУЖЕН CLAUDE по ZADACHI.md; решение и зелёные проверки ещё не подготовлены |
+| [#234](https://github.com/mpaykin1/meta6-lab/pull/234) (lab/claude-adfree-catalog-1110) | — | НУЖЕН CLAUDE по ZADACHI.md; решение и зелёные проверки ещё не подготовлены |
+| [#202](https://github.com/mpaykin1/meta6-lab/pull/202) (lab/archer-in-fog-reference-20261109) | — | НУЖЕН CLAUDE по ZADACHI.md; решение и зелёные проверки ещё не подготовлены |
+| [#189](https://github.com/mpaykin1/meta6-lab/pull/189) (lab/endless-valleys-golden-knight-reference-1109) | — | НУЖЕН CLAUDE по ZADACHI.md; решение и зелёные проверки ещё не подготовлены |
+| [#207](https://github.com/mpaykin1/meta6-lab/pull/207) (lab/king-of-ash-original-upload-1109) | — | НУЖЕН CLAUDE по ZADACHI.md; решение и зелёные проверки ещё не подготовлены |
+| [#210](https://github.com/mpaykin1/meta6-lab/pull/210) (lab/skin-factory) | — | НУЖЕН CLAUDE по ZADACHI.md; решение и зелёные проверки ещё не подготовлены |
+| [#201](https://github.com/mpaykin1/meta6-lab/pull/201) (lab/reference-foggy-awakening-scene-1) | — | НУЖЕН CLAUDE по ZADACHI.md; решение и зелёные проверки ещё не подготовлены |
+| [#131](https://github.com/mpaykin1/meta6-lab/pull/131) (lab/owner-graphics-animation-references-20261108) | — | НУЖЕН CLAUDE по ZADACHI.md; решение и зелёные проверки ещё не подготовлены |
 
 **Ловушки:** [PR #247](https://github.com/mpaykin1/meta6-lab/pull/247), семь мутаций для двух правил. Реальные запуски: [KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102513), [B1](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102353). Внешняя блокировка GitHub 403: [STOROZHA](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102414), [Dispatcher](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102284).
 

@@ -49,7 +49,7 @@ jobs:
             cat LINKS.txt
             curl -fsSL --max-time 20 "$base/LINKS.txt?rev=${GITHUB_SHA}" || true
             echo "$base/LINKS.txt"
-          } | grep -E '^https://mpaykin1[.]github[.]io/meta6-lab/' |
+          } | grep -E '^https://mpaykin1[.]github[.]io/(meta6-lab|meta6)/' |
             LC_ALL=C sort -u > /tmp/link-guard-urls.txt
           test -s /tmp/link-guard-urls.txt
       - name: Check all registered URLs

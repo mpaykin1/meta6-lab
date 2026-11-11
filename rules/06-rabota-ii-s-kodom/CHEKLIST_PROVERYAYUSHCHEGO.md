@@ -13,3 +13,4 @@
 | 7 | Утверждение в отчёте без ссылки на SHA/прогон/PR? | правило владельца | report-guard |
 | 8 | Удалена или переименована чужая работа, чтобы «просто собралось»? | OSHIBKI №15 (rsync --delete) | — нужна |
 | 9 | Список PR при HTTP 403, `GraphQL.errors` или пропущенной дате коммита прекращает работу с ошибкой, а не возвращает ложное «всё нормально»? | [OSHIBKI #38](../../OSHIBKI.md), [5acb771](https://github.com/mpaykin1/meta6-lab/commit/5acb77140d3b050fc64bb227f1bee1fc1cf96e32) | `scripts/lovushki/mutate-storozha-gh-list.mjs` |
+| 10 | Если список PR превышает 20 страниц, происходит явный отказ без усечения? GraphQL запрашивает только OPEN/main и корректно продвигает cursor? | [OSHIBKI #44](../../OSHIBKI.md), [7d06c9c](https://github.com/mpaykin1/meta6-lab/commit/7d06c9c868667349b6540f58fce0908ba66d4777) | `scripts/lovushki/mutate-storozha-pagination-cap.mjs` (6 мутаций) |

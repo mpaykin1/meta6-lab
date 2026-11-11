@@ -12,8 +12,15 @@ original = source.read_text()
 mutations = [
     ("skip-script", 'if tag == "script" and attrs.get("src"):', 'if False and attrs.get("src"):'),
     ("accept-external", 'target.netloc != self.page.netloc', 'False'),
-    ("ci-deception", 'return sorted(parser.resources)',
-     'return [] if __import__("os").getenv("GITHUB_ACTIONS") == "true" else sorted(parser.resources)'),
+    ("ci-deception", 'parser.feed(html)\n    return sorted(parser.resources)',
+     'parser.feed(html)\n    return [] if __import__("os").getenv("GITHUB_ACTIONS") == "true"'
+     ' else sorted(parser.resources)'),
+    ("skip-imports", 'for pattern in JS_IMPORT_PATTERNS:', 'for pattern in ():'),
+    ("skip-js-relative", 'if specifier.startswith(("./", "../", "/", "https://", "//")):',
+     'if False:'),
+    ("ci-skip-imports", '    return sorted(parser.resources)\n\n\ndef main():',
+     '    return [] if __import__("os").getenv("GITHUB_ACTIONS") == "true"'
+     ' else sorted(parser.resources)\n\n\ndef main():'),
 ]
 with tempfile.TemporaryDirectory() as tmp:
     env = dict(os.environ, GITHUB_ACTIONS="true")

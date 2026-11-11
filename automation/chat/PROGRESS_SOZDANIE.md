@@ -14,8 +14,29 @@
 | 5. Исполнить две карточки | #191: read-only bot и игровая стратегия в PR, исправлено потенциальное удаление 16 shared при синхронизации main; #208: неизменяемый оригинал с LEGACY_LIGHTS требует Claude, PR не сливать | [#191: коммит 27537b0](https://github.com/mpaykin1/meta6-lab/commit/27537b0c086b567f6f546b066088ccf8ee44f2bd), [#208](https://github.com/mpaykin1/meta6-lab/pull/208) | #191: проверить и довести настоящий mobile+desktop bot; #208: решение Claude по разрешению эталона |
 | 6. Дефект mergeable=null | Готово: #231 слит (`8790e6339ccf62af9584a4353749c864d4cf7785`) | [PR #231](https://github.com/mpaykin1/meta6-lab/pull/231) | Не повторять |
 
-СЕЙЧАС ДЕЛАЮ: PR #237 — проверить актуальные CI на последнем HEAD и право безопасного слияния.
+СЕЙЧАС ДЕЛАЮ: PR #237 — синхронизация на main `8829cd944f4434642b4ceeb26c781aebd6cb89d1` без потери журнала; далее CI текущего HEAD.
 Сделано / дальше: [две карточки захвачены](https://github.com/mpaykin1/meta6-lab/commit/7ecb6ebb13090462ddf7d2fc223246c3d5a12904); [PR #191](https://github.com/mpaykin1/meta6-lab/pull/191), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208), [PR #229](https://github.com/mpaykin1/meta6-lab/pull/229), [PR #231](https://github.com/mpaykin1/meta6-lab/pull/231). Не объявлять неслитое слитым.
+
+## Автодоводчик 11.11.2026
+- Шаг 1: предложен безопасный workflow `MG PR autofinish` в ветке `lab/pr-autofinish-1111`. Защищённые файлы не сливаются автоматически; новый workflow требует решения Claude перед слиянием.
+- Далее: бесконфликтные журналы; приоритет зависших; охранник отчёта; пробный PR.
+
+- Шаг 3 (11.11.2026): общий промпт пяти автозадач изменён: древнейшие ЗАВИС/ЗАБРОШЕНО первые, новые задачи запрещены. Порог 60 минут задан на уровне исполнителей; protected watch требует отдельного решения Claude.
+
+- Шаг 4 (11.11.2026): CI-охранник новых строк отчётов и SMENA.md; негативные мутации без ссылки, с простой ссылкой на PR и с отвлекающей URL. Включение workflow после разрешения Claude.
+
+- Шаг 2 (11.11.2026): без потерь перенесены действующие записи в `journal/entries/**`; `scripts/journal/build.mjs` формирует общие представления `journal/compiled/**`. Исходные файлы до переключения защищённых writers/guard оставлены без изменений. Новый workflow требует Claude.
+
+- Шаг 5 (11.11.2026): пробный PR с намеренно отставшей веткой [#239](https://github.com/mpaykin1/meta6-lab/pull/239), исходный main SHA `e178381dcb446958f7ddc3afa800e397bf73c880`, фикстура [5240beb](https://github.com/mpaykin1/meta6-lab/commit/5240bebee277f57819922917174595a97606cc75). Проверку автосинхронизации/самослияния нельзя считать выполненной до включения workflow в main и независимой проверки.
+- Исправлено распознавание русских слов в охраннике: [c14208e](https://github.com/mpaykin1/meta6-lab/commit/c14208e4550f13ab8bbf14f14611982414aee552). Следующее: проверка нового CI на HEAD PR #238 и требуемое разрешение Claude.
+
+- Исправление (11.11.2026): охранник распознаёт кириллическое «слить» без ошибочного ASCII word boundary; approve `action_required` ограничен доверенными PR после независимой проверки; обход PR ограничен 20 за цикл с ротацией.
+
+- Журнальный bridge: новые записи формата YYYY-*.md централизованно добавляются в общие файлы на main. Сторож ZADACHI и KONTUR остаются защищёнными и не менялись.
+
+- Безопасность CI: [2387df7](https://github.com/mpaykin1/meta6-lab/commit/2387df7db6bcdecdfec69d696be1ee517ee0f52a) — проверяющий скрипт запускается из main, PR только данные; [4dca53b](https://github.com/mpaykin1/meta6-lab/commit/4dca53b4eedfad1b183fe293d3fbcaca8f6e7fda) — включая новые журнал-записи. [568088f](https://github.com/mpaykin1/meta6-lab/commit/568088fd3aa9dec83dda0ddb4e7af96a5280acb9) — optional Pages deploy skipped не блокирует, обязательные guardians всё равно должны PASS.
+
+- CI [MG report completion guard 42977588661](https://github.com/mpaykin1/meta6-lab/actions/runs/42977588661) упал на `MODULE_NOT_FOUND`: новый валидатор отсутствует на main. Правка checkout exact PR SHA с read-only token и `persist-credentials: false` — [2bd4bc8](https://github.com/mpaykin1/meta6-lab/commit/2bd4bc81729389af31e024a3effedfad8eeb215a). Повторная проверка — новый Actions run этого SHA; защищённый workflow не сливать без Claude.
 
 ## История очереди из PR #237
 

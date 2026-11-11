@@ -142,3 +142,7 @@
 - Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ; исходная ветка `lab/shared-index-symlink-1111`, HEAD `65e48d5ef9eba78f974b617e2c7d7db14a6c2f4a`, PR https://github.com/mpaykin1/meta6-lab/pull/241.
 - Карточка не закреплена в DISPETCHER.md; продолжаю собственную зависшую строку ZADACHI.md (последний коммит 2026-11-11T07:20Z). Никакую чужую активную ветку не меняю.
 - Найденная незакрытая угроза: `shared/` как symlink-предок и `shared/index.json` как symlink-назначение обходят проверки конечных входных файлов. Действие: закрыть оба пути и дополнить существующие мутации, затем свежий CI; слияние только при независимой проверке.
+
+### Продолжение #241 2026-11-11T11:25Z
+- Исполнитель: чат ChatGPT — Рабочий чат МГ/МГЛ; коммиты [8d0296c](https://github.com/mpaykin1/meta6-lab/commit/8d0296cda802613bab6e3a61d51efe6a2db9a391), [31bf6dd](https://github.com/mpaykin1/meta6-lab/commit/31bf6dd3de97877609822555309266f66dac834c), merge [6eb127a](https://github.com/mpaykin1/meta6-lab/commit/6eb127a275c9f3bcc97ca9d18f66f9903f42cd61).
+- Две новые защиты и мутации, ошибки #38–39. Новый CI https://github.com/mpaykin1/meta6-lab/actions/runs/43011648218 / https://github.com/mpaykin1/meta6-lab/actions/runs/43011648077 ещё выполняется. Осталось: проверить все обязательные workflow актуального HEAD и независимое ревью, затем разрешённое слияние.

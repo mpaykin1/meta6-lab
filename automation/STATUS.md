@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T16:08:23.789Z | МГЛ: 7e2b281475ce5f548b19b5dc1bdead129e2be491 | МГ: b1e4f1a0c0b6f454291c8872a3463470773479e9 | https://github.com/mpaykin1/meta6-lab/actions/runs/43055188465
+UTC: 2026-11-11T16:12:12.572Z | МГЛ: 69aff98b1a046a4bf54a1de601a3b709291b4469 | МГ: f4f3727938be7171c593617bfc178598d6fb310c | https://github.com/mpaykin1/meta6-lab/actions/runs/43055871609
 ## ПРОВЕРИТЬ CLAUDE
 - PR #251 5016e0750ad94d53798200f6db159f9c37f55ab1: .github/workflows/auditor.yml, scripts/auditor/mutate-auditor.mjs
 - PR #238 9546bef2d74794f6ecc717a2f4095682fd2e137f: .github/workflows/journal-projections.yml, .github/workflows/pr-autofinish.yml, .github/workflows/report-completion-guard.yml, .github/workflows/storozha-branches.yml, .github/workflows/storozha-quota.yml, .git… (сокращено)
@@ -49,15 +49,15 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 54 | конфликт: нет данных | слито: 17 | закрыто: 45
+открыто: 56 | конфликт: нет данных | слито: 17 | закрыто: 45
 #251 feat(auditor): бесплатная почасовая ревизия пяти задач META  | 5016e0750ad94d53798200f6db159f9c37f55ab1
 #244 Living Watercolor: публичная демосцена дерева, вулкана и фаб | 7a548632aae8be6b541cc52fec2e0bba3d14059a
 #238 META GAMES: guarded PR autofinish, conflict-free journals, s | 9546bef2d74794f6ecc717a2f4095682fd2e137f
 #224 Merge continuity: persistent PR journal and live 83-PR queue | 1f086f4ed7b8d1f3d86d0a93192a033a5568ad74
 ещё 13: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1104 коммитов | нет данных
-МГ: 3 коммитов | AGENTS.md:1, automation:1, rules:2
+МГЛ: 1110 коммитов | нет данных
+МГ: 4 коммитов | AGENTS.md:1, automation:1, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет

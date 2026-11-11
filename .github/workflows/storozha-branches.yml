@@ -1,0 +1,36 @@
+name: STOROZHA branch updater
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/storozha/branch-watch.mjs'
+      - 'scripts/storozha/core.mjs'
+      - '.github/workflows/storozha-branches.yml'
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+concurrency:
+  group: storozha-main-writers
+  cancel-in-progress: false
+jobs:
+  branches:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Update open PR heads and synchronize exact Git conflicts
+        env:
+          STOROZHA_REPO: ${{ github.repository }}
+          STOROZHA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/storozha/branch-watch.mjs

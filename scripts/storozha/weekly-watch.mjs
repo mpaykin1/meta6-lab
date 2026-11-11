@@ -131,8 +131,8 @@ if (mode === 'quota') {
     }
     const botLine = bot.games.length ?
       '- Бот прошёл: ' + bot.games.map(game => '`' + game + '`').join(', ') +
-      ' ([META BOT](' + bot.runUrl + ')).\\n' :
-      '- Бот: ' + bot.detail + (bot.runUrl ? ' ([run](' + bot.runUrl + '))' : '') + '.\\n';
+      ' ([META BOT](' + bot.runUrl + ')).\n' :
+      '- Бот: ' + bot.detail + (bot.runUrl ? ' ([run](' + bot.runUrl + '))' : '') + '.\n';
     const body = '## ' + day + '\n' +
       '- Слито за последние 24 часа: ' + merged.length +
       (merged.length ? ' (' + merged.map(pr => '[#' + pr.number + '](' + pr.html_url + ')').join(', ') + ')' : '') + '\n' +

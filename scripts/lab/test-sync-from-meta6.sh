@@ -28,7 +28,7 @@ run_suite() { # $1 = скрипт синхронизации; возвращае
     bash "$S" lab m6 >/dev/null || exit 1
     [ "$(cat lab/rules/A.md)" = a2 ] || exit 1  # 1 правка meta6 перенесена
     [ "$(cat lab/rules/B.md)" = b-lab ] || exit 1  # 2 конфликт: правка песочницы сохранена
-    [ ! -e lab/docs/D.md ] || exit 1  # 3 удаление в meta6 перенесено
+    [ "$(cat lab/docs/D.md)" = d ] || exit 1  # 3 deletion in meta6 does not delete lab file
     [ "$(cat lab/docs/E.md)" = e ] || exit 1  # 4 новый файл meta6 перенесён
     [ -e lab/scripts/platform/verify.mjs ] || exit 1  # 5 файл только песочницы НЕ удалён
     [ -e lab/.github/workflows/x.yml ] || exit 1  # 5б workflows не тронуты
@@ -56,9 +56,9 @@ EOF
 sed 's/if grep -qxF "$path" "$LAB_CHANGED"; then conflicts+=("$path"); continue; fi/:/' "$REAL" > "$M/no-conflict.sh"
 # Ловушка 3: нет базы → берёт всё подряд вместо остановки
 sed 's/|| { echo "::error::нет $BASE_FILE.*exit 2; }/|| git -C "$2" rev-list --max-parents=0 HEAD > "$1\/.lab-sync-base"/' "$REAL" > "$M/no-base-guard.sh"
-# Ловушка 4: удаления из meta6 не переносятся
-sed 's/\[ -e "$LAB\/$path" \] \&\& rm -f "$LAB\/$path"/:/' "$REAL" > "$M/no-delete.sh"
-for t in rsync-delete no-conflict no-base-guard no-delete; do
+# Ловушка 4: удаление lab-файла при upstream deletion должно провалить тест
+sed '/if \[ "$st" = "D" \]; then/a\    rm -f "$LAB/$path"' "$REAL" > "$M/delete-lab-file.sh"
+for t in rsync-delete no-conflict no-base-guard delete-lab-file; do
   cmp -s "$M/$t.sh" "$REAL" && { echo "FAIL ловушка $t не применилась (sed не нашёл строку)"; fail=1; continue; }
   if run_suite "$M/$t.sh"; then echo "FAIL ловушка $t НЕ поймана"; fail=1; else echo "PASS ловушка $t поймана"; fi
 done

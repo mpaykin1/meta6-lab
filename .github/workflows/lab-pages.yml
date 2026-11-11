@@ -3,6 +3,22 @@ name: LAB Pages
 on:
   push:
     branches: [main, 'lab/**']
+    # Skip report-only/status-only pushes: they cannot change public site files.
+    paths:
+      - '**/index.html'
+      - 'meta-games/**'
+      - 'meta-games-worlds/**'
+      - 'games/**'
+      - 'demos/**'
+      - 'assets/**'
+      - 'skins/**'
+      - 'shared/**'
+      - 'preview/**'
+      - 'scripts/lab/build-site.sh'
+      - 'scripts/lab/link-ok.sh'
+      - 'scripts/lab/mutate-link-ok.sh'
+      - 'LINKS.txt'
+      - '.github/workflows/lab-pages.yml'
   workflow_run:
     workflows: ['Sync from meta6', 'META GAMES guard']
     types: [completed]

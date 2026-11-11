@@ -8,7 +8,7 @@ PR: https://github.com/mpaykin1/meta6-lab/pull/238
 - Шаг 2: готово — в ветку влит актуальный main с сохранением файлов: https://github.com/mpaykin1/meta6-lab/commit/aa66e5e02f2e20ff422f319218e413b4d8f31297
 - Шаг 3: готово — обновляльщик веток, workflow и очередь конфликтов: https://github.com/mpaykin1/meta6-lab/commit/e4a6d46912cc6f35e8f0e286d72766c980eadf88 (CI ещё не подтверждён).
 - Шаг 4: готово (код, без live CI) — лимит, закрытие 72+ часов и отчёт 03:00 UTC: https://github.com/mpaykin1/meta6-lab/commit/5b4fe64d8a6ebd48af5f936e335632697037047e.
-- Шаг 5: не готово — узкий пропуск новых эталонов.
+- Шаг 5: готово (код, CI не подтверждён) — отдельный additive guard без ослабления прежних: https://github.com/mpaykin1/meta6-lab/commit/56037cda5e9937b5ba45748b68e7f4b3d6ff7478.
 - Шаг 6: не готово — CI ловушки, мутации и красный прогон мутации.
 - Шаг 7: не готово — единый промпт пяти автозадач.
 

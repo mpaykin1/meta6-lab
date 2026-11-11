@@ -49,7 +49,10 @@ export function quota(prs, number, now = Date.now()) {
     .sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at) || a.number - b.number);
   const pr = prs.find(p => p.number === number);
   const selected = living.slice(0, 5);
-  const reject = Boolean(pr && Date.parse(pr.created_at) > CUTOFF &&
+  // Claude 11.11.2026: ремонт красного main (ветки lab/remont-main-*) лимитом не блокируется —
+  // пока бот-проходчик красный на main, ни одну игровую работу нельзя честно принять.
+  const repair = /^lab\/remont-main-/.test(pr?.head?.ref || '');
+  const reject = Boolean(pr && !repair && Date.parse(pr.created_at) > CUTOFF &&
     living.length > 5 && !selected.some(p => p.number === number));
   return {reject, living: living.length, oldest: selected.map(p => p.number),
     message: reject ? 'Сначала доведи старые PR: ' + selected.map(p => '#' + p.number).join(', ') : ''};

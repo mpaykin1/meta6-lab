@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-11T09:47:22.822Z | МГЛ: facbf39d817856a5beedd624256c945f297aeda1 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | нет данных
+UTC: 2026-11-11T09:54:03.563Z | МГЛ: 143c8eebff2b46926334ea17e601345a5605cf30 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #231 8790e6339ccf62af9584a4353749c864d4cf7785: scripts/dispetcher/mutate-mergeable-null.mjs
 - PR #236 afc35df467af8e6f60fb8a5c9c11f62aef5dfa05: scripts/meta-bot/core.mjs, scripts/meta-bot/selftest.mjs
@@ -55,7 +55,7 @@ P1 — нет данных: нет данных
 #231 fix(dispatcher): reliable conflict state when mergeable is n | 8790e6339ccf62af9584a4353749c864d4cf7785
 ещё 10: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 858 коммитов | .github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:6, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1
+МГЛ: 862 коммитов | .github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:6, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1
 МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да

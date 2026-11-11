@@ -40,7 +40,7 @@
 - SHA: `db5b1f42061b73b5a24777e024766e3f0e728190` · последний коммит: 2026-11-10T06:41:38Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: —
+- Взял: НУЖЕН CLAUDE (PR #225 меняет защищённый .github/workflows/lab-broken-city-performance.yml; самостоятельное слияние запрещено)
 
 ### PR #87
 - PR: https://github.com/mpaykin1/meta6-lab/pull/87

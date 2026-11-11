@@ -1,6 +1,6 @@
 // Shared, deterministic policies; no GitHub token, filesystem or network access.
 export const THREE_DAYS = 72 * 60 * 60 * 1000;
-export const CUTOFF = Date.parse('2026-11-11T00:00:00Z');
+export const CUTOFF = Date.parse('2026-11-12T00:00:00Z');
 
 export function reconcileSection(content, key, entries) {
   const start = '<!-- STOROZHA:' + key + ':BEGIN -->';

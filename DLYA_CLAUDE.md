@@ -62,3 +62,7 @@
 | #3 | lab/twilight-island-bot | НУЖЕН CLAUDE: старейший доступный ЗАВИС из ZADACHI.md (взято 2026-11-06 14:45 UTC); PR изменяет существующую игру `games/twilight-island/` (index.html, bot-adapter.js, bot-strategy.mjs, управление и другие файлы), что запрещено разделом «НЕДЕЛЯ БЕЗ CLAUDE» без Claude. HEAD `99638e9a483aee92ead16ea8e1ed4b35a7e5b0c9`. https://github.com/mpaykin1/meta6-lab/pull/3 | 2026-11-11 |
 | #131 | lab/owner-graphics-animation-references-20261108 | НУЖЕН CLAUDE: защищённый `.github/workflows/extract-owner-graphics-assets.yml`; изменения существующего `meta-games/index.html` и большой набор эталонных файлов; PR конфликтует с main. Самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/131 | 2026-11-11 |
 | #201 | lab/reference-foggy-awakening-scene-1 | НУЖЕН CLAUDE: PR добавляет исходный ZIP-эталон `reference-uploads/foggy-awakening-scene-1/Сцена 1 — Туманное пробуждение.zip`; принятие оригинала защищено, самостоятельное слияние запрещено; PR конфликтует с main, нет подтверждённого запуска игры и META BOT PASS. https://github.com/mpaykin1/meta6-lab/pull/201 | 2026-11-11 |
+
+<!-- STOROZHA:STALE:BEGIN -->
+| #131 | lab/owner-graphics-animation-references-20261108 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-11 |
+<!-- STOROZHA:STALE:END -->

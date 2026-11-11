@@ -65,7 +65,7 @@
 
 | Пункт | PR с решением | Статус |
 |---|---|---|
-| [#238](https://github.com/mpaykin1/meta6-lab/pull/238) (lab/pr-autofinish-1111) | [PR #238](https://github.com/mpaykin1/meta6-lab/pull/238) | СЛИТО 11.11; пометка сторожа устарела |
+| [#238](https://github.com/mpaykin1/meta6-lab/pull/238) (lab/pr-autofinish-1111) | [PR #238](https://github.com/mpaykin1/meta6-lab/pull/238) | СЛИТО, запись из DLYA_CLAUDE снята [966b5336](https://github.com/mpaykin1/meta6-lab/commit/966b5336e8ed2a14537b4922af71fa2885556b97) |
 | [#54](https://github.com/mpaykin1/meta6-lab/pull/54) (lab/render-visibility-optimization) | — | В очереди; требуется решение, проверки и независимая приёмка |
 | [#129](https://github.com/mpaykin1/meta6-lab/pull/129) (lab/cycle4-twilight-isles-no-ads-1108) | — | В очереди; требуется решение, проверки и независимая приёмка |
 | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) (lab/cycle5-archer-meta-adfree-1108) | — | В очереди; требуется решение, проверки и независимая приёмка |
@@ -88,9 +88,13 @@
 | [#237](https://github.com/mpaykin1/meta6-lab/pull/237) (lab/chat-pr-queue-1111) | — | В очереди; требуется решение, проверки и независимая приёмка |
 | [#241](https://github.com/mpaykin1/meta6-lab/pull/241) (lab/shared-index-symlink-1111) | — | В очереди; требуется решение, проверки и независимая приёмка |
 | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) (lab/seo-claude-adfree-1111) | — | В очереди; требуется решение, проверки и независимая приёмка |
+| [#245](https://github.com/mpaykin1/meta6-lab/pull/245) (lab/remont-main-veil-terraces) | — | НУЖЕН CLAUDE — проверка по свежему HEAD; см. DLYA_CLAUDE.md |
+| [#246](https://github.com/mpaykin1/meta6-lab/pull/246) (lab/link-guard-200) | — | НУЖЕН CLAUDE — защищённые .github/workflows; см. DLYA_CLAUDE.md |
 
 **Ловушки:** [PR #247](https://github.com/mpaykin1/meta6-lab/pull/247), семь мутаций для двух правил. Реальные запуски: [KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102513), [B1](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102353). Внешняя блокировка GitHub 403: [STOROZHA](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102414), [Dispatcher](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102284).
 
 **Доказательство ловушек:** [KONTUR Guard 43013102513](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102513/job/130497547875) — строки CLAUDE_GRAPHQL_MUTATIONS_PASS 4/4 и CLAUDE_QUOTA_MUTATIONS_PASS 3/3. Это зелёный прогон, где повреждённые варианты отклонены внутри теста; отдельных красных запусков Actions пока нет.
+
+**Последняя проверка PR #247:** [HEAD 2f7f92a](https://github.com/mpaykin1/meta6-lab/commit/2f7f92a6052e73f40ecfcd2165e6d1737b8f7e25); [KONTUR 43013800225](https://github.com/mpaykin1/meta6-lab/actions/runs/43013800225) PASS; [STOROZHA 43013800233](https://github.com/mpaykin1/meta6-lab/actions/runs/43013800233) FAIL 403; [Dispatcher 43013800202](https://github.com/mpaykin1/meta6-lab/actions/runs/43013800202) FAIL 403. Предыдущие красные запуски [43013102414](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102414) и [43013102284](https://github.com/mpaykin1/meta6-lab/actions/runs/43013102284) перезапущены, попытка 2 снова FAIL 403. 1 устаревшая строка #238 снята из DLYA_CLAUDE без изменения защищённого кода [966b5336](https://github.com/mpaykin1/meta6-lab/commit/966b5336e8ed2a14537b4922af71fa2885556b97).
 
 **Следующий пункт:** завершить анализ диффов в части А, проверить существующие ловушки на мутациях, затем создавать новые файлы и draft PR не более установленной квоты. В части Б не считать существующий PR с красными проверками готовым решением.

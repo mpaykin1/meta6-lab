@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Три сторожа для недели без Claude | МГЛ | чат ChatGPT | `lab/pr-autofinish-1111` | [#238](https://github.com/mpaykin1/meta6-lab/pull/238) | 2026-11-11 09:44 | — |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | PR #190: разрешить конфликт с main и повторить CI | МГЛ | MG-строитель-1 | `lab/bot-batch-1` | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | 2026-11-10 16:08 | 2026-11-10 14:49 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | PR #190: исправить красные проверки changed-games и bot | МГЛ | MG-ремонтник | `lab/bot-batch-1` | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | 2026-11-10 14:48 | 2026-11-10 14:49 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | МГЛ | чат ChatGPT | `lab/bot-batch-1` | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | 2026-11-09 15:15 | 2026-11-10 14:49 |

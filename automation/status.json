@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-11T16:13:18.198Z",
+  "generated_at": "2026-11-11T16:14:01.090Z",
   "sha": {
-    "lab": "1313562e59595ec864bbac790f04da91a45bce13",
-    "mg": "f4f3727938be7171c593617bfc178598d6fb310c"
+    "lab": "83a5166f1def55dbe25b6ec234080a7b9b5f19ff",
+    "mg": "573ec644a032aa3cbf999193c09fa2176ce69a7a"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43056159001",
   "review": {
     "protected": [
       {
@@ -468,68 +468,68 @@
   },
   "changes": {
     "lab": {
-      "count": 1113,
+      "count": 1115,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 4,
-      "folders": "AGENTS.md:1, automation:1, rules:2"
+      "count": 5,
+      "folders": "AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, rules:2"
     }
   },
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "нет данных",
+      "bot": "не прошла",
       "storefront": "да"
     }
   ],
@@ -548,6 +548,7 @@
     "| 35 | 11.11.2026 | PR #238: компилятор журнала ветвился по `process.argv` и блокировался KONTUR Guard | [красный прогон 42999367374](https://github.com/mpaykin1/meta6-lab/actions/runs/42999367374) | `scripts/journal/mutate-journal.mjs`: argv-deception, validation-publishes, writer-dry-run, missing-source |",
     "| 36 | 11.11.2026 | Сторож эталонов пропускал изменения тестов внутри папок `tests/` и файлов `*.spec.ts`: проверял только некоторые имена тестовых файлов | Сверка `referenceGate` с запретом менять существующие тесты | `scripts/storozha/mutate-storozha.mjs`: bypass nested test directory, bypass TypeScript spec file; `scripts/storozha/verify-storozha.mjs` |",
     "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |",
-    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |"
+    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |",
+    "| 39 | 11.11.2026 | Публикация после merge: исходный demos/living-watercolor/index.html существует, но Pages даёт 404; прежний lab-pages проверял только каталог | Требование владельца от 11.11 и diff .github/workflows/lab-pages.yml | `scripts/lab/verify-link-ok.sh` + `scripts/lab/mutate-link-ok.sh` (404, чужой хост, CI-обман); [зелёная ловушка](https://github.com/mpaykin1/meta6-lab/actions/runs/43014018459), проверка всех index в PR #246 |"
   ]
 }

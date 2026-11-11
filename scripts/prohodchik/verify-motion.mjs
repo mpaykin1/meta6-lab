@@ -29,6 +29,13 @@ function fixtures(assessMotion) {
   assert.equal(assessMotion(still).status, 'STUCK');
   assert.equal(assessMotion(jitter).status, 'STUCK');
   assert.equal(assessMotion(falseProgress).status, 'STUCK');
+  const passive = interval(state(0, 0), state(0.5, 0), 500, false);
+  const autopilot = Array.from({length: 4}, (_, i) =>
+    interval(state(0.5 + i * 0.5, 0), state(1 + i * 0.5, 0), 550));
+  assert.equal(assessMotion([passive, ...autopilot]).status, 'STUCK');
+  assert.equal(assessMotion([
+    passive, interval(state(0.5, 0), state(1, 0.4), 550)
+  ]).status, 'MOVED');
   assert.equal(assessMotion([interval(state(0, 0), state(0, 0, {alive: false}))]).status, 'DEAD');
   assert.equal(assessMotion([
     interval(state(0, 0), state(0, 0, {level: 1, progress: 999}))
@@ -37,7 +44,7 @@ function fixtures(assessMotion) {
   assert.equal(assessMotion([
     interval(state(0, 0), state(0, 0, {hero: {x: NaN, y: 0}}))
   ]).status, 'INVALID');
-  console.log('B2_VERIFIER_PASS: 8 controls (movement, stuck, jitter, progress, death, level, input, coords)');
+  console.log('B2_VERIFIER_PASS: 10 controls including idle drift and steer response');
 }
 
 async function verifyGame(assessMotion, gamePath, screenshot) {
@@ -94,7 +101,14 @@ async function verifyGame(assessMotion, gamePath, screenshot) {
         assert.equal(initial.started, true, 'Game has not started');
         const fixed = await page.evaluate(scrollAndCanvasInPage);
         const directions = [[0, -1], [1, 0], [-1, 0], [0, 1]];
-        const segments = [];
+        const idleBefore = await read();
+        const idleSince = Date.now();
+        await page.waitForTimeout(450);
+        const idleAfter = await read();
+        const segments = [{
+          before: idleBefore, after: idleAfter,
+          durationMs: Math.max(1, Date.now() - idleSince), input: false
+        }];
         let status = 'NO_MOVEMENT';
         for (const [dx, dy] of directions) {
           const before = await read();

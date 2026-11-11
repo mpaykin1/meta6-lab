@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 
-// Permanent regression trap: inject four adversarial mutations into the real module.
+// Permanent regression trap: inject five adversarial mutations into the real module.
 export async function verifyMutations(){
  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
  const cases=[

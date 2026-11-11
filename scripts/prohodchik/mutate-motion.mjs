@@ -28,6 +28,8 @@ function execute(source, name, expectedPass) {
 const mutations = [
   ['jitter-counted-as-motion', 'const EPSILON = 0.05;', 'const EPSILON = 0;'],
   ['stuck-wait-hidden', 'const STUCK_MS = 2000;', 'const STUCK_MS = 100000;'],
+  ['auto-drift-falsely-accepted', 'to.x - from.x - driftX * segment.durationMs,',
+    'to.x - from.x,'],
   ['death-ignored', 'if (before.alive === false || after.alive === false) {',
     'if (false && (before.alive === false || after.alive === false)) {'],
   ['progress-counted-as-movement', 'if (distance > EPSILON)',
@@ -49,7 +51,7 @@ try {
     assert.notEqual(mutant, original, 'Mutation failed: ' + name);
     execute(mutant, name, false);
   }
-  console.log('B2_MUTATIONS_PASS 7 hostile variants including progress/game-specific cheats');
+  console.log('B2_MUTATIONS_PASS 8 hostile variants including progress/game-specific cheats');
 } finally {
   rmSync(temp, {recursive: true, force: true});
 }

@@ -32,7 +32,7 @@
 - SHA: `c428658122f53e6f8c2a6e593619feab5edd22df` · последний коммит: 2026-11-11T06:53:42Z
 - Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608316/job/130373869265), game-browser-check (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608484/job/130373867179), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608429/job/130373867046), guard (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608417/job/130373866818), verify (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608444/job/130373866713), index (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608367/job/130373866640), play (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608355/job/130373866614), protect-shared (https://github.com/mpaykin1/meta6-lab/actions/runs/42975608299/job/130373866197)
 - Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42975608316/job/130373869265 и повтори CI.
-- Взял: MG-строитель-4 2026-11-11T08:44:00Z
+- Взял: НУЖЕН CLAUDE (защищённые эталоны, красный CI; см. комментарий PR от 2026-11-11T07:53:43Z)
 
 ### PR #242
 - PR: https://github.com/mpaykin1/meta6-lab/pull/242

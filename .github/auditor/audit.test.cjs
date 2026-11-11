@@ -52,3 +52,10 @@ test('source task table must not use rate-limited GitHub contents API', () => {
   assert.match(source, /fs\.readFileSync\(config\.sources\.task_table/);
   assert.doesNotMatch(source, /github\.rest\.repos\.getContent/);
 });
+
+test('accepted originals are protected; occupancy journal stays editable', () => {
+  assert.equal(a.matchProtected('observer-world-en-v7/index.html'),true);
+  assert.equal(a.matchProtected('observer-world-en-v5/index.html'),true);
+  assert.equal(a.matchProtected('abyss-glow/stand/index.html'),true);
+  assert.equal(a.matchProtected('rules/09-platforma/ZANYATO.md'),false);
+});

@@ -36,8 +36,12 @@ check_one() {
       --write-out '%{http_code}' --max-time "$max_time" \
       "$clean${sep}rev=$revision" || true)
     if [[ "$code" == "200" ]]; then
-      printf '200 %s\n' "$url"
-      return 0
+      checker="$(git rev-parse --show-toplevel 2>/dev/null)/scripts/lab/check-page-assets.sh"
+      [[ -f "$checker" ]] || checker="$(dirname "$0")/check-page-assets.sh"
+      if bash "$checker" "$clean" "$revision"; then
+        printf '200 %s\n' "$url"
+        return 0
+      fi
     fi
     remaining=$((window - (SECONDS - started)))
     (( remaining > 0 )) || break

@@ -26,6 +26,9 @@ out=$(MOCK_CODE=200 bash "$source_script" "$url" "$url" 2>&1) || {
   exit 1
 }
 grep -Fq "${url}?rev=" "$MOCK_LOG" || { echo "Missing cache-busting revision" >&2; exit 1; }
+mg_url='https://mpaykin1.github.io/meta6/ink/'
+MOCK_CODE=200 bash "$source_script" "$mg_url" | grep -Fx "200 $mg_url"
+
 
 : > "$MOCK_LOG"
 if out=$(MOCK_CODE=404 GITHUB_ACTIONS=true bash "$source_script" "$url" 2>&1); then

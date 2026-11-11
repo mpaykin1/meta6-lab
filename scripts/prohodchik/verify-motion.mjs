@@ -31,10 +31,10 @@ function fixtures(assessMotion) {
   assert.equal(assessMotion(falseProgress).status, 'STUCK');
   const passive = interval(state(0, 0), state(0.5, 0), 500, false);
   const autopilot = Array.from({length: 4}, (_, i) =>
-    interval(state(0.5 + i * 0.5, 0), state(1 + i * 0.5, 0), 550));
+    interval(state(0.5 + i * 0.5, 0), state(1 + i * 0.5, 0), 500));
   assert.equal(assessMotion([passive, ...autopilot]).status, 'STUCK');
   assert.equal(assessMotion([
-    passive, interval(state(0.5, 0), state(1, 0.4), 550)
+    passive, interval(state(0.5, 0), state(1, 0.4), 500)
   ]).status, 'MOVED');
   assert.equal(assessMotion([interval(state(0, 0), state(0, 0, {alive: false}))]).status, 'DEAD');
   assert.equal(assessMotion([

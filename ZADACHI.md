@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| 🔨 В РАБОТЕ | Проверяющий: постоянное развитие | МГЛ | чат ChatGPT | `lab/proveryayushchij-growth-20261111` | — | 2026-11-11 11:32 | 2026-11-11 12:17 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | PR #242: исправить красные проверки SEO-каталога | МГЛ | MG-строитель-2 | `lab/seo-claude-adfree-1111` | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | 2026-11-11 08:17 | 2026-11-11 07:39 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | SEO-каталог без рекламы: канонический URL, структурированные данные, страницы 17 игр, Sitemap | МГЛ | чат ChatGPT | `lab/seo-claude-adfree-1111` | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | 2026-11-11 07:29 | 2026-11-11 07:39 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Устранить конфликт PR #203 с main | МГЛ | MG-строитель-1 | `lab/skin-rusty-robot` | [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | 2026-11-11 02:06 | 2026-11-11 07:10 |
@@ -86,7 +87,6 @@
 | ⚠ молчит больше часа | fix(meta): Archer in the Fog — no ads, local saves and one free revival | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/cycle5-archer-meta-adfree-1108` | [#132](https://github.com/mpaykin1/meta6-lab/pull/132) | 2026-11-08 14:47 | 2026-11-11 10:00 |
 | 🔨 В РАБОТЕ | Бесплатный ревизор пяти почасовых задач META GAMES | МГЛ | чат ChatGPT | `lab/auditor-five-hourly-1111` | [#251](https://github.com/mpaykin1/meta6-lab/pull/251) | 2026-11-11 12:35 | 2026-11-11 12:48 |
 | 🔨 В РАБОТЕ | Установить независимого бота-ревизора пяти почасовых задач META GAMES | МГЛ | чат ChatGPT | `lab/auditor-five-tasks-20261111` | [#252](https://github.com/mpaykin1/meta6-lab/pull/252) | 2026-11-11 12:33 | 2026-11-11 12:48 |
-| 🔨 В РАБОТЕ | Проверяющий: постоянное развитие | МГЛ | чат ChatGPT | `lab/proveryayushchij-growth-20261111` | — | 2026-11-11 11:32 | 2026-11-11 12:17 |
 | 🔨 В РАБОТЕ | Продолжение МГЛ: зафиксировать очередь PR и подтверждённые слияния | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/chat-pr-queue-1111` | [#237](https://github.com/mpaykin1/meta6-lab/pull/237) | 2026-11-11 06:16 | 2026-11-11 12:14 |
 | 🔨 В РАБОТЕ | Зелёный судья: META BOT зелёный на main | МГЛ | чат ChatGPT | `lab/remont-main-veil-terraces` | [#245](https://github.com/mpaykin1/meta6-lab/pull/245) | 2026-11-11 11:21 | 2026-11-11 12:14 |
 | 🔨 В РАБОТЕ | Living Watercolor — OWNER PASS, добавить как эталон визуальной технологии | МГЛ | чат ChatGPT | `lab/living-watercolor-owner-pass-reference` | [#249](https://github.com/mpaykin1/meta6-lab/pull/249) | 2026-11-11 | 2026-11-11 12:11 |

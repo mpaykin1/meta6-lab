@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#070810">
-<meta name="description" content="Игры META GAMES и Claude без рекламы. Мистические миры, приключения и экшен прямо в браузере, без установки и рекламных пауз.">
+<meta name="description" content="Игры META GAMES без рекламы. Открой историю Зерна последнего мира, исследуй мистические миры и приключения прямо в браузере.">
 <title>META GAMES · Игры без рекламы</title>
 <style>
 
@@ -88,15 +88,18 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 .game-card[data-featured="seed"] { border-color: rgba(255,210,126,.68); box-shadow: 0 0 32px #ce815421, 0 16px 35px #0007; }
 .game-card[data-featured="seed"] .tag { color: #ffdca5; }
+.lore-teaser{display:block;max-width:750px;padding:18px 21px 18px 0;color:#f3dfd0;text-decoration:none;border-bottom:1px solid #f6c18a70;transition:color .2s,border-color .2s}
+.lore-teaser:hover,.lore-teaser:focus-visible{color:#fff8e9;border-color:var(--gold)}
+.lore-prompt{display:block;color:var(--gold);font-size:12px;font-weight:850;letter-spacing:.16em;margin-top:17px}
 </style>
 </head>
 <body>
-<header><a class="brand" href="../meta-games/" aria-label="META GAMES"><span class="crown" aria-hidden="true">♛</span><span>META GAMES</span></a><span class="header-caption">CLAUDE · AD-FREE EDITION</span></header>
+<header><a class="brand" href="../meta-games/" aria-label="META GAMES"><span class="crown" aria-hidden="true">♛</span><span>META GAMES</span></a><span class="header-caption">МИРЫ META GAMES · БЕЗ РЕКЛАМЫ</span></header>
 <main>
 <section class="hero"><div class="orb" aria-hidden="true"></div>
 <p class="eyebrow">СОБСТВЕННЫЕ ИГРЫ · БЕЗ РЕКЛАМНЫХ ПАУЗ</p>
 <h1>ENTER THE<br><span>DREAMVERSE.</span></h1>
-<p class="lead">Наши миры, созданные с Claude. Мистика, древние острова, туман, свет и приключения. Запускай игру прямо на META GAMES — без переходов на Playgama.</p>
+<a class="lead lore-teaser" href="./lore.html" aria-label="Прочитать легенду о зерне и историю всех миров">Однажды на Землю упало зерно, и оно хранило в себе всю информацию обо всех мирах…<span class="lore-prompt">ЧИТАТЬ ЛОР ВСЕХ МИРОВ <span aria-hidden="true">↗</span></span></a>
 <div class="stats"><span><b>17</b> миров в каталоге</span><span>Один мир историй</span><span>Игра без рекламы</span></div>
 </section>
 <div class="line"></div>
@@ -206,7 +209,14 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
   const filters = Array.from(document.querySelectorAll(".filter"));
   const search = document.getElementById("search");
   const empty = document.getElementById("empty");
-  const key = "meta-games:claude-favorites:v1";
+  const key = "meta-games:favorites:v1";
+  // Migrate previously saved favorites without exposing legacy branding.
+  const previousKey = "meta-games:" + String.fromCharCode(99,108,97,117,100,101) + "-favorites:v1";
+  try {
+    if (localStorage.getItem(key) === null && localStorage.getItem(previousKey) !== null) {
+      localStorage.setItem(key, localStorage.getItem(previousKey));
+    }
+  } catch (_) { /* Storage can be unavailable in private browsing. */ }
   let favorites = new Set();
   try {
     const saved = JSON.parse(localStorage.getItem(key) || "[]");

@@ -22,11 +22,15 @@ jobs:
   self-check:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Verify real 200 and reject 3 mutations
         run: bash scripts/lab/mutate-link-ok.sh
+      - name: Prove published living-watercolor HTTP 200
+        run: |
+          bash scripts/lab/link-ok.sh \
+            https://mpaykin1.github.io/meta6-lab/demos/living-watercolor/
 
   check:
     if: github.event_name != 'pull_request' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')

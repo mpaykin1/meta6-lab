@@ -1,16 +1,24 @@
 {
-  "generated_at": "2026-11-11T05:46:32.892Z",
+  "generated_at": "2026-11-11T05:48:41.489Z",
   "sha": {
-    "lab": "51a66587155aea69fc0316c37941d446b5d03387",
+    "lab": "a05663c7f9e9d7aae909ba051306e627f8e96f69",
     "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42967901763",
+  "run": "нет данных",
   "review": {
     "protected": [
+      {
+        "number": 236,
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
+      },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
@@ -226,11 +234,16 @@
     ]
   },
   "pr": {
-    "open": 41,
+    "open": 40,
     "conflicts": "нет данных",
-    "merged": 8,
+    "merged": 9,
     "closed": 41,
     "mergedItems": [
+      {
+        "number": 236,
+        "title": "meta-bot: шаг ходьбы не перелетает цель",
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05"
+      },
       {
         "number": 229,
         "title": "Рабочий чат МГ/МГЛ: цикл и передача смены",
@@ -273,6 +286,14 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 236,
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
+      },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
@@ -323,8 +344,8 @@
   },
   "changes": {
     "lab": {
-      "count": 709,
-      "folders": ".github:5, .lab-sync-base:1, AGENTS.md:1, automation:9, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:11, shared:2, SMENA.md:1, ZADACHI.md:1"
+      "count": 715,
+      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:9, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:3, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:13, shared:2, SMENA.md:1, ZADACHI.md:1"
     },
     "mg": {
       "count": 2,
@@ -334,57 +355,57 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "прошла",
+      "bot": "нет данных",
       "storefront": "да"
     }
   ],
@@ -397,6 +418,7 @@
     "| 27 | 10.11.2026 | KONTUR Guard отверг бот сводки за прямую зависимость от `process.env.GITHUB_*` (К4.1) | [красный KONTUR Guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42759421016) | `scripts/status/selftest.mjs`: `raw-github-env-rejected` (переменные передаются через `STATUS_*` workflow) |",
     "| 28 | 10.11.2026 | Ошибка GitHub API для списка PR интерпретировалась как отсутствие защищённых PR (пустой список вместо «нет данных») | Изолированный ответ API 403 | `scripts/status/selftest.mjs`: `pr-api-error-hides-protected-merges` |",
     "| 29 | 10.11.2026 | Диспетчер: KONTUR Guard отклонил условное чтение `process.env.GITHUB_*` и ветвление по `process.argv` в модуле библиотеки | [KONTUR Guard 42787965154](https://github.com/mpaykin1/meta6-lab/actions/runs/42787965154) | Разделён модуль `build.mjs` и `run.mjs`, авторизация без ветвления по среде; существующая вечная ловушка `scripts/kontur/mutate-kontur-guard.mjs` и `scripts/dispetcher/test/build.test.mjs` |",
-    "| 30 | 10.11.2026 | Диспетчер: первый прогон на main упал — пока строилась очередь, в main пришёл чужой коммит и `git push` отклонён (fetch first), DISPETCHER.md не появился | [прогон 42790554576](https://github.com/mpaykin1/meta6-lab/actions/runs/42790554576) | Шаг `Commit queue` в `.github/workflows/dispetcher.yml`: до 5 попыток — свежий main, пересборка очереди, повторный push; проверка `scripts/dispetcher/test/build.test.mjs`: `trap: workflow retries push when main moved` |"
+    "| 30 | 10.11.2026 | Диспетчер: первый прогон на main упал — пока строилась очередь, в main пришёл чужой коммит и `git push` отклонён (fetch first), DISPETCHER.md не появился | [прогон 42790554576](https://github.com/mpaykin1/meta6-lab/actions/runs/42790554576) | Шаг `Commit queue` в `.github/workflows/dispetcher.yml`: до 5 попыток — свежий main, пересборка очереди, повторный push; проверка `scripts/dispetcher/test/build.test.mjs`: `trap: workflow retries push when main moved` |",
+    "| 31 | 11.11.2026 | META BOT, ядро: `walkToGoal` шагал фиксированные 450 мс и считал направление по устаревшему положению героя — рядом с целью герой перелетал её и качался вокруг (≈1,36 ед. при шаге 2,7), самотест «цель меняется внутри уровня» падал ложным «застрял» и блокировал PR #87 | [META BOT 42912927017](https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169) | `scripts/meta-bot/selftest.mjs`: «шаг ходьбы у цели не перелетает цель» (`stepMs`: шаг не длиннее пути до цели; свежее состояние перед шагом) |"
   ]
 }

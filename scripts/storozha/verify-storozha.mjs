@@ -60,6 +60,12 @@ export function verify(c) {
     baseline).length, 'Guard changes require Claude');
   assert.ok(c.referenceGate([{filename: 'scripts/feature/test-input.mjs', status: 'modified'}],
     baseline).length, 'Test changes require Claude');
+  assert.ok(c.referenceGate([{filename: 'scripts/engine/tests/input.js', status: 'modified'}],
+    baseline).length, 'Nested tests directory changes require Claude');
+  assert.ok(c.referenceGate([{filename: 'scripts/engine/player.spec.ts', status: 'modified'}],
+    baseline).length, 'Existing spec-file changes require Claude');
+  assert.deepEqual(c.referenceGate([{filename: 'scripts/engine/tests/new.test.js', status: 'added'}],
+    baseline), [], 'New test files are allowed without changing existing tests');
 }
 export function verifyWiring(sources) {
   assert.match(sources.branch, /'\/pulls\/' \+ pr\.number \+ '\/update-branch'/,

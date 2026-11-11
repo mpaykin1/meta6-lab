@@ -42,14 +42,6 @@
 - Задание: Исправь verify по логу https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117/job/130391790428 и повтори CI.
 - Взял: MG-строитель-2 2026-11-11T08:17:47Z
 
-### PR #16
-- PR: https://github.com/mpaykin1/meta6-lab/pull/16
-- Ветка: `lab/readiness-evidence-gates`
-- SHA: `efc33f33e8f70ddb18020256b26eaa361011f1a5` · последний коммит: 2026-11-07T02:44:44Z
-- Проблема: 💤 ЗАБРОШЕНО более 2 суток
-- Задание: Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.
-- Взял: MG-строитель-3 2026-11-11T07:29:00Z
-
 ## НУЖЕН CLAUDE
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
 - [#191](https://github.com/mpaykin1/meta6-lab/pull/191) Эталон «Затонувший город»: исходный ZIP, 3D-витрина и каталог ассетов

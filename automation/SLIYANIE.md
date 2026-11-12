@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 68, слито 2, закрыто 42, открыто 24 — бот, 2026-11-11 13:44 UTC
+Итог: всего 68, слито 2, закрыто 45, открыто 21 — бот, 2026-11-12 12:40 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -22,19 +22,19 @@
 | #211 | код | `lab/claude-context-compact` | Compact agent context: STATUS, rules, CI summaries and traps | closed | |
 | #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |
 | #209 | код | `lab/library-catalog` | L1 ч.3 + L3: каталог игровых систем для MCP ИИ | open | |
-| #205 | код | `lab/owner-pult` | Пульт владельца — прогресс и свежие игры | open dirty | |
-| #204 | код | `lab/rules-bot-trainer` | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | open dirty | |
-| #203 | код | `lab/skin-rusty-robot` | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | open dirty | |
-| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open dirty | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |
+| #205 | код | `lab/owner-pult` | Пульт владельца — прогресс и свежие игры | open | |
+| #204 | код | `lab/rules-bot-trainer` | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | open | |
+| #203 | код | `lab/skin-rusty-robot` | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | open | |
+| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |
 | #193 | код | `lab/kontur-k7-review` | K7: guard against repeated regression classes | open | |
-| #192 | код | `lab/mcp-connect` | M6: Connect — локальный MCP, конфиги клиентов и официальный  | open dirty | |
-| #190 | код | `lab/bot-batch-1` | B2 (batch 1): read-only META BOT adapters for two Twilight g | open dirty | |
+| #192 | код | `lab/mcp-connect` | M6: Connect — локальный MCP, конфиги клиентов и официальный  | open | |
+| #190 | код | `lab/bot-batch-1` | B2 (batch 1): read-only META BOT adapters for two Twilight g | open | |
 | #177 | код | `lab/automation-efficiency-rules-20261109` | Правила эффективности пяти автозадач: только измеримый резул | closed | |
 | #172 | код | `lab/pod-i-nad-palette-cycle` | META GAMES: original dynamic palette cycle for sky, water, f | closed | |
 | #169 | код | `lab/pod-i-nad-original-palettes` | META GAMES: extract source-exact dusk, twilight, night and d | closed | |
-| #132 | код | `lab/cycle5-archer-meta-adfree-1108` | fix(meta): Archer in the Fog — no ads, local saves and one f | open dirty | |
-| #131 | код | `lab/owner-graphics-animation-references-20261108` | META GAMES: 10 эталонов графики и анимации из оригиналов вла | open | |
-| #129 | код | `lab/cycle4-twilight-isles-no-ads-1108` | fix(meta): Twilight Isles 2 plays without ads, with free rev | open dirty | |
+| #132 | код | `lab/cycle5-archer-meta-adfree-1108` | fix(meta): Archer in the Fog — no ads, local saves and one f | closed | |
+| #131 | код | `lab/owner-graphics-animation-references-20261108` | META GAMES: 10 эталонов графики и анимации из оригиналов вла | closed | |
+| #129 | код | `lab/cycle4-twilight-isles-no-ads-1108` | fix(meta): Twilight Isles 2 plays without ads, with free rev | closed | |
 | #126 | код | `lab/sketch-to-game-standard` | Эталон: универсальный промпт Sketch → HTML Game → ZIP | merged | |
 | #125 | код | `lore/alternative-last-seed-20261108` | Lore: alternative Last Seed mythology and inspiration bank | merged | |
 | #124 | код | `lab/seed-of-last-world-canon` | ЛОР: Зерно последнего мира — эталон и карта мультивселенной  | closed | |

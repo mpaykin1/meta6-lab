@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "3dc11ee9645943ebd3f539a5836fc1475815e2b7",
+  "last_processed_head": "64ae05f16d4a18808de4c8472e20616880daa3b2",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -19,7 +19,7 @@
     },
     "1_fix_bot_and_other_ci": {
       "status": "in_progress",
-      "details": "Кнопка музыки перекрывала меню: скрыта на игровом экране и сдвинута в паузе; Clean screen стал 0 видимых текстов (Actions 43199889622), но меню оставалось скрытым. Теперь меню показывается независимо от состояния HUD и скрывается лишь на титульном экране. Ожидается новый browser-check. Генератор библиотеки в Actions автоматически обновил оба машинных индекса вслед за изменением кнопок, см. коммит 4661d37; старые action_required на ботовом push не считать зелёным."
+      "details": "Кнопка музыки перекрывала меню: скрыта на игровом экране и сдвинута в паузе; Clean screen стал 0 видимых текстов (Actions 43199889622), но меню оставалось скрытым. Теперь меню показывается независимо от состояния HUD и скрывается лишь на титульном экране. Ожидается новый browser-check. Генератор библиотеки в Actions автоматически обновил оба машинных индекса вслед за изменением кнопок, см. коммит 4661d37; старые action_required на ботовом push не считать зелёным. Veil Terraces теперь выбирает только полный проходимый маршрут шести воспоминаний: повторно ищет маршрут, при первом запуске отклоняет генерацию мира без пути; подмена бот-ручки и проверок запрещена. Новый CI ожидает проверки."
     },
     "2_canonical_and_publish": {
       "status": "pending"
@@ -57,7 +57,8 @@
     "https://github.com/mpaykin1/meta6-lab/actions/runs/43201355486",
     "https://github.com/mpaykin1/meta6-lab/commit/75282933272b06905b5c261f4ecf5917a837a55d",
     "https://github.com/mpaykin1/meta6-lab/commit/d59921c3eb1651a366438950198b6c140db7fc9a",
-    "https://github.com/mpaykin1/meta6-lab/commit/3dc11ee9645943ebd3f539a5836fc1475815e2b7"
+    "https://github.com/mpaykin1/meta6-lab/commit/3dc11ee9645943ebd3f539a5836fc1475815e2b7",
+    "https://github.com/mpaykin1/meta6-lab/commit/64ae05f16d4a18808de4c8472e20616880daa3b2"
   ],
   "cycle_updates": [
     {
@@ -98,6 +99,13 @@
         "3dc11ee9645943ebd3f539a5836fc1475815e2b7"
       ],
       "next": "Проверить STOROZHA protected originals на новом HEAD; не сливать PR, пока все обязательные проверки не зелёные."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Veil Terraces: генератор теперь требует реальный проходимый маршрут всех шести воспоминаний вместо случайного тупика; при первой загрузке переподбирает мир. Не меняются графика, бот-контракт или правила проверок.",
+      "commit": "64ae05f16d4a18808de4c8472e20616880daa3b2",
+      "next": "Проверить META BOT и LAB focused META BOT для реальной полной игры; сохранить генератор без обходов физики."
     }
   ]
 }

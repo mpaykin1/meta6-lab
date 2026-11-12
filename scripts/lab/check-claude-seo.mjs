@@ -49,6 +49,23 @@ export function inspect(html, page) {
   if (/rel="preconnect"\s+href="https:\/\/static\.playgama\.com"/i.test(html)) {
     errors.push(page + ': Playgama preconnect is forbidden');
   }
+  // Catch broken links to pages and files within the catalogue before publishing.
+  const site = new URL(base);
+  for (const match of html.matchAll(/<a\\b[^>]*\\bhref\\s*=\\s*(?:"([^"]*)"|'([^']*)')/gi)) {
+    const href = match[1] ?? match[2];
+    if (!href || href.startsWith('#')) continue;
+    let target;
+    try { target = new URL(href, expected); }
+    catch { errors.push(page + ': invalid link URL ' + href); continue; }
+    if (target.origin !== site.origin || !target.pathname.startsWith(site.pathname)) continue;
+    let relative;
+    try { relative = decodeURIComponent(target.pathname.slice(site.pathname.length)); }
+    catch { errors.push(page + ': malformed encoded URL ' + href); continue; }
+    const local = path.resolve(root, relative, !relative || relative.endsWith('/') ? 'index.html' : '');
+    if (!local.startsWith(root + path.sep) || !fs.existsSync(local) || !fs.statSync(local).isFile()) {
+      errors.push(page + ': broken catalogue link ' + href);
+    }
+  }
   // Game links must not silently leave the ad-free catalogue for an ad-supported host.
   const compact = html.replace(/[\r\n\t]/g, '');
   if (/playgama\.ai\/play\//i.test(compact)) {

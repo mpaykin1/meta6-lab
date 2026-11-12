@@ -31,7 +31,14 @@
 - [ ] Шаг 4 — конкретных строк нарушений в 🚨 нет; отсутствие нарушений требует полного подтверждения.
 - [x] Шаг 5 (б, реализация в ветке, НЕ MERGED) · 2026-11-12T07:01:03.060Z — два последовательных почасовых среза с подтверждённым нулём, запись в Issue; [workflow SHA 1dd625e](https://github.com/mpaykin1/meta6-lab/commit/1dd625e4034939a89d80ca9e1d55b410205ee4d3), [4 ловушки SHA 5b54ef3](https://github.com/mpaykin1/meta6-lab/commit/5b54ef3cc6a592352892a74358d6fcd0bdd40349), [OSHIBKI #41](https://github.com/mpaykin1/meta6-lab/commit/9cd6c2db79d5bc808f1450ea03518f68e3822727). Требует проверки CI и Claude для защищённого workflow.
 - [x] Шаг 6 · 2026-11-12T07:01:03.060Z — «Урок» ниже, расчётные слоты отдельно от фактических запусков.
-- [ ] Шаг 7 — обновить ZADACHI.md ссылкой на новый PR и CI после его создания.
+- [x] Шаг 7 · 2026-11-12T07:03:38.553Z — [PR #269](https://github.com/mpaykin1/meta6-lab/pull/269) в [ZADACHI.md](https://github.com/mpaykin1/meta6-lab/commit/8d68f5b196d57eb3ec6a58c59dd018da025051f3); [auditor run #43172228764](https://github.com/mpaykin1/meta6-lab/actions/runs/43172228764) success для HEAD 226dffca442c9e0ce984cce5081b46337fb0f662; [STOROZHA #43172228737](https://github.com/mpaykin1/meta6-lab/actions/runs/43172228737) красный, защищённые workflow и mutate-auditor; [quota #43172228843](https://github.com/mpaykin1/meta6-lab/actions/runs/43172228843) красный: 50 открытых PR, первыми указаны #3, #54, #72, #87, #133.
 
 ### Урок
 Расчётный часовой слот — не реальный запуск задачи. В отчёте различать окно, Actions run и подтверждённую активность.
+
+## Продолжение после PR #269
+
+- НУЖЕН CLAUDE: одобрить защищённые `.github/workflows/auditor.yml` и `scripts/auditor/mutate-auditor.mjs` в [PR #269](https://github.com/mpaykin1/meta6-lab/pull/269) вместе с конфликтующим [PR #254](https://github.com/mpaykin1/meta6-lab/pull/254); не обходить STOROZHA.
+- Квота новых PR: [run #43172228843](https://github.com/mpaykin1/meta6-lab/actions/runs/43172228843). Нельзя удалять чужие PR без разбора; один безопасный шаг — Claude разбирает #3 первым.
+- Сверить 3 последние schedule-прогона main, GraphQL pinnedIssues, обновление Issue <= 70 мин после разрешённого merge. Единственный в этом круге независимо проверенный [run #43144961586](https://github.com/mpaykin1/meta6-lab/actions/runs/43144961586).
+- Следующее улучшение после б): **в) находить PR старше 24 часов с конфликтами или красным CI**.

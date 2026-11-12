@@ -64,6 +64,18 @@ async function openGame(browser, url, label, viewport) {
 async function pixelDifference(page, selector) {
   const mark = page.locator(selector);
   if (!(await mark.count()) || !(await mark.isVisible())) return 0;
+  // A transparent ancestor can leave a layout box while drawing no pixels.
+  // Check effective visibility before sampling the actual screenshot difference.
+  const effectiveOpacity = await mark.evaluate(el => {
+    let opacity = 1;
+    for (let node = el; node && node.nodeType === 1; node = node.parentElement) {
+      const css = getComputedStyle(node);
+      if (css.display === 'none' || css.visibility !== 'visible') return 0;
+      opacity *= Number(css.opacity);
+    }
+    return opacity;
+  });
+  if (effectiveOpacity < 0.05) return 0;
   const rect = await mark.boundingBox();
   if (!rect || rect.width < 8 || rect.height < 8) return 0;
   const clip = {
@@ -169,7 +181,7 @@ try {
       });
       const invisible = await inspect(page);
       const passed = !baseline.visual && !invisible.visual && invisible.state;
-      console.log(viewport + ' no improvement: RED; fake hook / invisible screen: RED; mutation PASS=' + passed);
+      console.log(JSON.stringify({ viewport, baseline, invisible, noImprovementRed: !baseline.visual, invisibleHookRed: invisible.state && !invisible.visual, passed }));
       success &&= passed;
       await context.close();
       continue;

@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "744e6d7e89c716f2a81cfd184819cee297bd9e26",
+  "last_processed_head": "5b917550df3edc7518683cf3e2622ce776db78cf",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -49,9 +49,10 @@
         "underwater-world"
       ],
       "pending_pages": 0,
-      "details": "17/17 длинных уникальных текстов и FAQ; SEO-валидатор проходит на предыдущем SHA, последний запуск ожидается; WebP-скриншоты ещё нужны.",
+      "details": "17/17 уникальных описаний и FAQ; валидатор проверяет также реальные обязательные поля VideoGame, адрес запуска и несовпадающие/дублирующиеся сущности. Новый CI ожидается.",
       "seo_ci": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
-      "metadata": "23 страницы: title <= 60, description 120–160, Schema.org JSON-LD, alt"
+      "metadata": "23 страницы: title <= 60, description 120–160, Schema.org JSON-LD, alt",
+      "validator_implementation": "https://github.com/mpaykin1/meta6-lab/commit/674359e1781fb13e4dfeabb461e12def5448ea86"
     },
     "4_indexnow_and_sitemap": {
       "status": "in_progress",
@@ -127,6 +128,17 @@
         "744e6d7e89c716f2a81cfd184819cee297bd9e26"
       ],
       "next": "Проверить META BOT и обязательные проверки новых HEAD, устранить следующие реальные ошибки без правки эталонов."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Схема VideoGame: обязательные поля name, url, description, image, free access, платформы и META GAMES PlayAction; три новые мутации, включая двойную правдоподобную сущность.",
+      "commits": [
+        "674359e1781fb13e4dfeabb461e12def5448ea86",
+        "31f989e8ad23473c68a15aefc13d5564fe3fa174",
+        "5b917550df3edc7518683cf3e2622ce776db78cf"
+      ],
+      "next": "Подтвердить SEO CI на актуальном SHA и устранить остальные красные проверки до публикации."
     }
   ]
 }

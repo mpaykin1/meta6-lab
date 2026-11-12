@@ -6,6 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {ROOT,buildLibrary,LIMIT} from './machine.mjs';
 import {searchLibrary} from './search.mjs';
 import {verifyBibliotekaContract} from './verify-biblioteka-contract.mjs';
+import {verifyFindSystemsAndMutations} from './mutate-find-systems.mjs';
 import {mutateBibliotekaContract} from './mutate-biblioteka-contract.mjs';
 
 const sum=buffer=>crypto.createHash('sha256').update(buffer).digest('hex');
@@ -162,6 +163,8 @@ function liveDiscovery(){
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   try{
     verifyBibliotekaContract(ROOT);
+    const caught = await verifyFindSystemsAndMutations();
+    console.log('SYSTEM DISCOVERY MUTATIONS CAUGHT ' + caught);
     console.log('BIBLIOTEKA CONTRACT VERIFIED; MUTATIONS CAUGHT ' + mutateBibliotekaContract(ROOT));
     const rows=verifyLibrary();for(const row of rows)console.log(row.game+': assets '+row.assets+', file assets '+row.file_assets+', solutions '+row.solutions);console.log('LIBRARY VERIFIED');}
   catch(error){console.error(error.stack||error);process.exitCode=1;}

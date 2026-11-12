@@ -70,6 +70,8 @@
 | #190 | lab/bot-batch-1 | НУЖЕН CLAUDE: защищённый `.github/workflows/bot-adapters-b2.yml`; конфликт с main (`OSHIBKI.md`); проверка B2 охватывает 2/3 игр, `archer-in-the-fog` не подтверждён. Самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/190 | 2026-11-11 |
 | #54 | lab/render-visibility-optimization | НУЖЕН CLAUDE: PR изменяет защищённый `.github/workflows/lab-render-performance.yml` и существующий эталон `games/veil-terraces/index.html`; конфликт с main (`docs/progress/PR54_59_60.md`), самостоятельное слияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/54 | 2026-11-12 |
 
+| #234 | lab/claude-adfree-catalog-1110 | НУЖЕН CLAUDE: PR меняет существующие игры `games/*` и защищённые `scripts/storozha/*`; красный CI, самостоятельно исправлять защищённое и сливать запрещено. https://github.com/mpaykin1/meta6-lab/pull/234 | 2026-11-12 |
+
 ## Ждёт Claude
 
 Одна строка на PR; автоматическое слияние защищённых проверок запрещено.

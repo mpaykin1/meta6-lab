@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-12T09:11:42.241Z",
+  "generated_at": "2026-11-12T09:14:45.232Z",
   "sha": {
-    "lab": "8954bcb82601af221620b007efb3ca84b19dedaa",
+    "lab": "b2d9620d6a58c1ec81e8f577910bd93c47ed51e9",
     "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43187188419",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43187369805",
   "review": {
     "protected": [
       {
@@ -135,7 +135,7 @@
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
       "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open dirty | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
       "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
-      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
+      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open dirty | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
       "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
@@ -293,7 +293,7 @@
   },
   "pr": {
     "open": 52,
-    "conflicts": "нет данных",
+    "conflicts": 31,
     "merged": 23,
     "closed": 51,
     "mergedItems": [
@@ -530,7 +530,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1302,
+      "count": 1304,
       "folders": "нет данных"
     },
     "mg": {

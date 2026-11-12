@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-12T09:11:42.241Z | МГЛ: 8954bcb82601af221620b007efb3ca84b19dedaa | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | https://github.com/mpaykin1/meta6-lab/actions/runs/43187188419
+UTC: 2026-11-12T09:14:45.232Z | МГЛ: b2d9620d6a58c1ec81e8f577910bd93c47ed51e9 | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | https://github.com/mpaykin1/meta6-lab/actions/runs/43187369805
 ## ПРОВЕРИТЬ CLAUDE
 - PR #246 72a2be2281e8f4c54785599732024b111d50bfd1: .github/workflows/lab-pages.yml, .github/workflows/link-guard.yml, scripts/lab/mutate-link-ok.sh, scripts/lab/mutate-page-assets.mjs, scripts/lab/mutate-page-assets.py, scripts/lab/verify-check-page-assets.sh, … (сокращено)
 - PR #265 f0a6d79bdda5416da56a145901e0216808cba97e: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py
@@ -47,14 +47,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 52 | конфликт: нет данных | слито: 23 | закрыто: 51
+открыто: 52 | конфликт: 31 | слито: 23 | закрыто: 51
 #263 docs(prompty): реестр 15 промптов МГЛ и улучшение многоразов | d40662486e7b6cc8382f5184c86e4b68819b43f4
 #257 docs(zadachi): не создавать дубли задач по одному PR | 79f4465b6667092e16115222325c012ca73cc137
 #256 docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ | 2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec
 #243 Геймдизайн-аудит META GAMES — чистый PR без защищённой истор | 98d7334782dfeac39984972d3b2bf2067828bd81
 ещё 19: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1302 коммитов | нет данных
+МГЛ: 1304 коммитов | нет данных
 МГ: 6 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

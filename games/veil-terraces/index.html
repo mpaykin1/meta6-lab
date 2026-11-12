@@ -58,7 +58,7 @@ function passableSegment(from,to){
  }
  return true;
 }
-fufunction generateShards(){
+function generateShards(){
  // A random branch can reach a dead-end terrace despite each individual hop
  // being walkable. Retry the entire six-memory path, never place a shortcut.
  // On first load only, reject worlds whose spawn cannot reach all memories.

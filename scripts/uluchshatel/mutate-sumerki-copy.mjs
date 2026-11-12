@@ -24,6 +24,11 @@ const cases = [
     'hero: { x: 4, y: 4, z: 9 }'
   ],
   [
+    'wrong end-game destination (beacon instead of ring)',
+    '? guardian.segs?.[0] : world.ring;',
+    '? guardian.segs?.[0] : world.beacon;'
+  ],
+  [
     'mutate game state while reading',
     'const { G, player, world } = engine;',
     'const { G, player, world } = engine;\n    G.kills += 1;'
@@ -37,4 +42,4 @@ for (const [label, before, after] of cases) {
   assert.throws(() => verifyObserver(mutated), undefined, 'undetected regression: ' + label);
   console.log('TRAPPED: ' + label);
 }
-console.log('MUTATE sumerki copy rule 13: 3/3');
+console.log('MUTATE sumerki copy rule 13: 4/4');

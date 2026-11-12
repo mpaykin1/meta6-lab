@@ -19,7 +19,7 @@
     },
     "1_fix_bot_and_other_ci": {
       "status": "in_progress",
-      "details": "PR #234: на текущем HEAD 2 красных игровых прогона (Veil Terraces: застревание на уровнях 2 и 4). Остальные проверки #234 зелёные; #242 показывает action_required и не является доказательством успеха. Игровые эталоны не менять ради SEO.",
+      "details": "Текущий HEAD PR #234 9b1feaa6f452ba49dff8c89954d9ee43878609a6: красные Library Machine (Actions 43236878422: не закоммичены GENERATED shared/library/index.json и veil-terraces.json после изменения bot-strategy.mjs 65→67 строк) и LAB focused META BOT (Actions 43236879007: Veil Terraces intermittent отсутствует window.__META_BOT__ несмотря на успешные 6/6 прохождений). LAB Veil Shared Narrative Gameplay зелёный (Actions 43236878714). Не объявлять PR зелёным.",
       "evidence": [
         "https://github.com/mpaykin1/meta6-lab/commit/7ee56e90d9da32d806e697c542b705102575b963",
         "https://github.com/mpaykin1/meta6-lab/commit/744e6d7e89c716f2a81cfd184819cee297bd9e26",
@@ -31,7 +31,7 @@
     },
     "2_canonical_and_publish": {
       "status": "pending",
-      "details": "Preview: build-time noindex и постоянные canonical/Schema URL; live Pages ещё требует подтверждения."
+      "details": "PR #242 продолжает базироваться на #234, оба OPEN, mergeable=false; на последнем SEO HEAD обязательные Workflow Runs отсутствуют, старые были action_required. Без полного CI не сливать. Реальный HTTP 200 постоянного URL не подтверждён."
     },
     "3_content_and_validator": {
       "status": "in_progress",
@@ -62,7 +62,7 @@
     },
     "4_indexnow_and_sitemap": {
       "status": "in_progress",
-      "details": "IndexNow: перед POST требует HTTP 200 ключа и каждой изменённой страницы, точный canonical и JSON-LD; реальное 200/202 ответа API ещё не получено. Sitemap: 18 реальных страниц с изменениями от 12.11 получили lastmod=2026-11-12 по GitHub commits; 5 прежних страниц остались 11.11. IndexNow остаётся неподтверждённым до live-HTTP 200."
+      "details": "Key/file/sitemap/indexnow workflow присутствуют в PR242, но PR не слит в main. Ответ API 200/202 и 200 для постоянных HTML страниц не подтверждены."
     },
     "5_continuous_improvement": {
       "status": "done",
@@ -78,6 +78,7 @@
     }
   },
   "next_ideas": [
+    "PR #234: устранить незафиксированную генерацию shared/library без ручного изменения охраняемых baseline и восстановить стабильный window.__META_BOT__; ссылки: Actions 43236878422 и 43236879007.",
     "Сконвертировать 2 локальных PNG-кадра Three Worlds в WebP без изменения исходного игрового содержимого.",
     "После публикации проверять существование и HTTP 200 всех 17 ссылок PlayAction отдельно от локальной проверки.",
     "Дополнить SEO валидатор проверкой реально локальных OG-обложек после получения подтверждённых скриншотов",
@@ -325,6 +326,17 @@
         "three-worlds-rift.png": "cc3251c834a6e621d427c478f600312742a19622"
       },
       "next": "Заменить PNG на WebP, сформированные из этих же реальных кадров; собрать аналогичные кадры для остальных игр и снять внешние картинки; после CI и деплоя выполнить HTTP 200/202 IndexNow."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "blocked_pending_green_ci",
+      "change": "Свежая диагностика после изменения другим агентом PR #234: Veil gameplay PASS, но индексы библиотеки рассинхронизированы с bot-strategy, META BOT intermittently не инициализируется. Защитные проверки и эталоны не менялись; не слито.",
+      "evidence": [
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43236878422",
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43236879007",
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43236878714"
+      ],
+      "next": "Regenerate the two derived library artifacts from real code in a checked-out GitHub Actions workspace, not by overwriting owner reference hashes; fix sporadic Veil startup; approve/run fresh CI on #242."
     }
   ],
   "base_sync_sha": "a6431c80a43e11f1031530268031acb28341d824"

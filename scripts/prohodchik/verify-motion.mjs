@@ -14,7 +14,7 @@ function option(key) {
   return args[index + 1];
 }
 
-function fixtures(assessMotion) {
+function fixtures(assessMotion, assessFixedViewport) {
   const state = (x, y, extra = {}) => ({
     hero: {x, y}, level: 0, alive: true, progress: 0, game: 'veil-terraces', ...extra
   });
@@ -44,10 +44,15 @@ function fixtures(assessMotion) {
   assert.equal(assessMotion([
     interval(state(0, 0), state(0, 0, {hero: {x: NaN, y: 0}}))
   ]).status, 'INVALID');
-  console.log('B2_VERIFIER_PASS: 10 controls including idle drift and steer response');
+  const fixed = {sx: 0, sy: 0, st: 0, cx: 0, cy: 0, cw: 390, ch: 844};
+  assert.equal(assessFixedViewport([fixed, {...fixed}]).status, 'FIXED');
+  assert.equal(assessFixedViewport([fixed, {...fixed, sy: 12}, fixed]).status, 'FIX_MOVED');
+  assert.equal(assessFixedViewport([fixed, {...fixed, cw: 391.5}, fixed]).status, 'FIX_MOVED');
+  assert.equal(assessFixedViewport([fixed, {...fixed, cx: NaN}]).status, 'INVALID');
+  console.log('B2_VERIFIER_PASS: motion, transient FIX drift and deceptive state controls');
 }
 
-async function verifyGame(assessMotion, gamePath, screenshot) {
+async function verifyGame(assessMotion, assessFixedViewport, gamePath, screenshot) {
   assert.match(gamePath, /^games\/[a-z0-9-]+$/, 'Unsafe game path');
   const gameDir = resolve(root, gamePath);
   assert.ok(existsSync(join(gameDir, 'index.html')), 'Game entry point missing');
@@ -113,17 +118,27 @@ async function verifyGame(assessMotion, gamePath, screenshot) {
         for (const [dx, dy] of directions) {
           const before = await read();
           const since = Date.now();
-          await input.joystick(dx, dy, 550);
+          // Sample while the finger/key is held: a page can scroll and spring back by release.
+          const viewportTrace = [fixed];
+          let observing = true;
+          const observer = (async () => {
+            while (observing) {
+              await page.waitForTimeout(80);
+              if (observing) viewportTrace.push(await page.evaluate(scrollAndCanvasInPage));
+            }
+          })();
+          try {
+            await input.joystick(dx, dy, 550);
+          } finally {
+            observing = false;
+            await observer;
+          }
+          viewportTrace.push(await page.evaluate(scrollAndCanvasInPage));
+          const fix = assessFixedViewport(viewportTrace);
+          assert.equal(fix.status, 'FIXED', 'FIX: viewport changed during held input: ' + JSON.stringify(fix));
           const durationMs = Math.max(1, Date.now() - since);
           const after = await read();
           segments.push({before, after, durationMs, input: true});
-          const position = await page.evaluate(scrollAndCanvasInPage);
-          assert.ok(!position.sx && !position.sy && !position.st &&
-            Math.abs(position.cx - fixed.cx) <= 1 &&
-            Math.abs(position.cy - fixed.cy) <= 1 &&
-            Math.abs(position.cw - fixed.cw) <= 1 &&
-            Math.abs(position.ch - fixed.ch) <= 1,
-          'FIX: page scrolled or canvas moved during input');
           status = assessMotion(segments).status;
           if (status !== 'NO_MOVEMENT') break;
         }
@@ -150,11 +165,11 @@ async function verifyGame(assessMotion, gamePath, screenshot) {
 
 const moduleFile = option('--module');
 const source = moduleFile ? pathToFileURL(resolve(moduleFile)).href : './motion-check.mjs';
-const {assessMotion} = await import(source);
+const {assessMotion, assessFixedViewport} = await import(source);
 const game = option('--game');
 try {
-  if (game) await verifyGame(assessMotion, game, option('--screenshot'));
-  else fixtures(assessMotion);
+  if (game) await verifyGame(assessMotion, assessFixedViewport, game, option('--screenshot'));
+  else fixtures(assessMotion, assessFixedViewport);
 } catch (error) {
   console.error(error.stack || error.message);
   process.exitCode = 1;

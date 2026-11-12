@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "notes": "JSON is valid YAML 1.2. Use only explicit role attribution; shared branch prefixes alone do not prove authorship. Canonical issue #253 is never recreated.",
+  "sources": [
+    "https://github.com/mpaykin1/meta6-lab/blob/main/automation/prompts/MG_PYAT_AVTOZADACH.md",
+    "https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md",
+    "https://github.com/mpaykin1/meta6-lab/blob/main/rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md"
+  ],
+  "roles": [
+    {
+      "name": "MG-строитель-1",
+      "minute_utc": 5,
+      "table_owner": "MG-строитель-1",
+      "role_marker": "MG-строитель-1",
+      "branch_prefixes": [
+        "lab/auto-",
+        "lab/mcp-",
+        "lab/bot-",
+        "lab/library-",
+        "lab/p1-",
+        "lab/kontur-",
+        "lab/stryker-"
+      ],
+      "commit_prefixes": [],
+      "pr_labels": []
+    },
+    {
+      "name": "MG-строитель-2",
+      "minute_utc": 17,
+      "table_owner": "MG-строитель-2",
+      "role_marker": "MG-строитель-2",
+      "branch_prefixes": [
+        "lab/auto-",
+        "lab/mcp-",
+        "lab/bot-",
+        "lab/library-",
+        "lab/p1-",
+        "lab/kontur-",
+        "lab/stryker-"
+      ],
+      "commit_prefixes": [],
+      "pr_labels": []
+    },
+    {
+      "name": "MG-строитель-3",
+      "minute_utc": 29,
+      "table_owner": "MG-строитель-3",
+      "role_marker": "MG-строитель-3",
+      "branch_prefixes": [
+        "lab/auto-",
+        "lab/mcp-",
+        "lab/bot-",
+        "lab/library-",
+        "lab/p1-",
+        "lab/kontur-",
+        "lab/stryker-"
+      ],
+      "commit_prefixes": [],
+      "pr_labels": []
+    },
+    {
+      "name": "MG-строитель-4",
+      "minute_utc": 41,
+      "table_owner": "MG-строитель-4",
+      "role_marker": "MG-строитель-4",
+      "branch_prefixes": [
+        "lab/auto-",
+        "lab/mcp-",
+        "lab/bot-",
+        "lab/library-",
+        "lab/p1-",
+        "lab/kontur-",
+        "lab/stryker-"
+      ],
+      "commit_prefixes": [],
+      "pr_labels": []
+    },
+    {
+      "name": "MG-ремонтник",
+      "minute_utc": 53,
+      "table_owner": "MG-ремонтник",
+      "role_marker": "MG-ремонтник",
+      "branch_prefixes": [
+        "lab/auto-",
+        "lab/mcp-",
+        "lab/bot-",
+        "lab/library-",
+        "lab/p1-",
+        "lab/kontur-",
+        "lab/stryker-"
+      ],
+      "commit_prefixes": [],
+      "pr_labels": []
+    }
+  ],
+  "protected_paths": [
+    ".github/workflows/**",
+    "scripts/storozha/**",
+    "scripts/autofinish/**",
+    "scripts/zadachi/**",
+    "scripts/meta-bot/**",
+    "scripts/kontur/**",
+    "rules/09-platforma/FINISH.md",
+    "scripts/meta-games-guard/**",
+    "observer-world-en-v7/**",
+    "ashen-sumerek/**",
+    "underwater-world/**",
+    "three-worlds-game/**",
+    "meta-games-worlds/veil-terraces/**",
+    "abyss-glow/stand/**",
+    "games/broken-city/**",
+    "games/twilight-isles/**",
+    "games/twilight-isle-classic/**",
+    "games/archer-in-the-fog/**",
+    "games/veil-terraces/**"
+  ],
+  "protected_existing_roots": [
+    "reference/",
+    "games/"
+  ],
+  "issue_title": "🤖 Ревизия META GAMES",
+  "max_pull_requests": 200,
+  "max_rows_per_role": 30,
+  "issue_number": 253
+}

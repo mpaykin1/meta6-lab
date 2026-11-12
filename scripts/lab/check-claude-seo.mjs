@@ -51,7 +51,7 @@ export function inspect(html, page) {
   }
   // Catch broken links to pages and files within the catalogue before publishing.
   const site = new URL(base);
-  for (const match of html.matchAll(/<a\\b[^>]*\\bhref\\s*=\\s*(?:"([^"]*)"|'([^']*)')/gi)) {
+  for (const match of html.matchAll(/<a\b[^>]*\bhref\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)) {
     const href = match[1] ?? match[2];
     if (!href || href.startsWith('#')) continue;
     let target;

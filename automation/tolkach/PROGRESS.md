@@ -115,3 +115,58 @@
 - Созданный [PR #274](https://github.com/mpaykin1/meta6-lab/pull/274), commit `1277b6445a45ebeb560538bc5cb6bdd738d11bda`, НЕ слит: [storozha-quota 43186612703](https://github.com/mpaykin1/meta6-lab/actions/runs/43186612703) fail `LIVE=51`, максимум 5. Защищённый сторож не ослаблен; собственный лишний PR закрыт без слияния, ветка сохранена. [Причина в комментарии](https://github.com/mpaykin1/meta6-lab/issues/274#issuecomment-6819252807). Улучшение (в) **не дошло до main** и не считается внедрённым; повторить после уменьшения числа активных PR до квоты.
 - Урок: перед созданием отдельного PR на саморазвитие надо проверять текущую квоту сторожа и пять старейших активных PR. При `LIVE>5` не создавать лишний PR; завершить доступный старый PR, а текст будущего правила сохранить в прогрессе/существующей ветке, не объявляя зелёным.
 - Подтверждённые операции этого продолжения: PR слито 1 (#263), закрыто 1 (свой #274 без merge), исправлено в коде 0, передано Claude 0. Строки 🛑 проверять по свежему снимку сторожа, а не по прежнему summary.
+
+## Круг 2026-11-12T10:12:40.017Z — очередь по ZADACHI (актуальна только на момент снимка)
+- Источник [ZADACHI.md](https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md), blob `578a09ad17ac468274aa5a9dbf68716672f7571f`. Строки: 🛑 43, ⚠ 4, 💤 77; 44 уникальных ключей в очереди, из них 43 с открытым PR. Открыто по GitHub МГЛ 52, МГ 16. Время взято из таблицы сторожа, **перед каждым действием проверить реальный commit SHA и что коммит старше 60 минут**.
+
+| Порядок | Репо / PR или ветка | Последний коммит сторожа UTC | Строк |
+|---:|---|---|---:|
+| 1 | МГЛ `—` (без PR) | — | 2 |
+| 2 | [МГЛ #193](https://github.com/mpaykin1/meta6-lab/pull/193) | 2026-11-09 15:37 | 1 |
+| 3 | [МГЛ #201](https://github.com/mpaykin1/meta6-lab/pull/201) | 2026-11-09 15:53 | 2 |
+| 4 | [МГЛ #205](https://github.com/mpaykin1/meta6-lab/pull/205) | 2026-11-09 17:01 | 1 |
+| 5 | [МГЛ #192](https://github.com/mpaykin1/meta6-lab/pull/192) | 2026-11-09 22:26 | 1 |
+| 6 | [МГЛ #204](https://github.com/mpaykin1/meta6-lab/pull/204) | 2026-11-10 02:51 | 1 |
+| 7 | [МГЛ #208](https://github.com/mpaykin1/meta6-lab/pull/208) | 2026-11-10 04:35 | 1 |
+| 8 | [МГЛ #218](https://github.com/mpaykin1/meta6-lab/pull/218) | 2026-11-10 06:22 | 2 |
+| 9 | [МГЛ #3](https://github.com/mpaykin1/meta6-lab/pull/3) | 2026-11-10 06:25 | 2 |
+| 10 | [МГЛ #220](https://github.com/mpaykin1/meta6-lab/pull/220) | 2026-11-10 06:26 | 1 |
+| 11 | [МГЛ #210](https://github.com/mpaykin1/meta6-lab/pull/210) | 2026-11-10 06:36 | 1 |
+| 12 | [МГЛ #207](https://github.com/mpaykin1/meta6-lab/pull/207) | 2026-11-10 06:54 | 1 |
+| 13 | [МГЛ #189](https://github.com/mpaykin1/meta6-lab/pull/189) | 2026-11-10 06:56 | 3 |
+| 14 | [МГЛ #202](https://github.com/mpaykin1/meta6-lab/pull/202) | 2026-11-10 06:57 | 1 |
+| 15 | [МГЛ #133](https://github.com/mpaykin1/meta6-lab/pull/133) | 2026-11-10 07:09 | 3 |
+| 16 | [МГЛ #134](https://github.com/mpaykin1/meta6-lab/pull/134) | 2026-11-10 07:14 | 1 |
+| 17 | [МГЛ #54](https://github.com/mpaykin1/meta6-lab/pull/54) | 2026-11-10 08:48 | 3 |
+| 18 | [МГЛ #221](https://github.com/mpaykin1/meta6-lab/pull/221) | 2026-11-10 08:48 | 1 |
+| 19 | [МГЛ #209](https://github.com/mpaykin1/meta6-lab/pull/209) | 2026-11-10 08:49 | 2 |
+| 20 | [МГЛ #222](https://github.com/mpaykin1/meta6-lab/pull/222) | 2026-11-10 08:53 | 2 |
+| 21 | [МГЛ #200](https://github.com/mpaykin1/meta6-lab/pull/200) | 2026-11-10 09:15 | 2 |
+| 22 | [МГЛ #191](https://github.com/mpaykin1/meta6-lab/pull/191) | 2026-11-10 10:27 | 1 |
+| 23 | [МГЛ #190](https://github.com/mpaykin1/meta6-lab/pull/190) | 2026-11-10 14:49 | 4 |
+| 24 | [МГЛ #225](https://github.com/mpaykin1/meta6-lab/pull/225) | 2026-11-11 06:34 | 1 |
+| 25 | [МГЛ #235](https://github.com/mpaykin1/meta6-lab/pull/235) | 2026-11-11 06:39 | 1 |
+| 26 | [МГЛ #219](https://github.com/mpaykin1/meta6-lab/pull/219) | 2026-11-11 06:41 | 1 |
+| 27 | [МГЛ #87](https://github.com/mpaykin1/meta6-lab/pull/87) | 2026-11-11 06:54 | 2 |
+| 28 | [МГЛ #72](https://github.com/mpaykin1/meta6-lab/pull/72) | 2026-11-11 06:56 | 1 |
+| 29 | [МГЛ #239](https://github.com/mpaykin1/meta6-lab/pull/239) | 2026-11-11 06:58 | 1 |
+| 30 | [МГЛ #233](https://github.com/mpaykin1/meta6-lab/pull/233) | 2026-11-11 07:03 | 1 |
+| 31 | [МГЛ #203](https://github.com/mpaykin1/meta6-lab/pull/203) | 2026-11-11 07:10 | 5 |
+| 32 | [МГЛ #237](https://github.com/mpaykin1/meta6-lab/pull/237) | 2026-11-11 12:14 | 1 |
+| 33 | [МГЛ #245](https://github.com/mpaykin1/meta6-lab/pull/245) | 2026-11-11 12:14 | 1 |
+| 34 | [МГЛ #252](https://github.com/mpaykin1/meta6-lab/pull/252) | 2026-11-11 12:51 | 1 |
+| 35 | [МГЛ #255](https://github.com/mpaykin1/meta6-lab/pull/255) | 2026-11-11 13:58 | 1 |
+| 36 | [МГЛ #259](https://github.com/mpaykin1/meta6-lab/pull/259) | 2026-11-11 14:20 | 1 |
+| 37 | [МГЛ #260](https://github.com/mpaykin1/meta6-lab/pull/260) | 2026-11-11 14:36 | 1 |
+| 38 | [МГЛ #241](https://github.com/mpaykin1/meta6-lab/pull/241) | 2026-11-11 16:08 | 1 |
+| 39 | [МГЛ #247](https://github.com/mpaykin1/meta6-lab/pull/247) | 2026-11-11 16:13 | 1 |
+| 40 | [МГЛ #267](https://github.com/mpaykin1/meta6-lab/pull/267) | 2026-11-11 16:24 | 1 |
+| 41 | [МГЛ #268](https://github.com/mpaykin1/meta6-lab/pull/268) | 2026-11-11 16:45 | 1 |
+| 42 | [МГЛ #269](https://github.com/mpaykin1/meta6-lab/pull/269) | 2026-11-12 07:03 | 1 |
+| 43 | [МГЛ #270](https://github.com/mpaykin1/meta6-lab/pull/270) | 2026-11-12 07:15 | 1 |
+| 44 | [МГЛ #262](https://github.com/mpaykin1/meta6-lab/pull/262) | 2026-11-12 07:18 | 1 |
+
+### PR #193 — действие (д), 2026-11-12T10:12:40.017Z
+- Ветка `lab/kontur-k7-review`, HEAD [`c7e07c9afa9462bc3512edca92696602c2c3a126`](https://github.com/mpaykin1/meta6-lab/commit/c7e07c9afa9462bc3512edca92696602c2c3a126), последний коммит 2026-11-09T15:37:22Z. [KONTUR run 42929712565](https://github.com/mpaykin1/meta6-lab/actions/runs/42929712565) успешен; файлы `scripts/kontur/guard.mjs` и `scripts/kontur/mutate-kontur-guard.mjs` защищены, в [PR #193](https://github.com/mpaykin1/meta6-lab/pull/193) ранее выявлены ложные срабатывания. Не сливать без Claude. Захват — [коммит ZADACHI](https://github.com/mpaykin1/meta6-lab/commit/619c6329111d11c735762082709a0582ddc1f86b); единая строка [DLYA_CLAUDE](https://github.com/mpaykin1/meta6-lab/commit/e4ca52e7ff00d3b6184daddcaa47643228b11b8b).
+- Счётчик по двум публикациям: 🛑 44 (summary сторожа 09:03) → 43 (свежая таблица); не считать уменьшение заслугой толкача. Слито 0, закрыто 0, исправлено в чужом PR 0, передано Claude: 1 (#193, повторная актуализация).
+- Урок: успешный KONTUR на защищённом guard не означает права на самостоятельный merge; при прежнем замечании Claude об избыточных срабатываниях оставлять ручное ревью и единую строку, не дублировать handoff.

@@ -8514,21 +8514,6 @@
       "sha256": "820f750cd545844bb9f2ec3c2d40344399ada8324db0c61c4d352e95ad49deba"
     },
     {
-      "id": "13f29dff613dae44b34d08ae",
-      "game": "archer-in-the-fog",
-      "kind": "solution",
-      "name": "playLevel",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/archer-in-the-fog/bot-strategy.mjs",
-      "lines": [
-        11,
-        34
-      ],
-      "sha256": "6d3d571ff2f617c4f1ff25aadd71580323e96c0b0e95d3d94a6a0f17ae4b7635"
-    },
-    {
       "id": "2fe8dc95a0ccbada78600820",
       "game": "archer-in-the-fog",
       "kind": "solution",
@@ -8544,7 +8529,7 @@
       "sha256": "354cb02103e033de3842d801fa9e350f872cf9beb45dabc40963350c8e2687a5"
     },
     {
-      "id": "d7d97e6eb2496f6a87717811",
+      "id": "99774402307213d10b31be57",
       "game": "archer-in-the-fog",
       "kind": "solution",
       "name": "module:bot-strategy.mjs",
@@ -8554,9 +8539,24 @@
       "source_path": "games/archer-in-the-fog/bot-strategy.mjs",
       "lines": [
         1,
-        34
+        40
       ],
-      "sha256": "25bb3751302be28fbf110d86e27630dbb9fffdca3a01ffddfa6d0ef41d68f1bc"
+      "sha256": "f9d0c9b5b7cfb2b61e0ce9b56e35f0e784f2ae4f49e508c4ede754913d7d9b53"
+    },
+    {
+      "id": "d5c5c47dded7c6d9404dc195",
+      "game": "archer-in-the-fog",
+      "kind": "solution",
+      "name": "playLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/archer-in-the-fog/bot-strategy.mjs",
+      "lines": [
+        11,
+        40
+      ],
+      "sha256": "8d4f2004623adda40c113fc62935c440f922ac757bef35fbac725c4a41609768"
     },
     {
       "id": "0128db45c999ebf147943a97",

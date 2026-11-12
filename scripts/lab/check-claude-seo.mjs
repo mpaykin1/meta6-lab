@@ -73,6 +73,22 @@ export function inspect(html, page) {
           typeof play.target !== 'string' ||
           !play.target.startsWith(siteOrigin + '/meta6-lab/')) {
         errors.push(page + ': VideoGame must link to an actual META GAMES launch target');
+      } else {
+        // An internal-looking PlayAction is not necessarily a playable page.
+        // Verify its exact source path exists before sending it to Pages.
+        const pathname = new URL(play.target).pathname.slice('/meta6-lab/'.length);
+        let relative;
+        try { relative = decodeURIComponent(pathname); }
+        catch { errors.push(page + ': PlayAction has malformed encoded path'); }
+        if (relative !== undefined) {
+          const projectRoot = path.resolve('.');
+          const entry = path.resolve(projectRoot, relative,
+            relative.endsWith('/') ? 'index.html' : '');
+          if (!entry.startsWith(projectRoot + path.sep) ||
+              !fs.existsSync(entry) || !fs.statSync(entry).isFile()) {
+            errors.push(page + ': PlayAction target is missing from this build');
+          }
+        }
       }
     }
   }

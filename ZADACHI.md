@@ -188,3 +188,5 @@
 
 ## БОТ-ПРОХОДЧИК — запуски
 - 2026-11-11 14:27 UTC · БОТ-ПРОХОДЧИК: проверено игр 0, технически пройдено 0, исправлено игровых дефектов 0, передано Claude 0 · [B2 PR #258](https://github.com/mpaykin1/meta6-lab/pull/258), [KONTUR на коммите кода](https://github.com/mpaykin1/meta6-lab/actions/runs/43038099712) PASS, финальный HEAD ещё проверяется · [саморазвитие а) PR #259](https://github.com/mpaykin1/meta6-lab/pull/259), [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43037648249).
+
+- 2026-11-12 UTC · БОТ-ПРОХОДЧИК B2/B3: проверено игр 0, технически пройдено 0, исправлено игровых дефектов 0, передано Claude 0. Исправлено раннее завершение мониторинга `MOVED` до позднего `STUCK`, 3 регрессионные мутации; [PR #258](https://github.com/mpaykin1/meta6-lab/pull/258). Новый Actions run пока не подтверждён; B2–B5 остаются НЕТ.

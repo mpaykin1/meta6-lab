@@ -28,6 +28,12 @@ function execute(source, name, expectedPass) {
 const mutations = [
   ['jitter-counted-as-motion', 'const EPSILON = 0.05;', 'const EPSILON = 0;'],
   ['stuck-wait-hidden', 'const STUCK_MS = 2000;', 'const STUCK_MS = 100000;'],
+  ['first-motion-hides-later-stuck', "motion = result('MOVED', {distance, level: after.level});",
+    "return result('MOVED', {distance, level: after.level});"],
+  ['stuck-counter-restarts-every-sample', 'stationaryMs += segment.durationMs;',
+    'stationaryMs = segment.durationMs;'],
+  ['first-motion-disables-stuck-alarm', 'if (stationaryMs >= STUCK_MS) {',
+    'if (stationaryMs >= STUCK_MS && !motion) {'],
   ['auto-drift-falsely-accepted', 'to.x - from.x - driftX * segment.durationMs,',
     'to.x - from.x,'],
   ['death-ignored', 'if (before.alive === false || after.alive === false) {',
@@ -55,7 +61,7 @@ try {
     assert.notEqual(mutant, original, 'Mutation failed: ' + name);
     execute(mutant, name, false);
   }
-  console.log('B2_MUTATIONS_PASS 11 hostile variants including transient drift and release-only cheats');
+  console.log('B2_MUTATIONS_PASS 14 hostile variants including late stall after movement');
 } finally {
   rmSync(temp, {recursive: true, force: true});
 }

@@ -14,6 +14,7 @@ export function assessMotion(segments) {
   if (!Array.isArray(segments)) return result('INVALID', {reason: 'segments must be an array'});
   let stationaryMs = 0;
   let sampled = 0;
+  let motion = null;
   let driftX = 0;
   let driftY = 0;
   for (const segment of segments) {
@@ -43,15 +44,19 @@ export function assessMotion(segments) {
       to.x - from.x - driftX * segment.durationMs,
       to.y - from.y - driftY * segment.durationMs
     );
-    if (distance > EPSILON) return result('MOVED', {distance, level: after.level});
+    if (distance > EPSILON) {
+      motion = result('MOVED', {distance, level: after.level});
+      stationaryMs = 0;
+      continue;
+    }
     stationaryMs += segment.durationMs;
     if (stationaryMs >= STUCK_MS) {
       return result('STUCK', {hero: to, level: after.level, stationaryMs});
     }
   }
-  return sampled
+  return motion || (sampled
     ? result('NO_MOVEMENT', {stationaryMs})
-    : result('NO_INPUT', {reason: 'no physical input was sent'});
+    : result('NO_INPUT', {reason: 'no physical input was sent'}));
 }
 
 

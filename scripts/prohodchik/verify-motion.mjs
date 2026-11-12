@@ -27,6 +27,11 @@ function fixtures(assessMotion, assessFixedViewport) {
     interval(state(0, 0, {progress: i}), state(0, 0, {progress: i + 1})));
   assert.equal(assessMotion([interval(state(0, 0), state(0.3, 0))]).status, 'MOVED');
   assert.equal(assessMotion(still).status, 'STUCK');
+  const firstMove = interval(state(0, 0), state(0.5, 0));
+  const lateStall = Array.from({length: 4}, () =>
+    interval(state(0.5, 0), state(0.5, 0)));
+  assert.equal(assessMotion([firstMove, ...lateStall]).status, 'STUCK');
+  assert.equal(assessMotion([...still.slice(0, 2), firstMove]).status, 'MOVED');
   assert.equal(assessMotion(jitter).status, 'STUCK');
   assert.equal(assessMotion(falseProgress).status, 'STUCK');
   const passive = interval(state(0, 0), state(0.5, 0), 500, false);

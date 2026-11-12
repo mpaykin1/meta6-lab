@@ -34,7 +34,7 @@ const cases = [
   [
     'false end of game on second level',
     'Boolean(G.ending) && level === LEVELS.length - 1;',
-    'Boolean(G.ending) && level >= 1;'
+    'Boolean(G.ending) && level === 1;'
   ]
 ];
 

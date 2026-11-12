@@ -19,14 +19,6 @@
 - Проверка: поведение игр не проверено, META BOT потребуется при внедрении.
 - Статус: В РАБОТЕ — требуется ревью Claude и отдельное внедрение по играм; без автоматического переноса в `meta6`.
 - Михаил: —; Claude: —
-### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
-- Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
-- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/
-- Источник: `games/asqura-ilya-reference/index.html`, blob `b7b7167b3fb48776b2c82433087cb13e867e5abb`.
-- Каталог: `shared/references/asqura-ilya-reference.json`; 3D требует CDN Three.js r128.
-- Ветка: `lab/asqura-ilya-reference-1109`; PR — см. ветку.
-- Статус: В РАБОТЕ — Pages и бот ещё не подтверждены.
-- Михаил: запросил включение в эталоны; оценку игры не дал.
 
 ### lab/link-guard-recovery-1111 — ССЫЛКА = 200: восстановление и защита (11.11.2026)
 - Шаг 1/6: DONE — [PR #266 закрыт как дубль](https://github.com/mpaykin1/meta6-lab/pull/266), [комментарий](https://github.com/mpaykin1/meta6-lab/pull/266#issuecomment-6801260398).

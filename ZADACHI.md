@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | ТРИ СТОРОЖА: довести требования после слитого #238 | МГЛ | чат ChatGPT | `lab/storozha-nedelya` | — | 2026-11-12 14:25 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Лучник в тумане — улучшение №1 | МГЛ | ChatGPT | `lab/archer-retention-exp-1` | [#262](https://github.com/mpaykin1/meta6-lab/pull/262) | 2026-11-11 14:42 | 2026-11-12 07:18 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | ЭТАЛОНЫ В БИБЛИОТЕКУ — Veil Terraces: отдельный модуль камеры, исходные байты, Chromium; [run #43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458) PASS (1 камера); [quota FAIL #43173380383](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383); полных эталонов 0 → 0, систем в PR 0 → 1 | МГЛ | Кто: библиотека | `lab/biblioteka-veil-camera-20261112` | [#270](https://github.com/mpaykin1/meta6-lab/pull/270) | 2026-11-12 07:00 | 2026-11-12 07:15 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | БОТ-ПРОХОДЧИК б): проверка маршрутов с фиксированным seed, PR закрыт квотой 51/5 | МГЛ | проходчик | `lab/prohodchik-seeded-routes-20261112` | [#271](https://github.com/mpaykin1/meta6-lab/pull/271) | 2026-11-12 07:15 | 2026-11-12 07:15 |

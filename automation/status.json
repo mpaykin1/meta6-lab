@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-12T14:33:34.681Z",
+  "generated_at": "2026-11-12T14:35:44.616Z",
   "sha": {
-    "lab": "1c7ebbbf4807a477421fe7cd1225c77753b682bb",
+    "lab": "80f22d7b87296a00c3836ec2b0183931061fbf3f",
     "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
@@ -10,7 +10,127 @@
   },
   "run": "нет данных",
   "review": {
-    "protected": "нет данных",
+    "protected": [
+      {
+        "number": 259,
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
+      },
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
+      {
+        "number": 238,
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 231,
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
+      },
+      {
+        "number": 236,
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
+      },
+      {
+        "number": 230,
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 227,
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 216,
+        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
+        "paths": [
+          ".github/workflows/status-dlya-claude.yml",
+          "scripts/status/selftest.mjs"
+        ]
+      },
+      {
+        "number": 223,
+        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
+      },
+      {
+        "number": 215,
+        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
+      },
+      {
+        "number": 217,
+        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
+      }
+    ],
     "redLab": [],
     "redMg": [],
     "sliyanie": [
@@ -179,16 +299,257 @@
     ]
   },
   "pr": {
-    "open": "нет данных",
+    "open": 54,
     "conflicts": "нет данных",
-    "merged": "нет данных",
-    "closed": "нет данных",
-    "mergedItems": "нет данных",
-    "protectedItems": "нет данных"
+    "merged": 24,
+    "closed": 52,
+    "mergedItems": [
+      {
+        "number": 259,
+        "title": "БОТ-ПРОХОДЧИК: сохраняемый промпт для повторных запусков",
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311"
+      },
+      {
+        "number": 263,
+        "title": "docs(prompty): реестр 15 промптов МГЛ и улучшение многоразов",
+        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4"
+      },
+      {
+        "number": 257,
+        "title": "docs(zadachi): не создавать дубли задач по одному PR",
+        "sha": "79f4465b6667092e16115222325c012ca73cc137"
+      },
+      {
+        "number": 256,
+        "title": "docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ",
+        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec"
+      },
+      {
+        "number": 243,
+        "title": "Геймдизайн-аудит META GAMES — чистый PR без защищённой истор",
+        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81"
+      },
+      {
+        "number": 246,
+        "title": "ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож",
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1"
+      },
+      {
+        "number": 265,
+        "title": "ASSET CHECK: бот-проверщик ассет-паков + многоразовый промпт",
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e"
+      },
+      {
+        "number": 251,
+        "title": "feat(auditor): бесплатная почасовая ревизия пяти задач META ",
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1"
+      },
+      {
+        "number": 244,
+        "title": "Living Watercolor: публичная демосцена дерева, вулкана и фаб",
+        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a"
+      },
+      {
+        "number": 238,
+        "title": "META GAMES: guarded PR autofinish, conflict-free journals, s",
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f"
+      },
+      {
+        "number": 224,
+        "title": "Merge continuity: persistent PR journal and live 83-PR queue",
+        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74"
+      },
+      {
+        "number": 125,
+        "title": "Lore: alternative Last Seed mythology and inspiration bank",
+        "sha": "9f50910368238775bda40729722ec3512f14e623"
+      },
+      {
+        "number": 232,
+        "title": "META GAMES: возможности платформы для начинающих разработчик",
+        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98"
+      },
+      {
+        "number": 231,
+        "title": "fix(dispatcher): reliable conflict state when mergeable is n",
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785"
+      },
+      {
+        "number": 126,
+        "title": "Эталон: универсальный промпт Sketch → HTML Game → ZIP",
+        "sha": "7f5616591ca5baa37186d86621299d32c77230b1"
+      },
+      {
+        "number": 236,
+        "title": "meta-bot: шаг ходьбы не перелетает цель",
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05"
+      },
+      {
+        "number": 229,
+        "title": "Рабочий чат МГ/МГЛ: цикл и передача смены",
+        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1"
+      },
+      {
+        "number": 230,
+        "title": "Dispatcher: retry queue push when main moves",
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88"
+      },
+      {
+        "number": 227,
+        "title": "MG Dispatcher: automated PR triage queue",
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496"
+      },
+      {
+        "number": 226,
+        "title": "ЛОР: Древо миров и каталог skin-trainer — чистая история без",
+        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8"
+      },
+      {
+        "number": 216,
+        "title": "СВОДКА ДЛЯ CLAUDE: facts-only GitHub Actions bot",
+        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee"
+      },
+      {
+        "number": 223,
+        "title": "Investigation: GitHub Pages dashboard + hourly GitHub-only t",
+        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66"
+      },
+      {
+        "number": 215,
+        "title": "Portal Visits: исправить устаревшее ожидание 12 миров",
+        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d"
+      },
+      {
+        "number": 217,
+        "title": "Fix: Veil Shared CI проверяет существующую игру",
+        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3"
+      }
+    ],
+    "protectedItems": [
+      {
+        "number": 259,
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
+      },
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
+      {
+        "number": 238,
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 231,
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
+      },
+      {
+        "number": 236,
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
+      },
+      {
+        "number": 230,
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 227,
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 216,
+        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
+        "paths": [
+          ".github/workflows/status-dlya-claude.yml",
+          "scripts/status/selftest.mjs"
+        ]
+      },
+      {
+        "number": 223,
+        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
+      },
+      {
+        "number": 215,
+        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
+      },
+      {
+        "number": 217,
+        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
+      }
+    ]
   },
   "changes": {
     "lab": {
-      "count": 1429,
+      "count": 1448,
       "folders": "нет данных"
     },
     "mg": {

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-12T08:51:54.346Z",
+  "generated_at": "2026-11-12T08:54:29.007Z",
   "sha": {
-    "lab": "62377781025c127863c73de1e10e3c946b3d82d7",
-    "mg": "573ec644a032aa3cbf999193c09fa2176ce69a7a"
+    "lab": "a68095690fbb8dec7ece6f9338bb2f154631769b",
+    "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43186337136",
+  "run": "нет данных",
   "review": {
     "protected": [
       {
@@ -126,14 +126,14 @@
     ],
     "redLab": [
       {
+        "workflow": "ZADACHI watch",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43186337244",
+        "step": "Update ZADACHI.md from GitHub"
+      },
+      {
         "workflow": "META BOT",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43182878550",
         "step": "Play all games"
-      },
-      {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43174592471",
-        "step": "Run node scripts/dispetcher/run.mjs"
       }
     ],
     "redMg": [],
@@ -303,7 +303,7 @@
     ]
   },
   "pr": {
-    "open": 53,
+    "open": 54,
     "conflicts": "нет данных",
     "merged": 22,
     "closed": 50,
@@ -536,68 +536,68 @@
   },
   "changes": {
     "lab": {
-      "count": 1282,
+      "count": 1290,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 5,
-      "folders": "AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, rules:2"
+      "count": 6,
+      "folders": "AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2"
     }
   },
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "не прошла",
+      "bot": "нет данных",
       "storefront": "да"
     }
   ],

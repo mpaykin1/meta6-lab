@@ -62,7 +62,7 @@
     },
     "4_indexnow_and_sitemap": {
       "status": "in_progress",
-      "details": "IndexNow: перед POST требует HTTP 200 ключа и каждой изменённой страницы, точный canonical и JSON-LD; реальное 200/202 ответа API ещё не получено."
+      "details": "IndexNow: перед POST требует HTTP 200 ключа и каждой изменённой страницы, точный canonical и JSON-LD; реальное 200/202 ответа API ещё не получено. Sitemap: 18 реальных страниц с изменениями от 12.11 получили lastmod=2026-11-12 по GitHub commits; 5 прежних страниц остались 11.11. IndexNow остаётся неподтверждённым до live-HTTP 200."
     },
     "5_continuous_improvement": {
       "status": "done",
@@ -93,7 +93,8 @@
     "Уникальные описания 150–300 слов для каждого игрового URL",
     "Проверка title/description/JSON-LD и внутренних ссылок в CI",
     "Копии webp из собственных игровых кадров",
-    "IndexNow после деплоя без секретов"
+    "IndexNow после деплоя без секретов",
+    "Автоматически проверять sitemap lastmod против git log в SEO CI"
   ],
   "notes": [
     "Не менять защищённые файлы, эталоны, бота и охранников в обход правил",
@@ -118,7 +119,7 @@
     "https://github.com/mpaykin1/meta6-lab/commit/3dc11ee9645943ebd3f539a5836fc1475815e2b7",
     "https://github.com/mpaykin1/meta6-lab/commit/64ae05f16d4a18808de4c8472e20616880daa3b2"
   ],
-  "last_completed_seo_content_commit": "33f9708e63230a397ad8158f62b2b584d8e27bbd",
+  "last_completed_seo_content_commit": "c1e66016d1465caeca44e8be0ebbe02b7335c27a",
   "cycle_updates": [
     {
       "date": "2026-11-12",
@@ -300,6 +301,13 @@
         "59ec10d617c1db6fa6a4fff016e1daee8b00dd96"
       ],
       "next": "Live-публикация после исправления красного Veil Terraces CI и разрешения Actions на PR #242. Затем проверить все 23 страницы, кадры WebP и отправку IndexNow."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Sitemap lastmod установлен по реальным GitHub коммитам 23 файлов: 18 обновлённых, 5 неизменённых.",
+      "commit": "c1e66016d1465caeca44e8be0ebbe02b7335c27a",
+      "next": "Убедиться, что SEO CI на свежем SHA успешен; опубликовать только после зелёного #234 и #242."
     }
   ],
   "base_sync_sha": "a6431c80a43e11f1031530268031acb28341d824"

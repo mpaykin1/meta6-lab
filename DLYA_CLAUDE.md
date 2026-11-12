@@ -12,8 +12,8 @@
 | #262 | lab/archer-retention-exp-1 | .github/workflows/archer-visual-proof.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
 | #269 | lab/auditor-twohour-stall-20261112 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/auditor/mutate-auditor.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
 | #261 | lab/biblioteka-contract-20261111 | scripts/library/verify-library.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
-| #234 | lab/claude-adfree-catalog-1110 | reference/abyss-glow-2026-11-09/index.html: существующий эталон нельзя изменять или удалять; reference/sumerechny-arkhipelag/index.html: существующий эталон нельзя изменять или удалять; reference/sunken-city/index.html: существующий эталон нельзя изменять или удалять | 2026-11-12 |
 | #254 | lab/auditor-truthful-cycle-20261111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/auditor/mutate-auditor.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
+| #234 | lab/claude-adfree-catalog-1110 | reference/abyss-glow-2026-11-09/index.html: существующий эталон нельзя изменять или удалять; reference/sumerechny-arkhipelag/index.html: существующий эталон нельзя изменять или удалять; reference/sunken-city/index.html: существующий эталон нельзя изменять или удалять | 2026-11-12 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

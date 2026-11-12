@@ -173,8 +173,10 @@ jobs:
                 const badChecks = d.checks.filter(c => c.conclusion &&
                   !['success','neutral','skipped'].includes(c.conclusion));
                 const badRuns = d.runs.filter(r => r.conclusion &&
-                  !['success','neutral','skipped'].includes(r.conclusion));
+                  !['success','neutral','skipped','action_required'].includes(r.conclusion));
+                const pendingApproval = d.runs.some(r => r.conclusion === 'action_required');
                 const green = d.checks.length > 0 && !badChecks.length && !badRuns.length &&
+                  !pendingApproval &&
                   d.checks.every(c => c.status === 'completed') &&
                   d.runs.every(r => r.status === 'completed') && !d.errors.length;
                 if (!green) uncertain = true;
@@ -184,7 +186,8 @@ jobs:
                 if (d.runs.length) refs.push(link('Actions #'+d.runs[0].id,d.runs[0].html_url));
                 if (badChecks.length) refs.push(link('check '+badChecks[0].name,
                   badChecks[0].html_url || pr.html_url));
-                const ci = green ? 'CI ✅' : badChecks.length || badRuns.length ? 'CI ❌' : 'CI ⚠️';
+                const ci = green ? 'CI ✅' : badChecks.length || badRuns.length ? 'CI ❌' :
+                  pendingApproval ? 'CI ⚠️ action_required' : 'CI ⚠️';
                 evidence.push(refs.join(' · ')+' · '+ci+(ambiguous ? ' · авторство не установлено' : '')+
                   (d.errors.length ? ' · Ошибки API: '+clean(d.errors.join('; ')) : ''));
                 if (green && meaningful && !guarded.length && !ambiguous) successes.push(

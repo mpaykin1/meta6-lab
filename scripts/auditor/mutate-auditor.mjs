@@ -18,21 +18,21 @@ const examplePRs = Array.from({ length: 100 }, (_, i) => ({
   head: { ref: 'lab/unattributed', sha: '0123456789abcdef' }
 }));
 
-async function exercise(script, eventName) {
+async function exercise(script, eventName, options = {}) {
   const stats = { pulls: 0, issueUpdates: 0, issueCreates: 0, pins: 0, report: '' };
   const github = {
     rest: {
       repos: {
         getContent: async ({ path }) => ({
           data: { content: Buffer.from(path.endsWith('config.yml')
-            ? JSON.stringify(config) : '# sample task table\n').toString('base64') }
+            ? JSON.stringify(config) : (options.tasks ?? '# sample task table\n')).toString('base64') }
         })
       },
       pulls: {
-        list: async () => { stats.pulls++; return { data: examplePRs }; }
+        list: async () => { stats.pulls++; return { data: options.prs ?? examplePRs }; }
       },
       issues: {
-        listForRepo: async () => ({ data: [] }),
+        listForRepo: async () => ({ data: options.issues ?? [] }),
         update: async () => {
           stats.issueUpdates++;
           return { data: { node_id: 'ISSUE123', html_url: 'https://github.com/example/repo/issues/253' } };
@@ -94,3 +94,57 @@ for (const mutant of mutants) {
   process.stdout.write('TRAP ' + mutant.name + ' PASS\n');
 }
 process.stdout.write('AUDITOR MUTATIONS PASS: 3/3\n');
+
+
+// Permanent traps for two hourly observations. Calculated windows are not verified job runs.
+const start = new Date();
+start.setUTCMinutes(config.roles[0].minute_utc, 0, 0);
+if (start > new Date()) start.setUTCHours(start.getUTCHours() - 1);
+const taskStamp = start.toISOString().slice(0, 16).replace('T', ' ');
+const taskRow = '| взято | hourly task | МГЛ | '+config.roles[0].name+
+  ' | lab/auditor-test | — | '+taskStamp+' | — |\n';
+const past = new Date(Date.now() - 60 * 60_000).toISOString();
+const snapshot = (state, time = past) => ({
+  number: config.issue_number, title: config.issue_title, updated_at: time,
+  body: '<!-- auditor-cycle-v1 '+JSON.stringify({
+    time, run: 43144961586, states: { [config.roles[0].name]: state }
+  })+' -->'
+});
+const zero = {tasks:taskRow,prs:[],issues:[snapshot('zero')]};
+const confirmed = await exercise(original, 'push', zero);
+assert(confirmed.report.includes('2 часа подряд'),
+  'two consecutive audited hours without improvement must be visible');
+const notStalled = async (script, scenario) => {
+  const result = await exercise(script, 'push', scenario);
+  assert(!result.report.includes('2 часа подряд'),
+    'unknown, stale, or improved observations cannot be labeled two-hour stalls');
+};
+await notStalled(original, {...zero, issues:[snapshot('improved')]});
+await notStalled(original, {...zero, issues:[snapshot('zero',
+  new Date(Date.now()-3*60*60_000).toISOString())]});
+await notStalled(original, {...zero, prs:examplePRs});
+const twoHourMutants = [
+  {
+    name:'deception-ignore-first-hour',
+    source:original.replace("previous.states?.[role.name] === 'zero'", "true"),
+    scenario:{...zero,issues:[snapshot('improved')]}
+  },
+  {
+    name:'stale-audit-as-consecutive',
+    source:original.replace('gap <= 75 * 60_000','gap <= 750 * 60_000'),
+    scenario:{...zero,issues:[snapshot('zero',
+      new Date(Date.now()-3*60*60_000).toISOString())]}
+  },
+  {
+    name:'incomplete-pr-scan-as-zero',
+    source:original.replace('prs.length < 100','true'),
+    scenario:{...zero,prs:examplePRs}
+  }
+];
+for (const mutant of twoHourMutants) {
+  assert.notEqual(mutant.source, original, 'mutation not applied: '+mutant.name);
+  await assert.rejects(notStalled(mutant.source, mutant.scenario),
+    undefined, 'escaped mutant: '+mutant.name);
+  process.stdout.write('TRAP '+mutant.name+' PASS\n');
+}
+process.stdout.write('AUDITOR TWO-HOUR MUTATIONS PASS: 3/3\n');

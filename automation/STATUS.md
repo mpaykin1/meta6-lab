@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-12T13:13:15.298Z | МГЛ: acae53712d30b720060b6eb3bbe5f4369dbecdef | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | https://github.com/mpaykin1/meta6-lab/actions/runs/43225095778
+UTC: 2026-11-12T14:20:37.133Z | МГЛ: 6d272840d071105abb6d92cc17b251b34d7f90d0 | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | https://github.com/mpaykin1/meta6-lab/actions/runs/43236049393
 ## ПРОВЕРИТЬ CLAUDE
 - PR #259 24d0a9e8151cde7c3242275159c301a10d189311: scripts/prohodchik/mutate-prompt.mjs
 - PR #246 72a2be2281e8f4c54785599732024b111d50bfd1: .github/workflows/lab-pages.yml, .github/workflows/link-guard.yml, scripts/lab/mutate-link-ok.sh, scripts/lab/mutate-page-assets.mjs, scripts/lab/mutate-page-assets.py, scripts/lab/verify-check-page-assets.sh, … (сокращено)
@@ -55,7 +55,7 @@ P1 — нет данных: нет данных
 #256 docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ | 2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec
 ещё 20: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1377 коммитов | нет данных
+МГЛ: 1380 коммитов | нет данных
 МГ: 6 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

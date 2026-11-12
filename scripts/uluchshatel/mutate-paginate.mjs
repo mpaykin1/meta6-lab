@@ -26,6 +26,21 @@ const cases = [
     'swallow malformed API responses',
     "if (!Array.isArray(items)) throw new Error('GitHub API returned incomplete page: ' + path);",
     'if (!Array.isArray(items)) return results;'
+  ],
+  [
+    'rename source path silently discarded',
+    'if (file.previous_filename) paths.push(file.previous_filename);',
+    'if (false) paths.push(file.previous_filename);'
+  ],
+  [
+    'accept renamed file with unknown original path',
+    "if (file.status === 'renamed' &&",
+    "if (false &&"
+  ],
+  [
+    'deception: hardcode checked path for one game',
+    'paths.push(file.filename);',
+    "paths.push('games/skin-trainer/index.html');"
   ]
 ];
 for (const [label, before, after] of cases) {
@@ -33,8 +48,8 @@ for (const [label, before, after] of cases) {
   const changed = source.replace(before, after);
   assert.notEqual(changed, source);
   const uri = 'data:text/javascript;charset=utf-8,' + encodeURIComponent(changed);
-  const { allPages } = await import(uri);
-  await assert.rejects(() => verifyPagination(allPages), undefined, 'escaped mutation: ' + label);
+  const { allPages, allChangedPaths } = await import(uri);
+  await assert.rejects(() => verifyPagination(allPages, allChangedPaths), undefined, 'escaped mutation: ' + label);
   console.log('TRAPPED:', label);
 }
-console.log('mutate-paginate: 4/4');
+console.log('mutate-paginate: 7/7');

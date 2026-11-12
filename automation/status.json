@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-12T07:08:17.861Z",
+  "generated_at": "2026-11-12T07:08:47.397Z",
   "sha": {
-    "lab": "9f2741d514ed4981ad924eba51d41b9c9715c695",
+    "lab": "718b55dde590bf0ebf193c4d7b55f17cbdf1161c",
     "mg": "573ec644a032aa3cbf999193c09fa2176ce69a7a"
   },
   "checked": {
@@ -124,13 +124,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43172470382",
-        "step": "Run node scripts/dispetcher/run.mjs"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -526,7 +520,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1251,
+      "count": 1254,
       "folders": "нет данных"
     },
     "mg": {

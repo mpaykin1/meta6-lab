@@ -5,7 +5,7 @@ import {openPulls} from './gh-list.mjs';
 
 const repo = process.env.STOROZHA_REPO;
 const token = process.env.STOROZHA_TOKEN;
-if (!repo || !token || !/^[\w.-]+\/[\w.-]+$/.test(repo)) throw Error('Missing trusted repo/token');
+if (repo !== 'mpaykin1/meta6-lab' || !token) throw Error('Only trusted meta6-lab is writable');
 const base = 'https://api.github.com/repos/' + repo;
 const headers = {Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json',
   'X-GitHub-Api-Version': '2022-11-28'};

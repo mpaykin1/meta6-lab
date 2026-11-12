@@ -176,7 +176,7 @@ async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, game
         assert.equal(status, 'MOVED', 'B2 no proven player movement; status=' + status);
         const finalState = await read();
         if (screenshot) {
-          const file = resolve(screenshot.replace(/(\\.[a-z]+)?$/, '-' + name + '.png'));
+          const file = resolve(screenshot.replace(/(\.[a-z]+)?$/, '-' + name + '.png'));
           mkdirSync(resolve(file, '..'), {recursive: true});
           await page.screenshot({path: file, animations: 'disabled', timeout: 15000});
           console.log('B2 screenshot ' + file);

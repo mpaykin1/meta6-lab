@@ -26,8 +26,22 @@
   ],
   "rights": "META GAMES owner source allowlist; no third-party runtime dependency",
   "standalone": true,
-  "load_ok": false,
+  "load_ok": true,
   "asset_ok": 0,
   "asset_ids": [],
-  "note": "load_ok stays false until green GitHub Actions Chromium verification"
+  "note": "load_ok confirmed for identical system module on 7b2f3e0; final PR SHA checks still required before merge. Not in main or public MCP.",
+  "load_evidence": {
+    "workflow": "Library Machine",
+    "run_id": 43173380458,
+    "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458",
+    "verified_commit_sha": "7b2f3e0eb3742048d338bd5bba8a568d076e388b",
+    "browser": "headless Chromium",
+    "checks": [
+      "exact blob",
+      "source bytes",
+      "nonempty canvas",
+      "keyboard input changes canvas",
+      "3 mutations"
+    ]
+  }
 }

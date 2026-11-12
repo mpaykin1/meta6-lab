@@ -41,6 +41,10 @@ cases.push(
   ['foreign VideoGame canonical', mutateGame(game => {
     game.url = 'https://example.invalid/game/';
   })],
+  ['missing PlayAction target file', mutateGame(game => {
+    game.potentialAction.target =
+      'https://mpaykin1.github.io/meta6-lab/games/nonexistent-play-target/';
+  })],
   ['deceptive extra valid-looking VideoGame', mutateGame((game, schema) => {
     schema['@graph'].push({ ...game, name: 'Fake game', url: 'https://example.invalid/' });
   })]

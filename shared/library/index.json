@@ -33,7 +33,7 @@
       "manifest": "shared/library/broken-city-copy.json",
       "assets": 6,
       "file_assets": 0,
-      "solutions": 236
+      "solutions": 238
     },
     {
       "game": "rainbow-acceleration",
@@ -38196,6 +38196,36 @@
       "lines": [
         1167,
         1174
+      ]
+    },
+    {
+      "id": "83cb7f71632809f10dc8fbcd",
+      "game": "broken-city-copy",
+      "kind": "solution",
+      "name": "module:bot-observer.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/broken-city-copy/bot-observer.js",
+      "sha256": "d7a529fde8b1e4272c834d294385b5b44a96aedb1d6a8ba055265dddb3687bcc",
+      "lines": [
+        1,
+        70
+      ]
+    },
+    {
+      "id": "e1b22f56e9b93cee2c82efa0",
+      "game": "broken-city-copy",
+      "kind": "solution",
+      "name": "state",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city-copy/bot-observer.js",
+      "sha256": "576f95a9613adbac5a2bd386ca4c989026bb71d672d11001317a2429562eb78f",
+      "lines": [
+        5,
+        55
       ]
     },
     {

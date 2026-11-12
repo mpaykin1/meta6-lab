@@ -96,6 +96,36 @@
   ],
   "solutions": [
     {
+      "id": "83cb7f71632809f10dc8fbcd",
+      "game": "broken-city-copy",
+      "kind": "solution",
+      "name": "module:bot-observer.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/broken-city-copy/bot-observer.js",
+      "lines": [
+        1,
+        70
+      ],
+      "sha256": "d7a529fde8b1e4272c834d294385b5b44a96aedb1d6a8ba055265dddb3687bcc"
+    },
+    {
+      "id": "e1b22f56e9b93cee2c82efa0",
+      "game": "broken-city-copy",
+      "kind": "solution",
+      "name": "state",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city-copy/bot-observer.js",
+      "lines": [
+        5,
+        55
+      ],
+      "sha256": "576f95a9613adbac5a2bd386ca4c989026bb71d672d11001317a2429562eb78f"
+    },
+    {
       "id": "0116b77ecf6f78438c7637cf",
       "game": "broken-city-copy",
       "kind": "solution",
@@ -3639,6 +3669,6 @@
   "counts": {
     "assets": 6,
     "file_assets": 0,
-    "solutions": 236
+    "solutions": 238
   }
 }

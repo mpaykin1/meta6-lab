@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-12T07:00:35.552Z | МГЛ: b5807975efc493a1a803e4d9fdcb050c47654b38 | МГ: 573ec644a032aa3cbf999193c09fa2176ce69a7a | https://github.com/mpaykin1/meta6-lab/actions/runs/43172050721
+UTC: 2026-11-12T07:01:07.970Z | МГЛ: c52ee473b7f11f9b89c5604034cde1953652fa7d | МГ: 573ec644a032aa3cbf999193c09fa2176ce69a7a | https://github.com/mpaykin1/meta6-lab/actions/runs/43172056837
 ## ПРОВЕРИТЬ CLAUDE
 - PR #246 72a2be2281e8f4c54785599732024b111d50bfd1: .github/workflows/lab-pages.yml, .github/workflows/link-guard.yml, scripts/lab/mutate-link-ok.sh, scripts/lab/mutate-page-assets.mjs, scripts/lab/mutate-page-assets.py, scripts/lab/verify-check-page-assets.sh, … (сокращено)
 - PR #265 f0a6d79bdda5416da56a145901e0216808cba97e: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py
@@ -45,13 +45,13 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 53 | конфликт: нет данных | слито: 19 | закрыто: 48
+открыто: 52 | конфликт: нет данных | слито: 19 | закрыто: 49
 #246 ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож | 72a2be2281e8f4c54785599732024b111d50bfd1
 #265 ASSET CHECK: бот-проверщик ассет-паков + многоразовый промпт | f0a6d79bdda5416da56a145901e0216808cba97e
 #251 feat(auditor): бесплатная почасовая ревизия пяти задач META  | 5016e0750ad94d53798200f6db159f9c37f55ab1
 ещё 16: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1231 коммитов | нет данных
+МГЛ: 1232 коммитов | нет данных
 МГ: 5 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

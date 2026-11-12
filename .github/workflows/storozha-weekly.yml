@@ -1,0 +1,34 @@
+name: STOROZHA weekly maintenance
+on:
+  schedule:
+    - cron: '47 * * * *'
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['scripts/storozha/weekly-watch.mjs', '.github/workflows/storozha-weekly.yml']
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+concurrency:
+  group: storozha-main-writers
+  cancel-in-progress: false
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Close genuinely stale PRs without deleting branches and write daily report
+        env:
+          STOROZHA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STOROZHA_REPO: ${{ github.repository }}
+          STOROZHA_MODE: maintenance
+        run: node scripts/storozha/weekly-watch.mjs maintenance

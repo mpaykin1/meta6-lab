@@ -1,76 +1,125 @@
 {
-  "generated_at": "2026-11-11T06:53:50.455Z",
+  "generated_at": "2026-11-12T10:17:40.762Z",
   "sha": {
-    "lab": "6ecb75a38a2c680de89f565398d233d190b23bdb",
-    "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
+    "lab": "5140aa27863915c2453a2ee7678e5c34233ecae9",
+    "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42975342713",
+  "run": "нет данных",
   "review": {
     "protected": [
       {
+        "number": 257,
+        "sha": "79f4465b6667092e16115222325c012ca73cc137",
+        "paths": "нет данных"
+      },
+      {
+        "number": 256,
+        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec",
+        "paths": "нет данных"
+      },
+      {
+        "number": 243,
+        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81",
+        "paths": "нет данных"
+      },
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": "нет данных"
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": "нет данных"
+      },
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": "нет данных"
+      },
+      {
+        "number": 244,
+        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a",
+        "paths": "нет данных"
+      },
+      {
+        "number": 238,
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
+        "paths": "нет данных"
+      },
+      {
+        "number": 224,
+        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74",
+        "paths": "нет данных"
+      },
+      {
+        "number": 125,
+        "sha": "9f50910368238775bda40729722ec3512f14e623",
+        "paths": "нет данных"
+      },
+      {
+        "number": 232,
+        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98",
+        "paths": "нет данных"
+      },
+      {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": [
-          "scripts/dispetcher/mutate-mergeable-null.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 126,
+        "sha": "7f5616591ca5baa37186d86621299d32c77230b1",
+        "paths": "нет данных"
       },
       {
         "number": 236,
         "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": [
-          "scripts/meta-bot/core.mjs",
-          "scripts/meta-bot/selftest.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 229,
+        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1",
+        "paths": "нет данных"
       },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 227,
         "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 226,
+        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8",
+        "paths": "нет данных"
       },
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": [
-          ".github/workflows/status-dlya-claude.yml",
-          "scripts/status/selftest.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": [
-          ".github/workflows/investigation-snapshot.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": [
-          ".github/workflows/lab-portal-visits.yml",
-          "scripts/lab/mutate-portal-links.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
-        ]
+        "paths": "нет данных"
       }
     ],
     "redLab": [],
@@ -82,9 +131,9 @@
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
       "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | open | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
-      "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
-      "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
-      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
+      "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open dirty | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
+      "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
+      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open dirty | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
       "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
@@ -241,11 +290,56 @@
     ]
   },
   "pr": {
-    "open": 37,
+    "open": 53,
     "conflicts": "нет данных",
-    "merged": 14,
-    "closed": 41,
+    "merged": 23,
+    "closed": 51,
     "mergedItems": [
+      {
+        "number": 263,
+        "title": "docs(prompty): реестр 15 промптов МГЛ и улучшение многоразов",
+        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4"
+      },
+      {
+        "number": 257,
+        "title": "docs(zadachi): не создавать дубли задач по одному PR",
+        "sha": "79f4465b6667092e16115222325c012ca73cc137"
+      },
+      {
+        "number": 256,
+        "title": "docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ",
+        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec"
+      },
+      {
+        "number": 243,
+        "title": "Геймдизайн-аудит META GAMES — чистый PR без защищённой истор",
+        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81"
+      },
+      {
+        "number": 246,
+        "title": "ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож",
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1"
+      },
+      {
+        "number": 265,
+        "title": "ASSET CHECK: бот-проверщик ассет-паков + многоразовый промпт",
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e"
+      },
+      {
+        "number": 251,
+        "title": "feat(auditor): бесплатная почасовая ревизия пяти задач META ",
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1"
+      },
+      {
+        "number": 244,
+        "title": "Living Watercolor: публичная демосцена дерева, вулкана и фаб",
+        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a"
+      },
+      {
+        "number": 238,
+        "title": "META GAMES: guarded PR autofinish, conflict-free journals, s",
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f"
+      },
       {
         "number": 224,
         "title": "Merge continuity: persistent PR journal and live 83-PR queue",
@@ -319,132 +413,181 @@
     ],
     "protectedItems": [
       {
+        "number": 257,
+        "sha": "79f4465b6667092e16115222325c012ca73cc137",
+        "paths": "нет данных"
+      },
+      {
+        "number": 256,
+        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec",
+        "paths": "нет данных"
+      },
+      {
+        "number": 243,
+        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81",
+        "paths": "нет данных"
+      },
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": "нет данных"
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": "нет данных"
+      },
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": "нет данных"
+      },
+      {
+        "number": 244,
+        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a",
+        "paths": "нет данных"
+      },
+      {
+        "number": 238,
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
+        "paths": "нет данных"
+      },
+      {
+        "number": 224,
+        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74",
+        "paths": "нет данных"
+      },
+      {
+        "number": 125,
+        "sha": "9f50910368238775bda40729722ec3512f14e623",
+        "paths": "нет данных"
+      },
+      {
+        "number": 232,
+        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98",
+        "paths": "нет данных"
+      },
+      {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": [
-          "scripts/dispetcher/mutate-mergeable-null.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 126,
+        "sha": "7f5616591ca5baa37186d86621299d32c77230b1",
+        "paths": "нет данных"
       },
       {
         "number": 236,
         "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": [
-          "scripts/meta-bot/core.mjs",
-          "scripts/meta-bot/selftest.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 229,
+        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1",
+        "paths": "нет данных"
       },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 227,
         "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 226,
+        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8",
+        "paths": "нет данных"
       },
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": [
-          ".github/workflows/status-dlya-claude.yml",
-          "scripts/status/selftest.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": [
-          ".github/workflows/investigation-snapshot.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": [
-          ".github/workflows/lab-portal-visits.yml",
-          "scripts/lab/mutate-portal-links.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
-        ]
+        "paths": "нет данных"
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 779,
-      "folders": ".github:6, .lab-sync-base:1, AGENTS.md:1, automation:10, BIBLIOTEKA.md:1, DISPETCHER.md:1, docs:6, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:5, scripts:15, shared:2, SMENA.md:1, ZADACHI.md:1"
+      "count": 1330,
+      "folders": "нет данных"
     },
     "mg": {
-      "count": 2,
-      "folders": "AGENTS.md:1, automation:1, rules:1"
+      "count": 6,
+      "folders": "AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2"
     }
   },
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "не прошла",
+      "bot": "нет данных",
       "storefront": "да"
     }
   ],
@@ -459,6 +602,12 @@
     "| 29 | 10.11.2026 | Диспетчер: KONTUR Guard отклонил условное чтение `process.env.GITHUB_*` и ветвление по `process.argv` в модуле библиотеки | [KONTUR Guard 42787965154](https://github.com/mpaykin1/meta6-lab/actions/runs/42787965154) | Разделён модуль `build.mjs` и `run.mjs`, авторизация без ветвления по среде; существующая вечная ловушка `scripts/kontur/mutate-kontur-guard.mjs` и `scripts/dispetcher/test/build.test.mjs` |",
     "| 30 | 10.11.2026 | Диспетчер: первый прогон на main упал — пока строилась очередь, в main пришёл чужой коммит и `git push` отклонён (fetch first), DISPETCHER.md не появился | [прогон 42790554576](https://github.com/mpaykin1/meta6-lab/actions/runs/42790554576) | Шаг `Commit queue` в `.github/workflows/dispetcher.yml`: до 5 попыток — свежий main, пересборка очереди, повторный push; проверка `scripts/dispetcher/test/build.test.mjs`: `trap: workflow retries push when main moved` |",
     "| 31 | 11.11.2026 | META BOT, ядро: `walkToGoal` шагал фиксированные 450 мс и считал направление по устаревшему положению героя — рядом с целью герой перелетал её и качался вокруг (≈1,36 ед. при шаге 2,7), самотест «цель меняется внутри уровня» падал ложным «застрял» и блокировал PR #87 | [META BOT 42912927017](https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169) | `scripts/meta-bot/selftest.mjs`: «шаг ходьбы у цели не перелетает цель» (`stepMs`: шаг не длиннее пути до цели; свежее состояние перед шагом) |",
-    "| 34 | 10.11.2026 | MG Dispatcher принимал GitHub `mergeable=null` за отсутствие конфликта после сдвига main, из-за чего очередь показывала неверный ноль конфликтов | [MG Dispatcher 42791769677](https://github.com/mpaykin1/meta6-lab/actions/runs/42791769677) и анализ `scripts/dispetcher/build.mjs` | `scripts/dispetcher/mutate-mergeable-null.mjs`: 5 мутаций — отсутствие повторов, потеря прежнего конфликта, выдача неизвестного статуса за чистый PR и обман с жёстко заданным `false`, ошибочное признание красного CI доказательством отсутствия конфликта; `scripts/dispetcher/test/mergeable-null.test.mjs` |"
+    "| 34 | 10.11.2026 | MG Dispatcher принимал GitHub `mergeable=null` за отсутствие конфликта после сдвига main, из-за чего очередь показывала неверный ноль конфликтов | [MG Dispatcher 42791769677](https://github.com/mpaykin1/meta6-lab/actions/runs/42791769677) и анализ `scripts/dispetcher/build.mjs` | `scripts/dispetcher/mutate-mergeable-null.mjs`: 5 мутаций — отсутствие повторов, потеря прежнего конфликта, выдача неизвестного статуса за чистый PR и обман с жёстко заданным `false`, ошибочное признание красного CI доказательством отсутствия конфликта; `scripts/dispetcher/test/mergeable-null.test.mjs` |",
+    "| 35 | 11.11.2026 | PR #238: компилятор журнала ветвился по `process.argv` и блокировался KONTUR Guard | [красный прогон 42999367374](https://github.com/mpaykin1/meta6-lab/actions/runs/42999367374) | `scripts/journal/mutate-journal.mjs`: argv-deception, validation-publishes, writer-dry-run, missing-source |",
+    "| 36 | 11.11.2026 | Сторож эталонов пропускал изменения тестов внутри папок `tests/` и файлов `*.spec.ts`: проверял только некоторые имена тестовых файлов | Сверка `referenceGate` с запретом менять существующие тесты | `scripts/storozha/mutate-storozha.mjs`: bypass nested test directory, bypass TypeScript spec file; `scripts/storozha/verify-storozha.mjs` |",
+    "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |",
+    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |",
+    "| 39 | 11.11.2026 | Публикация после merge: исходный demos/living-watercolor/index.html существует, но Pages даёт 404; прежний lab-pages проверял только каталог | Требование владельца от 11.11 и diff .github/workflows/lab-pages.yml | `scripts/lab/verify-link-ok.sh` + `scripts/lab/mutate-link-ok.sh` (404, чужой хост, CI-обман); [зелёная ловушка](https://github.com/mpaykin1/meta6-lab/actions/runs/43014018459), проверка всех index в PR #246 |",
+    "| 40 | 11.11.2026 | HTML 200 с недоступным JS/CSS/изображением/аудио: прежняя проверка игнорировала вложенные 404 | Локальный fixture HTML 200 + JS 404 и 3 мутации (пропуск script, чужой origin, CI-обман) | `scripts/lab/link-ok.sh` вызывает `scripts/lab/check-page-assets.sh` перед PASS; `scripts/lab/mutate-page-assets.mjs` + `scripts/lab/verify-check-page-assets.sh`, [PR #246](https://github.com/mpaykin1/meta6-lab/pull/246), [SHA bb60a8b](https://github.com/mpaykin1/meta6-lab/commit/bb60a8bff951c714fb6c332a323445119ac1486c) |"
   ]
 }

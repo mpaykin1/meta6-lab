@@ -9,7 +9,6 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
-
 ### lab/immersive-dishonored-principles-20261107 — IM1–IM5 для всех игр
 - Польза: новые уровни рассказывают историю окружением, предлагают альтернативные маршруты, вертикальность, узнаваемую живопись и информативный звук.
 - Правило: [IMMERSIVE_LEVEL_DESIGN.md](rules/02-igrovye-mekhaniki/IMMERSIVE_LEVEL_DESIGN.md); пункт 15 [RULES_CHECKLIST.md](rules/09-platforma/RULES_CHECKLIST.md).
@@ -20,6 +19,35 @@
 - Проверка: поведение игр не проверено, META BOT потребуется при внедрении.
 - Статус: В РАБОТЕ — требуется ревью Claude и отдельное внедрение по играм; без автоматического переноса в `meta6`.
 - Михаил: —; Claude: —
+### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
+- Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
+- Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/
+- Источник: `games/asqura-ilya-reference/index.html`, blob `b7b7167b3fb48776b2c82433087cb13e867e5abb`.
+- Каталог: `shared/references/asqura-ilya-reference.json`; 3D требует CDN Three.js r128.
+- Ветка: `lab/asqura-ilya-reference-1109`; PR — см. ветку.
+- Статус: В РАБОТЕ — Pages и бот ещё не подтверждены.
+- Михаил: запросил включение в эталоны; оценку игры не дал.
+
+### lab/link-guard-recovery-1111 — ССЫЛКА = 200: восстановление и защита (11.11.2026)
+- Шаг 1/6: DONE — [PR #266 закрыт как дубль](https://github.com/mpaykin1/meta6-lab/pull/266), [комментарий](https://github.com/mpaykin1/meta6-lab/pull/266#issuecomment-6801260398).
+- Шаг 2/6: CODE, NOT LIVE — 11 файлов восстановлены [4204e3f](https://github.com/mpaykin1/meta6-lab/commit/4204e3fdc7398de8a5071a8587010db510e7435e), синхронизация защищена [0ff9507](https://github.com/mpaykin1/meta6-lab/commit/0ff9507aa40b1ca5b4fa6f8d3a6c1935cf8138cd), unpublished twilight-island снят [21b3641](https://github.com/mpaykin1/meta6-lab/commit/21b364123acb818b77dac280945689dd6adedc84).
+- Шаг 3/6: BLOCKED BY STOROZHA — менять workflow может только Claude: [красный STOROZHA](https://github.com/mpaykin1/meta6-lab/actions/runs/43060030636), изменение отменено [9bc30007](https://github.com/mpaykin1/meta6-lab/commit/9bc30007b08c6bbe0d4751fd9d13069e5fae3a26); текущий Link Guard запускает проверки из `mutate-link-ok.sh`.
+- Шаг 4/6: CODE, CI TO VERIFY — рекурсивные JS imports и ловушки [156d830](https://github.com/mpaykin1/meta6-lab/commit/156d83077ab102726c9e18e81da4c94fd34325db).
+- Шаг 5/6: CODE, CI TO VERIFY — сторож games/demos/assets index.html требует LINKS [9db8dcf](https://github.com/mpaykin1/meta6-lab/commit/9db8dcf4c87e2473d9f837c1d39ed2d54305e297); запуск через существующий gate [e919642](https://github.com/mpaykin1/meta6-lab/commit/e919642e469b877f0d830dca45c0e083d89cee69).
+- Шаг 6/6: CODE, NOT LIVE — обработка /meta6/ink/ [d0f79eb](https://github.com/mpaykin1/meta6-lab/commit/d0f79ebf015286557a0684d12655a04ce5f65d73); защищённые workflows пока отфильтровывают эту строку.
+- PR: [#268](https://github.com/mpaykin1/meta6-lab/pull/268); статус: OPEN, проверки на новом HEAD, main не менялся.
+
+### lab/living-watercolor-owner-pass-reference — Living Watercolor 3D (OWNER PASS)
+- Польза: одобренный эталон живой 3D-акварели; оригинальный код рендера и генераторов доступен для повторного использования.
+- Смотреть: https://mpaykin1.github.io/meta6-lab/demos/living-watercolor/
+- Источник: `demos/living-watercolor/` (main), исходники не изменены.
+- Машинный паспорт: `shared/references/living-watercolor.json`, точные blob SHA.
+- Live: https://github.com/mpaykin1/meta6-lab/actions/runs/43015257477/job/130504589418 — HTTP 200.
+- Ветка: `lab/living-watercolor-owner-pass-reference`.
+- Статус: OWNER PASS 11.11.2026; PR на добавление в эталоны; не считать отдельной игрой.
+- Михаил: «Супер. Это пасс!! Добавь это к нам в эталоны на МГЛ».
+
+
 ### lab/asqura-ilya-reference-1109 — ASQURA OFFICE / Ilya version (Copy)
 - Польза: исходная игра и её пиксельная изометрия сохранены байт-в-байт как эталон, доступен машинный паспорт.
 - Играть после merge: https://mpaykin1.github.io/meta6-lab/games/asqura-ilya-reference/

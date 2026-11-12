@@ -44293,7 +44293,7 @@
         "style"
       ],
       "source_path": "ashen-sumerek/index.html",
-      "sha256": "bec407aff4ae0234edc3e115aecab90ae62b4095d7793dd7e1900713fce03d57",
+      "sha256": "c485a4f50d3550f639fc66aaf9469dc9ae5bd3ec006acc0cb9373b9b33483e81",
       "lines": [
         9144,
         9160
@@ -44585,10 +44585,10 @@
       ]
     },
     {
-      "id": "bc286e2bc051ac9cc12fffc5",
+      "id": "bbf9bcff9d14b2e802059728",
       "game": "reference-ashen-sumerek",
       "kind": "inline-svg",
-      "name": "svg@597906",
+      "name": "svg@598104",
       "purpose": [
         "svg"
       ],
@@ -59318,21 +59318,6 @@
       ]
     },
     {
-      "id": "05d22afc3b488c333cc29abf",
-      "game": "reference-ashen-sumerek",
-      "kind": "solution",
-      "name": "inline-script@598077",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "ashen-sumerek/index.html",
-      "sha256": "bff56e5229f91580d9e677c35a9b6e16244711694f784cc078c0073ae0bb9094",
-      "lines": [
-        9162,
-        9198
-      ]
-    },
-    {
       "id": "06013617fd0b029084b1b54c",
       "game": "reference-ashen-sumerek",
       "kind": "solution",
@@ -60245,6 +60230,21 @@
       "lines": [
         2126,
         2126
+      ]
+    },
+    {
+      "id": "2e710a0646c23d984606f23f",
+      "game": "reference-ashen-sumerek",
+      "kind": "solution",
+      "name": "inline-script@598275",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "ashen-sumerek/index.html",
+      "sha256": "bff56e5229f91580d9e677c35a9b6e16244711694f784cc078c0073ae0bb9094",
+      "lines": [
+        9162,
+        9198
       ]
     },
     {

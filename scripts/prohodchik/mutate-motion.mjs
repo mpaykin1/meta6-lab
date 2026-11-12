@@ -36,8 +36,21 @@ const mutations = [
     'if (stationaryMs >= STUCK_MS && !motion) {'],
   ['auto-drift-falsely-accepted', 'to.x - from.x - driftX * segment.durationMs,',
     'to.x - from.x,'],
-  ['death-ignored', 'if (before.alive === false || after.alive === false) {',
-    'if (false && (before.alive === false || after.alive === false)) {'],
+  ['death-ignored', 'if (before?.alive === false || after?.alive === false) {',
+    'if (false && (before?.alive === false || after?.alive === false)) {'],
+  ['death-vanished-hero-fallback-disabled',
+    'const lastHero = coordinates(after) ?? coordinates(before);',
+    'const lastHero = coordinates(after);'],
+  ['death-before-state-ignored',
+    'if (before?.alive === false || after?.alive === false) {',
+    'if (after?.alive === false) {'],
+  ['death-with-missing-level-not-detected',
+    'if (before?.alive === false || after?.alive === false) {',
+    'if ((before?.alive === false || after?.alive === false) && Number.isInteger(after?.level)) {'],
+  // Deception: skip death reports for the named game, even if its hero vanished.
+  ['death-game-specific-deception',
+    'if (before?.alive === false || after?.alive === false) {',
+    "if ((before?.alive === false || after?.alive === false) && before?.game !== 'veil-terraces') {"],
   ['progress-counted-as-movement', 'if (distance > EPSILON)',
     'if (distance > EPSILON || after.progress > before.progress)'],
   ['level-change-counted-as-movement', 'if (before.level !== after.level) {',
@@ -67,7 +80,7 @@ try {
     assert.notEqual(mutant, original, 'Mutation failed: ' + name);
     execute(mutant, name, false);
   }
-  console.log('B2_MUTATIONS_PASS 17 hostile variants including 2s follow-up and idle deception');
+  console.log('B2_MUTATIONS_PASS 21 hostile variants including vanished-hero death and deception');
 } finally {
   rmSync(temp, {recursive: true, force: true});
 }

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-12T06:59:36.773Z",
+  "generated_at": "2026-11-12T07:00:35.552Z",
   "sha": {
-    "lab": "3e9247152257c4172632ce921e37754e9daf13ce",
+    "lab": "b5807975efc493a1a803e4d9fdcb050c47654b38",
     "mg": "573ec644a032aa3cbf999193c09fa2176ce69a7a"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43171893675",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43172050721",
   "review": {
     "protected": [
       {
@@ -124,7 +124,13 @@
         ]
       }
     ],
-    "redLab": [],
+    "redLab": [
+      {
+        "workflow": "ZADACHI watch",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43171873003",
+        "step": "Update ZADACHI.md from GitHub"
+      }
+    ],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -143,8 +149,7 @@
       "| B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |",
       "| B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |",
       "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |",
-      "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |",
-      "| B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | свободно (зависло 8 ч, было: проходчик) | 2026-11-11 14:14 UTC |"
+      "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |"
     ]
   },
   "finish": {
@@ -511,7 +516,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1228,
+      "count": 1231,
       "folders": "нет данных"
     },
     "mg": {

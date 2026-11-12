@@ -18,7 +18,7 @@ const examplePRs = Array.from({ length: 100 }, (_, i) => ({
   head: { ref: 'lab/unattributed', sha: '0123456789abcdef' }
 }));
 
-async function exercise(script, eventName, pinnedInitially = true, pinAllowed = true) {
+async function exercise(script, eventName, pinnedInitially = true, pinAllowed = true, malformedPinQuery = false) {
   let isPinned = pinnedInitially;
   const stats = { pulls: 0, issueUpdates: 0, issueCreates: 0, pins: 0, pinChecks: 0, report: '' };
   const github = {
@@ -60,6 +60,7 @@ async function exercise(script, eventName, pinnedInitially = true, pinAllowed = 
     graphql: async (query) => {
       if (query.includes('pinnedIssues')) {
         stats.pinChecks++;
+        if (malformedPinQuery) return { repository: { pinnedIssues: { nodes: null } } };
         return { repository: { pinnedIssues: {
           nodes: isPinned ? [{ issue: { number: config.issue_number } }] : []
         } } };
@@ -93,6 +94,10 @@ async function exercise(script, eventName, pinnedInitially = true, pinAllowed = 
     assert(stats.report.includes('⚠️ не проверено (PR preview)'),
       'PR preview must not claim a verified pin');
     assert.equal(stats.pinChecks, 0, 'PR preview must not run a pin query');
+  } else if (malformedPinQuery) {
+    assert(stats.report.includes('⚠️ не подтверждено (ошибка GraphQL)'),
+      'malformed GraphQL pin payload must be unknown, not green or red');
+    assert(stats.pinChecks >= 1, 'malformed pin payload must be observed');
   } else {
     const expectedPinned = pinnedInitially || pinAllowed;
     assert(stats.report.includes(expectedPinned
@@ -115,6 +120,7 @@ await exercise(original, 'pull_request');
 await exercise(original, 'push');
 await exercise(original, 'push', false, true);
 await exercise(original, 'push', false, false);
+await exercise(original, 'push', false, false, true);
 const mutants = [
   {
     name: 'excessive-api-pages',
@@ -163,13 +169,30 @@ const mutants = [
     name: 'pinned-wrong-issue',
     source: original.replace('n.issue?.number === cfg.issue_number', 'n.issue?.number === 250'),
     event: 'push', pinnedInitially: true
+  },
+  {
+    name: 'malformed-pin-as-unpinned',
+    source: original.replace("throw new Error('Missing pinnedIssues nodes in GraphQL response');", 'return false;'),
+    event: 'push', pinnedInitially: false, pinAllowed: false, malformedPinQuery: true
+  },
+  {
+    name: 'deception-malformed-pin-as-green',
+    source: original.replace("let pinStatus = '⚠️ не подтверждено (ошибка GraphQL)';",
+      "let pinStatus = '✅ закреплено (GraphQL)';"),
+    event: 'push', pinnedInitially: false, pinAllowed: false, malformedPinQuery: true
+  },
+  {
+    name: 'malformed-pin-as-red',
+    source: original.replace("let pinStatus = '⚠️ не подтверждено (ошибка GraphQL)';",
+      "let pinStatus = '❌ не закреплено (GraphQL)';"),
+    event: 'push', pinnedInitially: false, pinAllowed: false, malformedPinQuery: true
   }
 ];
 for (const mutant of mutants) {
   assert.notEqual(mutant.source, original, 'mutation not applied: ' + mutant.name);
   await assert.rejects(exercise(mutant.source, mutant.event,
-    mutant.pinnedInitially ?? true, mutant.pinAllowed ?? true),
+    mutant.pinnedInitially ?? true, mutant.pinAllowed ?? true, mutant.malformedPinQuery ?? false),
     undefined, 'escaped mutant: ' + mutant.name);
   process.stdout.write('TRAP ' + mutant.name + ' PASS\n');
 }
-process.stdout.write('AUDITOR MUTATIONS PASS: 9/9\n');
+process.stdout.write('AUDITOR MUTATIONS PASS: 12/12\n');

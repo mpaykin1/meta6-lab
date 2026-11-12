@@ -9166,6 +9166,18 @@ body.ashDanger::after { content: ""; position: fixed; z-index: 6; inset: 0; box-
   const button = document.getElementById('ashMenuButton');
   const tools = document.getElementById('tools');
   if (!pause || !button) return;
+  // Keep the icon in sync with the actual game HUD, not CSS :has alone.
+  // A hidden button prevented mouse/touch players from opening the pause menu.
+  const hudForMenu = document.getElementById('hud');
+  if (hudForMenu) {
+    const syncMenuButton = () => {
+      button.style.display = hudForMenu.hidden ? 'none' : 'grid';
+    };
+    new MutationObserver(syncMenuButton).observe(hudForMenu, {
+      attributes: true, attributeFilter: ['hidden']
+    });
+    syncMenuButton();
+  }
   const info = document.createElement('section');
   info.id = 'ashMenuInfo';
   info.setAttribute('aria-label', 'Игровая информация');

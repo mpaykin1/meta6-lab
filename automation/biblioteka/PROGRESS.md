@@ -13,14 +13,14 @@
 | Метрика | Было | Стало | Основание |
 |---|---:|---:|---|
 | Полных эталонов из 22 уникальных позиций | 0 | 0 | [BIBLIOTEKA.md](https://github.com/mpaykin1/meta6-lab/blob/main/BIBLIOTEKA.md); 24 позиции минус 2 копии |
-| Систем, подтверждённых независимым Chromium (load_ok) | 0 | 0 | [PR #209](https://github.com/mpaykin1/meta6-lab/pull/209), [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/42764324099) |
+| Систем, подтверждённых независимым Chromium (load_ok) | 0 | **0 в main + 1 в PR #270** | [зелёный Chromium 43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458), [SHA 7b2f3e0eb3742048d338bd5bba8a568d076e388b](https://github.com/mpaykin1/meta6-lab/commit/7b2f3e0eb3742048d338bd5bba8a568d076e388b); merge запрещён до всех зелёных checks |
 | Ассетов с подтверждённым asset_ok | не подтверждено | не подтверждено | Независимых доказательств нет |
 | Полных эталонов, подтверждённо доступных через MCP | 0 | 0 | Живого вызова систем и ассетов без ошибок нет |
 
 ## Список саморазвития (по порядку)
 
 - [x] а) Сохранить многоразовый промпт в `automation/prompts/BIBLIOTEKA.md` с источниками, ограничениями и ловушкой неверных PASS.
-- [ ] б) Одна целая система одной игры = один небольшой PR, независимый Chromium.
+- [ ] б) Одна целая система одной игры = один небольшой PR, независимый Chromium — [#270](https://github.com/mpaykin1/meta6-lab/pull/270), [Chromium PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458), **НЕ ЗАКРЫТО**, quota red.
 - [ ] в) Исключить копии и учебные игры из живого индекса; не дублировать [PR #218](https://github.com/mpaykin1/meta6-lab/pull/218).
 - [ ] г) Семантический поиск по системам нескольких игр для MCP-клиентов.
 - [ ] д) Демо из систем и ассетов библиотеки; реально пройдено ботом.
@@ -31,7 +31,7 @@
 - Король Пепла × ИСХОДНИК — **BLOCKED, не PASS**: оригинал [в открытом PR #207](https://github.com/mpaykin1/meta6-lab/pull/207), но не принят в main; не запрашивать повторно файл у владельца. Исходный blob по описанию PR: `1a1f6d32310ec84d8c542262a74e4ed71ee60f59`; сверка с принятым оригиналом и Chromium не подтверждена.
 - Бесконечные долины — Золотой рыцарь × ИСХОДНИК — **BLOCKED, не PASS**: оригинал [в PR #189](https://github.com/mpaykin1/meta6-lab/pull/189), не в main. Для верификации исходника ещё нужен принятый blob и безопасное слияние.
 
-- Veil Terraces × СИСТЕМЫ — **IN PROGRESS, НЕ PASS**: выделена ровно одна система камеры из исходника [Git blob 22f3cd154cd247e3fcc6977c8334e04417a2faf7](https://github.com/mpaykin1/meta6-lab/blob/22f3cd154cd247e3fcc6977c8334e04417a2faf7/games/veil-terraces/index.html), [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270), [коммит 7b2f3e0eb3742048d338bd5bba8a568d076e388b](https://github.com/mpaykin1/meta6-lab/commit/7b2f3e0eb3742048d338bd5bba8a568d076e388b), [Chromium/Library Machine run 43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458) ожидает финального результата; `load_ok=false` до зелёного браузера.
+- Veil Terraces × СИСТЕМЫ — **1/1 камера load_ok в PR #270, полный шаг игры НЕ PASS**: выделена ровно одна система камеры из исходника [Git blob 22f3cd154cd247e3fcc6977c8334e04417a2faf7](https://github.com/mpaykin1/meta6-lab/blob/22f3cd154cd247e3fcc6977c8334e04417a2faf7/games/veil-terraces/index.html), [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270), [коммит 7b2f3e0eb3742048d338bd5bba8a568d076e388b](https://github.com/mpaykin1/meta6-lab/commit/7b2f3e0eb3742048d338bd5bba8a568d076e388b), [зелёный Chromium 43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458) подтвердил непустой canvas и реальный ввод; [красный STOROZHA quota 43173380383](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383) блокирует merge, публичный MCP не проверен.
 
 ## Текущий PR
 
@@ -49,12 +49,16 @@
 
 - 2026-11-12T07:12:00.916Z — синхронизация [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261) с текущим main без force-push: [merge commit 5587949b43a16760160f2199158db32ed83841cc](https://github.com/mpaykin1/meta6-lab/commit/5587949b43a16760160f2199158db32ed83841cc); саморазвитие **б)** начато отдельным [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270), 1 система, 5 файлов, 3 мутации, [CI 43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458) в очереди, PASS не заявлен.
 
+- 2026-11-12T07:14:00Z — Veil Terraces, система камеры: исходный Git blob `22f3cd154cd247e3fcc6977c8334e04417a2faf7`, 1/1 автономная камера Chromium PASS: [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270), [зелёный run 43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458), [система и код 7b2f3e0eb3742048d338bd5bba8a568d076e388b](https://github.com/mpaykin1/meta6-lab/commit/7b2f3e0eb3742048d338bd5bba8a568d076e388b), [метаданные ae57880382e7ca2c3f53bc3bbceb2b6964137898](https://github.com/mpaykin1/meta6-lab/commit/ae57880382e7ca2c3f53bc3bbceb2b6964137898). PR quota [красный run 43173380383](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383), LIVE=48, первыми заблокированы #3 #54 #72 #87 #133. Полных эталонов 0 → 0; MCP без подтверждений.
+
 ## Урок
 
 - Латинское название MCP обязано учитываться при проверке нумерованных русских шагов; смешанный алфавит проверять мутациями.
 - Не запрашивать у владельца файл, если он уже существует в открытом PR: сначала проверить исходный Git blob и статус PR. [Король Пепла #207](https://github.com/mpaykin1/meta6-lab/pull/207), [Золотой рыцарь #189](https://github.com/mpaykin1/meta6-lab/pull/189).
 
 - Правило: не повышать `load_ok` после статического совпадения SHA/ESM — только после независимого headless Chromium с непустым canvas и реальным `Input.dispatchKeyEvent`; при `main` с 100+ коммитами впереди синхронизировать merge-коммитом без перезаписи главной ветки.
+
+- Перед созданием **нового PR** проверить [STOROZHA PR quota](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383): при `LIVE>5` не создавать очередной PR; работать в существующей библиотечной ветке или передавать расчистку очереди Claude. Не обходить квоту; не путать зелёный Chromium с разрешением на merge.
 
 ## Развитие
 

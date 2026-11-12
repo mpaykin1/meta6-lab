@@ -13,6 +13,8 @@ export function mutateBibliotekaContract(root) {
       [prompt.replace(/^(4\. СИСТЕМЫ\.[^\n]*)$/m, '$1 Разрешено подтверждать по наличию файла.'), progress]],
     ['admit-copy-and-training-by-renaming',
       [prompt.replaceAll('*-copy', '*-duplicate').replaceAll('skin-trainer', 'training-game'), progress]],
+    ['remove-pr-quota-preflight',
+      [prompt.replace(/## Обязательная проверка квоты перед новым PR[\s\S]*$/,'## Проверка отсутствует'), progress]],
     ['erase-restart-state',
       [prompt, progress.replace('## Пары «игра × шаг»', '## Пары без истории')]],
   ];

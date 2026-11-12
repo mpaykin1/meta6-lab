@@ -82,3 +82,5 @@
 ## Ждёт владельца — библиотека
 
 - Новые оригиналы пока не запрашивать: [Король Пепла, PR #207](https://github.com/mpaykin1/meta6-lab/pull/207), [Золотой рыцарь, PR #189](https://github.com/mpaykin1/meta6-lab/pull/189), [Демоническая рука, закрытый PR #137](https://github.com/mpaykin1/meta6-lab/pull/137) имеют доступные исходные файлы в GitHub-ветках, но **не в main**. Следующий шаг — безопасно подтвердить перенос оригинальных blob, а не выдумывать или просить их повторно.
+
+- [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) — Veil Terraces, камера 1/1: [Chromium PASS 43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458), [STOROZHA PR quota FAIL 43173380383](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383) (LIVE=48, сначала #3/#54/#72/#87/#133). **НУЖЕН CLAUDE:** расчистить старые PR по правилам, не обходить quota; затем финальный зелёный SHA и merge, MCP отдельно.

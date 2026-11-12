@@ -31,6 +31,8 @@ export function verifyBibliotekaContract(root, promptOverride, progressOverride)
     fail('asset_ok has no independent loading gate');
   }
 
+  if (!prompt.includes('STOROZHA PR quota') || !prompt.includes('не создавать PR') || !prompt.includes('LIVE>5')) fail('missing active-PR quota preflight');
+
   const required = ['*-copy', 'skin-trainer', 'PROGRESS.md', 'DLYA_CLAUDE.md',
     'MCP', 'SHA', 'двух попыток', 'main', 'Ждёт Claude', 'не доказательство'];
   for (const token of required) {

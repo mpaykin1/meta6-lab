@@ -28,7 +28,7 @@ export function discover(root=ROOT){
   const dir=path.join(root,'games');
   if(!fs.existsSync(dir))throw Error('Missing games directory');
   const games=fs.readdirSync(dir,{withFileTypes:true})
-    .filter(d=>d.isDirectory()&&!d.name.endsWith('-copy'))
+    .filter(d=>d.isDirectory()&&!d.name.endsWith('-copy')&&d.name!=='skin-trainer')
     .map(d=>({game:d.name,source_root:'games/'+d.name}));
   const rule=fs.readFileSync(path.join(root,'rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md'),'utf8');
   const table=rule.split(/##\s*1\.\s*/)[1]?.split(/##\s*2\.\s*/)[0];
@@ -159,10 +159,19 @@ export function buildLibrary(root=ROOT){
       !manifests.some(item=>item.game===duplicateOf))throw Error('Invalid protected copy manifest: '+file);
     return {game,duplicateOf,manifest:'shared/library/'+file,excluded:true};
   });
-  const current=new Set([...manifests.map(m=>m.game+'.json'),...archive.map(x=>path.basename(x.manifest))]);
+  // Preserve teaching-game history without exposing it as a reusable owner reference.
+  const trainingFile=path.join(target,'skin-trainer.json');
+  const training=fs.existsSync(trainingFile)?(()=>{
+    const record=JSON.parse(fs.readFileSync(trainingFile,'utf8'));
+    if(record.game!=='skin-trainer'||record.source_root!=='games/skin-trainer')
+      throw Error('Invalid preserved training manifest: skin-trainer.json');
+    return [{game:'skin-trainer',reason:'training',manifest:'shared/library/skin-trainer.json',excluded:true}];
+  })():[];
+  const excludedGames=[...archive,...training];
+  const current=new Set([...manifests.map(m=>m.game+'.json'),...excludedGames.map(x=>path.basename(x.manifest))]);
   for(const file of fs.readdirSync(target))if(file.endsWith('.json')&&file!=='index.json'&&!current.has(file))fs.rmSync(path.join(target,file));
   for(const m of manifests)save(path.join(target,m.game+'.json'),m);
-  const index={schema_version:1,copy_limit_bytes:LIMIT,copied_bytes:copied,excluded_games:archive,
+  const index={schema_version:1,copy_limit_bytes:LIMIT,copied_bytes:copied,excluded_games:excludedGames,
     games:manifests.map(m=>({game:m.game,source_root:m.source_root,manifest:'shared/library/'+m.game+'.json',...m.counts})),
     entries:manifests.flatMap(m=>[...m.assets,...m.solutions].map(({id,game,kind,name,purpose,source_path,lines,file,sha256})=>({id,game,kind,...(name?{name}:{}),purpose:purpose||[],source_path,sha256,...(lines?{lines}:{}),...(file?{file}:{})})))};
   save(path.join(target,'index.json'),index);

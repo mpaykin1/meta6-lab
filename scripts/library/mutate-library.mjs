@@ -104,6 +104,28 @@ const scenarios=[
     index.copied_bytes-=removed.bytes;
     if(removed.copy_path)fs.rmSync(path.join(root,removed.copy_path));
     write(mf,m);write(ix,index);
+  }],
+  ['training-game-forged-into-global-index',root=>{
+    const file=path.join(root,'shared/library/index.json'),index=read(file);
+    const base=index.games.find(x=>x.game==='base');
+    index.games.push({...base,game:'skin-trainer',source_root:'games/skin-trainer'});
+    write(file,index);
+  }],
+  ['deception-training-search-entry',root=>{
+    const file=path.join(root,'shared/library/index.json'),index=read(file);
+    index.entries.push({...index.entries[0],game:'skin-trainer'});
+    write(file,index);
+  }],
+  ['deception-preserved-training-flag-disabled',root=>{
+    const source=read(path.join(root,'shared/library/base.json'));
+    write(path.join(root,'shared/library/skin-trainer.json'),
+      {...source,game:'skin-trainer',source_root:'games/skin-trainer'});
+    buildLibrary(root);
+    const file=path.join(root,'shared/library/index.json'),index=read(file);
+    const entry=index.excluded_games.find(x=>x.game==='skin-trainer');
+    if(!entry)throw Error('Missing training exclusion in fixture');
+    entry.excluded=false;
+    write(file,index);
   }]
 ];
 let passed=0;

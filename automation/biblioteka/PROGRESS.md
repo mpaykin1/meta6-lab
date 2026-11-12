@@ -22,7 +22,7 @@
 - [x] а) Сохранить многоразовый промпт в `automation/prompts/BIBLIOTEKA.md` с источниками, ограничениями и ловушкой неверных PASS.
 - [ ] б) Одна целая система одной игры = один небольшой PR, независимый Chromium — [#270](https://github.com/mpaykin1/meta6-lab/pull/270), [Chromium PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458), **НЕ ЗАКРЫТО**, quota red.
 - [ ] в) Исключить копии и учебные игры из живого индекса; [PR #218](https://github.com/mpaykin1/meta6-lab/pull/218), [изменение 0002c862425113c177c6faf2fe6184c0cc7cf754](https://github.com/mpaykin1/meta6-lab/commit/0002c862425113c177c6faf2fe6184c0cc7cf754), [Library Machine #43198957093](https://github.com/mpaykin1/meta6-lab/actions/runs/43198957093) — ЗЕЛЁНЫЙ для [SHA 0002c862425113c177c6faf2fe6184c0cc7cf754](https://github.com/mpaykin1/meta6-lab/commit/0002c862425113c177c6faf2fe6184c0cc7cf754). Автоиндекс: [коммит 696c4ed8a7f332928c6963f02f996b42817809b2](https://github.com/mpaykin1/meta6-lab/commit/696c4ed8a7f332928c6963f02f996b42817809b2), Git blob `e21d9e6fea0737310c044593b8f5dcd1a1f4da87`, 14 записей `skin-trainer` удалены из живого индекса, `games` 14 → 13, `entries` 9860 → 9846, исторический манифест сохранён. [STOROZHA #43198965759](https://github.com/mpaykin1/meta6-lab/actions/runs/43198965759) КРАСНЫЙ; PR ещё не принят, в main без изменений.
-- [ ] г) Семантический поиск по системам нескольких игр для MCP-клиентов.
+- [ ] г) Поиск систем по намерению нескольких игр — код [b63b54ecfe5b439290dbed93b44bfa844c65d491](https://github.com/mpaykin1/meta6-lab/commit/b63b54ecfe5b439290dbed93b44bfa844c65d491), 5 мутаций, подключено к Library Machine, **CI финального SHA не подтверждён**, MCP ещё не подключён.
 - [ ] д) Демо из систем и ассетов библиотеки; реально пройдено ботом.
 - [ ] е) Счётчики «было → стало» с SHA и run ID каждого круга.
 
@@ -56,6 +56,8 @@
 
 - 2026-11-12T10:16:50Z — саморазвитие **в)**: в существующей ветке [#218](https://github.com/mpaykin1/meta6-lab/pull/218) исключена учебная `skin-trainer` (1 игра / 14 записей исходного индекса), добавлены 3 мутации и защита исторического манифеста; [коммит](https://github.com/mpaykin1/meta6-lab/commit/0002c862425113c177c6faf2fe6184c0cc7cf754), [Library Machine #43198957093](https://github.com/mpaykin1/meta6-lab/actions/runs/43198957093) в очереди. Позднее [Library Machine 43198957093](https://github.com/mpaykin1/meta6-lab/actions/runs/43198957093) завершился успешно: пересобран [индекс e21d9e6fea0737310c044593b8f5dcd1a1f4da87](https://github.com/mpaykin1/meta6-lab/blob/696c4ed8a7f332928c6963f02f996b42817809b2/shared/library/index.json), в нём 0 записей `skin-trainer` вместо 14. Однако [STOROZHA 43198965759](https://github.com/mpaykin1/meta6-lab/actions/runs/43198965759) красный, PR не слит. Полных эталонов 0 → 0, MCP без подтверждения.
 
+- 2026-11-12T14:26:19Z — саморазвитие г), поиск систем из нескольких игр без дублирования каталога #209: [исходная реализация 7dd39dd002b786ceb44102076eb14ac7893f9d33](https://github.com/mpaykin1/meta6-lab/commit/7dd39dd002b786ceb44102076eb14ac7893f9d33), [исправление синтаксиса d4a8de20fee60a64544cb4b0fcc235556457e2b4](https://github.com/mpaykin1/meta6-lab/commit/d4a8de20fee60a64544cb4b0fcc235556457e2b4), [5 мутаций 8c6d5ec32d33be2207777b8b937e6838c4c6628b](https://github.com/mpaykin1/meta6-lab/commit/8c6d5ec32d33be2207777b8b937e6838c4c6628b), [подключение к существующей проверке b63b54ecfe5b439290dbed93b44bfa844c65d491](https://github.com/mpaykin1/meta6-lab/commit/b63b54ecfe5b439290dbed93b44bfa844c65d491). Модуль возвращает source_only, ссылки на диапазоны оригинала, исключает *-copy и skin-trainer. Фактическая работа в Actions **ещё не подтверждена**. Полных эталонов 0 → 0, load_ok в main 0 → 0, доступность MCP 0 → 0.
+
 ## Урок
 
 - Правило: если `shared/library/index.json` превышает лимит GitHub Contents/Blob API, не отправлять 3.8 МБ через инструмент создания blob; обновить извлекатель и проверку в существующем PR, затем позволить уже существующему `Library Machine` пересобрать индекс на push. Не считать результат готовым до опубликованного SHA индекса и успешного Actions run.
@@ -68,6 +70,8 @@
 - Правило: не повышать `load_ok` после статического совпадения SHA/ESM — только после независимого headless Chromium с непустым canvas и реальным `Input.dispatchKeyEvent`; при `main` с 100+ коммитами впереди синхронизировать merge-коммитом без перезаписи главной ветки.
 
 - Перед созданием **нового PR** проверить [STOROZHA PR quota](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383): при `LIVE>5` не создавать очередной PR; работать в существующей библиотечной ветке или передавать расчистку очереди Claude. Не обходить квоту; не путать зелёный Chromium с разрешением на merge.
+
+- Правило: семантический поиск работает только по реально индексированным системам, а результат помечается source_only до независимого Chromium/MCP. В поисковых тестах обязательны мутанты с подменой PASS, хардкодом намерения и включением копий.
 
 ## Развитие
 

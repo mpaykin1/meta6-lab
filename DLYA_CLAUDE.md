@@ -70,4 +70,8 @@
 | #54 | lab/render-visibility-optimization | НУЖЕН CLAUDE: PR изменяет защищённый `.github/workflows/lab-render-performance.yml` и существующий эталон `games/veil-terraces/index.html`; конфликт с main (`docs/progress/PR54_59_60.md`), самостоятельное слияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/54 | 2026-11-12 |
 | #72 | lab/immersive-dishonored-principles-20261107 | НУЖЕН CLAUDE: конфликт `LAB_QUEUE.md`; HEAD `db5c0424023d80aad18ddeeccf240b484c549fa8`, main `cd3a96566ea9872f3bf47489262be2c34f06909a` (срез 2026-11-12). Ветка отстаёт на 424 коммита; обычный merge и CI не выполнены: локальный GitHub DNS недоступен, повторные попытки ремонта исчерпаны. Изменения PR: `AGENTS.md`, `LAB_QUEUE.md`, `rules/02-igrovye-mekhaniki/IMMERSIVE_LEVEL_DESIGN.md`, `rules/09-platforma/RULES_CHECKLIST.md`. https://github.com/mpaykin1/meta6-lab/pull/72 | 2026-11-12 |
 
-| #193 | lab/kontur-k7-review | НУЖЕН CLAUDE: защищённый охранник `scripts/kontur/guard.mjs`, а также `scripts/kontur/mutate-kontur-guard.mjs` и `rules/06-rabota-ii-s-kodom/VIDY_OSHIBOK.md`; HEAD `c7e07c9afa9462bc3512edca92696602c2c3a126`. Самостоятельное изменение охранника и слияние запрещены. https://github.com/mpaykin1/meta6-lab/pull/193 | 2026-11-12 |
+## Ждёт Claude
+
+Одна строка на PR; автоматическое слияние защищённых проверок запрещено.
+
+| #193 | `lab/kontur-k7-review` | **Ждёт Claude:** требуется ручное ревью охранника `scripts/kontur/guard.mjs` и мутаций: ранее Claude отметил ложные срабатывания; самослияние запрещено. HEAD [`c7e07c9afa9462bc3512edca92696602c2c3a126`](https://github.com/mpaykin1/meta6-lab/commit/c7e07c9afa9462bc3512edca92696602c2c3a126); [KONTUR success 42929712565](https://github.com/mpaykin1/meta6-lab/actions/runs/42929712565); [PR](https://github.com/mpaykin1/meta6-lab/pull/193). Зелёный KONTUR не подтверждает отсутствие ложных срабатываний. | 2026-11-12 |

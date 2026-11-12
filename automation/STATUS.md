@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-12T06:51:17.426Z | МГЛ: 7f6463db0bb91b0dac2401f5fb47a62ede2ead40 | МГ: 573ec644a032aa3cbf999193c09fa2176ce69a7a | нет данных
+UTC: 2026-11-12T06:51:50.853Z | МГЛ: eca735fec654a29c041415dc89d5937c9ffd8ea4 | МГ: 573ec644a032aa3cbf999193c09fa2176ce69a7a | https://github.com/mpaykin1/meta6-lab/actions/runs/43171016179
 ## ПРОВЕРИТЬ CLAUDE
 - PR #246 72a2be2281e8f4c54785599732024b111d50bfd1: .github/workflows/lab-pages.yml, .github/workflows/link-guard.yml, scripts/lab/mutate-link-ok.sh, scripts/lab/mutate-page-assets.mjs, scripts/lab/mutate-page-assets.py, scripts/lab/verify-check-page-assets.sh, … (сокращено)
 - PR #265 f0a6d79bdda5416da56a145901e0216808cba97e: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py
@@ -54,20 +54,20 @@ P1 — нет данных: нет данных
 #244 Living Watercolor: публичная демосцена дерева, вулкана и фаб | 7a548632aae8be6b541cc52fec2e0bba3d14059a
 ещё 15: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1218 коммитов | нет данных
+МГЛ: 1219 коммитов | нет данных
 МГ: 5 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, rules:2
 ## ИГРЫ
-archer-in-the-fog — нет данных | витрина: да
-asqura-ilya-reference — нет данных | витрина: нет
-broken-city — нет данных | витрина: да
-broken-city-copy — нет данных | витрина: да
-rainbow-acceleration — нет данных | витрина: нет
-skin-trainer — нет данных | витрина: нет
-sumerki-i-pepel-2 — нет данных | витрина: да
-sumerki-i-pepel-2-copy — нет данных | витрина: нет
-twilight-isle-classic — нет данных | витрина: да
-twilight-isles — нет данных | витрина: да
-veil-terraces — нет данных | витрина: да
+archer-in-the-fog — не запускалась | витрина: да
+asqura-ilya-reference — не запускалась | витрина: нет
+broken-city — не запускалась | витрина: да
+broken-city-copy — не запускалась | витрина: да
+rainbow-acceleration — не запускалась | витрина: нет
+skin-trainer — не запускалась | витрина: нет
+sumerki-i-pepel-2 — не запускалась | витрина: да
+sumerki-i-pepel-2-copy — не запускалась | витрина: нет
+twilight-isle-classic — не запускалась | витрина: да
+twilight-isles — не запускалась | витрина: да
+veil-terraces — не прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
 | 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)

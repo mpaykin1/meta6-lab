@@ -89,8 +89,11 @@ jobs:
             // Inspect a bounded set; old PRs are only flagged on current HEAD evidence.
             const staleFindings = [];
             let staleUnknown = false;
-            const staleCandidates = prs.filter(pr => pr.state === 'open' &&
-              now.getTime() - Date.parse(pr.created_at) > 86400000).slice(0, 4);
+            const stalePool = prs.filter(pr => pr.state === 'open' &&
+              now.getTime() - Date.parse(pr.created_at) > 86400000);
+            const stalePages = Math.max(1, Math.ceil(stalePool.length / 4));
+            const stalePage = Math.floor(now.getTime() / 3600000) % stalePages;
+            const staleCandidates = stalePool.slice(stalePage * 4, stalePage * 4 + 4);
             for (const pr of staleCandidates) {
               try {
                 const [detail, checks] = await Promise.all([
@@ -252,8 +255,10 @@ jobs:
               : 'Добавить SHA и Actions run к следующей записи в таблице задач.';
             const report = [
               '## 🚨 Нарушения и незавершённое',
-              ...(priority.length ? priority : ['- Доказанных нарушений не обнаружено — '+
+              ...(priority.length ? priority : ['- В проверенной выборке не найдено нарушений — '+
                 link('источник',fileUrl('ZADACHI.md'))]),
+              '- Старые PR: проверено '+staleCandidates.length+' из '+stalePool.length+
+                ' в актуальной выборке. При каждом часовом запуске следующая четвёрка.',
               '',
               '**Один безопасный следующий шаг:** '+next+' '+
                 link('правила',fileUrl('automation/prompts/MG_PYAT_AVTOZADACH.md')),

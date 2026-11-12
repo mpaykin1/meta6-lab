@@ -7,7 +7,7 @@
 - **Статус ставит сторож, а не ChatGPT** (GitHub Actions `ZADACHI watch`, каждые 30 минут, без ИИ): 🔨 В РАБОТЕ — коммит был меньше часа назад; ⚠ молчит — больше часа; 🛑 ЗАВИС — больше 3 часов, **надо толкнуть**; 💤 ЗАБРОШЕНО — больше 2 суток; ✅ ГОТОВО — PR слит; ✖ ЗАКРЫТО — PR закрыт без слияния; 🙋 НУЖЕН CLAUDE.
 - Задачу, которую ChatGPT не записал, сторож добавляет сам из открытых PR.
 
-Сторож проверил: 2026-11-12 07:26 UTC
+Сторож проверил: 2026-11-12 07:35 UTC
 
 <!-- ZADACHI:START -->
 **Итог:** 🛑 зависло 59 · ⚠ молчит 0 · 🔨 в работе 5 · 🙋 нужен Claude 18 · 💤 заброшено 85 · ✅ готово 0
@@ -180,7 +180,7 @@
 | 💤 ЗАБРОШЕНО 5 дн — продолжить или закрыть | lab: Twilight Isles GPU optimization, single RAF, first-island progression | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/twilight-isles-pass` | [#2](https://github.com/mpaykin1/meta6-lab/pull/2) | 2026-11-06 14:35 | 2026-11-07 08:38 |
 | 💤 ЗАБРОШЕНО 4 дн — продолжить или закрыть | Vault: replace prohibited procedural payload with SHA-pinned approved donor baseline | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/approved-donor-confluence-vault-20261107` | [#58](https://github.com/mpaykin1/meta6-lab/pull/58) | 2026-11-07 08:13 | 2026-11-07 08:14 |
 | 💤 ЗАБРОШЕНО 5 дн — продолжить или закрыть | Use exact original Three Worlds weather in playable Veil Terraces copy | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/veil-weather-original-20261107` | [#43](https://github.com/mpaykin1/meta6-lab/pull/43) | 2026-11-07 07:08 | 2026-11-07 07:32 |
-| 💤 ЗАБРОШЕНО 4 дн — продолжить или закрыть | Playable Veil uses exact original Three Worlds weather; register real shared consumer | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/veil-weather-connected-20261107` | [#49](https://github.com/mpaykin1/meta6-lab/pull/49) | 2026-11-07 07:31 | 2026-11-07 07:31 |
+| 💤 ЗАБРОШЕНО 5 дн — продолжить или закрыть | Playable Veil uses exact original Three Worlds weather; register real shared consumer | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/veil-weather-connected-20261107` | [#49](https://github.com/mpaykin1/meta6-lab/pull/49) | 2026-11-07 07:31 | 2026-11-07 07:31 |
 | 💤 ЗАБРОШЕНО 5 дн — продолжить или закрыть | Evidence-gated META GAMES readiness: 10 elements, same-SHA CI, 100 acceptance gates | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/readiness-evidence-gates` | [#16](https://github.com/mpaykin1/meta6-lab/pull/16) | 2026-11-07 02:25 | 2026-11-07 02:44 |
 | 💤 ЗАБРОШЕНО 5 дн — продолжить или закрыть | [BLOCKED — source policy] Procedural World_server candidate cannot be promoted | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/agent-game-candidate` | [#9](https://github.com/mpaykin1/meta6-lab/pull/9) | 2026-11-07 01:15 | 2026-11-07 02:04 |
 <!-- ZADACHI:END -->

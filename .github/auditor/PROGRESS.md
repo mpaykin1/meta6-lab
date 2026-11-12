@@ -21,3 +21,12 @@
 - Ревизор в PR: зелёный https://github.com/mpaykin1/meta6-lab/actions/runs/43024276845
 - Защищённый workflow: ожидает Claude https://github.com/mpaykin1/meta6-lab/actions/runs/43024276457
 - Единственный Issue: https://github.com/mpaykin1/meta6-lab/issues/253 (ботом ещё не обновлён).
+
+## Круг 2026-11-12 — main 984aaeeeed53ebba902bb9f216c2c0bba72bce94
+
+- [x] Расписание (10:11 UTC): только два подтверждённых schedule: [#43102877168](https://github.com/mpaykin1/meta6-lab/actions/runs/43102877168) и [#43144961586](https://github.com/mpaykin1/meta6-lab/actions/runs/43144961586); 5 ч 32 мин 46 с между ними; третьего в актуальной выборке schedule нет. Причина пропусков не доказана.
+- [x] Issue #253 открыт, 08:51:38 UTC — [Issue](https://github.com/mpaykin1/meta6-lab/issues/253); GraphQL-pin недоступен через подключённое API, status неизвестен. Дубликат [#250](https://github.com/mpaykin1/meta6-lab/issues/250) закрыт.
+- [x] Сверка двух ссылок из #253: [schedule #43102877168](https://github.com/mpaykin1/meta6-lab/actions/runs/43102877168) (success, SHA 238ed8178aa4fc65c336dc141167ba731a1c60c3), [#43144961586](https://github.com/mpaykin1/meta6-lab/actions/runs/43144961586) (success, SHA 29b4c6f3ea5d80f1e14720986f126ad20900271c).
+- [x] Улучшение (в), 10:13 UTC: добавлена проверка PR старше 24 ч с конфликтом/красным check по текущему head, лимит четыре кандидата за проход. [Коммит c4a70d81c9c3a0325ebb497ea6122cacf9f6b8aa](https://github.com/mpaykin1/meta6-lab/commit/c4a70d81c9c3a0325ebb497ea6122cacf9f6b8aa). Проверенный пример: [PR #241](https://github.com/mpaykin1/meta6-lab/pull/241), mergeable_state=dirty, [красная browser-open-all](https://github.com/mpaykin1/meta6-lab/actions/runs/43055319496/job/130643325707).
+- [ ] Добавить три мутационные ловушки, проверить CI нового SHA, учесть результат в ZADACHI.md. Workflow защищён, без Claude не сливать.
+- **Урок:** GitHub schedule не гарантирует запуск точно по cron; проверять реальные timestamps из runs и никогда не объявлять равномерность по YAML.

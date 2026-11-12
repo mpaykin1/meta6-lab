@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-12T10:14:06.092Z",
+  "generated_at": "2026-11-12T10:15:35.508Z",
   "sha": {
-    "lab": "61a4495934f9a6da320d91ca925b7db80f9e403f",
+    "lab": "1ec47393c081abeba2097d380f6b5a35ff35cc16",
     "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
@@ -124,13 +124,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "ZADACHI watch",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43198093897",
-        "step": "Update ZADACHI.md from GitHub"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -536,7 +530,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1321,
+      "count": 1327,
       "folders": "нет данных"
     },
     "mg": {

@@ -35,7 +35,7 @@ export function verifyRecipe(recipe) {
   return true;
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === recipePath.replace(/rules\/09-platforma\/RECEPTY\/13\.md$/, 'scripts/uluchshatel/verify-recipe-13.mjs')) {
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   verifyRecipe(readFileSync(recipePath, 'utf8'));
   console.log('VERIFY recipe 13: origin, safety, real state and green-run gates');
 }

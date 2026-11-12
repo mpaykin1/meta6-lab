@@ -1,16 +1,23 @@
 {
-  "generated_at": "2026-11-12T07:05:36.633Z",
+  "generated_at": "2026-11-12T14:31:40.384Z",
   "sha": {
-    "lab": "940ea4bfd83b76aae64c486f6401e0c64ea9ec33",
-    "mg": "573ec644a032aa3cbf999193c09fa2176ce69a7a"
+    "lab": "a7df4354d6b7173bd08ac541de198069b7883be8",
+    "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43172470265",
+  "run": "нет данных",
   "review": {
     "protected": [
+      {
+        "number": 259,
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
+      },
       {
         "number": 246,
         "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
@@ -133,9 +140,9 @@
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
       "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | open | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
-      "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open dirty | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
+      "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
       "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
-      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open dirty | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
+      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
       "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
@@ -292,11 +299,31 @@
     ]
   },
   "pr": {
-    "open": 52,
+    "open": 54,
     "conflicts": "нет данных",
-    "merged": 20,
-    "closed": 49,
+    "merged": 24,
+    "closed": 52,
     "mergedItems": [
+      {
+        "number": 259,
+        "title": "БОТ-ПРОХОДЧИК: сохраняемый промпт для повторных запусков",
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311"
+      },
+      {
+        "number": 263,
+        "title": "docs(prompty): реестр 15 промптов МГЛ и улучшение многоразов",
+        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4"
+      },
+      {
+        "number": 257,
+        "title": "docs(zadachi): не создавать дубли задач по одному PR",
+        "sha": "79f4465b6667092e16115222325c012ca73cc137"
+      },
+      {
+        "number": 256,
+        "title": "docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ",
+        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec"
+      },
       {
         "number": 243,
         "title": "Геймдизайн-аудит META GAMES — чистый PR без защищённой истор",
@@ -399,6 +426,13 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 259,
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
+      },
       {
         "number": 246,
         "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
@@ -515,68 +549,68 @@
   },
   "changes": {
     "lab": {
-      "count": 1246,
+      "count": 1417,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 5,
-      "folders": "AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, rules:2"
+      "count": 6,
+      "folders": "AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2"
     }
   },
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "не прошла",
+      "bot": "нет данных",
       "storefront": "да"
     }
   ],

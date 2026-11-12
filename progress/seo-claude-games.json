@@ -7,16 +7,19 @@
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
-      "details": "Восстановлены 3 исходных файла точными Git blob SHA из main, проверка CI ещё требуется.",
+      "details": "Оригиналы восстановлены из main байт-в-байт: ранее три файла + reference/abyss-glow-2026-11-09/index.html, reference/sumerechny-arkhipelag/index.html, reference/sunken-city/index.html. Новая STOROZHA проверка на HEAD ожидает CI.",
       "files": [
         "observer-world-en-v7/index.html",
         "rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
-        "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+        "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+        "reference/abyss-glow-2026-11-09/index.html",
+        "reference/sumerechny-arkhipelag/index.html",
+        "reference/sunken-city/index.html"
       ]
     },
     "1_fix_bot_and_other_ci": {
       "status": "in_progress",
-      "details": "На втором мобильном запуске Veil Terraces уровень 6 застревал в 3.1 единицы от цели: стратегия делала обход только при расстоянии >3.2. Теперь обходной ввод выполняется и вблизи; итог нового CI ещё не подтверждён. В базовом PR #234 дополнительно: Кнопка музыки перекрывала меню: скрыта на игровом экране и сдвинута в паузе; Clean screen стал 0 видимых текстов (Actions 43199889622), но меню оставалось скрытым. Теперь меню показывается независимо от состояния HUD и скрывается лишь на титульном экране. Ожидается новый browser-check. Генератор библиотеки в Actions автоматически обновил оба машинных индекса вслед за изменением кнопок, см. коммит 4661d37; старые action_required на ботовом push не считать зелёным.",
+      "details": "На втором мобильном запуске Veil Terraces уровень 6 застревал в 3.1 единицы от цели: стратегия делала обход только при расстоянии >3.2. Теперь обходной ввод выполняется и вблизи; итог нового CI ещё не подтверждён. В базовом PR #234 дополнительно: Кнопка музыки перекрывала меню: скрыта на игровом экране и сдвинута в паузе; Clean screen стал 0 видимых текстов (Actions 43199889622), но меню оставалось скрытым. Теперь меню показывается независимо от состояния HUD и скрывается лишь на титульном экране. Ожидается новый browser-check. Генератор библиотеки в Actions автоматически обновил оба машинных индекса вслед за изменением кнопок, см. коммит 4661d37; старые action_required на ботовом push не считать зелёным. Обновлённый базовый PR #234: Кнопка музыки перекрывала меню: скрыта на игровом экране и сдвинута в паузе; Clean screen стал 0 видимых текстов (Actions 43199889622), но меню оставалось скрытым. Теперь меню показывается независимо от состояния HUD и скрывается лишь на титульном экране. Ожидается новый browser-check. Генератор библиотеки в Actions автоматически обновил оба машинных индекса вслед за изменением кнопок, см. коммит 4661d37; старые action_required на ботовом push не считать зелёным. Veil Terraces теперь выбирает только полный проходимый маршрут шести воспоминаний: повторно ищет маршрут, при первом запуске отклоняет генерацию мира без пути; подмена бот-ручки и проверок запрещена. Новый CI ожидает проверки.",
       "evidence": [
         "https://github.com/mpaykin1/meta6-lab/commit/7ee56e90d9da32d806e697c542b705102575b963",
         "https://github.com/mpaykin1/meta6-lab/commit/744e6d7e89c716f2a81cfd184819cee297bd9e26",
@@ -107,7 +110,12 @@
     "https://github.com/mpaykin1/meta6-lab/commit/25f2aa86844654c0924809643b4e044e648c95a4",
     "https://github.com/mpaykin1/meta6-lab/actions/runs/43199889622",
     "https://github.com/mpaykin1/meta6-lab/commit/edd4a58940f904e384dfddf2bfa1d972963c2877",
-    "https://github.com/mpaykin1/meta6-lab/commit/4661d37c04824efe021e38004ade720da32b098b"
+    "https://github.com/mpaykin1/meta6-lab/commit/4661d37c04824efe021e38004ade720da32b098b",
+    "https://github.com/mpaykin1/meta6-lab/actions/runs/43201355486",
+    "https://github.com/mpaykin1/meta6-lab/commit/75282933272b06905b5c261f4ecf5917a837a55d",
+    "https://github.com/mpaykin1/meta6-lab/commit/d59921c3eb1651a366438950198b6c140db7fc9a",
+    "https://github.com/mpaykin1/meta6-lab/commit/3dc11ee9645943ebd3f539a5836fc1475815e2b7",
+    "https://github.com/mpaykin1/meta6-lab/commit/64ae05f16d4a18808de4c8472e20616880daa3b2"
   ],
   "last_completed_seo_content_commit": "33f9708e63230a397ad8158f62b2b584d8e27bbd",
   "cycle_updates": [
@@ -237,7 +245,25 @@
       "status": "merge_base_sync_pending_ci",
       "change": "SEO-ветка синхронизирована с PR #234 без потери SEO и рабочих правок; GitHub CI следует проверить на новом commit.",
       "base": "faa13c76da87875fdcc8dc8b8a6baf8774799c52"
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "STOROZHA защитил ещё 3 исходника: восстановлены байт-в-байт из main, SHA blob точно совпадают.",
+      "commits": [
+        "75282933272b06905b5c261f4ecf5917a837a55d",
+        "d59921c3eb1651a366438950198b6c140db7fc9a",
+        "3dc11ee9645943ebd3f539a5836fc1475815e2b7"
+      ],
+      "next": "Проверить STOROZHA protected originals на новом HEAD; не сливать PR, пока все обязательные проверки не зелёные."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Veil Terraces: генератор теперь требует реальный проходимый маршрут всех шести воспоминаний вместо случайного тупика; при первой загрузке переподбирает мир. Не меняются графика, бот-контракт или правила проверок.",
+      "commit": "64ae05f16d4a18808de4c8472e20616880daa3b2",
+      "next": "Проверить META BOT и LAB focused META BOT для реальной полной игры; сохранить генератор без обходов физики."
     }
   ],
-  "base_sync_sha": "faa13c76da87875fdcc8dc8b8a6baf8774799c52"
+  "base_sync_sha": "a6431c80a43e11f1031530268031acb28341d824"
 }

@@ -1,3 +1,9 @@
+## INK — эталон живой акварели (OWNER PASS, 11.11.2026)
+Living Watercolor 3D — эталон визуальной технологии под паролем `ink`. Перед работой с акварельной/чернильной графикой прочитать [ink.md](ink.md). Исходники `demos/living-watercolor/` не менять, переиспользовать как есть.
+
+## ССЫЛКА = 200
+Публичную ссылку владельцу можно выдавать только после подтверждения строки `200 <точный URL>` в GitHub Actions run. Ссылку и URL прогона указывать вместе. Каждую новую публичную ссылку сначала добавить в `LINKS.txt`. Не считать существование файла или успешный merge подтверждением публикации.
+
 ## ТАБЛИЦА ЗАДАЧ (правило владельца, 10.11.2026)
 Каждая задача, за которую берётся ChatGPT (чат или автозадача) по МГ и МГЛ, сразу записывается строкой в [ZADACHI.md](https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md) (корень meta6-lab). Статус ставит сторож `ZADACHI watch` по данным GitHub: ✅ готово (PR слит), 🛑 ЗАВИС — толкнуть (нет коммитов 3+ часа). Без строки работу не начинать. Полное правило: [rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md](rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md).
 
@@ -125,3 +131,5 @@ _общий склад и конструктор всех игр_
 - [games/sumerki-i-pepel-2/](games/sumerki-i-pepel-2/README.md) — эталонная игра Claude «Сумерки и пепел II» (загружена 06.11.2026) и её честный статус по каждому правилу
 - [games/twilight-isle-classic/](games/twilight-isle-classic/README.md), [games/twilight-isles/](games/twilight-isles/README.md), [games/archer-in-the-fog/](games/archer-in-the-fog/README.md) — эталоны удержания Playgama R1–R11 (загружены 06.11.2026) и статус каждой по всем универсальным правилам; [games/broken-city/](games/broken-city/README.md) — эталон Claude 1.4.0 (образец ЧИСТОГО ЭКРАНА и ЛОРА) со статусом по всем правилам
 - [meta-games-bot-rollout.md](automation/prompts/meta-games-bot-rollout.md) — промпт для ChatGPT на внедрение бота и исправление всех игр
+
+- **Библиотека игр / MCP:** [BIBLIOTEKA_IGR.md](rules/06-rabota-ii-s-kodom/BIBLIOTEKA_IGR.md) — обязательное продолжение существующего PR, реальные Chromium-проверки, честные счётчики и исправление кодом перед завершением каждого запуска.

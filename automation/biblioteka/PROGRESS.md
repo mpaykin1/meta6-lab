@@ -31,6 +31,8 @@
 - Король Пепла × ИСХОДНИК — **BLOCKED, не PASS**: оригинал [в открытом PR #207](https://github.com/mpaykin1/meta6-lab/pull/207), но не принят в main; не запрашивать повторно файл у владельца. Исходный blob по описанию PR: `1a1f6d32310ec84d8c542262a74e4ed71ee60f59`; сверка с принятым оригиналом и Chromium не подтверждена.
 - Бесконечные долины — Золотой рыцарь × ИСХОДНИК — **BLOCKED, не PASS**: оригинал [в PR #189](https://github.com/mpaykin1/meta6-lab/pull/189), не в main. Для верификации исходника ещё нужен принятый blob и безопасное слияние.
 
+- Veil Terraces × СИСТЕМЫ — **IN PROGRESS, НЕ PASS**: выделена ровно одна система камеры из исходника [Git blob 22f3cd154cd247e3fcc6977c8334e04417a2faf7](https://github.com/mpaykin1/meta6-lab/blob/22f3cd154cd247e3fcc6977c8334e04417a2faf7/games/veil-terraces/index.html), [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270), [коммит 7b2f3e0eb3742048d338bd5bba8a568d076e388b](https://github.com/mpaykin1/meta6-lab/commit/7b2f3e0eb3742048d338bd5bba8a568d076e388b), [Chromium/Library Machine run 43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458) ожидает финального результата; `load_ok=false` до зелёного браузера.
+
 ## Текущий PR
 
 - [#261](https://github.com/mpaykin1/meta6-lab/pull/261) — саморазвитие а); рабочая ветка `lab/biblioteka-contract-20261111`; CI финального SHA ещё не подтверждён, слияния нет.
@@ -45,10 +47,14 @@
 
 - 2026-11-11T14:29:10.586Z UTC — блокеры систем и исключения копий оставлены за существующими [#209](https://github.com/mpaykin1/meta6-lab/pull/209) и [#218](https://github.com/mpaykin1/meta6-lab/pull/218); [обновлён DLYA_CLAUDE.md](https://github.com/mpaykin1/meta6-lab/commit/41bd68d5f5c257565a23914a8fe96c487c585ddb). Оригиналы из PR #207/#189/#137 не объявлены файлами main.
 
+- 2026-11-12T07:12:00.916Z — синхронизация [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261) с текущим main без force-push: [merge commit 5587949b43a16760160f2199158db32ed83841cc](https://github.com/mpaykin1/meta6-lab/commit/5587949b43a16760160f2199158db32ed83841cc); саморазвитие **б)** начато отдельным [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270), 1 система, 5 файлов, 3 мутации, [CI 43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458) в очереди, PASS не заявлен.
+
 ## Урок
 
 - Латинское название MCP обязано учитываться при проверке нумерованных русских шагов; смешанный алфавит проверять мутациями.
 - Не запрашивать у владельца файл, если он уже существует в открытом PR: сначала проверить исходный Git blob и статус PR. [Король Пепла #207](https://github.com/mpaykin1/meta6-lab/pull/207), [Золотой рыцарь #189](https://github.com/mpaykin1/meta6-lab/pull/189).
+
+- Правило: не повышать `load_ok` после статического совпадения SHA/ESM — только после независимого headless Chromium с непустым canvas и реальным `Input.dispatchKeyEvent`; при `main` с 100+ коммитами впереди синхронизировать merge-коммитом без перезаписи главной ветки.
 
 ## Развитие
 

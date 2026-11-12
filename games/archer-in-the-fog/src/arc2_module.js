@@ -5,10 +5,74 @@
    U4 fog veil while falling · U5 lasting progress + daily gift · R1 instant start · R5 rewarded revive · R8 telemetry
 ============================================================================= */
 const ICON_ICE = '<svg viewBox="0 0 11 11" fill="currentColor" aria-hidden="true"><rect x="5" y="0" width="1" height="11"/><rect x="0" y="5" width="11" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="8" y="8" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="4" y="1" width="3" height="1"/><rect x="4" y="9" width="3" height="1"/><rect x="1" y="4" width="1" height="3"/><rect x="9" y="4" width="1" height="3"/></svg>';
-const GAME_VERSION = "2.0.0";
+const GAME_VERSION = "2.0.1";
 const ARC2 = (() => {
   const pg = (n, d) => { try { PG.ready && window.bridge.analytics && window.bridge.analytics.send(n, d); } catch (e) {} };
   const ru = () => PG.language === "ru";
+
+  /* Fortress wall run: animate existing archer on solid tower surface, no new assets. */
+  const RUN = { left: false, right: false, touchId: null, touchX: 0,
+    touchAxis: 0, velocity: 0, speed: 0, stride: 0 };
+  const runKey = (event, down) => {
+    if (event.code === "KeyA" || event.code === "ArrowLeft") RUN.left = down;
+    else if (event.code === "KeyD" || event.code === "ArrowRight") RUN.right = down;
+    else return;
+    if (G.mode === "play") event.preventDefault();
+  };
+  addEventListener("keydown", event => runKey(event, true));
+  addEventListener("keyup", event => runKey(event, false));
+  addEventListener("blur", () => {
+    RUN.left = false; RUN.right = false; RUN.touchAxis = 0; RUN.touchId = null;
+  });
+  function wallRunStart(event) {
+    if (event.pointerType !== "touch" || G.mode !== "play" || G.paused ||
+        event.clientX > innerWidth * 0.32 || event.clientY < innerHeight * 0.55 ||
+        RUN.touchId !== null) return false;
+    RUN.touchId = event.pointerId;
+    RUN.touchX = event.clientX;
+    RUN.touchAxis = 0;
+    return true;
+  }
+  function wallRunMove(event) {
+    if (event.pointerId !== RUN.touchId) return false;
+    RUN.touchAxis = Math.max(-1, Math.min(1, (event.clientX - RUN.touchX) / 48));
+    return true;
+  }
+  function wallRunEnd(event) {
+    if (event.pointerId !== RUN.touchId) return false;
+    RUN.touchId = null;
+    RUN.touchAxis = 0;
+    return true;
+  }
+  function wallRunStep(dt) {
+    if (!dt || G.mode !== "play" || G.paused || PG.paused ||
+        G.phase === "fall" || G.phase === "over" || G.phase === "retreat") {
+      RUN.velocity = 0;
+      RUN.speed = 0;
+      return;
+    }
+    const axis = Math.max(-1, Math.min(1, Number(RUN.right) - Number(RUN.left) + RUN.touchAxis));
+    const targetSpeed = axis * 5.2;
+    RUN.velocity += (targetSpeed - RUN.velocity) * (1 - Math.exp(-10 * dt));
+    const position = archer.root.position;
+    const previousX = position.x;
+    // Central 12-metre stretch is always solid and clear of the perimeter crenellations.
+    position.x = Math.max(cur.stand.x - 6, Math.min(cur.stand.x + 6, previousX + RUN.velocity * dt));
+    const travelled = Math.abs(position.x - previousX);
+    RUN.speed = travelled / dt;
+    RUN.stride += travelled * 2.8;
+    if (travelled < 0.0001) RUN.velocity = 0;
+  }
+  function wallRunPose() {
+    const strength = Math.min(1, RUN.speed / 3.2);
+    if (strength <= 0 || archer.fall > 0) return;
+    const step = Math.sin(RUN.stride) * strength;
+    archer.legs[0].rotation.x += step * 0.75;
+    archer.legs[1].rotation.x -= step * 0.75;
+    archer.body.position.y += Math.abs(Math.sin(RUN.stride)) * 0.065 * strength;
+    archer.spine.rotation.z += -Math.sign(RUN.velocity) * 0.09 * strength;
+  }
+
   /* ---------- U1 sparks ---------- */
   const COLS = ["harvest", "precision", "element", "agility"];
   const HEX = { harvest: "#c27bff", precision: "#58c4ff", element: "#ff8a3d", agility: "#6ee68a" };
@@ -254,7 +318,7 @@ const ARC2 = (() => {
     if (PG.language === "ru") { $("bRevive").lastChild.textContent = "Ожить: смотреть рекламу"; }
     if (!SAVE.played) setTimeout(() => { if (G.mode === "menu") $("bPlay").onclick(); }, 600);       // first visit: straight into the fight
   }
-  return { get camK() { return camK; }, SP, dice, absorb, onRound, onShotDown, onRepel, onDragonHit, pickSpecial, plunge, ambush, tick, onGameOver, onStart, boot, spark, retreat };
+  return { get camK() { return camK; }, SP, dice, absorb, onRound, onShotDown, onRepel, onDragonHit, pickSpecial, plunge, ambush, tick, onGameOver, onStart, boot, spark, retreat, wallRunStart, wallRunMove, wallRunEnd, wallRunStep, wallRunPose };
 })();
 window.__arc2 = ARC2;
 window.__A = { G, SAVE, startSpecial, crash, repel, startRound, gameOver, get dragon() { return dragon; }, get archer() { return archer; } };

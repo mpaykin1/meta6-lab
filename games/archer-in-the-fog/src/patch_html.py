@@ -9,4 +9,5 @@ rep('<button class="btn" id="bRetry">RETRY</button>','<button class="btn" id="bR
 css=open('/home/claude/arc/work/extra.css',encoding='utf8').read()
 rep('</style>\n\n<canvas id="c"></canvas>','</style>\n<style>\n'+css+'\n</style>\n\n<canvas id="c"></canvas>')
 rep('<div id="flash"></div>','<div id="flash"></div><div id="fogveil" aria-hidden="true"></div>')
+rep('</body></html>', '<script src="./src/goal-target.js" defer></script>\n</body></html>')
 open(p,'w',encoding='utf8').write(s); print('html ok')

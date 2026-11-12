@@ -9,3 +9,4 @@
 | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | `lab/bot-batch-1` | защищённое, ждёт Claude: `.github/workflows/bot-adapters-b2.yml`; ветка не изменялась | [файлы PR](https://github.com/mpaykin1/meta6-lab/pull/190/files) |
 | [#192](https://github.com/mpaykin1/meta6-lab/pull/192) | `lab/mcp-connect` | защищённое, ждёт Claude: `.github/workflows/mcp-connect-m6.yml`; ветка не изменялась | [файлы PR](https://github.com/mpaykin1/meta6-lab/pull/192/files) |
 | [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | `lab/bot-batch-2` | защищённое, ждёт Claude: `.github/workflows/b2-batch-2.yml`; ветка не изменялась | [файлы PR](https://github.com/mpaykin1/meta6-lab/pull/200/files) |
+| [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | `lab/skin-rusty-robot` | защищённое, ждёт Claude: `.github/workflows/skin-live.yml`, `.github/workflows/skin-pack.yml`; ветка не изменялась | [файлы PR](https://github.com/mpaykin1/meta6-lab/pull/203/files) |

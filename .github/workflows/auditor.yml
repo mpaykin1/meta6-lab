@@ -1,0 +1,250 @@
+name: META GAMES five-task auditor
+on:
+  schedule:
+    - cron: '13 * * * *' # 20m after the :53 job; UTC
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - .github/workflows/auditor.yml
+      - .github/auditor/config.yml
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/auditor.yml
+      - .github/auditor/config.yml
+permissions:
+  contents: read
+  pull-requests: read
+  checks: read
+  actions: read
+  issues: write
+concurrency:
+  group: meta-games-five-task-auditor
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify three auditor mutation traps
+        run: node scripts/auditor/mutate-auditor.mjs
+      - name: Audit five agent cycles
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const root = 'https://github.com/' + owner + '/' + repo;
+            const now = new Date();
+            const clean = x => String(x == null ? '' : x).replace(/[|<>]/g, ' ').replace(/\s+/g, ' ').slice(0, 180);
+            const link = (name, url) => '[' + clean(name) + '](' + url + ')';
+            const fileUrl = path => root + '/blob/main/' + path;
+            async function read(path) {
+              const ref = context.eventName === 'pull_request' && path === '.github/auditor/config.yml'
+                ? context.payload.pull_request.head.sha : 'main';
+              const response = await github.rest.repos.getContent({owner, repo, path, ref});
+              if (!response.data.content) throw new Error('Missing content: ' + path);
+              return Buffer.from(response.data.content, 'base64').toString('utf8');
+            }
+            const cfg = JSON.parse(await read('.github/auditor/config.yml'));
+            if (!Array.isArray(cfg.roles) || cfg.roles.length !== 5) throw new Error('Expected five task roles');
+            const source = await read('ZADACHI.md');
+            const rows = source.split('\n').filter(x => x.startsWith('|')).map(x => {
+              const c = x.split('|').slice(1, -1).map(s => s.trim());
+              if (c.length !== 8 || !cfg.roles.some(r => r.table_owner === c[3])) return null;
+              const match = c[5].match(/\/pull\/(\d+)/);
+              const branch = c[4].match(/\x60([^\x60]+)\x60/);
+              return {task:c[1],who:c[3],branch:branch ? branch[1] : '',
+                pr:match ? Number(match[1]) : 0,taken:Date.parse(c[6].replace(' ', 'T')+'Z')};
+            }).filter(Boolean);
+            function slot(minute) {
+              const date = new Date(now);
+              date.setUTCMinutes(minute, 0, 0);
+              if (date > now) date.setUTCHours(date.getUTCHours()-1);
+              return date;
+            }
+            const starts = Object.fromEntries(cfg.roles.map(r => [r.name, slot(r.minute_utc)]));
+            const oldTime = Math.min(...Object.values(starts).map(d => d.getTime()));
+            function guard(file) {
+              return [file.filename,file.previous_filename].filter(Boolean).some(p =>
+                cfg.protected_paths.some(pattern => pattern.endsWith('/**')
+                  ? p.startsWith(pattern.slice(0,-2)) : p === pattern) ||
+                (file.status !== 'added' && cfg.protected_existing_roots.some(prefix => p.startsWith(prefix))));
+            }
+            const prs = [];
+            for (let page = 1; page <= 1; page++) {
+              const {data} = await github.rest.pulls.list({
+                owner,repo,state:'all',sort:'updated',direction:'desc',per_page:100,page
+              });
+              prs.push(...data);
+              if (data.length < 100) break;
+            }
+            const recentIssues = [];
+            const issuePage = await github.rest.issues.listForRepo({
+              owner,repo,state:'all',sort:'updated',direction:'desc',per_page:100
+            });
+            recentIssues.push(...issuePage.data.filter(i => !i.pull_request));
+            
+            function owners(pr) {
+              const scores = cfg.roles.map(role => {
+                const mine = rows.filter(row => row.who === role.name &&
+                  (row.pr === pr.number || row.branch === pr.head.ref));
+                const direct = (pr.title + ' ' + (pr.body || '')).includes(role.role_marker) ||
+                  pr.labels.some(label => role.pr_labels.includes(label.name));
+                const takenNow = mine.some(row => row.taken >= starts[role.name].getTime());
+                return {name:role.name,score:direct || takenNow ? 3 : mine.length ? 1 : 0};
+              }).filter(x => x.score > 0);
+              if (!scores.length) return [];
+              const high = Math.max(...scores.map(x => x.score));
+              return scores.filter(x => x.score === high).map(x => x.name);
+            }
+            const cache = new Map();
+            async function inspect(pr) {
+              if (cache.has(pr.number)) return cache.get(pr.number);
+              const data = {commits:[],files:[],checks:[],runs:[],errors:[]};
+              async function collect(name, action) {
+                try { return await action(); }
+                catch(err) { data.errors.push(name + ': ' + clean(err.message)); return []; }
+              }
+              data.commits = await collect('commits', async () => {
+                const x = await github.rest.pulls.listCommits({owner,repo,pull_number:pr.number,per_page:100});
+                return x.data.filter(c => {
+                  const time = Date.parse(c.commit.committer?.date || c.commit.author?.date || '');
+                  return time >= oldTime && time <= now.getTime();
+                });
+              });
+              if (data.commits.length) {
+                data.files = await collect('diff', async () => (await github.rest.pulls.listFiles({
+                  owner,repo,pull_number:pr.number,per_page:100
+                })).data);
+                data.checks = await collect('checks', async () => (await github.rest.checks.listForRef({
+                  owner,repo,ref:pr.head.sha,per_page:100
+                })).data.check_runs || []);
+                data.runs = await collect('actions', async () => {
+                  const x = await github.rest.actions.listWorkflowRunsForRepo({
+                    owner,repo,head_sha:pr.head.sha,per_page:50
+                  });
+                  return (x.data.workflow_runs || []).filter(run => run.head_sha === pr.head.sha);
+                });
+              }
+              cache.set(pr.number,data);
+              return data;
+            }
+            function proof(text) {
+              return /https:\/\/github\.com\/[^\s)]+\/(?:pull|issues|actions\/runs|commit)\/\d+|[a-f0-9]{40}/i.test(text);
+            }
+            const priority = [];
+            const rowsOut = [];
+            const successes = [];
+            for (const role of cfg.roles) {
+              const start = starts[role.name].getTime();
+              const mine = rows.filter(row => row.who === role.name).sort((a,b) => b.taken-a.taken);
+              const current = prs.filter(pr => owners(pr).includes(role.name) &&
+                Date.parse(pr.updated_at) >= start);
+              const relatedIssues = recentIssues.filter(i =>
+                (i.title + ' ' + (i.body || '')).includes(role.role_marker) &&
+                Date.parse(i.updated_at) >= start);
+              const plans = [];
+              for (const row of mine.filter(x => x.taken >= start).slice(0,3)) {
+                plans.push(link(row.task,row.pr ? root+'/pull/'+row.pr : fileUrl('ZADACHI.md')));
+              }
+              for (const pr of current.filter(x => (x.body || '').trim())) {
+                plans.push(link('PR #'+pr.number+' план',pr.html_url));
+              }
+              for (const issue of relatedIssues) plans.push(link('Issue #'+issue.number,issue.html_url));
+              const evidence = [];
+              const problems = [];
+              let improvements = 0;
+              let uncertain = false;
+              for (const pr of current) {
+                const d = await inspect(pr);
+                const commits = d.commits.filter(c =>
+                  Date.parse(c.commit.committer?.date || c.commit.author?.date || '') >= start);
+                if (!commits.length) continue;
+                const ambiguous = owners(pr).length !== 1;
+                const meaningful = commits.some(c => !/^Merge (branch|pull request)/i.test(c.commit.message));
+                if (meaningful && !ambiguous) improvements++;
+                if (ambiguous || d.errors.length) uncertain = true;
+                const guarded = d.files.filter(guard).map(f => clean(f.filename));
+                if (guarded.length) problems.push('защищённые файлы '+guarded.join(', ')+' — '+link('PR #'+pr.number,pr.html_url));
+                const badChecks = d.checks.filter(c => c.conclusion &&
+                  !['success','neutral','skipped'].includes(c.conclusion));
+                const badRuns = d.runs.filter(r => r.conclusion &&
+                  !['success','neutral','skipped'].includes(r.conclusion));
+                const green = d.checks.length > 0 && !badChecks.length && !badRuns.length &&
+                  d.checks.every(c => c.status === 'completed') &&
+                  d.runs.every(r => r.status === 'completed') && !d.errors.length;
+                if (!green) uncertain = true;
+                const latest = commits[commits.length-1];
+                const refs = [link('SHA',root+'/commit/'+latest.sha),
+                  link('PR #'+pr.number+(pr.merged_at ? ' merged' : ' '+pr.state),pr.html_url)];
+                if (d.runs.length) refs.push(link('Actions #'+d.runs[0].id,d.runs[0].html_url));
+                if (badChecks.length) refs.push(link('check '+badChecks[0].name,
+                  badChecks[0].html_url || pr.html_url));
+                const ci = green ? 'CI ✅' : badChecks.length || badRuns.length ? 'CI ❌' : 'CI ⚠️';
+                evidence.push(refs.join(' · ')+' · '+ci+(ambiguous ? ' · авторство не установлено' : '')+
+                  (d.errors.length ? ' · Ошибки API: '+clean(d.errors.join('; ')) : ''));
+                if (green && meaningful && !guarded.length && !ambiguous) successes.push(
+                  clean(role.name)+': '+refs.join(' · '));
+                if (/(готово|исправлено|слито|проверки прошли|checks passed|merged|PASS)/i.test(pr.body || '') &&
+                  !proof(pr.body || '')) problems.push('заявление без SHA/ссылки — '+link('PR #'+pr.number,pr.html_url));
+              }
+              if (improvements > 1) problems.push(improvements+' PR с улучшениями за один цикл — '+
+                link('источник',fileUrl('ZADACHI.md')));
+              const started = mine.some(row => row.taken >= start);
+              if (started && improvements === 0 && !uncertain) problems.push(
+                'нулевое улучшение при записи о начале цикла — '+link('таблица',fileUrl('ZADACHI.md')));
+              const planStatus = plans.length ? '✅' : mine.length ? '⚠️' : '❌';
+              const execStatus = problems.length ? '❌' : improvements === 1 && !uncertain ? '✅' : '⚠️';
+              if (!plans.length) plans.push(link('запись плана не подтверждена',fileUrl('ZADACHI.md')));
+              if (!evidence.length) evidence.push(link('нет подтверждённых коммитов',fileUrl('ZADACHI.md')));
+              rowsOut.push('| '+clean(role.name)+' | '+starts[role.name].toISOString().slice(11,16)+
+                ' UTC | '+planStatus+' '+plans[0]+' | '+execStatus+' '+evidence[0]+' |');
+              for (const item of evidence.slice(1)) rowsOut.push('| | | | ↳ '+item+' |');
+              for (const problem of problems) priority.push('- **'+clean(role.name)+'**: '+problem);
+            }
+            const next = priority.length
+              ? 'Проверить первое нарушение по ссылке, защищённое передать Claude без слияния.'
+              : 'Добавить SHA и Actions run к следующей записи в таблице задач.';
+            const report = [
+              '## 🚨 Нарушения и незавершённое',
+              ...(priority.length ? priority : ['- Доказанных нарушений не обнаружено — '+
+                link('источник',fileUrl('ZADACHI.md'))]),
+              '',
+              '**Один безопасный следующий шаг:** '+next+' '+
+                link('правила',fileUrl('automation/prompts/MG_PYAT_AVTOZADACH.md')),
+              '',
+              'Срез: '+now.toISOString()+' · '+link('Actions run',root+'/actions/runs/'+context.runId),
+              '',
+              '| Роль | Последний запуск | Цикл 1 — план | Цикл 2 — исполнение |',
+              '| --- | --- | --- | --- |',
+              ...rowsOut,
+              '',
+              '<details><summary>Подтверждённые улучшения</summary>',
+              '',
+              ...(successes.length ? successes.map(x => '- '+x) :
+                ['- Подтверждённых зелёных улучшений нет — '+link('Actions',root+'/actions')]),
+              '',
+              '</details>',
+              '',
+              '_⚠️ означает отсутствие достаточных доказательств, а не установленное нарушение._'
+            ].join('\n');
+            await core.summary.addRaw(report).write();
+            if (context.eventName === 'pull_request') {
+              core.info('PR preview: no Issue mutation allowed');
+            } else {
+            const updated = await github.rest.issues.update({
+              owner,repo,issue_number:cfg.issue_number,state:'open',body:report
+            });
+            const audit = updated.data;
+            try {
+              await github.graphql('mutation($id:ID!){pinIssue(input:{issueId:$id}){issue{id}}}',{
+                id:audit.node_id
+              });
+            } catch (err) {
+              core.warning('Issue pin unavailable: '+clean(err.message));
+            }
+            core.info('Audit issue: '+audit.html_url);
+            }

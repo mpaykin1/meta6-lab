@@ -6,6 +6,7 @@
 
 | Пункт | Ветка | Кто | С какого времени (UTC) |
 |---|---|---|---|
+| R13 · games/sumerki-i-pepel-2-copy | `lab/uluchshatel-sumerki-copy-bot13-20261112` | улучшатель | 2026-11-12 07:04 UTC |
 | M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |
 | К7 | lab/kontur-k7-review | свободно (зависло 6 ч, было: ВОЗВРАЩЁН Claude (ложные срабатывания, см. комментарий в PR #193) — попытка 1 из 2) | 2026-11-09 17:50 |
 | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |

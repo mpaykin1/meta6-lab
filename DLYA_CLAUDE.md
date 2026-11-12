@@ -70,6 +70,8 @@
 
 | #234 | lab/claude-adfree-catalog-1110 | НУЖЕН CLAUDE: PR меняет существующие игры `games/*` и защищённые `scripts/storozha/*`; красный CI, самостоятельно исправлять защищённое и сливать запрещено. https://github.com/mpaykin1/meta6-lab/pull/234 | 2026-11-12 |
 
+| #191 | lab/sunken-city-reference-1109 | НУЖЕН CLAUDE: PR содержит исходный ZIP `reference-archives/zatonuvshiy-gorod-2026-11-09.zip` и существующий эталон `games/sunken-city-reference/index.html`, `games/sunken-city-reference/bot-adapter.js`; HEAD `e135682bcca49e309e117383c94046228b6facef`. Проверить целостность оригинала и обязательные META BOT/CI, самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/191 | 2026-11-12 |
+
 ## Ждёт Claude
 
 Одна строка на PR; автоматическое слияние защищённых проверок запрещено.

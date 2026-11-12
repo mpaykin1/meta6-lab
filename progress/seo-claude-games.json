@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "4c7e5d0a9b5a361e593aa3a68ad683990267021a",
+  "last_processed_head": "3dc116663aada43b2e65706b5828811fb01e13fa",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -16,12 +16,14 @@
     },
     "1_fix_bot_and_other_ci": {
       "status": "in_progress",
-      "details": "В #234 восстановлена игра Veil Terraces из main и пять отсутствовавших файлов STOROZHA byte-identical main. Проверки после коммитов ещё должны пройти; quota не ослаблялась.",
+      "details": "На втором мобильном запуске Veil Terraces уровень 6 застревал в 3.1 единицы от цели: стратегия делала обход только при расстоянии >3.2. Теперь обходной ввод выполняется и вблизи; итог нового CI ещё не подтверждён.",
       "evidence": [
         "https://github.com/mpaykin1/meta6-lab/commit/7ee56e90d9da32d806e697c542b705102575b963",
         "https://github.com/mpaykin1/meta6-lab/commit/744e6d7e89c716f2a81cfd184819cee297bd9e26",
         "https://github.com/mpaykin1/meta6-lab/actions/runs/43173775699",
-        "https://github.com/mpaykin1/meta6-lab/commit/b566a431d24819f0f36c0ec51bb9f1a24222cb8d"
+        "https://github.com/mpaykin1/meta6-lab/commit/b566a431d24819f0f36c0ec51bb9f1a24222cb8d",
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43188234313",
+        "https://github.com/mpaykin1/meta6-lab/commit/3dc116663aada43b2e65706b5828811fb01e13fa"
       ]
     },
     "2_canonical_and_publish": {
@@ -73,6 +75,7 @@
     }
   },
   "next_ideas": [
+    "Устранить ложные блокировки движения по прямой у Veil Terraces на реальном мобильном маршруте",
     "Live-проверка HTTP 200 всех 23 опубликованных URL после деплоя main",
     "Убрать зависимость игровых OG-обложек от static.playgama.com после получения подлинных кадров",
     "Проверить и защитить внутренние игровые ссылки лора на версии без рекламы",
@@ -169,6 +172,13 @@
         "b566a431d24819f0f36c0ec51bb9f1a24222cb8d"
       ],
       "next": "Проверить две STOROZHA проверки на текущем SHA PR #234. Не менять ограничения/охраняемые эталоны."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Veil Terraces: физический боковой обход препятствия при застревании работает также вблизи цели (<=3.2), не меняя бот-ядро или проверки.",
+      "commit": "3dc116663aada43b2e65706b5828811fb01e13fa",
+      "next": "Проверить LAB focused META BOT на новом HEAD; если путь по-прежнему непроходим, исправить генератор проходимых точек/стратегию в следующем цикле."
     }
   ]
 }

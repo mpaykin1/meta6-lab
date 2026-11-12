@@ -40,7 +40,11 @@ const mutations = [
   // Deception: special-case the named benchmark game, instead of measuring coordinates.
   ['game-specific-deception', '  let stationaryMs = 0;',
     "  if (segments[0]?.before?.game === 'veil-terraces') return {status: 'MOVED'};\n" +
-    '  let stationaryMs = 0;']
+    '  let stationaryMs = 0;'],
+  ['transient-scroll-ignored', 'sample.sy !== 0 ||', 'false ||'],
+  ['transient-canvas-resize-ignored', 'Math.abs(sample.cw - baseline.cw) > 1 ||', 'false ||'],
+  ['release-only-deception', 'for (const sample of samples) {',
+    'for (const sample of samples.slice(-1)) {']
 ];
 
 try {
@@ -51,7 +55,7 @@ try {
     assert.notEqual(mutant, original, 'Mutation failed: ' + name);
     execute(mutant, name, false);
   }
-  console.log('B2_MUTATIONS_PASS 8 hostile variants including progress/game-specific cheats');
+  console.log('B2_MUTATIONS_PASS 11 hostile variants including transient drift and release-only cheats');
 } finally {
   rmSync(temp, {recursive: true, force: true});
 }

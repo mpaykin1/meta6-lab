@@ -38,6 +38,8 @@ jobs:
             node scripts/archer-proof/archer.mjs
           else
             node scripts/archer-proof/archer.mjs --selftest
+            git fetch --no-tags origin '+refs/heads/lab/archer-retention-exp-1-game:refs/remotes/origin/lab/archer-retention-exp-1-game'
+            ARCHER_CANDIDATE_REF=refs/remotes/origin/lab/archer-retention-exp-1-game node scripts/archer-proof/archer.mjs
           fi
       - uses: actions/upload-artifact@v4
         if: always()

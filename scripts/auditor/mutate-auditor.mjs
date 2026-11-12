@@ -18,8 +18,14 @@ const examplePRs = Array.from({ length: 100 }, (_, i) => ({
   head: { ref: 'lab/unattributed', sha: '0123456789abcdef' }
 }));
 
-async function exercise(script, eventName, pinnedInitially = true, pinAllowed = true, malformedPinQuery = false) {
+async function exercise(script, eventName, pinnedInitially = true, pinAllowed = true, malformedPinQuery = false,
+  approvalRequired = false) {
   let isPinned = pinnedInitially;
+  const pendingSha = 'abcdefabcdefabcdefabcdefabcdefabcdefabcd';
+  const pendingPR = { ...examplePRs[0], number: 242, title: 'MG-строитель-2',
+    updated_at: new Date().toISOString(),
+    head: { ref: 'lab/approval', sha: pendingSha } };
+  const commitDate = new Date(Date.now() - 30000).toISOString();
   const stats = { pulls: 0, issueUpdates: 0, issueCreates: 0, pins: 0, pinChecks: 0, report: '' };
   const github = {
     rest: {
@@ -30,8 +36,22 @@ async function exercise(script, eventName, pinnedInitially = true, pinAllowed = 
         })
       },
       pulls: {
-        list: async () => { stats.pulls++; return { data: examplePRs }; }
+        list: async () => { stats.pulls++; return {
+          data: approvalRequired ? [pendingPR, ...examplePRs.slice(1)] : examplePRs
+        }; },
+        listCommits: async () => ({ data: [{
+          sha: pendingSha, commit: {
+            message: 'feat: real PR work', committer: { date: commitDate }
+          }
+        }] }),
+        listFiles: async () => ({ data: [] })
       },
+      checks: { listForRef: async () => ({ data: { check_runs: [] } }) },
+      actions: { listWorkflowRunsForRepo: async () => ({ data: {
+        workflow_runs: [{ id: 43204251493, head_sha: pendingSha, status: 'completed',
+          conclusion: 'action_required',
+          html_url: 'https://github.com/example/repo/actions/runs/43204251493' }]
+      } }) },
       issues: {
         listForRepo: async () => ({ data: [
           {
@@ -105,6 +125,13 @@ async function exercise(script, eventName, pinnedInitially = true, pinAllowed = 
       'reported pin state does not match GraphQL');
     assert(stats.pinChecks >= 1, 'trusted main must verify pinnedIssues via GraphQL');
   }
+  if (approvalRequired) {
+    const row = stats.report.split('\n').find(line => line.startsWith('| MG-строитель-2 |'));
+    assert(row && row.includes('CI ⚠️ action_required'),
+      'unapproved Actions is waiting for approval, not a failed or green CI run');
+    assert(!row.includes('CI ❌') && !row.includes('CI ✅'),
+      'approval-required run must never be reported as a test outcome');
+  }
   for (const role of config.roles) {
     assert(stats.report.includes(role.name), 'role is absent from run summary: ' + role.name);
     const line = stats.report.split('\n').find(row => row.startsWith('| ' + role.name + ' |'));
@@ -121,7 +148,24 @@ await exercise(original, 'push');
 await exercise(original, 'push', false, true);
 await exercise(original, 'push', false, false);
 await exercise(original, 'push', false, false, true);
+await exercise(original, 'push', true, true, false, true);
 const mutants = [
+  {
+    name: 'approval-as-failure',
+    source: original.replace("'CI ⚠️ action_required'", "'CI ❌'"),
+    event: 'push', approvalRequired: true
+  },
+  {
+    name: 'deception-approval-as-success',
+    source: original.replace("pendingApproval ? 'CI ⚠️ action_required'",
+      "pendingApproval ? 'CI ✅'"),
+    event: 'push', approvalRequired: true
+  },
+  {
+    name: 'approval-silently-unknown',
+    source: original.replace("d.runs.some(r => r.conclusion === 'action_required')", 'false'),
+    event: 'push', approvalRequired: true
+  },
   {
     name: 'excessive-api-pages',
     source: original.replace('page <= 1', 'page <= 15'),
@@ -191,8 +235,9 @@ const mutants = [
 for (const mutant of mutants) {
   assert.notEqual(mutant.source, original, 'mutation not applied: ' + mutant.name);
   await assert.rejects(exercise(mutant.source, mutant.event,
-    mutant.pinnedInitially ?? true, mutant.pinAllowed ?? true, mutant.malformedPinQuery ?? false),
+    mutant.pinnedInitially ?? true, mutant.pinAllowed ?? true, mutant.malformedPinQuery ?? false,
+    mutant.approvalRequired ?? false),
     undefined, 'escaped mutant: ' + mutant.name);
   process.stdout.write('TRAP ' + mutant.name + ' PASS\n');
 }
-process.stdout.write('AUDITOR MUTATIONS PASS: 12/12\n');
+process.stdout.write('AUDITOR MUTATIONS PASS: 15/15\n');

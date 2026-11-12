@@ -174,7 +174,15 @@ async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, game
         }
         assert.deepEqual(errors, [], 'Browser console/page errors');
         assert.equal(status, 'MOVED', 'B2 no proven player movement; status=' + status);
-        console.log('B2_MOTION_PASS ' + gamePath + ' ' + name);
+        const finalState = await read();
+        if (screenshot) {
+          const file = resolve(screenshot.replace(/(\\.[a-z]+)?$/, '-' + name + '.png'));
+          mkdirSync(resolve(file, '..'), {recursive: true});
+          await page.screenshot({path: file, animations: 'disabled', timeout: 15000});
+          console.log('B2 screenshot ' + file);
+        }
+        console.log('B2_MOTION_PASS ' + gamePath + ' ' + name +
+          ' initial=' + JSON.stringify(initial.hero) + ' final=' + JSON.stringify(finalState.hero));
       } catch (error) {
         if (screenshot) {
           const file = resolve(screenshot.replace(/(\.[a-z]+)?$/, '-' + name + '.png'));

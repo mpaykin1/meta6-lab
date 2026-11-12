@@ -51,7 +51,12 @@
 
 - 2026-11-12T07:14:00Z — Veil Terraces, система камеры: исходный Git blob `22f3cd154cd247e3fcc6977c8334e04417a2faf7`, 1/1 автономная камера Chromium PASS: [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270), [зелёный run 43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458), [система и код 7b2f3e0eb3742048d338bd5bba8a568d076e388b](https://github.com/mpaykin1/meta6-lab/commit/7b2f3e0eb3742048d338bd5bba8a568d076e388b), [метаданные ae57880382e7ca2c3f53bc3bbceb2b6964137898](https://github.com/mpaykin1/meta6-lab/commit/ae57880382e7ca2c3f53bc3bbceb2b6964137898). PR quota [красный run 43173380383](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383), LIVE=48, первыми заблокированы #3 #54 #72 #87 #133. Полных эталонов 0 → 0; MCP без подтверждений.
 
+
+- 2026-11-12T08:55:50.645Z — саморазвитие а), проверка ПРОИСХОЖДЕНИЯ: запрещено считать стороннюю лицензию подтверждённой по имени файла или включать непроверенное в каталог. [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261), [проверка 2a8e116cd2aba35eec7727f7cfda4d19e0ef81e2](https://github.com/mpaykin1/meta6-lab/commit/2a8e116cd2aba35eec7727f7cfda4d19e0ef81e2), [3 мутации 3a19f8d7545d694e768723b4bb44cfc7ddaf2702](https://github.com/mpaykin1/meta6-lab/commit/3a19f8d7545d694e768723b4bb44cfc7ddaf2702). CI текущего SHA не подтверждён. Игр-эталонов 0 → 0; load_ok в main 0 → 0; MCP 0 → 0.
+
 ## Урок
+
+- Правило: обнаружение игрового ассета по пути не подтверждает лицензию. Проверяющий должен отклонять допуск стороннего материала без источника и лицензии, даже если текст контракта формально содержит шаг «ПРОИСХОЖДЕНИЕ».
 
 - Латинское название MCP обязано учитываться при проверке нумерованных русских шагов; смешанный алфавит проверять мутациями.
 - Не запрашивать у владельца файл, если он уже существует в открытом PR: сначала проверить исходный Git blob и статус PR. [Король Пепла #207](https://github.com/mpaykin1/meta6-lab/pull/207), [Золотой рыцарь #189](https://github.com/mpaykin1/meta6-lab/pull/189).

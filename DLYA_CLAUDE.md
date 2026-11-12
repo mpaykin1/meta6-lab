@@ -22,7 +22,6 @@
 <!-- STOROZHA:CONFLICTS:BEGIN -->
 | #54 | lab/render-visibility-optimization | docs/progress/PR54_59_60.md | 2026-11-12 |
 | #190 | lab/bot-batch-1 | OSHIBKI.md | 2026-11-12 |
-| #192 | lab/mcp-connect | OSHIBKI.md | 2026-11-12 |
 | #200 | lab/bot-batch-2 | OSHIBKI.md, shared/library/index.json | 2026-11-12 |
 | #203 | lab/skin-rusty-robot | LAB_QUEUE.md, OSHIBKI.md, games/skin-trainer/index.html, rules/01-stil-i-grafika/SKINY.md | 2026-11-12 |
 | #204 | lab/rules-bot-trainer | LAB_QUEUE.md, OSHIBKI.md | 2026-11-12 |

@@ -22,13 +22,17 @@ export function assessMotion(segments) {
       return result('INVALID', {reason: 'invalid input duration'});
     }
     const {before, after} = segment;
+    // Death may remove the hero entity in the same frame. Preserve the last
+    // trustworthy position rather than reporting INVALID and hiding the death.
+    if (before?.alive === false || after?.alive === false) {
+      const lastHero = coordinates(after) ?? coordinates(before);
+      const level = Number.isInteger(after?.level) ? after.level : before?.level;
+      return result('DEAD', {hero: lastHero, level});
+    }
     const from = coordinates(before);
     const to = coordinates(after);
     if (!from || !to || !Number.isInteger(before.level) || !Number.isInteger(after.level)) {
       return result('INVALID', {reason: 'missing trustworthy hero coordinates or level'});
-    }
-    if (before.alive === false || after.alive === false) {
-      return result('DEAD', {hero: to, level: after.level});
     }
     if (before.level !== after.level) {
       return result('LEVEL_CHANGED', {reason: 'level transition is not proof of movement'});

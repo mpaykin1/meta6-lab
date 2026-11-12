@@ -14,7 +14,7 @@ function option(key) {
   return args[index + 1];
 }
 
-function fixtures(assessMotion, assessFixedViewport) {
+function fixtures(assessMotion, assessFixedViewport, assessB2Probe) {
   const state = (x, y, extra = {}) => ({
     hero: {x, y}, level: 0, alive: true, progress: 0, game: 'veil-terraces', ...extra
   });
@@ -31,6 +31,14 @@ function fixtures(assessMotion, assessFixedViewport) {
   const lateStall = Array.from({length: 4}, () =>
     interval(state(0.5, 0), state(0.5, 0)));
   assert.equal(assessMotion([firstMove, ...lateStall]).status, 'STUCK');
+  assert.equal(assessB2Probe([firstMove]).status, 'OBSERVING');
+  assert.equal(assessB2Probe([firstMove, ...lateStall.slice(0, 3)]).status, 'OBSERVING');
+  assert.equal(assessB2Probe([firstMove, ...lateStall]).status, 'STUCK');
+  const subsequentMovement = Array.from({length: 4}, (_, i) =>
+    interval(state(0.5 + i * 0.2, 0), state(0.7 + i * 0.2, 0)));
+  assert.equal(assessB2Probe([firstMove, ...subsequentMovement]).status, 'MOVED');
+  const idleAfterMove = interval(state(0.5, 0), state(0.5, 0), 2200, false);
+  assert.equal(assessB2Probe([firstMove, idleAfterMove]).status, 'OBSERVING');
   assert.equal(assessMotion([...still.slice(0, 2), firstMove]).status, 'MOVED');
   assert.equal(assessMotion(jitter).status, 'STUCK');
   assert.equal(assessMotion(falseProgress).status, 'STUCK');
@@ -57,7 +65,7 @@ function fixtures(assessMotion, assessFixedViewport) {
   console.log('B2_VERIFIER_PASS: motion, transient FIX drift and deceptive state controls');
 }
 
-async function verifyGame(assessMotion, assessFixedViewport, gamePath, screenshot) {
+async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, gamePath, screenshot) {
   assert.match(gamePath, /^games\/[a-z0-9-]+$/, 'Unsafe game path');
   const gameDir = resolve(root, gamePath);
   assert.ok(existsSync(join(gameDir, 'index.html')), 'Game entry point missing');
@@ -120,7 +128,10 @@ async function verifyGame(assessMotion, assessFixedViewport, gamePath, screensho
           durationMs: Math.max(1, Date.now() - idleSince), input: false
         }];
         let status = 'NO_MOVEMENT';
-        for (const [dx, dy] of directions) {
+        // Do not stop at the first MOVED: 2s of subsequent held input is needed
+        // to reveal a hero that moves once and then becomes stuck.
+        for (let probe = 0; probe < directions.length * 3; probe++) {
+          const [dx, dy] = directions[probe % directions.length];
           const before = await read();
           const since = Date.now();
           // Sample while the finger/key is held: a page can scroll and spring back by release.
@@ -144,8 +155,9 @@ async function verifyGame(assessMotion, assessFixedViewport, gamePath, screensho
           const durationMs = Math.max(1, Date.now() - since);
           const after = await read();
           segments.push({before, after, durationMs, input: true});
-          status = assessMotion(segments).status;
-          if (status !== 'NO_MOVEMENT') break;
+          status = assessB2Probe(segments).status;
+          if (status === 'MOVED' || status === 'STUCK' || status === 'DEAD' ||
+              status === 'INVALID' || status === 'LEVEL_CHANGED') break;
         }
         assert.deepEqual(errors, [], 'Browser console/page errors');
         assert.equal(status, 'MOVED', 'B2 no proven player movement; status=' + status);
@@ -170,11 +182,11 @@ async function verifyGame(assessMotion, assessFixedViewport, gamePath, screensho
 
 const moduleFile = option('--module');
 const source = moduleFile ? pathToFileURL(resolve(moduleFile)).href : './motion-check.mjs';
-const {assessMotion, assessFixedViewport} = await import(source);
+const {assessMotion, assessFixedViewport, assessB2Probe} = await import(source);
 const game = option('--game');
 try {
-  if (game) await verifyGame(assessMotion, assessFixedViewport, game, option('--screenshot'));
-  else fixtures(assessMotion, assessFixedViewport);
+  if (game) await verifyGame(assessMotion, assessFixedViewport, assessB2Probe, game, option('--screenshot'));
+  else fixtures(assessMotion, assessFixedViewport, assessB2Probe);
 } catch (error) {
   console.error(error.stack || error.message);
   process.exitCode = 1;

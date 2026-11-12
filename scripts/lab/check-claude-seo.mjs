@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const base = 'https://mpaykin1.github.io/meta6-lab/claude-games/';
+const base = JSON.parse(fs.readFileSync('claude-games/seo-config.json', 'utf8')).baseUrl;
 const root = path.resolve('claude-games');
 const meta = (html, name) => {
   const re = new RegExp('<meta\\b[^>]*\\b(?:name|property)="' + name + '"[^>]*>', 'gi');
@@ -48,6 +48,11 @@ export function inspect(html, page) {
   }
   if (/rel="preconnect"\s+href="https:\/\/static\.playgama\.com"/i.test(html)) {
     errors.push(page + ': Playgama preconnect is forbidden');
+  }
+  // Game links must not silently leave the ad-free catalogue for an ad-supported host.
+  const compact = html.replace(/[\r\n\t]/g, '');
+  if (/playgama\.ai\/play\//i.test(compact)) {
+    errors.push(page + ': external Playgama game link is forbidden in ad-free catalogue');
   }
   return errors;
 }

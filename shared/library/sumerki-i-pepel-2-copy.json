@@ -441,7 +441,7 @@
   ],
   "solutions": [
     {
-      "id": "9785b0625845f72cd0b1a32b",
+      "id": "00acb4e35395d5802e1f8b31",
       "game": "sumerki-i-pepel-2-copy",
       "kind": "solution",
       "name": "state",
@@ -451,12 +451,12 @@
       "source_path": "games/sumerki-i-pepel-2-copy/bot-observer.js",
       "lines": [
         5,
-        52
+        59
       ],
-      "sha256": "7081eceac42b08e674e12c80f274dbad0bbe4d57b52b1c1d89ddc071c452bf1f"
+      "sha256": "3e00a10ff55484a01e7a0b2bda14722bc4579425c05c739e15d0bc32435262e0"
     },
     {
-      "id": "9f5b209ae1eb32bf65a4b3be",
+      "id": "cec98ec2a34648d60fa218b1",
       "game": "sumerki-i-pepel-2-copy",
       "kind": "solution",
       "name": "module:bot-observer.js",
@@ -466,9 +466,9 @@
       "source_path": "games/sumerki-i-pepel-2-copy/bot-observer.js",
       "lines": [
         1,
-        64
+        71
       ],
-      "sha256": "fb64be5f203574d3761c5940ab23c1e403ba310916b48967d600d4f01eeedfec"
+      "sha256": "1c0809aebd26b86649d0acc95dbd6b9d579eadec4ee6f95b7583b781096d7c98"
     },
     {
       "id": "00ad141e453cd08bb2dd2753",

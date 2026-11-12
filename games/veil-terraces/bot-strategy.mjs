@@ -35,11 +35,11 @@ export async function playLevel(ctx, level) {
         improvingAt = Date.now();
       }
       if (Date.now() - improvingAt > 4200) {
-        if (distance > 3.2) {
-          const side = detours++ % 2 ? -1 : 1;
-          await ctx.joystick(side, 0, 250);
-          if (ctx.state().level !== level) return;
-        }
+        // Even within 3.2 units, a ridge can block the direct approach.
+        // Alternate real sideways inputs to regain the traversable corridor.
+        const side = detours++ % 2 ? -1 : 1;
+        await ctx.joystick(side, 0, 420);
+        if (ctx.state().level !== level) return;
         await ctx.jump();
         if (ctx.state().level !== level) return;
         improvingAt = Date.now();

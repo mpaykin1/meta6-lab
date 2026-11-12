@@ -148,3 +148,16 @@ for (const mutant of twoHourMutants) {
   process.stdout.write('TRAP '+mutant.name+' PASS\n');
 }
 process.stdout.write('AUDITOR TWO-HOUR MUTATIONS PASS: 3/3\n');
+
+
+// Trap: never label calculated UTC windows as actual task launches.
+const headerMutant = original.replace('Начало окна проверки (UTC)', 'Последний запуск');
+assert.notEqual(headerMutant, original, 'mutation not applied: launch-vs-window');
+const correct = await exercise(original, 'push');
+assert(correct.report.includes('| Роль | Начало окна проверки (UTC) |'),
+  'auditor must describe calculated time windows accurately');
+await assert.rejects(async () => {
+  const falseHeader = await exercise(headerMutant, 'push');
+  assert(falseHeader.report.includes('| Роль | Начало окна проверки (UTC) |'));
+}, undefined, 'escaped mutant: launch-vs-window');
+process.stdout.write('TRAP launch-vs-window PASS\n');

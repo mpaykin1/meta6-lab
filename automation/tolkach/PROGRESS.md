@@ -183,3 +183,86 @@
 ### PR #259 — завершён, 2026-11-12T10:23:27.303Z
 - Исходный HEAD [`b5001dc09a4a5624d3ad0ab3f005a33d101df60c`](https://github.com/mpaykin1/meta6-lab/commit/b5001dc09a4a5624d3ad0ab3f005a33d101df60c). [B1 43037647548](https://github.com/mpaykin1/meta6-lab/actions/runs/43037647548) после точечного retry success, остальные workflow (KONTUR [43037648249](https://github.com/mpaykin1/meta6-lab/actions/runs/43037648249), META GAMES guard [43037647621](https://github.com/mpaykin1/meta6-lab/actions/runs/43037647621), quota [43037648001](https://github.com/mpaykin1/meta6-lab/actions/runs/43037648001)) success на том же HEAD; `mergeable_state=clean`, затронуты лишь `automation/prompts/PROHODCHIK.md` и `scripts/prohodchik/mutate-prompt.mjs`, защищённые пути не менялись.
 - GitHub подтвердил `merged=true`: [squash SHA `24d0a9e8151cde7c3242275159c301a10d189311`](https://github.com/mpaykin1/meta6-lab/commit/24d0a9e8151cde7c3242275159c301a10d189311); [комментарий с фактами](https://github.com/mpaykin1/meta6-lab/issues/259#issuecomment-6821009430). Счёт за этот запуск: слито 1, закрыто 0, конфликт разрешён 1 (#72), передано Claude 1 (#193); новые проверки на #72 ещё идут.
+
+### PR #237 — действие (а), 2026-11-12T10:28:07.073Z
+- [Захват ZADACHI](https://github.com/mpaykin1/meta6-lab/commit/41cdd2595bec699d6b92aa81418c048351ab6987) до правок. Исходный HEAD [`3932fa1eb9a3c6b4ca10e906b78a099eabe9c29a`](https://github.com/mpaykin1/meta6-lab/commit/3932fa1eb9a3c6b4ca10e906b78a099eabe9c29a) от 2026-11-11T12:14:20Z, ветка старше 60 мин. Совмещены `SMENA.md` и `automation/chat/PROGRESS_SOZDANIE.md` с новым main `41cdd2595bec699d6b92aa81418c048351ab6987`, сохранён целиком архив PR и свежая история main. Двухродительский [merge-коммит `4f07f43cd8b6d4a5ebba9d3466aa3098aee8833c`](https://github.com/mpaykin1/meta6-lab/commit/4f07f43cd8b6d4a5ebba9d3466aa3098aee8833c). Проверено: один заголовок `## Архив очереди из PR #237` в новой ветке. Protected/game paths не затронуты.
+- [PR #237](https://github.com/mpaykin1/meta6-lab/pull/237) `mergeable=true`, но [B1 43200582002](https://github.com/mpaykin1/meta6-lab/actions/runs/43200582002), [KONTUR 43200581892](https://github.com/mpaykin1/meta6-lab/actions/runs/43200581892) и [report guard 43200582231](https://github.com/mpaykin1/meta6-lab/actions/runs/43200582231) на этом HEAD queued; не считать зелёным или слитым. Следующий шаг: проверить все проверки на текущем SHA, при полном PASS и clean — squash merge.
+
+### PR #72 — CI PASS, merge race, 2026-11-12T10:32:03.892Z
+- На HEAD [`c6fa9564677704778f1b2ccc4d9b9bad0d786cb8`](https://github.com/mpaykin1/meta6-lab/commit/c6fa9564677704778f1b2ccc4d9b9bad0d786cb8) завершились success все шесть проверок: [B1](https://github.com/mpaykin1/meta6-lab/actions/runs/43199453784), [KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/43199453699), [META GAMES guard](https://github.com/mpaykin1/meta6-lab/actions/runs/43199453627), [library](https://github.com/mpaykin1/meta6-lab/actions/runs/43199454118), [originals](https://github.com/mpaykin1/meta6-lab/actions/runs/43199453677), [quota](https://github.com/mpaykin1/meta6-lab/actions/runs/43199453832). Перед командой слияния GitHub показывал `mergeable_state=clean`.
+- Попытка squash merge с `expected_head_sha=c6fa9564677704778f1b2ccc4d9b9bad0d786cb8` отклонена HTTP 405 `Base branch was modified. Review and try the merge again.`; **слияние не подтверждено**, новый main требует синхронизации и повторного CI на новом SHA. Не переписывать историю и не считать старые зелёные прогоны достаточными для новой базы.
+- Урок: при активных параллельных агентах даже clean+success не гарантирует атомарного merge; проверять точный main перед повторной попыткой и не расходовать повтор на устаревшие данные.
+
+## Круг 2026-11-12 — продолжение 2026-11-12T14:27:21.960Z
+- Актуальная очередь (снимок [ZADACHI.md](https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md), blob `f05b2c108d8e5e377bcd66b2c7a03b42b7d038c3`): 54 открытых уникальных PR из 🛑/⚠/💤, отсортировано по последнему коммиту **из сторожа**. Перед любой записью в PR сверять фактический HEAD, реальную дату и новых исполнителей; старый снимок не является захватом. МГ — только чтение.
+- Счёт 🛑 по сторожу: 36 строк в первом снимке запуска → 44 строк в этом снимке; изменения от параллельного сторожа/агентов не приписывать толкачу.
+
+### Очередь МГЛ, один PR на номер
+1. [#193](https://github.com/mpaykin1/meta6-lab/pull/193) · 2026-11-09 15:37 UTC · строк 1
+2. [#201](https://github.com/mpaykin1/meta6-lab/pull/201) · 2026-11-09 15:53 UTC · строк 3
+3. [#205](https://github.com/mpaykin1/meta6-lab/pull/205) · 2026-11-09 17:01 UTC · строк 4
+4. [#192](https://github.com/mpaykin1/meta6-lab/pull/192) · 2026-11-09 22:26 UTC · строк 1
+5. [#204](https://github.com/mpaykin1/meta6-lab/pull/204) · 2026-11-10 02:51 UTC · строк 2
+6. [#208](https://github.com/mpaykin1/meta6-lab/pull/208) · 2026-11-10 04:35 UTC · строк 1
+7. [#54](https://github.com/mpaykin1/meta6-lab/pull/54) · 2026-11-10 06:21 UTC · строк 3
+8. [#3](https://github.com/mpaykin1/meta6-lab/pull/3) · 2026-11-10 06:25 UTC · строк 2
+9. [#220](https://github.com/mpaykin1/meta6-lab/pull/220) · 2026-11-10 06:26 UTC · строк 1
+10. [#210](https://github.com/mpaykin1/meta6-lab/pull/210) · 2026-11-10 06:36 UTC · строк 2
+11. [#207](https://github.com/mpaykin1/meta6-lab/pull/207) · 2026-11-10 06:54 UTC · строк 2
+12. [#189](https://github.com/mpaykin1/meta6-lab/pull/189) · 2026-11-10 06:56 UTC · строк 4
+13. [#202](https://github.com/mpaykin1/meta6-lab/pull/202) · 2026-11-10 06:57 UTC · строк 2
+14. [#133](https://github.com/mpaykin1/meta6-lab/pull/133) · 2026-11-10 07:09 UTC · строк 4
+15. [#134](https://github.com/mpaykin1/meta6-lab/pull/134) · 2026-11-10 07:14 UTC · строк 2
+16. [#221](https://github.com/mpaykin1/meta6-lab/pull/221) · 2026-11-10 08:48 UTC · строк 1
+17. [#209](https://github.com/mpaykin1/meta6-lab/pull/209) · 2026-11-10 08:49 UTC · строк 2
+18. [#222](https://github.com/mpaykin1/meta6-lab/pull/222) · 2026-11-10 08:53 UTC · строк 2
+19. [#200](https://github.com/mpaykin1/meta6-lab/pull/200) · 2026-11-10 09:15 UTC · строк 3
+20. [#191](https://github.com/mpaykin1/meta6-lab/pull/191) · 2026-11-10 10:27 UTC · строк 1
+21. [#190](https://github.com/mpaykin1/meta6-lab/pull/190) · 2026-11-10 14:49 UTC · строк 4
+22. [#225](https://github.com/mpaykin1/meta6-lab/pull/225) · 2026-11-11 06:34 UTC · строк 1
+23. [#235](https://github.com/mpaykin1/meta6-lab/pull/235) · 2026-11-11 06:39 UTC · строк 1
+24. [#219](https://github.com/mpaykin1/meta6-lab/pull/219) · 2026-11-11 06:41 UTC · строк 1
+25. [#87](https://github.com/mpaykin1/meta6-lab/pull/87) · 2026-11-11 06:54 UTC · строк 3
+26. [#239](https://github.com/mpaykin1/meta6-lab/pull/239) · 2026-11-11 06:58 UTC · строк 1
+27. [#233](https://github.com/mpaykin1/meta6-lab/pull/233) · 2026-11-11 07:03 UTC · строк 1
+28. [#203](https://github.com/mpaykin1/meta6-lab/pull/203) · 2026-11-11 07:10 UTC · строк 6
+29. [#245](https://github.com/mpaykin1/meta6-lab/pull/245) · 2026-11-11 12:14 UTC · строк 1
+30. [#252](https://github.com/mpaykin1/meta6-lab/pull/252) · 2026-11-11 12:51 UTC · строк 1
+31. [#248](https://github.com/mpaykin1/meta6-lab/pull/248) · 2026-11-11 13:50 UTC · строк 1
+32. [#255](https://github.com/mpaykin1/meta6-lab/pull/255) · 2026-11-11 13:58 UTC · строк 1
+33. [#241](https://github.com/mpaykin1/meta6-lab/pull/241) · 2026-11-11 16:08 UTC · строк 1
+34. [#247](https://github.com/mpaykin1/meta6-lab/pull/247) · 2026-11-11 16:13 UTC · строк 1
+35. [#267](https://github.com/mpaykin1/meta6-lab/pull/267) · 2026-11-11 16:24 UTC · строк 1
+36. [#268](https://github.com/mpaykin1/meta6-lab/pull/268) · 2026-11-11 16:45 UTC · строк 1
+37. [#269](https://github.com/mpaykin1/meta6-lab/pull/269) · 2026-11-12 07:03 UTC · строк 1
+38. [#270](https://github.com/mpaykin1/meta6-lab/pull/270) · 2026-11-12 07:15 UTC · строк 1
+39. [#262](https://github.com/mpaykin1/meta6-lab/pull/262) · 2026-11-12 07:18 UTC · строк 1
+40. [#273](https://github.com/mpaykin1/meta6-lab/pull/273) · 2026-11-12 08:54 UTC · строк 1
+41. [#272](https://github.com/mpaykin1/meta6-lab/pull/272) · 2026-11-12 08:55 UTC · строк 1
+42. [#218](https://github.com/mpaykin1/meta6-lab/pull/218) · 2026-11-12 10:19 UTC · строк 3
+43. [#72](https://github.com/mpaykin1/meta6-lab/pull/72) · 2026-11-12 10:20 UTC · строк 1
+44. [#275](https://github.com/mpaykin1/meta6-lab/pull/275) · 2026-11-12 10:20 UTC · строк 1
+45. [#264](https://github.com/mpaykin1/meta6-lab/pull/264) · 2026-11-12 10:23 UTC · строк 1
+46. [#237](https://github.com/mpaykin1/meta6-lab/pull/237) · 2026-11-12 10:27 UTC · строк 1
+47. [#242](https://github.com/mpaykin1/meta6-lab/pull/242) · 2026-11-12 10:51 UTC · строк 2
+48. [#234](https://github.com/mpaykin1/meta6-lab/pull/234) · 2026-11-12 14:24 UTC · строк 8
+49. [#278](https://github.com/mpaykin1/meta6-lab/pull/278) · 2026-11-12 14:24 UTC · строк 1
+50. [#254](https://github.com/mpaykin1/meta6-lab/pull/254) · 2026-11-12 14:25 UTC · строк 1
+51. [#258](https://github.com/mpaykin1/meta6-lab/pull/258) · 2026-11-12 14:25 UTC · строк 2
+52. [#260](https://github.com/mpaykin1/meta6-lab/pull/260) · 2026-11-12 14:25 UTC · строк 1
+53. [#261](https://github.com/mpaykin1/meta6-lab/pull/261) · 2026-11-12 14:25 UTC · строк 1
+54. [#277](https://github.com/mpaykin1/meta6-lab/pull/277) · 2026-11-12 14:25 UTC · строк 1
+
+### PR #208 — эскалация защищённого оригинала, 2026-11-12T14:27:21.960Z
+- Исходный HEAD [`ad81a3d4196a19e81a50a60a3dd4faaef904ced6`](https://github.com/mpaykin1/meta6-lab/commit/ad81a3d4196a19e81a50a60a3dd4faaef904ced6), старше 60 минут; [захват](https://github.com/mpaykin1/meta6-lab/commit/f66be4ce2354f7f8271f283b1e60789571b71cb5).
+- [KONTUR FAIL 42799091174](https://github.com/mpaykin1/meta6-lab/actions/runs/42799091174/job/129771791545): авторский `reference/ashen-path-asset-pack/index.html:70` содержит исходный `LEGACY_LIGHTS`, запрещённый К4.1. Авторский blob `a5911f6d0a0e36fc4fc0ad581be071dfb6d7882c`, в main этой reference-папки нет. Изменение оригинала либо protected guard без Claude запрещено; **PR не исправлен, не зелёный и не слит**.
+- [Одна строка «Ждёт Claude»](https://github.com/mpaykin1/meta6-lab/commit/5095441ef37a50e36f71c7c669be1b393346d11a) фиксирует точный blocker, не утверждая PASS.
+
+### Саморазвитие (в) — отдельный PR #278, 2026-11-12T14:27:21.960Z
+- [PR #278](https://github.com/mpaykin1/meta6-lab/pull/278), HEAD [`353d0492e31f9fd306a2771b1633521fab449b1d`](https://github.com/mpaykin1/meta6-lab/commit/353d0492e31f9fd306a2771b1633521fab449b1d): добавлен обязательный preflight branch/main SHA и безопасное слияние main при каждом часовом запуске; `force` и ослабление CI запрещены. Подготовка — [захват](https://github.com/mpaykin1/meta6-lab/commit/f66be4ce2354f7f8271f283b1e60789571b71cb5). **Не считать зелёным/слитым до всех проверок**; проверка PR quota может блокировать из-за большого числа открытых PR.
+- Текущий итог: слито 0, закрыто 0, исправлено чужих PR 0, передано Claude 1 (#208), отдельное безопасное улучшение в PR 1 (#278).
+- Урок: source-exact эталон может содержать запрещённое слово `LEGACY_LIGHTS`; ни подмена авторских байтов, ни отключение охранника недопустимы. В следующий раз до начала исправления читать лог конкретного упавшего job, сверять происхождение оригинала и сразу разграничивать безопасную правку и защищённое исключение.
+
+### PR #278 — обязательный CI пока красный, 2026-11-12T14:30:54.659Z
+- HEAD [`353d0492e31f9fd306a2771b1633521fab449b1d`](https://github.com/mpaykin1/meta6-lab/commit/353d0492e31f9fd306a2771b1633521fab449b1d). [KONTUR 43236947738](https://github.com/mpaykin1/meta6-lab/actions/runs/43236947738), [META GAMES guard 43236947632](https://github.com/mpaykin1/meta6-lab/actions/runs/43236947632), [library guard 43236947719](https://github.com/mpaykin1/meta6-lab/actions/runs/43236947719), [protected originals 43236947883](https://github.com/mpaykin1/meta6-lab/actions/runs/43236947883) — success. [B1 43236947763](https://github.com/mpaykin1/meta6-lab/actions/runs/43236947763) in_progress на момент проверки. [STOROZHA PR quota 43236948035](https://github.com/mpaykin1/meta6-lab/actions/runs/43236948035/job/131246726299) — failure: LIVE=51, требуется сначала завершить #3, #54, #72, #87, #133; это квота, **не дефект промпта**. [Комментарий PR](https://github.com/mpaykin1/meta6-lab/issues/278#issuecomment-6826415516). Слияние запрещено. Не обходить quota и не менять защищённый скрипт.
+- Урок: при глобальной PR-квоте отдельное самоулучшение получает красный CI независимо от содержимого; следующий цикл сначала разгружает старую очередь или передаёт защищённые PR Claude, не «лечит» quota отключением guard. Улучшение в PR, **но ещё не принято в main**.

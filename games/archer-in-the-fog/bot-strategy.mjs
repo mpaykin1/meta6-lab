@@ -28,7 +28,13 @@ export async function playLevel(ctx, level) {
     const [x, y] = aimPoints[index % aimPoints.length];
     await ctx.hold(width * x, height * y, 1100);
     // Real side-step, never a direct game-state write.
-    await ctx.key(index % 2 ? 'KeyA' : 'KeyD', 420);
+    if (ctx.mobile) {
+      const fromX = width * 0.12;
+      const toX = fromX + (index % 2 ? -width * 0.10 : width * 0.10);
+      await ctx.swipe(fromX, height * 0.87, toX, height * 0.87, 500);
+    } else {
+      await ctx.key(index % 2 ? 'KeyA' : 'KeyD', 420);
+    }
     index++;
   }
 }

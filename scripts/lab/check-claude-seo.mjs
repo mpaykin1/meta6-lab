@@ -78,8 +78,21 @@ export function inspect(html, page) {
   for (const img of html.matchAll(/<img\b[^>]*>/gi)) {
     if (!/\balt="[^"]+"/i.test(img[0])) errors.push(page + ': image missing nonempty alt');
   }
-  if (/rel="preconnect"\s+href="https:\/\/static\.playgama\.com"/i.test(html)) {
-    errors.push(page + ': Playgama preconnect is forbidden');
+  // Validate link attributes regardless of order, quoting style or rel token order.
+  for (const [tag] of html.matchAll(/<link\b[^>]*>/gi)) {
+    const rel = tag.match(/\brel\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
+    const href = tag.match(/\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
+    const relValue = (rel?.[1] ?? rel?.[2] ?? rel?.[3] ?? '').toLowerCase();
+    if (!relValue.split(/\s+/).includes('preconnect')) continue;
+    const target = href?.[1] ?? href?.[2] ?? href?.[3];
+    if (!target) continue;
+    try {
+      if (new URL(target, expected).hostname === 'static.playgama.com') {
+        errors.push(page + ': Playgama preconnect is forbidden');
+      }
+    } catch {
+      errors.push(page + ': invalid preconnect URL');
+    }
   }
   // Catch broken links to pages and files within the catalogue before publishing.
   const site = new URL(base);

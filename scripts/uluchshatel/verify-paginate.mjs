@@ -1,11 +1,11 @@
 // Regression for the real 12 Nov incident: PR #234 was beyond a manually selected shortlist.
 import assert from 'node:assert/strict';
 import { blockersFor } from './claim.mjs';
-import { allPages } from './paginate.mjs';
+import { allPages, allChangedPaths } from './paginate.mjs';
 
 const BASE = '/repos/mpaykin1/meta6-lab';
 
-export async function verifyPagination(paginate = allPages) {
+export async function verifyPagination(paginate = allPages, expand = allChangedPaths) {
   const firstHundred = Array.from({ length: 100 }, (_, index) => ({
     number: index + 1,
     html_url: 'https://github.com/mpaykin1/meta6-lab/pull/' + (index + 1),
@@ -27,7 +27,8 @@ export async function verifyPagination(paginate = allPages) {
     }
     if (path.includes('/pulls/234/files')) {
       return page === 1 ? otherFiles :
-        page === 2 ? [{ filename: 'games/broken-city-copy/index.html' }] : [];
+        page === 2 ? [{ filename: 'docs/seo-renamed.html', status: 'renamed',
+          previous_filename: 'games/broken-city-copy/index.html' }] : [];
     }
     if (path.includes('/pulls/') && path.includes('/files')) return [];
     throw new Error('unexpected fixture request: ' + path);
@@ -41,9 +42,9 @@ export async function verifyPagination(paginate = allPages) {
     url: pr.html_url,
     branch: pr.head.ref,
     repo: pr.head.repo.full_name,
-    files: (await paginate(BASE + '/pulls/' + pr.number + '/files', api)).map(f => f.filename)
+    files: expand(await paginate(BASE + '/pulls/' + pr.number + '/files', api))
   })));
-  assert.equal(checked.at(-1).files.length, 101, 'last changed-file page must be included');
+  assert.equal(checked.at(-1).files.length, 102, 'last page and renamed source path must be included');
   const blockers = blockersFor({
     game: 'games/broken-city-copy',
     branch: 'lab/uluchshatel-broken-copy',
@@ -54,6 +55,13 @@ export async function verifyPagination(paginate = allPages) {
   });
   assert.equal(blockers.length, 1, 'PR #234 must block the game');
   assert.match(blockers[0], /#234/);
+
+  assert.ok(checked.at(-1).files.includes('games/broken-city-copy/index.html'),
+    'renamed source game must be checked even when destination is not a game');
+  assert.throws(() => expand([{ filename: 'docs/renamed.html', status: 'renamed' }]),
+    /previous_filename/, 'rename without original path must fail closed');
+  assert.throws(() => expand([{ status: 'added' }]), /filename/,
+    'malformed file without a path must fail closed');
 
   await assert.rejects(
     () => paginate(BASE + '/pulls?state=open', async () => ({ truncated: true })),

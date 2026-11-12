@@ -58,6 +58,8 @@ export async function verifyPagination(paginate = allPages, expand = allChangedP
 
   assert.ok(checked.at(-1).files.includes('games/broken-city-copy/index.html'),
     'renamed source game must be checked even when destination is not a game');
+  assert.ok(checked.at(-1).files.includes('docs/seo-renamed.html'),
+    'destination path must remain authentic, not be replaced by a hardcoded game');
   assert.throws(() => expand([{ filename: 'docs/renamed.html', status: 'renamed' }]),
     /previous_filename/, 'rename without original path must fail closed');
   assert.throws(() => expand([{ status: 'added' }]), /filename/,

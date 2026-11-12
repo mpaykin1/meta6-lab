@@ -28,7 +28,7 @@ export function verifyRecipe(recipe) {
     /FPS p95/,
     /без самостоятельного merge/,
     /`G\.warden\.segs\[0\]`/,
-    /`world\.ring`/,
+    /после победы над стражем — `world\.ring`/,
     /подмены `world\.ring` на `world\.beacon`/,
     /не отмечать правило «сделано»/
   ];

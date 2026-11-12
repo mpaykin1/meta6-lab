@@ -129,6 +129,98 @@ async function threatProof(page) {
   return { state: !!hook?.danger, redPixels, visual: redPixels >= 48 };
 }
 
+
+async function motionProof(page, viewport) {
+  // No direct writes to game state: real keyboard input or Chromium touchscreen events.
+  const readArcher = () => page.evaluate(() => {
+    const archer = window.__A?.archer;
+    return archer ? {
+      x: archer.root.position.x,
+      legs: archer.legs.map(leg => leg.rotation.x)
+    } : null;
+  });
+  const initial = await readArcher();
+  if (!initial) throw new Error('Archer model missing during motion proof');
+  const beforePixels = PNG.sync.read(await page.screenshot({ animations: 'disabled' }));
+  let cdp;
+  if (viewport === 'desktop') await page.keyboard.down('d');
+  else {
+    cdp = await page.context().newCDPSession(page);
+    await cdp.send('Input.dispatchTouchEvent', {
+      type: 'touchStart', touchPoints: [{ id: 1, x: 45, y: 730 }]
+    });
+  }
+  let maxLegDifference = 0;
+  let final = initial;
+  try {
+    for (let step = 0; step < 12; step++) {
+      if (cdp) await cdp.send('Input.dispatchTouchEvent', {
+        type: 'touchMove',
+        touchPoints: [{ id: 1, x: Math.min(125, 45 + (step + 1) * 13), y: 730 }]
+      });
+      await page.waitForTimeout(115);
+      final = await readArcher();
+      maxLegDifference = Math.max(
+        maxLegDifference, Math.abs(final.legs[0] - final.legs[1])
+      );
+    }
+  } finally {
+    if (cdp) {
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      await cdp.detach();
+    } else await page.keyboard.up('d');
+  }
+  const afterPixels = PNG.sync.read(await page.screenshot({ animations: 'disabled' }));
+  let changedPixels = 0;
+  for (let index = 0; index < beforePixels.data.length; index += 64) {
+    const delta = Math.abs(beforePixels.data[index] - afterPixels.data[index])
+      + Math.abs(beforePixels.data[index + 1] - afterPixels.data[index + 1])
+      + Math.abs(beforePixels.data[index + 2] - afterPixels.data[index + 2]);
+    if (delta > 75) changedPixels++;
+  }
+  await page.waitForTimeout(300);
+  const stopped = await page.evaluate(() => !window.__A?.G?.holding);
+  return {
+    displacement: +(final.x - initial.x).toFixed(2),
+    maxLegDifference: +maxLegDifference.toFixed(2),
+    changedPixels,
+    moved: final.x - initial.x > 1.5,
+    animated: maxLegDifference > 1.05,
+    visible: changedPixels > 200,
+    released: stopped
+  };
+}
+
+function buildMotionMutant(kind) {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'archer-motion-mutant-'));
+  const gameDir = path.join(temp, 'games/archer-in-the-fog');
+  fs.mkdirSync(path.dirname(gameDir), { recursive: true });
+  fs.cpSync(path.join(root, 'games/archer-in-the-fog'), gameDir, { recursive: true });
+  const bundle = path.join(gameDir, 'assets/index-xsRfS2lk.js');
+  let text = fs.readFileSync(bundle, 'utf8');
+  const mutations = {
+    position: [
+      'position.x = Math.max(cur.stand.x - 6, Math.min(cur.stand.x + 6, previousX + RUN.velocity * dt));',
+      'position.x = previousX;'
+    ],
+    animation: [
+      'archer.legs[0].rotation.x += step * 0.75;',
+      'archer.legs[0].rotation.x += 0;'
+    ]
+  };
+  const [before, after] = mutations[kind];
+  if (!text.includes(before)) throw new Error('Motion mutation anchor missing: ' + kind);
+  text = text.replace(before, after);
+  if (kind === 'animation') {
+    text = text.replace(
+      'archer.legs[1].rotation.x -= step * 0.75;',
+      'archer.legs[1].rotation.x -= 0;'
+    );
+  }
+  fs.writeFileSync(bundle, text);
+  return temp;
+}
+
 async function fpsSample(page) {
   return page.evaluate(async () => {
     const frames = [];
@@ -180,16 +272,35 @@ try {
     const after = await inspect(a.page);
     const beforeFps = await fpsSample(b.page);
     const afterFps = await fpsSample(a.page);
+    const beforeMotion = await motionProof(b.page, viewport);
+    const afterMotion = await motionProof(a.page, viewport);
     const beforeThreat = await threatProof(b.page);
     const afterThreat = await threatProof(a.page);
     const passed = !before.state && !before.visual && after.state && after.visual
       && !beforeThreat.state && !beforeThreat.visual && afterThreat.state && afterThreat.visual
+      && !beforeMotion.moved && !beforeMotion.animated
+      && afterMotion.moved && afterMotion.animated && afterMotion.visible && afterMotion.released
       && beforeFps <= afterFps && b.errors.length === 0 && a.errors.length === 0;
-    console.log(JSON.stringify({ viewport, before, after, beforeThreat, afterThreat, beforeFps, afterFps,
+    console.log(JSON.stringify({ viewport, before, after, beforeMotion, afterMotion, beforeThreat, afterThreat, beforeFps, afterFps,
       errorsBefore: b.errors, errorsAfter: a.errors, passed }));
     success &&= passed;
     await b.context.close();
     await a.context.close();
+  }
+  if (!selftest) for (const kind of ['position', 'animation']) {
+    const mutantRoot = buildMotionMutant(kind);
+    const mutantServer = await serve(mutantRoot);
+    try {
+      const { page, context, errors } = await openGame(browser, mutantServer.url, 'mutant-' + kind, 'desktop');
+      const proof = await motionProof(page, 'desktop');
+      const caught = kind === 'position' ? !proof.moved : !proof.animated;
+      console.log(JSON.stringify({ mutation: kind, caught, proof, errors }));
+      success &&= caught;
+      await context.close();
+    } finally {
+      mutantServer.close();
+      fs.rmSync(mutantRoot, { recursive: true, force: true });
+    }
   }
 } finally {
   if (older) older.close();

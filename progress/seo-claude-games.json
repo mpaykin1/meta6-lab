@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "2752f4d774e19ee7d206df2841a4c751905e2730",
+  "last_processed_head": "c7759957139724fae3d7d9a090bec4fe6317bef6",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -61,6 +61,7 @@
     }
   },
   "next_ideas": [
+    "Убрать зависимость игровых OG-обложек от static.playgama.com после получения подлинных кадров",
     "Проверить и защитить внутренние игровые ссылки лора на версии без рекламы",
     "Получить для каждой из 17 игр реальные 2–3 скриншота WebP из игрового рендера и безопасно заменить внешние обложки",
     "Сравнить близкие Twilight и Broken City страницы, проставить canonical на основную версию там, где контент действительно дублируется",
@@ -83,10 +84,15 @@
   "cycle_updates": [
     {
       "date": "2026-11-12",
-      "status": "in_progress",
+      "status": "implemented_pending_ci",
       "change": "Лор: 10 ссылок на версии без рекламы; 4 игры без таких версий обозначены явно, без ложной кнопки 'Играть'.",
       "commit": "2752f4d774e19ee7d206df2841a4c751905e2730",
-      "next": "Проверка запрета Playgama-ссылок в каталоге и мутация-ловушка; затем CI."
+      "next": "Проверить зелёную SEO CI на новом HEAD; исправить остальные красные и опубликовать после полного CI.",
+      "evidence": [
+        "https://github.com/mpaykin1/meta6-lab/commit/2752f4d774e19ee7d206df2841a4c751905e2730",
+        "https://github.com/mpaykin1/meta6-lab/commit/25187756780ea96d59b64c4fee40ce324e63e556",
+        "https://github.com/mpaykin1/meta6-lab/commit/c7759957139724fae3d7d9a090bec4fe6317bef6"
+      ]
     }
   ]
 }

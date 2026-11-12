@@ -108,13 +108,19 @@
   });
   Object.defineProperty(window, '__metaBot', { value: botReadOnly, writable: false, configurable: false });
 
+  let lastActive = null;
+  let lastDanger = null;
+  let lastMenu = null;
   function tick() {
     const g = state();
     const active = combatActive(g);
-    target.hidden = !active;
-    target.classList.toggle('danger', active && attackNear(g));
-    menuButton.hidden = !g || g.mode !== 'play';
-    if (!g || g.mode !== 'play') {
+    const danger = active && attackNear(g);
+    const inGame = !!g && g.mode === 'play';
+    // Avoid redundant DOM writes and layout invalidations every animation frame.
+    if (active !== lastActive) { target.hidden = !active; lastActive = active; }
+    if (danger !== lastDanger) { target.classList.toggle('danger', danger); lastDanger = danger; }
+    if (inGame !== lastMenu) { menuButton.hidden = !inGame; lastMenu = inGame; }
+    if (!inGame) {
       panel.hidden = true;
       announced = false;
     }

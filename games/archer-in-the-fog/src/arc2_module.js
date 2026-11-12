@@ -182,7 +182,7 @@ const ARC2 = (() => {
   let perf = { f: [], act: 0, start: performance.now() };
   let lastHoldClock = performance.now();
   function countsHoldTime(task, phase, paused, pgPaused, hidden, dead) {
-    const combat = ['fight', 'windup', 'dive', 'tail', 'plunge', 'ambush', 'stagger'];
+    const combat = ['fight', 'spin', 'windup', 'dive', 'tail', 'plunge', 'ambush', 'stagger'];
     return task === 'hold' && combat.includes(phase) && !paused && !pgPaused && !hidden && !dead;
   }
   function tick(raw, t, e) {

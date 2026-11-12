@@ -31,13 +31,15 @@ export async function playLevel(ctx, level) {
     // Hold challenge increments its own time counter; sparks must be earned.
     // During the fire challenge, shooting the dragon cannot clear the task.
     // Wait for an actual visible projectile instead of wasting shots.
-    const point = s.task === 'fire'
+    const intercept = s.task === 'fire' ||
+      (s.task === 'sparks' && s.taskCol === 'precision');
+    const point = intercept
       ? (s.fireballScreen?.visible ? s.fireballScreen : null)
       : s.aimScreen;
     if (point?.visible) {
       // A 110 ms press can be missed at mobile CI frame rates below 5 FPS.\n      // Use a 320 ms real pointer press, then reacquire the moving projectile.
       // Keep the original hold for the slower dragon target.
-      await ctx.hold(point.x, point.y, s.task === 'fire' ? 320 : 550);
+      await ctx.hold(point.x, point.y, intercept ? 320 : 550);
     } else {
       await ctx.wait(160);
     }

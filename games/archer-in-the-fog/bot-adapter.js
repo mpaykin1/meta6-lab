@@ -62,7 +62,7 @@
       const anticipated = target.clone().addScaledVector(dragon.vel, travel);
       const aimScreen = project(anticipated);
       let fireballScreen = null;
-      if (g.task === 'fire') {
+      if (g.task === 'fire' || (g.task === 'sparks' && g.taskCol === 'precision')) {
         // Incoming projectiles can be unordered. Prioritize the nearest
         // visible threat instead of whichever projectile was spawned first.
         let nearestDistance = Infinity;
@@ -97,6 +97,7 @@
         hp: Math.max(0, Number(g.lives) || 0) / 3,
         cameraYaw: Math.atan2(g.camDir.x, g.camDir.z),
         task: g.task,
+        taskCol: g.taskCol,
         phase: g.phase,
         aimScreen,
         fireballScreen,

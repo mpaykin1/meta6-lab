@@ -53,3 +53,26 @@ export function assessMotion(segments) {
     ? result('NO_MOVEMENT', {stationaryMs})
     : result('NO_INPUT', {reason: 'no physical input was sent'});
 }
+
+
+// FIX must stay stable for the entire gesture, not merely at release.
+export function assessFixedViewport(samples) {
+  if (!Array.isArray(samples) || samples.length < 2) {
+    return result('INVALID', {reason: 'viewport trace must contain a baseline and in-flight samples'});
+  }
+  const keys = ['sx', 'sy', 'st', 'cx', 'cy', 'cw', 'ch'];
+  const baseline = samples[0];
+  for (const sample of samples) {
+    if (!sample || keys.some(key => !Number.isFinite(sample[key]))) {
+      return result('INVALID', {reason: 'missing viewport coordinates'});
+    }
+    if (sample.sx !== 0 || sample.sy !== 0 || sample.st !== 0 ||
+      Math.abs(sample.cx - baseline.cx) > 1 ||
+      Math.abs(sample.cy - baseline.cy) > 1 ||
+      Math.abs(sample.cw - baseline.cw) > 1 ||
+      Math.abs(sample.ch - baseline.ch) > 1) {
+      return result('FIX_MOVED', {baseline, observed: sample});
+    }
+  }
+  return result('FIXED', {samples: samples.length});
+}

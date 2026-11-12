@@ -242,7 +242,10 @@ jobs:
                 '{pinnedIssues(first:3){nodes{issue{number}}}}}';
               const pinned = async () => {
                 const response = await github.graphql(query,{owner,repo});
-                const nodes = response.repository?.pinnedIssues?.nodes || [];
+                const nodes = response?.repository?.pinnedIssues?.nodes;
+                if (!Array.isArray(nodes)) {
+                  throw new Error('Missing pinnedIssues nodes in GraphQL response');
+                }
                 return nodes.some(n => n.issue?.number === cfg.issue_number);
               };
               let pinStatus = '⚠️ не подтверждено (ошибка GraphQL)';

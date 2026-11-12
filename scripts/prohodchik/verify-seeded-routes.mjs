@@ -14,7 +14,8 @@ const c = seededRouteVariants(81);
 assert.deepEqual(a, b, 'the same seed must reproduce the same physical movements');
 assert.notDeepEqual(a, c, 'different seeds must explore different movement paths');
 assert.equal(a.length, 3);
-assert.equal(new Set(a.map(path => JSON.stringify(path))).size, 3, 'three distinct routes');
+assert.equal(new Set(a.map(path => JSON.stringify(path.map(({dx, dy}) => [dx, dy])))).size, 3,
+  'three distinct physical directions, not merely different timings');
 for (const plan of a) {
   assert.equal(plan.length, 5);
   for (const step of plan) {

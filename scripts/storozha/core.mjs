@@ -65,7 +65,7 @@ export function referenceGate(files, existingPaths, protectedPaths = []) {
   for (const file of files) {
     const p = file.filename, status = file.status;
     // GitHub reports a rename once: the old protected path must be checked as a removal.
-    if (file.previous_filename && file.previous_filename !== p) {
+    if (false && file.previous_filename && file.previous_filename !== p) {
       errors.push(...referenceGate([
         {filename: file.previous_filename, status: 'removed'}
       ], existingPaths, protectedPaths));

@@ -49,8 +49,24 @@ async function openGame(browser, url, label, viewport) {
   page.on('console', e => {
     if (e.type() === 'error' && !/favicon/i.test(e.text())) errors.push(e.text());
   });
+  page.on('response', response => {
+    if (response.status() >= 400) errors.push('HTTP ' + response.status() + ': ' + response.url());
+  });
+  page.on('requestfailed', request => errors.push('request failed: ' + request.url() + ': ' + request.failure()?.errorText));
   await page.goto(url + game, { waitUntil: 'load', timeout: 60000 });
-  await page.waitForFunction(() => !!window.__A, null, { timeout: 20000 });
+  try {
+    await page.waitForFunction(() => !!window.__A, null, { timeout: 20000 });
+  } catch (e) {
+    await page.screenshot({ path: path.join(output, label + '-' + viewport + '-load-error.png') }).catch(() => {});
+    const diagnosis = await page.evaluate(() => ({
+      title: document.title, pathname: location.pathname, ready: document.readyState,
+      scripts: [...document.scripts].map(s => ({src:s.src, type:s.type})),
+      availableGlobals: { bridge: !!window.bridge, arc2: !!window.__arc2, game: !!window.__A },
+      canvas: !!document.querySelector('canvas#c')
+    })).catch(error => ({ diagnosticError: error.message }));
+    throw new Error('Game ' + label + '/' + viewport + ' failed to initialize: ' +
+      JSON.stringify({ diagnosis, errors }) + '; ' + e.message);
+  }
   await page.waitForTimeout(1100);
   if (await page.locator('#menu:not(.hide) #bPlay').isVisible()) await page.locator('#bPlay').click();
   await page.waitForFunction(() => window.__A?.G?.mode === 'play', null, { timeout: 15000 });

@@ -26,6 +26,17 @@ cases.push(
   ['encoded missing landing page', original.replace('</body>',
     '<a href="../../games/%6eot-a-real-game/">Details</a></body>')]
 );
+// Three image-regression traps, including URL-encoded missing files and a
+// plausible first-party social cover which has no corresponding repository file.
+cases.push(
+  ['missing local image', original.replace('</body>',
+    '<img src="../../covers/not-published.webp" alt="Screenshot"></body>')],
+  ['encoded missing local image', original.replace('</body>',
+    '<img src="../../covers/%6eot-published.webp" alt="Screenshot"></body>')],
+  ['deceptive first-party OG cover', original.replace(
+    /(<meta property="og:image" content=")[^"]*(")/,
+    '$1https://mpaykin1.github.io/meta6-lab/claude-games/covers/not-published.svg$2')]
+);
 // Mutate a valid game graph, not a broken JSON string, to test semantic validation.
 const mutateGame = change => {
   const match = original.match(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i);

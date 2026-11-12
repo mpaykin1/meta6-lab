@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T07:09:08.670Z",
+  "generated_at": "2026-11-12T07:10:41.039Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -281,7 +281,7 @@
     },
     {
       "id": 16,
-      "task": "ТОЛКАЧ: прекратить дубли задач по PR в правилах автозадач — ТОЛКАЧ 12.11: [повторён B1](https://github.com/mpaykin1/meta6-lab/actions/runs/43036418329), CI ещё идёт",
+      "task": "ТОЛКАЧ: прекратить дубли задач по PR в правилах автозадач — ТОЛКАЧ 12.11: [слито, SHA 79f4465](https://github.com/mpaykin1/meta6-lab/commit/79f4465b6667092e16115222325c012ca73cc137), [B1 PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43036418329)",
       "project": "МГЛ",
       "owner": "толкач",
       "branch": "lab/tolkach-dedup-20261111",

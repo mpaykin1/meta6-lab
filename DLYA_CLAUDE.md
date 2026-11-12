@@ -77,9 +77,11 @@
 ## Ждёт Claude — библиотека
 
 - [PR #209](https://github.com/mpaykin1/meta6-lab/pull/209) — извлечение игровых систем: 0 подтверждённых load_ok; [провал 1](https://github.com/mpaykin1/meta6-lab/actions/runs/42761353151), [провал 2](https://github.com/mpaykin1/meta6-lab/actions/runs/42764324099). Не сливать до независимого Chromium и исправления зависимостей.
-- [PR #218](https://github.com/mpaykin1/meta6-lab/pull/218) — исключение копий из живого индекса уже реализуется там; изменение защищённого workflow и конфликт с main требуют решения Claude, отдельный дубль не создавать.
+- [PR #218](https://github.com/mpaykin1/meta6-lab/pull/218) — исключение копий и `skin-trainer`: [SHA 0002c862425113c177c6faf2fe6184c0cc7cf754](https://github.com/mpaykin1/meta6-lab/commit/0002c862425113c177c6faf2fe6184c0cc7cf754) добавил 3 ловушки и сохранение учебного манифеста; [Library Machine 43198957093](https://github.com/mpaykin1/meta6-lab/actions/runs/43198957093) запущен, зелёный результат и пересобранный индекс пока не подтверждены. Защищённый workflow и конфликт с main — нужен Claude, новый PR не открывать.
 
 - [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) — Veil Terraces, камера 1/1: [Chromium PASS 43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458), [STOROZHA PR quota FAIL 43173380383](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383) (LIVE=48, сначала #3/#54/#72/#87/#133). **НУЖЕН CLAUDE:** расчистить старые PR по правилам, не обходить quota; затем финальный зелёный SHA и merge, MCP отдельно.
+
+- [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261) — многоразовый контракт, PROGRESS и ловушки: [изменение 1dade8002cb4b37e5d373552ea8e0d027131744d](https://github.com/mpaykin1/meta6-lab/commit/1dade8002cb4b37e5d373552ea8e0d027131744d) записало текущий цикл; финальный зелёный run отсутствует, merge не выполнять до проверок Claude.
 
 ## Ждёт владельца — библиотека
 

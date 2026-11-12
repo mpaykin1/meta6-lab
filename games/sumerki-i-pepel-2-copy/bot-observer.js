@@ -18,7 +18,14 @@
         target = coin;
       }
     }
-    if (!target) target = world.beacon;
+    // Follow the game's own nearestGoal() progression: coins -> live guardian -> victory ring.
+    if (G.all || G.collected >= G.total) {
+      const guardian = G.warden;
+      target = guardian && guardian.hp > 0 && guardian.state !== 'dissolve'
+        ? guardian.segs?.[0] : world.ring;
+    } else if (!target) {
+      throw new Error('META BOT: missing collectible before the collection stage is complete');
+    }
     if (!target || ![target.x, target.y, target.z].every(Number.isFinite)) {
       throw new Error('META BOT: no valid live goal');
     }

@@ -16,7 +16,7 @@
     },
     "1_fix_bot_and_other_ci": {
       "status": "in_progress",
-      "details": "На втором мобильном запуске Veil Terraces уровень 6 застревал в 3.1 единицы от цели: стратегия делала обход только при расстоянии >3.2. Теперь обходной ввод выполняется и вблизи; итог нового CI ещё не подтверждён.",
+      "details": "На втором мобильном запуске Veil Terraces уровень 6 застревал в 3.1 единицы от цели: стратегия делала обход только при расстоянии >3.2. Теперь обходной ввод выполняется и вблизи; итог нового CI ещё не подтверждён. В базовом PR #234 дополнительно: Кнопка музыки перекрывала меню: скрыта на игровом экране и сдвинута в паузе; Clean screen стал 0 видимых текстов (Actions 43199889622), но меню оставалось скрытым. Теперь меню показывается независимо от состояния HUD и скрывается лишь на титульном экране. Ожидается новый browser-check. Генератор библиотеки в Actions автоматически обновил оба машинных индекса вслед за изменением кнопок, см. коммит 4661d37; старые action_required на ботовом push не считать зелёным.",
       "evidence": [
         "https://github.com/mpaykin1/meta6-lab/commit/7ee56e90d9da32d806e697c542b705102575b963",
         "https://github.com/mpaykin1/meta6-lab/commit/744e6d7e89c716f2a81cfd184819cee297bd9e26",
@@ -84,7 +84,12 @@
     "Сравнить близкие Twilight и Broken City страницы, проставить canonical на основную версию там, где контент действительно дублируется",
     "Добавить workflow проверку фактических HTTP 200 для всех 23 публичных страниц после merge в main",
     "Сверить релизный sitemap lastmod с git log и IndexNow HTTP 200/202",
-    "Сделать отдельные подборки для телефонов и атмосферных игр без повторного контента"
+    "Сделать отдельные подборки для телефонов и атмосферных игр без повторного контента",
+    "Восстановить META BOT для изменённых игр PR #234 и пройти все уровни на мобильном и ПК",
+    "Уникальные описания 150–300 слов для каждого игрового URL",
+    "Проверка title/description/JSON-LD и внутренних ссылок в CI",
+    "Копии webp из собственных игровых кадров",
+    "IndexNow после деплоя без секретов"
   ],
   "notes": [
     "Не менять защищённые файлы, эталоны, бота и охранников в обход правил",
@@ -95,7 +100,14 @@
   ],
   "evidence": [
     "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
-    "https://github.com/mpaykin1/meta6-lab/commit/b3182119ff6dc16274afb8d47e7aa6a17f449f59"
+    "https://github.com/mpaykin1/meta6-lab/commit/b3182119ff6dc16274afb8d47e7aa6a17f449f59",
+    "https://github.com/mpaykin1/meta6-lab/actions/runs/43188137217",
+    "https://github.com/mpaykin1/meta6-lab/commit/e166826c94121f782ec919c7fd84b26898dbbe1b",
+    "https://github.com/mpaykin1/meta6-lab/actions/runs/43198753200",
+    "https://github.com/mpaykin1/meta6-lab/commit/25f2aa86844654c0924809643b4e044e648c95a4",
+    "https://github.com/mpaykin1/meta6-lab/actions/runs/43199889622",
+    "https://github.com/mpaykin1/meta6-lab/commit/edd4a58940f904e384dfddf2bfa1d972963c2877",
+    "https://github.com/mpaykin1/meta6-lab/commit/4661d37c04824efe021e38004ade720da32b098b"
   ],
   "last_completed_seo_content_commit": "33f9708e63230a397ad8158f62b2b584d8e27bbd",
   "cycle_updates": [
@@ -191,6 +203,41 @@
         "0d072f861146693806571306e9e861becdf356b4"
       ],
       "next": "Проверить SEO Catalog Validator на новом SHA; убедиться, что новые мутации отсекают внешние префетчи, затем перейти к публикации только после полного CI."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Пауза в ashen-sumerek: реальное состояние HUD управляет видимостью иконки меню, чтобы кнопка не оставалась скрытой в браузере.",
+      "commit": "e166826c94121f782ec919c7fd84b26898dbbe1b",
+      "next": "Проверить browser-check на актуальном SHA и повторить поиск недоступных кнопок."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Ashen Sumerek: убрано перекрытие кнопки меню кнопкой музыки (♫) на игровом экране; управление музыкой перенесено в паузу посредством CSS без изменения shared scripts.",
+      "commit": "25f2aa86844654c0924809643b4e044e648c95a4",
+      "next": "Проверить game-browser-check и Library Machine после CSS-only исправления на последнем коммите."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Меню Ashen включается по реальному игровому экрану: штатно видно, скрыто только на титульной сцене; исключена зависимость от `#hud` и ошибки CSS-перекрытия.",
+      "commit": "edd4a58940f904e384dfddf2bfa1d972963c2877",
+      "next": "Проверить реальный click menu в browser-check после обновления."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Автоматический генератор библиотеки синхронизировал shared/library/index.json и reference-ashen-sumerek.json с текущей игрой.",
+      "commit": "4661d37c04824efe021e38004ade720da32b098b",
+      "next": "Повторно проверить реальные CI с пользовательского коммита, не считать action_required зелёным."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "merge_base_sync_pending_ci",
+      "change": "SEO-ветка синхронизирована с PR #234 без потери SEO и рабочих правок; GitHub CI следует проверить на новом commit.",
+      "base": "faa13c76da87875fdcc8dc8b8a6baf8774799c52"
     }
-  ]
+  ],
+  "base_sync_sha": "faa13c76da87875fdcc8dc8b8a6baf8774799c52"
 }

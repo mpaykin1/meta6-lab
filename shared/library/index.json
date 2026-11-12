@@ -44293,7 +44293,7 @@
         "style"
       ],
       "source_path": "ashen-sumerek/index.html",
-      "sha256": "bec407aff4ae0234edc3e115aecab90ae62b4095d7793dd7e1900713fce03d57",
+      "sha256": "fd7e058a2377929fd0b8ab9c8f95af1f66f9a7f00ad13041b2e0faeac535a03f",
       "lines": [
         9144,
         9160
@@ -44372,6 +44372,21 @@
       "lines": [
         6780,
         6780
+      ]
+    },
+    {
+      "id": "381037f060af674d7596866b",
+      "game": "reference-ashen-sumerek",
+      "kind": "inline-svg",
+      "name": "svg@598109",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "ashen-sumerek/index.html",
+      "sha256": "514d1163febc6d7bae95fa785c7a83c62f7fbdd619a223af2ed7dd6bd1a30369",
+      "lines": [
+        9161,
+        9161
       ]
     },
     {
@@ -44582,21 +44597,6 @@
       "lines": [
         6000,
         6010
-      ]
-    },
-    {
-      "id": "bc286e2bc051ac9cc12fffc5",
-      "game": "reference-ashen-sumerek",
-      "kind": "inline-svg",
-      "name": "svg@597906",
-      "purpose": [
-        "svg"
-      ],
-      "source_path": "ashen-sumerek/index.html",
-      "sha256": "514d1163febc6d7bae95fa785c7a83c62f7fbdd619a223af2ed7dd6bd1a30369",
-      "lines": [
-        9161,
-        9161
       ]
     },
     {
@@ -59318,21 +59318,6 @@
       ]
     },
     {
-      "id": "05d22afc3b488c333cc29abf",
-      "game": "reference-ashen-sumerek",
-      "kind": "solution",
-      "name": "inline-script@598077",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "ashen-sumerek/index.html",
-      "sha256": "bff56e5229f91580d9e677c35a9b6e16244711694f784cc078c0073ae0bb9094",
-      "lines": [
-        9162,
-        9198
-      ]
-    },
-    {
       "id": "06013617fd0b029084b1b54c",
       "game": "reference-ashen-sumerek",
       "kind": "solution",
@@ -64525,6 +64510,21 @@
       "lines": [
         1136,
         1136
+      ]
+    },
+    {
+      "id": "cfac65fbab89f8a4e9a951ee",
+      "game": "reference-ashen-sumerek",
+      "kind": "solution",
+      "name": "inline-script@598280",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "ashen-sumerek/index.html",
+      "sha256": "bff56e5229f91580d9e677c35a9b6e16244711694f784cc078c0073ae0bb9094",
+      "lines": [
+        9162,
+        9198
       ]
     },
     {
@@ -155885,7 +155885,7 @@
         "game-module"
       ],
       "source_path": "games/veil-terraces/bot-strategy.mjs",
-      "sha256": "8c678d49d807533067517eff55f364f11afd6e8b52d283e50bba4a1cb22989e9",
+      "sha256": "69909563872f468cd1b831ce68f88599cd9021ba49a40ee9582eab61bce728ad",
       "lines": [
         1,
         65
@@ -155900,7 +155900,7 @@
         "level-generation"
       ],
       "source_path": "games/veil-terraces/bot-strategy.mjs",
-      "sha256": "30560b3837b1afe45f01e7d1f4ec2e59d9665a2cd5cd9e1c2335884d86c0a617",
+      "sha256": "87d80932d7f80365dea4dbed117386dadfdaa32cb88f163840a9fc0476581b89",
       "lines": [
         10,
         65

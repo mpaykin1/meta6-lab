@@ -1,0 +1,104 @@
+name: Link Guard 200
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_run:
+    workflows: ['LAB Pages']
+    types: [completed]
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/link-guard.yml'
+      - '.github/workflows/lab-pages.yml'
+      - 'scripts/lab/**'
+      - 'LINKS.txt'
+concurrency:
+  group: link-guard-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: read
+  actions: write
+jobs:
+  self-check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify real 200 and reject 3 mutations
+        run: bash scripts/lab/mutate-link-ok.sh
+      - name: Prove published living-watercolor HTTP 200
+        run: |
+          bash scripts/lab/link-ok.sh \
+            https://mpaykin1.github.io/meta6-lab/demos/living-watercolor/
+
+  check:
+    if: github.event_name != 'pull_request' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Collect source and deployed URL registries
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://mpaykin1.github.io/meta6-lab'
+          {
+            cat LINKS.txt
+            curl -fsSL --max-time 20 "$base/LINKS.txt?rev=${GITHUB_SHA}" || true
+            echo "$base/LINKS.txt"
+          } | grep -E '^https://mpaykin1[.]github[.]io/meta6-lab/' |
+            LC_ALL=C sort -u > /tmp/link-guard-urls.txt
+          test -s /tmp/link-guard-urls.txt
+      - name: Check all registered URLs
+        id: links
+        continue-on-error: true
+        shell: bash
+        run: |
+          mapfile -t urls < /tmp/link-guard-urls.txt
+          bash scripts/lab/link-ok.sh "${urls[@]}"
+      - name: Republish on 404
+        id: retry
+        if: steps.links.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if gh api --method POST "repos/$GITHUB_REPOSITORY/actions/workflows/lab-pages.yml/dispatches" -f ref=main; then
+              exit 0
+            fi
+            [[ "$attempt" -eq 3 ]] || sleep "$((attempt * 20))"
+          done
+          exit 1
+      - name: Check again after republishing
+        id: recheck
+        if: steps.links.outcome == 'failure' && steps.retry.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          mapfile -t urls < /tmp/link-guard-urls.txt
+          bash scripts/lab/link-ok.sh "${urls[@]}"
+      - name: Diagnose URLs still failing
+        if: steps.links.outcome == 'failure' && (steps.retry.outcome == 'failure' || steps.recheck.outcome == 'failure')
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://mpaykin1.github.io/meta6-lab/'
+          while IFS= read -r url; do
+            [[ "$url" == "$base"* ]] || continue
+            path="${url#"$base"}"
+            path="${path%%\?*}"
+            [[ "$path" == preview/* ]] && {
+              echo "::warning::Preview branch publication to inspect: $url"
+              continue
+            }
+            if [[ -f "$path/index.html" || -f "$path" ]]; then
+              echo "::error::Source exists but published path may be stale: $url (inspect build-site.sh and deploy)"
+            else
+              echo "::error::Source missing or wrong path in main: $url"
+            fi
+          done < /tmp/link-guard-urls.txt
+          exit 1

@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "c428658122f53e6f8c2a6e593619feab5edd22df",
+  "last_processed_head": "e166826c94121f782ec919c7fd84b26898dbbe1b",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -15,7 +15,8 @@
       ]
     },
     "1_fix_bot_and_other_ci": {
-      "status": "pending"
+      "status": "in_progress",
+      "details": "В ashen-sumerek кнопка паузы больше не полагается только на CSS :has: при снятии hidden с игрового HUD видимость кнопки синхронизирует MutationObserver. Браузерный CI на новом коммите ожидает проверки; остальные красные проверки не объявлены исправленными."
     },
     "2_canonical_and_publish": {
       "status": "pending"
@@ -31,6 +32,7 @@
     }
   },
   "next_ideas": [
+    "Восстановить META BOT для изменённых игр PR #234 и пройти все уровни на мобильном и ПК",
     "Уникальные описания 150–300 слов для каждого игрового URL",
     "Проверка title/description/JSON-LD и внутренних ссылок в CI",
     "Копии webp из собственных игровых кадров",
@@ -41,5 +43,17 @@
     "Без зелёного CI не сливать PR",
     "Только подтверждённые live URL"
   ],
-  "evidence": []
+  "evidence": [
+    "https://github.com/mpaykin1/meta6-lab/actions/runs/43188137217",
+    "https://github.com/mpaykin1/meta6-lab/commit/e166826c94121f782ec919c7fd84b26898dbbe1b"
+  ],
+  "cycle_updates": [
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Пауза в ashen-sumerek: реальное состояние HUD управляет видимостью иконки меню, чтобы кнопка не оставалась скрытой в браузере.",
+      "commit": "e166826c94121f782ec919c7fd84b26898dbbe1b",
+      "next": "Проверить browser-check на актуальном SHA и повторить поиск недоступных кнопок."
+    }
+  ]
 }

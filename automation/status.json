@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-12T07:02:47.057Z",
+  "generated_at": "2026-11-12T08:51:54.346Z",
   "sha": {
-    "lab": "fd2a5d9d0f9d0b9a9e4983d67d6b1c7de53a2aaa",
+    "lab": "62377781025c127863c73de1e10e3c946b3d82d7",
     "mg": "573ec644a032aa3cbf999193c09fa2176ce69a7a"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43186337136",
   "review": {
     "protected": [
       {
@@ -124,7 +124,18 @@
         ]
       }
     ],
-    "redLab": [],
+    "redLab": [
+      {
+        "workflow": "META BOT",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43182878550",
+        "step": "Play all games"
+      },
+      {
+        "workflow": "MG Dispatcher",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43174592471",
+        "step": "Run node scripts/dispetcher/run.mjs"
+      }
+    ],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -133,9 +144,9 @@
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
       "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | open | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
-      "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
+      "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open dirty | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
       "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
-      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
+      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open dirty | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
       "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
@@ -294,9 +305,24 @@
   "pr": {
     "open": 53,
     "conflicts": "нет данных",
-    "merged": 19,
-    "closed": 49,
+    "merged": 22,
+    "closed": 50,
     "mergedItems": [
+      {
+        "number": 257,
+        "title": "docs(zadachi): не создавать дубли задач по одному PR",
+        "sha": "79f4465b6667092e16115222325c012ca73cc137"
+      },
+      {
+        "number": 256,
+        "title": "docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ",
+        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec"
+      },
+      {
+        "number": 243,
+        "title": "Геймдизайн-аудит META GAMES — чистый PR без защищённой истор",
+        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81"
+      },
       {
         "number": 246,
         "title": "ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож",
@@ -510,7 +536,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1239,
+      "count": 1282,
       "folders": "нет данных"
     },
     "mg": {
@@ -521,57 +547,57 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "нет данных",
+      "bot": "не прошла",
       "storefront": "да"
     }
   ],

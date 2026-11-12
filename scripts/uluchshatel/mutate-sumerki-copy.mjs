@@ -3,12 +3,14 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { verifyObserver } from './verify-sumerki-copy.mjs';
+import { verifyFiles, verifyObserver } from './verify-sumerki-copy.mjs';
 
 const source = readFileSync(
   fileURLToPath(new URL('../../games/sumerki-i-pepel-2-copy/bot-observer.js', import.meta.url)),
   'utf8'
 );
+
+verifyFiles();
 
 const cases = [
   [

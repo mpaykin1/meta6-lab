@@ -16,7 +16,7 @@ const cases = [
   ['protocol relative Playgama link', original.replace('</body>',
     '<a href="//playgama.ai/play/fake">Играть</a></body>')],
   ['deceptive line wrapped ad link', original.replace('</body>',
-    '<a href="https://playgama.ai/\\nplay/fake">Играть</a></body>')]
+    '<a href="https://playgama.ai/\nplay/fake">Играть</a></body>')]
 ];
 for (const [name, html] of cases) {
   if (!inspect(html, page).length) throw Error('Mutation escaped SEO validator: ' + name);

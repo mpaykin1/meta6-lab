@@ -16,37 +16,37 @@
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->
-| #3 | lab/twilight-island-bot | LAB_QUEUE.md | 2026-11-11 |
-| #54 | lab/render-visibility-optimization | docs/progress/PR54_59_60.md | 2026-11-11 |
-| #72 | lab/immersive-dishonored-principles-20261107 | LAB_QUEUE.md | 2026-11-11 |
-| #129 | lab/cycle4-twilight-isles-no-ads-1108 | .github/workflows/sync-from-meta6.yml | 2026-11-11 |
-| #133 | lab/asqura-single-graphics-reference-20261108 | OSHIBKI.md | 2026-11-11 |
-| #134 | lab/abyss-glow-owner-reference-20261108 | OSHIBKI.md | 2026-11-11 |
-| #190 | lab/bot-batch-1 | OSHIBKI.md | 2026-11-11 |
-| #191 | lab/sunken-city-reference-1109 | LAB_QUEUE.md, OSHIBKI.md | 2026-11-11 |
-| #192 | lab/mcp-connect | OSHIBKI.md | 2026-11-11 |
-| #200 | lab/bot-batch-2 | OSHIBKI.md, shared/library/index.json | 2026-11-11 |
-| #203 | lab/skin-rusty-robot | LAB_QUEUE.md, OSHIBKI.md, games/skin-trainer/index.html, rules/01-stil-i-grafika/SKINY.md | 2026-11-11 |
-| #204 | lab/rules-bot-trainer | LAB_QUEUE.md, OSHIBKI.md | 2026-11-11 |
-| #205 | lab/owner-pult | OSHIBKI.md | 2026-11-11 |
-| #209 | lab/library-catalog | BIBLIOTEKA.md, OSHIBKI.md | 2026-11-11 |
-| #218 | lab/remont-r1-library | OSHIBKI.md | 2026-11-11 |
-| #219 | lab/status-a1-20261110 | OSHIBKI.md, SMENA.md | 2026-11-11 |
-| #220 | lab/zadachi-conflicts | OSHIBKI.md | 2026-11-11 |
-| #221 | lab/zadachi-tolkach | AGENTS.md, OSHIBKI.md, rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md | 2026-11-11 |
-| #225 | lab/render-broken-city-safe-1110 | OSHIBKI.md, SMENA.md | 2026-11-11 |
-| #235 | lab/fix-mobile-screen-all-games-1111 | AGENTS.md, OSHIBKI.md, SMENA.md | 2026-11-11 |
-| #237 | lab/chat-pr-queue-1111 | SMENA.md | 2026-11-11 |
-| #241 | lab/shared-index-symlink-1111 | OSHIBKI.md | 2026-11-11 |
-| #245 | lab/remont-main-veil-terraces | OSHIBKI.md | 2026-11-11 |
-| #247 | lab/kak-proveryayushchij-traps | OSHIBKI.md | 2026-11-11 |
-| #248 | lab/pr-autofinish-followup-1111 | OSHIBKI.md, SMENA.md | 2026-11-11 |
-| #249 | lab/living-watercolor-owner-pass-reference | LAB_QUEUE.md, shared/references/living-watercolor.json | 2026-11-11 |
-| #252 | lab/auditor-five-tasks-20261111 | .github/auditor/PROGRESS.md, .github/auditor/config.yml, .github/workflows/auditor.yml, OSHIBKI.md | 2026-11-11 |
-| #254 | lab/auditor-truthful-cycle-20261111 | OSHIBKI.md, ZADACHI.md | 2026-11-11 |
-| #255 | lab/archer-meta-adfree-clean-1111 | OSHIBKI.md | 2026-11-11 |
-| #260 | lab/uluchshatel-preflight-20261111 | OSHIBKI.md, ZADACHI.md | 2026-11-11 |
-| #261 | lab/biblioteka-contract-20261111 | DLYA_CLAUDE.md, OSHIBKI.md, ZADACHI.md | 2026-11-11 |
+| #3 | lab/twilight-island-bot | LAB_QUEUE.md | 2026-11-12 |
+| #54 | lab/render-visibility-optimization | docs/progress/PR54_59_60.md | 2026-11-12 |
+| #72 | lab/immersive-dishonored-principles-20261107 | LAB_QUEUE.md | 2026-11-12 |
+| #129 | lab/cycle4-twilight-isles-no-ads-1108 | .github/workflows/sync-from-meta6.yml | 2026-11-12 |
+| #133 | lab/asqura-single-graphics-reference-20261108 | OSHIBKI.md | 2026-11-12 |
+| #134 | lab/abyss-glow-owner-reference-20261108 | OSHIBKI.md | 2026-11-12 |
+| #190 | lab/bot-batch-1 | OSHIBKI.md | 2026-11-12 |
+| #191 | lab/sunken-city-reference-1109 | LAB_QUEUE.md, OSHIBKI.md | 2026-11-12 |
+| #192 | lab/mcp-connect | OSHIBKI.md | 2026-11-12 |
+| #200 | lab/bot-batch-2 | OSHIBKI.md, shared/library/index.json | 2026-11-12 |
+| #203 | lab/skin-rusty-robot | LAB_QUEUE.md, OSHIBKI.md, games/skin-trainer/index.html, rules/01-stil-i-grafika/SKINY.md | 2026-11-12 |
+| #204 | lab/rules-bot-trainer | LAB_QUEUE.md, OSHIBKI.md | 2026-11-12 |
+| #205 | lab/owner-pult | OSHIBKI.md | 2026-11-12 |
+| #209 | lab/library-catalog | BIBLIOTEKA.md, OSHIBKI.md | 2026-11-12 |
+| #218 | lab/remont-r1-library | OSHIBKI.md | 2026-11-12 |
+| #219 | lab/status-a1-20261110 | OSHIBKI.md, SMENA.md | 2026-11-12 |
+| #220 | lab/zadachi-conflicts | OSHIBKI.md | 2026-11-12 |
+| #221 | lab/zadachi-tolkach | AGENTS.md, OSHIBKI.md, rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md | 2026-11-12 |
+| #225 | lab/render-broken-city-safe-1110 | OSHIBKI.md, SMENA.md | 2026-11-12 |
+| #235 | lab/fix-mobile-screen-all-games-1111 | AGENTS.md, OSHIBKI.md, SMENA.md | 2026-11-12 |
+| #237 | lab/chat-pr-queue-1111 | SMENA.md | 2026-11-12 |
+| #241 | lab/shared-index-symlink-1111 | OSHIBKI.md | 2026-11-12 |
+| #245 | lab/remont-main-veil-terraces | OSHIBKI.md | 2026-11-12 |
+| #247 | lab/kak-proveryayushchij-traps | OSHIBKI.md | 2026-11-12 |
+| #248 | lab/pr-autofinish-followup-1111 | OSHIBKI.md, SMENA.md | 2026-11-12 |
+| #249 | lab/living-watercolor-owner-pass-reference | LAB_QUEUE.md, shared/references/living-watercolor.json | 2026-11-12 |
+| #252 | lab/auditor-five-tasks-20261111 | .github/auditor/PROGRESS.md, .github/auditor/config.yml, .github/workflows/auditor.yml, OSHIBKI.md | 2026-11-12 |
+| #254 | lab/auditor-truthful-cycle-20261111 | OSHIBKI.md, ZADACHI.md | 2026-11-12 |
+| #255 | lab/archer-meta-adfree-clean-1111 | OSHIBKI.md | 2026-11-12 |
+| #260 | lab/uluchshatel-preflight-20261111 | OSHIBKI.md, ZADACHI.md | 2026-11-12 |
+| #261 | lab/biblioteka-contract-20261111 | DLYA_CLAUDE.md, OSHIBKI.md, ZADACHI.md | 2026-11-12 |
 <!-- STOROZHA:CONFLICTS:END -->
 | #242 | lab/seo-claude-adfree-1111 | НУЖЕН CLAUDE: красные verify, bot, guard; SEO PR меняет claude-games/games/*/index.html (17 игр), а базовый PR #234 содержит несовпадение SHA256 защищённого pod-i-nad; не изменять эталон/охранник, проверить базовую ветку и CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117 | 2026-11-11 |
 | #245 | lab/remont-main-veil-terraces | НУЖЕН CLAUDE: игровая правка [PR #245](https://github.com/mpaykin1/meta6-lab/pull/245) прошла [META BOT на PR](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984334) и [focused 6/6](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984307), но на main PASS нет. После безопасного слияния актуального main в ремонтную ветку [13d85bb](https://github.com/mpaykin1/meta6-lab/commit/13d85bbf4e324cb01729c8a8464bf73364889a74) автоматический Library Machine **повторно** внёс посторонние `shared/library/index.json`, `shared/library/veil-terraces.json` коммитом [02ba0f5](https://github.com/mpaykin1/meta6-lab/commit/02ba0f5812afcae9467cdefa5cb7f3b381f6ee2f). Новый [META BOT](https://github.com/mpaykin1/meta6-lab/actions/runs/43018578169) имеет `action_required`, не PASS. STOROZHA [43012984349](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984349) дважды FAIL HTTP 403 GitHub API rate limit. Третья очистка бесполезна: машинная запись восстанавливает изменения, защищённые workflow/сторож не править. Нужны одобрение новых Actions (если доступно), устранение автоматического загрязнения PR и независимая проверка до squash; затем 2 PASS META BOT на main. | 2026-11-11 |

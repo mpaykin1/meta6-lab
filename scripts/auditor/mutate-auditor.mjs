@@ -25,7 +25,7 @@ async function exercise(script, eventName, pinnedInitially = true, pinAllowed = 
   const pendingPR = { ...examplePRs[0], number: 242, title: 'MG-строитель-2',
     updated_at: new Date().toISOString(),
     head: { ref: 'lab/approval', sha: pendingSha } };
-  const commitDate = new Date(Date.now() - 30000).toISOString();
+  const commitDate = new Date().toISOString();
   const stats = { pulls: 0, issueUpdates: 0, issueCreates: 0, pins: 0, pinChecks: 0, report: '' };
   const github = {
     rest: {

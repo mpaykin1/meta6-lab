@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="icon" href="data:,"><title>Veil Terraces camera module</title><style>body{margin:0;background:#020914}canvas{display:block;width:100vw;height:100vh}</style></head><body><canvas id="scene" width="480" height="320"></canvas><script type="module">
+import {perspective,lookAt,multiply} from './veil-terraces-camera.mjs';
+const c=document.querySelector('canvas'),ctx=c.getContext('2d');let yaw=.25,frames=0;
+function draw(){
+ ctx.fillStyle='#020914';ctx.fillRect(0,0,c.width,c.height);
+ const eye=[7*Math.sin(yaw),4.2,7*Math.cos(yaw)];
+ const vp=multiply(perspective(Math.PI/3,c.width/c.height,.1,50),lookAt(eye,[0,0,0]));
+ for(let x=-2;x<=2;x+=.4)for(let z=-2;z<=2;z+=.4){
+   const p=[x,.3*Math.sin(x+z),z,1],q=[0,0,0,0];
+   for(let a=0;a<4;a++)for(let b=0;b<4;b++)q[a]+=vp[b*4+a]*p[b];
+   if(q[3]<=0)continue;
+   ctx.fillStyle='#95d9de';ctx.fillRect((q[0]/q[3]*.5+.5)*c.width-3,(.5-q[1]/q[3]*.5)*c.height-3,6,6);
+ }
+ window.__cameraProbe={yaw,frames:++frames};
+}
+document.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){yaw+=event.key==='ArrowRight'?.32:-.32;draw();}});
+draw();
+</script></body></html>

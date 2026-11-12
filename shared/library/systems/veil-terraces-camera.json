@@ -1,0 +1,33 @@
+{
+  "id": "veil-terraces/camera-matrices",
+  "kind": "system",
+  "game": "veil-terraces",
+  "title": "Original perspective, lookAt, multiply and model",
+  "source_path": "games/veil-terraces/index.html",
+  "source_git_blob_sha": "22f3cd154cd247e3fcc6977c8334e04417a2faf7",
+  "source_lines": [
+    25,
+    29,
+    30,
+    31,
+    32
+  ],
+  "entry": "shared/library/systems/veil-terraces-camera.mjs",
+  "preview": "shared/library/systems/veil-terraces-camera-preview.html",
+  "exports": [
+    "perspective",
+    "lookAt",
+    "multiply",
+    "model"
+  ],
+  "dependencies": [
+    "Float32Array",
+    "Math"
+  ],
+  "rights": "META GAMES owner source allowlist; no third-party runtime dependency",
+  "standalone": true,
+  "load_ok": false,
+  "asset_ok": 0,
+  "asset_ids": [],
+  "note": "load_ok stays false until green GitHub Actions Chromium verification"
+}

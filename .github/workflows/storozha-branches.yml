@@ -1,12 +1,14 @@
 name: STOROZHA branch updater
 on:
   schedule:
-    - cron: '17 * * * *'
+    - cron: '17,47 * * * *'
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - 'scripts/storozha/branch-watch.mjs'
+      - 'scripts/storozha/update-heads.mjs'
+      - 'scripts/storozha/run-update-heads.mjs'
       - 'scripts/storozha/core.mjs'
       - '.github/workflows/storozha-branches.yml'
 permissions:
@@ -29,7 +31,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Update open PR heads and synchronize exact Git conflicts
+      - name: Update PR heads with CI-triggering token
+        env:
+          STOROZHA_REPO: ${{ github.repository }}
+          STOROZHA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STOROZHA_UPDATE_TOKEN: ${{ secrets.AUTOFINISH_UPDATE_TOKEN }}
+        run: node scripts/storozha/run-update-heads.mjs
+      - name: Synchronize exact Git conflicts even if update is unavailable
+        if: always()
         env:
           STOROZHA_REPO: ${{ github.repository }}
           STOROZHA_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -35,9 +35,11 @@ export async function playLevel(ctx, level) {
         improvingAt = Date.now();
       }
       if (Date.now() - improvingAt > 4200) {
-        if (distance > 3.2) {
+        // A terrace lip can trap the hero even within 3 units of a memory.
+        // Sidestep at any distance outside the actual 1.35-unit pickup zone.
+        if (distance > 1.35) {
           const side = detours++ % 2 ? -1 : 1;
-          await ctx.joystick(side, 0, 250);
+          await ctx.joystick(side, 0, 420);
           if (ctx.state().level !== level) return;
         }
         await ctx.jump();

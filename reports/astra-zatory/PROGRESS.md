@@ -1,6 +1,6 @@
 # Astra: заторы МГЛ
 
-Обновлено: 2026-11-12 14:47 UTC. Источник очереди: STOROZHA:CONFLICTS в DLYA_CLAUDE.md.
+Обновлено: 2026-11-12 15:03 UTC. Источник очереди: STOROZHA:CONFLICTS в DLYA_CLAUDE.md.
 Сделанное не повторять; защищённые PR не изменять. Только обычный merge main, без force-push и удаления веток.
 
 | PR | ветка | статус | ссылка-доказательство |
@@ -34,3 +34,11 @@
 | [#245](https://github.com/mpaykin1/meta6-lab/pull/245) | `lab/remont-main-veil-terraces` | конфликты сняты; блокер STOROZHA: HTTP 403 GitHub API rate limit exceeded for installation; повторный запуск выполнен, полного зелёного CI нет; не сливать | [merge](https://github.com/mpaykin1/meta6-lab/commit/01a02c310d1f67b95bfcaa1880e67f9c8c848479), [storozha-reference](https://github.com/mpaykin1/meta6-lab/actions/runs/43240117672/job/131261480953) |
 | [#255](https://github.com/mpaykin1/meta6-lab/pull/255) | `lab/archer-meta-adfree-clean-1111` | ждёт Claude: guard отклоняет merge-коммиты 55b7cbbe и 595d93c8 за .github/protected; force/rebase/правка охранника запрещены. Игровое исправление 1/2 сохранено: spin в выживании, sparks/precision по настоящим снарядам; 11 старых ловушек прошли локально. Полного PASS нет, слияния нет | [код](https://github.com/mpaykin1/meta6-lab/commit/bafd3b5c115affac0db7c3d407a17b0312e9ace9), [последний merge](https://github.com/mpaykin1/meta6-lab/commit/efed7d9085f15c3bf5f40e31e22aaa39b9fe806f), [guard FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43242961059/job/131268054159) |
 | [#3](https://github.com/mpaykin1/meta6-lab/pull/3) | `lab/twilight-island-bot` | конфликт LAB_QUEUE снят; STOROZHA дважды HTTP 403 (первый прогон и повтор); игровой прогон использует разрешённый текущим контрактом levelTimeoutSec=1200 и ещё не завершён. Полного PASS нет; после восстановления API проверять этот же SHA, без повторения merge | [merge](https://github.com/mpaykin1/meta6-lab/commit/bf899da496d873ea677fa960d3e6c688d1a337ab), [повтор STOROZHA](https://github.com/mpaykin1/meta6-lab/actions/runs/43240442948), [игровой прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/43240450262), [разрешение 1200 секунд](https://github.com/mpaykin1/meta6-lab/blob/main/automation/prompts/meta-games-bot-rollout.md) |
+
+## Продолжение
+
+Слито этой задачей: 0. Ждут Claude: 24 PR; прочие блокировки: 5 PR (#3, #235, #241, #245, #260). Всего 29 строк очереди.
+Свежий main объединён с 12 доступными ветками; локальная проверка merge-tree после последнего обновления main: все 12 CLEAN. Защищённые 17 PR не менялись. Force-push, rebase, удаление веток и правка проверок не выполнялись.
+Сначала перечитать текущие SHA и CI пяти доступных PR после восстановления GitHub API; уже выполненный merge не повторять, пока merge-tree не показывает новый конфликт. #255: исправление bafd3b5c, последний merge efed7d90; игровой PASS ещё не подтверждён, guard красный. #191: восстановление 24765f5a, последний merge e135682b; guard, Library Machine и changed-games красные. Не выдавать эти PR за готовые к слиянию.
+Повторы Actions этого запуска (чтобы не повторять бесконечно): #3 — 1; #235 — 2; #237 — 1; #241 — 2; #245 — 1; #247 — 1; #255 — 1; #260 — 1. Кодовые исправления: #191 — 1, #255 — 1. Запрещённые изменения требуют Claude, дополнительные циклы с тем же красным guard бессмысленны.
+Прогоны META BOT у части PR всё ещё выполняют общий self-test; защищённое ядро и workflow не изменять. У #3 контракт из main разрешает levelTimeoutSec=1200, поэтому текущая игровая проверка долгая; не подменять её PASS.

@@ -7,12 +7,12 @@
 | #254 | lab/auditor-truthful-cycle-20261111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/auditor/mutate-auditor.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #234 | lab/claude-adfree-catalog-1110 | reference/abyss-glow-2026-11-09/index.html: существующий эталон нельзя изменять или удалять; reference/sumerechny-arkhipelag/index.html: существующий эталон нельзя изменять или удалять; reference/sunken-city/index.html: существующий эталон нельзя изменять или удалять | 2026-11-11 |
 | #261 | lab/biblioteka-contract-20261111 | scripts/library/verify-library.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
-| #262 | lab/archer-retention-exp-1 | .github/workflows/archer-visual-proof.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #265 | lab/asset-check-bot | .github/workflows/asset-check.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #266 | claude/ink-link200-1111 | .github/workflows/lab-pages.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/link-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #246 | lab/link-guard-200 | .github/workflows/lab-pages.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/link-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #267 | lab/asset-check-universal | .github/workflows/asset-check.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #268 | lab/link-guard-recovery-1111 | .github/workflows/kontur-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/lab-pages.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/link-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
+| #262 | lab/archer-retention-exp-1 | .github/workflows/archer-visual-proof.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

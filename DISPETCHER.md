@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 8 · конфликт 7 · непроверено 0 · красные проверки 7 · нужен Claude 35
+Итог: зависло 8 · конфликт 6 · непроверено 0 · красные проверки 8 · нужен Claude 35
 
 ### PR #221
 - PR: https://github.com/mpaykin1/meta6-lab/pull/221
@@ -14,14 +14,6 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/241
 - Ветка: `lab/shared-index-symlink-1111`
 - SHA: `40d24bfd3833cf425a6803a8289434acc167f897` · последний коммит: 2026-11-11T16:08:19Z
-- Проблема: Конфликт с main
-- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
-- Взял: —
-
-### PR #242
-- PR: https://github.com/mpaykin1/meta6-lab/pull/242
-- Ветка: `lab/seo-claude-adfree-1111`
-- SHA: `5aadea292362e69c9b6cc1d0935c4be058ea345e` · последний коммит: 2026-11-12T10:39:41Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
@@ -56,6 +48,14 @@
 - SHA: `171f90b228b9841492ea29624ae6e73f8350e7e2` · последний коммит: 2026-11-12T10:23:07Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: —
+
+### PR #234
+- PR: https://github.com/mpaykin1/meta6-lab/pull/234
+- Ветка: `lab/claude-adfree-catalog-1110`
+- SHA: `a6431c80a43e11f1031530268031acb28341d824` · последний коммит: 2026-11-12T10:44:34Z
+- Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/43203045318/job/131131122738), play (https://github.com/mpaykin1/meta6-lab/actions/runs/43203045458/job/131131111386)
+- Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43203045318/job/131131122738 и повтори CI.
 - Взял: —
 
 ### PR #262
@@ -125,11 +125,11 @@
 - [#235](https://github.com/mpaykin1/meta6-lab/pull/235) Неподвижный экран при джойстике — все игры МГЛ
 - [#225](https://github.com/mpaykin1/meta6-lab/pull/225) Broken City: чистый PR оптимизации вместо #60
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
-- [#254](https://github.com/mpaykin1/meta6-lab/pull/254) fix(auditor): достоверные планы и проверка pin Issue #253
 - [#260](https://github.com/mpaykin1/meta6-lab/pull/260) НУЖЕН CLAUDE: Улучшатель игр — безопасный захват без пересечения PR
 - [#261](https://github.com/mpaykin1/meta6-lab/pull/261) ЭТАЛОНЫ В БИБЛИОТЕКУ: `skin-trainer` × ИНДЕКС — 14 записей на исключение; [#218](https://github.com/mpaykin1/meta6-lab/pull/218), [Library Machine #43198957093](https://github.com/mpaykin1/meta6-lab/actions/runs/43198957093) ЗЕЛЁНЫЙ; [STOROZHA #43198965759](https://github.com/mpaykin1/meta6-lab/actions/runs/43198965759) КРАСНЫЙ, слияния нет; прогресс в #261
 - [#275](https://github.com/mpaykin1/meta6-lab/pull/275) Ревизор: искать PR старше 24 ч с конфликтом или красными проверками (в)
 - [#218](https://github.com/mpaykin1/meta6-lab/pull/218) PR #218: синхронизировать библиотеку R1 с main, проверить защищённый workflow
+- [#254](https://github.com/mpaykin1/meta6-lab/pull/254) fix(auditor): достоверные планы и проверка pin Issue #253
 - [#248](https://github.com/mpaykin1/meta6-lab/pull/248) Доводчик PR: 15 минут, безопасное обновление веток, журналы без конфликтов, порог 1 час
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния
 - [#134](https://github.com/mpaykin1/meta6-lab/pull/134) ABYSS GLOW — второй эталон графики и анимации

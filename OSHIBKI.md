@@ -48,5 +48,5 @@
 
 | 41 | 12.11.2026 | Rename из reference/ в games/ обходил защиту; реестр и другие guards/bots не учитывались | PR #277: previous_filename и реестр | scripts/storozha/mutate-resume.mjs: rename ignored, rename special-case cheat, registry ignored, other guards ignored |
 | 42 | 12.11.2026 | После #238 сторож оставался NO_HEAD_PUSH раз в час; GITHUB_TOKEN update не запускает CI | PR #277: отдельный updater, AUTOFINISH_UPDATE_TOKEN, 17/47 минут | scripts/storozha/mutate-resume.mjs: no actual update, missing head lease, conflict update, repo fence removed, hardcoded PR cheat |
-| 43 | 12.11.2026 | Повторная проверка заброшенного PR могла закрыть его при неизвестной дате коммита (NaN) | PR #277: staleDecision перед close | scripts/storozha/verify-resume.mjs: invalid/future dates; scripts/storozha/mutate-storozha.mjs: stale mutations |
+| 43 | 12.11.2026 | Повторная проверка заброшенного PR могла закрыть его при неизвестной дате коммита (NaN) | PR #277: staleDecision перед close | scripts/storozha/mutate-maintenance.mjs: fresh date ignored, queue not persisted, branch deleted, date cheat |
 | 44 | 12.11.2026 | Мутация approval сначала падала на ошибке mock API вместо assert о лишнем одобрении | Mock принимает запись и проверяет журнал вызовов | scripts/storozha/mutate-resume.mjs: superseded run approved |

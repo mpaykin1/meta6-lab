@@ -15,7 +15,7 @@ export async function updateHeads({repo, prs, api, updateApi, now = Date.now(), 
       if (comparison.behind_by > 0) {
         if (!updateApi) throw Error('AUTOFINISH_UPDATE_TOKEN required to trigger PR CI');
         await updateApi('/pulls/' + pr.number + '/update-branch', 'PUT', {
-          expected_head_sha: undefined
+          expected_head_sha: pr.head.sha
         });
         log('UPDATE_REQUESTED #' + pr.number + ' from ' + pr.head.sha);
       }

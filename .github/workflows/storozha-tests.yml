@@ -43,3 +43,5 @@ jobs:
           import {verifyUpdates} from './scripts/storozha/verify-resume.mjs'; await verifyUpdates({updateHeads})"
       - name: Branch update and protected rename mutations
         run: node scripts/storozha/mutate-resume.mjs
+      - name: Maintenance API behavior and mutations
+        run: node scripts/storozha/mutate-maintenance.mjs

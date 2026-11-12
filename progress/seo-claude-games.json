@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "07681534e5b4077054e24ae584da8baa0dc15229",
+  "last_processed_head": "744e6d7e89c716f2a81cfd184819cee297bd9e26",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -15,7 +15,13 @@
       ]
     },
     "1_fix_bot_and_other_ci": {
-      "status": "pending"
+      "status": "in_progress",
+      "details": "Восстановлен точный main blob Veil Terraces в #234 и #242; текущие обязательные CI ещё должны пройти.",
+      "evidence": [
+        "https://github.com/mpaykin1/meta6-lab/commit/7ee56e90d9da32d806e697c542b705102575b963",
+        "https://github.com/mpaykin1/meta6-lab/commit/744e6d7e89c716f2a81cfd184819cee297bd9e26",
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43173775699"
+      ]
     },
     "2_canonical_and_publish": {
       "status": "pending",
@@ -111,6 +117,16 @@
         "07681534e5b4077054e24ae584da8baa0dc15229"
       ],
       "next": "Проверить SEO и остальные обязательные CI на новом SHA."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Veil Terraces снова игровая сцена из main вместо redirect: восстановлен window.__META_BOT__ в обеих ветках.",
+      "commits": [
+        "7ee56e90d9da32d806e697c542b705102575b963",
+        "744e6d7e89c716f2a81cfd184819cee297bd9e26"
+      ],
+      "next": "Проверить META BOT и обязательные проверки новых HEAD, устранить следующие реальные ошибки без правки эталонов."
     }
   ]
 }

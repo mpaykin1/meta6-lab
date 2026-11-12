@@ -1138,7 +1138,7 @@
         "game-module"
       ],
       "source_path": "games/archer-in-the-fog/assets/index-xsRfS2lk.js",
-      "sha256": "d69e770f7f6f2193bf6950b5c052b879576ae47de0909e881485b84151284f5a",
+      "sha256": "618c45d46067d081fb8ceda2998d639a568735356fc7a03bdd8f7150d9fb4a69",
       "lines": [
         1,
         3927
@@ -2563,7 +2563,7 @@
         "gameplay"
       ],
       "source_path": "games/archer-in-the-fog/assets/index-xsRfS2lk.js",
-      "sha256": "0dafed40a3e17025520c86c18c57e1b20dd55b5b5d12eb2198131023f99994f6",
+      "sha256": "70e0717ac3a6f5d72e193a780b221040f48527d70ce694572fd10dc81167edd3",
       "lines": [
         3924,
         3927
@@ -8357,7 +8357,7 @@
         "gameplay"
       ],
       "source_path": "games/archer-in-the-fog/assets/index-xsRfS2lk.js",
-      "sha256": "0dafed40a3e17025520c86c18c57e1b20dd55b5b5d12eb2198131023f99994f6",
+      "sha256": "70e0717ac3a6f5d72e193a780b221040f48527d70ce694572fd10dc81167edd3",
       "lines": [
         3924,
         3927
@@ -8379,7 +8379,7 @@
       ]
     },
     {
-      "id": "3c756f36be76f1f835a4bf48",
+      "id": "31c563ad5224b2508b942f17",
       "game": "archer-in-the-fog",
       "kind": "solution",
       "name": "module:bot-adapter.js",
@@ -8387,10 +8387,10 @@
         "game-module"
       ],
       "source_path": "games/archer-in-the-fog/bot-adapter.js",
-      "sha256": "97d2134e48bf5ba2095119045e3e56eabfc7e835d8eb5a72b5ba82ea6e263a2d",
+      "sha256": "e678852209492acaa3ec38923262cc6fca496d97feb14a80bb50d4066ebe173e",
       "lines": [
         1,
-        111
+        112
       ]
     },
     {
@@ -8424,22 +8424,7 @@
       ]
     },
     {
-      "id": "344bb392a76f32ddd5f1595e",
-      "game": "archer-in-the-fog",
-      "kind": "solution",
-      "name": "playLevel",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/archer-in-the-fog/bot-strategy.mjs",
-      "sha256": "901ee78200aa922e70e926b53d8b50e188a5d5cd82f32827784f5e5fa78dd6f7",
-      "lines": [
-        18,
-        45
-      ]
-    },
-    {
-      "id": "35841860a62a985f2b4ef635",
+      "id": "2d58fffff0cd292546780cb0",
       "game": "archer-in-the-fog",
       "kind": "solution",
       "name": "module:bot-strategy.mjs",
@@ -8447,10 +8432,10 @@
         "game-module"
       ],
       "source_path": "games/archer-in-the-fog/bot-strategy.mjs",
-      "sha256": "c183886fea6fe1391f31878a269917a75e93e719a8878c04997d7193c462651d",
+      "sha256": "9a9f332a696416b27c2695cb42a4434f5df935e8eb51b5871cd93903aa52b57c",
       "lines": [
         1,
-        45
+        47
       ]
     },
     {
@@ -8466,6 +8451,21 @@
       "lines": [
         3,
         15
+      ]
+    },
+    {
+      "id": "da90c200fd20f16bcd1aa910",
+      "game": "archer-in-the-fog",
+      "kind": "solution",
+      "name": "playLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/archer-in-the-fog/bot-strategy.mjs",
+      "sha256": "e59ee3b3f5e3ebcc60fe5d896fcf6f69b0db5e8a1ba1d801419c9dc911d2c226",
+      "lines": [
+        18,
+        47
       ]
     },
     {
@@ -8552,7 +8552,7 @@
         "game-module"
       ],
       "source_path": "games/archer-in-the-fog/src/arc2_module.js",
-      "sha256": "06322b4731868c212d1b2c8b8261a2b3fad08c8b4039c18f36d8265f776e3e8d",
+      "sha256": "790d0ff3e97884eacf9029667dd015b8fb315926ae6a7adb5ef7b2e19b2ce631",
       "lines": [
         1,
         261
@@ -8672,7 +8672,7 @@
         "gameplay"
       ],
       "source_path": "games/archer-in-the-fog/src/arc2_module.js",
-      "sha256": "0d2456fecbe986043f2c5102846a9ad36ce80c04a2b2a83fdde818d45deba4c5",
+      "sha256": "4380d36106ddd5ff25ec784c0607d23b30d28a4719758db33764aabc8514c390",
       "lines": [
         184,
         187
@@ -8702,7 +8702,7 @@
         "gameplay"
       ],
       "source_path": "games/archer-in-the-fog/src/arc2_module.js",
-      "sha256": "f94e5e40e872d466863e7fd3d7b2cfea7c42b9a37725cbcda1026a6315dcfeae",
+      "sha256": "873ed7fed27c6dcbe9e9e798c02175983b88f27c090b62477ee1cb43c8aa32d7",
       "lines": [
         9,
         259

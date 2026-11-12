@@ -15,14 +15,14 @@ const baseSHA = process.env.ARCHER_BASE_SHA || 'HEAD^';
 const game = '/games/archer-in-the-fog/';
 fs.mkdirSync(output, { recursive: true });
 
-function extractPrevious() {
-  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'archer-before-'));
-  const git = spawnSync('git', ['archive', baseSHA, 'games/archer-in-the-fog'], {
+function extractGame(ref, label) {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'archer-' + label + '-'));
+  const git = spawnSync('git', ['archive', ref, 'games/archer-in-the-fog'], {
     cwd: root, maxBuffer: 120 * 1024 * 1024
   });
-  if (git.status !== 0) throw new Error('git archive baseline: ' + git.stderr.toString());
+  if (git.status !== 0) throw new Error('git archive ' + label + ': ' + git.stderr.toString());
   const tar = spawnSync('tar', ['-x', '-C', temp], { input: git.stdout });
-  if (tar.status !== 0) throw new Error('extract previous: ' + tar.stderr.toString());
+  if (tar.status !== 0) throw new Error('extract ' + label + ': ' + tar.stderr.toString());
   return temp;
 }
 
@@ -179,11 +179,13 @@ const browser = await chromium.launch({
   headless: true, args: ['--use-gl=angle', '--use-angle=swiftshader',
     '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist']
 });
-const newer = await serve(root);
+const candidateRef = process.env.ARCHER_CANDIDATE_REF;
+const newer = await serve(candidateRef ? extractGame(candidateRef, 'after') : root);
+if (candidateRef) console.log('Candidate commit ' + spawnSync('git', ['rev-parse', candidateRef], { cwd: root, encoding: 'utf8' }).stdout.trim());
 let older;
 let success = true;
 try {
-  if (!selftest) older = await serve(extractPrevious());
+  if (!selftest) older = await serve(extractGame(baseSHA, 'before'));
   for (const viewport of ['mobile', 'desktop']) {
     if (selftest) {
       const { context, page } = await openGame(browser, newer.url, 'baseline', viewport);

@@ -86,6 +86,39 @@ jobs:
               owner,repo,state:'all',sort:'updated',direction:'desc',per_page:100
             });
             recentIssues.push(...issuePage.data.filter(i => !i.pull_request));
+            // Inspect a bounded set; old PRs are only flagged on current HEAD evidence.
+            const staleFindings = [];
+            let staleUnknown = false;
+            const staleCandidates = prs.filter(pr => pr.state === 'open' &&
+              now.getTime() - Date.parse(pr.created_at) > 86400000).slice(0, 4);
+            for (const pr of staleCandidates) {
+              try {
+                const [detail, checks] = await Promise.all([
+                  github.rest.pulls.get({owner,repo,pull_number:pr.number}),
+                  github.rest.checks.listForRef({owner,repo,ref:pr.head.sha,per_page:100})
+                ]);
+                if (detail.data.head.sha !== pr.head.sha) {
+                  staleUnknown = true;
+                  continue;
+                }
+                const conflicts = detail.data.mergeable_state === 'dirty';
+                const failures = (checks.data.check_runs || []).filter(check =>
+                  check.status === 'completed' &&
+                  ['failure','timed_out','action_required'].includes(check.conclusion));
+                if (conflicts || failures.length) {
+                  staleFindings.push({
+                    pr,
+                    reason: [conflicts ? 'конфликт с main' : '',
+                      failures.length ? 'красная проверка '+clean(failures[0].name) : '']
+                      .filter(Boolean).join('; '),
+                    checkUrl: failures[0]?.html_url || ''
+                  });
+                }
+              } catch (err) {
+                staleUnknown = true;
+                core.warning('stale PR inspection unavailable: '+clean(err.message));
+              }
+            }
             
             function owners(pr) {
               const scores = cfg.roles.map(role => {
@@ -204,6 +237,15 @@ jobs:
                 ' UTC | '+planStatus+' '+plans[0]+' | '+execStatus+' '+evidence[0]+' |');
               for (const item of evidence.slice(1)) rowsOut.push('| | | | ↳ '+item+' |');
               for (const problem of problems) priority.push('- **'+clean(role.name)+'**: '+problem);
+            }
+            for (const finding of staleFindings) {
+              priority.push('- **PR старше 24 ч**: '+link('PR #'+finding.pr.number,
+                finding.pr.html_url)+' — '+finding.reason+
+                (finding.checkUrl ? ' · '+link('проверка',finding.checkUrl) : ''));
+            }
+            if (staleUnknown) {
+              priority.push('- **Срез старых PR неполный** — часть проверок API недоступна; '+
+                link('открытые PR',root+'/pulls'));
             }
             const next = priority.length
               ? 'Проверить первое нарушение по ссылке, защищённое передать Claude без слияния.'

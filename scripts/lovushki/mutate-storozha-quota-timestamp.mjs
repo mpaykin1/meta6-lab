@@ -48,8 +48,8 @@ verify(production);
 const mutants = [
   ['future-timestamp-counted', '&& timestamp <= now;', ';'],
   ['exact-72h-counted', 'now - timestamp < THREE_DAYS', 'now - timestamp <= THREE_DAYS'],
-  ['unknown-date-faked-as-now', "Date.parse(pr.lastCommitAt || '')",
-    'Date.parse(pr.lastCommitAt || new Date(now).toISOString())'],
+  ['unknown-date-faked-as-now', "const timestamp = Date.parse(pr.lastCommitAt || '');",
+    'const timestamp = Date.parse(pr.lastCommitAt || new Date(now).toISOString());'],
   ['newest-pr-first', 'Date.parse(a.created_at) - Date.parse(b.created_at)',
     'Date.parse(b.created_at) - Date.parse(a.created_at)'],
   ['grandfathered-pr-denied', 'Date.parse(pr.created_at) > CUTOFF &&', 'true &&'],

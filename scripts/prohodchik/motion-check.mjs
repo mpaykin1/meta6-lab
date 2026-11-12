@@ -81,3 +81,28 @@ export function assessFixedViewport(samples) {
   }
   return result('FIXED', {samples: samples.length});
 }
+
+/**
+ * Never accept one successful input burst as a finished B2 probe.
+ * Keep sampling for 2 s of later held input so a newly blocked hero is detected.
+ * Idle time does not count as player input, and DEAD/STUCK always wins immediately.
+ */
+export function assessB2Probe(segments) {
+  const verdict = assessMotion(segments);
+  if (verdict.status !== 'MOVED') return verdict;
+  let firstMoveIdx = -1;
+  for (let i = 0; i < segments.length; i++) {
+    if (assessMotion(segments.slice(0, i + 1)).status === 'MOVED') {
+      firstMoveIdx = i;
+      break;
+    }
+  }
+  if (firstMoveIdx < 0) return result('INVALID', {reason: 'unverifiable first movement'});
+  const laterMs = segments.slice(firstMoveIdx + 1)
+    .filter(s => s.input)
+    .reduce((sum, s) => sum + s.durationMs, 0);
+  if (laterMs < STUCK_MS) {
+    return result('OBSERVING', {remainingMs: STUCK_MS - laterMs});
+  }
+  return verdict;
+}

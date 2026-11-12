@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "3dc116663aada43b2e65706b5828811fb01e13fa",
+  "last_processed_head": "0d072f861146693806571306e9e861becdf356b4",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -52,7 +52,7 @@
         "underwater-world"
       ],
       "pending_pages": 0,
-      "details": "17/17 уникальных описаний и FAQ; валидатор проверяет также реальные обязательные поля VideoGame, адрес запуска и несовпадающие/дублирующиеся сущности. Новый CI ожидается.",
+      "details": "17/17 уникальных описаний и FAQ; валидатор проверяет также реальные обязательные поля VideoGame, адрес запуска и несовпадающие/дублирующиеся сущности. Новый CI ожидается. Ноябрьский цикл: запрет Playgama preconnect теперь обнаруживает любой порядок и разные кавычки в HTML link; три сценария-ловушки. Ожидает нового CI.",
       "seo_ci": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
       "metadata": "23 страницы: title <= 60, description 120–160, Schema.org JSON-LD, alt",
       "validator_implementation": "https://github.com/mpaykin1/meta6-lab/commit/674359e1781fb13e4dfeabb461e12def5448ea86"
@@ -75,6 +75,7 @@
     }
   },
   "next_ideas": [
+    "Дополнить SEO валидатор проверкой реально локальных OG-обложек после получения подтверждённых скриншотов",
     "Устранить ложные блокировки движения по прямой у Veil Terraces на реальном мобильном маршруте",
     "Live-проверка HTTP 200 всех 23 опубликованных URL после деплоя main",
     "Убрать зависимость игровых OG-обложек от static.playgama.com после получения подлинных кадров",
@@ -179,6 +180,17 @@
       "change": "Veil Terraces: физический боковой обход препятствия при застревании работает также вблизи цели (<=3.2), не меняя бот-ядро или проверки.",
       "commit": "3dc116663aada43b2e65706b5828811fb01e13fa",
       "next": "Проверить LAB focused META BOT на новом HEAD; если путь по-прежнему непроходим, исправить генератор проходимых точек/стратегию в следующем цикле."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Усилен SEO-валидатор для preconnect к Playgama: перестановка атрибутов, несколько rel токенов, https и protocol-relative; три новые мутации и OSHIBKI #32.",
+      "commits": [
+        "06e7532738deb3571a6b4dd0f238c33c2be2e8a5",
+        "97990c8fb3e7593b6f6d8642e4c1ecda7814dcda",
+        "0d072f861146693806571306e9e861becdf356b4"
+      ],
+      "next": "Проверить SEO Catalog Validator на новом SHA; убедиться, что новые мутации отсекают внешние префетчи, затем перейти к публикации только после полного CI."
     }
   ]
 }

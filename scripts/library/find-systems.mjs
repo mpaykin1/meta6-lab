@@ -3,7 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const EXCLUDED = /(?:^|[-/])copy$|(?:^|\/)skin-trainer(?:\/|$)/i;
+const EXCLUDED = /(?:^|[-\/])copy$|(?:^|\/)skin-trainer(?:\/|$)/i;
 const INTENTS = [
   {tag: 'camera', match: /камер|третьего лица|от третьего лица|third.person|camera|follow|orbit/i},
   {tag: 'controls', match: /управлен|движени|джойстик|ввод|controls?|input|joystick|keyboard/i},

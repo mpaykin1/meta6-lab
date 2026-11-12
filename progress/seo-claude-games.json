@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "942fd687d716297f76493ee3982626bd2b2bb8f9",
+  "last_processed_head": "07681534e5b4077054e24ae584da8baa0dc15229",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -101,6 +101,16 @@
       "change": "SEO-валидатор проверяет существование локальных адресов каталога, включая вложенные и URL-encoded пути; добавлены три мутации.",
       "commit": "942fd687d716297f76493ee3982626bd2b2bb8f9",
       "next": "Получить зелёные прогоны нового HEAD, затем слить PR по правилам."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Страницы Archer in the Fog и Twilight Island ведут к собственным главам лора, а не на начало длинной страницы.",
+      "commits": [
+        "b36e2b867813265847af2fc56eb36ee6e0a0acb6",
+        "07681534e5b4077054e24ae584da8baa0dc15229"
+      ],
+      "next": "Проверить SEO и остальные обязательные CI на новом SHA."
     }
   ]
 }

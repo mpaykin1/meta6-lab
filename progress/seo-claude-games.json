@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "5b917550df3edc7518683cf3e2622ce776db78cf",
+  "last_processed_head": "4c7e5d0a9b5a361e593aa3a68ad683990267021a",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -60,10 +60,14 @@
     },
     "5_continuous_improvement": {
       "status": "done",
-      "details": "Все 17 индивидуальных описаний и 3 FAQ на страницу; SEO-валидатор с 3 мутациями; основной код игр не менялся.",
+      "details": "Добавлены взаимные контекстные ссылки с объяснением различий на четырёх страницах: две версии Twilight, две версии Broken City.",
       "evidence": [
         "https://github.com/mpaykin1/meta6-lab/commit/33f9708e63230a397ad8158f62b2b584d8e27bbd",
-        "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041"
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
+        "https://github.com/mpaykin1/meta6-lab/commit/358e7076d361419c04fac5bdc058184990909e93",
+        "https://github.com/mpaykin1/meta6-lab/commit/d8aa9550a6ef2eb97d27484cd4bbcdd5a5625c89",
+        "https://github.com/mpaykin1/meta6-lab/commit/34103c9e1ce48052d78fe0a91190ede5f966d2a1",
+        "https://github.com/mpaykin1/meta6-lab/commit/4c7e5d0a9b5a361e593aa3a68ad683990267021a"
       ]
     }
   },
@@ -139,6 +143,18 @@
         "5b917550df3edc7518683cf3e2622ce776db78cf"
       ],
       "next": "Подтвердить SEO CI на актуальном SHA и устранить остальные красные проверки до публикации."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Контекстная перелинковка: Twilight Isles ↔ Twilight Isle Classic; Broken City ↔ другая версия. На каждой странице даны отличия по механике/сцене.",
+      "commits": [
+        "358e7076d361419c04fac5bdc058184990909e93",
+        "d8aa9550a6ef2eb97d27484cd4bbcdd5a5625c89",
+        "34103c9e1ce48052d78fe0a91190ede5f966d2a1",
+        "4c7e5d0a9b5a361e593aa3a68ad683990267021a"
+      ],
+      "next": "Получить SEO CI после четырёх изменений; не сливать при красных обязательных проверках."
     }
   ]
 }

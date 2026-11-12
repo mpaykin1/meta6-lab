@@ -16,11 +16,12 @@
     },
     "1_fix_bot_and_other_ci": {
       "status": "in_progress",
-      "details": "Восстановлен точный main blob Veil Terraces в #234 и #242; текущие обязательные CI ещё должны пройти.",
+      "details": "В #234 восстановлена игра Veil Terraces из main и пять отсутствовавших файлов STOROZHA byte-identical main. Проверки после коммитов ещё должны пройти; quota не ослаблялась.",
       "evidence": [
         "https://github.com/mpaykin1/meta6-lab/commit/7ee56e90d9da32d806e697c542b705102575b963",
         "https://github.com/mpaykin1/meta6-lab/commit/744e6d7e89c716f2a81cfd184819cee297bd9e26",
-        "https://github.com/mpaykin1/meta6-lab/actions/runs/43173775699"
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43173775699",
+        "https://github.com/mpaykin1/meta6-lab/commit/b566a431d24819f0f36c0ec51bb9f1a24222cb8d"
       ]
     },
     "2_canonical_and_publish": {
@@ -155,6 +156,19 @@
         "4c7e5d0a9b5a361e593aa3a68ad683990267021a"
       ],
       "next": "Получить SEO CI после четырёх изменений; не сливать при красных обязательных проверках."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "PR #234: пять отсутствовавших файлов trusted STOROZHA (core, bot-summary, gh-list, reference-check, weekly-watch) восстановлены из main с точным SHA.",
+      "commits": [
+        "896701e09b7ed6bf234d809f1c8c3c370a2845e9",
+        "1bd46e7e7bd9fa70e5200185e4af07f798e8d479",
+        "d814889947a35f80c5fb9daf6e48d345de1a154a",
+        "9eef7a4c66c034872b88d4abd9b0315b0637e7c2",
+        "b566a431d24819f0f36c0ec51bb9f1a24222cb8d"
+      ],
+      "next": "Проверить две STOROZHA проверки на текущем SHA PR #234. Не менять ограничения/охраняемые эталоны."
     }
   ]
 }

@@ -28,7 +28,7 @@ cases.push(
 );
 // Mutate a valid game graph, not a broken JSON string, to test semantic validation.
 const mutateGame = change => {
-  const match = original.match(/<script\\b[^>]*type="application\\/ld\\+json"[^>]*>([\\s\\S]*?)<\\/script>/i);
+  const match = original.match(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i);
   if (!match) throw Error('Missing JSON-LD fixture');
   const schema = JSON.parse(match[1]);
   const game = schema['@graph'].find(node => node['@type'] === 'VideoGame');

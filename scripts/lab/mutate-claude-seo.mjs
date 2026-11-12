@@ -18,6 +18,14 @@ const cases = [
   ['deceptive line wrapped ad link', original.replace('</body>',
     '<a href="https://playgama.ai/\nplay/fake">Играть</a></body>')]
 ];
+cases.push(
+  ['missing game landing', original.replace('</body>',
+    '<a href="../../games/not-published/">Details</a></body>')],
+  ['missing local XML file', original.replace('</body>',
+    '<a href="../../missing-sitemap.xml">Sitemap</a></body>')],
+  ['encoded missing landing page', original.replace('</body>',
+    '<a href="../../games/%6eot-a-real-game/">Details</a></body>')]
+);
 for (const [name, html] of cases) {
   if (!inspect(html, page).length) throw Error('Mutation escaped SEO validator: ' + name);
   console.log('CAUGHT', name);

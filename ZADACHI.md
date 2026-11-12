@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | ТОЛКАЧ: саморазвитие (в), синхронизация ветки из main при запуске | МГЛ | Кто: толкач | `lab/tolkach-main-first-20261112` | — | 2026-11-12 14:23 | — |
 | взято | БОТ-ПРОХОДЧИК: продолжение B2 — смерть без координат + браузерное движение, Кто: проходчик | МГЛ | проходчик | `lab/prohodchik-b2-motion-20261111` | [#258](https://github.com/mpaykin1/meta6-lab/pull/258) | 2026-11-12 14:22 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | PR #242: исправить красные проверки SEO-каталога | МГЛ | MG-строитель-2 | `lab/seo-claude-adfree-1111` | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | 2026-11-11 08:17 | 2026-11-12 10:51 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | PR #234: исправить красные проверки каталога без рекламы | МГЛ | MG-ремонтник | `lab/claude-adfree-catalog-1110` | [#234](https://github.com/mpaykin1/meta6-lab/pull/234) | 2026-11-11 07:51 | 2026-11-12 10:44 |
@@ -111,7 +112,7 @@
 | 💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть | Разблокировать проверки PR #3 Twilight Island | МГЛ | MG-строитель-2 | `lab/twilight-island-bot` | [#3](https://github.com/mpaykin1/meta6-lab/pull/3) | 2026-11-10 13:20 | 2026-11-10 06:25 |
 | 💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть | lab: Twilight Island — бот проходит весь остров | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/twilight-island-bot` | [#3](https://github.com/mpaykin1/meta6-lab/pull/3) | 2026-11-06 14:45 | 2026-11-10 06:25 |
 | 💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть | PR #54, #59, #60: конфликты, производительность, CI и слияние | МГЛ | чат ChatGPT | `lab/pr54-59-60-finish` | [#54](https://github.com/mpaykin1/meta6-lab/pull/54), [#59](https://github.com/mpaykin1/meta6-lab/pull/59), [#60](https://github.com/mpaykin1/meta6-lab/pull/60) | 2026-11-10 06:02 | 2026-11-10 06:21 |
-| 💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть | Restore original Ashen Path asset pack reference after sync | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/ashen-path-asset-pack-restore-1109` | [#208](https://github.com/mpaykin1/meta6-lab/pull/208) | 2026-11-09 16:54 | 2026-11-10 04:35 |
+| 💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть | Restore original Ashen Path asset pack reference after sync | МГЛ | Кто: толкач | `lab/ashen-path-asset-pack-restore-1109` | [#208](https://github.com/mpaykin1/meta6-lab/pull/208) | 2026-11-09 16:54 | 2026-11-10 04:35 |
 | 💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/rules-bot-trainer` | [#204](https://github.com/mpaykin1/meta6-lab/pull/204) | 2026-11-09 16:36 | 2026-11-10 02:51 |
 | 💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть | M6 | МГЛ | MG-строитель-3 | `lab/mcp-connect` | [#192](https://github.com/mpaykin1/meta6-lab/pull/192) | 2026-11-09 22:25 | 2026-11-09 22:26 |
 | 💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть | Пульт владельца | МГЛ | чат ChatGPT | `lab/owner-pult` | [#205](https://github.com/mpaykin1/meta6-lab/pull/205) | 2026-11-09 16:35 | 2026-11-09 17:01 |

@@ -28,6 +28,8 @@ export function inspect(html, page) {
     errors.push(page + ': og:url must match canonical');
   }
   const schemas = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
+  const graphNodes = [];
+  const siteOrigin = new URL(base).origin;
   if (!schemas.length) errors.push(page + ': missing JSON-LD');
   for (const [i, script] of schemas.entries()) {
     try {
@@ -39,8 +41,38 @@ export function inspect(html, page) {
       if (!Array.isArray(nodes) || !nodes.length || nodes.some(n => !n['@type'])) {
         errors.push(page + ': JSON-LD #' + i + ' missing @type');
       }
+      if (Array.isArray(nodes)) graphNodes.push(...nodes);
     } catch {
       errors.push(page + ': JSON-LD #' + i + ' is not valid JSON');
+    }
+  }
+  if (page.startsWith('games/')) {
+    const gameNodes = graphNodes.filter(n => n?.['@type'] === 'VideoGame');
+    if (gameNodes.length !== 1) {
+      errors.push(page + ': expected exactly one VideoGame object');
+    } else {
+      const game = gameNodes[0];
+      if (typeof game.name !== 'string' || !game.name.trim()) {
+        errors.push(page + ': VideoGame object must have a real name');
+      }
+      if (game.url !== expected) {
+        errors.push(page + ': VideoGame url must match canonical');
+      }
+      if (typeof game.description !== 'string' || !game.description.trim()) {
+        errors.push(page + ': VideoGame description is required');
+      }
+      if (typeof game.image !== 'string' || !game.image.startsWith('https://')) {
+        errors.push(page + ': VideoGame needs an HTTPS cover image');
+      }
+      if (game.isAccessibleForFree !== true || !game.gamePlatform) {
+        errors.push(page + ': VideoGame must state free access and platform');
+      }
+      const play = game.potentialAction;
+      if (play?.['@type'] !== 'PlayAction' ||
+          typeof play.target !== 'string' ||
+          !play.target.startsWith(siteOrigin + '/meta6-lab/')) {
+        errors.push(page + ': VideoGame must link to an actual META GAMES launch target');
+      }
     }
   }
   for (const img of html.matchAll(/<img\b[^>]*>/gi)) {

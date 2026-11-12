@@ -14,8 +14,10 @@ const original = yaml.slice(yaml.indexOf(sentinel) + sentinel.length)
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 const examplePRs = Array.from({ length: 100 }, (_, i) => ({
   number: i + 1, title: 'unattributed task', body: '', labels: [],
+  state: i < 4 ? 'open' : 'closed',
+  created_at: i < 4 ? '2020-01-01T00:00:00Z' : null,
   updated_at: '2020-01-01T00:00:00Z',
-  head: { ref: 'lab/unattributed', sha: '0123456789abcdef' }
+  head: { ref: 'lab/unattributed', sha: String(i + 1).padStart(40, '0') }
 }));
 
 async function exercise(script, eventName) {
@@ -29,7 +31,23 @@ async function exercise(script, eventName) {
         })
       },
       pulls: {
-        list: async () => { stats.pulls++; return { data: examplePRs }; }
+        list: async () => { stats.pulls++; return { data: examplePRs }; },
+        get: async ({ pull_number }) => ({
+          data: {
+            head: { sha: examplePRs[pull_number - 1].head.sha },
+            mergeable_state: pull_number === 1 ? 'dirty' : 'clean'
+          }
+        })
+      },
+      checks: {
+        listForRef: async ({ ref }) => ({
+          data: { check_runs: [{
+            name: 'browser-open-all',
+            status: 'completed',
+            conclusion: ref === examplePRs[1].head.sha ? 'failure' : 'success',
+            html_url: 'https://github.com/example/repo/actions/runs/123'
+          }] }
+        })
       },
       issues: {
         listForRepo: async () => ({ data: [] }),
@@ -64,6 +82,11 @@ async function exercise(script, eventName) {
   for (const role of config.roles) {
     assert(stats.report.includes(role.name), 'role is absent from run summary: ' + role.name);
   }
+  assert(stats.report.includes('PR #1') && stats.report.includes('конфликт с main'),
+    'stale PR merge conflict must appear with its link and reason');
+  assert(stats.report.includes('PR #2') && stats.report.includes('красная проверка'),
+    'stale PR failed check must appear with its link and reason');
+  assert(!stats.report.includes('PR #3'), 'clean PR must not be marked failing');
   return stats;
 }
 
@@ -85,6 +108,23 @@ const mutants = [
     source: original.replace("if (context.eventName === 'pull_request')",
       "if (false && context.eventName === 'pull_request')"),
     event: 'pull_request'
+  },
+  {
+    name: 'stale-pr-age-reversed',
+    source: original.replace('now.getTime() - Date.parse(pr.created_at) > 86400000',
+      'now.getTime() - Date.parse(pr.created_at) < 86400000'),
+    event: 'push'
+  },
+  {
+    name: 'stale-merge-conflict-ignored',
+    source: original.replace("detail.data.mergeable_state === 'dirty'", 'false'),
+    event: 'push'
+  },
+  {
+    name: 'deception-failed-ci-replaced-with-success',
+    source: original.replace("['failure','timed_out','action_required'].includes(check.conclusion)",
+      "['success'].includes(check.conclusion)"),
+    event: 'push'
   }
 ];
 for (const mutant of mutants) {
@@ -93,4 +133,4 @@ for (const mutant of mutants) {
     undefined, 'escaped mutant: ' + mutant.name);
   process.stdout.write('TRAP ' + mutant.name + ' PASS\n');
 }
-process.stdout.write('AUDITOR MUTATIONS PASS: 3/3\n');
+process.stdout.write('AUDITOR MUTATIONS PASS: 6/6\n');

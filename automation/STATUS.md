@@ -1,12 +1,12 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-12T14:38:44.529Z | МГЛ: 50e7c0c7994ba827f4a14763df6b67569d7fde5a | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | нет данных
+UTC: 2026-11-12T14:47:58.390Z | МГЛ: 31f1d121d90d088f6328cd0206d7ae88e993ca32 | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #259 24d0a9e8151cde7c3242275159c301a10d189311: scripts/prohodchik/mutate-prompt.mjs
 - PR #246 72a2be2281e8f4c54785599732024b111d50bfd1: .github/workflows/lab-pages.yml, .github/workflows/link-guard.yml, scripts/lab/mutate-link-ok.sh, scripts/lab/mutate-page-assets.mjs, scripts/lab/mutate-page-assets.py, scripts/lab/verify-check-page-assets.sh, … (сокращено)
 - PR #265 f0a6d79bdda5416da56a145901e0216808cba97e: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py
 - PR #251 5016e0750ad94d53798200f6db159f9c37f55ab1: .github/workflows/auditor.yml, scripts/auditor/mutate-auditor.mjs
 - ещё 9: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/43238980846 | Run node scripts/dispetcher/run.mjs
+- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/43239603469 | Run node scripts/dispetcher/run.mjs
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
@@ -55,7 +55,7 @@ P1 — нет данных: нет данных
 #256 docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ | 2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec
 ещё 20: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1461 коммитов | нет данных
+МГЛ: 1481 коммитов | нет данных
 МГ: 6 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да

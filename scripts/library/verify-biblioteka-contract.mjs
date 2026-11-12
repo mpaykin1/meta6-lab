@@ -26,6 +26,14 @@ export function verifyBibliotekaContract(root, promptOverride, progressOverride)
     fail('load_ok is not tied to independent runtime evidence');
   }
 
+  const provenance = prompt.split('\n').find(line => /^3\. ПРОИСХОЖДЕНИЕ\./.test(line)) ?? '';
+  if (!provenance.includes('источник и лицензию') ||
+      !provenance.includes('права на переиспользование не подтверждены') ||
+      !provenance.includes('НЕ допускать компонент в живой каталог') ||
+      /лицензи[яю] подтвержда(?:ется|ть) по имени файла/i.test(provenance)) {
+    fail('third-party origin and license must be verified before catalog admission');
+  }
+
   const assets = prompt.split('\n').find(line => /^5\. АССЕТЫ\./.test(line)) ?? '';
   if (!assets.includes('asset_ok') || !assets.includes('независимой загрузки')) {
     fail('asset_ok has no independent loading gate');

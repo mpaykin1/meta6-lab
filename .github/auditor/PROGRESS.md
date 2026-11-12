@@ -21,3 +21,16 @@
 - Ревизор в PR: зелёный https://github.com/mpaykin1/meta6-lab/actions/runs/43024276845
 - Защищённый workflow: ожидает Claude https://github.com/mpaykin1/meta6-lab/actions/runs/43024276457
 - Единственный Issue: https://github.com/mpaykin1/meta6-lab/issues/253 (ботом ещё не обновлён).
+
+## Круг 2026-11-12 — twohour-stall (main 7f6463db0bb91b0dac2401f5fb47a62ede2ead40)
+
+- [x] Шаг 0 · 2026-11-12T06:56:26.863Z — прочитаны PROGRESS и обязательные правила: https://github.com/mpaykin1/meta6-lab/blob/main/.github/auditor/PROGRESS.md
+- [ ] Шаг 1 · 2026-11-12T06:56:26.863Z — сверен один schedule run https://github.com/mpaykin1/meta6-lab/actions/runs/43144961586 (success, SHA 29b4c6f3ea5d80f1e14720986f126ad20900271c); три последовательных прогона не подтверждены.
+- [ ] Шаг 2 · 2026-11-12T06:56:26.863Z — Issue #253 открыт: https://github.com/mpaykin1/meta6-lab/issues/253 ; pin через GraphQL не подтверждён, PR https://github.com/mpaykin1/meta6-lab/pull/254 ожидает Claude.
+- [x] Шаг 3 · 2026-11-12T06:56:26.863Z — срез Issue сверен с https://github.com/mpaykin1/meta6-lab/actions/runs/43144961586; заголовок «Последний запуск» ошибочно называл расчётный слот запуском; исправлено непосредственно в https://github.com/mpaykin1/meta6-lab/issues/253 .
+- [ ] Шаг 4 — конкретных строк нарушений в 🚨 нет; отсутствие нарушений требует полного подтверждения.
+- [ ] Шаг 5 (б) — отдельный PR с детектором двух часов без подтверждённых улучшений и тремя мутациями.
+- [ ] Шаг 6/7 — финальная запись после PR/CI.
+
+### Урок
+Расчётный часовой слот — не реальный запуск задачи. В отчёте различать окно, Actions run и подтверждённую активность.

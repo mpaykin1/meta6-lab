@@ -7,3 +7,4 @@
 |---|---|---|---|
 | [#54](https://github.com/mpaykin1/meta6-lab/pull/54) | `lab/render-visibility-optimization` | защищённое, ждёт Claude: `.github/workflows/lab-render-performance.yml`; ветка не изменялась | [файлы PR](https://github.com/mpaykin1/meta6-lab/pull/54/files) |
 | [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | `lab/bot-batch-1` | защищённое, ждёт Claude: `.github/workflows/bot-adapters-b2.yml`; ветка не изменялась | [файлы PR](https://github.com/mpaykin1/meta6-lab/pull/190/files) |
+| [#192](https://github.com/mpaykin1/meta6-lab/pull/192) | `lab/mcp-connect` | защищённое, ждёт Claude: `.github/workflows/mcp-connect-m6.yml`; ветка не изменялась | [файлы PR](https://github.com/mpaykin1/meta6-lab/pull/192/files) |

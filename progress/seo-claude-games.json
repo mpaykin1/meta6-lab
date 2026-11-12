@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "e166826c94121f782ec919c7fd84b26898dbbe1b",
+  "last_processed_head": "25f2aa86844654c0924809643b4e044e648c95a4",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -16,7 +16,7 @@
     },
     "1_fix_bot_and_other_ci": {
       "status": "in_progress",
-      "details": "В ashen-sumerek кнопка паузы больше не полагается только на CSS :has: при снятии hidden с игрового HUD видимость кнопки синхронизирует MutationObserver. Браузерный CI на новом коммите ожидает проверки; остальные красные проверки не объявлены исправленными."
+      "details": "Причина неработающего меню Ashen: общая кнопка «♫» из shared/meta-games-music.js перекрывала меню с z-index 2147483646; теперь в игре музыка доступна в паузе, на игровом экране скрыта. Временный MutationObserver откатан, проверка CI на новом SHA требуется."
     },
     "2_canonical_and_publish": {
       "status": "pending"
@@ -45,7 +45,9 @@
   ],
   "evidence": [
     "https://github.com/mpaykin1/meta6-lab/actions/runs/43188137217",
-    "https://github.com/mpaykin1/meta6-lab/commit/e166826c94121f782ec919c7fd84b26898dbbe1b"
+    "https://github.com/mpaykin1/meta6-lab/commit/e166826c94121f782ec919c7fd84b26898dbbe1b",
+    "https://github.com/mpaykin1/meta6-lab/actions/runs/43198753200",
+    "https://github.com/mpaykin1/meta6-lab/commit/25f2aa86844654c0924809643b4e044e648c95a4"
   ],
   "cycle_updates": [
     {
@@ -54,6 +56,13 @@
       "change": "Пауза в ashen-sumerek: реальное состояние HUD управляет видимостью иконки меню, чтобы кнопка не оставалась скрытой в браузере.",
       "commit": "e166826c94121f782ec919c7fd84b26898dbbe1b",
       "next": "Проверить browser-check на актуальном SHA и повторить поиск недоступных кнопок."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Ashen Sumerek: убрано перекрытие кнопки меню кнопкой музыки (♫) на игровом экране; управление музыкой перенесено в паузу посредством CSS без изменения shared scripts.",
+      "commit": "25f2aa86844654c0924809643b4e044e648c95a4",
+      "next": "Проверить game-browser-check и Library Machine после CSS-only исправления на последнем коммите."
     }
   ]
 }

@@ -1,5 +1,6 @@
 // CLI проверки захвата игры. Не меняет игровые исходники.
 import { blockersFor } from './claim.mjs';
+import { allPages as paginate } from './paginate.mjs';
 const REPO = 'mpaykin1/meta6-lab';
 
 function parseLocks(markdown, game) {
@@ -30,15 +31,7 @@ async function api(path) {
 }
 
 async function allPages(path) {
-  const results = [];
-  for (let page = 1; page <= 20; page++) {
-    const separator = path.includes('?') ? '&' : '?';
-    const items = await api(path + separator + 'per_page=100&page=' + page);
-    if (!Array.isArray(items)) throw new Error('GitHub API вернул неполную страницу: ' + path);
-    results.push(...items);
-    if (items.length < 100) return results;
-  }
-  throw new Error('GitHub API: пагинация превысила 20 страниц, захват запрещён');
+  return paginate(path, api);
 }
 
 async function main() {
@@ -58,6 +51,8 @@ async function main() {
     repo: pr.head.repo?.full_name,
     files: (await allPages(prefix + '/pulls/' + pr.number + '/files')).map(file => file.filename)
   })));
+  console.log('PREFLIGHT checked ' + checked.length + ' open PRs and ' +
+    checked.reduce((sum, pr) => sum + pr.files.length, 0) + ' changed paths');
   const locks = parseLocks(Buffer.from(lockFile.content, 'base64').toString('utf8'), game);
   const blockers = blockersFor({
     game,

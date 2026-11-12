@@ -73,3 +73,7 @@
 | #72 | lab/immersive-dishonored-principles-20261107 | НУЖЕН CLAUDE: конфликт `LAB_QUEUE.md`; HEAD `db5c0424023d80aad18ddeeccf240b484c549fa8`, main `cd3a96566ea9872f3bf47489262be2c34f06909a` (срез 2026-11-12). Ветка отстаёт на 424 коммита; обычный merge и CI не выполнены: локальный GitHub DNS недоступен, повторные попытки ремонта исчерпаны. Изменения PR: `AGENTS.md`, `LAB_QUEUE.md`, `rules/02-igrovye-mekhaniki/IMMERSIVE_LEVEL_DESIGN.md`, `rules/09-platforma/RULES_CHECKLIST.md`. https://github.com/mpaykin1/meta6-lab/pull/72 | 2026-11-12 |
 
 | #193 | lab/kontur-k7-review | НУЖЕН CLAUDE: защищённый охранник `scripts/kontur/guard.mjs`, а также `scripts/kontur/mutate-kontur-guard.mjs` и `rules/06-rabota-ii-s-kodom/VIDY_OSHIBOK.md`; HEAD `c7e07c9afa9462bc3512edca92696602c2c3a126`. Самостоятельное изменение охранника и слияние запрещены. https://github.com/mpaykin1/meta6-lab/pull/193 | 2026-11-12 |
+
+## Ждёт Claude
+
+| #258 | `lab/prohodchik-b2-motion-20261111` | **НУЖЕН CLAUDE:** новый защищённый `.github/workflows/prohodchik-b2.yml` запускает реальный Chromium B2 на ПК и телефоне с артефактами; 4 мутации проверяют смерть с исчезновением координат героя (ошибка №44). [PR #258](https://github.com/mpaykin1/meta6-lab/pull/258), [SHA b962e1bd](https://github.com/mpaykin1/meta6-lab/commit/b962e1bde7904a93bd93ece5705518ee9fc4e267). Зелёного B2 live Actions run пока нет. Требуются проверка Claude, реальный run с кадрами и разрешение защищённого workflow. B2–B5 не утверждать. | 2026-11-12 |

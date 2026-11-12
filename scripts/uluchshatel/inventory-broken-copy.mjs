@@ -12,7 +12,7 @@ export function inventory(source = readFileSync(game, 'utf8')) {
   if (source.split(LOADER).length !== 2) throw new Error('Observer loader must occur exactly once');
   const original = source.replace('\n' + LOADER, '');
   const blob = createHash('sha1')
-    .update('blob ' + Buffer.byteLength(original) + '\\0' + original).digest('hex');
+    .update('blob ' + Buffer.byteLength(original) + '\0' + original).digest('hex');
   if (blob !== ORIGINAL_BLOB) throw new Error('Original HTML source or assets changed');
 
   const secStart = original.indexOf('  sec: {');

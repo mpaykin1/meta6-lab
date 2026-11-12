@@ -1,11 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-12T07:05:36.633Z | МГЛ: 940ea4bfd83b76aae64c486f6401e0c64ea9ec33 | МГ: 573ec644a032aa3cbf999193c09fa2176ce69a7a | https://github.com/mpaykin1/meta6-lab/actions/runs/43172470265
+UTC: 2026-11-12T07:07:25.249Z | МГЛ: 29dbbb39331c9cc1f284cef55d6de9d819f4f7f9 | МГ: 573ec644a032aa3cbf999193c09fa2176ce69a7a | https://github.com/mpaykin1/meta6-lab/actions/runs/43172495942
 ## ПРОВЕРИТЬ CLAUDE
 - PR #246 72a2be2281e8f4c54785599732024b111d50bfd1: .github/workflows/lab-pages.yml, .github/workflows/link-guard.yml, scripts/lab/mutate-link-ok.sh, scripts/lab/mutate-page-assets.mjs, scripts/lab/mutate-page-assets.py, scripts/lab/verify-check-page-assets.sh, … (сокращено)
-- PR #265 f0a6d79bdda5416da56a145901e0216808cba97e: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py
-- PR #251 5016e0750ad94d53798200f6db159f9c37f55ab1: .github/workflows/auditor.yml, scripts/auditor/mutate-auditor.mjs
-- PR #238 9546bef2d74794f6ecc717a2f4095682fd2e137f: .github/workflows/journal-projections.yml, .github/workflows/pr-autofinish.yml, .github/workflows/report-completion-guard.yml, .github/workflows/storozha-branches.yml, .github/workflows/storozha-quota.yml, .git… (сокращено)
-- ещё 8: https://github.com/mpaykin1/meta6-lab/pulls
+- PR #265 f0a6d79bdda5416da56a145901e0216808cba97e: нет данных
+- PR #251 5016e0750ad94d53798200f6db159f9c37f55ab1: нет данных
+- PR #244 7a548632aae8be6b541cc52fec2e0bba3d14059a: нет данных
+- ещё 15: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
@@ -47,14 +47,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 52 | конфликт: нет данных | слито: 20 | закрыто: 49
+открыто: 51 | конфликт: нет данных | слито: 21 | закрыто: 49
+#256 docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ | 2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec
 #243 Геймдизайн-аудит META GAMES — чистый PR без защищённой истор | 98d7334782dfeac39984972d3b2bf2067828bd81
 #246 ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож | 72a2be2281e8f4c54785599732024b111d50bfd1
 #265 ASSET CHECK: бот-проверщик ассет-паков + многоразовый промпт | f0a6d79bdda5416da56a145901e0216808cba97e
-#251 feat(auditor): бесплатная почасовая ревизия пяти задач META  | 5016e0750ad94d53798200f6db159f9c37f55ab1
-ещё 16: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 17: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1246 коммитов | нет данных
+МГЛ: 1249 коммитов | нет данных
 МГ: 5 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-12T07:02:47.057Z",
+  "generated_at": "2026-11-12T07:03:42.387Z",
   "sha": {
-    "lab": "fd2a5d9d0f9d0b9a9e4983d67d6b1c7de53a2aaa",
+    "lab": "b8efc2d96a1a7403aff4a2f129095cb69002bee9",
     "mg": "573ec644a032aa3cbf999193c09fa2176ce69a7a"
   },
   "checked": {
@@ -292,11 +292,16 @@
     ]
   },
   "pr": {
-    "open": 53,
+    "open": 52,
     "conflicts": "нет данных",
-    "merged": 19,
+    "merged": 20,
     "closed": 49,
     "mergedItems": [
+      {
+        "number": 243,
+        "title": "Геймдизайн-аудит META GAMES — чистый PR без защищённой истор",
+        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81"
+      },
       {
         "number": 246,
         "title": "ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож",
@@ -510,7 +515,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1239,
+      "count": 1242,
       "folders": "нет данных"
     },
     "mg": {

@@ -16,7 +16,7 @@ export function verifyObserver(code) {
   const engine = {
     G: { state: 'play', collected: 0, total: 2, kills: 3, seed: 1337, biome: 'dusk' },
     player: { pos: { x: 4, y: 7, z: 9 }, hp: 6 },
-    world: { beacon: { x: 45, y: 8, z: 50 }, coins: [{}, {}] },
+    world: { beacon: { x: 45, y: 8, z: 50 }, ring: { x: 42, y: 3, z: 47 }, coins: [{}, {}] },
     coins: [
       { x: 5, y: 8, z: 9, alive: true },
       { x: 22, y: 10, z: 9, alive: true }
@@ -66,8 +66,15 @@ export function verifyObserver(code) {
   assert.equal(bot.state().goal.x, 22, 'hero movement changes the live target');
   engine.coins.forEach(coin => { coin.alive = false; });
   engine.G.collected = 2;
-  assert.equal(bot.state().goal.x, 45, 'beacon replaces collected coins');
+  assert.equal(bot.state().goal.x, 42, 'the victory ring, not the beacon, follows all coins');
+  assert.equal(bot.state().goal.y, 3, 'ring elevation is read from the game');
   assert.equal(bot.state().stage, 2);
+  engine.G.warden = { hp: 10, state: 'hunt', segs: [{ x: 12, y: 5, z: 13 }] };
+  assert.equal(bot.state().goal.x, 12, 'live guardian must be approached before the ring');
+  assert.equal(bot.state().goal.z, 13, 'live guardian position is not hardcoded');
+  engine.G.warden.hp = 0;
+  engine.G.wardenDown = true;
+  assert.equal(bot.state().goal.x, 42, 'after guardian defeat the destination is the ring');
   engine.G.state = 'victory';
   assert.equal(bot.state().levelDone, true);
   assert.equal(bot.state().gameDone, true);

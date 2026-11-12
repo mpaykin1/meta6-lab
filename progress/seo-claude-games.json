@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "54ae3c49222b0682fbd48db776e6d73a69c09aee",
+  "last_processed_head": "59ec10d617c1db6fa6a4fff016e1daee8b00dd96",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -55,7 +55,7 @@
         "underwater-world"
       ],
       "pending_pages": 0,
-      "details": "17 описаний, 3 FAQ на игру; SEO-валидатор теперь отвергает несуществующий PlayAction, ловушка добавлена. Исправлены видимые H2-заголовки 6 игр; новую CI пока не подтвердили.",
+      "details": "17/17 уникальных SEO-описаний и FAQ сохранены; все 17 H2 теперь используют читаемое имя игры вместо технического slug. Валидатор проверяет существование файла игры в PlayAction; мутация ловит подмену адреса. Проверка CI на новом HEAD остаётся ожидаемой.",
       "seo_ci": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
       "metadata": "23 страницы: title <= 60, description 120–160, Schema.org JSON-LD, alt",
       "validator_implementation": "https://github.com/mpaykin1/meta6-lab/commit/674359e1781fb13e4dfeabb461e12def5448ea86"
@@ -290,6 +290,16 @@
         "54ae3c49222b0682fbd48db776e6d73a69c09aee"
       ],
       "next": "Довести Veil Terraces в базовом PR #234 без изменения защищённого эталона; добиться разрешённых проверок PR #242; завершить замену внешних картинок на собственные кадры, затем live 200 и IndexNow 200/202."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "У всех 17 страниц заменён технический URL-slug в видимом H2 на настоящее название игры; наличие заголовка и отсутствие старого slug проверено во всех 17 файлах.",
+      "commits": [
+        "ac317b4a4e15d1064bba2050ecea8d1af6e2d92c",
+        "59ec10d617c1db6fa6a4fff016e1daee8b00dd96"
+      ],
+      "next": "Live-публикация после исправления красного Veil Terraces CI и разрешения Actions на PR #242. Затем проверить все 23 страницы, кадры WebP и отправку IndexNow."
     }
   ],
   "base_sync_sha": "a6431c80a43e11f1031530268031acb28341d824"

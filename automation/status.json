@@ -1,16 +1,38 @@
 {
-  "generated_at": "2026-11-11T14:13:15.890Z",
+  "generated_at": "2026-11-12T07:05:36.633Z",
   "sha": {
-    "lab": "65b08814b29bee26357e4cff6edca750e0a10105",
-    "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
+    "lab": "940ea4bfd83b76aae64c486f6401e0c64ea9ec33",
+    "mg": "573ec644a032aa3cbf999193c09fa2176ce69a7a"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43036286478",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43172470265",
   "review": {
     "protected": [
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
@@ -102,13 +124,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "B1 — all games open without console errors",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43033573449",
-        "step": "Install Chromium for actual game rendering"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -276,11 +292,26 @@
     ]
   },
   "pr": {
-    "open": 46,
+    "open": 52,
     "conflicts": "нет данных",
-    "merged": 17,
-    "closed": 45,
+    "merged": 20,
+    "closed": 49,
     "mergedItems": [
+      {
+        "number": 243,
+        "title": "Геймдизайн-аудит META GAMES — чистый PR без защищённой истор",
+        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81"
+      },
+      {
+        "number": 246,
+        "title": "ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож",
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1"
+      },
+      {
+        "number": 265,
+        "title": "ASSET CHECK: бот-проверщик ассет-паков + многоразовый промпт",
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e"
+      },
       {
         "number": 251,
         "title": "feat(auditor): бесплатная почасовая ревизия пяти задач META ",
@@ -368,6 +399,28 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
@@ -462,12 +515,12 @@
   },
   "changes": {
     "lab": {
-      "count": 1041,
+      "count": 1246,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 3,
-      "folders": "AGENTS.md:1, automation:1, rules:2"
+      "count": 5,
+      "folders": "AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, rules:2"
     }
   },
   "games": [
@@ -542,6 +595,8 @@
     "| 35 | 11.11.2026 | PR #238: компилятор журнала ветвился по `process.argv` и блокировался KONTUR Guard | [красный прогон 42999367374](https://github.com/mpaykin1/meta6-lab/actions/runs/42999367374) | `scripts/journal/mutate-journal.mjs`: argv-deception, validation-publishes, writer-dry-run, missing-source |",
     "| 36 | 11.11.2026 | Сторож эталонов пропускал изменения тестов внутри папок `tests/` и файлов `*.spec.ts`: проверял только некоторые имена тестовых файлов | Сверка `referenceGate` с запретом менять существующие тесты | `scripts/storozha/mutate-storozha.mjs`: bypass nested test directory, bypass TypeScript spec file; `scripts/storozha/verify-storozha.mjs` |",
     "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |",
-    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |"
+    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |",
+    "| 39 | 11.11.2026 | Публикация после merge: исходный demos/living-watercolor/index.html существует, но Pages даёт 404; прежний lab-pages проверял только каталог | Требование владельца от 11.11 и diff .github/workflows/lab-pages.yml | `scripts/lab/verify-link-ok.sh` + `scripts/lab/mutate-link-ok.sh` (404, чужой хост, CI-обман); [зелёная ловушка](https://github.com/mpaykin1/meta6-lab/actions/runs/43014018459), проверка всех index в PR #246 |",
+    "| 40 | 11.11.2026 | HTML 200 с недоступным JS/CSS/изображением/аудио: прежняя проверка игнорировала вложенные 404 | Локальный fixture HTML 200 + JS 404 и 3 мутации (пропуск script, чужой origin, CI-обман) | `scripts/lab/link-ok.sh` вызывает `scripts/lab/check-page-assets.sh` перед PASS; `scripts/lab/mutate-page-assets.mjs` + `scripts/lab/verify-check-page-assets.sh`, [PR #246](https://github.com/mpaykin1/meta6-lab/pull/246), [SHA bb60a8b](https://github.com/mpaykin1/meta6-lab/commit/bb60a8bff951c714fb6c332a323445119ac1486c) |"
   ]
 }

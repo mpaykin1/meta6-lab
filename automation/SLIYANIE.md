@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 68, слито 2, закрыто 43, открыто 23 — бот, 2026-11-11 14:00 UTC
+Итог: всего 68, слито 2, закрыто 45, открыто 21 — бот, 2026-11-12 07:04 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -33,8 +33,8 @@
 | #172 | код | `lab/pod-i-nad-palette-cycle` | META GAMES: original dynamic palette cycle for sky, water, f | closed | |
 | #169 | код | `lab/pod-i-nad-original-palettes` | META GAMES: extract source-exact dusk, twilight, night and d | closed | |
 | #132 | код | `lab/cycle5-archer-meta-adfree-1108` | fix(meta): Archer in the Fog — no ads, local saves and one f | closed | |
-| #131 | код | `lab/owner-graphics-animation-references-20261108` | META GAMES: 10 эталонов графики и анимации из оригиналов вла | open | |
-| #129 | код | `lab/cycle4-twilight-isles-no-ads-1108` | fix(meta): Twilight Isles 2 plays without ads, with free rev | open dirty | |
+| #131 | код | `lab/owner-graphics-animation-references-20261108` | META GAMES: 10 эталонов графики и анимации из оригиналов вла | closed | |
+| #129 | код | `lab/cycle4-twilight-isles-no-ads-1108` | fix(meta): Twilight Isles 2 plays without ads, with free rev | closed | |
 | #126 | код | `lab/sketch-to-game-standard` | Эталон: универсальный промпт Sketch → HTML Game → ZIP | merged | |
 | #125 | код | `lore/alternative-last-seed-20261108` | Lore: alternative Last Seed mythology and inspiration bank | merged | |
 | #124 | код | `lab/seed-of-last-world-canon` | ЛОР: Зерно последнего мира — эталон и карта мультивселенной  | closed | |
@@ -56,7 +56,7 @@
 | #86 | код | `lab/sumerki2-bot-controls-20261107-1839` | bot: honest Sumerki II input strategy and bounded run contra | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42382769013), [PR #86](https://github.com/mpaykin1/meta6-lab/pull/86) |
 | #81 | код | `lab/sumerki-bot-controls-20261107-1746` | bot: strict input-only strategy for Sumerki i Pepel 2 | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42378567198), [PR #81](https://github.com/mpaykin1/meta6-lab/pull/81) |
 | #73 | код | `lab/sumerki-bot-config-20261107` | feat(bot): strict browser enrollment for Sumerki II | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42372675764), [PR #73](https://github.com/mpaykin1/meta6-lab/pull/73) |
-| #72 | код | `lab/immersive-dishonored-principles-20261107` | Геймдизайн META GAMES: пять принципов IM1–IM5 | open | |
+| #72 | код | `lab/immersive-dishonored-principles-20261107` | Геймдизайн META GAMES: пять принципов IM1–IM5 | open dirty | |
 | #69 | код | `lab/classic-bot-config-20261107` | feat(bot): configure strict classic game browser checks | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42368011822), [PR #69](https://github.com/mpaykin1/meta6-lab/pull/69) |
 | #60 | код | `lab/render-broken-city-adaptive` | Perf: adaptive WebGL/Three.js render resolution in Broken Ci | closed | |
 | #59 | код | `lab/render-veil-shared-instancing` | Perf: apply proven WebGL2 instancing to shared Veil Terraces | closed | |

@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| 🔨 В РАБОТЕ | Проверяющий: постоянное развитие | МГЛ | чат ChatGPT | `lab/proveryayushchij-growth-20261111` | — | 2026-11-12 17:35 | 2026-11-12 14:23 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | PR #242: исправить красные проверки SEO-каталога | МГЛ | MG-строитель-2 | `lab/seo-claude-adfree-1111` | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | 2026-11-11 08:17 | 2026-11-12 10:51 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Продолжение МГЛ: зафиксировать очередь PR и подтверждённые слияния — ТОЛКАЧ: [конфликт снят; CI не завершён](https://github.com/mpaykin1/meta6-lab/commit/4f07f43cd8b6d4a5ebba9d3466aa3098aee8833c) | МГЛ | Кто: толкач (захват 2026-11-12T10:26 UTC; прежде ChatGPT (сам не записал — добавил сторож)) | `lab/chat-pr-queue-1111` | [#237](https://github.com/mpaykin1/meta6-lab/pull/237) | 2026-11-11 06:16 | 2026-11-12 10:27 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Archer #1: visible dragon aim beacon and early attack warning (2.0.1) | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/archer-retention-exp-1-game` | [#264](https://github.com/mpaykin1/meta6-lab/pull/264) | 2026-11-11 15:00 | 2026-11-12 10:23 |
@@ -75,7 +76,6 @@
 | 🔨 В РАБОТЕ | Разные заставки по реальной графике всех 17 игр Claude | МГЛ | чат ChatGPT | `lab/claude-adfree-catalog-1110` | [#234](https://github.com/mpaykin1/meta6-lab/pull/234) | 2026-11-11 04:48 | 2026-11-12 14:24 |
 | 🔨 В РАБОТЕ | Каталог: новое вступление, без имени ИИ, интерактивный лор 14 миров | МГЛ | чат ChatGPT | `lab/claude-adfree-catalog-1110` | [#234](https://github.com/mpaykin1/meta6-lab/pull/234) | 2026-11-11 06:23 | 2026-11-12 14:24 |
 | 🔨 В РАБОТЕ | Вывести игру про дерево и зерно на первое место в каталоге Claude | МГЛ | чат ChatGPT | `lab/claude-adfree-catalog-1110` | [#234](https://github.com/mpaykin1/meta6-lab/pull/234) | 2026-11-11 05:43 | 2026-11-12 14:24 |
-| 🔨 В РАБОТЕ | Проверяющий: постоянное развитие | МГЛ | чат ChatGPT | `lab/proveryayushchij-growth-20261111` | — | 2026-11-11 11:32 | 2026-11-12 14:23 |
 | 🙋 НУЖЕН CLAUDE: защищённые эталоны, красный CI | Исправить красные проверки PR #234 каталога игр | МГЛ | MG-строитель-4 | `lab/claude-adfree-catalog-1110` | [#234](https://github.com/mpaykin1/meta6-lab/pull/234) | 2026-11-11 08:44 | 2026-11-12 14:24 |
 | 🙋 НУЖЕН CLAUDE: красные guard, pod-i-nad и META BOT в базовом PR #234 | SEO-каталог без рекламы: канонический URL, структурированные данные, страницы 17 игр, Sitemap | МГЛ | чат ChatGPT | `lab/seo-claude-adfree-1111` | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | 2026-11-11 07:29 | 2026-11-12 10:51 |
 | 🙋 НУЖЕН CLAUDE: PR меняет .github/workflows/library-machine.yml | Проверить PR #218 и ограничения безопасного слияния | МГЛ | MG-строитель-4 | `lab/remont-r1-library` | [#218](https://github.com/mpaykin1/meta6-lab/pull/218) | 2026-11-11 04:41 | 2026-11-12 10:19 |

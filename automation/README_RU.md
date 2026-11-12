@@ -18,15 +18,9 @@
 Канал связи: ветка `handoff` репозитория mpaykin1/meta6 (handoff/to-claude/, handoff/to-chatgpt/, STATUS-*.md, PROGRESS.md, RESULT.md)
 ```
 
-## Компоненты
-| Компонент | Где живёт | Расписание | Текст |
-|---|---|---|---|
-| Claude-контролёр | запланированная задача Claude, id `trig_01D1hx6RUzyniQeBSLHsCEVm` | каждый час (:07 UTC) | [prompts/claude-controller.md](prompts/claude-controller.md) |
-| Claude-сторож | запланированная задача на компьютере, id `trig_016tJNvfcaGA55pvSs2hugVZ` | каждые 2 часа (:23 UTC) | [prompts/claude-computer-watchdog.md](prompts/claude-computer-watchdog.md) |
-| ChatGPT-разработчик | 5 автозадач ChatGPT + чат «Продолжение этапов проекта» | по его расписанию, каждый час | [prompts/chatgpt-developer.md](prompts/chatgpt-developer.md) |
-| Независимый аудитор | новый чат ChatGPT раз в ~6 часов, запускает сторож | по условиям в watchdog | [prompts/chatgpt-auditor.md](prompts/chatgpt-auditor.md) |
-| Канал связи | ветка `handoff` | постоянно | раздел 18.3 документа |
-| Ассеты референса | `reference/graf-offline/` | только чтение | [NOTES](../reference/graf-offline/NOTES.md) |
+## Действующие промпты
+
+Актуальный список, назначение, статусы и версии: [реестр промптов](PROMPTY.md).
 
 ## Запуск с нуля (если что-то пропало)
 1. В чат ChatGPT вставить промпт 2 из [prompts/chatgpt-developer.md](prompts/chatgpt-developer.md) (обновить автозадачи), затем промпт 1 (запустить непрерывную разработку).

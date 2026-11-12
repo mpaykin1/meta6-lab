@@ -1,6 +1,6 @@
 // CLI проверки захвата игры. Не меняет игровые исходники.
 import { blockersFor } from './claim.mjs';
-import { allPages as paginate } from './paginate.mjs';
+import { allPages as paginate, allChangedPaths } from './paginate.mjs';
 const REPO = 'mpaykin1/meta6-lab';
 
 function parseLocks(markdown, game) {
@@ -49,7 +49,7 @@ async function main() {
     url: pr.html_url,
     branch: pr.head.ref,
     repo: pr.head.repo?.full_name,
-    files: (await allPages(prefix + '/pulls/' + pr.number + '/files')).map(file => file.filename)
+    files: allChangedPaths(await allPages(prefix + '/pulls/' + pr.number + '/files'))
   })));
   console.log('PREFLIGHT checked ' + checked.length + ' open PRs and ' +
     checked.reduce((sum, pr) => sum + pr.files.length, 0) + ' changed paths');

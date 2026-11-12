@@ -70,7 +70,15 @@ const ARC2 = (() => {
     archer.legs[0].rotation.x += step * 0.75;
     archer.legs[1].rotation.x -= step * 0.75;
     archer.body.position.y += Math.abs(Math.sin(RUN.stride)) * 0.065 * strength;
-    archer.spine.rotation.z += -Math.sign(RUN.velocity) * 0.09 * strength;
+    const direction = Math.sign(RUN.velocity);
+    archer.spine.rotation.z += -direction * 0.09 * strength;
+    archer.body.rotation.z += -direction * 0.07 * strength;
+    archer.head.rotation.y += direction * 0.13 * strength;
+    // Existing segmented cape follows the runner's real velocity and footsteps.
+    archer.cape.forEach((segment, index) => {
+      segment.rotation.x += (0.08 + index * 0.045) * strength;
+      segment.rotation.z += direction * (0.035 + index * 0.016) * strength;
+    });
   }
 
   /* ---------- U1 sparks ---------- */

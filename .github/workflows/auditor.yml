@@ -213,7 +213,7 @@ jobs:
             // Compare two completed hourly observations. The previous Issue is already in recentIssues.
             // A missing, stale, or incomplete observation is unknown, never a proven two-hour stall.
             const previousBody = recentIssues.find(i => i.number === cfg.issue_number)?.body || '';
-            const match = previousBody.match(/<!-- auditor-cycle-v1 (\\{[^\\n]*\\}) -->/);
+            const match = previousBody.match(/<!-- auditor-cycle-v1 (\{[^\n]*\}) -->/);
             let previous = null;
             try { if (match) previous = JSON.parse(match[1]); }
             catch (err) { core.warning('Invalid previous cycle: '+clean(err.message)); }

@@ -3,15 +3,18 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "4661d37c04824efe021e38004ade720da32b098b",
+  "last_processed_head": "3dc11ee9645943ebd3f539a5836fc1475815e2b7",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
-      "details": "Восстановлены 3 исходных файла точными Git blob SHA из main, проверка CI ещё требуется.",
+      "details": "Оригиналы восстановлены из main байт-в-байт: ранее три файла + reference/abyss-glow-2026-11-09/index.html, reference/sumerechny-arkhipelag/index.html, reference/sunken-city/index.html. Новая STOROZHA проверка на HEAD ожидает CI.",
       "files": [
         "observer-world-en-v7/index.html",
         "rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md",
-        "reference/sumerek-golden/pod-i-nad-68b2ecd3.html"
+        "reference/sumerek-golden/pod-i-nad-68b2ecd3.html",
+        "reference/abyss-glow-2026-11-09/index.html",
+        "reference/sumerechny-arkhipelag/index.html",
+        "reference/sunken-city/index.html"
       ]
     },
     "1_fix_bot_and_other_ci": {
@@ -50,7 +53,11 @@
     "https://github.com/mpaykin1/meta6-lab/commit/25f2aa86844654c0924809643b4e044e648c95a4",
     "https://github.com/mpaykin1/meta6-lab/actions/runs/43199889622",
     "https://github.com/mpaykin1/meta6-lab/commit/edd4a58940f904e384dfddf2bfa1d972963c2877",
-    "https://github.com/mpaykin1/meta6-lab/commit/4661d37c04824efe021e38004ade720da32b098b"
+    "https://github.com/mpaykin1/meta6-lab/commit/4661d37c04824efe021e38004ade720da32b098b",
+    "https://github.com/mpaykin1/meta6-lab/actions/runs/43201355486",
+    "https://github.com/mpaykin1/meta6-lab/commit/75282933272b06905b5c261f4ecf5917a837a55d",
+    "https://github.com/mpaykin1/meta6-lab/commit/d59921c3eb1651a366438950198b6c140db7fc9a",
+    "https://github.com/mpaykin1/meta6-lab/commit/3dc11ee9645943ebd3f539a5836fc1475815e2b7"
   ],
   "cycle_updates": [
     {
@@ -80,6 +87,17 @@
       "change": "Автоматический генератор библиотеки синхронизировал shared/library/index.json и reference-ashen-sumerek.json с текущей игрой.",
       "commit": "4661d37c04824efe021e38004ade720da32b098b",
       "next": "Повторно проверить реальные CI с пользовательского коммита, не считать action_required зелёным."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "STOROZHA защитил ещё 3 исходника: восстановлены байт-в-байт из main, SHA blob точно совпадают.",
+      "commits": [
+        "75282933272b06905b5c261f4ecf5917a837a55d",
+        "d59921c3eb1651a366438950198b6c140db7fc9a",
+        "3dc11ee9645943ebd3f539a5836fc1475815e2b7"
+      ],
+      "next": "Проверить STOROZHA protected originals на новом HEAD; не сливать PR, пока все обязательные проверки не зелёные."
     }
   ]
 }

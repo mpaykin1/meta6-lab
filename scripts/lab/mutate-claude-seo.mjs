@@ -26,6 +26,25 @@ cases.push(
   ['encoded missing landing page', original.replace('</body>',
     '<a href="../../games/%6eot-a-real-game/">Details</a></body>')]
 );
+// Mutate a valid game graph, not a broken JSON string, to test semantic validation.
+const mutateGame = change => {
+  const match = original.match(/<script\\b[^>]*type="application\\/ld\\+json"[^>]*>([\\s\\S]*?)<\\/script>/i);
+  if (!match) throw Error('Missing JSON-LD fixture');
+  const schema = JSON.parse(match[1]);
+  const game = schema['@graph'].find(node => node['@type'] === 'VideoGame');
+  if (!game) throw Error('Missing VideoGame fixture');
+  change(game, schema);
+  return original.replace(match[1], JSON.stringify(schema));
+};
+cases.push(
+  ['missing VideoGame name', mutateGame(game => { game.name = ''; })],
+  ['foreign VideoGame canonical', mutateGame(game => {
+    game.url = 'https://example.invalid/game/';
+  })],
+  ['deceptive extra valid-looking VideoGame', mutateGame((game, schema) => {
+    schema['@graph'].push({ ...game, name: 'Fake game', url: 'https://example.invalid/' });
+  })]
+);
 for (const [name, html] of cases) {
   if (!inspect(html, page).length) throw Error('Mutation escaped SEO validator: ' + name);
   console.log('CAUGHT', name);

@@ -50,7 +50,13 @@ const mutations = [
   ['transient-scroll-ignored', 'sample.sy !== 0 ||', 'false ||'],
   ['transient-canvas-resize-ignored', 'Math.abs(sample.cw - baseline.cw) > 1 ||', 'false ||'],
   ['release-only-deception', 'for (const sample of samples) {',
-    'for (const sample of samples.slice(-1)) {']
+    'for (const sample of samples.slice(-1)) {'],
+  ['follow-up-ignored-after-first-move', 'if (laterMs < STUCK_MS) {',
+    'if (false && laterMs < STUCK_MS) {'],
+  ['follow-up-shortened-to-one-ms', 'if (laterMs < STUCK_MS) {',
+    'if (laterMs < 1) {'],
+  ['idle-falsely-counts-as-held-input', '.filter(s => s.input)',
+    '.filter(s => true)']
 ];
 
 try {
@@ -61,7 +67,7 @@ try {
     assert.notEqual(mutant, original, 'Mutation failed: ' + name);
     execute(mutant, name, false);
   }
-  console.log('B2_MUTATIONS_PASS 14 hostile variants including late stall after movement');
+  console.log('B2_MUTATIONS_PASS 17 hostile variants including 2s follow-up and idle deception');
 } finally {
   rmSync(temp, {recursive: true, force: true});
 }

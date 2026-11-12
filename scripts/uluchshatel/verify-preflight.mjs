@@ -43,3 +43,7 @@ assert.equal(blockersFor({
 assert.throws(() => blockersFor({ ...base, prs: [{ files: null }] }), /полный список/);
 assert.throws(() => blockersFor({ ...base, lastCommitAt: null }), /точной даты/);
 console.log('verify-preflight: 12 PASS');
+
+const { verifyPagination } = await import('./verify-paginate.mjs');
+await verifyPagination();
+console.log('verify-paginate: late PR and file page verified');

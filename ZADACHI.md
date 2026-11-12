@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | ЭТАЛОНЫ В БИБЛИОТЕКУ — Veil Terraces: отдельный модуль камеры, исходные байты, Chromium; [run #43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458) ожидает PASS; 0 → 0 подтверждённых load_ok | МГЛ | Кто: библиотека | `lab/biblioteka-veil-camera-20261112` | [#270](https://github.com/mpaykin1/meta6-lab/pull/270) | 2026-11-12 07:00 | 2026-11-12 07:00 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | ССЫЛКА = 200: восстановить 404, защитить sync и JS imports, включить PR-ловушки | МГЛ | чат ChatGPT | `lab/link-guard-recovery-1111` | [#268](https://github.com/mpaykin1/meta6-lab/pull/268) | 2026-11-11 16:24 | 2026-11-11 16:45 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | ASSET CHECK v2: универсальный бот для любых ассетов | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/asset-check-universal` | [#267](https://github.com/mpaykin1/meta6-lab/pull/267) | 2026-11-11 16:24 | 2026-11-11 16:24 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | test(lovushki): catch Claude quota and GraphQL API regressions | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/kak-proveryayushchij-traps` | [#247](https://github.com/mpaykin1/meta6-lab/pull/247) | 2026-11-11 11:34 | 2026-11-11 16:13 |

@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "0d072f861146693806571306e9e861becdf356b4",
+  "last_processed_head": "ea8a8b336d68210f7b0d20ce658d0d6a4364ce12",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -55,7 +55,7 @@
         "underwater-world"
       ],
       "pending_pages": 0,
-      "details": "17/17 уникальных описаний и FAQ; валидатор проверяет также реальные обязательные поля VideoGame, адрес запуска и несовпадающие/дублирующиеся сущности. Новый CI ожидается. Ноябрьский цикл: запрет Playgama preconnect теперь обнаруживает любой порядок и разные кавычки в HTML link; три сценария-ловушки. Ожидает нового CI.",
+      "details": "17/17 уникальных описаний и FAQ; валидатор проверяет также реальные обязательные поля VideoGame, адрес запуска и несовпадающие/дублирующиеся сущности. Новый CI ожидается. Ноябрьский цикл: запрет Playgama preconnect теперь обнаруживает любой порядок и разные кавычки в HTML link; три сценария-ловушки. Ожидает нового CI. Проверка локальных img и социальных обложек: URL и существование файла, включая URL-encoded пути; три новые мутации. Новый CI ожидает проверки.",
       "seo_ci": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
       "metadata": "23 страницы: title <= 60, description 120–160, Schema.org JSON-LD, alt",
       "validator_implementation": "https://github.com/mpaykin1/meta6-lab/commit/674359e1781fb13e4dfeabb461e12def5448ea86"
@@ -263,6 +263,16 @@
       "change": "Veil Terraces: генератор теперь требует реальный проходимый маршрут всех шести воспоминаний вместо случайного тупика; при первой загрузке переподбирает мир. Не меняются графика, бот-контракт или правила проверок.",
       "commit": "64ae05f16d4a18808de4c8472e20616880daa3b2",
       "next": "Проверить META BOT и LAB focused META BOT для реальной полной игры; сохранить генератор без обходов физики."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "SEO-валидатор отклоняет отсутствующие локальные изображения и OG/Twitter обложки; 3 мутации без ослабления существующих проверок.",
+      "commits": [
+        "51308dc2742e8d31926ab154af6177c030b441de",
+        "ea8a8b336d68210f7b0d20ce658d0d6a4364ce12"
+      ],
+      "next": "Проверить SEO Catalog Validator на свежем SHA, исправить реальную ошибку при отказе. Затем привести обязательный CI 234/242 к зелёному."
     }
   ],
   "base_sync_sha": "a6431c80a43e11f1031530268031acb28341d824"

@@ -50,6 +50,19 @@ function fixtures(assessMotion, assessFixedViewport, assessB2Probe) {
     passive, interval(state(0.5, 0), state(1, 0.4), 500)
   ]).status, 'MOVED');
   assert.equal(assessMotion([interval(state(0, 0), state(0, 0, {alive: false}))]).status, 'DEAD');
+  // A real death can delete the hero object and even the current level pointer.
+  // The detector must raise DEAD at once, using the last valid hero coordinates.
+  const disappearsOnDeath = interval(state(2, 3), {alive: false, hero: null, level: null});
+  const vanished = assessMotion([disappearsOnDeath]);
+  assert.equal(vanished.status, 'DEAD');
+  assert.deepEqual(vanished.hero, {x: 2, y: 3});
+  assert.equal(vanished.level, 0);
+  assert.equal(assessB2Probe([interval(state(0, 0), state(1, 0)), disappearsOnDeath]).status, 'DEAD');
+  assert.equal(assessMotion([interval(
+    state(4, 5, {alive: false}), {alive: true, hero: null, level: 0}
+  )]).status, 'DEAD');
+  assert.equal(assessMotion([interval(state(2, 3), {alive: true, hero: null, level: 0})]).status,
+    'INVALID');
   assert.equal(assessMotion([
     interval(state(0, 0), state(0, 0, {level: 1, progress: 999}))
   ]).status, 'LEVEL_CHANGED');

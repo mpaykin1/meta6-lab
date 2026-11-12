@@ -12,6 +12,8 @@ verifyRecipe(recipe);
 const mutations = [
   ['remove source provenance', '90d83a77049e8edb7aab847ecbbf4e9723a3c2e5', 'unknown'],
   ['remove read-only behavior', 'state()` не меняет игровое состояние', 'state()` меняет игровое состояние'],
+  ['wrong victory destination', 'после победы над стражем — `world.ring`',
+    'после победы над стражем — `world.beacon`'],
   ['false PASS bypass (deception)', 'не отмечать правило «сделано»', 'отмечать правило «сделано»']
 ];
 for (const [label, before, after] of mutations) {
@@ -21,4 +23,4 @@ for (const [label, before, after] of mutations) {
   assert.throws(() => verifyRecipe(changed), undefined, 'recipe mutant survived: ' + label);
   console.log('TRAPPED: ' + label);
 }
-console.log('MUTATE recipe 13: 3/3');
+console.log('MUTATE recipe 13: 4/4');

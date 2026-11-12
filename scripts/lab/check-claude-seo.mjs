@@ -29,7 +29,8 @@ export function inspect(html, page) {
   }
   const schemas = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
   const graphNodes = [];
-  const siteOrigin = new URL(base).origin;
+  const site = new URL(base);
+  const siteOrigin = site.origin;
   if (!schemas.length) errors.push(page + ': missing JSON-LD');
   for (const [i, script] of schemas.entries()) {
     try {
@@ -75,9 +76,33 @@ export function inspect(html, page) {
       }
     }
   }
+  // Resolve images using the same paths as the deployed GitHub Pages site.
+  // External images are checked separately after real screenshots are available.
+  const inspectLocalImage = (address, label) => {
+    if (!address) {
+      errors.push(page + ': ' + label + ' has no src');
+      return;
+    }
+    let url;
+    try { url = new URL(address, expected); }
+    catch { errors.push(page + ': invalid ' + label + ' URL ' + address); return; }
+    if (url.origin !== site.origin || !url.pathname.startsWith(site.pathname)) return;
+    let relative;
+    try { relative = decodeURIComponent(url.pathname.slice(site.pathname.length)); }
+    catch { errors.push(page + ': malformed encoded ' + label + ' URL'); return; }
+    const local = path.resolve(root, relative);
+    if (!local.startsWith(root + path.sep) || !fs.existsSync(local) ||
+        !fs.statSync(local).isFile()) {
+      errors.push(page + ': missing local ' + label + ' ' + address);
+    }
+  };
   for (const img of html.matchAll(/<img\b[^>]*>/gi)) {
     if (!/\balt="[^"]+"/i.test(img[0])) errors.push(page + ': image missing nonempty alt');
+    const src = img[0].match(/\bsrc\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
+    inspectLocalImage(src?.[1] ?? src?.[2] ?? '', 'image');
   }
+  for (const cover of meta(html, 'og:image')) inspectLocalImage(cover, 'og:image');
+  for (const cover of meta(html, 'twitter:image')) inspectLocalImage(cover, 'twitter:image');
   // Validate link attributes regardless of order, quoting style or rel token order.
   for (const [tag] of html.matchAll(/<link\b[^>]*>/gi)) {
     const rel = tag.match(/\brel\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);
@@ -95,7 +120,6 @@ export function inspect(html, page) {
     }
   }
   // Catch broken links to pages and files within the catalogue before publishing.
-  const site = new URL(base);
   for (const match of html.matchAll(/<a\b[^>]*\bhref\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)) {
     const href = match[1] ?? match[2];
     if (!href || href.startsWith('#')) continue;

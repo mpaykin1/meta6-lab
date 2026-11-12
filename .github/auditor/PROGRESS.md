@@ -53,5 +53,8 @@
 - [ ] Шаг 3: две строки Issue #253 проверены на отсутствие подтверждающих коммитов; фиктивный план по самому Issue уже исправляется [PR #254](https://github.com/mpaykin1/meta6-lab/pull/254).
 - [x] Исправление · 2026-11-12T08:52:29.804Z: повреждённый ответ GraphQL не должен обозначать незакреплённый Issue; теперь статус неизвестен: [SHA c92c062fa0b71135f9974d396b03da029b20fffd](https://github.com/mpaykin1/meta6-lab/commit/c92c062fa0b71135f9974d396b03da029b20fffd) в [PR #254](https://github.com/mpaykin1/meta6-lab/pull/254); 12 мутаций подготовлены: [SHA c5a47d2f7252b819be966bb3d2f420b89494ccb4](https://github.com/mpaykin1/meta6-lab/commit/c5a47d2f7252b819be966bb3d2f420b89494ccb4); ошибка №42 — [SHA 8495de23183957080898888363d4b23bcd48a30f](https://github.com/mpaykin1/meta6-lab/commit/8495de23183957080898888363d4b23bcd48a30f). Проверки нового HEAD не подтверждены.
 
+- [x] Шаг 7 · 2026-11-12T08:54Z: строка [ZADACHI.md](https://github.com/mpaykin1/meta6-lab/blob/lab/auditor-truthful-cycle-20261111/ZADACHI.md) для [PR #254](https://github.com/mpaykin1/meta6-lab/pull/254) обновлена — [SHA 063d197f9e03493fb107c66cf88e8d9d079c4baf](https://github.com/mpaykin1/meta6-lab/commit/063d197f9e03493fb107c66cf88e8d9d079c4baf).
+- [ ] Шаг 5: Claude должен согласовать защищённый diff [PR #254](https://github.com/mpaykin1/meta6-lab/pull/254); [STOROZHA #43186704732](https://github.com/mpaykin1/meta6-lab/actions/runs/43186704732) pending на предыдущем SHA, новую проверку не называть зелёной.
+
 ### Урок
 Неполный GraphQL payload не равен достоверному «не закреплено». При ошибке схемы возвращать ⚠️ и требовать независимый ответ pinnedIssues. Не считать cron гарантом почасового запуска.

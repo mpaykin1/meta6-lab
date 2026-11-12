@@ -13,6 +13,7 @@
 | #267 | lab/asset-check-universal | .github/workflows/asset-check.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #268 | lab/link-guard-recovery-1111 | .github/workflows/kontur-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/lab-pages.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/link-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #262 | lab/archer-retention-exp-1 | .github/workflows/archer-visual-proof.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
+| #269 | lab/auditor-twohour-stall-20261112 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/auditor/mutate-auditor.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

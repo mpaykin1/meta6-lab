@@ -16,13 +16,13 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Проверяющий: постоянное развитие | МГЛ | чат ChatGPT | `lab/proveryayushchij-growth-20261111` | — | 2026-11-11 11:32 | 2026-11-12 06:58 |
 | взято | ТОЛКАЧ (в): безопасная синхронизация собственной ветки с main — отдельный PR | МГЛ | Кто: толкач | `lab/tolkach-sync-rule-20261112` | — | 2026-11-12 08:51 | — |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Лучник в тумане — улучшение №1 | МГЛ | ChatGPT | `lab/archer-retention-exp-1` | [#262](https://github.com/mpaykin1/meta6-lab/pull/262) | 2026-11-11 14:42 | 2026-11-12 07:06 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | БОТ-ПРОХОДЧИК: B2 — проверка движения героя и вечные ловушки | МГЛ | проходчик | `lab/prohodchik-b2-motion-20261111` | [#258](https://github.com/mpaykin1/meta6-lab/pull/258) | 2026-11-11 14:14 | 2026-11-12 07:05 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | PR #242: исправить красные проверки SEO-каталога | МГЛ | MG-строитель-2 | `lab/seo-claude-adfree-1111` | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | 2026-11-11 08:17 | 2026-11-12 07:04 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Библиотека а): многоразовый контракт, прогресс и ловушки ложного PASS | МГЛ | Кто: библиотека | `lab/biblioteka-contract-20261111` | [#261](https://github.com/mpaykin1/meta6-lab/pull/261) | 2026-11-11 14:27 | 2026-11-12 07:03 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ — ТОЛКАЧ 12.11: [слито, SHA 2d6875a](https://github.com/mpaykin1/meta6-lab/commit/2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec), [B1 PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43172201778) | МГЛ | Кто: толкач (с 2026-11-12T06:50 UTC; было ChatGPT (сам не записал — добавил сторож)) | `lab/tolkach-prompt-20261111` | [#256](https://github.com/mpaykin1/meta6-lab/pull/256) | 2026-11-11 14:03 | 2026-11-12 07:01 |
-| 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Проверяющий: постоянное развитие | МГЛ | чат ChatGPT | `lab/proveryayushchij-growth-20261111` | — | 2026-11-11 11:32 | 2026-11-12 06:58 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | ССЫЛКА = 200: восстановить 404, защитить sync и JS imports, включить PR-ловушки | МГЛ | чат ChatGPT | `lab/link-guard-recovery-1111` | [#268](https://github.com/mpaykin1/meta6-lab/pull/268) | 2026-11-11 16:24 | 2026-11-11 16:45 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | ASSET CHECK v2: универсальный бот для любых ассетов | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/asset-check-universal` | [#267](https://github.com/mpaykin1/meta6-lab/pull/267) | 2026-11-11 16:24 | 2026-11-11 16:24 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | test(lovushki): catch Claude quota and GraphQL API regressions | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/kak-proveryayushchij-traps` | [#247](https://github.com/mpaykin1/meta6-lab/pull/247) | 2026-11-11 11:34 | 2026-11-11 16:13 |

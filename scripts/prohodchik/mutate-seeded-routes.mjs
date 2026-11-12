@@ -17,7 +17,7 @@ const mutants = [
   ['no-real-input', 'await ctx.joystick(step.dx, step.dy, step.ms);', 'await ctx.wait(step.ms);'],
   ['skip-existing-strategy', 'await original.playLevel(ctx, level);', 'return;'],
   ['test-seed-cheat', '  const directions = VECTORS.map(([dx, dy]) => ({dx, dy}));',
-    '  if (seed === 17) return seededRouteVariants(81, {routes, steps});\\n' +
+    '  if (seed === 17) return seededRouteVariants(81, {routes, steps});\n' +
     '  const directions = VECTORS.map(([dx, dy]) => ({dx, dy}));']
 ];
 function execute(source, label, shouldPass) {

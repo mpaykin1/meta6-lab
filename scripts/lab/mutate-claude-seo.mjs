@@ -45,6 +45,15 @@ cases.push(
     schema['@graph'].push({ ...game, name: 'Fake game', url: 'https://example.invalid/' });
   })]
 );
+// A compliant HTML parser accepts reordered, single-quoted and multi-token rel attributes.
+cases.push(
+  ['reordered Playgama preconnect', original.replace('</head>',
+    '<link href="https://static.playgama.com/" rel="preconnect"></head>')],
+  ['multi-token Playgama preconnect', original.replace('</head>',
+    '<link rel="dns-prefetch preconnect" href="https://static.playgama.com"></head>')],
+  ['deceptive protocol-relative preconnect', original.replace('</head>',
+    "<link data-safe='yes' href='//static.playgama.com/path' rel='preconnect'></head>")]
+);
 for (const [name, html] of cases) {
   if (!inspect(html, page).length) throw Error('Mutation escaped SEO validator: ' + name);
   console.log('CAUGHT', name);

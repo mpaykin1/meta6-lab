@@ -5,3 +5,4 @@
 
 | PR | ветка | статус | ссылка-доказательство |
 |---|---|---|---|
+| [#54](https://github.com/mpaykin1/meta6-lab/pull/54) | `lab/render-visibility-optimization` | защищённое, ждёт Claude: `.github/workflows/lab-render-performance.yml`; ветка не изменялась | [файлы PR](https://github.com/mpaykin1/meta6-lab/pull/54/files) |

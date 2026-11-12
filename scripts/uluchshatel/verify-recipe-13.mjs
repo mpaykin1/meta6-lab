@@ -27,6 +27,9 @@ export function verifyRecipe(recipe) {
     /390×844/,
     /FPS p95/,
     /без самостоятельного merge/,
+    /`G\.warden\.segs\[0\]`/,
+    /`world\.ring`/,
+    /подмены `world\.ring` на `world\.beacon`/,
     /не отмечать правило «сделано»/
   ];
   for (const re of required) assert.match(recipe, re, 'rule 13 recipe contract: ' + re.source);

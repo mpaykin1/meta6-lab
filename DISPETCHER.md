@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 22 · конфликт 8 · непроверено 0 · красные проверки 13 · нужен Claude 32
+Итог: зависло 22 · конфликт 8 · непроверено 0 · красные проверки 13 · нужен Claude 31
 
 ### PR #72
 - PR: https://github.com/mpaykin1/meta6-lab/pull/72
@@ -204,10 +204,9 @@
 - [#3](https://github.com/mpaykin1/meta6-lab/pull/3) Разблокировать проверки PR #3 Twilight Island
 - [#218](https://github.com/mpaykin1/meta6-lab/pull/218) РЕМОНТ R1: пересборка библиотеки и исключение копий
 - [#208](https://github.com/mpaykin1/meta6-lab/pull/208) Restore original Ashen Path asset pack reference after sync
-- [#204](https://github.com/mpaykin1/meta6-lab/pull/204) B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер
 - [#248](https://github.com/mpaykin1/meta6-lab/pull/248) Доводчик PR: 15 минут, безопасное обновление веток, журналы без конфликтов, порог 1 час
+- [#204](https://github.com/mpaykin1/meta6-lab/pull/204) B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер
 - [#205](https://github.com/mpaykin1/meta6-lab/pull/205) Пульт владельца
 - [#201](https://github.com/mpaykin1/meta6-lab/pull/201) PR #201: проверить эталон и ограничения слияния
-- [#129](https://github.com/mpaykin1/meta6-lab/pull/129) fix(meta): Twilight Isles 2 plays without ads, with free revival
 - [#192](https://github.com/mpaykin1/meta6-lab/pull/192) M6
 - [#193](https://github.com/mpaykin1/meta6-lab/pull/193) К7

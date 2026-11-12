@@ -18092,22 +18092,7 @@
       "sha256": "c82608ceff9e19a9f45d3f7318d4c2ebf5cc2ca951508e0bb9d0d8886b0b77c5"
     },
     {
-      "id": "3fba9b140bb9da2e90e2d398",
-      "game": "archer-in-the-fog",
-      "kind": "solution",
-      "name": "tick",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/archer-in-the-fog/src/goal-target.js",
-      "lines": [
-        111,
-        130
-      ],
-      "sha256": "45f4685ed33d1380e6ce2a9765f7c5cfe6c2a311744d015c68ab1704c56edb7c"
-    },
-    {
-      "id": "b34668fbc6e8a71c0fea9764",
+      "id": "4c008fc4a59b58e285520111",
       "game": "archer-in-the-fog",
       "kind": "solution",
       "name": "module:goal-target.js",
@@ -18117,9 +18102,24 @@
       "source_path": "games/archer-in-the-fog/src/goal-target.js",
       "lines": [
         1,
-        132
+        138
       ],
-      "sha256": "6eb8ecb1ab0563072f5ec5f133a4b51bd98943c858edc974a338e8d0756d8c92"
+      "sha256": "ccc61a1f30e79edd13e170235c46f70c22b3df0e1721e632bf634778825438e4"
+    },
+    {
+      "id": "ae63b00d314deb4d2ab5d894",
+      "game": "archer-in-the-fog",
+      "kind": "solution",
+      "name": "tick",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/archer-in-the-fog/src/goal-target.js",
+      "lines": [
+        114,
+        136
+      ],
+      "sha256": "abb3f2cb22192dd7282e9a0a136e00f766337ce513609e4270c267174e768a60"
     },
     {
       "id": "d055acb372fbc7aef105fa89",

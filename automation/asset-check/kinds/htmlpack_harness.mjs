@@ -228,6 +228,46 @@ window.__AC_RESTORE__=()=>{for(const fn of __acUndo)fn();__acUndo=[]};
   if(!source.includes(outputLine))throw Error('HP10: render-restore insertion point absent');
   return source.replace(outputLine,outputLine+'window.__AC_RESTORE__();');
 }
+// Comparison sheets must depict only the actual object, not a scenic background.
+async function isolatePreview(page, onPng, offPng) {
+  return page.evaluate(async ([foreground,background]) => {
+    const read=async base64=>{
+      const image=new Image();image.src='data:image/png;base64,'+base64;
+      await image.decode();return image;
+    };
+    const [on,off]=await Promise.all([read(foreground),read(background)]);
+    const source=document.createElement('canvas');source.width=on.width;source.height=on.height;
+    const ctx=source.getContext('2d',{willReadFrequently:true});
+    ctx.drawImage(on,0,0);const frame=ctx.getImageData(0,0,on.width,on.height);
+    ctx.clearRect(0,0,on.width,on.height);ctx.drawImage(off,0,0);
+    const hidden=ctx.getImageData(0,0,on.width,on.height);
+    const pixels=frame.data,back=hidden.data;
+    let left=on.width,top=on.height,right=0,bottom=0,area=0;
+    for(let y=0;y<on.height;y++)for(let x=0;x<on.width;x++){
+      const i=4*(y*on.width+x);
+      const delta=(Math.abs(pixels[i]-back[i])+
+                   Math.abs(pixels[i+1]-back[i+1])+
+                   Math.abs(pixels[i+2]-back[i+2]))/3;
+      if(delta<=23){pixels[i+3]=0;continue}
+      pixels[i+3]=255;area++;
+      left=Math.min(left,x);right=Math.max(right,x);
+      top=Math.min(top,y);bottom=Math.max(bottom,y);
+    }
+    if(area===0)throw Error('HP13: comparison asset mask empty');
+    ctx.putImageData(frame,0,0);
+    const pad=Math.max(5,Math.ceil(Math.max(right-left,bottom-top)*.08));
+    const x=Math.max(0,left-pad),y=Math.max(0,top-pad);
+    const w=Math.min(on.width-x,right-left+1+2*pad);
+    const h=Math.min(on.height-y,bottom-top+1+2*pad);
+    const preview=document.createElement('canvas');preview.width=640;preview.height=360;
+    const dst=preview.getContext('2d');dst.fillStyle='#071827';dst.fillRect(0,0,640,360);
+    dst.imageSmoothingEnabled=false;
+    const scale=Math.min(610/w,330/h),dw=w*scale,dh=h*scale;
+    dst.drawImage(source,x,y,w,h,(640-dw)/2,(360-dh)/2,dw,dh);
+    return preview.toDataURL('image/png').split(',')[1];
+  },[onPng.toString('base64'),offPng.toString('base64')]);
+}
+
 async function measure(browser,file){
  const page=await browser.newPage({viewport:{width:640,height:360},deviceScaleFactor:1});
  const report={items:{},errors:[],screen_text:false,previews:{}};
@@ -260,10 +300,11 @@ async function measure(browser,file){
      const on=pixels(png);
      await page.evaluate(id=>window.__ISOLATE__(id,false),id);
      await page.waitForTimeout(35);
-     const off=pixels(await page.screenshot({type:'png'}));
+     const offPng=await page.screenshot({type:'png'});
+     const off=pixels(offPng);
      await page.evaluate(id=>window.__ISOLATE__(id,true),id);
      await page.evaluate(()=>{window.__AC_FREEZE__=false});
-     return {on,off,png};
+     return {on,off,png,offPng};
    };
    const first=await capture();
    const fps=await page.evaluate(()=>new Promise(done=>{
@@ -275,7 +316,8 @@ async function measure(browser,file){
    report.items[id]=features(first.on,second.on,first.off,second.off,fps);
    const accepted=['hero','beast','gate','obelisk','sky','fog','rain','cathedral'];
    const selected=await page.evaluate(id=>!!window.__PACK__.items.find(it=>it.id===id)?.isNew,id);
-   if(selected||accepted.includes(id))report.previews[id]=second.png.toString('base64');
+   if(selected||accepted.includes(id))
+     report.previews[id]=await isolatePreview(page,second.png,second.offPng);
    if(await textOutsideMenu(page))report.screen_text=true;
   }
  }finally{await page.close();}

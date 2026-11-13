@@ -226,3 +226,5 @@
 - БЕЗ ТОРМОЗОВ: #275 перенесён обычным merge в [#254, 2e8e04c6](https://github.com/mpaykin1/meta6-lab/commit/2e8e04c6); [дубль #275](https://github.com/mpaykin1/meta6-lab/pull/275) закрыт. Шесть дополнительных мутаций локально PASS; старые тесты сохранены. Далее #282.
 
 - БЕЗ ТОРМОЗОВ: #282 перенесён обычным merge в [#254, 30937b3d](https://github.com/mpaykin1/meta6-lab/commit/30937b3d91c296cd7939c0d4b24942c4becdfc2b), [дубль #282](https://github.com/mpaykin1/meta6-lab/pull/282) закрыт. Сохранены task-table и все 11 сценариев; исходный тест main не потерял строк. Далее определить судьбу устаревшего #252 и проверить CI единого auditor.
+
+- БЕЗ ТОРМОЗОВ: #252 закрыт как устаревшая установка поверх уже слитого #251 (старый Issue #250 против #253); актуальный единый [#254 e166b41f](https://github.com/mpaykin1/meta6-lab/commit/e166b41f) обновлён main, KONTUR policy локально PASS. #246/#251/#265 уже merged, #266 уже closed — повторная обработка не нужна. Последний [STOROZHA run](https://github.com/mpaykin1/meta6-lab/actions/runs/43413072882) упал из-за HTTP403 API rate limit; ядро не менять. Далее #262 и оставшиеся protected-PR.

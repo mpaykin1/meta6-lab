@@ -3,11 +3,11 @@
 | Шаг | Статус | Доказательство (PR, SHA, прогон) | Время UTC |
 |---|---|---|---|
 | 1. Очередь Actions | в работе у другого чата | [PR #299](https://github.com/mpaykin1/meta6-lab/pull/299), [ZANYATO.md](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md) | 2026-11-13T19:05:00Z |
-| 2. Красный main: Native Catalog Candidate | в работе | [workflow](https://github.com/mpaykin1/meta6-lab/blob/main/.github/workflows/lab-native-catalog.yml), [удаление при sync](https://github.com/mpaykin1/meta6-lab/commit/0d30d5bd2d0db3380a6fab63f9e8899579b098ae) | 2026-11-13T19:05:00Z |
+| 2. Красный main: Native Catalog Candidate | в работе | [PR #300](https://github.com/mpaykin1/meta6-lab/pull/300), [SHA 9dacb38c](https://github.com/mpaykin1/meta6-lab/commit/9dacb38ca895db776d617276cb9558e2349e3290), [Native Catalog run 43489820434](https://github.com/mpaykin1/meta6-lab/actions/runs/43489820434), [KONTUR reject 43489820416](https://github.com/mpaykin1/meta6-lab/actions/runs/43489820416) | 2026-11-13T19:15:00Z |
 | 3. PR НУЖЕН CLAUDE | осталось | [очередь](https://github.com/mpaykin1/meta6-lab/pulls) | 2026-11-13T19:05:00Z |
 | 4. Зависшее | осталось | [ZANYATO.md](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md) | 2026-11-13T19:05:00Z |
 | 5. STATUS ФИНИШ | в работе | [PR #302](https://github.com/mpaykin1/meta6-lab/pull/302), [SHA 78af8f8](https://github.com/mpaykin1/meta6-lab/commit/78af8f85c6d6c68f32fbd32b5886606597ecb541), [STATUS PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43489931682); KONTUR требует числовой номер OSHIBKI, правка подготовлена; quota блокирует merge | 2026-11-13T19:15:00Z |
-| 6. Постоянное развитие | осталось | — | 2026-11-13T19:05:00Z |
+| 6. Постоянное развитие | в работе | [3 мутации в PR #300](https://github.com/mpaykin1/meta6-lab/pull/300), [NATIVE_CATALOG_MUTATIONS_PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43489820434) | 2026-11-13T19:15:00Z |
 
 ## Развитие STATUS (чат)
 

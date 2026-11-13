@@ -35,9 +35,25 @@ jobs:
       - run: node scripts/dispetcher/run.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish queue exclusively to bot-state
+      - name: Run offline safety traps and daily noise measurement
+        if: github.event_name == 'schedule'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/polza/verify-noise.mjs
+          node scripts/polza/mutate-noise.mjs
+          node scripts/polza/noise.mjs
+      - name: Publish queue and daily metrics exclusively to bot-state
         if: github.ref == 'refs/heads/main'
-        run: bash scripts/polza/write-bot-state.sh DISPETCHER.md
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(DISPETCHER.md)
+          if [ -f automation/progress/antisueta-noise.json ]; then
+            files+=(automation/progress/antisueta-noise.json automation/progress/antisueta-noise.log)
+            if [ -f /tmp/antisueta-alert ]; then files+=(DLYA_CLAUDE.md); fi
+          fi
+          bash scripts/polza/write-bot-state.sh "${files[@]}"
       - name: Run consolidated hourly state and audit jobs
         if: github.event_name == 'schedule'
         env:

@@ -117,7 +117,7 @@ try {
   assert.equal(rejected.status, 1);
   assert.match(rejected.stdout, /Защищённый файл изменён/);
   function verify(workflow) {
-    assert.match(workflow, /^          fetch-depth: 0$/m, 'Checkout must fetch complete history');
+    assert.match(workflow, /^          fetch-depth: 0(?:[ \t]+#[^\n]*)?$/m, 'Checkout must fetch complete history');
     assert.ok(workflow.indexOf('- name: Require complete commit history') <
       workflow.indexOf('- name: Check protected files'), 'The gate must run before the guard');
     const history = script(workflow, 'Require complete commit history');

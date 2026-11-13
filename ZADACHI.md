@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| 🔨 В РАБОТЕ | АНТИСУЕТА: механические ворота пользы и тишина ботов | МГЛ | ChatGPT | `lab/antisueta` | [#289](https://github.com/mpaykin1/meta6-lab/pull/289) | 2026-11-13 11:00 | [SHA](https://github.com/mpaykin1/meta6-lab/commit/f1635459f6009f4108d53d9aea7c150cf6fbc973) |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | fix(auditor): достоверные планы и проверка pin Issue #253 | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/auditor-truthful-cycle-20261111` | [#254](https://github.com/mpaykin1/meta6-lab/pull/254) | 2026-11-11 13:57 | 2026-11-13 10:51 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | Ревизор: сверять ZADACHI.md с реальными PR (г); [Actions](https://github.com/mpaykin1/meta6-lab/actions/runs/43392251668), НУЖЕН CLAUDE | МГЛ | ревизор | `lab/auditor-task-table-20261113` | [#282](https://github.com/mpaykin1/meta6-lab/pull/282) | 2026-11-13 04:14 | 2026-11-13 10:46 |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | test(lovushki): catch Claude quota and GraphQL API regressions | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/kak-proveryayushchij-traps` | [#247](https://github.com/mpaykin1/meta6-lab/pull/247) | 2026-11-11 11:34 | 2026-11-13 10:43 |

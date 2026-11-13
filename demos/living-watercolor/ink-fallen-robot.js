@@ -8,7 +8,7 @@ const palette = {
 };
 const shared = new Map();
 function pigment(color, opts = {}) {
-  const key = color + JSON.stringify(opts);
+  const key = color + (opts.map ? ':patina' : JSON.stringify(opts));
   if (!shared.has(key)) {
     shared.set(key, new T.MeshStandardMaterial({ color, roughness: 1, ...opts }));
   }

@@ -75,7 +75,8 @@ async function main() {
       }
     }
   }
-  const activation=Date.parse(execFileSync('git',['log','-1','--format=%cI','--','scripts/polza/gate-core.mjs'],{encoding:'utf8'}).trim());
+  const installed=await api('/commits?sha=main&path=scripts/polza/gate-core.mjs&per_page=1');
+  const activation=Date.parse(installed[0]?.commit?.committer?.date||'');
   const isNewPR=!Number.isFinite(activation) || Date.parse(pr.created_at)>activation;
   const ctx={body:pr.body,files,isNewPR,openPRs:opened.length,scheduledWorkflows:scheduled,newCronFiles,finish:parseFinish(fs.readFileSync('rules/09-platforma/FINISH.md','utf8')),botOK,redRun,repairPaths};
   const answer=verdict(ctx);

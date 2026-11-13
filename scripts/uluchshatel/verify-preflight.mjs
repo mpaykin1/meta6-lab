@@ -47,3 +47,7 @@ console.log('verify-preflight: 12 PASS');
 const { verifyPagination } = await import('./verify-paginate.mjs');
 await verifyPagination();
 console.log('verify-paginate: late PR and file page verified');
+
+const { verifyTaskLocks } = await import('./verify-task-locks.mjs');
+verifyTaskLocks();
+console.log('verify-task-locks: active ZADACHI reservation without PR is blocked');

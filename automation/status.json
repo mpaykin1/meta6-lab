@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-13T10:31:18.721Z",
+  "generated_at": "2026-11-13T10:32:46.212Z",
   "sha": {
-    "lab": "9135849134d323f37fae0061cf13608a2a903315",
+    "lab": "578a792ba0c5c9a744ccaf29c5096eb6d323c51a",
     "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
@@ -11,6 +11,15 @@
   "run": "нет данных",
   "review": {
     "protected": [
+      {
+        "number": 285,
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
       {
         "number": 241,
         "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
@@ -131,11 +140,7 @@
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
-        ]
+        "paths": "нет данных"
       }
     ],
     "redLab": [
@@ -148,11 +153,6 @@
         "workflow": "MG Dispatcher",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43408944206",
         "step": "Commit queue"
-      },
-      {
-        "workflow": "Investigation snapshot",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43408649138",
-        "step": "Refresh investigation snapshot from GitHub"
       }
     ],
     "redMg": [],
@@ -322,11 +322,16 @@
     ]
   },
   "pr": {
-    "open": 53,
+    "open": 52,
     "conflicts": "нет данных",
-    "merged": 26,
+    "merged": 27,
     "closed": 58,
     "mergedItems": [
+      {
+        "number": 285,
+        "title": "storozha: «только Claude» — лишь ядро охраны (убираем тормоз",
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3"
+      },
       {
         "number": 279,
         "title": "INK: объёмный дождевой лес из видео, Ч/Б и цвет",
@@ -460,6 +465,15 @@
     ],
     "protectedItems": [
       {
+        "number": 285,
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
         "number": 241,
         "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
         "paths": [
@@ -579,17 +593,13 @@
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
-        ]
+        "paths": "нет данных"
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 1774,
+      "count": 1780,
       "folders": "нет данных"
     },
     "mg": {

@@ -14,33 +14,34 @@
 | #218 | lab/remont-r1-library | .github/workflows/library-machine.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/library/mutate-library.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/library/verify-library.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
 | #275 | lab/auditor-stale-pr-20261112 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/auditor/mutate-auditor.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
 | #277 | lab/storozha-nedelya | .github/workflows/storozha-branches.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/storozha-reference.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/storozha-tests.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/branch-watch.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/core.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/reference-check.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/weekly-watch.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
-| #258 | lab/prohodchik-b2-motion-20261111 | .github/workflows/prohodchik-b2.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 | #254 | lab/auditor-truthful-cycle-20261111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/auditor/mutate-auditor.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 | #261 | lab/biblioteka-contract-20261111 | scripts/library/verify-library.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
+| #258 | lab/prohodchik-b2-motion-20261111 | .github/workflows/prohodchik-b2.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
+| #247 | lab/kak-proveryayushchij-traps | scripts/storozha/reference-check.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->
-| #54 | lab/render-visibility-optimization | docs/progress/PR54_59_60.md | 2026-11-12 |
-| #190 | lab/bot-batch-1 | OSHIBKI.md | 2026-11-12 |
-| #200 | lab/bot-batch-2 | OSHIBKI.md, shared/library/index.json | 2026-11-12 |
-| #203 | lab/skin-rusty-robot | LAB_QUEUE.md, OSHIBKI.md, games/skin-trainer/index.html, rules/01-stil-i-grafika/SKINY.md | 2026-11-12 |
-| #204 | lab/rules-bot-trainer | НУЖЕН CLAUDE: PR меняет защищённые `.github/workflows/kontur-guard.yml`, `.github/workflows/rules-bot.yml`, проверки `scripts/rules-bot/` и `OSHIBKI.md`; самостоятельные исправления workflow и слияние запрещены. HEAD `4feb49cfa3cc6810a0d49c8489796a54b4e97a90`. https://github.com/mpaykin1/meta6-lab/pull/204 | 2026-11-13 |
-| #209 | lab/library-catalog | BIBLIOTEKA.md, OSHIBKI.md | 2026-11-12 |
-| #218 | lab/remont-r1-library | OSHIBKI.md | 2026-11-12 |
-| #219 | lab/status-a1-20261110 | OSHIBKI.md, SMENA.md | 2026-11-12 |
-| #220 | lab/zadachi-conflicts | OSHIBKI.md, rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md | 2026-11-12 |
-| #221 | lab/zadachi-tolkach | AGENTS.md, OSHIBKI.md, rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md | 2026-11-12 |
-| #225 | lab/render-broken-city-safe-1110 | OSHIBKI.md, SMENA.md | 2026-11-12 |
-| #248 | lab/pr-autofinish-followup-1111 | OSHIBKI.md, SMENA.md, automation/prompts/MG_PYAT_AVTOZADACH.md | 2026-11-12 |
-| #252 | lab/auditor-five-tasks-20261111 | .github/auditor/PROGRESS.md, .github/auditor/config.yml, .github/workflows/auditor.yml, OSHIBKI.md | 2026-11-12 |
-| #254 | lab/auditor-truthful-cycle-20261111 | OSHIBKI.md, ZADACHI.md | 2026-11-12 |
-| #258 | lab/prohodchik-b2-motion-20261111 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-12 |
-| #261 | lab/biblioteka-contract-20261111 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-12 |
-| #268 | lab/link-guard-recovery-1111 | OSHIBKI.md | 2026-11-12 |
-| #269 | lab/auditor-twohour-stall-20261112 | OSHIBKI.md | 2026-11-12 |
-| #272 | lab/uluchshatel-sumerki-copy-bot13-20261112 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-12 |
-| #275 | lab/auditor-stale-pr-20261112 | OSHIBKI.md | 2026-11-12 |
-| #277 | lab/storozha-nedelya | OSHIBKI.md | 2026-11-12 |
+| #54 | lab/render-visibility-optimization | docs/progress/PR54_59_60.md | 2026-11-13 |
+| #190 | lab/bot-batch-1 | OSHIBKI.md | 2026-11-13 |
+| #200 | lab/bot-batch-2 | OSHIBKI.md, shared/library/index.json | 2026-11-13 |
+| #203 | lab/skin-rusty-robot | LAB_QUEUE.md, OSHIBKI.md, games/skin-trainer/index.html, rules/01-stil-i-grafika/SKINY.md | 2026-11-13 |
+| #209 | lab/library-catalog | BIBLIOTEKA.md, OSHIBKI.md | 2026-11-13 |
+| #218 | lab/remont-r1-library | OSHIBKI.md | 2026-11-13 |
+| #219 | lab/status-a1-20261110 | OSHIBKI.md, SMENA.md | 2026-11-13 |
+| #220 | lab/zadachi-conflicts | OSHIBKI.md, rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md | 2026-11-13 |
+| #221 | lab/zadachi-tolkach | AGENTS.md, OSHIBKI.md, rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md | 2026-11-13 |
+| #225 | lab/render-broken-city-safe-1110 | OSHIBKI.md, SMENA.md | 2026-11-13 |
+| #248 | lab/pr-autofinish-followup-1111 | OSHIBKI.md, SMENA.md, automation/prompts/MG_PYAT_AVTOZADACH.md | 2026-11-13 |
+| #252 | lab/auditor-five-tasks-20261111 | .github/auditor/PROGRESS.md, .github/auditor/config.yml, .github/workflows/auditor.yml, OSHIBKI.md | 2026-11-13 |
+| #254 | lab/auditor-truthful-cycle-20261111 | OSHIBKI.md, ZADACHI.md | 2026-11-13 |
+| #255 | lab/archer-meta-adfree-clean-1111 | OSHIBKI.md | 2026-11-13 |
+| #258 | lab/prohodchik-b2-motion-20261111 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-13 |
+| #260 | lab/uluchshatel-preflight-20261111 | OSHIBKI.md, ZADACHI.md | 2026-11-13 |
+| #261 | lab/biblioteka-contract-20261111 | DLYA_CLAUDE.md | 2026-11-13 |
+| #268 | lab/link-guard-recovery-1111 | OSHIBKI.md | 2026-11-13 |
+| #269 | lab/auditor-twohour-stall-20261112 | OSHIBKI.md | 2026-11-13 |
+| #272 | lab/uluchshatel-sumerki-copy-bot13-20261112 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-13 |
+| #275 | lab/auditor-stale-pr-20261112 | OSHIBKI.md | 2026-11-13 |
 <!-- STOROZHA:CONFLICTS:END -->
 | #242 | lab/seo-claude-adfree-1111 | НУЖЕН CLAUDE: красные verify, bot, guard; SEO PR меняет claude-games/games/*/index.html (17 игр), а базовый PR #234 содержит несовпадение SHA256 защищённого pod-i-nad; не изменять эталон/охранник, проверить базовую ветку и CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117 | 2026-11-11 |
 | #245 | lab/remont-main-veil-terraces | НУЖЕН CLAUDE: игровая правка [PR #245](https://github.com/mpaykin1/meta6-lab/pull/245) прошла [META BOT на PR](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984334) и [focused 6/6](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984307), но на main PASS нет. После безопасного слияния актуального main в ремонтную ветку [13d85bb](https://github.com/mpaykin1/meta6-lab/commit/13d85bbf4e324cb01729c8a8464bf73364889a74) автоматический Library Machine **повторно** внёс посторонние `shared/library/index.json`, `shared/library/veil-terraces.json` коммитом [02ba0f5](https://github.com/mpaykin1/meta6-lab/commit/02ba0f5812afcae9467cdefa5cb7f3b381f6ee2f). Новый [META BOT](https://github.com/mpaykin1/meta6-lab/actions/runs/43018578169) имеет `action_required`, не PASS. STOROZHA [43012984349](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984349) дважды FAIL HTTP 403 GitHub API rate limit. Третья очистка бесполезна: машинная запись восстанавливает изменения, защищённые workflow/сторож не править. Нужны одобрение новых Actions (если доступно), устранение автоматического загрязнения PR и независимая проверка до squash; затем 2 PASS META BOT на main. | 2026-11-11 |
@@ -79,6 +80,8 @@
 
 | #208 | `lab/ashen-path-asset-pack-restore-1109` | **НУЖЕН CLAUDE:** источник владельца `reference/ashen-path-asset-pack/index.html` идентичен оригиналу (Git blob `a5911f6d0a0e36fc4fc0ad581be071dfb6d7882c`), но [KONTUR FAIL 42799091174](https://github.com/mpaykin1/meta6-lab/actions/runs/42799091174) отклоняет исходный `LEGACY_LIGHTS` (К4.1). Не менять авторские байты и защищённый `scripts/kontur/guard.mjs` силами толкача; Claude должен определить безопасное исключение с ловушками и получить зелёные проверки **до** merge. [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208), HEAD `ad81a3d4196a19e81a50a60a3dd4faaef904ced6`; на этом SHA **зелёного KONTUR нет**. | 2026-11-12 |
 
-| #247 | `lab/kak-proveryayushchij-traps` | РЕШЕНИЕ НА ПОДПИСЬ CLAUDE: [draft #247](https://github.com/mpaykin1/meta6-lab/pull/247), [HEAD 14ffdab](https://github.com/mpaykin1/meta6-lab/commit/14ffdab626e71a699c74c763bad62d9a4aa9a00e). Объединены оба продолжения проверяющего; исправлены существующие Pages/quota-проверки и REST N+1 Dispatcher. [Красные мутации Pages](https://github.com/mpaykin1/meta6-lab/actions/runs/43361010725) и [пагинации](https://github.com/mpaykin1/meta6-lab/actions/runs/43362008490), [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43362273180), [Dispatcher PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43362273104). Код восстановлен; не сливать самостоятельно. STOROZHA reference пока HTTP 403 rate limit, не объявлять весь PR зелёным. | 2026-11-13 |
+| #247 | `lab/kak-proveryayushchij-traps` | РЕШЕНИЕ НА ПОДПИСЬ CLAUDE: [draft #247](https://github.com/mpaykin1/meta6-lab/pull/247), [HEAD 90da1b0](https://github.com/mpaykin1/meta6-lab/commit/90da1b0cb3470f70b0a12ccc271a2e7996ddf095). Полный reference read/write без REST; очередь по SHA main и expectedHeadOid, повтор с сохранением чужих строк. [Новая настоящая красная мутация](https://github.com/mpaykin1/meta6-lab/actions/runs/43366807301), [KONTUR PASS 40 скриптов, новые 13/13](https://github.com/mpaykin1/meta6-lab/actions/runs/43366900749). Изменение защищённого reference-check требует Claude; на main writer ещё не активирован. Workflow/права не менялись, самослияние запрещено. | 2026-11-13 |
 
 | #133 | `lab/asqura-single-graphics-reference-20261108` | **НУЖЕН CLAUDE:** [PR #133](https://github.com/mpaykin1/meta6-lab/pull/133) HEAD `bcbdb6ef08a95d9739bd86baf3cbcf4ca8f1ea30` содержит исходный эталон `reference/asqura-office/`, а проверка STOROZHA [43239240778](https://github.com/mpaykin1/meta6-lab/actions/runs/43239240778/job/131674186810) после повторного запуска FAIL: «Новый эталон: PR должен только добавлять файлы»; историческое изменение `OSHIBKI.md` и `scripts/lab/mutate-owner-reference-placement.mjs` нельзя удалить обычным merge main. Безопасное решение — Claude одобряет чистую ветку только с оригиналом и отдельный PR для ловушек, затем новая независимая проверка; сейчас нет зелёного run, не сливать. | 2026-11-13 |
+| #87 | `lab/platform-play-connect-earn-20261107` | **НУЖЕН CLAUDE:** [PR #87](https://github.com/mpaykin1/meta6-lab/pull/87), HEAD [`2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d`](https://github.com/mpaykin1/meta6-lab/commit/2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d): [META GAMES guard FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/42975697783/job/130374149800) — исторические `faf69f1` и `d66f304` меняли `.github/protected` без подписи; [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/42976938005). Одобрить перенос **только** `meta-games/index.html` в чистую ветку и независимую проверку; старую историю не переписывать, guard не отключать. **Полного зелёного CI нет; без слияния.** | 2026-11-13 |
+| #189 | lab/endless-valleys-golden-knight-reference-1109 | НУЖЕН CLAUDE: унаследованный merge-коммит `32e113f6f6bef74a92b2333004481ff07991db2e` затрагивает защищённую `.github/protected`; `kontur-guard` FAIL, переписывание истории/обход охранника запрещены. https://github.com/mpaykin1/meta6-lab/pull/189 ; https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962 | 2026-11-13 |

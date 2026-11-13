@@ -280,7 +280,7 @@ class KindTraps(unittest.TestCase):
     def test_IK5_random_breaks_determinism(self):
         if not shutil.which("node"):
             self.skipTest("нет node")
-        self.assertIn("IK5", ids(self.ink_pack([("const n = 4 + Math.floor(rnd(seed, 0) * 4)", "const n = 4 + Math.floor(Math.random() * 4)")])))
+        self.assertIn("IK5", ids(self.ink_pack([("const r = .16 + rnd(seed, i + 1) * .14", "const r = .16 + Math.random() * .14")])))
 
     def test_IK6_same_shape_for_every_seed(self):
         if not shutil.which("node"):

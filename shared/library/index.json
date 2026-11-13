@@ -42379,7 +42379,7 @@
         "gameplay"
       ],
       "source_path": "games/ostrov-aptekarya/chapter2.js",
-      "sha256": "3d11c1dcb3e67c12745b51a7493c9c66aa6ec1c6841e40487acae713762e4f80",
+      "sha256": "63e85b8f662be0fbf435a92ae16c03ff113e4523e46d1b4b183b1e173f9abd7b",
       "lines": [
         64,
         73
@@ -42454,7 +42454,7 @@
         "game-module"
       ],
       "source_path": "games/ostrov-aptekarya/chapter2.js",
-      "sha256": "c60bb3b5743fc39291801fbc9a946437f6d7e9678366211d2fdc0ed57ceeb584",
+      "sha256": "3dd38e9d83f1205f26f847cef09b45c27dbe6ca232d9f46b998c285b74033296",
       "lines": [
         1,
         134
@@ -42476,7 +42476,7 @@
       ]
     },
     {
-      "id": "16e93325bf1d0fab7a4050bb",
+      "id": "a042c70eb86a32494df2a14a",
       "game": "ostrov-aptekarya",
       "kind": "solution",
       "name": "module:dialogue.js",
@@ -42484,10 +42484,10 @@
         "game-module"
       ],
       "source_path": "games/ostrov-aptekarya/dialogue.js",
-      "sha256": "1b68c2d6d5fe33b1c03f3d7963baa6fddb4f3aacce02450a8887e3da074c86ed",
+      "sha256": "20e5212842ae8daa7456847475236a2366d7a29d69112443d94714a3b78678db",
       "lines": [
         1,
-        183
+        187
       ]
     },
     {

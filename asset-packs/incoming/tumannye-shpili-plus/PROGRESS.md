@@ -13,3 +13,5 @@
 - 13.11: новая проверка, [бот 2.4.0 SHA 4e3f3b7](https://github.com/mpaykin1/meta6-lab/commit/4e3f3b7225d14f693cbfdeb035a365c6739f4545). Изоляция референса и пака одним механизмом; силуэт и палитра считаются внутри маски. [CI #43495288295](https://github.com/mpaykin1/meta6-lab/actions/runs/43495288295) — результат не подтверждён.
 
 - 14.11: [HP12 f264a5a](https://github.com/mpaykin1/meta6-lab/commit/f264a5ac01e27dd95a8a9f40c66f891cb1ea2733) обнаруживает мёртвую геометрию при RGB-анимации; [партия из 2 новых силуэтов SHA 5214228](https://github.com/mpaykin1/meta6-lab/commit/5214228c8f4c77f4e4831b77dddb4f6f39c598e8). Число IDs 38→38, исходные 26 сохранены. Без подтверждённого сравнения и нуля HARD пока нельзя выпускать.
+
+- 14.11.2026: HTMLPACK-картинки сравнения теперь строятся по изолированной маске (объект крупно) вместо всего кадра. HP13 проверяет наличие и размер compare.png; версия 2.4.4. [SHA cca566ac](https://github.com/mpaykin1/meta6-lab/commit/cca566ac3f524cfb61bcbe11f6b7d5f14724b6bb), [PR #305](https://github.com/mpaykin1/meta6-lab/pull/305). CI/HARD ещё не подтверждены.

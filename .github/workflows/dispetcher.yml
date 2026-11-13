@@ -31,6 +31,7 @@ jobs:
         with:
           node-version: '22'
       - run: node --test scripts/dispetcher/test/*.test.mjs
+      - run: node scripts/dispetcher/mutate-quota.mjs
       - run: node scripts/dispetcher/run.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

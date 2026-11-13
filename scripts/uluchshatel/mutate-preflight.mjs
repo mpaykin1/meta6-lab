@@ -37,3 +37,5 @@ for (const [name, original, replacement, scenario] of mutants) {
 console.log('mutate-preflight: 4/4 mutants detected by the blocking contract');
 
 await import('./mutate-paginate.mjs');
+
+await import('./mutate-task-locks.mjs');

@@ -219,3 +219,5 @@
 - БЕЗ ТОРМОЗОВ 2026-11-13: #282 — merge main [e7b35a41](https://github.com/mpaykin1/meta6-lab/commit/e7b35a41), конфликт PROGRESS сохранён с обеими историями; локально 11 ловушек PASS после нормализации CRLF рабочего checkout. Старый diff теста имеет удаления, их требуется устранить при объединении auditor.
 
 - БЕЗ ТОРМОЗОВ: #254 [d9986a68](https://github.com/mpaykin1/meta6-lab/commit/d9986a68) содержит merge main и восстановление старого теста без удалений (2/0), 3+18 прежних ловушек и 3 новые локально PASS. Новый append-only gate включён в auditor. Следующий шаг: объединить #252/#269/#275/#282 в #254 и проверить Actions.
+
+- БЕЗ ТОРМОЗОВ: #269 перенесён обычным merge в единый [#254, cb9de124](https://github.com/mpaykin1/meta6-lab/commit/cb9de124); [дубль #269](https://github.com/mpaykin1/meta6-lab/pull/269) закрыт без merge в main. Все старые строки mutation-теста сохранены. Далее #275 и #282.

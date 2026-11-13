@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T03:45:07.790Z | МГЛ: 55189cb3a4d021c9ea77f55d018b50e03b403609 | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | нет данных
+UTC: 2026-11-13T03:45:55.253Z | МГЛ: be18317412852ca804d68c94d8b85670ad02fc24 | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #241 351572af1dd748a4c5a99e1e8f0cdba8a7092a0f: scripts/shared/mutate-build-index-symlinks.mjs
 - PR #259 24d0a9e8151cde7c3242275159c301a10d189311: scripts/prohodchik/mutate-prompt.mjs
@@ -55,7 +55,7 @@ P1 — нет данных: нет данных
 #257 docs(zadachi): не создавать дубли задач по одному PR | 79f4465b6667092e16115222325c012ca73cc137
 ещё 21: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1582 коммитов | нет данных
+МГЛ: 1585 коммитов | нет данных
 МГ: 6 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да

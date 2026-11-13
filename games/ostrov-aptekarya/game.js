@@ -280,7 +280,6 @@ function botInput(dt) {
     else if (stage === 3) target = V(...SPOTS.water);
   } else if (state === 'chase' || state === 'tell') target = HOME;
   else if (state === 'archive') {
-    chapter2.botActionIfNear();
     const goal=chapter2.goal();if(goal)target=V(goal.x,goal.y);
   }
   if (state === 'grab' && api.botPassive) return {x: 0, y: 0};

@@ -287,6 +287,126 @@
       "sha256": "8b37c1f5193f32a30dda479fe96cd7a0cb16d2674f28e18d7a008a11c8445065"
     },
     {
+      "id": "35b6aab196e2daef0c7331e8",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "countLines",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/inventory.mjs",
+      "lines": [
+        20,
+        59
+      ],
+      "sha256": "f0f89833300fd406d22d64166e3045c7d7f3fb01e76fe5f28fe47b4fbc329c28"
+    },
+    {
+      "id": "3a41e9723354b27af69c51bc",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "startChase",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/inventory.mjs",
+      "lines": [
+        44,
+        46
+      ],
+      "sha256": "ddb8906e2f8ff7c7aa5036108292673219213cd777fc1a1732a0df1e93f1d621"
+    },
+    {
+      "id": "49cdab1f641f39aa04b8f004",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "toEnding",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/inventory.mjs",
+      "lines": [
+        44,
+        46
+      ],
+      "sha256": "ddb8906e2f8ff7c7aa5036108292673219213cd777fc1a1732a0df1e93f1d621"
+    },
+    {
+      "id": "8decd11cc7bce7574b764283",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "read",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/inventory.mjs",
+      "lines": [
+        7,
+        18
+      ],
+      "sha256": "5a0317b9a92f224de425df12b3d4724f8017b9c16df7fc613c7230f0581c0f1e"
+    },
+    {
+      "id": "915cf38199dbc1474aa051c5",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:inventory.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/inventory.mjs",
+      "lines": [
+        1,
+        67
+      ],
+      "sha256": "f15675e4803af368cdc0ed69cd25c1dfd87744202777d2b88d049a2d42855422"
+    },
+    {
+      "id": "d4f5175ff182e29e4241e7fe",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "inventory",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/inventory.mjs",
+      "lines": [
+        21,
+        59
+      ],
+      "sha256": "2b46092e953663447d0bfc3803f54567583356ea39a3ecd374da9733d41142ee"
+    },
+    {
+      "id": "e0acbeabc8fae4f1394f316b",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "sourceInput",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/inventory.mjs",
+      "lines": [
+        60,
+        63
+      ],
+      "sha256": "bd0d6626391492b7b4cbc12fb553347ddb49107ee7e1a938afe186511798ae23"
+    },
+    {
+      "id": "f7e14aef9e57564b9d02e300",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "hash",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/inventory.mjs",
+      "lines": [
+        19,
+        19
+      ],
+      "sha256": "ce1eb9d005dacd2dd43fdde290c9aaa28b7010e880d4e9ec431cb38aab13056f"
+    },
+    {
       "id": "3e2a7726c7e419112cffdecf",
       "game": "ostrov-aptekarya",
       "kind": "solution",
@@ -1100,6 +1220,6 @@
   "counts": {
     "assets": 6,
     "file_assets": 1,
-    "solutions": 67
+    "solutions": 75
   }
 }

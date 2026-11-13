@@ -136,6 +136,27 @@ def check(root: Path, r) -> set[str]:
         r.add("HP8", "HARD", "index.html", f"браузерный прогон не состоялся: {error}",
               "Проверь запуск headless Chrome, WebGL и исправь ошибки загрузки")
         return covered
+    # HP13: comparison must be produced by the *current* successful browser run.
+    # A pretty full-screen screenshot is not a valid isolated object comparison.
+    if new_ids:
+        compare = root / "_check" / "compare.png"
+        if not compare.is_file():
+            r.add("HP13", "HARD", str(compare),
+                  "нет листа сравнения изолированных ассетов с эталоном",
+                  "Браузерный harness должен записать _check/compare.png")
+        else:
+            try:
+                from PIL import Image
+                with Image.open(compare) as sheet:
+                    size = sheet.size
+                if size != (1440, 316 * len(new_ids)):
+                    r.add("HP13", "HARD", str(compare),
+                          f"сравнение неполное: размер {size}, нужно 1440×{316 * len(new_ids)}",
+                          "Нарисуй каждую строку: два эталона и один изолированный новый ассет")
+            except (OSError, ValueError) as ex:
+                r.add("HP13", "HARD", str(compare),
+                      f"сравнение не является читаемым PNG: {ex}",
+                      "Пересними лист сравнения браузером, не подделывая PNG")
     reference = data.get("reference", {})
     candidate = data.get("candidate", {})
     for label, measurement in (("эталон", reference), ("пак", candidate)):

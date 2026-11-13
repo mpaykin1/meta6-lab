@@ -105607,21 +105607,6 @@
       ]
     },
     {
-      "id": "1a57b9af59baed83062db36e",
-      "game": "sumerki-i-pepel-2",
-      "kind": "solution",
-      "name": "inline-script@37454",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/sumerki-i-pepel-2/index.html",
-      "sha256": "aed3d090d6e38c1526beb9b45b88139c109fa8f00fb72f83cd3b0ba7a2fdcc0f",
-      "lines": [
-        435,
-        11160
-      ]
-    },
-    {
       "id": "1a8ff1f31595b32febb39005",
       "game": "sumerki-i-pepel-2",
       "kind": "solution",
@@ -112420,6 +112405,21 @@
       "lines": [
         9563,
         9563
+      ]
+    },
+    {
+      "id": "e2ca8f144e65ec97de68624c",
+      "game": "sumerki-i-pepel-2",
+      "kind": "solution",
+      "name": "inline-script@37454",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/sumerki-i-pepel-2/index.html",
+      "sha256": "2e07e1f963060589b698830acb28594ede3d50d02eb75434bc38024cf3ae96dd",
+      "lines": [
+        435,
+        11188
       ]
     },
     {

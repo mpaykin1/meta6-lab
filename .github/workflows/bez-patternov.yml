@@ -68,6 +68,10 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
           python -m pip install numpy pillow
+      - name: Prove FFT catches three image mutations
+        run: |
+          node --check scripts/visual/capture-pattern-frames.mjs
+          python scripts/visual/mutate-pattern-fft.py
       - name: Capture original INK on exact PR base
         if: github.event_name == 'pull_request'
         env:

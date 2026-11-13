@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {summarize,chooseFuse,needsEscalation,isBot} from './noise.mjs';
+import {summarize,chooseFuse,needsEscalation,isBot} from './noise-core.mjs';
 const commit=(name,msg,sha)=>({sha,commit:{author:{name,email:name+'@example.com'},message:msg}});
 const commits=Array.from({length:31},(_,i)=>commit('status-dlya-claude bot','status: refresh facts for Claude','bot'+i));
 commits.push(commit('human','Merge pull request #1','merge1'));

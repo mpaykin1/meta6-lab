@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "a42f3df4e20ca97e7495c7caef0a462b4b204634",
+  "last_processed_head": "11629fe2b9ff4a095c558447f51160a218ad8ffe",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -55,7 +55,7 @@
         "underwater-world"
       ],
       "pending_pages": 0,
-      "details": "17/17 уникальных текстов и FAQ; 17/17 человекочитаемых H2. Three Worlds теперь использует два оригинальных PNG-кадра из `three-worlds-game/evidence` (сохранены побайтно как локальные assets) на странице, в OG, JSON-LD и карточках, без старой внешней ссылки. SEO CI на новом HEAD ещё не подтверждён.",
+      "details": "17/17 уникальных текстов и FAQ; 17/17 человекочитаемых H2. Three Worlds теперь использует два оригинальных PNG-кадра из `three-worlds-game/evidence` (сохранены побайтно как локальные assets) на странице, в OG, JSON-LD и карточках, без старой внешней ссылки. SEO CI на новом HEAD ещё не подтверждён. Усиление: все 23 sitemap lastmod обязаны иметь один реальный календарный день не в будущем; три мутации, включая правдоподобный дубль, должны падать. SEO CI на новом SHA ожидается.",
       "seo_ci": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
       "metadata": "23 страницы: title <= 60, description 120–160, Schema.org JSON-LD, alt",
       "validator_implementation": "https://github.com/mpaykin1/meta6-lab/commit/674359e1781fb13e4dfeabb461e12def5448ea86"
@@ -78,6 +78,7 @@
     }
   },
   "next_ideas": [
+    "Сверять каждый sitemap lastmod с git log последнего изменения именно исходной HTML-страницы, защищать через мутации.",
     "PR #234: устранить незафиксированную генерацию shared/library без ручного изменения охраняемых baseline и восстановить стабильный window.__META_BOT__; ссылки: Actions 43236878422 и 43236879007.",
     "Сконвертировать 2 локальных PNG-кадра Three Worlds в WebP без изменения исходного игрового содержимого.",
     "После публикации проверять существование и HTTP 200 всех 17 ссылок PlayAction отдельно от локальной проверки.",
@@ -337,6 +338,12 @@
         "https://github.com/mpaykin1/meta6-lab/actions/runs/43236878714"
       ],
       "next": "Regenerate the two derived library artifacts from real code in a checked-out GitHub Actions workspace, not by overwriting owner reference hashes; fix sporadic Veil startup; approve/run fresh CI on #242."
+    },
+    {
+      "date": "2026-11-13",
+      "status": "implemented_pending_ci",
+      "change": "Валидатор sitemap проверяет обязательность, календарную достоверность и отсутствие дублей lastmod на всех 23 URL, плюс 3 мутации.",
+      "next": "Получить SEO CI нового SHA; по завершении вернуть 2–3 оригинальных WebP кадра каждой игре и доказать live HTTP 200."
     }
   ],
   "base_sync_sha": "a6431c80a43e11f1031530268031acb28341d824"

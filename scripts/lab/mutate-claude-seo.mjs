@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { inspect } from './check-claude-seo.mjs';
+import { inspect, inspectSitemap } from './check-claude-seo.mjs';
 
 const original = fs.readFileSync('claude-games/games/twilight-isles/index.html', 'utf8');
 const page = 'games/twilight-isles/';
@@ -71,5 +71,21 @@ cases.push(
 );
 for (const [name, html] of cases) {
   if (!inspect(html, page).length) throw Error('Mutation escaped SEO validator: ' + name);
+  console.log('CAUGHT', name);
+}
+
+const sitemap = fs.readFileSync('claude-games/sitemap.xml', 'utf8');
+const base = JSON.parse(fs.readFileSync('claude-games/seo-config.json', 'utf8')).baseUrl;
+const slugs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x => x[1].slice(base.length));
+if (inspectSitemap(sitemap, slugs, base).length) throw Error('Original sitemap invalid');
+const brokenSitemaps = [
+  ['missing sitemap lastmod', sitemap.replace(/<lastmod>[^<]*<\/lastmod>/, '')],
+  ['impossible calendar lastmod', sitemap.replace(/<lastmod>[^<]*<\/lastmod>/,
+    '<lastmod>2026-02-31</lastmod>')],
+  ['deceptive duplicate plausible lastmod', sitemap.replace(/(<lastmod>[^<]*<\/lastmod>)/,
+    '$1<lastmod>2026-11-12</lastmod>')]
+];
+for (const [name, xml] of brokenSitemaps) {
+  if (!inspectSitemap(xml, slugs, base).length) throw Error('Mutation escaped sitemap guard: ' + name);
   console.log('CAUGHT', name);
 }

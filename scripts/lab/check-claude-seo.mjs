@@ -158,6 +158,43 @@ export function inspect(html, page) {
   }
   return errors;
 }
+// Validate lastmod as one genuine calendar date for each published catalogue URL.
+export function inspectSitemap(xml, expectedSlugs, baseUrl) {
+  const failures = [];
+  const expected = new Set([...expectedSlugs].map(slug => baseUrl + slug));
+  const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)];
+  if (entries.length !== expected.size) failures.push('sitemap: wrong number of URL entries');
+  const seen = new Set();
+  const today = new Date().toISOString().slice(0, 10);
+  for (const [index, entry] of entries.entries()) {
+    const locs = [...entry[1].matchAll(/<loc>([^<]*)<\/loc>/g)];
+    const dates = [...entry[1].matchAll(/<lastmod>([^<]*)<\/lastmod>/g)];
+    if (locs.length !== 1 || !expected.has(locs[0]?.[1])) {
+      failures.push('sitemap: invalid canonical location at entry ' + (index + 1));
+    }
+    const loc = locs[0]?.[1];
+    if (loc && seen.has(loc)) failures.push('sitemap: duplicate canonical URL ' + loc);
+    if (loc) seen.add(loc);
+    if (dates.length !== 1) {
+      failures.push('sitemap: exactly one lastmod required for ' + (loc || index + 1));
+      continue;
+    }
+    const value = dates[0][1];
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+    if (!match) {
+      failures.push('sitemap: invalid lastmod format ' + value);
+      continue;
+    }
+    const actual = new Date(Date.UTC(+match[1], +match[2] - 1, +match[3]));
+    if (!Number.isFinite(actual.getTime()) || actual.toISOString().slice(0, 10) !== value ||
+        value > today) {
+      failures.push('sitemap: impossible or future lastmod ' + value);
+    }
+  }
+  for (const loc of expected) if (!seen.has(loc)) failures.push('sitemap: missing URL ' + loc);
+  return failures;
+}
+
 const pages = [{ file: 'index.html', slug: '' }, { file: 'lore.html', slug: 'lore.html' }];
 for (const category of ['games', 'genres']) {
   for (const name of fs.readdirSync(path.join(root, category))) {
@@ -193,11 +230,7 @@ for (const { file, slug } of pages) {
   if (!/<h2>Частые вопросы<\/h2>/i.test(html)) allErrors.push(slug + ': missing visible FAQ');
 }
 const xml = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
-const locations = [...xml.matchAll(/<loc>([^<]*)<\/loc>/g)].map(x => x[1]);
-if (locations.length !== pages.length || new Set(locations).size !== pages.length ||
-    locations.some(loc => !filePages.has(loc.replace(base, '')) || !loc.startsWith(base))) {
-  allErrors.push('sitemap: mismatch with 23 canonical pages');
-}
+allErrors.push(...inspectSitemap(xml, filePages, base));
 if (allErrors.length) {
   for (const error of allErrors) console.error('SEO FAIL: ' + error);
   process.exitCode = 1;

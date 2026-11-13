@@ -1,0 +1,35 @@
+{
+  "id": 1,
+  "game": "games/archer-in-the-fog/",
+  "game_version": "2.0.1",
+  "locked_at_utc": "2026-11-11T15:00:00Z",
+  "one_idea": "Раннее прицеливание и предупреждение об атаке дракона из имеющихся визуальных компонентов",
+  "conditions": [
+    {
+      "id": "goal",
+      "deadline_game_seconds": 3,
+      "description": "После старта появляется пульсирующий знак цели под полосой жизни дракона",
+      "state_hook": "window.__metaBot.state().goalVisible === true",
+      "pixels": "archerTarget visible pixel delta >=48",
+      "screen_region": "top-center mobile+desktop"
+    },
+    {
+      "id": "danger",
+      "deadline_game_seconds": 20,
+      "description": "Когда ярость дракона превышает 75%, цель заранее становится красной",
+      "state_hook": "window.__metaBot.state().danger === true",
+      "pixels": "red pixels in archerTarget region >=48",
+      "screen_region": "top-center mobile+desktop"
+    }
+  ],
+  "before": "Оба условия должны быть ложными в предшествующем коммите, включая отсутствие нарисованного элемента.",
+  "after": "Оба условия должны быть истинными в новой версии на экранах 390x844 и 1280x720.",
+  "statistics": {
+    "min_players": 300,
+    "minimum_increase_60s_percentage_points": 5,
+    "minimum_30s_rate_change_percentage_points": 0,
+    "historical_30s_percent": 45,
+    "historical_60s_percent": 27,
+    "decision": "Independent measurement after release; not a shipping gate."
+  }
+}

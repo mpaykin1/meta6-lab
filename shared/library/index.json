@@ -25,7 +25,7 @@
       "manifest": "shared/library/broken-city.json",
       "assets": 84,
       "file_assets": 79,
-      "solutions": 996
+      "solutions": 997
     },
     {
       "game": "broken-city-copy",
@@ -23245,7 +23245,22 @@
       ]
     },
     {
-      "id": "a9e52d8011405fc5dcf907c3",
+      "id": "dd598c4a1f8d29ecf6e54d61",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "install",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/bot-adapter.js",
+      "sha256": "a1046a61a232a34d242afef262165c737071f9ac680e4401261c689c90f5e8ff",
+      "lines": [
+        5,
+        23
+      ]
+    },
+    {
+      "id": "e5f50d8f35af910e01a48c89",
       "game": "broken-city",
       "kind": "solution",
       "name": "module:bot-adapter.js",
@@ -23253,10 +23268,10 @@
         "game-module"
       ],
       "source_path": "games/broken-city/bot-adapter.js",
-      "sha256": "9a66781feb2afa2c6fef4d6e0c249fa1f8095979ef9564b5bbcc0d05102e63a3",
+      "sha256": "9964ec6015a525dbf14f57c091c644cc311be9052dd56e63fc6c068c31f0eba1",
       "lines": [
         1,
-        18
+        26
       ]
     },
     {

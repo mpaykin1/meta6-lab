@@ -24,6 +24,9 @@ jobs:
           node-version: '22'
       - name: Check selector syntax
         run: node --check scripts/lab/affected-bot-games.mjs
+      - name: Check real Broken City bot startup with four mutation traps
+        if: ${{ hashFiles('games/broken-city/bot-adapter-boot.test.mjs') != '' }}
+        run: node games/broken-city/bot-adapter-boot.test.mjs
       - name: Select actual changed game copies
         id: scope
         env:

@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "11629fe2b9ff4a095c558447f51160a218ad8ffe",
+  "last_processed_head": "b90c7831bbbc8c56c9d29022e82048ffa7a9dc54",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -19,7 +19,7 @@
     },
     "1_fix_bot_and_other_ci": {
       "status": "in_progress",
-      "details": "Текущий HEAD PR #234 9b1feaa6f452ba49dff8c89954d9ee43878609a6: красные Library Machine (Actions 43236878422: не закоммичены GENERATED shared/library/index.json и veil-terraces.json после изменения bot-strategy.mjs 65→67 строк) и LAB focused META BOT (Actions 43236879007: Veil Terraces intermittent отсутствует window.__META_BOT__ несмотря на успешные 6/6 прохождений). LAB Veil Shared Narrative Gameplay зелёный (Actions 43236878714). Не объявлять PR зелёным.",
+      "details": "Updated SEO branch with latest actual Veil Terraces navigation strategy from PR234; previously diverging game strategy reconciled without changing any protected original. Library Machine and LAB focused BOT remain red on PR234's prior HEAD; SEO CI and full bot run still required.",
       "evidence": [
         "https://github.com/mpaykin1/meta6-lab/commit/7ee56e90d9da32d806e697c542b705102575b963",
         "https://github.com/mpaykin1/meta6-lab/commit/744e6d7e89c716f2a81cfd184819cee297bd9e26",
@@ -344,7 +344,20 @@
       "status": "implemented_pending_ci",
       "change": "Валидатор sitemap проверяет обязательность, календарную достоверность и отсутствие дублей lastmod на всех 23 URL, плюс 3 мутации.",
       "next": "Получить SEO CI нового SHA; по завершении вернуть 2–3 оригинальных WebP кадра каждой игре и доказать live HTTP 200."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Veil Terraces: обход у препятствия теперь доступен и у близкой цели, увеличена длительность реального бокового ввода; без изменения проверок.",
+      "commit": "1aaeed6f074602ab335bc775e60e6999891a209b",
+      "next": "Проверить новую LAB focused META BOT на текущем head и не сливать до всех зелёных CI."
+    },
+    {
+      "date": "2026-11-13",
+      "status": "merge_base_sync_pending_ci",
+      "change": "Синхронизация PR242 с PR234: новейшая честная игровая стратегия Veil и все новые записи прогресса основной ветки сохранены; нужен свежий CI.",
+      "base": "9b1feaa6f452ba49dff8c89954d9ee43878609a6"
     }
   ],
-  "base_sync_sha": "a6431c80a43e11f1031530268031acb28341d824"
+  "base_sync_sha": "9b1feaa6f452ba49dff8c89954d9ee43878609a6"
 }

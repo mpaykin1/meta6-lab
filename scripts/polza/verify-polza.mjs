@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { verdict, isDoc, isCodeChange, unwrapPage } from './gate.mjs';
+import { verdict, isDoc, isCodeChange, unwrapPage } from './gate-core.mjs';
 const f = (filename,status='modified',additions=3)=>({filename,status,additions,changes:additions,previous_filename:null});
 const base={body:'ПОЛЬЗА: FINISH B2',files:[f('scripts/shared/verify-bot-motion.mjs'),f('scripts/shared/mutate-bot-motion.mjs')],openPRs:9,scheduledWorkflows:8,newCronFiles:[],finish:{B2:{verify:['scripts/shared/verify-bot-motion.mjs'],mutate:['scripts/shared/mutate-bot-motion.mjs'],checked:[]}}};
 assert.equal(verdict(base).ok,true,'FINISH with matching verify and mutate');

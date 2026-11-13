@@ -10,6 +10,8 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from PIL import Image
+
 import check_pack as cp
 
 REPO = Path(os.environ.get("ASSET_CHECK_REPO") or Path(__file__).resolve().parents[2])
@@ -38,6 +40,8 @@ class HtmlPackTraps(unittest.TestCase):
         self.root.joinpath("index.html").write_text(src, "utf-8")
         manifest = dict(COMMON, assets={"new_shadow": {"role": "enemy"}})
         self.root.joinpath("pack.json").write_text(json.dumps(manifest), "utf-8")
+        (self.root / "_check").mkdir(exist_ok=True)
+        Image.new("RGB", (1440, 316), (7, 24, 39)).save(self.root / "_check/compare.png")
 
     def metrics(self, new=None, fps=45):
         ref = {name: {"visible": .14, "detail": .07, "motion": .08, "colors": 130,
@@ -180,6 +184,16 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertIn("ctx.putImageData(frame,0,0)", harness)
         self.assertIn("report.previews[id]=await isolatePreview(page,second.png,second.offPng)", harness)
         self.assertNotIn("report.previews[id]=second.png.toString('base64')", harness)
+
+    def test_HP13_missing_sheet_is_hard(self):
+        self.add_new()
+        (self.root / "_check/compare.png").unlink()
+        self.assertIn("HP13", self.ids(self.metrics(new={})))
+
+    def test_HP13_incomplete_sheet_is_hard(self):
+        self.add_new()
+        Image.new("RGB", (1440, 12), (7, 24, 39)).save(self.root / "_check/compare.png")
+        self.assertIn("HP13", self.ids(self.metrics(new={})))
 
     def test_HP8_unavailable_browser(self):
         with patch("subprocess.run", return_value=SimpleNamespace(

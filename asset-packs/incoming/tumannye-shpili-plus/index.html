@@ -77,8 +77,8 @@ const PACK={name:'Туманные шпили',version:'1.2.0',items:[
  {id:'post',n:'Кино-обработка: зерно, аберрация, глитч, свечение',k:'2D',m:'plaza',cam:PLAZA.cam,look:PLAZA.look,glitch:1},
 
  {id:'sable-beast',n:'Зверь — багровый страж',k:'2.5D',m:'flight',cam:[25,45,-17],look:[25,44,-40],isNew:true},
- {id:'shattered-mast',n:'Падающая мачта-игла',k:'2.5D',m:'plaza',cam:[-23,16,8],look:[-23,13,-38],isNew:true},
- {id:'gate-bridge',n:'Мост осколков врат',k:'2.5D',m:'plaza',cam:[12,14,8],look:[12,13,-40],isNew:true},
+ {id:'shattered-mast',n:'Сломанный собор-шпиль',k:'2.5D',m:'plaza',cam:[-23,29,21],look:[-23,30,-38],isNew:true},
+ {id:'gate-bridge',n:'Разрушенный мост-акведук',k:'2.5D',m:'plaza',cam:[12,22,9],look:[12,22,-40],isNew:true},
  {id:'dawn-sentinel',n:'Спутник летуна — хранитель',k:'2.5D',m:'flight',follow:'hero',d:13,isNew:true},
  {id:'mirror-seed',n:'Сердце зеркальной воды — усиление',k:'2.5D',m:'flight',cam:[3,45,-19],look:[3,43,-40],isNew:true},
  {id:'storm-heart',n:'Багровая гроза над шпилями',k:'2D',m:'plaza',cam:[-34,48,-14],look:[-34,46,-43],isNew:true},
@@ -822,6 +822,235 @@ const SHPILI_PLUS=(()=>{
        const l=lightning[i];l.material.opacity=.04+.7*Math.pow(.5+.5*Math.sin(t*1.3+i*2.399),10);
        l.scale.x=.9+.15*Math.sin(t*.31+i);
      }petals(t);
+   };
+ }
+
+
+ // OWNER METHOD 14.11: two actual architectural silhouettes, never glowing circles.
+ // Built like the accepted obelisk/cathedral: red = weathered stone, green = windows.
+ const silhouettePlane=(root,texture,width,height,z,phase=0)=>{
+   const m=new T.Mesh(new T.PlaneGeometry(width,height),
+     archMat(texture,.17,{light:0xb3e6f9,amp:1.15,sway:.17,ph:phase,base:.68}));
+   m.position.set(0,height*.5,z);m.frustumCulled=false;root.add(m);return m;
+ };
+ const cutStone=(x,coords,tone)=>{
+   x.fillStyle=S(tone);x.beginPath();x.moveTo(...coords[0]);
+   for(let i=1;i<coords.length;i++)x.lineTo(...coords[i]);
+   x.closePath();x.fill();
+ };
+ // I. The broken cathedral-mast. A stepped nave, buttresses, flying bridges,
+ // open windows, chipped carved stone and a violently fractured crown.
+ {
+   const root=own['shattered-mast'].group;
+   for(const item of root.children)item.visible=false;
+   const rear=mk(640,1400,(x,w,h)=>{
+     const R=rng(1429);
+     for(let side of [-1,1]){
+       const cx=w/2+side*180;
+       cutStone(x,[[cx-61,h],[cx-50,410],[cx-34,310],[cx-20,250],
+         [cx-9,180],[cx+13,135],[cx+29,260],[cx+42,410],[cx+70,h]],25);
+       for(let j=0;j<13;j++){
+         const y=435+j*67;
+         x.fillStyle=S(j%2?55:10);x.fillRect(cx-58+(j%3)*4,y,109-j*.6,7);
+         x.fillStyle=S(76);x.fillRect(cx-39,y+17,5,26);
+         x.fillRect(cx+29,y+17,5,26);
+       }
+       for(let i=0;i<52;i++){
+         const y=R()*h+80;
+         x.fillStyle=S(44+R()*65);
+         x.fillRect(cx-29+R()*56,y,1+R()*3,4+R()*32);
+       }
+     }
+   });
+   silhouettePlane(root,rear,35,50,-3.8,1.8);
+   const face=mk(1024,2048,(x,w,h)=>{
+     const R=rng(2851),cx=w*.5;
+     const body=[[cx-224,h],[cx-208,1562],[cx-175,1562],[cx-168,1370],
+       [cx-144,1310],[cx-151,1115],[cx-123,1058],[cx-135,862],
+       [cx-104,809],[cx-113,612],[cx-72,548],[cx-74,389],
+       [cx-53,301],[cx-39,206],[cx-66,159],[cx-20,109],
+       [cx+9,187],[cx+40,135],[cx+61,224],[cx+41,311],
+       [cx+84,421],[cx+71,580],[cx+114,656],[cx+126,853],
+       [cx+141,899],[cx+134,1075],[cx+161,1145],[cx+177,1370],
+       [cx+196,1442],[cx+219,1610],[cx+235,h]];
+     cutStone(x,body,42);
+     x.save();x.beginPath();x.moveTo(...body[0]);
+     for(let i=1;i<body.length;i++)x.lineTo(...body[i]);x.closePath();x.clip();
+     for(let i=0;i<1600;i++){
+       const yy=R()*h,xx=cx+(R()-.5)*(140+yy*.16);
+       x.strokeStyle=S(12+R()*118);x.lineWidth=.8+R()*2.4;
+       x.beginPath();x.moveTo(xx,yy);
+       x.lineTo(xx+(R()-.5)*19,yy+(R()-.3)*42);x.stroke();
+     }
+     for(let level=0;level<22;level++){
+       const y=395+level*73,span=95+y*.055;
+       x.fillStyle=S(10);x.fillRect(cx-span,y,span*2,8);
+       x.fillStyle=S(112);x.fillRect(cx-span,y+8,span*2,3);
+       x.fillStyle=S(20);x.fillRect(cx-span+8,y+16,span*2-16,3);
+       for(let col=-2;col<=2;col++){
+         const wx=cx+col*(span*.32),wy=y+17;
+         // Pointed gothic niches: both frame and real hollow-looking lancet.
+         cutStone(x,[[wx-8,wy+34],[wx-8,wy+10],[wx,wy-9],
+           [wx+8,wy+10],[wx+8,wy+34]],12);
+         x.fillStyle='rgb(74,170,0)';x.fillRect(wx-1.5,wy+6,3,24);
+         x.fillRect(wx-4,wy+19,8,1.8);
+       }
+     }
+     for(let i=0;i<400;i++){
+       const y=R()*h,xx=cx+(R()-.5)*260;
+       x.fillStyle=S(30+R()*140);
+       x.fillRect(xx,y,1+R()*4,1+R()*13);
+     }
+     x.restore();
+     for(let side of [-1,1]){
+       for(let k=0;k<13;k++){
+         const y=680+k*98,reach=105+k*11;
+         cutStone(x,[[cx+side*90,y-51],[cx+side*(reach+22),y-44],
+           [cx+side*(reach+60),y+4],[cx+side*(reach+40),y+24],
+           [cx+side*107,y+38]],k%3?52:67);
+         cutStone(x,[[cx+side*(reach+11),y+13],[cx+side*(reach+72),y+52],
+           [cx+side*(reach+91),y+68],[cx+side*(reach+61),y+62]],
+           22+k%3*15);
+         x.strokeStyle=S(126);x.lineWidth=2.5;x.beginPath();
+         x.moveTo(cx+side*94,y-30);x.lineTo(cx+side*(reach+50),y+14);x.stroke();
+       }
+       for(let k=0;k<4;k++){
+         // Flying stone bridges between side towers and the broken nave.
+         const y=940+k*205,dir=side;
+         cutStone(x,[[cx+dir*126,y],[cx+dir*303,y-58],
+           [cx+dir*319,y-37],[cx+dir*171,y+32]],58);
+         x.strokeStyle=S(115);x.lineWidth=5;x.beginPath();
+         x.moveTo(cx+dir*145,y+4);
+         x.quadraticCurveTo(cx+dir*219,y+103,cx+dir*296,y-43);x.stroke();
+       }
+     }
+     // Broken finial: irregular exposed ribs, no circular topper.
+     for(let i=0;i<33;i++){
+       const y=110+R()*520,xx=cx+(R()-.5)*125;
+       cutStone(x,[[xx-3,y],[xx+4,y-19-R()*42],
+         [xx+9,y-50-R()*64],[xx+13,y+7]],i%3?75:125);
+     }
+   });
+   const front=silhouettePlane(root,face,34,52,1.6,.4);
+   const pennants=banners(root,5,9,0x5ca0b4,6183);
+   own['shattered-mast'].tick=t=>{
+     front.rotation.z=.012*Math.sin(t*.39);
+     front.position.x=.14*Math.sin(t*.51);
+     pennants(t);
+   };
+ }
+ // II. The ruined flying aqueduct: a real traversable silhouette with a deck,
+ // pointed arch voids, watchtowers, snapped spans, railings and dangling cables.
+ {
+   const root=own['gate-bridge'].group;
+   for(const item of root.children)item.visible=false;
+   const far=mk(1536,768,(x,w,h)=>{
+     const R=rng(5821);
+     cutStone(x,[[80,h],[83,435],[188,373],[293,405],[440,370],
+       [591,405],[742,379],[906,418],[1090,360],[1297,420],
+       [1440,421],[1466,h]],21);
+     for(let i=0;i<11;i++){
+       const p=95+i*126;
+       x.fillStyle=S(52+R()*23);x.fillRect(p,396+R()*45,42,12);
+       cutStone(x,[[p+6,420],[p+18,295-R()*58],
+         [p+33,395],[p+42,420]],47);
+     }
+   });
+   silhouettePlane(root,far,52,26,-4.2,.8);
+   const aqueduct=mk(1536,896,(x,w,h)=>{
+     const R=rng(9987),W=w,H=h;
+     const left=[[84,H],[96,340],[127,281],[150,191],[159,89],
+       [196,55],[234,130],[249,263],[282,325],[335,368],
+       [477,365],[508,391],[548,426],[574,437],[580,H]];
+     const right=left.map(p=>[W-p[0],p[1]]);
+     cutStone(x,left,44);cutStone(x,right,54);
+     // Massive stone deck broken at the centre. The profile is jagged,
+     // broken edges point towards the empty chasm rather than forming a ring.
+     cutStone(x,[[145,334],[295,297],[480,316],[621,337],
+       [649,351],[634,401],[589,393],[558,449],[528,430],
+       [474,412],[280,414],[146,437]],65);
+     cutStone(x,[[W-145,334],[W-295,297],[W-480,316],[W-621,337],
+       [W-649,351],[W-634,401],[W-589,393],[W-558,449],
+       [W-528,430],[W-474,412],[W-280,414],[W-146,437]],61);
+     // Piers and pointed Gothic arches, with transparent air and water below.
+     for(let sign of [-1,1]){
+       const mirror=v=>sign===1?v:W-v;
+       for(let k=0;k<3;k++){
+         const mid=mirror(245+k*115),y=405;
+         cutStone(x,[[mid-16,y],[mid+16,y],[mid+32,H],[mid-43,H]],47+k*8);
+       }
+     }
+     x.globalCompositeOperation='destination-out';
+     for(let side of [-1,1]){
+       const mirror=v=>side===1?v:W-v;
+       for(let k=0;k<2;k++){
+         const center=mirror(278+k*146),radius=38+(k%2)*15;
+         x.beginPath();x.moveTo(center-radius,H+4);
+         x.lineTo(center-radius,566);
+         x.quadraticCurveTo(center-radius*.9,505,center,476-k*12);
+         x.quadraticCurveTo(center+radius*.9,505,center+radius,566);
+         x.lineTo(center+radius,H+4);x.closePath();x.fill();
+       }
+     }
+     x.globalCompositeOperation='source-over';
+     for(let side of [-1,1]){
+       const mirror=v=>side===1?v:W-v;
+       // Upper battlements and broken watchtowers.
+       for(let i=0;i<5;i++){
+         const bx=mirror(112+i*36);
+         cutStone(x,[[bx-13,331],[bx-15,294-(i%2)*11],
+           [bx+9,295],[bx+14,331]],i%2?84:41);
+       }
+       for(let i=0;i<4;i++){
+         const wx=mirror(190+i*60);
+         cutStone(x,[[wx-11,286],[wx,248-i%2*15],[wx+9,286],
+           [wx+7,332],[wx-7,332]],26);
+         x.fillStyle='rgb(32,210,0)';x.fillRect(wx-1,279,3,29);
+       }
+       // Flying support ribs and open pointed vaults.
+       for(let i=0;i<4;i++){
+         const cx=mirror(220+i*112);
+         x.strokeStyle=S(120);x.lineWidth=5;x.beginPath();
+         x.moveTo(cx-26,610);
+         x.quadraticCurveTo(cx,488,cx+41,612);x.stroke();
+       }
+     }
+     // Irregular masonry, cracks and flaked edges. Drawing remains inside stone.
+     for(let i=0;i<1050;i++){
+       const xx=R()*W, yy=260+R()*(H-260);
+       x.strokeStyle=S(18+R()*114);x.lineWidth=.8+R()*2.4;
+       x.beginPath();x.moveTo(xx,yy);
+       x.lineTo(xx+(R()-.5)*21,yy+(R()-.5)*27);x.stroke();
+     }
+     // Cut hanging bridge chains, not luminous toruses.
+     x.strokeStyle=S(131);x.lineWidth=5;x.beginPath();
+     x.moveTo(640,352);x.bezierCurveTo(677,615,725,572,766,390);
+     x.moveTo(664,395);x.bezierCurveTo(703,645,748,563,788,360);x.stroke();
+     for(let i=0;i<30;i++){
+       const xx=647+i*4.3, yy=377+185*Math.sin(i/29*Math.PI);
+       x.strokeStyle=S(i%3?110:159);x.lineWidth=2.5;
+       x.beginPath();x.moveTo(xx,yy);x.lineTo(xx+10,yy+12);x.stroke();
+     }
+     // Bridge fragments expose the failure of the centre span.
+     for(let i=0;i<26;i++){
+       const xx=615+R()*308,yy=360+R()*255,ss=5+R()*29;
+       cutStone(x,[[xx-ss,yy],[xx+ss*.3,yy-ss*.9],
+         [xx+ss,yy+ss*.2],[xx-ss*.5,yy+ss]],i%3?95:45);
+     }
+     // Sharp irregular vertical parapet, never repetitive geometrical rings.
+     for(let i=0;i<56;i++){
+       const px=140+i*23.7;
+       if(px>583&&px<960)continue;
+       cutStone(x,[[px,334],[px+3,320-(i%4)*8],[px+10,334],
+         [px+12,342]],i%3?45:103);
+     }
+   });
+   const near=silhouettePlane(root,aqueduct,49,27,1.4,2.1);
+   const strands=banners(root,7,8,0x548e9f,8712);
+   own['gate-bridge'].tick=t=>{
+     near.rotation.z=.007*Math.sin(t*.53);
+     near.position.x=.12*Math.sin(t*.61);
+     strands(t);
    };
  }
 

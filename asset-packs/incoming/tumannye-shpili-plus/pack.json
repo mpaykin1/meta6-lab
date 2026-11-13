@@ -1,6 +1,6 @@
 {
   "format": "htmlpack/1",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "name": "Туманные шпили — 12 дополнительных живых ассетов",
   "base": "reference/tumannye-shpili",
   "reference_count": 26,
@@ -17,10 +17,10 @@
   },
   "provenance": {
     "tool": "ChatGPT",
-    "date": "2026-11-13",
+    "date": "2026-11-14",
     "source": "reference/tumannye-shpili/index.html",
-    "branch": "lab/asset-pack-shpili",
-    "method": "unmodified reference scene extended with procedural meshes and animation"
+    "branch": "lab/assets-tumannye-shpili-20261114",
+    "method": "INK robot method for characters, architecture via detailed 2D silhouette canvas"
   },
   "content_flags": {
     "real_persons": [],
@@ -35,15 +35,15 @@
       "animated": true
     },
     "shattered-mast": {
-      "label_ru": "Падающая мачта",
+      "label_ru": "Сломанный собор-шпиль",
       "role": "world",
-      "benefit": "новая вертикальная руина и ориентир",
+      "benefit": "ориентир: многоярусный надломленный собор с контрфорсами и мостами",
       "animated": true
     },
     "gate-bridge": {
-      "label_ru": "Мост осколков врат",
+      "label_ru": "Разрушенный мост-акведук",
       "role": "world",
-      "benefit": "новая воздушная переправа",
+      "benefit": "переправа с обрушенными пролётами и готическими арками",
       "animated": true
     },
     "dawn-sentinel": {

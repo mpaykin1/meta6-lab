@@ -115,6 +115,13 @@ class HtmlPackTraps(unittest.TestCase):
         data["candidate"]["errors"] = ["ReferenceError: broken"]
         self.assertIn("HP8", self.ids(data))
 
+    def test_HP9_camera_focus_wait_not_disabled(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        # Камера должна войти в 3.5 мировых единицы, прежде чем сравнивать кадры.
+        self.assertIn("CAMERA_TOLERANCE=3.5", harness)
+        self.assertIn("page.waitForFunction(({target,tolerance})", harness)
+        self.assertIn("fixedCamera", harness)
+
     def test_HP8_unavailable_browser(self):
         with patch("subprocess.run", return_value=SimpleNamespace(
             stdout='{"ok":false,"error":"Chrome unavailable"}', stderr="", returncode=1)):

@@ -1,5 +1,5 @@
 // CLI проверки захвата игры. Не меняет игровые исходники.
-import { blockersFor } from './claim.mjs';
+import { blockersFor, taskLocksFor } from './claim.mjs';
 import { allPages as paginate, allChangedPaths } from './paginate.mjs';
 const REPO = 'mpaykin1/meta6-lab';
 
@@ -38,12 +38,15 @@ async function main() {
   const [game, branch] = process.argv.slice(2);
   if (!game || !branch) throw new Error('Пример: node preflight.mjs games/skin-trainer lab/my-branch');
   const prefix = '/repos/' + REPO;
-  const [prs, commits, lockFile] = await Promise.all([
+  const [prs, commits, lockFile, taskFile] = await Promise.all([
     allPages(prefix + '/pulls?state=open'),
     api(prefix + '/commits?path=' + encodeURIComponent(game) + '&per_page=1'),
-    api(prefix + '/contents/rules/09-platforma/ZANYATO.md?ref=main')
+    api(prefix + '/contents/rules/09-platforma/ZANYATO.md?ref=main'),
+    api(prefix + '/contents/ZADACHI.md?ref=main')
   ]);
-  if (!commits.length || !lockFile.content) throw new Error('Неполные данные GitHub, захват запрещён');
+  if (!Array.isArray(commits) || !commits.length || !lockFile.content || !taskFile.content) {
+    throw new Error('Неполные данные GitHub, захват запрещён');
+  }
   const checked = await Promise.all(prs.map(async pr => ({
     number: pr.number,
     url: pr.html_url,
@@ -53,7 +56,10 @@ async function main() {
   })));
   console.log('PREFLIGHT checked ' + checked.length + ' open PRs and ' +
     checked.reduce((sum, pr) => sum + pr.files.length, 0) + ' changed paths');
-  const locks = parseLocks(Buffer.from(lockFile.content, 'base64').toString('utf8'), game);
+  const locks = [
+    ...parseLocks(Buffer.from(lockFile.content, 'base64').toString('utf8'), game),
+    ...taskLocksFor(Buffer.from(taskFile.content, 'base64').toString('utf8'), game)
+  ];
   const blockers = blockersFor({
     game,
     branch,

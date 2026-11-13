@@ -33,6 +33,14 @@ MUTANTS = [
     ("kinds/ink.py", 'if m["min"][1] > 0.25 and', "if False and"),
     ("kinds/ink.py", 'if bar and role not in ("effect", "ground") and', "if False and"),
     ("check_pack.py", 'if "content_flags" not in merged:', "if False:"),
+    ("kinds/htmlpack.py", "if missing:", "if False and missing:"),
+    ("kinds/htmlpack.py", "if any_bad_text:", "if False and any_bad_text:"),
+    ("kinds/htmlpack.py", "if isolated < .006:", "if isolated < -1:"),
+    ("kinds/htmlpack.py", "if val + 1e-6 < ref:", "if False and val + 1e-6 < ref:"),
+    ("kinds/htmlpack.py", "if ref_fps > 0 and new_fps < ref_fps * .8:", "if False:"),
+    ("kinds/htmlpack.py", "if found != CDN:", "if False:"),
+    ("kinds/htmlpack.py", "if error:", "if False and error:"),
+    ("kinds/htmlpack.py", 'if new_ids and "window.__PACK_PROBE__" not in source:', "if False:"),
 ]
 
 

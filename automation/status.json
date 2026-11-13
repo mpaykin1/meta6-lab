@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-13T10:25:51.524Z",
+  "generated_at": "2026-11-13T10:31:18.721Z",
   "sha": {
-    "lab": "126d3c005e5650f29497863e3341f0d63de26c86",
+    "lab": "9135849134d323f37fae0061cf13608a2a903315",
     "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43408944251",
+  "run": "нет данных",
   "review": {
     "protected": [
       {
@@ -140,8 +140,18 @@
     ],
     "redLab": [
       {
+        "workflow": "STOROZHA weekly maintenance",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43409546447",
+        "step": "Close genuinely stale PRs without deleting branches and write daily report"
+      },
+      {
+        "workflow": "MG Dispatcher",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43408944206",
+        "step": "Commit queue"
+      },
+      {
         "workflow": "Investigation snapshot",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43408469422",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43408649138",
         "step": "Refresh investigation snapshot from GitHub"
       }
     ],
@@ -312,7 +322,7 @@
     ]
   },
   "pr": {
-    "open": 51,
+    "open": 53,
     "conflicts": "нет данных",
     "merged": 26,
     "closed": 58,
@@ -579,7 +589,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1766,
+      "count": 1774,
       "folders": "нет данных"
     },
     "mg": {
@@ -590,57 +600,57 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "прошла",
+      "bot": "нет данных",
       "storefront": "да"
     }
   ],

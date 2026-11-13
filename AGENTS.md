@@ -22,6 +22,13 @@ Living Watercolor 3D — эталон визуальной технологии 
 ## ТАБЛИЦА ЗАДАЧ (правило владельца, 10.11.2026)
 Каждая задача, за которую берётся ChatGPT (чат или автозадача) по МГ и МГЛ, сразу записывается строкой в [ZADACHI.md](https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md) (корень meta6-lab). Статус ставит сторож `ZADACHI watch` по данным GitHub: ✅ готово (PR слит), 🛑 ЗАВИС — толкнуть (нет коммитов 3+ часа). Без строки работу не начинать. Полное правило: [rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md](rules/06-rabota-ii-s-kodom/TABLITSA_ZADACH.md).
 
+## БЕЗ ТОРМОЗОВ (решение владельца через Claude, 13.11.2026)
+- «Только Claude» теперь лишь ЯДРО охраны: workflow `storozha-*`, `kontur-guard`, `meta-games-guard`, `meta-bot`, `report-completion-guard`, `lab-shared-deletion-guard`, `pr-autofinish`, `sync-from-meta6` и папки `scripts/storozha|kontur|meta-bot`, `scripts/meta-games-guard.sh` (+ `.github/protected/paths.txt`). Код — `CORE_WORKFLOW` в [scripts/storozha/core.mjs](scripts/storozha/core.mjs).
+- Остальные workflow и боты (auditor, asset-check, link-guard, zadachi-watch, library-machine, prohodchik и т.д.) ChatGPT меняет и добавляет САМ, при зелёных проверках. Нельзя: удалять/переименовывать workflow; удалять строки из старых тестов (`mutate-*`, `verify-*`, `*.test.*`, `tests/`) — их можно только дополнять.
+- Пуш в ветку PR и публикация патча в PR **никогда** не требуют разрешения владельца или Claude. Владельцу такие вопросы не задавать.
+- Нужен Claude (правка ядра) → одна строка в DLYA_CLAUDE.md и сразу следующая задача. Не ждать, не спрашивать владельца.
+- Один workflow = один PR: несколько PR на один и тот же файл (например auditor.yml) — объединить в один, дубли закрыть со ссылкой.
+
 ## ОДИН ПРОМПТ НА ВСЕ 5 АВТОЗАДАЧ (правило владельца для Claude, 10.11.2026)
 Claude никогда не просит владельца вставлять промпт в каждую автозадачу отдельно. Изменение автозадач — всегда ОДИН общий промпт для всех 5 сразу (5 автозадач, каждая раз в час): владелец вставляет его одним сообщением в ChatGPT, ChatGPT сам перенастраивает все пять. Текущий общий промпт — [automation/prompts/MG_PYAT_AVTOZADACH.md](automation/prompts/MG_PYAT_AVTOZADACH.md); при любом изменении обновлять этот файл и отдавать владельцу весь промпт целиком в одном блоке кода.
 

@@ -38,11 +38,11 @@ jobs:
       - name: Run offline safety traps and daily noise measurement
         if: github.event_name == 'schedule'
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           node scripts/polza/verify-noise.mjs
           node scripts/polza/mutate-noise.mjs
-          node scripts/polza/noise.mjs
+          node scripts/polza/noise.mjs "$GITHUB_RUN_ID"
       - name: Publish queue and daily metrics exclusively to bot-state
         if: github.ref == 'refs/heads/main'
         shell: bash

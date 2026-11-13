@@ -2,6 +2,7 @@
 import {readFileSync, writeFileSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {parseRows} from '../zadachi/watch.mjs';
+import {publicationDecision} from './publish.mjs';
 
 const LAB = 'mpaykin1/meta6-lab';
 const MG = 'mpaykin1/meta6';
@@ -148,5 +149,13 @@ const snapshot = {
   warnings: notes.slice(0, 15)
 };
 if (!tasks.length) throw Error('ZADACHI.md is empty; refusing to replace valid snapshot');
-writeFileSync('reports/investigation/data.json', JSON.stringify(snapshot, null, 2) + '\n');
+let previous = null;
+try { previous = JSON.parse(readFileSync('reports/investigation/data.json', 'utf8')); }
+catch (error) { if (error.code !== 'ENOENT') throw error; }
+const decision = publicationDecision(previous, snapshot, now.getTime());
+if (decision !== 'publish') {
+  console.log('Investigation snapshot preserved: ' + decision);
+} else {
+  writeFileSync('reports/investigation/data.json', JSON.stringify(snapshot, null, 2) + '\\n');
+}
 console.log('Investigation snapshot: ' + tasks.length + ' tasks, ' + errors.length + ' error entries');

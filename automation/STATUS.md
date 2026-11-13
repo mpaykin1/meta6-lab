@@ -1,12 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T20:16:46.418Z | МГЛ: af6238c7237cd129f58a2d66826b8405e9376f05 | МГ: 7ae9604d0dfc969116895cd06bf11b4c3cdf15ff | https://github.com/mpaykin1/meta6-lab/actions/runs/43499994871
+UTC: 2026-11-13T20:29:15.110Z | МГЛ: 14d2a1dc48ec2595b4db079a6f0d32fbd353726c | МГ: 7ae9604d0dfc969116895cd06bf11b4c3cdf15ff | https://github.com/mpaykin1/meta6-lab/actions/runs/43501914727
 ## ПРОВЕРИТЬ CLAUDE
 - PR #296 1d385b135f0fd52a35d6b2df6503f5f6eacf171a: automation/asset-check/test_htmlpack.py
 - PR #293 1ec3046bbe0972e316d92ec3846b542af0883716: automation/asset-check/test_kinds.py
 - PR #292 5df54dc0764daa77154709207e612b311127108d: automation/asset-check/test_kinds.py
 - PR #267 8127784a2d65ec5caa7aed93b753d13ce96b0c14: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py, automation/asset-check/test_kinds.py
 - ещё 15: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/43490722564 | Run node scripts/dispetcher/run.mjs
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обн… (сокращено)
@@ -48,14 +47,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 46 | конфликт: нет данных | слито: 35 | закрыто: 75
+открыто: 47 | конфликт: нет данных | слито: 35 | закрыто: 75
 #304 Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У  | af6238c7237cd129f58a2d66826b8405e9376f05
 #298 Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА | 4e17483f42baf5300da95c840962218958994b71
 #296 feat(asset-check): HTMLPACK visual quality bot + Tumannye Sh | 1d385b135f0fd52a35d6b2df6503f5f6eacf171a
 #295 Остров последнего аптекаря · Глава I «Тихолист» (демо + этап | b158e1dd42db709100c79ceb5ea6745db53aa2bd
 ещё 31: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2011 коммитов | нет данных
+МГЛ: 2016 коммитов | нет данных
 МГ: 9 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:4
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

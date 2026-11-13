@@ -1,6 +1,6 @@
 // Mutation traps: the fuse and two-day low-value alarm must not be bypassable.
 import assert from 'node:assert/strict';
-import {summarize,chooseFuse,needsEscalation} from './noise.mjs';
+import {summarize,chooseFuse,needsEscalation} from './noise-core.mjs';
 const bot=(i)=>({sha:'bot'+i,commit:{author:{name:'status-dlya-claude bot',email:'actions@users.noreply.github.com'},message:'status: refresh facts for Claude'}});
 const bots=Array.from({length:31},(_,i)=>bot(i));
 const red=[

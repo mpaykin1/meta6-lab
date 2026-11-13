@@ -123,12 +123,11 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
     return s?{x:s.pos.x,y:s.pos.z}:null;
   }
   function doorNearby() {return active && doors.some(d=>near(d.pos,hero.position)<1.9 && d.time<=0 && d.cooldown<=0);}
-  function botActionIfNear() { if(doorNearby() && pageCount>=2 && doorUses===0)return action(); return false; }
   function hide(){
     active=false;doors.forEach(d=>{d.pivot.visible=false;d.beacon.userData.want=0;});
     sheets.forEach(s=>{s.mesh.visible=false;s.beacon.userData.want=0;});
   }
-  return {begin,tick,action,goal,doorNearby,botActionIfNear,resetAfterCaught,hide,beacons,
+  return {begin,tick,action,goal,doorNearby,resetAfterCaught,hide,beacons,
     get active(){return active}, get done(){return done},
     get pages(){return pageCount}, get doorsClosed(){return doorUses},
     get caught(){return caughtCount},get layoutHash(){return layoutHash}};

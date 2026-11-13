@@ -173,9 +173,9 @@
 ### PR #296
 - PR: https://github.com/mpaykin1/meta6-lab/pull/296
 - Ветка: `lab/asset-pack-shpili`
-- SHA: `b416dfda021d72aa36c46cb210329b822895b1f6` · последний коммит: 2026-11-13T17:05:03Z
-- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43469219380/job/132036403020), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43469219380/job/132036403020 и повтори CI.
+- SHA: `7fa8678fef3684b4f146de3b8c389d7e133f082c` · последний коммит: 2026-11-13T17:20:24Z
+- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43471838859/job/132045443431), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43471838859/job/132045443431 и повтори CI.
 - Взял: —
 
 ### PR #242

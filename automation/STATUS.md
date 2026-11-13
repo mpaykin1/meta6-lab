@@ -1,12 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T15:29:24.291Z | МГЛ: 50a025a7351a89c796c00cb5bd96b025844f83df | МГ: 1bea203fb63d7c27c29a5643e2f38e4554a658c1 | нет данных
+UTC: 2026-11-13T16:34:41.853Z | МГЛ: 7b20e345b7f28382706188990f863611acf156a7 | МГ: 1bea203fb63d7c27c29a5643e2f38e4554a658c1 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #293 1ec3046bbe0972e316d92ec3846b542af0883716: automation/asset-check/test_kinds.py
 - PR #292 5df54dc0764daa77154709207e612b311127108d: automation/asset-check/test_kinds.py
 - PR #267 8127784a2d65ec5caa7aed93b753d13ce96b0c14: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py, automation/asset-check/test_kinds.py
 - PR #285 2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3: .github/workflows/meta-games-guard.yml, scripts/storozha/mutate-storozha.mjs, scripts/storozha/verify-storozha.mjs
 - ещё 14: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/43418238664 | Run node scripts/dispetcher/run.mjs
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
@@ -48,20 +47,21 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 50 | конфликт: нет данных | слито: 31 | закрыто: 66
+открыто: 50 | конфликт: нет данных | слито: 32 | закрыто: 66
+#295 Остров последнего аптекаря · Глава I «Тихолист» (демо + этап | b158e1dd42db709100c79ceb5ea6745db53aa2bd
 #293 ASSET CHECK 2.2: «не хуже эталона» + эталон «Туманные шпили» | 1ec3046bbe0972e316d92ec3846b542af0883716
 #294 Эталон «Туманные шпили» (только добавление) | f55c2e87fbd99f261977dbe7da58700a0a73a50e
 #292 ASSET CHECK 2.1: бот проверяет ассеты INK «Павший великан» | 5df54dc0764daa77154709207e612b311127108d
-#267 ASSET CHECK v2: универсальный бот для любых ассетов | 8127784a2d65ec5caa7aed93b753d13ce96b0c14
-ещё 27: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 28: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1929 коммитов | нет данных
+МГЛ: 1939 коммитов | нет данных
 МГ: 7 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:2
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да
 asqura-ilya-reference — нет данных | витрина: нет
 broken-city — нет данных | витрина: да
 broken-city-copy — нет данных | витрина: да
+ostrov-aptekarya — нет данных | витрина: нет
 rainbow-acceleration — нет данных | витрина: нет
 skin-trainer — нет данных | витрина: нет
 sumerki-i-pepel-2 — нет данных | витрина: да

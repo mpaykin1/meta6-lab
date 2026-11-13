@@ -28,6 +28,10 @@ jobs:
         run: node scripts/polza/verify-polza.mjs
       - name: Verify permanent mutation traps
         run: node scripts/polza/mutate-polza.mjs
+      - name: Verify daily noise meter and its permanent fuses
+        run: |
+          node scripts/polza/verify-noise.mjs
+          node scripts/polza/mutate-noise.mjs
       - name: Reject useless or unproven pull requests
         env:
           GH_TOKEN: ${{ github.token }}

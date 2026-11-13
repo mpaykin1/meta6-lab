@@ -76,6 +76,7 @@ export function createUI(handlers) {
   document.body.append(root);
   const $ = s => root.querySelector(s);
   const say = $('#ap-say'), menu = $('#ap-menu'), act = $('#ap-act'), pips = [...root.querySelectorAll('.pip')];
+  let currentMode = 'dust';
   root.addEventListener('click', e => {
     let m = e.target.closest('[data-m]')?.dataset.m;
     if (!m && e.target.closest('#ap-title')) m = 'start';   // стартовая карточка нажимается целиком
@@ -155,8 +156,9 @@ export function createUI(handlers) {
       pips.forEach((p, i) => p.classList.toggle('off', (i >= 3 && stage < 2) || (i >= 5 && stage < 3)));
     },
     action(visible, charges, urge) {
-      act.classList.toggle('on', visible); act.classList.toggle('empty', charges <= 0); act.classList.toggle('urge', !!urge);
-      const c = $('#ap-charges'); if (c.childElementCount !== charges) c.innerHTML = '<i></i>'.repeat(Math.max(0, charges));
+      act.classList.toggle('on', visible); act.classList.toggle('empty', currentMode !== 'archive' && charges <= 0); act.classList.toggle('urge', !!urge);
+      const c = $('#ap-charges'), shown = currentMode === 'archive' ? 0 : charges;
+      if (c.childElementCount !== shown) c.innerHTML = '<i></i>'.repeat(Math.max(0, shown));
     },
     end(show, chapter = 1) {
       const card=$('#ap-end'); card.hidden = !show;
@@ -166,7 +168,7 @@ export function createUI(handlers) {
       $('#ap-next').hidden = chapter !== 1;
     },
     mode(name) {
-      const archive = name === 'archive';
+      const archive = name === 'archive'; currentMode = name;
       act.setAttribute('aria-label',archive ? 'Закрыть архивную дверь' : 'Пыльца сонника');
       act.querySelector('svg').outerHTML = archive ? ICON.door : ICON.dust;
     },

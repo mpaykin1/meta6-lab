@@ -56,3 +56,33 @@ jobs:
         with:
           name: asset-check-reports
           path: out/
+  preview-links:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check published previews of changed asset pages
+        env:
+          PREVIEW_BRANCH: ${{ github.head_ref }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          LINK_OK_WINDOW_SEC: 180
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}"
+          branch="${PREVIEW_BRANCH#lab/}"
+          branch="${branch//\//-}"
+          [[ "$branch" =~ ^[A-Za-z0-9._-]+$ ]]
+          mapfile -t pages < <(git diff --name-only "$BASE_SHA" HEAD -- 'asset-packs/**/index.html')
+          urls=()
+          for page in "${pages[@]}"; do
+            [[ -f "$page" ]] && urls+=("$base/preview/$branch/${page%index.html}")
+          done
+          if (( ${#urls[@]} )); then
+            bash scripts/lab/link-ok.sh "${urls[@]}"
+          else
+            echo 'No changed asset page URLs to check.'
+          fi

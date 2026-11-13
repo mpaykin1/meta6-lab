@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 15 · конфликт 4 · непроверено 0 · красные проверки 12 · нужен Claude 35
+Итог: зависло 15 · конфликт 4 · непроверено 0 · красные проверки 12 · нужен Claude 34
 
 ### PR #221
 - PR: https://github.com/mpaykin1/meta6-lab/pull/221
@@ -38,8 +38,8 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/72
 - Ветка: `lab/immersive-dishonored-principles-20261107`
 - SHA: `7e41856a507e83b5a6e501ab8e3e3734c34c5668` · последний коммит: 2026-11-12T14:35:12Z
-- Проблема: Красная проверка: storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43238743618/job/131255809522), guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43238743698/job/131253079312), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43238739940/job/131253072631)
-- Задание: Исправь storozha-reference по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43238743618/job/131255809522 и повтори CI.
+- Проблема: Красная проверка: guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43238743698/job/131253079312)
+- Задание: Исправь guard по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43238743698/job/131253079312 и повтори CI.
 - Взял: —
 
 ### PR #234
@@ -165,4 +165,3 @@
 - [#54](https://github.com/mpaykin1/meta6-lab/pull/54) Оптимизация всех игр: довести PR #54, #59, #60
 - [#220](https://github.com/mpaykin1/meta6-lab/pull/220) Сторож таблицы: конфликты, красные проверки и МГ
 - [#208](https://github.com/mpaykin1/meta6-lab/pull/208) Restore original Ashen Path asset pack reference after sync — ТОЛКАЧ: [оригинал блокирован KONTUR, решение Claude](https://github.com/mpaykin1/meta6-lab/actions/runs/42799091174), [вопрос Claude](https://github.com/mpaykin1/meta6-lab/commit/5095441ef37a50e36f71c7c669be1b393346d11a)
-- [#192](https://github.com/mpaykin1/meta6-lab/pull/192) M6

@@ -108,20 +108,33 @@ export function deer(seed = 1) {
 export function rowboat() {
   const root = new T.Group();
   root.name = 'Деревянная лодка';
-  solid(root, new T.SphereGeometry(1, 18, 12), '#826d56', [0, .27, 0], [1.13, .39, .49]);
-  solid(root, new T.SphereGeometry(1, 18, 12), '#3f5a56', [0, .50, 0], [1.04, .10, .39]);
-  for (const side of [-1, 1]) {
-    const rail = new T.Group();
-    for (let i = 0; i < 11; i++) {
-      const x = -1.01 + i * .20;
-      const z = side * (.32 + .16 * Math.sqrt(Math.max(0, 1 - x * x / 1.22)));
-      if (i > 0) {
-        const prev = -.99 + (i - 1) * .20;
-        const oldZ = side * (.32 + .16 * Math.sqrt(Math.max(0, 1 - prev * prev / 1.22)));
-        timber(rail, [prev, .52, oldZ], [x, .52, z], .038, '#d3bb8f', 5);
-      }
+  // Open clinker hull: both pointed ends, visible interior ribs and gunwales.
+  const outline = [[-1.38, 0], [-.94, -.37], [0, -.51], [.94, -.37], [1.38, 0],
+    [.94, .37], [0, .51], [-.94, .37]];
+  const bottom = new T.Shape();
+  outline.forEach(([x, z], i) => i ? bottom.lineTo(x * .86, z * .73) : bottom.moveTo(x * .86, z * .73));
+  bottom.closePath();
+  const floor = new T.ShapeGeometry(bottom); floor.rotateX(-Math.PI / 2);
+  solid(root, floor, '#8f795c', [0, .16, 0]);
+  for (let i = 0; i < outline.length; i++) {
+    const a = outline[i], b = outline[(i + 1) % outline.length];
+    for (let row = 0; row < 3; row++) {
+      const low = .72 + row * .09, high = low + .09;
+      const points = [a[0] * low, .16 + row * .12, a[1] * low,
+        b[0] * low, .16 + row * .12, b[1] * low,
+        b[0] * high, .28 + row * .12, b[1] * high,
+        a[0] * high, .28 + row * .12, a[1] * high];
+      const geo = new T.BufferGeometry();
+      geo.setAttribute('position', new T.Float32BufferAttribute(points, 3));
+      geo.setIndex([0, 1, 2, 0, 2, 3]); geo.computeVertexNormals();
+      const panel = solid(root, geo, row % 2 ? '#ab8c63' : '#987954');
+      panel.material = panel.material.clone(); panel.material.side = T.DoubleSide;
     }
-    root.add(rail);
+    timber(root, [a[0], .54, a[1]], [b[0], .54, b[1]], .035, '#cfb68b', 5);
+  }
+  for (let i = 0; i < 5; i++) {
+    const x = -.70 + i * .35;
+    plank(root, [.025, .025, .60], '#b19a72', [x, .18, 0]);
   }
   for (const x of [-.41, .42]) plank(root, [.14, .10, .88], '#c5a178', [x, .53, 0]);
   for (const sign of [-1, 1]) {

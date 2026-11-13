@@ -49,8 +49,8 @@ export function inventory(input) {
   // Разрешён только настоящий ввод игрока (нажатие Space / иконки) из внешнего бота.
   const botBody = game.split('function botInput(dt) {')[1]?.split('// ---------- Симуляция')[0];
   if(!botBody)throw Error('Не найден бот главы I');
-  const cleanBot = botBody.replace(/\\/\\*[\\s\\S]*?\\*\\/|\\/\\/[^\\n]*/g,'');
-  if(/\\bchapter2\\s*(?:\\.\\s*(?:action|botActionIfNear)\\s*\\(|\\[)/.test(cleanBot))
+  const cleanBot = botBody.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g,'');
+  if(/\bchapter2\s*(?:\.\s*(?:action|botActionIfNear)\s*\(|\[)/.test(cleanBot))
     throw Error('Недопустимо: бот закрывает дверь из движка без пользовательского ввода');
   return {
     scriptKeys:Object.keys(entries).length,

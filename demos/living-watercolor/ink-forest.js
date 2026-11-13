@@ -2,6 +2,8 @@ import * as T from 'three';
 import {createLivingWatercolor3D,createWatercolorStyle} from './shared/living-watercolor-3d.js';
 import {createIllustrationCamera} from './shared/living-watercolor-generators.js';
 import {objectMakers} from './ink-objects.js';
+import {createFallenRobot} from './ink-fallen-robot.js';
+objectMakers.robot = createFallenRobot;
 
 document.querySelectorAll('#label,#hint,#chooser').forEach(o=>o.remove());
 document.title='INK · Дождевой лес';
@@ -46,8 +48,10 @@ const pathMesh=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(path),50,.35
 for(let i=0;i<17;i++){
   const a=i*2.39996,r=3.4+rnd(i+30)*2.6,x=Math.cos(a)*r,z=Math.sin(a)*r*.79;
   if(x>-.4&&x<3.5&&z<0)continue;
+  if((x-2.7)**2+(z+3.15)**2<8.5)continue;
   add(i%5===0?'birch':'fir',x,z,.65+rnd(i+20)*.36,rnd(i)*6.28,i+1);
 }
+const fallenGuardian=add('robot',2.7,-3.15,.83,-.28,23);
 const hut=add('shelter',-3.5,-1.6,.77,.12);add('bench',-2.50,.3,.72,-.1);add('sign',-.70,1.6,.8,-.25);add('bridge',2.45,.9,.9,Math.PI/2);
 hero=add('traveller',-.30,2.5,.70,.6);add('mushrooms',-3.9,1.9,1.1);add('mushrooms',1.3,-3.3,.80);
 for(let i=0;i<6;i++)add('rock',Math.cos(i*2.2)*5.4,Math.sin(i*2.2)*4.4,.55+rnd(i)*.4,i,22+i);
@@ -66,7 +70,7 @@ const rainPositions=new Float32Array(180*6),rainGeo=new T.BufferGeometry();rainG
 const rain=new T.LineSegments(rainGeo,new T.LineBasicMaterial({color:'#5c7979',transparent:true,opacity:.30,depthWrite:false}));world.add(rain);
 const ringGeo=new T.RingGeometry(.12,.132,18);ringGeo.rotateX(-Math.PI/2);const rings=[];
 for(let i=0;i<22;i++){const o=new T.Mesh(ringGeo,new T.MeshBasicMaterial({color:'#5c7979',transparent:true,opacity:.15,depthWrite:false,side:T.DoubleSide}));o.position.set((rnd(i+4)-.5)*10,.022,(rnd(i+7)-.5)*8);world.add(o);rings.push(o);}
-const labels={forest:'Дождевой лес',fir:'Ель',birch:'Берёза',shelter:'Лесной домик',traveller:'Путник',lantern:'Фонарь',sign:'Указатель',bench:'Скамейка',rock:'Камни',mushrooms:'Грибы',bridge:'Мостик'};
+const labels={forest:'Дождевой лес',fir:'Ель',birch:'Берёза',shelter:'Лесной домик',traveller:'Путник',lantern:'Фонарь',sign:'Указатель',bench:'Скамейка',rock:'Камни',mushrooms:'Грибы',bridge:'Мостик',robot:'Павший великан'};
 let active='forest',mono=false,orbit=false,yaw=.62,pitch=.65,zoom=1,drag=null,pinch=0,previous=0,elapsed=0,frameAvg=16,quality=1;
 const params=new URLSearchParams(location.search);
 function choose(name){active=labels[name]?name:'forest';world.visible=active==='forest';specimen.visible=!world.visible;for(const [k,o] of Object.entries(displayObjects))o.visible=k===active;
@@ -74,7 +78,7 @@ function choose(name){active=labels[name]?name:'forest';world.visible=active==='
 for(const [id,label] of Object.entries(labels)){const b=document.createElement('button');b.textContent=label;b.dataset.object=id;b.onclick=()=>{choose(id);menu.hidden=true;ui.querySelector('#ink-menu-button').setAttribute('aria-expanded','false');};menu.querySelector('nav').append(b);}
 function setMono(value){mono=value;document.body.classList.toggle('mono',mono);ui.querySelector('#ink-color').setAttribute('aria-pressed',String(mono));ui.querySelector('#ink-color').title=mono?'Включить цвет':'Включить Ч/Б';params.set('palette',mono?'mono':'color');history.replaceState(null,'','?'+params);}
 ui.querySelector('#ink-color').onclick=()=>setMono(!mono);ui.querySelector('#ink-orbit').onclick=e=>{orbit=!orbit;e.currentTarget.setAttribute('aria-pressed',String(orbit));};
-function resize(){const aspect=innerWidth/Math.max(1,innerHeight);camera.userData.viewHeight=active==='forest'?Math.max(14.2,15.7/aspect):Math.max(5.6,5.1/aspect);camera.updateForViewport(innerWidth,innerHeight);camera.zoom=zoom;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);}
+function resize(){const aspect=innerWidth/Math.max(1,innerHeight);camera.userData.viewHeight=active==='forest'?Math.max(14.2,15.7/aspect):active==='robot'?Math.max(9.1,10/aspect):Math.max(5.6,5.1/aspect);camera.updateForViewport(innerWidth,innerHeight);camera.zoom=zoom;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);}
 addEventListener('resize',resize);choose(params.get('ink')||'forest');setMono(params.get('palette')==='mono');
 const keys=new Set(),stick={x:0,y:0},pointers=new Map();
 addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();keys.add(e.key.toLowerCase());});addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));
@@ -89,7 +93,7 @@ pad.onpointerdown=e=>{padId=e.pointerId;pad.setPointerCapture(padId);moveStick(e
 for(const event of ['pointerup','pointercancel','lostpointercapture'])pad.addEventListener(event,()=>{padId=null;stick.x=stick.y=0;knob.style.transform='';});
 function animate(ms){requestAnimationFrame(animate);if(document.hidden){previous=ms;return;}const dt=Math.min(.04,Math.max(0,(ms-previous)/1000));previous=ms;elapsed+=dt;
   frameAvg=frameAvg*.97+dt*1000*.03;if(frameAvg>30&&quality>.7){quality=.7;renderer.setPixelRatio(1);paint.setQuality(.7);}
-  if(orbit&&!drag)yaw+=dt*.12;const targetY=active==='forest'?.6:active==='fir'||active==='birch'?1.6:active==='shelter'?1.2:.65;const radius=22;
+  if(orbit&&!drag)yaw+=dt*.12;const targetY=active==='forest'?.6:active==='fir'||active==='birch'?1.6:active==='shelter'?1.2:active==='robot'?1.15:.65;const radius=22;
   camera.position.set(Math.sin(yaw)*Math.cos(pitch)*radius,targetY+Math.sin(pitch)*radius,Math.cos(yaw)*Math.cos(pitch)*radius);camera.lookAt(0,targetY,0);
   let vx=stick.x+(keys.has('d')||keys.has('arrowright')?1:0)-(keys.has('a')||keys.has('arrowleft')?1:0),vy=stick.y+(keys.has('s')||keys.has('arrowdown')?1:0)-(keys.has('w')||keys.has('arrowup')?1:0);const length=Math.hypot(vx,vy),moving=active==='forest'&&length>.05;
   if(moving){vx/=Math.max(1,length);vy/=Math.max(1,length);const dx=Math.cos(yaw)*vx+Math.sin(yaw)*vy,dz=-Math.sin(yaw)*vx+Math.cos(yaw)*vy;const nx=hero.position.x+dx*dt*1.9,nz=hero.position.z+dz*dt*1.9;if(nx*nx/43+nz*nz/27<1&&!(nx<-2.3&&nx>-4.8&&nz<-1&&nz>-2.8)){hero.position.x=nx;hero.position.z=nz;}hero.rotation.y=Math.atan2(dx,dz);hero.position.y=Math.abs(Math.sin(elapsed*9))*.035;}else hero.position.y=Math.sin(elapsed*2)*.012;
@@ -98,7 +102,11 @@ function animate(ms){requestAnimationFrame(animate);if(document.hidden){previous
   for(let i=0;i<180;i++){const x=(rnd(i+100)-.5)*14,z=(rnd(i+700)-.5)*11,y=7-((elapsed*4+rnd(i+70)*7)%7),n=i*6;rainPositions[n]=x;rainPositions[n+1]=y;rainPositions[n+2]=z;rainPositions[n+3]=x-.055;rainPositions[n+4]=y+.30;rainPositions[n+5]=z;}
   rainGeo.attributes.position.needsUpdate=true;rings.forEach((ring,i)=>{const phase=(elapsed*.65+rnd(i))%1;ring.scale.setScalar(.3+phase*2.6);ring.material.opacity=(1-phase)*.19;});
   const displayed=displayObjects.traveller;displayed.userData.scarf.rotation.z=Math.sin(elapsed*2.3)*.1;
+  for(const guardian of [fallenGuardian,displayObjects.robot]){
+    const eye=guardian.userData.robotEyes;
+    if(eye)eye.color.setRGB(1,.39+Math.sin(elapsed*.75)*.065,.20);
+  }
   paint.tick(ms);renderer.render(scene,camera);
 }
 requestAnimationFrame(animate);
-window.__INK_FOREST__={version:'1.0.0',objects:Object.keys(objectMakers),show:choose,setMono,get active(){return active;}};
+window.__INK_FOREST__={version:'1.1.0',objects:Object.keys(objectMakers),show:choose,setMono,get active(){return active;}};

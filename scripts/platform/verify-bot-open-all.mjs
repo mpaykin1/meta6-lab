@@ -49,6 +49,7 @@ async function listGames() {
   const child = spawn(process.execPath, [serverFile], {
     cwd: otherCwd, stdio: ['pipe', 'pipe', 'pipe']
   });
+  const closed = new Promise(resolve => child.once('close', resolve));
   const pending = new Map();
   let nextId = 0, stderr = '';
   child.stderr.setEncoding('utf8');
@@ -103,6 +104,7 @@ async function listGames() {
   } finally {
     child.stdin.end();
     child.kill();
+    await closed;
     lines.close();
     rmSync(otherCwd, {recursive: true, force: true});
   }

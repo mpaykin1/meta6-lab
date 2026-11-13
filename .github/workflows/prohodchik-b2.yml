@@ -1,0 +1,46 @@
+name: PROHODCHIK B2 real movement
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/prohodchik/**'
+      - 'games/veil-terraces/**'
+      - '.github/workflows/prohodchik-b2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prohodchik-b2-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  real-motion:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify real motion and every permanent mutation
+        run: |
+          node scripts/prohodchik/verify-motion.mjs
+          node scripts/prohodchik/mutate-motion.mjs
+      - name: Install existing Playwright browser runtime
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Observe real hero movement via player inputs on desktop and phone
+        run: node scripts/prohodchik/verify-motion.mjs --game games/veil-terraces --screenshot b2-artifacts/veil
+      - name: Preserve in-game screenshots even when the probe fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prohodchik-b2-movement
+          path: b2-artifacts/*.png
+          if-no-files-found: warn

@@ -71,3 +71,5 @@ runCase('pageerror', false, 'B1_PAGEERROR');
 runCase('missing-entry', false, 'HTTP 404');
 runCase('hardcoded-list', false, 'MCP list_games is missing/adding storefront games');
 console.log('B1_MUTATIONS_PASS 4 negative scenarios including hardcoded-list deception');
+
+await import("./mutate-bot-open-lifecycle.mjs");

@@ -13,7 +13,7 @@
 - [ ] G9: hitboxes для 14 персонажей + events у 13 attack/shoot
 - [ ] G2/G4: 17 тайлов со швом, 3 фона mid со швом
 - [ ] A8/G5: свои тайлы для каждого мира, углы и склоны
-- [ ] C1/C2: license, provenance, content_flags; версия -fiction с вымышленным героем
+- [ ] A6/A7: license, provenance, content_flags; версия -fiction с вымышленным героем
 - [ ] A9, C5, P7, P2 (SOFT)
 
 Обработано до: main @ (заполнит первый запуск ChatGPT)

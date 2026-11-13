@@ -137,7 +137,7 @@ async function main() {
   if(c?.type==='fix'){
     redRun=await getRun(c.value);
     if(redRun && redRun.head_branch==='main' && redRun.conclusion==='failure'){
-      const path=(redRun.path||'').replace(/^.*?\.github\//,'.github/');
+      const path=(redRun.path||'').replace(/^.*?\.github\//,'.github/').replace(/@.*$/,'');
       if(/^\.github\/workflows\/[a-zA-Z0-9._-]+\.ya?ml$/.test(path)){
         repairPaths.push(path);
         const raw=await api('/contents/'+path+'?ref='+redRun.head_sha);
@@ -148,6 +148,12 @@ async function main() {
   }
   const ctx={body:pr.body,files,openPRs:opened.length,scheduledWorkflows:scheduled,newCronFiles,finish:parseFinish(fs.readFileSync('rules/09-platforma/FINISH.md','utf8')),botOK,redRun,repairPaths};
   const answer=verdict(ctx);
+  const status=await fetch(API+REPO+'/statuses/'+pr.head.sha,{
+    method:'POST',
+    headers:{Accept:'application/vnd.github+json',Authorization:'Bearer '+process.env.GITHUB_TOKEN,'X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},
+    body:JSON.stringify({state:answer.ok?'success':'failure',context:'POLZA',description:answer.reason.slice(0,140),target_url:'https://github.com/'+REPO+'/actions'})
+  });
+  if(!status.ok) throw Error('Cannot publish required POLZA status: '+status.status);
   console.log(JSON.stringify({pr:n,head:pr.head.sha,openPRs:opened.length,scheduled,claim:c,answer},null,2));
   if(!answer.ok) process.exitCode=1;
 }

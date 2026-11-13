@@ -52,7 +52,7 @@ export async function updateReferenceQueue(repo, token, transform, request = fet
         createCommitOnBranch(input:$input){commit{oid}}
       }`, {input: {
         branch: {repositoryNameWithOwner: repo, branchName: 'main'},
-        expectedHeadOid: undefined,
+        expectedHeadOid: head,
         message: {headline: 'chore(storozha): reconcile protected PR queue'},
         fileChanges: {additions: [{path: 'DLYA_CLAUDE.md',
           contents: Buffer.from(after, 'utf8').toString('base64')}]}

@@ -42,3 +42,5 @@
 
 | 29 | После merge сохранена каждая строка OSHIBKI обоих родителей, включая разные ошибки с одним номером? | OSHIBKI #1064, PR #255/#260 | scripts/lovushki/mutate-merge-journal.mjs (3 мутации и настоящие Git-родители) |
 | 30 | Охранник использует полный Git-граф и проверяет SHA диапазона до атрибуции protected-правок? Ложный shallow FAIL отличён от настоящей unsigned правки? | OSHIBKI #1065 | scripts/lovushki/mutate-full-history-proposal.mjs (4 мутации; тот же реальный shell guard не ослаблен) |
+
+31. После изменения политики на main проверить постоянные фикстуры на соответствие новой разрешённой границе; сохранять прежние атаки и отдельно проверять ядро, удаление/rename workflow, append-only старые тесты. Пример: [KONTUR #43413334165](https://github.com/mpaykin1/meta6-lab/actions/runs/43413334165), OSHIBKI #1066; исправление старой проверки — на подпись.

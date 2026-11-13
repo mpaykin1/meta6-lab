@@ -24,18 +24,29 @@ function verify(mod) {
   assert.match(messages(mod, [entry('reference/a/one.glb', 'added'),
     entry('reference/b/two.glb', 'added')]), /ровно одна новая папка/,
     'New reference must occupy exactly one folder');
-  assert.match(messages(mod, [entry('.github/workflows/guard.yml', 'modified')]),
-    /только Claude/, 'Existing workflow is protected');
+  assert.match(messages(mod, [entry('.github/workflows/meta-games-guard.yml', 'modified')]),
+    /только Claude/, 'Core workflow is protected');
   assert.match(messages(mod, [entry('scripts/storozha/core.mjs', 'modified')]),
     /только Claude/, 'Existing watcher is protected');
   assert.match(messages(mod, [entry('scripts/lab/tests/helper.ts', 'modified')]),
     /только Claude/, 'Nested tests are protected');
+  assert.equal(messages(mod, [entry('.github/workflows/auditor.yml', 'modified')]), '',
+    'Ordinary workflow edits follow the accepted main policy');
+  assert.match(messages(mod, [entry('.github/workflows/auditor.yml', 'removed')]),
+    /только Claude/, 'Deleting an ordinary workflow remains forbidden');
+  assert.match(messages(mod, [entry('.github/workflows/auditor.yml', 'renamed')]),
+    /только Claude/, 'Renaming an ordinary workflow remains forbidden');
+  assert.equal(messages(mod, [{...entry('scripts/lab/tests/helper.ts', 'modified'), deletions: 0}]), '',
+    'Appending to an existing test is allowed by the accepted main policy');
+  assert.match(messages(mod, [{...entry('scripts/lab/tests/helper.ts', 'modified'), deletions: 1}]),
+    /только Claude/, 'Removing even one existing assertion remains forbidden');
   assert.equal(messages(mod, [entry('scripts/lovushki/new-guard.mjs', 'added')]), '',
     'Adding a separate new guard is allowed');
 }
 
 verify(production);
 const mutations = [
+  ['ignore-core-workflow', 'const coreWorkflow = CORE_WORKFLOW.test(p);', 'const coreWorkflow = false;'],
   ['allow-reference-edit', "if (status !== 'added') errors.push", "if (false) errors.push"],
   ['mixed-reference-pr', "if (files.length !== additions.length) errors.push", "if (false) errors.push"],
   ['allow-existing-reference-folder', "if (paths.some(p => p === folder || p.startsWith(folder + '/'))) {", "if (false) {"],

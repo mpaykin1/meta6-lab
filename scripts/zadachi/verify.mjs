@@ -3,7 +3,7 @@ import {pathToFileURL} from 'node:url';
 import {resolve, dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url));
-const {apply, parseRows, START, END} = await import(pathToFileURL(resolve(process.argv[2] || resolve(here, 'watch.mjs'))).href);
+const {apply, parseRows, START, END, resolveMergeability, collect} = await import(pathToFileURL(resolve(process.argv[2] || resolve(here, 'watch.mjs'))).href);
 const now = Date.parse('2026-11-10T12:00:00Z'), H = 3600e3;
 const row = (status, task, branch, taken) => `| ${status} | ${task} | МГЛ | чат ChatGPT | ${branch} | — | ${taken} | — |`;
 const doc = rows => `# t\nСторож проверил: —\n${START}\n| Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |\n|---|---|---|---|---|---|---|---|\n${rows.join('\n')}\n${END}\nхвост\n`;
@@ -32,5 +32,122 @@ ok('без ветки готово только со ссылкой; НУЖЕН 
 const out = apply(doc([row('взято', 'b', 'lab/b', '2026-11-10 11:00'), row('взято', 'a', 'lab/a', '2026-11-10 07:00')]), {repo: 'o/r', pulls: {'lab/a': pr(1, {lastCommit: now - 4 * H}), 'lab/b': pr(2)}}, now);
 ok('зависшие наверху, итог и список «толкнуть»', out.indexOf('| a |') < out.indexOf('| b |') && /зависло 1 · /.test(out) && /Толкнуть сейчас:\*\* a \(`lab\/a`\)/.test(out) && out.endsWith('хвост\n') && /Сторож проверил: 2026-11-10 12:00 UTC/.test(out));
 ok('повторный прогон ничего не меняет', apply(out, {repo: 'o/r', pulls: {'lab/a': pr(1, {lastCommit: now - 4 * H}), 'lab/b': pr(2)}}, now) === out);
+
+/* К10: новые ловушки обязаны сначала краснеть на старом стороже. */
+r = st([row('взято', 'dirty', 'lab/dirty', '2026-11-10 11:50')],
+  {pulls: {'lab/dirty': pr(31, {mergeable: false, mergeable_state: 'dirty'})}});
+ok('dirty PR с коммитом 5 минут назад = конфликт', /⚔ КОНФЛИКТ с main/.test(r.dirty.status));
+
+r = st([row('взято', 'red', 'lab/red', '2026-11-10 11:50')],
+  {pulls: {'lab/red': pr(32, {failedChecks: ['lint / validate']})}});
+ok('красная проверка и имя проверки', /❌ КРАСНЫЕ ПРОВЕРКИ: lint \/ validate/.test(r.red.status));
+
+const mergedRed = apply(doc([row('взято', 'merged-red', 'lab/merged-red', '2026-11-10 07:00')]),
+  {repo: 'o/r', pulls: {'lab/merged-red': pr(33, {state: 'closed', merged: true,
+    failedChecks: ['lint']})}}, now);
+r = Object.fromEntries(parseRows(mergedRed).map(x => [x.task, x]));
+ok('слияние приоритетнее красной проверки, она не попала в красный счётчик',
+  /✅ ГОТОВО/.test(r['merged-red'].status) && /❌ красные 0/.test(mergedRed));
+
+const mgOut = apply(doc([]), {repo: 'o/r', mgRepo: 'o/meta6',
+  mgPulls: {'lab/mg': pr(34, {mergeable: true})}}, now);
+const mgRow = parseRows(mgOut).find(x => x.branch === 'lab/mg');
+ok('открытый PR из meta6 появляется как МГ и с правильной ссылкой',
+  !!mgRow && mgRow.project === 'МГ' && /o\/meta6\/pull\/34/.test(mgRow.pr));
+
+// API-fixture: verifies the collector actually requests meta6 and its check-runs.
+const apiPaths = [];
+const apiFixture = path => {
+  apiPaths.push(path);
+  if (path === 'repos/o/meta6/pulls?state=open&per_page=100&page=1') {
+    return [{
+      number: 41, title: 'MG open PR', state: 'open', merged_at: null,
+      created_at: '2026-11-10T11:50:00Z', head: {ref: 'lab/mg-live', sha: 'mgsha41'},
+    }];
+  }
+  if (path === 'repos/o/meta6/pulls/41') {
+    return {mergeable: true, mergeable_state: 'clean'};
+  }
+  if (path.includes('/check-runs?')) return {check_runs: [
+    {name: 'meta6-build', conclusion: 'failure'},
+  ]};
+  if (path.includes('/commits?sha=')) {
+    return [{commit: {committer: {date: '2026-11-10T11:55:00Z'}}}];
+  }
+  return [];
+};
+const collected = collect([], {
+  repo: 'o/r', mgRepo: 'o/meta6', api: apiFixture, zanyato: [],
+});
+const actualMg = parseRows(apply(doc([]), collected, now))
+  .find(x => x.branch === 'lab/mg-live');
+ok('collector: GET meta6 open PR + check-runs and render МГ red status',
+  apiPaths.some(x => x === 'repos/o/meta6/pulls/41') &&
+  apiPaths.some(x => x.startsWith('repos/o/meta6/commits/mgsha41/check-runs?')) &&
+  actualMg?.project === 'МГ' && /КРАСНЫЕ ПРОВЕРКИ: meta6-build/.test(actualMg.status));
+
+let attempts = 0, waits = [];
+const unresolved = typeof resolveMergeability === 'function' ?
+  resolveMergeability(() => { attempts++; return {mergeable: null, mergeable_state: 'unknown'}; },
+    ms => waits.push(ms)) : null;
+r = st([row('взято', 'pending', 'lab/pending', '2026-11-10 11:50')],
+  {pulls: {'lab/pending': pr(35, {mergeable: null, mergeable_state: 'unknown',
+    failedChecks: []})}});
+ok('mergeable=null 3 раза: 3 запроса, 2 паузы по 3 с, статус по времени',
+  attempts === 3 && waits.join(',') === '3000,3000' &&
+  unresolved?.mergeable === null && /🔨 В РАБОТЕ/.test(r.pending.status));
+
+const severity = apply(doc([row('взято', 'bad', 'lab/bad', '2026-11-10 11:50')]),
+  {repo: 'o/r', pulls: {'lab/bad': pr(36, {mergeable: false,
+    mergeable_state: 'dirty', failedChecks: ['lint']})}}, now);
+ok('сводка конфликтов и список Чинить сейчас', /⚔ конфликт 1 · ❌ красные 0/.test(severity) &&
+  /Чинить сейчас:.*#36.*lab\/bad/.test(severity));
+
+
+// УСКОРЕНИЕ: частичные API-ответы не могут менять таблицу.
+let refusedIncompleteList = false;
+try {
+  collect([], {repo: 'o/r', mgRepo: 'o/meta6', zanyato: [],
+    api: path => path.includes('/pulls?state=open&') ? null : []});
+} catch (error) {
+  refusedIncompleteList = /Incomplete open PR list/.test(error.message);
+}
+ok('API 403/429 instead of PR list: preserve the last complete snapshot', refusedIncompleteList);
+
+const incompleteCheckApi = path => {
+  if (path === 'repos/o/r/pulls?state=open&per_page=100&page=1') {
+    return [{number: 77, title: 'Pending', state: 'open', merged_at: null,
+      created_at: '2026-11-10T11:50:00Z', head: {ref: 'lab/check-77', sha: 'sha77'}}];
+  }
+  if (path === 'repos/o/r/pulls/77') return {mergeable: true, mergeable_state: 'clean'};
+  if (path.includes('/check-runs?')) return null;
+  return [];
+};
+let refusedIncompleteChecks = false;
+try {
+  collect([], {repo: 'o/r', mgRepo: 'o/meta6', zanyato: [], api: incompleteCheckApi});
+} catch (error) {
+  refusedIncompleteChecks = /Incomplete check-runs/.test(error.message);
+}
+ok('API failure checking PR checks must abort, not clear failed checks', refusedIncompleteChecks);
+
+const reuse = row('взято', 'reused', 'lab/reused', '2026-11-10 07:00');
+const reusedPulls = [
+  {number: 81, title: 'old', state: 'closed', merged_at: '2026-11-08T00:00:00Z',
+    merge_commit_sha: 'oldsha', created_at: '2026-11-07T00:00:00Z',
+    head: {ref: 'lab/reused', sha: 'oldsha'}},
+  {number: 82, title: 'new', state: 'closed', merged_at: null,
+    created_at: '2026-11-10T00:00:00Z', head: {ref: 'lab/reused', sha: 'newsha'}},
+];
+const reusedData = collect(parseRows(doc([reuse])), {
+  repo: 'o/r', mgRepo: 'o/meta6', zanyato: [],
+  api: path => path.includes('state=open') ? [] :
+    path.includes('state=all&head=') ? reusedPulls : [],
+});
+const reusedRow = parseRows(apply(doc([reuse]), reusedData, now))
+  .find(x => x.task === 'reused');
+ok('reused branch: old merged PR cannot mask current closed PR',
+  !!reusedRow && /ЗАКРЫТО/.test(reusedRow.status) && /#82/.test(reusedRow.pr));
+
 console.log(fail ? `ZADACHI_VERIFY_FAIL ${fail}` : 'ZADACHI_VERIFY_OK');
 process.exit(fail ? 1 : 0);

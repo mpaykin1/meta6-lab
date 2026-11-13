@@ -232,23 +232,33 @@ function stalled(content) {
     (/зависло|ЗАВИС|⚠/.test(line)) && !/^\|[- ]+\|/.test(line));
 }
 
-function finishIds(content) {
+// FINISH.md is the official source of truth; progress.json is optional.
+export function finishTableStatus(content) {
   if (content === null) return null;
-  return [...content.matchAll(/^\|\s*([MBLPЛСЭ]\d+)\s*\|/gm)].map(match => match[1]);
+  const rows = [];
+  for (const line of content.split('\n')) {
+    if (!/^\|\s*[MBLPЛСЭ]\d+\s*\|/.test(line)) continue;
+    const cells = line.split('|').slice(1, -1).map(x => x.trim());
+    const id = cells[0], status = cells.at(-1) || '';
+    const linked = /\[прогон\]\(https:\/\/github\.com\/[^)]+\/actions\/runs\/\d+\)/.test(status);
+    const ready = /^ЗЕЛЁНАЯ(?:\s|$)/.test(status) && linked;
+    rows.push({id, value: ready ? 'готов' : /^НЕТ(?:\s|$)/.test(status) ?
+      'не готов' : UNKNOWN, reason: ready ? '' : status || UNKNOWN});
+  }
+  return rows;
 }
 
-function finishSummary(progress) {
+function finishSummary() {
   const files = ['rules/09-platforma/FINISH.md', 'rules/09-platforma/FINISH_2.md'];
-  const ids = files.map(finishFile => finishIds(read(finishFile)));
-  if (ids.some(list => list === null)) return UNKNOWN;
+  const states = files.map(path => finishTableStatus(read(path)));
+  if (states.some(x => x === null)) return UNKNOWN;
   const ready = [];
   const pending = [];
-  for (const id of ids.flat()) {
-    const mark = progressMark(progress, id);
-    if (mark.value === 'готов') ready.push(id);
-    else pending.push({ id, value: mark.value, reason: mark.reason });
+  for (const entry of states.flat()) {
+    if (entry.value === 'готов') ready.push(entry.id);
+    else pending.push(entry);
   }
-  return { ready, pending };
+  return {ready, pending};
 }
 
 async function lastBotGameStates() {
@@ -370,6 +380,26 @@ function render(data, cap = 99) {
   return md.join('\n') + '\n';
 }
 
+// Volatile metadata and bot-generated commit counts do not warrant main commits.
+export function decisionFacts(value) {
+  const {generated_at, run, sha, changes, ...facts} = value;
+  return facts;
+}
+export function retainKnown(previous, current) {
+  if (current === UNKNOWN && previous !== undefined) return previous;
+  if (Array.isArray(current)) return current.map((v, i) => retainKnown(previous?.[i], v));
+  if (current && typeof current === 'object') {
+    return Object.fromEntries(Object.entries(current).map(([key, value]) =>
+      [key, retainKnown(previous?.[key], value)]));
+  }
+  return current;
+}
+export function shouldPublishStatus(previous, current, now = Date.now()) {
+  if (!previous) return true;
+  if (now - Date.parse(previous.generated_at) < 3600_000) return false;
+  return JSON.stringify(decisionFacts(previous)) !== JSON.stringify(decisionFacts(current));
+}
+
 export async function build() {
   const [labChecked, mgChecked] = checkedSha();
   const [labSha, mgSha] = await Promise.all([
@@ -397,16 +427,22 @@ export async function build() {
     checked: { lab: labChecked || UNKNOWN, mg: mgChecked || UNKNOWN },
     run: process.env.STATUS_RUN_URL || UNKNOWN,
     review: { protected: prData.protectedItems, redLab, redMg, sliyanie: sl, stalled: st },
-    finish: finishSummary(json('progress.json')),
+    finish: finishSummary(),
     pr: prData,
     changes: { lab: normalizeChanges(changeLab), mg: normalizeChanges(changeMg) },
     games,
     errors
   };
+  const previous = json('automation/status.json');
+  const stableData = retainKnown(previous, data);
+  if (!shouldPublishStatus(previous, stableData)) {
+    console.log('STATUS_UNCHANGED_OR_THROTTLED: no main publication');
+    return;
+  }
   let markdown;
   for (const cap of [99, 12, 10, 8, 6, 4, 3, 2, 1, 0]) {
     try {
-      markdown = enforceLimit(render(data, cap));
+      markdown = enforceLimit(render(stableData, cap));
       break;
     } catch (error) {
       if (!String(error.message).includes('STATUS exceeds')) throw error;
@@ -415,7 +451,7 @@ export async function build() {
   if (!markdown) throw new Error('Required STATUS sections exceed 8 KiB / 150 lines');
   fs.mkdirSync('automation', { recursive: true });
   fs.writeFileSync('automation/STATUS.md', markdown);
-  fs.writeFileSync('automation/status.json', JSON.stringify(data, null, 2) + '\n');
+  fs.writeFileSync('automation/status.json', JSON.stringify(stableData, null, 2) + '\n');
   console.log('STATUS: ' + markdown.trimEnd().split('\n').length + ' lines, ' +
     Buffer.byteLength(markdown) + ' bytes');
 }

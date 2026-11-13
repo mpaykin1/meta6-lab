@@ -19,7 +19,7 @@ permissions:
   contents: read
 concurrency:
   group: asset-check-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   asset-check:
     runs-on: ubuntu-latest

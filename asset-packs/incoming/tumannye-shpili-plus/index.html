@@ -641,6 +641,37 @@ const SHPILI_PLUS=(()=>{
      }
      limbs.push({shoulder,elbow,hand,hip,knee,wing,side});
    }
+   // Static masonry is batched inside each joint; animated joint hierarchy stays intact.
+   const batchJoint=parent=>{
+     for(const child of [...parent.children])if(child.isGroup)batchJoint(child);
+     const buckets=new Map();
+     for(const child of parent.children){
+       if(!child.isMesh)continue;
+       if(!buckets.has(child.material))buckets.set(child.material,[]);
+       buckets.get(child.material).push(child);
+     }
+     for(const [material,parts] of buckets){
+       if(parts.length<2)continue;
+       const geometries=parts.map(part=>{
+         part.updateMatrix();
+         const geo=part.geometry.index?part.geometry.toNonIndexed():part.geometry.clone();
+         return geo.applyMatrix4(part.matrix);
+       });
+       const geometry=new T.BufferGeometry();
+       for(const key of ['position','normal','uv']){
+         const size=geometries[0].attributes[key].itemSize;
+         const arrays=geometries.map(geo=>geo.attributes[key].array);
+         const data=new Float32Array(arrays.reduce((n,a)=>n+a.length,0));
+         let offset=0;for(const array of arrays){data.set(array,offset);offset+=array.length;}
+         geometry.setAttribute(key,new T.BufferAttribute(data,size));
+       }
+       geometry.computeBoundingSphere();
+       for(const part of parts){parent.remove(part);part.geometry.dispose();}
+       for(const geo of geometries)geo.dispose();
+       parent.add(new T.Mesh(geometry,material));
+     }
+   };
+   batchJoint(body);
    g.rotation.y=-.26;g.scale.setScalar(1.05);
    own[id].tick=t=>{
      body.position.y=.14*Math.sin(t*.65);neck.rotation.z=.09*Math.sin(t*.8);

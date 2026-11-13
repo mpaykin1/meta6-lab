@@ -11,6 +11,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MUTANTS = [
+    ("check_pack.py", 'r.add("A6",', 'r.add("C1",'),
+    ("check_pack.py", 'r.add("A7",', 'r.add("C2",'),
+    ("kinds/images.py", 'r.add("A1",', 'r.add("I1",'),
     ("kinds/sprite2d.py", "if med < 0.06:", "if med < -1:"),
     ("kinds/sprite2d.py", 'if tags.get("seamless") and', "if False and"),
     ("kinds/sprite2d.py", "if len(fr) > 1 and len(uniq) == 1:", "if False:"),

@@ -101,17 +101,17 @@ def common_checks(root: Path, r: Report, covered: set):
     where = next(iter(mans), "pack.json")
     miss = [k for k in ("license", "provenance") if k not in merged]
     if miss:
-        r.add("C1", "HARD", where, f"Нет полей {miss} — происхождение и права не указаны",
+        r.add("A6", "HARD", where, f"Нет полей {miss} — происхождение и права не указаны",
               'Добавь в манифест (или pack.json) "license": {"type":"…","author":"…","commercial":true} и '
               '"provenance": {"tool":"…","prompt_sha256":"…","date":"YYYY-MM-DD"} (правило META_GAMES_SOURCE_ALLOWLIST)')
     if "content_flags" not in merged:
-        r.add("C2", "HARD", where, "Нет content_flags — не указано, есть ли реальные люди, бренды, политика",
+        r.add("A7", "HARD", where, "Нет content_flags — не указано, есть ли реальные люди, бренды, политика",
               'Добавь "content_flags": {"real_persons": [...], "brands": [...], "political": true|false}. '
               'Реальные узнаваемые люди/бренды/политика = отдельная версия пака без них для МГ, Google Play, Steam, Playgama')
     else:
         cf = merged["content_flags"]
         if isinstance(cf, dict) and (cf.get("real_persons") or cf.get("brands")):
-            r.add("C2", "SOFT", where, f"В паке реальные люди/бренды: {cf.get('real_persons') or cf.get('brands')}",
+            r.add("A7", "SOFT", where, f"В паке реальные люди/бренды: {cf.get('real_persons') or cf.get('brands')}",
                   "Нужна версия <имя>-fiction с вымышленными героями — её можно публиковать везде")
 
     files = [p for p in root.rglob("*") if p.is_file() or p.is_symlink()]

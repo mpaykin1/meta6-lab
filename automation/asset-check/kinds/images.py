@@ -18,7 +18,7 @@ def detect(root: Path) -> bool:
 
 def check(root: Path, r) -> set:
     covered = set()
-    r.add("I1", "HARD", "/", "картинки без манифеста — игра не знает кадры, якоря, назначение",
+    r.add("A1", "HARD", "/", "картинки без манифеста — игра не знает кадры, якоря, назначение",
           "Добавь atlas.json по SPEC.md §1 (вид sprite2d) — тогда бот проверит всё полностью")
     for p in sorted(x for x in root.rglob("*") if x.is_file() and x.suffix.lower() in EXT):
         rel = p.relative_to(root).as_posix()

@@ -7,7 +7,9 @@ trap 'rm -rf "$tmp"' EXIT
 cat > "$tmp/curl" <<'MOCK'
 #!/usr/bin/env bash
 printf '%s\n' "$*" >> "$MOCK_LOG"
-printf '%s' "${MOCK_CODE:-500}"
+# Only the status probe (--write-out) prints a code; body downloads stay silent.
+[[ "$*" == *--write-out* ]] && printf '%s' "${MOCK_CODE:-500}"
+exit 0
 MOCK
 chmod +x "$tmp/curl"
 export PATH="$tmp:$PATH" MOCK_LOG="$tmp/curl.log"

@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 22 · конфликт 13 · непроверено 0 · красные проверки 22 · нужен Claude 26
+Итог: зависло 22 · конфликт 13 · непроверено 0 · красные проверки 21 · нужен Claude 26
 
 ### PR #234
 - PR: https://github.com/mpaykin1/meta6-lab/pull/234
@@ -168,14 +168,6 @@
 - SHA: `544dcb50368a853daa6b843b07a8ae3e930464fe` · последний коммит: 2026-11-13T11:06:42Z
 - Проблема: Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
 - Задание: Исправь Vercel по логу https://vercel.com/improve-world?upgradeToPro=build-rate-limit и повтори CI.
-- Взял: —
-
-### PR #296
-- PR: https://github.com/mpaykin1/meta6-lab/pull/296
-- Ветка: `lab/asset-pack-shpili`
-- SHA: `7fa8678fef3684b4f146de3b8c389d7e133f082c` · последний коммит: 2026-11-13T17:20:24Z
-- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43471838859/job/132045443431), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43471838859/job/132045443431 и повтори CI.
 - Взял: —
 
 ### PR #242

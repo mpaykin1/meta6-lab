@@ -68,7 +68,7 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
     if(!d)return false;
     d.time=6.5;d.cooldown=12;doorUses++;iva.set('listen',6.5);
     burst(d.pos.clone().setY(1),'#c3b99b',12,.6);audio.door();
-    if(!lastDoorLine){lastDoorLine=true;play('doorShut');}
+    if(!lastDoorLine){lastDoorLine=true;play('doorShut');play('archiveWhisper');}
     return true;
   }
   function tick(dt,t) {

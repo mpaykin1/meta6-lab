@@ -1,7 +1,5 @@
 name: META GAMES five-task auditor
 on:
-  schedule:
-    - cron: '13 * * * *' # 20m after the :53 job; UTC
   workflow_dispatch:
   pull_request:
     paths:

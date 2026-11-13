@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import { verdict, isDoc, isCodeChange, unwrapPage } from './gate.mjs';
+const f = (filename,status='modified',additions=3)=>({filename,status,additions,changes:additions,previous_filename:null});
+const base={body:'ПОЛЬЗА: FINISH B2',files:[f('scripts/shared/verify-bot-motion.mjs'),f('scripts/shared/mutate-bot-motion.mjs')],openPRs:9,scheduledWorkflows:8,newCronFiles:[],finish:{B2:{verify:['scripts/shared/verify-bot-motion.mjs'],mutate:['scripts/shared/mutate-bot-motion.mjs'],checked:[]}}};
+assert.equal(verdict(base).ok,true,'FINISH with matching verify and mutate');
+assert.equal(verdict({...base,body:'ПОЛЬЗА: FINISH B2',files:[f('games/example/index.html')],finish:{B2:{verify:[],mutate:[],checked:['games/example/index.html']}}}).ok,true,'FINISH real checked source');
+assert.equal(verdict({...base,body:'ПОЛЬЗА: ИГРА games/example',files:[f('games/example/index.html')],botOK:true}).ok,true,'Game with passing bot on PR SHA');
+assert.equal(verdict({...base,body:'ПОЛЬЗА: ПОЧИНКА https://github.com/mpaykin1/meta6-lab/actions/runs/123',files:[f('scripts/auditor/verify.mjs')],redRun:{id:123,conclusion:'failure',head_branch:'main',jobsFailed:true},repairPaths:['scripts/auditor/verify.mjs']}).ok,true,'Real failed main run with related code change');
+assert.equal(isDoc('games/example/README.md'),true);
+assert.equal(isCodeChange(f('reports/STATUS.md')),false);
+assert.equal(unwrapPage({jobs:[{id:1}]}).length,1,'GitHub jobs response envelope');
+assert.equal(unwrapPage({workflow_runs:[{id:2}]}).length,1,'GitHub runs response envelope');
+console.log('VERIFY POLZA: 8 positive checks PASS');

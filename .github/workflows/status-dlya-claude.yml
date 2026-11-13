@@ -1,7 +1,5 @@
 name: status-dlya-claude
 on:
-  schedule:
-    - cron: '43 * * * *'
   push:
     branches: [main]
     paths:
@@ -49,26 +47,6 @@ jobs:
           STATUS_REPO: ${{ github.repository }}
           STATUS_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: node scripts/status/build.mjs
-      - name: Commit only changed summary files to main
+      - name: Publish facts exclusively to bot-state
         if: github.event_name != 'pull_request'
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "status-dlya-claude bot"
-          git config user.email "actions@users.noreply.github.com"
-          for attempt in 1 2 3; do
-            git add automation/STATUS.md automation/status.json
-            if git diff --cached --quiet; then
-              echo "No status changes"
-              exit 0
-            fi
-            git commit -m "status: refresh facts for Claude"
-            if git push origin HEAD:main; then
-              echo "Status committed to main"
-              exit 0
-            fi
-            git fetch -q origin main
-            git reset --hard origin/main
-            node scripts/status/build.mjs
-          done
-          exit 1
+        run: bash scripts/polza/write-bot-state.sh automation/STATUS.md automation/status.json

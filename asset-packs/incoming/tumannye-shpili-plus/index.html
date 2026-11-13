@@ -345,7 +345,7 @@ const dust=new T.Points(dg,dustMat);dust.frustumCulled=false;dust.renderOrder=80
 const qScene=new T.Scene(),qCam=new T.OrthographicCamera(-1,1,1,-1,0,1),quad=new T.Mesh(new T.PlaneGeometry(2,2));qScene.add(quad);
 const QV='varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}';
 const rtO={minFilter:T.LinearFilter,magFilter:T.LinearFilter,depthBuffer:false,stencilBuffer:false};
-const rtA=new T.WebGLRenderTarget(4,4,rtO),rtB=new T.WebGLRenderTarget(4,4,rtO),rtC=new T.WebGLRenderTarget(4,4,rtO),rtD=new T.WebGLRenderTarget(4,4,rtO);
+const rtA=new T.WebGLRenderTarget(4,4,{...rtO,depthBuffer:true}),rtB=new T.WebGLRenderTarget(4,4,rtO),rtC=new T.WebGLRenderTarget(4,4,rtO),rtD=new T.WebGLRenderTarget(4,4,rtO);
 const waterMat=new T.ShaderMaterial({depthTest:false,depthWrite:false,uniforms:{tS:{value:rtA.texture},uT:U.t,uH:{value:-1},uAsp:{value:1},uTap:{value:new T.Vector3(.5,0,-99)}},vertexShader:QV,fragmentShader:NOISE+`
 uniform sampler2D tS;uniform float uT,uH,uAsp;uniform vec3 uTap;varying vec2 vUv;
 void main(){vec2 uv=vUv;vec3 c;
@@ -563,10 +563,10 @@ const SHPILI_PLUS=(()=>{
        ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+R()*21-10,y+15+R()*30);ctx.stroke();
      }
    });
-   const stone=new T.MeshBasicMaterial({map:wear,color:0x7790aa});
-   const dark=new T.MeshBasicMaterial({color:0x101e32});
-   const edge=new T.MeshBasicMaterial({color:0x91bcc9});
-   const ember=new T.MeshBasicMaterial({color:0xee7aab});
+   const stone=new T.MeshBasicMaterial({map:wear,color:0x7790aa,transparent:true,depthWrite:true});
+   const dark=new T.MeshBasicMaterial({color:0x101e32,transparent:true,depthWrite:true});
+   const edge=new T.MeshBasicMaterial({color:0x91bcc9,transparent:true,depthWrite:true});
+   const ember=new T.MeshBasicMaterial({color:0xee7aab,transparent:true,depthWrite:true});
    const part=(parent,dims,pos,mat,rot=0)=>{
      const m=new T.Mesh(new T.BoxGeometry(...dims),mat);m.position.set(...pos);
      m.rotation.z=rot;parent.add(m);return m;

@@ -11,6 +11,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MUTANTS = [
+    ("kinds/htmlpack_pixels.mjs", "if(!active[p])continue;", "if(false)continue;"),
+    ("kinds/htmlpack_pixels.mjs", "Math.min(rgbDistance(on0.data,prev*c,shown,i),", "Math.max(rgbDistance(on0.data,prev*c,shown,i),"),
+    ("kinds/htmlpack_pixels.mjs", "Math.min(rgbDistance(shown,i,shown,q*c),", "Math.max(rgbDistance(shown,i,shown,q*c),"),
     ("check_pack.py", 'r.add("A6",', 'r.add("C1",'),
     ("check_pack.py", 'r.add("A7",', 'r.add("C2",'),
     ("kinds/images.py", 'r.add("A1",', 'r.add("I1",'),

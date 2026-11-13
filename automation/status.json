@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-13T04:15:27.512Z",
+  "generated_at": "2026-11-13T04:22:11.444Z",
   "sha": {
-    "lab": "88b738d3a1380961f305ea991bb81d227b0625fa",
+    "lab": "51c43718a0a25425b39f82e901cd17fd88cc2bbc",
     "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
@@ -123,18 +123,25 @@
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
       }
     ],
     "redLab": [
       {
         "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43364209568",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43364997352",
         "step": "Run node scripts/dispetcher/run.mjs"
       }
     ],
@@ -554,18 +561,25 @@
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 1629,
+      "count": 1633,
       "folders": "нет данных"
     },
     "mg": {

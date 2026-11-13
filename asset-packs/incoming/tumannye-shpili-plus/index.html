@@ -1113,6 +1113,229 @@ const SHPILI_PLUS=(()=>{
   };
  }
 
+
+ // Выразительные формы вместо обобщённых колец: все детали принадлежат своим ассетам.
+ const shaped=(p,points,col,z=1,opacity=.92)=>{
+  const q=new T.Shape();q.moveTo(...points[0]);
+  for(let i=1;i<points.length;i++)q.lineTo(...points[i]);
+  q.closePath();return mesh(p,new T.ShapeGeometry(q),col,[0,0,z],opacity);
+ };
+ const enhance=(id,fn)=>{const prev=own[id].tick;own[id].tick=(t,dt)=>{prev(t,dt);fn(t,dt)};};
+ // Зверь: морда, живая челюсть, костяные лапы, шерсть и хвост вместо красного диска.
+ {
+  const root=own['sable-beast'].group,animal=new T.Group();root.add(animal);
+  shaped(animal,[[-5,1],[-4.3,2.5],[-2.1,3.1],[.2,3.5],
+   [3.2,2.7],[5.5,1.8],[5.8,-.7],[3.3,-2.9],[.3,-3.4],
+   [-3.6,-2.2]],0x161d36,2.2);
+  shaped(animal,[[-4.5,1],[-3,2.1],[-.3,2.3],[2.8,1.65],
+   [4.1,.5],[3.2,-1.2],[1.5,-1.6],[-3.4,-1.3]],0x842b52,2.35,.85);
+  const jaw=new T.Group();jaw.position.set(-5.1,.3,2.9);animal.add(jaw);
+  shaped(jaw,[[-1.4,.65],[-.8,1.6],[.05,1.85],[.95,.85],
+   [.42,-.18],[-1.1,-.7]],0xe0b3bd,.3);
+  shaped(jaw,[[-1.2,-.3],[.5,-.4],[.88,-1.37],[-1.1,-1.27]],0x301425,.42);
+  for(const side of [-1,1]){
+   const eye=ball(jaw,.21,0xfff0d5,[side*.38,.55,.6]);
+   eye.scale.set(.85,.6,.3);
+   spike(jaw,.2,2.05,0x854564,[side*.66,1.9,.27],side*.4);
+   for(let i=0;i<3;i++)spike(jaw,.12,.56,0xffd7e0,
+      [side*(.23+i*.25),-.95,.6],Math.PI);
+  }
+  const paws=[],fur=[],tail=[];
+  for(let i=0;i<6;i++){
+   const leg=new T.Group(),x=-3.6+Math.floor(i/2)*3.3;
+   leg.position.set(x,-1.9,1.25+i%2*.3);animal.add(leg);
+   shaped(leg,[[-.5,.3],[.6,-.1],[.35,-1.6],[-.15,-2.8],
+       [-.78,-1.85]],i%2?0x4f2948:0x241c38,.2);
+   for(let j=0;j<3;j++)spike(leg,.12,.48,0xe4bac2,
+       [j*.27-.38,-2.85,.65],Math.PI+.12*j);
+   paws.push(leg);
+  }
+  for(let i=0;i<27;i++){
+   const rr=rng(230+i),x=-4.6+i*.38,y=1.5+rr()*.85;
+   const tuft=shaped(animal,[[x-.4,y-.3],[x+.05,y+.12],
+     [x+.44,y+.52+rr()*.65],[x+.32,y-.45]],i%4?0xbd5577:0xf191a1,2.42+i*.0002,.79);
+   fur.push(tuft);
+  }
+  for(let i=0;i<11;i++){
+   const segment=new T.Group();segment.position.set(5+i*.35,-.8+i*.17,1);
+   animal.add(segment);
+   shaped(segment,[[-.25,-.18],[.5,-.28],[.76,.02],[.05,.36]],
+     i%3?0x7e3a59:0xdb7e96,.4);tail.push(segment);
+  }
+  enhance('sable-beast',t=>{
+   animal.rotation.z=.035*Math.sin(t*.63);
+   jaw.rotation.z=.13*Math.sin(t*1.3);
+   paws.forEach((leg,i)=>leg.rotation.z=.26*Math.sin(t*1.5-i*.71));
+   fur.forEach((u,i)=>u.rotation.z=.04*Math.sin(t*1.2-i*.24));
+   tail.forEach((u,i)=>{u.position.y=-.8+i*.17+.32*Math.sin(t*.9-i*.43);
+     u.rotation.z=.22*Math.sin(t*1.04-i*.31)});
+  });
+ }
+ // Мост: настил, подвески и обе опорные аркады, чтобы это была переправа.
+ {
+  const root=own['gate-bridge'].group,deck=new T.Group();root.add(deck),planks=[];
+  for(let i=0;i<34;i++){
+   const x=(i-16.5)*.66,p=new T.Group();deck.add(p);
+   p.position.set(x,-.4*Math.sin(i*Math.PI/33),1.7);
+   shaped(p,[[-.31,-.39],[.31,-.48],[.37,.17],
+      [.2,.38],[-.36,.28]],i%5?0x66869a:0xb7a3ad,.5);
+   planks.push(p);
+  }
+  for(const side of [-1,1]){
+   for(let i=0;i<29;i++){
+    const x=(i-14)*.75,h=3.5+3*(1-(x/11)**2);
+    beam(deck,[x,.15,side*1.3],[x,h,side*1.3],.04,
+      i%3?0x759eaf:0xf2b9c9,.87);
+    if(i<28){
+     const nx=x+.75,nh=3.5+3*(1-(nx/11)**2);
+     beam(deck,[x,h,side*1.3],[nx,nh,side*1.3],.08,0xa7bcca,.88);
+    }
+   }
+   const buttress=new T.Group();buttress.position.set(side*11,0,.8);deck.add(buttress);
+   shaped(buttress,[[-.8,-2],[.88,-2],[1.27,4.3],
+      [.14,6.1],[-1.15,3.5]],0x385e78,.3);
+   for(let i=0;i<6;i++)beam(buttress,[-.6,i*.76,.8],
+    [.75,i*.76,.8],.047,0xc5becd,.82);
+  }
+  enhance('gate-bridge',t=>{
+   deck.rotation.z=.015*Math.sin(t*.7);
+   planks.forEach((plank,i)=>{
+    plank.position.y=-.4*Math.sin(i*Math.PI/33)+.27*Math.sin(t*.94-i*.22);
+    plank.rotation.z=.055*Math.sin(t*.85-i*.2);
+   });
+  });
+ }
+ // Хранитель: капюшон, лицо, плащ, два крыла, посох и подвижные суставы.
+ {
+  const root=own['dawn-sentinel'].group,guardian=new T.Group();root.add(guardian);
+  shaped(guardian,[[-1.1,1.8],[-.5,2.4],[.7,2.3],[1.5,.9],
+   [2,-2.7],[.15,-3.1],[-1.5,-3.8],[-2.2,-2.1]],0x15374b,1.7);
+  shaped(guardian,[[-.7,.7],[.45,1.2],[1.12,.4],
+   [.58,-1.8],[-.8,-1.7]],0x8caec5,1.88);
+  const hood=new T.Group();hood.position.set(0,2,2.1);guardian.add(hood);
+  shaped(hood,[[-.9,.1],[-.8,1.05],[-.1,1.5],[.74,.9],
+   [.88,-.1],[.2,-.85],[-.67,-.7]],0xcab9c6,.4);
+  shaped(hood,[[-.49,.35],[.1,.6],[.48,.3],[.3,-.51],
+   [-.3,-.55]],0x192d45,.51);
+  for(const sgn of [-1,1])ball(hood,.12,0xb8fffa,[sgn*.25,.06,.59]);
+  const wings=[];
+  for(const sgn of [-1,1]){
+   const wing=new T.Group();wing.position.set(sgn*1.2,.6,.9);guardian.add(wing);
+   shaped(wing,[[0,0],[sgn*1.2,1.65],[sgn*2.8,1.3],
+      [sgn*4.2,-.5],[sgn*2.7,-.55],[sgn*2.8,-2.15],
+      [sgn*.7,-1.1]],sgn>0?0x77b5bc:0x406b83,.6,.83);
+   for(let i=0;i<6;i++)beam(wing,[0,0,.9],
+     [sgn*(1+i*.5),1.1-i*.53,.9],.045,0xc2edf0,.77);
+   wings.push({wing,sgn});
+  }
+  const staff=new T.Group();staff.position.set(1.5,.2,2.4);guardian.add(staff);
+  beam(staff,[0,-3,0],[0,3,0],.075,0xeff0dc);
+  shaped(staff,[[-.6,3.1],[0,4.35],[.55,3.1],[.2,2.7],
+    [-.3,2.75]],0xf9b3d0,.4);
+  enhance('dawn-sentinel',t=>{
+   guardian.rotation.z=.08*Math.sin(t*.62);
+   hood.rotation.y=.14*Math.sin(t*.82);staff.rotation.z=.2*Math.sin(t*.7);
+   wings.forEach(({wing,sgn},i)=>{
+    wing.rotation.y=sgn*(.2+.29*Math.sin(t*1.31-i*.54));
+    wing.rotation.z=.1*Math.sin(t*.98-i*.36);
+   });
+  });
+ }
+ // Зеркальное семя: створки, прожилки, заостренная оболочка и корни.
+ {
+  const root=own['mirror-seed'].group,seed=new T.Group();root.add(seed);
+  seed.position.z=2.6;
+  shaped(seed,[[0,3.1],[1.3,2],[1.65,.15],[.8,-1.8],
+    [0,-3.45],[-1.1,-2],[-1.6,.3],[-.9,2.2]],0x254b67,.3);
+  shaped(seed,[[0,2.65],[.9,1.5],[1.15,.1],[.65,-1.7],
+    [0,-2.85],[-.8,-1.5],[-1.1,.05]],0xa1cfdb,.5,.91);
+  shaped(seed,[[0,2.25],[.25,1.65],[.2,-1.5],[0,-2.6],
+    [-.25,-1.5],[-.27,1.65]],0xf6c1d5,.63,.86);
+  const leaves=[],roots=[];
+  for(const sgn of [-1,1]){
+   const leaf=new T.Group();leaf.position.set(sgn*.53,-.26,.6);seed.add(leaf);
+   shaped(leaf,[[0,-1.2],[sgn*1.25,-.75],[sgn*1.65,.55],
+    [sgn*.7,1.7],[0,2.1]],sgn>0?0xd1a5be:0x72b4bf,.8,.8);
+   beam(leaf,[0,-1,.9],[sgn*.65,1.5,.9],.042,0xf1edf0,.79);
+   leaves.push({leaf,sgn});
+  }
+  for(let i=0;i<9;i++){
+   const rr=rng(590+i),rootlet=new T.Group();
+   rootlet.position.set((i-4)*.31,-2.8,1.1);seed.add(rootlet);
+   beam(rootlet,[0,0,0],[(i-4)*.13,-.62-rr()*.55,0],.045,
+     i%2?0x8ad5e3:0xf0b6d5,.84);roots.push(rootlet);
+  }
+  enhance('mirror-seed',t=>{
+   seed.rotation.z=.07*Math.sin(t*.68);seed.position.y=.22*Math.sin(t*.94);
+   leaves.forEach(({leaf,sgn})=>leaf.rotation.y=sgn*(.2+.24*Math.sin(t*1.1)));
+   roots.forEach((v,i)=>v.rotation.z=.09*Math.sin(t*1.1-i*.37));
+  });
+ }
+ // Мачта — реальные реи и разорванные паруса с живыми концами.
+ {
+  const root=own['shattered-mast'].group,rig=new T.Group();root.add(rig);
+  rig.position.set(0,2,2.3);const sails=[];
+  for(let i=0;i<3;i++){
+   const y=i*8,sgn=i%2?1:-1,sail=new T.Group();
+   sail.position.set(i*.45-.5,y,0);rig.add(sail);
+   beam(sail,[-5,0,0],[5,.15,0],.1,0xc0d2dd,.88);
+   shaped(sail,[[0,.2],[sgn*5,.3],[sgn*4.25,-1.4],
+      [sgn*3.2,-3.1],[sgn*2.45,-2.45],[sgn*2,-4.8],
+      [sgn*.95,-4.15],[sgn*.45,-5.9],[0,-4.1]],
+      i%2?0x6c5476:0x496e82,.7,.83);
+   for(let j=0;j<6;j++)beam(sail,[0,0,.8],
+      [sgn*(.8+j*.55),-3-j*.3,.8],.03,0xb4e6ed,.67);
+   sails.push(sail);
+  }
+  for(const sgn of [-1,1]){
+   beam(rig,[0,27,0],[sgn*11,-1,0],.045,0xaccbda,.86);
+   beam(rig,[sgn*11,-1,0],[sgn*3.4,15,0],.03,0xe3a9c7,.67);
+  }
+  const flag=shaped(rig,[[0,28],[1.4,28.3],[2.8,27.4],
+    [1.3,27],[1.8,26.6],[.3,26.1]],0xf3a8c9,1);
+  enhance('shattered-mast',t=>{
+   rig.rotation.z=-.04+.028*Math.sin(t*.41);
+   flag.rotation.z=.13*Math.sin(t*.92);
+   sails.forEach((sail,i)=>{
+    sail.rotation.y=.09*Math.sin(t*.88-i*.43);
+    sail.rotation.z=.035*Math.sin(t*.57-i*.51);
+   });
+  });
+ }
+ // Грозовой фронт с асимметричными краями и ветвящимися длинными разрядами.
+ {
+  const root=own['storm-heart'].group,front=new T.Group();root.add(front);
+  front.position.z=2.4;
+  shaped(front,[[-13,7],[-10,10.3],[-6.2,11],[-3,12.6],
+    [0,11.3],[4.5,12],[8,10.4],[12.2,7.2],
+    [10.5,3.6],[6.1,2.7],[2.2,3.4],[-1,2.2],
+    [-4.8,3.1],[-8.6,2.4],[-11.2,4.2]],0x1a344f,.3);
+  shaped(front,[[-11,6.7],[-6,9.1],[-2.4,8.1],[1,9.3],
+    [6.7,8.2],[10,6.8],[7,4.4],[2,5.2],
+    [-1,3.6],[-5.5,5]],0x805a80,.46,.81);
+  const strikes=[];
+  for(let i=0;i<7;i++){
+   const a=rng(7400+i),bolt=new T.Group(),x=-9+i*3.1;
+   bolt.position.set(x,3.2+i%3*.6,.9);front.add(bolt);
+   const points=[[0,0]];
+   for(let k=1;k<10;k++)points.push([points[k-1][0]+
+     (a()-.5)*2.5,-1.36*k]);
+   const outline=points.map(p=>[p[0]+.19,p[1]]).concat(
+     [...points].reverse().map(p=>[p[0]-.16,p[1]]));
+   const body=shaped(bolt,outline,i%3?0xb8eeef:0xffcee0,1.1,.85);
+   for(let k=2;k<8;k+=2)beam(bolt,[points[k][0],points[k][1],1.3],
+     [points[k][0]+(a()-.5)*3.5,points[k][1]-2.5-a(),1.3],
+     .052,0xf6c7de,.78);
+   strikes.push({bolt,body,i});
+  }
+  enhance('storm-heart',t=>{
+   front.rotation.z=.014*Math.sin(t*.36);
+   strikes.forEach(({bolt,body,i})=>{
+    body.material.opacity=.12+.86*Math.pow(.5+.5*Math.sin(t*1.25+i*2.39),7);
+    bolt.rotation.z=.037*Math.sin(t*.7-i*.37);
+   });
+  });
+ }
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;

@@ -42881,21 +42881,6 @@
       ]
     },
     {
-      "id": "43ee47845bf5550532451b9b",
-      "game": "ostrov-aptekarya",
-      "kind": "solution",
-      "name": "update",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/ostrov-aptekarya/girl.js",
-      "sha256": "b29c250e587ac822a667f60724303c94305dc590df8c41ae8f48068298192f05",
-      "lines": [
-        56,
-        131
-      ]
-    },
-    {
       "id": "79500821f5ad046b4b71c08d",
       "game": "ostrov-aptekarya",
       "kind": "solution",
@@ -42908,6 +42893,21 @@
       "lines": [
         49,
         49
+      ]
+    },
+    {
+      "id": "7a69b1c8509658a4e03b1399",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:girl.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/girl.js",
+      "sha256": "1d8e344c4e928bc2db6c460172a46362e026a09cbad34e45b5d4cf0868814c2c",
+      "lines": [
+        1,
+        143
       ]
     },
     {
@@ -42926,18 +42926,18 @@
       ]
     },
     {
-      "id": "7bdafd39ffcb67f0e77ab819",
+      "id": "8573a749749c09aabc0faf56",
       "game": "ostrov-aptekarya",
       "kind": "solution",
-      "name": "module:girl.js",
+      "name": "update",
       "purpose": [
-        "game-module"
+        "gameplay"
       ],
       "source_path": "games/ostrov-aptekarya/girl.js",
-      "sha256": "3ba9e96898ab6fe99f4321211a7d1c7725713c77b207bdac5bc5b780aee963f4",
+      "sha256": "aeba5bded751190ef71d65d20e5c32ef8723de144e8af2e3905bf67f2bb8936c",
       "lines": [
-        1,
-        133
+        56,
+        141
       ]
     },
     {

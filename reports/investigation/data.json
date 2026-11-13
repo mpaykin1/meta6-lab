@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T11:25:52.029Z",
+  "generated_at": "2026-11-13T11:29:21.794Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -26,40 +26,6 @@
   "tasks": [
     {
       "id": 1,
-      "task": "БЕЗ ПАТТЕРНОВ — INK: непериодические пятна + запрет повторяющихся узоров",
-      "project": "МГЛ → МГ",
-      "owner": "ChatGPT",
-      "branch": "lab/bez-patternov-20261113",
-      "status": "в работе",
-      "original_status": "взято",
-      "pr": null,
-      "pr_state": null,
-      "check": "unknown",
-      "check_url": null,
-      "url": "https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md",
-      "taken_at": "2026-11-13 11:11",
-      "last_commit_at": "—",
-      "remaining": "Довести PR до зелёных проверок и слияния"
-    },
-    {
-      "id": 2,
-      "task": "Проверяющий: постоянное развитие",
-      "project": "МГЛ",
-      "owner": "чат ChatGPT: журналы #255/#260 и совместимость проверок",
-      "branch": "lab/kak-proveryayushchij-traps",
-      "status": "зависла",
-      "original_status": "🙋 НУЖЕН CLAUDE: подпись на изменение существующих проверок",
-      "pr": null,
-      "pr_state": null,
-      "check": "unknown",
-      "check_url": null,
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/247",
-      "taken_at": "2026-11-13 08:28",
-      "last_commit_at": "2026-11-13 10:43",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
-    },
-    {
-      "id": 3,
       "task": "fix(auditor): достоверные планы и проверка pin Issue #253",
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
@@ -76,7 +42,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 4,
+      "id": 2,
       "task": "Ревизор: сверять ZADACHI.md с реальными PR (г); [Actions](https://github.com/mpaykin1/meta6-lab/actions/runs/43392251668), НУЖЕН CLAUDE",
       "project": "МГЛ",
       "owner": "ревизор",
@@ -93,7 +59,24 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 5,
+      "id": 3,
+      "task": "ТОЛКАЧ #220: конфликт устранён [merge](https://github.com/mpaykin1/meta6-lab/commit/fb2cde9aa428959c33a44dd0af6d14dcf73e0ef2); локально verify и 11/11 мутаций PASS, Actions на новом HEAD ожидаются; защищённое слияние только Claude; УСКОРЕНИЕ 1.1–1.3: fail-closed API и таблица FINISH [PR #220](https://github.com/mpaykin1/meta6-lab/pull/220)",
+      "project": "МГЛ",
+      "owner": "чат ChatGPT (УСКОРЕНИЕ, продолжение существующего PR #220)",
+      "branch": "lab/zadachi-conflicts",
+      "status": "зависла",
+      "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
+      "pr": null,
+      "pr_state": null,
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/220",
+      "taken_at": "2026-11-13T08:17:00+00:00",
+      "last_commit_at": "2026-11-13 10:44",
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+    },
+    {
+      "id": 4,
       "task": "test(lovushki): catch Claude quota and GraphQL API regressions",
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
@@ -110,7 +93,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 6,
+      "id": 5,
       "task": "БОТ-ПРОХОДЧИК: продолжение B2 — смерть без координат + браузерное движение, Кто: проходчик",
       "project": "МГЛ",
       "owner": "проходчик",
@@ -127,7 +110,41 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
+      "id": 6,
+      "task": "БОТ-ПРОХОДЧИК: B2 — проверка движения героя и вечные ловушки",
+      "project": "МГЛ",
+      "owner": "Кто: проходчик",
+      "branch": "lab/prohodchik-b2-motion-20261111",
+      "status": "зависла",
+      "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
+      "pr": null,
+      "pr_state": null,
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/258",
+      "taken_at": "2026-11-13 08:20",
+      "last_commit_at": "2026-11-13 10:27",
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+    },
+    {
       "id": 7,
+      "task": "ТОЛКАЧ #278: [правило уточнено](https://github.com/mpaykin1/meta6-lab/commit/4ae277ab7d7897b43b00109fc170066b5ffa9932); guard shallow-history и quota FAIL; локальный патч + 6 мутаций готовы, защищённая публикация ждёт разрешения",
+      "project": "МГЛ",
+      "owner": "Кто: толкач",
+      "branch": "lab/tolkach-main-first-20261112",
+      "status": "зависла",
+      "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
+      "pr": null,
+      "pr_state": null,
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/278",
+      "taken_at": "2026-11-13T08:17:00+00:00",
+      "last_commit_at": "2026-11-13 08:27",
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+    },
+    {
+      "id": 8,
       "task": "INK: объёмные объекты леса из видео, Ч/Б и цвет по прежней ссылке",
       "project": "МГЛ",
       "owner": "ChatGPT",
@@ -144,7 +161,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 8,
+      "id": 9,
       "task": "PR #242: исправить красные проверки SEO-каталога",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -161,7 +178,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 9,
+      "id": 10,
       "task": "ЭТАЛОНЫ В БИБЛИОТЕКУ — усилен поиск исходных систем: SHA-256 и диапазон строк, [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261), [SHA 688dd7c6df1ffe3a591fb417946bb6f0c7041ca5](https://github.com/mpaykin1/meta6-lab/commit/688dd7c6df1ffe3a591fb417946bb6f0c7041ca5), [Library Machine PASS #43365245872](https://github.com/mpaykin1/meta6-lab/actions/runs/43365245872) 9/9, [KONTUR PASS #43365245842](https://github.com/mpaykin1/meta6-lab/actions/runs/43365245842), [STOROZHA FAIL #43365245850](https://github.com/mpaykin1/meta6-lab/actions/runs/43365245850); НУЖЕН CLAUDE; 22 → 22 неполных, MCP 0",
       "project": "МГЛ",
       "owner": "Кто: библиотека",
@@ -178,7 +195,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 10,
+      "id": 11,
       "task": "Archer #1: visible dragon aim beacon and early attack warning (2.0.1)",
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
@@ -192,23 +209,6 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/264",
       "taken_at": "2026-11-11 15:00",
       "last_commit_at": "2026-11-13 04:25",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
-    },
-    {
-      "id": 11,
-      "task": "Зелёный судья: META BOT зелёный на main",
-      "project": "МГЛ",
-      "owner": "чат ChatGPT",
-      "branch": "lab/remont-main-veil-terraces",
-      "status": "зависла",
-      "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
-      "pr": null,
-      "pr_state": null,
-      "check": "unknown",
-      "check_url": null,
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/245",
-      "taken_at": "2026-11-11 11:21",
-      "last_commit_at": "2026-11-12 14:43",
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
@@ -451,23 +451,6 @@
     },
     {
       "id": 26,
-      "task": "Думай как проверяющий",
-      "project": "МГЛ",
-      "owner": "чат ChatGPT",
-      "branch": "—",
-      "status": "зависла",
-      "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
-      "pr": null,
-      "pr_state": null,
-      "check": "unknown",
-      "check_url": null,
-      "url": "https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md",
-      "taken_at": "2026-11-11 11:26",
-      "last_commit_at": "—",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
-    },
-    {
-      "id": 27,
       "task": "INK · Павший великан — OWNER PASS, эталон 3D-мира МГЛ",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -484,58 +467,92 @@
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
-      "id": 28,
-      "task": "ТОЛКАЧ #220: конфликт устранён [merge](https://github.com/mpaykin1/meta6-lab/commit/fb2cde9aa428959c33a44dd0af6d14dcf73e0ef2); локально verify и 11/11 мутаций PASS, Actions на новом HEAD ожидаются; защищённое слияние только Claude; УСКОРЕНИЕ 1.1–1.3: fail-closed API и таблица FINISH [PR #220](https://github.com/mpaykin1/meta6-lab/pull/220)",
+      "id": 27,
+      "task": "fix(archer): clean ad-free META build and adaptive FPS (replaces #132)",
       "project": "МГЛ",
-      "owner": "чат ChatGPT (УСКОРЕНИЕ, продолжение существующего PR #220)",
-      "branch": "lab/zadachi-conflicts",
+      "owner": "чат ChatGPT: проверяющий, ремонт конфликта",
+      "branch": "lab/archer-meta-adfree-clean-1111",
       "status": "в работе",
       "original_status": "⚠ молчит больше часа",
       "pr": null,
       "pr_state": null,
       "check": "unknown",
       "check_url": null,
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/220",
-      "taken_at": "2026-11-13T08:17:00+00:00",
-      "last_commit_at": "2026-11-13 10:44",
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/255",
+      "taken_at": "2026-11-13 10:20",
+      "last_commit_at": "2026-11-13 10:31",
+      "remaining": "Довести PR до зелёных проверок и слияния"
+    },
+    {
+      "id": 28,
+      "task": "Улучшатель: восстановить PR #260 после расхождения с main; тренировка заблокирована, Кто: улучшатель",
+      "project": "МГЛ",
+      "owner": "чат ChatGPT: проверяющий, ремонт конфликта",
+      "branch": "lab/uluchshatel-preflight-20261111",
+      "status": "в работе",
+      "original_status": "⚠ молчит больше часа",
+      "pr": null,
+      "pr_state": null,
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/260",
+      "taken_at": "2026-11-13 10:20",
+      "last_commit_at": "2026-11-13 10:29",
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 29,
-      "task": "БОТ-ПРОХОДЧИК: B2 — проверка движения героя и вечные ловушки",
+      "task": "storozha: «только Claude» — лишь ядро охраны (убираем тормоза)",
       "project": "МГЛ",
-      "owner": "Кто: проходчик",
-      "branch": "lab/prohodchik-b2-motion-20261111",
+      "owner": "ChatGPT (сам не записал — добавил сторож)",
+      "branch": "claude/storozha-yadro-1113",
       "status": "в работе",
       "original_status": "⚠ молчит больше часа",
       "pr": null,
       "pr_state": null,
       "check": "unknown",
       "check_url": null,
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/258",
-      "taken_at": "2026-11-13 08:20",
-      "last_commit_at": "2026-11-13 10:27",
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/285",
+      "taken_at": "2026-11-13 10:28",
+      "last_commit_at": "2026-11-13 10:28",
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 30,
-      "task": "ТОЛКАЧ #278: [правило уточнено](https://github.com/mpaykin1/meta6-lab/commit/4ae277ab7d7897b43b00109fc170066b5ffa9932); guard shallow-history и quota FAIL; локальный патч + 6 мутаций готовы, защищённая публикация ждёт разрешения",
+      "task": "INK · Павший великан — OWNER PASS, добавить канонический эталон",
       "project": "МГЛ",
-      "owner": "Кто: толкач",
-      "branch": "lab/tolkach-main-first-20261112",
+      "owner": "ChatGPT (сам не записал — добавил сторож)",
+      "branch": "lab/ink-fallen-guardian-reference-20261113",
       "status": "в работе",
       "original_status": "⚠ молчит больше часа",
       "pr": null,
       "pr_state": null,
       "check": "unknown",
       "check_url": null,
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/278",
-      "taken_at": "2026-11-13T08:17:00+00:00",
-      "last_commit_at": "2026-11-13 08:27",
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/284",
+      "taken_at": "2026-11-13 10:26",
+      "last_commit_at": "2026-11-13 10:26",
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 31,
+      "task": "БЕЗ ПАТТЕРНОВ — INK: непериодические пятна + запрет повторяющихся узоров",
+      "project": "МГЛ → МГ",
+      "owner": "ChatGPT",
+      "branch": "lab/bez-patternov-20261113",
+      "status": "в работе",
+      "original_status": "🔨 В РАБОТЕ",
+      "pr": null,
+      "pr_state": null,
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md",
+      "taken_at": "2026-11-13 11:11",
+      "last_commit_at": "—",
+      "remaining": "Довести PR до зелёных проверок и слияния"
+    },
+    {
+      "id": 32,
       "task": "БЕЗ ТОРМОЗОВ: разблокировать STOROZHA и сократить очередь PR",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -552,7 +569,7 @@
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
-      "id": 32,
+      "id": 33,
       "task": "INK · Рецепт мира и шаблон объёмного объекта",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -569,7 +586,7 @@
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
-      "id": 33,
+      "id": 34,
       "task": "БЕЗ ТОРМОЗОВ: обновить очередь после #285, объединить дубли, саморазвитие; этап 1 — прочитаны правила и прогресс, получен снимок 54 открытых PR; новых PR не открывать",
       "project": "МГЛ",
       "owner": "Codex",
@@ -586,7 +603,7 @@
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
-      "id": 34,
+      "id": 35,
       "task": "INK · Тест рецепта — упавший каменный колокол",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -603,7 +620,7 @@
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
-      "id": 35,
+      "id": 36,
       "task": "INK · Анимация «Павшего великана» v2, отдельное превью",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -620,75 +637,24 @@
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
-      "id": 36,
-      "task": "fix(archer): clean ad-free META build and adaptive FPS (replaces #132)",
-      "project": "МГЛ",
-      "owner": "чат ChatGPT: проверяющий, ремонт конфликта",
-      "branch": "lab/archer-meta-adfree-clean-1111",
-      "status": "в работе",
-      "original_status": "🔨 В РАБОТЕ",
-      "pr": null,
-      "pr_state": null,
-      "check": "unknown",
-      "check_url": null,
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/255",
-      "taken_at": "2026-11-13 10:20",
-      "last_commit_at": "2026-11-13 10:31",
-      "remaining": "Довести PR до зелёных проверок и слияния"
-    },
-    {
       "id": 37,
-      "task": "Улучшатель: восстановить PR #260 после расхождения с main; тренировка заблокирована, Кто: улучшатель",
+      "task": "Проверяющий: постоянное развитие",
       "project": "МГЛ",
-      "owner": "чат ChatGPT: проверяющий, ремонт конфликта",
-      "branch": "lab/uluchshatel-preflight-20261111",
-      "status": "в работе",
-      "original_status": "🔨 В РАБОТЕ",
+      "owner": "чат ChatGPT: журналы #255/#260 и совместимость проверок",
+      "branch": "lab/kak-proveryayushchij-traps",
+      "status": "зависла",
+      "original_status": "🙋 НУЖЕН CLAUDE: подпись на изменение существующих проверок",
       "pr": null,
       "pr_state": null,
       "check": "unknown",
       "check_url": null,
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/260",
-      "taken_at": "2026-11-13 10:20",
-      "last_commit_at": "2026-11-13 10:29",
-      "remaining": "Довести PR до зелёных проверок и слияния"
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/247",
+      "taken_at": "2026-11-13 08:28",
+      "last_commit_at": "2026-11-13 10:43",
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 38,
-      "task": "storozha: «только Claude» — лишь ядро охраны (убираем тормоза)",
-      "project": "МГЛ",
-      "owner": "ChatGPT (сам не записал — добавил сторож)",
-      "branch": "claude/storozha-yadro-1113",
-      "status": "в работе",
-      "original_status": "🔨 В РАБОТЕ",
-      "pr": null,
-      "pr_state": null,
-      "check": "unknown",
-      "check_url": null,
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/285",
-      "taken_at": "2026-11-13 10:28",
-      "last_commit_at": "2026-11-13 10:28",
-      "remaining": "Довести PR до зелёных проверок и слияния"
-    },
-    {
-      "id": 39,
-      "task": "INK · Павший великан — OWNER PASS, добавить канонический эталон",
-      "project": "МГЛ",
-      "owner": "ChatGPT (сам не записал — добавил сторож)",
-      "branch": "lab/ink-fallen-guardian-reference-20261113",
-      "status": "в работе",
-      "original_status": "🔨 В РАБОТЕ",
-      "pr": null,
-      "pr_state": null,
-      "check": "unknown",
-      "check_url": null,
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/284",
-      "taken_at": "2026-11-13 10:26",
-      "last_commit_at": "2026-11-13 10:26",
-      "remaining": "Довести PR до зелёных проверок и слияния"
-    },
-    {
-      "id": 40,
       "task": "Ревизор META GAMES: продолжение круга и проверка незавершённых улучшений; [#282](https://github.com/mpaykin1/meta6-lab/pull/282), [Actions](https://github.com/mpaykin1/meta6-lab/actions/runs/43392251668), интервалы и GraphQL pin не подтверждены",
       "project": "МГЛ",
       "owner": "ревизор",
@@ -705,7 +671,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 41,
+      "id": 39,
       "task": "SEO-каталог без рекламы: канонический URL, структурированные данные, страницы 17 игр, Sitemap — [SEO-код и 17 страниц обновлены](https://github.com/mpaykin1/meta6-lab/commit/4b1b25fd5f0af69674e5afa0f9aa78bad0b7d7f5)",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -722,7 +688,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 42,
+      "id": 40,
       "task": "Исправить красные проверки PR #234 каталога игр",
       "project": "МГЛ",
       "owner": "MG-строитель-4",
@@ -739,7 +705,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 43,
+      "id": 41,
       "task": "ТРИ СТОРОЖА: [код и мутации в #277](https://github.com/mpaykin1/meta6-lab/pull/277); [зелёные ловушки](https://github.com/mpaykin1/meta6-lab/actions/runs/43238005678); [main синхронизирован 46f15a2](https://github.com/mpaykin1/meta6-lab/commit/46f15a27081ae3c3d01e3a458ba679dd46f83a4b); нужны принятие Claude, токен и обязательная квота",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -756,7 +722,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 44,
+      "id": 42,
       "task": "PR #134: перенести оригинал ABYSS GLOW в reference без изменений",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -773,7 +739,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 45,
+      "id": 43,
       "task": "Довести PR #133: эталон Asqura",
       "project": "МГЛ",
       "owner": "MG-строитель-4",
@@ -790,7 +756,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 46,
+      "id": 44,
       "task": "Astra: заторы МГЛ",
       "project": "МГЛ",
       "owner": "Astra",
@@ -807,7 +773,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 47,
+      "id": 45,
       "task": "Проверить PR #218 и ограничения безопасного слияния",
       "project": "МГЛ",
       "owner": "MG-строитель-4",
@@ -824,7 +790,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 48,
+      "id": 46,
       "task": "Доводчик PR: 15 минут, безопасное обновление веток, журналы без конфликтов, порог 1 час",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -841,7 +807,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 49,
+      "id": 47,
       "task": "PR #203: устранить конфликт с main",
       "project": "МГЛ",
       "owner": "MG-строитель-3",
@@ -858,7 +824,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 50,
+      "id": 48,
       "task": "ТОЛКАЧ: #87 — [META GAMES guard FAIL: историческая .github/protected](https://github.com/mpaykin1/meta6-lab/actions/runs/42975697783/job/130374149800); [эскалировано Claude](https://github.com/mpaykin1/meta6-lab/commit/51c43718a0a25425b39f82e901cd17fd88cc2bbc), не сливать",
       "project": "МГЛ",
       "owner": "толкач",
@@ -875,7 +841,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 51,
+      "id": 49,
       "task": "Исправить changed-games PR #200",
       "project": "МГЛ",
       "owner": "MG-строитель-2",
@@ -892,7 +858,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 52,
+      "id": 50,
       "task": "PR #202: чистый эталон Лучник в тумане без генератора библиотеки",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -909,7 +875,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 53,
+      "id": 51,
       "task": "PR #189: очистить эталон Бесконечные долины для безопасного слияния",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -926,7 +892,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 54,
+      "id": 52,
       "task": "PR #207: чистый эталон Король Пепла и сохранение авторских файлов",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -943,7 +909,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 55,
+      "id": 53,
       "task": "Разобрать PR #210 по очереди слияния",
       "project": "МГЛ",
       "owner": "MG-строитель-4",
@@ -960,7 +926,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 56,
+      "id": 54,
       "task": "PR #234: исправить красные проверки каталога без рекламы",
       "project": "МГЛ",
       "owner": "MG-ремонтник",
@@ -977,7 +943,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 57,
+      "id": 55,
       "task": "Улучшить музыку всех 17 игр каталога Claude без рекламы",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -994,7 +960,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 58,
+      "id": 56,
       "task": "Разные заставки по реальной графике всех 17 игр Claude",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -1011,7 +977,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 59,
+      "id": 57,
       "task": "Каталог: новое вступление, без имени ИИ, интерактивный лор 14 миров",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -1028,7 +994,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 60,
+      "id": 58,
       "task": "Вывести игру про дерево и зерно на первое место в каталоге Claude",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -1045,7 +1011,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 61,
+      "id": 59,
       "task": "Исправить красные проверки PR #234",
       "project": "МГЛ",
       "owner": "MG-ремонтник",
@@ -1062,13 +1028,13 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 62,
+      "id": 60,
       "task": "Каталог игр Claude без рекламы",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/claude-adfree-catalog-1110",
       "status": "зависла",
-      "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
+      "original_status": "💤 ЗАБРОШЕНО 3 дн — продолжить или закрыть",
       "pr": null,
       "pr_state": null,
       "check": "unknown",
@@ -1079,7 +1045,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 63,
+      "id": 61,
       "task": "Эталон «Затонувший город»: исходный ZIP, 3D-витрина и каталог ассетов",
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
@@ -1096,7 +1062,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 64,
+      "id": 62,
       "task": "Разблокировать проверки PR #3 Twilight Island",
       "project": "МГЛ",
       "owner": "MG-строитель-2",
@@ -1113,7 +1079,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 65,
+      "id": 63,
       "task": "lab: Twilight Island — бот проходит весь остров",
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
@@ -1130,7 +1096,24 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 66,
+      "id": 64,
+      "task": "Зелёный судья: META BOT зелёный на main",
+      "project": "МГЛ",
+      "owner": "чат ChatGPT",
+      "branch": "lab/remont-main-veil-terraces",
+      "status": "зависла",
+      "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
+      "pr": null,
+      "pr_state": null,
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/245",
+      "taken_at": "2026-11-11 11:21",
+      "last_commit_at": "2026-11-12 14:43",
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+    },
+    {
+      "id": 65,
       "task": "Неподвижный экран при джойстике — все игры МГЛ",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -1147,7 +1130,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 67,
+      "id": 66,
       "task": "ABYSS GLOW — второй эталон графики и анимации",
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
@@ -1164,7 +1147,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 68,
+      "id": 67,
       "task": "Довести PR #133: эталон графики Asqura — ТОЛКАЧ: [STOROZHA FAIL: эталон только добавлением](https://github.com/mpaykin1/meta6-lab/actions/runs/43239240778/job/131674186810), [передано Claude](https://github.com/mpaykin1/meta6-lab/commit/be18317412852ca804d68c94d8b85670ad02fc24)",
       "project": "МГЛ",
       "owner": "толкач",
@@ -1181,7 +1164,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 69,
+      "id": 68,
       "task": "PR #133: перенести ASQURA Office в reference без изменений",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -1198,7 +1181,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 70,
+      "id": 69,
       "task": "ASQURA Office — первый эталон графики и анимации",
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
@@ -1215,7 +1198,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 71,
+      "id": 70,
       "task": "Геймдизайн META GAMES: пять принципов IM1–IM5 — ТОЛКАЧ: [конфликт разрешён, CI ожидается](https://github.com/mpaykin1/meta6-lab/commit/c6fa9564677704778f1b2ccc4d9b9bad0d786cb8)",
       "project": "МГЛ",
       "owner": "Кто: толкач (захват 2026-11-12 10:17 UTC; прежнее: ChatGPT (сам не записал — добавил сторож))",
@@ -1232,7 +1215,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 72,
+      "id": 71,
       "task": "Продолжение МГЛ: зафиксировать очередь PR и подтверждённые слияния — ТОЛКАЧ: [конфликт снят; CI не завершён](https://github.com/mpaykin1/meta6-lab/commit/4f07f43cd8b6d4a5ebba9d3466aa3098aee8833c)",
       "project": "МГЛ",
       "owner": "Кто: толкач (захват 2026-11-12T10:26 UTC; прежде ChatGPT (сам не записал — добавил сторож))",
@@ -1249,7 +1232,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 73,
+      "id": 72,
       "task": "PR #218: синхронизировать библиотеку R1 с main, проверить защищённый workflow",
       "project": "МГЛ",
       "owner": "MG-строитель-4",
@@ -1266,7 +1249,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 74,
+      "id": 73,
       "task": "РЕМОНТ R1: пересборка библиотеки и исключение копий",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -1283,7 +1266,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 75,
+      "id": 74,
       "task": "Исправить красные changed-games и bot PR #132",
       "project": "МГЛ",
       "owner": "MG-ремонтник",
@@ -1300,7 +1283,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 76,
+      "id": 75,
       "task": "Исправить мобильное застревание Лучника в тумане PR #132",
       "project": "МГЛ",
       "owner": "MG-ремонтник",
@@ -1317,7 +1300,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 77,
+      "id": 76,
       "task": "fix(meta): Archer in the Fog — no ads, local saves and one free revival",
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
@@ -1331,6 +1314,23 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/132",
       "taken_at": "2026-11-08 14:47",
       "last_commit_at": "2026-11-11 13:52",
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+    },
+    {
+      "id": 77,
+      "task": "Думай как проверяющий",
+      "project": "МГЛ",
+      "owner": "чат ChatGPT",
+      "branch": "—",
+      "status": "зависла",
+      "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
+      "pr": null,
+      "pr_state": null,
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md",
+      "taken_at": "2026-11-11 11:26",
+      "last_commit_at": "—",
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
@@ -3168,23 +3168,44 @@
       "problem": "STATUS скрывал 7 зелёных FINISH из-за отсутствия progress.json и считал изменение времени новыми фактами",
       "detection": "[таблица FINISH](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/FINISH.md)",
       "trap": "`scripts/status/selftest.mjs`: false-green-without-run-link, hourly-gate-removed, timestamp-trigger-misreported-as-fact; [патч](https://github.com/mpaykin1/meta6-lab/commit/b4254e356b689d023afdcf2d8a69379345c42add)"
+    },
+    {
+      "id": 1108,
+      "date": "13.11.2026",
+      "problem": "sliyanie-status создавал main-коммит из-за изменения времени при неизменных состояниях PR; API 403 подменял сведения словом «нет данных»",
+      "detection": "[workflow](https://github.com/mpaykin1/meta6-lab/blob/main/.github/workflows/sliyanie-status.yml)",
+      "trap": "`scripts/lab/test-sliyanie-status.py`: ловушка time-only-commit и 3 прежние; [патч](https://github.com/mpaykin1/meta6-lab/commit/1f0e1aa64edad1d5d70882818c4824f5c51235f1)"
+    },
+    {
+      "id": 1109,
+      "date": "13.11.2026",
+      "problem": "investigation-snapshot писал generated_at при прежних фактах и мог публиковать неполную выборку при исчерпании лимита GitHub API",
+      "detection": "[workflow](https://github.com/mpaykin1/meta6-lab/blob/main/.github/workflows/investigation-snapshot.yml)",
+      "trap": "`scripts/investigation/mutate-publish.mjs`: почасовой лимит, неполный API, время ≠ факт; [патч](https://github.com/mpaykin1/meta6-lab/commit/50db5add34a89257bb2234bdf7f038e786de17c5)"
+    },
+    {
+      "id": 1110,
+      "date": "13.11.2026",
+      "problem": "MG Dispatcher запрашивал PR из закрытой исторической очереди и падал на 403 GitHub API quota, теряя возможность публиковать исправную очередь",
+      "detection": "[красный run 43410481729](https://github.com/mpaykin1/meta6-lab/actions/runs/43410481729)",
+      "trap": "`scripts/dispetcher/mutate-quota.mjs`: 3 мутации на 403/429 и ошибочную авторизацию; [патч](https://github.com/mpaykin1/meta6-lab/commit/03836dddab7a05986b00de2f9b92dec9924c93cf)"
     }
   ],
   "warnings": [
     "API недоступен: repos/mpaykin1/meta6-lab/pulls?state=all&per_page=100&page=1 (1)",
     "API недоступен: repos/mpaykin1/meta6/pulls?state=all&per_page=100&page=1 (1)",
-    "API недоступен: repos/mpaykin1/meta6-lab/pulls/247 (1)",
     "API недоступен: repos/mpaykin1/meta6-lab/pulls/254 (1)",
     "API недоступен: repos/mpaykin1/meta6-lab/pulls/282 (1)",
+    "API недоступен: repos/mpaykin1/meta6-lab/pulls/220 (1)",
+    "API недоступен: repos/mpaykin1/meta6-lab/pulls/247 (1)",
     "API недоступен: repos/mpaykin1/meta6-lab/pulls/258 (1)",
+    "API недоступен: repos/mpaykin1/meta6-lab/pulls/278 (1)",
     "API недоступен: repos/mpaykin1/meta6-lab/pulls/280 (1)",
     "API недоступен: repos/mpaykin1/meta6-lab/pulls/242 (1)",
     "API недоступен: repos/mpaykin1/meta6-lab/pulls/261 (1)",
     "API недоступен: repos/mpaykin1/meta6-lab/pulls/264 (1)",
-    "API недоступен: repos/mpaykin1/meta6-lab/pulls/245 (1)",
     "API недоступен: repos/mpaykin1/meta6-lab/pulls/272 (1)",
     "API недоступен: repos/mpaykin1/meta6-lab/pulls/275 (1)",
-    "API недоступен: repos/mpaykin1/meta6-lab/pulls/276 (1)",
-    "API недоступен: repos/mpaykin1/meta6-lab/pulls/273 (1)"
+    "API недоступен: repos/mpaykin1/meta6-lab/pulls/276 (1)"
   ]
 }

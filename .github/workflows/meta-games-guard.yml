@@ -1,7 +1,4 @@
 name: META GAMES guard
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 # Защищает принятые оригиналы и направление проекта (rules/09-platforma/META_GAMES_PLATFORM.md).
 # PR: красный, если тронут защищённый файл. Push в main: защищённые файлы автоматически возвращаются.
 on:

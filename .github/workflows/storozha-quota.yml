@@ -13,7 +13,7 @@ permissions:
   pull-requests: read
 concurrency:
   group: storozha-pr-quota-${{ github.event.pull_request.number || github.run_id }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: true
 jobs:
   storozha-quota:
     runs-on: ubuntu-latest

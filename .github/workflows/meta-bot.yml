@@ -1,7 +1,4 @@
 name: META BOT
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 # Каркас Claude (защищён сторожем meta-games-guard). Бот-игрок проходит все уровни игр из games/*.
 # Цель: rules/09-platforma/META_GAMES_PLATFORM.md §8. Контракт: scripts/meta-bot/CONTRACT.md.
 on:

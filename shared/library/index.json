@@ -89,7 +89,7 @@
       "manifest": "shared/library/skin-trainer.json",
       "assets": 3,
       "file_assets": 0,
-      "solutions": 11
+      "solutions": 12
     },
     {
       "game": "sumerki-i-pepel-2",
@@ -103896,18 +103896,18 @@
       ]
     },
     {
-      "id": "15966a15fbbe434a48556793",
+      "id": "1d70ea74b4ae9a33e0ac9ed8",
       "game": "skin-trainer",
       "kind": "solution",
-      "name": "loop",
+      "name": "inline-script@3719",
       "purpose": [
-        "gameplay"
+        "game-runtime"
       ],
       "source_path": "games/skin-trainer/index.html",
-      "sha256": "8eca3b74a29500b9b0039f8da964bd4242324d92dfd77ba20dcfa7c0a5a9dc11",
+      "sha256": "dd88302264bdbfd19ac90e7a8a8b48d92c2b758c0f351361c26ea28297f8d5d5",
       "lines": [
-        257,
-        320
+        58,
+        354
       ]
     },
     {
@@ -103926,21 +103926,6 @@
       ]
     },
     {
-      "id": "66f6cbbf80e97295aad22a6a",
-      "game": "skin-trainer",
-      "kind": "solution",
-      "name": "inline-script@3719",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/skin-trainer/index.html",
-      "sha256": "74a49284d374fbb1a8c90be56f067d750cf5aa8f704614bf5240a4d07b345e36",
-      "lines": [
-        58,
-        343
-      ]
-    },
-    {
       "id": "6b6b05e9fd90c2b8d8f11e9e",
       "game": "skin-trainer",
       "kind": "solution",
@@ -103956,6 +103941,21 @@
       ]
     },
     {
+      "id": "7f018e06b948d27adf4e0527",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "loop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "8eca3b74a29500b9b0039f8da964bd4242324d92dfd77ba20dcfa7c0a5a9dc11",
+      "lines": [
+        268,
+        331
+      ]
+    },
+    {
       "id": "93ff821df089300e790c1b0f",
       "game": "skin-trainer",
       "kind": "solution",
@@ -103968,6 +103968,21 @@
       "lines": [
         189,
         191
+      ]
+    },
+    {
+      "id": "96873a9157a22fbe49b8381e",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "resetMovementInput",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "4d5ac9a313a3039dfdee150629bf215fd587e48e3edf7d6db139546efbac55ac",
+      "lines": [
+        251,
+        255
       ]
     },
     {

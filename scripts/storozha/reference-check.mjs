@@ -3,12 +3,17 @@ import {execFileSync} from 'node:child_process';
 import {referenceGate, reconcileSection} from './core.mjs';
 import {referenceSnapshot} from './reference-snapshot.mjs';
 import {updateReferenceQueue} from './reference-queue.mjs';
+import {verifyReferenceHead} from './reference-head.mjs';
 
 const repo = process.env.STOROZHA_REPO;
 const token = process.env.STOROZHA_TOKEN;
 const number = Number(process.env.STOROZHA_PR_NUMBER);
 if (!repo || !token || !Number.isInteger(number) || number < 1) throw Error('Missing PR guard inputs');
 const {pr, files} = await referenceSnapshot(repo, token, number);
+if (process.env.STOROZHA_READ_ONLY === '1') {
+  const checkoutHead = execFileSync('git', ['rev-parse', 'HEAD'], {encoding: 'utf8'}).trim();
+  verifyReferenceHead(pr, checkoutHead);
+}
 // The checkout is trusted main; only read old tree metadata.
 const stdout = execFileSync('git', ['ls-tree', '-r', '--name-only',
   pr.base.sha, 'reference/'], {encoding: 'utf8', maxBuffer: 8 * 1024 * 1024});

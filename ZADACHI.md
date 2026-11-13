@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | INK · Тест рецепта — упавший каменный колокол | МГЛ | чат ChatGPT | `lab/ink-stone-bell-20261113` | — | 2026-11-13 10:44 | — |
 | взято | БЕЗ ТОРМОЗОВ: обновить очередь после #285, объединить дубли, саморазвитие; этап 1 — прочитаны правила и прогресс, получен снимок 54 открытых PR; новых PR не открывать | МГЛ | Codex | — | — | 2026-11-13 10:47 | — |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | PR #242: исправить красные проверки SEO-каталога | МГЛ | чат ChatGPT | `lab/seo-claude-adfree-1111` | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | 2026-11-13 04:14 | 2026-11-13 04:30 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | ЭТАЛОНЫ В БИБЛИОТЕКУ — усилен поиск исходных систем: SHA-256 и диапазон строк, [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261), [SHA 688dd7c6df1ffe3a591fb417946bb6f0c7041ca5](https://github.com/mpaykin1/meta6-lab/commit/688dd7c6df1ffe3a591fb417946bb6f0c7041ca5), [Library Machine PASS #43365245872](https://github.com/mpaykin1/meta6-lab/actions/runs/43365245872) 9/9, [KONTUR PASS #43365245842](https://github.com/mpaykin1/meta6-lab/actions/runs/43365245842), [STOROZHA FAIL #43365245850](https://github.com/mpaykin1/meta6-lab/actions/runs/43365245850); НУЖЕН CLAUDE; 22 → 22 неполных, MCP 0 | МГЛ | Кто: библиотека | `lab/biblioteka-contract-20261111` | [#261](https://github.com/mpaykin1/meta6-lab/pull/261) | 2026-11-11 14:27 | 2026-11-13 04:26 |

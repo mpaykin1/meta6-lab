@@ -7,7 +7,7 @@ function assertJournalPreserved(parents, merged) {
   const rows = text => new Set(text.split(/\r?\n/)
     .filter(line => /^\|\s*(?:\d+|[A-Z][\w-]*)\s*\|/.test(line)));
   const actual = rows(merged);
-  for (const parent of parents.slice(0, 1)) {
+  for (const parent of parents) {
     for (const row of rows(parent)) assert.ok(actual.has(row), 'Lost journal row: ' + row);
   }
 }

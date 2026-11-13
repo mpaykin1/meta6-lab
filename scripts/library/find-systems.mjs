@@ -6,6 +6,10 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const EXCLUDED = /(?:^|[-\/])copy$|(?:^|\/)skin-trainer(?:\/|$)/i;
 const THIRD_PARTY = /(?:^|\/)(?:node_modules|vendor|vendors|third[-_]party|lib|libs)(?:\/|$)|(?:^|\/)(?:three(?:\.module)?(?:\.min)?|dat\.gui(?:\.min)?|stats(?:\.min)?)\.js$|\.min\.(?:js|mjs)$/i;
 const isThirdParty = sourcePath => typeof sourcePath === 'string' && THIRD_PARTY.test(sourcePath);
+const hasProvenance = entry => typeof entry.sha256 === 'string' && /^[a-f\d]{64}$/i.test(entry.sha256) &&
+  Array.isArray(entry.lines) && entry.lines.length === 2 &&
+  entry.lines.every(line => Number.isSafeInteger(line) && line > 0) &&
+  entry.lines[0] <= entry.lines[1];
 const INTENTS = [
   {tag: 'camera', match: /камер|третьего лица|от третьего лица|third.person|camera|follow|orbit/i},
   {tag: 'controls', match: /управлен|движени|джойстик|ввод|controls?|input|joystick|keyboard/i},
@@ -41,7 +45,8 @@ export function rankSystems(index, query, {limit = 20, repositoryUrl, ref = 'mai
     !game.excluded && !excludes(game.game, excluded)).map(game => game.game));
   const scored = index.entries.map(entry => {
     if (entry.kind !== 'solution' || isThirdParty(entry.source_path) || excludes(entry.game, excluded) ||
-        (index.games && !eligible.has(entry.game)) || !safePath(entry.source_path)) return null;
+        (index.games && !eligible.has(entry.game)) || !safePath(entry.source_path) ||
+        !hasProvenance(entry)) return null;
     const tags = Array.isArray(entry.purpose) ? entry.purpose : [];
     const haystack = lower([entry.name, entry.source_path, ...tags].join(' '));
     const score = requested.reduce((sum, tag) =>

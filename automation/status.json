@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-13T15:29:24.291Z",
+  "generated_at": "2026-11-13T16:34:41.853Z",
   "sha": {
-    "lab": "50a025a7351a89c796c00cb5bd96b025844f83df",
+    "lab": "7b20e345b7f28382706188990f863611acf156a7",
     "mg": "1bea203fb63d7c27c29a5643e2f38e4554a658c1"
   },
   "checked": {
@@ -170,13 +170,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43418238664",
-        "step": "Run node scripts/dispetcher/run.mjs"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -346,9 +340,14 @@
   "pr": {
     "open": 50,
     "conflicts": "нет данных",
-    "merged": 31,
+    "merged": 32,
     "closed": 66,
     "mergedItems": [
+      {
+        "number": 295,
+        "title": "Остров последнего аптекаря · Глава I «Тихолист» (демо + этап",
+        "sha": "b158e1dd42db709100c79ceb5ea6745db53aa2bd"
+      },
       {
         "number": 293,
         "title": "ASSET CHECK 2.2: «не хуже эталона» + эталон «Туманные шпили»",
@@ -668,7 +667,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1929,
+      "count": 1939,
       "folders": "нет данных"
     },
     "mg": {
@@ -696,6 +695,11 @@
       "name": "broken-city-copy",
       "bot": "нет данных",
       "storefront": "да"
+    },
+    {
+      "name": "ostrov-aptekarya",
+      "bot": "нет данных",
+      "storefront": "нет"
     },
     {
       "name": "rainbow-acceleration",

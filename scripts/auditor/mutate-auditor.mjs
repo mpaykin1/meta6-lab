@@ -148,3 +148,23 @@ for (const [name, code] of tableMutants) {
 }
 process.stdout.write('TASK TABLE MUTATIONS PASS: 4/4\n');
 
+function checkJournal(text) {
+  for (const marker of ['AUDITOR-TABLE-20261113', 'AUDITOR-JOURNAL-20261113']) {
+    const row = text.split('\n').find(line => line.includes(marker));
+    assert(row && /^\|\s*\d+\s*\|/.test(row), 'journal requires numeric ID: ' + marker);
+    assert(row.split('|').at(-2).includes('scripts/auditor/mutate-auditor.mjs'),
+      'journal requires concrete trap path in last column: ' + marker);
+  }
+}
+const journal = readFileSync(resolve(root, 'OSHIBKI.md'), 'utf8');
+checkJournal(journal);
+for (const [name, text] of [
+  ['nonnumeric-journal-id', journal.replace(/^(\| )\d+( \|.*AUDITOR-TABLE-20261113.*)$/m,
+    '$1AUDITOR-TABLE$2')],
+  ['missing-full-trap-path', journal.replaceAll('scripts/auditor/mutate-auditor.mjs', 'mutate-auditor.mjs')],
+  ['deception-journal-placeholder', journal.replace('AUDITOR-JOURNAL-20261113', 'unrelated-entry')]
+]) {
+  assert.notEqual(text, journal, 'journal mutation not applied: ' + name);
+  assert.throws(() => checkJournal(text), undefined, 'escaped journal mutant: ' + name);
+  process.stdout.write('TRAP journal ' + name + ' PASS\n');
+}

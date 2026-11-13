@@ -1401,40 +1401,6 @@ const SHPILI_PLUS=(()=>{
      u.rotation.z=.22*Math.sin(t*1.04-i*.31)});
   });
  }
- // Мост: настил, подвески и обе опорные аркады, чтобы это была переправа.
- {
-  const root=own['gate-bridge'].group,deck=new T.Group(),planks=[];root.add(deck);
-  for(let i=0;i<34;i++){
-   const x=(i-16.5)*.66,p=new T.Group();deck.add(p);
-   p.position.set(x,-.4*Math.sin(i*Math.PI/33),1.7);
-   shaped(p,[[-.31,-.39],[.31,-.48],[.37,.17],
-      [.2,.38],[-.36,.28]],i%5?0x66869a:0xb7a3ad,.5);
-   planks.push(p);
-  }
-  for(const side of [-1,1]){
-   for(let i=0;i<29;i++){
-    const x=(i-14)*.75,h=3.5+3*(1-(x/11)**2);
-    beam(deck,[x,.15,side*1.3],[x,h,side*1.3],.04,
-      i%3?0x759eaf:0xf2b9c9,.87);
-    if(i<28){
-     const nx=x+.75,nh=3.5+3*(1-(nx/11)**2);
-     beam(deck,[x,h,side*1.3],[nx,nh,side*1.3],.08,0xa7bcca,.88);
-    }
-   }
-   const buttress=new T.Group();buttress.position.set(side*11,0,.8);deck.add(buttress);
-   shaped(buttress,[[-.8,-2],[.88,-2],[1.27,4.3],
-      [.14,6.1],[-1.15,3.5]],0x385e78,.3);
-   for(let i=0;i<6;i++)beam(buttress,[-.6,i*.76,.8],
-    [.75,i*.76,.8],.047,0xc5becd,.82);
-  }
-  enhance('gate-bridge',t=>{
-   deck.rotation.z=.015*Math.sin(t*.7);
-   planks.forEach((plank,i)=>{
-    plank.position.y=-.4*Math.sin(i*Math.PI/33)+.27*Math.sin(t*.94-i*.22);
-    plank.rotation.z=.055*Math.sin(t*.85-i*.2);
-   });
-  });
- }
  // Хранитель: капюшон, лицо, плащ, два крыла, посох и подвижные суставы.
  {
   const root=own['dawn-sentinel'].group,guardian=new T.Group();root.add(guardian);
@@ -1499,37 +1465,6 @@ const SHPILI_PLUS=(()=>{
    seed.rotation.z=.07*Math.sin(t*.68);seed.position.y=.22*Math.sin(t*.94);
    leaves.forEach(({leaf,sgn})=>leaf.rotation.y=sgn*(.2+.24*Math.sin(t*1.1)));
    roots.forEach((v,i)=>v.rotation.z=.09*Math.sin(t*1.1-i*.37));
-  });
- }
- // Мачта — реальные реи и разорванные паруса с живыми концами.
- {
-  const root=own['shattered-mast'].group,rig=new T.Group();root.add(rig);
-  rig.position.set(0,2,2.3);const sails=[];
-  for(let i=0;i<3;i++){
-   const y=i*8,sgn=i%2?1:-1,sail=new T.Group();
-   sail.position.set(i*.45-.5,y,0);rig.add(sail);
-   beam(sail,[-5,0,0],[5,.15,0],.1,0xc0d2dd,.88);
-   shaped(sail,[[0,.2],[sgn*5,.3],[sgn*4.25,-1.4],
-      [sgn*3.2,-3.1],[sgn*2.45,-2.45],[sgn*2,-4.8],
-      [sgn*.95,-4.15],[sgn*.45,-5.9],[0,-4.1]],
-      i%2?0x6c5476:0x496e82,.7,.83);
-   for(let j=0;j<6;j++)beam(sail,[0,0,.8],
-      [sgn*(.8+j*.55),-3-j*.3,.8],.03,0xb4e6ed,.67);
-   sails.push(sail);
-  }
-  for(const sgn of [-1,1]){
-   beam(rig,[0,27,0],[sgn*11,-1,0],.045,0xaccbda,.86);
-   beam(rig,[sgn*11,-1,0],[sgn*3.4,15,0],.03,0xe3a9c7,.67);
-  }
-  const flag=shaped(rig,[[0,28],[1.4,28.3],[2.8,27.4],
-    [1.3,27],[1.8,26.6],[.3,26.1]],0xf3a8c9,1);
-  enhance('shattered-mast',t=>{
-   rig.rotation.z=-.04+.028*Math.sin(t*.41);
-   flag.rotation.z=.13*Math.sin(t*.92);
-   sails.forEach((sail,i)=>{
-    sail.rotation.y=.09*Math.sin(t*.88-i*.43);
-    sail.rotation.z=.035*Math.sin(t*.57-i*.51);
-   });
   });
  }
  // Грозовой фронт с асимметричными краями и ветвящимися длинными разрядами.

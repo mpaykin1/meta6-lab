@@ -11,6 +11,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MUTANTS = [
+    ("kinds/htmlpack_harness.mjs", "const candidateRoute='/preview/asset-check/'", "const candidateRoute='/flattened/'"),
+    ("kinds/htmlpack_harness.mjs", "[candidateRoute]:cand", "'/candidate.html':cand"),
+    ("kinds/htmlpack_harness.mjs", "writeFileSync(cand,instrumentIsolation(readFileSync(packPath,'utf8')),'utf8');", "writeFileSync(cand,instrumentIsolation(readFileSync(packPath,'utf8')).replaceAll('../../../games/', '/games/'),'utf8');"),
     ("kinds/htmlpack_harness.mjs", "if(id==='petals')explode();", "if(id==='petals')void 0;"),
     ("kinds/htmlpack_harness.mjs", "waterMat.uniforms.__acBokeh.value=0", "waterMat.uniforms.__acBokeh.value=1"),
     ("kinds/htmlpack_harness.mjs", "for(const o of instancePart?[]:objects)", "for(const o of objects)"),

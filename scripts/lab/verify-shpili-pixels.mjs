@@ -32,3 +32,22 @@ if(clean.motion!==0||deceptive.motion!==0||deceptive.detail!==0||translated.moti
  throw Error('background/translation promoted to quality: '+JSON.stringify({clean,deceptive,translated}));
 if(deceptive.isolated<=.1||deceptive.isolated>=.5)throw Error('wrong object mask area');
 console.log('object-pixel traps PASS');
+
+// Exercise the actual game's resource-root expression on main, preview and local HTTP.
+const {readFileSync}=await import('node:fs');
+const {runInNewContext}=await import('node:vm');
+const gameFile=new URL('../../asset-packs/incoming/tumannye-shpili-plus/index.html',import.meta.url);
+const source=readFileSync(gameFile,'utf8');
+const expression=source.match(/const assetRoot=([\s\S]*?);\nconst THREE=/)?.[1];
+if(!expression)throw Error('shared asset root expression absent');
+for(const [pathname,expected] of [
+ ['/meta6-lab/asset-packs/incoming/pack/index.html','/meta6-lab/'],
+ ['/meta6-lab/preview/my-branch/asset-packs/incoming/pack/index.html','/meta6-lab/'],
+ ['/preview/asset-check/asset-packs/incoming/pack/index.html','/'],
+]){
+ const moduleURL='https://example.invalid'+pathname;
+ const actual=runInNewContext(expression.replaceAll('import.meta.url','moduleURL'),
+   {URL,location:{pathname},moduleURL});
+ if(actual.pathname!==expected)throw Error('preview dependency is outside published root: '+actual.pathname);
+}
+console.log('preview dependency paths PASS');

@@ -2,7 +2,7 @@
 // node htmlpack_harness.mjs <reference/index.html> <candidate/index.html>
 import {chromium} from 'playwright-core';
 import {existsSync, readFileSync, writeFileSync, mkdtempSync, rmSync, mkdirSync} from 'node:fs';
-import {resolve, join, dirname, extname, sep} from 'node:path';
+import {resolve, join, dirname, extname, sep, relative} from 'node:path';
 import {createServer} from 'node:http';
 import {fileURLToPath} from 'node:url';
 import {tmpdir} from 'node:os';
@@ -13,6 +13,7 @@ import {features} from './htmlpack_pixels.mjs';
 const [refPath, packPath] = process.argv.slice(2);
 const repoRoot=resolve(dirname(fileURLToPath(import.meta.url)),'../../..');
 let runtimeOrigin='';
+const candidateRoute='/preview/asset-check/'+relative(repoRoot,resolve(packPath||'.')).split(sep).join('/');
 const CAMERA_TOLERANCE=3.5;
 const result = {ok: false, reference: null, candidate: null};
 const chrome = [process.env.CHROME_BIN, '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser'].find(p => p && existsSync(p));
@@ -218,7 +219,7 @@ async function measure(browser,file){
  page.on('pageerror',e=>report.errors.push('pageerror: '+e.message));
  page.on('console',e=>{if(e.type()==='error')report.errors.push('console: '+e.text());});
  try{
-  await page.goto(runtimeOrigin+"/"+file.split(sep).at(-1),{waitUntil:'domcontentloaded',timeout:30000});
+  await page.goto(runtimeOrigin+(file.endsWith('candidate.html')?candidateRoute:'/reference.html'),{waitUntil:'domcontentloaded',timeout:30000});
   await page.waitForFunction(()=>window.__PACK__?.items?.length>0&&!!window.__STATE__&&
     typeof window.__ISOLATE__==='function',{timeout:30000});
   const ids=await page.evaluate(()=>window.__PACK__.items.map(o=>o.id));
@@ -324,13 +325,14 @@ try {
   try {
     const ref=join(temp,'reference.html'),cand=join(temp,'candidate.html');
     writeFileSync(ref,instrumentIsolation(readFileSync(refPath,'utf8')),'utf8');
-    writeFileSync(cand,instrumentIsolation(readFileSync(packPath,'utf8'))
-      .replaceAll('../../../games/', '/games/'),'utf8');
+    writeFileSync(cand,instrumentIsolation(readFileSync(packPath,'utf8')),'utf8');
     const server=createServer((request,response)=>{
       try{
         const pathname=decodeURIComponent(new URL(request.url,'http://localhost').pathname);
-        const runtime={'/reference.html':ref,'/candidate.html':cand};
-        const file=runtime[pathname]||resolve(repoRoot,'.'+pathname);
+        const runtime={'/reference.html':ref,[candidateRoute]:cand};
+        const resource=pathname.startsWith('/preview/asset-check/asset-packs/')
+          ?pathname.slice('/preview/asset-check'.length):pathname;
+        const file=runtime[pathname]||resolve(repoRoot,'.'+resource);
         if(!runtime[pathname]&&!file.startsWith(repoRoot+sep))throw Error('outside repository');
         response.setHeader('Content-Type',extname(file)==='.js'?'text/javascript':'text/html');
         response.end(readFileSync(file));

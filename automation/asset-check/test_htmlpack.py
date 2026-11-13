@@ -219,5 +219,12 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertIn("for(const o of instancePart?[]:objects)", harness)
 
 
+    def test_HP8_browser_checks_real_preview_location(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("const candidateRoute='/preview/asset-check/'", harness)
+        self.assertIn("[candidateRoute]:cand", harness)
+        self.assertNotIn(".replaceAll('../../../games/', '/games/')", harness)
+
+
 if __name__ == "__main__":
     unittest.main()

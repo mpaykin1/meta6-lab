@@ -36,7 +36,9 @@ html,body{margin:0;width:100%;height:100%;background:#020912;overflow:hidden;tou
 </aside>
 <div id="err">Не удалось запустить графику (WebGL недоступен).</div>
 <script type="module">
-import * as THREE from "../../../games/broken-city/lib/three.module.js";
+const assetRoot=new URL(location.pathname.includes('/preview/')
+  ? location.pathname.split('/preview/')[0]+'/' : '../../../',import.meta.url);
+const THREE=await import(new URL('games/broken-city/lib/three.module.js',assetRoot).href);
 THREE.ColorManagement.enabled=false;
 (()=>{'use strict';
 const T=THREE,$=id=>document.getElementById(id);

@@ -92,12 +92,16 @@ async function api(path) {
   if(!r.ok) throw Error('GitHub API '+r.status+' '+path);
   return r.json();
 }
+export function unwrapPage(data) {
+ const list=Array.isArray(data)?data:(data?.jobs||data?.workflow_runs||[]);
+ if(!Array.isArray(list)) throw Error('GitHub did not return an array');
+ return list;
+}
 async function pages(path) {
   const out=[];
   for(let page=1;page<=10;page++){
     const data=await api(path+(path.includes('?')?'&':'?')+'per_page=100&page='+page);
-    const list=Array.isArray(data)?data:(data.jobs||data.workflow_runs||[]);
-    if(!Array.isArray(list)) throw Error('GitHub did not return an array');
+    const list=unwrapPage(data);
     out.push(...list); if(list.length<100) break;
   }
   return out;

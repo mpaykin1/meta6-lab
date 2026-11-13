@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-13T20:02:10.693Z",
+  "generated_at": "2026-11-13T20:16:46.418Z",
   "sha": {
-    "lab": "775e046cd0ad8551594c097d2c5376f1361d36b7",
+    "lab": "af6238c7237cd129f58a2d66826b8405e9376f05",
     "mg": "7ae9604d0dfc969116895cd06bf11b4c3cdf15ff"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43497645348",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43499994871",
   "review": {
     "protected": [
       {
@@ -354,11 +354,16 @@
     ]
   },
   "pr": {
-    "open": 47,
+    "open": 46,
     "conflicts": "нет данных",
-    "merged": 34,
+    "merged": 35,
     "closed": 75,
     "mergedItems": [
+      {
+        "number": 304,
+        "title": "Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У ",
+        "sha": "af6238c7237cd129f58a2d66826b8405e9376f05"
+      },
       {
         "number": 298,
         "title": "Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА",
@@ -700,7 +705,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2007,
+      "count": 2011,
       "folders": "нет данных"
     },
     "mg": {

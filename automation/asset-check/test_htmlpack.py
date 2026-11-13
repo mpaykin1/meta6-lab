@@ -195,8 +195,18 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertIn("if(delta<=23){pixels[i+3]=0;continue}", harness)
         self.assertIn("const pad=Math.max(5,", harness)
         self.assertIn("ctx.putImageData(frame,0,0)", harness)
-        self.assertIn("report.previews[id]=await isolatePreview(page,second.png,second.offPng)", harness)
+        self.assertIn("const isolated=await isolatePreview(page,second.png,second.offPng);", harness)
+        self.assertIn("if(isolated)report.previews[id]=isolated;", harness)
+        self.assertIn("else if(selected)report.errors.push('HP13: preview has no visible object pixels: '+id)", harness)
         self.assertNotIn("report.previews[id]=second.png.toString('base64')", harness)
+
+    def test_HP13_empty_reference_preview_is_not_misclassified_as_new(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("if(area===0)return null;", harness)
+        self.assertIn("report.newIds=await page.evaluate(()=>window.__PACK__.items.filter(o=>o.isNew).map(o=>o.id));", harness)
+        self.assertIn("const accepted=Object.keys(refShots);", harness)
+        self.assertIn("await compareSheet(browser,result.reference.previews,result.candidate.previews,packPath,result.candidate.newIds);", harness)
+        self.assertIn("if(pair.length<2)throw Error('HP13: insufficient accepted asset previews');", harness)
 
     def test_HP13_missing_sheet_is_hard(self):
         self.add_new()

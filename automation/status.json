@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-13T20:42:34.705Z",
+  "generated_at": "2026-11-13T21:05:56.979Z",
   "sha": {
-    "lab": "107d6025ac2c98fb8f0286a23eeb485e62058de2",
+    "lab": "531e5516b8c15cafc4d63732d858d2fede17f952",
     "mg": "7ae9604d0dfc969116895cd06bf11b4c3cdf15ff"
   },
   "checked": {
@@ -53,16 +53,27 @@
       {
         "number": 241,
         "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
-        "paths": [
-          "scripts/shared/mutate-build-index-symlinks.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 259,
         "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
-        "paths": [
-          "scripts/prohodchik/mutate-prompt.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 263,
+        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4",
+        "paths": "нет данных"
+      },
+      {
+        "number": 257,
+        "sha": "79f4465b6667092e16115222325c012ca73cc137",
+        "paths": "нет данных"
+      },
+      {
+        "number": 256,
+        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec",
+        "paths": "нет данных"
       },
       {
         "number": 243,
@@ -336,11 +347,16 @@
     ]
   },
   "pr": {
-    "open": 49,
+    "open": 48,
     "conflicts": "нет данных",
-    "merged": 35,
+    "merged": 36,
     "closed": 75,
     "mergedItems": [
+      {
+        "number": 307,
+        "title": "Остров аптекаря: 3 этапа для META BOT",
+        "sha": "fb4cf4f5bce602dee82910ea066637feb7418c6d"
+      },
       {
         "number": 304,
         "title": "Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У ",
@@ -560,16 +576,27 @@
       {
         "number": 241,
         "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
-        "paths": [
-          "scripts/shared/mutate-build-index-symlinks.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 259,
         "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
-        "paths": [
-          "scripts/prohodchik/mutate-prompt.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 263,
+        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4",
+        "paths": "нет данных"
+      },
+      {
+        "number": 257,
+        "sha": "79f4465b6667092e16115222325c012ca73cc137",
+        "paths": "нет данных"
+      },
+      {
+        "number": 256,
+        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec",
+        "paths": "нет данных"
       },
       {
         "number": 243,
@@ -675,7 +702,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2024,
+      "count": 2031,
       "folders": "нет данных"
     },
     "mg": {

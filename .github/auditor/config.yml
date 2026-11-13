@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "notes": "JSON is valid YAML 1.2. Use only explicit role attribution; shared branch prefixes alone do not prove authorship. Canonical issue #253 is never recreated.",
+  "notes": "JSON is valid YAML 1.2. Use only explicit role attribution; shared branch prefixes alone do not prove authorship. Canonical issue #253 is never recreated. Only issue #253 may be updated or pinned, and its published body must match Actions Summary; verify with auditor mutations.",
   "sources": [
     "https://github.com/mpaykin1/meta6-lab/blob/main/automation/prompts/MG_PYAT_AVTOZADACH.md",
     "https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md",

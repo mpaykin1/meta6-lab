@@ -1,4 +1,6 @@
 // Permanent auditor traps: API budget, singleton issue, and read-only PR previews.
+import { createRequire } from 'node:module';
+globalThis.require = createRequire(import.meta.url);
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
@@ -94,3 +96,11 @@ for (const mutant of mutants) {
   process.stdout.write('TRAP ' + mutant.name + ' PASS\n');
 }
 process.stdout.write('AUDITOR MUTATIONS PASS: 3/3\n');
+
+await import("./mutate-auditor-truthful.mjs");
+
+await import("./mutate-auditor-stall.mjs");
+
+await import("./mutate-auditor-stale-pr.mjs");
+
+await import("./mutate-auditor-task-table.mjs");

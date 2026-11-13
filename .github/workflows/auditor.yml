@@ -7,11 +7,13 @@ on:
     paths:
       - .github/workflows/auditor.yml
       - .github/auditor/config.yml
+      - scripts/auditor/**
   push:
     branches: [main]
     paths:
       - .github/workflows/auditor.yml
       - .github/auditor/config.yml
+      - scripts/auditor/**
 permissions:
   contents: read
   pull-requests: read
@@ -27,6 +29,12 @@ jobs:
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Preserve existing auditor tests and prove mutation traps
+        run: |
+          node scripts/auditor/check-append-only.mjs '${{ github.event.pull_request.base.sha || github.event.before || github.sha }}'
+          node scripts/auditor/mutate-append-only.mjs
       - name: Verify three auditor mutation traps
         run: node scripts/auditor/mutate-auditor.mjs
       - name: Audit five agent cycles
@@ -86,6 +94,42 @@ jobs:
               owner,repo,state:'all',sort:'updated',direction:'desc',per_page:100
             });
             recentIssues.push(...issuePage.data.filter(i => !i.pull_request));
+            // Inspect a bounded set; old PRs are only flagged on current HEAD evidence.
+            const staleFindings = [];
+            let staleUnknown = false;
+            const stalePool = prs.filter(pr => pr.state === 'open' &&
+              now.getTime() - Date.parse(pr.created_at) > 86400000);
+            const stalePages = Math.max(1, Math.ceil(stalePool.length / 4));
+            const stalePage = Math.floor(now.getTime() / 3600000) % stalePages;
+            const staleCandidates = stalePool.slice(stalePage * 4, stalePage * 4 + 4);
+            for (const pr of staleCandidates) {
+              try {
+                const [detail, checks] = await Promise.all([
+                  github.rest.pulls.get({owner,repo,pull_number:pr.number}),
+                  github.rest.checks.listForRef({owner,repo,ref:pr.head.sha,per_page:100})
+                ]);
+                if (detail.data.head.sha !== pr.head.sha) {
+                  staleUnknown = true;
+                  continue;
+                }
+                const conflicts = detail.data.mergeable_state === 'dirty';
+                const failures = (checks.data.check_runs || []).filter(check =>
+                  check.status === 'completed' &&
+                  ['failure','timed_out','action_required'].includes(check.conclusion));
+                if (conflicts || failures.length) {
+                  staleFindings.push({
+                    pr,
+                    reason: [conflicts ? 'конфликт с main' : '',
+                      failures.length ? 'красная проверка '+clean(failures[0].name) : '']
+                      .filter(Boolean).join('; '),
+                    checkUrl: failures[0]?.html_url || ''
+                  });
+                }
+              } catch (err) {
+                staleUnknown = true;
+                core.warning('stale PR inspection unavailable: '+clean(err.message));
+              }
+            }
             
             function owners(pr) {
               const scores = cfg.roles.map(role => {
@@ -138,12 +182,14 @@ jobs:
             const priority = [];
             const rowsOut = [];
             const successes = [];
+            const roleStates = {};
             for (const role of cfg.roles) {
               const start = starts[role.name].getTime();
               const mine = rows.filter(row => row.who === role.name).sort((a,b) => b.taken-a.taken);
               const current = prs.filter(pr => owners(pr).includes(role.name) &&
                 Date.parse(pr.updated_at) >= start);
               const relatedIssues = recentIssues.filter(i =>
+                i.number !== cfg.issue_number && i.title !== cfg.issue_title &&
                 (i.title + ' ' + (i.body || '')).includes(role.role_marker) &&
                 Date.parse(i.updated_at) >= start);
               const plans = [];
@@ -172,8 +218,10 @@ jobs:
                 const badChecks = d.checks.filter(c => c.conclusion &&
                   !['success','neutral','skipped'].includes(c.conclusion));
                 const badRuns = d.runs.filter(r => r.conclusion &&
-                  !['success','neutral','skipped'].includes(r.conclusion));
+                  !['success','neutral','skipped','action_required'].includes(r.conclusion));
+                const pendingApproval = d.runs.some(r => r.conclusion === 'action_required');
                 const green = d.checks.length > 0 && !badChecks.length && !badRuns.length &&
+                  !pendingApproval &&
                   d.checks.every(c => c.status === 'completed') &&
                   d.runs.every(r => r.status === 'completed') && !d.errors.length;
                 if (!green) uncertain = true;
@@ -183,7 +231,8 @@ jobs:
                 if (d.runs.length) refs.push(link('Actions #'+d.runs[0].id,d.runs[0].html_url));
                 if (badChecks.length) refs.push(link('check '+badChecks[0].name,
                   badChecks[0].html_url || pr.html_url));
-                const ci = green ? 'CI ✅' : badChecks.length || badRuns.length ? 'CI ❌' : 'CI ⚠️';
+                const ci = green ? 'CI ✅' : badChecks.length || badRuns.length ? 'CI ❌' :
+                  pendingApproval ? 'CI ⚠️ action_required' : 'CI ⚠️';
                 evidence.push(refs.join(' · ')+' · '+ci+(ambiguous ? ' · авторство не установлено' : '')+
                   (d.errors.length ? ' · Ошибки API: '+clean(d.errors.join('; ')) : ''));
                 if (green && meaningful && !guarded.length && !ambiguous) successes.push(
@@ -196,6 +245,10 @@ jobs:
               const started = mine.some(row => row.taken >= start);
               if (started && improvements === 0 && !uncertain) problems.push(
                 'нулевое улучшение при записи о начале цикла — '+link('таблица',fileUrl('ZADACHI.md')));
+              // No negative claims when PR pagination or attribution is incomplete.
+              const verified = successes.some(item => item.startsWith(clean(role.name)+': '));
+              roleStates[role.name] = verified ? 'improved' :
+                improvements === 0 && started && !uncertain && prs.length < 100 ? 'zero' : 'unknown';
               const planStatus = plans.length ? '✅' : mine.length ? '⚠️' : '❌';
               const execStatus = problems.length ? '❌' : improvements === 1 && !uncertain ? '✅' : '⚠️';
               if (!plans.length) plans.push(link('запись плана не подтверждена',fileUrl('ZADACHI.md')));
@@ -205,20 +258,60 @@ jobs:
               for (const item of evidence.slice(1)) rowsOut.push('| | | | ↳ '+item+' |');
               for (const problem of problems) priority.push('- **'+clean(role.name)+'**: '+problem);
             }
+            // Compare two completed hourly observations. The previous Issue is already in recentIssues.
+            // A missing, stale, or incomplete observation is unknown, never a proven two-hour stall.
+            const previousBody = recentIssues.find(i => i.number === cfg.issue_number)?.body || '';
+            const match = previousBody.match(/<!-- auditor-cycle-v1 (\{[^\n]*\}) -->/);
+            let previous = null;
+            try { if (match) previous = JSON.parse(match[1]); }
+            catch (err) { core.warning('Invalid previous cycle: '+clean(err.message)); }
+            const gap = previous ? now.getTime() - Date.parse(previous.time) : NaN;
+            if (Number.isFinite(gap) && gap >= 45 * 60_000 && gap <= 75 * 60_000 &&
+              Number.isInteger(previous.run) && previous.run !== context.runId) {
+              for (const role of cfg.roles) {
+                if (previous.states?.[role.name] === 'zero' && roleStates[role.name] === 'zero') {
+                  priority.push('- **'+clean(role.name)+'**: 2 часа подряд без подтверждённого улучшения — '+
+                    link('предыдущий audit',root+'/actions/runs/'+previous.run)+' · '+
+                    link('текущий audit',root+'/actions/runs/'+context.runId));
+                }
+              }
+            }
+            const snapshot = '<!-- auditor-cycle-v1 '+JSON.stringify({
+              time: now.toISOString(), run: context.runId, states: roleStates
+            })+' -->';
+            for (const finding of staleFindings) {
+              priority.push('- **PR старше 24 ч**: '+link('PR #'+finding.pr.number,
+                finding.pr.html_url)+' — '+finding.reason+
+                (finding.checkUrl ? ' · '+link('проверка',finding.checkUrl) : ''));
+            }
+            if (staleUnknown) {
+              priority.push('- **Срез старых PR неполный** — часть проверок API недоступна; '+
+                link('открытые PR',root+'/pulls'));
+            }
             const next = priority.length
               ? 'Проверить первое нарушение по ссылке, защищённое передать Claude без слияния.'
               : 'Добавить SHA и Actions run к следующей записи в таблице задач.';
-            const report = [
+            const { auditTaskTable } = require(process.cwd() + "/scripts/auditor/task-table.cjs");
+            const taskFindings = auditTaskTable(source, prs, root);
+            let report = [
               '## 🚨 Нарушения и незавершённое',
-              ...(priority.length ? priority : ['- Доказанных нарушений не обнаружено — '+
+              ...(priority.length ? priority : ['- В проверенной выборке не найдено нарушений — '+
                 link('источник',fileUrl('ZADACHI.md'))]),
+              '- Старые PR: проверено '+staleCandidates.length+' из '+stalePool.length+
+                ' в актуальной выборке. При каждом часовом запуске следующая четвёрка.',
+              '',
+              '### Сверка ZADACHI с PR',
+              ...(taskFindings.length ? taskFindings.slice(0, 12) :
+                ['- Расхождений в проверенных строках не обнаружено.']),
+              ...(taskFindings.length > 12 ? ['- Ещё записей: ' + (taskFindings.length - 12)] : []),
+              'Сверена ограниченная выборка PR; отсутствие PR в ней не доказывает нарушение.',
               '',
               '**Один безопасный следующий шаг:** '+next+' '+
                 link('правила',fileUrl('automation/prompts/MG_PYAT_AVTOZADACH.md')),
               '',
               'Срез: '+now.toISOString()+' · '+link('Actions run',root+'/actions/runs/'+context.runId),
               '',
-              '| Роль | Последний запуск | Цикл 1 — план | Цикл 2 — исполнение |',
+              '| Роль | Начало окна проверки (UTC) | Цикл 1 — план | Цикл 2 — исполнение |',
               '| --- | --- | --- | --- |',
               ...rowsOut,
               '',
@@ -229,22 +322,54 @@ jobs:
               '',
               '</details>',
               '',
-              '_⚠️ означает отсутствие достаточных доказательств, а не установленное нарушение._'
+              '_⚠️ означает отсутствие достаточных доказательств, а не установленное нарушение._',
+              snapshot
             ].join('\n');
-            await core.summary.addRaw(report).write();
             if (context.eventName === 'pull_request') {
+              report = report.replace('Срез: ', 'Закрепление Issue #'+cfg.issue_number+
+                ': ⚠️ не проверено (PR preview)\n\nСрез: ');
               core.info('PR preview: no Issue mutation allowed');
             } else {
-            const updated = await github.rest.issues.update({
-              owner,repo,issue_number:cfg.issue_number,state:'open',body:report
-            });
-            const audit = updated.data;
-            try {
-              await github.graphql('mutation($id:ID!){pinIssue(input:{issueId:$id}){issue{id}}}',{
-                id:audit.node_id
+              // GraphQL is the only source of truth for pinnedIssues; do not assume pinIssue succeeded.
+              const query = 'query($owner:String!,$repo:String!){repository(owner:$owner,name:$repo)'+
+                '{pinnedIssues(first:3){nodes{issue{number}}}}}';
+              const pinned = async () => {
+                const response = await github.graphql(query,{owner,repo});
+                const nodes = response?.repository?.pinnedIssues?.nodes;
+                if (!Array.isArray(nodes)) {
+                  throw new Error('Missing pinnedIssues nodes in GraphQL response');
+                }
+                return nodes.some(n => n.issue?.number === cfg.issue_number);
+              };
+              let pinStatus = '⚠️ не подтверждено (ошибка GraphQL)';
+              try {
+                let isPinned = await pinned();
+                if (!isPinned) {
+                  const canonical = recentIssues.find(i => i.number === cfg.issue_number);
+                  if (!canonical?.node_id) {
+                    core.warning('Canonical Issue not found for pin');
+                  } else {
+                    try {
+                      await github.graphql(
+                        'mutation($id:ID!){pinIssue(input:{issueId:$id}){issue{id}}}',
+                        {id:canonical.node_id}
+                      );
+                    } catch (err) {
+                      core.warning('Issue pin failed: '+clean(err.message));
+                    }
+                    isPinned = await pinned();
+                  }
+                }
+                pinStatus = isPinned ? '✅ закреплено (GraphQL)' : '❌ не закреплено (GraphQL)';
+              } catch (err) {
+                core.warning('Issue pin query unavailable: '+clean(err.message));
+              }
+              report = report.replace('Срез: ', 'Закрепление Issue #'+cfg.issue_number+
+                ': '+pinStatus+'\n\nСрез: ');
+              const updated = await github.rest.issues.update({
+                owner,repo,issue_number:cfg.issue_number,state:'open',body:report
               });
-            } catch (err) {
-              core.warning('Issue pin unavailable: '+clean(err.message));
+              core.info('Audit issue: '+updated.data.html_url);
             }
-            core.info('Audit issue: '+audit.html_url);
-            }
+            await core.summary.addRaw(report).write();
+

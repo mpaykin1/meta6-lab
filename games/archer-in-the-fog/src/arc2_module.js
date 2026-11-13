@@ -12,7 +12,7 @@ const ARC2 = (() => {
 
   /* Fortress wall run: animate existing archer on solid tower surface, no new assets. */
   const RUN = { left: false, right: false, touchId: null, touchX: 0,
-    touchAxis: 0, velocity: 0, speed: 0, stride: 0 };
+    touchAxis: 0, velocity: 0, speed: 0, stride: 0, footstep: 0, stepSide: 0 };
   const runKey = (event, down) => {
     if (event.code === "KeyA" || event.code === "ArrowLeft") RUN.left = down;
     else if (event.code === "KeyD" || event.code === "ArrowRight") RUN.right = down;
@@ -56,11 +56,23 @@ const ARC2 = (() => {
     RUN.velocity += (targetSpeed - RUN.velocity) * (1 - Math.exp(-10 * dt));
     const position = archer.root.position;
     const previousX = position.x;
-    // Central 12-metre stretch is always solid and clear of the perimeter crenellations.
-    position.x = Math.max(cur.stand.x - 6, Math.min(cur.stand.x + 6, previousX + RUN.velocity * dt));
+    // The procedural tower top is only 5-6 blocks wide: never sprint into thin air.
+    const half = Math.floor(cur.size / 2);
+    const leftEdge = cur.stand.x - half + 0.1;
+    const rightEdge = cur.stand.x + cur.size - half - 1 - 0.1;
+    position.x = Math.max(leftEdge, Math.min(rightEdge, previousX + RUN.velocity * dt));
     const travelled = Math.abs(position.x - previousX);
     RUN.speed = travelled / dt;
     RUN.stride += travelled * 2.8;
+    RUN.footstep += travelled;
+    if (RUN.speed > 0.8 && RUN.footstep >= 0.72) {
+      RUN.footstep -= 0.72;
+      RUN.stepSide = 1 - RUN.stepSide;
+      // Existing snow dust pool; emitted by real ground contact, not by a timer.
+      dust.spawn(position.clone().add(new V3(0, 0.08, RUN.stepSide ? 0.18 : -0.18)),
+        new V3(-RUN.velocity * 0.12, 0.75, 0), 0.18, 0.38,
+        new Color(0.7, 0.78, 0.95), 0.6, 0);
+    }
     if (travelled < 0.0001) RUN.velocity = 0;
   }
   function wallRunPose() {

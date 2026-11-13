@@ -840,6 +840,17 @@
       "copy_path": "shared/library/assets/broken-city/audio/ui_reward_01.ogg"
     },
     {
+      "id": "2e67de2d91e2f5309169ffda",
+      "game": "broken-city",
+      "kind": "json-data",
+      "file": "shared/library/assets/broken-city/bot.json",
+      "source_path": "games/broken-city/bot.json",
+      "bytes": 388,
+      "sha256": "c121316e3cb71d6db440b29248aec4c081566855d79a74f8f571c7444b4e4e0c",
+      "storage": "copy",
+      "copy_path": "shared/library/assets/broken-city/bot.json"
+    },
+    {
       "id": "b483e2955d66f378fde8bcf9",
       "game": "broken-city",
       "kind": "font",
@@ -938,6 +949,81 @@
     }
   ],
   "solutions": [
+    {
+      "id": "a9e52d8011405fc5dcf907c3",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "module:bot-adapter.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/broken-city/bot-adapter.js",
+      "lines": [
+        1,
+        18
+      ],
+      "sha256": "9a66781feb2afa2c6fef4d6e0c249fa1f8095979ef9564b5bbcc0d05102e63a3"
+    },
+    {
+      "id": "173b630597400397bc4f712a",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "pressJump",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/bot-strategy.mjs",
+      "lines": [
+        7,
+        10
+      ],
+      "sha256": "80c6da7ca62bc7a8417b66986dfc17e88a90c290609f7c36c1ffa471cba4bd8f"
+    },
+    {
+      "id": "4654f8a96a3dab8d57b54254",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "module:bot-strategy.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/broken-city/bot-strategy.mjs",
+      "lines": [
+        1,
+        161
+      ],
+      "sha256": "275ed561b578d710bc4ac4283eb1ec4b53baba1bc8c75ace3423b12cceea160d"
+    },
+    {
+      "id": "ec9000c0629851f4147798c9",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/bot-strategy.mjs",
+      "lines": [
+        12,
+        25
+      ],
+      "sha256": "64662c8c43850b2af444a2e230db4a265b918d950e389177d9242d1b073dcb2d"
+    },
+    {
+      "id": "f45dc4e071fd0eb296873b66",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "playLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/broken-city/bot-strategy.mjs",
+      "lines": [
+        27,
+        161
+      ],
+      "sha256": "18399fd510beb1ae15ef0212df93837fbde757bfd09550f500ab644f30cf13d9"
+    },
     {
       "id": "00cd40a43bd6d20c96db535b",
       "game": "broken-city",
@@ -15813,8 +15899,8 @@
     }
   ],
   "counts": {
-    "assets": 83,
-    "file_assets": 78,
-    "solutions": 991
+    "assets": 84,
+    "file_assets": 79,
+    "solutions": 996
   }
 }

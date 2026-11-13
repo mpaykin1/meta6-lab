@@ -1173,7 +1173,7 @@ const SHPILI_PLUS=(()=>{
  }
  // Мост: настил, подвески и обе опорные аркады, чтобы это была переправа.
  {
-  const root=own['gate-bridge'].group,deck=new T.Group();root.add(deck),planks=[];
+  const root=own['gate-bridge'].group,deck=new T.Group(),planks=[];root.add(deck);
   for(let i=0;i<34;i++){
    const x=(i-16.5)*.66,p=new T.Group();deck.add(p);
    p.position.set(x,-.4*Math.sin(i*Math.PI/33),1.7);

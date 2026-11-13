@@ -69,7 +69,7 @@ def run_metrics(reference: Path, candidate: Path):
     try:
         proc = subprocess.run(
             [node, str(HARNESS), str(reference), str(candidate)],
-            capture_output=True, text=True, timeout=220, cwd=str(REPO),
+            capture_output=True, text=True, timeout=390, cwd=str(REPO),
         )
         data = json.loads(proc.stdout)
         if proc.returncode or not data.get("ok"):

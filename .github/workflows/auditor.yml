@@ -27,6 +27,12 @@ jobs:
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Preserve existing auditor tests and prove mutation traps
+        run: |
+          node scripts/auditor/check-append-only.mjs '${{ github.event.pull_request.base.sha || github.event.before || github.sha }}'
+          node scripts/auditor/mutate-append-only.mjs
       - name: Verify three auditor mutation traps
         run: node scripts/auditor/mutate-auditor.mjs
       - name: Audit five agent cycles

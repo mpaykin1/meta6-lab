@@ -8,7 +8,11 @@ export function seededRouteVariants(seed, {routes = 3, steps = 5} = {}) {
   if (!Number.isSafeInteger(seed) || seed < 0) throw new TypeError('seed must be a nonnegative safe integer');
   if (!Number.isInteger(routes) || routes < 2 || routes > 8) throw new RangeError('routes must be 2..8');
   if (!Number.isInteger(steps) || steps < 1 || steps > 8) throw new RangeError('steps must be 1..8');
-  let state = (seed >>> 0) || 0x9e3779b9;
+  // Number.isSafeInteger permits 53 bits; folding only with >>> 0 silently loses high bits.
+  const low = seed >>> 0;
+  const high = Math.floor(seed / 0x100000000) >>> 0;
+  let state = (low ^ Math.imul(high, 0x9e3779b9)) >>> 0;
+  if (state === 0) state = 0x9e3779b9;
   const next = () => {
     state ^= state << 13;
     state ^= state >>> 17;

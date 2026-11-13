@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T18:01:07.312Z | МГЛ: 09776c5bd120875ad76b20a880dd511b46786561 | МГ: 1bea203fb63d7c27c29a5643e2f38e4554a658c1 | https://github.com/mpaykin1/meta6-lab/actions/runs/43478334492
+UTC: 2026-11-13T18:02:15.432Z | МГЛ: 45d98590d5822d7c0c175b11862d2ac052e9a7d0 | МГ: 1bea203fb63d7c27c29a5643e2f38e4554a658c1 | https://github.com/mpaykin1/meta6-lab/actions/runs/43478551436
 ## ПРОВЕРИТЬ CLAUDE
 - PR #296 1d385b135f0fd52a35d6b2df6503f5f6eacf171a: automation/asset-check/test_htmlpack.py
 - PR #293 1ec3046bbe0972e316d92ec3846b542af0883716: automation/asset-check/test_kinds.py
@@ -55,7 +55,7 @@ P1 — нет данных: нет данных
 #294 Эталон «Туманные шпили» (только добавление) | f55c2e87fbd99f261977dbe7da58700a0a73a50e
 ещё 29: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1957 коммитов | нет данных
+МГЛ: 1958 коммитов | нет данных
 МГ: 7 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

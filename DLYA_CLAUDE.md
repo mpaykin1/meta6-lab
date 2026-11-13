@@ -20,6 +20,7 @@
 | #282 | lab/auditor-task-table-20261113 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/auditor/mutate-auditor.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 | #247 | lab/kak-proveryayushchij-traps | scripts/storozha/reference-check.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 | #258 | lab/prohodchik-b2-motion-20261111 | .github/workflows/prohodchik-b2.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/platform/mutate-bot-open-all.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/platform/verify-bot-open-all.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
+| #285 | claude/storozha-yadro-1113 | .github/workflows/meta-games-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/core.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/mutate-storozha.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/verify-storozha.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

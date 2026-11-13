@@ -645,7 +645,9 @@ function loop(){requestAnimationFrame(loop);
 // Read-only observation of the actual rider; never synthesizes movement or completion.
 Object.defineProperty(window,'__META_BOT__',{configurable:false,enumerable:true,get(){
  const end=seg&&seg.F&&seg.F[seg.F.length-1];
- const destination=target&&target.F&&target.F[0]||end;
+ // The next real track endpoint is the goal; gallery mode has no active run.
+ const next=chain[ci+1]&&chain[ci+1].F&&chain[ci+1].F[0];
+ const destination=target&&target.F&&target.F[0]||end||next;
  return Object.freeze({
   level:1,totalLevels:1,
   player:Object.freeze({x:pos.x,y:pos.y,z:pos.z}),

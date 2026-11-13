@@ -234,5 +234,14 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertIn("report.errors.push('HP13 '+id+", harness)
 
 
+    def test_HP8_isolation_uniform_compiles_and_tracks_visibility(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("waterMat.uniforms.uAcBokeh=waterMat.uniforms.__acBokeh;", harness)
+        self.assertIn("uniform float uAcBokeh;", harness)
+        self.assertIn("*.42*sh*uAcBokeh;", harness)
+        self.assertNotIn("uniform float __acBokeh;", harness)
+        self.assertNotIn("*.42*sh*__acBokeh;", harness)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -110,8 +110,9 @@ const __acGroups={
  rain:[rain],dust:[dust],water:[],bokeh:[],post:[]
 };
 waterMat.uniforms.__acBokeh={value:1};
-waterMat.fragmentShader='uniform float __acBokeh;\n'+waterMat.fragmentShader.replace(
- 'exp(-dot(q,q))*.42*sh;', 'exp(-dot(q,q))*.42*sh*__acBokeh;');
+waterMat.uniforms.uAcBokeh=waterMat.uniforms.__acBokeh;
+waterMat.fragmentShader='uniform float uAcBokeh;\n'+waterMat.fragmentShader.replace(
+ 'exp(-dot(q,q))*.42*sh;', 'exp(-dot(q,q))*.42*sh*uAcBokeh;');
 let __acHidden=null;let __acUndo=[];
 window.__ISOLATE__=(id,shown)=>{
  const known=Object.prototype.hasOwnProperty.call(__acGroups,id)||

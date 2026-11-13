@@ -22,7 +22,7 @@ def spectrum_score(filename):
     power = abs(np.fft.fftshift(np.fft.fft2(signal))) ** 2
     ys, xs = np.indices((256, 256))
     rad = np.hypot(xs - 128, ys - 128)
-    valid = ((rad > 5) & (rad < 90) & (abs(xs - 128) > 2) & (abs(ys - 128) > 2))
+    valid = (rad > 6) & (rad < 90)  # Include axis-aligned stripes and tile rows.
     energy = np.sort(power[valid].ravel())
     total = float(np.sum(energy))
     if total < 1e-9:

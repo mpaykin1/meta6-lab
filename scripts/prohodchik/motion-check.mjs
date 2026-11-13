@@ -102,9 +102,13 @@ export function assessB2Probe(segments) {
     }
   }
   if (firstMoveIdx < 0) return result('INVALID', {reason: 'unverifiable first movement'});
-  const laterMs = segments.slice(firstMoveIdx + 1)
-    .filter(s => s.input)
-    .reduce((sum, s) => sum + s.durationMs, 0);
+  // A pause breaks continuous input: separated taps must not satisfy a 2 s hold.
+  let laterMs = 0;
+  for (let i = firstMoveIdx + 1; i < segments.length; i++) {
+    const segment = segments[i];
+    if (!segment.input) laterMs = 0;
+    else laterMs += segment.durationMs;
+  }
   if (laterMs < STUCK_MS) {
     return result('OBSERVING', {remainingMs: STUCK_MS - laterMs});
   }

@@ -11157,6 +11157,29 @@ window.__isle = {
   TREE,
 };
 
+
+/* Read-only observation: gameplay controls remain the normal keyboard/touch input. */
+Object.defineProperty(window, '__META_BOT__', {
+  configurable: true,
+  get() {
+    return Object.freeze({
+      getState() {
+        const active = G.state === 'play';
+        const alive = player.hp > 0 && player.respawn <= 0;
+        const target = world?.beacon;
+        return {
+          x: player.pos.x, y: player.pos.y, z: player.pos.z,
+          level: 1, alive, dead: !alive,
+          playing: active, state: G.state,
+          progress: G.total > 0 ? Math.min(1, G.collected / G.total) : 0,
+          goal: target ? { x: target.x, z: target.z } : null,
+          completed: G.state === 'victory'
+        };
+      }
+    });
+  }
+});
+
 </script>
 
 </body></html>

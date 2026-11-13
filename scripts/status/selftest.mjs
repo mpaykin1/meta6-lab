@@ -68,6 +68,19 @@ async function suite(m, candidate) {
   assert.equal(finishRows[2].value, 'не готов');
   assert.deepEqual(m.finishTableStatus(null), null);
 
+  const phaseOne = Array.from({length: 18}, (_, index) =>
+    '| M' + (index + 1) + ' | x | v | ' +
+    (index < 7 ? 'ЗЕЛЁНАЯ — [прогон](https://github.com/o/r/actions/runs/123)' :
+      'НЕТ') + ' |').join('\n');
+  const phaseTwo = '| Л1 | x | v | ЗЕЛЁНАЯ — [прогон](https://github.com/o/r/actions/runs/456) |';
+  assert.equal(m.finishSummary(phaseOne, phaseTwo).ready.length, 7);
+  assert.equal(m.finishSummary(phaseOne, phaseTwo).pending.length, 11);
+  assert.equal(m.finishSummary(phaseOne.split('\n').slice(1).join('\n'), phaseTwo),
+    'нет данных');
+  const allGreen = phaseOne.replaceAll('| НЕТ |',
+    '| ЗЕЛЁНАЯ — [прогон](https://github.com/o/r/actions/runs/123) |');
+  assert.equal(m.finishSummary(allGreen, phaseTwo).ready.length, 19);
+
   const at = Date.parse('2026-11-13T12:00:00Z');
   const old = {generated_at: '2026-11-13T10:00:00Z', run: 'a',
     sha: {lab: 'before'}, changes: {lab: {count: 1}}, pr: {open: 55}};
@@ -85,6 +98,14 @@ const mutations = {
   'false-green-without-run-link': [
     "const ready = /^ЗЕЛЁНАЯ(?:\\s|$)/.test(status) && linked;".replace('\\\\', '\\'),
     "const ready = /^ЗЕЛЁНАЯ(?:\\s|$)/.test(status);".replace('\\\\', '\\')
+  ],
+  'stage-two-before-first-eighteen': [
+    'const secondary = allGreen ? finishTableStatus(stageTwo) : [];',
+    'const secondary = finishTableStatus(stageTwo);'
+  ],
+  'under-count-accepted-as-complete': [
+    'if (primary === null || primary.length !== 18) return UNKNOWN;',
+    'if (primary === null) return UNKNOWN;'
   ],
   'hourly-gate-removed': [
     "if (now - Date.parse(previous.generated_at) < 3600_000) return false;",

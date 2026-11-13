@@ -3,7 +3,7 @@ import fs from 'node:fs';
 const REPO=process.env.GITHUB_REPOSITORY||'mpaykin1/meta6-lab';
 const API='https://api.github.com/repos/'+REPO;
 const botNames=['status-dlya-claude','investigation-snapshot','zadachi-watch','zanyato-watch','sliyanie-status','dispatcher','journal-projections','github-actions[bot]'];
-const authorWorkflow={'status-dlya-claude bot':'status-dlya-claude.yml','investigation-snapshot':'investigation-snapshot.yml','zadachi-watch':'zadachi-watch.yml','zanyato-watch':'zanyato-watch.yml','sliyanie-status bot':'sliyanie-status.yml','github-actions[bot]':'dispetcher.yml'};
+const authorWorkflow={'status-dlya-claude bot':'status-dlya-claude.yml','investigation-snapshot':'investigation-snapshot.yml','zadachi-watch':'zadachi-watch.yml','zanyato-watch':'zanyato-watch.yml','sliyanie-status bot':'sliyanie-status.yml'};
 const CORE=/^(?:storozha-|kontur-guard|meta-games-guard|meta-bot|report-completion-guard|lab-shared-deletion-guard|pr-autofinish|sync-from-meta6)/;
 export function isBot(c) {
  const name=String(c?.commit?.author?.name||'').toLowerCase();

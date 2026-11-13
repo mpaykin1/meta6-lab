@@ -26,7 +26,7 @@ function verify(code) {
   const bot = window.__META_BOT__;
   assert.ok(bot, 'Bot API must appear once the real engine is available');
   assert.equal(bot.version, 1);
-  assert.equal(bot.info(), original.info());
+  assert.deepEqual(bot.info(), original.info());
   assert.deepEqual(bot.state(), original.state());
   assert.ok(Object.isFrozen(bot));
   const descriptor = Object.getOwnPropertyDescriptor(window, '__META_BOT__');

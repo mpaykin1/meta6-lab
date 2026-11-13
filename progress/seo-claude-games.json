@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "72248eac8debe3a937bd86d73a0066bf1d6fbe67",
+  "last_processed_head": "3a89858552c072315bbd75f15c7f352a56424ea3",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -19,7 +19,7 @@
     },
     "1_fix_bot_and_other_ci": {
       "status": "in_progress",
-      "details": "Library Machine auto-extracted and committed both exact indexes via push workflow: run 43361108519 PASS, HEAD cd43d2a730b7998abb953fdade65e7288e1d96cb. LAB focused META BOT earlier failed because nine changed games do not expose real __META_BOT__ adapters; no fake snapshots or weakened tests. Latest runs from bot-authored commit action_required, so new human-authored checkpoint needed.",
+      "details": "На PR #242 SEO/verify/bot/guard/browser/storefront PASS на 3a898585 (actions/runs/43361805054 и 43361805062); LAB Pages kick-main FAIL из-за GitHub API rate limit 403 (actions/runs/43361799692). На базовом PR #234 changed-games FAIL: у 9 изменённых игр нет правдивой window.__META_BOT__ ручки; не заменять фиктивной. STOROZHA queue отдельный сбой rate limit 403.",
       "evidence": [
         "https://github.com/mpaykin1/meta6-lab/commit/7ee56e90d9da32d806e697c542b705102575b963",
         "https://github.com/mpaykin1/meta6-lab/commit/744e6d7e89c716f2a81cfd184819cee297bd9e26",
@@ -58,7 +58,7 @@
         "underwater-world"
       ],
       "pending_pages": 0,
-      "details": "23 страницы: SEO validator includes lastmod date/calendar/dup checks with 3 mutation traps; successful SEO run 43360900263 on merge ancestor 4003cf7a; latest machine-generated branch e03717b lacks fresh confirmed run. Never treat action_required as green.",
+      "details": "23 страницы и 17 описаний в SEO-ветке. 9 внешних Playgama-обложек заменены оригинальными авторскими SVG в каталоге, включая OG, Twitter и JSON-LD; SEO-валидатор проверяет локальные источники с тремя новыми мутациями. Реальные 2–3 WebP-скриншота каждой игры остаются незавершёнными; результаты CI нового SHA ещё не подтверждены.",
       "seo_ci": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
       "metadata": "23 страницы: title <= 60, description 120–160, Schema.org JSON-LD, alt",
       "validator_implementation": "https://github.com/mpaykin1/meta6-lab/commit/674359e1781fb13e4dfeabb461e12def5448ea86"
@@ -81,11 +81,9 @@
     }
   },
   "next_ideas": [
+    "Снять реальные 2–3 WebP-кадра из каждой игры и связать их с лендингами через alt и lazy-loading",
     "Реальные read-only window.__META_BOT__ по CONTRACT.md для девяти изменённых игр; проход mobile, desktop и replay.",
     "Восстановить META BOT для изменённых игр PR #234 и пройти все уровни на мобильном и ПК",
-    "Уникальные описания 150–300 слов для каждого игрового URL",
-    "Проверка title/description/JSON-LD и внутренних ссылок в CI",
-    "Копии webp из собственных игровых кадров",
     "IndexNow после деплоя без секретов",
     "Сверять каждый sitemap lastmod с git log последнего изменения именно исходной HTML-страницы, защищать через мутации.",
     "PR #234: устранить незафиксированную генерацию shared/library без ручного изменения охраняемых baseline и восстановить стабильный window.__META_BOT__; ссылки: Actions 43236878422 и 43236879007.",
@@ -101,7 +99,10 @@
     "Добавить workflow проверку фактических HTTP 200 для всех 23 публичных страниц после merge в main",
     "Сверить релизный sitemap lastmod с git log и IndexNow HTTP 200/202",
     "Сделать отдельные подборки для телефонов и атмосферных игр без повторного контента",
-    "Автоматически проверять sitemap lastmod против git log в SEO CI"
+    "Автоматически проверять sitemap lastmod против git log в SEO CI",
+    "После публикации проверить все 23 URL, canonical и sitemap через HTTP 200",
+    "Добавить английские версии с hreflang без каноникализации на русский",
+    "Связать подборки для телефона и атмосферных игр с главным каталогом"
   ],
   "notes": [
     "Не менять защищённые файлы, эталоны, бота и охранников в обход правил",
@@ -388,6 +389,12 @@
       "change": "PR242 синхронизирован с настоящим HEAD PR234, без повторной модификации игровых исходников и машинных индексов.",
       "base": "2a283a97259c85d7244ede76a658e574f4b983bb",
       "next": "Проверить обязательные CI обеих веток, без красного и action_required не сливать."
+    },
+    {
+      "date": "2026-11-13",
+      "status": "implemented_pending_ci",
+      "change": "9 собственных иллюстрированных SVG-обложек вместо внешних Playgama URL; заменены ссылки на карточках, в OG/Twitter/JSON-LD; SEO-валидатор больше не пропускает внешний CDN и проверяет schema image; 3 новые мутации; sitemap lastmod обновлён для изменённых HTML.",
+      "next": "Подтвердить CI на новом SHA, затем восстановить реальные бот-адаптеры в #234 и дождаться разрешённого merge; снять настоящие WebP-кадры."
     }
   ],
   "base_sync_sha": "2a283a97259c85d7244ede76a658e574f4b983bb"

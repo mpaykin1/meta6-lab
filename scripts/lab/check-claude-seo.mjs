@@ -93,7 +93,7 @@ export function inspect(html, page) {
     }
   }
   // Resolve images using the same paths as the deployed GitHub Pages site.
-  // External images are checked separately after real screenshots are available.
+  // All cover images must exist in this repository, including schema images.
   const inspectLocalImage = (address, label) => {
     if (!address) {
       errors.push(page + ': ' + label + ' has no src');
@@ -102,7 +102,10 @@ export function inspect(html, page) {
     let url;
     try { url = new URL(address, expected); }
     catch { errors.push(page + ': invalid ' + label + ' URL ' + address); return; }
-    if (url.origin !== site.origin || !url.pathname.startsWith(site.pathname)) return;
+    if (url.origin !== site.origin || !url.pathname.startsWith(site.pathname)) {
+      errors.push(page + ': ' + label + ' must be hosted in the catalogue');
+      return;
+    }
     let relative;
     try { relative = decodeURIComponent(url.pathname.slice(site.pathname.length)); }
     catch { errors.push(page + ': malformed encoded ' + label + ' URL'); return; }
@@ -119,6 +122,9 @@ export function inspect(html, page) {
   }
   for (const cover of meta(html, 'og:image')) inspectLocalImage(cover, 'og:image');
   for (const cover of meta(html, 'twitter:image')) inspectLocalImage(cover, 'twitter:image');
+  for (const game of graphNodes.filter(node => node?.['@type'] === 'VideoGame')) {
+    inspectLocalImage(game.image, 'VideoGame image');
+  }
   // Validate link attributes regardless of order, quoting style or rel token order.
   for (const [tag] of html.matchAll(/<link\b[^>]*>/gi)) {
     const rel = tag.match(/\brel\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i);

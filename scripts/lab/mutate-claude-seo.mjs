@@ -60,6 +60,19 @@ cases.push(
     schema['@graph'].push({ ...game, name: 'Fake game', url: 'https://example.invalid/' });
   })]
 );
+// Prevent CDN regressions even when image URLs look plausible, and catch
+// schema-only images that do not appear in visible HTML.
+cases.push(
+  ['remote OG cover', original.replace(
+    /(<meta property="og:image" content=")[^"]*(")/,
+    '$1https://example.invalid/cover.svg$2')],
+  ['protocol-relative CDN thumbnail', original.replace(
+    /(<img\\b[^>]*\\bsrc=")[^"]*(")/i,
+    '$1//static.playgama.com/cover.svg$2')],
+  ['deceptive external schema image', mutateGame(game => {
+    game.image = 'https://static.playgama.com/p-img/pg/fake?width=640';
+  })]
+);
 // A compliant HTML parser accepts reordered, single-quoted and multi-token rel attributes.
 cases.push(
   ['reordered Playgama preconnect', original.replace('</head>',

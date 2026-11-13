@@ -1,4 +1,5 @@
 import * as T from 'three';
+import {batchInk} from './ink-batch.js';
 
 export const random = n => {
   const a = Math.sin(n * 127.1 + 311.7) * 43758.5453;
@@ -106,7 +107,7 @@ export function buildWorld({makers, paint, scene}) {
     const tree = add(i % 7 === 0 ? 'birch' : 'fir', x, z,
       .70 + random(i + 500) * .65, random(i) * 6.28, i + 3);
     if (i % 5 !== 0) tree.traverse(o => {
-      if (!o.isMesh || !o.material.color || o.position.y < 1.1) return;
+      if (!o.isMesh || !o.material.color || o.position.y < 1.1 || o.geometry.type === 'CylinderGeometry') return;
       o.material = o.material.clone(); o.material.color.set(autumn[i % autumn.length]);
       o.material.color.offsetHSL(0, -.04, (random(i + 40) - .5) * .12);
     });
@@ -141,12 +142,20 @@ export function buildWorld({makers, paint, scene}) {
     c.set(i % 4 === 0 ? '#c3b488' : i % 3 === 0 ? '#b5bb92' : '#879d77'); grass.setColorAt(i, c);
   }
   grass.userData.watercolorOutline = false; grass.userData.watercolorSkipWash = true; world.add(grass);
+  trees.forEach(tree => batchInk(tree));
+  batchInk(world, {cellSize: 8, exclude: new Set([...trees, hero, boat, mill, deer, fox, shrine])});
+  // Pigment seed is a uniform, so repeated objects can share the compiled GPU program.
   paint.apply(world, {seed: 'ink-expanded-valley'});
+  world.traverse(o => {
+    if (o.isMesh && o.material.userData?.livingWatercolorPatched) {
+      o.material.customProgramCacheKey = () => 'ink-world-pigment-v1';
+    }
+  });
   // Soft ink pools provide directional shadows without expensive shadow maps on phones.
   const canvas = document.createElement('canvas'); canvas.width = canvas.height = 128;
   const ctx = canvas.getContext('2d'), gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
-  gradient.addColorStop(0, '#243c37b0'); gradient.addColorStop(.55, '#243c3744');
-  gradient.addColorStop(1, '#243c3700'); ctx.fillStyle = gradient; ctx.fillRect(0, 0, 128, 128);
+  gradient.addColorStop(0, '#ffffffb0'); gradient.addColorStop(.55, '#ffffff44');
+  gradient.addColorStop(1, '#ffffff00'); ctx.fillStyle = gradient; ctx.fillRect(0, 0, 128, 128);
   const shadowTexture = new T.CanvasTexture(canvas);
   function pool(x, z, w, h, color, opacity, angle = 0) {
     const mesh = new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({

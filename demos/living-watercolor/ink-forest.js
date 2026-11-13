@@ -5,6 +5,7 @@ import {objectMakers} from './ink-objects.js';
 import {extraObjectMakers} from './ink-extras.js';
 import {settlementMakers} from './ink-settlement.js';
 import {buildWorld} from './ink-world.js';
+import {createInkOptics} from './ink-optics.js';
 const allObjectMakers = {...objectMakers, ...extraObjectMakers, ...settlementMakers};
 
 document.querySelectorAll('#label,#hint,#chooser').forEach(o=>o.remove());
@@ -28,7 +29,7 @@ const ui=document.createElement('div');ui.id='ink-ui';ui.innerHTML=`
 <button id="ink-menu-button" class="ink-round" aria-label="Объекты и управление" aria-expanded="false">☰</button>
 <div id="ink-tools"><button id="ink-color" class="ink-round" aria-label="Переключить Ч/Б и цвет" aria-pressed="false">◐</button><button id="ink-orbit" class="ink-round" aria-label="Вращать камеру" aria-pressed="false">↻</button><button id="ink-map" class="ink-round" aria-label="Весь мир" aria-pressed="false">⌖</button></div>
 <section id="ink-menu" hidden><h1>INK</h1><p>Город · осенний лес · озеро<br>Объёмный мир живой акварели</p><nav id="ink-zones"></nav><nav id="ink-objects"></nav><small>Проведи пальцем — повернуть.<br>Колёсико / два пальца — приблизить.<br>WASD / стрелки / джойстик — идти.<br>⌖ — весь мир / следовать за героем.<br>◐ — чёрно-белый / цвет.</small><a href="?reference=1">Эталон Living Watercolor ↗</a></section>
-<div id="ink-caption">Там, где дождь рисует лес</div><div id="ink-joystick"><div id="ink-stick"></div></div>`;document.body.append(ui);const vignette=document.createElement('div');vignette.id='ink-vignette';document.body.append(vignette);
+<div id="ink-caption">Там, где дождь рисует мир</div><div id="ink-joystick"><div id="ink-stick"></div></div>`;document.body.append(ui);const vignette=document.createElement('div');vignette.id='ink-vignette';document.body.append(vignette);
 const menu=ui.querySelector('#ink-menu');ui.querySelector('#ink-menu-button').onclick=e=>{menu.hidden=!menu.hidden;e.currentTarget.setAttribute('aria-expanded',String(!menu.hidden));};
 const scene = new T.Scene();
 const camera = createIllustrationCamera(T, {
@@ -45,10 +46,11 @@ const style = createWatercolorStyle({
   washOpacity: .78, washLayers: 6, edgeWidth: .019, edgeJitter: .26, granulation: .40,
   bleed: .24, shadowWash: .17, motion: .10, pigmentPooling: .27, paperGap: .15, paintedLight: .67
 });
+const optics = createInkOptics(renderer);
 const paint = createLivingWatercolor3D({THREE: T, renderer, scene, camera, style});
 const ambient = new T.HemisphereLight('#fff3d7', '#96aca3', 2.2); scene.add(ambient);
 const sun = new T.DirectionalLight('#fff0cd', 1.4); sun.position.set(-5, 9, 6); scene.add(sun);
-scene.fog = new T.Fog('#e7e5d6', 30, 85);
+scene.fog = new T.Fog('#e7e5d6', 64, 108);
 const valley = buildWorld({makers: allObjectMakers, paint, scene});
 const {world, hero} = valley;
 const specimen = new T.Group(); scene.add(specimen); specimen.visible = false;
@@ -61,7 +63,7 @@ const labels = {
   bush: 'Кустарник', reeds: 'Камыш', wildflowers: 'Цветы и зонтики', sapling: 'Саженец'
 };
 let active = 'forest', mono = false, orbit = false, overview = false;
-let yaw = .62, pitch = .65, zoom = 1, drag = null, pinch = 0, previous = 0, elapsed = 0;
+let yaw = -.62, pitch = .65, zoom = 1, drag = null, pinch = 0, previous = 0, elapsed = 0;
 let frameAvg = 16, quality = 1;
 const params = new URLSearchParams(location.search);
 const focus = new T.Vector3(hero.position.x, .6, hero.position.z);
@@ -179,7 +181,7 @@ function animate(ms) {
     if (shown.userData.orb) shown.userData.orb.position.y = 1.32 + Math.sin(elapsed) * .10;
     if (shown.userData.scarf) shown.userData.scarf.rotation.z = Math.sin(elapsed * 2.3) * .1;
   }
-  paint.tick(ms); renderer.render(scene, camera);
+  paint.tick(ms); optics.render(scene, camera, overview);
 }
 requestAnimationFrame(animate);
 window.__INK_FOREST__ = {

@@ -205,9 +205,9 @@ window.__AC_RESTORE__=()=>{for(const fn of __acUndo)fn();__acUndo=[]};
   const packLine='update(t,dt);SHPILI_PLUS.tick(t,dt);';
   if(source.includes(packLine))source=source.replace(packLine,packLine+'window.__AC_APPLY__();');
   else{
-    const refLine='update(t,dt);\n  renderer.setRenderTarget(rtA);';
-    if(!source.includes(refLine))throw Error('HP10: reference render hook absent');
-    source=source.replace(refLine,'update(t,dt);window.__AC_APPLY__();\n  renderer.setRenderTarget(rtA);');
+    const refDraw=/update\(t,dt\);(\s*)renderer\.setRenderTarget\(rtA\);/;
+    if(!refDraw.test(source))throw Error('HP10: reference render hook absent');
+    source=source.replace(refDraw, 'update(t,dt);window.__AC_APPLY__();$1renderer.setRenderTarget(rtA);');
   }
   const outputLine='renderer.setRenderTarget(null);renderer.render(qScene,qCam);';
   if(!source.includes(outputLine))throw Error('HP10: render-restore insertion point absent');

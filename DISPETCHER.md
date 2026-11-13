@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 21 · конфликт 15 · непроверено 0 · красные проверки 28 · нужен Claude 17
+Итог: зависло 21 · конфликт 15 · непроверено 0 · красные проверки 30 · нужен Claude 17
 
 ### PR #234
 - PR: https://github.com/mpaykin1/meta6-lab/pull/234
@@ -117,7 +117,7 @@
 ### PR #303
 - PR: https://github.com/mpaykin1/meta6-lab/pull/303
 - Ветка: `lab/asset-pack-shpili`
-- SHA: `278431cbeebda57d1081120d50f86c6b0d3d5349` · последний коммит: 2026-11-13T20:32:05Z
+- SHA: `01c5bbb988c61f6aa269d73358133931a47b0e17` · последний коммит: 2026-11-13T20:37:41Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
@@ -221,7 +221,23 @@
 ### PR #305
 - PR: https://github.com/mpaykin1/meta6-lab/pull/305
 - Ветка: `lab/assets-tumannye-shpili-20261114`
-- SHA: `171c3265072782f0c0131dc87cb3e0b64bf11f2a` · последний коммит: 2026-11-13T20:33:48Z
+- SHA: `0753e23ec3b95986d692d78996e63b2c6b09e172` · последний коммит: 2026-11-13T20:45:15Z
+- Проблема: Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь Vercel по логу https://vercel.com/improve-world?upgradeToPro=build-rate-limit и повтори CI.
+- Взял: —
+
+### PR #306
+- PR: https://github.com/mpaykin1/meta6-lab/pull/306
+- Ветка: `lab/assets-tumannye-shpili-20261114-2338`
+- SHA: `ab8ed7063c69af878e86c11f2fc2418875558455` · последний коммит: 2026-11-13T20:43:37Z
+- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43504215619/job/132157515958), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43504215619/job/132157515958 и повтори CI.
+- Взял: —
+
+### PR #307
+- PR: https://github.com/mpaykin1/meta6-lab/pull/307
+- Ветка: `lab/ostrov-aptekarya-bot-levels`
+- SHA: `0a1e54863d5b04b604b99458ac274ef55711dabf` · последний коммит: 2026-11-13T20:36:46Z
 - Проблема: Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
 - Задание: Исправь Vercel по логу https://vercel.com/improve-world?upgradeToPro=build-rate-limit и повтори CI.
 - Взял: —

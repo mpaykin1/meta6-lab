@@ -41,7 +41,7 @@
       "manifest": "shared/library/ostrov-aptekarya.json",
       "assets": 7,
       "file_assets": 1,
-      "solutions": 90
+      "solutions": 91
     },
     {
       "game": "rainbow-acceleration",
@@ -41996,7 +41996,7 @@
       ]
     },
     {
-      "id": "2a17d0ed7c26c8a3ffbb78bd",
+      "id": "0bc57b3a16acb72fa7b27592",
       "game": "ostrov-aptekarya",
       "kind": "solution",
       "name": "module:bot-strategy.mjs",
@@ -42004,29 +42004,14 @@
         "game-module"
       ],
       "source_path": "games/ostrov-aptekarya/bot-strategy.mjs",
-      "sha256": "69522e7daf13cb2b3fed4360180700e452e2f0be8ca864218aaf6c6c4688760c",
+      "sha256": "3aff5044e2a7906afe77217a1521f5c5f52354065f0d43c037220024bf362237",
       "lines": [
         1,
-        19
+        32
       ]
     },
     {
-      "id": "8578993336cc672e949620a2",
-      "game": "ostrov-aptekarya",
-      "kind": "solution",
-      "name": "start",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/ostrov-aptekarya/bot-strategy.mjs",
-      "sha256": "3038faf3088d4a3bb69482dd3ad5d1b233741fc7c5fcb27755f5bcd48c69cfc1",
-      "lines": [
-        2,
-        8
-      ]
-    },
-    {
-      "id": "e5b4e1c849e9278a5c3c82c6",
+      "id": "3d9da2c542e127c7ab08a5e5",
       "game": "ostrov-aptekarya",
       "kind": "solution",
       "name": "playLevel",
@@ -42034,10 +42019,40 @@
         "level-generation"
       ],
       "source_path": "games/ostrov-aptekarya/bot-strategy.mjs",
-      "sha256": "8b37c1f5193f32a30dda479fe96cd7a0cb16d2674f28e18d7a008a11c8445065",
+      "sha256": "e51c6f71ce36126dec9216a5e2c4815f356a1b5b4216555a1ce495af94c36c53",
       "lines": [
-        9,
-        19
+        12,
+        32
+      ]
+    },
+    {
+      "id": "6e3688cf3064d9a084486093",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "pressAction",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot-strategy.mjs",
+      "sha256": "300282df1985b1ba6733753b33a2ed23ccfd4ba66ccb5a2b9ed6a9337ca6c8ff",
+      "lines": [
+        8,
+        11
+      ]
+    },
+    {
+      "id": "fb37135aa413b0dd05e87e6b",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot-strategy.mjs",
+      "sha256": "d81db50a89ca71f972a9d6b40bbbfa3d4ff37ede3ab201bd41a7a9632e4652cb",
+      "lines": [
+        2,
+        7
       ]
     },
     {

@@ -15,6 +15,13 @@ mutations = [
     ("ci-deception", 'return sorted(parser.resources)',
      'return [] if __import__("os").getenv("GITHUB_ACTIONS") == "true" else sorted(parser.resources)'),
 ]
+# Keep the original cases; scope the HTML mutation to its function now that JS imports have another return.
+mutations[2] = (
+    "ci-deception",
+    'parser.feed(html)\n    return sorted(parser.resources)',
+    'parser.feed(html)\n    return [] if __import__("os").getenv("GITHUB_ACTIONS") == "true"'
+    ' else sorted(parser.resources)',
+)
 with tempfile.TemporaryDirectory() as tmp:
     env = dict(os.environ, GITHUB_ACTIONS="true")
     subprocess.run([sys.executable, str(verifier), str(source)], env=env, check=True)

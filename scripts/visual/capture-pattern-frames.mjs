@@ -2,6 +2,7 @@
 import {chromium} from 'playwright';
 import {serve} from '../meta-bot/server.mjs';
 import {readFileSync, mkdirSync, writeFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import {resolve, join} from 'node:path';
 
 const args = process.argv.slice(2);
@@ -12,7 +13,7 @@ function arg(name, fallback) {
 const root = resolve(arg('--root', '.'));
 const out = resolve(arg('--out', '/tmp/bez-patternov-images'));
 const target = arg('--target', 'ink');
-if (!['ink', 'all'].includes(target)) throw Error('Only --target ink or all is accepted');
+if (!['ink', 'all', 'changed'].includes(target)) throw Error('Only --target ink, all or changed is accepted');
 mkdirSync(out, {recursive: true});
 
 function gameTargets() {
@@ -29,9 +30,21 @@ function gameTargets() {
   if (!targets.length) throw Error('No catalog games to check');
   return targets;
 }
-const games = target === 'ink'
-  ? [{id: 'ink', url: 'demos/living-watercolor/?reference=1&object=house'}]
-  : [...gameTargets(), {id: 'ink', url: 'demos/living-watercolor/?reference=1&object=house'}];
+const ink = {id: 'ink', url: 'demos/living-watercolor/?reference=1&object=house'};
+let games;
+if (target === 'ink') games = [ink];
+else if (target === 'all') games = [...gameTargets(), ink];
+else {
+  const base = process.env.PATTERN_BASE;
+  if (!base) throw Error('PATTERN_BASE is required for --target changed');
+  const changed = execFileSync('git', ['diff', '--name-only', base + '...HEAD'], {
+    cwd: root, encoding: 'utf8'
+  }).trim().split('\n');
+  games = gameTargets().filter(game =>
+    changed.some(file => file.startsWith(game.url.replace(/\/$/, ''))));
+  if (changed.some(file => file.startsWith('demos/living-watercolor/'))) games.push(ink);
+  if (!games.length) games = [ink]; // A rule-only PR still proves that INK stays organic.
+}
 
 const web = await serve(root);
 const browser = await chromium.launch({headless: true, args: ['--use-gl=angle', '--use-angle=swiftshader']});

@@ -175,6 +175,8 @@ def check(root: Path, r) -> set[str]:
     physical = [m["silhouette"] for name, m in ref_measured.items()
                 if name not in technical and isinstance(m.get("silhouette"), (int, float))]
     silhouette_min = percentile10(physical)
+    structure_min = percentile10([m["structure"] for name, m in ref_measured.items()
+                                  if name not in technical and isinstance(m.get("structure"), (int, float))])
     # The largest palette variance accepted *between* reference objects defines
     # the allowed style variation. No color, texture or shader is banned.
     def palette_distance(one, two):
@@ -186,6 +188,7 @@ def check(root: Path, r) -> set[str]:
                for i, p in enumerate(palettes)] if len(palettes) > 1 else []
     palette_limit = max(40., sorted(nearest)[int(.9*(len(nearest)-1))] if nearest else 40.)
     r.stats["htmlpack_object_quality"] = {"silhouette_min": round(silhouette_min, 5),
+                                         "structure_min": round(structure_min, 5),
                                          "palette_distance_max": round(palette_limit, 2),
                                          "reference_isolated": len(ref_measured)}
     r.stats["htmlpack_quality_min"] = {k: round(v, 5) for k, v in thresholds.items()}
@@ -206,6 +209,12 @@ def check(root: Path, r) -> set[str]:
                 r.add("HP10", "HARD", name,
                       f"примитивнее эталона: сложность силуэта {shape} < {silhouette_min:.4f}",
                       "Добавь выразительный узнаваемый контур: челюсти, опоры, фактуру, конечности")
+        if role in {"enemy", "world", "ally", "pickup", "creature", "character"}:
+            structure = m.get("structure")
+            if not isinstance(structure, (int, float)) or structure + 1e-6 < structure_min:
+                r.add("HP12", "HARD", name,
+                      f"примитивнее эталона: совокупная структура {structure} < {structure_min:.4f}",
+                      "Усложни силуэт и внутренние детали самого ассета; свечение фона не учитывается")
         palette = m.get("palette")
         if not isinstance(palette, list) or len(palette) != 3:
             r.add("HP11", "HARD", name, "отсутствует палитра изолированных пикселей",

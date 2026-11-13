@@ -46,6 +46,7 @@ MUTANTS = [
     ("kinds/htmlpack.py", "if unisolated:", "if False and unisolated:"),
     ("kinds/htmlpack.py", "if not isinstance(shape, (int, float)) or shape + 1e-6 < silhouette_min:", "if False:"),
     ("kinds/htmlpack.py", "if color_delta > palette_limit:", "if False:"),
+    ("kinds/htmlpack.py", "if not isinstance(structure, (int, float)) or structure + 1e-6 < structure_min:", "if False:"),
     ("kinds/htmlpack_harness.mjs", "window.__ISOLATE__(id,false)", "window.__ISOLATE__(id,true)"),
     ("kinds/htmlpack_harness.mjs", r"const refDraw=/update\(t,dt\);(\s*)renderer\.setRenderTarget\(rtA\);/;", "const refDraw=/NO_MATCH/;"),
 ]

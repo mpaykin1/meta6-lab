@@ -73,6 +73,6 @@ export function createInkObject(seed=23){
   sphere(root,[1.8,.20,1.25],[0,-.11,0],soil,false);
   foliage(root,random);
   const eye=sphere(root,[.09,.09,.09],[0,.62,.79],pigment(P.eye),false);
-  root.userData.updateInk=(elapsed)=>{eye.scale.setScalar(1+.10*Math.sin(elapsed*.75));};
+  root.userData.updateInk=(elapsed)=>{const a=1+.10*Math.sin(elapsed*.75);eye.scale.set(.09*a,.09*a,.09*a);};
   return root;
 }

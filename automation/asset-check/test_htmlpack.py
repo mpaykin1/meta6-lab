@@ -172,6 +172,15 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertIn("if(id==='sparks')burst(GX-1,GY,GZ+1.5,440", harness)
         self.assertIn("await page.evaluate(id=>window.__AC_WAKE__(id),id);", harness)
 
+    def test_HP13_compare_sheet_uses_only_object_mask(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("async function isolatePreview(page, onPng, offPng)", harness)
+        self.assertIn("if(delta<=23){pixels[i+3]=0;continue}", harness)
+        self.assertIn("const pad=Math.max(5,", harness)
+        self.assertIn("ctx.putImageData(frame,0,0)", harness)
+        self.assertIn("report.previews[id]=await isolatePreview(page,second.png,second.offPng)", harness)
+        self.assertNotIn("report.previews[id]=second.png.toString('base64')", harness)
+
     def test_HP8_unavailable_browser(self):
         with patch("subprocess.run", return_value=SimpleNamespace(
             stdout='{"ok":false,"error":"Chrome unavailable"}', stderr="", returncode=1)):

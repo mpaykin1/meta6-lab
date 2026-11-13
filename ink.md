@@ -16,6 +16,10 @@ Living Watercolor 3D — живой акварельный рендер на Thr
 Машинный паспорт с Git blob SHA: МГЛ `shared/references/living-watercolor.json`, МГ `ink/REFERENCE.json`.
 Первоисточник кода: `mpaykin1/World_server` commit 3114267847d36df12204cdeff37a6625d5c6afb6 (перенесён без изменения графики в PR #244 МГЛ).
 
+## Рецепт INK: БЕЗ ПАТТЕРНОВ (PASS владельца 13.11.2026)
+
+Форму акварельных пятен определяют 3D value noise (3 октавы) и domain warp, с отдельным seed каждого объекта и медленным дрейфом. Запрещена сумма постоянных плоских sin/cos. Сетка повторяющейся бумажной текстуры 7×7 убрана. Цвет, мазки и обводку менять нельзя. Разрешённое владельцем изменение эталона помечать в паспорте Git blob SHA. См. [BEZ_PATTERNOV.md](rules/01-stil-i-grafika/BEZ_PATTERNOV.md).
+
 ## Правила для всех ИИ
 
 1. **Не менять исходники эталона.** Файлы `index.html`, `client.js`, `shared/living-watercolor-*.js` — только чтение. Сверка — по blob SHA из паспорта.

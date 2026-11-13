@@ -78,7 +78,20 @@ const mutations = [
   // Deception: silently skip pause handling for the fixture's named game.
   ['named-game-skips-pause',
     'if (!segment.input) laterMs = 0;',
-    "if (!segment.input && segment.before?.game !== 'veil-terraces') laterMs = 0;"]
+    "if (!segment.input && segment.before?.game !== 'veil-terraces') laterMs = 0;"],
+  ['slow-x-microsteps-forgotten',
+    'pendingX += to.x - from.x - driftX * segment.durationMs;',
+    'pendingX = to.x - from.x - driftX * segment.durationMs;'],
+  ['slow-y-microsteps-forgotten',
+    'pendingY += to.y - from.y - driftY * segment.durationMs;',
+    'pendingY = to.y - from.y - driftY * segment.durationMs;'],
+  ['release-carries-false-displacement',
+    '      stationaryMs = 0;\n      pendingX = 0;\n      pendingY = 0;\n      continue;\n    }\n    sampled++;',
+    '      stationaryMs = 0;\n      continue;\n    }\n    sampled++;'],
+  // Deception: only the fixture's originally named game gets slow-movement detection.
+  ['slow-movement-named-game-deception',
+    'const distance = Math.hypot(pendingX, pendingY);',
+    "const distance = before.game === 'veil-terraces' ? Math.hypot(pendingX, pendingY) : 0;"]
 ];
 
 try {
@@ -89,7 +102,7 @@ try {
     assert.notEqual(mutant, original, 'Mutation failed: ' + name);
     execute(mutant, name, false);
   }
-  console.log('B2_MUTATIONS_PASS 21 hostile variants including vanished-hero death and deception');
+  console.log('B2_MUTATIONS_PASS all hostile variants including slow microsteps and deception');
 } finally {
   rmSync(temp, {recursive: true, force: true});
 }

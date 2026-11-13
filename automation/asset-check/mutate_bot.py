@@ -45,6 +45,7 @@ MUTANTS = [
     ("kinds/htmlpack.py", 'if new_ids and "window.__PACK_PROBE__" not in source:', "if False:"),
     ("kinds/htmlpack.py", "if unisolated:", "if False and unisolated:"),
     ("kinds/htmlpack.py", "if shape_deform + 1e-6 < deform_min:", "if False and shape_deform + 1e-6 < deform_min:"),
+    ("kinds/htmlpack_harness.mjs", "await page.evaluate(id=>window.__AC_WAKE__(id),id);", "await page.evaluate(id=>void id,id);"),
     ("kinds/htmlpack.py", "if not isinstance(shape, (int, float)) or shape + 1e-6 < silhouette_min:", "if False:"),
     ("kinds/htmlpack.py", "if color_delta > palette_limit:", "if False:"),
     ("kinds/htmlpack_harness.mjs", "window.__ISOLATE__(id,false)", "window.__ISOLATE__(id,true)"),

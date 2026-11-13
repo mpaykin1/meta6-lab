@@ -188,6 +188,10 @@ window.__ISOLATE__=(id,shown)=>{
  if(!known)throw Error('HP10: isolation target not found '+id);
  __acHidden=shown?null:id;return true;
 };
+// Transient effects must be actually active before their shown/hidden capture.
+window.__AC_WAKE__=id=>{
+ if(id==='sparks')burst(GX-1,GY,GZ+1.5,440,11,.65,5.0,-5);
+};
 window.__AC_APPLY__=()=>{
  __acUndo=[];
  if(!__acHidden)return;
@@ -248,6 +252,7 @@ async function measure(browser,file){
      },{target:fixedCamera,tolerance:CAMERA_TOLERANCE},{timeout:4500,polling:80});
    }else await page.waitForTimeout(1000);
    await page.waitForTimeout(100);
+   await page.evaluate(id=>window.__AC_WAKE__(id),id);
    const capture=async()=>{
      await page.evaluate(()=>{window.__AC_FREEZE__=true});
      await page.waitForTimeout(40);

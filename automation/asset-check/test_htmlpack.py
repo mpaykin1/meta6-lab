@@ -166,6 +166,12 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertIn(r"const refDraw=/update\(t,dt\);(\s*)renderer\.setRenderTarget\(rtA\);/;", harness)
         self.assertIn("source.replace(refDraw,", harness)
 
+    def test_HP10_transient_sparks_are_activated_before_isolation(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("window.__AC_WAKE__=id=>", harness)
+        self.assertIn("if(id==='sparks')burst(GX-1,GY,GZ+1.5,440", harness)
+        self.assertIn("await page.evaluate(id=>window.__AC_WAKE__(id),id);", harness)
+
     def test_HP8_unavailable_browser(self):
         with patch("subprocess.run", return_value=SimpleNamespace(
             stdout='{"ok":false,"error":"Chrome unavailable"}', stderr="", returncode=1)):

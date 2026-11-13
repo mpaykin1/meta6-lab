@@ -24,6 +24,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Fast syntax preflight before browser installation
+        run: |
+          node --check games/archer-in-the-fog/src/goal-target.js
+          node --check games/archer-in-the-fog/src/arc2_module.js
+          node --check scripts/archer-proof/archer.mjs
+      - name: Reuse Chromium and npm download caches
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/ms-playwright
+            ~/.npm
+          key: archer-playwright-${{ runner.os }}-${{ runner.arch }}-1.56.1
       - name: Browser dependencies
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1 pngjs@7.0.0

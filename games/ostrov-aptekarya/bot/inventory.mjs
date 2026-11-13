@@ -45,6 +45,13 @@ export function inventory(input) {
     if(!game.includes(marker))throw Error('Потеряна механика главы I: '+marker);
   }
   if(!adapter.includes('Object.freeze')) throw Error('Ручка META BOT не защищена');
+  // Бот ведёт героя, но не должен автоматически закрывать двери внутри игровой логики.
+  // Разрешён только настоящий ввод игрока (нажатие Space / иконки) из внешнего бота.
+  const botBody = game.split('function botInput(dt) {')[1]?.split('// ---------- Симуляция')[0];
+  if(!botBody)throw Error('Не найден бот главы I');
+  const cleanBot = botBody.replace(/\\/\\*[\\s\\S]*?\\*\\/|\\/\\/[^\\n]*/g,'');
+  if(/\\bchapter2\\s*(?:\\.\\s*(?:action|botActionIfNear)\\s*\\(|\\[)/.test(cleanBot))
+    throw Error('Недопустимо: бот закрывает дверь из движка без пользовательского ввода');
   return {
     scriptKeys:Object.keys(entries).length,
     chapter1ScriptKeys:Object.keys(baseline).length,

@@ -59,7 +59,7 @@ try {
       if (!result?.ok()) throw Error('HTTP ' + (result?.status() || 'no-response'));
       await page.locator('canvas').first().waitFor({state: 'visible', timeout: 16000});
       if (game.id === 'ink') {
-        await page.waitForFunction(() => window.__LIVING_WATERCOLOR_3D_READY__?.ready, {timeout: 18000});
+        await page.waitForFunction(() => window.__LIVING_WATERCOLOR_3D_READY__?.ready, undefined, {timeout: 18000});
         await page.addStyleTag({content: '#label,#hint,#chooser{visibility:hidden!important}'});
       }
       const images = [];
@@ -92,7 +92,7 @@ try {
   }
 } finally {
   await browser.close();
-  await new Promise(done => web.close() || done());
+  web.close();
 }
 writeFileSync(join(out, 'index.json'), JSON.stringify({games: inventory, errors}, null, 2));
 if (errors.length) process.exitCode = 1;

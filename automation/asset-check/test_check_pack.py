@@ -111,6 +111,10 @@ class Traps(unittest.TestCase):
         (self.d / "atlas.json").unlink()
         self.assertIn("A1", self.ids())
 
+    def test_C3_symlink_out_of_pack(self):
+        (self.d / "evil.png").symlink_to("/etc/hostname")
+        self.assertIn("C3", self.ids())
+
     def test_A2_missing_file(self):
         (self.d / "characters/hero_idle.png").unlink()
         self.assertIn("A2", self.ids())

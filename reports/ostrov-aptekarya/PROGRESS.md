@@ -19,9 +19,9 @@
 |---|---|---|---|
 | 0 — прочитан лор, выбрано ядро | выполнен | [b97e4a1](https://github.com/mpaykin1/meta6-lab/commit/b97e4a1170e60ccee2f9135b29ece647e0882ead) | не запускался |
 | Инвентаризация главы I | выполнен | [c5a3477](https://github.com/mpaykin1/meta6-lab/commit/c5a34778912b126394f9eff5b3ceda1a2ebf3bdd) | не запускался |
-| 1–10 — глава II, переход и диалоги | следующий | — | — |
-| 11 — бот и браузерные проверки | не начат | — | — |
-| 12 — PR и проверка HTTP 200 | не начат | — | — |
+| 1–10 — глава II, переход и диалоги | выполнен | [67b2d927](https://github.com/mpaykin1/meta6-lab/commit/67b2d9273a9ca0e7c14410d8882f8964fed55dab) | не запускался |
+| 11 — бот и браузерные проверки | код добавлен, CI ожидает PR | [c3d4d207](https://github.com/mpaykin1/meta6-lab/commit/c3d4d2078223bb666d52dfa3ddfa535d4a8a3782), [32cbeaab](https://github.com/mpaykin1/meta6-lab/commit/32cbeaab640683dff53c16dd6a0a5d0c2b4b6a4a) | не запускался |
+| 12 — PR и проверка HTTP 200 | следующий | — | — |
 | Развитие и ловушка | не начат | — | — |
 
 ## Развитие

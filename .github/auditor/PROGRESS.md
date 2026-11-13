@@ -21,3 +21,15 @@
 - Ревизор в PR: зелёный https://github.com/mpaykin1/meta6-lab/actions/runs/43024276845
 - Защищённый workflow: ожидает Claude https://github.com/mpaykin1/meta6-lab/actions/runs/43024276457
 - Единственный Issue: https://github.com/mpaykin1/meta6-lab/issues/253 (ботом ещё не обновлён).
+
+## Круг 2026-11-13 — task-table, main c42a2dd4d07d8cae745cd963b4b3748ad7600084
+
+- Шаг 0 · 2026-11-13T04:14:00Z: правила и main PROGRESS прочитаны; продолжение а–в найдено в [#254](https://github.com/mpaykin1/meta6-lab/pull/254), [#269](https://github.com/mpaykin1/meta6-lab/pull/269), [#275](https://github.com/mpaykin1/meta6-lab/pull/275). Это подготовленные, не слитые улучшения; третья попытка #254 запрещена после двух STOROZHA отказов.
+- Шаг 1 · 2026-11-13T04:14:00Z: последние schedule [43336396518](https://github.com/mpaykin1/meta6-lab/actions/runs/43336396518), [43284747015](https://github.com/mpaykin1/meta6-lab/actions/runs/43284747015), [43205929183](https://github.com/mpaykin1/meta6-lab/actions/runs/43205929183) success, интервалы 5:26:25 и 7:50:30. Workflow уже содержит hourly cron 13 * * * *; менять cron без доказанной причины задержек нельзя. Причина задержек не установлена.
+- Шаг 2 · 2026-11-13T04:14:00Z: [#253](https://github.com/mpaykin1/meta6-lab/issues/253) open, updated_at 03:40:14Z (менее 70 минут). Поиск одноимённых Issues: #253 и закрытый #250; GraphQL/pin не предоставлен коннектором, закрепление НЕ подтверждено.
+- Шаг 3 · 2026-11-13T04:14:00Z: две строки о schedule в [#253](https://github.com/mpaykin1/meta6-lab/issues/253) сверены с run 43336396518 (SHA 7d420ed8e0da7748b8ecea0e9082dbb80f09808d) и 43284747015 (SHA 4da1fea899da6d36c38d37431ed8648ac0a2a04d): conclusion=success и интервалы соответствуют API. Называть срез 00:21 текущим состоянием нельзя.
+- Шаг 4 · 2026-11-13T04:14:00Z: текущий раздел 🚨 [#253](https://github.com/mpaykin1/meta6-lab/issues/253) не содержит конкретного нового нарушения для исправления; защищённые изменения #254/#269/#275 не сливать.
+- Шаг 5: выбрано г) сверка ZADACHI с PR; отдельная ветка lab/auditor-task-table-20261113. [Регистрация задачи](https://github.com/mpaykin1/meta6-lab/commit/23bc6f6ca1fe82198c608faff70bf6f83413acb8).
+
+### Урок
+Main PROGRESS устарел относительно открытых веток. Перед выбором улучшения читать PROGRESS всех открытых auditor PR, объединять статусы по номеру PR и SHA, не повторять уже подготовленные а–в и не делать третью попытку заблокированного #254. Готовность реализации в ветке и готовность main учитывать отдельно.

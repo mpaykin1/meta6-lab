@@ -24,13 +24,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Permanent syntax preflight mutation traps
+        run: node scripts/archer-proof/verify-preflight.mjs
       - name: Fast syntax preflight before browser installation
-        run: |
-          set -euo pipefail
-          node --check scripts/archer-proof/archer.mjs
-          for source in games/archer-in-the-fog/src/goal-target.js games/archer-in-the-fog/src/arc2_module.js; do
-            if [[ -f "$source" ]]; then node --check "$source"; fi
-          done
+        run: node scripts/archer-proof/preflight.mjs
       - name: Reuse Chromium and npm download caches
         uses: actions/cache@v4
         with:

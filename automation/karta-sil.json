@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "status": "нет данных",
+  "periodDays": 14,
+  "types": [
+    {
+      "id": "game_reference",
+      "label": "эталон игры"
+    },
+    {
+      "id": "game_fix",
+      "label": "правка игры"
+    },
+    {
+      "id": "bot_check",
+      "label": "бот/проверка"
+    },
+    {
+      "id": "workflow_ci",
+      "label": "workflow/CI"
+    },
+    {
+      "id": "repo_clean",
+      "label": "уборка репозитория"
+    },
+    {
+      "id": "summary_dispatch",
+      "label": "сводка/диспетчер"
+    },
+    {
+      "id": "assets",
+      "label": "ассеты"
+    },
+    {
+      "id": "rules_docs",
+      "label": "правила/доки"
+    }
+  ],
+  "metrics": [],
+  "prs": []
+}

@@ -1,3 +1,4 @@
+import {routeFor} from '../karta-sil/route.mjs';
 import fs from 'node:fs/promises';
 const {GITHUB_REPOSITORY: repo='mpaykin1/meta6-lab',GITHUB_TOKEN: token}=process.env;
 const root='https://api.github.com/repos/'+repo;
@@ -55,6 +56,8 @@ export async function main(){
  const finish=await fs.readFile('rules/09-platforma/FINISH.md','utf8');
  const finishIds=[...finish.matchAll(/^\|\s*([MBLP]\d+)\s*\|[^|]*\|[^|]*\|\s*НЕТ\b/gm)].map(m=>m[1]);
  let previous='';try{previous=await fs.readFile('DISPETCHER.md','utf8')}catch{}
+ const map=JSON.parse(await fs.readFile('automation/karta-sil.json','utf8'));
+ const forChat=[];
  const cards=[],claude=[];
  for(const t of tasks){
  let pr;try{pr=await api('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
@@ -72,16 +75,25 @@ export async function main(){
  const stalled=/ЗАВИС/.test(t.status),isClaude=/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(pr.body||'');
  const label=t.title+' '+(pr.title||'');
  const isFinish=finishIds.some(id=>new RegExp('(^|[^A-Z0-9])'+id+'([^A-Z0-9]|$)','i').test(label));
- const c={...t,branch:pr.head.ref,headSha:pr.head.sha,conflict,conflictUnknown,red:failed.length>0,stalled,finish:isFinish,lastCommit};
+ const c={...t,branch:pr.head.ref,headSha:pr.head.sha,conflict,conflictUnknown,red:failed.length>0,stalled,finish:isFinish,lastCommit,body:pr.body||''};
  if(isClaude){claude.push(c);continue}
  if(!conflict&&!conflictUnknown&&!failed.length&&!stalled&&!stale)continue;
  c.priority=(conflict||conflictUnknown)?0:failed.length?1:stalled?2:3;
  c.problem=conflict?(resolution.unresolved?'Конфликт с main (прошлый статус, mergeable=null)':'Конфликт с main'):conflictUnknown?'Статус конфликта неизвестен: mergeable=null после 3 повторов':failed.length?'Красная проверка: '+failed.map(x=>x.name+' ('+x.url+')').join(', '):stalled?'🛑 ЗАВИС':'💤 ЗАБРОШЕНО более 2 суток';
  c.action=conflict?'Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.':conflictUnknown?'Проверь конфликт вручную: GitHub не ответил после 3 повторов; не считай PR бесконфликтным.':failed.length?'Исправь '+failed[0].name+' по логу '+failed[0].url+' и повтори CI.':stalled?'Продолжи работу по PR, проверь CI и доведи до слияния.':c.finish?'Доведи пункт FINISH.md до зелёных проверок.':'Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.';
+ const routing=routeFor(c,map);
+ c.routing=routing;
+ if(routing.target==='claude'){claude.push(c);continue;}
+ if(routing.target==='chat'){forChat.push(c);continue;}
+ c.action+=' Режим: '+routing.note;
  cards.push(c);
  }
  const output=render(cards,claude,previous);
  assertNotEmpty(await fs.readFile('ZADACHI.md','utf8'),cards);
  await fs.writeFile('DISPETCHER.md',output);
+ const chat='# ТОЛКНУТЬ — обычный чат ChatGPT\n\n'+forChat.map(c=>
+ '- [PR #'+c.id+'](https://github.com/'+repo+'/pull/'+c.id+') · '+c.routing.zone+
+ ' · '+c.routing.note+' · '+c.problem).join('\n')+'\n';
+ await fs.writeFile('TOLKNUT.md',chat);
  console.log(output.slice(0,250));
 }

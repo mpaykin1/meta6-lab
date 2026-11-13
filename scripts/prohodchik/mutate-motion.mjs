@@ -34,8 +34,8 @@ const mutations = [
     'stationaryMs = segment.durationMs;'],
   ['first-motion-disables-stuck-alarm', 'if (stationaryMs >= STUCK_MS) {',
     'if (stationaryMs >= STUCK_MS && !motion) {'],
-  ['auto-drift-falsely-accepted', 'to.x - from.x - driftX * segment.durationMs,',
-    'to.x - from.x,'],
+  ['auto-drift-falsely-accepted', 'pendingX += to.x - from.x - driftX * segment.durationMs;',
+    'pendingX += to.x - from.x;'],
   ['death-ignored', 'if (before?.alive === false || after?.alive === false) {',
     'if (false && (before?.alive === false || after?.alive === false)) {'],
   ['death-vanished-hero-fallback-disabled',
@@ -51,8 +51,8 @@ const mutations = [
   ['death-game-specific-deception',
     'if (before?.alive === false || after?.alive === false) {',
     "if ((before?.alive === false || after?.alive === false) && before?.game !== 'veil-terraces') {"],
-  ['progress-counted-as-movement', 'if (distance > EPSILON)',
-    'if (distance > EPSILON || after.progress > before.progress)'],
+  ['progress-counted-as-movement', 'if (distance > EPSILON && observedDistance > EPSILON)',
+    'if ((distance > EPSILON && observedDistance > EPSILON) || after.progress > before.progress)'],
   ['level-change-counted-as-movement', 'if (before.level !== after.level) {',
     "if (false && before.level !== after.level) {"],
   ['no-input-counted-as-movement', 'if (!segment.input) {', 'if (false && !segment.input) {'],
@@ -86,12 +86,20 @@ const mutations = [
     'pendingY += to.y - from.y - driftY * segment.durationMs;',
     'pendingY = to.y - from.y - driftY * segment.durationMs;'],
   ['release-carries-false-displacement',
-    '      stationaryMs = 0;\n      pendingX = 0;\n      pendingY = 0;\n      continue;\n    }\n    sampled++;',
-    '      stationaryMs = 0;\n      continue;\n    }\n    sampled++;'],
+    '      stationaryMs = 0;\n      pendingX = 0;\n      pendingY = 0;\n      observedX = 0;\n      observedY = 0;',
+    '      stationaryMs = 0;'],
   // Deception: only the fixture's originally named game gets slow-movement detection.
   ['slow-movement-named-game-deception',
     'const distance = Math.hypot(pendingX, pendingY);',
-    "const distance = before.game === 'veil-terraces' ? Math.hypot(pendingX, pendingY) : 0;"]
+    "const distance = before.game === 'veil-terraces' ? Math.hypot(pendingX, pendingY) : 0;"],
+  ['stopped-drift-manufactures-motion',
+    'distance > EPSILON && observedDistance > EPSILON', 'distance > EPSILON'],
+  ['corrected-distance-pretends-to-be-observed',
+    'const observedDistance = Math.hypot(observedX, observedY);',
+    'const observedDistance = Math.hypot(pendingX, pendingY);'],
+  ['stopped-drift-game-deception',
+    'distance > EPSILON && observedDistance > EPSILON',
+    "distance > EPSILON && (before.game === 'veil-terraces' || observedDistance > EPSILON)"]
 ];
 
 try {
@@ -106,3 +114,4 @@ try {
 } finally {
   rmSync(temp, {recursive: true, force: true});
 }
+

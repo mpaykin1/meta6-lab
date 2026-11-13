@@ -20,6 +20,8 @@ export function assessMotion(segments) {
   // Integrate small consecutive steps: a slow hero can move < EPSILON per frame.
   let pendingX = 0;
   let pendingY = 0;
+  let observedX = 0;
+  let observedY = 0;
   for (const segment of segments) {
     if (!segment || !Number.isFinite(segment.durationMs) || segment.durationMs <= 0) {
       return result('INVALID', {reason: 'invalid input duration'});
@@ -46,17 +48,25 @@ export function assessMotion(segments) {
       stationaryMs = 0;
       pendingX = 0;
       pendingY = 0;
+      observedX = 0;
+      observedY = 0;
       continue;
     }
     sampled++;
+    observedX += to.x - from.x;
+    observedY += to.y - from.y;
     pendingX += to.x - from.x - driftX * segment.durationMs;
     pendingY += to.y - from.y - driftY * segment.durationMs;
     const distance = Math.hypot(pendingX, pendingY);
-    if (distance > EPSILON) {
+    // Drift subtraction cannot manufacture movement when world coordinates are still.
+    const observedDistance = Math.hypot(observedX, observedY);
+    if (distance > EPSILON && observedDistance > EPSILON) {
       motion = result('MOVED', {distance, level: after.level});
       stationaryMs = 0;
       pendingX = 0;
       pendingY = 0;
+      observedX = 0;
+      observedY = 0;
       continue;
     }
     stationaryMs += segment.durationMs;
@@ -120,3 +130,4 @@ export function assessB2Probe(segments) {
   }
   return verdict;
 }
+

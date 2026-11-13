@@ -85,6 +85,15 @@ function fixtures(assessMotion, assessFixedViewport, assessB2Probe) {
     ))
   ];
   assert.equal(assessMotion(microOverDrift).status, 'MOVED');
+  // Stopping passive drift at a wall is not player movement in the opposite direction.
+  for (const [x, y, game] of [[0.5, 0, 'veil-terraces'], [0, -0.5, 'other-game']]) {
+    const stoppedDrift = [
+      interval(state(0, 0, {game}), state(x, y, {game}), 500, false),
+      ...Array.from({length: 5}, () => interval(state(x, y, {game}), state(x, y, {game}), 500))
+    ];
+    assert.equal(assessMotion(stoppedDrift).status, 'STUCK');
+    assert.equal(assessB2Probe(stoppedDrift).status, 'STUCK');
+  }
 
   assert.equal(assessMotion(falseProgress).status, 'STUCK');
   const passive = interval(state(0, 0), state(0.5, 0), 500, false);
@@ -279,3 +288,4 @@ try {
   console.error(error.stack || error.message);
   process.exitCode = 1;
 }
+

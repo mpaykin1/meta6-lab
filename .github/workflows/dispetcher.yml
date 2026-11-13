@@ -35,24 +35,35 @@ jobs:
       - run: node scripts/dispetcher/run.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit queue to bot-state with five conflict retries
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git switch -q -C antisueta-refresh origin/main
+            git reset --hard origin/main
+            node scripts/dispetcher/run.mjs
+            if bash scripts/polza/write-bot-state.sh DISPETCHER.md; then exit 0; fi
+            echo "bot-state conflict retry $attempt"
+          done
+          exit 1
       - name: Run offline safety traps and daily noise measurement
         if: github.event_name == 'schedule'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          node scripts/polza/verify-noise.mjs
-          node scripts/polza/mutate-noise.mjs
-          node scripts/polza/noise.mjs "$GITHUB_RUN_ID"
-      - name: Publish queue and daily metrics exclusively to bot-state
-        if: github.ref == 'refs/heads/main'
         shell: bash
         run: |
           set -euo pipefail
-          files=(DISPETCHER.md)
-          if [ -f automation/progress/antisueta-noise.json ]; then
-            files+=(automation/progress/antisueta-noise.json automation/progress/antisueta-noise.log)
-            if [ -f /tmp/antisueta-alert ]; then files+=(DLYA_CLAUDE.md); fi
-          fi
+          git switch -q -C antisueta-noise origin/main
+          node scripts/polza/verify-noise.mjs
+          node scripts/polza/mutate-noise.mjs
+          node scripts/polza/noise.mjs "$GITHUB_RUN_ID"
+          files=(automation/progress/antisueta-noise.json automation/progress/antisueta-noise.log)
+          if [ -f /tmp/antisueta-alert ]; then files+=(DLYA_CLAUDE.md); fi
           bash scripts/polza/write-bot-state.sh "${files[@]}"
       - name: Run consolidated hourly state and audit jobs
         if: github.event_name == 'schedule'

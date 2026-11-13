@@ -11,6 +11,10 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MUTANTS = [
+    ("kinds/htmlpack_harness.mjs", "if(delta<=23){pixels[i+3]=0;continue}", "if(false){pixels[i+3]=0;continue}"),
+    ("kinds/htmlpack.py", 'r.add("HP13", "HARD", str(compare),', 'r.add("HP13OFF", "SOFT", str(compare),'),
+    ("kinds/htmlpack.py", "if shape_deform + 1e-6 < deform_min:", "if False and shape_deform + 1e-6 < deform_min:"),
+    ("kinds/htmlpack_harness.mjs", "await page.evaluate(id=>window.__AC_WAKE__(id),id);", "await page.evaluate(id=>void id,id);"),
     ("kinds/htmlpack_pixels.mjs", "if(!active[p])continue;", "if(false)continue;"),
     ("kinds/htmlpack_pixels.mjs", "Math.min(rgbDistance(on0.data,prev*c,shown,i),", "Math.max(rgbDistance(on0.data,prev*c,shown,i),"),
     ("kinds/htmlpack_pixels.mjs", "Math.min(rgbDistance(shown,i,shown,q*c),", "Math.max(rgbDistance(shown,i,shown,q*c),"),

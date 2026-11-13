@@ -10,6 +10,8 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from PIL import Image
+
 import check_pack as cp
 
 REPO = Path(os.environ.get("ASSET_CHECK_REPO") or Path(__file__).resolve().parents[2])
@@ -38,17 +40,19 @@ class HtmlPackTraps(unittest.TestCase):
         self.root.joinpath("index.html").write_text(src, "utf-8")
         manifest = dict(COMMON, assets={"new_shadow": {"role": "enemy"}})
         self.root.joinpath("pack.json").write_text(json.dumps(manifest), "utf-8")
+        (self.root / "_check").mkdir(exist_ok=True)
+        Image.new("RGB", (1440, 316), (7, 24, 39)).save(self.root / "_check/compare.png")
 
     def metrics(self, new=None, fps=45):
         ref = {name: {"visible": .14, "detail": .07, "motion": .08, "colors": 130,
                       "fps": 45, "isolated": 1} for name in self.old}
         for metric in ref.values():
-            metric.update(silhouette=.21, palette=[108, 142, 180])
+            metric.update(silhouette=.21, palette=[108, 142, 180], deformation=.09)
         cand = {name: dict(metric) for name, metric in ref.items()}
         if new is not None:
             cand["new_shadow"] = dict(visible=.16, detail=.09, motion=.1, colors=140,
                                       fps=fps, isolated=.16)
-            cand["new_shadow"].update(silhouette=.25, palette=[119, 153, 176])
+            cand["new_shadow"].update(silhouette=.25, palette=[119, 153, 176], deformation=.1)
             cand["new_shadow"].update(new)
         return {"ok": True, "reference": {"items": ref, "errors": [], "screen_text": False},
                 "candidate": {"items": cand, "errors": [], "screen_text": False}}
@@ -158,6 +162,52 @@ class HtmlPackTraps(unittest.TestCase):
         with patch("subprocess.run", return_value=SimpleNamespace(
             stdout='{"ok":false,"error":"Chrome unavailable"}', stderr="", returncode=1)):
             self.assertIn("HP8", {x["id"] for x in cp.check(self.root).hard()})
+
+
+    def test_HP12_glow_only_fails_articulated_motion(self):
+        self.add_new()
+        self.assertIn("HP12", self.ids(self.metrics(new={"motion": .3, "deformation": 0})))
+
+
+    def test_HP12_real_articulation_passes(self):
+        self.add_new()
+        self.assertNotIn("HP12", self.ids(self.metrics(new={"deformation": .2})))
+
+
+    def test_HP12_uses_shape_mask_not_rgb_only(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        harness += (Path(__file__).resolve().parent / "kinds/htmlpack_pixels.mjs").read_text("utf-8")
+        self.assertIn("differentShape=0,unionShape=0", harness)
+        self.assertIn("deformation:+deformation.toFixed(5)", harness)
+
+
+    def test_HP10_transient_sparks_are_activated_before_isolation(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("window.__AC_WAKE__=id=>", harness)
+        self.assertIn("if(id==='sparks')burst(GX-1,GY,GZ+1.5,440", harness)
+        self.assertIn("await page.evaluate(id=>window.__AC_WAKE__(id),id);", harness)
+
+
+    def test_HP13_compare_sheet_uses_only_object_mask(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("async function isolatePreview(page, onPng, offPng)", harness)
+        self.assertIn("if(delta<=23){pixels[i+3]=0;continue}", harness)
+        self.assertIn("const pad=Math.max(5,", harness)
+        self.assertIn("ctx.putImageData(frame,0,0)", harness)
+        self.assertIn("report.previews[id]=await isolatePreview(page,second.png,second.offPng)", harness)
+        self.assertNotIn("report.previews[id]=second.png.toString('base64')", harness)
+
+
+    def test_HP13_missing_sheet_is_hard(self):
+        self.add_new()
+        (self.root / "_check/compare.png").unlink()
+        self.assertIn("HP13", self.ids(self.metrics(new={})))
+
+
+    def test_HP13_incomplete_sheet_is_hard(self):
+        self.add_new()
+        Image.new("RGB", (1440, 12), (7, 24, 39)).save(self.root / "_check/compare.png")
+        self.assertIn("HP13", self.ids(self.metrics(new={})))
 
 
 if __name__ == "__main__":

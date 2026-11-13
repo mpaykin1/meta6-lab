@@ -38,7 +38,7 @@ except ImportError:  # pragma: no cover
     print("Нужны pillow и numpy: pip install pillow numpy", file=sys.stderr)
     sys.exit(2)
 
-BOT_VERSION = "2.4.2"
+BOT_VERSION = "2.4.5"
 HERE = Path(__file__).resolve().parent
 BUDGET = {"pack_mb_soft": 8.0, "pack_mb_hard": 25.0, "files_soft": 120}
 DOC_FILES = {".md", ".txt"}
@@ -218,6 +218,10 @@ def main(argv=None):
         o.mkdir(parents=True, exist_ok=True)
         (o / "REPORT.md").write_text(md, "utf-8")
         (o / "report.json").write_text(json.dumps(js, ensure_ascii=False, indent=1), "utf-8")
+        compare = src / "_check" / "compare.png"
+        target = o / "compare.png"
+        if "htmlpack" in r.kinds and compare.is_file() and compare.resolve() != target.resolve():
+            shutil.copy2(compare, target)
     print(md)
     if r.hard() or (a.strict and r.items):
         return 1

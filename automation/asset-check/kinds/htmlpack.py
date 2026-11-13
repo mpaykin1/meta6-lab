@@ -136,6 +136,27 @@ def check(root: Path, r) -> set[str]:
         r.add("HP8", "HARD", "index.html", f"браузерный прогон не состоялся: {error}",
               "Проверь запуск headless Chrome, WebGL и исправь ошибки загрузки")
         return covered
+    # HP13: comparison must be produced by the *current* successful browser run.
+    # A pretty full-screen screenshot is not a valid isolated object comparison.
+    if new_ids:
+        compare = root / "_check" / "compare.png"
+        if not compare.is_file():
+            r.add("HP13", "HARD", str(compare),
+                  "нет листа сравнения изолированных ассетов с эталоном",
+                  "Браузерный harness должен записать _check/compare.png")
+        else:
+            try:
+                from PIL import Image
+                with Image.open(compare) as sheet:
+                    size = sheet.size
+                if size != (1440, 316 * len(new_ids)):
+                    r.add("HP13", "HARD", str(compare),
+                          f"сравнение неполное: размер {size}, нужно 1440×{316 * len(new_ids)}",
+                          "Нарисуй каждую строку: два эталона и один изолированный новый ассет")
+            except (OSError, ValueError) as ex:
+                r.add("HP13", "HARD", str(compare),
+                      f"сравнение не является читаемым PNG: {ex}",
+                      "Пересними лист сравнения браузером, не подделывая PNG")
     reference = data.get("reference", {})
     candidate = data.get("candidate", {})
     for label, measurement in (("эталон", reference), ("пак", candidate)):
@@ -185,9 +206,16 @@ def check(root: Path, r) -> set[str]:
     nearest = [min(palette_distance(p, q) for j, q in enumerate(palettes) if i != j)
                for i, p in enumerate(palettes)] if len(palettes) > 1 else []
     palette_limit = max(40., sorted(nearest)[int(.9*(len(nearest)-1))] if nearest else 40.)
+    articulated = [ref_measured[n]["deformation"] for n in
+                   ("hero", "cape", "beast", "tendrils", "jaws")
+                   if n in ref_measured and
+                   isinstance(ref_measured[n].get("deformation"), (int, float))
+                   and ref_measured[n]["deformation"] > 0]
+    deform_min = max(.003, percentile10(articulated))
     r.stats["htmlpack_object_quality"] = {"silhouette_min": round(silhouette_min, 5),
                                          "palette_distance_max": round(palette_limit, 2),
-                                         "reference_isolated": len(ref_measured)}
+                                         "reference_isolated": len(ref_measured),
+                                         "part_deformation_min": round(deform_min, 5)}
     r.stats["htmlpack_quality_min"] = {k: round(v, 5) for k, v in thresholds.items()}
     for name in new_ids:
         m = measured.get(name)
@@ -206,6 +234,12 @@ def check(root: Path, r) -> set[str]:
                 r.add("HP10", "HARD", name,
                       f"примитивнее эталона: сложность силуэта {shape} < {silhouette_min:.4f}",
                       "Добавь выразительный узнаваемый контур: челюсти, опоры, фактуру, конечности")
+        if role in {"enemy", "ally", "creature", "character"}:
+            shape_deform = float(m.get("deformation") or 0)
+            if shape_deform + 1e-6 < deform_min:
+                r.add("HP12", "HARD", name,
+                      f"нет движения частей: деформация маски {shape_deform:.4f} < эталона {deform_min:.4f}",
+                      "Анимируй суставы, крылья, хвост и плащ, не только цвет и общий сдвиг")
         palette = m.get("palette")
         if not isinstance(palette, list) or len(palette) != 3:
             r.add("HP11", "HARD", name, "отсутствует палитра изолированных пикселей",

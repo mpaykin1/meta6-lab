@@ -35,14 +35,16 @@ html,body{margin:0;width:100%;height:100%;background:#020912;overflow:hidden;tou
   <div id="ls"></div>
 </aside>
 <div id="err">Не удалось запустить графику (WebGL недоступен).</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
+<script type="module">
+import * as THREE from "../../../games/broken-city/lib/three.module.js";
+THREE.ColorManagement.enabled=false;
 (()=>{'use strict';
-const T=window.THREE,$=id=>document.getElementById(id);
+const T=THREE,$=id=>document.getElementById(id);
 const fail=()=>{$('err').style.display='flex'};
 if(!T){fail();return}
 const canvas=$('c');let renderer;
 try{renderer=new T.WebGLRenderer({canvas,antialias:false,alpha:false,powerPreference:'high-performance'})}catch(e){fail();return}
+renderer.outputColorSpace=T.LinearSRGBColorSpace;
 renderer.setPixelRatio(1);renderer.autoClear=true;renderer.setClearColor(0x06182c,1);
 
 /* ============ СОСТАВ ПАКА (скрытый счётчик, виден только в коде/консоли) ============ */

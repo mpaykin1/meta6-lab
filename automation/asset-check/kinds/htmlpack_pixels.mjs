@@ -1,4 +1,3 @@
-// Object-only measurements shared by the browser harness and numeric traps.
 export function features(on0, on1, off0, off1, fps) {
   const w=on1.width,h=on1.height,c=on1.channels, n=w*h;
   if ([on0,off0,off1].some(x=>x.width!==w||x.height!==h||x.channels!==c))
@@ -19,7 +18,7 @@ export function features(on0, on1, off0, off1, fps) {
   const active=masks[1],shown=on1.data;
   const signal=ons.map((on,k)=>Float64Array.from(on.data,(v,i)=>v-offs[k].data[i]));
   const count=sums[1].n;
-  if(!count)return {visible:0,detail:0,motion:0,isolated:0,silhouette:0,
+  if(!count)return {visible:0,detail:0,motion:0,deformation:0,isolated:0,silhouette:0,
     colors:0,fps:Math.round(fps),palette:[0,0,0]};
   const center=[sums[1].x/count,sums[1].y/count];
   const radii=new Float64Array(24),touched=new Uint8Array(24);
@@ -55,6 +54,16 @@ export function features(on0, on1, off0, off1, fps) {
       }
     }
   }
+  // HP12: compare silhouette masks after cancelling motion of the entire object.
+  // Pulsating light and color cannot impersonate animation of articulated parts.
+  let differentShape=0,unionShape=0;
+  for(let y=2;y<h-2;y+=2)for(let x=2;x<w-2;x+=2){
+    const now=Boolean(masks[1][y*w+x]);
+    const px=x+dx,py=y+dy;
+    const before=px>=2&&px<w-2&&py>=2&&py<h-2&&Boolean(masks[0][py*w+px]);
+    if(now||before){unionShape++;if(now!==before)differentShape++;}
+  }
+  const deformation=differentShape/Math.max(1,unionShape);
   const rad=Array.from(radii).filter((v,i)=>touched[i]);
   const avg=rad.reduce((x,y)=>x+y,0)/Math.max(1,rad.length);
   const varR=rad.reduce((x,y)=>x+(y-avg)**2,0)/Math.max(1,rad.length);
@@ -63,6 +72,7 @@ export function features(on0, on1, off0, off1, fps) {
   return {visible:+(count/(n/4)).toFixed(5),
     detail:+(edgeCount/Math.max(1,count*2)).toFixed(5),
     motion:+(motionPixels/Math.max(1,validMotion)).toFixed(5),
+    deformation:+deformation.toFixed(5),
     silhouette:+silhouette.toFixed(5),
     colors:colors.size, fps:Math.round(fps),
     isolated:+(count/(n/4)).toFixed(5),

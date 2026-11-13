@@ -2,13 +2,17 @@
 // node htmlpack_harness.mjs <reference/index.html> <candidate/index.html>
 import {chromium} from 'playwright-core';
 import {existsSync, readFileSync, writeFileSync, mkdtempSync, rmSync, mkdirSync} from 'node:fs';
-import {resolve, join, dirname} from 'node:path';
+import {resolve, join, dirname, extname, sep} from 'node:path';
+import {createServer} from 'node:http';
+import {fileURLToPath} from 'node:url';
 import {tmpdir} from 'node:os';
 import {pathToFileURL} from 'node:url';
 import {inflateSync} from 'node:zlib';
 import {features} from './htmlpack_pixels.mjs';
 
 const [refPath, packPath] = process.argv.slice(2);
+const repoRoot=resolve(dirname(fileURLToPath(import.meta.url)),'../../..');
+let runtimeOrigin='';
 const CAMERA_TOLERANCE=3.5;
 const result = {ok: false, reference: null, candidate: null};
 const chrome = [process.env.CHROME_BIN, '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser'].find(p => p && existsSync(p));
@@ -83,7 +87,7 @@ async function textOutsideMenu(page) {
   }));
 }
 // Runtime-only copies: the tracked reference HTML is never modified.
-export function instrumentIsolation(source) {
+function instrumentIsolation(source) {
   const marker='/* ============ РЕНДЕР ============ */';
   if(!source.includes(marker))throw Error('HP10: render insertion point absent');
   const hook=String.raw`
@@ -110,6 +114,10 @@ window.__ISOLATE__=(id,shown)=>{
    !!scene.children.find(o=>o.name==='shpili-plus-'+id);
  if(!known)throw Error('HP10: isolation target not found '+id);
  __acHidden=shown?null:id;return true;
+};
+// Transient effects must be actually active before their shown/hidden capture.
+window.__AC_WAKE__=id=>{
+ if(id==='sparks')burst(GX-1,GY,GZ+1.5,440,11,.65,5.0,-5);
 };
 window.__AC_APPLY__=()=>{
  __acUndo=[];
@@ -147,13 +155,53 @@ window.__AC_RESTORE__=()=>{for(const fn of __acUndo)fn();__acUndo=[]};
   if(!source.includes(outputLine))throw Error('HP10: render-restore insertion point absent');
   return source.replace(outputLine,outputLine+'window.__AC_RESTORE__();');
 }
+// Comparison sheets must depict only the actual object, not a scenic background.
+async function isolatePreview(page, onPng, offPng) {
+  return page.evaluate(async ([foreground,background]) => {
+    const read=async base64=>{
+      const image=new Image();image.src='data:image/png;base64,'+base64;
+      await image.decode();return image;
+    };
+    const [on,off]=await Promise.all([read(foreground),read(background)]);
+    const source=document.createElement('canvas');source.width=on.width;source.height=on.height;
+    const ctx=source.getContext('2d',{willReadFrequently:true});
+    ctx.drawImage(on,0,0);const frame=ctx.getImageData(0,0,on.width,on.height);
+    ctx.clearRect(0,0,on.width,on.height);ctx.drawImage(off,0,0);
+    const hidden=ctx.getImageData(0,0,on.width,on.height);
+    const pixels=frame.data,back=hidden.data;
+    let left=on.width,top=on.height,right=0,bottom=0,area=0;
+    for(let y=0;y<on.height;y++)for(let x=0;x<on.width;x++){
+      const i=4*(y*on.width+x);
+      const delta=(Math.abs(pixels[i]-back[i])+
+                   Math.abs(pixels[i+1]-back[i+1])+
+                   Math.abs(pixels[i+2]-back[i+2]))/3;
+      if(delta<=23){pixels[i+3]=0;continue}
+      pixels[i+3]=255;area++;
+      left=Math.min(left,x);right=Math.max(right,x);
+      top=Math.min(top,y);bottom=Math.max(bottom,y);
+    }
+    if(area===0)throw Error('HP13: comparison asset mask empty');
+    ctx.putImageData(frame,0,0);
+    const pad=Math.max(5,Math.ceil(Math.max(right-left,bottom-top)*.08));
+    const x=Math.max(0,left-pad),y=Math.max(0,top-pad);
+    const w=Math.min(on.width-x,right-left+1+2*pad);
+    const h=Math.min(on.height-y,bottom-top+1+2*pad);
+    const preview=document.createElement('canvas');preview.width=640;preview.height=360;
+    const dst=preview.getContext('2d');dst.fillStyle='#071827';dst.fillRect(0,0,640,360);
+    dst.imageSmoothingEnabled=false;
+    const scale=Math.min(610/w,330/h),dw=w*scale,dh=h*scale;
+    dst.drawImage(source,x,y,w,h,(640-dw)/2,(360-dh)/2,dw,dh);
+    return preview.toDataURL('image/png').split(',')[1];
+  },[onPng.toString('base64'),offPng.toString('base64')]);
+}
+
 async function measure(browser,file){
  const page=await browser.newPage({viewport:{width:640,height:360},deviceScaleFactor:1});
  const report={items:{},errors:[],screen_text:false,previews:{}};
  page.on('pageerror',e=>report.errors.push('pageerror: '+e.message));
  page.on('console',e=>{if(e.type()==='error')report.errors.push('console: '+e.text());});
  try{
-  await page.goto(pathToFileURL(resolve(file)).href,{waitUntil:'domcontentloaded',timeout:30000});
+  await page.goto(runtimeOrigin+"/"+file.split(sep).at(-1),{waitUntil:'domcontentloaded',timeout:30000});
   await page.waitForFunction(()=>window.__PACK__?.items?.length>0&&!!window.__STATE__&&
     typeof window.__ISOLATE__==='function',{timeout:30000});
   const ids=await page.evaluate(()=>window.__PACK__.items.map(o=>o.id));
@@ -171,6 +219,7 @@ async function measure(browser,file){
      },{target:fixedCamera,tolerance:CAMERA_TOLERANCE},{timeout:4500,polling:80});
    }else await page.waitForTimeout(1000);
    await page.waitForTimeout(100);
+   await page.evaluate(id=>window.__AC_WAKE__(id),id);
    const capture=async()=>{
      await page.evaluate(()=>{window.__AC_FREEZE__=true});
      await page.waitForTimeout(40);
@@ -178,10 +227,11 @@ async function measure(browser,file){
      const on=pixels(png);
      await page.evaluate(id=>window.__ISOLATE__(id,false),id);
      await page.waitForTimeout(35);
-     const off=pixels(await page.screenshot({type:'png'}));
+     const offPng=await page.screenshot({type:'png'});
+     const off=pixels(offPng);
      await page.evaluate(id=>window.__ISOLATE__(id,true),id);
      await page.evaluate(()=>{window.__AC_FREEZE__=false});
-     return {on,off,png};
+     return {on,off,png,offPng};
    };
    const first=await capture();
    const fps=await page.evaluate(()=>new Promise(done=>{
@@ -193,7 +243,8 @@ async function measure(browser,file){
    report.items[id]=features(first.on,second.on,first.off,second.off,fps);
    const accepted=['hero','beast','gate','obelisk','sky','fog','rain','cathedral'];
    const selected=await page.evaluate(id=>!!window.__PACK__.items.find(it=>it.id===id)?.isNew,id);
-   if(selected||accepted.includes(id))report.previews[id]=second.png.toString('base64');
+   if(selected||accepted.includes(id))
+     report.previews[id]=await isolatePreview(page,second.png,second.offPng);
    if(await textOutsideMenu(page))report.screen_text=true;
   }
  }finally{await page.close();}
@@ -256,12 +307,27 @@ try {
   try {
     const ref=join(temp,'reference.html'),cand=join(temp,'candidate.html');
     writeFileSync(ref,instrumentIsolation(readFileSync(refPath,'utf8')),'utf8');
-    writeFileSync(cand,instrumentIsolation(readFileSync(packPath,'utf8')),'utf8');
+    writeFileSync(cand,instrumentIsolation(readFileSync(packPath,'utf8'))
+      .replaceAll('../../../games/', '/games/'),'utf8');
+    const server=createServer((request,response)=>{
+      try{
+        const pathname=decodeURIComponent(new URL(request.url,'http://localhost').pathname);
+        const runtime={'/reference.html':ref,'/candidate.html':cand};
+        const file=runtime[pathname]||resolve(repoRoot,'.'+pathname);
+        if(!runtime[pathname]&&!file.startsWith(repoRoot+sep))throw Error('outside repository');
+        response.setHeader('Content-Type',extname(file)==='.js'?'text/javascript':'text/html');
+        response.end(readFileSync(file));
+      }catch(error){response.statusCode=404;response.end(String(error.message));}
+    });
+    await new Promise(done=>server.listen(0,'127.0.0.1',done));
+    runtimeOrigin='http://127.0.0.1:'+server.address().port;
+    try{
     result.reference = await measure(browser,ref);
     result.candidate = resolve(refPath) === resolve(packPath) ? result.reference : await measure(browser,cand);
     if(resolve(refPath)!==resolve(packPath))
       await compareSheet(browser,result.reference.previews,result.candidate.previews,packPath);
     delete result.reference.previews;delete result.candidate.previews;
+    }finally{await new Promise(done=>server.close(done));}
   } finally {rmSync(temp,{recursive:true,force:true});}
   result.ok = true;
 } catch (err) {

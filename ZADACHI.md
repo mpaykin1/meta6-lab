@@ -16,7 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
-| 🔨 В РАБОТЕ | Проверяющий: постоянное развитие | МГЛ | чат ChatGPT | `lab/proveryayushchij-growth-20261111` | — | 2026-11-13 03:40 | 2026-11-13 03:37 |
+| НУЖЕН CLAUDE: подпись на изменение существующих проверок | Проверяющий: постоянное развитие | МГЛ | чат ChatGPT | `lab/kak-proveryayushchij-traps` | [#247](https://github.com/mpaykin1/meta6-lab/pull/247) | 2026-11-13 03:48 | 2026-11-13 03:48 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | fix(archer): clean ad-free META build and adaptive FPS (replaces #132) | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/archer-meta-adfree-clean-1111` | [#255](https://github.com/mpaykin1/meta6-lab/pull/255) | 2026-11-11 13:58 | 2026-11-12 14:59 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и каталог ассетов | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/sunken-city-reference-1109` | [#191](https://github.com/mpaykin1/meta6-lab/pull/191) | 2026-11-09 15:29 | 2026-11-12 14:49 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | PR #242: исправить красные проверки SEO-каталога | МГЛ | MG-строитель-2 | `lab/seo-claude-adfree-1111` | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | 2026-11-11 08:17 | 2026-11-12 14:47 |

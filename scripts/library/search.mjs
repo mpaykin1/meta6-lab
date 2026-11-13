@@ -8,7 +8,9 @@ export function searchLibrary(filters={},root=ROOT){
   if(!Number.isInteger(limit)||limit<1||limit>100||!Number.isInteger(offset)||offset<0)throw Error('limit 1..100, offset >= 0');
   const file=path.join(root,'shared/library/index.json');
   const index=JSON.parse(fs.readFileSync(file,'utf8'));
+  const excluded=new Set((index.excluded_games||[]).filter(row=>row.excluded===true).map(row=>row.game));
   const matches=index.entries.filter(entry=>{
+    if(excluded.has(entry.game))return false;
     if(game&&entry.game!==game)return false;
     if(kind&&entry.kind!==kind)return false;
     if(purpose&&!entry.purpose.some(value=>value.toLowerCase().includes(purpose.toLowerCase())))return false;

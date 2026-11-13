@@ -31,6 +31,9 @@ function independentWalk(dir){
 function expectedGames(root){
   const base=path.join(root,'games');
   const found=fs.readdirSync(base,{withFileTypes:true}).filter(x=>x.isDirectory()).map(x=>({game:x.name,source_root:'games/'+x.name}));
+  for(let i=found.length-1;i>=0;i--) {
+    if(found[i].game.endsWith('-copy')||found[i].game==='skin-trainer')found.splice(i,1);
+  }
   const contents=fs.readFileSync(path.join(root,'rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md'),'utf8');
   const lines=contents.split('\n');
   const first=lines.findIndex(line=>/^## 1\./.test(line)),second=lines.findIndex(line=>/^## 2\./.test(line));
@@ -64,9 +67,31 @@ export function verifyLibrary(root=ROOT,{live=true}={}){
   const expected=expectedGames(root);
   if(!Array.isArray(index.games)||JSON.stringify(index.games.map(x=>x.game).sort())!==JSON.stringify(expected.map(x=>x.game).sort()))fail('missing, extra or hardcoded games in global index');
   if(index.copy_limit_bytes!==LIMIT)fail('copy budget changed');
+  const protectedFiles=fs.readdirSync(directory).filter(x=>x.endsWith('-copy.json')).sort();
+  const excluded=protectedFiles.map(file=>{
+    const game=file.slice(0,-5),duplicateOf=game.slice(0,-5),archive=read(path.join(directory,file));
+    if(archive.game!==game||archive.source_root!=='games/'+game||
+      !expected.some(item=>item.game===duplicateOf))fail('invalid protected duplicate manifest: '+file);
+    return {game,duplicateOf,manifest:'shared/library/'+file,excluded:true};
+  });
+  const trainingFile=path.join(directory,'skin-trainer.json');
+  if(fs.existsSync(trainingFile)){
+    const record=read(trainingFile);
+    if(record.game!=='skin-trainer'||record.source_root!=='games/skin-trainer')
+      fail('invalid preserved training manifest');
+    excluded.push({game:'skin-trainer',reason:'training',manifest:'shared/library/skin-trainer.json',excluded:true});
+  }
+  if(JSON.stringify(index.excluded_games)!==JSON.stringify(excluded))
+    fail('stale protected-copy or training exclusion list');
   const present=fs.readdirSync(directory).filter(x=>x.endsWith('.json')&&x!=='index.json').sort();
   const wanted=expected.map(x=>x.game+'.json').sort();
+  wanted.push(...protectedFiles,...(fs.existsSync(trainingFile)?['skin-trainer.json']:[]));
+  wanted.sort();
   if(JSON.stringify(present)!==JSON.stringify(wanted))fail('stale or missing manifest');
+  const forbidden=new Set(['skin-trainer',...excluded.map(e=>e.game)]);
+  if(index.games.some(x=>forbidden.has(x.game))||
+    index.entries.some(x=>forbidden.has(x.game)))
+    fail('excluded copy or training game leaked into the published library');
   const entries=[],copyPaths=new Set(),copyHashes=new Set(),ids=new Set(),summary=[];
   let copiedBytes=0;
   for(const exp of expected){
@@ -140,6 +165,26 @@ function liveDiscovery(){
   const root=makeFixture();
   try{
     buildLibrary(root);verifyLibrary(root,{live:false});
+    const clone=path.join(root,'games/base-copy');
+    fs.cpSync(path.join(root,'games/base'),clone,{recursive:true});
+    buildLibrary(root);verifyLibrary(root,{live:false});
+    const cleanIndex=read(path.join(root,'shared/library/index.json'));
+    if(cleanIndex.games.some(game=>game.game==='base-copy')||
+      cleanIndex.entries.some(entry=>entry.game==='base-copy')||
+      fs.existsSync(path.join(root,'shared/library/base-copy.json')))
+      fail('copy folder was included as an independent game');
+    fs.rmSync(clone,{recursive:true,force:true});
+    const trainer=path.join(root,'games/skin-trainer');
+    fs.mkdirSync(trainer,{recursive:true});
+    fs.writeFileSync(path.join(trainer,'index.html'),
+      '<style>canvas{color:blue}</style><script>function trainingCamera(){return 1;}</script>');
+    buildLibrary(root);verifyLibrary(root,{live:false});
+    const trainingIndex=read(path.join(root,'shared/library/index.json'));
+    if(trainingIndex.games.some(x=>x.game==='skin-trainer')||
+      trainingIndex.entries.some(x=>x.game==='skin-trainer')||
+      searchLibrary({game:'skin-trainer'},root).total!==0)
+      fail('training game was promoted into live catalog');
+    fs.rmSync(trainer,{recursive:true,force:true});
     const newDir=path.join(root,'games/future-game');
     fs.mkdirSync(newDir,{recursive:true});
     fs.writeFileSync(path.join(newDir,'index.html'),'<style>canvas{color:red}</style><script>function attackEnemy(){return 7;}</script>');

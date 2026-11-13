@@ -1,21 +1,14 @@
 name: Library Machine
 on:
+  # Verify every main push, including merges that only touch metadata.
+  # Branch pushes also refresh manifests before PR validation.
   push:
-    paths:
-      - 'games/**'
-      - 'observer-world-en-v7/**'
-      - 'ashen-sumerek/**'
-      - 'underwater-world/**'
-      - 'three-worlds-game/**'
-      - 'meta-games-worlds/veil-terraces/**'
-      - 'rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md'
-      - 'scripts/library/**'
-      - 'shared/library/**'
-      - '.github/workflows/library-machine.yml'
   pull_request:
     branches: [main]
     paths:
       - 'games/**'
+      - 'reference/**'
+      - 'references/**'
       - 'observer-world-en-v7/**'
       - 'ashen-sumerek/**'
       - 'underwater-world/**'
@@ -49,11 +42,15 @@ jobs:
         run: node scripts/library/extract-all.mjs
       - name: Verify independent file inventory, hashes and live additions/removals
         run: node scripts/library/verify-library.mjs
-      - name: Run five persistent deceptive mutations
+      - name: Run persistent mutations, including protected archives and catalog exclusions
         run: node scripts/library/mutate-library.mjs
       - name: Check PR catalog is committed
         if: github.event_name == 'pull_request'
-        run: git diff --exit-code -- shared/library
+        run: |
+          if ! git diff --quiet -- shared/library; then
+            echo "::error::Library manifests are outdated. Run node scripts/library/extract-all.mjs"
+            exit 1
+          fi
       - name: Commit newly extracted assets on the feature branch
         if: github.event_name == 'push' && github.ref != 'refs/heads/main'
         run: |

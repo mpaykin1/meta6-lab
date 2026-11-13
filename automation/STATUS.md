@@ -1,11 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T10:45:45.348Z | МГЛ: c3539c768d370ffcc96f6c000df151c693ff3ce5 | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | https://github.com/mpaykin1/meta6-lab/actions/runs/43411471139
+UTC: 2026-11-13T10:49:12.658Z | МГЛ: db06d5b4e4433f3a6edcd3b01db8c34e9b85ee49 | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | https://github.com/mpaykin1/meta6-lab/actions/runs/43411983161
 ## ПРОВЕРИТЬ CLAUDE
 - PR #285 2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3: .github/workflows/meta-games-guard.yml, scripts/storozha/mutate-storozha.mjs, scripts/storozha/verify-storozha.mjs
 - PR #241 351572af1dd748a4c5a99e1e8f0cdba8a7092a0f: scripts/shared/mutate-build-index-symlinks.mjs
 - PR #259 24d0a9e8151cde7c3242275159c301a10d189311: scripts/prohodchik/mutate-prompt.mjs
 - ещё 12: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: Investigation snapshot | https://github.com/mpaykin1/meta6-lab/actions/runs/43411001434 | Refresh investigation snapshot from GitHub
+- МГЛ: Investigation snapshot | https://github.com/mpaykin1/meta6-lab/actions/runs/43411416112 | Refresh investigation snapshot from GitHub
 - МГЛ: STOROZHA branch updater | https://github.com/mpaykin1/meta6-lab/actions/runs/43409815373 | Update open PR heads and synchronize exact Git conflicts
 - МГЛ: STOROZHA weekly maintenance | https://github.com/mpaykin1/meta6-lab/actions/runs/43409546447 | Close genuinely stale PRs without deleting branches and write daily report
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
@@ -47,13 +47,13 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 54 | конфликт: нет данных | слито: 27 | закрыто: 58
+открыто: 55 | конфликт: нет данных | слито: 27 | закрыто: 58
 #285 storozha: «только Claude» — лишь ядро охраны (убираем тормоз | 2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3
 #279 INK: объёмный дождевой лес из видео, Ч/Б и цвет | d3f16b40a3c59ded669053388c0cf26130a7ed74
 #241 L2: защита индекса shared от symlink-подмены источников | 351572af1dd748a4c5a99e1e8f0cdba8a7092a0f
 ещё 24: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1795 коммитов | нет данных
+МГЛ: 1802 коммитов | нет данных
 МГ: 6 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

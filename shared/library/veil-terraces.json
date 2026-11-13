@@ -77,22 +77,7 @@
       "sha256": "2b44c04eb55eb84b5533c4eabd9018d86a2d3fcf96c57891a816ac00c6d0cbde"
     },
     {
-      "id": "4e1e9895343c2c97c6324b10",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "module:bot-strategy.mjs",
-      "purpose": [
-        "game-module"
-      ],
-      "source_path": "games/veil-terraces/bot-strategy.mjs",
-      "lines": [
-        1,
-        65
-      ],
-      "sha256": "8c678d49d807533067517eff55f364f11afd6e8b52d283e50bba4a1cb22989e9"
-    },
-    {
-      "id": "83ec76f4951de96db7ac9864",
+      "id": "2ee476d97b855ecb0db8a51d",
       "game": "veil-terraces",
       "kind": "solution",
       "name": "playLevel",
@@ -102,9 +87,9 @@
       "source_path": "games/veil-terraces/bot-strategy.mjs",
       "lines": [
         10,
-        65
+        67
       ],
-      "sha256": "30560b3837b1afe45f01e7d1f4ec2e59d9665a2cd5cd9e1c2335884d86c0a617"
+      "sha256": "e774af3d6d6ace1f1b83c766121c6da6632d8fed7e73d82a0c82490348bbaab1"
     },
     {
       "id": "af9e6bf81544560307eac279",
@@ -120,6 +105,21 @@
         9
       ],
       "sha256": "72e5bdf2b6005806018328c4bf8540380d6f956ccec807ddf6913d6f6d4cac08"
+    },
+    {
+      "id": "fd463372236f274efc058598",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "module:bot-strategy.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/veil-terraces/bot-strategy.mjs",
+      "lines": [
+        1,
+        67
+      ],
+      "sha256": "b28b253624338aaafdcb96902fbe5cf81339684dafd302754b30e42244055080"
     },
     {
       "id": "029facda30be9c574c707fa7",

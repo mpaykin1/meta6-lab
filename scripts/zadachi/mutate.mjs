@@ -17,6 +17,16 @@ const M = [
   ['исключить meta6 из реестра', "['МГ', data.mgPulls]", "['МГ', {}]"],
   ['не собирать PR meta6 через API', 'for (const repository of [repo, mgRepo])', 'for (const repository of [repo])'],
   ['не повторять запрос mergeable=null', 'attempt < 3', 'attempt < 1'],
+  // Never accept partial GitHub results as proof of completion or new status.
+  ['API 403 masked as empty PR list',
+    "if (!Array.isArray(l)) throw new Error('Incomplete open PR list for ' + repository);",
+    "if (!Array.isArray(l)) return {repo, mgRepo, pulls, mgPulls, branches, zanyato: []};"],
+  ['API 429 masked as missing checks',
+    "throw new Error('Incomplete check-runs for PR #' + p.number);",
+    "break;"],
+  ['old merged PR wins on reused branch',
+    "const p = [...l].sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))[0];",
+    "const p = l.find(x => x.merged_at) || l[0];"],
 ];
 const dir = mkdtempSync(join(tmpdir(), 'zadachi-')); let bad = 0;
 for (const [name, from, to] of M) {

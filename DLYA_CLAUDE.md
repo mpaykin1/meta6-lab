@@ -89,7 +89,7 @@
 
 - [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) — Veil Terraces, камера 1/1: [Chromium PASS 43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458), [STOROZHA PR quota FAIL 43173380383](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383) (LIVE=48, сначала #3/#54/#72/#87/#133). **НУЖЕН CLAUDE:** расчистить старые PR по правилам, не обходить quota; затем финальный зелёный SHA и merge, MCP отдельно.
 
-- [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261) — многоразовый контракт, PROGRESS и ловушки: [изменение 1dade8002cb4b37e5d373552ea8e0d027131744d](https://github.com/mpaykin1/meta6-lab/commit/1dade8002cb4b37e5d373552ea8e0d027131744d) записало текущий цикл; финальный зелёный run отсутствует, merge не выполнять до проверок Claude.
+- [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261) — контракт, PROGRESS и поиск систем: [коммит 0a42917ec9161ca20d04f1caac5153de38642302](https://github.com/mpaykin1/meta6-lab/commit/0a42917ec9161ca20d04f1caac5153de38642302), [Library Machine PASS #43360775748](https://github.com/mpaykin1/meta6-lab/actions/runs/43360775748) (6/6 мутаций поиска), [KONTUR PASS #43360775735](https://github.com/mpaykin1/meta6-lab/actions/runs/43360775735). **НУЖЕН CLAUDE:** [STOROZHA FAIL #43360776033](https://github.com/mpaykin1/meta6-lab/actions/runs/43360776033) отклоняет изменение защищённого `scripts/library/verify-library.mjs` в истории PR; получить одобрение защищённой проверки и затем зелёные проверки финального SHA, без обхода.
 
 ## Ждёт владельца — библиотека
 

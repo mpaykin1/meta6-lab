@@ -62,6 +62,8 @@
 
 - 2026-11-13T03:42:37.525Z — саморазвитие г), усиление поиска: в [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261) source-only поиск исключает сторонние vendor/lib/minified файлы, добавлены три отрицательных fixture и шестая мутация снятия фильтра. [Поиск](https://github.com/mpaykin1/meta6-lab/blob/lab/biblioteka-contract-20261111/scripts/library/find-systems.mjs), [ловушки](https://github.com/mpaykin1/meta6-lab/blob/lab/biblioteka-contract-20261111/scripts/library/mutate-find-systems.mjs). CI ожидается. Полных эталонов 0 → 0 из 22; load_ok в main 0 → 0; публичный MCP 0 → 0.
 
+- 2026-11-13T03:46:12.079Z — код [0a42917ec9161ca20d04f1caac5153de38642302](https://github.com/mpaykin1/meta6-lab/commit/0a42917ec9161ca20d04f1caac5153de38642302), [Library Machine #43360775748](https://github.com/mpaykin1/meta6-lab/actions/runs/43360775748) ЗЕЛЁНЫЙ: `SYSTEM DISCOVERY MUTATIONS CAUGHT 6`, `BIBLIOTEKA CONTRACT VERIFIED; MUTATIONS CAUGHT 8`, `LIBRARY VERIFIED`. [KONTUR #43360775735](https://github.com/mpaykin1/meta6-lab/actions/runs/43360775735) PASS, [PR quota #43360775801](https://github.com/mpaykin1/meta6-lab/actions/runs/43360775801) PASS. [STOROZHA #43360776033](https://github.com/mpaykin1/meta6-lab/actions/runs/43360776033) КРАСНЫЙ: изменение защищённого `scripts/library/verify-library.mjs` в старой истории #261; менять/ослаблять сторож запрещено, PR остаётся НУЖЕН CLAUDE. Это НЕ означает слияние и НЕ увеличивает load_ok/MCP.
+
 ## Урок
 
 - Источник в каталоге не равен авторской системе: до поиска для ИИ отсекать `vendor/`, `lib/`, `node_modules/` и `.min.js`; обязательна мутация на отключение фильтра.

@@ -14,6 +14,7 @@ import {createGirl} from './girl.js';
 import {createPost} from './post.js';
 import {createAudio} from './audio.js';
 import {createUI} from './ui.js';
+import {createCoast} from './coast.js';
 
 const makers = {...objectMakers, ...extraObjectMakers, ...settlementMakers, robot: createFallenRobot};
 const damp = (k, dt) => 1 - Math.exp(-k * dt);
@@ -41,7 +42,14 @@ const ambient = new T.HemisphereLight('#fff3d7', '#96aca3', 2.2); scene.add(ambi
 const sun = new T.DirectionalLight('#fff0cd', 1.4); sun.position.set(-5, 9, 6); scene.add(sun);
 scene.fog = new T.Fog('#e7e5d6', 64, 108);
 const valley = buildWorld({makers, paint, scene});
-const {hero, canWalk} = valley;
+// Живой берег и море вместо ровного края (эталон не меняется: старую воду только прячем, сверху — новый берег).
+const coast = createCoast({scene, paint, makers});
+valley.world.traverse(o => {   // старое озеро эталона — плоскость на y≈-0.08 до x=24
+  if (!o.isMesh || o.isInstancedMesh) return;
+  o.geometry.computeBoundingBox(); const b = o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld);
+  if (b.max.x > 23 && b.max.y < -.06 && b.min.y > -.1) o.visible = false;
+});
+const hero = valley.hero, canWalk = coast.extendWalk(valley.canWalk);
 // Корзина аптекаря — из готовых деталей мира (камни/грибы не нужны: простая плетёнка из примитивов INK).
 const basket = new T.Group();
 const weave = new T.Mesh(new T.CylinderGeometry(.2, .15, .2, 10, 1, true), new T.MeshStandardMaterial({color: '#a88a5c', roughness: 1, side: T.DoubleSide}));
@@ -188,7 +196,7 @@ function tickDialogue(dt) {
 const busy = () => !!dlg.cur || dlg.queue.length > 0;
 
 // ---------- Состояние игры ----------
-let heard = 0, frameAvg = 16, quality = 1;
+let heard = 0, frameAvg = 16, quality = 1, qualityT = 0;
 let state = 'title', stage = 0, counts = {herbs: 0, shrooms: 0, water: 0}, charges = 0;
 let day = 0, struggle = 0, lastFlip = 0, stateT = 0, chaseT = 0, glitchSpike = 0, fade = 0, fadeTo = 0;
 let flags = {}, ambientIx = 0, barkIx = 0, barkT = 0, checkpoint = START.clone(), afterWaterT = -1, warm = 0;
@@ -415,7 +423,9 @@ function animate(ms) {
   const raw = Math.min(.4, Math.max(0, (ms - previous) / 1000)); previous = ms;
   // Медленное устройство — снижаем качество один раз, плавность важнее резкости.
   frameAvg = frameAvg * .97 + Math.min(raw, .1) * 1000 * .03;
-  if (frameAvg > 30 && quality > .7 && elapsed > 3) { quality = .7; renderer.setPixelRatio(1); paint.setQuality(.7); post.setScale(.8); }
+  if (frameAvg > 30 && quality > .7 && elapsed > 3) { quality = .7; renderer.setPixelRatio(1); paint.setQuality(.7); post.setScale(.8); qualityT = elapsed; }
+  // Очень слабое устройство (программный WebGL): ещё одна ступень — меньше пикселей, игра остаётся отзывчивой.
+  if (frameAvg > 70 && quality === .7 && elapsed - qualityT > 4) { quality = .5; renderer.setPixelRatio(.6); paint.setQuality(.5); post.setScale(.7); }
   const dt = paused ? 0 : raw * api.timeScale;
   const fr = Math.min(raw, .066);
   elapsed += raw;
@@ -446,6 +456,8 @@ function animate(ms) {
     const eyes = guardian.userData.robotEyes.color, flare = Math.min(1, sig * 1.2 + (state === 'caught' ? 1 : 0));
     eyes.setRGB(1, .39 + Math.sin(elapsed * .75) * .065 + flare * .45, .2 + flare * .55);
   }
+
+  coast.tick(elapsed, dusk);
 
   // --- маяки, частицы ---
   for (const b of [...herbs, ...shrooms, ...spares].map(i => i.beacon).concat(waterBeacon, homeBeacon)) tickBeacon(b, elapsed, raw);
@@ -502,6 +514,7 @@ Object.defineProperties(api, Object.getOwnPropertyDescriptors({
     }
     return ['chase', 'tell', 'grab', 'caught', 'outro', 'ending'].includes(state) ? {x: HOME.x, y: HOME.z} : null;
   },
+  debugTeleport(x, z) { hero.position.set(x, 0, z); focus.copy(hero.position); iva.group.position.set(x + 1, 0, z + 1); },
   get caughtCount() { return flags.caughtN || 0; },
   start() { if (state === 'title') { ui.title(false); paused = false; audio.start(); begin(); } },
   skipDialogue() { dlg.queue.length = 0; if (dlg.cur) dlg.t = dlg.dur; },

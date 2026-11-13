@@ -44,6 +44,12 @@ const guardian = valley.world.children.find(o => o.userData?.isFallenRobot); // 
 ```
 Стиль акварели (`createWatercolorStyle({...})`) — те же числа, что в `ink-forest.js` эталона. Не менять.
 
+**Край мира (решение владельца 13.11.2026):** ровный край острова эталона закрыт живым берегом и морем — `coast.js` (правило [БЕЗ РОВНЫХ КРАЁВ](../../rules/01-stil-i-grafika/BEZ_ROVNYH_KRAEV.md)). Старая вода эталона прячется, новая суша рисуется поверх, ходить можно по всей новой суше.
+```js
+const coast = createCoast({scene, paint, makers});
+const canWalk = coast.extendWalk(valley.canWalk);
+```
+
 **Проверка:** `git diff reference/` пустой. Скриншот совпадает по палитре с https://mpaykin1.github.io/meta6-lab/reference/ink-fallen-guardian/.
 
 ---

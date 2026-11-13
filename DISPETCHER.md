@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 15 · конфликт 4 · непроверено 0 · красные проверки 12 · нужен Claude 34
+Итог: зависло 10 · конфликт 4 · непроверено 0 · красные проверки 12 · нужен Claude 33
 
 ### PR #221
 - PR: https://github.com/mpaykin1/meta6-lab/pull/221
@@ -10,10 +10,10 @@
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
 
-### PR #242
-- PR: https://github.com/mpaykin1/meta6-lab/pull/242
-- Ветка: `lab/seo-claude-adfree-1111`
-- SHA: `11629fe2b9ff4a095c558447f51160a218ad8ffe` · последний коммит: 2026-11-12T14:47:09Z
+### PR #255
+- PR: https://github.com/mpaykin1/meta6-lab/pull/255
+- Ветка: `lab/archer-meta-adfree-clean-1111`
+- SHA: `efed7d9085f15c3bf5f40e31e22aaa39b9fe806f` · последний коммит: 2026-11-12T14:59:30Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
@@ -21,7 +21,7 @@
 ### PR #264
 - PR: https://github.com/mpaykin1/meta6-lab/pull/264
 - Ветка: `lab/archer-retention-exp-1-game`
-- SHA: `171f90b228b9841492ea29624ae6e73f8350e7e2` · последний коммит: 2026-11-12T10:23:07Z
+- SHA: `f0a5e3f139edd367b620d2355eb4e37f7327b63b` · последний коммит: 2026-11-13T04:25:28Z
 - Проблема: Конфликт с main
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
@@ -45,9 +45,9 @@
 ### PR #234
 - PR: https://github.com/mpaykin1/meta6-lab/pull/234
 - Ветка: `lab/claude-adfree-catalog-1110`
-- SHA: `9b1feaa6f452ba49dff8c89954d9ee43878609a6` · последний коммит: 2026-11-12T14:24:30Z
-- Проблема: Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/43236879007/job/131246639156), library-machine (https://github.com/mpaykin1/meta6-lab/actions/runs/43236878422/job/131246484145)
-- Задание: Исправь changed-games по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43236879007/job/131246639156 и повтори CI.
+- SHA: `2a283a97259c85d7244ede76a658e574f4b983bb` · последний коммит: 2026-11-13T03:48:01Z
+- Проблема: Красная проверка: storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43361340235/job/131675418274), changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/43361340792/job/131675396520)
+- Задание: Исправь storozha-reference-queue по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43361340235/job/131675418274 и повтори CI.
 - Взял: —
 
 ### PR #237
@@ -58,28 +58,12 @@
 - Задание: Исправь storozha-reference по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43238587508/job/131256477481 и повтори CI.
 - Взял: —
 
-### PR #241
-- PR: https://github.com/mpaykin1/meta6-lab/pull/241
-- Ветка: `lab/shared-index-symlink-1111`
-- SHA: `fdd1ee1a4ebb84aa954a2ab02c58f821bfba85c7` · последний коммит: 2026-11-12T14:35:27Z
-- Проблема: Красная проверка: storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43238789559/job/131257581342), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43238785239/job/131256455048)
-- Задание: Исправь storozha-reference по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43238789559/job/131257581342 и повтори CI.
-- Взял: —
-
 ### PR #247
 - PR: https://github.com/mpaykin1/meta6-lab/pull/247
 - Ветка: `lab/kak-proveryayushchij-traps`
-- SHA: `e9bac3f16ea0b4afae4147c69dcd2a61a5c4258d` · последний коммит: 2026-11-12T14:36:15Z
-- Проблема: Красная проверка: storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43238932946/job/131256392180), dispatch (https://github.com/mpaykin1/meta6-lab/actions/runs/43238933023/job/131255772524), kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43238932959/job/131254051812), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43238928775/job/131253731208)
-- Задание: Исправь storozha-reference по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43238932946/job/131256392180 и повтори CI.
-- Взял: —
-
-### PR #255
-- PR: https://github.com/mpaykin1/meta6-lab/pull/255
-- Ветка: `lab/archer-meta-adfree-clean-1111`
-- SHA: `efed7d9085f15c3bf5f40e31e22aaa39b9fe806f` · последний коммит: 2026-11-12T14:59:30Z
-- Проблема: Красная проверка: storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43242960910/job/131269028485), guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43242961059/job/131268054159), changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/43242960852/job/131268053666), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/43242960810/job/131268053186), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43242954955/job/131268039132)
-- Задание: Исправь storozha-reference по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43242960910/job/131269028485 и повтори CI.
+- SHA: `90da1b0cb3470f70b0a12ccc271a2e7996ddf095` · последний коммит: 2026-11-13T04:39:02Z
+- Проблема: Красная проверка: storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43367098192/job/131694045296), storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43367097515/job/131693972200), storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43366900719/job/131693401809), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43366897314/job/131693318749)
+- Задание: Исправь storozha-reference-queue по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43367098192/job/131694045296 и повтори CI.
 - Взял: —
 
 ### PR #262
@@ -110,8 +94,16 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/278
 - Ветка: `lab/tolkach-main-first-20261112`
 - SHA: `353d0492e31f9fd306a2771b1633521fab449b1d` · последний коммит: 2026-11-12T14:24:39Z
-- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43236948035/job/131246726299)
-- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43236948035/job/131246726299 и повтори CI.
+- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43236948035/job/131673007393)
+- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43236948035/job/131673007393 и повтори CI.
+- Взял: —
+
+### PR #280
+- PR: https://github.com/mpaykin1/meta6-lab/pull/280
+- Ветка: `lab/ink-forest-1113`
+- SHA: `af737055ea204ed6f719201071e6eb435fbbb11d` · последний коммит: 2026-11-13T04:22:29Z
+- Проблема: Красная проверка: storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43365134926/job/131687715794), watch (https://github.com/mpaykin1/meta6-lab/actions/runs/43365134851/job/131687650352), storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43365135044/job/131687648040), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43365135001/job/131687647928)
+- Задание: Исправь storozha-reference-queue по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43365134926/job/131687715794 и повтори CI.
 - Взял: —
 
 ### PR #233
@@ -135,30 +127,29 @@
 - [#3](https://github.com/mpaykin1/meta6-lab/pull/3) Разблокировать проверки PR #3 Twilight Island
 - [#245](https://github.com/mpaykin1/meta6-lab/pull/245) Зелёный судья: META BOT зелёный на main
 - [#235](https://github.com/mpaykin1/meta6-lab/pull/235) Неподвижный экран при джойстике — все игры МГЛ
-- [#258](https://github.com/mpaykin1/meta6-lab/pull/258) БОТ-ПРОХОДЧИК: B2 — проверка движения героя и вечные ловушки
 - [#134](https://github.com/mpaykin1/meta6-lab/pull/134) ABYSS GLOW — второй эталон графики и анимации
-- [#133](https://github.com/mpaykin1/meta6-lab/pull/133) Довести PR #133: эталон графики Asqura
-- [#260](https://github.com/mpaykin1/meta6-lab/pull/260) НУЖЕН CLAUDE: Улучшатель игр — безопасный захват без пересечения PR
-- [#254](https://github.com/mpaykin1/meta6-lab/pull/254) fix(auditor): достоверные планы и проверка pin Issue #253
+- [#133](https://github.com/mpaykin1/meta6-lab/pull/133) Довести PR #133: эталон графики Asqura — ТОЛКАЧ: [STOROZHA FAIL: эталон только добавлением](https://github.com/mpaykin1/meta6-lab/actions/runs/43239240778/job/131674186810), [передано Claude](https://github.com/mpaykin1/meta6-lab/commit/be18317412852ca804d68c94d8b85670ad02fc24)
 - [#272](https://github.com/mpaykin1/meta6-lab/pull/272) УЛУЧШАТЕЛЬ ИГР: games/sumerki-i-pepel-2-copy × правило №13 (бот-ручка), Кто: улучшатель; 2 красных touch run [43174673836](https://github.com/mpaykin1/meta6-lab/actions/runs/43174673836), [43186923586](https://github.com/mpaykin1/meta6-lab/actions/runs/43186923586); НУЖЕН CLAUDE, исходный статус не меняется
-- [#261](https://github.com/mpaykin1/meta6-lab/pull/261) ЭТАЛОНЫ В БИБЛИОТЕКУ, поиск по назначению (г): [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261), [SHA 817786d](https://github.com/mpaykin1/meta6-lab/commit/817786d1b8a8915594a2a56bc471af1c4f50ad93), [Library Machine PASS #43238163338](https://github.com/mpaykin1/meta6-lab/actions/runs/43238163338) (5/5 мутантов); [STOROZHA FAIL #43238156524](https://github.com/mpaykin1/meta6-lab/actions/runs/43238156524), остальные CI ожидаются; 22 → 22 неполных эталона, публичный MCP 0
 - [#275](https://github.com/mpaykin1/meta6-lab/pull/275) Ревизор: искать PR старше 24 ч с конфликтом или красными проверками (в)
 - [#218](https://github.com/mpaykin1/meta6-lab/pull/218) PR #218: синхронизировать библиотеку R1 с main, проверить защищённый workflow
 - [#270](https://github.com/mpaykin1/meta6-lab/pull/270) ЭТАЛОНЫ В БИБЛИОТЕКУ — Veil Terraces: отдельный модуль камеры, исходные байты, Chromium; [run #43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458) PASS (1 камера); [quota FAIL #43173380383](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383); полных эталонов 0 → 0, систем в PR 0 → 1
 - [#269](https://github.com/mpaykin1/meta6-lab/pull/269) Ревизор: обнаруживать два часа без подтверждённых улучшений (б)
 - [#252](https://github.com/mpaykin1/meta6-lab/pull/252) Установить независимого бота-ревизора пяти почасовых задач META GAMES
 - [#203](https://github.com/mpaykin1/meta6-lab/pull/203) Устранить конфликт PR #203 с main
-- [#87](https://github.com/mpaykin1/meta6-lab/pull/87) Довести PR #87: Play / Connect / Earn до актуального main
+- [#87](https://github.com/mpaykin1/meta6-lab/pull/87) ТОЛКАЧ: #87 — [META GAMES guard FAIL: историческая .github/protected](https://github.com/mpaykin1/meta6-lab/actions/runs/42975697783/job/130374149800); [эскалировано Claude](https://github.com/mpaykin1/meta6-lab/commit/51c43718a0a25425b39f82e901cd17fd88cc2bbc), не сливать
 - [#219](https://github.com/mpaykin1/meta6-lab/pull/219) A1: STATUS.md — автоматический краткий статус МГЛ
 - [#225](https://github.com/mpaykin1/meta6-lab/pull/225) Broken City: чистый PR оптимизации вместо #60
-- [#277](https://github.com/mpaykin1/meta6-lab/pull/277) ТРИ СТОРОЖА: [код и мутации в #277](https://github.com/mpaykin1/meta6-lab/pull/277); [зелёные ловушки](https://github.com/mpaykin1/meta6-lab/actions/runs/43238005678); нужны принятие Claude, токен и обязательная квота
+- [#258](https://github.com/mpaykin1/meta6-lab/pull/258) БОТ-ПРОХОДЧИК: B2 — проверка движения героя и вечные ловушки
+- [#261](https://github.com/mpaykin1/meta6-lab/pull/261) ЭТАЛОНЫ В БИБЛИОТЕКУ — усилен поиск исходных систем: SHA-256 и диапазон строк, [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261), [SHA 688dd7c6df1ffe3a591fb417946bb6f0c7041ca5](https://github.com/mpaykin1/meta6-lab/commit/688dd7c6df1ffe3a591fb417946bb6f0c7041ca5), [Library Machine PASS #43365245872](https://github.com/mpaykin1/meta6-lab/actions/runs/43365245872) 9/9, [KONTUR PASS #43365245842](https://github.com/mpaykin1/meta6-lab/actions/runs/43365245842), [STOROZHA FAIL #43365245850](https://github.com/mpaykin1/meta6-lab/actions/runs/43365245850); НУЖЕН CLAUDE; 22 → 22 неполных, MCP 0
+- [#254](https://github.com/mpaykin1/meta6-lab/pull/254) fix(auditor): достоверные планы и проверка pin Issue #253
+- [#260](https://github.com/mpaykin1/meta6-lab/pull/260) Улучшатель: восстановить PR #260 после расхождения с main; тренировка заблокирована, Кто: улучшатель
+- [#277](https://github.com/mpaykin1/meta6-lab/pull/277) ТРИ СТОРОЖА: [код и мутации в #277](https://github.com/mpaykin1/meta6-lab/pull/277); [зелёные ловушки](https://github.com/mpaykin1/meta6-lab/actions/runs/43238005678); [main синхронизирован 46f15a2](https://github.com/mpaykin1/meta6-lab/commit/46f15a27081ae3c3d01e3a458ba679dd46f83a4b); нужны принятие Claude, токен и обязательная квота
 - [#248](https://github.com/mpaykin1/meta6-lab/pull/248) Доводчик PR: 15 минут, безопасное обновление веток, журналы без конфликтов, порог 1 час
 - [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния
 - [#202](https://github.com/mpaykin1/meta6-lab/pull/202) Эталон: Лучник в тумане — исходный HTML владельца
 - [#189](https://github.com/mpaykin1/meta6-lab/pull/189) Синхронизировать PR #189 с main, сохранить эталон Golden Knight и проверить CI
 - [#207](https://github.com/mpaykin1/meta6-lab/pull/207) Эталон: Король Пепла — исходная игра и каталог 34 ассетов
 - [#210](https://github.com/mpaykin1/meta6-lab/pull/210) SKIN FACTORY: ножницы и ловушки для parts-sheet
-- [#204](https://github.com/mpaykin1/meta6-lab/pull/204) B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер
 - [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
 - [#222](https://github.com/mpaykin1/meta6-lab/pull/222) CI #222 и разбор PR #208/#201/#200 для 5 автозадач
 - [#209](https://github.com/mpaykin1/meta6-lab/pull/209) Библиотека игр: эталоны, системы, ассеты и MCP

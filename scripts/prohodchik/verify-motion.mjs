@@ -52,6 +52,40 @@ function fixtures(assessMotion, assessFixedViewport, assessB2Probe) {
   ]).status, 'MOVED');
   assert.equal(assessMotion([...still.slice(0, 2), firstMove]).status, 'MOVED');
   assert.equal(assessMotion(jitter).status, 'STUCK');
+  // A slowly moving hero covers a real distance even if each 80ms step is tiny.
+  const microX = Array.from({length: 30}, (_, i) => interval(
+    state(i * 0.02, 0, {game: 'other-game'}),
+    state((i + 1) * 0.02, 0, {game: 'other-game'}), 80
+  ));
+  const microY = Array.from({length: 30}, (_, i) => interval(
+    state(0, i * 0.02), state(0, (i + 1) * 0.02), 80
+  ));
+  assert.equal(assessMotion(microX).status, 'MOVED');
+  assert.equal(assessB2Probe(microX).status, 'MOVED');
+  assert.equal(assessMotion(microY).status, 'MOVED');
+  // Oscillating jitter never accumulates into actual travel.
+  const oscillation = Array.from({length: 40}, (_, i) => interval(
+    state((i % 2) * 0.01, 0), state(((i + 1) % 2) * 0.01, 0), 80
+  ));
+  assert.equal(assessMotion(oscillation).status, 'STUCK');
+  // Release clears pending sub-threshold displacement; two separated nudges are not one.
+  const releaseBetween = [
+    interval(state(0, 0), state(0.02, 0), 80),
+    interval(state(0.02, 0), state(0.04, 0), 80),
+    interval(state(0.04, 0), state(0.04, 0), 100, false),
+    interval(state(0.04, 0), state(0.06, 0), 80),
+    interval(state(0.06, 0), state(0.08, 0), 80)
+  ];
+  assert.equal(assessMotion(releaseBetween).status, 'NO_MOVEMENT');
+  // Passive drift is removed before integrating genuine slow input.
+  const microOverDrift = [
+    interval(state(0, 0), state(0.5, 0), 500, false),
+    ...Array.from({length: 4}, (_, i) => interval(
+      state(0.5 + i * 0.52, 0), state(0.5 + (i + 1) * 0.52, 0), 500
+    ))
+  ];
+  assert.equal(assessMotion(microOverDrift).status, 'MOVED');
+
   assert.equal(assessMotion(falseProgress).status, 'STUCK');
   const passive = interval(state(0, 0), state(0.5, 0), 500, false);
   const autopilot = Array.from({length: 4}, (_, i) =>

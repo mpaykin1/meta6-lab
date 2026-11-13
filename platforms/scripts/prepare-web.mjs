@@ -9,7 +9,8 @@ const repoRoot = path.resolve(projectRoot, '..');
 const outputRoot = path.join(projectRoot, 'dist', 'www');
 const channel = process.argv[2] || 'web';
 const candidate = process.argv.includes('--candidate');
-if (candidate && process.argv.includes('--release')) throw Error('Candidate and release options are mutually exclusive');
+const releaseRequested = process.argv.includes('--release');
+if (candidate && releaseRequested) throw Error('Candidate and release options are mutually exclusive');
 
 if (!['web', 'steam', 'google-play'].includes(channel)) {
   throw new Error('Unsupported channel: ' + channel);

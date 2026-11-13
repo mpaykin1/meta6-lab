@@ -105,7 +105,7 @@ export function buildCatalog() {
   return catalog;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (import.meta.main) {
   const catalog = buildCatalog();
   const store = catalog.games.filter((entry) => entry.steamEligible || entry.androidEligible);
   console.log('META GAMES catalog: ' + catalog.games.length + ' local games, ' +

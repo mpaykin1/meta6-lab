@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "e03717b220a5a3e1b8d4840867550bfdf0f1f8b8",
+  "last_processed_head": "72248eac8debe3a937bd86d73a0066bf1d6fbe67",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -19,14 +19,17 @@
     },
     "1_fix_bot_and_other_ci": {
       "status": "in_progress",
-      "details": "Updated SEO branch with latest actual Veil Terraces navigation strategy from PR234; previously diverging game strategy reconciled without changing any protected original. Library Machine and LAB focused BOT remain red on PR234's prior HEAD; SEO CI and full bot run still required.",
+      "details": "Library Machine auto-extracted and committed both exact indexes via push workflow: run 43361108519 PASS, HEAD cd43d2a730b7998abb953fdade65e7288e1d96cb. LAB focused META BOT earlier failed because nine changed games do not expose real __META_BOT__ adapters; no fake snapshots or weakened tests. Latest runs from bot-authored commit action_required, so new human-authored checkpoint needed.",
       "evidence": [
         "https://github.com/mpaykin1/meta6-lab/commit/7ee56e90d9da32d806e697c542b705102575b963",
         "https://github.com/mpaykin1/meta6-lab/commit/744e6d7e89c716f2a81cfd184819cee297bd9e26",
         "https://github.com/mpaykin1/meta6-lab/actions/runs/43173775699",
         "https://github.com/mpaykin1/meta6-lab/commit/b566a431d24819f0f36c0ec51bb9f1a24222cb8d",
         "https://github.com/mpaykin1/meta6-lab/actions/runs/43188234313",
-        "https://github.com/mpaykin1/meta6-lab/commit/3dc116663aada43b2e65706b5828811fb01e13fa"
+        "https://github.com/mpaykin1/meta6-lab/commit/3dc116663aada43b2e65706b5828811fb01e13fa",
+        "https://github.com/mpaykin1/meta6-lab/commit/78b177026806bdaf5225528ba8ef82a7955281a2",
+        "https://github.com/mpaykin1/meta6-lab/commit/cd43d2a730b7998abb953fdade65e7288e1d96cb",
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43361108519"
       ]
     },
     "2_canonical_and_publish": {
@@ -78,6 +81,12 @@
     }
   },
   "next_ideas": [
+    "Реальные read-only window.__META_BOT__ по CONTRACT.md для девяти изменённых игр; проход mobile, desktop и replay.",
+    "Восстановить META BOT для изменённых игр PR #234 и пройти все уровни на мобильном и ПК",
+    "Уникальные описания 150–300 слов для каждого игрового URL",
+    "Проверка title/description/JSON-LD и внутренних ссылок в CI",
+    "Копии webp из собственных игровых кадров",
+    "IndexNow после деплоя без секретов",
     "Сверять каждый sitemap lastmod с git log последнего изменения именно исходной HTML-страницы, защищать через мутации.",
     "PR #234: устранить незафиксированную генерацию shared/library без ручного изменения охраняемых baseline и восстановить стабильный window.__META_BOT__; ссылки: Actions 43236878422 и 43236879007.",
     "Сконвертировать 2 локальных PNG-кадра Three Worlds в WebP без изменения исходного игрового содержимого.",
@@ -92,11 +101,6 @@
     "Добавить workflow проверку фактических HTTP 200 для всех 23 публичных страниц после merge в main",
     "Сверить релизный sitemap lastmod с git log и IndexNow HTTP 200/202",
     "Сделать отдельные подборки для телефонов и атмосферных игр без повторного контента",
-    "Восстановить META BOT для изменённых игр PR #234 и пройти все уровни на мобильном и ПК",
-    "Уникальные описания 150–300 слов для каждого игрового URL",
-    "Проверка title/description/JSON-LD и внутренних ссылок в CI",
-    "Копии webp из собственных игровых кадров",
-    "IndexNow после деплоя без секретов",
     "Автоматически проверять sitemap lastmod против git log в SEO CI"
   ],
   "notes": [
@@ -367,7 +371,24 @@
         "https://github.com/mpaykin1/meta6-lab/commit/e03717b220a5a3e1b8d4840867550bfdf0f1f8b8"
       ],
       "next": "Fresh required CI; safely merge #242 into #234 only when both have green checks."
+    },
+    {
+      "date": "2026-11-13",
+      "status": "index_green_bot_pending",
+      "change": "Ветка #234: честная пересборка библиотеки существующим push workflow, оба индекса совпадают с актуальным игровым кодом.",
+      "commit": "cd43d2a730b7998abb953fdade65e7288e1d96cb",
+      "evidence": [
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43361108519"
+      ],
+      "next": "Разобрать game adapters; добиться зелёного LAB focused META BOT."
+    },
+    {
+      "date": "2026-11-13",
+      "status": "base_reconciled_pending_green_ci",
+      "change": "PR242 синхронизирован с настоящим HEAD PR234, без повторной модификации игровых исходников и машинных индексов.",
+      "base": "2a283a97259c85d7244ede76a658e574f4b983bb",
+      "next": "Проверить обязательные CI обеих веток, без красного и action_required не сливать."
     }
   ],
-  "base_sync_sha": "9b1feaa6f452ba49dff8c89954d9ee43878609a6"
+  "base_sync_sha": "2a283a97259c85d7244ede76a658e574f4b983bb"
 }

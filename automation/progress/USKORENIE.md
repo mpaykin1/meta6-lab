@@ -13,18 +13,29 @@
 | UTC | FINISH для Claude | Открытых PR | Зависших | Бот-коммитов за 24ч | PASS бота на main за 24ч |
 |---|---:|---:|---:|---:|---|
 | 2026-11-13 11:03 UTC | 7/18 | 55 | 24 | 258 | не подтверждён; [ITOG_NEDELI](../../reports/ITOG_NEDELI.md) |
+| 2026-11-13 11:30 UTC | 7/18 | 48 | 25 | 294 | нет — [ITOG_NEDELI](../../reports/ITOG_NEDELI.md) |
 
 ## Уроки
+- 11:30 UTC: бот-коммиты выросли 258→294 и зависшие 24→25 — исправления пока в PR, main не изменён; делать так: сохранять точный SHA и получать зелёный CI, а не умножать ежечасные сканеры. [PR #220](https://github.com/mpaykin1/meta6-lab/pull/220).
+- GitHub API 403 у STOROZHA не лечится пересозданием отчёта: сохранить истину в файле и передать правку защищённого ядра Claude. [DLYA_CLAUDE](https://github.com/mpaykin1/meta6-lab/commit/64fcda58bd292dbc6a1aaf9ed0ce4b13923f0f86).
 - Запрос GitHub API завершился неполными данными — прервать запись, а не подменять исчезнувшие PR возрастом задачи. [Исправление](https://github.com/mpaykin1/meta6-lab/commit/e63513fec8dfe727d415d276fe9bee5c45a44a6f)
 - Повторное имя ветки: брать самый новый PR, а не старый уже слитый. [Исправление](https://github.com/mpaykin1/meta6-lab/commit/e63513fec8dfe727d415d276fe9bee5c45a44a6f)
 
 ## Уточнения
+- По возможности сначала получить список только открытых PR одним запросом; не обращаться отдельно к закрытым историческим PR.
+- Отсутствие PASS в последнем суточном отчёте не выдавать за зелёный bot run; проверять main и точный SHA.
 - У каждого запроса API, от которого зависит статус, проверять полноту ответа перед перезаписью фактов.
 - Ограничивать частоту публикации в main отдельно от частоты чтения и запусков проверок; отказ API не разрешает обход лимита.
 
 ## Сделано
+- 11:03–11:30 UTC — исправления STATUS: семи зелёных FINISH, строгие 18 пунктов, почасовой порог; [патч](https://github.com/mpaykin1/meta6-lab/commit/96c06c7d141f783d8845e345fbd803c689cb9534), [зелёный status run более раннего SHA](https://github.com/mpaykin1/meta6-lab/actions/runs/43414636728).
+- 11:10–11:30 UTC — sliyanie, investigation и dispatcher перестают писать timestamp-only/неполные API данные; [sliyanie](https://github.com/mpaykin1/meta6-lab/commit/1f0e1aa64edad1d5d70882818c4824f5c51235f1), [investigation](https://github.com/mpaykin1/meta6-lab/commit/50db5add34a89257bb2234bdf7f038e786de17c5), [dispatcher](https://github.com/mpaykin1/meta6-lab/commit/03836dddab7a05986b00de2f9b92dec9924c93cf); PR #220 ещё не слит.
+- 11:30 UTC — пять почасовых задач переведены на [единый промпт](https://github.com/mpaykin1/meta6-lab/commit/13dbb5ae7964b45c6c83d708d25a2c4daf60bc9b) без смены расписания. Закрыты два дубля [#219](https://github.com/mpaykin1/meta6-lab/pull/219) и [#221](https://github.com/mpaykin1/meta6-lab/pull/221), ветки сохранены.
 - 2026-11-13 11:03 UTC — сохранены регрессионные ловушки на неполный GitHub API и устаревший merged PR: [коммит](https://github.com/mpaykin1/meta6-lab/commit/f751682d698d8923b1936da59fe47d3a7613c336).
 - 2026-11-13 11:03 UTC — в PR #220 добавлен часовой предел коммитов zadachi-watch: [коммит](https://github.com/mpaykin1/meta6-lab/commit/05753cf17e57a166a988b958cbd496173c4b21e3).
 
+
+- 2026-11-13 11:15 UTC — подтверждён дефект шага 1.3: [`automation/STATUS.md`](https://github.com/mpaykin1/meta6-lab/blob/main/automation/STATUS.md) показывает все 18 FINISH как «нет данных» при 7 зелёных в [`FINISH.md`](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/FINISH.md); исходник [`scripts/zadachi/watch.mjs`](https://github.com/mpaykin1/meta6-lab/blob/main/scripts/zadachi/watch.mjs) проверен: `collect()` подменяет ошибку GitHub API пустым массивом, что может стирать статусы. Исправление ещё не подтверждено; следующий запуск — сначала восстановить полноту API и ловушку, затем генератор STATUS. Это диагностика, не PASS.
+
 ## Метка продолжения
-Обновлять после каждого этапа; ещё не объявлять PR слитым или тест зелёным. Предыдущий подтверждённый срез FINISH: [7/18](../../rules/09-platforma/FINISH.md).
+Обновлять после каждого этапа; ещё не объявлять PR слитым или последний SHA зелёным. Текущий PR #220: head [96c06c7](https://github.com/mpaykin1/meta6-lab/commit/96c06c7d141f783d8845e345fbd803c689cb9534). Сторож STOROZHA и Dispatcher падают при API 403 (квота); не менять core. Следующий шаг: проверить CI актуального SHA и устранить доступный отказ, безопасно обработать PR, затем B2. Предыдущий подтверждённый срез FINISH: [7/18](../../rules/09-platforma/FINISH.md).

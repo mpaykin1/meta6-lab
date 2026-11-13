@@ -1,14 +1,14 @@
 # Проверка ассет-пака — оценка 0/100
-HARD: **109** · SOFT: **105** · бот v1.0.0
-Статистика: {"files": 276, "megabytes": 0.78, "assets": 275, "entities": 14, "max_texture_side": 768, "bot_version": "1.0.0"}
+Вид: **sprite2d** · HARD: **109** · SOFT: **105** · бот v2.0.0
+Статистика: {"assets": 275, "entities": 14, "files": 281, "megabytes": 0.79, "kinds": ["sprite2d"], "bot_version": "2.0.0"}
 
 ## HARD
-- **A6** ×1 — Нет полей ['license', 'provenance'] — происхождение и права не указаны  
+- **C1** ×1 — Нет полей ['license', 'provenance'] — происхождение и права не указаны  
   где: atlas.json  
-  исправить: Добавь "license": {"type":"…","author":"ChatGPT image gen / автор","commercial":true} и "provenance": {"tool":"…","prompt_sha256":"…","date":"YYYY-MM-DD"} (правило META_GAMES_SOURCE_ALLOWLIST)
-- **A7** ×1 — Нет content_flags — не указано, есть ли реальные люди, бренды, политика  
+  исправить: Добавь в манифест (или pack.json) "license": {"type":"…","author":"…","commercial":true} и "provenance": {"tool":"…","prompt_sha256":"…","date":"YYYY-MM-DD"} (правило META_GAMES_SOURCE_ALLOWLIST)
+- **C2** ×1 — Нет content_flags — не указано, есть ли реальные люди, бренды, политика  
   где: atlas.json  
-  исправить: Добавь "content_flags": {"real_persons": [...], "brands": [...], "political": true|false}. Реальные узнаваемые люди/политика = отдельная версия пака без них для МГ, Google Play, Steam, Playgama
+  исправить: Добавь "content_flags": {"real_persons": [...], "brands": [...], "political": true|false}. Реальные узнаваемые люди/бренды/политика = отдельная версия пака без них для МГ, Google Play, Steam, Playgama
 - **G2** ×17 — помечен seamless, но края не совпадают (Δ=0.20)  
   где: tiles/manhattan/gold.png, tiles/manhattan/ground_fill.png, tiles/manhattan/wall.png, tiles/moon_resort/gold.png, tiles/moon_resort/ground_fill.png, tiles/moon_resort/wall.png …  
   исправить: Левый край = правый, верх = низ (сделай через offset/wrap)
@@ -41,7 +41,7 @@ HARD: **109** · SOFT: **105** · бот v1.0.0
 - **A9** ×1 — take_damage помечен loop=true — зациклится  
   где: characters/trump_take_damage.png  
   исправить: loop=false для take_damage (+ событие конца)
-- **B3** ×1 — 276 отдельных PNG = 276 загрузок на телефоне (правило ВИДИМО И ЭКОНОМНО)  
+- **C5** ×1 — 276 отдельных картинок = столько же загрузок на телефоне (ВИДИМО И ЭКОНОМНО)  
   где: /  
   исправить: Добавь упакованные атласы packed/<группа>.png + координаты в манифест; исходники оставь
 - **G2** ×14 — нет тега seamless_x  

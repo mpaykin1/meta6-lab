@@ -50,13 +50,8 @@ async function main() {
   const n=pr.number;
   const files=await pages('/pulls/'+n+'/files');
   const opened=await pages('/pulls?state=open');
-  const allFlows=await pages('/contents/.github/workflows?ref=main').catch(()=>[]);
-  let scheduled=0;
-  for(const x of allFlows){
-    if(!/\.ya?ml$/.test(x.name)) continue;
-    const f=await api('/contents/'+x.path+'?ref=main');
-    if(f.content && /^\s*schedule\s*:/m.test(Buffer.from(f.content,'base64').toString('utf8'))) scheduled++;
-  }
+  const allFlows=fs.readdirSync('.github/workflows').filter(n=>/\.ya?ml$/.test(n));
+  const scheduled=allFlows.filter(n=>/^\s*schedule\s*:/m.test(fs.readFileSync('.github/workflows/'+n,'utf8'))).length;
   const newCronFiles=[];
   for(const f of files.filter(f=>f.status==='added'&&/^\.github\/workflows\/.*\.ya?ml$/.test(f.filename))){
     const src=await api('/contents/'+f.filename+'?ref='+pr.head.sha);

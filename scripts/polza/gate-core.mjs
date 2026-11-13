@@ -64,3 +64,9 @@ export function verdict(ctx) {
   }
   return fail('Неизвестный тип пользы');
 }
+
+export function unwrapPage(data) {
+ const list=Array.isArray(data)?data:(data?.jobs||data?.workflow_runs||[]);
+ if(!Array.isArray(list)) throw Error('GitHub did not return an array');
+ return list;
+}

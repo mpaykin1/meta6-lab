@@ -1,24 +1,23 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T11:35:28.190Z | МГЛ: нет данных | МГ: нет данных | https://github.com/mpaykin1/meta6-lab/actions/runs/43418238586
+UTC: 2026-11-13T15:05:18.257Z | МГЛ: 8ed8f02596ce2c997b01c3492ec842b67fe484e6 | МГ: 1bea203fb63d7c27c29a5643e2f38e4554a658c1 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
-- нет данных
-- МГЛ: нет данных
-- МГ: нет данных
+- PR #292 5df54dc0764daa77154709207e612b311127108d: automation/asset-check/test_kinds.py
+- PR #267 8127784a2d65ec5caa7aed93b753d13ce96b0c14: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py, automation/asset-check/test_kinds.py
+- PR #285 2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3: .github/workflows/meta-games-guard.yml, scripts/storozha/mutate-storozha.mjs, scripts/storozha/verify-storozha.mjs
+- PR #241 351572af1dd748a4c5a99e1e8f0cdba8a7092a0f: scripts/shared/mutate-build-index-symlinks.mjs
+- ещё 13: https://github.com/mpaykin1/meta6-lab/pulls
+- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/43418238664 | Run node scripts/dispetcher/run.mjs
+- МГЛ: STOROZHA weekly maintenance | https://github.com/mpaykin1/meta6-lab/actions/runs/43417990305 | Close genuinely stale PRs without deleting branches and write daily report
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
 - | #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая в… (сокращено)
-- | #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |
-- | #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771… (сокращено)
-- | #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984… (сокращено)
-- | #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https:/… (сокращено)
-- ещё 1: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
+- ещё 5: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
 - | M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |
 - | К7 | lab/kontur-k7-review | свободно (зависло 6 ч, было: ВОЗВРАЩЁН Claude (ложные срабатывания, см. комментарий в PR #193) — попытка 1 из 2) | 2026-11-09 17:50 |
 - | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |
 - | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |
-- | Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |
-- | L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |
+- ещё 2: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
 готовы: ничего
 M1 — нет данных: нет данных
@@ -50,12 +49,30 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: нет данных | конфликт: нет данных | слито: нет данных | закрыто: нет данных
-нет данных
+открыто: 49 | конфликт: нет данных | слито: 29 | закрыто: 66
+#292 ASSET CHECK 2.1: бот проверяет ассеты INK «Павший великан» | 5df54dc0764daa77154709207e612b311127108d
+#267 ASSET CHECK v2: универсальный бот для любых ассетов | 8127784a2d65ec5caa7aed93b753d13ce96b0c14
+#285 storozha: «только Claude» — лишь ядро охраны (убираем тормоз | 2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3
+#279 INK: объёмный дождевой лес из видео, Ч/Б и цвет | d3f16b40a3c59ded669053388c0cf26130a7ed74
+ещё 25: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: нет данных коммитов | нет данных
-МГ: нет данных коммитов | нет данных
+МГЛ: 1915 коммитов | нет данных
+МГ: 7 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:2
 ## ИГРЫ
-нет данных
+archer-in-the-fog — нет данных | витрина: да
+asqura-ilya-reference — нет данных | витрина: нет
+broken-city — нет данных | витрина: да
+broken-city-copy — нет данных | витрина: да
+rainbow-acceleration — нет данных | витрина: нет
+skin-trainer — нет данных | витрина: нет
+sumerki-i-pepel-2 — нет данных | витрина: да
+sumerki-i-pepel-2-copy — нет данных | витрина: нет
+twilight-isle-classic — нет данных | витрина: да
+twilight-isles — нет данных | витрина: да
+veil-terraces — нет данных | витрина: да
 ## НОВЫЕ ОШИБКИ
-нет данных
+| 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
+| 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)
+| 24 | 10.11.2026 | Сводка без progress.json или при ошибке GitHub API могла бы выдавать непроверенные пункты как «готово» и прятать красные прогоны; старые варианты #211/#212 не защищали эту сводку полным набором мутаций | Изолированные ответы: отсутствующий … (сокращено)
+| 25 | 10.11.2026 | Сводка игнорировала новую запись OSHIBKI с уже использованным номером (в main номер 18 повторён) | Сравнение только по номеру ошибочно скрывало новую строку | `scripts/status/selftest.mjs`: `duplicate-error-number-hidden` |
+ещё 21: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

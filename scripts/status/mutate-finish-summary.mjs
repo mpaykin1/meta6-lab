@@ -1,6 +1,8 @@
 // Exercise the real STATUS consumer offline; do not infer readiness from progress.json.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 
 const source = fs.readFileSync(new URL('./build.mjs', import.meta.url), 'utf8');
 const first = fs.readFileSync(new URL('../../rules/09-platforma/FINISH.md', import.meta.url), 'utf8');
@@ -13,8 +15,44 @@ const green = table(`ЗЕЛЁНАЯ — [прогон](${link})`);
 const waiting = table('НЕТ');
 const passed = { id: 123, head_branch: 'main', event: 'push', status: 'completed', conclusion: 'success' };
 
+async function integration(module) {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'status-finish-'));
+  const previousDirectory = process.cwd();
+  const previousFetch = globalThis.fetch;
+  try {
+    process.chdir(directory);
+    fs.mkdirSync('rules/09-platforma', { recursive: true });
+    fs.mkdirSync('meta-games');
+    fs.writeFileSync('meta-games/index.html', '');
+    fs.writeFileSync('rules/09-platforma/FINISH_2.md', second);
+    globalThis.fetch = async input => {
+      const url = String(input);
+      let body = {};
+      if (url.includes('/branches/main')) body = { commit: { sha: 'a'.repeat(40) } };
+      else if (url.includes('/actions/runs/123')) body = passed;
+      else if (url.includes('/actions/')) body = { workflow_runs: [] };
+      else if (url.includes('/contents/games') || url.includes('/pulls?')) body = [];
+      return { ok: true, json: async () => body };
+    };
+    for (const [document, readyCount] of [[waiting, 0], [green, 18]]) {
+      fs.writeFileSync('rules/09-platforma/FINISH.md', document);
+      // Deliberately use the real producer's schema, with unrelated percentages.
+      fs.writeFileSync('progress.json', JSON.stringify({ parts: { MCP: { percent: 100 } } }));
+      await module.build();
+      const output = JSON.parse(fs.readFileSync('automation/status.json', 'utf8'));
+      assert.equal(output.finish.ready.length, readyCount, 'actual build reads the wrong producer');
+      const markdown = fs.readFileSync('automation/STATUS.md', 'utf8');
+      assert.ok(Buffer.byteLength(markdown) <= 8192);
+      assert.ok(markdown.split('\n').length <= 150);
+    }
+  } finally {
+    globalThis.fetch = previousFetch;
+    process.chdir(previousDirectory);
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+}
+
 async function suite(candidate) {
-  assert.match(candidate, /finish: await finishSummary\(read\('rules\/09-platforma\/FINISH.md'\)/);
   const module = await import('data:text/javascript;base64,' + Buffer.from(candidate).toString('base64'));
   assert.equal(await module.finishSummary(null, second), 'нет данных');
   assert.equal(await module.finishSummary('', second), 'нет данных');
@@ -71,6 +109,7 @@ async function suite(candidate) {
   assert.ok(offline.pending.every(row => row.reason.includes('GitHub недоступен')));
   const stageTwo = `| Л1 | lore | ЗЕЛЁНАЯ — [прогон](${link}) | — |`;
   assert.equal((await module.finishSummary(green, stageTwo, async () => passed)).ready.length, 19);
+  await integration(module);
 }
 
 await suite(source);

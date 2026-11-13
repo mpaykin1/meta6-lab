@@ -1,6 +1,6 @@
 {
   "format": "htmlpack/1",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "name": "Туманные шпили — 12 дополнительных живых ассетов",
   "base": "reference/tumannye-shpili",
   "reference_count": 26,
@@ -35,9 +35,9 @@
       "animated": true
     },
     "shattered-mast": {
-      "label_ru": "Падающая мачта",
+      "label_ru": "Разбитая мачта собора",
       "role": "world",
-      "benefit": "новая вертикальная руина и ориентир",
+      "benefit": "узнаваемая разрушенная мачта и мосты между ярусами",
       "animated": true
     },
     "gate-bridge": {
@@ -71,9 +71,9 @@
       "animated": true
     },
     "bell-spire": {
-      "label_ru": "Колокольня расколотых шпилей",
+      "label_ru": "Колокольня расколотого собора",
       "role": "world",
-      "benefit": "вертикальный ориентир и раскачивающийся колокол",
+      "benefit": "разбитые шпили, стрельчатые окна, реально качающийся колокол",
       "animated": true
     },
     "mirror-whirlpool": {

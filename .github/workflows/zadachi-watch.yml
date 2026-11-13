@@ -52,7 +52,24 @@ jobs:
           node-version: '22'
       - name: Self-test and traps
         run: node scripts/zadachi/verify.mjs && node scripts/zadachi/mutate.mjs
+      - name: Limit factual main writes to one per hour
+        id: publish_rate
+        shell: bash
+        run: |
+          set -euo pipefail
+          # A GitHub API failure must not grant permission to publish.
+          recent=$(gh api "repos/${GITHUB_REPOSITORY}/commits?path=ZADACHI.md&per_page=100" \
+            --jq '[.[] | select(.commit.author.name == "zadachi-watch") | .commit.author.date][0] // empty')
+          if [ -n "$recent" ]; then
+            last=$(date -u -d "$recent" +%s)
+            now=$(date -u +%s)
+            if [ $((now - last)) -lt 3600 ]; then
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              echo "Not publishing: last ZADACHI bot commit was under one hour ago"
+            fi
+          fi
       - name: Update ZADACHI.md from GitHub
+        if: steps.publish_rate.outputs.skip != 'true'
         shell: bash
         run: |
           set -euo pipefail

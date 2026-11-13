@@ -1,0 +1,51 @@
+name: BEZ PATTERNOV
+on:
+  pull_request:
+    paths:
+      - 'games/**'
+      - 'demos/**'
+      - 'meta-games/**'
+      - 'reference/**'
+      - 'shared/**'
+      - 'scripts/visual/**'
+      - 'rules/01-stil-i-grafika/BEZ_PATTERNOV.md'
+      - '.github/workflows/bez-patternov.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'games/**'
+      - 'demos/**'
+      - 'meta-games/**'
+      - 'reference/**'
+      - 'shared/**'
+      - 'scripts/visual/**'
+      - '.github/workflows/bez-patternov.yml'
+  schedule:
+    - cron: '23 3 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: bez-patternov-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  static:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Ensure guard rejects five mutations
+        run: node scripts/visual/mutate-no-patterns.mjs
+      - name: Scan changed games in PR
+        if: github.event_name == 'pull_request'
+        env:
+          PATTERN_BASE: ${{ github.event.pull_request.base.sha }}
+        run: node scripts/visual/verify-no-patterns.mjs --changed
+      - name: Full scan for main and scheduled audits
+        if: github.event_name != 'pull_request'
+        run: node scripts/visual/verify-no-patterns.mjs --all

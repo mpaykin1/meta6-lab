@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {verifyClaudePages} from './verify-claude-pages.mjs';
 
-const source = readFileSync(new URL('../../.github/workflows/lab-pages.yml', import.meta.url), 'utf8');
+const source = readFileSync(new URL('../../.github/workflows/lab-pages.yml', import.meta.url), 'utf8')
+  .replace(/\r\n/g, '\n');
 verifyClaudePages(source);
 const ifLine = source.split('\n').find(x => /^    if: github\.ref == 'refs\/heads\/main' &&/.test(x));
 assert.ok(ifLine, 'missing production guard condition');
@@ -13,8 +14,8 @@ const edits = [
   ['top-level-concurrency-cancels-deploy', '    concurrency:\n      group: lab-pages',
     'concurrency:\n  group: lab-pages'],
   ['kick-branch-does-not-request-main',
-    'gh workflow run lab-pages.yml --ref main',
-    'gh workflow run lab-pages.yml --ref lab/preview']
+    '-f ref=main',
+    '-f ref=lab/preview']
 ];
 for (const [label, target, mutated] of edits) {
   assert.ok(source.includes(target), 'Mutation target missing: ' + label);

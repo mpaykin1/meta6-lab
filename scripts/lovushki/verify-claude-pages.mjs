@@ -31,7 +31,10 @@ export function verifyClaudePages(source) {
   const kickCondition = kick.find(x => /^\s{4}if:\s*/.test(x)) || '';
   assert.match(kickCondition, /github\.ref\s*!=\s*'refs\/heads\/main'/,
     'lab branch should request rebuild, not publish directly');
-  assert.ok(kick.some(x => /gh workflow run lab-pages\.yml --ref main\b/.test(x)),
+  const commands = kick.filter(x => !/^\s*#/.test(x));
+  const cliDispatch = /^\s*(?:if\s+)?gh workflow run lab-pages\.yml --ref main\s*(?:;|$)/;
+  const apiDispatch = /\bgh api --method POST "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/lab-pages\.yml\/dispatches" -f ref=main\s*(?:;|$)/;
+  assert.ok(commands.some(x => cliDispatch.test(x) || apiDispatch.test(x)),
     'branch previews must kick trusted main');
   assert.ok(deploy.some(x => /actions\/deploy-pages@/.test(x)),
     'a real Pages publish job is mandatory');

@@ -1,8 +1,9 @@
 // Браузерный измеритель htmlpack/1. Playwright/Chrome взят из scripts/shared/verify-seven-browser.mjs.
 // node htmlpack_harness.mjs <reference/index.html> <candidate/index.html>
 import {chromium} from 'playwright-core';
-import {existsSync} from 'node:fs';
-import {resolve} from 'node:path';
+import {existsSync, readFileSync, writeFileSync, mkdtempSync, rmSync} from 'node:fs';
+import {resolve, join} from 'node:path';
+import {tmpdir} from 'node:os';
 import {pathToFileURL} from 'node:url';
 import {inflateSync} from 'node:zlib';
 
@@ -66,27 +67,76 @@ function diff(a, b, threshold = 32) {
   }
   return count / Math.max(1, all);
 }
-function features(a, b, fps, isolated = 1) {
-  const {width, height, channels: c, data: d} = a;
-  const corners = [[3, 3], [width - 4, 3], [3, height - 4], [width - 4, height - 4]];
-  const bg = corners.map(([x, y]) => [d[(y * width + x) * c], d[(y * width + x) * c + 1], d[(y * width + x) * c + 2]]);
-  let detail = 0, visible = 0, total = 0;
-  const colors = new Set();
-  for (let y = 3; y < height - 3; y += 4) for (let x = 3; x < width - 3; x += 4) {
-    const i = (y * width + x) * c, j = (y * width + x + 3) * c;
-    const h = ((y + 3) * width + x) * c;
-    const rgb = [d[i], d[i + 1], d[i + 2]];
-    colors.add(((rgb[0] >> 4) << 8) | ((rgb[1] >> 4) << 4) | (rgb[2] >> 4));
-    const edge = (Math.abs(d[i] - d[j]) + Math.abs(d[i + 1] - d[j + 1]) + Math.abs(d[i + 2] - d[j + 2]) +
-                  Math.abs(d[i] - d[h]) + Math.abs(d[i + 1] - d[h + 1]) + Math.abs(d[i + 2] - d[h + 2])) / 6;
-    if (edge > 13) detail++;
-    if (Math.min(...bg.map(z => (Math.abs(z[0] - rgb[0]) + Math.abs(z[1] - rgb[1]) + Math.abs(z[2] - rgb[2])) / 3)) > 23) visible++;
-    total++;
+// The alpha-like mask is the *changed object pixels*, not the background scene.
+// Both accepted reference and candidate use the identical shown/hidden capture path.
+function features(on0, on1, off0, off1, fps) {
+  const w=on1.width,h=on1.height,c=on1.channels, n=w*h;
+  if ([on0,off0,off1].some(x=>x.width!==w||x.height!==h||x.channels!==c))
+    throw Error('HP10: mismatched isolation frames');
+  const masks=[new Uint8Array(n),new Uint8Array(n)];
+  const ons=[on0,on1],offs=[off0,off1];
+  const sums=[{x:0,y:0,n:0},{x:0,y:0,n:0}];
+  const rgbDistance=(a,ai,b,bi)=>(
+    Math.abs(a[ai]-b[bi])+Math.abs(a[ai+1]-b[bi+1])+Math.abs(a[ai+2]-b[bi+2]))/3;
+  for(let k=0;k<2;k++){
+    const on=ons[k].data,off=offs[k].data;
+    for(let y=2;y<h-2;y+=2)for(let x=2;x<w-2;x+=2){
+      const p=y*w+x,i=p*c;
+      if(rgbDistance(on,i,off,i)<23)continue;
+      masks[k][p]=1;sums[k].x+=x;sums[k].y+=y;sums[k].n++;
+    }
   }
-  return {visible: +(visible / total).toFixed(5), detail: +(detail / total).toFixed(5),
-          motion: +diff(a, b, 12).toFixed(5), colors: colors.size,
-          fps: Math.round(fps), isolated: +isolated.toFixed(5)};
+  const active=masks[1],shown=on1.data;
+  const count=sums[1].n;
+  if(!count)return {visible:0,detail:0,motion:0,isolated:0,silhouette:0,
+    colors:0,fps:Math.round(fps),palette:[0,0,0]};
+  const center=[sums[1].x/count,sums[1].y/count];
+  const radii=new Float64Array(24),touched=new Uint8Array(24);
+  let edgeCount=0,shapeBoundary=0,validMotion=0,motionPixels=0;
+  const colors=new Set(),rgbMean=[0,0,0];
+  const dx=sums[0].n?2*Math.round(((sums[0].x/sums[0].n)-center[0])/2):0;
+  const dy=sums[0].n?2*Math.round(((sums[0].y/sums[0].n)-center[1])/2):0;
+  for(let y=2;y<h-2;y+=2)for(let x=2;x<w-2;x+=2){
+    const p=y*w+x;if(!active[p])continue;
+    const i=p*c,r=shown[i],g=shown[i+1],b=shown[i+2];
+    colors.add(((r>>4)<<8)|((g>>4)<<4)|(b>>4));
+    rgbMean[0]+=r;rgbMean[1]+=g;rgbMean[2]+=b;
+    const neighbors=[p-2,p+2,p-2*w,p+2*w];
+    if(neighbors.some(q=>!active[q])){
+      shapeBoundary++;
+      const phi=Math.atan2(y-center[1],x-center[0]);
+      const bin=Math.min(23,Math.floor(((phi+Math.PI)/(2*Math.PI))*24));
+      radii[bin]=Math.max(radii[bin],Math.hypot(x-center[0],y-center[1]));
+      touched[bin]=1;
+    }
+    // Count texture edges ONLY where both adjacent samples belong to the object.
+    for(const q of [p+2,p+2*w]){
+      if(active[q] && rgbDistance(shown,i,shown,q*c)>17)edgeCount++;
+    }
+    const prevX=x+dx,prevY=y+dy;
+    if(prevX>=2&&prevX<w-2&&prevY>=2&&prevY<h-2){
+      const prev=prevY*w+prevX;
+      if(masks[0][prev]){
+        validMotion++;
+        if(rgbDistance(on0.data,prev*c,shown,i)>19)motionPixels++;
+      }
+    }
+  }
+  const rad=Array.from(radii).filter((v,i)=>touched[i]);
+  const avg=rad.reduce((x,y)=>x+y,0)/Math.max(1,rad.length);
+  const varR=rad.reduce((x,y)=>x+(y-avg)**2,0)/Math.max(1,rad.length);
+  // Regular circles, tori and hexagons have low angular silhouette variation.
+  const silhouette=rad.length>=12?Math.sqrt(varR)/Math.max(1,avg):0;
+  return {visible:+(count/(n/4)).toFixed(5),
+    detail:+(edgeCount/Math.max(1,count*2)).toFixed(5),
+    motion:+(motionPixels/Math.max(1,validMotion)).toFixed(5),
+    silhouette:+silhouette.toFixed(5),
+    colors:colors.size, fps:Math.round(fps),
+    isolated:+(count/(n/4)).toFixed(5),
+    palette:rgbMean.map(v=>Math.round(v/count)),
+    boundary:shapeBoundary};
 }
+
 async function textOutsideMenu(page) {
   return page.evaluate(() => [...document.querySelectorAll('body *')].some(el => {
     if (el.closest('#pn') || el.closest('#mb') || el.closest('#err') ||
@@ -98,72 +148,134 @@ async function textOutsideMenu(page) {
            r.left < innerWidth && r.top < innerHeight;
   }));
 }
-async function measure(browser, file, isPack) {
-  const page = await browser.newPage({viewport: {width: 640, height: 360}, deviceScaleFactor: 1});
-  const report = {items: {}, errors: [], screen_text: false};
-  page.on('pageerror', e => report.errors.push('pageerror: ' + e.message));
-  page.on('console', e => {if (e.type() === 'error') report.errors.push('console: ' + e.text());});
-  try {
-    await page.goto(pathToFileURL(resolve(file)).href, {waitUntil: 'domcontentloaded', timeout: 30000});
-    await page.waitForFunction(() => window.__PACK__?.items?.length > 0 && !!window.__STATE__,
-                              {timeout: 30000});
-    const ids = await page.evaluate(() => window.__PACK__.items.map(o => o.id));
-    for (const id of ids) {
-      await page.locator('#mb').click();
-      await page.locator('#ls button[data-id="' + id + '"]').click();
-      // Оцениваем ассет только после того, как камера действительно достигла
-      // выбранного пункта меню; иначе измеряется переход между чужими объектами.
-      const fixedCamera = await page.evaluate(id => {
-        const asset = window.__PACK__.items.find(item => item.id === id);
-        return asset && !asset.follow ? asset.cam || null : null;
-      }, id);
-      if (fixedCamera) {
-        await page.waitForFunction(({target,tolerance}) => {
-          const p = window.__STATE__().cam;
-          return Math.hypot(p[0]-target[0],p[1]-target[1],p[2]-target[2]) < tolerance;
-        }, {target:fixedCamera,tolerance:CAMERA_TOLERANCE},
-           {timeout:4500,polling:80});
-      } else await page.waitForTimeout(1000);
-      await page.waitForTimeout(150);
-      const first = pixels(await page.screenshot({type: 'png'}));
-      const fps = await page.evaluate(() => new Promise(done => {
-        let n = 0, started = performance.now();
-        function next(now) {
-          n++;
-          if (now - started >= 500) done(n * 1000 / (now - started));
-          else requestAnimationFrame(next);
-        }
-        requestAnimationFrame(next);
-      }));
-      const second = pixels(await page.screenshot({type: 'png'}));
-      let isolated = 1;
-      if (isPack) {
-        const canHide = await page.evaluate(id => !!window.__PACK_PROBE__?.assets?.[id] &&
-          typeof window.__PACK_PROBE__.setHidden === 'function', id);
-        if (canHide) {
-          await page.evaluate(id => window.__PACK_PROBE__.setHidden(id, true), id);
-          await page.waitForTimeout(45);
-          const off = pixels(await page.screenshot({type: 'png'}));
-          await page.evaluate(id => window.__PACK_PROBE__.setHidden(id, false), id);
-          isolated = diff(second, off, 28);
-        } else if (await page.evaluate(id => window.__PACK__?.items.some(i => i.id === id && i.isNew), id)) {
-          isolated = 0;
-        }
-      }
-      report.items[id] = features(first, second, fps, isolated);
-      if (await textOutsideMenu(page)) report.screen_text = true;
-    }
-  } finally {await page.close();}
-  return report;
+// Runtime-only copies: the tracked reference HTML is never modified.
+function instrumentIsolation(source) {
+  const marker='/* ============ РЕНДЕР ============ */';
+  if(!source.includes(marker))throw Error('HP10: render insertion point absent');
+  const hook=String.raw\`
+/* ASSET-CHECK ONLY: per-object isolation, never shipped into the reference. */
+const __acArch=(tex)=>scene.children.filter(o=>o.material?.uniforms?.map?.value===tex);
+const __acAllArch=[texCath,texObelisk,texWall,texAnt,texDome,texCliff,texGate];
+const __acGroups={
+ sky:[sky],fog:scene.children.filter(o=>o.material?.uniforms?.uSp),
+ obelisk:__acArch(texObelisk),walls:__acArch(texWall),
+ cathedral:__acArch(texCath),antenna:__acArch(texAnt),
+ dome:__acArch(texDome),cliff:__acArch(texCliff),
+ rubble:scene.children.filter(o=>o.material?.uniforms?.uFog&&
+   o.material?.uniforms?.map&&!__acAllArch.includes(o.material.uniforms.map.value)),
+ gate:[gate],hero:[hero],
+ cape:hero.children.filter(o=>o.material?.uniforms?.uLen),
+ blade:[bladeG,arcM],engine:[engine,trail],
+ beast:[beast],mask:[mask],jaws:[beads],tendrils:[beads],
+ explosion:[puffs],sparks:[sparks],petals:[petals],
+ rain:[rain],dust:[dust],water:[],bokeh:[],post:[]
+};
+let __acHidden=null;let __acUndo=[];
+window.__ISOLATE__=(id,shown)=>{
+ const known=Object.prototype.hasOwnProperty.call(__acGroups,id)||
+   !!scene.children.find(o=>o.name==='shpili-plus-'+id);
+ if(!known)throw Error('HP10: isolation target not found '+id);
+ __acHidden=shown?null:id;return true;
+};
+window.__AC_APPLY__=()=>{
+ __acUndo=[];
+ if(!__acHidden)return;
+ const id=__acHidden;
+ const objects=__acGroups[id]||scene.children.filter(o=>o.name==='shpili-plus-'+id);
+ for(const o of objects){if(!o)continue;const was=o.visible;o.visible=false;
+   __acUndo.push(()=>{o.visible=was});}
+ if(id==='water'||id==='bokeh'){
+   const u=waterMat.uniforms.uH,old=u.value;u.value=-1;
+   __acUndo.push(()=>{u.value=old});
+ }
+ if(id==='post'){
+   for(const key of ['uCA','uGrain','uGlitch','uBloom']){
+     const u=finalMat.uniforms[key],old=u.value;u.value=0;
+     __acUndo.push(()=>{u.value=old});
+   }
+ }
+};
+window.__AC_RESTORE__=()=>{for(const fn of __acUndo)fn();__acUndo=[]};
+\`;
+  source=source.replace(marker,hook+'\n'+marker);
+  const clockLine='const dt=Math.min(clock.getDelta(),.05);';
+  if(!source.includes(clockLine))throw Error('HP10: clock insertion point absent');
+  source=source.replace(clockLine,
+    'const dt=window.__AC_FREEZE__?(clock.getDelta(),0):Math.min(clock.getDelta(),.05);');
+  const packLine='update(t,dt);SHPILI_PLUS.tick(t,dt);';
+  if(source.includes(packLine))source=source.replace(packLine,packLine+'window.__AC_APPLY__();');
+  else{
+    const refLine='update(t,dt);\n  renderer.setRenderTarget(rtA);';
+    if(!source.includes(refLine))throw Error('HP10: reference render hook absent');
+    source=source.replace(refLine,'update(t,dt);window.__AC_APPLY__();\n  renderer.setRenderTarget(rtA);');
+  }
+  const outputLine='renderer.setRenderTarget(null);renderer.render(qScene,qCam);';
+  if(!source.includes(outputLine))throw Error('HP10: render-restore insertion point absent');
+  return source.replace(outputLine,outputLine+'window.__AC_RESTORE__();');
 }
+async function measure(browser,file){
+ const page=await browser.newPage({viewport:{width:640,height:360},deviceScaleFactor:1});
+ const report={items:{},errors:[],screen_text:false};
+ page.on('pageerror',e=>report.errors.push('pageerror: '+e.message));
+ page.on('console',e=>{if(e.type()==='error')report.errors.push('console: '+e.text());});
+ try{
+  await page.goto(pathToFileURL(resolve(file)).href,{waitUntil:'domcontentloaded',timeout:30000});
+  await page.waitForFunction(()=>window.__PACK__?.items?.length>0&&!!window.__STATE__&&
+    typeof window.__ISOLATE__==='function',{timeout:30000});
+  const ids=await page.evaluate(()=>window.__PACK__.items.map(o=>o.id));
+  for(const id of ids){
+   await page.locator('#mb').click();
+   await page.locator('#ls button[data-id="'+id+'"]').click();
+   const fixedCamera=await page.evaluate(id=>{
+     const asset=window.__PACK__.items.find(item=>item.id===id);
+     return asset&&!asset.follow?asset.cam||null:null;
+   },id);
+   if(fixedCamera){
+     await page.waitForFunction(({target,tolerance})=>{
+       const p=window.__STATE__().cam;
+       return Math.hypot(p[0]-target[0],p[1]-target[1],p[2]-target[2])<tolerance;
+     },{target:fixedCamera,tolerance:CAMERA_TOLERANCE},{timeout:4500,polling:80});
+   }else await page.waitForTimeout(1000);
+   await page.waitForTimeout(100);
+   const capture=async()=>{
+     await page.evaluate(()=>{window.__AC_FREEZE__=true});
+     await page.waitForTimeout(40);
+     const on=pixels(await page.screenshot({type:'png'}));
+     await page.evaluate(id=>window.__ISOLATE__(id,false),id);
+     await page.waitForTimeout(35);
+     const off=pixels(await page.screenshot({type:'png'}));
+     await page.evaluate(id=>window.__ISOLATE__(id,true),id);
+     await page.evaluate(()=>{window.__AC_FREEZE__=false});
+     return {on,off};
+   };
+   const first=await capture();
+   const fps=await page.evaluate(()=>new Promise(done=>{
+     let frames=0,started=performance.now();
+     function next(now){frames++;if(now-started>=500)done(frames*1000/(now-started));
+     else requestAnimationFrame(next);}requestAnimationFrame(next);
+   }));
+   const second=await capture();
+   report.items[id]=features(first.on,second.on,first.off,second.off,fps);
+   if(await textOutsideMenu(page))report.screen_text=true;
+  }
+ }finally{await page.close();}
+ return report;
+}
+
 let browser;
 try {
   if (!refPath || !packPath) throw Error('usage: harness reference.html pack.html');
   browser = await chromium.launch({headless: true, executablePath: chrome || undefined,
     args: ['--no-sandbox', '--disable-dev-shm-usage', '--enable-webgl', '--enable-unsafe-swiftshader',
            '--use-gl=angle', '--use-angle=swiftshader']});
-  result.reference = await measure(browser, refPath, false);
-  result.candidate = resolve(refPath) === resolve(packPath) ? result.reference : await measure(browser, packPath, true);
+  const temp=mkdtempSync(join(tmpdir(),'shpili-isolate-'));
+  try {
+    const ref=join(temp,'reference.html'),cand=join(temp,'candidate.html');
+    writeFileSync(ref,instrumentIsolation(readFileSync(refPath,'utf8')),'utf8');
+    writeFileSync(cand,instrumentIsolation(readFileSync(packPath,'utf8')),'utf8');
+    result.reference = await measure(browser,ref);
+    result.candidate = resolve(refPath) === resolve(packPath) ? result.reference : await measure(browser,cand);
+  } finally {rmSync(temp,{recursive:true,force:true});}
   result.ok = true;
 } catch (err) {
   result.error = String(err?.stack || err);

@@ -14,3 +14,5 @@
 | 2026-11-14 | 2.4.3 | — | HP10: пробуждение временных искр перед изолированным измерением | 1 ловушка | +1 мутант, ещё без CI | ref sparks: HARD 1→повторный замер | [SHA 9aca7a6](https://github.com/mpaykin1/meta6-lab/commit/9aca7a624b43f046eab953ac5f55e777fdc0f7b8), [доказательство прежнего HARD](https://github.com/mpaykin1/meta6-lab/actions/runs/43498417717) |
 
 | 2026-11-14 | 2.4.4 | — | HP13: сравнение по кадрам показан−скрыт, кадрирование маски, проверка размера PNG-листа | 4 тестовых сценария в test_htmlpack.py и test_kinds.py | +2 мутанта, полный CI ещё не подтверждён | Туманные шпили: все 38 ID, HARD на свежем HEAD ещё не подтверждён | [код cca566ac](https://github.com/mpaykin1/meta6-lab/commit/cca566ac3f524cfb61bcbe11f6b7d5f14724b6bb), [PR #305](https://github.com/mpaykin1/meta6-lab/pull/305) |
+
+| 2026-11-14 | 2.4.5 | — | HP14: сложность контура × деталей внутри на пикселях самого объекта | 3 ловушки | +1 мутант, CI не подтверждён | Туманные шпили: итог HARD подлежит проверке | [PR #305](https://github.com/mpaykin1/meta6-lab/pull/305) |

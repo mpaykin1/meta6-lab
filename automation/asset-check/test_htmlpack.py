@@ -46,12 +46,12 @@ class HtmlPackTraps(unittest.TestCase):
     def metrics(self, new=None, fps=45):
         ref = {name: {"visible": .14, "detail": .07, "motion": .08, "colors": 130,
                       "fps": 45, "isolated": 1, "silhouette": .21,
-                      "palette": [108, 142, 180], "deformation": .09} for name in self.old}
+                      "palette": [108, 142, 180], "deformation": .09, "structure": .08} for name in self.old}
         cand = {name: dict(metric) for name, metric in ref.items()}
         if new is not None:
             cand["new_shadow"] = dict(visible=.16, detail=.09, motion=.1, colors=140,
                                       fps=fps, isolated=.16, silhouette=.25,
-                                      palette=[119, 153, 176], deformation=.1)
+                                      palette=[119, 153, 176], deformation=.1, structure=.11)
             cand["new_shadow"].update(new)
         return {"ok": True, "reference": {"items": ref, "errors": [], "screen_text": False},
                 "candidate": {"items": cand, "errors": [], "screen_text": False}}
@@ -126,6 +126,19 @@ class HtmlPackTraps(unittest.TestCase):
         harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
         self.assertIn("differentShape=0,unionShape=0", harness)
         self.assertIn("deformation:+deformation.toFixed(5)", harness)
+
+    def test_HP14_decorative_grain_cannot_cover_primitive_core(self):
+        self.add_new()
+        self.assertIn("HP14", self.ids(self.metrics(new={"structure": .001})))
+
+    def test_HP14_missing_joint_structure_is_hard(self):
+        self.add_new()
+        self.assertIn("HP14", self.ids(self.metrics(new={"structure": None})))
+
+    def test_HP14_reference_and_candidate_share_object_mask(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("const structure=silhouette*Math.sqrt(edgeCount/Math.max(1,count*2));", harness)
+        self.assertIn("structure:+structure.toFixed(5)", harness)
 
     def test_HP7_slow_browser_page(self):
         self.add_new()

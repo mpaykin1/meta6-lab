@@ -196,6 +196,9 @@ def check(root: Path, r) -> set[str]:
     physical = [m["silhouette"] for name, m in ref_measured.items()
                 if name not in technical and isinstance(m.get("silhouette"), (int, float))]
     silhouette_min = percentile10(physical)
+    # Joint quality bound from isolated *physical* reference objects.
+    structure_min = percentile10([m["structure"] for name, m in ref_measured.items()
+                                  if name not in technical and isinstance(m.get("structure"), (int, float))])
     # The largest palette variance accepted *between* reference objects defines
     # the allowed style variation. No color, texture or shader is banned.
     def palette_distance(one, two):
@@ -213,6 +216,7 @@ def check(root: Path, r) -> set[str]:
                    and ref_measured[n]["deformation"] > 0]
     deform_min = max(.003, percentile10(articulated))
     r.stats["htmlpack_object_quality"] = {"silhouette_min": round(silhouette_min, 5),
+                                         "structure_min": round(structure_min, 5),
                                          "palette_distance_max": round(palette_limit, 2),
                                          "reference_isolated": len(ref_measured),
                                          "part_deformation_min": round(deform_min, 5)}
@@ -240,6 +244,12 @@ def check(root: Path, r) -> set[str]:
                 r.add("HP12", "HARD", name,
                       f"нет движения частей: деформация маски {shape_deform:.4f} < эталона {deform_min:.4f}",
                       "Анимируй суставы, крылья, хвост и плащ, не только цвет и общий сдвиг")
+        if role in {"enemy", "world", "ally", "pickup", "creature", "character"}:
+            structure = m.get("structure")
+            if not isinstance(structure, (int, float)) or structure + 1e-6 < structure_min:
+                r.add("HP14", "HARD", name,
+                      f"примитивная форма: структура {structure} < эталона {structure_min:.4f}",
+                      "Усложни основной силуэт и детали внутри; фоновая фактура не засчитывается")
         palette = m.get("palette")
         if not isinstance(palette, list) or len(palette) != 3:
             r.add("HP11", "HARD", name, "отсутствует палитра изолированных пикселей",

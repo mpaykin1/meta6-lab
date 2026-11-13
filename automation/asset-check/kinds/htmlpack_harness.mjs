@@ -88,7 +88,7 @@ function features(on0, on1, off0, off1, fps) {
   }
   const active=masks[1],shown=on1.data;
   const count=sums[1].n;
-  if(!count)return {visible:0,detail:0,motion:0,deformation:0,isolated:0,silhouette:0,
+  if(!count)return {visible:0,detail:0,motion:0,deformation:0,isolated:0,silhouette:0,structure:0,
     colors:0,fps:Math.round(fps),palette:[0,0,0]};
   const center=[sums[1].x/count,sums[1].y/count];
   const radii=new Float64Array(24),touched=new Uint8Array(24);
@@ -137,11 +137,14 @@ function features(on0, on1, off0, off1, fps) {
   const varR=rad.reduce((x,y)=>x+(y-avg)**2,0)/Math.max(1,rad.length);
   // Regular circles, tori and hexagons have low angular silhouette variation.
   const silhouette=rad.length>=12?Math.sqrt(varR)/Math.max(1,avg):0;
+  // HP14: shape and internal surface detail must both be convincing
+  // on the same isolated physical object, rather than on scene pixels.
+  const structure=silhouette*Math.sqrt(edgeCount/Math.max(1,count*2));
   return {visible:+(count/(n/4)).toFixed(5),
     detail:+(edgeCount/Math.max(1,count*2)).toFixed(5),
     motion:+(motionPixels/Math.max(1,validMotion)).toFixed(5),
     deformation:+deformation.toFixed(5),
-    silhouette:+silhouette.toFixed(5),
+    silhouette:+silhouette.toFixed(5), structure:+structure.toFixed(5),
     colors:colors.size, fps:Math.round(fps),
     isolated:+(count/(n/4)).toFixed(5),
     palette:rgbMean.map(v=>Math.round(v/count)),

@@ -155,9 +155,39 @@ def check(root: Path, r) -> set[str]:
     if candidate.get("screen_text"):
         r.add("HP4", "HARD", "index.html", "видимый текст на экране вне меню ☰",
               "Убери текст из игровой области, оставь его только в меню")
+    # The reference must pass the same object-only on/off isolation as the pack.
+    # Full-screen reference frames must never set the quality bar for tiny sprites.
+    unisolated = [name for name, m in ref_measured.items()
+                  if not isinstance(m.get("isolated"), (int, float))
+                  or m["isolated"] <= 0]
+    if unisolated:
+        r.add("HP10", "HARD", "эталон",
+              f"отсутствует изоляция эталонных объектов: {', '.join(unisolated[:8])}",
+              "Измеряй показан/скрыт для каждого объекта копии эталона; исходник не меняй")
+        return covered
     thresholds = {key: percentile10([v[key] for v in ref_measured.values()
                                       if isinstance(v.get(key), (int, float))])
                   for key in ("visible", "detail", "motion")}
+    # Compare real shape, not effects around it. Role-specific silhouettes from
+    # the reference exclude sky, rain and postprocessing (not physical objects).
+    technical = {"sky", "fog", "water", "bokeh", "explosion", "sparks",
+                 "petals", "rain", "dust", "post"}
+    physical = [m["silhouette"] for name, m in ref_measured.items()
+                if name not in technical and isinstance(m.get("silhouette"), (int, float))]
+    silhouette_min = percentile10(physical)
+    # The largest palette variance accepted *between* reference objects defines
+    # the allowed style variation. No color, texture or shader is banned.
+    def palette_distance(one, two):
+        return sum((float(a)-float(b))**2 for a, b in zip(one, two))**.5
+
+    palettes = [m.get("palette") for m in ref_measured.values()
+                if isinstance(m.get("palette"), list) and len(m["palette"]) == 3]
+    nearest = [min(palette_distance(p, q) for j, q in enumerate(palettes) if i != j)
+               for i, p in enumerate(palettes)] if len(palettes) > 1 else []
+    palette_limit = max(40., sorted(nearest)[int(.9*(len(nearest)-1))] if nearest else 40.)
+    r.stats["htmlpack_object_quality"] = {"silhouette_min": round(silhouette_min, 5),
+                                         "palette_distance_max": round(palette_limit, 2),
+                                         "reference_isolated": len(ref_measured)}
     r.stats["htmlpack_quality_min"] = {k: round(v, 5) for k, v in thresholds.items()}
     for name in new_ids:
         m = measured.get(name)
@@ -169,6 +199,23 @@ def check(root: Path, r) -> set[str]:
         if isolated < .006:
             r.add("HP5", "HARD", name, f"пустой или невидимый ассет: изолированная доля {isolated:.4f}",
                   "Увеличь видимую форму, силуэт, свет и контраст объекта")
+        role = (manifest.get("assets", {}).get(name) or {}).get("role")
+        if role in {"enemy", "world", "ally", "pickup", "creature", "character"}:
+            shape = m.get("silhouette")
+            if not isinstance(shape, (int, float)) or shape + 1e-6 < silhouette_min:
+                r.add("HP10", "HARD", name,
+                      f"примитивнее эталона: сложность силуэта {shape} < {silhouette_min:.4f}",
+                      "Добавь выразительный узнаваемый контур: челюсти, опоры, фактуру, конечности")
+        palette = m.get("palette")
+        if not isinstance(palette, list) or len(palette) != 3:
+            r.add("HP11", "HARD", name, "отсутствует палитра изолированных пикселей",
+                  "Измерь цвета только самого ассета")
+        elif palettes:
+            color_delta = min(palette_distance(palette, ref) for ref in palettes)
+            if color_delta > palette_limit:
+                r.add("HP11", "HARD", name,
+                      f"палитра отличается от всех эталонных ассетов: {color_delta:.1f} > {palette_limit:.1f}",
+                      "Верни оттенки к палитре эталона, не запрещая способы рисования")
         for key, label in (("visible", "видимость"), ("detail", "детальность"),
                            ("motion", "живость")):
             val = float(m.get(key, 0))

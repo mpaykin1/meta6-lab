@@ -1,6 +1,6 @@
 {
   "format": "htmlpack/1",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "name": "Туманные шпили — живой мир + 6 ассетов",
   "base": "reference/tumannye-shpili",
   "reference_count": 26,
@@ -29,16 +29,20 @@
   },
   "assets": {
     "sable-beast": {
-      "label_ru": "Багровый страж",
+      "label_ru": "Страж из обломков врат",
       "role": "enemy",
       "benefit": "новая фаза столкновения; маска и щупальца",
-      "animated": true
+      "animated": true,
+      "construction": "articulated-3d",
+      "remade": true
     },
     "shattered-mast": {
-      "label_ru": "Падающая мачта",
+      "label_ru": "Собор — сломанная корона",
       "role": "world",
       "benefit": "новая вертикальная руина и ориентир",
-      "animated": true
+      "animated": true,
+      "construction": "canvas-architecture",
+      "remade": true
     },
     "gate-bridge": {
       "label_ru": "Мост осколков врат",

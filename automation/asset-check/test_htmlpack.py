@@ -42,10 +42,13 @@ class HtmlPackTraps(unittest.TestCase):
     def metrics(self, new=None, fps=45):
         ref = {name: {"visible": .14, "detail": .07, "motion": .08, "colors": 130,
                       "fps": 45, "isolated": 1} for name in self.old}
+        for metric in ref.values():
+            metric.update(silhouette=.21, palette=[108, 142, 180])
         cand = {name: dict(metric) for name, metric in ref.items()}
         if new is not None:
             cand["new_shadow"] = dict(visible=.16, detail=.09, motion=.1, colors=140,
                                       fps=fps, isolated=.16)
+            cand["new_shadow"].update(silhouette=.25, palette=[119, 153, 176])
             cand["new_shadow"].update(new)
         return {"ok": True, "reference": {"items": ref, "errors": [], "screen_text": False},
                 "candidate": {"items": cand, "errors": [], "screen_text": False}}
@@ -87,6 +90,27 @@ class HtmlPackTraps(unittest.TestCase):
         self.add_new()
         self.assertIn("HP6", self.ids(self.metrics(new={"motion": 0.0})))
 
+    def test_HP10_circle_cannot_hide_behind_detailed_background(self):
+        self.add_new()
+        self.assertIn("HP10", self.ids(self.metrics(new={"silhouette": .001})))
+
+    def test_HP10_missing_reference_isolation_is_hard(self):
+        self.add_new()
+        data = self.metrics(new={})
+        data["reference"]["items"][self.old[0]]["isolated"] = 0
+        self.assertIn("HP10", self.ids(data))
+
+    def test_HP11_palette_drift_not_covered_by_scene_colors(self):
+        self.add_new()
+        self.assertIn("HP11", self.ids(self.metrics(new={"palette": [255, 240, 0]})))
+
+    def test_HP10_reference_and_candidate_use_same_pixel_mask(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("window.__ISOLATE__(id,false)", harness)
+        self.assertIn("result.reference = await measure(browser,ref)", harness)
+        self.assertIn("result.candidate = resolve(refPath)", harness)
+        self.assertIn("features(first.on,second.on,first.off,second.off,fps)", harness)
+
     def test_HP7_slow_browser_page(self):
         self.add_new()
         data = self.metrics(new={})
@@ -121,6 +145,14 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertIn("CAMERA_TOLERANCE=3.5", harness)
         self.assertIn("page.waitForFunction(({target,tolerance})", harness)
         self.assertIn("fixedCamera", harness)
+
+    def test_HP10_reference_render_hook_matches_real_whitespace(self):
+        import re
+        reference = REF.read_text("utf-8")
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertRegex(reference, r"update\(t,dt\);\s*renderer\.setRenderTarget\(rtA\);")
+        self.assertIn(r"const refDraw=/update\(t,dt\);(\s*)renderer\.setRenderTarget\(rtA\);/;", harness)
+        self.assertIn("source.replace(refDraw,", harness)
 
     def test_HP8_unavailable_browser(self):
         with patch("subprocess.run", return_value=SimpleNamespace(

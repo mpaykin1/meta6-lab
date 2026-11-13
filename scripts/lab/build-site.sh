@@ -10,6 +10,8 @@ rewrite() { # абсолютные ссылки meta6 -> meta6-lab
     -e 'mpaykin1.github.io/meta6/' -e '/meta6/' "$1" 2>/dev/null | while read -r f; do
     sed -i -e 's#mpaykin1\.github\.io/meta6/#mpaykin1.github.io/meta6-lab/#g' -e 's#\([\"'"'"'(]\)/meta6/#\1/meta6-lab/#g' "$f"; done
 }
+# Reject unapproved games on the main catalogue before publishing.
+if [[ -f "claude-games/index.html" ]]; then node scripts/lab/check-claude-only-catalog.mjs; fi
 rsync -a "${EXCL[@]}" ./ "$OUT"/
 rewrite "$OUT"
 touch "$OUT/.nojekyll"
@@ -26,6 +28,11 @@ for ref in $(git for-each-ref --format='%(refname:strip=3)' 'refs/remotes/origin
   name="${ref#lab/}"; safe="${name//\//-}"
   [[ "$safe" =~ ^[A-Za-z0-9._-]+$ ]] || { echo "skip unsafe branch $ref"; continue; }
   wt="$(mktemp -d)"; git worktree add -q --detach "$wt" "origin/$ref"
+  # The ad-free catalogue preview must pass the same provenance guard as production.
+  if [[ "$safe" == "claude-adfree-catalog-1110" ]]; then
+    [[ -f "$wt/scripts/lab/check-claude-only-catalog.mjs" ]] || { echo "Missing Claude-only catalogue guard" >&2; exit 1; }
+    ( cd "$wt" && node scripts/lab/check-claude-only-catalog.mjs )
+  fi
   dest="$OUT/preview/$safe"; mkdir -p "$dest"
   base="$(git merge-base origin/main "origin/$ref" 2>/dev/null || echo origin/main)"
   tops="$( (git diff --name-only "$base" "origin/$ref"; echo meta-games/x) | awk -F/ 'NF>1{print $1}' | sort -u)"

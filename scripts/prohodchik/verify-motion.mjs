@@ -14,7 +14,8 @@ function option(key) {
   return args[index + 1];
 }
 
-async function fixtures(assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion) {
+async function fixtures(assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion,
+  probeB2Directions) {
   const state = (x, y, extra = {}) => ({
     hero: {x, y}, level: 0, alive: true, progress: 0, game: 'veil-terraces', ...extra
   });
@@ -129,6 +130,24 @@ async function fixtures(assessMotion, assessFixedViewport, assessB2Probe, monito
   assert.equal(assessFixedViewport([fixed, {...fixed, sy: 12}, fixed]).status, 'FIX_MOVED');
   assert.equal(assessFixedViewport([fixed, {...fixed, cw: 391.5}, fixed]).status, 'FIX_MOVED');
   assert.equal(assessFixedViewport([fixed, {...fixed, cx: NaN}]).status, 'INVALID');
+  for (const game of ['veil-terraces', 'other-game']) {
+    let attempts = 0;
+    const resumed = await probeB2Directions([[0, -1], [1, 0]], async () => ({
+      status: ++attempts === 1 ? 'LEVEL_CHANGED' : 'MOVED', game
+    }));
+    assert.equal(resumed.status, 'MOVED');
+    assert.equal(attempts, 2, 'transition requires a fresh probe');
+    assert.equal((await probeB2Directions([[0, -1], [1, 0]], async () => ({
+      status: 'LEVEL_CHANGED', game
+    }))).status, 'LEVEL_CHANGED', 'transitions alone never prove motion');
+    attempts = 0;
+    const died = await probeB2Directions([[0, -1], [1, 0]], async () => {
+      attempts++;
+      return {status: 'DEAD', game};
+    });
+    assert.equal(died.status, 'DEAD');
+    assert.equal(attempts, 1, 'death must stop retries');
+  }
   // The incident artifact must be captured before the held gesture finishes,
   // including a death whose entity has already vanished.
   for (const terminal of ['DEAD', 'STUCK']) {
@@ -167,6 +186,7 @@ async function fixtures(assessMotion, assessFixedViewport, assessB2Probe, monito
 }
 
 async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion,
+  probeB2Directions,
   gamePath, screenshot) {
   assert.match(gamePath, /^games\/[a-z0-9-]+$/, 'Unsafe game path');
   const gameDir = resolve(root, gamePath);
@@ -221,19 +241,19 @@ async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, moni
         assert.equal(initial.started, true, 'Game has not started');
         const fixed = await page.evaluate(scrollAndCanvasInPage);
         const directions = [[0, -1], [1, 0], [-1, 0], [0, 1]];
-        const idleBefore = await read();
-        const idleSince = Date.now();
-        await page.waitForTimeout(450);
-        const idleAfter = await read();
-        const idle = {
-          before: idleBefore, after: idleAfter,
-          durationMs: Math.max(1, Date.now() - idleSince), input: false
-        };
         let status = 'NO_MOVEMENT';
         // A series of short released taps is not one continuous 2s hold.
         // Each direction is a real held gesture with live world-state and FIX samples.
         // A blocked direction is an obstacle to log, not proof all controls are broken.
-        for (const [directionIndex, [dx, dy]] of directions.entries()) {
+        const directionVerdict = await probeB2Directions(directions, async ([dx, dy], directionIndex) => {
+          const idleBefore = await read();
+          const idleSince = Date.now();
+          await page.waitForTimeout(450);
+          const idleAfter = await read();
+          const idle = {
+            before: idleBefore, after: idleAfter,
+            durationMs: Math.max(1, Date.now() - idleSince), input: false
+          };
           const trial = [idle];
           const viewportTrace = [fixed];
           let previous = await read();
@@ -283,11 +303,11 @@ async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, moni
               mkdirSync(resolve(file, '..'), {recursive: true});
               await page.screenshot({path: file, timeout: 15000});
             }
-            continue;
+            return verdict;
           }
-          if (status === 'MOVED' || status === 'DEAD' ||
-              status === 'INVALID' || status === 'LEVEL_CHANGED') break;
-        }
+          return verdict;
+        });
+        status = directionVerdict.status;
         assert.deepEqual(errors, [], 'Browser console/page errors');
         assert.equal(status, 'MOVED', 'B2 no proven player movement; status=' + status);
         const finalState = await read();
@@ -319,12 +339,12 @@ async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, moni
 
 const moduleFile = option('--module');
 const source = moduleFile ? pathToFileURL(resolve(moduleFile)).href : './motion-check.mjs';
-const {assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion} = await import(source);
+const {assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion, probeB2Directions} = await import(source);
 const game = option('--game');
 try {
   if (game) await verifyGame(assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion,
-    game, option('--screenshot'));
-  else await fixtures(assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion);
+    probeB2Directions, game, option('--screenshot'));
+  else await fixtures(assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion, probeB2Directions);
 } catch (error) {
   console.error(error.stack || error.message);
   process.exitCode = 1;

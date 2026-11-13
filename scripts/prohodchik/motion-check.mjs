@@ -160,3 +160,14 @@ export async function monitorHeldMotion({segments, hold, sample, onIncident}) {
   return incident ?? assessB2Probe(segments);
 }
 
+// A natural transition invalidates this measurement, not the player's controls.
+// Retry with a fresh trace; never convert a transition itself into MOVED.
+export async function probeB2Directions(directions, probe) {
+  let verdict = result('NO_INPUT');
+  for (const [index, direction] of directions.entries()) {
+    verdict = await probe(direction, index);
+    if (['MOVED', 'DEAD', 'INVALID'].includes(verdict.status)) return verdict;
+  }
+  return verdict;
+}
+

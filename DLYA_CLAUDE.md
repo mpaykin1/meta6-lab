@@ -95,3 +95,5 @@
 
 ### Ждёт Claude — дополнение к PR #258, 13.11.2026
 - PR #258 — ранняя фиксация DEAD/STUCK (35 мутантов), исправление B1 Windows cleanup (7 негативных сценариев); локальный полный Veil Terraces 6/6 × три запуска. Эти результаты не являются зелёным Actions run. Проверки платформы и workflow защищены: требуется подпись/проверка Claude и Actions с артефактами; не сливать автоматически. Исторический защищённый коммит остаётся отдельным блокером.
+
+- PR #258, фактический CI SHA 37563a42e6597b0132a7899f876f81dfc4ed2238: [B1 PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43395444871), [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43395444863). [B2 FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43395445014) исправляется независимым повтором после LEVEL_CHANGED без подмены перехода движением. [Защищённый коммит 2c8f27fb](https://github.com/mpaykin1/meta6-lab/actions/runs/43395445107) и [workflow/B1 проверки](https://github.com/mpaykin1/meta6-lab/actions/runs/43395445054) требуют подписи Claude; самослияние запрещено.

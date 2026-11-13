@@ -110,7 +110,15 @@ const mutations = [
   ['in-flight-named-game-deception',
     "if (['DEAD', 'STUCK', 'INVALID', 'LEVEL_CHANGED'].includes(verdict.status)) {",
     "if (segment.before?.game === 'veil-terraces' && " +
-      "['DEAD', 'STUCK', 'INVALID', 'LEVEL_CHANGED'].includes(verdict.status)) {"]
+      "['DEAD', 'STUCK', 'INVALID', 'LEVEL_CHANGED'].includes(verdict.status)) {"],
+  ['transition-stops-direction-probes',
+    "['MOVED', 'DEAD', 'INVALID'].includes(verdict.status)",
+    "['MOVED', 'DEAD', 'INVALID', 'LEVEL_CHANGED'].includes(verdict.status)"],
+  ['transition-forged-as-motion', 'verdict = await probe(direction, index);',
+    "verdict = await probe(direction, index); if (verdict.status === 'LEVEL_CHANGED') return {status: 'MOVED'};"],
+  ['transition-named-game-deception', 'verdict = await probe(direction, index);',
+    "verdict = await probe(direction, index); " +
+      "if (verdict.game === 'other-game' && verdict.status === 'LEVEL_CHANGED') return verdict;"]
 ];
 
 try {

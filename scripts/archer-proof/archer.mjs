@@ -55,7 +55,8 @@ async function openGame(browser, url, label, viewport) {
   page.on('requestfailed', request => errors.push('request failed: ' + request.url() + ': ' + request.failure()?.errorText));
   await page.goto(url + game, { waitUntil: 'load', timeout: 60000 });
   try {
-    await page.waitForFunction(() => !!window.__A, null, { timeout: 20000 });
+    // GPU-backed games may suspend RAF while compiling shaders; poll independently of frame paint.
+    await page.waitForFunction(() => !!window.__A, null, { timeout: 20000, polling: 100 });
   } catch (e) {
     await page.screenshot({ path: path.join(output, label + '-' + viewport + '-load-error.png') }).catch(() => {});
     const diagnosis = await page.evaluate(() => ({
@@ -69,7 +70,7 @@ async function openGame(browser, url, label, viewport) {
   }
   await page.waitForTimeout(1100);
   if (await page.locator('#menu:not(.hide) #bPlay').isVisible()) await page.locator('#bPlay').click();
-  await page.waitForFunction(() => window.__A?.G?.mode === 'play', null, { timeout: 15000 });
+  await page.waitForFunction(() => window.__A?.G?.mode === 'play', null, { timeout: 15000, polling: 100 });
   if (mobile) await page.touchscreen.tap(195, 410);
   else await page.mouse.click(640, 360);
   await page.waitForTimeout(1200);

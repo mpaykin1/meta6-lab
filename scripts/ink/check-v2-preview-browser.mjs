@@ -42,7 +42,8 @@ try{
       assert.equal(metrics.active,'robot');
       assert.deepEqual(errors,[],variant+' browser errors');
       const png=PNG.sync.read(await page.screenshot());
-      captures.push({png,variant,metrics,page});
+      captures.push({png,variant,metrics,page:variant==='v2'?page:null});
+      if(variant==='v1')await page.close(); // preserve screenshots, not two heavyweight WebGL loops at once
       console.log('INK '+device.name+' '+variant+' canvas='+metrics.width+'x'+metrics.height+
         ' fps_est='+String(metrics.fps===null?'N/A':metrics.fps.toFixed(1))+' console=0');
     }
@@ -73,7 +74,7 @@ try{
     assert.equal(sample.debrisType,'Points');
     assert.ok(sample.after<sample.before-.08,'waking shoulder has not raised');
     results.push({device:device.name,diff:percent,fpsEstimate:two.metrics.fps});
-    for(const item of captures)await item.page.close();
+    for(const item of captures)if(item.page)await item.page.close();
     await ctx.close();
   }
   console.log('INK_V2_BROWSER_PASS '+JSON.stringify(results));

@@ -120,3 +120,5 @@
 - 2026-11-13T04:14:41.627Z · ТОЛКАЧ #220: СЕЙЧАС ДЕЛАЮ — безопасный merge main в ветку, конфликт только OSHIBKI.md и TABLITSA_ZADACH.md; защищённые скрипты/тесты не редактировать, итоговый merge PR — Claude.
 
 - 2026-11-13T08:19:13+00:00 · ТОЛКАЧ #220: [конфликт устранён](https://github.com/mpaykin1/meta6-lab/commit/fb2cde9aa428959c33a44dd0af6d14dcf73e0ef2), локальные verify и 11/11 мутаций PASS; Actions на новом HEAD ещё не подтверждены. Защищённый PR в main не сливался.
+
+- 2026-11-13T08:31:07+00:00 · #220: конфликт устранён, KONTUR/B1/verify/quota PASS на fb2cde9, защищённый STOROZHA FAIL — ждёт Claude. #278: [правило уточнено](https://github.com/mpaykin1/meta6-lab/commit/4ae277ab7d7897b43b00109fc170066b5ffa9932), исправление fetch-depth с 6 локальными ловушками подготовлено; авто-проверка запретила push защищённого workflow, требуется авторизация. В main PR не слиты.

@@ -16,7 +16,10 @@ const data = {
     .map(game => ({game})),
   entries: [
     example('island-a', 'followCamera', ['camera'], 'cam1'),
-    example('island-b', 'orbitCamera', ['camera'], 'cam2'),
+    {...example('island-b', 'orbitCamera', ['camera'], 'cam2'), sha256: 'b'.repeat(64)},
+    {...example('island-a', 'lostShaCamera', ['camera'], 'bad-digest'), sha256: 'missing'},
+    {...example('island-b', 'reverseLinesCamera', ['camera'], 'bad-range'), lines: [20, 10]},
+    {...example('island-a', 'zeroLineCamera', ['camera'], 'bad-zero'), lines: [0, 20]},
     example('broken-city-copy', 'copyCamera', ['camera'], 'bad-copy'),
     example('skin-trainer', 'trainingCamera', ['camera'], 'bad-training'),
     {...example('island-a', 'vendorCamera', ['camera'], 'bad-vendor'), source_path: 'games/island-a/vendor/orbit.js'},
@@ -35,6 +38,9 @@ function verify(find) {
   assert.deepEqual(new Set(camera.results.map(row => row.game)),
     new Set(['island-a', 'island-b']));
   assert.ok(camera.results.every(row => row.verification === 'source_only'));
+  assert.equal(camera.results.find(row => row.game === 'island-b').sha256, 'b'.repeat(64),
+    'must not invent or replace an original source SHA');
+  assert.ok(camera.results.every(row => row.lines?.[0] > 0 && row.lines[1] >= row.lines[0]));
   assert.ok(camera.results.every(row => row.source_link ===
     'https://github.com/example/source/blob/main/' +
       row.source_path + '#L10-L20'));
@@ -61,6 +67,10 @@ export async function verifyFindSystemsAndMutations() {
       'INTENTS.filter(intent => intent.match.test(query))',
       "INTENTS.filter(intent => intent.tag === 'camera')")],
     ['deception-admit-third-party', s => s.replace('isThirdParty(entry.source_path)', 'false')],
+    ['drop-provenance-guard', s => s.replace('!hasProvenance(entry)', 'false')],
+    ['admit-reversed-lines', s => s.replace('entry.lines[0] <= entry.lines[1]', 'true')],
+    ['deception-fake-source-sha', s => s.replace('sha256: entry.sha256',
+      "sha256: 'a'.repeat(64)")],
     ['deception-fake-verified-state', s => s.replace(
       "verification: 'source_only'", "verification: 'passed'")],
   ];

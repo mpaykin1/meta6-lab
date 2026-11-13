@@ -68,7 +68,4 @@ export function sourceInput() {return {
   dialogue:read('dialogue.js'),game:read('game.js'),ui:read('ui.js'),
   girl:read('girl.js'),audio:read('audio.js'),adapter:read('bot-adapter.js')
 };}
-if(process.argv[1] && path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
-  try {console.log(JSON.stringify(inventory(sourceInput()),null,2));}
-  catch(e){console.error(e.message);process.exitCode=1;}
-}
+console.log(JSON.stringify(inventory(sourceInput()),null,2));

@@ -24,6 +24,14 @@ def update(text, states, now):
     summary = (f"Итог: всего {total}, слито {cnt['merged']}, закрыто {cnt['closed']}, "
                f"открыто {cnt['open']}" + (f", нет данных {cnt['нет данных']}" if cnt['нет данных'] else '')
                + f" — бот, {now} UTC")
+    # Stable facts must not create a new main commit only for the clock.
+    facts_changed = any(
+        original.split(' | ')[4] != updated.split(' | ')[4]
+        for original, updated in zip(text.split('\n'), lines)
+        if row.match(original) and row.match(updated)
+    )
+    if not facts_changed and re.search(r'^Итог:\s*всего\s+\\d+', text, re.M):
+        return text
     lines = [summary if l.startswith('Итог:') else l for l in lines]
     return '\n'.join(lines)
 

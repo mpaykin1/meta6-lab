@@ -344,5 +344,15 @@ class KindTraps(unittest.TestCase):
         self.assertEqual(set(r.kinds) & {"model3d", "audio"}, {"model3d", "audio"})
 
 
+class HtmlPackPartsMotionWiringTrap(unittest.TestCase):
+    def test_HP12_animated_characters_need_deforming_pixels(self):
+        root = Path(__file__).resolve().parent
+        checker = (root / "kinds/htmlpack.py").read_text("utf-8")
+        harness = (root / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn('if shape_deform + 1e-6 < deform_min:', checker)
+        self.assertIn('r.add("HP12", "HARD"', checker)
+        self.assertIn("deformation:+deformation.toFixed(5)", harness)
+
+
 if __name__ == "__main__":
     unittest.main()

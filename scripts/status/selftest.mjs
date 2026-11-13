@@ -55,9 +55,49 @@ async function suite(m, candidate) {
     { count: 'нет данных', folders: 'нет данных' });
   assert.deepEqual(m.normalizeChanges({ count: 2, folders: 'scripts:4' }),
     { count: 2, folders: 'scripts:4' });
+
+  const finishDoc = [
+    '| M1 | x | verify | ЗЕЛЁНАЯ — [прогон](https://github.com/o/r/actions/runs/123) |',
+    '| M2 | x | verify | ЗЕЛЁНАЯ — без ссылки на Actions |',
+    '| M3 | x | verify | НЕТ |'
+  ].join('\n');
+  const finishRows = m.finishTableStatus(finishDoc);
+  assert.equal(finishRows.length, 3);
+  assert.equal(finishRows[0].value, 'готов');
+  assert.equal(finishRows[1].value, 'нет данных');
+  assert.equal(finishRows[2].value, 'не готов');
+  assert.deepEqual(m.finishTableStatus(null), null);
+
+  const at = Date.parse('2026-11-13T12:00:00Z');
+  const old = {generated_at: '2026-11-13T10:00:00Z', run: 'a',
+    sha: {lab: 'before'}, changes: {lab: {count: 1}}, pr: {open: 55}};
+  const volatile = {...old, generated_at: '2026-11-13T11:59:00Z',
+    run: 'b', sha: {lab: 'after'}, changes: {lab: {count: 2}}};
+  assert.equal(m.shouldPublishStatus(old, volatile, at), false);
+  assert.equal(m.shouldPublishStatus(old, {...old, pr: {open: 54}},
+    Date.parse('2026-11-13T10:30:00Z')), false);
+  assert.equal(m.shouldPublishStatus(old, {...old, pr: {open: 54}}, at), true);
+  assert.deepEqual(m.retainKnown({review: {redLab: ['known']}},
+    {review: {redLab: 'нет данных'}}), {review: {redLab: ['known']}});
 }
 
 const mutations = {
+  'false-green-without-run-link': [
+    "const ready = /^ЗЕЛЁНАЯ(?:\\s|$)/.test(status) && linked;".replace('\\\\', '\\'),
+    "const ready = /^ЗЕЛЁНАЯ(?:\\s|$)/.test(status);".replace('\\\\', '\\')
+  ],
+  'hourly-gate-removed': [
+    "if (now - Date.parse(previous.generated_at) < 3600_000) return false;",
+    "if (false) return false;"
+  ],
+  'timestamp-trigger-misreported-as-fact': [
+    'const {generated_at, run, sha, changes, ...facts} = value;',
+    'const {run, sha, changes, ...facts} = value;'
+  ],
+  'missing-api-values-overwrite-known-truth': [
+    'if (current === UNKNOWN && previous !== undefined) return previous;',
+    'if (false) return previous;'
+  ],
   'red-run-as-green': [
     "run?.conclusion === 'failure' ? 'красный'",
     "run?.conclusion === 'failure' ? 'зелёный'"

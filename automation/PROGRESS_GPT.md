@@ -2,9 +2,9 @@
 
 | Шаг | Статус | Доказательство (PR, SHA, прогон) | Время UTC |
 |---|---|---|---|
-| 1. Очередь Actions | в работе | [ветка исходного решения](https://github.com/mpaykin1/meta6-lab/tree/lab/ci-ochered-concurrency) — сверка с main | 2026-11-13T18:54:42.573Z |
-| 2. Красный main | осталось | — | 2026-11-13T18:54:42.573Z |
-| 3. Открытые PR | осталось | — | 2026-11-13T18:54:42.573Z |
-| 4. Зависшее | осталось | — | 2026-11-13T18:54:42.573Z |
-| 5. Сводка | осталось | — | 2026-11-13T18:54:42.573Z |
-| 6. Постоянное развитие | осталось | — | 2026-11-13T18:54:42.573Z |
+| 1. Очередь Actions | в работе | [PR #299](https://github.com/mpaykin1/meta6-lab/pull/299), [head 00e0041](https://github.com/mpaykin1/meta6-lab/commit/00e004109cdb89195e55cd300761e5863ff17734); 18 workflow + 2 политики push/PR, 5 Claude-owned исходников не изменены; [первый KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43488495579), [quota FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43488495363); не слит | 2026-11-13T19:15:12.093Z |
+| 2. Красный main | в работе | [новый B1 PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43487366615), [новый Dispatcher PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43487366580), [Investigation PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43487366657); `platforms/scripts/build-catalog.mjs` и `check-native-integrity.mjs` удалены, [история исходника](https://github.com/mpaykin1/meta6-lab/commit/b84045f7257ce15a9185d8bf62de48214d2ce7c2) | 2026-11-13T19:15:12.093Z |
+| 3. Открытые PR | в работе | [текущие PR](https://github.com/mpaykin1/meta6-lab/pulls); просмотрены diffs 40+ открытых PR, у всех есть уникальные изменения; [quota FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43488495363) фиксирует 37 active PR | 2026-11-13T19:15:12.093Z |
+| 4. Зависшее | осталось | [ZANYATO.md](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md): 9 строк уже помечены сторожем «свободно (зависло)», задачи не завершены | 2026-11-13T19:15:12.093Z |
+| 5. Сводка | осталось | [STATUS.md](https://github.com/mpaykin1/meta6-lab/blob/main/automation/STATUS.md): FINISH «нет данных»; [scripts/status/build.mjs](https://github.com/mpaykin1/meta6-lab/blob/main/scripts/status/build.mjs) читает отсутствующий в main `progress.json` | 2026-11-13T19:15:12.093Z |
+| 6. Постоянное развитие | в работе | [новая ловушка](https://github.com/mpaykin1/meta6-lab/blob/lab/ci-ochered-concurrency/scripts/lab/mutate-workflow-concurrency.mjs): 4 мутации и аудит всех workflow, [OSHIBKI #1111](https://github.com/mpaykin1/meta6-lab/blob/lab/ci-ochered-concurrency/OSHIBKI.md), [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43488495579) на прошлом head; ожидает зелёного current head | 2026-11-13T19:15:12.093Z |

@@ -23,6 +23,7 @@ mutants = [
     ("fixed-oblique-sin-waves", 180 + 22 * np.sin(x * .23 + y * .29) +
      18 * np.cos(x * .17 - y * .21)),
     ("periodic-grid", 180 + 20 * np.sin(x * .28) * np.sin(y * .21)),
+    ("vertical-wallpaper", 180 + 24 * np.sin(x * .23) + (micro - 128) * 1.5),
     # Deception: hides the oblique wave inside an irregular cloud of random blotches.
     ("disguised-sine-in-noise", 180 + 22 * np.sin(x * .23 + y * .29) + (micro - 128) * 2.0),
 ]
@@ -36,4 +37,4 @@ with tempfile.TemporaryDirectory() as tmp:
             f"FFT misclassified {name}: score={score}; cutoff={module.CUTOFF}"
         )
         print(name, "score", score, "CAUGHT" if is_mutant else "PASS")
-print("FFT MUTATIONS PASS: 3 rejected; clean accepted")
+print("FFT MUTATIONS PASS: 4 rejected; clean accepted")

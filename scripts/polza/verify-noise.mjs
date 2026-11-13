@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {summarize,chooseFuse,needsEscalation,isBot} from './noise.mjs';
+const commit=(name,msg,sha)=>({sha,commit:{author:{name,email:name+'@example.com'},message:msg}});
+const commits=Array.from({length:31},(_,i)=>commit('status-dlya-claude bot','status: refresh facts for Claude','bot'+i));
+commits.push(commit('human','Merge pull request #1','merge1'));
+const stats=summarize(commits,12,7,8,new Set(['merge1']));
+assert.equal(stats.total,32);
+assert.equal(stats.bots,31);
+assert.equal(stats.useful,1);
+assert.equal(stats.benefit,3);
+assert.equal(isBot(commits[31]),false);
+assert.equal(chooseFuse(commits,['status-dlya-claude.yml','dispetcher.yml']),'status-dlya-claude.yml');
+assert.equal(chooseFuse(commits,['dispetcher.yml']),null);
+assert.equal(needsEscalation([{date:'2026-11-12',benefit:49},{date:'2026-11-13',benefit:40}]),true);
+assert.equal(needsEscalation([{date:'2026-11-12',benefit:49},{date:'2026-11-13',benefit:50}]),false);
+console.log('VERIFY NOISE: 8 safety assertions PASS');

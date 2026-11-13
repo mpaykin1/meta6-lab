@@ -145,6 +145,14 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertIn("page.waitForFunction(({target,tolerance})", harness)
         self.assertIn("fixedCamera", harness)
 
+    def test_HP10_reference_render_hook_matches_real_whitespace(self):
+        import re
+        reference = REF.read_text("utf-8")
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertRegex(reference, r"update\(t,dt\);\s*renderer\.setRenderTarget\(rtA\);")
+        self.assertIn(r"const refDraw=/update\(t,dt\);(\s*)renderer\.setRenderTarget\(rtA\);/;", harness)
+        self.assertIn("source.replace(refDraw,", harness)
+
     def test_HP8_unavailable_browser(self):
         with patch("subprocess.run", return_value=SimpleNamespace(
             stdout='{"ok":false,"error":"Chrome unavailable"}', stderr="", returncode=1)):

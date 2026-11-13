@@ -1,0 +1,28 @@
+name: INK Fallen Guardian v1 immutable SHA
+on:
+  pull_request:
+    paths:
+      - 'demos/living-watercolor/**'
+      - 'shared/references/ink-fallen-guardian.json'
+      - 'scripts/ink/**'
+      - '.github/workflows/ink-guardian-v1-storozha.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'demos/living-watercolor/**'
+      - 'shared/references/ink-fallen-guardian.json'
+      - 'scripts/ink/**'
+      - '.github/workflows/ink-guardian-v1-storozha.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  guardian-v1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - run: node scripts/ink/check-guardian-v1.mjs
+      - run: node scripts/ink/mutate-guardian-v1.mjs

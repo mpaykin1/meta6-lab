@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "id": "ink-fallen-guardian",
+  "aliases": [
+    "INK Fallen Guardian",
+    "INK Forest",
+    "Павший великан",
+    "Заросший робот"
+  ],
+  "title": "INK · Павший великан — акварельный 3D-мир с разрушенным роботом",
+  "reference_type": "owner-approved-visual-world",
+  "collection": "META GAMES LAB",
+  "date_added": "2026-11-13",
+  "status": "OWNER_PASS",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "commit": "06ae2293a7bf3d1581554d14354401e87a5c77ba",
+    "source_branch": "lab/ink-fallen-robot-20261113",
+    "merge_target": "main",
+    "entry": "demos/living-watercolor/index.html?ink=forest&palette=color",
+    "files": [
+      {
+        "path": "demos/living-watercolor/ink-fallen-robot.js",
+        "git_blob_sha": "5caaa7f896d57bdf19c99462f6f492c3d41956a9",
+        "role": "procedural-robot"
+      },
+      {
+        "path": "demos/living-watercolor/ink-forest.js",
+        "git_blob_sha": "e85119cb46263ac1ca32fc0d300850173d36451b",
+        "role": "forest-scene"
+      },
+      {
+        "path": "demos/living-watercolor/ink-objects.js",
+        "git_blob_sha": "1c504dbbe29233b8034cd472e869d2b62d0cd0f3",
+        "role": "scene-objects"
+      },
+      {
+        "path": "demos/living-watercolor/index.html",
+        "git_blob_sha": "49213b2bba813ae8ad4ab708a8845557dd8cb367",
+        "role": "entrypoint"
+      },
+      {
+        "path": "demos/living-watercolor/ink-entry.js",
+        "git_blob_sha": "ab2f686d747597acaeb602ec16a63774bf22a4cc",
+        "role": "routing"
+      },
+      {
+        "path": "demos/living-watercolor/shared/living-watercolor-3d.js",
+        "git_blob_sha": "1286ca7b6641f7b6ca9aa6cfe319d6c4c0c98bf6",
+        "role": "accepted-ink-renderer"
+      },
+      {
+        "path": "demos/living-watercolor/shared/living-watercolor-generators.js",
+        "git_blob_sha": "32d6952209f419058b460c171d5ca6dab092416e",
+        "role": "accepted-ink-generators"
+      }
+    ]
+  },
+  "viewer": {
+    "reference_path": "reference/ink-fallen-guardian/",
+    "canonical_after_merge": "https://mpaykin1.github.io/meta6-lab/reference/ink-fallen-guardian/",
+    "preview": "https://mpaykin1.github.io/meta6-lab/reference/ink-fallen-guardian/",
+    "preview_status": "PENDING: PR #284 then PR #283 merge; exact URL HTTP 200 and browser checks not yet confirmed",
+    "github_pr": "https://github.com/mpaykin1/meta6-lab/pull/283",
+    "preview_proof": null,
+    "robot_v2_pr": "https://github.com/mpaykin1/meta6-lab/pull/287",
+    "stone_bell_pr": "https://github.com/mpaykin1/meta6-lab/pull/288",
+    "source_merge_commit_sha": null,
+    "animation_preview": "https://rawcdn.githack.com/mpaykin1/meta6-lab/17b6c42bc758ffc493e50eb1845f1b31e26846f8/preview/ink-fallen-guardian-v2/index.html?ink=forest&palette=color",
+    "animation_preview_proof": "https://github.com/mpaykin1/meta6-lab/actions/runs/43414752516",
+    "animation_preview_status": "Temporary pinned CDN URL; desktop & 390x844 Chromium PASS, physical phone FPS not measured",
+    "stone_bell_preview": "https://rawcdn.githack.com/mpaykin1/meta6-lab/828c03e8f4d94dd110987c5af8868ccce6909680/preview/ink-stone-bell/index.html?ink=forest&palette=color",
+    "stone_bell_status": "Candidate preview only. Requires separate OWNER PASS before merging"
+  },
+  "approved_features": [
+    "объёмный гигантский разрушенный робот, частично погребённый в земле",
+    "ржавчина и акварельные мазки на объёмной броне",
+    "сегментированные руки и пальцы, наклонённая голова, два глаза",
+    "мох, лианы, осенние растения, камни",
+    "трёхмерный лес, дождь, камера с поворотом, мобильное и клавиатурное управление",
+    "сохранён неизменный эталон живой акварели Living Watercolor 3D"
+  ],
+  "reuse": {
+    "owner_approved": true,
+    "authorial_code_and_visuals_reusable_in_meta_games": true,
+    "external_dependency": "Three.js 0.165.0, MIT",
+    "third_party_rights_verified": false,
+    "original_renderer_modified": false
+  },
+  "owner_decision": "Супер. Это пасс. Размести этот мир на гит МГЛ как эталон (2026-11-13)",
+  "category": "visual-reference-not-additional-game"
+}

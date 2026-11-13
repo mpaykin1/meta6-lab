@@ -27,7 +27,7 @@
       },
       {
         "path": "demos/living-watercolor/shared/living-watercolor-3d.js",
-        "git_blob_sha": "f89b67cf9ea8d0e324572477555c5d3f86ef02ba"
+        "git_blob_sha": "3c3436d066ab047780e63a0092b9217be1befc4d"
       },
       {
         "path": "demos/living-watercolor/shared/living-watercolor-generators.js",
@@ -53,5 +53,5 @@
   "external_dependency": "Three.js 0.165.0 via unpkg CDN; dependency is not an owner-authored asset",
   "owner_decision": "PASS, 2026-11-11; БЕЗ ПАТТЕРНОВ, одобрено владельцем 13.11.2026",
   "notes": "Эталон технологии. Владелец разрешил изменить только форму пятен; цвета, мазки, обводки неизменны. БЕЗ ПАТТЕРНОВ, одобрено владельцем 13.11.2026.",
-  "ink_revision": "seeded 3D FBM + domain warp; paper 7x7 tiling removed; pigment palettes and outlines preserved"
+  "ink_revision": "3D FBM + domain warp; unique 896px paper sheet with same accepted scratch density (no 7x7 repeat); pigment palettes, stroke dimensions and outlines unchanged"
 }

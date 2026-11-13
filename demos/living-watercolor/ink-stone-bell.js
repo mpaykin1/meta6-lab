@@ -117,7 +117,7 @@ export function createStoneBell(seed=43){
   const heart=sphere(casting,[.10,.10,.11],[.06,-.10,.49],ember,false);
   root.userData.updateInk=(elapsed)=>{
     ember.emissiveIntensity=.15+.035*Math.sin(elapsed*.7);
-    heart.scale.setScalar(1+.03*Math.sin(elapsed*.7));
+    const pulse=1+.03*Math.sin(elapsed*.7);heart.scale.set(.10*pulse,.10*pulse,.11*pulse);
   };
   return root;
 }

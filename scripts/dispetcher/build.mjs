@@ -2,7 +2,18 @@ import fs from 'node:fs/promises';
 const {GITHUB_REPOSITORY: repo='mpaykin1/meta6-lab',GITHUB_TOKEN: token}=process.env;
 const root='https://api.github.com/repos/'+repo;
 const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-dispatcher','Authorization':'Bearer '+token};
-async function api(path){const r=await fetch(root+path,{headers});if(!r.ok)throw Error(path+': '+r.status);return r.json();}
+const cache = new Map();
+async function api(path) {
+ if (cache.has(path)) return cache.get(path);
+ const r = await fetch(root + path, {headers});
+ if (!r.ok) {
+   const details = await r.json().catch(() => ({}));
+   throw Error(path + ': ' + r.status + ' ' + (details.message || 'Unknown HTTP error'));
+ }
+ const body = await r.json();
+ cache.set(path, body);
+ return body;
+}
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));
  const map=new Map();
@@ -56,7 +67,18 @@ export async function main(){
  const finishIds=[...finish.matchAll(/^\|\s*([MBLP]\d+)\s*\|[^|]*\|[^|]*\|\s*НЕТ\b/gm)].map(m=>m[1]);
  let previous='';try{previous=await fs.readFile('DISPETCHER.md','utf8')}catch{}
  const cards=[],claude=[];
+ // One complete open-PR listing avoids individual calls for closed historical tasks.
+ const allOpen = [];
+ for (let page = 1; page <= 10; page++) {
+  const batch = await api('/pulls?state=open&per_page=100&page=' + page);
+  if (!Array.isArray(batch)) throw Error('Incomplete open PR list');
+  allOpen.push(...batch);
+  if (batch.length < 100) break;
+  if (page === 10) throw Error('Truncated open PR listing');
+ }
+ const openIds = new Set(allOpen.map(x => x.number));
  for(const t of tasks){
+ if (!openIds.has(t.id)) continue;
  let pr;try{pr=await api('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
  if(pr.state!=='open')continue;
  const resolution=await resolveConflict(pr,()=>api('/pulls/'+t.id),previousConflict(previous,t.id));

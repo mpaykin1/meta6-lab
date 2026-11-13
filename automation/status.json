@@ -1,18 +1,24 @@
 {
-  "generated_at": "2026-11-13T11:07:35.635Z",
+  "generated_at": "2026-11-13T11:08:16.383Z",
   "sha": {
-    "lab": "нет данных",
-    "mg": "нет данных"
+    "lab": "399493814b418c4b502d769a8813fa3734a5c35f",
+    "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43414472414",
+  "run": "нет данных",
   "review": {
     "protected": "нет данных",
-    "redLab": "нет данных",
-    "redMg": "нет данных",
+    "redLab": [
+      {
+        "workflow": "MG Dispatcher",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43414476222",
+        "step": "нет данных"
+      }
+    ],
+    "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
       "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
@@ -188,14 +194,90 @@
   },
   "changes": {
     "lab": {
-      "count": "нет данных",
+      "count": 1851,
       "folders": "нет данных"
     },
     "mg": {
-      "count": "нет данных",
-      "folders": "нет данных"
+      "count": 6,
+      "folders": "AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2"
     }
   },
-  "games": "нет данных",
-  "errors": "нет данных"
+  "games": [
+    {
+      "name": "archer-in-the-fog",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "asqura-ilya-reference",
+      "bot": "нет данных",
+      "storefront": "нет"
+    },
+    {
+      "name": "broken-city",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "broken-city-copy",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "rainbow-acceleration",
+      "bot": "нет данных",
+      "storefront": "нет"
+    },
+    {
+      "name": "skin-trainer",
+      "bot": "нет данных",
+      "storefront": "нет"
+    },
+    {
+      "name": "sumerki-i-pepel-2",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "sumerki-i-pepel-2-copy",
+      "bot": "нет данных",
+      "storefront": "нет"
+    },
+    {
+      "name": "twilight-isle-classic",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "twilight-isles",
+      "bot": "нет данных",
+      "storefront": "да"
+    },
+    {
+      "name": "veil-terraces",
+      "bot": "нет данных",
+      "storefront": "да"
+    }
+  ],
+  "errors": [
+    "| 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая игра, неверная игра, пропавшая команда бота |",
+    "| 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дубли, внешние/небезопасные ссылки, неверный первый мир |",
+    "| 24 | 10.11.2026 | Сводка без progress.json или при ошибке GitHub API могла бы выдавать непроверенные пункты как «готово» и прятать красные прогоны; старые варианты #211/#212 не защищали эту сводку полным набором мутаций | Изолированные ответы: отсутствующий JSON, HTTP 403, failure workflow и подмена статуса PR | `scripts/status/selftest.mjs`: `missing-progress-as-ready`, `api-error-crashes-summary`, `red-run-as-green`, `merged-as-open`, `open-as-merged`, `protected-file-ignored`, ограничения размера, `hardcoded-protected-file-cheat` |",
+    "| 25 | 10.11.2026 | Сводка игнорировала новую запись OSHIBKI с уже использованным номером (в main номер 18 повторён) | Сравнение только по номеру ошибочно скрывало новую строку | `scripts/status/selftest.mjs`: `duplicate-error-number-hidden` |",
+    "| 26 | 10.11.2026 | Ошибка GitHub Compare возвращала строку «нет данных», а сводка печатала undefined коммитов | Подмена сравнения на исключение API | `scripts/status/selftest.mjs`: `failed-compare-disguised-as-zero` |",
+    "| 27 | 10.11.2026 | KONTUR Guard отверг бот сводки за прямую зависимость от `process.env.GITHUB_*` (К4.1) | [красный KONTUR Guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42759421016) | `scripts/status/selftest.mjs`: `raw-github-env-rejected` (переменные передаются через `STATUS_*` workflow) |",
+    "| 28 | 10.11.2026 | Ошибка GitHub API для списка PR интерпретировалась как отсутствие защищённых PR (пустой список вместо «нет данных») | Изолированный ответ API 403 | `scripts/status/selftest.mjs`: `pr-api-error-hides-protected-merges` |",
+    "| 29 | 10.11.2026 | Диспетчер: KONTUR Guard отклонил условное чтение `process.env.GITHUB_*` и ветвление по `process.argv` в модуле библиотеки | [KONTUR Guard 42787965154](https://github.com/mpaykin1/meta6-lab/actions/runs/42787965154) | Разделён модуль `build.mjs` и `run.mjs`, авторизация без ветвления по среде; существующая вечная ловушка `scripts/kontur/mutate-kontur-guard.mjs` и `scripts/dispetcher/test/build.test.mjs` |",
+    "| 30 | 10.11.2026 | Диспетчер: первый прогон на main упал — пока строилась очередь, в main пришёл чужой коммит и `git push` отклонён (fetch first), DISPETCHER.md не появился | [прогон 42790554576](https://github.com/mpaykin1/meta6-lab/actions/runs/42790554576) | Шаг `Commit queue` в `.github/workflows/dispetcher.yml`: до 5 попыток — свежий main, пересборка очереди, повторный push; проверка `scripts/dispetcher/test/build.test.mjs`: `trap: workflow retries push when main moved` |",
+    "| 31 | 11.11.2026 | META BOT, ядро: `walkToGoal` шагал фиксированные 450 мс и считал направление по устаревшему положению героя — рядом с целью герой перелетал её и качался вокруг (≈1,36 ед. при шаге 2,7), самотест «цель меняется внутри уровня» падал ложным «застрял» и блокировал PR #87 | [META BOT 42912927017](https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169) | `scripts/meta-bot/selftest.mjs`: «шаг ходьбы у цели не перелетает цель» (`stepMs`: шаг не длиннее пути до цели; свежее состояние перед шагом) |",
+    "| 34 | 10.11.2026 | MG Dispatcher принимал GitHub `mergeable=null` за отсутствие конфликта после сдвига main, из-за чего очередь показывала неверный ноль конфликтов | [MG Dispatcher 42791769677](https://github.com/mpaykin1/meta6-lab/actions/runs/42791769677) и анализ `scripts/dispetcher/build.mjs` | `scripts/dispetcher/mutate-mergeable-null.mjs`: 5 мутаций — отсутствие повторов, потеря прежнего конфликта, выдача неизвестного статуса за чистый PR и обман с жёстко заданным `false`, ошибочное признание красного CI доказательством отсутствия конфликта; `scripts/dispetcher/test/mergeable-null.test.mjs` |",
+    "| 35 | 11.11.2026 | PR #238: компилятор журнала ветвился по `process.argv` и блокировался KONTUR Guard | [красный прогон 42999367374](https://github.com/mpaykin1/meta6-lab/actions/runs/42999367374) | `scripts/journal/mutate-journal.mjs`: argv-deception, validation-publishes, writer-dry-run, missing-source |",
+    "| 36 | 11.11.2026 | Сторож эталонов пропускал изменения тестов внутри папок `tests/` и файлов `*.spec.ts`: проверял только некоторые имена тестовых файлов | Сверка `referenceGate` с запретом менять существующие тесты | `scripts/storozha/mutate-storozha.mjs`: bypass nested test directory, bypass TypeScript spec file; `scripts/storozha/verify-storozha.mjs` |",
+    "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |",
+    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |",
+    "| 1002 | 11.11.2026 | Индекс shared/components применял statSync к папкам и readFileSync к входным файлам; символьная ссылка могла вывести чтение за пределы утверждённого каталога и подменить источник | Статический разбор scripts/shared/build-index.mjs: statSync следует по symlink | scripts/shared/mutate-build-index-symlinks.mjs: блокировка symlink корня, папки, manifest, entry и три мутации (включая обман по имени ID) |",
+    "| 1003 | 11.11.2026 | PR #241: проверка symlink только на конечном файле пропускала подмену предка `shared/` или `reference/`; вывод `shared/index.json` мог перезаписать сторонний файл через symlink | Анализ `readRegularFile` и `fs.writeFileSync(target)` на существующем коде PR | `scripts/shared/mutate-build-index-symlinks.mjs`: атаки `shared-parent`, `reference-parent`, `target`, мутации обхода проверки предков и `O_NOFOLLOW` |",
+    "| 39 | 11.11.2026 | Публикация после merge: исходный demos/living-watercolor/index.html существует, но Pages даёт 404; прежний lab-pages проверял только каталог | Требование владельца от 11.11 и diff .github/workflows/lab-pages.yml | `scripts/lab/verify-link-ok.sh` + `scripts/lab/mutate-link-ok.sh` (404, чужой хост, CI-обман); [зелёная ловушка](https://github.com/mpaykin1/meta6-lab/actions/runs/43014018459), проверка всех index в PR #246 |",
+    "| 40 | 11.11.2026 | HTML 200 с недоступным JS/CSS/изображением/аудио: прежняя проверка игнорировала вложенные 404 | Локальный fixture HTML 200 + JS 404 и 3 мутации (пропуск script, чужой origin, CI-обман) | `scripts/lab/link-ok.sh` вызывает `scripts/lab/check-page-assets.sh` перед PASS; `scripts/lab/mutate-page-assets.mjs` + `scripts/lab/verify-check-page-assets.sh`, [PR #246](https://github.com/mpaykin1/meta6-lab/pull/246), [SHA bb60a8b](https://github.com/mpaykin1/meta6-lab/commit/bb60a8bff951c714fb6c332a323445119ac1486c) |"
+  ]
 }

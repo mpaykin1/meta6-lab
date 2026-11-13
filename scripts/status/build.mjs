@@ -248,13 +248,16 @@ export function finishTableStatus(content) {
   return rows;
 }
 
-function finishSummary() {
-  const files = ['rules/09-platforma/FINISH.md', 'rules/09-platforma/FINISH_2.md'];
-  const states = files.map(path => finishTableStatus(read(path)));
-  if (states.some(x => x === null)) return UNKNOWN;
+export function finishSummary(stageOne, stageTwo) {
+  // Stage 2 is intentionally hidden until all 18 stage-1 checks are confirmed.
+  const primary = finishTableStatus(stageOne);
+  if (primary === null || primary.length !== 18) return UNKNOWN;
+  const allGreen = primary.every(entry => entry.value === 'готов');
+  const secondary = allGreen ? finishTableStatus(stageTwo) : [];
+  if (secondary === null) return UNKNOWN;
   const ready = [];
   const pending = [];
-  for (const entry of states.flat()) {
+  for (const entry of [...primary, ...secondary]) {
     if (entry.value === 'готов') ready.push(entry.id);
     else pending.push(entry);
   }
@@ -427,7 +430,8 @@ export async function build() {
     checked: { lab: labChecked || UNKNOWN, mg: mgChecked || UNKNOWN },
     run: process.env.STATUS_RUN_URL || UNKNOWN,
     review: { protected: prData.protectedItems, redLab, redMg, sliyanie: sl, stalled: st },
-    finish: finishSummary(),
+    finish: finishSummary(read('rules/09-platforma/FINISH.md'),
+      read('rules/09-platforma/FINISH_2.md')),
     pr: prData,
     changes: { lab: normalizeChanges(changeLab), mg: normalizeChanges(changeMg) },
     games,

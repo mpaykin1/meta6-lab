@@ -1,7 +1,7 @@
 {
   "format": "htmlpack/1",
-  "version": "1.1.0",
-  "name": "Туманные шпили — живой мир + 6 ассетов",
+  "version": "1.2.1",
+  "name": "Туманные шпили — 12 дополнительных живых ассетов",
   "base": "reference/tumannye-shpili",
   "reference_count": 26,
   "license": {
@@ -17,10 +17,10 @@
   },
   "provenance": {
     "tool": "ChatGPT",
-    "date": "2026-11-13",
+    "date": "2026-11-14",
     "source": "reference/tumannye-shpili/index.html",
-    "branch": "lab/asset-pack-shpili",
-    "method": "unmodified reference scene extended with procedural meshes and animation"
+    "branch": "lab/assets-tumannye-shpili-20261114",
+    "method": "INK robot method for characters, architecture via detailed 2D silhouette canvas"
   },
   "content_flags": {
     "real_persons": [],
@@ -35,15 +35,15 @@
       "animated": true
     },
     "shattered-mast": {
-      "label_ru": "Падающая мачта",
+      "label_ru": "Сломанный собор-шпиль",
       "role": "world",
-      "benefit": "новая вертикальная руина и ориентир",
+      "benefit": "ориентир: многоярусный надломленный собор с контрфорсами и мостами",
       "animated": true
     },
     "gate-bridge": {
-      "label_ru": "Мост осколков врат",
+      "label_ru": "Разрушенный мост-акведук",
       "role": "world",
-      "benefit": "новая воздушная переправа",
+      "benefit": "переправа с обрушенными пролётами и готическими арками",
       "animated": true
     },
     "dawn-sentinel": {
@@ -62,6 +62,42 @@
       "label_ru": "Багровая гроза",
       "role": "weather",
       "benefit": "локальный дождь и живые разряды",
+      "animated": true
+    },
+    "mask-choir": {
+      "label_ru": "Хор пустых масок",
+      "role": "enemy",
+      "benefit": "подвижная стая бледных масок с щупальцами",
+      "animated": true
+    },
+    "bell-spire": {
+      "label_ru": "Колокольня расколотых шпилей",
+      "role": "world",
+      "benefit": "вертикальный ориентир и раскачивающийся колокол",
+      "animated": true
+    },
+    "mirror-whirlpool": {
+      "label_ru": "Воронка зеркальной воды",
+      "role": "effect",
+      "benefit": "движущаяся водная воронка и световой след",
+      "animated": true
+    },
+    "lantern-moth": {
+      "label_ru": "Мотылёк — спутник летуна",
+      "role": "ally",
+      "benefit": "летит рядом с героем и разворачивает защитное крыло",
+      "animated": true
+    },
+    "echo-keystone": {
+      "label_ru": "Ключ эха — усиление рывка",
+      "role": "pickup",
+      "benefit": "ускоряет рывок и восстановление удара при сближении",
+      "animated": true
+    },
+    "silver-squall": {
+      "label_ru": "Серебряный ливень",
+      "role": "weather",
+      "benefit": "серебряный дождь, осколки света и движущиеся облака",
       "animated": true
     }
   }

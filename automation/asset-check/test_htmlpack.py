@@ -10,6 +10,8 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from PIL import Image
+
 import check_pack as cp
 
 REPO = Path(os.environ.get("ASSET_CHECK_REPO") or Path(__file__).resolve().parents[2])
@@ -38,14 +40,18 @@ class HtmlPackTraps(unittest.TestCase):
         self.root.joinpath("index.html").write_text(src, "utf-8")
         manifest = dict(COMMON, assets={"new_shadow": {"role": "enemy"}})
         self.root.joinpath("pack.json").write_text(json.dumps(manifest), "utf-8")
+        (self.root / "_check").mkdir(exist_ok=True)
+        Image.new("RGB", (1440, 316), (7, 24, 39)).save(self.root / "_check/compare.png")
 
     def metrics(self, new=None, fps=45):
         ref = {name: {"visible": .14, "detail": .07, "motion": .08, "colors": 130,
-                      "fps": 45, "isolated": 1} for name in self.old}
+                      "fps": 45, "isolated": 1, "silhouette": .21,
+                      "palette": [108, 142, 180], "deformation": .09, "structure": .08} for name in self.old}
         cand = {name: dict(metric) for name, metric in ref.items()}
         if new is not None:
             cand["new_shadow"] = dict(visible=.16, detail=.09, motion=.1, colors=140,
-                                      fps=fps, isolated=.16)
+                                      fps=fps, isolated=.16, silhouette=.25,
+                                      palette=[119, 153, 176], deformation=.1, structure=.11)
             cand["new_shadow"].update(new)
         return {"ok": True, "reference": {"items": ref, "errors": [], "screen_text": False},
                 "candidate": {"items": cand, "errors": [], "screen_text": False}}
@@ -87,6 +93,53 @@ class HtmlPackTraps(unittest.TestCase):
         self.add_new()
         self.assertIn("HP6", self.ids(self.metrics(new={"motion": 0.0})))
 
+    def test_HP10_circle_cannot_hide_behind_detailed_background(self):
+        self.add_new()
+        self.assertIn("HP10", self.ids(self.metrics(new={"silhouette": .001})))
+
+    def test_HP10_missing_reference_isolation_is_hard(self):
+        self.add_new()
+        data = self.metrics(new={})
+        data["reference"]["items"][self.old[0]]["isolated"] = 0
+        self.assertIn("HP10", self.ids(data))
+
+    def test_HP11_palette_drift_not_covered_by_scene_colors(self):
+        self.add_new()
+        self.assertIn("HP11", self.ids(self.metrics(new={"palette": [255, 240, 0]})))
+
+    def test_HP10_reference_and_candidate_use_same_pixel_mask(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("window.__ISOLATE__(id,false)", harness)
+        self.assertIn("result.reference = await measure(browser,ref)", harness)
+        self.assertIn("result.candidate = resolve(refPath)", harness)
+        self.assertIn("features(first.on,second.on,first.off,second.off,fps)", harness)
+
+    def test_HP12_glow_only_fails_articulated_motion(self):
+        self.add_new()
+        self.assertIn("HP12", self.ids(self.metrics(new={"motion": .3, "deformation": 0})))
+
+    def test_HP12_real_articulation_passes(self):
+        self.add_new()
+        self.assertNotIn("HP12", self.ids(self.metrics(new={"deformation": .2})))
+
+    def test_HP12_uses_shape_mask_not_rgb_only(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("differentShape=0,unionShape=0", harness)
+        self.assertIn("deformation:+deformation.toFixed(5)", harness)
+
+    def test_HP14_decorative_grain_cannot_cover_primitive_core(self):
+        self.add_new()
+        self.assertIn("HP14", self.ids(self.metrics(new={"structure": .001})))
+
+    def test_HP14_missing_joint_structure_is_hard(self):
+        self.add_new()
+        self.assertIn("HP14", self.ids(self.metrics(new={"structure": None})))
+
+    def test_HP14_reference_and_candidate_share_object_mask(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("const structure=silhouette*Math.sqrt(edgeCount/Math.max(1,count*2));", harness)
+        self.assertIn("structure:+structure.toFixed(5)", harness)
+
     def test_HP7_slow_browser_page(self):
         self.add_new()
         data = self.metrics(new={})
@@ -121,6 +174,49 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertIn("CAMERA_TOLERANCE=3.5", harness)
         self.assertIn("page.waitForFunction(({target,tolerance})", harness)
         self.assertIn("fixedCamera", harness)
+
+    def test_HP10_reference_render_hook_matches_real_whitespace(self):
+        import re
+        reference = REF.read_text("utf-8")
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertRegex(reference, r"update\(t,dt\);\s*renderer\.setRenderTarget\(rtA\);")
+        self.assertIn(r"const refDraw=/update\(t,dt\);(\s*)renderer\.setRenderTarget\(rtA\);/;", harness)
+        self.assertIn("source.replace(refDraw,", harness)
+
+    def test_HP10_transient_sparks_are_activated_before_isolation(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("window.__AC_WAKE__=id=>", harness)
+        self.assertIn("if(id==='sparks')burst(GX-1,GY,GZ+1.5,440", harness)
+        self.assertIn("await page.evaluate(id=>window.__AC_WAKE__(id),id);", harness)
+
+    def test_HP13_compare_sheet_uses_only_object_mask(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("async function isolatePreview(page, onPng, offPng)", harness)
+        self.assertIn("if(delta<=23){pixels[i+3]=0;continue}", harness)
+        self.assertIn("const pad=Math.max(5,", harness)
+        self.assertIn("ctx.putImageData(frame,0,0)", harness)
+        self.assertIn("const isolated=await isolatePreview(page,second.png,second.offPng);", harness)
+        self.assertIn("if(isolated)report.previews[id]=isolated;", harness)
+        self.assertIn("else if(selected)report.errors.push('HP13: preview has no visible object pixels: '+id)", harness)
+        self.assertNotIn("report.previews[id]=second.png.toString('base64')", harness)
+
+    def test_HP13_empty_reference_preview_is_not_misclassified_as_new(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("if(area===0)return null;", harness)
+        self.assertIn("report.newIds=await page.evaluate(()=>window.__PACK__.items.filter(o=>o.isNew).map(o=>o.id));", harness)
+        self.assertIn("const accepted=Object.keys(refShots);", harness)
+        self.assertIn("await compareSheet(browser,result.reference.previews,result.candidate.previews,packPath,result.candidate.newIds);", harness)
+        self.assertIn("if(pair.length<2)throw Error('HP13: insufficient accepted asset previews');", harness)
+
+    def test_HP13_missing_sheet_is_hard(self):
+        self.add_new()
+        (self.root / "_check/compare.png").unlink()
+        self.assertIn("HP13", self.ids(self.metrics(new={})))
+
+    def test_HP13_incomplete_sheet_is_hard(self):
+        self.add_new()
+        Image.new("RGB", (1440, 12), (7, 24, 39)).save(self.root / "_check/compare.png")
+        self.assertIn("HP13", self.ids(self.metrics(new={})))
 
     def test_HP8_unavailable_browser(self):
         with patch("subprocess.run", return_value=SimpleNamespace(

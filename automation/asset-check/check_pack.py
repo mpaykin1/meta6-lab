@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import shutil
 import sys
 import tempfile
 import zipfile
@@ -38,7 +39,7 @@ except ImportError:  # pragma: no cover
     print("Нужны pillow и numpy: pip install pillow numpy", file=sys.stderr)
     sys.exit(2)
 
-BOT_VERSION = "2.3.1"
+BOT_VERSION = "2.4.6"
 HERE = Path(__file__).resolve().parent
 BUDGET = {"pack_mb_soft": 8.0, "pack_mb_hard": 25.0, "files_soft": 120}
 DOC_FILES = {".md", ".txt"}
@@ -218,6 +219,10 @@ def main(argv=None):
         o.mkdir(parents=True, exist_ok=True)
         (o / "REPORT.md").write_text(md, "utf-8")
         (o / "report.json").write_text(json.dumps(js, ensure_ascii=False, indent=1), "utf-8")
+        # Browser-produced comparison of the actual object with accepted references.
+        compare = src / "_check" / "compare.png"
+        if "htmlpack" in r.kinds and compare.is_file():
+            shutil.copy2(compare, o / "compare.png")
     print(md)
     if r.hard() or (a.strict and r.items):
         return 1

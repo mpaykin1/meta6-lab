@@ -34,7 +34,10 @@ MUTANTS = [
     ("kinds/ink.py", 'if bar and role not in ("effect", "ground") and', "if False and"),
     ("check_pack.py", 'if "content_flags" not in merged:', "if False:"),
     ("kinds/sprite2d.py", 'm.get("format") not in {"ink-pack/1", "htmlpack/1"}', 'm.get("format") != "ink-pack/1"'),
+    ("kinds/htmlpack_harness.mjs", "if(delta<=23){pixels[i+3]=0;continue}", "if(false){pixels[i+3]=0;continue}"),
+    ("kinds/htmlpack_harness.mjs", "if(area===0)return null;", "if(false)return null;"),
     ("kinds/htmlpack_harness.mjs", "CAMERA_TOLERANCE=3.5", "CAMERA_TOLERANCE=1e9"),
+    ("kinds/htmlpack.py", 'r.add("HP13", "HARD", str(compare),', 'r.add("HP13OFF", "SOFT", str(compare),'),
     ("kinds/htmlpack.py", "if missing:", "if False and missing:"),
     ("kinds/htmlpack.py", "if any_bad_text:", "if False and any_bad_text:"),
     ("kinds/htmlpack.py", "if isolated < .006:", "if isolated < -1:"),
@@ -43,6 +46,14 @@ MUTANTS = [
     ("kinds/htmlpack.py", "if found != CDN:", "if False:"),
     ("kinds/htmlpack.py", "if error:", "if False and error:"),
     ("kinds/htmlpack.py", 'if new_ids and "window.__PACK_PROBE__" not in source:', "if False:"),
+    ("kinds/htmlpack.py", "if unisolated:", "if False and unisolated:"),
+    ("kinds/htmlpack.py", "if shape_deform + 1e-6 < deform_min:", "if False and shape_deform + 1e-6 < deform_min:"),
+    ("kinds/htmlpack_harness.mjs", "await page.evaluate(id=>window.__AC_WAKE__(id),id);", "await page.evaluate(id=>void id,id);"),
+    ("kinds/htmlpack.py", "if not isinstance(shape, (int, float)) or shape + 1e-6 < silhouette_min:", "if False:"),
+    ("kinds/htmlpack.py", "if color_delta > palette_limit:", "if False:"),
+    ("kinds/htmlpack.py", "if not isinstance(structure, (int, float)) or structure + 1e-6 < structure_min:", "if False:"),
+    ("kinds/htmlpack_harness.mjs", "window.__ISOLATE__(id,false)", "window.__ISOLATE__(id,true)"),
+    ("kinds/htmlpack_harness.mjs", r"const refDraw=/update\(t,dt\);(\s*)renderer\.setRenderTarget\(rtA\);/;", "const refDraw=/NO_MATCH/;"),
 ]
 
 

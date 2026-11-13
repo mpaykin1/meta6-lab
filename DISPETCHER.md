@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 22 · конфликт 13 · непроверено 0 · красные проверки 21 · нужен Claude 26
+Итог: зависло 22 · конфликт 14 · непроверено 0 · красные проверки 22 · нужен Claude 17
 
 ### PR #234
 - PR: https://github.com/mpaykin1/meta6-lab/pull/234
@@ -106,6 +106,14 @@
 - Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
 - Взял: —
 
+### PR #297
+- PR: https://github.com/mpaykin1/meta6-lab/pull/297
+- Ветка: `lab/ostrov-aptekarya-ii`
+- SHA: `f0c696cee48ab4b492d587e0b591fb2f8d1aa1c1` · последний коммит: 2026-11-13T17:49:33Z
+- Проблема: Конфликт с main
+- Задание: Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.
+- Взял: —
+
 ### PR #72
 - PR: https://github.com/mpaykin1/meta6-lab/pull/72
 - Ветка: `lab/immersive-dishonored-principles-20261107`
@@ -202,14 +210,5 @@
 - [#277](https://github.com/mpaykin1/meta6-lab/pull/277) ТРИ СТОРОЖА: [код и мутации в #277](https://github.com/mpaykin1/meta6-lab/pull/277); [зелёные ловушки](https://github.com/mpaykin1/meta6-lab/actions/runs/43238005678); [main синхронизирован 46f15a2](https://github.com/mpaykin1/meta6-lab/commit/46f15a27081ae3c3d01e3a458ba679dd46f83a4b); нужны принятие Claude, токен и обязательная квота
 - [#203](https://github.com/mpaykin1/meta6-lab/pull/203) Устранить конфликт PR #203 с main
 - [#87](https://github.com/mpaykin1/meta6-lab/pull/87) ТОЛКАЧ: #87 — [META GAMES guard FAIL: историческая .github/protected](https://github.com/mpaykin1/meta6-lab/actions/runs/42975697783/job/130374149800); [эскалировано Claude](https://github.com/mpaykin1/meta6-lab/commit/51c43718a0a25425b39f82e901cd17fd88cc2bbc), не сливать
-- [#200](https://github.com/mpaykin1/meta6-lab/pull/200) Довести PR #200 (B2 ч.2) до зелёных проверок и слияния
-- [#202](https://github.com/mpaykin1/meta6-lab/pull/202) Эталон: Лучник в тумане — исходный HTML владельца
-- [#189](https://github.com/mpaykin1/meta6-lab/pull/189) Синхронизировать PR #189 с main, сохранить эталон Golden Knight и проверить CI
-- [#207](https://github.com/mpaykin1/meta6-lab/pull/207) Эталон: Король Пепла — исходная игра и каталог 34 ассетов
 - [#210](https://github.com/mpaykin1/meta6-lab/pull/210) SKIN FACTORY: ножницы и ловушки для parts-sheet
 - [#225](https://github.com/mpaykin1/meta6-lab/pull/225) Broken City: чистый PR оптимизации вместо #60
-- [#190](https://github.com/mpaykin1/meta6-lab/pull/190) PR #190: разрешить конфликт с main и повторить CI
-- [#222](https://github.com/mpaykin1/meta6-lab/pull/222) CI #222 и разбор PR #208/#201/#200 для 5 автозадач
-- [#209](https://github.com/mpaykin1/meta6-lab/pull/209) Библиотека игр: эталоны, системы, ассеты и MCP
-- [#54](https://github.com/mpaykin1/meta6-lab/pull/54) Оптимизация всех игр: довести PR #54, #59, #60
-- [#208](https://github.com/mpaykin1/meta6-lab/pull/208) Restore original Ashen Path asset pack reference after sync — ТОЛКАЧ: [оригинал блокирован KONTUR, решение Claude](https://github.com/mpaykin1/meta6-lab/actions/runs/42799091174), [вопрос Claude](https://github.com/mpaykin1/meta6-lab/commit/5095441ef37a50e36f71c7c669be1b393346d11a)

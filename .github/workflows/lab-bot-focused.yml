@@ -5,6 +5,7 @@ on:
     paths:
       - 'games/**'
       - 'scripts/lab/affected-bot-games.mjs'
+      - 'scripts/lab/*veil-input-release.mjs'
       - '.github/workflows/lab-bot-focused.yml'
 permissions:
   contents: read
@@ -38,6 +39,11 @@ jobs:
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
+      - name: Verify Veil interruptions release real keyboard and phone input
+        if: contains(steps.scope.outputs.games, 'games/veil-terraces')
+        run: |
+          node scripts/lab/mutate-veil-input-release.mjs
+          node scripts/lab/verify-veil-input-release.mjs
       - name: Play each changed game completely (mobile, desktop, second run)
         if: steps.scope.outputs.games != ''
         env:

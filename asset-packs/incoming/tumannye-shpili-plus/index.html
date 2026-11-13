@@ -831,7 +831,8 @@ const SHPILI_PLUS=(()=>{
  const silhouettePlane=(root,texture,width,height,z,phase=0)=>{
    const m=new T.Mesh(new T.PlaneGeometry(width,height),
      archMat(texture,.17,{light:0xb3e6f9,amp:1.15,sway:.17,ph:phase,base:.68}));
-   m.position.set(0,height*.5,z);m.frustumCulled=false;root.add(m);return m;
+   m.position.set(0,height*.5,z);m.material.uniforms.uHgt.value=height;
+   m.frustumCulled=false;root.add(m);return m;
  };
  const cutStone=(x,coords,tone)=>{
    x.fillStyle=S(tone);x.beginPath();x.moveTo(...coords[0]);

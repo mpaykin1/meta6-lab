@@ -1,12 +1,12 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T09:57:00.265Z | МГЛ: ff55847808539a4e472c35df926fdb52cbeda20e | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | https://github.com/mpaykin1/meta6-lab/actions/runs/43405248306
+UTC: 2026-11-13T10:22:03.923Z | МГЛ: 1f82d75b4258c372e54c67508ffa22f18f46d263 | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | https://github.com/mpaykin1/meta6-lab/actions/runs/43408469326
 ## ПРОВЕРИТЬ CLAUDE
 - PR #241 351572af1dd748a4c5a99e1e8f0cdba8a7092a0f: scripts/shared/mutate-build-index-symlinks.mjs
 - PR #259 24d0a9e8151cde7c3242275159c301a10d189311: scripts/prohodchik/mutate-prompt.mjs
 - PR #246 72a2be2281e8f4c54785599732024b111d50bfd1: .github/workflows/lab-pages.yml, .github/workflows/link-guard.yml, scripts/lab/mutate-link-ok.sh, scripts/lab/mutate-page-assets.mjs, scripts/lab/mutate-page-assets.py, scripts/lab/verify-check-page-assets.sh, … (сокращено)
 - PR #265 f0a6d79bdda5416da56a145901e0216808cba97e: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py
 - ещё 10: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/43402996691 | Run node scripts/dispetcher/run.mjs
+- МГЛ: Investigation snapshot | https://github.com/mpaykin1/meta6-lab/actions/runs/43405169261 | Refresh investigation snapshot from GitHub
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
@@ -48,14 +48,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 50 | конфликт: нет данных | слито: 26 | закрыто: 58
+открыто: 51 | конфликт: 23 | слито: 26 | закрыто: 58
 #279 INK: объёмный дождевой лес из видео, Ч/Б и цвет | d3f16b40a3c59ded669053388c0cf26130a7ed74
 #241 L2: защита индекса shared от symlink-подмены источников | 351572af1dd748a4c5a99e1e8f0cdba8a7092a0f
 #259 БОТ-ПРОХОДЧИК: сохраняемый промпт для повторных запусков | 24d0a9e8151cde7c3242275159c301a10d189311
 #263 docs(prompty): реестр 15 промптов МГЛ и улучшение многоразов | d40662486e7b6cc8382f5184c86e4b68819b43f4
 ещё 22: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1753 коммитов | нет данных
+МГЛ: 1759 коммитов | нет данных
 МГ: 6 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

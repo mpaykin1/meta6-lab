@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import {verdict} from './gate-core.mjs';
 const file=(filename,status='modified',additions=2,previous_filename=null)=>({filename,status,changes:additions,additions,previous_filename});
-const clean={body:'ПОЛЬЗА: FINISH B2',files:[file('scripts/shared/verify-bot-motion.mjs'),file('scripts/shared/mutate-bot-motion.mjs')],openPRs:8,scheduledWorkflows:8,newCronFiles:[],botOK:false,finish:{B2:{verify:['scripts/shared/verify-bot-motion.mjs'],mutate:['scripts/shared/mutate-bot-motion.mjs'],checked:[]}}};
+const clean={body:'ПОЛЬЗА: FINISH B2',files:[file('scripts/shared/verify-bot-motion.mjs'),file('scripts/shared/mutate-bot-motion.mjs')],openPRs:8,isNewPR:true,scheduledWorkflows:8,newCronFiles:[],botOK:false,finish:{B2:{verify:['scripts/shared/verify-bot-motion.mjs'],mutate:['scripts/shared/mutate-bot-motion.mjs'],checked:[]}}};
 const good=()=>JSON.parse(JSON.stringify(clean));
 const cases=[
  ['docs-only',()=>({...good(),files:[file('ZADACHI.md'),file('reports/STATUS.md')]})],

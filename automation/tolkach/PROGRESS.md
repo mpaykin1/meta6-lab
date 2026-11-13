@@ -288,3 +288,57 @@
 - [Итог в ZADACHI.md](https://github.com/mpaykin1/meta6-lab/commit/77c32734d52a4470cd314bdc4d72623f14028cc2): очередь 44 уникальных открытых PR МГЛ из строк 🛑/⚠/💤; сторож 🛑 53 → 56 (агенты работали параллельно); подтверждено слито 1 [#241](https://github.com/mpaykin1/meta6-lab/pull/241), закрыто 0, исправлено исходников других PR 0; передано Claude 1 [#133](https://github.com/mpaykin1/meta6-lab/pull/133). Открытых tagged-задач МГ в этом снимке ZADACHI.md нет, очередь МГ отсутствует; права на слияние МГ не использованы.
 - В ручном разделе [«Ждёт Claude»](https://github.com/mpaykin1/meta6-lab/blob/main/DLYA_CLAUDE.md) 3 PR (#208, #247, #133); закрытый #193 исключён в [be18317412852ca804d68c94d8b85670ad02fc24](https://github.com/mpaykin1/meta6-lab/commit/be18317412852ca804d68c94d8b85670ad02fc24).
 - Следующее саморазвитие: по списку (в) [#278](https://github.com/mpaykin1/meta6-lab/pull/278) остаётся открытым с [квотным FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43236948035/job/131673007393). Сначала освободить историческую очередь #3/#54/#72/#87/#133 без удаления уникального кода и без обхода охранников; после PASS слить #278. Не выдавать незелёный PR за выполненное улучшение.
+
+
+## Продолжение 2026-11-13 — 2026-11-13T04:13:56.653Z
+- Снимок ZADACHI blob `6abdd9f8287021dd6cb189a208c90b262d3ef35f`: 🛑 36 строк; 46 уникальных открытых PR МГЛ. Очередь ниже по датам commit object локального fetch GitHub. МГ: открытых помеченных строк нет; только чтение.
+
+| PR | HEAD | Коммит UTC |
+|---|---|---|
+| [#208](https://github.com/mpaykin1/meta6-lab/pull/208) | `ad81a3d4196a19e81a50a60a3dd4faaef904ced6` | 2026-11-10T04:35:50.000Z |
+| [#220](https://github.com/mpaykin1/meta6-lab/pull/220) | `84ab3a2bef87a37147670076be0f1da587e823ed` | 2026-11-10T06:26:14.000Z |
+| [#210](https://github.com/mpaykin1/meta6-lab/pull/210) | `68509bc41060a3b05b7aba4adc89db08c97493bd` | 2026-11-10T06:36:49.000Z |
+| [#207](https://github.com/mpaykin1/meta6-lab/pull/207) | `f96269e6da51a7bcc559164e3ec5854f8edc4efc` | 2026-11-10T06:54:41.000Z |
+| [#189](https://github.com/mpaykin1/meta6-lab/pull/189) | `d37a6abc82b22ad4bb6a8e1cce8dcdd28ab3f331` | 2026-11-10T06:56:55.000Z |
+| [#202](https://github.com/mpaykin1/meta6-lab/pull/202) | `98bba5626913751b41180b5f00c94c3a4c854943` | 2026-11-10T06:57:13.000Z |
+| [#221](https://github.com/mpaykin1/meta6-lab/pull/221) | `757890f0aa4809e92d3466c55a1db98269f133e6` | 2026-11-10T08:48:21.000Z |
+| [#54](https://github.com/mpaykin1/meta6-lab/pull/54) | `85014fa83b66c717fb585738045616fa421464ff` | 2026-11-10T08:48:54.000Z |
+| [#209](https://github.com/mpaykin1/meta6-lab/pull/209) | `4a4546b74a8c8adf1e2edcf2f2c306302d909597` | 2026-11-10T08:49:04.000Z |
+| [#222](https://github.com/mpaykin1/meta6-lab/pull/222) | `029164aebd1b34edf406a147b0af7b080f9e16ae` | 2026-11-10T08:53:27.000Z |
+| [#200](https://github.com/mpaykin1/meta6-lab/pull/200) | `6d3bb2055de85e8fa621fc1c2e4dad74746f55fa` | 2026-11-10T09:15:20.000Z |
+| [#190](https://github.com/mpaykin1/meta6-lab/pull/190) | `327a181124cfb0f13e6b2df3dea23ac29aff9abe` | 2026-11-10T14:49:30.000Z |
+| [#225](https://github.com/mpaykin1/meta6-lab/pull/225) | `03407b9f03e676554816c4396463e16f6ef0d41c` | 2026-11-11T06:34:54.000Z |
+| [#219](https://github.com/mpaykin1/meta6-lab/pull/219) | `5e09454d1a003995101a42b4b65f6ef7002bd4fe` | 2026-11-11T06:41:59.000Z |
+| [#87](https://github.com/mpaykin1/meta6-lab/pull/87) | `2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d` | 2026-11-11T06:54:27.000Z |
+| [#239](https://github.com/mpaykin1/meta6-lab/pull/239) | `5240bebee277f57819922917174595a97606cc75` | 2026-11-11T06:58:20.000Z |
+| [#233](https://github.com/mpaykin1/meta6-lab/pull/233) | `34176a2e47a2195492db486d1440428252d0a34d` | 2026-11-11T07:03:49.000Z |
+| [#203](https://github.com/mpaykin1/meta6-lab/pull/203) | `977cbc68ada861fed28f3341ff079f3774e66768` | 2026-11-11T07:10:32.000Z |
+| [#252](https://github.com/mpaykin1/meta6-lab/pull/252) | `d842a374c9bf63bca915bfaba199695594892d84` | 2026-11-11T12:51:41.000Z |
+| [#267](https://github.com/mpaykin1/meta6-lab/pull/267) | `6b467d58fefc9683f091c81c8f42025122f3b061` | 2026-11-11T16:24:43.000Z |
+| [#268](https://github.com/mpaykin1/meta6-lab/pull/268) | `e919642e469b877f0d830dca45c0e083d89cee69` | 2026-11-11T16:45:20.000Z |
+| [#269](https://github.com/mpaykin1/meta6-lab/pull/269) | `d51f3bb61cad8db962f484271f84408bd3e2ede8` | 2026-11-12T07:03:40.000Z |
+| [#270](https://github.com/mpaykin1/meta6-lab/pull/270) | `ae57880382e7ca2c3f53bc3bbceb2b6964137898` | 2026-11-12T07:15:39.000Z |
+| [#262](https://github.com/mpaykin1/meta6-lab/pull/262) | `4af93cff55f3c7437e8aaa49a6aee6aa7727e910` | 2026-11-12T07:18:15.000Z |
+| [#273](https://github.com/mpaykin1/meta6-lab/pull/273) | `2a643d5bd739cb4943dc47504baf78d79347d3d7` | 2026-11-12T08:54:41.000Z |
+| [#218](https://github.com/mpaykin1/meta6-lab/pull/218) | `696c4ed8a7f332928c6963f02f996b42817809b2` | 2026-11-12T10:19:13.000Z |
+| [#275](https://github.com/mpaykin1/meta6-lab/pull/275) | `a54e31e41a2454a59c715f167de9d78145e6d474` | 2026-11-12T10:20:19.000Z |
+| [#264](https://github.com/mpaykin1/meta6-lab/pull/264) | `171f90b228b9841492ea29624ae6e73f8350e7e2` | 2026-11-12T10:23:07.000Z |
+| [#278](https://github.com/mpaykin1/meta6-lab/pull/278) | `353d0492e31f9fd306a2771b1633521fab449b1d` | 2026-11-12T14:24:39.000Z |
+| [#272](https://github.com/mpaykin1/meta6-lab/pull/272) | `c6597ff89522de1c6433b70fbe937d1aab937ad0` | 2026-11-12T14:32:21.000Z |
+| [#237](https://github.com/mpaykin1/meta6-lab/pull/237) | `c5d42951e3b6119c55ec632a78b37ebcd35ec7dd` | 2026-11-12T14:34:00.000Z |
+| [#72](https://github.com/mpaykin1/meta6-lab/pull/72) | `7e41856a507e83b5a6e501ab8e3e3734c34c5668` | 2026-11-12T14:35:12.000Z |
+| [#133](https://github.com/mpaykin1/meta6-lab/pull/133) | `bcbdb6ef08a95d9739bd86baf3cbcf4ca8f1ea30` | 2026-11-12T14:38:02.000Z |
+| [#134](https://github.com/mpaykin1/meta6-lab/pull/134) | `d3f6642704d3a25b63a8c086083dd5be9f4dd095` | 2026-11-12T14:38:50.000Z |
+| [#235](https://github.com/mpaykin1/meta6-lab/pull/235) | `c4dfb8a88febd26c34340476b52616859c79e1cd` | 2026-11-12T14:42:26.000Z |
+| [#245](https://github.com/mpaykin1/meta6-lab/pull/245) | `01a02c310d1f67b95bfcaa1880e67f9c8c848479` | 2026-11-12T14:43:07.000Z |
+| [#3](https://github.com/mpaykin1/meta6-lab/pull/3) | `bf899da496d873ea677fa960d3e6c688d1a337ab` | 2026-11-12T14:45:02.000Z |
+| [#191](https://github.com/mpaykin1/meta6-lab/pull/191) | `e135682bcca49e309e117383c94046228b6facef` | 2026-11-12T14:49:54.000Z |
+| [#255](https://github.com/mpaykin1/meta6-lab/pull/255) | `efed7d9085f15c3bf5f40e31e22aaa39b9fe806f` | 2026-11-12T14:59:30.000Z |
+| [#260](https://github.com/mpaykin1/meta6-lab/pull/260) | `c52b350043391c8540ba8643c657862d299e276a` | 2026-11-13T03:44:32.000Z |
+| [#254](https://github.com/mpaykin1/meta6-lab/pull/254) | `c62de6b630383ac6c25929d56a8a6d87633fe36e` | 2026-11-13T03:45:18.000Z |
+| [#261](https://github.com/mpaykin1/meta6-lab/pull/261) | `b269517f01989e18cd8d430e8c8069a1afb7576d` | 2026-11-13T03:46:18.000Z |
+| [#234](https://github.com/mpaykin1/meta6-lab/pull/234) | `2a283a97259c85d7244ede76a658e574f4b983bb` | 2026-11-13T03:48:01.000Z |
+| [#258](https://github.com/mpaykin1/meta6-lab/pull/258) | `8e95c8221fe053b1a11d3e1fd4d7332a835f501f` | 2026-11-13T03:49:13.000Z |
+| [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | `3a89858552c072315bbd75f15c7f352a56424ea3` | 2026-11-13T03:52:18.000Z |
+| [#247](https://github.com/mpaykin1/meta6-lab/pull/247) | `14ffdab626e71a699c74c763bad62d9a4aa9a00e` | 2026-11-13T03:56:43.000Z |
+- Захват #220: [34f64472ead9871e65ba2d283c5faab741d22615](https://github.com/mpaykin1/meta6-lab/commit/34f64472ead9871e65ba2d283c5faab741d22615). Исходный HEAD старше 60 минут, конфликт dirty. #208 уже эскалирован на неизменном HEAD; повторная обработка исключена.

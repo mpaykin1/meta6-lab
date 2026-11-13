@@ -1,0 +1,22 @@
+name: INK stone bell preview HTTP 200
+on:
+  push:
+    branches: [lab/ink-stone-bell-20261113]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bell-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify actual public stone bell HTML and JavaScript
+        run: |
+          set -euo pipefail
+          for u in \
+            'https://rawcdn.githack.com/mpaykin1/meta6-lab/828c03e8f4d94dd110987c5af8868ccce6909680/preview/ink-stone-bell/index.html' \
+            'https://rawcdn.githack.com/mpaykin1/meta6-lab/828c03e8f4d94dd110987c5af8868ccce6909680/preview/ink-stone-bell/ink-forest-bell.js'; do
+            code="$(curl --fail --location --retry 2 --max-time 35 --silent --show-error --output /tmp/ink-stone-bell-public --write-out '%{http_code}' "$u")"
+            test "$code" = '200'
+            test -s /tmp/ink-stone-bell-public
+            echo "200 $u"
+          done

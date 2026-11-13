@@ -1,0 +1,53 @@
+name: ASSET CHECK — бот-проверщик ассет-паков
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'asset-packs/**'
+      - 'automation/asset-check/**'
+      - '.github/workflows/asset-check.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'asset-packs/**'
+      - 'automation/asset-check/**'
+      - '.github/workflows/asset-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: asset-check-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  asset-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow numpy
+      - name: Ловушки бота (должны быть зелёными)
+        run: python -m unittest discover -s automation/asset-check -p 'test_*.py' -v
+      - name: Проверка всех паков
+        run: |
+          set +e
+          fail=0
+          for d in asset-packs/*/*/; do
+            [ -f "$d/atlas.json" ] || [ -f "$d/manifest.json" ] || continue
+            name=$(basename "$d"); stage=$(basename "$(dirname "$d")")
+            python -I automation/asset-check/check_pack.py "$d" --out "out/$stage-$name" > /dev/null
+            code=$?
+            { echo "## $stage / $name — exit $code"; sed -n '1,200p' "out/$stage-$name/REPORT.md"; } >> "$GITHUB_STEP_SUMMARY"
+            # incoming/ — ещё в работе: HARD не валит прогон; ready/ — HARD запрещён
+            if [ "$stage" = "ready" ] && [ $code -ne 0 ]; then fail=1; fi
+          done
+          exit $fail
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: asset-check-reports
+          path: out/

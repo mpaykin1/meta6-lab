@@ -1,16 +1,61 @@
 {
-  "generated_at": "2026-11-11T13:45:11.002Z",
+  "generated_at": "2026-11-13T10:41:49.258Z",
   "sha": {
-    "lab": "65066d4edf93d0172e7989ee553493209bbf89c0",
-    "mg": "b1e4f1a0c0b6f454291c8872a3463470773479e9"
+    "lab": "4a6cf0bb98efecd34021b4718d7d79cbf63611ee",
+    "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43031898982",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43411001670",
   "review": {
     "protected": [
+      {
+        "number": 285,
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 241,
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
+      },
+      {
+        "number": 259,
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
+      },
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
@@ -102,14 +147,30 @@
         ]
       }
     ],
-    "redLab": [],
+    "redLab": [
+      {
+        "workflow": "MG Dispatcher",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43410481729",
+        "step": "Run node scripts/dispetcher/run.mjs"
+      },
+      {
+        "workflow": "STOROZHA branch updater",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43409815373",
+        "step": "Update open PR heads and synchronize exact Git conflicts"
+      },
+      {
+        "workflow": "STOROZHA weekly maintenance",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43409546447",
+        "step": "Close genuinely stale PRs without deleting branches and write daily report"
+      }
+    ],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
       "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
       "| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |",
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
-      "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | open | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
+      "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
       "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
       "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
@@ -270,11 +331,61 @@
     ]
   },
   "pr": {
-    "open": 44,
+    "open": 53,
     "conflicts": "нет данных",
-    "merged": 17,
-    "closed": 44,
+    "merged": 27,
+    "closed": 58,
     "mergedItems": [
+      {
+        "number": 285,
+        "title": "storozha: «только Claude» — лишь ядро охраны (убираем тормоз",
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3"
+      },
+      {
+        "number": 279,
+        "title": "INK: объёмный дождевой лес из видео, Ч/Б и цвет",
+        "sha": "d3f16b40a3c59ded669053388c0cf26130a7ed74"
+      },
+      {
+        "number": 241,
+        "title": "L2: защита индекса shared от symlink-подмены источников",
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f"
+      },
+      {
+        "number": 259,
+        "title": "БОТ-ПРОХОДЧИК: сохраняемый промпт для повторных запусков",
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311"
+      },
+      {
+        "number": 263,
+        "title": "docs(prompty): реестр 15 промптов МГЛ и улучшение многоразов",
+        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4"
+      },
+      {
+        "number": 257,
+        "title": "docs(zadachi): не создавать дубли задач по одному PR",
+        "sha": "79f4465b6667092e16115222325c012ca73cc137"
+      },
+      {
+        "number": 256,
+        "title": "docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ",
+        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec"
+      },
+      {
+        "number": 243,
+        "title": "Геймдизайн-аудит META GAMES — чистый PR без защищённой истор",
+        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81"
+      },
+      {
+        "number": 246,
+        "title": "ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож",
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1"
+      },
+      {
+        "number": 265,
+        "title": "ASSET CHECK: бот-проверщик ассет-паков + многоразовый промпт",
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e"
+      },
       {
         "number": 251,
         "title": "feat(auditor): бесплатная почасовая ревизия пяти задач META ",
@@ -362,6 +473,51 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 285,
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 241,
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
+      },
+      {
+        "number": 259,
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
+      },
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
@@ -456,12 +612,12 @@
   },
   "changes": {
     "lab": {
-      "count": 1023,
+      "count": 1789,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 3,
-      "folders": "AGENTS.md:1, automation:1, rules:2"
+      "count": 6,
+      "folders": "AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2"
     }
   },
   "games": [
@@ -517,7 +673,7 @@
     },
     {
       "name": "veil-terraces",
-      "bot": "не прошла",
+      "bot": "прошла",
       "storefront": "да"
     }
   ],
@@ -536,6 +692,10 @@
     "| 35 | 11.11.2026 | PR #238: компилятор журнала ветвился по `process.argv` и блокировался KONTUR Guard | [красный прогон 42999367374](https://github.com/mpaykin1/meta6-lab/actions/runs/42999367374) | `scripts/journal/mutate-journal.mjs`: argv-deception, validation-publishes, writer-dry-run, missing-source |",
     "| 36 | 11.11.2026 | Сторож эталонов пропускал изменения тестов внутри папок `tests/` и файлов `*.spec.ts`: проверял только некоторые имена тестовых файлов | Сверка `referenceGate` с запретом менять существующие тесты | `scripts/storozha/mutate-storozha.mjs`: bypass nested test directory, bypass TypeScript spec file; `scripts/storozha/verify-storozha.mjs` |",
     "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |",
-    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |"
+    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |",
+    "| 1002 | 11.11.2026 | Индекс shared/components применял statSync к папкам и readFileSync к входным файлам; символьная ссылка могла вывести чтение за пределы утверждённого каталога и подменить источник | Статический разбор scripts/shared/build-index.mjs: statSync следует по symlink | scripts/shared/mutate-build-index-symlinks.mjs: блокировка symlink корня, папки, manifest, entry и три мутации (включая обман по имени ID) |",
+    "| 1003 | 11.11.2026 | PR #241: проверка symlink только на конечном файле пропускала подмену предка `shared/` или `reference/`; вывод `shared/index.json` мог перезаписать сторонний файл через symlink | Анализ `readRegularFile` и `fs.writeFileSync(target)` на существующем коде PR | `scripts/shared/mutate-build-index-symlinks.mjs`: атаки `shared-parent`, `reference-parent`, `target`, мутации обхода проверки предков и `O_NOFOLLOW` |",
+    "| 39 | 11.11.2026 | Публикация после merge: исходный demos/living-watercolor/index.html существует, но Pages даёт 404; прежний lab-pages проверял только каталог | Требование владельца от 11.11 и diff .github/workflows/lab-pages.yml | `scripts/lab/verify-link-ok.sh` + `scripts/lab/mutate-link-ok.sh` (404, чужой хост, CI-обман); [зелёная ловушка](https://github.com/mpaykin1/meta6-lab/actions/runs/43014018459), проверка всех index в PR #246 |",
+    "| 40 | 11.11.2026 | HTML 200 с недоступным JS/CSS/изображением/аудио: прежняя проверка игнорировала вложенные 404 | Локальный fixture HTML 200 + JS 404 и 3 мутации (пропуск script, чужой origin, CI-обман) | `scripts/lab/link-ok.sh` вызывает `scripts/lab/check-page-assets.sh` перед PASS; `scripts/lab/mutate-page-assets.mjs` + `scripts/lab/verify-check-page-assets.sh`, [PR #246](https://github.com/mpaykin1/meta6-lab/pull/246), [SHA bb60a8b](https://github.com/mpaykin1/meta6-lab/commit/bb60a8bff951c714fb6c332a323445119ac1486c) |"
   ]
 }

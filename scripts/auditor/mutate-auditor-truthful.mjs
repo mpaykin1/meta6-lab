@@ -259,6 +259,12 @@ const mutants = [
   }
 ];
 for (const mutant of mutants) {
+  // Target the pin operation itself: the report also reads the canonical Issue body.
+  if (mutant.name === 'pin-foreign-issue') {
+    mutant.source = original.replace(
+      'const canonical = recentIssues.find(i => i.number === cfg.issue_number);',
+      'const canonical = recentIssues.find(i => i.number === 250);');
+  }
   assert.notEqual(mutant.source, original, 'mutation not applied: ' + mutant.name);
   await assert.rejects(exercise(mutant.source, mutant.event,
     mutant.pinnedInitially ?? true, mutant.pinAllowed ?? true, mutant.malformedPinQuery ?? false,

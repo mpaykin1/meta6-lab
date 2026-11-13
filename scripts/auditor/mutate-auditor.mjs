@@ -96,3 +96,5 @@ for (const mutant of mutants) {
 process.stdout.write('AUDITOR MUTATIONS PASS: 3/3\n');
 
 await import("./mutate-auditor-truthful.mjs");
+
+await import("./mutate-auditor-stall.mjs");

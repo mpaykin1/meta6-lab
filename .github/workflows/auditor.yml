@@ -144,6 +144,7 @@ jobs:
             const priority = [];
             const rowsOut = [];
             const successes = [];
+            const roleStates = {};
             for (const role of cfg.roles) {
               const start = starts[role.name].getTime();
               const mine = rows.filter(row => row.who === role.name).sort((a,b) => b.taken-a.taken);
@@ -206,6 +207,10 @@ jobs:
               const started = mine.some(row => row.taken >= start);
               if (started && improvements === 0 && !uncertain) problems.push(
                 'нулевое улучшение при записи о начале цикла — '+link('таблица',fileUrl('ZADACHI.md')));
+              // No negative claims when PR pagination or attribution is incomplete.
+              const verified = successes.some(item => item.startsWith(clean(role.name)+': '));
+              roleStates[role.name] = verified ? 'improved' :
+                improvements === 0 && started && !uncertain && prs.length < 100 ? 'zero' : 'unknown';
               const planStatus = plans.length ? '✅' : mine.length ? '⚠️' : '❌';
               const execStatus = problems.length ? '❌' : improvements === 1 && !uncertain ? '✅' : '⚠️';
               if (!plans.length) plans.push(link('запись плана не подтверждена',fileUrl('ZADACHI.md')));
@@ -215,6 +220,27 @@ jobs:
               for (const item of evidence.slice(1)) rowsOut.push('| | | | ↳ '+item+' |');
               for (const problem of problems) priority.push('- **'+clean(role.name)+'**: '+problem);
             }
+            // Compare two completed hourly observations. The previous Issue is already in recentIssues.
+            // A missing, stale, or incomplete observation is unknown, never a proven two-hour stall.
+            const previousBody = recentIssues.find(i => i.number === cfg.issue_number)?.body || '';
+            const match = previousBody.match(/<!-- auditor-cycle-v1 (\{[^\n]*\}) -->/);
+            let previous = null;
+            try { if (match) previous = JSON.parse(match[1]); }
+            catch (err) { core.warning('Invalid previous cycle: '+clean(err.message)); }
+            const gap = previous ? now.getTime() - Date.parse(previous.time) : NaN;
+            if (Number.isFinite(gap) && gap >= 45 * 60_000 && gap <= 75 * 60_000 &&
+              Number.isInteger(previous.run) && previous.run !== context.runId) {
+              for (const role of cfg.roles) {
+                if (previous.states?.[role.name] === 'zero' && roleStates[role.name] === 'zero') {
+                  priority.push('- **'+clean(role.name)+'**: 2 часа подряд без подтверждённого улучшения — '+
+                    link('предыдущий audit',root+'/actions/runs/'+previous.run)+' · '+
+                    link('текущий audit',root+'/actions/runs/'+context.runId));
+                }
+              }
+            }
+            const snapshot = '<!-- auditor-cycle-v1 '+JSON.stringify({
+              time: now.toISOString(), run: context.runId, states: roleStates
+            })+' -->';
             const next = priority.length
               ? 'Проверить первое нарушение по ссылке, защищённое передать Claude без слияния.'
               : 'Добавить SHA и Actions run к следующей записи в таблице задач.';
@@ -228,7 +254,7 @@ jobs:
               '',
               'Срез: '+now.toISOString()+' · '+link('Actions run',root+'/actions/runs/'+context.runId),
               '',
-              '| Роль | Последний запуск | Цикл 1 — план | Цикл 2 — исполнение |',
+              '| Роль | Начало окна проверки (UTC) | Цикл 1 — план | Цикл 2 — исполнение |',
               '| --- | --- | --- | --- |',
               ...rowsOut,
               '',
@@ -239,7 +265,8 @@ jobs:
               '',
               '</details>',
               '',
-              '_⚠️ означает отсутствие достаточных доказательств, а не установленное нарушение._'
+              '_⚠️ означает отсутствие достаточных доказательств, а не установленное нарушение._',
+              snapshot
             ].join('\n');
             if (context.eventName === 'pull_request') {
               report = report.replace('Срез: ', 'Закрепление Issue #'+cfg.issue_number+

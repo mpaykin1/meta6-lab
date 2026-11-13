@@ -50,6 +50,7 @@ const ICON = {
   menu: '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
   play: '<svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>',
   again: '<svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 1 0 2-5M5 4v4h4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>',
+  door: '<svg viewBox="0 0 40 40"><path d="M10 6h19v28H10z" fill="#c0ac87" stroke="#33433d" stroke-width="1.5"/><path d="M12 8l15-2v28l-15-2z" fill="#8a967d" stroke="#33433d" stroke-width="1.5"/><circle cx="23" cy="20" r="1.6" fill="#e9d9aa"/></svg>',
   dust: '<svg viewBox="0 0 40 40"><path d="M14 30c0-8 3-12 6-12s6 4 6 12z" fill="#e8e1cf" stroke="#33433d" stroke-width="1.4"/><path d="M8 18c0-6 6-10 12-10s12 4 12 10z" fill="#6f8fb5" stroke="#33433d" stroke-width="1.4"/><circle cx="13" cy="9" r="1.6" fill="#6f8fb5"/><circle cx="27" cy="6" r="1.3" fill="#6f8fb5"/><circle cx="21" cy="3.5" r="1" fill="#6f8fb5"/></svg>'
 };
 
@@ -66,23 +67,26 @@ export function createUI(handlers) {
       <div class="row"><button data-m="resume">Продолжить</button><button data-m="sound">Звук: вкл</button></div>
       <div class="row" style="margin-top:8px"><button data-m="restart">Начать заново</button></div>
       <h3>Управление</h3>
-      <small>Телефон: левая половина экрана — идти (джойстик появляется под пальцем), правая — повернуть камеру. Кнопка с грибом — пыльца сонника.<br>ПК: WASD / стрелки — идти, мышь — камера, колёсико — приблизить, Пробел — пыльца. Если Ива схватила — быстро дёргай влево‑вправо.</small>
+      <small>Телефон: левая половина экрана — идти (джойстик появляется под пальцем), правая — повернуть камеру. Кнопка с грибом — пыльца сонника.<br>ПК: WASD / стрелки — идти, мышь — камера, колёсико — приблизить, Пробел — пыльца. Если Ива схватила — быстро дёргай влево‑вправо. Глава II: возле архивной двери нажми E / Пробел или иконку створки, чтобы закрыть её.</small>
       <h3>Что слышали</h3><div id="ap-journal"></div>
-      <h3>Об игре</h3><small>Остров последнего аптекаря · Глава I «Тихолист». Мир — эталон INK «Павший великан» без изменений.</small>
+      <h3>Об игре</h3><small>Остров последнего аптекаря · Главы I «Тихолист» и II «Архив станции». Мир — эталон INK «Павший великан» без изменений.</small>
     </section>
     <section id="ap-title" class="ap-card"><div><h2>Глава I · Тихолист</h2><h1>Остров последнего аптекаря</h1><p>Люди разучились лечить и меняют больное на железное. На острове в тумане живёт последний, кто помнит травы. Сегодня с ним в лес идёт Ива.</p><button class="ap-big" data-m="start" aria-label="Начать">${ICON.play}</button></div></section>
-    <section id="ap-end" class="ap-card" hidden><div><h2>Конец демо · Глава I</h2><h1>«Вылечи того, кто лежит в лесу»</h1><p>Великан не был создан для войны. Что спрятано под ним — узнаем в главе II «Архив станции».</p><button class="ap-big" data-m="restart" aria-label="Ещё раз">${ICON.again}</button></div></section>`;
+    <section id="ap-end" class="ap-card" hidden><div><h2>Конец демо · Глава I</h2><h1>«Вылечи того, кто лежит в лесу»</h1><p>Великан не был создан для войны. Что спрятано под ним — узнаем в главе II «Архив станции».</p><button class="ap-big" data-m="restart" aria-label="Ещё раз">${ICON.again}</button><button id="ap-next" class="ap-big" data-m="next" aria-label="Следующая глава" style="margin-left:12px">${ICON.play}</button></div></section>`;
   document.body.append(root);
   const $ = s => root.querySelector(s);
   const say = $('#ap-say'), menu = $('#ap-menu'), act = $('#ap-act'), pips = [...root.querySelectorAll('.pip')];
+  let currentMode = 'dust';
   root.addEventListener('click', e => {
     let m = e.target.closest('[data-m]')?.dataset.m;
     if (!m && e.target.closest('#ap-title')) m = 'start';   // стартовая карточка нажимается целиком
+    if (!m && e.target.closest('#ap-end') && !$('#ap-next').hidden) m = 'next';
     if (!m) return;
     if (m === 'start') { $('#ap-title').hidden = true; handlers.onStart(); }
     if (m === 'resume') toggleMenu(false);
     if (m === 'sound') { const on = handlers.onSound(); e.target.textContent = 'Звук: ' + (on ? 'вкл' : 'выкл'); }
     if (m === 'restart') { toggleMenu(false); $('#ap-end').hidden = true; handlers.onRestart(); }
+    if (m === 'next') { $('#ap-end').hidden = true; handlers.onNext(); }
   });
   function toggleMenu(open = menu.hidden) { menu.hidden = !open; handlers.onPause(open); }
   $('#ap-menu-btn').onclick = () => toggleMenu();
@@ -153,10 +157,22 @@ export function createUI(handlers) {
       pips.forEach((p, i) => p.classList.toggle('off', (i >= 3 && stage < 2) || (i >= 5 && stage < 3)));
     },
     action(visible, charges, urge) {
-      act.classList.toggle('on', visible); act.classList.toggle('empty', charges <= 0); act.classList.toggle('urge', !!urge);
-      const c = $('#ap-charges'); if (c.childElementCount !== charges) c.innerHTML = '<i></i>'.repeat(Math.max(0, charges));
+      act.classList.toggle('on', visible); act.classList.toggle('empty', currentMode !== 'archive' && charges <= 0); act.classList.toggle('urge', !!urge);
+      const c = $('#ap-charges'), shown = currentMode === 'archive' ? 0 : charges;
+      if (c.childElementCount !== shown) c.innerHTML = '<i></i>'.repeat(Math.max(0, shown));
     },
-    end(show) { $('#ap-end').hidden = !show; },
+    end(show, chapter = 1) {
+      const card=$('#ap-end'); card.hidden = !show;
+      card.querySelector('h2').textContent = chapter === 2 ? 'Глава II завершена' : 'Конец демо · Глава I';
+      card.querySelector('h1').textContent = chapter === 2 ? 'Архив станции' : '«Вылечи того, кто лежит в лесу»';
+      card.querySelector('p').textContent = chapter === 2 ? '' : 'Великан не был создан для войны. Что спрятано под ним — узнаем в главе II «Архив станции».';
+      $('#ap-next').hidden = chapter !== 1;
+    },
+    mode(name) {
+      const archive = name === 'archive'; currentMode = name;
+      act.setAttribute('aria-label',archive ? 'Закрыть архивную дверь' : 'Пыльца сонника');
+      act.querySelector('svg').outerHTML = archive ? ICON.door : ICON.dust;
+    },
     title(show) { $('#ap-title').hidden = !show; },
     get menuOpen() { return !menu.hidden; },
     clearJournal() { journal.innerHTML = ''; }

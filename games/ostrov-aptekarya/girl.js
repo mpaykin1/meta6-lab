@@ -85,6 +85,19 @@ export function createGirl({makers, paint}) {
         if (dist < 2.5 && s.lungeCd <= 0) set('lunge');
       }
       lookAt = P;
+    } else if (s.mode === 'sleepwalk') {
+      // Глава II: Ива ещё не бежит. Старая сеть ведёт её от двери к двери.
+      // Вблизи замечает врача и тихо приближается, вдали блуждает по станции.
+      const target = dist < 7.4 ? P : new T.Vector3(-15.7 + Math.sin(ctx.time * .24) * 2.4,
+        0, 1.6 + Math.cos(ctx.time * .19) * 3.2);
+      want.subVectors(target, g.position).setY(0);
+      const distance = want.length();
+      // Чуткая, но не сверхбыстрая: у игрока есть время дойти до укрытия.
+      // К третьей странице сигнал усиливается; нервное преследование остаётся.
+      const pursuitSpeed = 1.65 + Math.min(2, ctx.archivePages || 0) * .18;
+      if (distance > .12) want.setLength(Math.min(dist < 7.4 ? pursuitSpeed : 1.1, distance * 1.5));
+      else want.set(0,0,0);
+      lookAt = dist < 7.4 ? P : ctx.robot;
     } else if (s.mode === 'stun') {
       want.copy(toHero).setLength(-1.6 * Math.max(0, 1 - s.t)); lookAt = P;
       if (s.t > s.dur) set('chase');
@@ -106,7 +119,7 @@ export function createGirl({makers, paint}) {
       Math.cos(Math.atan2(lookAt.x - g.position.x, lookAt.z - g.position.z) - g.rotation.y));
     s.headYaw += (T.MathUtils.clamp(headTarget, -1.25, 1.25) - s.headYaw) * damp(s.mode === 'tell' ? 9 : 4, dt);
     head.rotation.y = s.headYaw;
-    head.rotation.x = s.mode === 'tell' || s.mode === 'listen' ? -.12 + Math.sin(ctx.time * 31) * .015 * s.signal : 0;
+    head.rotation.x = s.mode === 'tell' || s.mode === 'listen' || s.mode === 'sleepwalk' ? -.12 + Math.sin(ctx.time * 31) * .015 * s.signal : 0;
     // Лёжа (сон/обморок) — плавно опускается, а не падает кадром.
     const lieTarget = s.mode === 'sleep' || s.mode === 'faint' ? 1 : 0;
     s.lie += (lieTarget - s.lie) * damp(lieTarget ? 3.2 : 2.2, dt);
@@ -118,7 +131,7 @@ export function createGirl({makers, paint}) {
     });
     g.userData.scarf.rotation.z = Math.sin(ctx.time * 2.6 + 1) * .1;
     // Сигнал великана — огонёк импланта: бирюзовый → тлеющий оранжевый, пульс ускоряется к ночи.
-    const wantSignal = {tell: 1, chase: .75, lunge: 1, grab: 1, listen: .7, stun: .5, rise: .6, sleep: .15}[s.mode] ?? ctx.dusk * .35;
+    const wantSignal = {tell: 1, chase: .75, lunge: 1, grab: 1, listen: .7, sleepwalk: .74, stun: .5, rise: .6, sleep: .15}[s.mode] ?? ctx.dusk * .35;
     s.signal += (wantSignal - s.signal) * damp(2.5, dt);
     const rate = 1.2 + ctx.dusk * 3 + s.signal * 7;
     const pulse = .55 + .45 * Math.sin(ctx.time * rate);

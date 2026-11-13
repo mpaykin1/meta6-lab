@@ -407,7 +407,7 @@ function simulate(dt, mx, my) {
 
   // --- Ива ---
   const robotPos = guardian ? guardian.position : ROBOT;
-  iva.update(dt, {hero, heroVel, heroDir, canWalk, robot: robotPos, home: HOME, time: elapsed, dusk: day});
+  iva.update(dt, {hero, heroVel, heroDir, canWalk, robot: robotPos, home: HOME, time: elapsed, dusk: day, archivePages: chapter2.pages});
   if (iva.state.mode === 'listen' && iva.state.t > iva.state.dur) iva.set('follow');
 
   heroMark.position.set(hero.position.x, .8, hero.position.z);

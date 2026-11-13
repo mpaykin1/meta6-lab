@@ -11,6 +11,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MUTANTS = [
+    ("kinds/htmlpack_harness.mjs", "if(id==='petals')explode();", "if(id==='petals')void 0;"),
+    ("kinds/htmlpack_harness.mjs", "waterMat.uniforms.__acBokeh.value=0", "waterMat.uniforms.__acBokeh.value=1"),
+    ("kinds/htmlpack_harness.mjs", "for(const o of instancePart?[]:objects)", "for(const o of objects)"),
     ("kinds/htmlpack_harness.mjs", "if(delta<=23){pixels[i+3]=0;continue}", "if(false){pixels[i+3]=0;continue}"),
     ("kinds/htmlpack.py", 'r.add("HP13", "HARD", str(compare),', 'r.add("HP13OFF", "SOFT", str(compare),'),
     ("kinds/htmlpack.py", "if shape_deform + 1e-6 < deform_min:", "if False and shape_deform + 1e-6 < deform_min:"),

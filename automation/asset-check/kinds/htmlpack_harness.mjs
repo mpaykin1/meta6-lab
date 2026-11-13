@@ -108,6 +108,9 @@ const __acGroups={
  explosion:[puffs],sparks:[sparks],petals:[petals],
  rain:[rain],dust:[dust],water:[],bokeh:[],post:[]
 };
+waterMat.uniforms.__acBokeh={value:1};
+waterMat.fragmentShader='uniform float __acBokeh;\n'+waterMat.fragmentShader.replace(
+ 'exp(-dot(q,q))*.42*sh;', 'exp(-dot(q,q))*.42*sh*__acBokeh;');
 let __acHidden=null;let __acUndo=[];
 window.__ISOLATE__=(id,shown)=>{
  const known=Object.prototype.hasOwnProperty.call(__acGroups,id)||
@@ -118,15 +121,29 @@ window.__ISOLATE__=(id,shown)=>{
 // Transient effects must be actually active before their shown/hidden capture.
 window.__AC_WAKE__=id=>{
  if(id==='sparks')burst(GX-1,GY,GZ+1.5,440,11,.65,5.0,-5);
+ if(id==='petals')explode();
 };
 window.__AC_APPLY__=()=>{
  __acUndo=[];
  if(!__acHidden)return;
  const id=__acHidden;
  const objects=__acGroups[id]||scene.children.filter(o=>o.name==='shpili-plus-'+id);
- for(const o of objects){if(!o)continue;const was=o.visible;o.visible=false;
+ const instancePart=id==='jaws'||id==='tendrils';
+ if(instancePart){
+   const from=id==='jaws'?0:2*CN,to=id==='jaws'?2*CN:CH.length*CN;
+   const previous=beads.instanceMatrix.array.slice();
+   const empty=new T.Matrix4().makeScale(0,0,0);
+   for(let i=from;i<to;i++)beads.setMatrixAt(i,empty);
+   beads.instanceMatrix.needsUpdate=true;
+   __acUndo.push(()=>{beads.instanceMatrix.array.set(previous);beads.instanceMatrix.needsUpdate=true});
+ }
+ for(const o of instancePart?[]:objects){if(!o)continue;const was=o.visible;o.visible=false;
    __acUndo.push(()=>{o.visible=was});}
- if(id==='water'||id==='bokeh'){
+ if(id==='bokeh'){
+   waterMat.uniforms.__acBokeh.value=0;
+   __acUndo.push(()=>{waterMat.uniforms.__acBokeh.value=1});
+ }
+ if(id==='water'){
    const u=waterMat.uniforms.uH,old=u.value;u.value=-1;
    __acUndo.push(()=>{u.value=old});
  }

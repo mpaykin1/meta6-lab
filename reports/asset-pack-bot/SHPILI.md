@@ -17,3 +17,7 @@
 
 - [x] Checkpoint [c5edffaa](https://github.com/mpaykin1/meta6-lab/commit/c5edffaa914fdd789b036048e2efb08a06032e8d), [draft #306](https://github.com/mpaykin1/meta6-lab/pull/306); [ASSET CHECK](https://github.com/mpaykin1/meta6-lab/actions/runs/43502898632). Занятую параллельным чатом ветку без суффикса не изменяли.
 - [x] Числовая ловушка исполняет настоящий htmlpack_pixels.mjs: круг/кольцо против сложной фигуры; живой фон не создаёт detail/motion, перенос не создаёт motion. 68 тестов PASS локально; 3 новых мутанта запущены. KONTUR из исходного CI исправлен: CLI и модуль пикселей разделены, в OSHIBKI указан конкретный scripts/lab/verify-shpili-pixels.mjs.
+
+- [x] [Первый ASSET CHECK #43502898632](https://github.com/mpaykin1/meta6-lab/actions/runs/43502898632) завершился: workflow зелёный, но пак НЕ принят — HP10 у эталонных sparks/petals (артефакт 14075018586). Исправлены активация настоящих эффектов, раздельное скрытие bokeh/воды и jaws/tendrils, добавлены три мутанта. Не считать зелёный workflow доказательством HARD=0 у incoming.
+
+- [x] [ab8ed706](https://github.com/mpaykin1/meta6-lab/commit/ab8ed7063c69af878e86c11f2fc2418875558455): HP12/HP13 из параллельного #305 сохранены, Three.js подключён из существующего games/broken-city/lib/three.module.js без CDN/копирования библиотеки; HTTP harness сохраняет относительные импорты. После исправления лепестков: 76 локальных тестов PASS. Полный прогон мутантов и реальное сравнение ещё выполняются.

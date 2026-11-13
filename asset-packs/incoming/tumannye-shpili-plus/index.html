@@ -85,7 +85,7 @@ const PACK={name:'Туманные шпили',version:'1.1.1',items:[
  {id:'mirror-seed',n:'Сердце зеркальной воды — усиление',k:'2.5D',m:'flight',cam:[3,45,-19],look:[3,43,-40],isNew:true},
  {id:'storm-heart',n:'Багровая гроза над шпилями',k:'2D',m:'plaza',cam:[-34,48,-14],look:[-34,46,-43],isNew:true}
 ]};
-PACK.count=PACK.items.length;PACK.by={d2:PACK.items.filter(i=>i.k==='2D').length,d25:PACK.items.filter(i=>i.k==='2.5D').length,d3:0};
+PACK.count=PACK.items.length;PACK.by={d2:PACK.items.filter(i=>i.k==='2D').length,d25:PACK.items.filter(i=>i.k==='2.5D').length,d3:PACK.items.filter(i=>i.k==='3D').length};
 window.__PACK__=PACK;try{console.info('[PACK]',PACK.name,PACK.version,'ассетов:',PACK.count,PACK.by)}catch(e){}
 
 /* ============ УТИЛИТЫ ============ */
@@ -565,9 +565,11 @@ const SHPILI_PLUS=(()=>{
        ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+R()*21-10,y+15+R()*30);ctx.stroke();
      }
    });
-   const stone=new T.MeshBasicMaterial({map:wear,color:0x7790aa,transparent:true,depthWrite:true});
+   const stone=new T.MeshLambertMaterial({map:wear,color:0x7790aa,transparent:true,depthWrite:true});
+   const fillLight=new T.AmbientLight(0x6589ad,.75);scene.add(fillLight);
+   const rimLight=new T.DirectionalLight(0xb5e4f3,.95);rimLight.position.set(-15,65,-12);scene.add(rimLight);
    const dark=new T.MeshBasicMaterial({color:0x101e32,transparent:true,depthWrite:true});
-   const edge=new T.MeshBasicMaterial({color:0x91bcc9,transparent:true,depthWrite:true});
+   const edge=new T.MeshLambertMaterial({color:0x91bcc9,transparent:true,depthWrite:true});
    const ember=new T.MeshBasicMaterial({color:0xee7aab,transparent:true,depthWrite:true});
    const part=(parent,dims,pos,mat,rot=0)=>{
      const m=new T.Mesh(new T.BoxGeometry(...dims),mat);m.position.set(...pos);

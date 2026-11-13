@@ -29,3 +29,5 @@
 | 22 | При одинаковом `created_at` для нескольких живых PR квота выбирает старейшие пять детерминированно (номер PR как tie-break), независимо от порядка GraphQL/API, не поддаётся hardcode одного диапазона и не теряет приоритет времени? | [OSHIBKI #53](../../OSHIBKI.md), [ffa2d35](https://github.com/mpaykin1/meta6-lab/commit/ffa2d35beb05ed11856d0cbb6705384852de5ff9) | `scripts/lovushki/mutate-storozha-quota-tie-break.mjs` (4 мутации; Actions ещё не подтверждён) |
 
 | 23 | Проверяется исполняемый dispatch только в main, а не устаревшее написание CLI или команда внутри echo/комментария? | PR #247, OSHIBKI #1054 | scripts/lovushki/mutate-pages-dispatch-contract.mjs (3 мутации), mutate-claude-pages.mjs (4 прежних) |
+
+| 24 | Dispatcher читает PR и проверки пакетно, пропускает закрытые строки без REST и сохраняет fail-closed при неполном снимке/смене HEAD? | OSHIBKI #1055, PR #247 | scripts/lovushki/mutate-dispatcher-snapshot.mjs (5 мутаций), 13 прежних тестов dispatcher сохранены |

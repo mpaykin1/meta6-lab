@@ -24,7 +24,7 @@
 | #190 | lab/bot-batch-1 | OSHIBKI.md | 2026-11-12 |
 | #200 | lab/bot-batch-2 | OSHIBKI.md, shared/library/index.json | 2026-11-12 |
 | #203 | lab/skin-rusty-robot | LAB_QUEUE.md, OSHIBKI.md, games/skin-trainer/index.html, rules/01-stil-i-grafika/SKINY.md | 2026-11-12 |
-| #204 | lab/rules-bot-trainer | LAB_QUEUE.md, OSHIBKI.md | 2026-11-12 |
+| #204 | lab/rules-bot-trainer | НУЖЕН CLAUDE: PR меняет защищённые `.github/workflows/kontur-guard.yml`, `.github/workflows/rules-bot.yml`, проверки `scripts/rules-bot/` и `OSHIBKI.md`; самостоятельные исправления workflow и слияние запрещены. HEAD `4feb49cfa3cc6810a0d49c8489796a54b4e97a90`. https://github.com/mpaykin1/meta6-lab/pull/204 | 2026-11-13 |
 | #209 | lab/library-catalog | BIBLIOTEKA.md, OSHIBKI.md | 2026-11-12 |
 | #218 | lab/remont-r1-library | OSHIBKI.md | 2026-11-12 |
 | #219 | lab/status-a1-20261110 | OSHIBKI.md, SMENA.md | 2026-11-12 |

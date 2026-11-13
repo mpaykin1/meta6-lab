@@ -410,3 +410,8 @@
 | [#258](https://github.com/mpaykin1/meta6-lab/pull/258) | `8cf33d2f8b4cfce9df62d79e115748b9e8bd999a` | 2026-11-13T04:27:45+00:00 |
 | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | `b8d44efb3c0f028c451c5e5769b26b69076df63d` | 2026-11-13T04:30:33+00:00 |
 | [#247](https://github.com/mpaykin1/meta6-lab/pull/247) | `90da1b0cb3470f70b0a12ccc271a2e7996ddf095` | 2026-11-13T04:39:02+00:00 |
+
+### PR #220 — 2026-11-13T08:19:13+00:00
+- Исходный HEAD `84ab3a2bef87a37147670076be0f1da587e823ed` старше 60 минут. Действие (а): [двухродительский merge main](https://github.com/mpaykin1/meta6-lab/commit/fb2cde9aa428959c33a44dd0af6d14dcf73e0ef2) устранил конфликты OSHIBKI.md и TABLITSA_ZADACH.md; сохранены все строки main, две уникальные ошибки PR получили отдельные ID, правило ремонта согласовано с запретом force-push и защищённых правок.
+- Локально существующие `node scripts/zadachi/verify.mjs` и `node scripts/zadachi/mutate.mjs` PASS, 11/11 мутаций. Это локальная проверка, **не** полный зелёный Actions. Код сторожа, workflow и существующие проверки при разрешении конфликта не редактировались. PR защищённый, в main не слит; текущий Actions проверять на `fb2cde9aa428959c33a44dd0af6d14dcf73e0ef2`.
+- Урок: старый конфликт документации можно разрешить, сохранив main и уникальные записи PR, без повторного создания ветки и без ослабления guard.

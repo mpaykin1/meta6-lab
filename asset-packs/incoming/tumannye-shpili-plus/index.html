@@ -661,16 +661,30 @@ const SHPILI_PLUS=(()=>{
      if(i%3===0)ring(st,.35,0xe27ca5,[0,.3,.2],.35);
      stones.push(st);
    }
+   const pylons=[];
    for(const s of [-1,1]){
-     const column=new T.Group();column.position.set(s*10,0,-.7);g.add(column);
+     const column=new T.Group();column.position.set(s*10,0,-.7);g.add(column);pylons.push(column);
      for(let j=0;j<6;j++)spike(column,.6,2,0x29455c,[Math.sin(j)*.8,j*1.7,0],s*.12+j*.1);
      ring(column,2.1,0xff7aaa,[0,8,0],.65);
    }
    const wave=banners(g,12,7,0xf2a5cc,817);
-   own[id].tick=(t)=>{for(let i=0;i<stones.length;i++){
-     stones[i].position.y=Math.sin(i*.33)*.43+Math.sin(i*.77)*.25+
-       .16*Math.sin(t*1.1-i*.22);stones[i].rotation.z=.07*Math.sin(t*.7-i*.28);
-   }wave(t);};
+   own[id].tick=(t)=>{
+     // Цепная волна проходит вдоль 28 осколков с задержкой по фазе.
+     // Весь мост дышит, опоры склоняются мягко, без скачков и телепортации.
+     g.position.y=12+.36*Math.sin(t*.73);
+     for(let i=0;i<stones.length;i++){
+       stones[i].position.y=Math.sin(i*.33)*.43+Math.sin(i*.77)*.25+
+         .92*Math.sin(t*1.55-i*.24);
+       stones[i].position.z=.25*Math.cos(t*1.12-i*.19);
+       stones[i].rotation.z=.22*Math.sin(t*.96-i*.28);
+       stones[i].scale.setScalar(.96+.13*Math.sin(t*1.28-i*.21));
+     }
+     for(let i=0;i<pylons.length;i++){
+       pylons[i].rotation.z=.07*Math.sin(t*.9+i*2.2);
+       pylons[i].position.y=.23*Math.sin(t*1.15+i*1.4);
+     }
+     wave(t);
+   };
  }
  // Спутник: осмысленно следует за героем, защищает видимым кольцом.
  {

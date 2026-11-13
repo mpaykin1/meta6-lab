@@ -45,7 +45,8 @@ class HtmlPackTraps(unittest.TestCase):
         cand = dict(ref)
         if new is not None:
             cand["new_shadow"] = dict(visible=.16, detail=.09, motion=.1, colors=140,
-                                      fps=fps, isolated=.16, **new)
+                                      fps=fps, isolated=.16)
+            cand["new_shadow"].update(new)
         return {"ok": True, "reference": {"items": ref, "errors": [], "screen_text": False},
                 "candidate": {"items": cand, "errors": [], "screen_text": False}}
 

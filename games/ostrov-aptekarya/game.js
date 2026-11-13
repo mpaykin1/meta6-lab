@@ -9,7 +9,7 @@ import {settlementMakers} from '../../reference/ink-fallen-guardian/ink-settleme
 import {buildWorld} from '../../reference/ink-fallen-guardian/ink-world.js';
 import {createInkOptics} from '../../reference/ink-fallen-guardian/ink-optics.js';
 import {createFallenRobot} from '../../reference/ink-fallen-guardian/ink-fallen-robot.js';
-import {SCRIPT, AMBIENT, CHASE_BARKS} from './dialogue.js';
+import {SCRIPT, CHASE_BARKS} from './dialogue.js';
 import {createGirl} from './girl.js';
 import {createPost} from './post.js';
 import {createAudio} from './audio.js';
@@ -71,7 +71,15 @@ const SPOTS = {
   water: [8.7, 10.8],
   spare: [[-1, -3.2], [1.6, 1.8], [-6.2, -6.5], [-13.2, -3.2], [3.2, 4.2]]
 };
-const NEAR = {shrine: V(-15, 2), fox: V(-1.8, 13.5), deer: V(-6.5, 3.7)};
+// Точки разговоров (предметы мира эталона INK и острова). r — радиус «стоим рядом».
+const ANCHORS = [
+  {id: 'shop', pos: V(-7.9, -13), r: 5.5}, {id: 'bench', pos: V(-9.15, -9.9), r: 2.6}, {id: 'car', pos: V(-12.3, -16.3), r: 3.2},
+  {id: 'lamp', pos: V(-4, -.4), r: 2.4}, {id: 'sign', pos: V(-7.3, -4.8), r: 2.6}, {id: 'shroomsRed', pos: V(-3.7, 1.4), r: 2.4},
+  {id: 'deer', pos: V(-6.5, 3.7), r: 3.4}, {id: 'robot', pos: V(-10.5, 5.8), r: 6.2}, {id: 'shrine', pos: V(-15, 2), r: 3.5},
+  {id: 'bridge', pos: V(-5.4, 8.1), r: 2.8}, {id: 'mill', pos: V(-13, 11.5), r: 3.8}, {id: 'fox', pos: V(-1.8, 13.5), r: 4},
+  {id: 'hut', pos: V(2.9, 7.8), r: 3.4}, {id: 'pier', pos: V(5.7, 10.8), r: 2.2}, {id: 'boat', pos: V(7.4, 10.8), r: 1.4},
+  ...coast.islets.map(pos => ({id: 'islet', pos, r: 6}))   // островок виден с берега
+];
 const guardian = valley.world.children.find(o => o.userData?.isFallenRobot);
 const robotHead = guardian?.children.find(c => c.isGroup && Math.abs(c.position.y - 2.64) < .01);
 const robotHands = guardian?.children.filter(c => c.isGroup && Math.abs(c.position.y - .30) < .01) || [];
@@ -178,15 +186,24 @@ const ui = createUI({
 });
 ui.bind(renderer.domElement);
 const dlg = {queue: [], cur: null, t: 0, dur: 0, idle: 0, gap: 0};
-function play(key, then, interrupt = false) {
+// anchor = {pos, r}: разговор привязан к предмету; герой ушёл дальше r+3.5 — разговор обрывается.
+function play(key, then, interrupt = false, anchor = null) {
   const lines = SCRIPT[key] || key;
   if (interrupt) { dlg.queue.length = 0; if (dlg.cur) { dlg.cur = null; ui.say(null); } }
-  lines.forEach((line, i) => dlg.queue.push({line, then: i === lines.length - 1 ? then : null}));
+  lines.forEach((line, i) => dlg.queue.push({line, anchor, then: i === lines.length - 1 ? then : null}));
 }
 function tickDialogue(dt) {
+  // Следующая фраза про предмет звучит, только если герои всё ещё рядом с ним.
+  while (dlg.queue[0]?.anchor && flat(hero.position, dlg.queue[0].anchor.pos) > dlg.queue[0].anchor.r + 1.5) {
+    const a = dlg.queue[0].anchor; dlg.queue = dlg.queue.filter(q => q.anchor !== a);
+  }
   if (!dlg.cur && dlg.queue.length && (dlg.gap -= dt) <= 0) {
     dlg.cur = dlg.queue.shift(); dlg.t = 0; dlg.dur = 1.7 + dlg.cur.line[1].length * .052;
     ui.say(dlg.cur.line); heard++; if (dlg.cur.line[0] === 'v') { audio.voice(dlg.cur.line[1]); glitchSpike = Math.max(glitchSpike, .55); }
+  }
+  if (dlg.cur?.anchor && flat(hero.position, dlg.cur.anchor.pos) > dlg.cur.anchor.r + 2.5) {
+    const a = dlg.cur.anchor; dlg.queue = dlg.queue.filter(q => q.anchor !== a);
+    dlg.t = Math.max(dlg.t, dlg.dur - .3);   // ушли от предмета — фраза гаснет, продолжения нет
   }
   if (dlg.cur) {
     dlg.idle = 0; dlg.t += dt;
@@ -199,7 +216,7 @@ const busy = () => !!dlg.cur || dlg.queue.length > 0;
 let heard = 0, frameAvg = 16, quality = 1, qualityT = 0;
 let state = 'title', stage = 0, counts = {herbs: 0, shrooms: 0, water: 0}, charges = 0;
 let day = 0, struggle = 0, lastFlip = 0, stateT = 0, chaseT = 0, glitchSpike = 0, fade = 0, fadeTo = 0;
-let flags = {}, ambientIx = 0, barkIx = 0, barkT = 0, checkpoint = START.clone(), afterWaterT = -1, warm = 0;
+let flags = {}, barkIx = 0, barkT = 0, checkpoint = START.clone(), afterWaterT = -1, warm = 0;
 let yaw = -.62, pitch = .92, zoom = 1, viewH = 15, shake = 0, elapsed = 0, previous = 0, stepT = 0;
 const heroVel = new T.Vector3(), heroDir = V(0, 1), focus = START.clone(), desired = new T.Vector3();
 
@@ -215,24 +232,24 @@ function layoutSpots() {
 function reset() {
   layoutSpots(); heard = 0;
   stage = 0; counts = {herbs: 0, shrooms: 0, water: 0}; charges = 0; day = 0; struggle = 0; chaseT = 0;
-  flags = {}; ambientIx = 0; barkIx = 0; afterWaterT = -1; fade = 0; fadeTo = 0; warm = 0;
+  flags = {}; barkIx = 0; afterWaterT = -1; fade = 0; fadeTo = 0; warm = 0;
   dlg.queue.length = 0; dlg.cur = null; ui.say(null); ui.clearJournal();
   for (const it of [...herbs, ...shrooms, ...spares]) { it.taken = false; it.take = 0; it.obj.visible = it.kind === 'herb'; it.obj.scale.setScalar(it.base); it.obj.position.copy(it.pos); it.beacon.userData.want = 0; }
   waterBeacon.userData.want = homeBeacon.userData.want = 0;
   hero.position.copy(START); heroVel.set(0, 0, 0); iva.group.position.set(START.x - .8, 0, START.z - 1.1); iva.set('follow');
   audio.setMood('calm');
 }
-function begin() { setState('walk'); stage = 1; herbs.forEach(h => h.beacon.userData.want = 1); play('intro'); }
+function begin() { setState('walk'); stage = 1; herbs.forEach(h => h.beacon.userData.want = 1); dlg.idle = 99; }
 reset();
 
 function take(it) {
   it.taken = true; burst(it.obj.position.clone().setY(.5), it.kind === 'herb' ? '#b9c86a' : '#7d9fd0'); it.beacon.userData.want = 0;
   audio.chime(it.kind === 'herb' ? 0 : 1); shake = .12;
   if (it.kind === 'herb') {
-    counts.herbs++; play('herb' + counts.herbs);
+    counts.herbs++; play('herb' + counts.herbs, null, false, {pos: it.pos.clone(), r: 3.5});
     if (counts.herbs === 3) { stage = 2; shrooms.forEach(s => { s.obj.visible = true; s.beacon.userData.want = 1; }); }
   } else if (it.kind === 'shroom') {
-    counts.shrooms++; charges++; play('shroom' + counts.shrooms);
+    counts.shrooms++; charges++; play('shroom' + counts.shrooms, null, false, {pos: it.pos.clone(), r: 3.5});
     if (counts.shrooms === 2) { stage = 3; waterBeacon.userData.want = 1; }
   } else { charges = Math.min(3, charges + 1); it.respawn = 18; }
 }
@@ -272,7 +289,7 @@ function botInput(dt) {
     else if (stage === 2) target = shrooms.find(h => !h.taken)?.pos;
     else if (stage === 3) target = V(...SPOTS.water);
   } else if (state === 'chase' || state === 'tell') target = HOME;
-  if (state === 'grab' && api.botPassive) return {x: 0, y: 0};
+  if (api.botPassive && (state === 'grab' || state === 'chase')) return {x: 0, y: 0};   // пассивный бот: не убегает и не вырывается
   if (state === 'grab') { botFlip += dt; if (botFlip > .09) { botFlip = 0; botSide *= -1; } return {x: botSide, y: 0}; }
   if (!target) return {x: 0, y: 0};
   let dir = V(target.x - hero.position.x, target.z - hero.position.z);
@@ -281,7 +298,7 @@ function botInput(dt) {
   if (state === 'chase') {
     const g = V(iva.group.position.x - hero.position.x, iva.group.position.z - hero.position.z), gd = g.length();
     if (!api.botPassive && gd < 1.9 && charges > 0 && ['chase', 'lunge'].includes(iva.state.mode)) useDust();
-    if (gd < 4.2 && g.normalize().dot(dir) > .55) dir = dir.clone().add(V(-dir.z, dir.x).multiplyScalar(botSide * 1.6)).normalize();
+    if (!api.botPassive && gd < 4.2 && g.normalize().dot(dir) > .55) dir = dir.clone().add(V(-dir.z, dir.x).multiplyScalar(botSide * 1.6)).normalize();
   }
   botStuckT += dt;
   if (botStuckT > 1.2) { if (flat(botLast, hero.position) < .4) { botDodge = .9; botSide *= -1; } botLast.copy(hero.position); botStuckT = 0; }
@@ -331,21 +348,32 @@ function simulate(dt, mx, my) {
   }
   if (state === 'walk' && stage === 3 && flat(hero.position, V(...SPOTS.water)) < 1.15) {
     stage = 4; counts.water = 1; audio.chime(2); burst(hero.position.clone().setY(.4), '#86c3cf', 30); waterBeacon.userData.want = 0;
-    play('water', () => { afterWaterT = 3; });
+    play('water', () => { afterWaterT = 3; }, false, {pos: V(...SPOTS.water), r: 6});
   }
 
   // --- сюжет: прогулка, места, сумерки ---
   if (state === 'walk') {
     day = Math.min(1, day + dt / (stage === 4 ? 9 : 320));
-    const near = (k, p, r) => { if (!flags[k] && !busy() && flat(hero.position, p) < r) { flags[k] = true; return true; } return false; };
-    if (stage >= 1 && near('robot', ROBOT, 8.2)) { iva.set('listen', 14); play('robot', () => iva.set('follow')); }
-    if (stage >= 1 && near('shrine', NEAR.shrine, 4)) play('shrine');
-    if (stage >= 1 && near('fox', NEAR.fox, 4.5)) play('fox');
-    if (stage >= 1 && near('deer', NEAR.deer, 3.6)) play('deer');
-    if (stage >= 1 && !flags.lake && !busy() && hero.position.x > 3.4) { flags.lake = true; play('lake'); }
+    // РАЗГОВОР У ПРЕДМЕТА: только то, что рядом и видно; каждый предмет — один раз.
+    if (!busy() && dlg.idle > 1.5 && stage < 4) {
+      for (const an of ANCHORS) {
+        if (flags['at_' + an.id] || flat(hero.position, an.pos) > an.r) continue;
+        flags['at_' + an.id] = true;
+        if (an.id === 'robot') { iva.set('listen', 30); play('AT_robot', () => iva.set('follow'), false, an); }
+        else play('AT_' + an.id, null, false, an);
+        break;
+      }
+    }
+    // Первая встреча с тем, что собираем: герои видят это перед собой.
+    for (const [key, list, st] of [['SEE_herb', herbs, 1], ['SEE_shroom', shrooms, 2]]) {
+      if (stage !== st || flags[key]) continue;
+      const it = list.find(h => !h.taken && flat(hero.position, h.pos) < 3.4);
+      if (it) { flags[key] = true; play(key, null, true, {pos: it.pos.clone(), r: 3.4}); }
+    }
+    // Разговор об импланте: огонёк за ухом Ивы всегда виден — звучит сразу после разговора у аптеки.
+    if (flags.at_shop && !flags.ivaTalk && !busy() && dlg.idle > 1) { flags.ivaTalk = true; play('IVA_implant'); }
     if (!flags.dusk1 && day > .42 && stage < 4 && !busy()) { flags.dusk1 = true; play('dusk1'); }
     if (!flags.dusk2 && day > .74 && stage < 4 && !busy()) { flags.dusk2 = true; play('dusk2'); }
-    if (stage >= 1 && stage < 4 && dlg.idle > 19 && ambientIx < AMBIENT.length) play(AMBIENT[ambientIx++]);
     if (afterWaterT > 0 && !busy() && (afterWaterT -= dt) <= 0) startTell(false);
     if (day >= 1 && stage < 4) startTell(true);
   } else if (state === 'tell') {

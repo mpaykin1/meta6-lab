@@ -327,7 +327,8 @@ Object.defineProperty(window,'__META_BOT__',{
     const progress=(Math.min(NEED,hints.L.progress)+Math.min(NEED,hints.R.progress))/(2*NEED);
     return Object.freeze({
       level:completed?2:hints.L.done?2:1,totalLevels:2,
-      player:Object.freeze({x:hero.position.x,y:hero.position.y,z:hero.position.z}),
+      player:Object.freeze({x:hero.position.x,y:hero.position.y,z:hero.position.z,vx:vel.x,vz:vel.z}),
+      input:Object.freeze({x:mvx+(keys.KeyD||keys.ArrowRight?1:0)-(keys.KeyA||keys.ArrowLeft?1:0),y:mvy+(keys.KeyW||keys.ArrowUp?1:0)-(keys.KeyS||keys.ArrowDown?1:0),touchActive:moveId!==null}),
       goal:Object.freeze({type:'movement-tutorial',side:next===hints.L?'left':next===hints.R?'right':'complete',required:NEED,progress:next?next.progress:NEED}),
       alive:true,completed,progress,
       tutorial:Object.freeze({left:hints.L.done,right:hints.R.done,

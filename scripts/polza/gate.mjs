@@ -1,7 +1,7 @@
 // Trusted GitHub CLI runtime; policy logic is in gate-core.mjs.
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
-import {verdict,claim} from './gate-core.mjs';
+import {verdict,claim,unwrapPage} from './gate-core.mjs';
 const REPO='mpaykin1/meta6-lab';
 function parseFinish(text) {
   const result = {};
@@ -26,11 +26,6 @@ function parseFinish(text) {
 async function api(path) {
  const data=execFileSync('gh',['api','repos/'+REPO+path],{encoding:'utf8',maxBuffer:16*1024*1024});
  return JSON.parse(data);
-}
-export function unwrapPage(data) {
- const list=Array.isArray(data)?data:(data?.jobs||data?.workflow_runs||[]);
- if(!Array.isArray(list)) throw Error('GitHub did not return an array');
- return list;
 }
 async function pages(path) {
   const out=[];

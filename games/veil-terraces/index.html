@@ -47,33 +47,44 @@ function orb(){let a=[],N=12;for(let i=0;i<N;i++){let t=i*TAU/N,T=(i+1)*TAU/N;tr
 // The accepted six memories and the endless WebGL terrain remain intact.
 // Generate a fresh chain of traversable shard locations on each new attempt.
 const ORIGINAL_TARGETS=[[-9,-10],[12,-8],[8,16],[-18,13],[22,23],[-31,-16]];
+// A player has width: reject routes where the straight centre is clear but
+// a normal steering correction runs into a ledge or a void.
 function passableSegment(from,to){
- let h=height(from.x,from.z);
- if(h===null)return false;
- const n=Math.ceil(Math.hypot(to.x-from.x,to.z-from.z)*12);
- for(let i=1;i<=n;i++){
-  const f=i/n,x=mix(from.x,to.x,f),z=mix(from.z,to.z,f),next=height(x,z);
-  if(next===null||surface(x,z)===null||next-h>=.5)return false;
-  h=next;
+ const dx=to.x-from.x,dz=to.z-from.z,length=Math.hypot(dx,dz);
+ const count=Math.ceil(length*12);
+ for(const offset of [-.45,0,.45]){
+  const shiftX=-dz/length*offset,shiftZ=dx/length*offset;
+  let h=height(from.x+shiftX,from.z+shiftZ);
+  if(h===null)return false;
+  for(let i=1;i<=count;i++){
+   const f=i/count,x=mix(from.x,to.x,f)+shiftX,z=mix(from.z,to.z,f)+shiftZ;
+   const next=height(x,z);
+   if(next===null||surface(x,z)===null||next-h>.51)return false;
+   h=next;
+  }
  }
  return true;
 }
 function generateShards(){
- let prev={x:0,z:0},out=[];
- for(let i=0;i<6;i++){
-  // Separate memories by >= 4.5 world units: the hero must physically leave the last light.
+ // Retry the whole genuine walking route rather than spawning an unreachable memory.
+ for(let attempt=0;attempt<5;attempt++){
+  let prev={x:0,z:0},out=[];
+  for(let i=0;i<6;i++){
    const possible=[];
-  for(let n=0;n<400;n++){
-   const a=Math.random()*TAU,d=4.65+Math.random()*2.4;
-   const q={x:+(prev.x+Math.cos(a)*d).toFixed(2),z:+(prev.z+Math.sin(a)*d).toFixed(2)};
-   if(Math.hypot(q.x,q.z)>2.1&&passableSegment(prev,q)&&out.every(t=>Math.hypot(t.x-q.x,t.z-q.z)>4.5))possible.push(q);
+   for(let n=0;n<550;n++){
+    const a=Math.random()*TAU,d=6.5+Math.random()*1.8;
+    const q={x:+(prev.x+Math.cos(a)*d).toFixed(2),z:+(prev.z+Math.sin(a)*d).toFixed(2)};
+    if(Math.hypot(q.x,q.z)>2.1&&passableSegment(prev,q)&&
+      out.every(t=>Math.hypot(t.x-q.x,t.z-q.z)>6.3))possible.push(q);
+   }
+   if(!possible.length)break;
+   const next=possible[Math.floor(Math.random()*possible.length)];
+   out.push({x:next.x,z:next.z,y:surface(next.x,next.z),done:false,id:i});
+   prev=next;
   }
-  if(!possible.length)throw Error('No physically traversable shard route at memory '+i);
-  const next=possible[Math.floor(Math.random()*possible.length)];
-  out.push({x:next.x,z:next.z,y:surface(next.x,next.z),done:false,id:i});
-  prev=next;
+  if(out.length===6)return out;
  }
- return out;
+ throw Error('No physically traversable six-memory route');
 }
 let targets=generateShards();
 const GAME_VERSION='1.1.0',META_PROGRESS_KEY='meta-veil-terraces-best';
@@ -189,11 +200,11 @@ canvas.addEventListener('pointermove',e=>{if(e.pointerId===touch.move)aimJoystic
 function endTouch(e){if(e.pointerId===touch.move){touch.move=null;touch.mx=touch.my=0;stick.style.display='none';nub.style.transform='rotate(45deg)'}if(e.pointerId===touch.orbit){touch.orbit=null;touch.orbitX=touch.orbitY=null}}
 canvas.addEventListener('pointerup',endTouch);canvas.addEventListener('pointercancel',endTouch);canvas.addEventListener('contextmenu',e=>e.preventDefault());
 function move(dt){if(menu||won||shardInputGuard.frozen)return;let side=(keys.has('d')||keys.has('arrowright')?1:0)-(keys.has('a')||keys.has('arrowleft')?1:0)+touch.mx,forward=(keys.has('w')||keys.has('arrowup')?1:0)-(keys.has('s')||keys.has('arrowdown')?1:0)-touch.my;let mag=Math.hypot(side,forward);if(mag>1){side/=mag;forward/=mag}let fx=-Math.sin(yaw),fz=-Math.cos(yaw),rx=-fz,rz=fx;const speed=t<boostUntil?6.5:5,desiredX=(fx*forward+rx*side)*speed,desiredZ=(fz*forward+rz*side)*speed,s=1-Math.exp(-8*dt);p.vx=mix(p.vx,desiredX,s);p.vz=mix(p.vz,desiredZ,s);if(jumpQueued&&p.ground){p.vy=6.5;p.ground=false}jumpQueued=false;
-const travel=Math.hypot(p.vx,p.vz)*dt,steps=Math.max(1,Math.ceil(travel/.12));for(let i=0;i<steps;i++)for(const axis of ['x','z']){const next=p[axis]+p['v'+axis]*dt/steps,x=axis==='x'?next:p.x,z=axis==='z'?next:p.z,land=height(x,z),current=height(p.x,p.z);if(land!==null&&(land-(current??p.y)<.5||p.y>=land-.05)||!p.ground){p[axis]=next}else p['v'+axis]=0}
+const travel=Math.hypot(p.vx,p.vz)*dt,steps=Math.max(1,Math.ceil(travel/.12));for(let i=0;i<steps;i++)for(const axis of ['x','z']){const next=p[axis]+p['v'+axis]*dt/steps,x=axis==='x'?next:p.x,z=axis==='z'?next:p.z,land=height(x,z),current=height(p.x,p.z);if(land!==null&&(land-(current??p.y)<=.51||p.y>=land-.05)||!p.ground){p[axis]=next}else p['v'+axis]=0}
 const floor=surface(p.x,p.z);p.vy-=14*dt;p.y+=p.vy*dt;if(floor!==null&&p.vy<=0&&p.y<=floor+.35){p.y=floor+.35;p.vy=0;p.ground=true;lastSafe={x:p.x,z:p.z}}else p.ground=false;if(p.y<-15){p.x=lastSafe.x;p.z=lastSafe.z;p.y=(surface(p.x,p.z)??0)+2;p.vy=0;p.vx=p.vz=0;}
 for(const q of targets)if(t>=nextShardAt&&!q.done&&(q.id===0||targets[q.id-1].done)&&
  (q.id===0||Math.hypot(p.x-targets[q.id-1].x,p.z-targets[q.id-1].z)>2.1)&&
- Math.hypot(q.x-p.x,q.z-p.z)<1.35&&Math.abs(p.y-q.y)<2){q.done=true;nextShardAt=t+0.5;const found=targets.filter(t=>t.done).length;if(found>best){best=found;try{localStorage.setItem(META_PROGRESS_KEY,String(best))}catch{}}shards.children[q.id].className='lit';lastSafe={x:p.x,z:p.z};sharedFx.event('coin');narrative.emit('memory',{title:'Memory '+found,text:STORY[found-1]});shardInputGuard.set(true);
+ Math.hypot(q.x-p.x,q.z-p.z)<1.35&&Math.abs(p.y-q.y)<2){q.done=true;nextShardAt=t+1.3;const found=targets.filter(t=>t.done).length;if(found>best){best=found;try{localStorage.setItem(META_PROGRESS_KEY,String(best))}catch{}}shards.children[q.id].className='lit';lastSafe={x:p.x,z:p.z};sharedFx.event('coin');narrative.emit('memory',{title:'Memory '+found,text:STORY[found-1]});shardInputGuard.set(true);
  if(q.id===0){const today=new Date().toISOString().slice(0,10);
   try{if(localStorage.getItem(META_DAILY_KEY)!==today){localStorage.setItem(META_DAILY_KEY,today);boostUntil=t+60}}catch{}
  }

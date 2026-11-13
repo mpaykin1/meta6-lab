@@ -65,7 +65,12 @@
     "preview_proof": null,
     "robot_v2_pr": "https://github.com/mpaykin1/meta6-lab/pull/287",
     "stone_bell_pr": "https://github.com/mpaykin1/meta6-lab/pull/288",
-    "source_merge_commit_sha": null
+    "source_merge_commit_sha": null,
+    "animation_preview": "https://rawcdn.githack.com/mpaykin1/meta6-lab/17b6c42bc758ffc493e50eb1845f1b31e26846f8/preview/ink-fallen-guardian-v2/index.html?ink=forest&palette=color",
+    "animation_preview_proof": "https://github.com/mpaykin1/meta6-lab/actions/runs/43414752516",
+    "animation_preview_status": "Temporary pinned CDN URL; desktop & 390x844 Chromium PASS, physical phone FPS not measured",
+    "stone_bell_preview": "https://rawcdn.githack.com/mpaykin1/meta6-lab/828c03e8f4d94dd110987c5af8868ccce6909680/preview/ink-stone-bell/index.html?ink=forest&palette=color",
+    "stone_bell_status": "Candidate preview only. Requires separate OWNER PASS before merging"
   },
   "approved_features": [
     "объёмный гигантский разрушенный робот, частично погребённый в земле",

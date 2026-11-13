@@ -84,7 +84,7 @@ const PACK={name:'Туманные шпили',version:'1.2.0',items:[
  {id:'storm-heart',n:'Багровая гроза над шпилями',k:'2D',m:'plaza',cam:[-34,48,-14],look:[-34,46,-43],isNew:true},
 
  {id:'mask-choir',n:'Хор пустых масок',k:'2.5D',m:'flight',cam:[25,48,-12],look:[25,44,-40],isNew:true},
- {id:'bell-spire',n:'Колокольня расколотых шпилей',k:'2.5D',m:'plaza',cam:[-42,21,-9],look:[-42,18,-47],isNew:true},
+ {id:'bell-spire',n:'Колокольня расколотых шпилей',k:'2.5D',m:'plaza',cam:[-42,22,-14],look:[-42,18,-47],isNew:true},
  {id:'mirror-whirlpool',n:'Воронка зеркальной воды',k:'2D',m:'plaza',cam:[0,14,-17],look:[0,2,-54],isNew:true},
  {id:'lantern-moth',n:'Мотылёк — спутник летуна',k:'2.5D',m:'flight',follow:'hero',d:15,isNew:true},
  {id:'echo-keystone',n:'Ключ эха — усиление рывка',k:'2.5D',m:'flight',cam:[8,47,-13],look:[8,46,-40],isNew:true},
@@ -829,7 +829,7 @@ const SHPILI_PLUS=(()=>{
   const tx=mk(1024,1024,(ctx,W,H)=>{
    const R=rng(seed);
    ctx.lineJoin='round';ctx.lineCap='round';
-   for(let i=0;i<520;i++){
+   for(let i=0;i<980;i++){
     let x=R()*W,y=R()*H;
     const n=3+Math.floor(R()*6),len=18+R()*104,a=R()*6.283;
     ctx.beginPath();ctx.moveTo(x,y);
@@ -895,7 +895,7 @@ const SHPILI_PLUS=(()=>{
  // Колокольня за вратами: надломленные вертикали, парящие обломки и голос немого колокола.
  {
   const id='bell-spire',g=newGroup(id,-42,13,-47),shaft=new T.Group();g.add(shaft);
-  aura(g,41,0x86cce8,.78);
+  aura(g,41,0xadddf9,.94);
   // Крылья архитектуры и широкие асимметричные витражные трещины:
   // силуэт действительно занимает кадр, а не расширяется только пустая дымка.
   const etch=engrave(g,18283,50,55,0x93e8ff);
@@ -915,14 +915,14 @@ const SHPILI_PLUS=(()=>{
   // Витражные осколки и сломанные фасады: один BufferGeometry/draw-call,
   // нерегулярные размеры и углы (без повторяющегося паттерна).
   const facetR=rng(86421),facets=new T.BufferGeometry(),vtx=[],clr=[];
-  const facetPalette=[0x438eac,0x5dacc0,0xb784ad,0x82c7df,0x6c91b4,0xcf99bb,0x467ca4];
+  const facetPalette=[0x8cdfff,0x9ceeff,0xffbbde,0xe9e4ff,0x86c4ea,0xff9bcf,0xc6f8ff];
   for(let i=0;i<520;i++){
    const y=-11+facetR()*50;
-   const width=(8+14*Math.max(0,1-Math.abs(y-13)/32));
-   const x=(facetR()-.5)*width*2,sz=1.7+facetR()*5.2;
+   const width=(10+15*Math.max(0,1-Math.abs(y-13)/32));
+   const x=(facetR()-.5)*width*2,sz=2.3+facetR()*7.4;
    const theta=facetR()*6.283,ang=[theta,theta+1.5+facetR()*.5,theta+3.8+facetR()*.9];
    const col=new T.Color(facetPalette[Math.floor(facetR()*facetPalette.length)]);
-   const intensity=.52+facetR()*.48;
+   const intensity=.84+facetR()*.16;
    for(let k=0;k<3;k++){
     vtx.push(x+Math.cos(ang[k])*sz,y+Math.sin(ang[k])*sz*.85,-.5-i*.0005);
     clr.push(col.r*intensity,col.g*intensity,col.b*intensity);
@@ -931,7 +931,7 @@ const SHPILI_PLUS=(()=>{
   facets.setAttribute('position',new T.Float32BufferAttribute(vtx,3));
   facets.setAttribute('color',new T.Float32BufferAttribute(clr,3));
   const glassMat=new T.MeshBasicMaterial({vertexColors:true,transparent:true,
-    opacity:.85,side:T.DoubleSide,depthTest:false,depthWrite:false,
+    opacity:.96,side:T.DoubleSide,depthTest:false,depthWrite:false,
     blending:T.AdditiveBlending});
   const glass=new T.Mesh(facets,glassMat);g.add(glass);
 
@@ -967,7 +967,7 @@ const SHPILI_PLUS=(()=>{
    bell.rotation.z=.17*Math.sin(t*.75);
    etch.position.x=.3*Math.sin(t*.28);
    glass.rotation.z=.016*Math.sin(t*.24);
-   glassMat.opacity=.8+.09*Math.sin(t*.69);
+   glassMat.opacity=.91+.06*Math.sin(t*.69);
    for(let i=0;i<ribs.length;i++)ribs[i].rotation.z=.016*Math.sin(t*.62-i*.26);
    for(let i=0;i<debris.length;i++){
     const o=debris[i];

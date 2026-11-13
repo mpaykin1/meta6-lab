@@ -134,4 +134,5 @@ function creak(){
 }
 fallenGuardian.userData.onRobotCreak=()=>{if(active==='forest')creak();};
 displayObjects.robot.userData.onRobotCreak=()=>{if(active==='robot')creak();};
+window.__INK_PREVIEW_METRICS__={get fps(){return 1000/Math.max(1,frameAvg);},get quality(){return quality;}};
 window.__INK_FOREST__={version:'2.0.0-preview',objects:Object.keys(objectMakers),show:choose,setMono,get active(){return active;}};

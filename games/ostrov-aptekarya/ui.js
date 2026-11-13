@@ -76,7 +76,9 @@ export function createUI(handlers) {
   const $ = s => root.querySelector(s);
   const say = $('#ap-say'), menu = $('#ap-menu'), act = $('#ap-act'), pips = [...root.querySelectorAll('.pip')];
   root.addEventListener('click', e => {
-    const m = e.target.closest('[data-m]')?.dataset.m; if (!m) return;
+    let m = e.target.closest('[data-m]')?.dataset.m;
+    if (!m && e.target.closest('#ap-title')) m = 'start';   // стартовая карточка нажимается целиком
+    if (!m) return;
     if (m === 'start') { $('#ap-title').hidden = true; handlers.onStart(); }
     if (m === 'resume') toggleMenu(false);
     if (m === 'sound') { const on = handlers.onSound(); e.target.textContent = 'Звук: ' + (on ? 'вкл' : 'выкл'); }
@@ -88,7 +90,7 @@ export function createUI(handlers) {
   act.addEventListener('pointerdown', e => { e.stopPropagation(); e.preventDefault(); handlers.onAction(); });
 
   // Ввод: плавающий джойстик (левая половина), камера (правая половина / мышь), клавиатура.
-  const keys = new Set(), stick = {x: 0, y: 0, id: null, ox: 0, oy: 0}, look = {id: null, x: 0, y: 0, dx: 0, dy: 0};
+  const keys = new Set(), pulse = new Set(), stick = {x: 0, y: 0, id: null, ox: 0, oy: 0, fresh: false, release: false}, look = {id: null, x: 0, y: 0, dx: 0, dy: 0};
   const stickEl = $('#ap-stick'), knob = stickEl.firstElementChild;
   let zoom = 0;
   addEventListener('keydown', e => {
@@ -96,7 +98,7 @@ export function createUI(handlers) {
     if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(k)) e.preventDefault();
     if ((k === ' ' || k === 'e') && !keys.has(k)) handlers.onAction();
     if (k === 'escape') toggleMenu();
-    keys.add(k);
+    keys.add(k); pulse.add(k);
   });
   addEventListener('keyup', e => keys.delete(e.key.toLowerCase()));
   const reset = () => { keys.clear(); stick.x = stick.y = 0; stick.id = look.id = null; stickEl.style.display = 'none'; };
@@ -112,11 +114,11 @@ export function createUI(handlers) {
     canvas.addEventListener('pointermove', e => {
       if (e.pointerId === stick.id) {
         const dx = e.clientX - stick.ox, dy = e.clientY - stick.oy, len = Math.max(40, Math.hypot(dx, dy));
-        stick.x = dx / len; stick.y = dy / len; knob.style.transform = `translate(${stick.x * 32}px,${stick.y * 32}px)`;
+        stick.x = dx / len; stick.y = dy / len; stick.fresh = true; knob.style.transform = `translate(${stick.x * 32}px,${stick.y * 32}px)`;
       } else if (e.pointerId === look.id) { look.dx += e.clientX - look.x; look.dy += e.clientY - look.y; look.x = e.clientX; look.y = e.clientY; }
     });
     for (const ev of ['pointerup', 'pointercancel', 'lostpointercapture']) canvas.addEventListener(ev, e => {
-      if (e.pointerId === stick.id) { stick.id = null; stick.x = stick.y = 0; knob.style.transform = ''; stickEl.style.display = 'none'; }
+      if (e.pointerId === stick.id) { stick.id = null; if (stick.fresh) stick.release = true; else stick.x = stick.y = 0; knob.style.transform = ''; stickEl.style.display = 'none'; }
       if (e.pointerId === look.id) look.id = null;
     });
     canvas.addEventListener('wheel', e => { e.preventDefault(); zoom += e.deltaY; }, {passive: false});
@@ -125,11 +127,14 @@ export function createUI(handlers) {
   return {
     bind,
     input() {
-      const k = n => keys.has(n) ? 1 : 0;
+      // Короткое нажатие (короче кадра на слабом телефоне) всё равно двигает героя хотя бы один кадр.
+      const k = n => keys.has(n) || pulse.has(n) ? 1 : 0;
       const x = stick.x + k('d') + k('arrowright') - k('a') - k('arrowleft');
       const y = stick.y + k('s') + k('arrowdown') - k('w') - k('arrowup');
       const out = {x, y, lookX: look.dx, lookY: look.dy, zoom};
-      look.dx = look.dy = 0; zoom = 0; return out;
+      look.dx = look.dy = 0; zoom = 0; pulse.clear(); stick.fresh = false;
+      if (stick.release) { stick.release = false; stick.x = stick.y = 0; }
+      return out;
     },
     say(line) {
       if (!line) { say.classList.remove('on'); return; }

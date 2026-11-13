@@ -7,4 +7,4 @@
 </head><body><div id="boot"><i></i></div>
 <script type="module">
 import('./game.js').then(()=>document.getElementById('boot').remove()).catch(e=>{document.getElementById('boot').outerHTML='<p style="font:14px system-ui;color:#733;padding:20px">Игра не запустилась: '+String(e.message||e).replace(/</g,'&lt;')+'</p>';console.error(e);});
-</script></body></html>
+</script><script src="bot-adapter.js"></script></body></html>

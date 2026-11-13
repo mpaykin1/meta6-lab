@@ -51,9 +51,15 @@ paint.apply(basket, {seed: 'apothecary-basket'});
 
 // ---------- Ключевые точки сюжета ----------
 const HOME = V(-7.9, -13), ROBOT = V(-10.5, 5.8), START = V(-8.7, -11.4);
+// БЕЗ ПОВТОРОВ: каждый поход травы и сонник растут в новых местах (3 из 7 и 2 из 5).
+const POOL = {
+  herbs: [[-6.8, -2.5], [-1.5, 4.0], [-12.2, .8], [-3.2, -4.8], [-9.2, -1.2], [.6, 1.2], [-13.6, -2.6]],
+  shrooms: [[-15.4, 8.2], [-4.6, 10.6], [-7.8, 12.6], [-1.4, 9.2], [-16.5, 5.0]]
+};
+const pickN = (arr, n) => arr.map((v, i) => [Math.random(), i]).sort((a, b) => a[0] - b[0]).slice(0, n).map(([, i]) => i);
 const SPOTS = {
-  herbs: [[-6.8, -2.5], [-1.5, 4.0], [-12.2, .8]],
-  shrooms: [[-15.4, 8.2], [-4.6, 10.6]],
+  herbs: POOL.herbs.slice(0, 3),
+  shrooms: POOL.shrooms.slice(0, 2),
   water: [8.7, 10.8],
   spare: [[-1, -3.2], [1.6, 1.8], [-6.2, -6.5], [-13.2, -3.2], [3.2, 4.2]]
 };
@@ -172,7 +178,7 @@ function play(key, then, interrupt = false) {
 function tickDialogue(dt) {
   if (!dlg.cur && dlg.queue.length && (dlg.gap -= dt) <= 0) {
     dlg.cur = dlg.queue.shift(); dlg.t = 0; dlg.dur = 1.7 + dlg.cur.line[1].length * .052;
-    ui.say(dlg.cur.line); if (dlg.cur.line[0] === 'v') { audio.voice(dlg.cur.line[1]); glitchSpike = Math.max(glitchSpike, .55); }
+    ui.say(dlg.cur.line); heard++; if (dlg.cur.line[0] === 'v') { audio.voice(dlg.cur.line[1]); glitchSpike = Math.max(glitchSpike, .55); }
   }
   if (dlg.cur) {
     dlg.idle = 0; dlg.t += dt;
@@ -182,6 +188,7 @@ function tickDialogue(dt) {
 const busy = () => !!dlg.cur || dlg.queue.length > 0;
 
 // ---------- Состояние игры ----------
+let heard = 0, frameAvg = 16, quality = 1;
 let state = 'title', stage = 0, counts = {herbs: 0, shrooms: 0, water: 0}, charges = 0;
 let day = 0, struggle = 0, lastFlip = 0, stateT = 0, chaseT = 0, glitchSpike = 0, fade = 0, fadeTo = 0;
 let flags = {}, ambientIx = 0, barkIx = 0, barkT = 0, checkpoint = START.clone(), afterWaterT = -1, warm = 0;
@@ -189,7 +196,16 @@ let yaw = -.62, pitch = .92, zoom = 1, viewH = 15, shake = 0, elapsed = 0, previ
 const heroVel = new T.Vector3(), heroDir = V(0, 1), focus = START.clone(), desired = new T.Vector3();
 
 function setState(s) { state = s; stateT = 0; }
+let layoutHash = '';
+function layoutSpots() {
+  const h = pickN(POOL.herbs, 3), m = pickN(POOL.shrooms, 2);
+  layoutHash = 'h' + h.join('') + 'm' + m.join('');
+  [[herbs, h, POOL.herbs], [shrooms, m, POOL.shrooms]].forEach(([items, ix, pool]) => items.forEach((it, i) => {
+    it.pos.set(pool[ix[i]][0], 0, pool[ix[i]][1]); fixSpot(it.pos); it.beacon.position.copy(it.pos);
+  }));
+}
 function reset() {
+  layoutSpots(); heard = 0;
   stage = 0; counts = {herbs: 0, shrooms: 0, water: 0}; charges = 0; day = 0; struggle = 0; chaseT = 0;
   flags = {}; ambientIx = 0; barkIx = 0; afterWaterT = -1; fade = 0; fadeTo = 0; warm = 0;
   dlg.queue.length = 0; dlg.cur = null; ui.say(null); ui.clearJournal();
@@ -198,7 +214,7 @@ function reset() {
   hero.position.copy(START); heroVel.set(0, 0, 0); iva.group.position.set(START.x - .8, 0, START.z - 1.1); iva.set('follow');
   audio.setMood('calm');
 }
-function begin() { setState('walk'); play('intro', () => { stage = 1; herbs.forEach(h => h.beacon.userData.want = 1); }); }
+function begin() { setState('walk'); stage = 1; herbs.forEach(h => h.beacon.userData.want = 1); play('intro'); }
 reset();
 
 function take(it) {
@@ -226,7 +242,7 @@ function startTell(late) {
   [...herbs, ...shrooms].forEach(s => s.beacon.userData.want = 0); waterBeacon.userData.want = 0;
 }
 function startChase() {
-  setState('chase'); iva.set('chase'); homeBeacon.userData.want = 1;
+  setState('chase'); flags.chased = true; iva.set('chase'); homeBeacon.userData.want = 1;
   spares.forEach(s => { if (!s.taken) { s.obj.visible = true; s.beacon.userData.want = .7; } });
 }
 function toEnding(lines) {
@@ -266,20 +282,9 @@ function botInput(dt) {
   return {x: Math.cos(yaw) * dir.x - Math.sin(yaw) * dir.z, y: Math.sin(yaw) * dir.x + Math.cos(yaw) * dir.z};
 }
 
-// ---------- Главный цикл ----------
-function resize() { renderer.setSize(innerWidth, innerHeight); }
-addEventListener('resize', resize);
-function animate(ms) {
-  requestAnimationFrame(animate);
-  if (document.hidden) { previous = ms; return; }
-  const raw = Math.min(.05, Math.max(0, (ms - previous) / 1000)); previous = ms;
-  const dt = paused ? 0 : raw * api.timeScale;
-  elapsed += raw; stateT += dt;
-  const input = ui.input();
-  yaw -= input.lookX * .0065; pitch = T.MathUtils.clamp(pitch + input.lookY * .0035, .32, 1.2);
-  zoom = T.MathUtils.clamp(zoom * Math.exp(-input.zoom * .001), .7, 1.8);
-  let mx = input.x, my = input.y;
-  if (api.bot && !paused) ({x: mx, y: my} = botInput(dt));
+// ---------- Симуляция (один подшаг) ----------
+function simulate(dt, mx, my) {
+  stateT += dt;
   tickDialogue(dt);
 
   // --- аптекарь: инерция, а не рывки ---
@@ -300,7 +305,7 @@ function animate(ms) {
   hero.userData.legs.forEach((leg, i) => leg.rotation.x = speed > .2 ? Math.sin(gait + i * Math.PI) * .4 * Math.min(1, speed / 2.5) : 0);
   hero.userData.scarf.rotation.z = Math.sin(elapsed * 2.3) * .09 + speed * .05;
   basket.rotation.z = Math.sin(gait) * .12 * Math.min(1, speed);
-  if (speed > 1 && (stepT -= raw) <= 0) { stepT = .3; audio.step(.6); }
+  if (speed > 1 && (stepT -= dt) <= 0) { stepT = .3; audio.step(.6); }
 
   // --- сбор ---
   for (const it of [...herbs, ...shrooms, ...spares]) {
@@ -336,6 +341,7 @@ function animate(ms) {
     if (afterWaterT > 0 && !busy() && (afterWaterT -= dt) <= 0) startTell(false);
     if (day >= 1 && stage < 4) startTell(true);
   } else if (state === 'tell') {
+    if (flags.chased) chaseT += dt;
     if (stateT > 2.6) startChase();
   } else if (state === 'chase') {
     chaseT += dt; barkT += dt;
@@ -347,8 +353,9 @@ function animate(ms) {
       setState('grab'); iva.set('grab'); struggle = 0; audio.stab(); shake = .35; play('grab', null, true);
     }
     if (flat(hero.position, HOME) < 1.7) { audio.door(); shake = .3; toEnding('home'); }
-    else if (chaseT > 85) toEnding('faint');
+    else if (chaseT > 70) toEnding('faint');
   } else if (state === 'grab') {
+    chaseT += dt;   // ночь идёт и в захвате: погоня всегда кончается (не дольше ~70 с)
     // Ива тянет к великану; вырваться — частые рывки в стороны или пыльца.
     const toR = V(ROBOT.x - hero.position.x, ROBOT.z - hero.position.z).normalize();
     hero.position.addScaledVector(toR, 1.55 * dt);
@@ -365,6 +372,7 @@ function animate(ms) {
       setState('caught'); flags.caughtN = (flags.caughtN || 0) + 1; fadeTo = 1; glitchSpike = 1; play('caught', null, true); audio.stab();
     }
   } else if (state === 'caught') {
+    chaseT += dt;
     if (stateT > 3.4) {
       hero.position.copy(checkpoint); heroVel.set(0, 0, 0); focus.copy(checkpoint);
       iva.group.position.copy(checkpoint).add(V(1.4, 1.2)); fixSpot(iva.group.position);
@@ -396,6 +404,31 @@ function animate(ms) {
   }
   robotHands.forEach((h, i) => { h.rotation.x = -sig * .14 * (i ? 1 : .6) + Math.max(0, Math.sin(elapsed * 1.7 + i * 2)) * sig * .06; });
 
+}
+
+// ---------- Главный цикл ----------
+function resize() { renderer.setSize(innerWidth, innerHeight); }
+addEventListener('resize', resize);
+function animate(ms) {
+  requestAnimationFrame(animate);
+  if (document.hidden) { previous = ms; return; }
+  const raw = Math.min(.4, Math.max(0, (ms - previous) / 1000)); previous = ms;
+  // Медленное устройство — снижаем качество один раз, плавность важнее резкости.
+  frameAvg = frameAvg * .97 + Math.min(raw, .1) * 1000 * .03;
+  if (frameAvg > 30 && quality > .7 && elapsed > 3) { quality = .7; renderer.setPixelRatio(1); paint.setQuality(.7); post.setScale(.8); }
+  const dt = paused ? 0 : raw * api.timeScale;
+  const fr = Math.min(raw, .066);
+  elapsed += raw;
+  const input = ui.input();
+  yaw -= input.lookX * .0065; pitch = T.MathUtils.clamp(pitch + input.lookY * .0035, .32, 1.2);
+  zoom = T.MathUtils.clamp(zoom * Math.exp(-input.zoom * .001), .7, 1.8);
+  let mx = input.x, my = input.y;
+  if (api.bot && !paused) ({x: mx, y: my} = botInput(dt));
+  // Симуляция идёт подшагами по 50 мс: на слабом устройстве игра медленнее рисуется, но не замедляется.
+  const steps = Math.min(8, Math.max(1, Math.ceil(dt / .05)));
+  for (let k = 0; k < steps; k++) simulate(dt / steps, mx, my);
+  const sig = iva.state.signal, robotNear = 1 - Math.min(1, flat(hero.position, ROBOT) / 22);
+
   // --- свет и сумерки ---
   const dusk = state === 'ending' ? 0 : Math.pow(day, 1.25);
   ambient.color.set('#fff3d7').lerp(new T.Color('#aeb8d4'), dusk); ambient.intensity = 2.2 - dusk * .75;
@@ -422,7 +455,7 @@ function animate(ms) {
   const chaseCam = ['chase', 'grab', 'tell', 'caught'].includes(state);
   desired.set(hero.position.x + heroVel.x * .35, .6, hero.position.z + heroVel.z * .35);
   if (chaseCam) desired.lerp(iva.group.position.clone().setY(.6), .25);
-  focus.lerp(desired, damp(state === 'ending' ? 1.5 : 3.6, raw));
+  focus.lerp(desired, damp(state === 'ending' ? 1.5 : 3.6, fr));
   shake = Math.max(0, shake - raw * 1.6);
   const aspect = innerWidth / Math.max(1, innerHeight);
   const baseH = Math.max(10, 7.2 / aspect) * (chaseCam ? 1.32 : state === 'ending' ? .85 : 1) / zoom;
@@ -457,6 +490,17 @@ Object.defineProperties(api, Object.getOwnPropertyDescriptors({
   debugChase() {
     api.start(); dlg.queue.length = 0; dlg.cur = null; stage = 4; counts = {herbs: 3, shrooms: 2, water: 1}; charges = 2; day = 1;
     hero.position.set(7.5, 0, 10.8); iva.group.position.set(6.3, 0, 10.7); focus.copy(hero.position); startTell(false);
+  },
+  get layoutHash() { return layoutHash; }, get progress() { return heard + counts.herbs + counts.shrooms + counts.water; },
+  get menuOpen() { return ui.menuOpen; }, get ended() { return state === 'ending'; },
+  goal() {
+    if (state === 'walk') {
+      const it = stage === 1 ? herbs.find(h => !h.taken) : stage === 2 ? shrooms.find(h => !h.taken) : null;
+      if (it) return {x: it.pos.x, y: it.pos.z};
+      if (stage >= 3) return {x: SPOTS.water[0], y: SPOTS.water[1]};   // цель не исчезает посреди шага бота
+      return null;
+    }
+    return ['chase', 'tell', 'grab', 'caught', 'outro', 'ending'].includes(state) ? {x: HOME.x, y: HOME.z} : null;
   },
   get caughtCount() { return flags.caughtN || 0; },
   start() { if (state === 'title') { ui.title(false); paused = false; audio.start(); begin(); } },

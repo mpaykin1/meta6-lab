@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "b90c7831bbbc8c56c9d29022e82048ffa7a9dc54",
+  "last_processed_head": "e03717b220a5a3e1b8d4840867550bfdf0f1f8b8",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -31,7 +31,7 @@
     },
     "2_canonical_and_publish": {
       "status": "pending",
-      "details": "PR #242 продолжает базироваться на #234, оба OPEN, mergeable=false; на последнем SEO HEAD обязательные Workflow Runs отсутствуют, старые были action_required. Без полного CI не сливать. Реальный HTTP 200 постоянного URL не подтверждён."
+      "details": "PR242 now reconciled with base PR234 (merge 4003cf7a), but newer bot-index commits move both branches; main publishing remains blocked by required all-green CI and 9 missing bot adapters in base. Verify permanent HTML, IndexNow only after safe merge and Pages."
     },
     "3_content_and_validator": {
       "status": "in_progress",
@@ -55,7 +55,7 @@
         "underwater-world"
       ],
       "pending_pages": 0,
-      "details": "17/17 уникальных текстов и FAQ; 17/17 человекочитаемых H2. Three Worlds теперь использует два оригинальных PNG-кадра из `three-worlds-game/evidence` (сохранены побайтно как локальные assets) на странице, в OG, JSON-LD и карточках, без старой внешней ссылки. SEO CI на новом HEAD ещё не подтверждён. Усиление: все 23 sitemap lastmod обязаны иметь один реальный календарный день не в будущем; три мутации, включая правдоподобный дубль, должны падать. SEO CI на новом SHA ожидается.",
+      "details": "23 страницы: SEO validator includes lastmod date/calendar/dup checks with 3 mutation traps; successful SEO run 43360900263 on merge ancestor 4003cf7a; latest machine-generated branch e03717b lacks fresh confirmed run. Never treat action_required as green.",
       "seo_ci": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
       "metadata": "23 страницы: title <= 60, description 120–160, Schema.org JSON-LD, alt",
       "validator_implementation": "https://github.com/mpaykin1/meta6-lab/commit/674359e1781fb13e4dfeabb461e12def5448ea86"
@@ -357,6 +357,16 @@
       "status": "merge_base_sync_pending_ci",
       "change": "Синхронизация PR242 с PR234: новейшая честная игровая стратегия Veil и все новые записи прогресса основной ветки сохранены; нужен свежий CI.",
       "base": "9b1feaa6f452ba49dff8c89954d9ee43878609a6"
+    },
+    {
+      "date": "2026-11-13",
+      "status": "seo_ci_ancestor_pass_new_head_pending",
+      "change": "SEO Catalog Validator PASSED on 4003cf7a (23 pages, strengthened sitemap traps); current machine-generated HEAD e03717b requires new run.",
+      "evidence": [
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43360900263",
+        "https://github.com/mpaykin1/meta6-lab/commit/e03717b220a5a3e1b8d4840867550bfdf0f1f8b8"
+      ],
+      "next": "Fresh required CI; safely merge #242 into #234 only when both have green checks."
     }
   ],
   "base_sync_sha": "9b1feaa6f452ba49dff8c89954d9ee43878609a6"

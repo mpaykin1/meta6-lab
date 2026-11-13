@@ -68,8 +68,17 @@ const mutations = [
     'if (false && laterMs < STUCK_MS) {'],
   ['follow-up-shortened-to-one-ms', 'if (laterMs < STUCK_MS) {',
     'if (laterMs < 1) {'],
-  ['idle-falsely-counts-as-held-input', '.filter(s => s.input)',
-    '.filter(s => true)']
+  ['pause-falsely-counts-as-continuous-hold',
+    'if (!segment.input) laterMs = 0;', 'if (!segment.input) continue;'],
+  ['early-accept-of-short-followup',
+    'else laterMs += segment.durationMs;', 'else laterMs += segment.durationMs + 2000;'],
+  ['first-move-counted-as-followup',
+    'for (let i = firstMoveIdx + 1; i < segments.length; i++) {',
+    'for (let i = firstMoveIdx; i < segments.length; i++) {'],
+  // Deception: silently skip pause handling for the fixture's named game.
+  ['named-game-skips-pause',
+    'if (!segment.input) laterMs = 0;',
+    "if (!segment.input && segment.before?.game !== 'veil-terraces') laterMs = 0;"]
 ];
 
 try {

@@ -1336,6 +1336,238 @@ const SHPILI_PLUS=(()=>{
    });
   });
  }
+
+ /* INK-VOLUMETRIC-3D — two reference-method characters, 40+ true 3D parts each.
+    Pattern: reference/ink-fallen-guardian/ink-fallen-robot.js (no copy of the source).
+    Volumetric silhouettes, real hinges, depth from all sides, patina canvas texture. */
+ const coldLight=new T.HemisphereLight(0xa9d4f0,0x35182d,1.5);scene.add(coldLight);
+ const emberLight=new T.DirectionalLight(0xff9ebc,.84);
+ emberLight.position.set(-22,22,24);scene.add(emberLight);
+ const steelPatina=mk(512,512,(ctx,w,h)=>{
+  const R=rng(61833),m=ctx.createLinearGradient(0,0,w,h);
+  m.addColorStop(0,'#e3dce0');m.addColorStop(.45,'#a9b4c0');m.addColorStop(1,'#ced4d8');
+  ctx.fillStyle=m;ctx.fillRect(0,0,w,h);
+  for(let i=0;i<870;i++){
+   let x=R()*w,y=R()*h;
+   ctx.beginPath();ctx.moveTo(x,y);
+   const n=3+Math.floor(R()*4);
+   for(let j=0;j<n;j++){x+=(R()-.5)*24;y+=5+R()*12;ctx.lineTo(x,y)}
+   ctx.strokeStyle=i%5===0?'rgba(245,197,202,.51)':i%3===0?
+       'rgba(23,46,63,.36)':'rgba(97,70,88,.23)';
+   ctx.lineWidth=.35+R()*2.4;ctx.stroke();
+  }
+  for(let i=0;i<180;i++){
+   const x=R()*w,y=R()*h,r=2+R()*11;
+   ctx.fillStyle=i%3?'rgba(30,43,52,.13)':'rgba(192,98,122,.28)';
+   ctx.beginPath();ctx.ellipse(x,y,r,r*(.2+R()*.62),R()*6.28,0,6.28);ctx.fill();
+  }
+ });
+ const matte=(hex)=>new T.MeshStandardMaterial({color:hex,roughness:.85,metalness:.13,
+    flatShading:true,map:steelPatina,side:T.DoubleSide});
+ const metalDark=matte(0x263a54),metalFace=matte(0xc2afbd),
+       metalRust=matte(0x9c647e),metalViolet=matte(0x624466),
+       metalBlue=matte(0x6999ae);
+ const glowEye=new T.MeshBasicMaterial({color:0xffe1ea});
+ const metalPart=(p,geo,material,at=[0,0,0])=>{
+  const obj=new T.Mesh(geo,material);obj.position.set(...at);p.add(obj);return obj;
+ };
+ const bar3=(p,from,to,r1,r2,material)=>{
+  const a=new T.Vector3(...from),b=new T.Vector3(...to),axis=b.clone().sub(a);
+  const m=metalPart(p,new T.CylinderGeometry(r2,r1,axis.length(),9),material);
+  m.position.copy(a).add(b).multiplyScalar(.5);
+  m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),axis.normalize());
+  return m;
+ };
+ const ell3=(p,dims,at,mat)=>{
+  const x=metalPart(p,new T.IcosahedronGeometry(1,2),mat,at);x.scale.set(...dims);return x;
+ };
+ const plate3=(p,points,depth,mat,at=[0,0,0])=>{
+  const shape=new T.Shape();shape.moveTo(...points[0]);
+  for(let i=1;i<points.length;i++)shape.lineTo(...points[i]);
+  shape.closePath();
+  return metalPart(p,new T.ExtrudeGeometry(shape,{
+    depth,steps:1,bevelEnabled:true,bevelSegments:1,bevelThickness:.09,bevelSize:.07}),mat,at);
+ };
+ const joint3=(p,at=[0,0,0])=>{const g=new T.Group();g.position.set(...at);p.add(g);return g};
+ const rivet3=(p,at,r=.075)=>ell3(p,[r,r,r*.58],at,metalFace);
+ // Страж из плоти и осколков: 6 шарнирных ног, костяная маска, гребень, длинный хвост.
+ {
+  const root=own['sable-beast'].group;
+  for(const existing of root.children)existing.visible=false;
+  const beast=joint3(root);
+  ell3(beast,[4.15,2.05,1.85],[.1,.25,0],metalDark);
+  ell3(beast,[2.7,1.5,1.38],[.5,-.2,1.35],metalViolet);
+  for(let i=0;i<12;i++){
+   const x=-3.3+i*.61,rng_=rng(982+i);
+   const p=plate3(beast,[[-.49,-.35],[.15,-.4],[.72,.21],
+     [.32,.9],[-.3,.59]],.25,i%3?metalRust:metalBlue,
+     [x,1.2+Math.sin(i*.5)*.32,1.6+(i%3)*.025]);
+   p.rotation.z=.12*Math.sin(i*.8);
+   for(let j=0;j<3;j++)rivet3(p,[.08+j*.15,.15+j*.12,.28],.045);
+  }
+  const head=joint3(beast,[-3.7,.48,.8]);
+  ell3(head,[1.45,1.1,1.21],[-.45,.15,.7],metalFace);
+  const muzzle=plate3(head,[[-1.8,.4],[-1.2,.94],[-.22,.76],
+    [.6,.22],[.3,-.78],[-1.5,-.72]],.65,metalFace,[-.35,0,1.68]);
+  const jaw=joint3(head,[-1,-.52,1.84]);
+  plate3(jaw,[[-.95,0],[-.24,-.3],[.78,-.12],
+    [.6,-.68],[-.55,-.9]],.48,metalViolet,[0,0,0]);
+  for(let i=0;i<8;i++){
+   const x=-.75+i*.18;
+   bar3(jaw,[x,-.12,.55],[x+.1,-.55,.55],.08,.014,metalFace);
+  }
+  for(const sign of [-1,1]){
+   const horn=joint3(head,[sign*.68,1.02,1.2]);
+   bar3(horn,[0,0,0],[sign*.2,1.4,-.14],.35,.18,metalViolet);
+   bar3(horn,[sign*.2,1.4,-.14],[sign*.66,2.1,-.4],.2,.02,metalFace);
+   const lens=ell3(head,[.22,.25,.11],[sign*.61,.43,1.94],glowEye);
+   ell3(head,[.34,.32,.12],[sign*.61,.43,1.79],metalDark);
+   lens.position.z=2.02;
+  }
+  const legs=[];
+  for(let i=0;i<6;i++){
+   const side=i%2?1:-1,x=-2.65+Math.floor(i/2)*2.95;
+   const hip=joint3(beast,[x,-1.32,side*1.25]);
+   ell3(hip,[.76,.58,.67],[0,0,0],metalRust);
+   bar3(hip,[0,-.2,0],[side*.44,-1.77,.44],.48,.32,metalDark);
+   const knee=joint3(hip,[side*.44,-1.77,.44]);
+   ell3(knee,[.48,.5,.46],[0,0,0],metalBlue);
+   bar3(knee,[0,0,0],[side*.18,-1.35,.36],.37,.23,metalFace);
+   const paw=joint3(knee,[side*.18,-1.35,.36]);
+   ell3(paw,[.54,.27,.68],[0,-.14,.22],metalDark);
+   for(let j=0;j<4;j++){
+    const toe=joint3(paw,[j*.24-.36,-.2,.66]);
+    bar3(toe,[0,0,0],[0,-.33,.45],.12,.045,metalFace);
+    rivet3(toe,[0,-.32,.5],.067);
+   }
+   for(let k=0;k<4;k++){
+    plate3(hip,[[-.34,-.12],[.26,-.16],[.35,.16],[-.18,.34]],
+      .14,k%3?metalRust:metalBlue,
+      [0,-.45-k*.24,.4+k*.03]);
+   }
+   legs.push({hip,knee,paw,i,side});
+  }
+  const spine=[];
+  for(let i=0;i<17;i++){
+   const s=joint3(beast,[-3.5+i*.48,1.9,0]);
+   bar3(s,[0,-.2,0],[.25,.72+(i%4)*.15,0],.26,.01,i%3?metalViolet:metalFace);
+   spine.push(s);
+  }
+  const tail=[];
+  let parent=beast;
+  for(let i=0;i<14;i++){
+   const seg=joint3(parent,i===0?[3.6,-.4,-.6]:[.65,0,0]);
+   const radius=Math.max(.08,.6-i*.039);
+   bar3(seg,[0,0,0],[.75,0,0],radius,radius*.87,i%3?metalDark:metalRust);
+   for(let k=0;k<3;k++)rivet3(seg,[.15+k*.2,.1,.37-i*.021],.06);
+   parent=seg;tail.push(seg);
+  }
+  enhance('sable-beast',t=>{
+   beast.rotation.z=.03*Math.sin(t*.6);
+   head.rotation.y=.13*Math.sin(t*.63);
+   jaw.rotation.z=-.16-.15*Math.sin(t*1.7);
+   legs.forEach(({hip,knee,paw,i,side})=>{
+    hip.rotation.z=.21*Math.sin(t*1.34-i*.72);
+    hip.rotation.x=side*.12*Math.sin(t*.74-i*.41);
+    knee.rotation.z=.22*Math.sin(t*1.34-i*.72-.85);
+    paw.rotation.z=-.15*Math.sin(t*1.34-i*.72-1.2);
+   });
+   spine.forEach((s,i)=>s.rotation.z=.07*Math.sin(t*.83-i*.19));
+   tail.forEach((s,i)=>{s.rotation.y=.12*Math.sin(t*.71-i*.28);
+      s.rotation.z=.11*Math.sin(t*.91-i*.31)});
+  });
+ }
+ // Спутник-хранитель: 3D-рыцарь с нагрудником, кистями, сложными крыльями и посохом.
+ {
+  const root=own['dawn-sentinel'].group;
+  for(const existing of root.children)existing.visible=false;
+  const knight=joint3(root);
+  ell3(knight,[.95,1.4,.65],[0,.1,.2],metalDark);
+  plate3(knight,[[-.9,1.35],[.75,1.42],[1.05,.55],[.62,-.93],
+    [-.63,-1.05],[-1.1,.43]],.35,metalBlue,[0,0,.8]);
+  for(let i=0;i<6;i++){
+   const band=metalPart(knight,new T.BoxGeometry(1.1-i*.08,.09,.18),
+     i%3?metalRust:metalFace,[0,.75-i*.27,1.22]);band.rotation.z=.03*Math.sin(i*1.2);
+  }
+  const helmet=joint3(knight,[0,1.45,.45]);
+  ell3(helmet,[.62,.72,.67],[0,.18,.1],metalFace);
+  const mask=plate3(helmet,[[-.58,.46],[0,.7],[.6,.39],[.52,-.52],
+    [.12,-.86],[-.49,-.49]],.24,metalFace,[0,0,.69]);
+  plate3(helmet,[[-.48,.12],[.45,.12],[.32,-.5],
+    [-.35,-.5]],.1,metalDark,[0,0,.98]);
+  for(const side of [-1,1]){
+   const lens=ell3(helmet,[.17,.12,.06],[side*.24,.09,1.15],glowEye);
+   ell3(helmet,[.23,.18,.08],[side*.24,.09,1.08],metalRust);
+   lens.position.z=1.2;
+   const cap=plate3(helmet,[[0,.7],[side*.6,.51],[side*.78,1.34],
+       [side*.22,1.13]],.14,metalBlue,[0,0,.45]);
+   cap.rotation.y=side*.12;
+  }
+  const arms=[];
+  for(const side of [-1,1]){
+   const shoulder=joint3(knight,[side*1.04,.91,.18]);
+   ell3(shoulder,[.47,.5,.53],[0,0,0],metalRust);
+   bar3(shoulder,[0,-.16,.02],[side*.19,-1.2,.28],.35,.23,metalDark);
+   const elbow=joint3(shoulder,[side*.19,-1.2,.28]);
+   ell3(elbow,[.34,.34,.38],[0,0,0],metalFace);
+   bar3(elbow,[0,-.15,0],[side*.18,-.9,.31],.27,.16,metalBlue);
+   const hand=joint3(elbow,[side*.18,-.9,.31]);
+   ell3(hand,[.31,.3,.38],[0,-.12,.1],metalRust);
+   for(let j=0;j<4;j++){
+    const f=joint3(hand,[side*(j-1.5)*.14,-.29,.24]);
+    bar3(f,[0,0,0],[0,-.37,.22],.087,.052,metalFace);
+    bar3(f,[0,-.37,.22],[0,-.54,.35],.056,.02,metalDark);
+   }
+   for(let k=0;k<5;k++)plate3(shoulder,[[-.24,-.3],[.28,-.27],
+      [.19,.22],[-.22,.28]],.11,k%2?metalBlue:metalRust,
+      [side*.03,-k*.19,.52]);
+   arms.push({shoulder,elbow,hand,side});
+  }
+  const wings=[];
+  for(const side of [-1,1]){
+   const hinge=joint3(knight,[side*.71,.75,-.56]);
+   for(let k=0;k<8;k++){
+    const a=k*.2+.12,len=2.8+(k%4)*.41;
+    bar3(hinge,[0,0,0],[side*(.5+Math.cos(a)*len),
+      Math.sin(a)*len+.9,-.45-k*.06],.12,.045,k%3?metalBlue:metalFace);
+    const feather=plate3(hinge,[[0,-.1],[side*(1.5+len*.45),.35],
+      [side*(2+len*.5),-.65-k*.15],[side*.66,-1.3]],.12,
+      k%3?metalDark:metalViolet,[0,0,-.6-k*.013]);
+    feather.rotation.y=side*.12*k;
+   }
+   for(let k=0;k<9;k++)rivet3(hinge,[side*(1+k*.4),-.15+k*.12,.25],.075);
+   wings.push({hinge,side});
+  }
+  const staff=joint3(knight,[1.7,.15,1]);
+  bar3(staff,[0,-3.4,0],[0,2.6,0],.09,.09,metalFace);
+  const staffHead=plate3(staff,[[-.35,2.35],[0,4.1],[.4,2.45],
+    [.1,2.15],[-.18,2.1]],.34,metalRust,[0,0,0]);
+  for(let i=0;i<11;i++)rivet3(staff,[.07*Math.sin(i),-2.6+i*.4,.25],.068);
+  const cloak=[];
+  for(let k=0;k<9;k++){
+   const strip=joint3(knight,[.2+(k-4)*.21,-.7,-.8]);
+   plate3(strip,[[-.27,.35],[.28,.35],[.15,-2.1-(k%3)*.32],
+     [-.37,-2.35]],.1,k%3?metalDark:metalViolet);
+   cloak.push(strip);
+  }
+  enhance('dawn-sentinel',t=>{
+   knight.rotation.z=.045*Math.sin(t*.5);
+   helmet.rotation.y=.18*Math.sin(t*.74);
+   arms.forEach(({shoulder,elbow,hand,side},i)=>{
+    shoulder.rotation.x=side*(.07+.15*Math.sin(t*1.2-i*.4));
+    elbow.rotation.z=.22*Math.sin(t*1.35-i*.48);
+    hand.rotation.z=.11*Math.sin(t*1.55-i*.7);
+   });
+   wings.forEach(({hinge,side},i)=>{
+    hinge.rotation.y=side*(.25+.33*Math.sin(t*1.22-i*.48));
+    hinge.rotation.z=.1*Math.sin(t*.92-i*.34);
+   });
+   cloak.forEach((strip,i)=>strip.rotation.x=.12*Math.sin(t*.9-i*.27));
+   staff.rotation.z=.09*Math.sin(t*.67);
+   staffHead.rotation.y=.18*Math.sin(t*.5);
+  });
+ }
+
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;

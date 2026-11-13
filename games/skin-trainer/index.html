@@ -318,6 +318,30 @@ function loop(){requestAnimationFrame(loop);
   R.setRenderTarget(RT);R.render(scene,cam);R.setRenderTarget(null);
   post.uniforms.tD.value=RT.texture;R.render(pScene,pCam);
 }
+
+/* Read-only observation for the META GAMES bot. Input remains the normal keyboard/touch path. */
+Object.defineProperty(window, '__META_BOT__', {
+  configurable: false,
+  enumerable: true,
+  get() {
+    const position = hero.position;
+    return Object.freeze({
+      level: 1,
+      totalLevels: 1,
+      player: Object.freeze({x: position.x, y: position.y, z: position.z}),
+      goal: null, // Skin Trainer has no level objective or finish trigger.
+      alive: true, // This scene has no health/death system.
+      completed: false,
+      buttons: Object.freeze(['w', 'a', 's', 'd', 'ArrowUp', 'ArrowDown',
+        'ArrowLeft', 'ArrowRight', 'touch:joystick']),
+      combat: false,
+      enemies: 0,
+      weapons: 0,
+      layout: 'skin-trainer:free-roam'
+    });
+  }
+});
+
 loop();
 })();
 </script>

@@ -43,6 +43,10 @@ MUTANTS = [
     ("kinds/htmlpack.py", "if found != CDN:", "if False:"),
     ("kinds/htmlpack.py", "if error:", "if False and error:"),
     ("kinds/htmlpack.py", 'if new_ids and "window.__PACK_PROBE__" not in source:', "if False:"),
+    ("kinds/htmlpack.py", "if unisolated:", "if False and unisolated:"),
+    ("kinds/htmlpack.py", "if not isinstance(shape, (int, float)) or shape + 1e-6 < silhouette_min:", "if False:"),
+    ("kinds/htmlpack.py", "if color_delta > palette_limit:", "if False:"),
+    ("kinds/htmlpack_harness.mjs", "window.__ISOLATE__(id,false)", "window.__ISOLATE__(id,true)"),
 ]
 
 

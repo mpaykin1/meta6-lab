@@ -12,3 +12,16 @@
 - [x] [ASSET CHECK #43471838907](https://github.com/mpaykin1/meta6-lab/actions/runs/43471838907): 32/32 измерены, HARD=0, SOFT=0, 62/62 тестов, 32/32 мутантов; FPS 52.5 против эталона 55. Шесть новых объектов соответствуют p10, SHA [7fa8678f](https://github.com/mpaykin1/meta6-lab/commit/7fa8678fef3684b4f146de3b8c389d7e133f082c).
 - [x] Шаг 3: [PR #296](https://github.com/mpaykin1/meta6-lab/pull/296) влит в main, SHA [1d385b13](https://github.com/mpaykin1/meta6-lab/commit/1d385b135f0fd52a35d6b2df6503f5f6eacf171a). Бот, ловушки, шесть ассетов сохранены.
 - [ ] LAB Pages: [#43475889928](https://github.com/mpaykin1/meta6-lab/actions/runs/43475889928) — `actions/deploy-pages` PASS; `Check published public URLs` ещё выполняется. Пока нет точной строки `200 https://mpaykin1.github.io/meta6-lab/asset-packs/incoming/tumannye-shpili-plus/`, публичную ссылку не выдавать. Старые прогоны отменялись из-за занятости слота [#43471006897](https://github.com/mpaykin1/meta6-lab/actions/runs/43471006897).
+- [x] Публикация подтверждена строкой `200 https://mpaykin1.github.io/meta6-lab/asset-packs/incoming/tumannye-shpili-plus/` в [LAB Pages #43475889928](https://github.com/mpaykin1/meta6-lab/actions/runs/43475889928/job/132059496473) в 17:53:40 UTC (деплой прошёл; общий прогон позже отменён на проверке других страниц).
+- [ ] Партия 2: 32→38, проверить в Chrome, HARD=0, мутанты, PR и публикацию.
+- [x] [ASSET CHECK #43490132064](https://github.com/mpaykin1/meta6-lab/actions/runs/43490132064): 38/38 измерены, 62 теста и 32/32 мутанта PASS; HARD HP5 bell-spire: видимость 0.34535 против p10 0.46647, другие 11 новых объектов прошли; SHA [87942340](https://github.com/mpaykin1/meta6-lab/commit/879423405a50d298327bb6517c0bf0af21ea1480).
+- [ ] Расширена колокольня — витражные трещины, архитектурные боковые крылья и арки; повторный Chrome замер до HARD=0.
+- [x] [ASSET CHECK #43491817886](https://github.com/mpaykin1/meta6-lab/actions/runs/43491817886): 38 ассетов, HARD HP5 bell-spire, 0.44237 < p10 0.51989; остальные 11 новых PASS; на втором прогоне улучшена видимость без изменения порогов.
+- [ ] Белл-спайр: добавлен единый меш из 520 живых витражных осколков (деталь + силуэт) — повторить проверку HARD=0.
+
+- [x] [ASSET CHECK #43493585815](https://github.com/mpaykin1/meta6-lab/actions/runs/43493585815): HARD=1, HP5 bell-spire 0.46668 < p10 0.50647; остальные 11 новых ассетов PASS, 32/32 мутанта.
+- [ ] После [2700c7a1](https://github.com/mpaykin1/meta6-lab/commit/2700c7a164a83b5b07ddf2788769926829ed14e9) обновлены 980 ярких осколков и ракурс колокольни. Chrome HARD=0 → слияние PR #303 → LAB Pages и 200.
+
+- [x] 13.11: исправлен принцип эталонных замеров: временная копия исходника изолирует 26+ объектов, замораживает анимацию на парах on/off, маска только пикселей объекта. [Хук SHA 24530080](https://github.com/mpaykin1/meta6-lab/commit/245300802e1ca939c39d5a75239010b7773817fd).
+- [x] 13.11: HP10 (силуэт) и HP11 (палитра), 4 регрессии и 4 мутанта; бот 2.4.0. [SHA 4e3f3b7](https://github.com/mpaykin1/meta6-lab/commit/4e3f3b7225d14f693cbfdeb035a365c6739f4545).
+- [ ] [ASSET CHECK #43495288295](https://github.com/mpaykin1/meta6-lab/actions/runs/43495288295): получить результат новых изолированных замеров всех 38; исправить каждый HARD, затем подготовить лист сравнения и слить при всех зелёных проверках.

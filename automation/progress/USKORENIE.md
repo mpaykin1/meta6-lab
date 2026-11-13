@@ -26,5 +26,8 @@
 - 2026-11-13 11:03 UTC — сохранены регрессионные ловушки на неполный GitHub API и устаревший merged PR: [коммит](https://github.com/mpaykin1/meta6-lab/commit/f751682d698d8923b1936da59fe47d3a7613c336).
 - 2026-11-13 11:03 UTC — в PR #220 добавлен часовой предел коммитов zadachi-watch: [коммит](https://github.com/mpaykin1/meta6-lab/commit/05753cf17e57a166a988b958cbd496173c4b21e3).
 
+
+- 2026-11-13 11:15 UTC — подтверждён дефект шага 1.3: [`automation/STATUS.md`](https://github.com/mpaykin1/meta6-lab/blob/main/automation/STATUS.md) показывает все 18 FINISH как «нет данных» при 7 зелёных в [`FINISH.md`](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/FINISH.md); исходник [`scripts/zadachi/watch.mjs`](https://github.com/mpaykin1/meta6-lab/blob/main/scripts/zadachi/watch.mjs) проверен: `collect()` подменяет ошибку GitHub API пустым массивом, что может стирать статусы. Исправление ещё не подтверждено; следующий запуск — сначала восстановить полноту API и ловушку, затем генератор STATUS. Это диагностика, не PASS.
+
 ## Метка продолжения
 Обновлять после каждого этапа; ещё не объявлять PR слитым или тест зелёным. Предыдущий подтверждённый срез FINISH: [7/18](../../rules/09-platforma/FINISH.md).

@@ -652,7 +652,8 @@ Object.defineProperty(window,'__META_BOT__',{configurable:false,enumerable:true,
   level:1,totalLevels:1,
   player:Object.freeze({x:pos.x,y:pos.y,z:pos.z}),
   goal:destination?Object.freeze({x:destination.p.x,y:destination.p.y,z:destination.p.z}):null,
-  alive:state!=='fall',completed:false,
+  // Falling is recoverable: spawnCatch() creates another track, never a death.
+  alive:true,completed:false,
   progress:Object.freeze({distance:S,segments:ci,speed:spd,mode,lateral:X,steering:readSteer()}),
   buttons:Object.freeze(['ArrowLeft','ArrowRight','KeyA','KeyD','touch:left','touch:right']),
   combat:false,enemies:0,weapons:0

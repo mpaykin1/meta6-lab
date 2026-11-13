@@ -1,0 +1,37 @@
+name: STOROZHA PR quota
+# Intentionally no pull_request paths filter: quota MUST check every PR.
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize, ready_for_review, edited]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['scripts/storozha/**', '.github/workflows/storozha-quota.yml']
+permissions:
+  contents: read
+  pull-requests: read
+concurrency:
+  group: storozha-pr-quota-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+jobs:
+  storozha-quota:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reject overflow of five active PRs
+        env:
+          STOROZHA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STOROZHA_REPO: ${{ github.repository }}
+          STOROZHA_MODE: quota
+          STOROZHA_PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: node scripts/storozha/weekly-watch.mjs quota

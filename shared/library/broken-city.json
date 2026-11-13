@@ -1280,6 +1280,21 @@
       "sha256": "9514097e347a9e89fc3320cfc752b1af5dd7b0745888151b9018cd45eeaffaf8"
     },
     {
+      "id": "13124ecb923e9e70e5f68f90",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "inline-script@9693",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        101,
+        3370
+      ],
+      "sha256": "6af11d3571141ae43f616273ce1fa6ec82e3f539a2ffb0967e98f5cb2a113c5d"
+    },
+    {
       "id": "13dd7f7737b12a71e44db736",
       "game": "broken-city",
       "kind": "solution",
@@ -1595,21 +1610,6 @@
       "sha256": "e1e61735e2d1045f6feebc99f7778ab0361a94c467a60a35041c8951c5105b6a"
     },
     {
-      "id": "28a4fd9b90ba5716fa1d4ff4",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "inline-script@9693",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        101,
-        3331
-      ],
-      "sha256": "edad139d9ca2eccf71c9cde17ca3b7877580aa857fc6a9fb449ede11e1ad4a8d"
-    },
-    {
       "id": "28a69cccb030e9a86add61d0",
       "game": "broken-city",
       "kind": "solution",
@@ -1758,21 +1758,6 @@
         1559
       ],
       "sha256": "19a5c4cdd9e0c7a21016a871bee2c30f351487864946e18a8825b470091a2acc"
-    },
-    {
-      "id": "35c4e57069592509abacadc0",
-      "game": "broken-city",
-      "kind": "solution",
-      "name": "frame",
-      "purpose": [
-        "animation"
-      ],
-      "source_path": "games/broken-city/index.html",
-      "lines": [
-        3242,
-        3327
-      ],
-      "sha256": "e46a88609b3f95fe65cdc5d03aec1e3ff4f6f8fa20dc51e0eb1f8ce7c44fa53e"
     },
     {
       "id": "3a22123fca4ed0639c17735d",
@@ -3693,6 +3678,21 @@
         2476
       ],
       "sha256": "0de3e10283f7492ac111b17787e9412683fa9eb9de4acd6bd32df48e734192a8"
+    },
+    {
+      "id": "aa906d3a5ca4bd58e80ad4a7",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "frame",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/broken-city/index.html",
+      "lines": [
+        3281,
+        3366
+      ],
+      "sha256": "e46a88609b3f95fe65cdc5d03aec1e3ff4f6f8fa20dc51e0eb1f8ce7c44fa53e"
     },
     {
       "id": "ab7779cd8c4dd730d57a99ac",

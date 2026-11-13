@@ -63,8 +63,9 @@ async function initialGatePasses(commits) {
    if(!m)continue;
    const pr=await api('/pulls/'+m[1]);
    if(!pr.merged_at || !pr.head?.sha)continue;
-   const checks=await api('/commits/'+pr.head.sha+'/check-runs?per_page=100');
-   if((checks.check_runs||[]).some(ch=>/^polza$/i.test(ch.name||'') && ch.conclusion==='success')) ok.add(c.sha);
+   const statuses=await api('/commits/'+pr.head.sha+'/status');
+   const polza=(statuses.statuses||[]).find(st=>st.context==='POLZA');
+   if(polza?.state==='success') ok.add(c.sha);
  }
  return ok;
 }

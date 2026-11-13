@@ -77,7 +77,7 @@ class HtmlPackTraps(unittest.TestCase):
 
     def test_HP5_empty_new_asset(self):
         self.add_new()
-        self.assertIn("HP5", self.ids(self.metrics(new={"isolated": 0.0, "visible": 0.0})))
+        self.assertIn("HP5", self.ids(self.metrics(new={"isolated": 0.0})))
 
     def test_HP5_undetailed_new_asset(self):
         self.add_new()

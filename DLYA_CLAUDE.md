@@ -17,6 +17,7 @@
 | #254 | lab/auditor-truthful-cycle-20261111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/auditor/mutate-auditor.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 | #261 | lab/biblioteka-contract-20261111 | scripts/library/verify-library.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 | #258 | lab/prohodchik-b2-motion-20261111 | .github/workflows/prohodchik-b2.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
+| #247 | lab/kak-proveryayushchij-traps | scripts/storozha/reference-check.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

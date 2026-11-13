@@ -116,17 +116,19 @@ export function resolveMergeability(fetchOne, pause = ms => execFileSync('sleep'
 export function collect(rows, options = {}) {
   const repo = options.repo || 'mpaykin1/meta6-lab';
   const mgRepo = options.mgRepo || 'mpaykin1/meta6';
+  // Never rewrite GitHub-backed statuses using partial API responses (403/429/timeouts).
+  // A failed query must abort this run, preserving the last complete snapshot.
   const api = options.api || (p => {
     try {
       return JSON.parse(execFileSync('gh', ['api', p], {maxBuffer: 64e6}).toString());
     } catch (error) {
-      console.error('ZADACHI API unavailable:', p, error.message);
-      return null;
+      throw new Error('ZADACHI API unavailable: ' + p + ': ' + error.message, {cause: error});
     }
   });
   const last = (repository, ref) => {
     const c = api(`repos/${repository}/commits?sha=${encodeURIComponent(ref)}&per_page=1`);
-    return c?.[0] ? Date.parse(c[0].commit.committer.date) : undefined;
+    if (!Array.isArray(c)) throw new Error('Incomplete commit response for ' + repository + ':' + ref);
+    return c[0] ? Date.parse(c[0].commit.committer.date) : undefined;
   };
   const pulls = {}, mgPulls = {}, branches = {};
   const put = (repository, p, withCommit) => {
@@ -137,7 +139,9 @@ export function collect(rows, options = {}) {
     if (open) for (let page = 1; page <= 10; page++) {
       const checks = api(
         `repos/${repository}/commits/${p.head.sha}/check-runs?per_page=100&page=${page}`);
-      if (!checks?.check_runs) break;
+      if (!Array.isArray(checks?.check_runs)) {
+        throw new Error('Incomplete check-runs for PR #' + p.number);
+      }
       checkRuns.push(...checks.check_runs);
       if (checks.check_runs.length < 100) break;
     }
@@ -156,7 +160,8 @@ export function collect(rows, options = {}) {
   };
   for (const repository of [repo, mgRepo]) {
     for (let page = 1; page < 6; page++) {
-      const l = api(`repos/${repository}/pulls?state=open&per_page=100&page=${page}`) || [];
+      const l = api(`repos/${repository}/pulls?state=open&per_page=100&page=${page}`);
+      if (!Array.isArray(l)) throw new Error('Incomplete open PR list for ' + repository);
       l.forEach(p => put(repository, p, true));
       if (l.length < 100) break;
     }
@@ -167,8 +172,10 @@ export function collect(rows, options = {}) {
     if (noBranch(r.branch) || source[r.branch] ||
         /ГОТОВО · слито|ЗАКРЫТО без/.test(r.status)) continue;
     const owner = repository.split('/')[0];
-    const l = api(`repos/${repository}/pulls?state=all&head=${owner}:${encodeURIComponent(r.branch)}&per_page=5`) || [];
-    const p = l.find(x => x.merged_at) || l[0];
+    const l = api(`repos/${repository}/pulls?state=all&head=${owner}:${encodeURIComponent(r.branch)}&per_page=5`);
+    if (!Array.isArray(l)) throw new Error('Incomplete PR history for ' + r.branch);
+    // The most recent PR on a reused branch is authoritative, not any older merged PR.
+    const p = [...l].sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))[0];
     if (p) put(repository, p, false);
     else {
       const t = last(repository, r.branch);

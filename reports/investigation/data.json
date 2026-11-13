@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T11:14:59.674Z",
+  "generated_at": "2026-11-13T11:17:29.250Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -485,9 +485,9 @@
     },
     {
       "id": 28,
-      "task": "ТОЛКАЧ #220: конфликт устранён [merge](https://github.com/mpaykin1/meta6-lab/commit/fb2cde9aa428959c33a44dd0af6d14dcf73e0ef2); локально verify и 11/11 мутаций PASS, Actions на новом HEAD ожидаются; защищённое слияние только Claude",
+      "task": "ТОЛКАЧ #220: конфликт устранён [merge](https://github.com/mpaykin1/meta6-lab/commit/fb2cde9aa428959c33a44dd0af6d14dcf73e0ef2); локально verify и 11/11 мутаций PASS, Actions на новом HEAD ожидаются; защищённое слияние только Claude; УСКОРЕНИЕ 1.1–1.3: fail-closed API и таблица FINISH [PR #220](https://github.com/mpaykin1/meta6-lab/pull/220)",
       "project": "МГЛ",
-      "owner": "Кто: толкач",
+      "owner": "чат ChatGPT (УСКОРЕНИЕ, продолжение существующего PR #220)",
       "branch": "lab/zadachi-conflicts",
       "status": "в работе",
       "original_status": "⚠ молчит больше часа",
@@ -548,7 +548,7 @@
       "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md",
       "taken_at": "2026-11-13 10:53",
-      "last_commit_at": "[#72: main merge](https://github.com/mpaykin1/meta6-lab/commit/9cc6958b0d34c6898a373dfd1d058e5fa539512d); [#278: main merge](https://github.com/mpaykin1/meta6-lab/commit/1677c68eed711adfba97841c66ae54cd2c2f3984); [#239: closed](https://github.com/mpaykin1/meta6-lab/pull/239); [#264: storm halo](https://github.com/mpaykin1/meta6-lab/commit/21d89026cc160345cd94fbd29cf7eab2a270cc67); [#262: CI cache](https://github.com/mpaykin1/meta6-lab/commit/d286205def63e2ef63d4605d95f5a3478b8c032e)",
+      "last_commit_at": "[#72: merge main](https://github.com/mpaykin1/meta6-lab/commit/9cc6958b0d34c6898a373dfd1d058e5fa539512d); [#278: API-403 rule](https://github.com/mpaykin1/meta6-lab/commit/e66a271095c39b65c9bdf22c55450d5dd043d1f9); [#239: closed](https://github.com/mpaykin1/meta6-lab/pull/239); [Archer #264](https://github.com/mpaykin1/meta6-lab/commit/21d89026cc160345cd94fbd29cf7eab2a270cc67); [CI #262](https://github.com/mpaykin1/meta6-lab/commit/d286205def63e2ef63d4605d95f5a3478b8c032e)",
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
@@ -3154,6 +3154,20 @@
       "problem": "ASSET CHECK v2 переименовывал A1/A6/A7 и заменял старые assertions; восстановлены все строки прежнего теста и стабильные диагностические ID",
       "detection": "PR #267, сравнение с main: test_check_pack.py только 4 добавления/0 удалений",
       "trap": "automation/asset-check/mutate_bot.py: 3 мутации переименования ID; прежние test_A1_no_manifest/test_A6_no_license/test_A7_no_content_flags сохранены"
+    },
+    {
+      "id": 1106,
+      "date": "13.11.2026",
+      "problem": "ZADACHI watch подменял ошибки API 403/429 пустыми списками, из-за чего числа зависших/заброшенных колебались без реальных PR изменений",
+      "detection": "[история ZADACHI](https://github.com/mpaykin1/meta6-lab/commits/main/ZADACHI.md)",
+      "trap": "`scripts/zadachi/mutate.mjs`: API 403 как пустой список и API 429 как пустые checks; [патч](https://github.com/mpaykin1/meta6-lab/commit/f751682d698d8923b1936da59fe47d3a7613c336)"
+    },
+    {
+      "id": 1107,
+      "date": "13.11.2026",
+      "problem": "STATUS скрывал 7 зелёных FINISH из-за отсутствия progress.json и считал изменение времени новыми фактами",
+      "detection": "[таблица FINISH](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/FINISH.md)",
+      "trap": "`scripts/status/selftest.mjs`: false-green-without-run-link, hourly-gate-removed, timestamp-trigger-misreported-as-fact; [патч](https://github.com/mpaykin1/meta6-lab/commit/b4254e356b689d023afdcf2d8a69379345c42add)"
     }
   ],
   "warnings": [

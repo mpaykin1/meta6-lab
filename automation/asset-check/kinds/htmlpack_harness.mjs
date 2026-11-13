@@ -7,6 +7,7 @@ import {pathToFileURL} from 'node:url';
 import {inflateSync} from 'node:zlib';
 
 const [refPath, packPath] = process.argv.slice(2);
+const CAMERA_TOLERANCE=3.5;
 const result = {ok: false, reference: null, candidate: null};
 const chrome = [process.env.CHROME_BIN, '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser'].find(p => p && existsSync(p));
 
@@ -110,7 +111,20 @@ async function measure(browser, file, isPack) {
     for (const id of ids) {
       await page.locator('#mb').click();
       await page.locator('#ls button[data-id="' + id + '"]').click();
-      await page.waitForTimeout(140);
+      // Оцениваем ассет только после того, как камера действительно достигла
+      // выбранного пункта меню; иначе измеряется переход между чужими объектами.
+      const fixedCamera = await page.evaluate(id => {
+        const asset = window.__PACK__.items.find(item => item.id === id);
+        return asset && !asset.follow ? asset.cam || null : null;
+      }, id);
+      if (fixedCamera) {
+        await page.waitForFunction(({target,tolerance}) => {
+          const p = window.__STATE__().cam;
+          return Math.hypot(p[0]-target[0],p[1]-target[1],p[2]-target[2]) < tolerance;
+        }, {target:fixedCamera,tolerance:CAMERA_TOLERANCE},
+           {timeout:4500,polling:80});
+      } else await page.waitForTimeout(1000);
+      await page.waitForTimeout(150);
       const first = pixels(await page.screenshot({type: 'png'}));
       const fps = await page.evaluate(() => new Promise(done => {
         let n = 0, started = performance.now();

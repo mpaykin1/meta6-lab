@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| 🔨 взято | АССЕТЫ: Туманные шпили | МГЛ | ChatGPT | `lab/assets-tumannye-shpili-20261114` | — | 2026-11-13 20:08 UTC | [5214228c](https://github.com/mpaykin1/meta6-lab/commit/5214228c8f4c77f4e4831b77dddb4f6f39c598e8) |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | feat(asset-check): HTMLPACK visual quality bot + Tumannye Shpili 26→32 | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/asset-pack-shpili` | [#296](https://github.com/mpaykin1/meta6-lab/pull/296) | 2026-11-13 15:48 | 2026-11-13 17:05 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | АССЕТ-ПАК: Туманные шпили | МГЛ | ChatGPT | `lab/asset-pack-shpili` | [#296](https://github.com/mpaykin1/meta6-lab/pull/296) | 2026-11-13 15:33 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Остров последнего аптекаря · Глава I «Тихолист» (демо + этапы для GPT) | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/ostrov-aptekarya` | [#295](https://github.com/mpaykin1/meta6-lab/pull/295) | 2026-11-13 15:21 | 2026-11-13 15:21 |

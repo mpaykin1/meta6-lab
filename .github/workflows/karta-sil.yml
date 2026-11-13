@@ -29,9 +29,11 @@ jobs:
       - run: node --test scripts/karta-sil/mutate-karta-sil.mjs
       - run: node --test scripts/dispetcher/test/*.test.mjs
       - name: Build map (fail closed on any GitHub API error)
+        id: build
+        continue-on-error: true
         if: github.ref == 'refs/heads/main'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/karta-sil/run.mjs
       - name: Publish only real changes
         if: github.ref == 'refs/heads/main'
@@ -42,3 +44,6 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'chore: update skill map from PR outcomes'
           git push
+      - name: Preserve failure after publishing no-data state
+        if: github.ref == 'refs/heads/main' && steps.build.outcome != 'success'
+        run: exit 1

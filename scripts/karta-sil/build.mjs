@@ -1,8 +1,9 @@
 import fs from 'node:fs/promises';
+import {execFile as runCommand} from 'node:child_process';
+import {promisify} from 'node:util';
 
-const repo = process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab';
-const token = process.env.GITHUB_TOKEN;
-const root = 'https://api.github.com/repos/' + repo;
+const gh = promisify(runCommand);
+const root = 'repos/{owner}/{repo}';
 const since = new Date(Date.now() - 14 * 86400000);
 const actors = ['автозадача', 'чат ChatGPT', 'неизвестно'];
 
@@ -14,12 +15,17 @@ export function requireResponse(response, endpoint) {
 }
 
 async function api(endpoint) {
-  if (!token) throw new Error('GITHUB_TOKEN: нет данных');
-  const response = requireResponse(await fetch(root + endpoint, {
-    headers: { Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28', 'User-Agent': 'meta-games-karta-sil' }
-  }), endpoint);
-  const value = await response.json();
+  let stdout;
+  try {
+    ({stdout} = await gh('gh', ['api', root + endpoint], {maxBuffer: 32 * 1024 * 1024}));
+  } catch (error) {
+    const status = Number(/HTTP\s+(\d+)/.exec(String(error.stderr || ''))?.[1] || 0);
+    requireResponse({status, ok:false}, endpoint);
+    throw error;
+  }
+  let value;
+  try { value = JSON.parse(stdout); }
+  catch { throw new Error('GitHub API JSON: нет данных (' + endpoint + ')'); }
   if (value === null) throw new Error('GitHub API null: ' + endpoint);
   return value;
 }
@@ -210,4 +216,11 @@ export async function main() {
   const json = stableJson(data);
   const old = await fs.readFile('automation/karta-sil.json','utf8');
   if (json !== old) await fs.writeFile('automation/karta-sil.json', json);
+}
+export async function markNoData() {
+  const filename = 'automation/karta-sil.json';
+  const previous = JSON.parse(await fs.readFile(filename,'utf8'));
+  const failed = stableJson({schema:1,status:'нет данных',periodDays:14,
+    types:previous.types,metrics:[],prs:[]});
+  if (stableJson(previous) !== failed) await fs.writeFile(filename,failed);
 }

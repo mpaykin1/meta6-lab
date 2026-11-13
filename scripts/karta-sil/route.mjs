@@ -9,7 +9,9 @@ export function routeFor(card, map) {
   if (zone === 'жёлтая' && (entry?.changedFiles ?? Infinity) <= 5) {
     return {target:'auto',zone,note:'маленькими шагами: 1 PR, не более 5 файлов'};
   }
-  const failures = (String(card.body || '').match(/неудач|попытка [12] из 2/gi) || []).length;
+  const reports = [...String(card.body || '').matchAll(/^КАРТА СИЛ: CHAT FAIL #(\d+) /gm)];
+  const failures = new Set(reports.map(x => x[1])).size +
+    (/попытка 2 из 2/i.test(card.body || '') ? 2 : 0);
   if (failures >= 2 || /НУЖЕН CLAUDE/i.test(card.body || '')) {
     return {target:'claude',zone,note:'две неудачи или передано Claude'};
   }

@@ -9,3 +9,5 @@
 | 5. Развитие | не готово: нужен свежий срез GitHub после запуска | [Actions](https://github.com/mpaykin1/meta6-lab/actions/workflows/karta-sil.yml) | 2026-11-13 19:07 |
 
 Обработано до: main 5fb9af2898fbc2b132a8700cda9be8fc80fc546d.
+
+- CI #43489853650 и #43489853404 выявили несовместимость статического импорта с существующими мутациями; #43489853390 отверг `process.env` (#К4). Исправление — динамический импорт и GitHub CLI, красная карта не считается пустой; [прогоны](https://github.com/mpaykin1/meta6-lab/actions/runs/43489853650).

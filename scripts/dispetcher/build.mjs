@@ -1,4 +1,3 @@
-import {routeFor} from '../karta-sil/route.mjs';
 import fs from 'node:fs/promises';
 const {GITHUB_REPOSITORY: repo='mpaykin1/meta6-lab',GITHUB_TOKEN: token}=process.env;
 const root='https://api.github.com/repos/'+repo;
@@ -57,6 +56,7 @@ export async function main(){
  const finishIds=[...finish.matchAll(/^\|\s*([MBLP]\d+)\s*\|[^|]*\|[^|]*\|\s*НЕТ\b/gm)].map(m=>m[1]);
  let previous='';try{previous=await fs.readFile('DISPETCHER.md','utf8')}catch{}
  const map=JSON.parse(await fs.readFile('automation/karta-sil.json','utf8'));
+ const {routeFor}=await import('../karta-sil/route.mjs');
  const forChat=[];
  const cards=[],claude=[];
  for(const t of tasks){
@@ -89,7 +89,7 @@ export async function main(){
  cards.push(c);
  }
  const output=render(cards,claude,previous);
- assertNotEmpty(await fs.readFile('ZADACHI.md','utf8'),cards);
+ assertNotEmpty(await fs.readFile('ZADACHI.md','utf8'),[...cards,...forChat,...claude]);
  await fs.writeFile('DISPETCHER.md',output);
  const chat='# ТОЛКНУТЬ — обычный чат ChatGPT\n\n'+forChat.map(c=>
  '- [PR #'+c.id+'](https://github.com/'+repo+'/pull/'+c.id+') · '+c.routing.zone+

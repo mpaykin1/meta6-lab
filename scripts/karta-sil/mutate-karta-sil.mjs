@@ -35,3 +35,8 @@ test('мутация: красная зона никогда не выдаётс
   assert.equal(routeFor({id:10},yellow).target,'auto');
   assert.equal(routeFor({id:10},{...yellow,prs:[{number:10,type:'game_fix',changedFiles:6}]}).target,'chat');
 });
+test('мутация: две документированные неудачи чата => Claude',()=>{
+ const map={schema:1,status:'полная',prs:[{number:9,type:'repo_clean',changedFiles:2}],
+ metrics:[{type:'repo_clean',actor:'автозадача',zone:'красная'}]};
+ assert.equal(routeFor({id:9,body:'КАРТА СИЛ: CHAT FAIL #1 https://github.com/x\nКАРТА СИЛ: CHAT FAIL #2 https://github.com/y'},map).target,'claude');
+});

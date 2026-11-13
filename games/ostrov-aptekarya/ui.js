@@ -80,6 +80,7 @@ export function createUI(handlers) {
   root.addEventListener('click', e => {
     let m = e.target.closest('[data-m]')?.dataset.m;
     if (!m && e.target.closest('#ap-title')) m = 'start';   // стартовая карточка нажимается целиком
+    if (!m && e.target.closest('#ap-end') && !$('#ap-next').hidden) m = 'next';
     if (!m) return;
     if (m === 'start') { $('#ap-title').hidden = true; handlers.onStart(); }
     if (m === 'resume') toggleMenu(false);

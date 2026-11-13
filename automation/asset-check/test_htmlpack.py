@@ -42,7 +42,7 @@ class HtmlPackTraps(unittest.TestCase):
     def metrics(self, new=None, fps=45):
         ref = {name: {"visible": .14, "detail": .07, "motion": .08, "colors": 130,
                       "fps": 45, "isolated": 1} for name in self.old}
-        cand = dict(ref)
+        cand = {name: dict(metric) for name, metric in ref.items()}
         if new is not None:
             cand["new_shadow"] = dict(visible=.16, detail=.09, motion=.1, colors=140,
                                       fps=fps, isolated=.16)

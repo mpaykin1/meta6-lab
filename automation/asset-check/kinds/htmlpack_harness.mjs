@@ -152,7 +152,7 @@ async function textOutsideMenu(page) {
 function instrumentIsolation(source) {
   const marker='/* ============ РЕНДЕР ============ */';
   if(!source.includes(marker))throw Error('HP10: render insertion point absent');
-  const hook=String.raw\`
+  const hook=String.raw`
 /* ASSET-CHECK ONLY: per-object isolation, never shipped into the reference. */
 const __acArch=(tex)=>scene.children.filter(o=>o.material?.uniforms?.map?.value===tex);
 const __acAllArch=[texCath,texObelisk,texWall,texAnt,texDome,texCliff,texGate];
@@ -196,7 +196,7 @@ window.__AC_APPLY__=()=>{
  }
 };
 window.__AC_RESTORE__=()=>{for(const fn of __acUndo)fn();__acUndo=[]};
-\`;
+`;
   source=source.replace(marker,hook+'\n'+marker);
   const clockLine='const dt=Math.min(clock.getDelta(),.05);';
   if(!source.includes(clockLine))throw Error('HP10: clock insertion point absent');

@@ -104,15 +104,15 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
     }
     // Ива не нападает, когда отрезана дверью, и не убивает аптекаря.
     if(!finishing && !doorLocked && invulnerable<=0 &&
-      iva.state.mode==='sleepwalk' && near(hero.position,iva.group.position)<1.02){
-      caughtCount++;invulnerable=4;iva.set('listen',4);onCaught();
+      iva.state.mode==='sleepwalk' && near(hero.position,iva.group.position)<.82){
+      caughtCount++;invulnerable=5;iva.set('listen',5);onCaught();
     }
   }
   function resetAfterCaught(){
     hero.position.copy(START);fixSpot(hero.position);
     iva.group.position.set(-14.7,0,3.7);fixSpot(iva.group.position);
     doors.forEach(d=>{d.time=0;d.cooldown=0;});
-    iva.set('sleepwalk');invulnerable=3;
+    iva.set('sleepwalk');invulnerable=5;
   }
   function goal() {
     if(!active || finishing)return null;

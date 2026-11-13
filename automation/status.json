@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-13T15:05:18.257Z",
+  "generated_at": "2026-11-13T15:28:13.997Z",
   "sha": {
-    "lab": "8ed8f02596ce2c997b01c3492ec842b67fe484e6",
+    "lab": "38bef549d89a7141f65c34e7898daf765367fc0a",
     "mg": "1bea203fb63d7c27c29a5643e2f38e4554a658c1"
   },
   "checked": {
@@ -11,6 +11,13 @@
   "run": "нет данных",
   "review": {
     "protected": [
+      {
+        "number": 293,
+        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
       {
         "number": 292,
         "sha": "5df54dc0764daa77154709207e612b311127108d",
@@ -168,11 +175,6 @@
         "workflow": "MG Dispatcher",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43418238664",
         "step": "Run node scripts/dispetcher/run.mjs"
-      },
-      {
-        "workflow": "STOROZHA weekly maintenance",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43417990305",
-        "step": "Close genuinely stale PRs without deleting branches and write daily report"
       }
     ],
     "redMg": [],
@@ -342,11 +344,21 @@
     ]
   },
   "pr": {
-    "open": 49,
+    "open": 50,
     "conflicts": "нет данных",
-    "merged": 29,
+    "merged": 31,
     "closed": 66,
     "mergedItems": [
+      {
+        "number": 293,
+        "title": "ASSET CHECK 2.2: «не хуже эталона» + эталон «Туманные шпили»",
+        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716"
+      },
+      {
+        "number": 294,
+        "title": "Эталон «Туманные шпили» (только добавление)",
+        "sha": "f55c2e87fbd99f261977dbe7da58700a0a73a50e"
+      },
       {
         "number": 292,
         "title": "ASSET CHECK 2.1: бот проверяет ассеты INK «Павший великан»",
@@ -494,6 +506,13 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 293,
+        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
       {
         "number": 292,
         "sha": "5df54dc0764daa77154709207e612b311127108d",
@@ -649,7 +668,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1915,
+      "count": 1927,
       "folders": "нет данных"
     },
     "mg": {

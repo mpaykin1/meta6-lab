@@ -344,6 +344,17 @@ class KindTraps(unittest.TestCase):
         self.assertEqual(set(r.kinds) & {"model3d", "audio"}, {"model3d", "audio"})
 
 
+class HtmlPackIsolatedCompareWiringTrap(unittest.TestCase):
+    def test_HP13_requires_cropped_object_screenshots(self):
+        root = Path(__file__).resolve().parent
+        checker = (root / "kinds/htmlpack.py").read_text("utf-8")
+        harness = (root / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn('if not compare.is_file():', checker)
+        self.assertIn('size != (1440, 316 * len(new_ids))', checker)
+        self.assertIn('if(delta<=23){pixels[i+3]=0;continue}', harness)
+        self.assertIn('report.previews[id]=await isolatePreview(page,second.png,second.offPng)', harness)
+
+
 class HtmlPackPartsMotionWiringTrap(unittest.TestCase):
     def test_HP12_animated_characters_need_deforming_pixels(self):
         root = Path(__file__).resolve().parent

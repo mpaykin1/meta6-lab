@@ -2182,21 +2182,6 @@
       "sha256": "197ce92b01adeb8cf8dff305780f65aa9c2ed8e6de8d78775eae2febfe41323a"
     },
     {
-      "id": "3cc489ddcef3b5194b380987",
-      "game": "twilight-isles",
-      "kind": "solution",
-      "name": "inline-script@64420",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/twilight-isles/index.html",
-      "lines": [
-        486,
-        8099
-      ],
-      "sha256": "a5bb0f7803d7745605c1afa03effb7d849a84610ed11c3ba5a88e5c0c9945ae4"
-    },
-    {
       "id": "3d130c2fed23ccb3930e27a8",
       "game": "twilight-isles",
       "kind": "solution",
@@ -3321,6 +3306,21 @@
         4898
       ],
       "sha256": "272ab85837fa8a6346bc8c026d3d09004cafb3e8d10d4ae6e45db9e37c1f656d"
+    },
+    {
+      "id": "67cdd915e64c8479be03ae9b",
+      "game": "twilight-isles",
+      "kind": "solution",
+      "name": "inline-script@64420",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/twilight-isles/index.html",
+      "lines": [
+        486,
+        8125
+      ],
+      "sha256": "35f9eb01b7d888d5f79b22e10a83eaa4551edbab7bbc00d4479da8ef466727ce"
     },
     {
       "id": "6841691944d4f8c0aba21038",

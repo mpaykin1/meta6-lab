@@ -39,6 +39,17 @@ function fixtures(assessMotion, assessFixedViewport, assessB2Probe) {
   assert.equal(assessB2Probe([firstMove, ...subsequentMovement]).status, 'MOVED');
   const idleAfterMove = interval(state(0.5, 0), state(0.5, 0), 2200, false);
   assert.equal(assessB2Probe([firstMove, idleAfterMove]).status, 'OBSERVING');
+  // 2.3 s split by an idle gap is not one continuous hold; only the last 1.1 s counts.
+  const interrupted = [
+    firstMove,
+    interval(state(0.5, 0), state(0.7, 0), 1200),
+    interval(state(0.7, 0), state(0.7, 0), 450, false),
+    interval(state(0.7, 0), state(0.9, 0), 1100)
+  ];
+  assert.equal(assessB2Probe(interrupted).status, 'OBSERVING');
+  assert.equal(assessB2Probe([
+    ...interrupted, interval(state(0.9, 0), state(1.2, 0), 900)
+  ]).status, 'MOVED');
   assert.equal(assessMotion([...still.slice(0, 2), firstMove]).status, 'MOVED');
   assert.equal(assessMotion(jitter).status, 'STUCK');
   assert.equal(assessMotion(falseProgress).status, 'STUCK');

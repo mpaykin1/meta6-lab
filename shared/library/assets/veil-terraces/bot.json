@@ -20,6 +20,6 @@
     "r": 0.09
   },
   "jumpKey": "Space",
-  "jumpButton": null,
+  "jumpButton": { "x": 0.855, "y": 0.909 },
   "ignoreConsole": []
 }

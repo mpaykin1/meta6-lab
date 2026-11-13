@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "copy_limit_bytes": 50000000,
-  "copied_bytes": 49666370,
+  "copied_bytes": 49666392,
   "games": [
     {
       "game": "archer-in-the-fog",
@@ -157380,7 +157380,7 @@
       "kind": "json-data",
       "purpose": [],
       "source_path": "games/veil-terraces/bot.json",
-      "sha256": "fdba66bf13af0c424cd78ef2bc488ef131e86be5ef74f2b8385af74b4d6acd55",
+      "sha256": "593263e2872187d69814aac0bdbf799a0de2f44301b62533c03e3d3c298a5198",
       "file": "shared/library/assets/veil-terraces/bot.json"
     },
     {

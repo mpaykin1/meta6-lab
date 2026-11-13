@@ -48,7 +48,7 @@ renderer.setPixelRatio(1);renderer.autoClear=true;renderer.setClearColor(0x06182
 /* ============ СОСТАВ ПАКА (скрытый счётчик, виден только в коде/консоли) ============ */
 const GX=15,GY=45,GZ=-44;                       // врата
 const PLAZA={cam:[0,1.3,14],look:[0,8,-60]};
-const PACK={name:'Туманные шпили',version:'1.1.0',items:[
+const PACK={name:'Туманные шпили',version:'1.2.0',items:[
  {id:'sky',n:'Небо и световые столбы',k:'2D',m:'plaza',cam:[0,6,14],look:[0,40,-80]},
  {id:'fog',n:'Слои тумана',k:'2D',m:'plaza',cam:[-6,5,6],look:[-4,7,-50]},
  {id:'obelisk',n:'Обелиск-гигант',k:'2.5D',m:'plaza',cam:[0,10,-14],look:[0,42,-78]},
@@ -81,7 +81,14 @@ const PACK={name:'Туманные шпили',version:'1.1.0',items:[
  {id:'gate-bridge',n:'Мост осколков врат',k:'2.5D',m:'plaza',cam:[12,14,8],look:[12,13,-40],isNew:true},
  {id:'dawn-sentinel',n:'Спутник летуна — хранитель',k:'2.5D',m:'flight',follow:'hero',d:13,isNew:true},
  {id:'mirror-seed',n:'Сердце зеркальной воды — усиление',k:'2.5D',m:'flight',cam:[3,45,-19],look:[3,43,-40],isNew:true},
- {id:'storm-heart',n:'Багровая гроза над шпилями',k:'2D',m:'plaza',cam:[-34,48,-14],look:[-34,46,-43],isNew:true}
+ {id:'storm-heart',n:'Багровая гроза над шпилями',k:'2D',m:'plaza',cam:[-34,48,-14],look:[-34,46,-43],isNew:true},
+
+ {id:'mask-choir',n:'Хор пустых масок',k:'2.5D',m:'flight',cam:[25,48,-12],look:[25,44,-40],isNew:true},
+ {id:'bell-spire',n:'Колокольня расколотых шпилей',k:'2.5D',m:'plaza',cam:[-42,21,-9],look:[-42,18,-47],isNew:true},
+ {id:'mirror-whirlpool',n:'Воронка зеркальной воды',k:'2D',m:'plaza',cam:[0,14,-17],look:[0,2,-54],isNew:true},
+ {id:'lantern-moth',n:'Мотылёк — спутник летуна',k:'2.5D',m:'flight',follow:'hero',d:15,isNew:true},
+ {id:'echo-keystone',n:'Ключ эха — усиление рывка',k:'2.5D',m:'flight',cam:[8,47,-13],look:[8,46,-40],isNew:true},
+ {id:'silver-squall',n:'Серебряный ливень',k:'2D',m:'plaza',cam:[-34,46,-13],look:[-34,46,-43],isNew:true}
 ]};
 PACK.count=PACK.items.length;PACK.by={d2:PACK.items.filter(i=>i.k==='2D').length,d25:PACK.items.filter(i=>i.k==='2.5D').length,d3:0};
 window.__PACK__=PACK;try{console.info('[PACK]',PACK.name,PACK.version,'ассетов:',PACK.count,PACK.by)}catch(e){}
@@ -817,6 +824,255 @@ const SHPILI_PLUS=(()=>{
      }petals(t);
    };
  }
+
+ const engrave=(parent,seed,w,h,col)=>{
+  const tx=mk(1024,1024,(ctx,W,H)=>{
+   const R=rng(seed);
+   ctx.lineJoin='round';ctx.lineCap='round';
+   for(let i=0;i<520;i++){
+    let x=R()*W,y=R()*H;
+    const n=3+Math.floor(R()*6),len=18+R()*104,a=R()*6.283;
+    ctx.beginPath();ctx.moveTo(x,y);
+    for(let j=0;j<n;j++){
+     const d=a+.54*Math.sin(j*1.8+i*.13)+(R()-.5);
+     x+=Math.cos(d)*len/n;y+=Math.sin(d)*len/n;ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle=i%5===0?'rgba(255,215,233,.92)':i%3===0?
+      'rgba(115,225,250,.8)':'rgba(205,129,189,.55)';
+    ctx.lineWidth=3+R()*7;ctx.stroke();
+   }
+   for(let i=0;i<170;i++){
+    const x=R()*W,y=R()*H,r=12+R()*55,a=(R()-.5)*2.7;
+    ctx.save();ctx.translate(x,y);ctx.rotate(a);
+    ctx.beginPath();ctx.moveTo(-r*.5,-r*.3);ctx.lineTo(-r*.24,-r*.72);
+    ctx.lineTo(r*.54,-r*.32);ctx.lineTo(r*.88,r*.33);
+    ctx.lineTo(-r*.48,r*.58);ctx.closePath();
+    ctx.fillStyle=i%4===0?'rgba(255,177,216,.5)':i%4===1?
+      'rgba(100,219,245,.46)':'rgba(19,46,78,.62)';
+    ctx.fill();ctx.strokeStyle='rgba(220,244,251,.52)';
+    ctx.lineWidth=3+R()*5;ctx.stroke();ctx.restore();
+   }
+  });
+  const mat=new T.MeshBasicMaterial({map:tx,transparent:true,opacity:.89,depthTest:false,
+    depthWrite:false,side:T.DoubleSide,blending:T.AdditiveBlending});
+  const plane=mesh(parent,new T.PlaneGeometry(w,h),0xffffff,[0,0,-1.05]);
+  plane.material=mat;return plane;
+ };
+
+
+ // Партия II: хор пустых масок. Каждая маска — отдельное живое существо, не копия врага.
+ {
+  const id='mask-choir',g=newGroup(id,25,44,-40),flock=[];
+  aura(g,23,0xc44b93,.58);
+  const etch=engrave(g,5801,34,29,0xefaac5);
+  for(let i=0;i<11;i++){
+   const a=i*2.399,unit=new T.Group();g.add(unit);
+   const head=ball(unit,.9+(i%4)*.11,0xc4b6c6,[0,0,0]);
+   head.scale.set(.82,1.18,.44);
+   ball(unit,.56,0x23324d,[0,-.2,.45]).scale.set(.87,.65,.45);
+   for(const side of [-1,1]){
+    ball(unit,.15,0xff83bb,[side*.33,.2,.46]);
+    spike(unit,.19,1.22,0x8e587e,[side*.53,.87,.04],-side*.32);
+    beam(unit,[side*.4,-.5,.3],[side*(.62+.11*i),-1.36,.2],.067,0xffb3cd,.82);
+   }
+   for(let j=0;j<6;j++)spike(unit,.075,.38,0xffdce8,[(j-2.5)*.17,-.76,.49],Math.PI);
+   const tail=banners(unit,3,3,0xbb6da0,198+i*17);
+   flock.push({unit,a,tail,r:3.5+(i%5)*.9});
+  }
+  own[id].tick=(t)=>{
+   g.rotation.z=.035*Math.sin(t*.43);
+   etch.rotation.z=.018*Math.sin(t*.36);
+   for(let i=0;i<flock.length;i++){
+    const f=flock[i],w=t*.3+f.a;
+    f.unit.position.set(Math.sin(w)*f.r,Math.cos(w*1.18)*3.9,1.8*Math.cos(w*.65));
+    f.unit.rotation.z=.24*Math.sin(t*.85-i*.4);
+    f.unit.rotation.y=.34*Math.sin(t*.45+i*.7);
+    f.unit.scale.setScalar(1+.13*Math.sin(t*1.15-i*.5));
+    f.tail(t);
+   }
+  };
+ }
+ // Колокольня за вратами: надломленные вертикали, парящие обломки и голос немого колокола.
+ {
+  const id='bell-spire',g=newGroup(id,-42,13,-47),shaft=new T.Group();g.add(shaft);
+  aura(g,30,0x86cce8,.64);
+  const etch=engrave(g,18283,28,44,0x93e8ff);
+  const ribs=[];
+  for(let i=0;i<13;i++){
+   const z=i%4*.38,x=(i-6)*.68;
+   const r=new T.Group();r.position.set(x,0,z);shaft.add(r);
+   beam(r,[0,-11,0],[Math.sin(i*.7)*1.5,13+(i%4)*1.4,0],.13+(i%3)*.034,i%3?0x2b5473:0x6faabd,.88);
+   if(i%2===0)spike(r,.44,3,0x75adc0,[Math.sin(i)*.85,12+i%3,0],(i-6)*.08);
+   ribs.push(r);
+  }
+  for(let k=0;k<8;k++){
+   const y=-7+k*3.1;
+   ring(shaft,4+(k%3)*.2,0x91c7db,[0,y,.45],.5);
+   for(let j=0;j<4;j++){
+    const a=j*1.57+k*.32;
+    beam(shaft,[Math.cos(a)*3.6,y,0],[Math.cos(a+0.3)*2.3,y+2.2,0],.095,0xe3a8c2,.8);
+   }
+  }
+  const bell=new T.Group();bell.position.set(0,18,1.3);shaft.add(bell);
+  mesh(bell,new T.CylinderGeometry(.72,2.4,3.4,14,1,true),0x7099aa,[0,0,0],.95);
+  ball(bell,.46,0xffb8cd,[0,-2.2,.3]);
+  ring(bell,2.7,0xff8cb2,[0,-1.65,.2],.85);
+  const debris=[];
+  for(let i=0;i<25;i++){
+   const a=i*2.399,r=6+(i%7)*.36;
+   const shard=spike(g,.2+(i%4)*.06,1.1+(i%6)*.2,i%3?0xaccbce:0xbe719a,
+     [Math.cos(a)*r,-7+(i*2.83)%29,Math.sin(a)*2],a);
+   debris.push({shard,a});
+  }
+  own[id].tick=t=>{
+   shaft.rotation.z=.042*Math.sin(t*.44);
+   bell.rotation.z=.17*Math.sin(t*.75);
+   etch.position.x=.3*Math.sin(t*.28);
+   for(let i=0;i<ribs.length;i++)ribs[i].rotation.z=.016*Math.sin(t*.62-i*.26);
+   for(let i=0;i<debris.length;i++){
+    const o=debris[i];
+    o.shard.position.y=-7+(i*2.83)%29+.48*Math.sin(t*.61-o.a);
+    o.shard.rotation.z=o.a+.27*Math.sin(t*.8+i*.43);
+   }
+  };
+ }
+ // Воронка зеркальной воды: видимый закрученный след, не просто фон.
+ {
+  const id='mirror-whirlpool',g=newGroup(id,0,2,-54);
+  aura(g,25,0x51c9de,.64);
+  const etch=engrave(g,22709,38,29,0xa5f8f7);
+  const ripples=[];
+  for(let i=0;i<13;i++){
+   const r=1.2+i*1.32;
+   const hoop=ring(g,r,i%3===0?0xffa6c8:0x71c4e0,[0,0,.35+i*.014],.28+.4*(1-i/13));
+   hoop.scale.y=.48+(i%3)*.1;
+   ripples.push(hoop);
+  }
+  const shards=[];
+  for(let i=0;i<38;i++){
+   const a=i*2.399,r=.8+Math.sqrt(i)*2.2;
+   const s=spike(g,.11+(i%5)*.045,.48+(i%6)*.17,i%3===0?0xffbcdb:0x8de7ed,
+      [Math.cos(a)*r,Math.sin(a)*r*.52,1],a+Math.PI*.5);
+   shards.push({s,a,r});
+  }
+  const pearl=ball(g,1.1,0xe4f9f3,[0,0,2.5]);
+  own[id].tick=t=>{
+   etch.rotation.z=.045*Math.sin(t*.35);
+   pearl.scale.setScalar(1+.2*Math.sin(t*1.35));
+   for(let i=0;i<ripples.length;i++){
+    ripples[i].rotation.z=.14*Math.sin(t*.52-i*.3);
+    ripples[i].scale.x=1+.09*Math.sin(t*.84-i*.24);
+   }
+   for(let i=0;i<shards.length;i++){
+    const o=shards[i],w=o.a+t*(.13+.02*(i%3));
+    o.s.position.x=Math.cos(w)*o.r;
+    o.s.position.y=Math.sin(w)*o.r*.52;
+    o.s.rotation.z=w+Math.PI*.5;
+   }
+  };
+ }
+ // Помощник летуна: фонарь-мотылёк плавно догоняет героя и разворачивает крылья-щит.
+ {
+  const id='lantern-moth',g=newGroup(id,-5,47,-40),body=new T.Group();g.add(body);
+  aura(g,18,0xeab3d1,.68);
+  const etch=engrave(body,31209,26,24,0xffc9e0);
+  const wings=[];
+  for(const side of [-1,1]){
+   const wing=new T.Group();body.add(wing);wings.push(wing);
+   for(let i=0;i<8;i++){
+    const a=i*.26+.15,len=2.7+(i%4)*.46;
+    beam(wing,[0,0,0],[side*(1.2+Math.cos(a)*len),Math.sin(a)*len,0],.095,
+      i%3?0x6aabc4:0xe3a6c9,.9);
+    ball(wing,.17,0xffdbef,[side*(1.2+Math.cos(a)*len),Math.sin(a)*len,.5]);
+   }
+   spike(wing,.8,5.9,0xa1cbd2,[side*2.3,0,-.4],-side*1.1);
+  }
+  ball(body,1.4,0x315b75,[0,0,1]);ball(body,.9,0xffd1c0,[0,.4,1.9]);
+  for(let j=0;j<9;j++)ring(body,1.65+j*.22,0x9cf5ef,[0,0,.15-j*.12],.12+(j%2)*.13);
+  const shield=ring(g,5.2,0xb8fff9,[0,0,1.4],.36);
+  own[id].tick=t=>{
+   g.position.set(hp.x+3.1+.7*Math.sin(t*.9),hp.y+3.2+.5*Math.sin(t*1.25),hp.z+.55);
+   body.rotation.z=.12*Math.sin(t*.45);
+   for(let i=0;i<wings.length;i++)wings[i].rotation.y=(i?1:-1)*(.4+.23*Math.sin(t*1.8+i*.3));
+   shield.scale.setScalar(.96+.14*Math.sin(t*1.4));
+   etch.rotation.z=.04*Math.sin(t*.7);
+  };
+ }
+ // Ключ эха: летун получает ускорение рывка и световой отзвук удара, если взял предмет.
+ {
+  const id='echo-keystone',g=newGroup(id,8,46,-40),core=new T.Group();g.add(core);
+  aura(g,20,0xff92c2,.66);
+  const etch=engrave(g,58342,28,27,0xffcce1);
+  const crystal=mesh(core,new T.OctahedronGeometry(2.1,2),0xdac9eb,[0,0,1.5],.86);
+  crystal.scale.set(.66,1.4,.44);
+  const petals=[];
+  for(let i=0;i<21;i++){
+   const a=i*2.399,r=2.9+(i%5)*.35;
+   const tip=spike(core,.16+(i%3)*.08,1.1+(i%5)*.24,i%3?0xffaed0:0x88dfea,
+       [Math.cos(a)*r,Math.sin(a)*r,1],a);
+   petals.push({tip,a,r});
+  }
+  const loops=[];
+  for(let i=0;i<8;i++)loops.push(ring(core,2.5+i*.48,i%2?0x9dece8:0xffacd3,
+     [0,0,-.7-i*.16],.44));
+  const pulse=ring(g,6.2,0xb1fff2,[0,0,1.3],.65);
+  own[id].tick=t=>{
+   core.rotation.z=.15*Math.sin(t*.38);
+   crystal.rotation.y=t*.23;
+   etch.rotation.z=.02*Math.sin(t*.43);
+   for(let i=0;i<loops.length;i++)loops[i].rotation.y=.43*Math.sin(t*.8+i*.55);
+   for(let i=0;i<petals.length;i++){
+    const o=petals[i];
+    o.tip.position.x=Math.cos(o.a+t*.12)*o.r;
+    o.tip.position.y=Math.sin(o.a+t*.12)*o.r;
+    o.tip.rotation.z=o.a+.2*Math.sin(t*.7-i*.26);
+   }
+   const near=hp.distanceToSquared(g.position)<90;
+   pulse.material.opacity=near?.88:.25;
+   pulse.scale.setScalar(.85+.22*Math.sin(t*2.8));
+   if(near){slashCd=Math.min(slashCd,.13);speedFx=Math.max(speedFx,.75);flash=Math.max(flash,.06);}
+  };
+ }
+ // Серебряный ливень: отдельные слои ветра, дождя и светящихся обрывков тумана.
+ {
+  const id='silver-squall',g=newGroup(id,-34,46,-43),drops=[];
+  aura(g,32,0xa5cfed,.71);
+  const etch=engrave(g,72219,44,37,0x9be9ff);
+  const clouds=[];
+  const R=rng(80015);
+  for(let i=0;i<12;i++){
+   const cloud=ball(g,2+R()*1.5,i%3?0x315c78:0x7e6a92,
+       [(R()-.5)*22,7+R()*6,-1.2],.7);
+   cloud.scale.set(2.1,.55,1.1);clouds.push(cloud);
+  }
+  for(let i=0;i<94;i++){
+   const x=(R()-.5)*29,y=(R()-.5)*28,z=R()*2;
+   const drop=beam(g,[x,y,z],[x-.4,y-(1+R()*2.1),z],.014+(i%3)*.009,
+     i%5===0?0xffbed8:0x9edff5,.28+R()*.62);
+   drops.push({drop,x,y,phase:R()*6.28,rate:.55+R()*.5});
+  }
+  const guides=[];
+  for(let i=0;i<13;i++){
+   const a=i*1.71;
+   const p=ring(g,2.2+i*.56,0xffb4d0,[Math.sin(a)*7,-2+i*.6,.7],.17);
+   guides.push(p);
+  }
+  own[id].tick=t=>{
+   etch.position.x=.8*Math.sin(t*.24);
+   etch.rotation.z=.017*Math.sin(t*.3);
+   for(let i=0;i<clouds.length;i++){
+    clouds[i].position.x+=.002*Math.sin(t*.42+i*.75);
+    clouds[i].position.y=7+(i%5)*.9+.48*Math.sin(t*.49-i*.38);
+   }
+   for(let i=0;i<drops.length;i++){
+    const o=drops[i];
+    o.drop.position.x=.42*Math.sin(t*.7+o.phase);
+    o.drop.position.y=2.2*Math.sin(t*o.rate+o.phase);
+   }
+   for(let i=0;i<guides.length;i++)guides[i].rotation.z=.07*Math.sin(t*.65-i*.21);
+  };
+ }
+
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;

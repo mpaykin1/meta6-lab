@@ -42,12 +42,12 @@ class HtmlPackTraps(unittest.TestCase):
     def metrics(self, new=None, fps=45):
         ref = {name: {"visible": .14, "detail": .07, "motion": .08, "colors": 130,
                       "fps": 45, "isolated": 1, "silhouette": .21,
-                      "palette": [108, 142, 180]} for name in self.old}
+                      "palette": [108, 142, 180], "deformation": .09} for name in self.old}
         cand = {name: dict(metric) for name, metric in ref.items()}
         if new is not None:
             cand["new_shadow"] = dict(visible=.16, detail=.09, motion=.1, colors=140,
                                       fps=fps, isolated=.16, silhouette=.25,
-                                      palette=[119, 153, 176])
+                                      palette=[119, 153, 176], deformation=.1)
             cand["new_shadow"].update(new)
         return {"ok": True, "reference": {"items": ref, "errors": [], "screen_text": False},
                 "candidate": {"items": cand, "errors": [], "screen_text": False}}
@@ -109,6 +109,19 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertIn("result.reference = await measure(browser,ref)", harness)
         self.assertIn("result.candidate = resolve(refPath)", harness)
         self.assertIn("features(first.on,second.on,first.off,second.off,fps)", harness)
+
+    def test_HP12_glow_only_fails_articulated_motion(self):
+        self.add_new()
+        self.assertIn("HP12", self.ids(self.metrics(new={"motion": .3, "deformation": 0})))
+
+    def test_HP12_real_articulation_passes(self):
+        self.add_new()
+        self.assertNotIn("HP12", self.ids(self.metrics(new={"deformation": .2})))
+
+    def test_HP12_uses_shape_mask_not_rgb_only(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("differentShape=0,unionShape=0", harness)
+        self.assertIn("deformation:+deformation.toFixed(5)", harness)
 
     def test_HP7_slow_browser_page(self):
         self.add_new()

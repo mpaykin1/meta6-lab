@@ -92,11 +92,13 @@ function makeWashTexture(THREE,style,seed=0,size=192){
 }
 
 function makePaperTexture(THREE,style,seed=0,size=128){
-  const canvas=makeCanvas(size);if(!canvas)return null;
+  // A single 7x7-sized unique sheet preserves original stroke size/density without repeating wallpaper.
+  const sheetSize=size*7;
+  const canvas=makeCanvas(sheetSize);if(!canvas)return null;
   const ctx=canvas.getContext('2d');if(!ctx)return null;
-  ctx.fillStyle=style.paperColor;ctx.fillRect(0,0,size,size);
-  for(let i=0;i<260;i++){
-    const a=.012+hash01(i,7,9,seed)*.022,x=hash01(i,11,5,seed)*size,y=hash01(i,17,3,seed)*size;
+  ctx.fillStyle=style.paperColor;ctx.fillRect(0,0,sheetSize,sheetSize);
+  for(let i=0;i<260*49;i++){
+    const a=.012+hash01(i,7,9,seed)*.022,x=hash01(i,11,5,seed)*sheetSize,y=hash01(i,17,3,seed)*sheetSize;
     ctx.strokeStyle=`rgba(36,54,79,${a})`;ctx.lineWidth=.35+hash01(i,23,2,seed)*.7;
     ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+6+hash01(i,29,1,seed)*24,y+(hash01(i,31,4,seed)-.5)*2);ctx.stroke();
   }

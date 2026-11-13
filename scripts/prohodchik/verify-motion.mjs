@@ -147,40 +147,55 @@ async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, game
         const idleSince = Date.now();
         await page.waitForTimeout(450);
         const idleAfter = await read();
-        const segments = [{
+        const idle = {
           before: idleBefore, after: idleAfter,
           durationMs: Math.max(1, Date.now() - idleSince), input: false
-        }];
+        };
         let status = 'NO_MOVEMENT';
-        // Do not stop at the first MOVED: 2s of subsequent held input is needed
-        // to reveal a hero that moves once and then becomes stuck.
-        for (let probe = 0; probe < directions.length * 3; probe++) {
-          const [dx, dy] = directions[probe % directions.length];
-          const before = await read();
-          const since = Date.now();
-          // Sample while the finger/key is held: a page can scroll and spring back by release.
+        // A series of short released taps is not one continuous 2s hold.
+        // Each direction is a real held gesture with live world-state and FIX samples.
+        // A blocked direction is an obstacle to log, not proof all controls are broken.
+        for (const [dx, dy] of directions) {
+          const trial = [idle];
           const viewportTrace = [fixed];
-          let observing = true;
+          let held = true;
+          let previous = await read();
+          let previousAt = Date.now();
           const observer = (async () => {
-            while (observing) {
+            while (held) {
               await page.waitForTimeout(80);
-              if (observing) viewportTrace.push(await page.evaluate(scrollAndCanvasInPage));
+              if (!held) break;
+              const [next, frame] = await Promise.all([
+                read(), page.evaluate(scrollAndCanvasInPage)
+              ]);
+              const at = Date.now();
+              trial.push({
+                before: previous, after: next,
+                durationMs: Math.max(1, at - previousAt), input: true
+              });
+              previous = next;
+              previousAt = at;
+              viewportTrace.push(frame);
             }
           })();
           try {
-            await input.joystick(dx, dy, 550);
+            await input.joystick(dx, dy, 3100);
           } finally {
-            observing = false;
+            held = false;
             await observer;
           }
           viewportTrace.push(await page.evaluate(scrollAndCanvasInPage));
           const fix = assessFixedViewport(viewportTrace);
-          assert.equal(fix.status, 'FIXED', 'FIX: viewport changed during held input: ' + JSON.stringify(fix));
-          const durationMs = Math.max(1, Date.now() - since);
-          const after = await read();
-          segments.push({before, after, durationMs, input: true});
-          status = assessB2Probe(segments).status;
-          if (status === 'MOVED' || status === 'STUCK' || status === 'DEAD' ||
+          assert.equal(fix.status, 'FIXED',
+            'FIX: viewport changed during held input: ' + JSON.stringify(fix));
+          const verdict = assessB2Probe(trial);
+          status = verdict.status;
+          if (status === 'STUCK') {
+            console.log('B3_PROBE_STUCK ' + gamePath + ' ' + name +
+              ' direction=' + JSON.stringify([dx, dy]) + ' state=' + JSON.stringify(verdict));
+            continue;
+          }
+          if (status === 'MOVED' || status === 'DEAD' ||
               status === 'INVALID' || status === 'LEVEL_CHANGED') break;
         }
         assert.deepEqual(errors, [], 'Browser console/page errors');

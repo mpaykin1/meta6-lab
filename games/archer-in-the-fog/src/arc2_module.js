@@ -7,7 +7,7 @@
 const ICON_ICE = '<svg viewBox="0 0 11 11" fill="currentColor" aria-hidden="true"><rect x="5" y="0" width="1" height="11"/><rect x="0" y="5" width="11" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="8" y="8" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="4" y="1" width="3" height="1"/><rect x="4" y="9" width="3" height="1"/><rect x="1" y="4" width="1" height="3"/><rect x="9" y="4" width="1" height="3"/></svg>';
 const GAME_VERSION = "2.0.0";
 const ARC2 = (() => {
-  const pg = (n, d) => { try { PG.ready && window.bridge.analytics && window.bridge.analytics.send(n, d); } catch (e) {} };
+  const pg = () => {}; // META build has no advertising or external analytics bridge.
   const ru = () => PG.language === "ru";
   /* ---------- U1 sparks ---------- */
   const COLS = ["harvest", "precision", "element", "agility"];
@@ -180,14 +180,24 @@ const ARC2 = (() => {
   /* ---------- per frame ---------- */
   const veil = $("fogveil");
   let perf = { f: [], act: 0, start: performance.now() };
+  let lastHoldClock = performance.now();
+  function countsHoldTime(task, phase, paused, pgPaused, hidden, dead) {
+    const combat = ['fight', 'spin', 'windup', 'dive', 'tail', 'plunge', 'ambush', 'stagger'];
+    return task === 'hold' && combat.includes(phase) && !paused && !pgPaused && !hidden && !dead;
+  }
   function tick(raw, t, e) {
+    // Survival is measured in real seconds, not in FPS-clamped simulation ticks.
+    // Reset the clock every frame to exclude pauses and background time.
+    const now = performance.now();
+    const holdDelta = Math.min(1.25, Math.max(0, (now - lastHoldClock) / 1000));
+    lastHoldClock = now;
     const sp = G.phase === "plunge" || G.phase === "ambush";
     camK = damp(camK, sp ? 1 : 0, 2.2, raw);
     if (G.phase !== "plunge") { shadow.visible = !1; shadowMat.uniforms.uRim.value = 0; }
     if (G.phase !== "ambush") { if (!dragon.root.visible && G.mode === "play") hideBody(!1); setEyes(0); G.fogBoost = Math.max(0, (G.fogBoost || 0) - raw * 1.2); }
     flyTick(t);
-    if (G.task === "hold" && G.phase === "fight") {      // survive: the progress fills by itself
-      holdT += t; const k = Math.min(10, Math.floor(holdT / (D0.T / 10)));
+    if (countsHoldTime(G.task, G.phase, G.paused, PG.paused, document.hidden, G.dead)) {
+      holdT += holdDelta; const k = Math.min(10, Math.floor(holdT / (D0.T / 10)));
       if (k !== G.hits) { G.hits = k; renderHP(); if (k >= 10) retreat(); }
     }
     // U4: a fog veil swallows the fall between towers
@@ -211,32 +221,23 @@ const ARC2 = (() => {
     $("arcHud").style.opacity = G.mode === "play" && G.phase !== "over" ? 1 : 0;
   }
 
-  /* ---------- R5 revive, R6 ads, U5 progress & daily gift, R1 instant start ---------- */
-  const rewOK = () => { try { return PG.ready && window.bridge.advertisement.isRewardedSupported; } catch (e) { return !1; } };
+  /* ---------- R5 free revive, U5 progress & daily gift, R1 instant start ---------- */
   function onGameOver() {
     const b = $("bRevive");
-    b.hidden = !(rewOK() && !G.revived); b.disabled = !1;
+    b.hidden = !!G.revived;
+    b.disabled = !!G.revived;
     if (!b.hidden) pg("revive_offered", { depth: G.depth });
     pg("progression_failed", { step_id: "tower", step_index: G.depth, level: G.level, version: GAME_VERSION });
   }
   $("bRevive").onclick = () => {
-    const b = $("bRevive"); if (b.disabled) return; b.disabled = !0;
-    let got = !1, done = !1;
-    const fin = (ok) => {
-      if (done) return; done = !0; b.hidden = !0;
-      if (!ok || G.phase !== "over") return;
-      G.revived = !0; G.lives = 1; G.dead = !1; renderRes();
-      $("over").classList.add("hide"); hud(!0); startRound(); caption("ЕЩЁ ЖИВ");
-      pg("revive_used", { depth: G.depth });
-    };
-    try {
-      window.bridge.advertisement.on(window.bridge.EVENT_NAME.REWARDED_STATE_CHANGED, (st) => {
-        if (st === "rewarded") got = !0;
-        if (st === "closed" || st === "failed") fin(got);
-      });
-      window.bridge.advertisement.showRewarded("revive");
-    } catch (e) { fin(!1); }
-    setTimeout(() => fin(got), 90000);
+    const b = $("bRevive");
+    if (b.disabled || G.revived || G.phase !== "over") return;
+    b.disabled = !0;
+    G.revived = !0;
+    b.hidden = !0;
+    G.lives = 1; G.dead = !1; renderRes();
+    $("over").classList.add("hide"); hud(!0); startRound(); caption("ЕЩЁ ЖИВ");
+    pg("revive_used", { depth: G.depth });
   };
   const today = () => { const d = new Date(); return d.getFullYear() * 1e4 + (d.getMonth() + 1) * 100 + d.getDate(); };
   const _startGame = startGame;
@@ -251,7 +252,7 @@ const ARC2 = (() => {
     pg("progression_started", { step_id: "run", step_index: 1, version: GAME_VERSION });
   }
   function boot() {
-    if (PG.language === "ru") { $("bRevive").lastChild.textContent = "Ожить: смотреть рекламу"; }
+    if (PG.language === "ru") { $("bRevive").lastChild.textContent = "Ожить бесплатно"; }
     if (!SAVE.played) setTimeout(() => { if (G.mode === "menu") $("bPlay").onclick(); }, 600);       // first visit: straight into the fight
   }
   return { get camK() { return camK; }, SP, dice, absorb, onRound, onShotDown, onRepel, onDragonHit, pickSpecial, plunge, ambush, tick, onGameOver, onStart, boot, spark, retreat };

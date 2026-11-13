@@ -3,6 +3,22 @@ name: LAB Pages
 on:
   push:
     branches: [main, 'lab/**']
+    # Skip report-only/status-only pushes: they cannot change public site files.
+    paths:
+      - '**/index.html'
+      - 'meta-games/**'
+      - 'meta-games-worlds/**'
+      - 'games/**'
+      - 'demos/**'
+      - 'assets/**'
+      - 'skins/**'
+      - 'shared/**'
+      - 'preview/**'
+      - 'scripts/lab/build-site.sh'
+      - 'scripts/lab/link-ok.sh'
+      - 'scripts/lab/mutate-link-ok.sh'
+      - 'LINKS.txt'
+      - '.github/workflows/lab-pages.yml'
   workflow_run:
     workflows: ['Sync from meta6', 'META GAMES guard']
     types: [completed]
@@ -20,10 +36,22 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - uses: actions/checkout@v4
+      - name: Verify HTTP 200 checker and mutation traps
+        run: bash scripts/lab/mutate-link-ok.sh
       - name: Rebuild the site from main (includes this branch preview)
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run lab-pages.yml --ref main -R "$GITHUB_REPOSITORY"
+        run: |
+          set -euo pipefail
+          # One direct POST avoids the extra workflow-lookup GET (installation API quota).
+          for attempt in 1 2 3; do
+            if gh api --method POST "repos/$GITHUB_REPOSITORY/actions/workflows/lab-pages.yml/dispatches" -f ref=main; then
+              exit 0
+            fi
+            [[ "$attempt" -eq 3 ]] || sleep "$((attempt * 20))"
+          done
+          exit 1
   deploy:
     # guard on a main push already has its own push-run of this workflow: skip the duplicate.
     if: github.ref == 'refs/heads/main' && !(github.event_name == 'workflow_run' && github.event.workflow_run.name == 'META GAMES guard' && github.event.workflow_run.event == 'push')
@@ -40,6 +68,8 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+      - name: Verify HTTP 200 checker and mutation traps
+        run: bash scripts/lab/mutate-link-ok.sh
       - name: Build sandbox site (main + all lab/** previews)
         run: bash scripts/lab/build-site.sh _site
       - uses: actions/configure-pages@v5
@@ -50,6 +80,27 @@ jobs:
           path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Collect public URLs from built pages and LINKS
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://mpaykin1.github.io/meta6-lab'
+          {
+            cat _site/LINKS.txt
+            if [ "${{ github.event_name }}" = push ]; then
+              git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" \
+                -- '*/index.html' 2>/dev/null | while read -r f; do
+                [[ -f "_site/$f" ]] && echo "$base/${f%index.html}"
+              done
+            fi
+          } | grep -E '^https://mpaykin1[.]github[.]io/meta6-lab/' |
+            LC_ALL=C sort -u > /tmp/lab-links.txt
+          test -s /tmp/lab-links.txt
+          echo "CHECKING $(wc -l < /tmp/lab-links.txt) URLS"
+      - name: Check published public URLs
+        run: |
+          mapfile -t urls < /tmp/lab-links.txt
+          bash scripts/lab/link-ok.sh "${urls[@]}"
       - name: Check that main and every preview answer 200
         shell: bash
         run: |

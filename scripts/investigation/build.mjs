@@ -156,6 +156,6 @@ const decision = publicationDecision(previous, snapshot, now.getTime());
 if (decision !== 'publish') {
   console.log('Investigation snapshot preserved: ' + decision);
 } else {
-  writeFileSync('reports/investigation/data.json', JSON.stringify(snapshot, null, 2) + '\\n');
+  writeFileSync('reports/investigation/data.json', JSON.stringify(snapshot, null, 2) + '\n');
 }
 console.log('Investigation snapshot: ' + tasks.length + ' tasks, ' + errors.length + ' error entries');

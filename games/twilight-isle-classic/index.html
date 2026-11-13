@@ -7160,6 +7160,35 @@ window.__isle = {
   skyBolt(x, z) { skyBolt(x, z); },
 };
 
+/* META GAMES bot telemetry: read-only snapshots of actual game state.
+   Movement remains exclusively on the game's existing keyboard/touch handlers. */
+Object.defineProperty(window, '__META_BOT__', {
+  configurable: false, enumerable: true,
+  get() {
+    const next = coins.find(c => c.alive);
+    const target = next || world.beacon;
+    const total = G.total + 1; // Collect all coins, then reach the guarded beacon.
+    const completed = G.state === 'victory';
+    return Object.freeze({
+      level: Math.min(total, G.collected + 1),
+      totalLevels: total,
+      player: Object.freeze({
+        x: player.pos.x, y: player.pos.y, z: player.pos.z
+      }),
+      goal: target ? Object.freeze({
+        x: target.x, y: target.y, z: target.z
+      }) : null,
+      alive: player.hp > 0 && G.state !== 'dead',
+      completed,
+      progress: G.total ? G.collected / G.total : 0,
+      buttons: Object.freeze(['w', 'a', 's', 'd', 'Space', 'touch:joystick', 'touch:jump']),
+      combat: true,
+      enemies: foes.filter(f => foeAlive(f)).length,
+      weapons: combat.arsenal.length
+    });
+  }
+});
+
 </script>
 
 </body></html>

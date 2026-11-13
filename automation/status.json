@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-13T18:54:36.597Z",
+  "generated_at": "2026-11-13T18:56:32.608Z",
   "sha": {
-    "lab": "38578c8684af19e3e2f08270153b767a7bf00b93",
+    "lab": "819849d6444f9f1370c4b6db542896cc9d7002b3",
     "mg": "1bea203fb63d7c27c29a5643e2f38e4554a658c1"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43487366862",
   "review": {
     "protected": [
       {
@@ -700,7 +700,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1973,
+      "count": 1975,
       "folders": "нет данных"
     },
     "mg": {
@@ -711,62 +711,62 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "ostrov-aptekarya",
-      "bot": "нет данных",
+      "bot": "прошла",
       "storefront": "нет"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "нет данных",
+      "bot": "прошла",
       "storefront": "да"
     }
   ],

@@ -36,7 +36,7 @@ export function verdict(ctx) {
   if (ctx.isNewPR && ctx.openPRs > 10) return fail('Открыто более 10 PR: ограничение очереди');
   const addedFlows = files.filter(f=>f.status==='added' && /^\.github\/workflows\/[^/]+\.ya?ml$/.test(f.filename));
   if (addedFlows.length && c.type !== 'finish') return fail('Новый workflow требует ПОЛЬЗА: FINISH');
-  if (addedFlows.some(f=>ctx.newCronFiles?.includes(f.filename)) && ctx.scheduledWorkflows > 8)
+  if (addedFlows.some(f=>ctx.newCronFiles?.includes(f.filename)) && (ctx.scheduledWorkflows + (ctx.newCronFiles?.length||0)) > 8)
     return fail('Новый workflow с cron запрещён при числе расписаний > 8');
   if (c.type === 'finish') {
     const item = ctx.finish?.[c.value];

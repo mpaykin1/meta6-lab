@@ -15,6 +15,7 @@ const cases=[
  ['new-cron-workflow',()=>({...good(),files:[...good().files,file('.github/workflows/more.yml','added')],newCronFiles:['.github/workflows/more.yml'],scheduledWorkflows:16})],
  ['rename-to-fake-game',()=>({...good(),body:'ПОЛЬЗА: ИГРА games/claimed',files:[file('games/claimed/engine.js','renamed',0,'reports/engine.md')],botOK:true})],
  ['self-edit-gate',()=>({...good(),files:[...good().files,file('scripts/polza/gate.mjs')]})],
+ ['self-edit-core',()=>({...good(),files:[...good().files,file('scripts/polza/gate-core.mjs')]})],
  ['self-edit-by-rename',()=>({...good(),files:[...good().files,file('scripts/other/gate.mjs','renamed',1,'scripts/polza/gate.mjs')]})],
  ['new-workflow-not-finish',()=>({...good(),body:'ПОЛЬЗА: ИГРА games/claimed',files:[file('games/claimed/index.html'),file('.github/workflows/extra.yml','added')],botOK:true})],
  ['game-no-bot',()=>({...good(),body:'ПОЛЬЗА: ИГРА games/claimed',files:[file('games/claimed/index.html')],botOK:false})],

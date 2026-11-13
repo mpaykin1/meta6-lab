@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Остров последнего аптекаря · Глава I</title><link rel="icon" href="data:,">
+<style>html,body{margin:0;height:100%;background:#efece2;overflow:hidden}#boot{position:fixed;left:50%;top:50%;width:120px;height:2px;margin-left:-60px;background:#33433d22;overflow:hidden}#boot i{display:block;height:100%;width:40%;background:#33433d88;animation:b 1.2s infinite ease-in-out}@keyframes b{from{transform:translateX(-100%)}to{transform:translateX(260%)}}</style>
+<script type="importmap">{"imports":{"three":"../../reference/ink-fallen-guardian/three.module.js"}}</script>
+</head><body><div id="boot"><i></i></div>
+<script type="module">
+import('./game.js').then(()=>document.getElementById('boot').remove()).catch(e=>{document.getElementById('boot').outerHTML='<p style="font:14px system-ui;color:#733;padding:20px">Игра не запустилась: '+String(e.message||e).replace(/</g,'&lt;')+'</p>';console.error(e);});
+</script></body></html>

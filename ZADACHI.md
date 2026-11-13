@@ -17,7 +17,7 @@
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | feat(asset-check): HTMLPACK visual quality bot + Tumannye Shpili 26→32 | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/asset-pack-shpili` | [#296](https://github.com/mpaykin1/meta6-lab/pull/296) | 2026-11-13 15:48 | 2026-11-13 17:05 |
-| 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | АССЕТ-ПАК: Туманные шпили | МГЛ | ChatGPT | `lab/asset-pack-shpili` | [#296](https://github.com/mpaykin1/meta6-lab/pull/296) | 2026-11-13 15:33 | — |
+| взято | АССЕТЫ: Туманные шпили | МГЛ | ChatGPT | `lab/asset-pack-shpili` | [#303](https://github.com/mpaykin1/meta6-lab/pull/303) | 2026-11-13 15:33 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Остров последнего аптекаря · Глава I «Тихолист» (демо + этапы для GPT) | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/ostrov-aptekarya` | [#295](https://github.com/mpaykin1/meta6-lab/pull/295) | 2026-11-13 15:21 | 2026-11-13 15:21 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | МГЛ | чат ChatGPT, один PR одной игры | `lab/polza-b2-broken-city-20261113` | [#291](https://github.com/mpaykin1/meta6-lab/pull/291) | 2026-11-13 11:31 | 2026-11-13 11:52 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | БЕЗ ПАТТЕРНОВ — INK: непериодические пятна + запрет повторяющихся узоров | МГЛ → МГ | ChatGPT | `lab/bez-patternov-20261113` | [#290](https://github.com/mpaykin1/meta6-lab/pull/290) | 2026-11-13 11:11 | 2026-11-13 11:50 |

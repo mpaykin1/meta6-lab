@@ -49,6 +49,7 @@ Claude никогда не просит владельца вставлять п
 
 _как игра выглядит: графика, свет, погода, чистый экран_
 
+- [BEZ_ROVNYH_KRAEV.md](rules/01-stil-i-grafika/BEZ_ROVNYH_KRAEV.md) — **БЕЗ РОВНЫХ КРАЁВ (13.11.2026):** берега и края мира только природные (мысы, бухты, пляж разной ширины, камни, островки) + вода цвета эскиза; ровный/обрезанный край = FAIL; образец games/ostrov-aptekarya/coast.js
 - [CHISTYY_EKRAN.md](rules/01-stil-i-grafika/CHISTYY_EKRAN.md) — на экране только графика и кнопки-иконки, всё остальное в меню ☰
 - [WEATHER_KRATKO.md](rules/01-stil-i-grafika/WEATHER_KRATKO.md) — принятая 3D-погода (11 режимов) — брать её
 - [GRAF_KRATKO.md](rules/01-stil-i-grafika/GRAF_KRATKO.md) — GRAF: главные требования к графике всех игр (полный текст — graf.md)

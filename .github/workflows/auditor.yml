@@ -7,11 +7,13 @@ on:
     paths:
       - .github/workflows/auditor.yml
       - .github/auditor/config.yml
+      - scripts/auditor/**
   push:
     branches: [main]
     paths:
       - .github/workflows/auditor.yml
       - .github/auditor/config.yml
+      - scripts/auditor/**
 permissions:
   contents: read
   pull-requests: read
@@ -289,12 +291,20 @@ jobs:
             const next = priority.length
               ? 'Проверить первое нарушение по ссылке, защищённое передать Claude без слияния.'
               : 'Добавить SHA и Actions run к следующей записи в таблице задач.';
+            const { auditTaskTable } = require(process.cwd() + "/scripts/auditor/task-table.cjs");
+            const taskFindings = auditTaskTable(source, prs, root);
             let report = [
               '## 🚨 Нарушения и незавершённое',
               ...(priority.length ? priority : ['- В проверенной выборке не найдено нарушений — '+
                 link('источник',fileUrl('ZADACHI.md'))]),
               '- Старые PR: проверено '+staleCandidates.length+' из '+stalePool.length+
                 ' в актуальной выборке. При каждом часовом запуске следующая четвёрка.',
+              '',
+              '### Сверка ZADACHI с PR',
+              ...(taskFindings.length ? taskFindings.slice(0, 12) :
+                ['- Расхождений в проверенных строках не обнаружено.']),
+              ...(taskFindings.length > 12 ? ['- Ещё записей: ' + (taskFindings.length - 12)] : []),
+              'Сверена ограниченная выборка PR; отсутствие PR в ней не доказывает нарушение.',
               '',
               '**Один безопасный следующий шаг:** '+next+' '+
                 link('правила',fileUrl('automation/prompts/MG_PYAT_AVTOZADACH.md')),
@@ -362,3 +372,4 @@ jobs:
               core.info('Audit issue: '+updated.data.html_url);
             }
             await core.summary.addRaw(report).write();
+

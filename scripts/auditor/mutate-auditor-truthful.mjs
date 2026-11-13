@@ -1,4 +1,6 @@
 // Permanent auditor traps: API budget, singleton issue, and read-only PR previews.
+import { createRequire } from 'node:module';
+globalThis.require = createRequire(import.meta.url);
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';

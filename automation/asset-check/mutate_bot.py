@@ -31,6 +31,7 @@ MUTANTS = [
     ("kinds/ink.py", "if name in taken:", "if False:"),
     ("kinds/ink.py", "if role in ALIVE and not", "if False and not"),
     ("kinds/ink.py", 'if m["min"][1] > 0.25 and', "if False and"),
+    ("kinds/ink.py", 'if bar and role not in ("effect", "ground") and', "if False and"),
     ("check_pack.py", 'if "content_flags" not in merged:', "if False:"),
 ]
 

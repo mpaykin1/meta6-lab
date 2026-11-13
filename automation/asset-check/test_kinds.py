@@ -258,6 +258,65 @@ class KindTraps(unittest.TestCase):
         self.assertIn("abyss", r.kinds)
         self.assertTrue(any(i["id"].startswith("AB:") for i in r.hard()))
 
+    # --- INK: процедурные ассеты акварельного мира (ink-pack/1) ---
+    def ink_pack(self, edit=None):
+        shutil.rmtree(self.d)
+        shutil.copytree(Path(__file__).parent / "fixtures" / "ink-clean", self.d)
+        if edit:
+            src = (self.d / "makers.js").read_text("utf-8")
+            for a, b in edit:
+                self.assertIn(a, src)
+                src = src.replace(a, b, 1)
+            (self.d / "makers.js").write_text(src, "utf-8")
+        return self.d
+
+    def test_ink_clean_passes(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        r = cp.check(self.ink_pack())
+        self.assertEqual(r.kinds, ["ink"])
+        self.assertEqual(r.hard(), [], r.hard())
+
+    def test_IK5_random_breaks_determinism(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK5", ids(self.ink_pack([("const n = 4 + Math.floor(rnd(seed, 0) * 4)", "const n = 4 + Math.floor(Math.random() * 4)")])))
+
+    def test_IK6_same_shape_for_every_seed(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK6", ids(self.ink_pack([("export function lilyPads(seed = 1) {", "export function lilyPads(seed = 1) {seed = 1;")])))
+
+    def test_IK4_overwrites_reference_asset(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack([("export const makers = {lilyPads,", "export const makers = {fir: lilyPads, lilyPads,")])
+        pj = json.loads((d / "pack.json").read_text("utf-8"))
+        pj["assets"]["fir"] = {"label_ru": "Ель", "role": "plant", "zone": "woodland"}
+        (d / "pack.json").write_text(json.dumps(pj), "utf-8")
+        self.assertIn("IK4", ids(d))
+
+    def test_IK2_network_forbidden(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK2", ids(self.ink_pack([("const ink = '#272c30';", "const ink = '#272c30'; const u = 'https://evil.example/x.png';")])))
+
+    def test_IK13_creature_does_not_move(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK13", ids(self.ink_pack([("g.userData.tick = t => {for (const b of bugs)", "g.userData.tick0 = t => {for (const b of bugs)")])))
+
+    def test_IK14_pickup_without_benefit(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK14", ids(self.ink_pack([("g.userData.interact = {", "g.userData.interact0 = {")])))
+
+    def test_IK10_floating_asset(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK10", ids(self.ink_pack([("const ring = part(g, new T.TorusGeometry(.22, .06, 6, 14), '#9c9b8e', [0, .28, 0]);",
+                                                 "const ring = part(g, new T.TorusGeometry(.22, .06, 6, 14), '#9c9b8e', [0, .28, 0]); g.position.y = 2;")])))
+
     # --- смешанный пак: все виды сразу ---
     def test_mixed_pack_runs_every_kind(self):
         make_glb(self.d / "m.glb")

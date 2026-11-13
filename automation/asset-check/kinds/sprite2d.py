@@ -21,7 +21,7 @@ def detect(root: Path) -> bool:
                 m = json.loads(p.read_text("utf-8"))
             except Exception:  # noqa
                 return n == "atlas.json"
-            if isinstance(m, dict) and isinstance(m.get("assets"), dict):
+            if isinstance(m, dict) and isinstance(m.get("assets"), dict) and m.get("format") != "ink-pack/1":
                 return True
     return False
 

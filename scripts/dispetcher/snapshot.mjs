@@ -60,10 +60,21 @@ export async function loadSnapshot(repository, token, request = fetch) {
         commit: {commit: {committer: {date: commit.committedDate}}}
       });
     }
-    break;
+    if (!page.pageInfo.hasNextPage) break;
     cursor = page.pageInfo.endCursor;
     if (!cursor || cursors.has(cursor)) throw Error('Dispatcher pagination made no progress');
     cursors.add(cursor);
   } while (true);
   return result;
+}
+
+export async function loadSettledSnapshot(repository, token, request = fetch,
+  sleep = ms => new Promise(done => setTimeout(done, ms))) {
+  let snapshot = await loadSnapshot(repository, token, request);
+  for (let attempt = 0; attempt < 3 && [...snapshot.values()].some(entry => entry.pr.mergeable === null);
+    attempt++) {
+    await sleep(5000);
+    snapshot = await loadSnapshot(repository, token, request);
+  }
+  return snapshot;
 }

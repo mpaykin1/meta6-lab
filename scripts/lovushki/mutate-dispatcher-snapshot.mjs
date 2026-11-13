@@ -48,6 +48,22 @@ async function verify(module) {
   for (const failure of ['http-403', 'graphql-error', 'wrong-head', 'truncated-checks', 'frozen-cursor']) {
     await assert.rejects(exercise(module.loadSnapshot, failure), undefined, 'Missing rejection: ' + failure);
   }
+  let calls = 0, pauses = 0;
+  const request = async () => {
+    calls++;
+    const commit = {oid: 'sha', committedDate: '2026-11-12T01:00:00Z', statusCheckRollup: null};
+    return {ok: true, json: async () => ({data: {repository: {pullRequests: {
+      pageInfo: {hasNextPage: false}, nodes: [{number: 300, state: 'OPEN', mergeable: 'UNKNOWN',
+        headRefOid: 'sha', headRefName: 'lab/pending', commits: {nodes: [{commit}]}}]
+    }}}})};
+  };
+  const snapshot = await module.loadSettledSnapshot('owner/repo', 'token', request, async ms => {
+    assert.equal(ms, 5000);
+    pauses++;
+  });
+  assert.equal(calls, 4, 'Unknown mergeability refreshes the entire batch at most three times');
+  assert.equal(pauses, 3);
+  assert.equal(snapshot.get(300).pr.mergeable, null, 'Unresolved mergeability stays unknown');
 }
 await verify(production);
 const mutants = [
@@ -56,7 +72,10 @@ const mutants = [
   ['ignore-graphql-error', 'if (data.errors?.length)', 'if (false)'],
   ['ignore-head-lease', 'commit?.oid !== node.headRefOid', 'false'],
   ['fixture-range-cheat', 'for (const node of page.nodes) {',
-    'for (const node of page.nodes) { if (node.number > 20) continue;']
+    'for (const node of page.nodes) { if (node.number > 20) continue;'],
+  ['skip-mergeability-retries', 'attempt < 3', 'attempt < 0'],
+  ['too-many-mergeability-retries', 'attempt < 3', 'attempt < 4'],
+  ['fabricate-clean-merge', "node.mergeable === 'UNKNOWN' ? null", "node.mergeable === 'UNKNOWN' ? true"]
 ];
 for (const [name, target, replacement] of mutants) {
   assert.equal(source.split(target).length, 2, 'Mutation target not unique: ' + name);
@@ -65,4 +84,4 @@ for (const [name, target, replacement] of mutants) {
   await assert.rejects(verify(module), assert.AssertionError, 'MUTANT_ESCAPED ' + name);
   console.log('MUTATION_KILLED ' + name);
 }
-console.log('DISPATCHER_SNAPSHOT_MUTATIONS_PASS 5/5');
+console.log('DISPATCHER_SNAPSHOT_MUTATIONS_PASS 8/8');

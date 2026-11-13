@@ -256,7 +256,7 @@ async function isolatePreview(page, onPng, offPng) {
       left=Math.min(left,x);right=Math.max(right,x);
       top=Math.min(top,y);bottom=Math.max(bottom,y);
     }
-    if(area===0)throw Error('HP13: comparison asset mask empty');
+    if(area===0)return null;
     ctx.putImageData(frame,0,0);
     const pad=Math.max(5,Math.ceil(Math.max(right-left,bottom-top)*.08));
     const x=Math.max(0,left-pad),y=Math.max(0,top-pad);
@@ -273,7 +273,7 @@ async function isolatePreview(page, onPng, offPng) {
 
 async function measure(browser,file){
  const page=await browser.newPage({viewport:{width:640,height:360},deviceScaleFactor:1});
- const report={items:{},errors:[],screen_text:false,previews:{}};
+ const report={items:{},errors:[],screen_text:false,previews:{},newIds:[]};
  page.on('pageerror',e=>report.errors.push('pageerror: '+e.message));
  page.on('console',e=>{if(e.type()==='error')report.errors.push('console: '+e.text());});
  try{
@@ -281,6 +281,7 @@ async function measure(browser,file){
   await page.waitForFunction(()=>window.__PACK__?.items?.length>0&&!!window.__STATE__&&
     typeof window.__ISOLATE__==='function',{timeout:30000});
   const ids=await page.evaluate(()=>window.__PACK__.items.map(o=>o.id));
+  report.newIds=await page.evaluate(()=>window.__PACK__.items.filter(o=>o.isNew).map(o=>o.id));
   for(const id of ids){
    await page.locator('#mb').click();
    await page.locator('#ls button[data-id="'+id+'"]').click();
@@ -319,8 +320,11 @@ async function measure(browser,file){
    report.items[id]=features(first.on,second.on,first.off,second.off,fps);
    const accepted=['hero','beast','gate','obelisk','sky','fog','rain','cathedral'];
    const selected=await page.evaluate(id=>!!window.__PACK__.items.find(it=>it.id===id)?.isNew,id);
-   if(selected||accepted.includes(id))
-     report.previews[id]=await isolatePreview(page,second.png,second.offPng);
+   if(selected||accepted.includes(id)){
+     const isolated=await isolatePreview(page,second.png,second.offPng);
+     if(isolated)report.previews[id]=isolated;
+     else if(selected)report.errors.push('HP13: preview has no visible object pixels: '+id);
+   }
    if(await textOutsideMenu(page))report.screen_text=true;
   }
  }finally{await page.close();}
@@ -329,8 +333,11 @@ async function measure(browser,file){
 
 // Visual acceptance evidence: each new object next to two accepted reference scenes.
 // Rendered by the same headless browser, not synthetic icons or full-screen averages.
-async function compareSheet(browser,refShots,packShots,packFile){
-  const newIds=Object.keys(packShots).filter(id=>!refShots[id]);
+async function compareSheet(browser,refShots,packShots,packFile,newIds){
+  // A missing accepted reference preview must not turn its ID into a new asset.
+  // New asset IDs come from PACK.items rather than screenshot presence.
+  const accepted=Object.keys(refShots);
+  if(accepted.length<2)throw Error('HP13: fewer than two accepted isolated reference previews');
   if(!newIds.length)return;
   const pairs={
    'sable-beast':['beast','hero'],'mask-choir':['beast','hero'],
@@ -361,7 +368,9 @@ async function compareSheet(browser,refShots,packShots,packFile){
     };
     for(let i=0;i<newIds.length;i++){
      const id=newIds[i],y=i*(h+top+gap);
-     const pair=pairs[id]||['hero','beast'];
+     const pair=(pairs[id]||['hero','beast']).filter(k=>refShots[k]);
+     for(const other of Object.keys(refShots))if(pair.length<2&&!pair.includes(other))pair.push(other);
+     if(pair.length<2)throw Error('HP13: insufficient accepted asset previews');
      await paint('r:'+pair[0],refShots[pair[0]],0,y,'Эталон · '+pair[0]);
      await paint('r:'+pair[1],refShots[pair[1]],w,y,'Эталон · '+pair[1]);
      await paint('p:'+id,packShots[id],2*w,y,'Новый · '+id);
@@ -387,7 +396,7 @@ try {
     result.reference = await measure(browser,ref);
     result.candidate = resolve(refPath) === resolve(packPath) ? result.reference : await measure(browser,cand);
     if(resolve(refPath)!==resolve(packPath))
-      await compareSheet(browser,result.reference.previews,result.candidate.previews,packPath);
+      await compareSheet(browser,result.reference.previews,result.candidate.previews,packPath,result.candidate.newIds);
     delete result.reference.previews;delete result.candidate.previews;
   } finally {rmSync(temp,{recursive:true,force:true});}
   result.ok = true;

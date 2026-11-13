@@ -33,7 +33,7 @@ export function verifyClaudePages(source) {
     'lab branch should request rebuild, not publish directly');
   const commands = kick.filter(x => !/^\s*#/.test(x));
   const cliDispatch = /^\s*(?:if\s+)?gh workflow run lab-pages\.yml --ref main\s*(?:;|$)/;
-  const apiDispatch = /\bgh api --method POST "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/lab-pages\.yml\/dispatches" -f ref=main\s*(?:;|$)/;
+  const apiDispatch = /^\s*(?:if\s+)?gh api --method POST "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/lab-pages\.yml\/dispatches" -f ref=main\s*(?:;|$)/;
   assert.ok(commands.some(x => cliDispatch.test(x) || apiDispatch.test(x)),
     'branch previews must kick trusted main');
   assert.ok(deploy.some(x => /actions\/deploy-pages@/.test(x)),

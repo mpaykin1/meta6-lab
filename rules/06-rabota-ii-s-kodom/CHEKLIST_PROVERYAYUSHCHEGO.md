@@ -39,3 +39,6 @@
 | 27 | После устранения REST-чтения проверен ли весь путь записи очереди: immutable blob, expectedHeadOid, пересборка после гонки, подтверждение commit и read-only без записи? | OSHIBKI #1060, PR #247 | scripts/lovushki/mutate-reference-queue.mjs (10); scripts/lovushki/mutate-reference-queue-wiring.mjs (3, реальный guard) |
 
 | 28 | Read-only guard сверяет API head с git rev-parse HEAD своего Actions checkout, прежде чем публиковать PASS? Новый diff не должен оправдывать старый SHA; trusted-main writer остаётся отдельным | OSHIBKI #1062, PR #247 | scripts/lovushki/mutate-reference-head.mjs (3); mutate-reference-queue-wiring.mjs (stale API head, skip-checkout-head-lease) |
+
+| 29 | После merge сохранена каждая строка OSHIBKI обоих родителей, включая разные ошибки с одним номером? | OSHIBKI #1064, PR #255/#260 | scripts/lovushki/mutate-merge-journal.mjs (3 мутации и настоящие Git-родители) |
+| 30 | Охранник использует полный Git-граф и проверяет SHA диапазона до атрибуции protected-правок? Ложный shallow FAIL отличён от настоящей unsigned правки? | OSHIBKI #1065 | scripts/lovushki/mutate-full-history-proposal.mjs (4 мутации; тот же реальный shell guard не ослаблен) |

@@ -14,4 +14,5 @@
 | 8 | Удалена или переименована чужая работа, чтобы «просто собралось»? | OSHIBKI №15 (rsync --delete) | — нужна |
 | 9 | Если HTML имеет HTTP 200, все ли его same-origin JS/CSS/изображения/аудио тоже имеют HTTP 200? | OSHIBKI №1002, PR #246 | scripts/lab/mutate-page-assets.mjs (3 мутации + HTML200/JS404) |
 
-| 10 | Может ли вычитание фонового дрейфа превратить неподвижные мировые координаты в MOVED? Проверить остановку дрейфа по обеим осям и несколько имён игр. | B2-STOPPED-DRIFT-20261113, PR #258 | scripts/prohodchik/mutate-motion.mjs: 3 stopped-drift ловушки |
+| 10 | Может ли компенсация фонового дрейфа превратить неподвижные координаты в MOVED? | B2-STOPPED-DRIFT-20261113, PR #258 | scripts/prohodchik/mutate-motion.mjs: stopped-drift ловушки |
+| 11 | Событие смерти/застревания и его снимок фиксируются до отпускания ввода? Временный cwd удаляется после close? | OSHIBKI 1004–1005, PR #258 | scripts/prohodchik/mutate-motion.mjs; scripts/platform/mutate-bot-open-all.mjs |

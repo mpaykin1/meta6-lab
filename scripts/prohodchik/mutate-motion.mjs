@@ -8,7 +8,7 @@ import {fileURLToPath} from 'node:url';
 
 const repo = resolve(fileURLToPath(new URL('../../', import.meta.url)));
 const script = join(repo, 'scripts/prohodchik/verify-motion.mjs');
-const original = readFileSync(join(repo, 'scripts/prohodchik/motion-check.mjs'), 'utf8');
+const original = readFileSync(join(repo, 'scripts/prohodchik/motion-check.mjs'), 'utf8').replace(/\r\n/g, '\n');
 const temp = mkdtempSync(join(tmpdir(), 'prohodchik-b2-mutations-'));
 
 function execute(source, name, expectedPass) {
@@ -99,7 +99,18 @@ const mutations = [
     'const observedDistance = Math.hypot(pendingX, pendingY);'],
   ['stopped-drift-game-deception',
     'distance > EPSILON && observedDistance > EPSILON',
-    "distance > EPSILON && (before.game === 'veil-terraces' || observedDistance > EPSILON)"]
+    "distance > EPSILON && (before.game === 'veil-terraces' || observedDistance > EPSILON)"],
+  ['in-flight-death-ignored',
+    "['DEAD', 'STUCK', 'INVALID', 'LEVEL_CHANGED'].includes(verdict.status)",
+    "['STUCK', 'INVALID', 'LEVEL_CHANGED'].includes(verdict.status)"],
+  ['in-flight-stuck-ignored',
+    "['DEAD', 'STUCK', 'INVALID', 'LEVEL_CHANGED'].includes(verdict.status)",
+    "['DEAD', 'INVALID', 'LEVEL_CHANGED'].includes(verdict.status)"],
+  ['in-flight-artifact-skipped', 'await onIncident(verdict);', 'await Promise.resolve();'],
+  ['in-flight-named-game-deception',
+    "if (['DEAD', 'STUCK', 'INVALID', 'LEVEL_CHANGED'].includes(verdict.status)) {",
+    "if (segment.before?.game === 'veil-terraces' && " +
+      "['DEAD', 'STUCK', 'INVALID', 'LEVEL_CHANGED'].includes(verdict.status)) {"]
 ];
 
 try {

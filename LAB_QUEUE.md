@@ -206,3 +206,9 @@
 - Каталог: `shared/references/ashen-path-asset-pack.json`.
 - Статус: ИСХОДНИК В БИБЛИОТЕКЕ; мобильная проверка не заявлена.
 - Михаил: передан владельцем как эталон 08.11.2026.
+
+## БОТ-ПРОХОДЧИК B2 — PR #258, 13.11.2026
+- Ветка lab/prohodchik-b2-motion-20261111; PR https://github.com/mpaykin1/meta6-lab/pull/258.
+- Реальные локальные проверки: Veil Terraces 6/6 × mobile/desktop/повтор mobile, B2 на двух экранах. Это не Actions; FINISH не изменён.
+- Ранняя фиксация инцидента + 4 мутации; B1 close-before-cleanup + 3 мутации; CRLF-совместимость. Защищённые проверки — предложение на подпись Claude.
+- Дальше: Actions текущего SHA, принятие Claude защищённого workflow/проверок, затем остальные игры.

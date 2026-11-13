@@ -14,7 +14,7 @@ function option(key) {
   return args[index + 1];
 }
 
-function fixtures(assessMotion, assessFixedViewport, assessB2Probe) {
+async function fixtures(assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion) {
   const state = (x, y, extra = {}) => ({
     hero: {x, y}, level: 0, alive: true, progress: 0, game: 'veil-terraces', ...extra
   });
@@ -129,10 +129,45 @@ function fixtures(assessMotion, assessFixedViewport, assessB2Probe) {
   assert.equal(assessFixedViewport([fixed, {...fixed, sy: 12}, fixed]).status, 'FIX_MOVED');
   assert.equal(assessFixedViewport([fixed, {...fixed, cw: 391.5}, fixed]).status, 'FIX_MOVED');
   assert.equal(assessFixedViewport([fixed, {...fixed, cx: NaN}]).status, 'INVALID');
+  // The incident artifact must be captured before the held gesture finishes,
+  // including a death whose entity has already vanished.
+  for (const terminal of ['DEAD', 'STUCK']) {
+    for (const game of ['veil-terraces', 'other-game']) {
+      let finishHold;
+      const held = new Promise(resolve => { finishHold = resolve; });
+      const releaseFallback = setTimeout(() => finishHold(), 100);
+      let released = false;
+      let samples = 0;
+      let captures = 0;
+      const verdict = await monitorHeldMotion({
+        segments: [],
+        hold: async () => { await held; released = true; },
+        sample: async () => {
+          samples++;
+          // A broken monitor must finish and fail assertions rather than hang.
+          if (samples > 26) finishHold();
+          return interval(state(2, 3, {game}), terminal === 'DEAD'
+            ? {alive: false, hero: null, level: null} : state(2, 3, {game}), 80);
+        },
+        onIncident: async observed => {
+          captures++;
+          assert.equal(released, false, 'incident captured after release');
+          assert.equal(observed.status, terminal);
+          assert.deepEqual(observed.hero, {x: 2, y: 3});
+          finishHold();
+        }
+      });
+      clearTimeout(releaseFallback);
+      assert.equal(verdict.status, terminal);
+      assert.equal(captures, 1, game + ' must capture one in-flight incident');
+      assert.equal(samples, terminal === 'DEAD' ? 1 : 25);
+    }
+  }
   console.log('B2_VERIFIER_PASS: motion, transient FIX drift and deceptive state controls');
 }
 
-async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, gamePath, screenshot) {
+async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion,
+  gamePath, screenshot) {
   assert.match(gamePath, /^games\/[a-z0-9-]+$/, 'Unsafe game path');
   const gameDir = resolve(root, gamePath);
   assert.ok(existsSync(join(gameDir, 'index.html')), 'Game entry point missing');
@@ -201,37 +236,42 @@ async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, game
         for (const [directionIndex, [dx, dy]] of directions.entries()) {
           const trial = [idle];
           const viewportTrace = [fixed];
-          let held = true;
           let previous = await read();
           let previousAt = Date.now();
-          const observer = (async () => {
-            while (held) {
+          const verdict = await monitorHeldMotion({
+            segments: trial,
+            hold: () => input.joystick(dx, dy, 3100),
+            sample: async () => {
               await page.waitForTimeout(80);
-              if (!held) break;
               const [next, frame] = await Promise.all([
                 read(), page.evaluate(scrollAndCanvasInPage)
               ]);
               const at = Date.now();
-              trial.push({
+              const segment = {
                 before: previous, after: next,
                 durationMs: Math.max(1, at - previousAt), input: true
-              });
+              };
               previous = next;
               previousAt = at;
               viewportTrace.push(frame);
+              return segment;
+            },
+            onIncident: async incident => {
+              console.log('B3_B4_INCIDENT ' + gamePath + ' ' + name +
+                ' direction=' + JSON.stringify([dx, dy]) + ' state=' + JSON.stringify(incident));
+              if (screenshot) {
+                const file = resolve(screenshot.replace(
+                  /(\.[a-z]+)?$/, '-incident-' + name + '-' + directionIndex + '.png'
+                ));
+                mkdirSync(resolve(file, '..'), {recursive: true});
+                await page.screenshot({path: file, timeout: 15000});
+              }
             }
-          })();
-          try {
-            await input.joystick(dx, dy, 3100);
-          } finally {
-            held = false;
-            await observer;
-          }
+          });
           viewportTrace.push(await page.evaluate(scrollAndCanvasInPage));
           const fix = assessFixedViewport(viewportTrace);
           assert.equal(fix.status, 'FIXED',
             'FIX: viewport changed during held input: ' + JSON.stringify(fix));
-          const verdict = assessB2Probe(trial);
           status = verdict.status;
           if (status === 'STUCK') {
             console.log('B3_PROBE_STUCK ' + gamePath + ' ' + name +
@@ -279,11 +319,12 @@ async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, game
 
 const moduleFile = option('--module');
 const source = moduleFile ? pathToFileURL(resolve(moduleFile)).href : './motion-check.mjs';
-const {assessMotion, assessFixedViewport, assessB2Probe} = await import(source);
+const {assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion} = await import(source);
 const game = option('--game');
 try {
-  if (game) await verifyGame(assessMotion, assessFixedViewport, assessB2Probe, game, option('--screenshot'));
-  else fixtures(assessMotion, assessFixedViewport, assessB2Probe);
+  if (game) await verifyGame(assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion,
+    game, option('--screenshot'));
+  else await fixtures(assessMotion, assessFixedViewport, assessB2Probe, monitorHeldMotion);
 } catch (error) {
   console.error(error.stack || error.message);
   process.exitCode = 1;

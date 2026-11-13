@@ -131,3 +131,32 @@ export function assessB2Probe(segments) {
   return verdict;
 }
 
+// Capture a terminal observation while the physical gesture is still held.
+// Waiting for hold() to finish first can lose a death followed by an automatic respawn.
+export async function monitorHeldMotion({segments, hold, sample, onIncident}) {
+  let active = true;
+  let incident = null;
+  let observationError = null;
+  const observer = (async () => {
+    while (active) {
+      const segment = await sample();
+      if (!active) break;
+      segments.push(segment);
+      const verdict = assessMotion(segments);
+      if (['DEAD', 'STUCK', 'INVALID', 'LEVEL_CHANGED'].includes(verdict.status)) {
+        incident = verdict;
+        await onIncident(verdict);
+        break;
+      }
+    }
+  })().catch(error => { observationError = error; });
+  try {
+    await hold();
+  } finally {
+    active = false;
+    await observer;
+  }
+  if (observationError) throw observationError;
+  return incident ?? assessB2Probe(segments);
+}
+

@@ -1,3 +1,6 @@
+## Рецепт новых акварельных миров INK
+Перед созданием нового объекта прочитать [RECEPT_INK_MIR.md](rules/01-stil-i-grafika/RECEPT_INK_MIR.md): объектный JS-модуль, объём, seeded random, кэш пигментов, InstancedMesh, неприкосновенный рендер и отдельная камера.
+
 ## INK — эталон живой акварели (OWNER PASS, 11.11.2026)
 Living Watercolor 3D — эталон визуальной технологии под паролем `ink` на МГ (`ink/`, https://mpaykin1.github.io/meta6/ink/) и МГЛ (`demos/living-watercolor/`). Перед работой с акварельной/чернильной графикой прочитать [ink.md](ink.md). Исходники эталона не менять, переиспользовать как есть.
 

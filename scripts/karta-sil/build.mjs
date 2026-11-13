@@ -90,6 +90,11 @@ export function statusOf(pr, lastCommitTime, now = Date.now()) {
   return now - Date.parse(lastCommitTime) > 86400000 ? 'брошено' : 'активно';
 }
 
+export function publishablePr(pr) {
+  const {lastCommit, ...facts} = pr;
+  return facts;
+}
+
 export function stableJson(data) {
   return JSON.stringify(data, null, 2) + '\n';
 }
@@ -127,6 +132,12 @@ export function compute(prs, dictionary) {
     }
   }
   return metrics;
+}
+
+export function isRepeatJournalError(line) {
+  if (/без повтор|нет повтор|без регресс|нет регресс|не повторилась/i.test(line)) return false;
+  return /повтор|снова|регресс|слома?л[аио]?сь? существующ|старую ловушк|старой проверк/i
+    .test(line);
 }
 
 function attributedErrors(journal, number) {
@@ -173,14 +184,14 @@ async function snapshot() {
     const lastCommit = commit?.commit?.committer?.date;
     if (!lastCommit) throw new Error('PR commit date: нет данных #' + pr.number);
     const matches = attributedErrors(journal, pr.number);
-    prs.push({
+    prs.push(publishablePr({
       number:pr.number, url:pr.html_url, type:classify(pr,filenames,dictionary),
       actor:identifyActor(pr,busy), status:statusOf(pr,lastCommit),
       created_at:pr.created_at, merged_at:pr.merged_at || null,
       lastCommit, changedFiles:filenames.length,
       failedBeforeGreen:await redBeforeGreen(pr), newErrors:matches.length,
-      repeatedError:matches.some(x=>/повтор|снова|регресс/i.test(x))
-    });
+      repeatedError:matches.some(isRepeatJournalError)
+    }));
   }
   prs.sort((a,b)=>a.number-b.number);
   return {schema:1, periodDays:14, source:'GitHub REST API', status:'полная',
@@ -192,12 +203,13 @@ function markdown(data) {
   const lines=['<!-- KARTA:AUTO BEGIN -->','## Статистика GitHub за 14 дней',
     'Источник: GitHub PR, коммиты, Actions, OSHIBKI.md. Нет выборки — «нет данных», а не зелёный.',
     '',
-    '| Тип | Исполнитель | Слито | Закрыто | Брошено | Claude | Ошибки | Красные прогоны | Зона |',
-    '|---|---|---:|---:|---:|---:|---:|---:|---|'];
+    '| Тип | Исполнитель | Слито | Закрыто | Брошено | Claude | Ошибки | До слияния, ч | Красные прогоны | Зона |',
+    '|---|---|---:|---:|---:|---:|---:|---:|---:|---|'];
   for (const m of data.metrics) {
     if (!m.total) continue;
     lines.push('| '+m.type+' | '+m.actor+' | '+m.merged+' | '+m.closed+' | '+
       m.abandoned+' | '+m.claude+' | '+m.newErrors+' | '+
+      (m.avgMergeHours ?? 'нет данных')+' | '+
       (m.failedBeforeGreen ?? 'нет данных')+' | '+m.zone+' |');
   }
   lines.push('', '<!-- KARTA:AUTO END -->');

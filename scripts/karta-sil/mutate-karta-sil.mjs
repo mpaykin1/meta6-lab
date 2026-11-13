@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {requireResponse,grade,classify,statusOf,stableJson} from './build.mjs';
+import {requireResponse,grade,classify,statusOf,stableJson,publishablePr,isRepeatJournalError} from './build.mjs';
 import {routeFor} from './route.mjs';
 import dictionary from './types.json' with {type:'json'};
 
@@ -39,4 +39,17 @@ test('мутация: две документированные неудачи �
  const map={schema:1,status:'полная',prs:[{number:9,type:'repo_clean',changedFiles:2}],
  metrics:[{type:'repo_clean',actor:'автозадача',zone:'красная'}]};
  assert.equal(routeFor({id:9,body:'КАРТА СИЛ: CHAT FAIL #1 https://github.com/x\nКАРТА СИЛ: CHAT FAIL #2 https://github.com/y'},map).target,'claude');
+});
+
+test('мутация: время последнего коммита PR не публикуется без изменения цифр',()=>{
+  const base={number:301,status:'активно',type:'summary_dispatch',merged:0,
+    lastCommit:'2026-11-13T19:00:00Z'};
+  const later={...base,lastCommit:'2026-11-13T19:59:59Z'};
+  assert.equal(stableJson(publishablePr(base)),stableJson(publishablePr(later)));
+  assert.ok(!Object.hasOwn(publishablePr(base),'lastCommit'));
+});
+
+test('мутация: регрессия прежней M1 ловушки отмечается повторной ошибкой',()=>{
+ assert.equal(isRepeatJournalError('M4: вставка run_bot сломалась существующая мутация M1'),true);
+ assert.equal(isRepeatJournalError('Обычное исправление интерфейса без регрессии'),false);
 });

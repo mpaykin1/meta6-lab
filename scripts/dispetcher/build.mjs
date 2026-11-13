@@ -3,6 +3,20 @@ const {GITHUB_REPOSITORY: repo='mpaykin1/meta6-lab',GITHUB_TOKEN: token}=process
 const root='https://api.github.com/repos/'+repo;
 const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-dispatcher','Authorization':'Bearer '+token};
 async function api(path){const r=await fetch(root+path,{headers});if(!r.ok)throw Error(path+': '+r.status);return r.json();}
+export async function listOpenPullRequests(request = api) {
+ const result = new Map();
+ for(let page=1;page<=20;page++){
+  const batch=await request('/pulls?state=open&per_page=100&page='+page);
+  if(!Array.isArray(batch))throw Error('GitHub API open PRs: нет данных');
+  for(const pr of batch){
+   if(!Number.isInteger(pr.number)||pr.state!=='open'||!pr.head?.sha||!pr.head?.ref||
+      result.has(pr.number))throw Error('GitHub API open PRs: неполные данные');
+   result.set(pr.number,pr);
+  }
+  if(batch.length<100)return result;
+ }
+ throw Error('GitHub API open PRs: неполная пагинация');
+}
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));
  const map=new Map();
@@ -59,7 +73,14 @@ export async function main(){
  const {routeFor}=await import('../karta-sil/route.mjs');
  const forChat=[];
  const cards=[],claude=[];
+ const openPrs=await listOpenPullRequests();
  for(const t of tasks){
+ const listed=openPrs.get(t.id);
+ if(!listed)continue;
+ if(/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(listed.body||'')){
+  claude.push({...t,title:listed.title,branch:listed.head.ref});
+  continue;
+ }
  let pr;try{pr=await api('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
  if(pr.state!=='open')continue;
  const resolution=await resolveConflict(pr,()=>api('/pulls/'+t.id),previousConflict(previous,t.id));

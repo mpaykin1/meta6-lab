@@ -26,6 +26,16 @@ else
   printf 200
 fi
 MOCK
+cat >> "$tmp/curl" <<'STATUS'
+# A body download can request its status in the same curl call.
+if [[ "$outfile" != /dev/null ]]; then
+  if [[ "$last" == *missing.js* && "${MOCK_MISSING:-0}" == 1 ]]; then
+    printf 404
+  else
+    printf 200
+  fi
+fi
+STATUS
 chmod +x "$tmp/curl"
 export PATH="$tmp:$PATH"
 page='https://mpaykin1.github.io/meta6-lab/demos/living-watercolor/'

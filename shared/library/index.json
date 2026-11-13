@@ -103926,6 +103926,21 @@
       ]
     },
     {
+      "id": "66f6cbbf80e97295aad22a6a",
+      "game": "skin-trainer",
+      "kind": "solution",
+      "name": "inline-script@3719",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/skin-trainer/index.html",
+      "sha256": "74a49284d374fbb1a8c90be56f067d750cf5aa8f704614bf5240a4d07b345e36",
+      "lines": [
+        58,
+        343
+      ]
+    },
+    {
       "id": "6b6b05e9fd90c2b8d8f11e9e",
       "game": "skin-trainer",
       "kind": "solution",
@@ -103938,21 +103953,6 @@
       "lines": [
         222,
         223
-      ]
-    },
-    {
-      "id": "913269e0dae30849283392c3",
-      "game": "skin-trainer",
-      "kind": "solution",
-      "name": "inline-script@3719",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/skin-trainer/index.html",
-      "sha256": "c0323bf6b2f68a4a9225b990c6449fde8be65c49ebe01161676da6a011814a23",
-      "lines": [
-        58,
-        323
       ]
     },
     {

@@ -75,7 +75,9 @@ async function main() {
       }
     }
   }
-  const ctx={body:pr.body,files,openPRs:opened.length,scheduledWorkflows:scheduled,newCronFiles,finish:parseFinish(fs.readFileSync('rules/09-platforma/FINISH.md','utf8')),botOK,redRun,repairPaths};
+  const activation=Date.parse(execFileSync('git',['log','-1','--format=%cI','--','scripts/polza/gate-core.mjs'],{encoding:'utf8'}).trim());
+  const isNewPR=!Number.isFinite(activation) || Date.parse(pr.created_at)>activation;
+  const ctx={body:pr.body,files,isNewPR,openPRs:opened.length,scheduledWorkflows:scheduled,newCronFiles,finish:parseFinish(fs.readFileSync('rules/09-platforma/FINISH.md','utf8')),botOK,redRun,repairPaths};
   const answer=verdict(ctx);
   execFileSync('gh',['api','--method','POST','repos/'+REPO+'/statuses/'+pr.head.sha,'--input','-'],{
     input:JSON.stringify({state:answer.ok?'success':'failure',context:'POLZA',description:answer.reason.slice(0,140),target_url:'https://github.com/'+REPO+'/actions'}),

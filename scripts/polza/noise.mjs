@@ -1,40 +1,13 @@
-// GitHub-only daily noise meter + non-core scheduling fuse.
+// Deterministic daily GitHub sampler; pure rules in noise-core.mjs.
 import fs from 'node:fs';
-const REPO=process.env.GITHUB_REPOSITORY||'mpaykin1/meta6-lab';
-const API='https://api.github.com/repos/'+REPO;
-const botNames=['status-dlya-claude','investigation-snapshot','zadachi-watch','zanyato-watch','sliyanie-status','dispatcher','journal-projections','github-actions[bot]'];
-const authorWorkflow={'status-dlya-claude bot':'status-dlya-claude.yml','investigation-snapshot':'investigation-snapshot.yml','zadachi-watch':'zadachi-watch.yml','zanyato-watch':'zanyato-watch.yml','sliyanie-status bot':'sliyanie-status.yml'};
-const CORE=/^(?:storozha-|kontur-guard|meta-games-guard|meta-bot|report-completion-guard|lab-shared-deletion-guard|pr-autofinish|sync-from-meta6)/;
-export function isBot(c) {
- const name=String(c?.commit?.author?.name||'').toLowerCase();
- const mail=String(c?.commit?.author?.email||'').toLowerCase();
- const msg=String(c?.commit?.message||'').split('\n')[0].toLowerCase();
- return name.includes('[bot]') || mail.includes('[bot]') || botNames.some(b=>name.includes(b)) || /^(?:status: refresh facts|zadachi:|zanyato:|sliyanie-status:|journal: compile|chore: refresh dispatcher queue|investigation: refresh)/.test(msg);
-}
-export function summarize(commits,openPRs,finish,scheduled,passedSHA=new Set()) {
- const total=commits.length,bots=commits.filter(isBot).length;
- const useful=commits.filter(c=>passedSHA.has(c.sha)).length;
- return {total,useful,bots,openPRs,finish,scheduled,benefit:total?Math.round(100*useful/total):0};
-}
-export function chooseFuse(commits,scheduledPaths) {
- const counts=new Map();
- for(const c of commits.filter(isBot)) {
-   const author=c.commit?.author?.name||'';
-   const name=authorWorkflow[author];
-   if(!name || CORE.test(name) || !scheduledPaths.includes(name)) continue;
-   counts.set(name,(counts.get(name)||0)+1);
- }
- return [...counts].sort((a,b)=>b[1]-a[1])[0]?.[0]||null;
-}
-export function needsEscalation(days) {
- if(days.length<2) return false;
- const tail=days.slice(-2);
- return tail[0].date!==tail[1].date && tail.every(d=>d.benefit<50);
-}
+import {execFileSync} from 'node:child_process';
+import {isBot,summarize,chooseFuse,needsEscalation} from './noise-core.mjs';
+const REPO='mpaykin1/meta6-lab';
 async function api(path,{method='GET',body}={}){
- const r=await fetch(API+path,{method,headers:{Authorization:'Bearer '+process.env.GITHUB_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined});
- if(!r.ok)throw Error('GitHub '+r.status+' '+path+' '+(await r.text()).slice(0,200));
- return r.status===204?{}:r.json();
+ const args=['api','--method',method,'repos/'+REPO+path];
+ if(body) args.push('--input','-');
+ const raw=execFileSync('gh',args,{encoding:'utf8',input:body?JSON.stringify(body):undefined,maxBuffer:16*1024*1024});
+ return raw.trim()?JSON.parse(raw):{};
 }
 async function getMany(path,key) {
  const all=[];
@@ -49,7 +22,7 @@ async function getMany(path,key) {
 }
 async function getPrior(path){
  try{let data=await api('/contents/'+path+'?ref=bot-state');return Buffer.from(data.content,'base64').toString('utf8');}
- catch(e){if(String(e).includes('404'))return '';throw e;}
+ catch(e){if((String(e)+String(e.stderr)).includes('404'))return '';throw e;}
 }
 function countFinish(source) {
  const lines=source.split('\n').filter(x=>/^\|\s*(?:M[1-6]|B[1-7]|L[1-4]|P1)\s*\|/.test(x));
@@ -93,7 +66,7 @@ async function main(){
  const scheduled=workflows.filter(n=>/^\s*schedule\s*:/m.test(fs.readFileSync('.github/workflows/'+n,'utf8')));
  const gates=await initialGatePasses(commits);
  const stats=summarize(commits,opened.length,finish,scheduled.length,gates);
- const entry={date:day,...stats,run:process.env.GITHUB_RUN_ID||'local'};
+ const entry={date:day,...stats,run:process.argv[2]||'manual'};
  const days=[...(previous.days||[]).filter(d=>d.date!==day),entry].slice(-31);
  let alerts=[];
  if(stats.bots>30) {
@@ -116,4 +89,4 @@ async function main(){
  }
  console.log('ANTISUETA '+JSON.stringify(entry));console.log(alerts.join('\n'));
 }
-if(process.argv[1]&&import.meta.url===new URL('file://'+process.argv[1]).href)main().catch(e=>{console.error(e);process.exitCode=1});
+main().catch(e=>{console.error(e);process.exitCode=1});

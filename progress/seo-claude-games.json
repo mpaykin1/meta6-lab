@@ -3,7 +3,7 @@
   "task": "SEO: 17 игр META GAMES без рекламы",
   "repository": "mpaykin1/meta6-lab",
   "work_branch": "lab/claude-adfree-catalog-1110",
-  "last_processed_head": "cd43d2a730b7998abb953fdade65e7288e1d96cb",
+  "last_processed_head": "3a89858552c072315bbd75f15c7f352a56424ea3",
   "steps": {
     "1_restore_protected_and_owner_originals": {
       "status": "done",
@@ -19,40 +19,101 @@
     },
     "1_fix_bot_and_other_ci": {
       "status": "in_progress",
-      "details": "Library Machine auto-extracted and committed both exact indexes via push workflow: run 43361108519 PASS, HEAD cd43d2a730b7998abb953fdade65e7288e1d96cb. LAB focused META BOT earlier failed because nine changed games do not expose real __META_BOT__ adapters; no fake snapshots or weakened tests. Latest runs from bot-authored commit action_required, so new human-authored checkpoint needed.",
+      "details": "На PR #242 SEO/verify/bot/guard/browser/storefront PASS на 3a898585 (actions/runs/43361805054 и 43361805062); LAB Pages kick-main FAIL из-за GitHub API rate limit 403 (actions/runs/43361799692). На базовом PR #234 changed-games FAIL: у 9 изменённых игр нет правдивой window.__META_BOT__ ручки; не заменять фиктивной. STOROZHA queue отдельный сбой rate limit 403.",
       "evidence": [
+        "https://github.com/mpaykin1/meta6-lab/commit/7ee56e90d9da32d806e697c542b705102575b963",
+        "https://github.com/mpaykin1/meta6-lab/commit/744e6d7e89c716f2a81cfd184819cee297bd9e26",
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43173775699",
+        "https://github.com/mpaykin1/meta6-lab/commit/b566a431d24819f0f36c0ec51bb9f1a24222cb8d",
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43188234313",
+        "https://github.com/mpaykin1/meta6-lab/commit/3dc116663aada43b2e65706b5828811fb01e13fa",
         "https://github.com/mpaykin1/meta6-lab/commit/78b177026806bdaf5225528ba8ef82a7955281a2",
         "https://github.com/mpaykin1/meta6-lab/commit/cd43d2a730b7998abb953fdade65e7288e1d96cb",
         "https://github.com/mpaykin1/meta6-lab/actions/runs/43361108519"
       ]
     },
     "2_canonical_and_publish": {
-      "status": "pending"
+      "status": "pending",
+      "details": "PR242 now reconciled with base PR234 (merge 4003cf7a), but newer bot-index commits move both branches; main publishing remains blocked by required all-green CI and 9 missing bot adapters in base. Verify permanent HTML, IndexNow only after safe merge and Pages."
     },
     "3_content_and_validator": {
-      "status": "pending"
+      "status": "in_progress",
+      "done_pages": [
+        "twilight-isle-classic",
+        "twilight-isles",
+        "archer-in-the-fog",
+        "ashen-path",
+        "broken-city",
+        "basement-b2",
+        "abyss-glow",
+        "asqura-office",
+        "broken-city-other-version",
+        "pod-i-nad",
+        "rainbow-acceleration",
+        "sumerechny-arkhipelag",
+        "sumerki-i-pepel-2",
+        "sunken-city",
+        "three-worlds-game",
+        "twilight-island",
+        "underwater-world"
+      ],
+      "pending_pages": 0,
+      "details": "23 страницы и 17 описаний в SEO-ветке. 9 внешних Playgama-обложек заменены оригинальными авторскими SVG в каталоге, включая OG, Twitter и JSON-LD; SEO-валидатор проверяет локальные источники с тремя новыми мутациями. Реальные 2–3 WebP-скриншота каждой игры остаются незавершёнными; результаты CI нового SHA ещё не подтверждены.",
+      "seo_ci": "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
+      "metadata": "23 страницы: title <= 60, description 120–160, Schema.org JSON-LD, alt",
+      "validator_implementation": "https://github.com/mpaykin1/meta6-lab/commit/674359e1781fb13e4dfeabb461e12def5448ea86"
     },
     "4_indexnow_and_sitemap": {
-      "status": "pending"
+      "status": "in_progress",
+      "details": "Key/file/sitemap/indexnow workflow присутствуют в PR242, но PR не слит в main. Ответ API 200/202 и 200 для постоянных HTML страниц не подтверждены."
     },
     "5_continuous_improvement": {
-      "status": "pending"
+      "status": "done",
+      "details": "Добавлены взаимные контекстные ссылки с объяснением различий на четырёх страницах: две версии Twilight, две версии Broken City.",
+      "evidence": [
+        "https://github.com/mpaykin1/meta6-lab/commit/33f9708e63230a397ad8158f62b2b584d8e27bbd",
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
+        "https://github.com/mpaykin1/meta6-lab/commit/358e7076d361419c04fac5bdc058184990909e93",
+        "https://github.com/mpaykin1/meta6-lab/commit/d8aa9550a6ef2eb97d27484cd4bbcdd5a5625c89",
+        "https://github.com/mpaykin1/meta6-lab/commit/34103c9e1ce48052d78fe0a91190ede5f966d2a1",
+        "https://github.com/mpaykin1/meta6-lab/commit/4c7e5d0a9b5a361e593aa3a68ad683990267021a"
+      ]
     }
   },
   "next_ideas": [
+    "Снять реальные 2–3 WebP-кадра из каждой игры и связать их с лендингами через alt и lazy-loading",
     "Реальные read-only window.__META_BOT__ по CONTRACT.md для девяти изменённых игр; проход mobile, desktop и replay.",
     "Восстановить META BOT для изменённых игр PR #234 и пройти все уровни на мобильном и ПК",
-    "Уникальные описания 150–300 слов для каждого игрового URL",
-    "Проверка title/description/JSON-LD и внутренних ссылок в CI",
-    "Копии webp из собственных игровых кадров",
-    "IndexNow после деплоя без секретов"
+    "IndexNow после деплоя без секретов",
+    "Сверять каждый sitemap lastmod с git log последнего изменения именно исходной HTML-страницы, защищать через мутации.",
+    "PR #234: устранить незафиксированную генерацию shared/library без ручного изменения охраняемых baseline и восстановить стабильный window.__META_BOT__; ссылки: Actions 43236878422 и 43236879007.",
+    "Сконвертировать 2 локальных PNG-кадра Three Worlds в WebP без изменения исходного игрового содержимого.",
+    "После публикации проверять существование и HTTP 200 всех 17 ссылок PlayAction отдельно от локальной проверки.",
+    "Дополнить SEO валидатор проверкой реально локальных OG-обложек после получения подтверждённых скриншотов",
+    "Устранить ложные блокировки движения по прямой у Veil Terraces на реальном мобильном маршруте",
+    "Live-проверка HTTP 200 всех 23 опубликованных URL после деплоя main",
+    "Убрать зависимость игровых OG-обложек от static.playgama.com после получения подлинных кадров",
+    "Проверить и защитить внутренние игровые ссылки лора на версии без рекламы",
+    "Получить для каждой из 17 игр реальные 2–3 скриншота WebP из игрового рендера и безопасно заменить внешние обложки",
+    "Сравнить близкие Twilight и Broken City страницы, проставить canonical на основную версию там, где контент действительно дублируется",
+    "Добавить workflow проверку фактических HTTP 200 для всех 23 публичных страниц после merge в main",
+    "Сверить релизный sitemap lastmod с git log и IndexNow HTTP 200/202",
+    "Сделать отдельные подборки для телефонов и атмосферных игр без повторного контента",
+    "Автоматически проверять sitemap lastmod против git log в SEO CI",
+    "После публикации проверить все 23 URL, canonical и sitemap через HTTP 200",
+    "Добавить английские версии с hreflang без каноникализации на русский",
+    "Связать подборки для телефона и атмосферных игр с главным каталогом"
   ],
   "notes": [
     "Не менять защищённые файлы, эталоны, бота и охранников в обход правил",
     "Без зелёного CI не сливать PR",
-    "Только подтверждённые live URL"
+    "Только подтверждённые live URL",
+    "Заменён preview canonical rewrite и включён robots=noindex для HTML-копий веток.",
+    "Сайт должен быть доступен по постоянному /meta6-lab/claude-games/; IndexNow запускается только после успешного деплоя main."
   ],
   "evidence": [
+    "https://github.com/mpaykin1/meta6-lab/actions/runs/43042511041",
+    "https://github.com/mpaykin1/meta6-lab/commit/b3182119ff6dc16274afb8d47e7aa6a17f449f59",
     "https://github.com/mpaykin1/meta6-lab/actions/runs/43188137217",
     "https://github.com/mpaykin1/meta6-lab/commit/e166826c94121f782ec919c7fd84b26898dbbe1b",
     "https://github.com/mpaykin1/meta6-lab/actions/runs/43198753200",
@@ -66,7 +127,101 @@
     "https://github.com/mpaykin1/meta6-lab/commit/3dc11ee9645943ebd3f539a5836fc1475815e2b7",
     "https://github.com/mpaykin1/meta6-lab/commit/64ae05f16d4a18808de4c8472e20616880daa3b2"
   ],
+  "last_completed_seo_content_commit": "c1e66016d1465caeca44e8be0ebbe02b7335c27a",
   "cycle_updates": [
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Лор: 10 ссылок на версии без рекламы; 4 игры без таких версий обозначены явно, без ложной кнопки 'Играть'.",
+      "commit": "2752f4d774e19ee7d206df2841a4c751905e2730",
+      "next": "Проверить зелёную SEO CI на новом HEAD; исправить остальные красные и опубликовать после полного CI.",
+      "evidence": [
+        "https://github.com/mpaykin1/meta6-lab/commit/2752f4d774e19ee7d206df2841a4c751905e2730",
+        "https://github.com/mpaykin1/meta6-lab/commit/25187756780ea96d59b64c4fee40ce324e63e556",
+        "https://github.com/mpaykin1/meta6-lab/commit/c7759957139724fae3d7d9a090bec4fe6317bef6"
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "SEO-валидатор проверяет существование локальных адресов каталога, включая вложенные и URL-encoded пути; добавлены три мутации.",
+      "commit": "942fd687d716297f76493ee3982626bd2b2bb8f9",
+      "next": "Получить зелёные прогоны нового HEAD, затем слить PR по правилам."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Страницы Archer in the Fog и Twilight Island ведут к собственным главам лора, а не на начало длинной страницы.",
+      "commits": [
+        "b36e2b867813265847af2fc56eb36ee6e0a0acb6",
+        "07681534e5b4077054e24ae584da8baa0dc15229"
+      ],
+      "next": "Проверить SEO и остальные обязательные CI на новом SHA."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Veil Terraces снова игровая сцена из main вместо redirect: восстановлен window.__META_BOT__ в обеих ветках.",
+      "commits": [
+        "7ee56e90d9da32d806e697c542b705102575b963",
+        "744e6d7e89c716f2a81cfd184819cee297bd9e26"
+      ],
+      "next": "Проверить META BOT и обязательные проверки новых HEAD, устранить следующие реальные ошибки без правки эталонов."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Схема VideoGame: обязательные поля name, url, description, image, free access, платформы и META GAMES PlayAction; три новые мутации, включая двойную правдоподобную сущность.",
+      "commits": [
+        "674359e1781fb13e4dfeabb461e12def5448ea86",
+        "31f989e8ad23473c68a15aefc13d5564fe3fa174",
+        "5b917550df3edc7518683cf3e2622ce776db78cf"
+      ],
+      "next": "Подтвердить SEO CI на актуальном SHA и устранить остальные красные проверки до публикации."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Контекстная перелинковка: Twilight Isles ↔ Twilight Isle Classic; Broken City ↔ другая версия. На каждой странице даны отличия по механике/сцене.",
+      "commits": [
+        "358e7076d361419c04fac5bdc058184990909e93",
+        "d8aa9550a6ef2eb97d27484cd4bbcdd5a5625c89",
+        "34103c9e1ce48052d78fe0a91190ede5f966d2a1",
+        "4c7e5d0a9b5a361e593aa3a68ad683990267021a"
+      ],
+      "next": "Получить SEO CI после четырёх изменений; не сливать при красных обязательных проверках."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "PR #234: пять отсутствовавших файлов trusted STOROZHA (core, bot-summary, gh-list, reference-check, weekly-watch) восстановлены из main с точным SHA.",
+      "commits": [
+        "896701e09b7ed6bf234d809f1c8c3c370a2845e9",
+        "1bd46e7e7bd9fa70e5200185e4af07f798e8d479",
+        "d814889947a35f80c5fb9daf6e48d345de1a154a",
+        "9eef7a4c66c034872b88d4abd9b0315b0637e7c2",
+        "b566a431d24819f0f36c0ec51bb9f1a24222cb8d"
+      ],
+      "next": "Проверить две STOROZHA проверки на текущем SHA PR #234. Не менять ограничения/охраняемые эталоны."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Veil Terraces: физический боковой обход препятствия при застревании работает также вблизи цели (<=3.2), не меняя бот-ядро или проверки.",
+      "commit": "3dc116663aada43b2e65706b5828811fb01e13fa",
+      "next": "Проверить LAB focused META BOT на новом HEAD; если путь по-прежнему непроходим, исправить генератор проходимых точек/стратегию в следующем цикле."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Усилен SEO-валидатор для preconnect к Playgama: перестановка атрибутов, несколько rel токенов, https и protocol-relative; три новые мутации и OSHIBKI #32.",
+      "commits": [
+        "06e7532738deb3571a6b4dd0f238c33c2be2e8a5",
+        "97990c8fb3e7593b6f6d8642e4c1ecda7814dcda",
+        "0d072f861146693806571306e9e861becdf356b4"
+      ],
+      "next": "Проверить SEO Catalog Validator на новом SHA; убедиться, что новые мутации отсекают внешние префетчи, затем перейти к публикации только после полного CI."
+    },
     {
       "date": "2026-11-12",
       "status": "implemented_pending_ci",
@@ -97,6 +252,12 @@
     },
     {
       "date": "2026-11-12",
+      "status": "merge_base_sync_pending_ci",
+      "change": "SEO-ветка синхронизирована с PR #234 без потери SEO и рабочих правок; GitHub CI следует проверить на новом commit.",
+      "base": "faa13c76da87875fdcc8dc8b8a6baf8774799c52"
+    },
+    {
+      "date": "2026-11-12",
       "status": "implemented_pending_ci",
       "change": "STOROZHA защитил ещё 3 исходника: восстановлены байт-в-байт из main, SHA blob точно совпадают.",
       "commits": [
@@ -116,9 +277,101 @@
     {
       "date": "2026-11-12",
       "status": "implemented_pending_ci",
+      "change": "SEO-валидатор отклоняет отсутствующие локальные изображения и OG/Twitter обложки; 3 мутации без ослабления существующих проверок.",
+      "commits": [
+        "51308dc2742e8d31926ab154af6177c030b441de",
+        "ea8a8b336d68210f7b0d20ce658d0d6a4364ce12"
+      ],
+      "next": "Проверить SEO Catalog Validator на свежем SHA, исправить реальную ошибку при отказе. Затем привести обязательный CI 234/242 к зелёному."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Проверка существования локального HTML-файла, указанного в VideoGame PlayAction, и мутация на отсутствующий исполняемый URL; шесть игровых страниц показывают настоящие названия вместо slug в H2.",
+      "commits": [
+        "ba42500909d4aa22390f82b100dc3107cab13e7f",
+        "4091b2cd4de6f6dc801e395cd6a47e87416de35d",
+        "0d721e96d41a7da301fb2ba013eb9a2fecf8c9d7",
+        "5621033ef9935cd59508974bddbd3fee9c4c0904",
+        "c647b35c5af46cf15b84a897d5e125c7c5421990",
+        "d93edc6802c52c2d2a884ba3b31e642cdaca1924",
+        "f98c9f413dbc9d0b0c455b5b311ddc3407c97913",
+        "54ae3c49222b0682fbd48db776e6d73a69c09aee"
+      ],
+      "next": "Довести Veil Terraces в базовом PR #234 без изменения защищённого эталона; добиться разрешённых проверок PR #242; завершить замену внешних картинок на собственные кадры, затем live 200 и IndexNow 200/202."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "У всех 17 страниц заменён технический URL-slug в видимом H2 на настоящее название игры; наличие заголовка и отсутствие старого slug проверено во всех 17 файлах.",
+      "commits": [
+        "ac317b4a4e15d1064bba2050ecea8d1af6e2d92c",
+        "59ec10d617c1db6fa6a4fff016e1daee8b00dd96"
+      ],
+      "next": "Live-публикация после исправления красного Veil Terraces CI и разрешения Actions на PR #242. Затем проверить все 23 страницы, кадры WebP и отправку IndexNow."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Sitemap lastmod установлен по реальным GitHub коммитам 23 файлов: 18 обновлённых, 5 неизменённых.",
+      "commit": "c1e66016d1465caeca44e8be0ebbe02b7335c27a",
+      "next": "Убедиться, что SEO CI на свежем SHA успешен; опубликовать только после зелёного #234 и #242."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
+      "change": "Внешний скриншот Three Worlds перенесён на собственный домен: 2 оригинальных игровых PNG (shore/rift) через идентичные Git blob SHA, страница с двумя кадрами, все ссылки на этот внешний хост заменены в 9 HTML-страницах; адаптивные стили изображений.",
+      "commits": [
+        "21fc731231d82bdf64c46806f28d7d7a629d4a28",
+        "aefa38856abc1d57760f5268c41a0f2a05a7a299",
+        "e53678082547b42dea1ac9a841a9a82a4d59695e",
+        "a42f3df4e20ca97e7495c7caef0a462b4b204634"
+      ],
+      "source_blobs": {
+        "three-worlds-shore.png": "18c710205640ce3a0ef85e6f63a149973d37f990",
+        "three-worlds-rift.png": "cc3251c834a6e621d427c478f600312742a19622"
+      },
+      "next": "Заменить PNG на WebP, сформированные из этих же реальных кадров; собрать аналогичные кадры для остальных игр и снять внешние картинки; после CI и деплоя выполнить HTTP 200/202 IndexNow."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "blocked_pending_green_ci",
+      "change": "Свежая диагностика после изменения другим агентом PR #234: Veil gameplay PASS, но индексы библиотеки рассинхронизированы с bot-strategy, META BOT intermittently не инициализируется. Защитные проверки и эталоны не менялись; не слито.",
+      "evidence": [
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43236878422",
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43236879007",
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43236878714"
+      ],
+      "next": "Regenerate the two derived library artifacts from real code in a checked-out GitHub Actions workspace, not by overwriting owner reference hashes; fix sporadic Veil startup; approve/run fresh CI on #242."
+    },
+    {
+      "date": "2026-11-13",
+      "status": "implemented_pending_ci",
+      "change": "Валидатор sitemap проверяет обязательность, календарную достоверность и отсутствие дублей lastmod на всех 23 URL, плюс 3 мутации.",
+      "next": "Получить SEO CI нового SHA; по завершении вернуть 2–3 оригинальных WebP кадра каждой игре и доказать live HTTP 200."
+    },
+    {
+      "date": "2026-11-12",
+      "status": "implemented_pending_ci",
       "change": "Veil Terraces: обход у препятствия теперь доступен и у близкой цели, увеличена длительность реального бокового ввода; без изменения проверок.",
       "commit": "1aaeed6f074602ab335bc775e60e6999891a209b",
       "next": "Проверить новую LAB focused META BOT на текущем head и не сливать до всех зелёных CI."
+    },
+    {
+      "date": "2026-11-13",
+      "status": "merge_base_sync_pending_ci",
+      "change": "Синхронизация PR242 с PR234: новейшая честная игровая стратегия Veil и все новые записи прогресса основной ветки сохранены; нужен свежий CI.",
+      "base": "9b1feaa6f452ba49dff8c89954d9ee43878609a6"
+    },
+    {
+      "date": "2026-11-13",
+      "status": "seo_ci_ancestor_pass_new_head_pending",
+      "change": "SEO Catalog Validator PASSED on 4003cf7a (23 pages, strengthened sitemap traps); current machine-generated HEAD e03717b requires new run.",
+      "evidence": [
+        "https://github.com/mpaykin1/meta6-lab/actions/runs/43360900263",
+        "https://github.com/mpaykin1/meta6-lab/commit/e03717b220a5a3e1b8d4840867550bfdf0f1f8b8"
+      ],
+      "next": "Fresh required CI; safely merge #242 into #234 only when both have green checks."
     },
     {
       "date": "2026-11-13",
@@ -129,6 +382,20 @@
         "https://github.com/mpaykin1/meta6-lab/actions/runs/43361108519"
       ],
       "next": "Разобрать game adapters; добиться зелёного LAB focused META BOT."
+    },
+    {
+      "date": "2026-11-13",
+      "status": "base_reconciled_pending_green_ci",
+      "change": "PR242 синхронизирован с настоящим HEAD PR234, без повторной модификации игровых исходников и машинных индексов.",
+      "base": "2a283a97259c85d7244ede76a658e574f4b983bb",
+      "next": "Проверить обязательные CI обеих веток, без красного и action_required не сливать."
+    },
+    {
+      "date": "2026-11-13",
+      "status": "implemented_pending_ci",
+      "change": "9 собственных иллюстрированных SVG-обложек вместо внешних Playgama URL; заменены ссылки на карточках, в OG/Twitter/JSON-LD; SEO-валидатор больше не пропускает внешний CDN и проверяет schema image; 3 новые мутации; sitemap lastmod обновлён для изменённых HTML.",
+      "next": "Подтвердить CI на новом SHA, затем восстановить реальные бот-адаптеры в #234 и дождаться разрешённого merge; снять настоящие WebP-кадры."
     }
-  ]
+  ],
+  "base_sync_sha": "2a283a97259c85d7244ede76a658e574f4b983bb"
 }

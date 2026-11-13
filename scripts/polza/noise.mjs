@@ -106,10 +106,13 @@ async function main(){
  if(needsEscalation(days)) alerts.push('СУЕТА: доля пользы ниже 50% двое суток ('+days.at(-2).benefit+'% и '+entry.benefit+'%); https://github.com/'+REPO+'/actions/runs/'+entry.run);
  fs.mkdirSync('automation/progress',{recursive:true});
  fs.writeFileSync('automation/progress/antisueta-noise.json',JSON.stringify({days},null,2)+'\n');
+ const oldLog=await getPrior('automation/progress/antisueta-noise.log');
+ fs.writeFileSync('automation/progress/antisueta-noise.log',oldLog+day+' UTC | '+stats.total+' commits | '+stats.useful+' POLZA merges | '+stats.bots+' bot commits | '+stats.openPRs+' PR | '+stats.finish+'/18 FINISH | '+stats.scheduled+' cron | https://github.com/'+REPO+'/actions/runs/'+entry.run+'\n');
  if(alerts.length){
    const old=await getPrior('DLYA_CLAUDE.md');
    const base=old||fs.readFileSync('DLYA_CLAUDE.md','utf8');
    fs.writeFileSync('DLYA_CLAUDE.md',base.trimEnd()+'\n'+alerts.map(a=>'- '+day+' '+a).join('\n')+'\n');
+   fs.writeFileSync('/tmp/antisueta-alert','1');
  }
  console.log('ANTISUETA '+JSON.stringify(entry));console.log(alerts.join('\n'));
 }

@@ -284,7 +284,7 @@ export function createFallenRobotV2(seed = 23) {
   g.add(debris);
   g.userData.robotV2 = {
     head, baseHead:head.rotation.clone(), arms, debris, debrisPositions,
-    debrisAge:9, debrisSeed:random, liftPrev:0, glowBase:new T.Color('#f18a4e'),
+    debrisAge:9, debrisSeed:random, liftPrev:0, glowBase:new T.Color().setRGB(1,.39,.20),
     headYaw:0, lastCreak:-20, moss:g.userData.mossSway, enabled:true
   };
   g.userData.robotEyes = glow;

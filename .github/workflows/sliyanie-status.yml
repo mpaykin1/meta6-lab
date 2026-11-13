@@ -30,10 +30,27 @@ jobs:
         run: |
           set -euo pipefail
           [ -f automation/SLIYANIE.md ] || { echo "no automation/SLIYANIE.md"; exit 0; }
+          # If API quota is unavailable, preserve last known facts instead of publishing guesses.
+          recent=$(gh api "repos/${GITHUB_REPOSITORY}/commits?path=automation/SLIYANIE.md&per_page=100" \
+            --jq '[.[] | select(.commit.author.name == "sliyanie-status bot") | .commit.author.date][0] // empty') || {
+              echo "::warning::GitHub API unavailable; SLIYANIE snapshot preserved"
+              exit 0
+            }
+          if [ -n "$recent" ] && [ $(( $(date -u +%s) - $(date -u -d "$recent" +%s) )) -lt 3600 ]; then
+            echo "SLIYANIE: bot committed less than an hour ago; skip"
+            exit 0
+          fi
           echo '{' > /tmp/st.json; first=1
           for n in $(grep -oE '^\| #[0-9]+' automation/SLIYANIE.md | tr -d '|# '); do
-            j=$(gh api "repos/${{ github.repository }}/pulls/$n" 2>/dev/null || echo '{}')
+            j=$(gh api "repos/${{ github.repository }}/pulls/$n") || {
+              echo "::warning::Could not fetch PR #$n; keep existing SLIYANIE facts"
+              exit 0
+            }
             st=$(echo "$j" | jq -r 'if .merged_at then "merged" elif .state=="closed" then "closed" elif .state=="open" then (if .mergeable_state=="dirty" then "open dirty" else "open" end) else "нет данных" end')
+            if [ "$st" = "нет данных" ]; then
+              echo "::warning::Unknown GitHub PR status for #$n; snapshot preserved"
+              exit 0
+            fi
             [ $first = 1 ] || echo ',' >> /tmp/st.json; first=0
             printf '"%s": "%s"' "$n" "$st" >> /tmp/st.json
           done

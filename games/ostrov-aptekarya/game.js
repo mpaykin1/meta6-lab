@@ -455,7 +455,9 @@ function animate(ms) {
   const sig = iva.state.signal, robotNear = 1 - Math.min(1, flat(hero.position, ROBOT) / 22);
 
   // --- свет и сумерки ---
-  const dusk = ['ending','chapter2End'].includes(state) ? 0 : Math.pow(day, 1.25);
+  const archiveNight = ['archive','archiveCaught'].includes(state);
+  // Ночь читается как акварельная синь, а не непроглядный чёрный экран.
+  const dusk = ['ending','chapter2End'].includes(state) ? 0 : archiveNight ? .66 : Math.pow(day, 1.25);
   ambient.color.set('#fff3d7').lerp(new T.Color('#aeb8d4'), dusk); ambient.intensity = 2.2 - dusk * .75;
   sun.color.set('#fff0cd').lerp(new T.Color('#e48c62'), dusk); sun.intensity = 1.4 - dusk * .8;
   scene.fog.color.set('#e7e5d6').lerp(new T.Color('#b9bfcc'), dusk);
@@ -497,7 +499,7 @@ function animate(ms) {
   fade += (fadeTo - fade) * damp(fadeTo > fade ? 1.6 : 1.1, raw);
   warm += ((state === 'chase' ? Math.max(0, 1 - flat(hero.position, HOME) / 12) : state === 'ending' ? .6 : 0) - warm) * damp(2, raw);
   const u = post.uniforms;
-  u.time.value = elapsed; u.signal.value = sig * (state === 'walk' ? .6 : 1); u.dusk.value = dusk; u.fade.value = fade; u.warm.value = warm;
+  u.time.value = elapsed; u.signal.value = sig * (archiveNight ? .5 : state === 'walk' ? .6 : 1); u.dusk.value = dusk; u.fade.value = fade; u.warm.value = warm;
   u.glitch.value = Math.min(1, glitchSpike + (state === 'grab' ? .3 + struggle * .2 : 0) + (state === 'caught' ? .6 : 0) + sig * .06);
   ui.pips(counts, stage === 4 && state !== 'walk' ? 0 : stage);
   if (state === 'archive') ui.action(chapter2.doorNearby(),1,false);

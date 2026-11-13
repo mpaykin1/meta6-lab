@@ -155,7 +155,7 @@ async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, game
         // A series of short released taps is not one continuous 2s hold.
         // Each direction is a real held gesture with live world-state and FIX samples.
         // A blocked direction is an obstacle to log, not proof all controls are broken.
-        for (const [dx, dy] of directions) {
+        for (const [directionIndex, [dx, dy]] of directions.entries()) {
           const trial = [idle];
           const viewportTrace = [fixed];
           let held = true;
@@ -193,6 +193,13 @@ async function verifyGame(assessMotion, assessFixedViewport, assessB2Probe, game
           if (status === 'STUCK') {
             console.log('B3_PROBE_STUCK ' + gamePath + ' ' + name +
               ' direction=' + JSON.stringify([dx, dy]) + ' state=' + JSON.stringify(verdict));
+            if (screenshot) {
+              const file = resolve(screenshot.replace(
+                /(\.[a-z]+)?$/, '-stuck-' + name + '-' + directionIndex + '.png'
+              ));
+              mkdirSync(resolve(file, '..'), {recursive: true});
+              await page.screenshot({path: file, timeout: 15000});
+            }
             continue;
           }
           if (status === 'MOVED' || status === 'DEAD' ||

@@ -712,7 +712,7 @@ const SHPILI_PLUS=(()=>{
      }petals(t);
    };
  }
- const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4();
+ const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;
  function tick(t,dt){
@@ -721,7 +721,7 @@ const SHPILI_PLUS=(()=>{
      const a=own[id],chosen=focus?.id===id,eligible=(!focus||chosen)&&!hidden.has(id);
      a.group.visible=eligible;
      if(!eligible)continue;
-     if(!chosen&&!frustum.intersectsObject(a.group))continue;
+     if(!chosen){sight.center.copy(a.group.position);if(!frustum.intersectsSphere(sight))continue;}
      a.tick(t,dt);
    }
  }

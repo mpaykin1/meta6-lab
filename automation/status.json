@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-13T10:56:58.954Z",
+  "generated_at": "2026-11-13T10:57:36.771Z",
   "sha": {
-    "lab": "fdda54350170c672e340a164ba1f621cc7ee180a",
+    "lab": "c0efc01458a4e7d755a2132d9f7e67390ad30ab3",
     "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
@@ -321,10 +321,10 @@
     ]
   },
   "pr": {
-    "open": 53,
+    "open": 52,
     "conflicts": "нет данных",
     "merged": 27,
-    "closed": 60,
+    "closed": 61,
     "mergedItems": [
       {
         "number": 285,
@@ -602,7 +602,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1821,
+      "count": 1823,
       "folders": "нет данных"
     },
     "mg": {

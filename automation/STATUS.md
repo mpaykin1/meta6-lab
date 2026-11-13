@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T10:56:58.954Z | МГЛ: fdda54350170c672e340a164ba1f621cc7ee180a | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | нет данных
+UTC: 2026-11-13T10:57:36.771Z | МГЛ: c0efc01458a4e7d755a2132d9f7e67390ad30ab3 | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #285 2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3: .github/workflows/meta-games-guard.yml, scripts/storozha/mutate-storozha.mjs, scripts/storozha/verify-storozha.mjs
 - PR #241 351572af1dd748a4c5a99e1e8f0cdba8a7092a0f: scripts/shared/mutate-build-index-symlinks.mjs
@@ -48,14 +48,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 53 | конфликт: нет данных | слито: 27 | закрыто: 60
+открыто: 52 | конфликт: нет данных | слито: 27 | закрыто: 61
 #285 storozha: «только Claude» — лишь ядро охраны (убираем тормоз | 2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3
 #279 INK: объёмный дождевой лес из видео, Ч/Б и цвет | d3f16b40a3c59ded669053388c0cf26130a7ed74
 #241 L2: защита индекса shared от symlink-подмены источников | 351572af1dd748a4c5a99e1e8f0cdba8a7092a0f
 #259 БОТ-ПРОХОДЧИК: сохраняемый промпт для повторных запусков | 24d0a9e8151cde7c3242275159c301a10d189311
 ещё 23: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1821 коммитов | нет данных
+МГЛ: 1823 коммитов | нет данных
 МГ: 6 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да

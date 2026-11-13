@@ -1,6 +1,6 @@
 // ANTISUETA: trusted GitHub facts, zero dependencies, no AI.
 const REPO = 'mpaykin1/meta6-lab';
-const GATE_FILES = new Set(['.github/workflows/polza-gate.yml','scripts/polza/gate.mjs','scripts/polza/verify-polza.mjs','scripts/polza/mutate-polza.mjs']);
+const isGateFile = p => p === '.github/workflows/polza-gate.yml' || p.startsWith('scripts/polza/');
 const prefixes = ['games/','ink/','reference/','shared/','meta-games/'];
 const DOCUMENT = /(^|\/)(?:readme|changelog|license|agents|oshibki|zadachi|zanyato|dlya_claude)(?:[._-]|$)|\.(?:md|mdx|txt|rst|adoc|pdf|log|csv)$/i;
 export function isDoc(path) {
@@ -11,7 +11,7 @@ export function isCodeChange(f) {
   if (f.status === 'renamed' && !(f.additions > 0)) return false;
   return !isDoc(f.filename) && !isDoc(f.previous_filename || f.filename) && (f.status !== 'renamed' || f.changes > 0);
 }
-function hasSelfChange(f) { return GATE_FILES.has(f.filename) || GATE_FILES.has(f.previous_filename); }
+function hasSelfChange(f) { return isGateFile(f.filename||'') || isGateFile(f.previous_filename||''); }
 const fail = reason => ({ok:false,reason});
 const pass = reason => ({ok:true,reason});
 export function claim(body) {

@@ -1,0 +1,1517 @@
+{
+ "score": 0,
+ "hard": 109,
+ "kinds": [
+  "sprite2d"
+ ],
+ "items": [
+  {
+   "id": "G4",
+   "severity": "HARD",
+   "where": "backgrounds/manhattan/mid.png",
+   "problem": "фон должен повторяться по X, но шов Δ=0.14",
+   "fix": "Левый край фона = правый (бесшовный по горизонтали)"
+  },
+  {
+   "id": "G4",
+   "severity": "HARD",
+   "where": "backgrounds/reptile_hq/mid.png",
+   "problem": "фон должен повторяться по X, но шов Δ=0.22",
+   "fix": "Левый край фона = правый (бесшовный по горизонтали)"
+  },
+  {
+   "id": "G4",
+   "severity": "HARD",
+   "where": "backgrounds/studio/mid.png",
+   "problem": "фон должен повторяться по X, но шов Δ=0.28",
+   "fix": "Левый край фона = правый (бесшовный по горизонтали)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/casino_robot_attack.png",
+   "problem": "тело не двигается: меняется лишь 3% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/casino_robot_damage.png",
+   "problem": "тело не двигается: меняется лишь 4% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/casino_robot_defeat.png",
+   "problem": "тело не двигается: меняется лишь 4% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/casino_robot_idle.png",
+   "problem": "тело не двигается: меняется лишь 3% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/casino_robot_movement.png",
+   "problem": "тело не двигается: меняется лишь 3% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/giant_journalist_attack.png",
+   "problem": "тело не двигается: меняется лишь 3% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/giant_journalist_damage.png",
+   "problem": "тело не двигается: меняется лишь 5% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/giant_journalist_defeat.png",
+   "problem": "тело не двигается: меняется лишь 5% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P4",
+   "severity": "SOFT",
+   "where": "bosses/giant_journalist_idle.png",
+   "problem": "2 повторов соседних кадров",
+   "fix": "Замени повтор новой фазой или увеличь duration_ms"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/giant_journalist_idle.png",
+   "problem": "тело не двигается: меняется лишь 3% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/giant_journalist_movement.png",
+   "problem": "тело не двигается: меняется лишь 3% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/lie_detector_attack.png",
+   "problem": "тело не двигается: меняется лишь 3% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/lie_detector_damage.png",
+   "problem": "тело не двигается: меняется лишь 3% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/lie_detector_defeat.png",
+   "problem": "тело не двигается: меняется лишь 4% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/lie_detector_idle.png",
+   "problem": "тело не двигается: меняется лишь 2% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/lie_detector_movement.png",
+   "problem": "тело не двигается: меняется лишь 3% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "bosses/reptile_king_attack.png",
+   "problem": "44% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/reptile_king_attack.png",
+   "problem": "тело не двигается: меняется лишь 2% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "bosses/reptile_king_damage.png",
+   "problem": "42% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/reptile_king_damage.png",
+   "problem": "тело не двигается: меняется лишь 4% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "bosses/reptile_king_defeat.png",
+   "problem": "42% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/reptile_king_defeat.png",
+   "problem": "тело не двигается: меняется лишь 4% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "bosses/reptile_king_idle.png",
+   "problem": "42% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P4",
+   "severity": "SOFT",
+   "where": "bosses/reptile_king_idle.png",
+   "problem": "2 повторов соседних кадров",
+   "fix": "Замени повтор новой фазой или увеличь duration_ms"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/reptile_king_idle.png",
+   "problem": "тело не двигается: меняется лишь 2% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "bosses/reptile_king_movement.png",
+   "problem": "42% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/reptile_king_movement.png",
+   "problem": "тело не двигается: меняется лишь 2% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "bosses/truth_machine_attack.png",
+   "problem": "39% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/truth_machine_attack.png",
+   "problem": "тело не двигается: меняется лишь 0% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "bosses/truth_machine_attack.png",
+   "problem": "спрайт упирается в край кадра в 6 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "bosses/truth_machine_damage.png",
+   "problem": "40% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/truth_machine_damage.png",
+   "problem": "тело не двигается: меняется лишь 2% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "bosses/truth_machine_damage.png",
+   "problem": "спрайт упирается в край кадра в 3 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "bosses/truth_machine_defeat.png",
+   "problem": "40% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/truth_machine_defeat.png",
+   "problem": "тело не двигается: меняется лишь 2% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "bosses/truth_machine_defeat.png",
+   "problem": "спрайт упирается в край кадра в 6 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "bosses/truth_machine_idle.png",
+   "problem": "40% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/truth_machine_idle.png",
+   "problem": "тело не двигается: меняется лишь 1% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "bosses/truth_machine_idle.png",
+   "problem": "спрайт упирается в край кадра в 4 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "bosses/truth_machine_movement.png",
+   "problem": "40% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "bosses/truth_machine_movement.png",
+   "problem": "тело не двигается: меняется лишь 1% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "bosses/truth_machine_movement.png",
+   "problem": "спрайт упирается в край кадра в 4 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P5",
+   "severity": "SOFT",
+   "where": "characters/trump_cap_hurricane.png",
+   "problem": "слабое движение: 12% пикселей меняется",
+   "fix": "Добавь вторичное движение (одежда, волосы, свет, хвост догоняет)"
+  },
+  {
+   "id": "P5",
+   "severity": "SOFT",
+   "where": "characters/trump_fall.png",
+   "problem": "тело не двигается: меняется лишь 0% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P4",
+   "severity": "SOFT",
+   "where": "characters/trump_golden_rain.png",
+   "problem": "2 повторов соседних кадров",
+   "fix": "Замени повтор новой фазой или увеличь duration_ms"
+  },
+  {
+   "id": "P5",
+   "severity": "SOFT",
+   "where": "characters/trump_golden_rain.png",
+   "problem": "слабое движение: 8% пикселей меняется",
+   "fix": "Добавь вторичное движение (одежда, волосы, свет, хвост догоняет)"
+  },
+  {
+   "id": "P4",
+   "severity": "SOFT",
+   "where": "characters/trump_idle.png",
+   "problem": "2 повторов соседних кадров",
+   "fix": "Замени повтор новой фазой или увеличь duration_ms"
+  },
+  {
+   "id": "P5",
+   "severity": "SOFT",
+   "where": "characters/trump_shoot.png",
+   "problem": "слабое движение: 9% пикселей меняется",
+   "fix": "Добавь вторичное движение (одежда, волосы, свет, хвост догоняет)"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "characters/trump_shoot.png",
+   "problem": "спрайт упирается в край кадра в 4 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P2",
+   "severity": "SOFT",
+   "where": "characters/trump_take_damage.png",
+   "problem": "35% полупрозрачных пикселей — размытый край в пиксель-арте",
+   "fix": "Альфа только 0 или 255 (без сглаживания), иначе ореол при nearest-фильтре"
+  },
+  {
+   "id": "P4",
+   "severity": "SOFT",
+   "where": "characters/trump_victory.png",
+   "problem": "2 повторов соседних кадров",
+   "fix": "Замени повтор новой фазой или увеличь duration_ms"
+  },
+  {
+   "id": "P5",
+   "severity": "SOFT",
+   "where": "characters/trump_victory.png",
+   "problem": "слабое движение: 8% пикселей меняется",
+   "fix": "Добавь вторичное движение (одежда, волосы, свет, хвост догоняет)"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "effects/destruction.png",
+   "problem": "38% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "effects/document_stream.png",
+   "problem": "спрайт упирается в край кадра в 8 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "effects/giant_wall.png",
+   "problem": "спрайт упирается в край кадра в 7 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "effects/golden_rain.png",
+   "problem": "спрайт упирается в край кадра в 8 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "effects/reality_tv_transform.png",
+   "problem": "спрайт упирается в край кадра в 8 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P4",
+   "severity": "SOFT",
+   "where": "effects/speech_bubble.png",
+   "problem": "4 повторов соседних кадров",
+   "fix": "Замени повтор новой фазой или увеличь duration_ms"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "effects/truth_electricity.png",
+   "problem": "52% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "effects/truth_electricity.png",
+   "problem": "спрайт упирается в край кадра в 8 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/alien_auditor_attack.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/alien_auditor_damage.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/alien_auditor_defeat.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/alien_auditor_idle.png",
+   "problem": "тело не двигается: меняется лишь 4% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/alien_auditor_movement.png",
+   "problem": "тело не двигается: меняется лишь 4% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/document_attack.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/document_damage.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/document_defeat.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/document_idle.png",
+   "problem": "тело не двигается: меняется лишь 0% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/document_movement.png",
+   "problem": "тело не двигается: меняется лишь 1% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/factcheck_robot_attack.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "enemies/factcheck_robot_attack.png",
+   "problem": "спрайт упирается в край кадра в 5 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/factcheck_robot_damage.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "enemies/factcheck_robot_damage.png",
+   "problem": "спрайт упирается в край кадра в 3 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/factcheck_robot_defeat.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "enemies/factcheck_robot_defeat.png",
+   "problem": "спрайт упирается в край кадра в 5 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/factcheck_robot_idle.png",
+   "problem": "тело не двигается: меняется лишь 1% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "enemies/factcheck_robot_idle.png",
+   "problem": "спрайт упирается в край кадра в 4 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/factcheck_robot_movement.png",
+   "problem": "тело не двигается: меняется лишь 1% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P6",
+   "severity": "SOFT",
+   "where": "enemies/factcheck_robot_movement.png",
+   "problem": "спрайт упирается в край кадра в 6 кадрах — может быть обрезан",
+   "fix": "Оставь 1–2 px прозрачного поля внутри кадра"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "enemies/journalist_attack.png",
+   "problem": "37% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/journalist_attack.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "enemies/journalist_damage.png",
+   "problem": "35% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/journalist_damage.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/journalist_defeat.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "enemies/journalist_idle.png",
+   "problem": "37% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/journalist_idle.png",
+   "problem": "тело не двигается: меняется лишь 0% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "enemies/journalist_movement.png",
+   "problem": "37% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/journalist_movement.png",
+   "problem": "тело не двигается: меняется лишь 0% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/lawsuit_attack.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/lawsuit_damage.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/lawsuit_defeat.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/lawsuit_idle.png",
+   "problem": "тело не двигается: меняется лишь 0% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/lawsuit_movement.png",
+   "problem": "тело не двигается: меняется лишь 2% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "enemies/mic_drone_attack.png",
+   "problem": "37% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/mic_drone_attack.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "enemies/mic_drone_damage.png",
+   "problem": "37% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/mic_drone_damage.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "enemies/mic_drone_defeat.png",
+   "problem": "35% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/mic_drone_defeat.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "enemies/mic_drone_idle.png",
+   "problem": "39% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/mic_drone_idle.png",
+   "problem": "тело не двигается: меняется лишь 0% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "enemies/mic_drone_movement.png",
+   "problem": "39% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/mic_drone_movement.png",
+   "problem": "тело не двигается: меняется лишь 0% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/reptiloid_attack.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/reptiloid_damage.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P4",
+   "severity": "HARD",
+   "where": "enemies/reptiloid_defeat.png",
+   "problem": "все кадры одинаковые — анимации нет",
+   "fix": "Нарисуй разные фазы движения"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/reptiloid_idle.png",
+   "problem": "тело не двигается: меняется лишь 0% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P5",
+   "severity": "HARD",
+   "where": "enemies/reptiloid_movement.png",
+   "problem": "тело не двигается: меняется лишь 0% пикселей (сдвиг/искры)",
+   "fix": "Нарисуй настоящие фазы: руки, ноги, корпус, голова меняются; волна по телу с задержкой"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "props/billboard.png",
+   "problem": "51% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "props/broadcast_tower.png",
+   "problem": "76% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "props/donation_box.png",
+   "problem": "52% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "props/fact_printer.png",
+   "problem": "37% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "props/reptile_portal.png",
+   "problem": "36% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "props/robot_factory.png",
+   "problem": "52% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P2",
+   "severity": "SOFT",
+   "where": "props/security_gate.png",
+   "problem": "51% полупрозрачных пикселей — размытый край в пиксель-арте",
+   "fix": "Альфа только 0 или 255 (без сглаживания), иначе ореол при nearest-фильтре"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "props/security_gate.png",
+   "problem": "73% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "props/skyscraper.png",
+   "problem": "49% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "props/tv_camera.png",
+   "problem": "40% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "P2",
+   "severity": "SOFT",
+   "where": "props/ufo.png",
+   "problem": "17% полупрозрачных пикселей — размытый край в пиксель-арте",
+   "fix": "Альфа только 0 или 255 (без сглаживания), иначе ореол при nearest-фильтре"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "props/white_house_door.png",
+   "problem": "51% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/manhattan/gold.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.20)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/manhattan/ground_fill.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.20)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/manhattan/ground_top.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/manhattan/platform_center.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/manhattan/wall.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.14)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/moon_resort/gold.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.20)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/moon_resort/ground_fill.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.22)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/moon_resort/ground_top.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/moon_resort/platform_center.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/moon_resort/wall.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.16)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/rally/gold.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.20)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/rally/ground_fill.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.14)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/rally/ground_top.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/rally/platform_center.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/reptile_hq/gold.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.20)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/reptile_hq/ground_top.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/reptile_hq/platform_center.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/studio/gold.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.20)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/studio/ground_fill.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.18)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/studio/ground_top.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/studio/platform_center.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/studio/wall.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.12)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/truth_machine/gold.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.20)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/truth_machine/ground_fill.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.17)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/truth_machine/ground_top.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/truth_machine/platform_center.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/white_house/gold.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.20)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/white_house/ground_fill.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.39)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/white_house/ground_top.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "SOFT",
+   "where": "tiles/white_house/platform_center.png",
+   "problem": "нет тега seamless_x",
+   "fix": "Добавь \"seamless_x\": true для тайлов, которые кладут рядом"
+  },
+  {
+   "id": "G2",
+   "severity": "HARD",
+   "where": "tiles/white_house/wall.png",
+   "problem": "помечен seamless, но края не совпадают (Δ=0.30)",
+   "fix": "Левый край = правый, верх = низ (сделай через offset/wrap)"
+  },
+  {
+   "id": "P7",
+   "severity": "SOFT",
+   "where": "ui/icons/wall.png",
+   "problem": "55% пикселей далеко от палитры пака",
+   "fix": "Приведи цвета к палитре пака (единый стиль)"
+  },
+  {
+   "id": "A8",
+   "severity": "SOFT",
+   "where": "tiles/manhattan/concrete.png = tiles/moon_resort/concrete.png = tiles/rally/concrete.png",
+   "problem": "7 одинаковых файлов (тайл один на все миры)",
+   "fix": "Оставь один, остальные — ссылкой"
+  },
+  {
+   "id": "A8",
+   "severity": "SOFT",
+   "where": "tiles/manhattan/elevator.png = tiles/moon_resort/elevator.png = tiles/rally/elevator.png",
+   "problem": "7 одинаковых файлов (тайл один на все миры)",
+   "fix": "Оставь один, остальные — ссылкой"
+  },
+  {
+   "id": "A8",
+   "severity": "SOFT",
+   "where": "tiles/manhattan/glass.png = tiles/moon_resort/glass.png = tiles/rally/glass.png",
+   "problem": "7 одинаковых файлов (тайл один на все миры)",
+   "fix": "Оставь один, остальные — ссылкой"
+  },
+  {
+   "id": "A8",
+   "severity": "SOFT",
+   "where": "tiles/manhattan/gold.png = tiles/moon_resort/gold.png = tiles/rally/gold.png",
+   "problem": "7 одинаковых файлов (тайл один на все миры)",
+   "fix": "Оставь один, остальные — ссылкой"
+  },
+  {
+   "id": "A8",
+   "severity": "SOFT",
+   "where": "tiles/manhattan/hazard.png = tiles/moon_resort/hazard.png = tiles/rally/hazard.png",
+   "problem": "7 одинаковых файлов (тайл один на все миры)",
+   "fix": "Оставь один, остальные — ссылкой"
+  },
+  {
+   "id": "A8",
+   "severity": "SOFT",
+   "where": "tiles/manhattan/ladder.png = tiles/moon_resort/ladder.png = tiles/rally/ladder.png",
+   "problem": "7 одинаковых файлов (тайл один на все миры)",
+   "fix": "Оставь один, остальные — ссылкой"
+  },
+  {
+   "id": "A8",
+   "severity": "SOFT",
+   "where": "tiles/manhattan/metal.png = tiles/moon_resort/metal.png = tiles/rally/metal.png",
+   "problem": "7 одинаковых файлов (тайл один на все миры)",
+   "fix": "Оставь один, остальные — ссылкой"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "characters/trump_shoot.png",
+   "problem": "shoot помечен loop=true — зациклится",
+   "fix": "loop=false для shoot (+ событие конца)"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "characters/trump_take_damage.png",
+   "problem": "take_damage помечен loop=true — зациклится",
+   "fix": "loop=false для take_damage (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "trump",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "characters/trump_shoot.png",
+   "problem": "shoot: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "enemies/journalist_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "journalist",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "enemies/journalist_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "enemies/mic_drone_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "mic_drone",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "enemies/mic_drone_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "enemies/document_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "document",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "enemies/document_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "enemies/factcheck_robot_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "factcheck_robot",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "enemies/factcheck_robot_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "enemies/lawsuit_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "lawsuit",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "enemies/lawsuit_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "enemies/alien_auditor_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "alien_auditor",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "enemies/alien_auditor_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "enemies/reptiloid_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "reptiloid",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "enemies/reptiloid_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "bosses/giant_journalist_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "giant_journalist",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "bosses/giant_journalist_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "bosses/casino_robot_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "casino_robot",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "bosses/casino_robot_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "bosses/reptile_king_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "reptile_king",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "bosses/reptile_king_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "bosses/lie_detector_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "lie_detector",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "bosses/lie_detector_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "A9",
+   "severity": "SOFT",
+   "where": "bosses/truth_machine_attack.png",
+   "problem": "attack помечен loop=true — зациклится",
+   "fix": "loop=false для attack (+ событие конца)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "truth_machine",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "bosses/truth_machine_attack.png",
+   "problem": "attack: нет события удара (на каком кадре урон/выстрел)",
+   "fix": "Добавь \"events\": [{\"frame\": N, \"type\": \"hit\"|\"spawn_projectile\", \"x\":.., \"y\":..}]"
+  },
+  {
+   "id": "G9",
+   "severity": "HARD",
+   "where": "effects",
+   "problem": "нет hitbox — игра не знает, где тело для попаданий",
+   "fix": "Добавь \"hitboxes\": {\"<персонаж>\": {\"x\":..,\"y\":..,\"w\":..,\"h\":..}} (в пикселях кадра)"
+  },
+  {
+   "id": "G5",
+   "severity": "SOFT",
+   "where": "tiles/rally",
+   "problem": "нет углов/склонов/краёв земли — уровни будут прямоугольными",
+   "fix": "Добавь ground_left, ground_right, corner_in, corner_out, slope_up, slope_down (БЕЗ ПОВТОРОВ)"
+  },
+  {
+   "id": "G5",
+   "severity": "SOFT",
+   "where": "tiles/studio",
+   "problem": "нет углов/склонов/краёв земли — уровни будут прямоугольными",
+   "fix": "Добавь ground_left, ground_right, corner_in, corner_out, slope_up, slope_down (БЕЗ ПОВТОРОВ)"
+  },
+  {
+   "id": "G5",
+   "severity": "SOFT",
+   "where": "tiles/manhattan",
+   "problem": "нет углов/склонов/краёв земли — уровни будут прямоугольными",
+   "fix": "Добавь ground_left, ground_right, corner_in, corner_out, slope_up, slope_down (БЕЗ ПОВТОРОВ)"
+  },
+  {
+   "id": "G5",
+   "severity": "SOFT",
+   "where": "tiles/reptile_hq",
+   "problem": "нет углов/склонов/краёв земли — уровни будут прямоугольными",
+   "fix": "Добавь ground_left, ground_right, corner_in, corner_out, slope_up, slope_down (БЕЗ ПОВТОРОВ)"
+  },
+  {
+   "id": "G5",
+   "severity": "SOFT",
+   "where": "tiles/moon_resort",
+   "problem": "нет углов/склонов/краёв земли — уровни будут прямоугольными",
+   "fix": "Добавь ground_left, ground_right, corner_in, corner_out, slope_up, slope_down (БЕЗ ПОВТОРОВ)"
+  },
+  {
+   "id": "G5",
+   "severity": "SOFT",
+   "where": "tiles/white_house",
+   "problem": "нет углов/склонов/краёв земли — уровни будут прямоугольными",
+   "fix": "Добавь ground_left, ground_right, corner_in, corner_out, slope_up, slope_down (БЕЗ ПОВТОРОВ)"
+  },
+  {
+   "id": "G5",
+   "severity": "SOFT",
+   "where": "tiles/truth_machine",
+   "problem": "нет углов/склонов/краёв земли — уровни будут прямоугольными",
+   "fix": "Добавь ground_left, ground_right, corner_in, corner_out, slope_up, slope_down (БЕЗ ПОВТОРОВ)"
+  },
+  {
+   "id": "C1",
+   "severity": "HARD",
+   "where": "atlas.json",
+   "problem": "Нет полей ['license', 'provenance'] — происхождение и права не указаны",
+   "fix": "Добавь в манифест (или pack.json) \"license\": {\"type\":\"…\",\"author\":\"…\",\"commercial\":true} и \"provenance\": {\"tool\":\"…\",\"prompt_sha256\":\"…\",\"date\":\"YYYY-MM-DD\"} (правило META_GAMES_SOURCE_ALLOWLIST)"
+  },
+  {
+   "id": "C2",
+   "severity": "HARD",
+   "where": "atlas.json",
+   "problem": "Нет content_flags — не указано, есть ли реальные люди, бренды, политика",
+   "fix": "Добавь \"content_flags\": {\"real_persons\": [...], \"brands\": [...], \"political\": true|false}. Реальные узнаваемые люди/бренды/политика = отдельная версия пака без них для МГ, Google Play, Steam, Playgama"
+  },
+  {
+   "id": "C5",
+   "severity": "SOFT",
+   "where": "/",
+   "problem": "276 отдельных картинок = столько же загрузок на телефоне (ВИДИМО И ЭКОНОМНО)",
+   "fix": "Добавь упакованные атласы packed/<группа>.png + координаты в манифест; исходники оставь"
+  }
+ ],
+ "stats": {
+  "assets": 275,
+  "entities": 14,
+  "files": 281,
+  "megabytes": 0.79,
+  "kinds": [
+   "sprite2d"
+  ],
+  "bot_version": "2.0.0"
+ }
+}

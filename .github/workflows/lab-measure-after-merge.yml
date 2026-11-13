@@ -1,4 +1,7 @@
 name: LAB Measure After Merge
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 # Dispatch the protected Claude progress workflow; never calculate/readiness here.
 on:
   push:
@@ -10,9 +13,6 @@ on:
 permissions:
   actions: write
   contents: read
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   dispatch:
     runs-on: ubuntu-24.04

@@ -1,0 +1,31 @@
+name: MG PR autofinish
+on:
+  schedule:
+    - cron: '7 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+  checks: read
+  statuses: read
+concurrency:
+  group: mg-pr-autofinish
+  cancel-in-progress: false
+jobs:
+  finish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Finish eligible PRs without executing untrusted PR code
+        env:
+          AUTOFINISH_REPO: ${{ github.repository }}
+          AUTOFINISH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/autofinish/run.mjs

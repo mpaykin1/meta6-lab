@@ -1,4 +1,7 @@
 name: game-browser-check
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 on:
   pull_request:
     paths:
@@ -11,9 +14,6 @@ on:
       - '.github/workflows/game-browser-check.yml'
   workflow_dispatch:
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   game-browser-check:
     runs-on: ubuntu-24.04

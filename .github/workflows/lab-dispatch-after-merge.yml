@@ -1,4 +1,7 @@
 name: LAB dispatch Claude readiness after main updates
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 on:
   push:
     branches: [main]
@@ -10,9 +13,6 @@ on:
 permissions:
   contents: read
   actions: write
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   dispatch:
     runs-on: ubuntu-24.04

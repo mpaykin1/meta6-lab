@@ -1,21 +1,22 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-10T08:50:47.265Z | МГЛ: 294c762211da9027a7b43a491cb981e5bc12dd07 | МГ: 6f8607a229ea84e237179243561a4c0963c70a30 | https://github.com/mpaykin1/meta6-lab/actions/runs/42785749751
+UTC: 2026-11-13T18:56:32.608Z | МГЛ: 819849d6444f9f1370c4b6db542896cc9d7002b3 | МГ: 1bea203fb63d7c27c29a5643e2f38e4554a658c1 | https://github.com/mpaykin1/meta6-lab/actions/runs/43487366862
 ## ПРОВЕРИТЬ CLAUDE
-- PR #216 06a8b61ec198ba43bb93a69efb2aeca7246383ee: .github/workflows/status-dlya-claude.yml, scripts/status/selftest.mjs
-- PR #223 0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66: .github/workflows/investigation-snapshot.yml
-- PR #215 2e73930d862d7de10a85c186e3c3517e5c58c98d: .github/workflows/lab-portal-visits.yml, scripts/lab/mutate-portal-links.mjs
-- PR #217 d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3: .github/workflows/lab-veil-shared.yml, scripts/lab/mutate-veil-workflow-target.mjs, scripts/lab/verify-veil-workflow-target.mjs
-- МГЛ: ZADACHI watch | https://github.com/mpaykin1/meta6-lab/actions/runs/42785535895 | Update ZADACHI.md from GitHub
+- PR #296 1d385b135f0fd52a35d6b2df6503f5f6eacf171a: automation/asset-check/test_htmlpack.py
+- PR #293 1ec3046bbe0972e316d92ec3846b542af0883716: automation/asset-check/test_kinds.py
+- PR #292 5df54dc0764daa77154709207e612b311127108d: automation/asset-check/test_kinds.py
+- PR #267 8127784a2d65ec5caa7aed93b753d13ce96b0c14: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py, automation/asset-check/test_kinds.py
+- ещё 15: https://github.com/mpaykin1/meta6-lab/pulls
+- МГЛ: Investigation snapshot | https://github.com/mpaykin1/meta6-lab/actions/runs/43473165084 | Refresh investigation snapshot from GitHub
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
-- | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/4… (сокращено)
-- | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обнов… (сокращено)
-- | #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая в… (сокращено)
+- | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
+- | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обн… (сокращено)
+- | #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая… (сокращено)
 - ещё 5: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
 - | M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |
 - | К7 | lab/kontur-k7-review | свободно (зависло 6 ч, было: ВОЗВРАЩЁН Claude (ложные срабатывания, см. комментарий в PR #193) — попытка 1 из 2) | 2026-11-09 17:50 |
 - | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |
 - | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |
-- ещё 1: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
+- ещё 5: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
 готовы: ничего
 M1 — нет данных: нет данных
@@ -47,19 +48,21 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 41 | конфликт: нет данных | слито: 4 | закрыто: 35
-#216 СВОДКА ДЛЯ CLAUDE: facts-only GitHub Actions bot | 06a8b61ec198ba43bb93a69efb2aeca7246383ee
-#223 Investigation: GitHub Pages dashboard + hourly GitHub-only t | 0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66
-#215 Portal Visits: исправить устаревшее ожидание 12 миров | 2e73930d862d7de10a85c186e3c3517e5c58c98d
-#217 Fix: Veil Shared CI проверяет существующую игру | d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3
+открыто: 41 | конфликт: нет данных | слито: 34 | закрыто: 75
+#298 Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА | 4e17483f42baf5300da95c840962218958994b71
+#296 feat(asset-check): HTMLPACK visual quality bot + Tumannye Sh | 1d385b135f0fd52a35d6b2df6503f5f6eacf171a
+#295 Остров последнего аптекаря · Глава I «Тихолист» (демо + этап | b158e1dd42db709100c79ceb5ea6745db53aa2bd
+#293 ASSET CHECK 2.2: «не хуже эталона» + эталон «Туманные шпили» | 1ec3046bbe0972e316d92ec3846b542af0883716
+ещё 30: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 203 коммитов | .github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1
-МГ: 2 коммитов | AGENTS.md:1, automation:1, rules:1
+МГЛ: 1975 коммитов | нет данных
+МГ: 7 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:2
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет
 broken-city — не запускалась | витрина: да
 broken-city-copy — не запускалась | витрина: да
+ostrov-aptekarya — прошла | витрина: нет
 rainbow-acceleration — не запускалась | витрина: нет
 skin-trainer — не запускалась | витрина: нет
 sumerki-i-pepel-2 — не запускалась | витрина: да
@@ -68,8 +71,8 @@ twilight-isle-classic — не запускалась | витрина: да
 twilight-isles — не запускалась | витрина: да
 veil-terraces — прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
-| 18 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
-| 17 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)
+| 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
+| 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)
 | 24 | 10.11.2026 | Сводка без progress.json или при ошибке GitHub API могла бы выдавать непроверенные пункты как «готово» и прятать красные прогоны; старые варианты #211/#212 не защищали эту сводку полным набором мутаций | Изолированные ответы: отсутствующий … (сокращено)
 | 25 | 10.11.2026 | Сводка игнорировала новую запись OSHIBKI с уже использованным номером (в main номер 18 повторён) | Сравнение только по номеру ошибочно скрывало новую строку | `scripts/status/selftest.mjs`: `duplicate-error-number-hidden` |
-ещё 3: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+ещё 21: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

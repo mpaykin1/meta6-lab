@@ -1,16 +1,149 @@
 {
-  "generated_at": "2026-11-10T08:50:47.265Z",
+  "generated_at": "2026-11-13T18:56:32.608Z",
   "sha": {
-    "lab": "294c762211da9027a7b43a491cb981e5bc12dd07",
-    "mg": "6f8607a229ea84e237179243561a4c0963c70a30"
+    "lab": "819849d6444f9f1370c4b6db542896cc9d7002b3",
+    "mg": "1bea203fb63d7c27c29a5643e2f38e4554a658c1"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/42785749751",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43487366862",
   "review": {
     "protected": [
+      {
+        "number": 296,
+        "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a",
+        "paths": [
+          "automation/asset-check/test_htmlpack.py"
+        ]
+      },
+      {
+        "number": 293,
+        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 292,
+        "sha": "5df54dc0764daa77154709207e612b311127108d",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 267,
+        "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py",
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 285,
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 241,
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
+      },
+      {
+        "number": 259,
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
+      },
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
+      {
+        "number": 238,
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 231,
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
+      },
+      {
+        "number": 236,
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
+      },
+      {
+        "number": 230,
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 227,
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
@@ -46,29 +179,33 @@
     ],
     "redLab": [
       {
-        "workflow": "ZADACHI watch",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/42785535895",
-        "step": "Update ZADACHI.md from GitHub"
+        "workflow": "Investigation snapshot",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43473165084",
+        "step": "Refresh investigation snapshot from GitHub"
       }
     ],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
-      "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
-      "| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |",
-      "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
-      "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | open | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
-      "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
+      "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
+      "| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |",
+      "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
+      "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
+      "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
       "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
-      "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
-      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
+      "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
+      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
       "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
       "| К7 | lab/kontur-k7-review | свободно (зависло 6 ч, было: ВОЗВРАЩЁН Claude (ложные срабатывания, см. комментарий в PR #193) — попытка 1 из 2) | 2026-11-09 17:50 |",
       "| B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |",
       "| B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |",
-      "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |"
+      "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |",
+      "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |",
+      "| B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | свободно (зависло 5 ч, было: проходчик, PR #258 — проверка ложного MOVED после дрейфа) | 2026-11-13 08:14 UTC |",
+      "| УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |",
+      "| B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | свободно (зависло 5 ч, было: чат ChatGPT, один PR одной игры) | 2026-11-13 11:31 UTC |"
     ]
   },
   "finish": {
@@ -219,9 +356,159 @@
   "pr": {
     "open": 41,
     "conflicts": "нет данных",
-    "merged": 4,
-    "closed": 35,
+    "merged": 34,
+    "closed": 75,
     "mergedItems": [
+      {
+        "number": 298,
+        "title": "Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА",
+        "sha": "4e17483f42baf5300da95c840962218958994b71"
+      },
+      {
+        "number": 296,
+        "title": "feat(asset-check): HTMLPACK visual quality bot + Tumannye Sh",
+        "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a"
+      },
+      {
+        "number": 295,
+        "title": "Остров последнего аптекаря · Глава I «Тихолист» (демо + этап",
+        "sha": "b158e1dd42db709100c79ceb5ea6745db53aa2bd"
+      },
+      {
+        "number": 293,
+        "title": "ASSET CHECK 2.2: «не хуже эталона» + эталон «Туманные шпили»",
+        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716"
+      },
+      {
+        "number": 294,
+        "title": "Эталон «Туманные шпили» (только добавление)",
+        "sha": "f55c2e87fbd99f261977dbe7da58700a0a73a50e"
+      },
+      {
+        "number": 292,
+        "title": "ASSET CHECK 2.1: бот проверяет ассеты INK «Павший великан»",
+        "sha": "5df54dc0764daa77154709207e612b311127108d"
+      },
+      {
+        "number": 267,
+        "title": "ASSET CHECK v2: универсальный бот для любых ассетов",
+        "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14"
+      },
+      {
+        "number": 285,
+        "title": "storozha: «только Claude» — лишь ядро охраны (убираем тормоз",
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3"
+      },
+      {
+        "number": 279,
+        "title": "INK: объёмный дождевой лес из видео, Ч/Б и цвет",
+        "sha": "d3f16b40a3c59ded669053388c0cf26130a7ed74"
+      },
+      {
+        "number": 241,
+        "title": "L2: защита индекса shared от symlink-подмены источников",
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f"
+      },
+      {
+        "number": 259,
+        "title": "БОТ-ПРОХОДЧИК: сохраняемый промпт для повторных запусков",
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311"
+      },
+      {
+        "number": 263,
+        "title": "docs(prompty): реестр 15 промптов МГЛ и улучшение многоразов",
+        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4"
+      },
+      {
+        "number": 257,
+        "title": "docs(zadachi): не создавать дубли задач по одному PR",
+        "sha": "79f4465b6667092e16115222325c012ca73cc137"
+      },
+      {
+        "number": 256,
+        "title": "docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ",
+        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec"
+      },
+      {
+        "number": 243,
+        "title": "Геймдизайн-аудит META GAMES — чистый PR без защищённой истор",
+        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81"
+      },
+      {
+        "number": 246,
+        "title": "ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож",
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1"
+      },
+      {
+        "number": 265,
+        "title": "ASSET CHECK: бот-проверщик ассет-паков + многоразовый промпт",
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e"
+      },
+      {
+        "number": 251,
+        "title": "feat(auditor): бесплатная почасовая ревизия пяти задач META ",
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1"
+      },
+      {
+        "number": 244,
+        "title": "Living Watercolor: публичная демосцена дерева, вулкана и фаб",
+        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a"
+      },
+      {
+        "number": 238,
+        "title": "META GAMES: guarded PR autofinish, conflict-free journals, s",
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f"
+      },
+      {
+        "number": 224,
+        "title": "Merge continuity: persistent PR journal and live 83-PR queue",
+        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74"
+      },
+      {
+        "number": 125,
+        "title": "Lore: alternative Last Seed mythology and inspiration bank",
+        "sha": "9f50910368238775bda40729722ec3512f14e623"
+      },
+      {
+        "number": 232,
+        "title": "META GAMES: возможности платформы для начинающих разработчик",
+        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98"
+      },
+      {
+        "number": 231,
+        "title": "fix(dispatcher): reliable conflict state when mergeable is n",
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785"
+      },
+      {
+        "number": 126,
+        "title": "Эталон: универсальный промпт Sketch → HTML Game → ZIP",
+        "sha": "7f5616591ca5baa37186d86621299d32c77230b1"
+      },
+      {
+        "number": 236,
+        "title": "meta-bot: шаг ходьбы не перелетает цель",
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05"
+      },
+      {
+        "number": 229,
+        "title": "Рабочий чат МГ/МГЛ: цикл и передача смены",
+        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1"
+      },
+      {
+        "number": 230,
+        "title": "Dispatcher: retry queue push when main moves",
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88"
+      },
+      {
+        "number": 227,
+        "title": "MG Dispatcher: automated PR triage queue",
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496"
+      },
+      {
+        "number": 226,
+        "title": "ЛОР: Древо миров и каталог skin-trainer — чистая история без",
+        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8"
+      },
       {
         "number": 216,
         "title": "СВОДКА ДЛЯ CLAUDE: facts-only GitHub Actions bot",
@@ -244,6 +531,139 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 296,
+        "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a",
+        "paths": [
+          "automation/asset-check/test_htmlpack.py"
+        ]
+      },
+      {
+        "number": 293,
+        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 292,
+        "sha": "5df54dc0764daa77154709207e612b311127108d",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 267,
+        "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py",
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 285,
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 241,
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
+      },
+      {
+        "number": 259,
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
+      },
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
+      {
+        "number": 238,
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 231,
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
+      },
+      {
+        "number": 236,
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
+      },
+      {
+        "number": 230,
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 227,
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
@@ -280,12 +700,12 @@
   },
   "changes": {
     "lab": {
-      "count": 203,
-      "folders": ".github:4, AGENTS.md:1, automation:5, BIBLIOTEKA.md:1, docs:2, DOVODKA.md:1, meta-games:1, OSHIBKI.md:1, reports:2, rules:4, scripts:8, ZADACHI.md:1"
+      "count": 1975,
+      "folders": "нет данных"
     },
     "mg": {
-      "count": 2,
-      "folders": "AGENTS.md:1, automation:1, rules:1"
+      "count": 7,
+      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:2"
     }
   },
   "games": [
@@ -308,6 +728,11 @@
       "name": "broken-city-copy",
       "bot": "не запускалась",
       "storefront": "да"
+    },
+    {
+      "name": "ostrov-aptekarya",
+      "bot": "прошла",
+      "storefront": "нет"
     },
     {
       "name": "rainbow-acceleration",
@@ -346,12 +771,30 @@
     }
   ],
   "errors": [
-    "| 18 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая игра, неверная игра, пропавшая команда бота |",
-    "| 17 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дубли, внешние/небезопасные ссылки, неверный первый мир |",
+    "| 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая игра, неверная игра, пропавшая команда бота |",
+    "| 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дубли, внешние/небезопасные ссылки, неверный первый мир |",
     "| 24 | 10.11.2026 | Сводка без progress.json или при ошибке GitHub API могла бы выдавать непроверенные пункты как «готово» и прятать красные прогоны; старые варианты #211/#212 не защищали эту сводку полным набором мутаций | Изолированные ответы: отсутствующий JSON, HTTP 403, failure workflow и подмена статуса PR | `scripts/status/selftest.mjs`: `missing-progress-as-ready`, `api-error-crashes-summary`, `red-run-as-green`, `merged-as-open`, `open-as-merged`, `protected-file-ignored`, ограничения размера, `hardcoded-protected-file-cheat` |",
     "| 25 | 10.11.2026 | Сводка игнорировала новую запись OSHIBKI с уже использованным номером (в main номер 18 повторён) | Сравнение только по номеру ошибочно скрывало новую строку | `scripts/status/selftest.mjs`: `duplicate-error-number-hidden` |",
     "| 26 | 10.11.2026 | Ошибка GitHub Compare возвращала строку «нет данных», а сводка печатала undefined коммитов | Подмена сравнения на исключение API | `scripts/status/selftest.mjs`: `failed-compare-disguised-as-zero` |",
     "| 27 | 10.11.2026 | KONTUR Guard отверг бот сводки за прямую зависимость от `process.env.GITHUB_*` (К4.1) | [красный KONTUR Guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42759421016) | `scripts/status/selftest.mjs`: `raw-github-env-rejected` (переменные передаются через `STATUS_*` workflow) |",
-    "| 28 | 10.11.2026 | Ошибка GitHub API для списка PR интерпретировалась как отсутствие защищённых PR (пустой список вместо «нет данных») | Изолированный ответ API 403 | `scripts/status/selftest.mjs`: `pr-api-error-hides-protected-merges` |"
+    "| 28 | 10.11.2026 | Ошибка GitHub API для списка PR интерпретировалась как отсутствие защищённых PR (пустой список вместо «нет данных») | Изолированный ответ API 403 | `scripts/status/selftest.mjs`: `pr-api-error-hides-protected-merges` |",
+    "| 29 | 10.11.2026 | Диспетчер: KONTUR Guard отклонил условное чтение `process.env.GITHUB_*` и ветвление по `process.argv` в модуле библиотеки | [KONTUR Guard 42787965154](https://github.com/mpaykin1/meta6-lab/actions/runs/42787965154) | Разделён модуль `build.mjs` и `run.mjs`, авторизация без ветвления по среде; существующая вечная ловушка `scripts/kontur/mutate-kontur-guard.mjs` и `scripts/dispetcher/test/build.test.mjs` |",
+    "| 30 | 10.11.2026 | Диспетчер: первый прогон на main упал — пока строилась очередь, в main пришёл чужой коммит и `git push` отклонён (fetch first), DISPETCHER.md не появился | [прогон 42790554576](https://github.com/mpaykin1/meta6-lab/actions/runs/42790554576) | Шаг `Commit queue` в `.github/workflows/dispetcher.yml`: до 5 попыток — свежий main, пересборка очереди, повторный push; проверка `scripts/dispetcher/test/build.test.mjs`: `trap: workflow retries push when main moved` |",
+    "| 31 | 11.11.2026 | META BOT, ядро: `walkToGoal` шагал фиксированные 450 мс и считал направление по устаревшему положению героя — рядом с целью герой перелетал её и качался вокруг (≈1,36 ед. при шаге 2,7), самотест «цель меняется внутри уровня» падал ложным «застрял» и блокировал PR #87 | [META BOT 42912927017](https://github.com/mpaykin1/meta6-lab/actions/runs/42912927017/job/130167927169) | `scripts/meta-bot/selftest.mjs`: «шаг ходьбы у цели не перелетает цель» (`stepMs`: шаг не длиннее пути до цели; свежее состояние перед шагом) |",
+    "| 34 | 10.11.2026 | MG Dispatcher принимал GitHub `mergeable=null` за отсутствие конфликта после сдвига main, из-за чего очередь показывала неверный ноль конфликтов | [MG Dispatcher 42791769677](https://github.com/mpaykin1/meta6-lab/actions/runs/42791769677) и анализ `scripts/dispetcher/build.mjs` | `scripts/dispetcher/mutate-mergeable-null.mjs`: 5 мутаций — отсутствие повторов, потеря прежнего конфликта, выдача неизвестного статуса за чистый PR и обман с жёстко заданным `false`, ошибочное признание красного CI доказательством отсутствия конфликта; `scripts/dispetcher/test/mergeable-null.test.mjs` |",
+    "| 35 | 11.11.2026 | PR #238: компилятор журнала ветвился по `process.argv` и блокировался KONTUR Guard | [красный прогон 42999367374](https://github.com/mpaykin1/meta6-lab/actions/runs/42999367374) | `scripts/journal/mutate-journal.mjs`: argv-deception, validation-publishes, writer-dry-run, missing-source |",
+    "| 36 | 11.11.2026 | Сторож эталонов пропускал изменения тестов внутри папок `tests/` и файлов `*.spec.ts`: проверял только некоторые имена тестовых файлов | Сверка `referenceGate` с запретом менять существующие тесты | `scripts/storozha/mutate-storozha.mjs`: bypass nested test directory, bypass TypeScript spec file; `scripts/storozha/verify-storozha.mjs` |",
+    "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |",
+    "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |",
+    "| 1002 | 11.11.2026 | Индекс shared/components применял statSync к папкам и readFileSync к входным файлам; символьная ссылка могла вывести чтение за пределы утверждённого каталога и подменить источник | Статический разбор scripts/shared/build-index.mjs: statSync следует по symlink | scripts/shared/mutate-build-index-symlinks.mjs: блокировка symlink корня, папки, manifest, entry и три мутации (включая обман по имени ID) |",
+    "| 1003 | 11.11.2026 | PR #241: проверка symlink только на конечном файле пропускала подмену предка `shared/` или `reference/`; вывод `shared/index.json` мог перезаписать сторонний файл через symlink | Анализ `readRegularFile` и `fs.writeFileSync(target)` на существующем коде PR | `scripts/shared/mutate-build-index-symlinks.mjs`: атаки `shared-parent`, `reference-parent`, `target`, мутации обхода проверки предков и `O_NOFOLLOW` |",
+    "| 39 | 11.11.2026 | Публикация после merge: исходный demos/living-watercolor/index.html существует, но Pages даёт 404; прежний lab-pages проверял только каталог | Требование владельца от 11.11 и diff .github/workflows/lab-pages.yml | `scripts/lab/verify-link-ok.sh` + `scripts/lab/mutate-link-ok.sh` (404, чужой хост, CI-обман); [зелёная ловушка](https://github.com/mpaykin1/meta6-lab/actions/runs/43014018459), проверка всех index в PR #246 |",
+    "| 40 | 11.11.2026 | HTML 200 с недоступным JS/CSS/изображением/аудио: прежняя проверка игнорировала вложенные 404 | Локальный fixture HTML 200 + JS 404 и 3 мутации (пропуск script, чужой origin, CI-обман) | `scripts/lab/link-ok.sh` вызывает `scripts/lab/check-page-assets.sh` перед PASS; `scripts/lab/mutate-page-assets.mjs` + `scripts/lab/verify-check-page-assets.sh`, [PR #246](https://github.com/mpaykin1/meta6-lab/pull/246), [SHA bb60a8b](https://github.com/mpaykin1/meta6-lab/commit/bb60a8bff951c714fb6c332a323445119ac1486c) |",
+    "| 1105 | 13.11.2026 | ASSET CHECK v2 переименовывал A1/A6/A7 и заменял старые assertions; восстановлены все строки прежнего теста и стабильные диагностические ID | PR #267, сравнение с main: test_check_pack.py только 4 добавления/0 удалений | automation/asset-check/mutate_bot.py: 3 мутации переименования ID; прежние test_A1_no_manifest/test_A6_no_license/test_A7_no_content_flags сохранены |",
+    "| 1106 | 13.11.2026 | ZADACHI watch подменял ошибки API 403/429 пустыми списками, из-за чего числа зависших/заброшенных колебались без реальных PR изменений | [история ZADACHI](https://github.com/mpaykin1/meta6-lab/commits/main/ZADACHI.md) | `scripts/zadachi/mutate.mjs`: API 403 как пустой список и API 429 как пустые checks; [патч](https://github.com/mpaykin1/meta6-lab/commit/f751682d698d8923b1936da59fe47d3a7613c336) |",
+    "| 1107 | 13.11.2026 | STATUS скрывал 7 зелёных FINISH из-за отсутствия progress.json и считал изменение времени новыми фактами | [таблица FINISH](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/FINISH.md) | `scripts/status/selftest.mjs`: false-green-without-run-link, hourly-gate-removed, timestamp-trigger-misreported-as-fact; [патч](https://github.com/mpaykin1/meta6-lab/commit/b4254e356b689d023afdcf2d8a69379345c42add) |",
+    "| 1108 | 13.11.2026 | sliyanie-status создавал main-коммит из-за изменения времени при неизменных состояниях PR; API 403 подменял сведения словом «нет данных» | [workflow](https://github.com/mpaykin1/meta6-lab/blob/main/.github/workflows/sliyanie-status.yml) | `scripts/lab/test-sliyanie-status.py`: ловушка time-only-commit и 3 прежние; [патч](https://github.com/mpaykin1/meta6-lab/commit/1f0e1aa64edad1d5d70882818c4824f5c51235f1) |",
+    "| 1109 | 13.11.2026 | investigation-snapshot писал generated_at при прежних фактах и мог публиковать неполную выборку при исчерпании лимита GitHub API | [workflow](https://github.com/mpaykin1/meta6-lab/blob/main/.github/workflows/investigation-snapshot.yml) | `scripts/investigation/mutate-publish.mjs`: почасовой лимит, неполный API, время ≠ факт; [патч](https://github.com/mpaykin1/meta6-lab/commit/50db5add34a89257bb2234bdf7f038e786de17c5) |",
+    "| 1110 | 13.11.2026 | MG Dispatcher запрашивал PR из закрытой исторической очереди и падал на 403 GitHub API quota, теряя возможность публиковать исправную очередь | [красный run 43410481729](https://github.com/mpaykin1/meta6-lab/actions/runs/43410481729) | `scripts/dispetcher/mutate-quota.mjs`: 3 мутации на 403/429 и ошибочную авторизацию; [патч](https://github.com/mpaykin1/meta6-lab/commit/03836dddab7a05986b00de2f9b92dec9924c93cf) |"
   ]
 }

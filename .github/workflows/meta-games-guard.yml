@@ -1,4 +1,7 @@
 name: META GAMES guard
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 # Защищает принятые оригиналы и направление проекта (rules/09-platforma/META_GAMES_PLATFORM.md).
 # PR: красный, если тронут защищённый файл. Push в main: защищённые файлы автоматически возвращаются.
 on:
@@ -10,16 +13,13 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   guard:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 300
+          fetch-depth: 0  # Claude 13.11: полная история — иначе база PR не видна и guard даёт ложный FAIL (#278)
       - name: Check protected files
         id: check
         env:

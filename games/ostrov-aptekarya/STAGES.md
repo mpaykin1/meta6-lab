@@ -218,6 +218,9 @@ for (let k = 0; k < steps; k++) simulate(dt / steps, mx, my);   // логика 
 
 **Ловушка (была ошибка):** `Object.assign(api, {get state(){…}})` копирует значение, а не геттер — бот видел вечное `title`. Только `Object.defineProperties(api, Object.getOwnPropertyDescriptors({...}))`.
 
+**Ловушка главы II (13.11.2026):** проверка бота не считается прохождением двери, если движок сам вызывает `chapter2.action()` из `botInput`. Бот обязан идти до створки и нажать настоящую игровую кнопку (пробел/иконка). Защита — `bot/inventory.mjs` и три мутации в `bot/mutate-inventory.mjs`; `bot/playthrough.mjs` проверяет три страницы и минимум одну закрытую дверь. Скриншоты — мобильный 390×844 и ПК.
+
+
 Запуск локально (Chrome + Playwright есть в репозитории):
 ```bash
 python3 -m http.server 8765 &      # из корня meta6-lab

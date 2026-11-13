@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 300
+          fetch-depth: 0  # Claude 13.11: полная история — иначе база PR не видна и guard даёт ложный FAIL (#278)
       - name: Check protected files
         id: check
         env:

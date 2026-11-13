@@ -1,16 +1,25 @@
 {
-  "generated_at": "2026-11-13T08:17:12.710Z",
+  "generated_at": "2026-11-13T10:41:49.258Z",
   "sha": {
-    "lab": "16ecb043b40aa764707ebd3575ea1febac8b1479",
+    "lab": "4a6cf0bb98efecd34021b4718d7d79cbf63611ee",
     "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43391934365",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43411001670",
   "review": {
     "protected": [
+      {
+        "number": 285,
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
       {
         "number": 241,
         "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
@@ -138,7 +147,23 @@
         ]
       }
     ],
-    "redLab": [],
+    "redLab": [
+      {
+        "workflow": "MG Dispatcher",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43410481729",
+        "step": "Run node scripts/dispetcher/run.mjs"
+      },
+      {
+        "workflow": "STOROZHA branch updater",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43409815373",
+        "step": "Update open PR heads and synchronize exact Git conflicts"
+      },
+      {
+        "workflow": "STOROZHA weekly maintenance",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43409546447",
+        "step": "Close genuinely stale PRs without deleting branches and write daily report"
+      }
+    ],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -149,7 +174,7 @@
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
       "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
       "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
-      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
+      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open dirty | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
       "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
@@ -306,11 +331,16 @@
     ]
   },
   "pr": {
-    "open": 49,
+    "open": 53,
     "conflicts": "нет данных",
-    "merged": 26,
+    "merged": 27,
     "closed": 58,
     "mergedItems": [
+      {
+        "number": 285,
+        "title": "storozha: «только Claude» — лишь ядро охраны (убираем тормоз",
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3"
+      },
       {
         "number": 279,
         "title": "INK: объёмный дождевой лес из видео, Ч/Б и цвет",
@@ -444,6 +474,15 @@
     ],
     "protectedItems": [
       {
+        "number": 285,
+        "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
         "number": 241,
         "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
         "paths": [
@@ -573,7 +612,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1697,
+      "count": 1789,
       "folders": "нет данных"
     },
     "mg": {
@@ -634,7 +673,7 @@
     },
     {
       "name": "veil-terraces",
-      "bot": "не прошла",
+      "bot": "прошла",
       "storefront": "да"
     }
   ],

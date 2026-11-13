@@ -18,6 +18,7 @@
 | skin | `skin.json` (meta6-skin/1) | kinds/skin.py | KS1–KS12 = SKINY.md S1–S12 |
 | abyss | `manifest.json` со `sprites` | kinds/abyss.py | AB:* — **переиспользует** automation/asset-quality/validate.py |
 | ink | `pack.json` с `"format": "ink-pack/1"` + `makers.js` | kinds/ink.py (+ ink_harness.mjs, Node) | IK1–IK14 (§INK ниже) |
+| htmlpack | `index.html` с `window.__PACK__`, `pack.json` с `format: htmlpack/1` | kinds/htmlpack.py (+ htmlpack_harness.mjs, Playwright/Chrome) | HP1–HP9: все 26 сохранены; консоль, чистый экран, CDN/eval; доля пикселей/детальность/живость не ниже 10-го процентиля эталона; FPS ≥ 80% эталона; изолированная видимость нового объекта |
 | model3d | `.glb` / `.gltf` | kinds/model3d.py | M1 читается, M2 меши, M3 треугольники ≤ 20k (HARD > 100k), M4 текстуры ≤ 2048 и степень двойки, M5 масштаб в метрах, M6 скелет с анимациями, M7 ≤ 8 материалов, M8 размер файла, M9 нормали, M10 низ на y=0, M11 есть idle |
 | audio | `.wav .ogg .mp3 .m4a .flac .opus` | kinds/audio.py | S1 читается, S2 перегруз, S3 тихо, S4 резкие высокие (правило ЗВУК), S5 тишина в начале, S6 громкость/вес, S7 стык петли, S8 короткая музыка, S9 DC |
 | images | картинки без манифеста (запасной) | kinds/images.py | A1 нужен манифест, I2–I4 |
@@ -31,6 +32,9 @@
 `NAME`, `ORDER`, `detect(root) -> bool`, `check(root, report) -> set(проверенных файлов)`; `report.add(id, "HARD"|"SOFT", где, что не так, как исправить)`.
 Плюс ловушки в `test_kinds.py` (чистый образец проходит, каждая подложенная ошибка ловится) и строки в `MUTANTS` в `mutate_bot.py`. Бот подхватит вид сам — правка ядра не нужна.
 Если для вида уже есть валидатор в репозитории — вызывать его (как abyss), не переписывать (REUSE).
+
+### HTMLPACK — визуальный эталон живой страницы
+Бот выбирает пункты `window.__PACK__.items` через кнопки меню ☰ и снимает кадры в Chrome через Playwright. Перед сравнением кадров камера обязана приблизиться к target пункта меню (HP9), чтобы движение камеры не подменяло живость и детальность объекта. Для новых объектов `window.__PACK_PROBE__.assets[id]` и `setHidden(id, bool)` позволяют измерять их отдельно от общей сцены. Порог видимости, детальности и живости — p10 по всем 26 исходным объектам из `reference/tumannye-shpili/index.html`. Чистый экран проверяется отдельно DOM+HTML. Пак не меняет эталон; все ID исходника обязательны. Любые эффекты, шейдеры, частицы и свечение разрешены.
 
 ## 0. Где лежат паки
 - `asset-packs/incoming/<имя>/` — пак в работе. HARD-ошибки не валят CI, но пак нельзя брать в игру.

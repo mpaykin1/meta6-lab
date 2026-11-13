@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Туманные шпили — ассет-пак</title>
+<!-- PACK-COUNTER (для Claude): 26 ассетов · 2D=17 · 2.5D=9 · 3D=0 · полный список в window.__PACK__ -->
+<style>
+html,body{margin:0;width:100%;height:100%;background:#020912;overflow:hidden;touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#c{position:fixed;left:0;top:0;width:100%;height:100%;display:block}
+#mb{position:fixed;top:12px;right:12px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(150,220,255,.28);background:rgba(4,16,32,.45);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;padding:0;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+#mb svg{width:22px;height:22px;stroke:#bfeaff;stroke-width:2;stroke-linecap:round;fill:none}
+#pn{position:fixed;top:0;right:0;bottom:0;width:min(340px,86vw);background:rgba(3,12,26,.9);border-left:1px solid rgba(120,200,240,.2);transform:translateX(102%);transition:transform .45s cubic-bezier(.2,.8,.2,1);z-index:6;display:flex;flex-direction:column;color:#cfeeff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#pn.on{transform:none}
+#pn header{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 10px}
+#pn h1{font-size:16px;margin:0;font-weight:600;letter-spacing:.04em}
+#pn h1 small{display:block;font-size:11px;font-weight:400;opacity:.6;margin-top:3px;letter-spacing:.02em}
+#cl{width:40px;height:40px;border-radius:50%;border:1px solid rgba(150,220,255,.25);background:none;color:#bfeaff;font-size:20px;cursor:pointer}
+.row{display:flex;gap:8px;padding:0 16px 10px}
+.row button{flex:1;height:42px;border-radius:10px;border:1px solid rgba(150,220,255,.3);background:rgba(40,120,170,.22);color:#dff5ff;font-size:13px;cursor:pointer}
+#ls{flex:1;overflow-y:auto;padding:0 10px 18px;touch-action:pan-y;-webkit-overflow-scrolling:touch}
+#ls button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;padding:11px 10px;margin:0;border:0;border-bottom:1px solid rgba(120,200,240,.1);background:none;color:#cfeeff;font-size:14px;text-align:left;cursor:pointer}
+#ls button.sel{background:rgba(255,120,170,.14)}
+#ls i{font-style:normal;font-size:10px;padding:3px 7px;border-radius:9px;border:1px solid rgba(150,220,255,.35);opacity:.8;white-space:nowrap}
+#ls i.k25{border-color:rgba(255,140,185,.6);color:#ffc3d9}
+#err{position:fixed;inset:0;display:none;align-items:center;justify-content:center;color:#cfeeff;padding:24px;text-align:center}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<button id="mb" aria-label="Меню"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<aside id="pn" aria-hidden="true">
+  <header><h1>Туманные шпили<small>ассет-пак · всё анимировано · 2D и 2.5D</small></h1><button id="cl" aria-label="Закрыть">×</button></header>
+  <div class="row"><button id="bw">▶ Весь мир</button><button id="bf">⛶ Полный экран</button></div>
+  <div id="ls"></div>
+</aside>
+<div id="err">Не удалось запустить графику (WebGL недоступен).</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(()=>{'use strict';
+const T=window.THREE,$=id=>document.getElementById(id);
+const fail=()=>{$('err').style.display='flex'};
+if(!T){fail();return}
+const canvas=$('c');let renderer;
+try{renderer=new T.WebGLRenderer({canvas,antialias:false,alpha:false,powerPreference:'high-performance'})}catch(e){fail();return}
+renderer.setPixelRatio(1);renderer.autoClear=true;renderer.setClearColor(0x06182c,1);
+
+/* ============ СОСТАВ ПАКА (скрытый счётчик, виден только в коде/консоли) ============ */
+const GX=15,GY=45,GZ=-44;                       // врата
+const PLAZA={cam:[0,1.3,14],look:[0,8,-60]};
+const PACK={name:'Туманные шпили',version:'1.1.0',items:[
+ {id:'sky',n:'Небо и световые столбы',k:'2D',m:'plaza',cam:[0,6,14],look:[0,40,-80]},
+ {id:'fog',n:'Слои тумана',k:'2D',m:'plaza',cam:[-6,5,6],look:[-4,7,-50]},
+ {id:'obelisk',n:'Обелиск-гигант',k:'2.5D',m:'plaza',cam:[0,10,-14],look:[0,42,-78]},
+ {id:'walls',n:'Стены-исполины',k:'2.5D',m:'plaza',cam:[0,12,10],look:[30,36,-40]},
+ {id:'cathedral',n:'Ярусные шпили',k:'2.5D',m:'plaza',cam:[-6,22,-30],look:[-10,38,-100]},
+ {id:'antenna',n:'Мачты-иглы',k:'2D',m:'plaza',cam:[-7,7,-22],look:[-7,12,-48]},
+ {id:'dome',n:'Купол',k:'2.5D',m:'plaza',cam:[-3,3,-20],look:[-3,5,-40]},
+ {id:'cliff',n:'Город на склоне',k:'2.5D',m:'plaza',cam:[-10,8,-14],look:[-24,14,-58]},
+ {id:'rubble',n:'Руины у воды',k:'2D',m:'plaza',cam:[4,2,-6],look:[2,3,-30]},
+ {id:'water',n:'Зеркальная вода',k:'2D',m:'plaza',cam:[0,3.2,14],look:[0,1,-60]},
+ {id:'bokeh',n:'Блики на воде',k:'2D',m:'plaza',cam:[3,2.2,12],look:[0,-2,-60]},
+ {id:'gate',n:'Розовые врата',k:'2.5D',m:'gate',cam:[GX-2,GY,GZ+13],look:[GX,GY+1,GZ]},
+ {id:'hero',n:'Летун в плаще',k:'2.5D',m:'flight',follow:'hero',d:9},
+ {id:'cape',n:'Плащ-ленты',k:'2D',m:'flight',follow:'hero',d:6},
+ {id:'blade',n:'Клинок и дуга удара',k:'2D',m:'flight',follow:'hero',d:7,slash:1},
+ {id:'engine',n:'Огонёк и след летуна',k:'2D',m:'flight',follow:'hero',d:7},
+ {id:'beast',n:'Багровый зверь',k:'2.5D',m:'flight',follow:'beast',d:19},
+ {id:'mask',n:'Бледная маска',k:'2D',m:'flight',follow:'beast',d:10},
+ {id:'jaws',n:'Светящиеся челюсти',k:'2D',m:'flight',follow:'beast',d:12},
+ {id:'tendrils',n:'Розовые щупальца',k:'2D',m:'flight',follow:'beast',d:15},
+ {id:'explosion',n:'Взрыв врат',k:'2D',m:'gate',cam:[GX-8,GY-1,GZ+19],look:[GX-4,GY,GZ]},
+ {id:'sparks',n:'Искры',k:'2D',m:'gate',cam:[GX-6,GY-6,GZ+17],look:[GX-4,GY-5,GZ]},
+ {id:'petals',n:'Осколки-лепестки',k:'2D',m:'gate',cam:[GX-5,GY-4,GZ+13],look:[GX-4,GY-3,GZ]},
+ {id:'rain',n:'Дождь',k:'2D',m:'plaza',cam:[0,4,14],look:[0,14,-60],rain:1},
+ {id:'dust',n:'Пыль и блёстки',k:'2D',m:'plaza',cam:[0,5,10],look:[0,12,-60]},
+ {id:'post',n:'Кино-обработка: зерно, аберрация, глитч, свечение',k:'2D',m:'plaza',cam:PLAZA.cam,look:PLAZA.look,glitch:1},
+
+ {id:'sable-beast',n:'Зверь — багровый страж',k:'2.5D',m:'flight',cam:[25,45,-17],look:[25,44,-40],isNew:true},
+ {id:'shattered-mast',n:'Падающая мачта-игла',k:'2.5D',m:'plaza',cam:[-23,16,8],look:[-23,13,-38],isNew:true},
+ {id:'gate-bridge',n:'Мост осколков врат',k:'2.5D',m:'plaza',cam:[12,14,8],look:[12,13,-40],isNew:true},
+ {id:'dawn-sentinel',n:'Спутник летуна — хранитель',k:'2.5D',m:'flight',follow:'hero',d:13,isNew:true},
+ {id:'mirror-seed',n:'Сердце зеркальной воды — усиление',k:'2.5D',m:'flight',cam:[3,45,-19],look:[3,43,-40],isNew:true},
+ {id:'storm-heart',n:'Багровая гроза над шпилями',k:'2D',m:'plaza',cam:[-34,48,-14],look:[-34,46,-43],isNew:true}
+]};
+PACK.count=PACK.items.length;PACK.by={d2:PACK.items.filter(i=>i.k==='2D').length,d25:PACK.items.filter(i=>i.k==='2.5D').length,d3:0};
+window.__PACK__=PACK;try{console.info('[PACK]',PACK.name,PACK.version,'ассетов:',PACK.count,PACK.by)}catch(e){}
+
+/* ============ УТИЛИТЫ ============ */
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const ex=(k,dt)=>1-Math.exp(-k*dt),clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,k)=>a+(b-a)*k;
+function mk(w,h,draw){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new T.CanvasTexture(c);t.minFilter=T.LinearMipmapLinearFilter;return t}
+const S=v=>'rgb('+(v|0)+',0,0)';
+function lit(x,list){x.globalCompositeOperation='lighter';x.fillStyle='rgb(0,255,0)';for(const l of list)x.fillRect(l[0],l[1],l[2],l[3]);x.globalCompositeOperation='source-over'}
+const NOISE=`
+float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}
+float fbm(vec2 p){float a=.5,s=0.;for(int i=0;i<4;i++){s+=a*noise(p);p=p*2.03+7.1;a*=.5;}return s;}
+`;
+const VS='varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}';
+const U={t:{value:0}};
+const scene=new T.Scene(),camera=new T.PerspectiveCamera(50,1,.5,900);scene.add(camera);
+const BASE={transparent:true,depthTest:false,depthWrite:false,side:T.DoubleSide};
+function plane(w,h,mat,x,y,z,parent){const m=new T.Mesh(new T.PlaneGeometry(w,h),mat);m.position.set(x,y,z);m.frustumCulled=false;(parent||scene).add(m);return m}
+
+/* ============ 1. НЕБО + СВЕТОВЫЕ СТОЛБЫ (2D шейдер) ============ */
+const skyMat=new T.ShaderMaterial(Object.assign({},BASE,{uniforms:{uT:U.t,uLook:{value:new T.Vector2()},uAsp:{value:1}},vertexShader:VS,fragmentShader:NOISE+`
+uniform float uT,uAsp;uniform vec2 uLook;varying vec2 vUv;
+void main(){vec2 p=vUv-.5;p.x*=uAsp;p+=uLook;
+ float g=smoothstep(-.7,.6,p.y);
+ vec3 col=mix(vec3(.07,.27,.42),vec3(.10,.42,.60),g);
+ float r=length(p*vec2(.8,1.)-vec2(0.,.22));
+ col=mix(col,vec3(.24,.68,.84),exp(-r*r*3.2)*.85);
+ float a=p.x*2.4+p.y*.55;
+ float sh=fbm(vec2(a*2.2+uT*.02,uT*.015));sh=pow(sh,3.)*smoothstep(-.5,.5,p.y);
+ col+=vec3(.25,.6,.75)*sh*.9;
+ col+=.07*fbm(p*3.+vec2(uT*.012,0.));
+ col*=1.-.55*smoothstep(.35,1.1,abs(p.x));
+ gl_FragColor=vec4(col*vec3(.7,.78,.84),1.);}`}));
+const sky=plane(2,2,skyMat,0,0,-600,camera);sky.renderOrder=-1000;
+
+/* ============ АРХИТЕКТУРА (спрайты-силуэты, R=тон, G=огни) ============ */
+const FOGC=new T.Color(0x155578);
+function archMat(tex,fog,o){o=o||{};return new T.ShaderMaterial(Object.assign({},BASE,{uniforms:{map:{value:tex},uT:U.t,uFog:{value:fog},uBase:{value:o.base==null?.8:o.base},uHgt:{value:1},uSway:{value:o.sway||0},uPh:{value:o.ph||0},uLight:{value:new T.Color(o.light||0x9fe8ff)},uAmp:{value:o.amp==null?.9:o.amp},uFogC:{value:FOGC}},
+vertexShader:'uniform float uT,uSway,uPh;varying vec2 vUv;void main(){vUv=uv;vec3 p=position;p.x+=(sin(uT*.8+uPh)+.4*sin(uT*1.9+uPh*2.))*uSway*uv.y*uv.y;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);}',
+fragmentShader:NOISE+`
+uniform sampler2D map;uniform float uT,uFog,uBase,uAmp,uHgt;uniform vec3 uLight,uFogC;varying vec2 vUv;
+void main(){vec4 t=texture2D(map,vUv);if(t.a<.03)discard;
+ vec3 c=mix(vec3(.022,.06,.115),vec3(.07,.22,.36),t.r);
+ float hz=clamp(uFog+(1.-uFog)*uBase*exp(-vUv.y*uHgt/11.),0.,1.);
+ c=mix(c,uFogC,hz);
+ vec2 cell=floor(vUv*vec2(60.,240.));float h=hash(cell);
+ float tw=.55+.45*sin(uT*(.6+2.4*h)+h*40.);
+ c+=uLight*t.g*tw*uAmp*(1.-hz*.5);
+ gl_FragColor=vec4(c,t.a);}`}))}
+function arch(tex,w,h,x,z,fog,o){const m=plane(w,h,archMat(tex,fog,o),x,h/2+((o&&o.y)||0),z);m.material.uniforms.uHgt.value=h;if(o&&o.flip)m.scale.x=-1;return m}
+
+const texObelisk=mk(256,1024,(x,w,h)=>{const R=rng(11),cx=w/2,half=y=>w*.42*(.3+.7*Math.pow(y/h,1.5));
+ x.beginPath();x.moveTo(cx,0);for(let y=40;y<=h;y+=24)x.lineTo(cx+half(y),y);for(let y=h;y>=40;y-=24)x.lineTo(cx-half(y),y);x.closePath();x.fillStyle=S(46);x.fill();x.save();x.clip();
+ for(let i=-3;i<=3;i++){x.beginPath();x.moveTo(cx+i*half(40)/3.5,40);x.lineTo(cx+i*half(h)/3.5,h);x.strokeStyle=S(i%2?105:20);x.lineWidth=i%2?3:5;x.stroke()}
+ for(let y=120;y<h;y+=64+R()*40){x.fillStyle=S(12);x.fillRect(0,y,w,6);x.fillStyle=S(120);x.fillRect(0,y+6,w,2)}
+ const L=[];for(let i=0;i<70;i++){const y=80+R()*(h-100);L.push([cx+(R()-.5)*1.7*half(y),y,2,3+R()*3])}lit(x,L);x.restore();
+ x.fillStyle=S(46);x.fillRect(cx-1.5,0,3,60)});
+const texWall=mk(256,1024,(x,w,h)=>{const R=rng(5);x.beginPath();x.moveTo(0,h);x.lineTo(0,0);let ex_=w*.86;x.lineTo(ex_,0);
+ for(let y=0;y<h;){const st=30+R()*90;y+=st;ex_=clamp(ex_+(R()-.5)*40,w*.72,w*.98);x.lineTo(ex_,y-st*.15);x.lineTo(ex_,Math.min(y,h))}
+ x.lineTo(w,h);x.closePath();x.fillStyle=S(18);x.fill();x.save();x.clip();
+ for(let i=0;i<26;i++){x.fillStyle=S(R()<.5?6:50);x.fillRect(R()*w,R()*h,4+R()*60,2+R()*4)}
+ for(let i=0;i<9;i++){x.fillStyle=S(60);x.fillRect(R()*w,0,2,h)}
+ const L=[];for(let i=0;i<40;i++)L.push([R()*w,R()*h,2,4]);lit(x,L);x.restore()});
+const texCath=mk(256,1024,(x,w,h)=>{const R=rng(23),cx=w/2,n=13,th=h*.062;x.fillStyle=S(40);
+ for(let i=0;i<n;i++){const wi=w*.62*(1-i/n*.82),y=h-(i+1)*th;x.fillStyle=S(34+i*3);x.fillRect(cx-wi/2,y,wi,th+1);x.fillStyle=S(14);x.fillRect(cx-wi*.68,y,wi*1.36,5);x.fillStyle=S(110);x.fillRect(cx-wi*.68,y+5,wi*1.36,2)}
+ const ty=h-n*th;x.fillStyle=S(40);x.beginPath();x.moveTo(cx-w*.06,ty);x.lineTo(cx,10);x.lineTo(cx+w*.06,ty);x.fill();
+ for(const s of[-1,1]){x.beginPath();x.moveTo(cx+s*w*.4,h);x.lineTo(cx+s*w*.36,h*.52);x.lineTo(cx+s*w*.3,h);x.fill();x.beginPath();x.moveTo(cx+s*w*.27,h);x.lineTo(cx+s*w*.24,h*.38);x.lineTo(cx+s*w*.2,h);x.fill()}
+ const L=[];for(let i=0;i<n;i++){const wi=w*.62*(1-i/n*.82),y=h-(i+1)*th+14;for(let k=-2;k<=2;k++)if(R()<.6)L.push([cx+k*wi*.17-1,y,2,th*.45])}lit(x,L)});
+const texAnt=mk(64,512,(x,w,h)=>{const cx=w/2;x.fillStyle=S(30);x.fillRect(cx-1.5,24,3,h-24);
+ for(let y=60,i=0;y<h-70;y+=38+i*3,i++){const s=5+i*.6;x.beginPath();x.moveTo(cx,y-s*1.5);x.lineTo(cx+s,y);x.lineTo(cx,y+s*1.5);x.lineTo(cx-s,y);x.fill();x.fillRect(cx-s*1.4,y-1,s*2.8,2)}
+ x.fillRect(cx-7,34,14,2);x.fillRect(cx-1,10,2,20);
+ x.beginPath();x.moveTo(cx-14,h);x.lineTo(cx-10,h-56);x.lineTo(cx,h-84);x.lineTo(cx+10,h-56);x.lineTo(cx+14,h);x.fill();
+ lit(x,[[cx-2,22,4,5],[cx-1,h-50,2,6],[cx-1,180,2,3]])});
+const texDome=mk(512,512,(x,w,h)=>{const cx=w/2;x.fillStyle=S(30);x.fillRect(w*.26,h*.62,w*.48,h*.38);
+ x.beginPath();x.ellipse(cx,h*.62,w*.25,h*.4,0,Math.PI,0);x.fill();x.fillRect(cx-3,h*.04,6,h*.22);x.beginPath();x.moveTo(cx-14,h*.25);x.lineTo(cx,h*.13);x.lineTo(cx+14,h*.25);x.fill();
+ for(let i=-4;i<=4;i++){x.strokeStyle=S(i%2?80:14);x.lineWidth=2;x.beginPath();x.moveTo(cx+i*w*.06,h*.62);x.quadraticCurveTo(cx+i*w*.05,h*.3,cx,h*.22);x.stroke()}
+ x.fillStyle=S(22);x.fillRect(w*.04,h*.78,w*.22,h*.22);x.fillRect(w*.74,h*.72,w*.22,h*.28);
+ for(const px of[.08,.2,.8,.92]){x.beginPath();x.moveTo(w*px-10,h*.78);x.lineTo(w*px,h*.56);x.lineTo(w*px+10,h*.78);x.fill()}
+ x.fillStyle=S(12);x.fillRect(w*.24,h*.62,w*.52,8);
+ const L=[];for(let i=0;i<9;i++)L.push([w*.3+i*w*.05,h*.72,5,h*.1]);lit(x,L)});
+const texCliff=mk(512,512,(x,w,h)=>{const R=rng(41);x.beginPath();x.moveTo(0,h);x.lineTo(0,h*.04);let px=0,py=h*.04;const st=[];
+ while(px<w){const dx=18+R()*46;px+=dx;x.lineTo(Math.min(px,w),py);st.push([px-dx/2,py]);py=Math.min(h*.92,py+10+R()*52);x.lineTo(Math.min(px,w),py)}
+ x.lineTo(w,h);x.closePath();x.fillStyle=S(28);x.fill();
+ for(const s of st){if(R()<.6){const hh=14+R()*46;x.beginPath();x.moveTo(s[0]-5,s[1]+1);x.lineTo(s[0],s[1]-hh);x.lineTo(s[0]+5,s[1]+1);x.fill()}if(R()<.35)x.fillRect(s[0]-9,s[1]-12,18,13)}
+ x.save();x.globalCompositeOperation='source-atop';for(let i=0;i<60;i++){x.fillStyle=S(R()<.5?8:64);x.fillRect(R()*w,R()*h,6+R()*50,2+R()*3)}x.restore();
+ const L=[];for(const s of st)if(R()<.5)L.push([s[0],s[1]+8+R()*30,2,4]);lit(x,L)});
+function texRubble(seed){return mk(1024,128,(x,w,h)=>{const R=rng(seed);x.fillStyle=S(16);x.fillRect(0,h-16,w,16);
+ for(let px=0;px<w;){const bw=8+R()*58,bh=8+R()*R()*100;x.save();x.translate(px+bw/2,h-10);x.rotate((R()-.5)*.5);x.fillStyle=S(10+R()*26);x.fillRect(-bw/2,-bh,bw,bh+10);
+  if(R()<.3){x.globalCompositeOperation='destination-out';x.fillRect(-bw*.2,-bh*.75,bw*.4,bh*.3);x.globalCompositeOperation='source-over'}
+  if(R()<.35){x.fillRect(-1.5,-bh-20-R()*30,3,40)}x.restore();px+=bw*(.5+R()*.9)}
+ for(let i=0;i<14;i++){x.strokeStyle=S(14);x.lineWidth=2+R()*3;const bx=R()*w;x.beginPath();x.moveTo(bx,h-10);x.lineTo(bx+(R()-.5)*90,h-30-R()*60);x.stroke()}})}
+const texGate=mk(256,1024,(x,w,h)=>{const R=rng(77),cx=w/2;x.fillStyle=S(34);x.fillRect(w*.2,h*.14,w*.6,h*.86);
+ x.fillRect(w*.12,h*.2,w*.76,14);x.fillRect(w*.12,h*.36,w*.76,14);
+ for(const s of[-1,1]){x.beginPath();x.moveTo(cx+s*w*.3,h*.15);x.lineTo(cx+s*w*.26,h*.02);x.lineTo(cx+s*w*.16,h*.15);x.fill()}
+ x.beginPath();x.moveTo(cx-10,h*.15);x.lineTo(cx,h*.06);x.lineTo(cx+10,h*.15);x.fill();
+ for(let i=0;i<30;i++){x.fillStyle=S(R()<.5?12:80);x.fillRect(w*.2+R()*w*.6,h*.4+R()*h*.6,3+R()*40,2+R()*3)}
+ x.strokeStyle=S(120);x.lineWidth=5;x.beginPath();x.moveTo(cx-w*.2,h*.345);x.lineTo(cx-w*.2,h*.27);x.quadraticCurveTo(cx,h*.2,cx+w*.2,h*.27);x.lineTo(cx+w*.2,h*.345);x.stroke();
+ x.globalCompositeOperation='lighter';const g=x.createLinearGradient(0,h*.23,0,h*.345);g.addColorStop(0,'rgb(0,255,0)');g.addColorStop(1,'rgb(0,120,0)');x.fillStyle=g;
+ x.beginPath();x.moveTo(cx-w*.17,h*.34);x.lineTo(cx-w*.17,h*.275);x.quadraticCurveTo(cx,h*.215,cx+w*.17,h*.275);x.lineTo(cx+w*.17,h*.34);x.fill();x.globalCompositeOperation='source-over';
+ x.fillStyle=S(20);for(let i=-2;i<=2;i++)x.fillRect(cx+i*w*.065-2,h*.25,4,h*.09)});
+
+arch(texCath,26,96,-34,-124,.8,{base:.6});arch(texCath,22,84,18,-112,.72,{base:.6});arch(texCath,20,72,-13,-102,.66,{base:.65});
+const obelisk=arch(texObelisk,30,112,0,-78,.4,{base:.95});
+arch(texCliff,44,36,-25,-58,.4,{flip:false});
+arch(texAnt,2.2,17,11,-56,.4,{sway:.35,ph:1});arch(texAnt,2.6,20,-5.5,-52,.36,{sway:.4,ph:2.2});arch(texAnt,2.5,19,7,-50,.33,{sway:.4,ph:3.1});
+arch(texAnt,2.9,22,-9,-46,.28,{sway:.45,ph:.4});arch(texAnt,1.9,14,-15,-44,.26,{sway:.3,ph:5});
+const gate=arch(texGate,13,62,GX,GZ,.25,{light:0xff5f9a,amp:1.6,base:.85});
+arch(texDome,13,13,-3,-40,.22,{base:.5});
+const wallR=arch(texWall,74,136,61,-40,.1,{flip:true,base:.55}),wallL=arch(texWall,70,136,-59,-34,.06,{base:.5});
+arch(texRubble(3),96,7.5,0,-31,.14,{base:.25});arch(texRubble(9),96,4.4,4,-25,.05,{base:.1,flip:true});
+
+/* ============ 2. ТУМАН (2D шейдерные слои) ============ */
+function fogPlane(w,h,x,y,z,a,sp,seed,col){return plane(w,h,new T.ShaderMaterial(Object.assign({},BASE,{uniforms:{uT:U.t,uA:{value:a},uSp:{value:sp},uSeed:{value:seed},uCol:{value:new T.Color(col||0x1f6f96)},uSc:{value:new T.Vector2(w/38,h/22)}},vertexShader:VS,fragmentShader:NOISE+`
+uniform float uT,uA,uSp,uSeed;uniform vec3 uCol;uniform vec2 uSc;varying vec2 vUv;
+void main(){vec2 p=vUv*uSc+vec2(uT*uSp+uSeed,uSeed*.7+uT*uSp*.15);
+ float n=fbm(p)*fbm(p*.45+3.1-uT*.008);
+ float m=smoothstep(0.,.18,vUv.y)*smoothstep(1.,.35,vUv.y)*smoothstep(0.,.12,vUv.x)*smoothstep(1.,.88,vUv.x);
+ gl_FragColor=vec4(uCol,clamp(n*3.2*m*uA,0.,1.));}`})),x,y,z)}
+fogPlane(260,60,0,16,-95,.95,.012,1);fogPlane(220,40,0,9,-68,.9,-.018,4);fogPlane(200,26,0,6,-47,.8,.024,7);fogPlane(180,16,0,3.5,-35,.7,-.03,9);fogPlane(160,9,0,2,-27,.5,.04,12);
+fogPlane(220,50,0,44,-60,.75,.02,15);fogPlane(180,40,0,46,-47,.55,-.03,18);fogPlane(160,30,0,36,-37,.4,.045,21);fogPlane(260,70,0,75,-90,.7,.01,25);
+
+/* ============ ТЕКСТУРЫ ЭФФЕКТОВ ============ */
+const texGlow=mk(64,64,(x,w)=>{const g=x.createRadialGradient(w/2,w/2,0,w/2,w/2,w/2);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.3,'rgba(255,255,255,.55)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,w,w)});
+const texPuff=mk(128,128,(x,w)=>{const R=rng(8);for(let i=0;i<16;i++){const px=w*.5+(R()-.5)*w*.42,py=w*.5+(R()-.5)*w*.42,r=w*(.12+R()*.16);const g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,'rgba(255,255,255,.75)');g.addColorStop(.6,'rgba(255,255,255,.3)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,w,w)}});
+const texShard=mk(32,32,(x,w)=>{x.fillStyle='#ff86b4';x.beginPath();x.moveTo(4,14);x.lineTo(15,2);x.lineTo(29,11);x.lineTo(22,29);x.lineTo(8,25);x.closePath();x.fill();x.strokeStyle='#ffe3ee';x.lineWidth=2;x.stroke()});
+const texArc=mk(128,128,(x,w)=>{x.lineCap='round';for(let i=0;i<10;i++){x.strokeStyle='rgba(255,255,255,'+(.05+i*.03)+')';x.lineWidth=16-i*1.5;x.beginPath();x.arc(w/2,w/2,w*.38,-1.9+i*.06,.5);x.stroke()}});
+const texBlade=mk(128,16,(x,w,h)=>{const g=x.createLinearGradient(0,0,w,0);g.addColorStop(0,'rgba(255,255,255,.9)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.beginPath();x.moveTo(0,h/2-4);x.lineTo(w,h/2);x.lineTo(0,h/2+4);x.fill()});
+const addMat=(tex,col)=>new T.MeshBasicMaterial({map:tex,color:col,transparent:true,depthTest:false,depthWrite:false,blending:T.AdditiveBlending,side:T.DoubleSide});
+
+/* ============ 13–15, 25. ЛЕТУН В ПЛАЩЕ (2.5D: составной, плащ — волна по ленте) ============ */
+const hero=new T.Group();scene.add(hero);
+const capes=[];
+function cape(len,w,y,ph,seed,z){const m=new T.ShaderMaterial(Object.assign({},BASE,{uniforms:{uT:U.t,uPh:{value:ph},uAmp:{value:.2},uLen:{value:len},uW:{value:w},uBend:{value:0},uSeed:{value:seed}},
+vertexShader:'uniform float uT,uPh,uAmp,uLen,uW,uBend;varying vec2 vUv;void main(){vUv=uv;float s=-position.x;vec3 p=position;p.x*=uLen;p.y*=uW*(.5+1.*s);p.y+=(sin(uT*7.-s*5.5+uPh)*uAmp+sin(uT*11.3-s*10.+uPh*1.7)*uAmp*.4)*s+uBend*s*s;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);}',
+fragmentShader:NOISE+`uniform float uSeed;varying vec2 vUv;
+void main(){float s=1.-vUv.x;float v=abs(vUv.y-.5)*2.;
+ float rag=noise(vec2(vUv.y*7.+uSeed,uSeed))*.42+noise(vec2(vUv.y*23.,uSeed*2.))*.16;
+ if(s>1.-rag)discard;
+ float side=1.-.4*s*noise(vec2(s*9.+uSeed,3.));
+ float al=smoothstep(side,side-.14,v);
+ vec3 c=mix(vec3(.018,.035,.08),vec3(.12,.34,.48),smoothstep(.5,1.,v)*.7+s*.08);
+ gl_FragColor=vec4(c,al);}`}));
+ const g=new T.PlaneGeometry(1,1,16,1);g.translate(-.5,0,0);const me=new T.Mesh(g,m);me.position.set(-.1,y,z);me.frustumCulled=false;hero.add(me);capes.push(m);return me}
+cape(3.4,.95,.16,0,1.3,-.03);cape(2.7,.75,-.08,1.7,4.1,-.02);cape(2.1,.55,-.3,3.1,7.7,-.01);
+const texBody=mk(128,128,(x,w)=>{x.fillStyle='#050c1a';x.beginPath();x.moveTo(8,70);x.quadraticCurveTo(30,28,84,34);x.quadraticCurveTo(122,40,120,60);x.quadraticCurveTo(100,92,50,96);x.quadraticCurveTo(18,96,8,70);x.fill();
+ x.strokeStyle='rgba(130,210,240,.55)';x.lineWidth=2.5;x.beginPath();x.moveTo(30,42);x.quadraticCurveTo(70,26,112,44);x.stroke();
+ x.fillStyle='#050c1a';x.beginPath();x.moveTo(84,34);x.lineTo(126,22);x.lineTo(112,52);x.fill()});
+plane(1.5,1.5,new T.MeshBasicMaterial(Object.assign({map:texBody},BASE)),.15,0,0,hero);
+const head=plane(.7,.7,addMat(texGlow,0xc8f4ff),.72,.2,.01,hero);
+const engine=plane(.8,.8,addMat(texGlow,0xff6fa6),-.25,-.22,.01,hero);
+const trail=plane(1,.28,addMat(texBlade,0xff6fa6),-.3,-.22,.005,hero);trail.geometry.translate(-.5,0,0);trail.scale.x=-1;
+const bladeG=new T.Group();bladeG.position.set(.45,-.12,.02);hero.add(bladeG);
+const blade=plane(2.1,.16,addMat(texBlade,0xdff8ff),0,0,0,bladeG);blade.geometry.translate(1.05,0,0);
+const arcM=plane(4.6,4.6,addMat(texArc,0xcdf3ff),0,0,.03,hero);arcM.material.opacity=0;
+const hp=new T.Vector3(-4,46,-40),hv=new T.Vector3(),htg=new T.Vector3();let hdir=1,slashT=-1,slashCd=0;
+hero.position.copy(hp);
+
+/* ============ 16–19. БАГРОВЫЙ ЗВЕРЬ (2.5D: тело-шейдер, маска, цепи-клыки) ============ */
+const beast=new T.Group();scene.add(beast);
+const bodyMat=new T.ShaderMaterial(Object.assign({},BASE,{uniforms:{uT:U.t,uA:{value:1},uHit:{value:0}},vertexShader:VS,fragmentShader:NOISE+`
+uniform float uT,uA,uHit;varying vec2 vUv;
+void main(){vec2 p=vUv-.5;float r=length(p)*2.;vec2 d=p/max(length(p),.001);
+ float n=fbm(d*1.9+vec2(uT*.22,-uT*.3)+r);
+ float edge=.5+.42*n+.05*sin(d.x*9.+uT*3.)*sin(d.y*7.-uT*2.);
+ float al=smoothstep(edge,edge-.22,r);
+ float mane=smoothstep(edge-.3,edge-.02,r);
+ vec3 c=mix(vec3(.012,.02,.05),vec3(.7,.05,.17),mane*pow(fbm(d*5.+vec2(r*5.-uT*1.3,uT*.2)),1.5)*2.2);
+ c+=vec3(1.,.35,.55)*uHit*(1.-r);
+ gl_FragColor=vec4(c,al*uA);}`}));
+const bbody=plane(19,15,bodyMat,1.5,0,0,beast);
+const texMask=mk(128,256,(x,w,h)=>{const g=x.createLinearGradient(0,0,0,h);g.addColorStop(0,'#d9eef4');g.addColorStop(1,'#5f93aa');x.fillStyle=g;
+ x.beginPath();x.moveTo(w*.5,6);x.bezierCurveTo(w*1.05,10,w*.98,h*.55,w*.56,h-6);x.lineTo(w*.44,h-6);x.bezierCurveTo(w*.02,h*.55,-w*.05,10,w*.5,6);x.fill();
+ x.fillStyle='#04101c';for(const s of[-1,1]){x.beginPath();x.moveTo(w*.5+s*w*.1,h*.36);x.quadraticCurveTo(w*.5+s*w*.26,h*.27,w*.5+s*w*.38,h*.33);x.quadraticCurveTo(w*.5+s*w*.26,h*.4,w*.5+s*w*.1,h*.36);x.fill()}
+ x.strokeStyle='rgba(4,16,28,.7)';x.lineWidth=2;x.beginPath();x.moveTo(w*.5,h*.05);x.lineTo(w*.46,h*.2);x.lineTo(w*.53,h*.3);x.stroke();
+ for(let i=-3;i<=3;i++){x.beginPath();x.moveTo(w*.5+i*7,h*.7);x.lineTo(w*.5+i*6,h*.8);x.stroke()}});
+const maskMat=new T.MeshBasicMaterial(Object.assign({map:texMask},BASE));
+const mask=plane(2.7,5.4,maskMat,-3.3,.4,.02,beast);
+const CH=[{x:-2.4,y:2.3,a:Math.PI-.45,c:.15,j:-1,ph:0},{x:-2.4,y:-1.6,a:Math.PI+.45,c:-.15,j:1,ph:1.3},{x:-.5,y:-3.4,a:-2.1,c:.13,j:0,ph:2.1},{x:2.4,y:-2.8,a:-1.2,c:-.15,j:0,ph:3.7},{x:1.2,y:3.4,a:1.7,c:.14,j:0,ph:5}];
+const CN=9,beads=new T.InstancedMesh(new T.PlaneGeometry(1.5,.78),addMat(texGlow,0xffffff),CH.length*CN);beads.frustumCulled=false;beads.position.z=.03;beast.add(beads);
+const dm=new T.Object3D(),dc=new T.Color();for(let i=0;i<CH.length*CN;i++){beads.setColorAt(i,dc.setRGB(1,.4,.6));dm.updateMatrix();beads.setMatrixAt(i,dm.matrix)}
+const bp=new T.Vector3(13,46,-41.5),bv=new T.Vector3(),btg=new T.Vector3();let bA=1,bHit=0,hits=0;
+function updBeast(t,dt){
+ beast.visible=bA>.01;if(!beast.visible)return;                       // вне дела — спит (ВИДИМО И ЭКОНОМНО)
+ beast.position.copy(bp);const br=1+.04*Math.sin(t*1.7);bbody.scale.set(br,2-br,1);bbody.rotation.z=Math.sin(t*.6)*.08;
+ bodyMat.uniforms.uA.value=bA;bodyMat.uniforms.uHit.value=bHit;maskMat.opacity=bA;
+ const ma=Math.atan2(hp.y-bp.y,-(hp.x-bp.x-3.3))*.35;mask.rotation.z+=(-ma+Math.sin(t*1.3)*.07-mask.rotation.z)*ex(2.2,dt);
+ mask.position.y=.4+Math.sin(t*1.9)*.18;mask.position.x=-3.3+Math.sin(t*1.1)*.12-bHit*.6;
+ const open=.5+.5*Math.sin(t*2.6);let k=0;
+ for(const c of CH){let a=c.a+c.j*open*.42,px=c.x,py=c.y;
+  for(let i=0;i<CN;i++,k++){const f=i/CN;a+=c.c+Math.cos(t*3.1-i*.7+c.ph)*.05*(c.j?1:1.7);px+=Math.cos(a)*.66;py+=Math.sin(a)*.66;
+   dm.position.set(px,py,0);dm.rotation.z=a;const s=(1.15-f*.6)*(1+.12*Math.sin(t*5-i+c.ph));dm.scale.set(s,s,1);dm.updateMatrix();beads.setMatrixAt(k,dm.matrix);
+   const b=bA*(.75+.25*Math.sin(t*6.3-i*.9+c.ph))+bHit;beads.setColorAt(k,dc.setRGB(1.3*b,(.42+f*.3)*b,(.68+f*.2)*b))}}
+ beads.instanceMatrix.needsUpdate=true;beads.instanceColor.needsUpdate=true}
+
+/* ============ 20–22. ВЗРЫВ, ИСКРЫ (GPU), ОСКОЛКИ ============ */
+const PN=48,puffs=new T.InstancedMesh(new T.PlaneGeometry(1,1),addMat(texPuff,0xffffff),PN);puffs.frustumCulled=false;scene.add(puffs);puffs.position.z=GZ+1.2;
+const pf=[];for(let i=0;i<PN;i++){pf.push({x:0,y:0,vx:0,vy:0,a:9,l:1,s:1,r:0});dm.scale.set(0,0,0);dm.updateMatrix();puffs.setMatrixAt(i,dm.matrix);puffs.setColorAt(i,dc.setRGB(0,0,0))}
+let puffLive=false;
+function updPuffs(dt){if(!puffLive)return;let live=false;
+ for(let i=0;i<PN;i++){const p=pf[i];p.a+=dt;const k=p.a/p.l;if(k>=1){dm.scale.set(0,0,0);dm.position.set(0,0,0);dm.updateMatrix();puffs.setMatrixAt(i,dm.matrix);continue}
+  if(k<0){continue}live=true;const d=Math.exp(-2.2*dt);p.vx*=d;p.vy*=d;p.x+=p.vx*dt;p.y+=p.vy*dt+.6*dt;
+  const s=p.s*(.35+1.6*(1-Math.exp(-4*k)));dm.position.set(p.x,p.y,0);dm.rotation.z=p.r+k*.8;dm.scale.set(s,s,1);dm.updateMatrix();puffs.setMatrixAt(i,dm.matrix);
+  const b=Math.pow(1-k,1.6)*.55,w=Math.max(0,1-k*2.2);puffs.setColorAt(i,dc.setRGB(b,b*(.42+.58*w),b*(.62+.38*w)))}
+ puffs.instanceMatrix.needsUpdate=true;puffs.instanceColor.needsUpdate=true;puffLive=live}
+const SN=720,sg=new T.BufferGeometry(),sP=new Float32Array(SN*3),sV=new Float32Array(SN*3),sD=new Float32Array(SN*4);
+for(let i=0;i<SN;i++)sD[i*4]=-99,sD[i*4+1]=1;
+sg.setAttribute('position',new T.BufferAttribute(sP,3));sg.setAttribute('aVel',new T.BufferAttribute(sV,3));sg.setAttribute('aData',new T.BufferAttribute(sD,4));
+const sparkMat=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,blending:T.AdditiveBlending,uniforms:{uT:U.t,uPx:{value:500}},
+vertexShader:`attribute vec3 aVel;attribute vec4 aData;uniform float uT,uPx;varying float vK,vC;
+void main(){float age=uT-aData.x;float k=age/aData.y;vK=k;vC=aData.w;
+ if(age<0.||k>1.){gl_Position=vec4(2.,2.,2.,1.);gl_PointSize=0.;return;}
+ vec3 p=position+aVel*(1.-exp(-1.4*age))/1.4+vec3(0.,-4.5,0.)*age*age;
+ vec4 mv=modelViewMatrix*vec4(p,1.);gl_Position=projectionMatrix*mv;gl_PointSize=aData.z*(1.-k*.6)*uPx/max(-mv.z,1.);}`,
+fragmentShader:`varying float vK,vC;void main(){float d=length(gl_PointCoord-.5);float a=smoothstep(.5,0.,d);
+ vec3 c=mix(vec3(.75,.95,1.),vec3(1.,.42,.68),vC)*(1.-vK*vK);gl_FragColor=vec4(c*a*a*2.4,1.);}`});
+const sparks=new T.Points(sg,sparkMat);sparks.frustumCulled=false;scene.add(sparks);let sI=0;
+function burst(x,y,z,n,sp,pink,life,dirx){for(let i=0;i<n;i++){const k=sI;sI=(sI+1)%SN;const a=Math.random()*6.283,e=(Math.random()-.5)*1.2,v=sp*(.25+Math.random());
+  sP[k*3]=x+(Math.random()-.5)*.6;sP[k*3+1]=y+(Math.random()-.5)*.6;sP[k*3+2]=z;
+  sV[k*3]=Math.cos(a)*Math.cos(e)*v+(dirx||0)*Math.random();sV[k*3+1]=Math.sin(a)*Math.cos(e)*v+sp*.2;sV[k*3+2]=Math.sin(e)*v*.6;
+  sD[k*4]=U.t.value+Math.random()*.12;sD[k*4+1]=life*(.4+Math.random()*.6);sD[k*4+2]=.14+Math.random()*.3;sD[k*4+3]=Math.random()<pink?1:0}
+ sg.attributes.position.needsUpdate=sg.attributes.aVel.needsUpdate=sg.attributes.aData.needsUpdate=true}
+const QN=40,petals=new T.InstancedMesh(new T.PlaneGeometry(.55,.55),new T.MeshBasicMaterial(Object.assign({map:texShard},BASE)),QN);petals.frustumCulled=false;scene.add(petals);
+const pt_=[];for(let i=0;i<QN;i++){pt_.push({x:0,y:0,z:0,vx:0,vy:0,a:99,l:1,r:0,w:0,ph:0});dm.scale.set(0,0,0);dm.updateMatrix();petals.setMatrixAt(i,dm.matrix)}
+let petLive=false;
+function updPetals(t,dt){if(!petLive)return;let live=false;dm.rotation.set(0,0,0);
+ for(let i=0;i<QN;i++){const p=pt_[i];p.a+=dt;const k=p.a/p.l;if(k>=1){dm.scale.set(0,0,0);dm.updateMatrix();petals.setMatrixAt(i,dm.matrix);continue}live=true;
+  const d=Math.exp(-1.6*dt);p.vx*=d;p.vy=p.vy*d-2.2*dt;p.x+=(p.vx+Math.sin(t*2+p.ph)*1.2)*dt;p.y+=p.vy*dt;
+  dm.position.set(p.x,p.y,p.z);dm.rotation.z=p.r+t*p.w;const s=Math.min(1,k*8)*(1-k*k)*(.6+Math.abs(Math.sin(t*p.w*1.3+p.ph))*.7);dm.scale.set(s,s*(.4+.6*Math.abs(Math.cos(t*p.w+p.ph))),1);dm.updateMatrix();petals.setMatrixAt(i,dm.matrix)}
+ dm.rotation.set(0,0,0);petals.instanceMatrix.needsUpdate=true;petLive=live}
+let flash=0,glitch=0,shake=0,gateAmp=1.6,exploded=false,explT=0;
+function explode(){exploded=true;explT=pt;flash=.9;glitch=1;shake=1;gateAmp=.05;
+ for(let i=0;i<PN;i++){const p=pf[i],a=Math.PI+(Math.random()-.5)*1.5,v=6+Math.random()*26;p.x=GX-1+(Math.random()-.5)*2;p.y=GY+(Math.random()-.5)*3;p.vx=Math.cos(a)*v;p.vy=Math.sin(a)*v*.55;p.a=-Math.random()*.25;p.l=1.3+Math.random()*1.6;p.s=2.2+Math.random()*4.2;p.r=Math.random()*6}
+ puffLive=true;burst(GX-1,GY,GZ+1.5,330,17,.6,4.2,-12);
+ for(let i=0;i<QN;i++){const p=pt_[i];p.x=GX-1;p.y=GY+(Math.random()-.5)*3;p.z=GZ+1+Math.random()*2;p.vx=-4-Math.random()*16;p.vy=(Math.random()-.3)*9;p.a=0;p.l=4+Math.random()*4;p.r=Math.random()*6;p.w=1.5+Math.random()*4;p.ph=Math.random()*6}petLive=true}
+function hit(){hits++;const mx=(hp.x+bp.x-3.3)/2,my=(hp.y+bp.y)/2;burst(mx,my,hp.z+.3,46,11,.35,1.3,0);flash=Math.max(flash,.28);glitch=Math.max(glitch,.7);shake=Math.max(shake,.5);bHit=1;bv.x+=9;bv.y+=(Math.random()-.4)*7;slashCd=1.5}
+function slash(){if(slashCd>0)return false;slashT=0;slashCd=.55;return true}
+
+/* ============ 23–24. ДОЖДЬ (шейдер на экранной плоскости) и ПЫЛЬ (GPU Points) ============ */
+const rainMat=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,blending:T.AdditiveBlending,uniforms:{uT:U.t,uAmt:{value:.3},uAsp:{value:1}},vertexShader:VS,fragmentShader:NOISE+`
+uniform float uT,uAmt,uAsp;varying vec2 vUv;
+void main(){vec2 p=vUv*vec2(uAsp,1.);float a=0.;
+ for(int i=0;i<2;i++){float s=1.+float(i)*.8;vec2 q=p*vec2(70.*s,1.3*s);q.x+=p.y*9.*s;float col=floor(q.x);float h=hash(vec2(col,float(i)*7.+1.));
+  float f=fract(q.y+uT*(1.7+h*1.4)*s+h*17.);float st=smoothstep(0.,.03,f)*smoothstep(.3,.03,f);
+  a+=smoothstep(.16,0.,abs(fract(q.x)-.5))*st*step(.55,h)/s;}
+ gl_FragColor=vec4(vec3(.5,.8,.95)*a*uAmt*.5,1.);}`});
+const rain=plane(2,2,rainMat,0,0,-2,camera);rain.renderOrder=900;
+const DN=420,dg=new T.BufferGeometry(),dP=new Float32Array(DN*3),dS=new Float32Array(DN*3);
+for(let i=0;i<DN*3;i++){dP[i]=Math.random()*80;dS[i]=Math.random()}
+dg.setAttribute('position',new T.BufferAttribute(dP,3));dg.setAttribute('aSeed',new T.BufferAttribute(dS,3));
+const dustMat=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,blending:T.AdditiveBlending,uniforms:{uT:U.t,uPx:{value:500},uCam:{value:new T.Vector3()}},
+vertexShader:`attribute vec3 aSeed;uniform float uT,uPx;uniform vec3 uCam;varying float vA;
+void main(){vec3 box=vec3(70.,44.,70.);vec3 p=position+vec3(sin(uT*.2+aSeed.x*6.)*1.6,-uT*.35*(.4+aSeed.y),cos(uT*.17+aSeed.z*6.)*1.6);
+ p=mod(p-uCam+box*.5,box)-box*.5+uCam;vec4 mv=modelViewMatrix*vec4(p,1.);gl_Position=projectionMatrix*mv;
+ float d=max(-mv.z,1.);gl_PointSize=(.1+.16*aSeed.y)*uPx/d;vA=(.45+.55*sin(uT*(1.+aSeed.x*3.)+aSeed.z*20.))*smoothstep(35.,20.,d)*smoothstep(1.5,5.,d);}`,
+fragmentShader:'varying float vA;void main(){float d=length(gl_PointCoord-.5);float a=smoothstep(.5,0.,d);gl_FragColor=vec4(vec3(.6,.9,1.)*a*a*vA*.8,1.);}'});
+const dust=new T.Points(dg,dustMat);dust.frustumCulled=false;dust.renderOrder=800;scene.add(dust);
+
+/* ============ 10–11, 26. ВОДА-ЗЕРКАЛО, БЛИКИ, КИНО-ОБРАБОТКА (экранные проходы) ============ */
+const qScene=new T.Scene(),qCam=new T.OrthographicCamera(-1,1,1,-1,0,1),quad=new T.Mesh(new T.PlaneGeometry(2,2));qScene.add(quad);
+const QV='varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}';
+const rtO={minFilter:T.LinearFilter,magFilter:T.LinearFilter,depthBuffer:false,stencilBuffer:false};
+const rtA=new T.WebGLRenderTarget(4,4,rtO),rtB=new T.WebGLRenderTarget(4,4,rtO),rtC=new T.WebGLRenderTarget(4,4,rtO),rtD=new T.WebGLRenderTarget(4,4,rtO);
+const waterMat=new T.ShaderMaterial({depthTest:false,depthWrite:false,uniforms:{tS:{value:rtA.texture},uT:U.t,uH:{value:-1},uAsp:{value:1},uTap:{value:new T.Vector3(.5,0,-99)}},vertexShader:QV,fragmentShader:NOISE+`
+uniform sampler2D tS;uniform float uT,uH,uAsp;uniform vec3 uTap;varying vec2 vUv;
+void main(){vec2 uv=vUv;vec3 c;
+ if(uv.y>=uH){c=texture2D(tS,uv).rgb;}
+ else{float d=uH-uv.y;float pz=1./(d+.015);
+  vec2 r=vec2(uv.x,uH+d*1.1);
+  float n1=noise(vec2(uv.x*uAsp*pz*.9,pz*.9+uT*.5));
+  float n2=noise(vec2(uv.x*uAsp*4.+uT*.1,pz*3.-uT*.8));
+  r.x+=(n1-.5)*.035*(d*4.+.15);r.y+=(n2-.5)*.04*d+(n1-.5)*.01;
+  vec2 tp=(uv-uTap.xy)*vec2(uAsp,3.);float td=length(tp);float ta=uT-uTap.z;
+  float rp=sin(td*60.-ta*9.)*exp(-td*7.)*exp(-ta*1.6)*step(0.,ta);
+  r+=rp*.012;r.y=clamp(r.y,uH,.998);
+  float b=.003+d*.035;
+  c=texture2D(tS,r).rgb*.34+texture2D(tS,r+vec2(b,0.)).rgb*.2+texture2D(tS,r-vec2(b,0.)).rgb*.2+texture2D(tS,r+vec2(b*2.3,b*.5)).rgb*.13+texture2D(tS,r-vec2(b*2.3,-b*.5)).rgb*.13;
+  c=c*vec3(.82,1.04,1.12)+vec3(0.,.02,.04);
+  float sheen=pow(noise(vec2(uv.x*uAsp*2.5+uT*.05,pz*.6+uT*.15)),2.);
+  c+=vec3(.25,.55,.7)*sheen*.4*smoothstep(.5,0.,d);
+  c+=vec3(.45,.8,.95)*exp(-d*70.)*.7;
+  for(int i=0;i<6;i++){float fi=float(i);vec2 bp=vec2(.1+.8*hash(vec2(fi,1.3)),uH-.09-.2*hash(vec2(fi,7.7)));
+   vec2 q=(uv-bp)*vec2(uAsp,1.)/vec2(.1+.09*hash(vec2(fi,2.)),.034);
+   float sh=.55+.45*sin(uT*(.6+hash(vec2(fi,5.)))+fi*2.);
+   c+=vec3(.5,.85,1.)*exp(-dot(q,q))*.42*sh;}
+  c*=mix(1.,.5,smoothstep(.05,.6,d));c+=rp*.15;}
+ gl_FragColor=vec4(c,1.);}`});
+const blurMat=new T.ShaderMaterial({depthTest:false,depthWrite:false,uniforms:{tS:{value:null},uDir:{value:new T.Vector2()},uThr:{value:0}},vertexShader:QV,fragmentShader:`
+uniform sampler2D tS;uniform vec2 uDir;uniform float uThr;varying vec2 vUv;
+void main(){vec3 s=vec3(0.);float ws=0.;for(int i=-4;i<=4;i++){float f=float(i);float w=exp(-f*f/9.);s+=max(texture2D(tS,vUv+uDir*f).rgb-uThr,0.)*w;ws+=w;}gl_FragColor=vec4(s/ws,1.);}`});
+const finalMat=new T.ShaderMaterial({depthTest:false,depthWrite:false,uniforms:{tS:{value:rtB.texture},tB:{value:rtD.texture},uT:U.t,uCA:{value:.004},uGrain:{value:.07},uGlitch:{value:0},uSpeed:{value:0},uFade:{value:0},uFlash:{value:0},uBloom:{value:1.5}},vertexShader:QV,fragmentShader:NOISE+`
+uniform sampler2D tS,tB;uniform float uT,uCA,uGrain,uGlitch,uSpeed,uFade,uFlash,uBloom;varying vec2 vUv;
+void main(){vec2 uv=vUv;float row=floor(uv.y*80.);float gt=floor(uT*16.);
+ float g=step(1.-uGlitch*.3,hash(vec2(row,gt)));uv.x+=g*(hash(vec2(row,gt+3.))-.5)*.07*uGlitch;
+ vec2 c=uv-.5;float r2=dot(c,c);float ca=uCA*(.4+r2*3.);vec3 col=vec3(0.);
+ for(int i=0;i<3;i++){float k=1.-uSpeed*.04*float(i)*(.3+r2*2.5);vec2 u=c*k;
+  col.r+=texture2D(tS,.5+u*(1.+ca)).r;col.g+=texture2D(tS,.5+u).g;col.b+=texture2D(tS,.5+u*(1.-ca)).b;}
+ col/=3.;col+=texture2D(tB,uv).rgb*uBloom;
+ col+=uFlash*vec3(1.,.72,.84)*(1.-r2*1.5)*.6;
+ col*=1.-r2*1.5;
+ col+=(hash(gl_FragCoord.xy*.7+fract(uT)*91.)-.5)*uGrain;
+ gl_FragColor=vec4(pow(max(col,0.),vec3(.92))*uFade,1.);}`});
+
+/* ============ РАЗМЕР: полный экран, портрет и ландшафт ============ */
+let W=1,H=1,asp=1,portrait=false,resK=1,rw=1,rh=1;
+function resize(){W=Math.max(1,window.innerWidth);H=Math.max(1,window.innerHeight);asp=W/H;portrait=asp<1;
+ const dpr=Math.min(window.devicePixelRatio||1,2),s=dpr*.8*resK;rw=Math.max(2,Math.round(W*s));rh=Math.max(2,Math.round(H*s));
+ renderer.setSize(rw,rh,false);rtA.setSize(rw,rh);rtB.setSize(rw,rh);const qw=Math.max(2,rw>>2),qh=Math.max(2,rh>>2);rtC.setSize(qw,qh);rtD.setSize(qw,qh);
+ const we=portrait?12.5:(asp<1.5?18:23);wallR.position.x=we+37;wallL.position.x=-(we+35);camera.aspect=asp;camera.fov=portrait?Math.min(92,2*Math.atan(Math.tan(24*Math.PI/180)/asp)*180/Math.PI):(asp<1.4?56:50);camera.updateProjectionMatrix();
+ const th=Math.tan(camera.fov*Math.PI/360);sky.scale.set(600*th*asp*1.05,600*th*1.05,1);rain.scale.set(2*th*asp*1.02,2*th*1.02,1);
+ skyMat.uniforms.uAsp.value=Math.max(asp,.7);rainMat.uniforms.uAsp.value=asp;waterMat.uniforms.uAsp.value=asp;
+ const px=rh/(2*th);sparkMat.uniforms.uPx.value=px;dustMat.uniforms.uPx.value=px}
+window.addEventListener('resize',resize);window.addEventListener('orientationchange',()=>setTimeout(resize,250));
+if(window.visualViewport)window.visualViewport.addEventListener('resize',resize);
+resize();
+
+/* ============ РЕЖИССЁР: полёт → бой → взрыв → падение → площадь → подъём ============ */
+let phase=0,pt=0,focus=null,focusCd=0;
+function setPhase(p){phase=p;pt=0;if(p===0)hits=0;if(p===1)exploded=false}
+const cpos=new T.Vector3(0,45,-21),look=new T.Vector3(0,46,-41),ct=new T.Vector3(),cl=new T.Vector3(),tmp=new T.Vector3(),tmp2=new T.Vector3();
+let roll=0,rainAmt=.3,speedFx=0;
+const ptr={x:0,y:0,sx:0,sy:0,t:-99,down:false,dx:0,dy:0,t0:0};
+function ptrWorld(out){tmp.set(ptr.x,ptr.y,.5).unproject(camera).sub(camera.position).normalize();const k=(hp.z-camera.position.z)/tmp.z;return out.copy(camera.position).addScaledVector(tmp,k)}
+canvas.addEventListener('pointerdown',e=>{ptr.down=true;setP(e);ptr.dx=e.clientX;ptr.dy=e.clientY;ptr.t0=performance.now()});
+canvas.addEventListener('pointermove',e=>{if(ptr.down||e.pointerType==='mouse')setP(e)});
+const up=e=>{if(!ptr.down)return;ptr.down=false;if(performance.now()-ptr.t0<300&&Math.hypot(e.clientX-ptr.dx,e.clientY-ptr.dy)<14)tap()};
+canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',()=>{ptr.down=false});
+function setP(e){ptr.x=e.clientX/W*2-1;ptr.y=-(e.clientY/H*2-1);ptr.t=U.t.value}
+function tap(){const u=(ptr.x+1)/2,v=(ptr.y+1)/2;if(v<waterMat.uniforms.uH.value)waterMat.uniforms.uTap.value.set(u,v,U.t.value);
+ if(slash()){burst(hp.x+hdir*1.4,hp.y,hp.z+.2,14,6,.2,.8,0);glitch=Math.max(glitch,.25)}}
+
+function update(t,dt){
+ pt+=dt;slashCd-=dt;focusCd-=dt;
+ const fm=focus?focus.m:null;
+ if(!focus){
+  if(phase===0&&(pt>16||(hits>=3&&pt>7)))setPhase(1);
+  else if(phase===1){if(!exploded&&pt>6)explode();if(exploded&&pt-explT>1.5)setPhase(2)}
+  else if(phase===2&&pt>5.5)setPhase(3);
+  else if(phase===3&&pt>20)setPhase(4);
+  else if(phase===4&&pt>5)setPhase(0);
+ }else{
+  if(fm==='flight'&&hits>=3&&bHit<.05)hits=0;
+  if(fm==='gate'){if(!exploded&&pt>2.2)explode();if(exploded&&pt-explT>4.2){pt=0;exploded=false}}
+  if(focus.slash&&focusCd<0){focusCd=1.1;slash()}
+  if(focus.glitch&&focusCd<0){focusCd=2.4;glitch=1}
+ }
+ /* зверь */
+ const bWant=(phase===0)?1:(phase===4?clamp((pt-2)/2.5,0,1):0);bA+=(bWant-bA)*ex(phase===1?2.5:1.2,dt);bHit*=Math.exp(-4*dt);
+ const lunge=Math.sin(t*.62)>-.1&&phase===0;
+ if(phase===0||phase===4){if(lunge)btg.set(hp.x+6.2,hp.y+.4+Math.sin(t*1.4)*1.2,-41.5);else btg.set(12+Math.sin(t*.5)*2,46+Math.sin(t*.8)*3,-41.5)}else btg.set(24,34,-46);
+ btg.x=clamp(btg.x,-1,12);if(bp.x>15&&phase===0)bv.x-=30*dt;
+ tmp.copy(btg).sub(bp).multiplyScalar(1.7);bv.lerp(tmp,ex(1.6,dt));bp.addScaledVector(bv,dt);
+ updBeast(t,dt);
+ /* летун */
+ const user=(t-ptr.t<3.2)&&(ptr.down||t-ptr.t<1.6)&&fm!=='gate';
+ let vmax=17;
+ if(phase===0){if(user)ptrWorld(htg);else if(lunge&&bA>.5)htg.set(bp.x-5.6+Math.sin(t*1.9)*1.6,bp.y+Math.sin(t*1.5)*2.4,-40);else htg.set(Math.sin(t*.7)*7-2,46+Math.sin(t*1.13+1)*4.5,-40)}
+ else if(phase===1){if(exploded)htg.set(GX-11,GY+4,-41);else{htg.set(GX-3.4,GY,-41.5);vmax=26}}
+ else if(phase===2)htg.set(-5+Math.sin(t*.5)*4,13,-47);
+ else if(phase===3){if(user)ptrWorld(htg);else htg.set(Math.sin(t*.23)*15,14+Math.sin(t*.31)*6,-47)}
+ else htg.set(-3,45,-40);
+ htg.z=phase>=2&&phase<4?-47:(phase===1?-41.5:-40);
+ tmp.copy(htg).sub(hp).multiplyScalar(2.3);if(tmp.length()>vmax)tmp.setLength(vmax);hv.lerp(tmp,ex(3,dt));hp.addScaledVector(hv,dt);
+ hero.position.set(hp.x,hp.y+Math.sin(t*2.3)*.18,hp.z);
+ if(Math.abs(hv.x)>.8)hdir+=((hv.x>0?1:-1)-hdir)*ex(6,dt);
+ hero.scale.set(hdir*1.35,1.35,1);
+ const sp=hv.length(),pitch=clamp(Math.atan2(hv.y,Math.abs(hv.x)+3),-1,1)*.7;
+ hero.rotation.z+=(pitch*(hdir>=0?1:-1)-hero.rotation.z)*ex(5,dt);
+ for(let i=0;i<3;i++){const u=capes[i].uniforms;u.uAmp.value=.16+Math.min(sp,20)*.012;u.uBend.value+=(-hv.y*.05-.25+Math.sin(t*1.1+i)*.15-u.uBend.value)*ex(2.5-i*.5,dt)}
+ head.scale.setScalar(1+.15*Math.sin(t*4.3));engine.scale.setScalar(.8+.3*Math.sin(t*9)+sp*.02);trail.scale.x=-(.4+sp*.16+.2*Math.sin(t*13));
+ /* удар */
+ if(slashT>=0){slashT+=dt/.36;const e=1-Math.pow(1-Math.min(slashT,1),3);bladeG.rotation.z=1.9-e*5.6;arcM.material.opacity=Math.sin(Math.min(slashT,1)*Math.PI)*.9;arcM.rotation.z=1.2-e*2.2;arcM.scale.setScalar(.7+e*.5);if(slashT>=1.25){slashT=-1}}
+ else{bladeG.rotation.z+=(-.35+Math.sin(t*2.1)*.12-bladeG.rotation.z)*ex(7,dt);arcM.material.opacity*=Math.exp(-10*dt)}
+ if(phase===0&&bA>.6){tmp.set(bp.x-3.3,bp.y+.4,hp.z);if(tmp.distanceTo(hp)<4.4&&slashCd<=0&&slash())hit()}
+ if(phase===1&&!exploded){tmp.set(GX-3.4,GY,hp.z);if(tmp.distanceTo(hp)<2.6){slash();explode()}}
+ /* врата, взрыв */
+ if(!exploded&&(phase===4||phase===0||phase===1))gateAmp+=(1.6-gateAmp)*ex(.7,dt);
+ gate.material.uniforms.uAmp.value=gateAmp*(1+.25*Math.sin(t*7)+.15*Math.sin(t*17.3));
+ updPuffs(dt);updPetals(t,dt);
+ /* камера: тяжёлая, с запаздыванием */
+ let kc=1.5,kl=2.2,rollT=0;const par=(t-ptr.t<4)?1:0;
+ if(focus&&focus.follow==='hero'){ct.set(hp.x,hp.y+.4,hp.z+focus.d*(portrait?1.5:1));cl.copy(hp);kc=3;kl=4}
+ else if(focus&&focus.follow==='beast'){ct.set(bp.x-2.5,bp.y,bp.z+focus.d*(portrait?1.6:1));cl.set(bp.x-2,bp.y,bp.z)}
+ else if(focus){ct.fromArray(focus.cam);cl.fromArray(focus.look);if(portrait&&fm==='plaza'&&focus.id!=='water'&&focus.id!=='bokeh')cl.y+=5}
+ else if(phase===0){const mx=lerp(hp.x,(hp.x+bp.x-3.3)*.5,bA);ct.set(mx*.6,45+(hp.y-46)*.5,-40+(portrait?31:20));cl.set(mx*.9,hp.y*.7+46*.3,-41);rollT=Math.sin(t*.4)*.1-hv.x*.007}
+ else if(phase===1){ct.set(GX-8,GY-1,GZ+(portrait?26:19));cl.set(GX-4,GY,GZ);rollT=Math.sin(t*.9)*.05}
+ else if(phase===2||phase===3){ct.set(Math.sin(t*.11)*1.6+ptr.x*par*1.2,1.3+Math.sin(t*.37)*.08,14);cl.set(Math.sin(t*.07)*3+ptr.x*par*3,(portrait?15:8)+ptr.y*par*2,-60);kc=phase===2?.85:1.3;kl=phase===2?1:1.6}
+ else{ct.set(0,44,-21);cl.set(0,46,-41);kc=.8;kl=.9}
+ cpos.lerp(ct,ex(kc,dt));look.lerp(cl,ex(kl,dt));roll+=(rollT-roll)*ex(1.5,dt);shake*=Math.exp(-3.2*dt);
+ camera.position.set(cpos.x+Math.sin(t*37)*shake*.35,cpos.y+Math.sin(t*43+1)*shake*.35,cpos.z);
+ camera.up.set(Math.sin(roll),Math.cos(roll),0);camera.lookAt(look);camera.updateMatrixWorld();
+ /* небо следует за взглядом */
+ tmp.copy(look).sub(camera.position).normalize();skyMat.uniforms.uLook.value.set(-tmp.x*.5,-tmp.y*.9+.1);
+ dustMat.uniforms.uCam.value.copy(camera.position);
+ /* линия воды в экранных координатах */
+ tmp2.set(camera.position.x,0,camera.position.z-32).project(camera);
+ waterMat.uniforms.uH.value=(tmp2.z<1&&Math.abs(roll)<.2)?clamp(tmp2.y*.5+.5,-1,.9):-1;
+ /* эмоциональные рычаги */
+ const rT=(focus&&focus.rain)?1:(phase===2?1:(phase===3?.55:(phase===1&&exploded?.9:.22)));rainAmt+=(rT-rainAmt)*ex(1,dt);rainMat.uniforms.uAmt.value=rainAmt;
+ const sT=focus?0:(phase===2&&pt<3.4?1.25:(phase===4?.9:(phase<2?Math.min(sp/17,1)*.55:0)));speedFx+=(sT-speedFx)*ex(2,dt);
+ flash*=Math.exp(-3.5*dt);glitch*=Math.exp(-2.6*dt);
+ const fu=finalMat.uniforms;fu.uSpeed.value=speedFx;fu.uFlash.value=flash;fu.uGlitch.value=glitch+(Math.sin(t*.31)>.992?.5:0);
+ fu.uCA.value=.0035+speedFx*.004+flash*.012+glitch*.004;fu.uGrain.value=.065+.015*Math.sin(t*.7);fu.uBloom.value=1.45+.2*Math.sin(t*.9)+flash;
+ fu.uFade.value=Math.min(1,fu.uFade.value+dt*.55);
+}
+
+
+/* ============ ДОПОЛНЕНИЕ: шесть живых ассетов, не изменяя эталон ============ */
+const SHPILI_PLUS=(()=>{
+ const own={}; const hidden=new Set(); const light=0xb9f5f7,pink=0xff77a8,deep=0x081e35;
+ const basic=(c,op=1,glow=false)=>new T.MeshBasicMaterial({color:c,transparent:op<1,opacity:op,
+   depthWrite:false,side:T.DoubleSide,blending:glow?T.AdditiveBlending:T.NormalBlending});
+ const mesh=(p,geo,col,xyz,op=1,glow=false)=>{
+   const m=new T.Mesh(geo,basic(col,op,glow));m.position.set(...xyz);p.add(m);return m;
+ };
+ const ball=(p,rad,col,xyz,op=1)=>mesh(p,new T.IcosahedronGeometry(rad,2),col,xyz,op);
+ const spike=(p,r,h,col,xyz,rot=0)=>{
+   const m=mesh(p,new T.ConeGeometry(r,h,5),col,xyz);m.rotation.z=rot;return m;
+ };
+ const ring=(p,r,col,xyz,op=.7)=>mesh(p,new T.TorusGeometry(r,.055,4,52),col,xyz,op,true);
+ const beam=(p,a,b,r,col,op=.9)=>{
+   const v=new T.Vector3(...a),w=new T.Vector3(...b);
+   const m=mesh(p,new T.CylinderGeometry(r*.45,r,v.distanceTo(w),6),col,
+               v.clone().add(w).multiplyScalar(.5).toArray(),op);
+   m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),w.sub(v).normalize());return m;
+ };
+ const aura=(p,r,col,op=.55)=>{
+   const mat=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,
+     blending:T.AdditiveBlending,uniforms:{uT:U.t,uC:{value:new T.Color(col)},uA:{value:op}},
+     vertexShader:VS,fragmentShader:NOISE+`
+       uniform float uT,uA;uniform vec3 uC;varying vec2 vUv;
+       void main(){vec2 p=(vUv-.5)*2.;float d=length(p);
+         float n=fbm(p*5.+vec2(uT*.12,-uT*.08));
+         float e=pow(max(0.,1.-d),2.1)*(.55+.45*n);
+         float edge=exp(-pow((d-.72)*15.,2.))*(.55+.45*sin(uT*2.6+n*7.));
+         gl_FragColor=vec4(uC*(.5+e*1.5),uA*(e+edge*.45));
+       }`});
+   return mesh(p,new T.PlaneGeometry(r*2,r*2),0xffffff,[0,0,-1.2],1).material=mat;
+ };
+ const newGroup=(id,x,y,z)=>{
+   const g=new T.Group();g.name='shpili-plus-'+id;g.position.set(x,y,z);scene.add(g);
+   own[id]={group:g,tick:()=>{}};return g;
+ };
+ const banners=(p,n,size,col,seed)=>{
+   const R=rng(seed),out=[];
+   for(let i=0;i<n;i++){
+     const h=size*(.4+R()*.8),w=.12+R()*.26,seg=15;
+     const g=new T.PlaneGeometry(w,h,1,seg),m=mesh(p,g,col,
+       [(R()-.5)*size*1.4,(R()-.5)*size*.45,-.2+i*.003],.27+R()*.45,true);
+     m.userData.phase=R()*6.28;m.userData.amp=.2+R()*.42;out.push(m);
+   }
+   return (t)=>{
+     for(const m of out){
+       const a=m.geometry.attributes.position,h=m.geometry.parameters.height;
+       for(let j=0;j<a.count;j++){
+         const y=a.getY(j),u=(y/h+.5);
+         a.setZ(j,Math.sin(t*.8-u*3.5+m.userData.phase)*u*u*.45);
+         a.setX(j,(j%2?1:-1)*m.geometry.parameters.width*.5+
+                 Math.sin(t*1.1-u*4.8+m.userData.phase)*u*u*m.userData.amp);
+       }
+       a.needsUpdate=true;
+     }
+   };
+ };
+ // Враг: багровый страж. Ломаный панцирь, челюсти, косые рога и волна из плавников.
+ {
+   const id='sable-beast',g=newGroup(id,25,44,-40),torso=new T.Group();g.add(torso);
+   aura(g,16,0x9a2e67,.35);
+   ball(torso,3.05,0x1b1834,[0,0,0]);
+   ball(torso,2.28,0x541d3a,[0,.22,.75],.91);
+   const mask=ball(torso,1.6,0xc6b0bd,[0,.65,2.15]);mask.scale.set(1.1,.82,.44);
+   for(const s of [-1,1]){
+     spike(torso,.64,3.2,0x370f36,[s*2.1,1.65,.4],s*.7);
+     spike(torso,.44,2.9,0xc45375,[s*1.1,2.48,1.26],s*.32);
+     const eye=ball(torso,.24,0xffb5ca,[s*.73,.9,2.75]);
+     ring(torso,.5,0xff718d,[s*.73,.9,2.68],.85);
+     for(let j=0;j<5;j++)spike(torso,.33,1.4+j*.18,0x391a45,
+       [s*(1.5+j*.34),-.32-j*.33,1.32-j*.12],s*(1.1+j*.11));
+   }
+   for(let i=0;i<9;i++){
+     const x=(i-4)*.33;
+     spike(torso,.15,.65,0xff739d,[x,-1.4,2.68],Math.PI);
+   }
+   const fins=[];for(let i=0;i<9;i++){
+     const s=i%2?-1:1,part=new T.Group();part.position.set(s*(1.6+i*.27),-.4-i*.24,-.6-i*.17);
+     torso.add(part);spike(part,.26,2.15,0x9f4569,[0,-.55,0],s*.8);
+     ball(part,.12,0xffb2b5,[0,-1.1,.25]);fins.push(part);
+   }
+   const wave=banners(torso,10,6,0xd43b88,414);
+   own[id].tick=(t)=>{torso.rotation.z=.055*Math.sin(t*.65);torso.rotation.y=.16*Math.sin(t*.32);
+     torso.position.y=.52*Math.sin(t*.9);mask.position.y=.65+.11*Math.sin(t*1.9);
+     for(let i=0;i<fins.length;i++)fins[i].rotation.z=.24*Math.sin(t*1.2-i*.4);
+     wave(t);
+   };
+ }
+ // Разрушенный шпиль: накренившиеся секции и парящие обломки с тревожным маяком.
+ {
+   const id='shattered-mast',g=newGroup(id,-23,8,-38),core=new T.Group();g.add(core);
+   aura(g,27,0x68c3e0,.55);
+   const shafts=[];for(let i=0;i<10;i++){
+     const h=3.6+i*.17,y=i*2.35,x=Math.sin(i*.49)*(.3+i*.09);
+     const st=new T.Group();st.position.set(x,y,0);core.add(st);
+     beam(st,[-.25,-h*.55,0],[.07,h*.55,0],.22-i*.01,i%3?deep:0x416075);
+     for(const s of [-1,1]){
+       beam(st,[0,-h*.35,0],[s*(1.1+i*.032),-h*.02,0],.055,0x6ea0a9,.75);
+       beam(st,[s*(1.1+i*.032),-h*.02,0],[0,h*.35,0],.045,0x42667a,.75);
+     }
+     ring(st,.55+i*.06,0x89dfeb,[0,h*.48,0],.23);
+     shafts.push(st);
+   }
+   for(let i=0;i<19;i++){
+     const a=i*2.4,r=2+i*.075;
+     const sh=spike(g,.22,.7+(i%4)*.28,i%3?0x4c7591:0xb9e6ef,
+       [Math.cos(a)*r,7+(i*4.7)%19,Math.sin(a)*1.5],Math.sin(a)*1.6);
+     sh.userData.phase=a;
+   }
+   const beacon=ball(core,.56,0xff91b0,[1,26,0]);ring(core,1.2,0xff7599,[1,26,0],.85);
+   // Разорванные кабели и сияющие трещины в металле. Несимметричный
+   // детализированный слой — один меш/вызов рисования.
+   const fractureTex=mk(1024,1024,(ctx,w,h)=>{
+     const Q=rng(19037);ctx.lineJoin='round';ctx.lineCap='round';
+     for(let i=0;i<440;i++){
+       const x0=w*(.18+Q()*.64),y0=Q()*h,len=12+Q()*105;
+       let x=x0,y=y0;
+       ctx.beginPath();ctx.moveTo(x,y);
+       for(let j=0,n=3+Math.floor(Q()*4);j<n;j++){
+         const a=Q()*2.4-1.2; x+=(Q()-.52)*len/n*1.4;y+=len/n*(.5+Q()*.5);
+         ctx.lineTo(x,y);
+       }
+       ctx.strokeStyle=i%7===0?'rgba(255,208,232,.95)':
+         i%2===0?'rgba(115,220,242,.73)':'rgba(49,127,162,.66)';
+       ctx.lineWidth=1.8+Q()*3.8;ctx.stroke();
+     }
+     // Крупные асимметричные надломы, хорошо читаемые даже на телефоне.
+     for(let i=0;i<200;i++){
+       const cx=w*(.16+Q()*.68),cy=Q()*h;
+       const sz=22+Q()*62,ang=(Q()-.5)*1.5;
+       ctx.save();ctx.translate(cx,cy);ctx.rotate(ang);
+       ctx.beginPath();ctx.moveTo(-sz*.52,-sz*.24);
+       ctx.lineTo(-sz*(.22+Q()*.25),-sz*(.55+Q()*.25));
+       ctx.lineTo(sz*.41,-sz*.46);
+       ctx.lineTo(sz*(.5+Q()*.3),sz*.21);
+       ctx.lineTo(sz*.18,sz*(.48+Q()*.3));
+       ctx.lineTo(-sz*.46,sz*.22);ctx.closePath();
+       ctx.fillStyle=i%4===0?'rgba(163,236,250,.68)':i%3===0?
+         'rgba(236,133,188,.53)':'rgba(26,77,112,.84)';
+       ctx.fill();ctx.lineWidth=6+Q()*9;
+       ctx.strokeStyle=i%2?'rgba(180,231,250,.8)':'rgba(255,172,210,.77)';
+       ctx.stroke();ctx.restore();
+     }
+   });
+   const fractureMat=new T.MeshBasicMaterial({map:fractureTex,transparent:true,
+     depthTest:false,depthWrite:false,side:T.DoubleSide,
+     blending:T.AdditiveBlending,opacity:.9});
+   const fractures=new T.Mesh(new T.PlaneGeometry(21,37),fractureMat);
+   fractures.position.set(.3,11.5,1.45);g.add(fractures);
+   const wave=banners(core,8,8,0x61cadd,23);
+   own[id].tick=(t)=>{core.rotation.z=-.09+.045*Math.sin(t*.65);beacon.scale.setScalar(.75+.34*Math.sin(t*2.3));
+      fractures.rotation.z=-.018+.015*Math.sin(t*.43);fractureMat.opacity=.92+.07*Math.sin(t*1.3);
+      for(let i=0;i<shafts.length;i++)shafts[i].rotation.z=.014*Math.sin(t*.7-i*.23);
+      wave(t);
+   };
+ }
+ // Мост между разбитыми вратами: 28 разноуровневых осколков, руны и волна по дугам.
+ {
+   const id='gate-bridge',g=newGroup(id,12,12,-40);
+   aura(g,21,0x984678,.33);
+   const stones=[];
+   const R=rng(533);
+   for(let i=0;i<28;i++){
+     const x=(i-13.5)*.67, y=Math.sin(i*.33)*.43+Math.sin(i*.77)*.25;
+     const st=new T.Group();st.position.set(x,y,0);g.add(st);
+     const block=mesh(st,new T.DodecahedronGeometry(.38+R()*.28,0),
+       i%5===0?0x697e96:0x18334f,[0,0,0]);block.scale.set(1.15,.45,1.8);
+     beam(st,[-.17,-.14,.4],[.17,.13,-.3],.025,0xc885a9,.7);
+     if(i%3===0)ring(st,.35,0xe27ca5,[0,.3,.2],.35);
+     stones.push(st);
+   }
+   const pylons=[];
+   for(const s of [-1,1]){
+     const column=new T.Group();column.position.set(s*10,0,-.7);g.add(column);pylons.push(column);
+     for(let j=0;j<6;j++)spike(column,.6,2,0x29455c,[Math.sin(j)*.8,j*1.7,0],s*.12+j*.1);
+     ring(column,2.1,0xff7aaa,[0,8,0],.65);
+   }
+   const wave=banners(g,12,7,0xf2a5cc,817);
+   own[id].tick=(t)=>{
+     // Цепная волна проходит вдоль 28 осколков с задержкой по фазе.
+     // Весь мост дышит, опоры склоняются мягко, без скачков и телепортации.
+     g.position.y=12+.36*Math.sin(t*.73);
+     g.rotation.z=.055*Math.sin(t*.84);
+     g.scale.setScalar(1+.085*Math.sin(t*1.12));
+     for(let i=0;i<stones.length;i++){
+       stones[i].position.y=Math.sin(i*.33)*.43+Math.sin(i*.77)*.25+
+         .92*Math.sin(t*1.55-i*.24);
+       stones[i].position.z=.25*Math.cos(t*1.12-i*.19);
+       stones[i].rotation.z=.22*Math.sin(t*.96-i*.28);
+       stones[i].scale.setScalar(.96+.13*Math.sin(t*1.28-i*.21));
+     }
+     for(let i=0;i<pylons.length;i++){
+       pylons[i].rotation.z=.07*Math.sin(t*.9+i*2.2);
+       pylons[i].position.y=.23*Math.sin(t*1.15+i*1.4);
+     }
+     wave(t);
+   };
+ }
+ // Спутник: осмысленно следует за героем, защищает видимым кольцом.
+ {
+   const id='dawn-sentinel',g=newGroup(id,-8,47,-38),wing=new T.Group();g.add(wing);
+   aura(g,9,0x4de6e6,.37);
+   ball(wing,.84,0xd3f7ef,[0,0,0]);ball(wing,.48,0x279bb9,[0,0,.67]);
+   ring(wing,1.26,0x82f1ed,[0,0,.4],.8);ring(wing,1.9,0x87cfed,[0,0,-.9],.38);
+   const petals=[];
+   for(let i=0;i<11;i++){
+     const a=i*Math.PI*2/11,part=new T.Group();part.position.set(Math.cos(a)*1.75,
+       Math.sin(a)*1.75,-.4);wing.add(part);
+     spike(part,.33,1.4,i%2?0x7bccd5:0x469cb8,[0,.65,0],-a);
+     ball(part,.12,0xbffaff,[0,1.28,.15]);petals.push(part);
+   }
+   const shield=ring(g,3.5,0x93ffff,[2,0,1.5],.28);
+   own[id].tick=(t)=>{
+     g.position.set(hp.x-2.8+Math.sin(t*1.1)*.6,hp.y+2.2+Math.sin(t*1.4)*.36,hp.z+.7);
+     wing.rotation.z=t*.17;wing.rotation.y=Math.sin(t*.4)*.22;
+     shield.rotation.z=-t*.28;shield.scale.setScalar(.9+.1*Math.sin(t*1.5));
+     for(let i=0;i<petals.length;i++)petals[i].rotation.z=.2*Math.sin(t*1.4-i*.35);
+   };
+ }
+ // Предмет: световое ядро ускоряет восстановление удара героя при сближении.
+ {
+   const id='mirror-seed',g=newGroup(id,3,43,-40),core=new T.Group();g.add(core);
+   aura(g,11,0x7bdbea,.44);
+   const prism=mesh(core,new T.OctahedronGeometry(1.2,1),0xb2f8f0,[0,0,0],.85);
+   const heart=ball(core,.65,0xff91bd,[0,0,.55]);
+   const circles=[];for(let i=0;i<4;i++){
+     const r=ring(core,1.65+i*.55,i%2?0x65aeca:0xff9fc4,[0,0,-.5-i*.17],.4);
+     circles.push(r);
+   }
+   const shards=[];for(let i=0;i<14;i++){
+     const a=i*2.399,r=2+(i%4)*.35;
+     shards.push(spike(g,.17,.65+(i%3)*.2,i%2?0x9dd9e1:0xe59cbc,
+       [Math.cos(a)*r,Math.sin(a)*r,-.3],a-.4));
+   }
+   const boost=ring(g,3,0x97ffff,[0,0,.8],.05);
+   own[id].tick=(t)=>{
+     core.rotation.z=t*.16;prism.rotation.y=t*.35;heart.scale.setScalar(.8+.25*Math.sin(t*1.7));
+     for(let i=0;i<circles.length;i++)circles[i].rotation.y=Math.sin(t*.7+i)*.46;
+     for(let i=0;i<shards.length;i++)shards[i].rotation.z+=.002*Math.sin(t+i);
+     const dx=hp.x-g.position.x,dy=hp.y-g.position.y;
+     const near=dx*dx+dy*dy<42;
+     boost.material.opacity=near?.9:.06;
+     boost.scale.setScalar(1+.2*Math.sin(t*4));
+     if(near){slashCd=Math.min(slashCd,.24);speedFx=Math.max(speedFx,.45);}
+   };
+ }
+ // Погода: локальная гроза. Никаких полноэкранных надписей, молнии с плавным затуханием.
+ {
+   const id='storm-heart',g=newGroup(id,-34,46,-43);
+   aura(g,31,0xe67bb4,.72);
+   const cloud=new T.Group();g.add(cloud);
+   const R=rng(966),rain=[];
+   for(let i=0;i<44;i++){
+     const x=(R()-.5)*18,y=(R()-.5)*16,z=(R()-.5)*3;
+     const m=beam(g,[x,y,z],[x-.24,y-1.3-R()*2,z],.023,
+       i%3?0x539ab8:0xf5a6d1,.25+R()*.55);
+     rain.push({mesh:m,x,y,speed:2+R()*4,phase:R()*6.28});
+   }
+   for(let i=0;i<9;i++){
+     const x=(R()-.5)*12,y=3+R()*5;
+     const m=ball(cloud,1.25+R()*.75,i%3?0x153b55:0x4c315f,[x,y,-1.4],.75);
+     m.scale.set(1.5,.48,1); 
+   }
+   const lightning=[];
+   for(let i=0;i<11;i++){
+     const x=(R()-.5)*10,h=7+R()*5,mid=(R()-.5)*4;
+     lightning.push(beam(g,[x,h,1],[x+mid,1,1],.045,i%3?0xffacd4:0xa6ecf6,.65));
+   }
+   // Сотни нерегулярных ветвящихся разрядов на одной полупрозрачной
+   // холстовой текстуре: высокая детализация, один draw call вместо 300+ мешей.
+   const veinTex=mk(1024,1024,(ctx,w,h)=>{
+     const V=rng(5017);ctx.lineCap='round';ctx.lineJoin='round';
+     for(let i=0;i<720;i++){
+       const x0=35+V()*(w-70),y0=35+V()*(h-70);
+       const steps=3+Math.floor(V()*6),len=14+V()*46,ang=V()*6.28;
+       ctx.beginPath();ctx.moveTo(x0,y0);
+       let x=x0,y=y0;
+       for(let j=0;j<steps;j++){
+         const a=ang+.55*Math.sin(j*1.4+i*.37)+(V()-.5)*.85;
+         x+=Math.cos(a)*len/steps;y+=Math.sin(a)*len/steps;
+         ctx.lineTo(x,y);
+       }
+       ctx.strokeStyle=i%4===0?'rgba(255,190,229,.85)':i%3===0?
+         'rgba(145,228,250,.73)':'rgba(218,118,183,.52)';
+       ctx.lineWidth=2.2+V()*3.6;ctx.stroke();
+       if(i%3===0){
+         const a=ang-1.1+V()*.55;
+         ctx.beginPath();ctx.moveTo(x,y);
+         ctx.lineTo(x+Math.cos(a)*len*.42,y+Math.sin(a)*len*.42);
+         ctx.strokeStyle='rgba(255,197,221,.64)';ctx.lineWidth=1.3+V()*1.2;ctx.stroke();
+       }
+     }
+     // Рваные фронты багровых грозовых облаков: не повторяющиеся пятна,
+     // а слои угловатых осколков с искрами и частичным перекрытием.
+     for(let i=0;i<280;i++){
+       const cx=35+V()*(w-70),cy=40+V()*(h-80),
+             rad=19+V()*55,ang=V()*6.28;
+       ctx.save();ctx.translate(cx,cy);ctx.rotate(ang);
+       ctx.beginPath();ctx.moveTo(-rad*.8,-rad*.3);
+       ctx.lineTo(-rad*.4,-rad*(.5+V()*.4));
+       ctx.lineTo(rad*.4,-rad*.26);
+       ctx.lineTo(rad*(.9+V()*.3),rad*.32);
+       ctx.lineTo(rad*.08,rad*(.55+V()*.2));
+       ctx.lineTo(-rad*.72,rad*.4);ctx.closePath();
+       ctx.fillStyle=i%4===0?'rgba(255,145,205,.65)':i%4===1?
+         'rgba(128,225,252,.59)':'rgba(37,61,104,.82)';
+       ctx.fill();ctx.lineWidth=6+V()*8;
+       ctx.strokeStyle=i%2?'rgba(255,194,224,.82)':'rgba(112,237,254,.79)';
+       ctx.stroke();ctx.restore();
+     }
+   });
+   const veinMat=new T.MeshBasicMaterial({map:veinTex,transparent:true,
+     depthTest:false,depthWrite:false,blending:T.AdditiveBlending,
+     opacity:.78,side:T.DoubleSide});
+   const veins=new T.Mesh(new T.PlaneGeometry(27,25),veinMat);
+   veins.position.set(0,1.2,1.7);g.add(veins);
+   const petals=banners(g,12,14,0xc16b9f,744);
+   own[id].tick=(t)=>{
+     cloud.position.x=.65*Math.sin(t*.5);cloud.position.y=.4*Math.sin(t*.37);
+     veins.rotation.z=.018*Math.sin(t*.42);veinMat.opacity=.9+.09*Math.sin(t*.9);
+     for(const o of rain)o.mesh.position.y=(o.y-((t*o.speed+o.phase)%16))*.42;
+     for(let i=0;i<lightning.length;i++){
+       const l=lightning[i];l.material.opacity=.04+.7*Math.pow(.5+.5*Math.sin(t*1.3+i*2.399),10);
+       l.scale.x=.9+.15*Math.sin(t*.31+i);
+     }petals(t);
+   };
+ }
+ const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
+ const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
+ window.__PACK_PROBE__=api;
+ function tick(t,dt){
+   proj.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);frustum.setFromProjectionMatrix(proj);
+   for(const id of ids){
+     const a=own[id],chosen=focus?.id===id,eligible=(!focus||chosen)&&!hidden.has(id);
+     a.group.visible=eligible;
+     if(!eligible)continue;
+     if(!chosen){sight.center.copy(a.group.position);if(!frustum.intersectsSphere(sight))continue;}
+     a.tick(t,dt);
+   }
+ }
+ return {tick,ids};
+})();
+
+/* ============ РЕНДЕР ============ */
+const clock=new T.Clock();let acc=0,fr=0;
+function frame(){requestAnimationFrame(frame);
+ const dt=Math.min(clock.getDelta(),.05);U.t.value+=dt;const t=U.t.value;
+ update(t,dt);SHPILI_PLUS.tick(t,dt);
+ renderer.setRenderTarget(rtA);renderer.render(scene,camera);
+ quad.material=waterMat;renderer.setRenderTarget(rtB);renderer.render(qScene,qCam);
+ quad.material=blurMat;blurMat.uniforms.tS.value=rtB.texture;blurMat.uniforms.uThr.value=.42;blurMat.uniforms.uDir.value.set(1.6/rtC.width,0);renderer.setRenderTarget(rtC);renderer.render(qScene,qCam);
+ blurMat.uniforms.tS.value=rtC.texture;blurMat.uniforms.uThr.value=0;blurMat.uniforms.uDir.value.set(0,1.6/rtC.height);renderer.setRenderTarget(rtD);renderer.render(qScene,qCam);
+ quad.material=finalMat;renderer.setRenderTarget(null);renderer.render(qScene,qCam);
+ /* автоподстройка качества под FPS */
+ acc+=dt;fr++;if(fr>=50){const a=acc/fr;acc=0;fr=0;if(a>.027&&resK>.5){resK=Math.max(.5,resK*.85);resize()}else if(a<.0175&&resK<1){resK=Math.min(1,resK*1.08);resize()}}
+}
+window.__STATE__=()=>({phase,pt,hits,bA,focus:focus&&focus.id,W,H,rw,rh,fov:camera.fov,uH:waterMat.uniforms.uH.value,cam:camera.position.toArray(),hero:hp.toArray()});
+window.__JUMP__=p=>setPhase(p);
+frame();
+
+/* ============ МЕНЮ ☰ (весь текст только здесь) ============ */
+const pn=$('pn'),ls=$('ls');
+function openM(o){pn.classList.toggle('on',o);pn.setAttribute('aria-hidden',o?'false':'true')}
+$('mb').addEventListener('click',()=>openM(!pn.classList.contains('on')));$('cl').addEventListener('click',()=>openM(false));
+function setFocus(it){focus=it;focusCd=.6;for(const b of ls.children)b.classList.toggle('sel',!!it&&b.dataset.id===it.id);
+ if(it){setPhase(it.m==='flight'?0:(it.m==='gate'?1:3));if(it.m==='gate'){exploded=false;pt=0}}else setPhase(phase===3?3:phase)}
+for(const it of PACK.items){const b=document.createElement('button');b.dataset.id=it.id;const s=document.createElement('span');s.textContent=it.n;const k=document.createElement('i');k.textContent=it.k;if(it.k==='2.5D')k.className='k25';b.appendChild(s);b.appendChild(k);
+ b.addEventListener('click',()=>{setFocus(it);openM(false)});ls.appendChild(b)}
+$('bw').addEventListener('click',()=>{setFocus(null);openM(false)});
+$('bf').addEventListener('click',()=>{try{const d=document,e=d.documentElement;if(d.fullscreenElement||d.webkitFullscreenElement){(d.exitFullscreen||d.webkitExitFullscreen).call(d)}else{const r=(e.requestFullscreen||e.webkitRequestFullscreen);if(r){const p=r.call(e);if(p&&p.catch)p.catch(()=>{})}}}catch(_){}openM(false)});
+})();
+</script>
+</body>
+</html>

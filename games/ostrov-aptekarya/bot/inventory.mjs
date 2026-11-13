@@ -19,7 +19,7 @@ const baseline = {
 const hash = s => {let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return (h>>>0).toString(16).padStart(8,'0');};
 const countLines = s => (s.match(/\['[aiv]',/g) || []).length;
 export function inventory(input) {
-  const {dialogue,game,ui,girl,audio,adapter} = input;
+  const {dialogue,game,ui,girl,audio,adapter,playthrough} = input;
   const section = dialogue.split('export const SCRIPT = {')[1]?.split('\n};')[0];
   if (!section) throw Error('SCRIPT отсутствует');
   const entries = Object.fromEntries([...section.matchAll(/^  ([\w]+): \[\n([\s\S]*?)^  \],?/gm)]
@@ -52,6 +52,13 @@ export function inventory(input) {
   const cleanBot = botBody.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g,'');
   if(/\bchapter2\s*(?:\.\s*(?:action|botActionIfNear)\s*\(|\[)/.test(cleanBot))
     throw Error('Недопустимо: бот закрывает дверь из движка без пользовательского ввода');
+  // Лимит поимок нельзя спрятать в комментарии или заменить чрезмерным числом.
+  const verdict = playthrough.split('const pass=')[1]?.split('console.log')[0];
+  if(!verdict)throw Error('Нет итоговой проверки браузерного бота');
+  const visibleCheck=verdict.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g,'');
+  const captureLimit=visibleCheck.match(/last\.archiveCaught\s*<=\s*(\d+)/);
+  if(!captureLimit || Number(captureLimit[1])>8)
+    throw Error('Браузерный бот больше не ограничивает поимки Ивой');
   return {
     scriptKeys:Object.keys(entries).length,
     chapter1ScriptKeys:Object.keys(baseline).length,
@@ -66,6 +73,7 @@ export function inventory(input) {
 }
 export function sourceInput() {return {
   dialogue:read('dialogue.js'),game:read('game.js'),ui:read('ui.js'),
-  girl:read('girl.js'),audio:read('audio.js'),adapter:read('bot-adapter.js')
+  girl:read('girl.js'),audio:read('audio.js'),adapter:read('bot-adapter.js'),
+  playthrough:read('bot/playthrough.mjs')
 };}
 console.log(JSON.stringify(inventory(sourceInput()),null,2));

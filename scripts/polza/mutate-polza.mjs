@@ -12,6 +12,7 @@ const cases=[
  ['double-benefit',()=>({...good(),body:'ПОЛЬЗА: FINISH B2\nПОЛЬЗА: FINISH B2'})],
  ['empty-benefit',()=>({...good(),body:'ПОЛЬЗА: '})],
  ['eleventh-pr',()=>({...good(),openPRs:11})],
+ ['ninth-cron-workflow',()=>({...good(),files:[...good().files,file('.github/workflows/ninth.yml','added')],newCronFiles:['.github/workflows/ninth.yml'],scheduledWorkflows:8})],
  ['new-cron-workflow',()=>({...good(),files:[...good().files,file('.github/workflows/more.yml','added')],newCronFiles:['.github/workflows/more.yml'],scheduledWorkflows:16})],
  ['rename-to-fake-game',()=>({...good(),body:'ПОЛЬЗА: ИГРА games/claimed',files:[file('games/claimed/engine.js','renamed',0,'reports/engine.md')],botOK:true})],
  ['self-edit-gate',()=>({...good(),files:[...good().files,file('scripts/polza/gate.mjs')]})],

@@ -43,6 +43,14 @@ while(Date.now()-t0<480000){
   if(mode==='full'&&last.chapter1Ended){
     await page.locator('#ap-next').click({timeout:12000});await page.waitForTimeout(300);
   }
+  if((mode==='full'||mode==='archive')&&last.state==='archive'&&last.doors===0) {
+    // Взаимодействие дверью — только реальная кнопка игрока, не скрытое действие из игрового движка.
+    const door = await page.evaluate(()=>{
+      const a=window.__APTEKAR__,g=a.goal(),p=a.heroPos();
+      return !!g?.door && Math.hypot(g.x-p.x,g.y-p.z)<1.85;
+    });
+    if(door)await page.locator('#ap-act').click({timeout:12000});
+  }
   if(artifacts&&!screenshots&&last.state==='archive'&&last.pages>=1){
     fs.mkdirSync(artifacts,{recursive:true});
     await page.screenshot({path:path.join(artifacts,'chapter2-mobile.png')});

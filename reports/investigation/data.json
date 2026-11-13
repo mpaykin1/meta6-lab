@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T11:25:02.710Z",
+  "generated_at": "2026-11-13T11:25:52.029Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -548,7 +548,7 @@
       "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md",
       "taken_at": "2026-11-13 10:53",
-      "last_commit_at": "[#237: закрыт](https://github.com/mpaykin1/meta6-lab/pull/237); [#262: trap](https://github.com/mpaykin1/meta6-lab/commit/a521442cf25e0413942eaf3aed9cafad4e1d8a96); [Archer](https://github.com/mpaykin1/meta6-lab/commit/21d89026cc160345cd94fbd29cf7eab2a270cc67); [#72 merge](https://github.com/mpaykin1/meta6-lab/commit/9cc6958b0d34c6898a373dfd1d058e5fa539512d); [#278 rule](https://github.com/mpaykin1/meta6-lab/commit/e66a271095c39b65c9bdf22c55450d5dd043d1f9)",
+      "last_commit_at": "[#262 WebGL poll](https://github.com/mpaykin1/meta6-lab/commit/05432572e623a20cb55f7b430fa99e59f97dc66a); [trap](https://github.com/mpaykin1/meta6-lab/commit/a521442cf25e0413942eaf3aed9cafad4e1d8a96); [Archer](https://github.com/mpaykin1/meta6-lab/commit/21d89026cc160345cd94fbd29cf7eab2a270cc67); [#72 merge](https://github.com/mpaykin1/meta6-lab/commit/9cc6958b0d34c6898a373dfd1d058e5fa539512d)",
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {

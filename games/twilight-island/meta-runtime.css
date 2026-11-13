@@ -1,0 +1,15 @@
+/* Working copy only. Original render, health, minimap and all inventory functions remain. */
+html, body { width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; }
+#c { position: fixed; inset: 0; width: 100%; height: 100dvh; touch-action: none; }
+#loading { font-size: 0; }
+#loading::after { content: ''; display: block; width: 80px; height: 4px; background: #f0d477; }
+#coinN, #coinT, #timer, #boss > span, .wname, .wstat, #wAmmo,
+#wNew, #toast, #v6Toast, .v7-arrow, #v5Hint, .hotbar small, .hotbar b,
+.hotbar .slot > span, #dmgLayer .dmg { display: none !important; }
+#v5Menu:not([open]) > .v5-controls { display: none; }
+#v5Menu #v5Dock { position: static; display: flex; flex-wrap: wrap; height: auto !important; max-height: 35dvh; }
+#v5Menu #v5Dock .v5-tool { flex-basis: 65px; }
+#v5Menu > summary { font-size: 0; }
+#v5Menu > summary::after { content: '☰'; font-size: 25px; }
+#v5Menu[open] { max-height: 94dvh; overflow: auto; }
+@media (pointer: fine) { #touch, #v7MobileHud { display: none !important; } }

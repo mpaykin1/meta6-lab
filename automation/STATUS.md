@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T19:07:45.965Z | МГЛ: 2f11c6f159de722eddfaf1a4d2627b4efb004b28 | МГ: 1bea203fb63d7c27c29a5643e2f38e4554a658c1 | https://github.com/mpaykin1/meta6-lab/actions/runs/43489114146
+UTC: 2026-11-13T20:29:15.110Z | МГЛ: 14d2a1dc48ec2595b4db079a6f0d32fbd353726c | МГ: 7ae9604d0dfc969116895cd06bf11b4c3cdf15ff | https://github.com/mpaykin1/meta6-lab/actions/runs/43501914727
 ## ПРОВЕРИТЬ CLAUDE
 - PR #296 1d385b135f0fd52a35d6b2df6503f5f6eacf171a: automation/asset-check/test_htmlpack.py
 - PR #293 1ec3046bbe0972e316d92ec3846b542af0883716: automation/asset-check/test_kinds.py
@@ -47,21 +47,21 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 42 | конфликт: нет данных | слито: 34 | закрыто: 75
+открыто: 47 | конфликт: нет данных | слито: 35 | закрыто: 75
+#304 Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У  | af6238c7237cd129f58a2d66826b8405e9376f05
 #298 Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА | 4e17483f42baf5300da95c840962218958994b71
 #296 feat(asset-check): HTMLPACK visual quality bot + Tumannye Sh | 1d385b135f0fd52a35d6b2df6503f5f6eacf171a
 #295 Остров последнего аптекаря · Глава I «Тихолист» (демо + этап | b158e1dd42db709100c79ceb5ea6745db53aa2bd
-#293 ASSET CHECK 2.2: «не хуже эталона» + эталон «Туманные шпили» | 1ec3046bbe0972e316d92ec3846b542af0883716
-ещё 30: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 31: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1988 коммитов | нет данных
-МГ: 7 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:2
+МГЛ: 2016 коммитов | нет данных
+МГ: 9 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:4
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет
 broken-city — не запускалась | витрина: да
 broken-city-copy — не запускалась | витрина: да
-ostrov-aptekarya — прошла | витрина: нет
+ostrov-aptekarya — не прошла | витрина: нет
 rainbow-acceleration — не запускалась | витрина: нет
 skin-trainer — не запускалась | витрина: нет
 sumerki-i-pepel-2 — не запускалась | витрина: да

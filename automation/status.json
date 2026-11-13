@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-13T19:07:45.965Z",
+  "generated_at": "2026-11-13T20:29:15.110Z",
   "sha": {
-    "lab": "2f11c6f159de722eddfaf1a4d2627b4efb004b28",
-    "mg": "1bea203fb63d7c27c29a5643e2f38e4554a658c1"
+    "lab": "14d2a1dc48ec2595b4db079a6f0d32fbd353726c",
+    "mg": "7ae9604d0dfc969116895cd06bf11b4c3cdf15ff"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43489114146",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43501914727",
   "review": {
     "protected": [
       {
@@ -348,11 +348,16 @@
     ]
   },
   "pr": {
-    "open": 42,
+    "open": 47,
     "conflicts": "нет данных",
-    "merged": 34,
+    "merged": 35,
     "closed": 75,
     "mergedItems": [
+      {
+        "number": 304,
+        "title": "Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У ",
+        "sha": "af6238c7237cd129f58a2d66826b8405e9376f05"
+      },
       {
         "number": 298,
         "title": "Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА",
@@ -694,12 +699,12 @@
   },
   "changes": {
     "lab": {
-      "count": 1988,
+      "count": 2016,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 7,
-      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:2"
+      "count": 9,
+      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:4"
     }
   },
   "games": [
@@ -725,7 +730,7 @@
     },
     {
       "name": "ostrov-aptekarya",
-      "bot": "прошла",
+      "bot": "не прошла",
       "storefront": "нет"
     },
     {

@@ -18,3 +18,4 @@
 | CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | ChatGPT (чат) | 2026-11-13 18:55 UTC |
 | STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | чат ChatGPT | 2026-11-13 19:07 UTC |
 | LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | чат ChatGPT | 2026-11-13 19:06 UTC |
+| PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | чат ChatGPT | 2026-11-13 19:17 UTC |

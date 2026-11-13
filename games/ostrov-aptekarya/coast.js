@@ -189,7 +189,7 @@ export function createCoast({scene, paint, makers, seed = 7}) {
     };
   }
   return {
-    group, sea, extendWalk,
+    group, sea, extendWalk, islets: islets.map(s => s.position.clone().setY(0)),
     tick(t, dusk) { sea.material.uniforms.uTime.value = t; sea.material.uniforms.uDusk.value = dusk; islets.forEach((s, i) => s.position.y = -.1 + Math.sin(t * .4 + i) * .01); }
   };
 }

@@ -18,7 +18,6 @@
 | #285 | claude/storozha-yadro-1113 | .github/workflows/meta-games-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/core.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/mutate-storozha.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/verify-storozha.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 | #282 | lab/auditor-task-table-20261113 | scripts/auditor/mutate-auditor.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-13 |
 | #247 | lab/kak-proveryayushchij-traps | scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude | 2026-11-13 |
-| #299 | lab/ci-ochered-concurrency | .github/workflows/kontur-guard.yml: изменение ЯДРА охраны — только Claude; .github/workflows/lab-shared-deletion-guard.yml: изменение ЯДРА охраны — только Claude; .github/workflows/meta-bot.yml: изменение ЯДРА охраны — только Claude; .github/workflows/meta-games-guard.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-quota.yml: изменение ЯДРА охраны — только Claude | 2026-11-13 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

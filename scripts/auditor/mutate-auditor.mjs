@@ -98,3 +98,5 @@ process.stdout.write('AUDITOR MUTATIONS PASS: 3/3\n');
 await import("./mutate-auditor-truthful.mjs");
 
 await import("./mutate-auditor-stall.mjs");
+
+await import("./mutate-auditor-stale-pr.mjs");

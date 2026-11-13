@@ -92,6 +92,42 @@ jobs:
               owner,repo,state:'all',sort:'updated',direction:'desc',per_page:100
             });
             recentIssues.push(...issuePage.data.filter(i => !i.pull_request));
+            // Inspect a bounded set; old PRs are only flagged on current HEAD evidence.
+            const staleFindings = [];
+            let staleUnknown = false;
+            const stalePool = prs.filter(pr => pr.state === 'open' &&
+              now.getTime() - Date.parse(pr.created_at) > 86400000);
+            const stalePages = Math.max(1, Math.ceil(stalePool.length / 4));
+            const stalePage = Math.floor(now.getTime() / 3600000) % stalePages;
+            const staleCandidates = stalePool.slice(stalePage * 4, stalePage * 4 + 4);
+            for (const pr of staleCandidates) {
+              try {
+                const [detail, checks] = await Promise.all([
+                  github.rest.pulls.get({owner,repo,pull_number:pr.number}),
+                  github.rest.checks.listForRef({owner,repo,ref:pr.head.sha,per_page:100})
+                ]);
+                if (detail.data.head.sha !== pr.head.sha) {
+                  staleUnknown = true;
+                  continue;
+                }
+                const conflicts = detail.data.mergeable_state === 'dirty';
+                const failures = (checks.data.check_runs || []).filter(check =>
+                  check.status === 'completed' &&
+                  ['failure','timed_out','action_required'].includes(check.conclusion));
+                if (conflicts || failures.length) {
+                  staleFindings.push({
+                    pr,
+                    reason: [conflicts ? 'конфликт с main' : '',
+                      failures.length ? 'красная проверка '+clean(failures[0].name) : '']
+                      .filter(Boolean).join('; '),
+                    checkUrl: failures[0]?.html_url || ''
+                  });
+                }
+              } catch (err) {
+                staleUnknown = true;
+                core.warning('stale PR inspection unavailable: '+clean(err.message));
+              }
+            }
             
             function owners(pr) {
               const scores = cfg.roles.map(role => {
@@ -241,13 +277,24 @@ jobs:
             const snapshot = '<!-- auditor-cycle-v1 '+JSON.stringify({
               time: now.toISOString(), run: context.runId, states: roleStates
             })+' -->';
+            for (const finding of staleFindings) {
+              priority.push('- **PR старше 24 ч**: '+link('PR #'+finding.pr.number,
+                finding.pr.html_url)+' — '+finding.reason+
+                (finding.checkUrl ? ' · '+link('проверка',finding.checkUrl) : ''));
+            }
+            if (staleUnknown) {
+              priority.push('- **Срез старых PR неполный** — часть проверок API недоступна; '+
+                link('открытые PR',root+'/pulls'));
+            }
             const next = priority.length
               ? 'Проверить первое нарушение по ссылке, защищённое передать Claude без слияния.'
               : 'Добавить SHA и Actions run к следующей записи в таблице задач.';
             let report = [
               '## 🚨 Нарушения и незавершённое',
-              ...(priority.length ? priority : ['- Доказанных нарушений не обнаружено — '+
+              ...(priority.length ? priority : ['- В проверенной выборке не найдено нарушений — '+
                 link('источник',fileUrl('ZADACHI.md'))]),
+              '- Старые PR: проверено '+staleCandidates.length+' из '+stalePool.length+
+                ' в актуальной выборке. При каждом часовом запуске следующая четвёрка.',
               '',
               '**Один безопасный следующий шаг:** '+next+' '+
                 link('правила',fileUrl('automation/prompts/MG_PYAT_AVTOZADACH.md')),

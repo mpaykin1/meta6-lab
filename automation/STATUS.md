@@ -1,12 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T18:56:32.608Z | МГЛ: 819849d6444f9f1370c4b6db542896cc9d7002b3 | МГ: 1bea203fb63d7c27c29a5643e2f38e4554a658c1 | https://github.com/mpaykin1/meta6-lab/actions/runs/43487366862
+UTC: 2026-11-13T19:06:26.872Z | МГЛ: 3204c85ac9139a4630dea06b73069590cd053584 | МГ: 1bea203fb63d7c27c29a5643e2f38e4554a658c1 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #296 1d385b135f0fd52a35d6b2df6503f5f6eacf171a: automation/asset-check/test_htmlpack.py
 - PR #293 1ec3046bbe0972e316d92ec3846b542af0883716: automation/asset-check/test_kinds.py
 - PR #292 5df54dc0764daa77154709207e612b311127108d: automation/asset-check/test_kinds.py
 - PR #267 8127784a2d65ec5caa7aed93b753d13ce96b0c14: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py, automation/asset-check/test_kinds.py
-- ещё 15: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: Investigation snapshot | https://github.com/mpaykin1/meta6-lab/actions/runs/43473165084 | Refresh investigation snapshot from GitHub
+- ещё 20: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обн… (сокращено)
@@ -48,28 +47,28 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 41 | конфликт: нет данных | слито: 34 | закрыто: 75
+открыто: 42 | конфликт: нет данных | слито: 34 | закрыто: 75
 #298 Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА | 4e17483f42baf5300da95c840962218958994b71
 #296 feat(asset-check): HTMLPACK visual quality bot + Tumannye Sh | 1d385b135f0fd52a35d6b2df6503f5f6eacf171a
 #295 Остров последнего аптекаря · Глава I «Тихолист» (демо + этап | b158e1dd42db709100c79ceb5ea6745db53aa2bd
 #293 ASSET CHECK 2.2: «не хуже эталона» + эталон «Туманные шпили» | 1ec3046bbe0972e316d92ec3846b542af0883716
 ещё 30: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1975 коммитов | нет данных
+МГЛ: 1983 коммитов | нет данных
 МГ: 7 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:2
 ## ИГРЫ
-archer-in-the-fog — не запускалась | витрина: да
-asqura-ilya-reference — не запускалась | витрина: нет
-broken-city — не запускалась | витрина: да
-broken-city-copy — не запускалась | витрина: да
-ostrov-aptekarya — прошла | витрина: нет
-rainbow-acceleration — не запускалась | витрина: нет
-skin-trainer — не запускалась | витрина: нет
-sumerki-i-pepel-2 — не запускалась | витрина: да
-sumerki-i-pepel-2-copy — не запускалась | витрина: нет
-twilight-isle-classic — не запускалась | витрина: да
-twilight-isles — не запускалась | витрина: да
-veil-terraces — прошла | витрина: да
+archer-in-the-fog — нет данных | витрина: да
+asqura-ilya-reference — нет данных | витрина: нет
+broken-city — нет данных | витрина: да
+broken-city-copy — нет данных | витрина: да
+ostrov-aptekarya — нет данных | витрина: нет
+rainbow-acceleration — нет данных | витрина: нет
+skin-trainer — нет данных | витрина: нет
+sumerki-i-pepel-2 — нет данных | витрина: да
+sumerki-i-pepel-2-copy — нет данных | витрина: нет
+twilight-isle-classic — нет данных | витрина: да
+twilight-isles — нет данных | витрина: да
+veil-terraces — нет данных | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
 | 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)

@@ -2,6 +2,8 @@ import * as T from 'three';
 import {createLivingWatercolor3D,createWatercolorStyle} from './shared/living-watercolor-3d.js';
 import {createIllustrationCamera} from './shared/living-watercolor-generators.js';
 import {objectMakers} from './ink-objects.js';
+import {extraObjectMakers} from './ink-extras.js';
+const allObjectMakers = {...objectMakers, ...extraObjectMakers};
 
 document.querySelectorAll('#label,#hint,#chooser').forEach(o=>o.remove());
 document.title='INK · Дождевой лес';
@@ -34,7 +36,7 @@ const paint=createLivingWatercolor3D({THREE:T,renderer,scene,camera,style});
 scene.add(new T.HemisphereLight('#fff3d7','#96aca3',2.4));const sun=new T.DirectionalLight('#fff4dc',1.3);sun.position.set(-3,9,6);scene.add(sun);
 const world=new T.Group(),specimen=new T.Group();scene.add(world,specimen);specimen.visible=false;
 const animatedTrees=[],lamps=[];let hero;
-function add(kind,x=0,z=0,scale=1,angle=0,seed=1){const o=objectMakers[kind](seed);o.position.set(x,0,z);o.scale.setScalar(scale);o.rotation.y=angle;world.add(o);if(kind==='fir'||kind==='birch')animatedTrees.push(o);return o;}
+function add(kind,x=0,z=0,scale=1,angle=0,seed=1){const o=allObjectMakers[kind](seed);o.position.set(x,0,z);o.scale.setScalar(scale);o.rotation.y=angle;world.add(o);if(kind==='fir'||kind==='birch')animatedTrees.push(o);return o;}
 const rnd=n=>{const a=Math.sin(n*127.1+311.7)*43758.5453;return a-Math.floor(a);};
 const ground=new T.Mesh(new T.CylinderGeometry(7.4,6.9,.30,64,1),new T.MeshStandardMaterial({color:'#b6bda4',roughness:1}));ground.position.y=-.23;ground.scale.z=.82;ground.userData.watercolorOutline=false;world.add(ground);
 const under=new T.Mesh(new T.CylinderGeometry(6.9,6.5,.36,64),new T.MeshStandardMaterial({color:'#c0b89e',roughness:1}));under.position.y=-.55;under.scale.z=.82;under.userData.watercolorOutline=false;world.add(under);
@@ -52,6 +54,12 @@ const hut=add('shelter',-3.5,-1.6,.77,.12);add('bench',-2.50,.3,.72,-.1);add('si
 hero=add('traveller',-.30,2.5,.70,.6);add('mushrooms',-3.9,1.9,1.1);add('mushrooms',1.3,-3.3,.80);
 for(let i=0;i<6;i++)add('rock',Math.cos(i*2.2)*5.4,Math.sin(i*2.2)*4.4,.55+rnd(i)*.4,i,22+i);
 for(let i=0;i<3;i++){const lamp=add('lantern',-.3+Math.sin(i)*1.2,-2.7+i*1.7,.85);lamps.push(lamp);}
+// Low-poly silhouettes from the film: volumetric wildlife, buildings and river props.
+const windmill = add('windmill', 4.55, -3.05, .77, -.20);
+const deer = add('deer', -3.15, 3.14, .70, -.35);
+const fox = add('fox', 3.82, 2.35, .83, -.55);
+const rowboat = add('rowboat', 1.22, -2.05, .66, .20);
+const shrine = add('shrine', -4.35, -3.20, .66, .35);
 // Meadow blades share one instanced geometry; no per-blade outline passes.
 const grassGeo=new T.ConeGeometry(.035,.24,3),grass=new T.InstancedMesh(grassGeo,new T.MeshStandardMaterial({color:'#7d9478',roughness:1}),420);const temp=new T.Object3D();
 for(let i=0;i<420;i++){const a=rnd(i+900)*Math.PI*2,r=Math.sqrt(rnd(i+1300))*6.8,x=Math.cos(a)*r,z=Math.sin(a)*r*.80;const nearPath=Math.abs(x-(-.7+Math.sin(z*.46)*.9))<.5;const nearRiver=Math.abs(x-(1.8+Math.sin(z*.45)*.7))<.6;temp.position.set(x,.08,z);temp.rotation.set(.1,rnd(i)*6.28,.1);temp.scale.setScalar(nearPath||nearRiver?.02:.65+rnd(i+1));temp.updateMatrix();grass.setMatrixAt(i,temp.matrix);}
@@ -60,13 +68,13 @@ paint.apply(world,{seed:'ink-forest'});
 // One coherent smoke brush emitter, directly reused from the accepted reference.
 paint.createBrushEmitter({parent:hut,origin:new T.Vector3(.58,2.9,.14),count:7,scale:.35,rise:.32,spread:.25,wind:.13,opacity:.12,seed:'hut-smoke'});
 paint.addGroundWash(world,{width:15,depth:10,opacity:.14,seed:'forest-ground'});
-const displayObjects={};for(const [name,maker] of Object.entries(objectMakers)){const o=maker(13);o.visible=false;specimen.add(o);paint.apply(o,{seed:'ink-specimen:'+name});paint.addGroundWash(o,{width:4,depth:2.5,opacity:.15,seed:name});displayObjects[name]=o;}
+const displayObjects={};for(const [name,maker] of Object.entries(allObjectMakers)){const o=maker(13);o.visible=false;specimen.add(o);paint.apply(o,{seed:'ink-specimen:'+name});paint.addGroundWash(o,{width:4,depth:2.5,opacity:.15,seed:name});displayObjects[name]=o;}
 // Rain lines and expanding rings remain fully three-dimensional.
 const rainPositions=new Float32Array(180*6),rainGeo=new T.BufferGeometry();rainGeo.setAttribute('position',new T.BufferAttribute(rainPositions,3));
 const rain=new T.LineSegments(rainGeo,new T.LineBasicMaterial({color:'#5c7979',transparent:true,opacity:.30,depthWrite:false}));world.add(rain);
 const ringGeo=new T.RingGeometry(.12,.132,18);ringGeo.rotateX(-Math.PI/2);const rings=[];
 for(let i=0;i<22;i++){const o=new T.Mesh(ringGeo,new T.MeshBasicMaterial({color:'#5c7979',transparent:true,opacity:.15,depthWrite:false,side:T.DoubleSide}));o.position.set((rnd(i+4)-.5)*10,.022,(rnd(i+7)-.5)*8);world.add(o);rings.push(o);}
-const labels={forest:'Дождевой лес',fir:'Ель',birch:'Берёза',shelter:'Лесной домик',traveller:'Путник',lantern:'Фонарь',sign:'Указатель',bench:'Скамейка',rock:'Камни',mushrooms:'Грибы',bridge:'Мостик'};
+const labels={forest:'Дождевой лес',fir:'Ель',birch:'Берёза',shelter:'Лесной домик',traveller:'Путник',lantern:'Фонарь',sign:'Указатель',bench:'Скамейка',rock:'Камни',mushrooms:'Грибы',bridge:'Мостик',windmill:'Мельница',deer:'Олень',rowboat:'Лодка',fox:'Лиса',shrine:'Каменные ворота'};
 let active='forest',mono=false,orbit=false,yaw=.62,pitch=.65,zoom=1,drag=null,pinch=0,previous=0,elapsed=0,frameAvg=16,quality=1;
 const params=new URLSearchParams(location.search);
 function choose(name){active=labels[name]?name:'forest';world.visible=active==='forest';specimen.visible=!world.visible;for(const [k,o] of Object.entries(displayObjects))o.visible=k===active;
@@ -94,6 +102,19 @@ function animate(ms){requestAnimationFrame(animate);if(document.hidden){previous
   let vx=stick.x+(keys.has('d')||keys.has('arrowright')?1:0)-(keys.has('a')||keys.has('arrowleft')?1:0),vy=stick.y+(keys.has('s')||keys.has('arrowdown')?1:0)-(keys.has('w')||keys.has('arrowup')?1:0);const length=Math.hypot(vx,vy),moving=active==='forest'&&length>.05;
   if(moving){vx/=Math.max(1,length);vy/=Math.max(1,length);const dx=Math.cos(yaw)*vx+Math.sin(yaw)*vy,dz=-Math.sin(yaw)*vx+Math.cos(yaw)*vy;const nx=hero.position.x+dx*dt*1.9,nz=hero.position.z+dz*dt*1.9;if(nx*nx/43+nz*nz/27<1&&!(nx<-2.3&&nx>-4.8&&nz<-1&&nz>-2.8)){hero.position.x=nx;hero.position.z=nz;}hero.rotation.y=Math.atan2(dx,dz);hero.position.y=Math.abs(Math.sin(elapsed*9))*.035;}else hero.position.y=Math.sin(elapsed*2)*.012;
   hero.userData.legs.forEach((leg,i)=>leg.rotation.x=moving?Math.sin(elapsed*9+i*Math.PI)*.40:0);hero.userData.scarf.rotation.z=Math.sin(elapsed*2.3)*.09;
+  if (active === 'forest') {
+    windmill.userData.rotor.rotation.z = elapsed * .23;
+    fox.userData.tail.rotation.y = Math.sin(elapsed * 1.3) * .12;
+    rowboat.position.y = Math.sin(elapsed * 1.1) * .035;
+    deer.rotation.y = -.35 + Math.sin(elapsed * .45) * .06;
+    shrine.userData.orb.position.y = 1.32 + Math.sin(elapsed * 1.5) * .10;
+  } else {
+    const shown = displayObjects[active];
+    if (active === 'windmill') shown.userData.rotor.rotation.z = elapsed * .32;
+    if (active === 'fox') shown.userData.tail.rotation.y = Math.sin(elapsed) * .16;
+    if (active === 'rowboat') shown.position.y = Math.sin(elapsed) * .04;
+    if (active === 'shrine') shown.userData.orb.position.y = 1.32 + Math.sin(elapsed) * .10;
+  }
   animatedTrees.forEach((tree,i)=>{tree.rotation.z=Math.sin(elapsed*.8+i)*.015;tree.rotation.x=Math.sin(elapsed*.6+i)*.009;});
   for(let i=0;i<180;i++){const x=(rnd(i+100)-.5)*14,z=(rnd(i+700)-.5)*11,y=7-((elapsed*4+rnd(i+70)*7)%7),n=i*6;rainPositions[n]=x;rainPositions[n+1]=y;rainPositions[n+2]=z;rainPositions[n+3]=x-.055;rainPositions[n+4]=y+.30;rainPositions[n+5]=z;}
   rainGeo.attributes.position.needsUpdate=true;rings.forEach((ring,i)=>{const phase=(elapsed*.65+rnd(i))%1;ring.scale.setScalar(.3+phase*2.6);ring.material.opacity=(1-phase)*.19;});
@@ -101,4 +122,4 @@ function animate(ms){requestAnimationFrame(animate);if(document.hidden){previous
   paint.tick(ms);renderer.render(scene,camera);
 }
 requestAnimationFrame(animate);
-window.__INK_FOREST__={version:'1.0.0',objects:Object.keys(objectMakers),show:choose,setMono,get active(){return active;}};
+window.__INK_FOREST__={version:'1.0.0',objects:Object.keys(allObjectMakers),show:choose,setMono,get active(){return active;}};

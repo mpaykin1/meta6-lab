@@ -35,6 +35,7 @@ MUTANTS = [
     ("check_pack.py", 'if "content_flags" not in merged:', "if False:"),
     ("kinds/sprite2d.py", 'm.get("format") not in {"ink-pack/1", "htmlpack/1"}', 'm.get("format") != "ink-pack/1"'),
     ("kinds/htmlpack_harness.mjs", "if(delta<=23){pixels[i+3]=0;continue}", "if(false){pixels[i+3]=0;continue}"),
+    ("kinds/htmlpack_harness.mjs", "if(area===0)return null;", "if(false)return null;"),
     ("kinds/htmlpack_harness.mjs", "CAMERA_TOLERANCE=3.5", "CAMERA_TOLERANCE=1e9"),
     ("kinds/htmlpack.py", 'r.add("HP13", "HARD", str(compare),', 'r.add("HP13OFF", "SOFT", str(compare),'),
     ("kinds/htmlpack.py", "if missing:", "if False and missing:"),

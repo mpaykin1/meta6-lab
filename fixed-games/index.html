@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#030912">
+<title>META GAMES — FIX · Неподвижный экран</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;position:fixed;inset:0;overflow:hidden;overscroll-behavior:none;background:#040916;font:14px system-ui;color:#fff}
+#game{position:fixed;inset:0;width:100%;height:100dvh;border:0;background:#080e1a}
+.panel{position:fixed;z-index:10;left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));background:#071322ed;border:1px solid #a3b2c85a;border-radius:10px;display:flex;align-items:center;gap:7px;padding:7px;box-shadow:0 8px 35px #0009}
+.panel select,.panel button{font:inherit;background:#1e3147;color:#fff;border:1px solid #849cb064;border-radius:7px;padding:9px;min-height:38px}
+.panel select{max-width:min(65vw,310px)}
+.panel button{min-width:38px;cursor:pointer}
+.panel.hide select,.panel.hide #restart,.panel.hide #label{display:none}
+#label{color:#efd4a8;letter-spacing:.05em;font-size:11px}
+#message{position:fixed;right:12px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:8;font-size:11px;color:#efd4a8;background:#03121dc9;padding:7px 9px;border-radius:7px;pointer-events:none}
+@media(max-width:600px){#label{display:none}}
+</style>
+</head>
+<body>
+<iframe id="game" title="META GAMES — игра" allow="autoplay;fullscreen"></iframe>
+<nav class="panel" id="panel" aria-label="Игры">
+<span id="label">META GAMES · FIX</span>
+<select id="games" aria-label="Выбрать игру"><option>Загрузка...</option></select>
+<button id="restart" type="button" title="Перезапустить игру">↻</button>
+<button id="toggle" type="button" title="Скрыть или открыть меню">☰</button>
+</nav>
+<output id="message">Выберите игру</output>
+<script>
+(() => {
+  'use strict';
+  const frame = document.getElementById('game');
+  const chooser = document.getElementById('games');
+  const panel = document.getElementById('panel');
+  const message = document.getElementById('message');
+  const origin = new URL('/meta6-lab/', location.origin);
+  const css = new URL('../shared/mobile-screen-lock.css', location.href);
+  const js = new URL('../shared/mobile-screen-lock.js', location.href);
+  const games = new Map();
+
+  async function loadCatalog(path) {
+    const url = new URL(path, origin);
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) return;
+    const doc = new DOMParser().parseFromString(await response.text(), 'text/html');
+    for (const link of doc.querySelectorAll('a.game[href^="../"], article.game-card a.art[href^="../"]')) {
+      const href = link.getAttribute('href');
+      const target = new URL(href, url);
+      if (!target.href.startsWith(origin.href)) continue;
+      const title = link.querySelector('h3')?.textContent ||
+        link.closest('article')?.querySelector('h3')?.textContent ||
+        target.pathname.split('/').filter(Boolean).at(-1);
+      if (!games.has(target.href)) games.set(target.href, title.trim());
+    }
+  }
+
+  function play(url) {
+    if (!games.has(url)) return;
+    frame.src = url;
+    chooser.value = url;
+    const page = new URL(location.href);
+    page.searchParams.set('game', new URL(url).pathname);
+    history.replaceState(null, '', page);
+    message.textContent = 'Загрузка мира...';
+  }
+
+  frame.addEventListener('load', () => {
+    try {
+      const doc = frame.contentDocument;
+      if (!doc?.head) throw new Error('Same-origin game document required');
+      const style = doc.createElement('link');
+      style.rel = 'stylesheet';
+      style.href = css.href;
+      doc.head.append(style);
+      const script = doc.createElement('script');
+      script.src = js.href;
+      script.addEventListener('load', () => {
+        message.textContent = 'Экран закреплён · играйте';
+      }, { once: true });
+      script.addEventListener('error', () => {
+        message.textContent = 'Ошибка загрузки фиксатора';
+      }, { once: true });
+      doc.head.append(script);
+    } catch (error) {
+      message.textContent = 'Не удалось закрепить этот мир';
+      console.warn(error);
+    }
+  });
+  chooser.addEventListener('change', () => play(chooser.value));
+  document.getElementById('restart').addEventListener('click', () => {
+    if (frame.src) frame.contentWindow?.location.reload();
+  });
+  document.getElementById('toggle').addEventListener('click', () => panel.classList.toggle('hide'));
+
+  Promise.all([loadCatalog('meta-games/'), loadCatalog('claude-games/')]).then(() => {
+    chooser.replaceChildren();
+    for (const [url, name] of games) {
+      const option = document.createElement('option');
+      option.value = url;
+      option.textContent = name;
+      chooser.append(option);
+    }
+    if (!games.size) throw Error('No local games found');
+    const requested = new URLSearchParams(location.search).get('game');
+    play([...games.keys()].find(url => new URL(url).pathname === requested) || games.keys().next().value);
+  }).catch(error => {
+    message.textContent = 'Каталог временно недоступен';
+    console.warn(error);
+  });
+})();
+</script>
+</body>
+</html>

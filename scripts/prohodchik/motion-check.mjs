@@ -17,6 +17,9 @@ export function assessMotion(segments) {
   let motion = null;
   let driftX = 0;
   let driftY = 0;
+  // Integrate small consecutive steps: a slow hero can move < EPSILON per frame.
+  let pendingX = 0;
+  let pendingY = 0;
   for (const segment of segments) {
     if (!segment || !Number.isFinite(segment.durationMs) || segment.durationMs <= 0) {
       return result('INVALID', {reason: 'invalid input duration'});
@@ -41,16 +44,19 @@ export function assessMotion(segments) {
       driftX = (to.x - from.x) / segment.durationMs;
       driftY = (to.y - from.y) / segment.durationMs;
       stationaryMs = 0;
+      pendingX = 0;
+      pendingY = 0;
       continue;
     }
     sampled++;
-    const distance = Math.hypot(
-      to.x - from.x - driftX * segment.durationMs,
-      to.y - from.y - driftY * segment.durationMs
-    );
+    pendingX += to.x - from.x - driftX * segment.durationMs;
+    pendingY += to.y - from.y - driftY * segment.durationMs;
+    const distance = Math.hypot(pendingX, pendingY);
     if (distance > EPSILON) {
       motion = result('MOVED', {distance, level: after.level});
       stationaryMs = 0;
+      pendingX = 0;
+      pendingY = 0;
       continue;
     }
     stationaryMs += segment.durationMs;

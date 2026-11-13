@@ -59,9 +59,13 @@
   "viewer": {
     "reference_path": "reference/ink-fallen-guardian/",
     "canonical_after_merge": "https://mpaykin1.github.io/meta6-lab/reference/ink-fallen-guardian/",
-    "preview": "https://meta6-lab-git-lab-ink-fallen-robot-20261113-improve-world.vercel.app/demos/living-watercolor/?ink=forest&palette=color",
-    "preview_status": "Vercel Ready on PR #283",
-    "github_pr": "https://github.com/mpaykin1/meta6-lab/pull/283"
+    "preview": "https://mpaykin1.github.io/meta6-lab/reference/ink-fallen-guardian/",
+    "preview_status": "PENDING: PR #284 then PR #283 merge; exact URL HTTP 200 and browser checks not yet confirmed",
+    "github_pr": "https://github.com/mpaykin1/meta6-lab/pull/283",
+    "preview_proof": null,
+    "robot_v2_pr": "https://github.com/mpaykin1/meta6-lab/pull/287",
+    "stone_bell_pr": "https://github.com/mpaykin1/meta6-lab/pull/288",
+    "source_merge_commit_sha": null
   },
   "approved_features": [
     "объёмный гигантский разрушенный робот, частично погребённый в земле",

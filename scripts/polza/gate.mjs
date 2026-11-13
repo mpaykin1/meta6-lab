@@ -5,9 +5,9 @@ const REPO = process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab';
 const OWN = REPO.split('/')[0], NAME = REPO.split('/')[1];
 const GATE_FILES = new Set(['.github/workflows/polza-gate.yml','scripts/polza/gate.mjs','scripts/polza/verify-polza.mjs','scripts/polza/mutate-polza.mjs']);
 const prefixes = ['games/','ink/','reference/','shared/','meta-games/'];
-const DOCUMENT = /(^|\/)(?:readme|changelog|license|agents|osh ibki|zadachi|zanyato|dlya_claude)(?:[._-]|$)|\.(?:md|mdx|txt|rst|adoc|pdf|log|csv)$/i;
+const DOCUMENT = /(^|\/)(?:readme|changelog|license|agents|oshibki|zadachi|zanyato|dlya_claude)(?:[._-]|$)|\.(?:md|mdx|txt|rst|adoc|pdf|log|csv)$/i;
 export function isDoc(path) {
-  return DOCUMENT.test(path.replace('osh ibki','oshibki')) || /^(?:automation\/(?:prompts|progress|reports)\/|reports\/|docs\/|journal\/|progress\/|rules\/)/.test(path) || /(^|\/)(?:prompts|reports|logs)\/[^/]+$/i.test(path);
+  return DOCUMENT.test(path) || /^(?:automation\/(?:prompts|progress|reports)\/|reports\/|docs\/|journal\/|progress\/|rules\/)/.test(path) || /(^|\/)(?:prompts|reports|logs)\/[^/]+$/i.test(path);
 }
 export function isCodeChange(f) {
   if (!f || !f.filename || f.status === 'removed') return false;
@@ -96,8 +96,9 @@ async function pages(path) {
   const out=[];
   for(let page=1;page<=10;page++){
     const data=await api(path+(path.includes('?')?'&':'?')+'per_page=100&page='+page);
-    if(!Array.isArray(data)) throw Error('GitHub did not return an array');
-    out.push(...data); if(data.length<100) break;
+    const list=Array.isArray(data)?data:(data.jobs||data.workflow_runs||[]);
+    if(!Array.isArray(list)) throw Error('GitHub did not return an array');
+    out.push(...list); if(list.length<100) break;
   }
   return out;
 }

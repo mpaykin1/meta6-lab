@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 21 · конфликт 15 · непроверено 0 · красные проверки 30 · нужен Claude 17
+Итог: зависло 22 · конфликт 15 · непроверено 0 · красные проверки 29 · нужен Claude 17
 
 ### PR #234
 - PR: https://github.com/mpaykin1/meta6-lab/pull/234
@@ -158,8 +158,8 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/278
 - Ветка: `lab/tolkach-main-first-20261112`
 - SHA: `e66a271095c39b65c9bdf22c55450d5dd043d1f9` · последний коммит: 2026-11-13T11:13:54Z
-- Проблема: Красная проверка: storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43415398914/job/131852583819), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43415398920/job/131851885915), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43415395730/job/131851879269), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь storozha-reference по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43415398914/job/131852583819 и повтори CI.
+- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43415398920/job/131851885915), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43415398920/job/131851885915 и повтори CI.
 - Взял: —
 
 ### PR #280
@@ -221,25 +221,17 @@
 ### PR #305
 - PR: https://github.com/mpaykin1/meta6-lab/pull/305
 - Ветка: `lab/assets-tumannye-shpili-20261114`
-- SHA: `0753e23ec3b95986d692d78996e63b2c6b09e172` · последний коммит: 2026-11-13T20:45:15Z
-- Проблема: Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь Vercel по логу https://vercel.com/improve-world?upgradeToPro=build-rate-limit и повтори CI.
+- SHA: `93ec59abb4c20b847df2ffd9494b17fb2f116eff` · последний коммит: 2026-11-13T20:45:41Z
+- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43504778315/job/132159445259), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43504778315/job/132159445259 и повтори CI.
 - Взял: —
 
 ### PR #306
 - PR: https://github.com/mpaykin1/meta6-lab/pull/306
 - Ветка: `lab/assets-tumannye-shpili-20261114-2338`
-- SHA: `ab8ed7063c69af878e86c11f2fc2418875558455` · последний коммит: 2026-11-13T20:43:37Z
-- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43504215619/job/132157515958), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43504215619/job/132157515958 и повтори CI.
-- Взял: —
-
-### PR #307
-- PR: https://github.com/mpaykin1/meta6-lab/pull/307
-- Ветка: `lab/ostrov-aptekarya-bot-levels`
-- SHA: `0a1e54863d5b04b604b99458ac274ef55711dabf` · последний коммит: 2026-11-13T20:36:46Z
-- Проблема: Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь Vercel по логу https://vercel.com/improve-world?upgradeToPro=build-rate-limit и повтори CI.
+- SHA: `828581e4c40310586838f439e687cf7a6cc9b572` · последний коммит: 2026-11-13T21:24:53Z
+- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43510486612/job/132179131817), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43510486612/job/132179131817 и повтори CI.
 - Взял: —
 
 ### PR #242

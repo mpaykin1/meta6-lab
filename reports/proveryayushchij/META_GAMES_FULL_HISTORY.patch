@@ -5,7 +5,7 @@
        - uses: actions/checkout@v4
          with:
 -          fetch-depth: 300
-+          fetch-depth: 300
++          fetch-depth: 0
 +      - name: Require complete commit history
 +        shell: bash
 +        run: |

@@ -15,3 +15,5 @@
 - 14.11: [HP12 f264a5a](https://github.com/mpaykin1/meta6-lab/commit/f264a5ac01e27dd95a8a9f40c66f891cb1ea2733) обнаруживает мёртвую геометрию при RGB-анимации; [партия из 2 новых силуэтов SHA 5214228](https://github.com/mpaykin1/meta6-lab/commit/5214228c8f4c77f4e4831b77dddb4f6f39c598e8). Число IDs 38→38, исходные 26 сохранены. Без подтверждённого сравнения и нуля HARD пока нельзя выпускать.
 
 - 14.11.2026: HTMLPACK-картинки сравнения теперь строятся по изолированной маске (объект крупно) вместо всего кадра. HP13 проверяет наличие и размер compare.png; версия 2.4.4. [SHA cca566ac](https://github.com/mpaykin1/meta6-lab/commit/cca566ac3f524cfb61bcbe11f6b7d5f14724b6bb), [PR #305](https://github.com/mpaykin1/meta6-lab/pull/305). CI/HARD ещё не подтверждены.
+
+- 14.11.2026: убраны старые паруса над новым собором-шпилем и верёвочная конструкция поверх нового каменного акведука, которые портили силуэты. [SHA 19680244](https://github.com/mpaykin1/meta6-lab/commit/196802445a6ac71f0cb45013e8d8cea623740c39). Проверка: [PR #305](https://github.com/mpaykin1/meta6-lab/pull/305); новая версия пока не опубликована.

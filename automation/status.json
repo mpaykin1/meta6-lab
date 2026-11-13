@@ -1,16 +1,23 @@
 {
-  "generated_at": "2026-11-12T14:23:44.338Z",
+  "generated_at": "2026-11-13T08:20:52.058Z",
   "sha": {
-    "lab": "f8bc0324ee657f672b37b2dbf0386848ece405fd",
+    "lab": "12cc30bdc74d8e0d1497728650948bccbf0a9738",
     "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43236500036",
+  "run": "нет данных",
   "review": {
     "protected": [
+      {
+        "number": 241,
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
+      },
       {
         "number": 259,
         "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
@@ -131,20 +138,14 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "Investigation snapshot",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43201422366",
-        "step": "Refresh investigation snapshot from GitHub"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
       "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
       "| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |",
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
-      "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | open | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
+      "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
       "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
       "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
@@ -305,11 +306,21 @@
     ]
   },
   "pr": {
-    "open": 53,
+    "open": 50,
     "conflicts": "нет данных",
-    "merged": 24,
-    "closed": 52,
+    "merged": 26,
+    "closed": 58,
     "mergedItems": [
+      {
+        "number": 279,
+        "title": "INK: объёмный дождевой лес из видео, Ч/Б и цвет",
+        "sha": "d3f16b40a3c59ded669053388c0cf26130a7ed74"
+      },
+      {
+        "number": 241,
+        "title": "L2: защита индекса shared от symlink-подмены источников",
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f"
+      },
       {
         "number": 259,
         "title": "БОТ-ПРОХОДЧИК: сохраняемый промпт для повторных запусков",
@@ -433,6 +444,13 @@
     ],
     "protectedItems": [
       {
+        "number": 241,
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
+      },
+      {
         "number": 259,
         "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
         "paths": [
@@ -555,7 +573,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1386,
+      "count": 1712,
       "folders": "нет данных"
     },
     "mg": {
@@ -566,57 +584,57 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "не прошла",
+      "bot": "нет данных",
       "storefront": "да"
     }
   ],
@@ -636,6 +654,8 @@
     "| 36 | 11.11.2026 | Сторож эталонов пропускал изменения тестов внутри папок `tests/` и файлов `*.spec.ts`: проверял только некоторые имена тестовых файлов | Сверка `referenceGate` с запретом менять существующие тесты | `scripts/storozha/mutate-storozha.mjs`: bypass nested test directory, bypass TypeScript spec file; `scripts/storozha/verify-storozha.mjs` |",
     "| 37 | 11.11.2026 | PR #238: новая проверка pull_request запустилась из main, где до merge отсутствует scripts/storozha/weekly-watch.mjs; [красный run](https://github.com/mpaykin1/meta6-lab/actions/runs/43002124363) | В GitHub Actions реальный MODULE_NOT_FOUND | `scripts/storozha/mutate-workflows.mjs`: PR читает HEAD без права записи; только trusted-main writer обновляет DLYA_CLAUDE.md |",
     "| 38 | 11.11.2026 | PR #251: ревизор пяти задач исчерпывал лимит GitHub API при обходе страниц PR/Issues и мог не обновить Issue | [красный run #43023214631](https://github.com/mpaykin1/meta6-lab/actions/runs/43023214631) | `scripts/auditor/mutate-auditor.mjs`: три ловушки — лишние запросы, создание дубликата Issue, запись Issue из pull_request |",
+    "| 1002 | 11.11.2026 | Индекс shared/components применял statSync к папкам и readFileSync к входным файлам; символьная ссылка могла вывести чтение за пределы утверждённого каталога и подменить источник | Статический разбор scripts/shared/build-index.mjs: statSync следует по symlink | scripts/shared/mutate-build-index-symlinks.mjs: блокировка symlink корня, папки, manifest, entry и три мутации (включая обман по имени ID) |",
+    "| 1003 | 11.11.2026 | PR #241: проверка symlink только на конечном файле пропускала подмену предка `shared/` или `reference/`; вывод `shared/index.json` мог перезаписать сторонний файл через symlink | Анализ `readRegularFile` и `fs.writeFileSync(target)` на существующем коде PR | `scripts/shared/mutate-build-index-symlinks.mjs`: атаки `shared-parent`, `reference-parent`, `target`, мутации обхода проверки предков и `O_NOFOLLOW` |",
     "| 39 | 11.11.2026 | Публикация после merge: исходный demos/living-watercolor/index.html существует, но Pages даёт 404; прежний lab-pages проверял только каталог | Требование владельца от 11.11 и diff .github/workflows/lab-pages.yml | `scripts/lab/verify-link-ok.sh` + `scripts/lab/mutate-link-ok.sh` (404, чужой хост, CI-обман); [зелёная ловушка](https://github.com/mpaykin1/meta6-lab/actions/runs/43014018459), проверка всех index в PR #246 |",
     "| 40 | 11.11.2026 | HTML 200 с недоступным JS/CSS/изображением/аудио: прежняя проверка игнорировала вложенные 404 | Локальный fixture HTML 200 + JS 404 и 3 мутации (пропуск script, чужой origin, CI-обман) | `scripts/lab/link-ok.sh` вызывает `scripts/lab/check-page-assets.sh` перед PASS; `scripts/lab/mutate-page-assets.mjs` + `scripts/lab/verify-check-page-assets.sh`, [PR #246](https://github.com/mpaykin1/meta6-lab/pull/246), [SHA bb60a8b](https://github.com/mpaykin1/meta6-lab/commit/bb60a8bff951c714fb6c332a323445119ac1486c) |"
   ]

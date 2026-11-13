@@ -26,7 +26,7 @@ async function exercise(script, eventName, pinnedInitially = true, pinAllowed = 
     updated_at: new Date().toISOString(),
     head: { ref: 'lab/approval', sha: pendingSha } };
   const commitDate = new Date().toISOString();
-  const stats = { pulls: 0, issueUpdates: 0, issueCreates: 0, pins: 0, pinChecks: 0, report: '' };
+  const stats = { pulls: 0, issueUpdates: 0, issueCreates: 0, pins: 0, pinChecks: 0, report: '', published: null };
   const github = {
     rest: {
       repos: {
@@ -67,7 +67,12 @@ async function exercise(script, eventName, pinnedInitially = true, pinAllowed = 
             updated_at: '2099-01-01T00:00:00Z'
           }
         ] }),
-        update: async () => {
+        update: async ({ issue_number, body }) => {
+          assert.equal(issue_number, config.issue_number,
+            'auditor must update only the canonical Issue #253');
+          assert(body.includes('Закрепление Issue #' + config.issue_number),
+            'published report must contain the GraphQL pin state');
+          stats.published = body;
           stats.issueUpdates++;
           return { data: { node_id: 'ISSUE123', html_url: 'https://github.com/example/repo/issues/253' } };
         },
@@ -77,7 +82,7 @@ async function exercise(script, eventName, pinnedInitially = true, pinAllowed = 
         }
       }
     },
-    graphql: async (query) => {
+    graphql: async (query, variables) => {
       if (query.includes('pinnedIssues')) {
         stats.pinChecks++;
         if (malformedPinQuery) return { repository: { pinnedIssues: { nodes: null } } };
@@ -87,6 +92,7 @@ async function exercise(script, eventName, pinnedInitially = true, pinAllowed = 
       }
       if (query.includes('pinIssue')) {
         stats.pins++;
+        if (variables?.id !== 'ISSUE253') throw new Error('foreign Issue pin refused');
         if (!pinAllowed) throw new Error('pin blocked by permissions');
         isPinned = true;
         return {};
@@ -110,6 +116,10 @@ async function exercise(script, eventName, pinnedInitially = true, pinAllowed = 
   assert.equal(stats.issueCreates, 0, 'auditor must never create duplicate issues');
   assert.equal(stats.issueUpdates, eventName === 'pull_request' ? 0 : 1,
     'PR preview must be read-only; trusted main must update exactly one Issue');
+  if (eventName !== 'pull_request') {
+    assert.equal(stats.published, stats.report,
+      'Issue #253 must receive the same report that appears in Actions Summary');
+  }
   if (eventName === 'pull_request') {
     assert(stats.report.includes('⚠️ не проверено (PR preview)'),
       'PR preview must not claim a verified pin');
@@ -150,6 +160,22 @@ await exercise(original, 'push', false, false);
 await exercise(original, 'push', false, false, true);
 await exercise(original, 'push', true, true, false, true);
 const mutants = [
+  {
+    name: 'publish-to-foreign-issue',
+    source: original.replace('issue_number:cfg.issue_number,state:', 'issue_number:250,state:'),
+    event: 'push'
+  },
+  {
+    name: 'deception-publish-fake-summary',
+    source: original.replace('body:report', "body:'No violations'"),
+    event: 'push'
+  },
+  {
+    name: 'pin-foreign-issue',
+    source: original.replace('recentIssues.find(i => i.number === cfg.issue_number)',
+      'recentIssues.find(i => i.number === 250)'),
+    event: 'push', pinnedInitially: false, pinAllowed: true
+  },
   {
     name: 'approval-as-failure',
     source: original.replace("'CI ⚠️ action_required'", "'CI ❌'"),
@@ -240,4 +266,4 @@ for (const mutant of mutants) {
     undefined, 'escaped mutant: ' + mutant.name);
   process.stdout.write('TRAP ' + mutant.name + ' PASS\n');
 }
-process.stdout.write('AUDITOR MUTATIONS PASS: 15/15\n');
+process.stdout.write('AUDITOR MUTATIONS PASS: 18/18\n');

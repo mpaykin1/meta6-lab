@@ -13,6 +13,8 @@ const b = seededRouteVariants(17);
 const c = seededRouteVariants(81);
 assert.deepEqual(a, b, 'the same seed must reproduce the same physical movements');
 assert.notDeepEqual(a, c, 'different seeds must explore different movement paths');
+const highSeed = seededRouteVariants(17 + 0x100000000);
+assert.notDeepEqual(a, highSeed, 'distinct safe integer seeds must not alias after 32 bits');
 assert.equal(a.length, 3);
 assert.equal(new Set(a.map(path => JSON.stringify(path.map(({dx, dy}) => [dx, dy])))).size, 3,
   'three distinct physical directions, not merely different timings');

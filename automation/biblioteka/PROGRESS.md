@@ -60,7 +60,11 @@
 
 - 2026-11-12T14:27:26Z — [Library Machine #43237106000](https://github.com/mpaykin1/meta6-lab/actions/runs/43237106000) для кода [b63b54ecfe5b439290dbed93b44bfa844c65d491](https://github.com/mpaykin1/meta6-lab/commit/b63b54ecfe5b439290dbed93b44bfa844c65d491) SUCCESS: `SYSTEM DISCOVERY MUTATIONS CAUGHT 5`, `LIBRARY VERIFIED`. Поиск (г) завершён **в PR**; merge и отдельный live MCP не подтверждены. Код не трогает исходники игр, количество полных эталонов 0 → 0.
 
+- 2026-11-13T03:42:37.525Z — саморазвитие г), усиление поиска: в [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261) source-only поиск исключает сторонние vendor/lib/minified файлы, добавлены три отрицательных fixture и шестая мутация снятия фильтра. [Поиск](https://github.com/mpaykin1/meta6-lab/blob/lab/biblioteka-contract-20261111/scripts/library/find-systems.mjs), [ловушки](https://github.com/mpaykin1/meta6-lab/blob/lab/biblioteka-contract-20261111/scripts/library/mutate-find-systems.mjs). CI ожидается. Полных эталонов 0 → 0 из 22; load_ok в main 0 → 0; публичный MCP 0 → 0.
+
 ## Урок
+
+- Источник в каталоге не равен авторской системе: до поиска для ИИ отсекать `vendor/`, `lib/`, `node_modules/` и `.min.js`; обязательна мутация на отключение фильтра.
 
 - Правило: если `shared/library/index.json` превышает лимит GitHub Contents/Blob API, не отправлять 3.8 МБ через инструмент создания blob; обновить извлекатель и проверку в существующем PR, затем позволить уже существующему `Library Machine` пересобрать индекс на push. Не считать результат готовым до опубликованного SHA индекса и успешного Actions run.
 

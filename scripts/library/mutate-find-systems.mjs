@@ -19,6 +19,9 @@ const data = {
     example('island-b', 'orbitCamera', ['camera'], 'cam2'),
     example('broken-city-copy', 'copyCamera', ['camera'], 'bad-copy'),
     example('skin-trainer', 'trainingCamera', ['camera'], 'bad-training'),
+    {...example('island-a', 'vendorCamera', ['camera'], 'bad-vendor'), source_path: 'games/island-a/vendor/orbit.js'},
+    {...example('island-b', 'threeCamera', ['camera'], 'bad-three'), source_path: 'games/island-b/lib/three.module.js'},
+    {...example('island-a', 'minifiedCamera', ['camera'], 'bad-minified'), source_path: 'games/island-a/js/camera.min.js'},
     example('rain-world', 'makeFog', ['weather'], 'fog'),
     example('sandbox', 'spawnItem', ['gameplay'], 'other'),
   ],
@@ -57,6 +60,7 @@ export async function verifyFindSystemsAndMutations() {
     ['deception-hardcode-camera-intent', s => s.replace(
       'INTENTS.filter(intent => intent.match.test(query))',
       "INTENTS.filter(intent => intent.tag === 'camera')")],
+    ['deception-admit-third-party', s => s.replace('isThirdParty(entry.source_path)', 'false')],
     ['deception-fake-verified-state', s => s.replace(
       "verification: 'source_only'", "verification: 'passed'")],
   ];

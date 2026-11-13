@@ -4,6 +4,8 @@ import {fileURLToPath} from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const EXCLUDED = /(?:^|[-\/])copy$|(?:^|\/)skin-trainer(?:\/|$)/i;
+const THIRD_PARTY = /(?:^|\/)(?:node_modules|vendor|vendors|third[-_]party|lib|libs)(?:\/|$)|(?:^|\/)(?:three(?:\.module)?(?:\.min)?|dat\.gui(?:\.min)?|stats(?:\.min)?)\.js$|\.min\.(?:js|mjs)$/i;
+const isThirdParty = sourcePath => typeof sourcePath === 'string' && THIRD_PARTY.test(sourcePath);
 const INTENTS = [
   {tag: 'camera', match: /камер|третьего лица|от третьего лица|third.person|camera|follow|orbit/i},
   {tag: 'controls', match: /управлен|движени|джойстик|ввод|controls?|input|joystick|keyboard/i},
@@ -38,7 +40,7 @@ export function rankSystems(index, query, {limit = 20, repositoryUrl, ref = 'mai
   const eligible = new Set((index.games ?? []).filter(game =>
     !game.excluded && !excludes(game.game, excluded)).map(game => game.game));
   const scored = index.entries.map(entry => {
-    if (entry.kind !== 'solution' || excludes(entry.game, excluded) ||
+    if (entry.kind !== 'solution' || isThirdParty(entry.source_path) || excludes(entry.game, excluded) ||
         (index.games && !eligible.has(entry.game)) || !safePath(entry.source_path)) return null;
     const tags = Array.isArray(entry.purpose) ? entry.purpose : [];
     const haystack = lower([entry.name, entry.source_path, ...tags].join(' '));

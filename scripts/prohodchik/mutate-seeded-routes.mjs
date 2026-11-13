@@ -11,7 +11,19 @@ const original = readFileSync(join(root, 'scripts/prohodchik/seeded-routes.mjs')
 const verifier = join(root, 'scripts/prohodchik/verify-seeded-routes.mjs');
 const temp = mkdtempSync(join(tmpdir(), 'prohodchik-seeded-'));
 const mutants = [
-  ['ignore-seed', 'let state = (seed >>> 0) || 0x9e3779b9;', 'let state = 0x9e3779b9;'],
+  ['ignore-seed',
+    'let state = (low ^ Math.imul(high, 0x9e3779b9)) >>> 0;',
+    'let state = 0x9e3779b9;'],
+  ['drop-upper-seed-bits',
+    'let state = (low ^ Math.imul(high, 0x9e3779b9)) >>> 0;',
+    'let state = low;'],
+  ['force-high-seed-zero',
+    'const high = Math.floor(seed / 0x100000000) >>> 0;',
+    'const high = 0;'],
+  // Deception: only the named high-bit fixture silently aliases the low seed.
+  ['high-seed-fixture-deception',
+    'const high = Math.floor(seed / 0x100000000) >>> 0;',
+    'const high = seed === 17 + 0x100000000 ? 0 : Math.floor(seed / 0x100000000) >>> 0;'],
   ['same-route', 'const index = (step + variant) % directions.length;',
     'const index = step % directions.length;'],
   ['no-real-input', 'await ctx.joystick(step.dx, step.dy, step.ms);', 'await ctx.wait(step.ms);'],

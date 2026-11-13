@@ -26,13 +26,20 @@ MUTANTS = [
     ("kinds/skin.py", "if pairs and len(set(pairs))", "if False and len(set(pairs))"),
     ("kinds/skin.py", "miss = [k for k in REQ_KINDS if k not in kinds]", "miss = []"),
     ("check_pack.py", "if p.is_symlink() or", "if False and"),
+    ("kinds/ink.py", 'if not m.get("same_seed_same"):', "if False:"),
+    ("kinds/ink.py", "if role in VARY and not", "if False and not"),
+    ("kinds/ink.py", "if name in taken:", "if False:"),
+    ("kinds/ink.py", "if role in ALIVE and not", "if False and not"),
+    ("kinds/ink.py", 'if m["min"][1] > 0.25 and', "if False and"),
     ("check_pack.py", 'if "content_flags" not in merged:', "if False:"),
 ]
 
 
 def run_tests(root: Path) -> bool:
+    import os
+    env = dict(os.environ, ASSET_CHECK_REPO=str(HERE.parents[1]))
     p = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(root), "-p", "test_*.py"],
-                       capture_output=True, text=True, cwd=root)
+                       capture_output=True, text=True, cwd=root, env=env)
     return p.returncode == 0
 
 

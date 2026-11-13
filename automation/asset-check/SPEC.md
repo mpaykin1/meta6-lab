@@ -12,6 +12,7 @@
 | sprite2d | `atlas.json` с `assets` | kinds/sprite2d.py | A, P, G, L (ниже, §2) |
 | skin | `skin.json` (meta6-skin/1) | kinds/skin.py | KS1–KS12 = SKINY.md S1–S12 |
 | abyss | `manifest.json` со `sprites` | kinds/abyss.py | AB:* — **переиспользует** automation/asset-quality/validate.py |
+| ink | `pack.json` с `"format": "ink-pack/1"` + `makers.js` | kinds/ink.py (+ ink_harness.mjs, Node) | IK1–IK14 (§INK ниже) |
 | model3d | `.glb` / `.gltf` | kinds/model3d.py | M1 читается, M2 меши, M3 треугольники ≤ 20k (HARD > 100k), M4 текстуры ≤ 2048 и степень двойки, M5 масштаб в метрах, M6 скелет с анимациями, M7 ≤ 8 материалов, M8 размер файла, M9 нормали, M10 низ на y=0, M11 есть idle |
 | audio | `.wav .ogg .mp3 .m4a .flac .opus` | kinds/audio.py | S1 читается, S2 перегруз, S3 тихо, S4 резкие высокие (правило ЗВУК), S5 тишина в начале, S6 громкость/вес, S7 стык петли, S8 короткая музыка, S9 DC |
 | images | картинки без манифеста (запасной) | kinds/images.py | A1 нужен манифест, I2–I4 |
@@ -92,3 +93,14 @@
 8. **C5** — 276 отдельных PNG → добавить упакованные атласы по группам (герой, враги, боссы, тайлы мира, UI), исходники оставить.
 9. **P7/P2** — у reptile_king и truth_machine цвета далеко от палитры; у trump_take_damage, security_gate, ufo 35 % полупрозрачных пикселей.
 Хорошо: размеры, сетка кадров, якоря, локали ru/en (ключи совпадают), фоны far, run/jump/defeat героя живые.
+
+## §INK — ассеты для акварельного мира INK «Павший великан» (ink-pack/1, 13.11.2026)
+Игра: эталон `reference/ink-fallen-guardian/` (только чтение). Ассеты этого мира — не картинки, а **процедурная 3D-геометрия Three.js**, которую рисует акварель эталона.
+Пак: `asset-packs/incoming/<имя>/` = `pack.json` + `makers.js`.
+- `makers.js` пишется как файл рядом с эталоном: `import * as T from 'three'`, можно импортировать генераторы эталона (`./shared/living-watercolor-generators.js`, `./ink-objects.js` …). В конце: `export const makers = {имя: seed => THREE.Group}`.
+- `pack.json`: `format`, `game`, `base: "reference/ink-fallen-guardian"`, `version`, `license`, `provenance`, `content_flags`, `assets: {имя: {label_ru, role, zone, footprint, benefit?}}`.
+- role: tree, plant, rock, ground, prop, building, landmark, creature, character, vehicle, pickup, interactive, effect. zone: city, woodland, lakeside, meadow, guardian, any или new:<id>.
+- `userData.tick(t, dt)` — движение (обязательно для creature/character/effect/pickup/interactive); `userData.footprint` — радиус, сквозь который нельзя пройти; `userData.interact {radius, effect, label_ru}` — польза для pickup/interactive.
+Проверки: IK1 загрузка, IK2 запреты (сеть, файлы, свои шейдеры, импорт не из эталона), IK3 описание в pack.json, IK4 нельзя подменять ассеты эталона (имя занято), IK5 один seed = одна форма, IK6 разные seed = разная форма для деревьев/растений/камней (БЕЗ ПОВТОРОВ), IK7 треугольники и меши (телефон), IK8 время создания, IK9 размер в метрах (путник 1.6 м), IK10 стоит на земле, IK11 материалы, которые рисует акварель, IK12 цвета акварели INK (SOFT), IK13 живое движение, IK14 footprint и понятная польза.
+Посмотреть пак глазами: стенд `asset-packs/ink-stand/?pack=incoming/<имя>` (режимы «В мире» и «По одному» в меню ☰), МГЛ: https://mpaykin1.github.io/meta6-lab/asset-packs/ink-stand/?pack=incoming/<имя>
+Чистая ловушка (минимальный пак, проходит без HARD): `automation/asset-check/fixtures/ink-clean/`.

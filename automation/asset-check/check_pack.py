@@ -9,6 +9,7 @@
     sprite2d — 2D-спрайты, тайлы, фоны, UI (atlas.json)
     skin     — скины meta6-skin/1 (skin.json, правило SKINY)
     abyss    — ассеты ABYSS GLOW (manifest.json со sprites) — переиспользует automation/asset-quality/validate.py
+    ink      — процедурные 3D-ассеты акварельного мира INK (pack.json ink-pack/1 + makers.js)
     model3d  — 3D-модели .glb/.gltf
     audio    — звук и музыка .wav/.ogg/.mp3 (правило ЗВУК)
     images   — картинки без манифеста (запасной вид)
@@ -37,7 +38,7 @@ except ImportError:  # pragma: no cover
     print("Нужны pillow и numpy: pip install pillow numpy", file=sys.stderr)
     sys.exit(2)
 
-BOT_VERSION = "2.0.0"
+BOT_VERSION = "2.1.0"
 HERE = Path(__file__).resolve().parent
 BUDGET = {"pack_mb_soft": 8.0, "pack_mb_hard": 25.0, "files_soft": 120}
 DOC_FILES = {".md", ".txt"}

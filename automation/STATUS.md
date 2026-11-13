@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T15:28:13.997Z | МГЛ: 38bef549d89a7141f65c34e7898daf765367fc0a | МГ: 1bea203fb63d7c27c29a5643e2f38e4554a658c1 | нет данных
+UTC: 2026-11-13T15:29:24.291Z | МГЛ: 50a025a7351a89c796c00cb5bd96b025844f83df | МГ: 1bea203fb63d7c27c29a5643e2f38e4554a658c1 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #293 1ec3046bbe0972e316d92ec3846b542af0883716: automation/asset-check/test_kinds.py
 - PR #292 5df54dc0764daa77154709207e612b311127108d: automation/asset-check/test_kinds.py
@@ -55,7 +55,7 @@ P1 — нет данных: нет данных
 #267 ASSET CHECK v2: универсальный бот для любых ассетов | 8127784a2d65ec5caa7aed93b753d13ce96b0c14
 ещё 27: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1927 коммитов | нет данных
+МГЛ: 1929 коммитов | нет данных
 МГ: 7 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:2
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да

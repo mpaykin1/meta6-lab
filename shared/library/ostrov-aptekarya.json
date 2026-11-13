@@ -452,7 +452,22 @@
       "sha256": "25ce2c5e197e5a7212320f31ba99f0ed586a80a2a7efc64860cc24d86468ac60"
     },
     {
-      "id": "3e2a7726c7e419112cffdecf",
+      "id": "a52ada8783c59dcb87ef2072",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "stray",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/playthrough.mjs",
+      "lines": [
+        27,
+        31
+      ],
+      "sha256": "53fbc78a7ac3f04e8dc4260ae73e8b1d72a7ba9c90f1aa05ccf9516421d2d865"
+    },
+    {
+      "id": "b220dd8c70716fe94397cc59",
       "game": "ostrov-aptekarya",
       "kind": "solution",
       "name": "module:playthrough.mjs",
@@ -462,24 +477,9 @@
       "source_path": "games/ostrov-aptekarya/bot/playthrough.mjs",
       "lines": [
         1,
-        35
+        70
       ],
-      "sha256": "ed8d81c8d203d94b819e5b72c6873bf8d7afe03067a05838414fbe984dfafd28"
-    },
-    {
-      "id": "48f0684a3d988605e13a5b75",
-      "game": "ostrov-aptekarya",
-      "kind": "solution",
-      "name": "stray",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/ostrov-aptekarya/bot/playthrough.mjs",
-      "lines": [
-        21,
-        31
-      ],
-      "sha256": "fc3d79f2c40bf10bed02fa8e486f58c9f906fef7de69714f81340cd281a41962"
+      "sha256": "7981d9ede7b56bfd274ad74a24f20f8a07a51bd540be30a12ea9d9a541db6324"
     },
     {
       "id": "038a604ef3f44e769b60ff21",

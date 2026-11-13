@@ -352,7 +352,8 @@ class HtmlPackIsolatedCompareWiringTrap(unittest.TestCase):
         self.assertIn('if not compare.is_file():', checker)
         self.assertIn('size != (1440, 316 * len(new_ids))', checker)
         self.assertIn('if(delta<=23){pixels[i+3]=0;continue}', harness)
-        self.assertIn('report.previews[id]=await isolatePreview(page,second.png,second.offPng)', harness)
+        self.assertIn('const isolated=await isolatePreview(page,second.png,second.offPng);', harness)
+        self.assertIn('if(isolated)report.previews[id]=isolated;', harness)
 
 
 class HtmlPackPartsMotionWiringTrap(unittest.TestCase):

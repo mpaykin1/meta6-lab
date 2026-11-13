@@ -261,8 +261,13 @@ async function measure(browser,file){
    report.items[id]=features(first.on,second.on,first.off,second.off,fps);
    const accepted=['hero','beast','gate','obelisk','sky','fog','rain','cathedral'];
    const selected=await page.evaluate(id=>!!window.__PACK__.items.find(it=>it.id===id)?.isNew,id);
-   if(selected||accepted.includes(id))
-     report.previews[id]=await isolatePreview(page,second.png,second.offPng);
+   if(selected||accepted.includes(id)){
+     try{report.previews[id]=await isolatePreview(page,second.png,second.offPng);}
+     catch(error){
+       report.previews[id]=null;
+       report.errors.push('HP13 '+id+': '+String(error.message));
+     }
+   }
    if(await textOutsideMenu(page))report.screen_text=true;
   }
  }finally{await page.close();}
@@ -272,7 +277,7 @@ async function measure(browser,file){
 // Visual acceptance evidence: each new object next to two accepted reference scenes.
 // Rendered by the same headless browser, not synthetic icons or full-screen averages.
 async function compareSheet(browser,refShots,packShots,packFile){
-  const newIds=Object.keys(packShots).filter(id=>!refShots[id]);
+  const newIds=Object.keys(packShots).filter(id=>!Object.prototype.hasOwnProperty.call(refShots,id));
   if(!newIds.length)return;
   const pairs={
    'sable-beast':['beast','hero'],'mask-choir':['beast','hero'],

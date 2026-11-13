@@ -226,5 +226,13 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertNotIn(".replaceAll('../../../games/', '/games/')", harness)
 
 
+    def test_HP8_empty_reference_preview_remains_hard_and_named(self):
+        data = self.metrics()
+        data["reference"]["errors"] = ["HP13 rain: comparison asset mask empty"]
+        self.assertIn("HP8", self.ids(data))
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("report.errors.push('HP13 '+id+", harness)
+
+
 if __name__ == "__main__":
     unittest.main()

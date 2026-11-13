@@ -10,7 +10,7 @@
     "commercial": true,
     "third_party": [
       {
-        "file": "Three.js r128 (CDN)",
+        "file": "games/broken-city/lib/three.module.js (reused without copying)",
         "license": "MIT"
       }
     ]
@@ -19,8 +19,9 @@
     "tool": "ChatGPT",
     "date": "2026-11-13",
     "source": "reference/tumannye-shpili/index.html",
-    "branch": "lab/asset-pack-shpili",
-    "method": "unmodified reference scene extended with procedural meshes and animation"
+    "branch": "lab/assets-tumannye-shpili-20261114-2338",
+    "method": "unmodified reference scene extended with procedural meshes and animation",
+    "repair_date": "2026-11-14"
   },
   "content_flags": {
     "real_persons": [],

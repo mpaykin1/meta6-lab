@@ -16,6 +16,21 @@ Living Watercolor 3D — живой акварельный рендер на Thr
 Машинный паспорт с Git blob SHA: МГЛ `shared/references/living-watercolor.json`, МГ `ink/REFERENCE.json`.
 Первоисточник кода: `mpaykin1/World_server` commit 3114267847d36df12204cdeff37a6625d5c6afb6 (перенесён без изменения графики в PR #244 МГЛ).
 
+## Принятый мир INK · Павший великан (OWNER PASS, 13.11.2026)
+
+Владелец принял акварельный 3D-мир с упавшим, заросшим растительностью роботом
+как новый эталон МГЛ, отдельно от базового эталона технологии INK.
+
+- Постоянный путь в МГЛ: `reference/ink-fallen-guardian/`.
+- Исходная сцена и 3D-робот: `demos/living-watercolor/ink-forest.js`,
+  `demos/living-watercolor/ink-fallen-robot.js`.
+- Машинный паспорт и неизменяемые Git blob SHA:
+  `shared/references/ink-fallen-guardian.json`.
+- Подготовка к включению в `main`: [PR #283](https://github.com/mpaykin1/meta6-lab/pull/283).
+- Приёмка владельца относится к виду мира и объёмной модели.
+  Оригинальный акварельный движок не изменён.
+- Это эталон визуального мира и его авторских объектов, а не новая игра.
+
 ## Правила для всех ИИ
 
 1. **Не менять исходники эталона.** Файлы `index.html`, `client.js`, `shared/living-watercolor-*.js` — только чтение. Сверка — по blob SHA из паспорта.

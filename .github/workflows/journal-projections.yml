@@ -34,4 +34,4 @@ jobs:
         run: |
           set -euo pipefail
           node scripts/journal/write.mjs
-          bash scripts/polza/write-bot-state.sh journal/compiled/INDEX.md OSHIBKI.md ZADACHI.md SMENA.md docs/progress/INDEX.md
+          bash scripts/polza/write-bot-state.sh journal/compiled OSHIBKI.md ZADACHI.md SMENA.md docs/progress

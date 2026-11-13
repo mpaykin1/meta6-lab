@@ -67,7 +67,7 @@ cases.push(
     /(<meta property="og:image" content=")[^"]*(")/,
     '$1https://example.invalid/cover.svg$2')],
   ['protocol-relative CDN thumbnail', original.replace(
-    /(<img\\b[^>]*\\bsrc=")[^"]*(")/i,
+    /(<img\b[^>]*\bsrc=")[^"]*(")/i,
     '$1//static.playgama.com/cover.svg$2')],
   ['deceptive external schema image', mutateGame(game => {
     game.image = 'https://static.playgama.com/p-img/pg/fake?width=640';

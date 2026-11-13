@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T04:46:18.363Z",
+  "generated_at": "2026-11-13T06:40:32.996Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -438,7 +438,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/auditor-twohour-stall-20261112",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 269,
       "pr_state": "open",
@@ -447,7 +447,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/269",
       "taken_at": "2026-11-12 06:50",
       "last_commit_at": "2026-11-12 07:03",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-quota, audit, storozha-reference-queue"
     },
     {
       "id": 26,
@@ -455,7 +455,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/link-guard-recovery-1111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 268,
       "pr_state": "open",
@@ -464,7 +464,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/268",
       "taken_at": "2026-11-11 16:24",
       "last_commit_at": "2026-11-11 16:45",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: changed-games"
     },
     {
       "id": 27,
@@ -506,7 +506,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/auditor-five-tasks-20261111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 252,
       "pr_state": "open",
@@ -515,7 +515,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/252",
       "taken_at": "2026-11-11 12:33",
       "last_commit_at": "2026-11-11 12:51",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference, storozha-reference, kontur-guard, storozha-reference-queue"
     },
     {
       "id": 30,
@@ -557,7 +557,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-1",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 203,
       "pr_state": "open",
@@ -566,7 +566,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-11 02:06",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 33,
@@ -574,7 +574,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-1",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 203,
       "pr_state": "open",
@@ -583,7 +583,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-10 22:05",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 34,
@@ -591,7 +591,7 @@
       "project": "МГЛ",
       "owner": "MG-ремонтник",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 203,
       "pr_state": "open",
@@ -600,7 +600,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-10 18:50",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 35,
@@ -608,7 +608,7 @@
       "project": "МГЛ",
       "owner": "MG-ремонтник",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 203,
       "pr_state": "open",
@@ -617,7 +617,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-10 15:58",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 36,
@@ -625,7 +625,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 203,
       "pr_state": "open",
@@ -634,7 +634,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-09 16:21",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 37,
@@ -727,7 +727,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/status-a1-20261110",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 219,
       "pr_state": "open",
@@ -736,7 +736,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/219",
       "taken_at": "2026-11-10 05:07",
       "last_commit_at": "2026-11-11 06:41",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 43,
@@ -744,7 +744,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/render-broken-city-safe-1110",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 225,
       "pr_state": "open",
@@ -753,7 +753,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/225",
       "taken_at": "2026-11-10 06:26",
       "last_commit_at": "2026-11-11 06:34",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: changed-games, guard, performance, bot, kick-main"
     },
     {
       "id": 44,
@@ -782,7 +782,7 @@
       "original_status": "🔨 В РАБОТЕ",
       "pr": 242,
       "pr_state": "open",
-      "check": "pending",
+      "check": "success",
       "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43365983229/job/131690386131",
       "url": "https://github.com/mpaykin1/meta6-lab/pull/242",
       "taken_at": "2026-11-13 04:14",
@@ -812,7 +812,7 @@
       "project": "МГЛ",
       "owner": "проходчик",
       "branch": "lab/prohodchik-b2-motion-20261111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 258,
       "pr_state": "open",
@@ -821,7 +821,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/258",
       "taken_at": "2026-11-11 14:14",
       "last_commit_at": "2026-11-13 04:27",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue"
     },
     {
       "id": 48,
@@ -829,7 +829,7 @@
       "project": "МГЛ",
       "owner": "проходчик",
       "branch": "lab/prohodchik-b2-motion-20261111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 258,
       "pr_state": "open",
@@ -838,7 +838,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/258",
       "taken_at": "2026-11-12 14:22",
       "last_commit_at": "2026-11-13 04:27",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue"
     },
     {
       "id": 49,
@@ -863,7 +863,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/auditor-truthful-cycle-20261111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 254,
       "pr_state": "open",
@@ -872,7 +872,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/254",
       "taken_at": "2026-11-11 13:57",
       "last_commit_at": "2026-11-13 04:26",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue, kick-main"
     },
     {
       "id": 51,
@@ -1050,7 +1050,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/uluchshatel-preflight-20261111",
-      "status": "конфликт",
+      "status": "в работе",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 260,
       "pr_state": "open",
@@ -1059,7 +1059,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/260",
       "taken_at": "2026-11-11 14:26",
       "last_commit_at": "2026-11-13 03:44",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 62,
@@ -1071,7 +1071,7 @@
       "original_status": "🙋 НУЖЕН CLAUDE: красные guard, pod-i-nad и META BOT в базовом PR #234",
       "pr": 242,
       "pr_state": "open",
-      "check": "pending",
+      "check": "success",
       "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43365983229/job/131690386131",
       "url": "https://github.com/mpaykin1/meta6-lab/pull/242",
       "taken_at": "2026-11-11 07:29",
@@ -1186,7 +1186,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/pr-autofinish-followup-1111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🙋 НУЖЕН CLAUDE — [PR #248](https://github.com/mpaykin1/meta6-lab/pull/248)",
       "pr": 248,
       "pr_state": "open",
@@ -1195,7 +1195,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/248",
       "taken_at": "2026-11-11 11:40",
       "last_commit_at": "2026-11-11 13:50",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference, browser-open-all, storozha-reference, storozha-reference-queue"
     },
     {
       "id": 70,
@@ -1203,7 +1203,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-3",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🙋 НУЖЕН CLAUDE: защищённые workflow и эталон",
       "pr": 203,
       "pr_state": "open",
@@ -1212,7 +1212,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-11 06:34",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 71,
@@ -1237,7 +1237,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-2",
       "branch": "lab/bot-batch-2",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🙋 НУЖЕН CLAUDE: защищённый workflow и повторно красный META BOT",
       "pr": 200,
       "pr_state": "open",
@@ -1492,7 +1492,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-2",
       "branch": "lab/bot-batch-2",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 200,
       "pr_state": "open",
@@ -1509,7 +1509,7 @@
       "project": "МГЛ",
       "owner": "автозадача",
       "branch": "lab/bot-batch-2",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 200,
       "pr_state": "open",

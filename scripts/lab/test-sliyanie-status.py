@@ -25,6 +25,11 @@ def suite(mod):
         'всего 3, слито 1, закрыто 1, открыто 1' in out,                       # счётчики
         'нет данных' in mod.update(SAMPLE, {}, 'T'),                            # PR без ответа GitHub не считается слитым
     ]
+    # Refresh at a new hour with identical PR states must be byte-identical.
+    second = mod.update(out, {'10': 'merged', '11': 'open dirty', '12': 'closed'}, 'T+2h')
+    ok.append(second == out)
+    changed = mod.update(out, {'10': 'merged', '11': 'closed', '12': 'closed'}, 'T+2h')
+    ok.append(changed != out and 'закрыто 2' in changed)
     return all(ok)
 
 real = (HERE / 'sliyanie-status.py').read_text(encoding='utf-8')
@@ -35,6 +40,9 @@ traps = {
     'stiraet-zametki': real.replace("lines[i] = ' | '.join(cells)", "lines[i] = ' | '.join(cells[:5] + ['|'])"),
     'net-dannyh-kak-slito': real.replace("states.get(m.group(1), 'нет данных')", "states.get(m.group(1), 'merged')"),
     'ne-schitaet': real.replace("cnt[st.split()[0] if st.split()[0] in cnt else 'нет данных'] += 1", "pass"),
+    'time-only-commit': real.replace(
+        "if not facts_changed and re.search(r'^Итог:", "if False and re.search(r'^Итог:"),
+
 }
 for name, src in traps.items():
     if src == real: print(f'FAIL ловушка {name} не применилась'); fail = 1; continue

@@ -248,8 +248,15 @@ function up(e){if(e.pointerId===moveId){moveId=null;mvx=mvy=0;joyEl.style.opacit
 cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
 addEventListener('keydown',e=>{keys[e.code]=1;});addEventListener('keyup',e=>{keys[e.code]=0;});
 // A lost focus or pointer capture must never leave the hero walking on its own.
-addEventListener('blur',()=>{for(const code of Object.keys(keys))keys[code]=0;
-  moveId=camId=null;mvx=mvy=0;joyEl.style.opacity=0;joyK.style.transform='';});
+function resetMovementInput(){
+  for(const code of Object.keys(keys))keys[code]=0;
+  moveId=camId=null;mvx=mvy=0;
+  joyEl.style.opacity=0;joyK.style.transform='';
+}
+addEventListener('blur',resetMovementInput);
+// Mobile browsers may suspend a tab without firing window.blur.
+document.addEventListener('visibilitychange',()=>{if(document.hidden)resetMovementInput();});
+addEventListener('pagehide',resetMovementInput);
 cv.addEventListener('lostpointercapture',e=>up(e));
 
 /* ================= ЦИКЛ ================= */

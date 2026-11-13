@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T11:17:29.250Z",
+  "generated_at": "2026-11-13T11:21:45.773Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -548,7 +548,7 @@
       "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md",
       "taken_at": "2026-11-13 10:53",
-      "last_commit_at": "[#72: merge main](https://github.com/mpaykin1/meta6-lab/commit/9cc6958b0d34c6898a373dfd1d058e5fa539512d); [#278: API-403 rule](https://github.com/mpaykin1/meta6-lab/commit/e66a271095c39b65c9bdf22c55450d5dd043d1f9); [#239: closed](https://github.com/mpaykin1/meta6-lab/pull/239); [Archer #264](https://github.com/mpaykin1/meta6-lab/commit/21d89026cc160345cd94fbd29cf7eab2a270cc67); [CI #262](https://github.com/mpaykin1/meta6-lab/commit/d286205def63e2ef63d4605d95f5a3478b8c032e)",
+      "last_commit_at": "[OSHIBKI Archer](https://github.com/mpaykin1/meta6-lab/commit/3e728c0d5b89badf128e47599ae181bde60c2079); [mutation trap](https://github.com/mpaykin1/meta6-lab/commit/a521442cf25e0413942eaf3aed9cafad4e1d8a96); [#264 game](https://github.com/mpaykin1/meta6-lab/commit/21d89026cc160345cd94fbd29cf7eab2a270cc67); [#72 merge](https://github.com/mpaykin1/meta6-lab/commit/9cc6958b0d34c6898a373dfd1d058e5fa539512d); [#278 rule](https://github.com/mpaykin1/meta6-lab/commit/e66a271095c39b65c9bdf22c55450d5dd043d1f9)",
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {

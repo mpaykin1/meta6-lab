@@ -1352,52 +1352,7 @@
       "sha256": "607e6dbc7103618f7d167180869619735b9994c1079cb3b1d951f40e9a03ce82"
     },
     {
-      "id": "033139f5c7b2318f849e04b6",
-      "game": "ostrov-aptekarya",
-      "kind": "solution",
-      "name": "bind",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/ostrov-aptekarya/ui.js",
-      "lines": [
-        109,
-        128
-      ],
-      "sha256": "a0699c46031c8a9054bdb83b77c3b6959febd4cec8e1fcfda1bd4b129cb57f88"
-    },
-    {
-      "id": "05e2f9bb0a420c0a5b5ccf51",
-      "game": "ostrov-aptekarya",
-      "kind": "solution",
-      "name": "toggleMenu",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/ostrov-aptekarya/ui.js",
-      "lines": [
-        90,
-        90
-      ],
-      "sha256": "e4018e02ed35712111c62c403aa1d06a3dc42987f4d5cfe90bf839807b1d1278"
-    },
-    {
-      "id": "4fd84f032e15892bb2edb032",
-      "game": "ostrov-aptekarya",
-      "kind": "solution",
-      "name": "$",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/ostrov-aptekarya/ui.js",
-      "lines": [
-        77,
-        89
-      ],
-      "sha256": "d8eff8b1753185733eb02ef6353c6b02afd466c5520960d75bfb92aac2488d0f"
-    },
-    {
-      "id": "524082144256bcafb25a5ff5",
+      "id": "312cd13424948b863e64c6e8",
       "game": "ostrov-aptekarya",
       "kind": "solution",
       "name": "reset",
@@ -1406,28 +1361,28 @@
       ],
       "source_path": "games/ostrov-aptekarya/ui.js",
       "lines": [
-        107,
-        107
+        108,
+        108
       ],
       "sha256": "03a0c5d4ef0f018ac9c5abf211ca74949969db49db6a077f7e4278b9032c2283"
     },
     {
-      "id": "9343cd6cf53532aab8ed2ff4",
+      "id": "77c3d41d999c9d510c75f1ce",
       "game": "ostrov-aptekarya",
       "kind": "solution",
-      "name": "k",
+      "name": "bind",
       "purpose": [
         "gameplay"
       ],
       "source_path": "games/ostrov-aptekarya/ui.js",
       "lines": [
-        134,
-        137
+        110,
+        129
       ],
-      "sha256": "54d32b0fa305b7648f26693ba4dfb640d77c981ead3147e5dd34fefe3055efdb"
+      "sha256": "a0699c46031c8a9054bdb83b77c3b6959febd4cec8e1fcfda1bd4b129cb57f88"
     },
     {
-      "id": "cc06c1dd747bf66206d4effa",
+      "id": "b5c605577d528df2fb508b7b",
       "game": "ostrov-aptekarya",
       "kind": "solution",
       "name": "module:ui.js",
@@ -1437,12 +1392,12 @@
       "source_path": "games/ostrov-aptekarya/ui.js",
       "lines": [
         1,
-        179
+        180
       ],
-      "sha256": "23f53d7cf9eef759481e816cbc65a577f872916820b6b90859fe8cf31940d104"
+      "sha256": "8d18ded7cd07269578728e4f24dd4769f8127fdb18ae339b177f72d576765f2a"
     },
     {
-      "id": "e3a3c0c6f6e64dfde4cd8848",
+      "id": "b637b08489c3adbbb071d453",
       "game": "ostrov-aptekarya",
       "kind": "solution",
       "name": "createUI",
@@ -1452,9 +1407,54 @@
       "source_path": "games/ostrov-aptekarya/ui.js",
       "lines": [
         57,
-        179
+        180
       ],
-      "sha256": "4003d464a9eb36e48ffc6508245d9ebac41499c56b23d3cdd218c77016af0979"
+      "sha256": "f261529987978705f04c8d1bb11db3d08a98c3571b8ec69ea9c4642a5d9e22c1"
+    },
+    {
+      "id": "d0667727ca0c51861b73c37d",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "toggleMenu",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "lines": [
+        91,
+        91
+      ],
+      "sha256": "e4018e02ed35712111c62c403aa1d06a3dc42987f4d5cfe90bf839807b1d1278"
+    },
+    {
+      "id": "dab01a2036cb9cc13de1c73e",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "k",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "lines": [
+        135,
+        138
+      ],
+      "sha256": "54d32b0fa305b7648f26693ba4dfb640d77c981ead3147e5dd34fefe3055efdb"
+    },
+    {
+      "id": "e91af17591350885e89b2b4e",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "$",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "lines": [
+        77,
+        90
+      ],
+      "sha256": "10988a6cc34d3dbf828792c7e12d78958eb24897d2c7f937b818fd3178c7452f"
     }
   ],
   "counts": {

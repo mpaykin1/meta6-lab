@@ -1,0 +1,46 @@
+name: MG report completion guard
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'SMENA.md'
+      - 'DOVODKA.md'
+      - 'docs/progress/**'
+      - 'automation/chat/**'
+      - 'journal/entries/SMENA/**'
+      - 'journal/entries/docs/progress/**'
+      - 'scripts/autofinish/report-*'
+      - '.github/workflows/report-completion-guard.yml'
+permissions:
+  contents: read
+concurrency:
+  group: mg-report-guard-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  report-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # PR content is executed only with read-only credentials and no secrets.
+          # The new validator does not yet exist on main before this PR is merged.
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch PR diff and verify exact immutable SHA
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          git fetch --no-tags origin "refs/pull/${PR_NUMBER}/head:refs/remotes/origin/pr-report-audit"
+          test "$(git rev-parse refs/remotes/origin/pr-report-audit)" = "$PR_HEAD"
+      - run: node scripts/autofinish/mutate-report-guard.mjs
+      - name: Validate added report lines against fresh base
+        env:
+          REPORT_GUARD_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: node scripts/autofinish/report-guard.mjs

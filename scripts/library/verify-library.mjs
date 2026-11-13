@@ -30,9 +30,10 @@ function independentWalk(dir){
 }
 function expectedGames(root){
   const base=path.join(root,'games');
-  const found=fs.readdirSync(base,{withFileTypes:true})
-    .filter(x=>x.isDirectory()&&!x.name.endsWith('-copy')&&x.name!=='skin-trainer')
-    .map(x=>({game:x.name,source_root:'games/'+x.name}));
+  const found=fs.readdirSync(base,{withFileTypes:true}).filter(x=>x.isDirectory()).map(x=>({game:x.name,source_root:'games/'+x.name}));
+  for(let i=found.length-1;i>=0;i--) {
+    if(found[i].game.endsWith('-copy')||found[i].game==='skin-trainer')found.splice(i,1);
+  }
   const contents=fs.readFileSync(path.join(root,'rules/06-rabota-ii-s-kodom/META_GAMES_SOURCE_ALLOWLIST.md'),'utf8');
   const lines=contents.split('\n');
   const first=lines.findIndex(line=>/^## 1\./.test(line)),second=lines.findIndex(line=>/^## 2\./.test(line));
@@ -83,8 +84,10 @@ export function verifyLibrary(root=ROOT,{live=true}={}){
   if(JSON.stringify(index.excluded_games)!==JSON.stringify(excluded))
     fail('stale protected-copy or training exclusion list');
   const present=fs.readdirSync(directory).filter(x=>x.endsWith('.json')&&x!=='index.json').sort();
-  const wanted=[...expected.map(x=>x.game+'.json'),...protectedFiles,...(fs.existsSync(trainingFile)?['skin-trainer.json']:[])].sort();
-  if(JSON.stringify(present)!==JSON.stringify(wanted))fail('stale, removed or unregistered manifest');
+  const wanted=expected.map(x=>x.game+'.json').sort();
+  wanted.push(...protectedFiles,...(fs.existsSync(trainingFile)?['skin-trainer.json']:[]));
+  wanted.sort();
+  if(JSON.stringify(present)!==JSON.stringify(wanted))fail('stale or missing manifest');
   const forbidden=new Set(['skin-trainer',...excluded.map(e=>e.game)]);
   if(index.games.some(x=>forbidden.has(x.game))||
     index.entries.some(x=>forbidden.has(x.game)))

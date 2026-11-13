@@ -1,0 +1,201 @@
+{
+  "generated_at": "2026-11-13T10:57:54.294Z",
+  "sha": {
+    "lab": "нет данных",
+    "mg": "нет данных"
+  },
+  "checked": {
+    "lab": "53ccabea4681832aefe536bb172a5541b293c743",
+    "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
+  },
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43413130797",
+  "review": {
+    "protected": "нет данных",
+    "redLab": "нет данных",
+    "redMg": "нет данных",
+    "sliyanie": [
+      "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
+      "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | open | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
+      "| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |",
+      "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
+      "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
+      "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
+      "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
+      "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
+      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open dirty | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
+    ],
+    "stalled": [
+      "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
+      "| К7 | lab/kontur-k7-review | свободно (зависло 6 ч, было: ВОЗВРАЩЁН Claude (ложные срабатывания, см. комментарий в PR #193) — попытка 1 из 2) | 2026-11-09 17:50 |",
+      "| B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |",
+      "| B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |",
+      "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |",
+      "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |"
+    ]
+  },
+  "finish": {
+    "ready": [],
+    "pending": [
+      {
+        "id": "M1",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "M2",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "M3",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "M4",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "M5",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "M6",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "B1",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "B2",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "B3",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "B4",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "B5",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "B6",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "B7",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "L1",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "L2",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "L3",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "L4",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "P1",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "Л1",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "Л2",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "Л3",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "Л4",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "Л5",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "Л6",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "С1",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "С2",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "Э1",
+        "value": "нет данных",
+        "reason": "нет данных"
+      },
+      {
+        "id": "Э2",
+        "value": "нет данных",
+        "reason": "нет данных"
+      }
+    ]
+  },
+  "pr": {
+    "open": "нет данных",
+    "conflicts": "нет данных",
+    "merged": "нет данных",
+    "closed": "нет данных",
+    "mergedItems": "нет данных",
+    "protectedItems": "нет данных"
+  },
+  "changes": {
+    "lab": {
+      "count": "нет данных",
+      "folders": "нет данных"
+    },
+    "mg": {
+      "count": "нет данных",
+      "folders": "нет данных"
+    }
+  },
+  "games": "нет данных",
+  "errors": "нет данных"
+}

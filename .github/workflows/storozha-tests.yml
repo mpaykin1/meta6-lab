@@ -1,0 +1,33 @@
+name: STOROZHA mutation traps
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/storozha/**'
+      - '.github/workflows/storozha-*.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/storozha/**'
+      - '.github/workflows/storozha-*.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: storozha-traps-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  storozha-mutations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Production fixture contracts
+        run: node scripts/storozha/verify-storozha.mjs
+      - name: Three-plus real breaking mutations per sentinel
+        run: node scripts/storozha/mutate-storozha.mjs

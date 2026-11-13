@@ -342,3 +342,8 @@
 | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | `3a89858552c072315bbd75f15c7f352a56424ea3` | 2026-11-13T03:52:18.000Z |
 | [#247](https://github.com/mpaykin1/meta6-lab/pull/247) | `14ffdab626e71a699c74c763bad62d9a4aa9a00e` | 2026-11-13T03:56:43.000Z |
 - Захват #220: [34f64472ead9871e65ba2d283c5faab741d22615](https://github.com/mpaykin1/meta6-lab/commit/34f64472ead9871e65ba2d283c5faab741d22615). Исходный HEAD старше 60 минут, конфликт dirty. #208 уже эскалирован на неизменном HEAD; повторная обработка исключена.
+
+### PR #87 — 2026-11-13T04:22:20.892Z
+- Исходный HEAD [`2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d`](https://github.com/mpaykin1/meta6-lab/commit/2a1d22c9bcd5ddb1e4f2eb6ae599a6816371ef7d), ветка старше 60 минут; [захват ZADACHI](https://github.com/mpaykin1/meta6-lab/commit/e1c47fc063f5b8318b737315393b69da8fd11255).
+- Действие (д): [META GAMES guard FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/42975697783/job/130374149800), исторические merge-коммиты `faf69f129ae3510a81e59a48328534fed8a5f944` и `d66f304967540ca9b9c144140ea51c971b3e2365` меняли `.github/protected` без подписи. [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/42976938005); полного PASS нет. [Одна строка в разделе «Ждёт Claude»](https://github.com/mpaykin1/meta6-lab/commit/51c43718a0a25425b39f82e901cd17fd88cc2bbc): одобрить чистый перенос только портала, без переписывания истории и ослабления guard. Не слит, не закрыт.
+- Урок: `mergeable=true` не означает безопасное слияние: охранник проверяет *исторические коммиты*, даже если итоговый diff содержит только незапрещённый HTML. Перед слиянием читать логи guard и историю HEAD.

@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 import { serve } from '../meta-bot/server.mjs';
 import { fileURLToPath } from 'node:url';
+import { readFileSync } from 'node:fs';
+import { jumpTarget } from './veil-jump-target.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const server = await serve(root);
@@ -28,6 +30,18 @@ try {
     const after = await page.evaluate(() => window.__META_BOT__.player);
     assert(Math.hypot(after.x - stopped.x, after.z - stopped.z) < .02, 'hero drifts after blur');
     if (mobile) {
+      const config = JSON.parse(readFileSync(new URL('../../games/veil-terraces/bot.json', import.meta.url)));
+      assert(config.jumpButton, 'phone bot must target the visible jump button');
+      const jumpPoint = jumpTarget(config, page.viewportSize(), await page.locator('#v7Action').boundingBox());
+      assert.equal(await page.evaluate(({ x, y }) => document.elementFromPoint(x, y)?.closest('button')?.id,
+        jumpPoint), 'v7Action', 'configured jump must hit the genuine visible Observer action');
+      await page.waitForTimeout(250);
+      const grounded = await page.evaluate(() => window.__META_BOT__.player.y);
+      await page.touchscreen.tap(jumpPoint.x, jumpPoint.y);
+      await page.waitForTimeout(220);
+      const jumping = await page.evaluate(() => window.__META_BOT__.player.y);
+      assert(jumping > grounded + .2, 'genuine phone jump must lift the hero');
+      await page.waitForTimeout(900);
       const client = await context.newCDPSession(page);
       await client.send('Input.dispatchTouchEvent', {
         type: 'touchStart', touchPoints: [{ x: 50, y: 300, id: 7 }]

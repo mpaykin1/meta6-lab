@@ -41,3 +41,4 @@ for (const [name, before, after] of [
   console.log('CAUGHT broken version:', name);
 }
 console.log('PASS fixed version: keyboard, touch, queued jump and momentum all released');
+await import('./mutate-veil-jump-target.mjs');

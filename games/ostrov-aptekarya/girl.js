@@ -92,7 +92,10 @@ export function createGirl({makers, paint}) {
         0, 1.6 + Math.cos(ctx.time * .19) * 3.2);
       want.subVectors(target, g.position).setY(0);
       const distance = want.length();
-      if (distance > .12) want.setLength(Math.min(dist < 7.4 ? 2.65 : 1.45, distance * 1.5));
+      // Чуткая, но не сверхбыстрая: у игрока есть время дойти до укрытия.
+      // К третьей странице сигнал усиливается; нервное преследование остаётся.
+      const pursuitSpeed = 1.65 + Math.min(2, ctx.archivePages || 0) * .18;
+      if (distance > .12) want.setLength(Math.min(dist < 7.4 ? pursuitSpeed : 1.1, distance * 1.5));
       else want.set(0,0,0);
       lookAt = dist < 7.4 ? P : ctx.robot;
     } else if (s.mode === 'stun') {

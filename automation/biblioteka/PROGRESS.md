@@ -64,7 +64,11 @@
 
 - 2026-11-13T03:46:12.079Z — код [0a42917ec9161ca20d04f1caac5153de38642302](https://github.com/mpaykin1/meta6-lab/commit/0a42917ec9161ca20d04f1caac5153de38642302), [Library Machine #43360775748](https://github.com/mpaykin1/meta6-lab/actions/runs/43360775748) ЗЕЛЁНЫЙ: `SYSTEM DISCOVERY MUTATIONS CAUGHT 6`, `BIBLIOTEKA CONTRACT VERIFIED; MUTATIONS CAUGHT 8`, `LIBRARY VERIFIED`. [KONTUR #43360775735](https://github.com/mpaykin1/meta6-lab/actions/runs/43360775735) PASS, [PR quota #43360775801](https://github.com/mpaykin1/meta6-lab/actions/runs/43360775801) PASS. [STOROZHA #43360776033](https://github.com/mpaykin1/meta6-lab/actions/runs/43360776033) КРАСНЫЙ: изменение защищённого `scripts/library/verify-library.mjs` в старой истории #261; менять/ослаблять сторож запрещено, PR остаётся НУЖЕН CLAUDE. Это НЕ означает слияние и НЕ увеличивает load_ok/MCP.
 
+- 2026-11-13T04:24:23Z — саморазвитие поиска (г), подтверждение происхождения результата: после [синхронизации main f664bc1feef589dfaa7d35248dc7cebe8464dc5b](https://github.com/mpaykin1/meta6-lab/commit/f664bc1feef589dfaa7d35248dc7cebe8464dc5b) система поиска исключает записи без 64-символьного SHA-256 и корректного диапазона строк оригинала. [Код 3fd3e2d147b9863fb6e29604e3b49aa578583545](https://github.com/mpaykin1/meta6-lab/commit/3fd3e2d147b9863fb6e29604e3b49aa578583545), [ловушки 688dd7c6df1ffe3a591fb417946bb6f0c7041ca5](https://github.com/mpaykin1/meta6-lab/commit/688dd7c6df1ffe3a591fb417946bb6f0c7041ca5), [Library Machine PASS #43365245872](https://github.com/mpaykin1/meta6-lab/actions/runs/43365245872) — 9/9 мутантов поиска, 8/8 контракта, Library verified. [STOROZHA FAIL #43365245850](https://github.com/mpaykin1/meta6-lab/actions/runs/43365245850) по старому защищённому файлу в истории PR #261; merge запрещён. Полных эталонов 0 → 0 из 22, load_ok на main 0 → 0 (камера PR #270 = 1), asset_ok не подтверждён, MCP 0 → 0. [Ошибка №45 ef0ea001fd5d056ff9d3c01046035ee2a2adb54c](https://github.com/mpaykin1/meta6-lab/commit/ef0ea001fd5d056ff9d3c01046035ee2a2adb54c).
+
 ## Урок
+
+- Правило: поиск для ИИ не выдаёт исходный фрагмент без достоверной структуры ссылки: SHA-256 ровно 64 hex и диапазон строк с положительными целыми границами в прямом порядке. Отдельно перед статусом PASS обязателен фактический пересчёт хэша по байтам оригинала и Chromium; формат SHA не доказывает соответствие содержимому.
 
 - Источник в каталоге не равен авторской системе: до поиска для ИИ отсекать `vendor/`, `lib/`, `node_modules/` и `.min.js`; обязательна мутация на отключение фильтра.
 
@@ -86,3 +90,4 @@
 | Дата UTC | Новых правил | Новых ловушек | Мутантов-беглецов | Повторов ошибок | Ждёт Claude |
 |---|---:|---:|---:|---:|---:|
 | 2026-11-11 | 1 | 1 (4 мутации) | 0 | 0 | минимум 2 PR (#209, #218) |
+| 2026-11-13 | 1 | 1 (3 новые мутации, 9/9 всего) | 0 | 0 | 4 PR (#209, #218, #261, #270) |

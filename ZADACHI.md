@@ -52,7 +52,7 @@
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | chore: PR autofinish pilot from intentionally stale branch | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/pr-autofinish-pilot-1111` | [#240](https://github.com/mpaykin1/meta6-lab/pull/240) | 2026-11-11 07:00 | 2026-11-11 07:00 |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | PROBE: autofinish must update stale branch before eligible merge | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/autofinish-probe-1111-01` | [#239](https://github.com/mpaykin1/meta6-lab/pull/239) | 2026-11-11 06:58 | 2026-11-11 06:58 |
 | 🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ | PR #205: разрешить конфликт пульта владельца с main | МГЛ | MG-строитель-4 | `lab/owner-pult` | [#205](https://github.com/mpaykin1/meta6-lab/pull/205) | 2026-11-11 06:43 | 2026-11-09 17:01 |
-| 🔨 В РАБОТЕ | INK: объёмные объекты леса из видео, Ч/Б и цвет по прежней ссылке | МГЛ | ChatGPT | `lab/ink-forest-1113` | — | 2026-11-13 07:12 | — |
+| 🔨 В РАБОТЕ | INK: объёмные объекты леса из видео, Ч/Б и цвет по прежней ссылке | МГЛ | ChatGPT | `lab/ink-forest-1113` | [#280](https://github.com/mpaykin1/meta6-lab/pull/280) | 2026-11-13 07:12 | — |
 | 🔨 В РАБОТЕ | Ревизор: сверять ZADACHI.md с реальными PR (г) | МГЛ | ревизор | `lab/auditor-task-table-20261113` | — | 2026-11-13 04:14 | — |
 | 🔨 В РАБОТЕ | PR #242: исправить красные проверки SEO-каталога | МГЛ | чат ChatGPT | `lab/seo-claude-adfree-1111` | [#242](https://github.com/mpaykin1/meta6-lab/pull/242) | 2026-11-13 04:14 | 2026-11-12 14:47 |
 | 🔨 В РАБОТЕ | Сторож таблицы: конфликты, красные проверки и МГ | МГЛ | Кто: толкач | `lab/zadachi-conflicts` | [#220](https://github.com/mpaykin1/meta6-lab/pull/220) | 2026-11-13 04:13 | 2026-11-10 06:26 |

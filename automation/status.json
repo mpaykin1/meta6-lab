@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-13T10:49:12.658Z",
+  "generated_at": "2026-11-13T10:51:35.913Z",
   "sha": {
-    "lab": "db06d5b4e4433f3a6edcd3b01db8c34e9b85ee49",
+    "lab": "8257a46e29e7dba772b3a0dde7eebcec632cef0f",
     "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43411983161",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43412296946",
   "review": {
     "protected": [
       {
@@ -157,11 +157,6 @@
         "workflow": "STOROZHA branch updater",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43409815373",
         "step": "Update open PR heads and synchronize exact Git conflicts"
-      },
-      {
-        "workflow": "STOROZHA weekly maintenance",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43409546447",
-        "step": "Close genuinely stale PRs without deleting branches and write daily report"
       }
     ],
     "redMg": [],
@@ -612,7 +607,7 @@
   },
   "changes": {
     "lab": {
-      "count": 1802,
+      "count": 1805,
       "folders": "нет данных"
     },
     "mg": {

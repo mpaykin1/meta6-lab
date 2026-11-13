@@ -317,6 +317,25 @@ class KindTraps(unittest.TestCase):
         self.assertIn("IK10", ids(self.ink_pack([("const ring = part(g, new T.TorusGeometry(.22, .06, 6, 14), '#9c9b8e', [0, .28, 0]);",
                                                  "const ring = part(g, new T.TorusGeometry(.22, .06, 6, 14), '#9c9b8e', [0, .28, 0]); g.position.y = 2;")])))
 
+    def test_IK15_simpler_than_reference(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack([("export const makers = {lilyPads,", "export function plainBox(){const g=new T.Group();"
+                            "g.add(new T.Mesh(new T.BoxGeometry(.5,.5,.5),mat('#918872')));g.children[0].position.y=.25;"
+                            "g.userData.footprint=.3;return g;}\nexport const makers = {plainBox, lilyPads,")])
+        pj = json.loads((d / "pack.json").read_text("utf-8"))
+        pj["assets"]["plainBox"] = {"label_ru": "Ящик", "role": "prop", "zone": "city", "footprint": .3}
+        (d / "pack.json").write_text(json.dumps(pj), "utf-8")
+        self.assertIn("IK15", ids(d))
+
+    def test_custom_shader_is_allowed(self):
+        """Бот не запрещает эффекты: свой шейдер проходит, если ассет не хуже эталона."""
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack([("const glow = new T.MeshBasicMaterial({color: '#ffd095'})",
+                            "const glow = new T.ShaderMaterial({uniforms: {uT: {value: 0}}, vertexShader: 'void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}', fragmentShader: 'void main(){gl_FragColor=vec4(1.,.8,.5,1.);}'})")])
+        self.assertEqual(cp.check(d).hard(), [])
+
     # --- смешанный пак: все виды сразу ---
     def test_mixed_pack_runs_every_kind(self):
         make_glb(self.d / "m.glb")

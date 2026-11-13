@@ -2,7 +2,7 @@
 
 Пак = pack.json + makers.js. makers.js пишется как файл рядом с эталоном INK (reference/ink-fallen-guardian):
 импортирует 'three' и при желании готовые генераторы эталона (./shared/…, ./ink-objects.js …) — REUSE без копирования.
-Бот прогоняет каждый maker в Node (ink_harness.mjs) и проверяет IK1–IK14. Спецификация: SPEC.md §INK.
+Бот прогоняет каждый maker в Node (ink_harness.mjs) и проверяет IK1–IK15. Эффекты и шейдеры не запрещены — бот держит планку «не хуже эталона». Спецификация: SPEC.md §INK.
 """
 from __future__ import annotations
 
@@ -33,8 +33,7 @@ FORBIDDEN = [(r"\bfetch\s*\(", "fetch"), (r"XMLHttpRequest", "XMLHttpRequest"), 
              (r"new\s+Function\s*\(", "new Function"), (r"\bimport\s*\(", "динамический import()"),
              (r"localStorage|sessionStorage|indexedDB", "хранилище браузера"),
              (r"TextureLoader|GLTFLoader|ImageLoader|FileLoader", "загрузка файлов"),
-             (r"https?://", "внешняя ссылка"), (r"\bwindow\s*\.|\blocation\s*\.", "window/location"),
-             (r"ShaderMaterial|RawShaderMaterial", "свой шейдер вместо акварели эталона")]
+             (r"https?://", "внешняя ссылка"), (r"\bwindow\s*\.|\blocation\s*\.", "window/location")]
 INK_PALETTE = ["#272c30", "#303c38", "#607e74", "#789180", "#91a18b", "#736b59", "#d5d3bb", "#c5ac69", "#bd7c69",
                "#587879", "#9c9b8e", "#918872", "#a89a80", "#b6bea3", "#a89e83", "#ccbc97", "#78a5a4", "#efece2",
                "#839487", "#e7e5d6"]
@@ -76,6 +75,32 @@ def reference_names(base: Path):
     return names | {"robot"}
 
 
+_BASELINE = {}
+
+
+def baseline(base: Path):
+    """Планка качества = ассеты принятого эталона. Новый ассет не должен быть проще самых простых из них."""
+    key = str(base)
+    if key in _BASELINE:
+        return _BASELINE[key]
+    import tempfile
+    tmp = Path(tempfile.mkdtemp()) / "ref_makers.js"
+    tmp.write_text("import {objectMakers} from './ink-objects.js';\nimport {extraObjectMakers} from './ink-extras.js';\n"
+                   "import {settlementMakers} from './ink-settlement.js';\n"
+                   "export const makers = {...objectMakers, ...extraObjectMakers, ...settlementMakers};\n", "utf-8")
+    data, _ = run_harness(base, tmp)
+    shutil.rmtree(tmp.parent, ignore_errors=True)
+    ok = [m for m in (data or {}).get("makers", {}).values() if not m.get("error")]
+    if not ok:
+        _BASELINE[key] = None
+        return None
+    def p10(xs):
+        xs = sorted(xs)
+        return xs[max(0, int(len(xs) * .1) - 1)]
+    _BASELINE[key] = {"tris": p10([m["tris"] for m in ok]), "meshes": p10([m["meshes"] for m in ok]), "n": len(ok)}
+    return _BASELINE[key]
+
+
 def check(root: Path, r) -> set:
     pj = json.loads((root / "pack.json").read_text("utf-8"))
     covered = {"pack.json", "makers.js", "README.md"}
@@ -92,7 +117,7 @@ def check(root: Path, r) -> set:
     for pat, what in FORBIDDEN:
         if re.search(pat, src):
             r.add("IK2", "HARD", "makers.js", f"запрещено: {what}",
-                  "Ассет INK — только процедурная геометрия Three.js и генераторы эталона, без сети, файлов и своих шейдеров")
+                  "Безопасность: ассет строится сам, без сети, внешних файлов и eval (эффекты и шейдеры — можно любые)")
     for imp in re.findall(r"""from\s+['"]([^'"]+)['"]""", src):
         if imp != "three" and not (imp.startswith("./") and (base / imp).exists()):
             r.add("IK2", "HARD", "makers.js", f"импорт {imp!r} не из эталона",
@@ -118,6 +143,9 @@ def check(root: Path, r) -> set:
         if name not in made:
             r.add("IK3", "HARD", name, "описан в pack.json, но нет в makers.js", "Добавь maker или убери описание")
     ink_rgb = [hexrgb(c) for c in INK_PALETTE]
+    bar = baseline(base)
+    if bar:
+        r.stats["ink_quality_bar"] = bar
     for name, m in made.items():
         d = meta.get(name, {})
         role = d.get("role")
@@ -146,6 +174,10 @@ def check(root: Path, r) -> set:
             r.add("IK7", "HARD", name, f"{m['meshes']} отдельных мешей — тормоза на телефоне", "Объедини меши (batchInk эталона)")
         elif m["meshes"] > 80:
             r.add("IK7", "SOFT", name, f"{m['meshes']} мешей", "Объедини мелкие детали")
+        if bar and role not in ("effect", "ground") and m["tris"] < bar["tris"] and m["meshes"] < bar["meshes"]:
+            r.add("IK15", "HARD", name, f"проще эталона: {m['tris']} треуг., {m['meshes']} частей "
+                  f"(самые простые принятые ассеты — от {bar['tris']} треуг. и {bar['meshes']} частей)",
+                  "Добавь деталей: форма, второстепенные части, мазки — не хуже принятых ассетов игры")
         if m["ms"] > 300:
             r.add("IK8", "HARD", name, f"создание {m['ms']} мс", "Ассет строится ≤ 50 мс")
         elif m["ms"] > 50:
@@ -163,10 +195,6 @@ def check(root: Path, r) -> set:
             r.add("IK10", "HARD", name, f"низ на высоте {m['min'][1]:.2f} м — висит в воздухе", "Основание на y = 0")
         elif m["min"][1] < -1.0:
             r.add("IK10", "SOFT", name, f"утоплен на {-m['min'][1]:.2f} м", "Основание около y = 0")
-        bad = [t for t in m["material_types"] if t not in OK_MATERIALS]
-        if bad:
-            r.add("IK11", "HARD", name, f"материалы {bad} — акварель эталона их не рисует",
-                  "MeshStandardMaterial (roughness 1) с цветом, как в ink-objects.js")
         if m["meshes"] and m["outline_set"] < m["meshes"] * 0.5:
             r.add("IK11", "SOFT", name, "у большинства мешей не задан watercolorOutline", "userData.watercolorOutline = true/false для каждой части")
         if m["colors"]:

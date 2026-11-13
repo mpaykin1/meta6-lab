@@ -33,3 +33,5 @@
 | 24 | Dispatcher читает PR и проверки пакетно, пропускает закрытые строки без REST и сохраняет fail-closed при неполном снимке/смене HEAD? | OSHIBKI #1055, PR #247 | scripts/lovushki/mutate-dispatcher-snapshot.mjs (8 мутаций), 13 прежних тестов dispatcher сохранены |
 
 | 25 | Чтение файлов PR расходует REST после исчерпания лимита? GraphQL-снимок сверяет base/head, число файлов, курсор и отказывает при неизвестном типе изменения? | OSHIBKI #1056; [run 43362923355](https://github.com/mpaykin1/meta6-lab/actions/runs/43362923355) | scripts/lovushki/mutate-reference-snapshot.mjs (5 мутаций) |
+
+| 26 | В GraphQL-снимке PR ловятся ли повторяющиеся пути между страницами, повторный cursor, неверный `totalCount` и CLOSED PR, включая обман с hardcoded номером? | [OSHIBKI #1057](../../OSHIBKI.md), [03054f0](https://github.com/mpaykin1/meta6-lab/commit/03054f0b83c4cd51a4a21f0f3cf39f5542d1392e) | `scripts/lovushki/mutate-reference-snapshot-integrity.mjs` (4 мутации) |

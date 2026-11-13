@@ -26,6 +26,26 @@
     '  animation:archerWarn .48s ease-in-out infinite;',
     '}',
     '#archerTarget.danger::after {background:#ff665b;box-shadow:0 0 20px #ff665b;}',
+    '#archerThreatHalo {',
+    '  position:fixed;inset:0;z-index:7;pointer-events:none;',
+    '  background:radial-gradient(ellipse 74% 67% at 50% 48%, transparent 58%,',
+    '    rgba(126,36,42,.08) 72%, rgba(255,82,63,.42) 100%);',
+    '  box-shadow:inset 0 0 65px rgba(255,77,62,.19);',
+    '  animation:archerThreatBreathe .65s ease-in-out infinite alternate;',
+    '  will-change:opacity;',
+    '}',
+    '#archerThreatHalo::after {',
+    '  content:"";position:absolute;inset:0;',
+    '  background:repeating-linear-gradient(132deg,transparent 0 83px,',
+    '    rgba(241,227,218,.04) 84px 86px,transparent 87px 173px);',
+    '  animation:archerThreatWind 3.2s linear infinite;',
+    '}',
+    '#archerThreatHalo[hidden]{display:none!important}',
+    '@keyframes archerThreatBreathe{from{opacity:.34}to{opacity:.9}}',
+    '@keyframes archerThreatWind{from{background-position:0 0}to{background-position:210px 0}}',
+    '@media (prefers-reduced-motion:reduce){',
+    '  #archerThreatHalo,#archerThreatHalo::after{animation:none!important}',
+    '}',
     '@keyframes archerAim {0%,100%{scale:.86}50%{scale:1.08}}',
     '@keyframes archerWarn {0%,100%{scale:.88}50%{scale:1.15}}',
     '#archerTarget[hidden],#archerMenuButton[hidden],#archerSettings[hidden]{display:none!important}',
@@ -52,6 +72,12 @@
   target.setAttribute('aria-hidden', 'true');
   target.hidden = true;
   document.body.appendChild(target);
+  // In-world danger phase also colours the viewport edges; never blocks controls.
+  const storm = document.createElement('div');
+  storm.id = 'archerThreatHalo';
+  storm.setAttribute('aria-hidden', 'true');
+  storm.hidden = true;
+  document.body.appendChild(storm);
 
   const menuButton = document.createElement('button');
   menuButton.id = 'archerMenuButton';
@@ -118,7 +144,7 @@
     const inGame = !!g && g.mode === 'play';
     // Avoid redundant DOM writes and layout invalidations every animation frame.
     if (active !== lastActive) { target.hidden = !active; lastActive = active; }
-    if (danger !== lastDanger) { target.classList.toggle('danger', danger); lastDanger = danger; }
+    if (danger !== lastDanger) { target.classList.toggle('danger', danger); storm.hidden = !danger; lastDanger = danger; }
     if (inGame !== lastMenu) { menuButton.hidden = !inGame; lastMenu = inGame; }
     if (!inGame) {
       panel.hidden = true;

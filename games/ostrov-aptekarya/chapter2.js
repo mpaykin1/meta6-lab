@@ -4,15 +4,21 @@ import * as T from 'three';
 const damp = (k, dt) => 1 - Math.exp(-k * dt);
 const near = (a, b) => Math.hypot(a.x-b.x, a.z-b.z);
 const CANDIDATES = [
-  [-17.5,-3.0], [-18.4,1.3], [-16.7,5.0], [-12.4,.9], [-14.0,-4.6], [-18.5,6.4]
+  [-14.6,-3.0], [-15.8,1.3], [-13.3,4.0], [-11.8,-.2], [-10.8,-3.8], [-16.0,5.4]
 ];
-const DOORS = [[-16.4,-1.6,.25],[-17.9,3.2,-.8],[-13.5,2.0,1.1]];
-const START = new T.Vector3(-16.7,0,-6.1);
+const DOORS = [[-13.8,-1.6,.25],[-14.8,3.2,-.8],[-11.6,1.6,1.1]];
+const START = new T.Vector3(-14.9,0,-6.1);
 export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpot, beacon, burst, audio, play, onCaught, onComplete}) {
   let active = false, done = false, pageCount = 0, doorUses = 0, caughtCount = 0;
   let invulnerable = 0, doorHint = false, lastDoorLine = false, finishing = false, drift = 0;
   let layoutHash = 'archive-unstarted';
   const sheets = [];
+  // Два локальных источника света подсвечивают руины станции: не новые модели,
+  // а реальный свет на материалах принятого мира INK, без shadow maps.
+  const archiveLights = [[-14.4,-1.6,'#e5bc85'],[-14.8,3.2,'#9cc5c9']].map(([x,z,color])=>{
+    const lamp=new T.PointLight(color,3.5,8,2);
+    lamp.position.set(x,2.7,z);lamp.visible=false;scene.add(lamp);return lamp;
+  });
   // Бумага — доска из генератора "Указатель", а не новая процедурная модель.
   const sourceSign = makers.sign();
   const signBoard = sourceSign.children.find(o => o.isMesh && o.geometry?.type === 'BoxGeometry');
@@ -48,6 +54,7 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
     .sort((a,b)=>a[0]-b[0]).slice(0,count).map(a=>a[1]);
   function begin() {
     active=true;done=false;pageCount=0;doorUses=0;caughtCount=0;
+    archiveLights.forEach(l=>l.visible=true);
     invulnerable=3;doorHint=false;lastDoorLine=false;finishing=false;drift=0;
     const selected=pick(3);layoutHash='archive-'+selected.join('');
     sheets.forEach((s,i)=>{
@@ -58,7 +65,7 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
     });
     doors.forEach(d=>{d.pivot.visible=true;d.hinge.rotation.y=d.angle=1.18;d.time=0;d.cooldown=0;d.beacon.userData.want=.28;});
     hero.position.copy(START);fixSpot(hero.position);
-    iva.group.position.set(-14.7,0,3.7);fixSpot(iva.group.position);iva.set('sleepwalk');
+    iva.group.position.set(-12.5,0,2.7);fixSpot(iva.group.position);iva.set('sleepwalk');
     audio.setMood('dusk');play('archiveIntro',null,true);
   }
   function action() {
@@ -110,7 +117,7 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
   }
   function resetAfterCaught(){
     hero.position.copy(START);fixSpot(hero.position);
-    iva.group.position.set(-14.7,0,3.7);fixSpot(iva.group.position);
+    iva.group.position.set(-12.5,0,2.7);fixSpot(iva.group.position);
     doors.forEach(d=>{d.time=0;d.cooldown=0;});
     iva.set('sleepwalk');invulnerable=5;
   }
@@ -124,7 +131,8 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
   }
   function doorNearby() {return active && doors.some(d=>near(d.pos,hero.position)<1.9 && d.time<=0 && d.cooldown<=0);}
   function hide(){
-    active=false;doors.forEach(d=>{d.pivot.visible=false;d.beacon.userData.want=0;});
+    active=false;archiveLights.forEach(l=>l.visible=false);
+    doors.forEach(d=>{d.pivot.visible=false;d.beacon.userData.want=0;});
     sheets.forEach(s=>{s.mesh.visible=false;s.beacon.userData.want=0;});
   }
   return {begin,tick,action,goal,doorNearby,resetAfterCaught,hide,beacons,

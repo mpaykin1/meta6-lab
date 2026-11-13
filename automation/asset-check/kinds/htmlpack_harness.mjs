@@ -1,8 +1,8 @@
 // Браузерный измеритель htmlpack/1. Playwright/Chrome взят из scripts/shared/verify-seven-browser.mjs.
 // node htmlpack_harness.mjs <reference/index.html> <candidate/index.html>
 import {chromium} from 'playwright-core';
-import {existsSync, readFileSync, writeFileSync, mkdtempSync, rmSync} from 'node:fs';
-import {resolve, join} from 'node:path';
+import {existsSync, readFileSync, writeFileSync, mkdtempSync, rmSync, mkdirSync} from 'node:fs';
+import {resolve, join, dirname} from 'node:path';
 import {tmpdir} from 'node:os';
 import {pathToFileURL} from 'node:url';
 import {inflateSync} from 'node:zlib';
@@ -215,7 +215,7 @@ window.__AC_RESTORE__=()=>{for(const fn of __acUndo)fn();__acUndo=[]};
 }
 async function measure(browser,file){
  const page=await browser.newPage({viewport:{width:640,height:360},deviceScaleFactor:1});
- const report={items:{},errors:[],screen_text:false};
+ const report={items:{},errors:[],screen_text:false,previews:{}};
  page.on('pageerror',e=>report.errors.push('pageerror: '+e.message));
  page.on('console',e=>{if(e.type()==='error')report.errors.push('console: '+e.text());});
  try{
@@ -240,13 +240,14 @@ async function measure(browser,file){
    const capture=async()=>{
      await page.evaluate(()=>{window.__AC_FREEZE__=true});
      await page.waitForTimeout(40);
-     const on=pixels(await page.screenshot({type:'png'}));
+     const png=await page.screenshot({type:'png'});
+     const on=pixels(png);
      await page.evaluate(id=>window.__ISOLATE__(id,false),id);
      await page.waitForTimeout(35);
      const off=pixels(await page.screenshot({type:'png'}));
      await page.evaluate(id=>window.__ISOLATE__(id,true),id);
      await page.evaluate(()=>{window.__AC_FREEZE__=false});
-     return {on,off};
+     return {on,off,png};
    };
    const first=await capture();
    const fps=await page.evaluate(()=>new Promise(done=>{
@@ -256,12 +257,61 @@ async function measure(browser,file){
    }));
    const second=await capture();
    report.items[id]=features(first.on,second.on,first.off,second.off,fps);
+   const accepted=['hero','beast','gate','obelisk','sky','fog','rain','cathedral'];
+   const selected=await page.evaluate(id=>!!window.__PACK__.items.find(it=>it.id===id)?.isNew,id);
+   if(selected||accepted.includes(id))report.previews[id]=second.png.toString('base64');
    if(await textOutsideMenu(page))report.screen_text=true;
   }
  }finally{await page.close();}
  return report;
 }
 
+// Visual acceptance evidence: each new object next to two accepted reference scenes.
+// Rendered by the same headless browser, not synthetic icons or full-screen averages.
+async function compareSheet(browser,refShots,packShots,packFile){
+  const newIds=Object.keys(packShots).filter(id=>!refShots[id]);
+  if(!newIds.length)return;
+  const pairs={
+   'sable-beast':['beast','hero'],'mask-choir':['beast','hero'],
+   'shattered-mast':['obelisk','cathedral'],'bell-spire':['obelisk','cathedral'],
+   'gate-bridge':['gate','cathedral'],'dawn-sentinel':['hero','beast'],
+   'lantern-moth':['hero','beast'],'mirror-seed':['hero','gate'],
+   'echo-keystone':['hero','gate'],'storm-heart':['sky','rain'],
+   'silver-squall':['sky','rain'],'mirror-whirlpool':['fog','gate']
+  };
+  const page=await browser.newPage({viewport:{width:1440,height:920}});
+  try{
+   const encoded=await page.evaluate(async ({newIds,refShots,packShots,pairs})=>{
+    const w=480,h=270,top=33,gap=13,height=(h+top+gap)*newIds.length;
+    const canvas=document.createElement('canvas');canvas.width=w*3;canvas.height=height;
+    const ctx=canvas.getContext('2d');ctx.fillStyle='#071627';ctx.fillRect(0,0,canvas.width,height);
+    const load=async b64=>{
+     const img=new Image();img.src='data:image/png;base64,'+b64;
+     await img.decode();return img;
+    };
+    const cache={};
+    const paint=async (key,b64,x,y,label)=>{
+     if(!b64)return;
+     const img=cache[key]||(cache[key]=await load(b64));
+     ctx.drawImage(img,x,y+top,w,h);
+     ctx.fillStyle='#0d2a44';ctx.fillRect(x,y,w,top);
+     ctx.font='bold 17px sans-serif';ctx.fillStyle='#d8f0f6';
+     ctx.fillText(label,x+12,y+22,w-20);
+    };
+    for(let i=0;i<newIds.length;i++){
+     const id=newIds[i],y=i*(h+top+gap);
+     const pair=pairs[id]||['hero','beast'];
+     await paint('r:'+pair[0],refShots[pair[0]],0,y,'Эталон · '+pair[0]);
+     await paint('r:'+pair[1],refShots[pair[1]],w,y,'Эталон · '+pair[1]);
+     await paint('p:'+id,packShots[id],2*w,y,'Новый · '+id);
+    }
+    return canvas.toDataURL('image/png').split(',')[1];
+   },{newIds,refShots,packShots,pairs});
+   const filename=join(dirname(resolve(packFile)),'_check','compare.png');
+   mkdirSync(dirname(filename),{recursive:true});
+   writeFileSync(filename,Buffer.from(encoded,'base64'));
+  }finally{await page.close();}
+}
 let browser;
 try {
   if (!refPath || !packPath) throw Error('usage: harness reference.html pack.html');
@@ -275,6 +325,9 @@ try {
     writeFileSync(cand,instrumentIsolation(readFileSync(packPath,'utf8')),'utf8');
     result.reference = await measure(browser,ref);
     result.candidate = resolve(refPath) === resolve(packPath) ? result.reference : await measure(browser,cand);
+    if(resolve(refPath)!==resolve(packPath))
+      await compareSheet(browser,result.reference.previews,result.candidate.previews,packPath);
+    delete result.reference.previews;delete result.candidate.previews;
   } finally {rmSync(temp,{recursive:true,force:true});}
   result.ok = true;
 } catch (err) {

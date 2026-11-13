@@ -14,6 +14,7 @@ import {createGirl} from './girl.js';
 import {createPost} from './post.js';
 import {createAudio} from './audio.js';
 import {createUI} from './ui.js';
+import {createChapter2} from './chapter2.js';
 
 const makers = {...objectMakers, ...extraObjectMakers, ...settlementMakers, robot: createFallenRobot};
 const damp = (k, dt) => 1 - Math.exp(-k * dt);
@@ -166,7 +167,11 @@ const ui = createUI({
   onSound() { audio.setEnabled(!audio.enabled); return audio.enabled; },
   onPause(open) { paused = open || state === 'title'; },
   onSkip() { if (dlg.cur) dlg.t = dlg.dur; },
-  onAction() { useDust(); if (state === 'grab') struggle += charges > 0 ? 0 : .12; }
+  onAction() {
+    if(state === 'archive'){chapter2.action();return;}
+    useDust(); if (state === 'grab') struggle += charges > 0 ? 0 : .12;
+  },
+  onNext() { beginChapter2(); }
 });
 ui.bind(renderer.domElement);
 const dlg = {queue: [], cur: null, t: 0, dur: 0, idle: 0, gap: 0};
@@ -194,6 +199,10 @@ let day = 0, struggle = 0, lastFlip = 0, stateT = 0, chaseT = 0, glitchSpike = 0
 let flags = {}, ambientIx = 0, barkIx = 0, barkT = 0, checkpoint = START.clone(), afterWaterT = -1, warm = 0;
 let yaw = -.62, pitch = .92, zoom = 1, viewH = 15, shake = 0, elapsed = 0, previous = 0, stepT = 0;
 const heroVel = new T.Vector3(), heroDir = V(0, 1), focus = START.clone(), desired = new T.Vector3();
+const chapter2 = createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpot, beacon, burst, audio, play,
+  onCaught() {setState('archiveCaught');fadeTo=1;glitchSpike=.55;audio.stab();play('archiveCaught',null,true);},
+  onComplete() {setState('chapter2End');fadeTo=0;day=0;audio.setMood('calm');ui.end(true,2);}
+});
 
 function setState(s) { state = s; stateT = 0; }
 let layoutHash = '';
@@ -205,6 +214,7 @@ function layoutSpots() {
   }));
 }
 function reset() {
+  chapter2.hide(); ui.mode('dust'); ui.end(false,1);
   layoutSpots(); heard = 0;
   stage = 0; counts = {herbs: 0, shrooms: 0, water: 0}; charges = 0; day = 0; struggle = 0; chaseT = 0;
   flags = {}; ambientIx = 0; barkIx = 0; afterWaterT = -1; fade = 0; fadeTo = 0; warm = 0;
@@ -215,6 +225,11 @@ function reset() {
   audio.setMood('calm');
 }
 function begin() { setState('walk'); stage = 1; herbs.forEach(h => h.beacon.userData.want = 1); play('intro'); }
+function beginChapter2() {
+  if (state !== 'ending') return;
+  ui.end(false); ui.mode('archive');day=1;fade=fadeTo=0;warm=0;
+  heroVel.set(0,0,0);focus.copy(hero.position);setState('archive');chapter2.begin();
+}
 reset();
 
 function take(it) {
@@ -264,6 +279,10 @@ function botInput(dt) {
     else if (stage === 2) target = shrooms.find(h => !h.taken)?.pos;
     else if (stage === 3) target = V(...SPOTS.water);
   } else if (state === 'chase' || state === 'tell') target = HOME;
+  else if (state === 'archive') {
+    chapter2.botActionIfNear();
+    const goal=chapter2.goal();if(goal)target=V(goal.x,goal.y);
+  }
   if (state === 'grab' && api.botPassive) return {x: 0, y: 0};
   if (state === 'grab') { botFlip += dt; if (botFlip > .09) { botFlip = 0; botSide *= -1; } return {x: botSide, y: 0}; }
   if (!target) return {x: 0, y: 0};
@@ -288,7 +307,7 @@ function simulate(dt, mx, my) {
   tickDialogue(dt);
 
   // --- аптекарь: инерция, а не рывки ---
-  const canMove = ['walk', 'chase', 'tell', 'ending'].includes(state);
+  const canMove = ['walk', 'chase', 'tell', 'ending', 'archive'].includes(state);
   const len = Math.hypot(mx, my); if (len > 1) { mx /= len; my /= len; }
   const want = canMove ? V(Math.cos(yaw) * mx + Math.sin(yaw) * my, -Math.sin(yaw) * mx + Math.cos(yaw) * my).multiplyScalar(state === 'chase' ? 3.45 : state === 'tell' ? 1.1 : 3.1) : V(0, 0);
   heroVel.lerp(want, damp(9, dt));
@@ -371,6 +390,13 @@ function simulate(dt, mx, my) {
     } else if (flat(hero.position, ROBOT) < 3.6) {
       setState('caught'); flags.caughtN = (flags.caughtN || 0) + 1; fadeTo = 1; glitchSpike = 1; play('caught', null, true); audio.stab();
     }
+  } else if (state === 'archive') {
+    chapter2.tick(dt,elapsed);
+  } else if (state === 'archiveCaught') {
+    if (stateT > 2.15) {
+      chapter2.resetAfterCaught();heroVel.set(0,0,0);focus.copy(hero.position);
+      fadeTo=0;setState('archive');
+    }
   } else if (state === 'caught') {
     chaseT += dt;
     if (stateT > 3.4) {
@@ -425,12 +451,12 @@ function animate(ms) {
   let mx = input.x, my = input.y;
   if (api.bot && !paused) ({x: mx, y: my} = botInput(dt));
   // Симуляция идёт подшагами по 50 мс: на слабом устройстве игра медленнее рисуется, но не замедляется.
-  const steps = Math.min(8, Math.max(1, Math.ceil(dt / .05)));
+  const steps = Math.min(32, Math.max(1, Math.ceil(dt / .05)));
   for (let k = 0; k < steps; k++) simulate(dt / steps, mx, my);
   const sig = iva.state.signal, robotNear = 1 - Math.min(1, flat(hero.position, ROBOT) / 22);
 
   // --- свет и сумерки ---
-  const dusk = state === 'ending' ? 0 : Math.pow(day, 1.25);
+  const dusk = ['ending','chapter2End'].includes(state) ? 0 : Math.pow(day, 1.25);
   ambient.color.set('#fff3d7').lerp(new T.Color('#aeb8d4'), dusk); ambient.intensity = 2.2 - dusk * .75;
   sun.color.set('#fff0cd').lerp(new T.Color('#e48c62'), dusk); sun.intensity = 1.4 - dusk * .8;
   scene.fog.color.set('#e7e5d6').lerp(new T.Color('#b9bfcc'), dusk);
@@ -448,11 +474,11 @@ function animate(ms) {
   }
 
   // --- маяки, частицы ---
-  for (const b of [...herbs, ...shrooms, ...spares].map(i => i.beacon).concat(waterBeacon, homeBeacon)) tickBeacon(b, elapsed, raw);
+  for (const b of [...herbs, ...shrooms, ...spares].map(i => i.beacon).concat(waterBeacon, homeBeacon, ...chapter2.beacons)) tickBeacon(b, elapsed, raw);
   tickParticles(raw);
 
   // --- камера: тяжёлая, с запаздыванием и упреждением ---
-  const chaseCam = ['chase', 'grab', 'tell', 'caught'].includes(state);
+  const chaseCam = ['chase', 'grab', 'tell', 'caught', 'archive', 'archiveCaught'].includes(state);
   desired.set(hero.position.x + heroVel.x * .35, .6, hero.position.z + heroVel.z * .35);
   if (chaseCam) desired.lerp(iva.group.position.clone().setY(.6), .25);
   focus.lerp(desired, damp(state === 'ending' ? 1.5 : 3.6, fr));
@@ -466,7 +492,7 @@ function animate(ms) {
   camera.lookAt(focus.x + sx, focus.y, focus.z + sz);
 
   // --- звук и пост-обработка ---
-  audio.setMood(state === 'chase' || state === 'grab' || state === 'tell' || state === 'caught' ? 'chase' : day > .45 && state === 'walk' ? 'dusk' : 'calm');
+  audio.setMood(state === 'chase' || state === 'grab' || state === 'tell' || state === 'caught' ? 'chase' : day > .45 && (state === 'walk' || state === 'archive' || state === 'archiveCaught') ? 'dusk' : 'calm');
   audio.setLevels({robot: Math.max(robotNear, sig * .8), chase: state === 'chase' || state === 'grab' ? Math.min(1, .35 + chaseT / 60 + (state === 'grab' ? .5 : 0)) : 0, rain: .4 + dusk * .5});
   glitchSpike = Math.max(0, glitchSpike - raw * 2.6);
   fade += (fadeTo - fade) * damp(fadeTo > fade ? 1.6 : 1.1, raw);
@@ -475,7 +501,9 @@ function animate(ms) {
   u.time.value = elapsed; u.signal.value = sig * (state === 'walk' ? .6 : 1); u.dusk.value = dusk; u.fade.value = fade; u.warm.value = warm;
   u.glitch.value = Math.min(1, glitchSpike + (state === 'grab' ? .3 + struggle * .2 : 0) + (state === 'caught' ? .6 : 0) + sig * .06);
   ui.pips(counts, stage === 4 && state !== 'walk' ? 0 : stage);
-  ui.action(counts.shrooms > 0 && state !== 'ending', charges, state === 'grab' || (state === 'chase' && flat(hero.position, iva.group.position) < 2.6 && charges > 0));
+  if (state === 'archive') ui.action(chapter2.doorNearby(),1,false);
+  else ui.action(counts.shrooms > 0 && !['ending','chapter2End'].includes(state), charges,
+    state === 'grab' || (state === 'chase' && flat(hero.position, iva.group.position) < 2.6 && charges > 0));
 
   valley.tick(elapsed, focus, false);
   paint.tick(ms);
@@ -491,9 +519,16 @@ Object.defineProperties(api, Object.getOwnPropertyDescriptors({
     api.start(); dlg.queue.length = 0; dlg.cur = null; stage = 4; counts = {herbs: 3, shrooms: 2, water: 1}; charges = 2; day = 1;
     hero.position.set(7.5, 0, 10.8); iva.group.position.set(6.3, 0, 10.7); focus.copy(hero.position); startTell(false);
   },
-  get layoutHash() { return layoutHash; }, get progress() { return heard + counts.herbs + counts.shrooms + counts.water; },
-  get menuOpen() { return ui.menuOpen; }, get ended() { return state === 'ending'; },
+  get layoutHash() { return chapter2.active || chapter2.done ? layoutHash+':'+chapter2.layoutHash : layoutHash; },
+  get progress() { return heard + counts.herbs + counts.shrooms + counts.water + chapter2.pages + chapter2.doorsClosed; },
+  get chapter() {return ['archive','archiveCaught','chapter2End'].includes(state) ? 2 : 1;},
+  get chapter1Ended() {return state === 'ending';},
+  get archivePages() {return chapter2.pages;},
+  get archiveDoors() {return chapter2.doorsClosed;},
+  get archiveCaught() {return chapter2.caught;},
+  get menuOpen() { return ui.menuOpen; }, get ended() { return state === 'chapter2End'; },
   goal() {
+    if(state === 'archive')return chapter2.goal();
     if (state === 'walk') {
       const it = stage === 1 ? herbs.find(h => !h.taken) : stage === 2 ? shrooms.find(h => !h.taken) : null;
       if (it) return {x: it.pos.x, y: it.pos.z};
@@ -504,6 +539,13 @@ Object.defineProperties(api, Object.getOwnPropertyDescriptors({
   },
   get caughtCount() { return flags.caughtN || 0; },
   start() { if (state === 'title') { ui.title(false); paused = false; audio.start(); begin(); } },
+  startChapter2() {beginChapter2();},
+  debugChapter2() {
+    if(state==='title')api.start();
+    if(state==='walk'||state==='ending'){
+      dlg.queue.length=0;dlg.cur=null;ui.say(null);setState('ending');beginChapter2();
+    }
+  },
   skipDialogue() { dlg.queue.length = 0; if (dlg.cur) dlg.t = dlg.dur; },
   heroPos: () => ({x: hero.position.x, z: hero.position.z})
 }));

@@ -1,7 +1,5 @@
 name: Link Guard 200
 on:
-  schedule:
-    - cron: '17 * * * *'
   workflow_run:
     workflows: ['LAB Pages']
     types: [completed]

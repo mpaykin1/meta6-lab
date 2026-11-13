@@ -185,6 +185,8 @@ async function motionProof(page, viewport) {
     maxLegDifference: +maxLegDifference.toFixed(2),
     changedPixels,
     moved: final.x - initial.x > 1.5,
+    // The first tower has 5-6 top tiles; its right-hand safe limit is 1.9 m.
+    grounded: final.x - initial.x <= 2.05,
     animated: maxLegDifference > 1.05,
     visible: changedPixels > 200,
     released: stopped
@@ -200,8 +202,12 @@ function buildMotionMutant(kind) {
   let text = fs.readFileSync(bundle, 'utf8');
   const mutations = {
     position: [
-      'position.x = Math.max(cur.stand.x - 6, Math.min(cur.stand.x + 6, previousX + RUN.velocity * dt));',
+      'position.x = Math.max(leftEdge, Math.min(rightEdge, previousX + RUN.velocity * dt));',
       'position.x = previousX;'
+    ],
+    grounding: [
+      'position.x = Math.max(leftEdge, Math.min(rightEdge, previousX + RUN.velocity * dt));',
+      'position.x = previousX + RUN.velocity * dt;'
     ],
     animation: [
       'archer.legs[0].rotation.x += step * 0.75;',
@@ -279,7 +285,8 @@ try {
     const passed = !before.state && !before.visual && after.state && after.visual
       && !beforeThreat.state && !beforeThreat.visual && afterThreat.state && afterThreat.visual
       && !beforeMotion.moved && !beforeMotion.animated
-      && afterMotion.moved && afterMotion.animated && afterMotion.visible && afterMotion.released
+      && afterMotion.moved && afterMotion.grounded && afterMotion.animated
+      && afterMotion.visible && afterMotion.released
       && beforeFps <= afterFps && b.errors.length === 0 && a.errors.length === 0;
     console.log(JSON.stringify({ viewport, before, after, beforeMotion, afterMotion, beforeThreat, afterThreat, beforeFps, afterFps,
       errorsBefore: b.errors, errorsAfter: a.errors, passed }));
@@ -287,13 +294,13 @@ try {
     await b.context.close();
     await a.context.close();
   }
-  if (!selftest) for (const kind of ['position', 'animation']) {
+  if (!selftest) for (const kind of ['position', 'animation', 'grounding']) {
     const mutantRoot = buildMotionMutant(kind);
     const mutantServer = await serve(mutantRoot);
     try {
       const { page, context, errors } = await openGame(browser, mutantServer.url, 'mutant-' + kind, 'desktop');
       const proof = await motionProof(page, 'desktop');
-      const caught = kind === 'position' ? !proof.moved : !proof.animated;
+      const caught = kind === 'position' ? !proof.moved : kind === 'grounding' ? !proof.grounded : !proof.animated;
       console.log(JSON.stringify({ mutation: kind, caught, proof, errors }));
       success &&= caught;
       await context.close();

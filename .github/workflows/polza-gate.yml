@@ -30,6 +30,6 @@ jobs:
         run: node scripts/polza/mutate-polza.mjs
       - name: Reject useless or unproven pull requests
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: node scripts/polza/gate.mjs
+        run: node scripts/polza/gate.mjs < "$GITHUB_EVENT_PATH"

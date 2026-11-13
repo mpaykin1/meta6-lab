@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-13T08:42:41.181Z",
+  "generated_at": "2026-11-13T09:56:31.667Z",
   "sha": {
-    "lab": "cffa925c0602c86830b65f819abb5c35d23dcfd4",
+    "lab": "67cbadbb3b4f3b9d9ccdd1ae18b362510f0ecfb7",
     "mg": "161207e8c03ff6d7dc850a9264d90d373b18bea7"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43395207047",
+  "run": "нет данных",
   "review": {
     "protected": [
       {
@@ -108,46 +108,34 @@
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": [
-          ".github/workflows/status-dlya-claude.yml",
-          "scripts/status/selftest.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": [
-          ".github/workflows/investigation-snapshot.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": [
-          ".github/workflows/lab-portal-visits.yml",
-          "scripts/lab/mutate-portal-links.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
-        ]
+        "paths": "нет данных"
       }
     ],
     "redLab": [
       {
+        "workflow": "MG Dispatcher",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43402996691",
+        "step": "Run node scripts/dispetcher/run.mjs"
+      },
+      {
         "workflow": "ZADACHI watch",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43394010907",
         "step": "Update ZADACHI.md from GitHub"
-      },
-      {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43394010882",
-        "step": "Run node scripts/dispetcher/run.mjs"
       }
     ],
     "redMg": [],
@@ -160,7 +148,7 @@
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | open | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
       "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
       "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
-      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
+      "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | open dirty | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
       "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
@@ -551,40 +539,28 @@
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": [
-          ".github/workflows/status-dlya-claude.yml",
-          "scripts/status/selftest.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": [
-          ".github/workflows/investigation-snapshot.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": [
-          ".github/workflows/lab-portal-visits.yml",
-          "scripts/lab/mutate-portal-links.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
-        ]
+        "paths": "нет данных"
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 1747,
+      "count": 1752,
       "folders": "нет данных"
     },
     "mg": {
@@ -595,57 +571,57 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "прошла",
+      "bot": "нет данных",
       "storefront": "да"
     }
   ],

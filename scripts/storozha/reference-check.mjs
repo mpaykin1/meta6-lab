@@ -1,6 +1,7 @@
 // Trusted-main PR guard. Never executes the PR's code.
 import {execFileSync} from 'node:child_process';
 import {referenceGate, reconcileSection} from './core.mjs';
+import {referenceSnapshot} from './reference-snapshot.mjs';
 
 const repo = process.env.STOROZHA_REPO;
 const token = process.env.STOROZHA_TOKEN;
@@ -18,18 +19,7 @@ async function api(path, method = 'GET', body) {
   if (!r.ok) throw Error(method + ' ' + path + ' HTTP ' + r.status + ' ' + out.message);
   return out;
 }
-async function prFiles() {
-  const files = [];
-  for (let page = 1; page <= 10; page++) {
-    const chunk = await api('/pulls/' + number + '/files?per_page=100&page=' + page);
-    files.push(...chunk);
-    if (chunk.length < 100) return files;
-  }
-  throw Error('Too many PR files — cannot verify reference safety');
-}
-const pr = await api('/pulls/' + number);
-if (pr.base.ref !== 'main') throw Error('PR must target main');
-const files = await prFiles();
+const {pr, files} = await referenceSnapshot(repo, token, number);
 // The checkout is trusted main; only read old tree metadata.
 const stdout = execFileSync('git', ['ls-tree', '-r', '--name-only',
   pr.base.sha, 'reference/'], {encoding: 'utf8', maxBuffer: 8 * 1024 * 1024});

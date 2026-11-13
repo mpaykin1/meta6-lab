@@ -8096,6 +8096,32 @@ window.__isle = {
   skyBolt(x, z) { skyBolt(x, z); },
 };
 
+
+/* B2 observation only: this getter never changes controls, physics or progress. */
+Object.defineProperty(window, '__META_BOT__', {
+  configurable: false,
+  enumerable: false,
+  get() {
+    const position = { x: player.pos.x, y: player.pos.y, z: player.pos.z };
+    const beaconPosition = world && world.beacon
+      ? { x: world.beacon.x, y: world.beacon.y, z: world.beacon.z }
+      : null;
+    const finished = G.state === 'victory';
+    const dead = G.state === 'dead' || player.hp <= 0;
+    return Object.freeze({
+      player: Object.freeze(position),
+      hero: Object.freeze({ ...position, alive: !dead, hp: player.hp }),
+      level: 1,
+      totalLevels: 1,
+      alive: !dead,
+      completed: finished,
+      progress: G.total > 0 ? Math.max(0, Math.min(1, G.collected / G.total)) : 0,
+      goal: beaconPosition && Object.freeze(beaconPosition),
+      state: G.state
+    });
+  }
+});
+
 </script>
 
 </body></html>

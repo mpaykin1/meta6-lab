@@ -70,6 +70,7 @@ const pass=errors.length===0&&strayText===0&&(
   mode==='passive'? result==='CAUGHT_AND_RETRY':
   mode==='chase'||mode==='chapter1'?result==='CHAPTER_I_END':
   result==='CHAPTER_II_END'&&archiveSeen&&last.pages===3&&last.doors>=1&&
+    last.archiveCaught<=8&&
     (mode!=='full'||chapter1Seen)
 ) && (!artifacts || !['full','archive'].includes(mode) || screenshots);
 console.log(JSON.stringify({mode,result,chapter1Seen,archiveSeen,screenshots,

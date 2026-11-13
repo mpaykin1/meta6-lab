@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "title": "INK · Павший великан",
+  "reference_id": "ink-fallen-guardian",
+  "archive_name": "INK · Павший великан.zip",
+  "archive_sha256": "2ee6bab4d3ed4572b500b3b68a1c952a28d4dcbea1e369bac8489ca9c1daf078",
+  "archive_size_bytes": 1412929,
+  "source": "user-provided ZIP 2026-11-13",
+  "format": "standalone Three.js/INK scene",
+  "status": "source ZIP fingerprinted; source bytes not committed in this PR",
+  "files": [
+    {
+      "path": "index.html",
+      "git_blob_sha": "ebab783cd46d1d2a4a5eeb90951bd69ee07244c2",
+      "size_bytes": 1848
+    },
+    {
+      "path": "client.js",
+      "git_blob_sha": "a7cb118d0f658e648b452baea1efed9a352534b0",
+      "size_bytes": 7764
+    },
+    {
+      "path": "ink-batch.js",
+      "git_blob_sha": "1662ed4889794e67c82e4e0d2b9627e05ffe5693",
+      "size_bytes": 2613
+    },
+    {
+      "path": "ink-entry.js",
+      "git_blob_sha": "ab2f686d747597acaeb602ec16a63774bf22a4cc",
+      "size_bytes": 140
+    },
+    {
+      "path": "ink-extras.js",
+      "git_blob_sha": "b7bc25dd2a310499ecd2adb5021b214e4a188e80",
+      "size_bytes": 8884
+    },
+    {
+      "path": "ink-fallen-robot.js",
+      "git_blob_sha": "5caaa7f896d57bdf19c99462f6f492c3d41956a9",
+      "size_bytes": 11064
+    },
+    {
+      "path": "ink-forest.js",
+      "git_blob_sha": "58894b822598330c5e2b2e41898a59ac18f2393e",
+      "size_bytes": 16403
+    },
+    {
+      "path": "ink-objects.js",
+      "git_blob_sha": "1c504dbbe29233b8034cd472e869d2b62d0cd0f3",
+      "size_bytes": 6169
+    },
+    {
+      "path": "ink-optics.js",
+      "git_blob_sha": "234babf38671763465f96335b8cb3776d1facfa5",
+      "size_bytes": 2305
+    },
+    {
+      "path": "ink-settlement.js",
+      "git_blob_sha": "8f7632bc320c3b76a5366eac534e3c504c9b4328",
+      "size_bytes": 7370
+    },
+    {
+      "path": "ink-world.js",
+      "git_blob_sha": "b1e896ee7484983ae7fd5795c2f16f0e30d7a8b7",
+      "size_bytes": 15596
+    },
+    {
+      "path": "shared/living-watercolor-3d.js",
+      "git_blob_sha": "ad5626572fb9a3d61ea8f2e8ea535f558b744c5c",
+      "size_bytes": 28519
+    },
+    {
+      "path": "shared/living-watercolor-generators.js",
+      "git_blob_sha": "32d6952209f419058b460c171d5ca6dab092416e",
+      "size_bytes": 12222
+    },
+    {
+      "path": "shared/living-watercolor-reference-gate.js",
+      "git_blob_sha": "dc1339c262331648efa795a31eef5e0583b7d6d7",
+      "size_bytes": 5680
+    },
+    {
+      "path": "three.module.js",
+      "git_blob_sha": "fcf5e09d8ada1f25b9c3218ce9ce65e67fb54eb5",
+      "size_bytes": 1284652
+    }
+  ],
+  "upstream_prs": [
+    "https://github.com/mpaykin1/meta6-lab/pull/283",
+    "https://github.com/mpaykin1/meta6-lab/pull/284"
+  ],
+  "viewer_status": "PENDING merge; 200 not confirmed"
+}

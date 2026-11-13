@@ -222,3 +222,5 @@
 - БЕЗ ТОРМОЗОВ: #254 [d9986a68](https://github.com/mpaykin1/meta6-lab/commit/d9986a68) содержит merge main и восстановление старого теста без удалений (2/0), 3+18 прежних ловушек и 3 новые локально PASS. Новый append-only gate включён в auditor. Следующий шаг: объединить #252/#269/#275/#282 в #254 и проверить Actions.
 
 - БЕЗ ТОРМОЗОВ: #269 перенесён обычным merge в единый [#254, cb9de124](https://github.com/mpaykin1/meta6-lab/commit/cb9de124); [дубль #269](https://github.com/mpaykin1/meta6-lab/pull/269) закрыт без merge в main. Все старые строки mutation-теста сохранены. Далее #275 и #282.
+
+- БЕЗ ТОРМОЗОВ: #275 перенесён обычным merge в [#254, 2e8e04c6](https://github.com/mpaykin1/meta6-lab/commit/2e8e04c6); [дубль #275](https://github.com/mpaykin1/meta6-lab/pull/275) закрыт. Шесть дополнительных мутаций локально PASS; старые тесты сохранены. Далее #282.

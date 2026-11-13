@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "id": "living-watercolor",
+  "password": "INK",
+  "aliases": [
+    "INK",
+    "эталон INK",
+    "Living Watercolor",
+    "живая акварель"
+  ],
+  "title": "Living Watercolor 3D — живой акварельный рендер",
+  "reference_type": "owner-approved-visual-technology",
+  "collection": "META GAMES (МГ)",
+  "date_added": "2026-11-11",
+  "status": "OWNER_PASS",
+  "source": {
+    "repository": "mpaykin1/meta6",
+    "branch": "main",
+    "copied_from": "mpaykin1/meta6-lab demos/living-watercolor/ (byte-identical)",
+    "files": [
+      {
+        "path": "ink/index.html",
+        "git_blob_sha": "bb6b9f0dc1aa5293c9562cfb33cbfbcb2ef84ffb"
+      },
+      {
+        "path": "ink/client.js",
+        "git_blob_sha": "a7cb118d0f658e648b452baea1efed9a352534b0"
+      },
+      {
+        "path": "ink/shared/living-watercolor-3d.js",
+        "git_blob_sha": "1286ca7b6641f7b6ca9aa6cfe319d6c4c0c98bf6"
+      },
+      {
+        "path": "ink/shared/living-watercolor-generators.js",
+        "git_blob_sha": "32d6952209f419058b460c171d5ca6dab092416e"
+      },
+      {
+        "path": "ink/shared/living-watercolor-reference-gate.js",
+        "git_blob_sha": "dc1339c262331648efa795a31eef5e0583b7d6d7"
+      }
+    ]
+  },
+  "viewer": {
+    "url": "https://mpaykin1.github.io/meta6/ink/",
+    "lab_url": "https://mpaykin1.github.io/meta6-lab/demos/living-watercolor/",
+    "lab_http_200_proof": "https://github.com/mpaykin1/meta6-lab/actions/runs/43015257477/job/130504589418"
+  },
+  "approved_features": [
+    "временная связность акварельных мазков",
+    "живой акварельный стиль в 3D",
+    "сцены: дом, дерево, вулкан, станция",
+    "управление мышью и касанием"
+  ],
+  "reuse_scope": "оригинальный код визуального эффекта и авторские материалы; сторонние зависимости только по их лицензии",
+  "external_dependency": "Three.js 0.165.0 via unpkg CDN; dependency is not an owner-authored asset",
+  "owner_decision": "PASS, 2026-11-11; добавить в эталоны МГ и МГЛ под именем INK",
+  "notes": "Это эталон графической технологии, а не дополнительная игра в перечне 24 игр. Исходники не изменять."
+}

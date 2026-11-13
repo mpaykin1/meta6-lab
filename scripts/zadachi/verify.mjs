@@ -103,5 +103,51 @@ const severity = apply(doc([row('взято', 'bad', 'lab/bad', '2026-11-10 11:5
 ok('сводка конфликтов и список Чинить сейчас', /⚔ конфликт 1 · ❌ красные 0/.test(severity) &&
   /Чинить сейчас:.*#36.*lab\/bad/.test(severity));
 
+
+// УСКОРЕНИЕ: частичные API-ответы не могут менять таблицу.
+let refusedIncompleteList = false;
+try {
+  collect([], {repo: 'o/r', mgRepo: 'o/meta6', zanyato: [],
+    api: path => path.includes('/pulls?state=open&') ? null : []});
+} catch (error) {
+  refusedIncompleteList = /Incomplete open PR list/.test(error.message);
+}
+ok('API 403/429 instead of PR list: preserve the last complete snapshot', refusedIncompleteList);
+
+const incompleteCheckApi = path => {
+  if (path === 'repos/o/r/pulls?state=open&per_page=100&page=1') {
+    return [{number: 77, title: 'Pending', state: 'open', merged_at: null,
+      created_at: '2026-11-10T11:50:00Z', head: {ref: 'lab/check-77', sha: 'sha77'}}];
+  }
+  if (path === 'repos/o/r/pulls/77') return {mergeable: true, mergeable_state: 'clean'};
+  if (path.includes('/check-runs?')) return null;
+  return [];
+};
+let refusedIncompleteChecks = false;
+try {
+  collect([], {repo: 'o/r', mgRepo: 'o/meta6', zanyato: [], api: incompleteCheckApi});
+} catch (error) {
+  refusedIncompleteChecks = /Incomplete check-runs/.test(error.message);
+}
+ok('API failure checking PR checks must abort, not clear failed checks', refusedIncompleteChecks);
+
+const reuse = row('взято', 'reused', 'lab/reused', '2026-11-10 07:00');
+const reusedPulls = [
+  {number: 81, title: 'old', state: 'closed', merged_at: '2026-11-08T00:00:00Z',
+    merge_commit_sha: 'oldsha', created_at: '2026-11-07T00:00:00Z',
+    head: {ref: 'lab/reused', sha: 'oldsha'}},
+  {number: 82, title: 'new', state: 'closed', merged_at: null,
+    created_at: '2026-11-10T00:00:00Z', head: {ref: 'lab/reused', sha: 'newsha'}},
+];
+const reusedData = collect(parseRows(doc([reuse])), {
+  repo: 'o/r', mgRepo: 'o/meta6', zanyato: [],
+  api: path => path.includes('state=open') ? [] :
+    path.includes('state=all&head=') ? reusedPulls : [],
+});
+const reusedRow = parseRows(apply(doc([reuse]), reusedData, now))
+  .find(x => x.task === 'reused');
+ok('reused branch: old merged PR cannot mask current closed PR',
+  !!reusedRow && /ЗАКРЫТО/.test(reusedRow.status) && /#82/.test(reusedRow.pr));
+
 console.log(fail ? `ZADACHI_VERIFY_FAIL ${fail}` : 'ZADACHI_VERIFY_OK');
 process.exit(fail ? 1 : 0);

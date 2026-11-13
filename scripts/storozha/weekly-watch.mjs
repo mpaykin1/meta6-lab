@@ -6,7 +6,7 @@ import {openPulls} from './gh-list.mjs';
 const repo = process.env.STOROZHA_REPO;
 const token = process.env.STOROZHA_TOKEN;
 const mode = process.env.STOROZHA_MODE;
-if (!repo || !token || !/^[\w.-]+\/[\w.-]+$/.test(repo)) throw Error('Missing trusted repo/token');
+if (repo !== 'mpaykin1/meta6-lab' || !token) throw Error('Only trusted meta6-lab is writable');
 if (!['quota', 'maintenance'].includes(mode)) throw Error('Expected quota or maintenance');
 const base = 'https://api.github.com/repos/' + repo;
 const headers = {Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json',
@@ -94,8 +94,8 @@ if (mode === 'quota') {
     const fresh = await api('/pulls/' + pr.number);
     if (fresh.state !== 'open' || fresh.head.sha !== pr.head.sha) continue;
     const commit = await api('/commits/' + fresh.head.sha);
-    const date = Date.parse(commit.commit?.committer?.date || commit.commit?.author?.date || '');
-    if (now - date < THREE_DAYS) continue;
+    const lastCommitAt = commit.commit?.committer?.date || commit.commit?.author?.date || '';
+    if (!staleDecision({state: fresh.state, lastCommitAt}, now).close) continue;
     await api('/issues/' + pr.number + '/comments', 'POST',
       {body: 'закрыт сторожем как заброшенный, ветка сохранена'});
     await api('/pulls/' + pr.number, 'PATCH', {state: 'closed'});

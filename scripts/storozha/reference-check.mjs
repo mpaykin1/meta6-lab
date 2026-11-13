@@ -1,11 +1,14 @@
 // Trusted-main PR guard. Never executes the PR's code.
 import {execFileSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
 import {referenceGate, reconcileSection} from './core.mjs';
 
 const repo = process.env.STOROZHA_REPO;
 const token = process.env.STOROZHA_TOKEN;
 const number = Number(process.env.STOROZHA_PR_NUMBER);
-if (!repo || !token || !Number.isInteger(number) || number < 1) throw Error('Missing PR guard inputs');
+if (repo !== 'mpaykin1/meta6-lab' || !token || !Number.isInteger(number) || number < 1) {
+  throw Error('Only trusted meta6-lab PRs are writable');
+}
 const root = 'https://api.github.com/repos/' + repo;
 const headers = {Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json',
   'X-GitHub-Api-Version': '2022-11-28'};
@@ -34,7 +37,9 @@ const files = await prFiles();
 const stdout = execFileSync('git', ['ls-tree', '-r', '--name-only',
   pr.base.sha, 'reference/'], {encoding: 'utf8', maxBuffer: 8 * 1024 * 1024});
 const existing = stdout.trim() ? stdout.trim().split('\n') : [];
-const errors = referenceGate(files, existing);
+const protectedPaths = readFileSync('.github/protected/paths.txt', 'utf8').split(/\r?\n/)
+  .map(line => line.trim()).filter(line => line && !line.startsWith('#'));
+const errors = pr.state === 'closed' ? [] : referenceGate(files, existing, protectedPaths);
 const row = '| #' + number + ' | ' + pr.head.ref + ' | ' +
   errors.join('; ').replace(/[\r\n|]/g, ' ') + ' | ' +
   new Date().toISOString().slice(0, 10) + ' |';

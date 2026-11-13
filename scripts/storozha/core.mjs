@@ -58,17 +58,27 @@ export function quota(prs, number, now = Date.now()) {
     message: reject ? 'Сначала доведи старые PR: ' + selected.map(p => '#' + p.number).join(', ') : ''};
 }
 
-export function referenceGate(files, existingPaths) {
+export function referenceGate(files, existingPaths, protectedPaths = []) {
   const errors = [], additions = [];
   const existing = new Set(existingPaths);
   const paths = [...existing];
   for (const file of files) {
     const p = file.filename, status = file.status;
+    // GitHub reports a rename once: the old protected path must be checked as a removal.
+    if (file.previous_filename && file.previous_filename !== p) {
+      errors.push(...referenceGate([
+        {filename: file.previous_filename, status: 'removed'}
+      ], existingPaths, protectedPaths));
+    }
+    if (protectedPaths.some(root => p === root || p.startsWith(root + '/'))) {
+      errors.push(p + ': защищённый путь из реестра — только Claude');
+    }
     if (/^reference\//.test(p)) {
       if (status !== 'added') errors.push(p + ': существующий эталон нельзя изменять или удалять');
       else additions.push(p);
     }
-    const protectedScript = /^scripts\/(?:meta-bot\/|kontur\/|meta-games-guard\.sh$|storozha\/)/.test(p);
+    const protectedScript = /^scripts\/(?:meta-bot\/|kontur\/|meta-games-guard\.sh$|storozha\/)/.test(p) ||
+      /^scripts\/.*(?:guard|bot)(?:[/._-]|$)/i.test(p);
     const protectedTest = /(?:^|\/)(?:__tests?__|tests?|specs?)\//i.test(p) ||
       /(?:^|\/)(?:mutate-|verify-|selftest|test[-.])[^/]*\.[cm]?[jt]s$/i.test(p) ||
       /\.(?:test|spec)\.[cm]?[jt]sx?$/i.test(p);

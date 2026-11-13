@@ -31,3 +31,17 @@ jobs:
         run: node scripts/storozha/verify-storozha.mjs
       - name: Three-plus real breaking mutations per sentinel
         run: node scripts/storozha/mutate-storozha.mjs
+      - name: Protected rename contracts
+        if: always()
+        run: |
+          node --input-type=module -e "import * as c from './scripts/storozha/core.mjs';
+          import {verifyReferences} from './scripts/storozha/verify-resume.mjs'; verifyReferences(c)"
+      - name: Branch update contracts
+        if: always()
+        run: |
+          node --input-type=module -e "import {updateHeads} from './scripts/storozha/update-heads.mjs';
+          import {verifyUpdates} from './scripts/storozha/verify-resume.mjs'; await verifyUpdates({updateHeads})"
+      - name: Branch update and protected rename mutations
+        run: node scripts/storozha/mutate-resume.mjs
+      - name: Maintenance API behavior and mutations
+        run: node scripts/storozha/mutate-maintenance.mjs

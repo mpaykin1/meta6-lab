@@ -58,6 +58,9 @@ export function quota(prs, number, now = Date.now()) {
     message: reject ? 'Сначала доведи старые PR: ' + selected.map(p => '#' + p.number).join(', ') : ''};
 }
 
+// Ядро охраны: эти workflow меняет только Claude (остальные — сам ChatGPT при зелёных проверках).
+export const CORE_WORKFLOW = /^\.github\/workflows\/(?:storozha-[^/]+|kontur-guard|meta-games-guard|meta-bot|report-completion-guard|lab-shared-deletion-guard|pr-autofinish|sync-from-meta6)\.ya?ml$/;
+
 export function referenceGate(files, existingPaths) {
   const errors = [], additions = [];
   const existing = new Set(existingPaths);
@@ -68,12 +71,21 @@ export function referenceGate(files, existingPaths) {
       if (status !== 'added') errors.push(p + ': существующий эталон нельзя изменять или удалять');
       else additions.push(p);
     }
+    // Claude 13.11.2026 (слово владельца «чтобы не было тормозов»): «только Claude» — лишь ЯДРО охраны.
+    // Свои боты/workflow ChatGPT меняет сам; удалять workflow нельзя; старые тесты — только дописывать.
     const protectedScript = /^scripts\/(?:meta-bot\/|kontur\/|meta-games-guard\.sh$|storozha\/)/.test(p);
     const protectedTest = /(?:^|\/)(?:__tests?__|tests?|specs?)\//i.test(p) ||
       /(?:^|\/)(?:mutate-|verify-|selftest|test[-.])[^/]*\.[cm]?[jt]s$/i.test(p) ||
       /\.(?:test|spec)\.[cm]?[jt]sx?$/i.test(p);
-    if (/^\.github\/workflows\//.test(p) || (protectedScript || protectedTest) && status !== 'added') {
-      errors.push(p + ': изменение защищённого workflow/охранника/бота/теста — только Claude');
+    const workflow = /^\.github\/workflows\//.test(p);
+    const coreWorkflow = CORE_WORKFLOW.test(p);
+    if (coreWorkflow || protectedScript && status !== 'added') {
+      errors.push(p + ': изменение ЯДРА охраны — только Claude');
+    } else if (workflow && status !== 'added' && status !== 'modified') {
+      errors.push(p + ': workflow нельзя удалять или переименовывать — только Claude');
+    } else if (protectedTest && status !== 'added' &&
+      (status !== 'modified' || Number(file.deletions) !== 0)) {
+      errors.push(p + ': старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude');
     }
   }
   if (additions.length) {

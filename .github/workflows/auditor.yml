@@ -38,6 +38,8 @@ jobs:
       - name: Verify three auditor mutation traps
         run: node scripts/auditor/mutate-auditor.mjs
       - name: Audit five agent cycles
+        # PRs prove the complete auditor against fixtures above; publish live reports only from trusted runs.
+        if: github.event_name != 'pull_request'
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

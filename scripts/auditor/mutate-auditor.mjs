@@ -104,3 +104,4 @@ await import("./mutate-auditor-stall.mjs");
 await import("./mutate-auditor-stale-pr.mjs");
 
 await import("./mutate-auditor-task-table.mjs");
+await import("./mutate-live-audit-budget.mjs");

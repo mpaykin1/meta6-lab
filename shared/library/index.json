@@ -42191,6 +42191,21 @@
       ]
     },
     {
+      "id": "0db4c14ddd8d9f447c36ec84",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:playthrough.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/playthrough.mjs",
+      "sha256": "f3113226353e922e9f59d4a86a7213afb46c675edafb46604f0815bc5ff06fb9",
+      "lines": [
+        1,
+        78
+      ]
+    },
+    {
       "id": "a52ada8783c59dcb87ef2072",
       "game": "ostrov-aptekarya",
       "kind": "solution",
@@ -42203,21 +42218,6 @@
       "lines": [
         27,
         31
-      ]
-    },
-    {
-      "id": "b220dd8c70716fe94397cc59",
-      "game": "ostrov-aptekarya",
-      "kind": "solution",
-      "name": "module:playthrough.mjs",
-      "purpose": [
-        "game-module"
-      ],
-      "source_path": "games/ostrov-aptekarya/bot/playthrough.mjs",
-      "sha256": "7981d9ede7b56bfd274ad74a24f20f8a07a51bd540be30a12ea9d9a541db6324",
-      "lines": [
-        1,
-        70
       ]
     },
     {
@@ -42431,6 +42431,21 @@
       ]
     },
     {
+      "id": "008133ff6c8b4c566078c25b",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "c3a8f016bd30521ffc15bf9defcc1540c68c2922d52e3f96e331f1256ef8c481",
+      "lines": [
+        435,
+        435
+      ]
+    },
+    {
       "id": "08050c81f95d47dfde049697",
       "game": "ostrov-aptekarya",
       "kind": "solution",
@@ -42476,33 +42491,18 @@
       ]
     },
     {
-      "id": "1a7301de7578d1f3bfb6f94d",
+      "id": "1187ee2377615b8f2a12dc14",
       "game": "ostrov-aptekarya",
       "kind": "solution",
-      "name": "simulate",
+      "name": "botInput",
       "purpose": [
-        "gameplay"
+        "controls"
       ],
       "source_path": "games/ostrov-aptekarya/game.js",
-      "sha256": "8f4649b4d4b236ad7783ca377963ab0c2c5cb535e7d9b415fe8482418a923859",
+      "sha256": "1c88292e0a3ea475ea234e76f4ca3b8fb7a57613c5a9a165321eaef40b7f3149",
       "lines": [
-        305,
-        433
-      ]
-    },
-    {
-      "id": "1ae1eee51993b2f1d138f050",
-      "game": "ostrov-aptekarya",
-      "kind": "solution",
-      "name": "module:game.js",
-      "purpose": [
-        "game-module"
-      ],
-      "source_path": "games/ostrov-aptekarya/game.js",
-      "sha256": "4edcce0dc2a3114566ad3c945cebcc39bbda7cb3641e1930ab93acdce619643e",
-      "lines": [
-        1,
-        551
+        275,
+        301
       ]
     },
     {
@@ -42536,6 +42536,21 @@
       ]
     },
     {
+      "id": "34e1f08018bfecbd6930e276",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "near",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "daeecf1f8f02e93891609b8ffc29eb0869e2f426f669fa64c53489a304b7b6b8",
+      "lines": [
+        350,
+        350
+      ]
+    },
+    {
       "id": "354ef777694318be7f87d8ae",
       "game": "ostrov-aptekarya",
       "kind": "solution",
@@ -42566,7 +42581,7 @@
       ]
     },
     {
-      "id": "3e459ab87056bc4a87f2fd67",
+      "id": "505d58a59588c232245f7e77",
       "game": "ostrov-aptekarya",
       "kind": "solution",
       "name": "animate",
@@ -42576,8 +42591,8 @@
       "source_path": "games/ostrov-aptekarya/game.js",
       "sha256": "36d2f6d5296e8c3326504e119cda1327b6f3574e1b75134d4f25aaa3ec011316",
       "lines": [
-        438,
-        511
+        437,
+        510
       ]
     },
     {
@@ -42596,21 +42611,6 @@
       ]
     },
     {
-      "id": "54244992c40e2f9bc275ad97",
-      "game": "ostrov-aptekarya",
-      "kind": "solution",
-      "name": "resize",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/ostrov-aptekarya/game.js",
-      "sha256": "c3a8f016bd30521ffc15bf9defcc1540c68c2922d52e3f96e331f1256ef8c481",
-      "lines": [
-        436,
-        436
-      ]
-    },
-    {
       "id": "54418a1d7ba934be1c808545",
       "game": "ostrov-aptekarya",
       "kind": "solution",
@@ -42623,21 +42623,6 @@
       "lines": [
         111,
         119
-      ]
-    },
-    {
-      "id": "5c061867e62db778f03e0ac7",
-      "game": "ostrov-aptekarya",
-      "kind": "solution",
-      "name": "near",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/ostrov-aptekarya/game.js",
-      "sha256": "daeecf1f8f02e93891609b8ffc29eb0869e2f426f669fa64c53489a304b7b6b8",
-      "lines": [
-        351,
-        351
       ]
     },
     {
@@ -42668,6 +42653,21 @@
       "lines": [
         259,
         262
+      ]
+    },
+    {
+      "id": "684b46e55fee84a5273ef061",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:game.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "890e367b1a888ebf6178614e3eae45e63730bf1a36dd3a9cc79b10f93e25c882",
+      "lines": [
+        1,
+        550
       ]
     },
     {
@@ -42713,6 +42713,21 @@
       "lines": [
         20,
         27
+      ]
+    },
+    {
+      "id": "7eb6315c660a01bc1b6a0273",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "simulate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "8f4649b4d4b236ad7783ca377963ab0c2c5cb535e7d9b415fe8482418a923859",
+      "lines": [
+        304,
+        432
       ]
     },
     {
@@ -42773,21 +42788,6 @@
       "lines": [
         141,
         145
-      ]
-    },
-    {
-      "id": "aff9e89a3cfcc49b5c63f23e",
-      "game": "ostrov-aptekarya",
-      "kind": "solution",
-      "name": "botInput",
-      "purpose": [
-        "controls"
-      ],
-      "source_path": "games/ostrov-aptekarya/game.js",
-      "sha256": "c73fd603d83d7986227e645ce76d2df18eb5d5cebd93fbf778d55ba47d3e3bd9",
-      "lines": [
-        275,
-        302
       ]
     },
     {

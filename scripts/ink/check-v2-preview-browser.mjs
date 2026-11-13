@@ -18,12 +18,20 @@ try{
       const page=await ctx.newPage(),errors=[];
       page.on('pageerror',e=>errors.push('exception: '+e.message));
       page.on('console',m=>{if(m.type()==='error')errors.push('console: '+m.text());});
+      page.on('response',r=>{if(r.status()>=400)errors.push('HTTP '+r.status()+' '+r.url());});
+      page.on('requestfailed',r=>errors.push('network '+r.url()+' '+r.failure()?.errorText));
       const url=variant==='v1'?base+'/demos/living-watercolor/?ink=robot&palette=color':
         base+'/preview/ink-fallen-guardian-v2/?ink=robot&palette=color';
       const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:35000});
       assert.equal(response?.status(),200,variant+' URL status');
-      await page.waitForFunction(()=>window.__INK_FOREST__?.objects?.includes('robot'),
-        {timeout:45000});
+      try {
+        await page.waitForFunction(()=>window.__INK_FOREST__?.objects?.includes('robot'),
+          null,{timeout:20000});
+      }catch(e){
+        console.error('INK '+device.name+' '+variant+' initialization errors:',JSON.stringify(errors));
+        console.error('INK page body:',(await page.locator('body').innerText()).slice(0,400));
+        throw e;
+      }
       await page.waitForTimeout(1100);
       const metrics=await page.evaluate(()=>{
         const c=document.querySelector('canvas');

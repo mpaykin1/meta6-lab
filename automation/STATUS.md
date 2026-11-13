@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-13T08:25:01.173Z | МГЛ: 14ce5bd3d2a22a68555dc35b1ae1f48a6ee2d6e5 | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | нет данных
+UTC: 2026-11-13T08:30:54.756Z | МГЛ: 6a6e873456d4c31fdbb16e8eeebd26b63aee1a2b | МГ: 161207e8c03ff6d7dc850a9264d90d373b18bea7 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #241 351572af1dd748a4c5a99e1e8f0cdba8a7092a0f: scripts/shared/mutate-build-index-symlinks.mjs
 - PR #259 24d0a9e8151cde7c3242275159c301a10d189311: scripts/prohodchik/mutate-prompt.mjs
@@ -54,7 +54,7 @@ P1 — нет данных: нет данных
 #263 docs(prompty): реестр 15 промптов МГЛ и улучшение многоразов | d40662486e7b6cc8382f5184c86e4b68819b43f4
 ещё 22: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 1724 коммитов | нет данных
+МГЛ: 1728 коммитов | нет данных
 МГ: 6 коммитов | AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, rules:2
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да

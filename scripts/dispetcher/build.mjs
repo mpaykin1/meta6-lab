@@ -1,8 +1,5 @@
 import fs from 'node:fs/promises';
 const {GITHUB_REPOSITORY: repo='mpaykin1/meta6-lab',GITHUB_TOKEN: token}=process.env;
-const root='https://api.github.com/repos/'+repo;
-const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-dispatcher','Authorization':'Bearer '+token};
-async function api(path){const r=await fetch(root+path,{headers});if(!r.ok)throw Error(path+': '+r.status);return r.json();}
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));
  const map=new Map();
@@ -51,22 +48,27 @@ export function assertNotEmpty(tasksMarkdown,cards){
  if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
 }
 export async function main(){
+ const {loadSettledSnapshot}=await import('./snapshot.mjs');
  const tasks=parseTasks(await fs.readFile('ZADACHI.md','utf8'));
  const finish=await fs.readFile('rules/09-platforma/FINISH.md','utf8');
  const finishIds=[...finish.matchAll(/^\|\s*([MBLP]\d+)\s*\|[^|]*\|[^|]*\|\s*НЕТ\b/gm)].map(m=>m[1]);
  let previous='';try{previous=await fs.readFile('DISPETCHER.md','utf8')}catch{}
  const cards=[],claude=[];
+ const snapshot=await loadSettledSnapshot(repo,token);
  for(const t of tasks){
- let pr;try{pr=await api('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
- if(pr.state!=='open')continue;
- const resolution=await resolveConflict(pr,()=>api('/pulls/'+t.id),previousConflict(previous,t.id));
+ const entry=snapshot.get(t.id);
+ if(!entry)continue;
+ let pr=entry.pr;
+ const resolution={pr,conflict:pr.mergeable===null?previousConflict(previous,t.id):
+   pr.mergeable===false||pr.mergeable_state==='dirty',unresolved:pr.mergeable===null};
  pr=resolution.pr;
- const checks=await api('/commits/'+pr.head.sha+'/check-runs?per_page=100');
- const statuses=await api('/commits/'+pr.head.sha+'/status');
+ if(pr.head.sha!==entry.pr.head.sha)throw Error('Dispatcher head changed during conflict resolution');
+ const checks=entry.checks;
+ const statuses=entry.statuses;
  const failed=checks.check_runs.filter(x=>['failure','timed_out','action_required'].includes(x.conclusion)).map(x=>({name:x.name,url:x.html_url}));
  failed.push(...statuses.statuses.filter(x=>['failure','error'].includes(x.state)).map(x=>({name:x.context,url:x.target_url})));
  const conflict=resolution.conflict===true,conflictUnknown=resolution.conflict===null;
- const commit=await api('/commits/'+pr.head.sha);
+ const commit=entry.commit;
  const lastCommit=commit.commit.committer.date;
  const stale=Date.now()-Date.parse(lastCommit)>172800000;
  const stalled=/ЗАВИС/.test(t.status),isClaude=/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(pr.body||'');

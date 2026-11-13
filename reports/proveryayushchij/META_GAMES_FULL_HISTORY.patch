@@ -1,0 +1,26 @@
+--- a/.github/workflows/meta-games-guard.yml
++++ b/.github/workflows/meta-games-guard.yml
+@@ -17,6 +17,23 @@
+       - uses: actions/checkout@v4
+         with:
+           fetch-depth: 0  # Claude 13.11: полная история — иначе база PR не видна и guard даёт ложный FAIL (#278)
++      - name: Require complete commit history
++        shell: bash
++        run: |
++          set -euo pipefail
++          test "$(git rev-parse --is-shallow-repository)" = false
++      - name: Verify PR range objects
++        if: github.event_name == 'pull_request'
++        shell: bash
++        env:
++          GUARD_BASE: ${{ github.event.pull_request.base.sha }}
++          GUARD_HEAD: ${{ github.event.pull_request.head.sha }}
++        run: |
++          set -euo pipefail
++          [[ "$GUARD_BASE" =~ ^[0-9a-f]{40}$ && "$GUARD_HEAD" =~ ^[0-9a-f]{40}$ ]]
++          git cat-file -e "${GUARD_BASE}^{commit}"
++          git cat-file -e "${GUARD_HEAD}^{commit}"
++          git merge-base "$GUARD_BASE" "$GUARD_HEAD" >/dev/null
+       - name: Check protected files
+         id: check
+         env:

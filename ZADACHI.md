@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | INK: объёмный анимированный ворон по эскизу, отдельная сцена рядом с Павшим великаном | МГЛ | чат ChatGPT | `lab/ink-watercolor-flying-raven-20261114` | — | 2026-11-14 12:10 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Разгрузить GitHub Actions: concurrency PR/main без отмены main | МГЛ | ChatGPT (чат) | `lab/ci-ochered-concurrency` | [#299](https://github.com/mpaykin1/meta6-lab/pull/299) | 2026-11-13 18:55 UTC | 2026-11-14 06:29 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | CI #222 и разбор PR #208/#201/#200 для 5 автозадач | МГЛ | чат ChatGPT | `lab/ci-ochered-concurrency` | [#299](https://github.com/mpaykin1/meta6-lab/pull/299) | 2026-11-10 08:57 | 2026-11-14 06:29 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | CI: concurrency для 22 workflow — очередь Actions не забивается | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/ci-ochered-concurrency` | [#299](https://github.com/mpaykin1/meta6-lab/pull/299) | 2026-11-10 05:51 | 2026-11-14 06:29 |

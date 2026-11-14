@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Туманные шпили — ассет-пак</title>
-<!-- PACK-COUNTER (для Claude): 26 ассетов · 2D=17 · 2.5D=9 · 3D=0 · полный список в window.__PACK__ -->
+<!-- PACK-COUNTER (для Claude): 26 неизменённых эталонных + 6 переработанных, всего 32; полный список в window.__PACK__ -->
 <style>
 html,body{margin:0;width:100%;height:100%;background:#020912;overflow:hidden;touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 #c{position:fixed;left:0;top:0;width:100%;height:100%;display:block}
@@ -52,7 +52,7 @@ renderer.setPixelRatio(1);renderer.autoClear=true;renderer.setClearColor(0x06182
 /* ============ СОСТАВ ПАКА (скрытый счётчик, виден только в коде/консоли) ============ */
 const GX=15,GY=45,GZ=-44;                       // врата
 const PLAZA={cam:[0,1.3,14],look:[0,8,-60]};
-const PACK={name:'Туманные шпили',version:'1.1.1',items:[
+const PACK={name:'Туманные шпили',version:'1.2.0',items:[
  {id:'sky',n:'Небо и световые столбы',k:'2D',m:'plaza',cam:[0,6,14],look:[0,40,-80]},
  {id:'fog',n:'Слои тумана',k:'2D',m:'plaza',cam:[-6,5,6],look:[-4,7,-50]},
  {id:'obelisk',n:'Обелиск-гигант',k:'2.5D',m:'plaza',cam:[0,10,-14],look:[0,42,-78]},
@@ -82,9 +82,9 @@ const PACK={name:'Туманные шпили',version:'1.1.1',items:[
 
  {id:'sable-beast',n:'Страж из обломков врат',k:'3D',m:'flight',cam:[28,44,-18],look:[25,44,-40],isNew:true},
  {id:'shattered-mast',n:'Собор — сломанная корона',k:'2.5D',m:'plaza',cam:[-23,24,25],look:[-23,24,-38],isNew:true},
- {id:'gate-bridge',n:'Мост осколков врат',k:'2.5D',m:'plaza',cam:[12,14,8],look:[12,13,-40],isNew:true},
- {id:'dawn-sentinel',n:'Спутник летуна — хранитель',k:'2.5D',m:'flight',follow:'hero',d:13,isNew:true},
- {id:'mirror-seed',n:'Сердце зеркальной воды — усиление',k:'2.5D',m:'flight',cam:[3,45,-19],look:[3,43,-40],isNew:true},
+ {id:'gate-bridge',n:'Разрушенный акведук над зеркальной водой',k:'2.5D',m:'plaza',cam:[12,14,8],look:[12,13,-40],isNew:true},
+ {id:'dawn-sentinel',n:'Крылатый каменный хранитель',k:'2.5D',m:'flight',follow:'hero',d:13,isNew:true},
+ {id:'mirror-seed',n:'Сердце зеркальной воды — реликварий',k:'2.5D',m:'flight',cam:[3,45,-19],look:[3,43,-40],isNew:true},
  {id:'storm-heart',n:'Багровая гроза над шпилями',k:'2D',m:'plaza',cam:[-34,48,-14],look:[-34,46,-43],isNew:true}
 ]};
 PACK.count=PACK.items.length;PACK.by={d2:PACK.items.filter(i=>i.k==='2D').length,d25:PACK.items.filter(i=>i.k==='2.5D').length,d3:PACK.items.filter(i=>i.k==='3D').length};

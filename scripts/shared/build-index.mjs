@@ -69,6 +69,13 @@ for(const id of fs.readdirSync(dir).sort()){
        !Array.isArray(meta.effects) || meta.effects.length!==3 ||
        !Array.isArray(meta.source.files) || meta.source.files.length!==20)
       throw Error('Invalid external MIT component passport '+id);
+    const external=JSON.parse(readRegularFile(path.join(root,'integration/patch/REGISTRY.json')))
+      .candidates?.find(candidate=>candidate.id===id && candidate.decision==='ALLOW');
+    if(!external || external.license!==meta.license ||
+       external.source_commit!==meta.source.commit ||
+       external.license_git_blob_sha!==meta.source.license_git_blob_sha ||
+       JSON.stringify(external.files)!==JSON.stringify(meta.source.files))
+      throw Error('Unregistered or altered external source '+id);
     const license=readRegularFile(path.join(folder,'LICENSE'));
     if(gitBlob(license)!==meta.source.license_git_blob_sha ||
        !license.toString('utf8').includes('Permission is hereby granted') ||

@@ -7,7 +7,7 @@
 - **Статус ставит сторож, а не ChatGPT** (GitHub Actions `ZADACHI watch`, каждые 30 минут, без ИИ): 🔨 В РАБОТЕ — коммит был меньше часа назад; ⚠ молчит — больше часа; 🛑 ЗАВИС — больше 3 часов, **надо толкнуть**; 💤 ЗАБРОШЕНО — больше 2 суток; ✅ ГОТОВО — PR слит; ✖ ЗАКРЫТО — PR закрыт без слияния; 🙋 НУЖЕН CLAUDE.
 - Задачу, которую ChatGPT не записал, сторож добавляет сам из открытых PR.
 
-Сторож проверил: 2026-11-14 03:51 UTC
+Сторож проверил: 2026-11-14 04:06 UTC
 
 <!-- ZADACHI:START -->
 **Итог:** 🛑 зависло 40 · ⚠ молчит 0 · 🔨 в работе 4 · 🙋 нужен Claude 12 · 💤 заброшено 92 · ✅ готово 0
@@ -156,7 +156,7 @@
 | 💤 ЗАБРОШЕНО 3 дн — продолжить или закрыть | Q1: restore library live index, exclude copy games | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/q1-library-quality-20261110` | [#214](https://github.com/mpaykin1/meta6-lab/pull/214) | 2026-11-10 04:37 | 2026-11-10 04:49 |
 | 💤 ЗАБРОШЕНО 3 дн — продолжить или закрыть | Закрыть устаревший красный PR #1 Twilight Island | МГЛ | MG-ремонтник | `lab/twilight-island-pass` | [#1](https://github.com/mpaykin1/meta6-lab/pull/1) | 2026-11-10 04:47 | — |
 | 💤 ЗАБРОШЕНО 4 дн — продолжить или закрыть | Restore original Ashen Path asset pack reference after sync — ТОЛКАЧ: [оригинал блокирован KONTUR, решение Claude](https://github.com/mpaykin1/meta6-lab/actions/runs/42799091174), [вопрос Claude](https://github.com/mpaykin1/meta6-lab/commit/5095441ef37a50e36f71c7c669be1b393346d11a) | МГЛ | Кто: толкач | `lab/ashen-path-asset-pack-restore-1109` | [#208](https://github.com/mpaykin1/meta6-lab/pull/208) | 2026-11-09 16:54 | 2026-11-10 04:35 |
-| 💤 ЗАБРОШЕНО 3 дн — продолжить или закрыть | Compact agent context: STATUS, rules, CI summaries and traps | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/claude-context-compact` | [#211](https://github.com/mpaykin1/meta6-lab/pull/211) | 2026-11-10 04:06 | 2026-11-10 04:07 |
+| 💤 ЗАБРОШЕНО 4 дн — продолжить или закрыть | Compact agent context: STATUS, rules, CI summaries and traps | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/claude-context-compact` | [#211](https://github.com/mpaykin1/meta6-lab/pull/211) | 2026-11-10 04:06 | 2026-11-10 04:07 |
 | 💤 ЗАБРОШЕНО 3 дн — продолжить или закрыть | PR #204: устранить конфликт с main и проверить B6/B7 | МГЛ | MG-строитель-3 | `lab/rules-bot-trainer` | [#204](https://github.com/mpaykin1/meta6-lab/pull/204) | 2026-11-10 23:30 | 2026-11-10 02:51 |
 | 💤 ЗАБРОШЕНО 4 дн — продолжить или закрыть | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/rules-bot-trainer` | [#204](https://github.com/mpaykin1/meta6-lab/pull/204) | 2026-11-09 16:36 | 2026-11-10 02:51 |
 | 💤 ЗАБРОШЕНО 4 дн — продолжить или закрыть | M6 | МГЛ | MG-строитель-3 | `lab/mcp-connect` | [#192](https://github.com/mpaykin1/meta6-lab/pull/192) | 2026-11-09 22:25 | 2026-11-09 22:26 |

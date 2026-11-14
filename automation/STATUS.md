@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-14T05:13:07.554Z | МГЛ: e6db0264b82eeeced3340fa8042dd2eb01766d25 | МГ: 7ae9604d0dfc969116895cd06bf11b4c3cdf15ff | https://github.com/mpaykin1/meta6-lab/actions/runs/43560392244
+UTC: 2026-11-14T05:19:13.856Z | МГЛ: 2883ee3ecbb01d4ed6a8c429b0d910b856f7122f | МГ: 7ae9604d0dfc969116895cd06bf11b4c3cdf15ff | https://github.com/mpaykin1/meta6-lab/actions/runs/43560913588
 ## ПРОВЕРИТЬ CLAUDE
 - PR #315 4319f8056814a5986b87200676b87f585c09705c: .github/workflows/storozha-reference.yml, scripts/storozha/mutate-storozha.mjs, scripts/storozha/verify-storozha.mjs
 - PR #309 41331671a13c476ff8ec3b7497dd3a47517dade8: scripts/storozha/mutate-storozha.mjs, scripts/storozha/verify-storozha.mjs
@@ -55,7 +55,7 @@ P1 — нет данных: нет данных
 #304 Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У  | af6238c7237cd129f58a2d66826b8405e9376f05
 ещё 34: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2088 коммитов | нет данных
+МГЛ: 2090 коммитов | нет данных
 МГ: 9 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:4
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

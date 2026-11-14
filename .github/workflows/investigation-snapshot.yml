@@ -2,15 +2,11 @@ name: Investigation snapshot
 # GitHub is the sole persistence and publishing platform.
 on:
   schedule:
-    - cron: '13 * * * *'
+    - cron: '13 */3 * * *'
   workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - 'ZADACHI.md'
-      - 'OSHIBKI.md'
-      - 'automation/SLIYANIE.md'
-      - 'rules/09-platforma/FINISH.md'
       - 'scripts/investigation/**'
       - '.github/workflows/investigation-snapshot.yml'
   pull_request:

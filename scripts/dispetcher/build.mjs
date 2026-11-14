@@ -2,7 +2,22 @@ import fs from 'node:fs/promises';
 const {GITHUB_REPOSITORY: repo='mpaykin1/meta6-lab',GITHUB_TOKEN: token}=process.env;
 const root='https://api.github.com/repos/'+repo;
 const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-dispatcher','Authorization':'Bearer '+token};
-async function api(path){const r=await fetch(root+path,{headers});if(!r.ok)throw Error(path+': '+r.status);return r.json();}
+export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTimeout(done,ms)),
+ now=()=>Date.now()}={}){
+ for(let attempt=0;attempt<2;attempt++){
+  const response=await request(root+path,{headers});
+  if(response.ok)return response.json();
+  const remaining=Number(response.headers.get('x-ratelimit-remaining'));
+  const reset=Number(response.headers.get('x-ratelimit-reset'))*1000;
+  if((response.status===403||response.status===429)&&remaining===0&&Number.isFinite(reset)&&reset>0){
+   const waitMs=reset-now();
+   if(waitMs>0&&waitMs<=8*60*1000&&attempt===0){await wait(waitMs+1000);continue}
+   throw Error('нет данных: квота GitHub API до '+new Date(reset).toISOString().slice(11,16)+' UTC');
+  }
+  throw Error('нет данных: GitHub HTTP '+response.status+' ('+path+')');
+ }
+ throw Error('нет данных: GitHub API не ответил после повтора ('+path+')');
+}
 export async function listOpenPullRequests(request = api) {
  const result = new Map();
  for(let page=1;;page++){
@@ -75,7 +90,10 @@ export async function main(){
  const {routeFor}=await import('../karta-sil/route.mjs');
  const forChat=[];
  const cards=[],claude=[];
- const openPrs=await listOpenPullRequests();
+ const {openPulls}=await import('../storozha/gh-list.mjs');
+ const opened=await openPulls(repo,token);
+ if(!Array.isArray(opened))throw Error('нет данных: открытые PR не получены');
+ const openPrs=new Map(opened.map(pr=>[pr.number,pr]));
  for(const t of tasks){
  const listed=openPrs.get(t.id);
  if(!listed)continue;

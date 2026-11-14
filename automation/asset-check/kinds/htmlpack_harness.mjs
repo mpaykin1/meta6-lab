@@ -239,6 +239,9 @@ async function measure(browser,file){
    }else await page.waitForTimeout(1000);
    await page.waitForTimeout(100);
    await page.evaluate(id=>window.__AC_WAKE__(id),id);
+   // Sparks have future spawn-time offsets; petals start with zero-size instance matrices.
+   // Allow original update() to form the object before freezing the rendered diff.
+   if(id==='sparks'||id==='petals')await page.waitForTimeout(240);
    const capture=async()=>{
      await page.evaluate(()=>{window.__AC_FREEZE__=true});
      await page.waitForTimeout(40);
@@ -335,6 +338,8 @@ try {
     const server=createServer((request,response)=>{
       try{
         const pathname=decodeURIComponent(new URL(request.url,'http://localhost').pathname);
+        // The reference intentionally has no favicon; never request a nonexistent asset.
+        if(pathname==='/favicon.ico'){response.statusCode=204;response.end();return;}
         const runtime={'/reference.html':ref,[candidateRoute]:cand};
         const resource=pathname.startsWith('/preview/asset-check/asset-packs/')
           ?pathname.slice('/preview/asset-check'.length):pathname;

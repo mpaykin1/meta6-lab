@@ -65,6 +65,30 @@ class HtmlPackTraps(unittest.TestCase):
     def ids(self, data=None, error=None):
         return {x["id"] for x in self.check(data, error).hard()}
 
+    def test_HP13_cli_exports_real_comparison_png(self):
+        # Regression: CLI wrote REPORT.md but crashed with NameError on copy2.
+        self.add_new()
+        destination = self.root / "out"
+        fake = cp.Report(self.root)
+        fake.kinds = ["htmlpack"]
+        with patch("check_pack.check", return_value=fake):
+            self.assertEqual(cp.main([str(self.root), "--out", str(destination)]), 0)
+        self.assertEqual((destination / "compare.png").read_bytes(),
+                         (self.root / "_check" / "compare.png").read_bytes())
+
+    def test_HP10_transient_effect_waits_for_nonzero_geometry(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        wake = harness.index("await page.evaluate(id=>window.__AC_WAKE__(id),id);")
+        settle = harness.index("if(id==='sparks'||id==='petals')await page.waitForTimeout(240);")
+        freeze = harness.index("await page.evaluate(()=>{window.__AC_FREEZE__=true});")
+        self.assertLess(wake, settle)
+        self.assertLess(settle, freeze)
+
+    def test_HP8_missing_favicon_not_a_fake_resource_failure(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("if(pathname==='/favicon.ico'){response.statusCode=204;response.end();return;}", harness)
+        self.assertIn("response.statusCode=404;response.end(String(error.message));", harness)
+
     def test_good_reference_passes_without_hard(self):
         self.assertEqual([], self.check().hard())
 

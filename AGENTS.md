@@ -67,6 +67,7 @@ _как игра играется: открытие мира, польза ве�
 - [BEZ_POVTOROV.md](rules/02-igrovye-mekhaniki/BEZ_POVTOROV.md) — раскладка уровня никогда не повторяется, но всегда проходима
 - [DRAKON_I_LUCHNIK.md](rules/02-igrovye-mekhaniki/DRAKON_I_LUCHNIK.md) — как делать боссов и боевые умения героя
 - [UNIVERSAL.md](rules/02-igrovye-mekhaniki/UNIVERSAL.md) — универсальные улучшения U1–U6 для всех игр
+- [IMMERSIVE_LEVEL_DESIGN.md](rules/02-igrovye-mekhaniki/IMMERSIVE_LEVEL_DESIGN.md) — IM1–IM5: история через окружение, плотные уровни, вертикальность, стилизация, эмбиент и тишина (07.11.2026)
 - [FIX_EKRAN.md](rules/02-igrovye-mekhaniki/FIX_EKRAN.md) — экран телефона не должен тянуться (полный контракт — fix.md)
 - [UPRAVLENIE_TELEFON.md](rules/02-igrovye-mekhaniki/UPRAVLENIE_TELEFON.md) — джойстик двигает героя, камера плавно следует, кнопки — иконки
 - [PROGRESSIVE_UNLOCK.md](rules/02-igrovye-mekhaniki/PROGRESSIVE_UNLOCK.md) — ПОСТЕПЕННО — подробности и пример

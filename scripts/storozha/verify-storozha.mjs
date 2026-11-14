@@ -40,6 +40,11 @@ export function verify(c) {
   assert.equal(c.staleDecision(old, t).deleteBranch, false, 'Never delete a stale PR branch');
   assert.equal(c.staleDecision(recent, t).close, false, 'Recent PR stays open');
   assert.equal(c.staleDecision({...old, state: 'closed'}, t).close, false, 'Do not close twice');
+  const gitFiles = c.filesFromGit('A\treference/new/a.glb\nM\tscripts/x.mjs\nD\treference/old/file.glb\n',
+    '10\t0\treference/new/a.glb\n3\t2\tscripts/x.mjs\n0\t5\treference/old/file.glb\n');
+  assert.deepEqual(gitFiles.map(f => f.status), ['added', 'modified', 'removed'], 'git statuses map to GitHub statuses');
+  assert.equal(gitFiles[1].deletions, 2, 'git numstat deletions reach the old-test rule');
+  assert.throws(() => c.filesFromGit('X\tweird\n', ''), /Unknown git status/, 'Unknown git status must fail closed');
   const baseline = ['reference/old/file.glb', 'reference/old/texture.png'];
   assert.deepEqual(c.referenceGate([
     {filename: 'reference/new-world/index.html', status: 'added'},

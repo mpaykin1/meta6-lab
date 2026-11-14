@@ -13,7 +13,7 @@ const renderer=new T.WebGLRenderer({antialias:true,powerPreference:'high-perform
 renderer.outputColorSpace=T.SRGBColorSpace;
 renderer.toneMapping=T.ACESFilmicToneMapping;
 renderer.toneMappingExposure=1.24;
-renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.15));
 renderer.setSize(innerWidth,innerHeight);
 document.body.prepend(renderer.domElement);
 const style=createWatercolorStyle({
@@ -89,7 +89,7 @@ for(let i=0;i<240;i++){
 gravel.userData.watercolorOutline=false;ballast.add(gravel);
 // Distant damp forest, illustrated with the same accepted volumetric INK tree makers.
 const woodland=new T.Group();all.add(woodland);
-for(let i=0;i<31;i++){
+for(let i=0;i<18;i++){
   const x=-9+r(i+41)*26;
   const back=i%4?-(3.6+r(i+166)*7):(4.7+r(i+91)*4);
   const tree=i%5===0?birch(i+7):fir(i+19);
@@ -122,9 +122,26 @@ for(let i=0;i<480;i++){
 }
 blades.userData.watercolorOutline=false;all.add(blades);
 const train=createInkSteamTrain(11);train.position.y=.02;all.add(train);
+// INK silhouette remains richly outlined while tiny bolts/trim avoid costly
+// triple-pass outlines (especially on phones).
+train.traverse(o=>{
+  if(!o.isMesh || o.userData.watercolorOutline===false)return;
+  o.geometry?.computeBoundingSphere?.();
+  const r=o.geometry?.boundingSphere?.radius||0;
+  if(r<.36)o.userData.watercolorOutline=false;
+});
 paint.apply(train,{seed:'steam-locomotive'});
 paint.apply(woodland,{seed:'railway-woodland'});
 paint.apply(ballast,{seed:'railway-ballast'});
+// Reuse one compiled watercolor shader program across deterministic pigment
+// seeds; the accepted INK reference uses the same optimization.
+for(const part of [train,woodland,ballast]){
+  part.traverse(o=>{
+    if(o.isMesh && o.material?.userData?.livingWatercolorPatched){
+      o.material.customProgramCacheKey=()=>'ink-steam-watercolor-20261114';
+    }
+  });
+}
 // A translucent ground wash anchors the 3D model to the same mist as the forest.
 paint.addGroundWash(train,{x:2.0,z:0,width:16,depth:4.4,opacity:.14,seed:'rolling-shadow'});
 const veilCanvas=document.createElement('canvas');veilCanvas.width=veilCanvas.height=128;

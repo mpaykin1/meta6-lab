@@ -31,7 +31,7 @@ async function prFiles() {
 // Claude 14.11.2026: проверка на PR больше не тратит REST-квоту GitHub (403 rate limit блокировал #301, #308):
 // данные PR берутся из события, список файлов — из git (тот же diff base...head, что отдаёт /pulls/N/files).
 function localPull() {
-  const path = process.env.GITHUB_EVENT_PATH;
+  const path = process.env.STOROZHA_EVENT_FILE;
   if (process.env.STOROZHA_READ_ONLY !== '1' || !path) return null;
   const event = JSON.parse(readFileSync(path, 'utf8'));
   const pr = event.pull_request;

@@ -28,7 +28,7 @@ test('мутация: если первая страница полна, тре�
   seen.push(endpoint);
   return seen.length===1 ? Array.from({length:100},(_,i)=>item(i+1)) : [item(101)];
  });
- assert.deepEqual(seen.map(x=>x.match(/page=(\d+)/)[1]),['1','2']);
+ assert.deepEqual(seen.map(x=>new URLSearchParams(x.split('?')[1]).get('page')),['1','2']);
  assert.equal(open.size,101);
 });
 
@@ -38,4 +38,13 @@ test('мутация-обман: список нельзя подменить о
  await assert.rejects(()=>listOpenPullRequests(async()=>[item(301),item(301)]),/неполные данные/);
  await assert.rejects(()=>listOpenPullRequests(async()=>[item(301),{number:304,state:'open'}]),
   /неполные данные/);
+});
+test('мутация: ошибку API на второй странице нельзя скрыть первой',async()=>{
+ let calls=0;
+ await assert.rejects(()=>listOpenPullRequests(async()=>{
+  calls++;
+  if(calls===1)return Array.from({length:100},(_,i)=>item(i+1));
+  throw Error('HTTP 429');
+ }),/429/);
+ assert.equal(calls,2);
 });

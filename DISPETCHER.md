@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 21 · конфликт 15 · непроверено 0 · красные проверки 30 · нужен Claude 17
+Итог: зависло 28 · конфликт 15 · непроверено 0 · красные проверки 29 · нужен Claude 16
 
 ### PR #234
 - PR: https://github.com/mpaykin1/meta6-lab/pull/234
@@ -125,9 +125,9 @@
 ### PR #72
 - PR: https://github.com/mpaykin1/meta6-lab/pull/72
 - Ветка: `lab/immersive-dishonored-principles-20261107`
-- SHA: `ec3fc33a972ddd6fc1acfe3ce55e041e253ee44f` · последний коммит: 2026-11-13T19:17:40Z
-- Проблема: Красная проверка: storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43490840808/job/132111396124), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43490834975/job/132111280301), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь storozha-reference по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43490840808/job/132111396124 и повтори CI.
+- SHA: `dc663fbc6980a4aaa8bafa7221b25e24eb67d0c8` · последний коммит: 2026-11-14T03:19:15Z
+- Проблема: Красная проверка: guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43551023196/job/132313248053), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь guard по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43551023196/job/132313248053 и повтори CI.
 - Взял: —
 
 ### PR #258
@@ -158,8 +158,8 @@
 - PR: https://github.com/mpaykin1/meta6-lab/pull/278
 - Ветка: `lab/tolkach-main-first-20261112`
 - SHA: `e66a271095c39b65c9bdf22c55450d5dd043d1f9` · последний коммит: 2026-11-13T11:13:54Z
-- Проблема: Красная проверка: storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43415398914/job/131852583819), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43415398920/job/131851885915), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43415395730/job/131851879269), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь storozha-reference по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43415398914/job/131852583819 и повтори CI.
+- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43415398920/job/131851885915), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43415398920/job/131851885915 и повтори CI.
 - Взял: —
 
 ### PR #280
@@ -205,9 +205,9 @@
 ### PR #301
 - PR: https://github.com/mpaykin1/meta6-lab/pull/301
 - Ветка: `lab/karta-sil`
-- SHA: `9ea260d528eb93980bcfbc5698313ef787dcc2e6` · последний коммит: 2026-11-13T19:29:26Z
-- Проблема: Красная проверка: storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43493549040/job/132120873574), storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43493548770/job/132120636906), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43493548581/job/132120635801), storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43492810980/job/132118229746), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43492811153/job/132118130434), dispatch (https://github.com/mpaykin1/meta6-lab/actions/runs/43492811043/job/132118130124), karta (https://github.com/mpaykin1/meta6-lab/actions/runs/43492810999/job/132118129738), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43492801901/job/132118109410), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь storozha-reference-queue по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43493549040/job/132120873574 и повтори CI.
+- SHA: `13a9d7cf5f5bc384954cf8a0e8447bce54caf855` · последний коммит: 2026-11-14T03:31:20Z
+- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43552411390/job/132317607734), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43552197650/job/132316955387), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43552411390/job/132317607734 и повтори CI.
 - Взял: —
 
 ### PR #302
@@ -221,25 +221,17 @@
 ### PR #305
 - PR: https://github.com/mpaykin1/meta6-lab/pull/305
 - Ветка: `lab/assets-tumannye-shpili-20261114`
-- SHA: `0753e23ec3b95986d692d78996e63b2c6b09e172` · последний коммит: 2026-11-13T20:45:15Z
-- Проблема: Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь Vercel по логу https://vercel.com/improve-world?upgradeToPro=build-rate-limit и повтори CI.
+- SHA: `93ec59abb4c20b847df2ffd9494b17fb2f116eff` · последний коммит: 2026-11-13T20:45:41Z
+- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43504778315/job/132159445259), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43504778315/job/132159445259 и повтори CI.
 - Взял: —
 
 ### PR #306
 - PR: https://github.com/mpaykin1/meta6-lab/pull/306
 - Ветка: `lab/assets-tumannye-shpili-20261114-2338`
-- SHA: `ab8ed7063c69af878e86c11f2fc2418875558455` · последний коммит: 2026-11-13T20:43:37Z
-- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43504215619/job/132157515958), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43504215619/job/132157515958 и повтори CI.
-- Взял: —
-
-### PR #307
-- PR: https://github.com/mpaykin1/meta6-lab/pull/307
-- Ветка: `lab/ostrov-aptekarya-bot-levels`
-- SHA: `0a1e54863d5b04b604b99458ac274ef55711dabf` · последний коммит: 2026-11-13T20:36:46Z
-- Проблема: Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь Vercel по логу https://vercel.com/improve-world?upgradeToPro=build-rate-limit и повтори CI.
+- SHA: `828581e4c40310586838f439e687cf7a6cc9b572` · последний коммит: 2026-11-13T21:24:53Z
+- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43510486612/job/132179131817), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43510486612/job/132179131817 и повтори CI.
 - Взял: —
 
 ### PR #242
@@ -266,7 +258,6 @@
 - [#191](https://github.com/mpaykin1/meta6-lab/pull/191) Эталон «Затонувший город»: исходный ZIP, 3D-витрина и каталог ассетов
 - [#3](https://github.com/mpaykin1/meta6-lab/pull/3) Разблокировать проверки PR #3 Twilight Island
 - [#235](https://github.com/mpaykin1/meta6-lab/pull/235) Неподвижный экран при джойстике — все игры МГЛ
-- [#134](https://github.com/mpaykin1/meta6-lab/pull/134) ABYSS GLOW — второй эталон графики и анимации
 - [#133](https://github.com/mpaykin1/meta6-lab/pull/133) Довести PR #133: эталон графики Asqura — ТОЛКАЧ: [STOROZHA FAIL: эталон только добавлением](https://github.com/mpaykin1/meta6-lab/actions/runs/43239240778/job/131674186810), [передано Claude](https://github.com/mpaykin1/meta6-lab/commit/be18317412852ca804d68c94d8b85670ad02fc24)
 - [#272](https://github.com/mpaykin1/meta6-lab/pull/272) УЛУЧШАТЕЛЬ ИГР: games/sumerki-i-pepel-2-copy × правило №13 (бот-ручка), Кто: улучшатель; 2 красных touch run [43174673836](https://github.com/mpaykin1/meta6-lab/actions/runs/43174673836), [43186923586](https://github.com/mpaykin1/meta6-lab/actions/runs/43186923586); НУЖЕН CLAUDE, исходный статус не меняется
 - [#270](https://github.com/mpaykin1/meta6-lab/pull/270) ЭТАЛОНЫ В БИБЛИОТЕКУ — Veil Terraces: отдельный модуль камеры, исходные байты, Chromium; [run #43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458) PASS (1 камера); [quota FAIL #43173380383](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383); полных эталонов 0 → 0, систем в PR 0 → 1

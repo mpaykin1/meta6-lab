@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-14T22:52:31.266Z | МГЛ: 96726137310a3f0abaf7135fd0006d0539eca2af | МГ: 42e706b7b27bfca00ae89dbf0787a3f319a3f0f4 | https://github.com/mpaykin1/meta6-lab/actions/runs/43650298743
+UTC: 2026-11-14T23:21:23.959Z | МГЛ: 9228ffbbe2d04b7b4036c58ae5b668df003fe2d1 | МГ: 42e706b7b27bfca00ae89dbf0787a3f319a3f0f4 | https://github.com/mpaykin1/meta6-lab/actions/runs/43652768204
 ## ПРОВЕРИТЬ CLAUDE
 - PR #320 fd4ea42560b6c1f43ecdf1a7df2e667160943c18: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
 - PR #301 4048fca93da0d4d7be883e61cd9c1d06f6d71a4f: .github/workflows/dispetcher.yml, .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
@@ -14,7 +14,7 @@ UTC: 2026-11-14T22:52:31.266Z | МГЛ: 96726137310a3f0abaf7135fd0006d0539eca2af
 - | M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |
 - ещё 12: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
-готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43649370227))
+готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43650298784))
 M1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
 M2 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
 M3 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
@@ -39,7 +39,7 @@ P1 — не подтверждено: нет успешного завершён
 #301 КАРТА СИЛ: статистика слияний PR и фильтр автозадач | 4048fca93da0d4d7be883e61cd9c1d06f6d71a4f
 ещё 44: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2188 коммитов | нет данных
+МГЛ: 2192 коммитов | нет данных
 МГ: 13 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:22, reference:22, rules:6, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

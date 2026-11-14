@@ -163,7 +163,7 @@ let active=['train','engine','travel'].includes(user.get('view'))?user.get('view
   (innerWidth/innerHeight<.75?'engine':'train');
 let stopped=false,monochrome=user.get('palette')==='mono';
 let yaw=2.35,pitch=.39,zoom=1,drag=null,pinchDistance=0,lastMs=0,time=0;
-let frameMs=16.7,quality=1;
+let frameMs=16.7,quality=1,renderedFrames=0;
 const menu=document.querySelector('#menu'),menuButton=document.querySelector('#menu-btn');
 menuButton.onclick=()=>{menu.hidden=!menu.hidden;menuButton.setAttribute('aria-expanded',String(!menu.hidden));};
 function updateButtons(){
@@ -245,12 +245,13 @@ function animate(ms){
   lookAt();
   paint.tick(ms);
   renderer.render(scene,camera);
+  renderedFrames++;
 }
 requestAnimationFrame(animate);
 window.__INK_TRAIN__={
   ready:true,mesh:train,isProcedural3D:true,
   getWheels:()=>train.getObjectByName('WHEELS')||null,
-  stats:()=>({mode:active,quality,frameMs,elapsed:time,meshes:(()=>{
+  stats:()=>({mode:active,quality,frameMs,elapsed:time,renderedFrames,meshes:(()=>{
     let count=0;train.traverse(o=>{if(o.isMesh)count++;});return count;
   })()}),
   show:setView,pause:()=>{stopped=true;updateButtons();},

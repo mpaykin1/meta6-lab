@@ -34,6 +34,19 @@ export async function listOpenPullRequests(request = api) {
  }
  throw Error('GitHub API open PRs: неполная пагинация');
 }
+export function indexOpened(opened) {
+ if(!Array.isArray(opened))throw Error('нет данных: открытые PR не получены');
+ const openPrs=new Map();
+ for(const pr of opened){
+  if(!Number.isSafeInteger(pr?.number)||pr.number<1||pr.state!=='open'||
+     !pr.head?.sha||!pr.head?.ref||openPrs.has(pr.number)){
+   throw Error('нет данных: неполный или повторный GraphQL PR');
+  }
+  openPrs.set(pr.number,pr);
+ }
+ const openNumbers=new Set(openPrs.keys());
+ return {openNumbers,openPrs};
+}
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));
  const map=new Map();
@@ -93,10 +106,11 @@ export async function main(){
  const {openPulls}=await import('../storozha/gh-list.mjs');
  const opened=await openPulls(repo,token);
  if(!Array.isArray(opened))throw Error('нет данных: открытые PR не получены');
- const openPrs=new Map(opened.map(pr=>[pr.number,pr]));
+ const {openNumbers,openPrs}=indexOpened(opened);
  for(const t of tasks){
+ if(!openNumbers.has(t.id))continue;
  const listed=openPrs.get(t.id);
- if(!listed)continue;
+ if(!listed)throw Error('нет данных: GraphQL PR исчез из индекса');
  if(/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(listed.body||'')){
   claude.push({...t,title:listed.title,branch:listed.head.ref});
   continue;

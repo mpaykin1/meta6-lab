@@ -1,0 +1,28 @@
+{
+  "id": "asqura-office-reference",
+  "title": "ASQURA Office",
+  "kind": "graphics-and-animation-canonical-reference",
+  "origin": "ASQURA Office.html supplied directly by the owner 2026-11-08",
+  "source_filename": "ASQURA Office.html",
+  "owner_authorized_reuse": true,
+  "format": "single-file HTML",
+  "rendering": [
+    "Canvas 2D",
+    "pixel art",
+    "procedurally drawn office scenes",
+    "sprite-style character animation",
+    "lighting gradients"
+  ],
+  "animation": [
+    "requestAnimationFrame animation loop",
+    "multi-character behavior",
+    "interactive UI transitions"
+  ],
+  "audio": "Web Audio synthesis",
+  "assets": "Original procedural graphics embedded in the HTML; no invented replacement assets",
+  "external_dependencies": [
+    "Google Fonts for optional font"
+  ],
+  "preservation": "Keep original HTML unchanged. Build derivative graphics and animation modules separately.",
+  "publication": "Reference copy in meta6-lab, not a certified META GAMES production release"
+}

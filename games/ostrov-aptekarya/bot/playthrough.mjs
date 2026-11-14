@@ -25,8 +25,8 @@ const t0 = Date.now();
 while (Date.now() - t0 < 480000) {
   const s = await page.evaluate(() => { const a = window.__APTEKAR__; return {state: a.state, girl: a.girl, caught: a.caughtCount, end: !document.getElementById('ap-end').hidden}; });
   strayText = Math.max(strayText, await stray());
-  if (mode === 'passive' && s.caught >= 1 && s.state === 'chase') { result = 'CAUGHT_AND_RETRY'; break; }
-  if (s.end) { result = 'ENDING'; break; }
+  if (mode === 'passive' && s.caught >= 1 && (s.state === 'chase' || s.end)) { result = 'CAUGHT_AND_RETRY'; break; }  // после поимки — повтор погони или (ночь кончилась) финал
+  if (s.end) { result = mode === 'passive' ? 'ENDING_NOT_CAUGHT' : 'ENDING'; break; }
   await page.waitForTimeout(600);
 }
 await browser.close();

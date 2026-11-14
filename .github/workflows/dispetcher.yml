@@ -1,18 +1,20 @@
 name: MG Dispatcher
 on:
   schedule:
-    - cron: '21,51 * * * *'
+    - cron: '21 * * * *'
   workflow_dispatch:
   pull_request:
     branches: [main]
     paths:
       - '.github/workflows/dispetcher.yml'
       - 'scripts/dispetcher/**'
+      - 'scripts/lab/pr-status-*.mjs'
+      - 'scripts/lab/mutate-pr-status-batch.mjs'
+      - 'scripts/lab/sliyanie-status.py'
+      - 'scripts/lab/mutate-sliyanie-facts.py'
+      - '.github/workflows/sliyanie-status.yml'
       - 'automation/dispetcher/**'
       - 'automation/prompts/MG_PYAT_AVTOZADACH.md'
-  push:
-    branches: [main]
-    paths: [ZADACHI.md]
 permissions:
   contents: write
   checks: read
@@ -30,7 +32,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test scripts/dispetcher/test/*.test.mjs
+      - name: PR batching, quota and mutation gates
+        run: |
+          node --test scripts/dispetcher/test/*.test.mjs
+          node scripts/lab/mutate-pr-status-batch.mjs
+          python3 scripts/lab/test-sliyanie-status.py
+          python3 scripts/lab/mutate-sliyanie-facts.py
       - run: node scripts/dispetcher/run.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

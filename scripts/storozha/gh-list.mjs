@@ -4,7 +4,7 @@ export async function openPulls(repo, token) {
   const [owner, name] = repo.split('/');
   const query = `query($owner:String!,$name:String!,$after:String){repository(owner:$owner,name:$name){
     pullRequests(states:OPEN,baseRefName:"main",first:100,after:$after){pageInfo{hasNextPage endCursor}
-      nodes{number url createdAt mergeable headRefName headRefOid
+      nodes{number url createdAt isDraft mergeable headRefName headRefOid
         headRepository{nameWithOwner} commits(last:1){nodes{commit{committedDate}}}}}}}`;
   const result = [];
   let after = null;
@@ -20,7 +20,7 @@ export async function openPulls(repo, token) {
     for (const n of data.nodes) {
       const lastCommitAt = n.commits.nodes[0]?.commit?.committedDate || '';
       if (!lastCommitAt) throw Error('Unknown last commit date for PR #' + n.number);
-      result.push({number: n.number, html_url: n.url, created_at: n.createdAt, state: 'open',
+      result.push({number: n.number, html_url: n.url, created_at: n.createdAt, state: 'open', draft: n.isDraft === true,
         mergeable: n.mergeable, lastCommitAt,
         head: {ref: n.headRefName, sha: n.headRefOid, repo: {full_name: n.headRepository?.nameWithOwner}}});
     }

@@ -1,3 +1,4 @@
+import {verifyVeilCamera} from './verify-veil-camera.mjs';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -158,6 +159,6 @@ function liveDiscovery(){
   }finally{fs.rmSync(root,{recursive:true,force:true});}
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
-  try{const rows=verifyLibrary();for(const row of rows)console.log(row.game+': assets '+row.assets+', file assets '+row.file_assets+', solutions '+row.solutions);console.log('LIBRARY VERIFIED');}
+  try{const rows=verifyLibrary();for(const row of rows)console.log(row.game+': assets '+row.assets+', file assets '+row.file_assets+', solutions '+row.solutions);await verifyVeilCamera(ROOT);console.log('LIBRARY VERIFIED');}
   catch(error){console.error(error.stack||error);process.exitCode=1;}
 }

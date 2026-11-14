@@ -1,0 +1,47 @@
+{
+  "id": "veil-terraces/camera-matrices",
+  "kind": "system",
+  "game": "veil-terraces",
+  "title": "Original perspective, lookAt, multiply and model",
+  "source_path": "games/veil-terraces/index.html",
+  "source_git_blob_sha": "22f3cd154cd247e3fcc6977c8334e04417a2faf7",
+  "source_lines": [
+    25,
+    29,
+    30,
+    31,
+    32
+  ],
+  "entry": "shared/library/systems/veil-terraces-camera.mjs",
+  "preview": "shared/library/systems/veil-terraces-camera-preview.html",
+  "exports": [
+    "perspective",
+    "lookAt",
+    "multiply",
+    "model"
+  ],
+  "dependencies": [
+    "Float32Array",
+    "Math"
+  ],
+  "rights": "META GAMES owner source allowlist; no third-party runtime dependency",
+  "standalone": true,
+  "load_ok": true,
+  "asset_ok": 0,
+  "asset_ids": [],
+  "note": "load_ok confirmed for identical system module on 7b2f3e0; final PR SHA checks still required before merge. Not in main or public MCP.",
+  "load_evidence": {
+    "workflow": "Library Machine",
+    "run_id": 43173380458,
+    "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458",
+    "verified_commit_sha": "7b2f3e0eb3742048d338bd5bba8a568d076e388b",
+    "browser": "headless Chromium",
+    "checks": [
+      "exact blob",
+      "source bytes",
+      "nonempty canvas",
+      "keyboard input changes canvas",
+      "3 mutations"
+    ]
+  }
+}

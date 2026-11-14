@@ -121,6 +121,7 @@ function animate(ms){requestAnimationFrame(animate);if(document.hidden){previous
   raven.userData.updateInkRaven(elapsed);
   displayObjects.raven.userData.updateInkRaven(elapsed);
   paint.tick(ms);renderer.render(scene,camera);
+  window.__INK_RAVEN_RENDERED__=(window.__INK_RAVEN_RENDERED__||0)+1;
 }
 requestAnimationFrame(animate);
 window.__INK_RAVEN__={
@@ -128,6 +129,7 @@ window.__INK_RAVEN__={
   display:displayObjects.raven,
   get wingAngle(){return raven.userData.ravenRig.wings[1].shoulder.rotation.z;},
   get triangleCount(){let n=0;displayObjects.raven.traverse(o=>{if(o.isMesh&&o.geometry?.index)n+=o.geometry.index.count/3;});return n;},
-  get fpsEstimate(){return 1000/Math.max(1,frameAvg);}
+  get fpsEstimate(){return 1000/Math.max(1,frameAvg);},
+  get renderedFrames(){return window.__INK_RAVEN_RENDERED__||0;}
 };
 window.__INK_FOREST__={version:'1.2.0-raven-preview',objects:Object.keys(objectMakers),show:choose,setMono,get active(){return active;}};

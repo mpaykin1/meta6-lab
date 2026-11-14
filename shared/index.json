@@ -169,6 +169,127 @@
       "dependency_policy": "host-browser-APIs-only"
     },
     {
+      "id": "patch-pixelfx",
+      "title": "PixelFX — fire, explosion and lightning",
+      "kind": "vfx",
+      "registry": "third-party-mit",
+      "entry": "src/core/index.js",
+      "exports": [
+        "createFrame",
+        "clearFrame",
+        "createFx",
+        "composite"
+      ],
+      "effects": [
+        "src/fx/fire/campfire.js",
+        "src/fx/lightning/lightning-strike.js",
+        "src/fx/explosions/small-explosion.js"
+      ],
+      "needs": [
+        "Canvas 2D",
+        "ES modules"
+      ],
+      "dependencies": [],
+      "source": {
+        "repository": "patch-gg/pixelfx",
+        "commit": "5294518ce7c72e48b6100a744596e0acf57f2826",
+        "path": "src/core/index.js",
+        "git_blob_sha": "14b3144cb33068271221f1766994b627660d5d93",
+        "files": [
+          {
+            "path": "src/core/act.js",
+            "git_blob_sha": "731e56c89512650bb56dcc9318e495a2b14dd85e"
+          },
+          {
+            "path": "src/core/actor.js",
+            "git_blob_sha": "d6824aceada5fd8f696df4312f0ec4486f82b06b"
+          },
+          {
+            "path": "src/core/chain.js",
+            "git_blob_sha": "c816e89170277c16d2820548c2b31ace6f797e0d"
+          },
+          {
+            "path": "src/core/color.js",
+            "git_blob_sha": "60cdedd3352b3a682ef0391f4b3957918b5756d3"
+          },
+          {
+            "path": "src/core/font.js",
+            "git_blob_sha": "1aa816b802fff7beb490548eeb792049ec824da0"
+          },
+          {
+            "path": "src/core/fx.js",
+            "git_blob_sha": "1acacba6e8cf7c7ded76c5cfc8b02c128f8f1fc7"
+          },
+          {
+            "path": "src/core/index.js",
+            "git_blob_sha": "14b3144cb33068271221f1766994b627660d5d93"
+          },
+          {
+            "path": "src/core/math.js",
+            "git_blob_sha": "90356680e4696072b6fc8faedcc9ac15ef42ae9d"
+          },
+          {
+            "path": "src/core/painter.js",
+            "git_blob_sha": "4f397dbf558e29ad04fcba9e45488b4ee588bb39"
+          },
+          {
+            "path": "src/core/particles.js",
+            "git_blob_sha": "345c67fbea7cfa5f03e1591bb428a18abdd0263b"
+          },
+          {
+            "path": "src/core/poses.js",
+            "git_blob_sha": "c6a9daa3b945405b53d7d49ff072bb0a8499f1e8"
+          },
+          {
+            "path": "src/core/rig.js",
+            "git_blob_sha": "525b7145624f53722fde335503cdf271d3958ca5"
+          },
+          {
+            "path": "src/core/scene.js",
+            "git_blob_sha": "04b61a341eaf062c46ad5dfe028428ec909db33f"
+          },
+          {
+            "path": "src/core/shapes.js",
+            "git_blob_sha": "a59200b40f137b5852b1f8917dc6c7209f6ffe45"
+          },
+          {
+            "path": "src/core/sim.js",
+            "git_blob_sha": "68f1a7097a6cf263b03d61a5144cfdb3938e4850"
+          },
+          {
+            "path": "src/fx/explosions/small-explosion.js",
+            "git_blob_sha": "64b98a2976bf623829fe4bc9bdfc2b4ae894672a"
+          },
+          {
+            "path": "src/fx/fire/_lib.js",
+            "git_blob_sha": "f39107f588c1e887b29e7e7c798bb53b89626531"
+          },
+          {
+            "path": "src/fx/fire/campfire.js",
+            "git_blob_sha": "2ff5b492f2751ccc43795044d69b33571fd4eb63"
+          },
+          {
+            "path": "src/fx/lightning/_lib.js",
+            "git_blob_sha": "0d41c83b5f154235588d80143f2d4fd7537c4886"
+          },
+          {
+            "path": "src/fx/lightning/lightning-strike.js",
+            "git_blob_sha": "252bdc884409f10453f6b2c4a7d39459300a3086"
+          }
+        ],
+        "license_git_blob_sha": "74eff5d22b4195a2b1690d1c769fd5f2537e7cf6"
+      },
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "license_evidence": "https://github.com/patch-gg/pixelfx/blob/5294518ce7c72e48b6100a744596e0acf57f2826/LICENSE",
+      "attribution": "Copyright (c) 2026 Patch; Copyright (c) 2026 Hugo Duprez; MIT license retained",
+      "restrictions": "No Patch trademarks, Patch Pixel font, model weights, third-party media or platform content",
+      "used_by": [
+        "demos/patch-pixelfx"
+      ],
+      "ads": false
+    },
+    {
       "id": "three-worlds-combat-facing",
       "title": "Three Worlds combat target selection and angular inertia",
       "kind": "combat",

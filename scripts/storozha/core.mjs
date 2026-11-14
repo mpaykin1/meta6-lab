@@ -45,7 +45,9 @@ export function staleDecision(pr, now = Date.now()) {
 }
 
 export function quota(prs, number, now = Date.now()) {
-  const living = prs.filter(p => alive(p, now))
+  // Claude 14.11.2026: черновик (draft) — PR, отложенный до решения Claude или замены; слить его нельзя,
+  // поэтому он не занимает место среди «пяти старейших» и не блокирует очередь (тупик #3/#72/#87/#133/#191).
+  const living = prs.filter(p => alive(p, now) && p.draft !== true)
     .sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at) || a.number - b.number);
   const pr = prs.find(p => p.number === number);
   const selected = living.slice(0, 5);

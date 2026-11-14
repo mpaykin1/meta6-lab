@@ -1,16 +1,24 @@
 {
-  "generated_at": "2026-11-14T05:39:03.268Z",
+  "generated_at": "2026-11-14T05:43:07.110Z",
   "sha": {
-    "lab": "bc24124303060dcb9ad75353d6a6f1ba967dd169",
+    "lab": "f1aa7aaa99210b4287b13aac4fec774ad318e1d4",
     "mg": "7ae9604d0dfc969116895cd06bf11b4c3cdf15ff"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562516637",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562825303",
   "review": {
     "protected": [
+      {
+        "number": 317,
+        "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03",
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-branch-ownership.mjs"
+        ]
+      },
       {
         "number": 315,
         "sha": "4319f8056814a5986b87200676b87f585c09705c",
@@ -194,7 +202,13 @@
         ]
       }
     ],
-    "redLab": [],
+    "redLab": [
+      {
+        "workflow": "Investigation snapshot",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562565734",
+        "step": "Refresh investigation snapshot from GitHub"
+      }
+    ],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -369,11 +383,16 @@
     ]
   },
   "pr": {
-    "open": 52,
+    "open": 50,
     "conflicts": "нет данных",
-    "merged": 40,
-    "closed": 77,
+    "merged": 41,
+    "closed": 78,
     "mergedItems": [
+      {
+        "number": 317,
+        "title": "fix(library-machine): restrict automatic commits to owned sy",
+        "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03"
+      },
       {
         "number": 312,
         "title": "Reference: ASQURA Office — clean source-only transfer of #13",
@@ -577,6 +596,14 @@
     ],
     "protectedItems": [
       {
+        "number": 317,
+        "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03",
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-branch-ownership.mjs"
+        ]
+      },
+      {
         "number": 315,
         "sha": "4319f8056814a5986b87200676b87f585c09705c",
         "paths": [
@@ -762,7 +789,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2105,
+      "count": 2116,
       "folders": "нет данных"
     },
     "mg": {
@@ -859,6 +886,7 @@
     "| 1109 | 13.11.2026 | investigation-snapshot писал generated_at при прежних фактах и мог публиковать неполную выборку при исчерпании лимита GitHub API | [workflow](https://github.com/mpaykin1/meta6-lab/blob/main/.github/workflows/investigation-snapshot.yml) | `scripts/investigation/mutate-publish.mjs`: почасовой лимит, неполный API, время ≠ факт; [патч](https://github.com/mpaykin1/meta6-lab/commit/50db5add34a89257bb2234bdf7f038e786de17c5) |",
     "| 1110 | 13.11.2026 | MG Dispatcher запрашивал PR из закрытой исторической очереди и падал на 403 GitHub API quota, теряя возможность публиковать исправную очередь | [красный run 43410481729](https://github.com/mpaykin1/meta6-lab/actions/runs/43410481729) | `scripts/dispetcher/mutate-quota.mjs`: 3 мутации на 403/429 и ошибочную авторизацию; [патч](https://github.com/mpaykin1/meta6-lab/commit/03836dddab7a05986b00de2f9b92dec9924c93cf) |",
     "| 1120 | 14.11.2026 | STOROZHA quota держала «пять старейших» PR даже когда их нельзя слить без решения Claude (#3, #72, #87, #133, #191): очередь из 42 PR стояла целиком | [quota run 43552615225](https://github.com/mpaykin1/meta6-lab/actions/runs/43552615225/job/132318241088) | `scripts/storozha/mutate-storozha.mjs` (мутация «quota: draft PRs block the queue again») |",
-    "| 1121 | 14.11.2026 | STOROZHA reference на каждом PR тратил REST-квоту (GET /pulls/N и /files) и падал на «HTTP 403 API rate limit exceeded», блокируя #301 и #308 без ошибки в коде | [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/43493548770) | `scripts/storozha/mutate-storozha.mjs` (мутации «git files: …») |"
+    "| 1121 | 14.11.2026 | STOROZHA reference на каждом PR тратил REST-квоту (GET /pulls/N и /files) и падал на «HTTP 403 API rate limit exceeded», блокируя #301 и #308 без ошибки в коде | [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/43493548770) | `scripts/storozha/mutate-storozha.mjs` (мутации «git files: …») |",
+    "| 1124 | 14.11.2026 | Library Machine напрямую коммитил 200 производных файлов в чужой PR #314 после push игр | В workflow ветка записи разрешалась для любой ветки кроме main | Ветку записи ограничить только `lab/library-machine-sync`, прежняя инвентаризация не отключена; 4 мутации, включая ложный широкий префикс: scripts/library/mutate-branch-ownership.mjs |"
   ]
 }

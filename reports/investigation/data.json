@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T05:33:31.309Z",
+  "generated_at": "2026-11-14T05:44:23.240Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -30,7 +30,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/assets-tumannye-shpili-20261114",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 305,
       "pr_state": "open",
@@ -39,7 +39,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/305",
       "taken_at": "2026-11-13 20:20",
       "last_commit_at": "2026-11-13 20:45",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-quota"
     },
     {
       "id": 2,
@@ -47,7 +47,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/asset-pack-shpili",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 303,
       "pr_state": "open",
@@ -56,7 +56,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/303",
       "taken_at": "2026-11-13 15:48",
       "last_commit_at": "2026-11-13 20:37",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 3,
@@ -64,7 +64,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/assets-tumannye-shpili-20261114; lab/assets-tumannye-shpili-20261114-2338",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 305,
       "pr_state": "open",
@@ -73,7 +73,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/305",
       "taken_at": "2026-11-13 23:33",
       "last_commit_at": "2026-11-13 20:35",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-quota"
     },
     {
       "id": 4,
@@ -81,7 +81,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/status-finish-source-20261113",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 302,
       "pr_state": "open",
@@ -90,7 +90,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/302",
       "taken_at": "2026-11-13 19:07 UTC",
       "last_commit_at": "2026-11-13 19:22",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: browser-open-all, storozha-reference, storozha-quota, storozha-reference-queue"
     },
     {
       "id": 5,
@@ -98,7 +98,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/native-catalog-recovery-20261113",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 300,
       "pr_state": "open",
@@ -107,7 +107,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/300",
       "taken_at": "2026-11-13 19:06",
       "last_commit_at": "2026-11-13 19:20",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference, storozha-quota, storozha-reference-queue"
     },
     {
       "id": 6,
@@ -115,7 +115,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (чат)",
       "branch": "lab/ci-ochered-concurrency",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 299,
       "pr_state": "open",
@@ -124,7 +124,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/299",
       "taken_at": "2026-11-13 18:55 UTC",
       "last_commit_at": "2026-11-13 19:12",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-quota, dispatch"
     },
     {
       "id": 7,
@@ -132,7 +132,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/ci-ochered-concurrency",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 299,
       "pr_state": "open",
@@ -141,7 +141,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/299",
       "taken_at": "2026-11-10 08:57",
       "last_commit_at": "2026-11-13 19:12",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-quota, dispatch"
     },
     {
       "id": 8,
@@ -149,7 +149,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/ci-ochered-concurrency",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 299,
       "pr_state": "open",
@@ -158,7 +158,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/299",
       "taken_at": "2026-11-10 05:51",
       "last_commit_at": "2026-11-13 19:12",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-quota, dispatch"
     },
     {
       "id": 9,
@@ -166,7 +166,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/ostrov-aptekarya-ii",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ",
       "pr": 297,
       "pr_state": "open",
@@ -175,7 +175,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/297",
       "taken_at": "2026-11-13 17:09",
       "last_commit_at": "2026-11-13 17:49",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, changed-games, bot, storozha-quota, archive-chapter"
     },
     {
       "id": 10,
@@ -183,7 +183,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT, один PR одной игры",
       "branch": "lab/polza-b2-broken-city-20261113",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 291,
       "pr_state": "open",
@@ -192,7 +192,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/291",
       "taken_at": "2026-11-13 11:31",
       "last_commit_at": "2026-11-13 11:52",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, changed-games, bot, storozha-quota"
     },
     {
       "id": 11,
@@ -200,7 +200,7 @@
       "project": "МГЛ → МГ",
       "owner": "ChatGPT",
       "branch": "lab/bez-patternov-20261113",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 290,
       "pr_state": "open",
@@ -209,7 +209,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/290",
       "taken_at": "2026-11-13 11:11",
       "last_commit_at": "2026-11-13 11:50",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue"
     },
     {
       "id": 12,
@@ -217,7 +217,7 @@
       "project": "МГЛ",
       "owner": "проходчик",
       "branch": "lab/prohodchik-b2-motion-20261111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 258,
       "pr_state": "open",
@@ -226,7 +226,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/258",
       "taken_at": "2026-11-12 14:22",
       "last_commit_at": "2026-11-13 11:49",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue"
     },
     {
       "id": 13,
@@ -234,7 +234,7 @@
       "project": "МГЛ",
       "owner": "Кто: проходчик",
       "branch": "lab/prohodchik-b2-motion-20261111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 258,
       "pr_state": "open",
@@ -243,7 +243,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/258",
       "taken_at": "2026-11-13 08:20",
       "last_commit_at": "2026-11-13 11:49",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue"
     },
     {
       "id": 14,
@@ -251,7 +251,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/antisueta",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 289,
       "pr_state": "open",
@@ -260,7 +260,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/289",
       "taken_at": "2026-11-13 11:22",
       "last_commit_at": "2026-11-13 11:45",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 15,
@@ -285,7 +285,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT (УСКОРЕНИЕ, продолжение существующего PR #220)",
       "branch": "lab/zadachi-conflicts",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 220,
       "pr_state": "open",
@@ -294,7 +294,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/220",
       "taken_at": "2026-11-13T08:17:00+00:00",
       "last_commit_at": "2026-11-13 11:30",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue"
     },
     {
       "id": 17,
@@ -302,7 +302,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/remont-main-veil-terraces",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 245,
       "pr_state": "open",
@@ -311,7 +311,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/245",
       "taken_at": "2026-11-11 11:21",
       "last_commit_at": "2026-11-13 11:29",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue"
     },
     {
       "id": 18,
@@ -319,7 +319,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT",
       "branch": "lab/archer-retention-exp-1",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 262,
       "pr_state": "open",
@@ -328,7 +328,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/262",
       "taken_at": "2026-11-11 14:42",
       "last_commit_at": "2026-11-13 11:25",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue"
     },
     {
       "id": 19,
@@ -336,7 +336,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/ink-fallen-guardian-reference-20261113",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 284,
       "pr_state": "open",
@@ -345,7 +345,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/284",
       "taken_at": "2026-11-13 10:26",
       "last_commit_at": "2026-11-13 11:22",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-quota, storozha-quota"
     },
     {
       "id": 20,
@@ -353,7 +353,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/auditor-truthful-cycle-20261111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 254,
       "pr_state": "open",
@@ -362,7 +362,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/254",
       "taken_at": "2026-11-11 13:57",
       "last_commit_at": "2026-11-13 11:16",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue, storozha-reference-queue"
     },
     {
       "id": 21,
@@ -387,7 +387,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-4",
       "branch": "lab/remont-r1-library",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 218,
       "pr_state": "open",
@@ -396,7 +396,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/218",
       "taken_at": "2026-11-11 03:38",
       "last_commit_at": "2026-11-13 11:12",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 23,
@@ -404,7 +404,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/remont-r1-library",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 218,
       "pr_state": "open",
@@ -413,7 +413,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/218",
       "taken_at": "2026-11-10 05:03",
       "last_commit_at": "2026-11-13 11:12",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 24,
@@ -421,7 +421,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/ink-fallen-robot-20261113",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 283,
       "pr_state": "open",
@@ -430,7 +430,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/283",
       "taken_at": "2026-11-13 09:55",
       "last_commit_at": "2026-11-13 11:11",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue, kontur-guard, storozha-reference, storozha-quota"
     },
     {
       "id": 25,
@@ -438,7 +438,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/ink-fallen-guardian-recipe-20261113",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 286,
       "pr_state": "open",
@@ -447,7 +447,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/286",
       "taken_at": "2026-11-13 10:37",
       "last_commit_at": "2026-11-13 11:11",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-quota"
     },
     {
       "id": 26,
@@ -506,7 +506,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/kak-proveryayushchij-traps",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 247,
       "pr_state": "open",
@@ -515,7 +515,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/247",
       "taken_at": "2026-11-11 11:34",
       "last_commit_at": "2026-11-13 11:01",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference, storozha-reference, storozha-reference-queue"
     },
     {
       "id": 30,
@@ -540,7 +540,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT: проверяющий, ремонт конфликта",
       "branch": "lab/uluchshatel-preflight-20261111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 260,
       "pr_state": "open",
@@ -549,7 +549,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/260",
       "taken_at": "2026-11-13 10:20",
       "last_commit_at": "2026-11-13 10:57",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference, storozha-reference, storozha-reference-queue"
     },
     {
       "id": 32,
@@ -591,7 +591,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT: проверяющий, ремонт конфликта",
       "branch": "lab/archer-meta-adfree-clean-1111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ",
       "pr": 255,
       "pr_state": "open",
@@ -600,7 +600,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/255",
       "taken_at": "2026-11-13 10:20",
       "last_commit_at": "2026-11-13 10:31",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference, storozha-reference-queue, changed-games, bot"
     },
     {
       "id": 35,
@@ -642,7 +642,7 @@
       "project": "МГЛ",
       "owner": "MG-ремонтник",
       "branch": "lab/claude-adfree-catalog-1110",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 234,
       "pr_state": "open",
@@ -651,7 +651,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/234",
       "taken_at": "2026-11-11 07:51",
       "last_commit_at": "2026-11-13 03:48",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue, changed-games"
     },
     {
       "id": 38,
@@ -659,7 +659,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/claude-adfree-catalog-1110",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 234,
       "pr_state": "open",
@@ -668,7 +668,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/234",
       "taken_at": "2026-11-11 04:55",
       "last_commit_at": "2026-11-13 03:48",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue, changed-games"
     },
     {
       "id": 39,
@@ -676,7 +676,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/claude-adfree-catalog-1110",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 234,
       "pr_state": "open",
@@ -685,7 +685,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/234",
       "taken_at": "2026-11-11 04:48",
       "last_commit_at": "2026-11-13 03:48",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue, changed-games"
     },
     {
       "id": 40,
@@ -693,7 +693,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/claude-adfree-catalog-1110",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 234,
       "pr_state": "open",
@@ -702,7 +702,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/234",
       "taken_at": "2026-11-11 06:23",
       "last_commit_at": "2026-11-13 03:48",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue, changed-games"
     },
     {
       "id": 41,
@@ -710,7 +710,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/claude-adfree-catalog-1110",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 234,
       "pr_state": "open",
@@ -719,7 +719,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/234",
       "taken_at": "2026-11-11 05:43",
       "last_commit_at": "2026-11-13 03:48",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue, changed-games"
     },
     {
       "id": 42,
@@ -727,7 +727,7 @@
       "project": "МГЛ",
       "owner": "MG-ремонтник",
       "branch": "lab/claude-adfree-catalog-1110",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 234,
       "pr_state": "open",
@@ -736,7 +736,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/234",
       "taken_at": "2026-11-10 12:51",
       "last_commit_at": "2026-11-13 03:48",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue, changed-games"
     },
     {
       "id": 43,
@@ -744,7 +744,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/claude-adfree-catalog-1110",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 234,
       "pr_state": "open",
@@ -753,7 +753,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/234",
       "taken_at": "2026-11-10 11:13",
       "last_commit_at": "2026-11-13 03:48",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue, changed-games"
     },
     {
       "id": 44,
@@ -761,7 +761,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/sunken-city-reference-1109",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 191,
       "pr_state": "open",
@@ -778,7 +778,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-2",
       "branch": "lab/twilight-island-bot",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 3,
       "pr_state": "open",
@@ -787,7 +787,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/3",
       "taken_at": "2026-11-10 13:20",
       "last_commit_at": "2026-11-12 14:45",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference, bot, changed-games"
     },
     {
       "id": 46,
@@ -795,7 +795,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/twilight-island-bot",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 3,
       "pr_state": "open",
@@ -804,7 +804,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/3",
       "taken_at": "2026-11-06 14:45",
       "last_commit_at": "2026-11-12 14:45",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference, bot, changed-games"
     },
     {
       "id": 47,
@@ -812,7 +812,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/fix-mobile-screen-all-games-1111",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 235,
       "pr_state": "open",
@@ -821,66 +821,15 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/235",
       "taken_at": "2026-11-11 04:46",
       "last_commit_at": "2026-11-12 14:42",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference, storozha-reference-queue"
     },
     {
       "id": 48,
-      "task": "Довести PR #133: эталон графики Asqura — ТОЛКАЧ: [STOROZHA FAIL: эталон только добавлением](https://github.com/mpaykin1/meta6-lab/actions/runs/43239240778/job/131674186810), [передано Claude](https://github.com/mpaykin1/meta6-lab/commit/be18317412852ca804d68c94d8b85670ad02fc24)",
-      "project": "МГЛ",
-      "owner": "толкач",
-      "branch": "lab/asqura-single-graphics-reference-20261108",
-      "status": "ошибка",
-      "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
-      "pr": 133,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43239240778/job/132312468275",
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/133",
-      "taken_at": "2026-11-10 13:30",
-      "last_commit_at": "2026-11-12 14:38",
-      "remaining": "в работе: [К3 ловушка и журнал](https://github.com/mpaykin1/meta6-lab/commit/633ad10443f9c5e9f1132b6d91d68ad3955b0159), [зелёный kontur-guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42773326044), нужен независимый ревьюер для самослияния"
-    },
-    {
-      "id": 49,
-      "task": "PR #133: перенести ASQURA Office в reference без изменений",
-      "project": "МГЛ",
-      "owner": "чат ChatGPT",
-      "branch": "lab/asqura-single-graphics-reference-20261108",
-      "status": "ошибка",
-      "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
-      "pr": 133,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43239240778/job/132312468275",
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/133",
-      "taken_at": "2026-11-10 06:48",
-      "last_commit_at": "2026-11-12 14:38",
-      "remaining": "в работе: [К3 ловушка и журнал](https://github.com/mpaykin1/meta6-lab/commit/633ad10443f9c5e9f1132b6d91d68ad3955b0159), [зелёный kontur-guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42773326044), нужен независимый ревьюер для самослияния"
-    },
-    {
-      "id": 50,
-      "task": "ASQURA Office — первый эталон графики и анимации",
-      "project": "МГЛ",
-      "owner": "ChatGPT (сам не записал — добавил сторож)",
-      "branch": "lab/asqura-single-graphics-reference-20261108",
-      "status": "ошибка",
-      "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
-      "pr": 133,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43239240778/job/132312468275",
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/133",
-      "taken_at": "2026-11-08 15:03",
-      "last_commit_at": "2026-11-12 14:38",
-      "remaining": "в работе: [К3 ловушка и журнал](https://github.com/mpaykin1/meta6-lab/commit/633ad10443f9c5e9f1132b6d91d68ad3955b0159), [зелёный kontur-guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42773326044), нужен независимый ревьюер для самослияния"
-    },
-    {
-      "id": 51,
       "task": "УЛУЧШАТЕЛЬ ИГР: games/sumerki-i-pepel-2-copy × правило №13 (бот-ручка), Кто: улучшатель; 2 красных touch run [43174673836](https://github.com/mpaykin1/meta6-lab/actions/runs/43174673836), [43186923586](https://github.com/mpaykin1/meta6-lab/actions/runs/43186923586); НУЖЕН CLAUDE, исходный статус не меняется",
       "project": "МГЛ",
       "owner": "улучшатель",
       "branch": "lab/uluchshatel-sumerki-copy-bot13-20261112",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 272,
       "pr_state": "open",
@@ -889,10 +838,10 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/272",
       "taken_at": "2026-11-12 07:04",
       "last_commit_at": "2026-11-12 14:32",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue"
     },
     {
-      "id": 52,
+      "id": 49,
       "task": "УЛУЧШАТЕЛЬ: саморазвитие б) рецепт правила №13 из подтверждённых источников, Кто: улучшатель",
       "project": "МГЛ",
       "owner": "улучшатель",
@@ -909,7 +858,7 @@
       "remaining": "Исправить красные проверки: storozha-quota"
     },
     {
-      "id": 53,
+      "id": 50,
       "task": "ЭТАЛОНЫ В БИБЛИОТЕКУ — Veil Terraces: отдельный модуль камеры, исходные байты, Chromium; [run #43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458) PASS (1 камера); [quota FAIL #43173380383](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383); полных эталонов 0 → 0, систем в PR 0 → 1",
       "project": "МГЛ",
       "owner": "Кто: библиотека",
@@ -926,12 +875,29 @@
       "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-quota, storozha-quota"
     },
     {
-      "id": 54,
+      "id": 51,
+      "task": "Reference: ASQURA Office — clean source-only transfer of #133",
+      "project": "МГЛ",
+      "owner": "ChatGPT (сам не записал — добавил сторож)",
+      "branch": "lab/asqura-office-clean-transfer-20261114",
+      "status": "успех",
+      "original_status": "⚠ молчит больше часа",
+      "pr": 312,
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/312",
+      "taken_at": "2026-11-14 04:03",
+      "last_commit_at": "2026-11-14 05:32",
+      "remaining": "слит [bc24124303060dcb9ad75353d6a6f1ba967dd169](https://github.com/mpaykin1/meta6-lab/commit/bc24124303060dcb9ad75353d6a6f1ba967dd169)"
+    },
+    {
+      "id": 52,
       "task": "КАРТА СИЛ: экзамены, статистика PR, маршрутизация диспетчера",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/karta-sil",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "⚠ молчит больше часа",
       "pr": 301,
       "pr_state": "open",
@@ -940,10 +906,10 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/301",
       "taken_at": "2026-11-13 19:05",
       "last_commit_at": "2026-11-14 04:18",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference, storozha-reference, dispatch, storozha-reference-queue"
     },
     {
-      "id": 55,
+      "id": 53,
       "task": "Reference: Sunken City source ZIP and playable files, clean #191 transfer",
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
@@ -953,36 +919,19 @@
       "pr": 314,
       "pr_state": "open",
       "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43555617397/job/132327746145",
+      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562767615/job/132349894661",
       "url": "https://github.com/mpaykin1/meta6-lab/pull/314",
       "taken_at": "2026-11-14 04:05",
       "last_commit_at": "2026-11-14 04:05",
-      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference"
+      "remaining": "Исправить красные проверки: library-machine, changed-games"
     },
     {
-      "id": 56,
-      "task": "feat(portal): clean Play / Connect / Earn transfer of #87",
-      "project": "МГЛ",
-      "owner": "ChatGPT (сам не записал — добавил сторож)",
-      "branch": "lab/portal-play-connect-earn-clean-20261114",
-      "status": "в работе",
-      "original_status": "⚠ молчит больше часа",
-      "pr": 313,
-      "pr_state": "open",
-      "check": "pending",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562085079/job/132347830924",
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/313",
-      "taken_at": "2026-11-14 04:03",
-      "last_commit_at": "2026-11-14 04:03",
-      "remaining": "Довести PR до зелёных проверок и слияния"
-    },
-    {
-      "id": 57,
+      "id": 54,
       "task": "Patch → PixelFX: лицензированный импорт и игровая демонстрация",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/patch-import",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "⚠ молчит больше часа",
       "pr": 310,
       "pr_state": "open",
@@ -991,10 +940,10 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/310",
       "taken_at": "2026-11-14 03:30",
       "last_commit_at": "2026-11-14 03:58",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference, storozha-reference-queue"
     },
     {
-      "id": 58,
+      "id": 55,
       "task": "docs: IM1–IM5 из #72 — документация на свежем main",
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
@@ -1011,12 +960,12 @@
       "remaining": "слит [e07b085e4bec73081ff804be24a7398ada4b68c3](https://github.com/mpaykin1/meta6-lab/commit/e07b085e4bec73081ff804be24a7398ada4b68c3), [PR #308](https://github.com/mpaykin1/meta6-lab/pull/308)"
     },
     {
-      "id": 59,
+      "id": 56,
       "task": "Проверка ботов: достоверные результаты, безопасный ремонт и повреждённые пакеты",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/bot-audit-20261114",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "⚠ молчит больше часа",
       "pr": 311,
       "pr_state": "open",
@@ -1025,44 +974,10 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/311",
       "taken_at": "2026-11-14 12:00",
       "last_commit_at": "2026-11-14 03:56",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference, storozha-quota, storozha-reference-queue"
     },
     {
-      "id": 60,
-      "task": "Reference: ASQURA Office — clean source-only transfer of #133",
-      "project": "МГЛ",
-      "owner": "ChatGPT (сам не записал — добавил сторож)",
-      "branch": "lab/asqura-office-clean-transfer-20261114",
-      "status": "в работе",
-      "original_status": "🔨 В РАБОТЕ",
-      "pr": 312,
-      "pr_state": "open",
-      "check": "pending",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562061483/job/132347775123",
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/312",
-      "taken_at": "2026-11-14 04:03",
-      "last_commit_at": "2026-11-14 05:32",
-      "remaining": "Довести PR до зелёных проверок и слияния"
-    },
-    {
-      "id": 61,
-      "task": "fix(shpili): шарнирный страж и собор — пара на просмотр",
-      "project": "МГЛ",
-      "owner": "ChatGPT (сам не записал — добавил сторож)",
-      "branch": "lab/assets-tumannye-shpili-20261114-2338",
-      "status": "конфликт",
-      "original_status": "🔨 В РАБОТЕ",
-      "pr": 306,
-      "pr_state": "open",
-      "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562002235/job/132347539398",
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/306",
-      "taken_at": "2026-11-13 20:35",
-      "last_commit_at": "2026-11-14 05:31",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
-    },
-    {
-      "id": 62,
+      "id": 57,
       "task": "БЮДЖЕТ GitHub API — Карта сил",
       "project": "МГЛ",
       "owner": "чат ChatGPT, отдельный PR без ядра",
@@ -1072,14 +987,48 @@
       "pr": 316,
       "pr_state": "open",
       "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43561753034/job/132346865234",
+      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562631433/job/132349530437",
       "url": "https://github.com/mpaykin1/meta6-lab/pull/316",
       "taken_at": "2026-11-14T05:12:18Z",
-      "last_commit_at": "2026-11-14 05:29",
+      "last_commit_at": "2026-11-14 05:39",
       "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
-      "id": 63,
+      "id": 58,
+      "task": "fix(shpili): шарнирный страж и собор — пара на просмотр",
+      "project": "МГЛ",
+      "owner": "ChatGPT (сам не записал — добавил сторож)",
+      "branch": "lab/assets-tumannye-shpili-20261114-2338",
+      "status": "в работе",
+      "original_status": "🔨 В РАБОТЕ",
+      "pr": 306,
+      "pr_state": "open",
+      "check": "pending",
+      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562370359/job/132348710364",
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/306",
+      "taken_at": "2026-11-13 20:35",
+      "last_commit_at": "2026-11-14 05:36",
+      "remaining": "Довести PR до зелёных проверок и слияния"
+    },
+    {
+      "id": 59,
+      "task": "feat(portal): clean Play / Connect / Earn transfer of #87",
+      "project": "МГЛ",
+      "owner": "ChatGPT (сам не записал — добавил сторож)",
+      "branch": "lab/portal-play-connect-earn-clean-20261114",
+      "status": "в работе",
+      "original_status": "🔨 В РАБОТЕ",
+      "pr": 313,
+      "pr_state": "open",
+      "check": "pending",
+      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562085079/job/132347830924",
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/313",
+      "taken_at": "2026-11-14 04:03",
+      "last_commit_at": "2026-11-14 05:33",
+      "remaining": "Довести PR до зелёных проверок и слияния"
+    },
+    {
+      "id": 60,
       "task": "STOROZHA reference: файлы PR из git, без REST-квоты (403 блокировал #301, #308)",
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
@@ -1096,12 +1045,12 @@
       "remaining": "Ничего, задача закрыта"
     },
     {
-      "id": 64,
+      "id": 61,
       "task": "Проверить PR #218 и ограничения безопасного слияния",
       "project": "МГЛ",
       "owner": "MG-строитель-4",
       "branch": "lab/remont-r1-library",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🙋 НУЖЕН CLAUDE: PR меняет .github/workflows/library-machine.yml",
       "pr": 218,
       "pr_state": "open",
@@ -1110,15 +1059,15 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/218",
       "taken_at": "2026-11-11 04:41",
       "last_commit_at": "2026-11-13 11:12",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 65,
+      "id": 62,
       "task": "Проверяющий: постоянное развитие",
       "project": "МГЛ",
       "owner": "чат ChatGPT: журналы #255/#260 и совместимость проверок",
       "branch": "lab/kak-proveryayushchij-traps",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🙋 НУЖЕН CLAUDE: подпись на изменение существующих проверок",
       "pr": 247,
       "pr_state": "open",
@@ -1127,10 +1076,10 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/247",
       "taken_at": "2026-11-13 08:28",
       "last_commit_at": "2026-11-13 11:01",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference, storozha-reference, storozha-reference-queue"
     },
     {
-      "id": 66,
+      "id": 63,
       "task": "Доводчик PR: 15 минут, безопасное обновление веток, журналы без конфликтов, порог 1 час",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -1147,7 +1096,7 @@
       "remaining": "Исправить красные проверки: storozha-reference, dispatch, storozha-reference-queue"
     },
     {
-      "id": 67,
+      "id": 64,
       "task": "Ревизор META GAMES: продолжение круга и проверка незавершённых улучшений; [#282](https://github.com/mpaykin1/meta6-lab/pull/282), [Actions](https://github.com/mpaykin1/meta6-lab/actions/runs/43392251668), интервалы и GraphQL pin не подтверждены",
       "project": "МГЛ",
       "owner": "ревизор",
@@ -1164,7 +1113,7 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 68,
+      "id": 65,
       "task": "SEO-каталог без рекламы: канонический URL, структурированные данные, страницы 17 игр, Sitemap — [SEO-код и 17 страниц обновлены](https://github.com/mpaykin1/meta6-lab/commit/4b1b25fd5f0af69674e5afa0f9aa78bad0b7d7f5)",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
@@ -1181,12 +1130,12 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 69,
+      "id": 66,
       "task": "Исправить красные проверки PR #234 каталога игр",
       "project": "МГЛ",
       "owner": "MG-строитель-4",
       "branch": "lab/claude-adfree-catalog-1110",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🙋 НУЖЕН CLAUDE: защищённые эталоны, красный CI",
       "pr": 234,
       "pr_state": "open",
@@ -1195,15 +1144,15 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/234",
       "taken_at": "2026-11-11 08:44",
       "last_commit_at": "2026-11-13 03:48",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-reference-queue, changed-games"
     },
     {
-      "id": 70,
+      "id": 67,
       "task": "ТРИ СТОРОЖА: [код и мутации в #277](https://github.com/mpaykin1/meta6-lab/pull/277); [зелёные ловушки](https://github.com/mpaykin1/meta6-lab/actions/runs/43238005678); [main синхронизирован 46f15a2](https://github.com/mpaykin1/meta6-lab/commit/46f15a27081ae3c3d01e3a458ba679dd46f83a4b); нужны принятие Claude, токен и обязательная квота",
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/storozha-nedelya",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🙋 НУЖЕН CLAUDE: защищённые workflow; квота",
       "pr": 277,
       "pr_state": "open",
@@ -1212,27 +1161,10 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/277",
       "taken_at": "2026-11-12 14:25",
       "last_commit_at": "2026-11-13 03:30",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, storozha-quota, storozha-reference, storozha-reference-queue, storozha-reference"
     },
     {
-      "id": 71,
-      "task": "Довести PR #133: эталон Asqura",
-      "project": "МГЛ",
-      "owner": "MG-строитель-4",
-      "branch": "lab/asqura-single-graphics-reference-20261108",
-      "status": "ошибка",
-      "original_status": "🙋 НУЖЕН CLAUDE: защищённый эталон, PR #133",
-      "pr": 133,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43239240778/job/132312468275",
-      "url": "https://github.com/mpaykin1/meta6-lab/pull/133",
-      "taken_at": "2026-11-10 18:41",
-      "last_commit_at": "2026-11-12 14:38",
-      "remaining": "в работе: [К3 ловушка и журнал](https://github.com/mpaykin1/meta6-lab/commit/633ad10443f9c5e9f1132b6d91d68ad3955b0159), [зелёный kontur-guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42773326044), нужен независимый ревьюер для самослияния"
-    },
-    {
-      "id": 72,
+      "id": 68,
       "task": "Astra: заторы МГЛ",
       "project": "МГЛ",
       "owner": "Astra",
@@ -1249,12 +1181,12 @@
       "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 73,
+      "id": 69,
       "task": "PR #203: устранить конфликт с main",
       "project": "МГЛ",
       "owner": "MG-строитель-3",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🙋 НУЖЕН CLAUDE: защищённые workflow и эталон",
       "pr": 203,
       "pr_state": "open",
@@ -1263,10 +1195,10 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-11 06:34",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
-      "id": 74,
+      "id": 70,
       "task": "ТОЛКАЧ: #87 — [META GAMES guard FAIL: историческая .github/protected](https://github.com/mpaykin1/meta6-lab/actions/runs/42975697783/job/130374149800); [эскалировано Claude](https://github.com/mpaykin1/meta6-lab/commit/51c43718a0a25425b39f82e901cd17fd88cc2bbc), не сливать",
       "project": "МГЛ",
       "owner": "толкач",
@@ -1283,7 +1215,7 @@
       "remaining": "Исправить красные проверки: guard"
     },
     {
-      "id": 75,
+      "id": 71,
       "task": "Разобрать PR #210 по очереди слияния",
       "project": "МГЛ",
       "owner": "MG-строитель-4",
@@ -1298,6 +1230,74 @@
       "taken_at": "2026-11-10 07:39",
       "last_commit_at": "2026-11-10 06:36",
       "remaining": "НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652)"
+    },
+    {
+      "id": 72,
+      "task": "Довести PR #133: эталон графики Asqura — ТОЛКАЧ: [STOROZHA FAIL: эталон только добавлением](https://github.com/mpaykin1/meta6-lab/actions/runs/43239240778/job/131674186810), [передано Claude](https://github.com/mpaykin1/meta6-lab/commit/be18317412852ca804d68c94d8b85670ad02fc24)",
+      "project": "МГЛ",
+      "owner": "толкач",
+      "branch": "lab/asqura-single-graphics-reference-20261108",
+      "status": "ошибка",
+      "original_status": "💤 ЗАБРОШЕНО 3 дн — продолжить или закрыть",
+      "pr": 133,
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/133",
+      "taken_at": "2026-11-10 13:30",
+      "last_commit_at": "2026-11-12 14:38",
+      "remaining": "closed"
+    },
+    {
+      "id": 73,
+      "task": "PR #133: перенести ASQURA Office в reference без изменений",
+      "project": "МГЛ",
+      "owner": "чат ChatGPT",
+      "branch": "lab/asqura-single-graphics-reference-20261108",
+      "status": "ошибка",
+      "original_status": "💤 ЗАБРОШЕНО 3 дн — продолжить или закрыть",
+      "pr": 133,
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/133",
+      "taken_at": "2026-11-10 06:48",
+      "last_commit_at": "2026-11-12 14:38",
+      "remaining": "closed"
+    },
+    {
+      "id": 74,
+      "task": "ASQURA Office — первый эталон графики и анимации",
+      "project": "МГЛ",
+      "owner": "ChatGPT (сам не записал — добавил сторож)",
+      "branch": "lab/asqura-single-graphics-reference-20261108",
+      "status": "ошибка",
+      "original_status": "💤 ЗАБРОШЕНО 5 дн — продолжить или закрыть",
+      "pr": 133,
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/133",
+      "taken_at": "2026-11-08 15:03",
+      "last_commit_at": "2026-11-12 14:38",
+      "remaining": "closed"
+    },
+    {
+      "id": 75,
+      "task": "Довести PR #133: эталон Asqura",
+      "project": "МГЛ",
+      "owner": "MG-строитель-4",
+      "branch": "lab/asqura-single-graphics-reference-20261108",
+      "status": "ошибка",
+      "original_status": "💤 ЗАБРОШЕНО 3 дн — продолжить или закрыть",
+      "pr": 133,
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
+      "url": "https://github.com/mpaykin1/meta6-lab/pull/133",
+      "taken_at": "2026-11-10 18:41",
+      "last_commit_at": "2026-11-12 14:38",
+      "remaining": "closed"
     },
     {
       "id": 76,
@@ -1322,7 +1322,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-1",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 203,
       "pr_state": "open",
@@ -1331,7 +1331,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-11 02:06",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 78,
@@ -1339,7 +1339,7 @@
       "project": "МГЛ",
       "owner": "MG-строитель-1",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 203,
       "pr_state": "open",
@@ -1348,7 +1348,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-10 22:05",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 79,
@@ -1356,7 +1356,7 @@
       "project": "МГЛ",
       "owner": "MG-ремонтник",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 203,
       "pr_state": "open",
@@ -1365,7 +1365,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-10 18:50",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 80,
@@ -1373,7 +1373,7 @@
       "project": "МГЛ",
       "owner": "MG-ремонтник",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 203,
       "pr_state": "open",
@@ -1382,7 +1382,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-10 15:58",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 81,
@@ -1390,7 +1390,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/skin-rusty-robot",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 203,
       "pr_state": "open",
@@ -1399,7 +1399,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/203",
       "taken_at": "2026-11-09 16:21",
       "last_commit_at": "2026-11-11 07:10",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 82,
@@ -1458,7 +1458,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/render-broken-city-safe-1110",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "💤 ЗАБРОШЕНО 2 дн — продолжить или закрыть",
       "pr": 225,
       "pr_state": "open",
@@ -1467,7 +1467,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/225",
       "taken_at": "2026-11-10 06:26",
       "last_commit_at": "2026-11-11 06:34",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: storozha-reference-queue, changed-games, guard, performance, bot"
     },
     {
       "id": 86,
@@ -2965,6 +2965,13 @@
       "problem": "STOROZHA reference на каждом PR тратил REST-квоту (GET /pulls/N и /files) и падал на «HTTP 403 API rate limit exceeded», блокируя #301 и #308 без ошибки в коде",
       "detection": "[красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/43493548770)",
       "trap": "`scripts/storozha/mutate-storozha.mjs` (мутации «git files: …»)"
+    },
+    {
+      "id": 1124,
+      "date": "14.11.2026",
+      "problem": "Library Machine напрямую коммитил 200 производных файлов в чужой PR #314 после push игр",
+      "detection": "В workflow ветка записи разрешалась для любой ветки кроме main",
+      "trap": "Ветку записи ограничить только `lab/library-machine-sync`, прежняя инвентаризация не отключена; 4 мутации, включая ложный широкий префикс: scripts/library/mutate-branch-ownership.mjs"
     }
   ],
   "warnings": [

@@ -11174,7 +11174,7 @@ Object.defineProperty(window, '__META_BOT__', {
         const target = G.collected < G.total ? coins.filter(c => c.alive).sort((a,b) => Math.hypot(a.x-player.pos.x,a.z-player.pos.z)-Math.hypot(b.x-player.pos.x,b.z-player.pos.z))[0] : world?.beacon;
         return {
           x: player.pos.x, y: player.pos.y, z: player.pos.z,
-          level: 1, alive, dead: !alive,
+          level: 1, alive, dead: active && !alive,
           playing: active, state: G.state,
           progress: G.total > 0 ? Math.min(1, G.collected / G.total) : 0,
           goal: target ? { x: target.x, z: target.z } : null,

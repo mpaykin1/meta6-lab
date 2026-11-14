@@ -104,3 +104,20 @@ export function referenceGate(files, existingPaths) {
   }
   return [...new Set(errors)];
 }
+
+// Claude 14.11.2026: файлы PR из git вместо REST /pulls/N/files (403 rate limit блокировал проверки).
+export function filesFromGit(nameStatus, numstat) {
+  const kinds = {A: 'added', M: 'modified', D: 'removed', T: 'modified'};
+  const counts = new Map();
+  for (const line of numstat.split('\n').filter(Boolean)) {
+    const [add, del, ...name] = line.split('\t');
+    counts.set(name.join('\t'), {additions: Number(add) || 0, deletions: del === '-' ? 1 : Number(del) || 0});
+  }
+  return nameStatus.split('\n').filter(Boolean).map(line => {
+    const [code, ...name] = line.split('\t');
+    const filename = name.join('\t');
+    const status = kinds[code[0]];
+    if (!status) throw Error('Unknown git status ' + code + ' for ' + filename);
+    return {filename, status, ...(counts.get(filename) || {additions: 0, deletions: 0})};
+  });
+}

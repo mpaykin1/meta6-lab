@@ -37,6 +37,7 @@ jobs:
           STOROZHA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           STOROZHA_PR_NUMBER: ${{ github.event.pull_request.number }}
           STOROZHA_READ_ONLY: '1'
+          STOROZHA_EVENT_FILE: ${{ github.event_path }}
         run: node scripts/storozha/reference-check.mjs
   storozha-reference-queue:
     if: github.event_name == 'pull_request_target'

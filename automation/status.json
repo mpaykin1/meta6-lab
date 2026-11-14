@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-14T22:41:36.758Z",
+  "generated_at": "2026-11-14T22:52:31.266Z",
   "sha": {
-    "lab": "c0418db87f2de8c25c8b5a708a7de8b65b4cf8cb",
-    "mg": "4c9fc8549b991d55f12fa30621fceada1884d8ca"
+    "lab": "96726137310a3f0abaf7135fd0006d0539eca2af",
+    "mg": "42e706b7b27bfca00ae89dbf0787a3f319a3f0f4"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43649370144",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43650298743",
   "review": {
     "protected": [
       {
@@ -373,11 +373,11 @@
       }
     ],
     "proofs": {
-      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43647536501"
+      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43649370227"
     }
   },
   "pr": {
-    "open": 47,
+    "open": 48,
     "conflicts": "нет данных",
     "merged": 47,
     "closed": 82,
@@ -861,11 +861,11 @@
   },
   "changes": {
     "lab": {
-      "count": 2184,
+      "count": 2188,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 12,
+      "count": 13,
       "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:22, reference:22, rules:6, SOURCE_INDEX.md:1"
     }
   },

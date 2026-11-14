@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-14T06:25:40.634Z | МГЛ: 1866858d3206a3d159860933368bb65f7c81e472 | МГ: d8ce0d817cccfc4676963bc209d5920e76f4d883 | https://github.com/mpaykin1/meta6-lab/actions/runs/43566235913
+UTC: 2026-11-14T06:59:13.681Z | МГЛ: 0d6acb1db18aa6b05fb08d5ae0a899ece264c888 | МГ: d8ce0d817cccfc4676963bc209d5920e76f4d883 | https://github.com/mpaykin1/meta6-lab/actions/runs/43568866470
 ## ПРОВЕРИТЬ CLAUDE
 - PR #302 6ec51cb945f1e28fb2e7cab3cb215bcc27973de1: scripts/status/mutate-finish-summary.mjs, scripts/status/selftest.mjs
 - PR #318 102f39faec295019aed9bf1ae3879b484af0c9a3: .github/workflows/library-machine.yml, scripts/library/mutate-source-only-gate.mjs
@@ -14,7 +14,7 @@ UTC: 2026-11-14T06:25:40.634Z | МГЛ: 1866858d3206a3d159860933368bb65f7c81e472
 - | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
-готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43565997071))
+готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43566235799))
 M1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
 M2 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
 M3 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
@@ -33,13 +33,13 @@ L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 P1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 ## PR МГЛ
-открыто: 49 | конфликт: нет данных | слито: 44 | закрыто: 78
+открыто: 49 | конфликт: 33 | слито: 44 | закрыто: 78
 #302 fix(status): ФИНИШ из таблиц и подтверждённых прогонов main | 6ec51cb945f1e28fb2e7cab3cb215bcc27973de1
 #318 fix(library): strict source-only gate for new game transfers | 102f39faec295019aed9bf1ae3879b484af0c9a3
 #316 fix(api-budget): GraphQL batches and hourly bot limits | 4574e06a308792514a92db2f6328eb444f92d62a
 ещё 41: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2142 коммитов | нет данных
+МГЛ: 2143 коммитов | нет данных
 МГ: 10 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:6
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

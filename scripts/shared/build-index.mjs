@@ -53,6 +53,51 @@ for(const id of fs.readdirSync(dir).sort()){
     continue;
   }
   const meta=JSON.parse(readRegularFile(path.join(folder,'component.json')).toString('utf8'));
+  // External owners' code is admitted only with an explicit commercial MIT grant,
+  // pinned original bytes for every module, and the unchanged license notice.
+  // The existing owner-source branch below retains all of its original checks.
+  if(id==='patch-pixelfx'){
+    if(meta.id!==id || meta.registry!=='third-party-mit' ||
+       meta.license!=='MIT' || meta.license_file!=='LICENSE' ||
+       meta.entry!=='src/core/index.js' ||
+       meta.source?.repository!=='patch-gg/pixelfx' ||
+       !/^[a-f0-9]{40}$/.test(meta.source.commit) ||
+       !/^[a-f0-9]{40}$/.test(meta.source.git_blob_sha) ||
+       !/^[a-f0-9]{40}$/.test(meta.source.license_git_blob_sha) ||
+       !Array.isArray(meta.exports) || !meta.exports.length ||
+       !Array.isArray(meta.effects) || meta.effects.length!==3 ||
+       !Array.isArray(meta.source.files) || meta.source.files.length!==20)
+      throw Error('Invalid external MIT component passport '+id);
+    const license=readRegularFile(path.join(folder,'LICENSE'));
+    if(gitBlob(license)!==meta.source.license_git_blob_sha ||
+       !license.toString('utf8').includes('Permission is hereby granted') ||
+       !license.toString('utf8').includes('Copyright (c) 2026 Hugo Duprez'))
+      throw Error('External MIT notice changed '+id);
+    const files=new Set();
+    for(const file of meta.source.files){
+      if(typeof file.path!=='string' ||
+         !/^src\/(?:core|fx\/(?:fire|explosions|lightning))\/[a-z0-9_-]+\.js$/.test(file.path) ||
+         !/^[a-f0-9]{40}$/.test(file.git_blob_sha) || files.has(file.path))
+        throw Error('Invalid external source path or checksum '+id);
+      files.add(file.path);
+      const bytes=readRegularFile(path.join(folder,file.path));
+      if(gitBlob(bytes)!==file.git_blob_sha)
+        throw Error('External original bytes drifted: '+file.path);
+      const code=bytes.toString('utf8');
+      if(/\bimport\s*\(/.test(code))throw Error('Unexpected dynamic import: '+file.path);
+      for(const match of code.matchAll(/(?:^|\n)\s*(?:import|export)\s+[^\n]*?from\s*["']([^"']+)["']/g)){
+        if(!match[1].startsWith('.'))throw Error('External network/package import: '+file.path);
+        const dep=path.posix.normalize(path.posix.join(path.posix.dirname(file.path),match[1]));
+        if(!meta.source.files.some(other=>other.path===dep))
+          throw Error('Unpinned external dependency '+file.path+' -> '+dep);
+      }
+    }
+    if(meta.source.files.find(file=>file.path===meta.entry)?.git_blob_sha!==meta.source.git_blob_sha ||
+       !meta.effects.every(effect=>files.has(effect)))
+      throw Error('External entry/effects are not pinned '+id);
+    components.push(meta);
+    continue;
+  }
   if(meta.id!==id || !/^[a-zA-Z0-9_.-]+\.js$/.test(meta.entry) ||
      meta.source?.repository!=='mpaykin1/meta6' || !/^[a-f0-9]{40}$/.test(meta.source.commit) ||
      !/^[a-f0-9]{40}$/.test(meta.source.git_blob_sha) ||

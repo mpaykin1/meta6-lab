@@ -245,7 +245,9 @@ class HtmlPackTraps(unittest.TestCase):
 
     def test_HP10_petals_activated_from_real_explosion(self):
         harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
-        self.assertIn("if(id==='petals')explode();", harness)
+        wake = harness.split("window.__AC_WAKE__=id=>", 1)[1].split("window.__AC_APPLY__=", 1)[0]
+        self.assertIn("if(id==='petals'){", wake)
+        self.assertIn("  explode();", wake)
         self.assertIn("if(id==='bokeh'){", harness)
         self.assertIn("waterMat.uniforms.__acBokeh.value=0", harness)
         self.assertIn("const instancePart=id==='jaws'||id==='tendrils'", harness)

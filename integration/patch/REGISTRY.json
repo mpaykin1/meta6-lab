@@ -105,19 +105,34 @@
       "id": "trompe",
       "decision": "REVIEW",
       "license": "Apache-2.0",
-      "reason": "Assess offline code, providers, assets and costs"
+      "reason": "Assess offline code, providers, assets and costs; external assets and dependency rights not yet verified",
+      "license_evidence": "https://github.com/patch-gg/trompe/blob/main/LICENSE",
+      "code_license_confirmed": true,
+      "commercial_code_use": true
     },
     {
       "id": "anymove",
       "decision": "REVIEW",
       "license": "Apache-2.0",
-      "reason": "Exclude restricted model weights and videos"
+      "reason": "Exclude restricted model weights and videos; external assets and dependency rights not yet verified",
+      "license_evidence": "https://github.com/patch-gg/anymove/blob/main/LICENSE",
+      "code_license_confirmed": true,
+      "commercial_code_use": true
     },
     {
       "id": "crowdbricks",
       "decision": "REVIEW",
       "license": "Apache-2.0",
-      "reason": "Audit CUDA, model weights and commercial deployment"
+      "reason": "Audit CUDA, model weights and commercial deployment; external assets and dependency rights not yet verified",
+      "license_evidence": "https://github.com/patch-gg/crowdbricks/blob/main/LICENSE",
+      "code_license_confirmed": true,
+      "commercial_code_use": true
+    },
+    {
+      "id": "boss-babies-vs-toddlers",
+      "decision": "BLOCK",
+      "source_url": "https://github.com/patch-gg/boss-babies-vs-toddlers",
+      "reason": "No LICENSE in main; game code and branded assets cannot be reused without grant"
     }
   ]
 }

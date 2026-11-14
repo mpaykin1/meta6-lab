@@ -1207,7 +1207,7 @@ const SHPILI_PLUS=(()=>{
  // Погода: локальная гроза. Никаких полноэкранных надписей, молнии с плавным затуханием.
  {
    const id='storm-heart',g=newGroup(id,-34,46,-43);
-   aura(g,31,0xe67bb4,.72);
+   aura(g,22,0x5489a2,.11);
    const cloud=new T.Group();g.add(cloud);
    const R=rng(966),rain=[];
    for(let i=0;i<44;i++){
@@ -1216,15 +1216,97 @@ const SHPILI_PLUS=(()=>{
        i%3?0x539ab8:0xf5a6d1,.25+R()*.55);
      rain.push({mesh:m,x,y,speed:2+R()*4,phase:R()*6.28});
    }
-   for(let i=0;i<9;i++){
-     const x=(R()-.5)*12,y=3+R()*5;
-     const m=ball(cloud,1.25+R()*.75,i%3?0x153b55:0x4c315f,[x,y,-1.4],.75);
-     m.scale.set(1.5,.48,1); 
+   // Three long broken cloudbanks are irregular silhouettes, not a row of spheres.
+   const stormLayer=(seed,width,height,x,y,z,baseFog)=>{
+     const silhouette=mk(1024,640,(ctx,w,h)=>{
+       const V=rng(seed);
+       const ridge=[];
+       for(let px=45;px<w-35;){
+         const py=195+V()*105+Math.sin(px*.009)*37;
+         ridge.push([px,py]);px+=17+V()*33;
+       }
+       ridge.push([w-36,275]);
+       ctx.beginPath();ctx.moveTo(38,h*.66);
+       ctx.lineTo(39,270);
+       for(const point of ridge)ctx.lineTo(point[0],point[1]);
+       ctx.lineTo(w-36,h*.65);
+       for(let px=w-38;px>44;){
+         ctx.lineTo(px,h*.66+V()*90+Math.sin(px*.02)*36);
+         px-=13+V()*35;
+       }
+       ctx.closePath();ctx.fillStyle=S(30);ctx.fill();
+       ctx.save();ctx.clip();
+       // Jagged shadow facets preserve the same color encoding as the reference arch().
+       for(let i=0;i<700;i++){
+         const px=40+V()*(w-80),py=190+V()*380,
+           a=V()*6.28,len=7+V()*85;
+         ctx.beginPath();ctx.moveTo(px,py);
+         ctx.lineTo(px+Math.cos(a)*len,py+Math.sin(a)*len*.5);
+         ctx.lineTo(px+Math.cos(a+.9)*len*.35,py+Math.sin(a+.9)*len);
+         ctx.closePath();ctx.fillStyle=S(i%9===0?102:i%3===0?58:12);
+         ctx.globalAlpha=.08+V()*.44;ctx.fill();
+       }
+       // Layered ruptures and long descending fractured cloud tongues.
+       ctx.globalAlpha=.74;
+       for(let i=0;i<68;i++){
+         const px=70+V()*(w-140),py=267+V()*260,L=19+V()*82;
+         ctx.strokeStyle=S(i%3===0?100:7);ctx.lineWidth=1+V()*8;
+         ctx.beginPath();ctx.moveTo(px,py);
+         ctx.lineTo(px+(V()-.5)*25,py+L*.6);
+         ctx.lineTo(px+(V()-.5)*39,py+L);ctx.stroke();
+       }
+       ctx.globalAlpha=1;
+       const lights=[];
+       for(let i=0;i<34;i++){
+         const px=75+V()*(w-150),py=335+V()*168;
+         lights.push([px,py,1.2+V()*3,2+V()*7]);
+       }
+       lit(ctx,lights);ctx.restore();
+       // Bites out of upper cloud edge make the profile asymmetric.
+       ctx.globalCompositeOperation='destination-out';
+       for(let i=0;i<17;i++){
+         const px=65+V()*(w-130),py=236+V()*44,s=5+V()*40;
+         ctx.beginPath();ctx.moveTo(px-s,py-10);
+         ctx.lineTo(px,py+s*.3);ctx.lineTo(px+s,py-10);ctx.closePath();ctx.fill();
+       }
+       ctx.globalCompositeOperation='source-over';
+     });
+     const mat=archMat(silhouette,baseFog,{base:.77,light:0x96d1e2,amp:.34,
+       sway:.15,ph:seed*.13});
+     const p=plane(width,height,mat,x,y,z,cloud);
+     mat.uniforms.uHgt.value=height;return p;
+   };
+   const banks=[
+     stormLayer(966,31,16,-2.4,6,-2.4,.19),
+     stormLayer(973,22,12,4.2,3.2,-1.4,.25),
+     stormLayer(985,18,9,-7.1,2.7,.2,.31)
+   ];
+   // A few surviving steeples protrude from cloud ruins in true 3D.
+   const fragments=[];
+   for(let i=0;i<18;i++){
+     const px=(R()-.5)*19,py=1.6+R()*5;
+     const frag=mesh(cloud,new T.TetrahedronGeometry(.25+R()*.75,0),
+       i%4===0?0x5a8ba1:0x0c2a40,[px,py,-.4+R()*1.3],.86);
+     frag.rotation.z=R()*4;frag.scale.set(.7,1.5+R()*2,.5);
+     fragments.push({frag,py,phase:i*.4});
    }
+   // Each lightning stroke forks through 3–7 segments instead of being a straight beam.
    const lightning=[];
-   for(let i=0;i<11;i++){
-     const x=(R()-.5)*10,h=7+R()*5,mid=(R()-.5)*4;
-     lightning.push(beam(g,[x,h,1],[x+mid,1,1],.045,i%3?0xffacd4:0xa6ecf6,.65));
+   for(let i=0;i<17;i++){
+     const x=(R()-.5)*21,h=3+R()*7,bend=(R()-.5)*4;
+     const arm=new T.Group();arm.position.set(x,h,.9+R()*.6);g.add(arm);
+     let xx=0,yy=0;
+     const segments=4+(i%4);
+     for(let j=0;j<segments;j++){
+       const nx=xx+bend/segments+(R()-.5)*.9,ny=yy-(1.2+R()*.7);
+       beam(arm,[xx,yy,0],[nx,ny,.02],.014+R()*.021,
+         i%3?0xc09aba:0x95c4d1,.63);
+       if(j===2&&i%3!==0)
+         beam(arm,[xx,yy,0],[nx+(R()-.5)*2.5,ny-.7,.04],
+           .012,0x7ac3d8,.43);
+       xx=nx;yy=ny;
+     }
+     lightning.push(arm);
    }
    // Сотни нерегулярных ветвящихся разрядов на одной полупрозрачной
    // холстовой текстуре: высокая детализация, один draw call вместо 300+ мешей.
@@ -1276,12 +1358,15 @@ const SHPILI_PLUS=(()=>{
    veins.position.set(0,1.2,1.7);g.add(veins);
    const petals=banners(g,12,14,0xc16b9f,744);
    own[id].tick=(t)=>{
-     cloud.position.x=.65*Math.sin(t*.5);cloud.position.y=.4*Math.sin(t*.37);
+     cloud.position.x=.43*Math.sin(t*.3);cloud.position.y=.22*Math.sin(t*.27);
+     for(let i=0;i<banks.length;i++)banks[i].rotation.z=.01*Math.sin(t*.28+i*.7);
+     for(const o of fragments)o.frag.position.y=o.py+.16*Math.sin(t*.63-o.phase);
      veins.rotation.z=.018*Math.sin(t*.42);veinMat.opacity=.9+.09*Math.sin(t*.9);
      for(const o of rain)o.mesh.position.y=(o.y-((t*o.speed+o.phase)%16))*.42;
      for(let i=0;i<lightning.length;i++){
-       const l=lightning[i];l.material.opacity=.04+.7*Math.pow(.5+.5*Math.sin(t*1.3+i*2.399),10);
-       l.scale.x=.9+.15*Math.sin(t*.31+i);
+       const l=lightning[i],pulse=Math.pow(.5+.5*Math.sin(t*1.3+i*2.399),10);
+       l.visible=pulse>.035;l.scale.x=.94+.18*Math.sin(t*.31+i);
+       for(const seg of l.children)seg.material.opacity=.05+.67*pulse;
      }petals(t);
    };
  }

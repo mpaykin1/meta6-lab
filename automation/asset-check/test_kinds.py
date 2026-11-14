@@ -344,5 +344,47 @@ class KindTraps(unittest.TestCase):
         self.assertEqual(set(r.kinds) & {"model3d", "audio"}, {"model3d", "audio"})
 
 
+
+class TestPixelFxPack(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.path = Path(self.tmp.name)
+        ready = Path(__file__).resolve().parents[2] / "asset-packs/ready/patch-pixelfx/pack.json"
+        # Mutant runner copies this test module, but uses the real project as asset source.
+        if not ready.exists():
+            import os
+            ready = Path(os.environ["ASSET_CHECK_REPO"]) / "asset-packs/ready/patch-pixelfx/pack.json"
+        self.data = json.loads(ready.read_text("utf-8"))
+        self.write()
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def write(self):
+        (self.path / "pack.json").write_text(json.dumps(self.data), "utf-8")
+
+    def test_pixelfx_original_mit_pack_passes(self):
+        self.assertEqual(cp.check(self.path).hard(), [])
+
+    def test_PX2_invalid_license_not_commercial(self):
+        self.data["license"]["type"] = "Proprietary"
+        self.write()
+        self.assertIn("PX2", ids(self.path))
+
+    def test_PX3_fake_upstream_revision(self):
+        self.data["provenance"]["commit"] = "f" * 40
+        self.write()
+        self.assertIn("PX3", ids(self.path))
+
+    def test_PX4_incomplete_registered_source_list(self):
+        self.data["files"] = self.data["files"][:-1]
+        self.write()
+        self.assertIn("PX4", ids(self.path))
+
+    def test_PX5_deceptive_component_path(self):
+        self.data["component"] = "shared/components/observer-audio"
+        self.write()
+        self.assertIn("PX5", ids(self.path))
+
 if __name__ == "__main__":
     unittest.main()

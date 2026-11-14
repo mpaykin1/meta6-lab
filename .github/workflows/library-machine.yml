@@ -49,13 +49,26 @@ jobs:
         run: node scripts/library/extract-all.mjs
       - name: Verify independent file inventory, hashes and live additions/removals
         run: node scripts/library/verify-library.mjs
-      - name: Run five persistent deceptive mutations
-        run: node scripts/library/mutate-library.mjs
-      - name: Check PR catalog is committed
+      - name: Run permanent mutation traps
+        run: |
+          node scripts/library/mutate-library.mjs
+          node scripts/library/mutate-branch-ownership.mjs
+          node scripts/library/mutate-source-only-gate.mjs
+      - name: Check committed catalog or verified new-game source-only transfer
         if: github.event_name == 'pull_request'
-        run: git diff --exit-code -- shared/library
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --exit-code -- shared/library; then
+            echo "No catalog drift"
+          else
+            # The extractor and independent verifier passed before this step.
+            # Only a strictly additive new-game PR may defer generated files
+            # to the dedicated main → library-machine-sync follow-up.
+            node scripts/library/source-only-pr-cli.mjs
+          fi
       - name: Commit newly extracted assets on the feature branch
-        if: github.event_name == 'push' && github.ref != 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/lab/library-machine-sync'
         run: |
           git add -A shared/library
           if git diff --cached --quiet; then echo 'Library unchanged'; exit 0; fi

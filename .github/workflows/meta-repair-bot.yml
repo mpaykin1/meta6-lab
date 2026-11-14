@@ -4,7 +4,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 on:
   schedule:
-    - cron: '17,47 * * * *'
+    - cron: '47 * * * *'
   workflow_dispatch:
   push:
     branches: [main]

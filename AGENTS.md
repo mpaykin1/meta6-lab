@@ -43,7 +43,7 @@ Claude никогда не просит владельца вставлять п
 
 Все правила разложены по папкам в [rules/](rules/). **Перед работой открыть нужную папку и прочитать правило целиком** — здесь только суть одной строкой. Пароли правил прежние (`retention`, `postepenno`, `polza`, `vidimo`, `boss`, `universal`, `abyss`, `three-worlds`, `island-biomes`, `graf`, `evolve`, `fix`); по паролю открывать файл из оглавления ниже.
 
-**Обязательно для всех игр:** 01 ЧИСТЫЙ ЭКРАН, 02 ПОСТЕПЕННО, 02 ПОНЯТНАЯ ПОЛЬЗА, 02 БЕЗ ПОВТОРОВ, 03 ЗВУК, 04 ЛОР (почти готовые игры), 05 ВИДИМО И ЭКОНОМНО, все правила папки 06, 07 RETENTION (игры для Playgama), 09 БЕЗ РЕКЛАМЫ (все версии META GAMES).
+**Обязательно для всех игр:** 01 ЧИСТЫЙ ЭКРАН, 02 ПОСТЕПЕННО, 02 ПОНЯТНАЯ ПОЛЬЗА, 02 БЕЗ ПОВТОРОВ, 03 ЗВУК, 04 ЛОР (почти готовые игры), 04 РАЗГОВОР У ПРЕДМЕТА, 01 БЕЗ РОВНЫХ КРАЁВ, 05 ВИДИМО И ЭКОНОМНО, все правила папки 06, 07 RETENTION (игры для Playgama), 09 БЕЗ РЕКЛАМЫ (все версии META GAMES).
 
 ## 01. Стиль и графика — [rules/01-stil-i-grafika/](rules/01-stil-i-grafika/)
 
@@ -67,6 +67,7 @@ _как игра играется: открытие мира, польза ве�
 - [BEZ_POVTOROV.md](rules/02-igrovye-mekhaniki/BEZ_POVTOROV.md) — раскладка уровня никогда не повторяется, но всегда проходима
 - [DRAKON_I_LUCHNIK.md](rules/02-igrovye-mekhaniki/DRAKON_I_LUCHNIK.md) — как делать боссов и боевые умения героя
 - [UNIVERSAL.md](rules/02-igrovye-mekhaniki/UNIVERSAL.md) — универсальные улучшения U1–U6 для всех игр
+- [IMMERSIVE_LEVEL_DESIGN.md](rules/02-igrovye-mekhaniki/IMMERSIVE_LEVEL_DESIGN.md) — IM1–IM5: история через окружение, плотные уровни, вертикальность, стилизация, эмбиент и тишина (07.11.2026)
 - [FIX_EKRAN.md](rules/02-igrovye-mekhaniki/FIX_EKRAN.md) — экран телефона не должен тянуться (полный контракт — fix.md)
 - [UPRAVLENIE_TELEFON.md](rules/02-igrovye-mekhaniki/UPRAVLENIE_TELEFON.md) — джойстик двигает героя, камера плавно следует, кнопки — иконки
 - [PROGRESSIVE_UNLOCK.md](rules/02-igrovye-mekhaniki/PROGRESSIVE_UNLOCK.md) — ПОСТЕПЕННО — подробности и пример
@@ -84,6 +85,7 @@ _мелодии, эффекты, громкость_
 
 _лор героя, подписи-воспоминания, квесты_
 
+- [RAZGOVOR_U_PREDMETA.md](rules/04-syuzhet-i-scenarii/RAZGOVOR_U_PREDMETA.md) — **РАЗГОВОР У ПРЕДМЕТА (13.11.2026):** герои говорят только о том, что рядом и видно; каждый предмет — разговор-ассоциация с новой деталью лора; реплика раскрывает, что с героем было («Тебя вчера опять трясло» — «Я ничего не помню…»); ушли — разговор оборван
 - [LOR.md](rules/04-syuzhet-i-scenarii/LOR.md) — жуткое детство героя, рассказанное миром; круги 2, 3, 4…; история в конце
 - [PODPISI_VOSPOMINANIYA.md](rules/04-syuzhet-i-scenarii/PODPISI_VOSPOMINANIYA.md) — короткие подписи-осколки памяти, из которых игрок сам собирает сюжет
 - [QUEST_RULES_RU.md](rules/04-syuzhet-i-scenarii/QUEST_RULES_RU.md) — понятные квесты

@@ -269,3 +269,24 @@ test('GraphQL-карта: форма PR, красные пуши до зелён
     await assert.rejects(()=>checkGraphql(module),undefined,label);
   }
 });
+
+// Claude 14.11.2026: публикация карты не должна теряться на гонке push с main (OSHIBKI).
+function checkPublishRetry(yml){
+  const step=yml.slice(yml.indexOf('- name: Publish only real changes'));
+  assert.match(step,/for attempt in 1 2 3 4 5; do/,'нужно несколько попыток push');
+  assert.match(step,/git push && exit 0/,'успешный push завершает шаг');
+  assert.match(step,/git pull --rebase origin main \|\| \{ git rebase --abort; exit 1; \}/,'перед повтором rebase на main');
+  assert.match(step,/done\n\s*exit 1/,'после всех попыток — ошибка, а не тишина');
+}
+test('карта сил: push повторяется после rebase, а не теряется',async()=>{
+  const yml=await fs.readFile(new URL('../../.github/workflows/karta-sil.yml',import.meta.url),'utf8');
+  checkPublishRetry(yml);
+  for(const [label,from,to] of [
+    ['один push без повтора','for attempt in 1 2 3 4 5; do','for attempt in 1; do'],
+    ['повтор без rebase','git pull --rebase origin main','true'],
+    ['тихий выход после неудач',"          done\n          exit 1\n","          done\n          exit 0\n"]
+  ]){
+    assert.ok(yml.includes(from),'якорь: '+label);
+    assert.throws(()=>checkPublishRetry(yml.replace(from,to)),undefined,label);
+  }
+});

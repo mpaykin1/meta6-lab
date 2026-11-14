@@ -44,7 +44,13 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'chore: update skill map from PR outcomes'
-          git push
+          # main часто двигают другие боты: повторить push после rebase, а не терять карту (OSHIBKI)
+          for attempt in 1 2 3 4 5; do
+            git push && exit 0
+            git pull --rebase origin main || { git rebase --abort; exit 1; }
+            sleep $((attempt * 5))
+          done
+          exit 1
       - name: Preserve failure after publishing no-data state
         if: github.ref == 'refs/heads/main' && steps.build.outcome != 'success'
         run: exit 1

@@ -7,6 +7,7 @@
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
+| #317 | код | `lab/library-machine-branch-ownership-20261114` | Library Machine: ограничить запись служебной веткой | merged | слит [e02387721f8e2cbf126ba1af2ac6e4e803bebc03](https://github.com/mpaykin1/meta6-lab/commit/e02387721f8e2cbf126ba1af2ac6e4e803bebc03) |
 | #312 | эталон | `lab/asqura-office-clean-transfer-20261114` | ASQURA Office — clean source-only #133 | merged | слит [bc24124303060dcb9ad75353d6a6f1ba967dd169](https://github.com/mpaykin1/meta6-lab/commit/bc24124303060dcb9ad75353d6a6f1ba967dd169) |
 | #308 | код | `lab/immersive-docs-clean-20261114` | IM1–IM5 — чистый перенос вместо #72 | merged | слит [e07b085e4bec73081ff804be24a7398ada4b68c3](https://github.com/mpaykin1/meta6-lab/commit/e07b085e4bec73081ff804be24a7398ada4b68c3), [PR #308](https://github.com/mpaykin1/meta6-lab/pull/308) |
 | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |

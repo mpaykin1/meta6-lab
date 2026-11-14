@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 68, слито 2, закрыто 59, открыто 7 — бот, 2026-11-14 03:19 UTC
+Итог: всего 68, слито 2, закрыто 60, открыто 6 — бот, 2026-11-14 03:49 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -56,7 +56,7 @@
 | #86 | код | `lab/sumerki2-bot-controls-20261107-1839` | bot: honest Sumerki II input strategy and bounded run contra | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42382769013), [PR #86](https://github.com/mpaykin1/meta6-lab/pull/86) |
 | #81 | код | `lab/sumerki-bot-controls-20261107-1746` | bot: strict input-only strategy for Sumerki i Pepel 2 | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42378567198), [PR #81](https://github.com/mpaykin1/meta6-lab/pull/81) |
 | #73 | код | `lab/sumerki-bot-config-20261107` | feat(bot): strict browser enrollment for Sumerki II | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42372675764), [PR #73](https://github.com/mpaykin1/meta6-lab/pull/73) |
-| #72 | код | `lab/immersive-dishonored-principles-20261107` | Геймдизайн META GAMES: пять принципов IM1–IM5 | open | НУЖЕН CLAUDE: main влит dc663fbc; [guard](https://github.com/mpaykin1/meta6-lab/actions/runs/43551023196/job/132313248053) отвергает старые коммиты .github/protected без подписи; reference зелёный |
+| #72 | код | `lab/immersive-dishonored-principles-20261107` | Геймдизайн META GAMES: пять принципов IM1–IM5 | closed | закрыт: замена [#308](https://github.com/mpaykin1/meta6-lab/pull/308) ожидает зелёного CI; main влит dc663fbc; [guard](https://github.com/mpaykin1/meta6-lab/actions/runs/43551023196/job/132313248053) отвергает старые коммиты .github/protected без подписи; reference зелёный |
 | #69 | код | `lab/classic-bot-config-20261107` | feat(bot): configure strict classic game browser checks | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42368011822), [PR #69](https://github.com/mpaykin1/meta6-lab/pull/69) |
 | #60 | код | `lab/render-broken-city-adaptive` | Perf: adaptive WebGL/Three.js render resolution in Broken Ci | closed | |
 | #59 | код | `lab/render-veil-shared-instancing` | Perf: apply proven WebGL2 instancing to shared Veil Terraces | closed | |

@@ -48,3 +48,5 @@
 | 2026-11-14 03:29 | 4 | 5 | 15 | 1 | 2 |
 
 Проверено локально: 31 сценарий PASS и KONTUR checkDiff PASS на полном diff; это не полный Actions. Следующая точка продолжения — шаг 2, #72/#87 защищённая история и #133 разнос source-only/К3; #3 реальное застревание. Новый PR развития по частотам красных типов остаётся заблокирован отсутствием полной карты на main.
+
+| 4. Влить main (#309) | подготовлен двухродительский merge, 3 общих файла сведены без потери строк; новый CI требуется | [PR #301](https://github.com/mpaykin1/meta6-lab/pull/301), [#309](https://github.com/mpaykin1/meta6-lab/pull/309), чистые кандидаты [#312](https://github.com/mpaykin1/meta6-lab/pull/312), [#313](https://github.com/mpaykin1/meta6-lab/pull/313), [#314](https://github.com/mpaykin1/meta6-lab/pull/314) | 2026-11-14T04:08:30Z |

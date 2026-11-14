@@ -1,6 +1,6 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 29 · конфликт 15 · непроверено 0 · красные проверки 29 · нужен Claude 16
+Итог: зависло 28 · конфликт 15 · непроверено 0 · красные проверки 29 · нужен Claude 16
 
 ### PR #234
 - PR: https://github.com/mpaykin1/meta6-lab/pull/234
@@ -205,9 +205,9 @@
 ### PR #301
 - PR: https://github.com/mpaykin1/meta6-lab/pull/301
 - Ветка: `lab/karta-sil`
-- SHA: `d7aba87d49c2e088d86c26c0aa954324679a7927` · последний коммит: 2026-11-14T03:21:58Z
-- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43551291773/job/132314099880), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43551291773/job/132314099880 и повтори CI.
+- SHA: `13a9d7cf5f5bc384954cf8a0e8447bce54caf855` · последний коммит: 2026-11-14T03:31:20Z
+- Проблема: Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43552411390/job/132317607734), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43552197650/job/132316955387), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- Задание: Исправь storozha-quota по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43552411390/job/132317607734 и повтори CI.
 - Взял: —
 
 ### PR #302

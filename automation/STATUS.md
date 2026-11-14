@@ -1,11 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-14T03:32:39.752Z | МГЛ: 898d7eef5582c5451207d3e34223fca5513be30b | МГ: 7ae9604d0dfc969116895cd06bf11b4c3cdf15ff | https://github.com/mpaykin1/meta6-lab/actions/runs/43552125803
+UTC: 2026-11-14T03:49:47.322Z | МГЛ: 3bd7e067ace8933d37a9146a206960068a676bca | МГ: 7ae9604d0dfc969116895cd06bf11b4c3cdf15ff | https://github.com/mpaykin1/meta6-lab/actions/runs/43553538347
 ## ПРОВЕРИТЬ CLAUDE
+- PR #309 41331671a13c476ff8ec3b7497dd3a47517dade8: scripts/storozha/mutate-storozha.mjs, scripts/storozha/verify-storozha.mjs
 - PR #296 1d385b135f0fd52a35d6b2df6503f5f6eacf171a: automation/asset-check/test_htmlpack.py
-- PR #293 1ec3046bbe0972e316d92ec3846b542af0883716: automation/asset-check/test_kinds.py
-- PR #292 5df54dc0764daa77154709207e612b311127108d: automation/asset-check/test_kinds.py
-- PR #267 8127784a2d65ec5caa7aed93b753d13ce96b0c14: .github/workflows/asset-check.yml, automation/asset-check/test_check_pack.py, automation/asset-check/test_kinds.py
-- ещё 15: https://github.com/mpaykin1/meta6-lab/pulls
+- PR #293 1ec3046bbe0972e316d92ec3846b542af0883716: нет данных
+- PR #294 f55c2e87fbd99f261977dbe7da58700a0a73a50e: нет данных
+- ещё 29: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обн… (сокращено)
@@ -47,14 +47,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 47 | конфликт: нет данных | слито: 36 | закрыто: 76
+открыто: 48 | конфликт: нет данных | слито: 37 | закрыто: 77
+#309 STOROZHA quota: черновики не блокируют очередь (тупик #3/#72 | 41331671a13c476ff8ec3b7497dd3a47517dade8
 #307 Остров аптекаря: 3 этапа для META BOT | fb4cf4f5bce602dee82910ea066637feb7418c6d
 #304 Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У  | af6238c7237cd129f58a2d66826b8405e9376f05
 #298 Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА | 4e17483f42baf5300da95c840962218958994b71
-#296 feat(asset-check): HTMLPACK visual quality bot + Tumannye Sh | 1d385b135f0fd52a35d6b2df6503f5f6eacf171a
-ещё 32: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 33: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2051 коммитов | нет данных
+МГЛ: 2070 коммитов | нет данных
 МГ: 9 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:4
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
@@ -74,4 +74,4 @@ veil-terraces — прошла | витрина: да
 | 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)
 | 24 | 10.11.2026 | Сводка без progress.json или при ошибке GitHub API могла бы выдавать непроверенные пункты как «готово» и прятать красные прогоны; старые варианты #211/#212 не защищали эту сводку полным набором мутаций | Изолированные ответы: отсутствующий … (сокращено)
 | 25 | 10.11.2026 | Сводка игнорировала новую запись OSHIBKI с уже использованным номером (в main номер 18 повторён) | Сравнение только по номеру ошибочно скрывало новую строку | `scripts/status/selftest.mjs`: `duplicate-error-number-hidden` |
-ещё 21: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+ещё 22: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

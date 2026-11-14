@@ -30,25 +30,29 @@ html,body{margin:0;width:100%;height:100%;background:#020912;overflow:hidden;tou
 <canvas id="c"></canvas>
 <button id="mb" aria-label="Меню"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 <aside id="pn" aria-hidden="true">
-  <header><h1>Туманные шпили<small>ассет-пак · всё анимировано · 2D и 2.5D</small></h1><button id="cl" aria-label="Закрыть">×</button></header>
+  <header><h1>Туманные шпили<small>ассет-пак · 2D, 2.5D и объёмные 3D-модели</small></h1><button id="cl" aria-label="Закрыть">×</button></header>
   <div class="row"><button id="bw">▶ Весь мир</button><button id="bf">⛶ Полный экран</button></div>
   <div id="ls"></div>
 </aside>
 <div id="err">Не удалось запустить графику (WebGL недоступен).</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
+<script type="module">
+const assetRoot=new URL(location.pathname.includes('/preview/')
+  ? location.pathname.split('/preview/')[0]+'/' : '../../../',import.meta.url);
+const THREE=await import(new URL('games/broken-city/lib/three.module.js',assetRoot).href);
+THREE.ColorManagement.enabled=false;
 (()=>{'use strict';
-const T=window.THREE,$=id=>document.getElementById(id);
+const T=THREE,$=id=>document.getElementById(id);
 const fail=()=>{$('err').style.display='flex'};
 if(!T){fail();return}
 const canvas=$('c');let renderer;
 try{renderer=new T.WebGLRenderer({canvas,antialias:false,alpha:false,powerPreference:'high-performance'})}catch(e){fail();return}
+renderer.outputColorSpace=T.LinearSRGBColorSpace;
 renderer.setPixelRatio(1);renderer.autoClear=true;renderer.setClearColor(0x06182c,1);
 
 /* ============ СОСТАВ ПАКА (скрытый счётчик, виден только в коде/консоли) ============ */
 const GX=15,GY=45,GZ=-44;                       // врата
 const PLAZA={cam:[0,1.3,14],look:[0,8,-60]};
-const PACK={name:'Туманные шпили',version:'1.1.0',items:[
+const PACK={name:'Туманные шпили',version:'1.1.1',items:[
  {id:'sky',n:'Небо и световые столбы',k:'2D',m:'plaza',cam:[0,6,14],look:[0,40,-80]},
  {id:'fog',n:'Слои тумана',k:'2D',m:'plaza',cam:[-6,5,6],look:[-4,7,-50]},
  {id:'obelisk',n:'Обелиск-гигант',k:'2.5D',m:'plaza',cam:[0,10,-14],look:[0,42,-78]},
@@ -76,14 +80,14 @@ const PACK={name:'Туманные шпили',version:'1.1.0',items:[
  {id:'dust',n:'Пыль и блёстки',k:'2D',m:'plaza',cam:[0,5,10],look:[0,12,-60]},
  {id:'post',n:'Кино-обработка: зерно, аберрация, глитч, свечение',k:'2D',m:'plaza',cam:PLAZA.cam,look:PLAZA.look,glitch:1},
 
- {id:'sable-beast',n:'Зверь — багровый страж',k:'2.5D',m:'flight',cam:[25,45,-17],look:[25,44,-40],isNew:true},
- {id:'shattered-mast',n:'Падающая мачта-игла',k:'2.5D',m:'plaza',cam:[-23,16,8],look:[-23,13,-38],isNew:true},
+ {id:'sable-beast',n:'Страж из обломков врат',k:'3D',m:'flight',cam:[28,44,-18],look:[25,44,-40],isNew:true},
+ {id:'shattered-mast',n:'Собор — сломанная корона',k:'2.5D',m:'plaza',cam:[-23,24,25],look:[-23,24,-38],isNew:true},
  {id:'gate-bridge',n:'Мост осколков врат',k:'2.5D',m:'plaza',cam:[12,14,8],look:[12,13,-40],isNew:true},
  {id:'dawn-sentinel',n:'Спутник летуна — хранитель',k:'2.5D',m:'flight',follow:'hero',d:13,isNew:true},
  {id:'mirror-seed',n:'Сердце зеркальной воды — усиление',k:'2.5D',m:'flight',cam:[3,45,-19],look:[3,43,-40],isNew:true},
  {id:'storm-heart',n:'Багровая гроза над шпилями',k:'2D',m:'plaza',cam:[-34,48,-14],look:[-34,46,-43],isNew:true}
 ]};
-PACK.count=PACK.items.length;PACK.by={d2:PACK.items.filter(i=>i.k==='2D').length,d25:PACK.items.filter(i=>i.k==='2.5D').length,d3:0};
+PACK.count=PACK.items.length;PACK.by={d2:PACK.items.filter(i=>i.k==='2D').length,d25:PACK.items.filter(i=>i.k==='2.5D').length,d3:PACK.items.filter(i=>i.k==='3D').length};
 window.__PACK__=PACK;try{console.info('[PACK]',PACK.name,PACK.version,'ассетов:',PACK.count,PACK.by)}catch(e){}
 
 /* ============ УТИЛИТЫ ============ */
@@ -345,7 +349,7 @@ const dust=new T.Points(dg,dustMat);dust.frustumCulled=false;dust.renderOrder=80
 const qScene=new T.Scene(),qCam=new T.OrthographicCamera(-1,1,1,-1,0,1),quad=new T.Mesh(new T.PlaneGeometry(2,2));qScene.add(quad);
 const QV='varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}';
 const rtO={minFilter:T.LinearFilter,magFilter:T.LinearFilter,depthBuffer:false,stencilBuffer:false};
-const rtA=new T.WebGLRenderTarget(4,4,rtO),rtB=new T.WebGLRenderTarget(4,4,rtO),rtC=new T.WebGLRenderTarget(4,4,rtO),rtD=new T.WebGLRenderTarget(4,4,rtO);
+const rtA=new T.WebGLRenderTarget(4,4,{...rtO,depthBuffer:true}),rtB=new T.WebGLRenderTarget(4,4,rtO),rtC=new T.WebGLRenderTarget(4,4,rtO),rtD=new T.WebGLRenderTarget(4,4,rtO);
 const waterMat=new T.ShaderMaterial({depthTest:false,depthWrite:false,uniforms:{tS:{value:rtA.texture},uT:U.t,uH:{value:-1},uAsp:{value:1},uTap:{value:new T.Vector3(.5,0,-99)}},vertexShader:QV,fragmentShader:NOISE+`
 uniform sampler2D tS;uniform float uT,uH,uAsp;uniform vec3 uTap;varying vec2 vUv;
 void main(){vec2 uv=vUv;vec3 c;
@@ -547,105 +551,281 @@ const SHPILI_PLUS=(()=>{
      }
    };
  };
- // Враг: багровый страж. Ломаный панцирь, челюсти, косые рога и волна из плавников.
+ // Страж из обломков врат: шарнирная 3D-модель, а не экранный ореол.
  {
-   const id='sable-beast',g=newGroup(id,25,44,-40),torso=new T.Group();g.add(torso);
-   aura(g,16,0x9a2e67,.35);
-   ball(torso,3.05,0x1b1834,[0,0,0]);
-   ball(torso,2.28,0x541d3a,[0,.22,.75],.91);
-   const mask=ball(torso,1.6,0xc6b0bd,[0,.65,2.15]);mask.scale.set(1.1,.82,.44);
-   for(const s of [-1,1]){
-     spike(torso,.64,3.2,0x370f36,[s*2.1,1.65,.4],s*.7);
-     spike(torso,.44,2.9,0xc45375,[s*1.1,2.48,1.26],s*.32);
-     const eye=ball(torso,.24,0xffb5ca,[s*.73,.9,2.75]);
-     ring(torso,.5,0xff718d,[s*.73,.9,2.68],.85);
-     for(let j=0;j<5;j++)spike(torso,.33,1.4+j*.18,0x391a45,
-       [s*(1.5+j*.34),-.32-j*.33,1.32-j*.12],s*(1.1+j*.11));
-   }
-   for(let i=0;i<9;i++){
-     const x=(i-4)*.33;
-     spike(torso,.15,.65,0xff739d,[x,-1.4,2.68],Math.PI);
-   }
-   const fins=[];for(let i=0;i<9;i++){
-     const s=i%2?-1:1,part=new T.Group();part.position.set(s*(1.6+i*.27),-.4-i*.24,-.6-i*.17);
-     torso.add(part);spike(part,.26,2.15,0x9f4569,[0,-.55,0],s*.8);
-     ball(part,.12,0xffb2b5,[0,-1.1,.25]);fins.push(part);
-   }
-   const wave=banners(torso,10,6,0xd43b88,414);
-   own[id].tick=(t)=>{torso.rotation.z=.055*Math.sin(t*.65);torso.rotation.y=.16*Math.sin(t*.32);
-     torso.position.y=.52*Math.sin(t*.9);mask.position.y=.65+.11*Math.sin(t*1.9);
-     for(let i=0;i<fins.length;i++)fins[i].rotation.z=.24*Math.sin(t*1.2-i*.4);
-     wave(t);
-   };
- }
- // Разрушенный шпиль: накренившиеся секции и парящие обломки с тревожным маяком.
- {
-   const id='shattered-mast',g=newGroup(id,-23,8,-38),core=new T.Group();g.add(core);
-   aura(g,27,0x68c3e0,.55);
-   const shafts=[];for(let i=0;i<10;i++){
-     const h=3.6+i*.17,y=i*2.35,x=Math.sin(i*.49)*(.3+i*.09);
-     const st=new T.Group();st.position.set(x,y,0);core.add(st);
-     beam(st,[-.25,-h*.55,0],[.07,h*.55,0],.22-i*.01,i%3?deep:0x416075);
-     for(const s of [-1,1]){
-       beam(st,[0,-h*.35,0],[s*(1.1+i*.032),-h*.02,0],.055,0x6ea0a9,.75);
-       beam(st,[s*(1.1+i*.032),-h*.02,0],[0,h*.35,0],.045,0x42667a,.75);
+   const id='sable-beast',g=newGroup(id,25,44,-40),body=new T.Group();g.add(body);
+   const wear=mk(256,256,(ctx,w,h)=>{
+     const R=rng(711);ctx.fillStyle='#697e91';ctx.fillRect(0,0,w,h);
+     for(let i=0;i<720;i++){
+       ctx.fillStyle=['#28394e','#9bb2bc','#4c5d75','#c0adb5'][i%4];
+       ctx.globalAlpha=.15+R()*.4;
+       ctx.fillRect(R()*w,R()*h,1+R()*21,1+R()*3);
      }
-     ring(st,.55+i*.06,0x89dfeb,[0,h*.48,0],.23);
-     shafts.push(st);
-   }
-   for(let i=0;i<19;i++){
-     const a=i*2.4,r=2+i*.075;
-     const sh=spike(g,.22,.7+(i%4)*.28,i%3?0x4c7591:0xb9e6ef,
-       [Math.cos(a)*r,7+(i*4.7)%19,Math.sin(a)*1.5],Math.sin(a)*1.6);
-     sh.userData.phase=a;
-   }
-   const beacon=ball(core,.56,0xff91b0,[1,26,0]);ring(core,1.2,0xff7599,[1,26,0],.85);
-   // Разорванные кабели и сияющие трещины в металле. Несимметричный
-   // детализированный слой — один меш/вызов рисования.
-   const fractureTex=mk(1024,1024,(ctx,w,h)=>{
-     const Q=rng(19037);ctx.lineJoin='round';ctx.lineCap='round';
-     for(let i=0;i<440;i++){
-       const x0=w*(.18+Q()*.64),y0=Q()*h,len=12+Q()*105;
-       let x=x0,y=y0;
-       ctx.beginPath();ctx.moveTo(x,y);
-       for(let j=0,n=3+Math.floor(Q()*4);j<n;j++){
-         const a=Q()*2.4-1.2; x+=(Q()-.52)*len/n*1.4;y+=len/n*(.5+Q()*.5);
-         ctx.lineTo(x,y);
-       }
-       ctx.strokeStyle=i%7===0?'rgba(255,208,232,.95)':
-         i%2===0?'rgba(115,220,242,.73)':'rgba(49,127,162,.66)';
-       ctx.lineWidth=1.8+Q()*3.8;ctx.stroke();
-     }
-     // Крупные асимметричные надломы, хорошо читаемые даже на телефоне.
-     for(let i=0;i<200;i++){
-       const cx=w*(.16+Q()*.68),cy=Q()*h;
-       const sz=22+Q()*62,ang=(Q()-.5)*1.5;
-       ctx.save();ctx.translate(cx,cy);ctx.rotate(ang);
-       ctx.beginPath();ctx.moveTo(-sz*.52,-sz*.24);
-       ctx.lineTo(-sz*(.22+Q()*.25),-sz*(.55+Q()*.25));
-       ctx.lineTo(sz*.41,-sz*.46);
-       ctx.lineTo(sz*(.5+Q()*.3),sz*.21);
-       ctx.lineTo(sz*.18,sz*(.48+Q()*.3));
-       ctx.lineTo(-sz*.46,sz*.22);ctx.closePath();
-       ctx.fillStyle=i%4===0?'rgba(163,236,250,.68)':i%3===0?
-         'rgba(236,133,188,.53)':'rgba(26,77,112,.84)';
-       ctx.fill();ctx.lineWidth=6+Q()*9;
-       ctx.strokeStyle=i%2?'rgba(180,231,250,.8)':'rgba(255,172,210,.77)';
-       ctx.stroke();ctx.restore();
+     ctx.globalAlpha=1;
+     for(let i=0;i<55;i++){
+       const x=R()*w,y=R()*h;ctx.strokeStyle='#233249';ctx.lineWidth=1+R()*2;
+       ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+R()*21-10,y+15+R()*30);ctx.stroke();
      }
    });
-   const fractureMat=new T.MeshBasicMaterial({map:fractureTex,transparent:true,
-     depthTest:false,depthWrite:false,side:T.DoubleSide,
-     blending:T.AdditiveBlending,opacity:.9});
-   const fractures=new T.Mesh(new T.PlaneGeometry(21,37),fractureMat);
-   fractures.position.set(.3,11.5,1.45);g.add(fractures);
-   const wave=banners(core,8,8,0x61cadd,23);
-   own[id].tick=(t)=>{core.rotation.z=-.09+.045*Math.sin(t*.65);beacon.scale.setScalar(.75+.34*Math.sin(t*2.3));
-      fractures.rotation.z=-.018+.015*Math.sin(t*.43);fractureMat.opacity=.92+.07*Math.sin(t*1.3);
-      for(let i=0;i<shafts.length;i++)shafts[i].rotation.z=.014*Math.sin(t*.7-i*.23);
-      wave(t);
+   const stone=new T.MeshLambertMaterial({map:wear,color:0x526b80,transparent:true,depthWrite:true});
+   const fillLight=new T.AmbientLight(0x6589ad,.75);scene.add(fillLight);
+   const rimLight=new T.DirectionalLight(0xb5e4f3,.95);rimLight.position.set(-15,65,-12);scene.add(rimLight);
+   const dark=new T.MeshBasicMaterial({color:0x101e32,transparent:true,depthWrite:true});
+   const edge=new T.MeshLambertMaterial({color:0x7299a7,transparent:true,depthWrite:true});
+   const ember=new T.MeshBasicMaterial({color:0xb97698,transparent:true,depthWrite:true});
+   // True chipped masonry, not a pile of perfect cubes: individual joints stay animated.
+   let fractureSerial=0;
+   const part=(parent,dims,pos,mat,rot=0)=>{
+     const geo=new T.BoxGeometry(...dims,1,2,1);
+     if(mat===stone||mat===edge){
+       const a=geo.attributes.position,n=fractureSerial++;
+       const scale=Math.min(...dims)*.11;
+       for(let k=0;k<a.count;k++){
+         const x=a.getX(k),y=a.getY(k),z=a.getZ(k);
+         const u=n*13.31+k*1.91+pos[0]*3.17+pos[1]*1.73;
+         const chip=scale*(.4+.6*Math.abs(Math.sin(u*1.23)));
+         a.setXYZ(k,x+chip*Math.sin(u),y+chip*.65*Math.cos(u*1.7),
+                  z+chip*.7*Math.sin(u*1.91));
+       }
+       a.needsUpdate=true;geo.computeVertexNormals();
+     }
+     const m=new T.Mesh(geo,mat);m.position.set(...pos);
+     m.rotation.z=rot;parent.add(m);return m;
+   };
+   // Jagged salvaged gate fragments are part of the armor, not luminous stripes.
+   const shard=(parent,x,y,z,w,h,rot,mat)=>{
+     const outline=new T.Shape();
+     outline.moveTo(-.46*w,-.49*h);
+     outline.lineTo(.27*w,-.56*h);
+     outline.lineTo(.57*w,-.15*h);
+     outline.lineTo(.35*w,.37*h);
+     outline.lineTo(.04*w,.59*h);
+     outline.lineTo(-.54*w,.31*h);
+     outline.closePath();
+     const geo=new T.ExtrudeGeometry(outline,{depth:.15,bevelEnabled:true,
+       bevelThickness:.035,bevelSize:.025,bevelSegments:1,steps:1,curveSegments:1});
+     const m=new T.Mesh(geo,mat);m.position.set(x,y,z);m.rotation.z=rot;
+     parent.add(m);return m;
+   };
+   const link=(parent,a,b,width,mat)=>{
+     const A=new T.Vector3(...a),B=new T.Vector3(...b);
+     const m=part(parent,[width,A.distanceTo(B),width],A.clone().add(B).multiplyScalar(.5).toArray(),mat);
+     m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),B.sub(A).normalize());return m;
+   };
+   // Inset masonry ribs surround a hollow chest; every side has real depth.
+   part(body,[2.8,3.3,1.5],[0,.5,0],dark);
+   for(const side of [-1,1]){
+     part(body,[.72,3.8,1.8],[side*1.25,.8,0],stone,side*.13);
+     part(body,[.16,3.2,.15],[side*1.58,.8,.98],edge,side*.13);
+     for(let j=0;j<5;j++){
+       part(body,[1.18,.31,.43],[side*.71,1.7-j*.63,.86],stone,side*(.12+j*.025));
+       shard(body,side*.7,1.78-j*.63,1.1,.55,.18,side*(.1+j*.05),ember);
+     }
+     part(body,[1.2,.46,1.75],[side*.76,-1.25,0],stone,-side*.08);
+   }
+   part(body,[.32,2.8,.4],[0,.5,.96],dark);
+   for(let j=0;j<4;j++)part(body,[.14,.22,.12],[0,1.5-j*.61,1.22],ember);
+   const neck=new T.Group();neck.position.set(0,2.7,.15);body.add(neck);
+   part(neck,[.75,.65,.7],[0,0,0],dark);
+   const skull=new T.Group();skull.position.y=.8;neck.add(skull);
+   part(skull,[1.7,1.65,1.15],[0,0,0],stone,.07);
+   part(skull,[1.9,.35,1.3],[0,.5,.12],stone,-.05);
+   part(skull,[1.4,.42,.12],[0,.12,.66],dark);
+   for(const side of [-1,1]){
+     part(skull,[.42,.09,.16],[side*.42,.16,.76],ember,side*.13);
+     part(skull,[.15,1.2,.3],[side*.89,.85,0],edge,-side*.23);
+     part(skull,[.22,.65,.31],[side*1.03,1.64,0],stone,-side*.4);
+   }
+   const jaw=new T.Group();jaw.position.set(0,-.57,.52);skull.add(jaw);
+   part(jaw,[1.38,.36,.7],[0,0,0],stone);
+   for(let j=0;j<5;j++)part(jaw,[.09,.27,.12],[(j-2)*.24,.21,.33],edge,(j-2)*.05);
+   const limbs=[];
+   for(const side of [-1,1]){
+     const shoulder=new T.Group();shoulder.position.set(side*2,1.65,0);body.add(shoulder);
+     part(shoulder,[1.3,.83,1.7],[side*.2,.15,0],stone,-side*.18);
+     part(shoulder,[.8,.1,1.3],[side*.2,.65,0],edge,-side*.18);
+     part(shoulder,[.63,2.3,.8],[side*.33,-1.2,0],stone,side*.18);
+     shard(shoulder,side*.31,-1.12,.51,.48,1.65,side*.23,ember);
+     shard(shoulder,side*.1,.38,.92,.84,.67,-side*.3,stone);
+     const elbow=new T.Group();elbow.position.set(side*.55,-2.3,0);shoulder.add(elbow);
+     part(elbow,[.85,.72,.95],[0,0,0],dark);
+     part(elbow,[.92,1.8,1.1],[side*.12,-1,.1],stone,-side*.12);
+     part(elbow,[.13,1.5,.1],[side*.49,-1,.71],edge,-side*.12);
+     const hand=new T.Group();hand.position.set(side*.23,-2,.2);elbow.add(hand);
+     part(hand,[1.05,.74,.9],[0,0,0],dark);
+     for(let j=0;j<3;j++){
+       part(hand,[.22,.73,.25],[(j-1)*.34,-.55,.33],stone,(j-1)*.12);
+       part(hand,[.17,.46,.19],[(j-1)*.39,-1.07,.44],edge,(j-1)*.21);
+     }
+     const hip=new T.Group();hip.position.set(side*.85,-1.72,0);body.add(hip);
+     part(hip,[.77,1.7,.85],[side*.12,-.7,0],stone,-side*.18);
+     const knee=new T.Group();knee.position.set(side*.25,-1.6,0);hip.add(knee);
+     part(knee,[.8,.62,1],[0,0,.1],dark);
+     part(knee,[.6,1.8,.68],[0,-1,.1],stone,side*.12);
+     part(knee,[1.03,.47,1.85],[0,-1.85,.62],stone);
+     for(let j=0;j<3;j++)part(knee,[.17,.2,.4],[(j-1)*.32,-1.92,1.65],edge);
+     // Split gate-leaves hang behind the shoulders with delayed motion.
+     const wing=new T.Group();wing.position.set(side*1.2,2,-.8);body.add(wing);
+     for(let j=0;j<5;j++){
+       const x=side*(.6+j*.47),y=1.2-j*.48;
+       link(wing,[side*.2,0,0],[x,y,0],.16,stone);
+       part(wing,[.23,2.1+j*.39,.38],[x,y-.55,0],stone,-side*.1);
+       shard(wing,x,y-.4,.24,.38,.78,side*(.18+j*.06),ember);
+     }
+     limbs.push({shoulder,elbow,hand,hip,knee,wing,side});
+   }
+   // Static masonry is batched inside each joint; animated joint hierarchy stays intact.
+   const batchJoint=parent=>{
+     for(const child of [...parent.children])if(child.isGroup)batchJoint(child);
+     const buckets=new Map();
+     for(const child of parent.children){
+       if(!child.isMesh)continue;
+       if(!buckets.has(child.material))buckets.set(child.material,[]);
+       buckets.get(child.material).push(child);
+     }
+     for(const [material,parts] of buckets){
+       if(parts.length<2)continue;
+       const geometries=parts.map(part=>{
+         part.updateMatrix();
+         const geo=part.geometry.index?part.geometry.toNonIndexed():part.geometry.clone();
+         return geo.applyMatrix4(part.matrix);
+       });
+       const geometry=new T.BufferGeometry();
+       for(const key of ['position','normal','uv']){
+         const size=geometries[0].attributes[key].itemSize;
+         const arrays=geometries.map(geo=>geo.attributes[key].array);
+         const data=new Float32Array(arrays.reduce((n,a)=>n+a.length,0));
+         let offset=0;for(const array of arrays){data.set(array,offset);offset+=array.length;}
+         geometry.setAttribute(key,new T.BufferAttribute(data,size));
+       }
+       geometry.computeBoundingSphere();
+       for(const part of parts){parent.remove(part);part.geometry.dispose();}
+       for(const geo of geometries)geo.dispose();
+       parent.add(new T.Mesh(geometry,material));
+     }
+   };
+   // Two fog layers make the silhouette recede into the ruined city at foot level.
+   const groundHaze=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,
+     side:T.DoubleSide,uniforms:{uT:U.t,uFogAlpha:{value:.48}},
+     vertexShader:VS,fragmentShader:NOISE+`
+       uniform float uT,uFogAlpha;varying vec2 vUv;
+       void main(){
+         vec2 p=vUv;
+         float n=fbm(vec2(p.x*5.1+uT*.038,p.y*4.4-uT*.014));
+         float lower=1.-smoothstep(.1,.91,p.y+.11*(n-.5));
+         float feather=smoothstep(0.,.12,p.x)*(1.-smoothstep(.88,1.,p.x));
+         float opacity=lower*feather*uFogAlpha*(.48+.52*n);
+         vec3 ink=mix(vec3(.012,.027,.052),vec3(.056,.13,.18),n);
+         gl_FragColor=vec4(ink,opacity);
+       }`});
+   for(const layer of [
+     {x:-.45,y:-3.65,z:.1,w:11.8,h:6.8,a:.32},
+     {x:.3,y:-4.25,z:2.45,w:12.5,h:7.2,a:.62}
+   ]){
+     const fogMat=groundHaze.clone();fogMat.uniforms.uT=U.t;
+     fogMat.uniforms.uFogAlpha.value=layer.a;
+     const fog=new T.Mesh(new T.PlaneGeometry(layer.w,layer.h),fogMat);
+     fog.position.set(layer.x,layer.y,layer.z);
+     fog.renderOrder=45;g.add(fog);
+   }
+   batchJoint(body);
+   g.rotation.y=-.26;g.scale.setScalar(1.05);
+   own[id].tick=t=>{
+     body.position.y=.14*Math.sin(t*.65);neck.rotation.z=.09*Math.sin(t*.8);
+     skull.rotation.y=.2*Math.sin(t*.52);jaw.rotation.x=.18+.16*Math.sin(t*1.12);
+     for(const l of limbs){
+       const p=t*.92+l.side*.8;
+       l.shoulder.rotation.z=l.side*(.17+.18*Math.sin(p));
+       l.elbow.rotation.x=.28+.24*Math.sin(p-.65);
+       l.hand.rotation.z=.18*Math.sin(p-1.3);
+       l.hip.rotation.x=.2*Math.sin(p+1.5);l.knee.rotation.x=.18+.15*Math.sin(p+.8);
+       l.wing.rotation.y=l.side*(.18+.15*Math.sin(p-1.1));
+     }
    };
  }
+ // Собор-шпиль: контрфорсы, мосты, проломы, тёмная каменная масса и свет в окнах.
+ {
+   const id='shattered-mast',g=newGroup(id,-23,0,-38);
+   const texture=mk(768,1536,(ctx,w,h)=>{
+     const R=rng(829);const windows=[];
+     const masonry=(x,y,bw,bh,tone)=>{
+       ctx.fillStyle=S(tone);ctx.fillRect(x,y,bw,bh);
+       ctx.save();ctx.beginPath();ctx.rect(x,y,bw,bh);ctx.clip();
+       for(let row=y;row<y+bh;row+=14){
+         ctx.fillStyle=S(12);ctx.fillRect(x,row,bw,1.5);
+         for(let col=x-(Math.floor(row/14)%2)*19;col<x+bw;col+=38){
+           ctx.fillStyle=S(30+R()*55);ctx.fillRect(col+1,row+2,35,11);
+           if(R()<.18){ctx.fillStyle=S(105);ctx.fillRect(col+2,row+2,30,1);}
+         }
+       }
+       ctx.restore();
+     };
+     const lancet=(x,y,bw,bh)=>{
+       ctx.fillStyle=S(4);ctx.beginPath();ctx.moveTo(x-bw/2,y+bh);
+       ctx.lineTo(x-bw/2,y+bw);ctx.quadraticCurveTo(x-bw/2,y+bw*.4,x,y);
+       ctx.quadraticCurveTo(x+bw/2,y+bw*.4,x+bw/2,y+bw);
+       ctx.lineTo(x+bw/2,y+bh);ctx.closePath();ctx.fill();
+       windows.push([x-bw*.23,y+bw*.8,bw*.46,bh-bw*.9]);
+     };
+     // A stepped central tower with a visibly broken crown, never a regular cone.
+     for(let tier=0;tier<8;tier++){
+       const y=1310-tier*139,bw=300-tier*21;
+       masonry(w*.49-bw/2,y,bw,145,34+tier*3);
+       ctx.fillStyle=S(13);ctx.fillRect(w*.49-bw*.62,y-8,bw*1.24,15);
+       ctx.fillStyle=S(115);ctx.fillRect(w*.49-bw*.62,y+7,bw*1.24,3);
+       for(const side of [-1,1]){
+         ctx.fillStyle=S(25);ctx.beginPath();ctx.moveTo(w*.49+side*bw*.55,y+110);
+         ctx.lineTo(w*.49+side*bw*.76,y+29);ctx.lineTo(w*.49+side*bw*.53,y-24);ctx.fill();
+       }
+       for(let j=-1;j<=1;j++)lancet(w*.49+j*bw*.23,y+25,12,70);
+     }
+     // Two unequal buttress towers and bridges with open pointed arches.
+     for(const side of [-1,1]){
+       const x=w*.49+side*235,top=side<0?498:658;
+       masonry(x-38,top,76,h-top,43);
+       for(let y=top+30;y<h-80;y+=120){
+         ctx.fillStyle=S(98);ctx.fillRect(x-46,y-7,92,4);lancet(x,y+12,18,63);
+         const bx=side<0?x:w*.49+100,bw=135;
+         masonry(bx,y+77,bw,35,55);
+         ctx.globalCompositeOperation='destination-out';ctx.beginPath();
+         ctx.moveTo(bx+12,y+112);ctx.quadraticCurveTo(bx+35,y+58,bx+60,y+112);ctx.fill();
+         ctx.globalCompositeOperation='source-over';
+       }
+       ctx.fillStyle=S(52);ctx.beginPath();ctx.moveTo(x-41,top);
+       ctx.lineTo(x-20,top-23);ctx.lineTo(x-17,top-117);
+       ctx.lineTo(x+2,top-150);ctx.lineTo(x+18,top-47);ctx.lineTo(x+39,top);ctx.fill();
+       // Exterior flying buttresses have irregular double profiles.
+       for(let j=0;j<3;j++){
+         ctx.strokeStyle=S(49+j*9);ctx.lineWidth=11;
+         ctx.beginPath();ctx.moveTo(x+side*18,top+260+j*175);
+         ctx.quadraticCurveTo(x+side*67,top+360+j*175,x+side*(88+j*14),h-23);ctx.stroke();
+       }
+     }
+     ctx.fillStyle=S(53);ctx.beginPath();ctx.moveTo(320,336);ctx.lineTo(328,137);
+     ctx.lineTo(350,162);ctx.lineTo(364,67);ctx.lineTo(388,104);ctx.lineTo(395,233);
+     ctx.lineTo(420,190);ctx.lineTo(436,347);ctx.closePath();ctx.fill();
+     // Protruding fractured cornice, not floating triangles covering the frame.
+     for(let j=0;j<19;j++){
+       const y=490+R()*920,x=280+R()*185;
+       ctx.strokeStyle=S(6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y);
+       ctx.lineTo(x-9,y+19);ctx.lineTo(x+4,y+37);ctx.lineTo(x-13,y+68);ctx.stroke();
+     }
+     lit(ctx,windows);
+   });
+   const tower=arch(texture,24,49,-23,-38,.19,{base:.68,amp:1.13,light:0x91cbdc});
+   scene.remove(tower);tower.position.set(0,24.5,0);g.add(tower);
+   const strips=[];
+   for(let j=0;j<4;j++){
+     const cloth=new T.Group();cloth.position.set(-1.8+j*1.35,12+j*6,.3);g.add(cloth);
+     const animate=banners(cloth,2,2.4,0x9c527f,317+j);strips.push({cloth,animate});
+   }
+   own[id].tick=t=>{
+     for(let j=0;j<strips.length;j++){
+       strips[j].cloth.rotation.z=.045*Math.sin(t*.6-j*.4);strips[j].animate(t);
+     }
+   };
+ }
+
  // Мост между разбитыми вратами: 28 разноуровневых осколков, руны и волна по дугам.
  {
    const id='gate-bridge',g=newGroup(id,12,12,-40);

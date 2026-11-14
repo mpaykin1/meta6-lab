@@ -346,3 +346,19 @@ class KindTraps(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class HtmlPackPixelTraps(unittest.TestCase):
+    """Execute the actual JS pixel metric, including deceptive detailed backgrounds."""
+
+    def test_actual_mask_rejects_primitives_and_background_animation(self):
+        import subprocess
+        import os
+        harness = Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs"
+        verifier = Path(os.environ.get("ASSET_CHECK_REPO") or Path(__file__).resolve().parents[2]) / "scripts/lab/verify-shpili-pixels.mjs"
+        pixel_module = harness.with_name("htmlpack_pixels.mjs")
+
+        run = subprocess.run(["node", str(verifier), pixel_module.as_uri()],
+                             capture_output=True, text=True, timeout=30)
+        self.assertEqual(0, run.returncode, run.stderr)
+        self.assertIn("object-pixel traps PASS", run.stdout)

@@ -10,6 +10,8 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from PIL import Image
+
 import check_pack as cp
 
 REPO = Path(os.environ.get("ASSET_CHECK_REPO") or Path(__file__).resolve().parents[2])
@@ -38,14 +40,19 @@ class HtmlPackTraps(unittest.TestCase):
         self.root.joinpath("index.html").write_text(src, "utf-8")
         manifest = dict(COMMON, assets={"new_shadow": {"role": "enemy"}})
         self.root.joinpath("pack.json").write_text(json.dumps(manifest), "utf-8")
+        (self.root / "_check").mkdir(exist_ok=True)
+        Image.new("RGB", (1440, 316), (7, 24, 39)).save(self.root / "_check/compare.png")
 
     def metrics(self, new=None, fps=45):
         ref = {name: {"visible": .14, "detail": .07, "motion": .08, "colors": 130,
                       "fps": 45, "isolated": 1} for name in self.old}
+        for metric in ref.values():
+            metric.update(silhouette=.21, palette=[108, 142, 180], deformation=.09)
         cand = {name: dict(metric) for name, metric in ref.items()}
         if new is not None:
             cand["new_shadow"] = dict(visible=.16, detail=.09, motion=.1, colors=140,
                                       fps=fps, isolated=.16)
+            cand["new_shadow"].update(silhouette=.25, palette=[119, 153, 176], deformation=.1)
             cand["new_shadow"].update(new)
         return {"ok": True, "reference": {"items": ref, "errors": [], "screen_text": False},
                 "candidate": {"items": cand, "errors": [], "screen_text": False}}
@@ -57,6 +64,30 @@ class HtmlPackTraps(unittest.TestCase):
 
     def ids(self, data=None, error=None):
         return {x["id"] for x in self.check(data, error).hard()}
+
+    def test_HP13_cli_exports_real_comparison_png(self):
+        # Regression: CLI wrote REPORT.md but crashed with NameError on copy2.
+        self.add_new()
+        destination = self.root / "out"
+        fake = cp.Report(self.root)
+        fake.kinds = ["htmlpack"]
+        with patch("check_pack.check", return_value=fake):
+            self.assertEqual(cp.main([str(self.root), "--out", str(destination)]), 0)
+        self.assertEqual((destination / "compare.png").read_bytes(),
+                         (self.root / "_check" / "compare.png").read_bytes())
+
+    def test_HP10_transient_effect_waits_for_nonzero_geometry(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        wake = harness.index("await page.evaluate(id=>window.__AC_WAKE__(id),id);")
+        settle = harness.index("if(id==='sparks'||id==='petals')await page.waitForTimeout(240);")
+        freeze = harness.index("await page.evaluate(()=>{window.__AC_FREEZE__=true});")
+        self.assertLess(wake, settle)
+        self.assertLess(settle, freeze)
+
+    def test_HP8_missing_favicon_not_a_fake_resource_failure(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("if(pathname==='/favicon.ico'){response.statusCode=204;response.end();return;}", harness)
+        self.assertIn("response.statusCode=404;response.end(String(error.message));", harness)
 
     def test_good_reference_passes_without_hard(self):
         self.assertEqual([], self.check().hard())
@@ -86,6 +117,27 @@ class HtmlPackTraps(unittest.TestCase):
     def test_HP6_static_new_asset(self):
         self.add_new()
         self.assertIn("HP6", self.ids(self.metrics(new={"motion": 0.0})))
+
+    def test_HP10_circle_cannot_hide_behind_detailed_background(self):
+        self.add_new()
+        self.assertIn("HP10", self.ids(self.metrics(new={"silhouette": .001})))
+
+    def test_HP10_missing_reference_isolation_is_hard(self):
+        self.add_new()
+        data = self.metrics(new={})
+        data["reference"]["items"][self.old[0]]["isolated"] = 0
+        self.assertIn("HP10", self.ids(data))
+
+    def test_HP11_palette_drift_not_covered_by_scene_colors(self):
+        self.add_new()
+        self.assertIn("HP11", self.ids(self.metrics(new={"palette": [255, 240, 0]})))
+
+    def test_HP10_reference_and_candidate_use_same_pixel_mask(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("window.__ISOLATE__(id,false)", harness)
+        self.assertIn("result.reference = await measure(browser,ref)", harness)
+        self.assertIn("result.candidate = resolve(refPath)", harness)
+        self.assertIn("features(first.on,second.on,first.off,second.off,fps)", harness)
 
     def test_HP7_slow_browser_page(self):
         self.add_new()
@@ -122,10 +174,97 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertIn("page.waitForFunction(({target,tolerance})", harness)
         self.assertIn("fixedCamera", harness)
 
+    def test_HP10_reference_render_hook_matches_real_whitespace(self):
+        import re
+        reference = REF.read_text("utf-8")
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertRegex(reference, r"update\(t,dt\);\s*renderer\.setRenderTarget\(rtA\);")
+        self.assertIn(r"const refDraw=/update\(t,dt\);(\s*)renderer\.setRenderTarget\(rtA\);/;", harness)
+        self.assertIn("source.replace(refDraw,", harness)
+
     def test_HP8_unavailable_browser(self):
         with patch("subprocess.run", return_value=SimpleNamespace(
             stdout='{"ok":false,"error":"Chrome unavailable"}', stderr="", returncode=1)):
             self.assertIn("HP8", {x["id"] for x in cp.check(self.root).hard()})
+
+
+    def test_HP12_glow_only_fails_articulated_motion(self):
+        self.add_new()
+        self.assertIn("HP12", self.ids(self.metrics(new={"motion": .3, "deformation": 0})))
+
+
+    def test_HP12_real_articulation_passes(self):
+        self.add_new()
+        self.assertNotIn("HP12", self.ids(self.metrics(new={"deformation": .2})))
+
+
+    def test_HP12_uses_shape_mask_not_rgb_only(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        harness += (Path(__file__).resolve().parent / "kinds/htmlpack_pixels.mjs").read_text("utf-8")
+        self.assertIn("differentShape=0,unionShape=0", harness)
+        self.assertIn("deformation:+deformation.toFixed(5)", harness)
+
+
+    def test_HP10_transient_sparks_are_activated_before_isolation(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("window.__AC_WAKE__=id=>", harness)
+        self.assertIn("if(id==='sparks')burst(GX-1,GY,GZ+1.5,440", harness)
+        self.assertIn("await page.evaluate(id=>window.__AC_WAKE__(id),id);", harness)
+
+
+    def test_HP13_compare_sheet_uses_only_object_mask(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("async function isolatePreview(page, onPng, offPng)", harness)
+        self.assertIn("if(delta<=23){pixels[i+3]=0;continue}", harness)
+        self.assertIn("const pad=Math.max(5,", harness)
+        self.assertIn("ctx.putImageData(frame,0,0)", harness)
+        self.assertIn("report.previews[id]=await isolatePreview(page,second.png,second.offPng)", harness)
+        self.assertNotIn("report.previews[id]=second.png.toString('base64')", harness)
+
+
+    def test_HP13_missing_sheet_is_hard(self):
+        self.add_new()
+        (self.root / "_check/compare.png").unlink()
+        self.assertIn("HP13", self.ids(self.metrics(new={})))
+
+
+    def test_HP13_incomplete_sheet_is_hard(self):
+        self.add_new()
+        Image.new("RGB", (1440, 12), (7, 24, 39)).save(self.root / "_check/compare.png")
+        self.assertIn("HP13", self.ids(self.metrics(new={})))
+
+
+    def test_HP10_petals_activated_from_real_explosion(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("if(id==='petals')explode();", harness)
+        self.assertIn("if(id==='bokeh'){", harness)
+        self.assertIn("waterMat.uniforms.__acBokeh.value=0", harness)
+        self.assertIn("const instancePart=id==='jaws'||id==='tendrils'", harness)
+        self.assertIn("for(const o of instancePart?[]:objects)", harness)
+
+
+    def test_HP8_browser_checks_real_preview_location(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("const candidateRoute='/preview/asset-check/'", harness)
+        self.assertIn("[candidateRoute]:cand", harness)
+        self.assertNotIn(".replaceAll('../../../games/', '/games/')", harness)
+
+
+    def test_HP8_empty_reference_preview_remains_hard_and_named(self):
+        data = self.metrics()
+        data["reference"]["errors"] = ["HP13 rain: comparison asset mask empty"]
+        self.assertIn("HP8", self.ids(data))
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("report.errors.push('HP13 '+id+", harness)
+
+
+    def test_HP8_isolation_uniform_compiles_and_tracks_visibility(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("waterMat.uniforms.uAcBokeh=waterMat.uniforms.__acBokeh;", harness)
+        self.assertIn("uniform float uAcBokeh;", harness)
+        self.assertIn("*.42*sh*uAcBokeh;", harness)
+        self.assertNotIn("uniform float __acBokeh;", harness)
+        self.assertNotIn("*.42*sh*__acBokeh;", harness)
 
 
 if __name__ == "__main__":

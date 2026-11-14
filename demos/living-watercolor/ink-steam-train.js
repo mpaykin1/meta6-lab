@@ -131,7 +131,7 @@ function windows(parent,start,length,z,y,count,height=.58){
     rivet(parent,[x+length/count*.26,y-height*.45,z+(z>0?.055:-.055)],.027);
   }
 }
-function makeCoach(parent,center,seed){
+function makeCoach(parent,center,seed,wheels){
   const g=new T.Group();g.position.x=center;parent.add(g);
   const rnd=random(seed);
   box(g,[3.10,.27,1.61],'charcoal',[0,.47,0]);
@@ -157,7 +157,7 @@ function makeCoach(parent,center,seed){
     box(g,[.25,.14,1.88],'charcoal',[x,.55,0]);
   }
   for(const x of [-.89,.89])for(const side of [-1,1]){
-    locomotiveWheel(g,x,side*.93,.38,[]); // coaches have separate rolling bogies
+    locomotiveWheel(g,x,side*.93,.38,wheels); // independently rotating coach bogies
     box(g,[.93,.20,.11],'edge',[x,.53,side*1.00],false);
   }
   for(const x of [-1.55,1.55]){
@@ -261,8 +261,8 @@ export function createInkSteamTrain(seed=17){
     coal.rotation.set(rnd(),rnd()*3,rnd());
   }
   // Coupled passenger coaches behind the engine.
-  const coach1=makeCoach(root,5.14,seed+39);
-  const coach2=makeCoach(root,8.52,seed+74);
+  const coach1=makeCoach(root,5.14,seed+39,wheels);
+  const coach2=makeCoach(root,8.52,seed+74,wheels);
   for(const [a,b] of [[.85,1.15],[3.21,3.61],[6.72,6.95]]){
     connect(root,[a,.44,0],[b,.44,0],.087,'charcoal');
     sph(root,[.17,.13,.18],'edge',[(a+b)*.5,.43,0],false,1);
@@ -284,6 +284,7 @@ export function createInkSteamTrain(seed=17){
     puff.userData.watercolorOutline=false;puff.userData.watercolorSkipWash=true;
     smokeItems.push({puff,index:i+28,speed:.8+rnd()*.4,x:rnd(),z:rnd()});
   }
+  root.userData.wheelCount=wheels.length;
   root.userData.footprint=5.0;
   root.userData.isSteamTrain=true;
   root.userData.motion={running:true,speed:.72};

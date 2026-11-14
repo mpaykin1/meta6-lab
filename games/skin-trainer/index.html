@@ -273,7 +273,7 @@ function loop(){requestAnimationFrame(loop);
   let ix=mvx,iy=mvy;
   if(keys.KeyA||keys.ArrowLeft)ix-=1;if(keys.KeyD||keys.ArrowRight)ix+=1;
   if(keys.KeyW||keys.ArrowUp)iy-=1;if(keys.KeyS||keys.ArrowDown)iy+=1;
-  if(ix||iy)feedHint('L',dt*60*(keys.KeyW||keys.KeyA||keys.KeyS||keys.KeyD||keys.ArrowUp||keys.ArrowDown||keys.ArrowLeft||keys.ArrowRight?2:0));
+  // Tutorial progress is based on actual hero displacement, not a held key.
   const il=Math.min(1,Math.hypot(ix,iy));
 
   // камера с инерцией
@@ -283,8 +283,10 @@ function loop(){requestAnimationFrame(loop);
   const fx=Math.sin(yaw),fz=Math.cos(yaw);
   const tx=(ix*fz+iy*fx)*4.2,tz=(-ix*fx+iy*fz)*4.2;
   const vk=1-Math.exp(-dt*(il?5:3.5));vel.x+=(tx-vel.x)*vk;vel.z+=(tz-vel.z)*vk;
+  const beforeX=hero.position.x,beforeZ=hero.position.z;
   hero.position.x+=vel.x*dt;hero.position.z+=vel.z*dt;
   const hl=Math.hypot(hero.position.x,hero.position.z);if(hl>36){hero.position.x*=36/hl;hero.position.z*=36/hl;}
+  if(il>0)feedHint('L',Math.hypot(hero.position.x-beforeX,hero.position.z-beforeZ)*45);
   const sp=Math.hypot(vel.x,vel.z);
   if(sp>.2){const ty=Math.atan2(-vel.x,-vel.z);let d=ty-heroYaw;d=Math.atan2(Math.sin(d),Math.cos(d));heroYaw+=d*(1-Math.exp(-dt*8));lean+=(d*.4-lean)*(1-Math.exp(-dt*5));}
   else lean*=1-Math.min(1,dt*4);

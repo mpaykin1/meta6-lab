@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 72, слито 6, закрыто 61, открыто 5 — бот, 2026-11-14 06:00 UTC
+Итог: всего 72, слито 6, закрыто 62, открыто 4 — бот, 2026-11-14 09:33 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -16,7 +16,7 @@
 | #206 | эталон | `lab/king-of-ash-reference-1109` | Эталон: Король Пепла (оригинальный HTML) | closed | закрыт: дубль, сохранён [PR #207](https://github.com/mpaykin1/meta6-lab/pull/207), [PR #206](https://github.com/mpaykin1/meta6-lab/pull/206) |
 | #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |
 | #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |
-| #191 | эталон | `lab/sunken-city-reference-1109` | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и катало | open unknown | в работе 2026-11-10 04:47 UTC |
+| #191 | эталон | `lab/sunken-city-reference-1109` | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и катало | open dirty | в работе 2026-11-10 04:47 UTC |
 | #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |
 | #137 | эталон | `lab/demonic-hand-webgl2-reference` | Add Demonic Hand as owner-approved WebGL2 reference | closed | | закрыт stale: конфликт с main, красный [Portal Visited](https://github.com/mpaykin1/meta6-lab/actions/runs/42496471465), [PR #137](https://github.com/mpaykin1/meta6-lab/pull/137) |
 | #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | closed | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |
@@ -28,7 +28,7 @@
 | #209 | код | `lab/library-catalog` | L1 ч.3 + L3: каталог игровых систем для MCP ИИ | closed | |
 | #205 | код | `lab/owner-pult` | Пульт владельца — прогресс и свежие игры | closed | |
 | #204 | код | `lab/rules-bot-trainer` | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | closed | |
-| #203 | код | `lab/skin-rusty-robot` | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | open unknown | |
+| #203 | код | `lab/skin-rusty-robot` | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | open dirty | |
 | #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |
 | #193 | код | `lab/kontur-k7-review` | K7: guard against repeated regression classes | closed | |
 | #192 | код | `lab/mcp-connect` | M6: Connect — локальный MCP, конфиги клиентов и официальный  | closed | |
@@ -56,7 +56,7 @@
 | #92 | код | `lab/sumerki2-honest-combined-controls-20261107` | fix(bot): integrate Sumerki II read-only adapter, honest con | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42387142429), [PR #92](https://github.com/mpaykin1/meta6-lab/pull/92) |
 | #90 | код | `lab/twilight-isles-bot-real-state-20261107-1831` | feat(meta-bot): honest read-only Twilight Isles state and re | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42383897543), [PR #90](https://github.com/mpaykin1/meta6-lab/pull/90) |
 | #88 | код | `lab/sumerki2-honest-readonly-adapter-20261107` | feat(bot): real read-only Sumerki II adapter for existing in | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42383297858), [PR #88](https://github.com/mpaykin1/meta6-lab/pull/88) |
-| #87 | код | `lab/platform-play-connect-earn-20261107` | feat(portal): Play / Connect / Earn navigation and functiona | open unknown | |
+| #87 | код | `lab/platform-play-connect-earn-20261107` | feat(portal): Play / Connect / Earn navigation and functiona | closed | |
 | #86 | код | `lab/sumerki2-bot-controls-20261107-1839` | bot: honest Sumerki II input strategy and bounded run contra | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42382769013), [PR #86](https://github.com/mpaykin1/meta6-lab/pull/86) |
 | #81 | код | `lab/sumerki-bot-controls-20261107-1746` | bot: strict input-only strategy for Sumerki i Pepel 2 | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42378567198), [PR #81](https://github.com/mpaykin1/meta6-lab/pull/81) |
 | #73 | код | `lab/sumerki-bot-config-20261107` | feat(bot): strict browser enrollment for Sumerki II | closed | закрыт stale: >48ч без коммита, [красный CI](https://github.com/mpaykin1/meta6-lab/actions/runs/42372675764), [PR #73](https://github.com/mpaykin1/meta6-lab/pull/73) |
@@ -76,7 +76,7 @@
 | #6 | код | `lab/world-doors-progress` | lab: persistent visited-world doors without touching accepte | closed | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42285373653), [PR #6](https://github.com/mpaykin1/meta6-lab/pull/6) |
 | #5 | код | `lab/oss-commercial-kit` | lab: коммерчески разрешённые OSS-модули и игровая сцена | closed | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42286065563), [PR #5](https://github.com/mpaykin1/meta6-lab/pull/5) |
 | #4 | код | `lab/native-catalog-and-steam` | lab: native catalog and safe Steam/Android candidates | closed | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42285011814), [PR #4](https://github.com/mpaykin1/meta6-lab/pull/4) |
-| #3 | код | `lab/twilight-island-bot` | lab: Twilight Island — бот проходит весь остров | open unknown | |
+| #3 | код | `lab/twilight-island-bot` | lab: Twilight Island — бот проходит весь остров | open dirty | |
 | #2 | код | `lab/twilight-isles-pass` | lab: Twilight Isles GPU optimization, single RAF, first-isla | closed | закрыт stale: 48ч+ без коммита, [красный bot](https://github.com/mpaykin1/meta6-lab/actions/runs/42356322630), [PR #2](https://github.com/mpaykin1/meta6-lab/pull/2) |
 | #1 | код | `lab/twilight-island-pass` | lab: Twilight Island bot pass — combined #291 and #303 | closed | закрыт stale: красный META BOT, нет коммитов >48 ч — [PR #1](https://github.com/mpaykin1/meta6-lab/pull/1), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42356940858) |
 

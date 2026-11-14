@@ -1,16 +1,24 @@
 {
-  "generated_at": "2026-11-14T03:45:36.554Z",
+  "generated_at": "2026-11-14T03:49:21.796Z",
   "sha": {
-    "lab": "3345839c052d0b3a450ccb42cd1d4ae31dfce7fb",
+    "lab": "60f935b8d8397694865999dd53b62c62ce02d8de",
     "mg": "7ae9604d0dfc969116895cd06bf11b4c3cdf15ff"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43553225176",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43553537033",
   "review": {
     "protected": [
+      {
+        "number": 309,
+        "sha": "41331671a13c476ff8ec3b7497dd3a47517dade8",
+        "paths": [
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
       {
         "number": 296,
         "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a",
@@ -352,11 +360,16 @@
     ]
   },
   "pr": {
-    "open": 49,
-    "conflicts": "нет данных",
-    "merged": 36,
+    "open": 48,
+    "conflicts": 34,
+    "merged": 37,
     "closed": 77,
     "mergedItems": [
+      {
+        "number": 309,
+        "title": "STOROZHA quota: черновики не блокируют очередь (тупик #3/#72",
+        "sha": "41331671a13c476ff8ec3b7497dd3a47517dade8"
+      },
       {
         "number": 307,
         "title": "Остров аптекаря: 3 этапа для META BOT",
@@ -540,6 +553,14 @@
     ],
     "protectedItems": [
       {
+        "number": 309,
+        "sha": "41331671a13c476ff8ec3b7497dd3a47517dade8",
+        "paths": [
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
         "number": 296,
         "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a",
         "paths": [
@@ -708,7 +729,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2063,
+      "count": 2068,
       "folders": "нет данных"
     },
     "mg": {
@@ -803,6 +824,7 @@
     "| 1107 | 13.11.2026 | STATUS скрывал 7 зелёных FINISH из-за отсутствия progress.json и считал изменение времени новыми фактами | [таблица FINISH](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/FINISH.md) | `scripts/status/selftest.mjs`: false-green-without-run-link, hourly-gate-removed, timestamp-trigger-misreported-as-fact; [патч](https://github.com/mpaykin1/meta6-lab/commit/b4254e356b689d023afdcf2d8a69379345c42add) |",
     "| 1108 | 13.11.2026 | sliyanie-status создавал main-коммит из-за изменения времени при неизменных состояниях PR; API 403 подменял сведения словом «нет данных» | [workflow](https://github.com/mpaykin1/meta6-lab/blob/main/.github/workflows/sliyanie-status.yml) | `scripts/lab/test-sliyanie-status.py`: ловушка time-only-commit и 3 прежние; [патч](https://github.com/mpaykin1/meta6-lab/commit/1f0e1aa64edad1d5d70882818c4824f5c51235f1) |",
     "| 1109 | 13.11.2026 | investigation-snapshot писал generated_at при прежних фактах и мог публиковать неполную выборку при исчерпании лимита GitHub API | [workflow](https://github.com/mpaykin1/meta6-lab/blob/main/.github/workflows/investigation-snapshot.yml) | `scripts/investigation/mutate-publish.mjs`: почасовой лимит, неполный API, время ≠ факт; [патч](https://github.com/mpaykin1/meta6-lab/commit/50db5add34a89257bb2234bdf7f038e786de17c5) |",
-    "| 1110 | 13.11.2026 | MG Dispatcher запрашивал PR из закрытой исторической очереди и падал на 403 GitHub API quota, теряя возможность публиковать исправную очередь | [красный run 43410481729](https://github.com/mpaykin1/meta6-lab/actions/runs/43410481729) | `scripts/dispetcher/mutate-quota.mjs`: 3 мутации на 403/429 и ошибочную авторизацию; [патч](https://github.com/mpaykin1/meta6-lab/commit/03836dddab7a05986b00de2f9b92dec9924c93cf) |"
+    "| 1110 | 13.11.2026 | MG Dispatcher запрашивал PR из закрытой исторической очереди и падал на 403 GitHub API quota, теряя возможность публиковать исправную очередь | [красный run 43410481729](https://github.com/mpaykin1/meta6-lab/actions/runs/43410481729) | `scripts/dispetcher/mutate-quota.mjs`: 3 мутации на 403/429 и ошибочную авторизацию; [патч](https://github.com/mpaykin1/meta6-lab/commit/03836dddab7a05986b00de2f9b92dec9924c93cf) |",
+    "| 1120 | 14.11.2026 | STOROZHA quota держала «пять старейших» PR даже когда их нельзя слить без решения Claude (#3, #72, #87, #133, #191): очередь из 42 PR стояла целиком | [quota run 43552615225](https://github.com/mpaykin1/meta6-lab/actions/runs/43552615225/job/132318241088) | `scripts/storozha/mutate-storozha.mjs` (мутация «quota: draft PRs block the queue again») |"
   ]
 }

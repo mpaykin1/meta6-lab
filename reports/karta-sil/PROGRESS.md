@@ -60,3 +60,4 @@
 | Шаг | Статус | Доказательство | UTC |
 |---|---|---|---|
 | 2. Merge main в #301 | Совмещены исходные и новые строки трёх общих файлов; Actions актуального HEAD не проверены | [#301](https://github.com/mpaykin1/meta6-lab/pull/301), main `1aa6223536b4` | 2026-11-14T09:06:42.648Z |
+| 2. Дублированная валидация PR | Исправлен общий путь REST/GraphQL; четыре существующие мутации без ослабления. Actions нового HEAD обязательны | [Dispatcher FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43579028641), [Karta FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43579028578), [#301](https://github.com/mpaykin1/meta6-lab/pull/301) | 2026-11-14T09:12:07.162Z |

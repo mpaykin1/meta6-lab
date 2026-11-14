@@ -25,10 +25,13 @@ export async function listOpenPullRequests(request = api) {
   try { batch=await request('/pulls?state=open&per_page=100&page='+page); }
   catch(error) { throw Error('GitHub API open PRs: нет данных: '+error.message); }
   if(!Array.isArray(batch))throw Error('GitHub API open PRs: нет данных');
-  for(const pr of batch){
-   if(!Number.isInteger(pr.number)||pr.state!=='open'||!pr.head?.sha||!pr.head?.ref||
-      result.has(pr.number))throw Error('GitHub API open PRs: неполные данные');
-   result.set(pr.number,pr);
+  // REST and GraphQL share one fail-closed validation of open PR records.
+  let checked;
+  try { checked=indexOpened(batch).openPrs; }
+  catch(error){throw Error('GitHub API open PRs: неполные данные: '+error.message)}
+  for(const [number,pr] of checked){
+   if(result.has(number))throw Error('GitHub API open PRs: неполные данные (повтор страницы)');
+   result.set(number,pr);
   }
   if(batch.length===0)return result;
  }

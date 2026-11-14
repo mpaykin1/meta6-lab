@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-14T12:13:41.998Z",
+  "generated_at": "2026-11-14T14:28:48.154Z",
   "sha": {
-    "lab": "068d0934e2e0b99e11b91cfe8486e71d192cffac",
+    "lab": "4990c172116bb4d08c59f0094fd795a7c5036203",
     "mg": "d8ce0d817cccfc4676963bc209d5920e76f4d883"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43604980033",
   "review": {
     "protected": [
       {
@@ -206,7 +206,9 @@
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 227,
@@ -214,11 +216,6 @@
         "paths": [
           ".github/workflows/dispetcher.yml"
         ]
-      },
-      {
-        "number": 226,
-        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8",
-        "paths": "нет данных"
       },
       {
         "number": 216,
@@ -231,7 +228,9 @@
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
       },
       {
         "number": 215,
@@ -244,7 +243,11 @@
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
       }
     ],
     "redLab": [],
@@ -261,6 +264,8 @@
       "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
+      "| БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |",
+      "| КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |",
       "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
       "| К7 | lab/kontur-k7-review | свободно (зависло 6 ч, было: ВОЗВРАЩЁН Claude (ложные срабатывания, см. комментарий в PR #193) — попытка 1 из 2) | 2026-11-09 17:50 |",
       "| B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |",
@@ -270,46 +275,46 @@
       "| B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | свободно (зависло 5 ч, было: проходчик, PR #258 — проверка ложного MOVED после дрейфа) | 2026-11-13 08:14 UTC |",
       "| УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |",
       "| B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | свободно (зависло 5 ч, было: чат ChatGPT, один PR одной игры) | 2026-11-13 11:31 UTC |",
+      "| CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | свободно (зависло 7 ч, было: чат ChatGPT — продолжение #299, очередь Actions) | 2026-11-14T06:25:04Z |",
+      "| STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | свободно (зависло 7 ч, было: чат ChatGPT — обновление #302 после API budget) | 2026-11-14T06:08:21Z |",
+      "| LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | свободно (зависло 4 ч, было: чат ChatGPT — продолжение PR #300, merge свежего main) | 2026-11-14T06:22:06Z |",
       "| PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:17 UTC |"
     ]
   },
   "finish": {
-    "ready": [],
+    "ready": [
+      "B1"
+    ],
     "pending": [
       {
         "id": "M1",
         "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036"
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036"
       },
       {
         "id": "M2",
         "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685"
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685"
       },
       {
         "id": "M3",
         "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       {
         "id": "M4",
         "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211"
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211"
       },
       {
         "id": "M5",
         "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       {
         "id": "M6",
         "value": "не готов",
         "reason": "НЕТ в таблице FINISH"
-      },
-      {
-        "id": "B1",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082"
       },
       {
         "id": "B2",
@@ -364,13 +369,15 @@
       {
         "id": "P1",
         "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308"
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308"
       }
     ],
-    "proofs": {}
+    "proofs": {
+      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43593678250"
+    }
   },
   "pr": {
-    "open": 44,
+    "open": 46,
     "conflicts": "нет данных",
     "merged": 46,
     "closed": 82,
@@ -802,7 +809,9 @@
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 227,
@@ -810,11 +819,6 @@
         "paths": [
           ".github/workflows/dispetcher.yml"
         ]
-      },
-      {
-        "number": 226,
-        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8",
-        "paths": "нет данных"
       },
       {
         "number": 216,
@@ -827,7 +831,9 @@
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
       },
       {
         "number": 215,
@@ -840,13 +846,17 @@
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 2165,
+      "count": 2173,
       "folders": "нет данных"
     },
     "mg": {
@@ -857,62 +867,62 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "ostrov-aptekarya",
-      "bot": "нет данных",
+      "bot": "прошла",
       "storefront": "нет"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "нет данных",
+      "bot": "прошла",
       "storefront": "да"
     }
   ],

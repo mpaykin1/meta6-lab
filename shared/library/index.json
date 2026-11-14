@@ -43181,21 +43181,6 @@
       ]
     },
     {
-      "id": "04b4193252f0d0db9a349420",
-      "game": "rainbow-acceleration",
-      "kind": "solution",
-      "name": "setMode",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/rainbow-acceleration/index.html",
-      "sha256": "e67d116f75e0988c5bbb4041d46f0e13a6fddf5d407019f9cecd02a8b11c3991",
-      "lines": [
-        617,
-        621
-      ]
-    },
-    {
       "id": "0a104cdb88805aba6a9ecafb",
       "game": "rainbow-acceleration",
       "kind": "solution",
@@ -43226,21 +43211,6 @@
       ]
     },
     {
-      "id": "0e06894bf49c9609a269dd96",
-      "game": "rainbow-acceleration",
-      "kind": "solution",
-      "name": "loop",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/rainbow-acceleration/index.html",
-      "sha256": "ed2de308b567a7ff69c47f015cc54100bf2b9c1030958d45f71c5453c4fcfb46",
-      "lines": [
-        629,
-        644
-      ]
-    },
-    {
       "id": "114cabdc238c4a5c20085614",
       "game": "rainbow-acceleration",
       "kind": "solution",
@@ -43268,6 +43238,21 @@
       "lines": [
         43,
         50
+      ]
+    },
+    {
+      "id": "16f44e96d33abd44f50ef83f",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "setMode",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/rainbow-acceleration/index.html",
+      "sha256": "e67d116f75e0988c5bbb4041d46f0e13a6fddf5d407019f9cecd02a8b11c3991",
+      "lines": [
+        619,
+        623
       ]
     },
     {
@@ -43346,21 +43331,6 @@
       ]
     },
     {
-      "id": "30d529d02b0cc53bb7fcbdb7",
-      "game": "rainbow-acceleration",
-      "kind": "solution",
-      "name": "inline-script@3013",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/rainbow-acceleration/index.html",
-      "sha256": "c2317a0b9d18819c8e339d3af89e4f5317d0ee6d3c9e634838d7fc3b09af42b9",
-      "lines": [
-        35,
-        648
-      ]
-    },
-    {
       "id": "3166f70cb5ab20f51b4165c4",
       "game": "rainbow-acceleration",
       "kind": "solution",
@@ -43436,6 +43406,21 @@
       ]
     },
     {
+      "id": "45762696d9333eb23153d6df",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "readSteer",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/rainbow-acceleration/index.html",
+      "sha256": "5dd3513372957bd9e6da376e9b4334a57910379c5493e3fe4b7427796b14db48",
+      "lines": [
+        616,
+        617
+      ]
+    },
+    {
       "id": "4970de23a322665adf2cf6fa",
       "game": "rainbow-acceleration",
       "kind": "solution",
@@ -43463,6 +43448,21 @@
       "lines": [
         40,
         40
+      ]
+    },
+    {
+      "id": "4acf023a32a080d541b14397",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "inline-script@3013",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/rainbow-acceleration/index.html",
+      "sha256": "67f5c9be96d524d02ff4ef71885fa7740842d58bd2701cfa156551f0164d060d",
+      "lines": [
+        35,
+        650
       ]
     },
     {
@@ -43613,6 +43613,21 @@
       "lines": [
         151,
         152
+      ]
+    },
+    {
+      "id": "7b06538418b0948692b95689",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "loop",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/rainbow-acceleration/index.html",
+      "sha256": "ed2de308b567a7ff69c47f015cc54100bf2b9c1030958d45f71c5453c4fcfb46",
+      "lines": [
+        631,
+        646
       ]
     },
     {
@@ -43973,21 +43988,6 @@
       "lines": [
         468,
         477
-      ]
-    },
-    {
-      "id": "ee3061da641504dd0083a1c9",
-      "game": "rainbow-acceleration",
-      "kind": "solution",
-      "name": "readSteer",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/rainbow-acceleration/index.html",
-      "sha256": "5dd3513372957bd9e6da376e9b4334a57910379c5493e3fe4b7427796b14db48",
-      "lines": [
-        614,
-        615
       ]
     },
     {

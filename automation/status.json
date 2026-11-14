@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-14T05:55:14.999Z",
+  "generated_at": "2026-11-14T05:55:45.450Z",
   "sha": {
-    "lab": "c5bec5741c987a1abaf9596b815f53591ed7dc3f",
+    "lab": "462bc3181bfd2c7bbc5a1407065dd8bd8ddc68b7",
     "mg": "d8ce0d817cccfc4676963bc209d5920e76f4d883"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43563764733",
   "review": {
     "protected": [
       {
@@ -195,17 +195,26 @@
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
       }
     ],
     "redLab": [],
@@ -384,7 +393,7 @@
   },
   "pr": {
     "open": 50,
-    "conflicts": "нет данных",
+    "conflicts": 35,
     "merged": 42,
     "closed": 78,
     "mergedItems": [
@@ -784,23 +793,32 @@
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 2123,
+      "count": 2124,
       "folders": "нет данных"
     },
     "mg": {
@@ -811,62 +829,62 @@
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "ostrov-aptekarya",
-      "bot": "нет данных",
+      "bot": "прошла",
       "storefront": "нет"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "нет данных",
+      "bot": "прошла",
       "storefront": "да"
     }
   ],

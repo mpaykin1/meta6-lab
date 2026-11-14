@@ -642,6 +642,21 @@ function loop(){requestAnimationFrame(loop);
   if(fps<48&&lowH>200){lowH=Math.max(200,Math.round(lowH*.86));resize();good=0;}
   else if(fps>57&&lowH<maxH){if(++good>2){lowH=Math.min(maxH,Math.round(lowH*1.1));resize();good=0;}}}
 }
+// Live read-only bot snapshot; controls remain normal keyboard/touch input.
+Object.defineProperty(window,'__META_BOT__',{configurable:false,enumerable:true,get(){
+ const riding=mode==='ride',end=seg&&seg.F[seg.n-1].p;
+ const destination=target&&target.F[0].p||end||pos;
+ return Object.freeze({
+  level:riding?Math.max(1,ci+1):0,totalLevels:Math.max(1,chain.length),
+  player:Object.freeze({x:pos.x,y:pos.y,z:pos.z}),
+  goal:Object.freeze({x:destination.x,y:destination.y,z:destination.z}),
+  alive:riding&&state!=='fall',completed:false,
+  buttons:Object.freeze(['ArrowLeft','ArrowRight','a','d','touch:steer','menu:ride']),
+  combat:false,enemies:0,weapons:0,
+  layout:riding?(seg?seg.name:'air')+':'+ci+':'+state:'gallery',
+  speed:riding?spd:0,input:riding?readSteer():0
+ });
+}});
 window.__rr={get state(){return{mode,state,spd,S,X,seg:seg&&seg.name,chain:chain.length,grave:grave.length,lowH,RW,RH,best}},setMode,showAsset,n:ASSETS.length};
 loop();
 })();

@@ -16,6 +16,7 @@ const mutants = [
     'return ["reference/old/wrong.glb"];'],
   ['quota: sixth PR erroneously green', 'living.length > 5', 'living.length > 6'],
   ['quota: fifth PR erroneously red', 'living.slice(0, 5)', 'living.slice(0, 4)'],
+  ['quota: draft PRs block the queue again', '&& p.draft !== true)', ')'],
   ['quota: hardcoded green for everyone', 'const reject = Boolean(pr &&', 'const reject = Boolean(false && pr &&'],
   ['stale: close after one day', '72 * 60 * 60 * 1000', '24 * 60 * 60 * 1000'],
   ['stale: keep abandoned PR forever', "const close = pr.state === 'open' &&", "const close = false && pr.state === 'open' &&"],

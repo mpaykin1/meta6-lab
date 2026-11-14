@@ -34,9 +34,13 @@ try{
     assert.ok(before.feathers>=24,'Three-dimensional modeled feathers missing');
     assert.ok(before.meshes>40,'Raven is not a volumetric multi-part object');
     assert.ok(before.triangles>1000,'Raven lacks three-dimensional topology');
-    await page.waitForTimeout(330);
-    const after=await page.evaluate(()=>window.__INK_RAVEN__.display.userData.ravenRig.wings[1].shoulder.rotation.z);
-    assert.ok(Math.abs(after-before.wing)>.04,'Flapping animation did not advance');
+    const samples=[before.wing];
+    for(let i=0;i<6;i++){
+      await page.waitForTimeout(150);
+      samples.push(await page.evaluate(()=>window.__INK_RAVEN__.display.userData.ravenRig.wings[1].shoulder.rotation.z));
+    }
+    const wingDelta=Math.max(...samples)-Math.min(...samples);
+    assert.ok(wingDelta>.18,'Flapping animation did not advance over a full sample window');
     await page.evaluate(()=>window.__INK_FOREST__.show('forest'));
     await page.waitForTimeout(250);
     assert.equal(await page.evaluate(()=>window.__INK_FOREST__.active),'forest');
@@ -50,7 +54,7 @@ try{
     assert.deepEqual(errors,[],'WebGL console/page errors');
     console.log('INK_RAVEN_PASS '+d.name+' meshes='+before.meshes+
       ' instanced='+before.instanced+' featherMeshes='+before.feathers+
-      ' triangles='+before.triangles+' wingDelta='+Math.abs(after-before.wing).toFixed(3)+
+      ' triangles='+before.triangles+' wingDelta='+wingDelta.toFixed(3)+
       ' viewport='+d.width+'x'+d.height+' fpsEstimate='+before.fps.toFixed(1)+
       ' errors=0');
     await page.close();await ctx.close();

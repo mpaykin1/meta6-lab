@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-14T22:21:02.226Z",
+  "generated_at": "2026-11-14T22:41:36.758Z",
   "sha": {
-    "lab": "cb2a5bd75679826ad8eb8006199893719977116a",
-    "mg": "cbb2fc1cbac3140cdefbc780c6b9762dfd6dc1a5"
+    "lab": "c0418db87f2de8c25c8b5a708a7de8b65b4cf8cb",
+    "mg": "4c9fc8549b991d55f12fa30621fceada1884d8ca"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43647536411",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43649370144",
   "review": {
     "protected": [
       {
@@ -373,15 +373,20 @@
       }
     ],
     "proofs": {
-      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43593678250"
+      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43647536501"
     }
   },
   "pr": {
-    "open": 46,
+    "open": 47,
     "conflicts": "нет данных",
-    "merged": 46,
+    "merged": 47,
     "closed": 82,
     "mergedItems": [
+      {
+        "number": 324,
+        "title": "library-machine: новая игра не роняет source-only гейт",
+        "sha": "c0418db87f2de8c25c8b5a708a7de8b65b4cf8cb"
+      },
       {
         "number": 320,
         "title": "Карта сил: повтор push после rebase при гонке с main",
@@ -856,12 +861,12 @@
   },
   "changes": {
     "lab": {
-      "count": 2180,
+      "count": 2184,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 11,
-      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:22, rules:6"
+      "count": 12,
+      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:22, reference:22, rules:6, SOURCE_INDEX.md:1"
     }
   },
   "games": [

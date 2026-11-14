@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-14T22:21:02.226Z | МГЛ: cb2a5bd75679826ad8eb8006199893719977116a | МГ: cbb2fc1cbac3140cdefbc780c6b9762dfd6dc1a5 | https://github.com/mpaykin1/meta6-lab/actions/runs/43647536411
+UTC: 2026-11-14T22:41:36.758Z | МГЛ: c0418db87f2de8c25c8b5a708a7de8b65b4cf8cb | МГ: 4c9fc8549b991d55f12fa30621fceada1884d8ca | https://github.com/mpaykin1/meta6-lab/actions/runs/43649370144
 ## ПРОВЕРИТЬ CLAUDE
 - PR #320 fd4ea42560b6c1f43ecdf1a7df2e667160943c18: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
 - PR #301 4048fca93da0d4d7be883e61cd9c1d06f6d71a4f: .github/workflows/dispetcher.yml, .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
@@ -14,7 +14,7 @@ UTC: 2026-11-14T22:21:02.226Z | МГЛ: cb2a5bd75679826ad8eb8006199893719977116a
 - | M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |
 - ещё 12: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
-готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43593678250))
+готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43647536501))
 M1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
 M2 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
 M3 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
@@ -33,14 +33,14 @@ L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 P1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 ## PR МГЛ
-открыто: 46 | конфликт: нет данных | слито: 46 | закрыто: 82
+открыто: 47 | конфликт: нет данных | слито: 47 | закрыто: 82
+#324 library-machine: новая игра не роняет source-only гейт | c0418db87f2de8c25c8b5a708a7de8b65b4cf8cb
 #320 Карта сил: повтор push после rebase при гонке с main | fd4ea42560b6c1f43ecdf1a7df2e667160943c18
 #301 КАРТА СИЛ: статистика слияний PR и фильтр автозадач | 4048fca93da0d4d7be883e61cd9c1d06f6d71a4f
-#302 fix(status): ФИНИШ из таблиц и подтверждённых прогонов main | 6ec51cb945f1e28fb2e7cab3cb215bcc27973de1
-ещё 43: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 44: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2180 коммитов | нет данных
-МГ: 11 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:22, rules:6
+МГЛ: 2184 коммитов | нет данных
+МГ: 12 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:22, reference:22, rules:6, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет

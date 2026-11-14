@@ -830,7 +830,7 @@ const SHPILI_PLUS=(()=>{
  // Главная форма — живописный силуэт из эталонного mk()/archMat(), не светящиеся кольца.
  {
    const id='gate-bridge',g=newGroup(id,12,12,-40),R=rng(533);
-   const texture=mk(1536,660,(ctx,w,h)=>{
+   const texture=mk(2048,1024,(ctx,W,H)=>{const w=1536,h=660;ctx.scale(W/w,H/h);
      const stone=S(32),edge=S(76),shadow=S(14),pale=S(105);
      // Broken upper parapet and lower wedge buttresses, including irregular open ends.
      ctx.beginPath();ctx.moveTo(52,277);
@@ -1218,7 +1218,7 @@ const SHPILI_PLUS=(()=>{
    }
    // Three long broken cloudbanks are irregular silhouettes, not a row of spheres.
    const stormLayer=(seed,width,height,x,y,z,baseFog)=>{
-     const silhouette=mk(1024,640,(ctx,w,h)=>{
+     const silhouette=mk(1024,1024,(ctx,W,H)=>{const w=1024,h=640;ctx.scale(W/w,H/h);
        const V=rng(seed);
        const ridge=[];
        for(let px=45;px<w-35;){

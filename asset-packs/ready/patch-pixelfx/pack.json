@@ -1,0 +1,44 @@
+{
+  "format": "pixelfx-pack/1",
+  "id": "patch-pixelfx",
+  "component": "shared/components/patch-pixelfx",
+  "files": [
+    "src/core/act.js",
+    "src/core/actor.js",
+    "src/core/chain.js",
+    "src/core/color.js",
+    "src/core/font.js",
+    "src/core/fx.js",
+    "src/core/index.js",
+    "src/core/math.js",
+    "src/core/painter.js",
+    "src/core/particles.js",
+    "src/core/poses.js",
+    "src/core/rig.js",
+    "src/core/scene.js",
+    "src/core/shapes.js",
+    "src/core/sim.js",
+    "src/fx/explosions/small-explosion.js",
+    "src/fx/fire/_lib.js",
+    "src/fx/fire/campfire.js",
+    "src/fx/lightning/_lib.js",
+    "src/fx/lightning/lightning-strike.js"
+  ],
+  "license": {
+    "type": "MIT",
+    "author": "Patch and Hugo Duprez",
+    "commercial": true,
+    "notice": "shared/components/patch-pixelfx/LICENSE"
+  },
+  "provenance": {
+    "tool": "original-source-import",
+    "repository": "patch-gg/pixelfx",
+    "commit": "5294518ce7c72e48b6100a744596e0acf57f2826",
+    "date": "2026-11-14"
+  },
+  "content_flags": {
+    "real_persons": [],
+    "brands": [],
+    "political": false
+  }
+}

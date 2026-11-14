@@ -43,6 +43,10 @@ MUTANTS = [
     ("kinds/htmlpack.py", "if found != CDN:", "if False:"),
     ("kinds/htmlpack.py", "if error:", "if False and error:"),
     ("kinds/htmlpack.py", 'if new_ids and "window.__PACK_PROBE__" not in source:', "if False:"),
+    ("kinds/pixelfx.py", 'if p.get("license", {}).get("type") != "MIT" or not p.get("license", {}).get("commercial"):', "if False:"),
+    ("kinds/pixelfx.py", 'if p.get("provenance", {}).get("commit") != manifest["source"]["commit"] or (', "if False and ("),
+    ("kinds/pixelfx.py", 'if sorted(p.get("files", [])) != sorted(registered_files):', "if False:"),
+    ("kinds/pixelfx.py", 'if p.get("component") != approved["destination"].rstrip("/"):', "if False:"),
 ]
 
 

@@ -14,6 +14,8 @@
     'three-worlds-island-weather':Object.freeze({file:'components/three-worlds-island-weather/island-weather.js',module:true,exports:['createIslandWeatherCatalog']}),
     'three-worlds-rift-guard':Object.freeze({file:'components/three-worlds-rift-guard/rift-input-guard.js',module:true,exports:['createRiftInputGuard']}),
     'three-worlds-combat-facing':Object.freeze({file:'components/three-worlds-combat-facing/combat-facing.js',module:true,exports:['chooseCombatTarget','turnWeaponToward','turnHeroToward','angleToTarget']}),
+    'patch-pixelfx':Object.freeze({file:'components/patch-pixelfx/entry.js',module:true,
+      exports:['createFrame','clearFrame','createFx','composite']}),
     // Derived owner-provided library; provenance is in pod-i-nad/library.json.
     'pod-i-nad-flail-combat':Object.freeze({file:'components/pod-i-nad/animations/flail-combat.mjs',module:true,exports:['createFlailCombat']}),
     'pod-i-nad-flail-physics':Object.freeze({file:'components/pod-i-nad/animations/flail-physics.mjs',module:true,exports:['createFlailPhysics']}),

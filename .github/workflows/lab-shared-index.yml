@@ -20,3 +20,5 @@ jobs:
       - run: node --check scripts/shared/build-index.mjs
       - run: node scripts/shared/build-index.mjs --check
       - run: node scripts/shared/verify-approved-runtime.mjs
+      - run: node scripts/shared/verify-patch-pixelfx.mjs
+      - run: node scripts/shared/mutate-patch-pixelfx.mjs

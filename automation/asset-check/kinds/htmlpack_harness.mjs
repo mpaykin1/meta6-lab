@@ -123,7 +123,15 @@ window.__ISOLATE__=(id,shown)=>{
 // Transient effects must be actually active before their shown/hidden capture.
 window.__AC_WAKE__=id=>{
  if(id==='sparks')burst(GX-1,GY,GZ+1.5,440,11,.65,5.0,-5);
- if(id==='petals')explode();
+ if(id==='petals'){
+  // The original blast spawns puffs and sparks over the small flying shards.
+  // Exclude those OTHER effects in the ephemeral reference/candidate browser
+  // copies, so the same shown-minus-hidden mask measures the petals themselves.
+  explode();
+  puffs.visible=false;
+  sparks.visible=false;
+  flash=0;glitch=0;shake=0;
+ }
 };
 window.__AC_APPLY__=()=>{
  __acUndo=[];

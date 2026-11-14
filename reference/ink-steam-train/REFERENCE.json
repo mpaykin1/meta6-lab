@@ -16,13 +16,13 @@
     "reference/ink-fallen-guardian"
   ],
   "rules": [
-    "read-only",
-    "REUSE: import createInkSteamTrain, не копировать"
+    "read-only (сам эталон не менять)",
+    "можно предложить при просьбе вставить поезд; новый поезд по просьбе владельца делается новым"
   ],
   "files": [
     {
       "path": "reference/ink-steam-train/README.md",
-      "git_blob_sha": "edb0254bfc3c9703eebfab9aac929bf58166f3bd"
+      "git_blob_sha": "d22c2a98c2fa10e5842563ae16beb6ca483b127c"
     },
     {
       "path": "reference/ink-steam-train/index.html",

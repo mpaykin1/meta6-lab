@@ -1,0 +1,48 @@
+name: INK Watercolor Flying Raven 3D
+on:
+  push:
+    branches: [lab/ink-watercolor-flying-raven-20261114]
+  pull_request:
+    paths:
+      - 'demos/living-watercolor/ink-flying-raven.js'
+      - 'preview/ink-watercolor-raven/**'
+      - 'scripts/ink/check-watercolor-raven-browser.mjs'
+      - '.github/workflows/ink-raven-3d.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  raven-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Syntax and browser dependencies
+        run: |
+          node --check demos/living-watercolor/ink-flying-raven.js
+          node --check preview/ink-watercolor-raven/ink-raven-forest.js
+          node --check scripts/ink/check-watercolor-raven-browser.mjs
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Real WebGL raven in forest and specimen on desktop and phone viewport
+        run: |
+          python3 -m http.server 8774 --bind 127.0.0.1 --directory . >/tmp/ink-raven-http.log 2>&1 &
+          node scripts/ink/check-watercolor-raven-browser.mjs
+  raven-public-url:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Verify public game HTML and JS (exact immutable SHA)
+        shell: bash
+        run: |
+          set -euo pipefail
+          for u in \
+            'https://rawcdn.githack.com/mpaykin1/meta6-lab/2ce355f702a4201e8bb8ae9caa622fb762070e81/preview/ink-watercolor-raven/index.html?ink=raven&palette=color' \
+            'https://rawcdn.githack.com/mpaykin1/meta6-lab/2ce355f702a4201e8bb8ae9caa622fb762070e81/preview/ink-watercolor-raven/ink-raven-forest.js'; do
+            code="$(curl --location --fail --silent --show-error --retry 2 --max-time 45 --output /tmp/ink-raven-page --write-out '%{http_code}' "$u")"
+            test "$code" = "200"
+            test -s /tmp/ink-raven-page
+            echo "200 $u"
+          done

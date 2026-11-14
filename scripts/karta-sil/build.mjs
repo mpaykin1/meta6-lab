@@ -161,16 +161,70 @@ function attributedErrors(journal, number) {
     line.includes('PR #' + number + ' ') && line.match(/20\d\d-\d\d-\d\d/));
 }
 
-async function redBeforeGreen(pr) {
-  const runs = await allPages('/actions/runs?branch=' + encodeURIComponent(pr.head.ref) +
-    '&created=>=' + since.toISOString().slice(0, 10), 'workflow_runs');
-  const related = runs.filter(run => run.head_branch === pr.head.ref &&
-    Date.parse(run.created_at) >= Date.parse(pr.created_at)).sort((a,b) =>
-      Date.parse(a.created_at) - Date.parse(b.created_at));
-  if (!related.length) return null;
-  const firstGreen = related.findIndex(x=>x.conclusion==='success');
-  return related.slice(0, firstGreen < 0 ? related.length : firstGreen)
-    .filter(x=>['failure','timed_out','action_required'].includes(x.conclusion)).length;
+
+// Claude 14.11.2026: один GraphQL-запрос на 25 PR вместо 4–20 REST-запросов на каждый PR.
+// Прежний REST-обход (~300 PR × files/commit/runs) не укладывался ни в 10 минут, ни в квоту 1000/ч.
+const PR_QUERY = `query($owner:String!,$name:String!,$cursor:String){repository(owner:$owner,name:$name){
+pullRequests(first:25,after:$cursor,orderBy:{field:UPDATED_AT,direction:DESC},states:[OPEN,CLOSED,MERGED]){
+pageInfo{hasNextPage endCursor}
+nodes{number url state isDraft title body headRefName headRefOid createdAt updatedAt mergedAt changedFiles
+files(first:100){nodes{path}}
+commits(last:50){nodes{commit{committedDate statusCheckRollup{state}}}}}}}}`;
+
+export function toRestShape(node) {
+  if (!Number.isSafeInteger(node?.number) || !node.headRefOid || !node.createdAt || !node.updatedAt ||
+      !['OPEN','CLOSED','MERGED'].includes(node.state) || !Array.isArray(node.files?.nodes) ||
+      !Array.isArray(node.commits?.nodes)) throw new Error('GraphQL PR: нет данных');
+  const commits = node.commits.nodes.map(x => x?.commit).filter(Boolean);
+  const lastCommit = commits.at(-1)?.committedDate;
+  if (!lastCommit) throw new Error('PR commit date: нет данных #' + node.number);
+  return {
+    pr: {number:node.number, html_url:node.url, state:node.state === 'OPEN' ? 'open' : 'closed',
+      merged_at:node.mergedAt || null, draft:node.isDraft === true, title:node.title, body:node.body,
+      head:{ref:node.headRefName, sha:node.headRefOid}, created_at:node.createdAt, updated_at:node.updatedAt},
+    filenames: node.files.nodes.map(x => x.path),
+    changedFiles: Number.isInteger(node.changedFiles) ? node.changedFiles : node.files.nodes.length,
+    lastCommit,
+    failedBeforeGreen: redPushesBeforeGreen(commits.map(x => x.statusCheckRollup?.state ?? null))
+  };
+}
+
+// Сколько пушей PR были красными до первого зелёного (по итоговому статусу проверок коммита).
+export function redPushesBeforeGreen(states) {
+  if (!states.length || states.every(x => x === null)) return null;
+  const firstGreen = states.indexOf('SUCCESS');
+  return states.slice(0, firstGreen < 0 ? states.length : firstGreen)
+    .filter(x => x === 'FAILURE' || x === 'ERROR').length;
+}
+
+export async function graphqlPulls(request = graphql) {
+  const out = [];
+  let cursor = null;
+  for (let round = 0; round < 40; round++) {
+    const data = await request(PR_QUERY, cursor);
+    const page = data?.data?.repository?.pullRequests;
+    if (!page || !Array.isArray(page.nodes)) {
+      throw new Error('GitHub GraphQL: нет данных ' + JSON.stringify(data?.errors || '').slice(0, 300));
+    }
+    for (const node of page.nodes) {
+      if (Date.parse(node?.updatedAt) < since.getTime()) return out;
+      out.push(toRestShape(node));
+    }
+    if (!page.pageInfo?.hasNextPage) return out;
+    cursor = page.pageInfo.endCursor;
+  }
+  throw new Error('GitHub GraphQL: неполная выборка PR');
+}
+
+async function graphql(query, cursor) {
+  const [owner, name] = String(process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab').split('/');
+  const args = ['api', 'graphql', '-f', 'query=' + query, '-F', 'owner=' + owner, '-F', 'name=' + name];
+  if (cursor) args.push('-f', 'cursor=' + cursor);
+  let stdout;
+  try { ({stdout} = await gh('gh', args, {maxBuffer: 64 * 1024 * 1024})); }
+  catch (error) { throw new Error('GitHub GraphQL: нет данных: ' + String(error.stderr || error.message).slice(0, 300)); }
+  try { return JSON.parse(stdout); }
+  catch { throw new Error('GitHub GraphQL JSON: нет данных'); }
 }
 
 async function snapshot() {
@@ -178,39 +232,21 @@ async function snapshot() {
     await fs.readFile('scripts/karta-sil/types.json', 'utf8')));
   const busy = await fs.readFile('rules/09-platforma/ZANYATO.md', 'utf8');
   const journal = await fs.readFile('OSHIBKI.md', 'utf8');
-  const listing = await allPages('/pulls?state=all&sort=updated&direction=desc');
-  const recent = listing.filter(pr => Date.parse(pr.updated_at) >= since.getTime());
   const prs = [];
-  for (const pr of recent) {
-    if (!pr.number || !pr.head?.sha || !pr.created_at || !pr.updated_at) {
-      throw new Error('PR fields: нет данных');
-    }
-    if (pr.state === 'open') {
-      let detail = await api('/pulls/' + pr.number);
-      for (let retry=0; detail.mergeable === null && retry<3; retry++) {
-        await new Promise(resolve=>setTimeout(resolve,1000));
-        detail = await api('/pulls/' + pr.number);
-      }
-      if (detail.mergeable === null || detail.mergeable === undefined) {
-        throw new Error('GitHub mergeable=null: PR #' + pr.number);
-      }
-    }
-    const filenames = (await allPages('/pulls/' + pr.number + '/files')).map(x=>x.filename);
-    const commit = await api('/commits/' + pr.head.sha);
-    const lastCommit = commit?.commit?.committer?.date;
-    if (!lastCommit) throw new Error('PR commit date: нет данных #' + pr.number);
+  for (const item of await graphqlPulls()) {
+    const {pr, filenames, changedFiles, lastCommit, failedBeforeGreen} = item;
     const matches = attributedErrors(journal, pr.number);
     prs.push(publishablePr({
       number:pr.number, url:pr.html_url, type:classify(pr,filenames,dictionary),
       actor:identifyActor(pr,busy), status:statusOf(pr,lastCommit),
       created_at:pr.created_at, merged_at:pr.merged_at || null,
-      lastCommit, changedFiles:filenames.length,
-      failedBeforeGreen:await redBeforeGreen(pr), newErrors:matches.length,
+      lastCommit, changedFiles, failedBeforeGreen, newErrors:matches.length,
       repeatedError:matches.some(isRepeatJournalError)
     }));
   }
+  if (!prs.length) throw new Error('GitHub GraphQL: 0 PR за 14 дней — нет данных');
   prs.sort((a,b)=>a.number-b.number);
-  return {schema:1, periodDays:14, source:'GitHub REST API', status:'полная',
+  return {schema:1, periodDays:14, source:'GitHub GraphQL API', status:'полная',
     types:dictionary.types.map(x=>({id:x.id,label:x.label})),
     metrics:compute(prs,dictionary), prs};
 }

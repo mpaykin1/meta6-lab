@@ -229,3 +229,43 @@ test('draft ожидающий решения не искажает красну
       'мутант '+index+' должен быть пойман');
   }
 });
+
+// Claude 14.11.2026: GraphQL-выборка вместо REST на каждый PR (ловушки К3).
+import {toRestShape,redPushesBeforeGreen,graphqlPulls} from './build.mjs';
+const gqlNode=(number,updatedAt,extra={})=>({number,url:'u'+number,state:'OPEN',isDraft:false,title:'t',body:'',
+  headRefName:'lab/x'+number,headRefOid:'s'+number,createdAt:'2026-11-13T00:00:00Z',updatedAt,mergedAt:null,
+  changedFiles:3,files:{nodes:[{path:'a'},{path:'b'}]},
+  commits:{nodes:[{commit:{committedDate:'2026-11-13T01:00:00Z',statusCheckRollup:{state:'FAILURE'}}},
+    {commit:{committedDate:'2026-11-13T02:00:00Z',statusCheckRollup:{state:'SUCCESS'}}}]},...extra});
+async function checkGraphql(mod){
+  const now=new Date().toISOString(), old='2020-01-01T00:00:00Z';
+  const shaped=mod.toRestShape(gqlNode(5,now,{state:'MERGED',mergedAt:now}));
+  assert.equal(shaped.pr.state,'closed'); assert.equal(shaped.pr.merged_at,now);
+  assert.equal(shaped.changedFiles,3); assert.equal(shaped.failedBeforeGreen,1);
+  assert.equal(shaped.lastCommit,'2026-11-13T02:00:00Z');
+  assert.equal(mod.redPushesBeforeGreen(['FAILURE','ERROR','SUCCESS','FAILURE']),2);
+  assert.equal(mod.redPushesBeforeGreen([null,null]),null);
+  assert.throws(()=>mod.toRestShape({...gqlNode(6,now),commits:{nodes:[]}}),/нет данных/);
+  let calls=0;
+  const pages=[{data:{repository:{pullRequests:{pageInfo:{hasNextPage:true,endCursor:'c'},nodes:[gqlNode(1,now)]}}}},
+    {data:{repository:{pullRequests:{pageInfo:{hasNextPage:true,endCursor:'d'},nodes:[gqlNode(2,now),gqlNode(3,old)]}}}}];
+  const got=await mod.graphqlPulls(async()=>pages[calls++]);
+  assert.deepEqual(got.map(x=>x.pr.number),[1,2]); assert.equal(calls,2);
+  await assert.rejects(()=>mod.graphqlPulls(async()=>({errors:[{message:'rate'}]})),/нет данных/);
+}
+test('GraphQL-карта: форма PR, красные пуши до зелёного, остановка на 14 днях, ошибка API не пустота',async()=>{
+  const mod=await import('./build.mjs');
+  await checkGraphql(mod);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  for(const [label,from,to] of [
+    ['слитый PR считается открытым',"state:node.state === 'OPEN' ? 'open' : 'closed'","state:'open'"],
+    ['ошибка GraphQL как пустой список',"throw new Error('GitHub GraphQL: нет данных ' +","return out; (''+"],
+    ['не останавливается на 14 днях','if (Date.parse(node?.updatedAt) < since.getTime()) return out;',''],
+    ['красные после зелёного тоже считаются','states.slice(0, firstGreen < 0 ? states.length : firstGreen)','states']
+  ]){
+    assert.ok(source.includes(from),'якорь мутации: '+label);
+    const changed=source.replace(from,to);
+    const module=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    await assert.rejects(()=>checkGraphql(module),undefined,label);
+  }
+});

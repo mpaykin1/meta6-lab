@@ -18,6 +18,19 @@ export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTime
  }
  throw Error('нет данных: GitHub API не ответил после повтора ('+path+')');
 }
+export function indexOpened(opened) {
+ if(!Array.isArray(opened))throw Error('нет данных: открытые PR не получены');
+ const openPrs=new Map();
+ for(const pr of opened){
+  if(!Number.isSafeInteger(pr?.number)||pr.number<1||pr.state!=='open'||
+     !pr.head?.sha||!pr.head?.ref||openPrs.has(pr.number)){
+   throw Error('нет данных: неполный или повторный GraphQL PR');
+  }
+  openPrs.set(pr.number,pr);
+ }
+ const openNumbers=new Set(openPrs.keys());
+ return {openNumbers,openPrs};
+}
 export async function listOpenPullRequests(request = api) {
  const result = new Map();
  for(let page=1;;page++){
@@ -33,19 +46,6 @@ export async function listOpenPullRequests(request = api) {
   if(batch.length===0)return result;
  }
  throw Error('GitHub API open PRs: неполная пагинация');
-}
-export function indexOpened(opened) {
- if(!Array.isArray(opened))throw Error('нет данных: открытые PR не получены');
- const openPrs=new Map();
- for(const pr of opened){
-  if(!Number.isSafeInteger(pr?.number)||pr.number<1||pr.state!=='open'||
-     !pr.head?.sha||!pr.head?.ref||openPrs.has(pr.number)){
-   throw Error('нет данных: неполный или повторный GraphQL PR');
-  }
-  openPrs.set(pr.number,pr);
- }
- const openNumbers=new Set(openPrs.keys());
- return {openNumbers,openPrs};
 }
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));

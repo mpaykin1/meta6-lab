@@ -5,7 +5,7 @@
 Сторож `ZANYATO watch` (каждые 30 минут, GitHub Actions, без ИИ): нет коммитов в ветке 60 минут → «⚠ нет коммитов N мин»; 3 часа → «свободно» — следующая автозадача подхватывает пункт и продолжает с последнего коммита.
 
 | Пункт | Ветка | Кто | С какого времени (UTC) |
-|---|---|---|\n| КАРТА СИЛ — чат ChatGPT | lab/karta-sil | чат ChatGPT | 2026-11-13T19:05:31Z |
+|---|---|---|\n| КАРТА СИЛ — чат ChatGPT | lab/karta-sil | чат ChatGPT | 2026-11-14T06:15:00Z |
 | M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |
 | К7 | lab/kontur-k7-review | свободно (зависло 6 ч, было: ВОЗВРАЩЁН Claude (ложные срабатывания, см. комментарий в PR #193) — попытка 1 из 2) | 2026-11-09 17:50 |
 | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |
@@ -15,7 +15,7 @@
 | B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | свободно (зависло 5 ч, было: проходчик, PR #258 — проверка ложного MOVED после дрейфа) | 2026-11-13 08:14 UTC |
 | УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |
 | B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | свободно (зависло 5 ч, было: чат ChatGPT, один PR одной игры) | 2026-11-13 11:31 UTC |
-| CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | ChatGPT (чат) | 2026-11-13 18:55 UTC |
-| STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | чат ChatGPT | 2026-11-13 19:07 UTC |
-| LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | чат ChatGPT | 2026-11-13 19:06 UTC |
-| PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | чат ChatGPT | 2026-11-13 19:17 UTC |
+| CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | свободно (зависло 4 ч, было: ChatGPT (чат)) | 2026-11-13 18:55 UTC |
+| STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | свободно (зависло 3 ч, было: чат ChatGPT) | 2026-11-13 19:07 UTC |
+| LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:06 UTC |
+| PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:17 UTC |

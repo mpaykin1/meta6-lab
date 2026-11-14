@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-13T19:07:45.965Z",
+  "generated_at": "2026-11-14T03:12:10.908Z",
   "sha": {
-    "lab": "2f11c6f159de722eddfaf1a4d2627b4efb004b28",
-    "mg": "1bea203fb63d7c27c29a5643e2f38e4554a658c1"
+    "lab": "6934748d4cd1fd41376f8def37fbec2e04fff559",
+    "mg": "7ae9604d0dfc969116895cd06bf11b4c3cdf15ff"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43489114146",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43550312390",
   "review": {
     "protected": [
       {
@@ -199,7 +199,11 @@
       "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |",
       "| B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | свободно (зависло 5 ч, было: проходчик, PR #258 — проверка ложного MOVED после дрейфа) | 2026-11-13 08:14 UTC |",
       "| УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |",
-      "| B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | свободно (зависло 5 ч, было: чат ChatGPT, один PR одной игры) | 2026-11-13 11:31 UTC |"
+      "| B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | свободно (зависло 5 ч, было: чат ChatGPT, один PR одной игры) | 2026-11-13 11:31 UTC |",
+      "| CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | свободно (зависло 4 ч, было: ChatGPT (чат)) | 2026-11-13 18:55 UTC |",
+      "| STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | свободно (зависло 3 ч, было: чат ChatGPT) | 2026-11-13 19:07 UTC |",
+      "| LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:06 UTC |",
+      "| PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:17 UTC |"
     ]
   },
   "finish": {
@@ -348,11 +352,21 @@
     ]
   },
   "pr": {
-    "open": 42,
-    "conflicts": "нет данных",
-    "merged": 34,
+    "open": 48,
+    "conflicts": 26,
+    "merged": 36,
     "closed": 75,
     "mergedItems": [
+      {
+        "number": 307,
+        "title": "Остров аптекаря: 3 этапа для META BOT",
+        "sha": "fb4cf4f5bce602dee82910ea066637feb7418c6d"
+      },
+      {
+        "number": 304,
+        "title": "Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У ",
+        "sha": "af6238c7237cd129f58a2d66826b8405e9376f05"
+      },
       {
         "number": 298,
         "title": "Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА",
@@ -694,12 +708,12 @@
   },
   "changes": {
     "lab": {
-      "count": 1988,
+      "count": 2044,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 7,
-      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:2"
+      "count": 9,
+      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:4"
     }
   },
   "games": [

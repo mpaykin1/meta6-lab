@@ -52,7 +52,20 @@ scene.add(sky);
 // Only the new bridges, rock and towers are painted; translucent cloud vapor
 // stays transparent while the trees, carvings and arches remain true 3D.
 for(const g of [sky.children[0],sky.children[1],sky.children[2]]){
+  // Preserve the watercolor wash on all major masonry and rock surfaces.
+  // Minute carved studs and leaves use their baked pigment color directly.
+  g.traverse(o=>{
+    if(!o.isMesh || o.isInstancedMesh)return;
+    const geo=o.geometry;
+    if(!geo?.boundingSphere)geo?.computeBoundingSphere?.();
+    const rr=(geo?.boundingSphere?.radius||0)*Math.max(o.scale.x,o.scale.y,o.scale.z);
+    if(rr<.37)o.userData.watercolorSkipWash=true;
+  });
   paint.apply(g,{seed:'ink-viaduct:'+g.name});
+  g.traverse(o=>{
+    if(o.isMesh && o.material?.userData?.livingWatercolorPatched)
+      o.material.customProgramCacheKey=()=>'ink-sky-watercolor-shared-v1';
+  });
 }
 
 const ui=document.querySelector('#ui');

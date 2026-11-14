@@ -37,3 +37,23 @@ jobs:
           name: ink-train-screenshots
           path: /tmp/ink-train-*.png
           if-no-files-found: ignore
+  public-http:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Verify public immutable WebGL preview (HTTP 200)
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://rawcdn.githack.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}"
+          for path in \
+            preview/ink-watercolor-train/index.html \
+            preview/ink-watercolor-train/scene.js \
+            demos/living-watercolor/ink-steam-train.js \
+            reference/ink-fallen-guardian/three.module.js; do
+            url="$base/$path"
+            curl --location --fail --silent --show-error --retry 3 --max-time 60 "$url" -o /tmp/ink-train-file
+            test -s /tmp/ink-train-file
+            echo "200 $url"
+          done

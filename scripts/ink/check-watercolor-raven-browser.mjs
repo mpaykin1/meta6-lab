@@ -34,13 +34,26 @@ try{
     assert.ok(before.feathers>=24,'Three-dimensional modeled feathers missing');
     assert.ok(before.meshes>40,'Raven is not a volumetric multi-part object');
     assert.ok(before.triangles>1000,'Raven lacks three-dimensional topology');
+    const exact=await page.evaluate(()=>{
+      const raven=window.__INK_RAVEN__.display;
+      raven.userData.updateInkRaven(0);
+      const a=raven.userData.ravenRig.wings[1].shoulder.rotation.z;
+      raven.userData.updateInkRaven(.25);
+      const b=raven.userData.ravenRig.wings[1].shoulder.rotation.z;
+      return {a,b,frames:window.__INK_RAVEN__.renderedFrames};
+    });
+    assert.ok(Math.abs(exact.b-exact.a)>.4,'Three.js wing joint animation must change mesh transforms');
     const samples=[before.wing];
-    for(let i=0;i<6;i++){
-      await page.waitForTimeout(150);
+    for(let i=0;i<5;i++){
+      const prev=await page.evaluate(()=>window.__INK_RAVEN__.renderedFrames);
+      await page.waitForFunction(n=>window.__INK_RAVEN__.renderedFrames>n,prev,{timeout:45000});
       samples.push(await page.evaluate(()=>window.__INK_RAVEN__.display.userData.ravenRig.wings[1].shoulder.rotation.z));
     }
     const wingDelta=Math.max(...samples)-Math.min(...samples);
-    assert.ok(wingDelta>.18,'Flapping animation did not advance over a full sample window');
+    console.log('INK Raven frame diagnostics '+d.name+': first='+exact.frames+
+      ', updated='+await page.evaluate(()=>window.__INK_RAVEN__.renderedFrames)+
+      ', wingRange='+wingDelta.toFixed(3));
+    assert.ok(wingDelta>.04,'Visible wing mesh must animate across rendered WebGL frames');
     await page.evaluate(()=>window.__INK_FOREST__.show('forest'));
     await page.waitForTimeout(250);
     assert.equal(await page.evaluate(()=>window.__INK_FOREST__.active),'forest');

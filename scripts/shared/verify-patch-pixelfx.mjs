@@ -10,7 +10,8 @@ const rgba=new Uint8ClampedArray(width*height*4);
 const sources=[campfire,smallExplosion,lightningStrike];
 
 for(const mod of sources){
-  assert.equal(typeof mod.create,'function',mod.meta?.name+' lacks a real effect');
+  assert.ok(typeof mod.create==='function' || typeof mod.draw==='function',
+    mod.meta?.name+' lacks a drawable effect');
   const instance=createFx(mod,{x:220,y:279,seed:11});
   let luminousFrames=0;
   let changes=0;

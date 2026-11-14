@@ -176,7 +176,6 @@ function grinFace(head) {
   skull.rotation.x=-.06;
   lump(head,[-.53,-.23,.29],[.39,.39,.40],'soot');
   lump(head,[.53,-.23,.29],[.39,.39,.40],'soot');
-  lump(head,[0,-.46,.23],[.66,.28,.45],'pitch');
   const eyes=[];
   for(const side of [-1,1]) {
     lump(head,[side*.455,.57,.50],[.40,.40,.23],'deep',false);
@@ -222,19 +221,26 @@ function grinFace(head) {
     const height=(.235+.10*(1-t))*(i%5===0?.83:1);
     tooth(head,x,anchor-.011,.777-.17*t*t,.096,height,false,i);
   }
-  const jaw=new T.Group();jaw.position.set(0,-.525,.37);head.add(jaw);
-  lump(jaw,[0,-.15,.13],[.76,.21,.28],'soot');
-  stroke(jaw,Array.from({length:23},(_,i)=>{
+  // Jaw hinge sits far back near the ears, so rotation swings the chin
+  // down and open instead of sliding the teeth forward.
+  const jaw=new T.Group();jaw.position.set(0,-.36,-.05);head.add(jaw);
+  const jawBody=new T.Group();jawBody.position.set(0,-.165,.42);jaw.add(jawBody);
+  lump(jawBody,[0,.065,-.14],[.66,.28,.45],'pitch');
+  // Black throat and a dark tongue: visible only when the mouth opens.
+  lump(jawBody,[0,.13,.10],[.66,.12,.24],'black',false);
+  const tongue=lump(jawBody,[0,.11,.18],[.34,.07,.20],'gums',false);
+  lump(jawBody,[0,-.15,.13],[.76,.21,.28],'soot');
+  stroke(jawBody,Array.from({length:23},(_,i)=>{
     const x=-.76+i*.069;
     return [x,.10-.12*Math.pow(Math.abs(x)/.76,2),.35];
   }),.069,'pitch');
   for(let i=0;i<14;i++) {
     const x=(i-6.5)*.117,t=Math.abs(x)/.85;
     const height=.195+.09*(1-t);
-    tooth(jaw,x,.04-.12*t*t,.36,.105,height,true,i+20);
+    tooth(jawBody,x,.04-.12*t*t,.36,.105,height,true,i+20);
   }
   for(const x of [-.63,.63]) {
-    stroke(jaw,[[x,-.05,.16],[x*.96,-.20,.12],[x*.9,-.30,.04]],.045,'pitch');
+    stroke(jawBody,[[x,-.05,.16],[x*.96,-.20,.12],[x*.9,-.30,.04]],.045,'pitch');
   }
   // Wet tendrils around cheeks and chin are secondary to the sculpted face.
   for(let i=0;i<8;i++) {
@@ -242,7 +248,7 @@ function grinFace(head) {
     drop(head,[side*(.28+j*.12),-.48-j*.025,.65-j*.065],
       .10+j*.075,i*39+21);
   }
-  return {jaw,eyes,skull,cavity};
+  return {jaw,jawBody,tongue,eyes,skull,cavity};
 }
 export function createInkGrinMonster(seed=19) {
   const rnd=seeded(seed);
@@ -297,7 +303,21 @@ export function createInkGrinMonster(seed=19) {
   root.userData.footprint=.8;
   root.userData.isInkGrinMonster=true;
   root.userData.rig={spine,neck,head,face,arms,legs};
-  const base={};
+  const smooth=(a,b,x)=>{const k=Math.min(1,Math.max(0,(x-a)/(b-a)));return k*k*(3-2*k);};
+  // Jaw driven by a spring: slow gaping, a sharp snap, then teeth chatter.
+  const jawState={open:0,vel:0,side:0,snap:0};
+  function jawTarget(t){
+    const cycle=4.6,p=(t%cycle)/cycle,n=Math.floor(t/cycle);
+    const wide=.30+.14*Math.sin(n*2.7);
+    let o=0;
+    if(p<.58)o=wide*smooth(.04,.58,p);              // slowly gapes
+    else if(p<.63)o=wide*(1-smooth(.58,.63,p));     // SNAP shut
+    else {                                          // chewing chatter
+      const k=1-smooth(.63,1,p);
+      o=Math.max(0,.075*k*(.6+.4*Math.sin(t*13.0))+.025*k);
+    }
+    return o+.022*(.5+.5*Math.sin(t*1.48)); // breathing never fully stops
+  }
   root.userData.tick=(time,dt=0)=>{
     const t=time,breath=Math.sin(t*1.48);
     spine.rotation.z=.058*Math.sin(t*.65)+.015*Math.sin(t*2.6);
@@ -307,8 +327,26 @@ export function createInkGrinMonster(seed=19) {
     neck.rotation.x=.07+.045*Math.sin(t*.95);
     head.rotation.y=.19*Math.sin(t*.41)+.055*Math.sin(t*2.6);
     head.rotation.z=.06*Math.sin(t*.53);
-    head.rotation.x=-.065+.06*Math.sin(t*.71);
-    face.jaw.rotation.x=.15+.19*(.5+.5*Math.sin(t*1.05+1.1));
+    head.rotation.x=-.065+.06*Math.sin(t*.71)-.22*jawState.open-.06*jawState.snap*Math.sin(jawState.snap*9);
+    const target=jawTarget(t);
+    if(dt>0){
+      const h=Math.min(dt,.033);
+      const prev=jawState.open;
+      jawState.vel+=((target-jawState.open)*260-jawState.vel*20)*h;
+      jawState.open+=jawState.vel*h;
+      // closing fast -> remember a snap impulse for secondary motion
+      if(jawState.vel<-2.2&&prev>.12)jawState.snap=1;
+    }else{jawState.open=target;jawState.vel=0;}
+    jawState.snap=Math.max(0,jawState.snap-dt*3.2);
+    const open=Math.max(-.02,jawState.open);
+    jawState.side+=((.05*Math.sin(t*2.3)*(open>.06?1:.3))-jawState.side)*Math.min(1,dt*6||1);
+    face.jaw.rotation.x=open;
+    face.jaw.rotation.y=jawState.side*.6;
+    face.jaw.rotation.z=jawState.side;
+    face.tongue.position.y=.11+.05*Math.sin(t*3.1)*Math.min(1,open*4);
+    face.tongue.rotation.x=-.25*open;
+    face.cavity.scale.y=.38+.22*Math.max(0,open);
+    face.cavity.position.y=-.286-.13*Math.max(0,open);
     face.eyes.forEach((eye,i)=>{
       eye.position.x=(i===0?-.455:.455)+.028*Math.sin(t*.71+i*.32);
       eye.position.y=.57+.026*Math.sin(t*.39+i*1.4);

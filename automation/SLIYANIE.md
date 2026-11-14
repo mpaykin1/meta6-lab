@@ -3,18 +3,18 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 69, слито 3, закрыто 60, открыто 6 — бот, 2026-11-14 05:37 UTC
+Итог: всего 70, слито 3, закрыто 60, открыто 6, нет данных 1 — бот, 2026-11-14 05:39 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
-| #312 | эталон | `lab/asqura-office-clean-transfer-20261114` | ASQURA Office — clean source-only #133 | merged | слит [bc24124303060dcb9ad75353d6a6f1ba967dd169](https://github.com/mpaykin1/meta6-lab/commit/bc24124303060dcb9ad75353d6a6f1ba967dd169) |
+| #312 | эталон | `lab/asqura-office-clean-transfer-20261114` | ASQURA Office — clean source-only #133 | нет данных | слит [bc24124303060dcb9ad75353d6a6f1ba967dd169](https://github.com/mpaykin1/meta6-lab/commit/bc24124303060dcb9ad75353d6a6f1ba967dd169) |
 | #308 | код | `lab/immersive-docs-clean-20261114` | IM1–IM5 — чистый перенос вместо #72 | merged | слит [e07b085e4bec73081ff804be24a7398ada4b68c3](https://github.com/mpaykin1/meta6-lab/commit/e07b085e4bec73081ff804be24a7398ada4b68c3), [PR #308](https://github.com/mpaykin1/meta6-lab/pull/308) |
 | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |
 | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |
 | #206 | эталон | `lab/king-of-ash-reference-1109` | Эталон: Король Пепла (оригинальный HTML) | closed | закрыт: дубль, сохранён [PR #207](https://github.com/mpaykin1/meta6-lab/pull/207), [PR #206](https://github.com/mpaykin1/meta6-lab/pull/206) |
 | #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |
 | #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |
-| #191 | эталон | `lab/sunken-city-reference-1109` | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и катало | open dirty | в работе 2026-11-10 04:47 UTC |
+| #191 | эталон | `lab/sunken-city-reference-1109` | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и катало | open | в работе 2026-11-10 04:47 UTC |
 | #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |
 | #137 | эталон | `lab/demonic-hand-webgl2-reference` | Add Demonic Hand as owner-approved WebGL2 reference | closed | | закрыт stale: конфликт с main, красный [Portal Visited](https://github.com/mpaykin1/meta6-lab/actions/runs/42496471465), [PR #137](https://github.com/mpaykin1/meta6-lab/pull/137) |
 | #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | closed | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |
@@ -74,7 +74,7 @@
 | #6 | код | `lab/world-doors-progress` | lab: persistent visited-world doors without touching accepte | closed | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42285373653), [PR #6](https://github.com/mpaykin1/meta6-lab/pull/6) |
 | #5 | код | `lab/oss-commercial-kit` | lab: коммерчески разрешённые OSS-модули и игровая сцена | closed | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42286065563), [PR #5](https://github.com/mpaykin1/meta6-lab/pull/5) |
 | #4 | код | `lab/native-catalog-and-steam` | lab: native catalog and safe Steam/Android candidates | closed | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42285011814), [PR #4](https://github.com/mpaykin1/meta6-lab/pull/4) |
-| #3 | код | `lab/twilight-island-bot` | lab: Twilight Island — бот проходит весь остров | open dirty | |
+| #3 | код | `lab/twilight-island-bot` | lab: Twilight Island — бот проходит весь остров | open | |
 | #2 | код | `lab/twilight-isles-pass` | lab: Twilight Isles GPU optimization, single RAF, first-isla | closed | закрыт stale: 48ч+ без коммита, [красный bot](https://github.com/mpaykin1/meta6-lab/actions/runs/42356322630), [PR #2](https://github.com/mpaykin1/meta6-lab/pull/2) |
 | #1 | код | `lab/twilight-island-pass` | lab: Twilight Island bot pass — combined #291 and #303 | closed | закрыт stale: красный META BOT, нет коммитов >48 ч — [PR #1](https://github.com/mpaykin1/meta6-lab/pull/1), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42356940858) |
 

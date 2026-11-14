@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T06:08:47.202Z",
+  "generated_at": "2026-11-14T06:14:57.697Z",
   "sha": {
     "lab": "нет данных",
     "mg": "нет данных"
@@ -8,7 +8,7 @@
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43564855779",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43565375952",
   "review": {
     "protected": "нет данных",
     "redLab": "нет данных",
@@ -44,145 +44,96 @@
     "pending": [
       {
         "id": "M1",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не подтверждено",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036"
       },
       {
         "id": "M2",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не подтверждено",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685"
       },
       {
         "id": "M3",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не подтверждено",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       {
         "id": "M4",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не подтверждено",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211"
       },
       {
         "id": "M5",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не подтверждено",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       {
         "id": "M6",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не готов",
+        "reason": "НЕТ в таблице FINISH"
       },
       {
         "id": "B1",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не подтверждено",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082"
       },
       {
         "id": "B2",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не готов",
+        "reason": "НЕТ в таблице FINISH"
       },
       {
         "id": "B3",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не готов",
+        "reason": "НЕТ в таблице FINISH"
       },
       {
         "id": "B4",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не готов",
+        "reason": "НЕТ в таблице FINISH"
       },
       {
         "id": "B5",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не готов",
+        "reason": "НЕТ в таблице FINISH"
       },
       {
         "id": "B6",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не готов",
+        "reason": "НЕТ в таблице FINISH"
       },
       {
         "id": "B7",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не готов",
+        "reason": "НЕТ в таблице FINISH"
       },
       {
         "id": "L1",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не готов",
+        "reason": "НЕТ в таблице FINISH"
       },
       {
         "id": "L2",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не готов",
+        "reason": "НЕТ в таблице FINISH"
       },
       {
         "id": "L3",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не готов",
+        "reason": "НЕТ в таблице FINISH"
       },
       {
         "id": "L4",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не готов",
+        "reason": "НЕТ в таблице FINISH"
       },
       {
         "id": "P1",
-        "value": "нет данных",
-        "reason": "нет данных"
-      },
-      {
-        "id": "Л1",
-        "value": "нет данных",
-        "reason": "нет данных"
-      },
-      {
-        "id": "Л2",
-        "value": "нет данных",
-        "reason": "нет данных"
-      },
-      {
-        "id": "Л3",
-        "value": "нет данных",
-        "reason": "нет данных"
-      },
-      {
-        "id": "Л4",
-        "value": "нет данных",
-        "reason": "нет данных"
-      },
-      {
-        "id": "Л5",
-        "value": "нет данных",
-        "reason": "нет данных"
-      },
-      {
-        "id": "Л6",
-        "value": "нет данных",
-        "reason": "нет данных"
-      },
-      {
-        "id": "С1",
-        "value": "нет данных",
-        "reason": "нет данных"
-      },
-      {
-        "id": "С2",
-        "value": "нет данных",
-        "reason": "нет данных"
-      },
-      {
-        "id": "Э1",
-        "value": "нет данных",
-        "reason": "нет данных"
-      },
-      {
-        "id": "Э2",
-        "value": "нет данных",
-        "reason": "нет данных"
+        "value": "не подтверждено",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308"
       }
-    ]
+    ],
+    "proofs": {}
   },
   "pr": {
     "open": "нет данных",

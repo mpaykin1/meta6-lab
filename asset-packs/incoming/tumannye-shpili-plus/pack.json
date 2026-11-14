@@ -1,6 +1,6 @@
 {
   "format": "htmlpack/1",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "name": "Туманные шпили — живой мир + 6 ассетов",
   "base": "reference/tumannye-shpili",
   "reference_count": 26,
@@ -46,28 +46,36 @@
       "remade": true
     },
     "gate-bridge": {
-      "label_ru": "Мост осколков врат",
+      "label_ru": "Разрушенный акведук над зеркальной водой",
       "role": "world",
-      "benefit": "новая воздушная переправа",
-      "animated": true
+      "benefit": "узнаваемая переправа с пятипролётными арками и цепями",
+      "animated": true,
+      "construction": "canvas-architecture",
+      "remade": true
     },
     "dawn-sentinel": {
-      "label_ru": "Спутник-хранитель",
+      "label_ru": "Крылатый каменный хранитель",
       "role": "ally",
-      "benefit": "видимый защитный контур рядом с летуном",
-      "animated": true
+      "benefit": "суставные крылья, защита рядом с летуном",
+      "animated": true,
+      "construction": "articulated-3d",
+      "remade": true
     },
     "mirror-seed": {
-      "label_ru": "Сердце зеркальной воды",
+      "label_ru": "Сердце зеркальной воды — реликварий",
       "role": "pickup",
-      "benefit": "ускоряет восстановление удара, усиливает след и вспышку",
-      "animated": true
+      "benefit": "раскрывающийся реликварий у героя ускоряет восстановление атаки",
+      "animated": true,
+      "construction": "articulated-3d",
+      "remade": true
     },
     "storm-heart": {
-      "label_ru": "Багровая гроза",
+      "label_ru": "Багровая гроза над шпилями",
       "role": "weather",
-      "benefit": "локальный дождь и живые разряды",
-      "animated": true
+      "benefit": "многослойные грозовые фронты, ветер, дождь, ветвящиеся разряды",
+      "animated": true,
+      "construction": "canvas-weather",
+      "remade": true
     }
   }
 }

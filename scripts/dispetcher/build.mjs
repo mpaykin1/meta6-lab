@@ -98,7 +98,9 @@ export async function main(){
  const stalled=/ЗАВИС/.test(t.status),isClaude=/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(pr.body||'');
  const label=t.title+' '+(pr.title||'');
  const isFinish=finishIds.some(id=>new RegExp('(^|[^A-Z0-9])'+id+'([^A-Z0-9]|$)','i').test(label));
- const c={...t,branch:pr.head.ref,headSha:pr.head.sha,conflict,conflictUnknown,red:failed.length>0,stalled,finish:isFinish,lastCommit,body:pr.body||''};
+ if(!Number.isInteger(pr.changed_files)||pr.changed_files<0)throw Error('PR changed_files: нет данных');
+ const c={...t,changedFiles:pr.changed_files,branch:pr.head.ref,headSha:pr.head.sha,
+  conflict,conflictUnknown,red:failed.length>0,stalled,finish:isFinish,lastCommit,body:pr.body||''};
  if(isClaude){claude.push(c);continue}
  if(!conflict&&!conflictUnknown&&!failed.length&&!stalled&&!stale)continue;
  c.priority=(conflict||conflictUnknown)?0:failed.length?1:stalled?2:3;

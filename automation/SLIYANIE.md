@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 68, слито 2, закрыто 58, открыто 8 — бот, 2026-11-13 23:31 UTC
+Итог: всего 68, слито 2, закрыто 59, открыто 7 — бот, 2026-11-14 03:19 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -12,10 +12,10 @@
 | #206 | эталон | `lab/king-of-ash-reference-1109` | Эталон: Король Пепла (оригинальный HTML) | closed | закрыт: дубль, сохранён [PR #207](https://github.com/mpaykin1/meta6-lab/pull/207), [PR #206](https://github.com/mpaykin1/meta6-lab/pull/206) |
 | #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |
 | #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |
-| #191 | эталон | `lab/sunken-city-reference-1109` | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и катало | open | в работе 2026-11-10 04:47 UTC |
+| #191 | эталон | `lab/sunken-city-reference-1109` | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и катало | open dirty | в работе 2026-11-10 04:47 UTC |
 | #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |
 | #137 | эталон | `lab/demonic-hand-webgl2-reference` | Add Demonic Hand as owner-approved WebGL2 reference | closed | | закрыт stale: конфликт с main, красный [Portal Visited](https://github.com/mpaykin1/meta6-lab/actions/runs/42496471465), [PR #137](https://github.com/mpaykin1/meta6-lab/pull/137) |
-| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | open | закрыт: заменён [#195](https://github.com/mpaykin1/meta6-lab/pull/195), HTML уже в main `abyss-glow/stand/index.html` (blob fb2c4c57), все 4 PNG совпадают; [решение](https://github.com/mpaykin1/meta6-lab/pull/134#issuecomment-6870854456), ветка сохранена |
+| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | closed | закрыт: заменён [#195](https://github.com/mpaykin1/meta6-lab/pull/195), HTML уже в main `abyss-glow/stand/index.html` (blob fb2c4c57), все 4 PNG совпадают; [решение](https://github.com/mpaykin1/meta6-lab/pull/134#issuecomment-6870854456), ветка сохранена |
 | #133 | эталон | `lab/asqura-single-graphics-reference-20261108` | ASQURA Office — первый эталон графики и анимации | open | в работе: [К3 ловушка и журнал](https://github.com/mpaykin1/meta6-lab/commit/633ad10443f9c5e9f1132b6d91d68ad3955b0159), [зелёный kontur-guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42773326044), нужен независимый ревьюер для самослияния |
 | #213 | код | `lab/library-machine-sync` | L1: Library Machine — индекс нового эталона skin-trainer | closed | |
 | #212 | код | `lab/claude-context-compact-v2` | Сократить контекст Claude: STATUS, короткие Actions, PROMPT_ | closed | |
@@ -24,7 +24,7 @@
 | #209 | код | `lab/library-catalog` | L1 ч.3 + L3: каталог игровых систем для MCP ИИ | closed | |
 | #205 | код | `lab/owner-pult` | Пульт владельца — прогресс и свежие игры | closed | |
 | #204 | код | `lab/rules-bot-trainer` | B6/B7 ч.1: бот правил — тренажёр, экран и звуковой мастер | closed | |
-| #203 | код | `lab/skin-rusty-robot` | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | open | |
+| #203 | код | `lab/skin-rusty-robot` | SKINY: rusty robot — runtime, asset pack, S1–S12, preview | open dirty | |
 | #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |
 | #193 | код | `lab/kontur-k7-review` | K7: guard against repeated regression classes | closed | |
 | #192 | код | `lab/mcp-connect` | M6: Connect — локальный MCP, конфиги клиентов и официальный  | closed | |

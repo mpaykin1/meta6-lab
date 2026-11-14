@@ -77,13 +77,21 @@ export function classify(pr, filenames, dictionary) {
 }
 
 export function identifyActor(pr, busy) {
-  const body = String(pr.body || '');
-  const label = String(pr.title || '');
-  const row = busy.split('\n').find(l => l.startsWith('|') &&
-    l.includes(pr.head?.ref || '\u0000')) || '';
-  if (/MG-строитель|MG-ремонтник|автозадач|автоматическ/i.test(body + row + label)) return actors[0];
-  if (/чат ChatGPT|обычный чат|ChatGPT \(чат\)/i.test(body + row)) return actors[1];
-  return actors[2];
+  const branch = pr.head?.ref;
+  const row = busy.split('\n').map(line => line.split('|').slice(1,-1).map(x => x.trim()))
+    .find(cells => branch && cells[1]?.replaceAll('`','') === branch);
+  const owner = row?.[2] || '';
+  if (/MG-строитель|MG-ремонтник|автозадач/i.test(owner)) return actors[0];
+  if (/чат ChatGPT|ChatGPT \(чат\)/i.test(owner)) return actors[1];
+  const markers = [...String(pr.body || '').matchAll(
+    /^(?:Исполнитель|Автор|Кто):\s*([^\n]+)|^Сделано \/ дальше \(([^,)]+)/gmi
+  )].map(match => match[1] || match[2]);
+  const found = new Set();
+  for (const marker of markers) {
+    if (/MG-строитель|MG-ремонтник|автозадач/i.test(marker)) found.add(actors[0]);
+    if (/чат ChatGPT|обычный чат|ChatGPT \(чат\)/i.test(marker)) found.add(actors[1]);
+  }
+  return found.size === 1 ? [...found][0] : actors[2];
 }
 
 export function statusOf(pr, lastCommitTime, now = Date.now()) {

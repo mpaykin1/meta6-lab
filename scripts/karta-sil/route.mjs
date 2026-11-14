@@ -13,7 +13,8 @@ export function routeFor(card, map) {
   const stat = map.metrics?.find(x => x.type === entry?.type && x.actor === 'автозадача');
   const zone = stat?.zone || 'нет данных';
   if (zone === 'зелёная') return {target:'auto',zone,note:'допущено'};
-  if (zone === 'жёлтая' && (entry?.changedFiles ?? Infinity) <= 5) {
+  const files = card.changedFiles ?? entry?.changedFiles;
+  if (zone === 'жёлтая' && Number.isInteger(files) && files >= 0 && files <= 5) {
     return {target:'auto',zone,note:'маленькими шагами: 1 PR, не более 5 файлов'};
   }
   return {target:'chat',zone,note:zone === 'жёлтая' ?

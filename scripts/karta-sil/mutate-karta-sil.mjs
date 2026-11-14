@@ -131,3 +131,63 @@ test('две неудачи чата имеют приоритет над зел
     await assert.rejects(()=>checkEscalation(module.routeFor));
   }
 });
+
+import {identifyActor} from './build.mjs';
+async function checkActorIdentity(identify) {
+  const pr={title:'Карта сил автозадач',body:'Правила для автозадач и обычного чата',head:{ref:'lab/x'}};
+  assert.equal(identify(pr,'| Карта сил | lab/x | чат ChatGPT | now |'),'чат ChatGPT');
+  assert.equal(identify({...pr,body:'Исполнитель: чат ChatGPT'},
+    '| Задача | lab/x | MG-строитель-2 | now |'),'автозадача');
+  assert.equal(identify(pr,'| Другое | lab/x-extra | MG-строитель-3 | now |'),'неизвестно');
+  assert.equal(identify(pr,''),'неизвестно');
+  assert.equal(identify({...pr,body:'Исполнитель: MG-строитель-1'},''),'автозадача');
+  assert.equal(identify({...pr,body:'Исполнитель: чат ChatGPT'},''),'чат ChatGPT');
+  assert.equal(identify({...pr,body:'Исполнитель: MG-строитель-1\nИсполнитель: чат ChatGPT'},''),'неизвестно');
+}
+test('исполнитель определяется по авторству, а не по теме PR про автозадачи',async()=>{
+  await checkActorIdentity(identifyActor);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const start=source.indexOf('export function identifyActor(');
+  const end=source.indexOf('\nexport function statusOf(',start);
+  const replacements=[
+    'export function identifyActor(pr,busy) { return actors[0]; }',
+    "export function identifyActor(pr,busy) { return /автозадач/i.test(pr.title)?actors[0]:actors[2]; }",
+    source.slice(start,end).replace("cells[1]?.replaceAll('`','') === branch",
+      "cells[1]?.includes(branch)")
+  ];
+  for(const replacement of replacements){
+    const changed=source.slice(0,start)+replacement+source.slice(end);
+    assert.notEqual(changed,source);
+    const module=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    await assert.rejects(()=>checkActorIdentity(module.identifyActor));
+  }
+});
+
+async function checkCurrentSize(route) {
+  const map={schema:1,status:'полная',prs:[{number:14,type:'game_fix',changedFiles:1}],
+    metrics:[{type:'game_fix',actor:'автозадача',zone:'жёлтая'}]};
+  for(const files of [6,7,100,-1,1.5,Infinity]) {
+    assert.equal(route({id:14,changedFiles:files},map).target,'chat');
+  }
+  for(const files of [1,5]) {
+    assert.equal(route({id:14,changedFiles:files},
+      {...map,prs:[{number:14,type:'game_fix',changedFiles:12}]}).target,'auto');
+  }
+}
+test('жёлтая карточка ограничена текущими файлами PR, а не старым снимком',async()=>{
+  await checkCurrentSize(routeFor);
+  const source=await fs.readFile(new URL('./route.mjs',import.meta.url),'utf8');
+  const mutants=[
+    source.replace('card.changedFiles ?? entry?.changedFiles','entry?.changedFiles'),
+    source.replace('files <= 5','files <= 6'),
+    source.replace('card.changedFiles ?? entry?.changedFiles','Math.min(card.changedFiles, 5)')
+  ];
+  for(const changed of mutants){
+    assert.notEqual(changed,source);
+    const module=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    await assert.rejects(()=>checkCurrentSize(module.routeFor));
+  }
+  const dispatcher=await fs.readFile(new URL('../dispetcher/build.mjs',import.meta.url),'utf8');
+  assert.match(dispatcher,/changedFiles:pr\.changed_files/);
+  assert.match(dispatcher,/Number\.isInteger\(pr\.changed_files\)/);
+});

@@ -2,7 +2,7 @@ name: Investigation snapshot
 # GitHub is the sole persistence and publishing platform.
 on:
   schedule:
-    - cron: '13 * * * *'
+    - cron: '13 */3 * * *'
   workflow_dispatch:
   push:
     branches: [main]

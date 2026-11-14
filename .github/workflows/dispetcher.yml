@@ -1,7 +1,7 @@
 name: MG Dispatcher
 on:
   schedule:
-    - cron: '21,51 * * * *'
+    - cron: '21 * * * *'
   workflow_dispatch:
   pull_request:
     branches: [main]
@@ -10,9 +10,6 @@ on:
       - 'scripts/dispetcher/**'
       - 'automation/dispetcher/**'
       - 'automation/prompts/MG_PYAT_AVTOZADACH.md'
-  push:
-    branches: [main]
-    paths: [ZADACHI.md]
 permissions:
   contents: write
   checks: read

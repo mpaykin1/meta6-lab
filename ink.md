@@ -21,6 +21,11 @@ Living Watercolor 3D — живой акварельный рендер на Thr
 Смотреть: https://mpaykin1.github.io/meta6-lab/reference/ink-fallen-guardian/ · исходники: `reference/ink-fallen-guardian/` (самодостаточно, только чтение), описание — README.md там же.
 Город, осенний лес, озеро, поляна + объёмный заросший робот; рендер в этой папке — **без однообразных паттернов** (шум вместо суммы синусов). Для новых акварельных миров брать рендер отсюда.
 
+## Эталон «Акварельный паровоз» — поезд с живыми шатунами (OWNER PASS, 15.11.2026)
+
+Смотреть: МГ https://mpaykin1.github.io/meta6/reference/ink-steam-train/ · МГЛ https://mpaykin1.github.io/meta6-lab/reference/ink-steam-train/ · исходники `reference/ink-steam-train/` (только чтение, README.md там же).
+Объёмный паровоз с вагонами, шатунами, колёсами и паром в акварельном мире; рендер — из «Павшего великана». Для поездов в новых мирах подключать `createInkSteamTrain` из этой папки.
+
 ## Правила для всех ИИ
 
 1. **Не менять исходники эталона.** Файлы `index.html`, `client.js`, `shared/living-watercolor-*.js` — только чтение. Сверка — по blob SHA из паспорта.

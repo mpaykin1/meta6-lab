@@ -522,34 +522,31 @@
       "id": "9a5b12973e4787f49c1455c1",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/00.png",
+      "file": "three-worlds-game/evidence/play/00.png",
       "source_path": "three-worlds-game/evidence/play/00.png",
       "bytes": 1106950,
       "sha256": "b001e58da011faa2f03279b63f9050d5d3cac855904c6ed7d3dc53d97ce06294",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/00.png"
+      "storage": "reference"
     },
     {
       "id": "780895c77ade2cbe99f2e315",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/01.png",
+      "file": "three-worlds-game/evidence/play/01.png",
       "source_path": "three-worlds-game/evidence/play/01.png",
       "bytes": 1101436,
       "sha256": "96d2a1f025ae5cbe1f660f0a86bef697b137ec8db22ebacd67d051b0edab069d",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/01.png"
+      "storage": "reference"
     },
     {
       "id": "772f1d4c1e9d9206fc5e25ce",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/02.png",
+      "file": "three-worlds-game/evidence/play/02.png",
       "source_path": "three-worlds-game/evidence/play/02.png",
       "bytes": 1103342,
       "sha256": "a6c34edae2a69218591035ffdab4059aca1784e19b562bbc0fa9f2281311c33c",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/02.png"
+      "storage": "reference"
     },
     {
       "id": "7a1c37e4b4fa5fe75274381a",
@@ -565,78 +562,71 @@
       "id": "52fe6dc6ec32e8ffd4528ec5",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/04.png",
+      "file": "three-worlds-game/evidence/play/04.png",
       "source_path": "three-worlds-game/evidence/play/04.png",
       "bytes": 1114262,
       "sha256": "57e8eb9ef39b03d37505fb5e7686ca5bdfc467e33de579bcfb72f89952d76271",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/04.png"
+      "storage": "reference"
     },
     {
       "id": "0ce045580ebf00b80efa3072",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/05.png",
+      "file": "three-worlds-game/evidence/play/05.png",
       "source_path": "three-worlds-game/evidence/play/05.png",
       "bytes": 1073998,
       "sha256": "2cee93e8f4d23f000a5f8ae526f0ae8327c6afc79fbb90f81e671a5d2c2733ff",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/05.png"
+      "storage": "reference"
     },
     {
       "id": "25cf02ccc6ea6f3c7d3c56eb",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/06.png",
+      "file": "three-worlds-game/evidence/play/06.png",
       "source_path": "three-worlds-game/evidence/play/06.png",
       "bytes": 1070170,
       "sha256": "651706c4e665a2f549cf8ed8016cd866a5b56dadba5b92b076d8572989805ce1",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/06.png"
+      "storage": "reference"
     },
     {
       "id": "7df74ba15ea029da37601f47",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/07.png",
+      "file": "three-worlds-game/evidence/play/07.png",
       "source_path": "three-worlds-game/evidence/play/07.png",
       "bytes": 1062789,
       "sha256": "faf7aafa6d5d675f359dfe1310ff11b7ed5a1b396d9d9108cb1c0542090e2473",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/07.png"
+      "storage": "reference"
     },
     {
       "id": "def2843045934e33b10266b8",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/08.png",
+      "file": "three-worlds-game/evidence/play/08.png",
       "source_path": "three-worlds-game/evidence/play/08.png",
       "bytes": 1063393,
       "sha256": "b425b7675515ca46bce3ee90d711f9392eb6fbcc5dca2e7a00fa91d06b10ff38",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/08.png"
+      "storage": "reference"
     },
     {
       "id": "9e36fd3528545826da68cb0b",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/09.png",
+      "file": "three-worlds-game/evidence/play/09.png",
       "source_path": "three-worlds-game/evidence/play/09.png",
       "bytes": 1057367,
       "sha256": "53ee0145d114990a82453f167b9fcbb660266ac80d66b1d1e4ec4990b94619ea",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/09.png"
+      "storage": "reference"
     },
     {
       "id": "dda683186d4e9e4137c02c28",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/10.png",
+      "file": "three-worlds-game/evidence/play/10.png",
       "source_path": "three-worlds-game/evidence/play/10.png",
       "bytes": 1057515,
       "sha256": "a57f9a2c22c0925685fb74bd3230f5f7d44ea578c2b6b844b93413da3ee51ee7",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/10.png"
+      "storage": "reference"
     },
     {
       "id": "c9c8b400190a494b8efda2c0",
@@ -664,12 +654,11 @@
       "id": "46766d86f99f07ca8e8591ff",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/13.png",
+      "file": "three-worlds-game/evidence/play/13.png",
       "source_path": "three-worlds-game/evidence/play/13.png",
       "bytes": 954531,
       "sha256": "7037299466bd2cb3d740861751e1fa7f714ee6aa38e467d5bb24319365d9c32e",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/13.png"
+      "storage": "reference"
     },
     {
       "id": "6a90002c4e2960cea69dee43",
@@ -708,12 +697,11 @@
       "id": "2bc9542881d8810571c2eaec",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/17.png",
+      "file": "three-worlds-game/evidence/play/17.png",
       "source_path": "three-worlds-game/evidence/play/17.png",
       "bytes": 952241,
       "sha256": "526f5d1132d555461f38be89156d2fb5a7a50956ec909480dc2f16953575fda8",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/17.png"
+      "storage": "reference"
     },
     {
       "id": "d350b653932b6ea4dcff803c",
@@ -741,12 +729,11 @@
       "id": "dd9fadfe1f629872661442c0",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/20.png",
+      "file": "three-worlds-game/evidence/play/20.png",
       "source_path": "three-worlds-game/evidence/play/20.png",
       "bytes": 953361,
       "sha256": "1d4dd1b1248e3f62b9552408b3c840ced68a90f3e28a46f47226f5fb80ba432b",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/20.png"
+      "storage": "reference"
     },
     {
       "id": "b1640eaf5596b645b0600afc",
@@ -763,12 +750,11 @@
       "id": "fc4676b45861996737e00db6",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/play/22.png",
+      "file": "three-worlds-game/evidence/play/22.png",
       "source_path": "three-worlds-game/evidence/play/22.png",
       "bytes": 954367,
       "sha256": "3daacee4170852bf68a9d8709d866b02d163d4d9c32cc0efbe68a9d1629f3167",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/play/22.png"
+      "storage": "reference"
     },
     {
       "id": "65a7b02ab848604c0dde0068",
@@ -884,12 +870,11 @@
       "id": "92286ca55b2529e123a0d8df",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/stage7-depth.png",
+      "file": "three-worlds-game/evidence/stage7-depth.png",
       "source_path": "three-worlds-game/evidence/stage7-depth.png",
       "bytes": 1154085,
       "sha256": "26027717c232a52b50dd3da8a876969ecfefc3cab0f0dff8b884c5a52b63edeb",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/stage7-depth.png"
+      "storage": "reference"
     },
     {
       "id": "bf43bd6ed912f1b2262eaa20",
@@ -905,12 +890,11 @@
       "id": "3fa4c80d236527bccb31a068",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/stage7-rift-guest.png",
+      "file": "three-worlds-game/evidence/stage7-rift-guest.png",
       "source_path": "three-worlds-game/evidence/stage7-rift-guest.png",
       "bytes": 1074267,
       "sha256": "9d642d9eaf2d6903a89893517413f07aafe4a6a8867457f57d01e1cfb10e817c",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/stage7-rift-guest.png"
+      "storage": "reference"
     },
     {
       "id": "c58599ad68189a273dcf3e4b",

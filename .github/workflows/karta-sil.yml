@@ -34,6 +34,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KARTA_REPO: ${{ github.repository }}
         run: node scripts/karta-sil/run.mjs
       - name: Publish only real changes
         if: github.ref == 'refs/heads/main'

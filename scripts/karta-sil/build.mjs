@@ -217,7 +217,7 @@ export async function graphqlPulls(request = graphql) {
 }
 
 async function graphql(query, cursor) {
-  const [owner, name] = String(process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab').split('/');
+  const [owner, name] = String(process.env.KARTA_REPO || 'mpaykin1/meta6-lab').split('/');
   const args = ['api', 'graphql', '-f', 'query=' + query, '-F', 'owner=' + owner, '-F', 'name=' + name];
   if (cursor) args.push('-f', 'cursor=' + cursor);
   let stdout;

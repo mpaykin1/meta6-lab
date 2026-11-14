@@ -1,16 +1,39 @@
 {
-  "generated_at": "2026-11-14T05:41:03.493Z",
+  "generated_at": "2026-11-14T06:01:04.517Z",
   "sha": {
-    "lab": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03",
-    "mg": "7ae9604d0dfc969116895cd06bf11b4c3cdf15ff"
+    "lab": "fc08b93e26eacb9ee9ada585f57f65d508c03b2e",
+    "mg": "d8ce0d817cccfc4676963bc209d5920e76f4d883"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562674640",
+  "run": "нет данных",
   "review": {
     "protected": [
+      {
+        "number": 318,
+        "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3",
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-source-only-gate.mjs"
+        ]
+      },
+      {
+        "number": 316,
+        "sha": "4574e06a308792514a92db2f6328eb444f92d62a",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          ".github/workflows/dispetcher.yml",
+          ".github/workflows/investigation-snapshot.yml",
+          ".github/workflows/meta-repair-bot.yml",
+          ".github/workflows/sliyanie-status.yml",
+          ".github/workflows/zadachi-watch.yml",
+          ".github/workflows/zanyato-watch.yml",
+          "scripts/lab/mutate-pr-status-batch.mjs",
+          "scripts/lab/mutate-sliyanie-facts.py"
+        ]
+      },
       {
         "number": 317,
         "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03",
@@ -172,34 +195,22 @@
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": [
-          ".github/workflows/status-dlya-claude.yml",
-          "scripts/status/selftest.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": [
-          ".github/workflows/investigation-snapshot.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": [
-          ".github/workflows/lab-portal-visits.yml",
-          "scripts/lab/mutate-portal-links.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
-        ]
+        "paths": "нет данных"
       }
     ],
     "redLab": [],
@@ -377,11 +388,21 @@
     ]
   },
   "pr": {
-    "open": 50,
-    "conflicts": 36,
-    "merged": 41,
+    "open": 49,
+    "conflicts": "нет данных",
+    "merged": 43,
     "closed": 78,
     "mergedItems": [
+      {
+        "number": 318,
+        "title": "fix(library): strict source-only gate for new game transfers",
+        "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3"
+      },
+      {
+        "number": 316,
+        "title": "fix(api-budget): GraphQL batches and hourly bot limits",
+        "sha": "4574e06a308792514a92db2f6328eb444f92d62a"
+      },
       {
         "number": 317,
         "title": "fix(library-machine): restrict automatic commits to owned sy",
@@ -590,6 +611,29 @@
     ],
     "protectedItems": [
       {
+        "number": 318,
+        "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3",
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-source-only-gate.mjs"
+        ]
+      },
+      {
+        "number": 316,
+        "sha": "4574e06a308792514a92db2f6328eb444f92d62a",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          ".github/workflows/dispetcher.yml",
+          ".github/workflows/investigation-snapshot.yml",
+          ".github/workflows/meta-repair-bot.yml",
+          ".github/workflows/sliyanie-status.yml",
+          ".github/workflows/zadachi-watch.yml",
+          ".github/workflows/zanyato-watch.yml",
+          "scripts/lab/mutate-pr-status-batch.mjs",
+          "scripts/lab/mutate-sliyanie-facts.py"
+        ]
+      },
+      {
         "number": 317,
         "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03",
         "paths": [
@@ -750,106 +794,94 @@
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": [
-          ".github/workflows/status-dlya-claude.yml",
-          "scripts/status/selftest.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": [
-          ".github/workflows/investigation-snapshot.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": [
-          ".github/workflows/lab-portal-visits.yml",
-          "scripts/lab/mutate-portal-links.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
-        ]
+        "paths": "нет данных"
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 2112,
+      "count": 2130,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 9,
-      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:4"
+      "count": 10,
+      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:6"
     }
   },
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "ostrov-aptekarya",
-      "bot": "прошла",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "прошла",
+      "bot": "нет данных",
       "storefront": "да"
     }
   ],
@@ -881,6 +913,10 @@
     "| 1110 | 13.11.2026 | MG Dispatcher запрашивал PR из закрытой исторической очереди и падал на 403 GitHub API quota, теряя возможность публиковать исправную очередь | [красный run 43410481729](https://github.com/mpaykin1/meta6-lab/actions/runs/43410481729) | `scripts/dispetcher/mutate-quota.mjs`: 3 мутации на 403/429 и ошибочную авторизацию; [патч](https://github.com/mpaykin1/meta6-lab/commit/03836dddab7a05986b00de2f9b92dec9924c93cf) |",
     "| 1120 | 14.11.2026 | STOROZHA quota держала «пять старейших» PR даже когда их нельзя слить без решения Claude (#3, #72, #87, #133, #191): очередь из 42 PR стояла целиком | [quota run 43552615225](https://github.com/mpaykin1/meta6-lab/actions/runs/43552615225/job/132318241088) | `scripts/storozha/mutate-storozha.mjs` (мутация «quota: draft PRs block the queue again») |",
     "| 1121 | 14.11.2026 | STOROZHA reference на каждом PR тратил REST-квоту (GET /pulls/N и /files) и падал на «HTTP 403 API rate limit exceeded», блокируя #301 и #308 без ошибки в коде | [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/43493548770) | `scripts/storozha/mutate-storozha.mjs` (мутации «git files: …») |",
-    "| 1124 | 14.11.2026 | Library Machine напрямую коммитил 200 производных файлов в чужой PR #314 после push игр | В workflow ветка записи разрешалась для любой ветки кроме main | Ветку записи ограничить только `lab/library-machine-sync`, прежняя инвентаризация не отключена; 4 мутации, включая ложный широкий префикс: scripts/library/mutate-branch-ownership.mjs |"
+    "| 1124 | 14.11.2026 | Library Machine напрямую коммитил 200 производных файлов в чужой PR #314 после push игр | В workflow ветка записи разрешалась для любой ветки кроме main | Ветку записи ограничить только `lab/library-machine-sync`, прежняя инвентаризация не отключена; 4 мутации, включая ложный широкий префикс: scripts/library/mutate-branch-ownership.mjs |",
+    "| 1122 | 14.11.2026 | Диспетчер вызывал REST на каждый исторический PR, бот SLIYANIE делал REST-запрос на каждую строку; семь workflow создавали лишнюю нагрузку | HTTP 403/429 прерывал очередь и мог маскироваться как пустой ответ | GraphQL пакетами до 100 PR, предварительный список открытых PR для диспетчера, 403/429 fail-closed с одним повтором до 8 минут; мутации в scripts/lab/mutate-pr-status-batch.mjs и scripts/dispetcher/test/api-budget.test.mjs |",
+    "| 1123 | 14.11.2026 | sliyanie-status обновлял строку времени даже при неизменных состояниях PR | Почасовой бессодержательный коммит и лишние каскадные Actions | Писать время только при изменении фактов; ловушка scripts/lab/mutate-sliyanie-facts.py (3 настоящих мутации, включая обман) |",
+    "| 1126 | 14.11.2026 | PR #316: KONTUR обнаружил условный запуск GraphQL-модуля по `process.argv`, [красный run 43560937686](https://github.com/mpaykin1/meta6-lab/actions/runs/43560937686) | К4.1 запрещает ветвления по имени теста/клиента | Чистый модуль и отдельный CLI, ловушка `scripts/kontur/guard.mjs` осталась неизменной; [зелёный KONTUR 43562631289](https://github.com/mpaykin1/meta6-lab/actions/runs/43562631289) |",
+    "| 1125 | 14.11.2026 | Source-only PR #314 after removing 200 Library Machine copies fails `Check PR catalog is committed`, although extractor and independent inventory passed | Source and derived library updates were forcibly bound to one PR, causing the bot to write into foreign branches | Keep original `git diff --exit-code -- shared/library` gate; accept only entirely added files for one NEW game and at most one owner ZIP via `scripts/library/source-only-gate.mjs` + 4 mutation traps in `scripts/library/mutate-source-only-gate.mjs`; main proposes separate library sync PR |"
   ]
 }

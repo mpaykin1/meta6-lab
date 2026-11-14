@@ -53,9 +53,20 @@ jobs:
         run: |
           node scripts/library/mutate-library.mjs
           node scripts/library/mutate-branch-ownership.mjs
-      - name: Check PR catalog is committed
+          node scripts/library/mutate-source-only-gate.mjs
+      - name: Check committed catalog or verified new-game source-only transfer
         if: github.event_name == 'pull_request'
-        run: git diff --exit-code -- shared/library
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --exit-code -- shared/library; then
+            echo "No catalog drift"
+          else
+            # The extractor and independent verifier passed before this step.
+            # Only a strictly additive new-game PR may defer generated files
+            # to the dedicated main → library-machine-sync follow-up.
+            node scripts/library/source-only-pr-cli.mjs
+          fi
       - name: Commit newly extracted assets on the feature branch
         if: github.event_name == 'push' && github.ref == 'refs/heads/lab/library-machine-sync'
         run: |

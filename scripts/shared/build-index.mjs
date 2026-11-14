@@ -59,10 +59,11 @@ for(const id of fs.readdirSync(dir).sort()){
   if(id==='patch-pixelfx'){
     if(meta.id!==id || meta.registry!=='third-party-mit' ||
        meta.license!=='MIT' || meta.license_file!=='LICENSE' ||
-       meta.entry!=='src/core/index.js' ||
+       meta.entry!=='entry.js' ||
        meta.source?.repository!=='patch-gg/pixelfx' ||
        !/^[a-f0-9]{40}$/.test(meta.source.commit) ||
        !/^[a-f0-9]{40}$/.test(meta.source.git_blob_sha) ||
+       !/^[a-f0-9]{40}$/.test(meta.source.adapter_blob_sha) ||
        !/^[a-f0-9]{40}$/.test(meta.source.license_git_blob_sha) ||
        !Array.isArray(meta.exports) || !meta.exports.length ||
        !Array.isArray(meta.effects) || meta.effects.length!==3 ||
@@ -92,7 +93,8 @@ for(const id of fs.readdirSync(dir).sort()){
           throw Error('Unpinned external dependency '+file.path+' -> '+dep);
       }
     }
-    if(meta.source.files.find(file=>file.path===meta.entry)?.git_blob_sha!==meta.source.git_blob_sha ||
+    if(meta.source.files.find(file=>file.path===meta.source.path)?.git_blob_sha!==meta.source.git_blob_sha ||
+       gitBlob(readRegularFile(path.join(folder,meta.entry)))!==meta.source.adapter_blob_sha ||
        !meta.effects.every(effect=>files.has(effect)))
       throw Error('External entry/effects are not pinned '+id);
     components.push(meta);

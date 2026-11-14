@@ -1,0 +1,83 @@
+name: INK Sky Viaduct 3D preview
+on:
+  push:
+    branches: [lab/ink-sky-viaduct-20261115]
+  pull_request:
+    paths:
+      - 'preview/ink-sky-viaduct/**'
+      - 'demos/living-watercolor/ink-sky-viaduct.js'
+      - '.github/workflows/ink-sky-viaduct.yml'
+permissions:
+  contents: read
+jobs:
+  live-view:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Load script and browser
+        run: |
+          node --check demos/living-watercolor/ink-sky-viaduct.js
+          node --check preview/ink-sky-viaduct/scene.js
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Browser draws 3D scene on desktop and phone
+        shell: bash
+        run: |
+          python3 -m http.server 8781 --bind 127.0.0.1 --directory . >/tmp/ink-sky-http.log 2>&1 &
+          node --input-type=module <<'NODE'
+          import {chromium} from 'playwright';
+          import assert from 'node:assert/strict';
+          const browser=await chromium.launch({headless:true,args:[
+            '--enable-webgl','--enable-unsafe-swiftshader','--use-angle=swiftshader']});
+          try{
+            for(const [label,width,height,mobile] of [
+              ['desktop',1280,800,false],['phone',390,844,true]]){
+              const context=await browser.newContext({viewport:{width,height},
+                isMobile:mobile,hasTouch:mobile,deviceScaleFactor:1});
+              const page=await context.newPage(),errors=[];
+              page.on('pageerror',e=>errors.push(String(e)));
+              page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
+              const response=await page.goto('http://127.0.0.1:8781/preview/ink-sky-viaduct/index.html?view=all&palette=color',
+                {waitUntil:'domcontentloaded',timeout:60000});
+              assert.equal(response.status(),200);
+              await page.waitForFunction(()=>window.__INK_VIADUCT__?.stats()?.renderCount>=3,
+                null,{timeout:90000});
+              const data=await page.evaluate(()=>{
+                const v=window.__INK_VIADUCT__,c=document.querySelector('canvas');
+                return {ready:v.ready,stats:v.stats(),counts:v.counts,
+                  canvas:[c?.width,c?.height],hasWebGL:Boolean(c?.getContext('webgl2'))};
+              });
+              console.log('INK_VIADUCT_3D '+label+' '+JSON.stringify({data,errors}));
+              assert.deepEqual(errors,[]);
+              assert.equal(data.ready,true);
+              assert.equal(data.counts.archSpans,24);
+              assert.ok(data.stats.meshes>250);
+              assert.equal(data.hasWebGL,true);
+              await page.close();await context.close();
+            }
+          } finally{await browser.close();}
+          NODE
+  immutable-url:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Confirm exact public 200 URL and dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://rawcdn.githack.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}"
+          for p in \
+            preview/ink-sky-viaduct/index.html \
+            preview/ink-sky-viaduct/scene.js \
+            demos/living-watercolor/ink-sky-viaduct.js \
+            reference/ink-fallen-guardian/three.module.js; do
+            url="$base/$p"
+            curl --location --fail --silent --show-error --retry 3 --max-time 65 "$url" -o /tmp/sky-viaduct-response
+            test -s /tmp/sky-viaduct-response
+            echo "200 $url"
+          done

@@ -1,11 +1,12 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-14T05:41:03.493Z | МГЛ: e02387721f8e2cbf126ba1af2ac6e4e803bebc03 | МГ: 7ae9604d0dfc969116895cd06bf11b4c3cdf15ff | https://github.com/mpaykin1/meta6-lab/actions/runs/43562674640
+UTC: 2026-11-14T05:43:07.110Z | МГЛ: f1aa7aaa99210b4287b13aac4fec774ad318e1d4 | МГ: 7ae9604d0dfc969116895cd06bf11b4c3cdf15ff | https://github.com/mpaykin1/meta6-lab/actions/runs/43562825303
 ## ПРОВЕРИТЬ CLAUDE
 - PR #317 e02387721f8e2cbf126ba1af2ac6e4e803bebc03: .github/workflows/library-machine.yml, scripts/library/mutate-branch-ownership.mjs
 - PR #315 4319f8056814a5986b87200676b87f585c09705c: .github/workflows/storozha-reference.yml, scripts/storozha/mutate-storozha.mjs, scripts/storozha/verify-storozha.mjs
 - PR #309 41331671a13c476ff8ec3b7497dd3a47517dade8: scripts/storozha/mutate-storozha.mjs, scripts/storozha/verify-storozha.mjs
 - PR #296 1d385b135f0fd52a35d6b2df6503f5f6eacf171a: automation/asset-check/test_htmlpack.py
 - ещё 18: https://github.com/mpaykin1/meta6-lab/pulls
+- МГЛ: Investigation snapshot | https://github.com/mpaykin1/meta6-lab/actions/runs/43562565734 | Refresh investigation snapshot from GitHub
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обн… (сокращено)
@@ -47,14 +48,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 50 | конфликт: 36 | слито: 41 | закрыто: 78
+открыто: 50 | конфликт: нет данных | слито: 41 | закрыто: 78
 #317 fix(library-machine): restrict automatic commits to owned sy | e02387721f8e2cbf126ba1af2ac6e4e803bebc03
 #312 Reference: ASQURA Office — clean source-only transfer of #13 | bc24124303060dcb9ad75353d6a6f1ba967dd169
 #308 docs: IM1–IM5 из #72 — документация на свежем main | e07b085e4bec73081ff804be24a7398ada4b68c3
 #315 STOROZHA reference: файлы PR из git, без REST-квоты (403 бло | 4319f8056814a5986b87200676b87f585c09705c
 ещё 37: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2112 коммитов | нет данных
+МГЛ: 2116 коммитов | нет данных
 МГ: 9 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:4
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

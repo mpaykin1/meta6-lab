@@ -62,6 +62,9 @@ def check(root: Path, report) -> set:
         report.add("PX5", "HARD", "pack.json", "Компонент подменён или путь небезопасен",
                    "Укажи компонент из проверенного реестра")
 
+    if any(item["severity"] == "HARD" and item["id"].startswith("PX") for item in report.items):
+        return covered
+
     # Reuse the index's byte-hash, license and import-closure verification.
     node = shutil.which("node")
     if not node:
@@ -72,8 +75,12 @@ def check(root: Path, report) -> set:
         args = [node, str(REPO / script)]
         if script.endswith("build-index.mjs"):
             args.append("--check")
-        run = subprocess.run(args, cwd=REPO, capture_output=True, text=True, timeout=45)
-        if run.returncode:
+        try:
+            run = subprocess.run(args, cwd=REPO, capture_output=True, text=True, timeout=45)
+            failed = run.returncode != 0
+        except (OSError, subprocess.TimeoutExpired):
+            failed = True
+        if failed:
             report.add("PX7", "HARD", script, "Хеши, лицензии или анимации не проходят проверку",
                        "Исправь оригиналы, проверь реестр и повтори автоматическую проверку")
     report.stats["pixelfx_effects"] = len(manifest.get("effects", []))

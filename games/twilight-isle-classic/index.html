@@ -7160,6 +7160,31 @@ window.__isle = {
   skyBolt(x, z) { skyBolt(x, z); },
 };
 
+
+ // Read-only live snapshot. No bot-specific movement or simulated completion.
+ Object.defineProperty(window, '__META_BOT__', {
+   configurable: false, enumerable: true,
+   get() {
+     const hero = window.__isle?.player;
+     const game = window.__isle?.G;
+     if (!hero || !game) return null;
+     const targetCoin = window.__isle.coins.find(c => c.alive);
+     const destination = targetCoin || window.__isle.world?.beacon;
+     const goal = destination && Number.isFinite(destination.x) && Number.isFinite(destination.z)
+       ? Object.freeze({x: destination.x, y: destination.y ?? 0, z: destination.z})
+       : null;
+     return Object.freeze({
+       level: 1, totalLevels: 1,
+       player: Object.freeze({x: hero.pos.x, y: hero.pos.y, z: hero.pos.z}),
+       goal, alive: game.state !== 'dead' && hero.hp > 0,
+       completed: game.state === 'victory',
+       buttons: Object.freeze(['w','a','s','d','Space','touch:joystick']),
+       combat: true, enemies: window.__isle.foes.filter(f => f.alive).length,
+       weapons: window.__isle.combat.arsenal.length
+     });
+   }
+ });
+
 </script>
 
 </body></html>

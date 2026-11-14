@@ -49,13 +49,15 @@ jobs:
         run: node scripts/library/extract-all.mjs
       - name: Verify independent file inventory, hashes and live additions/removals
         run: node scripts/library/verify-library.mjs
-      - name: Run five persistent deceptive mutations
-        run: node scripts/library/mutate-library.mjs
+      - name: Run permanent mutation traps
+        run: |
+          node scripts/library/mutate-library.mjs
+          node scripts/library/mutate-branch-ownership.mjs
       - name: Check PR catalog is committed
         if: github.event_name == 'pull_request'
         run: git diff --exit-code -- shared/library
       - name: Commit newly extracted assets on the feature branch
-        if: github.event_name == 'push' && github.ref != 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/lab/library-machine-sync'
         run: |
           git add -A shared/library
           if git diff --cached --quiet; then echo 'Library unchanged'; exit 0; fi

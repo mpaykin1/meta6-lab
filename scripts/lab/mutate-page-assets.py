@@ -15,6 +15,13 @@ mutations = [
     ("ci-deception", 'return sorted(parser.resources)',
      'return [] if __import__("os").getenv("GITHUB_ACTIONS") == "true" else sorted(parser.resources)'),
 ]
+# Keep the original cases; scope the HTML mutation to its function now that JS imports have another return.
+mutations[2] = (
+    "ci-deception",
+    'parser.feed(html)\n    return sorted(parser.resources)',
+    'parser.feed(html)\n    return [] if __import__("os").getenv("GITHUB_ACTIONS") == "true"'
+    ' else sorted(parser.resources)',
+)
 with tempfile.TemporaryDirectory() as tmp:
     env = dict(os.environ, GITHUB_ACTIONS="true")
     subprocess.run([sys.executable, str(verifier), str(source)], env=env, check=True)
@@ -28,3 +35,6 @@ with tempfile.TemporaryDirectory() as tmp:
         if result.returncode == 0:
             raise SystemExit("MUTATION ESCAPED: " + name)
         print("MUTATION CAUGHT: " + name)
+
+import runpy
+runpy.run_path(str(Path(__file__).with_name("mutate-page-imports.py")), run_name="__main__")

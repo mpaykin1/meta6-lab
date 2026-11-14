@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Patch → PixelFX: лицензированный импорт и игровая демонстрация | МГЛ | чат ChatGPT | `lab/patch-import` | — | 2026-11-14 03:30 | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | fix(shpili): шарнирный страж и собор — пара на просмотр | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-tumannye-shpili-20261114-2338` | [#306](https://github.com/mpaykin1/meta6-lab/pull/306) | 2026-11-13 20:35 | 2026-11-13 21:24 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | WIP(shpili): replace two circular props with architectural silhouettes; HP12 shape motion bot | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-tumannye-shpili-20261114` | [#305](https://github.com/mpaykin1/meta6-lab/pull/305) | 2026-11-13 20:20 | 2026-11-13 20:45 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | feat(asset-check): HTMLPACK visual quality bot + Tumannye Shpili 26→32 | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/asset-pack-shpili` | [#303](https://github.com/mpaykin1/meta6-lab/pull/303) | 2026-11-13 15:48 | 2026-11-13 20:37 |

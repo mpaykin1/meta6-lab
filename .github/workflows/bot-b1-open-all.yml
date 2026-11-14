@@ -1,4 +1,7 @@
 name: B1 — all games open without console errors
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 on:
   pull_request:
     branches: [main]
@@ -20,6 +23,8 @@ jobs:
           node-version: '22'
       - name: Fail on console, pageerror, HTTP 404 and hardcoded catalog
         run: node scripts/platform/mutate-bot-open-all.mjs
+      - name: Verify workflow concurrency and four mutation traps
+        run: node scripts/lab/mutate-workflow-concurrency.mjs
   browser-open-all:
     needs: permanent-mutations
     runs-on: ubuntu-24.04

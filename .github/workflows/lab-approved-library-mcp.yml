@@ -1,4 +1,7 @@
 name: LAB Approved Source MCP Live
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 on:
   push:
     branches: ['lab/approved-library-mcp-live', 'lab/mcp-list-games', 'lab/mcp-read-game']

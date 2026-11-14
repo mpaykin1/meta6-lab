@@ -611,6 +611,8 @@ canvas.addEventListener('pointerdown',e=>{initAudio();if(AC&&AC.state==='suspend
 addEventListener('pointermove',e=>{if(ptr&&e.pointerId===ptr.id)ptr.x=e.clientX;});
 addEventListener('pointerup',e=>{if(ptr&&e.pointerId===ptr.id){if(ptr.gal){const dx=ptr.x-ptr.x0;if(Math.abs(dx)>40)showAsset(gi+(dx<0?1:-1));}ptr=null;}});
 addEventListener('pointercancel',()=>{ptr=null;});
+// Backgrounding a mobile tab must release steering, even without blur/pointerup.
+addEventListener('visibilitychange',()=>{if(document.hidden){ptr=null;for(const k of Object.keys(keys))keys[k]=0;}});
 function readSteer(){let s=0;if(keys.ArrowLeft||keys.KeyA)s-=1;if(keys.ArrowRight||keys.KeyD)s+=1;
  if(ptr&&!ptr.gal){const dx=ptr.x-ptr.x0;s=Math.abs(dx)>12?clamp(dx/(innerWidth*.12),-1,1):(ptr.x<innerWidth/2?-1:1);}return s;}
 

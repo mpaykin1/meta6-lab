@@ -25,6 +25,7 @@ jobs:
         run: |
           python3 scripts/lab/test-sliyanie-status.py
           node scripts/lab/mutate-pr-status-batch.mjs
+          python3 scripts/lab/mutate-sliyanie-facts.py
       - name: Read PR states from GitHub and update SLIYANIE.md
         env:
           GH_TOKEN: ${{ github.token }}
@@ -33,7 +34,7 @@ jobs:
         run: |
           set -euo pipefail
           [ -f automation/SLIYANIE.md ] || { echo "no automation/SLIYANIE.md"; exit 0; }
-          node scripts/lab/pr-status-batch.mjs automation/SLIYANIE.md > /tmp/st.json
+          node scripts/lab/pr-status-cli.mjs automation/SLIYANIE.md > /tmp/st.json
           for attempt in 1 2 3; do
             python3 scripts/lab/sliyanie-status.py automation/SLIYANIE.md < /tmp/st.json
             grep '^Итог:' automation/SLIYANIE.md >> "$GITHUB_STEP_SUMMARY"

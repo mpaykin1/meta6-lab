@@ -1,6 +1,3 @@
-import fs from 'node:fs/promises';
-import {pathToFileURL} from 'node:url';
-
 // GitHub GraphQL: one request for up to 100 numbered PRs, including closed PRs.
 export function numbersFromTable(md){
  const ids=[...md.matchAll(/^\| #(\d+) \|/gm)].map(m=>Number(m[1]));
@@ -67,11 +64,3 @@ export async function requestBatch(ids,{repository,token,request=fetch,
  }
  return out;
 }
-async function main(){
- const md=await fs.readFile(process.argv[2],'utf8');
- const data=await requestBatch(numbersFromTable(md),{
-  repository:process.env.PR_STATUS_REPOSITORY,token:process.env.GH_TOKEN});
- process.stdout.write(JSON.stringify(data));
-}
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)
- main().catch(e=>{console.error(e);process.exitCode=1;});

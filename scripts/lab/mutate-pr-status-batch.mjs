@@ -67,4 +67,11 @@ for(const [file,cron] of Object.entries(plans)){
  const broken=yaml.replace("cron: '"+cron+"'","cron: '11,41 * * * *'");
  assert.equal(validSchedule(broken,cron),false,'schedule mutation survived: '+file);
 }
+const dispatcher=await fs.readFile(new URL('../../.github/workflows/dispetcher.yml',import.meta.url),'utf8');
+const investigation=await fs.readFile(
+ new URL('../../.github/workflows/investigation-snapshot.yml',import.meta.url),'utf8');
+assert.doesNotMatch(dispatcher,/paths: \[ZADACHI\.md\]/);
+assert.doesNotMatch(investigation,/- 'ZADACHI\.md'/);
+assert.doesNotMatch(investigation,/- 'OSHIBKI\.md'/);
+assert.doesNotMatch(investigation,/- 'automation\/SLIYANIE\.md'/);
 console.log('PASS GraphQL batch, fail-closed, 4 source mutations and 7 cadence mutations');

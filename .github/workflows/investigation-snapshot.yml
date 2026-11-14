@@ -7,10 +7,6 @@ on:
   push:
     branches: [main]
     paths:
-      - 'ZADACHI.md'
-      - 'OSHIBKI.md'
-      - 'automation/SLIYANIE.md'
-      - 'rules/09-platforma/FINISH.md'
       - 'scripts/investigation/**'
       - '.github/workflows/investigation-snapshot.yml'
   pull_request:

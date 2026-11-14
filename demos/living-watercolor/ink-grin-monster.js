@@ -44,14 +44,16 @@ function material(id) {
   let m;
   if (id==='ivory' || id==='bone' || id==='rim') {
     m=new T.MeshPhongMaterial({color:COLORS[id],shininess:32,specular:'#8e9a97'});
+  } else if (id==='ring') {
+    m=new T.MeshPhongMaterial({color:'#d9ddd6',emissive:'#3a403e',shininess:20,specular:'#9aa3a0'});
   } else if (id==='glint') {
     m=new T.MeshBasicMaterial({color:'#b7c9cc',transparent:true,opacity:.46,depthWrite:false});
   } else if (id==='black') {
     m=new T.MeshBasicMaterial({color:'#070a0e'});
   } else {
     m=new T.MeshPhysicalMaterial({
-      color:COLORS[id]||COLORS.hide,map:makePatina(),roughness:.31,metalness:.04,
-      clearcoat:.83,clearcoatRoughness:.12,flatShading:false
+      color:COLORS[id]||COLORS.hide,map:makePatina(),roughness:.46,metalness:.04,
+      clearcoat:.5,clearcoatRoughness:.3,flatShading:false
     });
   }
   MAT.set(id,m);
@@ -170,84 +172,113 @@ function makeLeg(root,side,seed) {
   }
   return {hip,knee,foot,side};
 }
+function fang(group,x,y,z,w,h,up,index) {
+  // Long, narrow, crooked enamel shard: each one a real extruded 3D tooth.
+  const dir=up?1:-1;
+  const shape=new T.Shape();
+  shape.moveTo(-w*.5,0);
+  shape.lineTo(w*.5,0);
+  shape.lineTo(w*.43,dir*h*.58);
+  shape.lineTo(w*(.14+index%3*.07),dir*h);
+  shape.lineTo(-w*(.18+index%2*.10),dir*h*(index%4===0?.86:.95));
+  shape.lineTo(-w*.45,dir*h*.52);
+  shape.closePath();
+  const geo=new T.ExtrudeGeometry(shape,{
+    depth:.075,steps:1,bevelEnabled:true,bevelThickness:.014,
+    bevelSize:Math.min(.016,w*.16),bevelSegments:1,curveSegments:2
+  });
+  const m=part(group,geo,index%4===0?'bone':'ivory',[x,y,z],false);
+  m.rotation.z=Math.sin(index*12.9898)*.13;
+  m.rotation.y=-x*.45;
+  return m;
+}
 function grinFace(head) {
-  // Cranium and cheekpads must read volumetrically from profile.
-  const skull=lump(head,[0,.37,.04],[.92,.94,.61],'pitch');
+  // Elongated skull; the face is modelled, never pasted as an image.
+  const surfZ=(x,y)=>.04+.62*Math.sqrt(Math.max(0,1-(x/.86)**2-((y-.42)/1.0)**2));
+  const skull=lump(head,[0,.42,.04],[.86,1.0,.62],'pitch');
   skull.rotation.x=-.06;
-  lump(head,[-.53,-.23,.29],[.39,.39,.40],'soot');
-  lump(head,[.53,-.23,.29],[.39,.39,.40],'soot');
+  for(const side of [-1,1]) {
+    lump(head,[side*.50,-.20,.27],[.40,.40,.40],'soot');
+    lump(head,[side*.66,.05,.20],[.36,.42,.36],'soot');
+  }
+  lump(head,[0,-.10,.42],[.70,.25,.30],'pitch');
+  // Forehead furrows.
+  for(let k=0;k<5;k++) {
+    const y=.86+k*.105,half=.50-k*.07,pts=[];
+    for(let n=0;n<=8;n++) {
+      const x=-half+n*half/4,yy=y+.035*Math.sin(n*1.7+k*2.1)-.05*Math.abs(x);
+      pts.push([x,yy,surfZ(x,yy)+.012]);
+    }
+    stroke(head,pts,.02+.004*(k%2),'lacquer',false);
+  }
   const eyes=[];
   for(const side of [-1,1]) {
-    lump(head,[side*.455,.57,.50],[.40,.40,.23],'deep',false);
-    const socket=lump(head,[side*.455,.58,.59],[.326,.342,.16],'soot',false);
-    socket.rotation.z=side*.06;
-    const white=part(head,new T.TorusGeometry(.325,.064,8,44),'rim',
-      [side*.455,.58,.73],false);
-    white.rotation.z=side*.095;
-    // Hollow inky pupils at varying heights, as in the reference face.
-    const iris=new T.Group();iris.position.set(side*.455,.57,.739);head.add(iris);
-    lump(iris,[side*.018,-.011,.05],[.265,.268,.107],'black',false);
-    lump(iris,[-.078,.119,.144],[.046,.038,.017],'glint',false);
+    // Asymmetric, deep-set eyes: thin uneven pale rings inside black pits.
+    const big=side<0?1.12:.90,ex=side*.43,ey=.55+(side<0?-.02:.03);
+    lump(head,[ex,ey,.47],[.30*big,.30*big,.17],'black',false);
+    const ring=part(head,new T.TorusGeometry(.195*big,.031,8,40),'ring',[ex,ey,.615],false);
+    ring.rotation.y=side*.22;ring.rotation.z=side*.2;
+    ring.scale.set(1,.94+.1*(side<0?1:0),1);
+    const iris=new T.Group();iris.position.set(ex,ey,.56);head.add(iris);
+    iris.userData.base={x:ex,y:ey};
+    lump(iris,[0,0,.03],[.155*big,.155*big,.06],'black',false);
+    lump(iris,[-.05,.07,.085],[.026,.02,.01],'glint',false);
     eyes.push(iris);
-    stroke(head,[[side*.16,.83,.60],[side*.35,.95,.56],
-      [side*.59,.95,.50],[side*.77,.76,.38]],.09,'pitch');
-    // Wrinkled smile lines that pull eye sockets towards the mouth.
+    // Heavy brow overhanging the top of the ring.
+    stroke(head,[[side*.10,.70,.66],[side*.30,.86,.68],
+      [side*.56,.84,.60],[side*.76,.62,.42]],.105,'pitch');
+    // Crease lines dragging the sockets towards the grin.
     for(let j=0;j<3;j++)stroke(head,[
-      [side*(.74+j*.045),.12-j*.12,.51],
-      [side*(.90+j*.01),-.03-j*.13,.40],
-      [side*(.83+j*.01),-.22-j*.1,.45]
-    ],.017+j*.004,'belly',false);
+      [side*(.60+j*.07),.30-j*.05,.50-j*.03],
+      [side*(.84+j*.03),.20-j*.08,.40],
+      [side*(.92+j*.02),.02-j*.10,.38]
+    ],.016+j*.004,'belly',false);
   }
-  // Narrow, triangular hollow nose separating the two enormous eyes.
-  lump(head,[0,.18,.64],[.22,.20,.23],'pitch');
-  lump(head,[0,.04,.832],[.135,.105,.073],'deep',false);
-  for(const side of [-1,1])lump(head,[side*.11,.064,.869],
-    [.07,.051,.036],'black',false);
-  // Mouth is a deep black cavity, NOT a pasted image.
-  const cavity=lump(head,[0,-.286,.556],[.80,.38,.19],'black',false);
-  cavity.rotation.x=.07;
-  const upper=[],lower=[];
-  for(let i=0;i<=22;i++) {
-    const x=-.89+i*.081,edge=-.215+.26*Math.pow(Math.abs(x)/.89,2);
-    upper.push([x,edge,.70-.22*Math.pow(Math.abs(x)/.89,2)]);
-    lower.push([x,-.49+.15*Math.pow(Math.abs(x)/.89,2),.73]);
+  // Skull-like nasal hole.
+  lump(head,[0,.30,.63],[.15,.20,.14],'pitch');
+  lump(head,[0,.13,.70],[.13,.13,.08],'black',false);
+  for(const side of [-1,1])lump(head,[side*.075,.07,.715],[.07,.075,.05],'black',false);
+  // Mouth: deep black cavity stretching into the cheeks.
+  const cavity=lump(head,[0,-.42,.50],[.92,.42,.20],'black',false);
+  for(const side of [-1,1]) {
+    const c=lump(head,[side*.72,.0,.40],[.27,.20,.14],'black',false);
+    c.rotation.z=side*.5;
   }
-  stroke(head,upper,.075,'pitch',true);
-  stroke(head,[[-.87,.00,.49],[-.94,-.18,.45],[-.73,-.40,.57]],.058,'soot');
-  stroke(head,[[.87,.00,.49],[.94,-.18,.45],[.73,-.40,.57]],.058,'soot');
-  for(let i=0;i<15;i++) {
-    const x=(i-7)*.112,t=Math.abs(x)/.89;
-    const anchor=-.215+.26*t*t;
-    const height=(.235+.10*(1-t))*(i%5===0?.83:1);
-    tooth(head,x,anchor-.011,.777-.17*t*t,.096,height,false,i);
+  const upY=x=>-.30+.50*Math.pow(Math.abs(x),1.8);
+  const upZ=x=>.74-.34*x*x;
+  const upper=[];
+  for(let i=0;i<=24;i++){const x=-1+i/12;upper.push([x,upY(x),upZ(x)]);}
+  stroke(head,upper,.07,'pitch',true);
+  for(const side of [-1,1])stroke(head,[[side*.97,.18,.40],
+    [side*1.0,-.15,.36],[side*.84,-.42,.45]],.055,'soot');
+  for(let i=0;i<13;i++) {
+    const x=(i-6)*.142+Math.sin(i*5.3)*.012,t=Math.abs(x);
+    const height=(.33-.12*t)*(.82+.3*Math.abs(Math.sin(i*2.31)));
+    fang(head,x,upY(x)-.02,upZ(x)+.0,.082+.018*Math.sin(i*3.7),height,false,i);
   }
-  // Jaw hinge sits far back near the ears, so rotation swings the chin
-  // down and open instead of sliding the teeth forward.
+  for(let i=0;i<4;i++){const x=-.45+i*.31;drop(head,[x,upY(x)-.28,upZ(x)+.03],.16+.08*(i%2),i*39+21);}
+  // Jaw hinge sits far back near the ears, so rotation swings the long
+  // chin down and open instead of sliding the teeth forward.
   const jaw=new T.Group();jaw.position.set(0,-.36,-.05);head.add(jaw);
-  const jawBody=new T.Group();jawBody.position.set(0,-.165,.42);jaw.add(jawBody);
+  const jawBody=new T.Group();jawBody.position.set(0,-.42,.42);jaw.add(jawBody);
   lump(jawBody,[0,.065,-.14],[.66,.28,.45],'pitch');
-  // Black throat and a dark tongue: visible only when the mouth opens.
-  lump(jawBody,[0,.13,.10],[.66,.12,.24],'black',false);
-  const tongue=lump(jawBody,[0,.11,.18],[.34,.07,.20],'gums',false);
-  lump(jawBody,[0,-.15,.13],[.76,.21,.28],'soot');
+  lump(jawBody,[0,.12,.02],[.70,.12,.17],'black',false);
+  const tongue=lump(jawBody,[0,.11,.06],[.30,.07,.15],'gums',false);
+  lump(jawBody,[0,-.15,.13],[.74,.21,.28],'soot');
+  lump(jawBody,[0,-.32,.10],[.50,.27,.26],'pitch');
+  for(const side of [-1,1])lump(jawBody,[side*.60,.08,0],[.26,.30,.34],'soot');
+  const loY=x=>.34*Math.pow(Math.abs(x)/.8,1.8);
+  const loZ=x=>.36-.26*(x/.8)**2;
   stroke(jawBody,Array.from({length:23},(_,i)=>{
-    const x=-.76+i*.069;
-    return [x,.10-.12*Math.pow(Math.abs(x)/.76,2),.35];
-  }),.069,'pitch');
-  for(let i=0;i<14;i++) {
-    const x=(i-6.5)*.117,t=Math.abs(x)/.85;
-    const height=.195+.09*(1-t);
-    tooth(jawBody,x,.04-.12*t*t,.36,.105,height,true,i+20);
+    const x=-.8+i*.0727;return [x,loY(x)-.02,loZ(x)];
+  }),.066,'pitch');
+  for(let i=0;i<11;i++) {
+    const x=(i-5)*.142+Math.sin(i*4.1)*.014,t=Math.abs(x)/.8;
+    const height=(.20+.07*(1-t))*(.8+.32*Math.abs(Math.sin(i*1.93+1)));
+    fang(jawBody,x,loY(x),loZ(x)-.01,.09+.016*Math.sin(i*2.9),height,true,i+20);
   }
-  for(const x of [-.63,.63]) {
-    stroke(jawBody,[[x,-.05,.16],[x*.96,-.20,.12],[x*.9,-.30,.04]],.045,'pitch');
-  }
-  // Wet tendrils around cheeks and chin are secondary to the sculpted face.
-  for(let i=0;i<8;i++) {
-    const side=i%2?-1:1,j=Math.floor(i/2);
-    drop(head,[side*(.28+j*.12),-.48-j*.025,.65-j*.065],
-      .10+j*.075,i*39+21);
-  }
+  for(let i=0;i<5;i++)drop(jawBody,[(i-2)*.2,-.50+Math.abs(i-2)*.07,.22],
+    .12+(i%3)*.09,i*57+3);
   return {jaw,jawBody,tongue,eyes,skull,cavity};
 }
 export function createInkGrinMonster(seed=19) {
@@ -294,12 +325,6 @@ export function createInkGrinMonster(seed=19) {
     stroke(spine,[[x,y,-.02],[x+side*.025,y-.14,.24],
       [x-side*.025,y-.20,.27]],.009,'glint',false);
   }
-  for(let i=0;i<8;i++) {
-    const z=-.39+rnd()*.18,side=i%2?-1:1;
-    const a=side*(.15+rnd()*.1);
-    stroke(head,[[a,.99,z+.23],[a+side*.06,1.22,z],
-      [a+side*.10,1.29+rnd()*.11,z+.08]],.028,'soot');
-  }
   root.userData.footprint=.8;
   root.userData.isInkGrinMonster=true;
   root.userData.rig={spine,neck,head,face,arms,legs};
@@ -316,18 +341,40 @@ export function createInkGrinMonster(seed=19) {
       const k=1-smooth(.63,1,p);
       o=Math.max(0,.075*k*(.6+.4*Math.sin(t*13.0))+.025*k);
     }
-    return o+.022*(.5+.5*Math.sin(t*1.48)); // breathing never fully stops
+    return .10+o+.022*(.5+.5*Math.sin(t*1.48)); // breathing never fully stops
   }
+  // Rare nervous twitch: a damped burst at irregular moments.
+  function twitch(t){
+    const period=6.3,n=Math.floor(t/period);
+    const start=n*period+1.2+3.4*Math.abs(Math.sin(n*91.7));
+    const u=t-start;
+    return u>0&&u<1.2?Math.exp(-7*u)*Math.sin(u*46):0;
+  }
+  const gaze={x:0,y:0,yaw:0,pitch:0},tmp=new T.Vector3();
+  root.userData.lookTarget=null;root.userData.pulse=0;
   root.userData.tick=(time,dt=0)=>{
-    const t=time,breath=Math.sin(t*1.48);
+    const t=time,breath=Math.sin(t*1.48),tw=twitch(t);
+    // Heavy, delayed following of whoever is looking at it.
+    let gx=0,gy=0,wantYaw=0,wantPitch=0;
+    if(root.userData.lookTarget){
+      neck.worldToLocal(tmp.copy(root.userData.lookTarget));
+      wantYaw=T.MathUtils.clamp(Math.atan2(tmp.x,tmp.z),-.9,.9)*.55;
+      wantPitch=T.MathUtils.clamp(Math.atan2(tmp.y-.9,Math.hypot(tmp.x,tmp.z)),-.5,.5)*.4;
+      head.worldToLocal(tmp.copy(root.userData.lookTarget));
+      const d=Math.max(.8,Math.hypot(tmp.x,tmp.y,tmp.z));
+      gx=T.MathUtils.clamp(tmp.x/d,-1,1);gy=T.MathUtils.clamp((tmp.y-.55)/d,-1,1);
+    }
+    const k=dt>0?1-Math.exp(-dt*1.6):1,ke=dt>0?1-Math.exp(-dt*5):1;
+    gaze.yaw+=(wantYaw-gaze.yaw)*k;gaze.pitch+=(wantPitch-gaze.pitch)*k;
+    gaze.x+=(gx-gaze.x)*ke;gaze.y+=(gy-gaze.y)*ke;
     spine.rotation.z=.058*Math.sin(t*.65)+.015*Math.sin(t*2.6);
     spine.rotation.x=.026*Math.sin(t*.88);
     spine.scale.set(1+.014*breath,1+.015*breath,1+.02*breath);
     neck.rotation.z=.057*Math.sin(t*.42+.70);
     neck.rotation.x=.07+.045*Math.sin(t*.95);
-    head.rotation.y=.19*Math.sin(t*.41)+.055*Math.sin(t*2.6);
-    head.rotation.z=.06*Math.sin(t*.53);
-    head.rotation.x=-.065+.06*Math.sin(t*.71)-.22*jawState.open-.06*jawState.snap*Math.sin(jawState.snap*9);
+    head.rotation.y=gaze.yaw+.09*Math.sin(t*.41)+.03*Math.sin(t*2.6)+.05*tw;
+    head.rotation.z=.13*Math.sin(t*.23)+.05*Math.sin(t*.53)+.16*tw;
+    head.rotation.x=-.065-gaze.pitch+.05*Math.sin(t*.71)-.20*jawState.open-.06*jawState.snap*Math.sin(jawState.snap*9);
     const target=jawTarget(t);
     if(dt>0){
       const h=Math.min(dt,.033);
@@ -345,11 +392,13 @@ export function createInkGrinMonster(seed=19) {
     face.jaw.rotation.z=jawState.side;
     face.tongue.position.y=.11+.05*Math.sin(t*3.1)*Math.min(1,open*4);
     face.tongue.rotation.x=-.25*open;
-    face.cavity.scale.y=.38+.22*Math.max(0,open);
-    face.cavity.position.y=-.286-.13*Math.max(0,open);
+    face.cavity.scale.y=.42+.25*Math.max(0,open);
+    face.cavity.position.y=-.42-.15*Math.max(0,open);
+    root.userData.pulse=Math.max(jawState.snap,Math.min(1,Math.abs(tw)*2.5));
     face.eyes.forEach((eye,i)=>{
-      eye.position.x=(i===0?-.455:.455)+.028*Math.sin(t*.71+i*.32);
-      eye.position.y=.57+.026*Math.sin(t*.39+i*1.4);
+      const b=eye.userData.base;
+      eye.position.x=b.x+.075*gaze.x+.008*Math.sin(t*.71+i*.32)+.02*tw;
+      eye.position.y=b.y+.06*gaze.y+.008*Math.sin(t*.39+i*1.4);
     });
     arms.forEach((a,i)=>{
       const phase=t*.92+i*2.1;

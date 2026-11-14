@@ -5,10 +5,10 @@ import {createIllustrationCamera}
   from '../../reference/ink-fallen-guardian/shared/living-watercolor-generators.js';
 import {createInkGrinMonster} from '../../demos/living-watercolor/ink-grin-monster.js';
 
-const background='#171d20';
+const background='#050708';
 const scene=new T.Scene();
 scene.background=new T.Color(background);
-scene.fog=new T.FogExp2('#20272a',.035);
+scene.fog=new T.FogExp2('#06090a',.085);
 const camera=createIllustrationCamera(T,{
   width:innerWidth,height:innerHeight,viewHeight:8,
   position:[4,5,12],lookAt:[0,2.6,0]
@@ -31,10 +31,10 @@ const style=createWatercolorStyle({
   paperGap:.08,paintedLight:.64
 });
 const paint=createLivingWatercolor3D({THREE:T,renderer,scene,camera,style});
-const ambient=new T.HemisphereLight('#c4cfd0','#324148',2.15);scene.add(ambient);
-const key=new T.DirectionalLight('#c8e2d6',2.3);key.position.set(-4,7,8);scene.add(key);
-const rim=new T.DirectionalLight('#9bcad3',2.0);rim.position.set(5,8,-8);scene.add(rim);
-const faceLight=new T.PointLight('#d4ddd4',2.0,12,2);faceLight.position.set(0,5.6,5.7);scene.add(faceLight);
+const ambient=new T.HemisphereLight('#8fa0a2','#0c1214',.5);scene.add(ambient);
+const key=new T.DirectionalLight('#c8e2d6',.16);key.position.set(-4,7,8);scene.add(key);
+const rim=new T.DirectionalLight('#9bcad3',1.1);rim.position.set(5,8,-8);scene.add(rim);
+const faceLight=new T.PointLight('#dfe6dc',26,7.5,2);faceLight.position.set(.25,3.55,2.9);scene.add(faceLight);
 const world=new T.Group();scene.add(world);
 const ground=new T.Mesh(new T.PlaneGeometry(90,90),
   new T.MeshStandardMaterial({color:'#253032',roughness:1,side:T.DoubleSide}));
@@ -128,7 +128,7 @@ const fogTexture=new T.CanvasTexture(fogCanvas),fogs=[];
 for(let i=0;i<10;i++){
   const fog=new T.Sprite(new T.SpriteMaterial({
     map:fogTexture,color:'#9caca6',transparent:true,
-    opacity:.21,depthWrite:false
+    opacity:.06,depthWrite:false
   }));
   fog.position.set(-9+i*2.2,.20+(i%3)*.50,-1.6-(i%4)*2.3);
   fog.scale.set(6.5+(i%4)*1.6,1.5+(i%3),1);
@@ -144,6 +144,50 @@ const rnd=i=>{
   const f=Math.sin(i*127.1+39.4)*43758.5453;
   return f-Math.floor(f);
 };
+// Old-film post-processing: soft focus, chromatic fringe, grain, vignette,
+// and line glitches that flare when the jaw snaps or the creature twitches.
+let fear=0;
+const target=new T.WebGLRenderTarget(2,2,{type:T.HalfFloatType,depthBuffer:true});
+const post=new T.ShaderMaterial({
+  uniforms:{tMap:{value:target.texture},uTime:{value:0},uFear:{value:0},
+    uRes:{value:new T.Vector2(2,2)}},
+  depthTest:false,depthWrite:false,
+  vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
+  fragmentShader:`
+    uniform sampler2D tMap;uniform float uTime,uFear;uniform vec2 uRes;varying vec2 vUv;
+    float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+    vec3 soft(vec2 uv,vec2 px){
+      vec3 c=texture2D(tMap,uv).rgb*.36;
+      c+=texture2D(tMap,uv+px*vec2(1.3,.6)).rgb*.16;
+      c+=texture2D(tMap,uv+px*vec2(-1.3,-.6)).rgb*.16;
+      c+=texture2D(tMap,uv+px*vec2(.6,-1.3)).rgb*.16;
+      c+=texture2D(tMap,uv+px*vec2(-.6,1.3)).rgb*.16;
+      return c;
+    }
+    void main(){
+      vec2 uv=vUv,c=uv-.5;float r=length(c);
+      float line=floor(uv.y*90.);
+      float g=step(.93-.25*uFear,h(vec2(line,floor(uTime*14.))))*uFear;
+      uv.x+=g*(h(vec2(line,uTime))-.5)*.05;
+      uv+=vec2(sin(uTime*.9),cos(uTime*.7))*.0012;
+      vec2 px=(1.6+2.2*r)/uRes;
+      float ab=(.0025+.007*uFear)*r*2.;
+      vec3 col=soft(uv,px);
+      col.r=soft(uv+c*ab,px).r;col.b=soft(uv-c*ab,px).b;
+      float l=dot(col,vec3(.3,.59,.11));
+      col=mix(col,vec3(l)*vec3(.96,1.,.98),.82);
+      float flick=.93+.05*sin(uTime*11.)*sin(uTime*2.3)+.04*h(vec2(floor(uTime*9.),3.));
+      col*=flick*smoothstep(.86,.18,r);
+      gl_FragColor=vec4(col,1.);
+      #include <tonemapping_fragment>
+      #include <colorspace_fragment>
+      float n=h(gl_FragCoord.xy+fract(uTime)*91.7)-.5;
+      float scr=step(.997,h(vec2(floor(gl_FragCoord.x/2.),floor(uTime*10.))))*.05;
+      gl_FragColor.rgb+=n*(.075+.05*uFear)+scr;
+    }`
+});
+const postScene=new T.Scene(),postCamera=new T.OrthographicCamera(-1,1,1,-1,0,1);
+const quad=new T.Mesh(new T.PlaneGeometry(2,2),post);quad.frustumCulled=false;postScene.add(quad);
 const ui=document.querySelector('#panel');
 const menuButton=document.querySelector('#menu-btn');
 menuButton.onclick=()=>{
@@ -152,7 +196,7 @@ menuButton.onclick=()=>{
 };
 let mode='body',paused=false,yaw=.36,pitch=.15,zoom=1;
 let elapsed=0,prevMs=0,renderedFrames=0,quality=1,smoothedFrame=16.7;
-const info={body:{target:2.60,height:7.6},face:{target:4.42,height:3.1},
+const info={body:{target:2.60,height:7.6},face:{target:4.28,height:3.5},
   profile:{target:2.65,height:7.6}};
 function show(kind){
   if(!info[kind])return;
@@ -187,6 +231,9 @@ function resize(){
   camera.zoom=zoom;
   camera.updateProjectionMatrix();
   renderer.setSize(innerWidth,innerHeight);
+  const pr=renderer.getPixelRatio()*.8;
+  target.setSize(Math.max(2,Math.round(innerWidth*pr)),Math.max(2,Math.round(innerHeight*pr)));
+  post.uniforms.uRes.value.set(target.width,target.height);
 }
 let drag=null,pinch=0;const touches=new Map();
 renderer.domElement.addEventListener('pointerdown',e=>{
@@ -231,7 +278,7 @@ function animate(ms){
     paint.setQuality(.68);resize();
   }
   if(!paused)elapsed+=dt;
-  monster.userData.tick(elapsed,dt);
+  monster.userData.tick(elapsed,paused?0:dt);
   fogs.forEach((fog,i)=>{
     fog.position.x=-9+i*2.2+Math.sin(elapsed*.17+i)*.51;
   });
@@ -242,13 +289,18 @@ function animate(ms){
     mistPos[n+2]=(rnd(i+91)-.5)*12;
   }
   mist.attributes.position.needsUpdate=true;
-  faceLight.intensity=2+.09*Math.sin(elapsed*.58);
+  const pulse=monster.userData.pulse||0;
+  fear+=(pulse-fear)*(pulse>fear?.5:Math.min(1,dt*2.2));
+  faceLight.intensity=26*(.86+.09*Math.sin(elapsed*.58)+.05*Math.sin(elapsed*7.3)*Math.sin(elapsed*1.9))+12*fear;
   const targetY=info[mode].target,d=13.5;
   camera.position.set(Math.sin(yaw)*Math.cos(pitch)*d,
     targetY+Math.sin(pitch)*d,Math.cos(yaw)*Math.cos(pitch)*d);
   camera.lookAt(0,targetY,0);
+  monster.userData.lookTarget=camera.position;
   paint.tick(ms);
-  renderer.render(scene,camera);
+  post.uniforms.uTime.value=elapsed;post.uniforms.uFear.value=fear;
+  renderer.setRenderTarget(target);renderer.render(scene,camera);
+  renderer.setRenderTarget(null);renderer.render(postScene,postCamera);
   renderedFrames++;
 }
 requestAnimationFrame(animate);

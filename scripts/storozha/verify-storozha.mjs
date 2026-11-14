@@ -30,6 +30,9 @@ export function verify(c) {
   assert.equal(c.quota(six, 5, t).reject, false, 'The oldest five still pass when six exist');
   assert.equal(c.quota(six, 6, t).reject, true, 'The sixth live PR is red');
   assert.match(c.quota(six, 6, t).message, /#1.*#5/, 'Error tells which old PRs to finish');
+  const parked = six.map((p, i) => i === 0 ? {...p, draft: true} : p);
+  assert.equal(c.quota(parked, 6, t).reject, false, 'A draft PR does not block the queue: the sixth becomes one of five');
+  assert.match(c.quota(parked, 6, t).oldest.join(','), /^2,3,4,5,6$/, 'Oldest five skip drafts');
   const required72Hours = 72 * 60 * 60 * 1000;
   const old = {...six[0], lastCommitAt: new Date(t - required72Hours - 1000).toISOString()};
   const recent = {...six[0], lastCommitAt: new Date(t - required72Hours + 1000).toISOString()};

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-14T05:32:28.246Z",
+  "generated_at": "2026-11-14T05:39:03.268Z",
   "sha": {
-    "lab": "e5a255efe09d5ca9d8b4a1c088c1a77fbd8c7a28",
+    "lab": "bc24124303060dcb9ad75353d6a6f1ba967dd169",
     "mg": "7ae9604d0dfc969116895cd06bf11b4c3cdf15ff"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43561977633",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43562516637",
   "review": {
     "protected": [
       {
@@ -194,13 +194,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43553538314",
-        "step": "Run node scripts/dispetcher/run.mjs"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -377,9 +371,14 @@
   "pr": {
     "open": 52,
     "conflicts": "нет данных",
-    "merged": 39,
+    "merged": 40,
     "closed": 77,
     "mergedItems": [
+      {
+        "number": 312,
+        "title": "Reference: ASQURA Office — clean source-only transfer of #13",
+        "sha": "bc24124303060dcb9ad75353d6a6f1ba967dd169"
+      },
       {
         "number": 308,
         "title": "docs: IM1–IM5 из #72 — документация на свежем main",
@@ -763,7 +762,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2097,
+      "count": 2105,
       "folders": "нет данных"
     },
     "mg": {

@@ -15,7 +15,7 @@ try{
     page.on('requestfailed',r=>failed.push(r.url()+': '+r.failure()?.errorText));
     const response=await page.goto('http://127.0.0.1:8779/preview/ink-watercolor-train/index.html?view=train&palette=color',{waitUntil:'domcontentloaded',timeout:60000});
     assert.equal(response.status(),200);
-    await page.waitForTimeout(1600);
+    await page.waitForFunction(()=>window.__INK_TRAIN__?.stats?.().renderedFrames>=2,null,{timeout:90000});
     const state=await page.evaluate(()=>{
       const t=window.__INK_TRAIN__,c=document.querySelector('canvas');
       let meshes=0;
@@ -24,11 +24,11 @@ try{
         webgl:c?.getContext('webgl2')!==null,meshes};
     });
     console.log('TRAIN_BROWSER '+v.name+' '+JSON.stringify({state,errors,failed}));
-    await page.screenshot({path:'/tmp/ink-train-'+v.name+'.png'});
     assert.deepEqual(failed,[],'network asset requests');
     assert.deepEqual(errors,[],'browser console errors');
     assert.ok(state.ready,'train model loaded');
     assert.ok(state.meshes>100,'train should have actual volumetric meshes');
+    assert.ok(state.stats.renderedFrames>=2,'actual WebGL frame updates required');
     await context.close();
   }
 } finally{await browser.close();}

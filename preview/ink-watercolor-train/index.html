@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#eae5dd">
+<title>INK · Акварельный паровоз · 3D</title>
+<link rel="icon" href="data:,">
+<style>
+html,body{padding:0;margin:0;width:100%;height:100%;overflow:hidden;background:#eae5dd;touch-action:none}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+button{font-family:Georgia,serif;cursor:pointer}
+#ui{position:fixed;inset:0;pointer-events:none;color:#394347;z-index:5}
+#menu-btn{pointer-events:auto;position:absolute;left:max(14px,env(safe-area-inset-left));top:max(14px,env(safe-area-inset-top));width:43px;height:43px;border-radius:50%;border:1px solid #51596235;background:#eee8deb9;box-shadow:0 3px 18px #3439441e;font-size:22px;color:#374049;backdrop-filter:blur(9px)}
+#menu{pointer-events:auto;position:absolute;left:14px;top:max(68px,calc(env(safe-area-inset-top) + 58px));width:min(285px,calc(100vw - 28px));box-sizing:border-box;max-height:calc(100vh - 85px);overflow:auto;border-radius:15px;padding:20px;background:#eee9e1ed;border:1px solid #39484d24;box-shadow:0 18px 60px #30343b33;backdrop-filter:blur(18px)}
+#menu[hidden]{display:none}
+#menu h1{font:italic 31px Georgia;margin:0 0 6px;letter-spacing:.05em}
+#menu p{font:13px/1.55 Georgia;color:#69706d;margin:0 0 17px}
+#menu nav{display:grid;grid-template-columns:1fr;gap:8px}
+#menu nav button{border:1px solid #66756d33;border-radius:8px;background:#fff9ed55;padding:11px 13px;text-align:left;color:#384746;font-size:15px}
+#menu nav button[aria-pressed=true]{background:#758e8950;border-color:#5d787e90}
+#menu small{display:block;margin-top:15px;color:#6e7770;font:12px/1.65 Georgia}
+#menu a{display:block;font:12px Georgia;margin-top:12px;color:#536e67}
+</style>
+<script type="importmap">{"imports":{"three":"../../reference/ink-fallen-guardian/three.module.js"}}</script>
+</head>
+<body>
+<div id="ui">
+<button id="menu-btn" aria-label="Меню" aria-expanded="false">☰</button>
+<div id="menu" hidden>
+<h1>INK</h1><p>Паровоз из акварели. Настоящая объёмная модель, живые шатуны и пар.</p>
+<nav>
+<button data-view="train">Весь поезд</button>
+<button data-view="engine">Паровоз крупно</button>
+<button data-view="travel">Путешествие по рельсам</button>
+<button id="pause">Остановить движение</button>
+<button id="palette">Чёрно-белая акварель</button>
+</nav>
+<small>Пальцем или мышью — вращать.<br>Колесо мыши или два пальца — масштаб.<br>Пробел — остановить / запустить.</small>
+<a href="https://github.com/mpaykin1/meta6-lab/tree/lab/ink-watercolor-steam-train-20261114">Исходники модели</a>
+</div>
+</div>
+<script type="module" src="./scene.js"></script>
+</body></html>

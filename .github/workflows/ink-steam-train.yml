@@ -1,0 +1,59 @@
+name: INK Steam Train browser scene
+on:
+  push:
+    branches: [lab/ink-watercolor-steam-train-20261114]
+  pull_request:
+    paths:
+      - 'preview/ink-watercolor-train/**'
+      - 'demos/living-watercolor/ink-steam-train.js'
+      - 'scripts/ink/check-watercolor-train-browser.mjs'
+      - '.github/workflows/ink-steam-train.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-scene:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Inspect module syntax and install browser
+        run: |
+          node --check demos/living-watercolor/ink-steam-train.js
+          node --check preview/ink-watercolor-train/scene.js
+          node --check scripts/ink/check-watercolor-train-browser.mjs
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Load real 3D train in Chromium desktop and mobile
+        run: |
+          python3 -m http.server 8779 --bind 127.0.0.1 --directory . >/tmp/ink-train-http.log 2>&1 &
+          node scripts/ink/check-watercolor-train-browser.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ink-train-screenshots
+          path: /tmp/ink-train-*.png
+          if-no-files-found: ignore
+  public-http:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Verify public immutable WebGL preview (HTTP 200)
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://rawcdn.githack.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}"
+          for path in \
+            preview/ink-watercolor-train/index.html \
+            preview/ink-watercolor-train/scene.js \
+            demos/living-watercolor/ink-steam-train.js \
+            reference/ink-fallen-guardian/three.module.js; do
+            url="$base/$path"
+            curl --location --fail --silent --show-error --retry 3 --max-time 60 "$url" -o /tmp/ink-train-file
+            test -s /tmp/ink-train-file
+            echo "200 $url"
+          done

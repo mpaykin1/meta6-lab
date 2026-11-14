@@ -2,7 +2,22 @@ import fs from 'node:fs/promises';
 const {GITHUB_REPOSITORY: repo='mpaykin1/meta6-lab',GITHUB_TOKEN: token}=process.env;
 const root='https://api.github.com/repos/'+repo;
 const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-dispatcher','Authorization':'Bearer '+token};
-async function api(path){const r=await fetch(root+path,{headers});if(!r.ok)throw Error(path+': '+r.status);return r.json();}
+export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTimeout(done,ms)),
+ now=()=>Date.now()}={}){
+ for(let attempt=0;attempt<2;attempt++){
+  const response=await request(root+path,{headers});
+  if(response.ok)return response.json();
+  const remaining=Number(response.headers.get('x-ratelimit-remaining'));
+  const reset=Number(response.headers.get('x-ratelimit-reset'))*1000;
+  if((response.status===403||response.status===429)&&remaining===0&&Number.isFinite(reset)&&reset>0){
+   const waitMs=reset-now();
+   if(waitMs>0&&waitMs<=8*60*1000&&attempt===0){await wait(waitMs+1000);continue}
+   throw Error('нет данных: квота GitHub API до '+new Date(reset).toISOString().slice(11,16)+' UTC');
+  }
+  throw Error('нет данных: GitHub HTTP '+response.status+' ('+path+')');
+ }
+ throw Error('нет данных: GitHub API не ответил после повтора ('+path+')');
+}
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));
  const map=new Map();
@@ -55,8 +70,14 @@ export async function main(){
  const finish=await fs.readFile('rules/09-platforma/FINISH.md','utf8');
  const finishIds=[...finish.matchAll(/^\|\s*([MBLP]\d+)\s*\|[^|]*\|[^|]*\|\s*НЕТ\b/gm)].map(m=>m[1]);
  let previous='';try{previous=await fs.readFile('DISPETCHER.md','utf8')}catch{}
+ // Skip historical closed PRs before any REST lookups; core helper stays read-only.
+ const {openPulls}=await import('../storozha/gh-list.mjs');
+ const opened=await openPulls(repo,token);
+ if(!Array.isArray(opened))throw Error('нет данных: открытые PR не получены');
+ const openNumbers=new Set(opened.map(pr=>pr.number));
  const cards=[],claude=[];
  for(const t of tasks){
+ if(!openNumbers.has(t.id))continue;
  let pr;try{pr=await api('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
  if(pr.state!=='open')continue;
  const resolution=await resolveConflict(pr,()=>api('/pulls/'+t.id),previousConflict(previous,t.id));

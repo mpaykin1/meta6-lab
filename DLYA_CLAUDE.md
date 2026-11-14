@@ -18,33 +18,35 @@
 | #285 | claude/storozha-yadro-1113 | .github/workflows/meta-games-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/core.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/mutate-storozha.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/verify-storozha.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 | #282 | lab/auditor-task-table-20261113 | scripts/auditor/mutate-auditor.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-13 |
 | #247 | lab/kak-proveryayushchij-traps | scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude | 2026-11-13 |
-| #299 | lab/ci-ochered-concurrency | .github/workflows/kontur-guard.yml: изменение ЯДРА охраны — только Claude; .github/workflows/lab-shared-deletion-guard.yml: изменение ЯДРА охраны — только Claude; .github/workflows/meta-bot.yml: изменение ЯДРА охраны — только Claude; .github/workflows/meta-games-guard.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-quota.yml: изменение ЯДРА охраны — только Claude | 2026-11-13 |
+| #309 | lab/storozha-quota-draft | scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/gh-list.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/mutate-storozha.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/verify-storozha.mjs: изменение ЯДРА охраны — только Claude | 2026-11-14 |
+| #315 | lab/storozha-reference-no-api | .github/workflows/storozha-reference.yml: изменение ЯДРА охраны — только Claude; scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/mutate-storozha.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/verify-storozha.mjs: изменение ЯДРА охраны — только Claude | 2026-11-14 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->
-| #54 | lab/render-visibility-optimization | docs/progress/PR54_59_60.md | 2026-11-13 |
-| #190 | lab/bot-batch-1 | OSHIBKI.md | 2026-11-13 |
-| #191 | lab/sunken-city-reference-1109 | OSHIBKI.md | 2026-11-13 |
-| #200 | lab/bot-batch-2 | OSHIBKI.md, shared/library/index.json | 2026-11-13 |
-| #203 | lab/skin-rusty-robot | LAB_QUEUE.md, OSHIBKI.md, games/skin-trainer/index.html, rules/01-stil-i-grafika/SKINY.md | 2026-11-13 |
-| #209 | lab/library-catalog | BIBLIOTEKA.md, OSHIBKI.md | 2026-11-13 |
-| #220 | lab/zadachi-conflicts | OSHIBKI.md, automation/progress/USKORENIE.md | 2026-11-13 |
-| #225 | lab/render-broken-city-safe-1110 | OSHIBKI.md, SMENA.md | 2026-11-13 |
-| #234 | lab/claude-adfree-catalog-1110 | scripts/storozha/core.mjs | 2026-11-13 |
-| #235 | lab/fix-mobile-screen-all-games-1111 | AGENTS.md | 2026-11-13 |
-| #245 | lab/remont-main-veil-terraces | OSHIBKI.md | 2026-11-13 |
-| #247 | lab/kak-proveryayushchij-traps | OSHIBKI.md | 2026-11-13 |
-| #254 | lab/auditor-truthful-cycle-20261111 | OSHIBKI.md | 2026-11-13 |
-| #255 | lab/archer-meta-adfree-clean-1111 | OSHIBKI.md | 2026-11-13 |
-| #260 | lab/uluchshatel-preflight-20261111 | OSHIBKI.md | 2026-11-13 |
-| #262 | lab/archer-retention-exp-1 | OSHIBKI.md | 2026-11-13 |
-| #272 | lab/uluchshatel-sumerki-copy-bot13-20261112 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-13 |
-| #277 | lab/storozha-nedelya | scripts/storozha/core.mjs | 2026-11-13 |
-| #283 | lab/ink-fallen-robot-20261113 | LINKS.txt, ink.md | 2026-11-13 |
-| #284 | lab/ink-fallen-guardian-reference-20261113 | reference/ink-fallen-guardian/index.html | 2026-11-13 |
-| #286 | lab/ink-fallen-guardian-recipe-20261113 | work-notes/ink-fallen-guardian-progress.md | 2026-11-13 |
-| #289 | lab/antisueta | DLYA_CLAUDE.md, OSHIBKI.md, ZADACHI.md | 2026-11-13 |
-| #290 | lab/bez-patternov-20261113 | OSHIBKI.md, ink.md | 2026-11-13 |
+| #3 | lab/twilight-island-bot | shared/library/index.json | 2026-11-14 |
+| #191 | lab/sunken-city-reference-1109 | OSHIBKI.md, shared/library/index.json | 2026-11-14 |
+| #203 | lab/skin-rusty-robot | LAB_QUEUE.md, OSHIBKI.md, games/skin-trainer/index.html, rules/01-stil-i-grafika/SKINY.md | 2026-11-14 |
+| #218 | lab/remont-r1-library | shared/library/index.json | 2026-11-14 |
+| #220 | lab/zadachi-conflicts | OSHIBKI.md, automation/progress/USKORENIE.md | 2026-11-14 |
+| #225 | lab/render-broken-city-safe-1110 | OSHIBKI.md, SMENA.md, shared/library/index.json | 2026-11-14 |
+| #234 | lab/claude-adfree-catalog-1110 | AGENTS.md, scripts/storozha/core.mjs | 2026-11-14 |
+| #235 | lab/fix-mobile-screen-all-games-1111 | AGENTS.md | 2026-11-14 |
+| #245 | lab/remont-main-veil-terraces | OSHIBKI.md, shared/library/index.json | 2026-11-14 |
+| #247 | lab/kak-proveryayushchij-traps | OSHIBKI.md | 2026-11-14 |
+| #254 | lab/auditor-truthful-cycle-20261111 | OSHIBKI.md | 2026-11-14 |
+| #255 | lab/archer-meta-adfree-clean-1111 | OSHIBKI.md, shared/library/index.json | 2026-11-14 |
+| #260 | lab/uluchshatel-preflight-20261111 | OSHIBKI.md | 2026-11-14 |
+| #262 | lab/archer-retention-exp-1 | OSHIBKI.md | 2026-11-14 |
+| #272 | lab/uluchshatel-sumerki-copy-bot13-20261112 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-14 |
+| #277 | lab/storozha-nedelya | scripts/storozha/core.mjs | 2026-11-14 |
+| #283 | lab/ink-fallen-robot-20261113 | LINKS.txt, ink.md | 2026-11-14 |
+| #284 | lab/ink-fallen-guardian-reference-20261113 | reference/ink-fallen-guardian/index.html | 2026-11-14 |
+| #286 | lab/ink-fallen-guardian-recipe-20261113 | work-notes/ink-fallen-guardian-progress.md | 2026-11-14 |
+| #289 | lab/antisueta | DLYA_CLAUDE.md, OSHIBKI.md, ZADACHI.md, rules/09-platforma/ZANYATO.md | 2026-11-14 |
+| #290 | lab/bez-patternov-20261113 | OSHIBKI.md, ink.md | 2026-11-14 |
+| #291 | lab/polza-b2-broken-city-20261113 | shared/library/index.json | 2026-11-14 |
+| #297 | lab/ostrov-aptekarya-ii | games/ostrov-aptekarya/bot-adapter.js, games/ostrov-aptekarya/bot-strategy.mjs, games/ostrov-aptekarya/bot/playthrough.mjs, games/ostrov-aptekarya/dialogue.js, games/ostrov-aptekarya/game.js, shared/library/index.json, shared/library/ostrov-aptekarya.json | 2026-11-14 |
+| #303 | lab/asset-pack-shpili | ZADACHI.md, automation/asset-check/SPEC.md | 2026-11-14 |
 <!-- STOROZHA:CONFLICTS:END -->
 | #242 | lab/seo-claude-adfree-1111 | НУЖЕН CLAUDE: красные verify, bot, guard; SEO PR меняет claude-games/games/*/index.html (17 игр), а базовый PR #234 содержит несовпадение SHA256 защищённого pod-i-nad; не изменять эталон/охранник, проверить базовую ветку и CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117 | 2026-11-11 |
 | #245 | lab/remont-main-veil-terraces | НУЖЕН CLAUDE: игровая правка [PR #245](https://github.com/mpaykin1/meta6-lab/pull/245) прошла [META BOT на PR](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984334) и [focused 6/6](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984307), но на main PASS нет. После безопасного слияния актуального main в ремонтную ветку [13d85bb](https://github.com/mpaykin1/meta6-lab/commit/13d85bbf4e324cb01729c8a8464bf73364889a74) автоматический Library Machine **повторно** внёс посторонние `shared/library/index.json`, `shared/library/veil-terraces.json` коммитом [02ba0f5](https://github.com/mpaykin1/meta6-lab/commit/02ba0f5812afcae9467cdefa5cb7f3b381f6ee2f). Новый [META BOT](https://github.com/mpaykin1/meta6-lab/actions/runs/43018578169) имеет `action_required`, не PASS. STOROZHA [43012984349](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984349) дважды FAIL HTTP 403 GitHub API rate limit. Третья очистка бесполезна: машинная запись восстанавливает изменения, защищённые workflow/сторож не править. Нужны одобрение новых Actions (если доступно), устранение автоматического загрязнения PR и независимая проверка до squash; затем 2 PASS META BOT на main. | 2026-11-11 |
@@ -107,3 +109,4 @@
 
 | #260 | lab/uluchshatel-preflight-20261111 | Конфликты сняты [dad5f9f](https://github.com/mpaykin1/meta6-lab/commit/dad5f9f42c9923e7c9f01bddc25edfde657cd976), [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43413130662), [B1 PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43413130857), [META GAMES PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43413130784). [Reference guard дважды HTTP 403](https://github.com/mpaykin1/meta6-lab/actions/runs/43413130789/job/131845211304); нужен ремонт ядра #247 или восстановление API-лимита и повтор guard. Draft на подпись: дополнены существующие preflight-тесты, по запрету этого запуска самослияния нет. | 2026-11-13 |
 - УСКОРЕНИЕ 13.11.2026 — ядро STOROZHA: [branch updater 43409815373](https://github.com/mpaykin1/meta6-lab/actions/runs/43409815373) и [weekly 43409546447](https://github.com/mpaykin1/meta6-lab/actions/runs/43409546447) падают из-за GitHub API 403 rate limit; `scripts/storozha/weekly-watch.mjs` показывает «зависших 0» по stale PR вместо таблицы [ZADACHI.md](https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md) (24 зависших на последнем полном снимке). Требуется общий источник и экономия API внутри ядра; ядро не менялось.
+| #314 | lab/sunken-city-clean-source-20261114 | CLAUDE: source-only замена #191 сохранила [187 исходных файлов, ZIP SHA ebc39f](https://github.com/mpaykin1/meta6-lab/commit/c6df59963f9ede875e7cf15768778e05c4370385), но [focused META BOT](https://github.com/mpaykin1/meta6-lab/actions/runs/43562767556/job/132349894621) FAIL: уровень 1, герой застрял 20 с, progress=0. Сохранить bytes оригинала: нужен отдельный игровой адаптер или разрешённое исправление без ослабления проверки/бота; оставить [#314](https://github.com/mpaykin1/meta6-lab/pull/314) draft. | 2026-11-14 |

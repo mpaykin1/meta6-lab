@@ -237,18 +237,73 @@ function finishIds(content) {
   return [...content.matchAll(/^\|\s*([MBLPЛСЭ]\d+)\s*\|/gm)].map(match => match[1]);
 }
 
-function finishSummary(progress) {
-  const files = ['rules/09-platforma/FINISH.md', 'rules/09-platforma/FINISH_2.md'];
-  const ids = files.map(finishFile => finishIds(read(finishFile)));
-  if (ids.some(list => list === null)) return UNKNOWN;
+// Reuse the FINISH table parser from lab/zadachi-conflicts (2789ffba),
+// but verify its cited runs instead of trusting a green word or a JSON boolean.
+export function finishTableStatus(content) {
+  if (content === null) return null;
+  const rows = [];
+  for (const line of content.split('\n')) {
+    if (!/^\|\s*[MBLPЛСЭ]\d+\s*\|/.test(line)) continue;
+    const cells = line.split('|').slice(1, -1).map(cell => cell.trim());
+    const status = cells.find(cell => /^(?:ЗЕЛЁНАЯ|НЕТ)(?:\s|$)/.test(cell)) || '';
+    const evidence = status.match(/https:\/\/github\.com\/([^/]+\/[^/]+)\/actions\/runs\/(\d+)(?=[)\s])/);
+    rows.push({ id: cells[0], status, evidence: evidence ?
+      { repo: evidence[1], run: evidence[2], url: evidence[0] } : null });
+  }
+  return rows;
+}
+
+export async function finishSummary(stageOne, stageTwo, getRun = request) {
+  const primary = finishTableStatus(stageOne);
+  if (primary?.length !== 18 || new Set(primary.map(row => row.id)).size !== primary.length) return UNKNOWN;
   const ready = [];
   const pending = [];
-  for (const id of ids.flat()) {
-    const mark = progressMark(progress, id);
-    if (mark.value === 'готов') ready.push(id);
-    else pending.push({ id, value: mark.value, reason: mark.reason });
+  const proofs = {};
+  const runs = new Map();
+  async function cached(path) {
+    if (!runs.has(path)) runs.set(path, safeSection(() => getRun(path)));
+    return runs.get(path);
   }
-  return { ready, pending };
+  async function check(rows) {
+    for (const { id, status, evidence } of rows) {
+      if (/^НЕТ(?:\s|$)/.test(status)) {
+        pending.push({ id, value: 'не готов', reason: 'НЕТ в таблице FINISH' });
+        continue;
+      }
+      if (!/^ЗЕЛЁНАЯ(?:\s|$)/.test(status) || evidence?.repo !== LAB) {
+        pending.push({ id, value: UNKNOWN, reason: 'нет ссылки на проверку этого репозитория' });
+        continue;
+      }
+      let run = await cached('/repos/' + LAB + '/actions/runs/' + evidence.run);
+      let identity = run !== UNKNOWN && String(run?.id) === evidence.run;
+      // FINISH historically cites PR checks. Confirm the same workflow's latest
+      // completed main run, never substitute an unrelated green workflow.
+      if (identity && run.head_branch !== 'main' && Number.isSafeInteger(run.workflow_id)) {
+        const workflow = run.workflow_id;
+        const main = await cached('/repos/' + LAB + '/actions/workflows/' + workflow +
+          '/runs?branch=main&status=completed&per_page=1');
+        run = main === UNKNOWN ? UNKNOWN : main.workflow_runs?.[0];
+        identity = run?.workflow_id === workflow && Number.isSafeInteger(run.id);
+      }
+      const confirmed = run !== UNKNOWN && identity &&
+        run.head_branch === 'main' && run.event !== 'pull_request' &&
+        run.status === 'completed' && run.conclusion === 'success';
+      if (confirmed) {
+        ready.push(id);
+        proofs[id] = LINK + LAB + '/actions/runs/' + run.id;
+      }
+      else pending.push({ id, value: 'не подтверждено', reason: run === UNKNOWN ?
+        'GitHub недоступен: ' + evidence.url : 'нет успешного завершённого прогона main: ' + evidence.url });
+    }
+  }
+  await check(primary);
+  // Stage 2 is shown only after the entire first stage is confirmed on main.
+  if (!pending.length) {
+    const secondary = finishTableStatus(stageTwo);
+    if (!secondary?.length) return UNKNOWN;
+    await check(secondary);
+  }
+  return { ready, pending, proofs };
 }
 
 async function lastBotGameStates() {
@@ -346,7 +401,8 @@ function render(data, cap = 99) {
   md.push('## ФИНИШ');
   if (data.finish === UNKNOWN) md.push(UNKNOWN);
   else {
-    md.push('готовы: ' + (data.finish.ready.join(', ') || 'ничего'));
+    md.push('готовы: ' + (data.finish.ready.map(id =>
+      id + ' ([main](' + data.finish.proofs[id] + '))').join(', ') || 'ничего'));
     md.push(...data.finish.pending.map(x =>
       x.id + ' — ' + x.value + (x.reason ? ': ' + shortLine(x.reason, 130) : '')));
   }
@@ -397,7 +453,7 @@ export async function build() {
     checked: { lab: labChecked || UNKNOWN, mg: mgChecked || UNKNOWN },
     run: process.env.STATUS_RUN_URL || UNKNOWN,
     review: { protected: prData.protectedItems, redLab, redMg, sliyanie: sl, stalled: st },
-    finish: finishSummary(json('progress.json')),
+    finish: await finishSummary(read('rules/09-platforma/FINISH.md'), read('rules/09-platforma/FINISH_2.md')),
     pr: prData,
     changes: { lab: normalizeChanges(changeLab), mg: normalizeChanges(changeMg) },
     games,

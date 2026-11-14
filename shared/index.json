@@ -173,7 +173,7 @@
       "title": "PixelFX — fire, explosion and lightning",
       "kind": "vfx",
       "registry": "third-party-mit",
-      "entry": "src/core/index.js",
+      "entry": "entry.js",
       "exports": [
         "createFrame",
         "clearFrame",
@@ -277,17 +277,17 @@
             "git_blob_sha": "252bdc884409f10453f6b2c4a7d39459300a3086"
           }
         ],
-        "license_git_blob_sha": "74eff5d22b4195a2b1690d1c769fd5f2537e7cf6"
+        "license_git_blob_sha": "74eff5d22b4195a2b1690d1c769fd5f2537e7cf6",
+        "adapter_blob_sha": "de38c3f60077501681e2fa1035a9f873bdc64f05"
       },
       "license": "MIT",
       "license_file": "LICENSE",
       "license_evidence": "https://github.com/patch-gg/pixelfx/blob/5294518ce7c72e48b6100a744596e0acf57f2826/LICENSE",
       "attribution": "Copyright (c) 2026 Patch; Copyright (c) 2026 Hugo Duprez; MIT license retained",
       "restrictions": "No Patch trademarks, Patch Pixel font, model weights, third-party media or platform content",
-      "used_by": [
-        "demos/patch-pixelfx"
-      ],
-      "ads": false
+      "used_by": [],
+      "ads": false,
+      "demo_path": "demos/patch-pixelfx/"
     },
     {
       "id": "three-worlds-combat-facing",

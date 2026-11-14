@@ -171,6 +171,21 @@
       "sha256": "47a264a951ca2d1da7e96ebb44bf0469443a68942ebac0a258af9eeb72477d84"
     },
     {
+      "id": "0db0a8da76d3f5e2f7ec2306",
+      "game": "rainbow-acceleration",
+      "kind": "solution",
+      "name": "inline-script@3013",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/rainbow-acceleration/index.html",
+      "lines": [
+        35,
+        667
+      ],
+      "sha256": "9086365c33fa2a548594da70a3654c57272c83897fda7ff9006f7b1e5957dfd2"
+    },
+    {
       "id": "0e06894bf49c9609a269dd96",
       "game": "rainbow-acceleration",
       "kind": "solution",
@@ -319,21 +334,6 @@
         164
       ],
       "sha256": "dbab38efe01e67bf28ed68cfa409fdffc276f00faa5e39292f3d2575f87413b2"
-    },
-    {
-      "id": "327297bdede140560c02d79d",
-      "game": "rainbow-acceleration",
-      "kind": "solution",
-      "name": "inline-script@3013",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/rainbow-acceleration/index.html",
-      "lines": [
-        35,
-        665
-      ],
-      "sha256": "1d7a9d1661c27addc0ec75dff512b1f93e85e45d29455d14167652d46b0b57fe"
     },
     {
       "id": "42d3439ffebfec7c9ec26ce2",

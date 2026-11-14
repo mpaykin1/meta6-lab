@@ -4,7 +4,7 @@ name: ZADACHI watch
 # ChatGPT этот файл и scripts/zadachi/ не меняет.
 on:
   schedule:
-    - cron: '11,41 * * * *'
+    - cron: '11 * * * *'
   push:
     branches: [main]
     paths: ['ZADACHI.md']

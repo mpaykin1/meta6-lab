@@ -826,46 +826,170 @@ const SHPILI_PLUS=(()=>{
    };
  }
 
- // Мост между разбитыми вратами: 28 разноуровневых осколков, руны и волна по дугам.
+ // Разрушенный акведук над зеркальной водой: узнаваемые арки, опоры и рваные парапеты.
+ // Главная форма — живописный силуэт из эталонного mk()/archMat(), не светящиеся кольца.
  {
-   const id='gate-bridge',g=newGroup(id,12,12,-40);
-   aura(g,21,0x984678,.33);
-   const stones=[];
-   const R=rng(533);
-   for(let i=0;i<28;i++){
-     const x=(i-13.5)*.67, y=Math.sin(i*.33)*.43+Math.sin(i*.77)*.25;
-     const st=new T.Group();st.position.set(x,y,0);g.add(st);
-     const block=mesh(st,new T.DodecahedronGeometry(.38+R()*.28,0),
-       i%5===0?0x697e96:0x18334f,[0,0,0]);block.scale.set(1.15,.45,1.8);
-     beam(st,[-.17,-.14,.4],[.17,.13,-.3],.025,0xc885a9,.7);
-     if(i%3===0)ring(st,.35,0xe27ca5,[0,.3,.2],.35);
-     stones.push(st);
-   }
-   const pylons=[];
-   for(const s of [-1,1]){
-     const column=new T.Group();column.position.set(s*10,0,-.7);g.add(column);pylons.push(column);
-     for(let j=0;j<6;j++)spike(column,.6,2,0x29455c,[Math.sin(j)*.8,j*1.7,0],s*.12+j*.1);
-     ring(column,2.1,0xff7aaa,[0,8,0],.65);
-   }
-   const wave=banners(g,12,7,0xf2a5cc,817);
-   own[id].tick=(t)=>{
-     // Цепная волна проходит вдоль 28 осколков с задержкой по фазе.
-     // Весь мост дышит, опоры склоняются мягко, без скачков и телепортации.
-     g.position.y=12+.36*Math.sin(t*.73);
-     g.rotation.z=.055*Math.sin(t*.84);
-     g.scale.setScalar(1+.085*Math.sin(t*1.12));
-     for(let i=0;i<stones.length;i++){
-       stones[i].position.y=Math.sin(i*.33)*.43+Math.sin(i*.77)*.25+
-         .92*Math.sin(t*1.55-i*.24);
-       stones[i].position.z=.25*Math.cos(t*1.12-i*.19);
-       stones[i].rotation.z=.22*Math.sin(t*.96-i*.28);
-       stones[i].scale.setScalar(.96+.13*Math.sin(t*1.28-i*.21));
+   const id='gate-bridge',g=newGroup(id,12,12,-40),R=rng(533);
+   const texture=mk(1536,660,(ctx,w,h)=>{
+     const stone=S(32),edge=S(76),shadow=S(14),pale=S(105);
+     // Broken upper parapet and lower wedge buttresses, including irregular open ends.
+     ctx.beginPath();ctx.moveTo(52,277);
+     for(let x=52;x<w-54;){
+       const step=14+R()*24;
+       const cracked=R()<.16;
+       ctx.lineTo(x,258+R()*17+(cracked?30:0));
+       if(R()<.24){ctx.lineTo(x+5,210-R()*46);ctx.lineTo(x+10,256);}
+       x+=step;
      }
-     for(let i=0;i<pylons.length;i++){
-       pylons[i].rotation.z=.07*Math.sin(t*.9+i*2.2);
-       pylons[i].position.y=.23*Math.sin(t*1.15+i*1.4);
+     ctx.lineTo(w-54,284);ctx.lineTo(w-72,444);
+     for(let x=w-70;x>64;){
+       const crack=R();
+       ctx.lineTo(x,433+R()*23+(crack>.83?R()*53:0));
+       x-=17+R()*36;
      }
-     wave(t);
+     ctx.lineTo(56,427);ctx.closePath();ctx.fillStyle=stone;ctx.fill();
+     // Arches are OPEN holes cut out of the architecture; each pier remains connected.
+     const cuts=[[214,139,396],[458,138,405],[714,150,404],
+                 [982,130,403],[1270,156,392]];
+     for(const [cx,rad,bottom] of cuts){
+       const apex=307-R()*19,side=bottom+33;
+       ctx.globalCompositeOperation='destination-out';
+       ctx.beginPath();ctx.moveTo(cx-rad,side);
+       ctx.lineTo(cx-rad,apex+69);
+       ctx.quadraticCurveTo(cx-rad*.92,apex+18,cx,apex-59);
+       ctx.quadraticCurveTo(cx+rad*.89,apex+18,cx+rad,apex+70);
+       ctx.lineTo(cx+rad,side);ctx.closePath();ctx.fill();
+       ctx.globalCompositeOperation='source-over';
+       // Stone ribs on each exposed arch contour.
+       ctx.strokeStyle=edge;ctx.lineWidth=10+R()*5;
+       ctx.beginPath();ctx.moveTo(cx-rad,side);
+       ctx.lineTo(cx-rad,apex+69);
+       ctx.quadraticCurveTo(cx-rad*.92,apex+18,cx,apex-59);
+       ctx.quadraticCurveTo(cx+rad*.89,apex+18,cx+rad,apex+70);
+       ctx.lineTo(cx+rad,side);ctx.stroke();
+       ctx.strokeStyle=shadow;ctx.lineWidth=4;
+       ctx.beginPath();ctx.moveTo(cx-rad+11,side);
+       ctx.lineTo(cx-rad+11,apex+71);
+       ctx.quadraticCurveTo(cx,apex-33,cx+rad-10,apex+73);
+       ctx.lineTo(cx+rad-10,side);ctx.stroke();
+     }
+     // Staggered courses of engraved masonry and fractured mortar lines.
+     ctx.save();
+     for(let row=0;row<16;row++){
+       const y=280+row*10;
+       const seam=R()*60;
+       for(let x=38+seam;x<w-28;){
+         const len=28+R()*64;
+         ctx.strokeStyle=R()<.19?pale:row%3===0?shadow:edge;
+         ctx.globalAlpha=.22+R()*.43;
+         ctx.lineWidth=.9+R()*2;
+         ctx.beginPath();ctx.moveTo(x,y);
+         ctx.lineTo(x+len*(.7+R()*.3),y+R()*3-1.5);
+         ctx.moveTo(x,y-3);ctx.lineTo(x+(R()-.5)*9,y+6+R()*5);
+         ctx.stroke();x+=len+4+R()*8;
+       }
+     }
+     // Teeth broken away from old crown; deliberately non-repeating.
+     ctx.globalAlpha=1;
+     for(let i=0;i<27;i++){
+       const x=50+R()*(w-100),y=277+R()*5;
+       const ht=10+R()*31;
+       ctx.fillStyle=i%3===0?shadow:stone;
+       ctx.beginPath();ctx.moveTo(x-8,y);
+       ctx.lineTo(x-4,y-ht*.7);ctx.lineTo(x+R()*8,y-ht);
+       ctx.lineTo(x+9,y-ht*.4);ctx.lineTo(x+13,y);
+       ctx.fill();
+     }
+     // Deep vertical fractures, missing masonry, glancing rim details.
+     for(let i=0;i<105;i++){
+       const x=45+R()*(w-90),y=280+R()*145,dx=(R()-.5)*22;
+       ctx.strokeStyle=i%4===0?pale:shadow;ctx.lineWidth=.8+R()*2.6;
+       ctx.globalAlpha=.19+R()*.56;
+       ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+dx,y+8+R()*25);
+       ctx.lineTo(x+dx+(R()-.5)*13,y+28+R()*30);ctx.stroke();
+     }
+     ctx.restore();
+     // Gothic hollow windows in the two abutments, sparse blue torchlights.
+     const lights=[];
+     for(const x of [83,355,593,862,1121,1450]){
+       if(x>1140&&R()<.4)continue;
+       ctx.fillStyle=shadow;
+       ctx.beginPath();ctx.moveTo(x-11,316);ctx.lineTo(x-11,345);
+       ctx.quadraticCurveTo(x,299,x+11,315);ctx.lineTo(x+11,345);ctx.closePath();ctx.fill();
+       lights.push([x-2,323,4,14]);
+     }
+     lit(ctx,lights);
+     // Black shattered support roots continue beneath arch height.
+     for(const x of [57,354,591,865,1114,1457]){
+       const d=8+R()*22;
+       ctx.fillStyle=shadow;ctx.beginPath();ctx.moveTo(x-d,420);
+       ctx.lineTo(x+17,418);ctx.lineTo(x+21+R()*11,484+R()*34);
+       ctx.lineTo(x+R()*19-10,522+R()*65);
+       ctx.lineTo(x-12,462);ctx.closePath();ctx.fill();
+     }
+   });
+   const wall=plane(39,21,archMat(texture,.12,{base:.92,
+     light:0x8bcadd,amp:.48,sway:.04}),0,0,0,g);
+   wall.material.uniforms.uHgt.value=21;
+   // Heavy abutments and narrow broken balustrades add genuine 3D thickness.
+   const piers=[];
+   for(const side of [-1,1]){
+     const x=side*18.45;
+     const p=new T.Group();p.position.set(x,-2.1,-.55);g.add(p);piers.push(p);
+     mesh(p,new T.BoxGeometry(1.9,8,2.4),0x10283b,[0,-1.7,0]);
+     for(let i=0;i<6;i++){
+       const y=-4.6+i*1.24;
+       const st=mesh(p,new T.BoxGeometry(2.08,.12,2.55),
+         i%3?0x315068:0x6c8898,[0,y,0]);
+       st.rotation.z=.012*Math.sin(i*2.6+side);
+     }
+     for(let j=0;j<5;j++){
+       const a=side*(.5+j*.21);
+       const m=mesh(p,new T.TetrahedronGeometry(.38+j*.09,0),
+         j%3?0x37516a:0x132c43,[a*.4,1.5+j*.51,.1]);
+       m.rotation.z=(j-2)*.23;
+     }
+   }
+   // Irregular detached voussoirs float in the breaks and respond as a slow wave.
+   const rubble=[];
+   for(let i=0;i<21;i++){
+     const x=(i-10)*1.76+.42*(R()-.5),y=.35+R()*3.2,z=.45+R()*1.4;
+     const pivot=new T.Group();pivot.position.set(x,y,z);g.add(pivot);
+     const a=mesh(pivot,new T.TetrahedronGeometry(.14+R()*.27,0),
+       i%5===0?0x7395a3:i%2?0x233f55:0x122b42,[0,0,0]);
+     a.scale.set(1.1+R()*.6,.44+R()*.8,.72+R()*.55);
+     a.rotation.z=R()*3;
+     rubble.push({pivot,y,phase:i*.37+R()*2});
+   }
+   // Frayed cables and hanging chains, visible against the open arch voids.
+   const chain=[];
+   for(let k=0;k<5;k++){
+     const group=new T.Group();group.position.set(-15+k*7.5,-.9,1.1);g.add(group);
+     for(let j=0;j<6;j++){
+       const x=.1*Math.sin(j*.6+k),y=-j*.42;
+       beam(group,[x,y,0],[x+.06,y-.45,-.02],.018,
+         j%2?0x9cb6b9:0x466778,.64);
+       if(j%3===0){
+         const shard=mesh(group,new T.TetrahedronGeometry(.18+.05*j,0),
+           0x48748b,[x+.02,y-.43,.03],.88);
+         shard.rotation.z=.48;
+       }
+     }chain.push(group);
+   }
+   const spray=banners(g,7,6,0x3f708c,817);
+   own[id].tick=t=>{
+     wall.position.y=.1*Math.sin(t*.64);
+     for(let i=0;i<rubble.length;i++){
+       const a=rubble[i],ph=t*.72-a.phase;
+       a.pivot.position.y=a.y+.33*Math.sin(ph);
+       a.pivot.rotation.z=.18*Math.sin(ph-.3);
+     }
+     for(let i=0;i<chain.length;i++){
+       chain[i].rotation.z=.045*Math.sin(t*.78-i*.49);
+       chain[i].rotation.y=.034*Math.cos(t*.59-i*.38);
+     }
+     for(let i=0;i<piers.length;i++)piers[i].rotation.z=.004*Math.sin(t*.43+i*2.5);
+     spray(t);
    };
  }
  // Спутник: крылатый страж из каменных створок, а не сфера с обручами.

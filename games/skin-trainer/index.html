@@ -238,7 +238,7 @@ let lastMX=0,lastMY=0;
 cv.addEventListener('pointermove',e=>{
   if(e.pointerId===moveId){let dx=e.clientX-mx0,dy=e.clientY-my0;const l=Math.hypot(dx,dy),M=50;
     if(l>M){dx*=M/l;dy*=M/l;}
-    feedHint('L',Math.hypot(dx/M-mvx,dy/M-mvy)*40);
+    // Left tutorial progress is credited only after hero coordinates change.
     mvx=dx/M;mvy=dy/M;joyK.style.transform=`translate(${dx}px,${dy}px)`;}
   else if(e.pointerId===camId){const dx=e.clientX-cx,dy=e.clientY-cy;cx=e.clientX;cy=e.clientY;
     yawT-=dx*.006;pitchT=Math.max(-.1,Math.min(1.1,pitchT+dy*.004));feedHint('R',Math.hypot(dx,dy));}

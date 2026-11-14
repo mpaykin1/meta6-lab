@@ -54,3 +54,9 @@
 
 | 2. Синхронизация с main после бюджета API | merge-кандидат: сохранены GraphQL openPulls, обработка 403/429 и маршрутизация красных типов без отключения проверок; новый Actions HEAD требуется | [#301](https://github.com/mpaykin1/meta6-lab/pull/301), [#316](https://github.com/mpaykin1/meta6-lab/pull/316), [#317](https://github.com/mpaykin1/meta6-lab/pull/317) | 2026-11-14T06:04:42.332Z |
 | 2. Исправление проверки GraphQL маршрутизации | подготовлено: индекс GraphQL openNumbers/openPrs и 4 мутации против closed/duplicates/truncation/hardcode; требуются Actions нового SHA | [FAIL MG Dispatcher](https://github.com/mpaykin1/meta6-lab/actions/runs/43564622036), [#301](https://github.com/mpaykin1/meta6-lab/pull/301) | 2026-11-14T06:09:04.428Z |
+
+## Продолжение 14.11.2026
+
+| Шаг | Статус | Доказательство | UTC |
+|---|---|---|---|
+| 2. Merge main в #301 | Совмещены исходные и новые строки трёх общих файлов; Actions актуального HEAD не проверены | [#301](https://github.com/mpaykin1/meta6-lab/pull/301), main `1aa6223536b4` | 2026-11-14T09:06:42.648Z |

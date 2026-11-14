@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-14T03:32:39.752Z | МГЛ: 898d7eef5582c5451207d3e34223fca5513be30b | МГ: 7ae9604d0dfc969116895cd06bf11b4c3cdf15ff | https://github.com/mpaykin1/meta6-lab/actions/runs/43552125803
+UTC: 2026-11-14T03:39:22.435Z | МГЛ: 108291e56d6fac2d9066c7103c15399a1904e182 | МГ: 7ae9604d0dfc969116895cd06bf11b4c3cdf15ff | https://github.com/mpaykin1/meta6-lab/actions/runs/43552703320
 ## ПРОВЕРИТЬ CLAUDE
 - PR #296 1d385b135f0fd52a35d6b2df6503f5f6eacf171a: automation/asset-check/test_htmlpack.py
 - PR #293 1ec3046bbe0972e316d92ec3846b542af0883716: automation/asset-check/test_kinds.py
@@ -47,14 +47,14 @@ P1 — нет данных: нет данных
 Э1 — нет данных: нет данных
 Э2 — нет данных: нет данных
 ## PR МГЛ
-открыто: 47 | конфликт: нет данных | слито: 36 | закрыто: 76
+открыто: 48 | конфликт: нет данных | слито: 36 | закрыто: 76
 #307 Остров аптекаря: 3 этапа для META BOT | fb4cf4f5bce602dee82910ea066637feb7418c6d
 #304 Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У  | af6238c7237cd129f58a2d66826b8405e9376f05
 #298 Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА | 4e17483f42baf5300da95c840962218958994b71
 #296 feat(asset-check): HTMLPACK visual quality bot + Tumannye Sh | 1d385b135f0fd52a35d6b2df6503f5f6eacf171a
 ещё 32: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2051 коммитов | нет данных
+МГЛ: 2057 коммитов | нет данных
 МГ: 9 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:4
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

@@ -73,4 +73,5 @@ for(const [name,before,after] of baseMutants){
  try{baseSuite(m.baseGameExists)}catch{caught=true}
  assert.ok(caught,'base-probe mutation escaped: '+name);
 }
+console.log('PASS: source-only alternative gate with four regression mutants');
 console.log('PASS: source-only gate and 8 genuine mutants');

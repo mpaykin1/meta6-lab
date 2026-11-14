@@ -53,3 +53,81 @@ test('мутация: регрессия прежней M1 ловушки отм
  assert.equal(isRepeatJournalError('M4: вставка run_bot сломалась существующая мутация M1'),true);
  assert.equal(isRepeatJournalError('Обычное исправление интерфейса без регрессии'),false);
 });
+
+// Проверяем реальные функции обеих очередей и испорченные копии их исходников.
+import fs from 'node:fs/promises';
+import {listOpenPullRequests} from '../dispetcher/build.mjs';
+import {allPages} from './build.mjs';
+
+const paginationItem = number => ({number,state:'open',head:{sha:'sha-'+number,ref:'lab/'+number}});
+async function checkPagination(load) {
+  const seen=[];
+  const items=await load(async endpoint=>{
+    const params=new URL(endpoint,'https://api.github.com').searchParams;
+    assert.equal(params.get('per_page'),'100');
+    const page=Number(params.get('page'));
+    seen.push(page);
+    assert.ok(seen.length<=24,'повтор страницы');
+    return page<=23 ? [paginationItem(page)] : [];
+  });
+  assert.equal(items.length,23);
+  assert.deepEqual(seen,Array.from({length:24},(_,i)=>i+1));
+  for (const status of [403,429]) {
+    await assert.rejects(()=>load(async endpoint=>{
+      const page=new URL(endpoint,'https://api.github.com').searchParams.get('page');
+      if(page==='1')return [paginationItem(17)];
+      throw Error('HTTP '+status);
+    }),new RegExp('нет данных.*'+status));
+  }
+  await assert.rejects(()=>load(async()=>null),/нет данных/);
+}
+
+for (const [name,path,wrap] of [
+  ['dispatcher','../dispetcher/build.mjs',module=>async request=>
+    [...(await module.listOpenPullRequests(request)).values()]],
+  ['karta','./build.mjs',module=>request=>module.allPages('/pulls?state=all',undefined,request)]
+]) {
+  test(name+': все страницы до пустой; 403/429/null не являются пустым списком',async()=>{
+    await checkPagination(wrap({listOpenPullRequests,allPages}));
+    const source=await fs.readFile(new URL(path,import.meta.url),'utf8');
+    const mutations=[
+      ['только первая страница',source.replace(/(?:batch|chunk)\.length\s*===\s*0/,'page >= 1')],
+      ['ошибка API как пустая страница',source.replace(
+        /throw (?:new )?Error\('GitHub API[^\n]*error\.message\);/,
+        name==='dispatcher' ? 'return result;' : 'return items;')],
+      ['обман: всегда page=1',source.replace(/page='\s*\+\s*page/,"page=' + 1")]
+    ];
+    for (const [label,changed] of mutations) {
+      assert.notEqual(changed,source,'мутация должна изменить код: '+label);
+      const module=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+      await assert.rejects(()=>checkPagination(wrap(module)),undefined,label);
+    }
+  });
+}
+
+async function checkEscalation(route) {
+  const body='КАРТА СИЛ: CHAT FAIL #1 https://github.com/x\n'+
+    'КАРТА СИЛ: CHAT FAIL #2 https://github.com/y';
+  for (const zone of ['зелёная','жёлтая','красная']) {
+    const map={schema:1,status:'полная',prs:[{number:11,type:'game_fix',changedFiles:1}],
+      metrics:[{type:'game_fix',actor:'автозадача',zone}]};
+    assert.equal(route({id:11,body},map).target,'claude');
+    assert.equal(route({id:11,body:'НУЖЕН CLAUDE'},map).target,'claude');
+  }
+  assert.equal(route({id:11,body},null).target,'claude');
+}
+test('две неудачи чата имеют приоритет над зелёной картой и отсутствием данных',async()=>{
+  await checkEscalation(routeFor);
+  const source=await fs.readFile(new URL('./route.mjs',import.meta.url),'utf8');
+  const mutants=[
+    source.replace('failures >= 2','failures >= 3'),
+    source.replace("target:'claude'","target:'auto'"),
+    source.replace('  const reports =',
+      "  if(map?.metrics?.[0]?.zone === 'зелёная') return {target:'auto'};\n  const reports =")
+  ];
+  for(const changed of mutants){
+    assert.notEqual(changed,source);
+    const module=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    await assert.rejects(()=>checkEscalation(module.routeFor));
+  }
+});

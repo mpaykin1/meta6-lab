@@ -5,15 +5,17 @@ const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-d
 async function api(path){const r=await fetch(root+path,{headers});if(!r.ok)throw Error(path+': '+r.status);return r.json();}
 export async function listOpenPullRequests(request = api) {
  const result = new Map();
- for(let page=1;page<=20;page++){
-  const batch=await request('/pulls?state=open&per_page=100&page='+page);
+ for(let page=1;;page++){
+  let batch;
+  try { batch=await request('/pulls?state=open&per_page=100&page='+page); }
+  catch(error) { throw Error('GitHub API open PRs: нет данных: '+error.message); }
   if(!Array.isArray(batch))throw Error('GitHub API open PRs: нет данных');
   for(const pr of batch){
    if(!Number.isInteger(pr.number)||pr.state!=='open'||!pr.head?.sha||!pr.head?.ref||
       result.has(pr.number))throw Error('GitHub API open PRs: неполные данные');
    result.set(pr.number,pr);
   }
-  if(batch.length<100)return result;
+  if(batch.length===0)return result;
  }
  throw Error('GitHub API open PRs: неполная пагинация');
 }

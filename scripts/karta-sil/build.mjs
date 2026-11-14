@@ -30,15 +30,21 @@ async function api(endpoint) {
   return value;
 }
 
-async function allPages(endpoint, key) {
+export async function allPages(endpoint, key, request = api) {
   let items = [];
-  for (let page = 1; page <= 20; page++) {
+  const seen = new Set();
+  for (let page = 1; ; page++) {
     const sep = endpoint.includes('?') ? '&' : '?';
-    const value = await api(endpoint + sep + 'per_page=100&page=' + page);
+    let value;
+    try { value = await request(endpoint + sep + 'per_page=100&page=' + page); }
+    catch (error) { throw new Error('GitHub API: нет данных: ' + error.message); }
     const chunk = key ? value?.[key] : value;
     if (!Array.isArray(chunk)) throw new Error('GitHub API: нет данных (' + endpoint + ')');
+    if (chunk.length === 0) return items;
+    const signature = JSON.stringify(chunk);
+    if (seen.has(signature)) throw new Error('GitHub API: неполные данные, повтор страницы');
+    seen.add(signature);
     items = items.concat(chunk);
-    if (chunk.length < 100) return items;
   }
   throw new Error('GitHub API: pagination incomplete (' + endpoint + ')');
 }

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-13T19:06:26.872Z",
+  "generated_at": "2026-11-14T03:12:10.908Z",
   "sha": {
-    "lab": "3204c85ac9139a4630dea06b73069590cd053584",
-    "mg": "1bea203fb63d7c27c29a5643e2f38e4554a658c1"
+    "lab": "6934748d4cd1fd41376f8def37fbec2e04fff559",
+    "mg": "7ae9604d0dfc969116895cd06bf11b4c3cdf15ff"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43550312390",
   "review": {
     "protected": [
       {
@@ -116,69 +116,65 @@
         ]
       },
       {
-        "number": 125,
-        "sha": "9f50910368238775bda40729722ec3512f14e623",
-        "paths": "нет данных"
-      },
-      {
-        "number": 232,
-        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98",
-        "paths": "нет данных"
-      },
-      {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": "нет данных"
-      },
-      {
-        "number": 126,
-        "sha": "7f5616591ca5baa37186d86621299d32c77230b1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
       },
       {
         "number": 236,
         "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": "нет данных"
-      },
-      {
-        "number": 229,
-        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
       },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 227,
         "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
-        "paths": "нет данных"
-      },
-      {
-        "number": 226,
-        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/status-dlya-claude.yml",
+          "scripts/status/selftest.mjs"
+        ]
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
       }
     ],
     "redLab": [],
@@ -203,7 +199,11 @@
       "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |",
       "| B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | свободно (зависло 5 ч, было: проходчик, PR #258 — проверка ложного MOVED после дрейфа) | 2026-11-13 08:14 UTC |",
       "| УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |",
-      "| B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | свободно (зависло 5 ч, было: чат ChatGPT, один PR одной игры) | 2026-11-13 11:31 UTC |"
+      "| B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | свободно (зависло 5 ч, было: чат ChatGPT, один PR одной игры) | 2026-11-13 11:31 UTC |",
+      "| CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | свободно (зависло 4 ч, было: ChatGPT (чат)) | 2026-11-13 18:55 UTC |",
+      "| STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | свободно (зависло 3 ч, было: чат ChatGPT) | 2026-11-13 19:07 UTC |",
+      "| LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:06 UTC |",
+      "| PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:17 UTC |"
     ]
   },
   "finish": {
@@ -352,11 +352,21 @@
     ]
   },
   "pr": {
-    "open": 42,
-    "conflicts": "нет данных",
-    "merged": 34,
+    "open": 48,
+    "conflicts": 26,
+    "merged": 36,
     "closed": 75,
     "mergedItems": [
+      {
+        "number": 307,
+        "title": "Остров аптекаря: 3 этапа для META BOT",
+        "sha": "fb4cf4f5bce602dee82910ea066637feb7418c6d"
+      },
+      {
+        "number": 304,
+        "title": "Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У ",
+        "sha": "af6238c7237cd129f58a2d66826b8405e9376f05"
+      },
       {
         "number": 298,
         "title": "Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА",
@@ -634,141 +644,137 @@
         ]
       },
       {
-        "number": 125,
-        "sha": "9f50910368238775bda40729722ec3512f14e623",
-        "paths": "нет данных"
-      },
-      {
-        "number": 232,
-        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98",
-        "paths": "нет данных"
-      },
-      {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": "нет данных"
-      },
-      {
-        "number": 126,
-        "sha": "7f5616591ca5baa37186d86621299d32c77230b1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
       },
       {
         "number": 236,
         "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": "нет данных"
-      },
-      {
-        "number": 229,
-        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
       },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 227,
         "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
-        "paths": "нет данных"
-      },
-      {
-        "number": 226,
-        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/status-dlya-claude.yml",
+          "scripts/status/selftest.mjs"
+        ]
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 1983,
+      "count": 2044,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 7,
-      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:2"
+      "count": 9,
+      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:4"
     }
   },
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "ostrov-aptekarya",
-      "bot": "нет данных",
+      "bot": "прошла",
       "storefront": "нет"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "нет данных",
+      "bot": "прошла",
       "storefront": "да"
     }
   ],

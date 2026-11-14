@@ -4,14 +4,14 @@ import {listOpenPullRequests} from '../build.mjs';
 
 const item=n=>({number:n,state:'open',head:{sha:'test-sha-'+n,ref:'lab/issue-'+n}});
 
-test('повтор №1110: открытые PR выбираются одним запросом, закрытые не обходятся',async()=>{
+test('повтор №1110: открытые PR выбираются до пустой страницы, закрытые не обходятся',async()=>{
  let calls=0;
  const open=await listOpenPullRequests(async endpoint=>{
   calls++;
   assert.match(endpoint,/state=open/);
-  return [item(301),item(303)];
+  return calls===1 ? [item(301),item(303)] : [];
  });
- assert.equal(calls,1);
+ assert.equal(calls,2);
  assert.equal(open.size,2);
  assert.equal(open.has(302),false);
 });
@@ -26,14 +26,15 @@ test('мутация: если первая страница полна, тре�
  const seen=[];
  const open=await listOpenPullRequests(async endpoint=>{
   seen.push(endpoint);
-  return seen.length===1 ? Array.from({length:100},(_,i)=>item(i+1)) : [item(101)];
+  return seen.length===1 ? Array.from({length:100},(_,i)=>item(i+1)) : seen.length===2 ? [item(101)] : [];
  });
- assert.deepEqual(seen.map(x=>new URLSearchParams(x.split('?')[1]).get('page')),['1','2']);
+ assert.deepEqual(seen.map(x=>new URLSearchParams(x.split('?')[1]).get('page')),['1','2','3']);
  assert.equal(open.size,101);
 });
 
 test('мутация-обман: список нельзя подменить одной захардкоженной карточкой',async()=>{
- const open=await listOpenPullRequests(async()=>[item(301),item(304)]);
+ let calls=0;
+ const open=await listOpenPullRequests(async()=>calls++===0 ? [item(301),item(304)] : []);
  assert.deepEqual([...open.keys()],[301,304]);
  await assert.rejects(()=>listOpenPullRequests(async()=>[item(301),item(301)]),/неполные данные/);
  await assert.rejects(()=>listOpenPullRequests(async()=>[item(301),{number:304,state:'open'}]),

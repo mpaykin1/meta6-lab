@@ -1,10 +1,8 @@
 // Original PixelFX modules below are byte-for-byte upstream MIT sources.
 // Scene, input, composition and game logic are original META GAMES glue.
-import {createFrame, clearFrame, createFx, composite} from
-  "../../shared/components/patch-pixelfx/src/core/index.js";
-import * as campfire from "../../shared/components/patch-pixelfx/src/fx/fire/campfire.js";
-import * as explosion from "../../shared/components/patch-pixelfx/src/fx/explosions/small-explosion.js";
-import * as lightning from "../../shared/components/patch-pixelfx/src/fx/lightning/lightning-strike.js";
+import {createFrame, clearFrame, createFx, composite, campfire,
+  smallExplosion as explosion, lightningStrike as lightning} from
+  "../../shared/components/patch-pixelfx/entry.js";
 
 const W = 640, H = 360;
 const canvas = document.querySelector("#world");

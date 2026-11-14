@@ -1,0 +1,109 @@
+{
+  "types": [
+    {
+      "id": "game_reference",
+      "label": "эталон игры",
+      "paths": [
+        "reference/"
+      ],
+      "words": [
+        "эталон",
+        "reference"
+      ]
+    },
+    {
+      "id": "game_fix",
+      "label": "правка игры",
+      "paths": [
+        "games/",
+        "meta-games/"
+      ],
+      "words": [
+        "game",
+        "игр",
+        "fix(archer",
+        "bot-hook"
+      ]
+    },
+    {
+      "id": "bot_check",
+      "label": "бот/проверка",
+      "paths": [
+        "scripts/meta-bot/",
+        "scripts/prohodchik/",
+        "automation/asset-check/"
+      ],
+      "words": [
+        "meta-bot",
+        "проверяющ",
+        "бот"
+      ]
+    },
+    {
+      "id": "workflow_ci",
+      "label": "workflow/CI",
+      "paths": [
+        ".github/workflows/"
+      ],
+      "words": [
+        "workflow",
+        "CI",
+        "actions"
+      ]
+    },
+    {
+      "id": "repo_clean",
+      "label": "уборка репозитория",
+      "paths": [
+        "scripts/lab/",
+        "scripts/storozha/"
+      ],
+      "words": [
+        "уборк",
+        "cleanup",
+        "sync"
+      ]
+    },
+    {
+      "id": "summary_dispatch",
+      "label": "сводка/диспетчер",
+      "paths": [
+        "scripts/dispetcher/",
+        "scripts/status/",
+        "automation/"
+      ],
+      "words": [
+        "dispatcher",
+        "диспетчер",
+        "сводк"
+      ]
+    },
+    {
+      "id": "assets",
+      "label": "ассеты",
+      "paths": [
+        "asset-packs/",
+        "shared/assets/"
+      ],
+      "words": [
+        "ассет",
+        "asset",
+        "skin"
+      ]
+    },
+    {
+      "id": "rules_docs",
+      "label": "правила/доки",
+      "paths": [
+        "rules/",
+        "docs/"
+      ],
+      "words": [
+        "правил",
+        "документ",
+        "lore",
+        "docs"
+      ]
+    }
+  ]
+}

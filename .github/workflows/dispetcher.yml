@@ -15,6 +15,7 @@ on:
       - '.github/workflows/sliyanie-status.yml'
       - 'automation/dispetcher/**'
       - 'automation/prompts/MG_PYAT_AVTOZADACH.md'
+      - 'automation/karta-sil.json'
 permissions:
   contents: write
   checks: read
@@ -49,7 +50,7 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           for attempt in 1 2 3 4 5; do
-            git add DISPETCHER.md
+            git add DISPETCHER.md TOLKNUT.md
             if git diff --cached --quiet; then exit 0; fi
             git commit -m 'chore: refresh dispatcher queue'
             if git push; then exit 0; fi

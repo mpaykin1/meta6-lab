@@ -40,3 +40,36 @@ test('three source mutations must fail, including fake empty data',async()=>{
   assert.ok(caught,'mutation escaped: '+name);
  }
 });
+
+test('GraphQL open-index mutations: closed, duplicate, third PR and forged two-card list',async()=>{
+ const {indexOpened}=await import('../build.mjs');
+ const a={number:3,state:'open',head:{sha:'a',ref:'lab/a'}};
+ const b={number:87,state:'open',head:{sha:'b',ref:'lab/b'}};
+ const c={number:5,state:'open',head:{sha:'c',ref:'lab/c'}};
+ const exercise=fn=>{
+  const {openNumbers,openPrs}=fn([a,b,c]);
+  assert.deepEqual([...openNumbers].sort((x,y)=>x-y),[3,5,87]);
+  assert.equal(openPrs.get(5).head.sha,'c');
+  assert.throws(()=>fn([a,{...b,state:'closed'},c]),/нет данных/);
+  assert.throws(()=>fn([a,a,c]),/нет данных/);
+  assert.throws(()=>fn([{...a,number:0},b,c]),/нет данных/);
+ };
+ exercise(indexOpened);
+ const source=await fs.readFile(new URL('../build.mjs',import.meta.url),'utf8');
+ const mutations=[
+  ['accept-closed',"pr.state!=='open'","false"],
+  ['allow-duplicate',"openPrs.has(pr.number)","false"],
+  ['truncate-index','const openNumbers=new Set(openPrs.keys());',
+   'const openNumbers=new Set([3,87]);'],
+  ['hardcode-two-card-demo','return {openNumbers,openPrs};',
+   'return {openNumbers:new Set([3,87]),openPrs:new Map(opened.slice(0,2).map(pr=>[pr.number,pr]))};']
+ ];
+ for(const [name,before,after] of mutations){
+  assert.ok(source.includes(before),'missing mutation anchor '+name);
+  const mod=await import('data:text/javascript;base64,'+
+   Buffer.from(source.replace(before,after)).toString('base64'));
+  let caught=false;
+  try{exercise(mod.indexOpened)}catch{caught=true}
+  assert.ok(caught,'mutation escaped: '+name);
+ }
+});

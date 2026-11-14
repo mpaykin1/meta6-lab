@@ -21,30 +21,30 @@
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->
-| #3 | lab/twilight-island-bot | shared/library/index.json | 2026-11-13 |
-| #191 | lab/sunken-city-reference-1109 | OSHIBKI.md, shared/library/index.json | 2026-11-13 |
-| #203 | lab/skin-rusty-robot | LAB_QUEUE.md, OSHIBKI.md, games/skin-trainer/index.html, rules/01-stil-i-grafika/SKINY.md | 2026-11-13 |
-| #218 | lab/remont-r1-library | shared/library/index.json | 2026-11-13 |
-| #220 | lab/zadachi-conflicts | OSHIBKI.md, automation/progress/USKORENIE.md | 2026-11-13 |
-| #225 | lab/render-broken-city-safe-1110 | OSHIBKI.md, SMENA.md, shared/library/index.json | 2026-11-13 |
-| #234 | lab/claude-adfree-catalog-1110 | AGENTS.md, scripts/storozha/core.mjs | 2026-11-13 |
-| #235 | lab/fix-mobile-screen-all-games-1111 | AGENTS.md | 2026-11-13 |
-| #245 | lab/remont-main-veil-terraces | OSHIBKI.md, shared/library/index.json | 2026-11-13 |
-| #247 | lab/kak-proveryayushchij-traps | OSHIBKI.md | 2026-11-13 |
-| #254 | lab/auditor-truthful-cycle-20261111 | OSHIBKI.md | 2026-11-13 |
-| #255 | lab/archer-meta-adfree-clean-1111 | OSHIBKI.md, shared/library/index.json | 2026-11-13 |
-| #260 | lab/uluchshatel-preflight-20261111 | OSHIBKI.md | 2026-11-13 |
-| #262 | lab/archer-retention-exp-1 | OSHIBKI.md | 2026-11-13 |
-| #272 | lab/uluchshatel-sumerki-copy-bot13-20261112 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-13 |
-| #277 | lab/storozha-nedelya | scripts/storozha/core.mjs | 2026-11-13 |
-| #283 | lab/ink-fallen-robot-20261113 | LINKS.txt, ink.md | 2026-11-13 |
-| #284 | lab/ink-fallen-guardian-reference-20261113 | reference/ink-fallen-guardian/index.html | 2026-11-13 |
-| #286 | lab/ink-fallen-guardian-recipe-20261113 | work-notes/ink-fallen-guardian-progress.md | 2026-11-13 |
-| #289 | lab/antisueta | DLYA_CLAUDE.md, OSHIBKI.md, ZADACHI.md, rules/09-platforma/ZANYATO.md | 2026-11-13 |
-| #290 | lab/bez-patternov-20261113 | OSHIBKI.md, ink.md | 2026-11-13 |
-| #291 | lab/polza-b2-broken-city-20261113 | shared/library/index.json | 2026-11-13 |
-| #297 | lab/ostrov-aptekarya-ii | games/ostrov-aptekarya/bot-adapter.js, games/ostrov-aptekarya/bot-strategy.mjs, games/ostrov-aptekarya/bot/playthrough.mjs, games/ostrov-aptekarya/dialogue.js, games/ostrov-aptekarya/game.js, shared/library/index.json, shared/library/ostrov-aptekarya.json | 2026-11-13 |
-| #303 | lab/asset-pack-shpili | ZADACHI.md, automation/asset-check/SPEC.md | 2026-11-13 |
+| #3 | lab/twilight-island-bot | shared/library/index.json | 2026-11-14 |
+| #191 | lab/sunken-city-reference-1109 | OSHIBKI.md, shared/library/index.json | 2026-11-14 |
+| #203 | lab/skin-rusty-robot | LAB_QUEUE.md, OSHIBKI.md, games/skin-trainer/index.html, rules/01-stil-i-grafika/SKINY.md | 2026-11-14 |
+| #218 | lab/remont-r1-library | shared/library/index.json | 2026-11-14 |
+| #220 | lab/zadachi-conflicts | OSHIBKI.md, automation/progress/USKORENIE.md | 2026-11-14 |
+| #225 | lab/render-broken-city-safe-1110 | OSHIBKI.md, SMENA.md, shared/library/index.json | 2026-11-14 |
+| #234 | lab/claude-adfree-catalog-1110 | AGENTS.md, scripts/storozha/core.mjs | 2026-11-14 |
+| #235 | lab/fix-mobile-screen-all-games-1111 | AGENTS.md | 2026-11-14 |
+| #245 | lab/remont-main-veil-terraces | OSHIBKI.md, shared/library/index.json | 2026-11-14 |
+| #247 | lab/kak-proveryayushchij-traps | OSHIBKI.md | 2026-11-14 |
+| #254 | lab/auditor-truthful-cycle-20261111 | OSHIBKI.md | 2026-11-14 |
+| #255 | lab/archer-meta-adfree-clean-1111 | OSHIBKI.md, shared/library/index.json | 2026-11-14 |
+| #260 | lab/uluchshatel-preflight-20261111 | OSHIBKI.md | 2026-11-14 |
+| #262 | lab/archer-retention-exp-1 | OSHIBKI.md | 2026-11-14 |
+| #272 | lab/uluchshatel-sumerki-copy-bot13-20261112 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-14 |
+| #277 | lab/storozha-nedelya | scripts/storozha/core.mjs | 2026-11-14 |
+| #283 | lab/ink-fallen-robot-20261113 | LINKS.txt, ink.md | 2026-11-14 |
+| #284 | lab/ink-fallen-guardian-reference-20261113 | reference/ink-fallen-guardian/index.html | 2026-11-14 |
+| #286 | lab/ink-fallen-guardian-recipe-20261113 | work-notes/ink-fallen-guardian-progress.md | 2026-11-14 |
+| #289 | lab/antisueta | DLYA_CLAUDE.md, OSHIBKI.md, ZADACHI.md, rules/09-platforma/ZANYATO.md | 2026-11-14 |
+| #290 | lab/bez-patternov-20261113 | OSHIBKI.md, ink.md | 2026-11-14 |
+| #291 | lab/polza-b2-broken-city-20261113 | shared/library/index.json | 2026-11-14 |
+| #297 | lab/ostrov-aptekarya-ii | games/ostrov-aptekarya/bot-adapter.js, games/ostrov-aptekarya/bot-strategy.mjs, games/ostrov-aptekarya/bot/playthrough.mjs, games/ostrov-aptekarya/dialogue.js, games/ostrov-aptekarya/game.js, shared/library/index.json, shared/library/ostrov-aptekarya.json | 2026-11-14 |
+| #303 | lab/asset-pack-shpili | ZADACHI.md, automation/asset-check/SPEC.md | 2026-11-14 |
 <!-- STOROZHA:CONFLICTS:END -->
 | #242 | lab/seo-claude-adfree-1111 | НУЖЕН CLAUDE: красные verify, bot, guard; SEO PR меняет claude-games/games/*/index.html (17 игр), а базовый PR #234 содержит несовпадение SHA256 защищённого pod-i-nad; не изменять эталон/охранник, проверить базовую ветку и CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117 | 2026-11-11 |
 | #245 | lab/remont-main-veil-terraces | НУЖЕН CLAUDE: игровая правка [PR #245](https://github.com/mpaykin1/meta6-lab/pull/245) прошла [META BOT на PR](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984334) и [focused 6/6](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984307), но на main PASS нет. После безопасного слияния актуального main в ремонтную ветку [13d85bb](https://github.com/mpaykin1/meta6-lab/commit/13d85bbf4e324cb01729c8a8464bf73364889a74) автоматический Library Machine **повторно** внёс посторонние `shared/library/index.json`, `shared/library/veil-terraces.json` коммитом [02ba0f5](https://github.com/mpaykin1/meta6-lab/commit/02ba0f5812afcae9467cdefa5cb7f3b381f6ee2f). Новый [META BOT](https://github.com/mpaykin1/meta6-lab/actions/runs/43018578169) имеет `action_required`, не PASS. STOROZHA [43012984349](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984349) дважды FAIL HTTP 403 GitHub API rate limit. Третья очистка бесполезна: машинная запись восстанавливает изменения, защищённые workflow/сторож не править. Нужны одобрение новых Actions (если доступно), устранение автоматического загрязнения PR и независимая проверка до squash; затем 2 PASS META BOT на main. | 2026-11-11 |

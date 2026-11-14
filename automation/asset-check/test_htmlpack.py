@@ -84,6 +84,15 @@ class HtmlPackTraps(unittest.TestCase):
         self.assertLess(wake, settle)
         self.assertLess(settle, freeze)
 
+    def test_HP10_petals_are_not_masked_by_other_explosion_effects(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        wake = harness.split("window.__AC_WAKE__=id=>", 1)[1].split("window.__AC_APPLY__=", 1)[0]
+        self.assertIn("if(id==='petals'){", wake)
+        self.assertIn("explode();", wake)
+        self.assertIn("puffs.visible=false;", wake)
+        self.assertIn("sparks.visible=false;", wake)
+        self.assertIn("flash=0;glitch=0;shake=0;", wake)
+
     def test_HP8_missing_favicon_not_a_fake_resource_failure(self):
         harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
         self.assertIn("if(pathname==='/favicon.ico'){response.statusCode=204;response.end();return;}", harness)

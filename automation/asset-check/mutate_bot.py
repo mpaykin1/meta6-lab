@@ -55,6 +55,10 @@ def run_tests(root: Path) -> bool:
 
 
 def main():
+    # A broken environment or pre-existing failing test cannot prove a mutation was caught.
+    if not run_tests(HERE):
+        print("BASELINE_FAILED: fix the unmodified test suite before mutation testing")
+        return 2
     escaped = []
     for f, needle, repl in MUTANTS:
         with tempfile.TemporaryDirectory() as t:

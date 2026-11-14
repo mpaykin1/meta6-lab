@@ -13,3 +13,6 @@
 | 7 | Утверждение в отчёте без ссылки на SHA/прогон/PR? | правило владельца | report-guard |
 | 8 | Удалена или переименована чужая работа, чтобы «просто собралось»? | OSHIBKI №15 (rsync --delete) | — нужна |
 | 9 | Если HTML имеет HTTP 200, все ли его same-origin JS/CSS/изображения/аудио тоже имеют HTTP 200? | OSHIBKI №1002, PR #246 | scripts/lab/mutate-page-assets.mjs (3 мутации + HTML200/JS404) |
+| 10 | Прежде чем засчитать убитых мутантов, прошёл ли исходный набор тестов? | bot-audit 14.11.2026 | automation/asset-check/test_mutation_runner.py: 3 обхода baseline |
+| 11 | Ремонт не пропускает недоступные файлы и не пишет через ссылку в предке? | bot-audit 14.11.2026 | scripts/repair-bot/mutate-repair-safety.mjs |
+| 12 | Размер распакованного ZIP и все имена проверены до первой записи? | bot-audit 14.11.2026 | automation/asset-check/test_zip_safety.py |

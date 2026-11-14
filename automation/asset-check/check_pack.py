@@ -25,6 +25,8 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import shutil
+import stat
 import sys
 import tempfile
 import zipfile
@@ -38,11 +40,47 @@ except ImportError:  # pragma: no cover
     print("Нужны pillow и numpy: pip install pillow numpy", file=sys.stderr)
     sys.exit(2)
 
-BOT_VERSION = "2.3.1"
+BOT_VERSION = "2.3.2"
 HERE = Path(__file__).resolve().parent
 BUDGET = {"pack_mb_soft": 8.0, "pack_mb_hard": 25.0, "files_soft": 120}
 DOC_FILES = {".md", ".txt"}
 MANIFEST_NAMES = ("pack.json", "atlas.json", "manifest.json", "skin.json")
+ZIP_MAX_BYTES = 100 * 1024 * 1024
+ZIP_MAX_FILES = 4096
+
+
+def extract_pack(archive: Path, target: Path) -> Path:
+    """Validate every ZIP member before writing anything, on Windows and POSIX alike."""
+    with zipfile.ZipFile(archive) as z:
+        members = z.infolist()
+        if len(members) > ZIP_MAX_FILES or sum(m.file_size for m in members) > ZIP_MAX_BYTES:
+            raise ValueError("ZIP exceeds extraction budget (100 MiB / 4096 entries)")
+        seen = set()
+        for member in members:
+            name = member.filename.replace("\\", "/")
+            parts = name.rstrip("/").split("/")
+            mode = member.external_attr >> 16
+            if (name.startswith("/") or any(p in ("", ".", "..") or ":" in p for p in parts)
+                    or any(p.endswith((" ", ".")) for p in parts)
+                    or stat.S_ISLNK(mode) or member.flag_bits & 1):
+                raise ValueError("Unsafe ZIP member: " + member.filename)
+            key = name.rstrip("/").casefold()
+            if key in seen:
+                raise ValueError("Duplicate ZIP destination: " + member.filename)
+            seen.add(key)
+        for member in members:
+            destination = target.joinpath(*member.filename.replace("\\", "/").rstrip("/").split("/"))
+            if member.is_dir() or member.filename.endswith("\\"):
+                destination.mkdir(parents=True, exist_ok=True)
+            else:
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                with z.open(member) as source, destination.open("xb") as output:
+                    shutil.copyfileobj(source, output)
+    subs = [p for p in target.iterdir() if p.is_dir()]
+    if (not any((target / n).exists() for n in MANIFEST_NAMES) and len(subs) == 1
+            and not any(p.is_file() for p in target.iterdir())):
+        return subs[0]
+    return target
 
 
 class Report:
@@ -194,32 +232,30 @@ def main(argv=None):
     ap.add_argument("--strict", action="store_true", help="SOFT тоже валит проверку")
     a = ap.parse_args(argv)
     src = Path(a.pack)
-    if src.suffix == ".zip":
-        tmp = tempfile.mkdtemp()
-        with zipfile.ZipFile(src) as z:
-            for n in z.namelist():
-                if n.startswith("/") or ".." in Path(n).parts:
-                    print("Опасный путь в ZIP:", n, file=sys.stderr)
-                    return 2
-            z.extractall(tmp)
-        src = Path(tmp)
-        subs = [p for p in src.iterdir() if p.is_dir()]
-        if not any((src / n).exists() for n in MANIFEST_NAMES) and len(subs) == 1 and \
-                not [p for p in src.iterdir() if p.is_file()]:
-            src = subs[0]
+    try:
+        if src.suffix.lower() == ".zip":
+            with tempfile.TemporaryDirectory(prefix="asset-check-") as tmp:
+                return report_pack(extract_pack(src, Path(tmp)), a.out, a.strict)
+        return report_pack(src, a.out, a.strict)
+    except (OSError, ValueError, zipfile.BadZipFile, RuntimeError) as error:
+        print("Pack could not be read:", error, file=sys.stderr)
+        return 2
+
+
+def report_pack(src: Path, out=None, strict=False):
     if not src.is_dir():
         print("Нет папки пака:", src, file=sys.stderr)
         return 2
     r = check(src)
     md = to_markdown(r)
     js = {"score": r.score(), "hard": len(r.hard()), "kinds": r.kinds, "items": r.items, "stats": r.stats}
-    if a.out:
-        o = Path(a.out)
+    if out:
+        o = Path(out)
         o.mkdir(parents=True, exist_ok=True)
         (o / "REPORT.md").write_text(md, "utf-8")
         (o / "report.json").write_text(json.dumps(js, ensure_ascii=False, indent=1), "utf-8")
     print(md)
-    if r.hard() or (a.strict and r.items):
+    if r.hard() or (strict and r.items):
         return 1
     return 0
 

@@ -1105,30 +1105,102 @@ const SHPILI_PLUS=(()=>{
      rune.opacity=.64+.22*bHit;
    };
  }
- // Предмет: световое ядро ускоряет восстановление удара героя при сближении.
+ // Сердце зеркальной воды: каменный реликварий с раскрывающимся кристаллом.
+ // Не набор орбитальных окружностей. Вблизи героя раскалывается броня, виден эффект.
  {
-   const id='mirror-seed',g=newGroup(id,3,43,-40),core=new T.Group();g.add(core);
-   aura(g,11,0x7bdbea,.44);
-   const prism=mesh(core,new T.OctahedronGeometry(1.2,1),0xb2f8f0,[0,0,0],.85);
-   const heart=ball(core,.65,0xff91bd,[0,0,.55]);
-   const circles=[];for(let i=0;i<4;i++){
-     const r=ring(core,1.65+i*.55,i%2?0x65aeca:0xff9fc4,[0,0,-.5-i*.17],.4);
-     circles.push(r);
+   const id='mirror-seed',g=newGroup(id,3,43,-40),relic=new T.Group();g.add(relic);
+   const R=rng(1512);
+   const shell=basic(0x19384e),ridge=basic(0x64899c),glass=basic(0x96d9d8,.92),
+         inner=basic(0xdab2c1,.78),shade=basic(0x0b2239);
+   const shape=(parent,pts,x,y,z,d,mat)=>{
+     const path=new T.Shape();
+     pts.forEach((p,j)=>j?path.lineTo(p[0],p[1]):path.moveTo(p[0],p[1]));
+     path.closePath();
+     const m=new T.Mesh(new T.ExtrudeGeometry(path,{steps:1,depth:d,bevelEnabled:true,
+       bevelThickness:.018,bevelSize:.017,bevelSegments:1,curveSegments:1}),mat);
+     m.position.set(x,y,z);parent.add(m);return m;
+   };
+   // Seed-shaped asymmetric crystallite, with a deep dark seam, not a glowing ball.
+   const seed=new T.Group();relic.add(seed);
+   const front=[[-.31,-1.23],[-.67,-.48],[-.55,.26],[-.17,.93],
+     [.02,1.6],[.37,.84],[.69,.11],[.52,-.88],[.13,-1.39]];
+   shape(seed,front,0,0,.34,.48,glass);
+   shape(seed,[[-.3,-.74],[-.37,.25],[-.02,1.24],[.22,.61],
+     [.11,-.12],[.36,-.64],[.08,-.86]],0,0,.82,.08,ridge);
+   shape(seed,[[.12,.73],[.02,1.43],[.3,.76],[.38,.14],
+     [.2,-.22]],0,0,.99,.05,inner);
+   shape(seed,[[-.18,-1],[-.08,-.44],[-.02,.19],[.13,.54],
+     [.06,-.44],[.18,-1.06]],0,0,1.08,.05,shade);
+   for(let i=0;i<7;i++){
+     const y=-.97+i*.3,x=i%2?-.44:.36;
+     const m=shape(seed,[[0,-.1],[.13,.04],[.03,.29],[-.12,.09]],
+       x,y,.92,.06,i%2?ridge:inner);
+     m.rotation.z=(i-3)*.28;
    }
-   const shards=[];for(let i=0;i<14;i++){
-     const a=i*2.399,r=2+(i%4)*.35;
-     shards.push(spike(g,.17,.65+(i%3)*.2,i%2?0x9dd9e1:0xe59cbc,
-       [Math.cos(a)*r,Math.sin(a)*r,-.3],a-.4));
+   // Gothic protective reliquary. Its fragmented ribs open on interaction.
+   const ribs=[];
+   for(const s of [-1,1]){
+     const outer=new T.Group();outer.position.set(s*.59,0,.05);relic.add(outer);
+     shape(outer,[[0,-1.6],[s*.62,-1.1],[s*.83,-.21],[s*.42,.63],
+       [s*.13,1.18],[s*.04,.42],[s*.34,-.3],[s*.11,-.9]],
+       0,0,-.36,.41,shell);
+     shape(outer,[[s*.14,-1.2],[s*.77,-.28],[s*.58,.38],
+       [s*.22,.91],[s*.35,.32],[s*.55,-.39]],
+       0,0,.08,.12,ridge);
+     for(let i=0;i<6;i++){
+       const pos=[s*(.3+.19*Math.sin(i)),.78-i*.36,.24];
+       const bone=mesh(outer,new T.TetrahedronGeometry(.19+i*.007,0),
+         i%2?0x3b6e85:0x9ab7bf,pos,.92);
+       bone.rotation.z=s*(i*.19+.2);
+     }
+     const jaw=new T.Group();jaw.position.set(s*.4,-1.24,.1);outer.add(jaw);
+     shape(jaw,[[0,-.13],[s*.53,-.48],[s*.42,-1.3],
+       [s*.12,-.97]],0,0,-.04,.2,shell);
+     shape(jaw,[[s*.24,-.63],[s*.4,-.92],[s*.19,-1.09]],
+       0,0,.14,.08,ridge);
+     ribs.push({outer,jaw,s});
    }
-   const boost=ring(g,3,0x97ffff,[0,0,.8],.05);
-   own[id].tick=(t)=>{
-     core.rotation.z=t*.16;prism.rotation.y=t*.35;heart.scale.setScalar(.8+.25*Math.sin(t*1.7));
-     for(let i=0;i<circles.length;i++)circles[i].rotation.y=Math.sin(t*.7+i)*.46;
-     for(let i=0;i<shards.length;i++)shards[i].rotation.z+=.002*Math.sin(t+i);
+   // Irregular hanging relic chains and branching roots (independent silhouettes).
+   const roots=[];
+   for(let i=0;i<11;i++){
+     const pivot=new T.Group();
+     pivot.position.set((i-5)*.23,-1.23,-.2-(i%3)*.1);relic.add(pivot);
+     const len=.73+R()*1.32,w=.07+R()*.08;
+     const p=shape(pivot,[[-w,.13],[w,.1],[w*1.5,-len*.45],
+       [w*.21,-len],[-w*1.6,-len*.77]],0,0,0,.085,
+       i%3===0?ridge:shell);
+     roots.push({pivot,phase:i*.33+R()});
+   }
+   const thorns=[];
+   for(let i=0;i<22;i++){
+     const phi=i*2.399,rad=1.7+(i%4)*.19;
+     const t=new T.Group();t.position.set(Math.cos(phi)*rad,Math.sin(phi)*rad*.8,
+       -.7-(i%3)*.11);g.add(t);
+     const m=shape(t,[[-.08,-.3],[.02,.45],[.23,.07],[.12,-.25]],
+       0,0,0,.06,i%5===0?inner:ridge);m.rotation.z=phi*.6;
+     thorns.push({node:t,phi,rad,phase:i*.4});
+   }
+   // Visible activation: armor spreads, crystal unfolds, the roots brighten near hero.
+   own[id].tick=t=>{
      const dx=hp.x-g.position.x,dy=hp.y-g.position.y;
-     const near=dx*dx+dy*dy<42;
-     boost.material.opacity=near?.9:.06;
-     boost.scale.setScalar(1+.2*Math.sin(t*4));
+     const near=dx*dx+dy*dy<42,open=near?1:0;
+     relic.rotation.y=.12*Math.sin(t*.39);
+     relic.position.y=.16*Math.sin(t*.77);
+     seed.rotation.z=.055*Math.sin(t*.7);
+     seed.rotation.y=.2*Math.sin(t*.48);
+     seed.scale.setScalar(1+.07*Math.sin(t*.94)+.16*open);
+     for(const r of ribs){
+       r.outer.rotation.z=r.s*(.08*Math.sin(t*.58+r.s*.4)+.25*open);
+       r.jaw.rotation.z=-r.s*(.07+.24*open+.06*Math.sin(t*.95-r.s));
+     }
+     for(const r of roots)
+       r.pivot.rotation.z=.12*Math.sin(t*.61-r.phase)*(.65+.35*open);
+     for(const a of thorns){
+       a.node.position.y=Math.sin(a.phi)*a.rad*.8+.11*Math.sin(t*.8-a.phase);
+       a.node.rotation.z=.13*Math.sin(t*.9-a.phase);
+       a.node.scale.setScalar(.86+.12*Math.sin(t*.7-a.phase)+.13*open);
+     }
+     glass.opacity=near?.99:.83;inner.opacity=near?.95:.58;
      if(near){slashCd=Math.min(slashCd,.24);speedFx=Math.max(speedFx,.45);}
    };
  }

@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-14T06:02:26.556Z | МГЛ: нет данных | МГ: нет данных | https://github.com/mpaykin1/meta6-lab/actions/runs/43564335945
+UTC: 2026-11-14T06:08:47.202Z | МГЛ: нет данных | МГ: нет данных | https://github.com/mpaykin1/meta6-lab/actions/runs/43564855779
 ## ПРОВЕРИТЬ CLAUDE
 - нет данных
 - МГЛ: нет данных
@@ -21,7 +21,7 @@ UTC: 2026-11-14T06:02:26.556Z | МГЛ: нет данных | МГ: нет да�
 - | L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |
 - | B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | свободно (зависло 5 ч, было: проходчик, PR #258 — проверка ложного MOVED после дрейфа) | 2026-11-13 08:14 UTC |
 - | УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |
-- ещё 5: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
+- ещё 4: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
 готовы: ничего
 M1 — нет данных: нет данных

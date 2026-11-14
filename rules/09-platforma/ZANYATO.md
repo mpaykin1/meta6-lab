@@ -18,6 +18,6 @@
 | УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |
 | B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | свободно (зависло 5 ч, было: чат ChatGPT, один PR одной игры) | 2026-11-13 11:31 UTC |
 | CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | свободно (зависло 4 ч, было: ChatGPT (чат)) | 2026-11-13 18:55 UTC |
-| STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | свободно (зависло 3 ч, было: чат ChatGPT) | 2026-11-13 19:07 UTC |
+| STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | чат ChatGPT — обновление #302 после API budget | 2026-11-14T06:08:21Z |
 | LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:06 UTC |
 | PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:17 UTC |

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T05:43:14.401Z",
+  "generated_at": "2026-11-14T05:44:23.240Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -923,7 +923,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/314",
       "taken_at": "2026-11-14 04:05",
       "last_commit_at": "2026-11-14 04:05",
-      "remaining": "Исправить красные проверки: library-machine"
+      "remaining": "Исправить красные проверки: library-machine, changed-games"
     },
     {
       "id": 54,
@@ -982,7 +982,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT, отдельный PR без ядра",
       "branch": "lab/karta-sil-api-budget-20261114",
-      "status": "конфликт",
+      "status": "в работе",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 316,
       "pr_state": "open",
@@ -991,7 +991,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/316",
       "taken_at": "2026-11-14T05:12:18Z",
       "last_commit_at": "2026-11-14 05:39",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Довести PR до зелёных проверок и слияния"
     },
     {
       "id": 58,

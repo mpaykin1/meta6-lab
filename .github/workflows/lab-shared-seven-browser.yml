@@ -1,7 +1,7 @@
 name: LAB Shared Seven Browser
 on:
   pull_request:
-    paths: ['shared/**','scripts/shared/**','.github/workflows/lab-shared-seven-browser.yml']
+    paths: ['shared/**','scripts/shared/**','demos/patch-pixelfx/**','.github/workflows/lab-shared-seven-browser.yml']
 permissions:
   contents: read
 jobs:
@@ -17,3 +17,4 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
       - run: node scripts/shared/verify-seven-browser.mjs
+      - run: node scripts/shared/verify-patch-game-browser.mjs

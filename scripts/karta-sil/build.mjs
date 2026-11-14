@@ -101,6 +101,8 @@ export function statusOf(pr, lastCommitTime, now = Date.now()) {
     throw new Error('PR state/commit: нет данных');
   }
   if (/НУЖЕН CLAUDE/i.test(pr.body || '')) return 'НУЖЕН CLAUDE';
+  // #309: отложенный draft не равен невыполненной работе и не портит долю слияний.
+  if (pr.draft === true) return 'отложено';
   return now - Date.parse(lastCommitTime) > 86400000 ? 'брошено' : 'активно';
 }
 
@@ -135,7 +137,7 @@ export function compute(prs, dictionary) {
       const failedRuns = list.map(x => x.failedBeforeGreen).filter(Number.isFinite);
       metrics.push({
         type, actor, total: list.length, merged, closed, abandoned, claude,
-        active: count('активно'), repeatedErrors: list.some(x => x.repeatedError),
+        active: count('активно'), deferred: count('отложено'), repeatedErrors: list.some(x => x.repeatedError),
         avgMergeHours: mergedDurations.length ? Number((mergedDurations.reduce((a,b)=>a+b,0) /
           mergedDurations.length).toFixed(1)) : null,
         failedBeforeGreen: failedRuns.length === list.length && list.length ?
@@ -217,12 +219,12 @@ function markdown(data) {
   const lines=['<!-- KARTA:AUTO BEGIN -->','## Статистика GitHub за 14 дней',
     'Источник: GitHub PR, коммиты, Actions, OSHIBKI.md. Нет выборки — «нет данных», а не зелёный.',
     '',
-    '| Тип | Исполнитель | Слито | Закрыто | Брошено | Claude | Ошибки | До слияния, ч | Красные прогоны | Зона |',
-    '|---|---|---:|---:|---:|---:|---:|---:|---:|---|'];
+    '| Тип | Исполнитель | Слито | Закрыто | Брошено | Отложено | Claude | Ошибки | До слияния, ч | Красные прогоны | Зона |',
+    '|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|'];
   for (const m of data.metrics) {
     if (!m.total) continue;
     lines.push('| '+m.type+' | '+m.actor+' | '+m.merged+' | '+m.closed+' | '+
-      m.abandoned+' | '+m.claude+' | '+m.newErrors+' | '+
+      m.abandoned+' | '+m.deferred+' | '+m.claude+' | '+m.newErrors+' | '+
       (m.avgMergeHours ?? 'нет данных')+' | '+
       (m.failedBeforeGreen ?? 'нет данных')+' | '+m.zone+' |');
   }

@@ -191,3 +191,41 @@ test('жёлтая карточка ограничена текущими фай
   assert.match(dispatcher,/changedFiles:pr\.changed_files/);
   assert.match(dispatcher,/Number\.isInteger\(pr\.changed_files\)/);
 });
+
+
+import {compute} from './build.mjs';
+
+async function verifyDeferredDrafts(status,aggregate) {
+  const now=Date.parse('2026-11-14T00:00:00Z'),last='2026-11-11T00:00:00Z';
+  const deferred={state:'open',draft:true,merged_at:null,body:'ЖДЁТ: Claude или замена'};
+  assert.equal(status(deferred,last,now),'отложено');
+  assert.equal(status({...deferred,body:'НУЖЕН CLAUDE: сверить эталон'},last,now),'НУЖЕН CLAUDE');
+  assert.equal(status({...deferred,draft:false},last,now),'брошено');
+  assert.equal(status({...deferred,state:'closed'},last,now),'закрыто');
+  const metrics=aggregate([{
+    type:'game_reference',actor:'автозадача',status:'отложено',
+    created_at:'2026-11-11T00:00:00Z',newErrors:0,repeatedError:false
+  }],dictionary);
+  const row=metrics.find(m=>m.type==='game_reference'&&m.actor==='автозадача');
+  assert.equal(row.deferred,1);
+  assert.equal(row.abandoned,0);
+  assert.equal(row.zone,'нет данных');
+}
+test('draft ожидающий решения не искажает красную статистику: четыре настоящие мутации',async()=>{
+  await verifyDeferredDrafts(statusOf,compute);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const key="if (pr.draft === true) return 'отложено';";
+  const mutants=[
+    source.replace(key,"if (false) return 'отложено';"),
+    source.replace(key,"if (pr.draft === true) return 'слито';"),
+    source.replace("  if (/НУЖЕН CLAUDE/i.test(pr.body || '')) return 'НУЖЕН CLAUDE';",
+      "  if (pr.draft === true) return 'отложено';\n  if (/НУЖЕН CLAUDE/i.test(pr.body || '')) return 'НУЖЕН CLAUDE';"),
+    source.replace("deferred: count('отложено')","deferred: 0")
+  ];
+  for(const [index,changed] of mutants.entries()){
+    assert.notEqual(changed,source,'мутация '+index+' не изменила код');
+    const module=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    await assert.rejects(()=>verifyDeferredDrafts(module.statusOf,module.compute),undefined,
+      'мутант '+index+' должен быть пойман');
+  }
+});

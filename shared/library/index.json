@@ -125661,21 +125661,6 @@
       ]
     },
     {
-      "id": "73eb5e18a45928c1acd5ac40",
-      "game": "twilight-isle-classic",
-      "kind": "solution",
-      "name": "inline-script@60327",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/twilight-isle-classic/index.html",
-      "sha256": "7b4b8457495ce3cf7c0511359e4586d37476d0e0d040ed41ed33d50e8dc97094",
-      "lines": [
-        448,
-        7163
-      ]
-    },
-    {
       "id": "7551dfc49b04a84099e770af",
       "game": "twilight-isle-classic",
       "kind": "solution",
@@ -126723,6 +126708,21 @@
       "lines": [
         1348,
         1352
+      ]
+    },
+    {
+      "id": "ad153c577c5343dce83f22e2",
+      "game": "twilight-isle-classic",
+      "kind": "solution",
+      "name": "inline-script@60327",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/twilight-isle-classic/index.html",
+      "sha256": "70aad75e03e40853d766a48392c1511f996b3a9a1851ffeb3df283ad3e94058f",
+      "lines": [
+        448,
+        7188
       ]
     },
     {

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-14T19:28:30.924Z",
+  "generated_at": "2026-11-14T22:21:02.226Z",
   "sha": {
-    "lab": "47d782b57ffd5aff836c7ebf7ce9349c21c37bd5",
-    "mg": "d8ce0d817cccfc4676963bc209d5920e76f4d883"
+    "lab": "cb2a5bd75679826ad8eb8006199893719977116a",
+    "mg": "cbb2fc1cbac3140cdefbc780c6b9762dfd6dc1a5"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43632205326",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43647536411",
   "review": {
     "protected": [
       {
@@ -856,12 +856,12 @@
   },
   "changes": {
     "lab": {
-      "count": 2177,
+      "count": 2180,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 10,
-      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:6"
+      "count": 11,
+      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:22, rules:6"
     }
   },
   "games": [

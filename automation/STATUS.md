@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-14T19:28:30.924Z | МГЛ: 47d782b57ffd5aff836c7ebf7ce9349c21c37bd5 | МГ: d8ce0d817cccfc4676963bc209d5920e76f4d883 | https://github.com/mpaykin1/meta6-lab/actions/runs/43632205326
+UTC: 2026-11-14T22:21:02.226Z | МГЛ: cb2a5bd75679826ad8eb8006199893719977116a | МГ: cbb2fc1cbac3140cdefbc780c6b9762dfd6dc1a5 | https://github.com/mpaykin1/meta6-lab/actions/runs/43647536411
 ## ПРОВЕРИТЬ CLAUDE
 - PR #320 fd4ea42560b6c1f43ecdf1a7df2e667160943c18: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
 - PR #301 4048fca93da0d4d7be883e61cd9c1d06f6d71a4f: .github/workflows/dispetcher.yml, .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
@@ -39,8 +39,8 @@ P1 — не подтверждено: нет успешного завершён
 #302 fix(status): ФИНИШ из таблиц и подтверждённых прогонов main | 6ec51cb945f1e28fb2e7cab3cb215bcc27973de1
 ещё 43: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2177 коммитов | нет данных
-МГ: 10 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:17, rules:6
+МГЛ: 2180 коммитов | нет данных
+МГ: 11 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, ink:6, ink.md:1, playgama-catalog:22, reference:22, rules:6
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет

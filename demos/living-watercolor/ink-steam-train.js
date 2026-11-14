@@ -207,7 +207,7 @@ export function createInkSteamTrain(seed=17){
   cyl(locomotive,.23,.29,.49,12,'rust',[-2.95,2.77,0]);
   cyl(locomotive,.33,.22,.56,12,'copper',[-2.95,3.18,0]);
   cyl(locomotive,.36,.41,.14,16,'brass',[-2.95,3.50,0]);
-  cyl(locomotive,.29,.29,.035,16,'charcoal',[-2.95,3.59,0],false);
+  cyl(locomotive,.29,.29,.035,16,'charcoal',[-2.95,3.59,0],[0,0,0],false);
   ring(locomotive,.325,.038,'edge',[-2.95,3.58,0],[Math.PI/2,0,0],false);
   // Brass steam dome, smaller sand dome and longitudinal iron pipes.
   cyl(locomotive,.26,.30,.36,14,'copper',[-1.67,2.72,0]);

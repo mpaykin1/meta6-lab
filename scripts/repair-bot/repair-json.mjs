@@ -5,10 +5,29 @@ import { execFileSync } from 'node:child_process';
 const excluded = /(^|\/)(node_modules|\.git|dist|build|coverage|vendor)(\/|$)/;
 const tracked = execFileSync('git', ['ls-files', '-z'], {encoding:'utf8'}).split('\0').filter(Boolean);
 let repaired = 0, invalid = 0;
+const pending = [];
+const root = process.cwd();
+function regularTrackedFile(name) {
+  const parts = name.split('/');
+  let current = root;
+  for (let i = 0; i < parts.length; i++) {
+    current = path.join(current, parts[i]);
+    const stat = fs.lstatSync(current);
+    if (stat.isSymbolicLink() || (i === parts.length - 1 ? !stat.isFile() : !stat.isDirectory())) {
+      throw new Error('expected regular file inside repository');
+    }
+  }
+  return current;
+}
 for (const name of tracked) {
   if (!name.endsWith('.json') || excluded.test(name)) continue;
   let original;
-  try { original = fs.readFileSync(path.resolve(name), 'utf8'); } catch { continue; }
+  try { original = fs.readFileSync(regularTrackedFile(name), 'utf8'); }
+  catch (error) {
+    invalid++;
+    console.error('UNRESOLVED ' + name + ': ' + error.message);
+    continue;
+  }
   try { JSON.parse(original); continue; } catch {}
   let fixed = original.replace(/^\uFEFF/, '');
   let output = '', quoted = false, escaped = false;
@@ -31,8 +50,16 @@ for (const name of tracked) {
   }
   try {
     JSON.parse(output);
-    if (output !== original) { fs.writeFileSync(name, output); repaired++; console.log('REPAIRED ' + name); }
+    if (output !== original) pending.push({ name, output });
   } catch { invalid++; console.log('UNRESOLVED ' + name); }
+}
+// Do not leave a partly repaired game when another tracked JSON file cannot be repaired.
+if (!invalid) {
+  for (const { name, output } of pending) {
+    fs.writeFileSync(regularTrackedFile(name), output);
+    repaired++;
+    console.log('REPAIRED ' + name);
+  }
 }
 console.log('Repair bot: repaired=' + repaired + ', unresolved=' + invalid);
 if (invalid) process.exitCode = 2;

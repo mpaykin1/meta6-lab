@@ -35,3 +35,5 @@ try {
 } finally {
   fs.rmSync(dir, { recursive: true, force: true });
 }
+
+await import('./selftest-safety.mjs');

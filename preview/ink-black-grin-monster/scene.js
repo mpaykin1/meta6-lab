@@ -195,6 +195,7 @@ menuButton.onclick=()=>{
   menuButton.setAttribute('aria-expanded',String(!ui.hidden));
 };
 let mode='body',paused=false,yaw=.36,pitch=.15,zoom=1;
+const headPos=new T.Vector3();let camY=2.6,yawS=.36,pitchS=.15,swellS=0;
 let elapsed=0,prevMs=0,renderedFrames=0,quality=1,smoothedFrame=16.7;
 const info={body:{target:2.60,height:7.6},face:{target:4.28,height:3.5},
   profile:{target:2.65,height:7.6}};
@@ -210,6 +211,13 @@ function show(kind){
 }
 document.querySelectorAll('[data-view]').forEach(button=>{
   button.addEventListener('click',()=>show(button.dataset.view));
+});
+document.querySelectorAll('[data-act]').forEach(button=>{
+  button.addEventListener('click',()=>{
+    if(paused)pauseToggle();
+    monster.userData.play(button.dataset.act);
+    ui.hidden=true;menuButton.setAttribute('aria-expanded','false');
+  });
 });
 const pauseButton=document.querySelector('#pause');
 function pauseToggle(){
@@ -292,10 +300,24 @@ function animate(ms){
   const pulse=monster.userData.pulse||0;
   fear+=(pulse-fear)*(pulse>fear?.5:Math.min(1,dt*2.2));
   faceLight.intensity=26*(.86+.09*Math.sin(elapsed*.58)+.05*Math.sin(elapsed*7.3)*Math.sin(elapsed*1.9))+12*fear;
-  const targetY=info[mode].target,d=13.5;
-  camera.position.set(Math.sin(yaw)*Math.cos(pitch)*d,
-    targetY+Math.sin(pitch)*d,Math.cos(yaw)*Math.cos(pitch)*d);
-  camera.lookAt(0,targetY,0);
+  // Heavy cinematic camera: it chases the orbit and the head with a lag,
+  // and gets kicked by snaps and landings.
+  const rig=monster.userData.rig;
+  rig.head.getWorldPosition(headPos);
+  const swell=rig.head.scale.z-1;
+  const wantY=mode==='face'?headPos.y-.05-1.7*swell:info[mode].target+(headPos.y-4.31)*.35;
+  swellS+=(swell-swellS)*(1-Math.exp(-dt*4));
+  faceLight.position.set(.25,3.55-1.5*swellS,2.9+1.6*swellS);faceLight.distance=7.5+5*swellS;
+  faceLight.intensity+=30*swellS;
+  camera.zoom=zoom/(1+(mode==='face'?.85:.12)*swellS);camera.updateProjectionMatrix();
+  const kcam=1-Math.exp(-dt*3.2),korb=1-Math.exp(-dt*7);
+  camY+=(wantY-camY)*kcam;
+  yawS+=(yaw-yawS)*korb;pitchS+=(pitch-pitchS)*korb;
+  const shake=fear*fear*.07;
+  const targetY=camY+shake*Math.sin(elapsed*61),d=13.5;
+  camera.position.set(Math.sin(yawS)*Math.cos(pitchS)*d+shake*Math.sin(elapsed*47),
+    targetY+Math.sin(pitchS)*d,Math.cos(yawS)*Math.cos(pitchS)*d);
+  camera.lookAt(shake*Math.sin(elapsed*47),targetY,0);
   monster.userData.lookTarget=camera.position;
   paint.tick(ms);
   post.uniforms.uTime.value=elapsed;post.uniforms.uFear.value=fear;
@@ -305,7 +327,7 @@ function animate(ms){
 }
 requestAnimationFrame(animate);
 window.__INK_GRIN_MONSTER__={
-  ready:true,model:monster,scene,camera,show,
+  ready:true,model:monster,scene,camera,show,play:n=>monster.userData.play(n),
   pause:()=>{paused=true;pauseButton.textContent='Запустить анимацию';},
   resume:()=>{paused=false;pauseButton.textContent='Остановить анимацию';},
   stats:()=>{

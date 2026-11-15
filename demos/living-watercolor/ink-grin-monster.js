@@ -222,7 +222,10 @@ function grinFace(head) {
     const iris=new T.Group();iris.position.set(ex,ey,.56);head.add(iris);
     iris.userData.base={x:ex,y:ey};
     lump(iris,[0,0,.03],[.155*big,.155*big,.06],'black',false);
-    lump(iris,[-.05,.07,.085],[.026,.02,.01],'glint',false);
+    // A pale pinprick pupil that can dart around inside the black pit.
+    const dot=new T.Group();dot.position.set(0,0,.095);iris.add(dot);
+    lump(dot,[0,0,0],[.04,.04,.018],'ring',false);
+    iris.userData.dot=dot;iris.userData.ring=ring;iris.userData.ringY=ring.scale.y;
     eyes.push(iris);
     // Heavy brow overhanging the top of the ring.
     stroke(head,[[side*.10,.70,.66],[side*.30,.86,.68],
@@ -343,6 +346,74 @@ export function createInkGrinMonster(seed=19) {
     }
     return .10+o+.022*(.5+.5*Math.sin(t*1.48)); // breathing never fully stops
   }
+  const hold=(p,a,b,c,d)=>smooth(a,b,p)*(1-smooth(c,d,p));
+  // ---- Action layer: every action is a set of smooth channels that are
+  // added on top of the idle life, then chased with inertia. ----
+  const zero=()=>({h:0,a:0,spX:0,spY:0,nkX:0,hdS:0,maw:0,jaw:0,jawW:0,
+    lsx:0,lsz:0,lel:0,rsx:0,rsz:0,rel:0,claw:0,mad:0,bulge:0,pulse:0});
+  function strike(p,o,side){
+    const m=side>0?'r':'l',n=side>0?'l':'r';
+    o[m+'sx']=-2.75*hold(p,0,.38,.45,.50)-1.15*hold(p,.45,.53,.66,1);
+    o[m+'el']=-1.05*hold(p,0,.34,.43,.51)-.12*hold(p,.5,.56,.7,1);
+    o[m+'sz']=.4*hold(p,0,.38,.45,.56);
+    o[n+'sx']=.45*hold(p,.1,.5,.6,1);o[n+'sz']=.3*hold(p,.1,.5,.6,1);
+    o.spY=side*(.42*hold(p,0,.38,.43,.50)-.55*hold(p,.45,.54,.68,1));
+    o.spX=-.08*hold(p,0,.36,.42,.5)+.34*hold(p,.45,.54,.68,1);
+    o.a=.24*hold(p,.42,.54,.68,1);o.claw=hold(p,.05,.3,.75,1);
+    o.jaw=.42;o.jawW=hold(p,.1,.4,.52,.6);o.bulge=.5*hold(p,.3,.5,.6,.9);
+    o.pulse=.9*hold(p,.51,.54,.56,.68);
+  }
+  const ACTIONS={
+    jump:{dur:1.9,f(p,o){
+      o.a=.62*hold(p,0,.26,.30,.38)+.42*hold(p,.40,.52,.56,.70)+.72*hold(p,.69,.745,.76,1);
+      const u=(p-.33)/.39;o.h=u>0&&u<1?1.55*4*u*(1-u):0;
+      o.spX=.30*hold(p,0,.26,.30,.40)-.16*hold(p,.36,.5,.56,.7)+.38*hold(p,.69,.75,.77,1);
+      const up=hold(p,.32,.48,.60,.78),back=hold(p,0,.26,.30,.38);
+      o.lsz=o.rsz=1.25*up;o.lsx=o.rsx=.55*back-.35*up;o.lel=o.rel=-.5*up;
+      o.claw=up;o.jaw=.55;o.jawW=hold(p,.3,.45,.68,.74);
+      o.bulge=.6*up;o.mad=.5*up;o.pulse=hold(p,.70,.73,.75,.86);
+    }},
+    strikeL:{dur:1.35,f(p,o){strike(p,o,-1);}},
+    strikeR:{dur:1.35,f(p,o){strike(p,o,1);}},
+    grab:{dur:1.7,f(p,o){
+      const reach=hold(p,.06,.40,.72,1),wide=hold(p,.06,.36,.46,.53),clap=hold(p,.48,.54,.72,1);
+      o.lsx=o.rsx=-1.5*reach;o.lsz=o.rsz=.75*wide-.42*clap;o.lel=o.rel=-.55*clap-.2*wide;
+      o.spX=-.1*wide+.38*clap;o.a=.25*clap;o.claw=reach;
+      o.jaw=.5;o.jawW=hold(p,.1,.36,.50,.55);o.bulge=.5*reach;
+      o.pulse=.9*hold(p,.52,.55,.57,.7);
+    }},
+    bite:{dur:2.7,f(p,o,t){
+      const wind=hold(p,0,.22,.28,.36),lunge=hold(p,.30,.40,.66,.76);
+      o.spX=-.2*wind+.52*lunge;o.nkX=-.32*wind+.30*lunge;
+      o.hdS=.8*hold(p,.28,.42,.68,.92);          // head keeps swelling a beat longer
+      o.maw=hold(p,.30,.43,.635,.68);            // the maw itself grows absurdly
+      o.jaw=.26*hold(p,.30,.40,.635,.665);o.jawW=hold(p,0,.1,.8,1);
+      o.a=.3*lunge;o.lsx=o.rsx=.55*lunge;o.lsz=o.rsz=.6*lunge;o.claw=lunge;
+      o.bulge=1.1*hold(p,.26,.42,.62,.8);
+      o.pulse=hold(p,.64,.665,.69,.86)+.25*lunge*(.5+.5*Math.sin(t*31));
+    }},
+    eyes:{dur:3.0,f(p,o){
+      o.mad=hold(p,0,.08,.86,1);o.bulge=.25*o.mad;
+      o.nkX=-.06*o.mad;
+    }}
+  };
+  const act={name:null,t:0,wait:2.2,bag:[],last:null};
+  const order=['bite','jump','strikeL','eyes','grab','bite','strikeR','eyes'];
+  function nextAction(){
+    if(!act.bag.length){
+      act.bag=order.slice();
+      for(let i=act.bag.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[act.bag[i],act.bag[j]]=[act.bag[j],act.bag[i]];}
+      if(act.bag[act.bag.length-1]===act.last)act.bag.reverse();
+    }
+    return act.bag.pop();
+  }
+  const cur=zero(),tgt=zero();
+  root.userData.actions=Object.keys(ACTIONS);
+  root.userData.auto=true;
+  root.userData.play=name=>{if(ACTIONS[name]){act.name=name;act.t=0;}};
+  root.userData.action=()=>act.name;
+  const eyeState=[{x:0,y:0},{x:0,y:0}];
+  const hash=n=>{const f=Math.sin(n*127.1+311.7)*43758.5453;return f-Math.floor(f);};
   // Rare nervous twitch: a damped burst at irregular moments.
   function twitch(t){
     const period=6.3,n=Math.floor(t/period);
@@ -354,6 +425,23 @@ export function createInkGrinMonster(seed=19) {
   root.userData.lookTarget=null;root.userData.pulse=0;
   root.userData.tick=(time,dt=0)=>{
     const t=time,breath=Math.sin(t*1.48),tw=twitch(t);
+    if(dt>0){
+      if(act.name){
+        act.t+=dt;
+        if(act.t>=ACTIONS[act.name].dur){act.last=act.name;act.name=null;act.wait=.8+rnd()*1.7;}
+      }else if(root.userData.auto){
+        act.wait-=dt;
+        if(act.wait<=0){act.name=nextAction();act.t=0;}
+      }
+    }
+    const fresh=zero();
+    if(act.name)ACTIONS[act.name].f(Math.min(1,act.t/ACTIONS[act.name].dur),fresh,t);
+    const kc=dt>0?1-Math.exp(-dt*20):1,kh=dt>0?1-Math.exp(-dt*9):1;
+    for(const key in cur){
+      tgt[key]=fresh[key];
+      // heavier parts (head swell, spine) lag behind limbs -> overlapping motion
+      cur[key]+=(tgt[key]-cur[key])*((key==='hdS'||key==='spX'||key==='spY'||key==='nkX')?kh:kc);
+    }
     // Heavy, delayed following of whoever is looking at it.
     let gx=0,gy=0,wantYaw=0,wantPitch=0;
     if(root.userData.lookTarget){
@@ -367,15 +455,24 @@ export function createInkGrinMonster(seed=19) {
     const k=dt>0?1-Math.exp(-dt*1.6):1,ke=dt>0?1-Math.exp(-dt*5):1;
     gaze.yaw+=(wantYaw-gaze.yaw)*k;gaze.pitch+=(wantPitch-gaze.pitch)*k;
     gaze.x+=(gx-gaze.x)*ke;gaze.y+=(gy-gaze.y)*ke;
+    // Legs: fold by angle `a`, keep feet planted, body drops by the same amount.
+    const la=cur.a,phi=Math.asin(Math.min(.98,1.04*Math.sin(la)/.76));
+    const dropY=1.8-(1.04*Math.cos(la)+.76*Math.cos(phi));
+    const air=Math.min(1,cur.h*2);
+    spine.position.y=2.18+cur.h-dropY;
     spine.rotation.z=.058*Math.sin(t*.65)+.015*Math.sin(t*2.6);
-    spine.rotation.x=.026*Math.sin(t*.88);
+    spine.rotation.x=.026*Math.sin(t*.88)+cur.spX;
+    spine.rotation.y=cur.spY;
     spine.scale.set(1+.014*breath,1+.015*breath,1+.02*breath);
     neck.rotation.z=.057*Math.sin(t*.42+.70);
-    neck.rotation.x=.07+.045*Math.sin(t*.95);
+    neck.rotation.x=.07+.045*Math.sin(t*.95)+cur.nkX;
     head.rotation.y=gaze.yaw+.09*Math.sin(t*.41)+.03*Math.sin(t*2.6)+.05*tw;
     head.rotation.z=.13*Math.sin(t*.23)+.05*Math.sin(t*.53)+.16*tw;
-    head.rotation.x=-.065-gaze.pitch+.05*Math.sin(t*.71)-.20*jawState.open-.06*jawState.snap*Math.sin(jawState.snap*9);
-    const target=jawTarget(t);
+    head.rotation.x=-.065-gaze.pitch+.05*Math.sin(t*.71)-.85*(cur.spX+cur.nkX)-.20*jawState.open-.06*jawState.snap*Math.sin(jawState.snap*9);
+    const hs=1+cur.hdS;
+    head.scale.set(hs*(1+.16*cur.maw),hs*(1+.08*cur.maw),hs);
+    head.rotation.z+=.03*cur.maw*Math.sin(t*37);
+    const target=jawTarget(t)*(1-cur.jawW)+cur.jaw*cur.jawW;
     if(dt>0){
       const h=Math.min(dt,.033);
       const prev=jawState.open;
@@ -392,27 +489,43 @@ export function createInkGrinMonster(seed=19) {
     face.jaw.rotation.z=jawState.side;
     face.tongue.position.y=.11+.05*Math.sin(t*3.1)*Math.min(1,open*4);
     face.tongue.rotation.x=-.25*open;
-    face.cavity.scale.y=.42+.25*Math.max(0,open);
-    face.cavity.position.y=-.42-.15*Math.max(0,open);
-    root.userData.pulse=Math.max(jawState.snap,Math.min(1,Math.abs(tw)*2.5));
+    face.jawBody.position.y=-.42-.95*cur.maw;
+    face.jawBody.position.z=.42+.36*cur.maw;
+    face.jawBody.scale.x=1+.22*cur.maw;
+    face.cavity.scale.set(.92*(1+.14*cur.maw),.42+.25*Math.max(0,open)+.5*cur.maw,.20);
+    face.cavity.position.y=-.42-.15*Math.max(0,open)-.30*cur.maw;
+    root.userData.pulse=Math.min(1,Math.max(jawState.snap,Math.abs(tw)*2.5,cur.pulse));
     face.eyes.forEach((eye,i)=>{
-      const b=eye.userData.base;
-      eye.position.x=b.x+.075*gaze.x+.008*Math.sin(t*.71+i*.32)+.02*tw;
-      eye.position.y=b.y+.06*gaze.y+.008*Math.sin(t*.39+i*1.4);
+      // Each eye has its own saccade clock, so they dart in different directions.
+      const dir=i?1:-1,n=Math.floor(t*(i?3.7:5.3)),mad=cur.mad;
+      const sx=(hash(n+i*71.3)-.5)*2,sy=(hash(n*1.7+i*13.1+5)-.5)*2;
+      const wx=.10*gaze.x*(1-mad)+mad*(.085*sx+.05*Math.cos(t*6.1*dir+i))+.02*tw;
+      const wy=.08*gaze.y*(1-mad)+mad*(.07*sy+.045*Math.sin(t*6.1+i*2));
+      const e=eyeState[i],kq=dt>0?1-Math.exp(-dt*(10+16*mad)):1;
+      e.x+=(wx-e.x)*kq;e.y+=(wy-e.y)*kq;
+      eye.userData.dot.position.x=e.x+.006*Math.sin(t*.71+i*.32);
+      eye.userData.dot.position.y=e.y+.006*Math.sin(t*.39+i*1.4);
+      const rs=1+.22*cur.bulge+.24*mad*Math.sin(t*3.3+i*Math.PI);
+      eye.userData.ring.scale.set(rs,rs*eye.userData.ringY,1);
     });
     arms.forEach((a,i)=>{
       const phase=t*.92+i*2.1;
-      a.shoulder.rotation.z=(i?1:-1)*(.095+.085*Math.sin(phase));
-      a.shoulder.rotation.x=.05*Math.sin(t*.69+i);
-      a.elbow.rotation.x=-.08+.10*Math.sin(phase-.55);
+      const m=i?'r':'l';
+      a.shoulder.rotation.z=(i?1:-1)*(.095+.085*Math.sin(phase)+cur[m+'sz']);
+      a.shoulder.rotation.x=.05*Math.sin(t*.69+i)+cur[m+'sx'];
+      a.elbow.rotation.x=-.08+.10*Math.sin(phase-.55)+cur[m+'el'];
       a.wrist.rotation.z=.06*Math.sin(t*.85+i);
       a.fingers.forEach((f,j)=>{
-        f.rotation.x=.09*Math.sin(t*.95-i*.3-j*.23);
+        f.rotation.x=.09*Math.sin(t*.95-i*.3-j*.23)-.55*cur.claw;
+        f.rotation.z=(j-2)*.13*cur.claw;
       });
     });
     legs.forEach((leg,i)=>{
-      leg.hip.rotation.x=.025*Math.sin(t*.66+i*Math.PI);
-      leg.knee.rotation.x=.04+.027*Math.sin(t*.66+i*Math.PI+1.1);
+      leg.hip.position.y=2.03+cur.h-dropY;
+      leg.hip.rotation.x=.025*Math.sin(t*.66+i*Math.PI)-la;
+      leg.hip.rotation.z=(i?1:-1)*.12*air;
+      leg.knee.rotation.x=.04+.027*Math.sin(t*.66+i*Math.PI+1.1)+la+phi;
+      leg.foot.rotation.x=-phi+.45*air;
     });
   };
   root.userData.tick(0,0);

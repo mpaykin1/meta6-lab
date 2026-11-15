@@ -1,6 +1,6 @@
 // Adversarial mutations for BEZ PATTERNOV. Every poisoned fixture must be rejected.
 import assert from 'node:assert/strict';
-import {detectNoPatterns} from './verify-no-patterns.mjs';
+import {detectNoPatterns, isGameSourceFile} from './verify-no-patterns.mjs';
 
 const mutants = [
   {
@@ -48,3 +48,18 @@ float wcFbm(vec3 p){float s=wcNoise(p)*.57;s+=wcNoise(p*2.07)*.29;return s;}
 float wcBloom=wcFbm(vWcWorld*.27+wcNoise(vWcWorld*.13));`;
 assert.deepEqual(detectNoPatterns(clean, 'fixed-ink'), []);
 console.log('BEZ_PATTERNOV MUTATIONS PASS (' + mutants.length + ' catches; clean 0)');
+
+const gameSourceMutants = [
+  'ashen-sumerek/terrain.js',
+  'underwater-world/underwater-runtime.js',
+  'observer-world-en-v7/index.html',
+  'three-worlds-game/index.html'
+];
+for (const file of gameSourceMutants) {
+  assert.ok(isGameSourceFile(file), 'ROOT-CATALOG escaped pattern scan: ' + file);
+}
+for (const file of ['docs/ashen-sumerek/terrain.js', 'scripts/visual/scan.mjs',
+  'underwater-world/vendor/legacy.js']) {
+  assert.ok(!isGameSourceFile(file), 'ROOT-CATALOG scan scope contaminated: ' + file);
+}
+console.log('ROOT-CATALOG MUTATIONS PASS: 4 playable roots included; 3 exclusions');

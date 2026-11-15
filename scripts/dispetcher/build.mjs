@@ -50,6 +50,14 @@ export async function listOpenPullRequests(request = api) {
  }
  throw Error('GitHub API open PRs: неполная пагинация');
 }
+export function claudeTitle(task, opened) {
+  const fromPr = typeof opened?.title === 'string' ? opened.title.trim() : '';
+  const fromTask = typeof task?.title === 'string' ? task.title.trim() : '';
+  const title = fromPr && fromPr !== 'undefined' ? fromPr : fromTask;
+  if (!title || title === 'undefined') throw Error('нет данных: PR #' + task?.id + ' без названия');
+  return title;
+}
+
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));
  const map=new Map();
@@ -115,7 +123,7 @@ export async function main(){
  const listed=openPrs.get(t.id);
  if(!listed)throw Error('нет данных: GraphQL PR исчез из индекса');
  if(/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(listed.body||'')){
-  claude.push({...t,title:listed.title,branch:listed.head.ref});
+  claude.push({...t,title:claudeTitle(t,listed),branch:listed.head.ref});
   continue;
  }
  let pr;try{pr=await api('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}

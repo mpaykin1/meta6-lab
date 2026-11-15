@@ -38,3 +38,40 @@ with tempfile.TemporaryDirectory() as tmp:
         )
         print(name, "score", score, "CAUGHT" if is_mutant else "PASS")
 print("FFT MUTATIONS PASS: 4 rejected; clean accepted")
+
+# Every captured viewpoint must be different. A changing timestamp or flicker
+# must not masquerade as moving through the scene.
+with tempfile.TemporaryDirectory() as tmp:
+    original = np.uint8(rng.integers(30, 230, size=(128, 128)))
+    independent = np.uint8(rng.integers(30, 230, size=(128, 128)))
+    shifted = np.uint8(rng.integers(30, 230, size=(128, 128)))
+
+    def write_view(name, data):
+        path = Path(tmp) / (name + ".png")
+        Image.fromarray(data).save(path)
+        return path
+
+    original_path = write_view("original", original)
+    duplicate = write_view("duplicate", original.copy())
+    alternate = write_view("alternate", independent)
+    third = write_view("third", shifted)
+    tiny_flicker = write_view("one-unit-flicker", np.uint8(original + 1))
+
+    mutants = [
+        ("three-same-screenshots", [original_path, duplicate, duplicate]),
+        ("two-duplicates-one-different", [original_path, duplicate, alternate]),
+        ("subtle-animation-not-a-new-view", [original_path, tiny_flicker, third]),
+    ]
+    for name, files in mutants:
+        separation = module.view_separation(files)
+        assert separation < 2.5, (
+            f"Undetected viewpoint mutation {name}: {separation}"
+        )
+        print(name, "separation", separation, "CAUGHT")
+    clean_separation = module.view_separation(
+        [original_path, alternate, third]
+    )
+    assert clean_separation >= 2.5, (
+        f"Three independent views rejected: {clean_separation}"
+    )
+    print("VIEWPOINT MUTATIONS PASS: 3 rejected; 3 distinct accepted")

@@ -1,0 +1,15 @@
+{
+  "format": "ink-pack/1",
+  "game": "ink-fallen-guardian",
+  "base": "reference/ink-fallen-guardian",
+  "version": "1.0.0",
+  "license": {"type": "own", "author": "Claude для Mikhail (META GAMES)", "commercial": true},
+  "provenance": {"tool": "Claude, процедурный Three.js по эталону INK", "date": "2026-11-13"},
+  "content_flags": {"real_persons": [], "brands": [], "political": false},
+  "assets": {
+    "lilyPads": {"label_ru": "Кувшинки", "role": "plant", "zone": "lakeside", "footprint": 0},
+    "fireflies": {"label_ru": "Светлячки", "role": "creature", "zone": "guardian", "footprint": 0},
+    "giantCog": {"label_ru": "Шестерня великана", "role": "pickup", "zone": "guardian", "footprint": 0,
+                 "benefit": "reveal_far — туман отступает, видно дальше"}
+  }
+}

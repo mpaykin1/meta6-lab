@@ -81,9 +81,27 @@ canvas#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-actio
 #bRevive{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(180deg,#ff6b7a,#c2303f);border-color:#ffb3ba}
 #bRevive .rv{width:16px;height:14px;background:#fff;clip-path:polygon(50% 100%,0 45%,0 15%,20% 0,40% 0,50% 15%,60% 0,80% 0,100% 15%,100% 45%)}
 
+/* Archer weather: two irregular low-cost translucent ribbons below the HUD. */
+#wind-haze{position:fixed;inset:auto -24vw -8vh -24vw;height:56vh;overflow:hidden;pointer-events:none;opacity:.65;contain:paint}
+#wind-haze::before,#wind-haze::after{content:"";position:absolute;inset:-8% -5%;pointer-events:none;will-change:transform}
+#wind-haze::before{
+ background:radial-gradient(ellipse 36% 23% at 17% 62%,rgba(210,228,239,.27),transparent 79%),
+ radial-gradient(ellipse 29% 16% at 72% 84%,rgba(193,215,227,.31),transparent 76%),
+ radial-gradient(ellipse 19% 10% at 45% 52%,rgba(234,242,248,.18),transparent 83%);
+ animation:wind-ribbon-outer 41s ease-in-out infinite alternate
+}
+#wind-haze::after{
+ background:radial-gradient(ellipse 42% 13% at 82% 49%,rgba(229,237,241,.19),transparent 80%),
+ radial-gradient(ellipse 21% 22% at 32% 78%,rgba(188,214,231,.28),transparent 76%);
+ animation:wind-ribbon-inner 59s ease-in-out infinite alternate
+}
+@keyframes wind-ribbon-outer{0%{transform:translate3d(-7%,1%,0) scale(1.04)}47%{transform:translate3d(3%,-6%,0) scale(.96)}100%{transform:translate3d(11%,2%,0) scale(1.08)}}
+@keyframes wind-ribbon-inner{0%{transform:translate3d(8%,-2%,0)}39%{transform:translate3d(-4%,5%,0) scale(1.06)}100%{transform:translate3d(-13%,-3%,0) scale(.94)}}
+@media(prefers-reduced-motion:reduce){#wind-haze::before,#wind-haze::after{animation:none}}
+
 </style>
 
-<canvas id="c"></canvas>
+<canvas id="c"></canvas><div id="wind-haze" aria-hidden="true"></div>
 <div id="flash"></div><div id="fogveil" aria-hidden="true"></div>
 <div class="hud">
   <div id="depth">TIER 1</div>

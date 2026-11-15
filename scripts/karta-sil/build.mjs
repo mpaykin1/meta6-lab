@@ -150,8 +150,10 @@ export function resolvedActorFromEvidence(pr, busy, dictionary = {}) {
       new RegExp('\\bPR\\s*#'+pr.number+'\\b','i').test(cells[0]||'');
     return byBranch || byNumber;
   });
-  const owners=new Set(rows.map(row=>identifyActor(
-    {...pr,body:''},row)).filter(x=>x!==actors[2]));
+  const owners=new Set(rows.map(row=>{
+    const cells=row.split('|').slice(1,-1).map(x=>x.trim());
+    return identifyActor({...pr,head:{ref:null},body:'Исполнитель: '+(cells[2]||'')},'');
+  }).filter(x=>x!==actors[2]));
   if(owners.size>1) return actors[2];
   if(owners.size===1) return [...owners][0];
   const matches=new Set((dictionary.branchActors||[])

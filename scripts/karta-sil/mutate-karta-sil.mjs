@@ -509,6 +509,8 @@ function checkEvidence(resolve) {
     '| PR #331 | lab/neutral | MG-строитель-1 | then |\n'+
     '| PR #331 | lab/neutral | чат ChatGPT | now |',dict),'неизвестно');
   assert.equal(resolve({...pr,body:'Исполнитель: —'},row,dict),'автозадача');
+  assert.equal(resolve({...pr,body:'',head:{ref:'lab/changed'}},
+    '| PR #331 | lab/original | MG-строитель-3 | past |',dict),'автозадача');
 }
 test('исполнитель карты: явное указание, подтверждённая история, документированная ветка',async()=>{
   checkEvidence(resolvedActorFromEvidence);
@@ -517,7 +519,9 @@ test('исполнитель карты: явное указание, подтв
     ['if(declared && declared!==actors[2]) return declared;','if(false) return declared;'],
     ["cells[1]?.replaceAll('`','')===branch","cells[1]?.includes(branch)"],
     ['return matches.size===1 ? [...matches][0] : actors[2];','return actors[0];'],
-    ['if(owners.size>1) return actors[2];','if(pr.number===331) return actors[1];']
+    ['if(owners.size>1) return actors[2];','if(pr.number===331) return actors[1];'],
+    ["new RegExp('\\\\bPR\\\\s*#'+pr.number+'\\\\b','i').test(cells[0]||'')",
+      'false']
   ];
   for(const [a,b] of changes){
     assert.ok(original.includes(a),'мутация без якоря '+a);

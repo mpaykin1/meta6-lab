@@ -55,3 +55,6 @@
 
 | MG-строитель-2 | 2026-11-15T18:08:38Z | старт |
 | MG-строитель-2 | 2026-11-15T18:08:38Z | итог: блокер — [45 открытых PR](https://github.com/mpaykin1/meta6-lab/pulls) при лимите 5; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md) содержит только 13 «НУЖЕН CLAUDE»; [карта сил](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json) workflow_ci красная, новые PR запрещены |
+
+| MG-ремонтник | 2026-11-15T18:47:27Z | старт |
+| MG-ремонтник | 2026-11-15T18:47:27Z | итог: блокер — [45 открытых PR](https://github.com/mpaykin1/meta6-lab/pulls) (проверено GitHub API, 15.11.2026), лимит 5; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md) только 13 НУЖЕН CLAUDE; [TOLKNUT](https://github.com/mpaykin1/meta6-lab/blob/main/TOLKNUT.md) запрещает ремонт перечисленных PR; [карта сил](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json): workflow_ci красная, redPerMerge=0; game_fix красная, redPerMerge=null. Исправлена устаревшая оценка 49 → 45 |

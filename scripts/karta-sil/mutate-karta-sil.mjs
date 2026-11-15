@@ -482,7 +482,7 @@ test('доля закрытых: незакрытый заброшенный PR 
   assert.equal(m.action,'дробить задачи / тесты до пуша');
 });
 
-test('3 дня: старый PR, слитый сегодня, обязательно виден в коротком срезе',()=>{
+test('3 дня: старый PR, слитый сегодня, обязательно виден в коротком срезе',async()=>{
   const now=Date.parse('2026-11-15T12:00:00Z');
   const items=[
     {number:1,status:'слито',created_at:'2026-11-06T00:00:00Z',
@@ -495,4 +495,17 @@ test('3 дня: старый PR, слитый сегодня, обязатель
       updated_at:'2026-11-15T06:00:00Z',isClosed:false}
   ];
   assert.deepEqual(recentCohort(items,3,now).map(x=>x.number),[1,2,4]);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const mutants=[
+    ["pr.status === 'слито' ? pr.merged_at","pr.status === 'слито' ? pr.created_at"],
+    ["pr.isClosed === true ? pr.closed_at","pr.isClosed === true ? pr.created_at"],
+    [": pr.updated_at;",": pr.created_at;"],
+    ["return event >= now - days * 86400000;","return pr.number === 1 ? true : createdRecent;"]
+  ];
+  for(const [from,to] of mutants){
+    assert.ok(source.includes(from),'якорь событийного среза: '+from);
+    const changed=source.replace(from,to);
+    const mod=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    assert.notDeepEqual(mod.recentCohort(items,3,now).map(x=>x.number),[1,2,4]);
+  }
 });

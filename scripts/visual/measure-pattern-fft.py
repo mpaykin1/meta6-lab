@@ -37,12 +37,10 @@ def view_separation(images):
         with Image.open(filename) as picture:
             gray = picture.convert("L").resize((128, 128))
             small.append(np.asarray(gray.crop((12, 12, 116, 116)), dtype=np.float32))
-    distances = []
-    for i in range(len(small)):
-        distances.append(max(
-            float(np.mean(np.abs(small[i] - small[j])))
-            for j in range(len(small)) if i != j
-        ))
+    distances = [
+        float(np.mean(np.abs(small[i] - small[j])))
+        for i in range(len(small)) for j in range(i + 1, len(small))
+    ]
     return round(min(distances), 4)
 
 

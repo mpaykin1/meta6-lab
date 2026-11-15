@@ -52,3 +52,6 @@
 | MG-строитель-4 | 2026-11-15T14:32:03Z | итог: блокер — [49 открытых PR](https://github.com/mpaykin1/meta6-lab/pulls) при лимите 5; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md) — 13 НУЖЕН CLAUDE, свободных карточек нет; файл прогресса роли в lab/avtozadachi-progress отсутствует; новый PR запрещён |
 | MG-строитель-1 | 2026-11-15T17:55:57Z | старт |
 | MG-строитель-1 | 2026-11-15T17:55:57Z | итог: блокер — [49 открытых PR](https://github.com/mpaykin1/meta6-lab/pulls) при лимите 5; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md) только 13 НУЖЕН CLAUDE; собственных открытых PR нет |
+
+| MG-строитель-2 | 2026-11-15T18:08:38Z | старт |
+| MG-строитель-2 | 2026-11-15T18:08:38Z | итог: блокер — [45 открытых PR](https://github.com/mpaykin1/meta6-lab/pulls) при лимите 5; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md) содержит только 13 «НУЖЕН CLAUDE»; [карта сил](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json) workflow_ci красная, новые PR запрещены |

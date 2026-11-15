@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-14T23:21:23.959Z | МГЛ: 9228ffbbe2d04b7b4036c58ae5b668df003fe2d1 | МГ: 42e706b7b27bfca00ae89dbf0787a3f319a3f0f4 | https://github.com/mpaykin1/meta6-lab/actions/runs/43652768204
+UTC: 2026-11-15T03:02:52.919Z | МГЛ: 19f5553e1d02a336d1441bf71bb6606cd519acb4 | МГ: dc1a529a5ca0e57446cf08de7907323e9c42622e | https://github.com/mpaykin1/meta6-lab/actions/runs/43670473726
 ## ПРОВЕРИТЬ CLAUDE
 - PR #320 fd4ea42560b6c1f43ecdf1a7df2e667160943c18: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
 - PR #301 4048fca93da0d4d7be883e61cd9c1d06f6d71a4f: .github/workflows/dispetcher.yml, .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
@@ -33,14 +33,14 @@ L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 P1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 ## PR МГЛ
-открыто: 48 | конфликт: нет данных | слито: 47 | закрыто: 82
+открыто: 49 | конфликт: нет данных | слито: 47 | закрыто: 82
 #324 library-machine: новая игра не роняет source-only гейт | c0418db87f2de8c25c8b5a708a7de8b65b4cf8cb
 #320 Карта сил: повтор push после rebase при гонке с main | fd4ea42560b6c1f43ecdf1a7df2e667160943c18
 #301 КАРТА СИЛ: статистика слияний PR и фильтр автозадач | 4048fca93da0d4d7be883e61cd9c1d06f6d71a4f
 ещё 44: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2192 коммитов | нет данных
-МГ: 13 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:22, reference:22, rules:6, SOURCE_INDEX.md:1
+МГЛ: 2199 коммитов | нет данных
+МГ: 16 коммитов | .github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:22, rules:6, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет

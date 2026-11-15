@@ -176,9 +176,13 @@ export function compute(prs, dictionary) {
       const failedRuns = list.map(x => x.failedBeforeGreen).filter(Number.isFinite);
       const failures = failedRuns.length === list.length && list.length ?
         failedRuns.reduce((a,b)=>a+b,0) : null;
-      const resolved = merged + closed + abandoned;
+      // Открытый PR без коммитов может быть брошенным, но он НЕ закрыт.
+      const abandonedClosed = list.filter(x =>
+        x.status === 'брошено' && x.isClosed === true).length;
+      const closedWithoutMerge = closed + abandonedClosed;
+      const resolved = merged + closedWithoutMerge;
       const closedShare = resolved ?
-        Number(((closed + abandoned) * 100 / resolved).toFixed(1)) : null;
+        Number((closedWithoutMerge * 100 / resolved).toFixed(1)) : null;
       const redPerMerge = merged && failures !== null ?
         Number((failures / merged).toFixed(1)) : null;
       metrics.push({
@@ -352,6 +356,7 @@ async function snapshot() {
     const matches = attributedErrors(journal, pr, commitShas, runHeads);
     prs.push(publishablePr({
       number:pr.number, url:pr.html_url, type:classify(pr,filenames,dictionary),
+      isClosed:pr.state === 'closed',
       actor:identifyActor(pr,busy,dictionary), status:statusOf(pr,lastCommit),
       created_at:pr.created_at, merged_at:pr.merged_at || null,
       lastCommit, changedFiles, failedBeforeGreen, newErrors:matches.length,

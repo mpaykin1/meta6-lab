@@ -389,8 +389,10 @@ function verifyCosts(aggregate) {
       merged_at:'2026-11-14',failedBeforeGreen:6,newErrors:0,repeatedError:false},
     {type:'bot_check',actor:'неизвестно',status:'закрыто',created_at:'2026-11-13',
       failedBeforeGreen:3,newErrors:0,repeatedError:false},
-    {type:'bot_check',actor:'неизвестно',status:'брошено',created_at:'2026-11-13',
-      failedBeforeGreen:0,newErrors:0,repeatedError:false}
+    {type:'bot_check',actor:'неизвестно',status:'брошено',isClosed:true,
+      created_at:'2026-11-13',failedBeforeGreen:0,newErrors:0,repeatedError:false},
+    {type:'bot_check',actor:'неизвестно',status:'брошено',isClosed:false,
+      created_at:'2026-11-13',failedBeforeGreen:0,newErrors:0,repeatedError:false}
   ];
   const m=aggregate(rows,dictionary).find(x=>x.type==='bot_check'&&x.actor==='неизвестно');
   assert.equal(m.redPerMerge,9);
@@ -407,7 +409,7 @@ test('стоимость типов: красных на слияние и ре�
   const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
   for(const [oldPart,newPart] of [
     ['(failures / merged).toFixed(1)','(failures / (merged + closed)).toFixed(1)'],
-    ['(closed + abandoned) * 100 / resolved','closed * 100 / resolved'],
+    ['closedWithoutMerge * 100 / resolved','closed * 100 / resolved'],
     ['redPerMerge > 5','redPerMerge > 50']
   ]){
     assert.ok(source.includes(oldPart),'мутация должна иметь якорь '+oldPart);
@@ -463,4 +465,19 @@ test('исполнитель: неопознанная подпись не ск�
     'автозадача');
   assert.equal(identifyActor({...pr,body:'Исполнитель: неизвестно'},'',dictionary),
     'неизвестно');
+});
+
+test('доля закрытых: незакрытый заброшенный PR не портит показатель',()=>{
+  const rows=[
+    {type:'game_fix',actor:'автозадача',status:'слито',isClosed:true,
+      failedBeforeGreen:0,newErrors:0},
+    {type:'game_fix',actor:'автозадача',status:'брошено',isClosed:false,
+      failedBeforeGreen:0,newErrors:0},
+    {type:'game_fix',actor:'автозадача',status:'брошено',isClosed:true,
+      failedBeforeGreen:0,newErrors:0}
+  ];
+  const m=compute(rows,dictionary).find(x=>x.type==='game_fix'&&x.actor==='автозадача');
+  assert.equal(m.abandoned,2);
+  assert.equal(m.closedShare,50);
+  assert.equal(m.action,'дробить задачи / тесты до пуша');
 });

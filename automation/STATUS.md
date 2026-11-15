@@ -1,10 +1,10 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-15T08:11:50.688Z | МГЛ: 3269f4fa5faa3590bb189417bbb1ac181250199a | МГ: 37d44225283c86f0b0f942f700d14105c44a2b56 | нет данных
+UTC: 2026-11-15T08:13:18.074Z | МГЛ: b78e9d554237f3fee6177d291196317cff7ccd49 | МГ: da6c0f8316ed59b978fd8724af46c07e0f7eab1f | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #330 17690b22fcbf4893451d7d7ec354f133abd6b738: .github/workflows/lab-bot-focused.yml
 - PR #327 bfdcea35097c49b70e7d08c7747716e4fb0daa20: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
 - PR #320 fd4ea42560b6c1f43ecdf1a7df2e667160943c18: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
-- ещё 32: https://github.com/mpaykin1/meta6-lab/pulls
+- ещё 45: https://github.com/mpaykin1/meta6-lab/pulls
 - МГЛ: Library Machine | https://github.com/mpaykin1/meta6-lab/actions/runs/43693274593 | Propose catalog update from main in a separate PR
 - МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/43677270911 | Play all games
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
@@ -42,8 +42,8 @@ P1 — не подтверждено: GitHub недоступен: https://githu
 #327 fix(karta-sil): исправить учёт брошенных закрытых PR | bfdcea35097c49b70e7d08c7747716e4fb0daa20
 ещё 49: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2229 коммитов | нет данных
-МГ: 30 коммитов | .github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:8, SOURCE_INDEX.md:1
+МГЛ: 2233 коммитов | нет данных
+МГ: 32 коммитов | .github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:8, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да
 asqura-ilya-reference — нет данных | витрина: нет

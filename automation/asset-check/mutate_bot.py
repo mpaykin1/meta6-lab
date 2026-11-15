@@ -11,6 +11,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MUTANTS = [
+    # Deceptive regression: one fixture ID must not get a free pass.
+    ("kinds/htmlpack.py", 'depth_faults = m.get("depth_faults")',
+     'depth_faults = 0 if name == "new_shadow" else m.get("depth_faults")'),
     ("kinds/htmlpack.py", "if not isinstance(depth_faults, (int, float)) or depth_faults > 0:",
      "if False:"),
     ("kinds/htmlpack_harness.mjs", "mat.depthWrite===false", "mat.depthWrite===true"),

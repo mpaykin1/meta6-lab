@@ -30,6 +30,22 @@ def spectrum_score(filename):
     return round(float(np.sum(energy[-8:]) / total), 6)
 
 
+def view_separation(images):
+    """Reject three nominal screenshots that show the same scene/viewpoint."""
+    small = []
+    for filename in images:
+        with Image.open(filename) as picture:
+            gray = picture.convert("L").resize((128, 128))
+            small.append(np.asarray(gray.crop((12, 12, 116, 116)), dtype=np.float32))
+    distances = []
+    for i in range(len(small)):
+        distances.append(max(
+            float(np.mean(np.abs(small[i] - small[j])))
+            for j in range(len(small)) if i != j
+        ))
+    return round(min(distances), 4)
+
+
 def load_group(folder):
     path = Path(folder)
     manifest = json.loads((path / "index.json").read_text(encoding="utf-8"))
@@ -39,8 +55,18 @@ def load_group(folder):
     for game in manifest["games"]:
         if len(game["images"]) != 3:
             raise ValueError("Must have exactly 3 viewpoints: " + game["id"])
-        scores = [spectrum_score(path / Path(name).name) for name in game["images"]]
-        games[game["id"]] = {"views": scores, "peak": max(scores)}
+        files = [path / Path(name).name for name in game["images"]]
+        separation = view_separation(files)
+        if separation < 2.5:
+            raise ValueError(
+                "Three screenshots are not visibly distinct for " +
+                game["id"] + ": minimum mean brightness difference=" +
+                str(separation)
+            )
+        scores = [spectrum_score(filename) for filename in files]
+        games[game["id"]] = {
+            "views": scores, "peak": max(scores), "view_separation": separation
+        }
     if not games:
         raise ValueError("No images captured")
     return games

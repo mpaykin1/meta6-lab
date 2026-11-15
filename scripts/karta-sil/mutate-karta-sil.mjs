@@ -290,3 +290,37 @@ test('карта сил: push повторяется после rebase, а не 
     assert.throws(()=>checkPublishRetry(yml.replace(from,to)),undefined,label);
   }
 });
+
+import {watchdogClosed} from './build.mjs';
+function checkClosedAbandoned(status, watchdog) {
+  const last = '2026-11-13T00:00:00Z';
+  const base = {state:'closed',merged_at:null,closed_at:'2026-11-13T12:00:00Z',comments:[]};
+  const comments = [{author:{login:'github-actions[bot]'},
+    body:'закрыт сторожем как заброшенный'}];
+  assert.equal(status(base,last),'закрыто');
+  assert.equal(status({...base,closed_at:'2026-11-14T00:00:01Z'},last),'брошено');
+  assert.equal(status({...base,closed_at:'2026-11-14T00:00:00Z'},last),'закрыто');
+  assert.equal(watchdog(comments),true);
+  assert.equal(status({...base,comments},last),'брошено');
+  assert.equal(status({...base,comments:[{...comments[0],author:{login:'other'}}]},last),
+    'закрыто');
+  assert.equal(status({...base,merged_at:'2026-11-13T11:00:00Z',comments},last),'слито');
+}
+test('закрытые без слияния: комментарий сторожа или 24ч без коммитов',async()=>{
+  checkClosedAbandoned(statusOf,watchdogClosed);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const mutants=[
+    source.replace("if (watchdogClosed(pr.comments || [])) return 'брошено';",
+      "if (watchdogClosed(pr.comments || [])) return 'закрыто';"),
+    source.replace('Date.parse(lastCommitTime) > 86400000)',
+      'Date.parse(lastCommitTime) > 172800000)'),
+    source.replace("return comments.some(comment =>",
+      "return comments.length > 0 || comments.some(comment =>")
+  ];
+  for(const [index,changed] of mutants.entries()){
+    assert.notEqual(changed,source,'мутация должна изменить код: '+index);
+    const module=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    assert.throws(()=>checkClosedAbandoned(module.statusOf,module.watchdogClosed),
+      undefined,'мутант '+index+' не должен пройти');
+  }
+});

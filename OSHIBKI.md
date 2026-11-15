@@ -81,3 +81,4 @@
 | 1131 | 14.11.2026 | Карта сил: первый запуск на main посчитал карту, но потерял её на «git push rejected (fetch first)» — main двигают другие боты | [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/43581137135) | `scripts/karta-sil/mutate-karta-sil.mjs` (тест «push повторяется после rebase», 3 мутации) |
 
 - 2026-11-15 · library-machine: `source-only-pr-cli.mjs` падал «Cannot read base game tree: 128» на любой НОВОЙ игре — `git cat-file -e` для пути, которого нет в main, возвращает 128, а не 1. Исправлено на `git ls-tree` (пустой ответ = игра новая). Ловушка: PR #323 (новая игра wild-train-prologue) проходит гейт.
+| 1132 | 15.11.2026 | Карта сил относила закрытые сторожем и после 24ч простоя PR к обычным закрытиям | statusOf не различал причину закрытия | `scripts/karta-sil/mutate-karta-sil.mjs`: 3 мутации, включая обман |

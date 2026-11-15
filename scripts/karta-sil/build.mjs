@@ -94,9 +94,25 @@ export function identifyActor(pr, busy) {
   return found.size === 1 ? [...found][0] : actors[2];
 }
 
+export function watchdogClosed(comments) {
+  if (!Array.isArray(comments)) throw new Error('PR comments: нет данных');
+  return comments.some(comment =>
+    /^(?:github-actions\[bot\]|github-actions)$/i.test(comment?.author?.login || '') &&
+    /закрыт сторожем как заброшенн/i.test(comment?.body || ''));
+}
+
 export function statusOf(pr, lastCommitTime, now = Date.now()) {
   if (pr.merged_at && pr.state === 'closed') return 'слито';
-  if (pr.state === 'closed') return 'закрыто';
+  if (pr.state === 'closed') {
+    if (watchdogClosed(pr.comments || [])) return 'брошено';
+    if (pr.closed_at && lastCommitTime &&
+        !Number.isNaN(Date.parse(pr.closed_at)) &&
+        !Number.isNaN(Date.parse(lastCommitTime)) &&
+        Date.parse(pr.closed_at) - Date.parse(lastCommitTime) > 86400000) {
+      return 'брошено';
+    }
+    return 'закрыто';
+  }
   if (pr.state !== 'open' || !lastCommitTime || Number.isNaN(Date.parse(lastCommitTime))) {
     throw new Error('PR state/commit: нет данных');
   }
@@ -167,21 +183,27 @@ function attributedErrors(journal, number) {
 const PR_QUERY = `query($owner:String!,$name:String!,$cursor:String){repository(owner:$owner,name:$name){
 pullRequests(first:25,after:$cursor,orderBy:{field:UPDATED_AT,direction:DESC},states:[OPEN,CLOSED,MERGED]){
 pageInfo{hasNextPage endCursor}
-nodes{number url state isDraft title body headRefName headRefOid createdAt updatedAt mergedAt changedFiles
+nodes{number url state isDraft title body headRefName headRefOid createdAt updatedAt mergedAt closedAt changedFiles
 files(first:100){nodes{path}}
+comments(last:5){nodes{author{login} body}}
 commits(last:50){nodes{commit{committedDate statusCheckRollup{state}}}}}}}}`;
 
 export function toRestShape(node) {
   if (!Number.isSafeInteger(node?.number) || !node.headRefOid || !node.createdAt || !node.updatedAt ||
       !['OPEN','CLOSED','MERGED'].includes(node.state) || !Array.isArray(node.files?.nodes) ||
       !Array.isArray(node.commits?.nodes)) throw new Error('GraphQL PR: нет данных');
+  if (node.state === 'CLOSED' && (!node.closedAt || !Array.isArray(node.comments?.nodes))) {
+    throw new Error('Closed PR details: нет данных #' + node.number);
+  }
   const commits = node.commits.nodes.map(x => x?.commit).filter(Boolean);
   const lastCommit = commits.at(-1)?.committedDate;
   if (!lastCommit) throw new Error('PR commit date: нет данных #' + node.number);
   return {
     pr: {number:node.number, html_url:node.url, state:node.state === 'OPEN' ? 'open' : 'closed',
       merged_at:node.mergedAt || null, draft:node.isDraft === true, title:node.title, body:node.body,
-      head:{ref:node.headRefName, sha:node.headRefOid}, created_at:node.createdAt, updated_at:node.updatedAt},
+      head:{ref:node.headRefName, sha:node.headRefOid}, created_at:node.createdAt,
+      updated_at:node.updatedAt, closed_at:node.closedAt || null,
+      comments:node.comments?.nodes || []},
     filenames: node.files.nodes.map(x => x.path),
     changedFiles: Number.isInteger(node.changedFiles) ? node.changedFiles : node.files.nodes.length,
     lastCommit,

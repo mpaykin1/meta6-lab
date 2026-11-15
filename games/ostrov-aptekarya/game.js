@@ -524,6 +524,7 @@ Object.defineProperties(api, Object.getOwnPropertyDescriptors({
   get progress() { return heard + counts.herbs + counts.shrooms + counts.water + chapter2.pages + chapter2.doorsClosed; },
   get chapter() {return ['archive','archiveCaught','chapter2End'].includes(state) ? 2 : 1;},
   get chapter1Ended() {return state === 'ending';},
+  get chapter1CardReady() {return state === 'ending' && document.getElementById('ap-end')?.hidden === false;},
   get archivePages() {return chapter2.pages;},
   get archiveDoors() {return chapter2.doorsClosed;},
   get archiveCaught() {return chapter2.caught;},

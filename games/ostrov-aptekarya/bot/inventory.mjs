@@ -19,7 +19,7 @@ const baseline = {
 const hash = s => {let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return (h>>>0).toString(16).padStart(8,'0');};
 const countLines = s => (s.match(/\['[aiv]',/g) || []).length;
 export function inventory(input) {
-  const {dialogue,game,ui,girl,audio,adapter,playthrough} = input;
+  const {dialogue,game,ui,girl,audio,adapter,playthrough,strategy} = input;
   const section = dialogue.split('export const SCRIPT = {')[1]?.split('\n};')[0];
   if (!section) throw Error('SCRIPT отсутствует');
   const entries = Object.fromEntries([...section.matchAll(/^  ([\w]+): \[\n([\s\S]*?)^  \],?/gm)]
@@ -44,7 +44,9 @@ export function inventory(input) {
     'function startChase()', 'function toEnding(', "debugChase()", 'get caughtCount()']) {
     if(!game.includes(marker))throw Error('Потеряна механика главы I: '+marker);
   }
-  if(!adapter.includes('Object.freeze')) throw Error('Ручка META BOT не защищена');
+  if(!adapter.includes('Object.freeze') || !adapter.includes('levels: 4')) throw Error('Ручка META BOT не защищена или потеряны 3 уровня главы I');
+  if(!game.includes('get chapter1CardReady()') || !adapter.includes('ap.chapter1CardReady') || !strategy.includes('ctx.state().chapter1CardReady'))
+    throw Error('Переход в архив возможен до появления настоящей карточки');
   // Бот ведёт героя, но не должен автоматически закрывать двери внутри игровой логики.
   // Разрешён только настоящий ввод игрока (нажатие Space / иконки) из внешнего бота.
   const botBody = game.split('function botInput(dt) {')[1]?.split('// ---------- Симуляция')[0];
@@ -74,6 +76,6 @@ export function inventory(input) {
 export function sourceInput() {return {
   dialogue:read('dialogue.js'),game:read('game.js'),ui:read('ui.js'),
   girl:read('girl.js'),audio:read('audio.js'),adapter:read('bot-adapter.js'),
-  playthrough:read('bot/playthrough.mjs')
+  playthrough:read('bot/playthrough.mjs'),strategy:read('bot-strategy.mjs')
 };}
 console.log(JSON.stringify(inventory(sourceInput()),null,2));

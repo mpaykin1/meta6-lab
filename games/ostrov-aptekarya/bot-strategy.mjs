@@ -14,17 +14,17 @@ export async function playLevel(ctx, level) {
     const s = ctx.state();
     if (s.goal) await ctx.walkToGoal();
     else await ctx.wait(400);
-    if (level === 1) {
+    if (level === 2) {
       await pressAction(ctx);
       if (s.enemies) {await ctx.joystick(1, 0, 90);await ctx.joystick(-1, 0, 90);}
-    } else if (level === 2) {
+    } else if (level === 3) {
       if (s.goal?.door || ctx.state().archiveDoors === 0) {
         await pressAction(ctx); // створка закрывается только рядом; не телепорт
       }
       if (s.enemies && s.goal?.door) await ctx.wait(250);
     }
   }
-  if (level === 1 && ctx.state().levelDone && !ctx.state().gameDone) {
+  if (level === 2 && ctx.state().chapter1CardReady && !ctx.state().gameDone) {
     // Карточка окончания первой главы целиком нажимается. Никаких вызовов игрового API.
     await ctx.tap(ctx.viewport.width / 2, ctx.viewport.height / 2);
     await ctx.wait(650);

@@ -10,6 +10,16 @@ on:
       - 'scripts/visual/**'
       - 'rules/01-stil-i-grafika/BEZ_PATTERNOV.md'
       - '.github/workflows/bez-patternov.yml'
+      # Root-level worlds are linked from meta-games/index.html (e.g. ashen-sumerek/).
+      - '**/*.js'
+      - '**/*.mjs'
+      - '**/*.cjs'
+      - '**/*.ts'
+      - '**/*.tsx'
+      - '**/*.glsl'
+      - '**/*.vert'
+      - '**/*.frag'
+      - '**/*.html'
   push:
     branches: [main]
     paths:
@@ -20,6 +30,16 @@ on:
       - 'shared/**'
       - 'scripts/visual/**'
       - '.github/workflows/bez-patternov.yml'
+      # Root-level worlds are linked from meta-games/index.html (e.g. ashen-sumerek/).
+      - '**/*.js'
+      - '**/*.mjs'
+      - '**/*.cjs'
+      - '**/*.ts'
+      - '**/*.tsx'
+      - '**/*.glsl'
+      - '**/*.vert'
+      - '**/*.frag'
+      - '**/*.html'
   schedule:
     - cron: '23 3 * * 1'
   workflow_dispatch:

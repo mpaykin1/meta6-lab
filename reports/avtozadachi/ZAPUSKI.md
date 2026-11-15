@@ -61,3 +61,6 @@
 
 | MG-строитель-2 | 2026-11-15T20:16:20Z | старт |
 | MG-строитель-2 | 2026-11-15T20:16:20Z | итог: блокер — [45 открытых PR](https://github.com/mpaykin1/meta6-lab/pulls) при лимите 5; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md) — 13 «НУЖЕН CLAUDE», свободных карточек 0; собственных открытых PR с атрибуцией 0; [карта сил](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json): workflow_ci красная из-за repeatedErrors=true и newErrors=6, хотя redPerMerge=0; game_fix красная, redPerMerge=null. Новые PR запрещены |
+
+| MG-строитель-2 | 2026-11-15T21:11:26Z | старт |
+| MG-строитель-2 | 2026-11-15T21:11:26Z | итог: блокер — [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md) содержит только 13 «НУЖЕН CLAUDE»; [ZADACHI](https://github.com/mpaykin1/meta6-lab/blob/main/ZADACHI.md) содержит зависшие работы, но [TOLKNUT](https://github.com/mpaykin1/meta6-lab/blob/main/TOLKNUT.md) запрещает выдачу перечисленных PR автозадачам; [карта сил](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json): workflow_ci красная, redPerMerge=0; game_fix красная, redPerMerge=null; точная текущая квота PR не подтверждена |

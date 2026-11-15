@@ -3,24 +3,24 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 85, слито 6, закрыто 63, открыто 16 — бот, 2026-11-15 11:01 UTC
+Итог: всего 118, слито 6, закрыто 67, открыто 45 — бот, 2026-11-15 23:06 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
 | #234 | код | — | Каталог игр без рекламы | open unknown | CLAUDE: да/нет? изменение scripts/storozha/** внутри каталога; [вопрос #234](https://github.com/mpaykin1/meta6-lab/pull/234); draft |
-| #242 | код | — | SEO каталога | open unknown | draft: ЖДЁТ принятый каталог [#234](https://github.com/mpaykin1/meta6-lab/pull/234) и зелёный CI/SEO |
+| #242 | код | — | SEO каталога | open | draft: ЖДЁТ принятый каталог [#234](https://github.com/mpaykin1/meta6-lab/pull/234) и зелёный CI/SEO |
 | #247 | код | — | Проверяющий и STOROZHA | open unknown | CLAUDE: да/нет? scripts/storozha/**; [STOROZHA FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43414460298); draft |
 | #254 | код | — | Auditor | open unknown | draft: ЖДЁТ конфликт main и CI [#254](https://github.com/mpaykin1/meta6-lab/pull/254); auditor не CORE_WORKFLOW |
 | #258 | код | — | B2 проходчик | open unknown | draft: ЖДЁТ merge main и нового полного CI; [B2 PASS 43420129986](https://github.com/mpaykin1/meta6-lab/actions/runs/43420129986); Claude не нужен |
 | #262 | код | — | Archer pixel proof | open unknown | draft: ЖДЁТ визуальный before/after и конфликт main [#262](https://github.com/mpaykin1/meta6-lab/pull/262) |
-| #264 | код | — | Archer wall running | open unknown | draft: ЖДЁТ #262, конфликт main и визуальный PASS [#264](https://github.com/mpaykin1/meta6-lab/pull/264) |
+| #264 | код | — | Archer wall running | open dirty | draft: ЖДЁТ #262, конфликт main и визуальный PASS [#264](https://github.com/mpaykin1/meta6-lab/pull/264) |
 | #268 | код | — | Ссылка 200 и Link Guard | open unknown | draft: ЖДЁТ зелёный CI и HTTP 200 восстановленных URL [#268](https://github.com/mpaykin1/meta6-lab/pull/268) |
 | #280 | код | — | INK объекты | open unknown | draft: ЖДЁТ визуальный PASS пяти INK объектов и зелёный CI [#280](https://github.com/mpaykin1/meta6-lab/pull/280) |
 | #283 | код | — | INK Fallen Guardian | open unknown | draft: ЖДЁТ сравнение с текущим INK эталоном и зависимость #284 [#283](https://github.com/mpaykin1/meta6-lab/pull/283) |
 | #284 | код | — | INK эталон ZIP | open unknown | draft: ЖДЁТ безопасно сохранить ZIP_SNAPSHOT.json, не затереть уже существующий index.html в main [#284](https://github.com/mpaykin1/meta6-lab/pull/284) |
 | #286 | код | — | INK рецепт | open unknown | draft: ЖДЁТ независимую проверку INK-рецепта и CI [#286](https://github.com/mpaykin1/meta6-lab/pull/286) |
-| #287 | код | — | INK v2 | open unknown | draft: ЖДЁТ отдельный визуальный PASS v2 и CI [#287](https://github.com/mpaykin1/meta6-lab/pull/287) |
-| #288 | код | — | INK stone bell | open unknown | draft: ЖДЁТ визуальный PASS колокола и CI [#288](https://github.com/mpaykin1/meta6-lab/pull/288) |
+| #287 | код | — | INK v2 | open | draft: ЖДЁТ отдельный визуальный PASS v2 и CI [#287](https://github.com/mpaykin1/meta6-lab/pull/287) |
+| #288 | код | — | INK stone bell | open | draft: ЖДЁТ визуальный PASS колокола и CI [#288](https://github.com/mpaykin1/meta6-lab/pull/288) |
 | #278 | код | — | ТОЛКАЧ safe merge | open unknown | draft: ЖДЁТ результата параллельной работы в ветке 62ab7cd и свежего CI [#278](https://github.com/mpaykin1/meta6-lab/pull/278); чужую активную ветку не трогать |
 | #289 | код | — | POLZA Gate | open unknown | draft: ЖДЁТ согласованного bootstrap POLZA и обязательного статуса в main [#289](https://github.com/mpaykin1/meta6-lab/pull/289); конфликт main |
 | #290 | код | — | INK без паттернов | open unknown | draft: ЖДЁТ визуальную приёмку изменения принятого INK-движка и CI [#290](https://github.com/mpaykin1/meta6-lab/pull/290); main имеет другой shader SHA |
@@ -35,20 +35,20 @@
 | #313 | код | — | Portal Play Connect Earn | open unknown | draft: ЖДЁТ настоящий META BOT без застревания и полный CI [#313](https://github.com/mpaykin1/meta6-lab/pull/313) |
 | #314 | код | — | Sunken City source ZIP | open unknown | draft: ЖДЁТ зелёный META BOT и Library Machine; ZIP оригинала сохранить [#314](https://github.com/mpaykin1/meta6-lab/pull/314) |
 | #319 | код | — | Source-only git 128 | open unknown | draft: ЖДЁТ source-only-base (отсутствует в main), зелёный Library Machine и новый CI [#319](https://github.com/mpaykin1/meta6-lab/pull/319) |
-| #321 | код | — | INK Raven | open unknown | live: ЖДЁТ отдельного OWNER PASS перед слиянием; [INK Raven 3D PASS 43594499481](https://github.com/mpaykin1/meta6-lab/actions/runs/43594499481) |
+| #321 | код | — | INK Raven | open | live: ЖДЁТ отдельного OWNER PASS перед слиянием; [INK Raven 3D PASS 43594499481](https://github.com/mpaykin1/meta6-lab/actions/runs/43594499481) |
 | #322 | код | — | INK Train | open unknown | draft: ЖДЁТ устранения [KONTUR FAIL 43749151115](https://github.com/mpaykin1/meta6-lab/actions/runs/43749151115) и визуального OWNER PASS [#322](https://github.com/mpaykin1/meta6-lab/pull/322) |
 | #325 | код | — | INK Monster | open unknown | draft: ЖДЁТ визуального OWNER PASS монстра и полного CI [#325](https://github.com/mpaykin1/meta6-lab/pull/325) |
 | #326 | код | — | INK Viaduct | open unknown | draft: ЖДЁТ визуального OWNER PASS 3D-виадуков и CI [#326](https://github.com/mpaykin1/meta6-lab/pull/326) |
 | #332 | код | — | INK Carrion Stalker | open unknown | draft: ЖДЁТ HTTP 200 превью и визуальный OWNER PASS робота [#332](https://github.com/mpaykin1/meta6-lab/pull/332) |
 | #311 | код | `lab/bot-audit-20261114` | Ремонт JSON и ассетов | open unknown | draft: ЖДЁТ merge main и [STOROZHA FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43554135089); [PR #311](https://github.com/mpaykin1/meta6-lab/pull/311) |
-| #272 | игра | `lab/uluchshatel-sumerki-copy-bot13-20261112` | Read-only META BOT №13 | open unknown | закрыт: сторожем как заброшенный, без слияния; META BOT не подтверждён [PR #272](https://github.com/mpaykin1/meta6-lab/pull/272#issuecomment-6898808356) |
+| #272 | игра | `lab/uluchshatel-sumerki-copy-bot13-20261112` | Read-only META BOT №13 | closed | закрыт: сторожем как заброшенный, без слияния; META BOT не подтверждён [PR #272](https://github.com/mpaykin1/meta6-lab/pull/272#issuecomment-6898808356) |
 | #255 | игра | `lab/archer-meta-adfree-clean-1111` | Archer adfree и адаптивный FPS | open unknown | draft: ЖДЁТ устранения META BOT FAIL и конфликта [#255](https://github.com/mpaykin1/meta6-lab/pull/255); Claude не нужен |
 | #260 | код | `lab/uluchshatel-preflight-20261111` | Защита захвата игр | open unknown | draft: ЖДЁТ конфликт main и STOROZHA [#260](https://github.com/mpaykin1/meta6-lab/pull/260); Claude не нужен |
 | #261 | код | `lab/biblioteka-contract-20261111` | Контракт библиотеки | open unknown | draft: ЖДЁТ STOROZHA и CI [#261](https://github.com/mpaykin1/meta6-lab/pull/261); Claude не нужен |
 | #218 | код | `lab/remont-r1-library` | R1: обновление библиотеки | open unknown | draft: ЖДЁТ merge main и Library Machine [#218](https://github.com/mpaykin1/meta6-lab/pull/218); Claude не нужен |
 | #220 | код | `lab/zadachi-conflicts` | ZADACHI watch | open unknown | draft: ЖДЁТ merge main, устранения конфликтов и полного CI [#220](https://github.com/mpaykin1/meta6-lab/pull/220); Claude не нужен |
 | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ честную интеграцию Library Machine, без ослабления source-only; [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) |
-| #235 | игра | `lab/fix-mobile-screen-all-games-1111` | Неподвижный экран при джойстике | open unknown | закрыт: сторожем как заброшенный, без слияния; исправление экрана не подтверждено [PR #235](https://github.com/mpaykin1/meta6-lab/pull/235#issuecomment-6898807686) |
+| #235 | игра | `lab/fix-mobile-screen-all-games-1111` | Неподвижный экран при джойстике | closed | закрыт: сторожем как заброшенный, без слияния; исправление экрана не подтверждено [PR #235](https://github.com/mpaykin1/meta6-lab/pull/235#issuecomment-6898807686) |
 | #245 | игра | `lab/remont-main-veil-terraces` | Шесть воспоминаний без застреваний | open unknown | CLAUDE: да/нет? изменение принятого Veil Terraces; [вопрос #245](https://github.com/mpaykin1/meta6-lab/pull/245); draft |
 | #277 | ядро | `lab/storozha-nedelya` | Три сторожа: update-heads и rename protection | open unknown | CLAUDE: да/нет? защищённое scripts/storozha/**; [вопрос #277](https://github.com/mpaykin1/meta6-lab/pull/277); draft |
 | #248 | ядро | `lab/pr-autofinish-followup-1111` | Доверенный автообновлятор PR и журнал | open unknown | CLAUDE: да/нет? защищённый pr-autofinish; [вопрос #248](https://github.com/mpaykin1/meta6-lab/pull/248); draft |
@@ -62,7 +62,7 @@
 | #206 | эталон | `lab/king-of-ash-reference-1109` | Эталон: Король Пепла (оригинальный HTML) | closed | закрыт: дубль, сохранён [PR #207](https://github.com/mpaykin1/meta6-lab/pull/207), [PR #206](https://github.com/mpaykin1/meta6-lab/pull/206) |
 | #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |
 | #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |
-| #191 | эталон | `lab/sunken-city-reference-1109` | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и катало | open unknown | закрыт: сторожем как заброшенный; ветка и оригинальный ZIP сохранены; замена [#314](https://github.com/mpaykin1/meta6-lab/pull/314) ещё draft |
+| #191 | эталон | `lab/sunken-city-reference-1109` | Эталон «Затонувший город»: исходный ZIP, 3D-витрина и катало | closed | закрыт: сторожем как заброшенный; ветка и оригинальный ZIP сохранены; замена [#314](https://github.com/mpaykin1/meta6-lab/pull/314) ещё draft |
 | #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |
 | #137 | эталон | `lab/demonic-hand-webgl2-reference` | Add Demonic Hand as owner-approved WebGL2 reference | closed | | закрыт stale: конфликт с main, красный [Portal Visited](https://github.com/mpaykin1/meta6-lab/actions/runs/42496471465), [PR #137](https://github.com/mpaykin1/meta6-lab/pull/137) |
 | #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | closed | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |
@@ -122,7 +122,7 @@
 | #6 | код | `lab/world-doors-progress` | lab: persistent visited-world doors without touching accepte | closed | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42285373653), [PR #6](https://github.com/mpaykin1/meta6-lab/pull/6) |
 | #5 | код | `lab/oss-commercial-kit` | lab: коммерчески разрешённые OSS-модули и игровая сцена | closed | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42286065563), [PR #5](https://github.com/mpaykin1/meta6-lab/pull/5) |
 | #4 | код | `lab/native-catalog-and-steam` | lab: native catalog and safe Steam/Android candidates | closed | закрыт stale: 48ч+ без коммита, [красный deploy](https://github.com/mpaykin1/meta6-lab/actions/runs/42285011814), [PR #4](https://github.com/mpaykin1/meta6-lab/pull/4) |
-| #3 | код | `lab/twilight-island-bot` | lab: Twilight Island — бот проходит весь остров | open unknown | закрыт: сторожем как заброшенный; ветка сохранена; чистый перенос ещё нужен [PR #3](https://github.com/mpaykin1/meta6-lab/pull/3#issuecomment-6898806224) |
+| #3 | код | `lab/twilight-island-bot` | lab: Twilight Island — бот проходит весь остров | closed | закрыт: сторожем как заброшенный; ветка сохранена; чистый перенос ещё нужен [PR #3](https://github.com/mpaykin1/meta6-lab/pull/3#issuecomment-6898806224) |
 | #2 | код | `lab/twilight-isles-pass` | lab: Twilight Isles GPU optimization, single RAF, first-isla | closed | закрыт stale: 48ч+ без коммита, [красный bot](https://github.com/mpaykin1/meta6-lab/actions/runs/42356322630), [PR #2](https://github.com/mpaykin1/meta6-lab/pull/2) |
 | #1 | код | `lab/twilight-island-pass` | lab: Twilight Island bot pass — combined #291 and #303 | closed | закрыт stale: красный META BOT, нет коммитов >48 ч — [PR #1](https://github.com/mpaykin1/meta6-lab/pull/1), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42356940858) |
 

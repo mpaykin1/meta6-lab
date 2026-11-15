@@ -47,6 +47,9 @@ DOC_FILES = {".md", ".txt"}
 MANIFEST_NAMES = ("pack.json", "atlas.json", "manifest.json", "skin.json")
 ZIP_MAX_BYTES = 100 * 1024 * 1024
 ZIP_MAX_FILES = 4096
+WINDOWS_DEVICES = {"con", "prn", "aux", "nul", "conin$", "conout$"} | {
+    prefix + str(n) for prefix in ("com", "lpt") for n in range(1, 10)
+}
 
 
 def extract_pack(archive: Path, target: Path) -> Path:
@@ -62,6 +65,8 @@ def extract_pack(archive: Path, target: Path) -> Path:
             mode = member.external_attr >> 16
             if (name.startswith("/") or any(p in ("", ".", "..") or ":" in p for p in parts)
                     or any(p.endswith((" ", ".")) for p in parts)
+                    or any(p.split(".", 1)[0].casefold() in WINDOWS_DEVICES for p in parts)
+                    or any(ord(c) < 32 or c in '<>"|?*' for c in name)
                     or stat.S_ISLNK(mode) or member.flag_bits & 1):
                 raise ValueError("Unsafe ZIP member: " + member.filename)
             key = name.rstrip("/").casefold()

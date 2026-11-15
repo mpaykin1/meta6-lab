@@ -9,6 +9,17 @@
 **ЗАМОРОЖЕНО ДО ФИНИША (09.11.2026):** Steam, Google Play, Earn / реклама / 100 DAU, аккаунты, профили, уведомления — не делать, пока не зелёные все 18 проверок [FINISH.md](rules/09-platforma/FINISH.md). Сначала M1 → M2 → B1 → B2.
 
 <!-- карточки ниже -->
+### lab/immersive-dishonored-principles-20261107 — IM1–IM5 для всех игр
+- Польза: новые уровни рассказывают историю окружением, предлагают альтернативные маршруты, вертикальность, узнаваемую живопись и информативный звук.
+- Правило: [IMMERSIVE_LEVEL_DESIGN.md](rules/02-igrovye-mekhaniki/IMMERSIVE_LEVEL_DESIGN.md); пункт 15 [RULES_CHECKLIST.md](rules/09-platforma/RULES_CHECKLIST.md).
+- Ветка / SHA: `lab/immersive-dishonored-principles-20261107` / `7764f7df208e483be3d45639ee64b0f72f5750aa` (до карточки).
+- PR: https://github.com/mpaykin1/meta6-lab/pull/72
+- Семь движков: https://github.com/mpaykin1/World_server/pull/634
+- Поиграть: не новая игра; изменение спецификаций, без правки игрового кода.
+- Проверка: поведение игр не проверено, META BOT потребуется при внедрении.
+- Статус: В РАБОТЕ — требуется ревью Claude и отдельное внедрение по играм; без автоматического переноса в `meta6`.
+- Михаил: —; Claude: —
+
 ### lab/link-guard-recovery-1111 — ССЫЛКА = 200: восстановление и защита (11.11.2026)
 - Шаг 1/6: DONE — [PR #266 закрыт как дубль](https://github.com/mpaykin1/meta6-lab/pull/266), [комментарий](https://github.com/mpaykin1/meta6-lab/pull/266#issuecomment-6801260398).
 - Шаг 2/6: CODE, NOT LIVE — 11 файлов восстановлены [4204e3f](https://github.com/mpaykin1/meta6-lab/commit/4204e3fdc7398de8a5071a8587010db510e7435e), синхронизация защищена [0ff9507](https://github.com/mpaykin1/meta6-lab/commit/0ff9507aa40b1ca5b4fa6f8d3a6c1935cf8138cd), unpublished twilight-island снят [21b3641](https://github.com/mpaykin1/meta6-lab/commit/21b364123acb818b77dac280945689dd6adedc84).

@@ -41,7 +41,8 @@ def exercise(module):
             raise AssertionError("unsafe ZIP accepted: " + repr(entries))
 
         for name in ("../escape.txt", "..\\escape.txt", "/absolute.txt", "C:/drive.txt",
-                     "C:relative.txt", "folder/../escape.txt", "name. /data", "x//data"):
+                     "C:relative.txt", "folder/../escape.txt", "name. /data", "x//data",
+                     "CON.txt", "folder/AUX.png", "LPT1", "bad?.png", "bad\x01.png"):
             rejected([("first.txt", "must not be written"), (name, "unsafe")])
         rejected([("A.txt", "one"), ("a.txt", "two")])
         link = zipfile.ZipInfo("linked")

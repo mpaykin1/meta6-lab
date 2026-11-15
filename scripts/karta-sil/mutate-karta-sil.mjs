@@ -491,3 +491,39 @@ test('3 дня: старый PR, слитый сегодня, обязатель
     assert.notDeepEqual(mod.recentCohort(items,3,now).map(x=>x.number),[1,2,4]);
   }
 });
+
+import {resolvedActorFromEvidence} from './build.mjs';
+function checkEvidence(resolve) {
+  const dict={...dictionary,branchActors:[{pattern:'^lab/mg-stroitel',actor:'автозадача'}]};
+  const pr={number:331,title:'про автозадачи',
+    body:'Исполнитель: чат ChatGPT',head:{ref:'lab/mg-stroitel-2'}};
+  const row='| PR #331 | lab/mg-stroitel-2 | MG-строитель-2 | now |';
+  assert.equal(resolve(pr,row,dict),'чат ChatGPT');
+  assert.equal(resolve({...pr,body:''},row,dict),'автозадача');
+  assert.equal(resolve({...pr,body:''},'',dict),'автозадача');
+  assert.equal(resolve({...pr,body:'',number:33,head:{ref:'lab/neutral'}},
+    '| PR #331 | lab/neutral-extra | MG-строитель-2 | now |',dict),'неизвестно');
+  assert.equal(resolve({...pr,body:'Исполнитель: MG-строитель-1\nИсполнитель: чат ChatGPT'},
+    row,dict),'неизвестно');
+  assert.equal(resolve({...pr,body:'',head:{ref:'lab/neutral'}},
+    '| PR #331 | lab/neutral | MG-строитель-1 | then |\n'+
+    '| PR #331 | lab/neutral | чат ChatGPT | now |',dict),'неизвестно');
+  assert.equal(resolve({...pr,body:'Исполнитель: —'},row,dict),'автозадача');
+}
+test('исполнитель карты: явное указание, подтверждённая история, документированная ветка',async()=>{
+  checkEvidence(resolvedActorFromEvidence);
+  const original=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const changes=[
+    ['if(declared && declared!==actors[2]) return declared;','if(false) return declared;'],
+    ["cells[1]?.replaceAll('`','')===branch","cells[1]?.includes(branch)"],
+    ['return matches.size===1 ? [...matches][0] : actors[2];','return actors[0];'],
+    ['if(owners.size>1) return actors[2];','if(pr.number===331) return actors[1];']
+  ];
+  for(const [a,b] of changes){
+    assert.ok(original.includes(a),'мутация без якоря '+a);
+    const mutation=original.replace(a,b);
+    const mod=await import('data:text/javascript;base64,'+
+      Buffer.from(mutation).toString('base64'));
+    assert.throws(()=>checkEvidence(mod.resolvedActorFromEvidence));
+  }
+});

@@ -59,6 +59,14 @@ export function validateDictionary(dictionary) {
         (!t.paths.length && !t.words.length)) throw new Error('Invalid type dictionary');
     ids.add(t.id);
   }
+  if (dictionary.branchActors !== undefined) {
+    if (!Array.isArray(dictionary.branchActors)) throw new Error('Invalid branch actor rules');
+    for (const rule of dictionary.branchActors) {
+      if (!rule.pattern?.startsWith('^') || !actors.includes(rule.actor) ||
+          rule.actor === 'неизвестно') throw new Error('Invalid branch actor rule');
+      new RegExp(rule.pattern);
+    }
+  }
   return dictionary;
 }
 
@@ -120,6 +128,35 @@ export function statusOf(pr, lastCommitTime, now = Date.now()) {
   // #309: отложенный draft не равен невыполненной работе и не портит долю слияний.
   if (pr.draft === true) return 'отложено';
   return now - Date.parse(lastCommitTime) > 86400000 ? 'брошено' : 'активно';
+}
+
+
+export function resolvedActorFromEvidence(pr, busy, dictionary = {}) {
+  // Явное указание важнее всех исторических записей.
+  const markers=[...String(pr.body||'').matchAll(/^Исполнитель:\s*([^\n]+)/gmi)];
+  if(markers.length){
+    const kinds=new Set(markers.map(m=>identifyActor(
+      {...pr,head:{ref:null},body:'Исполнитель: '+m[1]},'')));
+    if(kinds.size>1) return actors[2];
+    const declared=[...kinds][0];
+    if(declared && declared!==actors[2]) return declared;
+  }
+  // Без подписи — только точное соответствие PR / ветки из истории ZANYATO.
+  const branch=String(pr.head?.ref||'');
+  const rows=busy.split('\n').filter(line=>{
+    const cells=line.split('|').slice(1,-1).map(x=>x.trim());
+    const byBranch=Boolean(branch) && cells[1]?.replaceAll('`','')===branch;
+    const byNumber=Number.isSafeInteger(pr.number) &&
+      new RegExp('\\bPR\\s*#'+pr.number+'\\b','i').test(cells[0]||'');
+    return byBranch || byNumber;
+  });
+  const owners=new Set(rows.map(row=>identifyActor(
+    {...pr,body:''},row)).filter(x=>x!==actors[2]));
+  if(owners.size>1) return actors[2];
+  if(owners.size===1) return [...owners][0];
+  const matches=new Set((dictionary.branchActors||[])
+    .filter(x=>new RegExp(x.pattern).test(branch)).map(x=>x.actor));
+  return matches.size===1 ? [...matches][0] : actors[2];
 }
 
 export function publishablePr(pr) {
@@ -224,6 +261,29 @@ async function actionRunHeads(journal) {
   return heads;
 }
 
+async function busyHistory() {
+  const file = 'rules/09-platforma/ZANYATO.md';
+  let log;
+  try {
+    ({stdout:log} = await gh('git',['log','--format=%H','--',file],
+      {maxBuffer:2 * 1024 * 1024}));
+  } catch (error) {
+    throw new Error('ZANYATO history: нет данных ' + error.message);
+  }
+  const commits = log.trim().split('\n').filter(Boolean);
+  if (!commits.length) throw new Error('ZANYATO history: нет данных');
+  const versions = [];
+  for (const sha of commits) {
+    try {
+      const {stdout} = await gh('git',['show',sha + ':' + file],
+        {maxBuffer:2 * 1024 * 1024});
+      versions.push(stdout);
+    } catch (error) {
+      throw new Error('ZANYATO history: нет данных ' + error.message);
+    }
+  }
+  return versions.join('\n');
+}
 
 
 // Claude 14.11.2026: один GraphQL-запрос на 25 PR вместо 4–20 REST-запросов на каждый PR.
@@ -301,7 +361,7 @@ async function graphql(query, cursor) {
 async function snapshot() {
   const dictionary = validateDictionary(JSON.parse(
     await fs.readFile('scripts/karta-sil/types.json', 'utf8')));
-  const busy = await fs.readFile('rules/09-platforma/ZANYATO.md', 'utf8');
+  const busy = await busyHistory();
   const journal = await fs.readFile('OSHIBKI.md', 'utf8');
   const runHeads = await actionRunHeads(journal);
   const prs = [];
@@ -312,7 +372,7 @@ async function snapshot() {
     const facts = publishablePr({
       number:pr.number, url:pr.html_url, type:classify(pr,filenames,dictionary),
       isClosed:pr.state === 'closed',
-      actor:identifyActor(pr,busy), status:statusOf(pr,lastCommit),
+      actor:resolvedActorFromEvidence(pr,busy,dictionary), status:statusOf(pr,lastCommit),
       created_at:pr.created_at, merged_at:pr.merged_at || null,
       lastCommit, changedFiles, failedBeforeGreen, newErrors:matches.length,
       repeatedError:matches.some(isRepeatJournalError)

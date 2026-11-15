@@ -481,3 +481,18 @@ test('доля закрытых: незакрытый заброшенный PR 
   assert.equal(m.closedShare,50);
   assert.equal(m.action,'дробить задачи / тесты до пуша');
 });
+
+test('3 дня: старый PR, слитый сегодня, обязательно виден в коротком срезе',()=>{
+  const now=Date.parse('2026-11-15T12:00:00Z');
+  const items=[
+    {number:1,status:'слито',created_at:'2026-11-06T00:00:00Z',
+      merged_at:'2026-11-15T05:00:00Z',isClosed:true},
+    {number:2,status:'закрыто',created_at:'2026-11-06T00:00:00Z',
+      closed_at:'2026-11-15T05:00:00Z',isClosed:true},
+    {number:3,status:'слито',created_at:'2026-11-06T00:00:00Z',
+      merged_at:'2026-11-07T05:00:00Z',isClosed:true},
+    {number:4,status:'активно',created_at:'2026-11-06T00:00:00Z',
+      updated_at:'2026-11-15T06:00:00Z',isClosed:false}
+  ];
+  assert.deepEqual(recentCohort(items,3,now).map(x=>x.number),[1,2,4]);
+});

@@ -351,23 +351,28 @@ async function snapshot() {
   const journal = await fs.readFile('OSHIBKI.md', 'utf8');
   const runHeads = await actionRunHeads(journal);
   const prs = [];
+  const recentCandidates = [];
   for (const item of await graphqlPulls()) {
     const {pr, filenames, changedFiles, lastCommit, failedBeforeGreen, commitShas} = item;
     const matches = attributedErrors(journal, pr, commitShas, runHeads);
-    prs.push(publishablePr({
+    const facts = publishablePr({
       number:pr.number, url:pr.html_url, type:classify(pr,filenames,dictionary),
       isClosed:pr.state === 'closed',
       actor:identifyActor(pr,busy,dictionary), status:statusOf(pr,lastCommit),
       created_at:pr.created_at, merged_at:pr.merged_at || null,
       lastCommit, changedFiles, failedBeforeGreen, newErrors:matches.length,
       repeatedError:matches.some(isRepeatJournalError)
-    }));
+    });
+    prs.push(facts);
+    // Не публиковать updated_at и closed_at: они нужны лишь для краткого среза.
+    recentCandidates.push({...facts,closed_at:pr.closed_at,updated_at:pr.updated_at});
   }
   if (!prs.length) throw new Error('GitHub GraphQL: 0 PR за 14 дней — нет данных');
   prs.sort((a,b)=>a.number-b.number);
   const metrics = compute(prs,dictionary);
-  // Короткий срез — по дате создания PR, но маршрутизация диспетчера остаётся 14-дневной.
-  const metrics3 = compute(recentCohort(prs,3),dictionary).map(m => ({
+  // Срез по дате последнего результата PR (слияния/закрытия/активности).
+  // Диспетчер по-прежнему использует 14-дневную карту.
+  const metrics3 = compute(recentCohort(recentCandidates,3),dictionary).map(m => ({
     ...m, trend:trendFor(m,metrics.find(x => x.type === m.type && x.actor === m.actor))
   }));
   return {schema:1, periodDays:14, recentDays:3, source:'GitHub GraphQL API',
@@ -379,7 +384,13 @@ export function recentCohort(prs, days, now = Date.now()) {
   return prs.filter(pr => {
     const created = Date.parse(pr.created_at);
     if (!Number.isFinite(created)) throw new Error('PR creation date: нет данных');
-    return created >= now - days * 86400000;
+    const createdRecent = created >= now - days * 86400000;
+    const eventTime = pr.status === 'слито' ? pr.merged_at :
+      pr.isClosed === true ? pr.closed_at : pr.updated_at;
+    if (!eventTime) return createdRecent;
+    const event = Date.parse(eventTime);
+    if (!Number.isFinite(event)) throw new Error('PR event date: нет данных');
+    return event >= now - days * 86400000;
   });
 }
 
@@ -417,7 +428,7 @@ function markdown(data) {
   }
   print(data.metrics,false);
   lines.push('', '## Статистика GitHub за 3 дня',
-    'Когорта по дате создания PR. Для тренда нужно не меньше трёх завершённых PR.',
+    'Срез по дате слияния, закрытия или обновления PR; минимум 3 завершения для тренда.',
     '');
   print(data.metrics3,true);
   lines.push('', '<!-- KARTA:AUTO END -->');

@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "id": "ink-fallen-guardian",
+  "title": "INK · Павший великан — акварельная долина с заросшим роботом",
+  "status": "OWNER_PASS",
+  "date": "2026-11-13",
+  "added_by": "Claude",
+  "view": "https://mpaykin1.github.io/meta6-lab/reference/ink-fallen-guardian/",
+  "rules": [
+    "read-only",
+    "БЕЗ ПАТТЕРНОВ: шум вместо суммы синусов"
+  ],
+  "external_dependency": "three@0.165.0 MIT (bundled)",
+  "files": [
+    {
+      "path": "reference/ink-fallen-guardian/README.md",
+      "git_blob_sha": "0adc54646f9ed13b2844aea7cc173d38ed85b9d4"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/client.js",
+      "git_blob_sha": "a7cb118d0f658e648b452baea1efed9a352534b0"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/index.html",
+      "git_blob_sha": "ebab783cd46d1d2a4a5eeb90951bd69ee07244c2"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/ink-batch.js",
+      "git_blob_sha": "1662ed4889794e67c82e4e0d2b9627e05ffe5693"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/ink-entry.js",
+      "git_blob_sha": "ab2f686d747597acaeb602ec16a63774bf22a4cc"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/ink-extras.js",
+      "git_blob_sha": "b7bc25dd2a310499ecd2adb5021b214e4a188e80"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/ink-fallen-robot.js",
+      "git_blob_sha": "5caaa7f896d57bdf19c99462f6f492c3d41956a9"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/ink-forest.js",
+      "git_blob_sha": "58894b822598330c5e2b2e41898a59ac18f2393e"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/ink-objects.js",
+      "git_blob_sha": "1c504dbbe29233b8034cd472e869d2b62d0cd0f3"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/ink-optics.js",
+      "git_blob_sha": "234babf38671763465f96335b8cb3776d1facfa5"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/ink-settlement.js",
+      "git_blob_sha": "8f7632bc320c3b76a5366eac534e3c504c9b4328"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/ink-world.js",
+      "git_blob_sha": "b1e896ee7484983ae7fd5795c2f16f0e30d7a8b7"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/shared/living-watercolor-3d.js",
+      "git_blob_sha": "ad5626572fb9a3d61ea8f2e8ea535f558b744c5c"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/shared/living-watercolor-generators.js",
+      "git_blob_sha": "32d6952209f419058b460c171d5ca6dab092416e"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/shared/living-watercolor-reference-gate.js",
+      "git_blob_sha": "dc1339c262331648efa795a31eef5e0583b7d6d7"
+    },
+    {
+      "path": "reference/ink-fallen-guardian/three.module.js",
+      "git_blob_sha": "fcf5e09d8ada1f25b9c3218ce9ce65e67fb54eb5"
+    }
+  ]
+}

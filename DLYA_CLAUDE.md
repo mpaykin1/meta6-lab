@@ -26,7 +26,7 @@
 | #191 | lab/sunken-city-reference-1109 | LAB_QUEUE.md, OSHIBKI.md, shared/library/index.json | 2026-11-15 |
 | #218 | lab/remont-r1-library | .github/workflows/library-machine.yml, shared/library/index.json | 2026-11-15 |
 | #220 | lab/zadachi-conflicts | .github/workflows/dispetcher.yml, .github/workflows/sliyanie-status.yml, OSHIBKI.md, automation/progress/USKORENIE.md, scripts/dispetcher/build.mjs, scripts/lab/sliyanie-status.py, scripts/status/build.mjs | 2026-11-15 |
-| #234 | lab/claude-adfree-catalog-1110 | AGENTS.md, scripts/lab/build-site.sh, scripts/storozha/core.mjs, scripts/storozha/gh-list.mjs, scripts/storozha/reference-check.mjs | 2026-11-15 |
+| #234 | lab/claude-adfree-catalog-1110 | AGENTS.md, meta-games/index.html, scripts/lab/build-site.sh, scripts/storozha/core.mjs, scripts/storozha/gh-list.mjs, scripts/storozha/reference-check.mjs | 2026-11-15 |
 | #235 | lab/fix-mobile-screen-all-games-1111 | AGENTS.md, scripts/lab/build-site.sh | 2026-11-15 |
 | #245 | lab/remont-main-veil-terraces | OSHIBKI.md, shared/library/index.json | 2026-11-15 |
 | #247 | lab/kak-proveryayushchij-traps | OSHIBKI.md, rules/06-rabota-ii-s-kodom/CHEKLIST_PROVERYAYUSHCHEGO.md, scripts/dispetcher/build.mjs, scripts/storozha/reference-check.mjs | 2026-11-15 |
@@ -48,7 +48,7 @@
 | #300 | lab/native-catalog-recovery-20261113 | OSHIBKI.md | 2026-11-15 |
 | #303 | lab/asset-pack-shpili | OSHIBKI.md, ZADACHI.md, automation/asset-check/SPEC.md | 2026-11-15 |
 | #305 | lab/assets-tumannye-shpili-20261114 | OSHIBKI.md, automation/asset-check/SPEC.md | 2026-11-15 |
-| #306 | lab/assets-tumannye-shpili-20261114-2338 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-15 |
+| #306 | lab/assets-tumannye-shpili-20261114-2338 | DLYA_CLAUDE.md, LINKS.txt, OSHIBKI.md | 2026-11-15 |
 | #310 | lab/patch-import | OSHIBKI.md | 2026-11-15 |
 | #311 | lab/bot-audit-20261114 | DLYA_CLAUDE.md, OSHIBKI.md, rules/06-rabota-ii-s-kodom/CHEKLIST_PROVERYAYUSHCHEGO.md | 2026-11-15 |
 | #319 | lab/library-source-only-probe-20261114 | OSHIBKI.md, scripts/library/source-only-pr-cli.mjs | 2026-11-15 |

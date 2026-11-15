@@ -9,11 +9,12 @@ import {settlementMakers} from '../../reference/ink-fallen-guardian/ink-settleme
 import {buildWorld} from '../../reference/ink-fallen-guardian/ink-world.js';
 import {createInkOptics} from '../../reference/ink-fallen-guardian/ink-optics.js';
 import {createFallenRobot} from '../../reference/ink-fallen-guardian/ink-fallen-robot.js';
-import {SCRIPT, AMBIENT, CHASE_BARKS} from './dialogue.js';
+import {SCRIPT, CHASE_BARKS} from './dialogue.js';
 import {createGirl} from './girl.js';
 import {createPost} from './post.js';
 import {createAudio} from './audio.js';
 import {createUI} from './ui.js';
+import {createCoast} from './coast.js';
 import {createChapter2} from './chapter2.js';
 
 const makers = {...objectMakers, ...extraObjectMakers, ...settlementMakers, robot: createFallenRobot};
@@ -42,7 +43,14 @@ const ambient = new T.HemisphereLight('#fff3d7', '#96aca3', 2.2); scene.add(ambi
 const sun = new T.DirectionalLight('#fff0cd', 1.4); sun.position.set(-5, 9, 6); scene.add(sun);
 scene.fog = new T.Fog('#e7e5d6', 64, 108);
 const valley = buildWorld({makers, paint, scene});
-const {hero, canWalk} = valley;
+// Живой берег и море вместо ровного края (эталон не меняется: старую воду только прячем, сверху — новый берег).
+const coast = createCoast({scene, paint, makers});
+valley.world.traverse(o => {   // старое озеро эталона — плоскость на y≈-0.08 до x=24
+  if (!o.isMesh || o.isInstancedMesh) return;
+  o.geometry.computeBoundingBox(); const b = o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld);
+  if (b.max.x > 23 && b.max.y < -.06 && b.min.y > -.1) o.visible = false;
+});
+const hero = valley.hero, canWalk = coast.extendWalk(valley.canWalk);
 // Корзина аптекаря — из готовых деталей мира (камни/грибы не нужны: простая плетёнка из примитивов INK).
 const basket = new T.Group();
 const weave = new T.Mesh(new T.CylinderGeometry(.2, .15, .2, 10, 1, true), new T.MeshStandardMaterial({color: '#a88a5c', roughness: 1, side: T.DoubleSide}));
@@ -64,7 +72,15 @@ const SPOTS = {
   water: [8.7, 10.8],
   spare: [[-1, -3.2], [1.6, 1.8], [-6.2, -6.5], [-13.2, -3.2], [3.2, 4.2]]
 };
-const NEAR = {shrine: V(-15, 2), fox: V(-1.8, 13.5), deer: V(-6.5, 3.7)};
+// Точки разговоров (предметы мира эталона INK и острова). r — радиус «стоим рядом».
+const ANCHORS = [
+  {id: 'shop', pos: V(-7.9, -13), r: 5.5}, {id: 'bench', pos: V(-9.15, -9.9), r: 2.6}, {id: 'car', pos: V(-12.3, -16.3), r: 3.2},
+  {id: 'lamp', pos: V(-4, -.4), r: 2.4}, {id: 'sign', pos: V(-7.3, -4.8), r: 2.6}, {id: 'shroomsRed', pos: V(-3.7, 1.4), r: 2.4},
+  {id: 'deer', pos: V(-6.5, 3.7), r: 3.4}, {id: 'robot', pos: V(-10.5, 5.8), r: 6.2}, {id: 'shrine', pos: V(-15, 2), r: 3.5},
+  {id: 'bridge', pos: V(-5.4, 8.1), r: 2.8}, {id: 'mill', pos: V(-13, 11.5), r: 3.8}, {id: 'fox', pos: V(-1.8, 13.5), r: 4},
+  {id: 'hut', pos: V(2.9, 7.8), r: 3.4}, {id: 'pier', pos: V(5.7, 10.8), r: 2.2}, {id: 'boat', pos: V(7.4, 10.8), r: 1.4},
+  ...coast.islets.map(pos => ({id: 'islet', pos, r: 6}))   // островок виден с берега
+];
 const guardian = valley.world.children.find(o => o.userData?.isFallenRobot);
 const robotHead = guardian?.children.find(c => c.isGroup && Math.abs(c.position.y - 2.64) < .01);
 const robotHands = guardian?.children.filter(c => c.isGroup && Math.abs(c.position.y - .30) < .01) || [];
@@ -167,23 +183,29 @@ const ui = createUI({
   onSound() { audio.setEnabled(!audio.enabled); return audio.enabled; },
   onPause(open) { paused = open || state === 'title'; },
   onSkip() { if (dlg.cur) dlg.t = dlg.dur; },
-  onAction() {
-    if(state === 'archive'){chapter2.action();return;}
-    useDust(); if (state === 'grab') struggle += charges > 0 ? 0 : .12;
-  },
+  onAction() { if (state === 'archive') { chapter2.action(); return; } useDust(); if (state === 'grab') struggle += charges > 0 ? 0 : .12; },
   onNext() { beginChapter2(); }
 });
 ui.bind(renderer.domElement);
 const dlg = {queue: [], cur: null, t: 0, dur: 0, idle: 0, gap: 0};
-function play(key, then, interrupt = false) {
+// anchor = {pos, r}: разговор привязан к предмету; герой ушёл дальше r+3.5 — разговор обрывается.
+function play(key, then, interrupt = false, anchor = null) {
   const lines = SCRIPT[key] || key;
   if (interrupt) { dlg.queue.length = 0; if (dlg.cur) { dlg.cur = null; ui.say(null); } }
-  lines.forEach((line, i) => dlg.queue.push({line, then: i === lines.length - 1 ? then : null}));
+  lines.forEach((line, i) => dlg.queue.push({line, anchor, then: i === lines.length - 1 ? then : null}));
 }
 function tickDialogue(dt) {
+  // Следующая фраза про предмет звучит, только если герои всё ещё рядом с ним.
+  while (dlg.queue[0]?.anchor && flat(hero.position, dlg.queue[0].anchor.pos) > dlg.queue[0].anchor.r + 1.5) {
+    const a = dlg.queue[0].anchor; dlg.queue = dlg.queue.filter(q => q.anchor !== a);
+  }
   if (!dlg.cur && dlg.queue.length && (dlg.gap -= dt) <= 0) {
     dlg.cur = dlg.queue.shift(); dlg.t = 0; dlg.dur = 1.7 + dlg.cur.line[1].length * .052;
     ui.say(dlg.cur.line); heard++; if (dlg.cur.line[0] === 'v') { audio.voice(dlg.cur.line[1]); glitchSpike = Math.max(glitchSpike, .55); }
+  }
+  if (dlg.cur?.anchor && flat(hero.position, dlg.cur.anchor.pos) > dlg.cur.anchor.r + 2.5) {
+    const a = dlg.cur.anchor; dlg.queue = dlg.queue.filter(q => q.anchor !== a);
+    dlg.t = Math.max(dlg.t, dlg.dur - .3);   // ушли от предмета — фраза гаснет, продолжения нет
   }
   if (dlg.cur) {
     dlg.idle = 0; dlg.t += dt;
@@ -193,15 +215,15 @@ function tickDialogue(dt) {
 const busy = () => !!dlg.cur || dlg.queue.length > 0;
 
 // ---------- Состояние игры ----------
-let heard = 0, frameAvg = 16, quality = 1;
+let heard = 0, frameAvg = 16, quality = 1, qualityT = 0;
 let state = 'title', stage = 0, counts = {herbs: 0, shrooms: 0, water: 0}, charges = 0;
 let day = 0, struggle = 0, lastFlip = 0, stateT = 0, chaseT = 0, glitchSpike = 0, fade = 0, fadeTo = 0;
-let flags = {}, ambientIx = 0, barkIx = 0, barkT = 0, checkpoint = START.clone(), afterWaterT = -1, warm = 0;
+let flags = {}, barkIx = 0, barkT = 0, checkpoint = START.clone(), afterWaterT = -1, warm = 0;
 let yaw = -.62, pitch = .92, zoom = 1, viewH = 15, shake = 0, elapsed = 0, previous = 0, stepT = 0;
 const heroVel = new T.Vector3(), heroDir = V(0, 1), focus = START.clone(), desired = new T.Vector3();
 const chapter2 = createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpot, beacon, burst, audio, play,
-  onCaught() {setState('archiveCaught');fadeTo=1;glitchSpike=.55;audio.stab();play('archiveCaught',null,true);},
-  onComplete() {setState('chapter2End');fadeTo=0;day=0;audio.setMood('calm');ui.end(true,2);}
+  onCaught() { setState('archiveCaught'); fadeTo=1; glitchSpike=.55; audio.stab(); play('archiveCaught',null,true); },
+  onComplete() { setState('chapter2End'); fadeTo=0; day=0; audio.setMood('calm'); ui.end(true,2); }
 });
 
 function setState(s) { state = s; stateT = 0; }
@@ -217,18 +239,18 @@ function reset() {
   chapter2.hide(); ui.mode('dust'); ui.end(false,1);
   layoutSpots(); heard = 0;
   stage = 0; counts = {herbs: 0, shrooms: 0, water: 0}; charges = 0; day = 0; struggle = 0; chaseT = 0;
-  flags = {}; ambientIx = 0; barkIx = 0; afterWaterT = -1; fade = 0; fadeTo = 0; warm = 0;
+  flags = {}; barkIx = 0; afterWaterT = -1; fade = 0; fadeTo = 0; warm = 0;
   dlg.queue.length = 0; dlg.cur = null; ui.say(null); ui.clearJournal();
   for (const it of [...herbs, ...shrooms, ...spares]) { it.taken = false; it.take = 0; it.obj.visible = it.kind === 'herb'; it.obj.scale.setScalar(it.base); it.obj.position.copy(it.pos); it.beacon.userData.want = 0; }
   waterBeacon.userData.want = homeBeacon.userData.want = 0;
   hero.position.copy(START); heroVel.set(0, 0, 0); iva.group.position.set(START.x - .8, 0, START.z - 1.1); iva.set('follow');
   audio.setMood('calm');
 }
-function begin() { setState('walk'); stage = 1; herbs.forEach(h => h.beacon.userData.want = 1); play('intro'); }
+function begin() { setState('walk'); stage = 1; herbs.forEach(h => h.beacon.userData.want = 1); dlg.idle = 99; }
 function beginChapter2() {
   if (state !== 'ending') return;
-  ui.end(false); ui.mode('archive');day=1;fade=fadeTo=0;warm=0;
-  heroVel.set(0,0,0);focus.copy(hero.position);setState('archive');chapter2.begin();
+  ui.end(false); ui.mode('archive'); day=1; fade=fadeTo=0; warm=0;
+  heroVel.set(0,0,0); focus.copy(hero.position); setState('archive'); chapter2.begin();
 }
 reset();
 
@@ -236,10 +258,10 @@ function take(it) {
   it.taken = true; burst(it.obj.position.clone().setY(.5), it.kind === 'herb' ? '#b9c86a' : '#7d9fd0'); it.beacon.userData.want = 0;
   audio.chime(it.kind === 'herb' ? 0 : 1); shake = .12;
   if (it.kind === 'herb') {
-    counts.herbs++; play('herb' + counts.herbs);
+    counts.herbs++; play('herb' + counts.herbs, null, false, {pos: it.pos.clone(), r: 3.5});
     if (counts.herbs === 3) { stage = 2; shrooms.forEach(s => { s.obj.visible = true; s.beacon.userData.want = 1; }); }
   } else if (it.kind === 'shroom') {
-    counts.shrooms++; charges++; play('shroom' + counts.shrooms);
+    counts.shrooms++; charges++; play('shroom' + counts.shrooms, null, false, {pos: it.pos.clone(), r: 3.5});
     if (counts.shrooms === 2) { stage = 3; waterBeacon.userData.want = 1; }
   } else { charges = Math.min(3, charges + 1); it.respawn = 18; }
 }
@@ -280,9 +302,9 @@ function botInput(dt) {
     else if (stage === 3) target = V(...SPOTS.water);
   } else if (state === 'chase' || state === 'tell') target = HOME;
   else if (state === 'archive') {
-    const goal=chapter2.goal();if(goal)target=V(goal.x,goal.y);
+    const goal = chapter2.goal(); if (goal) target = V(goal.x,goal.y);
   }
-  if (state === 'grab' && api.botPassive) return {x: 0, y: 0};
+  if (api.botPassive && (state === 'grab' || state === 'chase')) return {x: 0, y: 0};   // пассивный бот: не убегает и не вырывается
   if (state === 'grab') { botFlip += dt; if (botFlip > .09) { botFlip = 0; botSide *= -1; } return {x: botSide, y: 0}; }
   if (!target) return {x: 0, y: 0};
   let dir = V(target.x - hero.position.x, target.z - hero.position.z);
@@ -291,7 +313,7 @@ function botInput(dt) {
   if (state === 'chase') {
     const g = V(iva.group.position.x - hero.position.x, iva.group.position.z - hero.position.z), gd = g.length();
     if (!api.botPassive && gd < 1.9 && charges > 0 && ['chase', 'lunge'].includes(iva.state.mode)) useDust();
-    if (gd < 4.2 && g.normalize().dot(dir) > .55) dir = dir.clone().add(V(-dir.z, dir.x).multiplyScalar(botSide * 1.6)).normalize();
+    if (!api.botPassive && gd < 4.2 && g.normalize().dot(dir) > .55) dir = dir.clone().add(V(-dir.z, dir.x).multiplyScalar(botSide * 1.6)).normalize();
   }
   botStuckT += dt;
   if (botStuckT > 1.2) { if (flat(botLast, hero.position) < .4) { botDodge = .9; botSide *= -1; } botLast.copy(hero.position); botStuckT = 0; }
@@ -341,21 +363,32 @@ function simulate(dt, mx, my) {
   }
   if (state === 'walk' && stage === 3 && flat(hero.position, V(...SPOTS.water)) < 1.15) {
     stage = 4; counts.water = 1; audio.chime(2); burst(hero.position.clone().setY(.4), '#86c3cf', 30); waterBeacon.userData.want = 0;
-    play('water', () => { afterWaterT = 3; });
+    play('water', () => { afterWaterT = 3; }, false, {pos: V(...SPOTS.water), r: 6});
   }
 
   // --- сюжет: прогулка, места, сумерки ---
   if (state === 'walk') {
     day = Math.min(1, day + dt / (stage === 4 ? 9 : 320));
-    const near = (k, p, r) => { if (!flags[k] && !busy() && flat(hero.position, p) < r) { flags[k] = true; return true; } return false; };
-    if (stage >= 1 && near('robot', ROBOT, 8.2)) { iva.set('listen', 14); play('robot', () => iva.set('follow')); }
-    if (stage >= 1 && near('shrine', NEAR.shrine, 4)) play('shrine');
-    if (stage >= 1 && near('fox', NEAR.fox, 4.5)) play('fox');
-    if (stage >= 1 && near('deer', NEAR.deer, 3.6)) play('deer');
-    if (stage >= 1 && !flags.lake && !busy() && hero.position.x > 3.4) { flags.lake = true; play('lake'); }
+    // РАЗГОВОР У ПРЕДМЕТА: только то, что рядом и видно; каждый предмет — один раз.
+    if (!busy() && dlg.idle > 1.5 && stage < 4) {
+      for (const an of ANCHORS) {
+        if (flags['at_' + an.id] || flat(hero.position, an.pos) > an.r) continue;
+        flags['at_' + an.id] = true;
+        if (an.id === 'robot') { iva.set('listen', 30); play('AT_robot', () => iva.set('follow'), false, an); }
+        else play('AT_' + an.id, null, false, an);
+        break;
+      }
+    }
+    // Первая встреча с тем, что собираем: герои видят это перед собой.
+    for (const [key, list, st] of [['SEE_herb', herbs, 1], ['SEE_shroom', shrooms, 2]]) {
+      if (stage !== st || flags[key]) continue;
+      const it = list.find(h => !h.taken && flat(hero.position, h.pos) < 3.4);
+      if (it) { flags[key] = true; play(key, null, true, {pos: it.pos.clone(), r: 3.4}); }
+    }
+    // Разговор об импланте: огонёк за ухом Ивы всегда виден — звучит сразу после разговора у аптеки.
+    if (flags.at_shop && !flags.ivaTalk && !busy() && dlg.idle > 1) { flags.ivaTalk = true; play('IVA_implant'); }
     if (!flags.dusk1 && day > .42 && stage < 4 && !busy()) { flags.dusk1 = true; play('dusk1'); }
     if (!flags.dusk2 && day > .74 && stage < 4 && !busy()) { flags.dusk2 = true; play('dusk2'); }
-    if (stage >= 1 && stage < 4 && dlg.idle > 19 && ambientIx < AMBIENT.length) play(AMBIENT[ambientIx++]);
     if (afterWaterT > 0 && !busy() && (afterWaterT -= dt) <= 0) startTell(false);
     if (day >= 1 && stage < 4) startTell(true);
   } else if (state === 'tell') {
@@ -393,8 +426,8 @@ function simulate(dt, mx, my) {
     chapter2.tick(dt,elapsed);
   } else if (state === 'archiveCaught') {
     if (stateT > 2.15) {
-      chapter2.resetAfterCaught();heroVel.set(0,0,0);focus.copy(hero.position);
-      fadeTo=0;setState('archive');
+      chapter2.resetAfterCaught(); heroVel.set(0,0,0); focus.copy(hero.position);
+      fadeTo=0; setState('archive');
     }
   } else if (state === 'caught') {
     chaseT += dt;
@@ -440,7 +473,9 @@ function animate(ms) {
   const raw = Math.min(.4, Math.max(0, (ms - previous) / 1000)); previous = ms;
   // Медленное устройство — снижаем качество один раз, плавность важнее резкости.
   frameAvg = frameAvg * .97 + Math.min(raw, .1) * 1000 * .03;
-  if (frameAvg > 30 && quality > .7 && elapsed > 3) { quality = .7; renderer.setPixelRatio(1); paint.setQuality(.7); post.setScale(.8); }
+  if (frameAvg > 30 && quality > .7 && elapsed > 3) { quality = .7; renderer.setPixelRatio(1); paint.setQuality(.7); post.setScale(.8); qualityT = elapsed; }
+  // Очень слабое устройство (программный WebGL): ещё одна ступень — меньше пикселей, игра остаётся отзывчивой.
+  if (frameAvg > 70 && quality === .7 && elapsed - qualityT > 4) { quality = .5; renderer.setPixelRatio(.6); paint.setQuality(.5); post.setScale(.7); }
   const dt = paused ? 0 : raw * api.timeScale;
   const fr = Math.min(raw, .066);
   elapsed += raw;
@@ -456,7 +491,6 @@ function animate(ms) {
 
   // --- свет и сумерки ---
   const archiveNight = ['archive','archiveCaught'].includes(state);
-  // Ночь читается как акварельная синь, а не непроглядный чёрный экран.
   const dusk = ['ending','chapter2End'].includes(state) ? 0 : archiveNight ? .66 : Math.pow(day, 1.25);
   ambient.color.set('#fff3d7').lerp(new T.Color('#aeb8d4'), dusk); ambient.intensity = 2.2 - dusk * .75;
   sun.color.set('#fff0cd').lerp(new T.Color('#e48c62'), dusk); sun.intensity = 1.4 - dusk * .8;
@@ -473,6 +507,8 @@ function animate(ms) {
     const eyes = guardian.userData.robotEyes.color, flare = Math.min(1, sig * 1.2 + (state === 'caught' ? 1 : 0));
     eyes.setRGB(1, .39 + Math.sin(elapsed * .75) * .065 + flare * .45, .2 + flare * .55);
   }
+
+  coast.tick(elapsed, dusk);
 
   // --- маяки, частицы ---
   for (const b of [...herbs, ...shrooms, ...spares].map(i => i.beacon).concat(waterBeacon, homeBeacon, ...chapter2.beacons)) tickBeacon(b, elapsed, raw);
@@ -493,7 +529,7 @@ function animate(ms) {
   camera.lookAt(focus.x + sx, focus.y, focus.z + sz);
 
   // --- звук и пост-обработка ---
-  audio.setMood(state === 'chase' || state === 'grab' || state === 'tell' || state === 'caught' ? 'chase' : day > .45 && (state === 'walk' || state === 'archive' || state === 'archiveCaught') ? 'dusk' : 'calm');
+  audio.setMood(state === 'chase' || state === 'grab' || state === 'tell' || state === 'caught' ? 'chase' : day > .45 && ['walk','archive','archiveCaught'].includes(state) ? 'dusk' : 'calm');
   audio.setLevels({robot: Math.max(robotNear, sig * .8), chase: state === 'chase' || state === 'grab' ? Math.min(1, .35 + chaseT / 60 + (state === 'grab' ? .5 : 0)) : 0, rain: .4 + dusk * .5});
   glitchSpike = Math.max(0, glitchSpike - raw * 2.6);
   fade += (fadeTo - fade) * damp(fadeTo > fade ? 1.6 : 1.1, raw);
@@ -530,7 +566,7 @@ Object.defineProperties(api, Object.getOwnPropertyDescriptors({
   get archiveCaught() {return chapter2.caught;},
   get menuOpen() { return ui.menuOpen; }, get ended() { return state === 'chapter2End'; },
   goal() {
-    if(state === 'archive')return chapter2.goal();
+    if (state === 'archive') return chapter2.goal();
     if (state === 'walk') {
       const it = stage === 1 ? herbs.find(h => !h.taken) : stage === 2 ? shrooms.find(h => !h.taken) : null;
       if (it) return {x: it.pos.x, y: it.pos.z};
@@ -539,6 +575,7 @@ Object.defineProperties(api, Object.getOwnPropertyDescriptors({
     }
     return ['chase', 'tell', 'grab', 'caught', 'outro', 'ending'].includes(state) ? {x: HOME.x, y: HOME.z} : null;
   },
+  debugTeleport(x, z) { hero.position.set(x, 0, z); focus.copy(hero.position); iva.group.position.set(x + 1, 0, z + 1); },
   get caughtCount() { return flags.caughtN || 0; },
   start() { if (state === 'title') { ui.title(false); paused = false; audio.start(); begin(); } },
   startChapter2() {beginChapter2();},

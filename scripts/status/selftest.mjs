@@ -139,3 +139,6 @@ for (const [name, [from, to]] of Object.entries(mutations)) {
 }
 if (!failures) console.log('GREEN selftest: original passed, all mutations were RED');
 process.exitCode = failures ? 1 : 0;
+
+// Also validate the FINISH consumer against actual table shapes and hostile run metadata.
+await import('./mutate-finish-summary.mjs');

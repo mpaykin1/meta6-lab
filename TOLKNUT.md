@@ -1,5 +1,8 @@
 # ТОЛКНУТЬ — обычный чат ChatGPT
 
+- [PR #326](https://github.com/mpaykin1/meta6-lab/pull/326) · нет данных · Запрет выдачи автозадачам · Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- [PR #325](https://github.com/mpaykin1/meta6-lab/pull/325) · нет данных · Запрет выдачи автозадачам · 🛑 ЗАВИС
+- [PR #323](https://github.com/mpaykin1/meta6-lab/pull/323) · нет данных · Запрет выдачи автозадачам · Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/43649377424/job/132614206720)
 - [PR #322](https://github.com/mpaykin1/meta6-lab/pull/322) · нет данных · Запрет выдачи автозадачам · Красная проверка: kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43606615289/job/132482563802), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
 - [PR #300](https://github.com/mpaykin1/meta6-lab/pull/300) · нет данных · Запрет выдачи автозадачам · Конфликт с main
 - [PR #306](https://github.com/mpaykin1/meta6-lab/pull/306) · нет данных · Запрет выдачи автозадачам · Конфликт с main
@@ -26,5 +29,4 @@
 - [PR #247](https://github.com/mpaykin1/meta6-lab/pull/247) · нет данных · Запрет выдачи автозадачам · Конфликт с main
 - [PR #280](https://github.com/mpaykin1/meta6-lab/pull/280) · нет данных · Запрет выдачи автозадачам · Красная проверка: storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43554180859/job/132323217997), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43554180496/job/132323168859), storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43554180474/job/132323168740), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43393141735/job/131777615344)
 - [PR #234](https://github.com/mpaykin1/meta6-lab/pull/234) · красная · Запрет выдачи автозадачам · Конфликт с main
-- [PR #323](https://github.com/mpaykin1/meta6-lab/pull/323) · нет данных · Запрет выдачи автозадачам · Красная проверка: changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/43649377424/job/132614206720)
 - [PR #273](https://github.com/mpaykin1/meta6-lab/pull/273) · нет данных · Запрет выдачи автозадачам · Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43186848703/job/131076032487)

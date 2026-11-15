@@ -7,7 +7,19 @@ import {fileURLToPath} from 'node:url';
 
 const root = resolve(fileURLToPath(new URL('../../', import.meta.url)));
 const codeSuffix = /\.(?:js|mjs|cjs|ts|tsx|glsl|vert|frag|html)$/i;
-const gameRoots = /^(?:games|demos|meta-games|reference|shared|ink)\//;
+// Include every playable root-level world linked in the live catalog, not only games/.
+// For example, ashen-sumerek/ and underwater-world/ would otherwise evade the guard.
+const gameRoots = new Set(['games', 'demos', 'meta-games', 'reference', 'shared', 'ink']);
+const catalog = readFileSync(resolve(root, 'meta-games/index.html'), 'utf8');
+for (const [anchor] of catalog.matchAll(/<a\\b[^>]*>/gi)) {
+  const klass = /\\bclass\\s*=\\s*["']([^"']+)["']/i.exec(anchor)?.[1] || '';
+  if (!klass.split(/\\s+/).includes('game')) continue;
+  const href = /\\bhref\\s*=\\s*["']([^"']+)["']/i.exec(anchor)?.[1] || '';
+  const match = /^\\.\\.\\/([a-z0-9_-]+)\\//i.exec(href);
+  if (match) gameRoots.add(match[1]);
+}
+export const isGameSourceFile = name =>
+  codeSuffix.test(name) && gameRoots.has(name.split('/')[0]) && !ignored.test(name);
 const ignored = /(?:^|\/)(?:node_modules|vendor|third_party|__tests__|tests)(?:\/|$)/;
 
 function positionWaveMatches(source) {
@@ -67,8 +79,7 @@ function listFiles(args) {
   throw Error('Specify --changed, --all, or paths');
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const files = listFiles(process.argv.slice(2)).filter(p =>
-    codeSuffix.test(p) && gameRoots.test(p) && !ignored.test(p));
+  const files = listFiles(process.argv.slice(2)).filter(isGameSourceFile);
   let errors = [];
   for (const name of files) {
     const full = resolve(root, name);

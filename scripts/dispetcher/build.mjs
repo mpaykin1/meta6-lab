@@ -58,6 +58,15 @@ export function claudeTitle(task, opened) {
   return title;
 }
 
+export function needsClaude(task, pr) {
+  const body = typeof pr?.body === 'string' ? pr.body.trimStart() : '';
+  const first = body.split(/\r?\n/, 1)[0].trim();
+  if (/^CLAUDE:\s*\S/i.test(first)) return true;
+  if (/^НУЖЕН CLAUDE(?:[:\s]|$)/i.test(first)) return true;
+  if (/^(?:ЖДЁТ|ГОТОВ К ПРОВЕРКЕ):/i.test(first)) return false;
+  return /НУЖЕН CLAUDE/.test(task?.status || '');
+}
+
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));
  const map=new Map();
@@ -122,7 +131,7 @@ export async function main(){
  if(!openNumbers.has(t.id))continue;
  const listed=openPrs.get(t.id);
  if(!listed)throw Error('нет данных: GraphQL PR исчез из индекса');
- if(/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(listed.body||'')){
+ if(needsClaude(t,listed)){
   claude.push({...t,title:claudeTitle(t,listed),branch:listed.head.ref});
   continue;
  }
@@ -138,7 +147,7 @@ export async function main(){
  const commit=await api('/commits/'+pr.head.sha);
  const lastCommit=commit.commit.committer.date;
  const stale=Date.now()-Date.parse(lastCommit)>172800000;
- const stalled=/ЗАВИС/.test(t.status),isClaude=/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(pr.body||'');
+ const stalled=/ЗАВИС/.test(t.status),isClaude=needsClaude(t,pr);
  const label=t.title+' '+(pr.title||'');
  const isFinish=finishIds.some(id=>new RegExp('(^|[^A-Z0-9])'+id+'([^A-Z0-9]|$)','i').test(label));
  if(!Number.isInteger(pr.changed_files)||pr.changed_files<0)throw Error('PR changed_files: нет данных');

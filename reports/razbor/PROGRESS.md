@@ -23,4 +23,10 @@
 | #321 | live: INK Raven checks PASS, внешний Vercel build-rate-limit; сливает другой исполнитель | https://github.com/mpaykin1/meta6-lab/pull/321 | 2026-11-15 09:03 UTC |
 | #331 | draft: исправление и ловушка опубликованы, MG Dispatcher PASS, остальной CI и внешний Vercel отдельно | https://github.com/mpaykin1/meta6-lab/actions/runs/43696007445 | 2026-11-15 09:03 UTC |
 
-Текущая очередь: 49 открытых PR по REST (срез до 2026-11-15 09:03 UTC), из них 1 non-draft (#321), 48 draft. Не рассмотренные детально PR остаются draft, статус «зелёный» не заявлен.
+| #3 | закрыт сторожем как заброшенный, ветка сохранена; чистый перенос не подтверждён | https://github.com/mpaykin1/meta6-lab/pull/3#issuecomment-6898806224 | 2026-11-15 18:40 UTC |
+| #191 | закрыт сторожем как заброшенный, ветка сохранена; source-only замена #314 пока draft | https://github.com/mpaykin1/meta6-lab/pull/191#issuecomment-6898806918 | 2026-11-15 18:40 UTC |
+| #235 | закрыт сторожем как заброшенный, ветка сохранена; исправление не слито | https://github.com/mpaykin1/meta6-lab/pull/235#issuecomment-6898807686 | 2026-11-15 18:40 UTC |
+| #272 | закрыт сторожем как заброшенный, ветка сохранена; проверка META BOT не завершена | https://github.com/mpaykin1/meta6-lab/pull/272#issuecomment-6898808356 | 2026-11-15 18:40 UTC |
+| Dispatcher: ложный «НУЖЕН CLAUDE» | исправить историческую эскалацию #218/#220/#255/#260/#261/#270, защищённые запросы оставить; 8 сценариев/3 мутации | https://github.com/mpaykin1/meta6-lab/pull/331 | 2026-11-15 18:40 UTC |
+
+Текущая очередь: 45 открытых PR по GitHub поиску (срез до 2026-11-15 09:03 UTC), из них 1 non-draft (#321), 44 draft. Не рассмотренные детально PR остаются draft, статус «зелёный» не заявлен.

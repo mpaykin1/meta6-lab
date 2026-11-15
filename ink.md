@@ -31,6 +31,10 @@ Living Watercolor 3D — живой акварельный рендер на Thr
 Смотреть: МГ https://mpaykin1.github.io/meta6/reference/ink-grin-monster/ · МГЛ https://mpaykin1.github.io/meta6-lab/reference/ink-grin-monster/ · исходники `reference/ink-grin-monster/` (только чтение, README.md там же).
 Объёмный чёрный склизкий монстр с оскалом в темноте: челюсть на пружине, действия `userData.play('bite'|'jump'|'strikeL'|'strikeR'|'grab'|'eyes')`, слежение за камерой, плёночный пост-шейдер; рендер — из «Павшего великана». Если просят вставить такого монстра — можно подключить `createInkGrinMonster` из этой папки; если просят нового монстра — делать нового.
 
+## Эталон «Падальщик» — биомеханический робот с прыжком и укусом (OWNER PASS, 15.11.2026)
+
+МГЛ: https://mpaykin1.github.io/meta6-lab/reference/ink-carrion-stalker/ · МГ: https://mpaykin1.github.io/meta6/reference/ink-carrion-stalker/ (после переноса Claude). Исходники: `reference/ink-carrion-stalker/`. Настоящая объёмная 3D-модель с бионическими ногами, шарнирной челюстью и зубами, командами `bite`, `jump`, `strike`, `prowl`. Рендер и Three.js берутся из `reference/ink-fallen-guardian/` без изменения эталона; модель при переносе копировать целиком, исходники принятой модели не менять. 
+
 ## Правила для всех ИИ
 
 1. **Не менять исходники эталона.** Файлы `index.html`, `client.js`, `shared/living-watercolor-*.js` — только чтение. Сверка — по blob SHA из паспорта.

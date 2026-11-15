@@ -7,7 +7,7 @@ const requirements=[
   "github.ref == 'refs/heads/lab/archer-retention-exp-1-game'",
   "github.event.pull_request.head.sha || github.sha",
   "github.event.pull_request.base.sha || 'origin/lab/archer-retention-exp-1'",
-  "run: node scripts/meta-bot/run.mjs archer-in-the-fog",
+  "run: node scripts/meta-bot/run.mjs games/archer-in-the-fog",
   "run: node scripts/archer-proof/mutate-visual-runner.mjs"
 ];
 const accept=s=>requirements.every(fragment=>s.includes(fragment));
@@ -17,3 +17,7 @@ for(const requirement of requirements){
  console.log('MUTATION_CAUGHT '+requirement);
 }
 console.log('PASS: real Archer push and BOT trigger, 7 mutations');
+
+assert.ok(yaml.includes('run: node scripts/archer-proof/diagnose-runtime.mjs'),'Missing real browser diagnostic');
+assert.ok(yaml.includes('node --check games/archer-in-the-fog/assets/index-xsRfS2lk.js'),'Missing syntax gate');
+assert.equal(yaml.includes('run: node scripts/meta-bot/run.mjs archer-in-the-fog'),false,'Bot must receive games/ relative path');

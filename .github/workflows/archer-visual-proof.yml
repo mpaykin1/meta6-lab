@@ -36,6 +36,14 @@ jobs:
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1 pngjs@7.0.0
           npx playwright install --with-deps chromium
+      - name: Diagnose startup on baseline and current game
+        env:
+          ARCHER_BASE_SHA: ${{ github.event.pull_request.base.sha || 'origin/lab/archer-retention-exp-1' }}
+        run: node scripts/archer-proof/diagnose-runtime.mjs
+      - name: Verify Archer scripts parse
+        run: |
+          node --check games/archer-in-the-fog/assets/index-xsRfS2lk.js
+          node --check games/archer-in-the-fog/bot-adapter.js
       - name: Prove absence and invisible-hook mutations, or compare game versions
         shell: bash
         env:
@@ -49,7 +57,7 @@ jobs:
           fi
       - name: Full Archer META BOT playthrough
         if: always()
-        run: node scripts/meta-bot/run.mjs archer-in-the-fog
+        run: node scripts/meta-bot/run.mjs games/archer-in-the-fog
       - uses: actions/upload-artifact@v4
         if: always()
         with:

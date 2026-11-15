@@ -26,8 +26,8 @@
 | #191 | lab/sunken-city-reference-1109 | LAB_QUEUE.md, OSHIBKI.md, shared/library/index.json | 2026-11-15 |
 | #218 | lab/remont-r1-library | .github/workflows/library-machine.yml, shared/library/index.json | 2026-11-15 |
 | #220 | lab/zadachi-conflicts | .github/workflows/dispetcher.yml, .github/workflows/sliyanie-status.yml, OSHIBKI.md, automation/progress/USKORENIE.md, scripts/dispetcher/build.mjs, scripts/lab/sliyanie-status.py, scripts/status/build.mjs | 2026-11-15 |
-| #234 | lab/claude-adfree-catalog-1110 | AGENTS.md, scripts/storozha/core.mjs, scripts/storozha/gh-list.mjs, scripts/storozha/reference-check.mjs | 2026-11-15 |
-| #235 | lab/fix-mobile-screen-all-games-1111 | AGENTS.md | 2026-11-15 |
+| #234 | lab/claude-adfree-catalog-1110 | AGENTS.md, scripts/lab/build-site.sh, scripts/storozha/core.mjs, scripts/storozha/gh-list.mjs, scripts/storozha/reference-check.mjs | 2026-11-15 |
+| #235 | lab/fix-mobile-screen-all-games-1111 | AGENTS.md, scripts/lab/build-site.sh | 2026-11-15 |
 | #245 | lab/remont-main-veil-terraces | OSHIBKI.md, shared/library/index.json | 2026-11-15 |
 | #247 | lab/kak-proveryayushchij-traps | OSHIBKI.md, rules/06-rabota-ii-s-kodom/CHEKLIST_PROVERYAYUSHCHEGO.md, scripts/dispetcher/build.mjs, scripts/storozha/reference-check.mjs | 2026-11-15 |
 | #254 | lab/auditor-truthful-cycle-20261111 | OSHIBKI.md | 2026-11-15 |

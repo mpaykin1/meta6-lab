@@ -70,8 +70,23 @@ jobs:
           fetch-depth: 0
       - name: Verify HTTP 200 checker and mutation traps
         run: bash scripts/lab/mutate-link-ok.sh
+      # Owner 15.11.2026: «выкладывать на МГЛ быстро» — unchanged lab/** previews come from the cache, only changed ones are rebuilt.
+      - name: Restore preview cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lab-preview-cache
+          key: lab-previews-${{ github.run_id }}
+          restore-keys: lab-previews-
       - name: Build sandbox site (main + all lab/** previews)
+        env:
+          PREVIEW_CACHE: ${{ github.workspace }}/.lab-preview-cache
         run: bash scripts/lab/build-site.sh _site
+      - name: Save preview cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lab-preview-cache
+          key: lab-previews-${{ github.run_id }}
       - uses: actions/configure-pages@v5
         with:
           enablement: true

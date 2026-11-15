@@ -229,6 +229,12 @@ def check(root: Path, r) -> set[str]:
                   "Увеличь видимую форму, силуэт, свет и контраст объекта")
         role = (manifest.get("assets", {}).get(name) or {}).get("role")
         if role in {"enemy", "world", "ally", "pickup", "creature", "character"}:
+            depth_faults = m.get("depth_faults")
+            if not isinstance(depth_faults, (int, float)) or depth_faults > 0:
+                r.add("HP14", "HARD", name,
+                      f"непрозрачные объёмные меши без записи глубины: {depth_faults}",
+                      "Для непрозрачной геометрии включи depthWrite; прозрачные эффекты оставь без записи глубины")
+        if role in {"enemy", "world", "ally", "pickup", "creature", "character"}:
             shape = m.get("silhouette")
             if not isinstance(shape, (int, float)) or shape + 1e-6 < silhouette_min:
                 r.add("HP10", "HARD", name,

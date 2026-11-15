@@ -52,7 +52,7 @@ class HtmlPackTraps(unittest.TestCase):
         if new is not None:
             cand["new_shadow"] = dict(visible=.16, detail=.09, motion=.1, colors=140,
                                       fps=fps, isolated=.16)
-            cand["new_shadow"].update(silhouette=.25, palette=[119, 153, 176], deformation=.1)
+            cand["new_shadow"].update(silhouette=.25, palette=[119, 153, 176], deformation=.1, depth_faults=0)
             cand["new_shadow"].update(new)
         return {"ok": True, "reference": {"items": ref, "errors": [], "screen_text": False},
                 "candidate": {"items": cand, "errors": [], "screen_text": False}}
@@ -100,6 +100,15 @@ class HtmlPackTraps(unittest.TestCase):
 
     def test_good_reference_passes_without_hard(self):
         self.assertEqual([], self.check().hard())
+
+    def test_HP14_depthless_opaque_solid_is_hard(self):
+        self.add_new()
+        self.assertIn("HP14", self.ids(self.metrics(new={"depth_faults": 4})))
+        self.assertNotIn("HP14", self.ids(self.metrics(new={"depth_faults": 0})))
+
+    def test_HP14_missing_mesh_depth_measurement_is_hard(self):
+        self.add_new()
+        self.assertIn("HP14", self.ids(self.metrics(new={"depth_faults": None})))
 
     def test_good_new_asset_passes(self):
         self.add_new()

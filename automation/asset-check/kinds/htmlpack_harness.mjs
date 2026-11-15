@@ -271,6 +271,22 @@ async function measure(browser,file){
    }));
    const second=await capture();
    report.items[id]=features(first.on,second.on,first.off,second.off,fps);
+   // HP14: inspect the actual mesh; an opaque solid must write depth.
+   report.items[id].depth_faults=await page.evaluate(id=>{
+     const root=window.__PACK_PROBE__?.assets?.[id]?.group;
+     if(!root)return 0;
+     let faults=0;
+     root.traverse(mesh=>{
+       if(!mesh.isMesh||!mesh.geometry?.attributes?.position)return;
+       mesh.geometry.computeBoundingBox();
+       const bounds=mesh.geometry.boundingBox;
+       if(!bounds||bounds.max.z-bounds.min.z<.012)return; // flat fog and canvas
+       const mats=Array.isArray(mesh.material)?mesh.material:[mesh.material];
+       for(const mat of mats)
+         if(mat&&!mat.transparent&&mat.opacity>=.999&&mat.depthWrite===false)faults++;
+     });
+     return faults;
+   },id);
    const accepted=['hero','beast','gate','obelisk','sky','fog','rain','cathedral'];
    const selected=await page.evaluate(id=>!!window.__PACK__.items.find(it=>it.id===id)?.isNew,id);
    if(selected||accepted.includes(id)){

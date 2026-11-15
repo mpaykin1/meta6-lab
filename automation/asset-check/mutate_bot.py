@@ -11,6 +11,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MUTANTS = [
+    ("kinds/htmlpack.py", "if not isinstance(depth_faults, (int, float)) or depth_faults > 0:",
+     "if False:"),
+    ("kinds/htmlpack_harness.mjs", "mat.depthWrite===false", "mat.depthWrite===true"),
     ("check_pack.py", "import shutil", "# import shutil MUTATED"),
     ("kinds/htmlpack_harness.mjs", "if(id==='sparks'||id==='petals')await page.waitForTimeout(240);", "if(false)await page.waitForTimeout(240);"),
     ("kinds/htmlpack_harness.mjs", "if(pathname==='/favicon.ico'){response.statusCode=204;response.end();return;}", "if(pathname==='/missing-favicon.ico'){response.statusCode=204;response.end();return;}"),

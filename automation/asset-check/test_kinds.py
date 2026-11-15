@@ -348,6 +348,27 @@ if __name__ == "__main__":
     unittest.main()
 
 
+class HtmlPackDepthTraps(unittest.TestCase):
+    """Catch depth-less opaque solids without banning fog or translucency."""
+
+    def test_opaque_depth_fault_caught_by_pack_validator(self):
+        from test_htmlpack import HtmlPackTraps
+        case = HtmlPackTraps()
+        case.setUp()
+        try:
+            case.add_new()
+            self.assertIn("HP14", case.ids(case.metrics(new={"depth_faults": 2})))
+            self.assertNotIn("HP14", case.ids(case.metrics(new={"depth_faults": 0})))
+        finally:
+            case.tearDown()
+
+    def test_harness_checks_solid_geometry_not_glow(self):
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        self.assertIn("root.traverse(mesh=>", harness)
+        self.assertIn("bounds.max.z-bounds.min.z<.012", harness)
+        self.assertIn("mat.depthWrite===false", harness)
+
+
 class HtmlPackPixelTraps(unittest.TestCase):
     """Execute the actual JS pixel metric, including deceptive detailed backgrounds."""
 

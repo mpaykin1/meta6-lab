@@ -49,7 +49,7 @@ paint.apply(stalker,{seed:'carrion-stalker-author-approved-ink'});
 const ground=new T.Group();scene.add(ground);
 const floor=new T.Mesh(new T.PlaneGeometry(80,80),
   new T.MeshStandardMaterial({color:'#918889',roughness:1}));
-floor.rotation.x=-Math.PI/2;floor.position.y=-.43;
+floor.rotation.x=-Math.PI/2;floor.position.y=-.21;
 floor.userData.watercolorOutline=false;floor.userData.watercolorSkipWash=true;
 ground.add(floor);
 const shadowCanvas=document.createElement('canvas');
@@ -65,7 +65,7 @@ const contact=new T.Mesh(new T.PlaneGeometry(7.0,5.4),
     map:new T.CanvasTexture(shadowCanvas),transparent:true,
     depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1
   }));
-contact.rotation.x=-Math.PI/2;contact.position.set(0,-.421,.50);ground.add(contact);
+contact.rotation.x=-Math.PI/2;contact.position.set(0,-.201,.50);ground.add(contact);
 
 // Muted fragments are instanced: not a visible repeating grid.
 const stoneGeo=new T.IcosahedronGeometry(1,0);
@@ -74,7 +74,7 @@ const stones=new T.InstancedMesh(stoneGeo,stoneMat,54);
 const dummy=new T.Object3D(),col=new T.Color();
 for(let i=0;i<54;i++){
   const angle=i*2.3999632,dist=2.0+Math.sqrt(i/54)*2.4;
-  dummy.position.set(Math.cos(angle)*dist,-.38,Math.sin(angle)*dist*.7);
+  dummy.position.set(Math.cos(angle)*dist,-.17,Math.sin(angle)*dist*.7);
   dummy.rotation.set(i*.16,i*1.27,i*.31);
   dummy.scale.set(.07+(i%5)*.029,.032+(i%4)*.014,.075+(i%7)*.016);
   dummy.updateMatrix();stones.setMatrixAt(i,dummy.matrix);
@@ -129,6 +129,7 @@ function setTransparent(flag){
   stones.visible=!transparent;
   scene.fog=transparent?null:new T.FogExp2(paper,.018);
   renderer.setClearColor(paper,transparent?0:1);
+  renderer.domElement.style.background=transparent?'transparent':paper;
   document.body.style.background=transparent?'transparent':paper;
   document.querySelector('#transparent').textContent=
     transparent?'Вернуть фон INK':'Прозрачный фон';

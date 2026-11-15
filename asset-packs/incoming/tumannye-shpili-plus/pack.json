@@ -1,0 +1,68 @@
+{
+  "format": "htmlpack/1",
+  "version": "1.1.0",
+  "name": "Туманные шпили — живой мир + 6 ассетов",
+  "base": "reference/tumannye-shpili",
+  "reference_count": 26,
+  "license": {
+    "type": "own",
+    "author": "META GAMES / ChatGPT; reference: original owner artifact",
+    "commercial": true,
+    "third_party": [
+      {
+        "file": "Three.js r128 (CDN)",
+        "license": "MIT"
+      }
+    ]
+  },
+  "provenance": {
+    "tool": "ChatGPT",
+    "date": "2026-11-13",
+    "source": "reference/tumannye-shpili/index.html",
+    "branch": "lab/asset-pack-shpili",
+    "method": "unmodified reference scene extended with procedural meshes and animation"
+  },
+  "content_flags": {
+    "real_persons": [],
+    "brands": [],
+    "political": false
+  },
+  "assets": {
+    "sable-beast": {
+      "label_ru": "Багровый страж",
+      "role": "enemy",
+      "benefit": "новая фаза столкновения; маска и щупальца",
+      "animated": true
+    },
+    "shattered-mast": {
+      "label_ru": "Падающая мачта",
+      "role": "world",
+      "benefit": "новая вертикальная руина и ориентир",
+      "animated": true
+    },
+    "gate-bridge": {
+      "label_ru": "Мост осколков врат",
+      "role": "world",
+      "benefit": "новая воздушная переправа",
+      "animated": true
+    },
+    "dawn-sentinel": {
+      "label_ru": "Спутник-хранитель",
+      "role": "ally",
+      "benefit": "видимый защитный контур рядом с летуном",
+      "animated": true
+    },
+    "mirror-seed": {
+      "label_ru": "Сердце зеркальной воды",
+      "role": "pickup",
+      "benefit": "ускоряет восстановление удара, усиливает след и вспышку",
+      "animated": true
+    },
+    "storm-heart": {
+      "label_ru": "Багровая гроза",
+      "role": "weather",
+      "benefit": "локальный дождь и живые разряды",
+      "animated": true
+    }
+  }
+}

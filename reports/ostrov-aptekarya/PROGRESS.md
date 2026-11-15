@@ -40,3 +40,6 @@
 ## Статус развития
 
 Новая механика: непрерывное удержание контакта 1.1с вместо мгновенного захвата, в журнале глав II и ловушка в STAGES.md; лимит прохождения ≤8 не снят.
+
+| Совмещение нового берега, 38 ключей/102 реплик I и архива II | [a258ba4](https://github.com/mpaykin1/meta6-lab/commit/a258ba481ed324ae55adbc7c3836b2997a8b5be7) | [Apothecary chapter II, run 43749136222](https://github.com/mpaykin1/meta6-lab/actions/runs/43749136222) |
+| К3 — обязательная мутация в scripts/ и нумерованные записи журнала | добавлено в текущем коммите | [красный KONTUR 43749136019](https://github.com/mpaykin1/meta6-lab/actions/runs/43749136019) |

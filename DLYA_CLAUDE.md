@@ -20,6 +20,7 @@
 | #247 | lab/kak-proveryayushchij-traps | scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude | 2026-11-13 |
 | #309 | lab/storozha-quota-draft | scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/gh-list.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/mutate-storozha.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/verify-storozha.mjs: изменение ЯДРА охраны — только Claude | 2026-11-14 |
 | #315 | lab/storozha-reference-no-api | .github/workflows/storozha-reference.yml: изменение ЯДРА охраны — только Claude; scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/mutate-storozha.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/verify-storozha.mjs: изменение ЯДРА охраны — только Claude | 2026-11-14 |
+| #327 | lab/karta-sil-2 | scripts/karta-sil/mutate-karta-sil.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-15 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

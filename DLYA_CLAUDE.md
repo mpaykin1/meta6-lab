@@ -3,7 +3,6 @@
 <!-- STOROZHA:PROTECTED:BEGIN -->
 | #252 | lab/auditor-five-tasks-20261111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #251 | lab/auditor-five-hourly-1111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
-| #248 | lab/pr-autofinish-followup-1111 | .github/workflows/journal-projections.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/pr-autofinish.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #265 | lab/asset-check-bot | .github/workflows/asset-check.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #266 | claude/ink-link200-1111 | .github/workflows/lab-pages.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/link-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #246 | lab/link-guard-200 | .github/workflows/lab-pages.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/link-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
@@ -20,6 +19,7 @@
 | #309 | lab/storozha-quota-draft | scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/gh-list.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/mutate-storozha.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/verify-storozha.mjs: изменение ЯДРА охраны — только Claude | 2026-11-14 |
 | #315 | lab/storozha-reference-no-api | .github/workflows/storozha-reference.yml: изменение ЯДРА охраны — только Claude; scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/mutate-storozha.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/verify-storozha.mjs: изменение ЯДРА охраны — только Claude | 2026-11-14 |
 | #277 | lab/storozha-nedelya | .github/workflows/storozha-branches.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-reference.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-tests.yml: изменение ЯДРА охраны — только Claude; scripts/storozha/branch-watch.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/weekly-watch.mjs: изменение ЯДРА охраны — только Claude | 2026-11-15 |
+| #248 | lab/pr-autofinish-followup-1111 | .github/workflows/pr-autofinish.yml: изменение ЯДРА охраны — только Claude | 2026-11-15 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

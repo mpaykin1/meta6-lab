@@ -36,3 +36,5 @@
 | MG-строитель-3 | 2026-11-15T11:26:09Z | итог: блокер — [49 открытых PR](https://github.com/mpaykin1/meta6-lab/pulls) при лимите 5; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md) содержит только 13 карточек «НУЖЕН CLAUDE»; [карта](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json) допускает пробу repo_clean/assets при свободной квоте |
 | MG-строитель-4 | 2026-11-15T11:38:23Z | старт |
 | MG-строитель-4 | 2026-11-15T11:38:23Z | итог: блокер — 49 открытых PR при лимите 5; DISPETCHER содержит только 13 «НУЖЕН CLAUDE»; собственных открытых PR нет; проба repo_clean/assets отложена до квоты |
+| MG-строитель-1 | 2026-11-15T12:05:32.648Z | старт |
+| MG-строитель-1 | 2026-11-15T12:05:32.648Z | итог: блокер — [49 открытых PR](https://github.com/mpaykin1/meta6-lab/pulls) при лимите 5; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md) только 13 НУЖЕН CLAUDE; проба repo_clean/assets блокирована квотой; собственных PR нет |

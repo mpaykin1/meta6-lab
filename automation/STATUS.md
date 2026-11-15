@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-15T11:04:07.793Z | МГЛ: 27422c8b6563e2a8d2be46df1c078a9f32feef59 | МГ: 3c5d6602aef3f8b0e5dd155f25a49abe69cf3e1f | https://github.com/mpaykin1/meta6-lab/actions/runs/43707064805
+UTC: 2026-11-15T11:28:26.070Z | МГЛ: 4db81c77623f644e01833f83ba60555bf2edee40 | МГ: 3c5d6602aef3f8b0e5dd155f25a49abe69cf3e1f | https://github.com/mpaykin1/meta6-lab/actions/runs/43709004057
 ## ПРОВЕРИТЬ CLAUDE
 - PR #330 17690b22fcbf4893451d7d7ec354f133abd6b738: .github/workflows/lab-bot-focused.yml
 - PR #327 bfdcea35097c49b70e7d08c7747716e4fb0daa20: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
@@ -14,7 +14,7 @@ UTC: 2026-11-15T11:04:07.793Z | МГЛ: 27422c8b6563e2a8d2be46df1c078a9f32feef59
 - | КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |
 - ещё 13: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
-готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43697554019))
+готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43707064764))
 M1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
 M2 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
 M3 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
@@ -39,7 +39,7 @@ P1 — не подтверждено: нет успешного завершён
 #330 Решение владельца 15.11: правила R12–R24 для Playgama; бот-п | 17690b22fcbf4893451d7d7ec354f133abd6b738
 ещё 51: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2272 коммитов | нет данных
+МГЛ: 2274 коммитов | нет данных
 МГ: 33 коммитов | .github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:8, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

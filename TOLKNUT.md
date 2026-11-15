@@ -1,5 +1,7 @@
 # ТОЛКНУТЬ — обычный чат ChatGPT
 
+- [PR #332](https://github.com/mpaykin1/meta6-lab/pull/332) · нет данных · Запрет выдачи автозадачам · Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
+- [PR #331](https://github.com/mpaykin1/meta6-lab/pull/331) · нет данных · Запрет выдачи автозадачам · Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
 - [PR #325](https://github.com/mpaykin1/meta6-lab/pull/325) · нет данных · Запрет выдачи автозадачам · 🛑 ЗАВИС
 - [PR #326](https://github.com/mpaykin1/meta6-lab/pull/326) · красная · Запрет выдачи автозадачам · Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
 - [PR #322](https://github.com/mpaykin1/meta6-lab/pull/322) · красная · Запрет выдачи автозадачам · Красная проверка: kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43606615289/job/132482563802), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
@@ -14,6 +16,8 @@
 - [PR #305](https://github.com/mpaykin1/meta6-lab/pull/305) · нет данных · Запрет выдачи автозадачам · Конфликт с main
 - [PR #303](https://github.com/mpaykin1/meta6-lab/pull/303) · нет данных · Запрет выдачи автозадачам · Конфликт с main
 - [PR #297](https://github.com/mpaykin1/meta6-lab/pull/297) · красная · Запрет выдачи автозадачам · Конфликт с main
+- [PR #247](https://github.com/mpaykin1/meta6-lab/pull/247) · нет данных · Запрет выдачи автозадачам · Конфликт с main
+- [PR #234](https://github.com/mpaykin1/meta6-lab/pull/234) · красная · Запрет выдачи автозадачам · Конфликт с main
 - [PR #291](https://github.com/mpaykin1/meta6-lab/pull/291) · красная · Запрет выдачи автозадачам · Конфликт с main
 - [PR #290](https://github.com/mpaykin1/meta6-lab/pull/290) · красная · Запрет выдачи автозадачам · Конфликт с main
 - [PR #258](https://github.com/mpaykin1/meta6-lab/pull/258) · нет данных · Запрет выдачи автозадачам · Конфликт с main
@@ -25,9 +29,4 @@
 - [PR #278](https://github.com/mpaykin1/meta6-lab/pull/278) · нет данных · Запрет выдачи автозадачам · Красная проверка: kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43554157420/job/132323155803), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43554157642/job/132323150138), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43554157432/job/132323095453), storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43554157409/job/132323095280), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43415398920/job/131851885915), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
 - [PR #283](https://github.com/mpaykin1/meta6-lab/pull/283) · красная · Запрет выдачи автозадачам · Конфликт с main
 - [PR #286](https://github.com/mpaykin1/meta6-lab/pull/286) · красная · Запрет выдачи автозадачам · Конфликт с main
-- [PR #247](https://github.com/mpaykin1/meta6-lab/pull/247) · нет данных · Запрет выдачи автозадачам · Конфликт с main
-- [PR #332](https://github.com/mpaykin1/meta6-lab/pull/332) · нет данных · Запрет выдачи автозадачам · Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- [PR #331](https://github.com/mpaykin1/meta6-lab/pull/331) · нет данных · Запрет выдачи автозадачам · Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- [PR #333](https://github.com/mpaykin1/meta6-lab/pull/333) · нет данных · Запрет выдачи автозадачам · Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- [PR #234](https://github.com/mpaykin1/meta6-lab/pull/234) · красная · Запрет выдачи автозадачам · Конфликт с main
 - [PR #280](https://github.com/mpaykin1/meta6-lab/pull/280) · нет данных · Запрет выдачи автозадачам · Красная проверка: storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43554180859/job/132323217997), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43554180496/job/132323168859), storozha-reference (https://github.com/mpaykin1/meta6-lab/actions/runs/43554180474/job/132323168740), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/43393141735/job/131777615344)

@@ -1,16 +1,24 @@
 {
-  "generated_at": "2026-11-15T04:34:47.600Z",
+  "generated_at": "2026-11-15T05:04:38.304Z",
   "sha": {
-    "lab": "b7e33954e23309fe51f9af53cd40966e298fb715",
-    "mg": "6c67e543a76dc2e68bb80845dce1ca0f287afb7e"
+    "lab": "644c42f1d34c1df775c53229b1dc8b49cbb59f39",
+    "mg": "05f3bee728a856a44ee29e0ccf1b2fea54e80950"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43677271003",
+  "run": "нет данных",
   "review": {
     "protected": [
+      {
+        "number": 327,
+        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20",
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
       {
         "number": 320,
         "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
@@ -170,92 +178,80 @@
       {
         "number": 238,
         "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
-        "paths": [
-          ".github/workflows/journal-projections.yml",
-          ".github/workflows/pr-autofinish.yml",
-          ".github/workflows/report-completion-guard.yml",
-          ".github/workflows/storozha-branches.yml",
-          ".github/workflows/storozha-quota.yml",
-          ".github/workflows/storozha-reference.yml",
-          ".github/workflows/storozha-tests.yml",
-          ".github/workflows/storozha-weekly.yml",
-          "scripts/autofinish/mutate-report-guard.mjs",
-          "scripts/autofinish/mutate-safety.mjs",
-          "scripts/journal/mutate-journal.mjs",
-          "scripts/storozha/mutate-bot-summary.mjs",
-          "scripts/storozha/mutate-storozha.mjs",
-          "scripts/storozha/mutate-workflows.mjs",
-          "scripts/storozha/verify-storozha.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 224,
+        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74",
+        "paths": "нет данных"
+      },
+      {
+        "number": 125,
+        "sha": "9f50910368238775bda40729722ec3512f14e623",
+        "paths": "нет данных"
+      },
+      {
+        "number": 232,
+        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98",
+        "paths": "нет данных"
       },
       {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": [
-          "scripts/dispetcher/mutate-mergeable-null.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 126,
+        "sha": "7f5616591ca5baa37186d86621299d32c77230b1",
+        "paths": "нет данных"
       },
       {
         "number": 236,
         "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": [
-          "scripts/meta-bot/core.mjs",
-          "scripts/meta-bot/selftest.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 229,
+        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1",
+        "paths": "нет данных"
       },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 227,
         "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 226,
+        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8",
+        "paths": "нет данных"
       },
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": [
-          ".github/workflows/status-dlya-claude.yml",
-          "scripts/status/selftest.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": [
-          ".github/workflows/investigation-snapshot.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": [
-          ".github/workflows/lab-portal-visits.yml",
-          "scripts/lab/mutate-portal-links.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
-        ]
+        "paths": "нет данных"
       }
     ],
     "redLab": [
-      {
-        "workflow": "META GAMES guard",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43677270915",
-        "step": "Check protected files"
-      },
       {
         "workflow": "Library Machine",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43677270964",
@@ -293,39 +289,42 @@
     ]
   },
   "finish": {
-    "ready": [
-      "B1"
-    ],
+    "ready": [],
     "pending": [
       {
         "id": "M1",
         "value": "не подтверждено",
-        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036"
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036"
       },
       {
         "id": "M2",
         "value": "не подтверждено",
-        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685"
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685"
       },
       {
         "id": "M3",
         "value": "не подтверждено",
-        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       {
         "id": "M4",
         "value": "не подтверждено",
-        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211"
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211"
       },
       {
         "id": "M5",
         "value": "не подтверждено",
-        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       {
         "id": "M6",
         "value": "не готов",
         "reason": "НЕТ в таблице FINISH"
+      },
+      {
+        "id": "B1",
+        "value": "не подтверждено",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082"
       },
       {
         "id": "B2",
@@ -380,19 +379,22 @@
       {
         "id": "P1",
         "value": "не подтверждено",
-        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308"
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308"
       }
     ],
-    "proofs": {
-      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43676326933"
-    }
+    "proofs": {}
   },
   "pr": {
-    "open": 49,
+    "open": 48,
     "conflicts": "нет данных",
-    "merged": 49,
+    "merged": 50,
     "closed": 82,
     "mergedItems": [
+      {
+        "number": 327,
+        "title": "fix(karta-sil): исправить учёт брошенных закрытых PR",
+        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20"
+      },
       {
         "number": 323,
         "title": "Эталон Claude: Wild train: Prologue (без рекламы) в МГЛ",
@@ -641,6 +643,14 @@
     ],
     "protectedItems": [
       {
+        "number": 327,
+        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20",
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
         "number": 320,
         "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
         "paths": [
@@ -799,161 +809,154 @@
       {
         "number": 238,
         "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
-        "paths": [
-          ".github/workflows/journal-projections.yml",
-          ".github/workflows/pr-autofinish.yml",
-          ".github/workflows/report-completion-guard.yml",
-          ".github/workflows/storozha-branches.yml",
-          ".github/workflows/storozha-quota.yml",
-          ".github/workflows/storozha-reference.yml",
-          ".github/workflows/storozha-tests.yml",
-          ".github/workflows/storozha-weekly.yml",
-          "scripts/autofinish/mutate-report-guard.mjs",
-          "scripts/autofinish/mutate-safety.mjs",
-          "scripts/journal/mutate-journal.mjs",
-          "scripts/storozha/mutate-bot-summary.mjs",
-          "scripts/storozha/mutate-storozha.mjs",
-          "scripts/storozha/mutate-workflows.mjs",
-          "scripts/storozha/verify-storozha.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 224,
+        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74",
+        "paths": "нет данных"
+      },
+      {
+        "number": 125,
+        "sha": "9f50910368238775bda40729722ec3512f14e623",
+        "paths": "нет данных"
+      },
+      {
+        "number": 232,
+        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98",
+        "paths": "нет данных"
       },
       {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": [
-          "scripts/dispetcher/mutate-mergeable-null.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 126,
+        "sha": "7f5616591ca5baa37186d86621299d32c77230b1",
+        "paths": "нет данных"
       },
       {
         "number": 236,
         "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": [
-          "scripts/meta-bot/core.mjs",
-          "scripts/meta-bot/selftest.mjs"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 229,
+        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1",
+        "paths": "нет данных"
       },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 227,
         "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
+        "paths": "нет данных"
+      },
+      {
+        "number": 226,
+        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8",
+        "paths": "нет данных"
       },
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": [
-          ".github/workflows/status-dlya-claude.yml",
-          "scripts/status/selftest.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": [
-          ".github/workflows/investigation-snapshot.yml"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": [
-          ".github/workflows/lab-portal-visits.yml",
-          "scripts/lab/mutate-portal-links.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
-        ]
+        "paths": "нет данных"
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 2210,
+      "count": 2217,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 17,
-      "folders": ".github:2, AGENTS.md:1, automation:2, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:22, rules:6, SOURCE_INDEX.md:1"
+      "count": 23,
+      "folders": ".github:2, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:22, rules:6, SOURCE_INDEX.md:1"
     }
   },
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "ostrov-aptekarya",
-      "bot": "прошла",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "прошла",
+      "bot": "нет данных",
       "storefront": "да"
     },
     {
       "name": "wild-train-prologue",
-      "bot": "не запускалась",
+      "bot": "нет данных",
       "storefront": "нет"
     }
   ],
@@ -1000,6 +1003,13 @@
     "| 1128 | 13.11.2026 | Повтор №1107: STATUS ожидает finish в progress.json, хотя производитель пишет parts; ссылка на зелёный PR не подтверждает main | scripts/meta-progress/progress.mjs и 6 исторических Actions из FINISH.md | scripts/status/mutate-finish-summary.mjs: 7 мутаций — ветка, красный run, чужой URL, подмена run, JSON-схема, ранний этап 2, чужой workflow |",
     "| 1129 | 14.11.2026 | Мутация accept-closed не проверяла GraphQL-индекс: якорь совпал с более ранним дублирующим REST-валидатором, дефект ускользал | [MG Dispatcher FAIL 43579028641](https://github.com/mpaykin1/meta6-lab/actions/runs/43579028641), [Karta Sil FAIL 43579028578](https://github.com/mpaykin1/meta6-lab/actions/runs/43579028578) | REST и GraphQL используют общий строгий `indexOpened`; четыре мутации в `scripts/dispetcher/test/api-budget.test.mjs` проверяют общий валидатор |",
     "| 1130 | 14.11.2026 | PR #301 Карта сил: сбор статистики шёл REST-запросами на каждый PR (/pulls/N, /files, /commits, /actions/runs по ветке) — ~300 PR не укладывались ни в 10 минут, ни в квоту 1000/ч; локальный прогон оборван через 600 с. Плюс api-budget мутация accept-closed била не в ту функцию | локальный прогон run.mjs 14.11 09:20 UTC | `scripts/karta-sil/mutate-karta-sil.mjs` (тест «GraphQL-карта», 4 мутации); `scripts/dispetcher/test/api-budget.test.mjs` |",
-    "| 1131 | 14.11.2026 | Карта сил: первый запуск на main посчитал карту, но потерял её на «git push rejected (fetch first)» — main двигают другие боты | [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/43581137135) | `scripts/karta-sil/mutate-karta-sil.mjs` (тест «push повторяется после rebase», 3 мутации) |"
+    "| 1131 | 14.11.2026 | Карта сил: первый запуск на main посчитал карту, но потерял её на «git push rejected (fetch first)» — main двигают другие боты | [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/43581137135) | `scripts/karta-sil/mutate-karta-sil.mjs` (тест «push повторяется после rebase», 3 мутации) |",
+    "| 1132 | 15.11.2026 | Карта сил относила закрытые сторожем и после 24ч простоя PR к обычным закрытиям | statusOf не различал причину закрытия | `scripts/karta-sil/mutate-karta-sil.mjs`: 3 мутации, включая обман |",
+    "| 1133 | 15.11.2026 | Карта сил пропускала строки OSHIBKI с SHA, /pull/N и Actions run ID, считая ошибки всех типов нулём | attributedErrors искал только `PR #N ` и дату ISO | `scripts/karta-sil/mutate-karta-sil.mjs`: 3 мутации, в том числе чужой SHA/чужой run ID |",
+    "| 1135 | 15.11.2026 | Диспетчер не видел стоимость красных прогонов и процент закрытых PR; улучшения 3-дневного окна терялись в 14 днях | Пропуск вычисления redPerMerge/closedShare и отсутствующий 3-дневный срез | `scripts/karta-sil/mutate-karta-sil.mjs`: 3 мутации стоимости, сравнение короткой когорты |",
+    "| 1136 | 15.11.2026 | Мутация порога красных прогонов скрывалась высоким процентом закрытий, поэтому неверный порог не распознавался | Самопроверка новых метрик карты сил: два условия включались одновременно | `scripts/karta-sil/mutate-karta-sil.mjs`: независимый redOnly и 3 мутации 3-дневного среза |",
+    "| 1138 | 15.11.2026 | Новая «Доля закрытых без слияния» ошибочно включала открытые заброшенные PR, завышая потери | Выделен isClosed для каждого PR, отдельный знаменатель метрики | `scripts/karta-sil/mutate-karta-sil.mjs`: различение открытого и закрытого «брошено», мутация расчёта |",
+    "| 1139 | 15.11.2026 | 3-дневный срез по дате создания PR скрывал сегодняшние слияния старых PR | Старый PR создан ранее 3 дней, но слит/закрыт сегодня | `scripts/karta-sil/mutate-karta-sil.mjs`: событийный срез по mergedAt/closedAt/updatedAt, без публикации временных полей |",
+    "| 1134 | 15.11.2026 | Карта сил теряла исполнителей без истории ZANYATO и явного приоритета подписи | Прежний проверенный identifyActor сохранён для истории; новый композитор источников применяет приоритет по контракту | `scripts/karta-sil/mutate-karta-sil.mjs`: 4 мутации, в том числе ложный успех по одному номеру PR |"
   ]
 }

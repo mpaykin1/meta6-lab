@@ -11,11 +11,11 @@ const codeSuffix = /\.(?:js|mjs|cjs|ts|tsx|glsl|vert|frag|html)$/i;
 // For example, ashen-sumerek/ and underwater-world/ would otherwise evade the guard.
 const gameRoots = new Set(['games', 'demos', 'meta-games', 'reference', 'shared', 'ink']);
 const catalog = readFileSync(resolve(root, 'meta-games/index.html'), 'utf8');
-for (const [anchor] of catalog.matchAll(/<a\\b[^>]*>/gi)) {
-  const klass = /\\bclass\\s*=\\s*["']([^"']+)["']/i.exec(anchor)?.[1] || '';
-  if (!klass.split(/\\s+/).includes('game')) continue;
-  const href = /\\bhref\\s*=\\s*["']([^"']+)["']/i.exec(anchor)?.[1] || '';
-  const match = /^\\.\\.\\/([a-z0-9_-]+)\\//i.exec(href);
+for (const [anchor] of catalog.matchAll(/<a\b[^>]*>/gi)) {
+  const klass = /\bclass\s*=\s*["']([^"']+)["']/i.exec(anchor)?.[1] || '';
+  if (!klass.split(/\s+/).includes('game')) continue;
+  const href = /\bhref\s*=\s*["']([^"']+)["']/i.exec(anchor)?.[1] || '';
+  const match = /^\.\.\/([a-z0-9_-]+)\//i.exec(href);
   if (match) gameRoots.add(match[1]);
 }
 export const isGameSourceFile = name =>

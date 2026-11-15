@@ -396,6 +396,11 @@ function verifyCosts(aggregate) {
   assert.equal(m.redPerMerge,9);
   assert.equal(m.closedShare,66.7);
   assert.equal(m.action,'дробить задачи / тесты до пуша');
+  const redOnly=aggregate([rows[0]],dictionary)
+    .find(x=>x.type==='bot_check'&&x.actor==='неизвестно');
+  assert.equal(redOnly.closedShare,0);
+  assert.equal(redOnly.redPerMerge,6);
+  assert.equal(redOnly.action,'дробить задачи / тесты до пуша');
 }
 test('стоимость типов: красных на слияние и реальная доля закрытых',async()=>{
   verifyCosts(compute);
@@ -424,4 +429,30 @@ test('3-дневная когорта не превращается в 14-дне
     {merged:6,closed:4,abandoned:0}),'↓ хуже');
   assert.equal(trendFor({merged:2,closed:1,abandoned:0},
     {merged:4,closed:2,abandoned:0}),'→ так же');
+});
+
+function verifyThreeDayTrap(cohort, trend) {
+  const now=Date.parse('2026-11-15T12:00:00Z');
+  const items=[{number:1,created_at:'2026-11-14T00:00:00Z'},
+    {number:2,created_at:'2026-11-06T00:00:00Z'}];
+  assert.deepEqual(cohort(items,3,now).map(x=>x.number),[1]);
+  const base={merged:6,closed:4,abandoned:0};
+  assert.equal(trend({merged:3,closed:0,abandoned:0},base),'↑ лучше');
+  assert.equal(trend({merged:0,closed:3,abandoned:0},base),'↓ хуже');
+  assert.equal(trend({merged:1,closed:0,abandoned:0},base),'мало данных');
+}
+test('3 дня: три мутации, включая фальшивую отметку улучшения',async()=>{
+  verifyThreeDayTrap(recentCohort,trendFor);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  for(const [from,to] of [
+    ['created >= now - days * 86400000','created >= now - 14 * 86400000'],
+    ["if (n3 < 3 || n14 < 3) return 'мало данных';",
+      "if (false) return 'мало данных';"],
+    ["return delta > 0.01 ? '↑ лучше'","return delta < 0.01 ? '↑ лучше'"]
+  ]){
+    assert.ok(source.includes(from),'действующий якорь '+from);
+    const code=source.replace(from,to);
+    const mutant=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
+    assert.throws(()=>verifyThreeDayTrap(mutant.recentCohort,mutant.trendFor));
+  }
 });

@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-15T18:47:09.781Z | МГЛ: 2a0b2b680b0c020bbddf689f963d25e69e4a2eae | МГ: b6726b7690ab85059ea7a38d4ee684e49cef1730 | https://github.com/mpaykin1/meta6-lab/actions/runs/43748608509
+UTC: 2026-11-15T18:49:35.431Z | МГЛ: 8a244d4123c0faf16b5bb6f62d216f77abc274a3 | МГ: b6726b7690ab85059ea7a38d4ee684e49cef1730 | https://github.com/mpaykin1/meta6-lab/actions/runs/43748874839
 ## ПРОВЕРИТЬ CLAUDE
 - PR #330 17690b22fcbf4893451d7d7ec354f133abd6b738: .github/workflows/lab-bot-focused.yml
 - PR #327 bfdcea35097c49b70e7d08c7747716e4fb0daa20: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
@@ -39,7 +39,7 @@ P1 — не подтверждено: нет успешного завершён
 #330 Решение владельца 15.11: правила R12–R24 для Playgama; бот-п | 17690b22fcbf4893451d7d7ec354f133abd6b738
 ещё 51: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2302 коммитов | нет данных
+МГЛ: 2306 коммитов | нет данных
 МГ: 34 коммитов | .github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

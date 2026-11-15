@@ -194,22 +194,7 @@
       ]
     },
     {
-      "id": "025c6a7b0b5f8490b2ddc648",
-      "game": "archer-in-the-fog",
-      "kind": "inline-svg",
-      "name": "svg@12291",
-      "purpose": [
-        "svg"
-      ],
-      "source_path": "games/archer-in-the-fog/index.html",
-      "sha256": "48030026ae5c4314304e5f8e2f143e75c9d6878a7b25faafff8948dad07781bc",
-      "lines": [
-        117,
-        117
-      ]
-    },
-    {
-      "id": "2260faa3e9bca4e6e73a7449",
+      "id": "8f164fcf603cd6a76483086d",
       "game": "archer-in-the-fog",
       "kind": "inline-style",
       "name": "style@7252",
@@ -217,10 +202,10 @@
         "style"
       ],
       "source_path": "games/archer-in-the-fog/index.html",
-      "sha256": "aee504856ec08751c87ceaf9fe6194aa69c0ea6790be9e1117a9efce4479f713",
+      "sha256": "30aee213267571e036082ac74ea4a3908aa50b31ec5f9b2c111d2ecad083f706",
       "lines": [
         59,
-        103
+        84
       ]
     },
     {
@@ -251,6 +236,21 @@
       "lines": [
         2,
         3
+      ]
+    },
+    {
+      "id": "d9a4dfb55d398b0aa9247566",
+      "game": "archer-in-the-fog",
+      "kind": "inline-svg",
+      "name": "svg@10869",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/archer-in-the-fog/index.html",
+      "sha256": "48030026ae5c4314304e5f8e2f143e75c9d6878a7b25faafff8948dad07781bc",
+      "lines": [
+        98,
+        98
       ]
     },
     {

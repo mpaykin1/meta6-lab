@@ -70,3 +70,5 @@
 
 | MG-строитель-2 | 2026-11-15T22:16:43Z | старт |
 | MG-строитель-2 | 2026-11-15T22:16:43Z | итог: блокер — [45 открытых PR](https://github.com/mpaykin1/meta6-lab/pulls) при лимите 5; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md) — 13 «НУЖЕН CLAUDE»; [TOLKNUT](https://github.com/mpaykin1/meta6-lab/blob/main/TOLKNUT.md) запрещает выдачу зависших PR; карта сил красная для workflow_ci/game_fix. Собственных PR с подтверждённой атрибуцией нет |
+| MG-строитель-4 | 2026-11-15T22:37:47Z | старт |
+| MG-строитель-4 | 2026-11-15T22:37:47Z | итог: блокер — [45 открытых PR](https://github.com/mpaykin1/meta6-lab/pulls) при лимите 5; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md): 13 НУЖЕН CLAUDE, свободных карточек нет; собственных открытых PR с атрибуцией нет |

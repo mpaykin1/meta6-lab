@@ -6,3 +6,21 @@
 | PR или задача | Решение | Доказательство | UTC |
 |---|---|---|---|
 | DISPETCHER PR #248, #277 | Замена отсутствующего GraphQL title на название из ZADACHI; добавлена защита от undefined и 3 мутации (без правки ядра) | scripts/dispetcher/build.mjs; scripts/dispetcher/test/mutate-claude-title.test.mjs; локально 4 сценария и 3 мутации PASS, CI проверит после PR | 2026-11-15 08:44 |
+| #248 | CLAUDE: да/нет? защищённый pr-autofinish; draft | https://github.com/mpaykin1/meta6-lab/pull/248 | 2026-11-15 09:03 UTC |
+| #277 | CLAUDE: да/нет? ядро STOROZHA; draft | https://github.com/mpaykin1/meta6-lab/pull/277 | 2026-11-15 09:03 UTC |
+| #245 | CLAUDE: да/нет? принятая игра Veil Terraces; draft | https://github.com/mpaykin1/meta6-lab/pull/245 | 2026-11-15 09:03 UTC |
+| #235 | CLAUDE: да/нет? принят оригинал Underwater World; draft | https://github.com/mpaykin1/meta6-lab/pull/235 | 2026-11-15 09:03 UTC |
+| #270 | draft: merge main устранён, STOROZHA quota PASS, Library Machine FAIL source-only; нужна корректная библиотечная интеграция | https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550 | 2026-11-15 09:03 UTC |
+| #191 | draft: ЖДЁТ чистой замены #314, игра пока не пройдена ботом | https://github.com/mpaykin1/meta6-lab/pull/314 | 2026-11-15 09:03 UTC |
+| #3 | draft: ЖДЁТ чистого переноса и зелёного META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/43240450734 | 2026-11-15 09:03 UTC |
+| #220 | draft: ЖДЁТ merge main, устранения конфликтов и CI | https://github.com/mpaykin1/meta6-lab/pull/220 | 2026-11-15 09:03 UTC |
+| #218 | draft: ЖДЁТ merge main и Library Machine | https://github.com/mpaykin1/meta6-lab/pull/218 | 2026-11-15 09:03 UTC |
+| #261 | draft: STOROZHA FAIL, обновить main; Claude не нужен для обычной библиотеки | https://github.com/mpaykin1/meta6-lab/actions/runs/43413645942 | 2026-11-15 09:03 UTC |
+| #260 | draft: STOROZHA FAIL и конфликт; Claude не нужен для uluchshatel | https://github.com/mpaykin1/meta6-lab/actions/runs/43413817361 | 2026-11-15 09:03 UTC |
+| #255 | draft: Archer META BOT FAIL и конфликт | https://github.com/mpaykin1/meta6-lab/actions/runs/43409726967 | 2026-11-15 09:03 UTC |
+| #272 | draft: ЖДЁТ свежих проверок принятого HTML и META BOT | https://github.com/mpaykin1/meta6-lab/pull/272 | 2026-11-15 09:03 UTC |
+| #311 | draft: ЖДЁТ конфликт и красную STOROZHA; сохранено | https://github.com/mpaykin1/meta6-lab/actions/runs/43554135089 | 2026-11-15 09:03 UTC |
+| #321 | live: INK Raven checks PASS, внешний Vercel build-rate-limit; сливает другой исполнитель | https://github.com/mpaykin1/meta6-lab/pull/321 | 2026-11-15 09:03 UTC |
+| #331 | draft: исправление и ловушка опубликованы, MG Dispatcher PASS, остальной CI и внешний Vercel отдельно | https://github.com/mpaykin1/meta6-lab/actions/runs/43696007445 | 2026-11-15 09:03 UTC |
+
+Текущая очередь: 49 открытых PR по REST (срез до 2026-11-15 09:03 UTC), из них 1 non-draft (#321), 48 draft. Не рассмотренные детально PR остаются draft, статус «зелёный» не заявлен.

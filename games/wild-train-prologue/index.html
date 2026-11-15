@@ -68,7 +68,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 
 /* ===== META GAMES version: no platform SDK, no ads (rule BEZ_REKLAMY). Same interface as the Playgama wrapper. ===== */
-const GAME_VERSION = '1.0.0-mg';
+const GAME_VERSION = '1.0.1-mg';
 const PG = (() => {
   let hidden=false, userPause=false; const KEY='wild_train_prologue_save'; let data={};
   try { data = JSON.parse(localStorage.getItem(KEY)||'{}') || {}; } catch(e) { data = {}; }
@@ -1199,6 +1199,7 @@ let echoCount=0, spiralT=0, spiralA=0;
 
 // ---------------------------------------------------------------- projectiles: straight lines from the muzzle, like real bullets
 const BN=140;
+const bulTrk=new Array(BN).fill(null);   // hit fix 1.0.1: a tapped target is followed by its bullet, so a tap = a hit
 const bul={ p:new Float32Array(BN*3), d:new Float32Array(BN*3), life:new Float32Array(BN), spd:new Float32Array(BN), hero:new Uint8Array(BN), bounce:new Uint8Array(BN), skip:new Int16Array(BN).fill(-1), cur:0 };
 const bulGeo=new THREE.BufferGeometry(); const bulPos=new Float32Array(BN*6), bulCol=new Float32Array(BN*6);
 bulGeo.setAttribute('position', new THREE.BufferAttribute(bulPos,3)); bulGeo.setAttribute('color', new THREE.BufferAttribute(bulCol,3));
@@ -1212,7 +1213,7 @@ function shootBullet(from, dir, hero, opts){
   const i=bul.cur; bul.cur=(bul.cur+1)%BN;
   bul.p[i*3]=from.x; bul.p[i*3+1]=from.y; bul.p[i*3+2]=from.z;
   bul.d[i*3]=dir.x; bul.d[i*3+1]=dir.y; bul.d[i*3+2]=dir.z;
-  bul.life[i]=hero?0.9:2.2; bul.spd[i]=hero?55:20; bul.hero[i]=hero?1:0; bul.bounce[i]=(opts&&opts.bounce)||0; bul.skip[i]=-1;
+  bul.life[i]=hero?0.9:2.2; bul.spd[i]=hero?55:20; bul.hero[i]=hero?1:0; bul.bounce[i]=(opts&&opts.bounce)||0; bul.skip[i]=-1; bulTrk[i]=(hero&&opts&&opts.track)||null;
 }
 // every target the hero's bullets can hit, as spheres
 function heroTargets(){
@@ -1243,6 +1244,7 @@ function stepBullets(dt){
     if(bul.life[i]<=0){ bulPos[o]=bulPos[o+3]=1e5; headPos[i*3]=1e5; continue; }
     bul.life[i]-=dt;
     const ax=bul.p[i*3], ay=bul.p[i*3+1], az=bul.p[i*3+2];
+    const trk=bulTrk[i]; if(trk){ if(targetGone(trk)) bulTrk[i]=null; else { targetPos(trk, vC); vC.x-=ax; vC.y-=ay; vC.z-=az; const l=vC.length()||1; bul.d[i*3]=vC.x/l; bul.d[i*3+1]=vC.y/l; bul.d[i*3+2]=vC.z/l; } }
     const st=bul.spd[i]*dt;
     const bx=ax+bul.d[i*3]*st - worldVX*dt, by=ay+bul.d[i*3+1]*st, bz=az+bul.d[i*3+2]*st - worldVZ*dt;
     bul.p[i*3]=bx; bul.p[i*3+1]=by; bul.p[i*3+2]=bz;
@@ -1383,7 +1385,7 @@ function tapShoot(x,y){
   else { ray.setFromCamera({x:x/innerWidth*2-1, y:-(y/innerHeight)*2+1}, camera); aimPoint.copy(ray.ray.origin).addScaledVector(ray.ray.direction, 30); }
   pending={ t:0, track:best }; aimHold=1.6; cooldown=0.3;
 }
-function fireNow(){
+function fireNow(track){
   barrel(vA, vB);
   const dirs=[vB.clone()];
   if(mode===2){
@@ -1391,7 +1393,7 @@ function fireNow(){
     if(active.W>0){ const back=vB.clone(); back.x=-back.x; back.z=-back.z; dirs.push(back); }
     if(active.E>0 && (++echoCount%3===0)){ for(let k=0;k<10;k++){ const a=k/10*Math.PI*2; dirs.push(new THREE.Vector3(Math.cos(a),0.02,Math.sin(a))); } }
   }
-  for(const d of dirs) shootBullet(vA, d, true, { bounce: active.R>0 ? 2 : 0 });
+  dirs.forEach((d,k)=>shootBullet(vA, d, true, { bounce: active.R>0 ? 2 : 0, track: k===0 ? track : null }));
   flash.position.copy(vA); flashT=1; muzzleLight.position.copy(vA);
   kick=1; glitch=Math.min(1,glitch+0.3); shake=Math.max(shake,0.45);
   for(let i=0;i<12;i++) emit(sparks, vA.x,vA.y,vA.z, vB.x*3+rnd(-1.5,1.5), vB.y*3+rnd(-1,2), vB.z*3+rnd(-1.5,1.5), rnd(0.12,0.3), rnd(0.05,0.12), 1,0.75,0.4, 1, 3, 3, 0);
@@ -1636,7 +1638,7 @@ function update(dtReal, t){
     if(pending.track && !targetGone(pending.track)) targetPos(pending.track, aimPoint);
     solveAim(aimPoint); pending.t += dt;
     R.riderYaw = dampAng(R.riderYaw, aimYawT, 20, dt); R.armRoll = damp(R.armRoll, aimRollT, 24, dt); R.armLift = damp(R.armLift, 0.1, 20, dt);
-    if(aimError() < 0.05 || pending.t > 0.24){ syncRig(modelUniforms, R); rig.updateMatrixWorld(true); fireNow(); pending=null; }
+    if(aimError() < 0.05 || pending.t > 0.24){ syncRig(modelUniforms, R); rig.updateMatrixWorld(true); fireNow(pending.track && !targetGone(pending.track) ? pending.track : null); pending=null; }
   } else if(aimHold>0){ solveAim(aimPoint); R.riderYaw = dampAng(R.riderYaw, aimYawT, 8, dt); R.armRoll = damp(R.armRoll, aimRollT, 8, dt); }
   else { R.riderYaw = dampAng(R.riderYaw, 0, 2, dt); R.armRoll = damp(R.armRoll, Math.sin(t*0.7)*0.12, 2.5, dt); R.armLift = damp(R.armLift, 0, 3, dt); }
   R.armRoll += kick*0.4*dt*8; kick = damp(kick, 0, 9, dt);   // recoil kicks the barrel up, then it settles
@@ -1830,9 +1832,9 @@ const INV = {
     'R3 guide arrow': () => !!document.getElementById('guide'),
     'R5 rewarded revive': () => !!document.getElementById('revive'),
     'R7 icon buttons': () => !document.getElementById('menuBtn').textContent.trim() && !document.getElementById('again').textContent.trim(),
-    'R10 version': () => GAME_VERSION.startsWith('1.0.0'),
+    'R10 version': () => GAME_VERSION.startsWith('1.0.'),
   },
-  hist: [['Wild train: Prologue 1.0.0 (Playgama first build)', 40]],
+  hist: [['Wild train: Prologue 1.0.0 (Playgama first build)', 40], ['1.0.1: a tapped target is always hit (bullet follows it) — fast unlocking again', 40]],
 };
 window.__INV = () => {
   const now = {}, lost = []; let total = 0;

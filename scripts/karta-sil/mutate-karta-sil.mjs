@@ -137,7 +137,7 @@ async function checkActorIdentity(identify) {
   const pr={title:'Карта сил автозадач',body:'Правила для автозадач и обычного чата',head:{ref:'lab/x'}};
   assert.equal(identify(pr,'| Карта сил | lab/x | чат ChatGPT | now |'),'чат ChatGPT');
   assert.equal(identify({...pr,body:'Исполнитель: чат ChatGPT'},
-    '| Задача | lab/x | MG-строитель-2 | now |'),'автозадача');
+    '| Задача | lab/x | MG-строитель-2 | now |'),'чат ChatGPT');
   assert.equal(identify(pr,'| Другое | lab/x-extra | MG-строитель-3 | now |'),'неизвестно');
   assert.equal(identify(pr,''),'неизвестно');
   assert.equal(identify({...pr,body:'Исполнитель: MG-строитель-1'},''),'автозадача');
@@ -455,4 +455,12 @@ test('3 дня: три мутации, включая фальшивую отм�
     const mutant=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
     assert.throws(()=>verifyThreeDayTrap(mutant.recentCohort,mutant.trendFor));
   }
+});
+
+test('исполнитель: неопознанная подпись не скрывает достоверную запись в ZANYATO',()=>{
+  const pr={body:'Исполнитель: —',head:{ref:'lab/proj'},number:42};
+  assert.equal(identifyActor(pr,'| PR #42 | lab/proj | MG-строитель-3 | now |',dictionary),
+    'автозадача');
+  assert.equal(identifyActor({...pr,body:'Исполнитель: неизвестно'},'',dictionary),
+    'неизвестно');
 });

@@ -98,7 +98,9 @@ export function identifyActor(pr, busy, dictionary = {}) {
   )];
   if (explicit.length) {
     const kinds = new Set(explicit.map(match => actorLabel(match[1])));
-    return kinds.size === 1 ? [...kinds][0] : actors[2];
+    if (kinds.size > 1) return actors[2];
+    const known = [...kinds][0];
+    if (known && known !== actors[2]) return known;
   }
   const owners = busy.split('\n').map(line => line.split('|').slice(1,-1).map(x => x.trim()))
     .filter(cells => (branch && cells[1]?.replaceAll('`','') === branch) ||

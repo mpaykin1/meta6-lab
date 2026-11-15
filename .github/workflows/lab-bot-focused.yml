@@ -14,6 +14,8 @@ concurrency:
 jobs:
   changed-games:
     runs-on: ubuntu-24.04
+    # Owner 15.11.2026: «убери правило, что сначала должен бот пройти» — the bot run is a report, it never blocks adding or updating a game.
+    continue-on-error: true
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4

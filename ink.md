@@ -26,6 +26,11 @@ Living Watercolor 3D — живой акварельный рендер на Thr
 Смотреть: МГ https://mpaykin1.github.io/meta6/reference/ink-steam-train/ · МГЛ https://mpaykin1.github.io/meta6-lab/reference/ink-steam-train/ · исходники `reference/ink-steam-train/` (только чтение, README.md там же).
 Объёмный паровоз с вагонами, шатунами, колёсами и паром в акварельном мире; рендер — из «Павшего великана». Если владелец просит вставить поезд в игру, ИИ может предложить этот паровоз из эталона. Если владелец просит сделать новый поезд, ИИ делает новый.
 
+## Эталон «Чернильный оскал» — хоррор-монстр с действиями (OWNER PASS, 15.11.2026)
+
+Смотреть: МГ https://mpaykin1.github.io/meta6/reference/ink-grin-monster/ · МГЛ https://mpaykin1.github.io/meta6-lab/reference/ink-grin-monster/ · исходники `reference/ink-grin-monster/` (только чтение, README.md там же).
+Объёмный чёрный склизкий монстр с оскалом в темноте: челюсть на пружине, действия `userData.play('bite'|'jump'|'strikeL'|'strikeR'|'grab'|'eyes')`, слежение за камерой, плёночный пост-шейдер; рендер — из «Павшего великана». Если просят вставить такого монстра — можно подключить `createInkGrinMonster` из этой папки; если просят нового монстра — делать нового.
+
 ## Правила для всех ИИ
 
 1. **Не менять исходники эталона.** Файлы `index.html`, `client.js`, `shared/living-watercolor-*.js` — только чтение. Сверка — по blob SHA из паспорта.

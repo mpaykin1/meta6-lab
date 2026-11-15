@@ -750,7 +750,7 @@ sndBtn.addEventListener('click', e=>{ e.stopPropagation(); soundOn=!soundOn; PG.
 let toastTimer=0;
 function toast(html){ toastEl.innerHTML=html; toastEl.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>toastEl.classList.remove('show'), 3400); }
 const unlocked=[];
-function unlock(icon, text){ if(unlocked.length>1){ swell(); epicHold=9; } unlocked.push(`<div class="row"><span>${icon}</span><span>${text}</span></div>`); infoEl.innerHTML=`<div id="ttl">${TT('title')}</div>`+unlocked.join(''); toast(`<span class="big">${icon}</span>${text}`); }
+function unlock(icon, text){ if(unlocked.length>1){ swell(); epicHold=9; } unlocked.push(`<div class="row"><span>${icon}</span><span>${text}</span></div>`); infoEl.innerHTML=`<div id="ttl">${TT('title')}</div>`+unlocked.join(''); toast(`<span class="big">${icon}</span>`); }
 unlock(ICON.bottle, TT('bottles'));
 unlocked.unshift(`<div class="row"><span>${ICON.hand}</span><span>${TT('how')}</span></div>`); infoEl.innerHTML=`<div id="ttl">${TT('title')}</div>`+unlocked.join('');
 const dots=[]; for(let i=0;i<6;i++){ const d=document.createElement('div'); d.className='dot'; dotsEl.appendChild(d); dots.push(d); }
@@ -1843,7 +1843,7 @@ window.__INV = () => {
   return { now: total, sections: now, extra, lost, hist: INV.hist };
 };
 
-window.__dbg = { audio:()=>audioInit(), get mus(){ return {cur:!!musicDirector.cur, active:musicDirector.active, wait:+musicDirector.wait.toFixed(1), buf:musicBuf?musicBuf.duration:0}; },
+window.__dbg = { get wave(){ return wave; }, get camAz(){ return camAz; }, get camPhi(){ return camPhi; }, get menuOpen(){ return panel.classList.contains('open'); }, audio:()=>audioInit(), get mus(){ return {cur:!!musicDirector.cur, active:musicDirector.active, wait:+musicDirector.wait.toFixed(1), buf:musicBuf?musicBuf.duration:0}; },
   targets, bandits, birds, letters, R, kills, active, get power(){return power;}, get stage(){return stage;}, set stage(v){stage=v;}, get mode(){return mode;},
   tapShoot, screenOf, setCam(a,p){camAz=a;camPhi=p;}, enter(c){ enterMode2(c||'A'); }, leave(){ leaveMode2(); }, steer(h){ steerHeading=h; },
   spawnLetterAhead(){ spawnLetter(randomLetter(), new THREE.Vector3(9,1.5,0.8), false); },
@@ -1867,5 +1867,6 @@ loadModel().then(()=>{ bar(1); started = true; RET.restore(); setTimeout(()=>{ d
 camera.position.copy(camPos); camera.lookAt(camLook);
 loop();
 </script>
+<script src="./bot-adapter.js"></script>
 </body>
 </html>

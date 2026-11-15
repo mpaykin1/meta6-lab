@@ -8,7 +8,8 @@ on:
       - 'automation/asset-quality/**'
       - '.github/workflows/asset-check.yml'
   push:
-    branches: [main]
+    # Temporary WIP self-check; remove branch pin before merging #306.
+    branches: [main, 'lab/assets-tumannye-shpili-20261114-2338']
     paths:
       - 'asset-packs/**'
       - 'automation/asset-check/**'

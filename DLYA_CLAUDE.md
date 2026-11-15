@@ -3,7 +3,6 @@
 <!-- STOROZHA:PROTECTED:BEGIN -->
 | #252 | lab/auditor-five-tasks-20261111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #251 | lab/auditor-five-hourly-1111 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
-| #248 | lab/pr-autofinish-followup-1111 | .github/workflows/journal-projections.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/pr-autofinish.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #265 | lab/asset-check-bot | .github/workflows/asset-check.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #266 | claude/ink-link200-1111 | .github/workflows/lab-pages.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/link-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #246 | lab/link-guard-200 | .github/workflows/lab-pages.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/link-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
@@ -11,15 +10,15 @@
 | #268 | lab/link-guard-recovery-1111 | .github/workflows/kontur-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/lab-pages.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; .github/workflows/link-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #262 | lab/archer-retention-exp-1 | .github/workflows/archer-visual-proof.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
 | #269 | lab/auditor-twohour-stall-20261112 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/auditor/mutate-auditor.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
-| #218 | lab/remont-r1-library | .github/workflows/library-machine.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/library/mutate-library.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/library/verify-library.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
 | #275 | lab/auditor-stale-pr-20261112 | .github/workflows/auditor.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/auditor/mutate-auditor.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-12 |
-| #277 | lab/storozha-nedelya | Нужен Claude: попытка обычного merge свежего main после #285 дала конфликт scripts/storozha/core.mjs (referenceGate/protectedScript); разрешение меняет ядро. Merge прерван, ветка и охрана сохранены. https://github.com/mpaykin1/meta6-lab/pull/277 | 2026-11-13 |
-| #261 | lab/biblioteka-contract-20261111 | scripts/library/verify-library.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 | #285 | claude/storozha-yadro-1113 | .github/workflows/meta-games-guard.yml: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/core.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/mutate-storozha.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude; scripts/storozha/verify-storozha.mjs: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-13 |
 | #282 | lab/auditor-task-table-20261113 | scripts/auditor/mutate-auditor.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-13 |
 | #247 | lab/kak-proveryayushchij-traps | scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude | 2026-11-13 |
 | #309 | lab/storozha-quota-draft | scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/gh-list.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/mutate-storozha.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/verify-storozha.mjs: изменение ЯДРА охраны — только Claude | 2026-11-14 |
 | #315 | lab/storozha-reference-no-api | .github/workflows/storozha-reference.yml: изменение ЯДРА охраны — только Claude; scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/mutate-storozha.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/verify-storozha.mjs: изменение ЯДРА охраны — только Claude | 2026-11-14 |
+| #277 | lab/storozha-nedelya | .github/workflows/storozha-branches.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-reference.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-tests.yml: изменение ЯДРА охраны — только Claude; scripts/storozha/branch-watch.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/weekly-watch.mjs: изменение ЯДРА охраны — только Claude | 2026-11-15 |
+| #248 | lab/pr-autofinish-followup-1111 | .github/workflows/pr-autofinish.yml: изменение ЯДРА охраны — только Claude | 2026-11-15 |
+| #270 | lab/biblioteka-veil-camera-20261112 | scripts/library/verify-library.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-15 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->
@@ -27,8 +26,8 @@
 | #191 | lab/sunken-city-reference-1109 | LAB_QUEUE.md, OSHIBKI.md, shared/library/index.json | 2026-11-15 |
 | #218 | lab/remont-r1-library | .github/workflows/library-machine.yml, shared/library/index.json | 2026-11-15 |
 | #220 | lab/zadachi-conflicts | .github/workflows/dispetcher.yml, .github/workflows/sliyanie-status.yml, OSHIBKI.md, automation/progress/USKORENIE.md, scripts/dispetcher/build.mjs, scripts/lab/sliyanie-status.py, scripts/status/build.mjs | 2026-11-15 |
-| #234 | lab/claude-adfree-catalog-1110 | AGENTS.md, scripts/storozha/core.mjs, scripts/storozha/gh-list.mjs, scripts/storozha/reference-check.mjs | 2026-11-15 |
-| #235 | lab/fix-mobile-screen-all-games-1111 | AGENTS.md | 2026-11-15 |
+| #234 | lab/claude-adfree-catalog-1110 | AGENTS.md, meta-games/index.html, scripts/lab/build-site.sh, scripts/storozha/core.mjs, scripts/storozha/gh-list.mjs, scripts/storozha/reference-check.mjs | 2026-11-15 |
+| #235 | lab/fix-mobile-screen-all-games-1111 | AGENTS.md, scripts/lab/build-site.sh | 2026-11-15 |
 | #245 | lab/remont-main-veil-terraces | OSHIBKI.md, shared/library/index.json | 2026-11-15 |
 | #247 | lab/kak-proveryayushchij-traps | OSHIBKI.md, rules/06-rabota-ii-s-kodom/CHEKLIST_PROVERYAYUSHCHEGO.md, scripts/dispetcher/build.mjs, scripts/storozha/reference-check.mjs | 2026-11-15 |
 | #254 | lab/auditor-truthful-cycle-20261111 | OSHIBKI.md | 2026-11-15 |
@@ -49,7 +48,7 @@
 | #300 | lab/native-catalog-recovery-20261113 | OSHIBKI.md | 2026-11-15 |
 | #303 | lab/asset-pack-shpili | OSHIBKI.md, ZADACHI.md, automation/asset-check/SPEC.md | 2026-11-15 |
 | #305 | lab/assets-tumannye-shpili-20261114 | OSHIBKI.md, automation/asset-check/SPEC.md | 2026-11-15 |
-| #306 | lab/assets-tumannye-shpili-20261114-2338 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-15 |
+| #306 | lab/assets-tumannye-shpili-20261114-2338 | DLYA_CLAUDE.md, LINKS.txt, OSHIBKI.md | 2026-11-15 |
 | #310 | lab/patch-import | OSHIBKI.md | 2026-11-15 |
 | #311 | lab/bot-audit-20261114 | DLYA_CLAUDE.md, OSHIBKI.md, rules/06-rabota-ii-s-kodom/CHEKLIST_PROVERYAYUSHCHEGO.md | 2026-11-15 |
 | #319 | lab/library-source-only-probe-20261114 | OSHIBKI.md, scripts/library/source-only-pr-cli.mjs | 2026-11-15 |
@@ -90,6 +89,11 @@
 | #225 | lab/render-broken-city-safe-1110 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-14 |
 | #203 | lab/skin-rusty-robot | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-14 |
 | #233 | lab/import-five-cc0-packs | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-14 |
+| #273 | lab/uluchshatel-recipe13-20261112 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-15 |
+| #3 | lab/twilight-island-bot | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-15 |
+| #191 | lab/sunken-city-reference-1109 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-15 |
+| #235 | lab/fix-mobile-screen-all-games-1111 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-15 |
+| #272 | lab/uluchshatel-sumerki-copy-bot13-20261112 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-15 |
 <!-- STOROZHA:STALE:END -->
 | #190 | lab/bot-batch-1 | НУЖЕН CLAUDE: защищённый `.github/workflows/bot-adapters-b2.yml`; конфликт с main (`OSHIBKI.md`); проверка B2 охватывает 2/3 игр, `archer-in-the-fog` не подтверждён. Самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/190 | 2026-11-11 |
 | #54 | lab/render-visibility-optimization | НУЖЕН CLAUDE: PR изменяет защищённый `.github/workflows/lab-render-performance.yml` и существующий эталон `games/veil-terraces/index.html`; конфликт с main (`docs/progress/PR54_59_60.md`), самостоятельное слияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/54 | 2026-11-12 |

@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-15T08:59:28.793Z | МГЛ: 7d3ce5e9358385f32685c7bd54134bbe92d5dd5d | МГ: 3c5d6602aef3f8b0e5dd155f25a49abe69cf3e1f | https://github.com/mpaykin1/meta6-lab/actions/runs/43696990810
+UTC: 2026-11-15T09:01:42.525Z | МГЛ: b5b1c6bf88f5432709f760784d35f5ccfa09a37a | МГ: 3c5d6602aef3f8b0e5dd155f25a49abe69cf3e1f | https://github.com/mpaykin1/meta6-lab/actions/runs/43697180801
 ## ПРОВЕРИТЬ CLAUDE
 - PR #330 17690b22fcbf4893451d7d7ec354f133abd6b738: .github/workflows/lab-bot-focused.yml
 - PR #327 bfdcea35097c49b70e7d08c7747716e4fb0daa20: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
@@ -41,7 +41,7 @@ P1 — не подтверждено: нет успешного завершён
 #327 fix(karta-sil): исправить учёт брошенных закрытых PR | bfdcea35097c49b70e7d08c7747716e4fb0daa20
 ещё 49: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2248 коммитов | нет данных
+МГЛ: 2252 коммитов | нет данных
 МГ: 33 коммитов | .github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:8, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

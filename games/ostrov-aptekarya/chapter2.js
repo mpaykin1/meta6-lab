@@ -10,7 +10,7 @@ const DOORS = [[-13.8,-1.6,.25],[-14.8,3.2,-.8],[-11.6,1.6,1.1]];
 const START = new T.Vector3(-14.9,0,-6.1);
 export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpot, beacon, burst, audio, play, onCaught, onComplete}) {
   let active = false, done = false, pageCount = 0, doorUses = 0, caughtCount = 0;
-  let invulnerable = 0, doorHint = false, lastDoorLine = false, finishing = false, drift = 0;
+  let invulnerable = 0, doorHint = false, lastDoorLine = false, finishing = false, drift = 0, contactT = 0;
   let layoutHash = 'archive-unstarted';
   const sheets = [];
   // Два локальных источника света подсвечивают руины станции: не новые модели,
@@ -55,7 +55,7 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
   function begin() {
     active=true;done=false;pageCount=0;doorUses=0;caughtCount=0;
     archiveLights.forEach(l=>l.visible=true);
-    invulnerable=3;doorHint=false;lastDoorLine=false;finishing=false;drift=0;
+    invulnerable=4;doorHint=false;lastDoorLine=false;finishing=false;drift=0;contactT=0;
     const selected=pick(3);layoutHash='archive-'+selected.join('');
     sheets.forEach((s,i)=>{
       const [x,z]=CANDIDATES[selected[i]];
@@ -110,16 +110,19 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
       play('archiveReveal',()=>{done=true;active=false;iva.set('idle');onComplete();});
     }
     // Ива не нападает, когда отрезана дверью, и не убивает аптекаря.
-    if(!finishing && !doorLocked && invulnerable<=0 &&
-      iva.state.mode==='sleepwalk' && near(hero.position,iva.group.position)<.82){
-      caughtCount++;invulnerable=5;iva.set('listen',5);onCaught();
+    // Захват требует непрерывного контакта: касание и рывок мимо не считаются поимкой.
+    const watched = !finishing && !doorLocked && invulnerable<=0 &&
+      iva.state.mode==='sleepwalk' && near(hero.position,iva.group.position)<.78;
+    contactT = Math.max(0, Math.min(1.1, contactT + (watched ? dt : -dt*2.5)));
+    if(contactT>=1.1) {
+      contactT=0;caughtCount++;invulnerable=6;iva.set('listen',5);onCaught();
     }
   }
   function resetAfterCaught(){
     hero.position.copy(START);fixSpot(hero.position);
     iva.group.position.set(-12.5,0,2.7);fixSpot(iva.group.position);
     doors.forEach(d=>{d.time=0;d.cooldown=0;});
-    iva.set('sleepwalk');invulnerable=5;
+    iva.set('sleepwalk');invulnerable=7;contactT=0;
   }
   function goal() {
     if(!active || finishing)return null;

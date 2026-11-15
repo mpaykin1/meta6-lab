@@ -88,16 +88,16 @@ export function createGirl({makers, paint}) {
     } else if (s.mode === 'sleepwalk') {
       // Глава II: Ива ещё не бежит. Старая сеть ведёт её от двери к двери.
       // Вблизи замечает врача и тихо приближается, вдали блуждает по станции.
-      const target = dist < 7.4 ? P : new T.Vector3(-15.7 + Math.sin(ctx.time * .24) * 2.4,
+      const target = dist < 5.2 ? P : new T.Vector3(-15.7 + Math.sin(ctx.time * .24) * 2.4,
         0, 1.6 + Math.cos(ctx.time * .19) * 3.2);
       want.subVectors(target, g.position).setY(0);
       const distance = want.length();
       // Чуткая, но не сверхбыстрая: у игрока есть время дойти до укрытия.
       // К третьей странице сигнал усиливается; нервное преследование остаётся.
-      const pursuitSpeed = 1.65 + Math.min(2, ctx.archivePages || 0) * .18;
-      if (distance > .12) want.setLength(Math.min(dist < 7.4 ? pursuitSpeed : 1.1, distance * 1.5));
+      const pursuitSpeed = 1.25 + Math.min(2, ctx.archivePages || 0) * .14;
+      if (distance > .12) want.setLength(Math.min(dist < 5.2 ? pursuitSpeed : 1.05, distance * 1.5));
       else want.set(0,0,0);
-      lookAt = dist < 7.4 ? P : ctx.robot;
+      lookAt = dist < 5.2 ? P : ctx.robot;
     } else if (s.mode === 'stun') {
       want.copy(toHero).setLength(-1.6 * Math.max(0, 1 - s.t)); lookAt = P;
       if (s.t > s.dur) set('chase');

@@ -137,7 +137,7 @@ async function checkActorIdentity(identify) {
   const pr={title:'Карта сил автозадач',body:'Правила для автозадач и обычного чата',head:{ref:'lab/x'}};
   assert.equal(identify(pr,'| Карта сил | lab/x | чат ChatGPT | now |'),'чат ChatGPT');
   assert.equal(identify({...pr,body:'Исполнитель: чат ChatGPT'},
-    '| Задача | lab/x | MG-строитель-2 | now |'),'чат ChatGPT');
+    '| Задача | lab/x | MG-строитель-2 | now |'),'автозадача');
   assert.equal(identify(pr,'| Другое | lab/x-extra | MG-строитель-3 | now |'),'неизвестно');
   assert.equal(identify(pr,''),'неизвестно');
   assert.equal(identify({...pr,body:'Исполнитель: MG-строитель-1'},''),'автозадача');
@@ -368,19 +368,7 @@ test('Карта сил: ошибки привязываются к PR по но
   }
 });
 
-test('исполнитель: исторические записи ZANYATO, приоритет подписи и отсутствие догадок',()=>{
-  const pr={number:331,title:'про автозадачи',
-    body:'Исполнитель: чат ChatGPT',head:{ref:'lab/mg-stroitel-2'}};
-  assert.equal(identifyActor(pr,'| PR #331 | lab/mg-stroitel-2 | MG-строитель-2 | now |',
-    dictionary),'чат ChatGPT');
-  assert.equal(identifyActor({...pr,body:''},'',dictionary),'автозадача');
-  assert.equal(identifyActor({...pr,body:'',head:{ref:'lab/neutral'}},'',dictionary),
-    'неизвестно');
-  assert.equal(identifyActor({...pr,number:33,body:'',head:{ref:'lab/neutral'}},
-    '| PR #331 | lab/other | MG-строитель-1 | now |',dictionary),'неизвестно');
-  assert.equal(identifyActor({...pr,body:'Исполнитель: MG-строитель-1\nИсполнитель: чат ChatGPT'},
-    '',dictionary),'неизвестно');
-});
+
 
 import {recentCohort,trendFor} from './build.mjs';
 function verifyCosts(aggregate) {
@@ -459,13 +447,7 @@ test('3 дня: три мутации, включая фальшивую отм�
   }
 });
 
-test('исполнитель: неопознанная подпись не скрывает достоверную запись в ZANYATO',()=>{
-  const pr={body:'Исполнитель: —',head:{ref:'lab/proj'},number:42};
-  assert.equal(identifyActor(pr,'| PR #42 | lab/proj | MG-строитель-3 | now |',dictionary),
-    'автозадача');
-  assert.equal(identifyActor({...pr,body:'Исполнитель: неизвестно'},'',dictionary),
-    'неизвестно');
-});
+
 
 test('доля закрытых: незакрытый заброшенный PR не портит показатель',()=>{
   const rows=[

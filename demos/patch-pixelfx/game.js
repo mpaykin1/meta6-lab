@@ -3,6 +3,7 @@
 import {createFrame, clearFrame, createFx, composite, campfire,
   smallExplosion as explosion, lightningStrike as lightning} from
   "../../shared/components/patch-pixelfx/entry.js";
+import {drawAmbience, drawForeground} from "./atmosphere.js";
 
 const W = 640, H = 360;
 const canvas = document.querySelector("#world");
@@ -27,6 +28,8 @@ let enemySeed = 0;
 let playerX = 112;
 let lastCast = -10;
 let sound = null;
+let stormPulse = 0;
+let stormX = 320;
 
 const random = (n) => {
   const x = Math.sin(n * 127.1 + 91.7) * 43758.5453;
@@ -48,6 +51,8 @@ function restart() {
   playerX=112;
   lastCast=-10;
   enemySeed=0;
+  stormPulse=0;
+  stormX=320;
   waves=[];
   hazards=makeEnemies();
   fire=newFire();
@@ -77,7 +82,9 @@ function playStrike() {
 function burst(x, y=281, withLightning=true) {
   if(paused || time-lastCast<0.45)return;
   lastCast=time;
+  stormPulse=1;
   const tx=clamp(Math.round(x),46,594);
+  stormX=tx;
   const yy=clamp(Math.round(y),244,301);
   if(withLightning)waves.push({fx:createFx(lightning,{x:tx,y:yy,seed:enemySeed++ + 23}),kind:"bolt"});
   waves.push({fx:createFx(explosion,{x:tx,y:yy,seed:enemySeed++ + 84,size:0.8}),kind:"blast",delay:0.23});
@@ -270,6 +277,7 @@ function landscape(){
 
 function update(dt){
   time+=dt;
+  stormPulse=Math.max(0,stormPulse-dt*2.9);
   if(keys.has("left"))playerX-=dt*82;
   if(keys.has("right"))playerX+=dt*82;
   playerX=clamp(playerX,34,606);
@@ -294,8 +302,10 @@ function update(dt){
 }
 function draw(){
   landscape();
+  drawAmbience(ctx,time,stormPulse,stormX);
   hazards.forEach(enemySprite);
   hero();
+  drawForeground(ctx,time,stormPulse);
   clearFrame(frame);
   fire.draw(frame);
   for(const w of waves)if(w.delay<=0)w.fx.draw(frame);

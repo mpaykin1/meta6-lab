@@ -1,5 +1,11 @@
 name: Archer visual proof
 on:
+  push:
+    branches: [lab/archer-retention-exp-1-game]
+    paths:
+      - 'games/archer-in-the-fog/**'
+      - 'scripts/archer-proof/**'
+      - '.github/workflows/archer-visual-proof.yml'
   pull_request:
     paths:
       - 'games/archer-in-the-fog/**'
@@ -9,21 +15,23 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: archer-proof-${{ github.event.pull_request.number }}
+  group: archer-proof-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   visual-proof:
-    if: startsWith(github.head_ref, 'lab/archer-retention-exp-')
+    if: startsWith(github.head_ref, 'lab/archer-retention-exp-') || github.ref == 'refs/heads/lab/archer-retention-exp-1-game'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Check workflow proof mutations
+        run: node scripts/archer-proof/mutate-visual-runner.mjs
       - name: Browser dependencies
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1 pngjs@7.0.0
@@ -31,7 +39,7 @@ jobs:
       - name: Prove absence and invisible-hook mutations, or compare game versions
         shell: bash
         env:
-          ARCHER_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          ARCHER_BASE_SHA: ${{ github.event.pull_request.base.sha || 'origin/lab/archer-retention-exp-1' }}
         run: |
           set -euo pipefail
           if git diff --name-only "$ARCHER_BASE_SHA...HEAD" | grep -q '^games/archer-in-the-fog/'; then
@@ -39,6 +47,9 @@ jobs:
           else
             node scripts/archer-proof/archer.mjs --selftest
           fi
+      - name: Full Archer META BOT playthrough
+        if: always()
+        run: node scripts/meta-bot/run.mjs archer-in-the-fog
       - uses: actions/upload-artifact@v4
         if: always()
         with:

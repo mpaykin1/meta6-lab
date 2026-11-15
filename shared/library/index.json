@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "copy_limit_bytes": 50000000,
-  "copied_bytes": 49666392,
+  "copied_bytes": 49666761,
   "games": [
     {
       "game": "archer-in-the-fog",
@@ -34,6 +34,14 @@
       "assets": 6,
       "file_assets": 0,
       "solutions": 236
+    },
+    {
+      "game": "ostrov-aptekarya",
+      "source_root": "games/ostrov-aptekarya",
+      "manifest": "shared/library/ostrov-aptekarya.json",
+      "assets": 6,
+      "file_assets": 1,
+      "solutions": 82
     },
     {
       "game": "rainbow-acceleration",
@@ -129,7 +137,7 @@
       "manifest": "shared/library/veil-terraces.json",
       "assets": 4,
       "file_assets": 1,
-      "solutions": 43
+      "solutions": 42
     }
   ],
   "entries": [
@@ -41736,6 +41744,1320 @@
       "lines": [
         1299,
         1308
+      ]
+    },
+    {
+      "id": "e7c03ebcf8e02c61d33e7181",
+      "game": "ostrov-aptekarya",
+      "kind": "json-data",
+      "purpose": [],
+      "source_path": "games/ostrov-aptekarya/bot.json",
+      "sha256": "659b9fa65b77bfa37ee346cc5b7eec00d0fb83a925122b3d18af974ab975e208",
+      "file": "shared/library/assets/ostrov-aptekarya/bot.json"
+    },
+    {
+      "id": "42e7ecf93684f67d9b85526f",
+      "game": "ostrov-aptekarya",
+      "kind": "inline-style",
+      "name": "style@248",
+      "purpose": [
+        "style"
+      ],
+      "source_path": "games/ostrov-aptekarya/index.html",
+      "sha256": "3aee1da52bfa91cc352844b83def66b67d198979ffc3df5c1bccbada3820b031",
+      "lines": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "190ae114f8118ffc7ac5bab6",
+      "game": "ostrov-aptekarya",
+      "kind": "inline-svg",
+      "name": "svg@5206",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "sha256": "8e466620055fee1e925289c281aec69b29da6237a0c82c07fbe7b577c4bf27dd",
+      "lines": [
+        50,
+        50
+      ]
+    },
+    {
+      "id": "5f47387c735329894bf39f46",
+      "game": "ostrov-aptekarya",
+      "kind": "inline-svg",
+      "name": "svg@5462",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "sha256": "eb99aa21ec6f5d3b208f2978d1b78b3a3fae4338ad62ae6fb71a0562927c346b",
+      "lines": [
+        52,
+        52
+      ]
+    },
+    {
+      "id": "9d64375c853afe9add5b5a41",
+      "game": "ostrov-aptekarya",
+      "kind": "inline-svg",
+      "name": "svg@5371",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "sha256": "e1eadf452e91e89c4583be9eda9449ec60961df8900bfb5c3ad622c420056d21",
+      "lines": [
+        51,
+        51
+      ]
+    },
+    {
+      "id": "d4b97154b927581e47843289",
+      "game": "ostrov-aptekarya",
+      "kind": "inline-svg",
+      "name": "svg@5620",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "sha256": "253a1419b6afc4cb1d9c9e08350c5156b74b66011b11d7b091ce0bc5b44d5a4c",
+      "lines": [
+        53,
+        53
+      ]
+    },
+    {
+      "id": "0f6f1741d59b517e08f34a3f",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "env",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/audio.js",
+      "sha256": "f5a75e6fb6ae4d608d4ecd5192d726277333a187def788c8788ac15574398538",
+      "lines": [
+        56,
+        56
+      ]
+    },
+    {
+      "id": "4b07a12f6ce942fe0d47a628",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "createAudio",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "games/ostrov-aptekarya/audio.js",
+      "sha256": "2c4029d9fb4e060749d9f0c0ba3cca79bf1cebe8915d5190c3dea0638742986e",
+      "lines": [
+        15,
+        134
+      ]
+    },
+    {
+      "id": "641224c5aeb4c3949b45ab4b",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "schedule",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/audio.js",
+      "sha256": "c239a06b133ae2baa47428be1e8e6934e382956cc3872bf5fca7144d4e2ab1f8",
+      "lines": [
+        73,
+        88
+      ]
+    },
+    {
+      "id": "73cae00e074379e407066017",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "chord",
+      "purpose": [
+        "audio"
+      ],
+      "source_path": "games/ostrov-aptekarya/audio.js",
+      "sha256": "42dd175bb79cfea5977dd969d11829672bfc97ece69f6d7a34d2ae375b92c358",
+      "lines": [
+        61,
+        72
+      ]
+    },
+    {
+      "id": "7ce6c15af5dce84420f28a65",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "impulse",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/audio.js",
+      "sha256": "7e7e0a79dc5102b7167b13df527ff11b9c800cc2760bd351ca5efd27fce958de",
+      "lines": [
+        19,
+        23
+      ]
+    },
+    {
+      "id": "8b505ec2632830c31b9de159",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/audio.js",
+      "sha256": "1df32645a9fd454485e4f360e577db4b41692e7b6ed66a52864cdec2c1c2bbf8",
+      "lines": [
+        24,
+        55
+      ]
+    },
+    {
+      "id": "d2b5a55e4f121a7815eb0599",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "tone",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/audio.js",
+      "sha256": "e40bb72aca3f30d21423db1275f235031394e895b6dfe5bbcc315ca6e868cf6d",
+      "lines": [
+        57,
+        57
+      ]
+    },
+    {
+      "id": "fa83562dcf4099c94b461ef9",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:audio.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/audio.js",
+      "sha256": "61e01f31a05bf0d38a38604498f846170ac361a6d2fd35087f51402a9acd7342",
+      "lines": [
+        1,
+        134
+      ]
+    },
+    {
+      "id": "ad15cdb7b938220fc71d666d",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "A",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot-adapter.js",
+      "sha256": "d44ee19711a912cd6392c0f45b62efc4ad6a1c402673bd9b1d628cc84c4479ee",
+      "lines": [
+        5,
+        21
+      ]
+    },
+    {
+      "id": "e9e534edd0458f36475b7586",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:bot-adapter.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot-adapter.js",
+      "sha256": "d1dac6f9ef7a34478f5bfb98f2496de658c70045e7ae814582ce0cbba98f85c9",
+      "lines": [
+        1,
+        22
+      ]
+    },
+    {
+      "id": "2a17d0ed7c26c8a3ffbb78bd",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:bot-strategy.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot-strategy.mjs",
+      "sha256": "430a6b54fb34700fdba0e0b6d82c00026cbbb097a756a645c0bd7264bb768498",
+      "lines": [
+        1,
+        19
+      ]
+    },
+    {
+      "id": "8578993336cc672e949620a2",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "start",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot-strategy.mjs",
+      "sha256": "3038faf3088d4a3bb69482dd3ad5d1b233741fc7c5fcb27755f5bcd48c69cfc1",
+      "lines": [
+        2,
+        8
+      ]
+    },
+    {
+      "id": "e5b4e1c849e9278a5c3c82c6",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "playLevel",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot-strategy.mjs",
+      "sha256": "fd0fbe6e7cb3732d7c6699930938f601afce03d58c1ae2ca5f6317acdfb1f1c1",
+      "lines": [
+        9,
+        19
+      ]
+    },
+    {
+      "id": "3e2a7726c7e419112cffdecf",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:playthrough.mjs",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/playthrough.mjs",
+      "sha256": "aa7d71540b2f9323d7b1c91abf9fae90177b36d6b7510b29dda851a75c642f15",
+      "lines": [
+        1,
+        35
+      ]
+    },
+    {
+      "id": "48f0684a3d988605e13a5b75",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "stray",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/bot/playthrough.mjs",
+      "sha256": "667d4557e09ebc3fbbe132c248ffec0cc980d4b0b889f3f712dcf6a8f5bb3085",
+      "lines": [
+        21,
+        31
+      ]
+    },
+    {
+      "id": "03c5c70b62791264e1f87a92",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "normals",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "5570a9a0b5916770604ca14f533263c753f1a3288bf3c36f956f138e3ada0787",
+      "lines": [
+        26,
+        34
+      ]
+    },
+    {
+      "id": "0c48a03f6bb7a14c8ef6fdce",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "oldOutline",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "2ed81d1c2781ff8398823f2363b9e6ebf52da0f6782481d968b3a7a436bf5548",
+      "lines": [
+        14,
+        25
+      ]
+    },
+    {
+      "id": "1c0a5cb72ed984875f6066d1",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:coast.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "3f42499d822b2d800f6acf89c48f5c018f76dd37bc3e5804c939241e145f0c24",
+      "lines": [
+        1,
+        195
+      ]
+    },
+    {
+      "id": "2131d5890cc416c50526e776",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "flat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "a195156048415ad8b8611255e53fa19477863a9f8ec59cab6106040bb3ad04ea",
+      "lines": [
+        67,
+        71
+      ]
+    },
+    {
+      "id": "2694cbb21c3562de24259b30",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "chaikin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "cb420c80cc4e72cd4d03469454970887af3e784c6757f7dd683a66b130892f5b",
+      "lines": [
+        35,
+        43
+      ]
+    },
+    {
+      "id": "2e4ab5ef7fba6909c3392551",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "line",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "57b685a892fd6881ba37d9988c07051a0d00418af28c629dc12d574eac602d21",
+      "lines": [
+        18,
+        18
+      ]
+    },
+    {
+      "id": "3d67c52721f48bdd75d9b6a5",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "quad",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "d0b72c3aeb03097e244e293f752c55c7f7b7c693c202d121e99bebd9b544472a",
+      "lines": [
+        17,
+        17
+      ]
+    },
+    {
+      "id": "41f5e8b0784d3043616c2677",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "createCoast",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "120341257c3d3b412f2ad4eae6b2cf96f0f3b578098c5726e36bc1d6c3a0079b",
+      "lines": [
+        45,
+        45
+      ]
+    },
+    {
+      "id": "55b7d16a281921e9d12ec7ee",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "C",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "410e45ecbdc4ea9b234e82aaae1cfa7accff37a1eb5273b6d16da976e26c8dce",
+      "lines": [
+        104,
+        150
+      ]
+    },
+    {
+      "id": "941c87d64479c152687db7fb",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "h1",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "6ee765c6bf55b182eea987aa4fb7337176f5679694724762dae94a1d5459c8b8",
+      "lines": [
+        9,
+        9
+      ]
+    },
+    {
+      "id": "9890cfdbc66cd35481e4555e",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "noise1",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "0bcec93ac409b5e190346f3374c0b7e470eda96229560e42124895b24edcafb4",
+      "lines": [
+        10,
+        10
+      ]
+    },
+    {
+      "id": "ba58a1ff2037561bb0806a02",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "fbm1",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "58b8f63b8cd004d676c33307350c45ec46e500f91242c7f3b612a9e1ae4c2ce1",
+      "lines": [
+        11,
+        11
+      ]
+    },
+    {
+      "id": "c216e435818d132fa235463f",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "inside",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "54d47ef1e9f3ce889a2ec044826cc50fa8533198db1023b70f0c439b5543bf16",
+      "lines": [
+        177,
+        184
+      ]
+    },
+    {
+      "id": "d7259b4b0c4a38f78e7e4637",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "extendWalk",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "9bbbd91d599e067d05423f493c855404c4e339e2a1fcba51f60a3436ee23a177",
+      "lines": [
+        185,
+        190
+      ]
+    },
+    {
+      "id": "eb394f7cb99dc84ff1ae809b",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "rnd",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "4456a4af7c575f9830978c7e888307c454d3db3410c4af8a1396fb520ec2be7e",
+      "lines": [
+        155,
+        161
+      ]
+    },
+    {
+      "id": "fd4a150c87c7c6dcdb77c454",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "shapeOf",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/coast.js",
+      "sha256": "8281c0014f648e26413c1092b78a5e29a928307d4096b250d1deb3ba511023f2",
+      "lines": [
+        66,
+        66
+      ]
+    },
+    {
+      "id": "b3828f19ba47c37ca1e72dc9",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:dialogue.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/dialogue.js",
+      "sha256": "6f2a69bcb435ac3b8ec1f366b2f893fbc0558a0abca8a5cfd783da35db25ad4c",
+      "lines": [
+        1,
+        195
+      ]
+    },
+    {
+      "id": "032fcac6921c2e4f341ac3d4",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "botInput",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "99c574c7ee1bc2ac9dd7c6271d5698c4ff31368f89c5362c335764d3c9285892",
+      "lines": [
+        285,
+        308
+      ]
+    },
+    {
+      "id": "058531b9445c8f83c234ee26",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "pickN",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "179dff8972387919bd977f66aebc3a0a85f9c26963b6eba808b02f7c752f3726",
+      "lines": [
+        67,
+        73
+      ]
+    },
+    {
+      "id": "08050c81f95d47dfde049697",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "flat",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "33964975cadb02c3cb6a2c803db98991b4e164c9bada8aacfa280cbf83dc5429",
+      "lines": [
+        22,
+        27
+      ]
+    },
+    {
+      "id": "081230a26a55041ecc59fcc5",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "pickable",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "dac4bc92be68f391c8340c3ed6e6ee1ed6677e06eab7c68fb69aa50c9fe09ac9",
+      "lines": [
+        142,
+        155
+      ]
+    },
+    {
+      "id": "0cbc0a9b1c9f8a6e0dd56aa9",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "startTell",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "fa3a913bb49ba7dfa00c287331bc01862121b3fb3d9ea893106e3df0aa977d2f",
+      "lines": [
+        264,
+        268
+      ]
+    },
+    {
+      "id": "0ee71d3915133611bfea2caa",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "simulate",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "befd20f9e4ab7482e8a8f796b82875a3819c0dbfcb564f8d9da1032ff52faf0b",
+      "lines": [
+        311,
+        443
+      ]
+    },
+    {
+      "id": "1afd92e93d56e1b2e86f4db8",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "play",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "903218e343c40cac394bdeef97da3aea48f9a431d19af1954eef64003b8f935a",
+      "lines": [
+        190,
+        194
+      ]
+    },
+    {
+      "id": "2852ea18a317a28f1e0837d8",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "useDust",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "496e9cbbc433ffd026818eb78b8d59dc7571a3fe829f53d65e5c8d57857af604",
+      "lines": [
+        256,
+        263
+      ]
+    },
+    {
+      "id": "35585d860f3216f4ad91ae0a",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "V",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "35bd7c0926f4c19feb3d1c93673d52595a1db4c28a837a06e653d6d29ace7576",
+      "lines": [
+        23,
+        27
+      ]
+    },
+    {
+      "id": "358ce080b954a5059990f9fc",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "gradient",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "9eb1dc9078b3713511d3148804a961814564f84c2b1216e249774b69371fe0af",
+      "lines": [
+        89,
+        89
+      ]
+    },
+    {
+      "id": "3d493e2ef1837a9242e389d6",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "burst",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "a7c839f0ef7233f6edf30d8f180d37a63dd830067556660edd00e7d67c54d078",
+      "lines": [
+        118,
+        125
+      ]
+    },
+    {
+      "id": "41a3d04a145161b193e382a6",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "c3a8f016bd30521ffc15bf9defcc1540c68c2922d52e3f96e331f1256ef8c481",
+      "lines": [
+        446,
+        446
+      ]
+    },
+    {
+      "id": "684b46e55fee84a5273ef061",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:game.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "b8cf6954094293352897228c2dfbe5580e4d488cea9e7901b91138a274c9bcc1",
+      "lines": [
+        1,
+        550
+      ]
+    },
+    {
+      "id": "76e4cdaefc05dcd8aa4645d1",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "lerpAngle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "2732cd8a04437584d37649a9825c03824bc94e16d4a1b19b1846e1e1c92cf3af",
+      "lines": [
+        21,
+        27
+      ]
+    },
+    {
+      "id": "7755bc40d2eb3ab497f52a83",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "busy",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "0bbf9da76f354b40e2b8b7c743f1ba92d81d91f015654afa55565a9c1808a084",
+      "lines": [
+        213,
+        217
+      ]
+    },
+    {
+      "id": "7cd2532119f2f7c5cff70d8c",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "damp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "3ff825cbfcdb8437daa27034c0b62a39a68d58915ff7f1cefd9781e974be5768",
+      "lines": [
+        20,
+        27
+      ]
+    },
+    {
+      "id": "865cc31efe98af8ebc7347d6",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "mark",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "d2cc9fdb17203f4859c233ae0c4a24bdc847c7ba7b84f0b54fd422d1e204381e",
+      "lines": [
+        172,
+        172
+      ]
+    },
+    {
+      "id": "a3718236515e74088959d838",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "fixSpot",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "844e8a3095b52b9b35a481477248ef4f63a0e47be671d97cc93d4d453e0e119f",
+      "lines": [
+        156,
+        160
+      ]
+    },
+    {
+      "id": "a49e3b5468690731f2927730",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "setState",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "7c6a4dbf98dc1a748ef0ca20490e2960c9afe83c6a46d252e63b1e3f774caf5f",
+      "lines": [
+        223,
+        223
+      ]
+    },
+    {
+      "id": "a5849f9962b6f4a01909f7b1",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "reset",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "e0bb387e6e303c4b96792da5a854201813e40b7fad2604a363ae11e0545ccbdc",
+      "lines": [
+        232,
+        241
+      ]
+    },
+    {
+      "id": "b12f8388eaf7655fd8914945",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "tickBeacon",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "1683b57755159c160c568951aec692aa5be332896447de8f4f6b40bb42f2aaff",
+      "lines": [
+        106,
+        111
+      ]
+    },
+    {
+      "id": "c19c0877666184146c2aafd5",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "animate",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "4df82a45d0e38a45927351bb10e20cb88f19713337272e104f450004f58a0d7a",
+      "lines": [
+        448,
+        523
+      ]
+    },
+    {
+      "id": "c68461ddcd124abc3578a623",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "startChase",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "6914aec0823c56c74bf8079942aa42d5ba1f3fee820abf776933c1e7149d462f",
+      "lines": [
+        269,
+        272
+      ]
+    },
+    {
+      "id": "c76dd39fa4b5b95262219dc9",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "begin",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "6858c9259ddf2ec64c4d57e503fa8841e77d8f07bb34f004813f91bb4a99752c",
+      "lines": [
+        242,
+        242
+      ]
+    },
+    {
+      "id": "c8d026697ed652fd611d475a",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "toEnding",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "7d042a9b51fbe17a6fe8a804182e9893e464bd25b254be780feb21529a94d890",
+      "lines": [
+        273,
+        281
+      ]
+    },
+    {
+      "id": "c90d4bd607737c121fb175fb",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "tickParticles",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "3a791ce38180e953b2a1d9168652e1b84c5dd539206bc9f9e5d4c9be206698a1",
+      "lines": [
+        126,
+        134
+      ]
+    },
+    {
+      "id": "e02f43bfb29e5e07a661e9a9",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "take",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "50b5299c8451697a52816747989a124e50cb6155ec2f64726d9d808d1157b060",
+      "lines": [
+        245,
+        255
+      ]
+    },
+    {
+      "id": "e848703a57dc17b1ab7b9116",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "tickDialogue",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "b3c8e2e8cb8320c4b8fab55105c6cda91509373fc76ff03807bfe2981f36ebf7",
+      "lines": [
+        195,
+        212
+      ]
+    },
+    {
+      "id": "e8d7da43da71bbbe4ddfba7c",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "beacon",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "d06cdcbda7e55956b49c22ef97eab8c1cad0293789232bb1572579957a56b004",
+      "lines": [
+        98,
+        105
+      ]
+    },
+    {
+      "id": "fb03f89e7883a5725e871c98",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "layoutSpots",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/game.js",
+      "sha256": "083dcd1863e12c7bb1fe584b68aecd4bce3812121577c9cfe449e1005c74ea1a",
+      "lines": [
+        225,
+        231
+      ]
+    },
+    {
+      "id": "3eaee61dbbae79b46a5770ea",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "plain",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/girl.js",
+      "sha256": "40b51a8e11e9ffbb710eea3f4d3175672e46162103fe5ab9235c093866a4bde4",
+      "lines": [
+        25,
+        29
+      ]
+    },
+    {
+      "id": "43ee47845bf5550532451b9b",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "update",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/girl.js",
+      "sha256": "b29c250e587ac822a667f60724303c94305dc590df8c41ae8f48068298192f05",
+      "lines": [
+        56,
+        131
+      ]
+    },
+    {
+      "id": "79500821f5ad046b4b71c08d",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "set",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/girl.js",
+      "sha256": "fe1ceb8cd272a8718c40d81b1e5f3fdfb6e411c778d0dc12bf1817537df83f76",
+      "lines": [
+        49,
+        49
+      ]
+    },
+    {
+      "id": "7b2d55e534c4f96c515291c2",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "lerpAngle",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/girl.js",
+      "sha256": "f27fb2db139a8c6fbf3801128f6cb8c329a3acb446fc444b5f12819545ff578f",
+      "lines": [
+        5,
+        8
+      ]
+    },
+    {
+      "id": "7bdafd39ffcb67f0e77ab819",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:girl.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/girl.js",
+      "sha256": "3ba9e96898ab6fe99f4321211a7d1c7725713c77b207bdac5bc5b780aee963f4",
+      "lines": [
+        1,
+        133
+      ]
+    },
+    {
+      "id": "c0726c7a196898eef3442ae6",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "glowTex",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/girl.js",
+      "sha256": "08a2e600e1bfc4d832cfaa3f09785d58d5ebcf4eb933f40d3a5d042830306c32",
+      "lines": [
+        32,
+        37
+      ]
+    },
+    {
+      "id": "c50752d7599f38ba8f29600c",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "createGirl",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/girl.js",
+      "sha256": "321c85973c2fb877ed3beff9a0646d105bf73c4d88de845dd7ba99fd4279fd9d",
+      "lines": [
+        8,
+        8
+      ]
+    },
+    {
+      "id": "fd036136c19523672d81a877",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "damp",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/girl.js",
+      "sha256": "4a23df2de214ae6bda3c2938d83250e0391e7acb65da4843d3cb7c878a4ae3a4",
+      "lines": [
+        6,
+        8
+      ]
+    },
+    {
+      "id": "ff10cd708099246f40e5466c",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "move",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "games/ostrov-aptekarya/girl.js",
+      "sha256": "e1e1bda8a4da53f2a806dc039853f3e87dfe28fe07f2c30e076e94f639de2911",
+      "lines": [
+        50,
+        54
+      ]
+    },
+    {
+      "id": "e09697376090921ddccd6785",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "inline-script@626",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/ostrov-aptekarya/index.html",
+      "sha256": "747261b453c498d6e66d1337ed182baf77ae836c4dcda7209924acf073aa1dd2",
+      "lines": [
+        6,
+        6
+      ]
+    },
+    {
+      "id": "f8653a927e5b24e54e9bc55c",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "inline-script@778",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/ostrov-aptekarya/index.html",
+      "sha256": "a3b5424c578f038572aca24493f5fc7ad3ccbbd895800da6f6bfff3c41aa32b5",
+      "lines": [
+        8,
+        10
+      ]
+    },
+    {
+      "id": "5568c2dcd0bc83d839969708",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "createPost",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/post.js",
+      "sha256": "7560d389a514c1ca5379de03a2cd4f3f57065b086e388c18aa8a460187025249",
+      "lines": [
+        6,
+        62
+      ]
+    },
+    {
+      "id": "a5759311d42e61162b2b7c21",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:post.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/post.js",
+      "sha256": "607e6dbc7103618f7d167180869619735b9994c1079cb3b1d951f40e9a03ce82",
+      "lines": [
+        1,
+        62
+      ]
+    },
+    {
+      "id": "159557866296bf6f9881dd81",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "module:ui.js",
+      "purpose": [
+        "game-module"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "sha256": "fb7b346283962fba1cc4b1aa065c2e55727c58b97ef92556b2654b118a5b099e",
+      "lines": [
+        1,
+        164
+      ]
+    },
+    {
+      "id": "1a82322f38e2663256603921",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "k",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "sha256": "54d32b0fa305b7648f26693ba4dfb640d77c981ead3147e5dd34fefe3055efdb",
+      "lines": [
+        131,
+        134
+      ]
+    },
+    {
+      "id": "373172121c7ae9217746b45b",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "toggleMenu",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "sha256": "e4018e02ed35712111c62c403aa1d06a3dc42987f4d5cfe90bf839807b1d1278",
+      "lines": [
+        87,
+        87
+      ]
+    },
+    {
+      "id": "42661bcb2740b63f7d0fd7f6",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "$",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "sha256": "3547fc90b545cbf7a11d00bcaf33c639f5ae8c261b952cee3d3d9920e303f007",
+      "lines": [
+        76,
+        86
+      ]
+    },
+    {
+      "id": "4b755d4871ef89382e05ef76",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "createUI",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "sha256": "ac9f0ea199b27b9881b8342162505651d00bccd3f97183a09fea746aef45e2e5",
+      "lines": [
+        56,
+        164
+      ]
+    },
+    {
+      "id": "b414b8779a34ebc0127402be",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "bind",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "sha256": "a0699c46031c8a9054bdb83b77c3b6959febd4cec8e1fcfda1bd4b129cb57f88",
+      "lines": [
+        106,
+        125
+      ]
+    },
+    {
+      "id": "d4ce2475c92a65b8c8dfaa5a",
+      "game": "ostrov-aptekarya",
+      "kind": "solution",
+      "name": "reset",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/ostrov-aptekarya/ui.js",
+      "sha256": "03a0c5d4ef0f018ac9c5abf211ca74949969db49db6a077f7e4278b9032c2283",
+      "lines": [
+        104,
+        104
       ]
     },
     {
@@ -157380,7 +158702,7 @@
       "kind": "json-data",
       "purpose": [],
       "source_path": "games/veil-terraces/bot.json",
-      "sha256": "593263e2872187d69814aac0bdbf799a0de2f44301b62533c03e3d3c298a5198",
+      "sha256": "fdba66bf13af0c424cd78ef2bc488ef131e86be5ef74f2b8385af74b4d6acd55",
       "file": "shared/library/assets/veil-terraces/bot.json"
     },
     {
@@ -157504,18 +158826,33 @@
       ]
     },
     {
-      "id": "0e64ea1fc859a0dc5263a8e0",
+      "id": "0b3909438e762684f0c84504",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "SOUND",
+      "name": "openMenu",
       "purpose": [
-        "audio"
+        "gameplay"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "1a322aecf65d075215fc0ceaf829d87f1b9ed6b0b44d6e94242b2297b4b0b6d0",
+      "sha256": "5da3d3be5ef91923078b5154e4557989c7bb82fdaf76a01f8c1e2d7c0750d932",
       "lines": [
-        103,
-        143
+        179,
+        183
+      ]
+    },
+    {
+      "id": "0b576e54f3d5876dc991354d",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "tick",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "80931cc357c2612efdec692c27f56f08d7de93109faeb6d9025f8fb7a2b65181",
+      "lines": [
+        120,
+        130
       ]
     },
     {
@@ -157534,7 +158871,22 @@
       ]
     },
     {
-      "id": "14d80e6391f565d53efce2be",
+      "id": "14de6d9edd189c18b79893af",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "move",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "f26f5980a3c51c135ab7dbf47b4f2b587b6c6a18b8913c58c4c157d754576426",
+      "lines": [
+        191,
+        200
+      ]
+    },
+    {
+      "id": "1704c1d6c4a89cc152a485a7",
       "game": "veil-terraces",
       "kind": "solution",
       "name": "note",
@@ -157544,53 +158896,8 @@
       "source_path": "games/veil-terraces/index.html",
       "sha256": "bd42740f2bfe4b9d64305f0d4ebe814e8bc08d039175197991dcb053bf0846a1",
       "lines": [
-        112,
-        122
-      ]
-    },
-    {
-      "id": "1b1ec5facbd363bb63e72a6e",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "reset",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "5ea32cf2980881c7395384e76ad22c718bec7a31b106f1657243e3556b4a36dd",
-      "lines": [
-        190,
-        190
-      ]
-    },
-    {
-      "id": "2484cc290b1c8aabb156ab29",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "enableSharedFx",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "8f5472d47a323e033902b62772f4e6eaa8653778ea9fa17082c2233dca01913a",
-      "lines": [
-        97,
-        102
-      ]
-    },
-    {
-      "id": "2679bc56d89ed165c1b8a05f",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "openMenu",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "5da3d3be5ef91923078b5154e4557989c7bb82fdaf76a01f8c1e2d7c0750d932",
-      "lines": [
-        190,
-        194
+        101,
+        111
       ]
     },
     {
@@ -157609,33 +158916,18 @@
       ]
     },
     {
-      "id": "412a9184d71d2805d6a999c2",
+      "id": "419bc59a7de29a43caccc83f",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "tick",
+      "name": "SOUND",
       "purpose": [
-        "gameplay"
+        "audio"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "80931cc357c2612efdec692c27f56f08d7de93109faeb6d9025f8fb7a2b65181",
+      "sha256": "1a322aecf65d075215fc0ceaf829d87f1b9ed6b0b44d6e94242b2297b4b0b6d0",
       "lines": [
-        131,
-        141
-      ]
-    },
-    {
-      "id": "46d9e983ca73a54e6799ed3f",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "releasePlayerInput",
-      "purpose": [
-        "controls"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "f057f1db54d1cbcf05b0d12ee8b09624b969a8d86c77a4c95299a2197d49186a",
-      "lines": [
-        203,
-        213
+        92,
+        132
       ]
     },
     {
@@ -157654,21 +158946,6 @@
       ]
     },
     {
-      "id": "4ee486adc01bc78121897080",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "generateShards",
-      "purpose": [
-        "level-generation"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "6f16f0fabe160528899c4de0c936008d04683162028355ccac68da84f3d7305a",
-      "lines": [
-        68,
-        88
-      ]
-    },
-    {
       "id": "4fcf6f907b0785745afe053e",
       "game": "veil-terraces",
       "kind": "solution",
@@ -157684,18 +158961,18 @@
       ]
     },
     {
-      "id": "5090393896c9b876eb9f6452",
+      "id": "50dbddf180ed8d3e97399cb8",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "frame",
+      "name": "generateShards",
       "purpose": [
-        "animation"
+        "level-generation"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "68c4ee77f18ab8eaf92efe6ba461c635cad4b14ae155ecbe962aa7f6f9a92e6d",
+      "sha256": "64f9c562192c08f8a014ecceafa8e36d2602dfdbc71fc0034c15afa405ed3638",
       "lines": [
-        229,
-        244
+        61,
+        77
       ]
     },
     {
@@ -157714,6 +158991,21 @@
       ]
     },
     {
+      "id": "5b3de863e9b8d55f64bb1063",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "reset",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "5ea32cf2980881c7395384e76ad22c718bec7a31b106f1657243e3556b4a36dd",
+      "lines": [
+        179,
+        179
+      ]
+    },
+    {
       "id": "5c62f014e353ebdf5f438414",
       "game": "veil-terraces",
       "kind": "solution",
@@ -157726,21 +159018,6 @@
       "lines": [
         30,
         30
-      ]
-    },
-    {
-      "id": "5ec7c1d6c36fbb3c48d7fe6e",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "inline-script@4963",
-      "purpose": [
-        "game-runtime"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "e5f269f112f7ad67acd64f2c397890311b3e3ed12e2b12a1f28099a0ebe37dc9",
-      "lines": [
-        10,
-        246
       ]
     },
     {
@@ -157774,18 +159051,18 @@
       ]
     },
     {
-      "id": "71b7a7057d63b5a85963049f",
+      "id": "84600d58fe09d2448379d387",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "resize",
+      "name": "draw",
       "purpose": [
         "gameplay"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "5ea32cf2980881c7395384e76ad22c718bec7a31b106f1657243e3556b4a36dd",
+      "sha256": "5e1741ce8d8ab612f42a044b90f355930637457a97b3831a2acd4cf665f7d017",
       "lines": [
-        190,
-        190
+        201,
+        201
       ]
     },
     {
@@ -157804,6 +159081,21 @@
       ]
     },
     {
+      "id": "9770b75868b42ebdf221704d",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "aimJoystick",
+      "purpose": [
+        "controls"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "ad61e5a13db66822f34eaf81c05de9818a9e740bfd8cf4d4db4e587e996bebd3",
+      "lines": [
+        186,
+        186
+      ]
+    },
+    {
       "id": "a05dd5a88e761fa751028511",
       "game": "veil-terraces",
       "kind": "solution",
@@ -157819,6 +159111,21 @@
       ]
     },
     {
+      "id": "a7343663b24cdb516372ceae",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "passableSegment",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "15219de88996c6006d4f9a85b13f05940e7b51e5d83fd6c8b245cc2c69233251",
+      "lines": [
+        50,
+        60
+      ]
+    },
+    {
       "id": "aba5fe5adde1a238ab66dfaa",
       "game": "veil-terraces",
       "kind": "solution",
@@ -157831,6 +159138,21 @@
       "lines": [
         29,
         29
+      ]
+    },
+    {
+      "id": "b9dc58b8a15d0d5189d90f22",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "enableSharedFx",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "8f5472d47a323e033902b62772f4e6eaa8653778ea9fa17082c2233dca01913a",
+      "lines": [
+        86,
+        91
       ]
     },
     {
@@ -157879,48 +159201,33 @@
       ]
     },
     {
-      "id": "cd1c6f1e6222f32bfff20633",
+      "id": "d13bbbbf3abe0fcfc3b589fc",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "endTouch",
+      "name": "frame",
       "purpose": [
-        "controls"
+        "animation"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "01b5b758e10439144a82af3d899c82da88653d0cf5cdf0990c05b580aee9ee5e",
+      "sha256": "68c4ee77f18ab8eaf92efe6ba461c635cad4b14ae155ecbe962aa7f6f9a92e6d",
       "lines": [
-        200,
-        200
+        204,
+        219
       ]
     },
     {
-      "id": "d19902a49b414c965c6a8a2f",
+      "id": "d974e27eb58dc456aa2d394b",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "aimJoystick",
-      "purpose": [
-        "controls"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "ad61e5a13db66822f34eaf81c05de9818a9e740bfd8cf4d4db4e587e996bebd3",
-      "lines": [
-        197,
-        197
-      ]
-    },
-    {
-      "id": "d7047914fa670a9e1c7c4e79",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "passableSegment",
+      "name": "start",
       "purpose": [
         "gameplay"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "130f45c41b0284fdf713ded982548a0e3da88be66467b072c29f630a284ab345",
+      "sha256": "1e3621b126841c24027c6dece4aba2773ad0babd38a26a5990e81ade5a1ba688",
       "lines": [
-        52,
-        67
+        112,
+        119
       ]
     },
     {
@@ -157939,18 +159246,18 @@
       ]
     },
     {
-      "id": "e157dcfdb7471e3060c9edd5",
+      "id": "dce0c533820c0cdb45ce62b4",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "start",
+      "name": "inline-script@4963",
       "purpose": [
-        "gameplay"
+        "game-runtime"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "1e3621b126841c24027c6dece4aba2773ad0babd38a26a5990e81ade5a1ba688",
+      "sha256": "308bc9582a77d139cfdcbcae38154b43b61ebcea755c5d36b9025f25703b3329",
       "lines": [
-        123,
-        130
+        10,
+        221
       ]
     },
     {
@@ -157969,6 +159276,21 @@
       ]
     },
     {
+      "id": "e5338a9e9828d6092d766d11",
+      "game": "veil-terraces",
+      "kind": "solution",
+      "name": "resize",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/veil-terraces/index.html",
+      "sha256": "5ea32cf2980881c7395384e76ad22c718bec7a31b106f1657243e3556b4a36dd",
+      "lines": [
+        179,
+        179
+      ]
+    },
+    {
       "id": "ea1bcfd1c8f7915b218b6d18",
       "game": "veil-terraces",
       "kind": "solution",
@@ -157981,21 +159303,6 @@
       "lines": [
         45,
         45
-      ]
-    },
-    {
-      "id": "eb61bbdfe6d32edff600c513",
-      "game": "veil-terraces",
-      "kind": "solution",
-      "name": "draw",
-      "purpose": [
-        "gameplay"
-      ],
-      "source_path": "games/veil-terraces/index.html",
-      "sha256": "5e1741ce8d8ab612f42a044b90f355930637457a97b3831a2acd4cf665f7d017",
-      "lines": [
-        226,
-        226
       ]
     },
     {
@@ -158014,18 +159321,18 @@
       ]
     },
     {
-      "id": "ff61f127b233d9ca4380431c",
+      "id": "f129ce0ae811ea39ebaa3b62",
       "game": "veil-terraces",
       "kind": "solution",
-      "name": "move",
+      "name": "endTouch",
       "purpose": [
         "controls"
       ],
       "source_path": "games/veil-terraces/index.html",
-      "sha256": "3c7200ccc1df093b88d113a986cd4dd6ea990826c3f6adf687be6bf2437e3d04",
+      "sha256": "01b5b758e10439144a82af3d899c82da88653d0cf5cdf0990c05b580aee9ee5e",
       "lines": [
-        216,
-        225
+        189,
+        189
       ]
     },
     {

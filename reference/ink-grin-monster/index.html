@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#171d20">
+<title>INK · Чернильный оскал — анимированная 3D-модель</title>
+<link rel="icon" href="data:,">
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#171d20;touch-action:none}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+button{font-family:Georgia,serif;cursor:pointer}
+#menu-btn{position:fixed;z-index:7;top:max(16px,env(safe-area-inset-top));
+left:max(16px,env(safe-area-inset-left));height:44px;width:44px;cursor:pointer;
+border:1px solid #9ba8a44a;border-radius:50%;background:#1d2529bd;
+color:#cbd1c6;font-size:21px;backdrop-filter:blur(12px)}
+#panel{max-height:calc(100vh - 96px);overflow:auto;position:fixed;z-index:7;top:max(72px,calc(env(safe-area-inset-top) + 60px));
+left:16px;width:min(284px,calc(100vw - 32px));padding:21px;box-sizing:border-box;
+border:1px solid #83958e40;border-radius:14px;background:#172024e8;
+color:#c4cbc6;box-shadow:0 18px 45px #0008;backdrop-filter:blur(18px)}
+#panel[hidden]{display:none}
+#panel h1{font:italic 27px Georgia;margin:0 0 4px;letter-spacing:.07em}
+#panel p{font:12px/1.5 Georgia;margin:0 0 16px;color:#899a94}
+#panel button{display:block;width:100%;margin:8px 0;padding:10px 12px;text-align:left;
+border:1px solid #8fa29942;border-radius:8px;background:#ffffff0b;color:#e0e2d9;font:14px Georgia}
+#panel small{display:block;margin-top:17px;font:11px/1.6 Georgia;color:#91a7a2}
+#error{display:none;position:fixed;z-index:10;bottom:20px;left:16px;
+right:16px;padding:13px;background:#292b31;color:#e9ded0;font:12px/1.5 monospace;
+border:1px solid #7f514a55;border-radius:8px}
+</style>
+<script type="importmap">{"imports":{"three":"../ink-fallen-guardian/three.module.js"}}</script>
+</head>
+<body>
+<button id="menu-btn" aria-label="Меню" aria-expanded="false">☰</button>
+<div id="panel" hidden>
+<h1>Чернильный оскал</h1><p>INK · живой акварельный 3D-хоррор</p>
+<button data-view="body">Весь монстр</button>
+<button data-view="face">Посмотреть лицо</button>
+<button data-view="profile">Посмотреть сбоку</button>
+<button data-act="bite">Укус</button>
+<button data-act="jump">Прыжок</button>
+<button data-act="strikeR">Удар</button>
+<button data-act="grab">Схватить</button>
+<button data-act="eyes">Безумные глаза</button>
+<button id="pause">Остановить анимацию</button>
+<small>Мышь / палец — вращать камеру.<br>Колёсико / два пальца — приблизить.</small>
+</div>
+<div id="error" role="alert"></div>
+<script>
+function showFailure(e){
+  const el=document.getElementById('error');
+  el.style.display='block';
+  el.textContent='Не удалось загрузить 3D-сцену: '+String(e||'неизвестная ошибка');
+}
+window.addEventListener('error',e=>showFailure(e.message));
+window.addEventListener('unhandledrejection',e=>showFailure(e.reason?.message||e.reason));
+</script>
+<script type="module" src="./scene.js"></script>
+</body>
+</html>

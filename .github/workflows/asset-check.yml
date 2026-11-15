@@ -5,12 +5,14 @@ on:
     paths:
       - 'asset-packs/**'
       - 'automation/asset-check/**'
+      - 'automation/asset-quality/**'
       - '.github/workflows/asset-check.yml'
   push:
     branches: [main]
     paths:
       - 'asset-packs/**'
       - 'automation/asset-check/**'
+      - 'automation/asset-quality/**'
       - '.github/workflows/asset-check.yml'
   workflow_dispatch:
 permissions:
@@ -30,14 +32,17 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install pillow numpy
+      - name: ffmpeg для проверки ogg/mp3
+        run: which ffmpeg || (sudo apt-get update -q && sudo apt-get install -y -q ffmpeg)
       - name: Ловушки бота (должны быть зелёными)
         run: python -m unittest discover -s automation/asset-check -p 'test_*.py' -v
+      - name: Охота на мутантов (каждая выключенная проверка обязана ронять ловушки)
+        run: python automation/asset-check/mutate_bot.py
       - name: Проверка всех паков
         run: |
           set +e
           fail=0
           for d in asset-packs/*/*/; do
-            [ -f "$d/atlas.json" ] || [ -f "$d/manifest.json" ] || continue
             name=$(basename "$d"); stage=$(basename "$(dirname "$d")")
             python -I automation/asset-check/check_pack.py "$d" --out "out/$stage-$name" > /dev/null
             code=$?

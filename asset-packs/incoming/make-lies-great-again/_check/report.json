@@ -1,21 +1,10 @@
 {
  "score": 0,
  "hard": 109,
+ "kinds": [
+  "sprite2d"
+ ],
  "items": [
-  {
-   "id": "A6",
-   "severity": "HARD",
-   "where": "atlas.json",
-   "problem": "Нет полей ['license', 'provenance'] — происхождение и права не указаны",
-   "fix": "Добавь \"license\": {\"type\":\"…\",\"author\":\"ChatGPT image gen / автор\",\"commercial\":true} и \"provenance\": {\"tool\":\"…\",\"prompt_sha256\":\"…\",\"date\":\"YYYY-MM-DD\"} (правило META_GAMES_SOURCE_ALLOWLIST)"
-  },
-  {
-   "id": "A7",
-   "severity": "HARD",
-   "where": "atlas.json",
-   "problem": "Нет content_flags — не указано, есть ли реальные люди, бренды, политика",
-   "fix": "Добавь \"content_flags\": {\"real_persons\": [...], \"brands\": [...], \"political\": true|false}. Реальные узнаваемые люди/политика = отдельная версия пака без них для МГ, Google Play, Steam, Playgama"
-  },
   {
    "id": "G4",
    "severity": "HARD",
@@ -1494,19 +1483,35 @@
    "fix": "Добавь ground_left, ground_right, corner_in, corner_out, slope_up, slope_down (БЕЗ ПОВТОРОВ)"
   },
   {
-   "id": "B3",
+   "id": "C1",
+   "severity": "HARD",
+   "where": "atlas.json",
+   "problem": "Нет полей ['license', 'provenance'] — происхождение и права не указаны",
+   "fix": "Добавь в манифест (или pack.json) \"license\": {\"type\":\"…\",\"author\":\"…\",\"commercial\":true} и \"provenance\": {\"tool\":\"…\",\"prompt_sha256\":\"…\",\"date\":\"YYYY-MM-DD\"} (правило META_GAMES_SOURCE_ALLOWLIST)"
+  },
+  {
+   "id": "C2",
+   "severity": "HARD",
+   "where": "atlas.json",
+   "problem": "Нет content_flags — не указано, есть ли реальные люди, бренды, политика",
+   "fix": "Добавь \"content_flags\": {\"real_persons\": [...], \"brands\": [...], \"political\": true|false}. Реальные узнаваемые люди/бренды/политика = отдельная версия пака без них для МГ, Google Play, Steam, Playgama"
+  },
+  {
+   "id": "C5",
    "severity": "SOFT",
    "where": "/",
-   "problem": "276 отдельных PNG = 276 загрузок на телефоне (правило ВИДИМО И ЭКОНОМНО)",
+   "problem": "276 отдельных картинок = столько же загрузок на телефоне (ВИДИМО И ЭКОНОМНО)",
    "fix": "Добавь упакованные атласы packed/<группа>.png + координаты в манифест; исходники оставь"
   }
  ],
  "stats": {
-  "files": 276,
-  "megabytes": 0.78,
   "assets": 275,
   "entities": 14,
-  "max_texture_side": 768,
-  "bot_version": "1.0.0"
+  "files": 281,
+  "megabytes": 0.79,
+  "kinds": [
+   "sprite2d"
+  ],
+  "bot_version": "2.0.0"
  }
 }

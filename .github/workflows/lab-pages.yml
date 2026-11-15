@@ -97,6 +97,32 @@ jobs:
             LC_ALL=C sort -u > /tmp/lab-links.txt
           test -s /tmp/lab-links.txt
           echo "CHECKING $(wc -l < /tmp/lab-links.txt) URLS"
+      - name: Keep URL lists for the separate check job
+        run: |
+          mkdir -p /tmp/lab-check && cp /tmp/lab-links.txt _site/.lab-previews /tmp/lab-check/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lab-check-lists
+          path: /tmp/lab-check/
+          include-hidden-files: true
+          retention-days: 1
+  # Правило владельца 15.11.2026: проверки ссылок не держат очередь публикации.
+  # Деплой отпускает группу lab-pages сразу после публикации, а 200-проверки идут отдельно.
+  check-links:
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/download-artifact@v4
+        with:
+          name: lab-check-lists
+          path: /tmp/lab-check
+      - name: Restore URL lists
+        run: |
+          mkdir -p _site && cp /tmp/lab-check/lab-links.txt /tmp/lab-links.txt && cp /tmp/lab-check/.lab-previews _site/.lab-previews
       - name: Check published public URLs
         run: |
           mapfile -t urls < /tmp/lab-links.txt

@@ -7,6 +7,9 @@
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
+| #277 | ядро | `lab/storozha-nedelya` | Три сторожа: update-heads и rename protection | open draft | CLAUDE: да/нет? защищённое scripts/storozha — [вопрос в PR #277](https://github.com/mpaykin1/meta6-lab/pull/277), полный зелёный прогон отсутствует |
+| #248 | ядро | `lab/pr-autofinish-followup-1111` | Доверенный автообновлятор PR и журнал | open draft | CLAUDE: да/нет? защищённый pr-autofinish.yml — [вопрос в PR #248](https://github.com/mpaykin1/meta6-lab/pull/248), полный зелёный прогон отсутствует |
+| #331 | код | `lab/razbor-zavalov` | Исправить undefined у #248/#277 и поставить мутационную ловушку | open draft | draft: ЖДЁТ полный CI, [MG Dispatcher PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43696007445), [коммит 02cfeba](https://github.com/mpaykin1/meta6-lab/commit/02cfeba731f3a4076dea5905f3d7f3829e0a3b66) |
 | #316 | код | `lab/karta-sil-api-budget-20261114` | GitHub API quota, GraphQL batch, расписания ботов | merged | слит [4574e06a308792514a92db2f6328eb444f92d62a](https://github.com/mpaykin1/meta6-lab/commit/4574e06a308792514a92db2f6328eb444f92d62a), [11 зелёных проверок](https://github.com/mpaykin1/meta6-lab/pull/316/checks) |
 | #317 | код | `lab/library-machine-branch-ownership-20261114` | Library Machine: ограничить запись служебной веткой | merged | слит [e02387721f8e2cbf126ba1af2ac6e4e803bebc03](https://github.com/mpaykin1/meta6-lab/commit/e02387721f8e2cbf126ba1af2ac6e4e803bebc03) |
 | #312 | эталон | `lab/asqura-office-clean-transfer-20261114` | ASQURA Office — clean source-only #133 | merged | слит [bc24124303060dcb9ad75353d6a6f1ba967dd169](https://github.com/mpaykin1/meta6-lab/commit/bc24124303060dcb9ad75353d6a6f1ba967dd169) |

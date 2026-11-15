@@ -324,3 +324,46 @@ test('закрытые без слияния: комментарий сторо�
       undefined,'мутант '+index+' не должен пройти');
   }
 });
+
+import {attributedErrors} from './build.mjs';
+
+function checkJournalAttribution(match) {
+  const head = 'abcdef1234567890abcdef1234567890abcdef12';
+  const pr = {number:301,head:{sha:head}};
+  const rows = [
+    '| 1 | 14.11.2026 | SHA abcdef1234 | доказательство | ловушка |',
+    '| 2 | 14.11.2026 | SHA ffffffff99 | доказательство | ловушка |',
+    '| 3 | 14.11.2026 | PR #301 сломался | доказательство | ловушка |',
+    '| 4 | 14.11.2026 | /pull/301 сломался | доказательство | ловушка |',
+    '| 5 | 14.11.2026 | /actions/runs/12345678901 упал | доказательство | ловушка |',
+    '| 6 | 14.11.2026 | /actions/runs/12345678902 упал | доказательство | ловушка |',
+    '| 7 | 14.11.2026 | PR #3010 чужой | доказательство | ловушка |'
+  ].join('\n');
+  const found=match(rows,pr,[],new Map([
+    ['12345678901',head],
+    ['12345678902','ffffffffffffffffffffffffffffffffffffffff']
+  ]));
+  assert.equal(found.length,4);
+  assert.ok(found.some(line=>line.includes('abcdef1234')));
+  assert.ok(!found.some(line=>line.includes('ffffffff99')));
+  assert.ok(!found.some(line=>line.includes('12345678902')));
+  const other=match('| 9 | 14.11.2026 | PR #302 | факт | ловушка |',
+    {...pr,number:302},[],new Map());
+  assert.equal(other.length,1);
+}
+test('Карта сил: ошибки привязываются к PR по номеру, SHA или проверенному run ID',async()=>{
+  checkJournalAttribution(attributedErrors);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const mutations=[
+    source.replace("sha.startsWith(match[0].toLowerCase())","false"),
+    source.replace("runs.some(match => commits.has(String(runToSha.get(match[1]) || '').toLowerCase()))",
+      "runs.length > 0"),
+    source.replace("Number(match[1]) === pr.number","Number(match[1]) === 301")
+  ];
+  for(const [i,changed] of mutations.entries()){
+    assert.notEqual(changed,source,'мутация '+i+' должна менять код');
+    const mod=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    assert.throws(()=>checkJournalAttribution(mod.attributedErrors),undefined,
+      'мутант '+i+' не должен выжить');
+  }
+});

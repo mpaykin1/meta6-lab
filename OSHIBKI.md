@@ -82,3 +82,4 @@
 
 - 2026-11-15 · library-machine: `source-only-pr-cli.mjs` падал «Cannot read base game tree: 128» на любой НОВОЙ игре — `git cat-file -e` для пути, которого нет в main, возвращает 128, а не 1. Исправлено на `git ls-tree` (пустой ответ = игра новая). Ловушка: PR #323 (новая игра wild-train-prologue) проходит гейт.
 | 1132 | 15.11.2026 | Карта сил относила закрытые сторожем и после 24ч простоя PR к обычным закрытиям | statusOf не различал причину закрытия | `scripts/karta-sil/mutate-karta-sil.mjs`: 3 мутации, включая обман |
+| 1133 | 15.11.2026 | Карта сил пропускала строки OSHIBKI с SHA, /pull/N и Actions run ID, считая ошибки всех типов нулём | attributedErrors искал только `PR #N ` и дату ISO | `scripts/karta-sil/mutate-karta-sil.mjs`: 3 мутации, в том числе чужой SHA/чужой run ID |

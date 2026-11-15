@@ -172,9 +172,42 @@ export function isRepeatJournalError(line) {
     .test(line);
 }
 
-function attributedErrors(journal, number) {
-  return journal.split('\n').filter(line => line.startsWith('|') &&
-    line.includes('PR #' + number + ' ') && line.match(/20\d\d-\d\d-\d\d/));
+export function attributedErrors(journal, pr, commitShas = [], runToSha = new Map()) {
+  const commits = new Set([pr.head?.sha, ...commitShas]
+    .filter(sha => /^[a-f0-9]{7,40}$/i.test(sha || ''))
+    .map(sha => sha.toLowerCase()));
+  return journal.split('\n').filter(line => {
+    if (!/^\|\s*\d+\s*\|\s*(?:\d{2}\.\d{2}\.\d{4}|\d{4}-\d{2}-\d{2})\s*\||^-\s*\d{4}-\d{2}-\d{2}/.test(line)) {
+      return false;
+    }
+    const refs = [...line.matchAll(/(?:\bPR\s*#|\/pull\/|(?<![\w/])#)(\d+)(?!\d)/gi)];
+    if (refs.some(match => Number(match[1]) === pr.number)) return true;
+    const runs = [...line.matchAll(/\/actions\/runs\/(\d+)/g)];
+    if (runs.some(match => commits.has(String(runToSha.get(match[1]) || '').toLowerCase()))) {
+      return true;
+    }
+    const withoutRuns = line.replace(/\/actions\/runs\/\d+/g, '');
+    return [...withoutRuns.matchAll(/\b[a-f0-9]{7,40}\b/gi)]
+      .some(match => [...commits].some(sha => sha.startsWith(match[0].toLowerCase())));
+  });
+}
+
+async function actionRunHeads(journal) {
+  // Только уникальные ссылки из журнала; не опрашиваем Actions для каждого PR.
+  const ids = [...new Set([...journal.matchAll(/\/actions\/runs\/(\d+)/g)]
+    .map(match => match[1]))];
+  const heads = new Map();
+  for (let i = 0; i < ids.length; i += 4) {
+    const group = await Promise.all(ids.slice(i, i + 4).map(async id => {
+      const run = await api('/actions/runs/' + id);
+      if (!/^[a-f0-9]{40}$/i.test(run?.head_sha || '')) {
+        throw new Error('GitHub Actions: нет данных ' + id);
+      }
+      return [id, run.head_sha];
+    }));
+    for (const [id, sha] of group) heads.set(id, sha);
+  }
+  return heads;
 }
 
 
@@ -186,7 +219,7 @@ pageInfo{hasNextPage endCursor}
 nodes{number url state isDraft title body headRefName headRefOid createdAt updatedAt mergedAt closedAt changedFiles
 files(first:100){nodes{path}}
 comments(last:5){nodes{author{login} body}}
-commits(last:50){nodes{commit{committedDate statusCheckRollup{state}}}}}}}}`;
+commits(last:50){nodes{commit{oid committedDate statusCheckRollup{state}}}}}}}}`;
 
 export function toRestShape(node) {
   if (!Number.isSafeInteger(node?.number) || !node.headRefOid || !node.createdAt || !node.updatedAt ||
@@ -204,6 +237,7 @@ export function toRestShape(node) {
       head:{ref:node.headRefName, sha:node.headRefOid}, created_at:node.createdAt,
       updated_at:node.updatedAt, closed_at:node.closedAt || null,
       comments:node.comments?.nodes || []},
+    commitShas: commits.map(x => x.oid).filter(Boolean),
     filenames: node.files.nodes.map(x => x.path),
     changedFiles: Number.isInteger(node.changedFiles) ? node.changedFiles : node.files.nodes.length,
     lastCommit,
@@ -254,10 +288,11 @@ async function snapshot() {
     await fs.readFile('scripts/karta-sil/types.json', 'utf8')));
   const busy = await fs.readFile('rules/09-platforma/ZANYATO.md', 'utf8');
   const journal = await fs.readFile('OSHIBKI.md', 'utf8');
+  const runHeads = await actionRunHeads(journal);
   const prs = [];
   for (const item of await graphqlPulls()) {
-    const {pr, filenames, changedFiles, lastCommit, failedBeforeGreen} = item;
-    const matches = attributedErrors(journal, pr.number);
+    const {pr, filenames, changedFiles, lastCommit, failedBeforeGreen, commitShas} = item;
+    const matches = attributedErrors(journal, pr, commitShas, runHeads);
     prs.push(publishablePr({
       number:pr.number, url:pr.html_url, type:classify(pr,filenames,dictionary),
       actor:identifyActor(pr,busy), status:statusOf(pr,lastCommit),

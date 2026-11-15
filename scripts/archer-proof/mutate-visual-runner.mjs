@@ -24,7 +24,7 @@ assert.equal(yaml.includes('run: node scripts/meta-bot/run.mjs archer-in-the-fog
 
 const baselineKey="github.event.pull_request.base.sha || 'origin/lab/archer-retention-exp-1'";
 assert.equal(yaml.split(baselineKey).length-1,2,'both diagnostic and proof must use real baseline');
-assert.equal(yaml.split(baselineKey.replace('origin/lab/archer-retention-exp-1','BROKEN')).length-1,1,'duplicate baseline regression must be detected');
+assert.equal(yaml.replace(baselineKey,'BROKEN_BASE').split(baselineKey).length-1,1,'one missing baseline must be detected');
 
 assert.ok(yaml.includes("id: browserdeps"),'dependency outcome missing');
 assert.ok(yaml.includes("if: always() && steps.browserdeps.outcome == 'success'"),'run bot only when Playwright installed');

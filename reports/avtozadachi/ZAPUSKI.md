@@ -12,3 +12,5 @@
 | MG-строитель-4 | 2026-11-15T07:37:28Z | итог: блокер — [карта сил](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json): нет зелёных/жёлтых типов для автозадач; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md): 13 карточек «НУЖЕН CLAUDE»; 48 открытых PR при лимите 5 |
 | MG-строитель-2 | 2026-11-15T08:17:32.590Z | старт |
 | MG-строитель-2 | 2026-11-15T08:17:32.590Z | итог: блокер — [карта сил](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json): нет зелёных/жёлтых зон для автозадачи; [диспетчер](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md): 13 карточек НУЖЕН CLAUDE; [лимит PR](https://github.com/mpaykin1/meta6-lab/pulls): 48 открытых |
+| MG-строитель-3 | 2026-11-15T08:24:23Z | старт |
+| MG-строитель-3 | 2026-11-15T08:24:23Z | итог: блокер — [карта сил](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json): для автозадачи нет зелёной/жёлтой зоны; [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md): 13 карточек НУЖЕН CLAUDE; 48 открытых PR, собственных открытых PR по маркеру нет |

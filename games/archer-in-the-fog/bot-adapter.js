@@ -40,7 +40,7 @@
         gameDone: won,
         alive: started && g?.mode !== 'over' && hp > 0 && !g.dead,
         hero: { x: p?.x ?? 0, y: p?.z ?? 0 },
-        goal: null, // Aim and defeat the dragon; no physical destination.
+        goal: started && dragon ? { x: dragon.x, y: dragon.z } : null, // Real moving dragon as physical aim target.
         enemies: started && !won && g?.mode !== 'over' ? 1 : 0,
         weapons: 1,
         layoutHash: openingLayout || '',

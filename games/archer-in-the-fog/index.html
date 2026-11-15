@@ -99,9 +99,17 @@ canvas#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-actio
 @keyframes wind-ribbon-inner{0%{transform:translate3d(8%,-2%,0)}39%{transform:translate3d(-4%,5%,0) scale(1.06)}100%{transform:translate3d(-13%,-3%,0) scale(.94)}}
 @media(prefers-reduced-motion:reduce){#wind-haze::before,#wind-haze::after{animation:none}}
 
+
+/* Small functional player menu above the mist and outside the aim canvas */
+#gameMenuToggle{position:fixed;z-index:60;top:calc(env(safe-area-inset-top) + 12px);right:14px;width:43px;height:43px;border:1px solid rgba(212,232,247,.58);border-radius:10px;background:rgba(15,26,42,.74);box-shadow:0 6px 18px #07121e63;color:#edfaff;font:24px/1 system-ui,sans-serif;cursor:pointer;pointer-events:auto}
+#gameQuickMenu{position:fixed;z-index:59;top:calc(env(safe-area-inset-top) + 64px);right:14px;padding:12px;border:1px solid rgba(212,232,247,.48);border-radius:12px;background:rgba(12,25,42,.91);box-shadow:0 10px 36px #06101a80;color:white;pointer-events:auto}
+#gameQuickMenu[hidden]{display:none!important}
+#gameQuickMenu button{color:#ecf7ff;font:15px 'Russo One',system-ui,sans-serif;background:rgba(73,110,146,.58);border:1px solid rgba(220,244,255,.4);padding:10px 24px;cursor:pointer}
+
 </style>
 
 <canvas id="c"></canvas><div id="wind-haze" aria-hidden="true"></div>
+<button id="gameMenuToggle" type="button" aria-label="Menu ☰" aria-expanded="false">☰</button><div id="gameQuickMenu" hidden role="group" aria-label="Game menu"><button id="gameQuickResume" type="button">RESUME</button></div>
 <div id="flash"></div><div id="fogveil" aria-hidden="true"></div>
 <div class="hud">
   <div id="depth">TIER 1</div>
@@ -137,4 +145,21 @@ canvas#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-actio
 
 <script src="./src/goal-target.js" defer></script>
 <script src="./bot-adapter.js" defer></script>
+
+<script>
+(() => {
+  const toggle=document.getElementById('gameMenuToggle');
+  const panel=document.getElementById('gameQuickMenu');
+  const resume=document.getElementById('gameQuickResume');
+  function show(open) {
+    panel.hidden=!open;
+    toggle.setAttribute('aria-expanded',String(open));
+    const game=window.__A?.G;
+    if(game && game.mode==='play') game.paused=open;
+  }
+  toggle.addEventListener('click',()=>show(panel.hidden));
+  resume.addEventListener('click',()=>show(false));
+  window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)show(false)});
+})();
+</script>
 </body></html>

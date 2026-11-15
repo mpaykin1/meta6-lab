@@ -18,6 +18,38 @@ export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTime
  }
  throw Error('нет данных: GitHub API не ответил после повтора ('+path+')');
 }
+export function indexOpened(opened) {
+ if(!Array.isArray(opened))throw Error('нет данных: открытые PR не получены');
+ const openPrs=new Map();
+ for(const pr of opened){
+  if(!Number.isSafeInteger(pr?.number)||pr.number<1||pr.state!=='open'||
+     !pr.head?.sha||!pr.head?.ref||openPrs.has(pr.number)){
+   throw Error('нет данных: неполный или повторный GraphQL PR');
+  }
+  openPrs.set(pr.number,pr);
+ }
+ const openNumbers=new Set(openPrs.keys());
+ return {openNumbers,openPrs};
+}
+export async function listOpenPullRequests(request = api) {
+ const result = new Map();
+ for(let page=1;;page++){
+  let batch;
+  try { batch=await request('/pulls?state=open&per_page=100&page='+page); }
+  catch(error) { throw Error('GitHub API open PRs: нет данных: '+error.message); }
+  if(!Array.isArray(batch))throw Error('GitHub API open PRs: нет данных');
+  // REST and GraphQL share one fail-closed validation of open PR records.
+  let checked;
+  try { checked=indexOpened(batch).openPrs; }
+  catch(error){throw Error('GitHub API open PRs: неполные данные: '+error.message)}
+  for(const [number,pr] of checked){
+   if(result.has(number))throw Error('GitHub API open PRs: неполные данные (повтор страницы)');
+   result.set(number,pr);
+  }
+  if(batch.length===0)return result;
+ }
+ throw Error('GitHub API open PRs: неполная пагинация');
+}
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));
  const map=new Map();
@@ -70,14 +102,22 @@ export async function main(){
  const finish=await fs.readFile('rules/09-platforma/FINISH.md','utf8');
  const finishIds=[...finish.matchAll(/^\|\s*([MBLP]\d+)\s*\|[^|]*\|[^|]*\|\s*НЕТ\b/gm)].map(m=>m[1]);
  let previous='';try{previous=await fs.readFile('DISPETCHER.md','utf8')}catch{}
- // Skip historical closed PRs before any REST lookups; core helper stays read-only.
+ const map=JSON.parse(await fs.readFile('automation/karta-sil.json','utf8'));
+ const {routeFor}=await import('../karta-sil/route.mjs');
+ const forChat=[];
+ const cards=[],claude=[];
  const {openPulls}=await import('../storozha/gh-list.mjs');
  const opened=await openPulls(repo,token);
  if(!Array.isArray(opened))throw Error('нет данных: открытые PR не получены');
- const openNumbers=new Set(opened.map(pr=>pr.number));
- const cards=[],claude=[];
+ const {openNumbers,openPrs}=indexOpened(opened);
  for(const t of tasks){
  if(!openNumbers.has(t.id))continue;
+ const listed=openPrs.get(t.id);
+ if(!listed)throw Error('нет данных: GraphQL PR исчез из индекса');
+ if(/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(listed.body||'')){
+  claude.push({...t,title:listed.title,branch:listed.head.ref});
+  continue;
+ }
  let pr;try{pr=await api('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
  if(pr.state!=='open')continue;
  const resolution=await resolveConflict(pr,()=>api('/pulls/'+t.id),previousConflict(previous,t.id));
@@ -93,16 +133,27 @@ export async function main(){
  const stalled=/ЗАВИС/.test(t.status),isClaude=/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(pr.body||'');
  const label=t.title+' '+(pr.title||'');
  const isFinish=finishIds.some(id=>new RegExp('(^|[^A-Z0-9])'+id+'([^A-Z0-9]|$)','i').test(label));
- const c={...t,branch:pr.head.ref,headSha:pr.head.sha,conflict,conflictUnknown,red:failed.length>0,stalled,finish:isFinish,lastCommit};
+ if(!Number.isInteger(pr.changed_files)||pr.changed_files<0)throw Error('PR changed_files: нет данных');
+ const c={...t,changedFiles:pr.changed_files,branch:pr.head.ref,headSha:pr.head.sha,
+  conflict,conflictUnknown,red:failed.length>0,stalled,finish:isFinish,lastCommit,body:pr.body||''};
  if(isClaude){claude.push(c);continue}
  if(!conflict&&!conflictUnknown&&!failed.length&&!stalled&&!stale)continue;
  c.priority=(conflict||conflictUnknown)?0:failed.length?1:stalled?2:3;
  c.problem=conflict?(resolution.unresolved?'Конфликт с main (прошлый статус, mergeable=null)':'Конфликт с main'):conflictUnknown?'Статус конфликта неизвестен: mergeable=null после 3 повторов':failed.length?'Красная проверка: '+failed.map(x=>x.name+' ('+x.url+')').join(', '):stalled?'🛑 ЗАВИС':'💤 ЗАБРОШЕНО более 2 суток';
  c.action=conflict?'Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.':conflictUnknown?'Проверь конфликт вручную: GitHub не ответил после 3 повторов; не считай PR бесконфликтным.':failed.length?'Исправь '+failed[0].name+' по логу '+failed[0].url+' и повтори CI.':stalled?'Продолжи работу по PR, проверь CI и доведи до слияния.':c.finish?'Доведи пункт FINISH.md до зелёных проверок.':'Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.';
+ const routing=routeFor(c,map);
+ c.routing=routing;
+ if(routing.target==='claude'){claude.push(c);continue;}
+ if(routing.target==='chat'){forChat.push(c);continue;}
+ c.action+=' Режим: '+routing.note;
  cards.push(c);
  }
  const output=render(cards,claude,previous);
- assertNotEmpty(await fs.readFile('ZADACHI.md','utf8'),cards);
+ assertNotEmpty(await fs.readFile('ZADACHI.md','utf8'),[...cards,...forChat,...claude]);
  await fs.writeFile('DISPETCHER.md',output);
+ const chat='# ТОЛКНУТЬ — обычный чат ChatGPT\n\n'+forChat.map(c=>
+ '- [PR #'+c.id+'](https://github.com/'+repo+'/pull/'+c.id+') · '+c.routing.zone+
+ ' · '+c.routing.note+' · '+c.problem).join('\n')+'\n';
+ await fs.writeFile('TOLKNUT.md',chat);
  console.log(output.slice(0,250));
 }

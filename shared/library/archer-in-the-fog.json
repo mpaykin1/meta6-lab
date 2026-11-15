@@ -75,7 +75,7 @@
       "copy_path": "shared/library/assets/archer-in-the-fog/bot.json"
     },
     {
-      "id": "160a57265f16da3c767374f9",
+      "id": "916b85bbddcd3c6cbadb4a96",
       "game": "archer-in-the-fog",
       "kind": "inline-style",
       "name": "style@7252",
@@ -85,24 +85,9 @@
       "source_path": "games/archer-in-the-fog/index.html",
       "lines": [
         59,
-        102
+        109
       ],
-      "sha256": "3e900f5db3c94bb81d3759d2287c4a5f6978fbc2af7237c6e360a70452aa002f"
-    },
-    {
-      "id": "454929500e0862f0612dbc34",
-      "game": "archer-in-the-fog",
-      "kind": "inline-svg",
-      "name": "svg@12290",
-      "purpose": [
-        "svg"
-      ],
-      "source_path": "games/archer-in-the-fog/index.html",
-      "lines": [
-        116,
-        116
-      ],
-      "sha256": "48030026ae5c4314304e5f8e2f143e75c9d6878a7b25faafff8948dad07781bc"
+      "sha256": "154133638068139a02ed6cc788c8dec343a0cd48511762d254567a072be87f95"
     },
     {
       "id": "bdda28ad85b497adaa8f751a",
@@ -133,6 +118,21 @@
         3
       ],
       "sha256": "d896d595954ee790953c6b2c8df6c6f2ace683e75c59fd16723852d36d3c894e"
+    },
+    {
+      "id": "feb62c90e2c62cf60b70a286",
+      "game": "archer-in-the-fog",
+      "kind": "inline-svg",
+      "name": "svg@13407",
+      "purpose": [
+        "svg"
+      ],
+      "source_path": "games/archer-in-the-fog/index.html",
+      "lines": [
+        124,
+        124
+      ],
+      "sha256": "48030026ae5c4314304e5f8e2f143e75c9d6878a7b25faafff8948dad07781bc"
     },
     {
       "id": "ffb4cfe63a779cd4d6df2a3c",
@@ -8496,7 +8496,7 @@
         1,
         56
       ],
-      "sha256": "455db5715faf3de5fdf8fc55a8b44ab031342ee60a72e9944d4f1ddfdf330026"
+      "sha256": "e78e93baa500c5438d52c4969a7025c2c68bf4403d0c27ce6a5006d8cae9a7d8"
     },
     {
       "id": "ccafb247092545b54b1b6e5b",
@@ -8557,6 +8557,36 @@
         40
       ],
       "sha256": "8d4f2004623adda40c113fc62935c440f922ac757bef35fbac725c4a41609768"
+    },
+    {
+      "id": "64adeb8ab348d1c271246caf",
+      "game": "archer-in-the-fog",
+      "kind": "solution",
+      "name": "inline-script@15354",
+      "purpose": [
+        "game-runtime"
+      ],
+      "source_path": "games/archer-in-the-fog/index.html",
+      "lines": [
+        149,
+        164
+      ],
+      "sha256": "51bd66d4278598ff4b94a44095a27d562babcd67e775d15ffe9bc0c85b891169"
+    },
+    {
+      "id": "cb7ab58133a8536a91c0c52a",
+      "game": "archer-in-the-fog",
+      "kind": "solution",
+      "name": "show",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/archer-in-the-fog/index.html",
+      "lines": [
+        154,
+        159
+      ],
+      "sha256": "83de8ef2936c8c768f2bd5c1f67a542b2489ea274a7a6a3bf5928dbb17a9d5cb"
     },
     {
       "id": "0128db45c999ebf147943a97",
@@ -18421,6 +18451,6 @@
   "counts": {
     "assets": 28,
     "file_assets": 4,
-    "solutions": 1200
+    "solutions": 1202
   }
 }

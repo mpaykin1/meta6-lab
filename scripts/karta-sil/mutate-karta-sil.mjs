@@ -381,3 +381,47 @@ test('исполнитель: исторические записи ZANYATO, п�
   assert.equal(identifyActor({...pr,body:'Исполнитель: MG-строитель-1\nИсполнитель: чат ChatGPT'},
     '',dictionary),'неизвестно');
 });
+
+import {recentCohort,trendFor} from './build.mjs';
+function verifyCosts(aggregate) {
+  const rows=[
+    {type:'bot_check',actor:'неизвестно',status:'слито',created_at:'2026-11-13',
+      merged_at:'2026-11-14',failedBeforeGreen:6,newErrors:0,repeatedError:false},
+    {type:'bot_check',actor:'неизвестно',status:'закрыто',created_at:'2026-11-13',
+      failedBeforeGreen:3,newErrors:0,repeatedError:false},
+    {type:'bot_check',actor:'неизвестно',status:'брошено',created_at:'2026-11-13',
+      failedBeforeGreen:0,newErrors:0,repeatedError:false}
+  ];
+  const m=aggregate(rows,dictionary).find(x=>x.type==='bot_check'&&x.actor==='неизвестно');
+  assert.equal(m.redPerMerge,9);
+  assert.equal(m.closedShare,66.7);
+  assert.equal(m.action,'дробить задачи / тесты до пуша');
+}
+test('стоимость типов: красных на слияние и реальная доля закрытых',async()=>{
+  verifyCosts(compute);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  for(const [oldPart,newPart] of [
+    ['(failures / merged).toFixed(1)','(failures / (merged + closed)).toFixed(1)'],
+    ['(closed + abandoned) * 100 / resolved','closed * 100 / resolved'],
+    ['redPerMerge > 5','redPerMerge > 50']
+  ]){
+    assert.ok(source.includes(oldPart),'мутация должна иметь якорь '+oldPart);
+    const changed=source.replace(oldPart,newPart);
+    const mod=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    assert.throws(()=>verifyCosts(mod.compute));
+  }
+});
+test('3-дневная когорта не превращается в 14-дневную и не меняет зоны',()=>{
+  const now=Date.parse('2026-11-15T12:00:00Z');
+  const recent=[{created_at:'2026-11-14T00:00:00Z',number:1},
+    {created_at:'2026-11-06T00:00:00Z',number:2}];
+  assert.deepEqual(recentCohort(recent,3,now).map(x=>x.number),[1]);
+  assert.equal(trendFor({merged:1,closed:0,abandoned:0},
+    {merged:3,closed:1,abandoned:0}),'мало данных');
+  assert.equal(trendFor({merged:3,closed:0,abandoned:0},
+    {merged:6,closed:4,abandoned:0}),'↑ лучше');
+  assert.equal(trendFor({merged:0,closed:3,abandoned:0},
+    {merged:6,closed:4,abandoned:0}),'↓ хуже');
+  assert.equal(trendFor({merged:2,closed:1,abandoned:0},
+    {merged:4,closed:2,abandoned:0}),'→ так же');
+});

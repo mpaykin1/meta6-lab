@@ -172,13 +172,23 @@ export function compute(prs, dictionary) {
       const mergedDurations = list.filter(x => x.status === 'слито' && x.merged_at && x.created_at)
         .map(x => (Date.parse(x.merged_at) - Date.parse(x.created_at)) / 3600000);
       const failedRuns = list.map(x => x.failedBeforeGreen).filter(Number.isFinite);
+      const failures = failedRuns.length === list.length && list.length ?
+        failedRuns.reduce((a,b)=>a+b,0) : null;
+      const resolved = merged + closed + abandoned;
+      const closedShare = resolved ?
+        Number(((closed + abandoned) * 100 / resolved).toFixed(1)) : null;
+      const redPerMerge = merged && failures !== null ?
+        Number((failures / merged).toFixed(1)) : null;
       metrics.push({
         type, actor, total: list.length, merged, closed, abandoned, claude,
         active: count('активно'), deferred: count('отложено'), repeatedErrors: list.some(x => x.repeatedError),
         avgMergeHours: mergedDurations.length ? Number((mergedDurations.reduce((a,b)=>a+b,0) /
           mergedDurations.length).toFixed(1)) : null,
-        failedBeforeGreen: failedRuns.length === list.length && list.length ?
-          failedRuns.reduce((a,b)=>a+b,0) : null,
+        failedBeforeGreen: failures,
+        redPerMerge, closedShare,
+        action: (redPerMerge !== null && redPerMerge > 5) ||
+          (closedShare !== null && closedShare > 30) ?
+          'дробить задачи / тесты до пуша' : '—',
         newErrors: list.reduce((n,x)=>n+x.newErrors,0),
         zone: grade(merged, closed, abandoned, claude, list.some(x=>x.repeatedError))
       });
@@ -348,24 +358,61 @@ async function snapshot() {
   }
   if (!prs.length) throw new Error('GitHub GraphQL: 0 PR за 14 дней — нет данных');
   prs.sort((a,b)=>a.number-b.number);
-  return {schema:1, periodDays:14, source:'GitHub GraphQL API', status:'полная',
-    types:dictionary.types.map(x=>({id:x.id,label:x.label})),
-    metrics:compute(prs,dictionary), prs};
+  const metrics = compute(prs,dictionary);
+  // Короткий срез — по дате создания PR, но маршрутизация диспетчера остаётся 14-дневной.
+  const metrics3 = compute(recentCohort(prs,3),dictionary).map(m => ({
+    ...m, trend:trendFor(m,metrics.find(x => x.type === m.type && x.actor === m.actor))
+  }));
+  return {schema:1, periodDays:14, recentDays:3, source:'GitHub GraphQL API',
+    status:'полная', types:dictionary.types.map(x=>({id:x.id,label:x.label})),
+    metrics, metrics3, prs};
+}
+
+export function recentCohort(prs, days, now = Date.now()) {
+  return prs.filter(pr => {
+    const created = Date.parse(pr.created_at);
+    if (!Number.isFinite(created)) throw new Error('PR creation date: нет данных');
+    return created >= now - days * 86400000;
+  });
+}
+
+export function trendFor(recent, baseline) {
+  if (!baseline) return 'нет данных';
+  const n3 = recent.merged + recent.closed + recent.abandoned;
+  const n14 = baseline.merged + baseline.closed + baseline.abandoned;
+  if (n3 < 3 || n14 < 3) return 'мало данных';
+  const delta = recent.merged / n3 - baseline.merged / n14;
+  return delta > 0.01 ? '↑ лучше' : delta < -0.01 ? '↓ хуже' : '→ так же';
 }
 
 function markdown(data) {
-  const lines=['<!-- KARTA:AUTO BEGIN -->','## Статистика GitHub за 14 дней',
-    'Источник: GitHub PR, коммиты, Actions, OSHIBKI.md. Нет выборки — «нет данных», а не зелёный.',
-    '',
-    '| Тип | Исполнитель | Слито | Закрыто | Брошено | Отложено | Claude | Ошибки | До слияния, ч | Красные прогоны | Зона |',
-    '|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|'];
-  for (const m of data.metrics) {
-    if (!m.total) continue;
-    lines.push('| '+m.type+' | '+m.actor+' | '+m.merged+' | '+m.closed+' | '+
-      m.abandoned+' | '+m.deferred+' | '+m.claude+' | '+m.newErrors+' | '+
-      (m.avgMergeHours ?? 'нет данных')+' | '+
-      (m.failedBeforeGreen ?? 'нет данных')+' | '+m.zone+' |');
+  const lines=['<!-- KARTA:AUTO BEGIN -->',
+    '## Статистика GitHub за 14 дней',
+    'Источник: GitHub PR, коммиты, Actions, OSHIBKI.md. Нет выборки — «нет данных».',
+    'Зона диспетчера по-прежнему рассчитывается только по 14 дням.', ''];
+  const headings=['Тип','Исполнитель','Слито','Закрыто','Брошено','Отложено',
+    'Claude','Ошибки','До слияния, ч','Красные прогоны','Красных/слияние',
+    'Закрыто без слияния','Действие','Зона'];
+  function print(metrics, recent) {
+    const cols = recent ? [...headings,'Тренд к 14 дням'] : headings;
+    lines.push('| ' + cols.join(' | ') + ' |');
+    lines.push('|' + cols.map((_,i) => i < 2 || i >= 12 ? '---' : '---:').join('|') + '|');
+    for (const m of metrics) {
+      if (!m.total) continue;
+      const values=[m.type,m.actor,m.merged,m.closed,m.abandoned,m.deferred,m.claude,
+        m.newErrors,m.avgMergeHours ?? 'нет данных',m.failedBeforeGreen ?? 'нет данных',
+        m.redPerMerge ?? 'нет данных',
+        m.closedShare === null ? 'нет данных' : m.closedShare + '%',
+        m.action,m.zone];
+      if (recent) values.push(m.trend);
+      lines.push('| ' + values.join(' | ') + ' |');
+    }
   }
+  print(data.metrics,false);
+  lines.push('', '## Статистика GitHub за 3 дня',
+    'Когорта по дате создания PR. Для тренда нужно не меньше трёх завершённых PR.',
+    '');
+  print(data.metrics3,true);
   lines.push('', '<!-- KARTA:AUTO END -->');
   return lines.join('\n');
 }
@@ -386,7 +433,7 @@ export async function main() {
 export async function markNoData() {
   const filename = 'automation/karta-sil.json';
   const previous = JSON.parse(await fs.readFile(filename,'utf8'));
-  const failed = stableJson({schema:1,status:'нет данных',periodDays:14,
-    types:previous.types,metrics:[],prs:[]});
+  const failed = stableJson({schema:1,status:'нет данных',periodDays:14,recentDays:3,
+    types:previous.types,metrics:[],metrics3:[],prs:[]});
   if (stableJson(previous) !== failed) await fs.writeFile(filename,failed);
 }

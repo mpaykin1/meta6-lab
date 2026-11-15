@@ -45,7 +45,9 @@ export function staleDecision(pr, now = Date.now()) {
 }
 
 export function quota(prs, number, now = Date.now()) {
-  const living = prs.filter(p => alive(p, now))
+  // Claude 14.11.2026: черновик (draft) — PR, отложенный до решения Claude или замены; слить его нельзя,
+  // поэтому он не занимает место среди «пяти старейших» и не блокирует очередь (тупик #3/#72/#87/#133/#191).
+  const living = prs.filter(p => alive(p, now) && p.draft !== true)
     .sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at) || a.number - b.number);
   const pr = prs.find(p => p.number === number);
   const selected = living.slice(0, 5);
@@ -58,6 +60,9 @@ export function quota(prs, number, now = Date.now()) {
     message: reject ? 'Сначала доведи старые PR: ' + selected.map(p => '#' + p.number).join(', ') : ''};
 }
 
+// Ядро охраны: эти workflow меняет только Claude (остальные — сам ChatGPT при зелёных проверках).
+export const CORE_WORKFLOW = /^\.github\/workflows\/(?:storozha-[^/]+|kontur-guard|meta-games-guard|meta-bot|report-completion-guard|lab-shared-deletion-guard|pr-autofinish|sync-from-meta6)\.ya?ml$/;
+
 export function referenceGate(files, existingPaths) {
   const errors = [], additions = [];
   const existing = new Set(existingPaths);
@@ -68,12 +73,21 @@ export function referenceGate(files, existingPaths) {
       if (status !== 'added') errors.push(p + ': существующий эталон нельзя изменять или удалять');
       else additions.push(p);
     }
+    // Claude 13.11.2026 (слово владельца «чтобы не было тормозов»): «только Claude» — лишь ЯДРО охраны.
+    // Свои боты/workflow ChatGPT меняет сам; удалять workflow нельзя; старые тесты — только дописывать.
     const protectedScript = /^scripts\/(?:meta-bot\/|kontur\/|meta-games-guard\.sh$|storozha\/)/.test(p);
     const protectedTest = /(?:^|\/)(?:__tests?__|tests?|specs?)\//i.test(p) ||
       /(?:^|\/)(?:mutate-|verify-|selftest|test[-.])[^/]*\.[cm]?[jt]s$/i.test(p) ||
       /\.(?:test|spec)\.[cm]?[jt]sx?$/i.test(p);
-    if (/^\.github\/workflows\//.test(p) || (protectedScript || protectedTest) && status !== 'added') {
-      errors.push(p + ': изменение защищённого workflow/охранника/бота/теста — только Claude');
+    const workflow = /^\.github\/workflows\//.test(p);
+    const coreWorkflow = CORE_WORKFLOW.test(p);
+    if (coreWorkflow || protectedScript && status !== 'added') {
+      errors.push(p + ': изменение ЯДРА охраны — только Claude');
+    } else if (workflow && status !== 'added' && status !== 'modified') {
+      errors.push(p + ': workflow нельзя удалять или переименовывать — только Claude');
+    } else if (protectedTest && status !== 'added' &&
+      (status !== 'modified' || Number(file.deletions) !== 0)) {
+      errors.push(p + ': старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude');
     }
   }
   if (additions.length) {
@@ -89,4 +103,21 @@ export function referenceGate(files, existingPaths) {
     }
   }
   return [...new Set(errors)];
+}
+
+// Claude 14.11.2026: файлы PR из git вместо REST /pulls/N/files (403 rate limit блокировал проверки).
+export function filesFromGit(nameStatus, numstat) {
+  const kinds = {A: 'added', M: 'modified', D: 'removed', T: 'modified'};
+  const counts = new Map();
+  for (const line of numstat.split('\n').filter(Boolean)) {
+    const [add, del, ...name] = line.split('\t');
+    counts.set(name.join('\t'), {additions: Number(add) || 0, deletions: del === '-' ? 1 : Number(del) || 0});
+  }
+  return nameStatus.split('\n').filter(Boolean).map(line => {
+    const [code, ...name] = line.split('\t');
+    const filename = name.join('\t');
+    const status = kinds[code[0]];
+    if (!status) throw Error('Unknown git status ' + code + ' for ' + filename);
+    return {filename, status, ...(counts.get(filename) || {additions: 0, deletions: 0})};
+  });
 }

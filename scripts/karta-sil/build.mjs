@@ -59,6 +59,14 @@ export function validateDictionary(dictionary) {
         (!t.paths.length && !t.words.length)) throw new Error('Invalid type dictionary');
     ids.add(t.id);
   }
+  if (dictionary.branchActors !== undefined) {
+    if (!Array.isArray(dictionary.branchActors)) throw new Error('Invalid branch actor rules');
+    for (const rule of dictionary.branchActors) {
+      if (!rule.pattern?.startsWith('^') || !actors.includes(rule.actor) ||
+          rule.actor === 'неизвестно') throw new Error('Invalid branch actor rule');
+      new RegExp(rule.pattern);
+    }
+  }
   return dictionary;
 }
 
@@ -76,22 +84,35 @@ export function classify(pr, filenames, dictionary) {
   return best.id;
 }
 
-export function identifyActor(pr, busy) {
-  const branch = pr.head?.ref;
-  const row = busy.split('\n').map(line => line.split('|').slice(1,-1).map(x => x.trim()))
-    .find(cells => branch && cells[1]?.replaceAll('`','') === branch);
-  const owner = row?.[2] || '';
-  if (/MG-строитель|MG-ремонтник|автозадач/i.test(owner)) return actors[0];
-  if (/чат ChatGPT|ChatGPT \(чат\)/i.test(owner)) return actors[1];
-  const markers = [...String(pr.body || '').matchAll(
-    /^(?:Исполнитель|Автор|Кто):\s*([^\n]+)|^Сделано \/ дальше \(([^,)]+)/gmi
-  )].map(match => match[1] || match[2]);
+function actorLabel(value) {
   const found = new Set();
-  for (const marker of markers) {
-    if (/MG-строитель|MG-ремонтник|автозадач/i.test(marker)) found.add(actors[0]);
-    if (/чат ChatGPT|обычный чат|ChatGPT \(чат\)/i.test(marker)) found.add(actors[1]);
-  }
+  if (/MG-строитель|MG-ремонтник|автозадач/i.test(value)) found.add(actors[0]);
+  if (/чат ChatGPT|ChatGPT \(чат\)|обычный чат/i.test(value)) found.add(actors[1]);
   return found.size === 1 ? [...found][0] : actors[2];
+}
+
+export function identifyActor(pr, busy, dictionary = {}) {
+  const branch = String(pr.head?.ref || '');
+  const explicit = [...String(pr.body || '').matchAll(
+    /^(?:Исполнитель|Автор|Кто):\s*([^\n]+)/gmi
+  )];
+  if (explicit.length) {
+    const kinds = new Set(explicit.map(match => actorLabel(match[1])));
+    return kinds.size === 1 ? [...kinds][0] : actors[2];
+  }
+  const owners = busy.split('\n').map(line => line.split('|').slice(1,-1).map(x => x.trim()))
+    .filter(cells => (branch && cells[1]?.replaceAll('`','') === branch) ||
+      (Number.isInteger(pr.number) &&
+       new RegExp('\\bPR\\s*#' + pr.number + '\\b', 'i').test(cells[0] || '')))
+    .map(cells => actorLabel(cells[2] || ''))
+    .filter(owner => owner !== actors[2]);
+  const unique = new Set(owners);
+  if (unique.size === 1) return [...unique][0];
+  if (unique.size > 1) return actors[2];
+  const matched = (dictionary.branchActors || []).filter(rule =>
+    new RegExp(rule.pattern).test(branch));
+  const inferred = new Set(matched.map(rule => rule.actor));
+  return inferred.size === 1 ? [...inferred][0] : actors[2];
 }
 
 export function watchdogClosed(comments) {
@@ -210,6 +231,30 @@ async function actionRunHeads(journal) {
   return heads;
 }
 
+async function busyHistory() {
+  const file = 'rules/09-platforma/ZANYATO.md';
+  let log;
+  try {
+    ({stdout:log} = await gh('git',['log','--format=%H','--',file],
+      {maxBuffer:2 * 1024 * 1024}));
+  } catch (error) {
+    throw new Error('ZANYATO history: нет данных ' + error.message);
+  }
+  const commits = log.trim().split('\n').filter(Boolean);
+  if (!commits.length) throw new Error('ZANYATO history: нет данных');
+  const versions = [];
+  for (const sha of commits) {
+    try {
+      const {stdout} = await gh('git',['show',sha + ':' + file],
+        {maxBuffer:2 * 1024 * 1024});
+      versions.push(stdout);
+    } catch (error) {
+      throw new Error('ZANYATO history: нет данных ' + error.message);
+    }
+  }
+  return versions.join('\n');
+}
+
 
 // Claude 14.11.2026: один GraphQL-запрос на 25 PR вместо 4–20 REST-запросов на каждый PR.
 // Прежний REST-обход (~300 PR × files/commit/runs) не укладывался ни в 10 минут, ни в квоту 1000/ч.
@@ -286,7 +331,7 @@ async function graphql(query, cursor) {
 async function snapshot() {
   const dictionary = validateDictionary(JSON.parse(
     await fs.readFile('scripts/karta-sil/types.json', 'utf8')));
-  const busy = await fs.readFile('rules/09-platforma/ZANYATO.md', 'utf8');
+  const busy = await busyHistory();
   const journal = await fs.readFile('OSHIBKI.md', 'utf8');
   const runHeads = await actionRunHeads(journal);
   const prs = [];
@@ -295,7 +340,7 @@ async function snapshot() {
     const matches = attributedErrors(journal, pr, commitShas, runHeads);
     prs.push(publishablePr({
       number:pr.number, url:pr.html_url, type:classify(pr,filenames,dictionary),
-      actor:identifyActor(pr,busy), status:statusOf(pr,lastCommit),
+      actor:identifyActor(pr,busy,dictionary), status:statusOf(pr,lastCommit),
       created_at:pr.created_at, merged_at:pr.merged_at || null,
       lastCommit, changedFiles, failedBeforeGreen, newErrors:matches.length,
       repeatedError:matches.some(isRepeatJournalError)

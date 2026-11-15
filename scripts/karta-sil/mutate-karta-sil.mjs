@@ -367,3 +367,17 @@ test('Карта сил: ошибки привязываются к PR по но
       'мутант '+i+' не должен выжить');
   }
 });
+
+test('исполнитель: исторические записи ZANYATO, приоритет подписи и отсутствие догадок',()=>{
+  const pr={number:331,title:'про автозадачи',
+    body:'Исполнитель: чат ChatGPT',head:{ref:'lab/mg-stroitel-2'}};
+  assert.equal(identifyActor(pr,'| PR #331 | lab/mg-stroitel-2 | MG-строитель-2 | now |',
+    dictionary),'чат ChatGPT');
+  assert.equal(identifyActor({...pr,body:''},'',dictionary),'автозадача');
+  assert.equal(identifyActor({...pr,body:'',head:{ref:'lab/neutral'}},'',dictionary),
+    'неизвестно');
+  assert.equal(identifyActor({...pr,number:33,body:'',head:{ref:'lab/neutral'}},
+    '| PR #331 | lab/other | MG-строитель-1 | now |',dictionary),'неизвестно');
+  assert.equal(identifyActor({...pr,body:'Исполнитель: MG-строитель-1\nИсполнитель: чат ChatGPT'},
+    '',dictionary),'неизвестно');
+});

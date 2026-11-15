@@ -497,8 +497,9 @@ function update(t,dt){
 /* ============ ДОПОЛНЕНИЕ: шесть живых ассетов, не изменяя эталон ============ */
 const SHPILI_PLUS=(()=>{
  const own={}; const hidden=new Set(); const light=0xb9f5f7,pink=0xff77a8,deep=0x081e35;
- const basic=(c,op=1,glow=false)=>new T.MeshBasicMaterial({color:c,transparent:op<1,opacity:op,
-   depthWrite:false,side:T.DoubleSide,blending:glow?T.AdditiveBlending:T.NormalBlending});
+ // Opaque solid stone writes depth; wisps and glow remain non-occluding.
+ const basic=(c,op=1,glow=false)=>new T.MeshBasicMaterial({color:c,transparent:op<1||glow,opacity:op,
+   depthWrite:op>=1&&!glow,side:T.DoubleSide,blending:glow?T.AdditiveBlending:T.NormalBlending});
  const mesh=(p,geo,col,xyz,op=1,glow=false)=>{
    const m=new T.Mesh(geo,basic(col,op,glow));m.position.set(...xyz);p.add(m);return m;
  };
@@ -567,12 +568,12 @@ const SHPILI_PLUS=(()=>{
        ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+R()*21-10,y+15+R()*30);ctx.stroke();
      }
    });
-   const stone=new T.MeshLambertMaterial({map:wear,color:0x526b80,transparent:true,depthWrite:true});
+   const stone=new T.MeshLambertMaterial({map:wear,color:0x526b80,transparent:false,depthWrite:true});
    const fillLight=new T.AmbientLight(0x6589ad,.75);scene.add(fillLight);
    const rimLight=new T.DirectionalLight(0xb5e4f3,.95);rimLight.position.set(-15,65,-12);scene.add(rimLight);
-   const dark=new T.MeshBasicMaterial({color:0x101e32,transparent:true,depthWrite:true});
-   const edge=new T.MeshLambertMaterial({color:0x7299a7,transparent:true,depthWrite:true});
-   const ember=new T.MeshBasicMaterial({color:0xb97698,transparent:true,depthWrite:true});
+   const dark=new T.MeshBasicMaterial({color:0x101e32,transparent:false,depthWrite:true});
+   const edge=new T.MeshLambertMaterial({color:0x7299a7,transparent:false,depthWrite:true});
+   const ember=new T.MeshBasicMaterial({color:0xb97698,transparent:false,depthWrite:true});
    // True chipped masonry, not a pile of perfect cubes: individual joints stay animated.
    let fractureSerial=0;
    const part=(parent,dims,pos,mat,rot=0)=>{

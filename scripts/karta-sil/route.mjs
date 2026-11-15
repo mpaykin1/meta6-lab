@@ -1,8 +1,13 @@
+export function currentClaudeMarker(body) {
+ const first = typeof body === 'string' ? body.trimStart().split(/\r?\n/,1)[0].trim() : '';
+ return /^CLAUDE:\s*\S/i.test(first) || /^НУЖЕН CLAUDE(?:[:\s]|$)/i.test(first);
+}
+
 export function routeFor(card, map) {
   const reports = [...String(card.body || '').matchAll(/^КАРТА СИЛ: CHAT FAIL #(\d+) /gm)];
   const failures = new Set(reports.map(x => x[1])).size +
     (/попытка 2 из 2/i.test(card.body || '') ? 2 : 0);
-  if (failures >= 2 || /НУЖЕН CLAUDE/i.test(card.body || '')) {
+  if (failures >= 2 || currentClaudeMarker(card.body)) {
     return {target:'claude',zone:'передано Claude',note:'две неудачи или передано Claude'};
   }
 

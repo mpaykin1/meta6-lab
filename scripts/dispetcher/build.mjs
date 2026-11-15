@@ -67,6 +67,15 @@ export function needsClaude(task, pr) {
   return /НУЖЕН CLAUDE/.test(task?.status || '');
 }
 
+export function checkedClaudeDecision(task, listed, pr) {
+ if (!pr || pr.state !== 'open' || pr.number !== task?.id ||
+     listed?.number !== task?.id || !pr.head?.sha ||
+     pr.head.sha !== listed.head?.sha || pr.head.ref !== listed.head?.ref) {
+  throw Error('нет данных: GraphQL/REST PR #' + task?.id + ' расходятся');
+ }
+ return needsClaude(task, pr);
+}
+
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));
  const map=new Map();
@@ -132,12 +141,13 @@ export async function main(){
  if(!openNumbers.has(t.id))continue;
  const listed=openPrs.get(t.id);
  if(!listed)throw Error('нет данных: GraphQL PR исчез из индекса');
- if(needsClaude(t,listed)){
-  claude.push({...t,title:claudeTitle(t,listed),branch:listed.head.ref});
-  continue;
- }
  let pr;try{pr=await dispatchApi('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
  if(pr.state!=='open')continue;
+ // GraphQL openPulls has no body/title; classify only the current REST response.
+ if(checkedClaudeDecision(t,listed,pr)){
+  claude.push({...t,title:claudeTitle(t,pr),branch:pr.head.ref});
+  continue;
+ }
  const resolution=await resolveConflict(pr,()=>dispatchApi('/pulls/'+t.id),previousConflict(previous,t.id));
  pr=resolution.pr;
  const checks=await dispatchApi('/commits/'+pr.head.sha+'/check-runs?per_page=100');

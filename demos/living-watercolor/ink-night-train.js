@@ -29,18 +29,18 @@ function spillTexture(){
 }
 function beamMaterial(len,strength,tint){
   return new T.ShaderMaterial({
-    uniforms:{uLen:{value:len},uI:{value:strength},uTime:{value:0},uTint:{value:new T.Color(tint)}},
+    uniforms:{uLen:{value:len},uI:{value:strength},uTime:{value:0},uBody:{value:0},uPow:{value:1.7},uFall:{value:1.35},uTint:{value:new T.Color(tint)}},
     transparent:true,depthWrite:false,side:T.DoubleSide,blending:T.AdditiveBlending,fog:false,
     vertexShader:`uniform float uLen;varying float vT;varying vec3 vN;varying vec3 vV;varying vec3 vP;
       void main(){vT=position.x/uLen;vP=position;vec4 mv=modelViewMatrix*vec4(position,1.);
       vN=normalize(normalMatrix*normal);vV=normalize(-mv.xyz);gl_Position=projectionMatrix*mv;}`,
-    fragmentShader:`uniform float uI,uTime;uniform vec3 uTint;varying float vT;varying vec3 vN;varying vec3 vV;varying vec3 vP;
+    fragmentShader:`uniform float uI,uTime,uBody,uPow,uFall;uniform vec3 uTint;varying float vT;varying vec3 vN;varying vec3 vV;varying vec3 vP;
       float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
       float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
         return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
       void main(){
-        float rim=pow(abs(dot(normalize(vN),normalize(vV))),1.7);
-        float fall=pow(1.-clamp(vT,0.,1.),1.35)*smoothstep(0.,.03,vT);
+        float rim=mix(pow(abs(dot(normalize(vN),normalize(vV))),uPow),1.,uBody);
+        float fall=pow(1.-clamp(vT,0.,1.),uFall)*smoothstep(0.,.03,vT);
         // fog banks rushing back through the beam
         float fogn=.62+.55*n(vec2(vP.x*.22+uTime*9.,atan(vP.y,vP.z)*1.6));
         gl_FragColor=vec4(uTint*uI*rim*fall*fogn,1.);
@@ -54,13 +54,26 @@ function beamCone(len,radius,strength,tint){
   m.frustumCulled=false;m.renderOrder=5;return m;
 }
 
-export function createInkNightTrain({cars=7,seed=7}={}){
-  const rnd=seeded(seed);
+// `look` tunes how the light reads; defaults are the first, hazy version.
+const LOOK={glareBase:2.6,glareGain:19,glareDepthTest:false,smallBase:1.3,smallGain:2.6,
+  beamLen:[52,34],beamRad:[3.6,6.2],beamI:[1.05,.34],beamBody:0,tilt:.035,spot:850,nose:26,warm:22,
+  spill:.34,mullions:false,halo:0,minGlare:0,minSmall:0,minHalo:0,cab:1,beamPow:1.7,beamFall:1.35,bodyColor:'#2a353b'};
+function paneTexture(){
+  // window split by dark bars, so panes read even as tiny far rectangles
+  const c=document.createElement('canvas');c.width=c.height=64;
+  const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,64,64);
+  x.fillStyle='#000';x.fillRect(29,0,6,64);x.fillRect(0,26,64,5);
+  x.strokeStyle='#000';x.lineWidth=5;x.strokeRect(0,0,64,64);
+  const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;return t;
+}
+export function createInkNightTrain({cars=7,seed=7,look={}}={}){
+  const rnd=seeded(seed),K={...LOOK,...look};
+  const paneTex=K.mullions?paneTexture():null;
   const root=new T.Group();root.name='INK · Ночной экспресс (объёмный 3D-поезд)';
   const painted=new T.Group();root.add(painted);   // dark wet bodies: watercolor is applied here
   const lights=new T.Group();root.add(lights);     // emissive parts, never painted
   const M={
-    body:new T.MeshPhysicalMaterial({color:'#2a353b',roughness:.42,metalness:.25,clearcoat:.55,clearcoatRoughness:.3}),
+    body:new T.MeshPhysicalMaterial({color:K.bodyColor,roughness:.42,metalness:.25,clearcoat:.55,clearcoatRoughness:.3}),
     roof:new T.MeshPhysicalMaterial({color:'#12171a',roughness:.5,metalness:.2,clearcoat:.4,clearcoatRoughness:.35}),
     under:new T.MeshStandardMaterial({color:'#0b0e10',roughness:.9}),
     stripe:new T.MeshStandardMaterial({color:'#5d6a70',roughness:.5,metalness:.3}),
@@ -125,7 +138,7 @@ export function createInkNightTrain({cars=7,seed=7}={}){
     bogie(cx-3.6);bogie(cx+3.6);
     // lit windows (never painted, HDR so they bloom)
     const lit=new T.Group();lit.position.copy(car.position);lights.add(lit);
-    const mat=new T.MeshBasicMaterial({color:'#ffffff',side:T.DoubleSide});
+    const mat=new T.MeshBasicMaterial({color:'#ffffff',side:T.DoubleSide,map:paneTex});
     const count=18,win=new T.InstancedMesh(winGeo,mat,count);
     const d=new T.Object3D(),col=new T.Color();
     for(let k=0;k<count;k++){
@@ -141,7 +154,7 @@ export function createInkNightTrain({cars=7,seed=7}={}){
     win.instanceColor.needsUpdate=true;lit.add(win);
     const spills=[];
     for(const side of [-1,1]){
-      const sm=new T.MeshBasicMaterial({map:spillTex,transparent:true,opacity:.34,depthWrite:false,blending:T.AdditiveBlending});
+      const sm=new T.MeshBasicMaterial({map:spillTex,transparent:true,opacity:K.spill,depthWrite:false,blending:T.AdditiveBlending});
       const sp=new T.Mesh(spillGeo,sm);
       sp.position.set(0,-FLOOR+.07,side*4.0);if(side<0)sp.rotation.y=Math.PI;
       sp.renderOrder=2;lit.add(sp);spills.push(sm);
@@ -166,29 +179,36 @@ export function createInkNightTrain({cars=7,seed=7}={}){
   const lamp=new T.Group();lamp.position.set(-1.6,FLOOR-.17+3.2,0);lights.add(lamp);
   const lens=new T.Mesh(new T.CircleGeometry(.24,20),new T.MeshBasicMaterial({color:new T.Color(14,15,17),side:T.DoubleSide}));
   lens.rotation.y=Math.PI/2;lamp.add(lens);
-  const beamIn=beamCone(52,3.6,1.05,'#dfe8ff'),beamOut=beamCone(34,6.2,.34,'#aebbe0');
-  lamp.add(beamIn,beamOut);lamp.rotation.z=.035;
-  const glare=new T.Sprite(new T.SpriteMaterial({map:glowTex,color:'#eef2ff',transparent:true,opacity:.9,depthWrite:false,depthTest:false,blending:T.AdditiveBlending,fog:false}));
+  const beamIn=beamCone(K.beamLen[0],K.beamRad[0],K.beamI[0],'#dfe8ff'),beamOut=beamCone(K.beamLen[1],K.beamRad[1],K.beamI[1],'#aebbe0');
+  beamIn.material.uniforms.uBody.value=beamOut.material.uniforms.uBody.value=K.beamBody;
+  for(const b of [beamIn,beamOut]){b.material.uniforms.uPow.value=K.beamPow;b.material.uniforms.uFall.value=K.beamFall;}
+  lamp.add(beamIn,beamOut);lamp.rotation.z=K.tilt;
+  const glare=new T.Sprite(new T.SpriteMaterial({map:glowTex,color:'#eef2ff',transparent:true,opacity:.9,depthWrite:false,depthTest:K.glareDepthTest,blending:T.AdditiveBlending,fog:false}));
   glare.position.set(.15,0,0);glare.renderOrder=9;lamp.add(glare);
+  let halo=null;
+  if(K.halo){
+    halo=new T.Sprite(new T.SpriteMaterial({map:glowTex,color:'#dfe4f2',transparent:true,opacity:.2,depthWrite:false,blending:T.AdditiveBlending,fog:false}));
+    halo.position.set(.2,0,0);halo.scale.setScalar(K.halo);halo.renderOrder=8;lamp.add(halo);
+  }
   const small=[];
   for(const p of [[.06,1.5,-.92],[.06,1.5,.92],[.06,1.18,0]]){
     const g=new T.Group();g.position.set(p[0],FLOOR-.17+p[1],p[2]);lights.add(g);
     const l=new T.Mesh(new T.CircleGeometry(.1,12),new T.MeshBasicMaterial({color:new T.Color(7,7,7.5),side:T.DoubleSide}));
     l.rotation.y=Math.PI/2;g.add(l);
     const s=new T.Sprite(new T.SpriteMaterial({map:glowTex,color:'#f2f4ff',transparent:true,opacity:.7,depthWrite:false,blending:T.AdditiveBlending,fog:false}));
-    s.scale.setScalar(1.6);g.add(s);small.push(s);
+    s.scale.setScalar(K.smallBase);g.add(s);small.push(s);
   }
   // cab glass, dim
-  const cab=new T.Mesh(new T.PlaneGeometry(2.3,1.05),new T.MeshBasicMaterial({color:new T.Color(.2,.17,.11),side:T.DoubleSide}));
+  const cab=new T.Mesh(new T.PlaneGeometry(2.3,1.05),new T.MeshBasicMaterial({color:new T.Color(.2*K.cab,.17*K.cab,.11*K.cab),side:T.DoubleSide}));
   const nrm=new T.Vector3(1.1,.95,0).normalize();
   cab.position.set(-1.05,FLOOR-.17+2.27,0).addScaledVector(nrm,.1);cab.lookAt(cab.position.clone().add(nrm));lights.add(cab);
   // real light on the world: searchlight, window warmth, pantograph spark
-  const spot=new T.SpotLight('#e4ecff',850,120,.3,.85,1.55);
+  const spot=new T.SpotLight('#e4ecff',K.spot,120,.3,.85,1.55);
   spot.position.copy(lamp.position);spot.target.position.set(60,1.2,0);root.add(spot,spot.target);
-  const nose=new T.PointLight('#dfe8ff',26,16,1.8);nose.position.set(2.2,2.2,0);root.add(nose);
+  const nose=new T.PointLight('#dfe8ff',K.nose,16,1.8);nose.position.set(2.2,2.2,0);root.add(nose);
   const warm=[];
   for(const x of [-22,-52,-80]){
-    const p=new T.PointLight('#ffcf90',22,17,1.6);p.position.set(x,2.6,0);root.add(p);warm.push(p);
+    const p=new T.PointLight('#ffcf90',K.warm,17,1.6);p.position.set(x,2.6,0);root.add(p);warm.push(p);
   }
   const spark=new T.PointLight('#bcd4ff',0,26,1.6);spark.position.copy(pantoTops[0]);root.add(spark);
   const sparkGlow=new T.Sprite(new T.SpriteMaterial({map:glowTex,color:'#cfe0ff',transparent:true,opacity:0,depthWrite:false,blending:T.AdditiveBlending,fog:false}));
@@ -220,25 +240,25 @@ export function createInkNightTrain({cars=7,seed=7}={}){
         const w=((t+c.phase)%6.5);
         if(w<.9)f*=hash(Math.floor(t*17)+i*31)>.45?1:.18;
       }
-      c.mat.color.setScalar(f);c.spills[0].opacity=c.spills[1].opacity=.34*f;
+      c.mat.color.setScalar(f);c.spills[0].opacity=c.spills[1].opacity=K.spill*f;
     });
-    warm.forEach((p,i)=>{p.intensity=22*(.9+.1*Math.sin(t*2.7+i*2));});
+    warm.forEach((p,i)=>{p.intensity=K.warm*(.9+.1*Math.sin(t*2.7+i*2));});
     // searchlight: breathing, shimmer and head-on glare
     const breathe=.93+.05*Math.sin(t*1.3)+.03*Math.sin(t*17.3)*Math.sin(t*3.1);
     beamIn.material.uniforms.uTime.value=t;beamOut.material.uniforms.uTime.value=t*.7+3;
-    beamIn.material.uniforms.uI.value=1.05*breathe;beamOut.material.uniforms.uI.value=.34*breathe;
-    spot.intensity=850*breathe;nose.intensity=26*breathe;
-    lamp.rotation.z=.035+.004*Math.sin(t*5.2)*k;
-    let facing=.15;
+    beamIn.material.uniforms.uI.value=K.beamI[0]*breathe;beamOut.material.uniforms.uI.value=K.beamI[1]*breathe;
+    spot.intensity=K.spot*breathe;nose.intensity=K.nose*breathe;
+    lamp.rotation.z=K.tilt+.004*Math.sin(t*5.2)*k;
+    let facing=.15,camDist=0;
     if(camera){
       lamp.getWorldPosition(tmp);fwd.copy(camera.position).sub(tmp);
-      const dist=fwd.length();fwd.normalize();
+      const dist=fwd.length();fwd.normalize();camDist=dist;
       facing=Math.pow(Math.max(0,fwd.x),7)*Math.min(1,26/Math.max(6,dist)+.35);
     }
     glareS+=(facing-glareS)*(dt>0?1-Math.exp(-dt*6):1);
-    const gs=(2.6+19*glareS)*breathe;glare.scale.set(gs,gs,1);
+    const gs=Math.max(K.glareBase+K.glareGain*glareS,camDist*K.minGlare)*breathe;if(halo){halo.material.opacity=.14+.12*glareS;halo.scale.setScalar(Math.max(K.halo,camDist*K.minHalo));}glare.scale.set(gs,gs,1);
     glare.material.opacity=.55+.45*glareS;
-    small.forEach((s,i)=>s.scale.setScalar((1.3+2.6*glareS)*(.95+.05*Math.sin(t*9+i))));
+    small.forEach((s,i)=>s.scale.setScalar(Math.max(K.smallBase+K.smallGain*glareS,camDist*K.minSmall)*(.95+.05*Math.sin(t*9+i))));
     // pantograph sparks: irregular cold flashes that kick the whole picture
     const n=Math.floor(t/2.9),st=n*2.9+.4+2*hash(n*7.3),u=t-st;
     let sp=0;

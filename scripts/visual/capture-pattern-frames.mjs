@@ -31,9 +31,10 @@ function gameTargets() {
   return targets;
 }
 const ink = {id: 'ink', url: 'demos/living-watercolor/?reference=1&object=house'};
+const inkProbe = {id: 'ink-shader-probe', url: 'scripts/visual/ink-pattern-probe.html'};
 let games;
-if (target === 'ink') games = [ink];
-else if (target === 'all') games = [...gameTargets(), ink];
+if (target === 'ink') games = [ink, inkProbe];
+else if (target === 'all') games = [...gameTargets(), ink, inkProbe];
 else {
   const base = process.env.PATTERN_BASE;
   if (!base) throw Error('PATTERN_BASE is required for --target changed');
@@ -42,8 +43,8 @@ else {
   }).trim().split('\n');
   games = gameTargets().filter(game =>
     changed.some(file => file.startsWith(game.url.replace(/\/$/, ''))));
-  if (changed.some(file => file.startsWith('demos/living-watercolor/'))) games.push(ink);
-  if (!games.length) games = [ink]; // A rule-only PR still proves that INK stays organic.
+  if (changed.some(file => file.startsWith('demos/living-watercolor/'))) games.push(ink, inkProbe);
+  if (!games.length) games = [ink, inkProbe]; // Rule-only PRs still check real INK waves.
 }
 
 const web = await serve(root);
@@ -61,6 +62,8 @@ try {
       if (game.id === 'ink') {
         await page.waitForFunction(() => window.__LIVING_WATERCOLOR_3D_READY__?.ready, undefined, {timeout: 18000});
         await page.addStyleTag({content: '#label,#hint,#chooser{visibility:hidden!important}'});
+      } else if (game.id === 'ink-shader-probe') {
+        await page.waitForFunction(() => window.__INK_PATTERN_PROBE__?.ready, undefined, {timeout: 18000});
       }
       const images = [];
       for (let i = 0; i < 3; i++) {
@@ -69,6 +72,9 @@ try {
           await page.evaluate(name => window.__LIVING_WATERCOLOR_3D_READY__.show(name), mode);
           await page.mouse.move(150 + i * 230, 240 + i * 80);
           await page.waitForTimeout(1400);
+        } else if (game.id === 'ink-shader-probe') {
+          await page.evaluate(i => window.__INK_PATTERN_PROBE__.show(i), i);
+          await page.waitForTimeout(350);
         } else {
           await page.mouse.move(170 + i * 230, 200 + i * 90);
           const key = ['ArrowRight', 'ArrowDown', 'ArrowLeft'][i];

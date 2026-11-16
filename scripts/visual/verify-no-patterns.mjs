@@ -64,6 +64,32 @@ export function detectNoPatterns(source, filename = '<fixture>') {
       if (!macroBlend) report(m.index, 'REPEATED_TILE: texture repeat > 2 with no macro variation');
     }
   }
+  // A world-space UV atlas must not reset to the same image in every 1x1 block.
+  // Repetition through fract(wp.x/y) is as visible as texture.repeat.set(7,7).
+  const executableAtlas = source
+    .replace(/\/\*[\s\S]*?\*\//g, s => s.replace(/[^\n]/g, ' '))
+    .replace(/\/\/[^\n]*/g, s => ' '.repeat(s.length));
+  const uvWorld = '(?:wp|vWorld|worldPos|worldPosition|vUv|uv|position|p)';
+  const worldAxis = '\\bfract\\s*\\(\\s*' + uvWorld + '\\.[xyzw]\\s*\\)';
+  const adjacentWorldFracts = new RegExp(worldAxis + '[^;]{0,140}' + worldAxis, 'g');
+  const samplers = /\btexture(?:2D|Lod|Grad)?\s*\([^;]{0,260}\)/g;
+  for (const m of executableAtlas.matchAll(samplers)) {
+    if (adjacentWorldFracts.test(m[0])) {
+      report(m.index, 'WORLD_UV_ATLAS: unwarped world fract UV repeats the same tile');
+    }
+    adjacentWorldFracts.lastIndex = 0;
+  }
+  // Aliasing the world UV into a named vec2 must not bypass the guard.
+  const directWorldUv = new RegExp(
+    '\\bvec2\\s+([A-Za-z_$][\\w$]*)\\s*=\\s*vec2\\s*\\(\\s*' +
+    worldAxis + '\\s*,\\s*' + worldAxis + '\\s*\\)', 'g'
+  );
+  for (const m of executableAtlas.matchAll(directWorldUv)) {
+    const tail = executableAtlas.slice(m.index + m[0].length, m.index + m[0].length + 550);
+    if (new RegExp('\\btexture(?:2D|Lod|Grad)?\\s*\\([^,]+,\\s*' + m[1] + '\\b').test(tail)) {
+      report(m.index, 'WORLD_UV_ATLAS: aliased unwarped world texture coordinates');
+    }
+  }
   const gridPattern = /\bfor\s*\([^)]*\)[\s\S]{0,650}?\bclone\s*\([\s\S]{0,320}?(?:position\.set|translate[XYZ])\s*\([^;\n]*(?:Math\.floor\s*\(|%\s*\d+|row\s*\*|col\s*\*)/g;
   for (const m of source.matchAll(gridPattern)) {
     const nearby = source.slice(m.index, m.index + 1400);

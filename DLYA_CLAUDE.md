@@ -72,6 +72,7 @@
 | #191 | lab/sunken-city-reference-1109 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-15 |
 | #235 | lab/fix-mobile-screen-all-games-1111 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-15 |
 | #272 | lab/uluchshatel-sumerki-copy-bot13-20261112 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-15 |
+| #234 | lab/claude-adfree-catalog-1110 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-16 |
 <!-- STOROZHA:STALE:END -->
 | #190 | lab/bot-batch-1 | НУЖЕН CLAUDE: защищённый `.github/workflows/bot-adapters-b2.yml`; конфликт с main (`OSHIBKI.md`); проверка B2 охватывает 2/3 игр, `archer-in-the-fog` не подтверждён. Самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/190 | 2026-11-11 |
 | #54 | lab/render-visibility-optimization | НУЖЕН CLAUDE: PR изменяет защищённый `.github/workflows/lab-render-performance.yml` и существующий эталон `games/veil-terraces/index.html`; конфликт с main (`docs/progress/PR54_59_60.md`), самостоятельное слияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/54 | 2026-11-12 |

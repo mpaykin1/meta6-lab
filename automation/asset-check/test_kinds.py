@@ -336,6 +336,64 @@ class KindTraps(unittest.TestCase):
                             "const glow = new T.ShaderMaterial({uniforms: {uT: {value: 0}}, vertexShader: 'void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}', fragmentShader: 'void main(){gl_FragColor=vec4(1.,.8,.5,1.);}'})")])
         self.assertEqual(cp.check(d).hard(), [])
 
+    # --- ЗАКАЗ ПО ВИДЕО: список ассетов из видео против готовых ассетов ---
+    def zakaz(self, d, items):
+        (d / "zakaz/frames").mkdir(parents=True, exist_ok=True)
+        for it in items:
+            if it.get("frame"):
+                Image.new("RGB", (64, 36), (40, 60, 90)).save(d / it["frame"])
+        z = {"format": "mg-zakaz/1", "video": {"source": "test.mp4", "duration_s": 20}, "items": items}
+        (d / "ZAKAZ.json").write_text(json.dumps(z, ensure_ascii=False), "utf-8")
+
+    def zitem(self, iid, frame=True):
+        it = {"id": iid, "name_ru": iid, "kind": "3d", "seen_at": [3.5], "must": ["силуэт"]}
+        if frame:
+            it["frame"] = f"zakaz/frames/{iid}.jpg"
+        return it
+
+    def test_zakaz_all_ready_passes(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack()
+        self.zakaz(d, [self.zitem(n) for n in ("lilyPads", "fireflies", "giantCog")])
+        r = cp.check(d)
+        self.assertEqual(r.hard(), [], r.hard())
+        self.assertEqual(r.stats["zakaz"]["ready"], 3)
+
+    def test_Z4_item_from_video_not_made(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack()
+        self.zakaz(d, [self.zitem("lilyPads"), self.zitem("chainBridge")])
+        r = cp.check(d)
+        self.assertIn("Z4", {i["id"] for i in r.hard()})
+        self.assertEqual(r.stats["zakaz"]["missing"], ["chainBridge"])
+
+    def test_Z3_item_without_video_frame(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack()
+        self.zakaz(d, [self.zitem("lilyPads", frame=False)])
+        self.assertIn("Z2", ids(d))
+
+    def test_Z3_frame_file_missing(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack()
+        self.zakaz(d, [self.zitem("lilyPads")])
+        (d / "zakaz/frames/lilyPads.jpg").unlink()
+        self.assertIn("Z3", ids(d))
+
+    def test_zakaz_quality_failure_is_not_ready(self):
+        """Ассет есть, но не прошёл свою проверку качества — он не считается готовым."""
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack([("g.userData.tick = t => {for (const b of bugs)", "g.userData.tick0 = t => {for (const b of bugs)")])
+        self.zakaz(d, [self.zitem(n) for n in ("lilyPads", "fireflies", "giantCog")])
+        r = cp.check(d)
+        self.assertEqual(r.stats["zakaz"]["quality_hard"], ["fireflies"])
+        self.assertEqual(r.stats["zakaz"]["ready"], 2)
+
     # --- смешанный пак: все виды сразу ---
     def test_mixed_pack_runs_every_kind(self):
         make_glb(self.d / "m.glb")

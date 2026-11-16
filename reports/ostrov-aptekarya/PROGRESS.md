@@ -45,3 +45,5 @@
 | К3 — обязательная мутация в scripts/ и нумерованные записи журнала | добавлено в текущем коммите | [красный KONTUR 43749136019](https://github.com/mpaykin1/meta6-lab/actions/runs/43749136019) |
 
 | 2026-11-16 · развитие: три световых импульса страниц (тепло → холод), без новых моделей; браузерный бот требует ровно 3 события | [fa244752](https://github.com/mpaykin1/meta6-lab/commit/fa244752ae744d9e3985ab87fe1fcac3786966f1) | [Apothecary chapter II #43801555048](https://github.com/mpaykin1/meta6-lab/actions/runs/43801555048) — начат, итог уточнить по GitHub |
+
+| 2026-11-16 · исправление старта: пропущенная запятая между геттерами и синтаксическая ловушка V8 (13 мутаций) | [9d8976c](https://github.com/mpaykin1/meta6-lab/commit/9d8976ce5715d2dd793104260734a81650b668ad) | [исходный красный прогон #43801628662](https://github.com/mpaykin1/meta6-lab/actions/runs/43801628662), новая проверка CI по HEAD |

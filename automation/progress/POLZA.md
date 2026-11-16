@@ -7,6 +7,8 @@
 - В2: games/archer-in-the-fog занят PR #264 (обновлено 13.11 11:04 UTC); skin-trainer имеет ввод/движение героя, отдельный B2 PR не открывать, пока >10 PR.
 
 ## Сделано
+- ЧАТ 2026-11-16: B2 Archer чтение геометрии башни/настоящих координат без симуляции, [SHA 4f9518e](https://github.com/mpaykin1/meta6-lab/commit/4f9518e90e9d08e2ff861cf5c852985b76466c5f), [SHA 77544b3](https://github.com/mpaykin1/meta6-lab/commit/77544b37e74ab42bbd9fffb1c9dcf8e75d0bca3d), [SHA 06762e3](https://github.com/mpaykin1/meta6-lab/commit/06762e3de51ce55c0086e1c25ff2d48646e049cf). Не main, НЕ единица пользы. Занято в [ZANYATO SHA 5cd4cb5](https://github.com/mpaykin1/meta6-lab/commit/5cd4cb5e1df59aa8277a431cf473dc61ad975f2b).
+
 - 2026-11-13T11:31:08.634Z: сохранена общая инструкция v3 в ветке lab/polza-bez-suety-v3-20261113: https://github.com/mpaykin1/meta6-lab/commit/2be9d73a0cec526012119002b3309cf7bffaa407 . Это организационный шаг, НЕ единица пользы.
 - 2026-11-13T11:31:08.634Z: переключены пять существующих автозадач MG-строитель-1…4 и MG-ремонтник на единый промпт v3, расписания сохранены; прямые проверки инструмента обновления = success для каждой. Это организационный шаг, НЕ единица пользы.
 
@@ -24,7 +26,22 @@
 
 - 2026-11-13 18:13 UTC, MG-строитель-2: свежий POLZA v3 прочитан из lab (main: 404); AGENTS, FINISH, ZANYATO проверены. GitHub REST `/pulls?state=open&per_page=100`: 50 PR; #258, #264, #291 открыты и имеют mergeable=false (GitHub API); FINISH 7/18. Выбран конкретный кодовый следующий шаг: разрешить конфликт существующего PR #258, не удаляя строки verify/mutate и не изменяя ядро, затем запустить desktop/mobile B2 verifier. Новые PR запрещены. Новых зелёных Actions на main, игровых изменений и подтверждённых B2 PASS за запуск: 0. Бот-коммиты и конфликтные PR полностью не измерены.
 
+- 2026-11-16 12:52 UTC | чат: 0 новых единиц пользы с зелёным main; бот 1/9; FINISH 7/18; открытых PR 30; конфликтных и бот-коммитов/24ч — не проверено; очередь 5 зарезервировано до снижения PR ≤10 / 0 в работе / 0 завершено. [Открытые PR](https://github.com/mpaykin1/meta6-lab/pulls), [FINISH](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/FINISH.md).
+
+## Не смог
+- 2026-11-16T12:52Z (чат): B2 Archer не закрыт: #264 draft и конфликт main, реальный browser B2 ещё не PASS; #258 реальный B2 Veil PASS, но guard FAILED из-за ядра охраны. [PR #264](https://github.com/mpaykin1/meta6-lab/pull/264), [PR #258](https://github.com/mpaykin1/meta6-lab/pull/258).
+
+## Очередь для автозадач
+- [ ] СВОБОДНА ПОСЛЕ КВОТЫ (<11 открытых PR): Three Worlds `three-worlds-game/ash-archipelago.mjs` → `shared/components/three-worlds-ash-archipelago/{component.json,entry.js}`, `shared/index.json`; точный SHA blob `fec149c120cf9bf747f4b883c960175a833fe143`. Образец слит [#50](https://github.com/mpaykin1/meta6-lab/pull/50); `node scripts/shared/build-index.mjs && node scripts/shared/build-index.mjs --check && node --check shared/components/three-worlds-ash-archipelago/entry.js`; ждать `verified, deduplicated owner-approved shared components`; PR `ПОЛЬЗА: FINISH L1`. Только точные оригинальные байты, не менять оригинал.
+- [ ] СВОБОДНА ПОСЛЕ КВОТЫ: Three Worlds `three-worlds-game/dialogue.mjs` → `shared/components/three-worlds-dialogue/{component.json,entry.js}`, `shared/index.json`; blob `a9680a2b81c5fccd8208f0a77901531920d4bc1e`; образец [#50](https://github.com/mpaykin1/meta6-lab/pull/50); `node scripts/shared/build-index.mjs && node scripts/shared/build-index.mjs --check && node --check shared/components/three-worlds-dialogue/entry.js`; ждать `verified, deduplicated owner-approved shared components`; PR `ПОЛЬЗА: FINISH L1`. Не брать параллельно предыдущей задаче: единый индекс.
+- [ ] СВОБОДНА ПОСЛЕ КВОТЫ: Three Worlds `three-worlds-game/guest-roster.mjs` → `shared/components/three-worlds-guest-roster/{component.json,entry.js}`, `shared/index.json`; blob `adbc01eea15adb282bd8a3153d70c19efb7ef6f4`; образец [#50](https://github.com/mpaykin1/meta6-lab/pull/50); `node scripts/shared/build-index.mjs && node scripts/shared/build-index.mjs --check && node --check shared/components/three-worlds-guest-roster/entry.js`; ждать `verified, deduplicated owner-approved shared components`; PR `ПОЛЬЗА: FINISH L1`. Только после слияния предыдущей.
+- [ ] СВОБОДНА ПОСЛЕ КВОТЫ: Three Worlds `three-worlds-game/keeper-bubble.mjs` → `shared/components/three-worlds-keeper-bubble/{component.json,entry.js}`, `shared/index.json`; blob `3b0e3e1db24f9f88630fea85f6c70bd843251a15`; образец [#50](https://github.com/mpaykin1/meta6-lab/pull/50); `node scripts/shared/build-index.mjs && node scripts/shared/build-index.mjs --check && node --check shared/components/three-worlds-keeper-bubble/entry.js`; ждать `verified, deduplicated owner-approved shared components`; PR `ПОЛЬЗА: FINISH L1`. Только после слияния предыдущей.
+- [ ] СВОБОДНА ПОСЛЕ КВОТЫ: Three Worlds `three-worlds-game/seabed.mjs` → `shared/components/three-worlds-seabed/{component.json,entry.js}`, `shared/index.json`; blob `835fcf880117d0dad50e7a5561078569a62edd46`; образец [#50](https://github.com/mpaykin1/meta6-lab/pull/50); `node scripts/shared/build-index.mjs && node scripts/shared/build-index.mjs --check && node --check shared/components/three-worlds-seabed/entry.js`; ждать `verified, deduplicated owner-approved shared components`; PR `ПОЛЬЗА: FINISH L1`. Только после слияния предыдущей.
+- Запрет: пять компонентов одного источника НЕ оформлять пятью параллельными PR; правило «по игре на PR». При квоте или приоритете B2 выше L1 этот блок только резерв, а не исполняемая очередь.
+
 ## Уроки
+- ЧАТ 2026-11-16: считать полезным только зелёный main, не считать новый статус готовности по кодовым коммитам в draft #264; PR #258 B2 success не означает FINISH B2 для каталога.
+
 - Не объявлять B2 зелёным для всех игр после прогона одной: подтверждение для Veil не означает готовность девяти игр.
 - Не начинать одновременно с активным исполнителем; ветка PR #258 и Archer #264 обновлены менее трёх часов назад.
 - Не создавать 50-й PR при лимите 10: сначала безопасно устранить затор через свободную линию Б.
@@ -33,6 +50,8 @@
 - GitHub Search сейчас возвращает 50 открытых PR; прежнее число 49 не использовать без повторной проверки.
 
 ## Уточнения
+- Автозадача: сначала бери верхнюю свободную задачу из раздела «Очередь для автозадач», отметь её взятой; не получилось за запуск — запиши причину в «Не смог» и бери следующую. Пока PR >10, новую ветку/PR не создавать.
+
 - Фактически games/ содержит 11 папок, из них 2 *-copy; в девяти разных index.html на main только veil-terraces включает __META_BOT__. В новых замерах указать N=9.
 - Непринятый B2 verifier находится в PR #258 (ветка lab/prohodchik-b2-motion-20261111), отсутствует в main; не писать B2_MOTION_PASS до настоящего desktop/mobile Chromium.
 - Пять автозадач сейчас читают канонический промпт из отдельной ветки lab/polza-bez-suety-v3-20261113, чтобы избежать запрещённого прямого пуша документов в main.

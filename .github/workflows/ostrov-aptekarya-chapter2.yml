@@ -36,6 +36,17 @@ jobs:
               echo 'Reference INK altered'; exit 1
             fi
           fi
+      - name: Build independent library snapshot for source drift inspection
+        run: node scripts/library/extract-all.mjs
+      - name: Capture exact derived catalogs
+        uses: actions/upload-artifact@v4
+        with:
+          name: apothecary-library-manifests
+          path: |
+            shared/library/index.json
+            shared/library/ostrov-aptekarya.json
+            shared/library/reference-three-worlds-game.json
+          retention-days: 3
       - name: Install Playwright Chromium
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1

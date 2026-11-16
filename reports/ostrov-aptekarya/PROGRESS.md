@@ -43,3 +43,5 @@
 
 | Совмещение нового берега, 38 ключей/102 реплик I и архива II | [a258ba4](https://github.com/mpaykin1/meta6-lab/commit/a258ba481ed324ae55adbc7c3836b2997a8b5be7) | [Apothecary chapter II, run 43749136222](https://github.com/mpaykin1/meta6-lab/actions/runs/43749136222) |
 | К3 — обязательная мутация в scripts/ и нумерованные записи журнала | добавлено в текущем коммите | [красный KONTUR 43749136019](https://github.com/mpaykin1/meta6-lab/actions/runs/43749136019) |
+
+| 2026-11-16 · развитие: три световых импульса страниц (тепло → холод), без новых моделей; браузерный бот требует ровно 3 события | [fa244752](https://github.com/mpaykin1/meta6-lab/commit/fa244752ae744d9e3985ab87fe1fcac3786966f1) | [Apothecary chapter II #43801555048](https://github.com/mpaykin1/meta6-lab/actions/runs/43801555048) — начат, итог уточнить по GitHub |

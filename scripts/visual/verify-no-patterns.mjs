@@ -48,7 +48,11 @@ export function detectNoPatterns(source, filename = '<fixture>') {
   const tilePatterns = [
     {regex: /\b([A-Za-z_$][\w$]*)\.repeat\??\.set\??\.?\s*\(\s*(\d*\.?\d+)\s*,\s*(\d*\.?\d+)\s*\)/g, values: [2, 3]},
     {regex: /\b([A-Za-z_$][\w$]*)\.repeat\??\.setScalar\??\.?\s*\(\s*(\d*\.?\d+)\s*\)/g, values: [2]},
-    {regex: /\b([A-Za-z_$][\w$]*)\.repeat\??\.([xy])\s*=\s*(\d*\.?\d+)\b/g, values: [3]}
+    {regex: /\b([A-Za-z_$][\w$]*)\.repeat\??\.([xy])\s*=\s*(\d*\.?\d+)\b/g, values: [3]},
+    // Three.js Vector2 supports these alternatives to repeat.set()/setScalar().
+    {regex: /\b([A-Za-z_$][\w$]*)\.repeat\??\.copy\??\.?\s*\(\s*new\s+(?:THREE\.)?Vector2\s*\(\s*(\d*\.?\d+)\s*,\s*(\d*\.?\d+)\s*\)\s*\)/g, values: [2, 3]},
+    {regex: /\b([A-Za-z_$][\w$]*)\.repeat\??\.fromArray\??\.?\s*\(\s*\[\s*(\d*\.?\d+)\s*,\s*(\d*\.?\d+)\s*\]\s*\)/g, values: [2, 3]},
+    {regex: /\b([A-Za-z_$][\w$]*)\.repeat\??\.multiplyScalar\??\.?\s*\(\s*(\d*\.?\d+)\s*\)/g, values: [2]}
   ];
   for (const {regex, values} of tilePatterns) {
     for (const m of source.matchAll(regex)) {

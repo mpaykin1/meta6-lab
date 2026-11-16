@@ -1,7 +1,7 @@
 {
   "format": "mg-spritestack/1",
   "game": "nebesny-pilot",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": {
     "type": "original",
     "author": "META GAMES / OpenAI",
@@ -85,6 +85,281 @@
         "speed": 0.65
       },
       "spawn": "flight formation southeast"
+    },
+    "stormLighthouse": {
+      "file": "stacks/stormLighthouse.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "landmark",
+      "label_ru": "Маяк штормовых рифов",
+      "shadow": true,
+      "anim": {
+        "type": "spin",
+        "speed": 0.6
+      },
+      "spawn": "seeded world grid"
+    },
+    "sailingShip": {
+      "file": "stacks/sailingShip.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 13,
+      "pitch_px": 1,
+      "role": "vehicle",
+      "label_ru": "Корабль с волной",
+      "shadow": true,
+      "anim": {
+        "type": "bob",
+        "speed": 0.6
+      },
+      "spawn": "seeded world grid"
+    },
+    "villageIsland": {
+      "file": "stacks/villageIsland.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 6,
+      "pitch_px": 1,
+      "role": "island",
+      "label_ru": "Остров деревни и мельницы",
+      "shadow": true,
+      "anim": {
+        "type": "bob",
+        "speed": 0.6
+      },
+      "spawn": "seeded world grid"
+    },
+    "volcanicIsland": {
+      "file": "stacks/volcanicIsland.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 6,
+      "pitch_px": 1,
+      "role": "island",
+      "label_ru": "Вулканический остров",
+      "shadow": true,
+      "anim": {
+        "type": "bob",
+        "speed": 0.6
+      },
+      "spawn": "seeded world grid"
+    },
+    "oceanWhale": {
+      "file": "stacks/oceanWhale.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 9,
+      "pitch_px": 1,
+      "role": "creature",
+      "label_ru": "Кит у поверхности",
+      "shadow": false,
+      "anim": {
+        "type": "bob",
+        "speed": 1.1
+      },
+      "spawn": "seeded world grid"
+    },
+    "migratingBirds": {
+      "file": "stacks/migratingBirds.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "creature",
+      "label_ru": "Стая морских птиц",
+      "shadow": false,
+      "anim": {
+        "type": "bob",
+        "speed": 1.1
+      },
+      "spawn": "seeded world grid"
+    },
+    "hotAirBalloon": {
+      "file": "stacks/hotAirBalloon.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 13,
+      "pitch_px": 1,
+      "role": "vehicle",
+      "label_ru": "Воздушный шар",
+      "shadow": true,
+      "anim": {
+        "type": "bob",
+        "speed": 0.6
+      },
+      "spawn": "seeded world grid"
+    },
+    "thunderCloud": {
+      "file": "stacks/thunderCloud.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "cloud",
+      "label_ru": "Грозовая туча",
+      "shadow": false,
+      "anim": {
+        "type": "frames",
+        "speed": 0.6
+      },
+      "spawn": "seeded world grid"
+    },
+    "speedRing": {
+      "file": "stacks/speedRing.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "pickup",
+      "label_ru": "Бирюзовое кольцо ускорения",
+      "shadow": false,
+      "anim": {
+        "type": "bob",
+        "speed": 0.6
+      },
+      "spawn": "flight pickups",
+      "benefit": "При подборе ускоряет самолёт на 5 секунд (голубой хвост)"
+    },
+    "repairRing": {
+      "file": "stacks/repairRing.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "pickup",
+      "label_ru": "Зелёное кольцо ремонта",
+      "shadow": false,
+      "anim": {
+        "type": "bob",
+        "speed": 0.6
+      },
+      "spawn": "flight pickups",
+      "benefit": "Чинит двигатель и возвращает максимальную скорость (зелёный импульс)"
+    },
+    "scoreRing": {
+      "file": "stacks/scoreRing.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "pickup",
+      "label_ru": "Пурпурное кольцо комбо",
+      "shadow": false,
+      "anim": {
+        "type": "bob",
+        "speed": 0.6
+      },
+      "spawn": "flight pickups",
+      "benefit": "Добавляет 3 очка и продлевает комбо (пурпурные искры)"
+    },
+    "seaBuoy": {
+      "file": "stacks/seaBuoy.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 6,
+      "pitch_px": 1,
+      "role": "prop",
+      "label_ru": "Навигационный буй",
+      "shadow": false,
+      "anim": {
+        "type": "bob",
+        "speed": 0.6
+      },
+      "spawn": "seeded world grid"
+    },
+    "sunkenRuins": {
+      "file": "stacks/sunkenRuins.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "landmark",
+      "label_ru": "Руины затонувшего храма",
+      "shadow": true,
+      "anim": {
+        "type": "spin",
+        "speed": 0.6
+      },
+      "spawn": "seeded world grid"
+    },
+    "coralReef": {
+      "file": "stacks/coralReef.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 6,
+      "pitch_px": 1,
+      "role": "island",
+      "label_ru": "Коралловый риф",
+      "shadow": true,
+      "anim": {
+        "type": "bob",
+        "speed": 0.6
+      },
+      "spawn": "seeded world grid"
+    },
+    "seaMist": {
+      "file": "stacks/seaMist.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 6,
+      "pitch_px": 1,
+      "role": "effect",
+      "label_ru": "Слой холодного морского тумана",
+      "shadow": false,
+      "anim": {
+        "type": "bob",
+        "speed": 0.6
+      },
+      "spawn": "seeded world grid"
+    },
+    "wakeSpray": {
+      "file": "stacks/wakeSpray.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 6,
+      "pitch_px": 1,
+      "role": "effect",
+      "label_ru": "Брызги за кораблём",
+      "shadow": false,
+      "anim": {
+        "type": "bob",
+        "speed": 0.6
+      },
+      "spawn": "seeded world grid"
     }
   }
 }

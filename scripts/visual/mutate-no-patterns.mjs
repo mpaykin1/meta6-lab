@@ -159,7 +159,7 @@ const hiddenUploadMutations = [
   artifactWorkflow.replace('include-hidden-files: true', 'include-hidden-files: false'),
   artifactWorkflow.replace('include-hidden-files: true', '# include-hidden-files: true'),
   artifactWorkflow.replace('.pattern-before/', '# .pattern-before/'),
-  artifactWorkflow.replace('.pattern-fft.json', '# .pattern-fft.json')
+  artifactWorkflow.replace('\n            .pattern-fft.json', '\n            # .pattern-fft.json')
 ];
 for (const [i, mutant] of hiddenUploadMutations.entries()) {
   assert.ok(!capturesAreUploaded(mutant),

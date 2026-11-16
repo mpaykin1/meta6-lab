@@ -19,6 +19,7 @@ if (!base || !head || base.startsWith("-") || head.startsWith("-")) {
   process.exit(2);
 }
 try {
+  if(git("rev-parse", "--is-shallow-repository") !== "false") block("shallow git history cannot prove protected commit history");
   git("rev-parse", "--verify", base + "^{commit}");
   git("rev-parse", "--verify", head + "^{commit}");
   const changes = git("diff", "--name-status", "-z", base + "..." + head).split("\0").filter(Boolean);

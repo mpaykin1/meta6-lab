@@ -25,7 +25,7 @@
       "manifest": "shared/library/broken-city.json",
       "assets": 84,
       "file_assets": 79,
-      "solutions": 1000
+      "solutions": 1005
     },
     {
       "game": "broken-city-copy",
@@ -23245,7 +23245,67 @@
       ]
     },
     {
-      "id": "1f4805143e2a74f24fd34359",
+      "id": "0a0a73158a7f6b0323896c0d",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "between",
+      "purpose": [
+        "animation"
+      ],
+      "source_path": "games/broken-city/bot-adapter-boot.test.mjs",
+      "sha256": "a5778a63434eff263823263a0be7717a2186566441750dee54a8d511647920c1",
+      "lines": [
+        61,
+        67
+      ]
+    },
+    {
+      "id": "135e00958f490149fcc51cc8",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "layout",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/bot-adapter-boot.test.mjs",
+      "sha256": "46da35e5960532a9433e4673c9de2039eb286886ab96947f9b5aca3e5bed87b0",
+      "lines": [
+        88,
+        92
+      ]
+    },
+    {
+      "id": "61283cfb8d95ef814c51c5d9",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "tuneRenderQuality",
+      "purpose": [
+        "shader"
+      ],
+      "source_path": "games/broken-city/bot-adapter-boot.test.mjs",
+      "sha256": "4100eda170cfffe6aa640411fb40fea3226024026ae496e2ba42666968eed9fe",
+      "lines": [
+        96,
+        101
+      ]
+    },
+    {
+      "id": "a2d00dff406219de725438d1",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "toysStart",
+      "purpose": [
+        "gameplay"
+      ],
+      "source_path": "games/broken-city/bot-adapter-boot.test.mjs",
+      "sha256": "469cfaf0f9090d95197bcdac7a4a9d78ac4efd1638e2fb4c6f93c4e451f617b4",
+      "lines": [
+        69,
+        138
+      ]
+    },
+    {
+      "id": "b68f67e72e249cf1d16b4157",
       "game": "broken-city",
       "kind": "solution",
       "name": "module:bot-adapter-boot.test.mjs",
@@ -23253,10 +23313,10 @@
         "game-module"
       ],
       "source_path": "games/broken-city/bot-adapter-boot.test.mjs",
-      "sha256": "e41d4b00785aa09a5da85a9c163f6269239cfa2a33dee894ff2f33b5c4cf13cc",
+      "sha256": "8fe6e815d5775b5896337d9a37176990b406a42dbcaabb07d693fb47a935e993",
       "lines": [
         1,
-        56
+        138
       ]
     },
     {
@@ -23272,6 +23332,21 @@
       "lines": [
         7,
         35
+      ]
+    },
+    {
+      "id": "ea0270068b16f6ed85f5652e",
+      "game": "broken-city",
+      "kind": "solution",
+      "name": "verifyWorldAndQuality",
+      "purpose": [
+        "level-generation"
+      ],
+      "source_path": "games/broken-city/bot-adapter-boot.test.mjs",
+      "sha256": "b026da560812cc5760c8a97a1c33e5e958e2912b031eb70453b000b3f780ea6c",
+      "lines": [
+        68,
+        118
       ]
     },
     {

@@ -17,17 +17,17 @@
       const a = game();
       const g = a?.G;
       const p = a?.archer?.root?.position;
-      const dragon = a?.dragon?.root?.position;
+      const tower = a?.tower;
       const started = !!g && (g.mode === 'play' || g.mode === 'over');
       if (!started) {
         openingLayout = null;
         sawCombat = false;
       }
-      if (started && g.level === 1 && !openingLayout && p && dragon) {
-        // Capture world coordinates and the genuinely randomized attack direction.
+      if (started && g.level === 1 && !openingLayout && p && tower?.origin) {
+        // Capture actual tower geometry, not the moving dragon or a fabricated seed.
         openingLayout = [
-          p.x.toFixed(2), p.y.toFixed(2), p.z.toFixed(2),
-          dragon.x.toFixed(2), dragon.z.toFixed(2), g.orbitDir
+          tower.origin.x.toFixed(2), tower.origin.y.toFixed(2), tower.origin.z.toFixed(2),
+          String(tower.size), String(tower.type ?? '')
         ].join(':');
       }
       if (started && g.phase === 'fight') sawCombat = true;
@@ -40,11 +40,11 @@
         gameDone: won,
         alive: started && g?.mode !== 'over' && hp > 0 && !g.dead,
         hero: { x: p?.x ?? 0, y: p?.z ?? 0 },
-        goal: started && dragon ? { x: dragon.x, y: dragon.z } : null, // Real moving dragon as physical aim target.
+        goal: null, // This level is a dragon duel, not a waypoint to walk toward.
         enemies: started && !won && g?.mode !== 'over' ? 1 : 0,
-        weapons: 1,
+        weapons: Array.isArray(a?.SAVE?.owned) ? Math.max(1, a.SAVE.owned.length) : 1,
         layoutHash: openingLayout || '',
-        menuOpen: !!g?.paused,
+        menuOpen: !!g?.paused || document.getElementById('gameQuickMenu')?.hidden === false,
         progress: Math.max(0, Number(g?.hits) || 0)
       });
     }

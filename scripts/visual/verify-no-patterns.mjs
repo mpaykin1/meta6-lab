@@ -47,9 +47,11 @@ export function detectNoPatterns(source, filename = '<fixture>') {
   for (const m of source.matchAll(tilePattern)) {
     if (Math.max(+m[2], +m[3]) <= 2) continue;
     const nearby = source.slice(Math.max(0, m.index - 250), m.index + 450);
-    const textureRotation = new RegExp('\\b' + m[1] + '\\.rotation\\s*=').test(nearby);
-    const macroBlend = /\b(?:stochasticTiling|triplanarBlend|macroVariation|macroNoise|tileBlend)\b/.test(nearby);
-    if (!textureRotation && !macroBlend) report(m.index, 'REPEATED_TILE: texture repeat > 2 with no macro variation');
+    // A shared rotation does not remove lattice repetition, even when it uses a seed.
+    // Ignore comments and require an actual macro-level blending call.
+    const executable = nearby.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+    const macroBlend = /\b(?:stochasticTiling|triplanarBlend|macroVariation|macroNoise|tileBlend)\s*\(/.test(executable);
+    if (!macroBlend) report(m.index, 'REPEATED_TILE: texture repeat > 2 with no macro variation');
   }
   const gridPattern = /\bfor\s*\([^)]*\)[\s\S]{0,650}?\bclone\s*\([\s\S]{0,320}?(?:position\.set|translate[XYZ])\s*\([^;\n]*(?:Math\.floor\s*\(|%\s*\d+|row\s*\*|col\s*\*)/g;
   for (const m of source.matchAll(gridPattern)) {

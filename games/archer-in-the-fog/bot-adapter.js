@@ -23,11 +23,20 @@
         openingLayout = null;
         sawCombat = false;
       }
-      if (started && g.level === 1 && !openingLayout && p && tower?.origin) {
-        // Capture actual tower geometry, not the moving dragon or a fabricated seed.
+      if (started && g.level === 1 && !openingLayout && p && tower?.origin &&
+          Array.isArray(tower.blocks) && tower.blocks.length) {
+        // Hash only the actual procedurally generated blocks, once per duel.
+        // The starting tower origin is fixed, but its block layout is NOT.
+        let hash = 2166136261;
+        for (const block of tower.blocks) {
+          for (const value of [block.x, block.y, block.z, block.s, block.t]) {
+            hash ^= value | 0;
+            hash = Math.imul(hash, 16777619);
+          }
+        }
         openingLayout = [
-          tower.origin.x.toFixed(2), tower.origin.y.toFixed(2), tower.origin.z.toFixed(2),
-          String(tower.size), String(tower.type ?? '')
+          tower.origin.x, tower.origin.y, tower.origin.z,
+          tower.size, tower.blocks.length, hash >>> 0
         ].join(':');
       }
       if (started && g.phase === 'fight') sawCombat = true;

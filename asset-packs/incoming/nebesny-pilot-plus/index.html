@@ -162,21 +162,47 @@ const STACK_AIRCRAFT = [
  {id:'rescueHelicopter',lateral:24,forward:110,altitude:43},
  {id:'skyAirship',lateral:65,forward:90,altitude:51}
 ];
+
+const STACK_WORLD = [
+ {id:'stormLighthouse',count:8,role:'landmark',z:3},
+ {id:'sailingShip',count:13,role:'vehicle',z:6},
+ {id:'villageIsland',count:6,role:'island',z:2},
+ {id:'volcanicIsland',count:6,role:'island',z:3},
+ {id:'oceanWhale',count:9,role:'creature',z:2},
+ {id:'migratingBirds',count:8,role:'creature',z:28},
+ {id:'hotAirBalloon',count:13,role:'vehicle',z:40},
+ {id:'thunderCloud',count:8,role:'cloud',z:53},
+ {id:'seaBuoy',count:6,role:'prop',z:3},
+ {id:'sunkenRuins',count:8,role:'landmark',z:1},
+ {id:'coralReef',count:6,role:'island',z:1},
+ {id:'seaMist',count:6,role:'effect',z:9},
+ {id:'wakeSpray',count:6,role:'effect',z:4}
+];
+const STACK_BONUS = [
+ {id:'speedRing',count:8,role:'pickup',z:28},
+ {id:'repairRing',count:8,role:'pickup',z:28},
+ {id:'scoreRing',count:8,role:'pickup',z:28}
+];
+const STACK_ALL = [...STACK_AIRCRAFT,...STACK_WORLD,...STACK_BONUS];
+let STACK_FOCUS=null;
+
 const STACK_TEX = {};
 const STACK_HIDDEN = new Set();
 let STACK_ISOLATED = null;
-for(const item of STACK_AIRCRAFT){
+for(const item of STACK_ALL){
   const im = new Image(); im.decoding = 'async';
   im.src = './stacks/' + item.id + '.png';
   STACK_TEX[item.id] = im;
 }
 window.__STACK_PROBE__ = {
-  assets: Object.fromEntries(STACK_AIRCRAFT.map(a => [a.id,{id:a.id,visible:true}])),
+  assets: Object.fromEntries(STACK_ALL.map(a => [a.id,{id:a.id,visible:true}])),
   freeze:false,
   setHidden(id,on){if(on)STACK_HIDDEN.add(id);else STACK_HIDDEN.delete(id);},
   setIsolated(id,on){STACK_ISOLATED=on?id:null;},
-  ready(){return STACK_AIRCRAFT.every(o=>STACK_TEX[o.id].complete&&STACK_TEX[o.id].naturalWidth===416)},
-  ids(){return STACK_AIRCRAFT.map(o=>o.id)}
+  ready(){return STACK_ALL.every(o=>STACK_TEX[o.id].complete&&STACK_TEX[o.id].naturalWidth===(o.count||13)*32)},
+  ids(){return STACK_ALL.map(o=>o.id)},
+  focus(id){STACK_FOCUS=id;},
+  clearFocus(){STACK_FOCUS=null;}
 };
 window.__ISOLATE__=(id,on)=>window.__STACK_PROBE__.setIsolated(id,on);
 function drawStackTraffic(){
@@ -229,6 +255,100 @@ function drawStackTraffic(){
  }
  g.setTransform(1,0,0,1,0,0);g.globalAlpha=1;
 }
+
+const STACK_BONUS_IN_FLIGHT=[];
+let STACK_LAST_SPAWN=-6,STACK_SPAWN_INDEX=0;
+function stackBlit(item,sx,sy,az,angle,phase){
+ const im=STACK_TEX[item.id];
+ const count=item.count||13;
+ if(!im.complete||im.naturalWidth!==count*32)return;
+ g.save();
+ g.globalAlpha=item.id==='seaMist'?.52:1;
+ for(let z=0;z<count;z++){
+  g.setTransform(1,0,0,1,sx,(sy-az-z+Math.sin(t*.8+phase)*1.2)|0);
+  g.rotate(angle);
+  g.drawImage(im,z*32,0,32,32,-16,-16,32,32);
+ }
+ g.restore();
+}
+function drawStackWorld(){
+ const cell=220,range=1+Math.ceil(Math.max(W,H)/cell);
+ const i0=Math.floor(cam.x/cell),j0=Math.floor(cam.y/cell);
+ const visible=[];
+ for(let i=i0-range;i<=i0+range;i++)for(let j=j0-range;j<=j0+range;j++){
+   if(hash(i,j,58)>.82)continue;
+   const idx=Math.floor(hash(i,j,57)*STACK_WORLD.length);
+   const item=STACK_WORLD[idx];
+   if(STACK_HIDDEN.has(item.id)||(STACK_ISOLATED&&STACK_ISOLATED!==item.id))continue;
+   const wx=i*cell+cell*(.2+hash(i,j,66)*.6);
+   const wy=j*cell+cell*(.2+hash(i,j,67)*.6);
+   const [sx,sy]=toS(wx,wy);
+   if(sx<-40||sx>W+40||sy<-60||sy>H+80)continue;
+   visible.push({item,sx,sy,wx,wy,i,j});
+ }
+ visible.sort((a,b)=>a.sy-b.sy);
+ for(const o of visible){
+   const {item,sx,sy,i,j}=o;
+   const phase=hash(i,j,61)*TAU;
+   let az=item.z,ang=hash(i,j,59)*TAU-cam.a;
+   if(item.id==='oceanWhale')ang+=Math.sin(t*.55+phase)*.1;
+   if(item.id==='migratingBirds')az+=Math.sin(t*1.8+phase)*3;
+   stackBlit(item,sx,sy,az,ang,phase);
+   if(item.id==='sailingShip'||item.id==='oceanWhale'){
+    g.save();g.setTransform(1,0,0,1,sx,sy+7);g.rotate(ang);
+    g.strokeStyle='rgba(212,239,248,.58)';g.lineWidth=1;
+    for(const side of[-1,1]){g.beginPath();g.moveTo(side*6,0);g.quadraticCurveTo(side*18,8+Math.sin(t*3+phase)*2,side*25,14);g.stroke()}g.restore();
+   }
+   if(item.id==='villageIsland'){
+    g.save();g.setTransform(1,0,0,1,sx+14,sy-13);g.rotate(t*.8+phase);
+    g.strokeStyle='#d7b57b';g.lineWidth=2;g.beginPath();g.moveTo(-6,0);g.lineTo(6,0);g.moveTo(0,-6);g.lineTo(0,6);g.stroke();g.restore();
+   }
+   if(item.id==='thunderCloud'&&Math.sin(t*2.7+phase)>.985){
+    g.save();g.setTransform(1,0,0,1,sx,sy-az);
+    g.strokeStyle='rgba(251,228,178,.9)';g.lineWidth=1.4;g.beginPath();
+    g.moveTo(3,0);g.lineTo(-4,13);g.lineTo(4,12);g.lineTo(-7,28);g.stroke();g.restore();
+   }
+ }
+ for(const pickup of STACK_BONUS_IN_FLIGHT){
+  if(STACK_HIDDEN.has(pickup.id)||(STACK_ISOLATED&&STACK_ISOLATED!==pickup.id))continue;
+  const item=STACK_BONUS.find(v=>v.id===pickup.id);
+  const [sx,sy]=toS(pickup.x,pickup.y);
+  if(sx<-40||sx>W+40||sy<-50||sy>H+50)continue;
+  stackBlit(item,sx,sy,28+Math.sin(t*1.8+pickup.phase)*2,t*.35, pickup.phase);
+ }
+ if(STACK_FOCUS){
+  const item=STACK_ALL.find(v=>v.id===STACK_FOCUS);
+  if(item){stackBlit(item,CX,CY-20,5,t*.15,0)}
+ }
+ g.setTransform(1,0,0,1,0,0);g.globalAlpha=1;
+}
+function updateStackBonus(){
+ if(t-STACK_LAST_SPAWN>5){
+  STACK_LAST_SPAWN=t;
+  const item=STACK_BONUS[STACK_SPAWN_INDEX++%3];
+  const [fx,fy]=fwd(P.h);
+  const side=(Math.sin(STACK_SPAWN_INDEX*2.7)*.5)*90;
+  STACK_BONUS_IN_FLIGHT.push({
+   id:item.id,x:P.x+fx*200-fy*side,
+   y:P.y+fy*200+fx*side,phase:t
+  });
+ }
+ for(let i=STACK_BONUS_IN_FLIGHT.length-1;i>=0;i--){
+  const o=STACK_BONUS_IN_FLIGHT[i],d=Math.hypot(o.x-P.x,o.y-P.y);
+  if(d<20){
+   if(o.id==='speedRing')P.boost=Math.max(2.3,P.boost);
+   if(o.id==='repairRing'){P.heat=0;P.repairPulse=2.5;P.boost=Math.max(.65,P.boost)}
+   if(o.id==='scoreRing'){score+=3;combo+=2;document.getElementById('sc').textContent=score}
+   if(AC)chime();
+   const [dx,dy]=fwd(P.h);for(let n=0;n<14;n++){
+    const u=n*TAU/14;parts.push({x:o.x,y:o.y,vx:Math.cos(u)*48+dx*P.v*.2,
+       vy:Math.sin(u)*48+dy*P.v*.2,l:.65,z:28});
+   }
+   STACK_BONUS_IN_FLIGHT.splice(i,1);
+  }else if(d>850)STACK_BONUS_IN_FLIGHT.splice(i,1);
+ }
+}
+
 /* === конец новых ассетов === */
 
 /* ---------- кадр ---------- */
@@ -249,6 +369,11 @@ function frame(now){
   const[cfx,cfy]=fwd(cam.a);cam.x+=(P.x+cfx*20-cam.x)*ease(4,dt);cam.y+=(P.y+cfy*20-cam.y)*ease(4,dt);
   if(AC&&windG){windG.gain.value=0.16+P.boost*0.25+Math.abs(P.steer)*0.08;windF.frequency.value=320+P.v*2.2;
     if(t-padT>5){padT=t;pad()}}
+
+  // Кольца-ассеты с настоящей игровой пользой.
+  P.heat=Math.max(0,(P.heat||0)+(P.boost>1.0?dt*.24:-dt*.075));
+  P.repairPulse=Math.max(0,(P.repairPulse||0)-dt);
+  updateStackBonus();
 
   // кольца
   while(rings.length<6)spawnRing();
@@ -282,6 +407,9 @@ function frame(now){
   for(const[sy,sx,isl]of vis){const ra=isl.a-cam.a,h2=isl.size/2;
     g.setTransform(1,0,0,1,sx,sy);g.rotate(ra);g.drawImage(isl.sh,-h2,-h2);
     let z=0;for(const tr of isl.tiers)for(let s=0;s<tr.h;s++){z++;g.setTransform(1,0,0,1,sx,(sy-z)|0);g.rotate(ra);g.drawImage(s===tr.h-1?tr.L:tr.D,-h2,-h2)}}
+
+  // Архипелаг, корабли, животные и погода из пака.
+  drawStackWorld();
 
   // облака: собрать видимые
   const cl=[];const wind=t*7;

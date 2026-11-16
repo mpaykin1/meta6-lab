@@ -1,0 +1,21 @@
+# Небесный пилот — состояние ассетов · 2026-11-16
+
+- Ветка: `lab/assets-nebesny-pilot-20261116`. Эталон `reference/nebesny-pilot/` — без изменений.
+- Заказ: **20 из 20 PNG срезов создано и зарегистрировано**, качество проверяется отдельно; пока не утверждать HARD=0.
+- Сравнение: [первый статичный лист](../../asset-packs/incoming/nebesny-pilot-plus/_check/compare.png), [20 объектов в отдельном просмотрщике](../../asset-packs/incoming/nebesny-pilot-plus/_check/compare.html). В сравнении с JET: объём новых объектов на 6–13 срезах, у маленьких целей слабее внутренние детали, нужна проверка качественного порога.
+- Сквозной заказ: `asset-packs/incoming/nebesny-pilot-plus/ZAKAZ.json`; `stack.json`; отдельная копия `index.html` без модификации оригинала.
+- Защита от повторов: детекция spritestack, тесты SS2/3/5/6/7/8 и 6 мутантов (версия 2.6.0), CI ожидает подтверждения.
+
+| Партия | SHA | Ассеты | Визуальная оценка относительно эталона |
+|---|---|---|---|
+| 1 | [6f63ea2](https://github.com/mpaykin1/meta6-lab/commit/6f63ea2bacdfefaef9d9eae44f68652f0fbff85e) | rangerJet, cargoPlane, rescueHelicopter, skyAirship | Читаются крылья, винт, гондола; техника больше детализирована, чем простое кольцо эталона, но мелкие подпиксельные детали требуют увеличенного сравнения |
+| 2 | [a7694e6](https://github.com/mpaykin1/meta6-lab/commit/a7694e60138f5f1f15caa20b99a7f7d509cde8c4) | stormLighthouse, sailingShip, villageIsland, volcanicIsland | Маяк с огнём, корабль с парусами, дома/мельница, кратер/лава; мелкие башенные детали могут проигрывать JET |
+| 3 | [0e96df7](https://github.com/mpaykin1/meta6-lab/commit/0e96df702674312915f704da383eecf9ffe404df) | oceanWhale, migratingBirds, hotAirBalloon, thunderCloud | Кит с хвостом, стая птиц, корзина шара, молния; у стаи силуэт менее плотный, чем у JET, нужна проверка |
+| 4 | [52976b7](https://github.com/mpaykin1/meta6-lab/commit/52976b74537ed16391e568314ee49508c99e0dc0) | speedRing, repairRing, scoreRing, seaBuoy | Три различающихся бонуса с игровой пользой, полосатый буй; кольца сделаны по исходной механике RING и должны оцениваться с кольцом эталона |
+| 5 | [d8d048e](https://github.com/mpaykin1/meta6-lab/commit/d8d048e5ce3c3e513f8cb9581be4df433d88721f) | sunkenRuins, coralReef, seaMist, wakeSpray | Резные руины, нерегулярный коралловый риф, слоистая дымка и след пены; тонкие детали требуют оценки на масштабе телефона |
+
+## Продолжение
+
+1. Запустить CI ASSET CHECK: unittest, mutate_bot, check_pack, изучить отчёт для входящего пака; все HARD исправлять.
+2. Проверить реально загружаемые 20 файлов и браузерную анимацию, сделать полный лист сравнения PNG из всех 20 объектов + 2–3 эталона.
+3. Довести до 0 HARD, PR и проверка HTTP 200 публичного превью. После +30 новых ассетов с HARD=0 — передать Claude.

@@ -99,7 +99,9 @@
       "attribution": "shared/components/patch-pixelfx/LICENSE",
       "dependencies": [],
       "source_commit": "5294518ce7c72e48b6100a744596e0acf57f2826",
-      "license_git_blob_sha": "74eff5d22b4195a2b1690d1c769fd5f2537e7cf6"
+      "license_git_blob_sha": "74eff5d22b4195a2b1690d1c769fd5f2537e7cf6",
+      "notice_git_blob_sha": "bd049df57f92b448b6b106e0fc01fc71cbdb8dd2",
+      "notice_evidence": "https://github.com/patch-gg/pixelfx/blob/5294518ce7c72e48b6100a744596e0acf57f2826/NOTICE.md"
     },
     {
       "id": "trompe",

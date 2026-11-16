@@ -53,6 +53,26 @@ const mutants = [
     mustReport: 'REPEATED_TILE'
   },
   {
+    name: 'repeat-copy-vector-two',
+    source: 'const tex=new THREE.CanvasTexture(canvas);' +
+      'tex.repeat.copy(new THREE.Vector2(7,8));',
+    mustReport: 'REPEATED_TILE'
+  },
+  {
+    name: 'repeat-from-array',
+    source: 'const tex=new THREE.CanvasTexture(canvas);' +
+      'tex.repeat?.fromArray?.([9,6]);',
+    mustReport: 'REPEATED_TILE'
+  },
+  {
+    // Deception: a seeded angle still leaves the repeated tiles identical.
+    name: 'repeat-multiply-scalar-seeded-angle',
+    source: 'const tex=new THREE.CanvasTexture(canvas);' +
+      'tex.repeat.multiplyScalar(8);tex.rotation=hash(seed);' +
+      '// macroVariation(tex,uv)',
+    mustReport: 'REPEATED_TILE'
+  },
+  {
     // Deception: split the obvious visual expression into two intermediate aliases.
     name: 'alias-obfuscation',
     source: 'float aliasA=sin(uv.x*14.); float aliasB=cos(uv.y*19.);' +

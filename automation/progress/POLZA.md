@@ -11,6 +11,8 @@
 - Пока свободных задач нет: отсутствует слитый одобренный пример адаптера, запрещено раздавать неподтверждённый шаблон.
 
 ## Не смог
+- PR #258: после чистого слияния main [META GAMES guard FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43801537479) из-за исторических merge-коммитов [e2ee93a](https://github.com/mpaykin1/meta6-lab/commit/e2ee93ab45ffe7258207dac504c417e79d6220dc) и [1278c99](https://github.com/mpaykin1/meta6-lab/commit/1278c996fddd8f464abeed7823e2c21526cbc6fe), затронувших .github/protected без подписи Claude. Не ослаблять проверку и не переписывать историю; нужна приёмка Claude.
+- PR #291: [focused META BOT FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43420572104): Broken City mobile FPS 1.6, desktop 2.5, уровней 0/9; исходные игровые файлы не менять без полного игрового прогона и согласованного индекса библиотеки.
 - PR #245: `shared/library/index.json` 4.17 MiB: создание обновлённого blob/contents через подключённый GitHub API завершилось ошибкой транспорта h2; нельзя заменять индекс старой версией без ostrov-aptekarya. Нужна генерация штатным `node scripts/library/extract-all.mjs` на ветке #245, затем CI: [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/43749067284).
 - B2 archer-in-the-fog: в исходном режиме ввод стреляет (pointer), прямое перемещение героя с помощью WASD отсутствует; запрещено имитировать его координатами камеры. B2_MOTION_PASS без изменения механики честно получить невозможно.
 - B2 broken-city: [focused 43417988025](https://github.com/mpaykin1/meta6-lab/actions/runs/43417988025) — уровень 1 не пройден за 180 с при FPS 2.8; старт движка обгонял установку API (исправлено в PR #291), но полного зелёного прогона игры пока нет.
@@ -18,6 +20,7 @@
 - На старте нет общего automation/prompts/POLZA.md. Не выдавать чатовый текст за утверждённый промпт для пяти автозадач.
 
 ## Замеры
+- 2026-11-16 04 UTC (чат): FINISH [7/18](https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/FINISH.md), единиц пользы на зелёном main 0; игр с ботом в main 1/9 ранее подтверждённых, свободных задач 0 (нет слитого образца), открытых PR 45 (на момент пересчёта), бот-коммиты за сутки заново не подсчитаны; [#258 B2 PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43801537423), [B1 PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43801537463), [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43801537387), [guard FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43801537479). Это результаты PR, не main.
 - 2026-11-15, 19 UTC (чат): [main](https://github.com/mpaykin1/meta6-lab/commits/main) — 45 открытых PR, 23 из них mergeable=false (проверены 45 PR); из 144 коммитов после 14.11 19 UTC — 109 от ботов/автоматики, лидеры status-dlya-claude 36 и zadachi-watch 31. Из 9 целевых игр ручка window.__META_BOT__ подтверждена только у Veil (1/9), в очереди 0 свободных задач без слитого шаблона, единиц пользы на main в этой сессии 0, FINISH 7/18. PR [#258](https://github.com/mpaykin1/meta6-lab/pull/258) B1/B2 зелёные, PR [#245](https://github.com/mpaykin1/meta6-lab/pull/245) 6/6 ×3, но индекс библиотеки красный.
 - 2026-11-15 (чат, продолжение): единиц пользы по main 0, B2 на #258 [PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43748597509), Veil #245 [6/6 ×3 на PR](https://github.com/mpaykin1/meta6-lab/actions/runs/43749067384) без переноса в main, свободных задач 0, поскольку нет слитого шаблона; FINISH 7/18, открытых PR ранее 45.
 - 2026-11-15 (чат): новых зелёных пунктов FINISH на main 0; B2 PASS только в PR #258, #291 остаётся draft; main минимум 1 игра с ручкой из 8 известных проблемных игр; свободных задач для автозадач 0 — слитого образца нет; 45 открытых PR; FINISH 7/18. [PR #258](https://github.com/mpaykin1/meta6-lab/pull/258), [Actions B2](https://github.com/mpaykin1/meta6-lab/actions/runs/43748112666).
@@ -25,6 +28,8 @@
 - 2026-11-13 UTC (чат, исходный замер): FINISH 7/18 по main; пример B2 только PR #258, в main отсутствует.
 
 ## Уроки
+- Делай так, а не так: после merge main проверяй историю коммитов на подписи защищённых путей, а не только mergeable=true и B2 PASS; у #258 именно два исторических merge-коммита вызывают красный META GAMES guard — [run 43801537479](https://github.com/mpaykin1/meta6-lab/actions/runs/43801537479).
+- Нельзя считать улучшением недостаточный FPS Broken City и создавать новый конфликт индекса ради неподтверждённой оптимизации; для #291 сначала нужен воспроизводимый низкий FPS и единый пересборщик библиотеки. [focused run](https://github.com/mpaykin1/meta6-lab/actions/runs/43420572104).
 - Делай так, а не так: после изменения games/ обновляй `shared/library/veil-terraces.json` и общий индекс штатным `node scripts/library/extract-all.mjs` в том же PR; одних зелёных игровых прогонов недостаточно. Не откатывать общий каталог ради устранения конфликта: он содержит новые игры. [Блокирующий прогон #43749067284](https://github.com/mpaykin1/meta6-lab/actions/runs/43749067284).
 - Главная помеха достижению 3 единиц пользы: зелёные B2 и полное прохождение Veil пока только на PR-ветках, отсутствие слитого примера запрещает раздавать автоочередь. Следующая сессия: довести каталог #245, получить принятие #258 и подготовить проверяемую следующую игру, а не создавать ещё один gate.
 - Для статичного лучника нельзя считать движение камеры перемещением героя.
@@ -36,6 +41,8 @@
 - Автозадача: сначала бери верхнюю свободную задачу из раздела «Очередь для автозадач», отметь её взятой; не получилось за запуск — запиши причину в «Не смог» и бери следующую.
 
 ## Сделано
+- сделано: B2 ч.3 занят в ZANYATO.md — https://github.com/mpaykin1/meta6-lab/commit/1288743f30031a0f7e711e4b41c6371e9dcece4e ; расследована красная охрана после B2 PASS — https://github.com/mpaykin1/meta6-lab/actions/runs/43801537479 .
+- сделано: Broken City B2 закреплён в ZANYATO — https://github.com/mpaykin1/meta6-lab/commit/90fcde3ba64d5c30baeb88346cd23b8e5935af5c ; конкретный FPS-блокер проверен по https://github.com/mpaykin1/meta6-lab/actions/runs/43420572104 .
 - сделано: PR #258 сведен с актуальным main [e2ee93a](https://github.com/mpaykin1/meta6-lab/commit/e2ee93ab45ffe7258207dac504c417e79d6220dc); B2 успешно проверен [43748112666](https://github.com/mpaykin1/meta6-lab/actions/runs/43748112666). Окончательная приёмка main ещё не выполнена.
 - сделано: B2 PR #258 синхронизирован с main без удаления старых тестов — https://github.com/mpaykin1/meta6-lab/commit/1278c996fddd8f464abeed7823e2c21526cbc6fe ; B2 PASS https://github.com/mpaykin1/meta6-lab/actions/runs/43420129986
 - сделано: Broken City — отделён read-only API от PR #200, исправлена отложенная установка и добавлены четыре мутационные ловушки — https://github.com/mpaykin1/meta6-lab/pull/291

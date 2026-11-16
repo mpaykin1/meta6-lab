@@ -200,7 +200,8 @@ export function inspectObject3D(root, options = {}) {
         'Проверить backface culling и экспорт');
     }
     for (const mat of Array.isArray(mesh.material) ? mesh.material : [mesh.material]) {
-      if (!mat || materialSet.has(mat)) continue;
+      if (!mat) continue;
+      const firstUse = !materialSet.has(mat);
       materialSet.add(mat);
       const maps = ['map', 'normalMap', 'roughnessMap', 'metalnessMap', 'aoMap',
         'emissiveMap', 'alphaMap'];
@@ -213,6 +214,7 @@ export function inspectObject3D(root, options = {}) {
             'Создать UV-развёртку для текстуры');
         }
       }
+      if (!firstUse) continue;
       if (mat.roughness !== undefined && (mat.roughness < 0 || mat.roughness > 1)) {
         add('Q13', 'HARD', where, 'Некорректная roughness', 'Использовать значение 0–1');
       }

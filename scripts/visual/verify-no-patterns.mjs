@@ -43,15 +43,22 @@ export function detectNoPatterns(source, filename = '<fixture>') {
       break;
     }
   }
-  const tilePattern = /\b([A-Za-z_$][\w$]*)\.repeat\??\.set\??\.?\s*\(\s*(\d*\.?\d+)\s*,\s*(\d*\.?\d+)\s*\)/g;
-  for (const m of source.matchAll(tilePattern)) {
-    if (Math.max(+m[2], +m[3]) <= 2) continue;
-    const nearby = source.slice(Math.max(0, m.index - 250), m.index + 450);
-    // A shared rotation does not remove lattice repetition, even when it uses a seed.
-    // Ignore comments and require an actual macro-level blending call.
-    const executable = nearby.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
-    const macroBlend = /\b(?:stochasticTiling|triplanarBlend|macroVariation|macroNoise|tileBlend)\s*\(/.test(executable);
-    if (!macroBlend) report(m.index, 'REPEATED_TILE: texture repeat > 2 with no macro variation');
+  // set(), setScalar() and direct repeat.x/y assignments all create the same lattice.
+  // A shared rotation or merely seeded angle cannot make a periodically tiled image unique.
+  const tilePatterns = [
+    {regex: /\b([A-Za-z_$][\w$]*)\.repeat\??\.set\??\.?\s*\(\s*(\d*\.?\d+)\s*,\s*(\d*\.?\d+)\s*\)/g, values: [2, 3]},
+    {regex: /\b([A-Za-z_$][\w$]*)\.repeat\??\.setScalar\??\.?\s*\(\s*(\d*\.?\d+)\s*\)/g, values: [2]},
+    {regex: /\b([A-Za-z_$][\w$]*)\.repeat\??\.([xy])\s*=\s*(\d*\.?\d+)\b/g, values: [3]}
+  ];
+  for (const {regex, values} of tilePatterns) {
+    for (const m of source.matchAll(regex)) {
+      if (Math.max(...values.map(index => +m[index])) <= 2) continue;
+      const nearby = source.slice(Math.max(0, m.index - 250), m.index + 450);
+      // Only executable macro-scale blending avoids rejection; comments do not count.
+      const executable = nearby.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+      const macroBlend = /\b(?:stochasticTiling|triplanarBlend|macroVariation|macroNoise|tileBlend)\s*\(/.test(executable);
+      if (!macroBlend) report(m.index, 'REPEATED_TILE: texture repeat > 2 with no macro variation');
+    }
   }
   const gridPattern = /\bfor\s*\([^)]*\)[\s\S]{0,650}?\bclone\s*\([\s\S]{0,320}?(?:position\.set|translate[XYZ])\s*\([^;\n]*(?:Math\.floor\s*\(|%\s*\d+|row\s*\*|col\s*\*)/g;
   for (const m of source.matchAll(gridPattern)) {

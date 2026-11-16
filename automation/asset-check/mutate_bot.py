@@ -11,6 +11,8 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MUTANTS = [
+    ("kinds/htmlpack_harness.mjs", "if(id==='explosion'){", "if(id==='never-explosion'){"),
+    ("kinds/htmlpack_harness.mjs", "if(id==='explosion'||id==='sparks'||id==='petals')await page.waitForTimeout(240);", "if(id==='sparks'||id==='petals')await page.waitForTimeout(240);"),
     # Deceptive regression: one fixture ID must not get a free pass.
     ("kinds/htmlpack.py", 'depth_faults = m.get("depth_faults")',
      'depth_faults = 0 if name == "new_shadow" else m.get("depth_faults")'),

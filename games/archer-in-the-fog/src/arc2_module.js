@@ -341,4 +341,4 @@ const ARC2 = (() => {
   return { get camK() { return camK; }, SP, dice, absorb, onRound, onShotDown, onRepel, onDragonHit, pickSpecial, plunge, ambush, tick, onGameOver, onStart, boot, spark, retreat, wallRunStart, wallRunMove, wallRunEnd, wallRunStep, wallRunPose };
 })();
 window.__arc2 = ARC2;
-window.__A = { G, SAVE, startSpecial, crash, repel, startRound, gameOver, get dragon() { return dragon; }, get archer() { return archer; } };
+window.__A = { G, SAVE, startSpecial, crash, repel, startRound, gameOver, get dragon() { return dragon; }, get archer() { return archer; }, get tower() { return cur; } };

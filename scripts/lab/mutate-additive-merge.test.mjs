@@ -9,6 +9,7 @@ import { spawnSync } from "node:child_process";
 
 const subject = resolve(process.argv[2] || new URL("./verify-additive-merge.mjs", import.meta.url).pathname);
 const dir = mkdtempSync(join(tmpdir(), "mg-merge-gate-"));
+const shallowDir=mkdtempSync(join(tmpdir(), "mg-merge-shallow-"));
 const git = (...args) => {
   const r = spawnSync("git", args, { cwd: dir, encoding: "utf8" });
   assert.equal(r.status, 0, "git " + args.join(" ") + ": " + r.stderr);
@@ -63,5 +64,11 @@ try {
   put("preview/collision.js", "branch\n");
   git("add", "-A"); git("commit", "-qm", "branch asset");
   check("main", "collision", false);
-  console.log("PASS: additive, modified, historic-protected and collision cases");
-} finally { rmSync(dir, { recursive: true, force: true }); }
+  git("checkout", "-q", "main");
+  const clone=spawnSync("git",["clone","--quiet","--depth","1","file://"+dir,shallowDir],{encoding:"utf8"});
+  assert.equal(clone.status,0,"cannot create shallow fixture: "+clone.stderr);
+  const shallow=spawnSync(process.execPath,[subject,"HEAD","HEAD"],{cwd:shallowDir,encoding:"utf8"});
+  assert.notEqual(shallow.status,0,"shallow checkout must not be accepted");
+  assert.match(shallow.stderr,/shallow git history/, "shallow history must be specifically detected before diff");
+  console.log("PASS: additive, modified, historic-protected collision and shallow-history cases");
+} finally { rmSync(dir, { recursive: true, force: true }); rmSync(shallowDir, { recursive: true, force: true }); }

@@ -7,6 +7,7 @@ on:
       - 'preview/ink-watercolor-train/**'
       - 'demos/living-watercolor/ink-steam-train.js'
       - 'scripts/ink/check-watercolor-train-browser.mjs'
+      - 'scripts/ink/mutate-watercolor-train-browser.mjs'
       - '.github/workflows/ink-steam-train.yml'
   workflow_dispatch:
 permissions:
@@ -25,6 +26,7 @@ jobs:
           node --check demos/living-watercolor/ink-steam-train.js
           node --check preview/ink-watercolor-train/scene.js
           node --check scripts/ink/check-watercolor-train-browser.mjs
+          node scripts/ink/mutate-watercolor-train-browser.mjs
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
       - name: Load real 3D train in Chromium desktop and mobile

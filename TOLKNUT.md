@@ -18,9 +18,9 @@
 - [PR #299](https://github.com/mpaykin1/meta6-lab/pull/299) · красная · Запрет выдачи автозадачам · Конфликт с main
 - [PR #314](https://github.com/mpaykin1/meta6-lab/pull/314) · красная · Запрет выдачи автозадачам · Красная проверка: library-machine (https://github.com/mpaykin1/meta6-lab/actions/runs/43564315129/job/132354685848), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/43564315165/job/132354685752), changed-games (https://github.com/mpaykin1/meta6-lab/actions/runs/43564315037/job/132354685722), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43564312756/job/132354680879), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
 - [PR #313](https://github.com/mpaykin1/meta6-lab/pull/313) · красная · Запрет выдачи автозадачам · Красная проверка: kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43749139977/job/132919145623), storozha-reference-queue (https://github.com/mpaykin1/meta6-lab/actions/runs/43564272258/job/132354638037), kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43564271869/job/132354605642), bot (https://github.com/mpaykin1/meta6-lab/actions/runs/43562085053/job/132347784031), Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- [PR #305](https://github.com/mpaykin1/meta6-lab/pull/305) · нет данных · Запрет выдачи автозадачам · Конфликт с main
 - [PR #247](https://github.com/mpaykin1/meta6-lab/pull/247) · нет данных · Запрет выдачи автозадачам · Конфликт с main
 - [PR #234](https://github.com/mpaykin1/meta6-lab/pull/234) · красная · Запрет выдачи автозадачам · Конфликт с main
+- [PR #305](https://github.com/mpaykin1/meta6-lab/pull/305) · нет данных · Запрет выдачи автозадачам · Конфликт с main
 - [PR #303](https://github.com/mpaykin1/meta6-lab/pull/303) · нет данных · Запрет выдачи автозадачам · Конфликт с main
 - [PR #291](https://github.com/mpaykin1/meta6-lab/pull/291) · красная · Запрет выдачи автозадачам · Конфликт с main
 - [PR #289](https://github.com/mpaykin1/meta6-lab/pull/289) · красная · Запрет выдачи автозадачам · Конфликт с main

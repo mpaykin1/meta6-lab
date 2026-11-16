@@ -123,6 +123,14 @@ window.__ISOLATE__=(id,shown)=>{
 // Transient effects must be actually active before their shown/hidden capture.
 window.__AC_WAKE__=id=>{
  if(id==='sparks')burst(GX-1,GY,GZ+1.5,440,11,.65,5.0,-5);
+ if(id==='explosion'){
+  // The real accepted explosion lives for only a brief interval; trigger it
+  // identically in the temporary reference and candidate copies.
+  explode();
+  petals.visible=false;
+  sparks.visible=false;
+  flash=0;glitch=0;shake=0;
+ }
  if(id==='petals'){
   // The original blast spawns puffs and sparks over the small flying shards.
   // Exclude those OTHER effects in the ephemeral reference/candidate browser
@@ -249,7 +257,7 @@ async function measure(browser,file){
    await page.evaluate(id=>window.__AC_WAKE__(id),id);
    // Sparks have future spawn-time offsets; petals start with zero-size instance matrices.
    // Allow original update() to form the object before freezing the rendered diff.
-   if(id==='sparks'||id==='petals')await page.waitForTimeout(240);
+   if(id==='explosion'||id==='sparks'||id==='petals')await page.waitForTimeout(240);
    const capture=async()=>{
      await page.evaluate(()=>{window.__AC_FREEZE__=true});
      await page.waitForTimeout(40);

@@ -155,7 +155,12 @@ try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
 } catch (e) { $('loader').remove(); document.body.insertAdjacentHTML('beforeend', '<div id="err">WebGL недоступен</div>'); throw e; }
 const DPR = Math.min(window.devicePixelRatio || 1, 2);
-renderer.setPixelRatio(DPR);
+const RENDER_PIXEL_BUDGET = 320000;
+const maxRenderScale = Math.min(1, Math.sqrt(
+  RENDER_PIXEL_BUDGET / Math.max(1, innerWidth * innerHeight * DPR * DPR)
+));
+let renderScale = maxRenderScale;
+renderer.setPixelRatio(DPR * renderScale);
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 const damp = (k, dt) => 1 - Math.exp(-k * dt);
 const rnd = (() => { let s = 1337; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
@@ -603,7 +608,7 @@ function showGallery(i) {
 const rt = new THREE.WebGLRenderTarget(4, 4, { generateMipmaps: true, minFilter: THREE.LinearMipmapLinearFilter, magFilter: THREE.LinearFilter, type: THREE.HalfFloatType });
 const post = new THREE.ShaderMaterial({
   uniforms: {
-    tScene: { value: rt.texture }, uTime: U.uTime, uCell: { value: 4.5 * DPR }, uGlitch: { value: 0 }, uAberr: { value: .012 }, uGrain: { value: .06 },
+    tScene: { value: rt.texture }, uTime: U.uTime, uCell: { value: 4.5 * DPR * renderScale }, uGlitch: { value: 0 }, uAberr: { value: .012 }, uGrain: { value: .06 },
     c0: { value: PAL.c0 }, c1: { value: PAL.c1 }, c2: { value: PAL.c2 }, c3: { value: PAL.c3 }, cA: { value: PAL.amber }, cR: { value: new THREE.Color(1, .14, .1) }, uFade: { value: 0 }, uFlash: { value: 0 }, uDark: { value: 0 },
   },
   vertexShader: `varying vec2 vUv; void main(){vUv=uv; gl_Position=vec4(position.xy,0.,1.);}`,
@@ -649,7 +654,9 @@ const gcam = new THREE.PerspectiveCamera(50, 1, .1, 200);
 function resize() {
   const w = innerWidth, h = innerHeight;
   renderer.setSize(w, h, false);
-  const s = .8 * DPR; rt.setSize(Math.max(2, Math.floor(w * s)), Math.max(2, Math.floor(h * s)));
+  const s = .8 * DPR * renderScale;
+  rt.setSize(Math.max(2, Math.floor(w * s)), Math.max(2, Math.floor(h * s)));
+  post.uniforms.uCell.value = 4.5 * DPR * renderScale;
   camera.aspect = gcam.aspect = w / h;
   camera.fov = w < h ? 72 : 58; camera.updateProjectionMatrix(); gcam.updateProjectionMatrix();
 }
@@ -1938,7 +1945,9 @@ function toysBlock(hs, px0, pz0) {
   for (const r of truins) { const inside = (x, z) => Math.abs(x - r.x) < r.w / 2 + .2 && Math.abs(z - r.z) < r.d / 2 + .2;
     if (hs.pos.y < r.top - .45 && inside(hs.pos.x, hs.pos.z)) { if (!inside(px0, hs.pos.z)) hs.pos.x = px0; else if (!inside(hs.pos.x, pz0)) hs.pos.z = pz0; else { hs.pos.x = px0; hs.pos.z = pz0; } hs.vel.multiplyScalar(.5); } }
 }
-function toysStart() { memClear(); G.tfT = 1.1; G.tfN = 0; G.focusK = 0; G.nextBarrier = -27; toyBg.visible = true; toyBg.children.forEach(m => m.position.z = G.cfg.goal + m.userData.dz); }
+function toysStart() { memClear(); G.tfT = 1.1; G.tfN = 0; G.focusK = 0;
+  G.firstBarrier = -27 + (Math.random() - .5) * 2.4;
+  G.nextBarrier = G.firstBarrier; toyBg.visible = true; toyBg.children.forEach(m => m.position.z = G.cfg.goal + m.userData.dz); }
 function toysUpdate(hs, t, dt) {
   const c = G.cfg;
   G.tfT -= dt;
@@ -2014,6 +2023,36 @@ function tickStory(dt, t) {
 // R8 telemetry adapter (Bridge custom events; stable names, bounded data)
 function TEL(name, data) { if (!BR) return; try { BR.analytics.send(name, Object.assign({ game_version: GAME_VERSION }, data || {})); } catch (e) { } }
 const PERF = { win: performance.now(), active: 0, ft: [], last: 0 };
+const QUALITY = { last: 0, elapsed: 0, frames: 0, goodWindows: 0 };
+function tuneRenderQuality(now, active) {
+  const elapsed = QUALITY.last ? Math.min(now - QUALITY.last, 2000) : 0;
+  QUALITY.last = now;
+  if (!active || document.hidden) {
+    QUALITY.elapsed = 0;
+    QUALITY.frames = 0;
+    QUALITY.goodWindows = 0;
+    return;
+  }
+  QUALITY.elapsed += elapsed;
+  QUALITY.frames++;
+  if (QUALITY.elapsed < 2200) return;
+  const fps = QUALITY.frames * 1000 / QUALITY.elapsed;
+  QUALITY.frames = 0;
+  QUALITY.elapsed = 0;
+  if (fps > 49) QUALITY.goodWindows++;
+  else QUALITY.goodWindows = 0;
+  let scale = renderScale;
+  if (fps < 26) scale = Math.max(.38, scale * .78);
+  else if (QUALITY.goodWindows >= 3) {
+    scale = Math.min(maxRenderScale, scale * 1.08);
+    QUALITY.goodWindows = 0;
+  }
+  if (Math.abs(scale - renderScale) > .005) {
+    renderScale = scale;
+    renderer.setPixelRatio(DPR * renderScale);
+    resize();
+  }
+}
 function perfTick(now, playing) {
   const d = PERF.last ? now - PERF.last : 0; PERF.last = now;
   if (!playing || document.hidden || d <= 0 || d > 2000) return;
@@ -3041,6 +3080,7 @@ const bcBotSource = Object.freeze({
     const target = waypoint || (c ? { x: 0, y: c.goal, z: c.goal } : null);
     const layout = c ? [
       G.li, G.cycle, c.mode, c.goal,
+      ...(c.mode === 'toys' ? [G.firstBarrier.toFixed(4)] : []),
       ...(c.gaps || []),
       ...truins.filter(r => r.barrier).flatMap(r => [r.z, ...(r.route || []).flat()])
     ].join(':') : 'title';
@@ -3324,7 +3364,10 @@ function frame() {
       tickHero(hero, camera, t); animateBody(heroBody, dt, { speed: 0, onGround: true, vy: 0, t, faceYaw: Math.PI });
       backLight.position.set(0, 5, -9); fillLight.position.set(-3, 2.5, 9);
     } else {
-      perfTick(performance.now(), G.state === 'play' && !G.paused && !PAUSE.size);
+      const frameTime = performance.now();
+      const playing = G.state === 'play' && !G.paused && !PAUSE.size;
+      perfTick(frameTime, playing);
+      tuneRenderQuality(frameTime, playing);
       if (G.state === 'play' && !G.paused) { updateGame(dt, t); updateGameCamera(dt, t); tickNav(heroState, t, dt); tickGift(heroState, t, dt); tickMem(heroState, t, dt); }
       else if (G.state === 'play') updateGameCamera(dt, t);
       else if (G.state === 'defeat') { navArrow.visible = false; $('stickHint').classList.add('hidden'); }

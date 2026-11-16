@@ -1,0 +1,90 @@
+{
+  "format": "mg-spritestack/1",
+  "game": "nebesny-pilot",
+  "version": "0.1.0",
+  "license": {
+    "type": "original",
+    "author": "META GAMES / OpenAI",
+    "commercial": true
+  },
+  "provenance": {
+    "tool": "ChatGPT procedural pixel painter",
+    "date": "2026-11-16",
+    "origin": "original design based on accepted reference/nebesny-pilot/ (read-only)"
+  },
+  "content_flags": {
+    "real_persons": [],
+    "brands": [],
+    "political": false
+  },
+  "assets": {
+    "rangerJet": {
+      "file": "stacks/rangerJet.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 13,
+      "pitch_px": 1,
+      "role": "vehicle",
+      "label_ru": "Реактивный разведчик",
+      "shadow": true,
+      "anim": {
+        "type": "bob",
+        "speed": 0.65
+      },
+      "spawn": "flight formation northwest"
+    },
+    "cargoPlane": {
+      "file": "stacks/cargoPlane.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 13,
+      "pitch_px": 1,
+      "role": "vehicle",
+      "label_ru": "Грузовой самолёт",
+      "shadow": true,
+      "anim": {
+        "type": "bob",
+        "speed": 0.65
+      },
+      "spawn": "flight formation west"
+    },
+    "rescueHelicopter": {
+      "file": "stacks/rescueHelicopter.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 13,
+      "pitch_px": 1,
+      "role": "vehicle",
+      "label_ru": "Спасательный вертолёт",
+      "shadow": true,
+      "anim": {
+        "type": "bob",
+        "speed": 0.65
+      },
+      "spawn": "flight formation east"
+    },
+    "skyAirship": {
+      "file": "stacks/skyAirship.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 13,
+      "pitch_px": 1,
+      "role": "vehicle",
+      "label_ru": "Дирижабль небесной почты",
+      "shadow": true,
+      "anim": {
+        "type": "bob",
+        "speed": 0.65
+      },
+      "spawn": "flight formation southeast"
+    }
+  }
+}

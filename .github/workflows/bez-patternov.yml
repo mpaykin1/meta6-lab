@@ -1,5 +1,6 @@
 name: BEZ PATTERNOV
 on:
+  workflow_call:
   pull_request:
     paths:
       - 'games/**'

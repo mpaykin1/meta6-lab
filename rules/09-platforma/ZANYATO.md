@@ -15,9 +15,9 @@
 | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |
 | Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |
 | L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |
-| B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | чат ChatGPT — снятие конфликта PR #258 | 2026-11-16T03:59:10.754Z |
+| B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | свободно (B2 PASS; историческая подпись Claude) | 2026-11-16T03:59:10.754Z |
 | УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |
-| B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | чат ChatGPT — адаптивный рендер #291 | 2026-11-16 04:17 UTC |
+| B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | свободно (реальный FPS-блокер, bot FAIL #43420572104) | 2026-11-16 04:17 UTC |
 | CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | свободно (зависло 7 ч, было: чат ChatGPT — продолжение #299, очередь Actions) | 2026-11-14T06:25:04Z |
 | STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | свободно (зависло 7 ч, было: чат ChatGPT — обновление #302 после API budget) | 2026-11-14T06:08:21Z |
 | LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | свободно (зависло 4 ч, было: чат ChatGPT — продолжение PR #300, merge свежего main) | 2026-11-14T06:22:06Z |

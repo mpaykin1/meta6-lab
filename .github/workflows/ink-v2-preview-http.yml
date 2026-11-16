@@ -33,6 +33,25 @@ jobs:
       - run: |
           npm install --no-save --no-package-lock playwright@1.56.1 pngjs@7.0.0 three@0.165.0
           npx playwright install --with-deps chromium
+      - name: Baseline mutation traps (green source; red wrong v1)
+        shell: bash
+        run: |
+          node scripts/ink/mutate-v2-baseline.test.mjs
+          cp scripts/ink/check-v2-preview-browser.mjs /tmp/ink-v2-baseline-original.mjs
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/ink/check-v2-preview-browser.mjs')
+          original = path.read_text()
+          needle = "base+'/reference/ink-fallen-guardian/?ink=robot&palette=color'"
+          assert needle in original
+          path.write_text(original.replace(needle, "base+'/demos/living-watercolor/?ink=robot&palette=color'", 1))
+          PY
+          if node scripts/ink/mutate-v2-baseline.test.mjs; then
+            echo 'FAIL: wrong baseline survived mutation'
+            exit 1
+          fi
+          mv /tmp/ink-v2-baseline-original.mjs scripts/ink/check-v2-preview-browser.mjs
+          node scripts/ink/mutate-v2-baseline.test.mjs
       - name: Inspect desktop and phone-sized previews, compare v1 resting pose
         shell: bash
         run: |

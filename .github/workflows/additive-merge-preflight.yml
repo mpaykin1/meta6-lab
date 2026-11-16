@@ -1,0 +1,54 @@
+name: Additive merge preflight mutation traps
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/lab/verify-additive-merge.mjs'
+      - 'scripts/lab/mutate-additive-merge.test.mjs'
+      - '.github/workflows/additive-merge-preflight.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Green verifier and four negative cases
+        run: node scripts/lab/mutate-additive-merge.test.mjs
+      - name: History-bypass mutation must turn test red
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s = Path('scripts/lab/verify-additive-merge.mjs').read_text()
+          needle = 'if (protectedCommits.length > 0)'
+          assert needle in s
+          Path('/tmp/merge-preflight-mutant-history.mjs').write_text(s.replace(needle, 'if (false)', 1))
+          PY
+          if node scripts/lab/mutate-additive-merge.test.mjs /tmp/merge-preflight-mutant-history.mjs; then
+            echo 'FAIL: bypassed history guard survived mutation'
+            exit 1
+          fi
+          echo 'PASS: historical bypass mutation detected'
+      - name: Wrong-blob-SHA mutation must turn test red
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s = Path('scripts/lab/verify-additive-merge.mjs').read_text()
+          needle = 'git("rev-parse", head + ":" + path)'
+          assert needle in s
+          Path('/tmp/merge-preflight-mutant-blob.mjs').write_text(s.replace(needle, '"0".repeat(40)', 1))
+          PY
+          if node scripts/lab/mutate-additive-merge.test.mjs /tmp/merge-preflight-mutant-blob.mjs; then
+            echo 'FAIL: fabricated blob SHA survived mutation'
+            exit 1
+          fi
+          echo 'PASS: wrong blob SHA mutation detected'

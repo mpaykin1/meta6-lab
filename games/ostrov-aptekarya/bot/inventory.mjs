@@ -1,5 +1,6 @@
 // Chapter I inventory frozen at main 32c887295480ff6610be4da1636ae2c994b119e7.
 import fs from 'node:fs';
+import vm from 'node:vm';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const dir=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -46,8 +47,15 @@ const baseline={
 };
 const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return (h>>>0).toString(16).padStart(8,'0');};
 const countLines=s=>(s.match(/\['[aiv]',/g)||[]).length;
+// Текст ESM не выполняем: удаляем только import/export и проверяем синтаксис V8.
+function assertSyntax(source, filename) {
+  const body=source.replace(/^import[^\n]*;\s*$/gm,'').replace(/^export (?=(?:const|function|class)\b)/gm,'');
+  try {new vm.Script(body,{filename});} catch(e) {throw Error('Синтаксис '+filename+': '+e.message);}
+}
 export function inventory(input){
-  const {dialogue,game,ui,girl,audio,adapter,playthrough,strategy}=input;
+  const {dialogue,game,chapter2,ui,girl,audio,adapter,playthrough,strategy}=input;
+  assertSyntax(game,'game.js');
+  assertSyntax(chapter2,'chapter2.js');
   const section=dialogue.split('export const SCRIPT = {')[1]?.split('\n};')[0];
   if(!section)throw Error('SCRIPT отсутствует');
   const matches=[...section.matchAll(/^  ([\w]+): \[/gm)];
@@ -95,7 +103,7 @@ export function inventory(input){
     buttonElements:buttons.length,chapter1ButtonElements:7};
 }
 export function sourceInput(){return {
-  dialogue:read('dialogue.js'),game:read('game.js'),ui:read('ui.js'),
+  dialogue:read('dialogue.js'),game:read('game.js'),chapter2:read('chapter2.js'),ui:read('ui.js'),
   girl:read('girl.js'),audio:read('audio.js'),adapter:read('bot-adapter.js'),
   playthrough:read('bot/playthrough.mjs'),strategy:read('bot-strategy.mjs')
 };}

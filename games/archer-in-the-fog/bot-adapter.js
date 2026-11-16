@@ -17,6 +17,7 @@
       const a = game();
       const g = a?.G;
       const p = a?.archer?.root?.position;
+      const dragon = a?.dragon?.root?.position;
       const tower = a?.tower;
       const started = !!g && (g.mode === 'play' || g.mode === 'over');
       if (!started) {
@@ -49,7 +50,7 @@
         gameDone: won,
         alive: started && g?.mode !== 'over' && hp > 0 && !g.dead,
         hero: { x: p?.x ?? 0, y: p?.z ?? 0 },
-        goal: null, // This level is a dragon duel, not a waypoint to walk toward.
+        goal: started && dragon ? { x: dragon.x, y: dragon.z } : null, // Genuine moving dragon target.
         enemies: started && !won && g?.mode !== 'over' ? 1 : 0,
         weapons: Array.isArray(a?.SAVE?.owned) ? Math.max(1, a.SAVE.owned.length) : 1,
         layoutHash: openingLayout || '',

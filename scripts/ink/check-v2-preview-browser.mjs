@@ -13,6 +13,9 @@ try{
   for(const device of tests) {
     const ctx=await browser.newContext({viewport:{width:device.width,height:device.height},
       isMobile:device.isMobile,hasTouch:device.isMobile,deviceScaleFactor:1});
+    // Serve the exact pinned Three.js release locally: no CDN stalls in Chromium CI.
+    await ctx.route('https://unpkg.com/three@0.165.0/build/three.module.js',
+      route=>route.fulfill({path:'node_modules/three/build/three.module.js',contentType:'text/javascript'}));
     const captures=[];
     for(const variant of ['v1','v2']) {
       const page=await ctx.newPage(),errors=[];

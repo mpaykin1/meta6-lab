@@ -83,6 +83,9 @@
 ## Ждёт Claude
 
 Одна строка на PR; автоматическое слияние защищённых проверок запрещено.
+| #325 | lab/ink-black-grin-monster-20261115 | ЯДРО: [META GAMES guard FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43847494401) — исходный [commit a044eb6](https://github.com/mpaykin1/meta6-lab/commit/a044eb6c85fd457af8b7ad3a557ac23c46fddc02) исторически меняет .github/protected без подписи Claude. Безопасный merge main уже сделан [8a82da0](https://github.com/mpaykin1/meta6-lab/commit/8a82da03579ebfcb56127404e4e4f3acf0c7d9c6); историю не переписывать, ядро не ослаблять. Нужна подпись/решение Claude; до этого не сливать. | 2026-11-16 |
+| #326 | lab/ink-sky-viaduct-20261115 | ЯДРО: [META GAMES guard FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43847655179) — исходный [commit ff586b3](https://github.com/mpaykin1/meta6-lab/commit/ff586b34283cb369cd4e412f6b17128c632fe16d) исторически меняет .github/protected без подписи Claude. Безопасный merge main [f241daa](https://github.com/mpaykin1/meta6-lab/commit/f241daa264377ba448996cbd9f8f0ab028b6a847) сделан; новый INK-прогон [PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43847655288). Нужна подпись/решение Claude; не сливать. | 2026-11-16 |
+
 
 | #208 | `lab/ashen-path-asset-pack-restore-1109` | **НУЖЕН CLAUDE:** источник владельца `reference/ashen-path-asset-pack/index.html` идентичен оригиналу (Git blob `a5911f6d0a0e36fc4fc0ad581be071dfb6d7882c`), но [KONTUR FAIL 42799091174](https://github.com/mpaykin1/meta6-lab/actions/runs/42799091174) отклоняет исходный `LEGACY_LIGHTS` (К4.1). Не менять авторские байты и защищённый `scripts/kontur/guard.mjs` силами толкача; Claude должен определить безопасное исключение с ловушками и получить зелёные проверки **до** merge. [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208), HEAD `ad81a3d4196a19e81a50a60a3dd4faaef904ced6`; на этом SHA **зелёного KONTUR нет**. | 2026-11-12 |
 

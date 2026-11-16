@@ -2,6 +2,20 @@
 // Lightweight Canvas rendering; no textures, fonts, remote code or dependencies.
 const W=640,H=360;
 const hash=n=>{const v=Math.sin(n*127.1+17.3)*43758.5453;return v-Math.floor(v);};
+// Smoothed seeded value noise: independent drifting eddies, no repeating sine stripes.
+const smooth=u=>u*u*(3-2*u);
+function noise1(x,seed){
+  const cell=Math.floor(x);
+  const u=smooth(x-cell);
+  const a=hash(cell*17.13+seed*83.91);
+  const b=hash((cell+1)*17.13+seed*83.91);
+  return a+(b-a)*u;
+}
+function fogContour(x,wind,layer){
+  return (noise1((x+wind)*0.011,layer+4)-0.5)*14+
+    (noise1((x-wind*0.7)*0.037,layer+17)-0.5)*7+
+    (noise1((x+wind*1.3)*0.084,layer+39)-0.5)*2.5;
+}
 const fade=(g,x,y,rx,color,alpha)=>{
   const grad=g.createRadialGradient(x,y,2,x,y,rx);
   grad.addColorStop(0,color.replace('ALPHA',String(alpha)));
@@ -54,8 +68,7 @@ export function drawAmbience(g,t,flash=0,flashX=320){
     g.beginPath();
     g.moveTo(-50,H);
     for(let x=-50;x<=690;x+=14){
-      const h=Math.sin((x+shift)*0.019+layer*1.7)*4+
-        Math.sin((x-shift*0.7)*0.047+layer)*2;
+      const h=fogContour(x,shift,layer);
       g.lineTo(x,y+h);
     }
     g.lineTo(690,H);g.closePath();
@@ -82,9 +95,10 @@ export function drawForeground(g,t,flash=0){
   g.fillStyle='#080b10de';
   g.beginPath();
   g.moveTo(0,H);
-  for(let x=0;x<=W;x+=9){
+  for(let x=0;x<=W;){
     const y=350+hash(x*11+5)*8;
     g.lineTo(x,y);
+    x+=5+Math.floor(hash(x*7+23)*11);
   }
   g.lineTo(W,H);g.fill();
   for(let i=0;i<69;i++){

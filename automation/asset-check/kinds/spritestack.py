@@ -101,12 +101,16 @@ def check(root: Path, r) -> set[str]:
         if count < min_slices:
             r.add("SS5", "HARD", asset_id, f"{count} срезов, эталон роли >= {min_slices}",
                   "Объём стопкой не проще принятого JET / CLOUDS / TIERS")
-        changing = sum(not np.array_equal(masks[i], masks[i + 1])
-                       or not np.array_equal(planes[i], planes[i + 1])
+        changing = sum(not np.array_equal(planes[i], planes[i + 1])
                        for i in range(count - 1))
+        changed_shape = sum(not np.array_equal(masks[i], masks[i + 1])
+                            for i in range(count - 1))
         if changing < max(2, int((count - 1) * .35)):
             r.add("SS6", "HARD", asset_id, f"различаются лишь {changing}/{count-1} соседних срезов",
                   "Измени высоту, массу, цвет, крышу/кабину/части; не копируй слои")
+        if changed_shape < max(2, int((count - 1) * .25)):
+            r.add("SS6", "HARD", asset_id, f"форма меняется лишь на {changed_shape}/{count-1} слоях",
+                  "Перестрой сечение объёма на разных высотах, не перекрашивай копии")
         union = np.any(masks, axis=0)
         area = int(union.sum())
         yy, xx = np.where(union)
@@ -141,7 +145,7 @@ def check(root: Path, r) -> set[str]:
             r.add("SS1", "HARD", asset_id, "бонус не имеет видимой пользы",
                   "Добавь benefit и действие в игре")
         r.stats.setdefault("sprite_metrics", {})[asset_id] = {
-            "slices": count, "changed_neighbors": changing,
+            "slices": count, "changed_neighbors": changing, "shape_changes": changed_shape,
             "silhouette_area": area, "edge_ratio": round(perimeter_ratio, 4),
             "colors": len(colors),
         }

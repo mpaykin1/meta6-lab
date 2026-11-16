@@ -52,3 +52,16 @@ jobs:
         env:
           BOT_GAMES: ${{ steps.scope.outputs.games }}
         run: node scripts/meta-bot/run.mjs $BOT_GAMES
+
+  veil-landing-pulse:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify visible jump landing projection
+        run: node scripts/lab/verify-veil-landing-pulse.mjs
+      - name: Kill all seven landing projection regressions
+        run: node scripts/lab/mutate-veil-landing-pulse.mjs

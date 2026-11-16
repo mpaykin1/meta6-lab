@@ -293,7 +293,10 @@ def _check_mesh_quality(g, path, binc, root, rel, report):
                 report.add("M12", "HARD", where, "NaN/Infinity в координатах вершин",
                            "Исправить геометрию до экспорта")
                 continue
-            bounds.setdefault(mesh_id, []).append((pos.min(axis=0), pos.max(axis=0)))
+            step = max(1, len(pos) // 1024)
+            bounds.setdefault(mesh_id, []).append((
+                pos.min(axis=0), pos.max(axis=0), pos[::step]
+            ))
             if "indices" in primitive:
                 ix = _accessor_array(g, primitive["indices"], path, binc, root)
                 if ix is None:
@@ -455,7 +458,7 @@ def _world_bounds(g, mesh_bounds):
             mat[:3, 3] = node.get("translation", [0, 0, 0])
         mat = parent @ mat
         if "mesh" in node:
-            for low, high in mesh_bounds.get(node["mesh"], []):
+            for low, high, samples in mesh_bounds.get(node["mesh"], []):
                 corners = np.array([list(p) + [1.0] for p in itertools.product(
                     (low[0], high[0]), (low[1], high[1]), (low[2], high[2])
                 )])
@@ -463,10 +466,15 @@ def _world_bounds(g, mesh_bounds):
                 if np.isfinite(world).all():
                     minimum = np.minimum(minimum, world.min(axis=0))
                     maximum = np.maximum(maximum, world.max(axis=0))
-                    xz = world[:, (0, 2)]
-                    sample_count += len(xz)
-                    xz_sum += xz.sum(axis=0)
-                    xz_outer += xz.T @ xz
+                    # Actual vertices catch planar shapes pre-rotated in mesh space.
+                    # Bounding-box corners alone would invent false thickness.
+                    homogeneous = np.column_stack((samples, np.ones(len(samples))))
+                    world_samples = (mat @ homogeneous.T).T[:, :3]
+                    if np.isfinite(world_samples).all():
+                        xz = world_samples[:, (0, 2)]
+                        sample_count += len(xz)
+                        xz_sum += xz.sum(axis=0)
+                        xz_outer += xz.T @ xz
         updated = ancestors | {ix}
         stack.extend((child, mat, updated) for child in node.get("children", []))
     if not np.isfinite(minimum).all() or sample_count < 2:

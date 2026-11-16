@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Небесный пилот — сравнение срезов</title><style>
+:root{color-scheme:dark;font:14px system-ui}body{margin:0;background:#061831;color:#dce6ee}
+header{padding:18px 4vw;background:#102d4d;position:sticky;top:0;z-index:10}h1{margin:0;font-size:19px}
+p{margin:6px 0}main{padding:14px 3vw;display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:12px}
+article{background:#132d47;border:1px solid #3c5b77;padding:8px;border-radius:8px}
+article strong{display:block;font-size:13px;min-height:34px}canvas{display:block;width:100%;height:auto;image-rendering:pixelated}
+small{display:block;color:#9db1c1}iframe{width:100%;height:350px;border:1px solid #40617f}
+</style></head><body><header><h1>Сравнение: 20 новых ассетов · 3 эталона</h1>
+<p>Каждый объект показан отдельно, без морского фона. Вращение камеры имитирует настоящий полёт.</p></header>
+<main id="grid"></main>
+<section style="padding:12px 3vw"><h2>Оригинальный эталон, только для просмотра</h2>
+<iframe src="../../../../reference/nebesny-pilot/index.html" loading="lazy" title="Оригинальная игра"></iframe></section>
+<script>
+'use strict';
+const ITEMS=[
+['rangerJet','Реактивный разведчик',13,'Самолёт'],['cargoPlane','Грузовой самолёт',13,'Самолёт'],
+['rescueHelicopter','Спасательный вертолёт',13,'Вертолёт'],['skyAirship','Дирижабль',13,'Дирижабль'],
+['stormLighthouse','Маяк',8,'Маяк'],['sailingShip','Корабль',13,'Корабль'],
+['villageIsland','Деревенский остров',6,'Остров'],['volcanicIsland','Вулкан',6,'Остров'],
+['oceanWhale','Кит',9,'Существо'],['migratingBirds','Стая птиц',8,'Существо'],
+['hotAirBalloon','Воздушный шар',13,'Транспорт'],['thunderCloud','Грозовая туча',8,'Погода'],
+['speedRing','Кольцо ускорения',8,'Бонус'],['repairRing','Кольцо ремонта',8,'Бонус'],
+['scoreRing','Кольцо комбо',8,'Бонус'],['seaBuoy','Буй',6,'Предмет'],
+['sunkenRuins','Подводные руины',8,'Мир'],['coralReef','Кораллы',6,'Мир'],
+['seaMist','Морской туман',6,'Эффект'],['wakeSpray','Брызги',6,'Эффект']
+];
+const el=document.getElementById('grid');
+const canvases=[],visible=new Set(),images={};
+function add(id,name,count,kind){
+ const box=document.createElement('article'),caption=document.createElement('strong'),small=document.createElement('small');
+ caption.textContent=name;small.textContent=kind+' · '+count+' срезов';
+ const canvas=document.createElement('canvas');canvas.width=180;canvas.height=170;
+ box.append(caption,canvas,small);el.appendChild(box);
+ canvases.push({id,canvas,count,kind});visible.add(id);
+}
+ITEMS.forEach(([id,n,c,k])=>add(id,n,c,k));
+const io=new IntersectionObserver(entries=>{for(const e of entries){
+ const id=e.target.dataset.id;if(e.isIntersecting)visible.add(id);else visible.delete(id)
+}},{rootMargin:'80px'});
+canvases.forEach(({id,canvas})=>{canvas.dataset.id=id;io.observe(canvas);const img=new Image();
+ img.src='../stacks/'+id+'.png';images[id]=img});
+let t=0;function render(){
+ t+=.013;
+ for(const o of canvases){if(!visible.has(o.id))continue;
+ const x=o.canvas.getContext('2d');x.imageSmoothingEnabled=false;x.clearRect(0,0,180,170);
+ x.fillStyle='#16416b';x.fillRect(4,9,172,152);
+ x.save();x.translate(90,92);x.rotate(Math.sin(t*.2)*.17);
+ x.fillStyle='rgba(4,16,37,.28)';x.beginPath();x.ellipse(5,35,41,16,0,0,Math.PI*2);x.fill();
+ const im=images[o.id];if(im.complete&&im.naturalWidth===o.count*32){
+   for(let i=0;i<o.count;i++)x.drawImage(im,i*32,0,32,32,-52,-50-i*2,104,104);
+ }x.restore();
+ }
+ requestAnimationFrame(render)
+}requestAnimationFrame(render);
+</script></body></html>

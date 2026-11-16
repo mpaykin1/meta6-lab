@@ -1,6 +1,6 @@
 {
   "format": "htmlpack/1",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "name": "Туманные шпили — живой мир + 6 ассетов",
   "base": "reference/tumannye-shpili",
   "reference_count": 26,
@@ -21,7 +21,8 @@
     "source": "reference/tumannye-shpili/index.html",
     "branch": "lab/assets-tumannye-shpili-20261114-2338",
     "method": "unmodified reference scene extended with procedural meshes and animation",
-    "repair_date": "2026-11-14"
+    "repair_date": "2026-11-16",
+    "visual_revision": "d896ae44302b90fc472e768f06e1dab871c05dd4"
   },
   "content_flags": {
     "real_persons": [],

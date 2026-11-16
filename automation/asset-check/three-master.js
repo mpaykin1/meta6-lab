@@ -17,6 +17,7 @@ export function inspectObject3D(root, options = {}) {
   const textureSet = new Set();
   const lo = [Infinity, Infinity, Infinity];
   const hi = [-Infinity, -Infinity, -Infinity];
+  const xzMoments = { n: 0, x: 0, z: 0, xx: 0, zz: 0, xz: 0 };
   const role = options.role || 'prop';
   function add(id, severity, where, problem, fix) {
     findings.push({ id, severity, where, problem, fix });
@@ -178,6 +179,24 @@ export function inspectObject3D(root, options = {}) {
         }
       }
     }
+    // Sample real vertices, not only bounding-box corners. The resulting
+    // horizontal covariance reveals flat billboards even after Y rotation.
+    const verts = geo.getAttribute('position');
+    if (role === 'character' && verts && !mesh.isInstancedMesh) {
+      const stride = Math.max(1, Math.floor(verts.count / 2500));
+      for (let i = 0; i < verts.count; i += stride) {
+        const x = verts.getX(i), y = verts.getY(i), z = verts.getZ(i);
+        const wx = m[0] * x + m[4] * y + m[8] * z + m[12];
+        const wz = m[2] * x + m[6] * y + m[10] * z + m[14];
+        if (!Number.isFinite(wx) || !Number.isFinite(wz)) continue;
+        xzMoments.n++;
+        xzMoments.x += wx;
+        xzMoments.z += wz;
+        xzMoments.xx += wx * wx;
+        xzMoments.zz += wz * wz;
+        xzMoments.xz += wx * wz;
+      }
+    }
   }
   root.traverse(mesh => {
     if (!mesh.isMesh || mesh.userData?.qualityIgnore || !mesh.geometry) return;
@@ -234,7 +253,19 @@ export function inspectObject3D(root, options = {}) {
     const size = lo.map((v, i) => hi[i] - v);
     metrics.bounds = { min: lo, max: hi, size };
     const depth = size[2], width = size[0];
-    if (role === 'character' && width > 0 && depth / width < .065) {
+    let flatness = 1;
+    if (xzMoments.n >= 3) {
+      const n = xzMoments.n;
+      const vx = Math.max(0, xzMoments.xx / n - (xzMoments.x / n) ** 2);
+      const vz = Math.max(0, xzMoments.zz / n - (xzMoments.z / n) ** 2);
+      const vxz = xzMoments.xz / n - (xzMoments.x * xzMoments.z) / (n * n);
+      const delta = Math.sqrt((vx - vz) ** 2 + 4 * vxz ** 2);
+      const smaller = Math.max(0, (vx + vz - delta) / 2);
+      const larger = Math.max(1e-20, (vx + vz + delta) / 2);
+      flatness = Math.sqrt(smaller / larger);
+    }
+    metrics.sideFlatness = flatness;
+    if (role === 'character' && width > 0 && (depth / width < .065 || flatness < .065)) {
       add('Q17', 'HARD', 'silhouette', 'Персонаж почти плоский сбоку',
         'Достроить глубину головы, туловища, конечностей и шарниров');
     }

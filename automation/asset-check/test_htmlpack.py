@@ -100,6 +100,7 @@ class HtmlPackTraps(unittest.TestCase):
         harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
         wake = harness.split("window.__AC_WAKE__=id=>", 1)[1].split("window.__AC_APPLY__=", 1)[0]
         self.assertIn("if(id==='petals'){", wake)
+        self.assertIn("petals.visible=true;", wake)
         self.assertIn("explode();", wake)
         self.assertIn("puffs.visible=false;", wake)
         self.assertIn("sparks.visible=false;", wake)

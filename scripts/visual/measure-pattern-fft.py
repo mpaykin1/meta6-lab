@@ -85,16 +85,22 @@ def main():
         current = data["peak"]
         if old is not None:
             previous = old["peak"]
-            print(f"INK FFT BEFORE={previous:.6f}, AFTER={current:.6f}, "
+            print(f"INK FFT {name} BEFORE={previous:.6f}, AFTER={current:.6f}, "
                   f"DELTA={previous - current:.6f}, FIXED_LIMIT={CUTOFF:.2f}")
-            if previous < CUTOFF:
-                failures.append(name + ": old periodic reference was not detected")
-            if current >= previous * .85:
-                failures.append(name + ": improvement smaller than 15%")
+            # Ordinary world views can show less than one cycle on a single
+            # wall/tree. Their after-score is still checked, but a full-surface
+            # negative control is needed to prove the original periodic waves.
+            if name == "ink-shader-probe":
+                if previous < CUTOFF:
+                    failures.append(name + ": old periodic reference was not detected")
+                if current >= previous * .85:
+                    failures.append(name + ": improvement smaller than 15%")
         else:
             print(f"FFT {name}: score={current:.6f}, limit={CUTOFF:.2f}")
         if current >= CUTOFF:
             failures.append(name + ": periodic spectral peak above fixed limit")
+    if "ink" in after and "ink-shader-probe" not in after:
+        failures.append("INK shader-wide spectral negative control is missing")
     Path(args.output).write_text(json.dumps(report, indent=2), encoding="utf-8")
     if failures:
         for failure in failures:

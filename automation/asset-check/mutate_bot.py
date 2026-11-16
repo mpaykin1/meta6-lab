@@ -22,6 +22,10 @@ MUTANTS = [
     ("kinds/audio.py", "if clip > 0.001:", "if False:"),
     ("kinds/model3d.py", "if tris > TRI_HARD:", "if False:"),
     ("kinds/model3d.py", "if length != len(data):", "if False:"),
+    ("kinds/model3d.py", "if not np.isfinite(pos).all():", "if False:"),
+    ("kinds/model3d.py", "if bad_uv > max(3, len(tris) * .02):", "if False:"),
+    ("kinds/model3d.py", "or side_flatness < .065", "or False"),
+
     ("kinds/model3d.py", 'if g.get("skins") and not anims:', "if False:"),
     ("kinds/skin.py", "if pairs and len(set(pairs))", "if False and len(set(pairs))"),
     ("kinds/skin.py", "miss = [k for k in REQ_KINDS if k not in kinds]", "miss = []"),

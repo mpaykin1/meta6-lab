@@ -438,6 +438,87 @@ class KindTraps(unittest.TestCase):
         self.zakaz_text(d, [self.titem("lilyPads")], source={"type": "guess"})
         self.assertIn("Z1", ids(d))
 
+    # --- SPRITE STACK: isolated slice geometry and visual-quality traps ---
+    def make_sprite_stack(self, count=13):
+        from PIL import ImageDraw
+        (self.d / "stacks").mkdir(exist_ok=True)
+        sheet = Image.new("RGBA", (32 * count, 32))
+        for i in range(count):
+            piece = Image.new("RGBA", (32, 32))
+            d = ImageDraw.Draw(piece)
+            inset = min(5, i // 3)
+            d.polygon([(16, 3 + i % 3), (13, 11), (3 + inset, 22),
+                       (5 + inset, 25), (27 - inset, 25), (29 - inset, 22),
+                       (19, 11)], fill="#a32b43")
+            d.rectangle((14, 5, 18, 27 - i % 4), fill="#303e53")
+            d.rectangle((15, 8 + i % 3, 17, 14 + i % 3), fill="#8de8ee")
+            d.rectangle((9, 22, 12, 24), fill="#ffd08a")
+            d.rectangle((21, 22, 23, 24), fill="#efce63")
+            sheet.paste(piece, (32 * i, 0))
+        sheet.save(self.d / "stacks/rangerJet.png")
+        stack = {"format": "mg-spritestack/1", "game": "nebesny-pilot",
+                 "license": {"type": "original", "author": "META GAMES", "commercial": True},
+                 "provenance": {"tool": "procedural-test", "date": "2026-11-16"},
+                 "content_flags": {"real_persons": [], "brands": [], "political": False},
+                 "assets": {"rangerJet": {"file": "stacks/rangerJet.png",
+                                          "slice": [32, 32], "count": count,
+                                          "pitch_px": 1, "role": "vehicle",
+                                          "label_ru": "Разведчик", "spawn": "flight"}}}
+        (self.d / "stack.json").write_text(json.dumps(stack), "utf-8")
+        (self.d / "index.html").write_text(
+            '<script>window.__STACK_PROBE__={setHidden:function(){}};'
+            'const rangerJet="vehicle";</script>', "utf-8")
+        return stack
+
+    def test_spritestack_clean_passes(self):
+        self.make_sprite_stack()
+        r = cp.check(self.d)
+        self.assertIn("spritestack", r.kinds)
+        self.assertEqual(r.hard(), [], r.hard())
+
+    def test_SS2_wrong_strip_width(self):
+        stack = self.make_sprite_stack()
+        stack["assets"]["rangerJet"]["slice"] = [31, 32]
+        (self.d / "stack.json").write_text(json.dumps(stack), "utf-8")
+        self.assertIn("SS2", ids(self.d))
+
+    def test_SS3_blurred_alpha(self):
+        self.make_sprite_stack()
+        p = self.d / "stacks/rangerJet.png"
+        im = Image.open(p).convert("RGBA")
+        im.putpixel((15, 12), (120, 190, 200, 100))
+        im.save(p)
+        self.assertIn("SS3", ids(self.d))
+
+    def test_SS5_too_few_slices(self):
+        self.make_sprite_stack(count=4)
+        self.assertIn("SS5", ids(self.d))
+
+    def test_SS6_identical_slices(self):
+        self.make_sprite_stack()
+        p = self.d / "stacks/rangerJet.png"
+        im = Image.open(p).convert("RGBA")
+        tile = im.crop((0, 0, 32, 32))
+        for i in range(13):
+            im.paste(tile, (i * 32, 0))
+        im.save(p)
+        self.assertIn("SS6", ids(self.d))
+
+    def test_SS7_primitive_single_color(self):
+        self.make_sprite_stack()
+        p = self.d / "stacks/rangerJet.png"
+        im = Image.open(p).convert("RGBA")
+        a = np.asarray(im).copy()
+        a[a[..., 3] != 0, :3] = (180, 50, 50)
+        Image.fromarray(a).save(p)
+        self.assertIn("SS7", ids(self.d))
+
+    def test_SS8_missing_in_game(self):
+        self.make_sprite_stack()
+        (self.d / "index.html").write_text(
+            '<script>window.__STACK_PROBE__={setHidden:function(){}};</script>', "utf-8")
+        self.assertIn("SS8", ids(self.d))
+
     # --- смешанный пак: все виды сразу ---
     def test_mixed_pack_runs_every_kind(self):
         make_glb(self.d / "m.glb")

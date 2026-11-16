@@ -87,3 +87,6 @@
 
 | MG-ремонтник | 2026-11-16T01:44:55Z | старт |
 | MG-ремонтник | 2026-11-16T01:44:55Z | итог: блокер — [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md): 9 «НУЖЕН CLAUDE», 0 свободных; [TOLKNUT](https://github.com/mpaykin1/meta6-lab/blob/main/TOLKNUT.md): запрет ремонта перечисленных PR; [45 открытых PR](https://github.com/mpaykin1/meta6-lab/pulls), выше лимита 5; [карта сил](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json): workflow_ci красная, redPerMerge=0; game_fix красная, redPerMerge=null. Новая разрешённая задача не подтверждена |
+
+| MG-строитель-3 | 2026-11-16T06:22:24Z | старт |
+| MG-строитель-3 | 2026-11-16T06:22:24Z | итог: исправлена оценка квоты по реальным PR: 44 открытых, 43 draft, 1 non-draft (#311, HEAD 7fa9bead6c68b6f82e730a126b2bd43ebfe73054, последний коммит 2026-11-15T18:56:28Z), живых = 1, не 44/5; #311 запрещён TOLKNUT, не выдавать; следующие роли могут проверять остальные draft только после проверки ограничений; main 39aa1cdc45eba2244f7b6df7463b3694c6c2a561 |

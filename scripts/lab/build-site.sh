@@ -4,7 +4,7 @@
 set -euo pipefail
 OUT="${1:-_site}"
 rm -rf "$OUT"; mkdir -p "$OUT"
-EXCL=(--exclude='.git/' --exclude='.github/' --exclude='node_modules/' --exclude='_site/' --exclude='**/evidence/')
+EXCL=(--exclude='.git/' --exclude='.github/' --exclude='node_modules/' --exclude='_site/' --exclude='.lab-preview-cache/' --exclude='**/evidence/')
 rewrite() { # абсолютные ссылки meta6 -> meta6-lab
   grep -rlI --include='*.html' --include='*.js' --include='*.mjs' --include='*.json' --include='*.css' --include='*.xml' --include='*.webmanifest' \
     -e 'mpaykin1.github.io/meta6/' -e '/meta6/' "$1" 2>/dev/null | while read -r f; do
@@ -25,17 +25,26 @@ git fetch --no-tags origin '+refs/heads/lab/*:refs/remotes/origin/lab/*' >/dev/n
 for ref in $(git for-each-ref --format='%(refname:strip=3)' 'refs/remotes/origin/lab/'); do
   name="${ref#lab/}"; safe="${name//\//-}"
   [[ "$safe" =~ ^[A-Za-z0-9._-]+$ ]] || { echo "skip unsafe branch $ref"; continue; }
-  wt="$(mktemp -d)"; git worktree add -q --detach "$wt" "origin/$ref"
   dest="$OUT/preview/$safe"; mkdir -p "$dest"
   base="$(git merge-base origin/main "origin/$ref" 2>/dev/null || echo origin/main)"
+  # Fast path (owner 15.11.2026: publishing must be quick): a preview whose branch and base did not change
+  # is reused from the cache of the previous build instead of being rebuilt.
+  key="$(git rev-parse "origin/$ref")-$(git rev-parse "$base")-$(git rev-parse origin/main:scripts/lab/build-site.sh 2>/dev/null || echo x)"
+  if [[ -n "${PREVIEW_CACHE:-}" && -f "$PREVIEW_CACHE/$safe/.key" && "$(cat "$PREVIEW_CACHE/$safe/.key")" == "$key" ]]; then
+    rsync -a --exclude='.key' "$PREVIEW_CACHE/$safe/" "$dest/"; echo "$safe" >> "$OUT/.lab-previews"; echo "reuse preview $safe"; continue
+  fi
+  wt="$(mktemp -d)"; git worktree add -q --detach "$wt" "origin/$ref"
   tops="$( (git diff --name-only "$base" "origin/$ref"; echo meta-games/x) | awk -F/ 'NF>1{print $1}' | sort -u)"
   for t in $tops; do [ -e "$wt/$t" ] && rsync -a "${EXCL[@]}" "$wt/$t" "$dest/"; done
-  git diff --name-only "$base" "origin/$ref" | awk -F/ 'NF==1' | while read -r f; do [ -f "$wt/$f" ] && cp "$wt/$f" "$dest/"; done
+  git diff --name-only "$base" "origin/$ref" | awk -F/ 'NF==1' | while read -r f; do [ -f "$wt/$f" ] && cp "$wt/$f" "$dest/" || true; done
   rewrite "$dest"
   grep -rlI 'mpaykin1.github.io/meta6-lab/' "$dest" 2>/dev/null | xargs -r sed -i "s#mpaykin1\.github\.io/meta6-lab/#mpaykin1.github.io/meta6-lab/preview/$safe/#g"
   git worktree remove --force "$wt"
   echo "$safe" >> "$OUT/.lab-previews"
+  if [[ -n "${PREVIEW_CACHE:-}" ]]; then rm -rf "$PREVIEW_CACHE/$safe"; mkdir -p "$PREVIEW_CACHE/$safe"; rsync -a "$dest/" "$PREVIEW_CACHE/$safe/"; echo "$key" > "$PREVIEW_CACHE/$safe/.key"; fi
 done
+# drop cached previews of deleted branches
+if [[ -n "${PREVIEW_CACHE:-}" && -d "$PREVIEW_CACHE" ]]; then for d in "$PREVIEW_CACHE"/*/; do n="$(basename "$d")"; grep -qx "$n" "$OUT/.lab-previews" || rm -rf "$d"; done; fi
 du -sh "$OUT"
 
 # Legacy root URLs sometimes point to games that exist only in one lab preview.

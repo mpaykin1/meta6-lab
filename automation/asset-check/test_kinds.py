@@ -504,6 +504,25 @@ class KindTraps(unittest.TestCase):
         im.save(p)
         self.assertIn("SS6", ids(self.d))
 
+    def test_SS6_only_three_real_slice_transitions(self):
+        """Mask complexity passes (>2 changes), but slice-change density must still fail.
+        This trap is indispensable: otherwise disabling the neighbor-change
+        check survives because the existing identical-layer trap also trips SS6.
+        """
+        self.make_sprite_stack()
+        p = self.d / "stacks/rangerJet.png"
+        im = Image.open(p).convert("RGBA")
+        for start, stop in ((0, 4), (4, 7), (7, 10), (10, 13)):
+            template = im.crop((start * 32, 0, (start + 1) * 32, 32))
+            for i in range(start + 1, stop):
+                im.paste(template, (i * 32, 0))
+        im.save(p)
+        issues = [issue for issue in cp.check(self.d).hard()
+                  if issue["where"] == "rangerJet"]
+        self.assertEqual({issue["id"] for issue in issues}, {"SS6"},
+                         issues)
+        self.assertTrue(any("различаются" in issue["problem"] for issue in issues), issues)
+
     def test_SS6_same_shape_different_colors(self):
         self.make_sprite_stack()
         p = self.d / "stacks/rangerJet.png"

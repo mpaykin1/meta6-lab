@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-16T10:19:26.619Z | МГЛ: 7323a4a6ea906ceeb021b8abc4e29f3abf8b0bf5 | МГ: b6726b7690ab85059ea7a38d4ee684e49cef1730 | https://github.com/mpaykin1/meta6-lab/actions/runs/43847672968
+UTC: 2026-11-16T10:20:44.861Z | МГЛ: 936f25571b0cfaccba35f6af392cd982ba647956 | МГ: b6726b7690ab85059ea7a38d4ee684e49cef1730 | https://github.com/mpaykin1/meta6-lab/actions/runs/43847864589
 ## ПРОВЕРИТЬ CLAUDE
 - PR #321 00c22fba0c1fbcf71a535ddd9342da286e875b27: .github/workflows/ink-raven-3d.yml
 - PR #330 17690b22fcbf4893451d7d7ec354f133abd6b738: .github/workflows/lab-bot-focused.yml
@@ -35,13 +35,13 @@ L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 P1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 ## PR МГЛ
-открыто: 44 | конфликт: 23 | слито: 55 | закрыто: 87
+открыто: 44 | конфликт: нет данных | слито: 55 | закрыто: 87
 #321 INK · Летящий ворон — объёмная 3D-модель и анимация в лесу | 00c22fba0c1fbcf71a535ddd9342da286e875b27
 #334 INK · Падальщик: зарегистрировать новый эталон в AGENTS, ink | 27422c8b6563e2a8d2be46df1c078a9f32feef59
 #333 INK · Падальщик — OWNER PASS: добавить 3D-эталон в МГЛ для п | 960bab97a6c4a9c5e7cca673bbcbfca43e0f0d66
 ещё 52: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2376 коммитов | нет данных
+МГЛ: 2378 коммитов | нет данных
 МГ: 34 коммитов | .github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

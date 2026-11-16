@@ -127,11 +127,14 @@ window.__AC_WAKE__=id=>{
   // The real accepted explosion lives for only a brief interval; trigger it
   // identically in the temporary reference and candidate copies.
   explode();
+  puffs.visible=true;
   petals.visible=false;
   sparks.visible=false;
   flash=0;glitch=0;shake=0;
  }
  if(id==='petals'){
+  // The explosion selection must not leave the accepted petal mesh hidden.
+  petals.visible=true;
   // The original blast spawns puffs and sparks over the small flying shards.
   // Exclude those OTHER effects in the ephemeral reference/candidate browser
   // copies, so the same shown-minus-hidden mask measures the petals themselves.

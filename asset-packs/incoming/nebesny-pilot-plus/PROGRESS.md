@@ -4,7 +4,7 @@
 
 **Заказ:** 20 PNG-ассетов из 20, качество не утверждать до проверки HARD=0.
 
-**Бот:** 2.6.0; новый вид `spritestack`, 8 тестовых ловушек, 6 новых мутантов.
+**Бот:** 2.6.1; новый вид `spritestack`, 9 тестовых ловушек, 6 новых мутантов.
 
 **Партии:**
 - 1: `6f63ea2bacdfefaef9d9eae44f68652f0fbff85e` — rangerJet, cargoPlane, rescueHelicopter, skyAirship
@@ -17,4 +17,4 @@
 
 **Сравнение:** [20 новых PNG vs три эталонных мотива](https://github.com/mpaykin1/meta6-lab/commit/e1e0b158844df0066827b23abff9cde3a87855b6), [интерактивное увеличение каждого ассета](./_check/compare.html). Для JET/CLOUD/ISLAND на статичном листе показаны реконструкции мотивов эталона; сам оригинал доступен в отдельном iframe для реального сопоставления.
 
-**Текущая проверка:** [ASSET CHECK](https://github.com/mpaykin1/meta6-lab/actions/runs/43909263886) — запущена, результат ещё не подтверждён. [PR #343](https://github.com/mpaykin1/meta6-lab/pull/343) — черновик до качества.
+**Текущая проверка:** [ASSET CHECK #43909263886](https://github.com/mpaykin1/meta6-lab/actions/runs/43909263886) — 79/79 тестов, 41/42 мутантов (слабая ловушка SS6); [поправлена независимая ловушка](https://github.com/mpaykin1/meta6-lab/commit/b8569e5895c926688e9f6d0bd742f64cbe982a62); ожидается повторная приёмка. [PR #343](https://github.com/mpaykin1/meta6-lab/pull/343) — черновик до качества.

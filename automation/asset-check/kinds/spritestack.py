@@ -135,6 +135,11 @@ def check(root: Path, r) -> set[str]:
             r.add("SS7", "HARD", asset_id,
                   f"примитивный силуэт/фактура: {len(colors)} цветов, кромка {perimeter_ratio:.3f}",
                   "Добавь реальную конструкцию, вложенные детали, неровную форму")
+        if meta.get("assembly") == "flock" and float(np.median([
+                mask.sum() / max(1, area) for mask in masks])) > .42:
+            r.add("SS10", "HARD", asset_id,
+                  "стая повторяется целиком на каждом 3D-срезе, птицы сливаются в один узор",
+                  "Разнести отдельные силуэты птиц по срезам и собрать в объёмную стаю")
         if count >= 4 and np.array_equal(masks[0], masks[-1]):
             r.add("SS6", "SOFT", asset_id, "верх и низ имеют одинаковый силуэт",
                   "Меняй форму с высотой")

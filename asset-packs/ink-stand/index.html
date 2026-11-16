@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>INK · стенд ассетов</title><link rel="icon" href="data:,">
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#efece2;touch-action:none;font-family:system-ui,sans-serif}
+canvas{position:fixed;inset:0;display:block;width:100%;height:100%;touch-action:none}
+#vig{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 43%,transparent 35%,#4b574b1a 100%)}
+.r{position:fixed;top:max(18px,env(safe-area-inset-top));width:44px;height:44px;border:1px solid #364b3d25;border-radius:50%;background:#f7f3e7d9;color:#344640;font:20px Georgia;cursor:pointer;z-index:9}
+#menuBtn{right:max(18px,env(safe-area-inset-right))}#prev{left:18px}#next{left:70px}
+#menu{position:fixed;right:18px;top:74px;width:260px;max-height:calc(100dvh - 110px);overflow:auto;padding:18px;box-sizing:border-box;border-radius:14px;background:#f7f3e7f2;z-index:9;font:12px system-ui;color:#44534b}
+#menu[hidden]{display:none}#menu button{display:block;width:100%;text-align:left;margin:4px 0;padding:8px;border:1px solid #3c504018;border-radius:7px;background:transparent;color:#44534b;cursor:pointer}
+#menu button[aria-pressed=true]{background:#405d4b12;border-color:#405d4b55}#menu h2{font:italic 18px Georgia;margin:6px 0}
+#err{position:fixed;inset:auto 0 20px;text-align:center;color:#8a3b2b;font:13px system-ui;z-index:9}
+</style>
+<script type="importmap">{"imports":{"three":"../../reference/ink-fallen-guardian/three.module.js"}}</script>
+</head><body>
+<div id="vig"></div>
+<button id="prev" class="r" aria-label="Предыдущий ассет">‹</button><button id="next" class="r" aria-label="Следующий ассет">›</button>
+<button id="menuBtn" class="r" aria-label="Меню" aria-expanded="false">☰</button>
+<section id="menu" hidden><h2>Ассеты пака</h2><div id="list"></div><h2>Вид</h2><div id="modes"></div><p id="info"></p></section>
+<div id="err" hidden></div>
+<script type="module" src="./stand.js"></script>
+</body></html>

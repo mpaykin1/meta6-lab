@@ -30,6 +30,9 @@ export function verify(c) {
   assert.equal(c.quota(six, 5, t).reject, false, 'The oldest five still pass when six exist');
   assert.equal(c.quota(six, 6, t).reject, true, 'The sixth live PR is red');
   assert.match(c.quota(six, 6, t).message, /#1.*#5/, 'Error tells which old PRs to finish');
+  const parked = six.map((p, i) => i === 0 ? {...p, draft: true} : p);
+  assert.equal(c.quota(parked, 6, t).reject, false, 'A draft PR does not block the queue: the sixth becomes one of five');
+  assert.match(c.quota(parked, 6, t).oldest.join(','), /^2,3,4,5,6$/, 'Oldest five skip drafts');
   const required72Hours = 72 * 60 * 60 * 1000;
   const old = {...six[0], lastCommitAt: new Date(t - required72Hours - 1000).toISOString()};
   const recent = {...six[0], lastCommitAt: new Date(t - required72Hours + 1000).toISOString()};
@@ -37,6 +40,11 @@ export function verify(c) {
   assert.equal(c.staleDecision(old, t).deleteBranch, false, 'Never delete a stale PR branch');
   assert.equal(c.staleDecision(recent, t).close, false, 'Recent PR stays open');
   assert.equal(c.staleDecision({...old, state: 'closed'}, t).close, false, 'Do not close twice');
+  const gitFiles = c.filesFromGit('A\treference/new/a.glb\nM\tscripts/x.mjs\nD\treference/old/file.glb\n',
+    '10\t0\treference/new/a.glb\n3\t2\tscripts/x.mjs\n0\t5\treference/old/file.glb\n');
+  assert.deepEqual(gitFiles.map(f => f.status), ['added', 'modified', 'removed'], 'git statuses map to GitHub statuses');
+  assert.equal(gitFiles[1].deletions, 2, 'git numstat deletions reach the old-test rule');
+  assert.throws(() => c.filesFromGit('X\tweird\n', ''), /Unknown git status/, 'Unknown git status must fail closed');
   const baseline = ['reference/old/file.glb', 'reference/old/texture.png'];
   assert.deepEqual(c.referenceGate([
     {filename: 'reference/new-world/index.html', status: 'added'},

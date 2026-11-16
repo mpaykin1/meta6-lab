@@ -26,13 +26,31 @@ MUTANTS = [
     ("kinds/skin.py", "if pairs and len(set(pairs))", "if False and len(set(pairs))"),
     ("kinds/skin.py", "miss = [k for k in REQ_KINDS if k not in kinds]", "miss = []"),
     ("check_pack.py", "if p.is_symlink() or", "if False and"),
+    ("kinds/ink.py", 'if not m.get("same_seed_same"):', "if False:"),
+    ("kinds/ink.py", "if role in VARY and not", "if False and not"),
+    ("kinds/ink.py", "if name in taken:", "if False:"),
+    ("kinds/ink.py", "if role in ALIVE and not", "if False and not"),
+    ("kinds/ink.py", 'if m["min"][1] > 0.25 and', "if False and"),
+    ("kinds/ink.py", 'if bar and role not in ("effect", "ground") and', "if False and"),
     ("check_pack.py", 'if "content_flags" not in merged:', "if False:"),
+    ("kinds/sprite2d.py", 'm.get("format") not in {"ink-pack/1", "htmlpack/1"}', 'm.get("format") != "ink-pack/1"'),
+    ("kinds/htmlpack_harness.mjs", "CAMERA_TOLERANCE=3.5", "CAMERA_TOLERANCE=1e9"),
+    ("kinds/htmlpack.py", "if missing:", "if False and missing:"),
+    ("kinds/htmlpack.py", "if any_bad_text:", "if False and any_bad_text:"),
+    ("kinds/htmlpack.py", "if isolated < .006:", "if isolated < -1:"),
+    ("kinds/htmlpack.py", "if val + 1e-6 < ref:", "if False and val + 1e-6 < ref:"),
+    ("kinds/htmlpack.py", "if ref_fps > 0 and new_fps < ref_fps * .8:", "if False:"),
+    ("kinds/htmlpack.py", "if found != CDN:", "if False:"),
+    ("kinds/htmlpack.py", "if error:", "if False and error:"),
+    ("kinds/htmlpack.py", 'if new_ids and "window.__PACK_PROBE__" not in source:', "if False:"),
 ]
 
 
 def run_tests(root: Path) -> bool:
+    import os
+    env = dict(os.environ, ASSET_CHECK_REPO=str(HERE.parents[1]))
     p = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(root), "-p", "test_*.py"],
-                       capture_output=True, text=True, cwd=root)
+                       capture_output=True, text=True, cwd=root, env=env)
     return p.returncode == 0
 
 

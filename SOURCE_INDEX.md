@@ -70,6 +70,7 @@ Source files: [3D game](observer-world-en-v7/index.html) · [historical builder]
 | **Twilight Isles 2.0.0 — эталон удержания Claude (META GAMES, 06.11.2026)** | [games/twilight-isles/index.html](games/twilight-isles/index.html) | https://mpaykin1.github.io/meta6/games/twilight-isles/ |
 | **Лучник в тумане 2.0.0 — эталон удержания Claude (META GAMES, 06.11.2026)** | [games/archer-in-the-fog/src/](games/archer-in-the-fog/src/) | https://mpaykin1.github.io/meta6/games/archer-in-the-fog/ |
 | **Broken City (Сломанный город) 1.4.0 — эталон Claude (META GAMES, 06.11.2026)** | [games/broken-city/index.html](games/broken-city/index.html) | https://mpaykin1.github.io/meta6/games/broken-city/ |
+| **Wild train: Prologue 1.0.0-mg (Ковбой на закате) — эталон Claude, без рекламы (META GAMES, 15.11.2026)** | [games/wild-train-prologue/index.html](games/wild-train-prologue/index.html) | https://mpaykin1.github.io/meta6/games/wild-train-prologue/ |
 | Оригинал RU | [observer-world/index.html](observer-world/index.html) | https://mpaykin1.github.io/meta6/observer-world/ |
 | Первый перевод EN | [observer-world-en/index.html](observer-world-en/index.html) | https://mpaykin1.github.io/meta6/observer-world-en/ |
 | **Принятый эталон V2 (PASS)** | [observer-world-en-v2/index.html](observer-world-en-v2/index.html) | https://mpaykin1.github.io/meta6/observer-world-en-v2/ |

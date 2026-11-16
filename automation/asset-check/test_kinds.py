@@ -258,6 +258,84 @@ class KindTraps(unittest.TestCase):
         self.assertIn("abyss", r.kinds)
         self.assertTrue(any(i["id"].startswith("AB:") for i in r.hard()))
 
+    # --- INK: процедурные ассеты акварельного мира (ink-pack/1) ---
+    def ink_pack(self, edit=None):
+        shutil.rmtree(self.d)
+        shutil.copytree(Path(__file__).parent / "fixtures" / "ink-clean", self.d)
+        if edit:
+            src = (self.d / "makers.js").read_text("utf-8")
+            for a, b in edit:
+                self.assertIn(a, src)
+                src = src.replace(a, b, 1)
+            (self.d / "makers.js").write_text(src, "utf-8")
+        return self.d
+
+    def test_ink_clean_passes(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        r = cp.check(self.ink_pack())
+        self.assertEqual(r.kinds, ["ink"])
+        self.assertEqual(r.hard(), [], r.hard())
+
+    def test_IK5_random_breaks_determinism(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK5", ids(self.ink_pack([("const r = .16 + rnd(seed, i + 1) * .14", "const r = .16 + Math.random() * .14")])))
+
+    def test_IK6_same_shape_for_every_seed(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK6", ids(self.ink_pack([("export function lilyPads(seed = 1) {", "export function lilyPads(seed = 1) {seed = 1;")])))
+
+    def test_IK4_overwrites_reference_asset(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack([("export const makers = {lilyPads,", "export const makers = {fir: lilyPads, lilyPads,")])
+        pj = json.loads((d / "pack.json").read_text("utf-8"))
+        pj["assets"]["fir"] = {"label_ru": "Ель", "role": "plant", "zone": "woodland"}
+        (d / "pack.json").write_text(json.dumps(pj), "utf-8")
+        self.assertIn("IK4", ids(d))
+
+    def test_IK2_network_forbidden(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK2", ids(self.ink_pack([("const ink = '#272c30';", "const ink = '#272c30'; const u = 'https://evil.example/x.png';")])))
+
+    def test_IK13_creature_does_not_move(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK13", ids(self.ink_pack([("g.userData.tick = t => {for (const b of bugs)", "g.userData.tick0 = t => {for (const b of bugs)")])))
+
+    def test_IK14_pickup_without_benefit(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK14", ids(self.ink_pack([("g.userData.interact = {", "g.userData.interact0 = {")])))
+
+    def test_IK10_floating_asset(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        self.assertIn("IK10", ids(self.ink_pack([("const ring = part(g, new T.TorusGeometry(.22, .06, 6, 14), '#9c9b8e', [0, .28, 0]);",
+                                                 "const ring = part(g, new T.TorusGeometry(.22, .06, 6, 14), '#9c9b8e', [0, .28, 0]); g.position.y = 2;")])))
+
+    def test_IK15_simpler_than_reference(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack([("export const makers = {lilyPads,", "export function plainBox(){const g=new T.Group();"
+                            "g.add(new T.Mesh(new T.BoxGeometry(.5,.5,.5),mat('#918872')));g.children[0].position.y=.25;"
+                            "g.userData.footprint=.3;return g;}\nexport const makers = {plainBox, lilyPads,")])
+        pj = json.loads((d / "pack.json").read_text("utf-8"))
+        pj["assets"]["plainBox"] = {"label_ru": "Ящик", "role": "prop", "zone": "city", "footprint": .3}
+        (d / "pack.json").write_text(json.dumps(pj), "utf-8")
+        self.assertIn("IK15", ids(d))
+
+    def test_custom_shader_is_allowed(self):
+        """Бот не запрещает эффекты: свой шейдер проходит, если ассет не хуже эталона."""
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack([("const glow = new T.MeshBasicMaterial({color: '#ffd095'})",
+                            "const glow = new T.ShaderMaterial({uniforms: {uT: {value: 0}}, vertexShader: 'void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}', fragmentShader: 'void main(){gl_FragColor=vec4(1.,.8,.5,1.);}'})")])
+        self.assertEqual(cp.check(d).hard(), [])
+
     # --- смешанный пак: все виды сразу ---
     def test_mixed_pack_runs_every_kind(self):
         make_glb(self.d / "m.glb")

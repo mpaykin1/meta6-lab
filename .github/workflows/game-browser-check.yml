@@ -9,6 +9,11 @@ on:
       - 'games/**'
       - 'scripts/check-game.cjs'
       - '.github/workflows/game-browser-check.yml'
+      - '.github/workflows/bez-patternov.yml'
+      - 'scripts/visual/**'
+      - 'demos/**'
+      - 'reference/**'
+      - 'shared/references/**'
   workflow_dispatch:
 
 jobs:
@@ -99,3 +104,7 @@ jobs:
                 ;;
             esac
           done < /tmp/targets
+
+  no-patterns:
+    # Existing PR-triggered workflow bootstraps the new anti-pattern check before merge.
+    uses: ./.github/workflows/bez-patternov.yml

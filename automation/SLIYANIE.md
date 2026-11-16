@@ -7,7 +7,7 @@
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
-| #234 | код | — | Каталог игр без рекламы | closed | CLAUDE: да/нет? изменение scripts/storozha/** внутри каталога; [вопрос #234](https://github.com/mpaykin1/meta6-lab/pull/234); draft |
+| #234 | код | — | Каталог игр без рекламы | closed | закрыт: без слияния; защищённое ядро не получило одобрения, исходная ветка сохранена; [PR #234](https://github.com/mpaykin1/meta6-lab/pull/234) |
 | #242 | код | — | SEO каталога | open | draft: ЖДЁТ принятый каталог [#234](https://github.com/mpaykin1/meta6-lab/pull/234) и зелёный CI/SEO |
 | #247 | код | — | Проверяющий и STOROZHA | open dirty | CLAUDE: да/нет? scripts/storozha/**; [STOROZHA FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43414460298); draft |
 | #254 | код | — | Auditor | open dirty | draft: ЖДЁТ конфликт main и CI [#254](https://github.com/mpaykin1/meta6-lab/pull/254); auditor не CORE_WORKFLOW |
@@ -21,7 +21,7 @@
 | #286 | код | — | INK рецепт | open dirty | draft: ЖДЁТ независимую проверку INK-рецепта и CI [#286](https://github.com/mpaykin1/meta6-lab/pull/286) |
 | #287 | код | — | INK v2 | open dirty | draft: ЖДЁТ отдельный визуальный PASS v2 и CI [#287](https://github.com/mpaykin1/meta6-lab/pull/287) |
 | #288 | код | — | INK stone bell | open dirty | draft: ЖДЁТ визуальный PASS колокола и CI [#288](https://github.com/mpaykin1/meta6-lab/pull/288) |
-| #278 | код | — | ТОЛКАЧ safe merge | closed | draft: ЖДЁТ результата параллельной работы в ветке 62ab7cd и свежего CI [#278](https://github.com/mpaykin1/meta6-lab/pull/278); чужую активную ветку не трогать |
+| #278 | код | — | ТОЛКАЧ safe merge | closed | закрыт: без слияния; отдельный PR не нужен, изменения консолидировались в [#331](https://github.com/mpaykin1/meta6-lab/pull/331); [PR #278](https://github.com/mpaykin1/meta6-lab/pull/278) |
 | #289 | код | — | POLZA Gate | open dirty | draft: ЖДЁТ согласованного bootstrap POLZA и обязательного статуса в main [#289](https://github.com/mpaykin1/meta6-lab/pull/289); конфликт main |
 | #290 | код | — | INK без паттернов | open dirty | draft: ЖДЁТ визуальную приёмку изменения принятого INK-движка и CI [#290](https://github.com/mpaykin1/meta6-lab/pull/290); main имеет другой shader SHA |
 | #291 | код | — | B2 Broken City | open dirty | draft: ЖДЁТ реального прохождения broken-city ботом и changed-games [#291](https://github.com/mpaykin1/meta6-lab/pull/291) |
@@ -35,22 +35,22 @@
 | #313 | код | — | Portal Play Connect Earn | open | draft: ЖДЁТ настоящий META BOT без застревания и полный CI [#313](https://github.com/mpaykin1/meta6-lab/pull/313) |
 | #314 | код | — | Sunken City source ZIP | open | draft: ЖДЁТ зелёный META BOT и Library Machine; ZIP оригинала сохранить [#314](https://github.com/mpaykin1/meta6-lab/pull/314) |
 | #319 | код | — | Source-only git 128 | open | draft: ЖДЁТ source-only-base (отсутствует в main), зелёный Library Machine и новый CI [#319](https://github.com/mpaykin1/meta6-lab/pull/319) |
-| #321 | код | — | INK Raven | merged | live: ЖДЁТ отдельного OWNER PASS перед слиянием; [INK Raven 3D PASS 43594499481](https://github.com/mpaykin1/meta6-lab/actions/runs/43594499481) |
+| #321 | код | — | INK Raven | merged | слит в feature-ветку `lab/ink-fallen-robot-20261113`, не в main: [SHA 00c22fba](https://github.com/mpaykin1/meta6-lab/commit/00c22fba0c1fbcf71a535ddd9342da286e875b27); [PR #321](https://github.com/mpaykin1/meta6-lab/pull/321) |
 | #322 | код | — | INK Train | open dirty | draft: ЖДЁТ устранения [KONTUR FAIL 43749151115](https://github.com/mpaykin1/meta6-lab/actions/runs/43749151115) и визуального OWNER PASS [#322](https://github.com/mpaykin1/meta6-lab/pull/322) |
 | #325 | код | — | INK Monster | open | draft: ЖДЁТ визуального OWNER PASS монстра и полного CI [#325](https://github.com/mpaykin1/meta6-lab/pull/325) |
 | #326 | код | — | INK Viaduct | open | draft: ЖДЁТ визуального OWNER PASS 3D-виадуков и CI [#326](https://github.com/mpaykin1/meta6-lab/pull/326) |
 | #332 | код | — | INK Carrion Stalker | open | draft: ЖДЁТ HTTP 200 превью и визуальный OWNER PASS робота [#332](https://github.com/mpaykin1/meta6-lab/pull/332) |
 | #311 | код | `lab/bot-audit-20261114` | Ремонт JSON и ассетов | open | ГОТОВ К ПРОВЕРКЕ: HEAD `7fa9bead6c68b6f82e730a126b2bd43ebfe73054`, 23 GitHub Actions PASS, 9 skipped, 0 failed; mergeable=true; внешний Vercel build-rate-limit, не считать полным CI PASS; [проверки](https://github.com/mpaykin1/meta6-lab/pull/311/checks) |
 | #272 | игра | `lab/uluchshatel-sumerki-copy-bot13-20261112` | Read-only META BOT №13 | closed | закрыт: сторожем как заброшенный, без слияния; META BOT не подтверждён [PR #272](https://github.com/mpaykin1/meta6-lab/pull/272#issuecomment-6898808356) |
-| #255 | игра | `lab/archer-meta-adfree-clean-1111` | Archer adfree и адаптивный FPS | closed | draft: ЖДЁТ устранения META BOT FAIL и конфликта [#255](https://github.com/mpaykin1/meta6-lab/pull/255); Claude не нужен |
-| #260 | код | `lab/uluchshatel-preflight-20261111` | Защита захвата игр | open dirty | draft: ЖДЁТ конфликт main и STOROZHA [#260](https://github.com/mpaykin1/meta6-lab/pull/260); Claude не нужен |
-| #261 | код | `lab/biblioteka-contract-20261111` | Контракт библиотеки | open | draft: ЖДЁТ STOROZHA и CI [#261](https://github.com/mpaykin1/meta6-lab/pull/261); Claude не нужен |
-| #218 | код | `lab/remont-r1-library` | R1: обновление библиотеки | open dirty | draft: ЖДЁТ merge main и Library Machine [#218](https://github.com/mpaykin1/meta6-lab/pull/218); Claude не нужен |
-| #220 | код | `lab/zadachi-conflicts` | ZADACHI watch | open dirty | draft: ЖДЁТ merge main, устранения конфликтов и полного CI [#220](https://github.com/mpaykin1/meta6-lab/pull/220); Claude не нужен |
+| #255 | игра | `lab/archer-meta-adfree-clean-1111` | Archer adfree и адаптивный FPS | closed | закрыт: без слияния; META BOT FAIL и конфликт, исходная ветка сохранена; [PR #255](https://github.com/mpaykin1/meta6-lab/pull/255) |
+| #260 | код | `lab/uluchshatel-preflight-20261111` | Защита захвата игр | open dirty | закрыт: без слияния; конфликт main / STOROZHA, исходная ветка сохранена; [PR #260](https://github.com/mpaykin1/meta6-lab/pull/260) |
+| #261 | код | `lab/biblioteka-contract-20261111` | Контракт библиотеки | open | закрыт: без слияния; STOROZHA FAIL, исходная ветка сохранена; [PR #261](https://github.com/mpaykin1/meta6-lab/pull/261) |
+| #218 | код | `lab/remont-r1-library` | R1: обновление библиотеки | open dirty | закрыт: без слияния; R1 не прошёл актуальную Library Machine, исходная ветка сохранена; [PR #218](https://github.com/mpaykin1/meta6-lab/pull/218) |
+| #220 | код | `lab/zadachi-conflicts` | ZADACHI watch | open dirty | закрыт: без слияния; конфликт main и CI не устранены, исходная ветка сохранена; [PR #220](https://github.com/mpaykin1/meta6-lab/pull/220) |
 | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |
 | #235 | игра | `lab/fix-mobile-screen-all-games-1111` | Неподвижный экран при джойстике | closed | закрыт: сторожем как заброшенный, без слияния; исправление экрана не подтверждено [PR #235](https://github.com/mpaykin1/meta6-lab/pull/235#issuecomment-6898807686) |
 | #245 | игра | `lab/remont-main-veil-terraces` | Шесть воспоминаний без застреваний | open | CLAUDE: да/нет? изменение принятого Veil Terraces; [вопрос #245](https://github.com/mpaykin1/meta6-lab/pull/245); draft |
-| #277 | ядро | `lab/storozha-nedelya` | Три сторожа: update-heads и rename protection | closed | CLAUDE: да/нет? защищённое scripts/storozha/**; [вопрос #277](https://github.com/mpaykin1/meta6-lab/pull/277); draft |
+| #277 | ядро | `lab/storozha-nedelya` | Три сторожа: update-heads и rename protection | closed | закрыт: без слияния; изменения ядра STOROZHA не согласованы, исходная ветка сохранена; [PR #277](https://github.com/mpaykin1/meta6-lab/pull/277) |
 | #248 | ядро | `lab/pr-autofinish-followup-1111` | Доверенный автообновлятор PR и журнал | open | CLAUDE: да/нет? защищённый pr-autofinish; [вопрос #248](https://github.com/mpaykin1/meta6-lab/pull/248); draft |
 | #331 | код | `lab/razbor-zavalov` | Исправить undefined у #248/#277 и поставить мутационную ловушку | open dirty | draft: ЖДЁТ независимое принятие/merge; [коммит ab0ae49](https://github.com/mpaykin1/meta6-lab/commit/ab0ae49c33c02bb25da4110ac04940d24ed3cc6e), [8 CI PASS](https://github.com/mpaykin1/meta6-lab/pull/331/checks); внешний Vercel build-rate-limit |
 | #316 | код | `lab/karta-sil-api-budget-20261114` | GitHub API quota, GraphQL batch, расписания ботов | merged | слит [4574e06a308792514a92db2f6328eb444f92d62a](https://github.com/mpaykin1/meta6-lab/commit/4574e06a308792514a92db2f6328eb444f92d62a), [11 зелёных проверок](https://github.com/mpaykin1/meta6-lab/pull/316/checks) |

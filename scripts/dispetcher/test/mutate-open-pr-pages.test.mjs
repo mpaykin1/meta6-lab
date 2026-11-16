@@ -8,6 +8,8 @@ const pr = number => ({
 });
 
 async function exercise(fn) {
+  const original = fn;
+  fn = request => original(request,{stopOnShortPage:true});
   let requests = [];
   const one = await fn(async path => {
     requests.push(path);
@@ -39,7 +41,7 @@ test('dispatcher paginates completely without wasting a final API request',
 
 test('three pagination mutations are caught by actual request counts', async () => {
   const source = await readFile(new URL('../build.mjs', import.meta.url), 'utf8');
-  const anchor = 'if(batch.length<100)return result;';
+  const anchor = 'if(batch.length===0 || (stopOnShortPage && batch.length<100))return result;';
   assert.ok(source.includes(anchor), 'missing strict terminal-page rule');
   for (const [name, replacement] of [
     ['extra-page', 'if(batch.length===0)return result;'],
@@ -54,4 +56,19 @@ test('three pagination mutations are caught by actual request counts', async () 
     try { await exercise(mod.listOpenPullRequests); } catch { caught = true; }
     assert.ok(caught, 'pagination regression escaped: ' + name);
   }
+});
+
+
+test('legacy callers read through empty page and never trust missing second page', async () => {
+ let count=0;
+ const all=await listOpenPullRequests(async path=>{
+  count++;
+  assert.equal(path,`/pulls?state=open&per_page=100&page=${count}`);
+  return count===1?[pr(1),pr(2)]:[];
+ });
+ assert.deepEqual([...all.keys()],[1,2]);
+ assert.equal(count,2);
+ count=0;
+ await assert.rejects(()=>listOpenPullRequests(async()=>{count++;if(count===1)return [pr(1)];throw Error('HTTP 429');}),/429/);
+ assert.equal(count,2);
 });

@@ -1,5 +1,17 @@
 # Итоги недели без Claude
 
+## 2026-11-16
+- Слито за последние 24 часа: 7 ([#334](https://github.com/mpaykin1/meta6-lab/pull/334), [#333](https://github.com/mpaykin1/meta6-lab/pull/333), [#330](https://github.com/mpaykin1/meta6-lab/pull/330), [#329](https://github.com/mpaykin1/meta6-lab/pull/329), [#327](https://github.com/mpaykin1/meta6-lab/pull/327), [#323](https://github.com/mpaykin1/meta6-lab/pull/323), [#328](https://github.com/mpaykin1/meta6-lab/pull/328))
+- Бот: за последние 24 часа нет подтверждённого PASS на main.
+- В DLYA_CLAUDE.md: 78 записей, PR #267, #277, #270, #247, #248, #218, #220, #234, #247, #254, #255, #260, #262, #277, #283
+- Открытых живых PR: 39; зависших: 0.
+
+## 2026-11-15
+- Слито за последние 24 часа: 11 ([#324](https://github.com/mpaykin1/meta6-lab/pull/324), [#320](https://github.com/mpaykin1/meta6-lab/pull/320), [#301](https://github.com/mpaykin1/meta6-lab/pull/301), [#302](https://github.com/mpaykin1/meta6-lab/pull/302), [#318](https://github.com/mpaykin1/meta6-lab/pull/318), [#316](https://github.com/mpaykin1/meta6-lab/pull/316), [#317](https://github.com/mpaykin1/meta6-lab/pull/317), [#312](https://github.com/mpaykin1/meta6-lab/pull/312), [#308](https://github.com/mpaykin1/meta6-lab/pull/308), [#315](https://github.com/mpaykin1/meta6-lab/pull/315), [#309](https://github.com/mpaykin1/meta6-lab/pull/309))
+- Бот прошёл: `ostrov-aptekarya`, `veil-terraces` ([META BOT](https://github.com/mpaykin1/meta6-lab/actions/runs/43572142827)).
+- В DLYA_CLAUDE.md: 96 записей, PR #252, #251, #248, #265, #266, #246, #267, #268, #262, #269, #218, #275, #277, #261, #285
+- Открытых живых PR: 43; зависших: 0.
+
 ## 2026-11-14
 - Слито за последние 24 часа: 18 ([#302](https://github.com/mpaykin1/meta6-lab/pull/302), [#318](https://github.com/mpaykin1/meta6-lab/pull/318), [#316](https://github.com/mpaykin1/meta6-lab/pull/316), [#317](https://github.com/mpaykin1/meta6-lab/pull/317), [#312](https://github.com/mpaykin1/meta6-lab/pull/312), [#308](https://github.com/mpaykin1/meta6-lab/pull/308), [#315](https://github.com/mpaykin1/meta6-lab/pull/315), [#309](https://github.com/mpaykin1/meta6-lab/pull/309), [#307](https://github.com/mpaykin1/meta6-lab/pull/307), [#304](https://github.com/mpaykin1/meta6-lab/pull/304), [#298](https://github.com/mpaykin1/meta6-lab/pull/298), [#296](https://github.com/mpaykin1/meta6-lab/pull/296), [#295](https://github.com/mpaykin1/meta6-lab/pull/295), [#293](https://github.com/mpaykin1/meta6-lab/pull/293), [#294](https://github.com/mpaykin1/meta6-lab/pull/294), [#292](https://github.com/mpaykin1/meta6-lab/pull/292), [#267](https://github.com/mpaykin1/meta6-lab/pull/267), [#285](https://github.com/mpaykin1/meta6-lab/pull/285))
 - Бот прошёл: `ostrov-aptekarya`, `veil-terraces` ([META BOT](https://github.com/mpaykin1/meta6-lab/actions/runs/43507436568)).

@@ -105,5 +105,17 @@
         "docs"
       ]
     }
+  ],
+  "branchActors": [
+    {
+      "pattern": "^lab/(?:mg-stroitel|mg-remontnik|autotask)(?:[-/]|$)",
+      "actor": "автозадача",
+      "basis": "название исполнителя прямо указано в имени ветки"
+    },
+    {
+      "pattern": "^(?:chatgpt/|lab/chatgpt[-/])",
+      "actor": "чат ChatGPT",
+      "basis": "название чата прямо указано в имени ветки"
+    }
   ]
 }

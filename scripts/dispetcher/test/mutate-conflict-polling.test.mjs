@@ -10,7 +10,7 @@ async function exercise(module){
  const ready=await module.resolveConflict(pending,async()=>{
    calls++;
    return {mergeable:calls===3?true:null,mergeable_state:calls===3?'clean':undefined};
- },null,async ms=>{delays.push(ms)});
+ },null,async ms=>{delays.push(ms)},2000);
  assert.deepEqual(delays,[2000,2000,2000],'three complete 2s polls, never a 15s serial stall');
  assert.equal(calls,3,'all three checks must actually query current mergeability');
  assert.equal(ready.conflict,false,'clean response must not be forged');
@@ -18,14 +18,14 @@ async function exercise(module){
  assert.equal(ready.retries,3);
 
  calls=0;delays.length=0;
- const blocked=await module.resolveConflict(pending,async()=>{calls++;return pending},true,async ms=>{delays.push(ms)});
+ const blocked=await module.resolveConflict(pending,async()=>{calls++;return pending},true,async ms=>{delays.push(ms)},2000);
  assert.deepEqual(delays,[2000,2000,2000]);
  assert.equal(calls,3);
  assert.equal(blocked.unresolved,true,'null must stay explicitly unresolved');
  assert.equal(blocked.conflict,true,'historical conflict must remain fail-closed');
 
  calls=0;delays.length=0;
- const first=await module.resolveConflict(pending,async()=>{calls++;return {mergeable:false}},null,async ms=>{delays.push(ms)});
+ const first=await module.resolveConflict(pending,async()=>{calls++;return {mergeable:false}},null,async ms=>{delays.push(ms)},2000);
  assert.deepEqual(delays,[2000]);
  assert.equal(calls,1,'stop as soon as GitHub provides a definitive state');
  assert.equal(first.conflict,true);
@@ -37,7 +37,7 @@ test('dispatcher conflict polling: full checks, 6s worst-case, fail-closed unkno
 test('four polling regressions are rejected by real assertions',async()=>{
  const src=await readFile(new URL('../build.mjs',import.meta.url),'utf8');
  const mutants=[
-  ['slow-15s',src.replace('await sleep(2000);','await sleep(5000);')],
+  ['slow-15s',src.replace('await sleep(pollMs);','await sleep(5000);')],
   ['silently-drop-retries',src.replace('retries<3','retries<1')],
   ['forge-unknown-clean',src.replace('return {pr:current,conflict:prior,unresolved:true,retries};',
     'return {pr:current,conflict:false,unresolved:false,retries};')],

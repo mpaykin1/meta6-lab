@@ -110,10 +110,10 @@ export function previousConflict(previous,id){
  const problem=block.match(/^- Проблема:\s*([^\n]+)/m);
  return problem&&problem[1].includes('Конфликт с main')?true:null;
 }
-export async function resolveConflict(pr,reload,prior,sleep=ms=>new Promise(done=>setTimeout(done,ms))){
+export async function resolveConflict(pr,reload,prior,sleep=ms=>new Promise(done=>setTimeout(done,ms)),pollMs=5000){
  let current=pr, retries=0;
  while(current.mergeable===null && retries<3){
-  await sleep(2000);
+  await sleep(pollMs);
   current=await reload();
   retries++;
  }
@@ -148,7 +148,7 @@ export async function main(){
   claude.push({...t,title:claudeTitle(t,pr),branch:pr.head.ref});
   continue;
  }
- const resolution=await resolveConflict(pr,()=>dispatchApi('/pulls/'+t.id),previousConflict(previous,t.id));
+ const resolution=await resolveConflict(pr,()=>dispatchApi('/pulls/'+t.id),previousConflict(previous,t.id),undefined,2000);
  pr=resolution.pr;
  const checks=await dispatchApi('/commits/'+pr.head.sha+'/check-runs?per_page=100');
  const statuses=await dispatchApi('/commits/'+pr.head.sha+'/status');

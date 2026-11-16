@@ -504,6 +504,19 @@ class KindTraps(unittest.TestCase):
         im.save(p)
         self.assertIn("SS6", ids(self.d))
 
+    def test_SS6_same_shape_different_colors(self):
+        self.make_sprite_stack()
+        p = self.d / "stacks/rangerJet.png"
+        im = np.asarray(Image.open(p).convert("RGBA")).copy()
+        mask = (im[:, :32, 3] > 0)
+        for i in range(13):
+            block = im[:, i*32:(i+1)*32, :]
+            block[:, :, 3] = np.where(mask, 255, 0)
+            block[:, :, :3] = np.where(
+                mask[:, :, None], np.array([(i*11) % 255, 80, 110], dtype=np.uint8), 0)
+        Image.fromarray(im).save(p)
+        self.assertIn("SS6", ids(self.d))
+
     def test_SS7_primitive_single_color(self):
         self.make_sprite_stack()
         p = self.d / "stacks/rangerJet.png"

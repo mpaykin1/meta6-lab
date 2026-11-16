@@ -1,10 +1,10 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-16T04:18:56.939Z | МГЛ: 5048d686a87abfa7f7df5c603a63a271db8fda94 | МГ: b6726b7690ab85059ea7a38d4ee684e49cef1730 | https://github.com/mpaykin1/meta6-lab/actions/runs/43802515545
+UTC: 2026-11-16T04:27:53.672Z | МГЛ: 457f6d8253e17edc61e2eecbc22923ba6fb43ed3 | МГ: b6726b7690ab85059ea7a38d4ee684e49cef1730 | https://github.com/mpaykin1/meta6-lab/actions/runs/43802776929
 ## ПРОВЕРИТЬ CLAUDE
+- PR #321 00c22fba0c1fbcf71a535ddd9342da286e875b27: .github/workflows/ink-raven-3d.yml
 - PR #330 17690b22fcbf4893451d7d7ec354f133abd6b738: .github/workflows/lab-bot-focused.yml
 - PR #327 bfdcea35097c49b70e7d08c7747716e4fb0daa20: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
-- PR #320 fd4ea42560b6c1f43ecdf1a7df2e667160943c18: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
-- ещё 26: https://github.com/mpaykin1/meta6-lab/pulls
+- ещё 27: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/… (сокращено)
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
@@ -33,13 +33,13 @@ L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 P1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 ## PR МГЛ
-открыто: 45 | конфликт: 22 | слито: 54 | закрыто: 87
+открыто: 44 | конфликт: 23 | слито: 55 | закрыто: 87
+#321 INK · Летящий ворон — объёмная 3D-модель и анимация в лесу | 00c22fba0c1fbcf71a535ddd9342da286e875b27
 #334 INK · Падальщик: зарегистрировать новый эталон в AGENTS, ink | 27422c8b6563e2a8d2be46df1c078a9f32feef59
 #333 INK · Падальщик — OWNER PASS: добавить 3D-эталон в МГЛ для п | 960bab97a6c4a9c5e7cca673bbcbfca43e0f0d66
-#330 Решение владельца 15.11: правила R12–R24 для Playgama; бот-п | 17690b22fcbf4893451d7d7ec354f133abd6b738
-ещё 51: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 52: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2359 коммитов | нет данных
+МГЛ: 2360 коммитов | нет данных
 МГ: 34 коммитов | .github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

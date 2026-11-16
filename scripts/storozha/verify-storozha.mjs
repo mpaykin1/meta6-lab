@@ -30,6 +30,9 @@ export function verify(c) {
   assert.equal(c.quota(six, 5, t).reject, false, 'The oldest five still pass when six exist');
   assert.equal(c.quota(six, 6, t).reject, true, 'The sixth live PR is red');
   assert.match(c.quota(six, 6, t).message, /#1.*#5/, 'Error tells which old PRs to finish');
+  const parked = six.map((p, i) => i === 0 ? {...p, draft: true} : p);
+  assert.equal(c.quota(parked, 6, t).reject, false, 'A draft PR does not block the queue: the sixth becomes one of five');
+  assert.match(c.quota(parked, 6, t).oldest.join(','), /^2,3,4,5,6$/, 'Oldest five skip drafts');
   const required72Hours = 72 * 60 * 60 * 1000;
   const old = {...six[0], lastCommitAt: new Date(t - required72Hours - 1000).toISOString()};
   const recent = {...six[0], lastCommitAt: new Date(t - required72Hours + 1000).toISOString()};
@@ -37,6 +40,11 @@ export function verify(c) {
   assert.equal(c.staleDecision(old, t).deleteBranch, false, 'Never delete a stale PR branch');
   assert.equal(c.staleDecision(recent, t).close, false, 'Recent PR stays open');
   assert.equal(c.staleDecision({...old, state: 'closed'}, t).close, false, 'Do not close twice');
+  const gitFiles = c.filesFromGit('A\treference/new/a.glb\nM\tscripts/x.mjs\nD\treference/old/file.glb\n',
+    '10\t0\treference/new/a.glb\n3\t2\tscripts/x.mjs\n0\t5\treference/old/file.glb\n');
+  assert.deepEqual(gitFiles.map(f => f.status), ['added', 'modified', 'removed'], 'git statuses map to GitHub statuses');
+  assert.equal(gitFiles[1].deletions, 2, 'git numstat deletions reach the old-test rule');
+  assert.throws(() => c.filesFromGit('X\tweird\n', ''), /Unknown git status/, 'Unknown git status must fail closed');
   const baseline = ['reference/old/file.glb', 'reference/old/texture.png'];
   assert.deepEqual(c.referenceGate([
     {filename: 'reference/new-world/index.html', status: 'added'},
@@ -50,20 +58,40 @@ export function verify(c) {
     {filename: 'reference/new-world/index.html', status: 'added'},
     {filename: 'README.md', status: 'modified'}
   ], baseline).length, 'New reference exception must be ONLY additions');
-  assert.ok(c.referenceGate([{filename: '.github/workflows/guard.yml', status: 'modified'}],
-    baseline).length, 'Changing any existing workflow is red');
-  assert.ok(c.referenceGate([{filename: '.github/workflows/new.yml', status: 'added'}],
-    baseline).length, 'Adding an unapproved workflow is red');
-  assert.ok(c.referenceGate([{filename: 'scripts/meta-bot/engine.mjs', status: 'modified'}],
-    baseline).length, 'Bot changes require Claude');
-  assert.ok(c.referenceGate([{filename: 'scripts/kontur/guard.mjs', status: 'modified'}],
-    baseline).length, 'Guard changes require Claude');
-  assert.ok(c.referenceGate([{filename: 'scripts/feature/test-input.mjs', status: 'modified'}],
-    baseline).length, 'Test changes require Claude');
-  assert.ok(c.referenceGate([{filename: 'scripts/engine/tests/input.js', status: 'modified'}],
-    baseline).length, 'Nested tests directory changes require Claude');
-  assert.ok(c.referenceGate([{filename: 'scripts/engine/player.spec.ts', status: 'modified'}],
-    baseline).length, 'Existing spec-file changes require Claude');
+  const gate = files => c.referenceGate(files, baseline);
+  for (const core of ['storozha-reference.yml', 'kontur-guard.yml', 'meta-games-guard.yml', 'meta-bot.yml',
+    'report-completion-guard.yml', 'lab-shared-deletion-guard.yml', 'pr-autofinish.yml', 'sync-from-meta6.yml']) {
+    assert.ok(gate([{filename: '.github/workflows/' + core, status: 'modified', deletions: 1}]).length,
+      'Core guard workflow requires Claude: ' + core);
+  }
+  assert.ok(gate([{filename: '.github/workflows/storozha-new.yml', status: 'added'}]).length,
+    'A new storozha-* workflow is core too');
+  assert.deepEqual(gate([{filename: '.github/workflows/auditor.yml', status: 'modified', deletions: 3}]), [],
+    'ChatGPT changes its own (non-core) bot workflow without waiting for Claude');
+  assert.deepEqual(gate([{filename: '.github/workflows/new-bot.yml', status: 'added'}]), [],
+    'A new non-core workflow is allowed');
+  assert.ok(gate([{filename: '.github/workflows/auditor.yml', status: 'removed'}]).length,
+    'Deleting any workflow is red');
+  assert.ok(gate([{filename: '.github/workflows/auditor.yml', status: 'renamed'}]).length,
+    'Renaming a workflow away is red');
+  assert.ok(gate([{filename: 'scripts/meta-bot/engine.mjs', status: 'modified'}]).length,
+    'Bot changes require Claude');
+  assert.ok(gate([{filename: 'scripts/kontur/guard.mjs', status: 'modified'}]).length,
+    'Guard changes require Claude');
+  assert.ok(gate([{filename: 'scripts/storozha/core.mjs', status: 'modified', deletions: 0}]).length,
+    'Storozha core requires Claude even for pure additions');
+  assert.ok(gate([{filename: 'scripts/feature/test-input.mjs', status: 'modified', deletions: 1}]).length,
+    'Weakening a test (removed line) requires Claude');
+  assert.ok(gate([{filename: 'scripts/feature/test-input.mjs', status: 'modified'}]).length,
+    'Unknown deletions count is treated as weakening');
+  assert.deepEqual(gate([{filename: 'scripts/auditor/mutate-auditor.mjs', status: 'modified', deletions: 0}]), [],
+    'Extending an existing test with new checks only is allowed');
+  assert.ok(gate([{filename: 'scripts/engine/tests/input.js', status: 'modified', deletions: 2}]).length,
+    'Nested tests directory weakening requires Claude');
+  assert.ok(gate([{filename: 'scripts/engine/player.spec.ts', status: 'removed', deletions: 9}]).length,
+    'Deleting a spec file requires Claude');
+  assert.ok(gate([{filename: 'scripts/engine/player.spec.ts', status: 'renamed', deletions: 0}]).length,
+    'Moving a test away (rename) requires Claude');
   assert.deepEqual(c.referenceGate([{filename: 'scripts/engine/tests/new.test.js', status: 'added'}],
     baseline), [], 'New test files are allowed without changing existing tests');
 }

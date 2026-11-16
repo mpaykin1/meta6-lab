@@ -79,10 +79,22 @@ class HtmlPackTraps(unittest.TestCase):
     def test_HP10_transient_effect_waits_for_nonzero_geometry(self):
         harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
         wake = harness.index("await page.evaluate(id=>window.__AC_WAKE__(id),id);")
-        settle = harness.index("if(id==='sparks'||id==='petals')await page.waitForTimeout(240);")
+        settle = harness.index("if(id==='explosion'||id==='sparks'||id==='petals')await page.waitForTimeout(240);")
         freeze = harness.index("await page.evaluate(()=>{window.__AC_FREEZE__=true});")
         self.assertLess(wake, settle)
         self.assertLess(settle, freeze)
+
+    def test_HP10_explosion_must_be_awakened_without_covering_effects(self):
+        # Once-dormant InstancedMesh is not an empty reference asset: real explosion
+        # must run before shown-minus-hidden captures, with only puffs visible.
+        harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")
+        wake = harness.split("window.__AC_WAKE__=id=>", 1)[1].split("window.__AC_APPLY__=", 1)[0]
+        self.assertIn("if(id==='explosion'){", wake)
+        explosion = wake.split("if(id==='explosion'){", 1)[1].split("if(id==='petals'){", 1)[0]
+        self.assertIn("explode();", explosion)
+        self.assertIn("petals.visible=false;", explosion)
+        self.assertIn("sparks.visible=false;", explosion)
+        self.assertIn("if(id==='explosion'||id==='sparks'||id==='petals')await page.waitForTimeout(240);", harness)
 
     def test_HP10_petals_are_not_masked_by_other_explosion_effects(self):
         harness = (Path(__file__).resolve().parent / "kinds/htmlpack_harness.mjs").read_text("utf-8")

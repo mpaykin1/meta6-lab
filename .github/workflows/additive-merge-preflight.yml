@@ -20,8 +20,25 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Green verifier and four negative cases
+      - name: Preserve five previous TOLKACH policy mutation traps
+        run: node scripts/lab/mutate-tolkach-docs.mjs
+      - name: Green verifier and five negative cases
         run: node scripts/lab/mutate-additive-merge.test.mjs
+      - name: Shallow-history bypass mutation must turn test red
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('scripts/lab/verify-additive-merge.mjs').read_text()
+          needle='if(git("rev-parse", "--is-shallow-repository") !== "false")'
+          assert needle in s
+          Path('/tmp/merge-preflight-mutant-shallow.mjs').write_text(s.replace(needle,'if(false)',1))
+          PY
+          if node scripts/lab/mutate-additive-merge.test.mjs /tmp/merge-preflight-mutant-shallow.mjs; then
+            echo 'FAIL: shallow history survived mutation'
+            exit 1
+          fi
+          echo 'PASS: shallow-history bypass mutation detected'
       - name: History-bypass mutation must turn test red
         shell: bash
         run: |

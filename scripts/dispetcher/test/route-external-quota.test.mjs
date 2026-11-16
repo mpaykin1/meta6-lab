@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {routeFor} from '../route.mjs';
+import {routeFor} from '../../karta-sil/route.mjs';
 
 const map = {
   schema:1, status:'полная',
@@ -31,7 +31,7 @@ test('обман: обычный Vercel CI FAIL не скрывается под
 });
 
 test('мутация: выключение фильтра снова выпускает невозможную карточку',async()=>{
-  const source=await fs.readFile(new URL('../route.mjs',import.meta.url),'utf8');
+  const source=await fs.readFile(new URL('../../karta-sil/route.mjs',import.meta.url),'utf8');
   const mutant=source.replace('if (externalQuota) {','if (false) {');
   assert.notEqual(mutant,source,'мутация действительно изменила код');
   const module=await import('data:text/javascript;base64,'+Buffer.from(mutant).toString('base64'));

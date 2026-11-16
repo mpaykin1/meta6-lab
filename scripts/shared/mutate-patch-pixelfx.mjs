@@ -26,6 +26,7 @@ function run(attack){
     const passport=path.join(folder,'component.json');
     if(attack==='changed-effect')fs.appendFileSync(effect,'\n// unpinned drift\n');
     if(attack==='changed-license')fs.appendFileSync(path.join(folder,'LICENSE'),'\nchanged\n');
+    if(attack==='changed-notice')fs.appendFileSync(path.join(folder,'NOTICE.md'),'\nchanged\n');
     if(attack==='forged-source'){
       const fake=Buffer.from('export const meta = {name:"Fake",duration:1}; export const create = () => ({draw(){}});\n');
       fs.writeFileSync(effect,fake);
@@ -47,6 +48,7 @@ assert.equal(normal.status,0,'licensed unmodified modules must index: '+normal.s
 for(const [attack,reason] of [
   ['changed-effect',/External original bytes drifted/],
   ['changed-license',/External MIT notice changed/],
+  ['changed-notice',/External NOTICE changed/],
   ['forged-source',/Unregistered or altered external source/]
 ]){
   const result=run(attack);

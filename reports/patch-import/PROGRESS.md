@@ -15,3 +15,5 @@ Not published: no verified GitHub Pages 200 yet. STOROZHA PR quota is exceeded
 (44 active PRs vs limit 5), Vercel external build rate limit. Do not disable guards or pay.
 
 2026-11-16: Replaced periodic sine-based fog wave with layered seeded nonperiodic smooth noise; randomized foreground silhouette steps. Only original META GAMES demo module changed, PixelFX MIT sources untouched. Code commit: `e7221fd6b5b928bb496d2388ff5cd680770785f5`. Browser CI and public HTTP 200 still unconfirmed; PR #310 remains draft.
+
+2026-11-16: Pinned upstream `NOTICE.md` (`bd049df57f92b448b6b106e0fc01fc71cbdb8dd2`) and retained both Sprite Fusion / Hollow Crown attribution and Patch Pixel font exclusion in `shared/components/patch-pixelfx/`. Extended component passport, commercial license registry, generated index, exact-blob guard and tamper mutation (new trap `changed-notice`). Code SHA: `aa433d9aba481e2145bcfa99626aed298e41eeb9`. CI pending; no publication claim.

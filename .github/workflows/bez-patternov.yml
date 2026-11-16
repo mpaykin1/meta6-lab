@@ -124,3 +124,5 @@ jobs:
             .pattern-after/
             .pattern-fft.json
           if-no-files-found: warn
+          # Playwright captures live in dot-prefixed directories; v4 hides them by default.
+          include-hidden-files: true

@@ -1,0 +1,40 @@
+name: INK v2 browser-free preview reachability
+on:
+  push:
+    branches: [lab/ink-fallen-guardian-v2-20261113]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview-http:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check real public HTML and JS URLs
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL='https://rawcdn.githack.com/mpaykin1/meta6-lab/17b6c42bc758ffc493e50eb1845f1b31e26846f8/preview/ink-fallen-guardian-v2/index.html'
+          JS='https://rawcdn.githack.com/mpaykin1/meta6-lab/17b6c42bc758ffc493e50eb1845f1b31e26846f8/preview/ink-fallen-guardian-v2/ink-forest-v2.js'
+          for item in "$URL" "$JS"; do
+            code="$(curl --fail --location --retry 2 --max-time 35 --silent --show-error --output /tmp/ink-preview.html --write-out '%{http_code}' "$item")"
+            test "$code" = "200"
+            test -s /tmp/ink-preview.html
+            echo "200 $item"
+          done
+
+  preview-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save --no-package-lock playwright@1.56.1 pngjs@7.0.0
+          npx playwright install --with-deps chromium
+      - name: Inspect desktop and phone-sized previews, compare v1 resting pose
+        shell: bash
+        run: |
+          python3 -m http.server 8774 --bind 127.0.0.1 --directory . >/tmp/ink-v2-http.log 2>&1 &
+          node scripts/ink/check-v2-preview-browser.mjs

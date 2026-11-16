@@ -404,9 +404,9 @@ def _check_mesh_quality(g, path, binc, root, rel, report):
         world_extent = _world_bounds(g, bounds)
         if world_extent is None:
             return
-        minimum, maximum = world_extent
+        minimum, maximum, side_flatness = world_extent
         size = maximum - minimum
-        if size[0] > 0 and size[2] / size[0] < .065:
+        if size[0] > 0 and (size[2] / size[0] < .065 or side_flatness < .065):
             report.add("M21", "HARD", rel, "Персонаж почти плоский в боковом ракурсе",
                        "Добавить толщину корпусу, голове и суставам")
 
@@ -429,6 +429,9 @@ def _world_bounds(g, mesh_bounds):
         return None
     minimum = np.full(3, np.inf)
     maximum = np.full(3, -np.inf)
+    sample_count = 0
+    xz_sum = np.zeros(2)
+    xz_outer = np.zeros((2, 2))
     stack = [(ix, np.eye(4), frozenset()) for ix in roots]
     steps = 0
     while stack and steps < 10000:
@@ -460,8 +463,18 @@ def _world_bounds(g, mesh_bounds):
                 if np.isfinite(world).all():
                     minimum = np.minimum(minimum, world.min(axis=0))
                     maximum = np.maximum(maximum, world.max(axis=0))
+                    xz = world[:, (0, 2)]
+                    sample_count += len(xz)
+                    xz_sum += xz.sum(axis=0)
+                    xz_outer += xz.T @ xz
         updated = ancestors | {ix}
         stack.extend((child, mat, updated) for child in node.get("children", []))
-    if not np.isfinite(minimum).all():
+    if not np.isfinite(minimum).all() or sample_count < 2:
         return None
-    return minimum, maximum
+    # Eigenvalue ratio of the horizontal silhouette is invariant under yaw:
+    # rotating a cardboard-flat mesh cannot disguise its missing thickness.
+    mean = xz_sum / sample_count
+    cov = xz_outer / sample_count - np.outer(mean, mean)
+    eigen = np.linalg.eigvalsh(cov)
+    flatness = float(np.sqrt(max(eigen[0], 0) / max(eigen[-1], 1e-20)))
+    return minimum, maximum, flatness

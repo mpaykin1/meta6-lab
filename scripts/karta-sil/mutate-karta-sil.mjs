@@ -531,3 +531,48 @@ test('исполнитель карты: явное указание, подтв
     assert.throws(()=>checkEvidence(mod.resolvedActorFromEvidence));
   }
 });
+
+// Claude 16.11.2026: карта не обнуляется при сбое, 5xx повторяется, «нет данных» у автозадачи → пробный шаг.
+async function checkResilience(build, route){
+  const prev={schema:1,status:'полная',types:[{id:'bot_check'}],metrics:[{type:'bot_check',actor:'неизвестно',zone:'жёлтая'}],prs:[]};
+  const kept=build.noDataState(prev,'2026-11-16T06:00:00Z','HTTP 502');
+  assert.equal(kept.status,'устарела'); assert.equal(kept.metrics.length,1); assert.equal(kept.staleSince,'2026-11-16T06:00:00Z');
+  assert.equal(build.noDataState({schema:1,metrics:[],types:[]}).status,'нет данных');
+  let calls=0; const waits=[];
+  const ok=await build.withRetry(async()=>{calls++; if(calls<3) throw Object.assign(new Error('x'),{stderr:'gh: HTTP 502'}); return 7;},ms=>{waits.push(ms);});
+  assert.equal(ok,7); assert.equal(calls,3); assert.equal(waits.length,2);
+  let c403=0;
+  await assert.rejects(()=>build.withRetry(async()=>{c403++; throw Object.assign(new Error('x'),{stderr:'gh: HTTP 403'});},()=>{}));
+  assert.equal(c403,1,'403 не повторяется');
+  const now=Date.parse('2026-11-16T12:00:00Z');
+  assert.equal(route.usableMap({...kept,staleSince:'2026-11-16T06:00:00Z'},now),true);
+  assert.equal(route.usableMap({...kept,staleSince:'2026-11-14T06:00:00Z'},now),false);
+  const map={schema:1,status:'полная',prs:[{number:5,type:'bot_check',changedFiles:3}],
+    metrics:[{type:'bot_check',actor:'автозадача',zone:'нет данных'},{type:'bot_check',actor:'неизвестно',zone:'зелёная'}]};
+  assert.equal(route.routeFor({id:5,body:''},map).target,'auto');
+  assert.equal(route.routeFor({id:5,body:'',changedFiles:9},map).target,'chat');
+  const red={...map,metrics:[{type:'bot_check',actor:'автозадача',zone:'нет данных'},{type:'bot_check',actor:'неизвестно',zone:'красная'}]};
+  assert.equal(route.routeFor({id:5,body:''},red).target,'chat');
+}
+test('КАРТА: сбой не стирает карту, 5xx повторяется, нет данных → пробный шаг',async()=>{
+  const build=await import('./build.mjs'), route=await import('./route.mjs');
+  await checkResilience(build,route);
+  const bsrc=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const rsrc=await fs.readFile(new URL('./route.mjs',import.meta.url),'utf8');
+  const cases=[
+    ['b','сбой снова стирает карту',"  const hasData = Array.isArray(previous?.metrics) && previous.metrics.length > 0;","  const hasData = false;"],
+    ['b','403 тоже повторяется',"if (attempt >= tries || !TRANSIENT.test(String(error.stderr || error.message))) throw error;","if (attempt >= tries) throw error;"],
+    ['b','5xx не повторяется',"for (let attempt = 1; ; attempt++) {","for (let attempt = tries; ; attempt++) {"],
+    ['r','устаревшая карта не принимается',"  if (map.status !== 'устарела') return false;","  return false;"],
+    ['r','старая устаревшая карта принимается вечно',"return Number.isFinite(since) && now - since <= 24 * 3600 * 1000;","return true;"],
+    ['r','нет данных без запасного правила',"if (fallback === 'зелёная' || fallback === 'жёлтая') zone = 'жёлтая';",""],
+    ['r','запасное правило даёт красному типу',"if (fallback === 'зелёная' || fallback === 'жёлтая') zone = 'жёлтая';","zone = 'жёлтая';"],
+  ];
+  for(const [f,label,from,to] of cases){
+    const src=f==='b'?bsrc:rsrc;
+    assert.ok(src.includes(from),'якорь: '+label);
+    const mod=await import('data:text/javascript;base64,'+Buffer.from(src.replace(from,to)).toString('base64')+'#'+label.length);
+    const build2=f==='b'?mod:build, route2=f==='r'?mod:route;
+    await assert.rejects(()=>checkResilience(build2,route2),undefined,label);
+  }
+});

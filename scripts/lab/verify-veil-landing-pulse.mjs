@@ -4,7 +4,7 @@ import vm from 'node:vm';
 
 // Exercise the actual function extracted from the shipped game, without mocking geometry.
 export function verifyLandingPulse(source){
- const match=source.match(/function landingPulse\\(player,floor,time\\)\\{[\\s\\S]*?\\n\\}/);
+ const match=source.match(/function landingPulse\(player,floor,time\)\{[\s\S]*?\n\}/);
  assert.ok(match,'game must define the real landingPulse function');
  const signal=vm.runInNewContext('('+match[0]+')');
  const flyer={x:3.5,z:-2.5,y:4,ground:false};
@@ -21,7 +21,7 @@ export function verifyLandingPulse(source){
  const high=signal({...flyer,y:35},2,100);
  assert.ok(high.scale<=.56,'far jumps cannot spawn oversized geometry');
  assert.ok(Number.isFinite(high.angle),'animation angle must stay finite');
- assert.match(source,/if\\(!menu&&!won&&!p\\.ground\\)\\{const landing=landingPulse\\(p,surface\\(p\\.x,p\\.z\\),t\\);if\\(landing\\)draw\\(shardMesh,model\\(landing\\.x,landing\\.y,landing\\.z,landing\\.scale,landing\\.angle\\)\\);\\}/,
+ assert.match(source,/if\(!menu&&!won&&!p\.ground\)\{const landing=landingPulse\(p,surface\(p\.x,p\.z\),t\);if\(landing\)draw\(shardMesh,model\(landing\.x,landing\.y,landing\.z,landing\.scale,landing\.angle\)\);\}/,
   'game must render the genuine jump marker only when visible');
  return true;
 }

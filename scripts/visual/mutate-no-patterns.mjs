@@ -18,7 +18,7 @@ const mutants = [
   },
   {
     name: 'world-uv-comment-decoy',
-    source: '// noise warp fbm protects tiles (false claim)\\n' +
+    source: '// noise warp fbm protects tiles (false claim)\n' +
       'vec2 wp=vWorld.xz;vec3 col=texture(uTex,' +
       'vec2(fract(wp.x),fract(wp.y))).rgb;',
     mustReport: 'WORLD_UV_ATLAS'

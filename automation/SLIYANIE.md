@@ -34,7 +34,7 @@
 | #310 | код | — | MIT PixelFX | open | draft: ЖДЁТ устранения конфликта main, полного CI и лицензий PixelFX MIT [#310](https://github.com/mpaykin1/meta6-lab/pull/310) |
 | #313 | код | — | Portal Play Connect Earn | open | draft: ЖДЁТ настоящий META BOT без застревания и полный CI [#313](https://github.com/mpaykin1/meta6-lab/pull/313) |
 | #314 | код | — | Sunken City source ZIP | open | draft: ЖДЁТ зелёный META BOT и Library Machine; ZIP оригинала сохранить [#314](https://github.com/mpaykin1/meta6-lab/pull/314) |
-| #319 | код | — | Source-only git 128 | open | draft: ЖДЁТ source-only-base (отсутствует в main), зелёный Library Machine и новый CI [#319](https://github.com/mpaykin1/meta6-lab/pull/319) |
+| #319 | код | — | Source-only git 128 | open | draft: ЖДЁТ source-only gate — изменение `OSHIBKI.md` отвергается, нельзя удалять журнал/ослаблять тест; [Library Machine FAIL #43748316417](https://github.com/mpaykin1/meta6-lab/actions/runs/43748316417), [PR #319](https://github.com/mpaykin1/meta6-lab/pull/319) |
 | #321 | код | — | INK Raven | merged | слит в feature-ветку `lab/ink-fallen-robot-20261113`, не в main: [SHA 00c22fba](https://github.com/mpaykin1/meta6-lab/commit/00c22fba0c1fbcf71a535ddd9342da286e875b27); [PR #321](https://github.com/mpaykin1/meta6-lab/pull/321) |
 | #322 | код | — | INK Train | open dirty | draft: ЖДЁТ устранения [KONTUR FAIL 43749151115](https://github.com/mpaykin1/meta6-lab/actions/runs/43749151115) и визуального OWNER PASS [#322](https://github.com/mpaykin1/meta6-lab/pull/322) |
 | #325 | код | — | INK Monster | open | draft: ЖДЁТ визуального OWNER PASS монстра и полного CI [#325](https://github.com/mpaykin1/meta6-lab/pull/325) |

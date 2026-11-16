@@ -18,6 +18,25 @@ const mutants = [
     mustReport: 'REPEATED_TILE'
   },
   {
+    name: 'uniform-rotation-still-tiled',
+    source: 'const tex=new THREE.CanvasTexture(canvas);' +
+      'tex.repeat?.set?.(7,7);tex.rotation=Math.PI/4;',
+    mustReport: 'REPEATED_TILE'
+  },
+  {
+    name: 'seeded-global-rotation-still-tiled',
+    source: 'const tex=new THREE.CanvasTexture(canvas);' +
+      'tex.repeat?.set?.(8,8);tex.rotation=hash(seed);',
+    mustReport: 'REPEATED_TILE'
+  },
+  {
+    // Deception: a macroVariation call mentioned only in a comment is not a blend.
+    name: 'fake-macro-blend-in-comment',
+    source: 'const tex=new THREE.CanvasTexture(canvas);' +
+      'tex.repeat?.set?.(9,9);// macroVariation(tex,uv)',
+    mustReport: 'REPEATED_TILE'
+  },
+  {
     // Deception: split the obvious visual expression into two intermediate aliases.
     name: 'alias-obfuscation',
     source: 'float aliasA=sin(uv.x*14.); float aliasB=cos(uv.y*19.);' +
@@ -47,6 +66,9 @@ float wcNoise(vec3 p){return wcHash(p);}
 float wcFbm(vec3 p){float s=wcNoise(p)*.57;s+=wcNoise(p*2.07)*.29;return s;}
 float wcBloom=wcFbm(vWcWorld*.27+wcNoise(vWcWorld*.13));`;
 assert.deepEqual(detectNoPatterns(clean, 'fixed-ink'), []);
+const genuineMacroBlend = 'const tex=new THREE.CanvasTexture(canvas);' +
+  'tex.repeat?.set?.(7,7);const color=macroVariation(tex,uv);';
+assert.deepEqual(detectNoPatterns(genuineMacroBlend, 'stochastic-tiling'), []);
 console.log('BEZ_PATTERNOV MUTATIONS PASS (' + mutants.length + ' catches; clean 0)');
 
 const gameSourceMutants = [

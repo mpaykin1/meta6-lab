@@ -108,6 +108,9 @@ assert.deepEqual(detectNoPatterns(genuineMacroBlend, 'stochastic-tiling'), []);
 const scalarMacroBlend = 'const tex=new THREE.CanvasTexture(canvas);' +
   'tex.repeat.setScalar(7);const color=macroVariation(tex,uv);';
 assert.deepEqual(detectNoPatterns(scalarMacroBlend, 'scalar-stochastic-tiling'), []);
+const copyMacroBlend = 'const tex=new THREE.CanvasTexture(canvas);' +
+  'tex.repeat.copy(new THREE.Vector2(7,7));const color=macroVariation(tex,uv);';
+assert.deepEqual(detectNoPatterns(copyMacroBlend, 'copy-stochastic-tiling'), []);
 const nonTiledAxis = 'const tex=new THREE.CanvasTexture(canvas);' +
   'tex.repeat.x=2;tex.repeat.y=1;';
 assert.deepEqual(detectNoPatterns(nonTiledAxis, 'safe-tile-frequency'), []);

@@ -59,12 +59,13 @@ for(const id of fs.readdirSync(dir).sort()){
   if(id==='patch-pixelfx'){
     if(meta.id!==id || meta.registry!=='third-party-mit' ||
        meta.license!=='MIT' || meta.license_file!=='LICENSE' ||
-       meta.entry!=='entry.js' ||
+       meta.entry!=='entry.js' || meta.notice_file!=='NOTICE.md' ||
        meta.source?.repository!=='patch-gg/pixelfx' ||
        !/^[a-f0-9]{40}$/.test(meta.source.commit) ||
        !/^[a-f0-9]{40}$/.test(meta.source.git_blob_sha) ||
        !/^[a-f0-9]{40}$/.test(meta.source.adapter_blob_sha) ||
        !/^[a-f0-9]{40}$/.test(meta.source.license_git_blob_sha) ||
+       !/^[a-f0-9]{40}$/.test(meta.source.notice_git_blob_sha) ||
        !Array.isArray(meta.exports) || !meta.exports.length ||
        !Array.isArray(meta.effects) || meta.effects.length!==3 ||
        !Array.isArray(meta.source.files) || meta.source.files.length!==20)
@@ -74,6 +75,7 @@ for(const id of fs.readdirSync(dir).sort()){
     if(!external || external.license!==meta.license ||
        external.source_commit!==meta.source.commit ||
        external.license_git_blob_sha!==meta.source.license_git_blob_sha ||
+       external.notice_git_blob_sha!==meta.source.notice_git_blob_sha ||
        JSON.stringify(external.files)!==JSON.stringify(meta.source.files))
       throw Error('Unregistered or altered external source '+id);
     const license=readRegularFile(path.join(folder,'LICENSE'));
@@ -81,6 +83,12 @@ for(const id of fs.readdirSync(dir).sort()){
        !license.toString('utf8').includes('Permission is hereby granted') ||
        !license.toString('utf8').includes('Copyright (c) 2026 Hugo Duprez'))
       throw Error('External MIT notice changed '+id);
+    const notice=readRegularFile(path.join(folder,meta.notice_file));
+    if(gitBlob(notice)!==meta.source.notice_git_blob_sha ||
+       !notice.toString('utf8').includes('Hugo Duprez') ||
+       !notice.toString('utf8').includes('Hollow Crown') ||
+       !notice.toString('utf8').includes('Patch Pixel'))
+      throw Error('External NOTICE changed '+id);
     const files=new Set();
     for(const file of meta.source.files){
       if(typeof file.path!=='string' ||

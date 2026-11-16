@@ -561,7 +561,8 @@ Object.defineProperties(api, Object.getOwnPropertyDescriptors({
   get chapter() {return ['archive','archiveCaught','chapter2End'].includes(state) ? 2 : 1;},
   get chapter1Ended() {return state === 'ending';},
   get chapter1CardReady() {return state === 'ending' && document.getElementById('ap-end')?.hidden === false;},
-  get archivePages() {return chapter2.pages;},
+  get archivePages() {return chapter2.pages;}
+  get archiveSignalPulses() {return chapter2.signalPulses;},
   get archiveDoors() {return chapter2.doorsClosed;},
   get archiveCaught() {return chapter2.caught;},
   get menuOpen() { return ui.menuOpen; }, get ended() { return state === 'chapter2End'; },

@@ -11,6 +11,7 @@ const START = new T.Vector3(-14.9,0,-6.1);
 export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpot, beacon, burst, audio, play, onCaught, onComplete}) {
   let active = false, done = false, pageCount = 0, doorUses = 0, caughtCount = 0;
   let invulnerable = 0, doorHint = false, lastDoorLine = false, finishing = false, drift = 0, contactT = 0;
+  let signalPulses = 0, pageGlow = 0;
   let layoutHash = 'archive-unstarted';
   const sheets = [];
   // Два локальных источника света подсвечивают руины станции: не новые модели,
@@ -19,6 +20,8 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
     const lamp=new T.PointLight(color,3.5,8,2);
     lamp.position.set(x,2.7,z);lamp.visible=false;scene.add(lamp);return lamp;
   });
+  const warmLights = archiveLights.map(l => l.color.clone());
+  const revealLights = ['#a8dbca','#739bc9'].map(c => new T.Color(c));
   // Бумага — доска из генератора "Указатель", а не новая процедурная модель.
   const sourceSign = makers.sign();
   const signBoard = sourceSign.children.find(o => o.isMesh && o.geometry?.type === 'BoxGeometry');
@@ -54,7 +57,8 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
     .sort((a,b)=>a[0]-b[0]).slice(0,count).map(a=>a[1]);
   function begin() {
     active=true;done=false;pageCount=0;doorUses=0;caughtCount=0;
-    archiveLights.forEach(l=>l.visible=true);
+    signalPulses=0;pageGlow=0;
+    archiveLights.forEach((l,i)=>{l.visible=true;l.intensity=1.4;l.color.copy(warmLights[i]);});
     invulnerable=4;doorHint=false;lastDoorLine=false;finishing=false;drift=0;contactT=0;
     const selected=pick(3);layoutHash='archive-'+selected.join('');
     sheets.forEach((s,i)=>{
@@ -81,6 +85,14 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
   function tick(dt,t) {
     if(!active || done)return;
     drift+=dt;invulnerable=Math.max(0,invulnerable-dt);
+    // Каждая найденная страница зажигает архив: три световых удара, затем холодный свет
+    // раскрывает работу спящей машинной сети. Только свет эталонного мира, без новых моделей.
+    pageGlow=Math.max(0,pageGlow-dt*.67);
+    archiveLights.forEach((lamp,i)=>{
+      const target=1.65+pageCount*.35+pageGlow*2.8*(i===0?1:.8);
+      lamp.intensity+=(target-lamp.intensity)*damp(6,dt);
+      lamp.color.lerp(pageCount>=2?revealLights[i]:warmLights[i],damp(1.4,dt));
+    });
     let doorLocked=false;
     doors.forEach((d,i)=>{
       d.cooldown=Math.max(0,d.cooldown-dt);
@@ -99,6 +111,7 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
       if(near(hero.position,s.pos)>1.15)return;
       if(i===2 && doorUses===0)return; // финальный архив требует открыть путь дверью
       s.taken=true;s.mesh.visible=false;s.beacon.userData.want=0;pageCount++;
+      signalPulses++;pageGlow=1;
       audio.chime(i%3);burst(s.pos.clone().setY(.6),'#cddcc4',22);
       play('archive'+pageCount);
     });
@@ -140,6 +153,6 @@ export function createChapter2({scene, makers, paint, hero, iva, canWalk, fixSpo
   }
   return {begin,tick,action,goal,doorNearby,resetAfterCaught,hide,beacons,
     get active(){return active}, get done(){return done},
-    get pages(){return pageCount}, get doorsClosed(){return doorUses},
+    get pages(){return pageCount}, get signalPulses(){return signalPulses}, get doorsClosed(){return doorUses},
     get caught(){return caughtCount},get layoutHash(){return layoutHash}};
 }

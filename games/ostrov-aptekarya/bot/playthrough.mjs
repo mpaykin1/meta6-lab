@@ -34,7 +34,7 @@ while(Date.now()-t0<480000){
   last=await page.evaluate(()=>{
     const a=window.__APTEKAR__;
     return {state:a.state,chapter:a.chapter,pages:a.archivePages,doors:a.archiveDoors,
-      archiveCaught:a.archiveCaught,caught:a.caughtCount,ended:a.ended,
+      archiveCaught:a.archiveCaught,signalPulses:a.archiveSignalPulses,caught:a.caughtCount,ended:a.ended,
       chapter1Ended:a.chapter1Ended,endCard:!document.getElementById('ap-end').hidden};
   });
   strayText=Math.max(strayText,await stray());
@@ -69,7 +69,7 @@ await browser.close();
 const pass=errors.length===0&&strayText===0&&(
   mode==='passive'? result==='CAUGHT_AND_RETRY':
   mode==='chase'||mode==='chapter1'?result==='CHAPTER_I_END':
-  result==='CHAPTER_II_END'&&archiveSeen&&last.pages===3&&last.doors>=1&&
+  result==='CHAPTER_II_END'&&archiveSeen&&last.pages===3&&last.signalPulses===3&&last.doors>=1&&
     last.archiveCaught<=8&&
     (mode!=='full'||chapter1Seen)
 ) && (!artifacts || !['full','archive'].includes(mode) || screenshots);

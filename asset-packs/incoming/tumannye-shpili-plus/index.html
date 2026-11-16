@@ -714,14 +714,17 @@ const SHPILI_PLUS=(()=>{
          vec2 p=vUv;
          float n=fbm(vec2(p.x*5.1+uT*.038,p.y*4.4-uT*.014));
          float lower=1.-smoothstep(.1,.91,p.y+.11*(n-.5));
-         float feather=smoothstep(0.,.12,p.x)*(1.-smoothstep(.88,1.,p.x));
-         float opacity=lower*feather*uFogAlpha*(.48+.52*n);
+         // An irregular plume around the broken legs, not a rectangular billboard.
+         vec2 q=(p-vec2(.51,.23))*vec2(1.38,.92);
+         float radius=length(q)+.19*(n-.5);
+         float plume=1.-smoothstep(.29,.75,radius);
+         float opacity=lower*plume*uFogAlpha*(.34+.52*n);
          vec3 ink=mix(vec3(.012,.027,.052),vec3(.056,.13,.18),n);
          gl_FragColor=vec4(ink,opacity);
        }`});
    for(const layer of [
-     {x:-.45,y:-3.65,z:.1,w:11.8,h:6.8,a:.32},
-     {x:.3,y:-4.25,z:2.45,w:12.5,h:7.2,a:.62}
+     {x:-.45,y:-4.15,z:.1,w:9.8,h:5.3,a:.27},
+     {x:.3,y:-4.8,z:2.45,w:10.5,h:5.5,a:.42}
    ]){
      const fogMat=groundHaze.clone();fogMat.uniforms.uT=U.t;
      fogMat.uniforms.uFogAlpha.value=layer.a;
@@ -832,7 +835,7 @@ const SHPILI_PLUS=(()=>{
  {
    const id='gate-bridge',g=newGroup(id,12,12,-40),R=rng(533);
    const texture=mk(2048,1024,(ctx,W,H)=>{const w=1536,h=660;ctx.scale(W/w,H/h);
-     const stone=S(32),edge=S(76),shadow=S(14),pale=S(105);
+     const stone=S(65),edge=S(122),shadow=S(19),pale=S(163);
      // Broken upper parapet and lower wedge buttresses, including irregular open ends.
      ctx.beginPath();ctx.moveTo(52,277);
      for(let x=52;x<w-54;){
@@ -1083,8 +1086,10 @@ const SHPILI_PLUS=(()=>{
    }
    aura(g,6.5,0x4c8ca9,.13);
    own[id].tick=t=>{
-     g.position.set(hp.x-2.7+Math.sin(t*.83)*.39,
-       hp.y+2.45+Math.sin(t*1.13)*.32,hp.z+.85);
+     // Keep the articulated body clear of the original flying hero;
+     // otherwise shown-hidden captures see only the surrounding shield.
+     g.position.set(hp.x-5.6+Math.sin(t*.83)*.39,
+       hp.y+3.2+Math.sin(t*1.13)*.32,hp.z+3.1);
      body.position.y=.11*Math.sin(t*.93);body.rotation.y=.12*Math.sin(t*.47);
      head.rotation.z=.085*Math.sin(t*.73-.3);head.rotation.y=.16*Math.sin(t*.57);
      for(const w of wings){const p=t*.94+w.side*.36;
@@ -1313,6 +1318,18 @@ const SHPILI_PLUS=(()=>{
    // холстовой текстуре: высокая детализация, один draw call вместо 300+ мешей.
    const veinTex=mk(1024,1024,(ctx,w,h)=>{
      const V=rng(5017);ctx.lineCap='round';ctx.lineJoin='round';
+     // Clip both lightning and faceted shadows to a torn three-lobed cloudbank.
+     // The transparent outside must never form a solid glowing rectangle.
+     ctx.save();ctx.beginPath();
+     ctx.moveTo(101,408);ctx.lineTo(138,275);ctx.lineTo(218,322);
+     ctx.lineTo(247,166);ctx.lineTo(335,224);ctx.lineTo(410,96);
+     ctx.lineTo(500,155);ctx.lineTo(570,109);ctx.lineTo(676,245);
+     ctx.lineTo(762,197);ctx.lineTo(831,324);ctx.lineTo(941,293);
+     ctx.lineTo(917,494);ctx.lineTo(978,575);ctx.lineTo(860,652);
+     ctx.lineTo(910,761);ctx.lineTo(741,784);ctx.lineTo(657,907);
+     ctx.lineTo(502,844);ctx.lineTo(383,898);ctx.lineTo(311,747);
+     ctx.lineTo(165,737);ctx.lineTo(218,584);ctx.lineTo(84,538);
+     ctx.closePath();ctx.clip();
      for(let i=0;i<720;i++){
        const x0=35+V()*(w-70),y0=35+V()*(h-70);
        const steps=3+Math.floor(V()*6),len=14+V()*46,ang=V()*6.28;
@@ -1351,10 +1368,11 @@ const SHPILI_PLUS=(()=>{
        ctx.strokeStyle=i%2?'rgba(255,194,224,.82)':'rgba(112,237,254,.79)';
        ctx.stroke();ctx.restore();
      }
+     ctx.restore();
    });
    const veinMat=new T.MeshBasicMaterial({map:veinTex,transparent:true,
      depthTest:false,depthWrite:false,blending:T.AdditiveBlending,
-     opacity:.78,side:T.DoubleSide});
+     opacity:.46,side:T.DoubleSide});
    const veins=new T.Mesh(new T.PlaneGeometry(27,25),veinMat);
    veins.position.set(0,1.2,1.7);g.add(veins);
    const petals=banners(g,12,14,0xc16b9f,744);
@@ -1362,7 +1380,7 @@ const SHPILI_PLUS=(()=>{
      cloud.position.x=.43*Math.sin(t*.3);cloud.position.y=.22*Math.sin(t*.27);
      for(let i=0;i<banks.length;i++)banks[i].rotation.z=.01*Math.sin(t*.28+i*.7);
      for(const o of fragments)o.frag.position.y=o.py+.16*Math.sin(t*.63-o.phase);
-     veins.rotation.z=.018*Math.sin(t*.42);veinMat.opacity=.9+.09*Math.sin(t*.9);
+     veins.rotation.z=.018*Math.sin(t*.42);veinMat.opacity=.43+.07*Math.sin(t*.9);
      for(const o of rain)o.mesh.position.y=(o.y-((t*o.speed+o.phase)%16))*.42;
      for(let i=0;i<lightning.length;i++){
        const l=lightning[i],pulse=Math.pow(.5+.5*Math.sin(t*1.3+i*2.399),10);

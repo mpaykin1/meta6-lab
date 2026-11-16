@@ -16,7 +16,8 @@
       "source": {
         "type": "owner",
         "from": "новые самолёты/вертолёт/дирижабль"
-      }
+      },
+      "from": "новые самолёты/вертолёт/дирижабль"
     },
     {
       "id": "cargoPlane",
@@ -31,7 +32,8 @@
       "source": {
         "type": "owner",
         "from": "новые самолёты/вертолёт/дирижабль"
-      }
+      },
+      "from": "новые самолёты/вертолёт/дирижабль"
     },
     {
       "id": "rescueHelicopter",
@@ -46,7 +48,8 @@
       "source": {
         "type": "owner",
         "from": "новые самолёты/вертолёт/дирижабль"
-      }
+      },
+      "from": "новые самолёты/вертолёт/дирижабль"
     },
     {
       "id": "skyAirship",
@@ -61,7 +64,8 @@
       "source": {
         "type": "owner",
         "from": "новые самолёты/вертолёт/дирижабль"
-      }
+      },
+      "from": "новые самолёты/вертолёт/дирижабль"
     },
     {
       "id": "stormLighthouse",
@@ -76,7 +80,8 @@
       "source": {
         "type": "owner",
         "from": "маяк"
-      }
+      },
+      "from": "маяк"
     },
     {
       "id": "sailingShip",
@@ -91,7 +96,8 @@
       "source": {
         "type": "owner",
         "from": "корабль с волной"
-      }
+      },
+      "from": "корабль с волной"
     },
     {
       "id": "villageIsland",
@@ -106,7 +112,8 @@
       "source": {
         "type": "owner",
         "from": "остров с деревней и мельницей"
-      }
+      },
+      "from": "остров с деревней и мельницей"
     },
     {
       "id": "volcanicIsland",
@@ -121,7 +128,8 @@
       "source": {
         "type": "owner",
         "from": "вулканический остров"
-      }
+      },
+      "from": "вулканический остров"
     },
     {
       "id": "oceanWhale",
@@ -136,7 +144,8 @@
       "source": {
         "type": "owner",
         "from": "кит"
-      }
+      },
+      "from": "кит"
     },
     {
       "id": "migratingBirds",
@@ -151,7 +160,8 @@
       "source": {
         "type": "owner",
         "from": "стая птиц"
-      }
+      },
+      "from": "стая птиц"
     },
     {
       "id": "hotAirBalloon",
@@ -166,7 +176,8 @@
       "source": {
         "type": "owner",
         "from": "воздушный шар"
-      }
+      },
+      "from": "воздушный шар"
     },
     {
       "id": "thunderCloud",
@@ -181,7 +192,8 @@
       "source": {
         "type": "owner",
         "from": "грозовая туча с молнией"
-      }
+      },
+      "from": "грозовая туча с молнией"
     },
     {
       "id": "speedRing",
@@ -196,7 +208,8 @@
       "source": {
         "type": "owner",
         "from": "бонус-кольца разных цветов с пользой"
-      }
+      },
+      "from": "бонус-кольца разных цветов с пользой"
     },
     {
       "id": "repairRing",
@@ -211,7 +224,8 @@
       "source": {
         "type": "owner",
         "from": "бонус-кольца разных цветов с пользой"
-      }
+      },
+      "from": "бонус-кольца разных цветов с пользой"
     },
     {
       "id": "scoreRing",
@@ -226,7 +240,8 @@
       "source": {
         "type": "owner",
         "from": "бонус-кольца разных цветов с пользой"
-      }
+      },
+      "from": "бонус-кольца разных цветов с пользой"
     },
     {
       "id": "seaBuoy",
@@ -241,7 +256,8 @@
       "source": {
         "type": "owner",
         "from": "буй"
-      }
+      },
+      "from": "буй"
     },
     {
       "id": "sunkenRuins",
@@ -256,7 +272,8 @@
       "source": {
         "type": "owner",
         "from": "руины в воде"
-      }
+      },
+      "from": "руины в воде"
     },
     {
       "id": "coralReef",
@@ -271,7 +288,8 @@
       "source": {
         "type": "game",
         "from": "buildIsland(seed)"
-      }
+      },
+      "from": "buildIsland(seed)"
     },
     {
       "id": "seaMist",
@@ -286,7 +304,8 @@
       "source": {
         "type": "game",
         "from": "buildCloud(seed)"
-      }
+      },
+      "from": "buildCloud(seed)"
     },
     {
       "id": "wakeSpray",
@@ -301,7 +320,12 @@
       "source": {
         "type": "game",
         "from": "trails и parts"
-      }
+      },
+      "from": "trails и parts"
     }
-  ]
+  ],
+  "source": {
+    "type": "owner",
+    "note": "Заметки Claude, OCHERED.md, 2026-11-16; идеи игры из эталона"
+  }
 }

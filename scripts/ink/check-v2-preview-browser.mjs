@@ -23,7 +23,7 @@ try{
       page.on('console',m=>{if(m.type()==='error')errors.push('console: '+m.text());});
       page.on('response',r=>{if(r.status()>=400)errors.push('HTTP '+r.status()+' '+r.url());});
       page.on('requestfailed',r=>errors.push('network '+r.url()+' '+r.failure()?.errorText));
-      const url=variant==='v1'?base+'/demos/living-watercolor/?ink=robot&palette=color':
+      const url=variant==='v1'?base+'/reference/ink-fallen-guardian/?ink=robot&palette=color':
         base+'/preview/ink-fallen-guardian-v2/?ink=robot&palette=color';
       const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:35000});
       assert.equal(response?.status(),200,variant+' URL status');

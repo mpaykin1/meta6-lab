@@ -8,7 +8,7 @@
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
 | #234 | код | — | Каталог игр без рекламы | closed | закрыт: без слияния; защищённое ядро не получило одобрения, исходная ветка сохранена; [PR #234](https://github.com/mpaykin1/meta6-lab/pull/234) |
-| #242 | код | — | SEO каталога | open | draft: ЖДЁТ принятый каталог [#234](https://github.com/mpaykin1/meta6-lab/pull/234) и зелёный CI/SEO |
+| #242 | код | — | SEO каталога | open | draft: ЖДЁТ независимую каноническую основу каталога — [#234 закрыт без слияния](https://github.com/mpaykin1/meta6-lab/pull/234), `claude-games/index.html` отсутствует в main; [PR #242](https://github.com/mpaykin1/meta6-lab/pull/242) |
 | #247 | код | — | Проверяющий и STOROZHA | open dirty | CLAUDE: да/нет? scripts/storozha/**; [STOROZHA FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43414460298); draft |
 | #254 | код | — | Auditor | open dirty | draft: ЖДЁТ конфликт main и CI [#254](https://github.com/mpaykin1/meta6-lab/pull/254); auditor не CORE_WORKFLOW |
 | #258 | код | — | B2 проходчик | open | draft: ЖДЁТ merge main и нового полного CI; [B2 PASS 43420129986](https://github.com/mpaykin1/meta6-lab/actions/runs/43420129986); Claude не нужен |

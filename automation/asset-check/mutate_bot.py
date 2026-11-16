@@ -11,6 +11,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MUTANTS = [
+    ("kinds/htmlpack_harness.mjs", "petals.visible=true;", "petals.visible=false;"),
     ("kinds/htmlpack_harness.mjs", "if(id==='explosion'){", "if(id==='never-explosion'){"),
     ("kinds/htmlpack_harness.mjs", "if(id==='explosion'||id==='sparks'||id==='petals')await page.waitForTimeout(240);", "if(id==='sparks'||id==='petals')await page.waitForTimeout(240);"),
     # Deceptive regression: one fixture ID must not get a free pass.

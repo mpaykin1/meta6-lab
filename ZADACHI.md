@@ -259,3 +259,5 @@
 - БЕЗ ТОРМОЗОВ 16.11.2026, шаг 1: [#278](https://github.com/mpaykin1/meta6-lab/pull/278) — обычный двухродительский merge [4dca9b50](https://github.com/mpaykin1/meta6-lab/commit/4dca9b50c297bdd4893897e02b076abd75f2992c), пересечений изменённых файлов с main нет; проверки нового HEAD ещё не подтверждены.
 
 - БЕЗ ТОРМОЗОВ 16.11.2026, шаг 2: [#258](https://github.com/mpaykin1/meta6-lab/pull/258) — main обновлён двухродительским merge [0d663e0f](https://github.com/mpaykin1/meta6-lab/commit/0d663e0ffd1a8572e3c8deff8393abb162fc96a4), общий DLYA_CLAUDE.md сохранён без потери старых строк, 14 файлов перенесены; новый CI ожидает проверки фактического исхода.
+
+- БЕЗ ТОРМОЗОВ 16.11.2026, шаг 3 (игра): [#245 Veil Terraces](https://github.com/mpaykin1/meta6-lab/pull/245) — сохранены изменения управления и анимации через merge main [2eafafd3](https://github.com/mpaykin1/meta6-lab/commit/2eafafd378155f9650ed63f83f98db6e0a9e9e79), отдельная проверка проходчика на новом HEAD обязательна.

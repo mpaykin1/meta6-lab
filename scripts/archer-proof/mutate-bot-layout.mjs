@@ -15,6 +15,7 @@ function snapshot(code, geometry) {
     G: {mode: 'play', level: 1, depth: 1, phase: 'fight',
       lives: 3, dead: false, paused: false, hits: 2},
     archer: {root: {position: {x: 1, y: 10, z: 2}}},
+    dragon: {root: {position: {x: 8, y: 12, z: -9}}},
     tower: {origin: {x: 0, y: 0, z: 0}, size: 5, blocks: geometry},
     SAVE: {owned: ['bow', 'twin']},
   };
@@ -34,7 +35,8 @@ function valid(code) {
   const different = snapshot(code, variant);
   assert.equal(first.started, true);
   assert.equal(first.level, 0);
-  assert.equal(first.goal, null, 'a boss fight is not a world waypoint');
+  assert.equal(first.goal.x, 8, 'real dragon position should be the target');
+  assert.equal(first.goal.y, -9, 'horizontal ground coordinate must use dragon z');
   assert.equal(first.weapons, 2, 'show real unlocked weapon count');
   assert.equal(first.progress, 2);
   assert.equal(first.layoutHash, second.layoutHash, 'same geometry must hash identically');
@@ -43,7 +45,7 @@ function valid(code) {
 valid(source);
 const changes = [
   ['geometry-hidden', 'hash ^= value | 0;', 'hash ^= 0;'],
-  ['fake-waypoint', 'goal: null,', 'goal: { x: 0, y: 0 },'],
+  ['fake-waypoint', 'goal: started && dragon ? { x: dragon.x, y: dragon.z } : null,', 'goal: { x: 0, y: 0 },'],
   ['fixed-weapons', 'Array.isArray(a?.SAVE?.owned) ? Math.max(1, a.SAVE.owned.length) : 1', '1'],
 ];
 for (const [name, before, after] of changes) {

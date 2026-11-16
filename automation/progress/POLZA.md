@@ -7,6 +7,8 @@
 - В2: games/archer-in-the-fog занят PR #264 (обновлено 13.11 11:04 UTC); skin-trainer имеет ввод/движение героя, отдельный B2 PR не открывать, пока >10 PR.
 
 ## Сделано
+- ЧАТ 2026-11-16: ядро #258 эскалировано Claude [коммит 69cf5b5](https://github.com/mpaykin1/meta6-lab/commit/69cf5b5c1533d21522cb7ad46001daf005510c1f), [B2 real-motion PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43802754806), [guard FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43802754797). Не единица пользы на main.
+
 - ЧАТ 2026-11-16: дефект постоянного layoutHash исправлен по реальной сетке башни [cd5c3b8](https://github.com/mpaykin1/meta6-lab/commit/cd5c3b8d3f5300775d0a476b65a19a27202295f9); добавлены [3 негативные мутации](https://github.com/mpaykin1/meta6-lab/commit/0b209d0641086fc4ced9a8b7f5b32a7bb5f56e6e), [подключены к CI](https://github.com/mpaykin1/meta6-lab/commit/ab83fb4178dfb1918b63255ac14ef238f3ab2a45), [реальная цель-дракон учтена тестом](https://github.com/mpaykin1/meta6-lab/commit/86e6e127c0f46f08983d720d108d5efc09b8eaf1), [OSHIBKI](https://github.com/mpaykin1/meta6-lab/commit/5799c29c9ae1c3d022d983956e5bfce6292ee46d). До зелёного main не единица пользы.
 
 - ЧАТ 2026-11-16: B2 Archer чтение геометрии башни/настоящих координат без симуляции, [SHA 4f9518e](https://github.com/mpaykin1/meta6-lab/commit/4f9518e90e9d08e2ff861cf5c852985b76466c5f), [SHA 77544b3](https://github.com/mpaykin1/meta6-lab/commit/77544b37e74ab42bbd9fffb1c9dcf8e75d0bca3d), [SHA 06762e3](https://github.com/mpaykin1/meta6-lab/commit/06762e3de51ce55c0086e1c25ff2d48646e049cf). Не main, НЕ единица пользы. Занято в [ZANYATO SHA 5cd4cb5](https://github.com/mpaykin1/meta6-lab/commit/5cd4cb5e1df59aa8277a431cf473dc61ad975f2b).
@@ -16,6 +18,7 @@
 
 ## Замеры
 | UTC | Единиц пользы, подтверждённых зелёным main | Игр с __META_BOT__ | FINISH готово | Открытых PR | Конфликтных | Бот-коммитов за 24 ч | Доля пользы |
+| 2026-11-16T13:02Z, чат | 0 — нет нового зелёного main | 1/9 | 7/18 | 30 | 25 | 115 (авторы-боты; все main-коммиты за 24 ч: 160) | 0 подтверждено; 5 задач в резерве до снижения открытых PR до 10 |
 |---|---|---|---|---|---|---|---|
 | 2026-11-13T11:31:08.634Z | 0 (нет нового зелёного Actions на main) | 1/9 (9 папок games/ без *-copy, индексы просмотрены) | 7/18 | 49 ([PR](https://github.com/mpaykin1/meta6-lab/pulls)) | не измерено | 255 (строгая классификация по имени автора, [commits](https://github.com/mpaykin1/meta6-lab/commits/main/); 525 коммитов всего за скользящие 24 ч) | не измерено |
 
@@ -42,6 +45,8 @@
 - Запрет: пять компонентов одного источника НЕ оформлять пятью параллельными PR; правило «по игре на PR». При квоте или приоритете B2 выше L1 этот блок только резерв, а не исполняемая очередь.
 
 ## Уроки
+- 2026-11-16 чат: свыше 30 коммитов подтверждён счётчиком GitHub: 115/160 за 24 ч, основная нагрузка status-dlya-claude (45) и zadachi-watch (29); новый game-only PR не создаём до очереди ≤10. Нулевая польза — отказ от расширения документов; следующий подход: завершать существующий B2 и снимать guard-блокер у Claude.
+
 - ЧАТ: хеш первой башни вычислять по геометрии blocks, а не по постоянному origin/size; проверять одну изменённую грань мутацией, не выпускать ложный «без повторов».
 - ЧАТ: B2 стратегия обязана реально попадать по дракону; прежний full bot [FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43869619771) из-за 20 с без progress. Нельзя увеличивать stuckSec или помечать PASS.
 

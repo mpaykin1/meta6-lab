@@ -74,3 +74,13 @@
 | MG-ремонтник | :48 | да |
 
 - [ZAPUSKI.md](https://github.com/mpaykin1/meta6-lab/blob/lab/avtozadachi-progress/reports/avtozadachi/ZAPUSKI.md#L94-L98) по-прежнему заканчивается в 07:47 UTC; **не дописывать задним числом**. По данным автозадач отсутствует подтверждение работы MG-строитель-3 в этом новом окне; это недостаточность доступной истории, а не установленный пропуск. Следующий шаг — проверить журналирование без ложного нуля и маршрутизацию заблокированных PR; затем оценить v8 на новой выборке.
+
+| 2026-11-16T16:14:54.469Z | 2026-11-16 15:43–2026-11-16 16:14 UTC; ZAPUSKI не обновлён | 1 завершённый по истории задач (ремонтник); 0 новых записей ZAPUSKI | нет данных для полной классификации | нет данных | 2 из 3 карточек диспетчера: внешний Vercel build-rate-limit | [PR #342](https://github.com/mpaykin1/meta6-lab/pull/342), [SHA ffec3d98](https://github.com/mpaykin1/meta6-lab/commit/ffec3d98967607ff329a635b1d85fb305c637d23), v8 без изменений, ловушка OSHIBKI №1141 | После слияния не выдавать внешнюю квоту строителям; процент холостых проверять по следующим реальным запускам |
+
+## Контроль 2026-11-16T16:14:54.469Z: внешняя квота диспетчера
+
+- [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md) выдаёт #325 (отдельная причина guard), #332 и #337 (внешний Vercel build-rate-limit). Последние две неразрешимы ремонтом кода или платными услугами; автоназначение ошибочно.
+- [PR #342](https://github.com/mpaykin1/meta6-lab/pull/342) содержит узкий фильтр в scripts/karta-sil/route.mjs, регрессионную ловушку и строку OSHIBKI №1141. Другие ошибки Vercel и действующие красные зоны не меняются.
+- [Workflow Karta Sil](https://github.com/mpaykin1/meta6-lab/blob/main/.github/workflows/karta-sil.yml) запускает node --test scripts/dispetcher/test/*.test.mjs. Ловушку необходимо перенести из scripts/karta-sil/test/ в scripts/dispetcher/test/ до независимой приёмки.
+- [ZAPUSKI.md](https://github.com/mpaykin1/meta6-lab/blob/lab/avtozadachi-progress/reports/avtozadachi/ZAPUSKI.md#L94-L98) заканчивается 07:47 UTC. По истории задач после прошлого контроля завершился MG-ремонтник (назначен на 15:48, завершился в 16:04), но текста результата или нового SHA нет. Это отсутствие данных, а не доказанный нуль результата.
+- Пять автоматизаций включены с расписанием :00/:12/:24/:36/:48; установленная редакция v8 после отката. [PR #326 в meta6](https://github.com/mpaykin1/meta6/pull/326) ещё требует независимой приёмки; main meta6 по-прежнему содержит v9.

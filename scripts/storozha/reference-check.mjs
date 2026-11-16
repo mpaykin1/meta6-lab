@@ -1,6 +1,7 @@
 // Trusted-main PR guard. Never executes the PR's code.
 import {execFileSync} from 'node:child_process';
-import {referenceGate, reconcileSection} from './core.mjs';
+import {readFileSync} from 'node:fs';
+import {referenceGate, reconcileSection, filesFromGit} from './core.mjs';
 
 const repo = process.env.STOROZHA_REPO;
 const token = process.env.STOROZHA_TOKEN;
@@ -27,9 +28,26 @@ async function prFiles() {
   }
   throw Error('Too many PR files — cannot verify reference safety');
 }
-const pr = await api('/pulls/' + number);
+// Claude 14.11.2026: проверка на PR больше не тратит REST-квоту GitHub (403 rate limit блокировал #301, #308):
+// данные PR берутся из события, список файлов — из git (тот же diff base...head, что отдаёт /pulls/N/files).
+function localPull() {
+  const path = process.env.STOROZHA_EVENT_FILE;
+  if (process.env.STOROZHA_READ_ONLY !== '1' || !path) return null;
+  const event = JSON.parse(readFileSync(path, 'utf8'));
+  const pr = event.pull_request;
+  if (!pr || pr.number !== number) return null;
+  const git = args => execFileSync('git', args, {encoding: 'utf8', maxBuffer: 64 * 1024 * 1024});
+  git(['cat-file', '-e', pr.base.sha + '^{commit}']);
+  git(['cat-file', '-e', pr.head.sha + '^{commit}']);
+  const range = pr.base.sha + '...' + pr.head.sha;
+  const files = filesFromGit(git(['diff', '--no-renames', '--name-status', range]),
+    git(['diff', '--no-renames', '--numstat', range]));
+  return {pr, files};
+}
+const local = localPull();
+const pr = local ? local.pr : await api('/pulls/' + number);
 if (pr.base.ref !== 'main') throw Error('PR must target main');
-const files = await prFiles();
+const files = local ? local.files : await prFiles();
 // The checkout is trusted main; only read old tree metadata.
 const stdout = execFileSync('git', ['ls-tree', '-r', '--name-only',
   pr.base.sha, 'reference/'], {encoding: 'utf8', maxBuffer: 8 * 1024 * 1024});

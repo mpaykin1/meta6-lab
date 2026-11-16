@@ -92,3 +92,6 @@
 
 ### 2026-11-16 · АССЕТЫ «Небесный пилот»: новый вид не распознаётся
 Задача: новый `mg-spritestack/1` отсутствовал в kinds, а `stack.json` не учитывался в общих лицензиях. Ловушка: `test_spritestack_clean_passes` и `test_SS2_wrong_strip_width` / `test_SS3_blurred_alpha` / `test_SS5_too_few_slices` / `test_SS6_identical_slices` / `test_SS7_primitive_single_color` / `test_SS8_missing_in_game`; мутанты в `mutate_bot.py`. Впредь сначала регистрировать формат целиком, затем создавать изображения и демонстрацию. [Патч](https://github.com/mpaykin1/meta6-lab/commit/f8193e7b4dbfaeb9f73bc1810510251bdf4effdb)
+
+### 2026-11-16 · SS6: мутант пережил дублирующую ловушку
+В [CI 43909263886](https://github.com/mpaykin1/meta6-lab/actions/runs/43909263886) 41/42: отключение проверки `changing < min` не обнаруживалось, потому что все прежние примеры одновременно проваливали вторую проверку `changed_shape`. Добавлена независимая ловушка: ровно три смены слоёв при нормальной сложной форме; проверяется конкретный отказ по SS6 (не другие HARD). [Исправление](https://github.com/mpaykin1/meta6-lab/commit/b8569e5895c926688e9f6d0bd742f64cbe982a62)

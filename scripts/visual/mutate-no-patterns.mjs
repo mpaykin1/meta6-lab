@@ -1,5 +1,6 @@
 // Adversarial mutations for BEZ PATTERNOV. Every poisoned fixture must be rejected.
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {detectNoPatterns, isGameSourceFile} from './verify-no-patterns.mjs';
 
 const mutants = [
@@ -131,3 +132,37 @@ for (const file of ['docs/ashen-sumerek/terrain.js', 'scripts/visual/scan.mjs',
   assert.ok(!isGameSourceFile(file), 'ROOT-CATALOG scan scope contaminated: ' + file);
 }
 console.log('ROOT-CATALOG MUTATIONS PASS: 4 playable roots included; 3 exclusions');
+
+
+// Chromium capture folders are intentionally dot-prefixed. GitHub's artifact
+// uploader ignores such folders unless include-hidden-files is explicitly true.
+// Permanent traps prevent a green capture job from discarding all screenshots.
+function capturesAreUploaded(yaml) {
+  const start = yaml.indexOf('      - name: Preserve visual comparisons');
+  if (start < 0) return false;
+  const next = yaml.indexOf('\n      - name:', start + 7);
+  const block = yaml.slice(start, next < 0 ? undefined : next)
+    .replace(/^\s*#.*$/gm, '');
+  return /uses:\s*actions\/upload-artifact@v4/.test(block) &&
+    /^\s*include-hidden-files:\s*true\s*$/m.test(block) &&
+    /^\s*\.pattern-before\/\s*$/m.test(block) &&
+    /^\s*\.pattern-after\/\s*$/m.test(block) &&
+    /^\s*\.pattern-fft\.json\s*$/m.test(block);
+}
+const artifactWorkflow = readFileSync(
+  new URL('../../.github/workflows/bez-patternov.yml', import.meta.url),
+  'utf8'
+);
+assert.ok(capturesAreUploaded(artifactWorkflow),
+  'Screenshots and FFT must be uploaded, even from hidden .pattern-* paths');
+const hiddenUploadMutations = [
+  artifactWorkflow.replace('include-hidden-files: true', 'include-hidden-files: false'),
+  artifactWorkflow.replace('include-hidden-files: true', '# include-hidden-files: true'),
+  artifactWorkflow.replace('.pattern-before/', '# .pattern-before/'),
+  artifactWorkflow.replace('.pattern-fft.json', '# .pattern-fft.json')
+];
+for (const [i, mutant] of hiddenUploadMutations.entries()) {
+  assert.ok(!capturesAreUploaded(mutant),
+    'Artifact-upload mutation ' + (i + 1) + ' bypassed the screenshot preservation guard');
+}
+console.log('ARTIFACT UPLOAD MUTATIONS PASS: 4 broken upload configurations rejected');

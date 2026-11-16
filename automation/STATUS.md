@@ -1,11 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-16T10:32:25.917Z | МГЛ: 8a69b181127fcde08c09b509154117940d351da0 | МГ: b6726b7690ab85059ea7a38d4ee684e49cef1730 | нет данных
+UTC: 2026-11-16T10:38:58.247Z | МГЛ: 01ce103b10cfe25b7fea7f74fa188b22332e25b4 | МГ: b6726b7690ab85059ea7a38d4ee684e49cef1730 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #321 00c22fba0c1fbcf71a535ddd9342da286e875b27: .github/workflows/ink-raven-3d.yml
 - PR #330 17690b22fcbf4893451d7d7ec354f133abd6b738: .github/workflows/lab-bot-focused.yml
 - PR #327 bfdcea35097c49b70e7d08c7747716e4fb0daa20: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
 - PR #320 fd4ea42560b6c1f43ecdf1a7df2e667160943c18: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
-- ещё 40: https://github.com/mpaykin1/meta6-lab/pulls
+- ещё 33: https://github.com/mpaykin1/meta6-lab/pulls
 - МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/43828309195 | Play all games
 - МГЛ: Karta Sil | https://github.com/mpaykin1/meta6-lab/actions/runs/43814780178 | Preserve failure after publishing no-data state
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
@@ -39,14 +39,14 @@ L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 P1 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 ## PR МГЛ
-открыто: 45 | конфликт: нет данных | слито: 55 | закрыто: 87
+открыто: 41 | конфликт: нет данных | слито: 55 | закрыто: 91
 #321 INK · Летящий ворон — объёмная 3D-модель и анимация в лесу | 00c22fba0c1fbcf71a535ddd9342da286e875b27
 #334 INK · Падальщик: зарегистрировать новый эталон в AGENTS, ink | 27422c8b6563e2a8d2be46df1c078a9f32feef59
 #333 INK · Падальщик — OWNER PASS: добавить 3D-эталон в МГЛ для п | 960bab97a6c4a9c5e7cca673bbcbfca43e0f0d66
 #330 Решение владельца 15.11: правила R12–R24 для Playgama; бот-п | 17690b22fcbf4893451d7d7ec354f133abd6b738
 ещё 51: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2385 коммитов | нет данных
+МГЛ: 2391 коммитов | нет данных
 МГ: 34 коммитов | .github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да

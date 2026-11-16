@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-16T10:32:25.917Z",
+  "generated_at": "2026-11-16T10:38:58.247Z",
   "sha": {
-    "lab": "8a69b181127fcde08c09b509154117940d351da0",
+    "lab": "01ce103b10cfe25b7fea7f74fa188b22332e25b4",
     "mg": "b6726b7690ab85059ea7a38d4ee684e49cef1730"
   },
   "checked": {
@@ -109,87 +109,85 @@
       {
         "number": 296,
         "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a",
-        "paths": "нет данных"
-      },
-      {
-        "number": 295,
-        "sha": "b158e1dd42db709100c79ceb5ea6745db53aa2bd",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_htmlpack.py"
+        ]
       },
       {
         "number": 293,
         "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
-        "paths": "нет данных"
-      },
-      {
-        "number": 294,
-        "sha": "f55c2e87fbd99f261977dbe7da58700a0a73a50e",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 292,
         "sha": "5df54dc0764daa77154709207e612b311127108d",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 267,
         "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py",
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 285,
         "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
-        "paths": "нет данных"
-      },
-      {
-        "number": 279,
-        "sha": "d3f16b40a3c59ded669053388c0cf26130a7ed74",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 241,
         "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
       },
       {
         "number": 259,
         "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
-        "paths": "нет данных"
-      },
-      {
-        "number": 263,
-        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4",
-        "paths": "нет данных"
-      },
-      {
-        "number": 257,
-        "sha": "79f4465b6667092e16115222325c012ca73cc137",
-        "paths": "нет данных"
-      },
-      {
-        "number": 256,
-        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec",
-        "paths": "нет данных"
-      },
-      {
-        "number": 243,
-        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
       },
       {
         "number": 246,
         "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
       },
       {
         "number": 265,
         "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
       },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
       },
       {
         "number": 244,
@@ -410,10 +408,10 @@
     "proofs": {}
   },
   "pr": {
-    "open": 45,
+    "open": 41,
     "conflicts": "нет данных",
     "merged": 55,
-    "closed": 87,
+    "closed": 91,
     "mergedItems": [
       {
         "number": 321,
@@ -790,87 +788,85 @@
       {
         "number": 296,
         "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a",
-        "paths": "нет данных"
-      },
-      {
-        "number": 295,
-        "sha": "b158e1dd42db709100c79ceb5ea6745db53aa2bd",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_htmlpack.py"
+        ]
       },
       {
         "number": 293,
         "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
-        "paths": "нет данных"
-      },
-      {
-        "number": 294,
-        "sha": "f55c2e87fbd99f261977dbe7da58700a0a73a50e",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 292,
         "sha": "5df54dc0764daa77154709207e612b311127108d",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 267,
         "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py",
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 285,
         "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
-        "paths": "нет данных"
-      },
-      {
-        "number": 279,
-        "sha": "d3f16b40a3c59ded669053388c0cf26130a7ed74",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 241,
         "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
       },
       {
         "number": 259,
         "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
-        "paths": "нет данных"
-      },
-      {
-        "number": 263,
-        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4",
-        "paths": "нет данных"
-      },
-      {
-        "number": 257,
-        "sha": "79f4465b6667092e16115222325c012ca73cc137",
-        "paths": "нет данных"
-      },
-      {
-        "number": 256,
-        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec",
-        "paths": "нет данных"
-      },
-      {
-        "number": 243,
-        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
       },
       {
         "number": 246,
         "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
       },
       {
         "number": 265,
         "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
       },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
       },
       {
         "number": 244,
@@ -956,7 +952,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2385,
+      "count": 2391,
       "folders": "нет данных"
     },
     "mg": {

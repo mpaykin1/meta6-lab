@@ -1016,7 +1016,17 @@ void main() {
   float depth = uSea - ground;
   float dist = length(vWorld - cameraPosition);
   float frame = mod(floor(uTime * 4.0), 4.0);
-  vec3 tex = texture2D(uTex, vec2((fract(wp.x) + frame) * 0.25, fract(wp.y))).rgb;
+  // Organic underwater currents: no identical 1x1 water-stamp on every block.
+  // The atlas frame and palette remain unchanged; only the sampling field bends.
+  vec2 drift = wp * 0.095 + vec2(uSea * 3.17, uSea * 5.91)
+               + vec2(uTime * 0.003, -uTime * 0.002);
+  float currentA = vnoise(drift);
+  float currentB = vnoise(drift * 2.11 + vec2(11.9, 4.7));
+  float currentC = vnoise(drift * 0.57 + vec2(18.3, 25.6));
+  vec2 currentWarp = vec2(currentA - 0.5 + 0.35 * (currentC - 0.5),
+                          currentB - 0.5 + 0.23 * (currentC - 0.5));
+  vec2 organicUV = fract(wp + currentWarp * 1.55);
+  vec3 tex = texture2D(uTex, vec2((organicUV.x + frame) * 0.25, organicUV.y)).rgb;
   float tl = dot(tex, vec3(0.3, 0.5, 0.2));
   vec3 col = mix(uShallow, uDeep, smoothstep(0.25, 2.6, depth));
   float detail = 1.0 - smoothstep(26.0, 64.0, dist);

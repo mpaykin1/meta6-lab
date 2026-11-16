@@ -394,6 +394,50 @@ class KindTraps(unittest.TestCase):
         self.assertEqual(r.stats["zakaz"]["quality_hard"], ["fireflies"])
         self.assertEqual(r.stats["zakaz"]["ready"], 2)
 
+    def zakaz_text(self, d, items, source=None):
+        z = {"format": "mg-zakaz/1", "source": source or {"type": "owner", "note": "слова владельца в чате"}, "items": items}
+        (d / "ZAKAZ.json").write_text(json.dumps(z, ensure_ascii=False), "utf-8")
+
+    def titem(self, iid, **kw):
+        it = {"id": iid, "name_ru": iid, "kind": "3d", "must": ["силуэт читается"], "from": "владелец: «нужен мост на цепях»"}
+        it.update(kw)
+        return it
+
+    def test_zakaz_without_video_passes(self):
+        """Список без видео (слова владельца) — кадры не нужны, всё сделано → проходит."""
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack()
+        self.zakaz_text(d, [self.titem(n) for n in ("lilyPads", "fireflies", "giantCog")])
+        r = cp.check(d)
+        self.assertEqual(r.hard(), [], r.hard())
+        self.assertEqual(r.stats["zakaz"]["ready"], 3)
+
+    def test_zakaz_without_video_missing_asset(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack()
+        self.zakaz_text(d, [self.titem("lilyPads"), self.titem("chainBridge")])
+        r = cp.check(d)
+        self.assertEqual(r.stats["zakaz"]["missing"], ["chainBridge"])
+        self.assertIn("Z4", {i["id"] for i in r.hard()})
+
+    def test_Z2_text_item_without_origin(self):
+        """Пункт без «from» — непонятно, откуда требование."""
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack()
+        it = self.titem("lilyPads"); del it["from"]
+        self.zakaz_text(d, [it])
+        self.assertIn("Z2", ids(d))
+
+    def test_Z1_unknown_source(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack()
+        self.zakaz_text(d, [self.titem("lilyPads")], source={"type": "guess"})
+        self.assertIn("Z1", ids(d))
+
     # --- смешанный пак: все виды сразу ---
     def test_mixed_pack_runs_every_kind(self):
         make_glb(self.d / "m.glb")

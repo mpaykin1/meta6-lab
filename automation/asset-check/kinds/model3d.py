@@ -275,7 +275,7 @@ def _check_mesh_quality(g, path, binc, root, rel, report):
                 report.add("M20", "HARD", f"{rel}:material[{material_id}]",
                            f"{field} вне диапазона 0–1", "Исправь физически некорректный PBR-параметр")
 
-    bounds = []
+    bounds = {}
     for mesh_id, mesh in enumerate(g.get("meshes", [])):
         for prim_id, primitive in enumerate(mesh.get("primitives", [])):
             if primitive.get("mode", 4) != 4:
@@ -293,7 +293,7 @@ def _check_mesh_quality(g, path, binc, root, rel, report):
                 report.add("M12", "HARD", where, "NaN/Infinity в координатах вершин",
                            "Исправить геометрию до экспорта")
                 continue
-            bounds.append((pos.min(axis=0), pos.max(axis=0)))
+            bounds.setdefault(mesh_id, []).append((pos.min(axis=0), pos.max(axis=0)))
             if "indices" in primitive:
                 ix = _accessor_array(g, primitive["indices"], path, binc, root)
                 if ix is None:
@@ -401,9 +401,67 @@ def _check_mesh_quality(g, path, binc, root, rel, report):
                         report.add("M19", "SOFT", where, "Веса костей не нормализованы",
                                    "Нормализовать skin weights и проверить деформации")
     if bounds and role in ("character", "creature"):
-        minimum = np.min([b[0] for b in bounds], axis=0)
-        maximum = np.max([b[1] for b in bounds], axis=0)
+        world_extent = _world_bounds(g, bounds)
+        if world_extent is None:
+            return
+        minimum, maximum = world_extent
         size = maximum - minimum
         if size[0] > 0 and size[2] / size[0] < .065:
             report.add("M21", "HARD", rel, "Персонаж почти плоский в боковом ракурсе",
                        "Добавить толщину корпусу, голове и суставам")
+
+
+def _world_bounds(g, mesh_bounds):
+    """Evaluate 3D silhouette in the scene, not in each mesh's local coordinates."""
+    import itertools
+    import numpy as np
+
+    nodes = g.get("nodes", [])
+    if not nodes:
+        return None
+    used = {child for n in nodes for child in n.get("children", [])}
+    scenes = g.get("scenes", [])
+    scene_id = g.get("scene", 0)
+    roots = scenes[scene_id].get("nodes", []) if scenes and scene_id < len(scenes) else [
+        i for i in range(len(nodes)) if i not in used
+    ]
+    if not roots:
+        return None
+    minimum = np.full(3, np.inf)
+    maximum = np.full(3, -np.inf)
+    stack = [(ix, np.eye(4), frozenset()) for ix in roots]
+    steps = 0
+    while stack and steps < 10000:
+        ix, parent, ancestors = stack.pop()
+        steps += 1
+        if ix in ancestors or ix < 0 or ix >= len(nodes):
+            continue
+        node = nodes[ix]
+        if "matrix" in node:
+            mat = np.array(node["matrix"], dtype=float).reshape((4, 4), order="F")
+        else:
+            quat = np.array(node.get("rotation", [0, 0, 0, 1]), dtype=float)
+            quat /= max(float(np.linalg.norm(quat)), 1e-12)
+            x, y, z, w = quat
+            mat = np.eye(4)
+            mat[:3, :3] = np.array([
+                [1 - 2 * (y*y + z*z), 2 * (x*y - z*w), 2 * (x*z + y*w)],
+                [2 * (x*y + z*w), 1 - 2 * (x*x + z*z), 2 * (y*z - x*w)],
+                [2 * (x*z - y*w), 2 * (y*z + x*w), 1 - 2 * (x*x + y*y)]
+            ]) @ np.diag(node.get("scale", [1, 1, 1]))
+            mat[:3, 3] = node.get("translation", [0, 0, 0])
+        mat = parent @ mat
+        if "mesh" in node:
+            for low, high in mesh_bounds.get(node["mesh"], []):
+                corners = np.array([list(p) + [1.0] for p in itertools.product(
+                    (low[0], high[0]), (low[1], high[1]), (low[2], high[2])
+                )])
+                world = (mat @ corners.T).T[:, :3]
+                if np.isfinite(world).all():
+                    minimum = np.minimum(minimum, world.min(axis=0))
+                    maximum = np.maximum(maximum, world.max(axis=0))
+        updated = ancestors | {ix}
+        stack.extend((child, mat, updated) for child in node.get("children", []))
+    if not np.isfinite(minimum).all():
+        return None
+    return minimum, maximum

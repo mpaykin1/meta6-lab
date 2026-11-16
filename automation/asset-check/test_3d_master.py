@@ -98,6 +98,13 @@ class QualityAuditTests(unittest.TestCase):
         codes = self.audit(pos, [0, 1, 2, 0, 2, 3], rotation=math.pi / 4)
         self.assertIn("M21", codes)
 
+    def test_cardboard_already_rotated_in_mesh_coordinates(self):
+        angle = math.pi / 4
+        c, s = math.cos(angle), math.sin(angle)
+        pos = [[x * c, y, -x * s] for x, y in
+               [(-1, 0), (1, 0), (1, 2), (-1, 2)]]
+        self.assertIn("M21", self.audit(pos, [0, 1, 2, 0, 2, 3]))
+
     def test_real_volume_is_not_rejected_after_rotation(self):
         pos, ix = self.cube()
         codes = self.audit(pos, ix, rotation=math.pi / 4)

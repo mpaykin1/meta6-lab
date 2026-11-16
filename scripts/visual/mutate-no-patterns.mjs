@@ -198,3 +198,53 @@ for (const [i, mutant] of baselineProbeMutations.entries()) {
     'Original baseline probe mutation ' + (i + 1) + ' was not rejected');
 }
 console.log('ORIGINAL INK PROBE MUTATIONS PASS: 3 broken fixtures rejected');
+
+
+// The real renderer's small objects may show less than one sinusoidal period.
+// Never lose the wide material probe or accidentally apply the old-negative
+// threshold to the small scene in place of the actual periodic shader.
+const captureSource = readFileSync(
+  new URL('./capture-pattern-frames.mjs', import.meta.url), 'utf8'
+);
+const fftSource = readFileSync(
+  new URL('./measure-pattern-fft.py', import.meta.url), 'utf8'
+);
+function preservesBroadSpectrumControl(capture, fft) {
+  const src = capture.replace(/^\s*\/\/.*$/gm, '');
+  const judge = fft.replace(/^\s*#.*$/gm, '');
+  return src.includes("if (target === 'ink') games = [ink, inkProbe];") &&
+    src.includes("else if (target === 'all') games = [...gameTargets(), ink, inkProbe];") &&
+    src.includes('games.push(ink, inkProbe)') &&
+    src.includes("game.id === 'ink-shader-probe'") &&
+    judge.includes('if name == "ink-shader-probe":') &&
+    judge.includes('if previous < CUTOFF:') &&
+    judge.includes('if current >= previous * .85:') &&
+    judge.includes('if "ink" in after and "ink-shader-probe" not in after:');
+}
+assert.ok(preservesBroadSpectrumControl(captureSource, fftSource),
+  'INK old-negative calibration must use 3 shader-wide GPU views');
+const wideProbeMutations = [
+  [
+    captureSource.replace("if (target === 'ink') games = [ink, inkProbe];",
+      "if (target === 'ink') games = [ink];"),
+    fftSource
+  ],
+  [
+    captureSource.replace('games.push(ink, inkProbe)', 'games.push(ink)'),
+    fftSource
+  ],
+  [
+    captureSource,
+    fftSource.replace('if name == "ink-shader-probe":', 'if name == "ink":')
+  ],
+  [
+    captureSource,
+    fftSource.replace('if "ink" in after and "ink-shader-probe" not in after:',
+      'if "ink" in after and "ink" not in after:')
+  ]
+];
+for (const [i, [capture, fft]] of wideProbeMutations.entries()) {
+  assert.ok(!preservesBroadSpectrumControl(capture, fft),
+    'Wide-probe mutation ' + (i + 1) + ' evaded detection');
+}
+console.log('WIDE INK SHADER PROBE MUTATIONS PASS: 4 baseline deceptions caught');

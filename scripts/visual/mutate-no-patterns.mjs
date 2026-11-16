@@ -5,6 +5,25 @@ import {detectNoPatterns, isGameSourceFile} from './verify-no-patterns.mjs';
 
 const mutants = [
   {
+    name: 'raw-world-uv-water-tile',
+    source: 'vec2 wp=vWorld.xz;float frame=0.;' +
+      'vec3 col=texture2D(uTex,vec2((fract(wp.x)+frame)*.25,fract(wp.y))).rgb;',
+    mustReport: 'WORLD_UV_ATLAS'
+  },
+  {
+    name: 'world-uv-aliased-tile',
+    source: 'vec2 wp=vWorld.xz;vec2 uvAtlas=vec2(fract(wp.x),fract(wp.y));' +
+      'vec3 col=texture2D(uTex,uvAtlas).rgb;',
+    mustReport: 'WORLD_UV_ATLAS'
+  },
+  {
+    name: 'world-uv-comment-decoy',
+    source: '// noise warp fbm protects tiles (false claim)\\n' +
+      'vec2 wp=vWorld.xz;vec3 col=texture(uTex,' +
+      'vec2(fract(wp.x),fract(wp.y))).rgb;',
+    mustReport: 'WORLD_UV_ATLAS'
+  },
+  {
     name: 'legacy-ink-sine-interference',
     source: 'float wcFlow1=sin(dot(vWcWorld,vec3(1.73,2.11,.87)));' +
       'float wcFlow2=sin(dot(vWcWorld,vec3(-2.37,.91,1.41)));' +
@@ -103,6 +122,11 @@ float wcNoise(vec3 p){return wcHash(p);}
 float wcFbm(vec3 p){float s=wcNoise(p)*.57;s+=wcNoise(p*2.07)*.29;return s;}
 float wcBloom=wcFbm(vWcWorld*.27+wcNoise(vWcWorld*.13));`;
 assert.deepEqual(detectNoPatterns(clean, 'fixed-ink'), []);
+const seededWaterWarp = 'vec2 wp=vWorld.xz;vec2 p=wp*.095;' +
+  'vec2 currentWarp=vec2(vnoise(p),vnoise(p*2.11))-.5;' +
+  'vec2 organicUV=fract(wp+currentWarp*1.55);' +
+  'vec3 col=texture2D(uTex,vec2(organicUV.x,organicUV.y)).rgb;';
+assert.deepEqual(detectNoPatterns(seededWaterWarp, 'organic-water-uv'), []);
 const genuineMacroBlend = 'const tex=new THREE.CanvasTexture(canvas);' +
   'tex.repeat?.set?.(7,7);const color=macroVariation(tex,uv);';
 assert.deepEqual(detectNoPatterns(genuineMacroBlend, 'stochastic-tiling'), []);

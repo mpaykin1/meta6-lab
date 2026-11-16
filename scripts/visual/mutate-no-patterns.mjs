@@ -37,6 +37,22 @@ const mutants = [
     mustReport: 'REPEATED_TILE'
   },
   {
+    name: 'repeat-set-scalar-seven',
+    source: 'const tex=new THREE.CanvasTexture(canvas);tex.repeat.setScalar(7);',
+    mustReport: 'REPEATED_TILE'
+  },
+  {
+    name: 'repeat-optional-set-scalar',
+    source: 'const tex=new THREE.CanvasTexture(canvas);tex.repeat?.setScalar?.(8);',
+    mustReport: 'REPEATED_TILE'
+  },
+  {
+    name: 'repeat-direct-one-axis',
+    source: 'const tex=new THREE.CanvasTexture(canvas);' +
+      'tex.repeat.x=7;tex.repeat.y=1;tex.rotation=hash(seed);',
+    mustReport: 'REPEATED_TILE'
+  },
+  {
     // Deception: split the obvious visual expression into two intermediate aliases.
     name: 'alias-obfuscation',
     source: 'float aliasA=sin(uv.x*14.); float aliasB=cos(uv.y*19.);' +
@@ -69,6 +85,13 @@ assert.deepEqual(detectNoPatterns(clean, 'fixed-ink'), []);
 const genuineMacroBlend = 'const tex=new THREE.CanvasTexture(canvas);' +
   'tex.repeat?.set?.(7,7);const color=macroVariation(tex,uv);';
 assert.deepEqual(detectNoPatterns(genuineMacroBlend, 'stochastic-tiling'), []);
+const scalarMacroBlend = 'const tex=new THREE.CanvasTexture(canvas);' +
+  'tex.repeat.setScalar(7);const color=macroVariation(tex,uv);';
+assert.deepEqual(detectNoPatterns(scalarMacroBlend, 'scalar-stochastic-tiling'), []);
+const nonTiledAxis = 'const tex=new THREE.CanvasTexture(canvas);' +
+  'tex.repeat.x=2;tex.repeat.y=1;';
+assert.deepEqual(detectNoPatterns(nonTiledAxis, 'safe-tile-frequency'), []);
+
 console.log('BEZ_PATTERNOV MUTATIONS PASS (' + mutants.length + ' catches; clean 0)');
 
 const gameSourceMutants = [

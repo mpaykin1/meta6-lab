@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-15T09:06:15.259Z",
+  "generated_at": "2026-11-16T04:00:03.052Z",
   "sha": {
-    "lab": "3721ab98d40f7813dcb816d9cfd4bcf85fd00ea2",
-    "mg": "3c5d6602aef3f8b0e5dd155f25a49abe69cf3e1f"
+    "lab": "1288743f30031a0f7e711e4b41c6371e9dcece4e",
+    "mg": "b6726b7690ab85059ea7a38d4ee684e49cef1730"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43697554062",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43801325286",
   "review": {
     "protected": [
       {
@@ -265,13 +265,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "Library Machine",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43693274593",
-        "step": "Propose catalog update from main in a separate PR"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -281,10 +275,10 @@
       "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
       "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | closed | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
-      "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
       "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
+      "| КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |",
       "| БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |",
       "| КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |",
       "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
@@ -293,7 +287,6 @@
       "| B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |",
       "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |",
       "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |",
-      "| B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | свободно (зависло 5 ч, было: проходчик, PR #258 — проверка ложного MOVED после дрейфа) | 2026-11-13 08:14 UTC |",
       "| УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |",
       "| B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | свободно (зависло 5 ч, было: чат ChatGPT, один PR одной игры) | 2026-11-13 11:31 UTC |",
       "| CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | свободно (зависло 7 ч, было: чат ChatGPT — продолжение #299, очередь Actions) | 2026-11-14T06:25:04Z |",
@@ -394,15 +387,25 @@
       }
     ],
     "proofs": {
-      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43697180832"
+      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43751904624"
     }
   },
   "pr": {
-    "open": 49,
+    "open": 45,
     "conflicts": "нет данных",
-    "merged": 52,
-    "closed": 82,
+    "merged": 54,
+    "closed": 87,
     "mergedItems": [
+      {
+        "number": 334,
+        "title": "INK · Падальщик: зарегистрировать новый эталон в AGENTS, ink",
+        "sha": "27422c8b6563e2a8d2be46df1c078a9f32feef59"
+      },
+      {
+        "number": 333,
+        "title": "INK · Падальщик — OWNER PASS: добавить 3D-эталон в МГЛ для п",
+        "sha": "960bab97a6c4a9c5e7cca673bbcbfca43e0f0d66"
+      },
       {
         "number": 330,
         "title": "Решение владельца 15.11: правила R12–R24 для Playgama; бот-п",
@@ -922,12 +925,12 @@
   },
   "changes": {
     "lab": {
-      "count": 2254,
+      "count": 2353,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 33,
-      "folders": ".github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:8, SOURCE_INDEX.md:1"
+      "count": 34,
+      "folders": ".github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1"
     }
   },
   "games": [
@@ -949,11 +952,11 @@
     {
       "name": "broken-city-copy",
       "bot": "не запускалась",
-      "storefront": "да"
+      "storefront": "нет"
     },
     {
       "name": "ostrov-aptekarya",
-      "bot": "не прошла",
+      "bot": "прошла",
       "storefront": "нет"
     },
     {
@@ -993,8 +996,8 @@
     },
     {
       "name": "wild-train-prologue",
-      "bot": "прошла",
-      "storefront": "нет"
+      "bot": "не прошла",
+      "storefront": "да"
     }
   ],
   "errors": [

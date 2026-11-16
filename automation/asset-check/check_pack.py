@@ -38,7 +38,7 @@ except ImportError:  # pragma: no cover
     print("Нужны pillow и numpy: pip install pillow numpy", file=sys.stderr)
     sys.exit(2)
 
-BOT_VERSION = "2.3.1"
+BOT_VERSION = "2.4.0"
 HERE = Path(__file__).resolve().parent
 BUDGET = {"pack_mb_soft": 8.0, "pack_mb_hard": 25.0, "files_soft": 120}
 DOC_FILES = {".md", ".txt"}
@@ -51,6 +51,7 @@ class Report:
         self.items: list[dict] = []
         self.stats: dict = {}
         self.kinds: list[str] = []
+        self.asset_ids: set = set()   # имена ассетов, которые нашли виды пака (для сверки с ЗАКАЗом)
 
     def add(self, cid, sev, where, msg, fix):
         self.items.append({"id": cid, "severity": sev, "where": where, "problem": msg, "fix": fix})
@@ -140,6 +141,67 @@ def common_checks(root: Path, r: Report, covered: set):
     r.stats.update({"files": len(files), "megabytes": round(mb, 2)})
 
 
+ZAKAZ_KINDS = {"2d", "2.5d", "3d", "sound", "music", "effect", "ui", "tile", "background"}
+
+
+def zakaz_checks(root: Path, r: Report, covered: set):
+    """ЗАКАЗ ПО ВИДЕО (Z1–Z7): список ассетов, который ChatGPT составил по видео, против того, что реально есть в паке."""
+    p = root / "ZAKAZ.json"
+    if not p.exists():
+        return
+    covered.add("ZAKAZ.json")
+    try:
+        z = json.loads(p.read_text("utf-8"))
+    except Exception as e:  # noqa
+        r.add("Z1", "HARD", "ZAKAZ.json", f"не читается: {e}", "Исправь JSON")
+        return
+    if z.get("format") != "mg-zakaz/1" or not isinstance(z.get("items"), list):
+        r.add("Z1", "HARD", "ZAKAZ.json", "нет format mg-zakaz/1 или списка items", "Формат — SPEC.md §ЗАКАЗ")
+        return
+    vid = z.get("video") or {}
+    if not (vid.get("source") and vid.get("duration_s")):
+        r.add("Z1", "HARD", "ZAKAZ.json", "не указано видео (source, duration_s)", "Укажи, по какому видео составлен список")
+    items, seen = z["items"], set()
+    for it in items:
+        iid = str(it.get("id", ""))
+        if not iid:
+            r.add("Z2", "HARD", "ZAKAZ.json", "пункт без id", "У каждого пункта — id (имя будущего ассета)")
+            continue
+        if iid in seen:
+            r.add("Z7", "HARD", iid, "id повторяется в списке", "Один пункт — один ассет")
+        seen.add(iid)
+        miss = [k for k in ("name_ru", "kind", "seen_at", "frame", "must") if not it.get(k)]
+        if miss:
+            r.add("Z2", "HARD", iid, f"в пункте нет полей {miss}", "name_ru, kind, seen_at (секунды видео), frame (кадр), must (что обязательно видно)")
+        if it.get("kind") and str(it["kind"]).lower() not in ZAKAZ_KINDS:
+            r.add("Z2", "HARD", iid, f"kind={it['kind']!r}", f"kind один из: {', '.join(sorted(ZAKAZ_KINDS))}")
+        fr = it.get("frame")
+        if fr:
+            fp = (root / fr)
+            if not fp.exists() or not fp.resolve().is_relative_to(root.resolve()):
+                r.add("Z3", "HARD", iid, f"нет кадра из видео {fr}", "Сохрани кадр, где этот объект виден, в zakaz/frames/")
+            else:
+                covered.add(fp.relative_to(root).as_posix())
+    dur = float(vid.get("duration_s") or 0)
+    need = max(5, int(dur / 6)) if dur else 5
+    if len(items) < need:
+        r.add("Z5", "SOFT", "ZAKAZ.json", f"в списке {len(items)} пунктов — для видео {dur:.0f} с мало (ожидается ≥ {need})",
+              "Пересмотри видео покадрово: персонажи, враги, постройки, предметы, эффекты, погода, звуки, интерфейс")
+    have = set(r.asset_ids) | {Path(c).stem for c in covered if not c.startswith(("zakaz/", "_check/"))}
+    missing = [str(it.get("id")) for it in items if it.get("id") and str(it.get("id")) not in have]
+    bad_q = sorted({str(it.get("id")) for it in items for i in r.hard()
+                    if it.get("id") and str(it.get("id")) not in missing
+                    and str(it.get("id")) in (str(i["where"]), Path(str(i["where"])).stem)})
+    for iid in missing:
+        name = next((it.get("name_ru") for it in items if str(it.get("id")) == iid), iid)
+        r.add("Z4", "HARD", iid, f"не готово по списку из видео: «{name}»", "Сделай ассет с этим id (или исправь id в списке)")
+    extra = sorted(a for a in r.asset_ids if a not in seen)
+    if items and extra and z.get("strict_extra"):
+        r.add("Z6", "SOFT", ", ".join(extra[:6]), f"{len(extra)} ассетов нет в списке из видео", "Добавь их в ZAKAZ.json или убери")
+    ready = len(seen) - len(missing) - len(bad_q)
+    r.stats["zakaz"] = {"total": len(seen), "ready": max(0, ready), "missing": missing, "quality_hard": bad_q}
+
+
 def check(root: Path) -> Report:
     r = Report(root)
     covered: set = set()
@@ -163,6 +225,7 @@ def check(root: Path) -> Report:
         r.add("U1", "HARD", "/", "вид пака не распознан — бот не знает, что проверять",
               "Положи манифест известного вида (SPEC.md §1) или добавь новый вид kinds/<вид>.py с проверками и ловушками")
     covered |= set(MANIFEST_NAMES)
+    zakaz_checks(root, r, covered)
     common_checks(root, r, covered)
     r.stats.update({"kinds": r.kinds, "bot_version": BOT_VERSION})
     return r
@@ -173,6 +236,10 @@ def to_markdown(r: Report) -> str:
     out = [f"# Проверка ассет-пака — оценка {r.score()}/100",
            f"Вид: **{', '.join(r.kinds) or 'не распознан'}** · HARD: **{len(hard)}** · SOFT: **{len(soft)}** · бот v{BOT_VERSION}",
            f"Статистика: {json.dumps(r.stats, ensure_ascii=False)}", ""]
+    zk = r.stats.get("zakaz")
+    if zk:
+        out[1:1] = [f"**Заказ по видео: готово {zk['ready']} из {zk['total']}** · нет: {', '.join(zk['missing']) or '—'} · "
+                    f"есть, но качество не прошло: {', '.join(zk['quality_hard']) or '—'}"]
     for sev in ("HARD", "SOFT"):
         out.append(f"## {sev}")
         groups = defaultdict(list)

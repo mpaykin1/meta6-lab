@@ -12,15 +12,21 @@ FALLBACK = True
 EXT = (".png", ".webp", ".jpg", ".jpeg", ".gif")
 
 
+def _files(root: Path):
+    # кадры из видео (zakaz/frames) — доказательства для ЗАКАЗа, а не ассеты
+    return [p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in EXT
+            and not p.relative_to(root).as_posix().startswith(("zakaz/", "_check/"))]
+
+
 def detect(root: Path) -> bool:
-    return any(p.suffix.lower() in EXT for p in root.rglob("*") if p.is_file())
+    return bool(_files(root))
 
 
 def check(root: Path, r) -> set:
     covered = set()
     r.add("A1", "HARD", "/", "картинки без манифеста — игра не знает кадры, якоря, назначение",
           "Добавь atlas.json по SPEC.md §1 (вид sprite2d) — тогда бот проверит всё полностью")
-    for p in sorted(x for x in root.rglob("*") if x.is_file() and x.suffix.lower() in EXT):
+    for p in sorted(_files(root)):
         rel = p.relative_to(root).as_posix()
         covered.add(rel)
         try:

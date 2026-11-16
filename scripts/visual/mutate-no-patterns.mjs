@@ -195,7 +195,7 @@ console.log('ARTIFACT UPLOAD MUTATIONS PASS: 4 broken upload configurations reje
 // A probe stored only in PR HEAD cannot be served from the original main worktree.
 // Both versions must use the same fixture, while loading different shader files.
 function baselineProbeIsCopied(yaml) {
-  const start = yaml.indexOf('      - name: Capture original INK on exact PR base');
+  const start = yaml.indexOf('      - name: Capture original versions of changed games on exact PR base');
   if (start < 0) return false;
   const end = yaml.indexOf('\n      - name:', start + 7);
   const block = yaml.slice(start, end < 0 ? undefined : end)
@@ -272,3 +272,38 @@ for (const [i, [capture, fft]] of wideProbeMutations.entries()) {
     'Wide-probe mutation ' + (i + 1) + ' evaded detection');
 }
 console.log('WIDE INK SHADER PROBE MUTATIONS PASS: 4 baseline deceptions caught');
+
+
+// Catch false visual approval when baseline captures INK rather than the actual
+// changed world, or when a detached base worktree asks git for its own diff.
+function preservesChangedGamePair(workflow, capture) {
+  const src = capture.replace(/^\s*\/\/.*$/gm, '');
+  const start = workflow.indexOf('      - name: Capture original versions of changed games on exact PR base');
+  if (start < 0) return false;
+  const step = workflow.slice(start);
+  const next = step.indexOf('\n      - name:', 8);
+  const block = (next < 0 ? step : step.slice(0, next))
+    .replace(/^\s*#.*$/gm, '');
+  return block.includes('PATTERN_DIFF_ROOT: \${{ github.workspace }}') &&
+    block.includes('--out .pattern-before --target changed') &&
+    block.includes('git worktree add --detach') &&
+    src.includes('process.env.PATTERN_DIFF_ROOT || root') &&
+    src.includes('cwd: diffRoot, encoding:');
+}
+assert.ok(preservesChangedGamePair(artifactWorkflow, captureSource),
+  'Before and after must capture the same changed game on their own revisions');
+const changedPairMutations = [
+  [artifactWorkflow.replace('--out .pattern-before --target changed',
+    '--out .pattern-before --target ink'), captureSource],
+  [artifactWorkflow.replace('PATTERN_DIFF_ROOT: \${{ github.workspace }}',
+    '# PATTERN_DIFF_ROOT: \${{ github.workspace }}'), captureSource],
+  [artifactWorkflow, captureSource.replace('cwd: diffRoot, encoding:',
+    'cwd: root, encoding:')],
+  [artifactWorkflow.replace('--out .pattern-before --target changed',
+    '--out .pattern-before --target all'), captureSource]
+];
+for (const [i, [workflow, capture]] of changedPairMutations.entries()) {
+  assert.ok(!preservesChangedGamePair(workflow, capture),
+    'Changed-game screenshot mutation ' + (i + 1) + ' escaped');
+}
+console.log('CHANGED-GAME BASELINE MUTATIONS PASS: 4 invalid before/after pairs rejected');

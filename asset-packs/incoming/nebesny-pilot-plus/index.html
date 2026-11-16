@@ -371,7 +371,8 @@ function frame(now){
     if(t-padT>5){padT=t;pad()}}
 
   // Кольца-ассеты с настоящей игровой пользой.
-  P.heat=Math.max(0,(P.heat||0)+(P.boost>1.0?dt*.24:-dt*.075));
+  P.heat=Math.min(1.2,Math.max(0,(P.heat||0)+(P.boost>1.0?dt*.24:-dt*.075)));
+  if(P.heat>.85)P.v*=Math.max(.94,1-dt*.22);
   P.repairPulse=Math.max(0,(P.repairPulse||0)-dt);
   updateStackBonus();
 
@@ -439,6 +440,17 @@ function frame(now){
 
   // Дополнительные летательные аппараты видны во время полёта.
   drawStackTraffic();
+
+  // Ремонт двигателя заметен по зелёному импульсу вокруг машины.
+  if((P.repairPulse||0)>0){
+    const [rx,ry]=toS(P.x,P.y);
+    g.save();g.setTransform(1,0,0,1,rx,ry-alt);
+    g.strokeStyle='rgba(125,238,154,'+Math.min(1,P.repairPulse/2.5)*.7+')';
+    g.lineWidth=2;g.beginPath();
+    g.ellipse(0,0,15+(2.5-P.repairPulse)*8,8+(2.5-P.repairPulse)*4,0,0,TAU);
+    g.stroke();g.restore();
+  }
+  // Нагрев влияет на тягу, поэтому зелёное кольцо действительно ремонтирует двигатель.
 
   // самолёт: стопка срезов + крен
   {const[sx,sy]=toS(P.x,P.y),ra=P.h-cam.a,rx=Math.cos(ra),ry=Math.sin(ra);

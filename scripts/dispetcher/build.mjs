@@ -113,7 +113,7 @@ export function previousConflict(previous,id){
 export async function resolveConflict(pr,reload,prior,sleep=ms=>new Promise(done=>setTimeout(done,ms))){
  let current=pr, retries=0;
  while(current.mergeable===null && retries<3){
-  await sleep(5000);
+  await sleep(2000);
   current=await reload();
   retries++;
  }

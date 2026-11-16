@@ -45,6 +45,7 @@ jobs:
         run: |
           node --check games/archer-in-the-fog/assets/index-xsRfS2lk.js
           node --check games/archer-in-the-fog/bot-adapter.js
+          node scripts/archer-proof/mutate-bot-layout.mjs
           node scripts/archer-proof/mutate-threat-halo.mjs
           node scripts/archer-proof/mutate-dragon-goal.mjs
       - name: Prove absence and invisible-hook mutations, or compare game versions

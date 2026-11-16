@@ -1,16 +1,31 @@
 {
-  "generated_at": "2026-11-14T23:21:23.959Z",
+  "generated_at": "2026-11-16T04:00:03.052Z",
   "sha": {
-    "lab": "9228ffbbe2d04b7b4036c58ae5b668df003fe2d1",
-    "mg": "42e706b7b27bfca00ae89dbf0787a3f319a3f0f4"
+    "lab": "1288743f30031a0f7e711e4b41c6371e9dcece4e",
+    "mg": "b6726b7690ab85059ea7a38d4ee684e49cef1730"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43652768204",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43801325286",
   "review": {
     "protected": [
+      {
+        "number": 330,
+        "sha": "17690b22fcbf4893451d7d7ec354f133abd6b738",
+        "paths": [
+          ".github/workflows/lab-bot-focused.yml"
+        ]
+      },
+      {
+        "number": 327,
+        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20",
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
       {
         "number": 320,
         "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
@@ -260,10 +275,10 @@
       "| #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |",
       "| #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771627962), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/b10c1038e060c692de837f1c91ffead8d92d51c7) |",
       "| #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | closed | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/42773917984), [ловушка К3](https://github.com/mpaykin1/meta6-lab/commit/e570c011db563c2d566f045a1dbd98326889935a) |",
-      "| #210 | код | `lab/skin-factory` | SKIN FACTORY: ножницы и ловушки для parts-sheet | open dirty | НУЖЕН CLAUDE: меняет защищённые `.github/workflows/skin-factory.yml` и `skin-pack.yml`; визуальная приёмка восьми ракурсов ещё не подтверждена; [PR #210](https://github.com/mpaykin1/meta6-lab/pull/210), [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42769690652) |",
       "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
+      "| КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |",
       "| БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |",
       "| КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |",
       "| M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |",
@@ -272,7 +287,6 @@
       "| B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |",
       "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |",
       "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |",
-      "| B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | свободно (зависло 5 ч, было: проходчик, PR #258 — проверка ложного MOVED после дрейфа) | 2026-11-13 08:14 UTC |",
       "| УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |",
       "| B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | lab/polza-b2-broken-city-20261113 | свободно (зависло 5 ч, было: чат ChatGPT, один PR одной игры) | 2026-11-13 11:31 UTC |",
       "| CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | свободно (зависло 7 ч, было: чат ChatGPT — продолжение #299, очередь Actions) | 2026-11-14T06:25:04Z |",
@@ -373,15 +387,50 @@
       }
     ],
     "proofs": {
-      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43650298784"
+      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43751904624"
     }
   },
   "pr": {
-    "open": 48,
+    "open": 45,
     "conflicts": "нет данных",
-    "merged": 47,
-    "closed": 82,
+    "merged": 54,
+    "closed": 87,
     "mergedItems": [
+      {
+        "number": 334,
+        "title": "INK · Падальщик: зарегистрировать новый эталон в AGENTS, ink",
+        "sha": "27422c8b6563e2a8d2be46df1c078a9f32feef59"
+      },
+      {
+        "number": 333,
+        "title": "INK · Падальщик — OWNER PASS: добавить 3D-эталон в МГЛ для п",
+        "sha": "960bab97a6c4a9c5e7cca673bbcbfca43e0f0d66"
+      },
+      {
+        "number": 330,
+        "title": "Решение владельца 15.11: правила R12–R24 для Playgama; бот-п",
+        "sha": "17690b22fcbf4893451d7d7ec354f133abd6b738"
+      },
+      {
+        "number": 329,
+        "title": "Wild train 1.2.3 + правила R12–R24 + бот не блокирует",
+        "sha": "7875be74f02beeac1694a571134f160a763c5007"
+      },
+      {
+        "number": 327,
+        "title": "fix(karta-sil): исправить учёт брошенных закрытых PR",
+        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20"
+      },
+      {
+        "number": 323,
+        "title": "Эталон Claude: Wild train: Prologue (без рекламы) в МГЛ",
+        "sha": "292900342500a31633395f94bd1cbfa55200587f"
+      },
+      {
+        "number": 328,
+        "title": "Правило: игра в МГЛ по слову владельца, бот не пропуск",
+        "sha": "c1e162b552f9479bf16341ef0469995896a1197b"
+      },
       {
         "number": 324,
         "title": "library-machine: новая игра не роняет source-only гейт",
@@ -619,6 +668,21 @@
       }
     ],
     "protectedItems": [
+      {
+        "number": 330,
+        "sha": "17690b22fcbf4893451d7d7ec354f133abd6b738",
+        "paths": [
+          ".github/workflows/lab-bot-focused.yml"
+        ]
+      },
+      {
+        "number": 327,
+        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20",
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
       {
         "number": 320,
         "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
@@ -861,12 +925,12 @@
   },
   "changes": {
     "lab": {
-      "count": 2192,
+      "count": 2353,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 13,
-      "folders": ".github:2, AGENTS.md:1, automation:1, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:22, reference:22, rules:6, SOURCE_INDEX.md:1"
+      "count": 34,
+      "folders": ".github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1"
     }
   },
   "games": [
@@ -888,7 +952,7 @@
     {
       "name": "broken-city-copy",
       "bot": "не запускалась",
-      "storefront": "да"
+      "storefront": "нет"
     },
     {
       "name": "ostrov-aptekarya",
@@ -928,6 +992,11 @@
     {
       "name": "veil-terraces",
       "bot": "прошла",
+      "storefront": "да"
+    },
+    {
+      "name": "wild-train-prologue",
+      "bot": "не прошла",
       "storefront": "да"
     }
   ],
@@ -974,6 +1043,13 @@
     "| 1128 | 13.11.2026 | Повтор №1107: STATUS ожидает finish в progress.json, хотя производитель пишет parts; ссылка на зелёный PR не подтверждает main | scripts/meta-progress/progress.mjs и 6 исторических Actions из FINISH.md | scripts/status/mutate-finish-summary.mjs: 7 мутаций — ветка, красный run, чужой URL, подмена run, JSON-схема, ранний этап 2, чужой workflow |",
     "| 1129 | 14.11.2026 | Мутация accept-closed не проверяла GraphQL-индекс: якорь совпал с более ранним дублирующим REST-валидатором, дефект ускользал | [MG Dispatcher FAIL 43579028641](https://github.com/mpaykin1/meta6-lab/actions/runs/43579028641), [Karta Sil FAIL 43579028578](https://github.com/mpaykin1/meta6-lab/actions/runs/43579028578) | REST и GraphQL используют общий строгий `indexOpened`; четыре мутации в `scripts/dispetcher/test/api-budget.test.mjs` проверяют общий валидатор |",
     "| 1130 | 14.11.2026 | PR #301 Карта сил: сбор статистики шёл REST-запросами на каждый PR (/pulls/N, /files, /commits, /actions/runs по ветке) — ~300 PR не укладывались ни в 10 минут, ни в квоту 1000/ч; локальный прогон оборван через 600 с. Плюс api-budget мутация accept-closed била не в ту функцию | локальный прогон run.mjs 14.11 09:20 UTC | `scripts/karta-sil/mutate-karta-sil.mjs` (тест «GraphQL-карта», 4 мутации); `scripts/dispetcher/test/api-budget.test.mjs` |",
-    "| 1131 | 14.11.2026 | Карта сил: первый запуск на main посчитал карту, но потерял её на «git push rejected (fetch first)» — main двигают другие боты | [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/43581137135) | `scripts/karta-sil/mutate-karta-sil.mjs` (тест «push повторяется после rebase», 3 мутации) |"
+    "| 1131 | 14.11.2026 | Карта сил: первый запуск на main посчитал карту, но потерял её на «git push rejected (fetch first)» — main двигают другие боты | [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/43581137135) | `scripts/karta-sil/mutate-karta-sil.mjs` (тест «push повторяется после rebase», 3 мутации) |",
+    "| 1132 | 15.11.2026 | Карта сил относила закрытые сторожем и после 24ч простоя PR к обычным закрытиям | statusOf не различал причину закрытия | `scripts/karta-sil/mutate-karta-sil.mjs`: 3 мутации, включая обман |",
+    "| 1133 | 15.11.2026 | Карта сил пропускала строки OSHIBKI с SHA, /pull/N и Actions run ID, считая ошибки всех типов нулём | attributedErrors искал только `PR #N ` и дату ISO | `scripts/karta-sil/mutate-karta-sil.mjs`: 3 мутации, в том числе чужой SHA/чужой run ID |",
+    "| 1135 | 15.11.2026 | Диспетчер не видел стоимость красных прогонов и процент закрытых PR; улучшения 3-дневного окна терялись в 14 днях | Пропуск вычисления redPerMerge/closedShare и отсутствующий 3-дневный срез | `scripts/karta-sil/mutate-karta-sil.mjs`: 3 мутации стоимости, сравнение короткой когорты |",
+    "| 1136 | 15.11.2026 | Мутация порога красных прогонов скрывалась высоким процентом закрытий, поэтому неверный порог не распознавался | Самопроверка новых метрик карты сил: два условия включались одновременно | `scripts/karta-sil/mutate-karta-sil.mjs`: независимый redOnly и 3 мутации 3-дневного среза |",
+    "| 1138 | 15.11.2026 | Новая «Доля закрытых без слияния» ошибочно включала открытые заброшенные PR, завышая потери | Выделен isClosed для каждого PR, отдельный знаменатель метрики | `scripts/karta-sil/mutate-karta-sil.mjs`: различение открытого и закрытого «брошено», мутация расчёта |",
+    "| 1139 | 15.11.2026 | 3-дневный срез по дате создания PR скрывал сегодняшние слияния старых PR | Старый PR создан ранее 3 дней, но слит/закрыт сегодня | `scripts/karta-sil/mutate-karta-sil.mjs`: событийный срез по mergedAt/closedAt/updatedAt, без публикации временных полей |",
+    "| 1134 | 15.11.2026 | Карта сил теряла исполнителей без истории ZANYATO и явного приоритета подписи | Прежний проверенный identifyActor сохранён для истории; новый композитор источников применяет приоритет по контракту | `scripts/karta-sil/mutate-karta-sil.mjs`: 4 мутации, в том числе ложный успех по одному номеру PR |"
   ]
 }

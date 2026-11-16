@@ -545,6 +545,14 @@ class KindTraps(unittest.TestCase):
         Image.fromarray(a).save(p)
         self.assertIn("SS7", ids(self.d))
 
+    def test_SS10_repeated_whole_flock_not_accepted(self):
+        """Different paint is no excuse for repeating an entire flock every layer."""
+        stack = self.make_sprite_stack()
+        stack["assets"]["rangerJet"]["role"] = "creature"
+        stack["assets"]["rangerJet"]["assembly"] = "flock"
+        (self.d / "stack.json").write_text(json.dumps(stack), "utf-8")
+        self.assertIn("SS10", ids(self.d))
+
     def test_SS8_missing_in_game(self):
         self.make_sprite_stack()
         (self.d / "index.html").write_text(

@@ -7,6 +7,8 @@
 - В2: games/archer-in-the-fog занят PR #264 (обновлено 13.11 11:04 UTC); skin-trainer имеет ввод/движение героя, отдельный B2 PR не открывать, пока >10 PR.
 
 ## Сделано
+- ЧАТ 2026-11-16: дефект постоянного layoutHash исправлен по реальной сетке башни [cd5c3b8](https://github.com/mpaykin1/meta6-lab/commit/cd5c3b8d3f5300775d0a476b65a19a27202295f9); добавлены [3 негативные мутации](https://github.com/mpaykin1/meta6-lab/commit/0b209d0641086fc4ced9a8b7f5b32a7bb5f56e6e), [подключены к CI](https://github.com/mpaykin1/meta6-lab/commit/ab83fb4178dfb1918b63255ac14ef238f3ab2a45), [реальная цель-дракон учтена тестом](https://github.com/mpaykin1/meta6-lab/commit/86e6e127c0f46f08983d720d108d5efc09b8eaf1), [OSHIBKI](https://github.com/mpaykin1/meta6-lab/commit/5799c29c9ae1c3d022d983956e5bfce6292ee46d). До зелёного main не единица пользы.
+
 - ЧАТ 2026-11-16: B2 Archer чтение геометрии башни/настоящих координат без симуляции, [SHA 4f9518e](https://github.com/mpaykin1/meta6-lab/commit/4f9518e90e9d08e2ff861cf5c852985b76466c5f), [SHA 77544b3](https://github.com/mpaykin1/meta6-lab/commit/77544b37e74ab42bbd9fffb1c9dcf8e75d0bca3d), [SHA 06762e3](https://github.com/mpaykin1/meta6-lab/commit/06762e3de51ce55c0086e1c25ff2d48646e049cf). Не main, НЕ единица пользы. Занято в [ZANYATO SHA 5cd4cb5](https://github.com/mpaykin1/meta6-lab/commit/5cd4cb5e1df59aa8277a431cf473dc61ad975f2b).
 
 - 2026-11-13T11:31:08.634Z: сохранена общая инструкция v3 в ветке lab/polza-bez-suety-v3-20261113: https://github.com/mpaykin1/meta6-lab/commit/2be9d73a0cec526012119002b3309cf7bffaa407 . Это организационный шаг, НЕ единица пользы.
@@ -40,6 +42,9 @@
 - Запрет: пять компонентов одного источника НЕ оформлять пятью параллельными PR; правило «по игре на PR». При квоте или приоритете B2 выше L1 этот блок только резерв, а не исполняемая очередь.
 
 ## Уроки
+- ЧАТ: хеш первой башни вычислять по геометрии blocks, а не по постоянному origin/size; проверять одну изменённую грань мутацией, не выпускать ложный «без повторов».
+- ЧАТ: B2 стратегия обязана реально попадать по дракону; прежний full bot [FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43869619771) из-за 20 с без progress. Нельзя увеличивать stuckSec или помечать PASS.
+
 - ЧАТ 2026-11-16: считать полезным только зелёный main, не считать новый статус готовности по кодовым коммитам в draft #264; PR #258 B2 success не означает FINISH B2 для каталога.
 
 - Не объявлять B2 зелёным для всех игр после прогона одной: подтверждение для Veil не означает готовность девяти игр.

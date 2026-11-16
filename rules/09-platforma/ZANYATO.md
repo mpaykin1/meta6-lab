@@ -23,3 +23,4 @@
 | LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | свободно (зависло 4 ч, было: чат ChatGPT — продолжение PR #300, merge свежего main) | 2026-11-14T06:22:06Z |
 | PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:17 UTC |
 | РАЗБОР ЗАВАЛОВ — чат ChatGPT | `lab/razbor-zavalov` | чат ChatGPT | 2026-11-15T18:38:00.615Z |
+| B2 Archer #264 — read-only adapter | lab/archer-retention-exp-1-game | чат ChatGPT (продолжение B2 без нового PR, только наблюдение) | 2026-11-16T12:35:00Z |

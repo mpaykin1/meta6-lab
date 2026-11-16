@@ -46,7 +46,8 @@ export async function listOpenPullRequests(request = api) {
    if(result.has(number))throw Error('GitHub API open PRs: неполные данные (повтор страницы)');
    result.set(number,pr);
   }
-  if(batch.length===0)return result;
+  // A partial page is final; an extra empty-page request wastes the GitHub API quota.
+  if(batch.length<100)return result;
  }
  throw Error('GitHub API open PRs: неполная пагинация');
 }

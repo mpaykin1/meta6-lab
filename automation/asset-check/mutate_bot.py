@@ -48,6 +48,7 @@ MUTANTS = [
     ("kinds/htmlpack.py", "if error:", "if False and error:"),
     ("kinds/htmlpack.py", 'if new_ids and "window.__PACK_PROBE__" not in source:', "if False:"),
     ("kinds/spritestack.py", "if count < min_slices:", "if False:"),
+    ("kinds/spritestack.py", 'if meta.get("assembly") == "flock" and float(np.median([', "if False and float(np.median(["),
     ("kinds/spritestack.py", "if changed_shape < max(2, int((count - 1) * .25)):", "if False:"),
     ("kinds/spritestack.py", "if changing < max(2, int((count - 1) * .35)):", "if False:"),
     ("kinds/spritestack.py", "if np.any((alpha > 0) & (alpha < 255)):", "if False:"),

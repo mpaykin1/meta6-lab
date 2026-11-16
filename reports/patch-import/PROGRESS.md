@@ -13,3 +13,5 @@ Added visual game ambience in `demos/patch-pixelfx/atmosphere.js` with imports i
 
 Not published: no verified GitHub Pages 200 yet. STOROZHA PR quota is exceeded
 (44 active PRs vs limit 5), Vercel external build rate limit. Do not disable guards or pay.
+
+2026-11-16: Replaced periodic sine-based fog wave with layered seeded nonperiodic smooth noise; randomized foreground silhouette steps. Only original META GAMES demo module changed, PixelFX MIT sources untouched. Code commit: `e7221fd6b5b928bb496d2388ff5cd680770785f5`. Browser CI and public HTTP 200 still unconfirmed; PR #310 remains draft.

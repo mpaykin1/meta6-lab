@@ -21,6 +21,11 @@ const put = (path, value) => {
 const check = (base, head, pass) => {
   const r = spawnSync(process.execPath, [subject, base, head], { cwd: dir, encoding: "utf8" });
   assert.equal(r.status === 0, pass, "expected " + (pass ? "PASS" : "BLOCK") + " for " + head + "; " + r.stdout + r.stderr);
+  if (pass) {
+    const result = JSON.parse(r.stdout);
+    assert.equal(result.result, "PASS");
+    assert.deepEqual(result.added[0], { path: "preview/add.js", mode: "100644", type: "blob", sha: git("rev-parse", head + ":preview/add.js") });
+  }
 };
 try {
   git("init", "-q");

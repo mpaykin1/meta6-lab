@@ -93,16 +93,17 @@ jobs:
         run: |
           node --check scripts/visual/capture-pattern-frames.mjs
           python scripts/visual/mutate-pattern-fft.py
-      - name: Capture original INK on exact PR base
+      - name: Capture original versions of changed games on exact PR base
         if: github.event_name == 'pull_request'
         env:
           PATTERN_BASE: ${{ github.event.pull_request.base.sha }}
+          PATTERN_DIFF_ROOT: ${{ github.workspace }}
         run: |
           git worktree add --detach "$RUNNER_TEMP/no-pattern-base" "$PATTERN_BASE"
           # Keep the calibration geometry identical on base and head: only the INK shader differs.
           mkdir -p "$RUNNER_TEMP/no-pattern-base/scripts/visual"
           cp scripts/visual/ink-pattern-probe.html "$RUNNER_TEMP/no-pattern-base/scripts/visual/"
-          node scripts/visual/capture-pattern-frames.mjs --root "$RUNNER_TEMP/no-pattern-base" --out .pattern-before --target ink
+          node scripts/visual/capture-pattern-frames.mjs --root "$RUNNER_TEMP/no-pattern-base" --out .pattern-before --target changed
       - name: Capture three viewpoints of affected games
         if: github.event_name == 'pull_request'
         env:

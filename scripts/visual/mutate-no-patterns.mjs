@@ -5,6 +5,25 @@ import {detectNoPatterns, isGameSourceFile} from './verify-no-patterns.mjs';
 
 const mutants = [
   {
+    name: 'raw-world-uv-water-tile',
+    source: 'vec2 wp=vWorld.xz;float frame=0.;' +
+      'vec3 col=texture2D(uTex,vec2((fract(wp.x)+frame)*.25,fract(wp.y))).rgb;',
+    mustReport: 'WORLD_UV_ATLAS'
+  },
+  {
+    name: 'world-uv-aliased-tile',
+    source: 'vec2 wp=vWorld.xz;vec2 uvAtlas=vec2(fract(wp.x),fract(wp.y));' +
+      'vec3 col=texture2D(uTex,uvAtlas).rgb;',
+    mustReport: 'WORLD_UV_ATLAS'
+  },
+  {
+    name: 'world-uv-comment-decoy',
+    source: '// noise warp fbm protects tiles (false claim)\n' +
+      'vec2 wp=vWorld.xz;vec3 col=texture(uTex,' +
+      'vec2(fract(wp.x),fract(wp.y))).rgb;',
+    mustReport: 'WORLD_UV_ATLAS'
+  },
+  {
     name: 'legacy-ink-sine-interference',
     source: 'float wcFlow1=sin(dot(vWcWorld,vec3(1.73,2.11,.87)));' +
       'float wcFlow2=sin(dot(vWcWorld,vec3(-2.37,.91,1.41)));' +
@@ -103,6 +122,11 @@ float wcNoise(vec3 p){return wcHash(p);}
 float wcFbm(vec3 p){float s=wcNoise(p)*.57;s+=wcNoise(p*2.07)*.29;return s;}
 float wcBloom=wcFbm(vWcWorld*.27+wcNoise(vWcWorld*.13));`;
 assert.deepEqual(detectNoPatterns(clean, 'fixed-ink'), []);
+const seededWaterWarp = 'vec2 wp=vWorld.xz;vec2 p=wp*.095;' +
+  'vec2 currentWarp=vec2(vnoise(p),vnoise(p*2.11))-.5;' +
+  'vec2 organicUV=fract(wp+currentWarp*1.55);' +
+  'vec3 col=texture2D(uTex,vec2(organicUV.x,organicUV.y)).rgb;';
+assert.deepEqual(detectNoPatterns(seededWaterWarp, 'organic-water-uv'), []);
 const genuineMacroBlend = 'const tex=new THREE.CanvasTexture(canvas);' +
   'tex.repeat?.set?.(7,7);const color=macroVariation(tex,uv);';
 assert.deepEqual(detectNoPatterns(genuineMacroBlend, 'stochastic-tiling'), []);
@@ -171,7 +195,7 @@ console.log('ARTIFACT UPLOAD MUTATIONS PASS: 4 broken upload configurations reje
 // A probe stored only in PR HEAD cannot be served from the original main worktree.
 // Both versions must use the same fixture, while loading different shader files.
 function baselineProbeIsCopied(yaml) {
-  const start = yaml.indexOf('      - name: Capture original INK on exact PR base');
+  const start = yaml.indexOf('      - name: Capture original versions of changed games on exact PR base');
   if (start < 0) return false;
   const end = yaml.indexOf('\n      - name:', start + 7);
   const block = yaml.slice(start, end < 0 ? undefined : end)
@@ -248,3 +272,38 @@ for (const [i, [capture, fft]] of wideProbeMutations.entries()) {
     'Wide-probe mutation ' + (i + 1) + ' evaded detection');
 }
 console.log('WIDE INK SHADER PROBE MUTATIONS PASS: 4 baseline deceptions caught');
+
+
+// Catch false visual approval when baseline captures INK rather than the actual
+// changed world, or when a detached base worktree asks git for its own diff.
+function preservesChangedGamePair(workflow, capture) {
+  const src = capture.replace(/^\s*\/\/.*$/gm, '');
+  const start = workflow.indexOf('      - name: Capture original versions of changed games on exact PR base');
+  if (start < 0) return false;
+  const step = workflow.slice(start);
+  const next = step.indexOf('\n      - name:', 8);
+  const block = (next < 0 ? step : step.slice(0, next))
+    .replace(/^\s*#.*$/gm, '');
+  return block.includes('PATTERN_DIFF_ROOT: \${{ github.workspace }}') &&
+    block.includes('--out .pattern-before --target changed') &&
+    block.includes('git worktree add --detach') &&
+    src.includes('process.env.PATTERN_DIFF_ROOT || root') &&
+    src.includes('cwd: diffRoot, encoding:');
+}
+assert.ok(preservesChangedGamePair(artifactWorkflow, captureSource),
+  'Before and after must capture the same changed game on their own revisions');
+const changedPairMutations = [
+  [artifactWorkflow.replace('--out .pattern-before --target changed',
+    '--out .pattern-before --target ink'), captureSource],
+  [artifactWorkflow.replace('PATTERN_DIFF_ROOT: \${{ github.workspace }}',
+    '# PATTERN_DIFF_ROOT: \${{ github.workspace }}'), captureSource],
+  [artifactWorkflow, captureSource.replace('cwd: diffRoot, encoding:',
+    'cwd: root, encoding:')],
+  [artifactWorkflow.replace('--out .pattern-before --target changed',
+    '--out .pattern-before --target all'), captureSource]
+];
+for (const [i, [workflow, capture]] of changedPairMutations.entries()) {
+  assert.ok(!preservesChangedGamePair(workflow, capture),
+    'Changed-game screenshot mutation ' + (i + 1) + ' escaped');
+}
+console.log('CHANGED-GAME BASELINE MUTATIONS PASS: 4 invalid before/after pairs rejected');

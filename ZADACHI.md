@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| 🔨 В РАБОТЕ | БЕЗ ПАТТЕРНОВ — Underwater World: 3+3 кадра Chromium, UV-сторож PASS | МГЛ | ChatGPT | `lab/bez-patternov-underwater-water-20261116` | [#336](https://github.com/mpaykin1/meta6-lab/pull/336) · [PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43877451393) | 2026-11-16 13:17 UTC | 2026-11-16 13:38 UTC |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | INK · Павший великан — OWNER PASS, эталон 3D-мира МГЛ | МГЛ | чат ChatGPT | `lab/ink-fallen-robot-20261113` | [#283](https://github.com/mpaykin1/meta6-lab/pull/283) | 2026-11-13 09:55 | 2026-11-16 04:24 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | INK · Акварельный паровоз — объёмная анимированная 3D-модель | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/ink-watercolor-steam-train-20261114` | [#322](https://github.com/mpaykin1/meta6-lab/pull/322) | 2026-11-14 12:56 | 2026-11-16 04:21 |
 | 🛑 ЗАВИС 6+ ч — ТОЛКНУТЬ | Остров последнего аптекаря: глава II «Архив станции», переход главы I, бот | МГЛ | чат ChatGPT | `lab/ostrov-aptekarya-ii` | [#297](https://github.com/mpaykin1/meta6-lab/pull/297) | 2026-11-13 17:09 | 2026-11-16 04:18 |

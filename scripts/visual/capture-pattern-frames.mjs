@@ -38,8 +38,11 @@ else if (target === 'all') games = [...gameTargets(), ink, inkProbe];
 else {
   const base = process.env.PATTERN_BASE;
   if (!base) throw Error('PATTERN_BASE is required for --target changed');
+  // A detached baseline worktree must discover changed targets in PR HEAD,
+  // while serving baseline files. Never derive the diff from the old worktree.
+  const diffRoot = resolve(process.env.PATTERN_DIFF_ROOT || root);
   const changed = execFileSync('git', ['diff', '--name-only', base + '...HEAD'], {
-    cwd: root, encoding: 'utf8'
+    cwd: diffRoot, encoding: 'utf8'
   }).trim().split('\n');
   games = gameTargets().filter(game =>
     changed.some(file => file.startsWith(game.url.replace(/\/$/, ''))));

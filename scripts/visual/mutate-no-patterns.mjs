@@ -166,3 +166,35 @@ for (const [i, mutant] of hiddenUploadMutations.entries()) {
     'Artifact-upload mutation ' + (i + 1) + ' bypassed the screenshot preservation guard');
 }
 console.log('ARTIFACT UPLOAD MUTATIONS PASS: 4 broken upload configurations rejected');
+
+
+// A probe stored only in PR HEAD cannot be served from the original main worktree.
+// Both versions must use the same fixture, while loading different shader files.
+function baselineProbeIsCopied(yaml) {
+  const start = yaml.indexOf('      - name: Capture original INK on exact PR base');
+  if (start < 0) return false;
+  const end = yaml.indexOf('\n      - name:', start + 7);
+  const block = yaml.slice(start, end < 0 ? undefined : end)
+    .replace(/^\s*#.*$/gm, '');
+  return block.includes('git worktree add --detach') &&
+    block.includes('mkdir -p "$RUNNER_TEMP/no-pattern-base/scripts/visual"') &&
+    block.includes('cp scripts/visual/ink-pattern-probe.html ' +
+                   '"$RUNNER_TEMP/no-pattern-base/scripts/visual/"');
+}
+assert.ok(baselineProbeIsCopied(artifactWorkflow),
+  'Original INK base must receive the same shader-probe fixture');
+const copyStep='cp scripts/visual/ink-pattern-probe.html ' +
+  '"$RUNNER_TEMP/no-pattern-base/scripts/visual/"';
+const baselineProbeMutations = [
+  artifactWorkflow.replace(copyStep, '# ' + copyStep),
+  artifactWorkflow.replace(copyStep,
+    'cp scripts/visual/not-a-real-probe.html ' +
+    '"$RUNNER_TEMP/no-pattern-base/scripts/visual/"'),
+  artifactWorkflow.replace('mkdir -p "$RUNNER_TEMP/no-pattern-base/scripts/visual"',
+    '# mkdir -p "$RUNNER_TEMP/no-pattern-base/scripts/visual"')
+];
+for (const [i, mutant] of baselineProbeMutations.entries()) {
+  assert.ok(!baselineProbeIsCopied(mutant),
+    'Original baseline probe mutation ' + (i + 1) + ' was not rejected');
+}
+console.log('ORIGINAL INK PROBE MUTATIONS PASS: 3 broken fixtures rejected');

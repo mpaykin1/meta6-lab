@@ -4,6 +4,7 @@
 - [x] PixelFX: shared/index.json and playable desktop/mobile demo via MetaShared loader
 - [x] PixelFX: asset-check bot descriptor, SHA/license validation and 4 mutation guards
 - [x] PixelFX: original atmospheric layer — smoke bands, wrecked engine, ash, grass, pulsing fire halo and lightning flash (`b553c89d`)
+- [x] PixelFX: preserved pinned upstream NOTICE.md (Sprite Fusion / Hollow Crown attribution; Patch Pixel exclusion) and extended source-index integrity + tamper mutation (`aa433d9a`)
 - [ ] Confirm latest CI including desktop/mobile browser; STOROZHA PR quota blocks merge; publish after verified HTTP 200
 - [ ] Trompe: audit local texturing and exports
 - [ ] Anymove: audit rigging and GLB without restricted model weights

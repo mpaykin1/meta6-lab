@@ -24,6 +24,15 @@ CDN = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
 
 
 def detect(root: Path) -> bool:
+    # The INK game may expose __PACK__ for asset isolation, but is not an HTMLPACK.
+    manifest = root / "pack.json"
+    if manifest.is_file():
+        try:
+            fmt = json.loads(manifest.read_text("utf-8")).get("format")
+            if fmt and fmt != "htmlpack/1":
+                return False
+        except (ValueError, OSError):
+            pass
     page = root / "index.html"
     return page.is_file() and "window.__PACK__" in page.read_text("utf-8", errors="replace")
 

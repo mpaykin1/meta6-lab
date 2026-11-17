@@ -1,7 +1,7 @@
 {
   "format": "htmlpack/1",
-  "version": "1.1.0",
-  "name": "Туманные шпили — живой мир + 6 ассетов",
+  "version": "1.2.0",
+  "name": "Туманные шпили — живой мир + 10 ассетов",
   "base": "reference/tumannye-shpili",
   "reference_count": 26,
   "license": {
@@ -62,6 +62,30 @@
       "label_ru": "Багровая гроза",
       "role": "weather",
       "benefit": "локальный дождь и живые разряды",
+      "animated": true
+    },
+    "twinTowers": {
+      "label_ru": "Башни-близнецы собора",
+      "role": "world",
+      "benefit": "Две гигантские асимметричные башни со стрельчатыми окнами и контрфорсами",
+      "animated": true
+    },
+    "domeTemple": {
+      "label_ru": "Храм-купол со светящейся колоннадой",
+      "role": "world",
+      "benefit": "Голубое святилище, освещённая колоннада, отражение на воде",
+      "animated": true
+    },
+    "aqueduct": {
+      "label_ru": "Разрушенный акведук-аркада",
+      "role": "world",
+      "benefit": "Двухъярусная аркада над водой с обрушенным пролётом",
+      "animated": true
+    },
+    "stormLightning": {
+      "label_ru": "Молнии в грозовых тучах",
+      "role": "weather",
+      "benefit": "Нерегулярные ветвистые разряды освещают тучи и каменные башни",
       "animated": true
     }
   }

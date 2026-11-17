@@ -517,6 +517,14 @@ class CutoutTraps(unittest.TestCase):
         self.save(data)
         self.assertIn("CJ2", ids(self.d))
 
+    def test_CJ8_phantom_asset_without_renderer(self):
+        self.sample()
+        pack = json.loads((self.d / "pack.json").read_text("utf-8"))
+        pack["assets"] = {"ghost_forest": {"label_ru": "Фантом", "source": "scene.js"}}
+        (self.d / "pack.json").write_text(json.dumps(pack), encoding="utf-8")
+        (self.d / "scene.js").write_text("const ids=['ghost_forest'];", encoding="utf-8")
+        self.assertIn("CJ8", ids(self.d))
+
 
 if __name__ == "__main__":
     unittest.main()

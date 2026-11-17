@@ -212,23 +212,23 @@ function rainSplashRings(seed=4){
   const rain=new T.MeshBasicMaterial({color:'#d5d3bb',transparent:true,opacity:.68,depthWrite:false});
   const splashMat=new T.MeshBasicMaterial({color:'#e7e5d6',transparent:true,opacity:.5,depthWrite:false});
   // Individual rain strokes are real short diagonal meshes, never screen artifacts.
-  for(let i=0;i<48;i++){
+  for(let i=0;i<34;i++){
     const x=(rng()-.5)*5.3,z=(rng()-.5)*5.3;
     const meshDrop=rod(g,[x,0,z],[x-.095,.28,z+.055],.009,rain,.005);
     meshDrop.userData.watercolorOutline=false;
     drops.push({o:meshDrop,x,z,phase:rng()*3.25});
   }
-  for(let i=0;i<13;i++){
+  for(let i=0;i<9;i++){
     const x=(rng()-.5)*4.4,z=(rng()-.5)*4.4;
     const m=splashMat.clone();
-    const ripple=mesh(g,new T.TorusGeometry(.17,.014,5,30),m,x,.03,z);
+    const ripple=mesh(g,new T.TorusGeometry(.17,.014,5,18),m,x,.03,z);
     ripple.rotation.x=PI/2;ripple.userData.watercolorOutline=false;
     const center=ball(g,.033,water,x,.04,z,.55,.35,.55);
     rings.push({o:ripple,center,x,z,phase:rng()*4.3,i});
   }
   // Scattered falling splash triangles give an individual droplet a physical wake.
   const impacts=[];
-  for(let i=0;i<14;i++){
+  for(let i=0;i<10;i++){
     const x=(rng()-.5)*4.1,z=(rng()-.5)*4.1;
     const o=mesh(g,new T.ConeGeometry(.024,.16,5),splashMat,x,.11,z);
     o.rotation.z=(rng()-.5)*.9;impacts.push({o,x,z,phase:rng()*3.4});

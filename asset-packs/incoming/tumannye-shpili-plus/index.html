@@ -52,7 +52,7 @@ renderer.setPixelRatio(1);renderer.autoClear=true;renderer.setClearColor(0x06182
 /* ============ СОСТАВ ПАКА (скрытый счётчик, виден только в коде/консоли) ============ */
 const GX=15,GY=45,GZ=-44;                       // врата
 const PLAZA={cam:[0,1.3,14],look:[0,8,-60]};
-const PACK={name:'Туманные шпили',version:'1.2.4',items:[
+const PACK={name:'Туманные шпили',version:'1.2.5',items:[
  {id:'sky',n:'Небо и световые столбы',k:'2D',m:'plaza',cam:[0,6,14],look:[0,40,-80]},
  {id:'fog',n:'Слои тумана',k:'2D',m:'plaza',cam:[-6,5,6],look:[-4,7,-50]},
  {id:'obelisk',n:'Обелиск-гигант',k:'2.5D',m:'plaza',cam:[0,10,-14],look:[0,42,-78]},
@@ -86,7 +86,10 @@ const PACK={name:'Туманные шпили',version:'1.2.4',items:[
  {id:'dawn-sentinel',n:'Крылатый каменный хранитель',k:'2.5D',m:'flight',follow:'hero',d:13,isNew:true},
  {id:'mirror-seed',n:'Сердце зеркальной воды — реликварий',k:'2.5D',m:'flight',cam:[3,45,-19],look:[3,43,-40],isNew:true},
  {id:'storm-heart',n:'Багровая гроза над шпилями',k:'2D',m:'plaza',cam:[-34,48,-14],look:[-34,46,-43],isNew:true},
- {id:'twinTowers',n:'Башни-близнецы собора',k:'3D',m:'plaza',cam:[-44,24,-18],look:[-44,21,-56],isNew:true}
+ {id:'twinTowers',n:'Башни-близнецы собора',k:'3D',m:'plaza',cam:[-44,24,-18],look:[-44,21,-56],isNew:true},
+ {id:'domeTemple',n:'Храм-купол с сияющей колоннадой',k:'3D',m:'plaza',cam:[34,16,-21],look:[34,10,-59],isNew:true},
+ {id:'aqueduct',n:'Двухъярусная затопленная аркада',k:'3D',m:'plaza',cam:[15,18,-25],look:[15,10,-64],isNew:true},
+ {id:'stormLightning',n:'Ветвящиеся молнии грозовых туч',k:'2.5D',m:'plaza',cam:[-18,46,-20],look:[-18,45,-65],isNew:true}
 ]};
 PACK.count=PACK.items.length;PACK.by={d2:PACK.items.filter(i=>i.k==='2D').length,d25:PACK.items.filter(i=>i.k==='2.5D').length,d3:PACK.items.filter(i=>i.k==='3D').length};
 window.__PACK__=PACK;try{console.info('[PACK]',PACK.name,PACK.version,'ассетов:',PACK.count,PACK.by)}catch(e){}
@@ -1528,6 +1531,240 @@ const SHPILI_PLUS=(()=>{
        a.m.material.opacity=.33+.4*(.5+.5*Math.sin(t*(.42+i%7*.13)-a.phase*2.8));
      }
      for(const f of streamers)f(t);
+   };
+ }
+
+
+ // Заказ domeTemple: храм на воде с объёмной купольной кровлей, витражным светом и живым отражением.
+ {
+   const id='domeTemple',g=newGroup(id,34,0,-59),R=rng(7026),columns=[],ribs=[];
+   const matte=new T.MeshLambertMaterial({color:0x314c67,side:T.DoubleSide}),
+         litStone=new T.MeshLambertMaterial({color:0x9cb6be,side:T.DoubleSide}),
+         dark=basic(0x0d2339);
+   const inner=new T.MeshBasicMaterial({color:0x69c9e6,transparent:true,opacity:.35,
+     blending:T.AdditiveBlending,depthWrite:false,side:T.DoubleSide});
+   // Tiered octagonal base and vaulted plinth sit above the flooded plaza.
+   for(let k=0;k<3;k++){
+     const b=mesh(g,new T.CylinderGeometry(8.2-k*.35,8.45-k*.27,.58,12,1),
+       k%2?0x57788b:0x172e44,[0,.35+k*.65,0]);
+     b.rotation.y=k*.021;
+     mesh(g,new T.CylinderGeometry(8.5-k*.33,8.5-k*.33,.09,12),
+       0x9abac4,[0,.68+k*.65,0]);
+   }
+   // Outer colonnade: individual bases, fluted shafts, acanthus capitals.
+   for(let i=0;i<14;i++){
+     const phi=i*Math.PI*2/14+.045,x=Math.cos(phi)*6.6,z=Math.sin(phi)*6.1;
+     const cg=new T.Group();cg.position.set(x,1.5,z);g.add(cg);
+     mesh(cg,new T.CylinderGeometry(.78,.85,.35,8),0x385a74,[0,.18,0]);
+     const shaft=mesh(cg,new T.CylinderGeometry(.34,.46,7.7,9),0x577e91,[0,4.22,0]);
+     columns.push(shaft);
+     for(let f=0;f<7;f++){
+       const a=f*Math.PI*2/7;
+       const shaftFlute=mesh(cg,new T.CylinderGeometry(.057,.071,6.9,4),
+         f%2?0x8baab6:0x243c54,[.375*Math.cos(a),4.25,.375*Math.sin(a)]);
+       shaftFlute.rotation.z=.025*Math.sin(i*5+f);
+     }
+     mesh(cg,new T.CylinderGeometry(.75,.44,.65,8),0x91adb5,[0,8.42,0]);
+     for(let f=0;f<4;f++){
+       const a=(f+.5)*Math.PI/2;
+       const leaf=mesh(cg,new T.ConeGeometry(.17,.77,5),0x6c909e,
+         [.53*Math.cos(a),8.38,.53*Math.sin(a)]);
+       leaf.rotation.z=.17*Math.cos(a);
+     }
+   }
+   // Translucent light is recessed BEHIND the columns, not painted over their silhouettes.
+   const portico=mesh(g,new T.CylinderGeometry(5.8,6.3,7.9,24),
+     0x102b40,[0,6.1,0],.76);
+   const glow=mesh(g,new T.CylinderGeometry(5.3,5.8,7.1,24,1,true),
+     0x5dc7df,[0,6.5,0],.23,true);
+   const cornice=mesh(g,new T.CylinderGeometry(7.9,8.2,1.2,20),
+     0x36556e,[0,10.7,0]);
+   mesh(g,new T.CylinderGeometry(8.1,8.1,.12,20),0x9cbcc6,[0,11.33,0]);
+   const dome=mesh(g,new T.SphereGeometry(7.25,32,16,0,Math.PI*2,0,Math.PI*.5),
+     0x385a78,[0,11.28,0]);
+   dome.material=new T.MeshLambertMaterial({color:0x3e6179,side:T.DoubleSide});
+   // Arcing buttress ribs follow the actual curved dome in 3-D.
+   for(let i=0;i<13;i++){
+     const az=i*Math.PI*2/13+.05,pts=[];
+     for(let j=0;j<=16;j++){
+       const a=j*Math.PI/32,r=7.27*Math.sin(a);
+       pts.push(new T.Vector3(r*Math.cos(az),11.32+7.27*Math.cos(a),r*Math.sin(az)));
+     }
+     const m=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts),24,.095,5,false),litStone);
+     g.add(m);ribs.push(m);
+   }
+   // Lantern and four asymmetric finials.
+   for(let i=0;i<8;i++){
+     const a=i*Math.PI/4;
+     mesh(g,new T.CylinderGeometry(.1,.15,2.4,6),0x7da4b3,
+       [1.35*Math.cos(a),19.1,1.35*Math.sin(a)]);
+   }
+   mesh(g,new T.CylinderGeometry(1.67,2.05,.5,10),0x274860,[0,18.73,0]);
+   mesh(g,new T.ConeGeometry(1.83,3.6,9),0x63899a,[0,21.2,0]);
+   const beacon=mesh(g,new T.OctahedronGeometry(.61,1),0xa8f3ed,[0,23.35,0],.97,true);
+   for(const x of [-6,6]){
+     const p=new T.Group();p.position.set(x,8.3,5.1);g.add(p);
+     const banner=banners(p,3,3.6,0x5e8ea8,600+Math.floor(x));
+     columns.push({banner});
+   }
+   // Shader reflection on the water surface: independent shimmering vertical light columns.
+   const reflected=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,
+     side:T.DoubleSide,blending:T.AdditiveBlending,uniforms:{uT:U.t},vertexShader:VS,
+     fragmentShader:NOISE+
+     'uniform float uT;varying vec2 vUv;void main(){vec2 p=vUv;'+
+     'float s=sin((p.x-.5)*61.+sin(p.y*38.+uT*1.3)*2.6);'+
+     'float n=fbm(vec2(p.x*7.+uT*.04,p.y*18.-uT*.17));'+
+     'float strip=pow(max(0.,.54+.46*s),3.)*exp(-pow((p.x-.5)*2.5,2.));'+
+     'float a=strip*(.5+.5*n)*pow(1.-p.y,1.2)*.72;'+
+     'gl_FragColor=vec4(vec3(.13,.67,.87)*(1.1+n),a);}'});
+   const mirror=new T.Mesh(new T.PlaneGeometry(15,27),reflected);
+   mirror.rotation.x=-Math.PI*.5;mirror.position.set(0,.13,11.5);
+   mirror.renderOrder=43;g.add(mirror);
+   own[id].tick=t=>{
+     inner.opacity=.3+.14*Math.sin(t*.69);
+     glow.material.opacity=.2+.1*Math.sin(t*.75);
+     beacon.scale.setScalar(.94+.08*Math.sin(t*1.15));
+     for(const c of columns)if(c.banner)c.banner(t);
+   };
+ }
+ // Заказ aqueduct: арки — настоящие ПРОЁМЫ в толще камня, два разных яруса.
+ {
+   const id='aqueduct',g=newGroup(id,15,-.3,-64),R=rng(8981),shards=[],chains=[];
+   const wall=new T.MeshLambertMaterial({color:0x3d5c72,side:T.DoubleSide}),
+         caps=new T.MeshLambertMaterial({color:0x879fac,side:T.DoubleSide});
+   const bay=(x,y,w,h,salt)=>{
+     const s=new T.Shape();
+     s.moveTo(x-w*.5,y);s.lineTo(x+w*.5,y);
+     s.lineTo(x+w*.51,y+h*.91);s.lineTo(x+w*.42,y+h+R()*.16);
+     s.lineTo(x-w*.44,y+h+R()*.19);s.lineTo(x-w*.51,y+h*.9);s.closePath();
+     const hole=new T.Path(),r=w*.36;
+     hole.moveTo(x-r,y-.1);
+     hole.lineTo(x-r,y+h*.52);
+     hole.quadraticCurveTo(x-r*.95,y+h*.79,x,y+h*.79);
+     hole.quadraticCurveTo(x+r*.95,y+h*.79,x+r,y+h*.52);
+     hole.lineTo(x+r,y-.1);hole.closePath();
+     s.holes.push(hole);
+     const m=new T.Mesh(new T.ExtrudeGeometry(s,{depth:2.3,steps:1,bevelEnabled:true,
+       bevelThickness:.07,bevelSize:.06,bevelSegments:1}),wall);
+     m.position.z=-1.13;g.add(m);
+     // Clipped voussoirs around the arch crown, visibly irregular.
+     for(let k=0;k<5;k++){
+       const a=(k/4)*Math.PI,x0=x+Math.cos(a)*r*.91,y0=y+h*.57+Math.sin(a)*h*.22;
+       const q=mesh(g,new T.TetrahedronGeometry(.32+R()*.24,0),
+         k%2?0x9db6bc:0x223b52,[x0,y0,1.27]);
+       q.rotation.z=a+salt*.03;
+     }
+   };
+   for(let i=0;i<7;i++){
+     const x=(i-3)*6.35;
+     if(i!==4)bay(x,0,6.25,9,i);
+     else {
+       // Collapsed fourth arch — stone chunks fall and hover over the breach.
+       for(let k=0;k<10;k++){
+         const node=new T.Group();node.position.set(x+(R()-.5)*5,2+R()*7,(R()-.5)*3);
+         g.add(node);
+         const rock=mesh(node,new T.DodecahedronGeometry(.3+R()*.6,0),
+           k%2?0x5e7a8c:0x203c55,[0,0,0]);
+         rock.scale.set(1.1,.65,.72);
+         shards.push({node,y:node.position.y,phase:k*.61+R()*2});
+       }
+     }
+     if(i!==3&&i!==4)bay(x,10.05,6.25,5.6,20+i);
+   }
+   // A line of uneven buttresses descends directly into the water.
+   for(let i=0;i<8;i++){
+     const x=(i-3.5)*6.35;
+     if(i===4)continue;
+     const b=mesh(g,new T.BoxGeometry(1.15,11.4,3.5),0x183447,[x,5.55,0]);
+     b.rotation.z=(i%2?1:-1)*.025;
+     for(let k=0;k<3;k++){
+       const ledge=mesh(g,new T.BoxGeometry(1.4,.22,3.68),
+         k%2?0x52778a:0x9aaeb7,[x,2.6+k*3.9,0]);
+       ledge.rotation.z=(R()-.5)*.026;
+     }
+     const pin=mesh(g,new T.ConeGeometry(.5,2,5),0x6d919d,[x,12.4,0]);
+     pin.rotation.z=(R()-.5)*.09;
+   }
+   for(let k=0;k<5;k++){
+     const x=-15+k*7.7,chain=new T.Group();
+     chain.position.set(x,10.5,1.6);g.add(chain);
+     for(let j=0;j<9;j++){
+       const y=-j*.45;
+       const m=mesh(chain,new T.TorusGeometry(.15,.032,4,7),
+         j%2?0x5d7b8a:0xb0c8c8,[.11*Math.sin(j*.55),y,0],.83);
+       m.rotation.x=Math.PI*.5*(j%2);
+     }
+     chains.push(chain);
+   }
+   const haze=banners(g,8,10,0x4a7489,1251);
+   own[id].tick=t=>{
+     for(const a of shards){
+       a.node.position.y=a.y+.27*Math.sin(t*.61-a.phase);
+       a.node.rotation.z=.16*Math.sin(t*.52-a.phase-.5);
+     }
+     for(let i=0;i<chains.length;i++){
+       chains[i].rotation.z=.055*Math.sin(t*.48-i*.61);
+     }
+     haze(t);
+   };
+ }
+ // Заказ stormLightning: ветвистые 3D-разряды, нерегулярный тайминг, короткое освещение архитектуры.
+ {
+   const id='stormLightning',g=newGroup(id,-18,45,-65),R=rng(57871),bolts=[];
+   const cloudMat=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,
+     side:T.DoubleSide,uniforms:{uT:U.t},vertexShader:VS,fragmentShader:NOISE+
+     'uniform float uT;varying vec2 vUv;void main(){vec2 p=(vUv-.5)*vec2(1.6,1.1);'+
+     'float f=fbm(p*4.+vec2(uT*.035,-uT*.016));'+
+     'float e=length(p)+.17*(f-.5)+.07*sin(p.x*7.+f*3.);'+
+     'float a=(1.-smoothstep(.43,.77,e))*(.4+.5*f);'+
+     'vec3 c=mix(vec3(.013,.039,.075),vec3(.09,.2,.3),f);'+
+     'gl_FragColor=vec4(c,a);}'});
+   for(let k=0;k<4;k++){
+     const v=new T.Mesh(new T.PlaneGeometry(27-k*2.6,15+k*1.2),cloudMat);
+     v.position.set((k-1.6)*2.9,(k%2)*2.4,(k-2)*1.45);
+     g.add(v);
+   }
+   const glint=new T.PointLight(0x9fe4fa,0,105,2);
+   glint.position.set(0,-3,5);g.add(glint);
+   const branch=(k,ground=false)=>{
+     const lines=[],seedX=(k-1)*8+(R()-.5)*2;
+     let x=seedX,y=10+R()*2,z=1.4+k*.2;
+     for(let j=0;j<18;j++){
+       const nextX=x+(R()-.5)*3.4,nextY=y-(.8+R()*.55);
+       lines.push(x,y,z,nextX,nextY,z);
+       if(R()<.61){
+         let a=nextX,b=nextY;
+         for(let m=0;m<3;m++){
+           const xx=a+(R()-.5)*2.9,yy=b-.35-R();
+           lines.push(a,b,z,xx,yy,z-.06);a=xx;b=yy;
+         }
+       }
+       x=nextX;y=nextY;
+     }
+     if(ground)lines.push(x,y,z,x+(R()-.5)*2,-18,z);
+     return new T.Float32BufferAttribute(lines,3);
+   };
+   for(let k=0;k<3;k++){
+     const geometry=new T.BufferGeometry();
+     geometry.setAttribute('position',branch(k,k===1));
+     const mat=new T.LineBasicMaterial({color:k===1?0xd4f8ff:0x82c4ef,
+       transparent:true,opacity:.19,blending:T.AdditiveBlending,depthWrite:false});
+     const line=new T.LineSegments(geometry,mat);g.add(line);
+     bolts.push({line,mat,k});
+   }
+   let hit=-100,next=0,duration=.2;
+   own[id].tick=t=>{
+     if(t>=next){
+       hit=t;duration=.11+R()*.16;
+       next=t+4.7+R()*8.6;
+       for(const b of bolts){
+         b.line.geometry.setAttribute('position',branch(b.k,b.k===1));
+         b.line.geometry.computeBoundingSphere();
+       }
+     }
+     const pulse=Math.max(0,1-(t-hit)/duration);
+     glint.intensity=pulse*4.4;
+     for(const b of bolts)b.mat.opacity=.16+.77*pulse;
    };
  }
 

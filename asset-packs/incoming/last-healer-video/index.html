@@ -120,7 +120,7 @@ function draw(ms){
 }
 function frame(ms){requestAnimationFrame(frame);if(manual||document.hidden){last=ms;return;}let dt=Math.min(.04,Math.max(0,(ms-last)/1000));last=ms;t+=dt;draw(ms);}
 choose(0);resize();requestAnimationFrame(frame);
-window.__PACK__={items:scenes.map(s=>({id:s.id,label:s.label})),version:'0.1.0'};
+window.__INK_VIDEO_PACK__={items:scenes.map(s=>({id:s.id,label:s.label})),version:'0.1.0'};
 window.__PACK_PROBE__={assets,setHidden:(id,hidden)=>{if(assets[id])assets[id].visible=!hidden;draw(t*1000);return !!assets[id];},
  freeze:()=>{manual=true;draw(t*1000);},resume:()=>{manual=false;},select:(id)=>{let i=scenes.findIndex(s=>s.id===id);if(i<0)return false;choose(i);return true;}};
 window.__ISOLATE__=(id,on)=>window.__PACK_PROBE__.setHidden(id,!on);

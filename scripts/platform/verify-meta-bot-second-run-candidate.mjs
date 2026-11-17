@@ -41,7 +41,7 @@ async function checkScenario(source, second, expectedOk, label) {
   const chromium = { launch: async () => ({ close: async () => {} }) };
   const runOnce = async ({ firstOnly }) => {
     count++;
-    assert.equal(firstOnly, count === 2, label + ': wrong firstOnly');
+    assert.equal(!!firstOnly, count === 2, label + ': wrong firstOnly');
     return structuredClone(count === 1 ? first : second);
   };
   const fpsSave = () => {};

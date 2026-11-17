@@ -2,6 +2,7 @@
 // Only objects from the order are added; all existing enemy behaviour is preserved.
 import '../../../reference/ink-night-scream/src/scene.js';
 import {makers} from './makers.js';
+import {createBlackTrainAudio} from './sounds.js';
 const game=window.__INK_NIGHT_SCREAM__;
 if(!game?.ready)throw new Error('BLACK TRAIN: reference game did not initialize');
 const {scene,train}=game;
@@ -21,6 +22,15 @@ const fartherTrees=[makers.gnarledTree(73),makers.gnarledTree(129)];
 fartherTrees[0].position.set(9.8,0,-19.0);
 fartherTrees[1].position.set(-14.5,0,-25.0);
 scene.add(...fartherTrees);
+const storm=put('stormClouds',17,[0.5,5.3,-23.0]);
+const fence=put('brokenFence',26,[8.4,0,-15.7]);
+const grass=put('tallGrass',42,[1.1,0,-3.9]);
+const wet=put('wetRailGlow',49,[3.3,0,-7.5]);
+const wire=put('barbedWire',65,[-6.2,0,-13.6]);
+const puddles=put('swampPuddles',83,[-1.9,0,-4.4]);
+const grassFar=makers.tallGrass(105);grassFar.position.set(-2.4,0,-4.5);scene.add(grassFar);
+const fenceFar=makers.brokenFence(103);fenceFar.position.set(-10,0,-18);scene.add(fenceFar);
+const sound=createBlackTrainAudio();
 const oldLoco=train.userData.rig.loco;
 let lastActive=false,lastX=0,variant=false,last=performance.now();
 const originalVisible=Object.fromEntries(Object.keys(assets).map(k=>[k,true]));
@@ -29,7 +39,7 @@ window.__ISOLATE__=(id,on)=>{
  originalVisible[id]=!!on;assets[id].visible=!!on;return true;
 };
 window.__PACK__={items:Object.keys(assets).map(id=>({id,label:id}))};
-window.__BLACK_TRAIN_ASSETS__={scene,assets,fartherTrees,order:15,created:6,
+window.__BLACK_TRAIN_ASSETS__={scene,assets,fartherTrees,order:15,created:15,
  show:id=>window.__ISOLATE__(id,true),hide:id=>window.__ISOLATE__(id,false)};
 function frame(now){
  requestAnimationFrame(frame);
@@ -49,6 +59,15 @@ function frame(now){
  red.userData.light.intensity=(2+approach*23)*blink;
  red.userData.glass.material.color.setRGB(.34+approach*1.45,.02,.025);
  const t=now*.001;
+ sound.tick(t,approach,game.stats().state!=='title');
+ storm.userData.tick(t,dt);
+ fence.userData.tick(t,dt);
+ fenceFar.userData.tick(t+.4,dt);
+ grass.userData.tick(t,dt);
+ grassFar.userData.tick(t+.7,dt);
+ wet.userData.tick(t,dt);
+ wire.userData.tick(t,dt);
+ puddles.userData.tick(t,dt);
  if(black.visible)black.userData.tick(t,dt);
  crossing.userData.tick?.(t,dt);
  chains.userData.tick(t,dt);

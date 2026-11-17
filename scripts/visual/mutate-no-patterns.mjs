@@ -87,6 +87,28 @@ const mutants = [
     mustReport: 'CLONE_GRID'
   },
   {
+    name: 'instanced-tree-grid-with-no-variation',
+    source: 'for(let i=0;i<64;i++){const col=i%8;const row=Math.floor(i/8);' +
+      'dummy.position.set(col*3,0,row*3);dummy.updateMatrix();' +
+      'forest.setMatrixAt(i,dummy.matrix);}',
+    mustReport: 'INSTANCE_GRID'
+  },
+  {
+    name: 'instanced-matrix-translation-grid',
+    source: 'for(let i=0;i<100;i++){' +
+      'dummy.matrix.makeTranslation((i%10)*4,0,Math.floor(i/10)*4);' +
+      'forest.setMatrixAt(i,dummy.matrix);}',
+    mustReport: 'INSTANCE_GRID'
+  },
+  {
+    // Deception: comment promises seeded variation but matrices remain identical.
+    name: 'instanced-grid-hash-in-comment-only',
+    source: 'for(let i=0;i<64;i++){/* hash(i) gives variation */' +
+      'dummy.position.set((i%8)*3,0,Math.floor(i/8)*3);' +
+      'dummy.updateMatrix();forest.setMatrixAt(i,dummy.matrix);}',
+    mustReport: 'INSTANCE_GRID'
+  },
+  {
     name: 'one-noise-octave',
     source: 'float pigment=noise(position*.2); diffuseColor.rgb*=pigment;',
     mustReport: 'SINGLE_SCALE'
@@ -115,6 +137,16 @@ assert.deepEqual(detectNoPatterns(copyMacroBlend, 'copy-stochastic-tiling'), [])
 const nonTiledAxis = 'const tex=new THREE.CanvasTexture(canvas);' +
   'tex.repeat.x=2;tex.repeat.y=1;';
 assert.deepEqual(detectNoPatterns(nonTiledAxis, 'safe-tile-frequency'), []);
+
+const irregularInstances = 'for(let i=0;i<64;i++){' +
+  'dummy.position.set((i%8)*3+jitter(seed,i),0,Math.floor(i/8)*3);' +
+  'dummy.updateMatrix();forest.setMatrixAt(i,dummy.matrix);}';
+assert.deepEqual(detectNoPatterns(irregularInstances, 'seeded-instanced-forest'), []);
+const rotatedInstances = 'for(let i=0;i<64;i++){' +
+  'dummy.position.set((i%8)*3,0,Math.floor(i/8)*3);' +
+  'dummy.rotation.y=hash(seed+i)*6.28;dummy.updateMatrix();' +
+  'forest.setMatrixAt(i,dummy.matrix);}';
+assert.deepEqual(detectNoPatterns(rotatedInstances, 'seeded-instanced-rotation'), []);
 
 console.log('BEZ_PATTERNOV MUTATIONS PASS (' + mutants.length + ' catches; clean 0)');
 

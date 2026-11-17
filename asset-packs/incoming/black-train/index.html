@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#000000">
+<title>BLACK TRAIN — Ночной перегон</title>
+<link rel="icon" href="data:,">
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;touch-action:none;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+button{font-family:Georgia,serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#menu-btn{position:fixed;z-index:7;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));
+  height:44px;width:44px;border:1px solid #9ba8a44a;border-radius:50%;background:#1d2529bd;color:#cbd1c6;font-size:21px;backdrop-filter:blur(12px)}
+#panel{max-height:calc(100vh - 96px);overflow:auto;position:fixed;z-index:7;top:max(72px,calc(env(safe-area-inset-top) + 60px));
+  right:16px;width:min(300px,calc(100vw - 32px));padding:21px;box-sizing:border-box;border:1px solid #83958e40;border-radius:14px;
+  background:#121a1ef0;color:#c4cbc6;box-shadow:0 18px 45px #0008;backdrop-filter:blur(18px)}
+#menu-btn.need-sound{animation:glow 1.6s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 22px #e8f0ffaa;border-color:#e8f0ff99}}
+#panel[hidden]{display:none}
+#panel h1{font:italic 25px Georgia;margin:0 0 4px;letter-spacing:.06em}
+#panel p{font:12.5px/1.55 Georgia;margin:0 0 12px;color:#9aaba5}
+#panel button{display:block;width:100%;margin:8px 0;padding:10px 12px;text-align:left;border:1px solid #8fa29942;border-radius:8px;
+  background:#ffffff0b;color:#e0e2d9;font:14px Georgia}
+#panel small{display:block;margin-top:14px;font:11.5px/1.6 Georgia;color:#91a7a2}
+.big{position:fixed;z-index:6;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;
+  border:1px solid #c9d3d044;background:#0d1214cc;color:#dfe5e0;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 40px #dfe8ff14;animation:breathe 3.2s ease-in-out infinite}
+.big[hidden]{display:none}
+.big svg{width:34px;height:34px}
+@keyframes breathe{50%{box-shadow:0 0 60px #dfe8ff2a;transform:scale(1.04)}}
+#torch{position:fixed;z-index:6;right:max(22px,env(safe-area-inset-right));bottom:max(26px,calc(env(safe-area-inset-bottom) + 14px));
+  width:72px;height:72px;border-radius:50%;border:none;background:#0b1013b8;padding:0}
+#torch[hidden]{display:none}
+#torch svg{width:72px;height:72px;display:block}
+#torch .bulb{fill:#f2f4ea;transition:fill .2s}
+#torch.off .bulb{fill:#3b4442}
+#torch-ring{stroke:#e6ecdf;stroke-width:3;fill:none;stroke-dasharray:100;transition:stroke-dashoffset .2s}
+#torch.off #torch-ring{stroke:#59625f}
+#pips{position:fixed;z-index:6;left:max(18px,env(safe-area-inset-left));top:max(28px,calc(env(safe-area-inset-top) + 14px));display:flex;gap:6px}
+#pips[hidden]{display:none}
+#pips i{display:block;width:13px;height:9px;border:1px solid #c9b88a55;border-radius:1px;background:#0006}
+#pips i.on{background:#f2d9a0;box-shadow:0 0 8px #ffd99a99;border-color:#ffe2a6}
+#error{display:none;position:fixed;z-index:10;bottom:20px;left:16px;right:16px;padding:13px;background:#292b31;color:#e9ded0;
+  font:12px/1.5 monospace;border:1px solid #7f514a55;border-radius:8px}
+</style>
+<script type="importmap">{"imports":{"three":"../../../reference/ink-fallen-guardian/three.module.js"}}</script>
+<style>
+#panel .black-title{font:900 29px Georgia,serif;letter-spacing:.09em;color:#ccc8c1;text-shadow:0 2px 4px #07080b,0 0 24px #64151d}
+#panel .black-title:after{content:"";display:block;height:2px;margin:7px 10px 14px;background:linear-gradient(90deg,transparent,#ac2026 48%,transparent)}
+</style>
+</head>
+<body>
+<button id="menu-btn" aria-label="Меню" aria-expanded="false">☰</button>
+<div id="panel" hidden>
+<h1 class="black-title">BLACK TRAIN</h1>
+<p>Ночь. Вы один у железной дороги, в руке фонарик. В темноте кто-то есть — и он улыбается.</p>
+<p><b>Как выжить:</b> ведите вокруг лучом. Пока оно в свете, оно шипит и уходит в темноту. Как только отвернётесь — оно прыгает ближе, обходя вас со спины. Слушайте: дыхание и шаги звучат с той стороны, где оно.</p>
+<p>Фонарик садится — выключайте его, чтобы зарядить (кольцо на кнопке). Когда идёт поезд, его грохот заглушает шаги, и оно двигается быстрее.</p>
+<p>Переживите все поезда ночи (огоньки слева вверху) — наступит рассвет. Каждая ночь длиннее и опаснее.</p>
+<button id="resume">▶ Продолжить</button>
+<button id="sound">🔊 Звук включён</button>
+<button id="restart">↻ Начать с первой ночи</button>
+<small>Палец / мышь — оглядываться.<br>Кнопка фонарика или F / пробел — включить и выключить свет.<br>Стрелки или A / D — поворот.<br>Лучше в наушниках.</small>
+</div>
+<div id="pips" hidden aria-hidden="true"></div>
+<button id="start" class="big" aria-label="Начать"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg></button>
+<button id="again" class="big" hidden aria-label="Ещё раз"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v5h-5"/></svg></button>
+<button id="torch" hidden aria-label="Фонарик">
+<svg viewBox="0 0 72 72"><circle cx="36" cy="36" r="31.8" stroke="#ffffff14" stroke-width="3" fill="none"/>
+<circle id="torch-ring" cx="36" cy="36" r="31.8" pathLength="100" transform="rotate(-90 36 36)"/>
+<path class="bulb" d="M27 24h18l-4 11v14a2 2 0 0 1-2 2h-6a2 2 0 0 1-2-2V35z"/>
+<path d="M31 41h10" stroke="#0b1013" stroke-width="1.6"/></svg></button>
+<div id="error" role="alert"></div>
+<script>
+function showFailure(e){const el=document.getElementById('error');el.style.display='block';el.textContent='Ошибка запуска: '+String(e||'неизвестная ошибка');}
+window.addEventListener('error',e=>showFailure(e.message));
+window.addEventListener('unhandledrejection',e=>showFailure(e.reason?.message||e.reason));
+</script>
+<script type="module" src="./src/scene.js"></script>
+</body>
+</html>

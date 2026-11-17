@@ -8,6 +8,13 @@ window.GothicCity = (() => {
     roof: '#853f58', roofHi: '#bd6771', moss: '#52665c'
   };
   const decks = new Map();
+  const sheets = Object.create(null);
+  for (const id of ['gothicCathedral','spireTower','archBridge','sunsetSky']) {
+    const image = new Image();
+    image.decoding = 'async';
+    image.onload = () => { sheets[id] = image; decks.clear(); };
+    image.src = './stacks/' + id + '.png';
+  }
   const count = { gothicCathedral: 88, spireTower: 74, archBridge: 42 };
   const sizes = { gothicCathedral: 96, spireTower: 64, archBridge: 96 };
   function rect(c, color, x, y, w, h) {
@@ -148,7 +155,9 @@ window.GothicCity = (() => {
       const canvas = mk(size, size);
       const ctx = canvas.getContext('2d', {alpha: true});
       ctx.imageSmoothingEnabled = false;
-      if (id === 'gothicCathedral') cathedral(ctx, s, variant);
+      if (sheets[id] && variant === 0) {
+        ctx.drawImage(sheets[id], s * size, 0, size, size, 0, 0, size, size);
+      } else if (id === 'gothicCathedral') cathedral(ctx, s, variant);
       else if (id === 'spireTower') tower(ctx, s, variant);
       else bridge(ctx, s, variant);
       sl.push(canvas);
@@ -183,6 +192,10 @@ window.GothicCity = (() => {
     const fade = clamp((165 - P.z) / 115, .22, 1);
     g.save();
     g.setTransform(1,0,0,1,0,0);
+    if (sheets.sunsetSky) {
+      g.globalAlpha = fade * .45;
+      g.drawImage(sheets.sunsetSky, 0, 0, W, H);
+    }
     // Небо + фиолетовое закатное море поверх GPU: плоскости мягко меняются по высоте.
     const horizon = H * (.55 + Math.sin(cam.phi - .62) * .13);
     const sky = g.createLinearGradient(0,0,0,H);

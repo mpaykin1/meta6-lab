@@ -1,0 +1,18 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>INK — сравнение с эталоном</title><style>
+*{box-sizing:border-box}html,body{margin:0;background:#1c2827;color:#e1d4b7;height:100%;font:13px system-ui}
+main{height:100%;display:grid;grid-template-rows:auto minmax(0,1fr)}nav{display:flex;gap:6px;align-items:center;padding:9px;overflow-x:auto;white-space:nowrap}
+button{border:1px solid #a4b2a05e;background:#33473d;color:#e9e5ca;border-radius:5px;padding:8px 10px;cursor:pointer;flex-shrink:0}
+button[aria-pressed=true]{background:#a37c65;border-color:#d1b38b;color:#fff}
+#view{display:grid;grid-template-columns:1fr 1fr;min-height:0}
+section{position:relative;min-height:0;border-left:1px solid #a2a89266}iframe{width:100%;height:100%;border:0}
+label{position:absolute;top:8px;left:10px;padding:5px 9px;background:#12211fc9;pointer-events:none;z-index:2}
+@media(max-width:650px){#view{grid-template-columns:1fr;grid-template-rows:1fr 1fr}}
+</style></head><body><main><nav id="nav"></nav><div id="view">
+<section><label>Эталон · принятая долина INK</label><iframe src="../../../../reference/ink-fallen-guardian/index.html" title="Эталон"></iframe></section>
+<section><label>Новые ассеты · долина пробуждения</label><iframe id="new" src="../index.html" title="Ассеты"></iframe></section></div></main>
+<script>
+const items=[["brokenAqueduct","Акведук"],["reedBank","Камыш"],["ashStag","Олень"],["pilgrimageBoat","Лодка"],["moonBell","Колокол"],["brokenWindmill","Мельница"],["myceliumBloom","Грибы"],["drownedGates","Врата"],["cogRelic","Шестерня"],["ravenCoven","Вороны"],["paperMoths","Мотыльки"],["marshBeacon","Маяк"]];
+const nav=document.getElementById('nav'),iframe=document.getElementById('new');
+for(const [id,name]of items){const b=document.createElement('button');b.textContent=name;b.dataset.id=id;b.onclick=()=>{iframe.contentWindow.postMessage({selectAsset:id},location.origin);for(const button of nav.children)button.setAttribute('aria-pressed',String(button===b))};nav.appendChild(b)}
+iframe.addEventListener('load',()=>nav.children[0].click());
+</script></body></html>

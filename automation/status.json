@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T06:33:31.910Z",
+  "generated_at": "2026-11-17T06:34:58.473Z",
   "sha": {
-    "lab": "c3415a38e73b8adcedbeb36ec342c9026bb0ffd3",
+    "lab": "70d4e5ef0f1135bb0405b23b81ab32b07386b957",
     "mg": "431274dce4ad29b6c0f38058f52dd9ae2dae454a"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44031927380",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44031940222",
   "review": {
     "protected": [
       {
@@ -350,11 +350,6 @@
         "workflow": "OWNER PASS references sync",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44031927307",
         "step": "Byte-for-byte OWNER PASS sync"
-      },
-      {
-        "workflow": "B1 — all games open without console errors",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44030952680",
-        "step": "Open every MCP list_games entry on desktop and mobile"
       }
     ],
     "redMg": [],
@@ -504,7 +499,7 @@
   },
   "pr": {
     "open": 47,
-    "conflicts": 33,
+    "conflicts": "нет данных",
     "merged": 72,
     "closed": 115,
     "mergedItems": [
@@ -1207,7 +1202,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2698,
+      "count": 2700,
       "folders": "нет данных"
     },
     "mg": {

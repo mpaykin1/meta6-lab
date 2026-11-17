@@ -3,7 +3,7 @@
   "periodDays": 14,
   "recentDays": 3,
   "source": "GitHub GraphQL API",
-  "status": "полная",
+  "status": "устарела",
   "types": [
     {
       "id": "game_reference",
@@ -5828,5 +5828,7 @@
       "newErrors": 0,
       "repeatedError": false
     }
-  ]
+  ],
+  "staleSince": "2026-11-17T15:53:28.133Z",
+  "staleReason": "GitHub GraphQL: нет данных: unexpected end of JSON input\n"
 }

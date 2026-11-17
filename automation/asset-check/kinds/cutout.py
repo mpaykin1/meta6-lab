@@ -209,7 +209,7 @@ def check(root: Path, report) -> set[str]:
                 report.stats["cutout_browser"] = payload.get("facts", {})
                 if run.returncode != 0 or not payload.get("ok"):
                     report.add("CJ9", "HARD", "index.html",
-                               "browser rendering failed: " + str(payload.get("errors", []))[:420],
+                               "browser rendering failed: " + str(payload.get("errors", []))[:220] + " facts: " + str(payload.get("facts", {}))[:330],
                                "Repair missing textures, GLSL errors, broken controls or invisible rig")
             except (OSError, subprocess.TimeoutExpired) as exc:
                 report.add("CJ9", "HARD", "index.html", f"browser launch failed: {exc}",

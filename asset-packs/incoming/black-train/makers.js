@@ -144,7 +144,7 @@ function groundMist(seed=6){
    'float alpha=clamp(.13*ragged*ground*ends*wisps*(1.+1.9*beam+1.1*lamp),0.,.52);',
    'gl_FragColor=vec4(pigment,alpha);',
    '}'
-  ].join('\\n')
+  ].join('\n')
  });
  for(let i=0;i<12;i++){
    const w=2.4+r()*3.1,h=.75+r()*.48;

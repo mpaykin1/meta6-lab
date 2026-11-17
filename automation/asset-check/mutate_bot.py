@@ -55,6 +55,8 @@ MUTANTS = [
     ("kinds/spritestack.py", 'if len(colors) < 4:', 'if False:'),
     ("kinds/spritestack.py", 'if "gothic-city.js" not in body:', 'if False:'),
     ("kinds/spritestack.py", 'if "__ISOLATE__" not in script_source:', 'if False:'),
+    ("kinds/spritestack.py", 'if shape_diversity < min(5, max(3, n // 16)):', 'if False:'),
+    ("kinds/spritestack.py", '"GothicCity.drawGround()" not in index_source', 'False'),
 ]
 
 

@@ -211,6 +211,8 @@ function stormClouds(seed=7){
   bank.position.y=y+.045*Math.sin(t*.06+phase*.8);
   bank.rotation.z=.009*Math.sin(t*.052+j*.4);
  });
+ // Keep the full cloud-bank silhouette within the accepted INK world-scale envelope.
+ g.scale.x=.68;
  return finish(g,0);
 }
 function brokenFence(seed=8){

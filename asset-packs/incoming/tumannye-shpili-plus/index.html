@@ -1179,6 +1179,38 @@ const SHPILI_PLUS=(()=>{
    own[id].tick=()=>{waterMat.uniforms.uRipples.value=1;};
  }
 
+
+ /* STORM CLOUDS: three animated depth bands with cold luminous irregular rims. */
+ {
+   const id='stormClouds',g=newGroup(id,0,73,-157);
+   g.userData.sightRadius=124;
+   const clouds=[];
+   for(let layer=0;layer<3;layer++){
+     const mat=new T.ShaderMaterial({transparent:true,depthTest:false,
+       depthWrite:false,side:T.DoubleSide,
+       uniforms:{uT:U.t,uLightning:{value:0},uLayer:{value:layer}},
+       vertexShader:VS,
+       fragmentShader:NOISE+'uniform float uT,uLightning,uLayer;varying vec2 vUv;'+
+        'void main(){vec2 p=vUv*vec2(4.3,1.65);'+
+        'p+=vec2(uT*(.009+uLayer*.004)*mix(1.,-1.,step(1.,uLayer)),uLayer*3.71);'+
+        'float a=fbm(p*2.1+uLayer*11.);float b=fbm(p*4.6-uT*.015);'+
+        'float mass=smoothstep(.37,.68,a+b*.12);'+
+        'float edge=exp(-pow((a-.55)*8.,2.))*.7;'+
+        'vec3 col=mix(vec3(.01,.033,.075),vec3(.058,.19,.31),a);'+
+        'col+=vec3(.11,.36,.55)*edge*(.3+uLightning*.9);'+
+        'col+=vec3(.18,.48,.77)*mass*uLightning*.42;'+
+        'float fade=smoothstep(0.,.12,vUv.y)*smoothstep(1.,.82,vUv.y);'+
+        'gl_FragColor=vec4(col,mass*fade*(.74-uLayer*.12));}'});
+     const cloud=plane(225+layer*35,72+layer*7,mat,
+       (layer-1)*9,(layer-1)*8,-layer*4,g);
+     coverStormMats.push(mat);clouds.push(cloud);
+   }
+   own[id].tick=t=>{
+     for(let i=0;i<clouds.length;i++)clouds[i].position.y=
+       (i-1)*8+.65*Math.sin(t*.11+i*2);
+   };
+ }
+
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;

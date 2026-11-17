@@ -1,0 +1,78 @@
+{
+  "format": "mg-spritestack/1",
+  "game": "nebesny-pilot",
+  "license": {
+    "type": "own",
+    "author": "META GAMES",
+    "commercial": true
+  },
+  "provenance": {
+    "tool": "ChatGPT",
+    "method": "original procedural pixel art",
+    "date": "2026-11-17",
+    "reference": "reference/nebesny-pilot/v2/index.html"
+  },
+  "content_flags": {
+    "real_persons": [],
+    "brands": [],
+    "political": false
+  },
+  "assets": {
+    "gothicCathedral": {
+      "file": "stacks/gothicCathedral.png",
+      "slice": [
+        96,
+        96
+      ],
+      "count": 88,
+      "pitch_px": 1.25,
+      "role": "landmark",
+      "label_ru": "Готический собор с розой",
+      "shadow": true,
+      "spawn": "гарантирован в городских кварталах",
+      "benefit": "силуэт-ориентир"
+    },
+    "spireTower": {
+      "file": "stacks/spireTower.png",
+      "slice": [
+        64,
+        64
+      ],
+      "count": 74,
+      "pitch_px": 1.25,
+      "role": "landmark",
+      "label_ru": "Башня-шпиль",
+      "shadow": true,
+      "spawn": "варианты башен в каждом квартале",
+      "benefit": "манёвры между шпилями"
+    },
+    "archBridge": {
+      "file": "stacks/archBridge.png",
+      "slice": [
+        96,
+        96
+      ],
+      "count": 42,
+      "pitch_px": 1.65,
+      "role": "landmark",
+      "label_ru": "Арочный мост",
+      "shadow": true,
+      "spawn": "мосты в городских кварталах",
+      "benefit": "пролёт под аркой"
+    },
+    "sunsetSky": {
+      "file": "stacks/sunsetSky.png",
+      "slice": [
+        256,
+        128
+      ],
+      "count": 1,
+      "pitch_px": 0,
+      "role": "background",
+      "label_ru": "Розово-фиолетовый закат",
+      "shadow": false,
+      "spawn": "виден при снижении в город",
+      "benefit": "изменяет атмосферу"
+    }
+  }
+}

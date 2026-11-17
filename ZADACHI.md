@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | АССЕТЫ: ink-valley | МГЛ | чат ChatGPT | `lab/assets-ink-valley-20261117` | — | 2026-11-17 04:33 UTC | 2026-11-17 04:33 UTC |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Archer #1: visible dragon aim beacon and early attack warning (2.0.1) | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/archer-retention-exp-1-game` | [#264](https://github.com/mpaykin1/meta6-lab/pull/264) | 2026-11-11 15:00 | 2026-11-16 13:01 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | 3D Мастер — профессиональная проверка сетки, шейдинга и материалов | МГЛ | чат ChatGPT | `lab/3d-master-quality-20261116` | [#335](https://github.com/mpaykin1/meta6-lab/pull/335) | 2026-11-16 10:12 | 2026-11-16 12:37 |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | B2 ч.2 broken-city (изолировать готовый адаптер PR #200) | МГЛ | чат ChatGPT, один PR одной игры | `lab/polza-b2-broken-city-20261113` | [#291](https://github.com/mpaykin1/meta6-lab/pull/291) | 2026-11-13 11:31 | 2026-11-16 10:46 |

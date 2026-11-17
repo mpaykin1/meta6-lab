@@ -596,4 +596,102 @@ export function driftingLeaves(seed=1){
  return finish(g,0);
 }
 
-export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,wetGrassClumps,roadsideDryShrubs,pinkTownBuilding,duskTownLight,healerWalkWithLight,puddles,whiteClinicBuilding,nightRainGrade,boatWake,shoreFoamLine,autumnConeTrees,boatShed,driftingLeaves};
+
+export function sandBeachTiles(seed=1){
+ const rng=rand(seed),g=new T.Group();g.name='Неровный акварельный берег';
+ const sand=new T.MeshStandardMaterial({color:'#d5c3a0',roughness:1,side:T.DoubleSide});
+ const dark=new T.MeshStandardMaterial({color:'#b1aa8e',roughness:1,side:T.DoubleSide});
+ const grass=new T.MeshStandardMaterial({color:'#7d937d',roughness:1,side:T.DoubleSide});
+ const stones=['#91a18b','#a89e83','#839487'].map(color=>new T.MeshStandardMaterial({color,roughness:1}));
+ const shore=new T.Shape(),n=50;
+ for(let i=0;i<n;i++){
+  const a=i*Math.PI*2/n,r=2.45+.22*Math.sin(a*3+.3)+.12*Math.sin(a*8+1.6)+(rng()-.5)*.15;
+  const x=Math.cos(a)*r,z=Math.sin(a)*r*.88;
+  if(i===0)shore.moveTo(x,z);else shore.lineTo(x,z);
+ }shore.closePath();
+ const bed=part(g,new T.ShapeGeometry(shore),sand,0,.035,0);bed.rotation.x=-Math.PI/2;bed.castShadow=false;bed.receiveShadow=true;
+ for(let i=0;i<9;i++){
+  const x=(rng()-.5)*3.3,z=(rng()-.5)*2.8,s=.25+rng()*.43;
+  const p=part(g,new T.CircleGeometry(s,11),i%3?dark:grass,x,.037,z);
+  p.rotation.x=-Math.PI/2;p.scale.y=.45+rng()*.25;p.castShadow=false;
+ }
+ for(let i=0;i<36;i++){
+   const a=rng()*Math.PI*2,r=.12+rng()*2.1;
+   const x=Math.cos(a)*r,z=Math.sin(a)*r*.87;
+   const pebble=part(g,new T.IcosahedronGeometry(.026+rng()*.046,0),stones[i%stones.length],x,.04,z);
+   pebble.scale.y=.4;pebble.rotation.y=rng()*3.14;
+ }
+ const grasses=[];
+ for(let i=0;i<14;i++){
+   const a=rng()*Math.PI*2,r=1.5+rng()*.7,patch=new T.Group();
+   patch.position.set(Math.cos(a)*r,0,Math.sin(a)*r*.9);g.add(patch);
+   for(let k=0;k<4;k++){
+     const x=(k-1.5)*.055,z=(rng()-.5)*.05;
+     rod(patch,[x,.03,z],[x+.08*(rng()-.5),.17+rng()*.14,z+.08*(rng()-.5)],.01,grass,.004);
+   }
+   grasses.push({patch,phase:i*.31});
+ }
+ for(let i=0;i<4;i++){
+   const a=.5+i*.42;
+   rod(g,[1.3*Math.cos(a),.06,1.1*Math.sin(a)],[1.67*Math.cos(a),.08,1.4*Math.sin(a)],.016,pigment.wood);
+ }
+ g.userData.tick=t=>grasses.forEach(({patch,phase})=>{patch.rotation.z=.03*Math.sin(t*.59-phase);});
+ return finish(g,0);
+}
+
+export function tiltShiftPost(seed=1){
+ const g=new T.Group();g.name='Миниатюрная глубина резкости';
+ const q=part(g,new T.PlaneGeometry(1.65,1.05),
+   new T.MeshBasicMaterial({color:'#d5d3bb',transparent:true,opacity:.04,depthWrite:false,side:T.DoubleSide}),0,.64,0);
+ q.castShadow=false;
+ const vs='varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}';
+ const fs=[
+ 'precision mediump float;',
+ 'varying vec2 vUv;',
+ 'uniform sampler2D tDiffuse;',
+ 'uniform vec2 uTexel;',
+ 'uniform float uStrength;',
+ 'uniform float uFocus;',
+ 'uniform float uLowPower;',
+ 'void main(){',
+ 'vec4 base=texture2D(tDiffuse,vUv);',
+ 'float d=smoothstep(.13,.47,abs(vUv.y-uFocus));',
+ 'vec2 off=uTexel*(.30+uStrength*4.5)*d*d;',
+ 'vec4 col=base*.28;',
+ 'col+=texture2D(tDiffuse,vUv+vec2(off.x,0.0))*.12;',
+ 'col+=texture2D(tDiffuse,vUv-vec2(off.x,0.0))*.12;',
+ 'col+=texture2D(tDiffuse,vUv+vec2(0.0,off.y))*.12;',
+ 'col+=texture2D(tDiffuse,vUv-vec2(0.0,off.y))*.12;',
+ 'col+=texture2D(tDiffuse,vUv+off*.76)*.06;',
+ 'col+=texture2D(tDiffuse,vUv-off*.76)*.06;',
+ 'col+=texture2D(tDiffuse,vUv+vec2(off.x,-off.y)*.76)*.06;',
+ 'col+=texture2D(tDiffuse,vUv+vec2(-off.x,off.y)*.76)*.06;',
+ 'gl_FragColor=mix(base,col,mix(.65,1.0,uLowPower)*d);',
+ '}'].join('\n');
+ const mat=new T.ShaderMaterial({uniforms:{tDiffuse:{value:null},uTexel:{value:new T.Vector2(1/900,1/600)},uStrength:{value:1.0},uFocus:{value:.48},uLowPower:{value:1.0}},
+   vertexShader:vs,fragmentShader:fs,depthTest:false,depthWrite:false});
+ g.userData.makeMaterial=()=>mat;g.userData.focus=.48;
+ g.userData.tick=t=>{q.rotation.z=.012*Math.sin(t*.33);mat.uniforms.uStrength.value=.86+.10*Math.sin(t*.12);};
+ return finish(g,0);
+}
+
+export function dayCoastGrade(seed=1){
+ const rng=rand(seed),g=new T.Group();g.name='Яркий акварельный день на берегу';
+ const rays=[],tints=['#b7dfd5','#e7d4ac','#d9e9d0','#b1c8ad'];
+ for(let i=0;i<7;i++){
+  const mat=new T.MeshBasicMaterial({color:tints[i%tints.length],transparent:true,opacity:.077,depthWrite:false,side:T.DoubleSide});
+  const o=part(g,new T.PlaneGeometry(.34+i*.16,2.3+rng()*.43),mat,-2.2+i*.63,1.29,-1.6);
+  o.rotation.z=-.24+(i-3)*.055;o.rotation.y=(rng()-.5)*.24;o.castShadow=false;rays.push({o,mat,phase:i*.3});
+ }
+ for(let i=0;i<10;i++){
+   const x=(rng()-.5)*5.5,z=(rng()-.5)*3.5;
+   const o=part(g,new T.PlaneGeometry(.38+rng()*.5,.08+rng()*.14),
+     new T.MeshBasicMaterial({color:'#e1efe6',transparent:true,opacity:.15,depthWrite:false,side:T.DoubleSide}),x,.035,z);
+   o.rotation.x=-Math.PI/2;o.rotation.z=rng()*.6;o.castShadow=false;
+ }
+ g.userData.tick=t=>rays.forEach(({o,mat,phase})=>{o.rotation.y=.04*Math.sin(t*.35-phase);mat.opacity=.052+.035*Math.sin(t*.18-phase+.8)**2;});
+ g.userData.grade={sky:'#a8d0c7',water:'#79b2b1',sand:'#d5c3a0',sun:'#f1dbb1'};
+ return finish(g,0);
+}
+
+export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,wetGrassClumps,roadsideDryShrubs,pinkTownBuilding,duskTownLight,healerWalkWithLight,puddles,whiteClinicBuilding,nightRainGrade,boatWake,shoreFoamLine,autumnConeTrees,boatShed,driftingLeaves,sandBeachTiles,tiltShiftPost,dayCoastGrade};

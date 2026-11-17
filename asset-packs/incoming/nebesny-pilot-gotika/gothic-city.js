@@ -567,9 +567,119 @@ window.GothicCity = (() => {
       g.restore();
     }
   }
+  // Landmark viaducts are genuine world-space stone structures: flying under
+  // the arches remains possible. Unlike the old backdrop wall, perspective,
+  // approach, side faces, arch voids and camera occlusion all work naturally.
+  function addMonumentalViaducts(items) {
+    const haze=blend(); if(haze<.16)return;
+    const sector=Math.floor(P.y/1050);
+    for(let row=sector-1;row<=sector+1;row++){
+      const y=row*1050-195;
+      const cx=Math.round(P.x/1250)*1250;
+      const center=proj(cx,y,90);
+      if(!center||center[3]<12||center[3]>1350)continue;
+      const endA=proj(cx-530,y,96),endB=proj(cx+530,y,96);
+      if(endA&&endB&&(Math.max(endA[0],endB[0]) < -200 ||
+                          Math.min(endA[0],endB[0]) > W+200))continue;
+      const distance=center[3];
+      items.push({d:distance,f:()=>{
+        g.save();g.setTransform(1,0,0,1,0,0);
+        g.globalAlpha=haze*clamp(1.3-distance/1800,.24,1);
+        const fill3=(coords,color)=>{
+          const pp=coords.map(v=>proj(v[0],v[1],v[2]));
+          if(pp.some(v=>!v))return;
+          g.fillStyle=color;g.beginPath();g.moveTo(pp[0][0],pp[0][1]);
+          for(let j=1;j<pp.length;j++)g.lineTo(pp[j][0],pp[j][1]);
+          g.closePath();g.fill();
+        };
+        const side=y-13,front=y+13,span=144,deck=136;
+        const left=cx-span*3.5;
+        const piers=8;
+        // Cut limestone at two distinct depths, exposed masonry edge on top.
+        for(let i=0;i<piers;i++){
+          const xx=left+i*span,w=i===0||i===piers-1?25:17;
+          fill3([[xx-w/2,side,-12],[xx+w/2,side,-12],
+                 [xx+w/2,side,deck],[xx-w/2,side,deck]],'#4c3b56');
+          fill3([[xx-w/2,front,-12],[xx+w/2,front,-12],
+                 [xx+w/2,front,deck],[xx-w/2,front,deck]],
+                i%3===0?'#766074':'#5c485f');
+          fill3([[xx-w/2,side,-12],[xx-w/2,front,-12],
+                 [xx-w/2,front,deck],[xx-w/2,side,deck]],'#a07a82');
+          fill3([[xx-w/2-4,front,deck-17],[xx+w/2+3,front,deck-17],
+                 [xx+w/2+3,front,deck-14],[xx-w/2-4,front,deck-14]],'#b28689');
+          // Offset buttresses and weathered moss break the pier silhouette.
+          for(let j=0;j<3;j++){
+            const z=8+j*35;
+            fill3([[xx-w/2-4,front,z],[xx+w/2+4,front,z],
+                   [xx+w/2+2,front,z+4],[xx-w/2-3,front,z+4]],
+                 j===0?'#687063':'#8a7180');
+          }
+        }
+        for(let a=0;a<piers-1;a++){
+          const x0=left+a*span, x1=x0+span;
+          // Flying pointed arch: interior is OPEN up to the rib, so both
+          // the plane and clouds can pass through the masonry.
+          for(let j=0;j<12;j++){
+            const u0=j/12,u1=(j+1)/12;
+            const rise=u=>Math.sin(u*Math.PI*.5)*Math.sin((1-u)*Math.PI*.5);
+            const z0=91+rise(u0)*68,z1=91+rise(u1)*68;
+            const xx0=x0+(u0*span),xx1=x0+(u1*span);
+            const shade=j%4===0?'#aa828d':j%3===0?'#73536b':'#876778';
+            fill3([[xx0,front,z0],[xx1,front,z1],
+                   [xx1,front,deck],[xx0,front,deck]],shade);
+            fill3([[xx0,side,z0],[xx1,side,z1],
+                   [xx1,side,deck],[xx0,side,deck]],'#4b394f');
+            // Voussoir keystones and carved edge trim; not a solid wall.
+            fill3([[xx0,front,z0-4],[xx1,front,z1-4],
+                   [xx1,front,z1-1],[xx0,front,z0-1]],
+                  j%3===0?'#e4ada0':'#b88791');
+          }
+        }
+        // Upper street, mossy parapets, warm hanging lanterns.
+        fill3([[left-30,side,deck],[left+7*span+30,side,deck],
+               [left+7*span+30,front,deck],[left-30,front,deck]],'#a1838b');
+        for(const yy of [side,front]){
+          fill3([[left-30,yy,deck],[left+7*span+30,yy,deck],
+                 [left+7*span+30,yy,deck+10],[left-30,yy,deck+10]],'#55425c');
+          for(let i=0;i<=15;i++){
+            const xx=left-20+i*span*.47;
+            fill3([[xx,yy,deck+10],[xx+5,yy,deck+10],
+                   [xx+5,yy,deck+15],[xx,yy,deck+15]],'#aa8490');
+            if(i%2===0){
+              const lamp=proj(xx,yy,deck+16);
+              if(lamp&&lamp[2]>.18){
+                g.save();
+                g.globalAlpha=haze*.88;
+                const d=Math.max(2,lamp[2]*2.7);
+                g.fillStyle='#ffd18e';g.fillRect(lamp[0]-d/2,lamp[1]-d/2,d,d);
+                g.fillStyle='rgba(255,195,118,.18)';
+                g.fillRect(lamp[0]-d*2,lamp[1]-d*2,d*4,d*4);
+                g.restore();
+                g.globalAlpha=haze*clamp(1.3-distance/1800,.24,1);
+              }
+            }
+          }
+        }
+        // Fleur-de-lis banners are individually wind-displaced along bridge.
+        if(sheets.bannerFleurDeLis&&!hiddenAssets.has('bannerFleurDeLis')){
+          for(let i=0;i<5;i++){
+            const x=left+70+i*span*1.45;
+            const at=proj(x,front+3,deck-27),q=at?.[2]||0;
+            if(!at||q<.22)continue;
+            const fr=(Math.floor(t*4+i*1.6)%8+8)%8;
+            g.save();g.setTransform(q*1.15,0,0,q*1.15,at[0],at[1]);
+            g.drawImage(sheets.bannerFleurDeLis,fr*32,0,32,48,-14,-10,32,48);
+            g.restore();
+          }
+        }
+        g.restore();
+      }});
+    }
+  }
   function addRenderItems(items) {
     const fade = blend();
     if(fade < .035) return;
+    addMonumentalViaducts(items);
     let budget = 48;
     const ci = Math.floor(P.x/380), cj = Math.floor(P.y/380);
     for (let i = ci-3; i <= ci+3 && budget>0; i++) {

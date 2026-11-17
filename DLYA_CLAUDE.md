@@ -104,6 +104,9 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 
 ## Ждёт Claude
 
+| #353 | `lab/fix-etalony-concurrency-20261117` | Исправление защищённого `.github/workflows/verify-etalony-sync.yml`: `cancel-in-progress: false` для main/schedule. [HEAD 31db37e](https://github.com/mpaykin1/meta6-lab/commit/31db37ec5cc99dc27564159681567747b91af43b), [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/44002079345), [browser PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/44002079368); mergeable=false, Claude должен устранить конфликт и проверить текущий HEAD перед слиянием. Разблокирует [#351](https://github.com/mpaykin1/meta6-lab/pull/351). | 2026-11-17 |
+
+
 Одна строка на PR; автоматическое слияние защищённых проверок запрещено.
 | #325 | lab/ink-black-grin-monster-20261115 | ЯДРО: после нормального [merge main b848d00](https://github.com/mpaykin1/meta6-lab/commit/b848d00f5ca3185be66363b3b1885db9639084ea) [META GAMES guard FAIL #43995067772](https://github.com/mpaykin1/meta6-lab/actions/runs/43995067772): исторический [a044eb6](https://github.com/mpaykin1/meta6-lab/commit/a044eb6c85fd457af8b7ad3a557ac23c46fddc02) меняет `.github/protected` без подписи Claude. Не переписывать историю/не обходить guard; нужен Claude. | 2026-11-17 |
 | #326 | lab/ink-sky-viaduct-20261115 | ЯДРО: после нормального [merge main c5e20dd](https://github.com/mpaykin1/meta6-lab/commit/c5e20dd4558e16d9be8b110ca1bc72cc8a8a9160) [META GAMES guard FAIL #43995125843](https://github.com/mpaykin1/meta6-lab/actions/runs/43995125843): исторический [ff586b3](https://github.com/mpaykin1/meta6-lab/commit/ff586b34283cb369cd4e412f6b17128c632fe16d) меняет `.github/protected` без подписи Claude. [INK 3D preview PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43995125678); история/guard не изменялись, нужен Claude. | 2026-11-17 |

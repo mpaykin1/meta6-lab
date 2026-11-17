@@ -181,7 +181,7 @@ function stackBasis(k,stepU){const q=Math.max(pc.sp,0.55),st=stepU*k*Math.max(pc
   return{a:k*pc.cr,b:k*pc.sr,c:-k*q*pc.sr,d:k*q*pc.cr,ux:st*pc.sr,uy:-st*pc.cr}}
 
 function spawnRing(){const[fx,fy]=fwd(P.h),d=280+Math.random()*360,side=(Math.random()-.5)*360;
-  rings.push({x:P.x+fx*d-fy*side,y:P.y+fy*d+fx*side,z:30+Math.random()*95,ph:Math.random()*TAU})}
+  rings.push({x:P.x+fx*d-fy*side,y:P.y+fy*d+fx*side,z:30+Math.random()*95,ph:Math.random()*TAU,bonus:Math.random()<.28})}
 
 /* ---------------- ввод ---------------- */
 let ptr=null;
@@ -244,7 +244,7 @@ function frame(now){
 
   P.steer+=(steerIn-P.steer)*ease(5,dt);P.roll+=(P.steer-P.roll)*ease(3.5,dt);
   P.h+=P.steer*1.55*dt;P.boost=Math.max(0,P.boost-dt*0.4);
-  P.vz+=(pitchIn*55-P.vz)*ease(2.6,dt);P.z+=P.vz*dt;
+  P.vz+=(pitchIn*55-P.vz)*ease(2.6,dt);P.z+=P.vz*dt;P.shield=Math.max(0,(P.shield||0)-dt);
   if(P.z<24){P.z=24;P.vz=Math.max(0,P.vz)}if(P.z>150){P.z=150;P.vz=Math.min(0,P.vz)}
   P.v+=(clamp(108+P.boost*140-P.vz*1.1,70,330)-P.v)*ease(1.5,dt); // пикирование разгоняет, подъём тормозит
   const[fx,fy]=fwd(P.h);P.x+=fx*P.v*dt;P.y+=fy*P.v*dt;
@@ -269,7 +269,7 @@ function frame(now){
   /* --- кольца --- */
   while(rings.length<6)spawnRing();
   for(let i=rings.length-1;i>=0;i--){const r=rings[i],d=Math.hypot(r.x-P.x,r.y-P.y),dz=Math.abs(r.z-P.z);
-    if(d<20&&dz<18){rings.splice(i,1);score++;combo=Math.min(combo+1,9);P.boost=Math.min(1.5,P.boost+0.75);chime();shake=0.7;
+    if(d<20&&dz<18){rings.splice(i,1);score++;combo=Math.min(combo+1,9);P.boost=Math.min(1.5,P.boost+0.75);chime();if(window.GothicCity)GothicCity.onRing(!!r.bonus);shake=0.7;
       document.getElementById('sc').textContent=score;
       for(let j=0;j<26;j++){const a=Math.random()*TAU,b=Math.random()*TAU,s=30+Math.random()*80;
         parts.push({x:r.x,y:r.y,z:r.z,vx:Math.cos(a)*s+fx*P.v*.6,vy:Math.sin(a)*s+fy*P.v*.6,vz:Math.sin(b)*s*.6,l:0.8,ml:0.8,gold:1})}}
@@ -351,7 +351,7 @@ function frame(now){
 
   // сортируемое: облака, кольца, самолёт
   const items=[];
-  if(window.GothicCity) GothicCity.addRenderItems(items);
+  if(window.GothicCity){GothicCity.addRenderItems(items);GothicCity.drawCloudsAndBoats(items)}
   for(const o of cl)items.push({d:o.p[3],f:()=>{const k=o.p[2],B=stackBasis(k,2.4);const hs=o.c.size/2,n=o.c.sl.length,lod=k<0.3;
     const dd=Math.hypot(o.p[0]-pc.cx,o.p[1]-pc.cy);g.globalAlpha=(dd<hs*k&&Math.abs(o.z-P.z)<30?0.45:0.96)*clamp(1.3-o.p[3]/2400,0,1);
     for(let s=0;s<n;s++){if(lod&&s%3)continue;g.setTransform(B.a,B.b,B.c,B.d,Math.round(o.p[0]+B.ux*s),Math.round(o.p[1]+B.uy*s));g.rotate(o.rot-cam.a);g.drawImage(o.c.sl[s],-hs,-hs)}
@@ -360,7 +360,7 @@ function frame(now){
     const gp=proj(r.x,r.y,0);g.setTransform(1,0,0,1,0,0);
     if(gp&&pc.sp>0.7){g.fillStyle='rgba(255,220,140,.35)';const n=Math.floor(Math.abs(gp[1]-p[1])/5);for(let i=0;i<n;i+=1){const k=i/n;g.fillRect(lerp(p[0],gp[0],k)|0,lerp(p[1],gp[1],k)|0,1,2)}}
     g.globalCompositeOperation='lighter';const s=p[2]*(1+0.08*Math.sin(t*4+r.ph));
-    g.setTransform(s,0,0,s,p[0],p[1]);if(window.GothicCity)g.drawImage(GothicCity.gate,-27,-35);else g.drawImage(RING,-20,-20);g.globalCompositeOperation='source-over'}})}
+    g.setTransform(s,0,0,s,p[0],p[1]);if(window.GothicCity){if(r.bonus)GothicCity.drawBonusAt(p,s);else g.drawImage(GothicCity.gate,-27,-35)}else g.drawImage(RING,-20,-20);g.globalCompositeOperation='source-over'}})}
   {const p=proj(P.x,P.y,alt);if(p)items.push({d:p[3],f:()=>{
     const k=p[2]*(1+Math.max(0,P.vz)*0.0015),B=stackBasis(k,1.05),ra=P.h-cam.a;
     const lean=P.roll*0.55*k,rx=pc.cr,ry=pc.sr,flip=bc<0,n=JET.length;
@@ -384,7 +384,7 @@ function frame(now){
     g.stroke();g.globalCompositeOperation='source-over'}
 
   // пост-обработка
-  g.setTransform(1,0,0,1,0,0);g.drawImage(vign,0,0);
+  g.setTransform(1,0,0,1,0,0);if(window.GothicCity){GothicCity.paintTransition();GothicCity.drawShield()}g.drawImage(vign,0,0);
   g.globalAlpha=0.045;g.translate((Math.random()*96)|0,(Math.random()*96)|0);g.fillStyle=GRAIN;g.fillRect(-96,-96,W+96,H+96);
   g.setTransform(1,0,0,1,0,0);g.globalAlpha=1;
   requestAnimationFrame(frame);

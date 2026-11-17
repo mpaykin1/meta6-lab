@@ -1,11 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T01:51:04.190Z | МГЛ: нет данных | МГ: нет данных | нет данных
+UTC: 2026-11-17T01:58:35.418Z | МГЛ: нет данных | МГ: нет данных | https://github.com/mpaykin1/meta6-lab/actions/runs/43999481465
 ## ПРОВЕРИТЬ CLAUDE
 - нет данных
 - МГЛ: нет данных
 - МГ: нет данных
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
-- | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/… (сокращено)
+- | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/… (сокращено)
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
 - | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обн… (сокращено)
 - | #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая… (сокращено)
@@ -23,14 +23,15 @@ UTC: 2026-11-17T01:51:04.190Z | МГЛ: нет данных | МГ: нет да�
 - | Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |
 - ещё 8: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
-готовы: ничего
-M1 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
-M2 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
-M3 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
-M4 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211
-M5 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
+готовы по FINISH.md: M1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036)), M2 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685)), M3 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211)), M4 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211)), M5 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211)), B1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082)), P1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308))
+Actions M1: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42637860036): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
+Actions M2: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42641995685): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
+Actions M3: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
+Actions M4: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211
+Actions M5: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
+Actions B1: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082
+Actions P1: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 M6 — не готов: НЕТ в таблице FINISH
-B1 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082
 B2 — не готов: НЕТ в таблице FINISH
 B3 — не готов: НЕТ в таблице FINISH
 B4 — не готов: НЕТ в таблице FINISH
@@ -41,7 +42,6 @@ L1 — не готов: НЕТ в таблице FINISH
 L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
-P1 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 ## PR МГЛ
 открыто: нет данных | конфликт: нет данных | слито: нет данных | закрыто: нет данных
 нет данных

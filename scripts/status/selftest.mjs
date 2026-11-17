@@ -142,3 +142,4 @@ process.exitCode = failures ? 1 : 0;
 
 // Also validate the FINISH consumer against actual table shapes and hostile run metadata.
 await import('./mutate-finish-summary.mjs');
+await import('./mutate-canonical-finish.mjs');

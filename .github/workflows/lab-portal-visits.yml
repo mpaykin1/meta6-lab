@@ -1,4 +1,7 @@
 name: LAB Portal Visited World Persistence
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 on:
   pull_request:
     paths: ['meta-games/**','.github/workflows/lab-portal-visits.yml','scripts/lab/check-portal-visits.mjs','scripts/lab/portal-link-guard.mjs','scripts/lab/mutate-portal-links.mjs']

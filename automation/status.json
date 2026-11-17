@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T01:51:04.190Z",
+  "generated_at": "2026-11-17T01:58:35.418Z",
   "sha": {
     "lab": "нет данных",
     "mg": "нет данных"
@@ -8,14 +8,14 @@
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43999481465",
   "review": {
     "protected": "нет данных",
     "redLab": "нет данных",
     "redMg": "нет данных",
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
-      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
+      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
       "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
       "| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |",
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
@@ -44,42 +44,20 @@
     ]
   },
   "finish": {
-    "ready": [],
+    "ready": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "B1",
+      "P1"
+    ],
     "pending": [
-      {
-        "id": "M1",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036"
-      },
-      {
-        "id": "M2",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685"
-      },
-      {
-        "id": "M3",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
-      },
-      {
-        "id": "M4",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211"
-      },
-      {
-        "id": "M5",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
-      },
       {
         "id": "M6",
         "value": "не готов",
         "reason": "НЕТ в таблице FINISH"
-      },
-      {
-        "id": "B1",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082"
       },
       {
         "id": "B2",
@@ -130,14 +108,54 @@
         "id": "L4",
         "value": "не готов",
         "reason": "НЕТ в таблице FINISH"
-      },
-      {
-        "id": "P1",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308"
       }
     ],
-    "proofs": {}
+    "proofs": {
+      "M1": "https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036",
+      "M2": "https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685",
+      "M3": "https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
+      "M4": "https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211",
+      "M5": "https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
+      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082",
+      "P1": "https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308"
+    },
+    "verification": {
+      "M1": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42637860036"
+      },
+      "M2": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42641995685"
+      },
+      "M3": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211"
+      },
+      "M4": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211"
+      },
+      "M5": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211"
+      },
+      "B1": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082"
+      },
+      "P1": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308"
+      }
+    }
   },
   "pr": {
     "open": "нет данных",

@@ -1,4 +1,7 @@
 name: B1 — all games open without console errors
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 on:
   pull_request:
     branches: [main]

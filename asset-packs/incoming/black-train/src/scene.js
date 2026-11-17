@@ -129,9 +129,11 @@ const treesBig=[
  placeAsset('gnarledTree',127,-13,0,-23,1.6)
 ];
 placeAsset('hangingChains',41,-7.5,2,-13);
-placeAsset('groundMist',43,0,0,-8.2);
-placeAsset('groundMist',53,8,0,-15);
-placeAsset('groundMist',59,-8,0,-15.5);
+const mistAssets=[
+ placeAsset('groundMist',43,0,0,-8.2),
+ placeAsset('groundMist',53,8,0,-15),
+ placeAsset('groundMist',59,-8,0,-15.5)
+];
 placeAsset('stormClouds',61,-1,7,-22);
 placeAsset('stormClouds',67,4,9,-29);
 placeAsset('brokenFence',71,-3.1,0,-12.8);
@@ -153,6 +155,8 @@ function advanceNightAssets(dt){
  signal.userData.setApproach(approach,elapsed);
  farLamp.userData.setApproach(approach*.55,elapsed);
  railReflections.userData.setApproach(approach,elapsed);
+ const torchLit=(state==='play'||state==='dawn'||state==='caught')&&torchOn&&torchDead<=0&&battery>0;
+ for(const mist of mistAssets)mist.userData.setLight(torchLit,approach);
  crossingSounds.update({time:elapsed,approach,enabled:audio.enabled,state});
 }
 

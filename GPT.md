@@ -129,3 +129,9 @@
 Если что-то может сделать только Claude — одна строка `НУЖЕН CLAUDE: <что> <ссылка>`.
 
 Не проси владельца ничего делать руками.
+
+## 7. БОТЫ, АВТОЗАДАЧИ И CLAUDE — всё внутри этой системы
+
+- **Боты-сторожа (GitHub Actions, без ИИ)** сами обновляют сводки, которые ты читаешь в ПУЛЬСЕ: `zadachi-watch` → ZADACHI.md; `zanyato-watch` → ZANYATO.md; `dispetcher` → DISPETCHER.md/TOLKNUT.md; `status-dlya-claude` → automation/STATUS.md; `sliyanie-status` → automation/SLIYANIE.md; `link-guard` → проверка ссылок LINKS.txt; `meta-games-guard`, `kontur-guard`, `storozha-*` — охрана защищённого; `bot-b1-open-all`, `meta-bot`, `game-browser-check` — боты игр; `asset-check` — бот ассетов; `library-machine` — библиотека; `verify-etalony-sync` — эталоны МГ = МГЛ. Сторожа запускаются раз в 2–3 часа: сводка может отставать — сверяй с самим PR. Бот упал — это задача из пульса (правило 6): почини причину, а не отключай бота.
+- **5 автозадач** (`MG-строитель-1…4`, `MG-ремонтник`) — на ремонте. Когда заработают, они получают ту же ссылку на этот файл ([общий промпт](automation/prompts/MG_PYAT_AVTOZADACH.md)) и работают по тем же правилам; чаты и автозадачи тогда делят задачи через ZANYATO/ZADACHI.
+- **Claude** раз в сутки ([суточный контроль](automation/prompts/CLAUDE_SUTOCHNYJ.md)): чинит красный main, сливает `НУЖЕН CLAUDE`, ставит `ЗЕЛЁНАЯ` в FINISH, проверяет слитое, чинит ботов и правит этот файл и карточки, если чаты буксуют. Поэтому не жди Claude — помечай и иди дальше.

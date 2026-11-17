@@ -116,6 +116,25 @@ def baseline(base: Path):
     return _BASELINE[key]
 
 
+def check_night_isolation(root: Path, report) -> None:
+    """Night-game copy must expose stable shown/hidden frames for every asset.
+
+    Browser probes freeze game time and draw the same frame twice; an overall
+    scene screenshot cannot establish an individual object's visual quality.
+    """
+    src = root / "src/scene.js"
+    if not src.exists():
+        src = root / "scene.js"
+    code = src.read_text("utf-8") if src.exists() else ""
+    absent_hooks = [name for name in ("window.__ISOLATE__", "window.__PACK_PROBE__",
+                                      "setHidden", "manual=true", "draw();") if name not in code]
+    if absent_hooks:
+        report.add("IK18", "HARD", str(src.relative_to(root)) if src.exists() else "src/scene.js",
+                   "нет покадровой изоляции: " + ", ".join(absent_hooks),
+                   "Добавь window.__ISOLATE__(id,on), __PACK_PROBE__.assets/setHidden; "
+                   "замораживай время и перерисовывай только выбранный ассет")
+
+
 def check(root: Path, r) -> set:
     pj = json.loads((root / "pack.json").read_text("utf-8"))
     covered = {"pack.json", "makers.js", "README.md"}
@@ -131,6 +150,8 @@ def check(root: Path, r) -> set:
         r.add("IK1", "HARD", "makers.js", "нет makers.js", "Положи makers.js с export const makers = {имя: seed => Group}")
         return covered
     src = mk.read_text("utf-8")
+    if night_reference and (root / "index.html").exists():
+        check_night_isolation(root, r)
     for pat, what in FORBIDDEN:
         if re.search(pat, src):
             r.add("IK2", "HARD", "makers.js", f"запрещено: {what}",

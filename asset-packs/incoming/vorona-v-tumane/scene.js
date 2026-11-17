@@ -1,0 +1,220 @@
+import * as T from '../../../reference/ink-fallen-guardian/three.module.js';
+
+const source='../../../reference/vorona-v-tumane/';
+const ids=[
+ ['crow','Ворона'],['stalker','Существо'],['forest_far','Дальний лес'],
+ ['forest_mid','Средний лес'],['forest_near','Ближний лес'],['fog_ribbons','Туман'],
+ ['feather','Перо ускорения'],['firefly','Светлячок'],['nest','Гнездо']
+];
+const world=new T.Scene();
+world.background=new T.Color('#202a32');
+const camera=new T.OrthographicCamera(-14,14,8,-8,.1,100);
+camera.position.set(0,1.5,30);
+const renderer=new T.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.65));
+renderer.outputColorSpace=T.SRGBColorSpace;
+document.body.insertBefore(renderer.domElement,document.body.firstChild);
+const clock=new T.Clock(),load=new T.TextureLoader();
+const objects=Object.create(null),keys=new Set();
+const state={x:-5,y:1,face:1,time:0,boost:0,light:0,aim:null,focus:null,checkpoint:-13};
+function resize(){
+ const w=innerWidth,h=innerHeight,span=29;
+ camera.left=-span/2;camera.right=span/2;camera.top=span*h/w/2;camera.bottom=-camera.top;
+ camera.updateProjectionMatrix();renderer.setSize(w,h,false);
+}
+addEventListener('resize',resize);resize();
+function svgMap(s){const m=load.load('data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s));
+ m.colorSpace=T.SRGBColorSpace;return m;}
+function addPlane(map,w,h,z,x=0,y=0,opacity=1){
+ const mesh=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({
+  map,transparent:true,opacity,depthWrite:false,side:T.DoubleSide
+ }));
+ mesh.position.set(x,y,z);world.add(mesh);return mesh;
+}
+function rand(seed){return ()=>{seed=(Math.imul(seed,1664525)+1013904223)|0;return(seed>>>0)/4294967296;};}
+function forest(seed,n,color,detail){
+ const random=rand(seed);
+ let art='<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="512">';
+ art+='<path d="M0 466Q92 448 175 468T367 458T564 473T743 455T1024 464V512H0Z" fill="'+color+'"/>';
+ for(let i=0;i<n;i++){
+  const x=(i+.23+random()*.75)*1024/n,y=460+random()*65;
+  const h=125+random()*340,lean=(random()-.5)*65,w=3+random()*12;
+  const p=[x-w,y,x+w,y,x+lean*.5+w*.4,y-h*.47,x+lean,y-h,x+lean*.65-w*.3,y-h*.56];
+  art+='<path d="M'+p[0]+' '+p[1]+'L'+p[2]+' '+p[3]+'L'+p[4]+' '+p[5]+'L'+p[6]+' '+p[7]+'L'+p[8]+' '+p[9]+'Z" fill="'+color+'"/>';
+  for(let b=0;b<5;b++){
+   const yy=y-h*(.28+b*.13),xx=x+lean*b/5,side=b%2?1:-1;
+   const reach=side*(18+random()*90),dy=15+random()*80;
+   art+='<path d="M'+xx+' '+yy+'Q'+(xx+reach*.4)+' '+(yy-dy*.4)+' '+
+     (xx+reach)+' '+(yy-dy)+'" stroke="'+color+'" stroke-width="'+(1+random()*4)+'" fill="none"/>';
+  }
+  if(i%3===0)art+='<path d="M'+x+' '+(y-h*.4)+'q-13-18 -3-26" stroke="'+detail+
+   '" stroke-width="1.3" opacity=".5" fill="none"/>';
+ }
+ return art+'</svg>';
+}
+const layers=[
+ {id:'forest_far',z:-10,y:-.4,ratio:.07,h:30,seed:141,n:46,color:'#99a9ac',detail:'#b6b6ad',opacity:.31},
+ {id:'forest_mid',z:-4,y:-1.1,ratio:.22,h:28,seed:829,n:30,color:'#505c65',detail:'#9ca4a7',opacity:.70},
+ {id:'forest_near',z:7,y:-1.5,ratio:.68,h:34,seed:1142,n:19,color:'#161e27',detail:'#555b61',opacity:.82}
+];
+for(const a of layers){
+ const mesh=addPlane(svgMap(forest(a.seed,a.n,a.color,a.detail)),94,a.h,a.z,0,a.y,a.opacity);
+ objects[a.id]=mesh;
+}
+const moon=svgMap('<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256">'+
+ '<defs><radialGradient id="m"><stop stop-color="#fff0d8" stop-opacity=".7"/>'+
+ '<stop offset=".18" stop-color="#b5c1bb" stop-opacity=".4"/>'+
+ '<stop offset="1" stop-color="#b9c7c8" stop-opacity="0"/></radialGradient></defs>'+
+ '<circle cx="128" cy="128" r="128" fill="url(#m)"/></svg>');
+addPlane(moon,13,13,-12,10,5.5,.9);
+const groundSvg='<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="256">'+
+ '<path d="M0 174Q80 160 150 184T302 165T452 182T660 169T850 182T1024 161V256H0Z" fill="#222c31"/>'+
+ Array.from({length:83},(_,i)=>{const x=i*13,y=173+(i*37)%19;
+ return '<path d="M'+x+' '+y+'q-7-21 -4-27m4 27q8-18 12-22" fill="none" stroke="#506364" stroke-opacity=".53" stroke-width="1.7"/>';
+ }).join('')+'</svg>';
+const ground=addPlane(svgMap(groundSvg),110,13,4,0,-6);
+const mist=new T.ShaderMaterial({
+ transparent:true,depthWrite:false,
+ uniforms:{uTime:{value:0},uAmount:{value:.8},uColor:{value:new T.Color('#bdc8c5')}},
+ vertexShader:'varying vec2 v;void main(){v=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+ fragmentShader:[
+  'precision mediump float;varying vec2 v;uniform float uTime,uAmount;uniform vec3 uColor;',
+  'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+  'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);',
+  'return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+1.),f.x),f.y);}',
+  'void main(){vec2 p=v*vec2(3.,4.7);float a=n(p+vec2(-uTime*.027,uTime*.006));',
+  'float b=n(p*2.17+vec2(uTime*.018,0.));float c=n(p*4.11-uTime*.009);',
+  'float wave=sin(p.y*5.7+a*4.+b*2.);float fog=(a*.45+b*.3+c*.15+.12+wave*.15)*uAmount;',
+  'fog*=smoothstep(0.,.14,v.y)*(1.-smoothstep(.85,1.,v.y));',
+  'gl_FragColor=vec4(uColor,clamp(fog,0.,.65));}'
+ ].join('')
+});
+const fog=new T.Mesh(new T.PlaneGeometry(120,32),mist);
+fog.position.z=11;fog.frustumCulled=false;world.add(fog);objects.fog_ribbons=fog;
+function sprite(svg,w,h,x,y,z){
+ const s=new T.Sprite(new T.SpriteMaterial({map:svgMap(svg),transparent:true,depthWrite:false}));
+ s.position.set(x,y,z);s.scale.set(w,h,1);world.add(s);return s;
+}
+const hero=new T.Group();hero.position.set(state.x,state.y,5.2);world.add(hero);
+const birdTex=load.load(source+'vorona.png');birdTex.colorSpace=T.SRGBColorSpace;
+const bird=new T.Sprite(new T.SpriteMaterial({map:birdTex,transparent:true,depthWrite:false}));
+bird.scale.set(6.5,6.5,1);hero.add(bird);objects.crow=hero;
+const specimen=new T.Group();specimen.position.set(14,-2.35,4.4);world.add(specimen);
+const gif=new Image();gif.src=source+'sushchestvo.gif';
+const offscreen=document.createElement('canvas');offscreen.width=315;offscreen.height=311;
+const context=offscreen.getContext('2d',{alpha:true});
+const gifTexture=new T.CanvasTexture(offscreen);gifTexture.colorSpace=T.SRGBColorSpace;
+const creature=new T.Sprite(new T.SpriteMaterial({map:gifTexture,transparent:true,depthWrite:false}));
+creature.scale.set(6.2,6.15,1);specimen.add(creature);objects.stalker=specimen;
+let gifUpdate=0;
+const featherSvg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 240">'+
+ '<defs><linearGradient id="f"><stop stop-color="#d5c4ba"/><stop offset=".45" stop-color="#b4aab3"/>'+
+ '<stop offset="1" stop-color="#6a6875"/></linearGradient></defs>'+
+ '<path d="M74 223Q16 148 23 108Q38 47 99 12Q148 58 115 136Q90 195 74 223Z" fill="url(#f)" stroke="#564f57" stroke-width="3"/>'+
+ '<path d="M76 225Q81 122 101 17" stroke="#e7dccc" stroke-width="3" fill="none"/>'+
+ Array.from({length:11},(_,i)=>'<path d="M'+(78+i*.8)+' '+(210-i*15)+'q'+(i%2?'-39':'30')+
+ ' -25 '+(i%2?'-44':'45')+' -36" stroke="#756972" stroke-opacity=".6" fill="none"/>').join('')+
+ '</svg>';
+const feather=sprite(featherSvg,1.35,2.1,3,-2.1,5.8);objects.feather=feather;
+const nestSvg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 165">'+
+ '<path d="M13 64Q64 146 150 152Q260 143 291 68Q222 118 151 111Q91 127 13 64Z" fill="#685b53" stroke="#343536" stroke-width="6"/>'+
+ Array.from({length:31},(_,i)=>{const x=15+(i*71)%260,y=68+(i*47)%80;
+ return '<path d="M'+x+' '+y+'q'+(20+i%5*4)+' '+(i%2?16:-12)+' 52 '+(i%3?1:-14)+
+ '" stroke="'+(i%2?'#b4a08b':'#343239')+'" stroke-width="'+(2+i%3)+'" fill="none" opacity=".72"/>';
+ }).join('')+'</svg>';
+const nest=sprite(nestSvg,3.3,1.8,-13,-3.7,5.5);objects.nest=nest;
+const lightSvg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">'+
+ '<defs><radialGradient id="r"><stop stop-color="#fff8cd"/>'+
+ '<stop offset=".16" stop-color="#e6f1c2" stop-opacity=".93"/>'+
+ '<stop offset=".42" stop-color="#8ed5ae" stop-opacity=".35"/>'+
+ '<stop offset="1" stop-color="#9dcbb1" stop-opacity="0"/></radialGradient></defs>'+
+ '<circle cx="64" cy="64" r="64" fill="url(#r)"/></svg>';
+const firefly=sprite(lightSvg,4,4,11,1.5,6.5);objects.firefly=firefly;
+const mote=[];
+const random=rand(2231);
+for(let i=0;i<75;i++){
+ const x=random()*54-27,y=random()*12-5,size=.09+random()*.13;
+ const star=sprite(lightSvg,size,size,x,y,8.8);
+ star.material.opacity=.12+random()*.23;star.userData={x,phase:random()*6.28};mote.push(star);
+}
+window.__PACK__={items:ids.map(([id,label])=>({id,label}))};
+window.__PACK_PROBE__={assets:objects,setHidden(id,hide){if(objects[id])objects[id].visible=!hide;},
+ focus(id){state.focus=id;}};
+const panel=document.getElementById('panel'),menu=document.getElementById('menuButton');
+function openMenu(yes){panel.hidden=!yes;menu.setAttribute('aria-expanded',String(yes));}
+menu.addEventListener('click',()=>openMenu(panel.hidden));
+for(const [id,label] of ids){
+ const b=document.createElement('button');b.className='item';b.textContent=label;
+ b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>{
+  document.querySelectorAll('.item').forEach(el=>el.setAttribute('aria-pressed','false'));
+  b.setAttribute('aria-pressed','true');state.focus=id;openMenu(false);
+ });
+ document.getElementById('items').appendChild(b);
+}
+addEventListener('keydown',e=>{const k=e.key.toLowerCase();
+ if(k==='m'){openMenu(panel.hidden);return;}keys.add(k);
+ if(k.startsWith('arrow')||k===' ')e.preventDefault();
+});
+addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));
+renderer.domElement.addEventListener('pointerdown',e=>{
+ const p=new T.Vector3(e.clientX/innerWidth*2-1,1-e.clientY/innerHeight*2,.1);
+ p.unproject(camera);state.aim=[p.x,p.y];state.focus=null;
+});
+function mobile(id,key){
+ const b=document.getElementById(id);
+ b.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(key);b.setPointerCapture(e.pointerId);});
+ for(const event of ['pointerup','pointercancel','lostpointercapture'])
+  b.addEventListener(event,()=>keys.delete(key));
+}
+mobile('left','arrowleft');mobile('right','arrowright');mobile('up','arrowup');
+function draw(){
+ requestAnimationFrame(draw);
+ const dt=Math.min(clock.getDelta(),.045),t=state.time+=dt;
+ let dx=(keys.has('d')||keys.has('arrowright')?1:0)-(keys.has('a')||keys.has('arrowleft')?1:0);
+ let dy=(keys.has('w')||keys.has('arrowup')||keys.has(' ')?1:0)-
+        (keys.has('s')||keys.has('arrowdown')?1:0);
+ if(dx===0&&dy===0&&state.aim){
+  const x=state.aim[0]-state.x,y=state.aim[1]-state.y;
+  if(Math.hypot(x,y)<.3)state.aim=null;
+  else{dx=T.MathUtils.clamp(x,-1,1);dy=T.MathUtils.clamp(y,-1,1);}
+ }
+ state.boost=Math.max(0,state.boost-dt);state.light=Math.max(0,state.light-dt);
+ const speed=state.boost>0?7.7:4.7;
+ state.x=T.MathUtils.clamp(state.x+dx*speed*dt,-24,24);
+ state.y=T.MathUtils.clamp(state.y+dy*speed*dt,-3.4,6);
+ if(Math.abs(dx)>.05)state.face=Math.sign(dx);
+ hero.position.set(state.x,state.y+Math.sin(t*2.6)*.12,5.2);
+ hero.scale.x=T.MathUtils.lerp(hero.scale.x,state.face,.095);
+ hero.rotation.z=T.MathUtils.lerp(hero.rotation.z,-dy*.08+Math.sin(t*1.8)*.02,.08);
+ specimen.position.set(14+Math.sin(t*.41)*3,-2.35+Math.sin(t*1.1)*.09,4.4);
+ specimen.scale.x=Math.sin(t*.41)>0?-1:1;
+ if(gif.complete&&gif.naturalWidth&&t-gifUpdate>.083){
+  gifUpdate=t;context.clearRect(0,0,315,311);
+  context.drawImage(gif,0,0,315,311);gifTexture.needsUpdate=true;
+ }
+ feather.position.y=-2.1+Math.sin(t*1.4)*.24;
+ feather.material.rotation=Math.sin(t*.85)*.18;
+ if(feather.visible&&Math.hypot(state.x-feather.position.x,state.y-feather.position.y)<1.25){
+  feather.visible=false;state.boost=14;
+ }
+ firefly.position.y=1.5+Math.sin(t*1.9)*.45;
+ const glow=4+Math.sin(t*1.8)*.35;firefly.scale.set(glow,glow,1);
+ if(state.light===0&&Math.hypot(state.x-firefly.position.x,state.y-firefly.position.y)<1.5)
+  state.light=16;
+ mist.uniforms.uTime.value=t;mist.uniforms.uAmount.value=state.light>0?.24:.83;
+ if(Math.hypot(state.x-nest.position.x,state.y-nest.position.y)<1.6)state.checkpoint=-13;
+ for(const star of mote){
+  star.position.x=star.userData.x+Math.sin(t*.21+star.userData.phase)*.5;
+  star.position.y+=dt*.14;if(star.position.y>8)star.position.y=-6;
+ }
+ const focus=state.focus==='stalker'?specimen.position.x:
+ state.focus==='nest'?nest.position.x:
+ state.focus==='firefly'?firefly.position.x:
+ state.focus==='feather'?feather.position.x:state.x;
+ camera.position.x+=(focus-camera.position.x)*.055;
+ camera.position.y+=(1.5+state.y*.12-camera.position.y)*.012;
+ for(const l of layers)objects[l.id].position.x=camera.position.x*l.ratio;
+ ground.position.x=camera.position.x*.38;fog.position.x=camera.position.x;
+ renderer.render(world,camera);
+}
+draw();

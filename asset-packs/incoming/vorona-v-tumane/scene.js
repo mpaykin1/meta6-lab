@@ -27,6 +27,7 @@ const clock=new T.Clock(),load=new T.TextureLoader();
 const objects=Object.create(null),keys=new Set();
 const sound=createSoundscape();
 const state={x:-5,y:1,face:1,time:0,boost:0,light:0,aim:null,focus:null,checkpoint:-5,hit:0};
+const probeFrame=new URLSearchParams(location.search).has('asset_probe');
 window.__STATE__=()=>({x:state.x,y:state.y,cam:[camera.position.x,camera.position.y,camera.position.z]});
 function resize(){
  const w=innerWidth,h=innerHeight,span=29;
@@ -448,5 +449,17 @@ function draw(){
  for(const l of layers)objects[l.id].position.x=camera.position.x*l.ratio;
  ground.position.x=camera.position.x*.38;fog.position.x=camera.position.x;
  renderer.render(world,camera);
+ if(probeFrame && t>1 && (!window.__RENDER_STATS__||window.__RENDER_STATS__.colors<36)){
+  const gl=renderer.getContext(),width=Math.min(384,gl.drawingBufferWidth),
+   height=Math.min(216,gl.drawingBufferHeight);
+  const pix=new Uint8Array(width*height*4);
+  gl.readPixels(Math.floor((gl.drawingBufferWidth-width)/2),
+   Math.floor((gl.drawingBufferHeight-height)/2),width,height,gl.RGBA,gl.UNSIGNED_BYTE,pix);
+  const ink=new Set();
+  for(let i=0;i<pix.length;i+=4*11){
+   ink.add(((pix[i]>>4)<<8)|((pix[i+1]>>4)<<4)|(pix[i+2]>>4));
+  }
+  window.__RENDER_STATS__={colors:ink.size,samples:pix.length/4};
+ }
 }
 draw();

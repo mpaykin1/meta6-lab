@@ -22,6 +22,14 @@ async function exercise(fn){
  assert.equal(value.ok,true);assert.equal(calls,2);assert.equal(waits,6000);
 }
 test('dispatcher fails closed quickly on long API quota instead of sleeping 8 min',async()=>exercise(api));
+test('default API path also rejects long quota waits before retry',async()=>{
+ let calls=0,waits=0;
+ await assert.rejects(()=>api('/pulls?state=open',{now:()=>now,
+  request:async()=>{calls++;return response(403,60)},
+  wait:async()=>{waits++}}),/нет данных: квота/);
+ assert.equal(calls,1);
+ assert.equal(waits,0);
+});
 test('five API wait and caller mutations must be rejected',async()=>{
  const src=await readFile(new URL('../build.mjs',import.meta.url),'utf8');
  const anchor='waitMs<=8*60*1000&&waitMs<=maxWaitMs&&attempt===0';

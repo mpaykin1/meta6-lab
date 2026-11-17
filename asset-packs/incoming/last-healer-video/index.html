@@ -27,8 +27,7 @@ box-shadow:0 16px 45px #2f353a22;backdrop-filter:blur(18px)}
 text-align:left;border:1px solid #c0baa5;background:#faf6ea;color:#374747;font:500 13px system-ui;cursor:pointer}
 #menu button.active{background:#74897d;color:#fff;border-color:#74897d}
 #menu small{display:block;margin-top:12px;color:#7a786c}
-#grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.07;
-background-image:repeating-linear-gradient(33deg,transparent 0,transparent 13px,#1d2c32 14px,#1d2c32 14.5px)}
+#grain{display:none}
 </style>
 <script type="importmap">{"imports":{"three":"../../../reference/ink-fallen-guardian/three.module.js"}}</script>
 </head>
@@ -69,6 +68,7 @@ import * as T from 'three';
 import {makers} from './makers.js';
 import {createHealerAudio} from './sounds.js';
 import {createHealerOptics} from './postfx.js';
+import {createLivingWatercolor3D,createWatercolorStyle} from '../../../reference/ink-fallen-guardian/shared/living-watercolor-3d.js';
 import {car,apothecary,streetlamp,bush,pier} from '../../../reference/ink-fallen-guardian/ink-settlement.js';
 import {rowboat} from '../../../reference/ink-fallen-guardian/ink-extras.js';
 import {traveller,fir} from '../../../reference/ink-fallen-guardian/ink-objects.js';
@@ -86,6 +86,12 @@ renderer.toneMappingExposure=1.36;
 renderer.shadowMap.enabled=true;
 renderer.shadowMap.type=T.PCFSoftShadowMap;
 document.body.prepend(renderer.domElement);
+const paint=createLivingWatercolor3D({THREE:T,renderer,scene,camera,style:createWatercolorStyle({
+ seed:'last-healer-video-ink-20261117',inkColor:'#303c38',paperColor:'#efece2',
+ washColor:'#839487',washOpacity:.77,washLayers:6,edgeWidth:.019,edgeJitter:.26,
+ granulation:.4,bleed:.24,shadowWash:.17,motion:.10,pigmentPooling:.27,
+ paperGap:.15,paintedLight:.67
+})});
 const hemi=new T.HemisphereLight('#fff1d8','#607872',2.65);scene.add(hemi);
 const sun=new T.DirectionalLight('#f8ceb8',2.15);
 sun.position.set(-9,17,-5);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);
@@ -146,6 +152,9 @@ const supplements=[
 for(const [id,pos] of supplements){
  const o=makers[id](id.length*21+3);o.position.set(...pos);scene.add(o);assets[id]=o;
 }
+// Preserve approved meshes while tinting new StandardMaterial surfaces with the original INK engine.
+for(const o of [cm,npc,boat,wharf,house])paint.apply(o,{seed:'last-healer:accepted:'+o.name,outline:false});
+for(const [id,o] of Object.entries(assets))paint.apply(o,{seed:'last-healer:'+id,outline:false});
 const contexts={carHeadlights:cm,handFlashlight:npc,rowingHealer:boat,rainSplashRings:splashes,
  townRoad:street,roadsideDryShrubs:shrubs,pinkTownBuilding:shop,puddles:pools,whiteClinicBuilding:clinic,boatShed:shed};
 for(const [id] of supplements)contexts[id]=assets[id];
@@ -207,7 +216,7 @@ function draw(){
  const r=camDistance*.92*zoom;
  camera.position.set(camTarget.x+r*Math.sin(camAz)*Math.cos(camAlt),
  camTarget.y+r*Math.sin(camAlt),camTarget.z+r*Math.cos(camAz)*Math.cos(camAlt));
- camera.lookAt(camTarget);optics.render(clock);
+ camera.lookAt(camTarget);paint.tick(clock*1000);optics.render(clock);
 }
 function animate(ts){
  if(manual)return;

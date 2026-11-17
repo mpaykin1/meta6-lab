@@ -70,6 +70,23 @@ class SpriteStackTests(unittest.TestCase):
             Image.fromarray(a, "RGBA").save(image_path)
             self.assertIn("SS12", hard(root))
 
+    def test_SS13_catches_missing_ground_call_even_with_other_hooks(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = fixture(tmp)
+            mpath = root / "stack.json"
+            manifest = json.loads(mpath.read_text("utf-8"))
+            manifest["game"] = "nebesny-pilot"
+            manifest["assets"]["cliffBase"] = dict(manifest["assets"]["tower"])
+            mpath.write_text(json.dumps(manifest), "utf-8")
+            (root / "gothic-city.js").write_text(
+                "window.__ISOLATE__=(id,on)=>!!on;"
+                "function drawGround(){ const cliffBase = true; }", "utf-8")
+            # A renderer with no DRAW CALL is still a floating city.
+            (root / "index.html").write_text(
+                '<script src="./gothic-city.js"></script> '
+                'GothicCity.isCity(0,0);', "utf-8")
+            self.assertIn("SS13", hard(root))
+
     def test_SS13_city_cannot_float_over_sea(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = fixture(tmp)

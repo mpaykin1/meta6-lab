@@ -517,6 +517,17 @@ class CutoutTraps(unittest.TestCase):
         self.save(data)
         self.assertIn("CJ2", ids(self.d))
 
+    def test_vorona_live_scene_has_no_hard_defects(self):
+        """Actual staged pack must pass the same gate as fixtures and survive headless WebGL."""
+        pack = Path(__file__).resolve().parents[2] / "asset-packs/incoming/vorona-v-tumane"
+        if not pack.is_dir():
+            self.skipTest("live pack is absent in isolated mutation fixture")
+        result = cp.check(pack)
+        self.assertIn("cutout", result.kinds)
+        self.assertEqual(len(result.asset_ids & {item["id"] for item in
+            json.loads((pack / "ZAKAZ.json").read_text("utf-8"))["items"]}), 26)
+        self.assertEqual(result.hard(), [], result.hard())
+
     def test_CJ8_phantom_asset_without_renderer(self):
         self.sample()
         pack = json.loads((self.d / "pack.json").read_text("utf-8"))

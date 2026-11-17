@@ -1031,8 +1031,17 @@ void main() {
   vec3 col = mix(uShallow, uDeep, smoothstep(0.25, 2.6, depth));
   float detail = 1.0 - smoothstep(26.0, 64.0, dist);
   col *= mix(1.0, 0.62 + tl * 1.45, detail);
+  // Sunlight picks out non-repeating crests already present in the flowing water field.
+  float movingCaustic = smoothstep(0.54, 0.79,
+    currentA * 0.50 + currentB * 0.35 + currentC * 0.15);
+  col += uSunCol * movingCaustic * detail *
+    (1.0 - smoothstep(0.3, 3.0, depth)) * 0.085;
   float shore = 1.0 - smoothstep(0.05, 1.3, depth);
-  float band = fract(depth * 1.35 - uTime * 0.3 + h12(floor(pp * 2.0)) * 0.12);
+  // Reuse the coherent 3-scale current: foam edges now bend and breathe instead of following a frozen grid.
+  float shoreOffset = (currentA - 0.5) * 0.72
+                    + (currentB - 0.5) * 0.34
+                    + (currentC - 0.5) * 0.20;
+  float band = fract(depth * 1.35 - uTime * 0.3 + shoreOffset);
   float foam = shore * step(0.74, band) * detail + smoothstep(0.32, 0.02, depth);
   for (int i = 0; i < 8; i++) {
     vec4 r = uRipples[i];

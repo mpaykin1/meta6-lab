@@ -253,4 +253,194 @@ function rainSplashRings(seed=4){
   };
   return g;
 }
-export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings};
+
+// VIDEO CONTINUATION · never alters the four already accepted makers.
+// World geometry is irregular and rooted; all motion is per-part and deterministic.
+function townRoad(seed=5){
+ const r=random(seed),g=new T.Group(),stone=pigment('#77746c'),curb=pigment('#c4b6a1'),
+    chalk=pigment('#b4a88f'),asphalt=pigment('#62676a'),crack=pigment('#303c38');
+ g.name='Тихая улица городка · потрескавшийся перекрёсток';
+ box(g,6,.10,8,asphalt,0,-.05,0);
+ box(g,8,.09,4.7,asphalt,0,-.047,.16);
+ for(let s of [-1,1]){
+  // Curbs are raised; alternating stones visibly follow both road arms.
+  for(let k=0;k<15;k++){
+   const z=-3.8+k*.55;
+   box(g,.22,.20,.49,k%3===0?chalk:curb,s*3.08,.02,z);
+  }
+  for(let k=0;k<15;k++){
+   const x=-3.8+k*.55;
+   box(g,.49,.19,.22,k%4===0?chalk:curb,x,.02,.16+s*2.43);
+  }
+ }
+ for(let k=-3;k<=3;k++){
+  if(Math.abs(k)<2)continue;
+  box(g,.08,.012,.49,chalk,.0,.009,k*1.10).rotation.y=.04*(r()-.5);
+ }
+ for(let k=0;k<32;k++){
+  const x=(r()-.5)*6.9,z=(r()-.5)*7.5;
+  const a=[x,.014,z],b=[x+(r()-.5)*.44,.015,z+(r()-.5)*.55];
+  rod(g,a,b,.009,k%3?crack:stone,.004);
+  if(k%5===0){
+   const p=ball(g,.07,curb,x,.028,z,1,.32,.83);
+   p.rotation.y=r()*6.28;
+  }
+ }
+ g.userData.footprint=0;
+ return g;
+}
+function roadsideDryShrubs(seed=6){
+ const r=random(seed),g=new T.Group(),stem=pigment('#736b59'),tip=pigment('#bd7c69'),
+       dry=pigment('#c5ac69'),clumps=[];
+ g.name='Колючие кусты · семь разных силуэтов';
+ for(let i=0;i<7;i++){
+  const b=new T.Group();b.position.set((i-3)*.52+(r()-.5)*.17,0,(r()-.5)*.8);
+  g.add(b);clumps.push(b);
+  let H=.40+r()*.65;
+  rod(b,[0,0,0],[(r()-.5)*.10,H,0],.036,stem,.017);
+  for(let k=0;k<7;k++){
+   const a=(k/7)*PI*2+r()*.4,R=.28+r()*.35;
+   const x=Math.cos(a)*R,z=Math.sin(a)*R,y=H*(.55+r()*.45);
+   rod(b,[0,.08,0],[x*.6,y*.6,z*.55],.019,stem,.008);
+   rod(b,[x*.6,y*.6,z*.55],[x,y,z],.009,stem,.002);
+   const leaf=ball(b,.08,k%3?dry:tip,x,y,z,.45,1.15,.37);
+   leaf.rotation.y=a;
+   for(let v=0;v<2;v++)
+    rod(b,[x*.7,y*.8,z*.7],[x*(.83+v*.12),y*(.91+v*.12),z*(.94+v*.10)],.007,stem,.002);
+  }
+ }
+ g.userData.footprint=.35;
+ g.userData.tick=t=>clumps.forEach((b,i)=>{
+  b.rotation.x=.032*Math.sin(t*.73-i*.39);
+  b.rotation.z=.055*Math.sin(t*.58-i*.25);
+ });
+ return g;
+}
+function pinkTownBuilding(seed=7){
+ const r=random(seed),g=new T.Group(),wall=pigment('#bd9290'),
+    roof=pigment('#736b59'),frame=pigment('#d5c6ac'),glass=pigment('#587879'),
+    lamps=new T.MeshBasicMaterial({color:'#e7b97d'}),lintel=pigment('#8d6a63');
+ g.name='Угловой дом · живая витрина в розовых сумерках';
+ box(g,4.9,2.7,3.3,wall,0,1.35,0);
+ box(g,5.2,.22,3.6,roof,0,2.82,0);
+ for(let k=0;k<5;k++)box(g,5.03,.06,.12,lintel,0,.48+k*.51,1.69);
+ // Large recessed shop windows and visible timber braces.
+ for(let i=0;i<4;i++){
+  const x=-1.76+i*1.18;
+  box(g,.95,1.35,.08,glass,x,1.23,1.70);
+  box(g,.11,1.50,.12,frame,x-.47,1.20,1.76);
+  box(g,.11,1.50,.12,frame,x+.47,1.20,1.76);
+  box(g,1.04,.12,.13,frame,x,2.0,1.75);
+  const inside=box(g,.70,.41,.04,i%2?lamps:frame,x,1.20,1.82);
+  inside.userData.watercolorOutline=false;
+  box(g,1.12,.08,.49,lintel,x,2.15,1.91);
+  rod(g,[x-.49,2.13,2.12],[x-.48,2.52,1.78],.035,roof);
+  rod(g,[x+.49,2.13,2.12],[x+.48,2.52,1.78],.035,roof);
+ }
+ for(let i=0;i<9;i++){
+  const x=-2.45+i*.61;
+  box(g,.16,.28,.14,roof,x,2.97,1.62);
+ }
+ for(let i=0;i<12;i++){
+  const z=(r()-.5)*2.8;
+  const tile=box(g,.09,.025,.23,i%2?lintel:wall,(r()-.5)*4.5,2.96,z);
+  tile.rotation.y=r()*.6;
+ }
+ g.userData.footprint=2.2;
+ g.userData.tick=t=>{g.children.filter(o=>o.material===lamps).forEach((o,i)=>{
+  o.scale.y=.91+.08*Math.sin(t*.42+i*1.7);
+ });};
+ return g;
+}
+function puddles(seed=8){
+ const r=random(seed),g=new T.Group(),water=new T.MeshStandardMaterial({
+  color:'#6a9996',roughness:.19,metalness:.12,transparent:true,opacity:.67,depthWrite:false,
+  side:T.DoubleSide
+ }),foam=new T.MeshBasicMaterial({color:'#efece2',transparent:true,opacity:.66,depthWrite:false}),
+ ripples=[];
+ g.name='Разнокалиберные лужи · отражают фонари';
+ for(let j=0;j<11;j++){
+  const x=(r()-.5)*4.6,z=(r()-.5)*4.8,rad=.23+r()*.47;
+  const path=new T.Shape();
+  for(let k=0;k<=14;k++){
+   const a=k*2*PI/14,rr=rad*(.75+.32*Math.sin(a*3.7+j));
+   const X=Math.cos(a)*rr,Z=Math.sin(a)*rr*.72;
+   if(!k)path.moveTo(X,Z);else path.lineTo(X,Z);
+  }
+  const sheet=mesh(g,new T.ShapeGeometry(path),water,x,.018,z);
+  sheet.rotation.x=-PI/2;sheet.userData.watercolorOutline=false;
+  const shimmer=rod(g,[x-rad*.48,.027,z-rad*.16],[x+rad*.42,.027,z+rad*.08],.011,foam,.006);
+  shimmer.userData.watercolorOutline=false;
+  const ringMat=foam.clone(),ring=mesh(g,new T.TorusGeometry(.11,.010,4,25),ringMat,x,.033,z);
+  ring.rotation.x=PI/2;ring.userData.watercolorOutline=false;
+  ripples.push({ring,phase:r()});
+ }
+ g.userData.footprint=0;
+ g.userData.tick=t=>ripples.forEach(({ring,phase},i)=>{
+   const q=(t*.55+phase)%1;
+   ring.scale.setScalar(.2+q*2.9);
+   ring.material.opacity=.50*(1-q);
+   ring.position.y=.029+.003*Math.sin(t*1.3+i);
+ });
+ return g;
+}
+function whiteClinicBuilding(seed=9){
+ const r=random(seed),g=new T.Group(),wall=pigment('#d5d3bb'),roof=pigment('#9c9b8e'),
+  trim=pigment('#efece2'),glass=pigment('#607e74'),red=pigment('#bd7c69'),
+  leaf=pigment('#839487'),warm=new T.MeshBasicMaterial({color:'#e7c48d'});
+ g.name='Белая клиника · красный навес · единственное окно света';
+ box(g,6.3,2.68,2.9,wall,0,1.34,0);
+ box(g,6.65,.18,3.27,roof,0,2.78,0);
+ for(let i=0;i<6;i++){
+  const x=-2.6+i*1.03;
+  box(g,.74,1.0,.08,i===4?warm:glass,x,1.45,1.50);
+  box(g,.08,1.13,.10,trim,x-.40,1.42,1.55);
+  box(g,.08,1.13,.10,trim,x+.40,1.42,1.55);
+  box(g,.86,.10,.10,trim,x,2.01,1.55);
+  box(g,.08,1.03,.10,trim,x,1.46,1.56);
+  box(g,.86,.11,.15,roof,x,.90,1.60);
+ }
+ const canopy=box(g,2.2,.14,1.5,red,-1.4,2.33,2.08);canopy.rotation.z=-.04;
+ for(let k=0;k<3;k++)rod(g,[-2.36+k*.94,2.3,2.6],[-2.32+k*.94,.03,2.59],.04,roof);
+ box(g,1.28,1.65,.09,glass,-1.45,.83,1.58);
+ for(let i=0;i<14;i++){
+  let x=-3.1+r()*6.2,z=1.6+r()*.33;
+  const b=ball(g,.14,leaf,x,.12,z,.7,.8,1.2);
+  b.rotation.y=r()*PI;
+ }
+ g.userData.footprint=2.9;
+ g.userData.tick=t=>g.children.filter(o=>o.material===warm).forEach(o=>{
+  o.scale.x=.97+.03*Math.sin(t*.42);
+ });
+ return g;
+}
+function boatShed(seed=10){
+ const r=random(seed),g=new T.Group(),posts=pigment('#736b59'),
+  plank=pigment('#a89a80'),roof=pigment('#607e74'),stripe=pigment('#bd7c69');
+ g.name='Лодочный сарай · двускатная крыша и полки';
+ for(const s of [-1,1])for(const z of [-1,1]){
+  rod(g,[s*1.55,0,z],[s*1.54,2.5,z],.13,posts,.105);
+ }
+ for(let i=0;i<8;i++){
+  const z=-1+i*.29;
+  const a=box(g,2.2,.12,.37,roof,-.82,2.94,z);a.rotation.z=.37;
+  const b=box(g,2.2,.12,.37,roof,.82,2.94,z);b.rotation.z=-.37;
+ }
+ for(let i=0;i<8;i++){
+  const x=-1.55+i*.44;
+  box(g,.36,1.55,.11,i%3?plank:posts,x,.8,-1.04);
+ }
+ for(let i=0;i<5;i++){
+  box(g,2.9,.09,.22,plank,0,.65+i*.36,.85);
+  box(g,.7,.32,.48,posts,-.92+i*.43,.30+i*.36,.71);
+ }
+ const strip=box(g,3.4,.13,.24,stripe,0,2.27,1.17);
+ for(let i=0;i<13;i++){
+  const x=-1.4+r()*2.8;
+  box(g,.12,.036,.19,plank,x,.04,(r()-.5)*1.2);
+ }
+ g.userData.footprint=1.95;
+ return g;
+}
+
+export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,roadsideDryShrubs,pinkTownBuilding,puddles,whiteClinicBuilding,boatShed};

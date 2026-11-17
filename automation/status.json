@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T11:16:22.539Z",
+  "generated_at": "2026-11-17T12:23:06.150Z",
   "sha": {
-    "lab": "9de111dd6a7e0f7886e7f8670bf640daec43312e",
+    "lab": "a95f9c89c20323ff97440d46358ddf101098b223",
     "mg": "2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44072397492",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44082406008",
   "review": {
     "protected": [
       {
@@ -373,6 +373,8 @@
       "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
+      "| B2: независимый верификатор движения из #258 | lab/z04-b2-extract-motion-20261117 | свободно (зависло 9 ч, было: чат ChatGPT) | 2026-11-17T02:24:52.054Z |",
+      "| НАДЗОР — чат ChatGPT | lab/nadzor | свободно (зависло 10 ч, было: чат ChatGPT (надзор)) | 2026-11-17T01:33:05.414Z |",
       "| КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |",
       "| БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |",
       "| КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |",
@@ -495,7 +497,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44060696524"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44072397483"
       },
       "P1": {
         "value": "не подтверждено",
@@ -505,7 +507,7 @@
     }
   },
   "pr": {
-    "open": 42,
+    "open": 45,
     "conflicts": "нет данных",
     "merged": 77,
     "closed": 121,
@@ -1248,7 +1250,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2775,
+      "count": 2781,
       "folders": "нет данных"
     },
     "mg": {

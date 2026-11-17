@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T11:16:22.539Z | МГЛ: 9de111dd6a7e0f7886e7f8670bf640daec43312e | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44072397492
+UTC: 2026-11-17T12:23:06.150Z | МГЛ: a95f9c89c20323ff97440d46358ddf101098b223 | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44082406008
 ## ПРОВЕРИТЬ CLAUDE
 - PR #382 7c56b01e1a323254a1d850d50bd373364a079c7d: automation/asset-check/test_kinds.py
 - PR #362 51f2ef012ec9cf31d0d68c83ba02fac0951974b7: automation/asset-check/test_3d_master.py
@@ -9,10 +9,10 @@ UTC: 2026-11-17T11:16:22.539Z | МГЛ: 9de111dd6a7e0f7886e7f8670bf640daec43312e
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/… (сокращено)
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
 - ещё 6: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
+- | B2: независимый верификатор движения из #258 | lab/z04-b2-extract-motion-20261117 | свободно (зависло 9 ч, было: чат ChatGPT) | 2026-11-17T02:24:52.054Z |
+- | НАДЗОР — чат ChatGPT | lab/nadzor | свободно (зависло 10 ч, было: чат ChatGPT (надзор)) | 2026-11-17T01:33:05.414Z |
 - | КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |
-- | БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |
-- | КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |
-- ещё 13: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
+- ещё 15: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
 готовы по FINISH.md: M1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036)), M2 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685)), M3 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211)), M4 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211)), M5 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211)), B1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082)), P1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308))
 Actions M1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42637860036): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
@@ -20,7 +20,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44060696524)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44072397483)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -34,13 +34,13 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 42 | конфликт: нет данных | слито: 77 | закрыто: 121
+открыто: 45 | конфликт: нет данных | слито: 77 | закрыто: 121
 #361 Z01: корректный подсчёт живых PR без draft | 894a85831a9374e805753b71b0c4faa9f27d6bd7
 #383 BLACK TRAIN: опубликовать игровую сцену с 14 ассетами | 854aa2b15bde75ab4cd6e22a1749a63f69ed9846
 #382 feat(assets): BLACK TRAIN — 14 заказанных ассетов без нового | 7c56b01e1a323254a1d850d50bd373364a079c7d
 ещё 74: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2775 коммитов | нет данных
+МГЛ: 2781 коммитов | нет данных
 МГ: 44 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:25, reference:31, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

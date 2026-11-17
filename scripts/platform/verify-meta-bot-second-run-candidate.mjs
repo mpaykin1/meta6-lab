@@ -46,8 +46,8 @@ async function checkScenario(source, second, expectedOk, label) {
   };
   const fpsSave = () => {};
   // Exercise the exact production checkGame function with deterministic runOnce outcomes.
-  const checkGame = new Function('loadGame', 'chromium', 'runOnce', 'fpsSave', 'path',
-    code + '\nreturn checkGame;')(loadGame, chromium, runOnce, fpsSave, path);
+  const checkGame = new Function('loadGame', 'chromium', 'runOnce', 'fpsSave', 'path', 'LAUNCH',
+    code + '\nreturn checkGame;')(loadGame, chromium, runOnce, fpsSave, path, {});
   const result = await checkGame({ gameDir: '/tmp/meta-bot-hash', repoRoot: '/tmp', baseUrl: 'http://localhost' });
   assert.equal(count, 2, label + ': second launch skipped');
   assert.equal(result.ok, expectedOk, label + ': falsely accepted/rejected second launch');

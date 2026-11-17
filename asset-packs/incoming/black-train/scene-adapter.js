@@ -15,6 +15,7 @@ const black=put('blackLocomotive',11,[0,0,0],train);
 const crossing=put('crossingSign',7,[3.0,0,-9.7]);
 const red=put('redSignalLamp',8,[4.25,0,-9.7]);
 const chains=put('hangingChains',8,[3.15,0,-9.6]);
+const treeChains=makers.hangingChains(88);treeChains.position.set(-6.1,0,-13.4);scene.add(treeChains);
 const tree=put('gnarledTree',31,[-6.3,0,-13.2]);
 const mist=put('groundMist',16,[1.3,0,-6.2]);
 // Three asymmetrical specimens rather than a wall of repeated identical trees.
@@ -26,8 +27,9 @@ const storm=put('stormClouds',17,[0.5,5.3,-23.0]);
 const fence=put('brokenFence',26,[8.4,0,-15.7]);
 const grass=put('tallGrass',42,[1.1,0,-3.9]);
 const wet=put('wetRailGlow',49,[3.3,0,-7.5]);
-const wire=put('barbedWire',65,[-6.2,0,-13.6]);
+const wire=put('barbedWire',65,[7.5,0,-7.5]);wire.rotation.y=Math.PI/2;
 const puddles=put('swampPuddles',83,[-1.9,0,-4.4]);
+const puddlesNearLamp=makers.swampPuddles(93);puddlesNearLamp.position.set(4.5,0,-7.2);scene.add(puddlesNearLamp);
 const grassFar=makers.tallGrass(105);grassFar.position.set(-2.4,0,-4.5);scene.add(grassFar);
 const fenceFar=makers.brokenFence(103);fenceFar.position.set(-10,0,-18);scene.add(fenceFar);
 const sound=createBlackTrainAudio();
@@ -36,7 +38,10 @@ let lastActive=false,lastX=0,variant=false,last=performance.now();
 const originalVisible=Object.fromEntries(Object.keys(assets).map(k=>[k,true]));
 window.__ISOLATE__=(id,on)=>{
  if(!Object.hasOwn(assets,id))return false;
- originalVisible[id]=!!on;assets[id].visible=!!on;return true;
+ originalVisible[id]=!!on;assets[id].visible=!!on;
+ if(id==='blackLocomotive'&&on){variant=true;oldLoco.visible=false;}
+ if(id==='hangingChains')treeChains.visible=!!on;
+ return true;
 };
 window.__PACK__={items:Object.keys(assets).map(id=>({id,label:id}))};
 window.__BLACK_TRAIN_ASSETS__={scene,assets,fartherTrees,order:15,created:15,
@@ -58,6 +63,7 @@ function frame(now){
  red.userData.tick(now*.001,dt);
  red.userData.light.intensity=(2+approach*23)*blink;
  red.userData.glass.material.color.setRGB(.34+approach*1.45,.02,.025);
+ wet.userData.redMaterial.opacity=.06+.31*approach*blink;
  const t=now*.001;
  sound.tick(t,approach,game.stats().state!=='title');
  storm.userData.tick(t,dt);
@@ -68,12 +74,15 @@ function frame(now){
  wet.userData.tick(t,dt);
  wire.userData.tick(t,dt);
  puddles.userData.tick(t,dt);
+ puddlesNearLamp.userData.tick(t+.38,dt);
  if(black.visible)black.userData.tick(t,dt);
  crossing.userData.tick?.(t,dt);
  chains.userData.tick(t,dt);
+ treeChains.userData.tick(t+.65,dt);
  tree.userData.tick(t,dt);
  fartherTrees.forEach((g,i)=>g.userData.tick(t+i*4,dt));
  mist.userData.tick(t,dt);
- mist.userData.setGlow(.66+(approach*.65));
+ const torchOn=game.camera.children.some(c=>c.isSpotLight&&c.intensity>90);
+ mist.userData.setGlow(.35+(torchOn?.52:0)+approach*.55);
 }
 requestAnimationFrame(frame);

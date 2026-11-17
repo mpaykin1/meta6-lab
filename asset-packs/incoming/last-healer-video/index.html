@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>The Last Healer · INK / дождь, дорога и лодка</title>
+<link rel="icon" href="data:,">
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#202d31;touch-action:none}
+canvas{display:block;position:fixed;inset:0;width:100%;height:100%;touch-action:none}
+button{font:inherit;cursor:pointer}#toggle{position:fixed;z-index:12;right:max(18px,env(safe-area-inset-right));top:max(18px,env(safe-area-inset-top));width:46px;height:46px;border:1px solid #e6dfc6aa;border-radius:50%;background:#233b3dcc;color:#f6e5c5;font-size:24px}
+#menu{position:fixed;z-index:11;right:17px;top:77px;width:min(285px,calc(100vw - 34px));max-height:calc(100dvh - 94px);overflow:auto;background:#233436ed;color:#e8e4d4;border:1px solid #abb6a144;border-radius:14px;padding:20px;box-shadow:0 16px 64px #101b2199;font:13px/1.5 system-ui}
+#menu[hidden]{display:none}#menu h1{font:italic 22px/1.1 Georgia;margin:0 0 5px;color:#f6e9cb}#menu p{margin:5px 0 13px;opacity:.78}
+#menu button:not(#toggle){display:block;width:100%;padding:10px 12px;margin:8px 0;text-align:left;color:#eddfc5;background:#607e7430;border:1px solid #9fb1a044;border-radius:8px}
+#menu button[aria-pressed=true]{background:#b4a9804e;border-color:#ded5b3}
+#menu .small{font-size:11px;opacity:.7;margin-top:14px}#err{position:fixed;bottom:0;left:0;right:0;background:#4e3434;color:white;padding:10px;font:13px system-ui}
+#vignette{pointer-events:none;position:fixed;inset:0;background:radial-gradient(ellipse at 52% 44%,transparent 44%,#0d25303a 100%);z-index:2}
+</style>
+<script type="importmap">{"imports":{"three":"../../../reference/ink-fallen-guardian/three.module.js"}}</script>
+</head><body>
+<div id="vignette"></div>
+<button id="toggle" aria-label="Меню сцен" aria-expanded="false">☰</button>
+<nav id="menu" hidden><h1>The Last Healer</h1><p>Живая акварель · дополнения к одобренному миру INK</p>
+<div id="scenes"></div><p class="small">Свет привязан к принятой машине и аптекарю; гребец сидит в принятой лодке. Поверните сцену пальцем или мышью.</p></nav>
+<div id="err" hidden></div>
+<script type="module">
+import * as T from 'three';
+import {createLivingWatercolor3D,createWatercolorStyle} from '../../../reference/ink-fallen-guardian/shared/living-watercolor-3d.js';
+import {createIllustrationCamera} from '../../../reference/ink-fallen-guardian/shared/living-watercolor-generators.js';
+import {objectMakers} from '../../../reference/ink-fallen-guardian/ink-objects.js';
+import {extraObjectMakers} from '../../../reference/ink-fallen-guardian/ink-extras.js';
+import {settlementMakers} from '../../../reference/ink-fallen-guardian/ink-settlement.js';
+import {buildWorld} from '../../../reference/ink-fallen-guardian/ink-world.js';
+import {createInkOptics} from '../../../reference/ink-fallen-guardian/ink-optics.js';
+import {createFallenRobot} from '../../../reference/ink-fallen-guardian/ink-fallen-robot.js';
+import {makers} from './makers.js';
+const $=s=>document.querySelector(s);
+const scene=new T.Scene();
+const camera=createIllustrationCamera(T,{width:innerWidth,height:innerHeight,viewHeight:8.4,position:[15,15,19],lookAt:[0,.5,0]});
+camera.far=180;
+const renderer=new T.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.setSize(innerWidth,innerHeight);
+renderer.outputColorSpace=T.SRGBColorSpace;document.body.prepend(renderer.domElement);
+const style=createWatercolorStyle({seed:'last-healer-ink-video',inkColor:'#303c38',paperColor:'#efece2',washColor:'#839487',
+ washOpacity:.78,washLayers:6,edgeWidth:.019,edgeJitter:.26,granulation:.40,bleed:.24,shadowWash:.17,
+ motion:.10,pigmentPooling:.27,paperGap:.15,paintedLight:.67});
+const paint=createLivingWatercolor3D({THREE:T,renderer,scene,camera,style});
+const optics=createInkOptics(renderer);
+const sky=new T.HemisphereLight('#e9ded0','#78918b',1.95);scene.add(sky);
+const sun=new T.DirectionalLight('#ffe0b0',1.3);sun.position.set(-6,10,6);scene.add(sun);
+scene.fog=new T.Fog('#bac9b9',50,95);
+const valley=buildWorld({makers:{...objectMakers,...extraObjectMakers,...settlementMakers,robot:createFallenRobot},paint,scene});
+const get=n=>{let obj=null;valley.world.traverse(o=>{if(!obj&&o.name===n)obj=o;});return obj;};
+const car=get('Зелёный автомобиль');
+const hero=get('Путник');
+const boat=get('Деревянная лодка');
+if(!car||!hero||!boat){$('#err').hidden=false;$('#err').textContent='Не найдена принятая машина, аптекарь или лодка';throw new Error('Accepted INK world assets missing');}
+const assets={carHeadlights:makers.carHeadlights(11),handFlashlight:makers.handFlashlight(15),
+ rowingHealer:makers.rowingHealer(19),rainSplashRings:makers.rainSplashRings(23)};
+car.add(assets.carHeadlights);
+hero.add(assets.handFlashlight);
+boat.add(assets.rowingHealer);
+assets.rainSplashRings.position.set(-10.25,0,-8.6);valley.world.add(assets.rainSplashRings);
+for(const [id,o] of Object.entries(assets))paint.apply(o,{seed:'last-healer-video:'+id});
+const scenes=[
+ {id:'carHeadlights',label:'I · Розовые сумерки / машина',target:car,sky:'#d1a6a0',ground:'#756f78',fog:'#c3a8a4',intensity:1.45,hem:1.9,zoom:7.8},
+ {id:'handFlashlight',label:'II · Ночь / аптекарь с фонарём',target:hero,sky:'#647d88',ground:'#304e60',fog:'#617b85',intensity:.28,hem:.55,zoom:5.1},
+ {id:'rowingHealer',label:'III · День / гребля к причалу',target:boat,sky:'#f9e9c8',ground:'#90baa9',fog:'#d4dfcd',intensity:1.6,hem:2.3,zoom:6.2},
+ {id:'rainSplashRings',label:'IV · Ливень / кольца в лужах',target:assets.rainSplashRings,sky:'#819da5',ground:'#526f72',fog:'#889e9d',intensity:.62,hem:1.2,zoom:7.5}
+];
+let selected=0,yaw=-.61,pitch=.66,drag=null,t=0,last=0,manual=false;
+const look=new T.Vector3(),focus=new T.Vector3(),color=new T.Color();
+function choose(i){
+ selected=(i+scenes.length)%scenes.length;
+ $('#scenes').querySelectorAll('button').forEach((b,k)=>b.setAttribute('aria-pressed',String(k===selected)));
+ const active=scenes[selected];
+ // Light, haze and camera change gently, without a screen shake.
+ look.copy(active.target.getWorldPosition(new T.Vector3())).add(new T.Vector3(0,.7,0));
+}
+scenes.forEach((s,i)=>{const b=document.createElement('button');b.textContent=s.label;b.onclick=()=>{choose(i);$('#menu').hidden=true;$('#toggle').setAttribute('aria-expanded','false');};$('#scenes').append(b);});
+$('#toggle').onclick=()=>{const isOpen=$('#menu').hidden=!$('#menu').hidden;$('#toggle').setAttribute('aria-expanded',String(!isOpen));};
+function resize(){renderer.setSize(innerWidth,innerHeight);camera.userData.viewHeight=Math.max(5.5,scenes[selected].zoom/Math.max(.85,innerWidth/innerHeight));camera.updateForViewport(innerWidth,innerHeight);}
+addEventListener('resize',resize);
+const canvas=renderer.domElement;
+canvas.addEventListener('pointerdown',e=>{canvas.setPointerCapture(e.pointerId);drag={x:e.clientX,y:e.clientY};});
+canvas.addEventListener('pointermove',e=>{if(!drag)return;yaw-=(e.clientX-drag.x)*.007;pitch=T.MathUtils.clamp(pitch+(e.clientY-drag.y)*.004,.28,1.21);drag={x:e.clientX,y:e.clientY};});
+for(const key of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(key,()=>{drag=null;});
+canvas.addEventListener('wheel',e=>{e.preventDefault();camera.userData.viewHeight=T.MathUtils.clamp(camera.userData.viewHeight*Math.exp(e.deltaY*.001),4.5,20);camera.updateForViewport(innerWidth,innerHeight);},{passive:false});
+function draw(ms){
+ const current=scenes[selected],target=current.target.getWorldPosition(new T.Vector3());
+ target.y+=.55;focus.lerp(target,.04);
+ camera.position.set(focus.x+Math.sin(yaw)*Math.cos(pitch)*32,focus.y+Math.sin(pitch)*32,focus.z+Math.cos(yaw)*Math.cos(pitch)*32);
+ camera.lookAt(focus);
+ sky.color.lerp(color.set(current.sky),.025);
+ sky.groundColor.lerp(color.set(current.ground),.025);
+ sun.color.lerp(color.set(current.sky),.025);
+ sky.intensity+=(current.hem-sky.intensity)*.025;
+ sun.intensity+=(current.intensity-sun.intensity)*.025;
+ scene.fog.color.lerp(color.set(current.fog),.025);
+ valley.tick(t,focus,false);
+ for(const o of Object.values(assets))if(o.visible!==false)o.userData.tick?.(t,1/60);
+ paint.tick(ms);optics.render(scene,camera,false);
+}
+function frame(ms){requestAnimationFrame(frame);if(manual||document.hidden){last=ms;return;}let dt=Math.min(.04,Math.max(0,(ms-last)/1000));last=ms;t+=dt;draw(ms);}
+choose(0);resize();requestAnimationFrame(frame);
+window.__PACK__={items:scenes.map(s=>({id:s.id,label:s.label})),version:'0.1.0'};
+window.__PACK_PROBE__={assets,setHidden:(id,hidden)=>{if(assets[id])assets[id].visible=!hidden;draw(t*1000);return !!assets[id];},
+ freeze:()=>{manual=true;draw(t*1000);},resume:()=>{manual=false;},select:(id)=>{let i=scenes.findIndex(s=>s.id===id);if(i<0)return false;choose(i);return true;}};
+window.__ISOLATE__=(id,on)=>window.__PACK_PROBE__.setHidden(id,!on);
+</script></body></html>

@@ -95,22 +95,22 @@ def baseline(base: Path):
     if base == REPO / NIGHT_BASE:
         # Calibrate to actual accepted tree and train geometry from this game, not the unrelated bright valley.
         scene = (base / "src/scene.js").read_text("utf-8")
-        tree = re.search(r"function deadTree\\(height,seed\\)\\{[\\s\\S]+?\\n\\}", scene)
+        tree = re.search(r"function deadTree\(height,seed\)\{[\s\S]+?\n\}", scene)
         if not tree:
             _BASELINE[key] = None
             shutil.rmtree(tmp.parent, ignore_errors=True)
             return None
-        tmp.write_text("import * as T from 'three';\\n"
-                       "import {createInkNightTrain} from './src/ink-night-train.js';\\n"
-                       "const rnd=i=>{const f=Math.sin(i*127.1+39.4)*43758.5453;return f-Math.floor(f);};\\n"
-                       "const bark=new T.MeshStandardMaterial({color:'#2b3134',roughness:.95});\\n"
-                       + tree.group() + "\\n"
+        tmp.write_text("import * as T from 'three';\n"
+                       "import {createInkNightTrain} from './src/ink-night-train.js';\n"
+                       "const rnd=i=>{const f=Math.sin(i*127.1+39.4)*43758.5453;return f-Math.floor(f);};\n"
+                       "const bark=new T.MeshStandardMaterial({color:'#2b3134',roughness:.95});\n"
+                       + tree.group() + "\n"
                        "export const makers={nightTree:seed=>deadTree(4.8,seed),"
-                       "nightTrain:seed=>createInkNightTrain({cars:0,seed})};\\n", "utf-8")
+                       "nightTrain:seed=>createInkNightTrain({cars:0,seed})};\n", "utf-8")
     else:
-        tmp.write_text("import {objectMakers} from './ink-objects.js';\\nimport {extraObjectMakers} from './ink-extras.js';\\n"
-                       "import {settlementMakers} from './ink-settlement.js';\\n"
-                       "export const makers = {...objectMakers, ...extraObjectMakers, ...settlementMakers};\\n", "utf-8")
+        tmp.write_text("import {objectMakers} from './ink-objects.js';\nimport {extraObjectMakers} from './ink-extras.js';\n"
+                       "import {settlementMakers} from './ink-settlement.js';\n"
+                       "export const makers = {...objectMakers, ...extraObjectMakers, ...settlementMakers};\n", "utf-8")
     data, _ = run_harness(base, tmp)
     shutil.rmtree(tmp.parent, ignore_errors=True)
     ok = [m for m in (data or {}).get("makers", {}).values() if not m.get("error")]

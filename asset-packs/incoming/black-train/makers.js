@@ -1,0 +1,156 @@
+import * as T from 'three';
+// BLACK TRAIN — objects are true volumetric geometry, not screen-space glyphs.
+const M={
+ iron:new T.MeshStandardMaterial({color:0x111719,roughness:.65,metalness:.55}),
+ ironEdge:new T.MeshStandardMaterial({color:0x394247,roughness:.53,metalness:.65}),
+ soot:new T.MeshStandardMaterial({color:0x080b0d,roughness:.97}),
+ wood:new T.MeshStandardMaterial({color:0x25201e,roughness:.98}),
+ woodCut:new T.MeshStandardMaterial({color:0x4c3b31,roughness:1}),
+ silver:new T.MeshStandardMaterial({color:0x5e686a,roughness:.32,metalness:.8}),
+ red:new T.MeshBasicMaterial({color:0xb31717}),
+ glow:new T.MeshBasicMaterial({color:0xf4e5cc}),
+ glass:new T.MeshBasicMaterial({color:0xb9c5bc}),
+ mist:new T.MeshBasicMaterial({color:0x778389,transparent:true,opacity:.13,depthWrite:false,side:T.DoubleSide})
+};
+function random(seed){let s=(seed|0)||13;return()=>((s=(Math.imul(1664525,s)+1013904223)|0)>>>0)/4294967296;}
+function add(g,geo,mat,x=0,y=0,z=0){const o=new T.Mesh(geo,mat);o.position.set(x,y,z);o.userData.watercolorOutline=true;g.add(o);return o;}
+function box(g,w,h,d,mat,x,y,z){return add(g,new T.BoxGeometry(w,h,d),mat,x,y,z);}
+function rod(g,a,b,r,mat,r2=r){const p=new T.Vector3(...a),q=new T.Vector3(...b),v=q.clone().sub(p),o=add(g,new T.CylinderGeometry(r2,r,v.length(),6,1),mat,...p.clone().add(q).multiplyScalar(.5).toArray());o.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),v.normalize());return o;}
+function finish(g,footprint=0){g.userData.footprint=footprint;return g;}
+
+function blackLocomotive(seed=1){
+ const r=random(seed),g=new T.Group();g.name='Чёрный локомотив';
+ box(g,10.2,.5,2.85,M.soot,-5,.55,0);
+ box(g,9.85,2.65,2.62,M.iron,-5.05,2.08,0);
+ box(g,9.45,.22,2.8,M.ironEdge,-5.1,3.53,0);
+ // Flat vertical frontal armor. High, unbroken silhouette unlike accepted sloping nose.
+ box(g,.34,3.35,2.76,M.iron,-.12,2.3,0);
+ box(g,.11,3.2,2.45,M.soot,.11,2.28,0);
+ for(const side of [-1,1]){
+   box(g,9.5,.18,.13,M.silver,-5.05,1.45,side*1.38);
+   box(g,9.2,.09,.12,M.ironEdge,-5.05,2.9,side*1.4);
+   for(let k=0;k<5;k++) {
+     const x=-.95-k*1.7;
+     add(g,new T.CylinderGeometry(.48,.48,.20,12),M.soot,x,.45,side*1.16).rotation.x=Math.PI/2;
+     add(g,new T.TorusGeometry(.35,.055,5,12),M.silver,x,.45,side*1.27);
+     rod(g,[x-.18,.45,side*1.31],[x+.18,.45,side*1.31],.035,M.silver);
+   }
+   for(let i=0;i<9;i++)box(g,.06,.12,.08,M.silver,-.8-i*.95,1.2,side*1.44);
+   // Rails and exterior ladder, cut into dark body.
+   rod(g,[-8.1,.75,side*1.49],[-8.1,3.05,side*1.49],.045,M.silver);
+   rod(g,[-7.65,.75,side*1.49],[-7.65,3.05,side*1.49],.045,M.silver);
+   for(let j=0;j<7;j++)rod(g,[-8.1,.83+j*.32,side*1.5],[-7.65,.83+j*.32,side*1.5],.037,M.ironEdge);
+ }
+ // Front grill, rust and cascading streaks.
+ for(let i=0;i<13;i++)box(g,.06,1.18,.09,M.ironEdge,.21,1.48,-1.05+i*.17);
+ for(let i=0;i<11;i++){const z=-1.15+i*.24;
+  box(g,.04,.24+r()*.48,.015,M.woodCut,.245,2.6-r()*.4,z);}
+ // Low paired headlights, true glass and bolted reflectors.
+ for(const z of [-.87,.87]){
+  const lens=add(g,new T.CylinderGeometry(.29,.29,.16,20),M.glass,.26,1.08,z);
+  lens.rotation.z=Math.PI/2;
+  const ring=add(g,new T.TorusGeometry(.31,.065,7,20),M.silver,.36,1.08,z);
+  ring.rotation.y=Math.PI/2;
+  for(let a=0;a<8;a++){const th=a*Math.PI/4;add(g,new T.SphereGeometry(.036,5,5),M.iron,.37,1.08+Math.sin(th)*.33,z+Math.cos(th)*.33);}
+ }
+ // One roof searchlight, fixed to an angled mount, with source headlamp light retained by host game.
+ box(g,.55,.28,.6,M.ironEdge,-.43,4.12,0);
+ rod(g,[-.35,4.08,0],[.05,4.38,0],.13,M.ironEdge);
+ const hood=add(g,new T.CylinderGeometry(.42,.34,.38,16),M.ironEdge,.12,4.42,0);hood.rotation.z=Math.PI/2;
+ add(g,new T.CylinderGeometry(.31,.31,.08,16),M.glow,.34,4.42,0).rotation.z=Math.PI/2;
+ // Upper cab windows at the FRONT, separated by steel mullions.
+ for(let i=0;i<4;i++){
+  const z=-.92+i*.62;
+  box(g,.09,.62,.42,M.glass,.27,3.25,z);
+  box(g,.11,.05,.53,M.soot,.34,3.59,z);
+ }
+ // Exhaust stacks, pantograph spikes, roof apparatus.
+ for(let j=0;j<3;j++){
+  const x=-2.3-j*2.6;
+  rod(g,[x,3.62,0],[x,4.38+j*.08,0],.19,M.iron);
+  add(g,new T.CylinderGeometry(.28,.24,.17,10),M.ironEdge,x,4.43+j*.08,0);
+ }
+ for(let i=0;i<6;i++)for(const side of [-1,1]){
+  const x=-.7-i*1.63;
+  rod(g,[x,3.63,side*.74],[x-.17,4.08+(i%3)*.11,side*.89],.055,M.ironEdge);
+ }
+ g.userData.tick=(t)=>{g.userData.smoke=t;};
+ return finish(g,1.5);
+}
+function crossingSign(seed=2){
+ const r=random(seed),g=new T.Group();g.name='Старинный переезд';
+ const post=new T.Group();post.rotation.z=.065+r()*.05;g.add(post);
+ rod(post,[0,0,0],[0,3.85,0],.115,M.wood);
+ rod(post,[0,.15,.03],[.25,.02,.13],.06,M.woodCut);
+ for(const angle of [-.78,.78]){
+  const plank=box(post,3.35,.27,.23,M.wood,0,3.16,.035);plank.rotation.z=angle;
+  const seam=box(post,3.02,.025,.018,M.woodCut,0,3.14,.16);seam.rotation.z=angle;
+  for(const side of [-1,1]){const x=side*1.36*Math.cos(angle),y=3.16+side*1.36*Math.sin(angle);add(post,new T.SphereGeometry(.045,6,5),M.silver,x,y,.18);}
+ }
+ for(let i=0;i<12;i++){const y=.4+r()*3.2;box(post,.025,.15+r()*.14,.025,M.woodCut,.11,y,.09);}
+ return finish(g,.28);
+}
+function redSignalLamp(seed=3){
+ const g=new T.Group();g.name='Красный сигнальный фонарь';
+ rod(g,[0,0,0],[0,2.75,0],.075,M.iron);
+ const housing=add(g,new T.CylinderGeometry(.39,.39,.19,20),M.ironEdge,0,2.61,.12);housing.rotation.x=Math.PI/2;
+ const lens=add(g,new T.CylinderGeometry(.295,.295,.06,24),M.red,0,2.61,.26);lens.rotation.x=Math.PI/2;
+ add(g,new T.TorusGeometry(.35,.06,7,24),M.iron,0,2.61,.30);
+ for(let k=0;k<4;k++){const a=k*Math.PI/2;rod(g,[Math.cos(a)*.26,2.61+Math.sin(a)*.26,.32],[Math.cos(a+.45)*.09,2.61+Math.sin(a+.45)*.09,.35],.01,M.silver);}
+ for(let k=0;k<6;k++)box(g,.018,.16+k*.055,.02,M.woodCut,-.16+k*.065,2.18-k*.04,.28);
+ const l=new T.PointLight(0xd82420,0,13,1.8);l.position.set(0,2.65,.3);g.add(l);
+ g.userData.interact={radius:8,effect:'warn_train',label_ru:'Сигнал приближения поезда'};
+ g.userData.setApproach=(a,t)=>{const f=.2+.8*Math.pow(Math.max(0,Math.sin(t*(2.3+a*8))),6);l.intensity=(.7+2.8*a)*f;lens.material=M.red;};
+ g.userData.tick=(t)=>g.userData.setApproach(.4,t);
+ return finish(g,.25);
+}
+function hangingChains(seed=4){
+ const r=random(seed),g=new T.Group(),strands=[];
+ for(let j=0;j<3;j++){
+  const chain=new T.Group();chain.position.set((j-1)*.65,2.5+(j===1?.4:0),0);g.add(chain);strands.push(chain);
+  const n=11+j*3;
+  for(let k=0;k<n;k++){
+   const link=add(chain,new T.TorusGeometry(.095,.022,5,9),k%3?M.silver:M.ironEdge,.08*Math.sin(k*.27),-k*.15,0);
+   link.rotation.x=k%2?Math.PI/2:0;link.rotation.z=k*.11;
+   if(k%4===0)add(chain,new T.SphereGeometry(.032,5,4),M.iron,k*.001,-k*.15,.03);
+  }
+ }
+ g.userData.tick=(t)=>strands.forEach((s,j)=>{s.rotation.z=.06*Math.sin(t*.56-j*.42);s.rotation.x=.045*Math.sin(t*.4-j*.7);});
+ return finish(g,0);
+}
+function gnarledTree(seed=5){
+ const r=random(seed),g=new T.Group(),tips=[];g.name='Старое корявое дерево';
+ const H=4.4+r()*2;
+ let prev=[0,0,0];
+ const path=[[.18,.7,.1],[-.26,1.5,.24],[-.5,2.6,.22],[-.28,3.65,.02],[-.4,H,-.18]];
+ for(let i=0;i<path.length;i++){rod(g,prev,path[i],.43-i*.068,M.wood,.34-i*.066);prev=path[i];}
+ for(let a=0;a<11;a++){
+  const j=1+Math.floor(r()*3),start=path[j],side=a%2?1:-1,angle=r()*6.28;
+  const mid=[start[0]+side*(.55+r()*.7),start[1]+.35+r()*.5,start[2]+Math.cos(angle)*.38];
+  const end=[mid[0]+side*(.4+r()*.75),mid[1]+.45+r()*.5,mid[2]+Math.sin(angle)*.7];
+  rod(g,start,mid,.16-r()*.045,M.wood,.1);
+  const twig=new T.Group();twig.position.set(...mid);g.add(twig);tips.push(twig);
+  rod(twig,[0,0,0],[end[0]-mid[0],end[1]-mid[1],end[2]-mid[2]],.085,M.wood,.015);
+  for(let k=0;k<4;k++){
+   const f=.35+k*.17,rel=[(end[0]-mid[0])*f,(end[1]-mid[1])*f,(end[2]-mid[2])*f];
+   rod(twig,rel,[rel[0]+side*(.15+r()*.35),rel[1]+.24+r()*.3,rel[2]+(r()-.5)*.35],.024,M.woodCut,.004);
+  }
+ }
+ for(let a=0;a<7;a++){const ang=a*6.283/7,dist=.5+r()*.4;rod(g,[0,.09,0],[Math.cos(ang)*dist,.015,Math.sin(ang)*dist],.12,M.wood,.02);}
+ g.userData.tick=t=>tips.forEach((tip,i)=>{tip.rotation.z=.014*Math.sin(t*.36-i*.22);tip.rotation.x=.017*Math.sin(t*.3-i*.38);});
+ return finish(g,1.2);
+}
+function groundMist(seed=6){
+ const r=random(seed),g=new T.Group(),sheets=[];
+ for(let i=0;i<12;i++){
+  const s=new T.Shape(),w=1.9+r()*2.6,h=.55+r()*.85;
+  s.moveTo(-w/2,0);
+  for(let k=0;k<=9;k++){const x=-w/2+w*k/9,y=h*(.23+.75*Math.pow(Math.sin(k/9*Math.PI),1.5))*(.75+r()*.5);s.lineTo(x,y);}
+  s.lineTo(w/2,-.09);s.closePath();
+  const m=add(g,new T.ShapeGeometry(s),M.mist,(r()-.5)*9,.11+r()*.29,(r()-.5)*4);
+  m.rotation.y=(r()-.5)*.95;sheets.push({m,x:m.position.x,i});
+ }
+ g.userData.tick=t=>sheets.forEach(({m,x,i})=>{m.position.x=x+.18*Math.sin(t*.21-i*.34);m.rotation.y=.08*Math.sin(t*.17-i*.18);});
+ return finish(g,0);
+}
+export const makers={blackLocomotive,crossingSign,redSignalLamp,hangingChains,gnarledTree,groundMist};

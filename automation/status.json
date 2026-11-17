@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-17T01:40:02.547Z",
+  "generated_at": "2026-11-17T01:41:02.027Z",
   "sha": {
-    "lab": "600201f92a5f9bed0336184110b81ccaf7f69da6",
+    "lab": "9a35d20c7818f7d5a5d08f37008d6a324e0c12f6",
     "mg": "55fa9b20d2c92b98a2dff542d2ba862e3a6e6501"
   },
   "checked": {
@@ -197,67 +197,75 @@
       {
         "number": 246,
         "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
       },
       {
         "number": 265,
         "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
       },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
-        "paths": "нет данных"
-      },
-      {
-        "number": 244,
-        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
       },
       {
         "number": 238,
         "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
-        "paths": "нет данных"
-      },
-      {
-        "number": 224,
-        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74",
-        "paths": "нет данных"
-      },
-      {
-        "number": 125,
-        "sha": "9f50910368238775bda40729722ec3512f14e623",
-        "paths": "нет данных"
-      },
-      {
-        "number": 232,
-        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": "нет данных"
-      },
-      {
-        "number": 126,
-        "sha": "7f5616591ca5baa37186d86621299d32c77230b1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
       },
       {
         "number": 236,
         "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": "нет данных"
-      },
-      {
-        "number": 229,
-        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
       },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 227,
@@ -922,67 +930,75 @@
       {
         "number": 246,
         "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
       },
       {
         "number": 265,
         "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
       },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
-        "paths": "нет данных"
-      },
-      {
-        "number": 244,
-        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
       },
       {
         "number": 238,
         "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
-        "paths": "нет данных"
-      },
-      {
-        "number": 224,
-        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74",
-        "paths": "нет данных"
-      },
-      {
-        "number": 125,
-        "sha": "9f50910368238775bda40729722ec3512f14e623",
-        "paths": "нет данных"
-      },
-      {
-        "number": 232,
-        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": "нет данных"
-      },
-      {
-        "number": 126,
-        "sha": "7f5616591ca5baa37186d86621299d32c77230b1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
       },
       {
         "number": 236,
         "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": "нет данных"
-      },
-      {
-        "number": 229,
-        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
       },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 227,
@@ -1018,7 +1034,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2507,
+      "count": 2509,
       "folders": "нет данных"
     },
     "mg": {

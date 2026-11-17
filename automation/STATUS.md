@@ -1,11 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T01:40:02.547Z | МГЛ: 600201f92a5f9bed0336184110b81ccaf7f69da6 | МГ: 55fa9b20d2c92b98a2dff542d2ba862e3a6e6501 | нет данных
+UTC: 2026-11-17T01:41:02.027Z | МГЛ: 9a35d20c7818f7d5a5d08f37008d6a324e0c12f6 | МГ: 55fa9b20d2c92b98a2dff542d2ba862e3a6e6501 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #342 e203ffbea5b8ef5d180fcc5661707e2a8d32f7d6: scripts/karta-sil/mutate-route-external-quota.mjs
 - PR #344 6655190cde1040b028ed57f2b4a1043d88e7344d: scripts/karta-sil/mutate-karta-sil.mjs
 - PR #339 86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34: automation/asset-check/test_kinds.py
 - PR #340 5b9fa6e24485c7d527598777761f43e1f39e1a4d: scripts/karta-sil/mutate-karta-sil.mjs
-- ещё 38: https://github.com/mpaykin1/meta6-lab/pulls
+- ещё 32: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/… (сокращено)
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
@@ -44,7 +44,7 @@ P1 — не подтверждено: GitHub недоступен: https://githu
 #341 Эталон «Небесный пилот» (спрайт-стакинг), только добавление | d8cf489ee7b9ca0a4cf136cd1ee4efc7ab702359
 ещё 58: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2507 коммитов | нет данных
+МГЛ: 2509 коммитов | нет данных
 МГ: 38 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — нет данных | витрина: да

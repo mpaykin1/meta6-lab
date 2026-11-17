@@ -17,7 +17,7 @@ button{font:inherit;cursor:pointer}#toggle{position:fixed;z-index:12;right:max(1
 #tiltBottom{bottom:0;mask-image:linear-gradient(transparent 0%,#000 70%);-webkit-mask-image:linear-gradient(transparent 0%,#000 70%)}
 @media (max-width:650px){.tilt-band{backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px)}}
 </style>
-<script type="importmap">{"imports":{"three":"../../../reference/ink-fallen-guardian/three.module.js"}}</script>
+<script type="importmap">{"imports":{"three":"/meta6-lab/reference/ink-fallen-guardian/three.module.js"}}</script>
 </head><body>
 <div id="vignette"></div><div id="tiltTop" class="tilt-band" aria-hidden="true"></div><div id="tiltBottom" class="tilt-band" aria-hidden="true"></div>
 <button id="toggle" aria-label="Меню сцен" aria-expanded="false">☰</button>
@@ -26,14 +26,14 @@ button{font:inherit;cursor:pointer}#toggle{position:fixed;z-index:12;right:max(1
 <div id="err" hidden></div>
 <script type="module">
 import * as T from 'three';
-import {createLivingWatercolor3D,createWatercolorStyle} from '../../../reference/ink-fallen-guardian/shared/living-watercolor-3d.js';
-import {createIllustrationCamera} from '../../../reference/ink-fallen-guardian/shared/living-watercolor-generators.js';
-import {objectMakers} from '../../../reference/ink-fallen-guardian/ink-objects.js';
-import {extraObjectMakers} from '../../../reference/ink-fallen-guardian/ink-extras.js';
-import {settlementMakers} from '../../../reference/ink-fallen-guardian/ink-settlement.js';
-import {buildWorld} from '../../../reference/ink-fallen-guardian/ink-world.js';
-import {createInkOptics} from '../../../reference/ink-fallen-guardian/ink-optics.js';
-import {createFallenRobot} from '../../../reference/ink-fallen-guardian/ink-fallen-robot.js';
+import {createLivingWatercolor3D,createWatercolorStyle} from '/meta6-lab/reference/ink-fallen-guardian/shared/living-watercolor-3d.js';
+import {createIllustrationCamera} from '/meta6-lab/reference/ink-fallen-guardian/shared/living-watercolor-generators.js';
+import {objectMakers} from '/meta6-lab/reference/ink-fallen-guardian/ink-objects.js';
+import {extraObjectMakers} from '/meta6-lab/reference/ink-fallen-guardian/ink-extras.js';
+import {settlementMakers} from '/meta6-lab/reference/ink-fallen-guardian/ink-settlement.js';
+import {buildWorld} from '/meta6-lab/reference/ink-fallen-guardian/ink-world.js';
+import {createInkOptics} from '/meta6-lab/reference/ink-fallen-guardian/ink-optics.js';
+import {createFallenRobot} from '/meta6-lab/reference/ink-fallen-guardian/ink-fallen-robot.js';
 import {makers} from './makers.js';
 import {createSoundscapes} from './sounds.js';
 const $=s=>document.querySelector(s);

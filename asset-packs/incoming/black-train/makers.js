@@ -35,13 +35,22 @@ function redSignalLamp(seed=3){
  const g=new T.Group();g.name='Красный сигнальный фонарь';
  rod(g,[0,0,0],[0,2.75,0],.075,M.iron);
  const housing=add(g,new T.CylinderGeometry(.39,.39,.19,20),M.ironEdge,0,2.61,.12);housing.rotation.x=Math.PI/2;
- const lens=add(g,new T.CylinderGeometry(.295,.295,.06,24),M.red,0,2.61,.26);lens.rotation.x=Math.PI/2;
+ const lensMaterial=new T.MeshBasicMaterial({color:0x40090d});
+ const lens=add(g,new T.CylinderGeometry(.295,.295,.06,24),lensMaterial,0,2.61,.26);lens.rotation.x=Math.PI/2;
  add(g,new T.TorusGeometry(.35,.06,7,24),M.iron,0,2.61,.30);
  for(let k=0;k<4;k++){const a=k*Math.PI/2;rod(g,[Math.cos(a)*.26,2.61+Math.sin(a)*.26,.32],[Math.cos(a+.45)*.09,2.61+Math.sin(a+.45)*.09,.35],.01,M.silver);}
  for(let k=0;k<6;k++)box(g,.018,.16+k*.055,.02,M.woodCut,-.16+k*.065,2.18-k*.04,.28);
  const l=new T.PointLight(0xd82420,0,13,1.8);l.position.set(0,2.65,.3);g.add(l);
  g.userData.interact={radius:8,effect:'warn_train',label_ru:'Сигнал приближения поезда'};
- g.userData.setApproach=(a,t)=>{const f=.2+.8*Math.pow(Math.max(0,Math.sin(t*(2.3+a*8))),6);l.intensity=(.7+2.8*a)*f;lens.material=M.red;};
+ g.userData.setApproach=(a,t)=>{
+  const near=T.MathUtils.smoothstep(a,.06,.88);
+  // An actual red warning flash in the LENS, not only an invisible point light.
+  // Its smooth pulse accelerates as the train approaches; the idle lamp stays dim.
+  const pulse=.5+.5*Math.sin(t*(2.4+8.1*near));
+  const light=.09+near*(.48+3.7*pulse*pulse);
+  l.intensity=light;
+  lensMaterial.color.setRGB(.18+near*.75*pulse,.012+near*.037*pulse,.017+near*.035*pulse);
+ };
  g.userData.tick=(t)=>{g.userData.setApproach(.4,t);housing.rotation.z=.02*Math.sin(t*.8);};
  return finish(g,.25);
 }

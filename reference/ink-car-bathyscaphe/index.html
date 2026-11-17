@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#e8e8e0">
+<title>INK · Машина → Батискаф · интерактивная 3D-модель</title>
+<link rel="icon" href="data:,">
+<style>
+:root {
+  color-scheme: light;
+  --ink:#354b4a; --muted:#6c7e76; --cream:#edece3;
+  --edge:rgba(82,105,100,.22); --glow:#b49867;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; width:100%; height:100%; overflow:hidden; }
+body {
+  background:radial-gradient(ellipse at 56% 45%,#eeeee4 0%,#dce2d8 67%,#cbd7cc 100%);
+  font-family:Georgia,"Times New Roman",serif; color:var(--ink);
+  -webkit-tap-highlight-color:transparent;
+}
+#stage { position:fixed; inset:0; touch-action:none; cursor:grab; }
+#stage:active { cursor:grabbing; }
+#stage canvas { display:block; width:100%; height:100%; pointer-events:none; }
+#topbar {
+  position:fixed; top:max(22px,env(safe-area-inset-top)); left:clamp(18px,4vw,68px);
+  right:clamp(18px,4vw,68px); display:flex; justify-content:space-between;
+  align-items:flex-start; gap:20px; pointer-events:none; z-index:5;
+}
+.kicker {
+  font:700 10px system-ui,sans-serif; letter-spacing:.31em; color:var(--glow);
+  text-transform:uppercase;
+}
+h1 {
+  margin:12px 0 7px; font-size:clamp(26px,4.2vw,59px);
+  font-weight:400; letter-spacing:-.047em; line-height:1.02;
+}
+.subheading { margin:0; max-width:400px; font:12px/1.55 system-ui,sans-serif; color:var(--muted); }
+.seal {
+  flex:none; text-align:right; font:700 10px/1.8 system-ui,sans-serif;
+  letter-spacing:.21em; color:#657e75;
+}
+.seal strong { display:block; color:var(--ink); font-size:12px; letter-spacing:.14em; }
+#lower {
+  position:fixed; z-index:6; left:50%; bottom:max(18px,env(safe-area-inset-bottom));
+  transform:translateX(-50%); width:min(690px,calc(100% - 30px));
+  padding:17px 18px 15px; border:1px solid var(--edge); border-radius:18px;
+  background:rgba(249,248,239,.78); backdrop-filter:blur(18px);
+  box-shadow:0 12px 60px rgba(49,68,65,.10);
+}
+#readout { display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:12px; }
+#mode { font:700 11px system-ui,sans-serif; letter-spacing:.15em; color:#465f57; }
+#percent { font:600 12px system-ui,sans-serif; color:#768c81; font-variant-numeric:tabular-nums; }
+#progress {
+  appearance:none; -webkit-appearance:none; width:100%; height:5px;
+  display:block; margin:0 0 17px; border-radius:10px;
+  background:linear-gradient(90deg,#738f80 var(--fill,0%),#d4ded4 var(--fill,0%));
+  outline:none; cursor:pointer; touch-action:pan-x;
+}
+#progress::-webkit-slider-thumb {
+  -webkit-appearance:none; width:17px; height:17px; background:#6b887c;
+  border:3px solid #f8f6ef; border-radius:50%; box-shadow:0 1px 4px #74817766;
+}
+#progress::-moz-range-thumb {
+  width:13px; height:13px; background:#6b887c; border:3px solid #f8f6ef; border-radius:50%;
+}
+.controls { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+button {
+  border:1px solid #b8c4b9; background:#f9faf4; color:#50675d;
+  padding:10px 15px; border-radius:11px; cursor:pointer;
+  font:600 11px system-ui,sans-serif; letter-spacing:.025em;
+}
+button:active { transform:translateY(1px); }
+button.primary { background:#506d64; color:#f6f6ee; border-color:#506d64; }
+button[aria-pressed="true"] { border-color:#728f80; background:#dce8dd; }
+.hint { margin-left:auto; color:#809289; font:10px system-ui,sans-serif; white-space:nowrap; }
+#status {
+  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  font:13px system-ui,sans-serif; text-align:center; color:#5c7269;
+  z-index:10; display:none; background:#f5f5ec; padding:18px 24px; border-radius:13px;
+}
+@media (max-width:640px) {
+  #topbar { top:max(16px,env(safe-area-inset-top)); }
+  h1 { font-size:clamp(25px,7vw,38px); margin-top:8px; }
+  .subheading { font-size:10px; }
+  .seal { font-size:8px; }
+  #lower { padding:13px 13px 12px; bottom:max(11px,env(safe-area-inset-bottom)); }
+  button { padding:10px 11px; font-size:10px; }
+  .hint { display:none; }
+}
+</style>
+<script type="importmap">
+{"imports":{"three":"../ink-fallen-guardian/three.module.js"}}
+</script>
+</head>
+<body>
+<div id="stage" aria-label="3D-модель: перетаскивайте для вращения камеры"></div>
+<header id="topbar">
+  <div>
+    <div class="kicker">META GAMES · INK OBJECT / 01</div>
+    <h1>Машина <span style="color:#a8b9a7">→</span> Батискаф</h1>
+    <p class="subheading">Живая акварель · настоящая объёмная геометрия · трансформация</p>
+  </div>
+  <div class="seal">LIVING<br>WATERCOLOR<strong>3D · 360°</strong></div>
+</header>
+<div id="lower">
+  <div id="readout"><span id="mode">МАШИНА</span><span id="percent">00%</span></div>
+  <input type="range" id="progress" min="0" max="100" step="1" value="0"
+    aria-label="Степень превращения машины в батискаф">
+  <div class="controls">
+    <button class="primary" id="transform">Превратить</button>
+    <button id="autoplay" aria-pressed="true">Ⅱ Автоцикл</button>
+    <button id="orbit" aria-pressed="true">↻ Камера 360°</button>
+    <button id="reset">Сброс вида</button>
+    <span class="hint">Мышь / палец — вращение · колесо — масштаб</span>
+  </div>
+</div>
+<div id="status" role="alert"></div>
+<script type="module">
+import * as THREE from 'three';
+import {createInkCarBathyscaphe} from './ink-car-bathyscaphe.js';
+import {createLivingWatercolor3D,createWatercolorStyle}
+  from '../ink-fallen-guardian/shared/living-watercolor-3d.js';
+const stage = document.querySelector('#stage');
+const progress = document.querySelector('#progress');
+const mode = document.querySelector('#mode');
+const percent = document.querySelector('#percent');
+const transformButton = document.querySelector('#transform');
+const autoplayButton = document.querySelector('#autoplay');
+const orbitButton = document.querySelector('#orbit');
+const status = document.querySelector('#status');
+function showError(error) {
+  status.style.display = 'block';
+  status.textContent = 'Не удалось открыть 3D-модель: ' + String(error?.message || error);
+}
+try {
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#e8e8e0');
+  const camera = new THREE.PerspectiveCamera(33, innerWidth / innerHeight, .1, 130);
+  const renderer = new THREE.WebGLRenderer({
+    antialias:true, alpha:false, powerPreference:'high-performance'
+  });
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.27;
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.65));
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.domElement.style.pointerEvents = 'none';
+  stage.appendChild(renderer.domElement);
+  scene.add(new THREE.HemisphereLight('#fff8ed', '#849b98', 3.0));
+  const key = new THREE.DirectionalLight('#fff7df', 2.65);
+  key.position.set(-3.5, 8, 6.5);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight('#c4deda', 1.5);
+  rim.position.set(5, 3, -5);
+  scene.add(rim);
+  const ground = new THREE.Mesh(
+    new THREE.CircleGeometry(1, 56),
+    new THREE.MeshBasicMaterial({color:'#718e83',transparent:true,opacity:.085,depthWrite:false})
+  );
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.set(0, -.31, 0);
+  ground.scale.set(3.15, 2.30, 1);
+  scene.add(ground);
+  const model = createInkCarBathyscaphe(20261117);
+  scene.add(model);
+  const style = createWatercolorStyle({
+    seed:'ink-car-bathyscaphe-v1', paperColor:'#e8e8e0',
+    inkColor:'#354e4b', washColor:'#78978c', washOpacity:.59,
+    washLayers:7, edgeWidth:.022, edgeJitter:.20,
+    granulation:.30, bleed:.20, shadowWash:.08, motion:.10,
+    pigmentPooling:.26, paperGap:.14, paintedLight:.74
+  });
+  const ink = createLivingWatercolor3D({THREE, renderer, scene, camera, style});
+  ink.apply(model, {seed:'bathyscaphe:20117'});
+  const composite = ink.attachCompositor({replaceSource:true});
+  composite.canvas.style.pointerEvents = 'none';
+  composite.canvas.style.zIndex = '1';
+  let cameraAngle = .62, cameraPolar = 1.09, distance = 9.1;
+  let dragging = false, lastX = 0, lastY = 0;
+  let autoCycle = true, autoOrbit = true, morph = 0, targetMorph = 0;
+  let cycleStart = performance.now(), lastFrame = cycleStart, elapsed = 0;
+  let touchLastPinch = null;
+  function smooth(x) {
+    x = Math.max(0, Math.min(1, x));
+    return x * x * (3 - 2 * x);
+  }
+  function autoTarget(t) {
+    const phase = t % 28;
+    if (phase < 2.8) return 0;
+    if (phase < 15.5) return smooth((phase - 2.8) / 12.7);
+    if (phase < 20) return 1;
+    return 1 - smooth((phase - 20) / 8);
+  }
+  function redrawUI() {
+    const value = Math.round(morph * 100);
+    progress.value = value;
+    progress.style.setProperty('--fill', value + '%');
+    percent.textContent = String(value).padStart(2, '0') + '%';
+    mode.textContent = value < 3 ? 'МАШИНА' : value > 97 ? 'БАТИСКАФ' : 'ТРАНСФОРМАЦИЯ';
+    transformButton.textContent = morph > .5 ? 'Вернуть машину' : 'Превратить';
+    autoplayButton.setAttribute('aria-pressed', String(autoCycle));
+    autoplayButton.textContent = autoCycle ? 'Ⅱ Автоцикл' : '▶ Автоцикл';
+    orbitButton.setAttribute('aria-pressed', String(autoOrbit));
+  }
+  function placeCamera() {
+    const s = Math.sin(cameraPolar), cx = 0, cy = 1.18, cz = 0;
+    camera.position.set(cx + distance * s * Math.sin(cameraAngle),
+      cy + distance * Math.cos(cameraPolar),
+      cz + distance * s * Math.cos(cameraAngle));
+    camera.lookAt(cx, cy, cz);
+  }
+  function resize() {
+    camera.aspect = innerWidth / Math.max(innerHeight, 1);
+    camera.fov = camera.aspect < .7 ? 47 : 33;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+    composite.resize();
+  }
+  stage.addEventListener('pointerdown', event => {
+    dragging = true;
+    lastX = event.clientX;
+    lastY = event.clientY;
+    stage.setPointerCapture(event.pointerId);
+  });
+  stage.addEventListener('pointermove', event => {
+    if (!dragging) return;
+    cameraAngle += (lastX - event.clientX) * .007;
+    cameraPolar += (lastY - event.clientY) * .0055;
+    cameraPolar = Math.max(.35, Math.min(2.45, cameraPolar));
+    lastX = event.clientX;
+    lastY = event.clientY;
+  });
+  stage.addEventListener('pointerup', () => { dragging = false; });
+  stage.addEventListener('pointercancel', () => { dragging = false; });
+  stage.addEventListener('wheel', event => {
+    event.preventDefault();
+    distance = Math.max(5.7, Math.min(17, distance + Math.sign(event.deltaY) * .49));
+  }, {passive:false});
+  stage.addEventListener('touchmove', event => {
+    if (event.touches.length === 2) {
+      const [a,b] = event.touches;
+      const size = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+      if (touchLastPinch !== null) {
+        distance = Math.max(5.7, Math.min(17, distance - (size - touchLastPinch) * .026));
+      }
+      touchLastPinch = size;
+    } else {
+      touchLastPinch = null;
+    }
+  }, {passive:true});
+  stage.addEventListener('touchend', () => { touchLastPinch = null; }, {passive:true});
+  progress.addEventListener('input', event => {
+    autoCycle = false;
+    morph = targetMorph = Number(event.target.value) / 100;
+    model.userData.setMorph(morph, elapsed);
+    redrawUI();
+  });
+  transformButton.addEventListener('click', () => {
+    autoCycle = false;
+    targetMorph = morph > .5 ? 0 : 1;
+    redrawUI();
+  });
+  autoplayButton.addEventListener('click', () => {
+    autoCycle = !autoCycle;
+    if (autoCycle) cycleStart = performance.now();
+    redrawUI();
+  });
+  orbitButton.addEventListener('click', () => {
+    autoOrbit = !autoOrbit;
+    redrawUI();
+  });
+  document.querySelector('#reset').addEventListener('click', () => {
+    cameraAngle = .62;
+    cameraPolar = 1.09;
+    distance = 9.1;
+  });
+  window.addEventListener('resize', resize);
+  function frame(now) {
+    const dt = Math.min(.05, Math.max(0, (now - lastFrame) / 1000));
+    lastFrame = now;
+    elapsed += dt;
+    if (autoCycle) targetMorph = autoTarget((now - cycleStart) / 1000);
+    morph += (targetMorph - morph) * Math.min(1, dt * 3.1);
+    if (autoOrbit && !dragging) cameraAngle += dt * Math.PI * 2 / 28;
+    model.userData.setMorph(morph, elapsed);
+    placeCamera();
+    ink.tick(now);
+    renderer.render(scene, camera);
+    ink.present(now);
+    redrawUI();
+    requestAnimationFrame(frame);
+  }
+  placeCamera();
+  resize();
+  requestAnimationFrame(frame);
+} catch (error) {
+  showError(error);
+  console.error('INK Car/Bathyscaphe', error);
+}
+</script>
+</body>
+</html>

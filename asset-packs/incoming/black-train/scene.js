@@ -111,10 +111,6 @@ const train=createInkNightTrain({cars:7,seed:11,look:{
 train.position.z=TRACK_Z;scene.add(train);
 const LEN=train.userData.length;
 // Extra BLACK TRAIN assets: independent of the protected original scene.
-const blackEngine=makers.blackLocomotive(13);
-blackEngine.position.set(-424.4,0,TRACK_Z);scene.add(blackEngine);
-let useBlackTrain=true;
-train.visible=true;train.userData.rig.loco.visible=false;train.userData.rig.lamp.visible=false;
 const crossing=makers.crossingSign(7);crossing.position.set(6.9,0,-11.4);scene.add(crossing);
 const signal=makers.redSignalLamp(11);signal.position.set(8.3,0,-11.35);scene.add(signal);
 const chains=[makers.hangingChains(3),makers.hangingChains(17)];
@@ -143,7 +139,7 @@ const puddles=[[-4,-3.6,3],[8,-3.9,33]].map(([x,z,seed])=>{
 });
 const bell=makers.crossingBell(15);bell.position.set(7.0,2.7,-11.2);scene.add(bell);
 const noiseChains=makers.chainsClank(9);noiseChains.position.set(-10.2,3.4,-15);scene.add(noiseChains);
-const packObjects={blackLocomotive:blackEngine,crossingSign:crossing,redSignalLamp:signal,
+const packObjects={crossingSign:crossing,redSignalLamp:signal,
  hangingChains:chains,gnarledTree:crookedTrees,groundMist:fogBanks,
  stormClouds:skies,brokenFence:fences,tallGrass:grasses,wetRailGlow:railGlow,
  barbedWire:wire,swampPuddles:puddles,
@@ -228,7 +224,7 @@ function startNight(n){
   // it comes from behind your shoulder the first time
   M.dist=26;M.ang=yaw+Math.PI*(.75+.5*Math.random());M.mode='wait';M.timer=4.5;M.lit=0;M.repels=0;M.seen=0;
   placeMonster();
-  TR.active=false;TR.timer=7+Math.random()*4;TR.x=-2000;train.position.x=TR.x;blackEngine.position.x=TR.x-4.4;
+  TR.active=false;TR.timer=7+Math.random()*4;TR.x=-2000;train.position.x=TR.x;
   state='play';fade=0;caughtT=0;dawn=0;resize();
   startBtn.hidden=true;againBtn.hidden=true;torchBtn.hidden=false;pips.hidden=false;
   drawPips();audio.sting();
@@ -339,16 +335,16 @@ let trainLoud=0,trainDist=9999;
 function updateTrain(dt){
   if(!TR.active){
     TR.timer-=dt;
-    if(TR.timer<=0){TR.active=true;TR.x=-760;TR.horn=false;useBlackTrain=passed%2===0;train.userData.rig.loco.visible=!useBlackTrain;train.userData.rig.lamp.visible=!useBlackTrain;blackEngine.visible=useBlackTrain;}
+    if(TR.timer<=0){TR.active=true;TR.x=-760;TR.horn=false;}
     trainLoud=0;trainDist=9999;return;
   }
-  TR.x+=TRAIN_SPEED*dt;train.position.x=TR.x;blackEngine.position.x=TR.x-4.4;
+  TR.x+=TRAIN_SPEED*dt;train.position.x=TR.x;
   if(!TR.horn&&TR.x>-190){TR.horn=true;audio.horn(-.85);}
   const nearX=T.MathUtils.clamp(0,TR.x-LEN,TR.x),dd=Math.hypot(nearX,TRACK_Z);
   trainLoud=T.MathUtils.clamp(1-(dd-7.5)/150,0,1);
   trainDist=dd;
   if(TR.x-LEN>260){
-    TR.active=false;TR.x=-2000;train.position.x=TR.x;blackEngine.position.x=TR.x-4.4;TR.timer=8+Math.random()*8-night;trainLoud=0;
+    TR.active=false;TR.x=-2000;train.position.x=TR.x;TR.timer=8+Math.random()*8-night;trainLoud=0;
     if(state==='play'){passed++;drawPips();audio.click();if(passed>=need)dawnBreak();}
   }
 }
@@ -457,7 +453,6 @@ function step(dt){
   monster.userData.lookTarget=camera.position;
   monster.userData.tick(elapsed,dt);
   train.userData.tick(elapsed,dt,0,camera);
-  blackEngine.userData.tick(elapsed,dt);
   // Do not animate offscreen branches, mist or chains.
   camera.updateMatrixWorld();
   const forward=new T.Vector3();camera.getWorldDirection(forward);
@@ -488,7 +483,7 @@ requestAnimationFrame(animate);
 document.addEventListener('visibilitychange',()=>audio.suspend(document.hidden||menuOpen));
 // hooks for automatic checks (bot-tester)
 window.__INK_NIGHT_SCREAM__={
-  ready:true,scene,camera,monster,train,blackEngine,assets:packObjects,
+  ready:true,scene,camera,monster,train,assets:packObjects,
   start:()=>startNight(1),
   advance:(sec)=>{manual=true;for(let i=0;i<Math.round(sec/.016);i++)step(.016);draw();},
   look:(a)=>{yaw=yawS=a;},

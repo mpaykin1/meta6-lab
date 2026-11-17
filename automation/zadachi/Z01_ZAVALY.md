@@ -31,4 +31,4 @@ PR [#331 «БЕЗ ТОРМОЗОВ / РАЗБОР ЗАВАЛОВ»](https://gith
 Найди причину, по которой завал вырос (какой тип PR чаще всего бросают), и запиши одно правило-ловушку в OSHIBKI.md, чтобы такие PR больше не копились.
 
 ## Опыт (дописывает исполнитель: одна строка «что случилось → как обойти», со ссылкой)
-- —
+- 17.11 Claude: [#331](https://github.com/mpaykin1/meta6-lab/pull/331) — 15 файлов и конфликт: разбить (п.5) на PR без workflow (dispetcher build.mjs + его тесты; TOLKACH/SLIYANIE доки; karta-sil) — их сливать самому; отдельный PR только с `.github/workflows/additive-merge-preflight.yml` + его verify/mutate — `НУЖЕН CLAUDE`.

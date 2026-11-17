@@ -1144,6 +1144,7 @@ const SHPILI_PLUS=(()=>{
      if(t>=next){
        started=t;span=.11+R()*.18;which=Math.floor(R()*4);
        next=t+5.8+R()*12.8;
+       if(window.__STORM_AUDIO__)window.__STORM_AUDIO__.thunder(.6+R()*.4);
      }
      const elapsed=t-started;
      const strength=elapsed>=0&&elapsed<span?
@@ -1332,6 +1333,63 @@ const SHPILI_PLUS=(()=>{
    };
  }
 
+
+ /* STORM SOUND: soft layered rain, delayed low thunder, first-gesture iPhone unlock. */
+ {
+   const id='stormSound',g=newGroup(id,0,1,-40);
+   g.userData.noCull=true;
+   let ctx=null,master=null,noiseBuffer=null,active=false,unlocked=false;
+   const api={
+     start(){
+       try{
+         if(ctx){ctx.resume().catch(()=>{});return;}
+         const AC=window.AudioContext||window.webkitAudioContext;
+         if(!AC)return;
+         ctx=new AC();master=ctx.createGain();master.gain.value=0;
+         master.connect(ctx.destination);
+         noiseBuffer=ctx.createBuffer(1,Math.round(ctx.sampleRate*2),ctx.sampleRate);
+         const data=noiseBuffer.getChannelData(0);let low=0;
+         for(let i=0;i<data.length;i++){
+           low+=(Math.random()*2-1-low)*.19;
+           data[i]=low*.6+(Math.random()*2-1)*.14;
+         }
+         const rainMix=(freq,gain,rate)=>{
+           const src=ctx.createBufferSource();src.buffer=noiseBuffer;src.loop=true;
+           src.playbackRate.value=rate;
+           const filter=ctx.createBiquadFilter();filter.type='lowpass';filter.frequency.value=freq;
+           const amp=ctx.createGain();amp.gain.value=gain;
+           src.connect(filter);filter.connect(amp);amp.connect(master);src.start(0);
+         };
+         rainMix(980,.045,1.03);rainMix(380,.064,.79);
+         ctx.resume().catch(()=>{});unlocked=true;
+         master.gain.setTargetAtTime(active?.32:0,ctx.currentTime,.3);
+       }catch(_){}
+     },
+     setActive(on){
+       if(active===on)return;active=on;
+       if(ctx&&master)master.gain.setTargetAtTime(active?.32:0,ctx.currentTime,.4);
+     },
+     thunder(force){
+       if(!ctx||!unlocked||!active)return;
+       const at=ctx.currentTime+.32+Math.random()*.65;
+       const n=ctx.createBufferSource();n.buffer=noiseBuffer;n.loop=true;
+       n.playbackRate.value=.51+Math.random()*.23;
+       const filter=ctx.createBiquadFilter();filter.type='lowpass';
+       filter.frequency.setValueAtTime(190,at);
+       filter.frequency.exponentialRampToValueAtTime(78,at+2.6);
+       const gain=ctx.createGain();gain.gain.setValueAtTime(.0001,at);
+       gain.gain.linearRampToValueAtTime(.30*force,at+.26);
+       gain.gain.exponentialRampToValueAtTime(.0001,at+2.7);
+       n.connect(filter);filter.connect(gain);gain.connect(master);
+       n.start(at);n.stop(at+2.8);
+     }
+   };
+   window.__STORM_AUDIO__=api;
+   window.addEventListener('pointerdown',()=>api.start(),{once:true,passive:true});
+   window.addEventListener('keydown',()=>api.start(),{once:true});
+   own[id].tick=()=>{};
+ }
+
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;
@@ -1349,6 +1407,7 @@ const SHPILI_PLUS=(()=>{
      a.tick(t,dt);
    }
    if(!own.stormLightning.group.visible){for(const m of coverStormMats)m.uniforms.uLightning.value=0;}
+   if(window.__STORM_AUDIO__)window.__STORM_AUDIO__.setActive(own.stormSound.group.visible);
  }
  return {tick,ids};
 })();

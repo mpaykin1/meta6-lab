@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T06:23:54.560Z | МГЛ: 21ae4e2e5fe0201371b8b38e681dc5f807f73b08 | МГ: 0a58a2d0956a16d61cc86241e1a7e5dc680194d2 | https://github.com/mpaykin1/meta6-lab/actions/runs/44030817738
+UTC: 2026-11-17T06:25:08.504Z | МГЛ: c8aaf7679a39d99f0d0506abfc5ebfd3d0bab8cf | МГ: 0a58a2d0956a16d61cc86241e1a7e5dc680194d2 | https://github.com/mpaykin1/meta6-lab/actions/runs/44030952951
 ## ПРОВЕРИТЬ CLAUDE
 - PR #372 0e5d7893812d336299d041199deda50557a07395: scripts/karta-sil/mutate-current-claude-marker.mjs, scripts/karta-sil/mutate-karta-sil.mjs
 - PR #352 99a64541e458eb39f499c55655649abb87bf5bc8: scripts/meta-bot/core.mjs, scripts/meta-bot/mutate-viewports.mjs, scripts/platform/verify-meta-bot-config-candidate.mjs
@@ -37,7 +37,7 @@ L4 — не готов: НЕТ в таблице FINISH
 #359 docs: единый свод правил и идей для «Лучника в тумане» | 0a37a80d264aaac71832ab16d9ca82b306b7cec6
 ещё 68: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2686 коммитов | нет данных
+МГЛ: 2688 коммитов | нет данных
 МГ: 41 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

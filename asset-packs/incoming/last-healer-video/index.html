@@ -154,6 +154,46 @@ const assets={carHeadlights:root,handFlashlight:beam,rowingHealer:stroke,rainSpl
  boatShed:shed,driftingLeaves:leaves,sandBeachTiles:sandy,tiltShiftPost:lens,
  dayCoastGrade:sunny,sndCarEngine:motor,sndRainNight:rainSound,sndRowingShore:shoreSound};
 const audio=makeSoundscape();
+// Fullscreen GPU tilt-shift: focus strip with nine-tap spatially variable blur.
+// Fixed-resolution WebGL render target, no per-pixel CPU loops.
+const colorTarget=new T.WebGLRenderTarget(2,2,{depthBuffer:true,
+  minFilter:T.LinearFilter,magFilter:T.LinearFilter,stencilBuffer:false});
+const fxUniforms={
+  uScene:{value:colorTarget.texture},
+  uPixel:{value:new T.Vector2(1/2,1/2)},
+  uStrength:{value:.53},uCool:{value:0},uWarm:{value:.13}
+};
+const fxMat=new T.ShaderMaterial({depthTest:false,depthWrite:false,uniforms:fxUniforms,
+  vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}`,
+  fragmentShader:`precision highp float;
+    varying vec2 vUv;
+    uniform sampler2D uScene;
+    uniform vec2 uPixel;
+    uniform float uStrength,uCool,uWarm;
+    void main(){
+      vec3 origin=texture2D(uScene,vUv).rgb;
+      float separation=abs(vUv.y-.50);
+      float edge=smoothstep(.16,.47,separation);
+      float radius=(1.+4.*edge)*uStrength;
+      vec2 stepSize=uPixel*radius;
+      vec3 glow=origin*.24;
+      glow+=texture2D(uScene,vUv+vec2(stepSize.x,0.)).rgb*.16;
+      glow+=texture2D(uScene,vUv-vec2(stepSize.x,0.)).rgb*.16;
+      glow+=texture2D(uScene,vUv+vec2(0.,stepSize.y)).rgb*.16;
+      glow+=texture2D(uScene,vUv-vec2(0.,stepSize.y)).rgb*.16;
+      glow+=texture2D(uScene,vUv+stepSize).rgb*.03;
+      glow+=texture2D(uScene,vUv-stepSize).rgb*.03;
+      glow+=texture2D(uScene,vUv+vec2(stepSize.x,-stepSize.y)).rgb*.03;
+      glow+=texture2D(uScene,vUv+vec2(-stepSize.x,stepSize.y)).rgb*.03;
+      vec3 color=mix(origin,glow,clamp(edge*uStrength,0.,1.));
+      color=mix(color,color*vec3(.81,.88,1.04),uCool*.47);
+      color=mix(color,color*vec3(1.07,1.01,.93),uWarm*.42);
+      gl_FragColor=vec4(color,1.);
+    }`
+});
+const fxScene=new T.Scene(),fxCamera=new T.Camera();
+fxScene.add(new T.Mesh(new T.PlaneGeometry(2,2),fxMat));
+
 
 const places={
  all:[0,0,0,20],carHeadlights:[-5.2,.1,.35,9],handFlashlight:[-.8,.4,1.2,8],
@@ -211,9 +251,16 @@ renderer.domElement.addEventListener('pointermove',e=>{
 });
 renderer.domElement.addEventListener('pointerup',()=>{dragging=false;});
 renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();zoom=T.MathUtils.clamp(zoom+e.deltaY*.0015,.55,2.1);if(manual)draw();},{passive:false});
+let viewportWidth=0,viewportHeight=0;
 function resize(){
- const w=window.innerWidth,h=window.innerHeight,asp=w/h;
- renderer.setSize(w,h,false);
+ const w=Math.max(1,window.innerWidth),h=Math.max(1,window.innerHeight),asp=w/h;
+ if(w!==viewportWidth||h!==viewportHeight){
+   viewportWidth=w;viewportHeight=h;renderer.setSize(w,h,false);
+   const dpr=renderer.getPixelRatio();
+   const pxW=Math.max(1,Math.ceil(w*dpr)),pxH=Math.max(1,Math.ceil(h*dpr));
+   colorTarget.setSize(pxW,pxH);
+   fxUniforms.uPixel.value.set(1/pxW,1/pxH);
+ }
  const y=camDistance*.58*zoom,x=y*asp;
  camera.left=-x;camera.right=x;camera.top=y;camera.bottom=-y;
  camera.updateProjectionMatrix();
@@ -223,7 +270,11 @@ function draw(){
  const r=camDistance*.92*zoom;
  camera.position.set(camTarget.x+r*Math.sin(camAz)*Math.cos(camAlt),
  camTarget.y+r*Math.sin(camAlt),camTarget.z+r*Math.cos(camAz)*Math.cos(camAlt));
- camera.lookAt(camTarget);renderer.render(scene,camera);
+ camera.lookAt(camTarget);
+ renderer.setRenderTarget(colorTarget);
+ renderer.render(scene,camera);
+ renderer.setRenderTarget(null);
+ renderer.render(fxScene,fxCamera);
 }
 function animate(ts){
  if(manual)return;
@@ -234,7 +285,8 @@ function animate(ts){
  boat.position.y=.035*Math.sin(t*1.26);
  boat.rotation.z=.021*Math.sin(t*.97);
  npc.rotation.y=-.03+.035*Math.sin(t*.6);
- const a=t*.26;sun.intensity=1.8+.26*Math.sin(a);
+ const a=t*.26;sun.intensity=chosen==='nightRainGrade'||chosen==='sndRainNight'?
+    .65+.08*Math.sin(a):1.8+.26*Math.sin(a);
  draw();frame=requestAnimationFrame(animate);
 }
 // A frozen frame can be rendered with one asset hidden, then shown, at the same

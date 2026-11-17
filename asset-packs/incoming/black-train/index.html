@@ -90,8 +90,22 @@ el.textContent='Не удалось запустить игру: '+String(e||'н
 window.addEventListener('error',e=>showFailure(e.message));
 window.addEventListener('unhandledrejection',e=>showFailure(e.reason?.message||e.reason));
 </script>
-<script type="importmap">
-{"imports":{"three":"../../../reference/ink-fallen-guardian/three.module.js"}}
+<script>
+// The game uses root reference modules both on main Pages and in isolated lab previews.
+// Local CI routes retain their original relative paths.
+const inPreview = /^\\/meta6-lab\\/preview\\/[^/]+\\//.test(location.pathname);
+const referenceRoot = inPreview ? '/meta6-lab/reference/' : '../../../reference/';
+const mapping = {
+  three: referenceRoot + 'ink-fallen-guardian/three.module.js',
+  'blacktrain/watercolor': referenceRoot + 'ink-fallen-guardian/shared/living-watercolor-3d.js',
+  'blacktrain/monster': referenceRoot + 'ink-grin-monster/ink-grin-monster.js',
+  'blacktrain/train': referenceRoot + 'ink-night-scream/src/ink-night-train.js',
+  'blacktrain/audio': referenceRoot + 'ink-night-scream/src/audio.js'
+};
+const importMap = document.createElement('script');
+importMap.type = 'importmap';
+importMap.textContent = JSON.stringify({imports:mapping});
+document.currentScript.after(importMap);
 </script>
 <script type="module" src="./src/scene.js"></script>
 </body>

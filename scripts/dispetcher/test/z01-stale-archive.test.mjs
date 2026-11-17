@@ -21,4 +21,7 @@ test('only stale red drafts without owner acceptance are archive candidates',()=
  assert.equal(archiveCandidate({...base,failed:[{name:'Vercel',url:'https://vercel.com/improve-world?upgradeToPro=build-rate-limit'}]}),false);
  assert.throws(()=>archiveCandidate({...base,lastCommit:'unknown'}),/нет данных/);
  assert.throws(()=>archiveCandidate({...base,failed:null}),/нет данных/);
+ assert.throws(()=>archiveCandidate({...base,failed:[{name:'unknown'}]}),/URL красной проверки/);
+ assert.throws(()=>archiveCandidate({...base,failed:[{name:'unknown',url:''}]}),/URL красной проверки/);
+ assert.throws(()=>archiveCandidate({...base,failed:[{name:'unknown',url:'not-a-url'}]}),/URL красной проверки/);
 });

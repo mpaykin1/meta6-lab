@@ -37,6 +37,7 @@ import {car,pier,streetlamp,bush} from '../../../reference/ink-fallen-guardian/i
 import {traveller,fir,rock} from '../../../reference/ink-fallen-guardian/ink-objects.js';
 import {rowboat} from '../../../reference/ink-fallen-guardian/ink-extras.js';
 import {createLivingWatercolor3D,createWatercolorStyle} from '../../../reference/ink-fallen-guardian/shared/living-watercolor-3d.js';
+import {createInkOptics} from '../../../reference/ink-fallen-guardian/ink-optics.js';
 const stage=document.querySelector('#stage'),panel=document.querySelector('#panel'),menu=document.querySelector('#menu');
 try{
 const scene=new T.Scene();scene.background=new T.Color('#9aaeb0');scene.fog=new T.FogExp2('#9caeb0',.019);
@@ -50,7 +51,7 @@ const sun=new T.DirectionalLight('#f3d9be',2.85);sun.position.set(-8,14,8);sun.c
 const night=new T.PointLight('#e7d19c',1.9,7);night.position.set(-.9,3,-.3);scene.add(night);
 const seaLight=new T.DirectionalLight('#c1e0d9',1.0);seaLight.position.set(8,5,-8);scene.add(seaLight);
 const ink=createLivingWatercolor3D({THREE:T,renderer,scene,camera,style:createWatercolorStyle({seed:'last-healer-video-first-batch',paperColor:'#e8e6dc',inkColor:'#324a44',washColor:'#829e96',washOpacity:.60,washLayers:6,edgeWidth:.022,edgeJitter:.18,granulation:.26,bleed:.18,shadowWash:.12,motion:.09,pigmentPooling:.23,paperGap:.10,paintedLight:.66})});
-const compositor=ink.attachCompositor({replaceSource:true});compositor.canvas.style.pointerEvents='none';
+const optics=createInkOptics(renderer);
 const entries={},focusPoints={all:[0,0,0],carHeadlights:[-6,0,0],handFlashlight:[0,0,0],rainSplashRings:[0,0,0],rowingHealer:[6,0,0],townRoad:[-6,0,0],wetGrassClumps:[0,0,0]};
 function add(o,x,y,z,name){o.position.set(x,y,z);scene.add(o);if(name)entries[name]=o;ink.apply(o,{seed:name||String(x)+':'+String(z)});return o;}
 function plane(w,d,color,x,z,y=0){const o=new T.Mesh(new T.PlaneGeometry(w,d),new T.MeshStandardMaterial({color,roughness:1,side:T.DoubleSide}));o.rotation.x=-Math.PI/2;o.position.set(x,y,z);o.receiveShadow=true;scene.add(o);return o;}
@@ -102,7 +103,7 @@ stage.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;aut
 stage.addEventListener('pointermove',e=>{if(!drag)return;angle+=(px-e.clientX)*.006;polar=Math.max(.35,Math.min(1.35,polar+(py-e.clientY)*.006));px=e.clientX;py=e.clientY;});
 stage.addEventListener('pointerup',()=>drag=false);stage.addEventListener('pointercancel',()=>drag=false);
 stage.addEventListener('wheel',e=>{e.preventDefault();desiredDistance=Math.max(5,Math.min(32,desiredDistance+e.deltaY*.016));},{passive:false});
-window.addEventListener('resize',()=>{camera.aspect=innerWidth/Math.max(innerHeight,1);camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);compositor.resize();});
+window.addEventListener('resize',()=>{camera.aspect=innerWidth/Math.max(innerHeight,1);camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
 function renderFrame(now){requestAnimationFrame(renderFrame);const dt=Math.min(.05,(now-last)/1000);last=now;const t=manual?manualTime:now/1000;
 if(autoOrbit&&!drag)angle+=dt*.028;
 if(soundEnabled){const x=target.x;audioClips.car.volume=.24*Math.max(.03,1-Math.abs(x+6)/9);audioClips.rain.volume=.18*Math.max(.08,1-Math.abs(x)/12);audioClips.rowing.volume=.22*Math.max(.03,1-Math.abs(x-6)/9);}
@@ -113,8 +114,8 @@ rowing.position.y=.21+.06*Math.sin(t*1.07);
 cityCar.position.z=1.1+Math.sin(t*.37)*.08;carLight.position.z=cityCar.position.z;
 sun.intensity=2.45+.2*Math.sin(t*.17);
 night.intensity=1.65+.16*Math.sin(t*.81);
-placeCamera();ink.tick(now);renderer.render(scene,camera);ink.present(now);}
-window.__SCENE_CLOCK__={freeze(on=true,time=1){manual=!!on;manualTime=time;},render(){const t=performance.now();for(const o of Object.values(entries))if(o.userData.tick)o.userData.tick(manualTime,0);placeCamera();ink.tick(t);renderer.render(scene,camera);ink.present(t);}};
+placeCamera();ink.tick(now);optics.render(scene,camera,false);}
+window.__SCENE_CLOCK__={freeze(on=true,time=1){manual=!!on;manualTime=time;},render(){const t=performance.now();for(const o of Object.values(entries))if(o.userData.tick)o.userData.tick(manualTime,0);placeCamera();ink.tick(t);optics.render(scene,camera,false);}};
 requestAnimationFrame(renderFrame);
 }catch(e){console.error(e);const o=document.querySelector('#error');o.textContent='Не удалось открыть INK-сцену: '+String(e?.message||e);o.style.display='block';}
 </script></body></html>

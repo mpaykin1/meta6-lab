@@ -47,6 +47,13 @@ MUTANTS = [
     ("kinds/htmlpack.py", "if found != CDN:", "if False:"),
     ("kinds/htmlpack.py", "if error:", "if False and error:"),
     ("kinds/htmlpack.py", 'if new_ids and "window.__PACK_PROBE__" not in source:', "if False:"),
+    ("kinds/spritestack.py", 'if unique < max(3, int(n * .20)):', 'if unique < -1:'),
+    ("kinds/spritestack.py", 'if np.any((alpha != 0) & (alpha != 255)):', 'if False:'),
+    ("kinds/spritestack.py", 'if overlap < max(4, int(sw * sh * .01)):', 'if False:'),
+    ("kinds/spritestack.py", 'if not p.is_file():', 'if False:'),
+    ("kinds/spritestack.py", 'if n < floor:', 'if False:'),
+    ("kinds/spritestack.py", 'if len(colors) < 4:', 'if False:'),
+    ("kinds/spritestack.py", 'if "gothic-city.js" not in body:', 'if False:'),
 ]
 
 

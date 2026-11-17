@@ -44,6 +44,13 @@ button{font-family:Georgia,serif;cursor:pointer;-webkit-tap-highlight-color:tran
 #pips i.on{background:#f2d9a0;box-shadow:0 0 8px #ffd99a99;border-color:#ffe2a6}
 #error{display:none;position:fixed;z-index:10;bottom:20px;left:16px;right:16px;padding:13px;background:#292b31;color:#e9ded0;
   font:12px/1.5 monospace;border:1px solid #7f514a55;border-radius:8px}
+
+/* Menu-only locomotive identity. Nothing overlays gameplay. */
+#panel h1{color:#aeb4ad;font-weight:800;font-size:29px;letter-spacing:.18em;
+  text-shadow:0 1px 0 #b42123,0 3px 2px #230405,0 9px 15px #b4171760}
+#panel h1::after{content:"";display:block;margin:4px auto 17px;width:94%;height:3px;
+  background:linear-gradient(90deg,transparent 0%,#4c1015 12%,#b32228 48%,#540911 84%,transparent 100%);
+  box-shadow:0 0 13px #9c0d1a80;transform:skewY(-1deg)}
 </style>
 </head>
 <body>

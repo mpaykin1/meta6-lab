@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Туманные шпили — ассет-пак</title>
-<!-- PACK-COUNTER: 40 ассетов (26 эталонных + 14 новых), полный состав в window.__PACK__ -->
+<!-- PACK-COUNTER: 45 ассетов (26 эталонных + 19 новых), полный состав в window.__PACK__ -->
 <style>
 html,body{margin:0;width:100%;height:100%;background:#020912;overflow:hidden;touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 #c{position:fixed;left:0;top:0;width:100%;height:100%;display:block}
@@ -48,7 +48,7 @@ renderer.setPixelRatio(1);renderer.autoClear=true;renderer.setClearColor(0x06182
 /* ============ СОСТАВ ПАКА (скрытый счётчик, виден только в коде/консоли) ============ */
 const GX=15,GY=45,GZ=-44;                       // врата
 const PLAZA={cam:[0,1.3,14],look:[0,8,-60]};
-const PACK={name:'Туманные шпили',version:'1.3.0',items:[
+const PACK={name:'Туманные шпили',version:'1.4.0',items:[
  {id:'sky',n:'Небо и световые столбы',k:'2D',m:'plaza',cam:[0,6,14],look:[0,40,-80]},
  {id:'fog',n:'Слои тумана',k:'2D',m:'plaza',cam:[-6,5,6],look:[-4,7,-50]},
  {id:'obelisk',n:'Обелиск-гигант',k:'2.5D',m:'plaza',cam:[0,10,-14],look:[0,42,-78]},
@@ -89,7 +89,12 @@ const PACK={name:'Туманные шпили',version:'1.3.0',items:[
  {id:'brokenPiers',n:'Затопленные сгнившие причалы',k:'2.5D',m:'plaza',cam:[0,5,15],look:[0,5,-24],isNew:true},
  {id:'rainRipples',n:'Круги дождя на зеркальной воде',k:'2D',m:'plaza',cam:PLAZA.cam,look:PLAZA.look,isNew:true},
  {id:'stormClouds',n:'Многослойные грозовые тучи',k:'2D',m:'plaza',cam:[0,40,11],look:[0,70,-156],isNew:true},
- {id:'spireForest',n:'Дальний лес готических шпилей',k:'2.5D',m:'plaza',cam:[0,20,13],look:[0,37,-145],isNew:true}
+ {id:'spireForest',n:'Дальний лес готических шпилей',k:'2.5D',m:'plaza',cam:[0,20,13],look:[0,37,-145],isNew:true},
+ {id:'blueStormNight',n:'Синяя грозовая ночь',k:'2D',m:'plaza',cam:PLAZA.cam,look:PLAZA.look,isNew:true},
+ {id:'rainSheets',n:'Волны ливня над площадью',k:'2D',m:'plaza',cam:PLAZA.cam,look:PLAZA.look,isNew:true},
+ {id:'waterGlow',n:'Дрожащие отражения огней в воде',k:'2D',m:'plaza',cam:PLAZA.cam,look:PLAZA.look,isNew:true},
+ {id:'stormSound',n:'Гроза — дождь и гром',k:'2D',m:'plaza',cam:PLAZA.cam,look:PLAZA.look,isNew:true},
+ {id:'titleOrnament',n:'Мерцающий орнамент заставки',k:'2D',m:'plaza',cam:[0,26,12],look:[0,29,-43],isNew:true}
 ]};
 PACK.count=PACK.items.length;PACK.by={d2:PACK.items.filter(i=>i.k==='2D').length,d25:PACK.items.filter(i=>i.k==='2.5D').length,d3:0};
 window.__PACK__=PACK;try{console.info('[PACK]',PACK.name,PACK.version,'ассетов:',PACK.count,PACK.by)}catch(e){}

@@ -90,7 +90,7 @@ function redSignalLamp(seed=1){
   const splash=part(g,new T.PlaneGeometry(1.4,1.9),C.rust,0,.03,-.2);splash.rotation.x=-PI/2;
   g.userData.interact={radius:6,effect:'warning_train',label_ru:'Красный сигнал предупреждает о поезде'};
   setMotion(g,(t)=>{const near=g.userData.approach||0;const pulse=.15+.85*(.5+.5*Math.sin(t*(1.8+seed*.02+near*6.5)));
-    glow.material.emissiveIntensity=pulse*1.6;light.intensity=pulse*2.8;
+    glow.material.emissiveIntensity=pulse*(.08+near*1.5);light.intensity=pulse*(.12+near*2.8);
     vane.rotation.z=.05*Math.sin(t*.72+.8);splash.scale.setScalar(.8+.2*pulse);
   });
  });

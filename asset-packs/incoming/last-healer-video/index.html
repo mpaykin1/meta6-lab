@@ -155,6 +155,8 @@ function animate(ts){
  if(manual)return;
  const t=ts*.001;clock=t;
  for(const a of Object.values(assets))if(a.userData.tick)a.userData.tick(t,.016);
+ cm.position.z=-1.2+.36*Math.sin(t*.42); // headlights remain car-local while the car rolls
+ boat.position.x=6.65+.22*Math.sin(t*.65); // rig moves with the original hull
  boat.position.y=.035*Math.sin(t*1.26);
  boat.rotation.z=.021*Math.sin(t*.97);
  npc.rotation.y=-.03+.035*Math.sin(t*.6);

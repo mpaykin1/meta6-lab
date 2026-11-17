@@ -1,6 +1,6 @@
 {
   "format": "ink-pack/1",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "base": "reference/ink-night-scream",
   "game": "ink-night-scream",
   "license": {
@@ -19,12 +19,6 @@
     "political": false
   },
   "assets": {
-    "blackLocomotive": {
-      "label_ru": "Чёрный локомотив",
-      "role": "vehicle",
-      "zone": "railway",
-      "footprint": 1.5
-    },
     "crossingSign": {
       "label_ru": "Гнилой крест переезда",
       "role": "landmark",

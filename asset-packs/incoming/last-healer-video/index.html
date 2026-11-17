@@ -14,7 +14,7 @@ canvas{display:block}
 #panel small{display:block;color:#b2beb1;font:11px/1.5 Georgia;margin-top:12px}
 #error{display:none;position:fixed;z-index:10;left:12px;bottom:12px;right:12px;background:#502d30d9;color:white;font:12px monospace;padding:12px;border-radius:8px}
 </style>
-<script type="importmap">{"imports":{"three":"../../../reference/ink-fallen-guardian/three.module.js"}}</script>
+<script type="importmap">{"imports":{"three":"/meta6-lab/reference/ink-fallen-guardian/three.module.js"}}</script>
 </head><body>
 <div id="stage"></div><button id="menu" aria-label="Меню" aria-expanded="false">☰</button>
 <aside id="panel" hidden><h1>THE LAST HEALER</h1><p>INK · Живые дополнения к острову аптекаря. Фары, ручной свет, гребля, дождь.</p>
@@ -48,11 +48,11 @@ canvas{display:block}
 <script type="module">
 import * as T from 'three';
 import {makers} from './makers.js';
-import {car,pier,streetlamp,bush} from '../../../reference/ink-fallen-guardian/ink-settlement.js';
-import {traveller,fir,rock} from '../../../reference/ink-fallen-guardian/ink-objects.js';
-import {rowboat} from '../../../reference/ink-fallen-guardian/ink-extras.js';
-import {createLivingWatercolor3D,createWatercolorStyle} from '../../../reference/ink-fallen-guardian/shared/living-watercolor-3d.js';
-import {createInkOptics} from '../../../reference/ink-fallen-guardian/ink-optics.js';
+import {car,pier,streetlamp,bush} from '/meta6-lab/reference/ink-fallen-guardian/ink-settlement.js';
+import {traveller,fir,rock} from '/meta6-lab/reference/ink-fallen-guardian/ink-objects.js';
+import {rowboat} from '/meta6-lab/reference/ink-fallen-guardian/ink-extras.js';
+import {createLivingWatercolor3D,createWatercolorStyle} from '/meta6-lab/reference/ink-fallen-guardian/shared/living-watercolor-3d.js';
+import {createInkOptics} from '/meta6-lab/reference/ink-fallen-guardian/ink-optics.js';
 const stage=document.querySelector('#stage'),panel=document.querySelector('#panel'),menu=document.querySelector('#menu');
 try{
 const scene=new T.Scene();scene.background=new T.Color('#9aaeb0');scene.fog=new T.FogExp2('#9caeb0',.019);

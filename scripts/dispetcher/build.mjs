@@ -98,6 +98,7 @@ export function assertNotEmpty(tasksMarkdown,cards){
  if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
 }
 export async function main(){
+ const dispatchApi=path=>api(path,{maxWaitMs:10000});
  const tasks=parseTasks(await fs.readFile('ZADACHI.md','utf8'));
  const finish=await fs.readFile('rules/09-platforma/FINISH.md','utf8');
  const finishIds=[...finish.matchAll(/^\|\s*([MBLP]\d+)\s*\|[^|]*\|[^|]*\|\s*НЕТ\b/gm)].map(m=>m[1]);
@@ -118,16 +119,16 @@ export async function main(){
   claude.push({...t,title:listed.title,branch:listed.head.ref});
   continue;
  }
- let pr;try{pr=await api('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
+ let pr;try{pr=await dispatchApi('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
  if(pr.state!=='open')continue;
- const resolution=await resolveConflict(pr,()=>api('/pulls/'+t.id),previousConflict(previous,t.id));
+ const resolution=await resolveConflict(pr,()=>dispatchApi('/pulls/'+t.id),previousConflict(previous,t.id));
  pr=resolution.pr;
- const checks=await api('/commits/'+pr.head.sha+'/check-runs?per_page=100');
- const statuses=await api('/commits/'+pr.head.sha+'/status');
+ const checks=await dispatchApi('/commits/'+pr.head.sha+'/check-runs?per_page=100');
+ const statuses=await dispatchApi('/commits/'+pr.head.sha+'/status');
  const failed=checks.check_runs.filter(x=>['failure','timed_out','action_required'].includes(x.conclusion)).map(x=>({name:x.name,url:x.html_url}));
  failed.push(...statuses.statuses.filter(x=>['failure','error'].includes(x.state)).map(x=>({name:x.context,url:x.target_url})));
  const conflict=resolution.conflict===true,conflictUnknown=resolution.conflict===null;
- const commit=await api('/commits/'+pr.head.sha);
+ const commit=await dispatchApi('/commits/'+pr.head.sha);
  const lastCommit=commit.commit.committer.date;
  const stale=Date.now()-Date.parse(lastCommit)>172800000;
  const stalled=/ЗАВИС/.test(t.status),isClaude=/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(pr.body||'');

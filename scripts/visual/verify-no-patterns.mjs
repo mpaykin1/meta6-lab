@@ -71,6 +71,20 @@ export function detectNoPatterns(source, filename = '<fixture>') {
       report(m.index, 'CLONE_GRID: repeated cloned objects without seeded variation');
     }
   }
+  // InstancedMesh can bypass clone-grid checks: one geometry, hundreds of identical
+  // transforms. Only a spatially regular layout without executable per-instance
+  // variation is rejected. Ignore comment-only 'hash()' decoys.
+  const instancedGrid = /\bfor\s*\([^)]*\)\s*\{?[\s\S]{0,1600}?\bsetMatrixAt\s*\(/g;
+  for (const m of source.matchAll(instancedGrid)) {
+    const setup = m[0].replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/\/\/[^\n]*/g, '');
+    const regular = /\b(?:position\.set|makeTranslation)\s*\([^;\n]*(?:Math\.floor\s*\(|%\s*\d+|\b(?:row|col)\s*\*)/i;
+    if (!regular.test(setup) || !/\bsetMatrixAt\s*\(/.test(setup)) continue;
+    const variation = /\b(?:random|hash|noise|jitter|seededJitter|vary|variation)\s*\(/i;
+    if (!variation.test(setup)) {
+      report(m.index, 'INSTANCE_GRID: repeated InstancedMesh transforms without seeded variation');
+    }
+  }
   const monoNoise = /\b(?:float|vec3|const|let)\s+(?:blot|pigment|wash|colorNoise|pattern|patches)\s*=\s*(?:noise|snoise)\s*\(/g;
   for (const m of source.matchAll(monoNoise)) {
     const nearby = source.slice(Math.max(0, m.index - 700), m.index + 420);

@@ -277,6 +277,14 @@ class KindTraps(unittest.TestCase):
         self.assertEqual(r.kinds, ["ink"])
         self.assertEqual(r.hard(), [], r.hard())
 
+    def test_ink_pack_probe_does_not_trigger_unrelated_htmlpack(self):
+        d = self.ink_pack()
+        (d / "index.html").write_text(
+            '<script>window.__PACK__={items:[{id:"lilyPads"}]};</script>', "utf-8")
+        result = cp.check(d)
+        self.assertEqual(result.kinds, ["ink"])
+        self.assertNotIn("HP1", {item["id"] for item in result.hard()})
+
     def test_black_train_approved_asset_order_has_zero_hard(self):
         """The approved 14-asset BLACK TRAIN order is not ready with even one HARD."""
         if not shutil.which("node"):

@@ -45,6 +45,42 @@
       "role": "effect",
       "zone": "any",
       "footprint": 0
+    },
+    "townRoad": {
+      "label_ru": "Старая городская улица с перекрёстком",
+      "role": "ground",
+      "zone": "city",
+      "footprint": 0
+    },
+    "roadsideDryShrubs": {
+      "label_ru": "Сухие шевелящиеся кусты у дороги",
+      "role": "plant",
+      "zone": "city",
+      "footprint": 0.25
+    },
+    "pinkTownBuilding": {
+      "label_ru": "Розовый магазин на перекрёстке",
+      "role": "building",
+      "zone": "city",
+      "footprint": 1.6
+    },
+    "duskTownLight": {
+      "label_ru": "Розовые сумерки и дымка над городом",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "healerWalkWithLight": {
+      "label_ru": "Шагающий аптекарь с фонариком",
+      "role": "character",
+      "zone": "woodland",
+      "footprint": 0.35
+    },
+    "puddles": {
+      "label_ru": "Мокрые лужи с отражениями и кругами дождя",
+      "role": "ground",
+      "zone": "city",
+      "footprint": 0
     }
   }
 }

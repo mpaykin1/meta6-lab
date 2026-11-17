@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "upstream": "stegu/webgl-noise",
+  "upstream_commit": "22434e04d7753f7e949e8d724ab3da2864c17a0f",
+  "candidates": [
+    {
+      "id": "stegu-classic-noise-3d",
+      "decision": "ALLOW",
+      "license": "MIT",
+      "commercial_use": true,
+      "modification": true,
+      "redistribution": true,
+      "author": "Stefan Gustavson; Ashima Arts acknowledgements",
+      "scope": "src/classicnoise3D.glsl; original shader source only",
+      "source_url": "https://github.com/stegu/webgl-noise/blob/22434e04d7753f7e949e8d724ab3da2864c17a0f/src/classicnoise3D.glsl",
+      "git_blob_sha": "caef70600a43556c81067c58b1f82ee4cb76e932",
+      "license_url": "https://github.com/stegu/webgl-noise/blob/22434e04d7753f7e949e8d724ab3da2864c17a0f/LICENSE",
+      "license_git_blob_sha": "fe03f28c76b4759250822e17e1554eb71635b966",
+      "destination": "integration/stegu/classicnoise3D.glsl",
+      "attribution": "integration/stegu/LICENSE",
+      "dependencies": [],
+      "weights": [],
+      "fonts": [],
+      "models": [],
+      "assets": [],
+      "demo_path": "demos/stegu-noise/",
+      "library_status": "not-yet-indexed: existing build-index enforces owner-only originals",
+      "notes": "Original GLSL loaded locally with existing owner-hosted Three.js; no new engine copied"
+    }
+  ]
+}

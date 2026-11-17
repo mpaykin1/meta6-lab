@@ -114,7 +114,7 @@ const LEN=train.userData.length;
 const crossing=makers.crossingSign(7);crossing.position.set(6.9,0,-11.4);scene.add(crossing);
 const signal=makers.redSignalLamp(11);signal.position.set(8.3,0,-11.35);scene.add(signal);
 const chains=[makers.hangingChains(3),makers.hangingChains(17)];
-chains[0].position.set(7,2.6,-11.2);chains[1].position.set(-8.2,3.6,-14.8);
+chains[0].position.set(7,1.45,-11.2);chains[1].position.set(-8.2,3.6,-14.8);
 for(const c of chains)scene.add(c);
 const crookedTrees=[[-8.3,-14.7,13],[11.8,-17.6,29],[-15,-22.0,41]].map(([x,z,seed])=>{
  const tree=makers.gnarledTree(seed);tree.position.set(x,0,z);scene.add(tree);return tree;

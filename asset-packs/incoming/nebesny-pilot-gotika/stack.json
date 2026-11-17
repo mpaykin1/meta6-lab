@@ -169,6 +169,160 @@
       },
       "spawn": "между башнями",
       "benefit": "золотые блики воды"
+    },
+    "sunsetCloud": {
+      "file": "stacks/sunsetCloud.png",
+      "slice": [
+        64,
+        64
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "cloud",
+      "label_ru": "Облако в закатном свете",
+      "shadow": true,
+      "spawn": "над городом",
+      "benefit": "проход через туман"
+    },
+    "pigeonFlock": {
+      "file": "stacks/pigeonFlock.png",
+      "slice": [
+        64,
+        64
+      ],
+      "count": 12,
+      "pitch_px": 1,
+      "role": "creature",
+      "label_ru": "12 голубей с живыми крыльями",
+      "shadow": false,
+      "anim": {
+        "type": "frames",
+        "speed": 4
+      },
+      "spawn": "над крышами",
+      "benefit": "вспархивают перед самолётом"
+    },
+    "bellTower": {
+      "file": "stacks/bellTower.png",
+      "slice": [
+        64,
+        64
+      ],
+      "count": 66,
+      "pitch_px": 1,
+      "role": "landmark",
+      "label_ru": "Башня со звонящим колоколом",
+      "shadow": true,
+      "anim": {
+        "type": "frames",
+        "speed": 1
+      },
+      "spawn": "городские площади",
+      "benefit": "ориентир и тихий звон"
+    },
+    "rosetteBonus": {
+      "file": "stacks/rosetteBonus.png",
+      "slice": [
+        48,
+        48
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "pickup",
+      "label_ru": "Золотая розетка-бонус",
+      "shadow": false,
+      "anim": {
+        "type": "frames",
+        "speed": 4
+      },
+      "spawn": "между башнями",
+      "benefit": "щит на 3 секунды"
+    },
+    "windowSparks": {
+      "file": "stacks/windowSparks.png",
+      "slice": [
+        48,
+        48
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "effect",
+      "label_ru": "Искры у окон",
+      "shadow": false,
+      "anim": {
+        "type": "frames",
+        "speed": 6
+      },
+      "spawn": "окна в городе",
+      "benefit": "атмосфера"
+    },
+    "descentGate": {
+      "file": "stacks/descentGate.png",
+      "slice": [
+        64,
+        64
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "effect",
+      "label_ru": "Расходящиеся облака",
+      "shadow": false,
+      "anim": {
+        "type": "frames",
+        "speed": 2
+      },
+      "spawn": "на входе в город",
+      "benefit": "переход между высотами"
+    },
+    "gothicTile": {
+      "file": "stacks/gothicTile.png",
+      "slice": [
+        128,
+        128
+      ],
+      "count": 1,
+      "pitch_px": 0,
+      "role": "background",
+      "label_ru": "Готическая мостовая",
+      "shadow": false,
+      "spawn": "на основаниях города",
+      "benefit": "каменная фактура"
+    },
+    "sailBoat": {
+      "file": "stacks/sailBoat.png",
+      "slice": [
+        64,
+        64
+      ],
+      "count": 26,
+      "pitch_px": 1,
+      "role": "vehicle",
+      "label_ru": "Лодка под белым парусом",
+      "shadow": true,
+      "anim": {
+        "type": "frames",
+        "speed": 1
+      },
+      "spawn": "в каналах",
+      "benefit": "живая вода"
+    },
+    "lanternGlow": {
+      "file": "stacks/lanternGlow.png",
+      "slice": [
+        32,
+        32
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "effect",
+      "label_ru": "Фонарь с тёплым огнём",
+      "shadow": false,
+      "anim": {
+        "type": "frames",
+        "speed": 4
+      },
+      "spawn": "на мостах",
+      "benefit": "показывает путь"
     }
   }
 }

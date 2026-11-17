@@ -46,6 +46,20 @@
       "zone": "city",
       "footprint": 0,
       "benefit": "Живой дождь и круги на мокрой поверхности"
+    },
+    "townRoad": {
+      "label_ru": "Старая дорога с неровными краями и бордюром",
+      "role": "ground",
+      "zone": "city",
+      "footprint": 0,
+      "benefit": "Перекрёсток для поездки между домами"
+    },
+    "boatShed": {
+      "label_ru": "Сарай для лодки с зелёной крышей",
+      "role": "landmark",
+      "zone": "lakeside",
+      "footprint": 1.8,
+      "benefit": "Сохранение у причала"
     }
   }
 }

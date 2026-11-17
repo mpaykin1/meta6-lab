@@ -163,7 +163,8 @@ function advanceNightAssets(dt){
  const light={
   torchPosition:camera.position,torchDirection:fogTorchDir,
   torchPower:Math.min(1,torch.intensity/520),
-  signalPosition:fogSignalPos,signalPower:approach,
+  signalPosition:fogSignalPos,
+  signalPower:T.MathUtils.clamp((signal.userData.lightLevel-.09)/4.3,0,1),
   trainPosition:fogTrainPos,trainPower:trainLoud
  };
  for(const mist of mistLayers)if(mist.visible)mist.userData.setLighting(light);

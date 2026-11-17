@@ -74,7 +74,11 @@ function redSignalLamp(seed=1){
    lens.material.emissiveIntensity=(.45+near*2.5)*flash;
    light.intensity=near*9*flash;
  };
- g.userData.tick=(t,dt)=>g.userData.setApproach(.25,t);
+ g.userData.tick=(t,dt)=>{
+   g.userData.setApproach(.25,t);
+   // Physical lens micro-motion, not just light intensity — visible in isolation.
+   lens.scale.z=.35+.018*Math.sin(t*2.1);
+ };
  return g;
 }
 function hangingChains(seed=1){

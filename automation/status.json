@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T10:40:03.504Z",
+  "generated_at": "2026-11-17T10:48:02.091Z",
   "sha": {
-    "lab": "b44e36a8c9fa730e843566fea32f6f88e16b975a",
-    "mg": "aa63d1def02bcca2ddf7f3161add508255df824c"
+    "lab": "894a85831a9374e805753b71b0c4faa9f27d6bd7",
+    "mg": "2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44066652012",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44068021391",
   "review": {
     "protected": [
       {
@@ -513,9 +513,14 @@
   "pr": {
     "open": 39,
     "conflicts": "нет данных",
-    "merged": 76,
+    "merged": 77,
     "closed": 120,
     "mergedItems": [
+      {
+        "number": 361,
+        "title": "Z01: корректный подсчёт живых PR без draft",
+        "sha": "894a85831a9374e805753b71b0c4faa9f27d6bd7"
+      },
       {
         "number": 383,
         "title": "BLACK TRAIN: опубликовать игровую сцену с 14 ассетами",
@@ -1249,12 +1254,12 @@
   },
   "changes": {
     "lab": {
-      "count": 2758,
+      "count": 2767,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 43,
-      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:31, rules:9, SOURCE_INDEX.md:1"
+      "count": 44,
+      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:25, reference:31, rules:9, SOURCE_INDEX.md:1"
     }
   },
   "games": [

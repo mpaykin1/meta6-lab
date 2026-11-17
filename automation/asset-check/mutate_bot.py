@@ -51,6 +51,7 @@ MUTANTS = [
     ("kinds/cutout.py", 'if parent is not None and (parent not in by_name or parent == part["id"]):', "if False:"),
     ("kinds/cutout.py", "if len(phases) <= 1:", "if False:"),
     ("kinds/cutout.py", "if fill < 0.06:", "if False:"),
+    ("kinds/cutout.py", "if not (visual_hook or rig_hook or audio_hook):", "if False:"),
 ]
 
 

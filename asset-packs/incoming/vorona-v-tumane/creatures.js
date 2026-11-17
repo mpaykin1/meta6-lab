@@ -63,8 +63,9 @@ export function createCreatures({T,world,svgMap,rand}) {
  spectral('silver_moth',moth,7,1.7,1.55,1.55,.86,6.9);
  const swarm=new T.Group();world.add(swarm);objects.moth_swarm=swarm;
  const swarmSprites=[];
+ const swarmTexture=svgMap(art(moth));
  for(let i=0;i<17;i++){
-  const material=new T.SpriteMaterial({map:svgMap(art(moth)),transparent:true,opacity:.25+random()*.5,depthWrite:false});
+  const material=new T.SpriteMaterial({map:swarmTexture,transparent:true,opacity:.25+random()*.5,depthWrite:false});
   const s=new T.Sprite(material),size=.27+random()*.4;
   s.scale.set(size,size,1);
   const x=-18+random()*32,y=-3+random()*7,phase=random()*6.283,speed=.3+random()*.44;

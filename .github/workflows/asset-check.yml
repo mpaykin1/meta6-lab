@@ -36,6 +36,8 @@ jobs:
         run: which ffmpeg || (sudo apt-get update -q && sudo apt-get install -y -q ffmpeg)
       - name: Ловушки бота (должны быть зелёными)
         run: python -m unittest discover -s automation/asset-check -p 'test_*.py' -v
+      - name: Three.js 3D Master — геометрия и мутации
+        run: node automation/asset-check/test_three_master.mjs
       - name: Охота на мутантов (каждая выключенная проверка обязана ронять ловушки)
         run: python automation/asset-check/mutate_bot.py
       - name: Проверка всех паков

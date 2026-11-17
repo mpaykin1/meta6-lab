@@ -90,6 +90,21 @@ export function detectNoPatterns(source, filename = '<fixture>') {
       report(m.index, 'WORLD_UV_ATLAS: aliased unwarped world texture coordinates');
     }
   }
+  // A frozen hash of the atlas grid creates identical straight foam edges.
+  // Comment claims of "noise" or "warp" do not make a shader dynamic.
+  const staticShore = /\bfloat\s+(?:band|foamBand)\s*=\s*fract\s*\(\s*depth\s*\*[^;]{0,220}\bh12\s*\(\s*floor\s*\(\s*pp\b[^;]{0,160};/g;
+  for (const m of executableAtlas.matchAll(staticShore)) {
+    report(m.index, 'STATIC_SHORE_FOAM: shoreline band follows a frozen grid hash');
+  }
+  // The same bug must be caught when the grid hash is hidden behind an alias.
+  const hashAlias = /\bfloat\s+([A-Za-z_]\w*)\s*=\s*h12\s*\(\s*floor\s*\(\s*pp\b[^;]{0,140};/g;
+  for (const m of executableAtlas.matchAll(hashAlias)) {
+    const remainder = executableAtlas.slice(m.index + m[0].length, m.index + m[0].length + 320);
+    const bandUsesAlias = new RegExp('\\bfloat\\s+(?:band|foamBand)\\s*=\\s*fract\\s*\\([^;]{0,220}\\b' + m[1] + '\\b');
+    if (bandUsesAlias.test(remainder)) {
+      report(m.index, 'STATIC_SHORE_FOAM: aliased frozen atlas grid hash');
+    }
+  }
   const gridPattern = /\bfor\s*\([^)]*\)[\s\S]{0,650}?\bclone\s*\([\s\S]{0,320}?(?:position\.set|translate[XYZ])\s*\([^;\n]*(?:Math\.floor\s*\(|%\s*\d+|row\s*\*|col\s*\*)/g;
   for (const m of source.matchAll(gridPattern)) {
     const nearby = source.slice(m.index, m.index + 1400);

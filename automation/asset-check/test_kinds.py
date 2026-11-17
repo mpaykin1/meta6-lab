@@ -277,6 +277,18 @@ class KindTraps(unittest.TestCase):
         self.assertEqual(r.kinds, ["ink"])
         self.assertEqual(r.hard(), [], r.hard())
 
+    def test_ink_night_scream_uses_its_own_reference(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack()
+        pj = json.loads((d / "pack.json").read_text("utf-8"))
+        pj["base"] = "reference/ink-night-scream"
+        (d / "pack.json").write_text(json.dumps(pj), "utf-8")
+        r = cp.check(d)
+        self.assertNotIn("IK1", {issue["id"] for issue in r.hard()})
+        self.assertEqual(r.stats["ink_quality_bar"]["n"], 2)
+        self.assertGreater(r.stats["ink_quality_bar"]["vehicle"]["meshes"], r.stats["ink_quality_bar"]["tree"]["meshes"])
+
     def test_IK5_random_breaks_determinism(self):
         if not shutil.which("node"):
             self.skipTest("нет node")

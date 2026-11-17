@@ -21,6 +21,7 @@ function finish(g,footprint=0){g.userData.footprint=footprint;return g;}
 function blackLocomotive(seed=1){
  const r=random(seed),g=new T.Group();g.name='Чёрный локомотив';
  box(g,10.2,.5,2.85,M.soot,-5,.55,0);
+ box(g,9.8,.24,2.45,M.soot,-5,.18,0);
  box(g,9.85,2.65,2.62,M.iron,-5.05,2.08,0);
  box(g,9.45,.22,2.8,M.ironEdge,-5.1,3.53,0);
  // Flat vertical frontal armor. High, unbroken silhouette unlike accepted sloping nose.
@@ -106,6 +107,7 @@ function redSignalLamp(seed=3){
 }
 function hangingChains(seed=4){
  const r=random(seed),g=new T.Group(),strands=[];
+ rod(g,[0,0,0],[0,2.5,0],.039,M.iron);
  for(let j=0;j<3;j++){
   const chain=new T.Group();chain.position.set((j-1)*.65,2.5+(j===1?.4:0),0);g.add(chain);strands.push(chain);
   const n=11+j*3;

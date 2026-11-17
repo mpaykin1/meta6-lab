@@ -299,6 +299,27 @@ function drawStackWorld(){
     g.strokeStyle='rgba(212,239,248,.58)';g.lineWidth=1;
     for(const side of[-1,1]){g.beginPath();g.moveTo(side*6,0);g.quadraticCurveTo(side*18,8+Math.sin(t*3+phase)*2,side*25,14);g.stroke()}g.restore();
    }
+   // Парусный флажок и распадающиеся кильватерные капли — движение частей, не всей стопки.
+   if(item.id==='sailingShip'){
+    const flutter=Math.sin(t*3.3+phase)*2.1;
+    g.save();g.setTransform(1,0,0,1,sx,sy-az-10);g.rotate(ang);
+    g.fillStyle='#eac88c';g.beginPath();
+    g.moveTo(0,-11);g.quadraticCurveTo(5+flutter,-12,8+flutter,-8);
+    g.lineTo(0,-6);g.closePath();g.fill();
+    g.strokeStyle='#fff1c1';g.lineWidth=.75;g.beginPath();
+    g.moveTo(0,-10);g.quadraticCurveTo(4+flutter,-9,7+flutter,-8);g.stroke();
+    g.restore();
+    g.save();g.setTransform(1,0,0,1,sx,sy+7);g.rotate(ang);
+    for(let k=0;k<9;k++){
+     const seed=hash(i*7+k,j*11-k,123),life=((t*(.65+seed*.21)+seed*10)%2.3)/2.3;
+     const spread=8+life*25,side=k%2?1:-1;
+     g.globalAlpha=.72*(1-life);
+     g.fillStyle=seed>.48?'#d9f1f0':'#a1cddc';
+     g.fillRect((side*(5+spread*.31)+Math.sin(phase+k*2.73)*2)|0,
+       (8+life*20)|0,1+(k%4===0?1:0),1);
+    }
+    g.restore();
+   }
    if(item.id==='villageIsland'){
     g.save();g.setTransform(1,0,0,1,sx+14,sy-13);g.rotate(t*.8+phase);
     g.strokeStyle='#d7b57b';g.lineWidth=2;g.beginPath();g.moveTo(-6,0);g.lineTo(6,0);g.moveTo(0,-6);g.lineTo(0,6);g.stroke();g.restore();

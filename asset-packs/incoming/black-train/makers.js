@@ -161,6 +161,7 @@ function groundMist(seed=1){
 
 function stormClouds(seed=1){
  const r=rng(seed),g=new T.Group();g.name='Ночные рваные тучи';
+ g.scale.setScalar(.78);
  g.userData.footprint=0;const banks=[];
  for(let layer=0;layer<3;layer++){
   const group=new T.Group();group.position.set(0,-layer*.44,layer*.2);g.add(group);banks.push(group);
@@ -225,13 +226,13 @@ function tallGrass(seed=1){
  return g;
 }
 function wetRailGlow(seed=1){
- const g=new T.Group();g.name='Мокрые рельсы · красный отсвет';
+ const r=rng(seed),g=new T.Group();g.name='Мокрые рельсы · красный отсвет';
  g.userData.footprint=0;
  const reflections=[];
  for(const z of [-.78,.78]){
   for(let i=0;i<14;i++){
-   const x=-3.4+i*.51;
-   const m=add(g,new T.BoxGeometry(.35,.008,.045),
+   const x=-3.1+i*.46+(r()-.5)*.12;
+   const m=add(g,new T.BoxGeometry(.32,.008,.045),
      new T.MeshBasicMaterial({color:i%3===0?'#76151b':'#68777b',transparent:true,
        opacity:.25,depthWrite:false}),x,.246,z);
    reflections.push(m);

@@ -46,11 +46,19 @@ button{font-family:Georgia,serif;cursor:pointer;-webkit-tap-highlight-color:tran
   font:12px/1.5 monospace;border:1px solid #7f514a55;border-radius:8px}
 
 /* Menu-only locomotive identity. Nothing overlays gameplay. */
-#panel h1{color:#aeb4ad;font-weight:800;font-size:29px;letter-spacing:.18em;
+#panel h1{position:relative;font-family:"Old English Text MT","UnifrakturCook",Georgia,serif;color:#aeb4ad;font-weight:800;font-size:29px;letter-spacing:.18em;
   text-shadow:0 1px 0 #b42123,0 3px 2px #230405,0 9px 15px #b4171760}
 #panel h1::after{content:"";display:block;margin:4px auto 17px;width:94%;height:3px;
   background:linear-gradient(90deg,transparent 0%,#4c1015 12%,#b32228 48%,#540911 84%,transparent 100%);
   box-shadow:0 0 13px #9c0d1a80;transform:skewY(-1deg)}
+/* Slow liquid-ink drips exist exclusively inside the opened menu. */
+#panel h1::before{content:"";position:absolute;left:3%;right:3%;top:37px;height:15px;pointer-events:none;
+  background:radial-gradient(ellipse 4px 10px at 12% 1%,#8e1521 99%,transparent 100%),
+  radial-gradient(ellipse 3px 14px at 35% 1%,#b51a27 99%,transparent 100%),
+  radial-gradient(ellipse 4px 8px at 61% 1%,#780c15 99%,transparent 100%),
+  radial-gradient(ellipse 3px 12px at 87% 1%,#a91b24 99%,transparent 100%);
+  transform-origin:top;animation:black-train-ink-drip 5.6s ease-in-out infinite}
+@keyframes black-train-ink-drip{0%,100%{transform:scaleY(.35);opacity:.48}45%{transform:scaleY(1);opacity:.85}70%{transform:scaleY(.7);opacity:.66}}
 </style>
 </head>
 <body>

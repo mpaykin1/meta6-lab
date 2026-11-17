@@ -37,6 +37,9 @@ canvas{display:block}
 <button data-focus="autumnConeTrees">Остров · осенние кроны</button>
 <button data-focus="boatShed">Причал · лодочный сарай</button>
 <button data-focus="driftingLeaves">Остров · листья в воде</button>
+<button data-focus="sandBeachTiles">Остров · песчаный берег</button>
+<button data-focus="tiltShiftPost">Остров · кинематографическая миниатюра</button>
+<button data-focus="dayCoastGrade">Остров · бирюзовое утро</button>
 <button id="light">Выключить ручной фонарь</button>
 <button id="audio" aria-pressed="false">🔇 Звуки острова: выключены</button>
 <button id="orbit">Автообзор: включён</button>
@@ -64,7 +67,22 @@ const night=new T.PointLight('#e7d19c',1.9,7);night.position.set(-.9,3,-.3);scen
 const seaLight=new T.DirectionalLight('#c1e0d9',1.0);seaLight.position.set(8,5,-8);scene.add(seaLight);
 const ink=createLivingWatercolor3D({THREE:T,renderer,scene,camera,style:createWatercolorStyle({seed:'last-healer-video-first-batch',paperColor:'#e8e6dc',inkColor:'#324a44',washColor:'#829e96',washOpacity:.60,washLayers:6,edgeWidth:.022,edgeJitter:.18,granulation:.26,bleed:.18,shadowWash:.12,motion:.09,pigmentPooling:.23,paperGap:.10,paintedLight:.66})});
 const optics=createInkOptics(renderer);
-const entries={},focusPoints={all:[0,0,0],carHeadlights:[-6,0,0],handFlashlight:[0,0,0],rainSplashRings:[0,0,0],rowingHealer:[6,0,0],townRoad:[-6,0,0],wetGrassClumps:[0,0,0],roadsideDryShrubs:[-8,0,-2],pinkTownBuilding:[-8,0,-2],duskTownLight:[-6,0,0],healerWalkWithLight:[-1,0,-1],puddles:[0,0,0],whiteClinicBuilding:[2,0,2],nightRainGrade:[0,0,0],boatWake:[6,0,-1],shoreFoamLine:[7,0,1],autumnConeTrees:[5,0,-2],boatShed:[9,0,2],driftingLeaves:[7,0,0]};
+// Дополнительный GPU-проход depth-of-field из самого заказанного INK-ассета.
+const miniatureTarget=new T.WebGLRenderTarget(1,1,{depthBuffer:true});
+const miniatureMaterial=makers.tiltShiftPost(99).userData.makeMaterial();
+const miniatureScene=new T.Scene(),miniatureCamera=new T.OrthographicCamera(-1,1,1,-1,0,1);
+miniatureScene.add(new T.Mesh(new T.PlaneGeometry(2,2),miniatureMaterial));
+const targetSize=new T.Vector2();let miniatureEnabled=false;
+function renderGPU(){if(!miniatureEnabled){optics.render(scene,camera,false);return;}
+ renderer.getDrawingBufferSize(targetSize);const w=Math.floor(targetSize.x),h=Math.floor(targetSize.y);
+ if(miniatureTarget.width!==w||miniatureTarget.height!==h)miniatureTarget.setSize(w,h);
+ miniatureMaterial.uniforms.tDiffuse.value=miniatureTarget.texture;
+ miniatureMaterial.uniforms.uTexel.value.set(1/w,1/h);
+ miniatureMaterial.uniforms.uLowPower.value=innerWidth<720?.5:1;
+ renderer.setRenderTarget(miniatureTarget);renderer.render(scene,camera);
+ renderer.setRenderTarget(null);renderer.render(miniatureScene,miniatureCamera);
+}
+const entries={},focusPoints={all:[0,0,0],carHeadlights:[-6,0,0],handFlashlight:[0,0,0],rainSplashRings:[0,0,0],rowingHealer:[6,0,0],townRoad:[-6,0,0],wetGrassClumps:[0,0,0],roadsideDryShrubs:[-8,0,-2],pinkTownBuilding:[-8,0,-2],duskTownLight:[-6,0,0],healerWalkWithLight:[-1,0,-1],puddles:[0,0,0],whiteClinicBuilding:[2,0,2],nightRainGrade:[0,0,0],boatWake:[6,0,-1],shoreFoamLine:[7,0,1],autumnConeTrees:[5,0,-2],boatShed:[9,0,2],driftingLeaves:[7,0,0],sandBeachTiles:[5,0,2],tiltShiftPost:[6,0,-1],dayCoastGrade:[6,0,1]};
 function add(o,x,y,z,name){o.position.set(x,y,z);scene.add(o);if(name)entries[name]=o;ink.apply(o,{seed:name||String(x)+':'+String(z)});return o;}
 function plane(w,d,color,x,z,y=0){const o=new T.Mesh(new T.PlaneGeometry(w,d),new T.MeshStandardMaterial({color,roughness:1,side:T.DoubleSide}));o.rotation.x=-Math.PI/2;o.position.set(x,y,z);o.receiveShadow=true;scene.add(o);return o;}
 plane(26,13,'#718c82',0,0,-.15);
@@ -100,6 +118,9 @@ add(makers.shoreFoamLine(11),7.6,0,.4,'shoreFoamLine');
 add(makers.autumnConeTrees(6),4.1,0,-2.6,'autumnConeTrees');
 add(makers.boatShed(13),9.4,0,2.1,'boatShed');
 add(makers.driftingLeaves(24),7.2,0,.9,'driftingLeaves');
+add(makers.sandBeachTiles(24),4.7,0,2.1,'sandBeachTiles');
+const miniFX=add(makers.tiltShiftPost(12),6.2,0,.1,'tiltShiftPost');
+add(makers.dayCoastGrade(16),6.5,0,-.2,'dayCoastGrade');
 // Показываем принятую лодку INK без замены её геометрии.
 const hull=add(rowboat(),6.6,0,-1.1);
 const rowing=add(makers.rowingHealer(27),6.6,.21,-1.1,'rowingHealer');rowing.rotation.y=Math.PI/2;
@@ -109,7 +130,7 @@ window.__PACK_PROBE__={assets:entries,setHidden(id,hidden){if(entries[id])entrie
 window.__ISOLATE__=(id,on)=>{if(entries[id])entries[id].visible=!!on;};
 let target=new T.Vector3(0,0,0),angle=.43,polar=.87,distance=23,desiredDistance=23,autoOrbit=true,drag=false,px=0,py=0,last=performance.now(),manual=false,manualTime=0;
 function placeCamera(){const s=Math.sin(polar);camera.position.set(target.x+distance*s*Math.sin(angle),target.y+distance*Math.cos(polar)+2,target.z+distance*s*Math.cos(angle));camera.lookAt(target.x,target.y+.4,target.z);}
-function focus(id){const p=focusPoints[id]||focusPoints.all;target.set(...p);desiredDistance=id==='all'?23:9.4;panel.hidden=true;menu.setAttribute('aria-expanded','false');}
+function focus(id){const p=focusPoints[id]||focusPoints.all;target.set(...p);desiredDistance=id==='all'?23:9.4;miniatureEnabled=p[0]>3.4;panel.hidden=true;menu.setAttribute('aria-expanded','false');}
 document.querySelectorAll('[data-focus]').forEach(b=>b.addEventListener('click',()=>focus(b.dataset.focus)));
 menu.addEventListener('click',()=>{panel.hidden=!panel.hidden;menu.setAttribute('aria-expanded',String(!panel.hidden));});
 const audioClips={car:new Audio('./sndCarEngine.wav'),rain:new Audio('./sndRainNight.wav'),rowing:new Audio('./sndRowingShore.wav')};
@@ -138,8 +159,8 @@ rowing.position.y=.21+.06*Math.sin(t*1.07);
 cityCar.position.z=1.1+Math.sin(t*.37)*.08;carLight.position.z=cityCar.position.z;
 sun.intensity=2.45+.2*Math.sin(t*.17);
 night.intensity=1.65+.16*Math.sin(t*.81);
-placeCamera();ink.tick(now);optics.render(scene,camera,false);}
-window.__SCENE_CLOCK__={freeze(on=true,time=1){manual=!!on;manualTime=time;},render(){const t=performance.now();for(const o of Object.values(entries))if(o.userData.tick)o.userData.tick(manualTime,0);placeCamera();ink.tick(t);optics.render(scene,camera,false);}};
+placeCamera();ink.tick(now);renderGPU();}
+window.__SCENE_CLOCK__={freeze(on=true,time=1){manual=!!on;manualTime=time;},render(){const t=performance.now();for(const o of Object.values(entries))if(o.userData.tick)o.userData.tick(manualTime,0);placeCamera();ink.tick(t);renderGPU();}};
 requestAnimationFrame(renderFrame);
 }catch(e){console.error(e);const o=document.querySelector('#error');o.textContent='Не удалось открыть INK-сцену: '+String(e?.message||e);o.style.display='block';}
 </script></body></html>

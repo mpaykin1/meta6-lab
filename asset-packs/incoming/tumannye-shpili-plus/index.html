@@ -817,6 +817,93 @@ const SHPILI_PLUS=(()=>{
      }petals(t);
    };
  }
+
+ /* === COVER ASSETS: Gothic silhouettes, GPU shading, shared storm light === */
+ const coverStormMats=[];
+ const coverStone=(height,seed)=>{
+   const m=new T.ShaderMaterial({side:T.DoubleSide,depthWrite:true,
+     uniforms:{uLightning:{value:0},uHeight:{value:height},uSeed:{value:seed}},
+     vertexShader:'varying vec3 vNormal,vPos;void main(){vNormal=normalize(normalMatrix*normal);vPos=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+     fragmentShader:NOISE+'uniform float uLightning,uHeight,uSeed;varying vec3 vNormal,vPos;'+
+      'void main(){float h=clamp(vPos.y/max(uHeight,1.),0.,1.);float n=fbm(vPos.xy*.28+uSeed);'+
+      'float rim=pow(1.-abs(vNormal.z),1.6);'+
+      'vec3 c=mix(vec3(.015,.038,.072),vec3(.082,.18,.275),smoothstep(0.,1.,h));'+
+      'c+=vec3(.05,.085,.13)*(n-.48);c+=rim*vec3(.11,.28,.42)*(.42+uLightning);'+
+      'c+=uLightning*vec3(.11,.31,.49);c=mix(c,vec3(.025,.09,.15),.58*(1.-smoothstep(0.,.22,h)));'+
+      'gl_FragColor=vec4(c,1.);}'});
+   coverStormMats.push(m);return m;
+ };
+ const coverSlab=(parent,points,depth,material,z=0)=>{
+   const path=new T.Shape();points.forEach((p,i)=>i?path.lineTo(...p):path.moveTo(...p));path.closePath();
+   const geom=new T.ExtrudeGeometry(path,{depth,steps:1,bevelEnabled:true,bevelSize:.12,bevelThickness:.12,bevelSegments:1});
+   const obj=new T.Mesh(geom,material);obj.position.z=z;parent.add(obj);return obj;
+ };
+ const coverWindowGeom=(()=>{
+   const s=new T.Shape();s.moveTo(-.45,-.62);s.lineTo(-.45,.18);
+   s.quadraticCurveTo(-.3,.67,0,.9);s.quadraticCurveTo(.3,.67,.45,.18);s.lineTo(.45,-.62);s.closePath();
+   return new T.ShapeGeometry(s,7);
+ })();
+ const coverWindows=(parent,list,seed)=>{
+   const mesh=new T.InstancedMesh(coverWindowGeom,new T.MeshBasicMaterial({
+     color:0xc4f4ff,transparent:true,opacity:.83,blending:T.AdditiveBlending,
+     depthWrite:false,side:T.DoubleSide}),list.length);
+   const R=rng(seed),d=new T.Object3D(),col=new T.Color();
+   list.forEach((a,i)=>{
+     d.position.set(a[0],a[1],a[2]);d.scale.set(a[3],a[4],1);
+     d.updateMatrix();mesh.setMatrixAt(i,d.matrix);
+     const k=R();col.setRGB(k<.27?.015:k<.62?.15:.5,k<.27?.025:k<.62?.31:.85,
+       k<.27?.065:k<.62?.52:1.);mesh.setColorAt(i,col);
+   });
+   mesh.instanceMatrix.needsUpdate=true;mesh.instanceColor.needsUpdate=true;
+   mesh.frustumCulled=false;parent.add(mesh);return mesh;
+ };
+ /* TWIN TOWERS: asymmetric bases, flying buttresses, lancet windows, fractured pinnacles. */
+ {
+   const id='twinTowers',g=newGroup(id,-26,42,-90),city=new T.Group(),R=rng(49182);
+   city.position.y=-42;g.add(city);const lit=[];
+   function tower(cx,h,w,seed){
+     const root=new T.Group();root.position.x=cx;city.add(root);
+     const stone=coverStone(h,seed);
+     coverSlab(root,[[-w*.59,0],[-w*.63,h*.13],[-w*.53,h*.43],[-w*.45,h*.7],
+       [-w*.53,h*.75],[-w*.32,h*.79],[-w*.27,h*.87],[-w*.12,h*.94],
+       [0,h*1.1],[w*.12,h*.94],[w*.3,h*.87],[w*.35,h*.8],
+       [w*.53,h*.75],[w*.44,h*.7],[w*.57,h*.12],[w*.55,0]],2.4,stone,-.9);
+     for(const sign of [-1,1]){
+       const x=sign*w*.43;
+       coverSlab(root,[[x-sign*2.2,0],[x-sign*1.5,h*.3],[x-sign*.8,h*.57],
+         [x,h*.7],[x+sign*.45,h*.69],[x+sign*1.4,h*.32],[x+sign*2.3,0]],
+         1.9,coverStone(h,seed+sign+3),.4);
+       for(let y=h*.24,i=0;y<h*.78;y+=h*.18,i++){
+         beam(root,[x,y,.8],[x+sign*(3+R()),y+3,.05],.12,0x507e91,.72);
+         spike(root,.4,3.5+R()*2.2,0x385c72,
+           [x+sign*(1+R()),y+4.2,.3],sign*.12);
+       }
+       spike(root,.62,h*.15,0x34556b,[x,h*.87,1],sign*.06);
+     }
+     for(let k=0;k<6;k++){
+       const y=h*(.18+k*.115),span=w*(.51-k*.025);
+       beam(root,[-span,y,1.6],[span,y+.2,1.6],.13,0x5b92a2,.65);
+       for(const sign of [-1,1])spike(root,.18,2,0x6e9cac,[sign*span,y+1,1.4],sign*.07);
+     }
+     spike(root,.25,h*.16,0x87b4c1,[0,h*1.1,.5],.02);
+     const windows=[];
+     for(let row=0;row<9;row++){
+       const y=h*(.14+row*.072),span=w*(.4-row*.014);
+       for(let j=-1;j<=1;j++){
+         if(R()<.25)continue;
+         windows.push([j*span*.79+(R()-.5)*.2,y+(R()-.5)*.42,1.79,
+           .55+R()*.25,.85+R()*.37]);
+       }
+     }
+     lit.push(coverWindows(root,windows,seed+200));
+   }
+   tower(-12.4,78,13.5,83);tower(11.5,94,11.8,204);
+   for(let i=0;i<6;i++)beam(city,[-4.8,18+i*7.7,.2],[5,21+i*7.5,-.2],
+     .08,0x548198,.38);
+   own[id].tick=t=>{for(let i=0;i<lit.length;i++)
+     lit[i].material.opacity=.79+.08*Math.sin(t*(.8+i*.24)+i);};
+ }
+
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;

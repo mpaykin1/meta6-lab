@@ -20,8 +20,10 @@ canvas{display:block}
 <aside id="panel" hidden><h1>THE LAST HEALER</h1><p>INK · Живые дополнения к острову аптекаря. Фары, ручной свет, гребля, дождь.</p>
 <button data-focus="all">Все три времени суток</button>
 <button data-focus="carHeadlights">Сумерки · автомобиль и фары</button>
+<button data-focus="townRoad">Город · потрескавшийся перекрёсток</button>
 <button data-focus="handFlashlight">Ночь · аптекарь с фонарём</button>
 <button data-focus="rainSplashRings">Дождь · кольца на мокрой земле</button>
+<button data-focus="wetGrassClumps">Ночь · мокрая трава</button>
 <button data-focus="rowingHealer">Утро · гребец у причала</button>
 <button id="light">Выключить ручной фонарь</button>
 <button id="orbit">Автообзор: включён</button>
@@ -48,7 +50,7 @@ const night=new T.PointLight('#e7d19c',1.9,7);night.position.set(-.9,3,-.3);scen
 const seaLight=new T.DirectionalLight('#c1e0d9',1.0);seaLight.position.set(8,5,-8);scene.add(seaLight);
 const ink=createLivingWatercolor3D({THREE:T,renderer,scene,camera,style:createWatercolorStyle({seed:'last-healer-video-first-batch',paperColor:'#e8e6dc',inkColor:'#324a44',washColor:'#829e96',washOpacity:.60,washLayers:6,edgeWidth:.022,edgeJitter:.18,granulation:.26,bleed:.18,shadowWash:.12,motion:.09,pigmentPooling:.23,paperGap:.10,paintedLight:.66})});
 const compositor=ink.attachCompositor({replaceSource:true});compositor.canvas.style.pointerEvents='none';
-const entries={},focusPoints={all:[0,0,0],carHeadlights:[-6,0,0],handFlashlight:[0,0,0],rainSplashRings:[0,0,0],rowingHealer:[6,0,0]};
+const entries={},focusPoints={all:[0,0,0],carHeadlights:[-6,0,0],handFlashlight:[0,0,0],rainSplashRings:[0,0,0],rowingHealer:[6,0,0],townRoad:[-6,0,0],wetGrassClumps:[0,0,0]};
 function add(o,x,y,z,name){o.position.set(x,y,z);scene.add(o);if(name)entries[name]=o;ink.apply(o,{seed:name||String(x)+':'+String(z)});return o;}
 function plane(w,d,color,x,z,y=0){const o=new T.Mesh(new T.PlaneGeometry(w,d),new T.MeshStandardMaterial({color,roughness:1,side:T.DoubleSide}));o.rotation.x=-Math.PI/2;o.position.set(x,y,z);o.receiveShadow=true;scene.add(o);return o;}
 plane(26,13,'#718c82',0,0,-.15);
@@ -59,6 +61,7 @@ plane(7.1,3.2,'#6b7370',-6,0,-.082);
 plane(6.8,3.0,'#596f68',0,-.6,-.08);
 plane(6.9,5.2,'#83b1b0',6.2,.20,-.07);
 // Accepted model, rotated only for the preview. It remains a standalone source file.
+add(makers.townRoad(14),-6,0,1.1,'townRoad');
 const cityCar=add(car(),-6,0,1.1);cityCar.rotation.y=Math.PI;
 const carLight=add(makers.carHeadlights(104),-6,0,1.1,'carHeadlights');
 carLight.rotation.y=Math.PI;carLight.scale.z=1.78;
@@ -68,13 +71,14 @@ for(let i=0;i<6;i++){const r=add(rock(i+4),-4.8+(i%3)*.7,0,-2.8+Math.floor(i/3)*
 const healer=add(traveller(),0,0,.5);healer.rotation.y=Math.PI*.75;
 const handLight=add(makers.handFlashlight(9),0,0,.5,'handFlashlight');handLight.rotation.y=-.75;
 const rain=add(makers.rainSplashRings(19),0,0,0,'rainSplashRings');
+add(makers.wetGrassClumps(22),.3,0,-1.7,'wetGrassClumps');
 for(let i=0;i<4;i++){const t=add(fir(i+3),2.5+i*.7,0,-2.1+i*.37);t.scale.setScalar(.48+i*.13);}
 const wharf=add(pier(),7.7,0,1.0);wharf.rotation.y=-Math.PI/2;
 // Показываем принятую лодку INK без замены её геометрии.
 const hull=add(rowboat(),6.6,0,-1.1);
 const rowing=add(makers.rowingHealer(27),6.6,.21,-1.1,'rowingHealer');rowing.rotation.y=Math.PI/2;
 for(let i=0;i<7;i++){const b=add(bush(i+17),4.5+i*.45,0,-3.4+(i%2)*.17);b.scale.setScalar(.45+i*.03);}
-window.__PACK__={items:[{id:'carHeadlights'},{id:'handFlashlight'},{id:'rowingHealer'},{id:'rainSplashRings'}]};
+window.__PACK__={items:Object.keys(makers).map(id=>({id}))};
 window.__PACK_PROBE__={assets:entries,setHidden(id,hidden){if(entries[id])entries[id].visible=!hidden;}};
 window.__ISOLATE__=(id,on)=>{if(entries[id])entries[id].visible=!!on;};
 let target=new T.Vector3(0,0,0),angle=.43,polar=.87,distance=23,desiredDistance=23,autoOrbit=true,drag=false,px=0,py=0,last=performance.now(),manual=false,manualTime=0;

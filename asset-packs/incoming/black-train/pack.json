@@ -1,6 +1,6 @@
 {
   "format": "ink-pack/1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "base": "reference/ink-night-scream",
   "game": "ink-night-scream",
   "license": {
@@ -52,6 +52,60 @@
     "groundMist": {
       "label_ru": "Низкий движущийся туман",
       "role": "effect",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "stormClouds": {
+      "label_ru": "Штормовые облака",
+      "role": "effect",
+      "zone": "sky",
+      "footprint": 0
+    },
+    "brokenFence": {
+      "label_ru": "Покосившийся забор",
+      "role": "prop",
+      "zone": "railway",
+      "footprint": 0.4
+    },
+    "tallGrass": {
+      "label_ru": "Осока и сухая трава",
+      "role": "plant",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "wetRailGlow": {
+      "label_ru": "Красные блики на мокрых рельсах",
+      "role": "ground",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "barbedWire": {
+      "label_ru": "Колючая проволока",
+      "role": "prop",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "swampPuddles": {
+      "label_ru": "Неровные лужи",
+      "role": "ground",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "titleLogo": {
+      "label_ru": "Заставка BLACK TRAIN в меню",
+      "role": "prop",
+      "zone": "menu",
+      "footprint": 0
+    },
+    "crossingBell": {
+      "label_ru": "Звон колокола переезда",
+      "role": "prop",
+      "zone": "railway",
+      "footprint": 0.2
+    },
+    "chainsClank": {
+      "label_ru": "Звук цепей на ветру",
+      "role": "prop",
       "zone": "railway",
       "footprint": 0
     }

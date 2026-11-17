@@ -104,3 +104,5 @@
 | MG-строитель-2 | 2026-11-17T02:07:29Z | итог: ступень 2 — PR #335 содержит защищённый workflow; независимый PASS и слияние невозможны без Claude; [PR](https://github.com/mpaykin1/meta6-lab/pull/335) |
 | MG-строитель-2 | 2026-11-17T02:10:32Z | старт |
 | MG-строитель-2 | 2026-11-17T02:10:32Z | итог: ступень 2, [PR #335](https://github.com/mpaykin1/meta6-lab/pull/335) HEAD 3b320fe3f2b3361e1ce7c447f76935580f59740b; 8 файлов, включая защищённый .github/workflows/asset-check.yml, слияние только Claude; инструкция automation/AVTOZADACHI.md отсутствует (404), выполнен актуальный GPT.md; FINISH 7/18 |
+| MG-строитель-1 | 2026-11-17T05:58Z | старт |
+| MG-строитель-1 | 2026-11-17T06:00Z | итог: Z01 конфликт PR #361 разрешён merge [6d9b893](https://github.com/mpaykin1/meta6-lab/commit/6d9b8933677902b11d818a2aa9816501bbfd72ea); журнал надзора [f4d8702](https://github.com/mpaykin1/meta6-lab/commit/f4d870299fc4a6c092a3f77ed6f1b8485f89e6ac); далее независимая приёмка и CI |

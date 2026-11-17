@@ -98,8 +98,26 @@ function sprite(svg,w,h,x,y,z){
 }
 const hero=new T.Group();hero.position.set(state.x,state.y,5.2);world.add(hero);
 const birdTex=load.load(source+'vorona.png');birdTex.colorSpace=T.SRGBColorSpace;
-const bird=new T.Sprite(new T.SpriteMaterial({map:birdTex,transparent:true,depthWrite:false}));
-bird.scale.set(6.5,6.5,1);hero.add(bird);objects.crow=hero;
+const wingMaterial=new T.ShaderMaterial({
+ transparent:true,depthWrite:false,side:T.DoubleSide,
+ uniforms:{uImage:{value:birdTex},uTime:{value:0}},
+ vertexShader:[
+  'uniform float uTime;varying vec2 vUv;',
+  'void main(){vUv=uv;vec3 p=position;',
+  'float distanceFromBody=abs(uv.x-.5)*2.;',
+  'float tip=pow(smoothstep(.25,1.,distanceFromBody),1.65);',
+  'float phase=uTime*5.2-distanceFromBody*2.15;',
+  'p.y+=tip*(sin(phase)*.38+sin(phase*.57)*.09);',
+  'p.x+=sign(uv.x-.5)*tip*sin(phase*.78)*.05;',
+  'gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);}'
+ ].join(''),
+ fragmentShader:[
+  'precision mediump float;varying vec2 vUv;uniform sampler2D uImage;',
+  'void main(){vec4 color=texture2D(uImage,vUv);if(color.a<.02)discard;gl_FragColor=color;}'
+ ].join('')
+});
+const bird=new T.Mesh(new T.PlaneGeometry(6.5,6.5,24,12),wingMaterial);
+hero.add(bird);objects.crow=hero;
 const specimen=new T.Group();specimen.position.set(14,-2.35,4.4);world.add(specimen);
 const gif=new Image();gif.src=source+'sushchestvo.gif';
 const offscreen=document.createElement('canvas');offscreen.width=315;offscreen.height=311;
@@ -234,8 +252,10 @@ function draw(){
  state.y=T.MathUtils.clamp(state.y+dy*speed*dt,-3.4,6);
  if(Math.abs(dx)>.05)state.face=Math.sign(dx);
  hero.position.set(state.x,state.y+Math.sin(t*2.6)*.12,5.2);
+ wingMaterial.uniforms.uTime.value=t;
  hero.scale.x=T.MathUtils.lerp(hero.scale.x,state.face,.095);
  hero.rotation.z=T.MathUtils.lerp(hero.rotation.z,-dy*.08+Math.sin(t*1.8)*.02,.08);
+ hero.position.z=5.2+(state.hit>0?.15*Math.sin(t*30):0);
  specimen.position.set(14+Math.sin(t*.41)*3,-2.35+Math.sin(t*1.1)*.09,4.4);
  specimen.scale.x=Math.sin(t*.41)>0?-1:1;
  if(gif.complete&&gif.naturalWidth&&t-gifUpdate>.083){

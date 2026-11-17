@@ -12,13 +12,17 @@ button{font:inherit;cursor:pointer}#toggle{position:fixed;z-index:12;right:max(1
 #menu button[aria-pressed=true]{background:#b4a9804e;border-color:#ded5b3}
 #menu .small{font-size:11px;opacity:.7;margin-top:14px}#err{position:fixed;bottom:0;left:0;right:0;background:#4e3434;color:white;padding:10px;font:13px system-ui}
 #vignette{pointer-events:none;position:fixed;inset:0;background:radial-gradient(ellipse at 52% 44%,transparent 44%,#0d25303a 100%);z-index:2}
+.tilt-band{pointer-events:none;position:fixed;left:0;right:0;height:24%;z-index:3;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;transition:opacity 1s ease}
+#tiltTop{top:0;mask-image:linear-gradient(#000 30%,transparent 100%);-webkit-mask-image:linear-gradient(#000 30%,transparent 100%)}
+#tiltBottom{bottom:0;mask-image:linear-gradient(transparent 0%,#000 70%);-webkit-mask-image:linear-gradient(transparent 0%,#000 70%)}
+@media (max-width:650px){.tilt-band{backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px)}}
 </style>
 <script type="importmap">{"imports":{"three":"../../../reference/ink-fallen-guardian/three.module.js"}}</script>
 </head><body>
-<div id="vignette"></div>
+<div id="vignette"></div><div id="tiltTop" class="tilt-band" aria-hidden="true"></div><div id="tiltBottom" class="tilt-band" aria-hidden="true"></div>
 <button id="toggle" aria-label="Меню сцен" aria-expanded="false">☰</button>
 <nav id="menu" hidden><h1>The Last Healer</h1><p>Живая акварель · дополнения к одобренному миру INK</p>
-<div id="scenes"></div><p class="small">Свет привязан к принятой машине и аптекарю; гребец сидит в принятой лодке. Поверните сцену пальцем или мышью.</p></nav>
+<div id="scenes"></div><button id="audioToggle">♫ · Включить звук</button><p class="small">Свет привязан к принятой машине и аптекарю; гребец сидит в принятой лодке. Поверните сцену пальцем или мышью.</p></nav>
 <div id="err" hidden></div>
 <script type="module">
 import * as T from 'three';
@@ -31,6 +35,7 @@ import {buildWorld} from '../../../reference/ink-fallen-guardian/ink-world.js';
 import {createInkOptics} from '../../../reference/ink-fallen-guardian/ink-optics.js';
 import {createFallenRobot} from '../../../reference/ink-fallen-guardian/ink-fallen-robot.js';
 import {makers} from './makers.js';
+import {createSoundscapes} from './sounds.js';
 const $=s=>document.querySelector(s);
 const scene=new T.Scene();
 const camera=createIllustrationCamera(T,{width:innerWidth,height:innerHeight,viewHeight:8.4,position:[15,15,19],lookAt:[0,.5,0]});
@@ -57,7 +62,13 @@ const assets={carHeadlights:makers.carHeadlights(11),handFlashlight:makers.handF
  townRoad:makers.townRoad(29),boatShed:makers.boatShed(31),
  roadsideDryShrubs:makers.roadsideDryShrubs(37),pinkTownBuilding:makers.pinkTownBuilding(41),
  duskTownLight:makers.duskTownLight(43),healerWalkWithLight:makers.healerWalkWithLight(47),
- puddles:makers.puddles(53),whiteClinicBuilding:makers.whiteClinicBuilding(59)};
+ puddles:makers.puddles(53),whiteClinicBuilding:makers.whiteClinicBuilding(59),
+ nightRainGrade:makers.nightRainGrade(61),wetGrassClumps:makers.wetGrassClumps(67),
+ boatWake:makers.boatWake(71),shoreFoamLine:makers.shoreFoamLine(73),
+ autumnConeTrees:makers.autumnConeTrees(79),driftingLeaves:makers.driftingLeaves(83),
+ sandBeachTiles:makers.sandBeachTiles(89),tiltShiftPost:makers.tiltShiftPost(97),
+ dayCoastGrade:makers.dayCoastGrade(101),sndCarEngine:makers.sndCarEngine(103),
+ sndRainNight:makers.sndRainNight(107),sndRowingShore:makers.sndRowingShore(109)};
 car.add(assets.carHeadlights);
 hero.add(assets.handFlashlight);
 boat.add(assets.rowingHealer);
@@ -70,6 +81,18 @@ assets.duskTownLight.position.set(-12.3,0,-16.3);valley.world.add(assets.duskTow
 hero.add(assets.healerWalkWithLight);
 assets.puddles.position.set(-10.25,0,-8.6);valley.world.add(assets.puddles);
 assets.whiteClinicBuilding.position.set(-13.9,0,-8.3);assets.whiteClinicBuilding.rotation.y=-.22;valley.world.add(assets.whiteClinicBuilding);
+assets.nightRainGrade.position.set(-11.5,0,-7.2);valley.world.add(assets.nightRainGrade);
+assets.wetGrassClumps.position.set(-10.8,0,-7.7);valley.world.add(assets.wetGrassClumps);
+boat.add(assets.boatWake);assets.boatWake.position.set(-.75,-.06,0);
+assets.shoreFoamLine.position.set(6.25,0,10.1);assets.shoreFoamLine.rotation.y=.36;valley.world.add(assets.shoreFoamLine);
+assets.autumnConeTrees.position.set(-4.1,0,12.6);valley.world.add(assets.autumnConeTrees);
+assets.driftingLeaves.position.set(7.2,0,9.2);valley.world.add(assets.driftingLeaves);
+assets.sandBeachTiles.position.set(5.98,-.015,13.8);valley.world.add(assets.sandBeachTiles);
+assets.tiltShiftPost.position.set(-10.9,0,-8.6);valley.world.add(assets.tiltShiftPost);
+assets.dayCoastGrade.position.set(7.5,0,12.4);valley.world.add(assets.dayCoastGrade);
+assets.sndCarEngine.position.set(-12.3,0,-17.5);valley.world.add(assets.sndCarEngine);
+assets.sndRainNight.position.set(-11.2,0,-7.4);valley.world.add(assets.sndRainNight);
+assets.sndRowingShore.position.set(7.1,0,12.4);valley.world.add(assets.sndRowingShore);
 for(const [id,o] of Object.entries(assets))paint.apply(o,{seed:'last-healer-video:'+id});
 const scenes=[
  {id:'carHeadlights',label:'I · Розовые сумерки / машина',target:car,sky:'#d1a6a0',ground:'#756f78',fog:'#c3a8a4',intensity:1.45,hem:1.9,zoom:7.8},
@@ -83,8 +106,27 @@ const scenes=[
  {id:'duskTownLight',label:'IX · Акварельные сумерки',target:assets.duskTownLight,sky:'#d1a6a0',ground:'#756f78',fog:'#c3a8a4',intensity:1.45,hem:1.9,zoom:7.5},
  {id:'healerWalkWithLight',label:'X · Походка аптекаря',target:hero,sky:'#647d88',ground:'#304e60',fog:'#617b85',intensity:.28,hem:.55,zoom:5.4},
  {id:'puddles',label:'XI · Лужи и отражения',target:assets.puddles,sky:'#647d88',ground:'#304e60',fog:'#617b85',intensity:.28,hem:.55,zoom:6.4},
- {id:'whiteClinicBuilding',label:'XII · Ночная клиника',target:assets.whiteClinicBuilding,sky:'#647d88',ground:'#304e60',fog:'#617b85',intensity:.28,hem:.55,zoom:8}
+ {id:'whiteClinicBuilding',label:'XII · Ночная клиника',target:assets.whiteClinicBuilding,sky:'#647d88',ground:'#304e60',fog:'#617b85',intensity:.28,hem:.55,zoom:8},
+ {id:'nightRainGrade',label:'XIII · Ночная дымка',target:assets.nightRainGrade,sky:'#647d88',ground:'#304e60',fog:'#617b85',intensity:.28,hem:.55,zoom:7},
+ {id:'wetGrassClumps',label:'XIV · Мокрые травы',target:assets.wetGrassClumps,sky:'#647d88',ground:'#304e60',fog:'#617b85',intensity:.28,hem:.55,zoom:5},
+ {id:'boatWake',label:'XV · Кильватер и вёсла',target:boat,sky:'#f9e9c8',ground:'#90baa9',fog:'#d4dfcd',intensity:1.6,hem:2.3,zoom:6.4},
+ {id:'shoreFoamLine',label:'XVI · Живая береговая пена',target:assets.shoreFoamLine,sky:'#f9e9c8',ground:'#90baa9',fog:'#d4dfcd',intensity:1.6,hem:2.3,zoom:5.8},
+ {id:'autumnConeTrees',label:'XVII · Осенний лес',target:assets.autumnConeTrees,sky:'#f9e9c8',ground:'#90baa9',fog:'#d4dfcd',intensity:1.6,hem:2.3,zoom:8},
+ {id:'driftingLeaves',label:'XVIII · Листья в воде',target:assets.driftingLeaves,sky:'#f9e9c8',ground:'#90baa9',fog:'#d4dfcd',intensity:1.6,hem:2.3,zoom:6.1},
+ {id:'sandBeachTiles',label:'XIX · Тёплая песчаная бухта',target:assets.sandBeachTiles,sky:'#f9e9c8',ground:'#90baa9',fog:'#d4dfcd',intensity:1.6,hem:2.3,zoom:7},
+ {id:'tiltShiftPost',label:'XX · Живая миниатюра',target:assets.tiltShiftPost,sky:'#d1a6a0',ground:'#756f78',fog:'#c3a8a4',intensity:1.2,hem:1.7,zoom:7.3},
+ {id:'dayCoastGrade',label:'XXI · Солнечный берег',target:assets.dayCoastGrade,sky:'#f9e9c8',ground:'#90baa9',fog:'#d4dfcd',intensity:1.7,hem:2.4,zoom:7},
+ {id:'sndCarEngine',label:'XXII · Мотор и мокрые шины',target:car,sky:'#d1a6a0',ground:'#756f78',fog:'#c3a8a4',intensity:1.45,hem:1.9,zoom:7.5,audio:'engine'},
+ {id:'sndRainNight',label:'XXIII · Звуки ночного дождя',target:hero,sky:'#647d88',ground:'#304e60',fog:'#617b85',intensity:.28,hem:.55,zoom:7,audio:'rain'},
+ {id:'sndRowingShore',label:'XXIV · Звуки вёсел и моря',target:boat,sky:'#f9e9c8',ground:'#90baa9',fog:'#d4dfcd',intensity:1.6,hem:2.3,zoom:6.1,audio:'rowing'}
 ];
+const audio=createSoundscapes();
+let audioOn=false;
+$('#audioToggle').onclick=()=>{
+ audioOn=!audioOn;
+ audio.start(audioOn?(scenes[selected].audio||(selected<4?'rain':'rowing')):'silent');
+ $('#audioToggle').textContent=audioOn?'♫ · Выключить звук':'♫ · Включить звук';
+};
 let selected=0,yaw=-.61,pitch=.66,drag=null,t=0,last=0,manual=false;
 const look=new T.Vector3(),focus=new T.Vector3(),color=new T.Color();
 function choose(i){
@@ -93,6 +135,9 @@ function choose(i){
  const active=scenes[selected];
  // Light, haze and camera change gently, without a screen shake.
  look.copy(active.target.getWorldPosition(new T.Vector3())).add(new T.Vector3(0,.7,0));
+ $('#tiltTop').style.opacity=selected===19?'1':'.32';
+ $('#tiltBottom').style.opacity=selected===19?'1':'.32';
+ if(audioOn)audio.start(active.audio||(selected<4?'rain':'rowing'));
 }
 scenes.forEach((s,i)=>{const b=document.createElement('button');b.textContent=s.label;b.onclick=()=>{choose(i);$('#menu').hidden=true;$('#toggle').setAttribute('aria-expanded','false');};$('#scenes').append(b);});
 $('#toggle').onclick=()=>{const isOpen=$('#menu').hidden=!$('#menu').hidden;$('#toggle').setAttribute('aria-expanded',String(!isOpen));};
@@ -116,6 +161,7 @@ function draw(ms){
  scene.fog.color.lerp(color.set(current.fog),.025);
  valley.tick(t,focus,false);
  for(const o of Object.values(assets))if(o.visible!==false)o.userData.tick?.(t,1/60);
+ audio.tick(t,scenes[selected].audio||(selected<4?'rain':'rowing'));
  paint.tick(ms);optics.render(scene,camera,false);
 }
 function frame(ms){requestAnimationFrame(frame);if(manual||document.hidden){last=ms;return;}let dt=Math.min(.04,Math.max(0,(ms-last)/1000));last=ms;t+=dt;draw(ms);}

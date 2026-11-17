@@ -62,15 +62,15 @@ export function carHeadlights(seed=1) {
     const rear=part(g,new T.BoxGeometry(.22,.10,.035),'#bd6c63',[x,.61,-1.65],true);
     rear.userData.watercolorSkipWash=true;
     for(let j=0;j<3;j++) block(g,[.025,.09,.035],'#4b514b',[x-.08+j*.08,.61,-1.68]);
-    const cone=new T.Mesh(new T.ConeGeometry(.94,5.5,22,1,true),glowMaterial('#eed9a1'));
-    cone.rotation.x=-Math.PI/2;cone.position.set(x,.52,4.55);
+    const cone=new T.Mesh(new T.ConeGeometry(.82,3.5,22,1,true),glowMaterial('#eed9a1'));
+    cone.rotation.x=-Math.PI/2;cone.position.set(x,.52,3.50);
     cone.userData.watercolorSkipWash=true;cone.userData.watercolorOutline=false;g.add(cone);cones.push(cone);
-    const ground=new T.Mesh(new T.PlaneGeometry(2.25,5.35),
+    const ground=new T.Mesh(new T.PlaneGeometry(2.25,3.10),
       new T.ShaderMaterial({uniforms:{uTime:{value:0},uColor:{value:new T.Color('#f2d5a2')}},
         vertexShader:glowVertex,
         fragmentShader:'varying vec2 vUv;uniform vec3 uColor;uniform float uTime;void main(){float x=abs(vUv.x-.5)*2.;float y=vUv.y;float edge=smoothstep(1.,.05,x/(.14+y*.93));float near=smoothstep(0.,.12,y)*(1.-smoothstep(.65,1.,y));float grain=.87+.13*sin(vUv.x*37.+vUv.y*91.+uTime*.4);gl_FragColor=vec4(uColor,.21*edge*near*grain);}',
         transparent:true,depthWrite:false,blending:T.AdditiveBlending,side:T.DoubleSide}));
-    ground.rotation.x=-Math.PI/2;ground.position.set(x,.035,4.4);g.add(ground);spots.push(ground);
+    ground.rotation.x=-Math.PI/2;ground.position.set(x,.035,3.4);g.add(ground);spots.push(ground);
     for(let j=0;j<5;j++){
       const a=(j-2)*.07, z=1.48+j*.05;
       part(g,new T.SphereGeometry(.025,5,4),'#556662',[x+.18,.72+a,z]);

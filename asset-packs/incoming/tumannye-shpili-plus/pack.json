@@ -1,7 +1,7 @@
 {
   "format": "htmlpack/1",
-  "version": "1.2.0",
-  "name": "Туманные шпили — живой мир + 10 ассетов",
+  "version": "1.3.0",
+  "name": "Туманные шпили — живой мир + 14 ассетов",
   "base": "reference/tumannye-shpili",
   "reference_count": 26,
   "license": {
@@ -86,6 +86,30 @@
       "label_ru": "Молнии в грозовых тучах",
       "role": "weather",
       "benefit": "Нерегулярные ветвистые разряды освещают тучи и каменные башни",
+      "animated": true
+    },
+    "brokenPiers": {
+      "label_ru": "Сгнившие сваи и сломанные причалы",
+      "role": "world",
+      "benefit": "Неровные затопленные деревянные сваи и сломанные доски покачиваются в прибое",
+      "animated": true
+    },
+    "rainRipples": {
+      "label_ru": "Круги от капель на воде",
+      "role": "weather",
+      "benefit": "Расходящиеся GPU-круги дождя в водяном отражении",
+      "animated": true
+    },
+    "stormClouds": {
+      "label_ru": "Грозовые облака",
+      "role": "weather",
+      "benefit": "Три слоя живых облаков с подсвеченными молниями краями",
+      "animated": true
+    },
+    "spireForest": {
+      "label_ru": "Лес шпилей на горизонте",
+      "role": "background",
+      "benefit": "48 неповторяющихся готических силуэтов и далёкие огни",
       "animated": true
     }
   }

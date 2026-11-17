@@ -59,6 +59,42 @@
       "role": "plant",
       "zone": "woodland",
       "footprint": 0
+    },
+    "roadsideDryShrubs": {
+      "label_ru": "Сухие колючие кусты вдоль дороги",
+      "role": "plant",
+      "zone": "city",
+      "footprint": 0.1
+    },
+    "pinkTownBuilding": {
+      "label_ru": "Розовая лавка на углу",
+      "role": "building",
+      "zone": "city",
+      "footprint": 2.1
+    },
+    "duskTownLight": {
+      "label_ru": "Сумеречная акварельная дымка",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "healerWalkWithLight": {
+      "label_ru": "Ходьба аптекаря с ручным фонарём",
+      "role": "character",
+      "zone": "woodland",
+      "footprint": 0.34
+    },
+    "puddles": {
+      "label_ru": "Неровные отражающие лужи",
+      "role": "ground",
+      "zone": "city",
+      "footprint": 0
+    },
+    "whiteClinicBuilding": {
+      "label_ru": "Белая станция с красным козырьком",
+      "role": "building",
+      "zone": "city",
+      "footprint": 2.6
     }
   }
 }

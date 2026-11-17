@@ -101,7 +101,7 @@ function redSignalLamp(seed=3){
  const l=new T.PointLight(0xd82420,0,13,1.8);l.position.set(0,2.65,.3);g.add(l);
  g.userData.interact={radius:8,effect:'warn_train',label_ru:'Сигнал приближения поезда'};
  g.userData.setApproach=(a,t)=>{const f=.2+.8*Math.pow(Math.max(0,Math.sin(t*(2.3+a*8))),6);l.intensity=(.7+2.8*a)*f;lens.material=M.red;};
- g.userData.tick=(t)=>g.userData.setApproach(.4,t);
+ g.userData.tick=(t)=>{g.userData.setApproach(.4,t);housing.rotation.z=.02*Math.sin(t*.8);};
  return finish(g,.25);
 }
 function hangingChains(seed=4){
@@ -137,6 +137,7 @@ function gnarledTree(seed=5){
   }
  }
  for(let a=0;a<7;a++){const ang=a*6.283/7,dist=.5+r()*.4;rod(g,[0,.09,0],[Math.cos(ang)*dist,.015,Math.sin(ang)*dist],.12,M.wood,.02);}
+ g.scale.setScalar(.78);
  g.userData.tick=t=>tips.forEach((tip,i)=>{tip.rotation.z=.014*Math.sin(t*.36-i*.22);tip.rotation.x=.017*Math.sin(t*.3-i*.38);});
  return finish(g,1.2);
 }
@@ -150,7 +151,145 @@ function groundMist(seed=6){
   const m=add(g,new T.ShapeGeometry(s),M.mist,(r()-.5)*9,.11+r()*.29,(r()-.5)*4);
   m.rotation.y=(r()-.5)*.95;sheets.push({m,x:m.position.x,i});
  }
+ g.scale.x=.46;
  g.userData.tick=t=>sheets.forEach(({m,x,i})=>{m.position.x=x+.18*Math.sin(t*.21-i*.34);m.rotation.y=.08*Math.sin(t*.17-i*.18);});
  return finish(g,0);
 }
-export const makers={blackLocomotive,crossingSign,redSignalLamp,hangingChains,gnarledTree,groundMist};
+
+function stormClouds(seed=7){
+ const r=random(seed),g=new T.Group(),layers=[];
+ const cloudMat=new T.MeshBasicMaterial({color:0x20282d,transparent:true,opacity:.63,side:T.DoubleSide,depthWrite:false});
+ for(let j=0;j<5;j++){
+  const sh=new T.Shape(),w=2+r()*2.5;
+  sh.moveTo(-w/2,0);
+  for(let k=0;k<=14;k++){const x=-w/2+w*k/14,y=.22+Math.sin(k/14*Math.PI)*(.25+r()*.3)+r()*.14;sh.lineTo(x,y);}
+  sh.lineTo(w/2,-.26);sh.closePath();
+  const mesh=add(g,new T.ShapeGeometry(sh),cloudMat,(r()-.5)*2.6,1+j*.42,-j*.32);
+  layers.push({mesh,x:mesh.position.x,j});
+ }
+ g.userData.tick=t=>layers.forEach(({mesh,x,j})=>{mesh.position.x=x+.13*Math.sin(t*.1+j*.3);mesh.rotation.z=.015*Math.sin(t*.14+j);});
+ return finish(g,0);
+}
+function brokenFence(seed=8){
+ const r=random(seed),g=new T.Group();g.name='Поломанный забор';
+ const posts=[];
+ for(let i=0;i<6;i++){
+  const x=-2.8+i*1.07,h=.65+r()*1.7;
+  rod(g,[x,0,0],[x+(r()-.5)*.23,h,0],.12,M.wood,.065);
+  for(let q=0;q<3;q++)rod(g,[x-.09,h*(q+.3)/4,.13],[x+.03,h*(q+.3)/4,.13],.024,M.woodCut);
+  posts.push({x,h});
+ }
+ for(let k=0;k<2;k++){
+  const y=.55+k*.85;
+  for(let i=0;i<5;i++){
+   const a=posts[i],b=posts[i+1],end= (i+k)%4===0?.61:1;
+   rod(g,[a.x,y,0],[a.x+(b.x-a.x)*end,y+(r()-.5)*.3,.05],.055,M.woodCut,.045);
+  }
+ }
+ return finish(g,.4);
+}
+function tallGrass(seed=9){
+ const r=random(seed),g=new T.Group(),stems=[];g.name='Сухая болотная трава';
+ for(let cl=0;cl<6;cl++){
+  const tip=new T.Group();tip.position.set((r()-.5)*2.5,0,(r()-.5)*1.7);g.add(tip);stems.push(tip);
+  for(let k=0;k<7;k++){
+   const x=(r()-.5)*.29,z=(r()-.5)*.22,h=.42+r()*1.05;
+   rod(tip,[x,0,z],[x+(r()-.5)*.2,h,z+(r()-.5)*.15],.014,M.woodCut,.004);
+   if(k%3===0)add(tip,new T.ConeGeometry(.06,.25,5),M.wood,x,h-.1,z);
+  }
+ }
+ g.userData.tick=t=>stems.forEach((s,i)=>{s.rotation.z=.06*Math.sin(t*.7-i*.4);s.rotation.x=.035*Math.sin(t*.6+i*.6);});
+ return finish(g,0);
+}
+function wetRailGlow(seed=10){
+ const r=random(seed),g=new T.Group(),reflection=[];
+ const wet=new T.MeshBasicMaterial({color:0x848d92,transparent:true,opacity:.3,depthWrite:false});
+ const blood=new T.MeshBasicMaterial({color:0x6f1719,transparent:true,opacity:.23,depthWrite:false});
+ for(const z of [-.78,.78]){
+  const m=box(g,5,.012,.035,wet,0,.205,z);reflection.push(m);
+  for(let i=0;i<12;i++){
+   const k=box(g,.03+r()*.14,.007,.06,blood,-2.4+i*.42,.213,z+(r()-.5)*.08);
+   k.rotation.y=(r()-.5)*.2;
+  }
+ }
+ for(let i=0;i<10;i++){
+  const m=box(g,.12+r()*.3,.012,.3+r()*.2,blood,-2.5+i*.55,.13,(r()-.5)*.7);
+  reflection.push(m);
+ }
+ g.userData.tick=t=>{blood.opacity=.18+.11*Math.pow(Math.sin(t*2.5),4);wet.opacity=.2+.08*Math.sin(t*1.1);reflection[0].position.y=.205+.003*Math.sin(t*1.1);};
+ return finish(g,0);
+}
+function barbedWire(seed=11){
+ const r=random(seed),g=new T.Group(),wire=new T.Group();g.name='Проволока с шипами';
+ for(const x of [-2.3,2.3]){
+  const tip=x+(x<0?-.18:.1);rod(g,[x,0,0],[tip,1.6,0],.055,M.iron,.038);
+ }
+ const pts=[];for(let i=0;i<=32;i++){const x=-2.3+4.6*i/32;pts.push([x,1.39-.17*Math.sin(Math.PI*i/32)+.01*Math.sin(i*.8),0]);}
+ for(let i=0;i<32;i++)rod(wire,pts[i],pts[i+1],.017,M.ironEdge);
+ for(let i=1;i<32;i+=2){
+  const [x,y,z]=pts[i];
+  for(const sign of [-1,1]){
+   rod(wire,[x,y,z],[x+sign*(.10+r()*.06),y+sign*.16,z+sign*.03],.018,M.silver,.002);
+  }
+ }
+ g.add(wire);
+ g.userData.tick=t=>{wire.rotation.x=.006*Math.sin(t*.7);};
+ return finish(g,0);
+}
+function swampPuddles(seed=12){
+ const r=random(seed),g=new T.Group(),ripples=[];
+ const water=new T.MeshStandardMaterial({color:0x222b2e,metalness:.5,roughness:.2,transparent:true,opacity:.8,side:T.DoubleSide});
+ const sheen=new T.MeshBasicMaterial({color:0x794142,transparent:true,opacity:.2,depthWrite:false,side:T.DoubleSide});
+ for(let j=0;j<3;j++){
+  const shape=new T.Shape(),rad=.48+r()*.52,points=16;
+  for(let i=0;i<=points;i++){
+   const th=i/points*6.283,w=rad*(.68+.4*r());
+   const x=Math.cos(th)*w,z=Math.sin(th)*w;
+   if(i===0)shape.moveTo(x,z);else shape.lineTo(x,z);
+  }
+  const p=add(g,new T.ShapeGeometry(shape),water,(j-1)*1.25,.025,(r()-.5)*.6);
+  p.rotation.x=-Math.PI/2;
+  for(let a=0;a<5;a++){const th=r()*6.28,rr=.2+r()*.5;
+   const t=box(g,.15+r()*.19,.009,.025,sheen,p.position.x+Math.cos(th)*rr,.037,p.position.z+Math.sin(th)*rr);
+   t.rotation.y=th;ripples.push(t);}
+ }
+ g.userData.tick=t=>ripples.forEach((p,i)=>{p.position.y=.037+.004*Math.sin(t*1.4-i*.7);p.rotation.y+=.001;});
+ return finish(g,0);
+}
+function titleLogo(seed=13){
+ // The source geometry is the menu-only plaque; actual letters are CSS in the menu.
+ const g=new T.Group(),r=random(seed);
+ box(g,4.5,.65,.12,M.soot,0,.4,0);
+ for(let i=0;i<11;i++){
+  const x=-2.1+i*.42;
+  box(g,.07,.32+r()*.16,.07,M.ironEdge,x,.5,0);
+  box(g,.07,.07,.09,M.red,x,.17,0);
+ }
+ for(let i=0;i<12;i++){
+  const x=-2.2+i*.39;rod(g,[x,.08,0],[x+.12,.04+r()*.1,0],.027,M.red);
+ }
+ return finish(g,0);
+}
+function crossingBell(seed=14){
+ const g=new T.Group(),r=random(seed);g.name='Колокол переезда';
+ rod(g,[0,0,0],[0,2.1,0],.07,M.iron);
+ rod(g,[0,2.05,0],[.52,2.1,0],.065,M.ironEdge);
+ const bell=add(g,new T.CylinderGeometry(.19,.31,.46,12,1,true),M.silver,.51,1.75,0);
+ add(g,new T.TorusGeometry(.31,.035,5,12),M.ironEdge,.51,1.51,0).rotation.x=Math.PI/2;
+ rod(g,[.51,1.62,0],[.51,1.29,0],.036,M.iron);
+ const striker=add(g,new T.SphereGeometry(.08,9,7),M.ironEdge,.51,1.31,0);
+ g.userData.tick=t=>{bell.rotation.z=.06*Math.sin(t*2.5);striker.position.x=.51+.08*Math.sin(t*2.5-.4);};
+ return finish(g,.2);
+}
+function chainsClank(seed=15){
+ const g=new T.Group(),r=random(seed),links=[];
+ rod(g,[0,0,0],[0,2.3,0],.045,M.iron);
+ for(let i=0;i<15;i++){
+  const o=add(g,new T.TorusGeometry(.095,.019,5,9),i%2?M.silver:M.ironEdge,.09*Math.sin(i*.3),2.25-i*.15,(r()-.5)*.07);
+  o.rotation.x=i%2?Math.PI/2:0;links.push(o);
+ }
+ g.userData.tick=t=>links.forEach((o,i)=>{o.rotation.z=.03*Math.sin(t*.7-i*.16);});
+ return finish(g,0);
+}
+
+export const makers={blackLocomotive,crossingSign,redSignalLamp,hangingChains,gnarledTree,groundMist,stormClouds,brokenFence,tallGrass,wetRailGlow,barbedWire,swampPuddles,titleLogo,crossingBell,chainsClank};

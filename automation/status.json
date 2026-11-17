@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T06:53:36.014Z",
+  "generated_at": "2026-11-17T06:57:09.861Z",
   "sha": {
-    "lab": "1ebd7ff3ab529ba4cc729121b1653e68b2d9fbd0",
+    "lab": "faa303d22078ef1a00bee512047c8affbbd23f37",
     "mg": "aa63d1def02bcca2ddf7f3161add508255df824c"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44034419302",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44034893253",
   "review": {
     "protected": [
       {
@@ -481,7 +481,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44031940202"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44034419216"
       },
       "P1": {
         "value": "не подтверждено",
@@ -1195,7 +1195,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2707,
+      "count": 2710,
       "folders": "нет данных"
     },
     "mg": {
@@ -1336,6 +1336,8 @@
     "| 1152 | 17.11.2026 | Прямые пуши в main не проходили kontur-guard (он только на PR), поэтому поломка Claude (1151) всплыла на чужих PR | .github/workflows/kontur-main.yml, scripts/claude/pre-push.sh | все постоянные мутации на каждом содержательном пуше в main + обязательный pre-push Claude |",
     "| 1156 | 17.11.2026 | Диспетчер маршрутизировал PR к Claude по исторической строке «НУЖЕН CLAUDE», хотя текущая первая строка уже «ЖДЁТ» или «ГОТОВ К ПРОВЕРКЕ» | [PR #331](https://github.com/mpaykin1/meta6-lab/pull/331), проверка старого regex в `scripts/karta-sil/route.mjs` | `scripts/karta-sil/mutate-current-claude-marker.mjs`: проверка текущего статуса, эскалации после двух провалов и 3 мутации, в том числе обман по номеру PR |",
     "| 2026111703 | 17.11.2026 | Ассеты спрайт-стакинга (PR #367, готический город) сделаны «по списку», но не по эскизу: постройки парят над островами эталона, фон — плоская стена из полос, собор — трапеция с полосами, самолёт над крышами вместо полёта между башнями; бот проверял только PNG-срезы, не снимок игры рядом с эскизом | asset-packs/incoming/nebesny-pilot-gotika/ | вид spritestack: «плоский фасад из полос» и «здание без земли» — задание в automation/prompts/NEBESNY_GOTIKA_FIX.md п.2; урок в SPEC.md «Уроки» 2026-11-17 |",
-    "| 1153 | 17.11.2026 | Система INK: рецепт, БЕЗ ПАТТЕРНОВ, шаблон и сканер лежали только в ветках (#286 закрыт без слияния, #290 висит) — ChatGPT в main их не видел; рецепт и ink.md отправляли к старому рендеру с узором из синусов | ink.md, RECEPT_INK_MIR.md, BEZ_PATTERNOV.md, shared/ink/, scripts/visual/ | scripts/visual/mutate-no-patterns.mjs (17 ловушек) — теперь постоянная мутация KONTUR; карточка Z20 |"
+    "| 1153 | 17.11.2026 | Система INK: рецепт, БЕЗ ПАТТЕРНОВ, шаблон и сканер лежали только в ветках (#286 закрыт без слияния, #290 висит) — ChatGPT в main их не видел; рецепт и ink.md отправляли к старому рендеру с узором из синусов | ink.md, RECEPT_INK_MIR.md, BEZ_PATTERNOV.md, shared/ink/, scripts/visual/ | scripts/visual/mutate-no-patterns.mjs (17 ловушек) — теперь постоянная мутация KONTUR; карточка Z20 |",
+    "| 1154 | 17.11.2026 | Сторожа коммитили сводки, когда менялись только время/SHA, а status-dlya-claude запускался на каждый коммит другой сводки — каскад ~60 коммитов за ночь и расход лимита API | zadachi-watch, status-dlya-claude, sliyanie-status, dispetcher, zanyato-watch, karta-sil | scripts/lab/meaningful-diff.sh + постоянная ловушка scripts/lab/mutate-meaningful-diff.mjs |",
+    "| 1155 | 17.11.2026 | Эталоны описаны в 4 местах (ink.md, README, паспорта, AGENTS) — чаты не видели полного списка | ETALONY.md | scripts/lab/verify-etalony-catalog.mjs + mutate-etalony-catalog.mjs |"
   ]
 }

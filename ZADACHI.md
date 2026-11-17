@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взять: Z17 | Туманные шпили — 13 ассетов по заставке владельца (ZAKAZ.json, первая строка OCHERED.md) | МГЛ | Claude поставил | — | — | 2026-11-17 06:20 UTC | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Ремонт PR #319: source-only Library Machine, устранить блокер и сохранить ловушки | МГЛ | чат ChatGPT | `lab/library-source-only-probe-20261114` | [#319](https://github.com/mpaykin1/meta6-lab/pull/319) | 2026-11-17 02:23 UTC | 2026-11-17 02:26 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | fix(library): new-game base-path probe must not mistake Git 128 | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/library-source-only-probe-20261114` | [#319](https://github.com/mpaykin1/meta6-lab/pull/319) | 2026-11-14 06:05 | 2026-11-17 02:26 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Z01: разделить #335 — визуальный 3D Мастер отдельным PR | МГЛ | чат ChatGPT | `lab/3d-master-visual-split-20261117` | [#354](https://github.com/mpaykin1/meta6-lab/pull/354) | 2026-11-17 02:20 UTC | 2026-11-17 02:26 |

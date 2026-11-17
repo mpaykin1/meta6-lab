@@ -101,7 +101,7 @@ for(let i=0;i<3;i++){
  const lamp=streetlamp();lamp.position.set(-7.9+i*3.2,0,-4.3);lamp.scale.setScalar(.8);scene.add(lamp);
 }
 const root=makers.carHeadlights(11);cm.add(root);
-const beam=makers.handFlashlight(3);beam.position.set(.37,0,.11);npc.add(beam);
+const beam=makers.handFlashlight(3);beam.position.set(.41,-.64,.14);npc.add(beam);
 const stroke=makers.rowingHealer(7);boat.add(stroke);
 const splashes=makers.rainSplashRings(13);splashes.position.set(-.75,0,1.3);scene.add(splashes);
 const assets={carHeadlights:root,handFlashlight:beam,rowingHealer:stroke,rainSplashRings:splashes};

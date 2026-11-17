@@ -1,11 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T02:53:25.756Z | МГЛ: 6d671148454afcc3042298e21d67e1364bfda1ea | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44006156869
+UTC: 2026-11-17T03:01:13.956Z | МГЛ: 2ff4bfd79ca80faea88325c1f643c3c6f5e1b2f2 | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44007023181
 ## ПРОВЕРИТЬ CLAUDE
 - PR #346 9f247be3a3530d160f629f531f32eb6469a07bc1: scripts/status/mutate-canonical-finish.mjs, scripts/status/selftest.mjs
 - PR #311 fb708269aa165d43dea7a1b3204157a235087afd: automation/asset-check/test_mutation_runner.py, automation/asset-check/test_zip_safety.py, scripts/platform/mutate-bot-config.mjs, scripts/platform/verify-meta-bot-config-candidate.mjs, scripts/repair-bot/mutat… (сокращено)
 - ещё 35: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
-- | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/… (сокращено)
+- | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/… (сокращено)
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
 - | КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |
 - | БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |
@@ -17,7 +17,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44005288541)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44005741459)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -31,12 +31,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 33 | конфликт: нет данных | слито: 67 | закрыто: 112
+открыто: 35 | конфликт: нет данных | слито: 67 | закрыто: 113
 #358 feat(Z18): лицензированный GLSL-туман и атмосферные молнии в | 81e5fb9fcce86c5de90ec98953b8316ed87f83a6
 #350 Единая инструкция пяти автозадач и журнал NADZOR | bf240a699201aa2d8b9594c989ec34de47c37170
 ещё 65: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2606 коммитов | нет данных
+МГЛ: 2613 коммитов | нет данных
 МГ: 40 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

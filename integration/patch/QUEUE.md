@@ -6,6 +6,7 @@
 - [x] PixelFX: original atmospheric layer — smoke bands, wrecked engine, ash, grass, pulsing fire halo and lightning flash (`b553c89d`)
 - [x] PixelFX: preserved pinned upstream NOTICE.md (Sprite Fusion / Hollow Crown attribution; Patch Pixel exclusion) and extended source-index integrity + tamper mutation (`aa433d9a`)
 - [x] Resolved main divergence by two-parent merge (`0604bf2`): preserved current main and branch-specific error row; PR #310 now mergeable
+- [x] Саморазвивающийся промпт `automation/prompts/PATCH_IMPORT_SELF_EVOLVING.md` сохранён в текущем PR
 - [ ] Confirm latest CI including desktop/mobile browser; STOROZHA PR quota blocks merge; publish after verified HTTP 200
 - [ ] Trompe: audit local texturing and exports
 - [ ] Anymove: audit rigging and GLB without restricted model weights

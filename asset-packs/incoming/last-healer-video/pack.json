@@ -81,6 +81,43 @@
       "role": "ground",
       "zone": "city",
       "footprint": 0
+    },
+    "whiteClinicBuilding": {
+      "label_ru": "Белая ночная клиника с красным козырьком",
+      "role": "building",
+      "zone": "city",
+      "footprint": 2.15,
+      "benefit": "тёплый свет окна показывает путь"
+    },
+    "nightRainGrade": {
+      "label_ru": "Холодная ночная дождливая дымка",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "wetGrassClumps": {
+      "label_ru": "Живая мокрая трава и росистые агавы",
+      "role": "plant",
+      "zone": "city",
+      "footprint": 0
+    },
+    "boatWake": {
+      "label_ru": "След и брызги за лодкой",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "shoreFoamLine": {
+      "label_ru": "Накатывающая на берег пена",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "autumnConeTrees": {
+      "label_ru": "Разноцветные стилизованные осенние деревья",
+      "role": "tree",
+      "zone": "woodland",
+      "footprint": 0.6
     }
   }
 }

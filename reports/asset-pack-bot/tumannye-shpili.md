@@ -1,0 +1,5 @@
+# Туманные шпили — контроль ассет-пака
+
+- 2026-11-17 UTC | продолжена ветка [PR #306](https://github.com/mpaykin1/meta6-lab/pull/306); исправлена устаревшая мутация HP10 после изменения ожидания для `explosion/sparks/petals`: [f91af0f](https://github.com/mpaykin1/meta6-lab/commit/f91af0fd72cb202bc68a6e04639cdb921d4fa4f1). Сохранены обе независимые регрессионные мутации, ни одна проверка не отключена.
+- 2026-11-17 UTC | урок в SPEC: [e2b50c7](https://github.com/mpaykin1/meta6-lab/commit/e2b50c7b18c82d6cc3fa491c7477aa7b8de8dd65). Исходный CI [43802405975](https://github.com/mpaykin1/meta6-lab/actions/runs/43802405975) остановился на `MUTATION_TARGET_MISSING`; новый [44008083148](https://github.com/mpaykin1/meta6-lab/actions/runs/44008083148) проверяет первый фикс. До его завершения PASS не утверждать.
+- Дальше: прочитать результаты текущего ASSET CHECK (строки HARD из report.json, `64/64` мутантов), устранить HARD; получить лист сравнения `_check/compare.png`, убедиться, что арт не хуже эталона; безопасно синхронизировать `main` и разрешить конфликты; не сливать самостоятельно, так как в PR меняется workflow.

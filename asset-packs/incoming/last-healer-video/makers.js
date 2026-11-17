@@ -227,14 +227,14 @@ export function wetGrassClumps(seed=1){
    const ux=Math.cos(a),uz=Math.sin(a);
    const shape=new T.Shape();shape.moveTo(-.023,0);shape.quadraticCurveTo(-.11,h*.42,-.045,h*.72);
    shape.quadraticCurveTo(-.01,h*.92,0,h);shape.quadraticCurveTo(.08,h*.76,.07,h*.37);shape.lineTo(.027,0);shape.closePath();
-   const leaf=part(plant,new T.ExtrudeGeometry(shape,{depth:.015,bevelEnabled:false,steps:1}),i%3?pigment.iron:pigment.coat,.06*ux,0,.06*uz);
+   const leaf=part(plant,new T.ExtrudeGeometry(shape,{depth:.015,bevelEnabled:false,steps:1,curveSegments:3}),i%3?pigment.iron:pigment.coat,.06*ux,0,.06*uz);
    leaf.rotation.y=a+.4;leaf.rotation.z=.1*(random()-.5);
    if(i%3===0){
     const dew=part(plant,new T.IcosahedronGeometry(.019,0),pigment.paper,ux*.22,h*.45,uz*.22);
     dew.userData.watercolorOutline=false;
    }
   }
-  for(let k=0;k<3;k++)part(plant,new T.DodecahedronGeometry(.045+random()*.02,0),pigment.wood,(random()-.5)*.20,.02,(random()-.5)*.20);
+  for(let k=0;k<1;k++)part(plant,new T.DodecahedronGeometry(.045+random()*.02,0),pigment.wood,(random()-.5)*.20,.02,(random()-.5)*.20);
  }
  g.userData.tick=t=>stems.forEach((p,i)=>{p.rotation.z=.048*Math.sin(t*.61-i*.32);p.rotation.x=.034*Math.sin(t*.48+i*.52);});
  return finish(g,0);

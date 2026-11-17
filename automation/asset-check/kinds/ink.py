@@ -19,6 +19,7 @@ HERE = Path(__file__).resolve().parent
 REPO = Path(os.environ.get("ASSET_CHECK_REPO") or HERE.parents[2])  # мутант-прогон копирует бота во временную папку
 HARNESS = HERE / "ink_harness.mjs"
 DEFAULT_BASE = "reference/ink-fallen-guardian"
+NIGHT_BASE = "reference/ink-night-scream"
 ROLES = {"tree", "plant", "rock", "prop", "building", "landmark", "creature", "character", "vehicle",
          "pickup", "interactive", "effect", "ground"}
 VARY = {"tree", "plant", "rock", "ground"}             # БЕЗ ПОВТОРОВ: каждый seed — своя форма
@@ -105,7 +106,9 @@ def check(root: Path, r) -> set:
     pj = json.loads((root / "pack.json").read_text("utf-8"))
     covered = {"pack.json", "makers.js", "README.md"}
     base = (REPO / pj.get("base", DEFAULT_BASE)).resolve()
-    if not (base / "three.module.js").exists():
+    # The accepted Night Train source bundles Three.js inside index.html; reuse the
+    # same trusted engine module from the INK guardian reference, never a CDN.
+    if not ((base / "three.module.js").exists() or base == (REPO / NIGHT_BASE).resolve()):
         r.add("IK1", "HARD", "pack.json", f"эталон INK не найден: {pj.get('base', DEFAULT_BASE)}",
               f'"base": "{DEFAULT_BASE}" — папка эталона в meta6-lab')
         return covered
@@ -144,7 +147,7 @@ def check(root: Path, r) -> set:
         if name not in made:
             r.add("IK3", "HARD", name, "описан в pack.json, но нет в makers.js", "Добавь maker или убери описание")
     ink_rgb = [hexrgb(c) for c in INK_PALETTE]
-    bar = baseline(base)
+    bar = baseline(base if (base / "ink-objects.js").exists() else REPO / DEFAULT_BASE)
     if bar:
         r.stats["ink_quality_bar"] = bar
     for name, m in made.items():

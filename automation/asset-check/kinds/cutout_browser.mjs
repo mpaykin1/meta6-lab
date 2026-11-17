@@ -55,12 +55,15 @@ try{
   'started=true;document.body.dataset.loaded="26";',
   'document.body.dataset.crow=String(bird.children.length);',
   'document.body.dataset.beast=String(beast.children.length);',
-  'const before=child.__STATE__?.().x;',
+  'const before=child.__STATE__?.().x;let frames=0;',
+  'const key=()=>new KeyboardEvent("keyup",{key:"ArrowRight",bubbles:true});',
   'child.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowRight",bubbles:true}));',
-  'setTimeout(()=>{child.dispatchEvent(new KeyboardEvent("keyup",{key:"ArrowRight",bubbles:true}));',
-  'const after=child.__STATE__?.().x;',
-  'document.body.dataset.moved=(Number.isFinite(before)&&Number.isFinite(after)&&after>before+.05)?"yes":"no";',
-  '},850);',
+  'function verifyMove(){const after=child.__STATE__?.().x;',
+  'if(Number.isFinite(before)&&Number.isFinite(after)&&after>before+.05){',
+  'child.dispatchEvent(key());document.body.dataset.moved="yes";return;}',
+  'if(++frames>45){child.dispatchEvent(key());document.body.dataset.moved="no";return;}',
+  'child.requestAnimationFrame(verifyMove);}',
+  'child.requestAnimationFrame(verifyMove);',
   '}},80);',
   '</script></body></html>'
  ].join('');
@@ -71,7 +74,8 @@ try{
   '--disable-web-security','--allow-file-access-from-files',
   '--enable-webgl','--enable-unsafe-swiftshader','--use-gl=angle','--use-angle=swiftshader',
   '--no-first-run','--no-default-browser-check','--hide-scrollbars','--window-size=960,540',
-  '--virtual-time-budget=5500','--screenshot='+screenshot,'--dump-dom',pathToFileURL(probe).href
+  '--user-data-dir='+join(tmp,'profile'),
+  '--virtual-time-budget=7000','--screenshot='+screenshot,'--dump-dom',pathToFileURL(probe).href
  ],{encoding:'utf8',timeout:65000,maxBuffer:4*1024*1024});
  if(proc.error)throw proc.error;
  const html=proc.stdout??'';

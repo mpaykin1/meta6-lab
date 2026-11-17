@@ -44,13 +44,24 @@ button{font-family:Georgia,serif;cursor:pointer;-webkit-tap-highlight-color:tran
 #pips i.on{background:#f2d9a0;box-shadow:0 0 8px #ffd99a99;border-color:#ffe2a6}
 #error{display:none;position:fixed;z-index:10;bottom:20px;left:16px;right:16px;padding:13px;background:#292b31;color:#e9ded0;
   font:12px/1.5 monospace;border:1px solid #7f514a55;border-radius:8px}
+#panel .black-train-logo{position:relative;display:inline-block;margin:0 0 16px;
+ font:bold 29px/1.2 Georgia,serif;letter-spacing:.045em;transform:scaleY(1.15);
+ background:linear-gradient(180deg,#e6e0d5 0%,#aaa5a2 54%,#a91b23 75%,#5c070c 100%);
+ -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+ filter:drop-shadow(0 3px 5px #6b0306)}
+#panel .black-train-logo::after{content:'';position:absolute;left:0;right:0;bottom:-10px;height:4px;
+ background:linear-gradient(90deg,transparent 0%,#7e080e 20%,#cf1520 51%,#7e080e 85%,transparent 100%);
+ box-shadow:0 0 12px #a10614aa}
+#panel .black-train-logo::before{content:'';position:absolute;left:35%;bottom:-25px;width:3px;height:18px;
+ background:#810008;box-shadow:47px -3px 0 -1px #6a0308,-66px 6px 0 0 #8a080f;
+ transform:rotate(4deg)}
 </style>
 <script type="importmap">{"imports":{"three":"../../../reference/ink-fallen-guardian/three.module.js"}}</script>
 </head>
 <body>
 <button id="menu-btn" aria-label="Меню" aria-expanded="false">☰</button>
 <div id="panel" hidden>
-<h1 style="color:#9e2a2b;letter-spacing:.19em;text-shadow:0 1px 14px #9f1b1b44">BLACK TRAIN</h1><p>Ночной перегон</p>
+<h1 class="black-train-logo">BLACK TRAIN</h1><p>Ночной перегон</p>
 <p>Ночь. Вы один у железной дороги, в руке фонарик. В темноте кто-то есть — и он улыбается.</p>
 <p><b>Как выжить:</b> ведите вокруг лучом. Пока оно в свете, оно шипит и уходит в темноту. Как только отвернётесь — оно прыгает ближе, обходя вас со спины. Слушайте: дыхание и шаги звучат с той стороны, где оно.</p>
 <p>Фонарик садится — выключайте его, чтобы зарядить (кольцо на кнопке). Когда идёт поезд, его грохот заглушает шаги, и оно двигается быстрее.</p>

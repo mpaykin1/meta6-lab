@@ -48,11 +48,27 @@ background-image:repeating-linear-gradient(33deg,transparent 0,transparent 13px,
 <button data-id="puddles">Ночь · зеркальные лужи</button>
 <button data-id="whiteClinicBuilding">Ночь · здание клиники</button>
 <button data-id="boatShed">Берег · лодочный сарай</button>
+<button data-id="duskTownLight">Город · акварельные сумерки</button>
+<button data-id="healerWalkWithLight">Ночь · аптекарь с фонарём</button>
+<button data-id="nightRainGrade">Ночь · холодная дождливая дымка</button>
+<button data-id="wetGrassClumps">Ночь · мокрая трава</button>
+<button data-id="boatWake">Берег · пенный след от лодки</button>
+<button data-id="shoreFoamLine">Берег · линия живой пены</button>
+<button data-id="autumnConeTrees">Берег · осенние кроны</button>
+<button data-id="driftingLeaves">Берег · листья на воде</button>
+<button data-id="sandBeachTiles">Берег · рваная кромка песка</button>
+<button data-id="tiltShiftPost">Камера · эффект миниатюры</button>
+<button data-id="dayCoastGrade">День · бирюзовый свет берега</button>
+<button data-id="sndCarEngine">🔊 Звук машины · включить</button>
+<button data-id="sndRainNight">🔊 Звук дождя · включить</button>
+<button data-id="sndRowingShore">🔊 Звук гребли · включить</button>
 <small>Мышь / палец — поворот камеры. Колесо — приближение. Все модели процедурные, принятые INK-модели не изменены.</small>
 </aside><div id="grain"></div>
 <script type="module">
 import * as T from 'three';
 import {makers} from './makers.js';
+import {createHealerAudio} from './sounds.js';
+import {createHealerOptics} from './postfx.js';
 import {car,apothecary,streetlamp,bush,pier} from '../../../reference/ink-fallen-guardian/ink-settlement.js';
 import {rowboat} from '../../../reference/ink-fallen-guardian/ink-extras.js';
 import {traveller,fir} from '../../../reference/ink-fallen-guardian/ink-objects.js';
@@ -118,8 +134,21 @@ const clinic=makers.whiteClinicBuilding(93);clinic.position.set(-.3,0,-3.1);scen
 const shed=makers.boatShed(101);shed.position.set(7.55,0,-3.9);scene.add(shed);
 const assets={carHeadlights:root,handFlashlight:beam,rowingHealer:stroke,rainSplashRings:splashes,
  townRoad:street,roadsideDryShrubs:shrubs,pinkTownBuilding:shop,puddles:pools,whiteClinicBuilding:clinic,boatShed:shed};
+const supplements=[
+ ['duskTownLight',[-5.1,0,-4.1]],['healerWalkWithLight',[-.1,0,2.4]],
+ ['nightRainGrade',[-.45,0,-2.1]],['wetGrassClumps',[-1.4,0,-2.7]],
+ ['boatWake',[6.65,0,1.2]],['shoreFoamLine',[4.0,.015,4.15]],
+ ['sandBeachTiles',[7.8,.015,-4.9]],['autumnConeTrees',[7.8,.07,-5.0]],
+ ['driftingLeaves',[7.6,.03,-2.0]],['tiltShiftPost',[0,0,0]],
+ ['dayCoastGrade',[7.8,0,-4.4]],['sndCarEngine',[-5.2,0,-.6]],
+ ['sndRainNight',[-1.1,0,-2.95]],['sndRowingShore',[6.65,0,1.5]]
+];
+for(const [id,pos] of supplements){
+ const o=makers[id](id.length*21+3);o.position.set(...pos);scene.add(o);assets[id]=o;
+}
 const contexts={carHeadlights:cm,handFlashlight:npc,rowingHealer:boat,rainSplashRings:splashes,
  townRoad:street,roadsideDryShrubs:shrubs,pinkTownBuilding:shop,puddles:pools,whiteClinicBuilding:clinic,boatShed:shed};
+for(const [id] of supplements)contexts[id]=assets[id];
 const places={
  all:[0,0,0,20],carHeadlights:[-5.2,.1,.35,9],handFlashlight:[-.8,.4,1.2,8],
  rowingHealer:[6.3,0,1.2,9],rainSplashRings:[-.75,.2,1.3,9],
@@ -127,9 +156,19 @@ const places={
  pinkTownBuilding:[-5,1.1,-5.2,10],puddles:[-4.5,.1,2.3,8.5],
  whiteClinicBuilding:[-.3,1.2,-3.1,11],boatShed:[7.55,1.15,-3.9,10]
 };
+for(const [id,[x,y,z]] of supplements)places[id]=[x,y+.75,z,9];
+const optics=createHealerOptics(renderer,scene,camera),audio=createHealerAudio();
+const soundIds=new Set(['sndCarEngine','sndRainNight','sndRowingShore']);
 let chosen='all',clock=0,manual=false,frame=0;
 function select(id){
  chosen=id;
+ if(!soundIds.has(id))audio.stop();
+ const night=['nightRainGrade','healerWalkWithLight','wetGrassClumps','puddles','whiteClinicBuilding','sndRainNight','handFlashlight','rainSplashRings'].includes(id);
+ const day=['boatWake','shoreFoamLine','autumnConeTrees','driftingLeaves','sandBeachTiles','dayCoastGrade','rowingHealer','boatShed','sndRowingShore'].includes(id);
+ optics.setMood(day?2:night?1:0);
+ scene.background.set(day?'#ced9c9':night?'#798994':'#d9cab9');
+ scene.fog.color.set(day?'#c7dbce':night?'#7e9096':'#bdc1b5');
+ sun.intensity=night?.56:day?2.4:2.15;
  for(const [key,obj] of Object.entries(assets))obj.visible=id==='all'||id===key;
  for(const [key,obj] of Object.entries(contexts)){
   if(key!=='rainSplashRings')obj.visible=id==='all'||id===key;
@@ -143,7 +182,9 @@ menuButton.addEventListener('click',()=>{
  menu.hidden=!menu.hidden;menuButton.setAttribute('aria-expanded',String(!menu.hidden));
 });
 document.querySelectorAll('#menu button[data-id]').forEach(b=>b.addEventListener('click',()=>{
- select(b.dataset.id);menu.hidden=true;menuButton.setAttribute('aria-expanded','false');
+ select(b.dataset.id);
+ if(soundIds.has(b.dataset.id))audio.play(b.dataset.id);
+ menu.hidden=true;menuButton.setAttribute('aria-expanded','false');
 }));
 let dragging=false,lastX=0,lastY=0;
 renderer.domElement.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;renderer.domElement.setPointerCapture(e.pointerId);});
@@ -156,7 +197,7 @@ renderer.domElement.addEventListener('pointerup',()=>{dragging=false;});
 renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();zoom=T.MathUtils.clamp(zoom+e.deltaY*.0015,.55,2.1);if(manual)draw();},{passive:false});
 function resize(){
  const w=window.innerWidth,h=window.innerHeight,asp=w/h;
- renderer.setSize(w,h,false);
+ renderer.setSize(w,h,false);optics.resize(w,h);
  const y=camDistance*.58*zoom,x=y*asp;
  camera.left=-x;camera.right=x;camera.top=y;camera.bottom=-y;
  camera.updateProjectionMatrix();
@@ -166,7 +207,7 @@ function draw(){
  const r=camDistance*.92*zoom;
  camera.position.set(camTarget.x+r*Math.sin(camAz)*Math.cos(camAlt),
  camTarget.y+r*Math.sin(camAlt),camTarget.z+r*Math.cos(camAz)*Math.cos(camAlt));
- camera.lookAt(camTarget);renderer.render(scene,camera);
+ camera.lookAt(camTarget);optics.render(clock);
 }
 function animate(ts){
  if(manual)return;

@@ -1,11 +1,16 @@
 import * as T from '../../../reference/ink-fallen-guardian/three.module.js';
+import {createCreatures} from './creatures.js';
 
 const source='../../../reference/vorona-v-tumane/';
 const ids=[
  ['crow','Ворона'],['stalker','Существо'],['forest_far','Дальний лес'],
  ['forest_mid','Средний лес'],['forest_near','Ближний лес'],['fog_ribbons','Туман'],
  ['feather','Перо ускорения'],['firefly','Светлячок'],['nest','Гнездо'],
- ['impact_feathers','Перья при ударе'],['raindrops','Дождь'],['glowing_eyes','Глаза в тумане']
+ ['impact_feathers','Перья при ударе'],['raindrops','Дождь'],['glowing_eyes','Глаза в тумане'],
+ ['crow_wings','Шарнирные крылья'],['crow_tail','Хвост и лапы'],['stalker_limbs','Лапы существа'],
+ ['mist_antler','Олень из тумана'],['bell_crawler','Ползун с колоколом'],
+ ['hollow_sentinel','Пустоглазый часовой'],['ash_heron','Пепельная цапля'],
+ ['silver_moth','Серебряный мотылёк'],['moth_swarm','Стая мотыльков']
 ];
 const world=new T.Scene();
 world.background=new T.Color('#202a32');
@@ -160,6 +165,7 @@ function buildCrowCutout(img){
   joint.add(mesh);parent.add(joint);parts[part.id]=joint;
  }
  crowJoints.parts=parts;crowJoints.ready=true;bird.visible=false;
+ objects.crow_wings=parts.wingL_root;objects.crow_tail=parts.tail;
  return true;
 }
 const crowImg=new Image();
@@ -230,6 +236,7 @@ function buildCutoutRig(){
   group.add(mesh);parent.add(group);groups[part.id]=group;
  }
  joints.parts=groups;joints.root=rootJoint;joints.ready=true;
+ objects.stalker_limbs=groups.armL_upper;
  creature.visible=false;return true;
 }
 gif.addEventListener('load',buildCutoutRig,{once:true});
@@ -320,6 +327,8 @@ for(let i=0;i<7;i++){
   eyeGroup.add(eye);
  }
 }
+const wildlife=createCreatures({T,world,svgMap,rand});
+Object.assign(objects,wildlife.objects);
 const nestAura=sprite(lightSvg,4.2,2.6,-13,-3.55,5.1);
 nestAura.material.opacity=.13;nestedAuraSafe();
 function nestedAuraSafe(){nestAura.visible=true;}
@@ -361,6 +370,7 @@ mobile('left','arrowleft');mobile('right','arrowright');mobile('up','arrowup');
 function draw(){
  requestAnimationFrame(draw);
  const dt=Math.min(clock.getDelta(),.045),t=state.time+=dt;
+ wildlife.tick(t,dt);
  let dx=(keys.has('d')||keys.has('arrowright')?1:0)-(keys.has('a')||keys.has('arrowleft')?1:0);
  let dy=(keys.has('w')||keys.has('arrowup')||keys.has(' ')?1:0)-
         (keys.has('s')||keys.has('arrowdown')?1:0);

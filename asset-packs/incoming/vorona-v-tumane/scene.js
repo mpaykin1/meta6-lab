@@ -27,6 +27,7 @@ const clock=new T.Clock(),load=new T.TextureLoader();
 const objects=Object.create(null),keys=new Set();
 const sound=createSoundscape();
 const state={x:-5,y:1,face:1,time:0,boost:0,light:0,aim:null,focus:null,checkpoint:-5,hit:0};
+window.__STATE__=()=>({x:state.x,y:state.y,cam:[camera.position.x,camera.position.y,camera.position.z]});
 function resize(){
  const w=innerWidth,h=innerHeight,span=29;
  camera.left=-span/2;camera.right=span/2;camera.top=span*h/w/2;camera.bottom=-camera.top;

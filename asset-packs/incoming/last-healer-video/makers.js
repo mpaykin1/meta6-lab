@@ -740,7 +740,7 @@ function autumnConeTrees(seed=73){
     const seedDrop=ball(parent,.038,foliage[(i+j+k)%5],
       Math.cos(th)*a*.8,h*(.25+j*.23),Math.sin(th)*a*.8,
       1,.36,1.45);
-    leaves.push({o:seedDrop,phase:r()*3.7+i*.3});
+    leaves.push({o:seedDrop,phase:r()*3.7+i*.3,baseY:seedDrop.position.y});
    }
   }
   // Bark with non-repeating hand-drawn protrusions.
@@ -756,8 +756,8 @@ function autumnConeTrees(seed=73){
    o.rotation.z=.025*Math.sin(t*.58-phase);
    o.rotation.x=.016*Math.sin(t*.50-phase-.40);
   });
-  leaves.forEach(({o,phase},i)=>{
-   o.position.y+=.0004*Math.sin(t*.8+phase); // discreet leaf shiver
+  leaves.forEach(({o,phase,baseY},i)=>{
+   o.position.y=baseY+.025*Math.sin(t*.8+phase); // deterministic leaf shiver
    o.rotation.y=.08*Math.sin(t*.48-phase);
   });
  };
@@ -927,7 +927,7 @@ function dayCoastGrade(seed=101){
   const plane=mesh(g,new T.PlaneGeometry(.15+r()*.15,1+r()*.6),coral.clone(),
     (r()-.5)*3.4,1.3+r()*.4,(r()-.5)*3);
   plane.rotation.y=r()*PI;plane.userData.watercolorOutline=false;
-  rays.push({o:plane,phase:r()*6.28});
+  rays.push({o:plane,x:plane.position.x,phase:r()*6.28});
  }
  g.userData.footprint=0;
  g.userData.tick=t=>{
@@ -935,8 +935,8 @@ function dayCoastGrade(seed=101){
    o.position.z=z+.07*Math.sin(t*.5+phase);
    o.scale.x=.55+.45*Math.abs(Math.cos(t*.46+phase));
   });
-  rays.forEach(({o,phase})=>{
-   o.position.x+=.0002*Math.sin(t*.4+phase);
+  rays.forEach(({o,x,phase})=>{
+   o.position.x=x+.07*Math.sin(t*.4+phase);
    o.rotation.y=.04*Math.sin(t*.2+phase);
   });
  };

@@ -124,6 +124,10 @@ export async function main(){
  pr=resolution.pr;
  const checks=await api('/commits/'+pr.head.sha+'/check-runs?per_page=100');
  const statuses=await api('/commits/'+pr.head.sha+'/status');
+ if(!Array.isArray(checks.check_runs)||!Number.isSafeInteger(checks.total_count)||checks.total_count!==checks.check_runs.length){
+  throw Error('нет данных: неполный список check-runs для '+pr.head.sha+' (пагинация или ответ API)');
+ }
+ if(!Array.isArray(statuses.statuses))throw Error('нет данных: неполный combined status для '+pr.head.sha);
  const failed=checks.check_runs.filter(x=>['failure','timed_out','action_required'].includes(x.conclusion)).map(x=>({name:x.name,url:x.html_url}));
  failed.push(...statuses.statuses.filter(x=>['failure','error'].includes(x.state)).map(x=>({name:x.context,url:x.target_url})));
  const conflict=resolution.conflict===true,conflictUnknown=resolution.conflict===null;

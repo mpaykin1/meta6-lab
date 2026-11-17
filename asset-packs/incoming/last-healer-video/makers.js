@@ -174,4 +174,65 @@ export function rainSplashRings(seed=1){
  };
  return finish(g,0);
 }
-export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings};
+
+export function townRoad(seed=1){
+ // Земля по краю всегда неровная; разметка выцвела и не повторяется плиткой.
+ const random=rand(seed),g=new T.Group();g.name='Старая городская дорога';
+ const asphalt=new T.MeshStandardMaterial({color:'#666d69',roughness:.92});
+ const rim=new T.MeshStandardMaterial({color:'#9c9b8e',roughness:1});
+ const sand=new T.MeshStandardMaterial({color:'#918872',roughness:1});
+ const line=new T.MeshStandardMaterial({color:'#b8b1a1',roughness:1});
+ block(g,5.6,.11,1.8,asphalt,0,.018,0);
+ block(g,1.8,.11,5.6,asphalt,0,.019,0);
+ for(const sign of [-1,1])for(let i=0;i<7;i++){
+  const x=-2.55+i*.85;
+  if(Math.abs(x)<1.1)continue;
+  const piece=block(g,.72,.15,.19,rim,x,.09,sign*1.02);
+  piece.rotation.y=(random()-.5)*.055;
+  if(i%3===0)block(g,.16,.025,.15,sand,x+.19,.175,sign*1.02);
+ }
+ for(let i=0;i<17;i++){
+  const x=(random()-.5)*5.15,z=(random()-.5)*1.55;
+  rod(g,[x,.082,z],[x+(random()-.5)*.45,.082,z+(random()-.5)*.19],.007,pigment.steel,.002);
+ }
+ for(let i=0;i<10;i++){
+  const a=i/10*Math.PI*2,rr=2.4+random()*.55;
+  const x=Math.cos(a)*rr,z=Math.sin(a)*rr*.7;
+  const stone=part(g,new T.DodecahedronGeometry(.06+random()*.12,0),i%2?sand:rim,x,.038,z);
+  stone.scale.set(1,.40,1.2);
+ }
+ for(let i=0;i<7;i++){
+  const z=-2.4+i*.76;
+  if(Math.abs(z)<1.0)continue;
+  const d=block(g,.09,.013,.35,line,.1,.083,z);
+  d.rotation.y=(random()-.5)*.06;
+ }
+ g.userData.surface={walkable:true,speed:1,wetGrip:.65};
+ return finish(g,0);
+}
+export function wetGrassClumps(seed=1){
+ // У каждого растения отдельный корень, форма и фаза движения.
+ const random=rand(seed),g=new T.Group();g.name='Пучки мокрой травы';
+ const stems=[];
+ for(let c=0;c<7;c++){
+  const plant=new T.Group();plant.position.set((random()-.5)*2.65,0,(random()-.5)*1.4);g.add(plant);stems.push(plant);
+  const leaves=7+c%3;
+  for(let i=0;i<leaves;i++){
+   const a=2*Math.PI*i/leaves+(random()-.5)*.35,h=.37+random()*.65;
+   const ux=Math.cos(a),uz=Math.sin(a);
+   const shape=new T.Shape();shape.moveTo(-.023,0);shape.quadraticCurveTo(-.11,h*.42,-.045,h*.72);
+   shape.quadraticCurveTo(-.01,h*.92,0,h);shape.quadraticCurveTo(.08,h*.76,.07,h*.37);shape.lineTo(.027,0);shape.closePath();
+   const leaf=part(plant,new T.ExtrudeGeometry(shape,{depth:.015,bevelEnabled:false,steps:1}),i%3?pigment.iron:pigment.coat,.06*ux,0,.06*uz);
+   leaf.rotation.y=a+.4;leaf.rotation.z=.1*(random()-.5);
+   if(i%3===0){
+    const dew=part(plant,new T.IcosahedronGeometry(.019,0),pigment.paper,ux*.22,h*.45,uz*.22);
+    dew.userData.watercolorOutline=false;
+   }
+  }
+  for(let k=0;k<3;k++)part(plant,new T.DodecahedronGeometry(.045+random()*.02,0),pigment.wood,(random()-.5)*.20,.02,(random()-.5)*.20);
+ }
+ g.userData.tick=t=>stems.forEach((p,i)=>{p.rotation.z=.048*Math.sin(t*.61-i*.32);p.rotation.x=.034*Math.sin(t*.48+i*.52);});
+ return finish(g,0);
+}
+
+export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,wetGrassClumps};

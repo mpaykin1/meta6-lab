@@ -19,6 +19,8 @@ HERE = Path(__file__).resolve().parent
 REPO = Path(os.environ.get("ASSET_CHECK_REPO") or HERE.parents[2])  # мутант-прогон копирует бота во временную папку
 HARNESS = HERE / "ink_harness.mjs"
 DEFAULT_BASE = "reference/ink-fallen-guardian"
+NIGHT_BASE = "reference/ink-night-scream"
+THREE_FALLBACK = "reference/ink-fallen-guardian/three.module.js"  # shared approved renderer, not a change to either reference
 ROLES = {"tree", "plant", "rock", "prop", "building", "landmark", "creature", "character", "vehicle",
          "pickup", "interactive", "effect", "ground"}
 VARY = {"tree", "plant", "rock", "ground"}             # БЕЗ ПОВТОРОВ: каждый seed — своя форма
@@ -58,7 +60,8 @@ def run_harness(base: Path, makers: Path):
     node = shutil.which("node")
     if not node:
         return None, "нет node — бот не может прогнать ассеты INK"
-    p = subprocess.run([node, str(HARNESS), str(base), str(makers)], capture_output=True, text=True, timeout=300)
+    three = REPO / THREE_FALLBACK if base == REPO / NIGHT_BASE else base / "three.module.js"
+    p = subprocess.run([node, str(HARNESS), str(base), str(makers), str(three)], capture_output=True, text=True, timeout=300)
     try:
         return json.loads(p.stdout), None
     except Exception:  # noqa
@@ -72,6 +75,10 @@ def reference_names(base: Path):
         if p.exists():
             names |= set(re.findall(r"export function (\w+)", p.read_text("utf-8")))
             names |= set(re.findall(r"^\s{2}(\w+): '", p.read_text("utf-8"), re.M))
+    if base == REPO / NIGHT_BASE:
+        for p in (base / "src/ink-night-train.js", base / "src/scene.js"):
+            if p.exists():
+                names |= set(re.findall(r"(?:export )?function (\w+)\(", p.read_text("utf-8")))
     return names | {"robot"}
 
 
@@ -85,9 +92,25 @@ def baseline(base: Path):
         return _BASELINE[key]
     import tempfile
     tmp = Path(tempfile.mkdtemp()) / "ref_makers.js"
-    tmp.write_text("import {objectMakers} from './ink-objects.js';\nimport {extraObjectMakers} from './ink-extras.js';\n"
-                   "import {settlementMakers} from './ink-settlement.js';\n"
-                   "export const makers = {...objectMakers, ...extraObjectMakers, ...settlementMakers};\n", "utf-8")
+    if base == REPO / NIGHT_BASE:
+        # Calibrate to actual accepted tree and train geometry from this game, not the unrelated bright valley.
+        scene = (base / "src/scene.js").read_text("utf-8")
+        tree = re.search(r"function deadTree\\(height,seed\\)\\{[\\s\\S]+?\\n\\}", scene)
+        if not tree:
+            _BASELINE[key] = None
+            shutil.rmtree(tmp.parent, ignore_errors=True)
+            return None
+        tmp.write_text("import * as T from 'three';\\n"
+                       "import {createInkNightTrain} from './src/ink-night-train.js';\\n"
+                       "const rnd=i=>{const f=Math.sin(i*127.1+39.4)*43758.5453;return f-Math.floor(f);};\\n"
+                       "const bark=new T.MeshStandardMaterial({color:'#2b3134',roughness:.95});\\n"
+                       + tree.group() + "\\n"
+                       "export const makers={nightTree:seed=>deadTree(4.8,seed),"
+                       "nightTrain:seed=>createInkNightTrain({cars:0,seed})};\\n", "utf-8")
+    else:
+        tmp.write_text("import {objectMakers} from './ink-objects.js';\\nimport {extraObjectMakers} from './ink-extras.js';\\n"
+                       "import {settlementMakers} from './ink-settlement.js';\\n"
+                       "export const makers = {...objectMakers, ...extraObjectMakers, ...settlementMakers};\\n", "utf-8")
     data, _ = run_harness(base, tmp)
     shutil.rmtree(tmp.parent, ignore_errors=True)
     ok = [m for m in (data or {}).get("makers", {}).values() if not m.get("error")]
@@ -97,6 +120,15 @@ def baseline(base: Path):
     def p10(xs):
         xs = sorted(xs)
         return xs[max(0, int(len(xs) * .1) - 1)]
+    if base == REPO / NIGHT_BASE:
+        metrics = (data or {}).get("makers", {})
+        if not all(k in metrics and not metrics[k].get("error") for k in ("nightTree", "nightTrain")):
+            _BASELINE[key] = None
+            return None
+        _BASELINE[key] = {role: {"tris": metrics[k]["tris"], "meshes": metrics[k]["meshes"]}
+                          for role, k in (("tree", "nightTree"), ("vehicle", "nightTrain"))}
+        _BASELINE[key]["n"] = 2
+        return _BASELINE[key]
     _BASELINE[key] = {"tris": p10([m["tris"] for m in ok]), "meshes": p10([m["meshes"] for m in ok]), "n": len(ok)}
     return _BASELINE[key]
 
@@ -105,7 +137,8 @@ def check(root: Path, r) -> set:
     pj = json.loads((root / "pack.json").read_text("utf-8"))
     covered = {"pack.json", "makers.js", "README.md"}
     base = (REPO / pj.get("base", DEFAULT_BASE)).resolve()
-    if not (base / "three.module.js").exists():
+    valid_three = (base / "three.module.js").exists() or (base == REPO / NIGHT_BASE and (REPO / THREE_FALLBACK).exists())
+    if not valid_three or (base == REPO / NIGHT_BASE and not (base / "src/ink-night-train.js").exists()):
         r.add("IK1", "HARD", "pack.json", f"эталон INK не найден: {pj.get('base', DEFAULT_BASE)}",
               f'"base": "{DEFAULT_BASE}" — папка эталона в meta6-lab')
         return covered
@@ -175,9 +208,10 @@ def check(root: Path, r) -> set:
             r.add("IK7", "HARD", name, f"{m['meshes']} отдельных мешей — тормоза на телефоне", "Объедини меши (batchInk эталона)")
         elif m["meshes"] > 80:
             r.add("IK7", "SOFT", name, f"{m['meshes']} мешей", "Объедини мелкие детали")
-        if bar and role not in ("effect", "ground") and m["tris"] < bar["tris"] and m["meshes"] < bar["meshes"]:
+        ref = bar.get("vehicle" if role == "vehicle" else "tree") if bar and base == REPO / NIGHT_BASE else bar
+        if ref and role not in ("effect", "ground") and m["tris"] < ref["tris"] and m["meshes"] < ref["meshes"]:
             r.add("IK15", "HARD", name, f"проще эталона: {m['tris']} треуг., {m['meshes']} частей "
-                  f"(самые простые принятые ассеты — от {bar['tris']} треуг. и {bar['meshes']} частей)",
+                  f"(эталон роли — от {ref['tris']} треуг. и {ref['meshes']} частей)",
                   "Добавь деталей: форма, второстепенные части, мазки — не хуже принятых ассетов игры")
         if m["ms"] > 300:
             r.add("IK8", "HARD", name, f"создание {m['ms']} мс", "Ассет строится ≤ 50 мс")
@@ -188,7 +222,8 @@ def check(root: Path, r) -> set:
             continue
         size = [m["max"][i] - m["min"][i] for i in range(3)]
         top = max(size)
-        if top > SIZE_MAX.get(role, 7.0):
+        role_max = 12.0 if base == REPO / NIGHT_BASE and role == "vehicle" else SIZE_MAX.get(role, 7.0)
+        if top > role_max:
             r.add("IK9", "HARD", name, f"размер {top:.1f} м — несоразмерно (путник 1.6 м)", "Единица = метр; путник ≈ 1.6 м")
         if top < 0.12:
             r.add("IK9", "HARD", name, f"размер {top:.2f} м — не видно", "Сделай крупнее (путник ≈ 1.6 м)")

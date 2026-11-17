@@ -297,19 +297,19 @@ function roadsideDryShrubs(seed=6){
  const r=random(seed),g=new T.Group(),stem=pigment('#736b59'),tip=pigment('#bd7c69'),
        dry=pigment('#c5ac69'),clumps=[];
  g.name='Колючие кусты · семь разных силуэтов';
- for(let i=0;i<7;i++){
-  const b=new T.Group();b.position.set((i-3)*.52+(r()-.5)*.17,0,(r()-.5)*.8);
+ for(let i=0;i<6;i++){
+  const b=new T.Group();b.position.set((i-2.5)*.52+(r()-.5)*.17,0,(r()-.5)*.8);
   g.add(b);clumps.push(b);
   let H=.40+r()*.65;
   rod(b,[0,0,0],[(r()-.5)*.10,H,0],.036,stem,.017);
-  for(let k=0;k<7;k++){
-   const a=(k/7)*PI*2+r()*.4,R=.28+r()*.35;
+  for(let k=0;k<5;k++){
+   const a=(k/5)*PI*2+r()*.4,R=.28+r()*.35;
    const x=Math.cos(a)*R,z=Math.sin(a)*R,y=H*(.55+r()*.45);
    rod(b,[0,.08,0],[x*.6,y*.6,z*.55],.019,stem,.008);
    rod(b,[x*.6,y*.6,z*.55],[x,y,z],.009,stem,.002);
    const leaf=ball(b,.08,k%3?dry:tip,x,y,z,.45,1.15,.37);
    leaf.rotation.y=a;
-   for(let v=0;v<2;v++)
+   for(let v=0;v<1;v++)
     rod(b,[x*.7,y*.8,z*.7],[x*(.83+v*.12),y*(.91+v*.12),z*(.94+v*.10)],.007,stem,.002);
   }
  }
@@ -531,7 +531,7 @@ function wetGrassClumps(seed=14){
  g.name='Мокрая трава и агавы · задержка по листьям';
  for(let i=0;i<6;i++){
   const stalk=new T.Group();stalk.position.set((r()-.5)*3.2,0,(r()-.5)*2.7);g.add(stalk);sway.push(stalk);
-  const count=6+Math.floor(r()*2);
+  const count=5;
   for(let j=0;j<count;j++){
    const a=j*2*PI/count,reach=.2+r()*.3,H=.3+r()*.57;
    const x=Math.cos(a)*reach,z=Math.sin(a)*reach;

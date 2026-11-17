@@ -1,19 +1,14 @@
 # The Last Healer · видео-ассеты INK
 
-Заказ: [24 позиции](../../asset-packs/incoming/last-healer-video/ZAKAZ.json). Эталон и существующие ассеты не изменять.
+Заказ: [24 позиции](../../asset-packs/incoming/last-healer-video/ZAKAZ.json). Принятые эталоны INK и исходная игра не изменялись.
 
-## 2026-11-17 · партия 1
-- [x] carHeadlights: две пары настоящих фонарных линз, мягкие световые полосы по дороге, задние красные огни; создано в [9803803](https://github.com/mpaykin1/meta6-lab/commit/9803803ae9e9e143c4ed40d86aae09ea951e1f48).
-- [x] handFlashlight: металлический фонарик с кнопкой, тёплым конусом и пылью; свет можно включать и выключать.
-- [x] rowingHealer: отдельная кинематическая фигура аптекаря, шарнирные руки, два весла, запаздывающая фаза гребка; готовая лодка не заменена.
-- [x] rainSplashRings: капли, падающие полосы и независимо исчезающие кольца с разными фазами.
-- [x] [index.html](../../asset-packs/incoming/last-healer-video/index.html) — просмотр трёх сцен, меню ☰, вращение камеры, изоляция ассетов; [5d983bb](https://github.com/mpaykin1/meta6-lab/commit/5d983bbe2e72d343718ec4acce993be3a2a30da6).
+## 17.11.2026
+- [x] 21 процедурный 3D/GLSL ассет: carHeadlights, townRoad, roadsideDryShrubs, pinkTownBuilding, duskTownLight, handFlashlight, healerWalkWithLight, rainSplashRings, puddles, whiteClinicBuilding, nightRainGrade, wetGrassClumps, rowingHealer, boatWake, shoreFoamLine, autumnConeTrees, boatShed, driftingLeaves, sandBeachTiles, tiltShiftPost, dayCoastGrade.
+- [x] 3 WAV звука: sndCarEngine, sndRainNight, sndRowingShore; переключение звука в игровом меню.
+- [x] [Анимированная сцена](../../asset-packs/incoming/last-healer-video/index.html): все 21 INK-ассета, город / ночь / морской берег, камера и GPU tilt-shift, предпросмотр оригинальных car/rowboat/pier.
+- [x] Фары ориентированы в сторону принятой машины (+Z); гребец соприкасается с водой; для wetGrassClumps уменьшена сложность геометрии.
+- [ ] Визуальная пара с видео в `_check/compare.png` и ручная оценка.
+- [ ] Финальный ASSET CHECK: HARD=0 на актуальном HEAD (ранние артефакты были на неполном заказе, не являются подтверждением).
+- [ ] Live Pages HTTP 200 для точной страницы сцены; только после этого давать URL игры.
 
-- [x] townRoad: перекрёсток с трещинами, неровными краями, бордюрами и разметкой; [d9968b8](https://github.com/mpaykin1/meta6-lab/commit/d9968b8618b6d8efc69494281d8c14ca3c4a339e).
-- [x] wetGrassClumps: разнообразные мокрые пучки травы, отдельные листья с волной ветра, капли; [d9968b8](https://github.com/mpaykin1/meta6-lab/commit/d9968b8618b6d8efc69494281d8c14ca3c4a339e).
-- [x] Превью теперь использует исходную INK-лодку вместо временного примитива; фары согласованы с передней осью исходной машины; [66590c3](https://github.com/mpaykin1/meta6-lab/commit/66590c37b1aa28f6b8f41120530654fce7ca18aa).
-- [ ] Подтвердить визуально каждый ассет против кадров из `zakaz/frames/` и создать `_check/compare.png`.
-- [ ] Дождаться настоящего результата ASSET CHECK для HEAD ветки, исправить ошибки.
-- [ ] Сделать остальные 18 позиций ЗАКАЗА, прогнать HARD 0, добавить в копию игры, опубликовать только после HTTP 200.
-
-Счёт: 6 реализованы из 24; 0 потерянных. Не заявляется HARD 0 до отчёта бота.
+Счёт: **24 реализованы из 24**; качество и публикация пока не подтверждены. PR [#392](https://github.com/mpaykin1/meta6-lab/pull/392) — draft до выполнения блокеров.

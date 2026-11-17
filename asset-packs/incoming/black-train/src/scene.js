@@ -146,10 +146,6 @@ placeAsset('swampPuddles',93,-9.3,0,-8.8);
 placeAsset('crossingBell',95,5.3,0,-5.6);
 placeAsset('chainsClank',97,-8.6,0,-13.3);
 
-const blackEngine=makers.blackLocomotive(101);
-train.userData.painted.add(blackEngine);
-assetGroups.blackLocomotive=[blackEngine];
-let blackTurn=true;train.userData.rig.loco.visible=false;blackEngine.visible=true;
 const crossingSounds=createCrossingSounds();
 function advanceNightAssets(dt){
  for(const item of livingAssets)if(item.visible)item.userData.tick(elapsed,dt);
@@ -348,7 +344,7 @@ let trainLoud=0,trainDist=9999;
 function updateTrain(dt){
   if(!TR.active){
     TR.timer-=dt;
-    if(TR.timer<=0){TR.active=true;TR.x=-760;TR.horn=false;blackTurn=!blackTurn;blackEngine.visible=blackTurn;train.userData.rig.loco.visible=!blackTurn;}
+    if(TR.timer<=0){TR.active=true;TR.x=-760;TR.horn=false;}
     trainLoud=0;trainDist=9999;return;
   }
   TR.x+=TRAIN_SPEED*dt;train.position.x=TR.x;
@@ -479,7 +475,7 @@ function animate(ms){
 requestAnimationFrame(animate);
 document.addEventListener('visibilitychange',()=>audio.suspend(document.hidden||menuOpen));
 // hooks for automatic checks (bot-tester)
-window.__BLACK_TRAIN_PACK__={assets:assetGroups,setHidden:(id,on)=>{for(const m of assetGroups[id]||[])m.visible=!on;},blackEngine};
+window.__BLACK_TRAIN_PACK__={assets:assetGroups,setHidden:(id,on)=>{for(const m of assetGroups[id]||[])m.visible=!on;}};
 window.__INK_NIGHT_SCREAM__={
   ready:true,scene,camera,monster,train,
   start:()=>startNight(1),

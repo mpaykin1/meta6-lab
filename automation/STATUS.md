@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T02:49:55.415Z | МГЛ: 654a00b7ee9ef729974161f48ce621a696c75a62 | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44005741384
+UTC: 2026-11-17T02:53:25.756Z | МГЛ: 6d671148454afcc3042298e21d67e1364bfda1ea | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44006156869
 ## ПРОВЕРИТЬ CLAUDE
 - PR #346 9f247be3a3530d160f629f531f32eb6469a07bc1: scripts/status/mutate-canonical-finish.mjs, scripts/status/selftest.mjs
 - PR #311 fb708269aa165d43dea7a1b3204157a235087afd: automation/asset-check/test_mutation_runner.py, automation/asset-check/test_zip_safety.py, scripts/platform/mutate-bot-config.mjs, scripts/platform/verify-meta-bot-config-candidate.mjs, scripts/repair-bot/mutat… (сокращено)
@@ -17,7 +17,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44004529206)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44005288541)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -36,7 +36,7 @@ L4 — не готов: НЕТ в таблице FINISH
 #350 Единая инструкция пяти автозадач и журнал NADZOR | bf240a699201aa2d8b9594c989ec34de47c37170
 ещё 65: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2604 коммитов | нет данных
+МГЛ: 2606 коммитов | нет данных
 МГ: 40 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

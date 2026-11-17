@@ -135,4 +135,8 @@ def check(root: Path, report) -> set[str]:
         script = root / "gothic-city.js"
         if script.is_file():
             covered.add("gothic-city.js")
+            script_source = script.read_text("utf-8")
+            if "__ISOLATE__" not in script_source:
+                report.add("SS11", "HARD", "gothic-city.js", "Нет управляемой изоляции ассета",
+                           "Добавь window.__ISOLATE__(id, on), чтобы сравнивать пиксели ассета отдельно")
     return covered

@@ -40,7 +40,7 @@ def fixture(tmp, mode="good", n=14):
         im = im[:, :-1]
     Image.fromarray(im, "RGBA").save(root / "stacks" / "tower.png")
     (root / "index.html").write_text('<script src="./gothic-city.js"></script>', "utf-8")
-    (root / "gothic-city.js").write_text("window.GothicCity={};", "utf-8")
+    (root / "gothic-city.js").write_text("window.__ISOLATE__=(id,on)=>!!on;window.GothicCity={};", "utf-8")
     manifest = dict(COMMON, format="mg-spritestack/1", game="test",
                     assets={"tower": {"file": "stacks/tower.png", "slice": [16,16],
                                       "count": n, "pitch_px": 1, "role": "landmark",
@@ -96,6 +96,12 @@ class SpriteStackTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root=fixture(tmp)
             (root/"index.html").write_text("No render", "utf-8")
+            self.assertIn("SS11", hard(root))
+
+    def test_missing_asset_isolation_hook(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = fixture(tmp)
+            (root / "gothic-city.js").write_text("window.GothicCity={};", "utf-8")
             self.assertIn("SS11", hard(root))
 
     def test_unsafe_path(self):

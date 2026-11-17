@@ -11,4 +11,4 @@
 | 2026-11-16 | 2.4.0 | ЗАКАЗ ПО ВИДЕО (ядро) | Z1–Z7 | 5 (всего 67) | 35/35 | — | прогон ASSET CHECK этого PR |
 | 2026-11-16 | 2.5.0 | — | ЗАКАЗ без видео (owner/text/game/sketch) | 4 (всего 71) | 36/36 | — | прогон ASSET CHECK этого PR |
 
-| 2026-11-17 | 2.6.0 | spritestack | SS1–SS11: PNG-срезы, объём, фактура, альфа, игра | 11 | 7 новых мутантов | nebesny-pilot-gotika: PNG 19/19, audio 2/2, всего 21/21 | [PR #367](https://github.com/mpaykin1/meta6-lab/pull/367) |
+| 2026-11-17 | 2.6.0 | spritestack | SS1–SS11: PNG-срезы, объём, фактура, альфа, игра | 12 | 8 новых мутантов | nebesny-pilot-gotika: PNG 19/19, audio 2/2, всего 21/21 | [PR #367](https://github.com/mpaykin1/meta6-lab/pull/367) |

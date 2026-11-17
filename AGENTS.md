@@ -1,6 +1,9 @@
 ## ВСЁ НА GITHUB (правило владельца, 17.11.2026)
 Любая новая система, бот, промпт, правило или договорённость по МГ/МГЛ — сразу сюда: карточка `automation/zadachi/Z…` или правка GPT.md; правило — в AGENTS.md МГ и МГЛ. Отдельных систем, расписаний и автопроверок вне GitHub не заводить. У Claude только одна автопроверка — суточная (`automation/prompts/CLAUDE_SUTOCHNYJ.md`). Перед каждым прямым пушем в main Claude запускает `scripts/claude/pre-push.sh`; прогон `KONTUR main` ловит поломки прямых пушей сразу.
 
+## ЭТАЛОНЫ — один каталог (17.11.2026)
+Все эталоны МГЛ одним списком: [ETALONY.md](ETALONY.md) (собирается `scripts/lab/build-etalony-catalog.py`, полноту ловит `verify-etalony-catalog`). Остальные документы про эталоны ссылаются на него.
+
 ## INK 3D — система создания моделей (17.11.2026)
 Модели и миры в стиле INK — по карточке [Z21](automation/zadachi/Z21_INK_3D.md): стандарт [ink.md](ink.md), рецепт [RECEPT_INK_MIR.md](rules/01-stil-i-grafika/RECEPT_INK_MIR.md), [БЕЗ ПАТТЕРНОВ](rules/01-stil-i-grafika/BEZ_PATTERNOV.md), шаблон [shared/ink/ink-template.js](shared/ink/ink-template.js). Рендер для новых работ — только из `reference/ink-fallen-guardian/shared/`.
 

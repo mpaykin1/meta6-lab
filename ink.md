@@ -1,5 +1,7 @@
 # INK — эталон живой акварели (OWNER PASS, 11.11.2026)
 
+Все эталоны (INK и остальные) одним списком: [ETALONY.md](ETALONY.md).
+
 ## Система создания 3D-моделей INK — с чего начинать
 Задача для ChatGPT: [automation/zadachi/Z21_INK_3D.md](automation/zadachi/Z21_INK_3D.md). Главные документы (в main):
 1. этот файл — стандарт INK;

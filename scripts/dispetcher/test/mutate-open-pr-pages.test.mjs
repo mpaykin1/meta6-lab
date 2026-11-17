@@ -72,3 +72,14 @@ test('legacy callers read through empty page and never trust missing second page
  await assert.rejects(()=>listOpenPullRequests(async()=>{count++;if(count===1)return [pr(1)];throw Error('HTTP 429');}),/429/);
  assert.equal(count,2);
 });
+
+
+test('duplicate PR across page boundary fails closed', async () => {
+ const first=Array.from({length:100},(_,i)=>pr(i+1));
+ let calls=0;
+ await assert.rejects(() => listOpenPullRequests(async () => {
+  calls++;
+  return calls===1?first:[pr(100)];
+ },{stopOnShortPage:true}), /повтор страницы/);
+ assert.equal(calls,2);
+});

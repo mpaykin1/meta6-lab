@@ -1,13 +1,12 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T10:48:02.091Z | МГЛ: 894a85831a9374e805753b71b0c4faa9f27d6bd7 | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44068021391
+UTC: 2026-11-17T11:13:06.329Z | МГЛ: 5c1c377591cf670c6a9676ae5d9e6e60be9e227c | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44071800165
 ## ПРОВЕРИТЬ CLAUDE
 - PR #382 7c56b01e1a323254a1d850d50bd373364a079c7d: automation/asset-check/test_kinds.py
 - PR #362 51f2ef012ec9cf31d0d68c83ba02fac0951974b7: automation/asset-check/test_3d_master.py
 - PR #372 0e5d7893812d336299d041199deda50557a07395: scripts/karta-sil/mutate-current-claude-marker.mjs, scripts/karta-sil/mutate-karta-sil.mjs
 - ещё 38: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/44054411442 | Play all games
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
-- | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/… (сокращено)
+- | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/… (сокращено)
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
 - ещё 6: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
 - | КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |
@@ -35,13 +34,13 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 39 | конфликт: нет данных | слито: 77 | закрыто: 120
+открыто: 42 | конфликт: нет данных | слито: 77 | закрыто: 121
 #361 Z01: корректный подсчёт живых PR без draft | 894a85831a9374e805753b71b0c4faa9f27d6bd7
 #383 BLACK TRAIN: опубликовать игровую сцену с 14 ассетами | 854aa2b15bde75ab4cd6e22a1749a63f69ed9846
 #382 feat(assets): BLACK TRAIN — 14 заказанных ассетов без нового | 7c56b01e1a323254a1d850d50bd373364a079c7d
 ещё 74: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2767 коммитов | нет данных
+МГЛ: 2773 коммитов | нет данных
 МГ: 44 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:25, reference:31, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

@@ -19,3 +19,5 @@ Not published: no verified GitHub Pages 200 yet. STOROZHA PR quota is exceeded
 2026-11-16: Pinned upstream `NOTICE.md` (`bd049df57f92b448b6b106e0fc01fc71cbdb8dd2`) and retained both Sprite Fusion / Hollow Crown attribution and Patch Pixel font exclusion in `shared/components/patch-pixelfx/`. Extended component passport, commercial license registry, generated index, exact-blob guard and tamper mutation (new trap `changed-notice`). Code SHA: `aa433d9aba481e2145bcfa99626aed298e41eeb9`. CI pending; no publication claim.
 
 2026-11-16: Resolved PR #310 merge conflict with safe two-parent merge from `main@2dda99b491fe74aeca06860ebca10ff5bbd3fb1b`; retained all 43 intended Patch files and the single unique `PATCH-FX-01` journal row on top of latest main `OSHIBKI.md`. Merge SHA `0604bf2c8ffb4a244afc1c7d7f5f34dd4be8c548`. Verified GitHub PR `mergeable=true` (remains draft pending checks/publication).
+
+2026-11-17: Создан многоразовый саморазвивающийся промпт `automation/prompts/PATCH_IMPORT_SELF_EVOLVING.md` (коммит `db518ecb423129a2e9d98eefda81a0495753c3c9`). При новом запуске: сначала PR #310 + HEAD + CI, затем первая незакрытая задача; новые права не предполагать.

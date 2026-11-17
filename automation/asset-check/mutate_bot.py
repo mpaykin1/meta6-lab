@@ -21,7 +21,7 @@ MUTANTS = [
      "if False:"),
     ("kinds/htmlpack_harness.mjs", "mat.depthWrite===false", "mat.depthWrite===true"),
     ("check_pack.py", "import shutil", "# import shutil MUTATED"),
-    ("kinds/htmlpack_harness.mjs", "if(id==='sparks'||id==='petals')await page.waitForTimeout(240);", "if(false)await page.waitForTimeout(240);"),
+    ("kinds/htmlpack_harness.mjs", "if(id==='explosion'||id==='sparks'||id==='petals')await page.waitForTimeout(240);", "if(id==='explosion')await page.waitForTimeout(240);"),
     ("kinds/htmlpack_harness.mjs", "if(pathname==='/favicon.ico'){response.statusCode=204;response.end();return;}", "if(pathname==='/missing-favicon.ico'){response.statusCode=204;response.end();return;}"),
     ("kinds/htmlpack_harness.mjs", "uniform float uAcBokeh;", "uniform float __acBokeh;"),
     ("kinds/htmlpack_harness.mjs", "*.42*sh*uAcBokeh;", "*.42*sh*__acBokeh;"),

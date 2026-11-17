@@ -9,6 +9,7 @@
 
 Сторож проверил: 2026-11-17 06:54 UTC
 
+| взято | АССЕТЫ: BLACK TRAIN — объёмные рваные грозовые тучи вместо плоских полос | МГЛ | ChatGPT | `lab/assets-black-train-clouds-20261117` | [#384](https://github.com/mpaykin1/meta6-lab/pull/384) | 2026-11-17 | — |
 <!-- ZADACHI:START -->
 **Итог:** 🛑 зависло 40 · ⚠ молчит 6 · 🔨 в работе 10 · 🙋 нужен Claude 4 · 💤 заброшено 9 · ✅ готово 0
 
@@ -16,6 +17,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | АССЕТЫ: The Last Healer — дополнения INK по видео | МГЛ | чат ChatGPT | `lab/assets-last-healer-video-batch1-20261117-g6` | — | 2026-11-17 12:25 UTC | — |
 | взято | АССЕТЫ: The Last Healer — 24 позиции видео, партия INK | МГЛ | чат ChatGPT | `lab/assets-last-healer-video-20261117` | — | 2026-11-17 12:25 UTC | — |
 | взято | Z01: устранить конфликт PR #374 без потери независимых записей | МГЛ | чат ChatGPT | `lab/z01-preserve-summary-conflicts-builder3-1117` | [#374](https://github.com/mpaykin1/meta6-lab/pull/374) | 2026-11-17 10:46 UTC | — |
 | взято | Z01: восстановить CI PR #357 и регламент прямых ссылок Playgama | МГЛ | чат ChatGPT | `lab/rules-playgama-catalog-direct-20261117` | [#357](https://github.com/mpaykin1/meta6-lab/pull/357) | 2026-11-17 10:52 UTC | — |

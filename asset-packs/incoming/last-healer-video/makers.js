@@ -154,7 +154,7 @@ export function rainSplashRings(seed=1){
  for(let i=0;i<25;i++){
   const x=(random()-.5)*5.6,z=(random()-.5)*5.5;
   const r=.09+.13*random();
-  const mesh=part(g,new T.TorusGeometry(1,.018,4,28),pigment.ripple.clone(),x,.024,z);
+  const mesh=part(g,new T.TorusGeometry(1,.018,3,14),pigment.ripple.clone(),x,.024,z);
   mesh.rotation.x=-Math.PI/2;mesh.scale.setScalar(r);
   mesh.castShadow=false;
   rings.push({mesh,origin:(i/25)*2.6,duration:.68+.45*random(),radius:.06+.16*random()});
@@ -219,7 +219,7 @@ export function wetGrassClumps(seed=1){
  // У каждого растения отдельный корень, форма и фаза движения.
  const random=rand(seed),g=new T.Group();g.name='Пучки мокрой травы';
  const stems=[];
- for(let c=0;c<7;c++){
+ for(let c=0;c<6;c++){
   const plant=new T.Group();plant.position.set((random()-.5)*2.65,0,(random()-.5)*1.4);g.add(plant);stems.push(plant);
   const leaves=7+c%3;
   for(let i=0;i<leaves;i++){
@@ -227,7 +227,7 @@ export function wetGrassClumps(seed=1){
    const ux=Math.cos(a),uz=Math.sin(a);
    const shape=new T.Shape();shape.moveTo(-.023,0);shape.quadraticCurveTo(-.11,h*.42,-.045,h*.72);
    shape.quadraticCurveTo(-.01,h*.92,0,h);shape.quadraticCurveTo(.08,h*.76,.07,h*.37);shape.lineTo(.027,0);shape.closePath();
-   const leaf=part(plant,new T.ExtrudeGeometry(shape,{depth:.015,bevelEnabled:false,steps:1,curveSegments:3}),i%3?pigment.iron:pigment.coat,.06*ux,0,.06*uz);
+   const leaf=part(plant,new T.ExtrudeGeometry(shape,{depth:.015,bevelEnabled:false,steps:1,curveSegments:1}),i%3?pigment.iron:pigment.coat,.06*ux,0,.06*uz);
    leaf.rotation.y=a+.4;leaf.rotation.z=.1*(random()-.5);
    if(i%3===0){
     const dew=part(plant,new T.IcosahedronGeometry(.019,0),pigment.paper,ux*.22,h*.45,uz*.22);

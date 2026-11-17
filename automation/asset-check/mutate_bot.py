@@ -51,6 +51,7 @@ MUTANTS = [
     ("kinds/htmlpack.py", "if found != CDN:", "if False:"),
     ("kinds/htmlpack.py", "if error:", "if False and error:"),
     ("kinds/htmlpack.py", 'if new_ids and "window.__PACK_PROBE__" not in source:', "if False:"),
+    ("kinds/ink.py", 'if absent_hooks:', 'if False and absent_hooks:'),
 ]
 
 

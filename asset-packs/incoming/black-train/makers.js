@@ -158,4 +158,115 @@ function groundMist(seed=1){
  g.userData.setGlow=k=>{mistMat.uniforms.uGlow.value=k;};
  return g;
 }
-export const makers={blackLocomotive,crossingSign,redSignalLamp,hangingChains,gnarledTree,groundMist};
+
+function stormClouds(seed=1){
+ const g=foot(new T.Group(),0),rnd=rng(seed);g.name='stormClouds';
+ const drift=[];
+ for(let layer=0;layer<3;layer++){
+  const fogMat=new T.MeshBasicMaterial({color:layer===0?'#161c1f':layer===1?'#25292c':'#0d1114',transparent:true,opacity:.2+layer*.11,side:T.DoubleSide,depthWrite:false});
+  for(let j=0;j<3;j++){
+   const x=-1.9+j*2.0+(rnd()-.5)*.6,y=1.0+layer*.72+rnd()*.3,z=layer*.27;
+   const s=new T.Shape();s.moveTo(-.9,-.3);
+   for(let k=0;k<=12;k++){const xx=-.9+k*.15;const yy=.25+.18*Math.sin(k*1.7+layer*2)+.1*(rnd()-.5);s.lineTo(xx,yy);}
+   s.lineTo(.95,-.35);s.closePath();
+   const mesh=part(g,new T.ShapeGeometry(s,2),fogMat,[x,y,z]);drift.push({mesh,x,phase:rnd()*6.28,layer});
+  }
+ }
+ g.userData.tick=t=>drift.forEach(({mesh,x,phase,layer})=>{mesh.position.x=x+.18*Math.sin(t*(.08+layer*.02)+phase);});
+ return g;
+}
+function brokenFence(seed=1){
+ const g=foot(new T.Group(),.3),rnd=rng(seed);g.name='brokenFence';
+ for(let a=0;a<7;a++){
+  const x=(a-3)*.59+(rnd()-.5)*.09,h=.6+rnd()*1.4;
+  const slat=new T.Group();slat.position.x=x;slat.rotation.z=(rnd()-.5)*.32;g.add(slat);
+  block(slat,[.11,h,.20],a%3?M.wood:M.rust,[0,h/2,0]);
+  for(let k=0;k<2;k++){
+   const tip=k?.06:-.06;
+   part(slat,new T.ConeGeometry(.082,.3,4),M.wood,[tip,h+.1,.0],[0,0,(rnd()-.5)*.3]);
+  }
+  for(let k=0;k<3;k++)block(slat,[.12,.018,.22],M.black,[0,h*(.3+.2*k),.05]);
+ }
+ for(const y of [.45,1.06]){
+  const brace=block(g,[4.4,.10,.14],M.iron,[0,y,-.08],[0,0,(rnd()-.5)*.12]);
+  for(let i=0;i<6;i++)part(g,new T.SphereGeometry(.03,5,4),M.rust,[-1.8+i*.59,y,-.0]);
+ }
+ g.userData.tick=t=>{g.rotation.z=.003*Math.sin(t*.2);};
+ return g;
+}
+function tallGrass(seed=1){
+ const g=foot(new T.Group(),0),rnd=rng(seed);g.name='tallGrass';
+ const clumps=[];
+ for(let k=0;k<8;k++){
+  const tuft=new T.Group();tuft.position.set((rnd()-.5)*2.6,0,(rnd()-.5)*.8);g.add(tuft);
+  for(let i=0;i<7;i++){
+   const a=rnd()*Math.PI*2,h=.5+rnd()*.7,w=.022+rnd()*.024,dx=Math.cos(a)*(.09+rnd()*.24),dz=Math.sin(a)*(.09+rnd()*.23);
+   // Curved tapered blade: not a cylinder and not a billboard.
+   const v=new Float32Array([0,0,0, w,h*.45,0, dx,h*.92,dz, 0,0,0,dx,h*.92,dz,-w,h*.48,0]);
+   const geo=new T.BufferGeometry();geo.setAttribute('position',new T.BufferAttribute(v,3));geo.computeVertexNormals();
+   part(tuft,geo,i%3===0?M.rust:M.edge);
+   if(i%2===0)part(tuft,new T.ConeGeometry(.015,.16,5),M.wood,[dx*.7,h*.8,dz*.7]);
+  }clumps.push(tuft);
+ }
+ g.userData.tick=t=>clumps.forEach((tuft,i)=>{tuft.rotation.z=.045*Math.sin(.7*t-i*.23);tuft.rotation.x=.036*Math.sin(.61*t-i*.19);});
+ return g;
+}
+function wetRailGlow(seed=1){
+ const g=foot(new T.Group(),0),rnd=rng(seed);g.name='wetRailGlow';
+ const wet=new T.MeshStandardMaterial({color:'#4a555a',metalness:.94,roughness:.18,transparent:true,opacity:.75});
+ const red=new T.MeshBasicMaterial({color:'#7d1014',transparent:true,opacity:.18,depthWrite:false});
+ for(const z of [-.76,.76]){
+  for(let i=0;i<11;i++){
+   const x=-2.5+i*.5;
+   block(g,[.26,.008,.044],wet,[x,.26,z]);
+   block(g,[.13,.008,.025],red,[x,.268,z+.06]);
+  }
+ }
+ const stains=[];
+ for(let i=0;i<8;i++){
+  const x=(rnd()-.5)*5,z=(rnd()-.5)*2;
+  const s=new T.Shape();for(let j=0;j<10;j++){const a=j*6.283/10,r=.09+rnd()*.16;if(j===0)s.moveTo(Math.cos(a)*r,Math.sin(a)*r);else s.lineTo(Math.cos(a)*r,Math.sin(a)*r);}s.closePath();
+  const puddle=part(g,new T.ShapeGeometry(s),red,[x,.08,z],[-Math.PI/2,0,0]);stains.push(puddle);
+ }
+ g.userData.tick=t=>{red.opacity=.08+.06*Math.sin(t*1.8);};
+ g.userData.redMaterial=red;
+ return g;
+}
+function barbedWire(seed=1){
+ const g=foot(new T.Group(),.25),rnd=rng(seed);g.name='barbedWire';
+ for(const x of [-1.85,1.85]){
+  rod(g,[x,0,0],[x+(rnd()-.5)*.15,1.55,0],.065,M.wood,7);
+  for(let y of [.42,.89,1.37])rod(g,[x-.16,y,0],[x+.15,y,0],.024,M.rust,6);
+ }
+ for(const y of [1.03,1.43]){
+  const pts=[];for(let i=0;i<15;i++){const x=-1.82+i*.26;pts.push([x,y-.22*Math.sin((x+1.82)/3.64*Math.PI),.03*Math.sin(i*1.4)]);}
+  curve(g,pts,.022,M.steel,45);
+  for(let i=1;i<14;i++){
+   const p=pts[i],a=i*1.3;
+   rod(g,[p[0],p[1],p[2]],[p[0]+Math.cos(a)*.12,p[1]+Math.sin(a)*.14,p[2]+.08],.014,M.rust,4);
+   rod(g,[p[0],p[1],p[2]],[p[0]-Math.cos(a)*.09,p[1]-Math.sin(a)*.12,p[2]-.08],.014,M.steel,4);
+  }
+ }
+ g.userData.tick=t=>{g.rotation.z=.005*Math.sin(t*.38);};
+ return g;
+}
+function swampPuddles(seed=1){
+ const g=foot(new T.Group(),0),rnd=rng(seed);g.name='swampPuddles';
+ const pool=new T.MeshStandardMaterial({color:'#252a2a',roughness:.19,metalness:.53,transparent:true,opacity:.87,side:T.DoubleSide});
+ const ripples=[];
+ for(let n=0;n<4;n++){
+  const cx=(rnd()-.5)*2.8,cz=(rnd()-.5)*1.8;
+  const s=new T.Shape();for(let j=0;j<18;j++){const a=j*2*Math.PI/18,r=(.28+rnd()*.32)*(n===0?1.35:.85);
+   if(j===0)s.moveTo(Math.cos(a)*r,Math.sin(a)*r);else s.lineTo(Math.cos(a)*r,Math.sin(a)*r);
+  }s.closePath();
+  part(g,new T.ShapeGeometry(s),pool,[cx,.025,cz],[-Math.PI/2,0,0]);
+  for(let k=0;k<8;k++){const a=k*.78,r=.34+rnd()*.25;
+   part(g,new T.DodecahedronGeometry(.035+rnd()*.08,0),k%3?M.wood:M.rust,[cx+Math.cos(a)*r,.04,cz+Math.sin(a)*r]);
+  }
+  const ripple=part(g,new T.TorusGeometry(.10,.006,3,22),M.edge,[cx,.04,cz],[-Math.PI/2,0,0]);ripples.push(ripple);
+ }
+ g.userData.tick=t=>ripples.forEach((m,i)=>{const k=.72+.18*Math.sin(t*.72-i*1.8);m.scale.setScalar(k);});
+ return g;
+}
+
+export const makers={blackLocomotive,crossingSign,redSignalLamp,hangingChains,gnarledTree,groundMist,stormClouds,brokenFence,tallGrass,wetRailGlow,barbedWire,swampPuddles};

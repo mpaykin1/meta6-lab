@@ -4,7 +4,8 @@ const source='../../../reference/vorona-v-tumane/';
 const ids=[
  ['crow','Ворона'],['stalker','Существо'],['forest_far','Дальний лес'],
  ['forest_mid','Средний лес'],['forest_near','Ближний лес'],['fog_ribbons','Туман'],
- ['feather','Перо ускорения'],['firefly','Светлячок'],['nest','Гнездо']
+ ['feather','Перо ускорения'],['firefly','Светлячок'],['nest','Гнездо'],
+ ['impact_feathers','Перья при ударе'],['raindrops','Дождь'],['glowing_eyes','Глаза в тумане']
 ];
 const world=new T.Scene();
 world.background=new T.Color('#202a32');
@@ -16,7 +17,7 @@ renderer.outputColorSpace=T.SRGBColorSpace;
 document.body.insertBefore(renderer.domElement,document.body.firstChild);
 const clock=new T.Clock(),load=new T.TextureLoader();
 const objects=Object.create(null),keys=new Set();
-const state={x:-5,y:1,face:1,time:0,boost:0,light:0,aim:null,focus:null,checkpoint:-13};
+const state={x:-5,y:1,face:1,time:0,boost:0,light:0,aim:null,focus:null,checkpoint:-5,hit:0};
 function resize(){
  const w=innerWidth,h=innerHeight,span=29;
  camera.left=-span/2;camera.right=span/2;camera.top=span*h/w/2;camera.bottom=-camera.top;
@@ -137,6 +138,54 @@ for(let i=0;i<75;i++){
  const star=sprite(lightSvg,size,size,x,y,8.8);
  star.material.opacity=.12+random()*.23;star.userData={x,phase:random()*6.28};mote.push(star);
 }
+
+const impactGroup=new T.Group();world.add(impactGroup);objects.impact_feathers=impactGroup;
+const impact=[];
+const impactTex=svgMap(featherSvg);
+for(let i=0;i<10;i++){
+ const sprite=new T.Sprite(new T.SpriteMaterial({map:impactTex,transparent:true,depthWrite:false,opacity:.86}));
+ sprite.scale.set(.42,.64,1);sprite.visible=false;impactGroup.add(sprite);
+ impact.push({sprite,phase:i*Math.PI*2/10,life:0});
+}
+const rainPositions=[];
+const rainRandom=rand(44531);
+for(let i=0;i<140;i++)rainPositions.push(rainRandom()*84-42,rainRandom()*16-8,rainRandom()*2+3);
+const rainGeo=new T.BufferGeometry();
+rainGeo.setAttribute('position',new T.Float32BufferAttribute(rainPositions,3));
+const rainShader=new T.ShaderMaterial({
+ transparent:true,depthWrite:false,
+ uniforms:{uTime:{value:0}},
+ vertexShader:[
+ 'uniform float uTime;varying float alpha;',
+ 'void main(){vec3 p=position;p.y=mod(p.y-uTime*(3.6+fract(p.x*2.73)*2.4)+40.,16.)-8.;',
+ 'alpha=.18+.24*fract(p.x*9.73);gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);',
+ 'gl_PointSize=3.;}'
+ ].join(''),
+ fragmentShader:[
+ 'precision mediump float;varying float alpha;',
+ 'void main(){vec2 d=gl_PointCoord-.5;float a=1.-smoothstep(.25,.49,length(vec2(d.x*2.9,d.y*.56)));',
+ 'gl_FragColor=vec4(.68,.76,.77,alpha*a);}'
+ ].join('')
+});
+const rain=new T.Points(rainGeo,rainShader);rain.position.z=4.8;
+world.add(rain);objects.raindrops=rain;
+const eyeGroup=new T.Group();world.add(eyeGroup);objects.glowing_eyes=eyeGroup;
+for(let i=0;i<7;i++){
+ const x=-21+i*6.9+(i%2)*2.3,y=-1.75+(i%3)*1.2;
+ for(const side of [-1,1]){
+  const eye=new T.Sprite(new T.SpriteMaterial({map:svgMap(lightSvg),transparent:true,opacity:.34,depthWrite:false}));
+  eye.scale.set(.65,.65,1);eye.position.set(x+side*.21,y,-2.1);eye.userData.phase=i*1.7;
+  eyeGroup.add(eye);
+ }
+}
+const nestAura=sprite(lightSvg,4.2,2.6,-13,-3.55,5.1);
+nestAura.material.opacity=.13;nestedAuraSafe();
+function nestedAuraSafe(){nestAura.visible=true;}
+function burst(){
+ state.hit=2.4;state.x=state.checkpoint;state.y=1;state.aim=null;state.focus=null;
+ for(const p of impact){p.life=1.1;p.sprite.visible=true;p.sprite.position.set(state.x,state.y,8.3);}
+}
+
 window.__PACK__={items:ids.map(([id,label])=>({id,label}))};
 window.__PACK_PROBE__={assets:objects,setHidden(id,hide){if(objects[id])objects[id].visible=!hide;},
  focus(id){state.focus=id;}};
@@ -179,6 +228,7 @@ function draw(){
   else{dx=T.MathUtils.clamp(x,-1,1);dy=T.MathUtils.clamp(y,-1,1);}
  }
  state.boost=Math.max(0,state.boost-dt);state.light=Math.max(0,state.light-dt);
+ state.hit=Math.max(0,state.hit-dt);
  const speed=state.boost>0?7.7:4.7;
  state.x=T.MathUtils.clamp(state.x+dx*speed*dt,-24,24);
  state.y=T.MathUtils.clamp(state.y+dy*speed*dt,-3.4,6);
@@ -202,7 +252,22 @@ function draw(){
  if(state.light===0&&Math.hypot(state.x-firefly.position.x,state.y-firefly.position.y)<1.5)
   state.light=16;
  mist.uniforms.uTime.value=t;mist.uniforms.uAmount.value=state.light>0?.24:.83;
+ rainShader.uniforms.uTime.value=t;
+ for(const eye of eyeGroup.children){
+  eye.material.opacity=.08+.29*Math.pow(Math.max(0,Math.sin(t*.54+eye.userData.phase)),4);
+ }
+ for(const p of impact){
+  if(p.life<=0)continue;p.life-=dt;const age=1.1-p.life;
+  p.sprite.position.x+=Math.cos(p.phase)*dt*(1.9+age*1.1);
+  p.sprite.position.y+=Math.sin(p.phase)*dt*2.2-dt*age*2.3;
+  p.sprite.material.rotation+=dt*1.8;
+  p.sprite.material.opacity=Math.max(0,p.life/1.1);
+  if(p.life<=0)p.sprite.visible=false;
+ }
  if(Math.hypot(state.x-nest.position.x,state.y-nest.position.y)<1.6)state.checkpoint=-13;
+ nestAura.material.opacity=state.checkpoint===-13?.12+Math.sin(t*2.2)*.05:.025;
+ if(state.hit===0&&Math.hypot(state.x-specimen.position.x,state.y-specimen.position.y)<1.85)
+  burst();
  for(const star of mote){
   star.position.x=star.userData.x+Math.sin(t*.21+star.userData.phase)*.5;
   star.position.y+=dt*.14;if(star.position.y>8)star.position.y=-6;

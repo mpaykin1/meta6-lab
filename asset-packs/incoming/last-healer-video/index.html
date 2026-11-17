@@ -26,6 +26,7 @@ canvas{display:block}
 <button data-focus="wetGrassClumps">Ночь · мокрая трава</button>
 <button data-focus="rowingHealer">Утро · гребец у причала</button>
 <button id="light">Выключить ручной фонарь</button>
+<button id="audio" aria-pressed="false">🔇 Звуки острова: выключены</button>
 <button id="orbit">Автообзор: включён</button>
 <small>Поворот камеры — мышью или пальцем. Сцена использует одобренные модели машины, путника, причала и рендер INK из эталона без изменения исходников. Корпус лодки взят из принятого эталона INK без изменений.</small>
 </aside><div id="error"></div>
@@ -86,6 +87,15 @@ function placeCamera(){const s=Math.sin(polar);camera.position.set(target.x+dist
 function focus(id){const p=focusPoints[id]||focusPoints.all;target.set(...p);desiredDistance=id==='all'?23:9.4;panel.hidden=true;menu.setAttribute('aria-expanded','false');}
 document.querySelectorAll('[data-focus]').forEach(b=>b.addEventListener('click',()=>focus(b.dataset.focus)));
 menu.addEventListener('click',()=>{panel.hidden=!panel.hidden;menu.setAttribute('aria-expanded',String(!panel.hidden));});
+const audioClips={car:new Audio('./sndCarEngine.wav'),rain:new Audio('./sndRainNight.wav'),rowing:new Audio('./sndRowingShore.wav')};
+for(const clip of Object.values(audioClips)){clip.loop=true;clip.volume=0;clip.preload='auto';}
+let soundEnabled=false;
+document.querySelector('#audio').addEventListener('click',e=>{
+ soundEnabled=!soundEnabled;
+ e.currentTarget.setAttribute('aria-pressed',String(soundEnabled));
+ e.currentTarget.textContent=soundEnabled?'🔊 Звуки острова: включены':'🔇 Звуки острова: выключены';
+ if(soundEnabled)for(const clip of Object.values(audioClips)){const result=clip.play();if(result?.catch)result.catch(()=>{});}else for(const clip of Object.values(audioClips))clip.pause();
+});
 let flashlight=true;document.querySelector('#light').addEventListener('click',e=>{flashlight=!flashlight;handLight.userData.setEnabled(flashlight);e.currentTarget.textContent=flashlight?'Выключить ручной фонарь':'Включить ручной фонарь';});
 document.querySelector('#orbit').addEventListener('click',e=>{autoOrbit=!autoOrbit;e.currentTarget.textContent='Автообзор: '+(autoOrbit?'включён':'выключен');});
 stage.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;autoOrbit=false;stage.setPointerCapture(e.pointerId);});
@@ -95,6 +105,7 @@ stage.addEventListener('wheel',e=>{e.preventDefault();desiredDistance=Math.max(5
 window.addEventListener('resize',()=>{camera.aspect=innerWidth/Math.max(innerHeight,1);camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);compositor.resize();});
 function renderFrame(now){requestAnimationFrame(renderFrame);const dt=Math.min(.05,(now-last)/1000);last=now;const t=manual?manualTime:now/1000;
 if(autoOrbit&&!drag)angle+=dt*.028;
+if(soundEnabled){const x=target.x;audioClips.car.volume=.24*Math.max(.03,1-Math.abs(x+6)/9);audioClips.rain.volume=.18*Math.max(.08,1-Math.abs(x)/12);audioClips.rowing.volume=.22*Math.max(.03,1-Math.abs(x-6)/9);}
 distance+=(desiredDistance-distance)*Math.min(1,dt*3.7);
 for(const [id,o] of Object.entries(entries))if(typeof o.userData.tick==='function')o.userData.tick(t,dt);
 hull.position.y=.055*Math.sin(t*1.07);

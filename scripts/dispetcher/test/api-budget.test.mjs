@@ -11,14 +11,14 @@ async function suite(m){
  const now=Date.parse('2026-11-14T05:00:00Z');
  let n=0,waited=0;
  const value=await m.api('/pulls/3',{now:()=>now,wait:async ms=>{waited=ms},
-  request:async()=>++n===1?response(403,'0',String((now+60000)/1000)):response(200,'1','0')});
- assert.equal(n,2);assert.equal(waited,61000);assert.equal(value.ok,true);
+  request:async()=>++n===1?response(403,'0',String((now+5000)/1000)):response(200,'1','0')});
+ assert.equal(n,2);assert.equal(waited,6000);assert.equal(value.ok,true);
  await assert.rejects(()=>m.api('/pulls/3',{now:()=>now,
   request:async()=>response(429,'0',String((now+600000)/1000))}),/нет данных: квота/);
  await assert.rejects(()=>m.api('/pulls/3',{
   request:async()=>response(500,'1','0')}),/нет данных: GitHub HTTP/);
 }
-test('403 and 429: retry only when quota resets within eight minutes',async()=>suite({api}));
+test('403 and 429: retry only when quota resets within ten seconds',async()=>suite({api}));
 test('GraphQL filters old closed PRs before REST polling',async()=>{
  const s=await fs.readFile(new URL('../build.mjs',import.meta.url),'utf8');
  assert.match(s,/await openPulls\(repo,token\)/);

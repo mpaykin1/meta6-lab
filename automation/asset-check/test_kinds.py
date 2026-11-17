@@ -277,6 +277,19 @@ class KindTraps(unittest.TestCase):
         self.assertEqual(r.kinds, ["ink"])
         self.assertEqual(r.hard(), [], r.hard())
 
+    def test_black_train_approved_asset_order_has_zero_hard(self):
+        """The approved 14-asset BLACK TRAIN order is not ready with even one HARD."""
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        import os
+        root = Path(os.environ.get("ASSET_CHECK_REPO") or Path(__file__).resolve().parents[2])
+        pack = root / "asset-packs/incoming/black-train"
+        if not pack.exists():
+            self.skipTest("BLACK TRAIN not present in isolated fixtures")
+        result = cp.check(pack)
+        self.assertEqual(result.hard(), [], result.hard())
+        self.assertEqual(result.stats.get("zakaz", {}).get("ready"), 14)
+
     def test_ink_night_train_bundled_reference_uses_trusted_three(self):
         """Night Train bundles Three.js; the trusted engine must validate a real standalone maker."""
         if not shutil.which("node"):

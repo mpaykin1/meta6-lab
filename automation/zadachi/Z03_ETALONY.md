@@ -23,3 +23,4 @@
 
 ## Опыт (дописывает исполнитель: одна строка «что случилось → как обойти», со ссылкой)
 - 17.11.2026: даже точная копия OWNER PASS блокируется охраной при коммите не-Claude → авторство исправляет Claude, не ослабляя защиту ([#347](https://github.com/mpaykin1/meta6-lab/pull/347), [#348](https://github.com/mpaykin1/meta6-lab/pull/348)); лимит GitHub API 403 обходим sparse Git-клоном в CI ([#349](https://github.com/mpaykin1/meta6-lab/pull/349)).
+- 17.11 Claude ([415249d](https://github.com/mpaykin1/meta6-lab/commit/415249d)): #347–#349 перенесены, 3 эталона побайтно = МГ, сторож `verify-etalony-sync.yml` зелёный. Старые PR эталонов (#283, #322, #325) содержат ещё демо/превью вне `reference/` — проверить, нужны ли они, и либо довести отдельным PR, либо закрыть «эталон уже в main».

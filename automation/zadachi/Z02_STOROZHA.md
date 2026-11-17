@@ -27,3 +27,4 @@ PR [#331](https://github.com/mpaykin1/meta6-lab/pull/331), [#248](https://github
 
 ## Опыт (дописывает исполнитель: одна строка «что случилось → как обойти», со ссылкой)
 - 17.11 Claude: [#346](https://github.com/mpaykin1/meta6-lab/pull/346) слит — статусы финиша теперь только из FINISH.md, сбой API их не стирает; [#299](https://github.com/mpaykin1/meta6-lab/pull/299) перенесён в main (eb5aa8d) — отмена прогонов только у PR. Дальше — снизить расход API (шаг 5).
+- 17.11 Claude ([243ffc4](https://github.com/mpaykin1/meta6-lab/commit/243ffc4)): 10 сторожей переведены с ежечасного на раз в 2–3 ч, B1 не запускается на коммитах сводок. Лимит API всё ещё валил деплой LAB Pages (02:11 UTC). Следующие крупные потребители: `storozha-reference.yml` (запуск и на pull_request, и на pull_request_target — дважды на событие), `lab-pages.yml` kick-main на каждом пуше в `lab/**`. Сократи их, замерь 403 за сутки до/после.

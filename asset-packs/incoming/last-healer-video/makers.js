@@ -256,4 +256,290 @@ function rainSplashRings(seed=4){
   };
   return g;
 }
-export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings};
+
+function townRoad(seed=21){
+ const r=random(seed),g=new T.Group(),asphalt=pigment('#62676a'),
+       aged=pigment('#918872'),curb=pigment('#a89e83'),chalk=pigment('#b6bea3'),
+       dusty=pigment('#736b59'),crack=pigment(P.ink);
+ // A grounded double-width crossroads with damaged shoulder edges; no tiled textures.
+ const road=mesh(g,new T.BoxGeometry(3.75,.10,6.1),asphalt,0,-.04,0);
+ const cross=mesh(g,new T.BoxGeometry(6.1,.10,3.75),asphalt,0,-.04,0);
+ const sides=[];
+ for(const d of [-1,1]){
+   for(const edge of [-1,1]){
+     const path=mesh(g,new T.BoxGeometry(.42,.14,1.03),curb,
+        d*2.78,.065,edge*2.50);path.rotation.y=(r()-.5)*.1;sides.push(path);
+     const sidewalk=mesh(g,new T.BoxGeometry(.80,.075,2.0),aged,
+        d*2.69,.005,edge*2.08);
+     sidewalk.rotation.y=(r()-.5)*.045;
+   }
+   for(const k of [-1,1]){
+     mesh(g,new T.BoxGeometry(1.03,.14,.42),curb,k*2.50,.065,d*2.79);
+     mesh(g,new T.BoxGeometry(2,.075,.80),aged,k*2.08,.005,d*2.69);
+   }
+ }
+ for(let i=0;i<9;i++){
+   const x=i%2?0:(r()-.5)*.5,z=-2.7+i*.65+(r()-.5)*.2;
+   const mark=mesh(g,new T.BoxGeometry(.07+r()*.035,.007,.30+r()*.30),chalk,x,.017,z);
+   mark.rotation.y=(r()-.5)*.08;
+ }
+ for(let i=0;i<43;i++){
+   const x=(r()-.5)*5.92,z=(r()-.5)*5.92;
+   const chip=ball(g,.04+r()*.076,i%3===0?dusty:aged,x,.01,z,
+     .5+r()*1.5,.08,.7+r());
+   chip.rotation.y=r()*6.28;chip.userData.watercolorOutline=false;
+ }
+ for(let i=0;i<12;i++){
+   let x=(r()-.5)*3.8,z=(r()-.5)*3.8;
+   const n=2+Math.floor(r()*4);
+   for(let k=0;k<n;k++){
+     const dx=(r()-.5)*.65,dz=(r()-.5)*.42;
+     rod(g,[x,.02,z],[x+dx,.0201,z+dz],.008,crack,.004);
+     x+=dx;z+=dz;
+   }
+ }
+ g.userData.footprint=0;
+ return g;
+}
+function roadsideDryShrubs(seed=23){
+ const r=random(seed),g=new T.Group(),stem=pigment('#736b59'),
+   twig=pigment('#918872'),leafM=[pigment('#bd7c69'),pigment('#a96851'),pigment('#c5ac69'),pigment('#607e74')],
+   branches=[];
+ for(let cl=0;cl<6;cl++){
+   const h=.37+r()*.55,clump=new T.Group();
+   clump.position.set((r()-.5)*3.0,0,(r()-.5)*2.2);clump.rotation.y=r()*6.28;g.add(clump);
+   const slope=(r()-.5)*.22;
+   rod(clump,[0,0,0],[slope,h,0],.032,stem,.015);
+   for(let j=0;j<4;j++){
+     const angle=(j*2.399+r()*.3),s=.22+r()*.29;
+     const elbow=[Math.cos(angle)*s*.54,h*(.45+r()*.30),Math.sin(angle)*s*.54];
+     const tip=[Math.cos(angle)*s*1.3,h*(.76+r()*.40),Math.sin(angle)*s*1.15];
+     rod(clump,[slope*.55,h*.55,0],elbow,.016,stem,.010);
+     const bent=new T.Group();bent.position.set(...elbow);clump.add(bent);branches.push({part:bent,phase:r()*2.5+j*.41});
+     rod(bent,[0,0,0],tip.map((v,i)=>v-elbow[i]),.010,twig,.003);
+     for(let k=0;k<3;k++){
+       const q=.32+k*.29,p=tip.map((v,i)=>(v-elbow[i])*q);
+       const leaf=ball(bent,.055+r()*.030,leafM[(cl+j+k)%4],p[0],p[1],p[2],
+         .68,.25,1.1+r()*.9);
+       leaf.rotation.y=angle+k*.5;leaf.rotation.z=(r()-.5)*.7;
+     }
+   }
+   for(let k=0;k<5;k++){
+     const a=k*2.399,s=.12+r()*.22;
+     const thorn=rod(clump,[0,.04,0],[Math.cos(a)*s,.08,Math.sin(a)*s],.016,stem,.005);
+   }
+ }
+ g.userData.footprint=.25;
+ g.userData.tick=t=>{
+   branches.forEach(({part,phase},i)=>{
+     part.rotation.z=.07*Math.sin(t*.84-phase-i*.08);
+     part.rotation.x=.036*Math.sin(t*.68-phase*.5-i*.14);
+   });
+ };
+ return g;
+}
+function pinkTownBuilding(seed=29){
+ const r=random(seed),g=new T.Group(),pink=pigment('#bd7c69'),pale=pigment('#d5b895'),
+   edge=pigment('#736b59'),roof=pigment('#8d806f'),glass=pigment('#607e74'),
+   sill=pigment('#c5ac69'),iron=pigment(P.iron),
+   lit=new T.MeshBasicMaterial({color:'#e6c475'}),windows=[];
+ const base=mesh(g,new T.BoxGeometry(3.25,2.26,2.55),pink,0,1.16,0);
+ const facade=mesh(g,new T.BoxGeometry(3.30,1.89,.14),pale,0,1.07,1.32);
+ facade.userData.watercolorOutline=false;
+ mesh(g,new T.BoxGeometry(3.61,.18,2.91),edge,0,2.37,0);
+ mesh(g,new T.BoxGeometry(3.38,.07,2.68),roof,0,2.52,0);
+ for(const s of [-1,1]){
+   mesh(g,new T.BoxGeometry(.26,.45,2.77),edge,s*1.58,2.53,0);
+   for(let i=0;i<4;i++){
+     const bolt=ball(g,.044,iron,s*1.61,.30+i*.54,1.34,.38,.6,.4);
+   }
+ }
+ mesh(g,new T.BoxGeometry(3.43,.13,.48),roof,0,1.92,1.54);
+ for(let i=0;i<9;i++){
+   const x=-1.44+i*.36;
+   rod(g,[x,1.85,1.69],[x,.99,1.68],.011,iron,.006);
+ }
+ // High front window above recessed shop front, not a single colored flat box.
+ for(let i=0;i<3;i++){
+   const x=-1.06+i*1.06;
+   const win=mesh(g,new T.BoxGeometry(.84,.97,.12),i===1?lit:glass,x,1.26,1.45);
+   win.userData.watercolorOutline=false;windows.push(win);
+   mesh(g,new T.BoxGeometry(.06,1.09,.13),edge,x-.44,1.27,1.55);
+   mesh(g,new T.BoxGeometry(.06,1.09,.13),edge,x+.44,1.27,1.55);
+   mesh(g,new T.BoxGeometry(.93,.05,.22),sill,x,.70,1.50);
+   mesh(g,new T.BoxGeometry(.93,.05,.22),sill,x,1.82,1.50);
+   rod(g,[x,1.25,1.58],[x,1.75,1.58],.012,iron);
+   rod(g,[x-.39,1.30,1.58],[x+.39,1.30,1.58],.012,iron);
+ }
+ for(const s of [-1,1]){
+   for(let i=0;i<3;i++){
+     const win=mesh(g,new T.BoxGeometry(.14,.36,.56),i===0?lit:glass,
+       s*1.67,.96+i*.4,-.68);
+     windows.push(win);
+   }
+ }
+ const sign=mesh(g,new T.BoxGeometry(2.04,.31,.08),roof,0,2.10,1.47);
+ for(let i=0;i<13;i++){
+   const x=-.90+i*.145;
+   mesh(g,new T.BoxGeometry(.038,.12+(i%4)*.035,.035),i%3===0?sill:iron,x,2.1,1.54);
+ }
+ // Copper piping, drain, roof vents, roof gravel and uneven masonry.
+ rod(g,[1.50,2.20,1.45],[1.50,.12,1.46],.043,iron);
+ for(let i=0;i<16;i++){
+   const x=(r()-.5)*2.80,z=(r()-.5)*2.10;
+   ball(g,.050+r()*.037,roof,x,2.61,z,1,.24,1.4);
+ }
+ const vent=mesh(g,new T.CylinderGeometry(.20,.23,.53,9),iron,-.96,2.84,-.54);
+ mesh(g,new T.CylinderGeometry(.30,.30,.07,9),edge,-.96,3.13,-.54);
+ g.userData.footprint=1.6;
+ g.userData.tick=t=>windows.forEach((w,i)=>{
+   if(i===1||i===3){
+     const want=.5+.5*Math.sin(t*.19+i*.35);
+     w.material=i%2?lit:glass;
+     w.scale.z=.98+.025*want;
+   }
+ });
+ return g;
+}
+function duskTownLight(seed=34){
+ const r=random(seed),g=new T.Group(),sheets=[],motes=[];
+ g.name='Сумеречный тёплый свет и дальняя акварельная дымка';
+ const tint=new T.MeshBasicMaterial({color:'#bd7c69',transparent:true,opacity:.10,
+   side:T.DoubleSide,depthWrite:false});
+ const gold=new T.MeshBasicMaterial({color:'#c5ac69',transparent:true,opacity:.12,
+   side:T.DoubleSide,depthWrite:false});
+ for(let i=0;i<14;i++){
+   const x=(r()-.5)*4.6,z=(r()-.5)*4.3,depth=.45+r()*1.2;
+   const plane=mesh(g,new T.PlaneGeometry(1.4+r(),depth,3,2),i%3===0?gold:tint,x,
+     .30+i*.13,z);
+   plane.rotation.y=r()*6.28;
+   plane.userData.watercolorOutline=false;
+   sheets.push({o:plane,x,phase:r()*3.7,i});
+ }
+ for(let i=0;i<20;i++){
+   const x=(r()-.5)*4.7,z=(r()-.5)*4.5,y=.24+r()*1.5;
+   const ballMesh=ball(g,.014+r()*.028,gold,x,y,z,.7,1.5,.9);
+   ballMesh.userData.watercolorOutline=false;
+   motes.push({o:ballMesh,y,phase:r()*6.28});
+ }
+ g.userData.footprint=0;
+ g.userData.tick=t=>{
+   sheets.forEach(({o,x,phase,i})=>{
+     o.position.x=x+.16*Math.sin(t*.13-phase);
+     o.rotation.y=.3+.08*Math.sin(t*.21-i*.23);
+   });
+   motes.forEach(({o,y,phase})=>{
+     o.position.y=y+.12*Math.sin(t*.35+phase);
+   });
+ };
+ return g;
+}
+function healerWalkWithLight(seed=37){
+ const r=random(seed),g=new T.Group(),body=new T.Group();
+ g.name='Аптекарь шагает с собственным шарнирным фонариком';
+ const coat=pigment(P.coat),pants=pigment('#414f50'),
+   skin=pigment('#c5ac69'),hood=pigment('#bd7c69'),
+   leather=pigment(P.wood),silver=pigment(P.iron);
+ g.add(body);
+ const legs=[],arms=[];
+ for(const s of [-1,1]){
+   const hip=new T.Group();hip.position.set(s*.13,.63,0);body.add(hip);legs.push(hip);
+   rod(hip,[0,0,0],[s*.035,-.38,.012],.115,pants,.093);
+   const foot=ball(hip,.13,leather,s*.035,-.48,.085,1.1,.47,1.5);
+   rod(hip,[s*.035,-.37,.012],[s*.035,-.48,.085],.079,leather);
+ }
+ const torso=mesh(body,new T.CylinderGeometry(.21,.40,.69,10),coat,0,1.02,0);
+ torso.rotation.x=-.05;
+ ball(body,.23,skin,0,1.49,.065,.90,1.0,.81);
+ const cowl=ball(body,.28,hood,0,1.56,-.06,1.04,.87,.85);
+ cowl.rotation.x=-.35;
+ box(body,.38,.10,.15,leather,0,1.09,.26);
+ const cloak=mesh(body,new T.ConeGeometry(.42,.55,9,1,true),hood,0,.82,-.12);
+ cloak.rotation.x=.13;
+ for(let i=0;i<8;i++){
+   const a=(i-3.5)*.10;
+   rod(body,[a,1.18,-.29],[a+.02,.68,-.34],.009,leather);
+ }
+ for(const s of [-1,1]){
+   const shoulder=new T.Group();shoulder.position.set(s*.26,1.24,.04);
+   body.add(shoulder);arms.push(shoulder);
+   rod(shoulder,[0,0,0],[s*.06,-.28,.13],.102,coat);
+   rod(shoulder,[s*.06,-.28,.13],[s*.11,-.43,.36],.078,hood);
+   ball(shoulder,.065,skin,s*.11,-.44,.36);
+ }
+ const light=handFlashlight(seed+1);
+ light.position.set(.36,.12,.36);light.scale.setScalar(.85);
+ arms[1].add(light);
+ // Leather medicine satchel; the buckles and straps are true volumes.
+ box(body,.36,.48,.22,leather,-.38,.80,-.14);
+ for(let i=0;i<4;i++){
+   box(body,.047,.16,.036,i%2?silver:skin,-.5+i*.08,.78,-.012);
+ }
+ rod(body,[-.3,1.31,.03],[-.45,.67,-.15],.037,leather);
+ const scarf=mesh(body,new T.BoxGeometry(.10,.48,.055),pigment(P.brass),.14,1.23,.15);
+ scarf.rotation.z=-.22;
+ const hair=[];
+ for(let i=0;i<8;i++){
+   const a=r()*6.28;
+   const strand=mesh(body,new T.ConeGeometry(.020,.15,5),leather,
+    Math.cos(a)*.16,1.67,Math.sin(a)*.13);
+   strand.rotation.z=Math.sin(a)*.18;hair.push(strand);
+ }
+ g.userData.footprint=.35;
+ g.userData.tick=t=>{
+   const cycle=t*2.2;
+   legs[0].rotation.x=.48*Math.sin(cycle);
+   legs[1].rotation.x=.48*Math.sin(cycle+PI);
+   arms[0].rotation.x=.19*Math.sin(cycle+PI-.30);
+   arms[1].rotation.x=.13*Math.sin(cycle-.25);
+   body.position.y=.020*(1+Math.cos(cycle*2));
+   torso.rotation.z=.015*Math.sin(cycle-1.4);
+   scarf.rotation.x=.14*Math.sin(t*.66-.5);
+   cowl.rotation.y=.023*Math.sin(cycle-.7);
+   light.userData.tick(t);
+ };
+ return g;
+}
+function puddles(seed=41){
+ const r=random(seed),g=new T.Group(),shimmers=[],ripples=[];
+ const water=new T.MeshStandardMaterial({color:'#607e74',roughness:.29,metalness:.32,
+ transparent:true,opacity:.84,depthWrite:false,side:T.DoubleSide});
+ const shimmer=new T.MeshBasicMaterial({color:'#e7e5d6',transparent:true,opacity:.35,
+ depthWrite:false});
+ const ringMat=new T.MeshBasicMaterial({color:'#b6bea3',transparent:true,opacity:.32,
+ depthWrite:false});
+ for(let i=0;i<6;i++){
+   const x=(r()-.5)*3.8,z=(r()-.5)*3.8;
+   const sh=new T.Shape(),n=16,rr=.29+r()*.31;
+   for(let k=0;k<=n;k++){
+     const a=k*2*PI/n,d=rr*(.67+.48*r());
+     if(k===0)sh.moveTo(Math.cos(a)*d,Math.sin(a)*d);
+     else sh.lineTo(Math.cos(a)*d,Math.sin(a)*d);
+   }
+   sh.closePath();
+   const blob=mesh(g,new T.ShapeGeometry(sh),water,x,.035,z);
+   blob.rotation.x=-PI/2;blob.scale.x=.7+r()*.7;
+   const ripple=mesh(g,new T.TorusGeometry(.14,.012,4,16),ringMat.clone(),x,.042,z);
+   ripple.rotation.x=PI/2; ripple.userData.watercolorOutline=false;
+   ripples.push({o:ripple,phase:r()*2.5});
+   for(let j=0;j<3;j++){
+     const a=r()*6.28,d=r()*rr;
+     const s=box(g,.04+r()*.17,.005,.014,shimmer,x+Math.cos(a)*d,.048,z+Math.sin(a)*d);
+     s.rotation.y=a;shimmers.push({o:s,phase:r()*4.2});
+   }
+ }
+ g.userData.footprint=0;
+ g.userData.tick=t=>{
+   ripples.forEach(({o,phase},i)=>{
+     const p=(t*.45+phase)%1.8/1.8;
+     o.scale.setScalar(.45+1.7*p);
+     o.material.opacity=.3*(1-p);
+   });
+   shimmers.forEach(({o,phase},i)=>{
+     o.position.y=.045+.004*Math.sin(t*1.9+phase);
+   });
+ };
+ return g;
+}
+
+export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,roadsideDryShrubs,pinkTownBuilding,duskTownLight,healerWalkWithLight,puddles};

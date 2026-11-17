@@ -93,7 +93,7 @@ window.addEventListener('unhandledrejection',e=>showFailure(e.reason?.message||e
 <script>
 // The game uses root reference modules both on main Pages and in isolated lab previews.
 // Local CI routes retain their original relative paths.
-const inPreview = /^\\/meta6-lab\\/preview\\/[^/]+\\//.test(location.pathname);
+const inPreview = location.pathname.startsWith('/meta6-lab/preview/');
 const referenceRoot = inPreview ? '/meta6-lab/reference/' : '../../../reference/';
 const mapping = {
   three: referenceRoot + 'ink-fallen-guardian/three.module.js',

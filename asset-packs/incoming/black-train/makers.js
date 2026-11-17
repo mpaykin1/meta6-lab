@@ -24,9 +24,31 @@ function crossingSign(seed=2){
  rod(post,[0,0,0],[0,3.85,0],.115,M.wood);
  rod(post,[0,.15,.03],[.25,.02,.13],.06,M.woodCut);
  for(const angle of [-.78,.78]){
-  const plank=box(post,3.35,.27,.23,M.wood,0,3.16,.035);plank.rotation.z=angle;
-  const seam=box(post,3.02,.025,.018,M.woodCut,0,3.14,.16);seam.rotation.z=angle;
-  for(const side of [-1,1]){const x=side*1.36*Math.cos(angle),y=3.16+side*1.36*Math.sin(angle);add(post,new T.SphereGeometry(.045,6,5),M.silver,x,y,.18);}
+  // Each board is an extruded, water-damaged silhouette, not a perfect box.
+  const board=new T.Group();board.position.set(0,3.16,.025);board.rotation.z=angle;post.add(board);
+  const cut=new T.Shape(),chip=(r()-.5)*.075;
+  cut.moveTo(-1.69,-.065);cut.lineTo(-1.58,-.14);cut.lineTo(-1.23,-.135);
+  cut.lineTo(-.5,-.12);cut.lineTo(.22,-.135);cut.lineTo(1.39,-.115);
+  cut.lineTo(1.64,-.075);cut.lineTo(1.7+chip,-.015);
+  cut.lineTo(1.49,.045);cut.lineTo(1.68,.125);cut.lineTo(.48,.127);
+  cut.lineTo(-.38,.113);cut.lineTo(-1.44,.134);cut.lineTo(-1.67,.078);
+  cut.lineTo(-1.5,.012);cut.closePath();
+  add(board,new T.ExtrudeGeometry(cut,{steps:1,depth:.19,bevelEnabled:false}),M.wood,0,0,-.095);
+  // Deep split grain, irregular exposed fibers and rusted nail heads.
+  for(const side of [-1,1]){
+   const x=side*1.45;
+   for(let k=0;k<3;k++){
+    const y=-.065+k*.063,tip=x+side*(.17+r()*.23);
+    rod(board,[x,y,.112],[tip,y+(r()-.5)*.085,.11],.009+r()*.006,M.woodCut,.002);
+   }
+   const nail=add(board,new T.SphereGeometry(.045,7,5),M.ironEdge,side*1.26,.01,.115);
+   nail.scale.z=.38;
+   rod(board,[side*.32,-.075,.115],[side*(.49+r()*.3),-.06+r()*.065,.114],.009,M.woodCut,.004);
+  }
+  for(let k=0;k<5;k++){
+   const x=-1.15+k*.52+(r()-.5)*.13;
+   rod(board,[x,-.095,.104],[x+.1+r()*.14,-.088+r()*.055,.105],.005,M.woodCut,.002);
+  }
  }
  for(let i=0;i<12;i++){const y=.4+r()*3.2;box(post,.025,.15+r()*.14,.025,M.woodCut,.11,y,.09);}
  return finish(g,.28);

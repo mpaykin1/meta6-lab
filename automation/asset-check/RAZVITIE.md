@@ -11,3 +11,5 @@
 | 2026-11-16 | 2.4.0 | ЗАКАЗ ПО ВИДЕО (ядро) | Z1–Z7 | 5 (всего 67) | 35/35 | — | прогон ASSET CHECK этого PR |
 | 2026-11-16 | 2.5.0 | — | ЗАКАЗ без видео (owner/text/game/sketch) | 4 (всего 71) | 36/36 | — | прогон ASSET CHECK этого PR |
 | 2026-11-16 | 2.6.1 | spritestack (новый вид) | SS1–SS9: размеры, срезы, изменение формы, цвет, встраивание в копию игры | 9 новых ловушек | 6 новых мутантов; CI [41/42](https://github.com/mpaykin1/meta6-lab/actions/runs/43909263886), исправлена убежавшая ловушка, повторный прогон | Небесный пилот: 20 файлов PNG, заказ 20/20 до проверки | [SHA 84f5682](https://github.com/mpaykin1/meta6-lab/commit/84f5682b83032ea0d9bf9131eaae8f8a15700e86) |
+
+| 2026-11-17 | 2.6.2 | — | spritestack с A6/A7 + сохранена ZIP-защита при слиянии с main | 81 тест PASS | [43/43](https://github.com/mpaykin1/meta6-lab/actions/runs/43912262995) | Небесный пилот: [20/20, HARD=0](https://github.com/mpaykin1/meta6-lab/actions/runs/43912262995/artifacts/14251010080) | [4224c6d](https://github.com/mpaykin1/meta6-lab/commit/4224c6d6170f9bef7e8cb2593ce44593e0e9596a) |

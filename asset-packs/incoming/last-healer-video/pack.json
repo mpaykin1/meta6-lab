@@ -95,6 +95,43 @@
       "role": "building",
       "zone": "city",
       "footprint": 2.6
+    },
+    "nightRainGrade": {
+      "label_ru": "Серо-синяя ночная дымка дождя",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "boatWake": {
+      "label_ru": "Разлетающийся след лодки и вёсел",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "shoreFoamLine": {
+      "label_ru": "Живая пена вдоль кривого берега",
+      "role": "ground",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "autumnConeTrees": {
+      "label_ru": "Многоцветные осенние деревья",
+      "role": "tree",
+      "zone": "lakeside",
+      "footprint": 0.4
+    },
+    "boatShed": {
+      "label_ru": "Лодочный сарай с зелёной крышей",
+      "role": "building",
+      "zone": "lakeside",
+      "footprint": 1.9,
+      "benefit": "Место сохранения у причала"
+    },
+    "driftingLeaves": {
+      "label_ru": "Листья, дрейфующие по воде",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
     }
   }
 }

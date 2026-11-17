@@ -54,11 +54,21 @@ background-image:repeating-linear-gradient(33deg,transparent 0,transparent 13px,
 <button data-id="boatWake">Берег · живая волна за лодкой</button>
 <button data-id="shoreFoamLine">Берег · набегающая пена</button>
 <button data-id="autumnConeTrees">Берег · осенние деревья</button>
+<button data-id="boatShed">Берег · сарай для лодки</button>
+<button data-id="driftingLeaves">Берег · плавающие листья</button>
+<button data-id="sandBeachTiles">Берег · песчаная отмель</button>
+<button data-id="tiltShiftPost">Объектив · эффект миниатюры</button>
+<button data-id="dayCoastGrade">Солнце · ясный день</button>
+<button data-id="sndCarEngine">♫ Мотор автомобиля</button>
+<button data-id="sndRainNight">♫ Дождь над городом</button>
+<button data-id="sndRowingShore">♫ Волны и вёсла</button>
+<button id="audioToggle">♫ Включить тихий звук</button>
 <small>Мышь / палец — поворот камеры. Колесо — приближение. Все модели процедурные, принятые INK-модели не изменены.</small>
 </aside><div id="grain"></div>
 <script type="module">
 import * as T from 'three';
 import {makers} from './makers.js';
+import {makeSoundscape} from './sounds.js';
 import {car,apothecary,streetlamp,bush,pier} from '/meta6-lab/reference/ink-fallen-guardian/ink-settlement.js';
 import {rowboat} from '/meta6-lab/reference/ink-fallen-guardian/ink-extras.js';
 import {traveller,fir} from '/meta6-lab/reference/ink-fallen-guardian/ink-objects.js';
@@ -129,10 +139,21 @@ const grass=makers.wetGrassClumps(56);grass.position.set(-2.3,.0,1.9);scene.add(
 const wake=makers.boatWake(61);boat.add(wake);
 const foam=makers.shoreFoamLine(64);foam.position.set(3.3,0,.65);scene.add(foam);
 const trees=makers.autumnConeTrees(66);trees.position.set(3.5,.02,3.55);scene.add(trees);
+const shed=makers.boatShed(75);shed.position.set(5.6,.02,-2.35);scene.add(shed);
+const leaves=makers.driftingLeaves(79);leaves.position.set(3.3,.04,2.0);scene.add(leaves);
+const sandy=makers.sandBeachTiles(82);sandy.position.set(2.2,-.01,1.0);scene.add(sandy);
+const lens=makers.tiltShiftPost(84);lens.position.set(0,0,0);scene.add(lens);
+const sunny=makers.dayCoastGrade(85);sunny.position.set(6.9,.0,1.1);scene.add(sunny);
+const motor=makers.sndCarEngine(88);motor.position.set(-5.8,.015,-2.85);scene.add(motor);
+const rainSound=makers.sndRainNight(89);rainSound.position.set(-.05,.015,-2.70);scene.add(rainSound);
+const shoreSound=makers.sndRowingShore(90);shoreSound.position.set(5.1,.015,-3.10);scene.add(shoreSound);
 const assets={carHeadlights:root,handFlashlight:beam,rowingHealer:stroke,rainSplashRings:splashes,
  townRoad:town,roadsideDryShrubs:shrubs,pinkTownBuilding:shop,duskTownLight:dusk,
  healerWalkWithLight:walking,puddles:wet,whiteClinicBuilding:clinic,nightRainGrade:nightWash,
- wetGrassClumps:grass,boatWake:wake,shoreFoamLine:foam,autumnConeTrees:trees};
+ wetGrassClumps:grass,boatWake:wake,shoreFoamLine:foam,autumnConeTrees:trees,
+ boatShed:shed,driftingLeaves:leaves,sandBeachTiles:sandy,tiltShiftPost:lens,
+ dayCoastGrade:sunny,sndCarEngine:motor,sndRainNight:rainSound,sndRowingShore:shoreSound};
+const audio=makeSoundscape();
 
 const places={
  all:[0,0,0,20],carHeadlights:[-5.2,.1,.35,9],handFlashlight:[-.8,.4,1.2,8],
@@ -142,7 +163,11 @@ const places={
  healerWalkWithLight:[-.7,.9,3.1,7],puddles:[-5.15,.2,.3,8],
  whiteClinicBuilding:[-1.2,.8,-5.1,10],nightRainGrade:[-.25,.8,1.85,9],
  wetGrassClumps:[-2.3,.5,1.9,7],boatWake:[6.3,.1,1.2,8],
- shoreFoamLine:[3.3,.1,.65,8],autumnConeTrees:[3.5,1,3.55,9]
+ shoreFoamLine:[3.3,.1,.65,8],autumnConeTrees:[3.5,1,3.55,9],
+ boatShed:[5.6,.8,-2.35,9],driftingLeaves:[3.3,.3,2,8],
+ sandBeachTiles:[2.2,.3,1,9],tiltShiftPost:[0,.3,0,16],
+ dayCoastGrade:[6.9,.5,1.1,9],sndCarEngine:[-5.8,.4,-2.85,8],
+ sndRainNight:[-.05,.4,-2.70,8],sndRowingShore:[5.1,.4,-3.1,8]
 };
 let chosen='all',clock=0,manual=false,frame=0;
 function select(id){
@@ -151,6 +176,16 @@ function select(id){
  cm.visible=id==='all'||id==='carHeadlights';
  npc.visible=id==='all'||id==='handFlashlight';
  boat.visible=id==='all'||id==='rowingHealer'||id==='boatWake';
+ const night=['nightRainGrade','whiteClinicBuilding','rainSplashRings','handFlashlight','healerWalkWithLight','sndRainNight','puddles'].includes(id);
+ const day=['dayCoastGrade','rowingHealer','boatShed','boatWake','sandBeachTiles','sndRowingShore'].includes(id);
+ scene.background.set(night?'#74828b':day?'#cedfcf':'#d9cab9');
+ scene.fog.color.set(night?'#8a9da5':day?'#a3c8ba':'#bdc1b5');
+ sun.color.set(night?'#9cb0bd':day?'#fff1d8':'#f8ceb8');
+ hemi.color.set(night?'#d8dfe5':day?'#fff5e0':'#fff1d8');
+ fxUniforms.uStrength.value=id==='tiltShiftPost'?1.0:id==='all'?.53:.10;
+ fxUniforms.uCool.value=night?.65:0;
+ fxUniforms.uWarm.value=day?.25:.13;
+ if(id.startsWith('snd'))audio.play(id);else audio.stop();
  document.querySelectorAll('#menu button[data-id]').forEach(b=>b.classList.toggle('active',b.dataset.id===id));
  const [x,y,z,d]=places[id]||places.all;
  camTarget.set(x,y,z);camDistance=d;draw();
@@ -162,6 +197,11 @@ menuButton.addEventListener('click',()=>{
 document.querySelectorAll('#menu button[data-id]').forEach(b=>b.addEventListener('click',()=>{
  select(b.dataset.id);menu.hidden=true;menuButton.setAttribute('aria-expanded','false');
 }));
+document.getElementById('audioToggle').addEventListener('click',async()=>{
+ const preset=chosen.startsWith('snd')?chosen:'sndRowingShore';
+ const active=await audio.toggle(preset);
+ document.getElementById('audioToggle').textContent=active?'♫ Выключить звук':'♫ Включить тихий звук';
+});
 let dragging=false,lastX=0,lastY=0;
 renderer.domElement.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;renderer.domElement.setPointerCapture(e.pointerId);});
 renderer.domElement.addEventListener('pointermove',e=>{

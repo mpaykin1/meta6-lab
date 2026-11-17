@@ -31,6 +31,10 @@ const DEFAULT_STRATEGY = {
 export async function loadGame(dir) {
   const cfgFile = path.join(dir, 'bot.json');
   const cfg = Object.assign({}, DEFAULTS, fs.existsSync(cfgFile) ? JSON.parse(fs.readFileSync(cfgFile, 'utf8')) : {});
+  if (!Array.isArray(cfg.viewports) || cfg.viewports.length === 0 ||
+      cfg.viewports.some(name => !Object.hasOwn(VIEWPORTS, name))) {
+    throw new Error('bot.json viewports must contain supported screens: mobile, desktop');
+  }
   const sf = path.resolve(dir, 'bot-strategy.mjs');
   const strategy = fs.existsSync(sf) ? await import(pathToFileURL(sf).href) : DEFAULT_STRATEGY;
   if (typeof strategy.start !== 'function' || typeof strategy.playLevel !== 'function') throw new Error('bot-strategy.mjs должен экспортировать start(ctx) и playLevel(ctx, level)');

@@ -1,16 +1,33 @@
 {
-  "generated_at": "2026-11-17T02:53:25.756Z",
+  "generated_at": "2026-11-17T05:52:29.011Z",
   "sha": {
-    "lab": "6d671148454afcc3042298e21d67e1364bfda1ea",
+    "lab": "4207bd6a1a704c4887bf81617e24cf4cdf43785d",
     "mg": "5c259fcd552f04d40f6531907a5f19ef551be259"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44006156869",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44027011262",
   "review": {
     "protected": [
+      {
+        "number": 372,
+        "sha": "0e5d7893812d336299d041199deda50557a07395",
+        "paths": [
+          "scripts/karta-sil/mutate-current-claude-marker.mjs",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 352,
+        "sha": "99a64541e458eb39f499c55655649abb87bf5bc8",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/mutate-viewports.mjs",
+          "scripts/platform/verify-meta-bot-config-candidate.mjs"
+        ]
+      },
       {
         "number": 346,
         "sha": "9f247be3a3530d160f629f531f32eb6469a07bc1",
@@ -464,7 +481,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44005288541"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44025009468"
       },
       "P1": {
         "value": "не подтверждено",
@@ -474,11 +491,26 @@
     }
   },
   "pr": {
-    "open": 33,
+    "open": 41,
     "conflicts": "нет данных",
-    "merged": 67,
-    "closed": 112,
+    "merged": 70,
+    "closed": 114,
     "mergedItems": [
+      {
+        "number": 372,
+        "title": "fix(z01): не направлять PR к Claude по историческим пометкам",
+        "sha": "0e5d7893812d336299d041199deda50557a07395"
+      },
+      {
+        "number": 359,
+        "title": "docs: единый свод правил и идей для «Лучника в тумане»",
+        "sha": "0a37a80d264aaac71832ab16d9ca82b306b7cec6"
+      },
+      {
+        "number": 352,
+        "title": "META BOT: ядро отклоняет пустой и неизвестный список экранов",
+        "sha": "99a64541e458eb39f499c55655649abb87bf5bc8"
+      },
       {
         "number": 358,
         "title": "feat(Z18): лицензированный GLSL-туман и атмосферные молнии в",
@@ -817,6 +849,23 @@
     ],
     "protectedItems": [
       {
+        "number": 372,
+        "sha": "0e5d7893812d336299d041199deda50557a07395",
+        "paths": [
+          "scripts/karta-sil/mutate-current-claude-marker.mjs",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 352,
+        "sha": "99a64541e458eb39f499c55655649abb87bf5bc8",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/mutate-viewports.mjs",
+          "scripts/platform/verify-meta-bot-config-candidate.mjs"
+        ]
+      },
+      {
         "number": 346,
         "sha": "9f247be3a3530d160f629f531f32eb6469a07bc1",
         "paths": [
@@ -1136,7 +1185,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2606,
+      "count": 2669,
       "folders": "нет данных"
     },
     "mg": {
@@ -1212,6 +1261,7 @@
     }
   ],
   "errors": [
+    "| 2026111702 | 17.11.2026 | Защищённое ядро META BOT `checkGame` возвращало `{ok:true,runs:[]}` при `viewports: []` или неизвестном экране — ложный успех без открытия игры | Воспроизведено на исходном `scripts/meta-bot/core.mjs` (PR #311, reports/bot-audit/PROGRESS.md) | scripts/meta-bot/mutate-viewports.mjs: настоящее ядро, 7 неверных и 4 верных конфигурации, checkGame отклоняет, 3 мутации ядра |",
     "| 2026111701 | 17.11.2026 | META BOT could report success for zero screens; actual game configuration now fails KONTUR before acceptance | empty viewports and unknown screen fixtures | scripts/platform/mutate-bot-config.mjs: 3 mutations and real game configurations |",
     "| 2026111401 | 14.11.2026 | Repair Bot молча пропускал недоступные JSON и менял часть набора при неисправимой ошибке; ссылка в предке позволяла писать вне проекта | Воспроизведено изолированными git-fixtures | scripts/repair-bot/selftest-safety.mjs: missing file, directory, batch rollback, junction; 3 мутации |",
     "| 2026111402 | 14.11.2026 | ASSET CHECK распаковывал ZIP без лимита и оставлял временные папки; Windows-пути и дубли зависели от ОС | automation/asset-check/test_zip_safety.py | scripts/repair-bot/selftest-safety.mjs; automation/asset-check/test_zip_safety.py: 3 мутации ZIP |",
@@ -1273,6 +1323,7 @@
     "| 1149 | 13.11.2026 | В 22 активных workflow не было concurrency; в трёх существующих смешанные push/PR могли отменять push/main | Сверка 44 workflow с веткой lab/ci-ochered-concurrency; отсутствие параллельного ограничения | `scripts/lab/mutate-workflow-concurrency.mjs`: удалённая настройка, безусловная отмена, пустая группа и маскировка комментарием |",
     "| 1150 | 17.11.2026 | GITHUB_TOKEN упирался в лимит API (HTTP 403 «rate limit exceeded for installation»): 10 сторожей ходили в API каждый час, а B1 запускал браузер на каждом коммите сторожа в ZADACHI/STATUS | `.github/workflows/*` (расписания), `bot-b1-open-all.yml` (paths-ignore) | `scripts/lab/mutate-pr-status-batch.mjs`: 7 ловушек расписания на новые частоты (раз в 2–3 ч) |",
     "| 1151 | 17.11.2026 | Claude влил verify-etalony-sync.yml с cancel-in-progress: true — постоянная ловушка concurrency краснела у KONTUR Guard на всех PR | .github/workflows/verify-etalony-sync.yml | scripts/lab/mutate-workflow-concurrency.mjs (уже ловит; урок: перед вливанием нового workflow прогонять постоянные мутации KONTUR) |",
-    "| 1152 | 17.11.2026 | Прямые пуши в main не проходили kontur-guard (он только на PR), поэтому поломка Claude (1151) всплыла на чужих PR | .github/workflows/kontur-main.yml, scripts/claude/pre-push.sh | все постоянные мутации на каждом содержательном пуше в main + обязательный pre-push Claude |"
+    "| 1152 | 17.11.2026 | Прямые пуши в main не проходили kontur-guard (он только на PR), поэтому поломка Claude (1151) всплыла на чужих PR | .github/workflows/kontur-main.yml, scripts/claude/pre-push.sh | все постоянные мутации на каждом содержательном пуше в main + обязательный pre-push Claude |",
+    "| 1156 | 17.11.2026 | Диспетчер маршрутизировал PR к Claude по исторической строке «НУЖЕН CLAUDE», хотя текущая первая строка уже «ЖДЁТ» или «ГОТОВ К ПРОВЕРКЕ» | [PR #331](https://github.com/mpaykin1/meta6-lab/pull/331), проверка старого regex в `scripts/karta-sil/route.mjs` | `scripts/karta-sil/mutate-current-claude-marker.mjs`: проверка текущего статуса, эскалации после двух провалов и 3 мутации, в том числе обман по номеру PR |"
   ]
 }

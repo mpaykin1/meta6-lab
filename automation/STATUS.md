@@ -1,9 +1,9 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T02:53:25.756Z | МГЛ: 6d671148454afcc3042298e21d67e1364bfda1ea | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44006156869
+UTC: 2026-11-17T05:52:29.011Z | МГЛ: 4207bd6a1a704c4887bf81617e24cf4cdf43785d | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44027011262
 ## ПРОВЕРИТЬ CLAUDE
-- PR #346 9f247be3a3530d160f629f531f32eb6469a07bc1: scripts/status/mutate-canonical-finish.mjs, scripts/status/selftest.mjs
-- PR #311 fb708269aa165d43dea7a1b3204157a235087afd: automation/asset-check/test_mutation_runner.py, automation/asset-check/test_zip_safety.py, scripts/platform/mutate-bot-config.mjs, scripts/platform/verify-meta-bot-config-candidate.mjs, scripts/repair-bot/mutat… (сокращено)
-- ещё 35: https://github.com/mpaykin1/meta6-lab/pulls
+- PR #372 0e5d7893812d336299d041199deda50557a07395: scripts/karta-sil/mutate-current-claude-marker.mjs, scripts/karta-sil/mutate-karta-sil.mjs
+- PR #352 99a64541e458eb39f499c55655649abb87bf5bc8: scripts/meta-bot/core.mjs, scripts/meta-bot/mutate-viewports.mjs, scripts/platform/verify-meta-bot-config-candidate.mjs
+- ещё 37: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/… (сокращено)
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
@@ -17,7 +17,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44005288541)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44025009468)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -31,12 +31,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 33 | конфликт: нет данных | слито: 67 | закрыто: 112
-#358 feat(Z18): лицензированный GLSL-туман и атмосферные молнии в | 81e5fb9fcce86c5de90ec98953b8316ed87f83a6
-#350 Единая инструкция пяти автозадач и журнал NADZOR | bf240a699201aa2d8b9594c989ec34de47c37170
-ещё 65: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+открыто: 41 | конфликт: нет данных | слито: 70 | закрыто: 114
+#372 fix(z01): не направлять PR к Claude по историческим пометкам | 0e5d7893812d336299d041199deda50557a07395
+#359 docs: единый свод правил и идей для «Лучника в тумане» | 0a37a80d264aaac71832ab16d9ca82b306b7cec6
+ещё 68: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2606 коммитов | нет данных
+МГЛ: 2669 коммитов | нет данных
 МГ: 40 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
@@ -53,6 +53,6 @@ twilight-isles — не запускалась | витрина: да
 veil-terraces — прошла | витрина: да
 wild-train-prologue — не прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
+| 2026111702 | 17.11.2026 | Защищённое ядро META BOT `checkGame` возвращало `{ok:true,runs:[]}` при `viewports: []` или неизвестном экране — ложный успех без открытия игры | Воспроизведено на исходном `scripts/meta-bot/core.mjs` (PR #311, reports/bot-audit/PRO… (сокращено)
 | 2026111701 | 17.11.2026 | META BOT could report success for zero screens; actual game configuration now fails KONTUR before acceptance | empty viewports and unknown screen fixtures | scripts/platform/mutate-bot-config.mjs: 3 mutations and real game configurations |
-| 2026111401 | 14.11.2026 | Repair Bot молча пропускал недоступные JSON и менял часть набора при неисправимой ошибке; ссылка в предке позволяла писать вне проекта | Воспроизведено изолированными git-fixtures | scripts/repair-bot/selftest-safety.mjs: missing fi… (сокращено)
-ещё 60: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+ещё 62: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

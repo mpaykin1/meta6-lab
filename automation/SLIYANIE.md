@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 118, слито 8, закрыто 88, открыто 22 — бот, 2026-11-17 02:59 UTC
+Итог: всего 118, слито 8, закрыто 89, открыто 21 — бот, 2026-11-17 06:32 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -36,8 +36,8 @@
 | #314 | код | — | Sunken City source ZIP | closed | draft: ЖДЁТ зелёный META BOT и Library Machine; ZIP оригинала сохранить [#314](https://github.com/mpaykin1/meta6-lab/pull/314) |
 | #319 | код | — | Source-only git 128 | open | draft: ЖДЁТ source-only-base (отсутствует в main), зелёный Library Machine и новый CI [#319](https://github.com/mpaykin1/meta6-lab/pull/319) |
 | #321 | код | — | INK Raven | merged | слит в feature-ветку `lab/ink-fallen-robot-20261113`, не в main: [SHA 00c22fba](https://github.com/mpaykin1/meta6-lab/commit/00c22fba0c1fbcf71a535ddd9342da286e875b27); [PR #321](https://github.com/mpaykin1/meta6-lab/pull/321) |
-| #322 | код | — | INK Train | open | draft: ЖДЁТ устранения [KONTUR FAIL 43749151115](https://github.com/mpaykin1/meta6-lab/actions/runs/43749151115) и визуального OWNER PASS [#322](https://github.com/mpaykin1/meta6-lab/pull/322) |
-| #325 | код | — | INK Monster | open | draft: ЖДЁТ визуального OWNER PASS монстра и полного CI [#325](https://github.com/mpaykin1/meta6-lab/pull/325) |
+| #322 | код | — | INK Train | open dirty | draft: ЖДЁТ устранения [KONTUR FAIL 43749151115](https://github.com/mpaykin1/meta6-lab/actions/runs/43749151115) и визуального OWNER PASS [#322](https://github.com/mpaykin1/meta6-lab/pull/322) |
+| #325 | код | — | INK Monster | closed | draft: ЖДЁТ визуального OWNER PASS монстра и полного CI [#325](https://github.com/mpaykin1/meta6-lab/pull/325) |
 | #326 | код | — | INK Viaduct | open | draft: ЖДЁТ визуального OWNER PASS 3D-виадуков и CI [#326](https://github.com/mpaykin1/meta6-lab/pull/326) |
 | #332 | код | — | INK Carrion Stalker | open | draft: ЖДЁТ HTTP 200 превью и визуальный OWNER PASS робота [#332](https://github.com/mpaykin1/meta6-lab/pull/332) |
 | #311 | код | `lab/bot-audit-20261114` | Ремонт JSON и ассетов | merged | ГОТОВ К ПРОВЕРКЕ: HEAD `7fa9bead6c68b6f82e730a126b2bd43ebfe73054`, 23 GitHub Actions PASS, 9 skipped, 0 failed; mergeable=true; внешний Vercel build-rate-limit, не считать полным CI PASS; [проверки](https://github.com/mpaykin1/meta6-lab/pull/311/checks) |

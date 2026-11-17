@@ -288,12 +288,12 @@ class KindTraps(unittest.TestCase):
                                           "zone": "new:night", "footprint": .4}}
         (d / "pack.json").write_text(json.dumps(manifest), "utf-8")
         (d / "makers.js").write_text(
-            "import * as T from 'three';\\n"
+            "import * as T from 'three';\n"
             "export const makers={signal:(seed)=>{const g=new T.Group();"
             "for(let i=0;i<35;i++){const m=new T.Mesh(new T.BoxGeometry(.15,.5,.18),"
             "new T.MeshStandardMaterial({color:'#303c38'}));"
             "m.position.set(Math.sin(i+seed)*.4,.25+i*.04,Math.cos(i)*.4);g.add(m);}"
-            "g.userData.footprint=.4;return g;}};\\n", "utf-8")
+            "g.userData.footprint=.4;return g;}};\n", "utf-8")
         report = cp.check(d)
         failures = {i["id"] for i in report.hard()}
         self.assertNotIn("IK1", failures, report.hard())

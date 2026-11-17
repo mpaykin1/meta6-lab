@@ -47,6 +47,10 @@ MUTANTS = [
     ("kinds/htmlpack.py", "if found != CDN:", "if False:"),
     ("kinds/htmlpack.py", "if error:", "if False and error:"),
     ("kinds/htmlpack.py", 'if new_ids and "window.__PACK_PROBE__" not in source:', "if False:"),
+    ("kinds/cutout.py", "if not isinstance(parts, list) or len(parts) < 6:", "if False:"),
+    ("kinds/cutout.py", 'if parent is not None and (parent not in by_name or parent == part["id"]):', "if False:"),
+    ("kinds/cutout.py", "if len(phases) <= 1:", "if False:"),
+    ("kinds/cutout.py", "if fill < 0.06:", "if False:"),
 ]
 
 

@@ -126,9 +126,30 @@ const crookedTrees=[[-8.3,-14.7,13],[11.8,-17.6,29],[-15,-22.0,41]].map(([x,z,se
 const fogBanks=[[-1.1,-9.9,31],[2.8,-8.1,51],[-9.8,-12.4,77]].map(([x,z,seed])=>{
  const fog=makers.groundMist(seed);fog.position.set(x,0,z);scene.add(fog);return fog;
 });
+// Second asset group — static landmarks and animated weather/ground details.
+const skies=[[-6,10,-28,13],[7,11,-36,49]].map(([x,y,z,seed])=>{
+ const a=makers.stormClouds(seed);a.position.set(x,y,z);scene.add(a);return a;
+});
+const fences=[[-5.8,-4.1,12],[13,-13.1,23]].map(([x,z,seed])=>{
+ const a=makers.brokenFence(seed);a.position.set(x,0,z);scene.add(a);return a;
+});
+const grasses=[[-4,-4.6,18],[4,-4.2,42],[10,-5.1,65]].map(([x,z,seed])=>{
+ const a=makers.tallGrass(seed);a.position.set(x,0,z);scene.add(a);return a;
+});
+const railGlow=makers.wetRailGlow(5);railGlow.position.set(7,.0,TRACK_Z);scene.add(railGlow);
+const wire=makers.barbedWire(7);wire.position.set(-6.3,0,-13.2);scene.add(wire);
+const puddles=[[-4,-3.6,3],[8,-3.9,33]].map(([x,z,seed])=>{
+ const a=makers.swampPuddles(seed);a.position.set(x,0,z);scene.add(a);return a;
+});
+const bell=makers.crossingBell(15);bell.position.set(7.0,2.7,-11.2);scene.add(bell);
+const noiseChains=makers.chainsClank(9);noiseChains.position.set(-10.2,3.4,-15);scene.add(noiseChains);
 const packObjects={blackLocomotive:blackEngine,crossingSign:crossing,redSignalLamp:signal,
- hangingChains:chains,gnarledTree:crookedTrees,groundMist:fogBanks};
-const animatedPack=[...chains,...crookedTrees,...fogBanks];
+ hangingChains:chains,gnarledTree:crookedTrees,groundMist:fogBanks,
+ stormClouds:skies,brokenFence:fences,tallGrass:grasses,wetRailGlow:railGlow,
+ barbedWire:wire,swampPuddles:puddles,
+ titleLogo:document.querySelector('#panel h1'),crossingBell:bell,chainsClank:noiseChains};
+const animatedPack=[...chains,...crookedTrees,...fogBanks,...skies,...grasses,
+ railGlow,wire,...puddles,bell,noiseChains];
 
 // ---------- old-film post ----------
 const target=new T.WebGLRenderTarget(2,2,{type:T.HalfFloatType,depthBuffer:true});
@@ -418,6 +439,7 @@ function step(dt){
   const signalNear=TR.active?T.MathUtils.clamp(1-Math.abs(TR.x-6.9)/240,0,1):0;
   signal.userData.setApproach(signalNear,t);
   if(state==='play'){crossingBell(t,signalNear);if(signalNear<.3)chainsClank(t);}
+  railGlow.userData.tick(t,dt,signalNear);
   // flashlight: warm-white beam with a little hand tremble and dying-battery flicker
   const lightOn=(state==='play'||state==='dawn'||state==='caught')&&torchOn&&torchDead<=0&&battery>0;
   let I=lightOn?1:0;
@@ -438,6 +460,7 @@ function step(dt){
   const forward=new T.Vector3();camera.getWorldDirection(forward);
   const center=new T.Vector3();
   for(const a of animatedPack){
+    if(a===railGlow)continue;
     a.getWorldPosition(center);center.sub(camera.position);
     if(center.lengthSq()<6400&&forward.dot(center.normalize())>-.2)a.userData.tick(elapsed,dt);
   }
@@ -476,6 +499,8 @@ window.__INK_NIGHT_SCREAM__={
 window.__PACK__=packObjects;
 window.__ISOLATE__=(id,on)=>{
  const objects=packObjects[id];if(!objects)return false;
- for(const o of Array.isArray(objects)?objects:[objects])o.visible=!!on;
+ for(const o of Array.isArray(objects)?objects:[objects]){
+   if(o instanceof HTMLElement)o.hidden=!on;else o.visible=!!on;
+ }
  return true;
 };

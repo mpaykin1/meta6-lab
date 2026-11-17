@@ -78,8 +78,9 @@ export function detectNoPatterns(source, filename = '<fixture>') {
   for (const m of source.matchAll(instancedGrid)) {
     const setup = m[0].replace(/\/\*[\s\S]*?\*\//g, '')
       .replace(/\/\/[^\n]*/g, '');
-    const regular = /\b(?:position\.set|makeTranslation)\s*\([^;\n]*(?:Math\.floor\s*\(|%\s*\d+|\b(?:row|col)\s*\*)/i;
-    if (!regular.test(setup) || !/\bsetMatrixAt\s*\(/.test(setup)) continue;
+    const transform = /\b(?:position\.set|makeTranslation)\s*\(([^;\n]*)/i.exec(setup)?.[1] || '';
+    const regular = /(?:Math\.floor\s*\(|%\s*\d+|\b(?:row|col)\s*\*)/i.test(transform);
+    if (!regular || !/\bsetMatrixAt\s*\(/.test(setup)) continue;
     const variation = /\b(?:random|hash|noise|jitter|seededJitter|vary|variation)\s*\(/i;
     if (!variation.test(setup)) {
       report(m.index, 'INSTANCE_GRID: repeated InstancedMesh transforms without seeded variation');

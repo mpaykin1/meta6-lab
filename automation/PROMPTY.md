@@ -1,5 +1,7 @@
 # Реестр промптов META GAMES LAB
 
+**Действующий вход (17.11.2026): [GPT.md](../GPT.md)** — чат и 5 автозадач читают только его; карточки задач — [automation/zadachi/](zadachi/). Автозадачи: [prompts/MG_PYAT_AVTOZADACH.md](prompts/MG_PYAT_AVTOZADACH.md); чат: [prompts/CHAT_VHOD.md](prompts/CHAT_VHOD.md). Промпты ниже — справочные: GPT.md и карточки ссылаются на нужные (PROHODCHIK, ASSET_PACK_BOT, rules-bot-B6-B7).
+
 Источник: `automation/prompts/*.md` и `automation/prompts/archive/*.md` на `main` МГЛ; копии МГ — только чтение. Учёт задач: [ZADACHI.md](../ZADACHI.md), снимок 2026-11-11. Критерий «многоразовый = да»: явная ссылка на [MNOGORAZOVYE_PROMPTY.md](../rules/06-rabota-ii-s-kodom/MNOGORAZOVYE_PROMPTY.md) либо все четыре пункта внутри файла. Дублирование записей по одному PR не является отдельным подтверждённым результатом.
 
 | Промпт (ссылка) | Для кого | Статус | Чем заменён / причина сомнения | Многоразовый | Последнее изменение (SHA, UTC) | Задач в ZADACHI.md | Из них ✅ / 🛑 / ✖ | Отличается копия в МГ |

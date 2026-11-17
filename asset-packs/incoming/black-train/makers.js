@@ -11,24 +11,6 @@ const beam=(g,a,b,r,m,r2=r)=>{const va=new T.Vector3(...a),vb=new T.Vector3(...b
 const globe=(g,x,y,z,r,m,sx=1,sy=1,sz=1)=>{const q=new T.Mesh(new T.IcosahedronGeometry(r,1),m);q.scale.set(sx,sy,sz);q.position.set(x,y,z);q.userData.watercolorOutline=true;g.add(q);return q;};
 const done=(g,name,fp=0)=>{g.name=name;g.userData.footprint=fp;return g;};
 const sway=(items,amp=.03)=>t=>{items.forEach((q,i)=>{q.rotation.z=Math.sin(t*.54-i*.22)*amp*(.4+i/Math.max(1,items.length));});};
-function blackLocomotive(seed=1){
- const g=new T.Group(),body=ink('#101619'),roof=ink('#090d10'),lit=new T.MeshBasicMaterial({color:'#e6d6ae'}); 
- box(g,-2.2,1.65,0,5.5,2.75,2.65,body);box(g,-2.2,3.14,0,5.3,.32,2.9,roof);
- box(g,.56,1.8,0,.52,2.55,2.8,iron);box(g,.84,.8,0,.29,1.15,2.82,steel);
- for(let i=0;i<5;i++){box(g,-4.4+i*.95,2.58,1.346,.48,.41,.08,lit);box(g,-4.4+i*.95,2.58,-1.346,.48,.41,.08,lit);}
- for(let k=0;k<6;k++){const x=-4.5+k*.87;for(const z of [-1.16,1.16]){const q=new T.Mesh(new T.CylinderGeometry(.46,.46,.19,12),iron);q.rotation.x=Math.PI/2;q.position.set(x,.47,z);g.add(q);const r=new T.Mesh(new T.TorusGeometry(.27,.045,5,16),steel);r.position.set(x,.47,z+Math.sign(z)*.11);g.add(r);}}
- for(let i=0;i<7;i++){const x=-4.65+i*.75;box(g,x,3.4,0,.31,.36,1.38,roof);}
- box(g,.47,3.4,0,.68,.51,.73,iron);
- for(const z of [-.96,.96]){const q=new T.Mesh(new T.CylinderGeometry(.26,.26,.12,16),cream);q.rotation.z=Math.PI/2;q.position.set(.91,1.23,z);g.add(q);}
- const h=new T.Mesh(new T.CylinderGeometry(.31,.31,.13,16),cream);h.rotation.z=Math.PI/2;h.position.set(.94,3.34,0);g.add(h);
- const search=new T.SpotLight('#c7dfeb',25,35,.27,.8,1.8);search.position.set(1.06,3.3,0);search.target.position.set(22,1.8,0);g.add(search,search.target);
- for(let i=0;i<12;i++){const x=-4.8+i*.43;box(g,x,1.28,1.38,.08,.6,.11,steel,0,0,(i%3-1)*.04);}
- for(let i=0;i<15;i++){const x=-4.95+i*.36;const z=i%2?1.34:-1.34;globe(g,x,1.9+rnd(seed,i)*.5,z,.045,steel);}
- const step=box(g,-3.2,.85,1.61,1.1,.09,.58,steel);
- for(let i=0;i<4;i++)box(g,-3.65+i*.27,1.05,1.8,.07,.5,.07,steel);
- const lamp=h;g.userData.tick=t=>{lamp.material=cream;step.rotation.z=Math.sin(t*.52)*.002;};
- return done(g,'Чёрный локомотив',2.9);
-}
 function crossingSign(seed=1){
  const g=new T.Group();const post=beam(g,[0,0,0],[.22,3.9,.1],.14,wood,.095);post.rotation.z=-.07;
  for(const angle of [-.77,.77]){const q=box(g,.19,3.52,.1,2.65,.27,.22,ink('#bbb6a3'),0,0,angle);for(let i=0;i<4;i++)box(g,.2+(i-1.5)*.47*Math.cos(angle),3.52+(i-1.5)*.47*Math.sin(angle),.24,.12,.04,.07,iron,0,0,angle);}
@@ -43,7 +25,7 @@ function redSignalLamp(seed=1){
  for(let i=0;i<7;i++){const a=i*6.283/7;beam(lamp,[Math.cos(a)*.29,Math.sin(a)*.29,.13],[Math.cos(a+.16)*.12,Math.sin(a+.16)*.12,.18],.012,steel);}
  for(let i=0;i<4;i++)beam(lamp,[.1+i*.03,-.2,.22],[.04+i*.03,-.36-rnd(seed,i)*.17,.25],.012,red);
  const halo=new T.PointLight('#ff2409',3,8,2);halo.position.z=.32;lamp.add(halo);
- g.userData.tick=t=>{const v=.35+.65*Math.pow(.5+.5*Math.sin(t*3.2),3);halo.intensity=2.8*v;red.emissiveIntensity=.4+2.3*v;};
+ g.userData.tick=t=>{const v=.35+.65*Math.pow(.5+.5*Math.sin(t*3.2),3);halo.intensity=2.8*v;red.emissiveIntensity=.4+2.3*v;face.scale.z=.25+.12*v;};
  g.userData.interact={radius:6,effect:'warn-train',label_ru:'Сигнал приближения поезда'};
  return done(g,'Красный сигнальный фонарь',.35);
 }
@@ -112,4 +94,4 @@ function swampPuddles(seed=1){
 function titleLogo(seed=1){const g=new T.Group();box(g,0,1,0,3,.7,.08,wood);for(let i=0;i<11;i++)box(g,-1.25+i*.25,1.02,.065,.14,.25+rnd(seed,i)*.2,.03,i%3?steel:red);g.userData.tick=t=>g.rotation.y=.03*Math.sin(t*.3);return done(g,'BLACK TRAIN · знак меню',0);}
 function crossingBell(seed=1){const g=new T.Group();const cup=new T.Mesh(new T.CylinderGeometry(.1,.43,.61,14,1,true),steel);cup.position.y=1.17;g.add(cup);box(g,0,1.6,0,.09,.48,.09,iron);const cl=globe(g,0,.76,0,.12,wood);g.userData.tick=t=>{cl.position.x=.08*Math.sin(t*2.4);};return done(g,'Колокол переезда',.1);}
 function chainsClank(seed=1){const g=hangingChains(seed);const q=globe(g,.16,1.2,0,.14,steel);g.userData.tick=t=>{q.position.x=.12*Math.sin(t*.81);};g.name='Звон цепей';return g;}
-export const makers={blackLocomotive,crossingSign,redSignalLamp,hangingChains,gnarledTree,groundMist,stormClouds,brokenFence,tallGrass,wetRailGlow,barbedWire,swampPuddles,titleLogo,crossingBell,chainsClank};
+export const makers={crossingSign,redSignalLamp,hangingChains,gnarledTree,groundMist,stormClouds,brokenFence,tallGrass,wetRailGlow,barbedWire,swampPuddles,titleLogo,crossingBell,chainsClank};

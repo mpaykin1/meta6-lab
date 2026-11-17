@@ -58,6 +58,13 @@ class HtmlPackTraps(unittest.TestCase):
     def ids(self, data=None, error=None):
         return {x["id"] for x in self.check(data, error).hard()}
 
+    def test_ink_stand_with_pack_probe_is_not_htmlpack(self):
+        # An INK scene can expose window.__PACK__ for its object menu.
+        manifest = dict(COMMON, format="ink-pack/1")
+        self.root.joinpath("pack.json").write_text(json.dumps(manifest), "utf-8")
+        htmlpack = next(k for k in cp.load_kinds() if k.NAME == "htmlpack")
+        self.assertFalse(htmlpack.detect(self.root))
+
     def test_good_reference_passes_without_hard(self):
         self.assertEqual([], self.check().hard())
 

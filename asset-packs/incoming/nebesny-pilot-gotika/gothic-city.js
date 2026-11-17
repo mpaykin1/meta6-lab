@@ -223,6 +223,94 @@ window.GothicCity = (() => {
     }
   }
   makeHorizon();
+  /* Многоплановый готический силуэт: контрфорсы, аркады и окна
+     нарисованы один раз. Каждый фрагмент не повторяет шаблон соседнего. */
+  function architectureLayer(seed,near){
+    const art=mk(960,440),c=art.getContext('2d');
+    const r=rng(seed);
+    c.imageSmoothingEnabled=false;
+    const tone=near?['#40334e','#56425b','#6a5268','#86657a']:['#413453','#564064','#644865','#85596f'];
+    function brick(x,y,w,h,depth){
+      rect(c,tone[depth%tone.length],x,y,w,h);
+      for(let z=0;z<Math.max(12,(w*h/145)|0);z++){
+        const xx=x+2+r()*Math.max(1,w-4),yy=y+2+r()*Math.max(1,h-4);
+        rect(c,r()>.65?'#bb8490':'#312a48',xx,yy,1+(r()*3|0),1);
+      }
+    }
+    function lancet(x,y,scale){
+      rect(c,'#2c2945',x,y,Math.max(2,scale*3),Math.max(5,scale*8));
+      rect(c,r()>.25?'#ffe3a0':'#e9a87f',x+scale*.6,y+scale*1.2,scale*1.7,scale*5.8);
+      poly(c,'#3a304c',[[x,y+scale*2],[x+scale*1.5,y-scale*1.2],[x+scale*3,y+scale*2]]);
+      rect(c,'#79556b',x+scale*1.42,y+scale*2,1,scale*5);
+    }
+    const base=435;
+    let x=-25;
+    while(x<990){
+      const width=46+r()*95,height=110+r()*210;
+      const px=x,py=base-height;
+      brick(px,py,width,height,1+(r()*3|0));
+      brick(px-5,py+20,6,height-20,3);
+      brick(px+width,py+20,6,height-20,2);
+      const peak=18+r()*46;
+      poly(c,r()>.5?'#6c3c5b':'#864861',[[px-5,py+5],[px+width/2,py-peak],[px+width+5,py+5]]);
+      poly(c,'#b36978',[[px+width/2-3,py-peak+3],[px+width/2,py-peak-3],[px+width/2+4,py-peak+3]]);
+      const nWin=3+(r()*4|0),spacing=width/(nWin+1);
+      for(let k=1;k<=nWin;k++)for(let row=0;row<4;row++){
+        const yy=py+25+row*(24+r()*12);
+        if(yy>base-19)continue;
+        if(r()<.15)continue;
+        lancet(px+k*spacing-3,yy,1+(r()*.6));
+      }
+      if(r()>.35){
+        const tx=px+width*.78,th=35+r()*70,ww=8+r()*12;
+        brick(tx-ww/2,py-th/2,ww,th,2);
+        poly(c,'#34273d',[[tx-ww/2-3,py-th/2],[tx,py-th-20],[tx+ww/2+3,py-th/2]]);
+        rect(c,'#d9a08e',tx,py-th-20,1,13);
+      }
+      for(let k=0;k<6;k++)if(r()>.52){
+        const vx=px+r()*width,vy=py+r()*height;
+        rect(c,r()>.7?'#849078':'#4b675c',vx,vy,4+r()*7,2);
+      }
+      x+=width*(.61+r()*.46);
+    }
+    // Силовой каркас многоярусных виадуков: отверстия реальны, не закрашены камнем.
+    const stages=near?3:2;
+    for(let row=0;row<stages;row++){
+      const yy=near?178+row*84:280+row*65;
+      const top=yy+6+(r()*12|0),step=near?116:143;
+      rect(c,'#3c324e',0,top,960,10+row*3);
+      rect(c,'#ab7785',0,top,960,2);
+      for(let k=0;k<12;k++){
+        const cx=k*step+(row%2?step*.45:0)+(r()-.5)*28;
+        const wide=step*.64+r()*15;
+        brick(cx-wide/2,top+9,13+(r()*6|0),105+row*22,2);
+        brick(cx+wide/2-13,top+9,16,105+row*22,3);
+        const crown=top+40+r()*10;
+        // Лучистая стрельчатая арка — каменные рёбра над воздухом.
+        for(let h=0;h<29;h+=2){
+          const progress=h/29,span=(1-progress)*wide*.43;
+          const y=crown-progress*30;
+          rect(c,'#6d516c',cx-span-4,y,9,3);
+          rect(c,'#8b6577',cx+span-4,y,9,3);
+        }
+        for(let j=0;j<3;j++)lancet(cx-wide/2+2,top+19+j*20,.7);
+        if(row===0 && k%2===0){rect(c,'#c17f80',cx-wide/2-4,top-4,10,3);rect(c,'#ffd795',cx-wide/2+1,top-8,3,4);}
+      }
+    }
+    return art;
+  }
+  const backdropFar=architectureLayer(3437,false);
+  const backdropNear=architectureLayer(8931,true);
+  function drawArchitecture(horizon,fade){
+    const layers=[[backdropFar,1.53,.74,.45],[backdropNear,1.92,.94,.75]];
+    for(const [pic,mult,up,alpha] of layers){
+      const width=W*mult,height=Math.max(H*.66,140),speed=alpha*.045;
+      const dx=((cam.x*speed+t*(alpha+.2))%width+width)%width;
+      g.globalAlpha=fade*alpha;
+      for(let k=-1;k<=Math.ceil(W/width)+1;k++)
+        g.drawImage(pic,k*width-dx,horizon-height*up,width,height);
+    }
+  }
   function drawBackground() {
     const fade = clamp((165 - P.z) / 115, .22, 1);
     g.save();
@@ -263,6 +351,7 @@ window.GothicCity = (() => {
       g.fillStyle = k > 9 ? '#f8c795' : '#ffe0a0';
       g.fillRect((sx-half)|0, (sy+yy)|0, (half*2)|0, Math.max(1,H*.006)|0);
     }
+    drawArchitecture(horizon,fade);
     // Нерегулярные полосы облаков: избегаем повторяющегося синусоидального узора.
     g.globalAlpha = fade*.37;
     for(let n = 0; n < 23; n++) {

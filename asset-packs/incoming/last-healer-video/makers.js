@@ -50,7 +50,8 @@ export function carHeadlights(seed=1){
  }
  const stripes=[-.65,-.31,0,.31,.65];
  for(let i=0;i<stripes.length;i++)block(g,.032,.028,.04,pigment.iron,stripes[i],.48,-.72);
- g.userData.mount={vehicle:'car',front:'-z',at:[0,0,0]};
+ const facing=new T.Group();while(g.children.length)facing.add(g.children[0]);g.add(facing);facing.rotation.y=Math.PI;
+ g.userData.mount={vehicle:'car',front:'+z',at:[0,0,0]};
  g.userData.tick=t=>{const e=.92+.075*Math.sin(t*2.7);flares.forEach(l=>l.scale.z=.32+e*.07);glows.forEach((x,i)=>{x.material.opacity=(i%4===3?.13:.12)*e;});};
  return finish(g,0);
 }
@@ -157,7 +158,8 @@ export function rainSplashRings(seed=1){
  }
  const points=68;const pos=new Float32Array(points*3);
  for(let i=0;i<points;i++){pos[3*i]=(random()-.5)*5.6;pos[3*i+1]=.6+random()*3.5;pos[3*i+2]=(random()-.5)*5.5;}
- const initialY=Array.from({length:points},(_,i)=>pos[i*3+1]);const geo=new T.BufferGeometry();geo.setAttribute('position',new T.BufferAttribute(pos,3));
+ const initialY=Array.from({length:points},(_,i)=>pos[i*3+1]);const originalY=Array.from({length:points},(_,i)=>pos[3*i+1]);
+ const geo=new T.BufferGeometry();geo.setAttribute('position',new T.BufferAttribute(pos,3));
  const streaks=new T.Points(geo,pigment.spray);g.add(streaks);
  g.userData.tick=t=>{
   for(const {mesh,origin,duration,radius} of rings){

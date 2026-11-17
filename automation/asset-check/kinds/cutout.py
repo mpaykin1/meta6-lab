@@ -141,4 +141,55 @@ def check(root: Path, report) -> set[str]:
         if len(phases) <= 1:
             report.add("CJ4", "HARD", name, "every limb has identical phase",
                        "Offset the phase of child joints to make a traveling movement")
+    # A registered asset is not delivered merely by naming it in ZAKAZ/pack.json.
+    # Check that the declared visual or audio module contains an implementation hook.
+    manifest = root / "pack.json"
+    if manifest.is_file():
+        try:
+            assets = json.loads(manifest.read_text("utf-8")).get("assets", {})
+        except (OSError, ValueError):
+            assets = {}
+        if isinstance(assets, dict):
+            scene = (root / "scene.js").read_text("utf-8") if (root / "scene.js").is_file() else ""
+            for asset_id, meta in assets.items():
+                if not isinstance(meta, dict):
+                    report.add("CJ8", "HARD", asset_id, "invalid asset metadata",
+                               "Describe source, role and label")
+                    continue
+                source_name = str(meta.get("source", ""))
+                if source_name.startswith("asset-packs/incoming/vorona-v-tumane/"):
+                    source_name = source_name.rsplit("/", 1)[-1]
+                if source_name.startswith("reference/vorona-v-tumane/"):
+                    source_name = "scene.js"
+                if source_name not in ("scene.js", "creatures.js", "audio.js", "cutout.json"):
+                    report.add("CJ8", "HARD", asset_id, "asset source outside allowed implementation",
+                               "Link the actual scene, cutout, creature or audio implementation")
+                    continue
+                path = root / source_name
+                if not path.is_file():
+                    report.add("CJ8", "HARD", asset_id, "asset implementation missing",
+                               "Create the declared module")
+                    continue
+                implementation = path.read_text("utf-8", errors="replace")
+                visual_hook = (
+                    f"objects.{asset_id}" in implementation or
+                    f"id:'{asset_id}'" in implementation or
+                    f"spectral('{asset_id}'" in implementation or
+                    f"'{asset_id}'" in implementation and "createCreatures" in implementation
+                )
+                rig_hook = source_name == "cutout.json" and asset_id in ("crow_wings", "crow_tail", "stalker_limbs") and (
+                    "buildCrowCutout" in scene and "buildCutoutRig" in scene
+                )
+                audio_hook = source_name == "audio.js" and (
+                    "createSoundscape" in implementation and f"id==='{asset_id}'" in scene
+                )
+                if source_name == "scene.js":
+                    visual_hook = visual_hook or f"'{asset_id}'" in implementation and (
+                        "world.add(" in implementation and "renderer.render(" in implementation
+                    )
+                if not (visual_hook or rig_hook or audio_hook):
+                    report.add("CJ8", "HARD", asset_id, "asset listed but no drawing or sound hook",
+                               "Implement the declared effect in the actual referenced module")
+                else:
+                    report.asset_ids.add(asset_id)
     return covered

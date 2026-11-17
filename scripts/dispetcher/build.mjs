@@ -3,7 +3,7 @@ const {GITHUB_REPOSITORY: repo='mpaykin1/meta6-lab',GITHUB_TOKEN: token}=process
 const root='https://api.github.com/repos/'+repo;
 const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-dispatcher','Authorization':'Bearer '+token};
 export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTimeout(done,ms)),
- now=()=>Date.now(),maxWaitMs=8*60*1000}={}){
+ now=()=>Date.now(),maxWaitMs=10000}={}){
  for(let attempt=0;attempt<2;attempt++){
   const response=await request(root+path,{headers});
   if(response.ok)return response.json();

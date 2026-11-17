@@ -1,7 +1,7 @@
 diff --git a/scripts/meta-bot/core.mjs b/scripts/meta-bot/core.mjs
 --- a/scripts/meta-bot/core.mjs
 +++ b/scripts/meta-bot/core.mjs
-@@ -221,7 +221,13 @@ export async function checkGame({ gameDir, repoRoot, baseUrl, query = '' }) {
+@@ -222,6 +222,11 @@ export async function checkGame({ gameDir, repoRoot, baseUrl, query = '' }) {
        const full = cfg.secondRun !== 'hash';
        const again = await runOnce({ baseUrl, gameDir, repoRoot, viewportName: cfg.viewports[0], cfg: { ...cfg, skipChecks: [...cfg.skipChecks, 'fps'] }, strategy, browser, query, firstOnly: !full });
 -      again.viewport = cfg.viewports[0] + ' (2-й запуск)'; if (full) runs.push(again);

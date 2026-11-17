@@ -18,3 +18,9 @@
 **Сравнение:** [20 новых PNG vs три эталонных мотива](https://github.com/mpaykin1/meta6-lab/commit/e1e0b158844df0066827b23abff9cde3a87855b6), [интерактивное увеличение каждого ассета](./_check/compare.html). Для JET/CLOUD/ISLAND на статичном листе показаны реконструкции мотивов эталона; сам оригинал доступен в отдельном iframe для реального сопоставления.
 
 **Текущая проверка:** [ASSET CHECK #43909263886](https://github.com/mpaykin1/meta6-lab/actions/runs/43909263886) — 79/79 тестов, 41/42 мутантов (слабая ловушка SS6); [поправлена независимая ловушка](https://github.com/mpaykin1/meta6-lab/commit/b8569e5895c926688e9f6d0bd742f64cbe982a62); ожидается повторная приёмка. [PR #343](https://github.com/mpaykin1/meta6-lab/pull/343) — черновик до качества.
+
+## Проверенная приёмка 17.11.2026
+
+- [ASSET CHECK 43912262995](https://github.com/mpaykin1/meta6-lab/actions/runs/43912262995): 81 тест PASS, 43/43 мутанта, пакет `incoming-nebesny-pilot-plus` — **HARD=0**, **20/20** по ZAKAZ, оценка **97/100**, 3 SOFT (верх/низ: sailingShip, volcanicIsland, hotAirBalloon). Сохранён [артефакт report.json](https://github.com/mpaykin1/meta6-lab/actions/runs/43912262995/artifacts/14251010080).
+- [4224c6d](https://github.com/mpaykin1/meta6-lab/commit/4224c6d6170f9bef7e8cb2593ce44593e0e9596a): конфликт с main снят; восстановлены защищённые от ZipSlip проверки ZIP. Прежняя запись «0/20 независимо приняты» относится к состоянию до этого прогона.
+- Непроверено: интерактивный браузерный осмотр всех 20 в живом полёте, замеры FPS и 8 ракурсов. Не объявлять финальную приёмку глазами до проверки.

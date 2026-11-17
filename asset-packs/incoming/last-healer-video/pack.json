@@ -1,0 +1,50 @@
+{
+  "format": "ink-pack/1",
+  "game": "ostrov-aptekarya",
+  "base": "reference/ink-fallen-guardian",
+  "version": "1.0.0",
+  "license": {
+    "type": "original",
+    "author": "META GAMES",
+    "commercial": true
+  },
+  "provenance": {
+    "tool": "Three.js procedural geometry + GLSL",
+    "date": "2026-11-17",
+    "source": "Owner video commission, first four ZAKAZ.json items from last-healer-video"
+  },
+  "content_flags": {
+    "real_persons": false,
+    "brands": false,
+    "political": false
+  },
+  "assets": {
+    "carHeadlights": {
+      "label_ru": "Живой свет автомобильных фар",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0,
+      "benefit": "освещает дорогу ночью"
+    },
+    "handFlashlight": {
+      "label_ru": "Ручной фонарь с лучом и бликами",
+      "role": "interactive",
+      "zone": "woodland",
+      "footprint": 0,
+      "benefit": "помогает найти травы и путь ночью"
+    },
+    "rowingHealer": {
+      "label_ru": "Аптекарь — гребец с двумя вёслами",
+      "role": "character",
+      "zone": "lakeside",
+      "footprint": 0.7,
+      "benefit": "управляет лодкой и помогает переправиться"
+    },
+    "rainSplashRings": {
+      "label_ru": "Дождевые штрихи и кольца на земле",
+      "role": "effect",
+      "zone": "any",
+      "footprint": 0
+    }
+  }
+}

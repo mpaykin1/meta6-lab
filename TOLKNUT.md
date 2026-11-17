@@ -1,6 +1,7 @@
 # ТОЛКНУТЬ — обычный чат ChatGPT
 
-- [PR #357](https://github.com/mpaykin1/meta6-lab/pull/357) · нет данных · Запрет выдачи автозадачам · Красная проверка: kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/44004341124/job/133776015430), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/44004341135/job/133775863521)
+- [PR #374](https://github.com/mpaykin1/meta6-lab/pull/374) · нет данных · Запрет выдачи автозадачам · Конфликт с main
+- [PR #357](https://github.com/mpaykin1/meta6-lab/pull/357) · нет данных · Запрет выдачи автозадачам · Красная проверка: visual (https://github.com/mpaykin1/meta6-lab/actions/runs/44068885985/job/133989844178)
 - [PR #368](https://github.com/mpaykin1/meta6-lab/pull/368) · нет данных · Запрет выдачи автозадачам · Конфликт с main
 - [PR #306](https://github.com/mpaykin1/meta6-lab/pull/306) · жёлтая · Превышено 5 файлов: требуется разбиение · Конфликт с main
 - [PR #322](https://github.com/mpaykin1/meta6-lab/pull/322) · красная · Запрет выдачи автозадачам · Конфликт с main

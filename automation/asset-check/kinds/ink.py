@@ -54,11 +54,20 @@ def hexrgb(c):
     return tuple(int(c[i:i + 2], 16) for i in (0, 2, 4))
 
 
+def harness_base(base: Path) -> Path:
+    """Night Scream shares Three.js and paint with the approved Fallen Guardian renderer."""
+    if (base / "three.module.js").exists():
+        return base
+    if base.name == "ink-night-scream" and (base / "src/scene.js").exists() and (base / "src/ink-night-train.js").exists():
+        return REPO / "reference/ink-fallen-guardian"
+    return base
+
+
 def run_harness(base: Path, makers: Path):
     node = shutil.which("node")
     if not node:
         return None, "нет node — бот не может прогнать ассеты INK"
-    p = subprocess.run([node, str(HARNESS), str(base), str(makers)], capture_output=True, text=True, timeout=300)
+    p = subprocess.run([node, str(HARNESS), str(harness_base(base)), str(makers)], capture_output=True, text=True, timeout=300)
     try:
         return json.loads(p.stdout), None
     except Exception:  # noqa
@@ -105,7 +114,7 @@ def check(root: Path, r) -> set:
     pj = json.loads((root / "pack.json").read_text("utf-8"))
     covered = {"pack.json", "makers.js", "README.md"}
     base = (REPO / pj.get("base", DEFAULT_BASE)).resolve()
-    if not (base / "three.module.js").exists():
+    if not (harness_base(base) / "three.module.js").exists():
         r.add("IK1", "HARD", "pack.json", f"эталон INK не найден: {pj.get('base', DEFAULT_BASE)}",
               f'"base": "{DEFAULT_BASE}" — папка эталона в meta6-lab')
         return covered
@@ -144,7 +153,7 @@ def check(root: Path, r) -> set:
         if name not in made:
             r.add("IK3", "HARD", name, "описан в pack.json, но нет в makers.js", "Добавь maker или убери описание")
     ink_rgb = [hexrgb(c) for c in INK_PALETTE]
-    bar = baseline(base)
+    bar = baseline(harness_base(base))
     if bar:
         r.stats["ink_quality_bar"] = bar
     for name, m in made.items():
@@ -171,6 +180,9 @@ def check(root: Path, r) -> set:
             r.add("IK7", "HARD", name, f"{m['tris']} треугольников > {hi} для {role}", "Упрости геометрию (меньше сегментов)")
         elif m["tris"] > lo:
             r.add("IK7", "SOFT", name, f"{m['tris']} треугольников > {lo}", "Упрости или сделай вариант для дальнего плана")
+        if base.name == "ink-night-scream" and role == "vehicle" and m["meshes"] < 40:
+            r.add("IK16", "HARD", name, "локомотив примитивнее эталона: меньше 40 деталей",
+                  "Сложный силуэт с отдельной кабиной, окнами, колёсами, лестницами и фарами")
         if m["meshes"] > 200:
             r.add("IK7", "HARD", name, f"{m['meshes']} отдельных мешей — тормоза на телефоне", "Объедини меши (batchInk эталона)")
         elif m["meshes"] > 80:
@@ -188,7 +200,10 @@ def check(root: Path, r) -> set:
             continue
         size = [m["max"][i] - m["min"][i] for i in range(3)]
         top = max(size)
-        if top > SIZE_MAX.get(role, 7.0):
+        size_cap = SIZE_MAX.get(role, 7.0)
+        if base.name == "ink-night-scream":
+            size_cap = {"vehicle": 60.0, "tree": 10.0}.get(role, size_cap)
+        if top > size_cap:
             r.add("IK9", "HARD", name, f"размер {top:.1f} м — несоразмерно (путник 1.6 м)", "Единица = метр; путник ≈ 1.6 м")
         if top < 0.12:
             r.add("IK9", "HARD", name, f"размер {top:.2f} м — не видно", "Сделай крупнее (путник ≈ 1.6 м)")

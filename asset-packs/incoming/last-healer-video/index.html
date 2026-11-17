@@ -25,13 +25,14 @@ canvas{display:block}
 <button data-focus="rowingHealer">Утро · гребец у причала</button>
 <button id="light">Выключить ручной фонарь</button>
 <button id="orbit">Автообзор: включён</button>
-<small>Поворот камеры — мышью или пальцем. Сцена использует одобренные модели машины, путника, причала и рендер INK из эталона без изменения исходников. Лодочный корпус — только демонстрационный держатель гребца.</small>
+<small>Поворот камеры — мышью или пальцем. Сцена использует одобренные модели машины, путника, причала и рендер INK из эталона без изменения исходников. Корпус лодки взят из принятого эталона INK без изменений.</small>
 </aside><div id="error"></div>
 <script type="module">
 import * as T from 'three';
 import {makers} from './makers.js';
 import {car,pier,streetlamp,bush} from '../../../reference/ink-fallen-guardian/ink-settlement.js';
 import {traveller,fir,rock} from '../../../reference/ink-fallen-guardian/ink-objects.js';
+import {rowboat} from '../../../reference/ink-fallen-guardian/ink-extras.js';
 import {createLivingWatercolor3D,createWatercolorStyle} from '../../../reference/ink-fallen-guardian/shared/living-watercolor-3d.js';
 const stage=document.querySelector('#stage'),panel=document.querySelector('#panel'),menu=document.querySelector('#menu');
 try{
@@ -69,13 +70,8 @@ const handLight=add(makers.handFlashlight(9),0,0,.5,'handFlashlight');handLight.
 const rain=add(makers.rainSplashRings(19),0,0,0,'rainSplashRings');
 for(let i=0;i<4;i++){const t=add(fir(i+3),2.5+i*.7,0,-2.1+i*.37);t.scale.setScalar(.48+i*.13);}
 const wharf=add(pier(),7.7,0,1.0);wharf.rotation.y=-Math.PI/2;
-// Preview-only seat under the oars; the approved boat lives in the source game, not this pack.
-const hull=new T.Group();
-const hullMesh=new T.Mesh(new T.CylinderGeometry(.62,.52,2.8,9),new T.MeshStandardMaterial({color:'#856f5c',roughness:1}));
-hullMesh.rotation.x=Math.PI/2;hullMesh.scale.set(.70,.9,.34);hullMesh.position.y=.19;hull.add(hullMesh);
-const rim=new T.Mesh(new T.TorusGeometry(.58,.08,6,28),new T.MeshStandardMaterial({color:'#c1a37f',roughness:1}));
-rim.scale.set(1,2.4,1);rim.rotation.x=Math.PI/2;rim.position.y=.39;hull.add(rim);
-hull.position.set(6.6,0,-1.1);scene.add(hull);ink.apply(hull,{seed:'preview-hull'});
+// Показываем принятую лодку INK без замены её геометрии.
+const hull=add(rowboat(),6.6,0,-1.1);
 const rowing=add(makers.rowingHealer(27),6.6,.21,-1.1,'rowingHealer');rowing.rotation.y=Math.PI/2;
 for(let i=0;i<7;i++){const b=add(bush(i+17),4.5+i*.45,0,-3.4+(i%2)*.17);b.scale.setScalar(.45+i*.03);}
 window.__PACK__={items:[{id:'carHeadlights'},{id:'handFlashlight'},{id:'rowingHealer'},{id:'rainSplashRings'}]};

@@ -1211,6 +1211,60 @@ const SHPILI_PLUS=(()=>{
    };
  }
 
+
+ /* SPIRE FOREST: dozens of non-repeating cathedral crowns in three depth layers. */
+ {
+   const id='spireForest',g=newGroup(id,0,24,-143),R=rng(13117);
+   g.userData.sightRadius=135;
+   const layers=[],lightWindows=[];
+   for(let layer=0;layer<3;layer++){
+     const root=new T.Group();root.position.set((layer-1)*8,-24,-25+layer*21);
+     g.add(root);layers.push(root);
+     const windows=[];
+     const count=layer===0?13:layer===1?16:19;
+     for(let i=0;i<count;i++){
+       const x=-110+i*220/(count-1)+(R()-.5)*12,
+         h=(19+R()*39)*(1+layer*.16),
+         w=2.5+R()*5.7,bend=(R()-.5)*w*.45;
+       const rootSpire=new T.Group();rootSpire.position.x=x;root.add(rootSpire);
+       const stone=coverStone(h,2000+i*7+layer*240);
+       coverSlab(rootSpire,[[-w*.61,0],[-w*.62,h*.23],
+         [-w*.44,h*.55],[-w*.39,h*.78],[-w*.29,h*.81],
+         [-w*.18,h*.9],[bend,h*(1.08+R()*.2)],
+         [w*.14,h*.93],[w*.32,h*.82],[w*.47,h*.65],
+         [w*.58,h*.24],[w*.56,0]],.95+R()*1.5,stone,-.5);
+       if(R()<.78){
+         const p=spike(rootSpire,.22+R()*.2,h*(.08+R()*.12),
+           layer===0?0x4c7d9a:0x25475e,
+           [bend,h*(1.09+R()*.08),0],(R()-.5)*.09);
+       }
+       if(R()<.6){
+         for(const side of [-1,1]){
+           coverSlab(rootSpire,[[side*w*.43,0],[side*w*.5,h*.31],
+             [side*w*.55,h*.42],[side*w*.85,h*.32],[side*w*.92,0]],
+             .65,stone,.4);
+         }
+       }
+       const winCount=1+Math.floor(R()*4);
+       for(let k=0;k<winCount;k++){
+         const wh=h*(.18+k*.1)+R()*1.5;
+         if(wh>h*.74||R()<.2)continue;
+         windows.push([x+(R()-.5)*w*.5,wh,1.1,.25+R()*.35,.48+R()*.6]);
+       }
+     }
+     if(windows.length){
+       const win=coverWindows(root,windows,1200+layer*47);
+       win.material.opacity=.15+layer*.2;lightWindows.push(win);
+     }
+   }
+   own[id].tick=t=>{
+     for(let i=0;i<layers.length;i++)
+       layers[i].position.x=(i-1)*8+Math.sin(t*.12+i)*.16;
+     for(let i=0;i<lightWindows.length;i++)
+       lightWindows[i].material.opacity=.14+i*.19+.04*Math.sin(t*.7+i);
+   };
+ }
+
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;

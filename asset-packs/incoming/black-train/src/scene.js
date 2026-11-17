@@ -503,12 +503,10 @@ window.__ISOLATE__=(id,on)=>{
   return setPackHidden(id,!on);
 };
 window.__PACK_PROBE__={
-  assets:Object.fromEntries(packAssetIds.map(id=>[id,{
+  assets:Object.assign(Object.fromEntries(packAssetIds.map(id=>[id,{
     target:assetGroups[id][0].getWorldPosition(new T.Vector3()).toArray(),
     instances:assetGroups[id].length
-  }])),
-  // CSS lettering and its animated red ink exist exclusively in the menu.
-  titleLogo:{menuOnly:true,instances:1},
+  }])),{titleLogo:{menuOnly:true,instances:1}}),
   setHidden:setPackHidden,
   resume:resumePack
 };

@@ -89,7 +89,7 @@
 | 6 | эталоны с OWNER PASS висят открытыми PR | [Z03 — эталоны](automation/zadachi/Z03_ETALONY.md) |
 | 7 | в FINISH.md есть `НЕТ` (не `ГОТОВО ДЛЯ CLAUDE`) | первый свободный (не занятый другим чатом) пункт по порядку ниже |
 | 8 | FINISH 18/18 | [Z15 — этап 2](automation/zadachi/Z15_ETAP2.md) |
-| 9 | всё выше занято или ждёт Claude | [Z16 — улучшение игр](automation/zadachi/Z16_IGRY.md) или [Z17 — ассеты](automation/zadachi/Z17_ASSETY.md) |
+| 9 | всё выше занято или ждёт Claude | [Z16 — улучшение игр](automation/zadachi/Z16_IGRY.md), [Z17 — ассеты](automation/zadachi/Z17_ASSETY.md) или [Z18 — скачать полезное открытое (Patch и др.)](automation/zadachi/Z18_IMPORT.md) |
 
 Порядок пунктов финиша и их карточки (сначала B2 — на нём стоит остальное):
 1. [Z04 — B2 герой двигается от ввода](automation/zadachi/Z04_B2_DVIZHENIE.md)

@@ -23,5 +23,6 @@
 | Z15 — ЭТАП 2 (только когда FINISH 18/18) | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z15_ETAP2.md |
 | Z16 — УЛУЧШЕНИЕ ИГР (работа, которая есть всегда) | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z16_IGRY.md |
 | Z17 — АССЕТ-ПАКИ | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z17_ASSETY.md |
+| Z18 — СКАЧАТЬ ПОЛЕЗНОЕ ОТКРЫТОЕ (Patch и другие похожие проекты) | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z18_IMPORT.md |
 
 Карточки многоразовые и самоулучшающиеся (раздел «Опыт»). Новые карточки — только взамен старых (без суеты).

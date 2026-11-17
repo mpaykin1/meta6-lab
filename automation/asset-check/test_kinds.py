@@ -283,7 +283,9 @@ class KindTraps(unittest.TestCase):
         d = self.ink_pack()
         pj = json.loads((d / "pack.json").read_text("utf-8"))
         pj["base"] = "reference/ink-night-scream"
+        pj["assets"] = {"nightBeacon": {"label_ru": "Фонарь", "role": "prop", "zone": "railway", "footprint": 0}}
         (d / "pack.json").write_text(json.dumps(pj), "utf-8")
+        (d / "makers.js").write_text("import * as T from 'three'; export const makers = {nightBeacon: () => {const g=new T.Group();const m=new T.Mesh(new T.BoxGeometry(.4,1,.4),new T.MeshStandardMaterial());m.position.y=.5;g.add(m);g.userData.footprint=0;return g;}};", "utf-8")
         r = cp.check(d)
         self.assertNotIn("IK1", {issue["id"] for issue in r.hard()})
         self.assertEqual(r.stats["ink_quality_bar"]["n"], 2)

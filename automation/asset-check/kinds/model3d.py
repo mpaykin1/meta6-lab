@@ -178,6 +178,7 @@ def check(root: Path, r) -> set:
         mats = g.get("materials", [])
         if len(mats) > 8:
             r.add("M7", "SOFT", rel, f"{len(mats)} материалов = {len(mats)}+ вызовов отрисовки", "Объедини материалы в атлас (≤8)")
+        _check_mesh_quality(g, path, binc, root, rel, r)
         # анимации
         anims = g.get("animations", [])
         if g.get("skins") and not anims:
@@ -198,3 +199,290 @@ def check(root: Path, r) -> set:
             r.add("M11", "SOFT", rel, "нет анимации покоя (idle) — персонаж замрёт как статуя", "Добавь idle с дыханием")
     r.stats["models3d"] = len([c for c in covered if c.endswith(EXT)])
     return covered
+
+
+def _accessor_array(g, accessor_id, path, binc, root):
+    """Read a glTF 2 accessor, honoring bufferView strides and offsets.
+
+    Sparse accessors intentionally remain unsupported: a partial read would
+    misdiagnose legitimate geometry. No file outside the asset pack is opened.
+    """
+    import numpy as np
+
+    types = {
+        5120: "i1", 5121: "u1", 5122: "<i2",
+        5123: "<u2", 5125: "<u4", 5126: "<f4",
+    }
+    try:
+        a = g["accessors"][accessor_id]
+        if "sparse" in a or "bufferView" not in a:
+            return None
+        count = a["count"]
+        if not 0 <= count <= 300_000:
+            return None
+        view = g["bufferViews"][a["bufferView"]]
+        b = g["buffers"][view.get("buffer", 0)]
+        uri = b.get("uri")
+        if uri and not uri.startswith("data:"):
+            target = (path.parent / uri).resolve()
+            if not target.is_relative_to(root.resolve()):
+                return None
+            if target.stat().st_size > 32_000_000:
+                return None
+        dtype = np.dtype(types[a["componentType"]])
+        components = NCOMP[a["type"]]
+        stride = view.get("byteStride", dtype.itemsize * components)
+        offset = view.get("byteOffset", 0) + a.get("byteOffset", 0)
+        if stride < components * dtype.itemsize or count * stride > 40_000_000:
+            return None
+        buf = buffer_bytes(g, view.get("buffer", 0), path, binc)
+        if buf is None or count == 0:
+            return None
+        if offset < 0 or offset + (count - 1) * stride + components * dtype.itemsize > len(buf):
+            return None
+        return np.ndarray((count, components), dtype=dtype, buffer=buf,
+                          offset=offset, strides=(stride, dtype.itemsize)).copy()
+    except (KeyError, IndexError, ValueError, TypeError, OSError):
+        return None
+
+
+def _check_mesh_quality(g, path, binc, root, rel, report):
+    """Professional geometry and material audit, on decoded triangles.
+
+    Soft findings cover potentially intentional modelling choices. Hard
+    findings are reserved for broken data or objectively unusable geometry.
+    """
+    import numpy as np
+
+    stats = report.stats.setdefault("model3d_master", {
+        "triangles_scanned": 0, "degenerate": 0, "nonmanifold_edges": 0,
+        "inverted_normals": 0, "collapsed_uv": 0
+    })
+    material_list = g.get("materials", [])
+    pack = root / "pack.json"
+    role = ""
+    if pack.is_file():
+        try:
+            meta = json.loads(pack.read_text("utf-8"))
+            role = meta.get("model3d", {}).get("role", "")
+        except (ValueError, AttributeError):
+            pass
+    for material_id, material in enumerate(material_list):
+        pbr = material.get("pbrMetallicRoughness", {})
+        for field in ("metallicFactor", "roughnessFactor"):
+            value = pbr.get(field, 1)
+            if not isinstance(value, (int, float)) or not 0 <= value <= 1:
+                report.add("M20", "HARD", f"{rel}:material[{material_id}]",
+                           f"{field} вне диапазона 0–1", "Исправь физически некорректный PBR-параметр")
+
+    bounds = {}
+    for mesh_id, mesh in enumerate(g.get("meshes", [])):
+        for prim_id, primitive in enumerate(mesh.get("primitives", [])):
+            if primitive.get("mode", 4) != 4:
+                continue
+            where = f"{rel}:mesh[{mesh_id}]:primitive[{prim_id}]"
+            attr = primitive.get("attributes", {})
+            if "POSITION" not in attr:
+                continue
+            pos = _accessor_array(g, attr["POSITION"], path, binc, root)
+            if pos is None or pos.shape[1] != 3:
+                # External dependencies, compressed or sparse accessors are
+                # not proof of faulty topology; existing M1/M2 still apply.
+                continue
+            if not np.isfinite(pos).all():
+                report.add("M12", "HARD", where, "NaN/Infinity в координатах вершин",
+                           "Исправить геометрию до экспорта")
+                continue
+            step = max(1, len(pos) // 1024)
+            bounds.setdefault(mesh_id, []).append((
+                pos.min(axis=0), pos.max(axis=0), pos[::step]
+            ))
+            if "indices" in primitive:
+                ix = _accessor_array(g, primitive["indices"], path, binc, root)
+                if ix is None:
+                    continue
+                indices = ix.ravel().astype(np.int64)
+            else:
+                indices = np.arange(pos.shape[0], dtype=np.int64)
+            if indices.size % 3:
+                report.add("M12", "HARD", where, "Количество индексов не кратно трём",
+                           "Исправить список треугольников")
+                continue
+            if indices.size > 900_000:
+                continue
+            if indices.size and (indices.min() < 0 or indices.max() >= len(pos)):
+                report.add("M12", "HARD", where, "Индекс вершины вне диапазона",
+                           "Проверить индексы меша при экспорте")
+                continue
+            tris = indices.reshape((-1, 3))
+            if len(tris) == 0:
+                continue
+            v0, v1, v2 = pos[tris[:, 0]], pos[tris[:, 1]], pos[tris[:, 2]]
+            ab, ac, bc = v1 - v0, v2 - v0, v2 - v1
+            normal = np.cross(ab, ac)
+            area = np.linalg.norm(normal, axis=1)
+            diagonal = float(np.linalg.norm(pos.max(axis=0) - pos.min(axis=0)))
+            degenerate = area < max(diagonal * diagonal * 1e-10, 1e-14)
+            deg_count = int(degenerate.sum())
+            stats["triangles_scanned"] += len(tris)
+            stats["degenerate"] += deg_count
+            if deg_count > max(2, len(tris) * .01):
+                severity = "HARD" if deg_count > max(10, len(tris) * .10) else "SOFT"
+                report.add("M13", severity, where, f"{deg_count} вырожденных граней",
+                           "Убрать нулевые треугольники и пересобрать сетку")
+            if "NORMAL" in attr:
+                normals = _accessor_array(g, attr["NORMAL"], path, binc, root)
+                if normals is not None and normals.shape == pos.shape:
+                    averaged = normals[tris].mean(axis=1)
+                    dot = (normal * averaged).sum(axis=1)
+                    normal_length = np.linalg.norm(averaged, axis=1)
+                    opposite = (~degenerate) & (dot < -.25 * area * normal_length)
+                    wrong = int(opposite.sum())
+                    stats["inverted_normals"] += wrong
+                    if wrong > max(3, len(tris) * .03):
+                        report.add("M14", "SOFT", where, f"{wrong} граней с обратным шейдингом",
+                                   "Проверить winding, hard edges и нормали после модификаторов")
+            if "TEXCOORD_0" in attr:
+                uv = _accessor_array(g, attr["TEXCOORD_0"], path, binc, root)
+                if uv is not None and uv.shape == (len(pos), 2):
+                    uv0, uv1, uv2 = uv[tris[:, 0]], uv[tris[:, 1]], uv[tris[:, 2]]
+                    cross_uv = ((uv1[:, 0] - uv0[:, 0]) * (uv2[:, 1] - uv0[:, 1]) -
+                                (uv1[:, 1] - uv0[:, 1]) * (uv2[:, 0] - uv0[:, 0]))
+                    collapsed = (~degenerate) & (np.abs(cross_uv) < 1e-10)
+                    bad_uv = int(collapsed.sum())
+                    stats["collapsed_uv"] += bad_uv
+                    if bad_uv > max(3, len(tris) * .02):
+                        report.add("M15", "SOFT", where, f"{bad_uv} UV-граней без площади",
+                                   "Развернуть UV-острова и удалить растяжение текстуры")
+            mat_idx = primitive.get("material")
+            if isinstance(mat_idx, int) and 0 <= mat_idx < len(material_list):
+                mat = material_list[mat_idx]
+                pbr = mat.get("pbrMetallicRoughness", {})
+                used_maps = [
+                    pbr.get("baseColorTexture"), pbr.get("metallicRoughnessTexture"),
+                    mat.get("normalTexture"), mat.get("occlusionTexture"),
+                    mat.get("emissiveTexture")
+                ]
+                for texture in filter(None, used_maps):
+                    uv_index = texture.get("texCoord", 0)
+                    if "TEXCOORD_" + str(uv_index) not in attr:
+                        report.add("M16", "HARD", where, "Текстура используется без UV-канала",
+                                   f"Добавить TEXCOORD_{uv_index} или отключить текстуру")
+                        break
+            # Position welding ignores deliberate duplicated UV seam vertices.
+            # Non-manifold is diagnostic, not a blanket ban on open surfaces.
+            if len(tris) <= 80_000:
+                tolerance = max(diagonal * 1e-6, 1e-8)
+                welded = np.round(pos / tolerance).astype(np.int64)
+                _, vertex_ids = np.unique(welded, axis=0, return_inverse=True)
+                weld_tris = vertex_ids[tris]
+                edges = np.concatenate((weld_tris[:, [0, 1]],
+                                        weld_tris[:, [1, 2]],
+                                        weld_tris[:, [2, 0]]))
+                edges.sort(axis=1)
+                _, count = np.unique(edges, axis=0, return_counts=True)
+                nonmanifold = int((count > 2).sum())
+                stats["nonmanifold_edges"] += nonmanifold
+                if nonmanifold:
+                    report.add("M17", "SOFT", where, f"{nonmanifold} рёбер имеют более двух граней",
+                               "Проверить наложения, дубли поверхностей и соединения оболочек")
+            lengths = np.stack(((ab * ab).sum(axis=1), (ac * ac).sum(axis=1),
+                                (bc * bc).sum(axis=1)), axis=1)
+            smallest = np.maximum(lengths.min(axis=1), 1e-20)
+            skinny = int(((lengths.max(axis=1) / smallest > 1000) & ~degenerate).sum())
+            if skinny > max(10, len(tris) * .12):
+                report.add("M18", "SOFT", where, "Много сильно вытянутых треугольников",
+                           "Перераспределить плотность сетки у суставов и силуэтных границ")
+            if "WEIGHTS_0" in attr:
+                weights = _accessor_array(g, attr["WEIGHTS_0"], path, binc, root)
+                if weights is not None and weights.shape[0] == len(pos):
+                    weights = weights.astype(np.float64)
+                    wa = g["accessors"][attr["WEIGHTS_0"]]
+                    if wa.get("normalized") and wa["componentType"] != 5126:
+                        weights /= 255 if wa["componentType"] == 5121 else 65535
+                    if int((np.abs(weights.sum(axis=1) - 1) > .08).sum()) > len(pos) * .02:
+                        report.add("M19", "SOFT", where, "Веса костей не нормализованы",
+                                   "Нормализовать skin weights и проверить деформации")
+    if bounds and role in ("character", "creature"):
+        world_extent = _world_bounds(g, bounds)
+        if world_extent is None:
+            return
+        minimum, maximum, side_flatness = world_extent
+        size = maximum - minimum
+        if size[0] > 0 and (size[2] / size[0] < .065 or side_flatness < .065):
+            report.add("M21", "HARD", rel, "Персонаж почти плоский в боковом ракурсе",
+                       "Добавить толщину корпусу, голове и суставам")
+
+
+def _world_bounds(g, mesh_bounds):
+    """Evaluate 3D silhouette in the scene, not in each mesh's local coordinates."""
+    import itertools
+    import numpy as np
+
+    nodes = g.get("nodes", [])
+    if not nodes:
+        return None
+    used = {child for n in nodes for child in n.get("children", [])}
+    scenes = g.get("scenes", [])
+    scene_id = g.get("scene", 0)
+    roots = scenes[scene_id].get("nodes", []) if scenes and scene_id < len(scenes) else [
+        i for i in range(len(nodes)) if i not in used
+    ]
+    if not roots:
+        return None
+    minimum = np.full(3, np.inf)
+    maximum = np.full(3, -np.inf)
+    sample_count = 0
+    xz_sum = np.zeros(2)
+    xz_outer = np.zeros((2, 2))
+    stack = [(ix, np.eye(4), frozenset()) for ix in roots]
+    steps = 0
+    while stack and steps < 10000:
+        ix, parent, ancestors = stack.pop()
+        steps += 1
+        if ix in ancestors or ix < 0 or ix >= len(nodes):
+            continue
+        node = nodes[ix]
+        if "matrix" in node:
+            mat = np.array(node["matrix"], dtype=float).reshape((4, 4), order="F")
+        else:
+            quat = np.array(node.get("rotation", [0, 0, 0, 1]), dtype=float)
+            quat /= max(float(np.linalg.norm(quat)), 1e-12)
+            x, y, z, w = quat
+            mat = np.eye(4)
+            mat[:3, :3] = np.array([
+                [1 - 2 * (y*y + z*z), 2 * (x*y - z*w), 2 * (x*z + y*w)],
+                [2 * (x*y + z*w), 1 - 2 * (x*x + z*z), 2 * (y*z - x*w)],
+                [2 * (x*z - y*w), 2 * (y*z + x*w), 1 - 2 * (x*x + y*y)]
+            ]) @ np.diag(node.get("scale", [1, 1, 1]))
+            mat[:3, 3] = node.get("translation", [0, 0, 0])
+        mat = parent @ mat
+        if "mesh" in node:
+            for low, high, samples in mesh_bounds.get(node["mesh"], []):
+                corners = np.array([list(p) + [1.0] for p in itertools.product(
+                    (low[0], high[0]), (low[1], high[1]), (low[2], high[2])
+                )])
+                world = (mat @ corners.T).T[:, :3]
+                if np.isfinite(world).all():
+                    minimum = np.minimum(minimum, world.min(axis=0))
+                    maximum = np.maximum(maximum, world.max(axis=0))
+                    # Actual vertices catch planar shapes pre-rotated in mesh space.
+                    # Bounding-box corners alone would invent false thickness.
+                    homogeneous = np.column_stack((samples, np.ones(len(samples))))
+                    world_samples = (mat @ homogeneous.T).T[:, :3]
+                    if np.isfinite(world_samples).all():
+                        xz = world_samples[:, (0, 2)]
+                        sample_count += len(xz)
+                        xz_sum += xz.sum(axis=0)
+                        xz_outer += xz.T @ xz
+        updated = ancestors | {ix}
+        stack.extend((child, mat, updated) for child in node.get("children", []))
+    if not np.isfinite(minimum).all() or sample_count < 2:
+        return None
+    # Eigenvalue ratio of the horizontal silhouette is invariant under yaw:
+    # rotating a cardboard-flat mesh cannot disguise its missing thickness.
+    mean = xz_sum / sample_count
+    cov = xz_outer / sample_count - np.outer(mean, mean)
+    eigen = np.linalg.eigvalsh(cov)
+    flatness = float(np.sqrt(max(eigen[0], 0) / max(eigen[-1], 1e-20)))
+    return minimum, maximum, flatness

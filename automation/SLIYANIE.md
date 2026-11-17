@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 118, слито 8, закрыто 89, открыто 21 — бот, 2026-11-17 05:34 UTC
+Итог: всего 118, слито 8, закрыто 90, открыто 20 — бот, 2026-11-17 09:54 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -23,7 +23,7 @@
 | #288 | код | — | INK stone bell | open dirty | draft: ЖДЁТ визуальный PASS колокола и CI [#288](https://github.com/mpaykin1/meta6-lab/pull/288) |
 | #278 | код | — | ТОЛКАЧ safe merge | closed | закрыт: без слияния; отдельный PR не нужен, изменения консолидировались в [#331](https://github.com/mpaykin1/meta6-lab/pull/331); [PR #278](https://github.com/mpaykin1/meta6-lab/pull/278) |
 | #289 | код | — | POLZA Gate | closed | draft: ЖДЁТ согласованного bootstrap POLZA и обязательного статуса в main [#289](https://github.com/mpaykin1/meta6-lab/pull/289); конфликт main |
-| #290 | код | — | INK без паттернов | open unknown | draft: ЖДЁТ визуальную приёмку изменения принятого INK-движка и CI [#290](https://github.com/mpaykin1/meta6-lab/pull/290); main имеет другой shader SHA |
+| #290 | код | — | INK без паттернов | closed | draft: ЖДЁТ визуальную приёмку изменения принятого INK-движка и CI [#290](https://github.com/mpaykin1/meta6-lab/pull/290); main имеет другой shader SHA |
 | #291 | код | — | B2 Broken City | open unknown | draft: ЖДЁТ реального прохождения broken-city ботом и changed-games [#291](https://github.com/mpaykin1/meta6-lab/pull/291) |
 | #297 | код | — | Остров аптекаря II | open unknown | draft: ЖДЁТ бот-прохождения главы II, скриншоты ПК/мобилки и конфликт main [#297](https://github.com/mpaykin1/meta6-lab/pull/297) |
 | #299 | код | — | CI concurrency | closed | draft: ЖДЁТ merge main и CI 23 изменённых workflow, без отмены main [#299](https://github.com/mpaykin1/meta6-lab/pull/299) |

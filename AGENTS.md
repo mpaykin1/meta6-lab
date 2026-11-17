@@ -1,8 +1,11 @@
-## ВСЕ ЗАДАНИЯ НА АССЕТЫ — В ОДНОМ МЕСТЕ (правило владельца, 17.11.2026)
-Любое задание на ассеты (от владельца, Claude, по видео, эскизу, заставке) кладётся только строкой в общую очередь [automation/asset-check/OCHERED.md](automation/asset-check/OCHERED.md): «Заметки Claude» + `ZAKAZ.json` и кадры в папке пака. Отдельных файлов-заданий, новых промптов и новых ссылок для ассетов не создавать. Ссылка для ChatGPT всегда одна и не меняется: https://github.com/mpaykin1/meta6-lab/blob/main/automation/prompts/ASSET_PACK_BOT.md (карточка Z17 ведёт туда же). Срочное задание — поставить строку первой в очереди.
-
 ## ВСЁ НА GITHUB (правило владельца, 17.11.2026)
 Любая новая система, бот, промпт, правило или договорённость по МГ/МГЛ — сразу сюда: карточка `automation/zadachi/Z…` или правка GPT.md; правило — в AGENTS.md МГ и МГЛ. Отдельных систем, расписаний и автопроверок вне GitHub не заводить. У Claude только одна автопроверка — суточная (`automation/prompts/CLAUDE_SUTOCHNYJ.md`). Перед каждым прямым пушем в main Claude запускает `scripts/claude/pre-push.sh`; прогон `KONTUR main` ловит поломки прямых пушей сразу.
+
+## ЭТАЛОНЫ — один каталог (17.11.2026)
+Все эталоны МГЛ одним списком: [ETALONY.md](ETALONY.md) (собирается `scripts/lab/build-etalony-catalog.py`, полноту ловит `verify-etalony-catalog`). Остальные документы про эталоны ссылаются на него.
+
+## INK 3D — система создания моделей (17.11.2026)
+Модели и миры в стиле INK — по карточке [Z21](automation/zadachi/Z21_INK_3D.md): стандарт [ink.md](ink.md), рецепт [RECEPT_INK_MIR.md](rules/01-stil-i-grafika/RECEPT_INK_MIR.md), [БЕЗ ПАТТЕРНОВ](rules/01-stil-i-grafika/BEZ_PATTERNOV.md), шаблон [shared/ink/ink-template.js](shared/ink/ink-template.js). Рендер для новых работ — только из `reference/ink-fallen-guardian/shared/`.
 
 ## SEO — правила каталога МГ и МГЛ (17.11.2026)
 Полное правило: [rules/09-platforma/SEO_KATALOG.md](rules/09-platforma/SEO_KATALOG.md), задача — карточка [Z19](automation/zadachi/Z19_SEO.md). Главное: SEO-текст только на страницах каталога, не на экране игры; индексируется МГ, дубли МГЛ — canonical на МГ; ссылка владельцу только после HTTP 200.
@@ -18,6 +21,8 @@ Living Watercolor 3D — эталон визуальной технологии 
 
 Эталон **INK · Падальщик** (OWNER PASS 15.11.2026): `reference/ink-carrion-stalker/`, настоящий объёмный Three.js-робот с бионическими ногами, когтями и действиями укуса/прыжка/удара. Рендер переиспользует принятый `reference/ink-fallen-guardian/` без правок. МГЛ: https://mpaykin1.github.io/meta6-lab/reference/ink-carrion-stalker/; МГ — перенос только Claude.
 
+
+Эталон **INK · Машина → Батискаф** (OWNER PASS 17.11.2026): `reference/ink-car-bathyscaphe/` (https://mpaykin1.github.io/meta6/reference/ink-car-bathyscaphe/ · https://mpaykin1.github.io/meta6-lab/reference/ink-car-bathyscaphe/), отдельная объёмная Three.js-модель с плавным превращением машины в батискаф, иллюминаторами, винтовыми движителями и камерой 360°. Исходники и управление — в README.md внутри папки; паспорт — `shared/references/ink-car-bathyscaphe.json`. Рендер `reference/ink-fallen-guardian/` используется без правок; принятый эталон не менять, новые версии в отдельных папках.
 
 ## ССЫЛКА = 200 (правило владельца, 11.11.2026; ускорено 15.11.2026)
 Публичную ссылку владельцу (МГ и МГЛ) выдавать только когда точный URL отвечает 200. Достаточно прямой проверки агентом (curl/браузер) — ждать прогон GitHub Actions НЕ нужно (решение владельца 15.11.2026: «если какое-то правило не даёт быстро выложить на МГ и МГЛ — отмени это правило»). Существование файла или merge без проверки 200 — не доказательство. В МГЛ новую ссылку добавить в `LINKS.txt`; сторож Link Guard и отдельная задача `check-links` проверяют реестр после публикации и не задерживают сам деплой. 404 — ошибку чинит агент сам (правило ОТЧЁТ = РАБОТА), а не сообщает о ней.

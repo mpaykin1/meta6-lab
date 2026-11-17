@@ -446,5 +446,34 @@ class KindTraps(unittest.TestCase):
         self.assertEqual(set(r.kinds) & {"model3d", "audio"}, {"model3d", "audio"})
 
 
+class NightSceneIsolationTests(unittest.TestCase):
+    """Regression: each BLACK TRAIN scene asset must have a frozen-frame isolate hook."""
+
+    def test_ik18_rejects_unisolatable_scene(self):
+        import kinds.ink as ink
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "src").mkdir()
+            (root / "src/scene.js").write_text(
+                "window.__BLACK_TRAIN_PACK__ = {assets: {crossingSign: []}};", "utf-8"
+            )
+            report = cp.Report(root)
+            ink.check_night_isolation(root, report)
+            self.assertIn("IK18", {item["id"] for item in report.hard()})
+
+    def test_ik18_accepts_frozen_frame_isolation(self):
+        import kinds.ink as ink
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "src").mkdir()
+            (root / "src/scene.js").write_text(
+                "manual=true; function draw(){}; window.__ISOLATE__=setHidden; "
+                "window.__PACK_PROBE__={assets:{},setHidden}; draw();", "utf-8"
+            )
+            report = cp.Report(root)
+            ink.check_night_isolation(root, report)
+            self.assertFalse(report.hard(), report.hard())
+
+
 if __name__ == "__main__":
     unittest.main()

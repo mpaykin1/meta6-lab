@@ -8,6 +8,7 @@
 Полностью описана в [automation/prompts/ASSET_PACK_BOT.md](../prompts/ASSET_PACK_BOT.md) и [automation/asset-check/SPEC.md](../asset-check/SPEC.md). Выполняй их. Пак идёт в игру только из `asset-packs/ready/` (0 HARD, зелёный ASSET CHECK). Бот не запрещает техники — только держит качество не хуже эталонов. Видео-режим: список ассетов по видео → бот проверяет, что каждый сделан.
 
 ## Сначала найди
+**Очередь игр — одна на всех: [automation/asset-check/OCHERED.md](../asset-check/OCHERED.md).** Бери первую строку «в работе»; её «Заметки Claude» — обязательное задание. Сейчас первая — Туманные шпили: ассеты по заставке владельца (ZAKAZ.json, 13 пунктов, `asset-packs/incoming/tumannye-shpili-plus/zakaz/frames/zastavka.jpg`). Новые задания по ассетам Claude кладёт только туда — отдельных файлов-заданий не бывает.
 Висящие ассет-PR (например [#343 Небесный пилот](https://github.com/mpaykin1/meta6-lab/pull/343), [#306 Туманные шпили](https://github.com/mpaykin1/meta6-lab/pull/306)) — доведи их первыми.
 
 ## Саморазвитие (после основной работы, обязательно одно)

@@ -332,8 +332,10 @@ export function canonicalFinish(stageOne, checked) {
           reason: issue?.reason || 'Нет ответа от GitHub API',
           url: ROOT + '/repos/' + LAB + '/actions/runs/' + evidence.run
         };
-    } else if (/^НЕТ(?:\\s|$)/.test(status)) {
+    } else if (/^НЕТ(?:\s|$)/.test(status)) {
       pending.push({ id, value: 'не готов', reason: 'НЕТ в таблице FINISH' });
+    } else if (/^ГОТОВО ДЛЯ CLAUDE(?:\s|$)/.test(status)) {
+      pending.push({ id, value: 'ждёт Claude', reason: status });
     } else {
       pending.push({ id, value: UNKNOWN, reason: 'Некорректный статус или ссылка в FINISH.md' });
     }

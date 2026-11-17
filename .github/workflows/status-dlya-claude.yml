@@ -1,7 +1,7 @@
 name: status-dlya-claude
 on:
   schedule:
-    - cron: '43 * * * *'
+    - cron: '43 */2 * * *'
   push:
     branches: [main]
     paths:

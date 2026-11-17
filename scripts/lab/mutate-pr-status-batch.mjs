@@ -52,9 +52,9 @@ for(const [name,before,after] of mutants){
  assert.ok(caught,'mutation survived: '+name);
 }
 const plans={
- 'dispetcher.yml':'21 * * * *','zadachi-watch.yml':'11 * * * *',
- 'zanyato-watch.yml':'7 * * * *','sliyanie-status.yml':'37 * * * *',
- 'meta-repair-bot.yml':'47 * * * *','investigation-snapshot.yml':'13 */3 * * *',
+ 'dispetcher.yml':'21 */2 * * *','zadachi-watch.yml':'11 */2 * * *',
+ 'zanyato-watch.yml':'7 */3 * * *','sliyanie-status.yml':'37 */3 * * *',
+ 'meta-repair-bot.yml':'47 */3 * * *','investigation-snapshot.yml':'13 */3 * * *',
  'auditor.yml':'43 */3 * * *'
 };
 function validSchedule(yaml,cron){

@@ -5,8 +5,32 @@ concurrency:
 on:
   pull_request:
     branches: [main]
+    paths-ignore:
+      - 'ZADACHI.md'
+      - 'DISPETCHER.md'
+      - 'TOLKNUT.md'
+      - 'DLYA_CLAUDE.md'
+      - 'OSHIBKI.md'
+      - 'GPT.md'
+      - 'automation/**'
+      - 'reports/**'
+      - 'journal/**'
+      - 'rules/**'
+      - '**/PROGRESS.md'
   push:
     branches: [main]
+    paths-ignore:
+      - 'ZADACHI.md'
+      - 'DISPETCHER.md'
+      - 'TOLKNUT.md'
+      - 'DLYA_CLAUDE.md'
+      - 'OSHIBKI.md'
+      - 'GPT.md'
+      - 'automation/**'
+      - 'reports/**'
+      - 'journal/**'
+      - 'rules/**'
+      - '**/PROGRESS.md'
   workflow_dispatch:
 permissions:
   contents: read

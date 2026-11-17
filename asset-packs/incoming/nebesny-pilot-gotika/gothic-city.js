@@ -9,14 +9,14 @@ window.GothicCity = (() => {
   };
   const decks = new Map();
   const sheets = Object.create(null);
-  for (const id of ['gothicCathedral','spireTower','archBridge','sunsetSky']) {
+  for (const id of ['gothicCathedral','spireTower','archBridge','sunsetSky','redRoofHouse','aqueductTiers','cliffBase','bannerFleurDeLis','gothicGateRing','canalWater']) {
     const image = new Image();
     image.decoding = 'async';
-    image.onload = () => { sheets[id] = image; decks.clear(); };
+    image.onload = () => { sheets[id] = image; decks.clear(); if (id === 'gothicGateRing') { const x=gate.getContext('2d');x.clearRect(0,0,54,70);x.drawImage(image,0,0,54,70,0,0,54,70); } };
     image.src = './stacks/' + id + '.png';
   }
-  const count = { gothicCathedral: 88, spireTower: 74, archBridge: 42 };
-  const sizes = { gothicCathedral: 96, spireTower: 64, archBridge: 96 };
+  const count = { gothicCathedral: 88, spireTower: 74, archBridge: 42, redRoofHouse:38, aqueductTiers:48, cliffBase:32 };
+  const sizes = { gothicCathedral: 96, spireTower: 64, archBridge: 96, redRoofHouse:64, aqueductTiers:96, cliffBase:96 };
   function rect(c, color, x, y, w, h) {
     c.fillStyle = color;
     c.fillRect(x | 0, y | 0, Math.max(1, w | 0), Math.max(1, h | 0));
@@ -155,11 +155,20 @@ window.GothicCity = (() => {
       const canvas = mk(size, size);
       const ctx = canvas.getContext('2d', {alpha: true});
       ctx.imageSmoothingEnabled = false;
-      if (sheets[id] && variant === 0) {
+      if (sheets[id] && (variant === 0 || id === 'redRoofHouse' || id === 'aqueductTiers' || id === 'cliffBase')) {
         ctx.drawImage(sheets[id], s * size, 0, size, size, 0, 0, size, size);
       } else if (id === 'gothicCathedral') cathedral(ctx, s, variant);
       else if (id === 'spireTower') tower(ctx, s, variant);
-      else bridge(ctx, s, variant);
+      else if (id === 'redRoofHouse') {
+        rect(ctx, s<20?'#756074':'#974962',16+Math.max(0,s-20),16,Math.max(4,32-Math.max(0,s-20)*2),32);
+        if(s<20)for(let x=24;x<48;x+=9)rect(ctx,'#ffd18c',x,46,4,2);
+      } else if (id === 'aqueductTiers') {
+        for(let y=18;y<75;y+=22)for(let x=12;x<88;x+=20) {
+          rect(ctx,'#53475f',x,y,11,33);rect(ctx,'#8c7181',x,y,2,33);
+        }
+      } else if (id === 'cliffBase') {
+        rect(ctx,'#4b435d',18+s*.4,16+s*.35,Math.max(5,60-s*.8),Math.max(5,65-s*.75));
+      } else bridge(ctx, s, variant);
       sl.push(canvas);
     }
     const asset = { id, variant, sl, size, n, step: id === 'archBridge' ? 1.65 : 1.25 };
@@ -169,7 +178,7 @@ window.GothicCity = (() => {
   function location(i, j, n) {
     const salt = 71 + n * 23;
     const h = hash(i, j, salt);
-    const id = n === 0 && h > .52 ? 'gothicCathedral' : h < .22 ? 'archBridge' : 'spireTower';
+    const id = n === 0 && h > .66 ? 'gothicCathedral' : h < .12 ? 'archBridge' : h < .24 ? 'aqueductTiers' : h < .48 ? 'redRoofHouse' : h > .92 ? 'cliffBase' : 'spireTower';
     const variant = (hash(i, j, salt + 3) * 3) | 0;
     return {id, variant,
       x: i * 380 + 45 + hash(i, j, salt + 8) * 290,
@@ -206,6 +215,14 @@ window.GothicCity = (() => {
     sky.addColorStop(1,'#3d3557');
     g.globalAlpha = fade * .96;
     g.fillStyle = sky; g.fillRect(0,0,W,H);
+    // Мерцающий золотой канал — полоса воды под городским горизонтом.
+    if(sheets.canalWater) {
+      const waterY = Math.max(0,horizon+H*.03);
+      g.globalAlpha = fade * .18;
+      const drift=((t*3)%128+128)%128;
+      for(let x=-128-drift;x<W+128;x+=128)
+        g.drawImage(sheets.canalWater,x,waterY,128,H-waterY);
+    }
     // Дальние шпили — отдельный параллаксный слой.
     g.globalAlpha = fade * .83;
     const sh = Math.max(35, H * .29);
@@ -265,6 +282,15 @@ window.GothicCity = (() => {
               g.setTransform(m[0],m[1],m[2],m[3],Math.round(m[4]),Math.round(m[5]));
               g.rotate(b.angle);
               g.drawImage(asset.sl[s],-asset.size/2,-asset.size/2);
+            }
+            // Знамя под ветром на высотных фасадах: живая волна из отдельных срезов.
+            if(sheets.bannerFleurDeLis && (b.id === 'gothicCathedral' || b.id === 'redRoofHouse') && q[2]>.28) {
+              const flag=proj(b.x+25,b.y+12,35);
+              if(flag){
+                const phase=(Math.floor(t*4+hash(i,j,89)*8)%8+8)%8;
+                g.setTransform(q[2],0,0,q[2],flag[0],flag[1]);
+                g.drawImage(sheets.bannerFleurDeLis,phase*32,0,32,48,-6,-22,32,48);
+              }
             }
             g.globalAlpha=1;
           }});

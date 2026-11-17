@@ -112,6 +112,28 @@ def check(root: Path, report) -> set[str]:
             report.add("SS8", "HARD", where,
                        f"Только {unique}/{n} разных срезов — плоский повтор",
                        "Добавь смену силуэта и фактуры по высоте")
+        # SS12: color noise cannot disguise a wall made of repeated,
+        # identically rectangular cross-sections. Measure ALPHA geometry,
+        # not unique RGB pixel strings (the latter are easy to fake).
+        if role == "landmark" and n >= 20:
+            silhouettes = []
+            for mask in masks:
+                ys, xs = np.nonzero(mask)
+                if not len(xs):
+                    continue
+                # Geometry signature: relative footprint, contour in 8 bands,
+                # x/y centroids. Ignore small one-pixel masonry texture.
+                row = []
+                for band in np.array_split(mask, 8, axis=0):
+                    yy, xx = np.nonzero(band)
+                    row.extend((round(float(xx.min())/sw, 1), round(float(xx.max())/sw, 1))
+                               if len(xx) else (-1.0, -1.0))
+                silhouettes.append((round(len(xs)/(sw*sh), 1), *row))
+            shape_diversity = len(set(silhouettes))
+            if shape_diversity < min(5, max(3, n // 16)):
+                report.add("SS12", "HARD", where,
+                           f"Только {shape_diversity} форм у {n} срезов — фасад из полос",
+                           "Ступенчатые крыши, контрфорсы, сужения и шпили должны менять контур срезов")
         first, last = masks[0], masks[-1]
         overlap = np.count_nonzero(first ^ last)
         if overlap < max(4, int(sw * sh * .01)):
@@ -121,6 +143,19 @@ def check(root: Path, report) -> set[str]:
             report.add("SS10", "HARD", where, "Меньше 4 видимых цветов — нет фактуры",
                        "Камень, тень, блики и окна должны читаться отдельно")
         report.asset_ids.add(where)
+    # SS13: a city must replace the sea/island terrain beneath its buildings.
+    # Checking just a 'shadow' flag is insufficient: floating buildings still pass.
+    is_city = m.get("game") == "nebesny-pilot" and "cliffBase" in m["assets"]
+    if is_city:
+        game_source = (root / "gothic-city.js").read_text("utf-8") if (root / "gothic-city.js").is_file() else ""
+        index_source = (root / "index.html").read_text("utf-8") if (root / "index.html").is_file() else ""
+        if ("function drawGround(" not in game_source
+                or "GothicCity.drawGround()" not in index_source
+                or "GothicCity.isCity(" not in index_source
+                or "cliffBase" not in game_source):
+            report.add("SS13", "HARD", "gothic-city.js",
+                       "Здания без сплошного основания: море или острова просвечивают под городом",
+                       "Сделай drawGround() из cliffBase и мостовой; исключи острова внутри города")
     # Stand must actually load the strip textures.
     stand = root / "index.html"
     if not stand.is_file():

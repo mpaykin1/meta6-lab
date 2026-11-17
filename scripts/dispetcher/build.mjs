@@ -111,6 +111,26 @@ export function archiveCandidate({pr,lastCommit,lastActivity,failed,isFinish=fal
  if (failed.some(({url}) => typeof url !== 'string' || !/^https:\/\/[^\s/]+\//i.test(url))) throw Error('нет данных: URL красной проверки PR');
  return failed.some(({url}) => !/build-rate-limit|api-deployments-free-per-day/i.test(url));
 }
+// Retrieve complete activity history before treating a draft as abandoned.
+// Missing pages or timestamps fail closed rather than silently ignoring activity.
+export async function latestPrActivity(number, request=api) {
+ if (!Number.isSafeInteger(number) || number < 1) throw Error('нет данных: номер PR');
+ let latest = -Infinity;
+ for (const endpoint of ['/issues/'+number+'/comments', '/pulls/'+number+'/reviews']) {
+  for (let page=1;;page++) {
+   const batch=await request(endpoint+'?per_page=100&page='+page);
+   if (!Array.isArray(batch)) throw Error('нет данных: история активности PR');
+   for (const item of batch) {
+    const raw=endpoint.includes('/reviews') ? (item.submitted_at || item.created_at) : item.updated_at;
+    const time=Date.parse(raw);
+    if (!Number.isFinite(time)) throw Error('нет данных: дата активности PR');
+    latest=Math.max(latest,time);
+   }
+   if (batch.length<100) break;
+  }
+ }
+ return latest===-Infinity ? null : new Date(latest).toISOString();
+}
 export function assertNotEmpty(tasksMarkdown,cards){
  if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
 }

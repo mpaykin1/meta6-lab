@@ -19,3 +19,5 @@ scripts/meta-bot
 .github/workflows/meta-bot.yml
 # Измерение готовности и проверка честности отчётов (пишет Claude):
 scripts/meta-progress
+reference/ink-steam-train
+reference/ink-grin-monster

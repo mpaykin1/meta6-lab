@@ -26,6 +26,10 @@ MUTANTS = [
     ("kinds/skin.py", "if pairs and len(set(pairs))", "if False and len(set(pairs))"),
     ("kinds/skin.py", "miss = [k for k in REQ_KINDS if k not in kinds]", "miss = []"),
     ("check_pack.py", "if p.is_symlink() or", "if False and"),
+    ("check_pack.py", "for iid in missing:", "for iid in []:"),
+    ("check_pack.py", "if not fp.exists() or not", "if False and not"),
+    ("check_pack.py", "miss = [k for k in req if not it.get(k)]", "miss = []"),
+    ("check_pack.py", 'if stype not in ("video", "sketch", "text", "game", "owner"):', "if False:"),
     ("kinds/ink.py", 'if not m.get("same_seed_same"):', "if False:"),
     ("kinds/ink.py", "if role in VARY and not", "if False and not"),
     ("kinds/ink.py", "if name in taken:", "if False:"),
@@ -55,6 +59,10 @@ def run_tests(root: Path) -> bool:
 
 
 def main():
+    # A broken environment or pre-existing failing test cannot prove a mutation was caught.
+    if not run_tests(HERE):
+        print("BASELINE_FAILED: fix the unmodified test suite before mutation testing")
+        return 2
     escaped = []
     for f, needle, repl in MUTANTS:
         with tempfile.TemporaryDirectory() as t:

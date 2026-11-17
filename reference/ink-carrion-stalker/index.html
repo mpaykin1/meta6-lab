@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#a6999a">
+<title>INK · Падальщик · биомеханическая 3D-модель</title>
+<link rel="icon" href="data:,">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#a6999a;touch-action:none}
+body{font-family:Georgia,serif}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+#ui{position:fixed;z-index:4;inset:0;pointer-events:none}
+#menu-btn{pointer-events:auto;position:absolute;top:max(16px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));width:46px;height:46px;border:1px solid #34303566;border-radius:50%;color:#29272a;background:#c9c1bbcf;font:23px Georgia;cursor:pointer;backdrop-filter:blur(14px);box-shadow:0 4px 18px #37303518}
+#menu{pointer-events:auto;position:absolute;top:max(71px,calc(env(safe-area-inset-top) + 59px));left:16px;width:min(308px,calc(100vw - 32px));max-height:calc(100dvh - 85px);overflow-y:auto;border:1px solid #5d565744;background:#c9c0b7ef;box-shadow:0 12px 44px #29232944;padding:21px;border-radius:13px;color:#343033;backdrop-filter:blur(22px)}
+#menu[hidden]{display:none}
+#menu h1{font:italic 29px Georgia;margin:0 0 6px;letter-spacing:.035em}
+#menu p{font:13px/1.55 Georgia;margin:0 0 17px;color:#595154}
+#menu nav{display:grid;gap:7px}
+#menu button{cursor:pointer;border:1px solid #5c535655;background:#ffffff3a;border-radius:7px;padding:10px 13px;text-align:left;color:#322d30;font:15px Georgia}
+#menu small{display:block;margin-top:14px;font:12px/1.6 Georgia;color:#5c5154}
+#error{display:none;position:fixed;z-index:10;left:15px;bottom:14px;max-width:calc(100vw - 30px);background:#312a2e;color:#fff5f0;border:1px solid #d4bdb6;padding:12px;font:12px/1.5 monospace;border-radius:7px}
+</style>
+<script type="importmap">{"imports":{"three":"../ink-fallen-guardian/three.module.js"}}</script>
+</head>
+<body>
+<div id="ui">
+  <button id="menu-btn" aria-label="Открыть меню" aria-expanded="false">☰</button>
+  <section id="menu" hidden>
+    <h1>INK · Падальщик</h1>
+    <p>Объёмный биомеханический страж. Живая акварель, металл, плоть и независимые шарниры.</p>
+    <nav>
+      <button data-act="bite">Огромный укус</button>
+      <button data-act="jump">Прыжок</button>
+      <button data-act="strike">Атака когтями</button>
+      <button data-act="prowl">Движение</button>
+      <button data-view="all">Вся модель</button>
+      <button data-view="head">Морда и зубы</button>
+      <button data-view="legs">Бионические ноги</button>
+      <button id="orbit">Остановить вращение 360°</button>
+      <button id="pause">Остановить движение</button>
+      <button id="mono">Чёрно-белая акварель</button>
+      <button id="transparent">Прозрачный фон</button>
+    </nav>
+    <small>Мышь / палец — поворот камеры. Колёсико / два пальца — масштаб.<br>На ПК: B — укус, J — прыжок, A — атака, R — вращение, 1–3 — ракурсы.</small>
+  </section>
+</div>
+<div id="error" role="alert"></div>
+<script>
+function failure(e){let x=document.getElementById('error');x.style.display='block';x.textContent='3D-модель не загрузилась: '+String(e?.message||e||'неизвестная ошибка');}
+addEventListener('error',e=>failure(e.message));
+addEventListener('unhandledrejection',e=>failure(e.reason));
+</script>
+<script type="module" src="./scene.js"></script>
+</body>
+</html>

@@ -8,6 +8,12 @@ window.GothicCity = (() => {
     roof: '#853f58', roofHi: '#bd6771', moss: '#52665c'
   };
   const decks = new Map();
+  const hiddenAssets = new Set();
+  window.__ISOLATE__ = (id, visible=true) => {
+    if(visible) hiddenAssets.delete(id); else hiddenAssets.add(id);
+    decks.clear();
+    return !hiddenAssets.has(id);
+  };
   const ambience = new Audio('./audio/cityAmbience.wav');
   ambience.loop = true;
   ambience.volume = .12;
@@ -16,14 +22,14 @@ window.GothicCity = (() => {
   bellAudio.volume = .22;
   bellAudio.preload = 'none';
   function startMusic() {
-    if (typeof muted !== 'undefined' && muted) return;
+    if (hiddenAssets.has('cityAmbience') || typeof muted !== 'undefined' && muted) return;
     ambience.play().catch(() => {});
   }
   addEventListener('pointerdown', startMusic, {passive:true});
   addEventListener('keydown', startMusic, {passive:true});
   document.getElementById('snd').addEventListener('click', () => { if (muted) ambience.pause(); else startMusic(); });
   function onRing(bonus) {
-    if (typeof muted !== 'undefined' && !muted) {
+    if (!hiddenAssets.has('bellChime') && typeof muted !== 'undefined' && !muted) {
       try { bellAudio.currentTime = 0; bellAudio.play().catch(() => {}); } catch {}
     }
     if (bonus && typeof P !== 'undefined') P.shield = 3;
@@ -205,7 +211,7 @@ window.GothicCity = (() => {
   function location(i, j, n) {
     const salt = 71 + n * 23;
     const h = hash(i, j, salt);
-    const id = n === 0 && h > .71 ? 'gothicCathedral' : h < .10 ? 'archBridge' : h < .22 ? 'aqueductTiers' : h < .40 ? 'redRoofHouse' : h > .94 ? 'cliffBase' : h > .79 ? 'bellTower' : 'spireTower';
+    const id = (i===0 && j===-1 && n===0) ? 'gothicCathedral' : n === 0 && h > .71 ? 'gothicCathedral' : h < .10 ? 'archBridge' : h < .22 ? 'aqueductTiers' : h < .40 ? 'redRoofHouse' : h > .94 ? 'cliffBase' : h > .79 ? 'bellTower' : 'spireTower';
     const variant = (hash(i, j, salt + 3) * 3) | 0;
     return {id, variant,
       x: i * 380 + 45 + hash(i, j, salt + 8) * 290,
@@ -316,7 +322,7 @@ window.GothicCity = (() => {
     const fade = clamp((165 - P.z) / 115, .22, 1);
     g.save();
     g.setTransform(1,0,0,1,0,0);
-    if (sheets.sunsetSky) {
+    if (sheets.sunsetSky && !hiddenAssets.has('sunsetSky')) {
       g.globalAlpha = fade * .45;
       g.drawImage(sheets.sunsetSky, 0, 0, W, H);
     }
@@ -331,7 +337,7 @@ window.GothicCity = (() => {
     g.globalAlpha = fade * .96;
     g.fillStyle = sky; g.fillRect(0,0,W,H);
     // Мерцающий золотой канал — полоса воды под городским горизонтом.
-    if(sheets.canalWater) {
+    if(sheets.canalWater && !hiddenAssets.has('canalWater')) {
       const waterY = Math.max(0,horizon+H*.03);
       g.globalAlpha = fade * .18;
       const drift=((t*3)%128+128)%128;
@@ -379,6 +385,7 @@ window.GothicCity = (() => {
           const radius = sizes[b.id] * q[2] + 30;
           if(q[0]<-radius || q[0]>W+radius || q[1]<-height-radius || q[1]>H+radius) continue;
           budget--;
+          if(hiddenAssets.has(b.id)) continue;
           const asset = make(b.id,b.variant);
           items.push({d:q[3],f:()=>{
             g.globalAlpha = fade * clamp(1.2-q[3]/1700,.15,1);
@@ -389,7 +396,7 @@ window.GothicCity = (() => {
               g.rotate(b.angle);
               g.fillStyle = '#332d46';
               g.fillRect(-asset.size*.43,-asset.size*.45,asset.size*.86,asset.size*.88);
-              if (sheets.gothicTile) {
+              if (sheets.gothicTile && !hiddenAssets.has('gothicTile')) {
                 g.globalAlpha=fade*.65;
                 g.drawImage(sheets.gothicTile,-asset.size*.43,-asset.size*.45,asset.size*.86,asset.size*.88);
                 g.globalAlpha=fade;
@@ -405,7 +412,7 @@ window.GothicCity = (() => {
               g.drawImage(asset.sl[s],-asset.size/2,-asset.size/2);
             }
             // Знамя под ветром на высотных фасадах: живая волна из отдельных срезов.
-            if(sheets.bannerFleurDeLis && (b.id === 'gothicCathedral' || b.id === 'redRoofHouse') && q[2]>.28) {
+            if(sheets.bannerFleurDeLis && !hiddenAssets.has('bannerFleurDeLis') && (b.id === 'gothicCathedral' || b.id === 'redRoofHouse') && q[2]>.28) {
               const flag=proj(b.x+25,b.y+12,35);
               if(flag){
                 const phase=(Math.floor(t*4+hash(i,j,89)*8)%8+8)%8;
@@ -420,7 +427,7 @@ window.GothicCity = (() => {
               ['pigeonFlock',64,64,70,0,13]
             ];
             for(const [id,sw,sh,alt,dx,dy] of sprites) {
-              if(!sheets[id] || hash(i,j,id.length) < (id==='pigeonFlock'?.73:.35))continue;
+              if(!sheets[id] || hiddenAssets.has(id) || hash(i,j,id.length) < (id==='pigeonFlock'?.73:.35))continue;
               const at=proj(b.x+dx,b.y+dy,alt);
               if(!at || at[2]<.16)continue;
               const frame=(Math.floor(t*(id==='pigeonFlock'?6:4)+hash(i,j,31)*7)% (id==='pigeonFlock'?12:8)+12)% (id==='pigeonFlock'?12:8);
@@ -442,7 +449,7 @@ window.GothicCity = (() => {
     for(let n=0;n<15;n++){
       const i=Math.floor(P.x/450)+(n%5)-2, j=Math.floor(P.y/450)+Math.floor(n/5)-1;
       const id=birds[n%3===0?1:0];
-      if(!sheets[id])continue;
+      if(!sheets[id] || hiddenAssets.has(id))continue;
       const x=i*450+hash(i,j,47)*300,y=j*450+hash(i,j,48)*300;
       const z=id==='sailBoat'?5:80+hash(i,j,49)*40;
       const p=proj(x,y,z);
@@ -460,7 +467,7 @@ window.GothicCity = (() => {
     }
   }
   function paintTransition(){
-    if (!sheets.descentGate) return;
+    if (!sheets.descentGate || hiddenAssets.has('descentGate')) return;
     const k=Math.max(0,1-Math.abs(P.z-95)/26);
     if(k<.01)return;
     const frame=(Math.floor(t*2)%8+8)%8;
@@ -483,7 +490,7 @@ window.GothicCity = (() => {
     for(let n=0;n<4;n++){rect(c,'#ffe1a7',7,22+n*10,3,3);rect(c,'#ffe1a7',44,22+n*10,3,3);}
   }
   function drawBonusAt(q, scale){
-    if(!sheets.rosetteBonus){g.drawImage(gate,-27,-35);return;}
+    if(!sheets.rosetteBonus || hiddenAssets.has('rosetteBonus')){g.drawImage(gate,-27,-35);return;}
     const frame=(Math.floor(t*4)%8+8)%8;
     g.drawImage(sheets.rosetteBonus,frame*48,0,48,48,-24,-24,48,48);
   }

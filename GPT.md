@@ -49,7 +49,7 @@
 ## 1. ПРАВИЛА (действуют на каждом шаге, без исключений)
 
 1. **Истина — только свежий GitHub** (`main` МГЛ = `mpaykin1/meta6-lab`, МГ = `mpaykin1/meta6`). Не верь памяти чата.
-2. **Прочитай** [AGENTS.md МГ](https://github.com/mpaykin1/meta6/blob/main/AGENTS.md) (правила игр: ЧИСТЫЙ ЭКРАН, ПОСТЕПЕННО, ЗВУК, БЕЗ ПОВТОРОВ, НЕ ЛОМАТЬ РАБОЧЕЕ, REUSE…) и [КОНТУР БЕЗ ОШИБОК](rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md). Для Playgama — `docs/PLAYGAMA_RETENTION.md` в МГ.
+2. **Прочитай** [AGENTS.md МГ](https://github.com/mpaykin1/meta6/blob/main/AGENTS.md) (правила игр: ЧИСТЫЙ ЭКРАН, ПОСТЕПЕННО, ЗВУК, БЕЗ ПОВТОРОВ, НЕ ЛОМАТЬ РАБОЧЕЕ, REUSE…) и [КОНТУР БЕЗ ОШИБОК](rules/06-rabota-ii-s-kodom/KONTUR_BEZ_OSHIBOK.md). Для Playgama — `docs/PLAYGAMA_RETENTION.md` в МГ. **Для обновления `meta6/playgama-catalog/` обязательно** [правило прямых ссылок, обложек, 8 языков и SEO](rules/09-platforma/KATALOG_META_GAMES_PLAYGAMA.md): любые клики по карточке сразу открывают Playgama, без страниц-посредников.
 3. **Работаешь только в МГЛ.** МГ — только чтение. Что должно попасть в МГ — строка `🙋 НУЖЕН CLAUDE` в ZADACHI.md с ссылкой на готовый PR в МГЛ.
 4. **Взял задачу → сразу строка** в [ZADACHI.md](ZADACHI.md) (первой под шапкой) и, если это пункт финиша, строка в [ZANYATO.md](rules/09-platforma/ZANYATO.md). Пуш в main только этой правкой. Задача занята, если в её ветке был коммит меньше 3 часов назад — тогда бери следующую.
 5. **Прогресс не теряется.** После КАЖДОГО шага — коммит в ветку задачи и строка в `reports/<задача>/PROGRESS.md`: `время UTC | шаг | ссылка/SHA | что дальше`. Повторный запуск читает PROGRESS.md и продолжает с «что дальше», сделанное не повторяет.

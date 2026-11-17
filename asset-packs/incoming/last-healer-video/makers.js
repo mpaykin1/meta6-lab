@@ -401,12 +401,12 @@ export function roadsideDryShrubs(seed=1){
    root.position.set(x,0,z);root.rotation.y=r()*6.28;g.add(root);
    const h=.38+r()*.44,lean=(r()-.5)*.13;
    beam(root,[0,.02,0],[lean,h*.67,0],.031,'#736b59',6);
-   for(let k=0;k<7;k++){
+   for(let k=0;k<4;k++){
      const a=k*2.399+r()*.3,branchH=h*(.26+r()*.47),len=.30+r()*.30;
      const b=new T.Group();b.position.set(lean*.7,branchH,0);root.add(b);tips.push(b);
      const end=[Math.cos(a)*len,h*.23+len*.18,Math.sin(a)*len];
      beam(b,[0,0,0],end,.017+r()*.014,cols[(k+bush)%cols.length],5);
-     for(let j=0;j<3;j++){
+     for(let j=0;j<2;j++){
        const u=.34+j*.24,p=[end[0]*u,end[1]*u,end[2]*u];
        const q=[p[0]+Math.cos(a+.8+j)*(.11+r()*.12),p[1]+.10+r()*.11,p[2]+Math.sin(a+.8+j)*(.11+r()*.12)];
        beam(b,p,q,.008,'#897e66',4);
@@ -658,12 +658,12 @@ export function nightRainGrade(seed=1){
 export function wetGrassClumps(seed=1){
  const r=rng(seed),g=new T.Group(),blades=[];g.name='Мокрые агавы и блестящая трава';
  const pal=['#526b60','#607e74','#789180','#91a18b','#728574'];
- for(let k=0;k<9;k++){
+ for(let k=0;k<6;k++){
   const x=(k%3-1)*.62+(r()-.5)*.10,z=(Math.floor(k/3)-1)*.55+(r()-.5)*.1;
   const plant=new T.Group();plant.position.set(x,.03,z);g.add(plant);
   const h=.48+r()*.65;
-  for(let j=0;j<8;j++){
-   const a=j*Math.PI*2/8+r()*.10,len=h*(.75+r()*.5);
+  for(let j=0;j<6;j++){
+   const a=j*Math.PI*2/6+r()*.10,len=h*(.75+r()*.5);
    const tip=new T.Group();tip.rotation.y=a;plant.add(tip);blades.push(tip);
    const pts=new T.Shape();pts.moveTo(0,0);pts.quadraticCurveTo(.13,.22,.10,len*.55);
    pts.quadraticCurveTo(.02,len*.93,0,len);
@@ -671,7 +671,7 @@ export function wetGrassClumps(seed=1){
    pts.quadraticCurveTo(-.11,.12,0,0);
    const leaf=part(tip,new T.ExtrudeGeometry(pts,{depth:.018,bevelEnabled:false,curveSegments:5}),pal[(j+k)%pal.length]);
    leaf.rotation.x=-.3-j*.015;leaf.rotation.z=.12*Math.sin(a*2.3);
-   for(let v=0;v<3;v++){
+   for(let v=0;v<2;v++){
      const water=part(tip,new T.SphereGeometry(.016,5,4),'#d5d3bb',[(r()-.5)*.11,len*(.2+v*.19),.03],true);
      water.scale.set(1,.7,1);
    }
@@ -752,7 +752,7 @@ export function autumnConeTrees(seed=1){
    const geo=new T.ConeGeometry(.59-k*.09,.69-k*.04,9,2);
    const s=part(crown,geo,tones[(j+k)%tones.length],[0,.08,0]);
    s.rotation.y=r()*5.3;
-   for(let q=0;q<8;q++){
+   for(let q=0;q<6;q++){
     const a=q*2.4+r()*.2,x=Math.cos(a)*(.32-k*.04);
     const z=Math.sin(a)*(.32-k*.04);
     part(crown,new T.TetrahedronGeometry(.06+r()*.025,0),tones[(j+q+2)%tones.length],

@@ -116,16 +116,33 @@ function gnarledTree(seed=5){
 }
 function groundMist(seed=6){
  const r=random(seed),g=new T.Group(),sheets=[];
+ // GPU alpha ribbons: a gently dissolving silhouette, never solid white triangles.
+ const mat=new T.ShaderMaterial({
+  uniforms:{uTime:{value:0}},
+  transparent:true,depthWrite:false,side:T.DoubleSide,
+  vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+  fragmentShader:`varying vec2 vUv;uniform float uTime;
+   float noise2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+   void main(){
+     vec2 p=vUv;float t=uTime*.19;
+     float ripple=.09*sin(p.x*14.+t)+.065*sin(p.x*29.-t*.7);
+     float upper=.37+.19*sin(p.x*5.7+t*.5)+ripple;
+     float rim=1.-smoothstep(upper-.16,upper+.12,p.y);
+     float nearGround=smoothstep(.0,.11,p.y);
+     float sides=smoothstep(.0,.17,p.x)*(1.-smoothstep(.83,1.,p.x));
+     float trail=.73+.27*sin(p.x*19.-t+p.y*9.);
+     float wisps=.82+.18*noise2(floor(vec2(p.x*22.+t,p.y*13.)));
+     float a=.115*rim*nearGround*sides*trail*wisps;
+     gl_FragColor=vec4(.22,.26,.27,a);
+   }`
+ });
  for(let i=0;i<12;i++){
-  const s=new T.Shape(),w=1.9+r()*2.6,h=.55+r()*.85;
-  s.moveTo(-w/2,0);
-  for(let k=0;k<=9;k++){const x=-w/2+w*k/9,y=h*(.23+.75*Math.pow(Math.sin(k/9*Math.PI),1.5))*(.75+r()*.5);s.lineTo(x,y);}
-  s.lineTo(w/2,-.09);s.closePath();
-  const m=add(g,new T.ShapeGeometry(s),M.mist,(r()-.5)*9,.11+r()*.29,(r()-.5)*4);
-  m.rotation.y=(r()-.5)*.95;sheets.push({m,x:m.position.x,i});
+   const w=2.4+r()*3.1,h=.75+r()*.48;
+   const m=add(g,new T.PlaneGeometry(w,h,12,4),mat,(r()-.5)*10,h*.43+.03,(r()-.5)*4);
+   m.rotation.y=(r()-.5)*1.1;sheets.push({m,x:m.position.x,i});
  }
  g.scale.x=.46;
- g.userData.tick=t=>sheets.forEach(({m,x,i})=>{m.position.x=x+.18*Math.sin(t*.21-i*.34);m.rotation.y=.08*Math.sin(t*.17-i*.18);});
+ g.userData.tick=t=>{mat.uniforms.uTime.value=t;sheets.forEach(({m,x,i})=>{m.position.x=x+.17*Math.sin(t*.18-i*.34);m.rotation.y=.06*Math.sin(t*.16-i*.21);});};
  return finish(g,0);
 }
 

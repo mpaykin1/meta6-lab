@@ -10,4 +10,4 @@
 | 2026-11-13 | 2.3.1 | — | HP9: дождаться стабилизации камеры перед скриншотами (сравнивается ассет, не перелёт) | 1 | 32/32 ожидается CI | 26→32 | [PR #296](https://github.com/mpaykin1/meta6-lab/pull/296) |
 | 2026-11-16 | 2.4.0 | ЗАКАЗ ПО ВИДЕО (ядро) | Z1–Z7 | 5 (всего 67) | 35/35 | — | прогон ASSET CHECK этого PR |
 | 2026-11-16 | 2.5.0 | — | ЗАКАЗ без видео (owner/text/game/sketch) | 4 (всего 71) | 36/36 | — | прогон ASSET CHECK этого PR |
-| 2026-11-17 | 2.5.2 | — | INK: Night Scream uses actual night tree and train baselines; fallback to approved Three.js module | 1 | CI pending | BLACK TRAIN: 0→6 / 15 ordered | [draft branch](https://github.com/mpaykin1/meta6-lab/tree/lab/assets-black-train-20261117-v1) |
+| 2026-11-17 | 2.6.0 | — | INK: Night Scream bases; IK16 synthesized sounds + IK17 logo confined to menu | 3 | CI pending | BLACK TRAIN: 0→15 / 15 ordered | [draft branch](https://github.com/mpaykin1/meta6-lab/tree/lab/assets-black-train-20261117-v1) |

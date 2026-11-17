@@ -1,6 +1,6 @@
 {
   "format": "htmlpack/1",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "name": "Туманные шпили — живой мир + 6 ассетов",
   "base": "reference/tumannye-shpili",
   "reference_count": 26,
@@ -21,8 +21,8 @@
     "source": "reference/tumannye-shpili/index.html",
     "branch": "lab/assets-tumannye-shpili-20261114-2338",
     "method": "unmodified reference scene extended with procedural meshes and animation",
-    "repair_date": "2026-11-16",
-    "visual_revision": "d896ae44302b90fc472e768f06e1dab871c05dd4"
+    "repair_date": "2026-11-17",
+    "visual_revision": "412e548d9847dfff2b7512f09a96269c9e41e9d9"
   },
   "content_flags": {
     "real_persons": [],
@@ -33,7 +33,7 @@
     "sable-beast": {
       "label_ru": "Страж из обломков врат",
       "role": "enemy",
-      "benefit": "новая фаза столкновения; маска и щупальца",
+      "benefit": "новая фаза столкновения; маска и щупальца; разнородные изломанные фрагменты камня с независимым плавным движением",
       "animated": true,
       "construction": "articulated-3d",
       "remade": true

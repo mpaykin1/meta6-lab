@@ -10,6 +10,9 @@ on:
       - 'scripts/ink/mutate-watercolor-train-browser.mjs'
       - '.github/workflows/ink-steam-train.yml'
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 permissions:
   contents: read
 jobs:

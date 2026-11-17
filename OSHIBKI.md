@@ -4,6 +4,7 @@
 
 | # | Дата | Ошибка | Как поймали | Ловушка (путь к тесту) |
 |---|---|---|---|---|
+| 2026111705 | 17.11.2026 | META BOT при `bot.json.secondRun="hash"` пропускал сбой второго запуска: `again.ok=false` или `again.hashes=[]` не влияли на `checkGame().ok`, получался ложный PASS | Воспроизведение `checkGame` на `main` с 4 исходами, кандидат исправляет 2 ложных PASS (патч для защищённого ядра) | `scripts/platform/mutate-meta-bot-second-run.mjs`: 3 мутации, включая маскировку по `secondRun="hash"`; `docs/patches/meta-bot-second-run.patch` |
 | 2026111702 | 17.11.2026 | Защищённое ядро META BOT `checkGame` возвращало `{ok:true,runs:[]}` при `viewports: []` или неизвестном экране — ложный успех без открытия игры | Воспроизведено на исходном `scripts/meta-bot/core.mjs` (PR #311, reports/bot-audit/PROGRESS.md) | scripts/meta-bot/mutate-viewports.mjs: настоящее ядро, 7 неверных и 4 верных конфигурации, checkGame отклоняет, 3 мутации ядра |
 | 2026111701 | 17.11.2026 | META BOT could report success for zero screens; actual game configuration now fails KONTUR before acceptance | empty viewports and unknown screen fixtures | scripts/platform/mutate-bot-config.mjs: 3 mutations and real game configurations |
 | 2026111401 | 14.11.2026 | Repair Bot молча пропускал недоступные JSON и менял часть набора при неисправимой ошибке; ссылка в предке позволяла писать вне проекта | Воспроизведено изолированными git-fixtures | scripts/repair-bot/selftest-safety.mjs: missing file, directory, batch rollback, junction; 3 мутации |

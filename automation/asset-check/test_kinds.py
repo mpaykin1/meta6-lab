@@ -270,6 +270,32 @@ class KindTraps(unittest.TestCase):
             (self.d / "makers.js").write_text(src, "utf-8")
         return self.d
 
+    def test_ink_night_reference_reuses_accepted_renderer(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        root = self.ink_pack()
+        p = root / "pack.json"
+        doc = json.loads(p.read_text("utf-8"))
+        doc["base"] = "reference/ink-night-scream"
+        p.write_text(json.dumps(doc), "utf-8")
+        r = cp.check(root)
+        self.assertNotIn("IK1", {i["id"] for i in r.hard()})
+
+    def test_ink_night_locomotive_requires_40_components(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        root = self.ink_pack()
+        p = root / "pack.json"
+        doc = json.loads(p.read_text("utf-8"))
+        doc["base"] = "reference/ink-night-scream"
+        doc["assets"] = {"blackLocomotive": {"label_ru": "Локомотив", "role": "vehicle", "zone": "railway", "footprint": 1}}
+        p.write_text(json.dumps(doc), "utf-8")
+        m = root / "makers.js"
+        txt = m.read_text("utf-8").replace("export const makers = {lilyPads, fireflies, giantCog};",
+                                                "export const makers = {blackLocomotive: lilyPads};")
+        m.write_text(txt, "utf-8")
+        self.assertIn("IK16", ids(root))
+
     def test_ink_clean_passes(self):
         if not shutil.which("node"):
             self.skipTest("нет node")

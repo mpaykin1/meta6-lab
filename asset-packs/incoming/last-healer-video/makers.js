@@ -120,7 +120,7 @@ function handFlashlight(seed=2){
   spot.position.set(0,.96,.41);spot.target.position.set(0,.3,3.4);pivot.add(spot,spot.target);
   // Suspended rain/dust grains catch the flashlight in three-dimensional space.
   const motes=[];const pollen=new T.MeshBasicMaterial({color:P.linen,transparent:true,opacity:.53});
-  for(let i=0;i<24;i++){
+  for(let i=0;i<16;i++){
     const z=.65+rng()*2.75,rad=.025+rng()*.025;
     const x=(rng()-.5)*.37*z,y=.93+(rng()-.5)*.26*z;
     const p=ball(pivot,rad,pollen,x,y,z,.64,1.8,.56);
@@ -283,15 +283,15 @@ function townRoad(seed=21){
    const mark=mesh(g,new T.BoxGeometry(.07+r()*.035,.007,.30+r()*.30),chalk,x,.017,z);
    mark.rotation.y=(r()-.5)*.08;
  }
- for(let i=0;i<43;i++){
+ for(let i=0;i<22;i++){
    const x=(r()-.5)*5.92,z=(r()-.5)*5.92;
    const chip=ball(g,.04+r()*.076,i%3===0?dusty:aged,x,.01,z,
      .5+r()*1.5,.08,.7+r());
    chip.rotation.y=r()*6.28;chip.userData.watercolorOutline=false;
  }
- for(let i=0;i<12;i++){
+ for(let i=0;i<6;i++){
    let x=(r()-.5)*3.8,z=(r()-.5)*3.8;
-   const n=2+Math.floor(r()*4);
+   const n=2+Math.floor(r()*3);
    for(let k=0;k<n;k++){
      const dx=(r()-.5)*.65,dz=(r()-.5)*.42;
      rod(g,[x,.02,z],[x+dx,.0201,z+dz],.008,crack,.004);
@@ -305,26 +305,26 @@ function roadsideDryShrubs(seed=23){
  const r=random(seed),g=new T.Group(),stem=pigment('#736b59'),
    twig=pigment('#918872'),leafM=[pigment('#bd7c69'),pigment('#a96851'),pigment('#c5ac69'),pigment('#607e74')],
    branches=[];
- for(let cl=0;cl<6;cl++){
+ for(let cl=0;cl<4;cl++){
    const h=.37+r()*.55,clump=new T.Group();
    clump.position.set((r()-.5)*3.0,0,(r()-.5)*2.2);clump.rotation.y=r()*6.28;g.add(clump);
    const slope=(r()-.5)*.22;
    rod(clump,[0,0,0],[slope,h,0],.032,stem,.015);
-   for(let j=0;j<4;j++){
+   for(let j=0;j<3;j++){
      const angle=(j*2.399+r()*.3),s=.22+r()*.29;
      const elbow=[Math.cos(angle)*s*.54,h*(.45+r()*.30),Math.sin(angle)*s*.54];
      const tip=[Math.cos(angle)*s*1.3,h*(.76+r()*.40),Math.sin(angle)*s*1.15];
      rod(clump,[slope*.55,h*.55,0],elbow,.016,stem,.010);
      const bent=new T.Group();bent.position.set(...elbow);clump.add(bent);branches.push({part:bent,phase:r()*2.5+j*.41});
      rod(bent,[0,0,0],tip.map((v,i)=>v-elbow[i]),.010,twig,.003);
-     for(let k=0;k<3;k++){
+     for(let k=0;k<2;k++){
        const q=.32+k*.29,p=tip.map((v,i)=>(v-elbow[i])*q);
        const leaf=ball(bent,.055+r()*.030,leafM[(cl+j+k)%4],p[0],p[1],p[2],
          .68,.25,1.1+r()*.9);
        leaf.rotation.y=angle+k*.5;leaf.rotation.z=(r()-.5)*.7;
      }
    }
-   for(let k=0;k<5;k++){
+   for(let k=0;k<3;k++){
      const a=k*2.399,s=.12+r()*.22;
      const thorn=rod(clump,[0,.04,0],[Math.cos(a)*s,.08,Math.sin(a)*s],.016,stem,.005);
    }
@@ -379,13 +379,13 @@ function pinkTownBuilding(seed=29){
    }
  }
  const sign=mesh(g,new T.BoxGeometry(2.04,.31,.08),roof,0,2.10,1.47);
- for(let i=0;i<13;i++){
+ for(let i=0;i<10;i++){
    const x=-.90+i*.145;
    mesh(g,new T.BoxGeometry(.038,.12+(i%4)*.035,.035),i%3===0?sill:iron,x,2.1,1.54);
  }
  // Copper piping, drain, roof vents, roof gravel and uneven masonry.
  rod(g,[1.50,2.20,1.45],[1.50,.12,1.46],.043,iron);
- for(let i=0;i<16;i++){
+ for(let i=0;i<12;i++){
    const x=(r()-.5)*2.80,z=(r()-.5)*2.10;
    ball(g,.050+r()*.037,roof,x,2.61,z,1,.24,1.4);
  }
@@ -456,7 +456,7 @@ function healerWalkWithLight(seed=37){
  box(body,.38,.10,.15,leather,0,1.09,.26);
  const cloak=mesh(body,new T.ConeGeometry(.42,.55,9,1,true),hood,0,.82,-.12);
  cloak.rotation.x=.13;
- for(let i=0;i<8;i++){
+ for(let i=0;i<6;i++){
    const a=(i-3.5)*.10;
    rod(body,[a,1.18,-.29],[a+.02,.68,-.34],.009,leather);
  }
@@ -576,14 +576,14 @@ function whiteClinicBuilding(seed=53){
  const ivy=pigment('#789180'),tip=pigment('#607e74');
  for(const side of [-1,1]){
   rod(g,[side*2.17,0,1.44],[side*2.23,1.72,1.43],.025,ivy);
-  for(let k=0;k<13;k++){
+  for(let k=0;k<8;k++){
    const y=.11+k*.12,a=k*2.399+r();
    const x=side*(2.20-.19*Math.sin(a));
    const leaf=ball(g,.086,ivy,x,y,1.47,.48,.7,1.05);
    leaf.rotation.z=(r()-.5)*1.8;
   }
  }
- for(let i=0;i<13;i++){
+ for(let i=0;i<10;i++){
   const x=(r()-.5)*4.0,z=-1.3+r()*2.5;
   ball(g,.052+r()*.044,shade,x,2.20,z,.85,.27,1.1);
  }
@@ -631,11 +631,11 @@ function wetGrassClumps(seed=61){
  const r=random(seed),g=new T.Group(),clusters=[],greens=[
    pigment('#607e74'),pigment('#789180'),pigment('#91a18b'),pigment('#414f50')
  ],glint=new T.MeshBasicMaterial({color:'#e7e5d6',transparent:true,opacity:.7});
- for(let i=0;i<8;i++){
+ for(let i=0;i<5;i++){
   const patch=new T.Group();
   patch.position.set((r()-.5)*3.25,0,(r()-.5)*2.8);patch.rotation.y=r()*6.28;
   g.add(patch);clusters.push({o:patch,phase:r()*4.7});
-  for(let j=0;j<9;j++){
+  for(let j=0;j<6;j++){
    const a=j*2.399+r()*.3,h=.35+r()*.72,reach=.13+r()*.23;
    const blade=rod(patch,[0,.015,0],[Math.cos(a)*reach,h,Math.sin(a)*reach],
     .025,greens[(i+j)%4],.002);
@@ -696,7 +696,7 @@ function shoreFoamLine(seed=71){
  }),aqua=new T.MeshBasicMaterial({color:'#78a5a4',transparent:true,opacity:.34,depthWrite:false}),
  arcs=[];
  // 21 independent irregular wave crests follow the oblique shoreline, not a straight strip.
- for(let i=0;i<22;i++){
+ for(let i=0;i<17;i++){
   const x=-2.35+i*.22,z=.37*Math.sin(i*.24)+.12*Math.cos(i*.52);
   const curve=new T.QuadraticBezierCurve3(
    new T.Vector3(x,.018,z),
@@ -724,7 +724,7 @@ function autumnConeTrees(seed=73){
  const r=random(seed),g=new T.Group(),crowns=[],leaves=[];
  const foliage=['#bd7c69','#c5ac69','#789180','#91a18b','#a96851'].map(pigment),
    trunk=pigment('#736b59'),bark=pigment('#4d5255');
- for(let i=0;i<5;i++){
+ for(let i=0;i<4;i++){
   const parent=new T.Group(),h=1.8+r()*1.4;
   parent.position.set((r()-.5)*3.5,0,(r()-.5)*3.5);parent.rotation.y=r()*6.28;
   g.add(parent);
@@ -735,7 +735,7 @@ function autumnConeTrees(seed=73){
      foliage[(i+j+Math.floor(r()*2))%foliage.length],(r()-.5)*.11,h*(.39+j*.20),(r()-.5)*.1);
    cone.rotation.x=(r()-.5)*.09;cone.rotation.z=(r()-.5)*.06;
    crowns.push({o:cone,phase:i*.8+j*.24});
-   for(let k=0;k<4;k++){
+   for(let k=0;k<2;k++){
     const th=k*PI*.5+r()*.6;
     const seedDrop=ball(parent,.038,foliage[(i+j+k)%5],
       Math.cos(th)*a*.8,h*(.25+j*.23),Math.sin(th)*a*.8,
@@ -832,7 +832,7 @@ function boatShed(seed=79){
 function driftingLeaves(seed=83){
  const r=random(seed),g=new T.Group(),leaves=[];
  const leafM=['#bd7c69','#c5ac69','#a96851','#91a18b'].map(pigment);
- for(let i=0;i<42;i++){
+ for(let i=0;i<36;i++){
   const x=(r()-.5)*4.5,z=(r()-.5)*4.5,y=i%3===0?.045:.035;
   const sh=new T.Shape(),rad=.06+r()*.09;
   sh.moveTo(0,rad*1.2);sh.quadraticCurveTo(rad*.95,rad*.48,0,-rad);
@@ -874,7 +874,7 @@ function sandBeachTiles(seed=89){
    .9,.09,.50+r()*.90);
   flat.rotation.y=r()*6.28;flat.userData.watercolorOutline=false;
  }
- for(let i=0;i<38;i++){
+ for(let i=0;i<30;i++){
   const x=(r()-.5)*4.7,z=(r()-.5)*4.4;
   const stone=ball(g,.05+r()*.047,i%4?shell:pebble,x,.035,z,
     .85,.35,.65+r()*.6);

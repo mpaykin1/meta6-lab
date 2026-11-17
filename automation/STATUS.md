@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T11:13:06.329Z | МГЛ: 5c1c377591cf670c6a9676ae5d9e6e60be9e227c | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44071800165
+UTC: 2026-11-17T11:16:22.539Z | МГЛ: 9de111dd6a7e0f7886e7f8670bf640daec43312e | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44072397492
 ## ПРОВЕРИТЬ CLAUDE
 - PR #382 7c56b01e1a323254a1d850d50bd373364a079c7d: automation/asset-check/test_kinds.py
 - PR #362 51f2ef012ec9cf31d0d68c83ba02fac0951974b7: automation/asset-check/test_3d_master.py
@@ -40,7 +40,7 @@ L4 — не готов: НЕТ в таблице FINISH
 #382 feat(assets): BLACK TRAIN — 14 заказанных ассетов без нового | 7c56b01e1a323254a1d850d50bd373364a079c7d
 ещё 74: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2773 коммитов | нет данных
+МГЛ: 2775 коммитов | нет данных
 МГ: 44 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:25, reference:31, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

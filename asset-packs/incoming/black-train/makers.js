@@ -116,25 +116,35 @@ function gnarledTree(seed=5){
 }
 function groundMist(seed=6){
  const r=random(seed),g=new T.Group(),sheets=[];
- // GPU alpha ribbons: a gently dissolving silhouette, never solid white triangles.
+ // GPU-only watercolor mist: soft torn contours, beam scattering and red signal bleed.
+ // Each ribbon owns its shader, so no unrelated pack asset or the reference scene changes.
  const mat=new T.ShaderMaterial({
-  uniforms:{uTime:{value:0}},
+  uniforms:{uTime:{value:0},uTorch:{value:0},uLamp:{value:0}},
   transparent:true,depthWrite:false,side:T.DoubleSide,
-  vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-  fragmentShader:`varying vec2 vUv;uniform float uTime;
-   float noise2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-   void main(){
-     vec2 p=vUv;float t=uTime*.19;
-     float ripple=.09*sin(p.x*14.+t)+.065*sin(p.x*29.-t*.7);
-     float upper=.37+.19*sin(p.x*5.7+t*.5)+ripple;
-     float rim=1.-smoothstep(upper-.16,upper+.12,p.y);
-     float nearGround=smoothstep(.0,.11,p.y);
-     float sides=smoothstep(.0,.17,p.x)*(1.-smoothstep(.83,1.,p.x));
-     float trail=.73+.27*sin(p.x*19.-t+p.y*9.);
-     float wisps=.82+.18*noise2(floor(vec2(p.x*22.+t,p.y*13.)));
-     float a=.115*rim*nearGround*sides*trail*wisps;
-     gl_FragColor=vec4(.22,.26,.27,a);
-   }`
+  vertexShader:'varying vec2 vUv;varying vec3 vWorld;void main(){vUv=uv;vWorld=(modelMatrix*vec4(position,1.)).xyz;gl_Position=projectionMatrix*viewMatrix*vec4(vWorld,1.);}',
+  fragmentShader:[
+   'varying vec2 vUv;varying vec3 vWorld;uniform float uTime,uTorch,uLamp;',
+   'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+   'float wash(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);',
+   'return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}',
+   'void main(){',
+   'vec2 p=vUv;float t=uTime*.16;',
+   'float upper=.37+.16*sin(p.x*5.3+t*.4)+.085*sin(p.x*13.-t*.58)',
+   '           +.065*(wash(vec2(p.x*9.+t,p.y*2.))- .5);',
+   'float ragged=1.-smoothstep(upper-.17,upper+.10,p.y);',
+   'float ground=smoothstep(.0,.12,p.y);',
+   'float ends=smoothstep(.0,.14,p.x)*(1.-smoothstep(.85,1.,p.x));',
+   'float wisps=.58+.42*wash(vec2(p.x*17.-t,p.y*7.+t*.3));',
+   'vec3 forward=normalize(vec3(-viewMatrix[0][2],-viewMatrix[1][2],-viewMatrix[2][2]));',
+   'vec3 toMist=normalize(vWorld-cameraPosition);',
+   'float dist2=dot(vWorld-cameraPosition,vWorld-cameraPosition);',
+   'float beam=uTorch*smoothstep(.86,.984,dot(toMist,forward))/(1.+dist2*.012);',
+   'float lamp=uLamp*exp(-distance(vWorld,vec3(4.2,2.65,-5.35))*.24);',
+   'vec3 pigment=vec3(.21,.26,.28)+vec3(.56,.58,.57)*beam+vec3(.49,.035,.025)*lamp;',
+   'float alpha=clamp(.13*ragged*ground*ends*wisps*(1.+1.9*beam+1.1*lamp),0.,.52);',
+   'gl_FragColor=vec4(pigment,alpha);',
+   '}'
+  ].join('\\n')
  });
  for(let i=0;i<12;i++){
    const w=2.4+r()*3.1,h=.75+r()*.48;
@@ -142,10 +152,16 @@ function groundMist(seed=6){
    m.rotation.y=(r()-.5)*1.1;sheets.push({m,x:m.position.x,i});
  }
  g.scale.x=.46;
- g.userData.tick=t=>{mat.uniforms.uTime.value=t;sheets.forEach(({m,x,i})=>{m.position.x=x+.17*Math.sin(t*.18-i*.34);m.rotation.y=.06*Math.sin(t*.16-i*.21);});};
+ g.userData.setLight=(on,near)=>{
+   mat.uniforms.uTorch.value=on?1:0;
+   mat.uniforms.uLamp.value=T.MathUtils.clamp(near,0,1);
+ };
+ g.userData.tick=t=>{mat.uniforms.uTime.value=t;sheets.forEach(({m,x,i})=>{
+   m.position.x=x+.17*Math.sin(t*.18-i*.34);
+   m.rotation.y=.06*Math.sin(t*.16-i*.21);
+ });};
  return finish(g,0);
 }
-
 function stormClouds(seed=7){
  const r=random(seed),g=new T.Group(),layers=[];
  const cloudMat=new T.MeshBasicMaterial({color:0x39454a,transparent:true,opacity:.63,side:T.DoubleSide,depthWrite:false});

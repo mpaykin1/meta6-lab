@@ -147,17 +147,70 @@ function groundMist(seed=6){
 }
 
 function stormClouds(seed=7){
- const r=random(seed),g=new T.Group(),layers=[];
- const cloudMat=new T.MeshBasicMaterial({color:0x39454a,transparent:true,opacity:.63,side:T.DoubleSide,depthWrite:false});
+ // Torn, overlapping thunderheads: dark lower washes, fractured contour,
+ // scattered silver ink along the crown. Independent banks drift without jitter.
+ const r=random(seed),g=new T.Group(),banks=[];
+ const back=new T.MeshBasicMaterial({color:0x101a20,transparent:true,opacity:.83,side:T.DoubleSide,depthWrite:false});
+ const body=new T.MeshBasicMaterial({color:0x2a353c,transparent:true,opacity:.79,side:T.DoubleSide,depthWrite:false});
+ const fold=new T.MeshBasicMaterial({color:0x455359,transparent:true,opacity:.38,side:T.DoubleSide,depthWrite:false});
+ const shadow=new T.MeshBasicMaterial({color:0x080e13,transparent:true,opacity:.69,side:T.DoubleSide,depthWrite:false});
+ const edge=new T.LineBasicMaterial({color:0x91a3aa,transparent:true,opacity:.21,depthWrite:false});
  for(let j=0;j<5;j++){
-  const sh=new T.Shape(),w=2+r()*2.5;
-  sh.moveTo(-w/2,0);
-  for(let k=0;k<=14;k++){const x=-w/2+w*k/14,y=.22+Math.sin(k/14*Math.PI)*(.25+r()*.3)+r()*.14;sh.lineTo(x,y);}
-  sh.lineTo(w/2,-.26);sh.closePath();
-  const mesh=add(g,new T.ShapeGeometry(sh),cloudMat,(r()-.5)*2.6,1+j*.42,-j*.32);
-  layers.push({mesh,x:mesh.position.x,j});
+  const bank=new T.Group(),span=2.45+r()*2.2,height=.55+r()*.3;
+  const left=-span*.5,top=[],bottom=[];
+  bank.position.set(-2.85+j*1.48+(r()-.5)*.48,1.04+j*.42,-j*.28);
+  g.add(bank);
+  for(let k=0;k<=30;k++){
+   const u=k/30,x=left+span*u;
+   const crown=.16+height*Math.pow(Math.sin(Math.PI*u),.75)+
+     .12*Math.sin(u*24+j*.8)+.085*Math.sin(u*49+j*1.7)+
+     (r()-.5)*.075;
+   top.push(new T.Vector3(x,crown,0));
+   bottom.push(new T.Vector3(x,-.16-.18*Math.sin(Math.PI*u)-
+     .065*Math.sin(u*32+j*1.2)-(r()*.055),0));
+  }
+  function wash(shift,depth,material){
+   const shape=new T.Shape();
+   shape.moveTo(top[0].x,top[0].y+shift);
+   for(let k=1;k<top.length;k++)shape.lineTo(top[k].x,top[k].y+shift);
+   for(let k=bottom.length-1;k>=0;k--)
+    shape.lineTo(bottom[k].x,bottom[k].y+shift*.35);
+   shape.closePath();
+   add(bank,new T.ShapeGeometry(shape),material,0,0,depth);
+  }
+  wash(-.18,-.10,back);
+  wash(-.055,-.035,body);
+  wash(-.27,.025,shadow);
+  // Separate chipped seams: never one continuous horizontal wall of colour.
+  for(let q=0;q<7;q++){
+   const k=2+Math.floor(r()*22),len=2+Math.floor(r()*5);
+   const sh=new T.Shape();
+   sh.moveTo(top[k].x,top[k].y-.08-r()*.1);
+   for(let a=k+1;a<=Math.min(30,k+len);a++)
+    sh.lineTo(top[a].x,top[a].y-.12-r()*.08);
+   sh.lineTo(top[Math.min(30,k+len)].x,-.04-r()*.14);
+   sh.lineTo(top[k].x,-.1-r()*.21);
+   sh.closePath();
+   add(bank,new T.ShapeGeometry(sh),q%3===0?shadow:fold,0,0,.045+q*.002);
+  }
+  const rim=new T.Line(new T.BufferGeometry().setFromPoints(top.map(p=>
+   new T.Vector3(p.x,p.y-.012,.09))),edge);
+  bank.add(rim);
+  for(let w=0;w<3;w++){
+   const k=2+Math.floor(r()*24),x=top[k].x,y=bottom[k].y;
+   const tip=new T.Shape();
+   tip.moveTo(x,y);tip.lineTo(x+.18+r()*.35,y-.12-r()*.16);
+   tip.lineTo(x+.38+r()*.6,y-.05);tip.lineTo(x+.23,y+.12);
+   tip.closePath();
+   add(bank,new T.ShapeGeometry(tip),back,0,0,-.04);
+  }
+  banks.push({bank,x:bank.position.x,y:bank.position.y,phase:j*.71+r()*2});
  }
- g.userData.tick=t=>layers.forEach(({mesh,x,j})=>{mesh.position.x=x+.13*Math.sin(t*.1+j*.3);mesh.rotation.z=.015*Math.sin(t*.14+j);});
+ g.userData.tick=t=>banks.forEach(({bank,x,y,phase},j)=>{
+  bank.position.x=x+.19*Math.sin(t*.085+phase);
+  bank.position.y=y+.045*Math.sin(t*.06+phase*.8);
+  bank.rotation.z=.009*Math.sin(t*.052+j*.4);
+ });
  return finish(g,0);
 }
 function brokenFence(seed=8){

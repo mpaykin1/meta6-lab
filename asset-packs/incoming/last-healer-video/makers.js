@@ -85,6 +85,7 @@ function carHeadlights(seed=1){
       screw.scale.z=.4;
     }
   }
+  g.scale.setScalar(.94);
   g.userData.footprint=0;g.userData.attachTo='car';
   g.userData.tick=(t)=>{
     for(let k=0;k<lightLayers.length;k++){
@@ -596,12 +597,12 @@ function autumnConeTrees(seed=17){
   const tree=new T.Group();tree.position.set((i-2)*1.15,(0),(r()-.5)*1.6);g.add(tree);trees.push(tree);
   const H=1.7+r()*1.0,color=pigment(pine[i]);
   rod(tree,[0,0,0],[0,H,0],.095,bark,.045);
-  for(let tier=0;tier<4;tier++){
+  for(let tier=0;tier<3;tier++){
    const radius=(.69-tier*.12)*(1+r()*.11),y=.8+tier*.36;
    const crown=mesh(tree,new T.ConeGeometry(radius,.77,7),color,0,y,0);
    crown.rotation.y=r()*PI;
-   for(let j=0;j<4;j++){
-    const a=j*PI/2+tier*.6;
+   for(let j=0;j<3;j++){
+    const a=j*2*PI/3+tier*.6;
     const leaf=ball(tree,.066,j%3?spark:color,Math.cos(a)*radius*.64,y-.09,Math.sin(a)*radius*.64,.8,.65,1.2);
     leaf.rotation.y=a;
    }

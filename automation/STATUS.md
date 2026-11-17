@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T08:16:14.524Z | МГЛ: 55a93572a96179361dd6253f0450eabf9274439d | МГ: aa63d1def02bcca2ddf7f3161add508255df824c | https://github.com/mpaykin1/meta6-lab/actions/runs/44045087168
+UTC: 2026-11-17T08:47:29.531Z | МГЛ: 91c2f72e828d616d41dee0fee93ee37515a264e1 | МГ: aa63d1def02bcca2ddf7f3161add508255df824c | https://github.com/mpaykin1/meta6-lab/actions/runs/44049433003
 ## ПРОВЕРИТЬ CLAUDE
 - PR #362 51f2ef012ec9cf31d0d68c83ba02fac0951974b7: automation/asset-check/test_3d_master.py
 - PR #372 0e5d7893812d336299d041199deda50557a07395: scripts/karta-sil/mutate-current-claude-marker.mjs, scripts/karta-sil/mutate-karta-sil.mjs
@@ -34,13 +34,13 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 44 | конфликт: 32 | слито: 74 | закрыто: 116
+открыто: 44 | конфликт: 31 | слито: 74 | закрыто: 116
 #369 docs(z01): verify live PR identity before backlog decisions | ad5bebf3eb5b68d3cc0c6bd8ac63ab26a563cb88
 #362 feat(3d-master): профессиональный аудит glTF геометрии (част | 51f2ef012ec9cf31d0d68c83ba02fac0951974b7
 #377 INK · Регистрация эталона «Машина → Батискаф» (МГ + МГЛ ссыл | 04fe7850e474ec7c2f7ee74f67728b51cfa084cb
 ещё 71: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2732 коммитов | нет данных
+МГЛ: 2738 коммитов | нет данных
 МГ: 43 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:31, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

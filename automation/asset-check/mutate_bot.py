@@ -30,6 +30,8 @@ MUTANTS = [
     ("check_pack.py", "if not fp.exists() or not", "if False and not"),
     ("check_pack.py", "miss = [k for k in req if not it.get(k)]", "miss = []"),
     ("check_pack.py", 'if stype not in ("video", "sketch", "text", "game", "owner"):', "if False:"),
+    ("kinds/ink.py", "if not found_sound:", "if False:"),
+    ("kinds/ink.py", "if not in_menu:", "if False:"),
     ("kinds/ink.py", 'THREE_FALLBACK = "reference/ink-fallen-guardian/three.module.js"', 'THREE_FALLBACK = "reference/ink-night-scream/three.module.js"'),
     ("kinds/ink.py", 'if not m.get("same_seed_same"):', "if False:"),
     ("kinds/ink.py", "if role in VARY and not", "if False and not"),

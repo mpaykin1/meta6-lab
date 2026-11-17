@@ -70,7 +70,7 @@ function redSignalLamp(seed=3){
   // Its smooth pulse accelerates as the train approaches; the idle lamp stays dim.
   const pulse=.5+.5*Math.sin(t*(2.4+8.1*near));
   const light=.09+near*(.48+3.7*pulse*pulse);
-  l.intensity=light;
+  l.intensity=light;g.userData.lightLevel=light;
   lensMaterial.color.setRGB(.18+near*.75*pulse,.012+near*.037*pulse,.017+near*.035*pulse);
  };
  g.userData.tick=(t)=>{g.userData.setApproach(.4,t);housing.rotation.z=.02*Math.sin(t*.8);};

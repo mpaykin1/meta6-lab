@@ -25,7 +25,7 @@ function redSignalLamp(seed=1){
  for(let i=0;i<7;i++){const a=i*6.283/7;beam(lamp,[Math.cos(a)*.29,Math.sin(a)*.29,.13],[Math.cos(a+.16)*.12,Math.sin(a+.16)*.12,.18],.012,steel);}
  for(let i=0;i<4;i++)beam(lamp,[.1+i*.03,-.2,.22],[.04+i*.03,-.36-rnd(seed,i)*.17,.25],.012,red);
  const halo=new T.PointLight('#ff2409',3,8,2);halo.position.z=.32;lamp.add(halo);
- g.userData.tick=t=>{const v=.35+.65*Math.pow(.5+.5*Math.sin(t*3.2),3);halo.intensity=2.8*v;red.emissiveIntensity=.4+2.3*v;face.scale.z=.25+.12*v;};
+ g.userData.tick=(t,dt,trainNear=0)=>{const approach=Math.min(1,Math.max(0,trainNear));const pulse=Math.pow(.5+.5*Math.sin(t*3.2),3);const v=.06+approach*.94*pulse;halo.intensity=2.8*v;red.emissiveIntensity=.25+2.4*v;face.scale.z=.25+.018*Math.sin(t*.36)+.10*v;};
  g.userData.interact={radius:6,effect:'warn-train',label_ru:'Сигнал приближения поезда'};
  return done(g,'Красный сигнальный фонарь',.35);
 }

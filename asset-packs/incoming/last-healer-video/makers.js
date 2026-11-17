@@ -630,4 +630,195 @@ export function whiteClinicBuilding(seed=1){
  return g;
 }
 
-export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,boatShed,roadsideDryShrubs,pinkTownBuilding,duskTownLight,healerWalkWithLight,puddles,whiteClinicBuilding};
+
+function washSheet(root,w,h,color,position,seed=0) {
+ const m=new T.Mesh(new T.PlaneGeometry(w,h,12,3),
+   new T.ShaderMaterial({uniforms:{uTime:{value:0},uColor:{value:new T.Color(color)}},
+    vertexShader:glowVertex,
+    fragmentShader:'varying vec2 vUv;uniform float uTime;uniform vec3 uColor;void main(){float x=smoothstep(0.,.12,vUv.x)*(1.-smoothstep(.86,1.,vUv.x));float y=smoothstep(.0,.26,vUv.y)*(1.-smoothstep(.61,1.,vUv.y));float n=.80+.20*sin(17.*vUv.x+3.*sin(vUv.y*7.+uTime*.20));gl_FragColor=vec4(uColor,.26*x*y*n);}',
+    side:T.DoubleSide,transparent:true,depthWrite:false}));
+ m.position.set(...position);m.userData.watercolorSkipWash=true;
+ m.userData.watercolorOutline=false;root.add(m);return m;
+}
+export function nightRainGrade(seed=1){
+ const r=rng(seed),g=new T.Group(),haze=[];g.name='Холодная дождливая ночь';
+ for(let i=0;i<9;i++){
+  const b=washSheet(g,2.3+r()*2.1,.7+r()*.6,i%3===0?'#6d8e9a':'#617880',
+    [(r()-.5)*2.5,.3+i*.24,-1-i*.16],seed);
+  b.rotation.y=(r()-.5)*.25;haze.push(b);
+ }
+ for(let i=0;i<17;i++){
+  const d=part(g,new T.BoxGeometry(.013,.13+r()*.18,.008),'#9aaca4',
+    [(r()-.5)*4,.20+r()*1.7,(r()-.5)*3]);
+  d.rotation.z=.16;d.material=d.material.clone();d.material.transparent=true;d.material.opacity=.35;
+ }
+ g.userData.tick=t=>haze.forEach((w,i)=>{w.material.uniforms.uTime.value=t;w.position.x=.12*Math.sin(t*.18-i*.37);});
+ g.userData.footprint=0;return g;
+}
+export function wetGrassClumps(seed=1){
+ const r=rng(seed),g=new T.Group(),blades=[];g.name='Мокрые агавы и блестящая трава';
+ const pal=['#526b60','#607e74','#789180','#91a18b','#728574'];
+ for(let k=0;k<9;k++){
+  const x=(k%3-1)*.62+(r()-.5)*.10,z=(Math.floor(k/3)-1)*.55+(r()-.5)*.1;
+  const plant=new T.Group();plant.position.set(x,.03,z);g.add(plant);
+  const h=.48+r()*.65;
+  for(let j=0;j<8;j++){
+   const a=j*Math.PI*2/8+r()*.10,len=h*(.75+r()*.5);
+   const tip=new T.Group();tip.rotation.y=a;plant.add(tip);blades.push(tip);
+   const pts=new T.Shape();pts.moveTo(0,0);pts.quadraticCurveTo(.13,.22,.10,len*.55);
+   pts.quadraticCurveTo(.02,len*.93,0,len);
+   pts.quadraticCurveTo(-.04,len*.82,-.07,len*.47);
+   pts.quadraticCurveTo(-.11,.12,0,0);
+   const leaf=part(tip,new T.ExtrudeGeometry(pts,{depth:.018,bevelEnabled:false,curveSegments:5}),pal[(j+k)%pal.length]);
+   leaf.rotation.x=-.3-j*.015;leaf.rotation.z=.12*Math.sin(a*2.3);
+   for(let v=0;v<3;v++){
+     const water=part(tip,new T.SphereGeometry(.016,5,4),'#d5d3bb',[(r()-.5)*.11,len*(.2+v*.19),.03],true);
+     water.scale.set(1,.7,1);
+   }
+  }
+ }
+ g.userData.tick=t=>blades.forEach((tip,i)=>{tip.rotation.z=.045*Math.sin(t*.76-i*.24);tip.rotation.x=.025*Math.sin(t*.39-i*.18);});
+ g.userData.footprint=0;return g;
+}
+function surfRipple(root,seed,x,z,size) {
+ const m=new T.Mesh(new T.PlaneGeometry(size,size),new T.ShaderMaterial({
+ uniforms:{uTime:{value:0},uSeed:{value:seed}},
+ vertexShader:glowVertex,
+ fragmentShader:'varying vec2 vUv;uniform float uTime;uniform float uSeed;void main(){vec2 p=(vUv-.5)*2.;float d=length(p);float w=fract(uTime*.38+uSeed*.17);float a=(1.-smoothstep(.025,.065,abs(d-w*.9)))*pow(1.-w,1.7)*.38;gl_FragColor=vec4(.84,.94,.87,a);}',
+ transparent:true,depthWrite:false,side:T.DoubleSide}));
+ m.rotation.x=-Math.PI/2;m.position.set(x,.07,z);root.add(m);
+ m.userData.watercolorOutline=false;m.userData.watercolorSkipWash=true;return m;
+}
+export function boatWake(seed=1){
+ const r=rng(seed),g=new T.Group(),ripples=[];g.name='След лодки и брызги вёсел';
+ for(let i=0;i<13;i++){
+   const x=-.15-i*.20,z=(i%2?1:-1)*(.16+i*.047);
+   const p=surfRipple(g,seed+i,x,z,.5+i*.17);ripples.push(p);
+   if(i%3===0)for(let j=0;j<4;j++){
+    const d=part(g,new T.TetrahedronGeometry(.027+r()*.015,0),'#c4dbd2',
+      [x+(r()-.5)*.20,.14+r()*.15,z+(r()-.5)*.23],true);
+    d.userData.watercolorSkipWash=true;
+   }
+ }
+ for(const sign of [-1,1])for(let j=0;j<6;j++){
+   const x=.12-j*.16,z=sign*(.39+j*.055);
+   const foam=part(g,new T.TetrahedronGeometry(.038+r()*.025,0),'#e7e5d6',[x,.07,z],true);
+   foam.scale.y=.32;
+ }
+ g.userData.tick=t=>{ripples.forEach((p,i)=>{p.material.uniforms.uTime.value=t;p.rotation.z=.015*Math.sin(t*.3-i*.17);});};
+ g.userData.footprint=0;return g;
+}
+export function shoreFoamLine(seed=1) {
+ const r=rng(seed),g=new T.Group(),tips=[];
+ g.name='Линия живой пены у берега';
+ // Draw an irregular, continuous shoreline rather than repeating glowing circles.
+ const N=95,points=[],idx=[];
+ for(let i=0;i<=N;i++){
+   const z=-2.7+5.4*i/N,x=.19*Math.sin(z*2.4+seed*.23)+.17*Math.sin(z*.91);
+   const edge=.10+.03*Math.sin(z*3.7+i*.19);
+   points.push(x,.045,z,x+edge,.043,z);
+   if(i<N){const k=i*2;idx.push(k,k+1,k+2,k+1,k+3,k+2);}
+ }
+ const geom=new T.BufferGeometry();geom.setAttribute('position',new T.Float32BufferAttribute(points,3));geom.setIndex(idx);geom.computeVertexNormals();
+ const surf=part(g,geom,'#d7e1cc');
+ surf.material=surf.material.clone();surf.material.transparent=true;surf.material.opacity=.71;surf.material.side=T.DoubleSide;
+ for(let i=0;i<40;i++){
+  const z=-2.7+r()*5.4,x=.15*Math.sin(z*2.4+seed*.23)+.17*Math.sin(z*.91);
+  const frag=new T.Group();frag.position.set(x+(r()-.5)*.35,.045,z);
+  g.add(frag);tips.push(frag);
+  for(let j=0;j<3;j++){
+   const mesh=part(frag,new T.TetrahedronGeometry(.025+r()*.022,0),'#e7e5d6',
+       [(r()-.5)*.10,.015,(r()-.5)*.13],true);
+   mesh.scale.y=.25;
+  }
+ }
+ // Tidal motion affects parts, never shakes the whole scene.
+ g.userData.tick=t=>{
+   surf.scale.x=1+.09*Math.sin(t*.61);
+   tips.forEach((tip,i)=>{tip.position.x+=.001*Math.sin(t*.4-i*.17);tip.rotation.y=.06*Math.sin(t*.42-i*.22);});
+ };
+ g.userData.footprint=0;return g;
+}
+export function autumnConeTrees(seed=1){
+ const r=rng(seed),g=new T.Group(),crowns=[];
+ const tones=['#c58b5a','#b7a65e','#64877a','#c28b93','#a89267','#91a18b'];
+ g.name='Осенние кроны-гроздья';
+ for(let j=0;j<5;j++){
+  const root=new T.Group();root.position.set((j-2)*1.00+(r()-.5)*.13,0,(r()-.5)*.6);g.add(root);
+  const h=1.40+r()*.67;
+  beam(root,[0,.02,0],[.05,h*.92,0],.09,'#736b59');
+  for(let k=0;k<4;k++){
+   const crown=new T.Group();crown.position.set((r()-.5)*.12,.58+k*.35,0);root.add(crown);crowns.push(crown);
+   const geo=new T.ConeGeometry(.59-k*.09,.69-k*.04,9,2);
+   const s=part(crown,geo,tones[(j+k)%tones.length],[0,.08,0]);
+   s.rotation.y=r()*5.3;
+   for(let q=0;q<8;q++){
+    const a=q*2.4+r()*.2,x=Math.cos(a)*(.32-k*.04);
+    const z=Math.sin(a)*(.32-k*.04);
+    part(crown,new T.TetrahedronGeometry(.06+r()*.025,0),tones[(j+q+2)%tones.length],
+       [x,(r()-.5)*.34,z]).rotation.y=a;
+   }
+  }
+  for(let k=0;k<4;k++){
+   const leaf=part(root,new T.TetrahedronGeometry(.065,0),tones[(j+k+1)%tones.length],[(r()-.5)*.8,.025,(r()-.5)*.7]);
+   leaf.scale.y=.12;
+  }
+ }
+ g.userData.tick=t=>crowns.forEach((c,i)=>{c.rotation.z=.017*Math.sin(t*.42-i*.17);c.rotation.x=.01*Math.sin(t*.34-i*.28);});
+ g.userData.footprint=.8;return g;
+}
+export function driftingLeaves(seed=1){
+ const r=rng(seed),g=new T.Group(),leaves=[];g.name='Плывущие листья и лепестки';
+ const colors=['#bd7c69','#c58b5a','#e1bc83','#a2b18b','#b97e76'];
+ for(let i=0;i<56;i++){
+  const x=(r()-.5)*4,z=(r()-.5)*3.8;
+  const leaf=new T.Group();leaf.position.set(x,.05+r()*.09,z);leaf.rotation.y=r()*6.28;g.add(leaf);
+  const s=new T.Shape();s.moveTo(0,-.08);s.bezierCurveTo(.12,-.14,.14,-.01,.10,.08);
+  s.quadraticCurveTo(0,.19,-.10,.08);s.bezierCurveTo(-.14,-.02,-.09,-.13,0,-.08);
+  const geo=new T.ShapeGeometry(s,8);geo.rotateX(-Math.PI/2);
+  part(leaf,geo,colors[i%colors.length]);
+  beam(leaf,[0,.005,-.095],[0,.008,.12],.005,'#736b59',4);
+  leaves.push(leaf);
+ }
+ g.userData.tick=t=>{
+  leaves.forEach((o,i)=>{
+   o.position.x+=.0008*Math.sin(t*.3-i*.2);
+   o.rotation.z=.12*Math.sin(t*.44-i*.31);
+   o.rotation.y=.05*Math.sin(t*.35-i*.2);
+   o.position.y=.07+.015*Math.sin(t*.72-i*.25);
+  });
+ };
+ g.userData.footprint=0;return g;
+}
+export function sandBeachTiles(seed=1){
+ const r=rng(seed),g=new T.Group(),ridges=[];g.name='Песчаная отмель с травой';
+ const shape=new T.Shape(),pts=[];
+ for(let i=0;i<=41;i++){
+  const a=i/41*Math.PI*2,rad=1.9+.30*Math.sin(a*3.6+seed*.2)+.15*Math.cos(a*8.5);
+  pts.push([Math.cos(a)*rad,Math.sin(a)*rad*.76]);
+ }
+ pts.forEach(([x,z],i)=>i?shape.lineTo(x,z):shape.moveTo(x,z));shape.closePath();
+ const surface=new T.ShapeGeometry(shape,4);surface.rotateX(-Math.PI/2);
+ const floor=part(g,surface,'#ccbc97',[0,.012,0]);floor.material.side=T.DoubleSide;
+ for(let i=0;i<49;i++){
+  const a=r()*Math.PI*2,dist=Math.sqrt(r())*1.7,x=Math.cos(a)*dist,z=Math.sin(a)*dist*.73;
+  if(i%4===0){
+    const tuft=new T.Group();tuft.position.set(x,.02,z);g.add(tuft);ridges.push(tuft);
+    for(let j=0;j<4;j++){
+     const v=part(tuft,new T.ConeGeometry(.024,.19+r()*.18,3),'#a4ae81',[(j-1.5)*.05,.15,j*.025]);
+     v.rotation.z=(r()-.5)*.4;
+    }
+  }else{
+    const stone=part(g,new T.IcosahedronGeometry(.035+r()*.07,0),i%3?'#918872':'#a9b3a4',[x,.045,z]);
+    stone.scale.set(1.5,.24,.82);stone.rotation.y=r()*6.28;
+  }
+ }
+ for(let i=0;i<12;i++){
+  const z=-1.35+i*.24,x=.84+.18*Math.sin(z*3+seed);
+  const shell=part(g,new T.TorusGeometry(.085,.014,5,12,Math.PI*.72),'#e7e5d6',[x,.035,z]);shell.rotation.x=-Math.PI/2;shell.rotation.y=r();
+ }
+ g.userData.tick=t=>ridges.forEach((o,i)=>{o.rotation.z=.018*Math.sin(t*.42-i*.25);});
+ g.userData.footprint=0;return g;
+}
+
+export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,boatShed,roadsideDryShrubs,pinkTownBuilding,duskTownLight,healerWalkWithLight,puddles,whiteClinicBuilding,nightRainGrade,wetGrassClumps,boatWake,shoreFoamLine,autumnConeTrees,driftingLeaves,sandBeachTiles};

@@ -25,5 +25,6 @@
 | Z17 — АССЕТ-ПАКИ | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z17_ASSETY.md |
 | Z18 — СКАЧАТЬ ПОЛЕЗНОЕ ОТКРЫТОЕ (Patch и другие похожие проекты) | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z18_IMPORT.md |
 | Z19 — SEO КАТАЛОГА ИГР | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z19_SEO.md |
+| Z20 — ПРОВЕРКА И УЛУЧШЕНИЕ ВСЕХ БОТОВ | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z20_BOTY.md |
 
 Карточки многоразовые и самоулучшающиеся (раздел «Опыт»). Новые карточки — только взамен старых (без суеты).

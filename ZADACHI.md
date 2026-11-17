@@ -16,6 +16,9 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | АССЕТЫ: The Last Healer — 24 позиции видео, партия INK | МГЛ | чат ChatGPT | `lab/assets-last-healer-video-20261117` | — | 2026-11-17 12:25 UTC | — |
+| взято | Z01: устранить конфликт PR #374 без потери независимых записей | МГЛ | чат ChatGPT | `lab/z01-preserve-summary-conflicts-builder3-1117` | [#374](https://github.com/mpaykin1/meta6-lab/pull/374) | 2026-11-17 10:46 UTC | — |
+| взято | Z01: восстановить CI PR #357 и регламент прямых ссылок Playgama | МГЛ | чат ChatGPT | `lab/rules-playgama-catalog-direct-20261117` | [#357](https://github.com/mpaykin1/meta6-lab/pull/357) | 2026-11-17 10:52 UTC | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | docs(z01): verify live PR identity before backlog decisions | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/mg-remontnik-nadzor-z01-20261117` | [#369](https://github.com/mpaykin1/meta6-lab/pull/369) | 2026-11-17 03:49 | 2026-11-17 03:48 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Z20: META BOT — не засчитывать провальный второй запуск `secondRun: hash` | МГЛ | чат ChatGPT | `lab/z20-meta-bot-second-run-hash-20261117` | [#368](https://github.com/mpaykin1/meta6-lab/pull/368) | 2026-11-17 03:39 UTC | 2026-11-17 03:45 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | fix(shpili): шарнирный страж и собор — пара на просмотр | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-tumannye-shpili-20261114-2338` | [#306](https://github.com/mpaykin1/meta6-lab/pull/306) | 2026-11-13 20:35 | 2026-11-17 03:12 |
@@ -63,7 +66,7 @@
 | ⚠ молчит больше часа | WIP: Ворона в тумане — акварельная 2.5D-сцена и заказ ассетов | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-vorona-v-tumane-20261117` | [#364](https://github.com/mpaykin1/meta6-lab/pull/364) | 2026-11-17 03:09 | 2026-11-17 03:57 |
 | ⚠ молчит больше часа | Z01: разгрузка PR МГЛ, независимая приёмка готовых PR | МГЛ | чат ChatGPT | — | [#351](https://github.com/mpaykin1/meta6-lab/pull/351) | 2026-11-17 05:30 UTC | 2026-11-17 01:57 |
 | 🔨 В РАБОТЕ | BLACK TRAIN: 14 INK-ассетов из заставки в игровую сцену | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-black-train-20261117-1021` | [#381](https://github.com/mpaykin1/meta6-lab/pull/381) | 2026-11-17 06:31 | 2026-11-17 06:52 |
-| 🔨 В РАБОТЕ | feat(assets): BLACK TRAIN — 15 ассетов в игровой INK-сцене | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-black-train-20261117` | [#382](https://github.com/mpaykin1/meta6-lab/pull/382) | 2026-11-17 06:31 | 2026-11-17 06:52 |
+| 🔨 В РАБОТЕ | feat(assets): BLACK TRAIN — 14 заказанных INK-ассетов в игровой сцене | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-black-train-20261117` | [#382](https://github.com/mpaykin1/meta6-lab/pull/382) | 2026-11-17 06:31 | 2026-11-17 06:52 |
 | 🔨 В РАБОТЕ | feat(assets): BLACK TRAIN — 6 анимированных INK-ассетов в игре «Ночной перегон» | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-black-train-gpt6-20261117` | [#379](https://github.com/mpaykin1/meta6-lab/pull/379) | 2026-11-17 06:29 | 2026-11-17 06:46 |
 | 🔨 В РАБОТЕ | Небесный пилот — закатный готический город, первые 4 спрайт-стакинг ассета и бот | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-nebesny-gothic-city-20261117` | [#367](https://github.com/mpaykin1/meta6-lab/pull/367) | 2026-11-17 03:43 | 2026-11-17 06:46 |
 | 🔨 В РАБОТЕ | Туманные шпили: архитектура и гроза с заставки (4 ассета) | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-shpili-cover-20261117-gpt6` | [#375](https://github.com/mpaykin1/meta6-lab/pull/375) | 2026-11-17 06:27 | 2026-11-17 06:39 |

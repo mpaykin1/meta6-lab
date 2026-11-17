@@ -32,6 +32,8 @@ function gameTargets() {
 }
 const ink = {id: 'ink', url: 'demos/living-watercolor/?reference=1&object=house'};
 const inkProbe = {id: 'ink-shader-probe', url: 'scripts/visual/ink-pattern-probe.html'};
+// Playable INK pack: measure the changed night scene instead of unrelated shaders.
+const blackTrain = {id: 'black-train', url: 'asset-packs/incoming/black-train/index.html'};
 let games;
 if (target === 'ink') games = [ink, inkProbe];
 else if (target === 'all') games = [...gameTargets(), ink, inkProbe];
@@ -44,6 +46,7 @@ else {
   games = gameTargets().filter(game =>
     changed.some(file => file.startsWith(game.url.replace(/\/$/, ''))));
   if (changed.some(file => file.startsWith('demos/living-watercolor/'))) games.push(ink, inkProbe);
+  if (changed.some(file => file.startsWith('asset-packs/incoming/black-train/'))) games.push(blackTrain);
   if (!games.length) games = [ink, inkProbe]; // Rule-only PRs still check real INK waves.
 }
 
@@ -64,6 +67,9 @@ try {
         await page.addStyleTag({content: '#label,#hint,#chooser{visibility:hidden!important}'});
       } else if (game.id === 'ink-shader-probe') {
         await page.waitForFunction(() => window.__INK_PATTERN_PROBE__?.ready, undefined, {timeout: 18000});
+      } else if (game.id === 'black-train') {
+        await page.waitForFunction(() => window.__INK_NIGHT_SCREAM__?.ready, undefined, {timeout: 18000});
+        await page.evaluate(() => window.__INK_NIGHT_SCREAM__.start());
       }
       const images = [];
       for (let i = 0; i < 3; i++) {
@@ -75,6 +81,14 @@ try {
         } else if (game.id === 'ink-shader-probe') {
           await page.evaluate(i => window.__INK_PATTERN_PROBE__.show(i), i);
           await page.waitForTimeout(350);
+        } else if (game.id === 'black-train') {
+          await page.evaluate(i => {
+            const game = window.__INK_NIGHT_SCREAM__;
+            game.look([-0.58, 0, 0.58][i]);
+            game.torch(true);
+            game.advance(0.5);
+          }, i);
+          await page.waitForTimeout(250);
         } else {
           await page.mouse.move(170 + i * 230, 200 + i * 90);
           const key = ['ArrowRight', 'ArrowDown', 'ArrowLeft'][i];

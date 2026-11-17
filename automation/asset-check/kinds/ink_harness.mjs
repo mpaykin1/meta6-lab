@@ -20,6 +20,15 @@ const out = {ok: false, error: null, makers: {}};
 try {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ink-pack-'));
   fs.cpSync(refDir, tmp, {recursive: true, filter: s => !s.endsWith('index.html')});
+  // Night Scream reuses the frozen Three.js engine of the accepted fallen guardian.
+  // Keep both references unmodified; the adapter exists only in this temp sandbox.
+  if (!fs.existsSync(path.join(tmp,'three.module.js')) &&
+      path.basename(refDir)==='ink-night-scream') {
+    const adopted=path.resolve(refDir,'../ink-fallen-guardian/three.module.js');
+    if (!fs.existsSync(adopted)) throw new Error('Night reference has no accepted engine');
+    fs.copyFileSync(adopted,path.join(tmp,'three.module.js'));
+  }
+
   fs.mkdirSync(path.join(tmp, 'node_modules', 'three'), {recursive: true});
   fs.writeFileSync(path.join(tmp, 'node_modules', 'three', 'package.json'),
     JSON.stringify({name: 'three', type: 'module', main: '../../three.module.js', exports: '../../three.module.js'}));

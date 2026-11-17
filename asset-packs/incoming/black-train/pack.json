@@ -1,7 +1,7 @@
 {
   "format": "ink-pack/1",
   "version": "0.2.0",
-  "name": "BLACK TRAIN — 15 ассетов по заставке",
+  "name": "BLACK TRAIN — 14 одобренных ассетов",
   "base": "reference/ink-night-scream",
   "license": {
     "type": "own",
@@ -20,13 +20,6 @@
     "political": false
   },
   "assets": {
-    "blackLocomotive": {
-      "label_ru": "Чёрный локомотив",
-      "role": "vehicle",
-      "zone": "railway",
-      "animated": true,
-      "benefit": "второй тип поезда, чередуется с экспрессом"
-    },
     "crossingSign": {
       "label_ru": "Покосившийся переезд",
       "role": "landmark",

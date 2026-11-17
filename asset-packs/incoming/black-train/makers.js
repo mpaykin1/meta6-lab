@@ -74,9 +74,9 @@ function tallGrass(seed=1){
  return done(g,'Сухая трава',0);
 }
 function wetRailGlow(seed=1){
- const g=new T.Group();for(const z of [-.82,.82])for(let i=0;i<16;i++)box(g,-3.1+i*.39,.015,z,.48,.018,.072,i%4?steel:red);
+ const g=new T.Group(),railRed=red.clone();for(const z of [-.82,.82])for(let i=0;i<16;i++)box(g,-3.1+i*.39,.015,z,.48,.018,.072,i%4?steel:railRed);
  const puddle=new T.Mesh(new T.CircleGeometry(.83,17),new T.MeshStandardMaterial({color:'#303b41',roughness:.13,metalness:.84,transparent:true,opacity:.65}));puddle.rotation.x=-Math.PI/2;puddle.scale.set(2,.62,1);puddle.position.set(1.5,.016,0);g.add(puddle);
- g.userData.tick=t=>{for(let i=1;i<g.children.length-1;i+=5){const m=g.children[i].material;m.emissiveIntensity=m===red?1+.5*Math.sin(t*3):0;}};return done(g,'Мокрые рельсы',0);
+ g.userData.tick=(t,dt,trainNear=0)=>{const pulse=.5+.5*Math.sin(t*3.2);railRed.emissiveIntensity=.12+2.3*Math.min(1,Math.max(0,trainNear))*pulse;};return done(g,'Мокрые рельсы',0);
 }
 function barbedWire(seed=1){
  const g=new T.Group();for(const x of [-2.9,2.9])beam(g,[x,0,0],[x+.16,1.7,.1],.08,wood,.055);

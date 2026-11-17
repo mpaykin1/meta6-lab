@@ -31,7 +31,10 @@ jobs:
           node-version: '22'
       - name: Mutation traps
         run: node scripts/platform/mutate-etalony-sync.mjs
+      - name: Fetch accepted MG references (sparse Git, no API quota)
+        run: |
+          git clone --depth=1 --filter=blob:none --sparse https://github.com/mpaykin1/meta6.git "$RUNNER_TEMP/meta6-source"
+          git -C "$RUNNER_TEMP/meta6-source" sparse-checkout set reference
+          test -s "$RUNNER_TEMP/meta6-source/AGENTS.md"
       - name: Byte-for-byte OWNER PASS sync
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/platform/verify-etalony-sync.mjs
+        run: node scripts/platform/verify-etalony-sync.mjs --mg-root "$RUNNER_TEMP/meta6-source"

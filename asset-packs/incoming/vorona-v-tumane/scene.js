@@ -1,8 +1,9 @@
-import * as T from '../../../reference/ink-fallen-guardian/three.module.js';
+const referenceBase=location.pathname.includes('/preview/')?'../../../../../reference/':'../../../reference/';
+const T=await import(referenceBase+'ink-fallen-guardian/three.module.js');
 import {createCreatures} from './creatures.js';
 import {createSoundscape} from './audio.js';
 
-const source='../../../reference/vorona-v-tumane/';
+const source=referenceBase+'vorona-v-tumane/';
 const ids=[
  ['crow','Ворона'],['stalker','Существо'],['forest_far','Дальний лес'],
  ['forest_mid','Средний лес'],['forest_near','Ближний лес'],['fog_ribbons','Туман'],

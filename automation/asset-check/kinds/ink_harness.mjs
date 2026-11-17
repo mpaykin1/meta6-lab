@@ -7,7 +7,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 
-const [refDir, makersFile] = process.argv.slice(2);
+const [refDir, makersFile, threeFile] = process.argv.slice(2);
 // Холст-заглушка: эталон рисует процедурные текстуры (патина робота) через <canvas>. В Node рисовать не нужно —
 // проверяются форма, бюджет и детерминизм, поэтому все методы 2D-контекста — пустые.
 const noop = () => {};
@@ -23,7 +23,9 @@ try {
   fs.mkdirSync(path.join(tmp, 'node_modules', 'three'), {recursive: true});
   fs.writeFileSync(path.join(tmp, 'node_modules', 'three', 'package.json'),
     JSON.stringify({name: 'three', type: 'module', main: '../../three.module.js', exports: '../../three.module.js'}));
-  fs.copyFileSync(path.join(tmp, 'three.module.js'), path.join(tmp, 'node_modules', 'three', 'three.module.js'));
+  const engine = fs.existsSync(path.join(tmp, 'three.module.js')) ? path.join(tmp, 'three.module.js') : threeFile;
+  if (!engine || !fs.existsSync(engine)) throw new Error('Missing approved Three.js module for this INK base');
+  fs.copyFileSync(engine, path.join(tmp, 'node_modules', 'three', 'three.module.js'));
   fs.writeFileSync(path.join(tmp, 'node_modules', 'three', 'package.json'),
     JSON.stringify({name: 'three', type: 'module', exports: './three.module.js'}));
   fs.writeFileSync(path.join(tmp, 'package.json'), JSON.stringify({type: 'module'}));

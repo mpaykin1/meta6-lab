@@ -974,6 +974,62 @@ const SHPILI_PLUS=(()=>{
    };
  }
 
+
+ /* AQUEDUCT: two water-facing arcades, ruined span and fractured masonry. */
+ {
+   const id='aqueduct',g=newGroup(id,-2,13,-51),root=new T.Group(),R=rng(61907);
+   root.position.y=-13;g.add(root);
+   const arches=[];
+   function bay(x,w,h,tier,i){
+     const s=new T.Shape(),edge=w*.5;
+     s.moveTo(-edge,0);s.lineTo(-edge*.99,h*.72);
+     s.lineTo(-edge*.84,h+.18*R());s.lineTo(edge*.81,h+.15*R());
+     s.lineTo(edge,h*.74);s.lineTo(edge,0);
+     s.lineTo(edge*.65,0);s.lineTo(edge*.64,h*.42);
+     s.quadraticCurveTo(edge*.48,h*.71,0,h*.88);
+     s.quadraticCurveTo(-edge*.48,h*.71,-edge*.64,h*.42);
+     s.lineTo(-edge*.65,0);s.closePath();
+     const geo=new T.ExtrudeGeometry(s,{depth:1.9,steps:1,bevelEnabled:true,
+       bevelSize:.13,bevelThickness:.1,bevelSegments:1,curveSegments:8});
+     const m=new T.Mesh(geo,coverStone(h+19,61907+i+tier*15));
+     m.position.set(x,tier?14.2:0,-tier*.3);root.add(m);arches.push(m);
+     const oy=tier?14.2:0;
+     for(let j=0;j<4;j++){
+       const bx=x+(j-1.5)*w*.22;
+       beam(root,[bx,oy+h*.22,2.06-tier*.3],
+         [bx+(R()-.5)*.3,oy+h*.76,2.06-tier*.3],
+         .027,0x77a6b7,.41);
+     }
+     beam(root,[x-edge,oy+h*.92,2],[x+edge,oy+h*.92,2],.11,0x598b9f,.5);
+   }
+   for(let i=0;i<11;i++){
+     const x=(i-5)*7.7,w=7.1+R()*.35;
+     if(i===6){
+       for(let j=0;j<9;j++){
+         const stone=mesh(root,new T.DodecahedronGeometry(.45+R()*.85,0),
+           j%3===0?0x527789:0x203b51,[x+(R()-.5)*8,.2+R()*2.3,
+             (R()-.5)*2.5],.9);
+         stone.rotation.set(R()*.45,R()*.45,R()*2);
+         stone.scale.set(1+.7*R(),.4+.3*R(),.7);
+       }
+       continue;
+     }
+     bay(x,w,13.9+(R()-.5)*1.5,0,i);
+     if(i>0&&i<10&&i!==5)bay(x,w*.99,8.2+(R()-.5)*1.3,1,i);
+     if(i%3===0)spike(root,.4,4.5+R()*1.8,0x345971,
+       [x,25.4+R()*2,.7],.07);
+   }
+   coverSlab(root,[[-43,13.6],[-43,14.4],[-7,14.6],[-6,14],
+     [-43,13.6]],1.8,coverStone(25,61939),-.4);
+   coverSlab(root,[[14,13.8],[16,14.7],[43,14.4],
+     [43,13.8],[14,13.8]],1.8,coverStone(25,61940),-.4);
+   own[id].tick=t=>{
+     for(let i=0;i<arches.length;i++){
+       arches[i].rotation.z=.002*Math.sin(t*.29-i*.44);
+     }
+   };
+ }
+
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;

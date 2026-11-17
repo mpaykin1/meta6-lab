@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Z01: устранить конфликт PR #374 без потери независимых записей | МГЛ | чат ChatGPT | `lab/z01-preserve-summary-conflicts-builder3-1117` | [#374](https://github.com/mpaykin1/meta6-lab/pull/374) | 2026-11-17 10:46 UTC | — |
 | взято | Z01: разрешить конфликт PR #361 и проверить слияние | МГЛ | чат ChatGPT | `lab/avto1-z01-draft-quota-20261117` | [#361](https://github.com/mpaykin1/meta6-lab/pull/361) | 2026-11-17 10:43 UTC | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | docs(z01): verify live PR identity before backlog decisions | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/mg-remontnik-nadzor-z01-20261117` | [#369](https://github.com/mpaykin1/meta6-lab/pull/369) | 2026-11-17 03:49 | 2026-11-17 03:48 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Z20: META BOT — не засчитывать провальный второй запуск `secondRun: hash` | МГЛ | чат ChatGPT | `lab/z20-meta-bot-second-run-hash-20261117` | [#368](https://github.com/mpaykin1/meta6-lab/pull/368) | 2026-11-17 03:39 UTC | 2026-11-17 03:45 |

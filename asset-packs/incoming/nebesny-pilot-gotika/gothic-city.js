@@ -180,6 +180,91 @@ window.GothicCity = (() => {
     }
     if (s < 28 && s % 5 === 0) rect(c, '#856d77', 9, 21, 2, 19);
   }
+  // Carved relief is drawn on EVERY visible volumetric cross-section,
+  // not as a flat billboard. Gothic windows follow the height of the stack.
+  function carveDetail(c,id,s,v) {
+    const gold=(s+v)%3?'#ffcb83':'#ffeaab';
+    if(id==='gothicCathedral'){
+      if(s<58){
+        for(const xx of [18,29,67,78]){
+          const yy=xx===18||xx===78?66:72;
+          rect(c,'#a28997',xx,yy,3,6);
+          rect(c,'#3d374b',xx+1,yy+1,1,4);
+        }
+      }
+      // Pointed windows stagger in three separate tiers.
+      for(const [lo,hi,xs] of [[9,23,[35,46,57]],[29,43,[37,59]],[46,58,[19,77]]]){
+        if(s<lo||s>hi)continue;
+        for(const xx of xs){
+          rect(c,'#2d283f',xx-3,66,7,9);
+          rect(c,gold,xx-2,68,5,6);
+          rect(c,'#7b5362',xx,68,1,6);
+          if(s>hi-3 || s<lo+3){
+            rect(c,'#5b4858',xx-3,66,7,2);
+            rect(c,gold,xx-1,67,3,1);
+          }
+        }
+      }
+      // Twelve-petalled stained glass rose across horizontal floor cuts.
+      const delta=s-31;
+      if(Math.abs(delta)<=11){
+        const radius=Math.sqrt(Math.max(0,121-delta*delta));
+        rect(c,'#3b3047',47-radius-3,75,radius*2+6,5);
+        rect(c,'#d99378',47-radius-2,76,radius*2+4,2);
+        for(let xx=47-radius;xx<=47+radius;xx+=3){
+          rect(c,(Math.floor(xx+delta)%3)?gold:'#ec7f89',xx,76,2,2);
+        }
+        rect(c,'#4d3549',47,75,2,5);
+      }
+      if(s>=36&&s<64) {
+        for(let xx=34;xx<64;xx+=7)if((s+xx)%5<3)
+          rect(c,'#bb6870',xx,25,3,2);
+        if(s%7===0) for(let xx of [24,36,59,69])rect(c,'#65705d',xx,68,5,2);
+      }
+    }
+    if(id==='spireTower' || id==='bellTower'){
+      if(s>=11&&s<48){
+        const flare=(s%17)>4&&(s%17)<14;
+        if(flare){
+          rect(c,'#29253b',29,43,7,8);
+          rect(c,gold,30,45,5,5);
+          rect(c,'#5c4556',32,45,1,5);
+          rect(c,gold,44,30,2,5);
+        }
+        for(const xx of [20,44]) {
+          rect(c,'#9f808b',xx,27,2,11);
+          if(s%12===0)rect(c,'#516b56',xx,28,5,2);
+        }
+      }
+      if(s>=47&&s<62)for(let xx=25;xx<=41;xx+=4)
+        if((xx+s)%3===0)rect(c,'#b96a73',xx,31,2,2);
+    }
+    if(id==='redRoofHouse'){
+      const side=v%3;
+      if(s<27){
+        for(let xx=22;xx<=44;xx+=11){
+          if((s+side*5)%13>4&&s%5!==0){
+            rect(c,'#40344b',xx,43,8,7);
+            rect(c,gold,xx+1,44,6,5);
+            rect(c,'#875c6b',xx+4,44,1,5);
+          }
+        }
+        rect(c,'#a48a91',16+side*2,19,2,34);
+        rect(c,'#a48a91',49-side*2,19,2,34);
+      }else if(s<37){
+        const k=s-27,wide=Math.max(7,21-k*1.55);
+        poly(c,side===1?'#c06b6e':'#a24d60',
+          [[32-wide,32],[32,23-side*4],[32+wide,32],[32+wide,37],[32-wide,37]]);
+        for(let xx=22;xx<46;xx+=5)if((xx+s)%4<2)
+          rect(c,'#da8c77',xx,33,3,1);
+      }
+    }
+    if(id==='archBridge'&&s>28&&s<39){
+      for(let xx=9;xx<88;xx+=11)
+        rect(c,(xx+s)%3?'#b18a8a':'#665066',xx,20,5,2);
+      if(s>35)for(let xx of [10,31,59,84])rect(c,gold,xx,16,2,3);
+    }
+  }
   function make(id, variant = 0) {
     const key = id + ':' + variant;
     if (decks.has(key)) return decks.get(key);
@@ -210,6 +295,8 @@ window.GothicCity = (() => {
       } else if (id === 'cliffBase') {
         rect(ctx,'#4b435d',18+s*.4,16+s*.35,Math.max(5,60-s*.8),Math.max(5,65-s*.75));
       } else bridge(ctx, s, variant);
+      if(['gothicCathedral','spireTower','bellTower','redRoofHouse','archBridge'].includes(id))
+        carveDetail(ctx,id,s,variant);
       sl.push(canvas);
     }
     const asset = { id, variant, sl, size, n, step: id === 'archBridge' ? 1.65 : 1.25 };
@@ -619,7 +706,8 @@ window.GothicCity = (() => {
   }
   function paintTransition(){
     if (!sheets.descentGate || hiddenAssets.has('descentGate')) return;
-    const k=Math.max(0,1-Math.abs(P.z-95)/26);
+    const d=Math.hypot(P.x,P.y);
+    const k=Math.max(0,1-Math.abs(d-760)/220)*clamp((147-P.z)/82,.20,1);
     if(k<.01)return;
     const frame=(Math.floor(t*2)%8+8)%8;
     g.save();
@@ -644,6 +732,18 @@ window.GothicCity = (() => {
     if(!sheets.rosetteBonus || hiddenAssets.has('rosetteBonus')){g.drawImage(gate,-27,-35);return;}
     const frame=(Math.floor(t*4)%8+8)%8;
     g.drawImage(sheets.rosetteBonus,frame*48,0,48,48,-24,-24,48,48);
+    // Gothic rose tracery, eight radial spokes and a small central jewel.
+    g.save();
+    g.strokeStyle='#ffe4a3';g.lineWidth=1.5;
+    for(let j=0;j<12;j++){
+      const a=j*Math.PI/6+t*.15;
+      g.beginPath();g.moveTo(Math.cos(a)*5,Math.sin(a)*5);
+      g.lineTo(Math.cos(a)*18,Math.sin(a)*18);g.stroke();
+    }
+    g.strokeStyle='#8d4564';g.lineWidth=2;
+    g.beginPath();g.arc(0,0,13,0,TAU);g.stroke();
+    g.fillStyle='#fff0b4';g.fillRect(-3,-3,6,6);
+    g.restore();
   }
   function drawShield(){
     if(!P.shield || P.shield<=0) return;

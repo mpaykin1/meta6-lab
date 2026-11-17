@@ -1,12 +1,12 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T06:22:44.648Z | МГЛ: 242afacdb7cccde4d4e8f962222dec68c5a6a90b | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44030651746
+UTC: 2026-11-17T06:34:58.473Z | МГЛ: 70d4e5ef0f1135bb0405b23b81ab32b07386b957 | МГ: 431274dce4ad29b6c0f38058f52dd9ae2dae454a | https://github.com/mpaykin1/meta6-lab/actions/runs/44031940222
 ## ПРОВЕРИТЬ CLAUDE
 - PR #372 0e5d7893812d336299d041199deda50557a07395: scripts/karta-sil/mutate-current-claude-marker.mjs, scripts/karta-sil/mutate-karta-sil.mjs
 - PR #352 99a64541e458eb39f499c55655649abb87bf5bc8: scripts/meta-bot/core.mjs, scripts/meta-bot/mutate-viewports.mjs, scripts/platform/verify-meta-bot-config-candidate.mjs
 - ещё 37: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: ZADACHI watch | https://github.com/mpaykin1/meta6-lab/actions/runs/44030357822 | Update ZADACHI.md from GitHub
+- МГЛ: OWNER PASS references sync | https://github.com/mpaykin1/meta6-lab/actions/runs/44031927307 | Byte-for-byte OWNER PASS sync
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
-- | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/… (сокращено)
+- | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/… (сокращено)
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
 - | КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |
 - | БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |
@@ -32,13 +32,13 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 41 | конфликт: нет данных | слито: 70 | закрыто: 114
-#372 fix(z01): не направлять PR к Claude по историческим пометкам | 0e5d7893812d336299d041199deda50557a07395
-#359 docs: единый свод правил и идей для «Лучника в тумане» | 0a37a80d264aaac71832ab16d9ca82b306b7cec6
-ещё 68: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+открыто: 47 | конфликт: нет данных | слито: 72 | закрыто: 115
+#377 INK · Регистрация эталона «Машина → Батискаф» (МГ + МГЛ ссыл | 04fe7850e474ec7c2f7ee74f67728b51cfa084cb
+#376 INK · Эталон: машина → батискаф (только папка reference) | 11f9ac58d0e1b46f61d8db2a9e8110091de4b104
+ещё 70: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2684 коммитов | нет данных
-МГ: 40 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
+МГЛ: 2700 коммитов | нет данных
+МГ: 42 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:31, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет
@@ -56,4 +56,4 @@ wild-train-prologue — не прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 2026111702 | 17.11.2026 | Защищённое ядро META BOT `checkGame` возвращало `{ok:true,runs:[]}` при `viewports: []` или неизвестном экране — ложный успех без открытия игры | Воспроизведено на исходном `scripts/meta-bot/core.mjs` (PR #311, reports/bot-audit/PRO… (сокращено)
 | 2026111701 | 17.11.2026 | META BOT could report success for zero screens; actual game configuration now fails KONTUR before acceptance | empty viewports and unknown screen fixtures | scripts/platform/mutate-bot-config.mjs: 3 mutations and real game configurations |
-ещё 62: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+ещё 63: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

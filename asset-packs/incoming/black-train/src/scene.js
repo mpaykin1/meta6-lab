@@ -147,12 +147,20 @@ placeAsset('crossingBell',95,5.3,0,-5.6);
 placeAsset('chainsClank',97,-8.6,0,-13.3);
 
 const crossingSounds=createCrossingSounds();
+const mistBeamDirection=new T.Vector3();
 function advanceNightAssets(dt){
  for(const item of livingAssets)if(item.visible)item.userData.tick(elapsed,dt);
  const approach=TR.active?Math.max(0,1-Math.abs(TR.x-5)/180):0;
  signal.userData.setApproach(approach,elapsed);
  farLamp.userData.setApproach(approach*.55,elapsed);
  railReflections.userData.setApproach(approach,elapsed);
+ // Actual world-space light passes through wisps instead of recoloring the whole screen.
+ camera.getWorldDirection(mistBeamDirection);
+ const torchPower=T.MathUtils.clamp(torch.intensity/520,0,1);
+ const signalPower=T.MathUtils.clamp(signal.userData.lightLevel/4.5,0,1);
+ for(const mist of assetGroups.groundMist||[])
+  mist.userData.setLighting(camera.position,mistBeamDirection,torchPower,train.position,
+    TR.active?trainLoud:0,signal.position,signalPower);
  crossingSounds.update({time:elapsed,approach,enabled:audio.enabled,state});
 }
 

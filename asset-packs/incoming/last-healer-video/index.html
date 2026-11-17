@@ -54,13 +54,22 @@ const boat=get('Деревянная лодка');
 if(!car||!hero||!boat){$('#err').hidden=false;$('#err').textContent='Не найдена принятая машина, аптекарь или лодка';throw new Error('Accepted INK world assets missing');}
 const assets={carHeadlights:makers.carHeadlights(11),handFlashlight:makers.handFlashlight(15),
  rowingHealer:makers.rowingHealer(19),rainSplashRings:makers.rainSplashRings(23),
- townRoad:makers.townRoad(29),boatShed:makers.boatShed(31)};
+ townRoad:makers.townRoad(29),boatShed:makers.boatShed(31),
+ roadsideDryShrubs:makers.roadsideDryShrubs(37),pinkTownBuilding:makers.pinkTownBuilding(41),
+ duskTownLight:makers.duskTownLight(43),healerWalkWithLight:makers.healerWalkWithLight(47),
+ puddles:makers.puddles(53),whiteClinicBuilding:makers.whiteClinicBuilding(59)};
 car.add(assets.carHeadlights);
 hero.add(assets.handFlashlight);
 boat.add(assets.rowingHealer);
 assets.rainSplashRings.position.set(-10.25,0,-8.6);valley.world.add(assets.rainSplashRings);
 assets.townRoad.position.copy(car.position);assets.townRoad.position.y=.012;valley.world.add(assets.townRoad);
 assets.boatShed.position.set(4.12,0,10.4);assets.boatShed.rotation.y=.13;valley.world.add(assets.boatShed);
+assets.roadsideDryShrubs.position.set(-9.15,0,-16.6);valley.world.add(assets.roadsideDryShrubs);
+assets.pinkTownBuilding.position.set(-15.6,0,-17.1);assets.pinkTownBuilding.rotation.y=.19;valley.world.add(assets.pinkTownBuilding);
+assets.duskTownLight.position.set(-12.3,0,-16.3);valley.world.add(assets.duskTownLight);
+hero.add(assets.healerWalkWithLight);
+assets.puddles.position.set(-10.25,0,-8.6);valley.world.add(assets.puddles);
+assets.whiteClinicBuilding.position.set(-13.9,0,-8.3);assets.whiteClinicBuilding.rotation.y=-.22;valley.world.add(assets.whiteClinicBuilding);
 for(const [id,o] of Object.entries(assets))paint.apply(o,{seed:'last-healer-video:'+id});
 const scenes=[
  {id:'carHeadlights',label:'I · Розовые сумерки / машина',target:car,sky:'#d1a6a0',ground:'#756f78',fog:'#c3a8a4',intensity:1.45,hem:1.9,zoom:7.8},
@@ -68,7 +77,13 @@ const scenes=[
  {id:'rowingHealer',label:'III · День / гребля к причалу',target:boat,sky:'#f9e9c8',ground:'#90baa9',fog:'#d4dfcd',intensity:1.6,hem:2.3,zoom:6.2},
  {id:'rainSplashRings',label:'IV · Ливень / кольца в лужах',target:assets.rainSplashRings,sky:'#819da5',ground:'#526f72',fog:'#889e9d',intensity:.62,hem:1.2,zoom:7.5},
  {id:'townRoad',label:'V · Старая улица / перекрёсток',target:assets.townRoad,sky:'#d4a8a4',ground:'#756f78',fog:'#c3a8a4',intensity:1.35,hem:1.8,zoom:8},
- {id:'boatShed',label:'VI · Сарай у причала / сохранение',target:assets.boatShed,sky:'#f8e5c6',ground:'#90baa9',fog:'#d5ddc9',intensity:1.55,hem:2.2,zoom:7}
+ {id:'boatShed',label:'VI · Сарай у причала / сохранение',target:assets.boatShed,sky:'#f8e5c6',ground:'#90baa9',fog:'#d5ddc9',intensity:1.55,hem:2.2,zoom:7},
+ {id:'roadsideDryShrubs',label:'VII · Колючие кустарники',target:assets.roadsideDryShrubs,sky:'#d1a6a0',ground:'#756f78',fog:'#c3a8a4',intensity:1.45,hem:1.9,zoom:5.8},
+ {id:'pinkTownBuilding',label:'VIII · Розовое здание',target:assets.pinkTownBuilding,sky:'#d1a6a0',ground:'#756f78',fog:'#c3a8a4',intensity:1.45,hem:1.9,zoom:8},
+ {id:'duskTownLight',label:'IX · Акварельные сумерки',target:assets.duskTownLight,sky:'#d1a6a0',ground:'#756f78',fog:'#c3a8a4',intensity:1.45,hem:1.9,zoom:7.5},
+ {id:'healerWalkWithLight',label:'X · Походка аптекаря',target:hero,sky:'#647d88',ground:'#304e60',fog:'#617b85',intensity:.28,hem:.55,zoom:5.4},
+ {id:'puddles',label:'XI · Лужи и отражения',target:assets.puddles,sky:'#647d88',ground:'#304e60',fog:'#617b85',intensity:.28,hem:.55,zoom:6.4},
+ {id:'whiteClinicBuilding',label:'XII · Ночная клиника',target:assets.whiteClinicBuilding,sky:'#647d88',ground:'#304e60',fog:'#617b85',intensity:.28,hem:.55,zoom:8}
 ];
 let selected=0,yaw=-.61,pitch=.66,drag=null,t=0,last=0,manual=false;
 const look=new T.Vector3(),focus=new T.Vector3(),color=new T.Color();

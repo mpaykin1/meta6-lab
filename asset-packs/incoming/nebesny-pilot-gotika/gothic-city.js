@@ -8,15 +8,34 @@ window.GothicCity = (() => {
     roof: '#853f58', roofHi: '#bd6771', moss: '#52665c'
   };
   const decks = new Map();
+  const ambience = new Audio('./audio/cityAmbience.wav');
+  ambience.loop = true;
+  ambience.volume = .12;
+  ambience.preload = 'none';
+  const bellAudio = new Audio('./audio/bellChime.wav');
+  bellAudio.volume = .22;
+  bellAudio.preload = 'none';
+  function startMusic() {
+    if (typeof muted !== 'undefined' && muted) return;
+    ambience.play().catch(() => {});
+  }
+  addEventListener('pointerdown', startMusic, {passive:true});
+  addEventListener('keydown', startMusic, {passive:true});
+  function onRing(bonus) {
+    if (typeof muted !== 'undefined' && !muted) {
+      try { bellAudio.currentTime = 0; bellAudio.play().catch(() => {}); } catch {}
+    }
+    if (bonus && typeof P !== 'undefined') P.shield = 3;
+  }
   const sheets = Object.create(null);
-  for (const id of ['gothicCathedral','spireTower','archBridge','sunsetSky','redRoofHouse','aqueductTiers','cliffBase','bannerFleurDeLis','gothicGateRing','canalWater']) {
+  for (const id of ['gothicCathedral','spireTower','archBridge','sunsetSky','redRoofHouse','aqueductTiers','cliffBase','bannerFleurDeLis','gothicGateRing','canalWater','sunsetCloud','pigeonFlock','bellTower','rosetteBonus','windowSparks','descentGate','gothicTile','sailBoat','lanternGlow']) {
     const image = new Image();
     image.decoding = 'async';
     image.onload = () => { sheets[id] = image; decks.clear(); if (id === 'gothicGateRing') { const x=gate.getContext('2d');x.clearRect(0,0,54,70);x.drawImage(image,0,0,54,70,0,0,54,70); } };
     image.src = './stacks/' + id + '.png';
   }
-  const count = { gothicCathedral: 88, spireTower: 74, archBridge: 42, redRoofHouse:38, aqueductTiers:48, cliffBase:32 };
-  const sizes = { gothicCathedral: 96, spireTower: 64, archBridge: 96, redRoofHouse:64, aqueductTiers:96, cliffBase:96 };
+  const count = { gothicCathedral: 88, spireTower: 74, archBridge: 42, redRoofHouse:38, aqueductTiers:48, cliffBase:32, bellTower:66, sailBoat:26 };
+  const sizes = { gothicCathedral: 96, spireTower: 64, archBridge: 96, redRoofHouse:64, aqueductTiers:96, cliffBase:96, bellTower:64, sailBoat:64 };
   function rect(c, color, x, y, w, h) {
     c.fillStyle = color;
     c.fillRect(x | 0, y | 0, Math.max(1, w | 0), Math.max(1, h | 0));
@@ -155,7 +174,7 @@ window.GothicCity = (() => {
       const canvas = mk(size, size);
       const ctx = canvas.getContext('2d', {alpha: true});
       ctx.imageSmoothingEnabled = false;
-      if (sheets[id] && (variant === 0 || id === 'redRoofHouse' || id === 'aqueductTiers' || id === 'cliffBase')) {
+      if (sheets[id] && (variant === 0 || id === 'redRoofHouse' || id === 'aqueductTiers' || id === 'cliffBase' || id === 'bellTower' || id === 'sailBoat')) {
         ctx.drawImage(sheets[id], s * size, 0, size, size, 0, 0, size, size);
       } else if (id === 'gothicCathedral') cathedral(ctx, s, variant);
       else if (id === 'spireTower') tower(ctx, s, variant);
@@ -166,6 +185,13 @@ window.GothicCity = (() => {
         for(let y=18;y<75;y+=22)for(let x=12;x<88;x+=20) {
           rect(ctx,'#53475f',x,y,11,33);rect(ctx,'#8c7181',x,y,2,33);
         }
+      } else if (id === 'bellTower') {
+        tower(ctx,s,variant);
+        if(s>10&&s<40){rect(ctx,'#221e34',27,32,11,7);rect(ctx,'#e7bc7d',31+Math.sin(s*.5)*2,32,4,6);}
+      } else if (id === 'sailBoat') {
+        rect(ctx,'#6c4d5d',15,37,38,14);
+        rect(ctx,'#e8b99b',31,7,3,34);
+        for(let y=9;y<35;y++)rect(ctx,'#edd3b5',17,y,30-(y-9)*.5,1);
       } else if (id === 'cliffBase') {
         rect(ctx,'#4b435d',18+s*.4,16+s*.35,Math.max(5,60-s*.8),Math.max(5,65-s*.75));
       } else bridge(ctx, s, variant);
@@ -178,7 +204,7 @@ window.GothicCity = (() => {
   function location(i, j, n) {
     const salt = 71 + n * 23;
     const h = hash(i, j, salt);
-    const id = n === 0 && h > .66 ? 'gothicCathedral' : h < .12 ? 'archBridge' : h < .24 ? 'aqueductTiers' : h < .48 ? 'redRoofHouse' : h > .92 ? 'cliffBase' : 'spireTower';
+    const id = n === 0 && h > .71 ? 'gothicCathedral' : h < .10 ? 'archBridge' : h < .22 ? 'aqueductTiers' : h < .40 ? 'redRoofHouse' : h > .94 ? 'cliffBase' : h > .79 ? 'bellTower' : 'spireTower';
     const variant = (hash(i, j, salt + 3) * 3) | 0;
     return {id, variant,
       x: i * 380 + 45 + hash(i, j, salt + 8) * 290,
@@ -273,6 +299,11 @@ window.GothicCity = (() => {
               g.rotate(b.angle);
               g.fillStyle = '#332d46';
               g.fillRect(-asset.size*.43,-asset.size*.45,asset.size*.86,asset.size*.88);
+              if (sheets.gothicTile) {
+                g.globalAlpha=fade*.65;
+                g.drawImage(sheets.gothicTile,-asset.size*.43,-asset.size*.45,asset.size*.86,asset.size*.88);
+                g.globalAlpha=fade;
+              }
             }
             const skip = q[2]<.18?6:q[2]<.36?4:q[2]<.65?2:1;
             for (let s=0; s<asset.n; s+=skip) {
@@ -292,11 +323,63 @@ window.GothicCity = (() => {
                 g.drawImage(sheets.bannerFleurDeLis,phase*32,0,32,48,-6,-22,32,48);
               }
             }
+            // Живые окна, фонари и стаи птиц появляются в городском объёме.
+            const sprites = [
+              ['windowSparks',48,48,42,-12,5],
+              ['lanternGlow',32,32,28,36,7],
+              ['pigeonFlock',64,64,70,0,13]
+            ];
+            for(const [id,sw,sh,alt,dx,dy] of sprites) {
+              if(!sheets[id] || hash(i,j,id.length) < (id==='pigeonFlock'?.73:.35))continue;
+              const at=proj(b.x+dx,b.y+dy,alt);
+              if(!at || at[2]<.16)continue;
+              const frame=(Math.floor(t*(id==='pigeonFlock'?6:4)+hash(i,j,31)*7)% (id==='pigeonFlock'?12:8)+12)% (id==='pigeonFlock'?12:8);
+              const scale=at[2]*(id==='pigeonFlock'?1.25:.8);
+              g.setTransform(scale,0,0,scale,at[0],at[1]);
+              g.globalAlpha=fade*.8;
+              g.drawImage(sheets[id],frame*sw,0,sw,sh,-sw/2,-sh/2,sw,sh);
+            }
             g.globalAlpha=1;
           }});
         }
       }
     }
+  }
+  // Дымка меняет глубину при снижении, облака уходят из кадра.
+  const effects = mk(64,64);
+  function drawCloudsAndBoats(items){
+    const birds = ['sunsetCloud','sailBoat'];
+    for(let n=0;n<15;n++){
+      const i=Math.floor(P.x/450)+(n%5)-2, j=Math.floor(P.y/450)+Math.floor(n/5)-1;
+      const id=birds[n%3===0?1:0];
+      if(!sheets[id])continue;
+      const x=i*450+hash(i,j,47)*300,y=j*450+hash(i,j,48)*300;
+      const z=id==='sailBoat'?5:80+hash(i,j,49)*40;
+      const p=proj(x,y,z);
+      if(!p||p[3]<10||p[3]>1250||p[2]<.17||p[0]<-100||p[0]>W+100||p[1]<-100||p[1]>H+100)continue;
+      const nSlices=id==='sailBoat'?26:8, side=id==='sailBoat'?64:64;
+      const frame=(Math.floor(t*.9+n)%nSlices+nSlices)%nSlices;
+      items.push({d:p[3],f:()=>{
+        const a=clamp(1-p[3]/1900,.15,1);
+        const k=p[2]*1.5;
+        g.globalAlpha=a;
+        g.setTransform(k,0,0,k,p[0],p[1]+Math.sin(t*1.2+n)*k*2);
+        g.drawImage(sheets[id],frame*side,0,side,side,-side/2,-side/2,side,side);
+        g.globalAlpha=1;
+      }});
+    }
+  }
+  function paintTransition(){
+    if (!sheets.descentGate) return;
+    const k=Math.max(0,1-Math.abs(P.z-95)/26);
+    if(k<.01)return;
+    const frame=(Math.floor(t*2)%8+8)%8;
+    g.save();
+    g.setTransform(1,0,0,1,0,0);
+    g.globalAlpha=k*.34;
+    const z=Math.max(W,H)*.85;
+    g.drawImage(sheets.descentGate,frame*64,0,64,64,W/2-z/2,H/2-z/2,z,z);
+    g.restore();
   }
   const gate = mk(54,70);
   { const c=gate.getContext('2d'); c.imageSmoothingEnabled=false;
@@ -309,5 +392,5 @@ window.GothicCity = (() => {
     rect(c,'#ffcf83',24,11,5,5);
     for(let n=0;n<4;n++){rect(c,'#ffe1a7',7,22+n*10,3,3);rect(c,'#ffe1a7',44,22+n*10,3,3);}
   }
-  return {drawBackground, addRenderItems, gate};
+  return {drawBackground, addRenderItems, gate, drawCloudsAndBoats, paintTransition, onRing};
 })();

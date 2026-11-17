@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>INK shader spatial-frequency calibration</title>
+<link rel="icon" href="data:,">
+<style>
+  html,body { margin:0; width:100%; height:100%; overflow:hidden; background:#f6f1e7 }
+  canvas { display:block; width:100%; height:100% }
+</style>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.165.0/build/three.module.js"}}</script>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import {createLivingWatercolor3D,createWatercolorStyle}
+  from '../../demos/living-watercolor/shared/living-watercolor-3d.js';
+
+// A wide, real Three.js surface gives periodic waves room to repeat.
+// This is an independent test scene: no test flags or changes in the game.
+const scene=new THREE.Scene();
+const camera=new THREE.OrthographicCamera(-16,16,12,-12,.1,200);
+const renderer=new THREE.WebGLRenderer({
+  antialias:true,alpha:false,preserveDrawingBuffer:true
+});
+renderer.setPixelRatio(1);
+renderer.setSize(innerWidth,innerHeight);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+const style=createWatercolorStyle({
+  seed:'living-watercolor-v2',inkColor:'#2e425d',paperColor:'#f6f1e7',
+  washColor:'#78899d',washOpacity:.68,washLayers:9,edgeWidth:.048,
+  edgeJitter:.37,granulation:.55,bleed:.29,shadowWash:.12,motion:.13,
+  pigmentPooling:.34,paperGap:.18,paintedLight:.72
+});
+const watercolor=createLivingWatercolor3D({
+  THREE,renderer,scene,camera,style,autoQuality:false
+});
+scene.add(new THREE.HemisphereLight(0xffffff,0xa8b0ba,2.9));
+const lamp=new THREE.DirectionalLight(0xffffff,.72);
+lamp.position.set(4,8,15);
+scene.add(lamp);
+const surface=new THREE.Mesh(
+  new THREE.PlaneGeometry(140,90),
+  new THREE.MeshStandardMaterial({color:'#aeb7c0',roughness:1})
+);
+scene.add(surface);
+watercolor.apply(surface,{seed:'reference:house',outline:false});
+const offsets=[[0,0],[24,5],[48,-9]];
+function show(i) {
+  const [x,y]=offsets[i];
+  camera.position.set(x,y,25);
+  camera.lookAt(x,y,0);
+  camera.updateProjectionMatrix();
+  watercolor.tick(0);
+  renderer.render(scene,camera);
+}
+addEventListener('resize',()=>{
+  renderer.setSize(innerWidth,innerHeight);
+  const h=12,aspect=innerWidth/Math.max(1,innerHeight);
+  camera.left=-h*aspect;camera.right=h*aspect;
+  camera.top=h;camera.bottom=-h;
+  camera.updateProjectionMatrix();show(0);
+});
+show(0);
+window.__INK_PATTERN_PROBE__={ready:true,show};
+</script>
+</body>
+</html>

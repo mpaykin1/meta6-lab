@@ -1,0 +1,135 @@
+name: BEZ PATTERNOV
+on:
+  workflow_call:
+  pull_request:
+    paths:
+      - 'games/**'
+      - 'demos/**'
+      - 'meta-games/**'
+      - 'reference/**'
+      - 'shared/**'
+      - 'scripts/visual/**'
+      - 'rules/01-stil-i-grafika/BEZ_PATTERNOV.md'
+      - '.github/workflows/bez-patternov.yml'
+      # Root-level worlds are linked from meta-games/index.html (e.g. ashen-sumerek/).
+      - '**/*.js'
+      - '**/*.mjs'
+      - '**/*.cjs'
+      - '**/*.ts'
+      - '**/*.tsx'
+      - '**/*.glsl'
+      - '**/*.vert'
+      - '**/*.frag'
+      - '**/*.html'
+  push:
+    branches: [main]
+    paths:
+      - 'games/**'
+      - 'demos/**'
+      - 'meta-games/**'
+      - 'reference/**'
+      - 'shared/**'
+      - 'scripts/visual/**'
+      - '.github/workflows/bez-patternov.yml'
+      # Root-level worlds are linked from meta-games/index.html (e.g. ashen-sumerek/).
+      - '**/*.js'
+      - '**/*.mjs'
+      - '**/*.cjs'
+      - '**/*.ts'
+      - '**/*.tsx'
+      - '**/*.glsl'
+      - '**/*.vert'
+      - '**/*.frag'
+      - '**/*.html'
+  schedule:
+    - cron: '23 3 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  static:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Ensure guard rejects five mutations
+        run: node scripts/visual/mutate-no-patterns.mjs
+      - name: Scan changed games in PR
+        if: github.event_name == 'pull_request'
+        env:
+          PATTERN_BASE: ${{ github.event.pull_request.base.sha }}
+        run: node scripts/visual/verify-no-patterns.mjs --changed
+      - name: Full scan for main and scheduled audits
+        # Старый долг (19 мест в играх, 17.11.2026) — отчёт, не блокировка; новые повторы ловит --changed на PR.
+        if: github.event_name != 'pull_request'
+        continue-on-error: true
+        run: node scripts/visual/verify-no-patterns.mjs --all
+  visual:
+    # Тяжёлый браузерный FFT (до 35 мин) — только PR, расписание и ручной запуск, не каждый пуш в main.
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    needs: static
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install free Chromium, FFT dependencies
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+          python -m pip install numpy pillow
+      - name: Prove FFT catches three image mutations
+        run: |
+          node --check scripts/visual/capture-pattern-frames.mjs
+          python scripts/visual/mutate-pattern-fft.py
+      - name: Capture original INK on exact PR base
+        if: github.event_name == 'pull_request'
+        env:
+          PATTERN_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/no-pattern-base" "$PATTERN_BASE"
+          # Keep the calibration geometry identical on base and head: only the INK shader differs.
+          mkdir -p "$RUNNER_TEMP/no-pattern-base/scripts/visual"
+          cp scripts/visual/ink-pattern-probe.html "$RUNNER_TEMP/no-pattern-base/scripts/visual/"
+          node scripts/visual/capture-pattern-frames.mjs --root "$RUNNER_TEMP/no-pattern-base" --out .pattern-before --target ink
+      - name: Capture three viewpoints of affected games
+        if: github.event_name == 'pull_request'
+        env:
+          PATTERN_BASE: ${{ github.event.pull_request.base.sha }}
+        run: node scripts/visual/capture-pattern-frames.mjs --root . --out .pattern-after --target changed
+      - name: Capture entire catalog on main and scheduled audits
+        if: github.event_name != 'pull_request'
+        run: node scripts/visual/capture-pattern-frames.mjs --root . --out .pattern-after --target all
+      - name: Calibrate against original INK, enforce fixed FFT threshold
+        if: github.event_name == 'pull_request'
+        run: python scripts/visual/measure-pattern-fft.py --before .pattern-before --after .pattern-after --output .pattern-fft.json
+      - name: Spectral pattern guard for catalog
+        if: github.event_name != 'pull_request'
+        run: python scripts/visual/measure-pattern-fft.py --after .pattern-after --output .pattern-fft.json
+      - name: Preserve visual comparisons
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: no-pattern-screenshots
+          path: |
+            .pattern-before/
+            .pattern-after/
+            .pattern-fft.json
+          if-no-files-found: warn
+          # Playwright captures live in dot-prefixed directories; v4 hides them by default.
+          include-hidden-files: true

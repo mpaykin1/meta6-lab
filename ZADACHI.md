@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Z01: разрешить конфликт PR #361 и проверить слияние | МГЛ | чат ChatGPT | `lab/avto1-z01-draft-quota-20261117` | [#361](https://github.com/mpaykin1/meta6-lab/pull/361) | 2026-11-17 10:43 UTC | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | docs(z01): verify live PR identity before backlog decisions | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/mg-remontnik-nadzor-z01-20261117` | [#369](https://github.com/mpaykin1/meta6-lab/pull/369) | 2026-11-17 03:49 | 2026-11-17 03:48 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Z20: META BOT — не засчитывать провальный второй запуск `secondRun: hash` | МГЛ | чат ChatGPT | `lab/z20-meta-bot-second-run-hash-20261117` | [#368](https://github.com/mpaykin1/meta6-lab/pull/368) | 2026-11-17 03:39 UTC | 2026-11-17 03:45 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | fix(shpili): шарнирный страж и собор — пара на просмотр | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-tumannye-shpili-20261114-2338` | [#306](https://github.com/mpaykin1/meta6-lab/pull/306) | 2026-11-13 20:35 | 2026-11-17 03:12 |

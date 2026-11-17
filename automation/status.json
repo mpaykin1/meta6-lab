@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T02:37:02.980Z",
+  "generated_at": "2026-11-17T02:38:37.131Z",
   "sha": {
-    "lab": "4b4ae96fd0cad48e170d69476ea28864f02b4033",
+    "lab": "b45dc308324af1eaf332dcb6548d7e4f017ebc31",
     "mg": "5e5c99a58bfa90f0d08102945fa14628f9589998"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44004221022",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44004422603",
   "review": {
     "protected": [
       {
@@ -474,7 +474,7 @@
     }
   },
   "pr": {
-    "open": 32,
+    "open": 33,
     "conflicts": "нет данных",
     "merged": 66,
     "closed": 111,
@@ -1131,7 +1131,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2588,
+      "count": 2591,
       "folders": "нет данных"
     },
     "mg": {
@@ -1266,6 +1266,7 @@
     "| 1147 | 16.11.2026 | MG Dispatcher выдавал автозадачам PR #332/#337 с внешним Vercel build-rate-limit вместо разрешимой работы; попытка «исправить Vercel» ведёт к холостым прогонам | [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md), [PR #332](https://github.com/mpaykin1/meta6-lab/pull/332), [PR #337](https://github.com/mpaykin1/meta6-lab/pull/337) | `scripts/karta-sil/route.mjs`: строгое распознавание внешней квоты; `scripts/karta-sil/mutate-route-external-quota.mjs`: постоянная мутация; `scripts/dispetcher/test/route-external-quota.test.mjs`: обычный FAIL, 3 обмана, выключение фильтра |",
     "| 1148 | 17.11.2026 | STATUS обнулял 7 ЗЕЛЁНЫХ пунктов FINISH.md, если API GitHub не отвечал на запрос старых прогонов: подтверждение смешивалось с решением Claude | [исходный status.json](https://github.com/mpaykin1/meta6-lab/blob/main/automation/status.json) | `scripts/status/mutate-canonical-finish.mjs`: 3 мутации (API off, ссылка без доказательства, ложный PASS), отдельная проверка Actions без перезаписи статуса FINISH |",
     "| 1149 | 13.11.2026 | В 22 активных workflow не было concurrency; в трёх существующих смешанные push/PR могли отменять push/main | Сверка 44 workflow с веткой lab/ci-ochered-concurrency; отсутствие параллельного ограничения | `scripts/lab/mutate-workflow-concurrency.mjs`: удалённая настройка, безусловная отмена, пустая группа и маскировка комментарием |",
-    "| 1150 | 17.11.2026 | GITHUB_TOKEN упирался в лимит API (HTTP 403 «rate limit exceeded for installation»): 10 сторожей ходили в API каждый час, а B1 запускал браузер на каждом коммите сторожа в ZADACHI/STATUS | `.github/workflows/*` (расписания), `bot-b1-open-all.yml` (paths-ignore) | `scripts/lab/mutate-pr-status-batch.mjs`: 7 ловушек расписания на новые частоты (раз в 2–3 ч) |"
+    "| 1150 | 17.11.2026 | GITHUB_TOKEN упирался в лимит API (HTTP 403 «rate limit exceeded for installation»): 10 сторожей ходили в API каждый час, а B1 запускал браузер на каждом коммите сторожа в ZADACHI/STATUS | `.github/workflows/*` (расписания), `bot-b1-open-all.yml` (paths-ignore) | `scripts/lab/mutate-pr-status-batch.mjs`: 7 ловушек расписания на новые частоты (раз в 2–3 ч) |",
+    "| 1151 | 17.11.2026 | Claude влил verify-etalony-sync.yml с cancel-in-progress: true — постоянная ловушка concurrency краснела у KONTUR Guard на всех PR | .github/workflows/verify-etalony-sync.yml | scripts/lab/mutate-workflow-concurrency.mjs (уже ловит; урок: перед вливанием нового workflow прогонять постоянные мутации KONTUR) |"
   ]
 }

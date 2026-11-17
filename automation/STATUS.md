@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T02:37:02.980Z | МГЛ: 4b4ae96fd0cad48e170d69476ea28864f02b4033 | МГ: 5e5c99a58bfa90f0d08102945fa14628f9589998 | https://github.com/mpaykin1/meta6-lab/actions/runs/44004221022
+UTC: 2026-11-17T02:38:37.131Z | МГЛ: b45dc308324af1eaf332dcb6548d7e4f017ebc31 | МГ: 5e5c99a58bfa90f0d08102945fa14628f9589998 | https://github.com/mpaykin1/meta6-lab/actions/runs/44004422603
 ## ПРОВЕРИТЬ CLAUDE
 - PR #346 9f247be3a3530d160f629f531f32eb6469a07bc1: scripts/status/mutate-canonical-finish.mjs, scripts/status/selftest.mjs
 - PR #311 fb708269aa165d43dea7a1b3204157a235087afd: automation/asset-check/test_mutation_runner.py, automation/asset-check/test_zip_safety.py, scripts/platform/mutate-bot-config.mjs, scripts/platform/verify-meta-bot-config-candidate.mjs, scripts/repair-bot/mutat… (сокращено)
@@ -31,12 +31,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 32 | конфликт: нет данных | слито: 66 | закрыто: 111
+открыто: 33 | конфликт: нет данных | слито: 66 | закрыто: 111
 #350 Единая инструкция пяти автозадач и журнал NADZOR | bf240a699201aa2d8b9594c989ec34de47c37170
 #346 fix(status): сохранять вердикты FINISH при сбое GitHub API | 9f247be3a3530d160f629f531f32eb6469a07bc1
 ещё 64: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2588 коммитов | нет данных
+МГЛ: 2591 коммитов | нет данных
 МГ: 39 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
@@ -55,4 +55,4 @@ wild-train-prologue — не прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 2026111701 | 17.11.2026 | META BOT could report success for zero screens; actual game configuration now fails KONTUR before acceptance | empty viewports and unknown screen fixtures | scripts/platform/mutate-bot-config.mjs: 3 mutations and real game configurations |
 | 2026111401 | 14.11.2026 | Repair Bot молча пропускал недоступные JSON и менял часть набора при неисправимой ошибке; ссылка в предке позволяла писать вне проекта | Воспроизведено изолированными git-fixtures | scripts/repair-bot/selftest-safety.mjs: missing fi… (сокращено)
-ещё 58: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+ещё 59: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

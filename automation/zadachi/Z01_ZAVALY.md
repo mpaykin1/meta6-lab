@@ -38,3 +38,5 @@ PR [#331 «БЕЗ ТОРМОЗОВ / РАЗБОР ЗАВАЛОВ»](https://gith
 - При независимой приёмке PR комментарий `COMMENT` не равен `APPROVED`: перед слиянием сверить состояние review, актуальный HEAD, конфликты и обязательные проверки. Пример: [рецензия #361](https://github.com/mpaykin1/meta6-lab/pull/361#pullrequestreview-5933636353) зафиксировала конфликт, а не разрешение на слияние.
 
 - При поиске открытых PR не доверяй выдаче, в которой по запросу `is:pr` возвращаются `issues/` вместо `pull/`: это неполные данные, не основание закрывать PR или утверждать, что очередь пуста. Повтори проверку через список pull requests с полями `number`, `state`, `draft`, `head.sha` и `mergeable`; при недоступности API оставь точный блокер, не меняй чужие ветки.
+
+- Проверка `combined status` с пустым `statuses` не означает отсутствие CI: отдельно запросить workflow runs по точному `head.sha`, сверить `conclusion` каждого обязательного workflow и не принимать старые прогоны за текущие. Пример: [HEAD 6d9b893](https://github.com/mpaykin1/meta6-lab/commit/6d9b8933677902b11d818a2aa9816501bbfd72ea), [META GAMES guard](https://github.com/mpaykin1/meta6-lab/actions/runs/44027903922).

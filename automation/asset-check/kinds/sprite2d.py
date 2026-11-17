@@ -113,6 +113,8 @@ def check(root: Path, r) -> set:
         return set()
 
     assets = man.get("assets", {})
+    r.asset_ids.update(Path(k).stem for k in assets)
+    r.asset_ids.update(man.get("animations", {}) or {})
     for key in ("format", "version", "assets", "tile_size"):
         if key not in man:
             r.add("A1", "HARD", mf.name, f"В манифесте нет поля {key}", f"Добавь поле {key} (см. SPEC.md §1)")

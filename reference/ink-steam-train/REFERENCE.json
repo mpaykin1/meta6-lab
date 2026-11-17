@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "ink-steam-train",
+  "title": "INK · Акварельный паровоз — объёмный поезд с живыми шатунами и паром",
+  "status": "OWNER_PASS",
+  "date": "2026-11-15",
+  "added_by": "Claude",
+  "view": "https://mpaykin1.github.io/meta6/reference/ink-steam-train/",
+  "view_lab": "https://mpaykin1.github.io/meta6-lab/reference/ink-steam-train/",
+  "source": {
+    "repo": "mpaykin1/meta6-lab",
+    "branch": "lab/ink-watercolor-steam-train-20261114",
+    "commit": "ac952d0d3626cd65d7650ad496ebb98bf025eecc"
+  },
+  "depends_on": [
+    "reference/ink-fallen-guardian"
+  ],
+  "rules": [
+    "read-only (сам эталон не менять)",
+    "можно предложить при просьбе вставить поезд; новый поезд по просьбе владельца делается новым"
+  ],
+  "files": [
+    {
+      "path": "reference/ink-steam-train/README.md",
+      "git_blob_sha": "d22c2a98c2fa10e5842563ae16beb6ca483b127c"
+    },
+    {
+      "path": "reference/ink-steam-train/index.html",
+      "git_blob_sha": "730a01fce17674c77c4f44a72f7186372043b766"
+    },
+    {
+      "path": "reference/ink-steam-train/ink-steam-train.js",
+      "git_blob_sha": "12f45e3411de728cfd5035b9a5af511ce40467f0"
+    },
+    {
+      "path": "reference/ink-steam-train/scene.js",
+      "git_blob_sha": "35a987debdd6bbc5ce68a0ac83a3fab11e419a32"
+    }
+  ]
+}

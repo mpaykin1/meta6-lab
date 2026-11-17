@@ -3,7 +3,7 @@ name: sliyanie-status
 # (merged / closed / open, dirty = конфликт) — прогресс задания «Слить всё» не теряется при зависании ChatGPT.
 on:
   schedule:
-    - cron: '37 * * * *'
+    - cron: '37 */3 * * *'
   pull_request_target:
     types: [closed]
   workflow_dispatch:

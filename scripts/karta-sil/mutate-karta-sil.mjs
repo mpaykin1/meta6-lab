@@ -290,3 +290,311 @@ test('карта сил: push повторяется после rebase, а не 
     assert.throws(()=>checkPublishRetry(yml.replace(from,to)),undefined,label);
   }
 });
+
+import {watchdogClosed} from './build.mjs';
+function checkClosedAbandoned(status, watchdog) {
+  const last = '2026-11-13T00:00:00Z';
+  const base = {state:'closed',merged_at:null,closed_at:'2026-11-13T12:00:00Z',comments:[]};
+  const comments = [{author:{login:'github-actions[bot]'},
+    body:'закрыт сторожем как заброшенный'}];
+  assert.equal(status(base,last),'закрыто');
+  assert.equal(status({...base,closed_at:'2026-11-14T00:00:01Z'},last),'брошено');
+  assert.equal(status({...base,closed_at:'2026-11-14T00:00:00Z'},last),'закрыто');
+  assert.equal(watchdog(comments),true);
+  assert.equal(status({...base,comments},last),'брошено');
+  assert.equal(status({...base,comments:[{...comments[0],author:{login:'other'}}]},last),
+    'закрыто');
+  assert.equal(status({...base,merged_at:'2026-11-13T11:00:00Z',comments},last),'слито');
+}
+test('закрытые без слияния: комментарий сторожа или 24ч без коммитов',async()=>{
+  checkClosedAbandoned(statusOf,watchdogClosed);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const mutants=[
+    source.replace("if (watchdogClosed(pr.comments || [])) return 'брошено';",
+      "if (watchdogClosed(pr.comments || [])) return 'закрыто';"),
+    source.replace('Date.parse(lastCommitTime) > 86400000)',
+      'Date.parse(lastCommitTime) > 172800000)'),
+    source.replace("return comments.some(comment =>",
+      "return comments.length > 0 || comments.some(comment =>")
+  ];
+  for(const [index,changed] of mutants.entries()){
+    assert.notEqual(changed,source,'мутация должна изменить код: '+index);
+    const module=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    assert.throws(()=>checkClosedAbandoned(module.statusOf,module.watchdogClosed),
+      undefined,'мутант '+index+' не должен пройти');
+  }
+});
+
+import {attributedErrors} from './build.mjs';
+
+function checkJournalAttribution(match) {
+  const head = 'abcdef1234567890abcdef1234567890abcdef12';
+  const pr = {number:301,head:{sha:head}};
+  const rows = [
+    '| 1 | 14.11.2026 | SHA abcdef1234 | доказательство | ловушка |',
+    '| 2 | 14.11.2026 | SHA ffffffff99 | доказательство | ловушка |',
+    '| 3 | 14.11.2026 | PR #301 сломался | доказательство | ловушка |',
+    '| 4 | 14.11.2026 | /pull/301 сломался | доказательство | ловушка |',
+    '| 5 | 14.11.2026 | /actions/runs/12345678901 упал | доказательство | ловушка |',
+    '| 6 | 14.11.2026 | /actions/runs/12345678902 упал | доказательство | ловушка |',
+    '| 7 | 14.11.2026 | PR #3010 чужой | доказательство | ловушка |'
+  ].join('\n');
+  const found=match(rows,pr,[],new Map([
+    ['12345678901',head],
+    ['12345678902','ffffffffffffffffffffffffffffffffffffffff']
+  ]));
+  assert.equal(found.length,4);
+  assert.ok(found.some(line=>line.includes('abcdef1234')));
+  assert.ok(!found.some(line=>line.includes('ffffffff99')));
+  assert.ok(!found.some(line=>line.includes('12345678902')));
+  const other=match('| 9 | 14.11.2026 | PR #302 | факт | ловушка |',
+    {...pr,number:302},[],new Map());
+  assert.equal(other.length,1);
+}
+test('Карта сил: ошибки привязываются к PR по номеру, SHA или проверенному run ID',async()=>{
+  checkJournalAttribution(attributedErrors);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const mutations=[
+    source.replace("sha.startsWith(match[0].toLowerCase())","false"),
+    source.replace("runs.some(match => commits.has(String(runToSha.get(match[1]) || '').toLowerCase()))",
+      "runs.length > 0"),
+    source.replace("Number(match[1]) === pr.number","Number(match[1]) === 301")
+  ];
+  for(const [i,changed] of mutations.entries()){
+    assert.notEqual(changed,source,'мутация '+i+' должна менять код');
+    const mod=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    assert.throws(()=>checkJournalAttribution(mod.attributedErrors),undefined,
+      'мутант '+i+' не должен выжить');
+  }
+});
+
+
+
+import {recentCohort,trendFor} from './build.mjs';
+function verifyCosts(aggregate) {
+  const rows=[
+    {type:'bot_check',actor:'неизвестно',status:'слито',created_at:'2026-11-13',
+      merged_at:'2026-11-14',failedBeforeGreen:6,newErrors:0,repeatedError:false},
+    {type:'bot_check',actor:'неизвестно',status:'закрыто',created_at:'2026-11-13',
+      failedBeforeGreen:3,newErrors:0,repeatedError:false},
+    {type:'bot_check',actor:'неизвестно',status:'брошено',isClosed:true,
+      created_at:'2026-11-13',failedBeforeGreen:0,newErrors:0,repeatedError:false},
+    {type:'bot_check',actor:'неизвестно',status:'брошено',isClosed:false,
+      created_at:'2026-11-13',failedBeforeGreen:0,newErrors:0,repeatedError:false}
+  ];
+  const m=aggregate(rows,dictionary).find(x=>x.type==='bot_check'&&x.actor==='неизвестно');
+  assert.equal(m.redPerMerge,9);
+  assert.equal(m.closedShare,66.7);
+  assert.equal(m.action,'дробить задачи / тесты до пуша');
+  const redOnly=aggregate([rows[0]],dictionary)
+    .find(x=>x.type==='bot_check'&&x.actor==='неизвестно');
+  assert.equal(redOnly.closedShare,0);
+  assert.equal(redOnly.redPerMerge,6);
+  assert.equal(redOnly.action,'дробить задачи / тесты до пуша');
+}
+test('стоимость типов: красных на слияние и реальная доля закрытых',async()=>{
+  verifyCosts(compute);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  for(const [oldPart,newPart] of [
+    ['(failures / merged).toFixed(1)','(failures / (merged + closed)).toFixed(1)'],
+    ['closedWithoutMerge * 100 / resolved','closed * 100 / resolved'],
+    ['redPerMerge > 5','redPerMerge > 50']
+  ]){
+    assert.ok(source.includes(oldPart),'мутация должна иметь якорь '+oldPart);
+    const changed=source.replace(oldPart,newPart);
+    const mod=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    assert.throws(()=>verifyCosts(mod.compute));
+  }
+});
+test('3-дневная когорта не превращается в 14-дневную и не меняет зоны',()=>{
+  const now=Date.parse('2026-11-15T12:00:00Z');
+  const recent=[{created_at:'2026-11-14T00:00:00Z',number:1},
+    {created_at:'2026-11-06T00:00:00Z',number:2}];
+  assert.deepEqual(recentCohort(recent,3,now).map(x=>x.number),[1]);
+  assert.equal(trendFor({merged:1,closed:0,abandoned:0},
+    {merged:3,closed:1,abandoned:0}),'мало данных');
+  assert.equal(trendFor({merged:3,closed:0,abandoned:0},
+    {merged:6,closed:4,abandoned:0}),'↑ лучше');
+  assert.equal(trendFor({merged:0,closed:3,abandoned:0},
+    {merged:6,closed:4,abandoned:0}),'↓ хуже');
+  assert.equal(trendFor({merged:2,closed:1,abandoned:0},
+    {merged:4,closed:2,abandoned:0}),'→ так же');
+});
+
+function verifyThreeDayTrap(cohort, trend) {
+  const now=Date.parse('2026-11-15T12:00:00Z');
+  const items=[{number:1,created_at:'2026-11-14T00:00:00Z'},
+    {number:2,created_at:'2026-11-06T00:00:00Z'}];
+  assert.deepEqual(cohort(items,3,now).map(x=>x.number),[1]);
+  const base={merged:6,closed:4,abandoned:0};
+  assert.equal(trend({merged:3,closed:0,abandoned:0},base),'↑ лучше');
+  assert.equal(trend({merged:0,closed:3,abandoned:0},base),'↓ хуже');
+  assert.equal(trend({merged:1,closed:0,abandoned:0},base),'мало данных');
+}
+test('3 дня: три мутации, включая фальшивую отметку улучшения',async()=>{
+  verifyThreeDayTrap(recentCohort,trendFor);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  for(const [from,to] of [
+    ['created >= now - days * 86400000','created >= now - 14 * 86400000'],
+    ["if (n3 < 3 || n14 < 3) return 'мало данных';",
+      "if (false) return 'мало данных';"],
+    ["return delta > 0.01 ? '↑ лучше'","return delta < 0.01 ? '↑ лучше'"]
+  ]){
+    assert.ok(source.includes(from),'действующий якорь '+from);
+    const code=source.replace(from,to);
+    const mutant=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
+    assert.throws(()=>verifyThreeDayTrap(mutant.recentCohort,mutant.trendFor));
+  }
+});
+
+
+
+test('доля закрытых: незакрытый заброшенный PR не портит показатель',()=>{
+  const rows=[
+    {type:'game_fix',actor:'автозадача',status:'слито',isClosed:true,
+      failedBeforeGreen:0,newErrors:0},
+    {type:'game_fix',actor:'автозадача',status:'брошено',isClosed:false,
+      failedBeforeGreen:0,newErrors:0},
+    {type:'game_fix',actor:'автозадача',status:'брошено',isClosed:true,
+      failedBeforeGreen:0,newErrors:0}
+  ];
+  const m=compute(rows,dictionary).find(x=>x.type==='game_fix'&&x.actor==='автозадача');
+  assert.equal(m.abandoned,2);
+  assert.equal(m.closedShare,50);
+  assert.equal(m.action,'дробить задачи / тесты до пуша');
+});
+
+test('3 дня: старый PR, слитый сегодня, обязательно виден в коротком срезе',async()=>{
+  const now=Date.parse('2026-11-15T12:00:00Z');
+  const items=[
+    {number:1,status:'слито',created_at:'2026-11-06T00:00:00Z',
+      merged_at:'2026-11-15T05:00:00Z',isClosed:true},
+    {number:2,status:'закрыто',created_at:'2026-11-06T00:00:00Z',
+      closed_at:'2026-11-15T05:00:00Z',isClosed:true},
+    {number:3,status:'слито',created_at:'2026-11-06T00:00:00Z',
+      merged_at:'2026-11-07T05:00:00Z',isClosed:true},
+    {number:4,status:'активно',created_at:'2026-11-06T00:00:00Z',
+      updated_at:'2026-11-15T06:00:00Z',isClosed:false}
+  ];
+  assert.deepEqual(recentCohort(items,3,now).map(x=>x.number),[1,2,4]);
+  const source=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const mutants=[
+    ["pr.status === 'слито' ? pr.merged_at","pr.status === 'слито' ? pr.created_at"],
+    ["pr.isClosed === true ? pr.closed_at","pr.isClosed === true ? pr.created_at"],
+    [": pr.updated_at;",": pr.created_at;"],
+    ["return event >= now - days * 86400000;","return pr.number === 1 ? true : createdRecent;"]
+  ];
+  for(const [from,to] of mutants){
+    assert.ok(source.includes(from),'якорь событийного среза: '+from);
+    const changed=source.replace(from,to);
+    const mod=await import('data:text/javascript;base64,'+Buffer.from(changed).toString('base64'));
+    assert.notDeepEqual(mod.recentCohort(items,3,now).map(x=>x.number),[1,2,4]);
+  }
+});
+
+import {resolvedActorFromEvidence} from './build.mjs';
+function checkEvidence(resolve) {
+  const dict={...dictionary,branchActors:[{pattern:'^lab/mg-stroitel',actor:'автозадача'}]};
+  const pr={number:331,title:'про автозадачи',
+    body:'Исполнитель: чат ChatGPT',head:{ref:'lab/mg-stroitel-2'}};
+  const row='| PR #331 | lab/mg-stroitel-2 | MG-строитель-2 | now |';
+  assert.equal(resolve(pr,row,dict),'чат ChatGPT');
+  assert.equal(resolve({...pr,body:''},row,dict),'автозадача');
+  assert.equal(resolve({...pr,body:''},'',dict),'автозадача');
+  assert.equal(resolve({...pr,body:'',number:33,head:{ref:'lab/neutral'}},
+    '| PR #331 | lab/neutral-extra | MG-строитель-2 | now |',dict),'неизвестно');
+  assert.equal(resolve({...pr,body:'Исполнитель: MG-строитель-1\nИсполнитель: чат ChatGPT'},
+    row,dict),'неизвестно');
+  assert.equal(resolve({...pr,body:'',head:{ref:'lab/neutral'}},
+    '| PR #331 | lab/neutral | MG-строитель-1 | then |\n'+
+    '| PR #331 | lab/neutral | чат ChatGPT | now |',dict),'неизвестно');
+  assert.equal(resolve({...pr,body:'Исполнитель: —'},row,dict),'автозадача');
+  assert.equal(resolve({...pr,body:'',head:{ref:'lab/changed'}},
+    '| PR #331 | lab/original | MG-строитель-3 | past |',dict),'автозадача');
+}
+test('исполнитель карты: явное указание, подтверждённая история, документированная ветка',async()=>{
+  checkEvidence(resolvedActorFromEvidence);
+  const original=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const changes=[
+    ['if(declared && declared!==actors[2]) return declared;','if(false) return declared;'],
+    ["cells[1]?.replaceAll('`','')===branch","cells[1]?.includes(branch)"],
+    ['return matches.size===1 ? [...matches][0] : actors[2];','return actors[0];'],
+    ['if(owners.size>1) return actors[2];','if(pr.number===331) return actors[1];'],
+    ["new RegExp('\\\\bPR\\\\s*#'+pr.number+'\\\\b','i').test(cells[0]||'')",
+      'false']
+  ];
+  for(const [a,b] of changes){
+    assert.ok(original.includes(a),'мутация без якоря '+a);
+    const mutation=original.replace(a,b);
+    const mod=await import('data:text/javascript;base64,'+
+      Buffer.from(mutation).toString('base64'));
+    assert.throws(()=>checkEvidence(mod.resolvedActorFromEvidence));
+  }
+});
+
+// Claude 16.11.2026: карта не обнуляется при сбое, 5xx повторяется, «нет данных» у автозадачи → пробный шаг.
+async function checkResilience(build, route){
+  const prev={schema:1,status:'полная',types:[{id:'bot_check'}],metrics:[{type:'bot_check',actor:'неизвестно',zone:'жёлтая'}],prs:[]};
+  const kept=build.noDataState(prev,'2026-11-16T06:00:00Z','HTTP 502');
+  assert.equal(kept.status,'устарела'); assert.equal(kept.metrics.length,1); assert.equal(kept.staleSince,'2026-11-16T06:00:00Z');
+  assert.equal(build.noDataState({schema:1,metrics:[],types:[]}).status,'нет данных');
+  let calls=0; const waits=[];
+  const ok=await build.withRetry(async()=>{calls++; if(calls<3) throw Object.assign(new Error('x'),{stderr:'gh: HTTP 502'}); return 7;},ms=>{waits.push(ms);});
+  assert.equal(ok,7); assert.equal(calls,3); assert.equal(waits.length,2);
+  let c403=0;
+  await assert.rejects(()=>build.withRetry(async()=>{c403++; throw Object.assign(new Error('x'),{stderr:'gh: HTTP 403'});},()=>{}));
+  assert.equal(c403,1,'403 не повторяется');
+  const now=Date.parse('2026-11-16T12:00:00Z');
+  assert.equal(route.usableMap({...kept,staleSince:'2026-11-16T06:00:00Z'},now),true);
+  assert.equal(route.usableMap({...kept,staleSince:'2026-11-14T06:00:00Z'},now),false);
+  const map={schema:1,status:'полная',prs:[{number:5,type:'bot_check',changedFiles:3}],
+    metrics:[{type:'bot_check',actor:'автозадача',zone:'нет данных'},{type:'bot_check',actor:'неизвестно',zone:'зелёная'}]};
+  assert.equal(route.routeFor({id:5,body:''},map).target,'auto');
+  assert.equal(route.routeFor({id:5,body:'',changedFiles:9},map).target,'chat');
+  const red={...map,metrics:[{type:'bot_check',actor:'автозадача',zone:'нет данных'},{type:'bot_check',actor:'неизвестно',zone:'красная'}]};
+  assert.equal(route.routeFor({id:5,body:''},red).target,'chat');
+}
+test('КАРТА: сбой не стирает карту, 5xx повторяется, нет данных → пробный шаг',async()=>{
+  const build=await import('./build.mjs'), route=await import('./route.mjs');
+  await checkResilience(build,route);
+  const bsrc=await fs.readFile(new URL('./build.mjs',import.meta.url),'utf8');
+  const rsrc=await fs.readFile(new URL('./route.mjs',import.meta.url),'utf8');
+  const cases=[
+    ['b','сбой снова стирает карту',"  const hasData = Array.isArray(previous?.metrics) && previous.metrics.length > 0;","  const hasData = false;"],
+    ['b','403 тоже повторяется',"if (attempt >= tries || !TRANSIENT.test(String(error.stderr || error.message))) throw error;","if (attempt >= tries) throw error;"],
+    ['b','5xx не повторяется',"for (let attempt = 1; ; attempt++) {","for (let attempt = tries; ; attempt++) {"],
+    ['r','устаревшая карта не принимается',"  if (map.status !== 'устарела') return false;","  return false;"],
+    ['r','старая устаревшая карта принимается вечно',"return Number.isFinite(since) && now - since <= 24 * 3600 * 1000;","return true;"],
+    ['r','нет данных без запасного правила',"if (fallback === 'зелёная' || fallback === 'жёлтая') zone = 'жёлтая';",""],
+    ['r','запасное правило даёт красному типу',"if (fallback === 'зелёная' || fallback === 'жёлтая') zone = 'жёлтая';","zone = 'жёлтая';"],
+  ];
+  for(const [f,label,from,to] of cases){
+    const src=f==='b'?bsrc:rsrc;
+    assert.ok(src.includes(from),'якорь: '+label);
+    const mod=await import('data:text/javascript;base64,'+Buffer.from(src.replace(from,to)).toString('base64')+'#'+label.length);
+    const build2=f==='b'?mod:build, route2=f==='r'?mod:route;
+    await assert.rejects(()=>checkResilience(build2,route2),undefined,label);
+  }
+});
+
+// Claude 17.11.2026: превью Vercel на каждый PR исчерпали бесплатный лимит 100 сборок/сутки, красный «Vercel»
+// висел на всех PR и автозадачи считали его блокером. Превью только для main.
+function checkVercelPolicy(cfg){
+  const d=cfg?.git?.deploymentEnabled;
+  assert.equal(typeof d,'object','deploymentEnabled — объект веток');
+  assert.equal(d['**'],false,'ветки PR не деплоятся');
+  assert.equal(d.main,true,'main деплоится');
+  assert.equal(Object.values(d).filter(v=>v===true).length,1,'кроме main никто не включён');
+}
+test('Vercel: превью только для main',async()=>{
+  const cfg=JSON.parse(await fs.readFile(new URL('../../vercel.json',import.meta.url),'utf8'));
+  checkVercelPolicy(cfg);
+  for(const [label,mut] of [
+    ['превью снова для всех',c=>{c.git.deploymentEnabled['**']=true;}],
+    ['main выключен',c=>{c.git.deploymentEnabled.main=false;}],
+    ['лазейка для lab/*',c=>{c.git.deploymentEnabled['lab/*']=true;}],
+  ]){
+    const c=structuredClone(cfg); mut(c);
+    assert.throws(()=>checkVercelPolicy(c),undefined,label);
+  }
+});

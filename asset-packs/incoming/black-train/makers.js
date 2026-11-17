@@ -89,7 +89,7 @@ function redSignalLamp(seed=1){
   const light=new T.PointLight('#ff272d',0,10,2);light.position.set(0,0,.32);lamp.add(light);
   const splash=part(g,new T.PlaneGeometry(1.4,1.9),C.rust,0,.03,-.2);splash.rotation.x=-PI/2;
   g.userData.interact={radius:6,effect:'warning_train',label_ru:'Красный сигнал предупреждает о поезде'};
-  setMotion(g,(t)=>{const pulse=.15+.85*(.5+.5*Math.sin(t*(1.8+seed*.02)));
+  setMotion(g,(t)=>{const near=g.userData.approach||0;const pulse=.15+.85*(.5+.5*Math.sin(t*(1.8+seed*.02+near*6.5)));
     glow.material.emissiveIntensity=pulse*1.6;light.intensity=pulse*2.8;
     vane.rotation.z=.05*Math.sin(t*.72+.8);splash.scale.setScalar(.8+.2*pulse);
   });
@@ -155,11 +155,11 @@ function groundMist(seed=1){
     for(let i=1;i<pos.length/3-1;i++)inds.push(0,i,i+1);
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setIndex(inds);geo.computeVertexNormals();
     const mesh=new T.Mesh(geo,fogmat.clone());
-    mesh.position.set((k-6)*.67,.06+noise(seed,k+100)*.3,(noise(seed,k+50)-.5)*1.5);
+    mesh.position.set((k-6)*.32,.06+noise(seed,k+100)*.3,(noise(seed,k+50)-.5)*1.5);
     mesh.rotation.y=noise(seed,k+12)*PI;
     mesh.userData.watercolorOutline=false;g.add(mesh);sheets.push(mesh);
   }
-  setMotion(g,t=>sheets.forEach((s,i)=>{s.position.x=(i-6)*.67+.45*Math.sin(t*.15+i*1.9);s.position.y=.12+.11*Math.sin(t*.24+i*.4);
+  setMotion(g,t=>sheets.forEach((s,i)=>{s.position.x=(i-6)*.32+.45*Math.sin(t*.15+i*1.9);s.position.y=.12+.11*Math.sin(t*.24+i*.4);
     s.material.opacity=.07+.05*(.5+.5*Math.sin(t*.33+i*.7));}));
  });
 }
@@ -169,7 +169,7 @@ function stormClouds(seed=1){
   for(let band=0;band<3;band++){
     const cloud=new T.Group();g.add(cloud);
     for(let k=0;k<16;k++){
-      const x=(k-7.5)*.37+(noise(seed,k+band*90)-.5)*.6;
+      const x=(k-7.5)*.26+(noise(seed,k+band*90)-.5)*.6;
       const r=.31+noise(seed,k+50+band)*.37;
       const m=part(cloud,new T.IcosahedronGeometry(r,1),band===0?C.iron:band===1?C.edge:C.coal,x,3+band*.47+(noise(seed,k+90)-.5)*.2,(band-1)*.5);
       m.scale.set(1.8,.6,.8);
@@ -209,7 +209,7 @@ function wetRailGlow(seed=1){
  return assemble('Влажные рельсы — отблески',g=>{
   const ribbons=[];
   for(const side of [-1,1])for(let k=0;k<12;k++){
-    const x=(k-6)*.7+noise(seed,k+side*11)*.12;
+    const x=(k-6)*.48+noise(seed,k+side*11)*.12;
     const m=box(g,.43,.009,.035,k%4?C.edge:C.rust,x,.21,side*.76);
     ribbons.push([m,k]);
   }
@@ -264,6 +264,7 @@ function crossingBell(seed=1){
  return assemble('Колокол переезда',g=>{
   const bell=poly(g,[[-.28,1.13],[.28,1.13],[.21,1.45],[.15,1.69],[-.15,1.69],[-.21,1.45]],C.rust,.35);
   rod(g,V(0,.92,.15),V(0,1.25,.15),.037,C.edge);
+  rod(g,V(0,0,0),V(0,1.2,0),.035,C.wood);
   const clapper=part(g,new T.IcosahedronGeometry(.065,0),C.edge,0,1,.15);
   rod(g,V(-.37,1.12,0),V(.37,1.12,0),.037,C.wood);
   for(let k=0;k<6;k++)part(g,new T.IcosahedronGeometry(.045,0),C.iron,Math.sin(k)*.28,1.2+k*.06,.38);
@@ -277,6 +278,7 @@ function chainsClank(seed=1){
     const link=part(chain,new T.TorusGeometry(.12,.027,6,10),k%3?C.edge:C.rust,0,-k*.19,0);
     link.rotation.y=k%2?PI/2:0;
   }
+  rod(g,V(0,0,0),V(0,2.45,0),.045,C.wood);
   rod(g,V(0,2.45,0),V(.2,2.78,0),.06,C.wood);
   setMotion(g,t=>{chain.rotation.z=.08*Math.sin(t*.58+seed*.2);chain.rotation.x=.035*Math.sin(t*.43)});
  });

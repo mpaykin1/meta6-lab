@@ -86,7 +86,7 @@ function blackLocomotive(seed=1){
  const beam=add(g,new T.ConeGeometry(3.0,38,24,1,true),
     new T.MeshBasicMaterial({color:'#6b7577',transparent:true,opacity:.045,side:T.DoubleSide,
     depthWrite:false,blending:T.AdditiveBlending}),23.4,4.53,0);
- beam.rotation.z=-Math.PI/2;beam.renderOrder=2;
+ beam.rotation.z=Math.PI/2;beam.renderOrder=2;
  for(let i=0;i<12;i++){
   const x=-4.7+i*.76;
   add(g,new T.BoxGeometry(.24,.025,.38),i%3?soot:edge,x,3.43,1.22);

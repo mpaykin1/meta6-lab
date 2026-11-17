@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T01:29:07.180Z | МГЛ: 71356348d8efd1fc0aef2df9aa20825558917c74 | МГ: 0375ce30bfd3f0385e53091ecaeec595e27fb052 | https://github.com/mpaykin1/meta6-lab/actions/runs/43995828904
+UTC: 2026-11-17T01:32:11.094Z | МГЛ: 86f03016e5fd94bc44807aa1c323d1d7fcab71a0 | МГ: 0375ce30bfd3f0385e53091ecaeec595e27fb052 | https://github.com/mpaykin1/meta6-lab/actions/runs/43996252571
 ## ПРОВЕРИТЬ CLAUDE
 - PR #344 6655190cde1040b028ed57f2b4a1043d88e7344d: scripts/karta-sil/mutate-karta-sil.mjs
 - PR #339 86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34: automation/asset-check/test_kinds.py
@@ -17,7 +17,7 @@ UTC: 2026-11-17T01:29:07.180Z | МГЛ: 71356348d8efd1fc0aef2df9aa20825558917c74
 - | КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |
 - ещё 13: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
-готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43995406558))
+готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43995691188))
 M1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
 M2 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
 M3 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
@@ -43,7 +43,7 @@ P1 — не подтверждено: нет успешного завершён
 #340 Карта сил: сбой не стирает карту, 5xx повторяется, «нет данн | 5b9fa6e24485c7d527598777761f43e1f39e1a4d
 ещё 56: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2487 коммитов | нет данных
+МГЛ: 2490 коммитов | нет данных
 МГ: 37 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

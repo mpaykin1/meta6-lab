@@ -1,6 +1,6 @@
 {
   "format": "htmlpack/1",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "game": "vorona-v-tumane",
   "base": "reference/vorona-v-tumane",
   "reference_count": 2,
@@ -93,6 +93,104 @@
       "role": "effect",
       "animated": true,
       "source": "automation/asset-check/OCHERED.md, 17.11.2026"
+    },
+    "crow_wings": {
+      "label_ru": "Шарнирные крылья вороны",
+      "role": "2.5d",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/cutout.json",
+      "quality_status": "preview"
+    },
+    "crow_tail": {
+      "label_ru": "Хвост и лапы вороны",
+      "role": "2.5d",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/cutout.json",
+      "quality_status": "preview"
+    },
+    "stalker_limbs": {
+      "label_ru": "Шарнирные лапы существа",
+      "role": "2.5d",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/cutout.json",
+      "quality_status": "preview"
+    },
+    "mist_antler": {
+      "label_ru": "Олень из тумана",
+      "role": "2.5d",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/creatures.js",
+      "quality_status": "preview"
+    },
+    "bell_crawler": {
+      "label_ru": "Ползун с колоколом",
+      "role": "2.5d",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/creatures.js",
+      "quality_status": "preview"
+    },
+    "hollow_sentinel": {
+      "label_ru": "Пустоглазый часовой",
+      "role": "2.5d",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/creatures.js",
+      "quality_status": "preview"
+    },
+    "ash_heron": {
+      "label_ru": "Пепельная цапля",
+      "role": "2.5d",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/creatures.js",
+      "quality_status": "preview"
+    },
+    "silver_moth": {
+      "label_ru": "Серебряный мотылёк",
+      "role": "2d",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/creatures.js",
+      "quality_status": "preview"
+    },
+    "moth_swarm": {
+      "label_ru": "Стая мотыльков",
+      "role": "effect",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/creatures.js",
+      "quality_status": "preview"
+    },
+    "wing_sound": {
+      "label_ru": "Звук взмаха",
+      "role": "sound",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/audio.js",
+      "quality_status": "preview"
+    },
+    "crow_cry": {
+      "label_ru": "Карканье",
+      "role": "sound",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/audio.js",
+      "quality_status": "preview"
+    },
+    "stalker_sound": {
+      "label_ru": "Шорох существа",
+      "role": "sound",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/audio.js",
+      "quality_status": "preview"
+    },
+    "wind_sound": {
+      "label_ru": "Ветер",
+      "role": "sound",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/audio.js",
+      "quality_status": "preview"
+    },
+    "fog_music": {
+      "label_ru": "Тихая музыка тумана",
+      "role": "music",
+      "animated": true,
+      "source": "asset-packs/incoming/vorona-v-tumane/audio.js",
+      "quality_status": "preview"
     }
   }
 }

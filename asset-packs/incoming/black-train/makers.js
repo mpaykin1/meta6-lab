@@ -118,10 +118,23 @@ function groundMist(seed=6){
  const r=random(seed),g=new T.Group(),sheets=[];
  // GPU alpha ribbons: a gently dissolving silhouette, never solid white triangles.
  const mat=new T.ShaderMaterial({
-  uniforms:{uTime:{value:0}},
+  uniforms:{
+   uTime:{value:0},
+   uTorchPos:{value:new T.Vector3(0,1.7,0)},
+   uTorchDir:{value:new T.Vector3(0,0,-1)},
+   uTorchPower:{value:0},
+   uSignalPos:{value:new T.Vector3(4.2,2.65,-5.35)},
+   uSignalPower:{value:0},
+   uTrainPos:{value:new T.Vector3(-700,1.7,-7.5)},
+   uTrainPower:{value:0}
+  },
   transparent:true,depthWrite:false,side:T.DoubleSide,
-  vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-  fragmentShader:`varying vec2 vUv;uniform float uTime;
+  vertexShader:`varying vec2 vUv;varying vec3 vWorld;
+   void main(){vUv=uv;vWorld=(modelMatrix*vec4(position,1.)).xyz;
+     gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+  fragmentShader:`varying vec2 vUv;varying vec3 vWorld;
+   uniform float uTime,uTorchPower,uSignalPower,uTrainPower;
+   uniform vec3 uTorchPos,uTorchDir,uSignalPos,uTrainPos;
    float noise2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
    void main(){
      vec2 p=vUv;float t=uTime*.19;
@@ -133,7 +146,16 @@ function groundMist(seed=6){
      float trail=.73+.27*sin(p.x*19.-t+p.y*9.);
      float wisps=.82+.18*noise2(floor(vec2(p.x*22.+t,p.y*13.)));
      float a=.115*rim*nearGround*sides*trail*wisps;
-     gl_FragColor=vec4(.22,.26,.27,a);
+     // Light only the actual fog pixels caught in the flashlight cone.
+     vec3 ray=vWorld-uTorchPos;
+     float cone=dot(normalize(ray+vec3(0.00001)),normalize(uTorchDir));
+     float torchLight=smoothstep(.83,.98,cone)*max(0.,1.-length(ray)/26.)*uTorchPower;
+     float redLight=exp(-distance(vWorld,uSignalPos)*.31)*uSignalPower;
+     float trainLight=exp(-distance(vWorld,uTrainPos)*.14)*uTrainPower;
+     vec3 pigment=mix(vec3(.22,.26,.27),vec3(.66,.68,.65),
+       clamp(torchLight*.83+trainLight*.52,0.,1.));
+     pigment+=vec3(.22,.025,.018)*redLight;
+     gl_FragColor=vec4(pigment,min(.33,a*(1.+torchLight*.75+redLight*.25+trainLight*.3)));
    }`
  });
  for(let i=0;i<12;i++){
@@ -143,6 +165,16 @@ function groundMist(seed=6){
  }
  g.scale.x=.46;
  g.userData.tick=t=>{mat.uniforms.uTime.value=t;sheets.forEach(({m,x,i})=>{m.position.x=x+.17*Math.sin(t*.18-i*.34);m.rotation.y=.06*Math.sin(t*.16-i*.21);});};
+ g.userData.setLighting=({torchPosition,torchDirection,torchPower,signalPosition,signalPower,trainPosition,trainPower})=>{
+   const u=mat.uniforms;
+   u.uTorchPos.value.copy(torchPosition);
+   u.uTorchDir.value.copy(torchDirection);
+   u.uTorchPower.value=torchPower;
+   u.uSignalPos.value.copy(signalPosition);
+   u.uSignalPower.value=signalPower;
+   u.uTrainPos.value.copy(trainPosition);
+   u.uTrainPower.value=trainPower;
+ };
  return finish(g,0);
 }
 

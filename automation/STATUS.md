@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T06:22:44.648Z | МГЛ: 242afacdb7cccde4d4e8f962222dec68c5a6a90b | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44030651746
+UTC: 2026-11-17T06:23:54.560Z | МГЛ: 21ae4e2e5fe0201371b8b38e681dc5f807f73b08 | МГ: 0a58a2d0956a16d61cc86241e1a7e5dc680194d2 | https://github.com/mpaykin1/meta6-lab/actions/runs/44030817738
 ## ПРОВЕРИТЬ CLAUDE
 - PR #372 0e5d7893812d336299d041199deda50557a07395: scripts/karta-sil/mutate-current-claude-marker.mjs, scripts/karta-sil/mutate-karta-sil.mjs
 - PR #352 99a64541e458eb39f499c55655649abb87bf5bc8: scripts/meta-bot/core.mjs, scripts/meta-bot/mutate-viewports.mjs, scripts/platform/verify-meta-bot-config-candidate.mjs
@@ -37,8 +37,8 @@ L4 — не готов: НЕТ в таблице FINISH
 #359 docs: единый свод правил и идей для «Лучника в тумане» | 0a37a80d264aaac71832ab16d9ca82b306b7cec6
 ещё 68: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2684 коммитов | нет данных
-МГ: 40 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
+МГЛ: 2686 коммитов | нет данных
+МГ: 41 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет
@@ -56,4 +56,4 @@ wild-train-prologue — не прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 2026111702 | 17.11.2026 | Защищённое ядро META BOT `checkGame` возвращало `{ok:true,runs:[]}` при `viewports: []` или неизвестном экране — ложный успех без открытия игры | Воспроизведено на исходном `scripts/meta-bot/core.mjs` (PR #311, reports/bot-audit/PRO… (сокращено)
 | 2026111701 | 17.11.2026 | META BOT could report success for zero screens; actual game configuration now fails KONTUR before acceptance | empty viewports and unknown screen fixtures | scripts/platform/mutate-bot-config.mjs: 3 mutations and real game configurations |
-ещё 62: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+ещё 63: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

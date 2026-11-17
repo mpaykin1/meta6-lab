@@ -1,0 +1,190 @@
+{
+  "format": "mg-zakaz/1",
+  "game": "ink-fallen-guardian",
+  "source": {
+    "type": "game",
+    "from": "reference/ink-fallen-guardian/README.md: долина, город, осенний лес, озеро, робот, дождь и туман"
+  },
+  "items": [
+    {
+      "id": "brokenAqueduct",
+      "name_ru": "Разрушенный акведук",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны lakeside"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "каменные арки и проломы",
+        "настоящие контрфорсы и кладка"
+      ],
+      "priority": 1
+    },
+    {
+      "id": "reedBank",
+      "name_ru": "Камышовая заводь",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны lakeside"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "множество отдельных колышущихся стеблей",
+        "нет одинаковых зарослей"
+      ],
+      "priority": 1
+    },
+    {
+      "id": "ashStag",
+      "name_ru": "Пепельный олень",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны woodland"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "объёмный зверь с ветвистыми рогами",
+        "ноги шагают независимо"
+      ],
+      "priority": 1
+    },
+    {
+      "id": "pilgrimageBoat",
+      "name_ru": "Лодка паломника",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны lakeside"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "корпус из отдельных досок, парус и вёсла",
+        "качка на воде"
+      ],
+      "priority": 1
+    },
+    {
+      "id": "moonBell",
+      "name_ru": "Колокол без часов",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны guardian"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "покачивающийся колокол на двух колоннах",
+        "восстанавливает выносливость и разгоняет туман"
+      ],
+      "priority": 1
+    },
+    {
+      "id": "brokenWindmill",
+      "name_ru": "Осенняя мельница",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны meadow"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "каменная башня, деревянные паруса",
+        "живое медленное вращение"
+      ],
+      "priority": 1
+    },
+    {
+      "id": "myceliumBloom",
+      "name_ru": "Грибной хоровод",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны woodland"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "грибы разной высоты и формы",
+        "покачивание шляпок с разной фазой"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "drownedGates",
+      "name_ru": "Затопленные врата",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны lakeside"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "две каменные башни, арка",
+        "мох, руны и разрушенная кладка"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "cogRelic",
+      "name_ru": "Сердце шестерни",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны guardian"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "механизм с зубцами и спицами",
+        "полезное зрение в тумане"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "ravenCoven",
+      "name_ru": "Вороны над озером",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны lakeside"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "стая из девяти отдельных птиц",
+        "каждая машет крыльями с задержкой"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "paperMoths",
+      "name_ru": "Бумажные мотыльки",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны woodland"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "роящийся светлый рисунок бабочек",
+        "крылья работают отдельно от тел"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "marshBeacon",
+      "name_ru": "Туманный маяк",
+      "kind": "3d",
+      "source": {
+        "type": "game",
+        "from": "reference/ink-fallen-guardian/README.md и SPEC.md §INK; новые объекты для зоны lakeside"
+      },
+      "from": "reference/ink-fallen-guardian/README.md; SPEC.md §INK",
+      "must": [
+        "каменная башня с окнами",
+        "живой вращающийся огонь на вершине"
+      ],
+      "priority": 2
+    }
+  ]
+}

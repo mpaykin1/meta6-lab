@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T16:40:15.484Z",
+  "generated_at": "2026-11-17T21:22:41.090Z",
   "sha": {
-    "lab": "1dd4ec72395f688d77a6c3aa3a7a6b0f1d07385f",
+    "lab": "c67c098ec56cf18e5d6f36c23606557b9b40dcf0",
     "mg": "2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44127917450",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44178905607",
   "review": {
     "protected": [
       {
@@ -28,10 +28,7 @@
       {
         "number": 372,
         "sha": "0e5d7893812d336299d041199deda50557a07395",
-        "paths": [
-          "scripts/karta-sil/mutate-current-claude-marker.mjs",
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 352,
@@ -369,7 +366,7 @@
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
-      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
+      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
       "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
       "| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |",
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
@@ -513,7 +510,7 @@
     }
   },
   "pr": {
-    "open": 50,
+    "open": 55,
     "conflicts": "нет данных",
     "merged": 80,
     "closed": 121,
@@ -937,10 +934,7 @@
       {
         "number": 372,
         "sha": "0e5d7893812d336299d041199deda50557a07395",
-        "paths": [
-          "scripts/karta-sil/mutate-current-claude-marker.mjs",
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
+        "paths": "нет данных"
       },
       {
         "number": 352,
@@ -1271,7 +1265,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2825,
+      "count": 2830,
       "folders": "нет данных"
     },
     "mg": {

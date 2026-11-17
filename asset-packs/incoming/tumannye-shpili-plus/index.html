@@ -52,7 +52,7 @@ renderer.setPixelRatio(1);renderer.autoClear=true;renderer.setClearColor(0x06182
 /* ============ СОСТАВ ПАКА (скрытый счётчик, виден только в коде/консоли) ============ */
 const GX=15,GY=45,GZ=-44;                       // врата
 const PLAZA={cam:[0,1.3,14],look:[0,8,-60]};
-const PACK={name:'Туманные шпили',version:'1.2.3',items:[
+const PACK={name:'Туманные шпили',version:'1.2.4',items:[
  {id:'sky',n:'Небо и световые столбы',k:'2D',m:'plaza',cam:[0,6,14],look:[0,40,-80]},
  {id:'fog',n:'Слои тумана',k:'2D',m:'plaza',cam:[-6,5,6],look:[-4,7,-50]},
  {id:'obelisk',n:'Обелиск-гигант',k:'2.5D',m:'plaza',cam:[0,10,-14],look:[0,42,-78]},
@@ -85,7 +85,8 @@ const PACK={name:'Туманные шпили',version:'1.2.3',items:[
  {id:'gate-bridge',n:'Разрушенный акведук над зеркальной водой',k:'2.5D',m:'plaza',cam:[12,14,8],look:[12,13,-40],isNew:true},
  {id:'dawn-sentinel',n:'Крылатый каменный хранитель',k:'2.5D',m:'flight',follow:'hero',d:13,isNew:true},
  {id:'mirror-seed',n:'Сердце зеркальной воды — реликварий',k:'2.5D',m:'flight',cam:[3,45,-19],look:[3,43,-40],isNew:true},
- {id:'storm-heart',n:'Багровая гроза над шпилями',k:'2D',m:'plaza',cam:[-34,48,-14],look:[-34,46,-43],isNew:true}
+ {id:'storm-heart',n:'Багровая гроза над шпилями',k:'2D',m:'plaza',cam:[-34,48,-14],look:[-34,46,-43],isNew:true},
+ {id:'twinTowers',n:'Башни-близнецы собора',k:'3D',m:'plaza',cam:[-44,24,-18],look:[-44,21,-56],isNew:true}
 ]};
 PACK.count=PACK.items.length;PACK.by={d2:PACK.items.filter(i=>i.k==='2D').length,d25:PACK.items.filter(i=>i.k==='2.5D').length,d3:PACK.items.filter(i=>i.k==='3D').length};
 window.__PACK__=PACK;try{console.info('[PACK]',PACK.name,PACK.version,'ассетов:',PACK.count,PACK.by)}catch(e){}
@@ -1411,6 +1412,125 @@ const SHPILI_PLUS=(()=>{
      }petals(t);
    };
  }
+
+ // ЗАКАЗ twinTowers: две несимметричные готические башни с настоящей глубиной.
+ {
+   const id='twinTowers',g=newGroup(id,-44,0,-56),R=rng(71423),windows=[],streamers=[];
+   const weathered=mk(256,256,(x,w,h)=>{
+     x.fillStyle='#6e8495';x.fillRect(0,0,w,h);
+     for(let i=0;i<970;i++){
+       x.globalAlpha=.14+R()*.32;
+       x.fillStyle=['#182d42','#aec2be','#354b60','#90a5af'][i%4];
+       x.fillRect(R()*w,R()*h,1+R()*21,1+R()*4);
+     }
+     x.globalAlpha=1;
+     for(let i=0;i<65;i++){
+       x.beginPath();let px=R()*w,py=R()*h;
+       x.moveTo(px,py);x.lineTo(px+(R()-.5)*20,py+5+R()*27);
+       x.strokeStyle='#12263b';x.lineWidth=.6+R()*1.5;x.stroke();
+     }
+   });
+   const stone=new T.MeshLambertMaterial({map:weathered,color:0x52758b,side:T.DoubleSide}),
+         ridge=new T.MeshLambertMaterial({map:weathered,color:0x9ab5bc,side:T.DoubleSide}),
+         shade=basic(0x091a2e);
+   const poly=(p,pts,z,depth,mat)=>{
+     const sh=new T.Shape();pts.forEach((q,i)=>i?sh.lineTo(q[0],q[1]):sh.moveTo(q[0],q[1]));sh.closePath();
+     const m=new T.Mesh(new T.ExtrudeGeometry(sh,{depth,steps:1,bevelEnabled:true,
+       bevelSize:.08,bevelThickness:.08,bevelSegments:1}),mat);
+     m.position.z=z;p.add(m);return m;
+   };
+   const lancet=(p,x,y,w,phase)=>{
+     const outline=[[x-w*.47,y],[x-w*.47,y+w*1.1],[x,y+w*1.9],
+       [x+w*.47,y+w*1.1],[x+w*.47,y]];
+     poly(p,outline,1.76,.03,shade);
+     const glow=new T.MeshBasicMaterial({color:0x9de8ec,transparent:true,opacity:.6,
+       side:T.DoubleSide,depthWrite:false,blending:T.AdditiveBlending});
+     const a=poly(p,outline.map(q=>[x+(q[0]-x)*.59,y+(q[1]-y)*.86]),1.83,.012,glow);
+     windows.push({m:a,phase});
+     poly(p,[[x-w*.045,y],[x+w*.045,y],[x+w*.045,y+w*1.4],
+       [x-w*.045,y+w*1.4]],1.87,.022,ridge);
+   };
+   const tier=(p,w,y,h,salt)=>{
+     const offset=i=>.15*Math.sin(salt*1.9+i*2.11);
+     poly(p,[[-w*.52,y+offset(1)],[w*.51,y+offset(2)],
+       [w*.47,y+h*.84+offset(3)],[w*.39,y+h+offset(4)],
+       [-w*.42,y+h+offset(5)],[-w*.53,y+h*.78+offset(6)]],-1.45,2.9,stone);
+     poly(p,[[-w*.6,y+h-.21],[w*.59,y+h-.2],[w*.56,y+h+.16],
+       [-w*.57,y+h+.17]],1.44,.17,ridge);
+   };
+   const pinnacle=(p,x,y,w,h,broken)=>{
+     const q=broken?[[x-w*.5,y],[x-w*.42,y+h*.7],[x-w*.18,y+h*.86],
+       [x+.03,y+h*.63],[x+w*.29,y+h],[x+w*.47,y+h*.82],[x+w*.5,y]]:
+       [[x-w*.5,y],[x-w*.36,y+h*.19],[x-w*.18,y+h*.56],
+       [x,y+h],[x+w*.2,y+h*.61],[x+w*.41,y+h*.2],[x+w*.51,y]];
+     poly(p,q,-.88,1.8,stone);
+     for(let j=0;j<4;j++)poly(p,[[x+(j-2)*w*.17,y+h*.22],
+       [x+(j-1.2)*w*.17,y+h*.22],[x+(j-1.5)*w*.17,y+h*.47]],1.02,.13,ridge);
+   };
+   const tower=(x,H,seed,broken)=>{
+     const t=new T.Group();t.position.set(x,0,broken?-1.6:0);g.add(t);
+     const W=broken?5.25:4.45,levels=6,step=(H-(broken?5:9))/levels;
+     for(let i=0;i<levels;i++){
+       const w=W*(1-i*.08),y=i*step;
+       tier(t,w,y,step+.12,seed+i);
+       if(i>0)for(let j=-1;j<=1;j++)lancet(t,j*w*.26,y+.68,.77+i*.035,seed+i*7+j);
+       for(let side of [-1,1]){
+         const b=side*w*.58;
+         poly(t,[[b-side*.37,y],[b+side*.32,y],
+           [b+side*.27,y+step*.8],[b,y+step+1.05],
+           [b-side*.26,y+step*.77]],.85,.95,stone);
+       }
+     }
+     for(const side of [-1,1]){
+       const bx=side*W*.7;
+       poly(t,[[bx-.55,0],[bx+.55,0],[bx+.4,H*.47],
+         [bx+side*.12,H*.62],[bx-.4,H*.43]],.22,1.72,stone);
+       for(let k=0;k<4;k++){
+         const y=H*(.06+.11*k);
+         mesh(t,new T.BoxGeometry(1.35,.12,2.02),k%2?0x304e66:0x7897a7,[bx,y,1.03]);
+       }
+     }
+     pinnacle(t,0,H-(broken?5:9)-.16,W*.91,broken?6:9.3,broken);
+     for(let j=0;j<9;j++){
+       const px=(R()-.5)*W*.72,py=H*(.2+R()*.68);
+       const frag=mesh(t,new T.TetrahedronGeometry(.12+R()*.2,0),
+         j%3?0x91a7b2:0x173149,[px,py,1.83]);
+       frag.rotation.z=R()*6.28;
+     }
+   };
+   tower(-5.5,36,13,false);
+   tower(5.2,31,79,true);
+   // Летящие контрфорсы между башнями не закрывают просветы.
+   for(const level of [14,23]){
+     for(let k=0;k<6;k++){
+       const x=-2.8+k*1.1,archY=level+3*Math.sin(k/6*Math.PI);
+       beam(g,[x,archY,1.3],[x+1.1,level+3*Math.sin((k+1)/6*Math.PI),1.1],
+         .13,k%2?0xabc2c9:0x435f73,.93);
+     }
+   }
+   for(const pos of [[-6.6,28],[4,26]]){
+     const p=new T.Group();p.position.set(pos[0],pos[1],2);g.add(p);
+     streamers.push(banners(p,2,3.2,0x6e92aa,420+pos[1]));
+   }
+   // Низ погружается в объёмную дымку, без прямоугольной рамки.
+   const fog=new T.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,
+     side:T.DoubleSide,uniforms:{uT:U.t},vertexShader:VS,fragmentShader:NOISE+
+     'uniform float uT;varying vec2 vUv;void main(){vec2 p=vUv-vec2(.5,.24);'+
+     'float n=fbm(vec2(vUv.x*6.+uT*.025,vUv.y*4.));'+
+     'float a=1.-smoothstep(.26,.74,length(p*vec2(1.42,.91))+.14*(n-.5));'+
+     'gl_FragColor=vec4(mix(vec3(.013,.03,.055),vec3(.059,.13,.17),n),'+
+     'a*(1.-smoothstep(.13,.9,vUv.y))*.68);}'});
+   const veil=new T.Mesh(new T.PlaneGeometry(25,11),fog);
+   veil.position.set(0,4,4);veil.renderOrder=45;g.add(veil);
+   own[id].tick=t=>{
+     for(let i=0;i<windows.length;i++){
+       const a=windows[i];
+       a.m.material.opacity=.33+.4*(.5+.5*Math.sin(t*(.42+i%7*.13)-a.phase*2.8));
+     }
+     for(const f of streamers)f(t);
+   };
+ }
+
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;

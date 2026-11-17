@@ -121,6 +121,18 @@ export async function resolveConflict(pr,reload,prior,sleep=ms=>new Promise(done
  if(current.mergeable===null)return {pr:current,conflict:prior,unresolved:true,retries};
  return {pr:current,conflict:current.mergeable===false||current.mergeable_state==='dirty',unresolved:false,retries};
 }
+// Z01: only nominate abandoned experiments for human review; never close PRs automatically.
+export function archiveCandidate({pr,lastCommit,failed,isFinish=false,now=Date.now()}) {
+ if (!pr || pr.state !== 'open' || pr.draft !== true) return false;
+ const ownerPass = /\\bOWNER PASS\\b/i.test(String(pr.title || '')+'\\n'+String(pr.body || ''));
+ if (isFinish || ownerPass) return false;
+ const date = Date.parse(lastCommit);
+ if (!Number.isFinite(date) || !Number.isFinite(now)) throw Error('нет данных: дата коммита PR');
+ const stale = now - date > 48 * 60 * 60 * 1000;
+ if (!stale) return false;
+ if (!Array.isArray(failed) || failed.some(x=>!x || typeof x.name !== 'string')) throw Error('нет данных: проверки PR');
+ return failed.some(({url}) => !/build-rate-limit|api-deployments-free-per-day/i.test(String(url || '')));
+}
 export function assertNotEmpty(tasksMarkdown,cards){
  if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
 }
@@ -170,6 +182,7 @@ export async function main(){
  c.priority=(conflict||conflictUnknown)?0:failed.length?1:stalled?2:3;
  c.problem=conflict?(resolution.unresolved?'Конфликт с main (прошлый статус, mergeable=null)':'Конфликт с main'):conflictUnknown?'Статус конфликта неизвестен: mergeable=null после 3 повторов':failed.length?'Красная проверка: '+failed.map(x=>x.name+' ('+x.url+')').join(', '):stalled?'🛑 ЗАВИС':'💤 ЗАБРОШЕНО более 2 суток';
  c.action=conflict?'Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.':conflictUnknown?'Проверь конфликт вручную: GitHub не ответил после 3 повторов; не считай PR бесконфликтным.':failed.length?'Исправь '+failed[0].name+' по логу '+failed[0].url+' и повтори CI.':stalled?'Продолжи работу по PR, проверь CI и доведи до слияния.':c.finish?'Доведи пункт FINISH.md до зелёных проверок.':'Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.';
+ if (archiveCandidate({pr,lastCommit,failed,isFinish})) c.action='Z01, п. 9: подтвердить отсутствие полной зелёной приёмки и ссылки FINISH, затем закрыть с комментарием и ссылкой на сохранённую ветку. Автоматически не закрывать.';
  const routing=routeFor(c,map);
  c.routing=routing;
  if(routing.target==='claude'){claude.push(c);continue;}

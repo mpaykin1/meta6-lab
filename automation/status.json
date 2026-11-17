@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T15:58:53.752Z",
+  "generated_at": "2026-11-17T02:17:15.853Z",
   "sha": {
     "lab": "нет данных",
     "mg": "нет данных"
@@ -8,7 +8,7 @@
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44001814323",
   "review": {
     "protected": "нет данных",
     "redLab": "нет данных",
@@ -35,49 +35,29 @@
       "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |",
       "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |",
       "| УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |",
+      "| B2 ч.2 broken-city (PR #291, оптимизация FPS и реальная вариативность) | lab/polza-b2-broken-city-20261113 | свободно (зависло 10 ч, было: чат ChatGPT (B2 Broken City, коммит 745469b)) | 2026-11-16T10:27:47.171Z |",
       "| CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | свободно (зависло 7 ч, было: чат ChatGPT — продолжение #299, очередь Actions) | 2026-11-14T06:25:04Z |",
       "| STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | свободно (зависло 7 ч, было: чат ChatGPT — обновление #302 после API budget) | 2026-11-14T06:08:21Z |",
       "| LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | свободно (зависло 4 ч, было: чат ChatGPT — продолжение PR #300, merge свежего main) | 2026-11-14T06:22:06Z |",
-      "| PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:17 UTC |"
+      "| PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:17 UTC |",
+      "| B2 Archer #264 — read-only adapter | lab/archer-retention-exp-1-game | свободно (зависло 8 ч, было: чат ChatGPT (продолжение B2 без нового PR, только наблюдение)) | 2026-11-16T12:35:00Z |"
     ]
   },
   "finish": {
-    "ready": [],
+    "ready": [
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "B1",
+      "P1"
+    ],
     "pending": [
-      {
-        "id": "M1",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036"
-      },
-      {
-        "id": "M2",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685"
-      },
-      {
-        "id": "M3",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
-      },
-      {
-        "id": "M4",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211"
-      },
-      {
-        "id": "M5",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211"
-      },
       {
         "id": "M6",
         "value": "не готов",
         "reason": "НЕТ в таблице FINISH"
-      },
-      {
-        "id": "B1",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082"
       },
       {
         "id": "B2",
@@ -128,14 +108,54 @@
         "id": "L4",
         "value": "не готов",
         "reason": "НЕТ в таблице FINISH"
-      },
-      {
-        "id": "P1",
-        "value": "не подтверждено",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308"
       }
     ],
-    "proofs": {}
+    "proofs": {
+      "M1": "https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036",
+      "M2": "https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685",
+      "M3": "https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
+      "M4": "https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211",
+      "M5": "https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
+      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082",
+      "P1": "https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308"
+    },
+    "verification": {
+      "M1": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42637860036"
+      },
+      "M2": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42641995685"
+      },
+      "M3": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211"
+      },
+      "M4": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211"
+      },
+      "M5": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211"
+      },
+      "B1": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082"
+      },
+      "P1": {
+        "value": "нет данных",
+        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308"
+      }
+    }
   },
   "pr": {
     "open": "нет данных",

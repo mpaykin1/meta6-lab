@@ -6,7 +6,7 @@
 
 | Пункт | Ветка | Кто | С какого времени (UTC) |
 |---|---|---|
-| НАДЗОР — чат ChatGPT | lab/nadzor | чат ChatGPT | 2026-11-16T14:18:43Z |
+| НАДЗОР — чат ChatGPT | lab/nadzor | чат ChatGPT (надзор) | 2026-11-17T01:33:05.414Z |
 | КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |
 | БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |
 | КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |
@@ -18,10 +18,10 @@
 | L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |
 | B2 ч.3 (универсальная проверка движения) | lab/prohodchik-b2-motion-20261111 | свободно (B2 PASS; историческая подпись Claude) | 2026-11-16T03:59:10.754Z |
 | УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |
-| B2 ч.2 broken-city (PR #291, оптимизация FPS и реальная вариативность) | lab/polza-b2-broken-city-20261113 | чат ChatGPT (B2 Broken City, коммит 745469b) | 2026-11-16T10:27:47.171Z |
+| B2 ч.2 broken-city (PR #291, оптимизация FPS и реальная вариативность) | lab/polza-b2-broken-city-20261113 | свободно (зависло 10 ч, было: чат ChatGPT (B2 Broken City, коммит 745469b)) | 2026-11-16T10:27:47.171Z |
 | CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | свободно (зависло 7 ч, было: чат ChatGPT — продолжение #299, очередь Actions) | 2026-11-14T06:25:04Z |
 | STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | свободно (зависло 7 ч, было: чат ChatGPT — обновление #302 после API budget) | 2026-11-14T06:08:21Z |
 | LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | свободно (зависло 4 ч, было: чат ChatGPT — продолжение PR #300, merge свежего main) | 2026-11-14T06:22:06Z |
 | PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:17 UTC |
 | РАЗБОР ЗАВАЛОВ — чат ChatGPT | `lab/razbor-zavalov` | чат ChatGPT | 2026-11-15T18:38:00.615Z |
-| B2 Archer #264 — read-only adapter | lab/archer-retention-exp-1-game | чат ChatGPT (продолжение B2 без нового PR, только наблюдение) | 2026-11-16T12:35:00Z |
+| B2 Archer #264 — read-only adapter | lab/archer-retention-exp-1-game | свободно (зависло 8 ч, было: чат ChatGPT (продолжение B2 без нового PR, только наблюдение)) | 2026-11-16T12:35:00Z |

@@ -6,6 +6,12 @@ export function routeFor(card, map) {
     return {target:'claude',zone:'передано Claude',note:'две неудачи или передано Claude'};
   }
 
+  // Внешняя бесплатная квота Vercel не является дефектом кода: не выдавать её автозадачам.
+  const externalQuota = /(?:^|[\s(])https:\/\/vercel\.com\/improve-world\?upgradeToPro=build-rate-limit(?=[\s),]|$)/.test(String(card.problem || ''));
+  if (externalQuota) {
+    return {target:'chat',zone:'внешняя квота',note:'Vercel build-rate-limit: ожидать бесплатного восстановления квоты; код и проверки не менять'};
+  }
+
   if (!usableMap(map)) {
     return {target:'chat',zone:'нет данных',note:'Карта недоступна; без автоматической выдачи'};
   }

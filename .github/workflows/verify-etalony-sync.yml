@@ -1,0 +1,40 @@
+name: OWNER PASS references sync
+on:
+  pull_request:
+    paths:
+      - 'reference/**'
+      - 'scripts/platform/verify-etalony-sync.mjs'
+      - 'scripts/platform/mutate-etalony-sync.mjs'
+      - '.github/workflows/verify-etalony-sync.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'reference/**'
+      - 'scripts/platform/verify-etalony-sync.mjs'
+      - 'scripts/platform/mutate-etalony-sync.mjs'
+  schedule:
+    - cron: '15 3 * * *'
+  workflow_dispatch:
+concurrency:
+  group: owner-pass-sync-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Mutation traps
+        run: node scripts/platform/mutate-etalony-sync.mjs
+      - name: Fetch accepted MG references (sparse Git, no API quota)
+        run: |
+          git clone --depth=1 --filter=blob:none --sparse https://github.com/mpaykin1/meta6.git "$RUNNER_TEMP/meta6-source"
+          git -C "$RUNNER_TEMP/meta6-source" sparse-checkout set reference
+          test -s "$RUNNER_TEMP/meta6-source/AGENTS.md"
+      - name: Byte-for-byte OWNER PASS sync
+        run: node scripts/platform/verify-etalony-sync.mjs --mg-root "$RUNNER_TEMP/meta6-source"

@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-16T15:58:53.752Z | МГЛ: нет данных | МГ: нет данных | нет данных
+UTC: 2026-11-17T02:17:15.853Z | МГЛ: нет данных | МГ: нет данных | https://github.com/mpaykin1/meta6-lab/actions/runs/44001814323
 ## ПРОВЕРИТЬ CLAUDE
 - нет данных
 - МГЛ: нет данных
@@ -21,16 +21,17 @@ UTC: 2026-11-16T15:58:53.752Z | МГЛ: нет данных | МГ: нет да�
 - | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |
 - | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |
 - | Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |
-- ещё 6: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
+- ещё 8: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
-готовы: ничего
-M1 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
-M2 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
-M3 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
-M4 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211
-M5 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
+готовы по FINISH.md: M1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036)), M2 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685)), M3 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211)), M4 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211)), M5 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211)), B1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082)), P1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308))
+Actions M1: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42637860036): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
+Actions M2: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42641995685): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
+Actions M3: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
+Actions M4: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211
+Actions M5: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
+Actions B1: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082
+Actions P1: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 M6 — не готов: НЕТ в таблице FINISH
-B1 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082
 B2 — не готов: НЕТ в таблице FINISH
 B3 — не готов: НЕТ в таблице FINISH
 B4 — не готов: НЕТ в таблице FINISH
@@ -41,7 +42,6 @@ L1 — не готов: НЕТ в таблице FINISH
 L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
-P1 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 ## PR МГЛ
 открыто: нет данных | конфликт: нет данных | слито: нет данных | закрыто: нет данных
 нет данных

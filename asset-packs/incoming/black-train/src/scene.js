@@ -129,9 +129,11 @@ const treesBig=[
  placeAsset('gnarledTree',127,-13,0,-23,1.6)
 ];
 placeAsset('hangingChains',41,-7.5,2,-13);
-placeAsset('groundMist',43,0,0,-8.2);
-placeAsset('groundMist',53,8,0,-15);
-placeAsset('groundMist',59,-8,0,-15.5);
+const mistLayers=[
+ placeAsset('groundMist',43,0,0,-8.2),
+ placeAsset('groundMist',53,8,0,-15),
+ placeAsset('groundMist',59,-8,0,-15.5)
+];
 placeAsset('stormClouds',61,-1,7,-22);
 placeAsset('stormClouds',67,4,9,-29);
 placeAsset('brokenFence',71,-3.1,0,-12.8);
@@ -147,12 +149,25 @@ placeAsset('crossingBell',95,5.3,0,-5.6);
 placeAsset('chainsClank',97,-8.6,0,-13.3);
 
 const crossingSounds=createCrossingSounds();
+const fogTorchDir=new T.Vector3(),fogSignalPos=new T.Vector3(),fogTrainPos=new T.Vector3();
 function advanceNightAssets(dt){
  for(const item of livingAssets)if(item.visible)item.userData.tick(elapsed,dt);
  const approach=TR.active?Math.max(0,1-Math.abs(TR.x-5)/180):0;
  signal.userData.setApproach(approach,elapsed);
  farLamp.userData.setApproach(approach*.55,elapsed);
  railReflections.userData.setApproach(approach,elapsed);
+ // GPU-only local illumination: mist glows in the flashlight cone and catches red rail signals.
+ camera.getWorldDirection(fogTorchDir);
+ signal.localToWorld(fogSignalPos.set(0,2.65,.3));
+ fogTrainPos.set(TR.x,1.7,TRACK_Z);
+ const light={
+  torchPosition:camera.position,torchDirection:fogTorchDir,
+  torchPower:Math.min(1,torch.intensity/520),
+  signalPosition:fogSignalPos,
+  signalPower:T.MathUtils.clamp((signal.userData.lightLevel-.09)/4.3,0,1),
+  trainPosition:fogTrainPos,trainPower:trainLoud
+ };
+ for(const mist of mistLayers)if(mist.visible)mist.userData.setLighting(light);
  crossingSounds.update({time:elapsed,approach,enabled:audio.enabled,state});
 }
 

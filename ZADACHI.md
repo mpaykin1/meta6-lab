@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Z04 B2: извлечь проверку настоящего движения из PR #258 в отдельный безопасный PR | МГЛ | чат ChatGPT | `lab/z04-b2-extract-motion-20261117` | — | 2026-11-17T02:24:34.332Z | — |
 | взято | Z01: PR #270 — сохранить исходный Library Machine guard при проверке камеры Veil Terraces | МГЛ | чат ChatGPT | `lab/biblioteka-veil-camera-20261112` | [#270](https://github.com/mpaykin1/meta6-lab/pull/270) | 2026-11-17 02:23 UTC | — |
 | взято | Ремонт PR #319: source-only Library Machine, устранить блокер и сохранить ловушки | МГЛ | чат ChatGPT | `lab/library-source-only-probe-20261114` | [#319](https://github.com/mpaykin1/meta6-lab/pull/319) | 2026-11-17 02:23 UTC | — |
 | 🛑 ЗАВИС 12+ ч — ТОЛКНУТЬ | Archer #1: visible dragon aim beacon and early attack warning (2.0.1) | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/archer-retention-exp-1-game` | [#264](https://github.com/mpaykin1/meta6-lab/pull/264) | 2026-11-11 15:00 | 2026-11-16 13:01 |

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T08:06:58.918Z",
+  "generated_at": "2026-11-17T08:11:33.991Z",
   "sha": {
-    "lab": "08d7cd3bedbbe588d9b3ab89bd5f89d4360cb625",
+    "lab": "ad5bebf3eb5b68d3cc0c6bd8ac63ab26a563cb88",
     "mg": "aa63d1def02bcca2ddf7f3161add508255df824c"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44043851245",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44044527049",
   "review": {
     "protected": [
       {
@@ -498,11 +498,16 @@
     }
   },
   "pr": {
-    "open": 45,
-    "conflicts": "нет данных",
-    "merged": 73,
+    "open": 44,
+    "conflicts": 32,
+    "merged": 74,
     "closed": 116,
     "mergedItems": [
+      {
+        "number": 369,
+        "title": "docs(z01): verify live PR identity before backlog decisions",
+        "sha": "ad5bebf3eb5b68d3cc0c6bd8ac63ab26a563cb88"
+      },
       {
         "number": 362,
         "title": "feat(3d-master): профессиональный аудит glTF геометрии (част",
@@ -1214,7 +1219,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2726,
+      "count": 2728,
       "folders": "нет данных"
     },
     "mg": {

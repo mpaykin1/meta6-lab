@@ -14,7 +14,6 @@ META BOT: исходный checkGame принимает viewports=[] и возв
 | #277 | lab/storozha-nedelya | .github/workflows/storozha-branches.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-reference.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-tests.yml: изменение ЯДРА охраны — только Claude; scripts/storozha/branch-watch.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/weekly-watch.mjs: изменение ЯДРА охраны — только Claude | 2026-11-15 |
 | #247 | lab/kak-proveryayushchij-traps | scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude | 2026-11-15 |
 | #248 | lab/pr-autofinish-followup-1111 | .github/workflows/pr-autofinish.yml: изменение ЯДРА охраны — только Claude | 2026-11-15 |
-| #270 | lab/biblioteka-veil-camera-20261112 | scripts/library/verify-library.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-16 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

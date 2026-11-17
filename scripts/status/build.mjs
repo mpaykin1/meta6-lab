@@ -306,6 +306,43 @@ export async function finishSummary(stageOne, stageTwo, getRun = request) {
   return { ready, pending, proofs };
 }
 
+// FINISH.md is the single source of accepted statuses. Actions verification is
+// diagnostic and may be unavailable independently; never overwrite Claude's
+// accepted verdict with an API error (or falsely claim a fresh main PASS).
+export function canonicalFinish(stageOne, checked) {
+  const rows = finishTableStatus(stageOne);
+  if (!rows || rows.length !== 18 ||
+      new Set(rows.map(row => row.id)).size !== rows.length) return UNKNOWN;
+  const ready = [];
+  const pending = [];
+  const proofs = {};
+  const verification = {};
+  for (const { id, status, evidence } of rows) {
+    const isGreen = /^ЗЕЛЁНАЯ(?:\s|$)/.test(status) && evidence?.repo === LAB;
+    if (isGreen) {
+      ready.push(id);
+      proofs[id] = evidence.url;
+      const confirmed = checked !== UNKNOWN && checked?.ready?.includes(id);
+      const issue = checked !== UNKNOWN ? checked?.pending?.find(row => row.id === id) : null;
+      const apiUnavailable = !issue || issue.reason?.startsWith('GitHub недоступен');
+      verification[id] = confirmed
+        ? { value: 'подтверждено', url: checked.proofs[id] }
+        : {
+          value: apiUnavailable ? UNKNOWN : 'не подтверждено',
+          reason: issue?.reason || 'Нет ответа от GitHub API',
+          url: ROOT + '/repos/' + LAB + '/actions/runs/' + evidence.run
+        };
+    } else if (/^НЕТ(?:\s|$)/.test(status)) {
+      pending.push({ id, value: 'не готов', reason: 'НЕТ в таблице FINISH' });
+    } else if (/^ГОТОВО ДЛЯ CLAUDE(?:\s|$)/.test(status)) {
+      pending.push({ id, value: 'ждёт Claude', reason: status });
+    } else {
+      pending.push({ id, value: UNKNOWN, reason: 'Некорректный статус или ссылка в FINISH.md' });
+    }
+  }
+  return { ready, pending, proofs, verification };
+}
+
 async function lastBotGameStates() {
   const answer = await request('/repos/' + LAB +
     '/actions/workflows/meta-bot.yml/runs?branch=main&status=completed&per_page=1');
@@ -401,8 +438,14 @@ function render(data, cap = 99) {
   md.push('## ФИНИШ');
   if (data.finish === UNKNOWN) md.push(UNKNOWN);
   else {
-    md.push('готовы: ' + (data.finish.ready.map(id =>
-      id + ' ([main](' + data.finish.proofs[id] + '))').join(', ') || 'ничего'));
+    md.push('готовы по FINISH.md: ' + (data.finish.ready.map(id =>
+      id + ' ([источник](' + data.finish.proofs[id] + '))').join(', ') || 'ничего'));
+    md.push(...data.finish.ready.map(id => {
+      const proof = data.finish.verification[id];
+      return 'Actions ' + id + ': ' + proof.value +
+        (proof.value === 'подтверждено' ? ' (' + proof.url + ')' :
+          ' (' + proof.url + '): ' + shortLine(proof.reason, 95));
+    }));
     md.push(...data.finish.pending.map(x =>
       x.id + ' — ' + x.value + (x.reason ? ': ' + shortLine(x.reason, 130) : '')));
   }
@@ -453,7 +496,8 @@ export async function build() {
     checked: { lab: labChecked || UNKNOWN, mg: mgChecked || UNKNOWN },
     run: process.env.STATUS_RUN_URL || UNKNOWN,
     review: { protected: prData.protectedItems, redLab, redMg, sliyanie: sl, stalled: st },
-    finish: await finishSummary(read('rules/09-platforma/FINISH.md'), read('rules/09-platforma/FINISH_2.md')),
+    finish: canonicalFinish(read('rules/09-platforma/FINISH.md'),
+      await finishSummary(read('rules/09-platforma/FINISH.md'), read('rules/09-platforma/FINISH_2.md'))),
     pr: prData,
     changes: { lab: normalizeChanges(changeLab), mg: normalizeChanges(changeMg) },
     games,

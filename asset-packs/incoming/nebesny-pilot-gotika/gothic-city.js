@@ -392,5 +392,27 @@ window.GothicCity = (() => {
     rect(c,'#ffcf83',24,11,5,5);
     for(let n=0;n<4;n++){rect(c,'#ffe1a7',7,22+n*10,3,3);rect(c,'#ffe1a7',44,22+n*10,3,3);}
   }
-  return {drawBackground, addRenderItems, gate, drawCloudsAndBoats, paintTransition, onRing};
+  function drawBonusAt(q, scale){
+    if(!sheets.rosetteBonus){g.drawImage(gate,-27,-35);return;}
+    const frame=(Math.floor(t*4)%8+8)%8;
+    g.drawImage(sheets.rosetteBonus,frame*48,0,48,48,-24,-24,48,48);
+  }
+  function drawShield(){
+    if(!P.shield || P.shield<=0) return;
+    const q=proj(P.x,P.y,P.z+Math.sin(t*1.7)*1.4);
+    if(!q)return;
+    g.save();g.globalAlpha=Math.min(.65,P.shield*.32);
+    const r=q[2]*20;
+    g.setTransform(1,0,0,1,q[0],q[1]);
+    g.strokeStyle='#ffe1a0';g.lineWidth=Math.max(1,q[2]*2);
+    g.beginPath();
+    for(let j=0;j<=12;j++){
+      const angle=(j/12)*TAU+t*.5;
+      const x=Math.cos(angle)*(r+Math.sin(j+t*4)*2);
+      const y=Math.sin(angle)*(r+Math.sin(j+t*4)*2);
+      if(!j)g.moveTo(x,y);else g.lineTo(x,y);
+    }
+    g.stroke();g.restore();
+  }
+  return {drawBackground, addRenderItems, gate, drawCloudsAndBoats, paintTransition, onRing, drawBonusAt, drawShield};
 })();

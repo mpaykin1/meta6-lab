@@ -104,7 +104,16 @@ def baseline(base: Path):
 def check(root: Path, r) -> set:
     pj = json.loads((root / "pack.json").read_text("utf-8"))
     covered = {"pack.json", "makers.js", "README.md"}
-    base = (REPO / pj.get("base", DEFAULT_BASE)).resolve()
+    requested_base = pj.get("base", DEFAULT_BASE)
+    night = requested_base == "reference/ink-night-scream"
+    # Night Scream reuses the accepted Guardian INK renderer and Three.js module.
+    # The night-game reference owns the train, monster and gameplay, not an additional copy of Three.js.
+    if night and not (REPO / requested_base / "src" / "scene.js").exists():
+        r.add("IK1", "HARD", "pack.json", "ночной эталон не найден",
+              "Для BLACK TRAIN нужен reference/ink-night-scream/src/scene.js")
+        return covered
+    renderer_base = DEFAULT_BASE if night else requested_base
+    base = (REPO / renderer_base).resolve()
     if not (base / "three.module.js").exists():
         r.add("IK1", "HARD", "pack.json", f"эталон INK не найден: {pj.get('base', DEFAULT_BASE)}",
               f'"base": "{DEFAULT_BASE}" — папка эталона в meta6-lab')
@@ -171,6 +180,10 @@ def check(root: Path, r) -> set:
             r.add("IK7", "HARD", name, f"{m['tris']} треугольников > {hi} для {role}", "Упрости геометрию (меньше сегментов)")
         elif m["tris"] > lo:
             r.add("IK7", "SOFT", name, f"{m['tris']} треугольников > {lo}", "Упрости или сделай вариант для дальнего плана")
+        if night and name == "blackLocomotive" and m["meshes"] < 40:
+            r.add("IK16", "HARD", name,
+                  f"у главного локомотива только {m['meshes']} деталей",
+                  "BLACK TRAIN требует не менее 40 объёмных деталей и прямой лоб")
         if m["meshes"] > 200:
             r.add("IK7", "HARD", name, f"{m['meshes']} отдельных мешей — тормоза на телефоне", "Объедини меши (batchInk эталона)")
         elif m["meshes"] > 80:

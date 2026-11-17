@@ -112,9 +112,9 @@ train.position.z=TRACK_Z;scene.add(train);
 const LEN=train.userData.length;
 // Extra BLACK TRAIN assets: independent of the protected original scene.
 const blackEngine=makers.blackLocomotive(13);
-blackEngine.position.set(-420,0,TRACK_Z);scene.add(blackEngine);
+blackEngine.position.set(-424.4,0,TRACK_Z);scene.add(blackEngine);
 let useBlackTrain=true;
-train.visible=false;
+train.visible=true;train.userData.rig.loco.visible=false;train.userData.rig.lamp.visible=false;
 const crossing=makers.crossingSign(7);crossing.position.set(6.9,0,-11.4);scene.add(crossing);
 const signal=makers.redSignalLamp(11);signal.position.set(8.3,0,-11.35);scene.add(signal);
 const chains=[makers.hangingChains(3),makers.hangingChains(17)];
@@ -207,7 +207,7 @@ function startNight(n){
   // it comes from behind your shoulder the first time
   M.dist=26;M.ang=yaw+Math.PI*(.75+.5*Math.random());M.mode='wait';M.timer=4.5;M.lit=0;M.repels=0;M.seen=0;
   placeMonster();
-  TR.active=false;TR.timer=7+Math.random()*4;TR.x=-2000;train.position.x=TR.x;blackEngine.position.x=TR.x;
+  TR.active=false;TR.timer=7+Math.random()*4;TR.x=-2000;train.position.x=TR.x;blackEngine.position.x=TR.x-4.4;
   state='play';fade=0;caughtT=0;dawn=0;resize();
   startBtn.hidden=true;againBtn.hidden=true;torchBtn.hidden=false;pips.hidden=false;
   drawPips();audio.sting();
@@ -318,16 +318,16 @@ let trainLoud=0,trainDist=9999;
 function updateTrain(dt){
   if(!TR.active){
     TR.timer-=dt;
-    if(TR.timer<=0){TR.active=true;TR.x=-760;TR.horn=false;useBlackTrain=passed%2===0;train.visible=!useBlackTrain;blackEngine.visible=useBlackTrain;}
+    if(TR.timer<=0){TR.active=true;TR.x=-760;TR.horn=false;useBlackTrain=passed%2===0;train.userData.rig.loco.visible=!useBlackTrain;train.userData.rig.lamp.visible=!useBlackTrain;blackEngine.visible=useBlackTrain;}
     trainLoud=0;trainDist=9999;return;
   }
-  TR.x+=TRAIN_SPEED*dt;train.position.x=TR.x;blackEngine.position.x=TR.x;
+  TR.x+=TRAIN_SPEED*dt;train.position.x=TR.x;blackEngine.position.x=TR.x-4.4;
   if(!TR.horn&&TR.x>-190){TR.horn=true;audio.horn(-.85);}
   const nearX=T.MathUtils.clamp(0,TR.x-LEN,TR.x),dd=Math.hypot(nearX,TRACK_Z);
   trainLoud=T.MathUtils.clamp(1-(dd-7.5)/150,0,1);
   trainDist=dd;
   if(TR.x-LEN>260){
-    TR.active=false;TR.x=-2000;train.position.x=TR.x;blackEngine.position.x=TR.x;TR.timer=8+Math.random()*8-night;trainLoud=0;
+    TR.active=false;TR.x=-2000;train.position.x=TR.x;blackEngine.position.x=TR.x-4.4;TR.timer=8+Math.random()*8-night;trainLoud=0;
     if(state==='play'){passed++;drawPips();audio.click();if(passed>=need)dawnBreak();}
   }
 }

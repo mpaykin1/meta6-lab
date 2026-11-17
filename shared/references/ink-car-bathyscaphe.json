@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "id": "ink-car-bathyscaphe",
+  "aliases": [
+    "INK Car Bathyscaphe",
+    "Машина-батискаф",
+    "Автомобиль-батискаф",
+    "Трансформирующаяся машина"
+  ],
+  "title": "INK · Машина → Батискаф — объёмная 3D-модель с трансформацией",
+  "reference_type": "owner-approved-animated-3d-object",
+  "collection": "META GAMES LAB",
+  "date_added": "2026-11-17",
+  "status": "OWNER_PASS",
+  "source": {
+    "repository": "mpaykin1/meta6-lab",
+    "source_branch": "lab/ink-car-bathyscaphe-20261117",
+    "merge_target": "main",
+    "entry": "reference/ink-car-bathyscaphe/index.html",
+    "files": [
+      {
+        "path": "reference/ink-car-bathyscaphe/ink-car-bathyscaphe.js",
+        "git_blob_sha": "7744942da3b93a271d727b98f5daad8621510a21",
+        "role": "volumetric-model-factory"
+      },
+      {
+        "path": "reference/ink-car-bathyscaphe/index.html",
+        "git_blob_sha": "7ac04b29945510396223d673d5fc63701608de89",
+        "role": "reference-interactive-viewer"
+      },
+      {
+        "path": "reference/ink-fallen-guardian/shared/living-watercolor-3d.js",
+        "git_blob_sha": "ad5626572fb9a3d61ea8f2e8ea535f558b744c5c",
+        "role": "reused-owner-approved-ink-renderer"
+      },
+      {
+        "path": "reference/ink-fallen-guardian/three.module.js",
+        "git_blob_sha": "fcf5e09d8ada1f25b9c3218ce9ce65e67fb54eb5",
+        "role": "reused-threejs-runtime"
+      }
+    ]
+  },
+  "viewer": {
+    "reference_path": "reference/ink-car-bathyscaphe/",
+    "canonical_after_merge": "https://mpaykin1.github.io/meta6-lab/reference/ink-car-bathyscaphe/",
+    "preview_status": "PENDING_MERGE_AND_HTTP200_VERIFICATION",
+    "github_pr": "https://github.com/mpaykin1/meta6-lab/pull/370"
+  },
+  "approved_features": [
+    "isometric pastel low-poly original car shape",
+    "volumetric car with four wheels",
+    "continuous interpolated userData.setMorph(0..1)",
+    "bathyscaphe hull, ports, hatch, fins and twin animated propulsors",
+    "interactive 360 degree orbit camera and touch controls",
+    "living watercolor without replacing approved renderer"
+  ],
+  "reuse": {
+    "owner_approved": true,
+    "authorial_code_reusable_in_meta_games": true,
+    "external_dependency": "Three.js 0.165.0 MIT",
+    "approved_renderer_modified": false,
+    "third_party_rights_verified": false,
+    "separate_visual_reference_not_game": true
+  },
+  "owner_decision": "Добавь это в эталон на МГЛ (2026-11-17)",
+  "category": "visual-reference-not-additional-game"
+}

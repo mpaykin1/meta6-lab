@@ -1,0 +1,40 @@
+name: KONTUR main
+# Прямые пуши в main (Claude, правки таблиц) не проходят PR-проверку kontur-guard.
+# Этот прогон запускает те же постоянные мутации после каждого содержательного пуша в main,
+# чтобы поломка (как OSHIBKI 1151) ловилась сразу, а не на чужих PR.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'ZADACHI.md'
+      - 'DISPETCHER.md'
+      - 'TOLKNUT.md'
+      - 'DLYA_CLAUDE.md'
+      - 'automation/STATUS.md'
+      - 'automation/status.json'
+      - 'automation/SLIYANIE.md'
+      - 'rules/09-platforma/ZANYATO.md'
+      - 'reports/**'
+      - 'journal/**'
+      - '**/PROGRESS.md'
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+permissions:
+  contents: read
+jobs:
+  permanent-mutations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Every permanent mutation on main
+        run: |
+          : > "$RUNNER_TEMP/empty.diff"
+          node scripts/kontur/guard.mjs --diff-file "$RUNNER_TEMP/empty.diff" --title "main" --body "main"

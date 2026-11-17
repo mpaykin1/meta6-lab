@@ -24,6 +24,24 @@ const mutants = [
     mustReport: 'WORLD_UV_ATLAS'
   },
   {
+    name: 'static-grid-shore-foam',
+    source: 'float band=fract(depth*1.35-uTime*0.3+h12(floor(pp*2.0))*0.12);',
+    mustReport: 'STATIC_SHORE_FOAM'
+  },
+  {
+    // Deception: a comment claims to use coherent currents but the band still uses fixed grid hashes.
+    name: 'comment-claims-moving-foam',
+    source: '// currentA currentB domain warp make this foam dynamic\n' +
+      'float band = fract(depth * 1.35 - uTime * .3 + h12(floor(pp*2.0))*.12);',
+    mustReport: 'STATIC_SHORE_FOAM'
+  },
+  {
+    name: 'aliased-static-shore-grid',
+    source: 'float cellHash=h12(floor(pp*2.0));' +
+      'float band=fract(depth*1.35-uTime*.3+cellHash*.12);',
+    mustReport: 'STATIC_SHORE_FOAM'
+  },
+  {
     name: 'legacy-ink-sine-interference',
     source: 'float wcFlow1=sin(dot(vWcWorld,vec3(1.73,2.11,.87)));' +
       'float wcFlow2=sin(dot(vWcWorld,vec3(-2.37,.91,1.41)));' +
@@ -127,6 +145,11 @@ const seededWaterWarp = 'vec2 wp=vWorld.xz;vec2 p=wp*.095;' +
   'vec2 organicUV=fract(wp+currentWarp*1.55);' +
   'vec3 col=texture2D(uTex,vec2(organicUV.x,organicUV.y)).rgb;';
 assert.deepEqual(detectNoPatterns(seededWaterWarp, 'organic-water-uv'), []);
+const flowingShore = 'float currentA=vnoise(drift);' +
+  'float currentB=vnoise(drift*2.11);float currentC=vnoise(drift*.57);' +
+  'float shoreOffset=(currentA-.5)*.72+(currentB-.5)*.34+(currentC-.5)*.2;' +
+  'float band=fract(depth*1.35-uTime*.3+shoreOffset);';
+assert.deepEqual(detectNoPatterns(flowingShore, 'organic-foam-band'), []);
 const genuineMacroBlend = 'const tex=new THREE.CanvasTexture(canvas);' +
   'tex.repeat?.set?.(7,7);const color=macroVariation(tex,uv);';
 assert.deepEqual(detectNoPatterns(genuineMacroBlend, 'stochastic-tiling'), []);

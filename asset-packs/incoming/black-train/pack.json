@@ -1,0 +1,121 @@
+{
+  "format": "ink-pack/1",
+  "version": "0.1.0",
+  "base": "reference/ink-night-scream",
+  "game": "ink-night-scream",
+  "license": {
+    "type": "original",
+    "author": "META GAMES",
+    "commercial": true
+  },
+  "provenance": {
+    "tool": "ChatGPT / procedural Three.js",
+    "date": "2026-11-17",
+    "source": "ZAKAZ.json + owner supplied BLACK TRAIN cover"
+  },
+  "content_flags": {
+    "real_persons": false,
+    "brands": false,
+    "political": false
+  },
+  "assets": {
+    "crossingSign": {
+      "label_ru": "Железнодорожный переезд: косой крест на гнилом столбе",
+      "role": "landmark",
+      "zone": "new:black-train",
+      "footprint": 0.3,
+      "source": "ZAKAZ.json #1"
+    },
+    "redSignalLamp": {
+      "label_ru": "Красный фонарь переезда с треснувшим стеклом",
+      "role": "interactive",
+      "zone": "new:black-train",
+      "footprint": 0.3,
+      "source": "ZAKAZ.json #1"
+    },
+    "hangingChains": {
+      "label_ru": "Цепи, свисающие с креста переезда и с веток",
+      "role": "prop",
+      "zone": "new:black-train",
+      "footprint": 0.3,
+      "source": "ZAKAZ.json #1"
+    },
+    "gnarledTree": {
+      "label_ru": "Старое корявое дерево, нависающее над путями",
+      "role": "tree",
+      "zone": "new:black-train",
+      "footprint": 0.3,
+      "source": "ZAKAZ.json #1"
+    },
+    "groundMist": {
+      "label_ru": "Низкий стелющийся туман над путями",
+      "role": "effect",
+      "zone": "new:black-train",
+      "footprint": 0,
+      "source": "ZAKAZ.json #1"
+    },
+    "stormClouds": {
+      "label_ru": "Тяжёлое ночное небо с рваными тучами",
+      "role": "effect",
+      "zone": "new:black-train",
+      "footprint": 0,
+      "source": "ZAKAZ.json #2"
+    },
+    "brokenFence": {
+      "label_ru": "Сломанный деревянный забор у путей",
+      "role": "prop",
+      "zone": "new:black-train",
+      "footprint": 0.3,
+      "source": "ZAKAZ.json #2"
+    },
+    "tallGrass": {
+      "label_ru": "Высокая сухая трава и осока вдоль насыпи",
+      "role": "plant",
+      "zone": "new:black-train",
+      "footprint": 0,
+      "source": "ZAKAZ.json #2"
+    },
+    "wetRailGlow": {
+      "label_ru": "Мокрые рельсы и шпалы с красным отсветом",
+      "role": "ground",
+      "zone": "new:black-train",
+      "footprint": 0,
+      "source": "ZAKAZ.json #2"
+    },
+    "barbedWire": {
+      "label_ru": "Колючая проволока поперёк пути",
+      "role": "prop",
+      "zone": "new:black-train",
+      "footprint": 0.3,
+      "source": "ZAKAZ.json #2"
+    },
+    "swampPuddles": {
+      "label_ru": "Болотные лужи у пути",
+      "role": "ground",
+      "zone": "new:black-train",
+      "footprint": 0,
+      "source": "ZAKAZ.json #3"
+    },
+    "titleLogo": {
+      "label_ru": "Логотип «BLACK TRAIN»",
+      "role": "prop",
+      "zone": "new:black-train",
+      "footprint": 0.3,
+      "source": "ZAKAZ.json #3"
+    },
+    "crossingBell": {
+      "label_ru": "Звон переезда издалека",
+      "role": "prop",
+      "zone": "new:black-train",
+      "footprint": 0.3,
+      "source": "ZAKAZ.json #2"
+    },
+    "chainsClank": {
+      "label_ru": "Позвякивание цепей на ветру",
+      "role": "effect",
+      "zone": "new:black-train",
+      "footprint": 0,
+      "source": "ZAKAZ.json #3"
+    }
+  }
+}

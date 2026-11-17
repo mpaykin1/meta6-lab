@@ -128,6 +128,9 @@ export function rowingHealer(seed=1){
  for(let i=0;i<4;i++)part(root,new T.SphereGeometry(.019,6,5),pigment.brass,0,1.11-i*.14,-.312);
  const satchel=block(root,.28,.24,.12,pigment.wood,.38,.60,.14);satchel.rotation.z=-.14;
  rod(root,[.15,1.07,.16],[.41,.69,.18],.035,pigment.brass);
+ // Водяной контакт у поверхности: гребец сидит в готовой лодке, не «висит» отдельно.
+ const waterWash=part(g,new T.TorusGeometry(.87,.017,5,32,Math.PI*1.64),pigment.ripple.clone(),0,.026,0);
+ waterWash.rotation.x=-Math.PI/2;waterWash.castShadow=false;
  g.userData.mount={vehicle:'rowboat',seat:[0,.25,0]};
  g.userData.tick=t=>{
   root.rotation.x=.075*Math.sin(t*2.15-.25);
@@ -140,6 +143,7 @@ export function rowingHealer(seed=1){
     upper.rotation.z=s*.14*Math.sin(phase-.42);
   });
   g.rotation.z=.024*Math.sin(t*2.15-.7);
+  waterWash.scale.setScalar(.97+.06*Math.sin(t*2.15-.75));
  };
  return finish(g,.34);
 }

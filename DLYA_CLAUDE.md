@@ -1,5 +1,7 @@
 # Для Claude — подтверждённые блокировки
 
+- **Z20 META BOT → [PR #368](https://github.com/mpaykin1/meta6-lab/pull/368): НУЖЕН CLAUDE.** Второй запуск при `secondRun: "hash"` может закончиться с `again.ok=false` или без хеша и дать ложный PASS. Готовый патч защищённого `scripts/meta-bot/core.mjs`: `docs/patches/meta-bot-second-run.patch`; в памяти проверка `scripts/platform/verify-meta-bot-second-run-candidate.mjs`, 3 мутации `scripts/platform/mutate-meta-bot-second-run.mjs`. Применить только после CI, затем убрать патч-кандидат при необходимости, не ослабляя ловушку.
+
 ## Z03 OWNER PASS — сделано Claude 17.11.2026
 
 - #347, #348, #349 перенесены в main одним подписанным коммитом; эталоны МГ и МГЛ побайтно совпадают (3 эталона, 27 файлов), сторож `verify-etalony-sync.yml` включён.

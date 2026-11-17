@@ -251,5 +251,33 @@ def check(root: Path, r) -> set:
             if not (it.get("radius") and it.get("effect") and it.get("label_ru")):
                 r.add("IK14", "HARD", name, "нет понятной пользы: userData.interact {radius, effect, label_ru}",
                       "Опиши, что получает герой (ПОНЯТНАЯ ПОЛЬЗА) — effect из списка SPEC.md §INK")
-    r.stats["ink_assets"] = len(made)
+    # Web Audio and menu UI belong to the asset order, but cannot be Three.Object3D makers.
+    # Count them only when their implementations exist; manifest-only declarations never pass Z4.
+    for sid in pj.get("sound_assets", []):
+        covered.add("sounds.js")
+        sound_source = (root / "sounds.js").read_text("utf-8") if (root / "sounds.js").exists() else ""
+        found_sound = bool(re.search(r"\bexport\s+function\s+" + re.escape(sid) + r"\s*\(", sound_source))
+        if not found_sound:
+            r.add("IK16", "HARD", sid, "заявлен звуковой ассет, но нет экспортированной функции в sounds.js",
+                  "Создай export function <id>(ctx,dest,...) на Web Audio API")
+        elif not ("createOscillator" in sound_source and "createGain" in sound_source):
+            r.add("IK16", "HARD", sid, "нет Web Audio-генератора звука",
+                  "Звук должен создавать реальные аудиосигналы, а не пустую функцию")
+        elif re.search(r"\b(?:fetch|eval)\s*\(|XMLHttpRequest|https?://", sound_source):
+            r.add("IK16", "HARD", sid, "в звуковом модуле есть сеть или eval", "Только локальный Web Audio")
+        else:
+            r.asset_ids.add(sid)
+    for uid in pj.get("ui_assets", []):
+        covered.add("index.html")
+        html = (root / "index.html").read_text("utf-8") if (root / "index.html").exists() else ""
+        panel = html.find('id="panel"')
+        location = html.find('id="' + uid + '"')
+        game_ui = html.find('id="pips"')
+        in_menu = panel >= 0 and location > panel and (game_ui < 0 or location < game_ui)
+        if not in_menu:
+            r.add("IK17", "HARD", uid, "логотип заявлен, но не помещён внутрь панели меню ☰",
+                  'Добавь id="' + uid + '" внутри #panel; на игровом экране логотип запрещён')
+        else:
+            r.asset_ids.add(uid)
+    r.stats["ink_assets"] = len(r.asset_ids)
     return covered

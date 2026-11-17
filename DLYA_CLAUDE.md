@@ -41,7 +41,18 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #367 | lab/assets-nebesny-gothic-city-20261117 | OSHIBKI.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-17 |
 | #368 | lab/z20-meta-bot-second-run-hash-20261117 | OSHIBKI.md | 2026-11-17 |
 | #371 | lab/assets-ink-valley-20261117 | ZADACHI.md, automation/asset-check/OCHERED.md, automation/asset-check/SPEC.md | 2026-11-17 |
+| #374 | lab/z01-preserve-summary-conflicts-builder3-1117 | reports/zavaly/PROGRESS.md | 2026-11-17 |
 | #375 | lab/assets-shpili-cover-20261117-gpt6 | automation/asset-check/OCHERED.md | 2026-11-17 |
+| #385 | lab/assets-black-train-puddle-reflections-20261117-gpt6 | asset-packs/incoming/black-train/src/scene.js | 2026-11-17 |
+| #386 | lab/assets-black-train-mist-light-20261117 | asset-packs/incoming/black-train/makers.js, asset-packs/incoming/black-train/src/scene.js | 2026-11-17 |
+| #390 | lab/avto4-z01-closed361-20261117 | automation/NADZOR.md, automation/zadachi/Z01_ZAVALY.md | 2026-11-17 |
+| #391 | lab/auto2-z01-pr361-state-1117 | automation/NADZOR.md, automation/zadachi/Z01_ZAVALY.md | 2026-11-17 |
+| #392 | lab/assets-last-healer-video-20261117 | ZADACHI.md, automation/asset-check/SPEC.md | 2026-11-17 |
+| #393 | lab/assets-last-healer-video-20261117-gpt6 | automation/asset-check/SPEC.md | 2026-11-17 |
+| #396 | lab/z01-pr-api-null-guard-1117 | automation/NADZOR.md, automation/zadachi/Z01_ZAVALY.md | 2026-11-17 |
+| #397 | lab/autotask1-z01-merged361-20261117 | automation/NADZOR.md, automation/zadachi/Z01_ZAVALY.md | 2026-11-17 |
+| #398 | lab/mg5-z01-pr-triage-1117 | automation/NADZOR.md, automation/zadachi/Z01_ZAVALY.md | 2026-11-17 |
+| #399 | lab/avto1-nadzor-20261117-2000 | automation/NADZOR.md | 2026-11-17 |
 <!-- STOROZHA:CONFLICTS:END -->
 | #242 | lab/seo-claude-adfree-1111 | НУЖЕН CLAUDE: красные verify, bot, guard; SEO PR меняет claude-games/games/*/index.html (17 игр), а базовый PR #234 содержит несовпадение SHA256 защищённого pod-i-nad; не изменять эталон/охранник, проверить базовую ветку и CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117 | 2026-11-11 |
 | #245 | lab/remont-main-veil-terraces | НУЖЕН CLAUDE: игровая правка [PR #245](https://github.com/mpaykin1/meta6-lab/pull/245) прошла [META BOT на PR](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984334) и [focused 6/6](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984307), но на main PASS нет. После безопасного слияния актуального main в ремонтную ветку [13d85bb](https://github.com/mpaykin1/meta6-lab/commit/13d85bbf4e324cb01729c8a8464bf73364889a74) автоматический Library Machine **повторно** внёс посторонние `shared/library/index.json`, `shared/library/veil-terraces.json` коммитом [02ba0f5](https://github.com/mpaykin1/meta6-lab/commit/02ba0f5812afcae9467cdefa5cb7f3b381f6ee2f). Новый [META BOT](https://github.com/mpaykin1/meta6-lab/actions/runs/43018578169) имеет `action_required`, не PASS. STOROZHA [43012984349](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984349) дважды FAIL HTTP 403 GitHub API rate limit. Третья очистка бесполезна: машинная запись восстанавливает изменения, защищённые workflow/сторож не править. Нужны одобрение новых Actions (если доступно), устранение автоматического загрязнения PR и независимая проверка до squash; затем 2 PASS META BOT на main. | 2026-11-11 |

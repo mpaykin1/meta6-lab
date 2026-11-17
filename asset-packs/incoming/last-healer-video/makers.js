@@ -392,4 +392,242 @@ export function boatShed(seed=1) {
  return g;
 }
 
-export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,boatShed};
+
+export function roadsideDryShrubs(seed=1){
+ const r=rng(seed),g=new T.Group(),tips=[];g.name='Сухие колючие кусты';
+ const cols=['#8b745d','#9d815b','#ae926d','#827762','#b09871','#8a7f65'];
+ for(let bush=0;bush<6;bush++){
+   const root=new T.Group(),x=(bush-2.5)*.60+(r()-.5)*.16,z=(r()-.5)*.47;
+   root.position.set(x,0,z);root.rotation.y=r()*6.28;g.add(root);
+   const h=.38+r()*.44,lean=(r()-.5)*.13;
+   beam(root,[0,.02,0],[lean,h*.67,0],.031,'#736b59',6);
+   for(let k=0;k<7;k++){
+     const a=k*2.399+r()*.3,branchH=h*(.26+r()*.47),len=.30+r()*.30;
+     const b=new T.Group();b.position.set(lean*.7,branchH,0);root.add(b);tips.push(b);
+     const end=[Math.cos(a)*len,h*.23+len*.18,Math.sin(a)*len];
+     beam(b,[0,0,0],end,.017+r()*.014,cols[(k+bush)%cols.length],5);
+     for(let j=0;j<3;j++){
+       const u=.34+j*.24,p=[end[0]*u,end[1]*u,end[2]*u];
+       const q=[p[0]+Math.cos(a+.8+j)*(.11+r()*.12),p[1]+.10+r()*.11,p[2]+Math.sin(a+.8+j)*(.11+r()*.12)];
+       beam(b,p,q,.008,'#897e66',4);
+       const leaf=part(b,new T.TetrahedronGeometry(.065+r()*.023,0),j%3?'#b59e79':'#c0a57c',q);
+       leaf.scale.set(.60,1.2,.45);leaf.rotation.z=r()*1.2;
+     }
+   }
+   for(let j=0;j<3;j++){
+     const spike=part(root,new T.ConeGeometry(.036,.20,4),cols[(bush+j)%6],[(r()-.5)*.30,.10+r()*.10,(r()-.5)*.3]);
+     spike.rotation.z=(r()-.5)*.9;
+   }
+ }
+ g.userData.tick=t=>{
+   tips.forEach((o,i)=>{o.rotation.z=.050*Math.sin(t*.85-i*.33);o.rotation.x=.028*Math.sin(t*.52-i*.21);});
+ };
+ g.userData.footprint=.15;return g;
+}
+function recessedWindow(root,x,y,z,light,seed){
+ part(root,new T.BoxGeometry(.77,1.08,.095),'#596762',[x,y,z]);
+ const glow=part(root,new T.BoxGeometry(.64,.92,.025),light?'#e6ce9f':'#76918d',[x,y,z+.067],light);
+ for(const dx of [-.375,.375])block(root,[.055,1.03,.075],'#d5c9ad',[x+dx,y,z+.085]);
+ for(const dy of [-.5,0,.50])block(root,[.76,.044,.068],'#b9a98d',[x,y+dy,z+.10]);
+ const pane=block(root,[.08,.75,.021],'#e0dbb8',[x-.15,y,z+.085]);pane.rotation.z=-.10;
+ return glow;
+}
+export function pinkTownBuilding(seed=1) {
+ const r=rng(seed),g=new T.Group();g.name='Розовое здание с витриной';
+ // The shop has individual piers, frieze, metalwork and original-like watercolor depth.
+ const wall=part(g,new T.BoxGeometry(4.8,2.8,3.45),'#bd8d84',[0,1.42,0]);
+ part(g,new T.BoxGeometry(5.0,.22,3.63),'#a67f77',[0,2.87,0]);
+ for(const y of [.29,.74,1.18,1.63,2.06,2.49]){
+   for(let j=0;j<10;j++){
+     const x=-2.24+j*.48+(r()-.5)*.06;
+     const patch=block(g,[.29+r()*.12,.020,.018],j%4===0?'#d5a69a':'#aa8279',[x,y,1.742]);
+     patch.rotation.z=(r()-.5)*.04;
+   }
+ }
+ // Deep storefront frames and brass-colored window highlights.
+ const glows=[];
+ for(const x of [-1.35,.05,1.43]){
+   part(g,new T.BoxGeometry(1.11,1.54,.13),'#6c7c76',[x,1.33,1.79]);
+   const glass=part(g,new T.BoxGeometry(.98,1.41,.045),'#789995',[x,1.32,1.89]);
+   glass.material=glass.material.clone();
+   glass.material.roughness=.21;
+   block(g,[.06,1.51,.12],'#ead7b4',[x,1.35,1.95]);
+   block(g,[1.07,.055,.08],'#d5c9ad',[x,1.04,1.96]);
+   const shine=part(g,new T.BoxGeometry(.23,1.08,.015),'#e2be92',[x-.32,1.36,1.98],true);
+   shine.rotation.z=.23;glows.push(shine);
+ }
+ // Featureless signboards are deliberate: never print HUD text in the world.
+ block(g,[4.08,.37,.10],'#8b716b',[0,2.31,1.88]);
+ for(let j=0;j<10;j++){
+   const x=-2.20+j*.49,mat=j%3===0?'#b97b72':'#dbc4a7';
+   const s=block(g,[.47,.10,1.10],mat,[x,2.12,2.22]);s.rotation.x=.13;
+   block(g,[.46,.17,.05],mat,[x,2.01,2.74]);
+ }
+ // Flat roof with crooked parapet, ventilator stacks and rain gutters.
+ for(const z of [-1.71,1.71])for(let j=0;j<14;j++){
+   const x=-2.36+j*.36;
+   block(g,[.34,.29,.13],j%4===0?'#bd998c':'#956f6e',[x,3.04+(r()-.5)*.035,z]);
+ }
+ for(const x of [-2.35,2.35])for(let j=0;j<10;j++){
+   const z=-1.62+j*.36;block(g,[.13,.30,.33],'#a17d76',[x,3.04+(r()-.5)*.035,z]);
+ }
+ for(let j=0;j<3;j++){
+   const x=-1.4+j*1.4;
+   part(g,new T.CylinderGeometry(.095,.14,.58,7),'#637872',[x,3.30,-.82]);
+   part(g,new T.ConeGeometry(.23,.20,7),'#87948c',[x,3.63,-.82]);
+ }
+ g.userData.tick=t=>glows.forEach((m,i)=>{m.scale.x=.91+.09*Math.sin(t*.34-i*.8);});
+ g.userData.footprint=2.65;return g;
+}
+export function duskTownLight(seed=1) {
+ const r=rng(seed),g=new T.Group(),wisps=[];g.name='Розовые акварельные сумерки';
+ const uniforms={uTime:{value:0},uIntensity:{value:1}};
+ const shader=new T.ShaderMaterial({
+   uniforms,
+   vertexShader:glowVertex,
+   fragmentShader:'varying vec2 vUv;uniform float uTime;uniform float uIntensity;void main(){float cloud=sin(vUv.x*7.+uTime*.07)*.09+sin(vUv.x*17.-uTime*.04)*.03;float edge=smoothstep(.03,.23,vUv.x)*(1.-smoothstep(.77,.98,vUv.x));float h=smoothstep(.05,.38,vUv.y-cloud)*(1.-smoothstep(.63,.97,vUv.y+cloud));float a=.16*edge*h*uIntensity;gl_FragColor=vec4(.86,.56,.54,a);}',
+   transparent:true,depthWrite:false,side:T.DoubleSide});
+ for(let i=0;i<8;i++){
+   const plane=new T.Mesh(new T.PlaneGeometry(3+r()*1.0,.62+r()*.52,9,2),shader);
+   plane.position.set((r()-.5)*2.1,.6+i*.19,-1.7-i*.18);
+   plane.rotation.y=(r()-.5)*.45;plane.userData.watercolorSkipWash=true;g.add(plane);wisps.push(plane);
+ }
+ // Long ground shadows from the actual setting sun, not flat HUD overlays.
+ for(let i=0;i<9;i++){
+   const x=(r()-.5)*4,z=(r()-.5)*3.3;
+   const sh=part(g,new T.BoxGeometry(.06+r()*.12,.018,.8+r()*1.8),'#8a726c',[x,.025,z]);
+   sh.material=sh.material.clone();sh.material.transparent=true;sh.material.opacity=.20;
+   sh.rotation.y=-.6+(r()-.5)*.09;
+ }
+ const motes=new T.Group();g.add(motes);
+ for(let i=0;i<18;i++){
+   const s=part(motes,new T.TetrahedronGeometry(.02+r()*.012,0),'#e7c29e',[(r()-.5)*3,.3+r()*1.3,(r()-.5)*2],true);
+   s.userData.watercolorSkipWash=true;
+ }
+ g.userData.tick=t=>{
+   uniforms.uTime.value=t;
+   wisps.forEach((w,i)=>{w.position.x=.16*Math.sin(t*.12+i*.71);w.rotation.z=.016*Math.sin(t*.24-i*.35);});
+   motes.rotation.y=.02*Math.sin(t*.10+seed);
+ };
+ g.userData.footprint=0;return g;
+}
+export function healerWalkWithLight(seed=1) {
+ const r=rng(seed),g=new T.Group();g.name='Походка аптекаря в мокром плаще';
+ // This animation overlay attaches to the ORIGINAL traveller, not a duplicate NPC.
+ const hips=new T.Group();hips.position.set(0,.48,0);g.add(hips);
+ const legs=[],coat=[];
+ for(const s of [-1,1]){
+   const leg=new T.Group();leg.position.set(s*.155,-.21,0);hips.add(leg);legs.push(leg);
+   beam(leg,[0,0,0],[s*.025,-.24,.045],.092,'#414f50');
+   block(leg,[.19,.12,.31],'#424a47',[s*.02,-.265,.13]);
+   for(let j=0;j<3;j++)block(leg,[.20,.024,.12],'#64756e',[s*.01,-.29,.08+j*.08]);
+   const flap=new T.Group();flap.position.set(s*.22,.10,-.15);hips.add(flap);coat.push(flap);
+   const cloth=part(flap,new T.ConeGeometry(.22,.68,5,1,false),'#8c785e',[0,.22,0]);
+   cloth.scale.z=.78;cloth.rotation.z=s*.14;
+   for(let k=0;k<3;k++)beam(flap,[0,.15-k*.13,-.19],[s*.06,.14-k*.13,-.18],.009,'#c2a783',4);
+ }
+ for(let i=0;i<8;i++){
+   const x=(r()-.5)*.27,y=.30+r()*.38,z=-.28-r()*.11;
+   part(hips,new T.BoxGeometry(.024,.13,.01),i%2?'#a38c72':'#746d60',[x,y,z]);
+ }
+ const shoulder=new T.Group();shoulder.position.set(.25,1.07,.03);g.add(shoulder);
+ beam(shoulder,[0,0,0],[.10,-.34,.21],.085,'#bd9b6f');
+ beam(shoulder,[.10,-.34,.21],[.17,-.48,.44],.060,'#bd9b6f');
+ part(shoulder,new T.SphereGeometry(.069,7,5),'#d3b793',[.17,-.48,.44]);
+ g.userData.tick=t=>{
+   const p=t*3.0;
+   legs.forEach((o,i)=>{o.rotation.x=.43*Math.sin(p+i*Math.PI);o.position.y=-.21+.045*Math.max(0,Math.sin(p+i*Math.PI));});
+   coat.forEach((o,i)=>{o.rotation.x=.09*Math.sin(p-.45+i*Math.PI)+.035*Math.sin(t*.57+i);o.rotation.z=.023*Math.sin(t*.63-i*.22);});
+   hips.rotation.z=.025*Math.sin(p-.23);
+   shoulder.rotation.x=.10*Math.sin(p-.38);shoulder.rotation.y=.06*Math.sin(t*.45);
+ };
+ g.userData.footprint=0;return g;
+}
+function irregularPuddle(root,r,x,z,scale){
+ const s=new T.Shape(),steps=21;
+ for(let j=0;j<=steps;j++){
+   const a=j/steps*Math.PI*2,rr=1+.14*Math.sin(j*2.3+x*3)+.11*Math.sin(j*5.7+z*7);
+   const px=Math.cos(a)*rr*.73*scale,pz=Math.sin(a)*rr*.53*scale;
+   j?s.lineTo(px,pz):s.moveTo(px,pz);
+ }
+ s.closePath();const geo=new T.ShapeGeometry(s,4);geo.rotateX(-Math.PI/2);
+ const water=part(root,geo,'#587879',[x,.026,z]);
+ water.material=water.material.clone();water.material.transparent=true;water.material.opacity=.73;water.material.roughness=.16;
+ return water;
+}
+export function puddles(seed=1) {
+ const r=rng(seed),g=new T.Group(),ripples=[];g.name='Живые отражающие лужи';
+ const shader=new T.ShaderMaterial({uniforms:{uTime:{value:0}},
+ vertexShader:glowVertex,
+ fragmentShader:'varying vec2 vUv;uniform float uTime;void main(){vec2 p=(vUv-.5)*vec2(1.8,2.1);float wave=fract(uTime*.37+vUv.x*.04);float ring=1.-smoothstep(0.,.028,abs(length(p)-wave*.65));float spec=pow(max(0.,sin(vUv.x*22.+uTime*.45)*cos(vUv.y*8.-uTime*.24)),8.);float edge=smoothstep(.3,.05,abs(vUv.x-.5))*(1.-smoothstep(.33,.5,abs(vUv.y-.5)));gl_FragColor=vec4(.78,.90,.88,(ring*.24*(1.-wave)+spec*.08)*edge);}',
+ transparent:true,depthWrite:false,side:T.DoubleSide});
+ for(let i=0;i<6;i++){
+   const x=(r()-.5)*4.0,z=(r()-.5)*3.8,sc=.50+r()*.7;
+   irregularPuddle(g,r,x,z,sc);
+   const refl=new T.Mesh(new T.PlaneGeometry(sc*1.1,sc*.81),shader);
+   refl.rotation.x=-Math.PI/2;refl.rotation.z=r()*6.28;
+   refl.position.set(x,.033,z);refl.userData.watercolorSkipWash=true;g.add(refl);ripples.push(refl);
+   for(let k=0;k<4;k++){
+     const xx=x+(r()-.5)*sc,zz=z+(r()-.5)*sc*.55;
+     const flake=part(g,new T.TetrahedronGeometry(.028,0),'#bac4b3',[xx,.025,zz]);
+     flake.scale.y=.20;
+   }
+ }
+ g.userData.tick=t=>{
+   shader.uniforms.uTime.value=t;
+   ripples.forEach((p,i)=>p.rotation.z=.02*Math.sin(t*.30-i*.41));
+ };
+ g.userData.footprint=0;return g;
+}
+export function whiteClinicBuilding(seed=1){
+ const r=rng(seed),g=new T.Group();g.name='Ночная клиника с красным навесом';
+ const lit=[];
+ // Real building volume, roof rim, window niches and rain-stained pale plaster.
+ block(g,[5.60,2.44,2.72],'#d5d3bb',[0,1.23,0]);
+ block(g,[5.84,.24,3.0],'#a9aba0',[0,2.52,0]);
+ block(g,[5.65,.09,2.82],'#d5cdb8',[0,2.68,0]);
+ for(let j=0;j<19;j++){
+   const x=-2.72+j*.30;
+   block(g,[.24,.25,.17],j%5===0?'#9aaca4':'#b2b8ab',[x,2.82,1.38]);
+ }
+ for(let i=0;i<7;i++){
+   const x=-2.43+i*.8;
+   const on=i===4;const w=recessedWindow(g,x,1.57,1.37,on,seed);
+   if(on)lit.push(w);
+   block(g,[.83,.12,.20],'#acae9b',[x,.97,1.46]);
+   for(let j=0;j<3;j++){
+     const stain=block(g,[.05,.14+r()*.25,.014],j%2?'#aab0a3':'#c7c6af',
+       [x+(r()-.5)*.63,2.1-r()*.23,1.50]);
+     stain.rotation.z=(r()-.5)*.07;
+   }
+ }
+ // Clinic doorway and deeply pitched scarlet canopy.
+ block(g,[1.16,2.06,.13],'#63746e',[1.15,1.10,1.47]);
+ block(g,[.91,1.87,.06],'#789995',[1.15,1.08,1.58]);
+ block(g,[.05,.15,.09],'#e5bf71',[1.49,1.05,1.65]);
+ const canopy=new T.Group();canopy.position.set(1.15,2.25,1.75);canopy.rotation.x=-.10;g.add(canopy);
+ block(canopy,[2.00,.15,1.32],'#bd7c69',[0,0,0]);
+ for(let j=0;j<8;j++)block(canopy,[.21,.11,.06],j%3?'#a35d58':'#c98974',[-.85+j*.245,-.10,.69]);
+ for(const x of [-.91,.91])beam(canopy,[x,-.12,.55],[x,-.94,-.51],.030,'#596762');
+ // Ivy creeps up the walls instead of uniform repeated textures.
+ for(const x of [-2.78,2.78]){
+   const vine=new T.Group();vine.position.set(x,.12,1.50);g.add(vine);
+   beam(vine,[0,0,0],[0,2.20,0],.017,'#6e846e');
+   for(let k=0;k<12;k++){
+     const a=k*2.4,yy=.17+k*.16;
+     const o=part(vine,new T.TetrahedronGeometry(.095+r()*.052,0),k%3?'#6c8f78':'#9ca887',
+       [Math.sin(a)*(.09+r()*.08),yy,.015]);
+     o.rotation.z=a*.18;o.scale.y=1.3;
+   }
+ }
+ // Interior solitary window glows in rain without any screen-space writing.
+ g.userData.tick=t=>lit.forEach((w,i)=>{
+   w.scale.x=.96+.04*Math.sin(t*.82+i);
+   w.material.color.setRGB(.82+.07*Math.sin(t*.60),.71,.52);
+ });
+ g.userData.footprint=2.8;
+ g.userData.interact={radius:2.6,effect:'reach_clinic',label_ru:'Войти в ночную клинику'};
+ return g;
+}
+
+export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,boatShed,roadsideDryShrubs,pinkTownBuilding,duskTownLight,healerWalkWithLight,puddles,whiteClinicBuilding};

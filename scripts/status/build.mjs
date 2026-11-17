@@ -318,7 +318,7 @@ export function canonicalFinish(stageOne, checked) {
   const proofs = {};
   const verification = {};
   for (const { id, status, evidence } of rows) {
-    const isGreen = /^ЗЕЛЁНАЯ(?:\\s|$)/.test(status) && evidence?.repo === LAB;
+    const isGreen = /^ЗЕЛЁНАЯ(?:\s|$)/.test(status) && evidence?.repo === LAB;
     if (isGreen) {
       ready.push(id);
       proofs[id] = evidence.url;

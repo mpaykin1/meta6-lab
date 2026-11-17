@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T02:31:51.055Z | МГЛ: bb80c794f6145a654c353a7b5c108c5bc66295b3 | МГ: 5e5c99a58bfa90f0d08102945fa14628f9589998 | https://github.com/mpaykin1/meta6-lab/actions/runs/44003589428
+UTC: 2026-11-17T02:33:28.984Z | МГЛ: 3aebc90b0d2437ccb39cfaf2f525cfcd0997220d | МГ: 5e5c99a58bfa90f0d08102945fa14628f9589998 | https://github.com/mpaykin1/meta6-lab/actions/runs/44003771920
 ## ПРОВЕРИТЬ CLAUDE
 - PR #346 9f247be3a3530d160f629f531f32eb6469a07bc1: scripts/status/mutate-canonical-finish.mjs, scripts/status/selftest.mjs
 - PR #311 fb708269aa165d43dea7a1b3204157a235087afd: automation/asset-check/test_mutation_runner.py, automation/asset-check/test_zip_safety.py, scripts/platform/mutate-bot-config.mjs, scripts/platform/verify-meta-bot-config-candidate.mjs, scripts/repair-bot/mutat… (сокращено)
@@ -31,12 +31,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 30 | конфликт: нет данных | слито: 66 | закрыто: 111
+открыто: 31 | конфликт: нет данных | слито: 66 | закрыто: 111
 #350 Единая инструкция пяти автозадач и журнал NADZOR | bf240a699201aa2d8b9594c989ec34de47c37170
 #346 fix(status): сохранять вердикты FINISH при сбое GitHub API | 9f247be3a3530d160f629f531f32eb6469a07bc1
 ещё 64: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2581 коммитов | нет данных
+МГЛ: 2584 коммитов | нет данных
 МГ: 39 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

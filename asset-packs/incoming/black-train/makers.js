@@ -56,7 +56,7 @@ function groundMist(seed=1){
  g.userData.tick=t=>{layers.forEach((q,i)=>{q.position.x=.65*Math.sin(t*.14+i*.61);q.material.opacity=.08+.065*(.5+.5*Math.sin(t*.27+i));});};return done(g,'Стелющийся туман',0);
 }
 function stormClouds(seed=1){
- const g=new T.Group(),cl=[];for(let i=0;i<8;i++){const c=new T.Group();c.position.set((i-3.5)*.45,4.5+rnd(seed,i)*1.3,-i*.8);for(let j=0;j<6;j++){const m=ink(j%3?'#111a20':'#283037');globe(c,(rnd(seed,i*10+j)-.5)*1.2,(rnd(seed,j*4+i)-.5)*.75,(rnd(seed,i+j+14)-.5)*1.7,.47+rnd(seed,j)*.28,m,1.5,.4,.9);}g.add(c);cl.push(c);}
+ const g=new T.Group(),cl=[];for(let i=0;i<8;i++){const c=new T.Group();c.position.set((i-3.5)*.45,4.5+rnd(seed,i)*1.3,-i*.62);for(let j=0;j<6;j++){const m=ink(j%3?'#111a20':'#283037');globe(c,(rnd(seed,i*10+j)-.5)*1.2,(rnd(seed,j*4+i)-.5)*.75,(rnd(seed,i+j+14)-.5)*1.7,.47+rnd(seed,j)*.28,m,1.5,.4,.9);}g.add(c);cl.push(c);}
  g.userData.tick=t=>cl.forEach((c,i)=>c.position.x+=(Math.sin(t*.035+i)-Math.sin((t-.016)*.035+i))*.75);
  return done(g,'Грозовые тучи',0);
 }
@@ -75,7 +75,7 @@ function tallGrass(seed=1){
 }
 function wetRailGlow(seed=1){
  const g=new T.Group(),railRed=red.clone();for(const z of [-.82,.82])for(let i=0;i<16;i++)box(g,-3.1+i*.39,.015,z,.48,.018,.072,i%4?steel:railRed);
- const puddle=new T.Mesh(new T.CircleGeometry(.83,17),new T.MeshStandardMaterial({color:'#303b41',roughness:.13,metalness:.84,transparent:true,opacity:.65}));puddle.rotation.x=-Math.PI/2;puddle.scale.set(2,.62,1);puddle.position.set(1.5,.016,0);g.add(puddle);
+ const puddle=new T.Mesh(new T.CircleGeometry(.83,17),new T.MeshStandardMaterial({color:'#303b41',roughness:.13,metalness:.84,transparent:true,opacity:.65}));puddle.rotation.x=-Math.PI/2;puddle.scale.set(2,.62,1);puddle.position.set(1.5+(rnd(seed,17)-.5)*.45,.016,(rnd(seed,19)-.5)*.16);g.add(puddle);
  g.userData.tick=(t,dt,trainNear=0)=>{const pulse=.5+.5*Math.sin(t*3.2);railRed.emissiveIntensity=.12+2.3*Math.min(1,Math.max(0,trainNear))*pulse;};return done(g,'Мокрые рельсы',0);
 }
 function barbedWire(seed=1){

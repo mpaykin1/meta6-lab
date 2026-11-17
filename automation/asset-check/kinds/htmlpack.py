@@ -90,6 +90,7 @@ def check(root: Path, r) -> set[str]:
     baseline_source = REFERENCE.read_text("utf-8")
     old = ids(baseline_source)
     current = ids(source)
+    r.asset_ids.update(current or [])
     if not old or not current:
         r.add("HP1", "HARD", "index.html", "window.__PACK__ или список items не читается",
               "Восстанови реальный PACK.items и окно window.__PACK__")

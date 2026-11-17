@@ -1,7 +1,10 @@
 name: META Repair Bot
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 on:
   schedule:
-    - cron: '47 * * * *'
+    - cron: '47 */3 * * *'
   workflow_dispatch:
   push:
     branches: [main]

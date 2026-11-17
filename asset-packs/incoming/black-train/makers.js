@@ -18,66 +18,6 @@ function box(g,w,h,d,mat,x,y,z){return add(g,new T.BoxGeometry(w,h,d),mat,x,y,z)
 function rod(g,a,b,r,mat,r2=r){const p=new T.Vector3(...a),q=new T.Vector3(...b),v=q.clone().sub(p),o=add(g,new T.CylinderGeometry(r2,r,v.length(),6,1),mat,...p.clone().add(q).multiplyScalar(.5).toArray());o.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),v.normalize());return o;}
 function finish(g,footprint=0){g.userData.footprint=footprint;return g;}
 
-function blackLocomotive(seed=1){
- const r=random(seed),g=new T.Group();g.name='Чёрный локомотив';
- box(g,10.2,.5,2.85,M.soot,-5,.55,0);
- box(g,9.8,.24,2.45,M.soot,-5,.18,0);
- box(g,9.85,2.65,2.62,M.iron,-5.05,2.08,0);
- box(g,9.45,.22,2.8,M.ironEdge,-5.1,3.53,0);
- // Flat vertical frontal armor. High, unbroken silhouette unlike accepted sloping nose.
- box(g,.34,3.35,2.76,M.iron,-.12,2.3,0);
- box(g,.11,3.2,2.45,M.soot,.11,2.28,0);
- for(const side of [-1,1]){
-   box(g,9.5,.18,.13,M.silver,-5.05,1.45,side*1.38);
-   box(g,9.2,.09,.12,M.ironEdge,-5.05,2.9,side*1.4);
-   for(let k=0;k<5;k++) {
-     const x=-.95-k*1.7;
-     add(g,new T.CylinderGeometry(.48,.48,.20,12),M.soot,x,.45,side*1.16).rotation.x=Math.PI/2;
-     add(g,new T.TorusGeometry(.35,.055,5,12),M.silver,x,.45,side*1.27);
-     rod(g,[x-.18,.45,side*1.31],[x+.18,.45,side*1.31],.035,M.silver);
-   }
-   for(let i=0;i<9;i++)box(g,.06,.12,.08,M.silver,-.8-i*.95,1.2,side*1.44);
-   // Rails and exterior ladder, cut into dark body.
-   rod(g,[-8.1,.75,side*1.49],[-8.1,3.05,side*1.49],.045,M.silver);
-   rod(g,[-7.65,.75,side*1.49],[-7.65,3.05,side*1.49],.045,M.silver);
-   for(let j=0;j<7;j++)rod(g,[-8.1,.83+j*.32,side*1.5],[-7.65,.83+j*.32,side*1.5],.037,M.ironEdge);
- }
- // Front grill, rust and cascading streaks.
- for(let i=0;i<13;i++)box(g,.06,1.18,.09,M.ironEdge,.21,1.48,-1.05+i*.17);
- for(let i=0;i<11;i++){const z=-1.15+i*.24;
-  box(g,.04,.24+r()*.48,.015,M.woodCut,.245,2.6-r()*.4,z);}
- // Low paired headlights, true glass and bolted reflectors.
- for(const z of [-.87,.87]){
-  const lens=add(g,new T.CylinderGeometry(.29,.29,.16,20),M.glass,.26,1.08,z);
-  lens.rotation.z=Math.PI/2;
-  const ring=add(g,new T.TorusGeometry(.31,.065,7,20),M.silver,.36,1.08,z);
-  ring.rotation.y=Math.PI/2;
-  for(let a=0;a<8;a++){const th=a*Math.PI/4;add(g,new T.SphereGeometry(.036,5,5),M.iron,.37,1.08+Math.sin(th)*.33,z+Math.cos(th)*.33);}
- }
- // One roof searchlight, fixed to an angled mount, with source headlamp light retained by host game.
- box(g,.55,.28,.6,M.ironEdge,-.43,4.12,0);
- rod(g,[-.35,4.08,0],[.05,4.38,0],.13,M.ironEdge);
- const hood=add(g,new T.CylinderGeometry(.42,.34,.38,16),M.ironEdge,.12,4.42,0);hood.rotation.z=Math.PI/2;
- add(g,new T.CylinderGeometry(.31,.31,.08,16),M.glow,.34,4.42,0).rotation.z=Math.PI/2;
- // Upper cab windows at the FRONT, separated by steel mullions.
- for(let i=0;i<4;i++){
-  const z=-.92+i*.62;
-  box(g,.09,.62,.42,M.glass,.27,3.25,z);
-  box(g,.11,.05,.53,M.soot,.34,3.59,z);
- }
- // Exhaust stacks, pantograph spikes, roof apparatus.
- for(let j=0;j<3;j++){
-  const x=-2.3-j*2.6;
-  rod(g,[x,3.62,0],[x,4.38+j*.08,0],.19,M.iron);
-  add(g,new T.CylinderGeometry(.28,.24,.17,10),M.ironEdge,x,4.43+j*.08,0);
- }
- for(let i=0;i<6;i++)for(const side of [-1,1]){
-  const x=-.7-i*1.63;
-  rod(g,[x,3.63,side*.74],[x-.17,4.08+(i%3)*.11,side*.89],.055,M.ironEdge);
- }
- g.userData.tick=(t)=>{g.userData.smoke=t;};
- return finish(g,1.5);
-}
 function crossingSign(seed=2){
  const r=random(seed),g=new T.Group();g.name='Старинный переезд';
  const post=new T.Group();post.rotation.z=.065+r()*.05;g.add(post);
@@ -294,4 +234,4 @@ function chainsClank(seed=15){
  return finish(g,0);
 }
 
-export const makers={blackLocomotive,crossingSign,redSignalLamp,hangingChains,gnarledTree,groundMist,stormClouds,brokenFence,tallGrass,wetRailGlow,barbedWire,swampPuddles,titleLogo,crossingBell,chainsClank};
+export const makers={crossingSign,redSignalLamp,hangingChains,gnarledTree,groundMist,stormClouds,brokenFence,tallGrass,wetRailGlow,barbedWire,swampPuddles,titleLogo,crossingBell,chainsClank};

@@ -165,6 +165,23 @@ function reset(){P={x:0,y:0,z:45,h:0,v:110,vz:0,steer:0,roll:0,boost:0,barrel:0,
   cam={x:0,y:-20,z:45,a:0,phi:1.12,dist:230,cy:.58,roll:0};rings=[];parts=[];trails=[[],[]];score=0;combo=0;shot=0;shotT=0;
   document.getElementById('sc').textContent=0}
 reset();
+// Four reproducible in-game camera positions for visual comparison against the
+// owner's sketch. Normal gameplay is unchanged (starts over open water).
+const viewParam=new URLSearchParams(location.search).get('view');
+if(viewParam){
+  const scene={
+    sea:     {x:0,y:0,z:100,shot:0},
+    approach:{x:0,y:-630,z:76,shot:3},
+    city:    {x:0,y:-1120,z:54,shot:5},
+    low:     {x:0,y:-1410,z:29,shot:4}
+  }[viewParam];
+  if(scene){
+    P.x=scene.x;P.y=scene.y;P.z=scene.z;P.v=76;
+    shot=scene.shot;shotT=0;camLock=true;
+    cam.x=P.x;cam.y=P.y+55;cam.z=P.z;cam.phi=SHOTS[shot].phi;
+    cam.dist=SHOTS[shot].dist;cam.cy=SHOTS[shot].cy;
+  }
+}
 const fwd=a=>[Math.sin(a),-Math.cos(a)];
 let pc={};
 function setupProj(){const sa=Math.sin(cam.a),ca=Math.cos(cam.a),sp=Math.sin(cam.phi),cp=Math.cos(cam.phi),cr=Math.cos(cam.roll),sr=Math.sin(cam.roll);

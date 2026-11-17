@@ -438,7 +438,10 @@ function step(dt){
   // Predictive crossing signal: flash faster as the next train approaches.
   const signalNear=TR.active?T.MathUtils.clamp(1-Math.abs(TR.x-6.9)/240,0,1):0;
   signal.userData.setApproach(signalNear,t);
-  if(state==='play'){crossingBell(t,signalNear);if(signalNear<.3)chainsClank(t);}
+  if(state==='play'){
+    crossingBell(t,signalNear,panOf(Math.atan2(-signal.position.x,-signal.position.z)));
+    if(signalNear<.3)chainsClank(t,panOf(Math.atan2(-noiseChains.position.x,-noiseChains.position.z)));
+  }
   railGlow.userData.tick(t,dt,signalNear);
   // flashlight: warm-white beam with a little hand tremble and dying-battery flicker
   const lightOn=(state==='play'||state==='dawn'||state==='caught')&&torchOn&&torchDead<=0&&battery>0;

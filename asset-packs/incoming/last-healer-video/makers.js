@@ -92,6 +92,7 @@ function carHeadlights(seed=1){
       lightLayers[k].uniforms.uGain.value=.89+.07*Math.sin(t*1.2+k*.41);
     }
     spots.forEach((o,i)=>{o.intensity=.8+.06*Math.sin(t*1.1-i*.28);});
+    g.rotation.y=.012*Math.sin(t*.62);
   };
   return g;
 }
@@ -286,6 +287,7 @@ function townRoad(seed=5){
    p.rotation.y=r()*6.28;
   }
  }
+ g.scale.setScalar(.82);
  g.userData.footprint=0;
  return g;
 }
@@ -525,19 +527,17 @@ function nightRainGrade(seed=13){
 function wetGrassClumps(seed=14){
  const r=random(seed),g=new T.Group(),sway=[],green=pigment('#607e74'),pale=pigment('#839487'),dark=pigment('#303c38');
  g.name='Мокрая трава и агавы · задержка по листьям';
- for(let i=0;i<11;i++){
+ for(let i=0;i<6;i++){
   const stalk=new T.Group();stalk.position.set((r()-.5)*3.2,0,(r()-.5)*2.7);g.add(stalk);sway.push(stalk);
-  const count=6+Math.floor(r()*5);
+  const count=6+Math.floor(r()*2);
   for(let j=0;j<count;j++){
    const a=j*2*PI/count,reach=.2+r()*.3,H=.3+r()*.57;
    const x=Math.cos(a)*reach,z=Math.sin(a)*reach;
    rod(stalk,[0,.02,0],[x,H,z],.018,j%3?green:pale,.002);
    const leaf=ball(stalk,.095,j%4===0?pale:dark,x*.63,H*.73,z*.65,.35,1.9,.45);
    leaf.rotation.y=a;leaf.rotation.z=Math.cos(a)*.5;
-   for(let k=0;k<3;k++){
-    const dewdrop=ball(stalk,.014,pale,x*(.5+k*.17),H*(.62+k*.11),z*(.5+k*.17));
-    dewdrop.scale.set(.55,1,.55);
-   }
+   const dewdrop=ball(stalk,.018,pale,x*.71,H*.78,z*.71);
+   dewdrop.scale.set(.55,1,.55);
   }
  }
  g.userData.footprint=0;
@@ -579,6 +579,7 @@ function shoreFoamLine(seed=16){
   const o=ball(g,.035+r()*.035,white,x,.04,z+.26);
   o.scale.set(.8,.16,1.2);segments.push({m:o,z:z+.26,i:i+57});
  }
+ g.scale.x=.60;
  g.userData.footprint=0;
  g.userData.tick=t=>segments.forEach(({m,z,i})=>{
   m.position.z=z+.12*Math.sin(t*.78-i*.11);m.scale.x=.66+.18*Math.sin(t*.56-i*.17);
@@ -641,6 +642,7 @@ function sandBeachTiles(seed=19){
   o.rotation.y=r()*PI*2;
   if(i%6===0)rod(g,[x,.04,z],[x+(r()-.5)*.12,.22,z+.08],.009,wet,.003);
  }
+ g.scale.x=.83;
  g.userData.footprint=0;
  return g;
 }
@@ -653,6 +655,7 @@ function tiltShiftPost(seed=20){
   sheet.userData.watercolorOutline=false;layers.push({sheet,i,s});
  }
  const eye=ball(g,.15,pigment('#c5ac69'),0,2.0,-2.6,.7,.7,.4);
+ g.scale.x=.82;
  g.userData.footprint=0;
  g.userData.tick=t=>layers.forEach(({sheet,i,s})=>{
   sheet.position.x=.06*Math.sin(t*.28-i*.31);sheet.rotation.z=.018*Math.sin(t*.2+s*i*.4);

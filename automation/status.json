@@ -1,16 +1,37 @@
 {
-  "generated_at": "2026-11-16T10:15:59.977Z",
+  "generated_at": "2026-11-16T22:30:05.366Z",
   "sha": {
-    "lab": "1971090a8b0dfd40e623fb38dc48d45e321b90d6",
-    "mg": "b6726b7690ab85059ea7a38d4ee684e49cef1730"
+    "lab": "922cf75972dc8dcc3e2c245f46ad081a1e3e8763",
+    "mg": "0375ce30bfd3f0385e53091ecaeec595e27fb052"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43847130820",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43970458065",
   "review": {
     "protected": [
+      {
+        "number": 339,
+        "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 340,
+        "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d",
+        "paths": [
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 338,
+        "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
       {
         "number": 321,
         "sha": "00c22fba0c1fbcf71a535ddd9342da286e875b27",
@@ -272,18 +293,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "META BOT",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43828309195",
-        "step": "Play all games"
-      },
-      {
-        "workflow": "Karta Sil",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43814780178",
-        "step": "Preserve failure after publishing no-data state"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -297,6 +307,7 @@
       "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
+      "| НАДЗОР — чат ChatGPT | lab/nadzor | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-16T14:18:43Z |",
       "| КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |",
       "| БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |",
       "| КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |",
@@ -307,10 +318,12 @@
       "| Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |",
       "| L1 ч.3 + L3 каталог для ИИ | lab/library-catalog | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-10 04:46 UTC |",
       "| УСКОРЕНИЕ 1.1–1.3 (сторож ZADACHI и STATUS) | lab/zadachi-conflicts | свободно (зависло 6 ч, было: чат ChatGPT, PR #220, продолжение) | 2026-11-13 11:20 UTC |",
+      "| B2 ч.2 broken-city (PR #291, оптимизация FPS и реальная вариативность) | lab/polza-b2-broken-city-20261113 | свободно (зависло 10 ч, было: чат ChatGPT (B2 Broken City, коммит 745469b)) | 2026-11-16T10:27:47.171Z |",
       "| CI: concurrency в GitHub Actions | lab/ci-ochered-concurrency | свободно (зависло 7 ч, было: чат ChatGPT — продолжение #299, очередь Actions) | 2026-11-14T06:25:04Z |",
       "| STATUS: источник ФИНИШ | lab/status-finish-source-20261113 | свободно (зависло 7 ч, было: чат ChatGPT — обновление #302 после API budget) | 2026-11-14T06:08:21Z |",
       "| LAB Native Catalog Candidate: восстановление после sync | lab/native-catalog-recovery-20261113 | свободно (зависло 4 ч, было: чат ChatGPT — продолжение PR #300, merge свежего main) | 2026-11-14T06:22:06Z |",
-      "| PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:17 UTC |"
+      "| PR #72: довести после GitHub API 403 | lab/immersive-dishonored-principles-20261107 | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-13 19:17 UTC |",
+      "| B2 Archer #264 — read-only adapter | lab/archer-retention-exp-1-game | свободно (зависло 8 ч, было: чат ChatGPT (продолжение B2 без нового PR, только наблюдение)) | 2026-11-16T12:35:00Z |"
     ]
   },
   "finish": {
@@ -405,15 +418,35 @@
       }
     ],
     "proofs": {
-      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43802776946"
+      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43902202267"
     }
   },
   "pr": {
-    "open": 44,
+    "open": 34,
     "conflicts": "нет данных",
-    "merged": 55,
-    "closed": 87,
+    "merged": 59,
+    "closed": 102,
     "mergedItems": [
+      {
+        "number": 341,
+        "title": "Эталон «Небесный пилот» (спрайт-стакинг), только добавление",
+        "sha": "d8cf489ee7b9ca0a4cf136cd1ee4efc7ab702359"
+      },
+      {
+        "number": 339,
+        "title": "ASSET CHECK 2.5: список ассетов без видео",
+        "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34"
+      },
+      {
+        "number": 340,
+        "title": "Карта сил: сбой не стирает карту, 5xx повторяется, «нет данн",
+        "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d"
+      },
+      {
+        "number": 338,
+        "title": "ASSET CHECK 2.4: заказ ассетов по видео",
+        "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb"
+      },
       {
         "number": 321,
         "title": "INK · Летящий ворон — объёмная 3D-модель и анимация в лесу",
@@ -692,6 +725,27 @@
     ],
     "protectedItems": [
       {
+        "number": 339,
+        "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 340,
+        "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d",
+        "paths": [
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 338,
+        "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
         "number": 321,
         "sha": "00c22fba0c1fbcf71a535ddd9342da286e875b27",
         "paths": [
@@ -955,12 +1009,12 @@
   },
   "changes": {
     "lab": {
-      "count": 2371,
+      "count": 2468,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 34,
-      "folders": ".github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1"
+      "count": 37,
+      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1"
     }
   },
   "games": [
@@ -1080,6 +1134,7 @@
     "| 1136 | 15.11.2026 | Мутация порога красных прогонов скрывалась высоким процентом закрытий, поэтому неверный порог не распознавался | Самопроверка новых метрик карты сил: два условия включались одновременно | `scripts/karta-sil/mutate-karta-sil.mjs`: независимый redOnly и 3 мутации 3-дневного среза |",
     "| 1138 | 15.11.2026 | Новая «Доля закрытых без слияния» ошибочно включала открытые заброшенные PR, завышая потери | Выделен isClosed для каждого PR, отдельный знаменатель метрики | `scripts/karta-sil/mutate-karta-sil.mjs`: различение открытого и закрытого «брошено», мутация расчёта |",
     "| 1139 | 15.11.2026 | 3-дневный срез по дате создания PR скрывал сегодняшние слияния старых PR | Старый PR создан ранее 3 дней, но слит/закрыт сегодня | `scripts/karta-sil/mutate-karta-sil.mjs`: событийный срез по mergedAt/closedAt/updatedAt, без публикации временных полей |",
-    "| 1134 | 15.11.2026 | Карта сил теряла исполнителей без истории ZANYATO и явного приоритета подписи | Прежний проверенный identifyActor сохранён для истории; новый композитор источников применяет приоритет по контракту | `scripts/karta-sil/mutate-karta-sil.mjs`: 4 мутации, в том числе ложный успех по одному номеру PR |"
+    "| 1134 | 15.11.2026 | Карта сил теряла исполнителей без истории ZANYATO и явного приоритета подписи | Прежний проверенный identifyActor сохранён для истории; новый композитор источников применяет приоритет по контракту | `scripts/karta-sil/mutate-karta-sil.mjs`: 4 мутации, в том числе ложный успех по одному номеру PR |",
+    "| 1140 | 16.11.2026 | Карта сил обнулилась от одного HTTP 502 GitHub (markNoData стирал прошлые цифры), а при «нет данных» у строки «автозадача» диспетчер отдавал все карточки в чат — 39 из 40 запусков автозадач стали холостыми | [прогон 43814780178](https://github.com/mpaykin1/meta6-lab/actions/runs/43814780178) | `scripts/karta-sil/mutate-karta-sil.mjs` (тест «сбой не стирает карту…», 7 мутаций) |"
   ]
 }

@@ -901,6 +901,7 @@ const SHPILI_PLUS=(()=>{
      }
      lit.push(coverWindows(root,windows,seed+200));
    }
+   g.userData.sightRadius=67;
    tower(-12.4,78,13.5,83);tower(11.5,94,11.8,204);
    for(let i=0;i<6;i++)beam(city,[-4.8,18+i*7.7,.2],[5,21+i*7.5,-.2],
      .08,0x548198,.38);
@@ -970,6 +971,7 @@ const SHPILI_PLUS=(()=>{
      const x=-8.9+i*2.96,light=plane(1.1,2.9,addMat(texGlow,0x8eeaff),
        x,11,2.7,temple);flames.push(light);
    }
+   g.userData.sightRadius=34;
    own[id].tick=t=>{
      glowMat.uniforms.uPower.value=.91+.09*Math.sin(t*.94);
      for(let i=0;i<flames.length;i++)flames[i].material.opacity=
@@ -1027,6 +1029,7 @@ const SHPILI_PLUS=(()=>{
      [-43,13.6]],1.8,coverStone(25,61939),-.4);
    coverSlab(root,[[14,13.8],[16,14.7],[43,14.4],
      [43,13.8],[14,13.8]],1.8,coverStone(25,61940),-.4);
+   g.userData.sightRadius=55;
    own[id].tick=t=>{
      for(let i=0;i<arches.length;i++){
        arches[i].rotation.z=.002*Math.sin(t*.29-i*.44);
@@ -1087,6 +1090,7 @@ const SHPILI_PLUS=(()=>{
        18+R()*23),mat);
      mesh.frustumCulled=false;g.add(mesh);bolts.push(mesh);
    }
+   g.userData.sightRadius=74;
    let next=3.4+R()*5,started=-100,span=.2,which=0;
    own[id].tick=t=>{
      if(t>=next){
@@ -1119,9 +1123,10 @@ const SHPILI_PLUS=(()=>{
      const a=own[id],chosen=focus?.id===id,eligible=(!focus||chosen)&&!hidden.has(id);
      a.group.visible=eligible;
      if(!eligible)continue;
-     if(!chosen){sight.center.copy(a.group.position);if(!frustum.intersectsSphere(sight))continue;}
+     if(!chosen){sight.center.copy(a.group.position);sight.radius=a.group.userData.sightRadius||28;if(!frustum.intersectsSphere(sight))continue;}
      a.tick(t,dt);
    }
+   if(!own.stormLightning.group.visible){for(const m of coverStormMats)m.uniforms.uLightning.value=0;}
  }
  return {tick,ids};
 })();

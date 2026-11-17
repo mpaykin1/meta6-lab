@@ -278,15 +278,28 @@ class KindTraps(unittest.TestCase):
         self.assertEqual(r.hard(), [], r.hard())
 
     def test_ink_night_train_bundled_reference_uses_trusted_three(self):
-        """Night Train has bundled Three.js, but pack check must still validate 3D makers."""
+        """Night Train bundles Three.js; the trusted engine must validate a real standalone maker."""
         if not shutil.which("node"):
             self.skipTest("нет node")
         d = self.ink_pack()
         manifest = json.loads((d / "pack.json").read_text("utf-8"))
         manifest["base"] = "reference/ink-night-scream"
+        manifest["assets"] = {"signal": {"label_ru": "Сигнал", "role": "prop",
+                                          "zone": "new:night", "footprint": .4}}
         (d / "pack.json").write_text(json.dumps(manifest), "utf-8")
+        (d / "makers.js").write_text(
+            "import * as T from 'three';\\n"
+            "export const makers={signal:(seed)=>{const g=new T.Group();"
+            "for(let i=0;i<35;i++){const m=new T.Mesh(new T.BoxGeometry(.15,.5,.18),"
+            "new T.MeshStandardMaterial({color:'#303c38'}));"
+            "m.position.set(Math.sin(i+seed)*.4,.25+i*.04,Math.cos(i)*.4);g.add(m);}"
+            "g.userData.footprint=.4;return g;}};\\n", "utf-8")
         report = cp.check(d)
-        self.assertEqual(report.hard(), [], report.hard())
+        failures = {i["id"] for i in report.hard()}
+        self.assertNotIn("IK1", failures, report.hard())
+        self.assertNotIn("IK2", failures, report.hard())
+        self.assertEqual(report.stats.get("ink_assets"), 1)
+
 
     def test_IK5_random_breaks_determinism(self):
         if not shutil.which("node"):

@@ -33,7 +33,7 @@ export function indexOpened(opened) {
 }
 export async function listOpenPullRequests(request = api) {
  const result = new Map();
- for(let page=1;;page++){
+ for(let page=1;page<=100;page++){
   let batch;
   try { batch=await request('/pulls?state=open&per_page=100&page='+page); }
   catch(error) { throw Error('GitHub API open PRs: нет данных: '+error.message); }
@@ -46,9 +46,9 @@ export async function listOpenPullRequests(request = api) {
    if(result.has(number))throw Error('GitHub API open PRs: неполные данные (повтор страницы)');
    result.set(number,pr);
   }
-  if(batch.length===0)return result;
+  if(batch.length<100)return result;
  }
- throw Error('GitHub API open PRs: неполная пагинация');
+ throw Error('GitHub API open PRs: превышен предел 100 страниц');
 }
 export function parseTasks(md){
  const lines=md.split('\n').filter(x=>x.startsWith('|')&&!x.startsWith('|---')&&!x.includes('| Статус |'));

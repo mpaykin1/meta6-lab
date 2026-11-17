@@ -118,6 +118,63 @@
       "role": "tree",
       "zone": "woodland",
       "footprint": 0.6
+    },
+    "boatShed": {
+      "label_ru": "Лодочный сарай с зелёной крышей",
+      "role": "interactive",
+      "zone": "lakeside",
+      "footprint": 1.28,
+      "benefit": "сохраняет лодку у причала"
+    },
+    "driftingLeaves": {
+      "label_ru": "Плывущие осенние листья и лепестки",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "sandBeachTiles": {
+      "label_ru": "Песчаная отмель с камнями и травой",
+      "role": "ground",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "tiltShiftPost": {
+      "label_ru": "Камерный эффект миниатюры и мягкого края",
+      "role": "effect",
+      "zone": "any",
+      "footprint": 0,
+      "render_kind": "postfx"
+    },
+    "dayCoastGrade": {
+      "label_ru": "Ясный день на лазурном берегу",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0,
+      "render_kind": "postfx"
+    },
+    "sndCarEngine": {
+      "label_ru": "Мотор машины и мокрые шины",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0,
+      "render_kind": "sound",
+      "sound_maker": "sounds.js"
+    },
+    "sndRainNight": {
+      "label_ru": "Дождь и мягкий щелчок фонарика",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0,
+      "render_kind": "sound",
+      "sound_maker": "sounds.js"
+    },
+    "sndRowingShore": {
+      "label_ru": "Вёсла, уключины и береговые волны",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0,
+      "render_kind": "sound",
+      "sound_maker": "sounds.js"
     }
   }
 }

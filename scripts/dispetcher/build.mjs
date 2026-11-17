@@ -95,13 +95,18 @@ export async function resolveConflict(pr,reload,prior,sleep=ms=>new Promise(done
  return {pr:current,conflict:current.mergeable===false||current.mergeable_state==='dirty',unresolved:false,retries};
 }
 // Z01: nominate abandoned red drafts for manual review; never close automatically.
-export function archiveCandidate({pr,lastCommit,failed,isFinish=false,now=Date.now()}) {
+export function archiveCandidate({pr,lastCommit,lastActivity,failed,isFinish=false,now=Date.now()}) {
  if (!pr || pr.state !== 'open' || pr.draft !== true) return false;
  const ownerPass = /\bOWNER PASS\b/i.test(String(pr.title || '')+'\n'+String(pr.body || ''));
  if (isFinish || ownerPass) return false;
  const date = Date.parse(lastCommit);
  if (!Number.isFinite(date) || !Number.isFinite(now)) throw Error('нет данных: дата коммита PR');
- if (now - date <= 48 * 60 * 60 * 1000) return false;
+ const activity = Date.parse(lastActivity);
+ // A commit alone cannot establish inactivity: comments and reviews may be newer.
+ // Callers must supply the latest timestamp across commits, issue comments and reviews.
+ if (!Number.isFinite(activity)) throw Error('нет данных: последняя активность PR (комментарии и рецензии)');
+ if (activity > now || date > now) throw Error('нет данных: дата активности PR в будущем');
+ if (now - Math.max(date, activity) <= 48 * 60 * 60 * 1000) return false;
  if (!Array.isArray(failed) || failed.some(x => !x || typeof x.name !== 'string')) throw Error('нет данных: проверки PR');
  return failed.some(({url}) => !/build-rate-limit|api-deployments-free-per-day/i.test(String(url || '')));
 }

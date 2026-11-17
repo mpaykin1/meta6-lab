@@ -10,7 +10,7 @@ const M={
  red:new T.MeshBasicMaterial({color:0xb31717}),
  glow:new T.MeshBasicMaterial({color:0xf4e5cc}),
  glass:new T.MeshBasicMaterial({color:0xb9c5bc}),
- mist:new T.MeshBasicMaterial({color:0x778389,transparent:true,opacity:.13,depthWrite:false,side:T.DoubleSide})
+ mist:new T.MeshStandardMaterial({color:0xa1adb2,emissive:0x161d22,emissiveIntensity:.18,roughness:1,transparent:true,opacity:.14,depthWrite:false,side:T.DoubleSide})
 };
 function random(seed){let s=(seed|0)||13;return()=>((s=(Math.imul(1664525,s)+1013904223)|0)>>>0)/4294967296;}
 function add(g,geo,mat,x=0,y=0,z=0){const o=new T.Mesh(geo,mat);o.position.set(x,y,z);o.userData.watercolorOutline=true;g.add(o);return o;}
@@ -109,15 +109,15 @@ function hangingChains(seed=4){
  const r=random(seed),g=new T.Group(),strands=[];
  rod(g,[0,0,0],[0,2.5,0],.039,M.iron);
  for(let j=0;j<3;j++){
-  const chain=new T.Group();chain.position.set((j-1)*.65,2.5+(j===1?.4:0),0);g.add(chain);strands.push(chain);
+  const chain=new T.Group(),links=[];chain.position.set((j-1)*.65,2.5+(j===1?.4:0),0);g.add(chain);strands.push({chain,links});
   const n=11+j*3;
   for(let k=0;k<n;k++){
    const link=add(chain,new T.TorusGeometry(.095,.022,5,9),k%3?M.silver:M.ironEdge,.08*Math.sin(k*.27),-k*.15,0);
-   link.rotation.x=k%2?Math.PI/2:0;link.rotation.z=k*.11;
+   link.rotation.x=k%2?Math.PI/2:0;link.rotation.z=k*.11;links.push(link);
    if(k%4===0)add(chain,new T.SphereGeometry(.032,5,4),M.iron,k*.001,-k*.15,.03);
   }
  }
- g.userData.tick=(t)=>strands.forEach((s,j)=>{s.rotation.z=.06*Math.sin(t*.56-j*.42);s.rotation.x=.045*Math.sin(t*.4-j*.7);});
+ g.userData.tick=t=>strands.forEach(({chain,links},j)=>{chain.rotation.z=.035*Math.sin(t*.56-j*.42);links.forEach((o,k)=>{o.rotation.z=k*.11+.07*Math.sin(t*.61-k*.18-j*.4);o.rotation.y=.024*Math.sin(t*.45-k*.13);});});
  return finish(g,0);
 }
 function gnarledTree(seed=5){
@@ -160,7 +160,7 @@ function groundMist(seed=6){
 
 function stormClouds(seed=7){
  const r=random(seed),g=new T.Group(),layers=[];
- const cloudMat=new T.MeshBasicMaterial({color:0x20282d,transparent:true,opacity:.63,side:T.DoubleSide,depthWrite:false});
+ const cloudMat=new T.MeshBasicMaterial({color:0x39454a,transparent:true,opacity:.63,side:T.DoubleSide,depthWrite:false});
  for(let j=0;j<5;j++){
   const sh=new T.Shape(),w=2+r()*2.5;
   sh.moveTo(-w/2,0);

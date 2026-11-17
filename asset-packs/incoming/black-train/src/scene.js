@@ -476,7 +476,30 @@ function animate(ms){
 requestAnimationFrame(animate);
 document.addEventListener('visibilitychange',()=>audio.suspend(document.hidden||menuOpen));
 // hooks for automatic checks (bot-tester)
-window.__BLACK_TRAIN_PACK__={assets:assetGroups,setHidden:(id,on)=>{for(const m of assetGroups[id]||[])m.visible=!on;}};
+// Asset-by-asset pixel isolation: freeze the simulation so shown/hidden screenshots
+// differ ONLY by the selected asset, never by film flicker or moving scenery.
+const packAssetIds=Object.keys(assetGroups);
+function setPackHidden(id,hidden){
+  if(!Object.prototype.hasOwnProperty.call(assetGroups,id))return false;
+  manual=true;
+  for(const obj of assetGroups[id])obj.visible=!hidden;
+  draw();
+  return true;
+}
+function resumePack(){
+  manual=false;
+  prevMs=performance.now();
+}
+window.__ISOLATE__=(id,on)=>setPackHidden(id,!on);
+window.__PACK_PROBE__={
+  assets:Object.fromEntries(packAssetIds.map(id=>[id,{
+    target:assetGroups[id][0].getWorldPosition(new T.Vector3()).toArray(),
+    instances:assetGroups[id].length
+  }])),
+  setHidden:setPackHidden,
+  resume:resumePack
+};
+window.__BLACK_TRAIN_PACK__={assets:assetGroups,setHidden:setPackHidden,resume:resumePack};
 window.__INK_NIGHT_SCREAM__={
   ready:true,scene,camera,monster,train,
   start:()=>startNight(1),

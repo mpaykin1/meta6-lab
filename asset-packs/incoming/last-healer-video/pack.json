@@ -1,6 +1,6 @@
 {
   "format": "ink-pack/1",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "game": "ostrov-aptekarya",
   "base": "reference/ink-fallen-guardian",
   "license": {
@@ -46,6 +46,19 @@
       "zone": "city",
       "footprint": 0,
       "benefit": "Дождь становится видим на дороге и в лужах"
+    },
+    "townRoad": {
+      "label_ru": "Неровная улица и перекрёсток",
+      "role": "ground",
+      "zone": "city",
+      "footprint": 0,
+      "benefit": "Проходимая старая дорога с трещинами и бордюрами"
+    },
+    "wetGrassClumps": {
+      "label_ru": "Мокрая трепещущая трава",
+      "role": "plant",
+      "zone": "woodland",
+      "footprint": 0
     }
   }
 }

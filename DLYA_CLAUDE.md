@@ -6,7 +6,7 @@
 
 ## 14.11.2026 — проверка ботов
 
-META BOT: исходный checkGame принимает viewports=[] и возвращает ok=true,runs=[] без проверки игры. Воспроизведено в скрытом Chromium 141. Нужна валидация непустого списка поддерживаемых экранов в loadGame и regression fixture. scripts/meta-bot защищён, обход охранника не выполнялся. Доказательство: reports/bot-audit/PROGRESS.md.
+META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loadGame применена, вечная ловушка scripts/meta-bot/mutate-viewports.mjs (OSHIBKI 2026111702).
 
 
 <!-- STOROZHA:PROTECTED:BEGIN -->

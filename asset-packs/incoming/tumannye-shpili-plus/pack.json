@@ -1,7 +1,7 @@
 {
   "format": "htmlpack/1",
-  "version": "1.3.0",
-  "name": "Туманные шпили — живой мир + 14 ассетов",
+  "version": "1.4.0",
+  "name": "Туманные шпили — живой мир + 19 ассетов",
   "base": "reference/tumannye-shpili",
   "reference_count": 26,
   "license": {
@@ -110,6 +110,36 @@
       "label_ru": "Лес шпилей на горизонте",
       "role": "background",
       "benefit": "48 неповторяющихся готических силуэтов и далёкие огни",
+      "animated": true
+    },
+    "blueStormNight": {
+      "label_ru": "Синяя грозовая ночь",
+      "role": "weather",
+      "benefit": "Холодная синяя цветокоррекция с сохранением исходных режимов",
+      "animated": true
+    },
+    "rainSheets": {
+      "label_ru": "Завесы ливня",
+      "role": "weather",
+      "benefit": "Многослойные потоки ливня под ветром, GPU-шейдер",
+      "animated": true
+    },
+    "waterGlow": {
+      "label_ru": "Дрожащие отражения огней",
+      "role": "effect",
+      "benefit": "Вертикальные отражения света храма, шпилей и молний в воде",
+      "animated": true
+    },
+    "stormSound": {
+      "label_ru": "Звук грозы и ливня",
+      "role": "sound",
+      "benefit": "Мягкий шум дождя, задержанный низкий гром, запуск после жеста на мобильном",
+      "animated": true
+    },
+    "titleOrnament": {
+      "label_ru": "Орнамент заставки без текста",
+      "role": "ui",
+      "benefit": "Светящаяся четырёхлучевая звезда, ромбы и филигрань в игре и меню",
       "animated": true
     }
   }

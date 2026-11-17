@@ -177,7 +177,21 @@ export async function main(){
  if(!conflict&&!conflictUnknown&&!failed.length&&!stalled&&!stale)continue;
  c.priority=(conflict||conflictUnknown)?0:failed.length?1:stalled?2:3;
  c.problem=conflict?(resolution.unresolved?'Конфликт с main (прошлый статус, mergeable=null)':'Конфликт с main'):conflictUnknown?'Статус конфликта неизвестен: mergeable=null после 3 повторов':failed.length?'Красная проверка: '+failed.map(x=>x.name+' ('+x.url+')').join(', '):stalled?'🛑 ЗАВИС':'💤 ЗАБРОШЕНО более 2 суток';
+ // Archive recommendation is advisory: never close PR automatically.
+ // Only old drafts with complete activity history and attributable failed checks qualify.
+ let archive=false;
+ if(pr.draft===true && stale && failed.length>0 && !isFinish){
+  const latestActivity=await latestPrActivity(t.id);
+  const activity=latestActivity || lastCommit;
+  try {
+   archive=archiveCandidate({pr,lastCommit,lastActivity:activity,failed,isFinish});
+  } catch(error) {
+   // Missing check URLs or incomplete evidence must not be mistaken for a proven failure.
+   if(!String(error.message).startsWith('нет данных: URL красной проверки PR'))throw error;
+  }
+ }
  c.action=conflict?'Смержи актуальный main в ветку. Разреши файлы из git diff --name-only --diff-filter=U и перезапусти CI.':conflictUnknown?'Проверь конфликт вручную: GitHub не ответил после 3 повторов; не считай PR бесконфликтным.':failed.length?'Исправь '+failed[0].name+' по логу '+failed[0].url+' и повтори CI.':stalled?'Продолжи работу по PR, проверь CI и доведи до слияния.':c.finish?'Доведи пункт FINISH.md до зелёных проверок.':'Закрой устаревший PR с причиной в OSHIBKI.md либо доведи его.';
+ if(archive)c.action='Кандидат на ручной архивный разбор (>48ч без активности, красный CI). '+c.action;
  const routing=routeFor(c,map);
  c.routing=routing;
  if(routing.target==='claude'){claude.push(c);continue;}

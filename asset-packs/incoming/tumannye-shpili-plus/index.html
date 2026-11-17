@@ -1390,6 +1390,66 @@ const SHPILI_PLUS=(()=>{
    own[id].tick=()=>{};
  }
 
+
+ /* TITLE ORNAMENT: central four-point star, broken filigree and diamond ends. */
+ {
+   const id='titleOrnament',g=newGroup(id,0,29,-43),vertices=[];
+   function segment(ax,ay,bx,by,w){
+     const dx=bx-ax,dy=by-ay,len=Math.max(.001,Math.hypot(dx,dy));
+     const ox=-dy/len*w*.5,oy=dx/len*w*.5;
+     vertices.push(ax-ox,ay-oy,0,ax+ox,ay+oy,0,bx+ox,by+oy,0,
+       ax-ox,ay-oy,0,bx+ox,by+oy,0,bx-ox,by-oy,0);
+   }
+   function polygon(pts,width){
+     for(let i=0;i<pts.length;i++)
+       segment(...pts[i],...pts[(i+1)%pts.length],width);
+   }
+   for(const s of [-1,1]){
+     segment(s*1.3,0,s*13.8,0,.055);
+     segment(s*4.8,0,s*6.5,.29,.06);
+     segment(s*6.5,.29,s*8.3,0,.06);
+     segment(s*4.8,0,s*6.5,-.29,.06);
+     segment(s*6.5,-.29,s*8.3,0,.06);
+     polygon([[s*11.1,0],[s*11.9,1.05],[s*12.7,0],[s*11.9,-1.05]],.055);
+     for(let i=0;i<4;i++){
+       const x=s*(8.6+i*.58),y=Math.sin(i*1.7)*.25;
+       segment(x,y,x+s*.35,y+.34,.026);
+       segment(x,y,x+s*.35,y-.34,.026);
+     }
+   }
+   polygon([[0,3.5],[.68,.8],[3.4,0],[.68,-.8],[0,-3.5],
+     [-.68,-.8],[-3.4,0],[-.68,.8]],.12);
+   polygon([[0,1.5],[.27,.26],[1.4,0],[.27,-.26],
+     [0,-1.5],[-.27,-.26],[-1.4,0],[-.27,.26]],.09);
+   for(let i=0;i<8;i++){
+     const a=i*Math.PI/4,r=4.1;
+     segment(Math.cos(a)*r,Math.sin(a)*r,
+       Math.cos(a)*(r+1.15),Math.sin(a)*(r+1.15),.045);
+   }
+   const geo=new T.BufferGeometry();
+   geo.setAttribute('position',new T.Float32BufferAttribute(vertices,3));
+   const mat=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,
+     side:T.DoubleSide,blending:T.AdditiveBlending,
+     uniforms:{uT:U.t,uOpacity:{value:.3}},
+     vertexShader:'void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+     fragmentShader:'uniform float uT,uOpacity;void main(){float wave=.81+.19*sin(uT*1.7);gl_FragColor=vec4(vec3(.44,.82,1.)*wave*uOpacity,uOpacity);}'} );
+   const glyph=new T.Mesh(geo,mat);glyph.frustumCulled=false;g.add(glyph);
+   g.userData.sightRadius=18;
+   own[id].tick=t=>{
+     const selected=focus&&focus.id===id;
+     mat.uniforms.uOpacity.value=(selected?.85:.35)+.12*Math.sin(t*.85);
+     glyph.scale.setScalar(1+.018*Math.sin(t*1.17));
+   };
+   const header=document.querySelector('#pn header');
+   if(header){
+     const deco=document.createElement('div');
+     deco.setAttribute('aria-hidden','true');
+     deco.style.cssText='position:absolute;right:55px;top:65px;width:105px;height:18px;opacity:.58;pointer-events:none';
+     deco.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 18" width="105" height="18" fill="none" stroke="#9ceaff" stroke-width=".8"><path d="M0 9h65l20-8 20 8h65M85 1l8 8-8 8-8-8zM20 9l6-5 6 5-6 5zM138 9l6-5 6 5-6 5z"/></svg>';
+     header.appendChild(deco);
+   }
+ }
+
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;

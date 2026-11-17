@@ -48,7 +48,8 @@ await suite(source);
 const mutations = [
   ['green-without-evidence', "const isGreen = /^ЗЕЛЁНАЯ(?:\\s|$)/.test(status) && evidence?.repo === LAB;",
     "const isGreen = /^ЗЕЛЁНАЯ(?:\\s|$)/.test(status);"],
-  ['api-outage-erases-accepted', '      ready.push(id);', '      pending.push({ id, value: UNKNOWN, reason: UNKNOWN });'],
+  ['api-outage-erases-accepted', '    if (isGreen) {\n      ready.push(id);',
+    '    if (isGreen) {\n      pending.push({ id, value: UNKNOWN, reason: UNKNOWN });'],
   ['api-outage-falsely-confirmed', "value: apiUnavailable ? UNKNOWN : 'не подтверждено'",
     "value: 'подтверждено'"]
 ];

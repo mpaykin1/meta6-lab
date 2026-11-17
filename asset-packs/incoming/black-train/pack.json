@@ -1,7 +1,7 @@
 {
   "format": "ink-pack/1",
-  "version": "0.1.0",
-  "name": "BLACK TRAIN — первая партия ассетов",
+  "version": "0.2.0",
+  "name": "BLACK TRAIN — 15 ассетов по заставке",
   "base": "reference/ink-night-scream",
   "license": {
     "type": "own",
@@ -57,6 +57,62 @@
       "role": "effect",
       "zone": "railway",
       "animated": true
+    },
+    "stormClouds": {
+      "label_ru": "Грозовые тучи",
+      "role": "effect",
+      "zone": "sky",
+      "animated": true
+    },
+    "brokenFence": {
+      "label_ru": "Покосившийся деревянный забор",
+      "role": "prop",
+      "zone": "railway",
+      "animated": false
+    },
+    "tallGrass": {
+      "label_ru": "Осока вдоль насыпи",
+      "role": "plant",
+      "zone": "railway",
+      "animated": true
+    },
+    "wetRailGlow": {
+      "label_ru": "Мокрые рельсы и красный отсвет",
+      "role": "ground",
+      "zone": "railway",
+      "animated": true
+    },
+    "barbedWire": {
+      "label_ru": "Колючая проволока",
+      "role": "prop",
+      "zone": "railway",
+      "animated": true
+    },
+    "swampPuddles": {
+      "label_ru": "Болотные лужи",
+      "role": "ground",
+      "zone": "railway",
+      "animated": true
+    },
+    "titleLogo": {
+      "label_ru": "Логотип BLACK TRAIN",
+      "role": "prop",
+      "zone": "menu",
+      "animated": true
+    },
+    "crossingBell": {
+      "label_ru": "Колокол переезда",
+      "role": "prop",
+      "zone": "railway",
+      "animated": true,
+      "benefit": "звук предупреждения при приближении поезда"
+    },
+    "chainsClank": {
+      "label_ru": "Позвякивающие цепи",
+      "role": "prop",
+      "zone": "railway",
+      "animated": true,
+      "benefit": "тихий позиционный звук цепей"
     }
   }
 }

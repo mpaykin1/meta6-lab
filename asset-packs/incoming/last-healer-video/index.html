@@ -29,7 +29,8 @@ button{border:1px solid #b3b8a5;background:#faf6ebed;color:#324440;border-radius
 import * as T from 'three';
 import {makers} from './makers.js';
 import {car,apothecary,streetlamp,pier} from '../../../reference/ink-fallen-guardian/ink-settlement.js';
-import {fir, birch, shelter, lantern} from '../../../reference/ink-fallen-guardian/ink-objects.js';
+import {fir, birch, shelter, lantern, traveller} from '../../../reference/ink-fallen-guardian/ink-objects.js';
+import {rowboat} from '../../../reference/ink-fallen-guardian/ink-extras.js';
 import {createIllustrationCamera} from '../../../reference/ink-fallen-guardian/shared/living-watercolor-generators.js';
 import {createLivingWatercolor3D,createWatercolorStyle} from '../../../reference/ink-fallen-guardian/shared/living-watercolor-3d.js';
 import {createInkOptics} from '../../../reference/ink-fallen-guardian/ink-optics.js';
@@ -83,6 +84,7 @@ for(let k=-3;k<=3;k++)if(k!==0){
 const rain=new T.Group();stages.push(rain);scene.add(rain);ground(rain,'#536e68',2);
 add(rain,shelter(),null,2.8,1.7);
 add(rain,lantern(),null,-1.9,1.15);
+add(rain,traveller(),null,-.55,-.1);
 add(rain,makers.handFlashlight(5),'handFlashlight',-.55,-.1);
 add(rain,makers.rainSplashRings(4),'rainSplashRings',0,.1);
 add(rain,fir(2),null,-3,2.5);add(rain,birch(3),null,2.9,-2.2);
@@ -95,6 +97,7 @@ for(let i=0;i<6;i++){
 const coast=new T.Group();stages.push(coast);scene.add(coast);ground(coast,'#80a8a2',3,true);
 const island=new T.Mesh(new T.CircleGeometry(3.5,35),new T.MeshStandardMaterial({color:'#beb397',roughness:1}));
 island.rotation.x=-Math.PI/2;island.scale.set(1,.7,1);island.position.set(3.3,-.018,2.1);coast.add(island);
+add(coast,rowboat(),null,-1.0,-.8,.2);
 add(coast,makers.rowingHealer(3),'rowingHealer',-1.0,-.8,.2);
 add(coast,pier(),null,2.6,.2,-.2);
 add(coast,fir(3),null,3.2,2.2);add(coast,birch(7),null,4.0,2.2);

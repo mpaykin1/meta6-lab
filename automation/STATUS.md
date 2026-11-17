@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T08:58:39.158Z | МГЛ: 196c792c9c870ee035a13eb7c47bc51046a1ac64 | МГ: aa63d1def02bcca2ddf7f3161add508255df824c | https://github.com/mpaykin1/meta6-lab/actions/runs/44051231173
+UTC: 2026-11-17T09:22:09.061Z | МГЛ: c8178e09f9a9b0dfd10168682469dd2e744e378a | МГ: aa63d1def02bcca2ddf7f3161add508255df824c | https://github.com/mpaykin1/meta6-lab/actions/runs/44054755867
 ## ПРОВЕРИТЬ CLAUDE
 - PR #362 51f2ef012ec9cf31d0d68c83ba02fac0951974b7: automation/asset-check/test_3d_master.py
 - PR #372 0e5d7893812d336299d041199deda50557a07395: scripts/karta-sil/mutate-current-claude-marker.mjs, scripts/karta-sil/mutate-karta-sil.mjs
@@ -36,7 +36,7 @@ L4 — не готов: НЕТ в таблице FINISH
 #362 feat(3d-master): профессиональный аудит glTF геометрии (част | 51f2ef012ec9cf31d0d68c83ba02fac0951974b7
 ещё 72: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2740 коммитов | нет данных
+МГЛ: 2743 коммитов | нет данных
 МГ: 43 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:31, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

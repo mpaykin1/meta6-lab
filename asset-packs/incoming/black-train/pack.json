@@ -1,0 +1,60 @@
+{
+  "format": "ink-pack/1",
+  "game": "ink-night-scream",
+  "base": "reference/ink-night-scream",
+  "version": "0.1.0",
+  "license": {
+    "type": "own",
+    "author": "META GAMES — original procedural assets",
+    "commercial": true
+  },
+  "provenance": {
+    "tool": "ChatGPT, deterministic Three.js; owner's BLACK TRAIN cover",
+    "date": "2026-11-17",
+    "prompt": "automation/prompts/ASSET_PACK_BOT.md"
+  },
+  "content_flags": {
+    "real_persons": [],
+    "brands": [],
+    "political": false
+  },
+  "assets": {
+    "blackLocomotive": {
+      "label_ru": "Чёрный локомотив",
+      "role": "vehicle",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "crossingSign": {
+      "label_ru": "Прогнивший переезд",
+      "role": "landmark",
+      "zone": "railway",
+      "footprint": 0.55
+    },
+    "redSignalLamp": {
+      "label_ru": "Красный сигнальный фонарь",
+      "role": "interactive",
+      "zone": "railway",
+      "footprint": 0,
+      "benefit": "Предупреждает о приближении поезда"
+    },
+    "hangingChains": {
+      "label_ru": "Живые ржавые цепи",
+      "role": "prop",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "gnarledTree": {
+      "label_ru": "Корявое дерево",
+      "role": "tree",
+      "zone": "woodland",
+      "footprint": 0.83
+    },
+    "groundMist": {
+      "label_ru": "Стелющийся туман",
+      "role": "effect",
+      "zone": "railway",
+      "footprint": 0
+    }
+  }
+}

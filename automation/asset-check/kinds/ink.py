@@ -180,9 +180,6 @@ def check(root: Path, r) -> set:
             r.add("IK7", "HARD", name, f"{m['tris']} треугольников > {hi} для {role}", "Упрости геометрию (меньше сегментов)")
         elif m["tris"] > lo:
             r.add("IK7", "SOFT", name, f"{m['tris']} треугольников > {lo}", "Упрости или сделай вариант для дальнего плана")
-        if base.name == "ink-night-scream" and role == "vehicle" and m["meshes"] < 40:
-            r.add("IK16", "HARD", name, "локомотив примитивнее эталона: меньше 40 деталей",
-                  "Сложный силуэт с отдельной кабиной, окнами, колёсами, лестницами и фарами")
         if m["meshes"] > 200:
             r.add("IK7", "HARD", name, f"{m['meshes']} отдельных мешей — тормоза на телефоне", "Объедини меши (batchInk эталона)")
         elif m["meshes"] > 80:

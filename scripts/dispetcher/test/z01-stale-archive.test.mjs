@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {archiveCandidate} from '../build.mjs';
+import {archiveCandidate,latestPrActivity} from '../build.mjs';
 
 const now=Date.parse('2026-11-17T12:00:00Z');
 const pr={state:'open',draft:true,title:'Old experiment',body:'Awaiting work'};
@@ -24,4 +24,19 @@ test('only stale red drafts without owner acceptance are archive candidates',()=
  assert.throws(()=>archiveCandidate({...base,failed:[{name:'unknown'}]}),/URL красной проверки/);
  assert.throws(()=>archiveCandidate({...base,failed:[{name:'unknown',url:''}]}),/URL красной проверки/);
  assert.throws(()=>archiveCandidate({...base,failed:[{name:'unknown',url:'not-a-url'}]}),/URL красной проверки/);
+});
+
+test('activity collector pages through comments and reviews',async()=>{
+ const calls=[];
+ const request=async path=>{
+  calls.push(path);
+  if(path.includes('/comments')&&path.includes('page=1'))return Array.from({length:100},()=>({updated_at:'2026-11-10T00:00:00Z'}));
+  if(path.includes('/comments'))return [{updated_at:'2026-11-15T00:00:00Z'}];
+  return [{submitted_at:'2026-11-16T00:00:00Z'}];
+ };
+ assert.equal(await latestPrActivity(401,request),'2026-11-16T00:00:00.000Z');
+ assert.equal(calls.length,3);
+ assert.equal(await latestPrActivity(401,async()=>[]),null);
+ await assert.rejects(()=>latestPrActivity(401,async()=>[{}]),/дата активности/);
+ await assert.rejects(()=>latestPrActivity(401,async()=>null),/история активности/);
 });

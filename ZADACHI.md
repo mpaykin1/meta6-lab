@@ -16,6 +16,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | АССЕТЫ: The Last Healer — 24 видео-ассета INK | МГЛ | чат ChatGPT | `lab/assets-last-healer-video-20261117` | [#392](https://github.com/mpaykin1/meta6-lab/pull/392) | 2026-11-17 12:26 UTC | — |
 | взято | Z01: устранить конфликт PR #374 без потери независимых записей | МГЛ | чат ChatGPT | `lab/z01-preserve-summary-conflicts-builder3-1117` | [#374](https://github.com/mpaykin1/meta6-lab/pull/374) | 2026-11-17 10:46 UTC | — |
 | взято | Z01: восстановить CI PR #357 и регламент прямых ссылок Playgama | МГЛ | чат ChatGPT | `lab/rules-playgama-catalog-direct-20261117` | [#357](https://github.com/mpaykin1/meta6-lab/pull/357) | 2026-11-17 10:52 UTC | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | docs(z01): verify live PR identity before backlog decisions | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/mg-remontnik-nadzor-z01-20261117` | [#369](https://github.com/mpaykin1/meta6-lab/pull/369) | 2026-11-17 03:49 | 2026-11-17 03:48 |

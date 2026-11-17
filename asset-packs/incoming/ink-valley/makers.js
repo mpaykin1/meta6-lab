@@ -53,7 +53,7 @@ export function ashStag(seed=1){
  }
  for(let i=0;i<17;i++){const x=(R(seed,i)-.5)*1.32;const fur=add(g,new T.ConeGeometry(.035,.13,4),i%2?C.moss:C.leaf,x,1.4,(R(seed,i+37)-.5)*.46);fur.rotation.z=(R(seed,i+81)-.5)*1.4}
  const tail=ell(g,C.bone,-.83,1.33,0,.2,.12,.12);
- g.userData.tick=t=>{joints.forEach(([o,s],i)=>o.rotation.z=Math.sin(t*2.05+i*.75)*.17*s;g.position.y=.015*Math.sin(t*4);tail.rotation.z=Math.sin(t*1.45)*.2;g.rotation.y=Math.sin(t*.24+seed)*.06};return g;
+ g.userData.tick=t=>{joints.forEach(([o,s],i)=>o.rotation.z=Math.sin(t*2.05+i*.75)*.17*s);g.position.y=.015*Math.sin(t*4);tail.rotation.z=Math.sin(t*1.45)*.2;g.rotation.y=Math.sin(t*.24+seed)*.06};return g;
 }
 
 export function pilgrimageBoat(seed=1){

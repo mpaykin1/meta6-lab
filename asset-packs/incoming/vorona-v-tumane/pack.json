@@ -75,6 +75,24 @@
       "role": "2.5d",
       "animated": true,
       "source": "Заметки Claude 17.11 — гнездо"
+    },
+    "impact_feathers": {
+      "label_ru": "Перья при ударе",
+      "role": "effect",
+      "animated": true,
+      "source": "automation/asset-check/OCHERED.md, 17.11.2026"
+    },
+    "raindrops": {
+      "label_ru": "Капли воды",
+      "role": "effect",
+      "animated": true,
+      "source": "automation/asset-check/OCHERED.md, 17.11.2026"
+    },
+    "glowing_eyes": {
+      "label_ru": "Глаза в тумане",
+      "role": "effect",
+      "animated": true,
+      "source": "automation/asset-check/OCHERED.md, 17.11.2026"
     }
   }
 }

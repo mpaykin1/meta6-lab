@@ -125,6 +125,70 @@ const context=offscreen.getContext('2d',{alpha:true});
 const gifTexture=new T.CanvasTexture(offscreen);gifTexture.colorSpace=T.SRGBColorSpace;
 const creature=new T.Sprite(new T.SpriteMaterial({map:gifTexture,transparent:true,depthWrite:false}));
 creature.scale.set(6.2,6.15,1);specimen.add(creature);objects.stalker=specimen;
+
+const rigPlan=[
+ {id:'torso',parent:null,pivot:[170,99],poly:[[104,36],[160,31],[206,42],[234,76],[244,115],[227,152],[188,173],[131,157],[104,125],[105,76]]},
+ {id:'head',parent:'torso',pivot:[125,114],poly:[[77,85],[91,78],[114,79],[136,94],[140,114],[122,139],[97,143],[76,121]]},
+ {id:'armL_upper',parent:'torso',pivot:[138,121],poly:[[127,109],[154,128],[110,179],[95,204],[70,214],[68,197],[97,164]]},
+ {id:'armL_lower',parent:'armL_upper',pivot:[79,204],poly:[[70,195],[97,204],[90,229],[81,256],[108,288],[57,296],[38,302],[43,263],[62,230]]},
+ {id:'armR_upper',parent:'torso',pivot:[211,119],poly:[[192,83],[228,95],[255,142],[262,167],[232,183],[207,156],[178,120]]},
+ {id:'armR_lower',parent:'armR_upper',pivot:[241,163],poly:[[222,151],[264,155],[233,217],[197,240],[166,276],[131,307],[107,306],[146,257],[181,223]]},
+ {id:'legL_upper',parent:'torso',pivot:[181,160],poly:[[169,147],[205,143],[214,170],[181,197],[146,217],[122,208]]},
+ {id:'legL_lower',parent:'legL_upper',pivot:[149,205],poly:[[129,188],[185,191],[184,239],[163,276],[130,281],[150,243]]},
+ {id:'legR_upper',parent:'torso',pivot:[232,159],poly:[[213,134],[254,131],[274,186],[283,227],[247,244],[218,204]]},
+ {id:'legR_lower',parent:'legR_upper',pivot:[266,221],poly:[[244,212],[283,212],[293,258],[288,287],[235,298],[216,286],[247,264]]}
+];
+const joints=Object.create(null);
+function buildCutoutRig(){
+ if(!gif.complete||!gif.naturalWidth)return false;
+ const k=6.2/315,groups=Object.create(null),origin=[157.5,155.5];
+ const rootJoint=new T.Group();specimen.add(rootJoint);
+ for(const [i,part] of rigPlan.entries()){
+  const bounds={
+   minX:Math.max(0,Math.floor(Math.min(...part.poly.map(v=>v[0]))-3)),
+   maxX:Math.min(315,Math.ceil(Math.max(...part.poly.map(v=>v[0]))+3)),
+   minY:Math.max(0,Math.floor(Math.min(...part.poly.map(v=>v[1]))-3)),
+   maxY:Math.min(311,Math.ceil(Math.max(...part.poly.map(v=>v[1]))+3))
+  };
+  const canvas=document.createElement('canvas');
+  canvas.width=bounds.maxX-bounds.minX;canvas.height=bounds.maxY-bounds.minY;
+  const ctx=canvas.getContext('2d');
+  ctx.save();ctx.beginPath();
+  part.poly.forEach(([x,y],j)=>j?ctx.lineTo(x-bounds.minX,y-bounds.minY):
+    ctx.moveTo(x-bounds.minX,y-bounds.minY));
+  ctx.closePath();ctx.clip();ctx.drawImage(gif,-bounds.minX,-bounds.minY);ctx.restore();
+  const map=new T.CanvasTexture(canvas);map.colorSpace=T.SRGBColorSpace;
+  const mesh=new T.Mesh(new T.PlaneGeometry(canvas.width*k,canvas.height*k),
+   new T.MeshBasicMaterial({map,transparent:true,depthWrite:false,side:T.DoubleSide}));
+  const group=new T.Group();
+  const parent=part.parent?groups[part.parent]:rootJoint;
+  const parentPx=part.parent?rigPlan.find(v=>v.id===part.parent).pivot:origin;
+  group.position.set((part.pivot[0]-parentPx[0])*k,
+   -(part.pivot[1]-parentPx[1])*k,.009*i);
+  mesh.position.set(((bounds.minX+bounds.maxX)/2-part.pivot[0])*k,
+   -((bounds.minY+bounds.maxY)/2-part.pivot[1])*k,0);
+  group.add(mesh);parent.add(group);groups[part.id]=group;
+ }
+ joints.parts=groups;joints.root=rootJoint;joints.ready=true;
+ creature.visible=false;return true;
+}
+gif.addEventListener('load',buildCutoutRig,{once:true});
+if(gif.complete)buildCutoutRig();
+function animateCutout(t){
+ if(!joints.ready)return;
+ const p=joints.parts,step=t*2.05;
+ p.torso.rotation.z=Math.sin(step*.55)*.028;
+ p.head.rotation.z=Math.sin(step*.62-.4)*.065;
+ p.armL_upper.rotation.z=Math.sin(step)*.13;
+ p.armL_lower.rotation.z=Math.sin(step-.72)*.25;
+ p.armR_upper.rotation.z=-Math.sin(step+.5)*.19;
+ p.armR_lower.rotation.z=-Math.sin(step-.32)*.29;
+ p.legL_upper.rotation.z=Math.sin(step+1.1)*.22;
+ p.legL_lower.rotation.z=-Math.sin(step+.31)*.38;
+ p.legR_upper.rotation.z=-Math.sin(step)*.19;
+ p.legR_lower.rotation.z=Math.sin(step-.85)*.33;
+}
+
 let gifUpdate=0;
 const featherSvg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 240">'+
  '<defs><linearGradient id="f"><stop stop-color="#d5c4ba"/><stop offset=".45" stop-color="#b4aab3"/>'+
@@ -258,7 +322,8 @@ function draw(){
  hero.position.z=5.2+(state.hit>0?.15*Math.sin(t*30):0);
  specimen.position.set(14+Math.sin(t*.41)*3,-2.35+Math.sin(t*1.1)*.09,4.4);
  specimen.scale.x=Math.sin(t*.41)>0?-1:1;
- if(gif.complete&&gif.naturalWidth&&t-gifUpdate>.083){
+ animateCutout(t);
+ if(!joints.ready&&gif.complete&&gif.naturalWidth&&t-gifUpdate>.083){
   gifUpdate=t;context.clearRect(0,0,315,311);
   context.drawImage(gif,0,0,315,311);gifTexture.needsUpdate=true;
  }

@@ -108,7 +108,8 @@ export function archiveCandidate({pr,lastCommit,lastActivity,failed,isFinish=fal
  if (activity > now || date > now) throw Error('нет данных: дата активности PR в будущем');
  if (now - Math.max(date, activity) <= 48 * 60 * 60 * 1000) return false;
  if (!Array.isArray(failed) || failed.some(x => !x || typeof x.name !== 'string')) throw Error('нет данных: проверки PR');
- return failed.some(({url}) => !/build-rate-limit|api-deployments-free-per-day/i.test(String(url || '')));
+ if (failed.some(({url}) => typeof url !== 'string' || !/^https:\/\/[^\s/]+\//i.test(url))) throw Error('нет данных: URL красной проверки PR');
+ return failed.some(({url}) => !/build-rate-limit|api-deployments-free-per-day/i.test(url));
 }
 export function assertNotEmpty(tasksMarkdown,cards){
  if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');

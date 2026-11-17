@@ -35,6 +35,10 @@ Living Watercolor 3D — живой акварельный рендер на Thr
 
 Источник: `reference/ink-carrion-stalker/`. Действия: `userData.play('bite'|'jump'|'strike'|'prowl')`; есть 360°-камера, шарнирная нижняя челюсть, острые зубы, механические ноги и длинные когти. Рендер из соседнего `reference/ink-fallen-guardian/` без изменения. МГЛ: https://mpaykin1.github.io/meta6-lab/reference/ink-carrion-stalker/; МГ после переноса Claude: https://mpaykin1.github.io/meta6/reference/ink-carrion-stalker/.
 
+## Эталон «Машина → Батискаф» — анимированная 3D-модель (OWNER PASS, 17.11.2026)
+
+Источник: `reference/ink-car-bathyscaphe/` (модель, интерактивный стенд и README); паспорт: `shared/references/ink-car-bathyscaphe.json`. После публикации: https://mpaykin1.github.io/meta6-lab/reference/ink-car-bathyscaphe/ . Объёмная серо-зелёная машина превращается в батискаф: колёса втягиваются, появляется герметичный корпус, люк, иллюминаторы, плавники и два вращающихся винта. `createInkCarBathyscaphe(seed)` возвращает `THREE.Group` с `userData.setMorph(0..1, seconds)`. На стенде — поворот камеры 360°, ручное вращение, мобильные жесты, ползунок и автоцикл. Рендер переиспользуется из «Павшего великана» без изменений. Эталон не является новой игрой; в МГ не переносить без разрешения Claude.
+
 ## Правила для всех ИИ
 
 1. **Не менять исходники эталона.** Файлы `index.html`, `client.js`, `shared/living-watercolor-*.js` — только чтение. Сверка — по blob SHA из паспорта.

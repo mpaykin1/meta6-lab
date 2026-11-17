@@ -220,6 +220,19 @@ function crossingBell(seed=14){
  add(g,new T.TorusGeometry(.31,.035,5,12),M.ironEdge,.51,1.51,0).rotation.x=Math.PI/2;
  rod(g,[.51,1.62,0],[.51,1.29,0],.036,M.iron);
  const striker=add(g,new T.SphereGeometry(.08,9,7),M.ironEdge,.51,1.31,0);
+ // Articulated yoke, steel bolt heads and a raised lip: this is a real bell,
+ // not a primitive cylinder. Detail matches the reference INK geometry bar.
+ for(const z of [-.2,.2]){
+   rod(g,[.31,1.99,z],[.51,1.91,z],.035,M.ironEdge);
+   rod(g,[.51,1.91,z],[.51,1.76,z],.03,M.silver);
+   add(g,new T.SphereGeometry(.05,8,6),M.ironEdge,.51,1.93,z);
+ }
+ for(let i=0;i<10;i++){
+   const a=i*6.283/10;
+   const x=.51+Math.cos(a)*.295,z=Math.sin(a)*.295;
+   add(g,new T.SphereGeometry(.036,6,6),M.ironEdge,x,1.52,z);
+ }
+ add(g,new T.CylinderGeometry(.18,.17,.09,14),M.ironEdge,.51,2.03,0);
  g.userData.tick=t=>{bell.rotation.z=.06*Math.sin(t*2.5);striker.position.x=.51+.08*Math.sin(t*2.5-.4);};
  return finish(g,.2);
 }

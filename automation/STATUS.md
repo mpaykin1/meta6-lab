@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T05:52:29.011Z | МГЛ: 4207bd6a1a704c4887bf81617e24cf4cdf43785d | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44027011262
+UTC: 2026-11-17T06:00:10.589Z | МГЛ: f4d870299fc4a6c092a3f77ed6f1b8485f89e6ac | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44027922815
 ## ПРОВЕРИТЬ CLAUDE
 - PR #372 0e5d7893812d336299d041199deda50557a07395: scripts/karta-sil/mutate-current-claude-marker.mjs, scripts/karta-sil/mutate-karta-sil.mjs
 - PR #352 99a64541e458eb39f499c55655649abb87bf5bc8: scripts/meta-bot/core.mjs, scripts/meta-bot/mutate-viewports.mjs, scripts/platform/verify-meta-bot-config-candidate.mjs
@@ -31,12 +31,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 41 | конфликт: нет данных | слито: 70 | закрыто: 114
+открыто: 41 | конфликт: 28 | слито: 70 | закрыто: 114
 #372 fix(z01): не направлять PR к Claude по историческим пометкам | 0e5d7893812d336299d041199deda50557a07395
 #359 docs: единый свод правил и идей для «Лучника в тумане» | 0a37a80d264aaac71832ab16d9ca82b306b7cec6
 ещё 68: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2669 коммитов | нет данных
+МГЛ: 2671 коммитов | нет данных
 МГ: 40 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

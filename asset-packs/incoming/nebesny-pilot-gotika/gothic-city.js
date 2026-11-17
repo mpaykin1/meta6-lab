@@ -21,6 +21,7 @@ window.GothicCity = (() => {
   }
   addEventListener('pointerdown', startMusic, {passive:true});
   addEventListener('keydown', startMusic, {passive:true});
+  document.getElementById('snd').addEventListener('click', () => { if (muted) ambience.pause(); else startMusic(); });
   function onRing(bonus) {
     if (typeof muted !== 'undefined' && !muted) {
       try { bellAudio.currentTime = 0; bellAudio.play().catch(() => {}); } catch {}

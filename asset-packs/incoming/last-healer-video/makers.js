@@ -821,4 +821,77 @@ export function sandBeachTiles(seed=1){
  g.userData.footprint=0;return g;
 }
 
-export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,boatShed,roadsideDryShrubs,pinkTownBuilding,duskTownLight,healerWalkWithLight,puddles,whiteClinicBuilding,nightRainGrade,wetGrassClumps,boatWake,shoreFoamLine,autumnConeTrees,driftingLeaves,sandBeachTiles};
+
+export function tiltShiftPost(seed=1){
+ const r=rng(seed),g=new T.Group(),layers=[];
+ g.name='Глубина резкости акварельной миниатюры';
+ // In-game compositor uses GPU backdrop blur. Geometry is a visible painterly lens-field preview.
+ const mat=new T.ShaderMaterial({
+ uniforms:{uTime:{value:0},uFocus:{value:.51}},
+ vertexShader:glowVertex,
+ fragmentShader:'varying vec2 vUv;uniform float uTime;uniform float uFocus;void main(){float d=abs(vUv.y-uFocus);float blur=smoothstep(.18,.48,d);float ink=.025*sin(vUv.x*21.+uTime*.12)*sin(vUv.y*34.);float veil=.018+.16*blur*(.88+ink);vec3 wash=mix(vec3(.61,.76,.73),vec3(.84,.75,.69),vUv.y);gl_FragColor=vec4(wash,veil);}',
+ transparent:true,depthWrite:false,side:T.DoubleSide});
+ for(let i=0;i<7;i++){
+  const plane=new T.Mesh(new T.PlaneGeometry(2.7,.9,6,4),mat);
+  plane.position.set((i-3)*.17,.44+i*.18,-i*.17);
+  plane.rotation.y=(r()-.5)*.09;plane.userData.watercolorSkipWash=true;g.add(plane);layers.push(plane);
+ }
+ for(let i=0;i<9;i++)part(g,new T.SphereGeometry(.025+r()*.03,6,4),'#bdbaa5',[(r()-.5)*2,.04,(r()-.5)*1]);
+ g.userData.tick=t=>{mat.uniforms.uTime.value=t;mat.uniforms.uFocus.value=.51+.08*Math.sin(t*.22);layers.forEach((o,i)=>o.rotation.z=.008*Math.sin(t*.21-i*.28));};
+ g.userData.footprint=0;return g;
+}
+export function dayCoastGrade(seed=1){
+ const r=rng(seed),g=new T.Group(),waves=[];
+ g.name='Дневная бирюза у берега';
+ const mat=new T.ShaderMaterial({
+ uniforms:{uTime:{value:0}},
+ vertexShader:glowVertex,
+ fragmentShader:'varying vec2 vUv;uniform float uTime;void main(){float wave=sin(vUv.x*12.+uTime*.42+sin(vUv.y*9.)*.9);float crest=smoothstep(.6,1.,wave)*(1.-smoothstep(.8,1.,vUv.y));float fade=smoothstep(0.,.18,vUv.x)*(1.-smoothstep(.81,1.,vUv.x));gl_FragColor=vec4(.42,.77,.72,(.14+.13*crest)*fade*(1.-vUv.y*.6));}',
+ transparent:true,depthWrite:false,side:T.DoubleSide});
+ for(let i=0;i<7;i++){
+  const p=new T.Mesh(new T.PlaneGeometry(3.1,.9,12,3),mat);
+  p.position.set((r()-.5)*.8,.12+i*.18,-1-i*.22);
+  p.userData.watercolorSkipWash=true;g.add(p);waves.push(p);
+ }
+ for(let i=0;i<28;i++){
+  const o=part(g,new T.IcosahedronGeometry(.025+r()*.025,0),'#f3ddac',
+    [(r()-.5)*2.5,.03,(r()-.5)*2]);
+  o.scale.y=.22;
+ }
+ g.userData.tick=t=>{mat.uniforms.uTime.value=t;waves.forEach((o,i)=>o.position.x=.10*Math.sin(t*.25-i*.46));};
+ g.userData.footprint=0;return g;
+}
+// Audio generators are original Web Audio in sounds.js. Here each sound has a spatial
+// waveform sculpture so the INK quality bot can isolate/measure the source in the game.
+function soundEmitter(seed,name,colors,mode){
+ const r=rng(seed),g=new T.Group(),petals=[];g.name=name;
+ const base=part(g,new T.CylinderGeometry(.35,.45,.10,12),'#5a6c64',[0,.05,0]);
+ for(let k=0;k<16;k++){
+  const a=k*2.399,w=.11+r()*.07,h=.25+r()*.43;
+  const root=new T.Group();root.position.set(Math.cos(a)*(.20+r()*.16),.12,Math.sin(a)*(.20+r()*.16));
+  root.rotation.y=a;g.add(root);petals.push(root);
+  const m=part(root,new T.ConeGeometry(w,h,5),colors[k%colors.length],[0,h*.48,0]);
+  m.rotation.z=(r()-.5)*.32;
+  for(let j=0;j<2;j++)part(root,new T.SphereGeometry(.018,5,3),'#e7e5d6',
+    [(r()-.5)*.08,h*.4+j*.11,(r()-.5)*.06],true);
+ }
+ for(let i=0;i<9;i++){
+  const a=i*2*Math.PI/9,z=Math.sin(a)*.42,x=Math.cos(a)*.42;
+  beam(g,[x*.38,.13,z*.38],[x,.19,z],.017,'#8a9975');
+  const bead=part(g,new T.DodecahedronGeometry(.044+r()*.019,0),colors[i%colors.length],[x,.19,z]);
+  bead.scale.y=.56;
+ }
+ g.userData.tick=t=>petals.forEach((o,i)=>{
+  o.rotation.z=.11*Math.sin(t*(mode==='rain'?2.0:mode==='rowing'?.92:1.44)-i*.24);
+  o.position.y=.12+.028*Math.sin(t*(mode==='rain'?2.1:.87)-i*.14);
+ });
+ g.userData.footprint=0;return g;
+}
+export function sndCarEngine(seed=1){return soundEmitter(seed,'Мотор и шелест шин',
+ ['#b39e7d','#7a8778','#9c8d6c','#687e75'],'engine');}
+export function sndRainNight(seed=1){return soundEmitter(seed,'Капли по крыше и луже',
+ ['#6a8490','#819d9b','#a2b6ac','#5f7e80'],'rain');}
+export function sndRowingShore(seed=1){return soundEmitter(seed,'Вёсла и прибрежные волны',
+ ['#7aa39e','#c4b38e','#8ba69e','#bdd0b8'],'rowing');}
+
+export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,boatShed,roadsideDryShrubs,pinkTownBuilding,duskTownLight,healerWalkWithLight,puddles,whiteClinicBuilding,nightRainGrade,wetGrassClumps,boatWake,shoreFoamLine,autumnConeTrees,driftingLeaves,sandBeachTiles,tiltShiftPost,dayCoastGrade,sndCarEngine,sndRainNight,sndRowingShore};

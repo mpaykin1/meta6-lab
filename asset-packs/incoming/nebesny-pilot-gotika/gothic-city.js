@@ -322,11 +322,7 @@ window.GothicCity = (() => {
     const fade = clamp((165 - P.z) / 115, .22, 1);
     g.save();
     g.setTransform(1,0,0,1,0,0);
-    if (sheets.sunsetSky && !hiddenAssets.has('sunsetSky')) {
-      g.globalAlpha = fade * .45;
-      g.drawImage(sheets.sunsetSky, 0, 0, W, H);
-    }
-    // Небо + фиолетовое закатное море поверх GPU: плоскости мягко меняются по высоте.
+    // Закатная палитра создаёт основу; пиксельный атлас кладётся поверх неё.
     const horizon = H * (.55 + Math.sin(cam.phi - .62) * .13);
     const sky = g.createLinearGradient(0,0,0,H);
     sky.addColorStop(0,'#241f42');
@@ -336,6 +332,12 @@ window.GothicCity = (() => {
     sky.addColorStop(1,'#3d3557');
     g.globalAlpha = fade * .96;
     g.fillStyle = sky; g.fillRect(0,0,W,H);
+    if (sheets.sunsetSky && !hiddenAssets.has('sunsetSky')) {
+      // The commissioned pixel sky must remain visible, not be hidden under
+      // an almost opaque gradient painted afterwards.
+      g.globalAlpha = fade * .34;
+      g.drawImage(sheets.sunsetSky, 0, 0, W, H);
+    }
     // Мерцающий золотой канал — полоса воды под городским горизонтом.
     if(sheets.canalWater && !hiddenAssets.has('canalWater')) {
       const waterY = Math.max(0,horizon+H*.03);

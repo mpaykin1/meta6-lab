@@ -277,6 +277,29 @@ class KindTraps(unittest.TestCase):
         self.assertEqual(r.kinds, ["ink"])
         self.assertEqual(r.hard(), [], r.hard())
 
+    def test_IK16_audio_not_just_manifest(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack()
+        p = json.loads((d / "pack.json").read_text("utf-8"))
+        p["sound_assets"] = ["crossingBell"]
+        (d / "pack.json").write_text(json.dumps(p), "utf-8")
+        self.assertIn("IK16", ids(d))
+        (d / "sounds.js").write_text("export function crossingBell(ctx,dest){const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(dest);o.start();}", "utf-8")
+        self.assertNotIn("IK16", ids(d))
+
+    def test_IK17_logo_only_inside_menu(self):
+        if not shutil.which("node"):
+            self.skipTest("нет node")
+        d = self.ink_pack()
+        p = json.loads((d / "pack.json").read_text("utf-8"))
+        p["ui_assets"] = ["titleLogo"]
+        (d / "pack.json").write_text(json.dumps(p), "utf-8")
+        (d / "index.html").write_text('<div id="titleLogo">BLACK TRAIN</div><div id="panel"></div><div id="pips"></div>', "utf-8")
+        self.assertIn("IK17", ids(d))
+        (d / "index.html").write_text('<div id="panel"><div id="titleLogo">BLACK TRAIN</div></div><div id="pips"></div>', "utf-8")
+        self.assertNotIn("IK17", ids(d))
+
     def test_ink_night_scream_uses_its_own_reference(self):
         if not shutil.which("node"):
             self.skipTest("нет node")

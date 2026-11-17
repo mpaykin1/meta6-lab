@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#151b21"><title>Ворона в тумане · META GAMES</title>
+<style>
+:root{color-scheme:dark}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#111820;touch-action:none}
+canvas{display:block;width:100%;height:100%}button{cursor:pointer}
+#menuButton{position:fixed;z-index:9;top:max(14px,env(safe-area-inset-top));right:16px;width:46px;height:46px;border:1px solid #b7c3c754;background:#161d24bb;color:#e8e2da;border-radius:50%;font-size:23px;backdrop-filter:blur(10px)}
+#panel{box-sizing:border-box;position:fixed;z-index:8;top:0;right:0;height:100%;width:min(320px,88vw);padding:76px 22px 32px;overflow:auto;background:#121b23ec;color:#e9e3d8;font:14px/1.5 system-ui;box-shadow:-8px 0 48px #05080e9a;transition:transform .25s ease}
+#panel[hidden]{display:none}h1{font:400 25px/1.2 Georgia,serif;letter-spacing:.04em;margin:0 0 14px}
+h2{font:600 12px system-ui;letter-spacing:.16em;margin:26px 0 10px;color:#93a9ae}
+#panel button.item{display:block;width:100%;text-align:left;border:1px solid #8198a72c;background:#ffffff09;color:#e7e4dd;padding:11px;margin:5px 0;border-radius:8px}
+#panel button.item[aria-pressed="true"]{background:#9db0af27;border-color:#c6b5aa66}
+#panel p{color:#a3b0b4;font-size:12px}
+#mobile{position:fixed;bottom:max(16px,env(safe-area-inset-bottom));left:16px;display:none;gap:12px;z-index:4}
+#mobile button{width:54px;height:54px;border-radius:50%;border:1px solid #e2e2e254;background:#10182080;color:#ecebe2;font-size:21px}
+@media (pointer:coarse){#mobile{display:flex}}
+</style></head><body>
+<button id="menuButton" aria-label="Открыть меню" aria-expanded="false">☰</button>
+<aside id="panel" hidden><h1>Ворона в тумане</h1><p>Стрелки / WASD — полёт; мышь / касание — направление. Найдите светлячка, перо и гнездо.</p><h2>АССЕТЫ</h2><div id="items"></div><h2>УПРАВЛЕНИЕ</h2><p>Клавиша M — меню. Щелчок по миру — лететь в выбранную точку. Перо ускоряет, светлячок подсвечивает туман, гнездо сохраняет место.</p></aside>
+<div id="mobile"><button id="left" aria-label="Лететь влево">◀</button><button id="right" aria-label="Лететь вправо">▶</button><button id="up" aria-label="Подняться">▲</button></div>
+<script type="module" src="./scene.js"></script></body></html>

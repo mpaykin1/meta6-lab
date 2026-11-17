@@ -132,6 +132,7 @@ def check(root: Path, r) -> set:
               "Исправь ошибку загрузки — бот показывает текст ошибки")
         return covered
     made = data["makers"]
+    r.asset_ids.update(made)
     taken = reference_names(base)
     for name in made:
         if name in taken:

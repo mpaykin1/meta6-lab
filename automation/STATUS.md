@@ -1,22 +1,23 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-16T10:15:59.977Z | МГЛ: 1971090a8b0dfd40e623fb38dc48d45e321b90d6 | МГ: b6726b7690ab85059ea7a38d4ee684e49cef1730 | https://github.com/mpaykin1/meta6-lab/actions/runs/43847130820
+UTC: 2026-11-16T22:30:05.366Z | МГЛ: 922cf75972dc8dcc3e2c245f46ad081a1e3e8763 | МГ: 0375ce30bfd3f0385e53091ecaeec595e27fb052 | https://github.com/mpaykin1/meta6-lab/actions/runs/43970458065
 ## ПРОВЕРИТЬ CLAUDE
+- PR #339 86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34: automation/asset-check/test_kinds.py
+- PR #340 5b9fa6e24485c7d527598777761f43e1f39e1a4d: scripts/karta-sil/mutate-karta-sil.mjs
+- PR #338 2a07bda15d7a3d0b66be49b332ba31dfa79d40fb: automation/asset-check/test_kinds.py
 - PR #321 00c22fba0c1fbcf71a535ddd9342da286e875b27: .github/workflows/ink-raven-3d.yml
-- PR #330 17690b22fcbf4893451d7d7ec354f133abd6b738: .github/workflows/lab-bot-focused.yml
-- PR #327 bfdcea35097c49b70e7d08c7747716e4fb0daa20: .github/workflows/karta-sil.yml, scripts/karta-sil/mutate-karta-sil.mjs
-- ещё 27: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/43828309195 | Play all games
-- МГЛ: Karta Sil | https://github.com/mpaykin1/meta6-lab/actions/runs/43814780178 | Preserve failure after publishing no-data state
+- ещё 29: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/… (сокращено)
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
-- ещё 6: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
+- | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обн… (сокращено)
+- ещё 5: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
+- | НАДЗОР — чат ChatGPT | lab/nadzor | свободно (зависло 4 ч, было: чат ChatGPT) | 2026-11-16T14:18:43Z |
 - | КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |
 - | БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |
 - | КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |
-- ещё 11: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
+- ещё 13: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
-готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43802776946))
+готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43902202267))
 M1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
 M2 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
 M3 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
@@ -35,14 +36,15 @@ L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 P1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 ## PR МГЛ
-открыто: 44 | конфликт: нет данных | слито: 55 | закрыто: 87
-#321 INK · Летящий ворон — объёмная 3D-модель и анимация в лесу | 00c22fba0c1fbcf71a535ddd9342da286e875b27
-#334 INK · Падальщик: зарегистрировать новый эталон в AGENTS, ink | 27422c8b6563e2a8d2be46df1c078a9f32feef59
-#333 INK · Падальщик — OWNER PASS: добавить 3D-эталон в МГЛ для п | 960bab97a6c4a9c5e7cca673bbcbfca43e0f0d66
-ещё 52: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+открыто: 34 | конфликт: нет данных | слито: 59 | закрыто: 102
+#341 Эталон «Небесный пилот» (спрайт-стакинг), только добавление | d8cf489ee7b9ca0a4cf136cd1ee4efc7ab702359
+#339 ASSET CHECK 2.5: список ассетов без видео | 86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34
+#340 Карта сил: сбой не стирает карту, 5xx повторяется, «нет данн | 5b9fa6e24485c7d527598777761f43e1f39e1a4d
+#338 ASSET CHECK 2.4: заказ ассетов по видео | 2a07bda15d7a3d0b66be49b332ba31dfa79d40fb
+ещё 55: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2371 коммитов | нет данных
-МГ: 34 коммитов | .github:3, AGENTS.md:1, automation:3, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
+МГЛ: 2468 коммитов | нет данных
+МГ: 37 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет
@@ -61,4 +63,5 @@ wild-train-prologue — не прошла | витрина: да
 | 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
 | 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)
 | 24 | 10.11.2026 | Сводка без progress.json или при ошибке GitHub API могла бы выдавать непроверенные пункты как «готово» и прятать красные прогоны; старые варианты #211/#212 не защищали эту сводку полным набором мутаций | Изолированные ответы: отсутствующий … (сокращено)
+| 25 | 10.11.2026 | Сводка игнорировала новую запись OSHIBKI с уже использованным номером (в main номер 18 повторён) | Сравнение только по номеру ошибочно скрывало новую строку | `scripts/status/selftest.mjs`: `duplicate-error-number-hidden` |
 ещё 47: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

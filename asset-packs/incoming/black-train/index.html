@@ -44,12 +44,22 @@ button{font-family:Georgia,serif;cursor:pointer;-webkit-tap-highlight-color:tran
 #pips i.on{background:#f2d9a0;box-shadow:0 0 8px #ffd99a99;border-color:#ffe2a6}
 #error{display:none;position:fixed;z-index:10;bottom:20px;left:16px;right:16px;padding:13px;background:#292b31;color:#e9ded0;
   font:12px/1.5 monospace;border:1px solid #7f514a55;border-radius:8px}
+#titleLogo{position:relative;width:100%;padding:5px 0 19px;color:#d8d0c6;text-shadow:0 1px 1px #100404,1px 2px 0 #6e0c0c,0 0 17px #82080877;
+ font:bold clamp(26px,6vw,34px)/1.15 Georgia,serif;letter-spacing:.085em;white-space:nowrap;text-align:center}
+#titleLogo::before{content:'';position:absolute;left:10%;right:9%;top:38px;height:11px;
+ background:linear-gradient(90deg,transparent,#390403 16%,#e11c10 52%,#3c0306 85%,transparent);
+ clip-path:polygon(0 0,100% 0,94% 25%,87% 100%,77% 34%,61% 65%,50% 25%,35% 72%,21% 35%,13% 85%,7% 25%);opacity:.9}
+#titleLogo::after{content:'';position:absolute;left:18%;top:43px;width:63%;height:10px;
+ background:repeating-linear-gradient(90deg,transparent 0 17px,#7d090b 17px 19px,transparent 19px 27px);
+ filter:drop-shadow(0 2px 2px #a90d16);animation:inkdrip 5.7s ease-in-out infinite}
+@keyframes inkdrip{50%{transform:scaleY(1.65);opacity:.65}}
 </style>
 <script type="importmap">{"imports":{"three":"../../../reference/ink-fallen-guardian/three.module.js"}}</script>
 </head>
 <body>
 <button id="menu-btn" aria-label="Меню" aria-expanded="false">☰</button>
 <div id="panel" hidden>
+<div id="titleLogo" aria-label="BLACK TRAIN">BLACK TRAIN</div>
 <h1>Ночной перегон</h1>
 <p>Ночь. Вы один у железной дороги, в руке фонарик. В темноте кто-то есть — и он улыбается.</p>
 <p><b>Как выжить:</b> ведите вокруг лучом. Пока оно в свете, оно шипит и уходит в темноту. Как только отвернётесь — оно прыгает ближе, обходя вас со спины. Слушайте: дыхание и шаги звучат с той стороны, где оно.</p>

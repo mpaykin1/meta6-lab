@@ -60,6 +60,9 @@ def run_tests(root: Path) -> bool:
     env = dict(os.environ, ASSET_CHECK_REPO=str(HERE.parents[1]))
     p = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(root), "-p", "test_*.py"],
                        capture_output=True, text=True, cwd=root, env=env)
+    if p.returncode != 0:
+        print('TEST_SUITE_FAILURE in', root, 'exit', p.returncode, flush=True)
+        print((p.stdout + '\n' + p.stderr)[-12000:], flush=True)
     return p.returncode == 0
 
 

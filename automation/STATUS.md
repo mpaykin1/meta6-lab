@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T14:34:39.496Z | МГЛ: 56ed0b18a88cd890f50d1b91e525bb1a0d17d8c3 | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44104251749
+UTC: 2026-11-17T15:36:07.589Z | МГЛ: d32744aa64746983e530357fbe98ed43760f22f8 | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44115958545
 ## ПРОВЕРИТЬ CLAUDE
 - PR #382 7c56b01e1a323254a1d850d50bd373364a079c7d: automation/asset-check/test_kinds.py
 - PR #362 51f2ef012ec9cf31d0d68c83ba02fac0951974b7: automation/asset-check/test_3d_master.py
@@ -34,13 +34,13 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 48 | конфликт: нет данных | слито: 80 | закрыто: 121
+открыто: 49 | конфликт: нет данных | слито: 80 | закрыто: 121
 #384 feat(assets): BLACK TRAIN — layered storm clouds with slow a | 21dd327c959710943bc4f5a04c4f5dcf60e1d136
 #373 INK · Чернильный оскал — чистая 3D-модель и сцена без защищё | 0c269f36f4f3f1801ba5147eb59c5d3355cf5768
 #387 BLACK TRAIN: живой туман освещается фонариком, красным сигна | aa47594a5fc4cf4ea0362ca73251fc0171937a2f
 ещё 77: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2813 коммитов | нет данных
+МГЛ: 2816 коммитов | нет данных
 МГ: 44 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:25, reference:31, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

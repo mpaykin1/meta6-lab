@@ -14,6 +14,14 @@ window.GothicCity = (() => {
     decks.clear();
     return !hiddenAssets.has(id);
   };
+  // The world changes only after the opening sea flight and a descent.
+  // Distance is continuous and unbounded: no repeating city chunks.
+  function isCity(x,y) { return Math.hypot(x,y) > 610; }
+  function blend() {
+    const travelled = Math.hypot(P.x,P.y);
+    return clamp((travelled-420)/450,0,1) * clamp((147-P.z)/82,.18,1);
+  }
+  function inCity() { return blend() > .45; }
   const ambience = new Audio('./audio/cityAmbience.wav');
   ambience.loop = true;
   ambience.volume = .12;
@@ -38,7 +46,7 @@ window.GothicCity = (() => {
   for (const id of ['gothicCathedral','spireTower','archBridge','sunsetSky','redRoofHouse','aqueductTiers','cliffBase','bannerFleurDeLis','gothicGateRing','canalWater','sunsetCloud','pigeonFlock','bellTower','rosetteBonus','windowSparks','descentGate','gothicTile','sailBoat','lanternGlow']) {
     const image = new Image();
     image.decoding = 'async';
-    image.onload = () => { sheets[id] = image; decks.clear(); if (id === 'gothicGateRing') { const x=gate.getContext('2d');x.clearRect(0,0,54,70);x.drawImage(image,0,0,54,70,0,0,54,70); } };
+    image.onload = () => { sheets[id] = image; decks.clear(); };
     image.src = './stacks/' + id + '.png';
   }
   const count = { gothicCathedral: 88, spireTower: 74, archBridge: 42, redRoofHouse:38, aqueductTiers:48, cliffBase:32, bellTower:66, sailBoat:26 };
@@ -306,20 +314,48 @@ window.GothicCity = (() => {
     }
     return art;
   }
-  const backdropFar=architectureLayer(3437,false);
-  const backdropNear=architectureLayer(8931,true);
-  function drawArchitecture(horizon,fade){
-    const layers=[[backdropFar,1.53,.74,.45],[backdropNear,1.92,.94,.75]];
-    for(const [pic,mult,up,alpha] of layers){
-      const width=W*mult,height=Math.max(H*.66,140),speed=alpha*.045;
-      const dx=((cam.x*speed+t*(alpha+.2))%width+width)%width;
-      g.globalAlpha=fade*alpha;
-      for(let k=-1;k<=Math.ceil(W/width)+1;k++)
-        g.drawImage(pic,k*width-dx,horizon-height*up,width,height);
+  // Pink-violet distant pinnacles occupy only the LOWER horizon. No flat
+  // brown skyline or enormous near-wall that obscures the sunset.
+  const duskSilhouette = mk(960,178);
+  {
+    const c=duskSilhouette.getContext('2d'),r=rng(32671);
+    c.imageSmoothingEnabled=false;
+    for(let x=0;x<960;){
+      const w=12+(r()*23|0),h=15+(r()*66|0),top=175-h;
+      rect(c,r()>.5?'#b17a96':'#a97999',x,top,w,h);
+      poly(c,'#bb879e',[[x-2,top+2],[x+w*.5,top-11-r()*18],[x+w+2,top+2]]);
+      if(r()>.58){
+        rect(c,'#bb8ca5',x+w*.43,top-25,3,28);
+        rect(c,'#c798ac',x+w*.43-2,top-28,7,2);
+      }
+      for(let j=0;j<3;j++)if(r()>.3)
+        rect(c,'#e5a8b1',x+2+(j*7)%Math.max(5,w-3),top+12+j*10,2,4);
+      x+=w+4+(r()*15|0);
+    }
+    // Broken aqueducts fade into mist; arch voids remain open.
+    for(let band=0;band<2;band++){
+      const y=128+band*21;
+      for(let x=0;x<960;x+=92+(r()*34|0)){
+        rect(c,'#b785a2',x,y,78,3);
+        for(const xx of [x+3,x+68])rect(c,'#b785a2',xx,y,7,46);
+        for(let h=0;h<20;h+=2){
+          const w=(1-h/20)*28;
+          rect(c,'#bf8da6',x+38-w,y+4+h,3,2);
+          rect(c,'#bf8da6',x+38+w-3,y+4+h,3,2);
+        }
+      }
     }
   }
+  function drawArchitecture(horizon,fade){
+    const height=Math.min(H*.25,138),width=Math.max(960,W*1.35);
+    const dx=((cam.x*.011+t*.18)%width+width)%width;
+    g.globalAlpha=fade*.24;
+    for(let k=-1;k<=Math.ceil(W/width)+1;k++)
+      g.drawImage(duskSilhouette,k*width-dx,horizon-height,width,height);
+  }
   function drawBackground() {
-    const fade = clamp((165 - P.z) / 115, .22, 1);
+    const fade = blend();
+    if(fade <= 0.002) return;
     g.save();
     g.setTransform(1,0,0,1,0,0);
     // Закатная палитра создаёт основу; пиксельный атлас кладётся поверх неё.
@@ -330,7 +366,7 @@ window.GothicCity = (() => {
     sky.addColorStop(.57,'#ed9b83');
     sky.addColorStop(.69,'#f6b277');
     sky.addColorStop(1,'#3d3557');
-    g.globalAlpha = fade * .96;
+    g.globalAlpha = fade;
     g.fillStyle = sky; g.fillRect(0,0,W,H);
     if (sheets.sunsetSky && !hiddenAssets.has('sunsetSky')) {
       // The commissioned pixel sky must remain visible, not be hidden under
@@ -338,17 +374,16 @@ window.GothicCity = (() => {
       g.globalAlpha = fade * .34;
       g.drawImage(sheets.sunsetSky, 0, 0, W, H);
     }
-    // Мерцающий золотой канал — полоса воды под городским горизонтом.
-    if(sheets.canalWater && !hiddenAssets.has('canalWater')) {
-      const waterY = Math.max(0,horizon+H*.03);
-      g.globalAlpha = fade * .18;
-      const drift=((t*3)%128+128)%128;
-      for(let x=-128-drift;x<W+128;x+=128)
-        g.drawImage(sheets.canalWater,x,waterY,128,H-waterY);
-    }
+    // Haze at the horizon, not a fake sea behind suspended buildings.
+    const haze=g.createLinearGradient(0,horizon-H*.1,0,horizon+H*.12);
+    haze.addColorStop(0,'rgba(248,181,176,0)');
+    haze.addColorStop(.53,'rgba(249,192,180,.60)');
+    haze.addColorStop(1,'rgba(231,163,181,0)');
+    g.globalAlpha=fade*.55;
+    g.fillStyle=haze;g.fillRect(0,horizon-H*.1,W,H*.24);
     // Дальние шпили — отдельный параллаксный слой.
-    g.globalAlpha = fade * .83;
-    const sh = Math.max(35, H * .29);
+    g.globalAlpha = fade * .11;
+    const sh = Math.max(22, H * .13);
     const shift = ((cam.x * .018 + t * 1.1) % 640 + 640) % 640;
     for(let i = -1; i < Math.ceil(W / 640)+2; i++)
       g.drawImage(skyline, i*640-shift, horizon-sh, 640, sh);
@@ -362,7 +397,7 @@ window.GothicCity = (() => {
     }
     drawArchitecture(horizon,fade);
     // Нерегулярные полосы облаков: избегаем повторяющегося синусоидального узора.
-    g.globalAlpha = fade*.37;
+    g.globalAlpha = fade*.26;
     for(let n = 0; n < 23; n++) {
       const x = ((hash(n,22,19)*W*1.7 - t*(2+hash(n,22,20)*5)) % (W*1.6) + W*1.6) % (W*1.6) - W*.3;
       const y = horizon * (.14 + hash(n,22,23)*.8);
@@ -371,16 +406,91 @@ window.GothicCity = (() => {
     }
     g.restore();
   }
+  // Three visible world layers: irregular dark cliff below, cobblestone
+  // streets above, reflective canals recessed between continuous districts.
+  // Ground is projected in the SAME world plane as the buildings.
+  function drawGround(){
+    const fade=blend();
+    if(fade<.015)return;
+    const step=380,ci=Math.floor(P.x/step),cj=Math.floor(P.y/step);
+    const cells=[];
+    for(let i=ci-3;i<=ci+3;i++)for(let j=cj-3;j<=cj+3;j++){
+      const x=i*step,y=j*step;
+      if(!isCity(x+step*.5,y+step*.5))continue;
+      const p=proj(x+190,y+190,-20);
+      if(!p||p[3]<6||p[3]>1650)continue;
+      cells.push({x,y,i,j,d:p[3]});
+    }
+    cells.sort((a,b)=>b.d-a.d);
+    for(const b of cells){
+      const m=planeT(b.x+190,b.y+190,-17);
+      if(!m)continue;
+      g.save();g.globalAlpha=fade;
+      g.setTransform(m[0],m[1],m[2],m[3],m[4],m[5]);
+      // Broken cliff lip, staggered terrace footprint and streets.
+      const r=hash(b.i,b.j,171);
+      g.fillStyle=r>.5?'#302b45':'#3e344b';g.fillRect(-196,-196,392,392);
+      g.fillStyle='#514258';g.fillRect(-186,-188,372,376);
+      for(let k=0;k<12;k++){
+        const px=-185+hash(b.i*13+k,b.j,176)*365;
+        const py=-186+hash(b.i,b.j*17+k,177)*366;
+        g.fillStyle=k%3===0?'#8c6c73':'#5d505f';
+        g.fillRect(px,py,24+hash(k,b.i,178)*53,3+hash(k,b.j,179)*13);
+      }
+      if(sheets.gothicTile&&!hiddenAssets.has('gothicTile')){
+        g.globalAlpha=fade*.27;
+        for(let u=-2;u<=1;u++)for(let v=-2;v<=1;v++)
+          g.drawImage(sheets.gothicTile,0,0,128,128,u*108,v*108,108,108);
+        g.globalAlpha=fade;
+      }
+      // Recessed central waterways, separated from coastal sea.
+      if((b.i+3*b.j)%3===0){
+        g.fillStyle='#242a4e';g.fillRect(-39,-190,78,380);
+        g.fillStyle='#404161';g.fillRect(-44,-190,5,380);
+        g.fillRect(39,-190,5,380);
+        if(sheets.canalWater&&!hiddenAssets.has('canalWater')){
+          g.globalAlpha=fade*.70;
+          for(let v=-2;v<2;v++)g.drawImage(sheets.canalWater,-39,v*110,78,110);
+          g.globalAlpha=fade;
+        }
+        for(let k=0;k<19;k++){
+          const sy=-184+k*20,flare=Math.sin(t*1.2+k*2.1+b.i)*7;
+          g.fillStyle=k%4?'#e09c92':'#ffd39a';
+          g.fillRect(-12+flare,sy,8+(k%5)*5,k%3===0?3:1);
+        }
+      } else {
+        // Streets thread through organic blocks, never a giant flat rectangle.
+        g.fillStyle='#81717a';g.fillRect(-190,-15,380,23);
+        g.fillStyle='#9e8882';g.fillRect(-190,-16,380,2);
+        for(let k=0;k<9;k++){
+          const py=-177+hash(k,b.i,181)*347;
+          g.fillStyle='#625164';
+          g.fillRect(-182,py,362,1.3);
+        }
+      }
+      // Three visible ledges of cliffBase; stagger them to read as terrain
+      // rather than one flat image shadow underneath a tower.
+      if(sheets.cliffBase&&!hiddenAssets.has('cliffBase')){
+        g.globalAlpha=fade*.38;
+        for(let q=0;q<3;q++){
+          const sx=-183+q*114,sy=165+(q%2)*8;
+          g.drawImage(sheets.cliffBase,q*96,0,96,96,sx,sy,148,35);
+        }
+      }
+      g.restore();
+    }
+  }
   function addRenderItems(items) {
-    const fade = clamp((150 - P.z) / 95, .12, 1);
-    if(fade < .15) return;
-    let budget = 45;
+    const fade = blend();
+    if(fade < .035) return;
+    let budget = 48;
     const ci = Math.floor(P.x/380), cj = Math.floor(P.y/380);
     for (let i = ci-3; i <= ci+3 && budget>0; i++) {
       for (let j = cj-3; j <= cj+3 && budget>0; j++) {
         // Две разные постройки на квартал, без повторяющейся регулярной расстановки.
         for (let n=0; n<2 && budget>0; n++) {
           const b = location(i,j,n);
+          if(!isCity(b.x,b.y))continue;
           const q = proj(b.x,b.y,20);
           if (!q || q[3]>1500 || q[3]<16) continue;
           const height = count[b.id] * 1.4*q[2];
@@ -449,21 +559,24 @@ window.GothicCity = (() => {
   function drawCloudsAndBoats(items){
     // Sprite-stack, not animated flat sprites: every moving boat and cloud
     // gets a true vertical volume. Each band projects onto the world plane.
+    const urban=blend();
     for(let n=0;n<15;n++){
       const i=Math.floor(P.x/450)+(n%5)-2, j=Math.floor(P.y/450)+Math.floor(n/5)-1;
       const boat=n%3===0, id=boat?'sailBoat':'sunsetCloud';
       const strip=sheets[id];
       if(!strip || hiddenAssets.has(id))continue;
       const phase=hash(i,j,54)*TAU;
-      const x=i*450+hash(i,j,47)*300+(boat?0:t*2.2),
-            y=j*450+hash(i,j,48)*300+(boat?Math.sin(t*.35+phase)*4:t*.85);
+      const x=boat ? i*450+190+(hash(i,j,47)-.5)*18
+                   : i*450+hash(i,j,47)*300+t*2.2,
+            y=j*450+hash(i,j,48)*300+(boat?t*3.2+Math.sin(t*.35+phase)*4:t*.85);
+      if(boat && urban<.15)continue;
       const z=boat?4+Math.sin(t*1.25+phase)*1.2:80+hash(i,j,49)*40+Math.sin(t*.4+phase)*2.5;
       const base=proj(x,y,z),nSlices=boat?26:8,side=64;
       if(!base||base[3]<10||base[3]>1250||base[2]<.17||
          base[0]<-125||base[0]>W+125||base[1]<-145||base[1]>H+130)continue;
       items.push({d:base[3],f:()=>{
         g.save();
-        const fade=clamp(1-base[3]/1900,.18,1) * (boat?1:.73);
+        const fade=clamp(1-base[3]/1900,.18,1) * (boat?urban: .73*(1-urban*.38));
         const skip=base[2]<.3?4:base[2]<.6?2:1;
         // Soft trails behind a sailing boat: displaced reflected highlights.
         if(boat){
@@ -549,5 +662,5 @@ window.GothicCity = (() => {
     }
     g.stroke();g.restore();
   }
-  return {drawBackground, addRenderItems, gate, drawCloudsAndBoats, paintTransition, onRing, drawBonusAt, drawShield};
+  return {blend, inCity, isCity, drawBackground, drawGround, addRenderItems, gate, drawCloudsAndBoats, paintTransition, onRing, drawBonusAt, drawShield};
 })();

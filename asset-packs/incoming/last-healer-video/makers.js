@@ -115,6 +115,7 @@ function handFlashlight(seed=2){
   const sw=box(pivot,.10,.05,.11,copper,.03,1.09,-.05);
   for(let j=0;j<3;j++)box(pivot,.05,.012,.038,iron,-.048+j*.047,1.12,-.05);
   const {cone,m}=lampBeam(pivot,0,.94,.41,3.4,1.17);
+  const groundWash=roadWash(pivot,0,2.1,1.15,2.1);
   const spot=new T.SpotLight(0xffdcaa,1.1,7,PI/7,.78,2);
   spot.position.set(0,.96,.41);spot.target.position.set(0,.3,3.4);pivot.add(spot,spot.target);
   // Suspended rain/dust grains catch the flashlight in three-dimensional space.
@@ -128,11 +129,12 @@ function handFlashlight(seed=2){
   }
   g.userData.footprint=0;
   g.userData.interact={radius:2.3,effect:'reveal_herbs',label_ru:'Включить фонарь — увидеть травы и тропу'};
-  g.userData.setEnabled=enabled=>{cone.visible=!!enabled;spot.intensity=enabled?1.1:0;m.uniforms.uGain.value=enabled?1:0;};
+  g.userData.setEnabled=enabled=>{cone.visible=!!enabled;spot.intensity=enabled?1.1:0;m.uniforms.uGain.value=enabled?1:0;groundWash.m.uniforms.uGain.value=enabled?1:0;};
   g.userData.tick=t=>{
     pivot.rotation.y=.085*Math.sin(t*.52+.17);
     pivot.rotation.x=.025*Math.sin(t*.73-.27);
     m.uniforms.uTime.value=t;
+    groundWash.m.uniforms.uTime.value=t;
     motes.forEach(({p,x,y,z,phase},i)=>{
       p.position.set(x+.035*Math.sin(t*.9+phase),y+.12*Math.sin(t*.63-i*.21),z);
       p.scale.y=.8+.7*(.5+.5*Math.sin(t*1.1+i));

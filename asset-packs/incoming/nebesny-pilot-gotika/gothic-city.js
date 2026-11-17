@@ -445,24 +445,50 @@ window.GothicCity = (() => {
   // Дымка меняет глубину при снижении, облака уходят из кадра.
   const effects = mk(64,64);
   function drawCloudsAndBoats(items){
-    const birds = ['sunsetCloud','sailBoat'];
-    for(let n=0;n<15;n++){
+    // PNG-срезы обозначают высоту, а не последовательность кадров.
+    // Рендерим всю стопку по перспективе, иначе облако и лодка — плоская карточка.
+    for (let n=0;n<15;n++){
       const i=Math.floor(P.x/450)+(n%5)-2, j=Math.floor(P.y/450)+Math.floor(n/5)-1;
-      const id=birds[n%3===0?1:0];
-      if(!sheets[id] || hiddenAssets.has(id))continue;
-      const x=i*450+hash(i,j,47)*300,y=j*450+hash(i,j,48)*300;
-      const z=id==='sailBoat'?5:80+hash(i,j,49)*40;
+      const id=n%3===0?'sailBoat':'sunsetCloud';
+      if(!sheets[id] || hiddenAssets.has(id)) continue;
+      const phase=hash(i,j,47)*Math.PI*2;
+      const motion=id==='sailBoat'?t*.18:t*.065;
+      const x=i*450+hash(i,j,47)*300+Math.sin(motion+phase)*(id==='sailBoat'?24:35);
+      const y=j*450+hash(i,j,48)*300+Math.cos(motion*.77+phase)*(id==='sailBoat'?11:24);
+      const z=(id==='sailBoat'?5:80+hash(i,j,49)*40)+
+        Math.sin(t*(id==='sailBoat'?1.3:.42)+phase)*(id==='sailBoat'?.9:2.7);
       const p=proj(x,y,z);
-      if(!p||p[3]<10||p[3]>1250||p[2]<.17||p[0]<-100||p[0]>W+100||p[1]<-100||p[1]>H+100)continue;
-      const nSlices=id==='sailBoat'?26:8, side=id==='sailBoat'?64:64;
-      const frame=(Math.floor(t*.9+n)%nSlices+nSlices)%nSlices;
+      if(!p || p[3]<10 || p[3]>1250 || p[2]<.13 ||
+         p[0]<-100 || p[0]>W+100 || p[1]<-100 || p[1]>H+100) continue;
+      const slices=id==='sailBoat'?26:8;
       items.push({d:p[3],f:()=>{
-        const a=clamp(1-p[3]/1900,.15,1);
-        const k=p[2]*1.5;
-        g.globalAlpha=a;
-        g.setTransform(k,0,0,k,p[0],p[1]+Math.sin(t*1.2+n)*k*2);
-        g.drawImage(sheets[id],frame*side,0,side,side,-side/2,-side/2,side,side);
-        g.globalAlpha=1;
+        const opacity=clamp(1-p[3]/1900,.15,1)*(id==='sailBoat'?.95:.74);
+        const stride=p[2]<.24?3:p[2]<.48?2:1;
+        g.save();
+        g.globalAlpha=opacity;
+        // Лёгкая рябь расходится за лодкой, пока она движется по каналу.
+        if(id==='sailBoat' && p[2]>.3){
+          const base=planeT(x,y,z-.7);
+          if(base){
+            g.setTransform(base[0],base[1],base[2],base[3],base[4],base[5]);
+            g.strokeStyle='rgba(251,191,139,.52)';
+            g.lineWidth=1.15;
+            for(let w=0;w<3;w++){
+              const trail=13+w*8, curve=Math.sin(t*2+w*1.7)*2;
+              g.beginPath();
+              g.moveTo(-trail,-12-w*3);
+              g.quadraticCurveTo(-trail-7,curve-10,-trail-17,-16-w*3);
+              g.stroke();
+            }
+          }
+        }
+        for(let s=0;s<slices;s+=stride){
+          const m=planeT(x,y,z+s*(id==='sailBoat'?1.05:1.35));
+          if(!m) break;
+          g.setTransform(m[0],m[1],m[2],m[3],Math.round(m[4]),Math.round(m[5]));
+          g.drawImage(sheets[id],s*64,0,64,64,-32,-32,64,64);
+        }
+        g.restore();
       }});
     }
   }

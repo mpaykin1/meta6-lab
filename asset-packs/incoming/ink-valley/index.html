@@ -98,6 +98,7 @@ function select(id){const found=objects.find(o=>o.id===id);if(!found)return;acti
  [...items.children].forEach(b=>b.classList.toggle('sel',b.dataset.id===id));panel.classList.remove('show')}
 for(const o of objects){const b=document.createElement('button');b.textContent=names[o.id];b.dataset.id=o.id;b.onclick=()=>select(o.id);items.appendChild(b)}
 menu.onclick=()=>panel.classList.toggle('show');
+addEventListener('message',e=>{if(e.origin===location.origin&&typeof e.data?.selectAsset==='string')select(e.data.selectAsset)});
 addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true;if('wasdarrowup arrowdown arrowleft arrowright'.includes(e.key.toLowerCase())){free=true;panel.classList.remove('show')}});
 addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);
 const stick=document.getElementById('joy'),nub=document.getElementById('nub');let touch=null;

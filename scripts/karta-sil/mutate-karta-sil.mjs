@@ -576,3 +576,25 @@ test('КАРТА: сбой не стирает карту, 5xx повторяе�
     await assert.rejects(()=>checkResilience(build2,route2),undefined,label);
   }
 });
+
+// Claude 17.11.2026: превью Vercel на каждый PR исчерпали бесплатный лимит 100 сборок/сутки, красный «Vercel»
+// висел на всех PR и автозадачи считали его блокером. Превью только для main.
+function checkVercelPolicy(cfg){
+  const d=cfg?.git?.deploymentEnabled;
+  assert.equal(typeof d,'object','deploymentEnabled — объект веток');
+  assert.equal(d['**'],false,'ветки PR не деплоятся');
+  assert.equal(d.main,true,'main деплоится');
+  assert.equal(Object.values(d).filter(v=>v===true).length,1,'кроме main никто не включён');
+}
+test('Vercel: превью только для main',async()=>{
+  const cfg=JSON.parse(await fs.readFile(new URL('../../vercel.json',import.meta.url),'utf8'));
+  checkVercelPolicy(cfg);
+  for(const [label,mut] of [
+    ['превью снова для всех',c=>{c.git.deploymentEnabled['**']=true;}],
+    ['main выключен',c=>{c.git.deploymentEnabled.main=false;}],
+    ['лазейка для lab/*',c=>{c.git.deploymentEnabled['lab/*']=true;}],
+  ]){
+    const c=structuredClone(cfg); mut(c);
+    assert.throws(()=>checkVercelPolicy(c),undefined,label);
+  }
+});

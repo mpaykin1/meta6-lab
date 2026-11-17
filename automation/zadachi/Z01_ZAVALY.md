@@ -34,3 +34,5 @@ PR [#331 «БЕЗ ТОРМОЗОВ / РАЗБОР ЗАВАЛОВ»](https://gith
 - 17.11 Claude: [#331](https://github.com/mpaykin1/meta6-lab/pull/331) — 15 файлов и конфликт: разбить (п.5) на PR без workflow (dispetcher build.mjs + его тесты; TOLKACH/SLIYANIE доки; karta-sil) — их сливать самому; отдельный PR только с `.github/workflows/additive-merge-preflight.yml` + его verify/mutate — `НУЖЕН CLAUDE`.
 
 - 17.11 MG-строитель-1: при подсчёте лимита не использовать общее число `is:open` — черновики не занимают квоту. Сначала отдельно посчитать `is:open is:pr draft:false` и `is:open is:pr draft:true`; только затем решать, можно ли создавать новый PR. Это предотвращает повторение ложного блокера «49 открытых при лимите 5» из журнала ZAPUSKI.
+
+- 17.11 MG-строитель-1: перед переводом PR в `Ready for review` повторно запросить `mergeable` и `mergeable_state` на текущем HEAD; `dirty` означает конфликт и запрещает объявлять PR готовым даже при старых зелёных проверках. Пример: [#361](https://github.com/mpaykin1/meta6-lab/pull/361) после обновления `main`.

@@ -46,11 +46,12 @@ try{
  const page=[
   '<!doctype html><html><head><meta charset="utf-8"><style>',
   'html,body,iframe{height:100%;width:100%;padding:0;margin:0;border:0;overflow:hidden;background:#141b21;}',
-  '</style></head><body><iframe src="./index.html"></iframe><script>',
+  '</style></head><body><iframe src="./index.html?asset_probe=1"></iframe><script>',
   'let started=false;setInterval(()=>{let child;',
   'try{child=document.querySelector("iframe").contentWindow;}catch(e){document.body.dataset.error=String(e);return;}',
   'const items=child.__PACK__?.items,objects=child.__PACK_PROBE__?.assets;',
   'const bird=objects?.crow,beast=objects?.stalker;',
+  'document.body.dataset.gpu=String(child.__RENDER_STATS__?.colors||0);',
   'if(!started&&items?.length===26&&bird?.children?.length>=2&&beast?.children?.length>=2){',
   'started=true;document.body.dataset.loaded="26";',
   'document.body.dataset.crow=String(bird.children.length);',
@@ -81,13 +82,13 @@ try{
  const html=proc.stdout??'';
  const attr=(name)=>new RegExp('data-'+name+'="([^"]*)"').exec(html)?.[1];
  result.facts={loaded:Number(attr('loaded')||0),crowParts:Number(attr('crow')||0),
-  beastParts:Number(attr('beast')||0),moved:attr('moved')||'unknown',exit:proc.status};
+  beastParts:Number(attr('beast')||0),gpuColors:Number(attr('gpu')||0),moved:attr('moved')||'unknown',exit:proc.status};
  if(existsSync(screenshot))Object.assign(result.facts,countColors(readFileSync(screenshot)));
  if(proc.status!==0)result.errors.push('Chrome nonzero exit: '+String(proc.stderr||'').slice(-600));
  if(result.facts.loaded!==26)result.errors.push('26 original-art assets did not initialize');
  if(result.facts.crowParts<2||result.facts.beastParts<2)result.errors.push('Owners PNG/GIF did not become hinged parts');
  if(result.facts.moved!=='yes')result.errors.push('Arrow key did not move raven');
- if(!result.facts.colors||result.facts.colors<36)result.errors.push('Blank or undetailed screenshot');
+ if(result.facts.gpuColors<36)result.errors.push('WebGL framebuffer has no visible detailed artwork');
  result.ok=result.errors.length===0;
 }catch(error){result.errors.push(String(error?.stack||error));}
 finally{

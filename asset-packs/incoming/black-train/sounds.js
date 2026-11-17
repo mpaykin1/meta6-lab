@@ -21,16 +21,16 @@ function sound(freq,volume,duration,pan,type='sine'){
  osc.connect(filter);filter.connect(gain);gain.connect(stereo);stereo.connect(ac.destination);
  osc.start(now);osc.stop(now+duration+.03);
 }
-export function crossingBell(t,near){
+export function crossingBell(t,near,pan=0){
  if(near<.06||t-lastBell<Math.max(.47,1.7-near*.95))return;
  lastBell=t;
  // Low consonant distant dyad, softer than the game's wheel rumble.
- sound(174.61,.014+near*.042,1.16,-.45);
- sound(261.63,.006+near*.016,1.35,-.45);
+ sound(174.61,.014+near*.042,1.16,pan);
+ sound(261.63,.006+near*.016,1.35,pan);
 }
-export function chainsClank(t){
+export function chainsClank(t,pan=0){
  if(t-lastChain<7.3)return;lastChain=t;
- sound(198,.008,.27,.55,'triangle');
- sound(296.66,.003,.23,.55,'triangle');
+ sound(198,.008,.27,pan,'triangle');
+ sound(296.66,.003,.23,pan,'triangle');
 }
 export function muteRailSounds(){if(ac&&ac.state==='running')ac.suspend().catch(()=>{});}

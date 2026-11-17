@@ -1,0 +1,51 @@
+{
+  "format": "ink-pack/1",
+  "version": "0.1.0",
+  "base": "reference/ink-fallen-guardian",
+  "game": "ostrov-aptekarya",
+  "license": {
+    "type": "original",
+    "author": "META GAMES",
+    "commercial": true
+  },
+  "provenance": {
+    "tool": "Three.js + GLSL procedural geometry",
+    "date": "2026-11-17",
+    "source": "ZAKAZ.json (owner-supplied 7-second game reference video)"
+  },
+  "content_flags": {
+    "real_persons": false,
+    "brands": false,
+    "political": false
+  },
+  "assets": {
+    "carHeadlights": {
+      "label_ru": "Фары машины — тёплый свет и задние огни",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0,
+      "benefit": "Освещают дорогу и кусты в сумерках"
+    },
+    "handFlashlight": {
+      "label_ru": "Ручной фонарик аптекаря",
+      "role": "interactive",
+      "zone": "woodland",
+      "footprint": 0,
+      "benefit": "Освещает травы и путь ночью"
+    },
+    "rowingHealer": {
+      "label_ru": "Аптекарь гребёт: руки и два весла",
+      "role": "character",
+      "zone": "lakeside",
+      "footprint": 0,
+      "benefit": "Помогает добраться до причала"
+    },
+    "rainSplashRings": {
+      "label_ru": "Дождь: косые штрихи и рябь на земле",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0,
+      "benefit": "Живой дождь и круги на мокрой поверхности"
+    }
+  }
+}

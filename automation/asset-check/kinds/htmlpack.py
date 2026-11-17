@@ -24,8 +24,15 @@ CDN = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
 
 
 def detect(root: Path) -> bool:
-    page = root / "index.html"
-    return page.is_file() and "window.__PACK__" in page.read_text("utf-8", errors="replace")
+    """Classify only declared htmlpack/1. INK stands may expose __PACK__ for menus."""
+    page, manifest = root / "index.html", root / "pack.json"
+    if not page.is_file() or not manifest.is_file():
+        return False
+    try:
+        fmt = json.loads(manifest.read_text("utf-8")).get("format")
+    except (OSError, ValueError, AttributeError):
+        return False
+    return fmt == "htmlpack/1" and "window.__PACK__" in page.read_text("utf-8", errors="replace")
 
 
 def ids(source: str) -> list[str]:

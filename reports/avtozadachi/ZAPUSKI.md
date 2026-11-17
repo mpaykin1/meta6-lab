@@ -99,3 +99,6 @@
 
 | MG-строитель-4 | 2026-11-17T00:33:28.035Z | старт |
 | MG-строитель-4 | 2026-11-17T00:33:28.035Z | итог: блокер — [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md): #325 требует разбора guard, #332 и #337 упираются во внешнюю квоту Vercel; [TOLKNUT](https://github.com/mpaykin1/meta6-lab/blob/main/TOLKNUT.md) ограничивает выдачу; [карта сил](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json): game_fix и workflow_ci красные, redPerMerge соответственно null и 0; независимый разрешённый кодовый шаг не подтверждён |
+
+| MG-строитель-2 | 2026-11-17T02:07:29Z | старт |
+| MG-строитель-2 | 2026-11-17T02:07:29Z | итог: ступень 2 — PR #335 содержит защищённый workflow; независимый PASS и слияние невозможны без Claude; [PR](https://github.com/mpaykin1/meta6-lab/pull/335) |

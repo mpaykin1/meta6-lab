@@ -23,7 +23,13 @@ try {
   fs.mkdirSync(path.join(tmp, 'node_modules', 'three'), {recursive: true});
   fs.writeFileSync(path.join(tmp, 'node_modules', 'three', 'package.json'),
     JSON.stringify({name: 'three', type: 'module', main: '../../three.module.js', exports: '../../three.module.js'}));
-  fs.copyFileSync(path.join(tmp, 'three.module.js'), path.join(tmp, 'node_modules', 'three', 'three.module.js'));
+  // Night Train is distributed as a bundled single-file game. Use the canonical
+  // trusted INK Three.js module for geometry checks; never load from the network.
+  const threeSource = fs.existsSync(path.join(tmp, 'three.module.js'))
+    ? path.join(tmp, 'three.module.js')
+    : path.resolve(refDir, '../ink-fallen-guardian/three.module.js');
+  if (!fs.existsSync(threeSource)) throw new Error('trusted Three.js reference missing');
+  fs.copyFileSync(threeSource, path.join(tmp, 'node_modules', 'three', 'three.module.js'));
   fs.writeFileSync(path.join(tmp, 'node_modules', 'three', 'package.json'),
     JSON.stringify({name: 'three', type: 'module', exports: './three.module.js'}));
   fs.writeFileSync(path.join(tmp, 'package.json'), JSON.stringify({type: 'module'}));

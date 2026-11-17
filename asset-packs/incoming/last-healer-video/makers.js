@@ -411,4 +411,189 @@ export function whiteClinicBuilding(seed=1){
  return finish(g,2.6);
 }
 
-export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,wetGrassClumps,roadsideDryShrubs,pinkTownBuilding,duskTownLight,healerWalkWithLight,puddles,whiteClinicBuilding};
+
+export function nightRainGrade(seed=1){
+ const rng=rand(seed),g=new T.Group();g.name='Ночь под холодным дождём';
+ const washes=[];
+ const colors=['#637d80','#72838a','#455c65','#6f8584','#81989a'];
+ for(let i=0;i<11;i++){
+  const w=1.5+rng()*2.1,h=.65+rng()*1.5;
+  const mat=new T.MeshBasicMaterial({color:colors[i%colors.length],transparent:true,opacity:.055,depthWrite:false,side:T.DoubleSide});
+  const o=part(g,new T.PlaneGeometry(w,h),mat,(rng()-.5)*3.6,.55+rng()*1.55,-1.35-rng()*.40);
+  o.rotation.y=(rng()-.5)*.35;o.castShadow=false;washes.push({o,mat,offset:i*.49});
+ }
+ for(let i=0;i<14;i++){
+  const s=.15+rng()*.4;
+  const m=part(g,new T.PlaneGeometry(s*.6,s*1.8),new T.MeshBasicMaterial({color:'#b7c7be',transparent:true,opacity:.08,depthWrite:false,side:T.DoubleSide}),(rng()-.5)*5,.015,(rng()-.5)*4.2);
+  m.rotation.x=-Math.PI/2;m.rotation.z=(rng()-.5)*.4;m.castShadow=false;
+ }
+ g.userData.tick=t=>washes.forEach(({o,mat,offset})=>{o.rotation.y=.06*Math.sin(t*.31-offset);mat.opacity=.046+.018*Math.sin(t*.20-offset);});
+ return finish(g,0);
+}
+
+export function boatWake(seed=1){
+ const rng=rand(seed),g=new T.Group();g.name='Пенный след за лодкой';
+ const wash=[],bubbles=[];
+ const foam=new T.MeshBasicMaterial({color:'#d6e3dc',transparent:true,opacity:.52,depthWrite:false});
+ for(const side of [-1,1]){
+  for(let i=0;i<8;i++){
+   const depth=.28+i*.33,x=side*(.38+depth*.30);
+   const pts=[new T.Vector3(side*.41,.03,-.35-depth*.3),
+     new T.Vector3(x*.8,.045,-.55-depth*.5),
+     new T.Vector3(x,.026,-1.0-depth)];
+   const curve=new T.CatmullRomCurve3(pts);
+   const geom=new T.TubeGeometry(curve,12,.015+rng()*.012,5,false);
+   const mat=foam.clone();mat.opacity=.24+rng()*.27;
+   const o=part(g,geom,mat);o.castShadow=false;wash.push({o,mat,phase:i*.27+(side>0?.31:0)});
+  }
+ }
+ for(let i=0;i<22;i++){
+  const x=(rng()-.5)*2.1,z=-.9-rng()*3.4;
+  const o=part(g,new T.IcosahedronGeometry(.024+rng()*.029,0),pigment.blue,x,.038,z);
+  o.castShadow=false;bubbles.push({o,phase:rng()*6.28});
+ }
+ const rings=[];
+ for(const s of [-1,1])for(let i=0;i<4;i++){
+   const o=part(g,new T.TorusGeometry(.17+i*.045,.012,4,24),pigment.ripple.clone(),s*.7,.02,-.6-i*.7);
+   o.rotation.x=-Math.PI/2;o.castShadow=false;rings.push({o,phase:i*.21+s*.07});
+ }
+ g.userData.tick=t=>{
+  wash.forEach(({o,mat,phase})=>{o.scale.x=1+.04*Math.sin(t*1.48-phase);mat.opacity=.16+.19*(.5+.5*Math.sin(t*1.7-phase));});
+  bubbles.forEach(({o,phase})=>{o.position.y=.043+.024*Math.sin(t*1.4-phase);o.scale.setScalar(.7+.3*Math.sin(t*1.6+phase));});
+  rings.forEach(({o,phase})=>{const u=(t*.62+phase)%1;o.scale.setScalar(.5+u*.9);o.material.opacity=.46*(1-u);});
+ };
+ return finish(g,0);
+}
+
+export function shoreFoamLine(seed=1){
+ const rng=rand(seed),g=new T.Group();g.name='Живой прибой на неровном берегу';
+ const bands=[];
+ for(let layer=0;layer<4;layer++){
+   const count=36,positions=new Float32Array(count*2*3),base=[];
+   for(let i=0;i<count;i++){
+     const z=-3.1+i*6.2/(count-1),shore=.62*Math.sin(z*.74)+.21*Math.sin(z*2.37+.2)+.07*Math.sin(z*5.1);
+     const phase=z*.6+layer*.38,near=shore+layer*.14,far=near+.06+.04*rng();
+     base.push({z,near,far,phase});
+     const j=i*6;positions.set([near,.018+layer*.004,z,far,.021+layer*.004,z],j);
+   }
+   const indices=[];
+   for(let i=0;i<count-1;i++){const j=i*2;indices.push(j,j+1,j+2,j+1,j+3,j+2);}
+   const geom=new T.BufferGeometry();geom.setAttribute('position',new T.BufferAttribute(positions,3));geom.setIndex(indices);geom.computeVertexNormals();
+   const mat=new T.MeshBasicMaterial({color:layer===0?'#efece2':'#a7c9c3',transparent:true,opacity:.24-layer*.037,depthWrite:false,side:T.DoubleSide});
+   const mesh=part(g,geom,mat);mesh.castShadow=false;bands.push({geom,mat,base,layer});
+ }
+ for(let i=0;i<20;i++){
+   const z=(rng()-.5)*6,shore=.62*Math.sin(z*.74)+.21*Math.sin(z*2.37+.2);
+   const o=part(g,new T.SphereGeometry(.025+rng()*.045,7,6),pigment.blue,shore+(rng()-.5)*.44,.05,z);
+   o.scale.y=.17;o.castShadow=false;
+ }
+ g.userData.tick=t=>{
+   for(const {geom,mat,base,layer} of bands){
+     const pos=geom.attributes.position;
+     for(let i=0;i<base.length;i++){
+       const q=base[i],drift=.04*Math.sin(t*.85-q.phase-layer*.24);
+       pos.setX(i*2,q.near+drift);pos.setX(i*2+1,q.far+drift+.025*Math.sin(t*1.1-q.z));
+     }
+     pos.needsUpdate=true;mat.opacity=.15+.11*Math.sin(t*.45-layer*.28+1.7)**2;
+   }
+ };
+ return finish(g,0);
+}
+
+export function autumnConeTrees(seed=1){
+ const rng=rand(seed),g=new T.Group();g.name='Осенние конусные деревья INK';
+ const shades=['#b78a61','#c5ac69','#607e74','#b79496','#9da78a'];
+ const trunks=new T.MeshStandardMaterial({color:'#736b59',roughness:1}),crowns=[];
+ for(let i=0;i<5;i++){
+  const tree=new T.Group();tree.position.set(-2+i*.98,0,(rng()-.5)*.7);g.add(tree);
+  const h=1.58+rng()*.95,shade=new T.MeshStandardMaterial({color:shades[i],roughness:1,flatShading:true});
+  const trunk=rod(tree,[0,0,0],[0,h*.80,0],.085,trunks,.058);
+  const crown=new T.Group();tree.add(crown);
+  for(let k=0;k<3;k++){
+   const mid=h*(.57+k*.21),w=.49-k*.11+rng()*.05;
+   const o=part(crown,new T.ConeGeometry(w,h*.50-k*.085,7,2),shade,0,mid,0);
+   o.rotation.y=rng()*.75;o.rotation.z=(rng()-.5)*.06;
+   for(let j=0;j<3;j++){
+     const a=(k*3+j)*6.283/9,r=w*.8;
+     part(crown,new T.TetrahedronGeometry(.055+rng()*.035),shade,r*Math.cos(a),mid-.16,r*Math.sin(a));
+   }
+  }
+  const leaflets=[];
+  for(let j=0;j<5;j++){
+   const leaf=part(tree,new T.TetrahedronGeometry(.032+rng()*.03,0),shade,(rng()-.5)*.9,.3+rng()*h,(rng()-.5)*.75);
+   leaflets.push({leaf,phase:rng()*4,height:leaf.position.y});
+  }
+  crowns.push({crown,leaflets,phase:i*.29+rng()*.36});
+ }
+ g.userData.tick=t=>crowns.forEach(({crown,leaflets,phase})=>{
+    crown.rotation.z=.035*Math.sin(t*.62-phase);crown.rotation.x=.027*Math.sin(t*.51-phase-.35);
+    leaflets.forEach(({leaf,height,phase:i})=>{leaf.position.y=.14+((height-.14-t*.12+i)%2.9+2.9)%2.9;leaf.rotation.y=t*.24+i;});
+ });
+ return finish(g,.40);
+}
+
+export function boatShed(seed=1){
+ const rng=rand(seed),g=new T.Group();g.name='Прибрежный лодочный сарай';
+ const timber=new T.MeshStandardMaterial({color:'#736b59',roughness:1}),dark=new T.MeshStandardMaterial({color:'#4a5d53',roughness:1}),roof=new T.MeshStandardMaterial({color:'#728e72',roughness:.91}),stripe=new T.MeshStandardMaterial({color:'#ad6e61',roughness:.9});
+ const floor=block(g,3.6,.18,3.2,timber,0,.13,0);
+ for(const s of [-1,1])for(const z of [-1.3,1.3])rod(g,[s*1.57,.14,z],[s*1.52,2.6,z],.10,timber);
+ for(let i=0;i<8;i++){
+  const z=-1.45+i*.40;
+  block(g,.08,1.93,.20,timber,-1.62,1.14,z);
+  block(g,.08,1.93,.20,timber,1.62,1.14,z);
+  if(i%2===0)rod(g,[-1.6,.6,z],[-1.6,1.77,z+.24],.024,dark);
+ }
+ for(const s of [-1,1]){
+  const slope=block(g,2.15,.15,3.63,roof,s*.92,2.74,0);
+  slope.rotation.z=-s*.34;
+  const lip=block(g,2.0,.10,3.75,stripe,s*1.01,2.31,0);lip.rotation.z=-s*.34;
+ }
+ for(let i=0;i<10;i++){
+  const x=(i%5)*.68-1.36,z=-1.34+Math.floor(i/5)*2.68;
+  block(g,.62,.027,.14,dark,x,.28,z);
+ }
+ for(const s of [-1,1]){
+  block(g,1.21,.09,.5,dark,s*1.05,1.18,-1.16);
+  for(let i=0;i<3;i++){
+   const x=s*(.70+i*.30);
+   const crate=block(g,.27,.25,.33,timber,x,.98,-1.09);
+   for(let k=0;k<2;k++)block(g,.028,.25,.34,pigment.brass,x+(k?-.08:.08),.98,-1.07);
+  }
+ }
+ for(let i=0;i<6;i++)rod(g,[-1.30+i*.14,.3,.98],[-.94+i*.13,1.63,1.40],.027,timber);
+ const bell=part(g,new T.CylinderGeometry(.11,.17,.24,9),pigment.brass,1.20,2.08,1.53);
+ const lantern=part(g,new T.SphereGeometry(.10,10,7),pigment.warm,-1.10,1.82,1.56);
+ for(let i=0;i<6;i++){
+  const a=i*6.283/6;
+  rod(g,[1.27,1.8,1.31],[1.27+Math.cos(a)*.09,1.64,1.31+Math.sin(a)*.09],.016,pigment.wood);
+ }
+ g.userData.tick=t=>{lantern.scale.setScalar(.98+.025*Math.sin(t*.46));bell.rotation.z=.011*Math.sin(t*.41);};
+ g.userData.interact={radius:2.1,effect:'save',label_ru:'Сохранить лодку и путь'};
+ return finish(g,1.90);
+}
+
+export function driftingLeaves(seed=1){
+ const rng=rand(seed),g=new T.Group();g.name='Плывущие осенние листья';
+ const mats=['#c5ac69','#bd7c69','#9c9b8e','#ad8767','#8c8270'].map(color=>new T.MeshStandardMaterial({color,roughness:1,side:T.DoubleSide}));
+ const leaves=[];
+ for(let i=0;i<27;i++){
+   const leaf=new T.Group();leaf.position.set((rng()-.5)*5.6,.055,(rng()-.5)*4.8);g.add(leaf);
+   const w=.05+rng()*.065,l=.12+rng()*.12;
+   const s=new T.Shape();s.moveTo(0,-l/2);s.bezierCurveTo(-w,-l*.3,-w,l*.30,0,l*.5);s.bezierCurveTo(w,l*.2,w,-l*.24,0,-l/2);
+   const body=part(leaf,new T.ShapeGeometry(s),mats[i%mats.length]);
+   body.rotation.x=-Math.PI/2;
+   rod(leaf,[0,.013,-l*.54],[0,.022,l*.31],.004,pigment.wood);
+   const mid=part(leaf,new T.TetrahedronGeometry(.011,0),mats[(i+2)%mats.length],0,.02,0);
+   leaves.push({leaf,originX:leaf.position.x,originZ:leaf.position.z,phase:rng()*6.28,speed:.014+rng()*.022});
+ }
+ g.userData.tick=t=>leaves.forEach(({leaf,originX,originZ,phase,speed})=>{
+    leaf.position.x=originX+.21*Math.sin(t*.34+phase);
+    leaf.position.z=originZ+speed*t+.18*Math.sin(t*.18+phase*.8);
+    leaf.position.y=.052+.018*Math.sin(t*.58+phase);
+    leaf.rotation.y=.25*Math.sin(t*.39+phase);
+    leaf.rotation.x=.09*Math.sin(t*.62+phase-.4);
+ });
+ return finish(g,0);
+}
+
+export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,wetGrassClumps,roadsideDryShrubs,pinkTownBuilding,duskTownLight,healerWalkWithLight,puddles,whiteClinicBuilding,nightRainGrade,boatWake,shoreFoamLine,autumnConeTrees,boatShed,driftingLeaves};

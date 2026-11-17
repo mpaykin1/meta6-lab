@@ -26,75 +26,6 @@ function tube(g,a,b,r,mat,seg=6){
 function cone(g,x,y,z,w,h,material=ink){
  const m=add(g,new T.ConeGeometry(w,h,5),material,x,y,z);return m;
 }
-function blackLocomotive(seed=1){
- const r=rng(seed),g=new T.Group();g.name='BLACK TRAIN · чёрный локомотив';g.userData.footprint=0;
- const body=add(g,new T.BoxGeometry(9.3,2.45,2.85),ink,-.2,2.12,0);
- add(g,new T.BoxGeometry(9.75,.36,3.2),soot,-.1,.97,0);
- add(g,new T.BoxGeometry(9.55,.34,3.08),steel,-.1,3.49,0);
- add(g,new T.BoxGeometry(3.05,1.45,2.92),soot,-2.92,4.2,0);
- add(g,new T.BoxGeometry(3.4,.26,3.35),ink,-2.87,4.97,0);
- // A flat, imposing upright front, rather than the reference train's sloped nose.
- add(g,new T.BoxGeometry(.36,3.32,3.02),soot,4.6,2.15,0);
- for(const z of [-1.40,1.40]){
-  tube(g,[-4.8,1.1,z],[4.65,1.1,z],.12,steel);
-  for(const x of [-3.9,-2.35,-.8,.8,2.45,3.85]){
-   add(g,new T.CylinderGeometry(.37,.37,.15,10),steel,x,.58,z).rotation.x=Math.PI/2;
-   add(g,new T.CylinderGeometry(.24,.24,.18,10),soot,x,.58,z).rotation.x=Math.PI/2;
-  }
- }
- // Iron ribs, handrails, seams, rivets, boiler access hatches and soot deposits.
- for(let i=0;i<15;i++){
-  const x=-4.34+i*.6;
-  tube(g,[x,1.18,-1.46],[x,3.38,-1.46],.023,i%3?steel:edge,5);
-  tube(g,[x,1.18,1.46],[x,3.38,1.46],.023,i%3?steel:edge,5);
- }
- for(let i=0;i<19;i++){
-  const x=-4.3+i*.49;
-  for(const z of [-1.52,1.52])add(g,new T.SphereGeometry(.055,5,4),edge,x,3.2,z);
- }
- for(const z of [-1.57,1.57]){
-  tube(g,[-4.56,2.2,z],[4.45,2.2,z],.038,edge);
-  for(let i=0;i<9;i++){
-   const x=-4.1+i*.96;
-   tube(g,[x,3.6,z*.86],[x,3.82,z*.86],.043,edge);
-  }
-  // Hanging ladder with twelve rungs, visible from side.
-  for(let y=1.1;y<3.55;y+=.28)tube(g,[-4.28,y,z],[-3.73,y,z],.03,steel);
-  tube(g,[-4.28,1.1,z],[-4.28,3.58,z],.038,steel);
-  tube(g,[-3.73,1.1,z],[-3.73,3.58,z],.038,steel);
- }
- for(let i=0;i<5;i++){
-  const x=-3.99+i*.49;
-  const w=add(g,new T.BoxGeometry(.29,.53,.07),pale,x,4.31,-1.51);
-  add(g,new T.BoxGeometry(.29,.53,.07),pale,x,4.31,1.51);
-  tube(g,[x-.18,4.05,-1.57],[x-.18,4.57,-1.57],.035,soot);
-  tube(g,[x-.18,4.05,1.57],[x-.18,4.57,1.57],.035,soot);
- }
- for(let i=0;i<7;i++){
-  const x=-1.25+i*.77;
-  add(g,new T.BoxGeometry(.23,.16,2.5),steel,x,3.67,0);
-  cone(g,x,3.88,(r()-.5)*1.9,.12,.42,soot);
- }
- // Distinct headlights: two low eyes, plus the roof-mounted searchlight.
- for(const z of [-.99,.99]){
-  add(g,new T.CylinderGeometry(.31,.31,.12,16),edge,4.82,1.65,z).rotation.z=Math.PI/2;
-  add(g,new T.CylinderGeometry(.225,.225,.14,16),pale,4.92,1.65,z).rotation.z=Math.PI/2;
- }
- add(g,new T.CylinderGeometry(.42,.42,.46,16),steel,4.24,4.53,0).rotation.z=Math.PI/2;
- add(g,new T.CylinderGeometry(.29,.29,.48,16),pale,4.49,4.53,0).rotation.z=Math.PI/2;
- const beacon=new T.PointLight('#c5d4d9',4,16,1.7);beacon.position.set(4.9,4.55,0);g.add(beacon);
- const beam=add(g,new T.ConeGeometry(3.0,38,24,1,true),
-    new T.MeshBasicMaterial({color:'#6b7577',transparent:true,opacity:.045,side:T.DoubleSide,
-    depthWrite:false,blending:T.AdditiveBlending}),23.4,4.53,0);
- beam.rotation.z=Math.PI/2;beam.renderOrder=2;
- for(let i=0;i<12;i++){
-  const x=-4.7+i*.76;
-  add(g,new T.BoxGeometry(.24,.025,.38),i%3?soot:edge,x,3.43,1.22);
- }
- g.userData.tick=(t,dt)=>{beacon.intensity=3.6+.35*Math.sin(t*1.9);beam.material.opacity=.043+.006*Math.sin(t*.7);};
- g.userData.length=10;
- return g;
-}
 function crossingSign(seed=1){
  const r=rng(seed),g=new T.Group();g.name='Гнилой переезд · косой крест';
  g.userData.footprint=.48;
@@ -409,6 +340,6 @@ function chainsClank(seed=1){
  return g;
 }
 
-export const makers={blackLocomotive,crossingSign,redSignalLamp,hangingChains,gnarledTree,groundMist,
+export const makers={crossingSign,redSignalLamp,hangingChains,gnarledTree,groundMist,
   stormClouds,brokenFence,tallGrass,wetRailGlow,barbedWire,swampPuddles,titleLogo,crossingBell,chainsClank};
 

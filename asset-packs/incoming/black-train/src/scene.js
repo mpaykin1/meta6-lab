@@ -139,7 +139,7 @@ placeAsset('brokenFence',73,6.5,0,-16.8,.18);
 placeAsset('tallGrass',77,-4.8,0,-6.2);
 placeAsset('tallGrass',79,7.6,0,-7.9);
 placeAsset('tallGrass',83,2.2,0,-13.4);
-placeAsset('wetRailGlow',87,4.4,0,TRACK_Z);
+const railReflections=placeAsset('wetRailGlow',87,4.4,0,TRACK_Z);
 placeAsset('barbedWire',89,11.4,0,TRACK_Z,Math.PI/2);
 placeAsset('swampPuddles',91,6.3,0,-3.5);
 placeAsset('swampPuddles',93,-9.3,0,-8.8);
@@ -152,6 +152,7 @@ function advanceNightAssets(dt){
  const approach=TR.active?Math.max(0,1-Math.abs(TR.x-5)/180):0;
  signal.userData.setApproach(approach,elapsed);
  farLamp.userData.setApproach(approach*.55,elapsed);
+ railReflections.userData.setApproach(approach,elapsed);
  crossingSounds.update({time:elapsed,approach,enabled:audio.enabled,state});
 }
 

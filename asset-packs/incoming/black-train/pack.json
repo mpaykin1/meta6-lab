@@ -2,7 +2,7 @@
   "format": "ink-pack/1",
   "game": "ink-night-scream",
   "base": "reference/ink-night-scream",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": {
     "type": "own",
     "author": "META GAMES — original procedural assets",
@@ -55,6 +55,49 @@
       "role": "effect",
       "zone": "railway",
       "footprint": 0
+    },
+    "stormClouds": {
+      "label_ru": "Ночные тучи",
+      "role": "effect",
+      "zone": "sky",
+      "footprint": 0
+    },
+    "brokenFence": {
+      "label_ru": "Сломанный забор",
+      "role": "prop",
+      "zone": "railway",
+      "footprint": 0.3
+    },
+    "tallGrass": {
+      "label_ru": "Трава у насыпи",
+      "role": "plant",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "wetRailGlow": {
+      "label_ru": "Отблески на мокрых рельсах",
+      "role": "ground",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "barbedWire": {
+      "label_ru": "Колючая проволока",
+      "role": "prop",
+      "zone": "railway",
+      "footprint": 0.25
+    },
+    "swampPuddles": {
+      "label_ru": "Болотные лужи",
+      "role": "ground",
+      "zone": "railway",
+      "footprint": 0
     }
-  }
+  },
+  "sound_assets": [
+    "crossingBell",
+    "chainsClank"
+  ],
+  "ui_assets": [
+    "titleLogo"
+  ]
 }

@@ -167,7 +167,13 @@ function wetRailGlow(seed=10){
   const m=box(g,.12+r()*.3,.012,.3+r()*.2,blood,-2.5+i*.55,.13,(r()-.5)*.7);
   reflection.push(m);
  }
- g.userData.tick=t=>{blood.opacity=.18+.11*Math.pow(Math.sin(t*2.5),4);wet.opacity=.2+.08*Math.sin(t*1.1);reflection[0].position.y=.205+.003*Math.sin(t*1.1);};
+ g.userData.setApproach=(a,t)=>{
+  const near=T.MathUtils.smoothstep(a,.06,.88);
+  const pulse=.5+.5*Math.sin(t*(2.4+8.1*near));
+  blood.opacity=.045+.40*near*pulse*pulse;
+  wet.opacity=.14+.13*near*pulse;
+ };
+ g.userData.tick=t=>{reflection[0].position.y=.205+.003*Math.sin(t*1.1);};
  return finish(g,0);
 }
 function barbedWire(seed=11){

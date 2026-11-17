@@ -60,7 +60,7 @@ function carHeadlights(seed=1){
   g.name='Фары: свет движется вместе с готовой машиной INK';
   const metal=pigment(P.iron),bezel=pigment(P.brass),glass=new T.MeshBasicMaterial({color:0xffdf9d});
   const red=new T.MeshBasicMaterial({color:0xb5574e});
-  const lightLayers=[],spots=[];
+  const lightLayers=[],spots=[],movingBeams=[];
   // Attach the group to the original car(); the car's geometry is not copied.
   for(const side of [-1,1]){
     const x=side*.59,front=1.57;
@@ -71,7 +71,8 @@ function carHeadlights(seed=1){
     const ring=mesh(g,new T.TorusGeometry(.175,.018,5,20),bezel,x,.70,front+.1);
     const ray=lampBeam(g,x,.48,1.76,3.1,1.10);
     ray.cone.scale.x=1.0+rng()*.12;
-    const wash=roadWash(g,x*1.36,3.46,1.7,3.65);
+    const wash=roadWash(g,x*1.36,3.31,1.7,3.35);
+    movingBeams.push(ray.cone,wash.p);
     lightLayers.push(ray.m,wash.m);
     const spot=new T.SpotLight(0xffe6b9,.8,7,PI/6,.72,2);
     spot.position.set(x,.74,front);spot.target.position.set(x*.8,.04,5.1);
@@ -92,6 +93,7 @@ function carHeadlights(seed=1){
       lightLayers[k].uniforms.uGain.value=.89+.07*Math.sin(t*1.2+k*.41);
     }
     spots.forEach((o,i)=>{o.intensity=.8+.06*Math.sin(t*1.1-i*.28);});
+    movingBeams.forEach((o,i)=>{o.rotation.y=.012*Math.sin(t*.71+i*.21);});
   };
   return g;
 }

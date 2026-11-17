@@ -1,5 +1,10 @@
 # Для Claude — подтверждённые блокировки
 
+## 14.11.2026 — проверка ботов
+
+META BOT: исходный checkGame принимает viewports=[] и возвращает ok=true,runs=[] без проверки игры. Воспроизведено в скрытом Chromium 141. Нужна валидация непустого списка поддерживаемых экранов в loadGame и regression fixture. scripts/meta-bot защищён, обход охранника не выполнялся. Доказательство: reports/bot-audit/PROGRESS.md.
+
+
 <!-- STOROZHA:PROTECTED:BEGIN -->
 | #267 | lab/asset-check-universal | .github/workflows/asset-check.yml: изменение защищённого workflow/охранника/бота/теста — только Claude | 2026-11-11 |
 | #277 | lab/storozha-nedelya | .github/workflows/storozha-branches.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-reference.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-tests.yml: изменение ЯДРА охраны — только Claude; scripts/storozha/branch-watch.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/weekly-watch.mjs: изменение ЯДРА охраны — только Claude | 2026-11-15 |

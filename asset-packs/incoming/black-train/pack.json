@@ -1,0 +1,62 @@
+{
+  "format": "ink-pack/1",
+  "version": "0.1.0",
+  "name": "BLACK TRAIN — первая партия ассетов",
+  "base": "reference/ink-night-scream",
+  "license": {
+    "type": "own",
+    "commercial": true,
+    "author": "META GAMES / ChatGPT"
+  },
+  "provenance": {
+    "tool": "ChatGPT",
+    "source": "reference/ink-night-scream/src/",
+    "date": "2026-11-17",
+    "method": "deterministic procedural Three.js geometry from original game scene"
+  },
+  "content_flags": {
+    "real_persons": [],
+    "brands": [],
+    "political": false
+  },
+  "assets": {
+    "blackLocomotive": {
+      "label_ru": "Чёрный локомотив",
+      "role": "vehicle",
+      "zone": "railway",
+      "animated": true,
+      "benefit": "второй тип поезда, чередуется с экспрессом"
+    },
+    "crossingSign": {
+      "label_ru": "Покосившийся переезд",
+      "role": "landmark",
+      "zone": "railway",
+      "animated": false
+    },
+    "redSignalLamp": {
+      "label_ru": "Красный предупредительный сигнал",
+      "role": "interactive",
+      "zone": "railway",
+      "animated": true,
+      "benefit": "частота мигания и звон заранее предупреждают о поезде"
+    },
+    "hangingChains": {
+      "label_ru": "Свисающие цепи",
+      "role": "prop",
+      "zone": "railway",
+      "animated": true
+    },
+    "gnarledTree": {
+      "label_ru": "Корявое дерево",
+      "role": "tree",
+      "zone": "woodland",
+      "animated": true
+    },
+    "groundMist": {
+      "label_ru": "Низкий рваный туман",
+      "role": "effect",
+      "zone": "railway",
+      "animated": true
+    }
+  }
+}

@@ -6,6 +6,8 @@ No technique is banned: geometry is judged on actual colored source pixels.
 from __future__ import annotations
 
 import json
+import shutil
+import subprocess
 from pathlib import Path, PurePosixPath
 
 from PIL import Image, ImageDraw, ImageStat
@@ -188,4 +190,28 @@ def check(root: Path, report) -> set[str]:
                                "Implement the declared effect in the actual referenced module")
                 else:
                     report.asset_ids.add(asset_id)
+    # Real browser proof: both owner characters must load as independent animated cutouts,
+    # the 26-item scene must render and survive keyboard input.
+    if (root / "index.html").is_file() and (root / "scene.js").is_file():
+        node = shutil.which("node")
+        if not node:
+            report.add("CJ9", "HARD", "index.html", "browser check unavailable: no Node.js",
+                       "Install Node.js and Chromium / Playwright")
+        else:
+            try:
+                script = Path(__file__).with_name("cutout_browser.mjs")
+                run = subprocess.run([node, str(script), str(root / "index.html")],
+                                     capture_output=True, text=True, timeout=90, cwd=str(REPO))
+                try:
+                    payload = json.loads(run.stdout)
+                except (ValueError, TypeError):
+                    payload = {"errors": [run.stderr[:300] or run.stdout[:300]]}
+                report.stats["cutout_browser"] = payload.get("facts", {})
+                if run.returncode != 0 or not payload.get("ok"):
+                    report.add("CJ9", "HARD", "index.html",
+                               "browser rendering failed: " + str(payload.get("errors", []))[:420],
+                               "Repair missing textures, GLSL errors, broken controls or invisible rig")
+            except (OSError, subprocess.TimeoutExpired) as exc:
+                report.add("CJ9", "HARD", "index.html", f"browser launch failed: {exc}",
+                           "Fix local Playwright/Chrome runtime; never waive this gate")
     return covered

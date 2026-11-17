@@ -595,13 +595,16 @@ const SHPILI_PLUS=(()=>{
    };
    // Jagged salvaged gate fragments are part of the armor, not luminous stripes.
    const shard=(parent,x,y,z,w,h,rot,mat)=>{
+     // Each salvaged stone gets its own fracture, not a repeated stamped polygon.
+     const R=rng((Math.round(x*7183+y*3797+z*5281+w*101+h*271)|0)^0x47abc);
+     const rag=()=>.82+R()*.36;
      const outline=new T.Shape();
-     outline.moveTo(-.46*w,-.49*h);
-     outline.lineTo(.27*w,-.56*h);
-     outline.lineTo(.57*w,-.15*h);
-     outline.lineTo(.35*w,.37*h);
-     outline.lineTo(.04*w,.59*h);
-     outline.lineTo(-.54*w,.31*h);
+     outline.moveTo(-.46*w*rag(),-.49*h*rag());
+     outline.lineTo(.27*w*rag(),-.56*h*rag());
+     outline.lineTo(.57*w*rag(),-.15*h*rag());
+     outline.lineTo(.35*w*rag(),.37*h*rag());
+     outline.lineTo(.04*w*rag(),.59*h*rag());
+     outline.lineTo(-.54*w*rag(),.31*h*rag());
      outline.closePath();
      const geo=new T.ExtrudeGeometry(outline,{depth:.15,bevelEnabled:true,
        bevelThickness:.035,bevelSize:.025,bevelSegments:1,steps:1,curveSegments:1});
@@ -732,10 +735,29 @@ const SHPILI_PLUS=(()=>{
      fog.position.set(layer.x,layer.y,layer.z);
      fog.renderOrder=45;g.add(fog);
    }
+   // Uneven floating rubble breaks the statue's outline; fragments lag the joints.
+   // These are true beveled meshes at different depths, not screen-space particles.
+   const rubbleSeeds=[
+     [-4.3,1.6,-1.7,.82,1.25,-.36],[-3.1,-2.9,1.2,.57,.94,.29],
+     [3.7,.4,.65,.61,1.32,.41],[4.9,-2.2,-1.3,.42,.71,-.57],
+     [-2.7,4.9,-2.3,.49,.91,.17],[2.5,5.2,1.2,.69,.88,-.16],
+     [-4.8,-4.1,.7,.36,.64,.51],[3.2,-5.1,2,.52,.83,-.43]
+   ];
+   const floatingRubble=rubbleSeeds.map(([x,y,z,w,h,r],i)=>{
+     const m=shard(g,x,y,z,w,h,r,i%3===0?edge:stone);
+     m.userData.drift={x,y,r,phase:i*1.71+.32};return m;
+   });
    batchJoint(body);
    g.rotation.y=-.26;g.scale.setScalar(1.05);
    own[id].tick=t=>{
      body.position.y=.14*Math.sin(t*.65);neck.rotation.z=.09*Math.sin(t*.8);
+     for(const m of floatingRubble){
+       const p=m.userData.drift;
+       m.position.x=p.x+.14*Math.sin(t*.37+p.phase*1.3);
+       m.position.y=p.y+.23*Math.sin(t*.69-p.phase);
+       m.rotation.z=p.r+.09*Math.sin(t*.48+p.phase);
+       m.rotation.y=.18*Math.cos(t*.31+p.phase);
+     }
      skull.rotation.y=.2*Math.sin(t*.52);jaw.rotation.x=.18+.16*Math.sin(t*1.12);
      for(const l of limbs){
        const p=t*.92+l.side*.8;

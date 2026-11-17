@@ -445,48 +445,58 @@ window.GothicCity = (() => {
   // Дымка меняет глубину при снижении, облака уходят из кадра.
   const effects = mk(64,64);
   function drawCloudsAndBoats(items){
-    // PNG-срезы обозначают высоту, а не последовательность кадров.
-    // Рендерим всю стопку по перспективе, иначе облако и лодка — плоская карточка.
-    for (let n=0;n<15;n++){
+    // Sprite-stack, not animated flat sprites: every moving boat and cloud
+    // gets a true vertical volume. Each band projects onto the world plane.
+    for(let n=0;n<15;n++){
       const i=Math.floor(P.x/450)+(n%5)-2, j=Math.floor(P.y/450)+Math.floor(n/5)-1;
-      const id=n%3===0?'sailBoat':'sunsetCloud';
-      if(!sheets[id] || hiddenAssets.has(id)) continue;
-      const phase=hash(i,j,47)*Math.PI*2;
-      const motion=id==='sailBoat'?t*.18:t*.065;
-      const x=i*450+hash(i,j,47)*300+Math.sin(motion+phase)*(id==='sailBoat'?24:35);
-      const y=j*450+hash(i,j,48)*300+Math.cos(motion*.77+phase)*(id==='sailBoat'?11:24);
-      const z=(id==='sailBoat'?5:80+hash(i,j,49)*40)+
-        Math.sin(t*(id==='sailBoat'?1.3:.42)+phase)*(id==='sailBoat'?.9:2.7);
-      const p=proj(x,y,z);
-      if(!p || p[3]<10 || p[3]>1250 || p[2]<.13 ||
-         p[0]<-100 || p[0]>W+100 || p[1]<-100 || p[1]>H+100) continue;
-      const slices=id==='sailBoat'?26:8;
-      items.push({d:p[3],f:()=>{
-        const opacity=clamp(1-p[3]/1900,.15,1)*(id==='sailBoat'?.95:.74);
-        const stride=p[2]<.24?3:p[2]<.48?2:1;
+      const boat=n%3===0, id=boat?'sailBoat':'sunsetCloud';
+      const strip=sheets[id];
+      if(!strip || hiddenAssets.has(id))continue;
+      const phase=hash(i,j,54)*TAU;
+      const x=i*450+hash(i,j,47)*300+(boat?0:t*2.2),
+            y=j*450+hash(i,j,48)*300+(boat?Math.sin(t*.35+phase)*4:t*.85);
+      const z=boat?4+Math.sin(t*1.25+phase)*1.2:80+hash(i,j,49)*40+Math.sin(t*.4+phase)*2.5;
+      const base=proj(x,y,z),nSlices=boat?26:8,side=64;
+      if(!base||base[3]<10||base[3]>1250||base[2]<.17||
+         base[0]<-125||base[0]>W+125||base[1]<-145||base[1]>H+130)continue;
+      items.push({d:base[3],f:()=>{
         g.save();
-        g.globalAlpha=opacity;
-        // Лёгкая рябь расходится за лодкой, пока она движется по каналу.
-        if(id==='sailBoat' && p[2]>.3){
-          const base=planeT(x,y,z-.7);
-          if(base){
-            g.setTransform(base[0],base[1],base[2],base[3],base[4],base[5]);
-            g.strokeStyle='rgba(251,191,139,.52)';
-            g.lineWidth=1.15;
-            for(let w=0;w<3;w++){
-              const trail=13+w*8, curve=Math.sin(t*2+w*1.7)*2;
+        const fade=clamp(1-base[3]/1900,.18,1) * (boat?1:.73);
+        const skip=base[2]<.3?4:base[2]<.6?2:1;
+        // Soft trails behind a sailing boat: displaced reflected highlights.
+        if(boat){
+          const water=planeT(x,y,1);
+          if(water){
+            g.setTransform(water[0],water[1],water[2],water[3],water[4],water[5]);
+            g.rotate(phase*.12);
+            g.strokeStyle='rgba(250,192,138,.36)';
+            g.lineWidth=1.25;g.globalAlpha=fade;
+            for(let w=0;w<4;w++){
               g.beginPath();
-              g.moveTo(-trail,-12-w*3);
-              g.quadraticCurveTo(-trail-7,curve-10,-trail-17,-16-w*3);
+              g.moveTo(-8-w*5,-8-w*8);
+              g.quadraticCurveTo(-2-w*7,2-w*5,12+w*4,8-w*6);
               g.stroke();
             }
           }
         }
-        for(let s=0;s<slices;s+=stride){
-          const m=planeT(x,y,z+s*(id==='sailBoat'?1.05:1.35));
-          if(!m) break;
+        // Render each real PNG slice in world space, from hull to sail tip.
+        // LOD affects the sampling rate only; top remains visible.
+        for(let s=0;s<nSlices;s+=skip){
+          const lift=s*(boat?1.05:2.15);
+          const m=planeT(x,y,z+lift);
+          if(!m)break;
+          g.globalAlpha=fade*(boat?1:.91);
           g.setTransform(m[0],m[1],m[2],m[3],Math.round(m[4]),Math.round(m[5]));
-          g.drawImage(sheets[id],s*64,0,64,64,-32,-32,64,64);
+          g.rotate((boat?.035:.08)*Math.sin(t*(boat?1.2:.38)+phase+s*.13));
+          g.drawImage(strip,s*side,0,side,side,-side/2,-side/2,side,side);
+        }
+        // At low LOD preserve the upper silhouette (sail or cloud cap).
+        if((nSlices-1)%skip){
+          const s=nSlices-1,m=planeT(x,y,z+s*(boat?1.05:2.15));
+          if(m){
+            g.globalAlpha=fade;g.setTransform(m[0],m[1],m[2],m[3],Math.round(m[4]),Math.round(m[5]));
+            g.drawImage(strip,s*side,0,side,side,-side/2,-side/2,side,side);
+          }
         }
         g.restore();
       }});

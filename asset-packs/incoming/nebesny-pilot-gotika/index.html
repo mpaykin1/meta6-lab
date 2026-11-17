@@ -247,7 +247,7 @@ function frame(now){
   P.vz+=(pitchIn*55-P.vz)*ease(2.6,dt);P.z+=P.vz*dt;P.shield=Math.max(0,(P.shield||0)-dt);
   if(P.z<24){P.z=24;P.vz=Math.max(0,P.vz)}if(P.z>150){P.z=150;P.vz=Math.min(0,P.vz)}
   P.v+=(clamp(108+P.boost*140-P.vz*1.1,70,330)-P.v)*ease(1.5,dt); // пикирование разгоняет, подъём тормозит
-  const[fx,fy]=fwd(P.h);P.x+=fx*P.v*dt;P.y+=fy*P.v*dt;
+  const[fx,fy]=fwd(P.h);const timeScale=P.shield>0?.76:1;P.x+=fx*P.v*dt*timeScale;P.y+=fy*P.v*dt*timeScale;
   if(P.rolling){P.barrel+=dt*TAU/0.85;const side=Math.sin(P.barrel*0.5)*90*dt;P.x+=Math.cos(P.h)*side;P.y+=Math.sin(P.h)*side;if(P.barrel>=TAU){P.rolling=false;P.barrel=0}}
 
   /* --- камера: инерция + смена планов --- */

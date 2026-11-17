@@ -1030,6 +1030,82 @@ const SHPILI_PLUS=(()=>{
    };
  }
 
+
+ /* STORM LIGHTNING: branching GPU strokes and internal cloud illumination. */
+ {
+   const id='stormLightning',g=newGroup(id,0,66,-126),R=rng(83117);
+   const cloudMat=new T.ShaderMaterial({side:T.DoubleSide,transparent:true,
+     depthWrite:false,depthTest:false,
+     uniforms:{uT:U.t,uPulse:{value:0}},vertexShader:VS,
+     fragmentShader:NOISE+'uniform float uT,uPulse;varying vec2 vUv;'+
+      'void main(){vec2 p=vUv*vec2(4.,1.6);'+
+      'float n=fbm(p*2.1+vec2(uT*.012,-uT*.014));'+
+      'float f=fbm(p*4.3+vec2(-uT*.009,uT*.019));'+
+      'float c=smoothstep(.31,.68,n+.15*f);'+
+      'float edge=pow(max(0.,1.-abs(n-.52)*3.),2.);'+
+      'vec3 col=mix(vec3(.018,.052,.10),vec3(.11,.28,.42),n);'+
+      'col+=vec3(.24,.58,.81)*uPulse*(.18+edge*.86);'+
+      'float a=c*smoothstep(0.,.1,vUv.y)*smoothstep(1.,.86,vUv.y);'+
+      'gl_FragColor=vec4(col,a*.95);}'} );
+   plane(146,65,cloudMat,0,1,-2,g);
+   const bolts=[];
+   function boltGeo(seed,x,y,length){
+     const r=rng(seed),vertices=[];
+     function seg(ax,ay,bx,by,w){
+       const dx=bx-ax,dy=by-ay,d=Math.max(.01,Math.hypot(dx,dy));
+       const u=-dy/d*w*.5,v=dx/d*w*.5;
+       vertices.push(ax-u,ay-v,.8,ax+u,ay+v,.8,bx+u,by+v,.8,
+         ax-u,ay-v,.8,bx+u,by+v,.8,bx-u,by-v,.8);
+     }
+     function split(cx,cy,dy,w,lev){
+       const n=lev?4+Math.floor(r()*4):12;
+       for(let i=0;i<n;i++){
+         const nx=cx+(r()-.5)*(lev?3.4:5.6),
+           ny=cy-dy/n*(.75+r()*.55);
+         seg(cx,cy,nx,ny,w*(.95-i/(n*1.8)));
+         if(lev<2&&i>1&&r()<(lev?.14:.29))
+           split(nx,ny,dy*(.15+r()*.25),w*.45,lev+1);
+         cx=nx;cy=ny;
+       }
+     }
+     split(x,y,length,.34,0);
+     const geo=new T.BufferGeometry();
+     geo.setAttribute('position',new T.Float32BufferAttribute(vertices,3));
+     return geo;
+   }
+   for(let i=0;i<4;i++){
+     const mat=new T.ShaderMaterial({side:T.DoubleSide,transparent:true,
+       depthWrite:false,depthTest:false,blending:T.AdditiveBlending,
+       uniforms:{uPulse:{value:0}},
+       vertexShader:'void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+       fragmentShader:'uniform float uPulse;void main(){gl_FragColor=vec4(vec3(.49,.78,1.)*uPulse*2.4,uPulse*.94);}'});
+     const mesh=new T.Mesh(boltGeo(4601+i*379,(i-1.4)*19,18+R()*7,
+       18+R()*23),mat);
+     mesh.frustumCulled=false;g.add(mesh);bolts.push(mesh);
+   }
+   let next=3.4+R()*5,started=-100,span=.2,which=0;
+   own[id].tick=t=>{
+     if(t>=next){
+       started=t;span=.11+R()*.18;which=Math.floor(R()*4);
+       next=t+5.8+R()*12.8;
+     }
+     const elapsed=t-started;
+     const strength=elapsed>=0&&elapsed<span?
+       Math.pow(1-elapsed/span,.55)*(elapsed<.026?.78:1):0;
+     cloudMat.uniforms.uPulse.value=strength;
+     for(let i=0;i<bolts.length;i++){
+       bolts[i].material.uniforms.uPulse.value=
+         (i===which?1:i===(which+1)%4?.17:0)*strength;
+     }
+     for(const m of coverStormMats)m.uniforms.uLightning.value=strength;
+     if(strength>.03){
+       flash=Math.max(flash,strength*.34);
+       finalMat.uniforms.uFlash.value=
+         Math.max(finalMat.uniforms.uFlash.value,strength*.34);
+     }
+   };
+ }
+
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;

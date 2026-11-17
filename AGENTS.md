@@ -1,6 +1,9 @@
 ## ВСЁ НА GITHUB (правило владельца, 17.11.2026)
 Любая новая система, бот, промпт, правило или договорённость по МГ/МГЛ — сразу сюда: карточка `automation/zadachi/Z…` или правка GPT.md; правило — в AGENTS.md МГ и МГЛ. Отдельных систем, расписаний и автопроверок вне GitHub не заводить. У Claude только одна автопроверка — суточная (`automation/prompts/CLAUDE_SUTOCHNYJ.md`).
 
+## ПРЯМОЙ ЗАПУСК ИЗ КАТАЛОГА PLAYGAMA (владелец, 17.11.2026)
+Для `https://mpaykin1.github.io/meta6/playgama-catalog/` действует обязательный [регламент обновления каталога](rules/09-platforma/KATALOG_META_GAMES_PLAYGAMA.md): новая игра по указанию владельца — первой, индивидуальная обложка, все 8 языков, актуальные SEO и Sitemap. **Обложка, название и «Играть» ведут сразу на Playgama к этой игре; никаких страниц-посредников и выбора другой версии.** Проверять точный Playgama URL, не выдумывать статусы. ChatGPT готовит в МГЛ, в основной МГ переносит Claude по правилу ПЕСОЧНИЦА.
+
 ## ЕДИНЫЙ ВХОД ДЛЯ ChatGPT — GPT.md (Claude, 17.11.2026, по просьбе владельца)
 Владелец даёт обычному чату ChatGPT только ссылку — на https://github.com/mpaykin1/meta6-lab/blob/main/GPT.md или на карточку задачи из [automation/zadachi/README.md](automation/zadachi/README.md); 5 автозадач тоже выполняют GPT.md (раздел 0А «лестница полезной работы», владелец 17.11.2026) — ChatGPT сам берёт оттуда промпт и выполняет. GPT.md каждый запуск делает ПУЛЬС системы (main, ZADACHI, DISPETCHER, TOLKNUT, FINISH, открытые PR), толкает зависшее и выбирает задачу по таблице; задачи — карточки `automation/zadachi/Z01…Z17`. Все остальные промпты в `automation/prompts/` — справочные; при расхождении действует GPT.md. Новые промпты, таблицы и сторожа — только взамен старых (без суеты).
 
@@ -164,6 +167,7 @@ _то, что касается только одной конкретной иг
 _общий склад и конструктор всех игр_
 
 - [META_GAMES_PLATFORM.md](rules/09-platforma/META_GAMES_PLATFORM.md) — **КОНЕЧНАЯ ЦЕЛЬ проекта, сверяться всем ИИ:** склад `shared/`, игры из склада, автоулучшение всех игр по правилам и бот-проходчик уровней, журнал решений владельца (§11)
+- [KATALOG_META_GAMES_PLAYGAMA.md](rules/09-platforma/KATALOG_META_GAMES_PLAYGAMA.md) — **ПРЯМО НА PLAYGAMA:** карточки игр без посредников; обложка/название/Play → игровой URL, новые игры первыми, 8 языков, лор, SEO, Sitemap и проверка публикации.
 - [BEZ_REKLAMY.md](rules/09-platforma/BEZ_REKLAMY.md) — **БЕЗ РЕКЛАМЫ (07.11.2026):** игры в META GAMES (веб, Android, Steam) — без рекламного кода и SDK; реклама только в отдельных версиях для Playgama; 4 игры, загруженные Claude 06.11, очистить
 - [RENDER_OPTIMIZATION_ROADMAP.md](rules/09-platforma/RENDER_OPTIMIZATION_ROADMAP.md) — **цель оптимизации рендеринга всех игр META GAMES:** frustum/backface/cave culling, секции чанков, lightmap, упаковка вершин, batching, GPU-driven по возможности, LOD/HLOD, greedy meshing; адаптация по типу сцены без потери графики.
 - [STEAM_DISTRIBUTION.md](rules/09-platforma/STEAM_DISTRIBUTION.md) — **новая цель 06.11.2026: META GAMES в Steam**, автоматическая сборка каталога новых игр из GitHub, SteamPipe, условия допуска и пошаговая реализация (без изменения защищённой основной цели).

@@ -1,11 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T01:34:03.114Z | МГЛ: 448af48b0da6dd60fb9b451cfe54ef5bc32f6060 | МГ: 55fa9b20d2c92b98a2dff542d2ba862e3a6e6501 | https://github.com/mpaykin1/meta6-lab/actions/runs/43996439172
+UTC: 2026-11-17T01:34:58.503Z | МГЛ: 0c685be8fe292649887deb8e4c45bb515b45c152 | МГ: 55fa9b20d2c92b98a2dff542d2ba862e3a6e6501 | нет данных
 ## ПРОВЕРИТЬ CLAUDE
 - PR #344 6655190cde1040b028ed57f2b4a1043d88e7344d: scripts/karta-sil/mutate-karta-sil.mjs
 - PR #339 86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34: automation/asset-check/test_kinds.py
 - PR #340 5b9fa6e24485c7d527598777761f43e1f39e1a4d: scripts/karta-sil/mutate-karta-sil.mjs
 - PR #338 2a07bda15d7a3d0b66be49b332ba31dfa79d40fb: automation/asset-check/test_kinds.py
-- ещё 30: https://github.com/mpaykin1/meta6-lab/pulls
+- ещё 37: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/… (сокращено)
 - | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
@@ -17,13 +17,14 @@ UTC: 2026-11-17T01:34:03.114Z | МГЛ: 448af48b0da6dd60fb9b451cfe54ef5bc32f6060
 - | M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |
 - ещё 12: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
-готовы: B1 ([main](https://github.com/mpaykin1/meta6-lab/actions/runs/43995828833))
-M1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
-M2 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
-M3 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
-M4 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211
-M5 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
+готовы: ничего
+M1 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
+M2 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
+M3 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
+M4 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211
+M5 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
 M6 — не готов: НЕТ в таблице FINISH
+B1 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082
 B2 — не готов: НЕТ в таблице FINISH
 B3 — не готов: НЕТ в таблице FINISH
 B4 — не готов: НЕТ в таблице FINISH
@@ -34,31 +35,31 @@ L1 — не готов: НЕТ в таблице FINISH
 L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
-P1 — не подтверждено: нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
+P1 — не подтверждено: GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
 ## PR МГЛ
-открыто: 32 | конфликт: 21 | слито: 60 | закрыто: 104
+открыто: 32 | конфликт: нет данных | слито: 60 | закрыто: 104
 #344 Vercel: превью только для main (лимит 100 сборок/сутки, крас | 6655190cde1040b028ed57f2b4a1043d88e7344d
 #341 Эталон «Небесный пилот» (спрайт-стакинг), только добавление | d8cf489ee7b9ca0a4cf136cd1ee4efc7ab702359
 #339 ASSET CHECK 2.5: список ассетов без видео | 86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34
 #340 Карта сил: сбой не стирает карту, 5xx повторяется, «нет данн | 5b9fa6e24485c7d527598777761f43e1f39e1a4d
 ещё 56: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2496 коммитов | нет данных
+МГЛ: 2499 коммитов | нет данных
 МГ: 38 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
-archer-in-the-fog — не запускалась | витрина: да
-asqura-ilya-reference — не запускалась | витрина: нет
-broken-city — не запускалась | витрина: да
-broken-city-copy — не запускалась | витрина: нет
-ostrov-aptekarya — не прошла | витрина: нет
-rainbow-acceleration — не запускалась | витрина: нет
-skin-trainer — не запускалась | витрина: нет
-sumerki-i-pepel-2 — не запускалась | витрина: да
-sumerki-i-pepel-2-copy — не запускалась | витрина: нет
-twilight-isle-classic — не запускалась | витрина: да
-twilight-isles — не запускалась | витрина: да
-veil-terraces — прошла | витрина: да
-wild-train-prologue — не прошла | витрина: да
+archer-in-the-fog — нет данных | витрина: да
+asqura-ilya-reference — нет данных | витрина: нет
+broken-city — нет данных | витрина: да
+broken-city-copy — нет данных | витрина: нет
+ostrov-aptekarya — нет данных | витрина: нет
+rainbow-acceleration — нет данных | витрина: нет
+skin-trainer — нет данных | витрина: нет
+sumerki-i-pepel-2 — нет данных | витрина: да
+sumerki-i-pepel-2-copy — нет данных | витрина: нет
+twilight-isle-classic — нет данных | витрина: да
+twilight-isles — нет данных | витрина: да
+veil-terraces — нет данных | витрина: да
+wild-train-prologue — нет данных | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 32 | 10.11.2026 | CI запускал удалённую `games/veil-terraces-shared`, поэтому бот не находил `window.__META_BOT__` | [.github/workflows/lab-veil-shared.yml](.github/workflows/lab-veil-shared.yml) | `scripts/lab/mutate-veil-workflow-target.mjs`: отсутствующая… (сокращено)
 | 33 | 10.11.2026 | Portal Visited ожидал жёсткие 12 карточек при 11 реальных ссылках; изменение каталога ломало проверку, не механику | [check-portal-visits.mjs](scripts/lab/check-portal-visits.mjs) | `scripts/lab/mutate-portal-links.mjs`: пустой каталог, дуб… (сокращено)

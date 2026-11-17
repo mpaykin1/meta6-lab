@@ -1,9 +1,9 @@
 import * as T from 'three';
 import {createLivingWatercolor3D,createWatercolorStyle}
-  from '../../../../reference/ink-fallen-guardian/shared/living-watercolor-3d.js';
-import {createInkGrinMonster} from '../../../../reference/ink-grin-monster/ink-grin-monster.js';
-import {createInkNightTrain} from '../../../../reference/ink-night-scream/src/ink-night-train.js';
-import {createHorrorAudio} from '../../../../reference/ink-night-scream/src/audio.js';
+  from 'blacktrain/watercolor';
+import {createInkGrinMonster} from 'blacktrain/monster';
+import {createInkNightTrain} from 'blacktrain/train';
+import {createHorrorAudio} from 'blacktrain/audio';
 import {makers} from '../makers.js';
 import {createCrossingSounds} from '../sounds.js';
 

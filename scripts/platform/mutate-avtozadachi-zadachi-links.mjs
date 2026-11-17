@@ -28,6 +28,7 @@ const correct = 'Точные имена карточек Z01–Z03: ' +
 const mutants = [
   ['Z01 404', original.replace('\x60Z01_ZAVALY.md\x60', '\x60Z01.md\x60')],
   ['Z02 404', original.replace('\x60Z02_STOROZHA.md\x60', '\x60Z02.md\x60')],
+  ['Z03 404', original.replace('\x60Z03_ETALONY.md\x60', '\x60Z03.md\x60')],
   ['Обман: верные пути только в комментарии', original.replace(correct,
     '<!-- ' + correct + ' --> ' +
     'Точные имена карточек Z01–Z03: \x60Z01.md\x60, \x60Z02.md\x60, \x60Z03.md\x60; индекс')]
@@ -36,4 +37,4 @@ for (const [name, mutant] of mutants) {
   assert.notEqual(mutant, original, name + ': мутант не создан');
   assert.throws(() => verifyCardLinks(mutant), undefined, name + ': мутант прошёл проверку');
 }
-console.log('Карточки Z01–Z03: PASS; 3 мутации пойманы, включая обман');
+console.log('Карточки Z01–Z03: PASS; 4 мутации пойманы, включая обман');

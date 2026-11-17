@@ -884,12 +884,11 @@
       "id": "92286ca55b2529e123a0d8df",
       "game": "reference-three-worlds-game",
       "kind": "image",
-      "file": "shared/library/assets/reference-three-worlds-game/evidence/stage7-depth.png",
+      "file": "three-worlds-game/evidence/stage7-depth.png",
       "source_path": "three-worlds-game/evidence/stage7-depth.png",
       "bytes": 1154085,
       "sha256": "26027717c232a52b50dd3da8a876969ecfefc3cab0f0dff8b884c5a52b63edeb",
-      "storage": "copy",
-      "copy_path": "shared/library/assets/reference-three-worlds-game/evidence/stage7-depth.png"
+      "storage": "reference"
     },
     {
       "id": "bf43bd6ed912f1b2262eaa20",

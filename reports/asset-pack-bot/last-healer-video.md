@@ -1,13 +1,12 @@
-# The Last Healer — INK ассеты по видео
+# The Last Healer — INK 24 / 24
 
 Игра: https://mpaykin1.github.io/meta6-lab/games/ostrov-aptekarya/
-Пак: asset-packs/incoming/last-healer-video/
-Заказ: 24 пункта, оригинальный видео-референс; готово в исходниках 4/24 (качество пока не подтверждено ботом).
+Стенд новой партии: `asset-packs/incoming/last-healer-video/index.html` в `lab/assets-last-healer-video-20261117-gpt6`.
 
-- [x] Сверен заказ с эталонами INK и исходной игрой; готовые car, rowboat, traveller, pier не переписаны.
-- [x] Четыре maker: carHeadlights, handFlashlight, rowingHealer, rainSplashRings — [коммит](https://github.com/mpaykin1/meta6-lab/commit/aba5f63a4b3bb1e6f60f7af32e43da5c9714cf5f).
-- [x] Стенд на WebGL, меню ☰, камера и замороженная изоляция ассета — [коммит](https://github.com/mpaykin1/meta6-lab/commit/e1ed7b924fac1c84afdd8ba0a9dff736312926c7).
-- [x] Исправлены несовместимые postfx-kind и метаданные видео без удаления пунктов — [коммит](https://github.com/mpaykin1/meta6-lab/commit/1118093744a7c14700d51378e213db547b130956).
-- [ ] Проверить в ASSET CHECK, исправить все HARD новой партии и снять крупный лист сравнения.
-- [ ] Остальные 20 id из ZAKAZ.json; затем повторный прогон до HARD = 0.
-- [ ] Слияние после всех зелёных проверок; реальная ссылка стенда после HTTP 200.
+Все 24 позиции `ZAKAZ.json` реализованы генераторами `makers.js`; Web Audio в `sounds.js` (запуск только после действия игрока). Процедурные формы 3D, анимации, GLSL-постэффект и мобильная камера. Эталонный INK не менялся.
+
+Входящий пакет `incoming`, не `ready`: по новой версии ещё обязательны CI `ASSET CHECK`, браузерный визуальный просмотр, `_check/compare.png`, HTTP 200 на игровую ссылку. Предыдущая CI-проверка **4/24** — 4 готовы, остальные ещё отсутствовали в предыдущем коммите: https://github.com/mpaykin1/meta6-lab/actions/runs/44084867968.
+
+Проверка геометрии исходников всех 24 генераторов на настоящем `three.module.js`: **0 HARD, 0 SOFT** по проверенным параметрам: `same_seed_same`, `other_seed_differs` для VARY, `tick_moves` для ALIVE, габариты, привязка к поверхности, численность мешей и треугольников. Это не заменяет полного CI и визуального сравнения.
+
+PR: https://github.com/mpaykin1/meta6-lab/pull/393

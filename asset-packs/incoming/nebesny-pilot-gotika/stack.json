@@ -73,6 +73,102 @@
       "shadow": false,
       "spawn": "виден при снижении в город",
       "benefit": "изменяет атмосферу"
+    },
+    "redRoofHouse": {
+      "file": "stacks/redRoofHouse.png",
+      "slice": [
+        64,
+        64
+      ],
+      "count": 38,
+      "pitch_px": 1,
+      "role": "landmark",
+      "label_ru": "Дом с красной черепицей",
+      "shadow": true,
+      "spawn": "4 вида домов в кварталах",
+      "benefit": "объёмные жилые улицы"
+    },
+    "aqueductTiers": {
+      "file": "stacks/aqueductTiers.png",
+      "slice": [
+        96,
+        96
+      ],
+      "count": 48,
+      "pitch_px": 1,
+      "role": "landmark",
+      "label_ru": "Трёхъярусный акведук",
+      "shadow": true,
+      "spawn": "между кварталами",
+      "benefit": "проходы между арками"
+    },
+    "cliffBase": {
+      "file": "stacks/cliffBase.png",
+      "slice": [
+        96,
+        96
+      ],
+      "count": 32,
+      "pitch_px": 1,
+      "role": "landmark",
+      "label_ru": "Скальные основания города",
+      "shadow": true,
+      "spawn": "под зданиями и дорогами",
+      "benefit": "тёмный объёмный фундамент"
+    },
+    "bannerFleurDeLis": {
+      "file": "stacks/bannerFleurDeLis.png",
+      "slice": [
+        32,
+        48
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "prop",
+      "label_ru": "Красное знамя с лилией",
+      "shadow": false,
+      "anim": {
+        "type": "frames",
+        "speed": 3
+      },
+      "spawn": "на фасадах",
+      "benefit": "движение ветра"
+    },
+    "gothicGateRing": {
+      "file": "stacks/gothicGateRing.png",
+      "slice": [
+        54,
+        70
+      ],
+      "count": 8,
+      "pitch_px": 1,
+      "role": "pickup",
+      "label_ru": "Стрельчатая арка-цель",
+      "shadow": false,
+      "anim": {
+        "type": "frames",
+        "speed": 4
+      },
+      "spawn": "на траектории полёта",
+      "benefit": "при пролёте скорость и звон"
+    },
+    "canalWater": {
+      "file": "stacks/canalWater.png",
+      "slice": [
+        128,
+        128
+      ],
+      "count": 1,
+      "pitch_px": 0,
+      "role": "background",
+      "label_ru": "Канал с отражением заката",
+      "shadow": false,
+      "anim": {
+        "type": "frames",
+        "speed": 0
+      },
+      "spawn": "между башнями",
+      "benefit": "золотые блики воды"
     }
   }
 }

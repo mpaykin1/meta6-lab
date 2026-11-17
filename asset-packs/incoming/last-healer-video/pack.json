@@ -60,6 +60,43 @@
       "zone": "lakeside",
       "footprint": 1.8,
       "benefit": "Сохранение у причала"
+    },
+    "roadsideDryShrubs": {
+      "label_ru": "Сухие придорожные кусты, живые ветви",
+      "role": "plant",
+      "zone": "city",
+      "footprint": 0.15
+    },
+    "pinkTownBuilding": {
+      "label_ru": "Розовая угловая лавка с витринами",
+      "role": "landmark",
+      "zone": "city",
+      "footprint": 2.65
+    },
+    "duskTownLight": {
+      "label_ru": "Акварельный розовый вечер и длинные тени",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "healerWalkWithLight": {
+      "label_ru": "Живая походка аптекаря в мокром плаще",
+      "role": "character",
+      "zone": "woodland",
+      "footprint": 0
+    },
+    "puddles": {
+      "label_ru": "Неровные мокрые лужи и мягкая рябь",
+      "role": "ground",
+      "zone": "city",
+      "footprint": 0
+    },
+    "whiteClinicBuilding": {
+      "label_ru": "Ночная клиника с красным козырьком",
+      "role": "landmark",
+      "zone": "city",
+      "footprint": 2.8,
+      "benefit": "Ориентир и цель ночного перехода"
     }
   }
 }

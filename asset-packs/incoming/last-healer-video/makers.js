@@ -168,17 +168,18 @@ function rowingHealer(seed=3){
   }
   const oars=[];
   for(const side of [-1,1]){
-    const o=new T.Group();o.position.set(side*.53,.67,.05);g.add(o);oars.push(o);
-    ball(o,.115,wood,0,0,0,.95,.6,1.0);
-    rod(o,[0,0,0],[side*1.98,-.20,.38],.053,wood,.037);
-    const blade=mesh(o,new T.SphereGeometry(.32,10,6),oarShade,side*2.18,-.25,.44);
-    blade.scale.set(.49,.10,1.26);blade.rotation.y=side*.25;
+    // The accepted rowboat's bow/stern are on X and gunwales on Z.
+    // The oars therefore reach port/starboard (±Z), not through the bow.
+    const o=new T.Group();o.position.set(side*.18,.58,side*.39);g.add(o);oars.push(o);
+    ball(o,.105,wood,0,0,0,.95,.65,1.0);
+    rod(o,[0,0,0],[side*.24,-.17,side*1.69],.053,wood,.037);
+    const blade=mesh(o,new T.SphereGeometry(.32,10,6),oarShade,side*.28,-.20,side*1.91);
+    blade.scale.set(.52,.12,1.26);blade.rotation.y=side*.16;
     for(let k=0;k<4;k++){
-      rod(o,[side*(1.99+k*.09),-.21,.22],[side*(2.04+k*.09),-.20,.66],.008,seam);
+      rod(o,[side*.10,-.20,side*(1.66+k*.09)],[side*.43,-.20,side*(1.69+k*.09)],.008,seam);
     }
-    // Brass oarlock and lashings visibly connect blade to the pivot.
-    mesh(o,new T.TorusGeometry(.12,.019,6,12),seam,0,.02,0).rotation.y=PI/2;
-    for(let i=0;i<3;i++)mesh(o,new T.TorusGeometry(.053,.008,5,10),cloth,side*(.31+i*.21),-.03,.05).rotation.z=PI/2;
+    mesh(o,new T.TorusGeometry(.12,.019,6,12),seam,0,.02,0).rotation.x=PI/2;
+    for(let i=0;i<3;i++)mesh(o,new T.TorusGeometry(.053,.008,5,10),cloth,side*(.06+i*.03),-.03,side*(.29+i*.22)).rotation.x=PI/2;
   }
   for(let i=0;i<11;i++){
     const x=(i-5)*.035;

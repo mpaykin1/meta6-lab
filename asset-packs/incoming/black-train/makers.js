@@ -234,22 +234,52 @@ function barbedWire(seed=11){
 }
 function swampPuddles(seed=12){
  const r=random(seed),g=new T.Group(),ripples=[];
- const water=new T.MeshStandardMaterial({color:0x222b2e,metalness:.5,roughness:.2,transparent:true,opacity:.8,side:T.DoubleSide});
- const sheen=new T.MeshBasicMaterial({color:0x794142,transparent:true,opacity:.2,depthWrite:false,side:T.DoubleSide});
+ g.name='Отражения в болотных лужах';
+ // Broken shorelines and subtle physical pooling. Two separately driven highlights
+ // reflect the cold approaching headlamp and the red level-crossing warning.
+ const water=new T.MeshStandardMaterial({color:0x222b2e,metalness:.56,roughness:.19,transparent:true,opacity:.88,side:T.DoubleSide});
+ const blood=new T.MeshBasicMaterial({color:0xcc2527,transparent:true,opacity:.05,depthWrite:false,side:T.DoubleSide,blending:T.AdditiveBlending});
+ const cold=new T.MeshBasicMaterial({color:0xa8babd,transparent:true,opacity:.04,depthWrite:false,side:T.DoubleSide,blending:T.AdditiveBlending});
  for(let j=0;j<3;j++){
-  const shape=new T.Shape(),rad=.48+r()*.52,points=16;
-  for(let i=0;i<=points;i++){
-   const th=i/points*6.283,w=rad*(.68+.4*r());
-   const x=Math.cos(th)*w,z=Math.sin(th)*w;
+  const shape=new T.Shape(),radius=.49+r()*.47,n=25;
+  for(let i=0;i<=n;i++){
+   const a=i/n*Math.PI*2,irregular=radius*(.74+.22*Math.sin(a*3+j)+.14*Math.sin(a*7+j*.8)+.11*r());
+   const x=Math.cos(a)*irregular,z=Math.sin(a)*irregular;
    if(i===0)shape.moveTo(x,z);else shape.lineTo(x,z);
   }
-  const p=add(g,new T.ShapeGeometry(shape),water,(j-1)*1.25,.025,(r()-.5)*.6);
-  p.rotation.x=-Math.PI/2;
-  for(let a=0;a<5;a++){const th=r()*6.28,rr=.2+r()*.5;
-   const t=box(g,.15+r()*.19,.009,.025,sheen,p.position.x+Math.cos(th)*rr,.037,p.position.z+Math.sin(th)*rr);
-   t.rotation.y=th;ripples.push(t);}
+  const px=(j-1)*1.28,pz=(r()-.5)*.55;
+  const pool=add(g,new T.ShapeGeometry(shape),water,px,.026,pz);
+  pool.rotation.x=-Math.PI/2;
+  // Fractured, elongated streaks on the surface, not glowing disks.
+  for(let k=0;k<17;k++){
+   const a=r()*Math.PI*2,rad=r()*.63,red=k%3===0;
+   const strip=add(g,new T.PlaneGeometry(.055+r()*(red?.19:.25),.005+r()*.022),
+     red?blood:cold,px+Math.cos(a)*rad,.037+r()*.004,pz+Math.sin(a)*rad);
+   strip.rotation.x=-Math.PI/2;strip.rotation.z=(r()-.5)*.32;
+   ripples.push({mesh:strip,phase:k*.47+j*1.2,baseY:strip.position.y,angle:strip.rotation.z});
+  }
+  // Sparse tufts and shore stones break the contour into irregular silhouettes.
+  for(let k=0;k<9;k++){
+   const a=k*Math.PI*2/9+r()*.34,dist=radius*(.82+r()*.35);
+   const x=px+Math.cos(a)*dist,z=pz+Math.sin(a)*dist;
+   if(k%3===0){
+    const stone=add(g,new T.DodecahedronGeometry(.095+r()*.09,0),M.woodCut,x,.037,z);
+    stone.scale.set(1.2,.38,.8);stone.rotation.y=a;
+   }else{
+    rod(g,[x,0,z],[x+(r()-.5)*.11,.16+r()*.21,z+(r()-.5)*.09],.009,M.woodCut,.002);
+   }
+  }
  }
- g.userData.tick=t=>ripples.forEach((p,i)=>{p.position.y=.037+.004*Math.sin(t*1.4-i*.7);p.rotation.y+=.001;});
+ g.userData.setApproach=(a,t)=>{
+  const near=T.MathUtils.smoothstep(a,.08,.92);
+  const pulse=.5+.5*Math.sin(t*(2.4+8.1*near));
+  blood.opacity=.035+near*(.09+.56*pulse*pulse);
+  cold.opacity=.03+near*(.06+.19*pulse);
+ };
+ g.userData.tick=t=>ripples.forEach(({mesh,phase,baseY,angle})=>{
+  mesh.position.y=baseY+.003*Math.sin(t*.8-phase);
+  mesh.rotation.z=angle+.022*Math.sin(t*.41-phase*.73);
+ });
  return finish(g,0);
 }
 function titleLogo(seed=13){

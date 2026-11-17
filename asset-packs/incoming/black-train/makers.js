@@ -1,7 +1,7 @@
 import * as T from 'three';
 // BLACK TRAIN • procedural stage props, all geometry; deterministic, no network.
 const ink=c=>new T.MeshStandardMaterial({color:c,roughness:.83,metalness:.14,flatShading:true});
-const iron=ink('#151b1e'),steel=ink('#414649'),wood=ink('#282a27'),bark=ink('#171c1d'),fogmat=()=>new T.MeshBasicMaterial({color:'#899597',transparent:true,opacity:.19,depthWrite:false,side:T.DoubleSide,fog:true});
+const iron=ink('#151b1e'),steel=ink('#414649'),wood=ink('#282a27'),bark=ink('#171c1d'),fogmat=()=>new T.MeshLambertMaterial({color:'#899597',transparent:true,opacity:.19,depthWrite:false,side:T.DoubleSide,fog:true});
 const red=new T.MeshStandardMaterial({color:'#541313',emissive:'#cf1108',emissiveIntensity:2.2,roughness:.27});
 const cream=new T.MeshBasicMaterial({color:'#ebeee4'});
 const rnd=(s,n)=>{const x=Math.sin(s*97.23+n*49.17)*43758.5453;return x-Math.floor(x)};

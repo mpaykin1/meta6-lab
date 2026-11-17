@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T06:25:08.504Z",
+  "generated_at": "2026-11-17T06:33:31.910Z",
   "sha": {
-    "lab": "c8aaf7679a39d99f0d0506abfc5ebfd3d0bab8cf",
-    "mg": "0a58a2d0956a16d61cc86241e1a7e5dc680194d2"
+    "lab": "c3415a38e73b8adcedbeb36ec342c9026bb0ffd3",
+    "mg": "431274dce4ad29b6c0f38058f52dd9ae2dae454a"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44030952951",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44031927380",
   "review": {
     "protected": [
       {
@@ -347,15 +347,20 @@
     ],
     "redLab": [
       {
-        "workflow": "ZADACHI watch",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44030357822",
-        "step": "Update ZADACHI.md from GitHub"
+        "workflow": "OWNER PASS references sync",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44031927307",
+        "step": "Byte-for-byte OWNER PASS sync"
+      },
+      {
+        "workflow": "B1 — all games open without console errors",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44030952680",
+        "step": "Open every MCP list_games entry on desktop and mobile"
       }
     ],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
-      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
+      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
       "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
       "| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |",
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
@@ -498,11 +503,21 @@
     }
   },
   "pr": {
-    "open": 41,
-    "conflicts": "нет данных",
-    "merged": 70,
-    "closed": 114,
+    "open": 47,
+    "conflicts": 33,
+    "merged": 72,
+    "closed": 115,
     "mergedItems": [
+      {
+        "number": 377,
+        "title": "INK · Регистрация эталона «Машина → Батискаф» (МГ + МГЛ ссыл",
+        "sha": "04fe7850e474ec7c2f7ee74f67728b51cfa084cb"
+      },
+      {
+        "number": 376,
+        "title": "INK · Эталон: машина → батискаф (только папка reference)",
+        "sha": "11f9ac58d0e1b46f61d8db2a9e8110091de4b104"
+      },
       {
         "number": 372,
         "title": "fix(z01): не направлять PR к Claude по историческим пометкам",
@@ -1192,12 +1207,12 @@
   },
   "changes": {
     "lab": {
-      "count": 2688,
+      "count": 2698,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 41,
-      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1"
+      "count": 42,
+      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:31, rules:9, SOURCE_INDEX.md:1"
     }
   },
   "games": [

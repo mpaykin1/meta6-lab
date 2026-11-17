@@ -398,7 +398,7 @@ const blurMat=new T.ShaderMaterial({depthTest:false,depthWrite:false,uniforms:{t
 uniform sampler2D tS;uniform vec2 uDir;uniform float uThr;varying vec2 vUv;
 void main(){vec3 s=vec3(0.);float ws=0.;for(int i=-4;i<=4;i++){float f=float(i);float w=exp(-f*f/9.);s+=max(texture2D(tS,vUv+uDir*f).rgb-uThr,0.)*w;ws+=w;}gl_FragColor=vec4(s/ws,1.);}`});
 const finalMat=new T.ShaderMaterial({depthTest:false,depthWrite:false,uniforms:{tS:{value:rtB.texture},tB:{value:rtD.texture},uT:U.t,uCA:{value:.004},uGrain:{value:.07},uGlitch:{value:0},uSpeed:{value:0},uFade:{value:0},uFlash:{value:0},uBloom:{value:1.5}},vertexShader:QV,fragmentShader:NOISE+`
-uniform sampler2D tS,tB;uniform float uT,uCA,uGrain,uGlitch,uSpeed,uFade,uFlash,uBloom;varying vec2 vUv;
+uniform sampler2D tS,tB;uniform float uT,uCA,uGrain,uGlitch,uSpeed,uFade,uFlash,uBloom,uNight;varying vec2 vUv;
 void main(){vec2 uv=vUv;float row=floor(uv.y*80.);float gt=floor(uT*16.);
  float g=step(1.-uGlitch*.3,hash(vec2(row,gt)));uv.x+=g*(hash(vec2(row,gt+3.))-.5)*.07*uGlitch;
  vec2 c=uv-.5;float r2=dot(c,c);float ca=uCA*(.4+r2*3.);vec3 col=vec3(0.);
@@ -406,10 +406,12 @@ void main(){vec2 uv=vUv;float row=floor(uv.y*80.);float gt=floor(uT*16.);
   col.r+=texture2D(tS,.5+u*(1.+ca)).r;col.g+=texture2D(tS,.5+u).g;col.b+=texture2D(tS,.5+u*(1.-ca)).b;}
  col/=3.;col+=texture2D(tB,uv).rgb*uBloom;
  col+=uFlash*vec3(1.,.72,.84)*(1.-r2*1.5)*.6;
+ col=mix(col,col*vec3(.63,.87,1.14)+vec3(.006,.018,.036),uNight*.62);
  col*=1.-r2*1.5;
  col+=(hash(gl_FragCoord.xy*.7+fract(uT)*91.)-.5)*uGrain;
  gl_FragColor=vec4(pow(max(col,0.),vec3(.92))*uFade,1.);}`});
 
+finalMat.uniforms.uNight={value:0};
 /* ============ РАЗМЕР: полный экран, портрет и ландшафт ============ */
 let W=1,H=1,asp=1,portrait=false,resK=1,rw=1,rh=1;
 function resize(){W=Math.max(1,window.innerWidth);H=Math.max(1,window.innerHeight);asp=W/H;portrait=asp<1;
@@ -1269,12 +1271,21 @@ const SHPILI_PLUS=(()=>{
    };
  }
 
+
+ /* BLUE STORM NIGHT: selectable cool scene-grade, preserving older weather. */
+ {
+   const id='blueStormNight',g=newGroup(id,0,1,-40);
+   g.userData.noCull=true;
+   own[id].tick=()=>{finalMat.uniforms.uNight.value=1;};
+ }
+
  const ids=Object.keys(own),frustum=new T.Frustum(),proj=new T.Matrix4(),sight=new T.Sphere(new T.Vector3(),28);
  const api={assets:own,setHidden(id,flag){if(flag)hidden.add(id);else hidden.delete(id);}};
  window.__PACK_PROBE__=api;
  function tick(t,dt){
    proj.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);frustum.setFromProjectionMatrix(proj);
    waterMat.uniforms.uRipples.value=0;
+   finalMat.uniforms.uNight.value=0;
    for(const id of ids){
      const a=own[id],chosen=focus?.id===id,eligible=(!focus||chosen)&&!hidden.has(id);
      a.group.visible=eligible;

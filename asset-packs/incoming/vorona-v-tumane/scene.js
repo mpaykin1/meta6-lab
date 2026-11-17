@@ -1,5 +1,6 @@
 import * as T from '../../../reference/ink-fallen-guardian/three.module.js';
 import {createCreatures} from './creatures.js';
+import {createSoundscape} from './audio.js';
 
 const source='../../../reference/vorona-v-tumane/';
 const ids=[
@@ -10,7 +11,9 @@ const ids=[
  ['crow_wings','Шарнирные крылья'],['crow_tail','Хвост и лапы'],['stalker_limbs','Лапы существа'],
  ['mist_antler','Олень из тумана'],['bell_crawler','Ползун с колоколом'],
  ['hollow_sentinel','Пустоглазый часовой'],['ash_heron','Пепельная цапля'],
- ['silver_moth','Серебряный мотылёк'],['moth_swarm','Стая мотыльков']
+ ['silver_moth','Серебряный мотылёк'],['moth_swarm','Стая мотыльков'],
+ ['wing_sound','Взмах крыльев'],['crow_cry','Карканье'],['stalker_sound','Шорох существа'],
+ ['wind_sound','Ветер'],['fog_music','Музыка тумана']
 ];
 const world=new T.Scene();
 world.background=new T.Color('#202a32');
@@ -22,6 +25,7 @@ renderer.outputColorSpace=T.SRGBColorSpace;
 document.body.insertBefore(renderer.domElement,document.body.firstChild);
 const clock=new T.Clock(),load=new T.TextureLoader();
 const objects=Object.create(null),keys=new Set();
+const sound=createSoundscape();
 const state={x:-5,y:1,face:1,time:0,boost:0,light:0,aim:null,focus:null,checkpoint:-5,hit:0};
 function resize(){
  const w=innerWidth,h=innerHeight,span=29;
@@ -342,27 +346,33 @@ window.__PACK_PROBE__={assets:objects,setHidden(id,hide){if(objects[id])objects[
  focus(id){state.focus=id;}};
 const panel=document.getElementById('panel'),menu=document.getElementById('menuButton');
 function openMenu(yes){panel.hidden=!yes;menu.setAttribute('aria-expanded',String(yes));}
-menu.addEventListener('click',()=>openMenu(panel.hidden));
+menu.addEventListener('click',()=>{sound.unlock();openMenu(panel.hidden);});
 for(const [id,label] of ids){
  const b=document.createElement('button');b.className='item';b.textContent=label;
  b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>{
   document.querySelectorAll('.item').forEach(el=>el.setAttribute('aria-pressed','false'));
-  b.setAttribute('aria-pressed','true');state.focus=id;openMenu(false);
+  b.setAttribute('aria-pressed','true');state.focus=id;
+  sound.unlock();
+  if(id==='wing_sound')sound.wing();
+  else if(id==='crow_cry')sound.crow();
+  else if(id==='stalker_sound')sound.stalker();
+  else if(id==='wind_sound'||id==='fog_music')sound.tick(state.time,true);
+  openMenu(false);
  });
  document.getElementById('items').appendChild(b);
 }
-addEventListener('keydown',e=>{const k=e.key.toLowerCase();
+addEventListener('keydown',e=>{sound.unlock();const k=e.key.toLowerCase();
  if(k==='m'){openMenu(panel.hidden);return;}keys.add(k);
  if(k.startsWith('arrow')||k===' ')e.preventDefault();
 });
 addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));
-renderer.domElement.addEventListener('pointerdown',e=>{
+renderer.domElement.addEventListener('pointerdown',e=>{sound.unlock();sound.wing();
  const p=new T.Vector3(e.clientX/innerWidth*2-1,1-e.clientY/innerHeight*2,.1);
  p.unproject(camera);state.aim=[p.x,p.y];state.focus=null;
 });
 function mobile(id,key){
  const b=document.getElementById(id);
- b.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(key);b.setPointerCapture(e.pointerId);});
+ b.addEventListener('pointerdown',e=>{e.preventDefault();sound.unlock();keys.add(key);b.setPointerCapture(e.pointerId);});
  for(const event of ['pointerup','pointercancel','lostpointercapture'])
   b.addEventListener(event,()=>keys.delete(key));
 }
@@ -382,6 +392,7 @@ function draw(){
  state.boost=Math.max(0,state.boost-dt);state.light=Math.max(0,state.light-dt);
  state.hit=Math.max(0,state.hit-dt);
  const speed=state.boost>0?7.7:4.7;
+ sound.tick(t,Math.abs(dx)+Math.abs(dy)>.2);
  state.x=T.MathUtils.clamp(state.x+dx*speed*dt,-24,24);
  state.y=T.MathUtils.clamp(state.y+dy*speed*dt,-3.4,6);
  if(Math.abs(dx)>.05)state.face=Math.sign(dx);
@@ -422,8 +433,7 @@ function draw(){
  }
  if(Math.hypot(state.x-nest.position.x,state.y-nest.position.y)<1.6)state.checkpoint=-13;
  nestAura.material.opacity=state.checkpoint===-13?.12+Math.sin(t*2.2)*.05:.025;
- if(state.hit===0&&Math.hypot(state.x-specimen.position.x,state.y-specimen.position.y)<1.85)
-  burst();
+ if(state.hit===0&&Math.hypot(state.x-specimen.position.x,state.y-specimen.position.y)<1.85){sound.stalker();burst();}
  for(const star of mote){
   star.position.x=star.userData.x+Math.sin(t*.21+star.userData.phase)*.5;
   star.position.y+=dt*.14;if(star.position.y>8)star.position.y=-6;

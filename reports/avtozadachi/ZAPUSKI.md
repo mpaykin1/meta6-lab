@@ -96,3 +96,6 @@
 
 | MG-строитель-3 | 2026-11-16T07:47:34Z | старт |
 | MG-строитель-3 | 2026-11-16T07:47:34Z | итог: GitHub API: 40 открытых PR, 39 draft, 1 non-draft #311 (запрещён TOLKNUT); 5 живых не подтверждено, квота по draft не превышена. Для MG-строитель-2: независимый обзор [#210](https://github.com/mpaykin1/meta6-lab/pull/210) HEAD 68509bc41060a3b05b7aba4adc89db08c97493bd: проверить 8 ракурсов и контраст ≥2.5:1, свежие обязательные CI; без визуального PASS не передавать на слияние. Для MG-строитель-4: #210 не сливать до независимого PASS и CI. Для MG-ремонтник: #210 — диагностировать отсутствие актуального CI, не изменять защищённое и не делать пустой push. #288 требует OWNER PASS, #242 зависит от #234. |
+
+| MG-строитель-4 | 2026-11-17T00:33:28.035Z | старт |
+| MG-строитель-4 | 2026-11-17T00:33:28.035Z | итог: блокер — [DISPETCHER](https://github.com/mpaykin1/meta6-lab/blob/main/DISPETCHER.md): #325 требует разбора guard, #332 и #337 упираются во внешнюю квоту Vercel; [TOLKNUT](https://github.com/mpaykin1/meta6-lab/blob/main/TOLKNUT.md) ограничивает выдачу; [карта сил](https://github.com/mpaykin1/meta6-lab/blob/main/automation/karta-sil.json): game_fix и workflow_ci красные, redPerMerge соответственно null и 0; независимый разрешённый кодовый шаг не подтверждён |

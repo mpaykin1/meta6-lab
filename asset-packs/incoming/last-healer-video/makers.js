@@ -258,4 +258,138 @@ export function rainSplashRings(seed=1) {
   };
   g.userData.footprint=0;return g;
 }
-export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings};
+
+function roughPath(root,coords,color,y=.02){
+ const sh=new T.Shape();coords.forEach(([x,z],i)=>i?sh.lineTo(x,z):sh.moveTo(x,z));sh.closePath();
+ const geo=new T.ShapeGeometry(sh,5);geo.rotateX(-Math.PI/2);
+ const p=part(root,geo,color,[0,y,0]);p.material.side=T.DoubleSide;return p;
+}
+export function townRoad(seed=1) {
+ const r=rng(seed),g=new T.Group();g.name='Перекрёсток у старой аптеки';
+ const length=3.05,edge=.87;
+ // The accepted landscape stays underneath; broken edges fade into its soil.
+ const north=[[-edge*.98,-length],[-edge+.03,-2.3],[-.97,-1.7],[-edge,-.95],
+ [-2.7,-.97],[-3.02,-.81],[-length,edge],[-2.7,.96],[-.95,edge],
+ [-.90,1.7],[-.82,2.42],[-.90,length],[.89,length],[.85,2.35],
+ [.97,1.65],[edge,.94],[2.8,.97],[length,.85],[length,-edge],
+ [2.72,-.93],[edge,-.87],[.94,-1.7],[.82,-2.32],[.90,-length]];
+ roughPath(g,north,'#777f78',.017);
+ // Uneven asphalt seams, islands of exposed aggregate and edge dirt.
+ const cracks=[[-2.7,-.81],[-2.1,-.58],[-1.6,-.67],[-.80,-.39],[-.14,-.57],
+ [.42,-.39],[.96,-.68],[1.52,-.51],[2.07,-.74],[2.72,-.70]];
+ for(let j=0;j<cracks.length-1;j++){
+   const a=cracks[j],b=cracks[j+1];
+   beam(g,[a[0],.030,a[1]],[b[0],.030,b[1]],.008,'#4a5859',5);
+ }
+ for(let i=0;i<18;i++){
+   const x=(r()-.5)*5.8,z=(r()-.5)*5.8,rad=.038+r()*.10;
+   if(Math.abs(x)>.91&&Math.abs(z)>.91)continue;
+   const o=part(g,new T.DodecahedronGeometry(rad,0),i%3?'#6a7774':'#879087',[x,.019,z]);
+   o.scale.y=.12;o.rotation.y=r()*6.28;
+ }
+ for(const axis of ['x','z']){
+   // Cracked curb and reclaimed stone sidewalk, individually placed.
+   for(const side of [-1,1]){
+     for(let i=-6;i<=6;i++){
+       const along=i*.46+(r()-.5)*.04,cross=side*(1.06+(r()-.5)*.03);
+       if(Math.abs(along)<1.2)continue;
+       const x=axis==='x'?along:cross,z=axis==='x'?cross:along;
+       const curb=part(g,new T.BoxGeometry(axis==='x'?.43:.18,.11,axis==='z'?.43:.18),
+         i%3?'#a1a69b':'#bcbaaa',[x,.07,z]);curb.rotation.y=(r()-.5)*.07;
+       const joint=part(g,new T.BoxGeometry(axis==='x'?.10:.40,.018,axis==='z'?.40:.10),
+         '#c3bca6',[x,.13,z]);joint.rotation.y=(r()-.5)*.035;
+     }
+   }
+ }
+ // Paint wear, not perfect stripes repeated to the horizon.
+ for(const axis of [0,1]){
+   for(const sign of [-1,1]){
+     for(let i=0;i<3;i++){
+       const z=sign*(1.46+i*.45),x=(r()-.5)*.09;
+       const marker=part(g,new T.BoxGeometry(axis?.13:.04,.009,axis?.04:.13),
+          i%2?'#d2c3a0':'#c1b8a0',axis?[z,.035,x]:[x,.035,z]);
+       marker.rotation.y=(r()-.5)*.05;
+     }
+   }
+ }
+ // Dust lifted by the passing car; a small visible animated detail.
+ const dust=new T.Group();g.add(dust);
+ for(let i=0;i<14;i++){
+   const x=(r()-.5)*.7,z=-2.4+r()*.65;
+   const o=part(dust,new T.TetrahedronGeometry(.025+r()*.022,0),'#a89e83',[x,.12+r()*.12,z]);
+   o.userData.watercolorOutline=false;
+ }
+ g.userData.tick=t=>{dust.position.x=.10*Math.sin(t*.39);dust.rotation.y=.03*Math.sin(t*.45);};
+ g.userData.footprint=0;return g;
+}
+export function boatShed(seed=1) {
+ const r=rng(seed),g=new T.Group();g.name='Лодочный сарай с зелёной крышей';
+ const wood=['#736b59','#918872','#a89a80','#b6a68a'];
+ // Stilted open structure; floor at local zero, dry storage above the tide line.
+ for(const x of [-1.45,1.45])for(const z of [-1.06,1.06]){
+   beam(g,[x,0,z],[x,2.55,z],.095,wood[(x<0?0:1)+(z<0?0:1)]);
+   part(g,new T.DodecahedronGeometry(.15,0),'#a89a80',[x,.10,z]).scale.y=.40;
+ }
+ for(let i=0;i<17;i++){
+   const z=-1.07+i*.13;
+   block(g,[3.15,.08,.118],i%4?'#a89a80':'#8a8068',[0,.28,z]);
+   if(i%3===0)block(g,[2.35,.012,.02],'#736b59',[(r()-.5)*.25,.33,z+.04]);
+ }
+ for(const s of [-1,1]){
+   // Vertical timber siding at back and side; front deliberately stays open.
+   for(let j=0;j<12;j++){
+     const x=-1.37+j*.25;
+     block(g,[.22,1.84,.075],j%4?'#918872':'#a89a80',[x,1.39,-1.08]);
+   }
+   for(let i=0;i<7;i++){
+     const z=-.96+i*.30;
+     if(i>3&&s===1)continue;
+     block(g,[.08,1.70,.26],wood[i%4],[s*1.47,1.40,z]);
+   }
+   beam(g,[s*1.47,2.54,-1.13],[0,3.28,-1.13],.095,'#526c5c');
+   beam(g,[s*1.47,2.54,1.15],[0,3.28,1.15],.09,'#526c5c');
+ }
+ beam(g,[0,3.29,-1.26],[0,3.29,1.25],.10,'#596d60');
+ // Two sloped roofs with layered green timber shingles; irregular edges.
+ for(const s of [-1,1]){
+   const roof=new T.Group();roof.position.set(s*.75,2.93,0);roof.rotation.z=s*.45;g.add(roof);
+   block(roof,[1.77,.16,2.64],'#587879',[0,0,0]);
+   for(let j=0;j<10;j++){
+     for(let i=0;i<4;i++){
+       const z=-1.12+j*.24+(r()-.5)*.024;
+       const x=-.68+i*.46+(r()-.5)*.04;
+       const sh=block(roof,[.43,.025,.21],(i+j)%4===0?'#6f9581':'#627c6f',[x,.09,z]);
+       sh.rotation.y=(r()-.5)*.065;
+     }
+   }
+   // Faded crimson ridge stripe reads as painted water-damaged roof trim.
+   block(roof,[.13,.028,2.66],'#bd7c69',[-s*.77,.115,0]);
+ }
+ // Interior storage supplies the reason for docking: rope, crate and oar rack.
+ for(let i=0;i<3;i++){
+   const b=block(g,[.55,.44,.46],'#b6a68a',[-.91+i*.72,.62,-.72]);
+   b.rotation.y=(r()-.5)*.15;
+   for(let j=0;j<4;j++)block(g,[.018,.035,.46],'#736b59',[-1.10+i*.72+j*.13,.84,-.72]);
+ }
+ for(let i=0;i<4;i++){
+   const z=-.68+i*.38;
+   beam(g,[1.18,1.26,z],[1.20,2.28,z+.06],.026,'#a89a80');
+   part(g,new T.ConeGeometry(.062,.20,6),'#7e896e',[1.20,2.31,z]);
+ }
+ const lantern=part(g,new T.SphereGeometry(.12,9,7),'#e5bf71',[.25,2.29,-.91],true);
+ lantern.scale.set(1,.72,1);
+ const rope=new T.Group();rope.position.set(-1.29,2.16,.82);g.add(rope);
+ for(let i=0;i<5;i++){
+   const link=part(rope,new T.TorusGeometry(.12+i*.012,.018,5,11),'#a69a7a',[0,-i*.15,0]);
+   link.rotation.y=i*.38;
+ }
+ g.userData.tick=t=>{
+   lantern.scale.y=.72+.045*Math.sin(t*.83);
+   rope.rotation.z=.017*Math.sin(t*.58-seed*.21);
+ };
+ g.userData.footprint=1.8;
+ g.userData.interact={radius:2.3,effect:'save_boat_progress',label_ru:'Сохранить лодку у причала'};
+ return g;
+}
+
+export const makers={carHeadlights,handFlashlight,rowingHealer,rainSplashRings,townRoad,boatShed};

@@ -6,7 +6,7 @@
 
 ## 14.11.2026 — проверка ботов
 
-META BOT: исходный checkGame принимает viewports=[] и возвращает ok=true,runs=[] без проверки игры. Воспроизведено в скрытом Chromium 141. Нужна валидация непустого списка поддерживаемых экранов в loadGame и regression fixture. scripts/meta-bot защищён, обход охранника не выполнялся. Доказательство: reports/bot-audit/PROGRESS.md.
+META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loadGame применена, вечная ловушка scripts/meta-bot/mutate-viewports.mjs (OSHIBKI 2026111702).
 
 
 <!-- STOROZHA:PROTECTED:BEGIN -->
@@ -14,6 +14,7 @@ META BOT: исходный checkGame принимает viewports=[] и возв
 | #277 | lab/storozha-nedelya | .github/workflows/storozha-branches.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-reference.yml: изменение ЯДРА охраны — только Claude; .github/workflows/storozha-tests.yml: изменение ЯДРА охраны — только Claude; scripts/storozha/branch-watch.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/weekly-watch.mjs: изменение ЯДРА охраны — только Claude | 2026-11-15 |
 | #247 | lab/kak-proveryayushchij-traps | scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude | 2026-11-15 |
 | #248 | lab/pr-autofinish-followup-1111 | .github/workflows/pr-autofinish.yml: изменение ЯДРА охраны — только Claude | 2026-11-15 |
+| #370 | lab/ink-car-bathyscaphe-20261117 | Новый эталон: PR должен только добавлять файлы | 2026-11-17 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->
@@ -102,6 +103,9 @@ META BOT: исходный checkGame принимает viewports=[] и возв
 | #191 | lab/sunken-city-reference-1109 | НУЖЕН CLAUDE: PR содержит исходный ZIP `reference-archives/zatonuvshiy-gorod-2026-11-09.zip` и существующий эталон `games/sunken-city-reference/index.html`, `games/sunken-city-reference/bot-adapter.js`; HEAD `e135682bcca49e309e117383c94046228b6facef`. Проверить целостность оригинала и обязательные META BOT/CI, самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/191 | 2026-11-12 |
 
 ## Ждёт Claude
+
+| #353 | `lab/fix-etalony-concurrency-20261117` | Исправление защищённого `.github/workflows/verify-etalony-sync.yml`: `cancel-in-progress: false` для main/schedule. [HEAD 31db37e](https://github.com/mpaykin1/meta6-lab/commit/31db37ec5cc99dc27564159681567747b91af43b), [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/44002079345), [browser PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/44002079368); mergeable=false, Claude должен устранить конфликт и проверить текущий HEAD перед слиянием. Разблокирует [#351](https://github.com/mpaykin1/meta6-lab/pull/351). | 2026-11-17 |
+
 
 Одна строка на PR; автоматическое слияние защищённых проверок запрещено.
 | #325 | lab/ink-black-grin-monster-20261115 | ЯДРО: после нормального [merge main b848d00](https://github.com/mpaykin1/meta6-lab/commit/b848d00f5ca3185be66363b3b1885db9639084ea) [META GAMES guard FAIL #43995067772](https://github.com/mpaykin1/meta6-lab/actions/runs/43995067772): исторический [a044eb6](https://github.com/mpaykin1/meta6-lab/commit/a044eb6c85fd457af8b7ad3a557ac23c46fddc02) меняет `.github/protected` без подписи Claude. Не переписывать историю/не обходить guard; нужен Claude. | 2026-11-17 |

@@ -1,5 +1,15 @@
 # INK — эталон живой акварели (OWNER PASS, 11.11.2026)
 
+Все эталоны (INK и остальные) одним списком: [ETALONY.md](ETALONY.md).
+
+## Система создания 3D-моделей INK — с чего начинать
+Задача для ChatGPT: [automation/zadachi/Z21_INK_3D.md](automation/zadachi/Z21_INK_3D.md). Главные документы (в main):
+1. этот файл — стандарт INK;
+2. [reference/ink-fallen-guardian/README.md](reference/ink-fallen-guardian/README.md) — правила эталона «Павший великан»;
+3. [rules/01-stil-i-grafika/RECEPT_INK_MIR.md](rules/01-stil-i-grafika/RECEPT_INK_MIR.md) — рецепт новой модели/мира;
+4. [rules/01-stil-i-grafika/BEZ_PATTERNOV.md](rules/01-stil-i-grafika/BEZ_PATTERNOV.md) — без паттернов + сканер `scripts/visual/verify-no-patterns.mjs`.
+Код: эталонный робот [reference/ink-fallen-guardian/ink-fallen-robot.js](reference/ink-fallen-guardian/ink-fallen-robot.js), шаблон новой модели [shared/ink/ink-template.js](shared/ink/ink-template.js), паспорт [reference/ink-fallen-guardian/REFERENCE.json](reference/ink-fallen-guardian/REFERENCE.json), защита [.github/protected/paths.txt](.github/protected/paths.txt).
+
 Решение владельца 11.11.2026: «Супер. Это пасс!! Добавь это к нам в эталоны» → «Добавь это на гит как эталон INK на МГ и МГЛ».
 
 ## Что это
@@ -35,10 +45,14 @@ Living Watercolor 3D — живой акварельный рендер на Thr
 
 Источник: `reference/ink-carrion-stalker/`. Действия: `userData.play('bite'|'jump'|'strike'|'prowl')`; есть 360°-камера, шарнирная нижняя челюсть, острые зубы, механические ноги и длинные когти. Рендер из соседнего `reference/ink-fallen-guardian/` без изменения. МГЛ: https://mpaykin1.github.io/meta6-lab/reference/ink-carrion-stalker/; МГ после переноса Claude: https://mpaykin1.github.io/meta6/reference/ink-carrion-stalker/.
 
+## Эталон «Машина → Батискаф» — анимированная 3D-модель (OWNER PASS, 17.11.2026)
+
+Источник: `reference/ink-car-bathyscaphe/` (модель, интерактивный стенд и README); паспорт: `shared/references/ink-car-bathyscaphe.json`. МГ: https://mpaykin1.github.io/meta6/reference/ink-car-bathyscaphe/ · МГЛ: https://mpaykin1.github.io/meta6-lab/reference/ink-car-bathyscaphe/ . Объёмная серо-зелёная машина превращается в батискаф: колёса втягиваются, появляется герметичный корпус, люк, иллюминаторы, плавники и два вращающихся винта. `createInkCarBathyscaphe(seed)` возвращает `THREE.Group` с `userData.setMorph(0..1, seconds)`. На стенде — поворот камеры 360°, ручное вращение, мобильные жесты, ползунок и автоцикл. Рендер переиспользуется из «Павшего великана» без изменений. Эталон не является новой игрой; в МГ перенесён Claude 17.11.2026.
+
 ## Правила для всех ИИ
 
 1. **Не менять исходники эталона.** Файлы `index.html`, `client.js`, `shared/living-watercolor-*.js` — только чтение. Сверка — по blob SHA из паспорта.
-2. **Переиспользовать, а не переписывать (REUSE).** Для акварельной, чернильной или рисованной графики в играх МГ/МГЛ подключать `shared/living-watercolor-3d.js` и `shared/living-watercolor-generators.js` как есть.
+2. **Переиспользовать, а не переписывать (REUSE).** Для акварельной, чернильной или рисованной графики в играх МГ/МГЛ подключать рендер **из эталона «Павший великан»** `reference/ink-fallen-guardian/shared/living-watercolor-3d.js` и `…/living-watercolor-generators.js` как есть (версия без паттернов). Старый `demos/living-watercolor/shared/` оставлен как байт-в-байт эталон МГ, для новых работ его не брать.
 3. **Это визуальная технология, а не игра.** Не добавлять в перечень игр и не менять показатели FINISH.md.
 4. **Three.js 0.165.0 с CDN unpkg** — внешняя зависимость, не авторский ассет владельца; учитывать её лицензию (MIT) отдельно.
 5. **ССЫЛКА = 200.** Публичную ссылку на эталон или на игру с ним давать, когда точный URL отвечает 200; хватает прямой проверки агентом, ждать прогон Actions не нужно (решение владельца 15.11.2026).

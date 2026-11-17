@@ -70,7 +70,7 @@ function redSignalLamp(seed=3){
   // Its smooth pulse accelerates as the train approaches; the idle lamp stays dim.
   const pulse=.5+.5*Math.sin(t*(2.4+8.1*near));
   const light=.09+near*(.48+3.7*pulse*pulse);
-  l.intensity=light;
+  l.intensity=light;g.userData.lightLevel=light;
   lensMaterial.color.setRGB(.18+near*.75*pulse,.012+near*.037*pulse,.017+near*.035*pulse);
  };
  g.userData.tick=(t)=>{g.userData.setApproach(.4,t);housing.rotation.z=.02*Math.sin(t*.8);};
@@ -118,10 +118,17 @@ function groundMist(seed=6){
  const r=random(seed),g=new T.Group(),sheets=[];
  // GPU alpha ribbons: a gently dissolving silhouette, never solid white triangles.
  const mat=new T.ShaderMaterial({
-  uniforms:{uTime:{value:0}},
+  uniforms:{
+   uTime:{value:0},uTorchPosition:{value:new T.Vector3(0,1.7,0)},
+   uTorchDirection:{value:new T.Vector3(0,0,-1)},uTorchStrength:{value:0},
+   uTrainPosition:{value:new T.Vector3(-999,1,-7.5)},uTrainStrength:{value:0},
+   uSignalPosition:{value:new T.Vector3(4.2,2.65,-5.35)},uSignalStrength:{value:0}
+  },
   transparent:true,depthWrite:false,side:T.DoubleSide,
-  vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-  fragmentShader:`varying vec2 vUv;uniform float uTime;
+  vertexShader:`varying vec2 vUv;varying vec3 vWorld;void main(){vUv=uv;vec4 world=modelMatrix*vec4(position,1.);vWorld=world.xyz;gl_Position=projectionMatrix*viewMatrix*world;}`,
+  fragmentShader:`varying vec2 vUv;varying vec3 vWorld;
+   uniform float uTime,uTorchStrength,uTrainStrength,uSignalStrength;
+   uniform vec3 uTorchPosition,uTorchDirection,uTrainPosition,uSignalPosition;
    float noise2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
    void main(){
      vec2 p=vUv;float t=uTime*.19;
@@ -133,7 +140,14 @@ function groundMist(seed=6){
      float trail=.73+.27*sin(p.x*19.-t+p.y*9.);
      float wisps=.82+.18*noise2(floor(vec2(p.x*22.+t,p.y*13.)));
      float a=.115*rim*nearGround*sides*trail*wisps;
-     gl_FragColor=vec4(.22,.26,.27,a);
+     vec3 toward=vWorld-uTorchPosition;
+     float cone=pow(smoothstep(.75,.985,dot(normalize(toward),normalize(uTorchDirection))),2.);
+     float torch=cone*(1.-smoothstep(3.,20.,length(toward)))*uTorchStrength;
+     float headlamp=(1.-smoothstep(9.,44.,length(vWorld-uTrainPosition)))*uTrainStrength;
+     float red=(1.-smoothstep(1.,6.2,length(vWorld-uSignalPosition)))*uSignalStrength;
+     vec3 pigment=mix(vec3(.22,.26,.27),vec3(.56,.60,.62),clamp(torch*.95+headlamp*.66,0.,1.));
+     pigment+=vec3(.40,.018,.014)*red;
+     gl_FragColor=vec4(pigment,a*(1.+.5*clamp(torch+headlamp+red,0.,1.)));
    }`
  });
  for(let i=0;i<12;i++){
@@ -143,6 +157,14 @@ function groundMist(seed=6){
  }
  g.scale.x=.46;
  g.userData.tick=t=>{mat.uniforms.uTime.value=t;sheets.forEach(({m,x,i})=>{m.position.x=x+.17*Math.sin(t*.18-i*.34);m.rotation.y=.06*Math.sin(t*.16-i*.21);});};
+ g.userData.setLighting=(torchPos,torchDir,torchPower,trainPos,trainPower,signalPos,signalPower)=>{
+  const u=mat.uniforms;
+  u.uTorchPosition.value.copy(torchPos);u.uTorchDirection.value.copy(torchDir);
+  u.uTorchStrength.value=torchPower;u.uTrainPosition.value.copy(trainPos);
+  u.uTrainStrength.value=trainPower;
+  u.uSignalPosition.value.set(signalPos.x,signalPos.y+2.65,signalPos.z);
+  u.uSignalStrength.value=signalPower;
+ };
  return finish(g,0);
 }
 

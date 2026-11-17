@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T10:00:52.186Z",
+  "generated_at": "2026-11-17T10:39:07.896Z",
   "sha": {
-    "lab": "854aa2b15bde75ab4cd6e22a1749a63f69ed9846",
+    "lab": "806037f4c13ddbd8d8a6941f237202095c0fba58",
     "mg": "aa63d1def02bcca2ddf7f3161add508255df824c"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44060696600",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44066639865",
   "review": {
     "protected": [
       {
@@ -359,7 +359,13 @@
         ]
       }
     ],
-    "redLab": [],
+    "redLab": [
+      {
+        "workflow": "META BOT",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44054411442",
+        "step": "Play all games"
+      }
+    ],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -495,7 +501,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44059439591"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44060696524"
       },
       "P1": {
         "value": "не подтверждено",
@@ -1243,7 +1249,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2754,
+      "count": 2757,
       "folders": "нет данных"
     },
     "mg": {
@@ -1274,7 +1280,7 @@
     },
     {
       "name": "ostrov-aptekarya",
-      "bot": "не прошла",
+      "bot": "прошла",
       "storefront": "нет"
     },
     {

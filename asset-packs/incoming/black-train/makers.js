@@ -109,6 +109,7 @@ function hangingChains(seed=1){
     }
     strands.push(arr);
   }
+  rod(g,V(-.8,0,0),V(-.82,3.93,0),.065,C.wood);
   rod(g,V(-.82,3.93,0),V(.84,3.93,.05),.065,C.wood);
   setMotion(g,t=>strands.forEach((arr,c)=>arr.forEach((link,i)=>{
     link.rotation.z=.035*Math.sin(t*.52+i*.21+c*.9)*(i+1)/11;

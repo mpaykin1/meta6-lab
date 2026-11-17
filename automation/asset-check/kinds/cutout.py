@@ -183,10 +183,6 @@ def check(root: Path, report) -> set[str]:
                 audio_hook = source_name == "audio.js" and (
                     "createSoundscape" in implementation and f"id==='{asset_id}'" in scene
                 )
-                if source_name == "scene.js":
-                    visual_hook = visual_hook or f"'{asset_id}'" in implementation and (
-                        "world.add(" in implementation and "renderer.render(" in implementation
-                    )
                 if not (visual_hook or rig_hook or audio_hook):
                     report.add("CJ8", "HARD", asset_id, "asset listed but no drawing or sound hook",
                                "Implement the declared effect in the actual referenced module")

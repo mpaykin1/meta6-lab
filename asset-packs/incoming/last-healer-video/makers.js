@@ -34,7 +34,7 @@ export function carHeadlights(seed=1){
    lens.scale.set(1.28,.66,.35);flares.push(lens);
    for(let k=0;k<3;k++){
      const z=-1.28-k*.92;
-     const length=.94+k*.79;
+     const length=.94+k*.46;
      const spread=.12+k*.37;
      const color=new T.MeshBasicMaterial({color:k===0?'#e7d4a4':'#d9c28f',transparent:true,opacity:(.17-k*.043),depthWrite:false,side:T.DoubleSide});
      const shape=new T.BufferGeometry();
@@ -148,7 +148,7 @@ export function rainSplashRings(seed=1){
  for(let i=0;i<25;i++){
   const x=(random()-.5)*5.6,z=(random()-.5)*5.5;
   const r=.09+.13*random();
-  const mesh=part(g,new T.TorusGeometry(1,.018,4,28),pigment.ripple,x,.024,z);
+  const mesh=part(g,new T.TorusGeometry(1,.018,4,28),pigment.ripple.clone(),x,.024,z);
   mesh.rotation.x=-Math.PI/2;mesh.scale.setScalar(r);
   mesh.castShadow=false;
   rings.push({mesh,origin:(i/25)*2.6,duration:.68+.45*random(),radius:.06+.16*random()});
@@ -157,7 +157,7 @@ export function rainSplashRings(seed=1){
  }
  const points=68;const pos=new Float32Array(points*3);
  for(let i=0;i<points;i++){pos[3*i]=(random()-.5)*5.6;pos[3*i+1]=.6+random()*3.5;pos[3*i+2]=(random()-.5)*5.5;}
- const geo=new T.BufferGeometry();geo.setAttribute('position',new T.BufferAttribute(pos,3));
+ const initialY=Array.from({length:points},(_,i)=>pos[i*3+1]);const geo=new T.BufferGeometry();geo.setAttribute('position',new T.BufferAttribute(pos,3));
  const streaks=new T.Points(geo,pigment.spray);g.add(streaks);
  g.userData.tick=t=>{
   for(const {mesh,origin,duration,radius} of rings){
@@ -167,7 +167,7 @@ export function rainSplashRings(seed=1){
   }
   drops.forEach(({spray,phase})=>{const cycle=(t*1.7+phase)%1;spray.scale.y=.35+.8*(1-cycle);spray.position.y=.07+.22*(1-cycle);});
   const a=geo.attributes.position;
-  for(let i=0;i<points;i++)a.setY(i,.2+((pos[i*3+1]-(t*5.8)%3.9+3.9)%3.9));
+  for(let i=0;i<points;i++)a.setY(i,.2+((initialY[i]-(t*5.8)%3.9+3.9)%3.9));
   a.needsUpdate=true;
  };
  return finish(g,0);

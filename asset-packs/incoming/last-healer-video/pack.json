@@ -2,7 +2,7 @@
   "format": "ink-pack/1",
   "game": "ostrov-aptekarya",
   "base": "reference/ink-fallen-guardian",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": {
     "type": "original",
     "author": "META GAMES",
@@ -11,7 +11,7 @@
   "provenance": {
     "tool": "Three.js procedural geometry + GLSL",
     "date": "2026-11-17",
-    "source": "Owner video commission, first four ZAKAZ.json items from last-healer-video"
+    "source": "Video reference: Nookvale 7 s, owner commission 2026-11-17; INK masters unchanged."
   },
   "content_flags": {
     "real_persons": false,
@@ -45,6 +45,42 @@
       "role": "effect",
       "zone": "any",
       "footprint": 0
+    },
+    "townRoad": {
+      "label_ru": "Улица городка: перекрёсток, сколы и бордюры",
+      "role": "ground",
+      "zone": "city",
+      "footprint": 0
+    },
+    "roadsideDryShrubs": {
+      "label_ru": "Сухие кусты вдоль дороги — ветер по веткам",
+      "role": "plant",
+      "zone": "city",
+      "footprint": 0.35
+    },
+    "pinkTownBuilding": {
+      "label_ru": "Розовое угловое здание с живыми витринами",
+      "role": "building",
+      "zone": "city",
+      "footprint": 2.2
+    },
+    "puddles": {
+      "label_ru": "Неровные лужи и бегущие отражения",
+      "role": "ground",
+      "zone": "city",
+      "footprint": 0
+    },
+    "whiteClinicBuilding": {
+      "label_ru": "Ночная клиника с красным козырьком",
+      "role": "building",
+      "zone": "city",
+      "footprint": 2.9
+    },
+    "boatShed": {
+      "label_ru": "Сарай у причала с зелёной крышей",
+      "role": "building",
+      "zone": "lakeside",
+      "footprint": 1.95
     }
   }
 }

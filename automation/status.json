@@ -1,16 +1,23 @@
 {
-  "generated_at": "2026-11-16T22:30:05.366Z",
+  "generated_at": "2026-11-17T01:27:59.172Z",
   "sha": {
-    "lab": "922cf75972dc8dcc3e2c245f46ad081a1e3e8763",
+    "lab": "ce7c993a9abac7346d8bf7d7df2b4a39f18e1bbe",
     "mg": "0375ce30bfd3f0385e53091ecaeec595e27fb052"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43970458065",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/43995691150",
   "review": {
     "protected": [
+      {
+        "number": 344,
+        "sha": "6655190cde1040b028ed57f2b4a1043d88e7344d",
+        "paths": [
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
       {
         "number": 339,
         "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34",
@@ -297,7 +304,7 @@
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
-      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
+      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
       "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
       "| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |",
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
@@ -418,15 +425,20 @@
       }
     ],
     "proofs": {
-      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43902202267"
+      "B1": "https://github.com/mpaykin1/meta6-lab/actions/runs/43995406558"
     }
   },
   "pr": {
-    "open": 34,
+    "open": 32,
     "conflicts": "нет данных",
-    "merged": 59,
-    "closed": 102,
+    "merged": 60,
+    "closed": 104,
     "mergedItems": [
+      {
+        "number": 344,
+        "title": "Vercel: превью только для main (лимит 100 сборок/сутки, крас",
+        "sha": "6655190cde1040b028ed57f2b4a1043d88e7344d"
+      },
       {
         "number": 341,
         "title": "Эталон «Небесный пилот» (спрайт-стакинг), только добавление",
@@ -725,6 +737,13 @@
     ],
     "protectedItems": [
       {
+        "number": 344,
+        "sha": "6655190cde1040b028ed57f2b4a1043d88e7344d",
+        "paths": [
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
         "number": 339,
         "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34",
         "paths": [
@@ -1009,7 +1028,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2468,
+      "count": 2485,
       "folders": "нет данных"
     },
     "mg": {
@@ -1135,6 +1154,7 @@
     "| 1138 | 15.11.2026 | Новая «Доля закрытых без слияния» ошибочно включала открытые заброшенные PR, завышая потери | Выделен isClosed для каждого PR, отдельный знаменатель метрики | `scripts/karta-sil/mutate-karta-sil.mjs`: различение открытого и закрытого «брошено», мутация расчёта |",
     "| 1139 | 15.11.2026 | 3-дневный срез по дате создания PR скрывал сегодняшние слияния старых PR | Старый PR создан ранее 3 дней, но слит/закрыт сегодня | `scripts/karta-sil/mutate-karta-sil.mjs`: событийный срез по mergedAt/closedAt/updatedAt, без публикации временных полей |",
     "| 1134 | 15.11.2026 | Карта сил теряла исполнителей без истории ZANYATO и явного приоритета подписи | Прежний проверенный identifyActor сохранён для истории; новый композитор источников применяет приоритет по контракту | `scripts/karta-sil/mutate-karta-sil.mjs`: 4 мутации, в том числе ложный успех по одному номеру PR |",
-    "| 1140 | 16.11.2026 | Карта сил обнулилась от одного HTTP 502 GitHub (markNoData стирал прошлые цифры), а при «нет данных» у строки «автозадача» диспетчер отдавал все карточки в чат — 39 из 40 запусков автозадач стали холостыми | [прогон 43814780178](https://github.com/mpaykin1/meta6-lab/actions/runs/43814780178) | `scripts/karta-sil/mutate-karta-sil.mjs` (тест «сбой не стирает карту…», 7 мутаций) |"
+    "| 1140 | 16.11.2026 | Карта сил обнулилась от одного HTTP 502 GitHub (markNoData стирал прошлые цифры), а при «нет данных» у строки «автозадача» диспетчер отдавал все карточки в чат — 39 из 40 запусков автозадач стали холостыми | [прогон 43814780178](https://github.com/mpaykin1/meta6-lab/actions/runs/43814780178) | `scripts/karta-sil/mutate-karta-sil.mjs` (тест «сбой не стирает карту…», 7 мутаций) |",
+    "| 1141 | 17.11.2026 | Vercel собирал превью на каждый пуш каждого PR: бесплатный лимит 100 сборок/сутки исчерпывался, красный статус «Vercel» висел на всех PR, автозадачи и диспетчер считали его блокером | [#311](https://github.com/mpaykin1/meta6-lab/pull/311), [#342](https://github.com/mpaykin1/meta6-lab/pull/342) | `scripts/karta-sil/mutate-karta-sil.mjs` (тест «Vercel: превью только для main», 3 мутации) |"
   ]
 }

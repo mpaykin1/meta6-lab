@@ -274,7 +274,7 @@ window.GothicCity = (() => {
       const canvas = mk(size, size);
       const ctx = canvas.getContext('2d', {alpha: true});
       ctx.imageSmoothingEnabled = false;
-      if (sheets[id] && (variant === 0 || id === 'redRoofHouse' || id === 'aqueductTiers' || id === 'cliffBase' || id === 'bellTower' || id === 'sailBoat')) {
+      if (sheets[id] && (variant === 0 || id === 'gothicCathedral' || id === 'redRoofHouse' || id === 'aqueductTiers' || id === 'cliffBase' || id === 'bellTower' || id === 'sailBoat')) {
         ctx.drawImage(sheets[id], s * size, 0, size, size, 0, 0, size, size);
       } else if (id === 'gothicCathedral') cathedral(ctx, s, variant);
       else if (id === 'spireTower') tower(ctx, s, variant);
@@ -653,7 +653,8 @@ window.GothicCity = (() => {
       const strip=sheets[id];
       if(!strip || hiddenAssets.has(id))continue;
       const phase=hash(i,j,54)*TAU;
-      const x=boat ? i*450+190+(hash(i,j,47)-.5)*18
+      // Canal water runs along x=(3k*380)+190. Align every boat to it.
+      const x=boat ? (Math.round((i*450-190)/1140)*1140)+190
                    : i*450+hash(i,j,47)*300+t*2.2,
             y=j*450+hash(i,j,48)*300+(boat?t*3.2+Math.sin(t*.35+phase)*4:t*.85);
       if(boat && urban<.15)continue;

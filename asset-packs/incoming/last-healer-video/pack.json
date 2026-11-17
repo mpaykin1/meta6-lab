@@ -97,6 +97,78 @@
       "zone": "city",
       "footprint": 2.8,
       "benefit": "Ориентир и цель ночного перехода"
+    },
+    "nightRainGrade": {
+      "label_ru": "Ночное синеватое освещение в ливень",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "wetGrassClumps": {
+      "label_ru": "Живые мокрые листья и агавы",
+      "role": "plant",
+      "zone": "woodland",
+      "footprint": 0
+    },
+    "boatWake": {
+      "label_ru": "Пенное движение за вёслами и кильватер",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "shoreFoamLine": {
+      "label_ru": "Линия приливной пены вдоль изломанного берега",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "autumnConeTrees": {
+      "label_ru": "Пять разноцветных объёмных деревьев",
+      "role": "tree",
+      "zone": "woodland",
+      "footprint": 0.8
+    },
+    "driftingLeaves": {
+      "label_ru": "Красные и охристые листья на воде",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "sandBeachTiles": {
+      "label_ru": "Песчаная бухта с неровным берегом и травой",
+      "role": "ground",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "tiltShiftPost": {
+      "label_ru": "Глубина резкости и мягкая акварельная миниатюра",
+      "role": "effect",
+      "zone": "any",
+      "footprint": 0
+    },
+    "dayCoastGrade": {
+      "label_ru": "Дневная бирюза, тёплый свет, короткие тени",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "sndCarEngine": {
+      "label_ru": "Звук двигателя и мокрых шин",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "sndRainNight": {
+      "label_ru": "Звук дождя, крыши и фонарика",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "sndRowingShore": {
+      "label_ru": "Звук вёсел и тихого прибоя",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
     }
   }
 }

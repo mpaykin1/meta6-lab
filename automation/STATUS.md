@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T03:06:57.843Z | МГЛ: 9f672d2dfa32632ed75a140c69612484ef82e817 | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44007760198
+UTC: 2026-11-17T03:33:55.071Z | МГЛ: 954af9384fe50d5025d098f8b78528ca56f9b2b7 | МГ: 5c259fcd552f04d40f6531907a5f19ef551be259 | https://github.com/mpaykin1/meta6-lab/actions/runs/44010995336
 ## ПРОВЕРИТЬ CLAUDE
 - PR #346 9f247be3a3530d160f629f531f32eb6469a07bc1: scripts/status/mutate-canonical-finish.mjs, scripts/status/selftest.mjs
 - PR #311 fb708269aa165d43dea7a1b3204157a235087afd: automation/asset-check/test_mutation_runner.py, automation/asset-check/test_zip_safety.py, scripts/platform/mutate-bot-config.mjs, scripts/platform/verify-meta-bot-config-candidate.mjs, scripts/repair-bot/mutat… (сокращено)
@@ -31,12 +31,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 35 | конфликт: нет данных | слито: 67 | закрыто: 113
+открыто: 37 | конфликт: 18 | слито: 67 | закрыто: 113
 #358 feat(Z18): лицензированный GLSL-туман и атмосферные молнии в | 81e5fb9fcce86c5de90ec98953b8316ed87f83a6
 #350 Единая инструкция пяти автозадач и журнал NADZOR | bf240a699201aa2d8b9594c989ec34de47c37170
 ещё 65: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2617 коммитов | нет данных
+МГЛ: 2621 коммитов | нет данных
 МГ: 40 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

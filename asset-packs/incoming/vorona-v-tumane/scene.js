@@ -118,6 +118,66 @@ const wingMaterial=new T.ShaderMaterial({
 });
 const bird=new T.Mesh(new T.PlaneGeometry(6.5,6.5,24,12),wingMaterial);
 hero.add(bird);objects.crow=hero;
+
+const crowPlan=[
+ {id:'torso',parent:null,pivot:[657,764],poly:[[425,583],[570,525],[664,555],[773,688],[960,692],[1050,755],[1058,834],[895,924],[691,903],[490,894],[413,805]]},
+ {id:'wingL_root',parent:'torso',pivot:[591,634],poly:[[280,245],[391,212],[474,334],[535,420],[611,517],[690,616],[653,724],[547,785],[380,748],[239,647],[169,532]]},
+ {id:'wingL_tip',parent:'wingL_root',pivot:[403,359],poly:[[16,218],[77,90],[158,62],[174,0],[207,8],[324,40],[344,52],[398,175],[460,244],[527,350],[422,468],[278,464],[149,404],[40,380]]},
+ {id:'wingR_root',parent:'torso',pivot:[744,755],poly:[[621,699],[759,675],[899,685],[1008,746],[1121,811],[1145,944],[1030,1055],[906,1018],[814,1081],[709,1008],[625,942]]},
+ {id:'wingR_tip',parent:'wingR_root',pivot:[950,856],poly:[[856,790],[982,741],[1170,849],[1253,862],[1237,1019],[1209,1032],[1185,1124],[1113,1108],[1048,1117],[951,1031],[880,984]]},
+ {id:'tail',parent:'torso',pivot:[495,876],poly:[[10,947],[51,870],[257,850],[350,826],[480,794],[564,827],[550,923],[456,1014],[363,1125],[268,1169],[178,1174],[97,1147],[37,1066]]},
+ {id:'head',parent:'torso',pivot:[711,592],poly:[[599,548],[651,519],[703,480],[787,457],[875,462],[918,481],[990,485],[1019,512],[1027,533],[971,572],[887,595],[827,679],[783,695],[692,676],[632,629]]},
+ {id:'feet',parent:'torso',pivot:[503,859],poly:[[435,817],[501,821],[577,854],[575,932],[558,981],[515,1003],[450,986],[438,948],[458,910]]}
+];
+const crowJoints=Object.create(null);
+function buildCrowCutout(img){
+ if(!img.complete||!img.naturalWidth)return false;
+ const scale=6.5/1254,parts=Object.create(null),pivot0=[627,627];
+ const rig=new T.Group();hero.add(rig);
+ for(const [i,part] of crowPlan.entries()){
+  const points=part.poly.map(([x,y])=>[x*img.naturalWidth/1254,y*img.naturalHeight/1254]);
+  const bounds={
+   x:Math.max(0,Math.floor(Math.min(...points.map(p=>p[0]))-5)),
+   y:Math.max(0,Math.floor(Math.min(...points.map(p=>p[1]))-5)),
+   X:Math.min(img.naturalWidth,Math.ceil(Math.max(...points.map(p=>p[0]))+5)),
+   Y:Math.min(img.naturalHeight,Math.ceil(Math.max(...points.map(p=>p[1]))+5))
+  };
+  const canvas=document.createElement('canvas');
+  canvas.width=bounds.X-bounds.x;canvas.height=bounds.Y-bounds.y;
+  const ctx=canvas.getContext('2d');
+  ctx.beginPath();
+  points.forEach(([x,y],n)=>n?ctx.lineTo(x-bounds.x,y-bounds.y):ctx.moveTo(x-bounds.x,y-bounds.y));
+  ctx.closePath();ctx.save();ctx.clip();ctx.drawImage(img,-bounds.x,-bounds.y);ctx.restore();
+  const tex=new T.CanvasTexture(canvas);tex.colorSpace=T.SRGBColorSpace;
+  const mesh=new T.Mesh(new T.PlaneGeometry(canvas.width*scale,canvas.height*scale),
+   new T.MeshBasicMaterial({map:tex,transparent:true,depthWrite:false,side:T.DoubleSide}));
+  const joint=new T.Group();
+  const parent=part.parent?parts[part.parent]:rig;
+  const par=part.parent?crowPlan.find(v=>v.id===part.parent).pivot:pivot0;
+  joint.position.set((part.pivot[0]-par[0])*scale,-(part.pivot[1]-par[1])*scale,i*.015);
+  mesh.position.set(((bounds.x+bounds.X)*.5-part.pivot[0])*scale,
+   -((bounds.y+bounds.Y)*.5-part.pivot[1])*scale,0);
+  joint.add(mesh);parent.add(joint);parts[part.id]=joint;
+ }
+ crowJoints.parts=parts;crowJoints.ready=true;bird.visible=false;
+ return true;
+}
+const crowImg=new Image();
+crowImg.src=source+'vorona.png';
+crowImg.addEventListener('load',()=>buildCrowCutout(crowImg),{once:true});
+if(crowImg.complete)buildCrowCutout(crowImg);
+function moveCrowParts(t){
+ if(!crowJoints.ready)return;
+ const p=crowJoints.parts,f=t*4.5;
+ p.wingL_root.rotation.z=Math.sin(f)*.095;
+ p.wingL_tip.rotation.z=Math.sin(f-.75)*.18;
+ p.wingR_root.rotation.z=-Math.sin(f+.24)*.12;
+ p.wingR_tip.rotation.z=-Math.sin(f-.66)*.21;
+ p.tail.rotation.z=Math.sin(f*.47-1.4)*.08;
+ p.head.rotation.z=Math.sin(f*.7-.35)*.045;
+ p.feet.rotation.z=Math.sin(f-1.7)*.085;
+}
+
 const specimen=new T.Group();specimen.position.set(14,-2.35,4.4);world.add(specimen);
 const gif=new Image();gif.src=source+'sushchestvo.gif';
 const offscreen=document.createElement('canvas');offscreen.width=315;offscreen.height=311;
@@ -317,6 +377,7 @@ function draw(){
  if(Math.abs(dx)>.05)state.face=Math.sign(dx);
  hero.position.set(state.x,state.y+Math.sin(t*2.6)*.12,5.2);
  wingMaterial.uniforms.uTime.value=t;
+ moveCrowParts(t);
  hero.scale.x=T.MathUtils.lerp(hero.scale.x,state.face,.095);
  hero.rotation.z=T.MathUtils.lerp(hero.rotation.z,-dy*.08+Math.sin(t*1.8)*.02,.08);
  hero.position.z=5.2+(state.hit>0?.15*Math.sin(t*30):0);

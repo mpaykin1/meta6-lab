@@ -2,6 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {requireResponse,grade,classify,statusOf,stableJson,publishablePr,isRepeatJournalError} from './build.mjs';
 import {routeFor} from './route.mjs';
+import './mutate-current-claude-marker.mjs';
 import dictionary from './types.json' with {type:'json'};
 
 test('мутация 403 как пустой список обязана упасть',()=>{

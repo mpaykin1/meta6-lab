@@ -39,7 +39,7 @@ jobs:
           for attempt in 1 2 3; do
             node scripts/zadachi/watch.mjs | tee /tmp/z.log
             tail -1 /tmp/z.log >> "$GITHUB_STEP_SUMMARY"
-            git diff --quiet && { echo "no changes"; exit 0; }
+            bash scripts/lab/meaningful-diff.sh || { git checkout -q -- .; echo "no meaningful changes"; exit 0; }
             git config user.name 'zadachi-watch'; git config user.email 'actions@users.noreply.github.com'
             git commit -qam "ZADACHI: $(tail -1 /tmp/z.log | tr -d '*' | cut -c1-110)"
             git push -q origin HEAD:main && exit 0

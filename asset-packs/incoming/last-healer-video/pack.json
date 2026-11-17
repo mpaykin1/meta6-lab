@@ -2,16 +2,17 @@
   "format": "ink-pack/1",
   "game": "ostrov-aptekarya",
   "base": "reference/ink-fallen-guardian",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "license": {
     "type": "original",
     "author": "META GAMES",
     "commercial": true
   },
   "provenance": {
-    "tool": "Three.js procedural geometry + GLSL",
+    "tool": "Three.js GPU geometry + original Web Audio synthesis",
     "date": "2026-11-17",
-    "source": "Video reference: Nookvale 7 s, owner commission 2026-11-17; INK masters unchanged."
+    "source": "Video reference: Nookvale 7 s, owner commission 2026-11-17; INK masters unchanged.",
+    "prompt_sha256": "owner-video-20261117-7s"
   },
   "content_flags": {
     "real_persons": false,
@@ -81,6 +82,90 @@
       "role": "building",
       "zone": "lakeside",
       "footprint": 1.95
+    },
+    "duskTownLight": {
+      "label_ru": "Розовые сумерки над городом: свет, длинные тени, дымка",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "healerWalkWithLight": {
+      "label_ru": "Аптекарь идёт с фонариком: походка, поворот, вытянутая рука",
+      "role": "character",
+      "zone": "woodland",
+      "footprint": 0.35
+    },
+    "nightRainGrade": {
+      "label_ru": "Ночь под дождём: синевато-серый холодный свет",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "wetGrassClumps": {
+      "label_ru": "Мокрые пучки травы и молодые агавы у стен и дорог",
+      "role": "plant",
+      "zone": "city",
+      "footprint": 0
+    },
+    "boatWake": {
+      "label_ru": "След за лодкой: расходящиеся круги и пена у вёсел",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "shoreFoamLine": {
+      "label_ru": "Живая линия пены вдоль берега",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "autumnConeTrees": {
+      "label_ru": "Деревья-конусы разных цветов: оранжевые, жёлтые, зелёные, розовые",
+      "role": "tree",
+      "zone": "lakeside",
+      "footprint": 0.8
+    },
+    "driftingLeaves": {
+      "label_ru": "Листья и лепестки: плывут по воде и лежат на песке",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "sandBeachTiles": {
+      "label_ru": "Песчаный берег с камушками и травой",
+      "role": "ground",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "tiltShiftPost": {
+      "label_ru": "Эффект «миниатюры»: резкая середина, размытые верх и низ кадра",
+      "role": "effect",
+      "zone": "any",
+      "footprint": 0
+    },
+    "dayCoastGrade": {
+      "label_ru": "Яркий день на берегу: бирюзовая вода, светлый песок, мягкие тени",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "sndCarEngine": {
+      "label_ru": "Звук: мотор машины и шорох шин по асфальту",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "sndRainNight": {
+      "label_ru": "Звук: дождь по асфальту, крышам и лужам + щелчок фонарика",
+      "role": "effect",
+      "zone": "city",
+      "footprint": 0
+    },
+    "sndRowingShore": {
+      "label_ru": "Звук: вёсла, скрип уключин, плеск волн о берег и причал",
+      "role": "effect",
+      "zone": "lakeside",
+      "footprint": 0
     }
   }
 }

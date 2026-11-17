@@ -435,9 +435,12 @@ function step(dt){
   blackEngine.userData.tick(elapsed,dt);
   // Do not animate offscreen branches, mist or chains.
   camera.updateMatrixWorld();
-  const visibleFrustum=new T.Frustum().setFromProjectionMatrix(
-    new T.Matrix4().multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse));
-  for(const a of animatedPack)if(visibleFrustum.intersectsObject(a))a.userData.tick(elapsed,dt);
+  const forward=new T.Vector3();camera.getWorldDirection(forward);
+  const center=new T.Vector3();
+  for(const a of animatedPack){
+    a.getWorldPosition(center);center.sub(camera.position);
+    if(center.lengthSq()<6400&&forward.dot(center.normalize())>-.2)a.userData.tick(elapsed,dt);
+  }
   paint.tick(performance.now());
   post.uniforms.uTime.value=elapsed;post.uniforms.uFear.value=fear;post.uniforms.uFade.value=fade;post.uniforms.uDawn.value=dawn;
 }

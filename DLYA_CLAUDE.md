@@ -42,6 +42,7 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #357 | lab/rules-playgama-catalog-direct-20261117 | OSHIBKI.md | 2026-11-18 |
 | #364 | lab/assets-vorona-v-tumane-20261117 | automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py, automation/asset-check/test_kinds.py | 2026-11-18 |
 | #402 | lab/avto2-pagination-20261117 | OSHIBKI.md | 2026-11-18 |
+| #405 | lab/repair-dispatcher-check-pagination-1118 | OSHIBKI.md | 2026-11-18 |
 | #411 | lab/asset-bot-cutout | OSHIBKI.md | 2026-11-18 |
 | #412 | lab/asset-bot-gothic-facades | OSHIBKI.md, automation/asset-check/SPEC.md | 2026-11-18 |
 <!-- STOROZHA:CONFLICTS:END -->

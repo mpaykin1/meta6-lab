@@ -1042,7 +1042,10 @@ void main() {
                     + (currentB - 0.5) * 0.34
                     + (currentC - 0.5) * 0.20;
   float band = fract(depth * 1.35 - uTime * 0.3 + shoreOffset);
-  float foam = shore * step(0.74, band) * detail + smoothstep(0.32, 0.02, depth);
+  float crest = smoothstep(0.63, 0.88, band) * (1.0 - smoothstep(0.92, 1.0, band));
+  float backwash = smoothstep(0.44, 0.67, band) * (1.0 - smoothstep(0.72, 0.94, band));
+  float foam = shore * (crest + backwash * 0.28) * detail
+             + 1.0 - smoothstep(0.02, 0.32, depth);
   for (int i = 0; i < 8; i++) {
     vec4 r = uRipples[i];
     float age = uTime - r.z;

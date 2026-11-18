@@ -1,7 +1,7 @@
 // Browser-side pattern sampler: three visibly different game viewpoints per target.
 import {chromium} from 'playwright';
 import {serve} from '../meta-bot/server.mjs';
-import {readFileSync, mkdirSync, writeFileSync} from 'node:fs';
+import {readFileSync, mkdirSync, writeFileSync, existsSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {resolve, join} from 'node:path';
 
@@ -45,9 +45,20 @@ else {
   }).trim().split('\n');
   games = gameTargets().filter(game =>
     changed.some(file => file.startsWith(game.url.replace(/\/$/, ''))));
-  if (changed.some(file => file.startsWith('demos/living-watercolor/'))) games.push(ink, inkProbe);
-  if (changed.some(file => file.startsWith('asset-packs/incoming/black-train/'))) games.push(blackTrain);
-  if (!games.length) games = [ink, inkProbe]; // Rule-only PRs still check real INK waves.
+  if (changed.some(file => file.startsWith('demos/living-watercolor/') ||
+      file.startsWith('reference/ink-fallen-guardian/shared/') ||
+      file === 'scripts/visual/ink-pattern-probe.html')) games.push(ink, inkProbe);
+  // Every changed playable asset pack is measured by its own page (black-train was the first such case).
+  // The INK shader probe demands a 15% improvement, so it runs only when the shader itself changes;
+  // before 18.11.2026 it ran for every unrelated PR and turned all of them red (owner: «почему стоит работа»).
+  const packs = [...new Set(changed.map(file => /^asset-packs\/incoming\/([^/]+)\//.exec(file)?.[1]).filter(Boolean))];
+  for (const slug of packs) {
+    const url = `asset-packs/incoming/${slug}/index.html`;
+    if (slug === 'black-train') games.push(blackTrain);
+    else if (existsSync(join(root, url))) games.push({id: 'pack-' + slug, url});
+  }
+  if (!games.length && changed.some(file => file.startsWith('scripts/visual/') ||
+      file === 'rules/01-stil-i-grafika/BEZ_PATTERNOV.md')) games = [ink, inkProbe];
 }
 
 const web = await serve(root);

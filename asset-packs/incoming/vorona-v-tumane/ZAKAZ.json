@@ -1,0 +1,374 @@
+{
+  "format": "mg-zakaz/1",
+  "game": "vorona-v-tumane",
+  "source": {
+    "type": "owner",
+    "source": "automation/asset-check/OCHERED.md — заметки Claude 17.11.2026; рисунки владельца: reference/vorona-v-tumane/"
+  },
+  "items": [
+    {
+      "id": "crow",
+      "name_ru": "Ворона — исходный силуэт",
+      "kind": "2.5d",
+      "must": [
+        "Ворона из vorona.png остаётся узнаваемой, плавно летит и наклоняется"
+      ],
+      "from": "рисунок владельца reference/vorona-v-tumane/vorona.png",
+      "priority": 1,
+      "source": {
+        "type": "owner",
+        "from": "рисунок владельца reference/vorona-v-tumane/vorona.png"
+      }
+    },
+    {
+      "id": "stalker",
+      "name_ru": "Существо с протезами",
+      "kind": "2.5d",
+      "must": [
+        "Силуэт из sushchestvo.gif, ходьба и замирание в тумане"
+      ],
+      "from": "рисунок владельца reference/vorona-v-tumane/sushchestvo.gif",
+      "priority": 1,
+      "source": {
+        "type": "owner",
+        "from": "рисунок владельца reference/vorona-v-tumane/sushchestvo.gif"
+      }
+    },
+    {
+      "id": "forest_far",
+      "name_ru": "Дальний туманный лес",
+      "kind": "background",
+      "must": [
+        "Бледные стволы, различимая глубина, бесшовный X"
+      ],
+      "from": "Заметки Claude 17.11 — дальний лес",
+      "priority": 1,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — дальний лес"
+      }
+    },
+    {
+      "id": "forest_mid",
+      "name_ru": "Средний туманный лес",
+      "kind": "background",
+      "must": [
+        "Асимметричные деревья, параллакс, бесшовный X"
+      ],
+      "from": "Заметки Claude 17.11 — средний лес",
+      "priority": 1,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — средний лес"
+      }
+    },
+    {
+      "id": "forest_near",
+      "name_ru": "Передний лес",
+      "kind": "background",
+      "must": [
+        "Тёмные передние стволы с ветвями, перекрывают героев"
+      ],
+      "from": "Заметки Claude 17.11 — ближний лес",
+      "priority": 1,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — ближний лес"
+      }
+    },
+    {
+      "id": "fog_ribbons",
+      "name_ru": "Текучие полосы тумана",
+      "kind": "effect",
+      "must": [
+        "Полупрозрачные живые полосы с медленным течением"
+      ],
+      "from": "Заметки Claude 17.11 — полосы тумана",
+      "priority": 1,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — полосы тумана"
+      }
+    },
+    {
+      "id": "crow_wings",
+      "name_ru": "Шарнирные крылья вороны",
+      "kind": "2.5d",
+      "must": [
+        "Два крыла по 2–3 сегмента, прозрачные части, у каждого свой pivot"
+      ],
+      "from": "Заметки Claude 17.11 — разрезать ворону на части",
+      "priority": 1,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — разрезать ворону на части"
+      }
+    },
+    {
+      "id": "crow_tail",
+      "name_ru": "Хвост и лапы вороны",
+      "kind": "2.5d",
+      "must": [
+        "Собственные шарниры хвоста и лап, запаздывание относительно тела"
+      ],
+      "from": "Заметки Claude 17.11 — хвост и лапы",
+      "priority": 1,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — хвост и лапы"
+      }
+    },
+    {
+      "id": "stalker_limbs",
+      "name_ru": "Шарнирные лапы существа",
+      "kind": "2.5d",
+      "must": [
+        "Четыре ноги по два сегмента, ходьба, подкрадывание и уход в туман"
+      ],
+      "from": "Заметки Claude 17.11 — разрезать существо",
+      "priority": 1,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — разрезать существо"
+      }
+    },
+    {
+      "id": "mist_antler",
+      "name_ru": "Олень из тумана",
+      "kind": "2.5d",
+      "must": [
+        "Тонкие ветвистые рога, высокий суставчатый силуэт, серый скульптурный стиль"
+      ],
+      "from": "Заметки Claude 17.11 — новые существа тумана",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — новые существа тумана"
+      }
+    },
+    {
+      "id": "bell_crawler",
+      "name_ru": "Ползун с колоколом",
+      "kind": "2.5d",
+      "must": [
+        "Неровные плечи, обвисший колокол, движение суставов"
+      ],
+      "from": "Заметки Claude 17.11 — разные существа тумана",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — разные существа тумана"
+      }
+    },
+    {
+      "id": "hollow_sentinel",
+      "name_ru": "Пустоглазый часовой",
+      "kind": "2.5d",
+      "must": [
+        "Высокая асимметричная фигура, медленная живая осанка, не копия других"
+      ],
+      "from": "Заметки Claude 17.11 — разные силуэты",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — разные силуэты"
+      }
+    },
+    {
+      "id": "ash_heron",
+      "name_ru": "Пепельная цапля",
+      "kind": "2.5d",
+      "must": [
+        "Живая птица с длинной шеей и авторским акварельным контуром"
+      ],
+      "from": "Заметки Claude 17.11 — другие птицы",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — другие птицы"
+      }
+    },
+    {
+      "id": "silver_moth",
+      "name_ru": "Серебряный мотылёк",
+      "kind": "2d",
+      "must": [
+        "Акварельные крылья с лёгкими независимыми движениями"
+      ],
+      "from": "Заметки Claude 17.11 — мотыльки",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — мотыльки"
+      }
+    },
+    {
+      "id": "moth_swarm",
+      "name_ru": "Стая мотыльков",
+      "kind": "effect",
+      "must": [
+        "Асинхронные особи со слоями и разными траекториями"
+      ],
+      "from": "Заметки Claude 17.11 — мотыльки",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — мотыльки"
+      }
+    },
+    {
+      "id": "feather",
+      "name_ru": "Перо ускорения",
+      "kind": "2.5d",
+      "must": [
+        "Видимое перо; при сборе скорость вороны заметно растёт"
+      ],
+      "from": "Заметки Claude 17.11 — перо ускоряет",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — перо ускоряет"
+      }
+    },
+    {
+      "id": "firefly",
+      "name_ru": "Светлячок",
+      "kind": "effect",
+      "must": [
+        "Даёт видимый свет в тумане, пульсирует без рывков"
+      ],
+      "from": "Заметки Claude 17.11 — светлячок",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — светлячок"
+      }
+    },
+    {
+      "id": "nest",
+      "name_ru": "Гнездо сохранения",
+      "kind": "2.5d",
+      "must": [
+        "Ветки и перья, взаимодействие сохраняет точку возвращения"
+      ],
+      "from": "Заметки Claude 17.11 — гнездо",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — гнездо"
+      }
+    },
+    {
+      "id": "impact_feathers",
+      "name_ru": "Перья при ударе",
+      "kind": "effect",
+      "must": [
+        "Несколько отдельных перьев летят разными траекториями"
+      ],
+      "from": "Заметки Claude 17.11 — перья при ударе",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — перья при ударе"
+      }
+    },
+    {
+      "id": "raindrops",
+      "name_ru": "Капли воды",
+      "kind": "effect",
+      "must": [
+        "Падающие капли и маленькие всплески на земле"
+      ],
+      "from": "Заметки Claude 17.11 — капли",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — капли"
+      }
+    },
+    {
+      "id": "glowing_eyes",
+      "name_ru": "Глаза в тумане",
+      "kind": "effect",
+      "must": [
+        "Малые парные огни разной глубины, не основной силуэт существа"
+      ],
+      "from": "Заметки Claude 17.11 — светящиеся глаза",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — светящиеся глаза"
+      }
+    },
+    {
+      "id": "wing_sound",
+      "name_ru": "Звук взмаха",
+      "kind": "sound",
+      "must": [
+        "Мягкий воздух крыла без резкой атаки"
+      ],
+      "from": "Заметки Claude 17.11 — звук взмаха",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — звук взмаха"
+      }
+    },
+    {
+      "id": "crow_cry",
+      "name_ru": "Карканье",
+      "kind": "sound",
+      "must": [
+        "Глухое, органичное и негромкое карканье"
+      ],
+      "from": "Заметки Claude 17.11 — карканье",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — карканье"
+      }
+    },
+    {
+      "id": "stalker_sound",
+      "name_ru": "Шорох существа",
+      "kind": "sound",
+      "must": [
+        "Трение лап по грунту и приглушённый хруст"
+      ],
+      "from": "Заметки Claude 17.11 — шорох существа",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — шорох существа"
+      }
+    },
+    {
+      "id": "wind_sound",
+      "name_ru": "Ветер",
+      "kind": "sound",
+      "must": [
+        "Тихий широкополосный ветер без резких высоких"
+      ],
+      "from": "Заметки Claude 17.11 — ветер",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — ветер"
+      }
+    },
+    {
+      "id": "fog_music",
+      "name_ru": "Тихая музыка тумана",
+      "kind": "music",
+      "must": [
+        "Сдержанные мягкие гармонии с плавной динамикой"
+      ],
+      "from": "Заметки Claude 17.11 — тихая музыка тумана",
+      "priority": 2,
+      "source": {
+        "type": "owner",
+        "from": "Заметки Claude 17.11 — тихая музыка тумана"
+      }
+    }
+  ]
+}

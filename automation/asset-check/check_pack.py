@@ -40,11 +40,11 @@ except ImportError:  # pragma: no cover
     print("Нужны pillow и numpy: pip install pillow numpy", file=sys.stderr)
     sys.exit(2)
 
-BOT_VERSION = "2.6.1"
+BOT_VERSION = "2.7.0"
 HERE = Path(__file__).resolve().parent
 BUDGET = {"pack_mb_soft": 8.0, "pack_mb_hard": 25.0, "files_soft": 120}
 DOC_FILES = {".md", ".txt"}
-MANIFEST_NAMES = ("pack.json", "atlas.json", "manifest.json", "skin.json")
+MANIFEST_NAMES = ("pack.json", "atlas.json", "manifest.json", "skin.json", "stack.json")
 ZIP_MAX_BYTES = 100 * 1024 * 1024
 ZIP_MAX_FILES = 4096
 WINDOWS_DEVICES = {"con", "prn", "aux", "nul", "conin$", "conout$"} | {

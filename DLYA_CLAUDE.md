@@ -15,27 +15,36 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #247 | lab/kak-proveryayushchij-traps | scripts/storozha/reference-check.mjs: изменение ЯДРА охраны — только Claude | 2026-11-15 |
 | #248 | lab/pr-autofinish-followup-1111 | .github/workflows/pr-autofinish.yml: изменение ЯДРА охраны — только Claude | 2026-11-15 |
 | #370 | lab/ink-car-bathyscaphe-20261117 | Новый эталон: PR должен только добавлять файлы | 2026-11-17 |
+| #404 | lab/z01-api-quota-fastfail-1117 | scripts/dispetcher/test/api-budget.test.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
+| #417 | claude/compare-sheet-test | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
+| #418 | claude/sheet-test-2 | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
+| #419 | claude/sheet-test-3 | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude; scripts/kontur/guard.mjs: изменение ЯДРА охраны — только Claude; scripts/kontur/mutate-kontur-guard.mjs: изменение ЯДРА охраны — только Claude | 2026-11-18 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->
-| #245 | lab/remont-main-veil-terraces | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-16 |
-| #248 | lab/pr-autofinish-followup-1111 | OSHIBKI.md | 2026-11-16 |
-| #258 | lab/prohodchik-b2-motion-20261111 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-16 |
-| #262 | lab/archer-retention-exp-1 | OSHIBKI.md | 2026-11-16 |
-| #283 | lab/ink-fallen-robot-20261113 | LINKS.txt, ink.md | 2026-11-16 |
-| #290 | lab/bez-patternov-20261113 | OSHIBKI.md, ZADACHI.md | 2026-11-16 |
-| #291 | lab/polza-b2-broken-city-20261113 | OSHIBKI.md, shared/library/index.json | 2026-11-16 |
-| #297 | lab/ostrov-aptekarya-ii | OSHIBKI.md | 2026-11-16 |
-| #299 | lab/ci-ochered-concurrency | OSHIBKI.md | 2026-11-16 |
-| #300 | lab/native-catalog-recovery-20261113 | OSHIBKI.md | 2026-11-16 |
-| #303 | lab/asset-pack-shpili | OSHIBKI.md, ZADACHI.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py | 2026-11-16 |
-| #305 | lab/assets-tumannye-shpili-20261114 | OSHIBKI.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py | 2026-11-16 |
-| #306 | lab/assets-tumannye-shpili-20261114-2338 | DLYA_CLAUDE.md, LINKS.txt, OSHIBKI.md, automation/asset-check/RAZVITIE.md, automation/asset-check/check_pack.py | 2026-11-16 |
-| #310 | lab/patch-import | OSHIBKI.md | 2026-11-16 |
-| #311 | lab/bot-audit-20261114 | DLYA_CLAUDE.md, OSHIBKI.md, automation/asset-check/check_pack.py | 2026-11-16 |
-| #319 | lab/library-source-only-probe-20261114 | OSHIBKI.md | 2026-11-16 |
-| #322 | lab/ink-watercolor-steam-train-20261114 | OSHIBKI.md | 2026-11-16 |
-| #331 | lab/razbor-zavalov | OSHIBKI.md, automation/SLIYANIE.md | 2026-11-16 |
+| #245 | lab/remont-main-veil-terraces | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-18 |
+| #248 | lab/pr-autofinish-followup-1111 | .github/workflows/pr-autofinish.yml, OSHIBKI.md, automation/prompts/MG_PYAT_AVTOZADACH.md | 2026-11-18 |
+| #258 | lab/prohodchik-b2-motion-20261111 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-18 |
+| #262 | lab/archer-retention-exp-1 | OSHIBKI.md | 2026-11-18 |
+| #283 | lab/ink-fallen-robot-20261113 | LINKS.txt, ink.md | 2026-11-18 |
+| #291 | lab/polza-b2-broken-city-20261113 | OSHIBKI.md, shared/library/index.json | 2026-11-18 |
+| #297 | lab/ostrov-aptekarya-ii | OSHIBKI.md | 2026-11-18 |
+| #300 | lab/native-catalog-recovery-20261113 | OSHIBKI.md | 2026-11-18 |
+| #306 | lab/assets-tumannye-shpili-20261114-2338 | DLYA_CLAUDE.md, LINKS.txt, OSHIBKI.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-18 |
+| #310 | lab/patch-import | OSHIBKI.md, automation/asset-check/mutate_bot.py, automation/asset-check/test_kinds.py | 2026-11-18 |
+| #322 | lab/ink-watercolor-steam-train-20261114 | LINKS.txt, OSHIBKI.md, reports/zavaly/PROGRESS.md | 2026-11-18 |
+| #331 | lab/razbor-zavalov | OSHIBKI.md, automation/SLIYANIE.md, reports/zavaly/PROGRESS.md, scripts/karta-sil/route.mjs | 2026-11-18 |
+| #343 | lab/assets-nebesny-pilot-20261116 | LINKS.txt, OSHIBKI.md, automation/asset-check/OCHERED.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-18 |
+| #354 | lab/3d-master-visual-split-20261117 | reports/zavaly/PROGRESS.md | 2026-11-18 |
+| #357 | lab/rules-playgama-catalog-direct-20261117 | OSHIBKI.md | 2026-11-18 |
+| #364 | lab/assets-vorona-v-tumane-20261117 | automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py, automation/asset-check/test_kinds.py | 2026-11-18 |
+| #367 | lab/assets-nebesny-gothic-city-20261117 | OSHIBKI.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-18 |
+| #371 | lab/assets-ink-valley-20261117 | ZADACHI.md, automation/asset-check/OCHERED.md, automation/asset-check/SPEC.md | 2026-11-18 |
+| #385 | lab/assets-black-train-puddle-reflections-20261117-gpt6 | asset-packs/incoming/black-train/src/scene.js | 2026-11-18 |
+| #386 | lab/assets-black-train-mist-light-20261117 | asset-packs/incoming/black-train/makers.js, asset-packs/incoming/black-train/src/scene.js | 2026-11-18 |
+| #389 | lab/assets-ink-video-nookvale-20261117 | automation/asset-check/OCHERED.md | 2026-11-18 |
+| #411 | lab/asset-bot-cutout | OSHIBKI.md | 2026-11-18 |
+| #412 | lab/asset-bot-gothic-facades | OSHIBKI.md | 2026-11-18 |
 <!-- STOROZHA:CONFLICTS:END -->
 | #242 | lab/seo-claude-adfree-1111 | НУЖЕН CLAUDE: красные verify, bot, guard; SEO PR меняет claude-games/games/*/index.html (17 игр), а базовый PR #234 содержит несовпадение SHA256 защищённого pod-i-nad; не изменять эталон/охранник, проверить базовую ветку и CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117 | 2026-11-11 |
 | #245 | lab/remont-main-veil-terraces | НУЖЕН CLAUDE: игровая правка [PR #245](https://github.com/mpaykin1/meta6-lab/pull/245) прошла [META BOT на PR](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984334) и [focused 6/6](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984307), но на main PASS нет. После безопасного слияния актуального main в ремонтную ветку [13d85bb](https://github.com/mpaykin1/meta6-lab/commit/13d85bbf4e324cb01729c8a8464bf73364889a74) автоматический Library Machine **повторно** внёс посторонние `shared/library/index.json`, `shared/library/veil-terraces.json` коммитом [02ba0f5](https://github.com/mpaykin1/meta6-lab/commit/02ba0f5812afcae9467cdefa5cb7f3b381f6ee2f). Новый [META BOT](https://github.com/mpaykin1/meta6-lab/actions/runs/43018578169) имеет `action_required`, не PASS. STOROZHA [43012984349](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984349) дважды FAIL HTTP 403 GitHub API rate limit. Третья очистка бесполезна: машинная запись восстанавливает изменения, защищённые workflow/сторож не править. Нужны одобрение новых Actions (если доступно), устранение автоматического загрязнения PR и независимая проверка до squash; затем 2 PASS META BOT на main. | 2026-11-11 |
@@ -103,6 +112,9 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #191 | lab/sunken-city-reference-1109 | НУЖЕН CLAUDE: PR содержит исходный ZIP `reference-archives/zatonuvshiy-gorod-2026-11-09.zip` и существующий эталон `games/sunken-city-reference/index.html`, `games/sunken-city-reference/bot-adapter.js`; HEAD `e135682bcca49e309e117383c94046228b6facef`. Проверить целостность оригинала и обязательные META BOT/CI, самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/191 | 2026-11-12 |
 
 ## Ждёт Claude
+
+| #353 | `lab/fix-etalony-concurrency-20261117` | Исправление защищённого `.github/workflows/verify-etalony-sync.yml`: `cancel-in-progress: false` для main/schedule. [HEAD 31db37e](https://github.com/mpaykin1/meta6-lab/commit/31db37ec5cc99dc27564159681567747b91af43b), [KONTUR PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/44002079345), [browser PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/44002079368); mergeable=false, Claude должен устранить конфликт и проверить текущий HEAD перед слиянием. Разблокирует [#351](https://github.com/mpaykin1/meta6-lab/pull/351). | 2026-11-17 |
+
 
 Одна строка на PR; автоматическое слияние защищённых проверок запрещено.
 | #325 | lab/ink-black-grin-monster-20261115 | ЯДРО: после нормального [merge main b848d00](https://github.com/mpaykin1/meta6-lab/commit/b848d00f5ca3185be66363b3b1885db9639084ea) [META GAMES guard FAIL #43995067772](https://github.com/mpaykin1/meta6-lab/actions/runs/43995067772): исторический [a044eb6](https://github.com/mpaykin1/meta6-lab/commit/a044eb6c85fd457af8b7ad3a557ac23c46fddc02) меняет `.github/protected` без подписи Claude. Не переписывать историю/не обходить guard; нужен Claude. | 2026-11-17 |

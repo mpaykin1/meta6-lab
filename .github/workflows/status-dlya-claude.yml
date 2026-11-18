@@ -4,10 +4,17 @@ on:
     - cron: '43 */2 * * *'
   push:
     branches: [main]
-    paths:
-      - '**'
-      - '!automation/STATUS.md'
-      - '!automation/status.json'
+    # Не реагировать на коммиты других сводок — иначе каскад коммитов (OSHIBKI 1154).
+    paths-ignore:
+      - 'automation/STATUS.md'
+      - 'automation/status.json'
+      - 'ZADACHI.md'
+      - 'DISPETCHER.md'
+      - 'TOLKNUT.md'
+      - 'automation/SLIYANIE.md'
+      - 'rules/09-platforma/ZANYATO.md'
+      - 'reports/**'
+      - '**/PROGRESS.md'
   pull_request:
     paths:
       - 'scripts/status/**'
@@ -58,8 +65,9 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           for attempt in 1 2 3; do
             git add automation/STATUS.md automation/status.json
-            if git diff --cached --quiet; then
-              echo "No status changes"
+            if ! bash scripts/lab/meaningful-diff.sh --cached; then
+              git reset -q; git checkout -q -- automation/STATUS.md automation/status.json
+              echo "No meaningful status changes"
               exit 0
             fi
             git commit -m "status: refresh facts for Claude"

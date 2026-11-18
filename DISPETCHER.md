@@ -1,33 +1,10 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 3 · конфликт 0 · непроверено 0 · красные проверки 3 · нужен Claude 4
-
-### PR #325
-- PR: https://github.com/mpaykin1/meta6-lab/pull/325
-- Ветка: `lab/ink-black-grin-monster-20261115`
-- SHA: `8a82da03579ebfcb56127404e4e4f3acf0c7d9c6` · последний коммит: 2026-11-16T10:17:16Z
-- Проблема: Красная проверка: guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43847494401/job/133231216632)
-- Задание: Исправь guard по логу https://github.com/mpaykin1/meta6-lab/actions/runs/43847494401/job/133231216632 и повтори CI. Режим: маленькими шагами: 1 PR, не более 5 файлов
-- Взял: —
-
-### PR #332
-- PR: https://github.com/mpaykin1/meta6-lab/pull/332
-- Ветка: `lab/ink-carrion-stalker-3d-20261115`
-- SHA: `35b53ef7a7a1ad26251c690b4164a406b884c1ee` · последний коммит: 2026-11-16T04:17:23Z
-- Проблема: Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь Vercel по логу https://vercel.com/improve-world?upgradeToPro=build-rate-limit и повтори CI. Режим: маленькими шагами: 1 PR, не более 5 файлов
-- Взял: —
-
-### PR #337
-- PR: https://github.com/mpaykin1/meta6-lab/pull/337
-- Ветка: `lab/nadzor`
-- SHA: `1d174dbde0858dc335ceeef460e895826ae3fbb8` · последний коммит: 2026-11-16T16:44:14Z
-- Проблема: Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- Задание: Исправь Vercel по логу https://vercel.com/improve-world?upgradeToPro=build-rate-limit и повтори CI. Режим: маленькими шагами: 1 PR, не более 5 файлов
-- Взял: —
+Итог: зависло 0 · конфликт 0 · непроверено 0 · красные проверки 0 · нужен Claude 5
 
 ## НУЖЕН CLAUDE
+- [#363](https://github.com/mpaykin1/meta6-lab/pull/363) НУЖЕН CLAUDE: CI для 3D Master после разбиения #335
+- [#270](https://github.com/mpaykin1/meta6-lab/pull/270) Z01: PR #270 — сохранить исходный Library Machine guard при проверке камеры Veil Terraces
 - [#331](https://github.com/mpaykin1/meta6-lab/pull/331) БЕЗ ТОРМОЗОВ — очередь PR, безопасная синхронизация и саморазвитие (15.11)
 - [#245](https://github.com/mpaykin1/meta6-lab/pull/245) Зелёный судья: META BOT зелёный на main
-- [#270](https://github.com/mpaykin1/meta6-lab/pull/270) ЭТАЛОНЫ В БИБЛИОТЕКУ — Veil Terraces: отдельный модуль камеры, исходные байты, Chromium; [run #43173380458](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380458) PASS (1 камера); [quota FAIL #43173380383](https://github.com/mpaykin1/meta6-lab/actions/runs/43173380383); полных эталонов 0 → 0, систем в PR 0 → 1
 - [#248](https://github.com/mpaykin1/meta6-lab/pull/248) undefined

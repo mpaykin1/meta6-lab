@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "ink-car-bathyscaphe",
+  "title": "INK · Машина → Батискаф — объёмная акварельная машина, плавно превращающаяся в батискаф, камера 360°",
+  "status": "OWNER_PASS",
+  "date": "2026-11-17",
+  "added_by": "Claude",
+  "view": "https://mpaykin1.github.io/meta6/reference/ink-car-bathyscaphe/",
+  "view_lab": "https://mpaykin1.github.io/meta6-lab/reference/ink-car-bathyscaphe/",
+  "source": {
+    "repo": "mpaykin1/meta6-lab",
+    "branch": "lab/ink-car-bathyscaphe-ref-only",
+    "commit": "e3e8779bb9fe69db5a2f6c8172a1ca4fb1b4dc8e",
+    "origin_pr": 370
+  },
+  "depends_on": [
+    "reference/ink-fallen-guardian"
+  ],
+  "rules": [
+    "read-only (сам эталон не менять)",
+    "можно предложить при просьбе вставить машину/батискаф/трансформацию; новая модель по просьбе владельца делается новой"
+  ],
+  "files": [
+    {
+      "path": "reference/ink-car-bathyscaphe/README.md",
+      "git_blob_sha": "c15c61b558f6b69d2c726c72b4d8fb59ceeb79b0"
+    },
+    {
+      "path": "reference/ink-car-bathyscaphe/index.html",
+      "git_blob_sha": "7ac04b29945510396223d673d5fc63701608de89"
+    },
+    {
+      "path": "reference/ink-car-bathyscaphe/ink-car-bathyscaphe.js",
+      "git_blob_sha": "7744942da3b93a271d727b98f5daad8621510a21"
+    }
+  ]
+}

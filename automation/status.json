@@ -1,16 +1,46 @@
 {
-  "generated_at": "2026-11-17T04:03:14.642Z",
+  "generated_at": "2026-11-18T08:25:59.242Z",
   "sha": {
-    "lab": "cb9dbfc1800b66f923e9364bc38db1f77d0bb6c6",
-    "mg": "5c259fcd552f04d40f6531907a5f19ef551be259"
+    "lab": "fd1ba758ec49ec50088e0ffa8e94e25856c89f5a",
+    "mg": "6c338382cd2472eca9a1d0c51f996ab0656b692f"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "нет данных",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44266797241",
   "review": {
     "protected": [
+      {
+        "number": 413,
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
+        "paths": [
+          ".github/workflows/odin-pr.yml",
+          "scripts/odin-pr/mutate-odin-pr.mjs"
+        ]
+      },
+      {
+        "number": 382,
+        "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 362,
+        "sha": "51f2ef012ec9cf31d0d68c83ba02fac0951974b7",
+        "paths": [
+          "automation/asset-check/test_3d_master.py"
+        ]
+      },
+      {
+        "number": 372,
+        "sha": "0e5d7893812d336299d041199deda50557a07395",
+        "paths": [
+          "scripts/karta-sil/mutate-current-claude-marker.mjs",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
       {
         "number": 352,
         "sha": "99a64541e458eb39f499c55655649abb87bf5bc8",
@@ -56,299 +86,285 @@
         ]
       },
       {
-        "number": 341,
-        "sha": "d8cf489ee7b9ca0a4cf136cd1ee4efc7ab702359",
-        "paths": "нет данных"
-      },
-      {
         "number": 339,
         "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 340,
         "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
       },
       {
         "number": 338,
         "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 321,
         "sha": "00c22fba0c1fbcf71a535ddd9342da286e875b27",
-        "paths": "нет данных"
-      },
-      {
-        "number": 334,
-        "sha": "27422c8b6563e2a8d2be46df1c078a9f32feef59",
-        "paths": "нет данных"
-      },
-      {
-        "number": 333,
-        "sha": "960bab97a6c4a9c5e7cca673bbcbfca43e0f0d66",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/ink-raven-3d.yml"
+        ]
       },
       {
         "number": 330,
         "sha": "17690b22fcbf4893451d7d7ec354f133abd6b738",
-        "paths": "нет данных"
-      },
-      {
-        "number": 329,
-        "sha": "7875be74f02beeac1694a571134f160a763c5007",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-bot-focused.yml"
+        ]
       },
       {
         "number": 327,
         "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20",
-        "paths": "нет данных"
-      },
-      {
-        "number": 323,
-        "sha": "292900342500a31633395f94bd1cbfa55200587f",
-        "paths": "нет данных"
-      },
-      {
-        "number": 328,
-        "sha": "c1e162b552f9479bf16341ef0469995896a1197b",
-        "paths": "нет данных"
-      },
-      {
-        "number": 324,
-        "sha": "c0418db87f2de8c25c8b5a708a7de8b65b4cf8cb",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
       },
       {
         "number": 320,
         "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
       },
       {
         "number": 301,
         "sha": "4048fca93da0d4d7be883e61cd9c1d06f6d71a4f",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml",
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
       },
       {
         "number": 302,
         "sha": "6ec51cb945f1e28fb2e7cab3cb215bcc27973de1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/status/mutate-finish-summary.mjs",
+          "scripts/status/selftest.mjs"
+        ]
       },
       {
         "number": 318,
         "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-source-only-gate.mjs"
+        ]
       },
       {
         "number": 316,
         "sha": "4574e06a308792514a92db2f6328eb444f92d62a",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/auditor.yml",
+          ".github/workflows/dispetcher.yml",
+          ".github/workflows/investigation-snapshot.yml",
+          ".github/workflows/meta-repair-bot.yml",
+          ".github/workflows/sliyanie-status.yml",
+          ".github/workflows/zadachi-watch.yml",
+          ".github/workflows/zanyato-watch.yml",
+          "scripts/lab/mutate-pr-status-batch.mjs",
+          "scripts/lab/mutate-sliyanie-facts.py"
+        ]
       },
       {
         "number": 317,
         "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03",
-        "paths": "нет данных"
-      },
-      {
-        "number": 312,
-        "sha": "bc24124303060dcb9ad75353d6a6f1ba967dd169",
-        "paths": "нет данных"
-      },
-      {
-        "number": 308,
-        "sha": "e07b085e4bec73081ff804be24a7398ada4b68c3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-branch-ownership.mjs"
+        ]
       },
       {
         "number": 315,
         "sha": "4319f8056814a5986b87200676b87f585c09705c",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/storozha-reference.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 309,
         "sha": "41331671a13c476ff8ec3b7497dd3a47517dade8",
-        "paths": "нет данных"
-      },
-      {
-        "number": 307,
-        "sha": "fb4cf4f5bce602dee82910ea066637feb7418c6d",
-        "paths": "нет данных"
-      },
-      {
-        "number": 304,
-        "sha": "af6238c7237cd129f58a2d66826b8405e9376f05",
-        "paths": "нет данных"
-      },
-      {
-        "number": 298,
-        "sha": "4e17483f42baf5300da95c840962218958994b71",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 296,
         "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a",
-        "paths": "нет данных"
-      },
-      {
-        "number": 295,
-        "sha": "b158e1dd42db709100c79ceb5ea6745db53aa2bd",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_htmlpack.py"
+        ]
       },
       {
         "number": 293,
         "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
-        "paths": "нет данных"
-      },
-      {
-        "number": 294,
-        "sha": "f55c2e87fbd99f261977dbe7da58700a0a73a50e",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 292,
         "sha": "5df54dc0764daa77154709207e612b311127108d",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 267,
         "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py",
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 285,
         "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
-        "paths": "нет данных"
-      },
-      {
-        "number": 279,
-        "sha": "d3f16b40a3c59ded669053388c0cf26130a7ed74",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 241,
         "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
       },
       {
         "number": 259,
         "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
-        "paths": "нет данных"
-      },
-      {
-        "number": 263,
-        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4",
-        "paths": "нет данных"
-      },
-      {
-        "number": 257,
-        "sha": "79f4465b6667092e16115222325c012ca73cc137",
-        "paths": "нет данных"
-      },
-      {
-        "number": 256,
-        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec",
-        "paths": "нет данных"
-      },
-      {
-        "number": 243,
-        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
       },
       {
         "number": 246,
         "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
       },
       {
         "number": 265,
         "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
       },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
-        "paths": "нет данных"
-      },
-      {
-        "number": 244,
-        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
       },
       {
         "number": 238,
         "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
-        "paths": "нет данных"
-      },
-      {
-        "number": 224,
-        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74",
-        "paths": "нет данных"
-      },
-      {
-        "number": 125,
-        "sha": "9f50910368238775bda40729722ec3512f14e623",
-        "paths": "нет данных"
-      },
-      {
-        "number": 232,
-        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": "нет данных"
-      },
-      {
-        "number": 126,
-        "sha": "7f5616591ca5baa37186d86621299d32c77230b1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
       },
       {
         "number": 236,
         "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": "нет данных"
-      },
-      {
-        "number": 229,
-        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
       },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 227,
         "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
-        "paths": "нет данных"
-      },
-      {
-        "number": 226,
-        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/status-dlya-claude.yml",
+          "scripts/status/selftest.mjs"
+        ]
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
       }
     ],
     "redLab": [],
@@ -365,6 +381,8 @@
       "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
+      "| B2: независимый верификатор движения из #258 | lab/z04-b2-extract-motion-20261117 | свободно (зависло 9 ч, было: чат ChatGPT) | 2026-11-17T02:24:52.054Z |",
+      "| НАДЗОР — чат ChatGPT | lab/nadzor | свободно (зависло 10 ч, было: чат ChatGPT (надзор)) | 2026-11-17T01:33:05.414Z |",
       "| КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |",
       "| БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |",
       "| КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |",
@@ -461,48 +479,112 @@
     },
     "verification": {
       "M1": {
-        "value": "нет данных",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036",
+        "value": "не подтверждено",
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036",
         "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42637860036"
       },
       "M2": {
-        "value": "нет данных",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685",
+        "value": "не подтверждено",
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685",
         "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42641995685"
       },
       "M3": {
-        "value": "нет данных",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
+        "value": "не подтверждено",
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
         "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       "M4": {
-        "value": "нет данных",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211",
+        "value": "не подтверждено",
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211",
         "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211"
       },
       "M5": {
-        "value": "нет данных",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
+        "value": "не подтверждено",
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211",
         "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       "B1": {
-        "value": "нет данных",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082",
-        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082"
+        "value": "подтверждено",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44227036072"
       },
       "P1": {
-        "value": "нет данных",
-        "reason": "GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308",
+        "value": "не подтверждено",
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308",
         "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308"
       }
     }
   },
   "pr": {
-    "open": 40,
+    "open": 35,
     "conflicts": "нет данных",
-    "merged": 68,
-    "closed": 113,
+    "merged": 81,
+    "closed": 153,
     "mergedItems": [
+      {
+        "number": 413,
+        "title": "ODIN PR: один PR на дело (дубли и журнал в PR)",
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258"
+      },
+      {
+        "number": 384,
+        "title": "feat(assets): BLACK TRAIN — layered storm clouds with slow a",
+        "sha": "21dd327c959710943bc4f5a04c4f5dcf60e1d136"
+      },
+      {
+        "number": 373,
+        "title": "INK · Чернильный оскал — чистая 3D-модель и сцена без защищё",
+        "sha": "0c269f36f4f3f1801ba5147eb59c5d3355cf5768"
+      },
+      {
+        "number": 387,
+        "title": "BLACK TRAIN: живой туман освещается фонариком, красным сигна",
+        "sha": "aa47594a5fc4cf4ea0362ca73251fc0171937a2f"
+      },
+      {
+        "number": 361,
+        "title": "Z01: корректный подсчёт живых PR без draft",
+        "sha": "894a85831a9374e805753b71b0c4faa9f27d6bd7"
+      },
+      {
+        "number": 383,
+        "title": "BLACK TRAIN: опубликовать игровую сцену с 14 ассетами",
+        "sha": "854aa2b15bde75ab4cd6e22a1749a63f69ed9846"
+      },
+      {
+        "number": 382,
+        "title": "feat(assets): BLACK TRAIN — 14 заказанных ассетов без нового",
+        "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d"
+      },
+      {
+        "number": 369,
+        "title": "docs(z01): verify live PR identity before backlog decisions",
+        "sha": "ad5bebf3eb5b68d3cc0c6bd8ac63ab26a563cb88"
+      },
+      {
+        "number": 362,
+        "title": "feat(3d-master): профессиональный аудит glTF геометрии (част",
+        "sha": "51f2ef012ec9cf31d0d68c83ba02fac0951974b7"
+      },
+      {
+        "number": 377,
+        "title": "INK · Регистрация эталона «Машина → Батискаф» (МГ + МГЛ ссыл",
+        "sha": "04fe7850e474ec7c2f7ee74f67728b51cfa084cb"
+      },
+      {
+        "number": 376,
+        "title": "INK · Эталон: машина → батискаф (только папка reference)",
+        "sha": "11f9ac58d0e1b46f61d8db2a9e8110091de4b104"
+      },
+      {
+        "number": 372,
+        "title": "fix(z01): не направлять PR к Claude по историческим пометкам",
+        "sha": "0e5d7893812d336299d041199deda50557a07395"
+      },
+      {
+        "number": 359,
+        "title": "docs: единый свод правил и идей для «Лучника в тумане»",
+        "sha": "0a37a80d264aaac71832ab16d9ca82b306b7cec6"
+      },
       {
         "number": 352,
         "title": "META BOT: ядро отклоняет пустой и неизвестный список экранов",
@@ -846,6 +928,36 @@
     ],
     "protectedItems": [
       {
+        "number": 413,
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
+        "paths": [
+          ".github/workflows/odin-pr.yml",
+          "scripts/odin-pr/mutate-odin-pr.mjs"
+        ]
+      },
+      {
+        "number": 382,
+        "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 362,
+        "sha": "51f2ef012ec9cf31d0d68c83ba02fac0951974b7",
+        "paths": [
+          "automation/asset-check/test_3d_master.py"
+        ]
+      },
+      {
+        "number": 372,
+        "sha": "0e5d7893812d336299d041199deda50557a07395",
+        "paths": [
+          "scripts/karta-sil/mutate-current-claude-marker.mjs",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
         "number": 352,
         "sha": "99a64541e458eb39f499c55655649abb87bf5bc8",
         "paths": [
@@ -890,380 +1002,368 @@
         ]
       },
       {
-        "number": 341,
-        "sha": "d8cf489ee7b9ca0a4cf136cd1ee4efc7ab702359",
-        "paths": "нет данных"
-      },
-      {
         "number": 339,
         "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 340,
         "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
       },
       {
         "number": 338,
         "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 321,
         "sha": "00c22fba0c1fbcf71a535ddd9342da286e875b27",
-        "paths": "нет данных"
-      },
-      {
-        "number": 334,
-        "sha": "27422c8b6563e2a8d2be46df1c078a9f32feef59",
-        "paths": "нет данных"
-      },
-      {
-        "number": 333,
-        "sha": "960bab97a6c4a9c5e7cca673bbcbfca43e0f0d66",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/ink-raven-3d.yml"
+        ]
       },
       {
         "number": 330,
         "sha": "17690b22fcbf4893451d7d7ec354f133abd6b738",
-        "paths": "нет данных"
-      },
-      {
-        "number": 329,
-        "sha": "7875be74f02beeac1694a571134f160a763c5007",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-bot-focused.yml"
+        ]
       },
       {
         "number": 327,
         "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20",
-        "paths": "нет данных"
-      },
-      {
-        "number": 323,
-        "sha": "292900342500a31633395f94bd1cbfa55200587f",
-        "paths": "нет данных"
-      },
-      {
-        "number": 328,
-        "sha": "c1e162b552f9479bf16341ef0469995896a1197b",
-        "paths": "нет данных"
-      },
-      {
-        "number": 324,
-        "sha": "c0418db87f2de8c25c8b5a708a7de8b65b4cf8cb",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
       },
       {
         "number": 320,
         "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
       },
       {
         "number": 301,
         "sha": "4048fca93da0d4d7be883e61cd9c1d06f6d71a4f",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml",
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
       },
       {
         "number": 302,
         "sha": "6ec51cb945f1e28fb2e7cab3cb215bcc27973de1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/status/mutate-finish-summary.mjs",
+          "scripts/status/selftest.mjs"
+        ]
       },
       {
         "number": 318,
         "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-source-only-gate.mjs"
+        ]
       },
       {
         "number": 316,
         "sha": "4574e06a308792514a92db2f6328eb444f92d62a",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/auditor.yml",
+          ".github/workflows/dispetcher.yml",
+          ".github/workflows/investigation-snapshot.yml",
+          ".github/workflows/meta-repair-bot.yml",
+          ".github/workflows/sliyanie-status.yml",
+          ".github/workflows/zadachi-watch.yml",
+          ".github/workflows/zanyato-watch.yml",
+          "scripts/lab/mutate-pr-status-batch.mjs",
+          "scripts/lab/mutate-sliyanie-facts.py"
+        ]
       },
       {
         "number": 317,
         "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03",
-        "paths": "нет данных"
-      },
-      {
-        "number": 312,
-        "sha": "bc24124303060dcb9ad75353d6a6f1ba967dd169",
-        "paths": "нет данных"
-      },
-      {
-        "number": 308,
-        "sha": "e07b085e4bec73081ff804be24a7398ada4b68c3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-branch-ownership.mjs"
+        ]
       },
       {
         "number": 315,
         "sha": "4319f8056814a5986b87200676b87f585c09705c",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/storozha-reference.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 309,
         "sha": "41331671a13c476ff8ec3b7497dd3a47517dade8",
-        "paths": "нет данных"
-      },
-      {
-        "number": 307,
-        "sha": "fb4cf4f5bce602dee82910ea066637feb7418c6d",
-        "paths": "нет данных"
-      },
-      {
-        "number": 304,
-        "sha": "af6238c7237cd129f58a2d66826b8405e9376f05",
-        "paths": "нет данных"
-      },
-      {
-        "number": 298,
-        "sha": "4e17483f42baf5300da95c840962218958994b71",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 296,
         "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a",
-        "paths": "нет данных"
-      },
-      {
-        "number": 295,
-        "sha": "b158e1dd42db709100c79ceb5ea6745db53aa2bd",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_htmlpack.py"
+        ]
       },
       {
         "number": 293,
         "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
-        "paths": "нет данных"
-      },
-      {
-        "number": 294,
-        "sha": "f55c2e87fbd99f261977dbe7da58700a0a73a50e",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 292,
         "sha": "5df54dc0764daa77154709207e612b311127108d",
-        "paths": "нет данных"
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 267,
         "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py",
+          "automation/asset-check/test_kinds.py"
+        ]
       },
       {
         "number": 285,
         "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
-        "paths": "нет данных"
-      },
-      {
-        "number": 279,
-        "sha": "d3f16b40a3c59ded669053388c0cf26130a7ed74",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/meta-games-guard.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 241,
         "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
       },
       {
         "number": 259,
         "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
-        "paths": "нет данных"
-      },
-      {
-        "number": 263,
-        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4",
-        "paths": "нет данных"
-      },
-      {
-        "number": 257,
-        "sha": "79f4465b6667092e16115222325c012ca73cc137",
-        "paths": "нет данных"
-      },
-      {
-        "number": 256,
-        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec",
-        "paths": "нет данных"
-      },
-      {
-        "number": 243,
-        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
       },
       {
         "number": 246,
         "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
       },
       {
         "number": 265,
         "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
       },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
-        "paths": "нет данных"
-      },
-      {
-        "number": 244,
-        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
       },
       {
         "number": 238,
         "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
-        "paths": "нет данных"
-      },
-      {
-        "number": 224,
-        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74",
-        "paths": "нет данных"
-      },
-      {
-        "number": 125,
-        "sha": "9f50910368238775bda40729722ec3512f14e623",
-        "paths": "нет данных"
-      },
-      {
-        "number": 232,
-        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
       },
       {
         "number": 231,
         "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": "нет данных"
-      },
-      {
-        "number": 126,
-        "sha": "7f5616591ca5baa37186d86621299d32c77230b1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
       },
       {
         "number": 236,
         "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": "нет данных"
-      },
-      {
-        "number": 229,
-        "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1",
-        "paths": "нет данных"
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
       },
       {
         "number": 230,
         "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 227,
         "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
-        "paths": "нет данных"
-      },
-      {
-        "number": 226,
-        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
       },
       {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/status-dlya-claude.yml",
+          "scripts/status/selftest.mjs"
+        ]
       },
       {
         "number": 223,
         "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
       },
       {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
       },
       {
         "number": 217,
         "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": "нет данных"
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 2636,
+      "count": 2903,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 40,
-      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:24, reference:27, rules:9, SOURCE_INDEX.md:1"
+      "count": 45,
+      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:33, reference:31, rules:9, SOURCE_INDEX.md:1"
     }
   },
   "games": [
     {
       "name": "archer-in-the-fog",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "asqura-ilya-reference",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "broken-city",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "broken-city-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "ostrov-aptekarya",
-      "bot": "нет данных",
+      "bot": "прошла",
       "storefront": "нет"
     },
     {
       "name": "rainbow-acceleration",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "skin-trainer",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "sumerki-i-pepel-2",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "sumerki-i-pepel-2-copy",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "нет"
     },
     {
       "name": "twilight-isle-classic",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "twilight-isles",
-      "bot": "нет данных",
+      "bot": "не запускалась",
       "storefront": "да"
     },
     {
       "name": "veil-terraces",
-      "bot": "нет данных",
+      "bot": "прошла",
       "storefront": "да"
     },
     {
       "name": "wild-train-prologue",
-      "bot": "нет данных",
+      "bot": "не прошла",
       "storefront": "да"
     }
   ],
   "errors": [
+    "| 2026111706 | 17.11.2026 | LAB Pages: сайт выкладывается, но шаг `check-links` с 11.11 ни разу не зелёный — выходит за 30 мин (таймаут = «cancelled») из‑за ~3000 повторов по мёртвым адресам: в main `games/skin-trainer` грузит несуществующий `skins/runtime/skin-runtime.js`; `LINKS.txt` держит `games/twilight-island/` и `games/ashen-path-asset-pack/` (их нет в main, только в нескольких preview); в старых preview нет `shared/components/observer-*` и шрифтов twilight-isles. [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/44168607909) | Суточный контроль Claude: лог check-links | ЛОВУШКИ ЕЩЁ НЕТ — починить ссылки (не ослаблять проверку), затем ловушка «check-links не зелёный > 24 ч = тревога» |",
+    "| 2026111705 | 17.11.2026 | META BOT при `bot.json.secondRun=\"hash\"` пропускал сбой второго запуска: `again.ok=false` или `again.hashes=[]` не влияли на `checkGame().ok`, получался ложный PASS | Воспроизведение `checkGame` на `main` с 4 исходами, кандидат исправляет 2 ложных PASS (патч для защищённого ядра) | `scripts/platform/mutate-meta-bot-second-run.mjs`: 3 мутации, включая маскировку по `secondRun=\"hash\"`; `docs/patches/meta-bot-second-run.patch` |",
     "| 2026111702 | 17.11.2026 | Защищённое ядро META BOT `checkGame` возвращало `{ok:true,runs:[]}` при `viewports: []` или неизвестном экране — ложный успех без открытия игры | Воспроизведено на исходном `scripts/meta-bot/core.mjs` (PR #311, reports/bot-audit/PROGRESS.md) | scripts/meta-bot/mutate-viewports.mjs: настоящее ядро, 7 неверных и 4 верных конфигурации, checkGame отклоняет, 3 мутации ядра |",
     "| 2026111701 | 17.11.2026 | META BOT could report success for zero screens; actual game configuration now fails KONTUR before acceptance | empty viewports and unknown screen fixtures | scripts/platform/mutate-bot-config.mjs: 3 mutations and real game configurations |",
     "| 2026111401 | 14.11.2026 | Repair Bot молча пропускал недоступные JSON и менял часть набора при неисправимой ошибке; ссылка в предке позволяла писать вне проекта | Воспроизведено изолированными git-fixtures | scripts/repair-bot/selftest-safety.mjs: missing file, directory, batch rollback, junction; 3 мутации |",
@@ -1326,6 +1426,14 @@
     "| 1149 | 13.11.2026 | В 22 активных workflow не было concurrency; в трёх существующих смешанные push/PR могли отменять push/main | Сверка 44 workflow с веткой lab/ci-ochered-concurrency; отсутствие параллельного ограничения | `scripts/lab/mutate-workflow-concurrency.mjs`: удалённая настройка, безусловная отмена, пустая группа и маскировка комментарием |",
     "| 1150 | 17.11.2026 | GITHUB_TOKEN упирался в лимит API (HTTP 403 «rate limit exceeded for installation»): 10 сторожей ходили в API каждый час, а B1 запускал браузер на каждом коммите сторожа в ZADACHI/STATUS | `.github/workflows/*` (расписания), `bot-b1-open-all.yml` (paths-ignore) | `scripts/lab/mutate-pr-status-batch.mjs`: 7 ловушек расписания на новые частоты (раз в 2–3 ч) |",
     "| 1151 | 17.11.2026 | Claude влил verify-etalony-sync.yml с cancel-in-progress: true — постоянная ловушка concurrency краснела у KONTUR Guard на всех PR | .github/workflows/verify-etalony-sync.yml | scripts/lab/mutate-workflow-concurrency.mjs (уже ловит; урок: перед вливанием нового workflow прогонять постоянные мутации KONTUR) |",
-    "| 1152 | 17.11.2026 | Прямые пуши в main не проходили kontur-guard (он только на PR), поэтому поломка Claude (1151) всплыла на чужих PR | .github/workflows/kontur-main.yml, scripts/claude/pre-push.sh | все постоянные мутации на каждом содержательном пуше в main + обязательный pre-push Claude |"
+    "| 1152 | 17.11.2026 | Прямые пуши в main не проходили kontur-guard (он только на PR), поэтому поломка Claude (1151) всплыла на чужих PR | .github/workflows/kontur-main.yml, scripts/claude/pre-push.sh | все постоянные мутации на каждом содержательном пуше в main + обязательный pre-push Claude |",
+    "| 1156 | 17.11.2026 | Диспетчер маршрутизировал PR к Claude по исторической строке «НУЖЕН CLAUDE», хотя текущая первая строка уже «ЖДЁТ» или «ГОТОВ К ПРОВЕРКЕ» | [PR #331](https://github.com/mpaykin1/meta6-lab/pull/331), проверка старого regex в `scripts/karta-sil/route.mjs` | `scripts/karta-sil/mutate-current-claude-marker.mjs`: проверка текущего статуса, эскалации после двух провалов и 3 мутации, в том числе обман по номеру PR |",
+    "| 2026111703 | 17.11.2026 | Ассеты спрайт-стакинга (PR #367, готический город) сделаны «по списку», но не по эскизу: постройки парят над островами эталона, фон — плоская стена из полос, собор — трапеция с полосами, самолёт над крышами вместо полёта между башнями; бот проверял только PNG-срезы, не снимок игры рядом с эскизом | asset-packs/incoming/nebesny-pilot-gotika/ | вид spritestack: «плоский фасад из полос» и «здание без земли» — задание в automation/prompts/NEBESNY_GOTIKA_FIX.md п.2; урок в SPEC.md «Уроки» 2026-11-17 |",
+    "| 1153 | 17.11.2026 | Система INK: рецепт, БЕЗ ПАТТЕРНОВ, шаблон и сканер лежали только в ветках (#286 закрыт без слияния, #290 висит) — ChatGPT в main их не видел; рецепт и ink.md отправляли к старому рендеру с узором из синусов | ink.md, RECEPT_INK_MIR.md, BEZ_PATTERNOV.md, shared/ink/, scripts/visual/ | scripts/visual/mutate-no-patterns.mjs (17 ловушек) — теперь постоянная мутация KONTUR; карточка Z20 |",
+    "| 1154 | 17.11.2026 | Сторожа коммитили сводки, когда менялись только время/SHA, а status-dlya-claude запускался на каждый коммит другой сводки — каскад ~60 коммитов за ночь и расход лимита API | zadachi-watch, status-dlya-claude, sliyanie-status, dispetcher, zanyato-watch, karta-sil | scripts/lab/meaningful-diff.sh + постоянная ловушка scripts/lab/mutate-meaningful-diff.mjs |",
+    "| 1155 | 17.11.2026 | Эталоны описаны в 4 местах (ink.md, README, паспорта, AGENTS) — чаты не видели полного списка | ETALONY.md | scripts/lab/verify-etalony-catalog.mjs + mutate-etalony-catalog.mjs |",
+    "| 2026111704 | 17.11.2026 | BLACK TRAIN PR #382 визуально показывал ассеты, но не позволял снять одинаковые кадры с показанным/скрытым отдельным ассетом; зелёный ASSET CHECK для incoming не проверял этот контракт | [PR #382](https://github.com/mpaykin1/meta6-lab/pull/382), [изолятор](https://github.com/mpaykin1/meta6-lab/commit/f86c89870ee3803e12bd721a44c822ce8a0007c7) | `kinds/ink.py` IK18; `test_kinds.py` хорошая/дефектная сцены; мутант в `mutate_bot.py` |",
+    "| 2026111801 | 18.11.2026 | Бот ассетов 16–17.11: 23 ветки, слита 1 игра — 5 чатов параллельно делали Last Healer (#392–#395), PR ассетов правили общие файлы и застревали в конфликтах, «зелёный ASSET CHECK» не значил HARD=0 для incoming, compare.png не делали | разбор Claude 18.11, промпт v3.4 | `scripts/asset-guard/rules.mjs` + `scripts/asset-guard/mutate-asset-guard.mjs` (9 ловушек, 5/5 мутантов), шаг ASSET GUARD и HARD=0 для паков PR в `.github/workflows/asset-check.yml` |",
+    "| 2026111802 | 18.11.2026 | Автозадачи 16–17.11 открыли ~20 PR по одному делу Z01 (#351–#407): каждый правил общий журнал automation/NADZOR.md и карточку Z01_ZAVALY.md, все конфликтовали между собой, ни один не слился, следующий запуск открывал новый; GPT.md указывал журнал в несуществующей ветке | разбор Claude 18.11 | `scripts/odin-pr/core.mjs` + `scripts/odin-pr/mutate-odin-pr.mjs` (7 мутантов), проверка `.github/workflows/odin-pr.yml`, правило «ОДИН PR НА ДЕЛО» в GPT.md 0А |"
   ]
 }

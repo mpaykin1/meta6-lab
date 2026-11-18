@@ -31,9 +31,9 @@ export function indexOpened(opened) {
  const openNumbers=new Set(openPrs.keys());
  return {openNumbers,openPrs};
 }
-export async function listOpenPullRequests(request = api, {stopOnShortPage=false}={}) {
+export async function listOpenPullRequests(request = api, {stopOnShortPage=true}={}) {
  const result = new Map();
- for(let page=1;;page++){
+ for(let page=1;page<=1000;page++){
   let batch;
   try { batch=await request('/pulls?state=open&per_page=100&page='+page); }
   catch(error) { throw Error('GitHub API open PRs: нет данных: '+error.message); }

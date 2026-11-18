@@ -61,6 +61,7 @@ try {
   browser = await chromium.launch({headless: true, executablePath: chrome || undefined,
     args: ['--no-sandbox', '--disable-dev-shm-usage', '--enable-webgl', '--enable-unsafe-swiftshader', '--use-gl=angle', '--use-angle=swiftshader', '--autoplay-policy=no-user-gesture-required', '--no-proxy-server']});
   const page = await browser.newPage({viewport: {width: W, height: H}, deviceScaleFactor: 1});
+  page.setDefaultTimeout(120000);
   page.on('pageerror', e => report.errors.push('pageerror: ' + e.message.slice(0, 200)));
   const html = join(pack, 'index.html');
   if (!existsSync(html)) throw Error('в паке нет index.html');
@@ -104,6 +105,7 @@ try {
   const refShots = [];
   if (refHtml) {
     const rp = await browser.newPage({viewport: {width: W, height: H}, deviceScaleFactor: 1});
+    rp.setDefaultTimeout(120000);
     try {
       await rp.goto(url(refHtml), {waitUntil: 'commit', timeout: 60000}); await rp.waitForLoadState('load', {timeout: 120000}).catch(() => {});
       for (const t of [2500, 1500, 1500]) { await rp.waitForTimeout(t); refShots.push((await rp.screenshot({type: 'png'})).toString('base64')); }
@@ -125,7 +127,7 @@ try {
     const TW = 300, TH = 169, PAD = 10, ROW = TH + 34, top = 40 + TH + 40;
     const c = document.getElementById('c'); c.width = PAD + (TW + PAD) * 3; c.height = top + rows.length * ROW + PAD;
     const g = c.getContext('2d'); g.fillStyle = '#111'; g.fillRect(0, 0, c.width, c.height);
-    g.fillStyle = '#eee'; g.font = 'bold 18px sans-serif'; g.fillText(title, PAD, 26);
+    g.fillStyle = '#eee'; g.font = 'bold 18px sans-serif'; g.fillText(title, PAD, 22);
     const fit = (img, x, y, w, h, crop) => {
       g.fillStyle = '#000'; g.fillRect(x, y, w, h); if (!img) return;
       const sx = crop ? crop.x : 0, sy = crop ? crop.y : 0, sw = crop ? crop.w : img.width, sh = crop ? crop.h : img.height;
@@ -134,9 +136,9 @@ try {
     };
     const refs = refShots.length ? refShots : [];
     g.font = '13px sans-serif'; g.fillStyle = '#9cf';
-    g.fillText(refs.length ? 'ЭТАЛОН (3 кадра)' : 'ЭТАЛОН НЕ НАЙДЕН — ниже вся сцена пака', PAD, 48 - 12);
+    g.fillText(refs.length ? 'ЭТАЛОН (3 кадра)' : 'ЭТАЛОН НЕ НАЙДЕН — ниже вся сцена пака', PAD, 40);
     const heads = refs.length ? refs : [scene];
-    for (let i = 0; i < heads.length; i++) fit(await load('data:image/png;base64,' + heads[i]), PAD + i * (TW + PAD), 44, TW, TH);
+    for (let i = 0; i < heads.length; i++) fit(await load('data:image/png;base64,' + heads[i]), PAD + i * (TW + PAD), 46, TW, TH);
     g.fillStyle = '#9cf'; g.fillText('ОБРАЗЕЦ ВЛАДЕЛЬЦА', PAD, top - 8); g.fillText('НОВЫЙ АССЕТ (крупно, по рамке)', PAD + TW + PAD, top - 8); g.fillText('АССЕТ В СЦЕНЕ', PAD + 2 * (TW + PAD), top - 8);
     for (let r = 0; r < rows.length; r++) {
       const row = rows[r], y = top + r * ROW, shot = await load(row.shot);

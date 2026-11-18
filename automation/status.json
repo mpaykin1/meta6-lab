@@ -1,16 +1,24 @@
 {
-  "generated_at": "2026-11-17T11:13:06.329Z",
+  "generated_at": "2026-11-18T06:52:37.058Z",
   "sha": {
-    "lab": "5c1c377591cf670c6a9676ae5d9e6e60be9e227c",
+    "lab": "2abb3a335d2ec62c61a1e4ec25cad4c2b39942b6",
     "mg": "2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44071800165",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44254436884",
   "review": {
     "protected": [
+      {
+        "number": 413,
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
+        "paths": [
+          ".github/workflows/odin-pr.yml",
+          "scripts/odin-pr/mutate-odin-pr.mjs"
+        ]
+      },
       {
         "number": 382,
         "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d",
@@ -363,7 +371,7 @@
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
-      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
+      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
       "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
       "| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |",
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
@@ -373,6 +381,8 @@
       "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
+      "| B2: независимый верификатор движения из #258 | lab/z04-b2-extract-motion-20261117 | свободно (зависло 9 ч, было: чат ChatGPT) | 2026-11-17T02:24:52.054Z |",
+      "| НАДЗОР — чат ChatGPT | lab/nadzor | свободно (зависло 10 ч, было: чат ChatGPT (надзор)) | 2026-11-17T01:33:05.414Z |",
       "| КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |",
       "| БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |",
       "| КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |",
@@ -495,7 +505,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44060696524"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44227036072"
       },
       "P1": {
         "value": "не подтверждено",
@@ -505,11 +515,31 @@
     }
   },
   "pr": {
-    "open": 42,
+    "open": 39,
     "conflicts": "нет данных",
-    "merged": 77,
-    "closed": 121,
+    "merged": 81,
+    "closed": 146,
     "mergedItems": [
+      {
+        "number": 413,
+        "title": "ODIN PR: один PR на дело (дубли и журнал в PR)",
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258"
+      },
+      {
+        "number": 384,
+        "title": "feat(assets): BLACK TRAIN — layered storm clouds with slow a",
+        "sha": "21dd327c959710943bc4f5a04c4f5dcf60e1d136"
+      },
+      {
+        "number": 373,
+        "title": "INK · Чернильный оскал — чистая 3D-модель и сцена без защищё",
+        "sha": "0c269f36f4f3f1801ba5147eb59c5d3355cf5768"
+      },
+      {
+        "number": 387,
+        "title": "BLACK TRAIN: живой туман освещается фонариком, красным сигна",
+        "sha": "aa47594a5fc4cf4ea0362ca73251fc0171937a2f"
+      },
       {
         "number": 361,
         "title": "Z01: корректный подсчёт живых PR без draft",
@@ -898,6 +928,14 @@
     ],
     "protectedItems": [
       {
+        "number": 413,
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
+        "paths": [
+          ".github/workflows/odin-pr.yml",
+          "scripts/odin-pr/mutate-odin-pr.mjs"
+        ]
+      },
+      {
         "number": 382,
         "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d",
         "paths": [
@@ -1248,7 +1286,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2773,
+      "count": 2875,
       "folders": "нет данных"
     },
     "mg": {
@@ -1324,6 +1362,8 @@
     }
   ],
   "errors": [
+    "| 2026111706 | 17.11.2026 | LAB Pages: сайт выкладывается, но шаг `check-links` с 11.11 ни разу не зелёный — выходит за 30 мин (таймаут = «cancelled») из‑за ~3000 повторов по мёртвым адресам: в main `games/skin-trainer` грузит несуществующий `skins/runtime/skin-runtime.js`; `LINKS.txt` держит `games/twilight-island/` и `games/ashen-path-asset-pack/` (их нет в main, только в нескольких preview); в старых preview нет `shared/components/observer-*` и шрифтов twilight-isles. [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/44168607909) | Суточный контроль Claude: лог check-links | ЛОВУШКИ ЕЩЁ НЕТ — починить ссылки (не ослаблять проверку), затем ловушка «check-links не зелёный > 24 ч = тревога» |",
+    "| 2026111705 | 17.11.2026 | META BOT при `bot.json.secondRun=\"hash\"` пропускал сбой второго запуска: `again.ok=false` или `again.hashes=[]` не влияли на `checkGame().ok`, получался ложный PASS | Воспроизведение `checkGame` на `main` с 4 исходами, кандидат исправляет 2 ложных PASS (патч для защищённого ядра) | `scripts/platform/mutate-meta-bot-second-run.mjs`: 3 мутации, включая маскировку по `secondRun=\"hash\"`; `docs/patches/meta-bot-second-run.patch` |",
     "| 2026111702 | 17.11.2026 | Защищённое ядро META BOT `checkGame` возвращало `{ok:true,runs:[]}` при `viewports: []` или неизвестном экране — ложный успех без открытия игры | Воспроизведено на исходном `scripts/meta-bot/core.mjs` (PR #311, reports/bot-audit/PROGRESS.md) | scripts/meta-bot/mutate-viewports.mjs: настоящее ядро, 7 неверных и 4 верных конфигурации, checkGame отклоняет, 3 мутации ядра |",
     "| 2026111701 | 17.11.2026 | META BOT could report success for zero screens; actual game configuration now fails KONTUR before acceptance | empty viewports and unknown screen fixtures | scripts/platform/mutate-bot-config.mjs: 3 mutations and real game configurations |",
     "| 2026111401 | 14.11.2026 | Repair Bot молча пропускал недоступные JSON и менял часть набора при неисправимой ошибке; ссылка в предке позволяла писать вне проекта | Воспроизведено изолированными git-fixtures | scripts/repair-bot/selftest-safety.mjs: missing file, directory, batch rollback, junction; 3 мутации |",
@@ -1392,6 +1432,8 @@
     "| 1153 | 17.11.2026 | Система INK: рецепт, БЕЗ ПАТТЕРНОВ, шаблон и сканер лежали только в ветках (#286 закрыт без слияния, #290 висит) — ChatGPT в main их не видел; рецепт и ink.md отправляли к старому рендеру с узором из синусов | ink.md, RECEPT_INK_MIR.md, BEZ_PATTERNOV.md, shared/ink/, scripts/visual/ | scripts/visual/mutate-no-patterns.mjs (17 ловушек) — теперь постоянная мутация KONTUR; карточка Z20 |",
     "| 1154 | 17.11.2026 | Сторожа коммитили сводки, когда менялись только время/SHA, а status-dlya-claude запускался на каждый коммит другой сводки — каскад ~60 коммитов за ночь и расход лимита API | zadachi-watch, status-dlya-claude, sliyanie-status, dispetcher, zanyato-watch, karta-sil | scripts/lab/meaningful-diff.sh + постоянная ловушка scripts/lab/mutate-meaningful-diff.mjs |",
     "| 1155 | 17.11.2026 | Эталоны описаны в 4 местах (ink.md, README, паспорта, AGENTS) — чаты не видели полного списка | ETALONY.md | scripts/lab/verify-etalony-catalog.mjs + mutate-etalony-catalog.mjs |",
-    "| 2026111704 | 17.11.2026 | BLACK TRAIN PR #382 визуально показывал ассеты, но не позволял снять одинаковые кадры с показанным/скрытым отдельным ассетом; зелёный ASSET CHECK для incoming не проверял этот контракт | [PR #382](https://github.com/mpaykin1/meta6-lab/pull/382), [изолятор](https://github.com/mpaykin1/meta6-lab/commit/f86c89870ee3803e12bd721a44c822ce8a0007c7) | `kinds/ink.py` IK18; `test_kinds.py` хорошая/дефектная сцены; мутант в `mutate_bot.py` |"
+    "| 2026111704 | 17.11.2026 | BLACK TRAIN PR #382 визуально показывал ассеты, но не позволял снять одинаковые кадры с показанным/скрытым отдельным ассетом; зелёный ASSET CHECK для incoming не проверял этот контракт | [PR #382](https://github.com/mpaykin1/meta6-lab/pull/382), [изолятор](https://github.com/mpaykin1/meta6-lab/commit/f86c89870ee3803e12bd721a44c822ce8a0007c7) | `kinds/ink.py` IK18; `test_kinds.py` хорошая/дефектная сцены; мутант в `mutate_bot.py` |",
+    "| 2026111801 | 18.11.2026 | Бот ассетов 16–17.11: 23 ветки, слита 1 игра — 5 чатов параллельно делали Last Healer (#392–#395), PR ассетов правили общие файлы и застревали в конфликтах, «зелёный ASSET CHECK» не значил HARD=0 для incoming, compare.png не делали | разбор Claude 18.11, промпт v3.4 | `scripts/asset-guard/rules.mjs` + `scripts/asset-guard/mutate-asset-guard.mjs` (9 ловушек, 5/5 мутантов), шаг ASSET GUARD и HARD=0 для паков PR в `.github/workflows/asset-check.yml` |",
+    "| 2026111802 | 18.11.2026 | Автозадачи 16–17.11 открыли ~20 PR по одному делу Z01 (#351–#407): каждый правил общий журнал automation/NADZOR.md и карточку Z01_ZAVALY.md, все конфликтовали между собой, ни один не слился, следующий запуск открывал новый; GPT.md указывал журнал в несуществующей ветке | разбор Claude 18.11 | `scripts/odin-pr/core.mjs` + `scripts/odin-pr/mutate-odin-pr.mjs` (7 мутантов), проверка `.github/workflows/odin-pr.yml`, правило «ОДИН PR НА ДЕЛО» в GPT.md 0А |"
   ]
 }

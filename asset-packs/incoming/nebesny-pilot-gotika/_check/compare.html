@@ -1,0 +1,57 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Готический город — эскиз и реальные ассеты</title>
+<style>
+:root{color-scheme:dark}body{background:#171522;color:#f4d9cd;font:14px system-ui;margin:0;padding:20px}
+h1{font-size:22px;margin:0 0 18px}main{display:grid;grid-template-columns:minmax(280px,1fr) minmax(300px,1.3fr);gap:20px;max-width:1400px;margin:auto}
+.reference img{display:block;width:100%;max-width:540px;image-rendering:pixelated;border-radius:12px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px}
+figure{background:#262039;border-radius:12px;padding:10px;margin:0;min-width:0}
+canvas{display:block;width:100%;aspect-ratio:1;background:radial-gradient(ellipse,#694f74,#231f38);image-rendering:pixelated}
+figcaption{margin-top:6px;font-size:12px;line-height:1.5}
+a{color:#e9bf97}
+.preview{grid-column:1/-1;display:grid;grid-template-columns:minmax(260px,1fr) minmax(280px,1.35fr);gap:16px;padding:14px;background:#262039;border-radius:12px}
+.preview iframe{width:100%;height:min(66vh,560px);border:1px solid #856378;border-radius:10px;background:#251c35}
+.viewBtns{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.viewBtns button{background:#47304f;color:#ffe4c6;border:1px solid #9b7785;border-radius:8px;padding:8px 12px;cursor:pointer}
+.viewBtns button.active{background:#b36d76;color:#20152c}
+@media(max-width:700px){.preview{display:block}.preview iframe{height:48vh}main{display:block}.reference{margin-bottom:24px}}
+</style><h1>Готический город: эскиз владельца ↔ PNG-ассеты</h1>
+<main>
+<section class="preview">
+  <div><h2>Четыре ракурса прямо в игре</h2>
+  <p>Море → подлёт → город → пролёт под виадуками. Кадр — реальный рендер HTML-игры, а не имитация скриншота.</p>
+  <div class="viewBtns" id="viewBtns">
+   <button data-view="sea">1 · Море</button>
+   <button data-view="approach">2 · Подлёт</button>
+   <button data-view="city" class="active">3 · Город</button>
+   <button data-view="low">4 · Низкий пролёт</button>
+  </div>
+  <p>Слева ниже — эскиз владельца; рядом — реальные 3D-стопки ассетов.</p>
+  <p><a href="../index.html">Играть с начала →</a></p></div>
+  <iframe id="gameView" src="../index.html?view=city" loading="lazy" title="Живая игровая сцена «Небесный пилот»" allow="autoplay"></iframe>
+</section>
+<section class="reference"><img src="../zakaz/frames/eskiz.jpg" alt="Исходный эскиз владельца: город на закате"><p>Эскиз владельца 17.11.2026 — слева. Справа настоящие срезы из файлов PNG.</p><p><a href="../index.html">Открыть игровую копию</a></p></section><section id="gallery" class="gallery"></section></main>
+<script>
+document.getElementById('viewBtns').addEventListener('click',e=>{
+ const button=e.target.closest('button[data-view]');if(!button)return;
+ document.querySelectorAll('#viewBtns button').forEach(b=>b.classList.toggle('active',b===button));
+ document.getElementById('gameView').src='../index.html?view='+encodeURIComponent(button.dataset.view);
+});
+const names={gothicCathedral:'Готический собор',spireTower:'Башня-шпиль',archBridge:'Арочный мост',redRoofHouse:'Черепичные дома',aqueductTiers:'Акведук',cliffBase:'Скальное основание',bannerFleurDeLis:'Знамя с лилией',gothicGateRing:'Арка-цель',canalWater:'Канал',sunsetSky:'Закат',sunsetCloud:'Розовые облака',pigeonFlock:'Стая птиц',bellTower:'Колокольня',rosetteBonus:'Роза-бонус',windowSparks:'Искры',descentGate:'Вход под облаками',gothicTile:'Каменная мостовая',sailBoat:'Лодка',lanternGlow:'Фонарь'};
+const root=document.getElementById('gallery');
+fetch('../stack.json').then(r=>r.json()).then(data=>{
+ for(const[id,a] of Object.entries(data.assets)){
+  const fig=document.createElement('figure'),canvas=document.createElement('canvas'),cap=document.createElement('figcaption');
+  canvas.width=160;canvas.height=160;canvas.getContext('2d').imageSmoothingEnabled=false;
+  cap.textContent=(names[id]||id)+' · '+a.count+' срезов';fig.append(canvas,cap);root.append(fig);
+  const img=new Image();img.onload=()=>{
+   const c=canvas.getContext('2d'),[w,h]=a.slice,scale=Math.min(145/w,135/h,1.5);
+   if(a.count===1){c.drawImage(img,0,0,w,h,8,8,145,145);return;}
+   for(let j=0;j<Math.min(a.count,18);j++){
+    const s=Math.floor(j*(a.count-1)/Math.max(1,Math.min(a.count,18)-1));
+    c.drawImage(img,s*w,0,w,h,80-w*scale*.5,90-h*scale*.5-j*1.8,w*scale,h*scale);
+   }
+  };img.src='../'+a.file;
+ }
+}).catch(console.error);
+</script></html>

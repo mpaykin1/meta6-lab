@@ -65,11 +65,11 @@ test('legacy callers read through empty page and never trust missing second page
   count++;
   assert.equal(path,`/pulls?state=open&per_page=100&page=${count}`);
   return count===1?[pr(1),pr(2)]:[];
- });
+ },{stopOnShortPage:false});
  assert.deepEqual([...all.keys()],[1,2]);
  assert.equal(count,2);
  count=0;
- await assert.rejects(()=>listOpenPullRequests(async()=>{count++;if(count===1)return [pr(1)];throw Error('HTTP 429');}),/429/);
+ await assert.rejects(()=>listOpenPullRequests(async()=>{count++;if(count===1)return [pr(1)];throw Error('HTTP 429');},{stopOnShortPage:false}),/429/);
  assert.equal(count,2);
 });
 

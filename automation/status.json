@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-18T01:48:16.689Z",
+  "generated_at": "2026-11-18T01:53:58.901Z",
   "sha": {
-    "lab": "bfdaaaead5d7877b590a827674884a17426bd61a",
+    "lab": "aaa975509aeb1c5a6149ae213d70b585626fecd7",
     "mg": "2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44218432586",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44219059183",
   "review": {
     "protected": [
       {
@@ -514,7 +514,7 @@
   },
   "pr": {
     "open": 56,
-    "conflicts": "нет данных",
+    "conflicts": 42,
     "merged": 80,
     "closed": 123,
     "mergedItems": [
@@ -1271,7 +1271,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2837,
+      "count": 2840,
       "folders": "нет данных"
     },
     "mg": {
@@ -1417,6 +1417,7 @@
     "| 1153 | 17.11.2026 | Система INK: рецепт, БЕЗ ПАТТЕРНОВ, шаблон и сканер лежали только в ветках (#286 закрыт без слияния, #290 висит) — ChatGPT в main их не видел; рецепт и ink.md отправляли к старому рендеру с узором из синусов | ink.md, RECEPT_INK_MIR.md, BEZ_PATTERNOV.md, shared/ink/, scripts/visual/ | scripts/visual/mutate-no-patterns.mjs (17 ловушек) — теперь постоянная мутация KONTUR; карточка Z20 |",
     "| 1154 | 17.11.2026 | Сторожа коммитили сводки, когда менялись только время/SHA, а status-dlya-claude запускался на каждый коммит другой сводки — каскад ~60 коммитов за ночь и расход лимита API | zadachi-watch, status-dlya-claude, sliyanie-status, dispetcher, zanyato-watch, karta-sil | scripts/lab/meaningful-diff.sh + постоянная ловушка scripts/lab/mutate-meaningful-diff.mjs |",
     "| 1155 | 17.11.2026 | Эталоны описаны в 4 местах (ink.md, README, паспорта, AGENTS) — чаты не видели полного списка | ETALONY.md | scripts/lab/verify-etalony-catalog.mjs + mutate-etalony-catalog.mjs |",
-    "| 2026111704 | 17.11.2026 | BLACK TRAIN PR #382 визуально показывал ассеты, но не позволял снять одинаковые кадры с показанным/скрытым отдельным ассетом; зелёный ASSET CHECK для incoming не проверял этот контракт | [PR #382](https://github.com/mpaykin1/meta6-lab/pull/382), [изолятор](https://github.com/mpaykin1/meta6-lab/commit/f86c89870ee3803e12bd721a44c822ce8a0007c7) | `kinds/ink.py` IK18; `test_kinds.py` хорошая/дефектная сцены; мутант в `mutate_bot.py` |"
+    "| 2026111704 | 17.11.2026 | BLACK TRAIN PR #382 визуально показывал ассеты, но не позволял снять одинаковые кадры с показанным/скрытым отдельным ассетом; зелёный ASSET CHECK для incoming не проверял этот контракт | [PR #382](https://github.com/mpaykin1/meta6-lab/pull/382), [изолятор](https://github.com/mpaykin1/meta6-lab/commit/f86c89870ee3803e12bd721a44c822ce8a0007c7) | `kinds/ink.py` IK18; `test_kinds.py` хорошая/дефектная сцены; мутант в `mutate_bot.py` |",
+    "| 2026111801 | 18.11.2026 | Бот ассетов 16–17.11: 23 ветки, слита 1 игра — 5 чатов параллельно делали Last Healer (#392–#395), PR ассетов правили общие файлы и застревали в конфликтах, «зелёный ASSET CHECK» не значил HARD=0 для incoming, compare.png не делали | разбор Claude 18.11, промпт v3.4 | `scripts/asset-guard/rules.mjs` + `scripts/asset-guard/mutate-asset-guard.mjs` (9 ловушек, 5/5 мутантов), шаг ASSET GUARD и HARD=0 для паков PR в `.github/workflows/asset-check.yml` |"
   ]
 }

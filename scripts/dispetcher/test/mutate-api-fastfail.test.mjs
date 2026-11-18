@@ -32,7 +32,7 @@ test('default API path also rejects long quota waits before retry',async()=>{
 });
 test('five API wait and caller mutations must be rejected',async()=>{
  const src=await readFile(new URL('../build.mjs',import.meta.url),'utf8');
- const anchor='waitMs<=8*60*1000&&waitMs<=maxWaitMs&&attempt===0';
+ const anchor='waitMs<=8*60*1000&&waitMs+1000<=maxWaitMs&&attempt===0';
  const broken=[
  ['unbounded-wait',src.replace(anchor,'waitMs<=8*60*1000&&attempt===0')],
  ['never-wait',src.replace(anchor,'waitMs<=0&&attempt===0')],

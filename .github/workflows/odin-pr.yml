@@ -24,11 +24,12 @@ jobs:
         with:
           node-version: '22'
       - name: Ловушки правила
-        run: node scripts/odin-pr/mutate-odin-pr.mjs
+        # скрипты берутся из main (PR не может подменить проверку); до слияния самого правила их там ещё нет
+        run: if [ -f scripts/odin-pr/run.mjs ]; then node scripts/odin-pr/mutate-odin-pr.mjs; else echo 'ODIN PR ещё не в main'; fi
       - name: Один PR на дело
         env:
           ODIN_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ODIN_REPO: ${{ github.repository }}
           ODIN_PR: ${{ github.event.pull_request.number }}
           ODIN_ACTION: ${{ github.event.action }}
-        run: node scripts/odin-pr/run.mjs
+        run: if [ -f scripts/odin-pr/run.mjs ]; then node scripts/odin-pr/run.mjs; else echo 'ODIN PR ещё не в main'; fi

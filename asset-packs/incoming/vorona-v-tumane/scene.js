@@ -476,7 +476,7 @@ function draw(){
  for(const l of layers)objects[l.id].position.x=camera.position.x*l.ratio;
  ground.position.x=camera.position.x*.38;fog.position.x=camera.position.x;
  renderer.render(world,camera);
- if(probeFrame && t>1 && (!window.__RENDER_STATS__||window.__RENDER_STATS__.colors<36)){
+ if(probeFrame && (!window.__RENDER_STATS__||window.__RENDER_STATS__.colors<36)){
   const gl=renderer.getContext(),width=Math.min(384,gl.drawingBufferWidth),
    height=Math.min(216,gl.drawingBufferHeight);
   const pix=new Uint8Array(width*height*4);

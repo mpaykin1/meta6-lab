@@ -1402,10 +1402,57 @@ const SHPILI_PLUS=(()=>{
        b.rotation.z=(R()-.5)*.16;
      }
    }
+   /* Hand-shaped rotten wharves: snapped boards, broken supports and hanging ropes. */
+   const moorings=[];
+   for(const side of [-1,1])for(let landing=0;landing<2;landing++){
+     const dock=new T.Group(),width=landing?5.9:7.5;
+     dock.position.set(side*(17+landing*12),.5,-2.1-landing*2.2);
+     dock.rotation.y=side*(.12+landing*.13);root.add(dock);
+     for(let j=0;j<9;j++){
+       if((landing===0&&j===3)||(landing===1&&j===6))continue;
+       const x=(j-4)*width/8,w=width/9*(.7+R()*.25);
+       const len=3.2+R()*3.9-(j%3===0?1.7:0),chip=.18+R()*.85;
+       const board=coverSlab(dock,[[-w*.5,-len*.49],[w*.45,-len*.5],
+         [w*.5,len*.5-chip],[w*.17,len*.5],[w*.06,len*.5-chip*.38],
+         [-w*.13,len*.5-chip*.7],[-w*.5,len*.48-chip*.2]],
+         .20+R()*.14,woodMat);
+       board.position.set(x,2.2+(R()-.5)*.22,(R()-.5)*.58);
+       board.rotation.set(-Math.PI/2,(R()-.5)*.11,(R()-.5)*.09);
+       for(let nail=0;nail<2;nail++){
+         const n=mesh(board,new T.SphereGeometry(.065,5,4),0x6b9ba5,
+           [0,(nail?-.8:.7)*Math.min(1.7,len*.3),.19],.72);
+         n.scale.set(.65,1,.3);
+       }
+     }
+     for(const offset of [-width*.4,width*.4]){
+       beam(dock,[offset,2,-3.2],[offset-.5,1.6,2.6],.17,0x25414a,.86);
+       beam(dock,[offset,1.7,-2.5],[offset+side*1.25,-4.8,-2.7],.21,0x304952,.93);
+       beam(dock,[offset,1.7,1.8],[offset-side*.95,-3.1,2.8],.17,0x233d47,.85);
+       const post=coverSlab(dock,[[-.30,-3.7],[-.38,2.4],[-.13,3.15],
+         [.07,2.7],[.34,2.95],[.32,-3.7]],.5,woodMat,-3);
+       post.position.x=offset;post.rotation.z=(R()-.5)*.17;
+       const ropeGroup=new T.Group();ropeGroup.position.set(offset,2.8,-3);
+       dock.add(ropeGroup);
+       const curl=new T.CatmullRomCurve3([new T.Vector3(0,0,0),
+         new T.Vector3(.2*side,-.9,.35),new T.Vector3(.35*side,-2.1,.16),
+         new T.Vector3(.05*side,-3.7,-.4)]);
+       const rope=mesh(ropeGroup,new T.TubeGeometry(curl,17,.064,5,false),
+         0x557d81,[0,0,0],.78);rope.frustumCulled=false;
+       moorings.push({group:ropeGroup,phase:R()*6.28});
+     }
+     for(let i=0;i<3;i++){
+       const z=-2.6+i*2.4;
+       beam(dock,[-width*.49,1.85,z],[width*.45,1.68,z+.35],.14,0x3c6068,.77);
+     }
+   }
    own[id].tick=t=>{
      for(let i=0;i<piles.length;i++){
        const p=piles[i];p.part.rotation.z=p.rot+.014*Math.sin(t*.49-p.phase);
        p.part.position.y=-2.5+.28*Math.sin(i*1.7)+.045*Math.cos(t*.7-i*.4);
+     }
+     for(const rope of moorings){
+       rope.group.rotation.z=.035*Math.sin(t*.38+rope.phase);
+       rope.group.rotation.x=.021*Math.sin(t*.53+rope.phase*.7);
      }
    };
  }

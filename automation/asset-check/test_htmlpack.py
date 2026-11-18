@@ -58,6 +58,12 @@ class HtmlPackTraps(unittest.TestCase):
     def ids(self, data=None, error=None):
         return {x["id"] for x in self.check(data, error).hard()}
 
+    def test_other_format_is_not_htmlpack(self):
+        from kinds import htmlpack
+        self.assertTrue(htmlpack.detect(self.root))
+        self.root.joinpath("pack.json").write_text(json.dumps(dict(COMMON, format="ink-pack/1")), "utf-8")
+        self.assertFalse(htmlpack.detect(self.root), "ink-pack/1 with window.__PACK__ was judged as htmlpack")
+
     def test_good_reference_passes_without_hard(self):
         self.assertEqual([], self.check().hard())
 

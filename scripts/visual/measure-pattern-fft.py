@@ -76,6 +76,12 @@ def main():
     parser.add_argument("--before")
     parser.add_argument("--output", default="/tmp/bez-patternov-fft.json")
     args = parser.parse_args()
+    manifest = json.loads((Path(args.after) / "index.json").read_text(encoding="utf-8"))
+    if not manifest["games"] and not manifest["errors"]:
+        # --target changed found no game, pack or INK shader in the diff: nothing visual to measure.
+        Path(args.output).write_text(json.dumps({"skipped": "no visual target changed"}), encoding="utf-8")
+        print("BEZ_PATTERNOV VISUAL PASS: no game, pack or INK shader changed")
+        return
     after = load_group(args.after)
     before = load_group(args.before) if args.before else {}
     failures = []

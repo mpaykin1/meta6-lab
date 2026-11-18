@@ -85,9 +85,24 @@ def baseline(base: Path):
         return _BASELINE[key]
     import tempfile
     tmp = Path(tempfile.mkdtemp()) / "ref_makers.js"
-    tmp.write_text("import {objectMakers} from './ink-objects.js';\nimport {extraObjectMakers} from './ink-extras.js';\n"
-                   "import {settlementMakers} from './ink-settlement.js';\n"
-                   "export const makers = {...objectMakers, ...extraObjectMakers, ...settlementMakers};\n", "utf-8")
+    if base.name == "ink-night-scream" and (base / "src/scene.js").exists():
+        # Use the ACTUAL approved old tree and train as night-scene comparators.
+        scene = (base / "src/scene.js").read_text("utf-8")
+        first = scene.index("function deadTree(height,seed){")
+        last = scene.index("const trees=[];", first)
+        accepted_tree = scene[first:last]
+        tmp.write_text(
+            "import * as T from 'three';\n"
+            "import {createInkNightTrain} from './src/ink-night-train.js';\n"
+            "const rnd=i=>{const f=Math.sin(i*127.1+39.4)*43758.5453;return f-Math.floor(f);};\n"
+            "const bark=new T.MeshStandardMaterial({color:'#2b3134',roughness:.95});\n"
+            + accepted_tree
+            + "\nexport const makers={acceptedTree:seed=>deadTree(5,seed),"
+              "acceptedNightTrain:seed=>createInkNightTrain({cars:1,seed})};\n", "utf-8")
+    else:
+        tmp.write_text("import {objectMakers} from './ink-objects.js';\nimport {extraObjectMakers} from './ink-extras.js';\n"
+                       "import {settlementMakers} from './ink-settlement.js';\n"
+                       "export const makers = {...objectMakers, ...extraObjectMakers, ...settlementMakers};\n", "utf-8")
     data, _ = run_harness(base, tmp)
     shutil.rmtree(tmp.parent, ignore_errors=True)
     ok = [m for m in (data or {}).get("makers", {}).values() if not m.get("error")]
@@ -101,11 +116,32 @@ def baseline(base: Path):
     return _BASELINE[key]
 
 
+def check_night_isolation(root: Path, report) -> None:
+    """Night-game copy must expose stable shown/hidden frames for every asset.
+
+    Browser probes freeze game time and draw the same frame twice; an overall
+    scene screenshot cannot establish an individual object's visual quality.
+    """
+    src = root / "src/scene.js"
+    if not src.exists():
+        src = root / "scene.js"
+    code = src.read_text("utf-8") if src.exists() else ""
+    absent_hooks = [name for name in ("window.__ISOLATE__", "window.__PACK_PROBE__",
+                                      "setHidden", "manual=true", "draw();") if name not in code]
+    if absent_hooks:
+        report.add("IK18", "HARD", str(src.relative_to(root)) if src.exists() else "src/scene.js",
+                   "нет покадровой изоляции: " + ", ".join(absent_hooks),
+                   "Добавь window.__ISOLATE__(id,on), __PACK_PROBE__.assets/setHidden; "
+                   "замораживай время и перерисовывай только выбранный ассет")
+
+
 def check(root: Path, r) -> set:
     pj = json.loads((root / "pack.json").read_text("utf-8"))
     covered = {"pack.json", "makers.js", "README.md"}
     base = (REPO / pj.get("base", DEFAULT_BASE)).resolve()
-    if not (base / "three.module.js").exists():
+    night_reference = base == (REPO / "reference/ink-night-scream").resolve()
+    engine_available = (base / "three.module.js").exists() or (night_reference and (REPO / "reference/ink-fallen-guardian/three.module.js").exists())
+    if not engine_available:
         r.add("IK1", "HARD", "pack.json", f"эталон INK не найден: {pj.get('base', DEFAULT_BASE)}",
               f'"base": "{DEFAULT_BASE}" — папка эталона в meta6-lab')
         return covered
@@ -114,6 +150,8 @@ def check(root: Path, r) -> set:
         r.add("IK1", "HARD", "makers.js", "нет makers.js", "Положи makers.js с export const makers = {имя: seed => Group}")
         return covered
     src = mk.read_text("utf-8")
+    if night_reference and (root / "index.html").exists():
+        check_night_isolation(root, r)
     for pat, what in FORBIDDEN:
         if re.search(pat, src):
             r.add("IK2", "HARD", "makers.js", f"запрещено: {what}",
@@ -132,6 +170,7 @@ def check(root: Path, r) -> set:
               "Исправь ошибку загрузки — бот показывает текст ошибки")
         return covered
     made = data["makers"]
+    r.asset_ids.update(made)
     taken = reference_names(base)
     for name in made:
         if name in taken:
@@ -187,8 +226,10 @@ def check(root: Path, r) -> set:
             continue
         size = [m["max"][i] - m["min"][i] for i in range(3)]
         top = max(size)
-        if top > SIZE_MAX.get(role, 7.0):
-            r.add("IK9", "HARD", name, f"размер {top:.1f} м — несоразмерно (путник 1.6 м)", "Единица = метр; путник ≈ 1.6 м")
+        # Accepted night locomotive is 10.5 m long; do not reject its silhouette as over-size.
+        cap = 12.0 if night_reference and role == "vehicle" else SIZE_MAX.get(role, 7.0)
+        if top > cap:
+            r.add("IK9", "HARD", name, f"размер {top:.1f} м > {cap:.1f} м — несоразмерно (путник 1.6 м)", "Единица = метр; путник ≈ 1.6 м")
         if top < 0.12:
             r.add("IK9", "HARD", name, f"размер {top:.2f} м — не видно", "Сделай крупнее (путник ≈ 1.6 м)")
         if m["min"][1] > 0.25 and role not in ("effect", "creature"):

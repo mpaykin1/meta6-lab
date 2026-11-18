@@ -349,12 +349,25 @@ export async function graphqlPulls(request = graphql) {
   throw new Error('GitHub GraphQL: неполная выборка PR');
 }
 
+// Claude 16.11.2026: HTTP 502 от GitHub обнулил карту (прогон 43814780178). Временные ошибки 5xx и
+// таймауты повторяются до 3 раз; 4xx (403/404) и чужие ошибки — сразу «нет данных», без повтора.
+export const TRANSIENT = /HTTP 5\d\d|ETIMEDOUT|ECONNRESET|timed out|Something went wrong/i;
+export async function withRetry(fn, wait = ms => new Promise(r => setTimeout(r, ms)), tries = 3) {
+  for (let attempt = 1; ; attempt++) {
+    try { return await fn(); }
+    catch (error) {
+      if (attempt >= tries || !TRANSIENT.test(String(error.stderr || error.message))) throw error;
+      await wait(attempt * 15000);
+    }
+  }
+}
+
 async function graphql(query, cursor) {
   const [owner, name] = String(process.env.KARTA_REPO || 'mpaykin1/meta6-lab').split('/');
   const args = ['api', 'graphql', '-f', 'query=' + query, '-F', 'owner=' + owner, '-F', 'name=' + name];
   if (cursor) args.push('-f', 'cursor=' + cursor);
   let stdout;
-  try { ({stdout} = await gh('gh', args, {maxBuffer: 64 * 1024 * 1024})); }
+  try { ({stdout} = await withRetry(() => gh('gh', args, {maxBuffer: 64 * 1024 * 1024}))); }
   catch (error) { throw new Error('GitHub GraphQL: нет данных: ' + String(error.stderr || error.message).slice(0, 300)); }
   try { return JSON.parse(stdout); }
   catch { throw new Error('GitHub GraphQL JSON: нет данных'); }
@@ -464,10 +477,18 @@ export async function main() {
   const old = await fs.readFile('automation/karta-sil.json','utf8');
   if (json !== old) await fs.writeFile('automation/karta-sil.json', json);
 }
-export async function markNoData() {
+// Claude 16.11.2026: сбой сбора больше не стирает последнюю настоящую карту — иначе диспетчер и автозадачи
+// остаются без зон и все запуски становятся холостыми. Сохраняем прошлые цифры с пометкой «устарела».
+export function noDataState(previous, now = new Date().toISOString(), reason = '') {
+  const hasData = Array.isArray(previous?.metrics) && previous.metrics.length > 0;
+  if (!hasData) return {schema:1,status:'нет данных',periodDays:14,recentDays:3,
+    types:previous?.types || [],metrics:[],metrics3:[],prs:[]};
+  return {...previous, status:'устарела', staleSince: previous.staleSince || now,
+    staleReason: String(reason).slice(0, 200)};
+}
+export async function markNoData(reason = '') {
   const filename = 'automation/karta-sil.json';
   const previous = JSON.parse(await fs.readFile(filename,'utf8'));
-  const failed = stableJson({schema:1,status:'нет данных',periodDays:14,recentDays:3,
-    types:previous.types,metrics:[],metrics3:[],prs:[]});
-  if (stableJson(previous) !== failed) await fs.writeFile(filename,failed);
+  const next = stableJson(noDataState(previous, new Date().toISOString(), reason));
+  if (stableJson(previous) !== next) await fs.writeFile(filename,next);
 }

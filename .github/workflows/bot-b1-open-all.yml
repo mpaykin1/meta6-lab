@@ -1,9 +1,36 @@
 name: B1 — all games open without console errors
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 on:
   pull_request:
     branches: [main]
+    paths-ignore:
+      - 'ZADACHI.md'
+      - 'DISPETCHER.md'
+      - 'TOLKNUT.md'
+      - 'DLYA_CLAUDE.md'
+      - 'OSHIBKI.md'
+      - 'GPT.md'
+      - 'automation/**'
+      - 'reports/**'
+      - 'journal/**'
+      - 'rules/**'
+      - '**/PROGRESS.md'
   push:
     branches: [main]
+    paths-ignore:
+      - 'ZADACHI.md'
+      - 'DISPETCHER.md'
+      - 'TOLKNUT.md'
+      - 'DLYA_CLAUDE.md'
+      - 'OSHIBKI.md'
+      - 'GPT.md'
+      - 'automation/**'
+      - 'reports/**'
+      - 'journal/**'
+      - 'rules/**'
+      - '**/PROGRESS.md'
   workflow_dispatch:
 permissions:
   contents: read

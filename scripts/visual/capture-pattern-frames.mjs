@@ -100,7 +100,19 @@ try {
           await page.waitForTimeout(500);
         }
         const file = join(out, game.id + '-' + i + '.png');
-        await page.screenshot({path: file, animations: 'disabled', timeout: 15000});
+        // Claude 18.11.2026: heavy pack scenes in CI SwiftShader may never hand a frame to the compositor
+        // (screenshot timeout, PR #420). A pack with __PACK_PROBE__.freeze/draw gives one still frame instead.
+        const still = game.id.startsWith('pack-') && await page.evaluate(() => {
+          const pr = window.__PACK_PROBE__;
+          if (typeof pr?.freeze !== 'function' || typeof pr?.draw !== 'function') return null;
+          pr.freeze(); pr.draw();
+          const c = [...document.querySelectorAll('canvas')].sort((a, b) => b.width * b.height - a.width * a.height)[0];
+          const data = c ? c.toDataURL('image/png').split(',')[1] : null;
+          pr.resume?.();
+          return data;
+        });
+        if (still) writeFileSync(file, Buffer.from(still, 'base64'));
+        else await page.screenshot({path: file, animations: 'disabled', timeout: 15000});
         images.push(file);
       }
       inventory.push({id: game.id, url: game.url, images});

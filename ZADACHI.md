@@ -9,7 +9,7 @@
 
 Сторож проверил: 2026-11-17 06:54 UTC
 
-| взято | Z01: снять конфликт PR #389 без потери действующей очереди INK-ассетов | МГЛ | чат ChatGPT | `lab/assets-ink-video-nookvale-20261117` | [#389](https://github.com/mpaykin1/meta6-lab/pull/389) | 2026-11-18 | — |
+| взято | Z01: перенос заказанных INK-ассетов из #389 в канонический PR #415 и CI | МГЛ | чат ChatGPT | `lab/assets-ink-video-nookvale` | [#415](https://github.com/mpaykin1/meta6-lab/pull/415) | 2026-11-18 | — |
 | взято | АССЕТЫ: BLACK TRAIN — объёмные рваные грозовые тучи вместо плоских полос | МГЛ | ChatGPT | `lab/assets-black-train-clouds-20261117` | [#384](https://github.com/mpaykin1/meta6-lab/pull/384) | 2026-11-17 | — |
 <!-- ZADACHI:START -->
 **Итог:** 🛑 зависло 40 · ⚠ молчит 6 · 🔨 в работе 10 · 🙋 нужен Claude 4 · 💤 заброшено 9 · ✅ готово 0

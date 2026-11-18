@@ -97,6 +97,21 @@ export async function resolveConflict(pr,reload,prior,sleep=ms=>new Promise(done
 export function assertNotEmpty(tasksMarkdown,cards){
  if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
 }
+export async function fetchAllCheckRuns(sha,request=api){
+ const all=[];
+ let expected=null;
+ for(let page=1;page<=100;page++){
+  const response=await request('/commits/'+sha+'/check-runs?per_page=100&page='+page);
+  if(!response||!Number.isSafeInteger(response.total_count)||response.total_count<0||!Array.isArray(response.check_runs)||
+     (expected!==null&&response.total_count!==expected))throw Error('нет данных: неполный список check-runs для '+sha);
+  expected=response.total_count;
+  all.push(...response.check_runs);
+  if(all.length>expected)throw Error('нет данных: дублированные check-runs для '+sha);
+  if(all.length===expected)return {total_count:expected,check_runs:all};
+  if(response.check_runs.length!==100)throw Error('нет данных: неполная страница check-runs для '+sha);
+ }
+ throw Error('нет данных: превышен предел страниц check-runs для '+sha);
+}
 export function assertCompleteCheckRuns(checks,statuses,sha){
  if(!checks||!Array.isArray(checks.check_runs)||!Number.isSafeInteger(checks.total_count)||checks.total_count<0||
     checks.total_count!==checks.check_runs.length){
@@ -131,7 +146,7 @@ export async function main(){
  if(pr.state!=='open')continue;
  const resolution=await resolveConflict(pr,()=>api('/pulls/'+t.id),previousConflict(previous,t.id));
  pr=resolution.pr;
- const checks=await api('/commits/'+pr.head.sha+'/check-runs?per_page=100');
+ const checks=await fetchAllCheckRuns(pr.head.sha);
  const statuses=await api('/commits/'+pr.head.sha+'/status');
  assertCompleteCheckRuns(checks,statuses,pr.head.sha);
  const failed=checks.check_runs.filter(x=>['failure','timed_out','action_required'].includes(x.conclusion)).map(x=>({name:x.name,url:x.html_url}));

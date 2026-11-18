@@ -113,7 +113,7 @@ renderer.domElement.addEventListener('pointermove',e=>{if(pointer?.id!==e.pointe
  pointer.x=e.clientX;pointer.y=e.clientY});
 renderer.domElement.addEventListener('pointerup',()=>pointer=null);renderer.domElement.addEventListener('pointercancel',()=>pointer=null);
 addEventListener('wheel',e=>{zoom=Math.max(.55,Math.min(1.65,zoom+e.deltaY*.0007))},{passive:true});
-const clock=new T.Clock();let last=performance.now(),fpsSlow=0,quality=1,boost=0,shimmer=0;
+let near=0;const clock=new T.Clock();let last=performance.now(),fpsSlow=0,quality=1,boost=0,shimmer=0;
 function update(){
  requestAnimationFrame(update);const now=performance.now(),dt=Math.min(.05,clock.getDelta()),t=now*.001;
  const moveX=(keys.d||keys.arrowright?1:0)-(keys.a||keys.arrowleft?1:0)+joy.x;
@@ -121,7 +121,7 @@ function update(){
  if(free){const sin=Math.sin(orbit),cos=Math.cos(orbit),speed=dt*3.9;
   target.x+=(moveX*cos-moveZ*sin)*speed;target.z+=(moveX*sin+moveZ*cos)*speed;
   target.x=Math.max(-18,Math.min(18,target.x));target.z=Math.max(-17,Math.min(17,target.z));}
- focus.lerp(target,1-Math.exp(-dt*3.1));const dist=16.4*zoom;
+ focus.lerp(target,1-Math.exp(-dt*3.1));near+=((free?0:1)-near)*(1-Math.exp(-dt*2.2));const dist=(16.4-8.2*near)*zoom;
  camera.position.lerp(new T.Vector3(focus.x+dist*Math.sin(.78+orbit),5.5+dist*Math.sin(heading),focus.z+dist*Math.cos(.78+orbit)),1-Math.exp(-dt*2.6));camera.lookAt(focus);
  for(const {id,o,x,z} of objects){o.userData.tick?.(t,dt);
  if(id==='moonBell'&&Math.hypot(focus.x-x,focus.z-z)<2.5){boost=3.0;shimmer=1}

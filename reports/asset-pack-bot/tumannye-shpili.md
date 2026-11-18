@@ -11,3 +11,7 @@
 - KONTUR: https://github.com/mpaykin1/meta6-lab/actions/runs/44225106653 — FAIL: для исправления нужен отдельный комплект OSHIBKI + ловушка.
 - Уникальные проверки бота из PR #306 ещё не выделены в отдельный бот-PR; #306 оставлен открытым до переноса.
 - HARD=0, настоящая браузерная визуальная приёмка, LAB Pages HTTP 200: не подтверждены.
+
+- 18.11 07:09 UTC: объёмные сгнившие причалы — сколотые доски, подпорки, стойки и качающиеся канаты: https://github.com/mpaykin1/meta6-lab/commit/e3d14e17762bb8cbce8571d00d33c7bc1e793627 .
+- 18.11 07:10 UTC: локальный Three.js переведён на относительный путь для Pages и локальных проверок: https://github.com/mpaykin1/meta6-lab/commit/6ae32c459431a81f23b4efa7b5b72544f7acd884 .
+- JS-синтаксис полного модуля проверен парсером; визуальный браузерный прогон и HARD=0 не подтверждены. ASSET CHECK: https://github.com/mpaykin1/meta6-lab/actions/runs/44256932748 — FAIL (ASSET GUARD, нет оригинального compare.png). PR остаётся draft.

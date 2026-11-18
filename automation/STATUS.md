@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-18T06:30:21.262Z | МГЛ: 24a71197458a7648e475345e2de010b467af69d8 | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44251564214
+UTC: 2026-11-18T06:52:37.058Z | МГЛ: 2abb3a335d2ec62c61a1e4ec25cad4c2b39942b6 | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44254436884
 ## ПРОВЕРИТЬ CLAUDE
 - PR #413 fa7e16893fb93ca733d8e5b93a0e03674d965258: .github/workflows/odin-pr.yml, scripts/odin-pr/mutate-odin-pr.mjs
 - PR #382 7c56b01e1a323254a1d850d50bd373364a079c7d: automation/asset-check/test_kinds.py
@@ -40,7 +40,7 @@ L4 — не готов: НЕТ в таблице FINISH
 #373 INK · Чернильный оскал — чистая 3D-модель и сцена без защищё | 0c269f36f4f3f1801ba5147eb59c5d3355cf5768
 ещё 78: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2873 коммитов | нет данных
+МГЛ: 2875 коммитов | нет данных
 МГ: 44 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:25, reference:31, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

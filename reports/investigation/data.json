@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-17T18:34:27.925Z",
+  "generated_at": "2026-11-18T02:54:58.498Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -33,13 +33,13 @@
       "status": "ошибка",
       "original_status": "взято",
       "pr": 394,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44088709545/job/134058172853",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/394",
       "taken_at": "2026-11-17 12:25 UTC",
       "last_commit_at": "—",
-      "remaining": "Исправить красные проверки: visual"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 2,
@@ -47,16 +47,16 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/assets-last-healer-video-20261117",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "взято",
       "pr": 392,
-      "pr_state": "open",
-      "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44088851570/job/134058408742",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/392",
       "taken_at": "2026-11-17 12:25 UTC",
       "last_commit_at": "—",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 3,
@@ -64,16 +64,16 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/z01-preserve-summary-conflicts-builder3-1117",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "взято",
       "pr": 374,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44068493941/job/133988719867",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/374",
       "taken_at": "2026-11-17 10:46 UTC",
       "last_commit_at": "—",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 4,
@@ -81,7 +81,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/rules-playgama-catalog-direct-20261117",
-      "status": "ошибка",
+      "status": "конфликт",
       "original_status": "взято",
       "pr": 357,
       "pr_state": "open",
@@ -90,7 +90,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/357",
       "taken_at": "2026-11-17 10:52 UTC",
       "last_commit_at": "—",
-      "remaining": "Исправить красные проверки: visual"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 5,
@@ -115,16 +115,16 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/z20-meta-bot-second-run-hash-20261117",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 368,
-      "pr_state": "open",
-      "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44012385549/job/133802309731",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/368",
       "taken_at": "2026-11-17 03:39 UTC",
       "last_commit_at": "2026-11-17 03:45",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 7,
@@ -217,16 +217,16 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/mg-remontnik-nadzor-20261117",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 360,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44084137014/job/134042010121",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/360",
       "taken_at": "2026-11-17 02:44",
       "last_commit_at": "2026-11-17 02:44",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 13,
@@ -251,7 +251,7 @@
       "project": "МГЛ → МГ",
       "owner": "ChatGPT (чат)",
       "branch": "lab/rules-playgama-catalog-direct-20261117",
-      "status": "ошибка",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 357,
       "pr_state": "open",
@@ -260,7 +260,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/357",
       "taken_at": "2026-11-17 02:32",
       "last_commit_at": "2026-11-17 02:37",
-      "remaining": "Исправить красные проверки: visual"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 15,
@@ -404,16 +404,16 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/autotask1-migration-journal-20261117",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 351,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44002547402/job/133769969629",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/351",
       "taken_at": "2026-11-17 02:15",
       "last_commit_at": "2026-11-17 02:22",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 24,
@@ -421,16 +421,16 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/fix-etalony-concurrency-20261117",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 353,
-      "pr_state": "open",
-      "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44024952911/job/133842942249",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/353",
       "taken_at": "2026-11-17 02:17",
       "last_commit_at": "2026-11-17 02:19",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 25,
@@ -761,7 +761,7 @@
       "project": "МГ",
       "owner": "чат ChatGPT",
       "branch": "lab/bez-patternov-ink-20261115",
-      "status": "зависла",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 324,
       "pr_state": "open",
@@ -770,7 +770,7 @@
       "url": "https://github.com/mpaykin1/meta6/pull/324",
       "taken_at": "2026-11-15 18:43",
       "last_commit_at": "2026-11-15 18:43",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 45,
@@ -778,16 +778,16 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/mg-builder4-z01-safe-pr-triage-1117",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "⚠ молчит больше часа",
       "pr": 366,
-      "pr_state": "open",
-      "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44025175427/job/133843753548",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/366",
       "taken_at": "2026-11-17 03:38",
       "last_commit_at": "2026-11-17 05:35",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 46,
@@ -829,16 +829,16 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/avto2-fix-zadachi-links-20261117",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "⚠ молчит больше часа",
       "pr": 365,
-      "pr_state": "open",
-      "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44071443413/job/133998409356",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/365",
       "taken_at": "2026-11-17 03:09",
       "last_commit_at": "2026-11-17 04:16",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 49,
@@ -863,16 +863,16 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "—",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "⚠ молчит больше часа",
       "pr": 351,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44002547402/job/133769969629",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/351",
       "taken_at": "2026-11-17 05:30 UTC",
       "last_commit_at": "2026-11-17 01:57",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 51,
@@ -948,16 +948,16 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/assets-shpili-cover-20261117-gpt6",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 375,
-      "pr_state": "open",
-      "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44032846518/job/133868684069",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/375",
       "taken_at": "2026-11-17 06:27",
       "last_commit_at": "2026-11-17 06:39",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 56,
@@ -999,16 +999,16 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/z01-preserve-summary-conflicts-builder3-1117",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🔨 В РАБОТЕ",
       "pr": 374,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44068493941/job/133988719867",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/374",
       "taken_at": "2026-11-17 06:25",
       "last_commit_at": "2026-11-17 06:25",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 59,
@@ -2307,7 +2307,7 @@
       "title": "Готовность META GAMES — отчёт",
       "state": "open",
       "sha": null,
-      "updated_at": "2026-11-17T16:05:14Z"
+      "updated_at": "2026-11-18T00:59:33Z"
     },
     {
       "label": "automation-watchdog",
@@ -2344,6 +2344,20 @@
     }
   ],
   "errors": [
+    {
+      "id": 2026111706,
+      "date": "17.11.2026",
+      "problem": "LAB Pages: сайт выкладывается, но шаг `check-links` с 11.11 ни разу не зелёный — выходит за 30 мин (таймаут = «cancelled») из‑за ~3000 повторов по мёртвым адресам: в main `games/skin-trainer` грузит несуществующий `skins/runtime/skin-runtime.js`; `LINKS.txt` держит `games/twilight-island/` и `games/ashen-path-asset-pack/` (их нет в main, только в нескольких preview); в старых preview нет `shared/components/observer-*` и шрифтов twilight-isles. [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/44168607909)",
+      "detection": "Суточный контроль Claude: лог check-links",
+      "trap": "ЛОВУШКИ ЕЩЁ НЕТ — починить ссылки (не ослаблять проверку), затем ловушка «check-links не зелёный > 24 ч = тревога»"
+    },
+    {
+      "id": 2026111705,
+      "date": "17.11.2026",
+      "problem": "META BOT при `bot.json.secondRun=\"hash\"` пропускал сбой второго запуска: `again.ok=false` или `again.hashes=[]` не влияли на `checkGame().ok`, получался ложный PASS",
+      "detection": "Воспроизведение `checkGame` на `main` с 4 исходами, кандидат исправляет 2 ложных PASS (патч для защищённого ядра)",
+      "trap": "`scripts/platform/mutate-meta-bot-second-run.mjs`: 3 мутации, включая маскировку по `secondRun=\"hash\"`; `docs/patches/meta-bot-second-run.patch`"
+    },
     {
       "id": 2026111702,
       "date": "17.11.2026",
@@ -2987,6 +3001,20 @@
       "problem": "BLACK TRAIN PR #382 визуально показывал ассеты, но не позволял снять одинаковые кадры с показанным/скрытым отдельным ассетом; зелёный ASSET CHECK для incoming не проверял этот контракт",
       "detection": "[PR #382](https://github.com/mpaykin1/meta6-lab/pull/382), [изолятор](https://github.com/mpaykin1/meta6-lab/commit/f86c89870ee3803e12bd721a44c822ce8a0007c7)",
       "trap": "`kinds/ink.py` IK18; `test_kinds.py` хорошая/дефектная сцены; мутант в `mutate_bot.py`"
+    },
+    {
+      "id": 2026111801,
+      "date": "18.11.2026",
+      "problem": "Бот ассетов 16–17.11: 23 ветки, слита 1 игра — 5 чатов параллельно делали Last Healer (#392–#395), PR ассетов правили общие файлы и застревали в конфликтах, «зелёный ASSET CHECK» не значил HARD=0 для incoming, compare.png не делали",
+      "detection": "разбор Claude 18.11, промпт v3.4",
+      "trap": "`scripts/asset-guard/rules.mjs` + `scripts/asset-guard/mutate-asset-guard.mjs` (9 ловушек, 5/5 мутантов), шаг ASSET GUARD и HARD=0 для паков PR в `.github/workflows/asset-check.yml`"
+    },
+    {
+      "id": 2026111802,
+      "date": "18.11.2026",
+      "problem": "Автозадачи 16–17.11 открыли ~20 PR по одному делу Z01 (#351–#407): каждый правил общий журнал automation/NADZOR.md и карточку Z01_ZAVALY.md, все конфликтовали между собой, ни один не слился, следующий запуск открывал новый; GPT.md указывал журнал в несуществующей ветке",
+      "detection": "разбор Claude 18.11",
+      "trap": "`scripts/odin-pr/core.mjs` + `scripts/odin-pr/mutate-odin-pr.mjs` (7 мутантов), проверка `.github/workflows/odin-pr.yml`, правило «ОДИН PR НА ДЕЛО» в GPT.md 0А"
     }
   ],
   "warnings": [

@@ -26,6 +26,10 @@ export function assessMotion(segments) {
     if (!segment || !Number.isFinite(segment.durationMs) || segment.durationMs <= 0) {
       return result('INVALID', {reason: 'invalid input duration'});
     }
+    // Only a recorded physical-input boolean may authorize movement evidence.
+    if (typeof segment.input !== 'boolean') {
+      return result('INVALID', {reason: 'input must be a physical-input boolean'});
+    }
     const {before, after} = segment;
     // Death may remove the hero entity in the same frame. Preserve the last
     // trustworthy position rather than reporting INVALID and hiding the death.

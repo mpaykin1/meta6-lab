@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-18T21:30:14.358Z | МГЛ: fb97653c05e8eb67e283486081b7931e1708b49b | МГ: 5984fcd5b79ed2d03c648053334361db8deb44fb | https://github.com/mpaykin1/meta6-lab/actions/runs/44401753443
+UTC: 2026-11-18T21:49:21.157Z | МГЛ: 10e3bd2ba56b112ea621b65d5c330d9696ab600c | МГ: 5984fcd5b79ed2d03c648053334361db8deb44fb | https://github.com/mpaykin1/meta6-lab/actions/runs/44405219481
 ## ПРОВЕРИТЬ CLAUDE
 - PR #421 a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1: .github/workflows/bez-patternov.yml, automation/asset-check/test_htmlpack.py, scripts/storozha/verify-storozha.mjs, scripts/visual/mutate-no-patterns.mjs, scripts/visual/verify-targets.mjs
 - PR #413 fa7e16893fb93ca733d8e5b93a0e03674d965258: .github/workflows/odin-pr.yml, scripts/odin-pr/mutate-odin-pr.mjs
@@ -31,12 +31,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 36 | конфликт: нет данных | слито: 83 | закрыто: 156
+открыто: 35 | конфликт: нет данных | слито: 83 | закрыто: 157
 #422 BEZ PATTERNOV: неподвижный кадр для паков вместо таймаута сн | 1d6c9557d51496b703e9279fb57188e385f2e126
 #421 Почему стояла работа: ложный красный BEZ PATTERNOV, тупик ли | a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1
 ещё 81: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3014 коммитов | нет данных
+МГЛ: 3016 коммитов | нет данных
 МГ: 46 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:33, reference:31, rules:10, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
@@ -55,4 +55,4 @@ wild-train-prologue — не прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 2026111801 | 18.11.2026 | BEZ PATTERNOV: у PR без игры каталога проверка по умолчанию мерила INK-шейдер и требовала улучшить его на 15% — красными стояли все PR ассетов и правил (#371, #409, #415 и др.), работа ChatGPT не сливалась | Claude: разбор «почему с… (сокращено)
 | 2026111802 | 18.11.2026 | Лимит пяти живых PR держал в очереди и сам ремонт ложно красной проверки, которая и мешала пяти старейшим слиться — тупик | Claude: #421 красный только по storozha-quota | scripts/storozha/verify-storozha.mjs: claude/* не блокируетс… (сокращено)
-ещё 75: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+ещё 76: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

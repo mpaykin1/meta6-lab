@@ -86,10 +86,13 @@ const ARC2 = (() => {
     archer.spine.rotation.z += -direction * 0.09 * strength;
     archer.body.rotation.z += -direction * 0.07 * strength;
     archer.head.rotation.y += direction * 0.13 * strength;
-    // Existing segmented cape follows the runner's real velocity and footsteps.
+    // Each step sends a ripple from the shoulders to the cape's loose hem.
     archer.cape.forEach((segment, index) => {
-      segment.rotation.x += (0.08 + index * 0.045) * strength;
-      segment.rotation.z += direction * (0.035 + index * 0.016) * strength;
+      const phase = RUN.stride * 2 - index * 0.75;
+      const swing = Math.sin(phase) * (0.035 + index * 0.043);
+      const lift = Math.cos(phase) * (0.02 + index * 0.026);
+      segment.rotation.x += (0.08 + index * 0.045 + lift) * strength;
+      segment.rotation.z += direction * (0.035 + index * 0.016 + swing) * strength;
     });
   }
 

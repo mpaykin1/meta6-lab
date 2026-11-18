@@ -50,6 +50,22 @@ const scenarios=[
   reason:/GITHUB_ACTIONS/
  },
  {
+  name:'asset-pack-repair-without-journal-is-allowed',
+  title:'assets(shpili): исправил HARD в ассетах',
+  body:'ошибки бота исправлены',
+  patch:diff('asset-packs/incoming/tumannye-shpili-plus/index.html',['-<p>a</p>','+<p>b</p>'])+
+   diff('reports/asset-pack-bot/tumannye-shpili.md',['-a','+b']),
+  pass:true
+ },
+ {
+  name:'repair-pack-plus-shared-file-needs-journal',
+  title:'assets: fix',
+  body:'',
+  patch:diff('asset-packs/incoming/tumannye-shpili-plus/index.html',['-<p>a</p>','+<p>b</p>'])+
+   diff('automation/asset-check/SPEC.md',['-a','+b']),
+  reason:/OSHIBKI\.md/
+ },
+ {
   name:'honest-change',
   title:'MCP: new method',
   body:'New method, no old assertions affected.',

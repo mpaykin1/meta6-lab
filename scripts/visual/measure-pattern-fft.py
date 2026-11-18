@@ -97,6 +97,12 @@ def main():
             # wall/tree. Their after-score is still checked, but a full-surface
             # negative control is needed to prove the original periodic waves.
             if name == "ink-shader-probe":
+                # Claude 18.11.2026: PR без изменения INK-шейдера (правила, бот ассетов) не может
+                # «улучшить» отрицательный контроль — кадр тот же. Раньше это валило каждый такой PR
+                # (#411, #412). Контроль сохраняется: старая волна должна быть видна, а хуже стать нельзя.
+                if previous >= CUTOFF and abs(previous - current) <= 1e-4:
+                    print(f"INK FFT {name}: INK shader unchanged in this PR, control identical — improvement not required")
+                    continue
                 if previous < CUTOFF:
                     failures.append(name + ": old periodic reference was not detected")
                 if current >= previous * .85:

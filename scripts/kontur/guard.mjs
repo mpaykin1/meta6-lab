@@ -128,7 +128,11 @@ export function checkDiff(diff,title='',body=''){
    }
   }
  }
- if(/исправ|ошибк|\bfix\b/i.test(title+'\n'+body) && !hasJournalTrap(files)){
+ // Claude 18.11.2026: PR ассетов (только свой пак + отчёт игры) по закону З2 не трогает OSHIBKI.md —
+ // урок он пишет отдельным файлом automation/asset-check/uroki/. Иначе К3 и З2 вечно спорили (#410).
+ const assetOnly=files.length>0 && files.every(file=>/^asset-packs\/incoming\/[^/]+\//.test(file.path) ||
+  /^reports\/asset-pack-bot\/[^/]+\.md$/.test(file.path));
+ if(!assetOnly && /исправ|ошибк|\bfix\b/i.test(title+'\n'+body) && !hasJournalTrap(files)){
   errors.push('PR title/body signals a repair, but OSHIBKI.md has no changed row with a concrete trap path (К3)');
  }
  return [...new Set(errors)];

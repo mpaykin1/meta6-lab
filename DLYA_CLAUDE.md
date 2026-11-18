@@ -32,21 +32,17 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #291 | lab/polza-b2-broken-city-20261113 | OSHIBKI.md, shared/library/index.json | 2026-11-18 |
 | #297 | lab/ostrov-aptekarya-ii | OSHIBKI.md | 2026-11-18 |
 | #300 | lab/native-catalog-recovery-20261113 | OSHIBKI.md | 2026-11-18 |
-| #306 | lab/assets-tumannye-shpili-20261114-2338 | DLYA_CLAUDE.md, LINKS.txt, OSHIBKI.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-18 |
 | #310 | lab/patch-import | OSHIBKI.md, automation/asset-check/mutate_bot.py, automation/asset-check/test_kinds.py | 2026-11-18 |
 | #322 | lab/ink-watercolor-steam-train-20261114 | LINKS.txt, OSHIBKI.md, reports/zavaly/PROGRESS.md | 2026-11-18 |
 | #331 | lab/razbor-zavalov | OSHIBKI.md, automation/SLIYANIE.md, reports/zavaly/PROGRESS.md, scripts/karta-sil/route.mjs | 2026-11-18 |
 | #343 | lab/assets-nebesny-pilot-20261116 | LINKS.txt, OSHIBKI.md, automation/asset-check/OCHERED.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-18 |
 | #354 | lab/3d-master-visual-split-20261117 | reports/zavaly/PROGRESS.md | 2026-11-18 |
+| #355 | lab/z04-b2-extract-motion-20261117 | OSHIBKI.md | 2026-11-18 |
 | #357 | lab/rules-playgama-catalog-direct-20261117 | OSHIBKI.md | 2026-11-18 |
 | #364 | lab/assets-vorona-v-tumane-20261117 | automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py, automation/asset-check/test_kinds.py | 2026-11-18 |
-| #367 | lab/assets-nebesny-gothic-city-20261117 | OSHIBKI.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-18 |
-| #371 | lab/assets-ink-valley-20261117 | ZADACHI.md, automation/asset-check/OCHERED.md, automation/asset-check/SPEC.md | 2026-11-18 |
-| #385 | lab/assets-black-train-puddle-reflections-20261117-gpt6 | asset-packs/incoming/black-train/src/scene.js | 2026-11-18 |
-| #386 | lab/assets-black-train-mist-light-20261117 | asset-packs/incoming/black-train/makers.js, asset-packs/incoming/black-train/src/scene.js | 2026-11-18 |
-| #389 | lab/assets-ink-video-nookvale-20261117 | automation/asset-check/OCHERED.md | 2026-11-18 |
+| #402 | lab/avto2-pagination-20261117 | OSHIBKI.md | 2026-11-18 |
 | #411 | lab/asset-bot-cutout | OSHIBKI.md | 2026-11-18 |
-| #412 | lab/asset-bot-gothic-facades | OSHIBKI.md | 2026-11-18 |
+| #412 | lab/asset-bot-gothic-facades | OSHIBKI.md, automation/asset-check/SPEC.md | 2026-11-18 |
 <!-- STOROZHA:CONFLICTS:END -->
 | #242 | lab/seo-claude-adfree-1111 | НУЖЕН CLAUDE: красные verify, bot, guard; SEO PR меняет claude-games/games/*/index.html (17 игр), а базовый PR #234 содержит несовпадение SHA256 защищённого pod-i-nad; не изменять эталон/охранник, проверить базовую ветку и CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117 | 2026-11-11 |
 | #245 | lab/remont-main-veil-terraces | НУЖЕН CLAUDE: игровая правка [PR #245](https://github.com/mpaykin1/meta6-lab/pull/245) прошла [META BOT на PR](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984334) и [focused 6/6](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984307), но на main PASS нет. После безопасного слияния актуального main в ремонтную ветку [13d85bb](https://github.com/mpaykin1/meta6-lab/commit/13d85bbf4e324cb01729c8a8464bf73364889a74) автоматический Library Machine **повторно** внёс посторонние `shared/library/index.json`, `shared/library/veil-terraces.json` коммитом [02ba0f5](https://github.com/mpaykin1/meta6-lab/commit/02ba0f5812afcae9467cdefa5cb7f3b381f6ee2f). Новый [META BOT](https://github.com/mpaykin1/meta6-lab/actions/runs/43018578169) имеет `action_required`, не PASS. STOROZHA [43012984349](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984349) дважды FAIL HTTP 403 GitHub API rate limit. Третья очистка бесполезна: машинная запись восстанавливает изменения, защищённые workflow/сторож не править. Нужны одобрение новых Actions (если доступно), устранение автоматического загрязнения PR и независимая проверка до squash; затем 2 PASS META BOT на main. | 2026-11-11 |

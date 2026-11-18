@@ -72,9 +72,11 @@ const details=[
  ['cogRelic',.7,1.2,-.3],['ravenCoven',-5.4,-7.9,.8],
  ['paperMoths',-1.5,-1.1,.8],['marshBeacon',-9.3,7,-.25]
 ];
+// Small creatures and relics read as specks at game distance: scaled up so they stay visible in fog.
+const SMALL={myceliumBloom:1.8,cogRelic:2.2,paperMoths:2.4};
 const objects=[],first=new Map();
 for(const [id,x,z,y] of details){const m=makers[id];if(!m)continue;
- const o=m(17);o.position.set(x,y,z);if(id==='pilgrimageBoat')o.rotation.y=.5;
+ const o=m(17);o.position.set(x,y,z);o.scale.multiplyScalar(SMALL[id]||1);if(id==='pilgrimageBoat')o.rotation.y=.5;
  world.add(o);watercolor.apply(o,{seed:'ink-valley:'+id});objects.push({id,o,x,z});first.set(id,o)}
 // Brush-lit fog: a translucent gradient texture on planes, drifting and recycling without CPU pixel loops.
 const texCanvas=document.createElement('canvas');texCanvas.width=128;texCanvas.height=128;
@@ -113,16 +115,19 @@ renderer.domElement.addEventListener('pointermove',e=>{if(pointer?.id!==e.pointe
  pointer.x=e.clientX;pointer.y=e.clientY});
 renderer.domElement.addEventListener('pointerup',()=>pointer=null);renderer.domElement.addEventListener('pointercancel',()=>pointer=null);
 addEventListener('wheel',e=>{zoom=Math.max(.55,Math.min(1.65,zoom+e.deltaY*.0007))},{passive:true});
-let near=0;const clock=new T.Clock();let last=performance.now(),fpsSlow=0,quality=1,boost=0,shimmer=0;
+let near=0,frozen=false;const clock=new T.Clock();
+function placeCamera(dt,snap){
+ if(snap){focus.copy(target);near=free?0:1}else{focus.lerp(target,1-Math.exp(-dt*3.1));near+=((free?0:1)-near)*(1-Math.exp(-dt*2.2))}
+ const dist=(16.4-8.2*near)*zoom,want=new T.Vector3(focus.x+dist*Math.sin(.78+orbit),5.5+dist*Math.sin(heading),focus.z+dist*Math.cos(.78+orbit));
+ if(snap)camera.position.copy(want);else camera.position.lerp(want,1-Math.exp(-dt*2.6));camera.lookAt(focus)}let last=performance.now(),fpsSlow=0,quality=1,boost=0,shimmer=0;
 function update(){
- requestAnimationFrame(update);const now=performance.now(),dt=Math.min(.05,clock.getDelta()),t=now*.001;
+ requestAnimationFrame(update);if(frozen)return;const now=performance.now(),dt=Math.min(.05,clock.getDelta()),t=now*.001;
  const moveX=(keys.d||keys.arrowright?1:0)-(keys.a||keys.arrowleft?1:0)+joy.x;
  const moveZ=(keys.s||keys.arrowdown?1:0)-(keys.w||keys.arrowup?1:0)+joy.y;
  if(free){const sin=Math.sin(orbit),cos=Math.cos(orbit),speed=dt*3.9;
   target.x+=(moveX*cos-moveZ*sin)*speed;target.z+=(moveX*sin+moveZ*cos)*speed;
   target.x=Math.max(-18,Math.min(18,target.x));target.z=Math.max(-17,Math.min(17,target.z));}
- focus.lerp(target,1-Math.exp(-dt*3.1));near+=((free?0:1)-near)*(1-Math.exp(-dt*2.2));const dist=(16.4-8.2*near)*zoom;
- camera.position.lerp(new T.Vector3(focus.x+dist*Math.sin(.78+orbit),5.5+dist*Math.sin(heading),focus.z+dist*Math.cos(.78+orbit)),1-Math.exp(-dt*2.6));camera.lookAt(focus);
+ placeCamera(dt,false);
  for(const {id,o,x,z} of objects){o.userData.tick?.(t,dt);
  if(id==='moonBell'&&Math.hypot(focus.x-x,focus.z-z)<2.5){boost=3.0;shimmer=1}
  if(id==='cogRelic'&&Math.hypot(focus.x-x,focus.z-z)<1.5){boost=3;shimmer=1;}
@@ -141,5 +146,10 @@ function update(){
 addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(quality===1?1.4:1,devicePixelRatio||1))});
 window.__INK_PACK__={assets:objects.map(o=>o.id),hasScene:true};
 window.__ISOLATE__=(id,on)=>{const o=first.get(id);if(o)o.visible=!!on};
+// Probe for the comparison-sheet bot: select = camera to asset, freeze/draw = one still frame without time drift.
+window.__PACK_PROBE__={assets:Object.fromEntries(objects.map(o=>[o.id,{name:names[o.id]}])),
+ select:id=>select(id),setHidden:(id,h)=>window.__ISOLATE__(id,!h),
+ freeze:()=>{frozen=true},resume:()=>{frozen=false;clock.getDelta()},
+ draw:()=>{placeCamera(0,true);rain.visible=false;watercolor.tick(1000);renderer.render(scene,camera);watercolor.present(1000)}};
 update();
 </script></body></html>

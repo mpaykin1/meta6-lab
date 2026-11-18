@@ -140,8 +140,8 @@ export function ravenCoven(seed=1){
 export function paperMoths(seed=1){
  const g=pack('Бумажные мотыльки',0),wings=[];
  for(let i=0;i<16;i++){const b=new T.Group();const a=R(seed,i)*6.28,d=.3+R(seed,i+44)*.9;b.position.set(Math.cos(a)*d,.25+R(seed,i+37)*1.1,Math.sin(a)*d);g.add(b);
-  ell(b,C.wood,0,0,0,.018,.035,.02);
-  const ww=[];for(let s of[-1,1]){const w=new T.Group();b.add(w);ell(w,i%3?C.bone:C.ochre,s*.07,0,0,.08,.012,.044);ww.push(w)}
+  ell(b,C.dark,0,0,0,.018,.035,.02);
+  const ww=[];for(let s of[-1,1]){const w=new T.Group();b.add(w);ell(w,i%3?C.rust:C.ochre,s*.07,0,0,.08,.012,.044);ww.push(w)}
   wings.push([b,ww,i*1.83]);}
  g.userData.tick=t=>wings.forEach(([b,w,p])=>{b.position.y=.45+.32*Math.sin(t*.7+p);b.position.x+=.00007*Math.sin(t+p);w.forEach((o,i)=>o.rotation.y=(i?1:-1)*Math.sin(t*7+p)*.95)});return g;
 }

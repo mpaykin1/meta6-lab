@@ -20,6 +20,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Лучник в тумане: волна плаща в такт бегу | МГЛ | чат ChatGPT | `lab/archer-retention-exp-1-game` | [#264](https://github.com/mpaykin1/meta6-lab/pull/264) | 2026-11-18 09:10 UTC | — |
 | взято | Z01: устранить конфликт PR #405 и сохранить полную проверку CI | МГЛ | чат ChatGPT | `lab/repair-dispatcher-check-pagination-1118` | [#405](https://github.com/mpaykin1/meta6-lab/pull/405) | 2026-11-18 07:09 UTC | — |
 | взято | BLACK TRAIN: разрешить конфликт графического PR #385, сохранив свет тумана из main | МГЛ | чат ChatGPT | `lab/assets-black-train-puddle-reflections-20261117-gpt6` | [#385](https://github.com/mpaykin1/meta6-lab/pull/385) | 2026-11-18 07:05 UTC | — |
 | взято | АССЕТЫ: The Last Healer — дополнения INK по видео | МГЛ | чат ChatGPT | `lab/assets-last-healer-video-batch1-20261117-g6` | — | 2026-11-17 12:25 UTC | — |

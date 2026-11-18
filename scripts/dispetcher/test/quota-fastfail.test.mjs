@@ -25,3 +25,12 @@ test('dispatcher retries once for short quota reset',async()=>{
  assert.equal(calls,2);
  assert.equal(waited,6000);
 });
+
+test('dispatcher rejects reset at 10 seconds when safety margin exceeds cap',async()=>{
+ let calls=0,waits=0;
+ await assert.rejects(()=>api('/pulls/1',{now:()=>now,maxWaitMs:10000,
+  request:async()=>{calls++;return response(429,10)},
+  wait:async()=>{waits++}}),/нет данных: квота/);
+ assert.equal(calls,1);
+ assert.equal(waits,0);
+});

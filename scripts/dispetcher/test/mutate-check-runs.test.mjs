@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {assertCompleteCheckRuns} from '../build.mjs';
+import {assertCompleteCheckRuns,fetchAllCheckRuns} from '../build.mjs';
 
 const sha='deadbeef';
 const full={total_count:2,check_runs:[{name:'guard',conclusion:'success'},{name:'visual',conclusion:'failure'}]};
@@ -32,4 +32,27 @@ test('a complete empty check-runs response with valid status is structurally val
 
 test('negative reported total is invalid even with empty check-runs',()=>{
  assert.throws(()=>assertCompleteCheckRuns({total_count:-1,check_runs:[]},statuses,sha),/неполный список check-runs/);
+});
+
+
+test('fetches later check-run pages including a failure',async()=>{
+ let page=0;
+ const checks=await fetchAllCheckRuns(sha,async()=>++page===1?
+  {total_count:101,check_runs:Array(100).fill({conclusion:'success'})}:
+  {total_count:101,check_runs:[{conclusion:'failure'}]});
+ assert.equal(page,2);
+ assert.equal(checks.check_runs.length,101);
+ assert.equal(checks.check_runs[100].conclusion,'failure');
+ assert.doesNotThrow(()=>assertCompleteCheckRuns(checks,statuses,sha));
+});
+
+test('mutation: changing total count between pages fails closed',async()=>{
+ let page=0;
+ await assert.rejects(fetchAllCheckRuns(sha,async()=>++page===1?
+  {total_count:101,check_runs:Array(100).fill({})}:
+  {total_count:102,check_runs:[{}]}),/неполный список/);
+});
+
+test('mutation: truncated intermediate page fails closed',async()=>{
+ await assert.rejects(fetchAllCheckRuns(sha,async()=>({total_count:101,check_runs:[{}]})),/неполная страница/);
 });

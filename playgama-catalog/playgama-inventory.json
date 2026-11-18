@@ -203,6 +203,15 @@
   ],
   "pendingGames": [
     {
+      "title": "The Last Healer",
+      "slug": "the-last-healer",
+      "coverUrl": "https://mpaykin1.github.io/meta6/playgama-catalog/covers/the-last-healer.webp",
+      "playgamaUrl": "https://playgama.ai/play/oa65imuhcockyp",
+      "source": "Owner-supplied game cover and exact Playgama URL, 2026-11-17",
+      "verification": "Owner confirms publication on Playgama. Connected developer console list currently returns only the earlier 14 records; URL content not independently retrievable from this environment.",
+      "indexable": true
+    },
+    {
       "title": "Wild Train: Prologue",
       "slug": "wild-train-prologue",
       "coverUrl": "https://mpaykin1.github.io/meta6/playgama-catalog/covers/wild-train-prologue.webp",

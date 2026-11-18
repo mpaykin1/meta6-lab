@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 118, слито 8, закрыто 88, открыто 22 — бот, 2026-11-17 01:57 UTC
+Итог: всего 118, слито 8, закрыто 91, открыто 19 — бот, 2026-11-18 08:12 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -23,21 +23,21 @@
 | #288 | код | — | INK stone bell | open dirty | draft: ЖДЁТ визуальный PASS колокола и CI [#288](https://github.com/mpaykin1/meta6-lab/pull/288) |
 | #278 | код | — | ТОЛКАЧ safe merge | closed | закрыт: без слияния; отдельный PR не нужен, изменения консолидировались в [#331](https://github.com/mpaykin1/meta6-lab/pull/331); [PR #278](https://github.com/mpaykin1/meta6-lab/pull/278) |
 | #289 | код | — | POLZA Gate | closed | draft: ЖДЁТ согласованного bootstrap POLZA и обязательного статуса в main [#289](https://github.com/mpaykin1/meta6-lab/pull/289); конфликт main |
-| #290 | код | — | INK без паттернов | open unknown | draft: ЖДЁТ визуальную приёмку изменения принятого INK-движка и CI [#290](https://github.com/mpaykin1/meta6-lab/pull/290); main имеет другой shader SHA |
+| #290 | код | — | INK без паттернов | closed | draft: ЖДЁТ визуальную приёмку изменения принятого INK-движка и CI [#290](https://github.com/mpaykin1/meta6-lab/pull/290); main имеет другой shader SHA |
 | #291 | код | — | B2 Broken City | open unknown | draft: ЖДЁТ реального прохождения broken-city ботом и changed-games [#291](https://github.com/mpaykin1/meta6-lab/pull/291) |
 | #297 | код | — | Остров аптекаря II | open unknown | draft: ЖДЁТ бот-прохождения главы II, скриншоты ПК/мобилки и конфликт main [#297](https://github.com/mpaykin1/meta6-lab/pull/297) |
 | #299 | код | — | CI concurrency | closed | draft: ЖДЁТ merge main и CI 23 изменённых workflow, без отмены main [#299](https://github.com/mpaykin1/meta6-lab/pull/299) |
 | #300 | код | — | Native Catalog Candidate | open unknown | draft: ЖДЁТ конфликт main, Native Catalog Candidate CI и проверку релиза [#300](https://github.com/mpaykin1/meta6-lab/pull/300) |
 | #303 | код | — | Туманные шпили 38 | closed | draft: ЖДЁТ HARD=0, сравнение эталонов и визуальный PASS [#303](https://github.com/mpaykin1/meta6-lab/pull/303) |
 | #305 | код | — | Туманные шпили архитектура | closed | draft: ЖДЁТ HARD=0 и визуальную приёмку 38-ID архитектуры [#305](https://github.com/mpaykin1/meta6-lab/pull/305) |
-| #306 | код | — | Туманные шпили страж | open unknown | draft: ЖДЁТ HARD=0 и визуальную приёмку «страж+собор» [#306](https://github.com/mpaykin1/meta6-lab/pull/306) |
+| #306 | код | — | Туманные шпили страж | closed | draft: ЖДЁТ HARD=0 и визуальную приёмку «страж+собор» [#306](https://github.com/mpaykin1/meta6-lab/pull/306) |
 | #310 | код | — | MIT PixelFX | open unknown | draft: ЖДЁТ устранения конфликта main, полного CI и лицензий PixelFX MIT [#310](https://github.com/mpaykin1/meta6-lab/pull/310) |
 | #313 | код | — | Portal Play Connect Earn | closed | draft: ЖДЁТ настоящий META BOT без застревания и полный CI [#313](https://github.com/mpaykin1/meta6-lab/pull/313) |
 | #314 | код | — | Sunken City source ZIP | closed | draft: ЖДЁТ зелёный META BOT и Library Machine; ZIP оригинала сохранить [#314](https://github.com/mpaykin1/meta6-lab/pull/314) |
 | #319 | код | — | Source-only git 128 | open unknown | draft: ЖДЁТ source-only-base (отсутствует в main), зелёный Library Machine и новый CI [#319](https://github.com/mpaykin1/meta6-lab/pull/319) |
 | #321 | код | — | INK Raven | merged | слит в feature-ветку `lab/ink-fallen-robot-20261113`, не в main: [SHA 00c22fba](https://github.com/mpaykin1/meta6-lab/commit/00c22fba0c1fbcf71a535ddd9342da286e875b27); [PR #321](https://github.com/mpaykin1/meta6-lab/pull/321) |
 | #322 | код | — | INK Train | open unknown | draft: ЖДЁТ устранения [KONTUR FAIL 43749151115](https://github.com/mpaykin1/meta6-lab/actions/runs/43749151115) и визуального OWNER PASS [#322](https://github.com/mpaykin1/meta6-lab/pull/322) |
-| #325 | код | — | INK Monster | open unknown | draft: ЖДЁТ визуального OWNER PASS монстра и полного CI [#325](https://github.com/mpaykin1/meta6-lab/pull/325) |
+| #325 | код | — | INK Monster | closed | draft: ЖДЁТ визуального OWNER PASS монстра и полного CI [#325](https://github.com/mpaykin1/meta6-lab/pull/325) |
 | #326 | код | — | INK Viaduct | open unknown | draft: ЖДЁТ визуального OWNER PASS 3D-виадуков и CI [#326](https://github.com/mpaykin1/meta6-lab/pull/326) |
 | #332 | код | — | INK Carrion Stalker | open unknown | draft: ЖДЁТ HTTP 200 превью и визуальный OWNER PASS робота [#332](https://github.com/mpaykin1/meta6-lab/pull/332) |
 | #311 | код | `lab/bot-audit-20261114` | Ремонт JSON и ассетов | merged | ГОТОВ К ПРОВЕРКЕ: HEAD `7fa9bead6c68b6f82e730a126b2bd43ebfe73054`, 23 GitHub Actions PASS, 9 skipped, 0 failed; mergeable=true; внешний Vercel build-rate-limit, не считать полным CI PASS; [проверки](https://github.com/mpaykin1/meta6-lab/pull/311/checks) |

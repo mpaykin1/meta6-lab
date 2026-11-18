@@ -7,8 +7,10 @@ export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTime
  for(let attempt=0;attempt<2;attempt++){
   const response=await request(root+path,{headers});
   if(response.ok)return response.json();
-  const remaining=Number(response.headers.get('x-ratelimit-remaining'));
-  const reset=Number(response.headers.get('x-ratelimit-reset'))*1000;
+  const remainingHeader=response.headers.get('x-ratelimit-remaining');
+  const resetHeader=response.headers.get('x-ratelimit-reset');
+  const remaining=remainingHeader===null?NaN:Number(remainingHeader);
+  const reset=resetHeader===null?NaN:Number(resetHeader)*1000;
   if((response.status===403||response.status===429)&&remaining===0&&Number.isFinite(reset)&&reset>0){
    const waitMs=reset-now();
    if(waitMs>0&&waitMs<=8*60*1000&&waitMs+1000<=maxWaitMs&&attempt===0){await wait(waitMs+1000);continue}

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-18T11:00:21.704Z",
+  "generated_at": "2026-11-18T11:15:50.929Z",
   "sha": {
-    "lab": "0824c001dd316605d8c607025f41185782563374",
+    "lab": "1d6c9557d51496b703e9279fb57188e385f2e126",
     "mg": "5984fcd5b79ed2d03c648053334361db8deb44fb"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44290392190",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44292897616",
   "review": {
     "protected": [
       {
@@ -515,7 +515,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44274899024"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44289324890"
       },
       "P1": {
         "value": "не подтверждено",
@@ -526,10 +526,15 @@
   },
   "pr": {
     "open": 35,
-    "conflicts": "нет данных",
-    "merged": 82,
+    "conflicts": 23,
+    "merged": 83,
     "closed": 156,
     "mergedItems": [
+      {
+        "number": 422,
+        "title": "BEZ PATTERNOV: неподвижный кадр для паков вместо таймаута сн",
+        "sha": "1d6c9557d51496b703e9279fb57188e385f2e126"
+      },
       {
         "number": 421,
         "title": "Почему стояла работа: ложный красный BEZ PATTERNOV, тупик ли",
@@ -1312,7 +1317,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2936,
+      "count": 2940,
       "folders": "нет данных"
     },
     "mg": {

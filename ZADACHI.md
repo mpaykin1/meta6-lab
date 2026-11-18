@@ -9,6 +9,7 @@
 
 Сторож проверил: 2026-11-17 06:54 UTC
 
+| взято | АССЕТЫ: BLACK TRAIN — объёмные рваные грозовые тучи вместо плоских полос | МГЛ | ChatGPT | `lab/assets-black-train-clouds-20261117` | [#384](https://github.com/mpaykin1/meta6-lab/pull/384) | 2026-11-17 | — |
 <!-- ZADACHI:START -->
 **Итог:** 🛑 зависло 40 · ⚠ молчит 6 · 🔨 в работе 10 · 🙋 нужен Claude 4 · 💤 заброшено 9 · ✅ готово 0
 
@@ -16,8 +17,11 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | BLACK TRAIN: разрешить конфликт графического PR #385, сохранив свет тумана из main | МГЛ | чат ChatGPT | `lab/assets-black-train-puddle-reflections-20261117-gpt6` | [#385](https://github.com/mpaykin1/meta6-lab/pull/385) | 2026-11-18 07:05 UTC | — |
+| взято | АССЕТЫ: The Last Healer — дополнения INK по видео | МГЛ | чат ChatGPT | `lab/assets-last-healer-video-batch1-20261117-g6` | — | 2026-11-17 12:25 UTC | — |
+| взято | АССЕТЫ: The Last Healer — 24 позиции видео, партия INK | МГЛ | чат ChatGPT | `lab/assets-last-healer-video-20261117` | — | 2026-11-17 12:25 UTC | — |
 | взято | Z01: устранить конфликт PR #374 без потери независимых записей | МГЛ | чат ChatGPT | `lab/z01-preserve-summary-conflicts-builder3-1117` | [#374](https://github.com/mpaykin1/meta6-lab/pull/374) | 2026-11-17 10:46 UTC | — |
-| взято | Z01: разрешить конфликт PR #361 и проверить слияние | МГЛ | чат ChatGPT | `lab/avto1-z01-draft-quota-20261117` | [#361](https://github.com/mpaykin1/meta6-lab/pull/361) | 2026-11-17 10:43 UTC | — |
+| взято | Z01: восстановить CI PR #357 и регламент прямых ссылок Playgama | МГЛ | чат ChatGPT | `lab/rules-playgama-catalog-direct-20261117` | [#357](https://github.com/mpaykin1/meta6-lab/pull/357) | 2026-11-17 10:52 UTC | — |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | docs(z01): verify live PR identity before backlog decisions | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/mg-remontnik-nadzor-z01-20261117` | [#369](https://github.com/mpaykin1/meta6-lab/pull/369) | 2026-11-17 03:49 | 2026-11-17 03:48 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | Z20: META BOT — не засчитывать провальный второй запуск `secondRun: hash` | МГЛ | чат ChatGPT | `lab/z20-meta-bot-second-run-hash-20261117` | [#368](https://github.com/mpaykin1/meta6-lab/pull/368) | 2026-11-17 03:39 UTC | 2026-11-17 03:45 |
 | 🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ | fix(shpili): шарнирный страж и собор — пара на просмотр | МГЛ | ChatGPT (сам не записал — добавил сторож) | `lab/assets-tumannye-shpili-20261114-2338` | [#306](https://github.com/mpaykin1/meta6-lab/pull/306) | 2026-11-13 20:35 | 2026-11-17 03:12 |

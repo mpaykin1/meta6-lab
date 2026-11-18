@@ -9,6 +9,7 @@
 
 Сторож проверил: 2026-11-17 06:54 UTC
 
+| взято | Z04 B2: довести реальный верификатор движения, закрыть ловушку KONTUR PR #355 | МГЛ | чат ChatGPT | `lab/z04-b2-extract-motion-20261117` | [#355](https://github.com/mpaykin1/meta6-lab/pull/355) | 2026-11-18 UTC | — |
 | взято | Z01: ремонт конфликта PR #402, проверка пагинации и исключение журнала из diff | МГЛ | чат ChatGPT | `lab/avto2-pagination-20261117` | [#402](https://github.com/mpaykin1/meta6-lab/pull/402) | 2026-11-18 08:45 UTC | — |
 | взято | Z01: перенос заказанных INK-ассетов из #389 в канонический PR #415 и CI | МГЛ | чат ChatGPT | `lab/assets-ink-video-nookvale` | [#415](https://github.com/mpaykin1/meta6-lab/pull/415) | 2026-11-18 | — |
 | взято | АССЕТЫ: BLACK TRAIN — объёмные рваные грозовые тучи вместо плоских полос | МГЛ | ChatGPT | `lab/assets-black-train-clouds-20261117` | [#384](https://github.com/mpaykin1/meta6-lab/pull/384) | 2026-11-17 | — |

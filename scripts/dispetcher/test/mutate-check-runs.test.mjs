@@ -29,3 +29,7 @@ test('deception mutation: fabricated empty successful first page despite larger 
 test('a complete empty check-runs response with valid status is structurally valid',()=>{
  assert.doesNotThrow(()=>assertCompleteCheckRuns({total_count:0,check_runs:[]},statuses,sha));
 });
+
+test('negative reported total is invalid even with empty check-runs',()=>{
+ assert.throws(()=>assertCompleteCheckRuns({total_count:-1,check_runs:[]},statuses,sha),/неполный список check-runs/);
+});

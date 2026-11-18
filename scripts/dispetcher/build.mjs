@@ -34,6 +34,7 @@ export function indexOpened(opened) {
 export async function listOpenPullRequests(request = api) {
  const result = new Map();
  for(let page=1;;page++){
+  if(page>1000)throw Error('GitHub API open PRs: нет данных: превышен лимит страниц');
   let batch;
   try { batch=await request('/pulls?state=open&per_page=100&page='+page); }
   catch(error) { throw Error('GitHub API open PRs: нет данных: '+error.message); }

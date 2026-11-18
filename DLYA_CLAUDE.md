@@ -16,6 +16,7 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #248 | lab/pr-autofinish-followup-1111 | .github/workflows/pr-autofinish.yml: изменение ЯДРА охраны — только Claude | 2026-11-15 |
 | #370 | lab/ink-car-bathyscaphe-20261117 | Новый эталон: PR должен только добавлять файлы | 2026-11-17 |
 | #404 | lab/z01-api-quota-fastfail-1117 | scripts/dispetcher/test/api-budget.test.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
+| #417 | claude/compare-sheet-test | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

@@ -168,16 +168,33 @@ const places={
 for(const [id,[x,y,z]] of supplements)places[id]=[x,y+.75,z,9];
 const optics=createHealerOptics(renderer,scene,camera),audio=createHealerAudio();
 const soundIds=new Set(['sndCarEngine','sndRainNight','sndRowingShore']);
-let chosen='all',clock=0,manual=false,frame=0;
+// Lighting, sky, fog and INK post-color stay in the same continuously blended mood.
+// Night must remain genuinely dark during animation, not reset to daytime every frame.
+const moods=[
+ {sky:new T.Color('#d9cab9'),fog:new T.Color('#bdc1b5'),sun:1.8,fill:2.3,exposure:1.32},
+ {sky:new T.Color('#4c6474'),fog:new T.Color('#5d7882'),sun:.32,fill:.92,exposure:1.06},
+ {sky:new T.Color('#ced9c9'),fog:new T.Color('#c7dbce'),sun:2.25,fill:2.75,exposure:1.45}
+];
+let chosen='all',clock=0,manual=false,frame=0,moodValue=0,moodTarget=0,lastTick=0;
+const carStart=cm.position.clone();
+function applyMood(dt){
+ const a=dt<=0?1:1-Math.exp(-2.5*dt);
+ moodValue+=(moodTarget-moodValue)*a;
+ const lo=Math.min(2,Math.floor(moodValue)),hi=Math.min(2,lo+1),f=moodValue-lo;
+ scene.background.copy(moods[lo].sky).lerp(moods[hi].sky,f);
+ scene.fog.color.copy(moods[lo].fog).lerp(moods[hi].fog,f);
+ sun.intensity=T.MathUtils.lerp(moods[lo].sun,moods[hi].sun,f)*(1+.025*Math.sin(clock*.26));
+ hemi.intensity=T.MathUtils.lerp(moods[lo].fill,moods[hi].fill,f);
+ renderer.toneMappingExposure=T.MathUtils.lerp(moods[lo].exposure,moods[hi].exposure,f);
+ optics.setMood(moodValue);
+}
 function select(id){
  chosen=id;
  if(!soundIds.has(id))audio.stop();
  const night=['nightRainGrade','healerWalkWithLight','wetGrassClumps','puddles','whiteClinicBuilding','sndRainNight','handFlashlight','rainSplashRings'].includes(id);
  const day=['boatWake','shoreFoamLine','autumnConeTrees','driftingLeaves','sandBeachTiles','dayCoastGrade','rowingHealer','boatShed','sndRowingShore'].includes(id);
- optics.setMood(day?2:night?1:0);
- scene.background.set(day?'#ced9c9':night?'#798994':'#d9cab9');
- scene.fog.color.set(day?'#c7dbce':night?'#7e9096':'#bdc1b5');
- sun.intensity=night?.56:day?2.4:2.15;
+ moodTarget=day?2:night?1:0;
+ if(manual)applyMood(0);
  for(const [key,obj] of Object.entries(assets))obj.visible=id==='all'||id===key;
  for(const [key,obj] of Object.entries(contexts)){
   if(key!=='rainSplashRings')obj.visible=id==='all'||id===key;
@@ -220,12 +237,18 @@ function draw(){
 }
 function animate(ts){
  if(manual)return;
- const t=ts*.001;clock=t;
- for(const a of Object.values(assets))if(a.userData.tick)a.userData.tick(t,.016);
+ const t=ts*.001,dt=lastTick?Math.max(0,Math.min(.05,t-lastTick)):.016;
+ lastTick=t;clock=t;
+ for(const a of Object.values(assets))if(a.userData.tick)a.userData.tick(t,dt);
+ // Original INK car remains untouched: its attached headlamps travel with the chassis.
+ // Gentle suspension and a slow approach make the light sweep the road and curb.
+ cm.position.z=carStart.z+1.08*Math.sin(t*.36);
+ cm.position.y=carStart.y+.014*Math.sin(t*6.4);
+ cm.rotation.y=.025*Math.sin(t*.36-.5);
  boat.position.y=.035*Math.sin(t*1.26);
  boat.rotation.z=.021*Math.sin(t*.97);
  npc.rotation.y=-.03+.035*Math.sin(t*.6);
- const a=t*.26;sun.intensity=1.8+.26*Math.sin(a);
+ applyMood(dt);
  draw();frame=requestAnimationFrame(animate);
 }
 // A frozen frame can be rendered with one asset hidden, then shown, at the same

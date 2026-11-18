@@ -1,0 +1,198 @@
+{
+  "format": "htmlpack/1",
+  "version": "0.2.0",
+  "game": "vorona-v-tumane",
+  "base": "reference/vorona-v-tumane",
+  "reference_count": 2,
+  "name": "Ворона в тумане — акварельный 2.5D-прототип",
+  "license": {
+    "type": "own",
+    "author": "META GAMES — исходные рисунки владельца; сценография ChatGPT",
+    "commercial": true
+  },
+  "provenance": {
+    "tool": "ChatGPT",
+    "date": "2026-11-17",
+    "source": "reference/vorona-v-tumane/README.md",
+    "description": "Оригиналы подгружаются с того же домена, не копируются и не изменяются"
+  },
+  "content_flags": {
+    "real_persons": [],
+    "brands": [],
+    "political": false
+  },
+  "assets": {
+    "crow": {
+      "label_ru": "Ворона — исходный силуэт",
+      "role": "2.5d",
+      "animated": true,
+      "source": "scene.js",
+      "reference_art_file": "reference/vorona-v-tumane/vorona.png"
+    },
+    "stalker": {
+      "label_ru": "Существо с протезами",
+      "role": "2.5d",
+      "animated": true,
+      "source": "scene.js",
+      "reference_art_file": "reference/vorona-v-tumane/sushchestvo.gif"
+    },
+    "forest_far": {
+      "label_ru": "Дальний туманный лес",
+      "role": "background",
+      "animated": true,
+      "source": "scene.js"
+    },
+    "forest_mid": {
+      "label_ru": "Средний туманный лес",
+      "role": "background",
+      "animated": true,
+      "source": "scene.js"
+    },
+    "forest_near": {
+      "label_ru": "Передний лес",
+      "role": "background",
+      "animated": true,
+      "source": "scene.js"
+    },
+    "fog_ribbons": {
+      "label_ru": "Текучие полосы тумана",
+      "role": "effect",
+      "animated": true,
+      "source": "scene.js"
+    },
+    "feather": {
+      "label_ru": "Перо ускорения",
+      "role": "2.5d",
+      "animated": true,
+      "source": "scene.js"
+    },
+    "firefly": {
+      "label_ru": "Светлячок",
+      "role": "effect",
+      "animated": true,
+      "source": "scene.js"
+    },
+    "nest": {
+      "label_ru": "Гнездо сохранения",
+      "role": "2.5d",
+      "animated": true,
+      "source": "scene.js"
+    },
+    "impact_feathers": {
+      "label_ru": "Перья при ударе",
+      "role": "effect",
+      "animated": true,
+      "source": "scene.js"
+    },
+    "raindrops": {
+      "label_ru": "Капли воды",
+      "role": "effect",
+      "animated": true,
+      "source": "scene.js"
+    },
+    "glowing_eyes": {
+      "label_ru": "Глаза в тумане",
+      "role": "effect",
+      "animated": true,
+      "source": "scene.js"
+    },
+    "crow_wings": {
+      "label_ru": "Шарнирные крылья вороны",
+      "role": "2.5d",
+      "animated": true,
+      "source": "cutout.json",
+      "quality_status": "preview"
+    },
+    "crow_tail": {
+      "label_ru": "Хвост и лапы вороны",
+      "role": "2.5d",
+      "animated": true,
+      "source": "cutout.json",
+      "quality_status": "preview"
+    },
+    "stalker_limbs": {
+      "label_ru": "Шарнирные лапы существа",
+      "role": "2.5d",
+      "animated": true,
+      "source": "cutout.json",
+      "quality_status": "preview"
+    },
+    "mist_antler": {
+      "label_ru": "Олень из тумана",
+      "role": "2.5d",
+      "animated": true,
+      "source": "creatures.js",
+      "quality_status": "preview"
+    },
+    "bell_crawler": {
+      "label_ru": "Ползун с колоколом",
+      "role": "2.5d",
+      "animated": true,
+      "source": "creatures.js",
+      "quality_status": "preview"
+    },
+    "hollow_sentinel": {
+      "label_ru": "Пустоглазый часовой",
+      "role": "2.5d",
+      "animated": true,
+      "source": "creatures.js",
+      "quality_status": "preview"
+    },
+    "ash_heron": {
+      "label_ru": "Пепельная цапля",
+      "role": "2.5d",
+      "animated": true,
+      "source": "creatures.js",
+      "quality_status": "preview"
+    },
+    "silver_moth": {
+      "label_ru": "Серебряный мотылёк",
+      "role": "2d",
+      "animated": true,
+      "source": "creatures.js",
+      "quality_status": "preview"
+    },
+    "moth_swarm": {
+      "label_ru": "Стая мотыльков",
+      "role": "effect",
+      "animated": true,
+      "source": "creatures.js",
+      "quality_status": "preview"
+    },
+    "wing_sound": {
+      "label_ru": "Звук взмаха",
+      "role": "sound",
+      "animated": true,
+      "source": "audio.js",
+      "quality_status": "preview"
+    },
+    "crow_cry": {
+      "label_ru": "Карканье",
+      "role": "sound",
+      "animated": true,
+      "source": "audio.js",
+      "quality_status": "preview"
+    },
+    "stalker_sound": {
+      "label_ru": "Шорох существа",
+      "role": "sound",
+      "animated": true,
+      "source": "audio.js",
+      "quality_status": "preview"
+    },
+    "wind_sound": {
+      "label_ru": "Ветер",
+      "role": "sound",
+      "animated": true,
+      "source": "audio.js",
+      "quality_status": "preview"
+    },
+    "fog_music": {
+      "label_ru": "Тихая музыка тумана",
+      "role": "music",
+      "animated": true,
+      "source": "audio.js",
+      "quality_status": "preview"
+    }
+  }
+}

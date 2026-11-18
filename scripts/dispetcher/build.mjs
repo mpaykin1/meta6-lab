@@ -11,7 +11,7 @@ export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTime
   const reset=Number(response.headers.get('x-ratelimit-reset'))*1000;
   if((response.status===403||response.status===429)&&remaining===0&&Number.isFinite(reset)&&reset>0){
    const waitMs=reset-now();
-   if(waitMs>0&&waitMs<=8*60*1000&&waitMs<=maxWaitMs&&attempt===0){await wait(waitMs+1000);continue}
+   if(waitMs>0&&waitMs<=8*60*1000&&waitMs+1000<=maxWaitMs&&attempt===0){await wait(waitMs+1000);continue}
    throw Error('нет данных: квота GitHub API до '+new Date(reset).toISOString().slice(11,16)+' UTC');
   }
   throw Error('нет данных: GitHub HTTP '+response.status+' ('+path+')');

@@ -1,0 +1,68 @@
+name: Apothecary chapter II
+on:
+  pull_request:
+    paths:
+      - 'games/ostrov-aptekarya/**'
+      - 'docs/INVENTORY_ostrov-aptekarya.md'
+      - '.github/workflows/ostrov-aptekarya-chapter2.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'games/ostrov-aptekarya/**'
+      - '.github/workflows/ostrov-aptekarya-chapter2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  archive-chapter:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Preserve baseline and invalidate four mutations
+        run: |
+          node games/ostrov-aptekarya/bot/inventory.mjs
+          node games/ostrov-aptekarya/bot/mutate-inventory.mjs
+      - name: No modification to accepted INK world
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            if git diff --name-only "${{ github.event.pull_request.base.sha }}" HEAD | grep '^reference/ink-fallen-guardian/'; then
+              echo 'Reference INK altered'; exit 1
+            fi
+          fi
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Run archive and original chapter playthroughs
+        env:
+          APTEKARYA_ARTIFACT_DIR: artifacts/aptekarya
+        run: |
+          python3 -m http.server 8765 >/tmp/aptekarya-http.log 2>&1 &
+          sleep 2
+          node games/ostrov-aptekarya/bot/playthrough.mjs chapter1
+          node games/ostrov-aptekarya/bot/playthrough.mjs passive
+          node games/ostrov-aptekarya/bot/playthrough.mjs archive
+          node games/ostrov-aptekarya/bot/playthrough.mjs full
+      - name: Screenshots of new chapter — 390×844 + desktop
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ostrov-aptekarya-chapter2-views
+          path: artifacts/aptekarya/*.png
+          if-no-files-found: warn
+      - name: Check publication after merge only
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          base='https://mpaykin1.github.io/meta6-lab/games/ostrov-aptekarya/'
+          curl --retry 5 --retry-delay 12 --fail --silent --show-error "${base}chapter2.js" >/tmp/aptekarya-live-chapter2.js
+          grep -q 'createChapter2' /tmp/aptekarya-live-chapter2.js
+          curl --retry 5 --retry-delay 12 --fail --silent --show-error "${base}" >/dev/null
+          printf '200 %s\n' "${base}"

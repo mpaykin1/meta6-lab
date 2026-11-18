@@ -37,6 +37,9 @@ test('activity collector pages through comments and reviews',async()=>{
  assert.equal(await latestPrActivity(401,request),'2026-11-16T00:00:00.000Z');
  assert.equal(calls.length,3);
  assert.equal(await latestPrActivity(401,async()=>[]),null);
+ let requests=0;
+ await assert.rejects(()=>latestPrActivity(401,async()=>{requests++;return Array.from({length:100},()=>({updated_at:'2026-11-10T00:00:00Z'}));}),/лимит страниц/);
+ assert.equal(requests,1000);
  await assert.rejects(()=>latestPrActivity(401,async()=>[{}]),/дата активности/);
  await assert.rejects(()=>latestPrActivity(401,async()=>null),/история активности/);
 });

@@ -18,6 +18,7 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Z01: устранить конфликт PR #405 и сохранить полную проверку CI | МГЛ | чат ChatGPT | `lab/repair-dispatcher-check-pagination-1118` | [#405](https://github.com/mpaykin1/meta6-lab/pull/405) | 2026-11-18 07:09 UTC | — |
 | взято | BLACK TRAIN: разрешить конфликт графического PR #385, сохранив свет тумана из main | МГЛ | чат ChatGPT | `lab/assets-black-train-puddle-reflections-20261117-gpt6` | [#385](https://github.com/mpaykin1/meta6-lab/pull/385) | 2026-11-18 07:05 UTC | — |
 | взято | АССЕТЫ: The Last Healer — дополнения INK по видео | МГЛ | чат ChatGPT | `lab/assets-last-healer-video-batch1-20261117-g6` | — | 2026-11-17 12:25 UTC | — |
 | взято | АССЕТЫ: The Last Healer — 24 позиции видео, партия INK | МГЛ | чат ChatGPT | `lab/assets-last-healer-video-20261117` | — | 2026-11-17 12:25 UTC | — |

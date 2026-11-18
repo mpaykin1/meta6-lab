@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-18T20:24:18.683Z",
+  "generated_at": "2026-11-18T20:33:32.182Z",
   "sha": {
-    "lab": "b87f416d03781fca183426b8d68ee5cde5ff33bb",
+    "lab": "166f98d3715a09c277b0c701116ff8110195eee6",
     "mg": "5984fcd5b79ed2d03c648053334361db8deb44fb"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44390291046",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44392122467",
   "review": {
     "protected": [
       {
@@ -392,7 +392,7 @@
       "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
-      "| B2: независимый верификатор движения из #258 | lab/z04-b2-extract-motion-20261117 | чат ChatGPT — продолжение PR #355 ⚠ нет коммитов 160 мин | 2026-11-18 |",
+      "| B2: независимый верификатор движения из #258 | lab/z04-b2-extract-motion-20261117 | свободно (зависло 12 ч, было: чат ChatGPT — продолжение PR #355) | 2026-11-18 |",
       "| НАДЗОР — чат ChatGPT | lab/nadzor | свободно (зависло 10 ч, было: чат ChatGPT (надзор)) | 2026-11-17T01:33:05.414Z |",
       "| КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |",
       "| БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |",
@@ -1318,7 +1318,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3000,
+      "count": 3005,
       "folders": "нет данных"
     },
     "mg": {

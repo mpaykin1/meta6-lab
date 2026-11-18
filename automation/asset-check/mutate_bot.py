@@ -11,6 +11,11 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MUTANTS = [
+    ("kinds/cutout.py", "if not isinstance(parts, list) or len(parts) < 6:", "if False:"),
+    ("kinds/cutout.py", 'if parent is not None and (parent not in by_name or parent == part["id"]):', "if False:"),
+    ("kinds/cutout.py", "if len(phases) <= 1:", "if False:"),
+    ("kinds/cutout.py", "if fill < 0.06:", "if False:"),
+    ("kinds/cutout.py", "if not (visual_hook or rig_hook or audio_hook):", "if False:"),
     ("check_pack.py", 'r.add("A6",', 'r.add("C1",'),
     ("check_pack.py", 'r.add("A7",', 'r.add("C2",'),
     ("kinds/images.py", 'r.add("A1",', 'r.add("I1",'),

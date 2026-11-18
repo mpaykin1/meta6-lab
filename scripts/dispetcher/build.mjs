@@ -118,6 +118,8 @@ export async function latestPrActivity(number, request=api) {
  let latest = -Infinity;
  for (const endpoint of ['/issues/'+number+'/comments', '/pulls/'+number+'/reviews']) {
   for (let page=1;;page++) {
+   // Fail closed if an API proxy repeats full pages indefinitely.
+   if (page>1000) throw Error('нет данных: история активности PR превышает лимит страниц');
    const batch=await request(endpoint+'?per_page=100&page='+page);
    if (!Array.isArray(batch)) throw Error('нет данных: история активности PR');
    for (const item of batch) {

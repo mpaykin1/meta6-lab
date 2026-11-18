@@ -7,6 +7,7 @@ on:
       - 'automation/asset-check/**'
       - 'automation/asset-quality/**'
       - '.github/workflows/asset-check.yml'
+      - 'scripts/asset-guard/**'
   push:
     branches: [main]
     paths:
@@ -14,9 +15,11 @@ on:
       - 'automation/asset-check/**'
       - 'automation/asset-quality/**'
       - '.github/workflows/asset-check.yml'
+      - 'scripts/asset-guard/**'
   workflow_dispatch:
 permissions:
   contents: read
+  pull-requests: read
 concurrency:
   group: asset-check-${{ github.ref }}
   cancel-in-progress: false
@@ -28,6 +31,20 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: ASSET GUARD — ловушки и мутанты законов З1–З3
+        run: node scripts/asset-guard/mutate-asset-guard.mjs
+      - name: ASSET GUARD — одна игра = одна ветка, PR только своего пака, compare.png (З1–З3)
+        if: github.event_name == 'pull_request'
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/asset-guard/guard.mjs
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -42,6 +59,11 @@ jobs:
         run: |
           set +e
           fail=0
+          # в PR паки, изменённые этим PR, обязаны иметь HARD = 0 (иначе «зелёный ASSET CHECK» ничего не значит)
+          changed=""
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            changed=$(git diff --name-only "${{ github.event.pull_request.base.sha }}...HEAD" | sed -n 's#^asset-packs/\([^/]*/[^/]*\)/.*#\1#p' | sort -u)
+          fi
           for d in asset-packs/*/*/; do
             name=$(basename "$d"); stage=$(basename "$(dirname "$d")")
             python -I automation/asset-check/check_pack.py "$d" --out "out/$stage-$name" > /dev/null
@@ -49,6 +71,10 @@ jobs:
             { echo "## $stage / $name — exit $code"; sed -n '1,200p' "out/$stage-$name/REPORT.md"; } >> "$GITHUB_STEP_SUMMARY"
             # incoming/ — ещё в работе: HARD не валит прогон; ready/ — HARD запрещён
             if [ "$stage" = "ready" ] && [ $code -ne 0 ]; then fail=1; fi
+            if [ $code -ne 0 ] && printf '%s\n' "$changed" | grep -qx "$stage/$name"; then
+              echo "::error::$stage/$name изменён в этом PR и имеет HARD (exit $code) — слияние запрещено, исправь HARD"
+              fail=1
+            fi
           done
           exit $fail
       - uses: actions/upload-artifact@v4

@@ -117,11 +117,20 @@ export async function latestPrActivity(number, request=api) {
  if (!Number.isSafeInteger(number) || number < 1) throw Error('нет данных: номер PR');
  let latest = -Infinity;
  for (const endpoint of ['/issues/'+number+'/comments', '/pulls/'+number+'/reviews']) {
+  let previousFingerprint = null;
   for (let page=1;;page++) {
    // Fail closed if an API proxy repeats full pages indefinitely.
    if (page>1000) throw Error('нет данных: история активности PR превышает лимит страниц');
    const batch=await request(endpoint+'?per_page=100&page='+page);
    if (!Array.isArray(batch)) throw Error('нет данных: история активности PR');
+   // A full repeated page indicates a broken API/proxy pagination cursor.
+   if (batch.length === 100) {
+    const ids = batch.map(item => item?.id);
+    if (ids.some(id => !Number.isSafeInteger(id))) throw Error('нет данных: идентификаторы активности PR');
+    const fingerprint = ids.join(',');
+    if (page > 1 && fingerprint === previousFingerprint) throw Error('нет данных: повтор страницы активности PR');
+    previousFingerprint = fingerprint;
+   }
    for (const item of batch) {
     const raw=endpoint.includes('/reviews') ? (item.submitted_at || item.created_at) : item.updated_at;
     const time=Date.parse(raw);

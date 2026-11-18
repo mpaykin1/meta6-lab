@@ -25,6 +25,7 @@ function verifies(code) {
     result(code, { check_runs: [], total_count: 0 }, statuses) === 'ok' &&
     result(code, { check_runs: [], total_count: 2 }, statuses) === 'rejected' &&
     result(code, { check_runs: [], total_count: undefined }, statuses) === 'rejected' &&
+    result(code, { total_count: 0 }, statuses) === 'rejected' &&
     result(code, {}, statuses) === 'rejected' &&
     result(code, checks, {}) === 'rejected';
 }

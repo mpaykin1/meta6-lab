@@ -55,6 +55,12 @@ const mutations = [
     'if ((distance > EPSILON && observedDistance > EPSILON) || after.progress > before.progress)'],
   ['level-change-counted-as-movement', 'if (before.level !== after.level) {',
     "if (false && before.level !== after.level) {"],
+  ['truthy-string-input-accepted',
+    "if (typeof segment.input !== 'boolean') {",
+    "if (segment.input == null) {"],
+  ['null-input-accepted',
+    "if (typeof segment.input !== 'boolean') {",
+    "if (typeof segment.input === 'string') {"],
   ['no-input-counted-as-movement', 'if (!segment.input) {', 'if (false && !segment.input) {'],
   // Deception: special-case the named benchmark game, instead of measuring coordinates.
   ['game-specific-deception', '  let stationaryMs = 0;',

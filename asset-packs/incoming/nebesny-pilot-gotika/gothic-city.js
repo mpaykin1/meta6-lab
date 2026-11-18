@@ -446,13 +446,19 @@ window.GothicCity = (() => {
     g.save();
     g.setTransform(1,0,0,1,0,0);
     // Закатная палитра создаёт основу; пиксельный атлас кладётся поверх неё.
-    const horizon = H * (.55 + Math.sin(cam.phi - .62) * .13);
-    const sky = g.createLinearGradient(0,0,0,H);
+    // Match the WebGL horizon exactly. Previous full-screen sunset overlay
+    // painted OVER stone and canals, making city facades float in empty color.
+    // Outside the sky the actual GPU terrain remains visible, even at low angles.
+    const horizon = pc.cy - F*Math.tan(cam.phi);
+    const skyEnd = Math.max(1,horizon + H*.11);
+    g.beginPath();
+    g.rect(0,0,W,Math.max(0,horizon+9));
+    g.clip();
+    const sky = g.createLinearGradient(0,0,0,skyEnd);
     sky.addColorStop(0,'#241f42');
-    sky.addColorStop(.34,'#8c5275');
-    sky.addColorStop(.57,'#ed9b83');
-    sky.addColorStop(.69,'#f6b277');
-    sky.addColorStop(1,'#3d3557');
+    sky.addColorStop(.33,'#8c5275');
+    sky.addColorStop(.67,'#ed9b83');
+    sky.addColorStop(1,'#f6b277');
     g.globalAlpha = fade;
     g.fillStyle = sky; g.fillRect(0,0,W,H);
     if (sheets.sunsetSky && !hiddenAssets.has('sunsetSky')) {

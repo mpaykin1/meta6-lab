@@ -34,3 +34,12 @@ test('dispatcher rejects reset at 10 seconds when safety margin exceeds cap',asy
  assert.equal(calls,1);
  assert.equal(waits,0);
 });
+
+test('dispatcher does not invent exhausted quota when rate-limit headers are missing',async()=>{
+ let calls=0,waits=0;
+ await assert.rejects(()=>api('/pulls/1',{now:()=>now,maxWaitMs:10000,
+  request:async()=>{calls++;return {ok:false,status:403,headers:{get:()=>null}}},
+  wait:async()=>{waits++}}),/нет данных: GitHub HTTP 403/);
+ assert.equal(calls,1);
+ assert.equal(waits,0);
+});

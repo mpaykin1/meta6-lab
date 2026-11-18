@@ -1,0 +1,35 @@
+name: ODIN PR
+# Claude 18.11.2026: один PR на дело. Дубль по тем же файлам закрывается, журнал в PR — красный.
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize]
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+concurrency:
+  group: odin-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  odin-pr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Ловушки правила
+        # скрипты берутся из main (PR не может подменить проверку); до слияния самого правила их там ещё нет
+        run: if [ -f scripts/odin-pr/run.mjs ]; then node scripts/odin-pr/mutate-odin-pr.mjs; else echo 'ODIN PR ещё не в main'; fi
+      - name: Один PR на дело
+        env:
+          ODIN_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ODIN_REPO: ${{ github.repository }}
+          ODIN_PR: ${{ github.event.pull_request.number }}
+          ODIN_ACTION: ${{ github.event.action }}
+        run: if [ -f scripts/odin-pr/run.mjs ]; then node scripts/odin-pr/run.mjs; else echo 'ODIN PR ещё не в main'; fi

@@ -1,16 +1,27 @@
 {
-  "generated_at": "2026-11-18T09:39:12.532Z",
+  "generated_at": "2026-11-18T10:59:22.389Z",
   "sha": {
-    "lab": "d3e3712595061c66de3a815ff4a2567b0b4db149",
+    "lab": "9f6003dfc74efb517322550c3bf4670504d71e5c",
     "mg": "5984fcd5b79ed2d03c648053334361db8deb44fb"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44277610178",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44290370640",
   "review": {
     "protected": [
+      {
+        "number": 421,
+        "sha": "a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1",
+        "paths": [
+          ".github/workflows/bez-patternov.yml",
+          "automation/asset-check/test_htmlpack.py",
+          "scripts/storozha/verify-storozha.mjs",
+          "scripts/visual/mutate-no-patterns.mjs",
+          "scripts/visual/verify-targets.mjs"
+        ]
+      },
       {
         "number": 413,
         "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
@@ -371,7 +382,7 @@
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
-      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
+      "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
       "| #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/42756903905), [PR #208](https://github.com/mpaykin1/meta6-lab/pull/208) |",
       "| #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/40b5090ea328c9b4fd4c916da526f6e0833ea4c1) |",
       "| #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая ветка](https://github.com/mpaykin1/meta6-lab/commit/ac1a411c2298720060207695c854d458b5e38a15) |",
@@ -514,11 +525,16 @@
     }
   },
   "pr": {
-    "open": 36,
+    "open": 35,
     "conflicts": "нет данных",
-    "merged": 81,
+    "merged": 82,
     "closed": 156,
     "mergedItems": [
+      {
+        "number": 421,
+        "title": "Почему стояла работа: ложный красный BEZ PATTERNOV, тупик ли",
+        "sha": "a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1"
+      },
       {
         "number": 413,
         "title": "ODIN PR: один PR на дело (дубли и журнал в PR)",
@@ -927,6 +943,17 @@
     ],
     "protectedItems": [
       {
+        "number": 421,
+        "sha": "a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1",
+        "paths": [
+          ".github/workflows/bez-patternov.yml",
+          "automation/asset-check/test_htmlpack.py",
+          "scripts/storozha/verify-storozha.mjs",
+          "scripts/visual/mutate-no-patterns.mjs",
+          "scripts/visual/verify-targets.mjs"
+        ]
+      },
+      {
         "number": 413,
         "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
         "paths": [
@@ -1285,7 +1312,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2925,
+      "count": 2935,
       "folders": "нет данных"
     },
     "mg": {
@@ -1361,6 +1388,9 @@
     }
   ],
   "errors": [
+    "| 2026111801 | 18.11.2026 | BEZ PATTERNOV: у PR без игры каталога проверка по умолчанию мерила INK-шейдер и требовала улучшить его на 15% — красными стояли все PR ассетов и правил (#371, #409, #415 и др.), работа ChatGPT не сливалась | Claude: разбор «почему стоит работа», 7 красных прогонов за утро | scripts/visual/verify-targets.mjs (шаг в bez-patternov.yml) |",
+    "| 2026111802 | 18.11.2026 | Лимит пяти живых PR держал в очереди и сам ремонт ложно красной проверки, которая и мешала пяти старейшим слиться — тупик | Claude: #421 красный только по storozha-quota | scripts/storozha/verify-storozha.mjs: claude/* не блокируется, lab/* с похожим именем блокируется |",
+    "| 2026111803 | 18.11.2026 | ASSET CHECK судил INK-пак (format ink-pack/1) как htmlpack по эталону «Туманные шпили» только из-за window.__PACK__ на странице — ложный HARD HP1 | Claude: PR #420 | automation/asset-check/test_htmlpack.py::test_other_format_is_not_htmlpack |",
     "| 2026111706 | 17.11.2026 | LAB Pages: сайт выкладывается, но шаг `check-links` с 11.11 ни разу не зелёный — выходит за 30 мин (таймаут = «cancelled») из‑за ~3000 повторов по мёртвым адресам: в main `games/skin-trainer` грузит несуществующий `skins/runtime/skin-runtime.js`; `LINKS.txt` держит `games/twilight-island/` и `games/ashen-path-asset-pack/` (их нет в main, только в нескольких preview); в старых preview нет `shared/components/observer-*` и шрифтов twilight-isles. [прогон](https://github.com/mpaykin1/meta6-lab/actions/runs/44168607909) | Суточный контроль Claude: лог check-links | ЛОВУШКИ ЕЩЁ НЕТ — починить ссылки (не ослаблять проверку), затем ловушка «check-links не зелёный > 24 ч = тревога» |",
     "| 2026111705 | 17.11.2026 | META BOT при `bot.json.secondRun=\"hash\"` пропускал сбой второго запуска: `again.ok=false` или `again.hashes=[]` не влияли на `checkGame().ok`, получался ложный PASS | Воспроизведение `checkGame` на `main` с 4 исходами, кандидат исправляет 2 ложных PASS (патч для защищённого ядра) | `scripts/platform/mutate-meta-bot-second-run.mjs`: 3 мутации, включая маскировку по `secondRun=\"hash\"`; `docs/patches/meta-bot-second-run.patch` |",
     "| 2026111702 | 17.11.2026 | Защищённое ядро META BOT `checkGame` возвращало `{ok:true,runs:[]}` при `viewports: []` или неизвестном экране — ложный успех без открытия игры | Воспроизведено на исходном `scripts/meta-bot/core.mjs` (PR #311, reports/bot-audit/PROGRESS.md) | scripts/meta-bot/mutate-viewports.mjs: настоящее ядро, 7 неверных и 4 верных конфигурации, checkGame отклоняет, 3 мутации ядра |",

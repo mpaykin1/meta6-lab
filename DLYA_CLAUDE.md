@@ -18,6 +18,7 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #404 | lab/z01-api-quota-fastfail-1117 | scripts/dispetcher/test/api-budget.test.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
 | #417 | claude/compare-sheet-test | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
 | #418 | claude/sheet-test-2 | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
+| #419 | claude/sheet-test-3 | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude; scripts/kontur/guard.mjs: изменение ЯДРА охраны — только Claude; scripts/kontur/mutate-kontur-guard.mjs: изменение ЯДРА охраны — только Claude | 2026-11-18 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

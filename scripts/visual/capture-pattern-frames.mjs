@@ -100,6 +100,15 @@ try {
             game.advance(0.5);
           }, i);
           await page.waitForTimeout(250);
+        } else if (game.id.startsWith('pack-') && await page.evaluate(() =>
+            (window.__INK_PACK__?.assets || window.__PACK_PROBE__?.assets || []).length >= 3)) {
+          // Asset pack with selectable objects: three views = first, middle and last asset.
+          await page.evaluate(i => {
+            const ids = window.__INK_PACK__?.assets || window.__PACK_PROBE__.assets;
+            const id = ids[[0, Math.floor(ids.length / 2), ids.length - 1][i]];
+            window.postMessage({selectAsset: typeof id === 'string' ? id : id.id}, location.origin);
+          }, i);
+          await page.waitForTimeout(3500);
         } else {
           await page.mouse.move(170 + i * 230, 200 + i * 90);
           const key = ['ArrowRight', 'ArrowDown', 'ArrowLeft'][i];

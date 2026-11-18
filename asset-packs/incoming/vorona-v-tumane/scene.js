@@ -98,7 +98,7 @@ const moonbeams=new T.ShaderMaterial({
   'beams+=exp(-x*x)*(.3+.55*grain(fi+1.));}',
   'float height=smoothstep(.03,.33,p.y)*(1.-smoothstep(.75,1.,p.y));',
   'float breathing=.84+.16*sin(uTime*.36+p.x*18.);',
-  'float vapor=exp(-pow((p.y-.36)/.24,2.))*.026;',
+  'float v=(p.y-.36)/.24;float vapor=exp(-v*v)*.026;',
   'float alpha=clamp((beams*.12*breathing+vapor)*height,0.,.23);',
   'gl_FragColor=vec4(.74,.82,.77,alpha);}'
  ].join('')

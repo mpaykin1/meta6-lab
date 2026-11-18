@@ -475,5 +475,95 @@ class NightSceneIsolationTests(unittest.TestCase):
             self.assertFalse(report.hard(), report.hard())
 
 
+class CutoutTraps(unittest.TestCase):
+    """Protect original-art hinged puppets from empty masks, cycles and fake motion."""
+
+    def setUp(self):
+        self.d = Path(tempfile.mkdtemp())
+        (self.d / "pack.json").write_text(json.dumps(COMMON), encoding="utf-8")
+
+    def tearDown(self):
+        shutil.rmtree(self.d, ignore_errors=True)
+
+    def sample(self, count=6):
+        image = Image.new("RGBA", (96, 96), (0, 0, 0, 0))
+        from PIL import ImageDraw
+        ImageDraw.Draw(image).rectangle((12, 12, 84, 84), fill=(80, 77, 84, 255))
+        image.save(self.d / "source.png")
+        parts = [
+            {"id": f"p{i}", "parent": None if i == 0 else "p0",
+             "pivot": [40 + i, 39],
+             "poly": [[17, 20], [77, 20], [48, 78]],
+             "motion": {"amplitude": .12, "lag": .2 + .17 * i, "frequency": 2}}
+            for i in range(count)
+        ]
+        document = {"format": "mg-cutout/1", "characters": [
+            {"id": "puppet", "source": "source.png", "dimensions": [96, 96], "parts": parts}]}
+        self.save(document)
+        return document
+
+    def save(self, document):
+        (self.d / "cutout.json").write_text(json.dumps(document), encoding="utf-8")
+
+    def test_CJ_clean_hinged_source_passes(self):
+        self.sample()
+        result = cp.check(self.d)
+        self.assertIn("cutout", result.kinds)
+        self.assertEqual(result.hard(), [], result.hard())
+
+    def test_CJ2_no_real_segmentation(self):
+        self.sample(count=2)
+        self.assertIn("CJ2", ids(self.d))
+
+    def test_CJ3_invalid_parent(self):
+        data = self.sample()
+        data["characters"][0]["parts"][3]["parent"] = "missing"
+        self.save(data)
+        self.assertIn("CJ3", ids(self.d))
+
+    def test_CJ3_cyclic_hierarchy(self):
+        data = self.sample()
+        data["characters"][0]["parts"][0]["parent"] = "p1"
+        self.save(data)
+        self.assertIn("CJ3", ids(self.d))
+
+    def test_CJ4_synchronous_puppet_lags(self):
+        data = self.sample()
+        for part in data["characters"][0]["parts"]:
+            part["motion"]["lag"] = 0
+        self.save(data)
+        self.assertIn("CJ4", ids(self.d))
+
+    def test_CJ6_blank_alpha_faked_cutout(self):
+        self.sample()
+        Image.new("RGBA", (96, 96), (0, 0, 0, 0)).save(self.d / "source.png")
+        self.assertIn("CJ6", ids(self.d))
+
+    def test_CJ2_mask_outside_image(self):
+        data = self.sample()
+        data["characters"][0]["parts"][1]["poly"][0] = [-400, 20]
+        self.save(data)
+        self.assertIn("CJ2", ids(self.d))
+
+    def test_vorona_live_scene_has_no_hard_defects(self):
+        """Actual staged pack must pass the same gate as fixtures and survive headless WebGL."""
+        pack = Path(__file__).resolve().parents[2] / "asset-packs/incoming/vorona-v-tumane"
+        if not pack.is_dir():
+            self.skipTest("live pack is absent in isolated mutation fixture")
+        result = cp.check(pack)
+        self.assertIn("cutout", result.kinds)
+        self.assertEqual(len(result.asset_ids & {item["id"] for item in
+            json.loads((pack / "ZAKAZ.json").read_text("utf-8"))["items"]}), 26)
+        self.assertEqual(result.hard(), [], result.hard())
+
+    def test_CJ8_phantom_asset_without_renderer(self):
+        self.sample()
+        pack = json.loads((self.d / "pack.json").read_text("utf-8"))
+        pack["assets"] = {"ghost_forest": {"label_ru": "Фантом", "source": "scene.js"}}
+        (self.d / "pack.json").write_text(json.dumps(pack), encoding="utf-8")
+        (self.d / "scene.js").write_text("const ids=['ghost_forest'];", encoding="utf-8")
+        self.assertIn("CJ8", ids(self.d))
+
+
 if __name__ == "__main__":
     unittest.main()

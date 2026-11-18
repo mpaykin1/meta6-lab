@@ -1,10 +1,10 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T21:51:59.432Z | МГЛ: af923975db8dc001a05c8a2f6a3e7fc5c30e96c9 | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44184106155
+UTC: 2026-11-18T01:48:16.689Z | МГЛ: bfdaaaead5d7877b590a827674884a17426bd61a | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44218432586
 ## ПРОВЕРИТЬ CLAUDE
 - PR #382 7c56b01e1a323254a1d850d50bd373364a079c7d: automation/asset-check/test_kinds.py
 - PR #362 51f2ef012ec9cf31d0d68c83ba02fac0951974b7: automation/asset-check/test_3d_master.py
 - ещё 39: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: Karta Sil | https://github.com/mpaykin1/meta6-lab/actions/runs/44119315136 | Preserve failure after publishing no-data state
+- МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/44183722961 | Play all games
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/… (сокращено)
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
@@ -18,7 +18,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44085237597)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44183722988)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -32,12 +32,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 54 | конфликт: нет данных | слито: 80 | закрыто: 123
+открыто: 56 | конфликт: нет данных | слито: 80 | закрыто: 123
 #384 feat(assets): BLACK TRAIN — layered storm clouds with slow a | 21dd327c959710943bc4f5a04c4f5dcf60e1d136
 #373 INK · Чернильный оскал — чистая 3D-модель и сцена без защищё | 0c269f36f4f3f1801ba5147eb59c5d3355cf5768
 ещё 78: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2834 коммитов | нет данных
+МГЛ: 2837 коммитов | нет данных
 МГ: 44 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:25, reference:31, rules:9, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

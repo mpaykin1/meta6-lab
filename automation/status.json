@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T21:51:59.432Z",
+  "generated_at": "2026-11-18T01:48:16.689Z",
   "sha": {
-    "lab": "af923975db8dc001a05c8a2f6a3e7fc5c30e96c9",
+    "lab": "bfdaaaead5d7877b590a827674884a17426bd61a",
     "mg": "2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44184106155",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44218432586",
   "review": {
     "protected": [
       {
@@ -361,9 +361,9 @@
     ],
     "redLab": [
       {
-        "workflow": "Karta Sil",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44119315136",
-        "step": "Preserve failure after publishing no-data state"
+        "workflow": "META BOT",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44183722961",
+        "step": "Play all games"
       }
     ],
     "redMg": [],
@@ -503,7 +503,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44085237597"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44183722988"
       },
       "P1": {
         "value": "не подтверждено",
@@ -513,7 +513,7 @@
     }
   },
   "pr": {
-    "open": 54,
+    "open": 56,
     "conflicts": "нет данных",
     "merged": 80,
     "closed": 123,
@@ -1271,7 +1271,7 @@
   },
   "changes": {
     "lab": {
-      "count": 2834,
+      "count": 2837,
       "folders": "нет данных"
     },
     "mg": {

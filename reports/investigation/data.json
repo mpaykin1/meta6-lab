@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-18T11:41:35.848Z",
+  "generated_at": "2026-11-18T20:30:35.593Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -47,16 +47,16 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/repair-dispatcher-check-pagination-1118",
-      "status": "ошибка",
+      "status": "зависла",
       "original_status": "взято",
       "pr": 405,
       "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44257125372/job/134641757957",
+      "check": "success",
+      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44350063639/job/134962948904",
       "url": "https://github.com/mpaykin1/meta6-lab/pull/405",
       "taken_at": "2026-11-18 07:09 UTC",
       "last_commit_at": "—",
-      "remaining": "Исправить красные проверки: visual, kontur-guard, guard"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 3,
@@ -812,7 +812,7 @@
       "project": "МГ",
       "owner": "чат ChatGPT",
       "branch": "lab/bez-patternov-ink-20261115",
-      "status": "зависла",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 324,
       "pr_state": "open",
@@ -821,7 +821,7 @@
       "url": "https://github.com/mpaykin1/meta6/pull/324",
       "taken_at": "2026-11-15 18:43",
       "last_commit_at": "2026-11-15 18:43",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 48,
@@ -2358,7 +2358,7 @@
       "title": "Готовность META GAMES — отчёт",
       "state": "open",
       "sha": null,
-      "updated_at": "2026-11-18T00:59:33Z"
+      "updated_at": "2026-11-18T11:48:21Z"
     },
     {
       "label": "automation-watchdog",

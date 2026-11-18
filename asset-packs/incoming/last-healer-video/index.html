@@ -175,7 +175,7 @@ const moods=[
  {sky:new T.Color('#4c6474'),fog:new T.Color('#5d7882'),sun:.32,fill:.92,exposure:1.06},
  {sky:new T.Color('#ced9c9'),fog:new T.Color('#c7dbce'),sun:2.25,fill:2.75,exposure:1.45}
 ];
-let chosen='all',clock=0,manual=false,frame=0,moodValue=0,moodTarget=0,lastTick=0;
+let chosen='all',clock=0,manual=false,frame=0,moodValue=0,moodTarget=0,lastTick=0,tourTime=0;
 const carStart=cm.position.clone();
 function applyMood(dt){
  const a=dt<=0?1:1-Math.exp(-2.5*dt);
@@ -183,6 +183,7 @@ function applyMood(dt){
  const lo=Math.min(2,Math.floor(moodValue)),hi=Math.min(2,lo+1),f=moodValue-lo;
  scene.background.copy(moods[lo].sky).lerp(moods[hi].sky,f);
  scene.fog.color.copy(moods[lo].fog).lerp(moods[hi].fog,f);
+ sun.color.setRGB(1, .81 + .12*moodValue/2, .72 + .18*moodValue/2);
  sun.intensity=T.MathUtils.lerp(moods[lo].sun,moods[hi].sun,f)*(1+.025*Math.sin(clock*.26));
  hemi.intensity=T.MathUtils.lerp(moods[lo].fill,moods[hi].fill,f);
  renderer.toneMappingExposure=T.MathUtils.lerp(moods[lo].exposure,moods[hi].exposure,f);
@@ -190,6 +191,7 @@ function applyMood(dt){
 }
 function select(id){
  chosen=id;
+ if(id==='all')tourTime=0;
  if(!soundIds.has(id))audio.stop();
  const night=['nightRainGrade','healerWalkWithLight','wetGrassClumps','puddles','whiteClinicBuilding','sndRainNight','handFlashlight','rainSplashRings'].includes(id);
  const day=['boatWake','shoreFoamLine','autumnConeTrees','driftingLeaves','sandBeachTiles','dayCoastGrade','rowingHealer','boatShed','sndRowingShore'].includes(id);
@@ -239,6 +241,13 @@ function animate(ts){
  if(manual)return;
  const t=ts*.001,dt=lastTick?Math.max(0,Math.min(.05,t-lastTick)):.016;
  lastTick=t;clock=t;
+ if(chosen==='all'){
+  tourTime=(tourTime+dt)%36;
+  moodTarget=Math.floor(tourTime/12);
+  const rain=moodValue>.55&&moodValue<1.45;
+  splashes.visible=rain;
+  beam.visible=rain;
+ }
  for(const a of Object.values(assets))if(a.userData.tick)a.userData.tick(t,dt);
  // Original INK car remains untouched: its attached headlamps travel with the chassis.
  // Gentle suspension and a slow approach make the light sweep the road and curb.
@@ -263,7 +272,7 @@ function animate(ts){
 const probe={
  assets,manual:false,setHidden(id,hidden){if(assets[id])assets[id].visible=!hidden;},
  draw(){draw();},freeze(){manual=true;probe.manual=true;cancelAnimationFrame(frame);draw();},
- resume(){if(manual){manual=false;probe.manual=false;frame=requestAnimationFrame(animate);}},
+ resume(){if(manual){manual=false;probe.manual=false;lastTick=0;frame=requestAnimationFrame(animate);}},
  select
 };
 window.__PACK_PROBE__=probe;

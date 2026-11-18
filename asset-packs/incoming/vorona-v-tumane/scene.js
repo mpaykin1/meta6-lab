@@ -80,6 +80,31 @@ const moon=svgMap('<svg xmlns="http://www.w3.org/2000/svg" width="256" height="2
  '<stop offset="1" stop-color="#b9c7c8" stop-opacity="0"/></radialGradient></defs>'+
  '<circle cx="128" cy="128" r="128" fill="url(#m)"/></svg>');
 addPlane(moon,13,13,-12,10,5.5,.9);
+// Thin hand-painted moonbeams filter through the far trees as the mist drifts.
+// A single GPU plane keeps the painterly 2.5D silhouette and mobile FPS intact.
+const moonbeams=new T.ShaderMaterial({
+ transparent:true,depthWrite:false,side:T.DoubleSide,
+ uniforms:{uTime:{value:0}},
+ vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+ fragmentShader:[
+  'precision mediump float;varying vec2 vUv;uniform float uTime;',
+  'float grain(float n){return fract(sin(n*73.17)*43758.5453);}',
+  'void main(){vec2 p=vUv;float beams=0.;',
+  'for(int i=0;i<9;i++){float fi=float(i);',
+  'float root=.63+(fi-4.)*.053+sin(uTime*.09+fi*1.71)*.008;',
+  'float bend=(p.y-.70)*(fi-4.)*.026;',
+  'float width=.006+(1.-p.y)*.012+fi*.0005;',
+  'float x=(p.x-root-bend)/width;',
+  'beams+=exp(-x*x)*(.3+.55*grain(fi+1.));}',
+  'float height=smoothstep(.03,.33,p.y)*(1.-smoothstep(.75,1.,p.y));',
+  'float breathing=.84+.16*sin(uTime*.36+p.x*18.);',
+  'float vapor=exp(-pow((p.y-.36)/.24,2.))*.026;',
+  'float alpha=clamp((beams*.12*breathing+vapor)*height,0.,.23);',
+  'gl_FragColor=vec4(.74,.82,.77,alpha);}'
+ ].join('')
+});
+const shafts=new T.Mesh(new T.PlaneGeometry(42,20),moonbeams);
+shafts.position.set(4,1,-7.5);shafts.frustumCulled=false;world.add(shafts);
 const groundSvg='<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="256">'+
  '<path d="M0 174Q80 160 150 184T302 165T452 182T660 169T850 182T1024 161V256H0Z" fill="#222c31"/>'+
  Array.from({length:83},(_,i)=>{const x=i*13,y=173+(i*37)%19;
@@ -422,6 +447,7 @@ function draw(){
  if(state.light===0&&Math.hypot(state.x-firefly.position.x,state.y-firefly.position.y)<1.5)
   state.light=16;
  mist.uniforms.uTime.value=t;mist.uniforms.uAmount.value=state.light>0?.24:.83;
+  moonbeams.uniforms.uTime.value=t;
  rainShader.uniforms.uTime.value=t;
  for(const eye of eyeGroup.children){
   eye.material.opacity=.08+.29*Math.pow(Math.max(0,Math.sin(t*.54+eye.userData.phase)),4);

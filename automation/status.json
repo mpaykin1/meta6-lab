@@ -1,16 +1,24 @@
 {
-  "generated_at": "2026-11-18T01:53:58.901Z",
+  "generated_at": "2026-11-18T09:39:12.532Z",
   "sha": {
-    "lab": "aaa975509aeb1c5a6149ae213d70b585626fecd7",
-    "mg": "2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5"
+    "lab": "d3e3712595061c66de3a815ff4a2567b0b4db149",
+    "mg": "5984fcd5b79ed2d03c648053334361db8deb44fb"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44219059183",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44277610178",
   "review": {
     "protected": [
+      {
+        "number": 413,
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
+        "paths": [
+          ".github/workflows/odin-pr.yml",
+          "scripts/odin-pr/mutate-odin-pr.mjs"
+        ]
+      },
       {
         "number": 382,
         "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d",
@@ -359,13 +367,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "META BOT",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44183722961",
-        "step": "Play all games"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -379,7 +381,6 @@
       "| #200 | код | `lab/bot-batch-2` | B2 ч.2: ручки бота | closed | НУЖЕН CLAUDE: PR изменяет `.github/workflows/b2-batch-2.yml`, самослияние запрещено; [PR #200](https://github.com/mpaykin1/meta6-lab/pull/200) |"
     ],
     "stalled": [
-      "| B2: независимый верификатор движения из #258 | lab/z04-b2-extract-motion-20261117 | свободно (зависло 9 ч, было: чат ChatGPT) | 2026-11-17T02:24:52.054Z |",
       "| НАДЗОР — чат ChatGPT | lab/nadzor | свободно (зависло 10 ч, было: чат ChatGPT (надзор)) | 2026-11-17T01:33:05.414Z |",
       "| КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |",
       "| БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |",
@@ -503,7 +504,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44183722988"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44274899024"
       },
       "P1": {
         "value": "не подтверждено",
@@ -513,11 +514,16 @@
     }
   },
   "pr": {
-    "open": 56,
-    "conflicts": 42,
-    "merged": 80,
-    "closed": 123,
+    "open": 36,
+    "conflicts": "нет данных",
+    "merged": 81,
+    "closed": 156,
     "mergedItems": [
+      {
+        "number": 413,
+        "title": "ODIN PR: один PR на дело (дубли и журнал в PR)",
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258"
+      },
       {
         "number": 384,
         "title": "feat(assets): BLACK TRAIN — layered storm clouds with slow a",
@@ -921,6 +927,14 @@
     ],
     "protectedItems": [
       {
+        "number": 413,
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
+        "paths": [
+          ".github/workflows/odin-pr.yml",
+          "scripts/odin-pr/mutate-odin-pr.mjs"
+        ]
+      },
+      {
         "number": 382,
         "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d",
         "paths": [
@@ -1271,12 +1285,12 @@
   },
   "changes": {
     "lab": {
-      "count": 2840,
+      "count": 2925,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 44,
-      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:25, reference:31, rules:9, SOURCE_INDEX.md:1"
+      "count": 46,
+      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:33, reference:31, rules:10, SOURCE_INDEX.md:1"
     }
   },
   "games": [
@@ -1418,6 +1432,8 @@
     "| 1154 | 17.11.2026 | Сторожа коммитили сводки, когда менялись только время/SHA, а status-dlya-claude запускался на каждый коммит другой сводки — каскад ~60 коммитов за ночь и расход лимита API | zadachi-watch, status-dlya-claude, sliyanie-status, dispetcher, zanyato-watch, karta-sil | scripts/lab/meaningful-diff.sh + постоянная ловушка scripts/lab/mutate-meaningful-diff.mjs |",
     "| 1155 | 17.11.2026 | Эталоны описаны в 4 местах (ink.md, README, паспорта, AGENTS) — чаты не видели полного списка | ETALONY.md | scripts/lab/verify-etalony-catalog.mjs + mutate-etalony-catalog.mjs |",
     "| 2026111704 | 17.11.2026 | BLACK TRAIN PR #382 визуально показывал ассеты, но не позволял снять одинаковые кадры с показанным/скрытым отдельным ассетом; зелёный ASSET CHECK для incoming не проверял этот контракт | [PR #382](https://github.com/mpaykin1/meta6-lab/pull/382), [изолятор](https://github.com/mpaykin1/meta6-lab/commit/f86c89870ee3803e12bd721a44c822ce8a0007c7) | `kinds/ink.py` IK18; `test_kinds.py` хорошая/дефектная сцены; мутант в `mutate_bot.py` |",
-    "| 2026111801 | 18.11.2026 | Бот ассетов 16–17.11: 23 ветки, слита 1 игра — 5 чатов параллельно делали Last Healer (#392–#395), PR ассетов правили общие файлы и застревали в конфликтах, «зелёный ASSET CHECK» не значил HARD=0 для incoming, compare.png не делали | разбор Claude 18.11, промпт v3.4 | `scripts/asset-guard/rules.mjs` + `scripts/asset-guard/mutate-asset-guard.mjs` (9 ловушек, 5/5 мутантов), шаг ASSET GUARD и HARD=0 для паков PR в `.github/workflows/asset-check.yml` |"
+    "| 2026111801 | 18.11.2026 | Бот ассетов 16–17.11: 23 ветки, слита 1 игра — 5 чатов параллельно делали Last Healer (#392–#395), PR ассетов правили общие файлы и застревали в конфликтах, «зелёный ASSET CHECK» не значил HARD=0 для incoming, compare.png не делали | разбор Claude 18.11, промпт v3.4 | `scripts/asset-guard/rules.mjs` + `scripts/asset-guard/mutate-asset-guard.mjs` (9 ловушек, 5/5 мутантов), шаг ASSET GUARD и HARD=0 для паков PR в `.github/workflows/asset-check.yml` |",
+    "| 2026111802 | 18.11.2026 | Автозадачи 16–17.11 открыли ~20 PR по одному делу Z01 (#351–#407): каждый правил общий журнал automation/NADZOR.md и карточку Z01_ZAVALY.md, все конфликтовали между собой, ни один не слился, следующий запуск открывал новый; GPT.md указывал журнал в несуществующей ветке | разбор Claude 18.11 | `scripts/odin-pr/core.mjs` + `scripts/odin-pr/mutate-odin-pr.mjs` (7 мутантов), проверка `.github/workflows/odin-pr.yml`, правило «ОДИН PR НА ДЕЛО» в GPT.md 0А |",
+    "| 2026111802 | 18.11.2026 | Ни одна игра не дошла до слияния: ASSET GUARD требовал _check/compare.png, а у ChatGPT нет настоящего браузера; заодно BEZ_PATTERNOV «visual» валил каждый PR без изменения INK (контроль ink-shader-probe не может «улучшиться» на 15%, когда шейдер не трогали: #411, #412) | разбор Claude 18.11, тестовый PR #417 | лист сравнения снимает CI: `automation/asset-check/compare_sheet.mjs` + шаг «ЛИСТ СРАВНЕНИЯ» в `asset-check.yml`; ловушки `sheetVerdict` в `scripts/asset-guard/mutate-asset-guard.mjs` (6/6 мутантов); `scripts/visual/measure-pattern-fft.py` пропускает только неизменённый контроль; К3 kontur-guard не требует OSHIBKI от PR, где только свой пак + отчёт (спорил с З2, #410) — ловушки в `scripts/kontur/mutate-kontur-guard.mjs` |"
   ]
 }

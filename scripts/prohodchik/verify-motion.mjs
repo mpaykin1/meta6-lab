@@ -30,7 +30,7 @@ async function fixtures(assessMotion, assessFixedViewport, assessB2Probe, monito
   assert.equal(assessMotion(still).status, 'STUCK');
   // A truthy string or fabricated input token cannot prove physical input.
   assert.equal(assessMotion([interval(state(0, 0), state(1, 0), 550, 'pressed')]).status, 'INVALID');
-  assert.equal(assessMotion([interval(state(0, 0), state(1, 0), 550, undefined)]).status, 'INVALID');
+  assert.equal(assessMotion([interval(state(0, 0), state(1, 0), 550, null)]).status, 'INVALID');
   const firstMove = interval(state(0, 0), state(0.5, 0));
   const lateStall = Array.from({length: 4}, () =>
     interval(state(0.5, 0), state(0.5, 0)));

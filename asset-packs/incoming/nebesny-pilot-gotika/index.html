@@ -49,11 +49,19 @@ void main(){
   o=vec2(o.x*cr+o.y*sr,-o.x*sr+o.y*cr);
   float px=o.x/uF,py=-o.y/uF,cp=cos(uPhi),sp=sin(uPhi);
   float dz=-sp+py*cp,df=cp+py*sp;
-  vec3 haze=vec3(.80,.89,.98);
+  // World-space sunset: sea stays blue at launch, descent uncovers ink-pink dusk.
+  vec3 haze=mix(vec3(.80,.89,.98),vec3(.88,.59,.66),uCity);
   if(dz>-.004){float e=clamp((dz+.004)*2.2,0.,1.);
-    vec3 sky=mix(haze,vec3(.30,.56,.93),pow(e,.55));
-    float cl=vn(vec2(px*6.+uA*3.,py*14.)+uTime*.01);sky=mix(sky,vec3(.95,.97,1.),smoothstep(.62,.9,cl)*.35*(1.-e));
-    gl_FragColor=vec4(sky,1.);return;}
+    float elevation=pow(e,.60);
+    vec3 morning=mix(vec3(.80,.89,.98),vec3(.30,.56,.93),pow(e,.55));
+    vec3 dusk=mix(vec3(.98,.68,.48),vec3(.31,.21,.45),elevation);
+    float cl=vn(vec2(px*6.+uA*3.,py*14.)+uTime*.011);
+    float cloud=smoothstep(.58,.84,cl)*(1.-e*.65);
+    morning=mix(morning,vec3(.95,.97,1.),cloud*.35);
+    dusk=mix(dusk,vec3(.80,.45,.58),cloud*.30);
+    // Sunset haze glows low; the sky itself stays fully 3D and roll-correct.
+    dusk+=vec3(.09,.045,.025)*(1.-smoothstep(.0,.24,e));
+    gl_FragColor=vec4(mix(morning,dusk,uCity),1.);return;}
   float camZ=uT.z+uDist*sp,t=camZ/(-dz);
   float X=t*px,Yf=-uDist*cp+t*df,ca=cos(uA),sa=sin(uA);
   vec2 w=vec2(uT.x+ca*X+sa*Yf,uT.y+sa*X-ca*Yf);
@@ -76,7 +84,11 @@ void main(){
                    1.-smoothstep(3.,5.5,abs(mod(w.y+190.,380.)-190.)));
   basalt=mix(basalt,vec3(.53,.41,.43),paving*.42);
   float canal=1.-smoothstep(19.,43.,abs(mod(w.x-190.+570.,1140.)-570.));
-  vec3 canalInk=vec3(.17,.22,.32)+vec3(.07,.045,.04)*(0.5+0.5*sin(w.y*.033-uTime*.85));
+  // Golden/pink sunset glints travel along water with independent wavelets.
+  float wave=sin(w.y*.059-uTime*1.21+sin(w.x*.041+uTime*.17)*2.1);
+  float glint=pow(max(wave,0.),10.)*(.42+.58*vn(w*.031+uTime*.11));
+  vec3 canalInk=mix(vec3(.17,.22,.32),vec3(.37,.22,.34),uCity);
+  canalInk+=vec3(.36,.22,.15)*(.18+.82*glint)*uCity;
   basalt=mix(basalt,canalInk,canal*.85);
   col=mix(col,basalt,city);
   float fog=smoothstep(380.,2600.,t);col=mix(col,haze,fog);

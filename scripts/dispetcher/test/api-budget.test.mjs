@@ -13,6 +13,13 @@ async function suite(m){
  const value=await m.api('/pulls/3',{now:()=>now,wait:async ms=>{waited=ms},
   request:async()=>++n===1?response(403,'0',String((now+5000)/1000)):response(200,'1','0')});
  assert.equal(n,2);assert.equal(waited,6000);assert.equal(value.ok,true);
+ // A reset exactly ten seconds away needs an extra 1000 ms safety margin:
+ // reject it rather than exceeding the configured ten-second budget.
+ let boundaryCalls=0,boundaryWaits=0;
+ await assert.rejects(()=>m.api('/pulls/3',{now:()=>now,
+  request:async()=>{boundaryCalls++;return response(429,'0',String((now+10000)/1000))},
+  wait:async()=>{boundaryWaits++}}),/нет данных: квота/);
+ assert.equal(boundaryCalls,1);assert.equal(boundaryWaits,0);
  await assert.rejects(()=>m.api('/pulls/3',{now:()=>now,
   request:async()=>response(429,'0',String((now+600000)/1000))}),/нет данных: квота/);
  await assert.rejects(()=>m.api('/pulls/3',{

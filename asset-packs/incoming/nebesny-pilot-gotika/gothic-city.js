@@ -16,10 +16,10 @@ window.GothicCity = (() => {
   };
   // The world changes only after the opening sea flight and a descent.
   // Distance is continuous and unbounded: no repeating city chunks.
-  function isCity(x,y) { return Math.hypot(x,y) > 610; }
+  function isCity(x,y) { return blend() > .16 && Math.hypot(x,y) > 610; }
   function blend() {
     const travelled = Math.hypot(P.x,P.y);
-    return clamp((travelled-420)/450,0,1) * clamp((147-P.z)/82,.18,1);
+    return clamp((travelled-420)/450,0,1) * clamp((147-P.z)/82,0,1);
   }
   function inCity() { return blend() > .45; }
   const ambience = new Audio('./audio/cityAmbience.wav');

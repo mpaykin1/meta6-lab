@@ -1,5 +1,6 @@
 // Browser-side pattern sampler: three visibly different game viewpoints per target.
 import {chromium} from 'playwright';
+import {ink, inkProbe, pickTargets} from './targets.mjs';
 import {serve} from '../meta-bot/server.mjs';
 import {readFileSync, mkdirSync, writeFileSync, existsSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
@@ -30,10 +31,6 @@ function gameTargets() {
   if (!targets.length) throw Error('No catalog games to check');
   return targets;
 }
-const ink = {id: 'ink', url: 'demos/living-watercolor/?reference=1&object=house'};
-const inkProbe = {id: 'ink-shader-probe', url: 'scripts/visual/ink-pattern-probe.html'};
-// Playable INK pack: measure the changed night scene instead of unrelated shaders.
-const blackTrain = {id: 'black-train', url: 'asset-packs/incoming/black-train/index.html'};
 let games;
 if (target === 'ink') games = [ink, inkProbe];
 else if (target === 'all') games = [...gameTargets(), ink, inkProbe];
@@ -43,22 +40,7 @@ else {
   const changed = execFileSync('git', ['diff', '--name-only', base + '...HEAD'], {
     cwd: root, encoding: 'utf8'
   }).trim().split('\n');
-  games = gameTargets().filter(game =>
-    changed.some(file => file.startsWith(game.url.replace(/\/$/, ''))));
-  if (changed.some(file => file.startsWith('demos/living-watercolor/') ||
-      file.startsWith('reference/ink-fallen-guardian/shared/') ||
-      file === 'scripts/visual/ink-pattern-probe.html')) games.push(ink, inkProbe);
-  // Every changed playable asset pack is measured by its own page (black-train was the first such case).
-  // The INK shader probe demands a 15% improvement, so it runs only when the shader itself changes;
-  // before 18.11.2026 it ran for every unrelated PR and turned all of them red (owner: «почему стоит работа»).
-  const packs = [...new Set(changed.map(file => /^asset-packs\/incoming\/([^/]+)\//.exec(file)?.[1]).filter(Boolean))];
-  for (const slug of packs) {
-    const url = `asset-packs/incoming/${slug}/index.html`;
-    if (slug === 'black-train') games.push(blackTrain);
-    else if (existsSync(join(root, url))) games.push({id: 'pack-' + slug, url});
-  }
-  if (!games.length && changed.some(file => file.startsWith('scripts/visual/') ||
-      file === 'rules/01-stil-i-grafika/BEZ_PATTERNOV.md')) games = [ink, inkProbe];
+  games = pickTargets(changed, gameTargets(), url => existsSync(join(root, url)));
 }
 
 const web = await serve(root);

@@ -92,14 +92,15 @@ export function brokenWindmill(seed=1){
  g.userData.tick=t=>wheel.rotation.z=t*.23;return g;
 }
 
+const LOW=new T.IcosahedronGeometry(1,0);
 export function myceliumBloom(seed=1){
  const g=pack('Грибной хоровод',0),heads=[];
  for(let i=0;i<19;i++){const a=R(seed,i)*Math.PI*2,d=Math.sqrt(R(seed,i+80))*.92,h=.3+R(seed,i+30)*1.02;const root=new T.Group();root.position.set(Math.cos(a)*d,0,Math.sin(a)*d);g.add(root);
   add(root,new T.CylinderGeometry(.04,.07,h,6),C.bone,0,h*.5,0);
   add(root,new T.ConeGeometry(.14+.08*R(seed,i+5),.18,9),i%3?C.rust:C.wood,0,h+.05,0,1,.8,1);
-  for(let j=0;j<4;j++){const q=j*Math.PI/2;ell(root,C.bone,.11*Math.cos(q),h+.045,.11*Math.sin(q),.022,.012,.025)}
+  for(let j=0;j<4;j++){const q=j*Math.PI/2;add(root,LOW,C.bone,.11*Math.cos(q),h+.045,.11*Math.sin(q),.022,.012,.025)}
   heads.push([root,i*.89]);}
- for(let i=0;i<20;i++)ell(g,i%2?C.moss:C.fern,(R(seed,i+123)-.5)*2,.018,(R(seed,i+145)-.5)*2,.08,.03,.12);
+ for(let i=0;i<20;i++)add(g,LOW,i%2?C.moss:C.fern,(R(seed,i+123)-.5)*2,.018,(R(seed,i+145)-.5)*2,.08,.03,.12);
  g.userData.tick=t=>heads.forEach(([o,p])=>{o.rotation.z=Math.sin(t*.65+p)*.1;o.rotation.x=Math.sin(t*.51+p)*.08});return g;
 }
 

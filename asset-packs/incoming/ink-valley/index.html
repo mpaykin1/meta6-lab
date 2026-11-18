@@ -139,7 +139,7 @@ function update(){
  if(now-last>2200){const fps=1/Math.max(dt,.01);if(fps<30){fpsSlow++;if(fpsSlow>=2){quality=.67;renderer.setPixelRatio(Math.min(1,devicePixelRatio||1))}}else{fpsSlow=0}last=now}
 }
 addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(quality===1?1.4:1,devicePixelRatio||1))});
-window.__PACK__={assets:objects.map(o=>o.id),hasScene:true};
+window.__INK_PACK__={assets:objects.map(o=>o.id),hasScene:true};
 window.__ISOLATE__=(id,on)=>{const o=first.get(id);if(o)o.visible=!!on};
 update();
 </script></body></html>

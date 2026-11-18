@@ -98,7 +98,7 @@ export function assertNotEmpty(tasksMarkdown,cards){
  if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
 }
 export function assertCompleteCheckRuns(checks,statuses,sha){
- if(!checks||!Array.isArray(checks.check_runs)||!Number.isSafeInteger(checks.total_count)||
+ if(!checks||!Array.isArray(checks.check_runs)||!Number.isSafeInteger(checks.total_count)||checks.total_count<0||
     checks.total_count!==checks.check_runs.length){
   throw Error('нет данных: неполный список check-runs для '+sha+' (пагинация или ответ API)');
  }

@@ -1,7 +1,8 @@
 // Browser-side pattern sampler: three visibly different game viewpoints per target.
 import {chromium} from 'playwright';
+import {ink, inkProbe, pickTargets} from './targets.mjs';
 import {serve} from '../meta-bot/server.mjs';
-import {readFileSync, mkdirSync, writeFileSync} from 'node:fs';
+import {readFileSync, mkdirSync, writeFileSync, existsSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {resolve, join} from 'node:path';
 
@@ -30,10 +31,6 @@ function gameTargets() {
   if (!targets.length) throw Error('No catalog games to check');
   return targets;
 }
-const ink = {id: 'ink', url: 'demos/living-watercolor/?reference=1&object=house'};
-const inkProbe = {id: 'ink-shader-probe', url: 'scripts/visual/ink-pattern-probe.html'};
-// Playable INK pack: measure the changed night scene instead of unrelated shaders.
-const blackTrain = {id: 'black-train', url: 'asset-packs/incoming/black-train/index.html'};
 let games;
 if (target === 'ink') games = [ink, inkProbe];
 else if (target === 'all') games = [...gameTargets(), ink, inkProbe];
@@ -43,11 +40,7 @@ else {
   const changed = execFileSync('git', ['diff', '--name-only', base + '...HEAD'], {
     cwd: root, encoding: 'utf8'
   }).trim().split('\n');
-  games = gameTargets().filter(game =>
-    changed.some(file => file.startsWith(game.url.replace(/\/$/, ''))));
-  if (changed.some(file => file.startsWith('demos/living-watercolor/'))) games.push(ink, inkProbe);
-  if (changed.some(file => file.startsWith('asset-packs/incoming/black-train/'))) games.push(blackTrain);
-  if (!games.length) games = [ink, inkProbe]; // Rule-only PRs still check real INK waves.
+  games = pickTargets(changed, gameTargets(), url => existsSync(join(root, url)));
 }
 
 const web = await serve(root);
@@ -89,6 +82,15 @@ try {
             game.advance(0.5);
           }, i);
           await page.waitForTimeout(250);
+        } else if (game.id.startsWith('pack-') && await page.evaluate(() =>
+            (window.__INK_PACK__?.assets || window.__PACK_PROBE__?.assets || []).length >= 3)) {
+          // Asset pack with selectable objects: three views = first, middle and last asset.
+          await page.evaluate(i => {
+            const ids = window.__INK_PACK__?.assets || window.__PACK_PROBE__.assets;
+            const id = ids[[0, Math.floor(ids.length / 2), ids.length - 1][i]];
+            window.postMessage({selectAsset: typeof id === 'string' ? id : id.id}, location.origin);
+          }, i);
+          await page.waitForTimeout(3500);
         } else {
           await page.mouse.move(170 + i * 230, 200 + i * 90);
           const key = ['ArrowRight', 'ArrowDown', 'ArrowLeft'][i];
@@ -98,7 +100,19 @@ try {
           await page.waitForTimeout(500);
         }
         const file = join(out, game.id + '-' + i + '.png');
-        await page.screenshot({path: file, animations: 'disabled', timeout: 15000});
+        // Claude 18.11.2026: heavy pack scenes in CI SwiftShader may never hand a frame to the compositor
+        // (screenshot timeout, PR #420). A pack with __PACK_PROBE__.freeze/draw gives one still frame instead.
+        const still = game.id.startsWith('pack-') && await page.evaluate(() => {
+          const pr = window.__PACK_PROBE__;
+          if (typeof pr?.freeze !== 'function' || typeof pr?.draw !== 'function') return null;
+          pr.freeze(); pr.draw();
+          const c = [...document.querySelectorAll('canvas')].sort((a, b) => b.width * b.height - a.width * a.height)[0];
+          const data = c ? c.toDataURL('image/png').split(',')[1] : null;
+          pr.resume?.();
+          return data;
+        });
+        if (still) writeFileSync(file, Buffer.from(still, 'base64'));
+        else await page.screenshot({path: file, animations: 'disabled', timeout: 15000});
         images.push(file);
       }
       inventory.push({id: game.id, url: game.url, images});

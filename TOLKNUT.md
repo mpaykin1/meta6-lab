@@ -13,8 +13,4 @@
 - [PR #300](https://github.com/mpaykin1/meta6-lab/pull/300) · нет данных · Карта недоступна; без автоматической выдачи · Конфликт с main
 - [PR #326](https://github.com/mpaykin1/meta6-lab/pull/326) · нет данных · Карта недоступна; без автоматической выдачи · Красная проверка: guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43995125843/job/133745173980)
 - [PR #310](https://github.com/mpaykin1/meta6-lab/pull/310) · нет данных · Карта недоступна; без автоматической выдачи · Конфликт с main
-- [PR #291](https://github.com/mpaykin1/meta6-lab/pull/291) · нет данных · Карта недоступна; без автоматической выдачи · Конфликт с main
-- [PR #283](https://github.com/mpaykin1/meta6-lab/pull/283) · нет данных · Карта недоступна; без автоматической выдачи · Конфликт с main
-- [PR #332](https://github.com/mpaykin1/meta6-lab/pull/332) · внешняя квота · Vercel build-rate-limit: ожидать бесплатного восстановления квоты; код и проверки не менять · Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- [PR #258](https://github.com/mpaykin1/meta6-lab/pull/258) · нет данных · Карта недоступна; без автоматической выдачи · Конфликт с main
 - [PR #364](https://github.com/mpaykin1/meta6-lab/pull/364) · нет данных · Карта недоступна; без автоматической выдачи · Конфликт с main

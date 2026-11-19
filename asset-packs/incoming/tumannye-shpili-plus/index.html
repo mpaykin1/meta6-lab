@@ -471,7 +471,7 @@ function setP(e){ptr.x=e.clientX/W*2-1;ptr.y=-(e.clientY/H*2-1);ptr.t=U.t.value}
 function tap(){const u=(ptr.x+1)/2,v=(ptr.y+1)/2;if(v<waterMat.uniforms.uH.value)waterMat.uniforms.uTap.value.set(u,v,U.t.value);
  if(slash()){burst(hp.x+hdir*1.4,hp.y,hp.z+.2,14,6,.2,.8,0);glitch=Math.max(glitch,.25)}}
 
-function update(t,dt){
+function update(t,dt,snapCamera=false){
  pt+=dt;slashCd-=dt;focusCd-=dt;
  const fm=focus?focus.m:null;
  if(!focus){
@@ -528,7 +528,7 @@ function update(t,dt){
  else if(phase===1){ct.set(GX-8,GY-1,GZ+(portrait?26:19));cl.set(GX-4,GY,GZ);rollT=Math.sin(t*.9)*.05}
  else if(phase===2||phase===3){ct.set(Math.sin(t*.11)*1.6+ptr.x*par*1.2,1.3+Math.sin(t*.37)*.08,14);cl.set(Math.sin(t*.07)*3+ptr.x*par*3,(portrait?15:8)+ptr.y*par*2,-60);kc=phase===2?.85:1.3;kl=phase===2?1:1.6}
  else{ct.set(0,44,-21);cl.set(0,46,-41);kc=.8;kl=.9}
- cpos.lerp(ct,ex(kc,dt));look.lerp(cl,ex(kl,dt));roll+=(rollT-roll)*ex(1.5,dt);shake*=Math.exp(-3.2*dt);
+ cpos.lerp(ct,snapCamera?1:ex(kc,dt));look.lerp(cl,snapCamera?1:ex(kl,dt));roll+=(rollT-roll)*ex(1.5,dt);shake*=Math.exp(-3.2*dt);
  camera.position.set(cpos.x+Math.sin(t*37)*shake*.35,cpos.y+Math.sin(t*43+1)*shake*.35,cpos.z);
  camera.up.set(Math.sin(roll),Math.cos(roll),0);camera.lookAt(look);camera.updateMatrixWorld();
  /* небо следует за взглядом */
@@ -1761,6 +1761,14 @@ function openM(o){pn.classList.toggle('on',o);pn.setAttribute('aria-hidden',o?'f
 $('mb').addEventListener('click',()=>openM(!pn.classList.contains('on')));$('cl').addEventListener('click',()=>openM(false));
 function setFocus(it){focus=it;focusCd=.6;for(const b of ls.children)b.classList.toggle('sel',!!it&&b.dataset.id===it.id);
  if(it){setPhase(it.m==='flight'?0:(it.m==='gate'?1:3));if(it.m==='gate'){exploded=false;pt=0}}else setPhase(phase===3?3:phase)}
+probe.select=id=>{
+ const item=PACK.items.find(entry=>entry.id===id);
+ if(!item)return false;
+ setFocus(item);
+ update(U.t.value,0,true);
+ drawIsolated();
+ return true;
+};
 for(const it of PACK.items){const b=document.createElement('button');b.dataset.id=it.id;const s=document.createElement('span');s.textContent=it.n;const k=document.createElement('i');k.textContent=it.k;if(it.k==='2.5D')k.className='k25';b.appendChild(s);b.appendChild(k);
  b.addEventListener('click',()=>{setFocus(it);openM(false)});ls.appendChild(b)}
 $('bw').addEventListener('click',()=>{setFocus(null);openM(false)});

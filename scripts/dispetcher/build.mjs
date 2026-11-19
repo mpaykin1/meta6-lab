@@ -8,13 +8,23 @@ export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTime
  for(let attempt=0;attempt<2;attempt++){
   const remainingMs=Math.floor(deadline-performance.now());
   if(remainingMs<=0)throw Error('нет данных: таймаут GitHub API ('+path+')');
+  const signal=AbortSignal.timeout(remainingMs);
   let response;
-  try{response=await request(root+path,{headers,signal:AbortSignal.timeout(remainingMs)})}
-  catch(error){
+  try{
+   response=await request(root+path,{headers,signal});
+   if(response.ok){
+    let onAbort;
+    const aborted=new Promise((_resolve,reject)=>{
+     onAbort=()=>reject(signal.reason);
+     signal.addEventListener('abort',onAbort,{once:true});
+    });
+    try{return await Promise.race([response.json(),aborted])}
+    finally{signal.removeEventListener('abort',onAbort)}
+   }
+  }catch(error){
    if(error?.name==='TimeoutError'||error?.name==='AbortError')throw Error('нет данных: таймаут GitHub API ('+path+')',{cause:error});
    throw error;
   }
-  if(response.ok)return response.json();
   const remainingHeader=response.headers.get('x-ratelimit-remaining');
   const resetHeader=response.headers.get('x-ratelimit-reset');
   const remaining=remainingHeader===null?NaN:Number(remainingHeader);

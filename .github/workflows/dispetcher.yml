@@ -54,7 +54,7 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           for attempt in 1 2 3 4 5; do
             git add DISPETCHER.md TOLKNUT.md
-            if git diff --cached --quiet; then exit 0; fi
+            if ! bash scripts/lab/meaningful-diff.sh --cached; then git reset -q; git checkout -q -- .; exit 0; fi
             git commit -m 'chore: refresh dispatcher queue'
             if git push; then exit 0; fi
             echo "push rejected (main moved), attempt $attempt: rebuild on fresh main"

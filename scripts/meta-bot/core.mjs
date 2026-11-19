@@ -31,6 +31,10 @@ const DEFAULT_STRATEGY = {
 export async function loadGame(dir) {
   const cfgFile = path.join(dir, 'bot.json');
   const cfg = Object.assign({}, DEFAULTS, fs.existsSync(cfgFile) ? JSON.parse(fs.readFileSync(cfgFile, 'utf8')) : {});
+  if (!Array.isArray(cfg.viewports) || cfg.viewports.length === 0 ||
+      cfg.viewports.some(name => !Object.hasOwn(VIEWPORTS, name))) {
+    throw new Error('bot.json viewports must contain supported screens: mobile, desktop');
+  }
   const sf = path.resolve(dir, 'bot-strategy.mjs');
   const strategy = fs.existsSync(sf) ? await import(pathToFileURL(sf).href) : DEFAULT_STRATEGY;
   if (typeof strategy.start !== 'function' || typeof strategy.playLevel !== 'function') throw new Error('bot-strategy.mjs должен экспортировать start(ctx) и playLevel(ctx, level)');
@@ -217,7 +221,12 @@ export async function checkGame({ gameDir, repoRoot, baseUrl, query = '' }) {
     if (!cfg.skipChecks.includes('noRepeat') && runs[0] && runs[0].hashes.length) {
       const full = cfg.secondRun !== 'hash';
       const again = await runOnce({ baseUrl, gameDir, repoRoot, viewportName: cfg.viewports[0], cfg: { ...cfg, skipChecks: [...cfg.skipChecks, 'fps'] }, strategy, browser, query, firstOnly: !full });
-      again.viewport = cfg.viewports[0] + ' (2-й запуск)'; if (full) runs.push(again);
+      again.viewport = cfg.viewports[0] + ' (2-й запуск)';
+      if (!again.hashes.length) {
+        again.errors.push('БЕЗ ПОВТОРОВ: повторный запуск не дал раскладку уровня 1');
+        again.ok = false;
+      }
+      if (full || !again.ok) runs.push(again);
       if (again.hashes[0] !== undefined && again.hashes[0] === runs[0].hashes[0]) runs[0].errors.push('БЕЗ ПОВТОРОВ: первый уровень одинаковый в двух запусках (' + again.hashes[0] + ')'), runs[0].ok = false;
     }
     fpsSave(gameDir, runs);

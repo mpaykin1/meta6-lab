@@ -53,7 +53,9 @@ export function quota(prs, number, now = Date.now()) {
   const selected = living.slice(0, 5);
   // Claude 11.11.2026: ремонт красного main (ветки lab/remont-main-*) лимитом не блокируется —
   // пока бот-проходчик красный на main, ни одну игровую работу нельзя честно принять.
-  const repair = /^lab\/remont-main-/.test(pr?.head?.ref || '');
+  // Claude 18.11.2026: ветки claude/* — ремонт сторожей и проверок Claude. Если проверка ложно красная у всех
+  // пяти старейших PR, её ремонт сам стоял в очереди за ними — тупик (OSHIBKI 2026111802). Лимит их не блокирует.
+  const repair = /^(?:lab\/remont-main-|claude\/)/.test(pr?.head?.ref || '');
   const reject = Boolean(pr && !repair && Date.parse(pr.created_at) > CUTOFF &&
     living.length > 5 && !selected.some(p => p.number === number));
   return {reject, living: living.length, oldest: selected.map(p => p.number),

@@ -1,3 +1,15 @@
+## ВСЁ НА GITHUB (правило владельца, 17.11.2026)
+Любая новая система, бот, промпт, правило или договорённость по МГ/МГЛ — сразу сюда: карточка `automation/zadachi/Z…` или правка GPT.md; правило — в AGENTS.md МГ и МГЛ. Отдельных систем, расписаний и автопроверок вне GitHub не заводить. У Claude только одна автопроверка — суточная (`automation/prompts/CLAUDE_SUTOCHNYJ.md`). Перед каждым прямым пушем в main Claude запускает `scripts/claude/pre-push.sh`; прогон `KONTUR main` ловит поломки прямых пушей сразу.
+
+## ЭТАЛОНЫ — один каталог (17.11.2026)
+Все эталоны МГЛ одним списком: [ETALONY.md](ETALONY.md) (собирается `scripts/lab/build-etalony-catalog.py`, полноту ловит `verify-etalony-catalog`). Остальные документы про эталоны ссылаются на него.
+
+## INK 3D — система создания моделей (17.11.2026)
+Модели и миры в стиле INK — по карточке [Z21](automation/zadachi/Z21_INK_3D.md): стандарт [ink.md](ink.md), рецепт [RECEPT_INK_MIR.md](rules/01-stil-i-grafika/RECEPT_INK_MIR.md), [БЕЗ ПАТТЕРНОВ](rules/01-stil-i-grafika/BEZ_PATTERNOV.md), шаблон [shared/ink/ink-template.js](shared/ink/ink-template.js). Рендер для новых работ — только из `reference/ink-fallen-guardian/shared/`.
+
+## SEO — правила каталога МГ и МГЛ (17.11.2026)
+Полное правило: [rules/09-platforma/SEO_KATALOG.md](rules/09-platforma/SEO_KATALOG.md), задача — карточка [Z19](automation/zadachi/Z19_SEO.md). Главное: SEO-текст только на страницах каталога, не на экране игры; индексируется МГ, дубли МГЛ — canonical на МГ; ссылка владельцу только после HTTP 200.
+
 ## ЕДИНЫЙ ВХОД ДЛЯ ChatGPT — GPT.md (Claude, 17.11.2026, по просьбе владельца)
 Владелец даёт обычному чату ChatGPT только ссылку — на https://github.com/mpaykin1/meta6-lab/blob/main/GPT.md или на карточку задачи из [automation/zadachi/README.md](automation/zadachi/README.md); 5 автозадач тоже выполняют GPT.md (раздел 0А «лестница полезной работы», владелец 17.11.2026) — ChatGPT сам берёт оттуда промпт и выполняет. GPT.md каждый запуск делает ПУЛЬС системы (main, ZADACHI, DISPETCHER, TOLKNUT, FINISH, открытые PR), толкает зависшее и выбирает задачу по таблице; задачи — карточки `automation/zadachi/Z01…Z17`. Все остальные промпты в `automation/prompts/` — справочные; при расхождении действует GPT.md. Новые промпты, таблицы и сторожа — только взамен старых (без суеты).
 
@@ -9,6 +21,8 @@ Living Watercolor 3D — эталон визуальной технологии 
 
 Эталон **INK · Падальщик** (OWNER PASS 15.11.2026): `reference/ink-carrion-stalker/`, настоящий объёмный Three.js-робот с бионическими ногами, когтями и действиями укуса/прыжка/удара. Рендер переиспользует принятый `reference/ink-fallen-guardian/` без правок. МГЛ: https://mpaykin1.github.io/meta6-lab/reference/ink-carrion-stalker/; МГ — перенос только Claude.
 
+
+Эталон **INK · Машина → Батискаф** (OWNER PASS 17.11.2026): `reference/ink-car-bathyscaphe/` (https://mpaykin1.github.io/meta6/reference/ink-car-bathyscaphe/ · https://mpaykin1.github.io/meta6-lab/reference/ink-car-bathyscaphe/), отдельная объёмная Three.js-модель с плавным превращением машины в батискаф, иллюминаторами, винтовыми движителями и камерой 360°. Исходники и управление — в README.md внутри папки; паспорт — `shared/references/ink-car-bathyscaphe.json`. Рендер `reference/ink-fallen-guardian/` используется без правок; принятый эталон не менять, новые версии в отдельных папках.
 
 ## ССЫЛКА = 200 (правило владельца, 11.11.2026; ускорено 15.11.2026)
 Публичную ссылку владельцу (МГ и МГЛ) выдавать только когда точный URL отвечает 200. Достаточно прямой проверки агентом (curl/браузер) — ждать прогон GitHub Actions НЕ нужно (решение владельца 15.11.2026: «если какое-то правило не даёт быстро выложить на МГ и МГЛ — отмени это правило»). Существование файла или merge без проверки 200 — не доказательство. В МГЛ новую ссылку добавить в `LINKS.txt`; сторож Link Guard и отдельная задача `check-links` проверяют реестр после публикации и не задерживают сам деплой. 404 — ошибку чинит агент сам (правило ОТЧЁТ = РАБОТА), а не сообщает о ней.
@@ -99,6 +113,7 @@ _мелодии, эффекты, громкость_
 _лор героя, подписи-воспоминания, квесты_
 
 - [RAZGOVOR_U_PREDMETA.md](rules/04-syuzhet-i-scenarii/RAZGOVOR_U_PREDMETA.md) — **РАЗГОВОР У ПРЕДМЕТА (13.11.2026):** герои говорят только о том, что рядом и видно; каждый предмет — разговор-ассоциация с новой деталью лора; реплика раскрывает, что с героем было («Тебя вчера опять трясло» — «Я ничего не помню…»); ушли — разговор оборван
+- [COMBINE_WORLDS.md](rules/04-syuzhet-i-scenarii/COMBINE_WORLDS.md) — **COMBINE WORLDS (18.11.2026):** все игры — куски одного Павшего великана, герои ищут друг друга; роль каждой из 28 игр, финал с Чернильным оскалом и 15 способов намекнуть на связь миров (предметы, тени, звук, разговоры у предмета, общая карта в ☰ меню, подарки между играми)
 - [LOR.md](rules/04-syuzhet-i-scenarii/LOR.md) — жуткое детство героя, рассказанное миром; круги 2, 3, 4…; история в конце
 - [PODPISI_VOSPOMINANIYA.md](rules/04-syuzhet-i-scenarii/PODPISI_VOSPOMINANIYA.md) — короткие подписи-осколки памяти, из которых игрок сам собирает сюжет
 - [QUEST_RULES_RU.md](rules/04-syuzhet-i-scenarii/QUEST_RULES_RU.md) — понятные квесты

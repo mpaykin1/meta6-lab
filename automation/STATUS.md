@@ -1,36 +1,24 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-17T02:17:15.853Z | МГЛ: нет данных | МГ: нет данных | https://github.com/mpaykin1/meta6-lab/actions/runs/44001814323
+UTC: 2026-11-19T01:42:28.865Z | МГЛ: 2f3ba35ac66f4a67f26ceefce200645911a2db67 | МГ: 5984fcd5b79ed2d03c648053334361db8deb44fb | https://github.com/mpaykin1/meta6-lab/actions/runs/44438756491
 ## ПРОВЕРИТЬ CLAUDE
-- нет данных
-- МГЛ: нет данных
-- МГ: нет данных
+- PR #421 a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1: .github/workflows/bez-patternov.yml, automation/asset-check/test_htmlpack.py, scripts/storozha/verify-storozha.mjs, scripts/visual/mutate-no-patterns.mjs, scripts/visual/verify-targets.mjs
+- PR #413 fa7e16893fb93ca733d8e5b93a0e03674d965258: .github/workflows/odin-pr.yml, scripts/odin-pr/mutate-odin-pr.mjs
+- ещё 41: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/… (сокращено)
-- | #208 | эталон | `lab/ashen-path-asset-pack-restore-1109` | Restore original Ashen Path asset pack reference after sync | closed | НУЖЕН CLAUDE: KONTUR Guard отклоняет исходный LEGACY_LIGHTS, [красный прогон](https://github.com/mpaykin1/meta6-lab/actions/runs… (сокращено)
-- | #207 | эталон | `lab/king-of-ash-original-upload-1109` | Эталон: Король Пепла — исходная игра и каталог 34 ассетов | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771440585), [обн… (сокращено)
-- | #202 | эталон | `lab/archer-in-fog-reference-20261109` | Эталон: Лучник в тумане — исходный HTML владельца | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/42771316201), [обновлённая… (сокращено)
-- | #201 | эталон | `lab/reference-foggy-awakening-scene-1` | Эталон: Сцена 1 — Туманное пробуждение | closed | НУЖЕН CLAUDE: распаковать бинарный ZIP в Actions, [PR #201](https://github.com/mpaykin1/meta6-lab/pull/201) |
-- | #189 | эталон | `lab/endless-valleys-golden-knight-reference-1109` | Add Endless Valleys — Golden Knight as owner-supplied refere | closed | НУЖЕН CLAUDE: старый коммит трогает protected, [красный guard](https://github.com/mpaykin1/meta6-lab/actions/runs/427… (сокращено)
-- | #134 | эталон | `lab/abyss-glow-owner-reference-20261108` | ABYSS GLOW — второй эталон графики и анимации | closed | НУЖЕН CLAUDE: авторский исходник LEGACY_LIGHTS нельзя изменять, [красный KONTUR](https://github.com/mpaykin1/meta6-lab/actions/runs/427739179… (сокращено)
-- ещё 1: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
-- | КАРТА СИЛ 2 — чат ChatGPT | lab/karta-sil-2 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-15T04:20:19.834Z |
-- | БЮДЖЕТ GitHub API — Карта сил | lab/karta-sil-api-budget-20261114 | свободно (зависло 8 ч, было: чат ChatGPT, отдельный PR без ядра) | 2026-11-14T05:12:18Z |
-- | КАРТА СИЛ — чат ChatGPT | lab/karta-sil | свободно (зависло 4 ч, было: чат ChatGPT — продолжение #301 после #316, #308) | 2026-11-14T09:02:41.637Z |
-- | M6 | lab/mcp-connect | свободно (зависло 6 ч, было: MG-строитель-3) | 2026-11-09 22:25 UTC |
-- | К7 | lab/kontur-k7-review | свободно (зависло 6 ч, было: ВОЗВРАЩЁН Claude (ложные срабатывания, см. комментарий в PR #193) — попытка 1 из 2) | 2026-11-09 17:50 |
-- | B2 ч.1 (twilight-isle-classic, twilight-isles, archer-in-the-fog) | lab/bot-batch-1 | свободно (зависло 6 ч, было: чат ChatGPT) | 2026-11-09 15:15 |
-- | B2 ч.2 (broken-city, rainbow-acceleration, sumerki-i-pepel-2) | lab/bot-batch-2 | свободно (зависло 6 ч, было: автозадача) | 2026-11-09 15:45 |
-- | Пульт владельца | lab/owner-pult | свободно (зависло 5 ч, было: чат ChatGPT) | 2026-11-09 16:35 |
-- ещё 8: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
+- ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
+- | B2: независимый верификатор движения из #258 | lab/z04-b2-extract-motion-20261117 | свободно (зависло 12 ч, было: чат ChatGPT — продолжение PR #355) | 2026-11-18 |
+- | НАДЗОР — чат ChatGPT | lab/nadzor | свободно (зависло 10 ч, было: чат ChatGPT (надзор)) | 2026-11-17T01:33:05.414Z |
+- ещё 16: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
 готовы по FINISH.md: M1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036)), M2 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685)), M3 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211)), M4 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211)), M5 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211)), B1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082)), P1 ([источник](https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308))
-Actions M1: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42637860036): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42637860036
-Actions M2: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42641995685): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42641995685
-Actions M3: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
-Actions M4: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647105211
-Actions M5: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42656155211
-Actions B1: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082
-Actions P1: нет данных (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): GitHub недоступен: https://github.com/mpaykin1/meta6-lab/actions/runs/42644769308
+Actions M1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42637860036): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
+Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42641995685): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
+Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
+Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
+Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44405219497)
+Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
 B3 — не готов: НЕТ в таблице FINISH
@@ -43,12 +31,28 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: нет данных | конфликт: нет данных | слито: нет данных | закрыто: нет данных
-нет данных
+открыто: 33 | конфликт: нет данных | слито: 83 | закрыто: 159
+#422 BEZ PATTERNOV: неподвижный кадр для паков вместо таймаута сн | 1d6c9557d51496b703e9279fb57188e385f2e126
+#421 Почему стояла работа: ложный красный BEZ PATTERNOV, тупик ли | a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1
+ещё 81: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: нет данных коммитов | нет данных
-МГ: нет данных коммитов | нет данных
+МГЛ: 3052 коммитов | нет данных
+МГ: 46 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:33, reference:31, rules:10, SOURCE_INDEX.md:1
 ## ИГРЫ
-нет данных
+archer-in-the-fog — не запускалась | витрина: да
+asqura-ilya-reference — не запускалась | витрина: нет
+broken-city — не запускалась | витрина: да
+broken-city-copy — не запускалась | витрина: нет
+ostrov-aptekarya — прошла | витрина: нет
+rainbow-acceleration — не запускалась | витрина: нет
+skin-trainer — не запускалась | витрина: нет
+sumerki-i-pepel-2 — не запускалась | витрина: да
+sumerki-i-pepel-2-copy — не запускалась | витрина: нет
+twilight-isle-classic — не запускалась | витрина: да
+twilight-isles — не запускалась | витрина: да
+veil-terraces — прошла | витрина: да
+wild-train-prologue — не прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
-нет данных
+| 2026111801 | 18.11.2026 | BEZ PATTERNOV: у PR без игры каталога проверка по умолчанию мерила INK-шейдер и требовала улучшить его на 15% — красными стояли все PR ассетов и правил (#371, #409, #415 и др.), работа ChatGPT не сливалась | Claude: разбор «почему с… (сокращено)
+| 2026111802 | 18.11.2026 | Лимит пяти живых PR держал в очереди и сам ремонт ложно красной проверки, которая и мешала пяти старейшим слиться — тупик | Claude: #421 красный только по storozha-quota | scripts/storozha/verify-storozha.mjs: claude/* не блокируетс… (сокращено)
+ещё 76: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

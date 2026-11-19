@@ -1,0 +1,107 @@
+{
+  "format": "ink-pack/1",
+  "version": "1.2.1",
+  "base": "reference/ink-night-scream",
+  "game": "ink-night-scream",
+  "license": {
+    "type": "original",
+    "author": "META GAMES",
+    "commercial": true
+  },
+  "provenance": {
+    "tool": "Three.js procedural geometry + Web Audio",
+    "date": "2026-11-17",
+    "prompt_sha256": "owner-brief-black-train-20261117"
+  },
+  "content_flags": {
+    "real_persons": false,
+    "brands": false,
+    "political": false
+  },
+  "assets": {
+    "crossingSign": {
+      "label_ru": "Гнилой крест переезда",
+      "role": "landmark",
+      "zone": "railway",
+      "footprint": 0.28
+    },
+    "redSignalLamp": {
+      "label_ru": "Красный предупреждающий фонарь",
+      "role": "interactive",
+      "zone": "railway",
+      "footprint": 0.25
+    },
+    "hangingChains": {
+      "label_ru": "Подвесные цепи",
+      "role": "prop",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "gnarledTree": {
+      "label_ru": "Старое корявое дерево",
+      "role": "tree",
+      "zone": "woodland",
+      "footprint": 1.2
+    },
+    "groundMist": {
+      "label_ru": "Низкий движущийся туман",
+      "role": "effect",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "stormClouds": {
+      "label_ru": "Штормовые облака",
+      "role": "effect",
+      "zone": "sky",
+      "footprint": 0
+    },
+    "brokenFence": {
+      "label_ru": "Покосившийся забор",
+      "role": "prop",
+      "zone": "railway",
+      "footprint": 0.4
+    },
+    "tallGrass": {
+      "label_ru": "Осока и сухая трава",
+      "role": "plant",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "wetRailGlow": {
+      "label_ru": "Красные блики на мокрых рельсах",
+      "role": "ground",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "barbedWire": {
+      "label_ru": "Колючая проволока",
+      "role": "prop",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "swampPuddles": {
+      "label_ru": "Неровные лужи",
+      "role": "ground",
+      "zone": "railway",
+      "footprint": 0
+    },
+    "titleLogo": {
+      "label_ru": "Заставка BLACK TRAIN в меню",
+      "role": "prop",
+      "zone": "menu",
+      "footprint": 0
+    },
+    "crossingBell": {
+      "label_ru": "Звон колокола переезда",
+      "role": "prop",
+      "zone": "railway",
+      "footprint": 0.2
+    },
+    "chainsClank": {
+      "label_ru": "Звук цепей на ветру",
+      "role": "prop",
+      "zone": "railway",
+      "footprint": 0
+    }
+  }
+}

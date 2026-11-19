@@ -90,3 +90,14 @@ test('dispatcher shares one deadline between quota wait and retry request',async
  assert.ok(elapsed<2500,'retry must not receive a fresh full deadline');
  }finally{clearTimeout(keepAlive)}
 });
+
+test('dispatcher deadline also covers a stalled response.json body',async()=>{
+ const keepAlive=setTimeout(()=>{},1500);
+ try{
+  const started=performance.now();
+  await assert.rejects(()=>api('/pulls/1',{maxWaitMs:150,
+   request:async()=>({ok:true,json:()=>new Promise(()=>{})})}),
+   error=>error.message.includes('нет данных: таймаут GitHub API')&&error.cause?.name==='TimeoutError');
+  assert.ok(performance.now()-started<1000,'body parsing must respect the request deadline');
+ }finally{clearTimeout(keepAlive)}
+});

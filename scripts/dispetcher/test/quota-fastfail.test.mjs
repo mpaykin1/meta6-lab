@@ -112,9 +112,9 @@ test('dispatcher deadline rejects a request that ignores AbortSignal',async()=>{
 });
 
 test('dispatcher deadline also bounds a stalled quota wait',async()=>{
- const keepAlive=setTimeout(()=>{},1200);
+ const keepAlive=setTimeout(()=>{},2000);
  try{
-  await assert.rejects(()=>api('/pulls/1',{now:()=>now,maxWaitMs:120,
+  await assert.rejects(()=>api('/pulls/1',{now:()=>now,maxWaitMs:1200,
    request:async()=>response(429,0.001),
    wait:async()=>new Promise(()=>{})}),
    error=>error.message.includes('нет данных: таймаут GitHub API')&&error.cause?.name==='TimeoutError');

@@ -1061,8 +1061,12 @@ void main() {
   col += uSunCol * smoothstep(0.3, 0.5, tl) * detail * 0.14;   // pixel crests catch the key light
   vec3 Rf = reflect(-V, vec3(0.0, 1.0, 0.0));
   float sd = max(dot(Rf, uSunDir), 0.0);
-  float glint = step(0.975, h12(pp * 3.7 + floor(uTime * 5.0))) * pow(sd, 40.0);
-  col += uSunCol * (pow(sd, 160.0) * 1.2 + glint * 3.5);
+  // The reflected light travels along the current instead of blinking on a texel grid.
+  float glintPhase = (currentA - currentB) * 5.4 + currentC * 2.8 - uTime * 0.82;
+  float glintCrest = smoothstep(0.58, 0.96, sin(glintPhase));
+  float glintMask = smoothstep(0.46, 0.72, currentB * 0.65 + currentC * 0.35);
+  float glint = glintCrest * glintMask * detail * pow(sd, 40.0);
+  col += uSunCol * (pow(sd, 160.0) * 1.2 + glint * 0.92);
   col = mix(col, uFoam, foam * 0.9);
   float alpha = mix(0.42, 0.93, smoothstep(0.1, 2.0, depth));
   alpha = max(alpha, foam * 0.95);

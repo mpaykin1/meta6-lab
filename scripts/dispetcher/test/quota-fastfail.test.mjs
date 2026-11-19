@@ -43,3 +43,13 @@ test('dispatcher does not invent exhausted quota when rate-limit headers are mis
  assert.equal(calls,1);
  assert.equal(waits,0);
 });
+
+
+test('dispatcher passes bounded abort signal to slow HTTP requests',async()=>{
+ let receivedSignal;
+ const result=await api('/pulls/1',{maxWaitMs:10000,
+  request:async (_url,options)=>{receivedSignal=options.signal;return {ok:true,json:async()=>({ok:true})}}});
+ assert.deepEqual(result,{ok:true});
+ assert.equal(receivedSignal instanceof AbortSignal,true);
+ assert.equal(receivedSignal.aborted,false);
+});

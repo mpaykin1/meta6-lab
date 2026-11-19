@@ -1,5 +1,11 @@
 # Итоги недели без Claude
 
+## 2026-11-19
+- Слито за последние 24 часа: 2 ([#422](https://github.com/mpaykin1/meta6-lab/pull/422), [#421](https://github.com/mpaykin1/meta6-lab/pull/421))
+- Бот: за последние 24 часа нет подтверждённого PASS на main.
+- В DLYA_CLAUDE.md: 107 записей, PR #267, #277, #247, #248, #370, #404, #417, #418, #419, #421, #402, #423, #245, #258, #283
+- Открытых живых PR: 25; зависших: 0.
+
 ## 2026-11-18
 - Слито за последние 24 часа: 5 ([#421](https://github.com/mpaykin1/meta6-lab/pull/421), [#413](https://github.com/mpaykin1/meta6-lab/pull/413), [#384](https://github.com/mpaykin1/meta6-lab/pull/384), [#373](https://github.com/mpaykin1/meta6-lab/pull/373), [#387](https://github.com/mpaykin1/meta6-lab/pull/387))
 - Бот: за последние 24 часа нет подтверждённого PASS на main.

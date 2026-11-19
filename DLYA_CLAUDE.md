@@ -25,17 +25,12 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->
-| #245 | lab/remont-main-veil-terraces | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-19 |
-| #258 | lab/prohodchik-b2-motion-20261111 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-19 |
-| #283 | lab/ink-fallen-robot-20261113 | LINKS.txt, ink.md | 2026-11-19 |
-| #291 | lab/polza-b2-broken-city-20261113 | OSHIBKI.md, shared/library/index.json | 2026-11-19 |
 | #297 | lab/ostrov-aptekarya-ii | OSHIBKI.md | 2026-11-19 |
 | #300 | lab/native-catalog-recovery-20261113 | OSHIBKI.md | 2026-11-19 |
 | #310 | lab/patch-import | OSHIBKI.md, automation/asset-check/mutate_bot.py, automation/asset-check/test_kinds.py | 2026-11-19 |
 | #322 | lab/ink-watercolor-steam-train-20261114 | LINKS.txt, OSHIBKI.md, reports/zavaly/PROGRESS.md | 2026-11-19 |
 | #331 | lab/razbor-zavalov | OSHIBKI.md, automation/SLIYANIE.md, reports/zavaly/PROGRESS.md, scripts/karta-sil/route.mjs | 2026-11-19 |
 | #343 | lab/assets-nebesny-pilot-20261116 | LINKS.txt, OSHIBKI.md, automation/asset-check/OCHERED.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-19 |
-| #354 | lab/3d-master-visual-split-20261117 | reports/zavaly/PROGRESS.md | 2026-11-19 |
 | #355 | lab/z04-b2-extract-motion-20261117 | OSHIBKI.md | 2026-11-19 |
 | #357 | lab/rules-playgama-catalog-direct-20261117 | OSHIBKI.md | 2026-11-19 |
 | #364 | lab/assets-vorona-v-tumane-20261117 | automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py, automation/asset-check/test_kinds.py | 2026-11-19 |

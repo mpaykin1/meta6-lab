@@ -5,7 +5,7 @@ const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-d
 export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTimeout(done,ms)),
  now=()=>Date.now(),maxWaitMs=8*60*1000}={}){
  for(let attempt=0;attempt<2;attempt++){
-  const response=await request(root+path,{headers});
+  const response=await request(root+path,{headers,signal:AbortSignal.timeout(maxWaitMs)});
   if(response.ok)return response.json();
   const remainingHeader=response.headers.get('x-ratelimit-remaining');
   const resetHeader=response.headers.get('x-ratelimit-reset');

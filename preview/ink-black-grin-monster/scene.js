@@ -134,6 +134,19 @@ for(let i=0;i<10;i++){
   fog.scale.set(6.5+(i%4)*1.6,1.5+(i%3),1);
   world.add(fog);fogs.push(fog);
 }
+// Cold lightning behind the forest: a real 3D light and branching silhouette.
+const stormLight=new T.PointLight('#9ec9db',0,28,2);
+stormLight.position.set(-6,9,-9);world.add(stormLight);
+const lightning=new T.Group();lightning.position.set(-6,5,-9);world.add(lightning);
+const boltMaterial=new T.MeshBasicMaterial({color:'#b8dce8',transparent:true,opacity:0,depthWrite:false});
+const boltSegments=[[[0,4,0],[-.3,2.8,0],[.2,1.8,0],[-.5,.5,0]],
+  [[-.3,2.8,0],[-1.2,2.1,0],[-1.4,1.3,0]],
+  [[.2,1.8,0],[1.1,1.1,0],[1.35,.5,0]]];
+for(const branch of boltSegments){
+  const points=branch.map(p=>new T.Vector3(...p));
+  const mesh=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(points),12,.022,5,false),boltMaterial);
+  mesh.userData.watercolorOutline=false;lightning.add(mesh);
+}
 // Slow drifting particles, rain and drips on a separate atmospheric layer.
 const mistCount=130,mistPos=new Float32Array(mistCount*3),mist=new T.BufferGeometry();
 mist.setAttribute('position',new T.BufferAttribute(mistPos,3));
@@ -297,6 +310,11 @@ function animate(ms){
     mistPos[n+2]=(rnd(i+91)-.5)*12;
   }
   mist.attributes.position.needsUpdate=true;
+  // Short double-flash every ~13 seconds; keep the monster readable.
+  const stormPhase=elapsed%13.7;
+  const flash=stormPhase<.10?1:stormPhase>.18&&stormPhase<.27?.55:0;
+  stormLight.intensity=flash*48;
+  boltMaterial.opacity=flash*.85;
   const pulse=monster.userData.pulse||0;
   fear+=(pulse-fear)*(pulse>fear?.5:Math.min(1,dt*2.2));
   faceLight.intensity=26*(.86+.09*Math.sin(elapsed*.58)+.05*Math.sin(elapsed*7.3)*Math.sin(elapsed*1.9))+12*fear;

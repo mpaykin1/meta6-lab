@@ -235,7 +235,11 @@ function draw(){
  const r=camDistance*.92*zoom;
  camera.position.set(camTarget.x+r*Math.sin(camAz)*Math.cos(camAlt),
  camTarget.y+r*Math.sin(camAlt),camTarget.z+r*Math.cos(camAz)*Math.cos(camAlt));
- camera.lookAt(camTarget);paint.tick(clock*1000);optics.render(clock);
+ camera.lookAt(camTarget);
+ paint.tick(clock*1000);
+ optics.setMood(hiddenEffects.has('nightRainGrade') ? 0 : moodValue);
+ if(hiddenEffects.has('tiltShiftPost'))optics.setTiltShift(false);
+ optics.render(clock);
 }
 function animate(ts){
  if(manual)return;
@@ -269,8 +273,15 @@ function animate(ts){
 }
 // A frozen frame can be rendered with one asset hidden, then shown, at the same
 // camera, lighting, simulation timestamp for truthful pixel-isolation comparison.
+const hiddenEffects=new Set();
 const probe={
- assets,manual:false,setHidden(id,hidden){if(assets[id])assets[id].visible=!hidden;},
+ assets,manual:false,setHidden(id,hidden){
+  if(assets[id])assets[id].visible=!hidden;
+  if(id==='nightRainGrade'||id==='tiltShiftPost'){
+   if(hidden)hiddenEffects.add(id);
+   else hiddenEffects.delete(id);
+  }
+ },
  draw(){draw();},freeze(){manual=true;probe.manual=true;cancelAnimationFrame(frame);draw();},
  resume(){if(manual){manual=false;probe.manual=false;lastTick=0;frame=requestAnimationFrame(animate);}},
  select

@@ -69,6 +69,10 @@ test('dispatcher treats AbortError as unavailable data, not a successful empty r
 test('dispatcher shares one deadline between quota wait and retry request',async()=>{
  let calls=0;
  const started=performance.now();
+ // AbortSignal.timeout uses an unref'ed timer in Node; keep the event loop alive
+ // while the mocked fetch intentionally waits only for its abort event.
+ const keepAlive=setTimeout(()=>{},3000);
+ try{
  await assert.rejects(()=>api('/pulls/1',{now:()=>now,maxWaitMs:1500,
   request:async (_url,{signal})=>{
    calls++;
@@ -84,4 +88,5 @@ test('dispatcher shares one deadline between quota wait and retry request',async
  assert.equal(calls,2);
  assert.ok(elapsed>=1050,'quota wait should occur before retry');
  assert.ok(elapsed<2500,'retry must not receive a fresh full deadline');
+ }finally{clearTimeout(keepAlive)}
 });

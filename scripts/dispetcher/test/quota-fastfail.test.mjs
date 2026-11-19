@@ -101,3 +101,12 @@ test('dispatcher deadline also covers a stalled response.json body',async()=>{
   assert.ok(performance.now()-started<1000,'body parsing must respect the request deadline');
  }finally{clearTimeout(keepAlive)}
 });
+
+test('dispatcher deadline rejects a request that ignores AbortSignal',async()=>{
+ const keepAlive=setTimeout(()=>{},1200);
+ try{
+  await assert.rejects(()=>api('/pulls/1',{maxWaitMs:100,
+   request:async()=>new Promise(()=>{})}),
+   error=>error.message.includes('нет данных: таймаут GitHub API')&&error.cause?.name==='TimeoutError');
+ }finally{clearTimeout(keepAlive)}
+});

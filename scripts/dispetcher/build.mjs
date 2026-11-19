@@ -4,9 +4,12 @@ const root='https://api.github.com/repos/'+repo;
 const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-dispatcher','Authorization':'Bearer '+token};
 export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTimeout(done,ms)),
  now=()=>Date.now(),maxWaitMs=8*60*1000}={}){
+ const deadline=performance.now()+maxWaitMs;
  for(let attempt=0;attempt<2;attempt++){
+  const remainingMs=Math.floor(deadline-performance.now());
+  if(remainingMs<=0)throw Error('нет данных: таймаут GitHub API ('+path+')');
   let response;
-  try{response=await request(root+path,{headers,signal:AbortSignal.timeout(maxWaitMs)})}
+  try{response=await request(root+path,{headers,signal:AbortSignal.timeout(remainingMs)})}
   catch(error){
    if(error?.name==='TimeoutError'||error?.name==='AbortError')throw Error('нет данных: таймаут GitHub API ('+path+')',{cause:error});
    throw error;
@@ -18,7 +21,7 @@ export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTime
   const reset=resetHeader===null?NaN:Number(resetHeader)*1000;
   if((response.status===403||response.status===429)&&remaining===0&&Number.isFinite(reset)&&reset>0){
    const waitMs=reset-now();
-   if(waitMs>0&&waitMs<=8*60*1000&&waitMs+1000<=maxWaitMs&&attempt===0){await wait(waitMs+1000);continue}
+   if(waitMs>0&&waitMs<=8*60*1000&&waitMs+1000<deadline-performance.now()&&attempt===0){await wait(waitMs+1000);continue}
    throw Error('нет данных: квота GitHub API до '+new Date(reset).toISOString().slice(11,16)+' UTC');
   }
   throw Error('нет данных: GitHub HTTP '+response.status+' ('+path+')');

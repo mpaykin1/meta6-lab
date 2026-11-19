@@ -59,3 +59,9 @@ test('dispatcher reports aborted HTTP requests as unavailable data',async()=>{
   request:async()=>{throw new DOMException('request timed out','TimeoutError')}}),
   /нет данных: таймаут GitHub API \(\/pulls\/1\)/);
 });
+
+test('dispatcher treats AbortError as unavailable data, not a successful empty response',async()=>{
+ await assert.rejects(()=>api('/pulls/1',{maxWaitMs:10000,
+  request:async()=>{throw new DOMException('request aborted','AbortError')}}),
+  error=>error.message.includes('нет данных: таймаут GitHub API (/pulls/1)')&&error.cause?.name==='AbortError');
+});

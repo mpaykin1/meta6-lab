@@ -11,7 +11,13 @@ export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTime
   const signal=AbortSignal.timeout(remainingMs);
   let response;
   try{
-   response=await request(root+path,{headers,signal});
+   let onRequestAbort;
+   const requestAborted=new Promise((_resolve,reject)=>{
+    onRequestAbort=()=>reject(signal.reason);
+    signal.addEventListener('abort',onRequestAbort,{once:true});
+   });
+   try{response=await Promise.race([request(root+path,{headers,signal}),requestAborted])}
+   finally{signal.removeEventListener('abort',onRequestAbort)}
    if(response.ok){
     let onAbort;
     const aborted=new Promise((_resolve,reject)=>{

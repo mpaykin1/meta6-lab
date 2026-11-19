@@ -53,3 +53,9 @@ test('dispatcher passes bounded abort signal to slow HTTP requests',async()=>{
  assert.equal(receivedSignal instanceof AbortSignal,true);
  assert.equal(receivedSignal.aborted,false);
 });
+
+test('dispatcher reports aborted HTTP requests as unavailable data',async()=>{
+ await assert.rejects(()=>api('/pulls/1',{maxWaitMs:10000,
+  request:async()=>{throw new DOMException('request timed out','TimeoutError')}}),
+  /нет данных: таймаут GitHub API \(\/pulls\/1\)/);
+});

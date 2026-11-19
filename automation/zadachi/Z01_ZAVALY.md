@@ -121,3 +121,5 @@ PR [#331](https://github.com/mpaykin1/meta6-lab/pull/331) и `reports/zavaly/PRO
 
 ### 19.11.2026 — PR #407: приёмка после зелёного CI
 На HEAD `d144293d09465ca19a7d1a97e7ebc536f7b76b14` GitHub Check Runs показывает 21 завершённую проверку: 18 success, 3 skipped, 0 failure. Последний review — COMMENTED от 18.11, независимого APPROVED нет. Не тратить следующий запуск на повторный поиск CI: сначала получить независимый APPROVED, затем проверить актуальный HEAD, draft/mergeable и обязательные guards; до этого не сливать. Проверки: https://github.com/mpaykin1/meta6-lab/commit/d144293d09465ca19a7d1a97e7ebc536f7b76b14/checks ; PR: https://github.com/mpaykin1/meta6-lab/pull/407 .
+
+- 19.11 №1: при `AbortSignal.timeout` Node выбрасывает `TimeoutError`/`AbortError`; без нормализации диспетчер теряет диагностическое `нет данных` и показывает сырой сбой. Исправление в существующем [PR #407](https://github.com/mpaykin1/meta6-lab/pull/407), [SHA 45fd648](https://github.com/mpaykin1/meta6-lab/commit/45fd64891d534dc514fef36ac3d8c5983be642f9). Проверять именно текущий HEAD и регрессию, не засчитывать прежний CI.

@@ -5,7 +5,12 @@ const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-d
 export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTimeout(done,ms)),
  now=()=>Date.now(),maxWaitMs=8*60*1000}={}){
  for(let attempt=0;attempt<2;attempt++){
-  const response=await request(root+path,{headers,signal:AbortSignal.timeout(maxWaitMs)});
+  let response;
+  try{response=await request(root+path,{headers,signal:AbortSignal.timeout(maxWaitMs)})}
+  catch(error){
+   if(error?.name==='TimeoutError'||error?.name==='AbortError')throw Error('нет данных: таймаут GitHub API ('+path+')',{cause:error});
+   throw error;
+  }
   if(response.ok)return response.json();
   const remainingHeader=response.headers.get('x-ratelimit-remaining');
   const resetHeader=response.headers.get('x-ratelimit-reset');

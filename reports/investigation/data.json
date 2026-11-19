@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-18T20:30:35.593Z",
+  "generated_at": "2026-11-19T02:34:42.649Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -387,16 +387,16 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/z04-b2-extract-motion-20261117",
-      "status": "ошибка",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 355,
       "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44270414186/job/134685540809",
+      "check": "success",
+      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44413862752/job/135188854345",
       "url": "https://github.com/mpaykin1/meta6-lab/pull/355",
       "taken_at": "2026-11-17T02:24:34.332Z",
       "last_commit_at": "2026-11-17 02:25",
-      "remaining": "Исправить красные проверки: visual"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 23,
@@ -795,10 +795,10 @@
       "project": "МГЛ",
       "owner": "ChatGPT",
       "branch": "lab/archer-retention-exp-1",
-      "status": "зависла",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 262,
-      "pr_state": "open",
+      "pr_state": "closed",
       "check": "unknown",
       "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/262",
@@ -1104,9 +1104,9 @@
       "status": "ошибка",
       "original_status": "🙋 НУЖЕН CLAUDE — [PR #248](https://github.com/mpaykin1/meta6-lab/pull/248)",
       "pr": 248,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/43751232106/job/132925509480",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/248",
       "taken_at": "2026-11-11 11:40",
       "last_commit_at": "2026-11-15 19:13",
@@ -2358,7 +2358,7 @@
       "title": "Готовность META GAMES — отчёт",
       "state": "open",
       "sha": null,
-      "updated_at": "2026-11-18T11:48:21Z"
+      "updated_at": "2026-11-18T20:35:53Z"
     },
     {
       "label": "automation-watchdog",
@@ -3094,6 +3094,13 @@
       "problem": "Ни одна игра не дошла до слияния: ASSET GUARD требовал _check/compare.png, а у ChatGPT нет настоящего браузера; заодно BEZ_PATTERNOV «visual» валил каждый PR без изменения INK (контроль ink-shader-probe не может «улучшиться» на 15%, когда шейдер не трогали: #411, #412)",
       "detection": "разбор Claude 18.11, тестовый PR #417",
       "trap": "лист сравнения снимает CI: `automation/asset-check/compare_sheet.mjs` + шаг «ЛИСТ СРАВНЕНИЯ» в `asset-check.yml`; ловушки `sheetVerdict` в `scripts/asset-guard/mutate-asset-guard.mjs` (6/6 мутантов); `scripts/visual/measure-pattern-fft.py` пропускает только неизменённый контроль; К3 kontur-guard не требует OSHIBKI от PR, где только свой пак + отчёт (спорил с З2, #410) — ловушки в `scripts/kontur/mutate-kontur-guard.mjs`"
+    },
+    {
+      "id": 2026111804,
+      "date": "18.11.2026",
+      "problem": "Сторожа (gh-list.mjs) при повторном или пустом курсоре GraphQL 20 раз обрабатывали одни и те же PR и только потом падали «truncated» (PR #423, ядро охраны — только Claude)",
+      "detection": "Claude перенёс #423 в main 18.11",
+      "trap": "`scripts/storozha/mutate-gh-list.mjs` (4 мутанта, старый код ловится: calls=20)"
     }
   ],
   "warnings": [

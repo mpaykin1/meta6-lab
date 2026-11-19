@@ -3,7 +3,7 @@
 Это файл-память задания. ChatGPT после КАЖДОГО PR сразу меняет его строку и пушит в main (одна правка). При зависании новый запуск продолжает с первой строки, где «Сделано» пусто.
 Колонку «GitHub» и строку «Итог» заполняет бот `sliyanie-status` (каждый час и при закрытии PR) — правду о PR он берёт из самого GitHub, поэтому прогресс не теряется, даже если ChatGPT не успел записать.
 
-Итог: всего 118, слито 8, закрыто 91, открыто 19 — бот, 2026-11-18 20:52 UTC
+Итог: всего 118, слито 8, закрыто 93, открыто 17 — бот, 2026-11-19 02:46 UTC
 
 | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 |---|---|---|---|---|---|
@@ -12,7 +12,7 @@
 | #247 | код | — | Проверяющий и STOROZHA | closed | CLAUDE: да/нет? scripts/storozha/**; [STOROZHA FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43414460298); draft |
 | #254 | код | — | Auditor | closed | draft: ЖДЁТ конфликт main и CI [#254](https://github.com/mpaykin1/meta6-lab/pull/254); auditor не CORE_WORKFLOW |
 | #258 | код | — | B2 проходчик | open unknown | draft: ЖДЁТ merge main и нового полного CI; [B2 PASS 43420129986](https://github.com/mpaykin1/meta6-lab/actions/runs/43420129986); Claude не нужен |
-| #262 | код | — | Archer pixel proof | open unknown | draft: ЖДЁТ визуальный before/after и конфликт main [#262](https://github.com/mpaykin1/meta6-lab/pull/262) |
+| #262 | код | — | Archer pixel proof | closed | draft: ЖДЁТ визуальный before/after и конфликт main [#262](https://github.com/mpaykin1/meta6-lab/pull/262) |
 | #264 | код | — | Archer wall running | open dirty | draft: ЖДЁТ #262, конфликт main и визуальный PASS [#264](https://github.com/mpaykin1/meta6-lab/pull/264) |
 | #268 | код | — | Ссылка 200 и Link Guard | closed | draft: ЖДЁТ зелёный CI и HTTP 200 восстановленных URL [#268](https://github.com/mpaykin1/meta6-lab/pull/268) |
 | #280 | код | — | INK объекты | closed | draft: ЖДЁТ визуальный PASS пяти INK объектов и зелёный CI [#280](https://github.com/mpaykin1/meta6-lab/pull/280) |
@@ -51,7 +51,7 @@
 | #235 | игра | `lab/fix-mobile-screen-all-games-1111` | Неподвижный экран при джойстике | closed | закрыт: сторожем как заброшенный, без слияния; исправление экрана не подтверждено [PR #235](https://github.com/mpaykin1/meta6-lab/pull/235#issuecomment-6898807686) |
 | #245 | игра | `lab/remont-main-veil-terraces` | Шесть воспоминаний без застреваний | open unknown | CLAUDE: да/нет? изменение принятого Veil Terraces; [вопрос #245](https://github.com/mpaykin1/meta6-lab/pull/245); draft |
 | #277 | ядро | `lab/storozha-nedelya` | Три сторожа: update-heads и rename protection | closed | закрыт: без слияния; изменения ядра STOROZHA не согласованы, исходная ветка сохранена; [PR #277](https://github.com/mpaykin1/meta6-lab/pull/277) |
-| #248 | ядро | `lab/pr-autofinish-followup-1111` | Доверенный автообновлятор PR и журнал | open unknown | CLAUDE: да/нет? защищённый pr-autofinish; [вопрос #248](https://github.com/mpaykin1/meta6-lab/pull/248); draft |
+| #248 | ядро | `lab/pr-autofinish-followup-1111` | Доверенный автообновлятор PR и журнал | closed | CLAUDE: да/нет? защищённый pr-autofinish; [вопрос #248](https://github.com/mpaykin1/meta6-lab/pull/248); draft |
 | #331 | код | `lab/razbor-zavalov` | Исправить undefined у #248/#277 и поставить мутационную ловушку | open unknown | draft: ЖДЁТ независимое принятие/merge; [коммит ab0ae49](https://github.com/mpaykin1/meta6-lab/commit/ab0ae49c33c02bb25da4110ac04940d24ed3cc6e), [8 CI PASS](https://github.com/mpaykin1/meta6-lab/pull/331/checks); внешний Vercel build-rate-limit |
 | #316 | код | `lab/karta-sil-api-budget-20261114` | GitHub API quota, GraphQL batch, расписания ботов | merged | слит [4574e06a308792514a92db2f6328eb444f92d62a](https://github.com/mpaykin1/meta6-lab/commit/4574e06a308792514a92db2f6328eb444f92d62a), [11 зелёных проверок](https://github.com/mpaykin1/meta6-lab/pull/316/checks) |
 | #317 | код | `lab/library-machine-branch-ownership-20261114` | Library Machine: ограничить запись служебной веткой | merged | слит [e02387721f8e2cbf126ba1af2ac6e4e803bebc03](https://github.com/mpaykin1/meta6-lab/commit/e02387721f8e2cbf126ba1af2ac6e4e803bebc03) |

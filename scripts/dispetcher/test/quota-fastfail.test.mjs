@@ -65,3 +65,23 @@ test('dispatcher treats AbortError as unavailable data, not a successful empty r
   request:async()=>{throw new DOMException('request aborted','AbortError')}}),
   error=>error.message.includes('нет данных: таймаут GitHub API (/pulls/1)')&&error.cause?.name==='AbortError');
 });
+
+test('dispatcher shares one deadline between quota wait and retry request',async()=>{
+ let calls=0;
+ const started=performance.now();
+ await assert.rejects(()=>api('/pulls/1',{now:()=>now,maxWaitMs:1500,
+  request:async (_url,{signal})=>{
+   calls++;
+   if(calls===1)return response(429,0.1);
+   return new Promise((_resolve,reject)=>{
+    if(signal.aborted)return reject(signal.reason);
+    signal.addEventListener('abort',()=>reject(signal.reason),{once:true});
+   });
+  },
+  wait:ms=>new Promise(resolve=>setTimeout(resolve,ms))}),
+  /нет данных: таймаут GitHub API/);
+ const elapsed=performance.now()-started;
+ assert.equal(calls,2);
+ assert.ok(elapsed>=1050,'quota wait should occur before retry');
+ assert.ok(elapsed<2500,'retry must not receive a fresh full deadline');
+});

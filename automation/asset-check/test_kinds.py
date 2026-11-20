@@ -565,5 +565,70 @@ class CutoutTraps(unittest.TestCase):
         self.assertIn("CJ8", ids(self.d))
 
 
+class CutoutScreenshotEvidence(unittest.TestCase):
+    """Page-supplied counters cannot replace independent browser pixels."""
+
+    def probe(self, mode):
+        import base64
+        import os
+        import subprocess
+        import zlib
+        node = shutil.which("node")
+        self.assertIsNotNone(node, "Node is required for the screenshot gate")
+        source = (Path(__file__).parent / "kinds/cutout_browser.mjs").read_text("utf-8")
+        def chunk(kind, payload):
+            return (struct.pack(">I", len(payload)) + kind + payload +
+                    struct.pack(">I", zlib.crc32(kind + payload) & 0xffffffff))
+        rows = bytearray()
+        for y in range(64):
+            rows.append(0)
+            for x in range(64):
+                rows.extend((x * 4, y * 4, (x + y) * 2, 255) if mode == "detail" else (0, 0, 0, 255))
+        png = (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", 64, 64, 8, 6, 0, 0, 0)) +
+               chunk(b"IDAT", zlib.compress(bytes(rows))) + chunk(b"IEND", b""))
+        if mode == "invalid":
+            png = b"not a PNG"
+        encoded = base64.b64encode(png).decode("ascii")
+        write = "" if mode == "missing" else (
+            "writeFileSync(args.find(x=>x.startsWith('--screenshot=')).slice(13),"
+            "Buffer.from('" + encoded + "','base64'));"
+        )
+        fake_dom = '<body data-loaded="26" data-crow="2" data-beast="2" data-gpu="999" data-moved="yes"></body>'
+        stub = "const spawnSync=(_command,args)=>{" + write + "return {status:0,stdout:" + json.dumps(fake_dom) + ",stderr:''};};"
+        original = "import {spawnSync} from 'node:child_process';"
+        self.assertIn(original, source)
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "index.html").write_text("<!doctype html><p>No real renderer</p>", "utf-8")
+            script = root / "probe.mjs"
+            script.write_text(source.replace(original, stub), "utf-8")
+            run = subprocess.run([node, str(script), str(root / "index.html")],
+                                 capture_output=True, text=True, timeout=15,
+                                 env={**os.environ, "CHROME_BIN": node, "TMP": temp, "TEMP": temp})
+            return run.returncode, json.loads(run.stdout)
+
+    def test_missing_screenshot_rejects_forged_dom_claims(self):
+        code, result = self.probe("missing")
+        self.assertNotEqual(code, 0)
+        self.assertFalse(result["ok"])
+
+    def test_uniform_screenshot_rejects_forged_gpu_colors(self):
+        code, result = self.probe("blank")
+        self.assertNotEqual(code, 0)
+        self.assertFalse(result["ok"])
+
+    def test_invalid_screenshot_rejected(self):
+        code, result = self.probe("invalid")
+        self.assertNotEqual(code, 0)
+        self.assertFalse(result["ok"])
+
+    def test_detailed_screenshot_preserves_pixel_gate(self):
+        code, result = self.probe("detail")
+        self.assertEqual(code, 0, result)
+        self.assertTrue(result["ok"])
+        self.assertGreaterEqual(result["facts"]["colors"], 36)
+
+
+
 if __name__ == "__main__":
     unittest.main()

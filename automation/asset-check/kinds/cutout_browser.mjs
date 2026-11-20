@@ -83,12 +83,14 @@ try{
  const attr=(name)=>new RegExp('data-'+name+'="([^"]*)"').exec(html)?.[1];
  result.facts={loaded:Number(attr('loaded')||0),crowParts:Number(attr('crow')||0),
   beastParts:Number(attr('beast')||0),gpuColors:Number(attr('gpu')||0),moved:attr('moved')||'unknown',exit:proc.status};
- if(existsSync(screenshot))Object.assign(result.facts,countColors(readFileSync(screenshot)));
+ if(!existsSync(screenshot))throw Error('Missing independent browser screenshot');
+ Object.assign(result.facts,countColors(readFileSync(screenshot)));
  if(proc.status!==0)result.errors.push('Chrome nonzero exit: '+String(proc.stderr||'').slice(-600));
  if(result.facts.loaded!==26)result.errors.push('26 original-art assets did not initialize');
  if(result.facts.crowParts<2||result.facts.beastParts<2)result.errors.push('Owners PNG/GIF did not become hinged parts');
  if(result.facts.moved!=='yes')result.errors.push('Arrow key did not move raven');
  if(result.facts.gpuColors<36)result.errors.push('WebGL framebuffer has no visible detailed artwork');
+ if(result.facts.colors<36)result.errors.push('Independent screenshot has no visible detailed artwork');
  result.ok=result.errors.length===0;
 }catch(error){result.errors.push(String(error?.stack||error));}
 finally{

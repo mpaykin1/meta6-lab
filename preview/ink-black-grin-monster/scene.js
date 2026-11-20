@@ -194,9 +194,11 @@ const rippleDummy=new T.Object3D();
 function animateRipples(time){
   for(let i=0;i<rippleCount;i++){
     const cycle=(time*.62+i*.61803398875)%2.4;
-    const seed=i*19.37;
-    rippleDummy.position.set((rnd(i+230)-.5)*10,.025+i*.0002,(rnd(i+440)-.5)*7);
-    rippleDummy.scale.setScalar(.02+cycle*.22);
+    // Each ring drifts subtly with the wind while expanding across the flooded floor.
+    const wind=Math.sin(time*.31+i*1.71)*.075;
+    rippleDummy.position.set((rnd(i+230)-.5)*10+wind,.025+i*.0002,(rnd(i+440)-.5)*7);
+    const fade=Math.max(0,1-cycle/2.4);
+    rippleDummy.scale.setScalar((.02+cycle*.22)*Math.sqrt(fade));
     rippleDummy.updateMatrix();
     ripples.setMatrixAt(i,rippleDummy.matrix);
   }

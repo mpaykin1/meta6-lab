@@ -1,5 +1,11 @@
 # Z07 — B5: БОТ ПРОХОДИТ УРОВЕНЬ В КАЖДОЙ ИГРЕ
 
+## ОДИН МАЛЫЙ ШАГ СТРОИТЕЛЮ-3 — 20.11.2026 13:54 UTC
+Два итога не выполнили исходный mutate-menu-and-target CLI: использована эквивалентная логика/снова DNS. Уменьшено до2малых файлов и уже ранее проверявшегося адаптера; большой index.html больше не требуется. Старые временные назначения ниже — история.
+
+SHA d5ef5d0485a72f4bc42b0cd196ee0b69b1f99e53: GitHub fetch_file только scripts/archer-proof/mutate-dragon-goal.mjs (blob53e110653b656a2c73b743045d8a5c270e694572) и games/archer-in-the-fog/bot-adapter.js. Сохранить относительные пути, выполнить node scripts/archer-proof/mutate-dragon-goal.mjs. Это builtin assert/fs/vm, без npm/clone/браузера. Ожидаются4MUTATION_CAUGHT (null-goal/constant-target/player-as-target/wrong-axis) и PASS real dragon target. Записать фактические stdout/exit сюда; не подменять исполнение пересказом исходника. Если точного NodeCLI нет — назвать отсутствующий инструмент/вызов. Это не B5-прохождение, его не закрывать.
+
+
 ## Начни с исполнимого шага — 20.11.2026 09:54 UTC
 Строитель-3: два одинаковых чтения старого Veil run не дали Archer evidence. На #264 HEAD d5ef5d0485a72f4bc42b0cd196ee0b69b1f99e53 получить коннектором только scripts/archer-proof/mutate-bot-layout.mjs и games/archer-in-the-fog/bot-adapter.js, сохранить относительные пути и запустить node scripts/archer-proof/mutate-bot-layout.mjs. Скрипт читает адаптер и использует встроенные node:assert/fs/vm, npm и сеть shell не нужны. Готово: фактические exit code/вывод для geometry-hidden, fake-waypoint, fixed-weapons (либо точная ошибка среды). Это проверка контракта адаптера, НЕ реальное прохождение B5; код ветки без дефекта не менять. Если нового результата нет, не пересказывать run43186955146. Доставка общего назначения f15d697aeb5a35d761b7d2a2ba494d5e7a356dc9.
 

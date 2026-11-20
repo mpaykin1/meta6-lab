@@ -26,7 +26,7 @@ concurrency:
 jobs:
   asset-check:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -77,6 +77,26 @@ jobs:
             fi
           done
           exit $fail
+      - name: ЛИСТ СРАВНЕНИЯ — снимает GitHub для паков этого PR (З3)
+        if: always() && github.event_name == 'pull_request'
+        run: |
+          set +e
+          fail=0; mkdir -p out/compare
+          for d in $(git diff --name-only "${{ github.event.pull_request.base.sha }}...HEAD" | sed -n 's#^\(asset-packs/incoming/[^/]*\)/.*#\1#p' | sort -u); do
+            name=$(basename "$d")
+            [ -f "$d/index.html" ] || { echo "::error::$d: нет index.html — лист сравнения не собрать"; fail=1; continue; }
+            node automation/asset-check/compare_sheet.mjs "$d" "out/compare/$name.png" | tee "out/compare/$name.verdict.json"
+            code=${PIPESTATUS[0]}
+            { echo "## Лист сравнения $name — exit $code"; echo; echo '```'; cat "out/compare/$name.verdict.json"; echo '```'; echo "Картинка: artifact **compare-sheets** → $name.png"; } >> "$GITHUB_STEP_SUMMARY"
+            if [ $code -ne 0 ]; then echo "::error::лист сравнения $name: $(cat out/compare/$name.verdict.json | head -c 600)"; fail=1; fi
+          done
+          exit $fail
+      - uses: actions/upload-artifact@v4
+        if: always() && github.event_name == 'pull_request'
+        with:
+          name: compare-sheets
+          path: out/compare/
+          if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         if: always()
         with:

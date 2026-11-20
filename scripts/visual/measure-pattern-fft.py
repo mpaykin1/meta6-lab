@@ -76,6 +76,12 @@ def main():
     parser.add_argument("--before")
     parser.add_argument("--output", default="/tmp/bez-patternov-fft.json")
     args = parser.parse_args()
+    manifest = json.loads((Path(args.after) / "index.json").read_text(encoding="utf-8"))
+    if not manifest["games"] and not manifest["errors"]:
+        # --target changed found no game, pack or INK shader in the diff: nothing visual to measure.
+        Path(args.output).write_text(json.dumps({"skipped": "no visual target changed"}), encoding="utf-8")
+        print("BEZ_PATTERNOV VISUAL PASS: no game, pack or INK shader changed")
+        return
     after = load_group(args.after)
     before = load_group(args.before) if args.before else {}
     failures = []
@@ -91,6 +97,12 @@ def main():
             # wall/tree. Their after-score is still checked, but a full-surface
             # negative control is needed to prove the original periodic waves.
             if name == "ink-shader-probe":
+                # Claude 18.11.2026: PR без изменения INK-шейдера (правила, бот ассетов) не может
+                # «улучшить» отрицательный контроль — кадр тот же. Раньше это валило каждый такой PR
+                # (#411, #412). Контроль сохраняется: старая волна должна быть видна, а хуже стать нельзя.
+                if previous >= CUTOFF and abs(previous - current) <= 1e-4:
+                    print(f"INK FFT {name}: INK shader unchanged in this PR, control identical — improvement not required")
+                    continue
                 if previous < CUTOFF:
                     failures.append(name + ": old periodic reference was not detected")
                 if current >= previous * .85:

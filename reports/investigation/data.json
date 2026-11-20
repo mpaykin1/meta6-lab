@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-19T20:37:12.200Z",
+  "generated_at": "2026-11-20T02:19:50.105Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -64,7 +64,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/repair-dispatcher-check-pagination-1118",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "взято",
       "pr": 405,
       "pr_state": "open",
@@ -73,7 +73,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/405",
       "taken_at": "2026-11-18 07:09 UTC",
       "last_commit_at": "—",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Возобновить работу с последнего коммита и проверить PR"
     },
     {
       "id": 4,
@@ -149,7 +149,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/rules-playgama-catalog-direct-20261117",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "взято",
       "pr": 357,
       "pr_state": "open",
@@ -158,7 +158,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/357",
       "taken_at": "2026-11-17 10:52 UTC",
       "last_commit_at": "—",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: visual"
     },
     {
       "id": 9,
@@ -217,7 +217,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/ink-watercolor-steam-train-20261114",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 322,
       "pr_state": "open",
@@ -234,7 +234,7 @@
       "project": "МГЛ",
       "owner": "ChatGPT (сам не записал — добавил сторож)",
       "branch": "lab/ink-watercolor-steam-train-20261114",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 322,
       "pr_state": "open",
@@ -319,7 +319,7 @@
       "project": "МГЛ → МГ",
       "owner": "ChatGPT (чат)",
       "branch": "lab/rules-playgama-catalog-direct-20261117",
-      "status": "конфликт",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 357,
       "pr_state": "open",
@@ -328,7 +328,7 @@
       "url": "https://github.com/mpaykin1/meta6-lab/pull/357",
       "taken_at": "2026-11-17 02:32",
       "last_commit_at": "2026-11-17 02:37",
-      "remaining": "Разрешить конфликты с main и повторить проверки"
+      "remaining": "Исправить красные проверки: visual"
     },
     {
       "id": 19,
@@ -2375,7 +2375,7 @@
       "title": "Готовность META GAMES — отчёт",
       "state": "open",
       "sha": null,
-      "updated_at": "2026-11-19T11:45:03Z"
+      "updated_at": "2026-11-19T20:41:06Z"
     },
     {
       "label": "automation-watchdog",

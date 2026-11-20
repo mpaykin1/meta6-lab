@@ -20,8 +20,8 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #418 | claude/sheet-test-2 | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
 | #419 | claude/sheet-test-3 | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude; scripts/kontur/guard.mjs: изменение ЯДРА охраны — только Claude; scripts/kontur/mutate-kontur-guard.mjs: изменение ЯДРА охраны — только Claude | 2026-11-18 |
 | #421 | claude/bez-patternov-no-false-red | scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/verify-storozha.mjs: изменение ЯДРА охраны — только Claude; scripts/visual/mutate-no-patterns.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
-| #402 | lab/avto2-pagination-20261117 | scripts/dispetcher/test/open-pr-queue.test.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
 | #423 | lab/gh-list-cursor-guard-20261118 | scripts/storozha/gh-list.mjs: изменение ЯДРА охраны — только Claude | 2026-11-18 |
+| #402 | lab/avto2-pagination-20261117 | scripts/dispetcher/test/open-pr-queue.test.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-20 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->

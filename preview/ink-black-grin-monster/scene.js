@@ -342,6 +342,10 @@ function animate(ms){
   const flash=stormPhase<.10?1:stormPhase>.18&&stormPhase<.27?.55:0;
   stormLight.intensity=flash*48;
   boltMaterial.opacity=flash*.85;
+  // Storm light catches the drifting swamp sparks and their diffuse halos.
+  // Restore the original glow between flashes without extra draw calls.
+  wispMaterial.opacity=.65+flash*.30;
+  wispHaloMaterial.opacity=.12+flash*.24;
   const pulse=monster.userData.pulse||0;
   fear+=(pulse-fear)*(pulse>fear?.5:Math.min(1,dt*2.2));
   faceLight.intensity=26*(.86+.09*Math.sin(elapsed*.58)+.05*Math.sin(elapsed*7.3)*Math.sin(elapsed*1.9))+12*fear;

@@ -203,6 +203,15 @@
   ],
   "pendingGames": [
     {
+      "title": "Bullet Car",
+      "slug": "bullet-car",
+      "coverUrl": "https://mpaykin1.github.io/meta6/playgama-catalog/covers/bullet-car.webp",
+      "playgamaUrl": "https://playgama.ai/play/ppgd5nbohmdsnt",
+      "source": "Owner-provided cover and direct Playgama URL (2026-11-18)",
+      "verification": "Owner reports game is published and playable on Playgama. Connected developer-console confirmation not obtained in this update.",
+      "indexable": true
+    },
+    {
       "title": "The Last Healer",
       "slug": "the-last-healer",
       "coverUrl": "https://mpaykin1.github.io/meta6/playgama-catalog/covers/the-last-healer.webp",

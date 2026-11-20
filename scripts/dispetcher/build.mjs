@@ -97,6 +97,10 @@ export async function resolveConflict(pr,reload,prior,sleep=ms=>new Promise(done
 export function assertNotEmpty(tasksMarkdown,cards){
  if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
 }
+function assertUniqueCheckRunIds(runs,sha){
+ const ids=runs.filter(run=>Number.isSafeInteger(run?.id)).map(run=>run.id);
+ if(new Set(ids).size!==ids.length)throw Error('нет данных: повтор check-run ID для '+sha);
+}
 export async function fetchAllCheckRuns(sha,request=api){
  const all=[];
  let expected=null;
@@ -107,7 +111,10 @@ export async function fetchAllCheckRuns(sha,request=api){
   expected=response.total_count;
   all.push(...response.check_runs);
   if(all.length>expected)throw Error('нет данных: дублированные check-runs для '+sha);
-  if(all.length===expected)return {total_count:expected,check_runs:all};
+  if(all.length===expected){
+   assertUniqueCheckRunIds(all,sha);
+   return {total_count:expected,check_runs:all};
+  }
   if(response.check_runs.length!==100)throw Error('нет данных: неполная страница check-runs для '+sha);
  }
  throw Error('нет данных: превышен предел страниц check-runs для '+sha);
@@ -120,6 +127,7 @@ export function assertCompleteCheckRuns(checks,statuses,sha){
  if(!statuses||!Array.isArray(statuses.statuses)){
   throw Error('нет данных: неполный combined status для '+sha);
  }
+ assertUniqueCheckRunIds(checks.check_runs,sha);
 }
 export async function main(){
  const tasks=parseTasks(await fs.readFile('ZADACHI.md','utf8'));

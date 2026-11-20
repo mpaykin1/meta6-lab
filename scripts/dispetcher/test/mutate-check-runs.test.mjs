@@ -56,3 +56,24 @@ test('mutation: changing total count between pages fails closed',async()=>{
 test('mutation: truncated intermediate page fails closed',async()=>{
  await assert.rejects(fetchAllCheckRuns(sha,async()=>({total_count:101,check_runs:[{}]})),/неполная страница/);
 });
+test('repeated page, boundary overlap and forged duplicate IDs fail closed',async()=>{
+ const first=Array.from({length:100},(_,i)=>({id:i+1,name:'job-'+i,conclusion:'success'}));
+ let calls=0;
+ await assert.rejects(()=>fetchAllCheckRuns(sha,async()=>{
+  calls++;
+  return {total_count:200,check_runs:first};
+ }),/повтор check-run ID/,'deception: first page repeated as a complete second page');
+ assert.equal(calls,2);
+ calls=0;
+ await assert.rejects(()=>fetchAllCheckRuns(sha,async()=>({
+  total_count:101,check_runs:++calls===1?first:[first[99]]
+ })),/повтор check-run ID/,'one repeated boundary record must not hide the missing last job');
+ assert.throws(()=>assertCompleteCheckRuns({total_count:2,check_runs:[first[0],first[0]]},
+  statuses,sha),/повтор check-run ID/,'forged complete length is not unique evidence');
+ calls=0;
+ const complete=await fetchAllCheckRuns(sha,async()=>({total_count:101,
+  check_runs:++calls===1?first:[{id:101,name:'last-failure',conclusion:'failure'}]
+ }));
+ assertCompleteCheckRuns(complete,statuses,sha);
+ assert.equal(complete.check_runs.at(-1).conclusion,'failure');
+});

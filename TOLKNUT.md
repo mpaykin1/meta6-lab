@@ -1,21 +1,8 @@
 # ТОЛКНУТЬ — обычный чат ChatGPT
 
-- [PR #357](https://github.com/mpaykin1/meta6-lab/pull/357) · нет данных · Запрет выдачи автозадачам · Конфликт с main
-- [PR #306](https://github.com/mpaykin1/meta6-lab/pull/306) · жёлтая · Превышено 5 файлов: требуется разбиение · Конфликт с main
-- [PR #322](https://github.com/mpaykin1/meta6-lab/pull/322) · красная · Запрет выдачи автозадачам · Конфликт с main
-- [PR #319](https://github.com/mpaykin1/meta6-lab/pull/319) · красная · Запрет выдачи автозадачам · Красная проверка: kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/44003271697/job/133772398282), kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/44003143800/job/133772018307), kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/44003004288/job/133771585869), kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/44002955012/job/133771401624), library-machine (https://github.com/mpaykin1/meta6-lab/actions/runs/44002955202/job/133771270229), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/44002955033/job/133771269431)
-- [PR #354](https://github.com/mpaykin1/meta6-lab/pull/354) · нет данных · Запрет выдачи автозадачам · Конфликт с main
-- [PR #355](https://github.com/mpaykin1/meta6-lab/pull/355) · нет данных · Запрет выдачи автозадачам · Красная проверка: kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/44003096497/job/133771818086), kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/44002897684/job/133771159407)
-- [PR #343](https://github.com/mpaykin1/meta6-lab/pull/343) · жёлтая · Превышено 5 файлов: требуется разбиение · Конфликт с main
-- [PR #300](https://github.com/mpaykin1/meta6-lab/pull/300) · красная · Запрет выдачи автозадачам · Конфликт с main
-- [PR #326](https://github.com/mpaykin1/meta6-lab/pull/326) · красная · Запрет выдачи автозадачам · Красная проверка: guard (https://github.com/mpaykin1/meta6-lab/actions/runs/43995125843/job/133745173980)
-- [PR #310](https://github.com/mpaykin1/meta6-lab/pull/310) · жёлтая · Превышено 5 файлов: требуется разбиение · Конфликт с main
-- [PR #291](https://github.com/mpaykin1/meta6-lab/pull/291) · красная · Запрет выдачи автозадачам · Конфликт с main
-- [PR #283](https://github.com/mpaykin1/meta6-lab/pull/283) · красная · Запрет выдачи автозадачам · Конфликт с main
-- [PR #297](https://github.com/mpaykin1/meta6-lab/pull/297) · красная · Запрет выдачи автозадачам · Конфликт с main
-- [PR #332](https://github.com/mpaykin1/meta6-lab/pull/332) · внешняя квота · Vercel build-rate-limit: ожидать бесплатного восстановления квоты; код и проверки не менять · Красная проверка: Vercel (https://vercel.com/improve-world?upgradeToPro=build-rate-limit)
-- [PR #258](https://github.com/mpaykin1/meta6-lab/pull/258) · жёлтая · Превышено 5 файлов: требуется разбиение · Конфликт с main
-- [PR #262](https://github.com/mpaykin1/meta6-lab/pull/262) · красная · Запрет выдачи автозадачам · Конфликт с main
-- [PR #371](https://github.com/mpaykin1/meta6-lab/pull/371) · нет данных · Запрет выдачи автозадачам · Конфликт с main
-- [PR #364](https://github.com/mpaykin1/meta6-lab/pull/364) · нет данных · Запрет выдачи автозадачам · Конфликт с main
-- [PR #367](https://github.com/mpaykin1/meta6-lab/pull/367) · нет данных · Запрет выдачи автозадачам · Конфликт с main
+- [PR #354](https://github.com/mpaykin1/meta6-lab/pull/354) · нет данных · Карта недоступна; без автоматической выдачи · Красная проверка: kontur-guard (https://github.com/mpaykin1/meta6-lab/actions/runs/44450098541/job/135312052876)
+- [PR #297](https://github.com/mpaykin1/meta6-lab/pull/297) · нет данных · Карта недоступна; без автоматической выдачи · Конфликт с main
+- [PR #355](https://github.com/mpaykin1/meta6-lab/pull/355) · нет данных · Карта недоступна; без автоматической выдачи · Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/44700266878/job/136166647689), guard (https://github.com/mpaykin1/meta6-lab/actions/runs/44700266822/job/136166647358)
+- [PR #402](https://github.com/mpaykin1/meta6-lab/pull/402) · нет данных · Карта недоступна; без автоматической выдачи · Красная проверка: storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/44725603667/job/136252094852), guard (https://github.com/mpaykin1/meta6-lab/actions/runs/44725563829/job/136251960605), storozha-quota (https://github.com/mpaykin1/meta6-lab/actions/runs/44725563721/job/136251960555)
+- [PR #415](https://github.com/mpaykin1/meta6-lab/pull/415) · нет данных · Карта недоступна; без автоматической выдачи · Красная проверка: asset-check (https://github.com/mpaykin1/meta6-lab/actions/runs/44257078610/job/134641228118)
+- [PR #405](https://github.com/mpaykin1/meta6-lab/pull/405) · нет данных · Карта недоступна; без автоматической выдачи · Конфликт с main

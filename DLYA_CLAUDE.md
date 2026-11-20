@@ -16,32 +16,18 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #248 | lab/pr-autofinish-followup-1111 | .github/workflows/pr-autofinish.yml: изменение ЯДРА охраны — только Claude | 2026-11-15 |
 | #370 | lab/ink-car-bathyscaphe-20261117 | Новый эталон: PR должен только добавлять файлы | 2026-11-17 |
 | #404 | lab/z01-api-quota-fastfail-1117 | scripts/dispetcher/test/api-budget.test.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
+| #417 | claude/compare-sheet-test | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
+| #418 | claude/sheet-test-2 | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
+| #419 | claude/sheet-test-3 | scripts/asset-guard/mutate-asset-guard.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude; scripts/kontur/guard.mjs: изменение ЯДРА охраны — только Claude; scripts/kontur/mutate-kontur-guard.mjs: изменение ЯДРА охраны — только Claude | 2026-11-18 |
+| #421 | claude/bez-patternov-no-false-red | scripts/storozha/core.mjs: изменение ЯДРА охраны — только Claude; scripts/storozha/verify-storozha.mjs: изменение ЯДРА охраны — только Claude; scripts/visual/mutate-no-patterns.mjs: старый тест можно только дополнять (ни одной удалённой строки) — иначе только Claude | 2026-11-18 |
+| #423 | lab/gh-list-cursor-guard-20261118 | scripts/storozha/gh-list.mjs: изменение ЯДРА охраны — только Claude | 2026-11-18 |
 <!-- STOROZHA:PROTECTED:END -->
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->
-| #245 | lab/remont-main-veil-terraces | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-18 |
-| #248 | lab/pr-autofinish-followup-1111 | .github/workflows/pr-autofinish.yml, OSHIBKI.md, automation/prompts/MG_PYAT_AVTOZADACH.md | 2026-11-18 |
-| #258 | lab/prohodchik-b2-motion-20261111 | DLYA_CLAUDE.md, OSHIBKI.md | 2026-11-18 |
-| #262 | lab/archer-retention-exp-1 | OSHIBKI.md | 2026-11-18 |
-| #283 | lab/ink-fallen-robot-20261113 | LINKS.txt, ink.md | 2026-11-18 |
-| #291 | lab/polza-b2-broken-city-20261113 | OSHIBKI.md, shared/library/index.json | 2026-11-18 |
-| #297 | lab/ostrov-aptekarya-ii | OSHIBKI.md | 2026-11-18 |
-| #300 | lab/native-catalog-recovery-20261113 | OSHIBKI.md | 2026-11-18 |
-| #306 | lab/assets-tumannye-shpili-20261114-2338 | DLYA_CLAUDE.md, LINKS.txt, OSHIBKI.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-18 |
-| #310 | lab/patch-import | OSHIBKI.md, automation/asset-check/mutate_bot.py, automation/asset-check/test_kinds.py | 2026-11-18 |
-| #322 | lab/ink-watercolor-steam-train-20261114 | LINKS.txt, OSHIBKI.md, reports/zavaly/PROGRESS.md | 2026-11-18 |
-| #331 | lab/razbor-zavalov | OSHIBKI.md, automation/SLIYANIE.md, reports/zavaly/PROGRESS.md, scripts/karta-sil/route.mjs | 2026-11-18 |
-| #343 | lab/assets-nebesny-pilot-20261116 | LINKS.txt, OSHIBKI.md, automation/asset-check/OCHERED.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-18 |
-| #354 | lab/3d-master-visual-split-20261117 | reports/zavaly/PROGRESS.md | 2026-11-18 |
-| #357 | lab/rules-playgama-catalog-direct-20261117 | OSHIBKI.md | 2026-11-18 |
-| #364 | lab/assets-vorona-v-tumane-20261117 | automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py, automation/asset-check/test_kinds.py | 2026-11-18 |
-| #367 | lab/assets-nebesny-gothic-city-20261117 | OSHIBKI.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-18 |
-| #371 | lab/assets-ink-valley-20261117 | ZADACHI.md, automation/asset-check/OCHERED.md, automation/asset-check/SPEC.md | 2026-11-18 |
-| #385 | lab/assets-black-train-puddle-reflections-20261117-gpt6 | asset-packs/incoming/black-train/src/scene.js | 2026-11-18 |
-| #386 | lab/assets-black-train-mist-light-20261117 | asset-packs/incoming/black-train/makers.js, asset-packs/incoming/black-train/src/scene.js | 2026-11-18 |
-| #389 | lab/assets-ink-video-nookvale-20261117 | automation/asset-check/OCHERED.md | 2026-11-18 |
-| #411 | lab/asset-bot-cutout | OSHIBKI.md | 2026-11-18 |
-| #412 | lab/asset-bot-gothic-facades | OSHIBKI.md | 2026-11-18 |
+| #297 | lab/ostrov-aptekarya-ii | OSHIBKI.md | 2026-11-20 |
+| #405 | lab/repair-dispatcher-check-pagination-1118 | OSHIBKI.md | 2026-11-20 |
+| #411 | lab/asset-bot-cutout | OSHIBKI.md | 2026-11-20 |
+| #412 | lab/asset-bot-gothic-facades | OSHIBKI.md, automation/asset-check/SPEC.md | 2026-11-20 |
 <!-- STOROZHA:CONFLICTS:END -->
 | #242 | lab/seo-claude-adfree-1111 | НУЖЕН CLAUDE: красные verify, bot, guard; SEO PR меняет claude-games/games/*/index.html (17 игр), а базовый PR #234 содержит несовпадение SHA256 защищённого pod-i-nad; не изменять эталон/охранник, проверить базовую ветку и CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117 | 2026-11-11 |
 | #245 | lab/remont-main-veil-terraces | НУЖЕН CLAUDE: игровая правка [PR #245](https://github.com/mpaykin1/meta6-lab/pull/245) прошла [META BOT на PR](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984334) и [focused 6/6](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984307), но на main PASS нет. После безопасного слияния актуального main в ремонтную ветку [13d85bb](https://github.com/mpaykin1/meta6-lab/commit/13d85bbf4e324cb01729c8a8464bf73364889a74) автоматический Library Machine **повторно** внёс посторонние `shared/library/index.json`, `shared/library/veil-terraces.json` коммитом [02ba0f5](https://github.com/mpaykin1/meta6-lab/commit/02ba0f5812afcae9467cdefa5cb7f3b381f6ee2f). Новый [META BOT](https://github.com/mpaykin1/meta6-lab/actions/runs/43018578169) имеет `action_required`, не PASS. STOROZHA [43012984349](https://github.com/mpaykin1/meta6-lab/actions/runs/43012984349) дважды FAIL HTTP 403 GitHub API rate limit. Третья очистка бесполезна: машинная запись восстанавливает изменения, защищённые workflow/сторож не править. Нужны одобрение новых Actions (если доступно), устранение автоматического загрязнения PR и независимая проверка до squash; затем 2 PASS META BOT на main. | 2026-11-11 |
@@ -100,6 +86,24 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #289 | lab/antisueta | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-16 |
 | #303 | lab/asset-pack-shpili | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-16 |
 | #305 | lab/assets-tumannye-shpili-20261114 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-16 |
+| #248 | lab/pr-autofinish-followup-1111 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-19 |
+| #262 | lab/archer-retention-exp-1 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-19 |
+| #245 | lab/remont-main-veil-terraces | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-19 |
+| #258 | lab/prohodchik-b2-motion-20261111 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-19 |
+| #283 | lab/ink-fallen-robot-20261113 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-19 |
+| #332 | lab/ink-carrion-stalker-3d-20261115 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-19 |
+| #291 | lab/polza-b2-broken-city-20261113 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-19 |
+| #270 | lab/biblioteka-veil-camera-20261112 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
+| #300 | lab/native-catalog-recovery-20261113 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
+| #310 | lab/patch-import | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
+| #319 | lab/library-source-only-probe-20261114 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
+| #322 | lab/ink-watercolor-steam-train-20261114 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
+| #326 | lab/ink-sky-viaduct-20261115 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
+| #331 | lab/razbor-zavalov | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
+| #343 | lab/assets-nebesny-pilot-20261116 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
+| #363 | lab/z01-3d-master-workflow-20261117 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
+| #364 | lab/assets-vorona-v-tumane-20261117 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
+| #357 | lab/rules-playgama-catalog-direct-20261117 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
 <!-- STOROZHA:STALE:END -->
 | #190 | lab/bot-batch-1 | НУЖЕН CLAUDE: защищённый `.github/workflows/bot-adapters-b2.yml`; конфликт с main (`OSHIBKI.md`); проверка B2 охватывает 2/3 игр, `archer-in-the-fog` не подтверждён. Самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/190 | 2026-11-11 |
 | #54 | lab/render-visibility-optimization | НУЖЕН CLAUDE: PR изменяет защищённый `.github/workflows/lab-render-performance.yml` и существующий эталон `games/veil-terraces/index.html`; конфликт с main (`docs/progress/PR54_59_60.md`), самостоятельное слияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/54 | 2026-11-12 |
@@ -138,3 +142,42 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 - КАРТА СИЛ #301 / quota: #134 закрыт как заменённый #195 (сверены HTML и 4 PNG); #72 после merge main dc663fbc блокируется историческими merge-коммитами `.github/protected` без подписи ([guard](https://github.com/mpaykin1/meta6-lab/actions/runs/43551023196/job/132313248053)), как #87; #133 referenceGate требует одновременно source-only и вынести добавленные OSHIBKI/ловушку К3 без удаления проверки. Нужна правка/подпись только ядра охраны или разрешённый способ переноса истории; сами охранники и исходники не менялись. Квота блокирует #301 и первый расчёт main.
 
 | #258 | lab/prohodchik-b2-motion-20261111 | CLAUDE: B2 real-motion на HEAD 95cd1017 — [PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/43802754806), но [guard FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/43802754797); PR пока draft. Разобрать подпись/защищённые тесты/базу без удаления существующих проверок и ослабления порогов; затем зелёный CI и слияние. | 2026-11-16 |
+
+- 2026-11-20 | Z04 / строитель-2 / PR #355, HEAD `bc9fabb509f698ea819f089e6945dc9bd33bf7c8`: требуется решение Claude по историческому коммиту [`e646ae81dbab230edd3855ceda9d302003606d71`](https://github.com/mpaykin1/meta6-lab/commit/e646ae81dbab230edd3855ceda9d302003606d71). Точный protected diff: `.github/protected/paths.txt` добавлена строка `reference/ink-night-scream`; `.github/protected/SHA256SUMS` заменён хеш `paths.txt` `a0c75f9ec950d73be092349794328962056df561b44e61566929c984cf6c06ec` → `30dfbb59cf3fca628a3087fa3162ed917040d5ee22a89263a569cd6710b1ead9`, добавлены семь SHA256 для `reference/ink-night-scream/` (README.md, index.html, src/audio.js, src/index.html, src/ink-night-train.js, src/scene.js, zastavka-black-train.jpg). [Guard FAIL](https://github.com/mpaykin1/meta6-lab/actions/runs/44700266822/job/136166647358) из-за отсутствия подписи Claude на историческом protected-изменении; quota тоже FAIL. Не переписывать историю, не обходить guard. Нужен санкционированный способ обработки исторической подписи/коммита от Claude. После решения — CI на актуальном SHA, Chromium desktop 1280×720 и mobile 390×844 с `node scripts/prohodchik/verify-motion.mjs --game games/veil-terraces`, независимое review; B2 остаётся НЕТ.
+
+- 2026-11-20 | Z01 / строитель-1 / [PR #402](https://github.com/mpaykin1/meta6-lab/pull/402), проверенный HEAD `117493711c8aa7708083859ef542ac2825fee894`: исторический merge-коммит [`e8e5cf949a2eb6b074ca59313bd9db8fc72f5fbb`](https://github.com/mpaykin1/meta6-lab/commit/e8e5cf949a2eb6b074ca59313bd9db8fc72f5fbb) меняет защищённый `.github/protected/SHA256SUMS`: SHA256 для `scripts/meta-bot/core.mjs` `865953f84b2fb49a5dbc744b92b3e77c56c0e07155c9a7b1da99073bab83c6e1` → `c7be3bcccceb76cc4ebb783afca2d1df7fe2e88d30a2738f2a79b015d3487186`; в этом merge также изменён `scripts/meta-bot/core.mjs` (проверка второго запуска). [STOROZHA protected FAIL, job 136222858865](https://github.com/mpaykin1/meta6-lab/actions/runs/44717008808/job/136222858865). Это исторический неподписанный protected-diff, не дефект пагинации; не переписывать историю, не обходить guard/quota. Решение — Claude/владелец защиты; возобновить после санкционированного разрешения, затем CI актуального HEAD и независимое APPROVED. Отдельно текущий CI #402: Karta Sil FAIL (default pagination 23→1), KONTUR FAIL, META GAMES guard FAIL, quota FAIL; исправление совместимости закреплено за Codex meta-games, `scripts/dispetcher/build.mjs` и тесты не трогать.
+
+## PR #411 — техническая проверка завершена, требуется допустимое независимое review (20.11.2026)
+HEAD817ddfb7567be2c29b67897a2b0748f1444ed010, lab/asset-bot-cutout. [21checks](https://github.com/mpaykin1/meta6-lab/commit/817ddfb7567be2c29b67897a2b0748f1444ed010/checks):16SUCCESS/5SKIP,0FAIL,всезавершены. [ASSETCHECK44729689063](https://github.com/mpaykin1/meta6-lab/actions/runs/44729689063/job/136265960907)полностьюSUCCESS:103unittests,влогеподтвержденывсе4CutoutScreenshotEvidence,5cutoutмутантовKILLED,полныйscanпаковзавершён. Новыеvisual/guard/quota/kontur/referenceSUCCESS. Artifactasset-check-reports14625334830связансименнос817ddfb,digestsha256:3f7d96f95bd7bdbedd05408adf24c7f2bfa1e322e7a0494dcdf63a1adacf4413;метаданныесверены,невыдаватьэтозаотдельнуюигровуюприёмкуincomingпаков.
+Изменениепроверяющегоусилено:PNGобязателени>=36независимыхцветов,DOMсчётчикинедостаточны;missing/blankfalsePASSзакрытa371afd/OSHIBKI2026112007. Конфликтустранённастоящимmerge817ddfbсmainada89a2,исходныетесты/все9PRпутейсохранены;guardне менялся. ПРОВЕРКАИЗМЕНЕНАотмеченавPR.
+ReviewsAPI=[];CodexнеставилсобственныйAPPROVEDзанезависимыйине сливалсвойPR. НужендопустимыйревьюердляподтвержденияизменённогопроверяющегоисанкционированногослиянияпослесвежейперепроверкиHEAD/gates. ЛожныйстарыйконфликтOSHIBKIизавтоматическойтаблицывышеустранён,этонеблокернатекущемSHA. Проверкаботанеподтверждаетпубликацию/игровуюприёмкуВороны,паковилиFINISH. Не повторять103теста/mergeбезизмененияSHA/причины.
+
+## PR #407 — точный пакет допустимого review,20.11.2026 12:54 UTC
+HEAD3324ce7cbf6b17226f5037bf475379b508fe2fbc, [checks](https://github.com/mpaykin1/meta6-lab/commit/3324ce7cbf6b17226f5037bf475379b508fe2fbc/checks)16completed=14SUCCESS/2SKIP/0FAIL. Combinedstatuses=[]НЕотсутствиеActions. ПоследнийreviewтолькоCOMMENTEDавторанастаром5fca944;независимогоAPPROVEDнет. КодограничиваетожиданиеGitHubAPI10секундами,11локальныхquota-fastfailтестовранееPASS(доставкаZ017dac695),натомжеSHAнеповторялись. Требуетсядопустимыйнезависимыйreview/свежаяпроверкаHEAD/gatesдляразрешённогозавершения;CodexнесливаетсвойPRисобственныйAPPROVEDнеподменяетприёмку. Не возвращатьавтозадачуктомужеобзорустарогоSHAилиcombinedstatus;пакетдоставлен,следующийсвободныйZ01шаг.
+
+## PR #428 — точный derived-catalog пакет и конфликт сохранности shared (20.11.2026 13:02 UTC)
+HEADefaaea3d4aaab234ae7619291388b08f863b0219:K3исправлен(только2строкиOSHIBKIполныеscripts/library/mutate-library.mjs/verify-library.mjs). НастоящийcheckDiffguardнастарыхстрокахвозвращаетK3,нановыхнет;охранникне менялся.
+ПолнаяпересборкаизGitblobбайтовэтогоHEAD,безWindowsCRLF,далаextract/verify/11мутацийPASS,28sourceRoot,копии49,222,409/50,000,000bytes. Производныйdiff141файл=129добавлений/2изменения/10удалений,новыебайты15,644,958;shared/library/index.json7,256,014bytesGitblob4feb55f737bc3e12b20bbb79a0f552a01bcde851. ЭтообъясняетPRcatalogdrift;неошибка11мутаций.
+**Блокер:**действующийlab-shared-deletion-guard.ymlбезисключенийотклоняетлюбыеудаленияshared/. Генераторпри50MBбюджетеудаляет10прежнихкопийreference-three-worlds-game,источникиостаются. СлепоприменитьполныйdiffзначитсоздатьновыйзащитныйFAIL,оставитьлишниекопиипротиворечиттекущемуindependentverifier/лимиту. Нуженразрешённыйпутьмиграциикаталога/сохраненияпринятыхкопийврамкахбюджета,безослабленияguard/хешей/исходников. Кодовойремонт/L1PRостаётся#428,дубльне создавался,141generatedизменениене отправлено.
+Полныйплан141path/status/GitSHAдоставленвсуществующуюZ10;детерминированноевоспроизведение:чистыйcheckoutefaaea3сcore.autocrlf=false, node scripts/library/extract-all.mjs; node scripts/library/verify-library.mjs; node scripts/library/mutate-library.mjs;сравнитьshared/library. Локальныйархивoutputs/MG_L1_catalog_candidate.zip(131новых/изменённыхфайлов+manifestпредлагаемыхудалений),4,326,495bytes,SHA256d75d0c95ddfd4feb77b971ba57ece7a7a54ed053e0509ece3dda5c0e5eca7972;архивНЕавтоприменён. Исходныеданные/код/воспроизводимыйпланвGitHub,локальныйархивдополнительныйноситель.
+Предлагаемыеудаления(НЕвыполненывPR):
+- `shared/library/assets/reference-three-worlds-game/models/scout_drone.glb`
+- `shared/library/assets/reference-three-worlds-game/evidence/play/04.png`
+- `shared/library/assets/reference-three-worlds-game/models/jellyfish_violet.glb`
+- `shared/library/assets/reference-three-worlds-game/evidence/play/00.png`
+- `shared/library/assets/reference-three-worlds-game/models/angler.glb`
+- `shared/library/assets/reference-three-worlds-game/models/eel.glb`
+- `shared/library/assets/reference-three-worlds-game/models/kraken_tentacle.glb`
+- `shared/library/assets/reference-three-worlds-game/models/jellyfish_teal.glb`
+- `shared/library/assets/reference-three-worlds-game/evidence/stage7-depth.png`
+- `shared/library/assets/reference-three-worlds-game/evidence/play/02.png`
+B1desktopunderwaterERR_CONNECTION_CLOSEDиquota—отдельныепричины,неподменятьэтимcatalogрешение. FINISH7/18не менялся,PRне слит.
+
+## L1 #428 — подтверждённая приёмочная граница19/24,20.11.2026 13:44 UTC
+НаHEADefaaea3d4aaab234ae7619291388b08f863b0219източныхGitblobисточниковиранееполностьюсгенерированногокаталогасопоставлены24строкиописи:строки1–19имеютреальныйsource_path/source_rootиmanifest(алиасыоднойстрокинеудваиваются);20–24не имеютподтверждённогоисходника/manifest. 28discoveredrootsНЕозначает24принятыхигры;catalogвPRвсёещёнеприменён.
+Конкретные4доступныхисточникапоисторическимPRAPI(filesпрочитаны,всеclosed/mergedfalse):20КорольПепла#206/#207 reference/king-of-ash/index.html,21ЗолотойРыцарь#189 reference/endless-valleys-golden-knight/index.html,22Демоническаярука#137 meta-games/references/demonic-hand/index.html,23Туманноепробуждение#201 толькоreference-uploads/foggy-awakening-scene-1/Сцена1ZIP. УказанныепутиотсутствуютвGitblobснимкеefaaea3. 24ПоездR1:reference/train-in-the-fogотсутствует,описьуказываетлишьcatalogmetadataбезисходныхGLB. Нельзяподменитьихдругимпоездом/новымигенерациями. ИсторическиезакрытыеPRнеперезапускались/непереоткрывались.
+РеальныйсуществующийconsumersearchLibraryCLIвыдал65silhouetteрешений;первыйaddEllipsoid,id04c096e0f4f2b2c981c975ad,source reference/silhouette-gold-generator/index.html:465–467,154bytes. НезависимопересчитанныйSHA25614dbcee6e95c2f86160dd8d1ed0fbfa1f41cbfbc23ee81a93a87eab8dbbfa665совпалсAPIрезультатом. Этоподтверждаетпоисковыйconsumer/byte-range,НЕигровуюотрисовку/L3браузер.
+Следующийразрешённыйпакетполноты:сверитьправо/актуальностьисточников20–23ипутьихбайт-в-байтпереносавreferenceчерездействующийпроцесс(безновогодубля/приусловияхочереди),для24найтиоригинальныеGLB. Дополнительноостаётсяужеотдельнопереданныйcatalogmigration10sharedcopies;этопроверкойисточниковнеисправлен. FINISH/L1неприниматьпоLIBRARYVERIFIEDсуществующихroots. Код/каталог/охранеэтимQAне менялись.
+
+## #355 — реальная browser-проверка Veil выполнена,20.11.2026 14:04 UTC
+HEADbc9fabb509f698ea819f089e6945dc9bd33bf7c8,оригинальныйverify-motion.mjsбезправок;Playwright1.56.1/Chromium141build1194,exit0,B2_MOTION_PASSdesktop1280×720иmobileviewport390×844. Реальныйввод/изменениеworldкоординат,скриншотысцены просмотрены,точныеvectors/хешиикомандадоставленывначалоZ04. ЭтооднаиграVeil,нефизическийтелефон/неполныйB2всехlist_games. НачальныйLEVEL_CHANGEDинцидентнепринятзадвижение,checkerштатнопродолжилдоподтверждённогоPASS. Код/guardне менялись,FINISH7/18не менялся. Прежнеетребование«ещёнепроверенChromiumVeil»теперьустарело;остаютсявсеостальныеигры/зелёныйB2Actions/разрешённаяприёмкаиисторическийprotectedguardе646ae8(уже2031205),quotaFAIL. Не повторятьVeil/fixturesбезновойпричины,необъявлятьB2зелёнымпооднойигре.

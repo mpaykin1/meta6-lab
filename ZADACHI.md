@@ -9,7 +9,11 @@
 
 Сторож проверил: 2026-11-17 06:54 UTC
 
-| взято | Z01: снять конфликт PR #389 без потери действующей очереди INK-ассетов | МГЛ | чат ChatGPT | `lab/assets-ink-video-nookvale-20261117` | [#389](https://github.com/mpaykin1/meta6-lab/pull/389) | 2026-11-18 | — |
+| взято | Z01: устранение конфликта визуального INK-инспектора #354 | МГЛ | чат ChatGPT | `lab/3d-master-visual-split-20261117` | [#354](https://github.com/mpaykin1/meta6-lab/pull/354) | 2026-11-19 UTC | — |
+| взято | Глава II «Острова последнего аптекаря»: синхронизация PR #297 с main | МГЛ | чат ChatGPT | `lab/ostrov-aptekarya-ii` | [#297](https://github.com/mpaykin1/meta6-lab/pull/297) | 2026-11-19 UTC | — |
+| взято | Z04 B2: довести реальный верификатор движения, закрыть ловушку KONTUR PR #355 | МГЛ | чат ChatGPT | `lab/z04-b2-extract-motion-20261117` | [#355](https://github.com/mpaykin1/meta6-lab/pull/355) | 2026-11-18 UTC | — |
+| взято | Z01: ремонт конфликта PR #402, проверка пагинации и исключение журнала из diff | МГЛ | чат ChatGPT | `lab/avto2-pagination-20261117` | [#402](https://github.com/mpaykin1/meta6-lab/pull/402) | 2026-11-18 08:45 UTC | — |
+| взято | Z01: перенос заказанных INK-ассетов из #389 в канонический PR #415 и CI | МГЛ | чат ChatGPT | `lab/assets-ink-video-nookvale` | [#415](https://github.com/mpaykin1/meta6-lab/pull/415) | 2026-11-18 | — |
 | взято | АССЕТЫ: BLACK TRAIN — объёмные рваные грозовые тучи вместо плоских полос | МГЛ | ChatGPT | `lab/assets-black-train-clouds-20261117` | [#384](https://github.com/mpaykin1/meta6-lab/pull/384) | 2026-11-17 | — |
 <!-- ZADACHI:START -->
 **Итог:** 🛑 зависло 40 · ⚠ молчит 6 · 🔨 в работе 10 · 🙋 нужен Claude 4 · 💤 заброшено 9 · ✅ готово 0
@@ -18,6 +22,8 @@
 
 | Статус | Задача | Проект | Кто | Ветка | PR | Взято (UTC) | Последний коммит (UTC) |
 |---|---|---|---|---|---|---|---|
+| взято | Underwater World: плавное движение солнечных бликов по течению | МГЛ | чат ChatGPT | `lab/bez-patternov-underwater-water-20261116` | [#336](https://github.com/mpaykin1/meta6-lab/pull/336) | 2026-11-19 UTC | — |
+| взято | Лучник в тумане: волна плаща в такт бегу | МГЛ | чат ChatGPT | `lab/archer-retention-exp-1-game` | [#264](https://github.com/mpaykin1/meta6-lab/pull/264) | 2026-11-18 09:10 UTC | — |
 | взято | Z01: устранить конфликт PR #405 и сохранить полную проверку CI | МГЛ | чат ChatGPT | `lab/repair-dispatcher-check-pagination-1118` | [#405](https://github.com/mpaykin1/meta6-lab/pull/405) | 2026-11-18 07:09 UTC | — |
 | взято | BLACK TRAIN: разрешить конфликт графического PR #385, сохранив свет тумана из main | МГЛ | чат ChatGPT | `lab/assets-black-train-puddle-reflections-20261117-gpt6` | [#385](https://github.com/mpaykin1/meta6-lab/pull/385) | 2026-11-18 07:05 UTC | — |
 | взято | АССЕТЫ: The Last Healer — дополнения INK по видео | МГЛ | чат ChatGPT | `lab/assets-last-healer-video-batch1-20261117-g6` | — | 2026-11-17 12:25 UTC | — |

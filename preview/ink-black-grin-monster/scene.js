@@ -373,6 +373,8 @@ function animate(ms){
   // Restore the original glow between flashes without extra draw calls.
   wispMaterial.opacity=.65+flash*.30;
   wispHaloMaterial.opacity=.12+flash*.24;
+  // Lightning briefly catches the concentric ripples on the flooded ground.
+  rippleMaterial.opacity=.11+.06*Math.sin(elapsed*.7)+flash*.32;
   const pulse=monster.userData.pulse||0;
   fear+=(pulse-fear)*(pulse>fear?.5:Math.min(1,dt*2.2));
   faceLight.intensity=26*(.86+.09*Math.sin(elapsed*.58)+.05*Math.sin(elapsed*7.3)*Math.sin(elapsed*1.9))+12*fear;

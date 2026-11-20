@@ -183,6 +183,26 @@ function animateWisps(time){
   wisps.instanceMatrix.needsUpdate=true;
   wispHalos.instanceMatrix.needsUpdate=true;
 }
+// Rain rings on the flooded floor: shared geometry and instancing, no per-frame allocations.
+const rippleCount=24;
+const rippleGeometry=new T.RingGeometry(.94,1,24);
+rippleGeometry.rotateX(-Math.PI/2);
+const rippleMaterial=new T.MeshBasicMaterial({color:'#8eada9',transparent:true,opacity:.18,side:T.DoubleSide,depthWrite:false});
+const ripples=new T.InstancedMesh(rippleGeometry,rippleMaterial,rippleCount);
+ripples.frustumCulled=false;world.add(ripples);
+const rippleDummy=new T.Object3D();
+function animateRipples(time){
+  for(let i=0;i<rippleCount;i++){
+    const cycle=(time*.62+i*.61803398875)%2.4;
+    const seed=i*19.37;
+    rippleDummy.position.set((rnd(i+230)-.5)*10,.025+i*.0002,(rnd(i+440)-.5)*7);
+    rippleDummy.scale.setScalar(.02+cycle*.22);
+    rippleDummy.updateMatrix();
+    ripples.setMatrixAt(i,rippleDummy.matrix);
+  }
+  ripples.instanceMatrix.needsUpdate=true;
+  rippleMaterial.opacity=.11+.06*Math.sin(time*.7);
+}
 // Old-film post-processing: soft focus, chromatic fringe, grain, vignette,
 // and line glitches that flare when the jaw snaps or the creature twitches.
 let fear=0;
@@ -327,6 +347,7 @@ function animate(ms){
   if(!paused)elapsed+=dt;
   monster.userData.tick(elapsed,paused?0:dt);
   animateWisps(elapsed);
+  animateRipples(elapsed);
   fogs.forEach((fog,i)=>{
     fog.position.x=-9+i*2.2+Math.sin(elapsed*.17+i)*.51;
   });

@@ -350,11 +350,14 @@ function animate(ms){
   monster.userData.tick(elapsed,paused?0:dt);
   animateWisps(elapsed);
   animateRipples(elapsed);
+  const stormCycle=elapsed%13.7;
+  const stormGlow=stormCycle<.13?Math.sin(Math.PI*stormCycle/.13)**2:stormCycle>.19&&stormCycle<.34?.62*Math.sin(Math.PI*(stormCycle-.19)/.15)**2:0;
   fogs.forEach((fog,i)=>{
     const breath=Math.sin(elapsed*.31+i*.83);
     fog.position.x=-9+i*2.2+Math.sin(elapsed*.17+i)*.51;
     fog.position.y=.20+(i%3)*.50+breath*.12;
-    fog.material.opacity=.045+.022*(.5+.5*breath);
+    // Distant storm backlights each fog bank for a split second, then darkness returns.
+    fog.material.opacity=.045+.022*(.5+.5*breath)+stormGlow*.085*(.35+.65*(i%3)/2);
     fog.scale.x=(6.5+(i%4)*1.6)*(1+.055*breath);
   });
   for(let i=0;i<mistCount;i++){
@@ -365,8 +368,7 @@ function animate(ms){
   }
   mist.attributes.position.needsUpdate=true;
   // Short double-flash every ~13 seconds; keep the monster readable.
-  const stormPhase=elapsed%13.7;
-  const flash=stormPhase<.13?Math.sin(Math.PI*stormPhase/.13)**2:stormPhase>.19&&stormPhase<.34?.62*Math.sin(Math.PI*(stormPhase-.19)/.15)**2:0;
+  const flash=stormGlow;
   stormLight.intensity=flash*48;
   boltMaterial.opacity=flash*.85;
   // Storm light catches the drifting swamp sparks and their diffuse halos.

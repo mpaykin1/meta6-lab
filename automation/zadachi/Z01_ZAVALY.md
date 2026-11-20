@@ -1,5 +1,17 @@
 # Z01 — РАЗБОР ЗАВАЛОВ (очередь PR МГЛ)
 
+## РЕЗУЛЬТАТ QA #405 — 20.11.2026 14:43 UTC, текущий HEAD45b3cb5
+Назначенный тест2файлов реально выполнил Codex: старые10PASS. Builder1сообщилневозможностьпереносаконнектор→container,поэтомуегоCLIне засчитан. ЭтотшагтеперьЗАВЕРШЁН,неповторятьстарый3858c825/combinedstatus.
+
+Найден и исправлен воспроизводимый false-complete: total_count200+дваждыpageIDs1–100давали200rows/100uniqueIDs,скрываявторуюстраницу. Теперь fetchAllCheckRuns и assertCompleteCheckRuns отклоняют повтор ЧИСЛОВОГОcheck-runID;старыеstructuralfixturesбезIDсохранены. Новыетриnegativeслучая (repeatedpage/boundaryoverlap/forgedcomplete) +positive101uniqueIDs. REDстарыйкод10PASS+новыйFAIL, GREEN64/64dispatcher/baseline/karta. Все58строкисходногоtestсохранены+21строка,guardне менялся. OSHIBKI2026112013,конкретныйtrapпутьуточнён,ПРОВЕРКАИЗМЕНЕНА.
+
+Настоящийmerge45b3cb5a829a83b8780f71145eef04ad96003822,parent3858c825470341708647776c01cdbd9ac8cf90bc+mainc076c58ede54229278cbcd41ae54c6c4d8a4bae0. Mainbuildравенbase9994bd0,документальныйappendконфликтразрешёнссохранениемвсеготекста;включёнполныйmain. Compare3пути:OSHIBKI+4/-0,build+34/-1,newtest+79/-0. CASexpected_sha/forcefalse,PRopenready/mergeabletrue/unstable;title/bodyобновленыпоитоговомуповедению,PRвmainНЕслит.
+
+CIновогоSHAзапущен:ранниеpermanent/static/karta/dispatch/quota/protectSUCCESS,остальныеещёвработе. Guardjob136360384670FAIL:историческийa6b6a7ce3d9012f5f82ebff7aa1d08fa36f41bb2менял.github/protected/SHA256SUMS(хешmeta-bot/core865953f→c7be3bcc)безподписиClaude. Этоотдельноотe8e#402/e646#355. ТочныйпакетдоставленDLYA_CLAUDEe42aa92d4d124c827b40c7aea9f6b087dfb6ab5b;история/защитане переписывались. Нельзяповторятьmerge/64тестапринеизменномкоде;возвратк#405посленовогоCI/санкционированногорешенияprotected/review.
+
+Все3кодовыхпутиосвобождены. Диспетчеручитывает1исправленныйfalse-complete+1устранённыйконфликт,0mergePR/публикаций/принятыхFINISH;следующийновыйпакетстроителю1повыборусвободногораннегопункта,непустойповтор#407/#405. FINISH7/18.
+
+
 ## АКТУАЛЬНОЕ ЗАДАНИЕ СТРОИТЕЛЮ-1 — 20.11.2026 13:54 UTC
 Два последних итога опять проверяли #407 вместо назначенного #405. Пакеты review #407 и #411 уже доставлены, их без нового SHA/review не повторять. Старые временные назначения ниже — история, обязательные правила сохраняются.
 

@@ -25,15 +25,6 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->
 | #297 | lab/ostrov-aptekarya-ii | OSHIBKI.md | 2026-11-20 |
-| #300 | lab/native-catalog-recovery-20261113 | OSHIBKI.md | 2026-11-20 |
-| #310 | lab/patch-import | OSHIBKI.md, automation/asset-check/mutate_bot.py, automation/asset-check/test_kinds.py | 2026-11-20 |
-| #322 | lab/ink-watercolor-steam-train-20261114 | LINKS.txt, OSHIBKI.md, reports/zavaly/PROGRESS.md | 2026-11-20 |
-| #331 | lab/razbor-zavalov | OSHIBKI.md, automation/SLIYANIE.md, reports/zavaly/PROGRESS.md, scripts/karta-sil/route.mjs | 2026-11-20 |
-| #343 | lab/assets-nebesny-pilot-20261116 | LINKS.txt, OSHIBKI.md, automation/asset-check/OCHERED.md, automation/asset-check/RAZVITIE.md, automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py | 2026-11-20 |
-| #355 | lab/z04-b2-extract-motion-20261117 | OSHIBKI.md | 2026-11-20 |
-| #357 | lab/rules-playgama-catalog-direct-20261117 | OSHIBKI.md | 2026-11-20 |
-| #364 | lab/assets-vorona-v-tumane-20261117 | automation/asset-check/SPEC.md, automation/asset-check/check_pack.py, automation/asset-check/mutate_bot.py, automation/asset-check/test_kinds.py | 2026-11-20 |
-| #402 | lab/avto2-pagination-20261117 | OSHIBKI.md | 2026-11-20 |
 | #405 | lab/repair-dispatcher-check-pagination-1118 | OSHIBKI.md | 2026-11-20 |
 | #411 | lab/asset-bot-cutout | OSHIBKI.md | 2026-11-20 |
 | #412 | lab/asset-bot-gothic-facades | OSHIBKI.md, automation/asset-check/SPEC.md | 2026-11-20 |

@@ -154,3 +154,21 @@ ReviewsAPI=[];CodexнеставилсобственныйAPPROVEDзанезав�
 
 ## PR #407 — точный пакет допустимого review,20.11.2026 12:54 UTC
 HEAD3324ce7cbf6b17226f5037bf475379b508fe2fbc, [checks](https://github.com/mpaykin1/meta6-lab/commit/3324ce7cbf6b17226f5037bf475379b508fe2fbc/checks)16completed=14SUCCESS/2SKIP/0FAIL. Combinedstatuses=[]НЕотсутствиеActions. ПоследнийreviewтолькоCOMMENTEDавторанастаром5fca944;независимогоAPPROVEDнет. КодограничиваетожиданиеGitHubAPI10секундами,11локальныхquota-fastfailтестовранееPASS(доставкаZ017dac695),натомжеSHAнеповторялись. Требуетсядопустимыйнезависимыйreview/свежаяпроверкаHEAD/gatesдляразрешённогозавершения;CodexнесливаетсвойPRисобственныйAPPROVEDнеподменяетприёмку. Не возвращатьавтозадачуктомужеобзорустарогоSHAилиcombinedstatus;пакетдоставлен,следующийсвободныйZ01шаг.
+
+## PR #428 — точный derived-catalog пакет и конфликт сохранности shared (20.11.2026 13:02–13:17 UTC)
+HEADefaaea3d4aaab234ae7619291388b08f863b0219:K3исправлен(только2строкиOSHIBKIполныеscripts/library/mutate-library.mjs/verify-library.mjs). НастоящийcheckDiffguardнастарыхстрокахвозвращаетK3,нановыхнет;охранникне менялся.
+ПолнаяпересборкаизGitblobбайтовэтогоHEAD,безWindowsCRLF,далаextract/verify/11мутацийPASS,28sourceRoot,копии49,222,409/50,000,000bytes. Производныйdiff141файл=129добавлений/2изменения/10удалений,новыебайты15,644,958;shared/library/index.json7,256,014bytesGitblob4feb55f737bc3e12b20bbb79a0f552a01bcde851. ЭтообъясняетPRcatalogdrift;неошибка11мутаций.
+**Блокер:**действующийlab-shared-deletion-guard.ymlбезисключенийотклоняетлюбыеудаленияshared/. Генераторпри50MBбюджетеудаляет10прежнихкопийreference-three-worlds-game,источникиостаются. СлепоприменитьполныйdiffзначитсоздатьновыйзащитныйFAIL,оставитьлишниекопиипротиворечиттекущемуindependentverifier/лимиту. Нуженразрешённыйпутьмиграциикаталога/сохраненияпринятыхкопийврамкахбюджета,безослабленияguard/хешей/исходников. Кодовойремонт/L1PRостаётся#428,дубльне создавался,141generatedизменениене отправлено.
+Полныйплан141path/status/GitSHAдоставленвсуществующуюZ10;детерминированноевоспроизведение:чистыйcheckoutefaaea3сcore.autocrlf=false, node scripts/library/extract-all.mjs; node scripts/library/verify-library.mjs; node scripts/library/mutate-library.mjs;сравнитьshared/library. Локальныйархивoutputs/MG_L1_catalog_candidate.zip(131новых/изменённыхфайлов+manifestпредлагаемыхудалений),4,326,495bytes,SHA256d75d0c95ddfd4feb77b971ba57ece7a7a54ed053e0509ece3dda5c0e5eca7972;архивНЕавтоприменён. Исходныеданные/код/воспроизводимыйпланвGitHub,локальныйархивдополнительныйноситель.
+Предлагаемыеудаления(НЕвыполненывPR):
+- `shared/library/assets/reference-three-worlds-game/models/scout_drone.glb`
+- `shared/library/assets/reference-three-worlds-game/evidence/play/04.png`
+- `shared/library/assets/reference-three-worlds-game/models/jellyfish_violet.glb`
+- `shared/library/assets/reference-three-worlds-game/evidence/play/00.png`
+- `shared/library/assets/reference-three-worlds-game/models/angler.glb`
+- `shared/library/assets/reference-three-worlds-game/models/eel.glb`
+- `shared/library/assets/reference-three-worlds-game/models/kraken_tentacle.glb`
+- `shared/library/assets/reference-three-worlds-game/models/jellyfish_teal.glb`
+- `shared/library/assets/reference-three-worlds-game/evidence/stage7-depth.png`
+- `shared/library/assets/reference-three-worlds-game/evidence/play/02.png`
+B1desktopunderwaterERR_CONNECTION_CLOSEDиquota—отдельныепричины,неподменятьэтимcatalogрешение. FINISH7/18не менялся,PRне слит.

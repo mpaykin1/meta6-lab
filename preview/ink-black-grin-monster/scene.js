@@ -189,7 +189,9 @@ function animateRain(time,lightningFlash){
     const z=(rnd(i+839)-.5)*9+1;
     const n=i*6;
     rainPositions[n]=x;rainPositions[n+1]=y;rainPositions[n+2]=z;
-    rainPositions[n+3]=x-.11;rainPositions[n+4]=y-.30;rainPositions[n+5]=z;
+    // Gusts bend the rain sideways; lightning exposes the longer streaks.
+    const gust=.10+.13*Math.sin(time*.73+z*.41)+.06*lightningFlash;
+    rainPositions[n+3]=x-gust;rainPositions[n+4]=y-(.30+.12*lightningFlash);rainPositions[n+5]=z;
   }
   rainGeometry.attributes.position.needsUpdate=true;
   rainMaterial.opacity=.13+lightningFlash*.37;

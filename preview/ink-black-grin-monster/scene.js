@@ -207,6 +207,17 @@ const wispHaloMaterial=new T.MeshBasicMaterial({color:'#5b9e91',transparent:true
 const wispHalos=new T.InstancedMesh(wispGeometry,wispHaloMaterial,wispCount);
 wispHalos.frustumCulled=false;wispHalos.userData.watercolorOutline=false;
 world.add(wispHalos);
+// Each swamp light leaves a faint vertical afterglow in the humid air.
+const wispTrailPositions=new Float32Array(wispCount*6);
+const wispTrailGeometry=new T.BufferGeometry();
+wispTrailGeometry.setAttribute('position',new T.BufferAttribute(wispTrailPositions,3));
+const wispTrailMaterial=new T.LineBasicMaterial({
+  color:'#83c9b5',transparent:true,opacity:.23,depthWrite:false,
+  blending:T.AdditiveBlending
+});
+const wispTrails=new T.LineSegments(wispTrailGeometry,wispTrailMaterial);
+wispTrails.frustumCulled=false;wispTrails.userData.watercolorOutline=false;
+world.add(wispTrails);
 const wispDummy=new T.Object3D();
 function animateWisps(time){
   for(let i=0;i<wispCount;i++){
@@ -214,11 +225,19 @@ function animateWisps(time){
     const radius=1.7+(i%6)*.47;
     wispDummy.position.set(Math.cos(a)*radius,.13+(i%5)*.12+Math.sin(time*1.7+i)*.18,Math.sin(a)*radius*.72);
     const glow=.65+.35*Math.sin(time*2.3+i*1.91);
+    const trail=i*6;
+    wispTrailPositions[trail]=wispDummy.position.x;
+    wispTrailPositions[trail+1]=wispDummy.position.y;
+    wispTrailPositions[trail+2]=wispDummy.position.z;
+    wispTrailPositions[trail+3]=wispDummy.position.x-.07*Math.sin(time*.8+i);
+    wispTrailPositions[trail+4]=wispDummy.position.y-.20-.14*glow;
+    wispTrailPositions[trail+5]=wispDummy.position.z;
     wispDummy.scale.setScalar(.55+glow*1.9);
     wispDummy.updateMatrix();wisps.setMatrixAt(i,wispDummy.matrix);
     wispDummy.scale.multiplyScalar(4.2);
     wispDummy.updateMatrix();wispHalos.setMatrixAt(i,wispDummy.matrix);
   }
+  wispTrailGeometry.attributes.position.needsUpdate=true;
   wisps.instanceMatrix.needsUpdate=true;
   wispHalos.instanceMatrix.needsUpdate=true;
 }
@@ -418,6 +437,7 @@ function animate(ms){
   // Restore the original glow between flashes without extra draw calls.
   wispMaterial.opacity=.65+flash*.30;
   wispHaloMaterial.opacity=.12+flash*.24;
+  wispTrailMaterial.opacity=.18+flash*.42;
   // Lightning briefly catches the concentric ripples on the flooded ground.
   rippleMaterial.opacity=.11+.06*Math.sin(elapsed*.7)+flash*.32;
   const pulse=monster.userData.pulse||0;

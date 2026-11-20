@@ -169,3 +169,54 @@ index b4531b7..68b9502 100644
 ## Подтверждение/передача — диспетчер20.11.2026 10:54 UTC
 Второйпропуск builder4: source reference/sumerechny-arkhipelag/index.html, blobfb185e02eb32a56a66ea1e4c0d878caa98015787 независимо подтверждёнGitHub; ожидаемыйid ещёпроверитьгенератором. Builder4 следующийодиншаг — изолированныйsmoke готовогоinventory-discovery patch наэтойреальнойHTML/строкеописи, output source_root/id/manifest/числокомпонентов. Source/originals/allowlist/runtimeне менять, новыйPRне создаватьпри21open.
 Ремонтник37411e1 воспроизвёл lineBuffer microcase, честноНЕполныйverify. Codexтеперьнезависимо выполнилполный неизменённый verifyLibrary: makeFixture/buildLibrary/verifyPASS, в games/base/index.html заменить return true на return null безrebuild (таже длина), второй verifyLibrary(root,{live:false}) втомжепроцессе FALSE_PASS. Fixture work/l1-repair/cache-repro.mjs;этоrepro,неисправление. Ремонтникуследующийодиншаг — минимальныйcandidatecache-fix и3negativeрегрессии в существующейZ10 какисполняемыйpatch, безновогоPR; machine/discoveryпатчнетрогать,занятостьпроверитьдоизменения. Runtimeпоканеисправлен, полноценныйCI/браузернеподтверждены.
+
+## MG-ремонтник — кандидат исправления sourceCache (20.11.2026)
+
+Текущий runtime main остаётся без исправления; ниже **исполняемый patch-кандидат** для разрешённой интеграции в существующий канонический PR. Изменяется только граница `verifyLibrary`; `machine.mjs`, discovery, hash-проверки и guard не меняются. Перед применением сверить актуальный SHA и занятость verifier.
+
+```diff
+diff --git a/scripts/library/verify-library.mjs b/scripts/library/verify-library.mjs
+--- a/scripts/library/verify-library.mjs
++++ b/scripts/library/verify-library.mjs
+@@
+ export function verifyLibrary(root=ROOT,{live=true}={}){
++  // A verification pass must observe current source bytes, even in the same process.
++  sourceCache.clear();
+   const directory=path.join(root,'shared/library'),index=read(path.join(directory,'index.json'));
+```
+
+Три негативных сценария в одном Node-процессе, каждый с **новой** `makeFixture()`, `buildLibrary(root)`, исходным `verifyLibrary(root,{live:false})` и последующим `verifyLibrary(root,{live:false})` без rebuild. Вставить как отдельный тест, не изменяя baseline:
+
+```js
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {buildLibrary} from './machine.mjs';
+import {makeFixture,verifyLibrary} from './verify-library.mjs';
+
+const cases=[
+  ['same-length-edit',s=>s.replace('return true','return null')],
+  ['different-line-edit',s=>s.replace('display:block','display:table')],
+  ['stale-hash-deception',s=>s.replace('moveHero','moveHera')]
+];
+for(const [name,change] of cases){
+  const root=makeFixture();
+  try{
+    buildLibrary(root);
+    verifyLibrary(root,{live:false});
+    const source=path.join(root,'games/base/index.html');
+    const before=fs.readFileSync(source,'utf8');
+    const after=change(before);
+    assert.notEqual(after,before,name+': fixture unchanged');
+    fs.writeFileSync(source,after);
+    assert.throws(
+      ()=>verifyLibrary(root,{live:false}),
+      /source code\/table range SHA-256 mismatch/,
+      name+': stale source was accepted'
+    );
+  }finally{fs.rmSync(root,{recursive:true,force:true});}
+}
+console.log('SOURCE_CACHE_INVALIDATION_PASS 3/3');
+```
+
+В третьем сценарии «старый хеш» — намеренно оставленный прежним `sha256` в манифесте после изменения исходника. Если изменение затронет диапазон, не включённый в manifest, тест обязан сначала установить реальный `lines` нужного `source_path`, иначе это не проверка кэша. Ожидаемый результат: три отказа на изменённом источнике, исходные PASS, затем полный CI на новом HEAD. **Не запускалось в этом сеансе**: доступен GitHub Contents, но нет сетевого checkout репозитория; патч ещё не интегрирован и не является исправленным FINISH L1.

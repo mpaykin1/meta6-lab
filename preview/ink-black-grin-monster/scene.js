@@ -163,6 +163,11 @@ const wispMaterial=new T.MeshBasicMaterial({color:'#9dcfc0',transparent:true,opa
 const wisps=new T.InstancedMesh(wispGeometry,wispMaterial,wispCount);
 wisps.frustumCulled=false;wisps.userData.watercolorOutline=false;
 world.add(wisps);
+// Diffuse outer halos give each moving spark a soft, atmospheric silhouette.
+const wispHaloMaterial=new T.MeshBasicMaterial({color:'#5b9e91',transparent:true,opacity:.12,depthWrite:false,depthTest:true,blending:T.AdditiveBlending});
+const wispHalos=new T.InstancedMesh(wispGeometry,wispHaloMaterial,wispCount);
+wispHalos.frustumCulled=false;wispHalos.userData.watercolorOutline=false;
+world.add(wispHalos);
 const wispDummy=new T.Object3D();
 function animateWisps(time){
   for(let i=0;i<wispCount;i++){
@@ -172,8 +177,11 @@ function animateWisps(time){
     const glow=.65+.35*Math.sin(time*2.3+i*1.91);
     wispDummy.scale.setScalar(.55+glow*1.9);
     wispDummy.updateMatrix();wisps.setMatrixAt(i,wispDummy.matrix);
+    wispDummy.scale.multiplyScalar(4.2);
+    wispDummy.updateMatrix();wispHalos.setMatrixAt(i,wispDummy.matrix);
   }
   wisps.instanceMatrix.needsUpdate=true;
+  wispHalos.instanceMatrix.needsUpdate=true;
 }
 // Old-film post-processing: soft focus, chromatic fringe, grain, vignette,
 // and line glitches that flare when the jaw snaps or the creature twitches.

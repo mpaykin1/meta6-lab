@@ -160,5 +160,28 @@ class SpriteStackTests(unittest.TestCase):
             self.assertIn("SS4", hard(root))
 
 
+
+class MissingSpriteStackRendererTests(unittest.TestCase):
+    def test_missing_renderer_with_real_script_reference(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = fixture(tmp)
+            (root / "gothic-city.js").unlink()
+            self.assertIn("SS11", hard(root))
+
+    def test_missing_renderer_with_comment_only_reference(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = fixture(tmp)
+            (root / "gothic-city.js").unlink()
+            (root / "index.html").write_text("<!-- gothic-city.js -->", "utf-8")
+            self.assertIn("SS11", hard(root))
+
+    def test_renderer_path_is_directory(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = fixture(tmp)
+            (root / "gothic-city.js").unlink()
+            (root / "gothic-city.js").mkdir()
+            self.assertIn("SS11", hard(root))
+
+
 if __name__=="__main__":
     unittest.main()

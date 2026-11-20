@@ -168,7 +168,10 @@ def check(root: Path, report) -> set[str]:
             report.add("SS11", "HARD", "index.html", "Атласы не подключены к игре",
                        "Подключи визуальный рендер sprite-stack")
         script = root / "gothic-city.js"
-        if script.is_file():
+        if not script.is_file():
+            report.add("SS11", "HARD", "gothic-city.js", "Missing sprite-stack renderer file",
+                       "Supply gothic-city.js; an HTML reference alone is insufficient")
+        else:
             covered.add("gothic-city.js")
             script_source = script.read_text("utf-8")
             if "__ISOLATE__" not in script_source:

@@ -57,3 +57,6 @@ PR [#258 «B2 real movement»](https://github.com/mpaykin1/meta6-lab/pull/258), 
 
 ## Не повторять неизменный Chrome timeout — 20.11.2026 11:54 UTC
 Builder2 сообщил8a9ea49d:2headlessabout:blankexit124,HTMLнет,D-Busstderr. D-Busсообщениесамопосебенеустанавливаетпричинузависания. Доизмененияпричиныэтижепрогонынеповторять;однаполнаяпередачасюда—точныедвекоманды,путь/версияChrome,timeout,exit,выдержкаstdout/stderr. ЗатемдоступнаянезависимаядетерминированнаяB3/B4работапосвежейзанятости;невыдаватьеёзаB2/ChromiumPASS. Текущий#355HEADbc9fabb,историческийgateClaudeуже2031205,неповторятьпакет/merge. SupportследующийпакетL1,необещатьеговмешательствовLinuxсредуGPT.
+
+## Codex support — старт реальной B2 проверки,20.11.2026 14:04 UTC
+Принимаюназначенный#355HEADbc9fabb509f698ea819f089e6945dc9bd33bf7c8,PRopen,новыхкоммитовнет,builder2idle/read-onlycombatконтракт. Кодветкине меняю;заняттолькоизолированныйruntimeпрогоноригинальногопроверяющего/реальнаяChromiumсреда. ПолучаюточныйGitснимок355,штатныйбесплатныйChromiumдляPlaywright1.56.1вworkspacecacheсосохранениемпрежнихкэшей,оригинальныйverify-motion--gamegames/veil-terracesdesktop/mobile/screenshots. Цель—фактическиемировыекоординаты/состоянияилипервыйвоспроизводимыйдефект,неfixturesPASS. ИсторическийClaudeprotectedgateнеобхожу;game/verifier/guardнеправлюрадиуспеха.

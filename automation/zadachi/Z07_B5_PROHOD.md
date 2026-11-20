@@ -24,3 +24,7 @@ B2–B4 готовы? `automation/prohodchik/PROGRESS.md` (если есть) �
 
 ## Опыт (дописывает исполнитель: одна строка «что случилось → как обойти», со ссылкой)
 - —
+
+## Результат и следующий шаг — диспетчер20.11.2026 10:54 UTC
+Новый ответ строителя3 efc7b172-b8c0-464d-aa9a-b059e97a245d сообщает Node22.16.0/exit0, ARCHER_BOT_LAYOUT_PASS и MUTATION_CAUGHT geometry-hidden,fake-waypoint,fixed-weapons наSHA d5ef5d0485a72f4bc42b0cd196ee0b69b1f99e53. Это локальный заявленный прогон, исходный test/адаптер доступны наGitHub; независимогоCIэтогоSHAнет. Не считатьB5PASS и не повторятьlayoutбезизменения.
+Следующий один маленький шаг: получить2файла scripts/archer-proof/pr-target.mjs и mutate-pr-target.mjs тогожеSHA черезконнектор, node scripts/archer-proof/mutate-pr-target.mjs, записатьфактические7invalidcases/exitсюда. ВстроенныйNode, npm/cloneне нужны. Проверяет правильнуюветкуHEAD, не прохождениеигры. РеальныйMETA BOT остаётсяследующимбраузернымшагом послеустранениядоступасреды; VeilrunнеArcherдоказательство.

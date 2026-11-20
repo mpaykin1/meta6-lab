@@ -25,8 +25,6 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 
 <!-- STOROZHA:CONFLICTS:BEGIN -->
 | #297 | lab/ostrov-aptekarya-ii | OSHIBKI.md | 2026-11-20 |
-| #405 | lab/repair-dispatcher-check-pagination-1118 | OSHIBKI.md | 2026-11-20 |
-| #411 | lab/asset-bot-cutout | OSHIBKI.md | 2026-11-20 |
 | #412 | lab/asset-bot-gothic-facades | OSHIBKI.md, automation/asset-check/SPEC.md | 2026-11-20 |
 <!-- STOROZHA:CONFLICTS:END -->
 | #242 | lab/seo-claude-adfree-1111 | НУЖЕН CLAUDE: красные verify, bot, guard; SEO PR меняет claude-games/games/*/index.html (17 игр), а базовый PR #234 содержит несовпадение SHA256 защищённого pod-i-nad; не изменять эталон/охранник, проверить базовую ветку и CI: https://github.com/mpaykin1/meta6-lab/actions/runs/42981201117 | 2026-11-11 |

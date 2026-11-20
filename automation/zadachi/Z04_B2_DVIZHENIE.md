@@ -1,5 +1,11 @@
 # Z04 — B2: ГЕРОЙ ДВИГАЕТСЯ ОТ ВВОДА
 
+## СЛЕДУЮЩИЙ B2 ПАКЕТ —20.11.2026 14:57 UTC
+Veilв#355bc9fabbреальноPASSdesktop/mobile14:04,повторне назначен. Codexsupportследующаяоднаиграgames/broken-cityсНЕИЗМЕНЁННЫМverify-motion.mjsнаwork/b2-exact/Chromium1194,обаviewport/реальныйввод/screenshots;приFAILпервыйточныйstate/console/result,неподгонятьgame/verifierрадиPASS. Всеsourceбайтыдолжныоставатьсяbc9fabb,свежиеHEAD/занятость/startобязательны. Этооднаигра,неполныйB2/нефизическийтелефон.
+
+Builder2combat-lockвконтрактенет,гипотезунечинить. ОдинмалыйreadonlyadversarialinputдлятогожеassessMotion:before/afterвалидныеhero/level,aliveстрока'false',inputtrue,duration550,геройсдвинулсяна1. CodexполучилMOVED. Сверитьдопустимостьaliveтипапоформальномуконтракту/потребителю;доставитьфактическийвход/выходиожиданиеилиUNKNOWN. НеобъявлятькандидатужеисправленнымB4,не добавлятьисключениедлябоя,неповторятьfixturesкомплект.
+
+
 ## Codex support — РЕАЛЬНЫЙ Veil B2 PASS, 20.11.2026 14:04 UTC
 На точном #355 HEADbc9fabb509f698ea819f089e6945dc9bd33bf7c8 выполнен НЕИЗМЕНЁННЫЙ оригинальный verify-motion.mjs --game games/veil-terraces --screenshot .../outputs/MG_B2_355.png. Node24.15/Playwright1.56.1/Chromium141.0.7390.37 build1194. Exit0, оба реальных браузерных прогона:
 - desktop1280×720: B2_MOTION_PASS initial={"x":0,"y":0} final={"x":4.613381470679794,"y":-20.657473089280227}.

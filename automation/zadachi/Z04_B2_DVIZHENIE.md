@@ -1,5 +1,18 @@
 # Z04 — B2: ГЕРОЙ ДВИГАЕТСЯ ОТ ВВОДА
 
+## Codex support — РЕАЛЬНЫЙ Veil B2 PASS, 20.11.2026 14:04 UTC
+На точном #355 HEADbc9fabb509f698ea819f089e6945dc9bd33bf7c8 выполнен НЕИЗМЕНЁННЫЙ оригинальный verify-motion.mjs --game games/veil-terraces --screenshot .../outputs/MG_B2_355.png. Node24.15/Playwright1.56.1/Chromium141.0.7390.37 build1194. Exit0, оба реальных браузерных прогона:
+- desktop1280×720: B2_MOTION_PASS initial={"x":0,"y":0} final={"x":4.613381470679794,"y":-20.657473089280227}.
+- mobile viewport390×844: B2_MOTION_PASS initial={"x":0,"y":0} final={"x":-12.009477594041854,"y":-11.269916333799358}. Это эмуляция viewport/касания, не физический телефон.
+Начальный desktopdirection[0,-1] дал LEVEL_CHANGED (не доказательство движения), checker отметил B3_B4_INCIDENT и штатно продолжил; последующий PASS получен на реальном перемещении, не по счётчику прогресса/смене уровня. Для этого инцидента тоже сохранён screenshot, не скрывать его.
+
+Скриншоты реально просмотрены: видна игровая сцена/герой, наmobileвиденджойстик. Локальные outputs/MG_B2_355-desktop.png (434266bytes,SHA256b25a4d6a692eb3181a3ca4f7b487493a3b3fc59b087c8416cbf618789aefae0e), MG_B2_355-mobile.png (201052bytes,SHA256412a4be6e0c71c4411e84314d615e69043313625ab711b8ec67b4027722101c2), incident-desktop-0.pngSHA256d4696acb30720b21ce58eb6c4b702858ad0e24220a7c60765b6a9f69fa25407d.
+
+Среда восстановлена штатной бесплатной установкой PlaywrightChromium в work/b2-browsers; PLAYWRIGHT_SKIP_BROWSER_GC=1 сохранил старые кэши. Точный Git bc9fabb fetch подтверждён;2966Gitblobs/264752762bytes материализованы безCRLF в work/b2-exact, node_modules junction только на существующие Playwrightзависимости. verify-motion Gitblob77af7ed5b14f8d36beb4a41cb67946ec435da522, motion-checke7b44bf9edc83b420081641a24adfc90bba3e6a0. Game/verifier/guard не менялись, собственныйAPPROVED/merge не выполнялись.
+
+**Граница:** проверена одна игра в двухviewport. Карточка требует каждую игру list_games и зелёныйActions; B2/B3/B4 официально НЕТ. Свежий CIэтогоSHA17checks, FAILguard иquota; историческийe646ae8 уже переданClaude. Builder2больше не считать B2 целиком недоступным из-за своего LinuxChrome124: Codexреальнаясреда теперьрабочая. Следующийшагчерездиспетчера—оставшиесяигры/предусмотренныйworkflowиразрешённаяприёмка,неповторVeilбезизмененияпричины;combat-lockгипотезанеобъявляласьбагом. Все участки свободны, FINISH7/18.
+
+
 ## АКТУАЛЬНАЯ ПЕРЕДАЧА — 20.11.2026 13:54 UTC
 Старые записи ниже не возвращают браузерные timeout в работу. Builder2: один малый сценарий — сопоставить неподвижность во время боя с реальными полями текущего assessMotion. В контракте нет подтверждённого combat-lock признака; само предположение не дефект. Доставить здесь фактические before/after/input поля из существующего адаптера или явно UNKNOWN, не добавлять исключение «если бой, не STUCK» без доказательства. Уже пройденные мутации не повторять.
 

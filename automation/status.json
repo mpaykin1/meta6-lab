@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-20T11:05:54.450Z",
+  "generated_at": "2026-11-20T11:06:45.649Z",
   "sha": {
-    "lab": "273bdae0296f339e5c6b62cf491e5dd67738027e",
+    "lab": "13eeed6ba2c688ae724277dc690c90f0566ffa0b",
     "mg": "5984fcd5b79ed2d03c648053334361db8deb44fb"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44724570989",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44724584193",
   "review": {
     "protected": [
       {
@@ -60,11 +60,6 @@
           "scripts/meta-bot/mutate-viewports.mjs",
           "scripts/platform/verify-meta-bot-config-candidate.mjs"
         ]
-      },
-      {
-        "number": 358,
-        "sha": "81e5fb9fcce86c5de90ec98953b8316ed87f83a6",
-        "paths": "нет данных"
       },
       {
         "number": 346,
@@ -1004,11 +999,6 @@
         ]
       },
       {
-        "number": 358,
-        "sha": "81e5fb9fcce86c5de90ec98953b8316ed87f83a6",
-        "paths": "нет данных"
-      },
-      {
         "number": 346,
         "sha": "9f247be3a3530d160f629f531f32eb6469a07bc1",
         "paths": [
@@ -1328,7 +1318,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3229,
+      "count": 3230,
       "folders": "нет данных"
     },
     "mg": {

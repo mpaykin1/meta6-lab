@@ -418,6 +418,9 @@ function animate(ms){
     // Distant storm backlights each fog bank for a split second, then darkness returns.
     fog.material.opacity=.045+.022*(.5+.5*breath)+stormGlow*.085*(.35+.65*(i%3)/2);
     fog.scale.x=(6.5+(i%4)*1.6)*(1+.055*breath);
+    // Wind shears each fog layer at a different speed during the storm.
+    fog.rotation.z=.012*Math.sin(elapsed*.23+i*.71)+stormGlow*.035*Math.sin(i*2.4);
+    fog.position.z=-.12*Math.sin(elapsed*.19+i*.64);
   });
   for(let i=0;i<mistCount;i++){
     const n=i*3;

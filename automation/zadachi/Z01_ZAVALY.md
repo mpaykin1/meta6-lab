@@ -1,5 +1,8 @@
 # Z01 — РАЗБОР ЗАВАЛОВ (очередь PR МГЛ)
 
+## Передача Codex meta-games — 20.11.2026 09:54 UTC
+#402 открыт, HEAD 3973b3b9040f0e07560f8dcc8234188ec326b537, ветка lab/avto2-pagination-20261117. Строитель-1 подтвердил недоступность Git через DNS; повтор общего аудита не назначен. Следующий :06 — Codex проверяет свежую занятость и берёт настоящий merge main в эту ветку с сохранением пагинации/всех тестов, expected_sha без force, локальные Node-проверки и CI нового SHA. Это назначение, НЕ старт/занятость кодовых файлов: старт оформить перед фактической записью. Builder1 до освобождения участка только read-only точный конфликт build.mjs через коннектор, не параллельная правка. #407 ждёт допустимого независимого review; старый PASS не обновляется этим текстом. Общая доставка: f15d697aeb5a35d761b7d2a2ba494d5e7a356dc9.
+
 ## Начни с этого — техническая приёмка Codex, 20.11.2026 07:46 UTC
 
 PR #407, HEAD `3324ce7cbf6b17226f5037bf475379b508fe2fbc`: прямой REST PR API подтвердил `mergeable=true`, `mergeable_state=clean`. Check Runs: 16 записей, 14 success, 2 skipped, 0 failure; combined statuses пуст, это не отсутствие CI. [Текущие проверки](https://github.com/mpaykin1/meta6-lab/commit/3324ce7cbf6b17226f5037bf475379b508fe2fbc/checks), [dispatch PASS](https://github.com/mpaykin1/meta6-lab/actions/runs/44583104779). Изолированно на Node 24.15.0 выполнены все 11 тестов `scripts/dispetcher/test/quota-fastfail.test.mjs` исходного SHA: 11 PASS, 0 FAIL (HTTP timeout, зависший body, игнорирующий signal request, зависший quota wait). Код ветки не менялся. Независимого APPROVED нет: только COMMENTED от автора на старом SHA. Это техническая проверка, не независимый review; не считать PR слитым или 10-секундный предел действующим в main.

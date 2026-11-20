@@ -349,7 +349,11 @@ function animate(ms){
   animateWisps(elapsed);
   animateRipples(elapsed);
   fogs.forEach((fog,i)=>{
+    const breath=Math.sin(elapsed*.31+i*.83);
     fog.position.x=-9+i*2.2+Math.sin(elapsed*.17+i)*.51;
+    fog.position.y=.20+(i%3)*.50+breath*.12;
+    fog.material.opacity=.045+.022*(.5+.5*breath);
+    fog.scale.x=(6.5+(i%4)*1.6)*(1+.055*breath);
   });
   for(let i=0;i<mistCount;i++){
     const n=i*3;

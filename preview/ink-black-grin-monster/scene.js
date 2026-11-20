@@ -456,7 +456,8 @@ function animate(ms){
   const kcam=1-Math.exp(-dt*3.2),korb=1-Math.exp(-dt*7);
   camY+=(wantY-camY)*kcam;
   yawS+=(yaw-yawS)*korb;pitchS+=(pitch-pitchS)*korb;
-  const shake=fear*fear*.07;
+  // Thunder impulse reaches the camera on both lightning peaks, then vanishes.
+  const shake=fear*fear*.07+stormGlow*.045;
   const targetY=camY+shake*Math.sin(elapsed*61),d=13.5;
   camera.position.set(Math.sin(yawS)*Math.cos(pitchS)*d+shake*Math.sin(elapsed*47),
     targetY+Math.sin(pitchS)*d,Math.cos(yawS)*Math.cos(pitchS)*d);

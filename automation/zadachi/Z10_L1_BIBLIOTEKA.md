@@ -161,3 +161,7 @@ index b4531b7..68b9502 100644
      verifyLibrary(root,{live:false});
 ```
 </details>
+
+## MG-ремонтник — воспроизведение sourceCache, 20.11.2026
+
+В текущем `scripts/library/verify-library.mjs` функция `lineBuffer()` хранит `bytes` и `starts` в модульном `sourceCache` по абсолютному имени файла и не проверяет повторно содержимое. Изолированный Node 22.16.0 сценарий с тем же телом `lineBuffer`: файл `source.html` со строкой `const hero=1;`, `expected=sha256(lineBuffer(file,[2,2]))`, первый вызов PASS; заменить на `const hero=2;` (та же длина), повторить `sha256(lineBuffer(file,[2,2]))===expected` в том же процессе — **FALSE_PASS**; свежий Node-процесс, читающий вторую строку и сравнивающий с прежним SHA — **FAIL_EXPECTED**. Это подтверждает дефект кэша исходных байтов, но не является полным запуском `verifyLibrary()` или CI. Команда для точного интеграционного воспроизведения: `const root=makeFixture(); buildLibrary(root); verifyLibrary(root,{live:false});` затем изменить только байты inline-источника в `games/base/index.html` без пересборки и вызвать `verifyLibrary(root,{live:false})` в том же процессе; ожидается исключение `source code/table range SHA-256 mismatch`. Сначала проверить, что изменённая строка соответствует `lines` манифеста. Критерий исправления: второй вызов FAIL, первый PASS, свежий процесс FAIL; не менять guard/allowlist и не ослаблять хеши. Не менять verifier параллельно с Codex L1; патч пока не внесён.

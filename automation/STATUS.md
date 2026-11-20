@@ -1,9 +1,10 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-20T09:09:48.439Z | МГЛ: 85fea515569f8e848ab6b199d2c9c300349fe255 | МГ: 5984fcd5b79ed2d03c648053334361db8deb44fb | https://github.com/mpaykin1/meta6-lab/actions/runs/44708088170
+UTC: 2026-11-20T09:45:35.357Z | МГЛ: 93a43f81d421b62350cd96cf1077e94c2286c76f | МГ: 5984fcd5b79ed2d03c648053334361db8deb44fb | https://github.com/mpaykin1/meta6-lab/actions/runs/44713241311
 ## ПРОВЕРИТЬ CLAUDE
 - PR #421 a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1: .github/workflows/bez-patternov.yml, automation/asset-check/test_htmlpack.py, scripts/storozha/verify-storozha.mjs, scripts/visual/mutate-no-patterns.mjs, scripts/visual/verify-targets.mjs
 - PR #413 fa7e16893fb93ca733d8e5b93a0e03674d965258: .github/workflows/odin-pr.yml, scripts/odin-pr/mutate-odin-pr.mjs
 - ещё 41: https://github.com/mpaykin1/meta6-lab/pulls
+- МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/44704421187 | Play all games
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/… (сокращено)
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
@@ -36,7 +37,7 @@ L4 — не готов: НЕТ в таблице FINISH
 #421 Почему стояла работа: ложный красный BEZ PATTERNOV, тупик ли | a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1
 ещё 81: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3200 коммитов | нет данных
+МГЛ: 3202 коммитов | нет данных
 МГ: 46 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:33, reference:31, rules:10, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
@@ -50,7 +51,7 @@ sumerki-i-pepel-2 — не запускалась | витрина: да
 sumerki-i-pepel-2-copy — не запускалась | витрина: нет
 twilight-isle-classic — не запускалась | витрина: да
 twilight-isles — не запускалась | витрина: да
-veil-terraces — прошла | витрина: да
+veil-terraces — не прошла | витрина: да
 wild-train-prologue — не прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 2026111801 | 18.11.2026 | BEZ PATTERNOV: у PR без игры каталога проверка по умолчанию мерила INK-шейдер и требовала улучшить его на 15% — красными стояли все PR ассетов и правил (#371, #409, #415 и др.), работа ChatGPT не сливалась | Claude: разбор «почему с… (сокращено)

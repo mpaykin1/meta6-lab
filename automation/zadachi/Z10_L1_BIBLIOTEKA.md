@@ -396,3 +396,6 @@ Generateddiff141файл(129add/2modified/10delete),15644958новыхбайто
 | added | `shared/library/wild-train-prologue.json` | 383210 | 188c7896fda38996a310f58e046e4007a57e4ec1 |
 
 </details>
+
+## Codex QA — старт read-only source/consumer #428,20.11.2026 13:44 UTC
+ПроверяюназначенныйHEADefaaea3d4aaab234ae7619291388b08f863b0219:актуальныйPRopen,кодsupportосвободил. Catalogmigrationуже7f2ff00переданClaude,егоFAILнеповторяю/необхожу. Одинограниченныйreadonlyшаг:опись24→реальныеисточники/generatedmanifestsиодинреальныйconsumersearchLibraryсbytehashизисходногоGitblobснимка. Источники/код/OSHIBKI/каталогне занимаюине меняю,приёмкуL1по28rootsнеставлю. Результат—конкретныенепокрытые/покрытыестроки,проверяемыйconsumerконтракт,непубликация.

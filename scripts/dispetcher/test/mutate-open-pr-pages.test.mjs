@@ -83,3 +83,35 @@ test('duplicate PR across page boundary fails closed', async () => {
  },{stopOnShortPage:true}), /повтор страницы/);
  assert.equal(calls,2);
 });
+
+async function exerciseLegacyDefault(fn) {
+  const seen=[];
+  const values=await fn(async endpoint=>{
+    const page=Number(new URL(endpoint,'https://api.github.com').searchParams.get('page'));
+    seen.push(page);
+    assert.ok(seen.length<=24, 'bounded legacy walk');
+    return page<=23 ? [pr(page)] : [];
+  });
+  assert.equal(values.size,23);
+  assert.deepEqual(seen,Array.from({length:24},(_,i)=>i+1));
+  let calls=0;
+  await assert.rejects(()=>fn(async()=>{
+    if(++calls===1)return [pr(1)];
+    throw Error('HTTP 429');
+  }),/429/);
+}
+
+test('legacy default remains complete; three opt-in leakage mutations are rejected',async()=>{
+  await exerciseLegacyDefault(listOpenPullRequests);
+  const source=await readFile(new URL('../build.mjs',import.meta.url),'utf8');
+  for(const [name,before,after] of [
+    ['default-opt-in-leak','stopOnShortPage=false','stopOnShortPage=true'],
+    ['ignore-explicit-mode','stopOnShortPage && batch.length<100','batch.length<100'],
+    ['forged-partial-on-api-error',"throw Error('GitHub API open PRs: нет данных: '+error.message);",'return result;']
+  ]){
+    assert.ok(source.includes(before),'mutation anchor: '+name);
+    const code=source.replace(before,after);
+    const mod=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
+    await assert.rejects(()=>exerciseLegacyDefault(mod.listOpenPullRequests),undefined,name);
+  }
+});

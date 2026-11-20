@@ -4,14 +4,14 @@ import {listOpenPullRequests} from '../build.mjs';
 
 const item=n=>({number:n,state:'open',head:{sha:'test-sha-'+n,ref:'lab/issue-'+n}});
 
-test('повтор №1110: короткая страница завершает обход, закрытые не обходятся',async()=>{
+test('повтор №1110: открытые PR выбираются до пустой страницы, закрытые не обходятся',async()=>{
  let calls=0;
  const open=await listOpenPullRequests(async endpoint=>{
   calls++;
   assert.match(endpoint,/state=open/);
   return calls===1 ? [item(301),item(303)] : [];
  });
- assert.equal(calls,1);
+ assert.equal(calls,2);
  assert.equal(open.size,2);
  assert.equal(open.has(302),false);
 });
@@ -28,7 +28,7 @@ test('мутация: если первая страница полна, тре�
   seen.push(endpoint);
   return seen.length===1 ? Array.from({length:100},(_,i)=>item(i+1)) : seen.length===2 ? [item(101)] : [];
  });
- assert.deepEqual(seen.map(x=>new URLSearchParams(x.split('?')[1]).get('page')),['1','2']);
+ assert.deepEqual(seen.map(x=>new URLSearchParams(x.split('?')[1]).get('page')),['1','2','3']);
  assert.equal(open.size,101);
 });
 

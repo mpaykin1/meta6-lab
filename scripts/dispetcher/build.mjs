@@ -31,7 +31,7 @@ export function indexOpened(opened) {
  const openNumbers=new Set(openPrs.keys());
  return {openNumbers,openPrs};
 }
-export async function listOpenPullRequests(request = api, {stopOnShortPage=true}={}) {
+export async function listOpenPullRequests(request = api, {stopOnShortPage=false}={}) {
  const result = new Map();
  for(let page=1;page<=1000;page++){
   let batch;

@@ -147,6 +147,16 @@ for(const branch of boltSegments){
   const mesh=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(points),12,.022,5,false),boltMaterial);
   mesh.userData.watercolorOutline=false;lightning.add(mesh);
 }
+// Wet-ground lightning bloom: a soft reflection rather than a hard glowing disk.
+const lightningReflectionMaterial=new T.MeshBasicMaterial({
+  map:fogTexture,color:'#8fbfce',transparent:true,opacity:0,
+  depthWrite:false,side:T.DoubleSide,blending:T.AdditiveBlending
+});
+const lightningReflection=new T.Mesh(new T.PlaneGeometry(8,5),lightningReflectionMaterial);
+lightningReflection.rotation.x=-Math.PI/2;
+lightningReflection.position.set(-3.5,.018,-2.8);
+lightningReflection.userData.watercolorOutline=false;
+world.add(lightningReflection);
 // Slow drifting particles, rain and drips on a separate atmospheric layer.
 const mistCount=130,mistPos=new Float32Array(mistCount*3),mist=new T.BufferGeometry();
 mist.setAttribute('position',new T.BufferAttribute(mistPos,3));
@@ -399,6 +409,9 @@ function animate(ms){
   const flash=stormGlow;
   stormLight.intensity=flash*48;
   boltMaterial.opacity=flash*.85;
+  // The wet floor blooms in sync with both lightning strikes.
+  lightningReflectionMaterial.opacity=flash*.42;
+  lightningReflection.scale.setScalar(1+flash*.18);
   // Storm light catches the drifting swamp sparks and their diffuse halos.
   // Restore the original glow between flashes without extra draw calls.
   wispMaterial.opacity=.65+flash*.30;

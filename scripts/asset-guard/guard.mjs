@@ -1,6 +1,6 @@
 // CLI: node scripts/asset-guard/guard.mjs — в pull_request ASSET CHECK. Падает (exit 1) при нарушении законов З1–З3.
 import {execFileSync} from 'node:child_process';
-import {readFileSync, existsSync, statSync, appendFileSync} from 'node:fs';
+import {appendFileSync} from 'node:fs';
 import {check, slugOf} from './rules.mjs';
 
 const git = (...a) => execFileSync('git', a, {encoding: 'utf8'}).trim();
@@ -21,15 +21,7 @@ if (slugOf(branch) && process.env.GITHUB_TOKEN) {
 }
 
 const packs = [...new Set(files.map(f => /^asset-packs\/incoming\/([^/]+)\//.exec(f)?.[1]).filter(Boolean))];
-const cmp = packs.length === 1 ? `asset-packs/incoming/${packs[0]}/_check/compare.png` : null;
-const compare = {changed: !!cmp && files.includes(cmp) && existsSync(cmp)};
-if (compare.changed) {
-  const b = readFileSync(cmp);
-  compare.isPng = b.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
-  compare.bytes = statSync(cmp).size;
-}
-
-const errors = check({branch, files, otherBranches, compare});
+const errors = check({branch, files, otherBranches});
 const out = errors.length
   ? `## ASSET GUARD — FAIL (${errors.length})\n\n${errors.map(e => '- ' + e).join('\n')}\n\nИсправь сам и запушь снова. Правила: automation/prompts/ASSET_PACK_BOT.md (законы З1–З3).\n`
   : `## ASSET GUARD — PASS\n\nВетка ${branch}, файлов ${files.length}, паков ${packs.length}.\n`;

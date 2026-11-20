@@ -62,6 +62,8 @@ jobs:
           node-version: '22'
       - name: Ensure guard rejects five mutations
         run: node scripts/visual/mutate-no-patterns.mjs
+      - name: Trap — unrelated PRs are not measured against the INK probe (OSHIBKI 2026111801)
+        run: node scripts/visual/verify-targets.mjs
       - name: Scan changed games in PR
         if: github.event_name == 'pull_request'
         env:

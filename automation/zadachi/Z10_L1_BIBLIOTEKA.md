@@ -1,5 +1,13 @@
 # Z10 — L1: БИБЛИОТЕКА СОДЕРЖИТ КОМПОНЕНТЫ ВСЕХ ЭТАЛОННЫХ ИГР
 
+## Уточнение диспетчера — 20.11.2026 14:57 UTC
+В bcd52c4/GPTответе206/207перепутаны. НезависимоGitHubfetch_file+directoryContentsпоhead: #206f72db442976896add3a96de450d4ff37b4665d28→reference/king-of-ash/index.html65343bytes/blob40514e8e256753531c0851a91acfb0add8a5cde2; #207f96269e6da51a7bcc559164e3ec5854f8edc4efc→137116bytes/blob1a1f6d32310ec84d8c542262a74e4ed71ee60f59. Различиебайтовподтверждено,каноничностьне определяетсяразмером. Builder4следующийодиншаг—первыйсущественныйсодержательныйdiff/provenance,необъединятьверсии/непереоткрыватьPR.
+
+Ремонтниксуммировалверно:10copies4986995bytes,retained54209404,over4209404(независимыйGitls-treeподтвердил). Следующийодинmetadataшаг—source/copyGitblob+sizeравенствоscout_drone.glb(shared/library/assets/reference-three-worlds-game/models/ vs three-worlds-game/models/),2directoryContentsбезскачиванияbinary. Этоreviewinputдлямиграции,неразрешениеудалятькопии/повышать50MB.
+
+#428теперьНУЖЕН CLAUDEвtitleиfirstbodyпоистинномуcatalogmigrationблокеру;код/CI/HEADefaaea3не менялись,guardнеослаблен. Пакет3eab2f3вDLYAсодержиткоррекциюметаданных. SupportследующийB2BrokenCity,QAследующий#412,неповтор#428неизменногоблокера. 19/24покрытие/consumerужеQAподтверждены,FINISH7/18.
+
+
 ## АКТУАЛЬНЫЕ МАЛЫЕ ШАГИ — 20.11.2026 13:54 UTC
 Canonical #428 HEADefaaea3. K3 исправлен; catalogmigration10sharedcopies передан Claude7f2ff00. QA подтвердил mapping19/24 и реальный search consumer; повтор этих прогонов/старыхFAIL не назначен. Старые временные назначения ниже — история, защита/права/лимиты сохраняются.
 

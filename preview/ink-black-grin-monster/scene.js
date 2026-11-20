@@ -360,7 +360,7 @@ function animate(ms){
   mist.attributes.position.needsUpdate=true;
   // Short double-flash every ~13 seconds; keep the monster readable.
   const stormPhase=elapsed%13.7;
-  const flash=stormPhase<.10?1:stormPhase>.18&&stormPhase<.27?.55:0;
+  const flash=stormPhase<.13?Math.sin(Math.PI*stormPhase/.13)**2:stormPhase>.19&&stormPhase<.34?.62*Math.sin(Math.PI*(stormPhase-.19)/.15)**2:0;
   stormLight.intensity=flash*48;
   boltMaterial.opacity=flash*.85;
   // Storm light catches the drifting swamp sparks and their diffuse halos.

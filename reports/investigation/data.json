@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-20T11:40:19.558Z",
+  "generated_at": "2026-11-20T20:19:18.794Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -64,16 +64,16 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/repair-dispatcher-check-pagination-1118",
-      "status": "зависла",
+      "status": "ошибка",
       "original_status": "взято",
       "pr": 405,
       "pr_state": "open",
-      "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44350063639/job/134962948904",
+      "check": "failure",
+      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44757328261/job/136360384670",
       "url": "https://github.com/mpaykin1/meta6-lab/pull/405",
       "taken_at": "2026-11-18 07:09 UTC",
       "last_commit_at": "—",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+      "remaining": "Исправить красные проверки: guard"
     },
     {
       "id": 4,
@@ -409,11 +409,11 @@
       "pr": 355,
       "pr_state": "open",
       "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44700266878/job/136166647689",
+      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44768873577/job/136400855241",
       "url": "https://github.com/mpaykin1/meta6-lab/pull/355",
       "taken_at": "2026-11-17T02:24:34.332Z",
       "last_commit_at": "2026-11-17 02:25",
-      "remaining": "Исправить красные проверки: storozha-quota, guard"
+      "remaining": "Исправить красные проверки: storozha-quota, storozha-quota, guard"
     },
     {
       "id": 24,
@@ -727,7 +727,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/ostrov-aptekarya-ii",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 297,
       "pr_state": "open",
@@ -2375,7 +2375,7 @@
       "title": "Готовность META GAMES — отчёт",
       "state": "open",
       "sha": null,
-      "updated_at": "2026-11-20T02:22:13Z"
+      "updated_at": "2026-11-20T11:45:06Z"
     },
     {
       "label": "automation-watchdog",

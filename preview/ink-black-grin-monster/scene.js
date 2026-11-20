@@ -157,6 +157,33 @@ const rnd=i=>{
   const f=Math.sin(i*127.1+39.4)*43758.5453;
   return f-Math.floor(f);
 };
+// Wind-driven rain streaks occupy the near and middle depth planes.
+// One shared line buffer keeps the storm light and silhouettes responsive.
+const rainCount=96;
+const rainPositions=new Float32Array(rainCount*6);
+const rainGeometry=new T.BufferGeometry();
+rainGeometry.setAttribute('position',new T.BufferAttribute(rainPositions,3));
+const rainMaterial=new T.LineBasicMaterial({
+  color:'#9ebbb9',transparent:true,opacity:.18,depthWrite:false,
+  blending:T.AdditiveBlending
+});
+const rainStreaks=new T.LineSegments(rainGeometry,rainMaterial);
+rainStreaks.frustumCulled=false;rainStreaks.userData.watercolorOutline=false;
+world.add(rainStreaks);
+function animateRain(time,lightningFlash){
+  for(let i=0;i<rainCount;i++){
+    const speed=2.8+rnd(i+802)*2.5;
+    const fall=(rnd(i+811)*7+time*speed)%7;
+    const x=(rnd(i+823)-.5)*13+Math.sin(time*.24)*.35;
+    const y=6.3-fall;
+    const z=(rnd(i+839)-.5)*9+1;
+    const n=i*6;
+    rainPositions[n]=x;rainPositions[n+1]=y;rainPositions[n+2]=z;
+    rainPositions[n+3]=x-.11;rainPositions[n+4]=y-.30;rainPositions[n+5]=z;
+  }
+  rainGeometry.attributes.position.needsUpdate=true;
+  rainMaterial.opacity=.13+lightningFlash*.37;
+}
 // Wandering will-o'-wisps: low-cost instanced glows that orbit the wet ground.
 const wispCount=18,wispGeometry=new T.SphereGeometry(.035,6,4);
 const wispMaterial=new T.MeshBasicMaterial({color:'#9dcfc0',transparent:true,opacity:.65,depthWrite:false});
@@ -352,6 +379,7 @@ function animate(ms){
   animateRipples(elapsed);
   const stormCycle=elapsed%13.7;
   const stormGlow=stormCycle<.13?Math.sin(Math.PI*stormCycle/.13)**2:stormCycle>.19&&stormCycle<.34?.62*Math.sin(Math.PI*(stormCycle-.19)/.15)**2:0;
+  animateRain(elapsed,stormGlow);
   fogs.forEach((fog,i)=>{
     const breath=Math.sin(elapsed*.31+i*.83);
     fog.position.x=-9+i*2.2+Math.sin(elapsed*.17+i)*.51;

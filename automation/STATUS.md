@@ -1,9 +1,9 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-20T10:55:46.010Z | МГЛ: ac458681faa157dbd425062f6059eb4152ad9eea | МГ: 5984fcd5b79ed2d03c648053334361db8deb44fb | https://github.com/mpaykin1/meta6-lab/actions/runs/44723208226
+UTC: 2026-11-20T11:05:54.450Z | МГЛ: 273bdae0296f339e5c6b62cf491e5dd67738027e | МГ: 5984fcd5b79ed2d03c648053334361db8deb44fb | https://github.com/mpaykin1/meta6-lab/actions/runs/44724570989
 ## ПРОВЕРИТЬ CLAUDE
 - PR #421 a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1: .github/workflows/bez-patternov.yml, automation/asset-check/test_htmlpack.py, scripts/storozha/verify-storozha.mjs, scripts/visual/mutate-no-patterns.mjs, scripts/visual/verify-targets.mjs
 - PR #413 fa7e16893fb93ca733d8e5b93a0e03674d965258: .github/workflows/odin-pr.yml, scripts/odin-pr/mutate-odin-pr.mjs
-- ещё 41: https://github.com/mpaykin1/meta6-lab/pulls
+- ещё 42: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open unknown | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/… (сокращено)
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
@@ -36,7 +36,7 @@ L4 — не готов: НЕТ в таблице FINISH
 #421 Почему стояла работа: ложный красный BEZ PATTERNOV, тупик ли | a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1
 ещё 81: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3226 коммитов | нет данных
+МГЛ: 3229 коммитов | нет данных
 МГ: 46 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:33, reference:31, rules:10, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

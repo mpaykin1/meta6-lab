@@ -79,7 +79,7 @@ def start_browser_server():
     thread.start()
     return srv
 
-def confirm_fusion_renderer(models, palette, destinations):
+def confirm_fusion_renderer(models, palette, destinations, export_to=None):
     from playwright.sync_api import sync_playwright
     browserdir=HERE/'browser'
     assetdir=browserdir/'assets'
@@ -97,7 +97,8 @@ def confirm_fusion_renderer(models, palette, destinations):
                     page=browser.new_page(viewport={'width':width,'height':height})
                     errors=[]
                     page.on('pageerror',lambda e:errors.append(str(e)))
-                    page.goto(f'http://127.0.0.1:{srv.server_port}/integration/browser/index.html',wait_until='load')
+                    extra='?fusion=1' if 'fusion' in models else ''
+                    page.goto(f'http://127.0.0.1:{srv.server_port}/integration/browser/index.html'+extra,wait_until='load')
                     page.wait_for_function("window.NEXUS_STATUS?.ok === true || window.NEXUS_STATUS?.error",timeout=25000)
                     status=page.evaluate("window.NEXUS_STATUS")
                     if not status.get('ok'):raise RuntimeError('Fusion browser failed '+str(status))
@@ -110,6 +111,11 @@ def confirm_fusion_renderer(models, palette, destinations):
                     assert status['webgl2'] is True
                     assert abs(status['canvasWidth']-width)<3, status
                     assert abs(status['canvasHeight']-height)<3, status
+                    if export_to is not None and width==390:
+                        import base64
+                        encoded=page.evaluate('window.NEXUS_EXPORT_GLTF()')
+                        export_to.write_bytes(base64.b64decode(encoded,validate=True))
+                        verify_glb(export_to)
                     page.close()
             finally:browser.close()
     finally:srv.shutdown();srv.server_close()
@@ -118,6 +124,9 @@ def confirm_fusion_renderer(models, palette, destinations):
         mark(source,'voxel-atmosphere-engine')
         if source!='casual-game-studio':mark(source,'casual-game-studio')
     mark('voxel-atmosphere-engine','meta-game-fusion')
+    if 'fusion' in models:
+        mark('meta-game-fusion','casual-game-studio')
+        mark('meta-game-fusion','voxel-atmosphere-engine')
 
 def main():
     sys.path.insert(0,str(UP/'voxel'))
@@ -209,13 +218,23 @@ def main():
         # For each model, real GLB reaches the exact Meta Game Fusion loader in Chrome.
         browserdir=HERE/'browser'
         (browserdir/'palette.json').write_text(json.dumps(palette))
-        confirm_fusion_renderer({'casual':casual_raw,'blender':blender,'hero':hero,'forge':forge_raw,'voxel':voxel_model},
-                                palette,['casual-game-studio','blender-model-animation-enhancer',
-                                         'hero-animator','game-style-forge','voxel-game-creator'])
+        scene_models={'casual':casual_raw,'blender':blender,'hero':hero,'forge':forge_raw,'voxel':voxel_model}
+        fusion_glb=w/'fusion-runtime-export.glb'
+        confirm_fusion_renderer(scene_models,palette,['casual-game-studio','blender-model-animation-enhancer',
+                                          'hero-animator','game-style-forge','voxel-game-creator'],export_to=fusion_glb)
+        # Actual Meta Game Fusion scene graph is GLB-exported from Chromium, then
+        # consumed by the original other four plugin adapters.
+        voxel_consumer(fusion_glb,'meta-game-fusion')
+        forge_consumer(fusion_glb,'meta-game-fusion','fusion')
+        optimize_blender(fusion_glb,w/'fusion-through-blender.glb')
+        mark('meta-game-fusion','blender-model-animation-enhancer')
+        prepare_hero(fusion_glb,w/'fusion-through-hero.glb')
+        mark('meta-game-fusion','hero-animator')
+        confirm_fusion_renderer({**scene_models,'fusion':fusion_glb},palette,[])
 
     total=42
     print('CONFIRMED_REAL_INTEGRATIONS',len(confirmed),'/',total,'PERCENT',round(100*len(confirmed)/total,2))
-    if len(confirmed)<28:raise SystemExit('Too few verified real integration routes')
+    if len(confirmed)<36:raise SystemExit('Too few verified real integration routes')
     out=ROOT/'integration'/'confirmed.json'
     out.write_text(json.dumps({'confirmed':sorted([{'from':a,'to':b} for a,b in confirmed],
         key=lambda r:(r['from'],r['to'])),'denominator':total,'test_definition':

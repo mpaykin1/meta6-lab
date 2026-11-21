@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-21T06:17:46.702Z",
+  "generated_at": "2026-11-21T13:03:15.622Z",
   "sha": {
-    "lab": "6404e632a897158568dbbe1a498f28302555a59e",
+    "lab": "9f4e6ef7adca17778ad1fc00acd10039ce4cd6a6",
     "mg": "5984fcd5b79ed2d03c648053334361db8deb44fb"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44874729371",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44906829389",
   "review": {
     "protected": [
       {
@@ -378,7 +378,13 @@
         ]
       }
     ],
-    "redLab": [],
+    "redLab": [
+      {
+        "workflow": "META BOT",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44884535173",
+        "step": "Play all games"
+      }
+    ],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -526,10 +532,10 @@
     }
   },
   "pr": {
-    "open": 21,
+    "open": 22,
     "conflicts": 5,
     "merged": 83,
-    "closed": 176,
+    "closed": 177,
     "mergedItems": [
       {
         "number": 422,
@@ -1318,7 +1324,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3362,
+      "count": 3368,
       "folders": "нет данных"
     },
     "mg": {
@@ -1384,7 +1390,7 @@
     },
     {
       "name": "veil-terraces",
-      "bot": "не прошла",
+      "bot": "прошла",
       "storefront": "да"
     },
     {

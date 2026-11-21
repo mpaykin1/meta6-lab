@@ -1,0 +1,75 @@
+name: Skill Nexus - game engine dependencies
+on:
+  pull_request:
+    paths:
+      - 'scripts/platform/skill-nexus/**'
+      - '.github/workflows/skill-nexus-engines.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  engine-deps-web:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install 25 JS engine libraries and 12 Python dependencies
+        run: bash scripts/platform/skill-nexus/install.sh core
+      - name: Run real inter-plugin model and WebGL integration
+        run: |
+          scripts/platform/skill-nexus/.venv/bin/python scripts/platform/skill-nexus/integration/verify.py
+      - name: Verify Chromium WebGL2
+        run: |
+          scripts/platform/skill-nexus/.venv/bin/python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True,args=['--no-sandbox','--enable-webgl','--enable-unsafe-swiftshader','--use-gl=angle','--use-angle=swiftshader'])
+              page=browser.new_page()
+              ok=page.evaluate("() => !!document.createElement('canvas').getContext('webgl2')")
+              browser.close()
+              print('WEBGL2_AVAILABLE',ok)
+              if not ok: raise SystemExit('Browser WebGL2 unavailable')
+          PY
+  engine-deps-assets:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PyMeshLab, rembg CPU and ScanCode
+        run: bash scripts/platform/skill-nexus/install.sh extended
+  engine-deps-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Blender 4.5, Assimp, Rust, wasm-pack, FFmpeg and headless GL
+        run: bash scripts/platform/skill-nexus/install.sh native
+      - name: Verify native engines
+        run: |
+          command -v assimp
+          command -v ffmpeg
+          command -v protoc
+          command -v cargo
+          command -v wasm-pack
+          "$BLENDER_BIN" --background --version | head -1

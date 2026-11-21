@@ -22,7 +22,7 @@ try{
   const ground=new THREE.Mesh(new THREE.PlaneGeometry(28,28),
     new THREE.MeshStandardMaterial({color:p.moss,roughness:1}));
   ground.rotation.x=-Math.PI/2;ground.position.y=-.12;scene.add(ground);
-  const urls=['casual','blender','hero','forge','voxel'];
+  const urls=['casual','blender','hero','forge','voxel','atmosphere-a','atmosphere-b'];
   if(new URLSearchParams(location.search).get('fusion')==='1')urls.push('fusion');
   const roots=[];
   const casualRoots=[], atmosphericRoots=[];

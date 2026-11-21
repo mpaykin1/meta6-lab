@@ -44,6 +44,25 @@ function expectedGames(root){
   }
   if(!canonical.length)fail('empty allowlist');
   for(const source_root of canonical)found.push({game:'reference-'+source_root.replaceAll('/','--'),source_root});
+  const inventoryFile=path.join(root,'docs/INVENTORY_LAB_GAMES_2026-11-10.md');
+  const seen=new Set(found.map(g=>g.source_root));
+  if(fs.existsSync(inventoryFile)){
+    for(const line of fs.readFileSync(inventoryFile,'utf8').split('\n')){
+      const cells=line.split('|').map(x=>x.trim());
+      if(!/^\d+$/.test(cells[1]||''))continue;
+      for(const token of (cells[3]||'').matchAll(/`([^`]+)`/g)){
+        if(!token[1].endsWith('/'))continue;
+        const source_root=token[1].slice(0,-1),full=safe(root,source_root);
+        if(seen.has(source_root)||!fs.existsSync(full))continue;
+        if(fs.lstatSync(full).isSymbolicLink())fail('symlink '+source_root);
+        if(!fs.statSync(full).isDirectory())continue;
+        const code=/\.(?:[cm]?js|ts|html?|css|glsl|vert|frag)$/i;
+        if(!independentWalk(full).some(file=>code.test(file)))continue;
+        found.push({game:'reference-'+source_root.replaceAll('/','--'),source_root});
+        seen.add(source_root);
+      }
+    }
+  }
   return found.sort((a,b)=>a.game.localeCompare(b.game,'en'));
 }
 const sourceCache=new Map();
@@ -60,6 +79,8 @@ function lineBuffer(file,lines){
 }
 const allIds=rows=>rows.map(x=>x.id).sort();
 export function verifyLibrary(root=ROOT,{live=true}={}){
+  // Each verification pass must observe current source bytes.
+  sourceCache.clear();
   const directory=path.join(root,'shared/library'),index=read(path.join(directory,'index.json'));
   const expected=expectedGames(root);
   if(!Array.isArray(index.games)||JSON.stringify(index.games.map(x=>x.game).sort())!==JSON.stringify(expected.map(x=>x.game).sort()))fail('missing, extra or hardcoded games in global index');

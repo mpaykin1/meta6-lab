@@ -38,6 +38,24 @@ export function discover(root=ROOT){
     if(!fs.existsSync(full)||!fs.statSync(full).isDirectory())throw Error('Missing allowlisted source: '+p);
     games.push({game:'reference-'+p.replaceAll('/','--'),source_root:p});
   }
+  // The owner's numbered inventory also authorizes uploaded reference directories.
+  const inventory=path.join(root,'docs/INVENTORY_LAB_GAMES_2026-11-10.md');
+  const roots=new Set(games.map(g=>g.source_root));
+  if(fs.existsSync(inventory)){
+    const rows=fs.readFileSync(inventory,'utf8');
+    for(const row of rows.matchAll(/^\|\s*\d+\s*\|[^|\n]*\|([^|\n]+)\|/gm)){
+      for(const item of row[1].matchAll(/`([^`]+\/)`/g)){
+        const p=item[1].slice(0,-1),full=path.resolve(root,p);
+        inside(root,full);
+        if(roots.has(p)||!fs.existsSync(full))continue;
+        if(fs.lstatSync(full).isSymbolicLink())throw Error('Symlink in source: '+full);
+        if(!fs.statSync(full).isDirectory())continue;
+        if(!walk(full).some(f=>CODE_EXT.has(path.extname(f).toLowerCase())))continue;
+        games.push({game:'reference-'+p.replaceAll('/','--'),source_root:p});
+        roots.add(p);
+      }
+    }
+  }
   const ids=new Set();
   for(const g of games){if(ids.has(g.game))throw Error('Duplicate game: '+g.game);ids.add(g.game);}
   return games.sort((a,b)=>a.game.localeCompare(b.game,'en'));

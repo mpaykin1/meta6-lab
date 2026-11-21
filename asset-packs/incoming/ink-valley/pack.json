@@ -1,0 +1,97 @@
+{
+  "format": "ink-pack/1",
+  "game": "ink-fallen-guardian",
+  "base": "reference/ink-fallen-guardian",
+  "version": "1.0.0",
+  "license": {
+    "type": "own",
+    "author": "META GAMES / ChatGPT; оригинальный процедурный код",
+    "commercial": true
+  },
+  "provenance": {
+    "tool": "ChatGPT, Three.js, reuse INK renderer from owner-approved reference",
+    "date": "2026-11-17",
+    "source": "reference/ink-fallen-guardian/"
+  },
+  "content_flags": {
+    "real_persons": [],
+    "brands": [],
+    "political": false
+  },
+  "assets": {
+    "brokenAqueduct": {
+      "label_ru": "Разрушенный акведук",
+      "role": "building",
+      "zone": "lakeside",
+      "footprint": 1.6
+    },
+    "reedBank": {
+      "label_ru": "Камышовая заводь",
+      "role": "plant",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "ashStag": {
+      "label_ru": "Пепельный олень",
+      "role": "creature",
+      "zone": "woodland",
+      "footprint": 0.68
+    },
+    "pilgrimageBoat": {
+      "label_ru": "Лодка паломника",
+      "role": "vehicle",
+      "zone": "lakeside",
+      "footprint": 0.85
+    },
+    "moonBell": {
+      "label_ru": "Колокол без часов",
+      "role": "interactive",
+      "zone": "guardian",
+      "footprint": 1,
+      "benefit": "restore_stamina — колокол возвращает силы"
+    },
+    "brokenWindmill": {
+      "label_ru": "Осенняя мельница",
+      "role": "building",
+      "zone": "meadow",
+      "footprint": 1.1
+    },
+    "myceliumBloom": {
+      "label_ru": "Грибной хоровод",
+      "role": "plant",
+      "zone": "woodland",
+      "footprint": 0
+    },
+    "drownedGates": {
+      "label_ru": "Затопленные врата",
+      "role": "landmark",
+      "zone": "lakeside",
+      "footprint": 1.3
+    },
+    "cogRelic": {
+      "label_ru": "Сердце шестерни",
+      "role": "pickup",
+      "zone": "guardian",
+      "footprint": 0,
+      "benefit": "reveal_far — видеть дальше сквозь туман"
+    },
+    "ravenCoven": {
+      "label_ru": "Вороны над озером",
+      "role": "creature",
+      "zone": "lakeside",
+      "footprint": 0
+    },
+    "paperMoths": {
+      "label_ru": "Бумажные мотыльки",
+      "role": "effect",
+      "zone": "woodland",
+      "footprint": 0
+    },
+    "marshBeacon": {
+      "label_ru": "Туманный маяк",
+      "role": "landmark",
+      "zone": "lakeside",
+      "footprint": 0.72
+    }
+  }
+}

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><meta name="theme-color" content="#283c39"><title>INK · Долина пробуждения</title>
+<link rel="icon" href="data:,">
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none;touch-action:none;background:linear-gradient(#797d87 0%,#baaaa2 32%,#e6c6ad 62%,#e9dbca 100%);font:13px system-ui}
+canvas{position:fixed;inset:0;display:block;width:100%;height:100%;touch-action:none}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#menu{position:fixed;z-index:10;top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));width:43px;height:43px;border:1px solid #d8d5ba77;border-radius:13px;background:#283d3caa;color:#e9dfce;font-size:23px;backdrop-filter:blur(8px)}
+#panel{position:fixed;z-index:11;right:12px;top:65px;bottom:12px;overflow:auto;width:min(285px,calc(100% - 24px));padding:17px;background:#243632eb;border:1px solid #d4cab26b;box-shadow:0 20px 65px #111a1bcc;border-radius:13px;color:#e6e0c9;backdrop-filter:blur(15px);display:none}
+#panel.show{display:block}#panel h1{font:600 13px Georgia,serif;letter-spacing:.2em;margin:0 0 5px}#panel p{font:11px/1.55 system-ui;opacity:.65;margin:0 0 15px}
+#items{display:grid;gap:5px}#items button{color:#f5ebdc;text-align:left;background:#53675b30;border:1px solid #d4cab224;border-radius:6px;padding:9px 10px;line-height:1.3}
+#items button.sel{border-color:#ecc68bbd;background:#9b8c6555}
+#joy{position:fixed;left:max(12px,env(safe-area-inset-left));bottom:max(15px,env(safe-area-inset-bottom));width:126px;height:126px;border:1px solid #f8eeda38;border-radius:50%;background:#2d403543;display:none;touch-action:none;z-index:6}
+#nub{position:absolute;width:53px;height:53px;border-radius:50%;left:36px;top:36px;background:#efe1be74;border:1px solid #efe1beab;box-shadow:0 0 14px #182d2833}
+@media(pointer:coarse){#joy{display:block}}
+</style>
+<script type="importmap">{"imports":{"three":"../../../reference/ink-fallen-guardian/three.module.js"}}</script>
+</head><body><button id="menu" aria-label="Открыть меню">☰</button><aside id="panel"><h1>INK · ДОЛИНА ПРОБУЖДЕНИЯ</h1><p>Двенадцать живых ассетов · акварельный мир. Выбери объект. Перемещение: WASD / джойстик, вращение камеры: пальцем.</p><div id="items"></div></aside><div id="joy"><div id="nub"></div></div>
+<script type="module">
+import * as T from 'three';
+import {makers} from './makers.js';
+import {createLivingWatercolor3D,createWatercolorStyle} from '../../../reference/ink-fallen-guardian/shared/living-watercolor-3d.js';
+const R=(s,n)=>{let v=Math.sin(s*137.17+n*827.37)*43758.5453;return v-Math.floor(v)};
+const scene=new T.Scene();scene.fog=new T.FogExp2('#c6c2b1',.019);
+const camera=new T.PerspectiveCamera(44,innerWidth/innerHeight,.1,190);
+const renderer=new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
+renderer.setClearColor(0x000000,0);renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(1.4,devicePixelRatio||1));
+renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
+document.body.prepend(renderer.domElement);
+scene.add(new T.HemisphereLight('#ffe8c7','#4c655e',2.7));
+const sun=new T.DirectionalLight('#ffd5a4',2.15);sun.position.set(-13,24,-23);scene.add(sun);
+const edge=new T.DirectionalLight('#879f94',.5);edge.position.set(8,9,14);scene.add(edge);
+const watercolor=createLivingWatercolor3D({THREE:T,renderer,scene,camera,style:createWatercolorStyle({
+ seed:17017,inkColor:'#272c30',paperColor:'#e9ddc8',washColor:'#7f9184',washOpacity:.67,
+ edgeWidth:.016,edgeJitter:.19,granulation:.34,bleed:.2,motion:.12,
+ pigmentPooling:.25,paperGap:.13,paintedLight:.48})});
+const world=new T.Group();scene.add(world);
+const stoneMat=new T.MeshStandardMaterial({color:'#697e72',roughness:1,flatShading:true});
+const darkMat=new T.MeshStandardMaterial({color:'#465a53',roughness:1,flatShading:true});
+const paperMat=new T.MeshStandardMaterial({color:'#a7ad92',roughness:1,flatShading:true});
+const groundGeo=new T.PlaneGeometry(88,88,64,64);groundGeo.rotateX(-Math.PI/2);
+function noise(x,z){const ix=Math.floor(x),iz=Math.floor(z),fx=x-ix,fz=z-iz;const sx=fx*fx*(3-2*fx),sz=fz*fz*(3-2*fz);
+ const h=(i,j)=>{let t=Math.sin(i*127.1+j*311.7+27)*43758.5453;return t-Math.floor(t)};
+ return (h(ix,iz)*(1-sx)+h(ix+1,iz)*sx)*(1-sz)+(h(ix,iz+1)*(1-sx)+h(ix+1,iz+1)*sx)*sz}
+const gp=groundGeo.attributes.position;
+for(let i=0;i<gp.count;i++){const x=gp.getX(i),z=gp.getZ(i),d=Math.hypot(x,z);let v=(noise(x*.17,z*.17)-.5)*1.25+(noise(x*.52,z*.52)-.5)*.18;
+ if(x>-7&&x<9&&z>-.8&&z<9){v=Math.min(v,-.42-.12*noise(x,z))}
+ v+=Math.max(0,d-17)*.055;gp.setY(i,v-.11)}
+gp.needsUpdate=true;groundGeo.computeVertexNormals();
+const ground=new T.Mesh(groundGeo,paperMat);ground.receiveShadow=true;world.add(ground);
+const lake=new T.Mesh(new T.CircleGeometry(10,72),new T.MeshStandardMaterial({color:'#6d908f',roughness:.32,metalness:.02,transparent:true,opacity:.88,side:T.DoubleSide,depthWrite:false}));
+lake.rotation.x=-Math.PI/2;lake.scale.set(1.26,.72,1);lake.position.set(1.4,-.22,5.1);world.add(lake);
+for(let i=0;i<110;i++){const x=(R(49,i)-.5)*76,z=(R(49,i+1000)-.5)*76;
+ if(Math.hypot(x-1.4,(z-5.1)*1.4)<12||Math.hypot(x,z)<8)continue;
+ const s=.2+R(49,i+200)*1.15;const rock=new T.Mesh(new T.DodecahedronGeometry(s*.36,0),i%3?stoneMat:darkMat);
+ rock.scale.set(1,.28+R(49,i+50)*.6,.8);rock.rotation.y=R(49,i+70)*6.283;rock.position.set(x,noise(x*.17,z*.17)*.4-.15,z);world.add(rock)}
+// Wide irregular layered horizon silhouettes: no tiled textures or repeated patterns.
+for(let layer=0;layer<4;layer++){
+ const shape=new T.Shape();const z=-38-layer*13,dist=65;shape.moveTo(-dist,-5);
+ for(let i=0;i<=38;i++){const x=-dist+i*dist*2/38;
+   const h=.5+noise(x*.045+layer*3,layer)*6+Math.max(0,5-Math.abs(x)*.04);shape.lineTo(x,h)}
+ shape.lineTo(dist,-6);shape.closePath();
+ const ridge=new T.Mesh(new T.ShapeGeometry(shape),new T.MeshBasicMaterial({color:['#7d887e','#89948a','#a5a99c','#b7b2a7'][layer],transparent:true,opacity:.27-layer*.04,depthWrite:false,side:T.DoubleSide}));
+ ridge.position.set(0,-2.5,z);world.add(ridge)}
+const details=[
+ ['brokenAqueduct',-9.0,-5.8, .25],['reedBank',-5.9,1.4,-.45],
+ ['ashStag',-1.9,-3.7,0],['pilgrimageBoat',2.9,5.0,0],
+ ['moonBell',4.3,-5.6,-.13],['brokenWindmill',9.3,-8.9,-.25],
+ ['myceliumBloom',-4.6,5.9,-.44],['drownedGates',9.5,3.3,-.15],
+ ['cogRelic',.7,1.2,-.3],['ravenCoven',-5.4,-7.9,.8],
+ ['paperMoths',-1.5,-1.1,.8],['marshBeacon',-9.3,7,-.25]
+];
+// Small creatures and relics read as specks at game distance: scaled up so they stay visible in fog.
+const SMALL={myceliumBloom:1.8,cogRelic:2.2,paperMoths:2.4};
+const objects=[],first=new Map();
+for(const [id,x,z,y] of details){const m=makers[id];if(!m)continue;
+ const o=m(17);o.position.set(x,y,z);o.scale.multiplyScalar(SMALL[id]||1);if(id==='pilgrimageBoat')o.rotation.y=.5;
+ world.add(o);watercolor.apply(o,{seed:'ink-valley:'+id});objects.push({id,o,x,z});first.set(id,o)}
+// Brush-lit fog: a translucent gradient texture on planes, drifting and recycling without CPU pixel loops.
+const texCanvas=document.createElement('canvas');texCanvas.width=128;texCanvas.height=128;
+const ctx=texCanvas.getContext('2d'),gr=ctx.createRadialGradient(64,64,4,64,64,63);
+gr.addColorStop(0,'rgba(234,222,208,.44)');gr.addColorStop(.55,'rgba(218,208,193,.18)');gr.addColorStop(1,'rgba(218,208,193,0)');
+ctx.fillStyle=gr;ctx.fillRect(0,0,128,128);
+const mistTexture=new T.CanvasTexture(texCanvas),mist=[];
+for(let i=0;i<22;i++){const m=new T.Mesh(new T.PlaneGeometry(8+R(i,7)*9,2.5+R(i,11)*2.5),new T.MeshBasicMaterial({
+ map:mistTexture,transparent:true,opacity:.14+R(i,8)*.20,depthWrite:false,side:T.DoubleSide,blending:T.NormalBlending}));
+ m.position.set((R(i,1)-.5)*25,.25+R(i,2)*1.8,(R(i,3)-.5)*23);scene.add(m);mist.push([m,i*.97]);}
+const drops=[];const rainGeo=new T.BufferGeometry();const dropCount=430;const rainPos=new Float32Array(dropCount*6);
+for(let i=0;i<dropCount;i++){const x=(R(i,14)-.5)*36,y=R(i,15)*17,z=(R(i,16)-.5)*32;rainPos.set([x,y,z,x-.05,y-.21,z],i*6);drops.push([x,y,z,2.8+R(i,17)*4]);}
+rainGeo.setAttribute('position',new T.BufferAttribute(rainPos,3));
+const rain=new T.LineSegments(rainGeo,new T.LineBasicMaterial({color:'#cad5cc',transparent:true,opacity:.19,depthWrite:false}));scene.add(rain);
+let heading=.6,orbit=0,zoom=1,free=true,focus=new T.Vector3(-.4,.9,1),target=new T.Vector3(-.4,.9,1),active='';
+const keys={},joy={x:0,y:0};const menu=document.getElementById('menu'),panel=document.getElementById('panel'),items=document.getElementById('items');
+const names={brokenAqueduct:'Разрушенный акведук',reedBank:'Камышовая заводь',ashStag:'Пепельный олень',pilgrimageBoat:'Лодка паломника',
+ moonBell:'Колокол без часов',brokenWindmill:'Осенняя мельница',myceliumBloom:'Грибной хоровод',drownedGates:'Затопленные врата',
+ cogRelic:'Сердце шестерни',ravenCoven:'Вороны над озером',paperMoths:'Бумажные мотыльки',marshBeacon:'Туманный маяк'};
+function select(id){const found=objects.find(o=>o.id===id);if(!found)return;active=id;target.set(found.x,.9,found.z);free=false;
+ [...items.children].forEach(b=>b.classList.toggle('sel',b.dataset.id===id));panel.classList.remove('show')}
+for(const o of objects){const b=document.createElement('button');b.textContent=names[o.id];b.dataset.id=o.id;b.onclick=()=>select(o.id);items.appendChild(b)}
+menu.onclick=()=>panel.classList.toggle('show');
+addEventListener('message',e=>{if(e.origin===location.origin&&typeof e.data?.selectAsset==='string')select(e.data.selectAsset)});
+addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true;if('wasdarrowup arrowdown arrowleft arrowright'.includes(e.key.toLowerCase())){free=true;panel.classList.remove('show')}});
+addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);
+const stick=document.getElementById('joy'),nub=document.getElementById('nub');let touch=null;
+const stickMove=e=>{const r=stick.getBoundingClientRect(),dx=e.clientX-r.left-r.width/2,dy=e.clientY-r.top-r.height/2;
+ const d=Math.max(1,Math.hypot(dx,dy)),k=Math.min(1,d/43);joy.x=dx/d*k;joy.y=dy/d*k;nub.style.transform='translate('+(joy.x*38)+'px,'+(joy.y*38)+'px)';free=true};
+stick.addEventListener('pointerdown',e=>{touch=e.pointerId;stick.setPointerCapture(e.pointerId);stickMove(e)});
+stick.addEventListener('pointermove',e=>{if(e.pointerId===touch)stickMove(e)});
+const stickStop=()=>{touch=null;joy.x=joy.y=0;nub.style.transform=''};stick.addEventListener('pointerup',stickStop);stick.addEventListener('pointercancel',stickStop);
+let pointer=null;
+renderer.domElement.addEventListener('pointerdown',e=>{pointer={id:e.pointerId,x:e.clientX,y:e.clientY};renderer.domElement.setPointerCapture(e.pointerId)});
+renderer.domElement.addEventListener('pointermove',e=>{if(pointer?.id!==e.pointerId)return;orbit+=(e.clientX-pointer.x)*.005;heading=Math.max(.15,Math.min(1.2,heading+(e.clientY-pointer.y)*.003));
+ pointer.x=e.clientX;pointer.y=e.clientY});
+renderer.domElement.addEventListener('pointerup',()=>pointer=null);renderer.domElement.addEventListener('pointercancel',()=>pointer=null);
+addEventListener('wheel',e=>{zoom=Math.max(.55,Math.min(1.65,zoom+e.deltaY*.0007))},{passive:true});
+let near=0,frozen=false;const clock=new T.Clock();
+function placeCamera(dt,snap){
+ if(snap){focus.copy(target);near=free?0:1}else{focus.lerp(target,1-Math.exp(-dt*3.1));near+=((free?0:1)-near)*(1-Math.exp(-dt*2.2))}
+ const dist=(16.4-8.2*near)*zoom,want=new T.Vector3(focus.x+dist*Math.sin(.78+orbit),5.5+dist*Math.sin(heading),focus.z+dist*Math.cos(.78+orbit));
+ if(snap)camera.position.copy(want);else camera.position.lerp(want,1-Math.exp(-dt*2.6));camera.lookAt(focus)}let last=performance.now(),fpsSlow=0,quality=1,boost=0,shimmer=0;
+function update(){
+ requestAnimationFrame(update);if(frozen)return;const now=performance.now(),dt=Math.min(.05,clock.getDelta()),t=now*.001;
+ const moveX=(keys.d||keys.arrowright?1:0)-(keys.a||keys.arrowleft?1:0)+joy.x;
+ const moveZ=(keys.s||keys.arrowdown?1:0)-(keys.w||keys.arrowup?1:0)+joy.y;
+ if(free){const sin=Math.sin(orbit),cos=Math.cos(orbit),speed=dt*3.9;
+  target.x+=(moveX*cos-moveZ*sin)*speed;target.z+=(moveX*sin+moveZ*cos)*speed;
+  target.x=Math.max(-18,Math.min(18,target.x));target.z=Math.max(-17,Math.min(17,target.z));}
+ placeCamera(dt,false);
+ for(const {id,o,x,z} of objects){o.userData.tick?.(t,dt);
+ if(id==='moonBell'&&Math.hypot(focus.x-x,focus.z-z)<2.5){boost=3.0;shimmer=1}
+ if(id==='cogRelic'&&Math.hypot(focus.x-x,focus.z-z)<1.5){boost=3;shimmer=1;}
+ }
+ boost=Math.max(0,boost-dt);shimmer=Math.max(0,shimmer-dt*.4);
+ scene.fog.density=.019-(boost>0?.009:0);edge.intensity=.5+shimmer*.55;
+ for(const [m,p] of mist){m.position.x+=Math.sin(t*.17+p)*dt*.095;m.position.z+=dt*.055;m.rotation.y=Math.atan2(camera.position.x-m.position.x,camera.position.z-m.position.z)}
+ const a=rain.geometry.attributes.position.array;
+ for(let i=0;i<dropCount;i++){const p=drops[i];p[1]-=dt*p[3];p[0]+=dt*.25;if(p[1]<-1){p[1]=10+R(i,Math.floor(t))*7;p[0]-=8.5}
+  a[i*6]=p[0];a[i*6+1]=p[1];a[i*6+2]=p[2];a[i*6+3]=p[0]-.05;a[i*6+4]=p[1]-.22;a[i*6+5]=p[2]}
+ rain.geometry.attributes.position.needsUpdate=true;
+ rain.visible=quality>=.8;
+ watercolor.tick(now);renderer.render(scene,camera);watercolor.present(now);
+ if(now-last>2200){const fps=1/Math.max(dt,.01);if(fps<30){fpsSlow++;if(fpsSlow>=2){quality=.67;renderer.setPixelRatio(Math.min(1,devicePixelRatio||1))}}else{fpsSlow=0}last=now}
+}
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(quality===1?1.4:1,devicePixelRatio||1))});
+window.__INK_PACK__={assets:objects.map(o=>o.id),hasScene:true};
+window.__ISOLATE__=(id,on)=>{const o=first.get(id);if(o)o.visible=!!on};
+// Probe for the comparison-sheet bot: select = camera to asset, freeze/draw = one still frame without time drift.
+window.__PACK_PROBE__={assets:Object.fromEntries(objects.map(o=>[o.id,{name:names[o.id]}])),
+ select:id=>select(id),setHidden:(id,h)=>window.__ISOLATE__(id,!h),
+ freeze:()=>{frozen=true},resume:()=>{frozen=false;clock.getDelta()},
+ draw:()=>{placeCamera(0,true);rain.visible=false;watercolor.tick(1000);renderer.render(scene,camera);watercolor.present(1000)}};
+update();
+</script></body></html>

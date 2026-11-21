@@ -1,5 +1,8 @@
 # Z04 — B2: ГЕРОЙ ДВИГАЕТСЯ ОТ ВВОДА
 
+## Codex support — старт Broken City, 21.11.2026 05:59 UTC
+По назначению принимаю read-only оригинальный browserprobe games/broken-city на #355 HEADbc9fabb509f698ea819f089e6945dc9bd33bf7c8. HEAD неизменен/open/draft, builder2idle и назначен толькоsourceconsumerчтению; QA работаетдругой#412. Критерий: НЕИЗМЕНЁННЫЙ verify-motion.mjs, desktop1280×720/mobile390×844, реальныйввод/мировыекоординаты, screenshots/точныйFAIL. Snapshotwork/b2-exact и готовыйChromium1194, никакихgame/verifier/guardправокрадиPASS. Veilнеповторяю. FINISH7/18.
+
 ## Текущее одно назначение — 21.11.2026 05:54 UTC
 Строитель2: расследование malformedalive завершено как КАНДИДАТ: контрактboolean, но обязательныйINVALID не установлен; не объявлятьзащищённымремонтом/принятымB4. Следующий один read-only consumerinput: games/broken-city/index.html на#355bc9fabb, точные __META_BOT__/alive/смерть/restartстроки и snapshotформа вэтойкарточке/UNKNOWN. Codexsupport следующийреальныйBrokenCityprobe, game/verifierбайтыreadonly, Veilнеповторять. Прежнийsupportзапуск былпрерванчеловеческимотчётом, BrokenCityрезультатанет.
 

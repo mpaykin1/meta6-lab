@@ -5,6 +5,20 @@ cd "$ROOT"
 MODE="$1"
 node --version
 python3 --version
+if [ "$MODE" = extended ]; then
+  sudo apt-get update -qq
+  sudo apt-get install -y --no-install-recommends libgl1 libopengl0 libglu1-mesa
+  python3 -m venv .venv-extended
+  . .venv-extended/bin/activate
+  python -m pip install --disable-pip-version-check --upgrade pip
+  python -m pip install --disable-pip-version-check "pymeshlab==2025.7.post1" "rembg[cpu]==2.0.87" "scancode-toolkit==32.5.0"
+  python - <<'PY'
+import pymeshlab, rembg
+print('ASSET_PYTHON_DEPENDENCIES_OK')
+PY
+  scancode --version
+  exit 0
+fi
 if [ "$MODE" = native ]; then
   sudo apt-get update -qq
   sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \

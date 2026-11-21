@@ -1,5 +1,10 @@
 # Z04 — B2: ГЕРОЙ ДВИГАЕТСЯ ОТ ВВОДА
 
+## Текущее одно назначение — 21.11.2026 05:54 UTC
+Строитель2: расследование malformedalive завершено как КАНДИДАТ: контрактboolean, но обязательныйINVALID не установлен; не объявлятьзащищённымремонтом/принятымB4. Следующий один read-only consumerinput: games/broken-city/index.html на#355bc9fabb, точные __META_BOT__/alive/смерть/restartстроки и snapshotформа вэтойкарточке/UNKNOWN. Codexsupport следующийреальныйBrokenCityprobe, game/verifierбайтыreadonly, Veilнеповторять. Прежнийsupportзапуск былпрерванчеловеческимотчётом, BrokenCityрезультатанет.
+
+Предыдущие временные назначения ниже — история. Сохраняются все обязательные правила, права, тесты и гейты.
+
 ## СЛЕДУЮЩИЙ B2 ПАКЕТ —20.11.2026 14:57 UTC
 Veilв#355bc9fabbреальноPASSdesktop/mobile14:04,повторне назначен. Codexsupportследующаяоднаиграgames/broken-cityсНЕИЗМЕНЁННЫМverify-motion.mjsнаwork/b2-exact/Chromium1194,обаviewport/реальныйввод/screenshots;приFAILпервыйточныйstate/console/result,неподгонятьgame/verifierрадиPASS. Всеsourceбайтыдолжныоставатьсяbc9fabb,свежиеHEAD/занятость/startобязательны. Этооднаигра,неполныйB2/нефизическийтелефон.
 

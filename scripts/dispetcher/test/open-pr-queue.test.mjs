@@ -49,3 +49,10 @@ test('мутация: ошибку API на второй странице нел
  }),/429/);
  assert.equal(calls,2);
 });
+
+test('явное отключение оптимизации требует пустой страницы',async()=>{
+ let calls=0;
+ const open=await listOpenPullRequests(async()=>++calls===1?[item(301)]:[],{stopOnShortPage:false});
+ assert.equal(calls,2);
+ assert.deepEqual([...open.keys()],[301]);
+});

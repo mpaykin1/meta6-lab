@@ -1,5 +1,8 @@
 # Z20 — ПРОВЕРКА И УЛУЧШЕНИЕ ВСЕХ БОТОВ
 
+## Codex QA — старт merge #412,21.11.2026 06:04 UTC
+Принимаю назначенный существующий #412 HEAD828cfebf4469876b050235b35fc577c943dcf896, новыхкоммитоввветкенет; builder1idle/read-only2docs, supportзанималсяB2другойветки. Тольконастоящийmergeсвежегоmain ссохранениемSS1–SS13/15+3тестов/всехстарыхстрок. Критерий: трёхстороннийdiff/блобы, локальныерелевантныетесты,новыйHEAD/CI. SPEC/OSHIBKIдокконфликтырешаютсяминимально,значительныйкодовойконфликтпередаётся. PRвmainнесливаю,собственныйAPPROVEDнезависимымнеставлю.
+
 ## Codex QA — #412: ложный SS11 PASS исправлен, 20.11.2026 15:44 UTC
 В существующей ветке lab/asset-bot-gothic-facades сохранён [828cfeb](https://github.com/mpaykin1/meta6-lab/commit/828cfebf4469876b050235b35fc577c943dcf896), parent7452045f9916a8774c15abf8c7d94a745d3c5aef, CAS/forcefalse. Исходный check_pack принимал корректную PNG fixture с удалённым gothic-city.js: HARD=[]; все15старыхтестовPASS. SS11 теперь требует существующий файл рендера. Добавлены3регрессии: missing script, comment-only deception при отсутствующем файле, directory вместо файла. RED исходного checker:3FAIL; GREEN исправленного:18/18. Исходные15тестов сохранены, compare ровно3пути: spritestack.py+4/-1, test_spritestack.py+23/-0, OSHIBKI+1/-0. OSHIBKI2026112014, полный scripts/lab/selftest-spritestack.mjs в последней колонке, ПРОВЕРКА ИЗМЕНЕНА в commit/PR.
 Это реальные локальные Python3.12/Pillow13/NumPy2.5.5 PNG-тесты, не браузерная/игроваяприёмка. Исходныеbytes взяты Gitshow точногоSHA; зависимости установлены толькоwork/qa412-deps. В sandbox Python не виделPIL, одобренный запуск с темиже локальными зависимостями успешно выполнен. РендерSS13 построковыммаркерам не объявляется проверенным/исправленным.

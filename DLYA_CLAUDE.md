@@ -102,6 +102,7 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #363 | lab/z01-3d-master-workflow-20261117 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
 | #364 | lab/assets-vorona-v-tumane-20261117 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
 | #357 | lab/rules-playgama-catalog-direct-20261117 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-20 |
+| #415 | lab/assets-ink-video-nookvale | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-21 |
 <!-- STOROZHA:STALE:END -->
 | #190 | lab/bot-batch-1 | НУЖЕН CLAUDE: защищённый `.github/workflows/bot-adapters-b2.yml`; конфликт с main (`OSHIBKI.md`); проверка B2 охватывает 2/3 игр, `archer-in-the-fog` не подтверждён. Самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/190 | 2026-11-11 |
 | #54 | lab/render-visibility-optimization | НУЖЕН CLAUDE: PR изменяет защищённый `.github/workflows/lab-render-performance.yml` и существующий эталон `games/veil-terraces/index.html`; конфликт с main (`docs/progress/PR54_59_60.md`), самостоятельное слияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/54 | 2026-11-12 |

@@ -1,17 +1,33 @@
-# Авторские игровые скилы — 21.11.2026
+# Авторские игровые скилы
 
-[Каталог всех 9 скилов (HTML)](index.html).
+[Открыть интерактивный каталог](index.html).
 
-- [Skill Nexus v0.8.0](skill-synergy-manager/)
-- [Living Image Animator v0.4.0](living-image-animator/)
-- [Hero Animator v0.17.1](hero-animator/)
-- [Meta Game Fusion v1.3.0](meta-game-fusion/)
-- [Blender Model Animation Enhancer v1.9.0](blender-model-animation-enhancer/)
-- [Game Style Forge v1.10.0](game-style-forge/)
-- [Voxel Atmosphere Engine v0.10.0](voxel-atmosphere-engine/)
-- [Voxel Game Creator v0.19.0](voxel-game-creator/)
-- [Casual Game Studio v1.2.1](casual-game-studio/)
+Снимки исходников **9 авторских скилов** для Claude Code и GitHub:
 
-Сохранены **текстовые исходники, документация, конфигурации и лицензии** девяти авторских ChatGPT-плагинов. Бинарные ресурсы (PNG, GLB, VOX, VRM, WebP) и компилированные кэши .pyc не включены. Для полноценного запуска графических демо нужны оригинальные бинарные ресурсы. Каталог предназначен для просмотра и анализа в GitHub или Claude Code; он **не гарантирует**, что игры запустятся без дополнительных ассетов и зависимостей.
+- [Skill Nexus](skill-synergy-manager/) v0.8.0
+- [Living Image Animator](living-image-animator/) v0.4.0
+- [Hero Animator](hero-animator/) v0.17.1
+- [Meta Game Fusion](meta-game-fusion/) v1.3.0
+- [Blender Model Animation Enhancer](blender-model-animation-enhancer/) v1.9.0
+- [Game Style Forge](game-style-forge/) v1.10.0
+- [Voxel Atmosphere Engine](voxel-atmosphere-engine/) v0.10.0
+- [Voxel Game Creator](voxel-game-creator/) v0.19.0
+- [Casual Game Studio](casual-game-studio/) v1.2.1
 
-Снимок отдельных плагинов не обновляется автоматически при изменении их версий в ChatGPT.
+**Исходники и инструкции доступны.** Оригинальные бинарные ресурсы **160 файлов, 8 667 225 байт** ещё не импортированы в эту ветку. Не подменять их сгенерированными заменами.
+
+## Восстановление оригинальных ассетов
+
+1. Экспортировать исходные TAR.GZ-архивы указанных трёх личных плагинов: `voxel-atmosphere-engine`, `casual-game-studio`, `voxel-game-creator`.
+2. Запустить из корня репозитория:
+
+```bash
+python3 author-skills/import_original_assets.py \
+  --archive voxel-atmosphere-engine=/path/to/voxel-atmosphere-engine.tar.gz \
+  --archive casual-game-studio=/path/to/casual-game-studio.tar.gz \
+  --archive voxel-game-creator=/path/to/voxel-game-creator.tar.gz
+```
+
+3. Закоммитить восстановленные бинарные файлы в эту же ветку PR №430.
+
+Импорт сверяет точные пути, число файлов, размеры и сигнатуры оригиналов по [манифесту](original-assets.manifest.json). Команда `python3 author-skills/import_original_assets.py --check` покажет отсутствующие исходные ассеты. Исходный код доступен для проверки до переноса изображений и моделей; полная графическая проверка потребует бинарных файлов.

@@ -1,0 +1,669 @@
+{
+  "snapshot": "2026-11-21",
+  "purpose": "Original binary assets required to complete source-only GitHub snapshots",
+  "skills": {
+    "game-style-forge": {
+      "version": "1.10.0",
+      "assets": []
+    },
+    "voxel-atmosphere-engine": {
+      "version": "0.10.0",
+      "assets": [
+        {
+          "path": "examples/playable/assets/moon_crystals.glb",
+          "size_bytes": 224856
+        },
+        {
+          "path": "examples/playable/assets/moon_crystals_animated.glb",
+          "size_bytes": 226796
+        },
+        {
+          "path": "examples/playable/assets/moon_crystals_pixelorama.glb",
+          "size_bytes": 224856
+        },
+        {
+          "path": "examples/playable/assets/moon_crystals_pixelorama.vox",
+          "size_bytes": 14180
+        },
+        {
+          "path": "examples/playable/assets/moon_crystals_pixelorama_animated.glb",
+          "size_bytes": 226796
+        },
+        {
+          "path": "examples/playable/assets/moon_gate.glb",
+          "size_bytes": 421804
+        },
+        {
+          "path": "examples/playable/assets/moon_gate_animated.glb",
+          "size_bytes": 423744
+        },
+        {
+          "path": "examples/playable/assets/moon_gate_pixelorama.glb",
+          "size_bytes": 421804
+        },
+        {
+          "path": "examples/playable/assets/moon_gate_pixelorama.vox",
+          "size_bytes": 25640
+        },
+        {
+          "path": "examples/playable/assets/moon_gate_pixelorama_animated.glb",
+          "size_bytes": 423744
+        },
+        {
+          "path": "examples/playable/assets/night_forest.glb",
+          "size_bytes": 237104
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/ember/00.png",
+          "size_bytes": 272
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/ember/01.png",
+          "size_bytes": 270
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/ember/02.png",
+          "size_bytes": 252
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/ember/03.png",
+          "size_bytes": 271
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/ember/04.png",
+          "size_bytes": 290
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/ember/05.png",
+          "size_bytes": 279
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/ember/06.png",
+          "size_bytes": 284
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/ember/07.png",
+          "size_bytes": 286
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/lantern/00.png",
+          "size_bytes": 258
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/lantern/01.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/lantern/02.png",
+          "size_bytes": 264
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/lantern/03.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/lantern/04.png",
+          "size_bytes": 265
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/lantern/05.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/lantern/06.png",
+          "size_bytes": 264
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/lantern/07.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/rune/00.png",
+          "size_bytes": 376
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/rune/01.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/rune/02.png",
+          "size_bytes": 373
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/rune/03.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/rune/04.png",
+          "size_bytes": 376
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/rune/05.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/rune/06.png",
+          "size_bytes": 380
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/rune/07.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/wisp/00.png",
+          "size_bytes": 324
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/wisp/01.png",
+          "size_bytes": 321
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/wisp/02.png",
+          "size_bytes": 334
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/wisp/03.png",
+          "size_bytes": 313
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/wisp/04.png",
+          "size_bytes": 337
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/wisp/05.png",
+          "size_bytes": 331
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/wisp/06.png",
+          "size_bytes": 330
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/frames/wisp/07.png",
+          "size_bytes": 329
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/sprite_sheet.png",
+          "size_bytes": 2779
+        },
+        {
+          "path": "examples/playable/assets/pixelorama/sprite_sheet.webp",
+          "size_bytes": 1356
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/goxel-assets/moon_crystals.glb",
+          "size_bytes": 224856
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/goxel-assets/moon_crystals.vox",
+          "size_bytes": 14180
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/goxel-assets/moon_crystals_animated.glb",
+          "size_bytes": 226796
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/goxel-assets/moon_gate.glb",
+          "size_bytes": 421804
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/goxel-assets/moon_gate.vox",
+          "size_bytes": 25640
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/goxel-assets/moon_gate_animated.glb",
+          "size_bytes": 423744
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/ember/00.png",
+          "size_bytes": 272
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/ember/01.png",
+          "size_bytes": 270
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/ember/02.png",
+          "size_bytes": 252
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/ember/03.png",
+          "size_bytes": 271
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/ember/04.png",
+          "size_bytes": 290
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/ember/05.png",
+          "size_bytes": 279
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/ember/06.png",
+          "size_bytes": 284
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/ember/07.png",
+          "size_bytes": 286
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/lantern/00.png",
+          "size_bytes": 258
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/lantern/01.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/lantern/02.png",
+          "size_bytes": 264
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/lantern/03.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/lantern/04.png",
+          "size_bytes": 265
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/lantern/05.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/lantern/06.png",
+          "size_bytes": 264
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/lantern/07.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/rune/00.png",
+          "size_bytes": 376
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/rune/01.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/rune/02.png",
+          "size_bytes": 373
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/rune/03.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/rune/04.png",
+          "size_bytes": 376
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/rune/05.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/rune/06.png",
+          "size_bytes": 380
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/rune/07.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/wisp/00.png",
+          "size_bytes": 324
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/wisp/01.png",
+          "size_bytes": 321
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/wisp/02.png",
+          "size_bytes": 334
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/wisp/03.png",
+          "size_bytes": 313
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/wisp/04.png",
+          "size_bytes": 337
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/wisp/05.png",
+          "size_bytes": 331
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/wisp/06.png",
+          "size_bytes": 330
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/frames/wisp/07.png",
+          "size_bytes": 329
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/moon_crystals_pixelorama.glb",
+          "size_bytes": 224856
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/moon_crystals_pixelorama.vox",
+          "size_bytes": 14180
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/moon_crystals_pixelorama_animated.glb",
+          "size_bytes": 226796
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/moon_gate_pixelorama.glb",
+          "size_bytes": 421804
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/moon_gate_pixelorama.vox",
+          "size_bytes": 25640
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/moon_gate_pixelorama_animated.glb",
+          "size_bytes": 423744
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/examples/pixelorama-assets/sprite_sheet.png",
+          "size_bytes": 2779
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/moon_crystals.glb",
+          "size_bytes": 224856
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/moon_crystals_animated.glb",
+          "size_bytes": 226796
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/moon_crystals_pixelorama.glb",
+          "size_bytes": 224856
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/moon_crystals_pixelorama.vox",
+          "size_bytes": 14180
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/moon_crystals_pixelorama_animated.glb",
+          "size_bytes": 226796
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/moon_gate.glb",
+          "size_bytes": 421804
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/moon_gate_animated.glb",
+          "size_bytes": 423744
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/moon_gate_pixelorama.glb",
+          "size_bytes": 421804
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/moon_gate_pixelorama.vox",
+          "size_bytes": 25640
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/moon_gate_pixelorama_animated.glb",
+          "size_bytes": 423744
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/night_forest.glb",
+          "size_bytes": 237104
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/ember/00.png",
+          "size_bytes": 272
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/ember/01.png",
+          "size_bytes": 270
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/ember/02.png",
+          "size_bytes": 252
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/ember/03.png",
+          "size_bytes": 271
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/ember/04.png",
+          "size_bytes": 290
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/ember/05.png",
+          "size_bytes": 279
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/ember/06.png",
+          "size_bytes": 284
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/ember/07.png",
+          "size_bytes": 286
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/lantern/00.png",
+          "size_bytes": 258
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/lantern/01.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/lantern/02.png",
+          "size_bytes": 264
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/lantern/03.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/lantern/04.png",
+          "size_bytes": 265
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/lantern/05.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/lantern/06.png",
+          "size_bytes": 264
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/lantern/07.png",
+          "size_bytes": 246
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/rune/00.png",
+          "size_bytes": 376
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/rune/01.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/rune/02.png",
+          "size_bytes": 373
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/rune/03.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/rune/04.png",
+          "size_bytes": 376
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/rune/05.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/rune/06.png",
+          "size_bytes": 380
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/rune/07.png",
+          "size_bytes": 377
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/wisp/00.png",
+          "size_bytes": 324
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/wisp/01.png",
+          "size_bytes": 321
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/wisp/02.png",
+          "size_bytes": 334
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/wisp/03.png",
+          "size_bytes": 313
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/wisp/04.png",
+          "size_bytes": 337
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/wisp/05.png",
+          "size_bytes": 331
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/wisp/06.png",
+          "size_bytes": 330
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/frames/wisp/07.png",
+          "size_bytes": 329
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/sprite_sheet.png",
+          "size_bytes": 2779
+        },
+        {
+          "path": "skills/voxel-atmosphere-engine/templates/embergrove/assets/pixelorama/sprite_sheet.webp",
+          "size_bytes": 1356
+        }
+      ]
+    },
+    "casual-game-studio": {
+      "version": "1.2.1",
+      "assets": [
+        {
+          "path": "skills/casual-game-studio/examples/vrm/pastel-scout.vrm",
+          "size_bytes": 82160
+        },
+        {
+          "path": "skills/casual-game-studio/templates/pastel-blocks/models/pastel-bunny.glb",
+          "size_bytes": 33336
+        },
+        {
+          "path": "skills/casual-game-studio/templates/pastel-blocks/models/pastel-scout.vrm",
+          "size_bytes": 82160
+        },
+        {
+          "path": "skills/casual-game-studio/templates/pastel-blocks/textures/png/brick.png",
+          "size_bytes": 448
+        },
+        {
+          "path": "skills/casual-game-studio/templates/pastel-blocks/textures/png/cream.png",
+          "size_bytes": 339
+        },
+        {
+          "path": "skills/casual-game-studio/templates/pastel-blocks/textures/png/gift.png",
+          "size_bytes": 701
+        },
+        {
+          "path": "skills/casual-game-studio/templates/pastel-blocks/textures/png/ice.png",
+          "size_bytes": 706
+        },
+        {
+          "path": "skills/casual-game-studio/templates/pastel-blocks/textures/png/mint.png",
+          "size_bytes": 821
+        },
+        {
+          "path": "skills/casual-game-studio/templates/pastel-blocks/textures/png/peach.png",
+          "size_bytes": 821
+        },
+        {
+          "path": "skills/casual-game-studio/templates/pastel-blocks/textures/png/pink.png",
+          "size_bytes": 832
+        },
+        {
+          "path": "skills/casual-game-studio/templates/pastel-blocks/textures/png/stone.png",
+          "size_bytes": 644
+        }
+      ]
+    },
+    "voxel-game-creator": {
+      "version": "0.19.1",
+      "assets": [
+        {
+          "path": "skills/voxel-game-creator/examples/blockbench-assets/voxel-lantern.glb",
+          "size_bytes": 3404
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_c_4d4a57.png",
+          "size_bytes": 79
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_c_64475e.png",
+          "size_bytes": 79
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_c_66534d.png",
+          "size_bytes": 79
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_c_705568_glow.png",
+          "size_bytes": 79
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_c_db8766.png",
+          "size_bytes": 79
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_c_db8766_glow.png",
+          "size_bytes": 79
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_color_4d4a57.png",
+          "size_bytes": 225
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_color_64475e.png",
+          "size_bytes": 225
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_color_66534d.png",
+          "size_bytes": 225
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_color_705568_glow.png",
+          "size_bytes": 224
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_color_db8766.png",
+          "size_bytes": 225
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/luanti-mod/vgc_bridge/textures/vgc_bridge_color_db8766_glow.png",
+          "size_bytes": 225
+        },
+        {
+          "path": "skills/voxel-game-creator/examples/veloren-compatible-lantern.vox",
+          "size_bytes": 1680
+        }
+      ]
+    },
+    "hero-animator": {
+      "version": "0.17.1",
+      "assets": []
+    }
+  }
+}

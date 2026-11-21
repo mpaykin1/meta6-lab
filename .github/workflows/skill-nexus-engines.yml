@@ -35,6 +35,21 @@ jobs:
               print('WEBGL2_AVAILABLE',ok)
               if not ok: raise SystemExit('Browser WebGL2 unavailable')
           PY
+  engine-deps-assets:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PyMeshLab, rembg CPU and ScanCode
+        run: bash scripts/platform/skill-nexus/install.sh extended
   engine-deps-native:
     runs-on: ubuntu-24.04
     timeout-minutes: 55

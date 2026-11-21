@@ -146,11 +146,20 @@ def main():
             mark(from_plugin,'game-style-forge')
             return output
 
-        # Voxel's actual lossless optimizer decides whether to keep the source.
+        # Voxel's strict shape and naming invariant is tested on one actual
+        # author-created Blockbench part (not on a merged 24-mesh character).
+        source_model=json.loads((UP/'casual'/'pastel-bunny.bbmodel').read_text())
+        original_element=source_model['elements'][0]
+        source_model['elements']=[original_element]
+        source_model['outliner']=[original_element['uuid']] if original_element.get('uuid') else []
+        voxel_bbmodel=w/'voxel-single-part.bbmodel'
+        voxel_bbmodel.write_text(json.dumps(source_model))
+        voxel_input=w/'voxel-source.glb'
+        casual.make_glb(voxel_bbmodel,voxel_input)
         from importlib import import_module
         vopt=import_module('gltf_transform_bridge')
         voxel_items, voxel_results=vopt.optimize(
-            [{'id':'nexus-bunny','source':casual_raw}],w/'voxel-work',
+            [{'id':'nexus-bunny','source':voxel_input}],w/'voxel-work',
             policy='auto',textures='off',
             executable=ROOT/'node_modules'/'.bin'/'gltf-transform',geometry='off')
         assert voxel_results[0]['status'] in ('optimized','original-smaller'), voxel_results

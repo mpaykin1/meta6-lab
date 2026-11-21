@@ -51,3 +51,8 @@ The existing static rounded tiles share one triangle BVH. The exact pointer hit 
 ## v1.2 — Three BVH CSG
 
 User-command **◇ CARVE** or **C** performs a real three-bvh-csg 0.0.18 subtraction on a chosen board tile. Its own geometry is rebuilt with a new BVH. Rapier collisions, Quarks impact particles, Tween ripples and Bloom share the same tile object. Original geometry and character identities are never changed. Collision remains a conservative box, not a cut-out. Use the pinned CDN at runtime or `vendor_engines.py` to vendor source when npm access is available. This is an experimental geometry tool, not a geometry guarantee.
+
+
+## 1.2.1 — optional input preflight
+
+`create_game.py` now rejects missing/wrong-extension `--bbmodel` and missing/wrong-extension/oversize `--vrm` before creating or copying output. Failed availability checks therefore leave existing output untouched even with `--force`. This does not validate malformed model contents or change the game runtime. Run `python scripts/test_input_preflight.py`: missing source cases, existing-file preservation and real bundled bunny GLB export are covered. Temporary template fixtures test CLI orchestration, not browser gameplay.

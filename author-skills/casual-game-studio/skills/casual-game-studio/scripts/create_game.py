@@ -26,6 +26,16 @@ def main():
     p.add_argument('--ktx-tool',type=str,help='Path to official KTX-Software ktx CLI executable')
     p.add_argument('--install-optimizer',action='store_true',help='Install the pinned npm glTF-Transform packages (requires network)')
     args=p.parse_args()
+    # Reject missing optional source assets before creating or overwriting output.
+    chosen=custom=None
+    if args.bbmodel:
+        chosen=args.bbmodel.expanduser().resolve()
+        if chosen.suffix.lower()!='.bbmodel' or not chosen.is_file():
+            raise SystemExit('--bbmodel must name an existing .bbmodel file')
+    if args.vrm:
+        custom=args.vrm.expanduser().resolve()
+        if not custom.is_file() or custom.suffix.lower()!='.vrm' or custom.stat().st_size>40_000_000:
+            raise SystemExit('--vrm must be an existing .vrm up to 40 MB')
     output=args.out.expanduser().resolve()
     if output.exists() and any(output.iterdir()) and not args.force:
         raise SystemExit('Output folder not empty. Choose another directory or pass --force.')
@@ -36,15 +46,9 @@ def main():
         elif path.is_dir():
             shutil.copytree(path,output/path.name,dirs_exist_ok=True)
     if args.bbmodel:
-        chosen=args.bbmodel.expanduser().resolve()
-        if chosen.suffix.lower()!='.bbmodel' or not chosen.is_file():
-            raise SystemExit('--bbmodel must name an existing .bbmodel file')
         make_glb(chosen,output/'models'/'pastel-bunny.glb')
         shutil.copy2(chosen,output/'models'/'pastel-bunny.bbmodel')
     if args.vrm:
-        custom=args.vrm.expanduser().resolve()
-        if not custom.is_file() or custom.suffix.lower()!='.vrm' or custom.stat().st_size>40_000_000:
-            raise SystemExit('--vrm must be an existing .vrm up to 40 MB')
         shutil.copy2(custom,output/'models'/'pastel-scout.vrm')
         print(f'Included selected VRM avatar: {custom.name} (loaded only on HERO command)')
     # Build-time optimization only. Keep original Blockbench GLB whenever Meshopt is enabled.
@@ -131,3 +135,4 @@ Licenses: KTX-Software Apache-2.0 (components and third-party subdirectories may
     print(output)
 
 if __name__=='__main__':main()
+

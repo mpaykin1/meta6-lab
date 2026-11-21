@@ -1,19 +1,17 @@
-# Авторские игровые скилы — снимок 21.11.2026
+# Авторские игровые скилы — 21.11.2026
 
-Исходники 9 авторских ChatGPT-плагинов для изучения в GitHub и Claude Code. Каждый каталог сохраняет исходную структуру пакета.
+[Каталог всех 9 скилов (HTML)](index.html).
 
-| Скил | Версия | Каталог |
-| --- | --- | --- |
-| [living-image-animator](living-image-animator/) | 0.4.0 | Анимация изображений и GIF |
-| [skill-synergy-manager / Skill Nexus](skill-synergy-manager/) | 0.8.0 | Связки игровых скилов |
-| [meta-game-fusion](meta-game-fusion/) | 1.3.0 | Игровой 3D-конвейер |
-| [blender-model-animation-enhancer](blender-model-animation-enhancer/) | 1.9.0 | Blender, моделирование, GLB |
-| [game-style-forge](game-style-forge/) | 1.10.0 | Визуальные стили и 3D |
-| [voxel-atmosphere-engine](voxel-atmosphere-engine/) | 0.10.0 | Воксельные атмосферы |
-| [casual-game-studio](casual-game-studio/) | 1.2.0 | Игра, 3D, физика |
-| [voxel-game-creator](voxel-game-creator/) | 0.19.0 | Воксельные игры |
-| [hero-animator](hero-animator/) | 0.17.0 | Покадровая анимация героя |
+- [Skill Nexus v0.8.0](skill-synergy-manager/)
+- [Living Image Animator v0.4.0](living-image-animator/)
+- [Hero Animator v0.17.1](hero-animator/)
+- [Meta Game Fusion v1.3.0](meta-game-fusion/)
+- [Blender Model Animation Enhancer v1.9.0](blender-model-animation-enhancer/)
+- [Game Style Forge v1.10.0](game-style-forge/)
+- [Voxel Atmosphere Engine v0.10.0](voxel-atmosphere-engine/)
+- [Voxel Game Creator v0.19.0](voxel-game-creator/)
+- [Casual Game Studio v1.2.1](casual-game-studio/)
 
-**Состав:** 643 текстовых исходника, конфигурации, документация и лицензии из 9 пакетов. 180 бинарных демонстрационных ресурсов (PNG, GLB, VOX, VRM, WebP) и компилированных кэшей .pyc **не включены**: интерфейс экспорта исходников не позволяет перенести их через GitHub без дополнительных операций. Это полноценный набор текстового кода для ревью, но **не полный набор ассетов для запуска всех демонстраций**. Проверка анимации и конечной игры требует оригинальных бинарных ресурсов.
+Сохранены **текстовые исходники, документация, конфигурации и лицензии** девяти авторских ChatGPT-плагинов. Бинарные ресурсы (PNG, GLB, VOX, VRM, WebP) и компилированные кэши .pyc не включены. Для полноценного запуска графических демо нужны оригинальные бинарные ресурсы. Каталог предназначен для просмотра и анализа в GitHub или Claude Code; он **не гарантирует**, что игры запустятся без дополнительных ассетов и зависимостей.
 
-Источник каждого снимка — текущий release соответствующего приватного ChatGPT-плагина на дату экспорта. Правки в этом каталоге не обновляют плагины автоматически.
+Снимок отдельных плагинов не обновляется автоматически при изменении их версий в ChatGPT.

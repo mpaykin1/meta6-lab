@@ -1,5 +1,8 @@
 import * as THREE from 'three';
 import {loadFusionAsset} from '../upstream/fusion/three-loader.mjs';
+import {loadMascot} from '../upstream/casual/model-loader.js';
+import {configureAssetLoader} from '../upstream/atmosphere/asset-loader.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 window.NEXUS_STATUS={ok:false};
 try{
   const p=await fetch('../upstream/atmosphere/palette.json').then(x=>x.json());
@@ -18,14 +21,27 @@ try{
   const ground=new THREE.Mesh(new THREE.PlaneGeometry(28,28),
     new THREE.MeshStandardMaterial({color:p.moss,roughness:1}));
   ground.rotation.x=-Math.PI/2;ground.position.y=-.12;scene.add(ground);
-  const urls=['casual','blender','hero','forge'];
+  const urls=['casual','blender','hero','forge','voxel'];
   const roots=[];
+  const casualRoots=[], atmosphericRoots=[];
+  const atmosphereLoader=configureAssetLoader(new GLTFLoader());
   for(let i=0;i<urls.length;i++){
-    const a=await loadFusionAsset('./assets/'+urls[i]+'.glb',scene);
-    a.root.position.set((i-1.5)*2.2,.2,0);
-    roots.push(a.root);
+    const url='./assets/'+urls[i]+'.glb';
+    const fusion=await loadFusionAsset(url,scene);
+    fusion.root.position.set((i-2)*1.7,.15,-1.4);
+    roots.push(fusion.root);
+    if(urls[i]!=='casual'){
+      const model=await loadMascot(scene,url);
+      model.position.set((i-2)*1.7,.15,.15);
+      scene.add(model);
+      casualRoots.push(model);
+    }
+    const atmos=await new Promise((resolve,reject)=>atmosphereLoader.load(url,resolve,undefined,reject));
+    atmos.scene.position.set((i-2)*1.7,.15,1.7);
+    scene.add(atmos.scene);
+    atmosphericRoots.push(atmos.scene);
   }
-  let meshCount=0;for(let r of roots)r.traverse(o=>{if(o.isMesh)meshCount++});
+  let meshCount=0;for(let r of [...roots,...casualRoots,...atmosphericRoots])r.traverse(o=>{if(o.isMesh)meshCount++});
   function resize(){
     camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
     renderer.setSize(innerWidth,innerHeight,false);
@@ -34,13 +50,13 @@ try{
   const start=performance.now();
   renderer.setAnimationLoop((t)=>{
     const dt=(t-start)*.001;
-    roots.forEach((r,i)=>{r.rotation.y=Math.sin(dt*.35+i*.7)*.12;
+    [...roots,...casualRoots,...atmosphericRoots].forEach((r,i)=>{r.rotation.y=Math.sin(dt*.35+i*.7)*.12;
       r.position.y=.15+Math.sin(dt*1.6+i*.5)*.04;});
     fire.intensity=14+Math.sin(dt*2.8)*1.5;
     renderer.render(scene,camera);
   });
   renderer.render(scene,camera);
-  window.NEXUS_STATUS={ok:true,modelCount:roots.length,meshCount,webgl2:renderer.capabilities.isWebGL2,
+  window.NEXUS_STATUS={ok:true,modelCount:roots.length,casualLoaded:casualRoots.length,atmosphereLoaded:atmosphericRoots.length,meshCount,webgl2:renderer.getContext() instanceof WebGL2RenderingContext,
     canvasWidth:renderer.domElement.getBoundingClientRect().width,
     canvasHeight:renderer.domElement.getBoundingClientRect().height,
     paletteMatches:scene.background.getHexString()===p.night.slice(1).toLowerCase()};

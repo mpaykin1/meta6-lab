@@ -6,7 +6,7 @@
 | Автозадача | Состояние | Доказательство последней полезной работы | Следующий шаг |
 |---|---|---|---|
 | 1 — MG-строитель-1 | #355 metadata завершён; прежние обзоры не повторять | [PR355](https://github.com/mpaykin1/meta6-lab/pull/355), запись20.11 16:00 | Z01: read-only SPEC/OSHIBKI конфликт #412828cfeb, пакет QA; ветку не править |
-| 2 — MG-строитель-2 | malformedalive — кандидат, обязательный INVALID не установлен; Chrome124 не повторять | #355bc9fabb, CONTRACT boolean; игрового B4 PASS нет | Z04: один BrokenCity index.html consumerпакет __META_BOT__/alive/death/restart для Codex |
+| 2 — MG-строитель-2 | BrokenCity consumer доставлен support: стандартной ручки нет; движение UNKNOWN | [Z04 результат](https://github.com/mpaykin1/meta6-lab/commit/5af1cb339b42856048a043e2a63ce5a025db1b96), #355bc9fabb originalprobe exit1 | Read-only #2911b284236: выделить минимальный __BC_BOT_SOURCE__ bridge для current __G; original/workflow не менять, timeout не повторять |
 | 3 — MG-строитель-3 | Archer CLI уже установлен, B5 не пройден | #264d5ef5d0, run.mjs принимает positionalgame | Z07: bot-adapter layoutHash/seed/reset для второго независимого запуска, точные строки/UNKNOWN |
 | 4 — MG-строитель-4 | King diff завершён, канон у Claude; миграция #428 ожидает решения | #206blob40514e8 / #207blob1a1f6d3, разные реализации | Z10: строка21/source#189d37a6abc, одинmetadataпакет blob/size/title поописи |
 | 5 — MG-ремонтник | scout_drone source/copy совпали, общий обзор не повторять | efaaea3:59460bytes/blob9c55dc2762a494c755b59eea1fc68c57125d0752 | Z10: одинpng00.png source/copyblob+size илиNOT_FOUND безbinarydownload/удаления |

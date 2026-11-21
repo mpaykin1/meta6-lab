@@ -3,6 +3,7 @@ import {loadFusionAsset} from '../upstream/fusion/three-loader.mjs';
 import {loadMascot} from '../upstream/casual/model-loader.js';
 import {configureAssetLoader} from '../upstream/atmosphere/asset-loader.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
 window.NEXUS_STATUS={ok:false};
 try{
   const p=await fetch('../upstream/atmosphere/palette.json').then(x=>x.json());
@@ -22,6 +23,7 @@ try{
     new THREE.MeshStandardMaterial({color:p.moss,roughness:1}));
   ground.rotation.x=-Math.PI/2;ground.position.y=-.12;scene.add(ground);
   const urls=['casual','blender','hero','forge','voxel'];
+  if(new URLSearchParams(location.search).get('fusion')==='1')urls.push('fusion');
   const roots=[];
   const casualRoots=[], atmosphericRoots=[];
   const atmosphereLoader=configureAssetLoader(new GLTFLoader());
@@ -56,6 +58,13 @@ try{
     renderer.render(scene,camera);
   });
   renderer.render(scene,camera);
+  window.NEXUS_EXPORT_GLTF=async () => {
+    const binary=await new GLTFExporter().parseAsync(roots[0],{binary:true,onlyVisible:true});
+    const data=new Uint8Array(binary);
+    let text='';
+    for(let i=0;i<data.length;i+=16384)text+=String.fromCharCode(...data.subarray(i,i+16384));
+    return btoa(text);
+  };
   window.NEXUS_STATUS={ok:true,modelCount:roots.length,casualLoaded:casualRoots.length,atmosphereLoaded:atmosphericRoots.length,meshCount,webgl2:renderer.getContext() instanceof WebGL2RenderingContext,
     canvasWidth:renderer.domElement.getBoundingClientRect().width,
     canvasHeight:renderer.domElement.getBoundingClientRect().height,

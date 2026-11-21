@@ -134,6 +134,29 @@ for(let i=0;i<10;i++){
   fog.scale.set(6.5+(i%4)*1.6,1.5+(i%3),1);
   world.add(fog);fogs.push(fog);
 }
+// Cold lightning behind the forest: a real 3D light and branching silhouette.
+const stormLight=new T.PointLight('#9ec9db',0,28,2);
+stormLight.position.set(-6,9,-9);world.add(stormLight);
+const lightning=new T.Group();lightning.position.set(-6,5,-9);world.add(lightning);
+const boltMaterial=new T.MeshBasicMaterial({color:'#b8dce8',transparent:true,opacity:0,depthWrite:false});
+const boltSegments=[[[0,4,0],[-.3,2.8,0],[.2,1.8,0],[-.5,.5,0]],
+  [[-.3,2.8,0],[-1.2,2.1,0],[-1.4,1.3,0]],
+  [[.2,1.8,0],[1.1,1.1,0],[1.35,.5,0]]];
+for(const branch of boltSegments){
+  const points=branch.map(p=>new T.Vector3(...p));
+  const mesh=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(points),12,.022,5,false),boltMaterial);
+  mesh.userData.watercolorOutline=false;lightning.add(mesh);
+}
+// Wet-ground lightning bloom: a soft reflection rather than a hard glowing disk.
+const lightningReflectionMaterial=new T.MeshBasicMaterial({
+  map:fogTexture,color:'#8fbfce',transparent:true,opacity:0,
+  depthWrite:false,side:T.DoubleSide,blending:T.AdditiveBlending
+});
+const lightningReflection=new T.Mesh(new T.PlaneGeometry(8,5),lightningReflectionMaterial);
+lightningReflection.rotation.x=-Math.PI/2;
+lightningReflection.position.set(-3.5,.018,-2.8);
+lightningReflection.userData.watercolorOutline=false;
+world.add(lightningReflection);
 // Slow drifting particles, rain and drips on a separate atmospheric layer.
 const mistCount=130,mistPos=new Float32Array(mistCount*3),mist=new T.BufferGeometry();
 mist.setAttribute('position',new T.BufferAttribute(mistPos,3));
@@ -144,6 +167,102 @@ const rnd=i=>{
   const f=Math.sin(i*127.1+39.4)*43758.5453;
   return f-Math.floor(f);
 };
+// Wind-driven rain streaks occupy the near and middle depth planes.
+// One shared line buffer keeps the storm light and silhouettes responsive.
+const rainCount=96;
+const rainPositions=new Float32Array(rainCount*6);
+const rainGeometry=new T.BufferGeometry();
+rainGeometry.setAttribute('position',new T.BufferAttribute(rainPositions,3));
+const rainMaterial=new T.LineBasicMaterial({
+  color:'#9ebbb9',transparent:true,opacity:.18,depthWrite:false,
+  blending:T.AdditiveBlending
+});
+const rainStreaks=new T.LineSegments(rainGeometry,rainMaterial);
+rainStreaks.frustumCulled=false;rainStreaks.userData.watercolorOutline=false;
+world.add(rainStreaks);
+function animateRain(time,lightningFlash){
+  for(let i=0;i<rainCount;i++){
+    const speed=2.8+rnd(i+802)*2.5;
+    const fall=(rnd(i+811)*7+time*speed)%7;
+    const x=(rnd(i+823)-.5)*13+Math.sin(time*.24)*.35;
+    const y=6.3-fall;
+    const z=(rnd(i+839)-.5)*9+1;
+    const n=i*6;
+    rainPositions[n]=x;rainPositions[n+1]=y;rainPositions[n+2]=z;
+    // Gusts bend the rain sideways; lightning exposes the longer streaks.
+    const gust=.10+.13*Math.sin(time*.73+z*.41)+.06*lightningFlash;
+    rainPositions[n+3]=x-gust;rainPositions[n+4]=y-(.30+.12*lightningFlash);rainPositions[n+5]=z;
+  }
+  rainGeometry.attributes.position.needsUpdate=true;
+  rainMaterial.opacity=.13+lightningFlash*.37;
+}
+// Wandering will-o'-wisps: low-cost instanced glows that orbit the wet ground.
+const wispCount=18,wispGeometry=new T.SphereGeometry(.035,6,4);
+const wispMaterial=new T.MeshBasicMaterial({color:'#9dcfc0',transparent:true,opacity:.65,depthWrite:false});
+const wisps=new T.InstancedMesh(wispGeometry,wispMaterial,wispCount);
+wisps.frustumCulled=false;wisps.userData.watercolorOutline=false;
+world.add(wisps);
+// Diffuse outer halos give each moving spark a soft, atmospheric silhouette.
+const wispHaloMaterial=new T.MeshBasicMaterial({color:'#5b9e91',transparent:true,opacity:.12,depthWrite:false,depthTest:true,blending:T.AdditiveBlending});
+const wispHalos=new T.InstancedMesh(wispGeometry,wispHaloMaterial,wispCount);
+wispHalos.frustumCulled=false;wispHalos.userData.watercolorOutline=false;
+world.add(wispHalos);
+// Each swamp light leaves a faint vertical afterglow in the humid air.
+const wispTrailPositions=new Float32Array(wispCount*6);
+const wispTrailGeometry=new T.BufferGeometry();
+wispTrailGeometry.setAttribute('position',new T.BufferAttribute(wispTrailPositions,3));
+const wispTrailMaterial=new T.LineBasicMaterial({
+  color:'#83c9b5',transparent:true,opacity:.23,depthWrite:false,
+  blending:T.AdditiveBlending
+});
+const wispTrails=new T.LineSegments(wispTrailGeometry,wispTrailMaterial);
+wispTrails.frustumCulled=false;wispTrails.userData.watercolorOutline=false;
+world.add(wispTrails);
+const wispDummy=new T.Object3D();
+function animateWisps(time){
+  for(let i=0;i<wispCount;i++){
+    const a=i*2.399963+time*(.13+(i%4)*.025);
+    const radius=1.7+(i%6)*.47;
+    wispDummy.position.set(Math.cos(a)*radius,.13+(i%5)*.12+Math.sin(time*1.7+i)*.18,Math.sin(a)*radius*.72);
+    const glow=.65+.35*Math.sin(time*2.3+i*1.91);
+    const trail=i*6;
+    wispTrailPositions[trail]=wispDummy.position.x;
+    wispTrailPositions[trail+1]=wispDummy.position.y;
+    wispTrailPositions[trail+2]=wispDummy.position.z;
+    wispTrailPositions[trail+3]=wispDummy.position.x-.07*Math.sin(time*.8+i);
+    wispTrailPositions[trail+4]=wispDummy.position.y-.20-.14*glow;
+    wispTrailPositions[trail+5]=wispDummy.position.z;
+    wispDummy.scale.setScalar(.55+glow*1.9);
+    wispDummy.updateMatrix();wisps.setMatrixAt(i,wispDummy.matrix);
+    wispDummy.scale.multiplyScalar(4.2);
+    wispDummy.updateMatrix();wispHalos.setMatrixAt(i,wispDummy.matrix);
+  }
+  wispTrailGeometry.attributes.position.needsUpdate=true;
+  wisps.instanceMatrix.needsUpdate=true;
+  wispHalos.instanceMatrix.needsUpdate=true;
+}
+// Rain rings on the flooded floor: shared geometry and instancing, no per-frame allocations.
+const rippleCount=24;
+const rippleGeometry=new T.RingGeometry(.94,1,24);
+rippleGeometry.rotateX(-Math.PI/2);
+const rippleMaterial=new T.MeshBasicMaterial({color:'#8eada9',transparent:true,opacity:.18,side:T.DoubleSide,depthWrite:false});
+const ripples=new T.InstancedMesh(rippleGeometry,rippleMaterial,rippleCount);
+ripples.frustumCulled=false;world.add(ripples);
+const rippleDummy=new T.Object3D();
+function animateRipples(time){
+  for(let i=0;i<rippleCount;i++){
+    const cycle=(time*.62+i*.61803398875)%2.4;
+    // Each ring drifts subtly with the wind while expanding across the flooded floor.
+    const wind=Math.sin(time*.31+i*1.71)*.075;
+    rippleDummy.position.set((rnd(i+230)-.5)*10+wind,.025+i*.0002,(rnd(i+440)-.5)*7);
+    const fade=Math.max(0,1-cycle/2.4);
+    rippleDummy.scale.setScalar((.02+cycle*.22)*Math.sqrt(fade));
+    rippleDummy.updateMatrix();
+    ripples.setMatrixAt(i,rippleDummy.matrix);
+  }
+  ripples.instanceMatrix.needsUpdate=true;
+  rippleMaterial.opacity=.11+.06*Math.sin(time*.7);
+}
 // Old-film post-processing: soft focus, chromatic fringe, grain, vignette,
 // and line glitches that flare when the jaw snaps or the creature twitches.
 let fear=0;
@@ -287,8 +406,21 @@ function animate(ms){
   }
   if(!paused)elapsed+=dt;
   monster.userData.tick(elapsed,paused?0:dt);
+  animateWisps(elapsed);
+  animateRipples(elapsed);
+  const stormCycle=elapsed%13.7;
+  const stormGlow=stormCycle<.13?Math.sin(Math.PI*stormCycle/.13)**2:stormCycle>.19&&stormCycle<.34?.62*Math.sin(Math.PI*(stormCycle-.19)/.15)**2:0;
+  animateRain(elapsed,stormGlow);
   fogs.forEach((fog,i)=>{
+    const breath=Math.sin(elapsed*.31+i*.83);
     fog.position.x=-9+i*2.2+Math.sin(elapsed*.17+i)*.51;
+    fog.position.y=.20+(i%3)*.50+breath*.12;
+    // Distant storm backlights each fog bank for a split second, then darkness returns.
+    fog.material.opacity=.045+.022*(.5+.5*breath)+stormGlow*.085*(.35+.65*(i%3)/2);
+    fog.scale.x=(6.5+(i%4)*1.6)*(1+.055*breath);
+    // Wind shears each fog layer at a different speed during the storm.
+    fog.rotation.z=.012*Math.sin(elapsed*.23+i*.71)+stormGlow*.035*Math.sin(i*2.4);
+    fog.position.z=-.12*Math.sin(elapsed*.19+i*.64);
   });
   for(let i=0;i<mistCount;i++){
     const n=i*3;
@@ -297,6 +429,20 @@ function animate(ms){
     mistPos[n+2]=(rnd(i+91)-.5)*12;
   }
   mist.attributes.position.needsUpdate=true;
+  // Short double-flash every ~13 seconds; keep the monster readable.
+  const flash=stormGlow;
+  stormLight.intensity=flash*48;
+  boltMaterial.opacity=flash*.85;
+  // The wet floor blooms in sync with both lightning strikes.
+  lightningReflectionMaterial.opacity=flash*.42;
+  lightningReflection.scale.setScalar(1+flash*.18);
+  // Storm light catches the drifting swamp sparks and their diffuse halos.
+  // Restore the original glow between flashes without extra draw calls.
+  wispMaterial.opacity=.65+flash*.30;
+  wispHaloMaterial.opacity=.12+flash*.24;
+  wispTrailMaterial.opacity=.18+flash*.42;
+  // Lightning briefly catches the concentric ripples on the flooded ground.
+  rippleMaterial.opacity=.11+.06*Math.sin(elapsed*.7)+flash*.32;
   const pulse=monster.userData.pulse||0;
   fear+=(pulse-fear)*(pulse>fear?.5:Math.min(1,dt*2.2));
   faceLight.intensity=26*(.86+.09*Math.sin(elapsed*.58)+.05*Math.sin(elapsed*7.3)*Math.sin(elapsed*1.9))+12*fear;
@@ -313,7 +459,8 @@ function animate(ms){
   const kcam=1-Math.exp(-dt*3.2),korb=1-Math.exp(-dt*7);
   camY+=(wantY-camY)*kcam;
   yawS+=(yaw-yawS)*korb;pitchS+=(pitch-pitchS)*korb;
-  const shake=fear*fear*.07;
+  // Thunder impulse reaches the camera on both lightning peaks, then vanishes.
+  const shake=fear*fear*.07+stormGlow*.045;
   const targetY=camY+shake*Math.sin(elapsed*61),d=13.5;
   camera.position.set(Math.sin(yawS)*Math.cos(pitchS)*d+shake*Math.sin(elapsed*47),
     targetY+Math.sin(pitchS)*d,Math.cos(yawS)*Math.cos(pitchS)*d);

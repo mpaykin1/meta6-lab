@@ -103,6 +103,8 @@ def confirm_fusion_renderer(models, palette, destinations):
                     if not status.get('ok'):raise RuntimeError('Fusion browser failed '+str(status))
                     if errors:raise RuntimeError('Browser errors: '+str(errors))
                     assert status['modelCount']==len(models)
+                    assert status['casualLoaded']==len(models)-1
+                    assert status['atmosphereLoaded']==len(models)
                     assert status['meshCount']>0
                     assert status['paletteMatches'] is True
                     assert status['webgl2'] is True
@@ -111,7 +113,10 @@ def confirm_fusion_renderer(models, palette, destinations):
                     page.close()
             finally:browser.close()
     finally:srv.shutdown();srv.server_close()
-    for source in destinations:mark(source,'meta-game-fusion')
+    for source in destinations:
+        mark(source,'meta-game-fusion')
+        mark(source,'voxel-atmosphere-engine')
+        if source!='casual-game-studio':mark(source,'casual-game-studio')
     mark('voxel-atmosphere-engine','meta-game-fusion')
 
 def main():
@@ -141,12 +146,31 @@ def main():
             mark(from_plugin,'game-style-forge')
             return output
 
+        # Voxel's actual lossless optimizer decides whether to keep the source.
+        from importlib import import_module
+        vopt=import_module('gltf_transform_bridge')
+        voxel_items, voxel_results=vopt.optimize(
+            [{'id':'nexus-bunny','source':casual_raw}],w/'voxel-work',
+            policy='auto',textures='off',
+            executable=ROOT/'node_modules'/'.bin'/'gltf-transform',geometry='off')
+        assert voxel_results[0]['status'] in ('optimized','original-smaller'), voxel_results
+        voxel_model=w/'voxel-optimized.glb'
+        shutil.copyfile(voxel_items[0]['source'],voxel_model)
+        verify_glb(voxel_model)
+
         voxel_consumer(casual_raw,'casual-game-studio')
         forge_raw=forge_consumer(casual_raw,'casual-game-studio','casual')
         blender=optimize_blender(casual_raw,w/'blender-safe.glb')
         mark('casual-game-studio','blender-model-animation-enhancer')
         hero=prepare_hero(casual_raw,w/'hero-visual.glb')
         mark('casual-game-studio','hero-animator')
+
+        # True Voxel Game Creator output is now handed to three distinct producers/consumers.
+        forge_consumer(voxel_model,'voxel-game-creator','voxel')
+        optimize_blender(voxel_model,w/'voxel-through-blender.glb')
+        mark('voxel-game-creator','blender-model-animation-enhancer')
+        prepare_hero(voxel_model,w/'voxel-through-hero.glb')
+        mark('voxel-game-creator','hero-animator')
 
         voxel_consumer(blender,'blender-model-animation-enhancer')
         forge_consumer(blender,'blender-model-animation-enhancer','blender')
@@ -176,13 +200,13 @@ def main():
         # For each model, real GLB reaches the exact Meta Game Fusion loader in Chrome.
         browserdir=HERE/'browser'
         (browserdir/'palette.json').write_text(json.dumps(palette))
-        confirm_fusion_renderer({'casual':casual_raw,'blender':blender,'hero':hero,'forge':forge_raw},
+        confirm_fusion_renderer({'casual':casual_raw,'blender':blender,'hero':hero,'forge':forge_raw,'voxel':voxel_model},
                                 palette,['casual-game-studio','blender-model-animation-enhancer',
-                                         'hero-animator','game-style-forge'])
+                                         'hero-animator','game-style-forge','voxel-game-creator'])
 
     total=42
     print('CONFIRMED_REAL_INTEGRATIONS',len(confirmed),'/',total,'PERCENT',round(100*len(confirmed)/total,2))
-    if len(confirmed)<16:raise SystemExit('Too few verified real integration routes')
+    if len(confirmed)<28:raise SystemExit('Too few verified real integration routes')
     out=ROOT/'integration'/'confirmed.json'
     out.write_text(json.dumps({'confirmed':sorted([{'from':a,'to':b} for a,b in confirmed],
         key=lambda r:(r['from'],r['to'])),'denominator':total,'test_definition':

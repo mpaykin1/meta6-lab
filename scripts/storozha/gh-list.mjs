@@ -8,6 +8,7 @@ export async function openPulls(repo, token) {
         headRepository{nameWithOwner} commits(last:1){nodes{commit{committedDate}}}}}}}`;
   const result = [];
   let after = null;
+  const seenCursors = new Set();
   for (let page = 0; page < 20; page++) {
     const r = await fetch('https://api.github.com/graphql', {method: 'POST',
       headers: {Authorization: 'Bearer ' + token, 'Content-Type': 'application/json'},
@@ -25,7 +26,12 @@ export async function openPulls(repo, token) {
         head: {ref: n.headRefName, sha: n.headRefOid, repo: {full_name: n.headRepository?.nameWithOwner}}});
     }
     if (!data.pageInfo.hasNextPage) return result;
-    after = data.pageInfo.endCursor;
+    const nextCursor = data.pageInfo.endCursor;
+    if (typeof nextCursor !== 'string' || !nextCursor || nextCursor === after || seenCursors.has(nextCursor)) {
+      throw Error('Refusing invalid or repeated GraphQL pagination cursor');
+    }
+    seenCursors.add(nextCursor);
+    after = nextCursor;
   }
   throw Error('Refusing truncated GraphQL pagination');
 }

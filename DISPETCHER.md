@@ -1,10 +1,8 @@
 # ДИСПЕТЧЕР МГ/МГЛ
 
-Итог: зависло 0 · конфликт 0 · непроверено 0 · красные проверки 0 · нужен Claude 5
+Итог: зависло 0 · конфликт 0 · непроверено 0 · красные проверки 0 · нужен Claude 3
 
 ## НУЖЕН CLAUDE
-- [#363](https://github.com/mpaykin1/meta6-lab/pull/363) НУЖЕН CLAUDE: CI для 3D Master после разбиения #335
-- [#270](https://github.com/mpaykin1/meta6-lab/pull/270) Z01: PR #270 — сохранить исходный Library Machine guard при проверке камеры Veil Terraces
-- [#331](https://github.com/mpaykin1/meta6-lab/pull/331) БЕЗ ТОРМОЗОВ — очередь PR, безопасная синхронизация и саморазвитие (15.11)
-- [#245](https://github.com/mpaykin1/meta6-lab/pull/245) Зелёный судья: META BOT зелёный на main
-- [#248](https://github.com/mpaykin1/meta6-lab/pull/248) undefined
+- [#355](https://github.com/mpaykin1/meta6-lab/pull/355) Z04 B2: извлечь проверку настоящего движения из PR #258 в отдельный безопасный PR
+- [#402](https://github.com/mpaykin1/meta6-lab/pull/402) Z01: ремонт конфликта PR #402, проверка пагинации и исключение журнала из diff
+- [#405](https://github.com/mpaykin1/meta6-lab/pull/405) Z01: устранить конфликт PR #405 и сохранить полную проверку CI

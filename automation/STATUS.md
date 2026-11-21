@@ -1,14 +1,13 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-18T01:53:58.901Z | МГЛ: aaa975509aeb1c5a6149ae213d70b585626fecd7 | МГ: 2af2bc03768f8ffe89a39f9c0e93a3b74c5a0aa5 | https://github.com/mpaykin1/meta6-lab/actions/runs/44219059183
+UTC: 2026-11-21T06:07:42.730Z | МГЛ: 2e9a08dc554e60aeba5246e0f2013adbe6caa51c | МГ: 5984fcd5b79ed2d03c648053334361db8deb44fb | https://github.com/mpaykin1/meta6-lab/actions/runs/44873984529
 ## ПРОВЕРИТЬ CLAUDE
-- PR #382 7c56b01e1a323254a1d850d50bd373364a079c7d: automation/asset-check/test_kinds.py
-- PR #362 51f2ef012ec9cf31d0d68c83ba02fac0951974b7: automation/asset-check/test_3d_master.py
-- ещё 39: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/44183722961 | Play all games
+- PR #421 a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1: .github/workflows/bez-patternov.yml, automation/asset-check/test_htmlpack.py, scripts/storozha/verify-storozha.mjs, scripts/visual/mutate-no-patterns.mjs, scripts/visual/verify-targets.mjs
+- PR #413 fa7e16893fb93ca733d8e5b93a0e03674d965258: .github/workflows/odin-pr.yml, scripts/odin-pr/mutate-odin-pr.mjs
+- ещё 41: https://github.com/mpaykin1/meta6-lab/pulls
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
-- | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | open | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/… (сокращено)
+- | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | closed | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/librar… (сокращено)
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
-- | B2: независимый верификатор движения из #258 | lab/z04-b2-extract-motion-20261117 | свободно (зависло 9 ч, было: чат ChatGPT) | 2026-11-17T02:24:52.054Z |
+- | B2: независимый верификатор движения из #258 | lab/z04-b2-extract-motion-20261117 | свободно (зависло 12 ч, было: чат ChatGPT — продолжение PR #355) | 2026-11-18 |
 - | НАДЗОР — чат ChatGPT | lab/nadzor | свободно (зависло 10 ч, было: чат ChatGPT (надзор)) | 2026-11-17T01:33:05.414Z |
 - ещё 16: https://github.com/mpaykin1/meta6-lab/blob/main/rules/09-platforma/ZANYATO.md
 ## ФИНИШ
@@ -18,7 +17,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44183722988)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/44405219497)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -32,13 +31,13 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 56 | конфликт: 42 | слито: 80 | закрыто: 123
-#384 feat(assets): BLACK TRAIN — layered storm clouds with slow a | 21dd327c959710943bc4f5a04c4f5dcf60e1d136
-#373 INK · Чернильный оскал — чистая 3D-модель и сцена без защищё | 0c269f36f4f3f1801ba5147eb59c5d3355cf5768
-ещё 78: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+открыто: 21 | конфликт: нет данных | слито: 83 | закрыто: 176
+#422 BEZ PATTERNOV: неподвижный кадр для паков вместо таймаута сн | 1d6c9557d51496b703e9279fb57188e385f2e126
+#421 Почему стояла работа: ложный красный BEZ PATTERNOV, тупик ли | a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1
+ещё 81: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 2840 коммитов | нет данных
-МГ: 44 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:25, reference:31, rules:9, SOURCE_INDEX.md:1
+МГЛ: 3350 коммитов | нет данных
+МГ: 46 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:33, reference:31, rules:10, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет
@@ -51,9 +50,9 @@ sumerki-i-pepel-2 — не запускалась | витрина: да
 sumerki-i-pepel-2-copy — не запускалась | витрина: нет
 twilight-isle-classic — не запускалась | витрина: да
 twilight-isles — не запускалась | витрина: да
-veil-terraces — прошла | витрина: да
+veil-terraces — не прошла | витрина: да
 wild-train-prologue — не прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
-| 2026111706 | 17.11.2026 | LAB Pages: сайт выкладывается, но шаг `check-links` с 11.11 ни разу не зелёный — выходит за 30 мин (таймаут = «cancelled») из‑за ~3000 повторов по мёртвым адресам: в main `games/skin-trainer` грузит несуществующий `skins/runtime/ski… (сокращено)
-| 2026111705 | 17.11.2026 | META BOT при `bot.json.secondRun="hash"` пропускал сбой второго запуска: `again.ok=false` или `again.hashes=[]` не влияли на `checkGame().ok`, получался ложный PASS | Воспроизведение `checkGame` на `main` с 4 исходами, кандидат испр… (сокращено)
-ещё 70: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+| 2026111801 | 18.11.2026 | BEZ PATTERNOV: у PR без игры каталога проверка по умолчанию мерила INK-шейдер и требовала улучшить его на 15% — красными стояли все PR ассетов и правил (#371, #409, #415 и др.), работа ChatGPT не сливалась | Claude: разбор «почему с… (сокращено)
+| 2026111802 | 18.11.2026 | Лимит пяти живых PR держал в очереди и сам ремонт ложно красной проверки, которая и мешала пяти старейшим слиться — тупик | Claude: #421 красный только по storozha-quota | scripts/storozha/verify-storozha.mjs: claude/* не блокируетс… (сокращено)
+ещё 76: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

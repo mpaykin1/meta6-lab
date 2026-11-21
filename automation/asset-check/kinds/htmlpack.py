@@ -25,7 +25,15 @@ CDN = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
 
 def detect(root: Path) -> bool:
     page = root / "index.html"
-    return page.is_file() and "window.__PACK__" in page.read_text("utf-8", errors="replace")
+    if not (page.is_file() and "window.__PACK__" in page.read_text("utf-8", errors="replace")):
+        return False
+    # Claude 18.11.2026 (OSHIBKI 2026111803): a pack that declares another format (ink-pack/1 …) is not
+    # an htmlpack even if its page sets window.__PACK__ — otherwise it is judged against Туманные шпили.
+    try:
+        fmt = json.loads((root / "pack.json").read_text("utf-8")).get("format")
+    except (OSError, ValueError, AttributeError):
+        fmt = None
+    return fmt in (None, "htmlpack/1")
 
 
 def ids(source: str) -> list[str]:

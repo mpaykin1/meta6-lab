@@ -235,9 +235,10 @@ console.log('ORIGINAL INK PROBE MUTATIONS PASS: 3 broken fixtures rejected');
 // The real renderer's small objects may show less than one sinusoidal period.
 // Never lose the wide material probe or accidentally apply the old-negative
 // threshold to the small scene in place of the actual periodic shader.
+// Claude 18.11.2026: target selection moved to targets.mjs (OSHIBKI 2026111801) — check both files together.
 const captureSource = readFileSync(
   new URL('./capture-pattern-frames.mjs', import.meta.url), 'utf8'
-);
+) + readFileSync(new URL('./targets.mjs', import.meta.url), 'utf8');
 const fftSource = readFileSync(
   new URL('./measure-pattern-fft.py', import.meta.url), 'utf8'
 );

@@ -121,7 +121,7 @@ def confirm_fusion_renderer(models, palette, destinations, export_to=None):
     finally:srv.shutdown();srv.server_close()
     for source in destinations:
         mark(source,'meta-game-fusion')
-        mark(source,'voxel-atmosphere-engine')
+        if source!='voxel-atmosphere-engine':mark(source,'voxel-atmosphere-engine')
         if source!='casual-game-studio':mark(source,'casual-game-studio')
     mark('voxel-atmosphere-engine','meta-game-fusion')
     if 'fusion' in models:
@@ -206,6 +206,35 @@ def main():
         forge_hero=prepare_hero(forge_raw,w/'forge-through-hero.glb')
         mark('game-style-forge','hero-animator')
 
+        # Author-owned Voxel Atmosphere Engine 0.10.0 Blockbench moon gate:
+        # preserve all 448 original editable cubes by dividing into two GLBs.
+        # Casual Game Studio accepts max 300 cubes per .bbmodel; do not relax
+        # this safety limit or silently discard any source objects.
+        source_gate=json.loads((UP/'atmosphere'/'moon_gate_pixelorama.bbmodel').read_text())
+        gate_parts=source_gate['elements']
+        assert len(gate_parts)==448 and len({c['uuid'] for c in gate_parts})==448
+        exported=[]
+        for part_index,start in enumerate(range(0,len(gate_parts),224),1):
+            subset=gate_parts[start:start+224]
+            clone=dict(source_gate)
+            clone['name']=f"moon-gate-original-part-{part_index}"
+            clone['elements']=subset
+            clone['outliner']=[c['uuid'] for c in subset]
+            fragment=w/f"moon-gate-{part_index}.bbmodel"
+            fragment.write_text(json.dumps(clone,ensure_ascii=False),encoding='utf-8')
+            output=w/f"moon-gate-{part_index}.glb"
+            casual.make_glb(fragment,output)
+            doc=voxel.read_glb(output)
+            assert doc['meshes']==len(subset),(doc['meshes'],len(subset))
+            optimize_blender(output,w/f"moon-gate-{part_index}.blender.glb")
+            prepare_hero(output,w/f"moon-gate-{part_index}.hero.glb")
+            exported.append(output)
+        assert len(exported)==2
+        mark('voxel-atmosphere-engine','casual-game-studio')
+        mark('voxel-atmosphere-engine','voxel-game-creator')
+        mark('voxel-atmosphere-engine','blender-model-animation-enhancer')
+        mark('voxel-atmosphere-engine','hero-animator')
+        
         from PIL import ImageColor
         import numpy as np
         visual=get_mod('forge_vision',UP/'forge'/'vision_opencv.py')
@@ -218,10 +247,11 @@ def main():
         # For each model, real GLB reaches the exact Meta Game Fusion loader in Chrome.
         browserdir=HERE/'browser'
         (browserdir/'palette.json').write_text(json.dumps(palette))
-        scene_models={'casual':casual_raw,'blender':blender,'hero':hero,'forge':forge_raw,'voxel':voxel_model}
+        scene_models={'casual':casual_raw,'blender':blender,'hero':hero,'forge':forge_raw,'voxel':voxel_model,
+                      'atmosphere-a':exported[0],'atmosphere-b':exported[1]}
         fusion_glb=w/'fusion-runtime-export.glb'
         confirm_fusion_renderer(scene_models,palette,['casual-game-studio','blender-model-animation-enhancer',
-                                          'hero-animator','game-style-forge','voxel-game-creator'],export_to=fusion_glb)
+                                          'hero-animator','game-style-forge','voxel-game-creator','voxel-atmosphere-engine'],export_to=fusion_glb)
         # Actual Meta Game Fusion scene graph is GLB-exported from Chromium, then
         # consumed by the original other four plugin adapters.
         voxel_consumer(fusion_glb,'meta-game-fusion')
@@ -234,7 +264,7 @@ def main():
 
     total=42
     print('CONFIRMED_REAL_INTEGRATIONS',len(confirmed),'/',total,'PERCENT',round(100*len(confirmed)/total,2))
-    if len(confirmed)<36:raise SystemExit('Too few verified real integration routes')
+    if len(confirmed)!=42:raise SystemExit('Real integration routes incomplete')
     out=ROOT/'integration'/'confirmed.json'
     out.write_text(json.dumps({'confirmed':sorted([{'from':a,'to':b} for a,b in confirmed],
         key=lambda r:(r['from'],r['to'])),'denominator':total,'test_definition':

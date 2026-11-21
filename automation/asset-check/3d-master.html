@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14181b">
+<title>3D Мастер · META GAMES Lab</title>
+<link rel="icon" href="data:,">
+<style>
+:root{color-scheme:dark;--silver:#d8d4c9;--muted:#a2aaa9;--line:#b0d8c637;--ink:#101719}
+*{box-sizing:border-box}
+html,body{margin:0;overflow:hidden;height:100%;background:#101719;color:var(--silver);font:14px/1.45 system-ui,sans-serif}
+body::after{content:"";pointer-events:none;position:fixed;inset:0;
+background:radial-gradient(ellipse at 65% 42%,transparent 23%,#06090c77 100%);z-index:1}
+canvas{display:block;touch-action:none}
+#header{position:fixed;z-index:5;left:max(18px,env(safe-area-inset-left));
+top:max(16px,env(safe-area-inset-top));pointer-events:none;max-width:calc(100% - 90px)}
+.eyebrow{color:#92cbb7;letter-spacing:.32em;font-size:10px;font-weight:700}
+h1{margin:4px 0 0;font:italic clamp(26px,4.6vw,48px) Georgia,serif;letter-spacing:.015em}
+.subtitle{color:#b5bebb;font:12px/1.5 system-ui;margin-top:7px}
+#menuBtn{position:fixed;z-index:8;top:max(16px,env(safe-area-inset-top));right:max(18px,env(safe-area-inset-right));border:1px solid #c7c8b760;
+background:#172326dd;color:#e7e7db;font-size:24px;width:46px;height:46px;
+border-radius:11px;cursor:pointer;backdrop-filter:blur(18px)}
+#panel{position:fixed;z-index:7;top:max(75px,calc(env(safe-area-inset-top) + 62px));
+right:max(18px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));
+width:min(360px,calc(100vw - 36px));overflow:auto;border:1px solid var(--line);
+background:#0f191de8;border-radius:15px;padding:21px;box-shadow:0 16px 80px #000a;
+backdrop-filter:blur(24px)}
+#panel[hidden]{display:none}
+#panel h2{font:italic 25px Georgia;margin:0 0 9px}
+#panel p{color:var(--muted);font-size:12px}
+.section{padding:15px 0 12px;border-top:1px solid var(--line)}
+.section h3{margin:0 0 10px;font-size:11px;color:#96baa9;letter-spacing:.16em;text-transform:uppercase}
+.buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+button{font:inherit}
+.buttons button{border:1px solid #899a8b55;border-radius:7px;background:#c2cfbd13;
+padding:10px 7px;color:#e5e4d5;cursor:pointer}
+.buttons button[aria-pressed="true"]{background:#a9ddbd36;border-color:#abdac4;color:#e1f8e4}
+.buttons button:focus-visible,#menuBtn:focus-visible{outline:2px solid #a9efdb}
+#findings{display:grid;gap:9px}
+.finding{border-left:2px solid #d3ba81;background:#ffffff09;padding:9px 11px}
+.finding.HARD{border-color:#e67b69}
+.finding strong{display:block;margin-bottom:4px;font-size:12px}
+.finding small{color:#b5c0ba;font-size:11px;line-height:1.5;display:block}
+#metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.metric{background:#ffffff09;border:1px solid #d3d4cb1e;padding:10px;border-radius:8px}
+.metric b{font:22px Georgia;display:block;color:#d6e4d9;font-variant-numeric:tabular-nums}
+.metric span{display:block;font-size:10px;color:#90aaa0;text-transform:uppercase;letter-spacing:.1em}
+#hud{position:fixed;z-index:3;bottom:max(22px,env(safe-area-inset-bottom));
+left:max(18px,env(safe-area-inset-left));pointer-events:none}
+#badge{display:inline-flex;align-items:center;gap:8px;background:#121b1fc9;
+border:1px solid var(--line);border-radius:30px;padding:7px 12px;color:#b8d6c7;
+font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+#badge::before{content:"";width:7px;height:7px;border-radius:50%;background:#9fcbb8;box-shadow:0 0 14px #95ddb1}
+#badge.error::before{background:#de806e;box-shadow:0 0 12px #e58880}
+#footnote{margin-top:9px;color:#b7b8ac99;font-size:10px;letter-spacing:.05em}
+#error{position:fixed;z-index:9;bottom:24px;left:24px;right:24px;display:none;
+padding:14px;color:#ffdad2;background:#3f2324;border:1px solid #f09886;border-radius:8px}
+@media(max-width:700px){
+h1{font-size:29px}.subtitle{font-size:11px}
+#panel{top:max(72px,calc(env(safe-area-inset-top) + 61px))}
+#hud{bottom:max(12px,env(safe-area-inset-bottom))}
+}
+</style>
+<script type="importmap">{"imports":{"three":"../../reference/ink-fallen-guardian/three.module.js"}}</script>
+</head>
+<body>
+<div id="header">
+  <div class="eyebrow">META GAMES LAB / QUALITY STUDIO</div>
+  <h1>3D Мастер</h1>
+  <div class="subtitle">Живая модель. Настоящая сетка. Проверка со всех сторон.</div>
+</div>
+<button id="menuBtn" aria-label="Открыть инспектор" aria-expanded="false">☰</button>
+<aside id="panel" hidden>
+  <h2>Инспектор модели</h2>
+  <p>Эталон INK «Падальщик». Исходный объект не изменяется. Анализируем геометрию и материалы непосредственно в Three.js.</p>
+  <div class="section">
+    <h3>Визуализация</h3>
+    <div class="buttons">
+      <button data-mode="ink" aria-pressed="true">Материал INK</button>
+      <button data-mode="wire" aria-pressed="false">Сетка</button>
+      <button data-mode="normals" aria-pressed="false">Нормали</button>
+      <button data-mode="clay" aria-pressed="false">Глина</button>
+    </div>
+  </div>
+  <div class="section">
+    <h3>360° и анимация</h3>
+    <div class="buttons">
+      <button data-view="front">Спереди</button>
+      <button data-view="side">Сбоку</button>
+      <button data-view="back">Сзади</button>
+      <button data-view="orbit">360°</button>
+      <button data-action="bite">Укус</button>
+      <button data-action="jump">Прыжок</button>
+      <button data-action="strike">Атака</button>
+      <button data-action="prowl">Ходьба</button>
+    </div>
+  </div>
+  <div class="section">
+    <h3>Геометрия и производительность</h3>
+    <div id="metrics">Вычисление…</div>
+  </div>
+  <div class="section">
+    <h3>Результат инспекции</h3>
+    <div id="findings">Анализ…</div>
+  </div>
+  <p>Проверки определяют технические дефекты. Художественное качество требует сравнения с эскизом и решения художника.</p>
+</aside>
+<div id="hud">
+  <div id="badge">Анализ геометрии…</div>
+  <div id="footnote">ПОВОРОТ: ПАЛЕЦ / МЫШЬ · МАСШТАБ: ДВА ПАЛЬЦА / КОЛЕСО</div>
+</div>
+<div id="error" role="alert"></div>
+<script type="module" src="./three-master-viewer.js"></script>
+</body>
+</html>

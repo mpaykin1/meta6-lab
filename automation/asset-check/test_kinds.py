@@ -475,5 +475,160 @@ class NightSceneIsolationTests(unittest.TestCase):
             self.assertFalse(report.hard(), report.hard())
 
 
+class CutoutTraps(unittest.TestCase):
+    """Protect original-art hinged puppets from empty masks, cycles and fake motion."""
+
+    def setUp(self):
+        self.d = Path(tempfile.mkdtemp())
+        (self.d / "pack.json").write_text(json.dumps(COMMON), encoding="utf-8")
+
+    def tearDown(self):
+        shutil.rmtree(self.d, ignore_errors=True)
+
+    def sample(self, count=6):
+        image = Image.new("RGBA", (96, 96), (0, 0, 0, 0))
+        from PIL import ImageDraw
+        ImageDraw.Draw(image).rectangle((12, 12, 84, 84), fill=(80, 77, 84, 255))
+        image.save(self.d / "source.png")
+        parts = [
+            {"id": f"p{i}", "parent": None if i == 0 else "p0",
+             "pivot": [40 + i, 39],
+             "poly": [[17, 20], [77, 20], [48, 78]],
+             "motion": {"amplitude": .12, "lag": .2 + .17 * i, "frequency": 2}}
+            for i in range(count)
+        ]
+        document = {"format": "mg-cutout/1", "characters": [
+            {"id": "puppet", "source": "source.png", "dimensions": [96, 96], "parts": parts}]}
+        self.save(document)
+        return document
+
+    def save(self, document):
+        (self.d / "cutout.json").write_text(json.dumps(document), encoding="utf-8")
+
+    def test_CJ_clean_hinged_source_passes(self):
+        self.sample()
+        result = cp.check(self.d)
+        self.assertIn("cutout", result.kinds)
+        self.assertEqual(result.hard(), [], result.hard())
+
+    def test_CJ2_no_real_segmentation(self):
+        self.sample(count=2)
+        self.assertIn("CJ2", ids(self.d))
+
+    def test_CJ3_invalid_parent(self):
+        data = self.sample()
+        data["characters"][0]["parts"][3]["parent"] = "missing"
+        self.save(data)
+        self.assertIn("CJ3", ids(self.d))
+
+    def test_CJ3_cyclic_hierarchy(self):
+        data = self.sample()
+        data["characters"][0]["parts"][0]["parent"] = "p1"
+        self.save(data)
+        self.assertIn("CJ3", ids(self.d))
+
+    def test_CJ4_synchronous_puppet_lags(self):
+        data = self.sample()
+        for part in data["characters"][0]["parts"]:
+            part["motion"]["lag"] = 0
+        self.save(data)
+        self.assertIn("CJ4", ids(self.d))
+
+    def test_CJ6_blank_alpha_faked_cutout(self):
+        self.sample()
+        Image.new("RGBA", (96, 96), (0, 0, 0, 0)).save(self.d / "source.png")
+        self.assertIn("CJ6", ids(self.d))
+
+    def test_CJ2_mask_outside_image(self):
+        data = self.sample()
+        data["characters"][0]["parts"][1]["poly"][0] = [-400, 20]
+        self.save(data)
+        self.assertIn("CJ2", ids(self.d))
+
+    def test_vorona_live_scene_has_no_hard_defects(self):
+        """Actual staged pack must pass the same gate as fixtures and survive headless WebGL."""
+        pack = Path(__file__).resolve().parents[2] / "asset-packs/incoming/vorona-v-tumane"
+        if not pack.is_dir():
+            self.skipTest("live pack is absent in isolated mutation fixture")
+        result = cp.check(pack)
+        self.assertIn("cutout", result.kinds)
+        self.assertEqual(len(result.asset_ids & {item["id"] for item in
+            json.loads((pack / "ZAKAZ.json").read_text("utf-8"))["items"]}), 26)
+        self.assertEqual(result.hard(), [], result.hard())
+
+    def test_CJ8_phantom_asset_without_renderer(self):
+        self.sample()
+        pack = json.loads((self.d / "pack.json").read_text("utf-8"))
+        pack["assets"] = {"ghost_forest": {"label_ru": "Фантом", "source": "scene.js"}}
+        (self.d / "pack.json").write_text(json.dumps(pack), encoding="utf-8")
+        (self.d / "scene.js").write_text("const ids=['ghost_forest'];", encoding="utf-8")
+        self.assertIn("CJ8", ids(self.d))
+
+
+class CutoutScreenshotEvidence(unittest.TestCase):
+    """Page-supplied counters cannot replace independent browser pixels."""
+
+    def probe(self, mode):
+        import base64
+        import os
+        import subprocess
+        import zlib
+        node = shutil.which("node")
+        self.assertIsNotNone(node, "Node is required for the screenshot gate")
+        source = (Path(__file__).parent / "kinds/cutout_browser.mjs").read_text("utf-8")
+        def chunk(kind, payload):
+            return (struct.pack(">I", len(payload)) + kind + payload +
+                    struct.pack(">I", zlib.crc32(kind + payload) & 0xffffffff))
+        rows = bytearray()
+        for y in range(64):
+            rows.append(0)
+            for x in range(64):
+                rows.extend((x * 4, y * 4, (x + y) * 2, 255) if mode == "detail" else (0, 0, 0, 255))
+        png = (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", 64, 64, 8, 6, 0, 0, 0)) +
+               chunk(b"IDAT", zlib.compress(bytes(rows))) + chunk(b"IEND", b""))
+        if mode == "invalid":
+            png = b"not a PNG"
+        encoded = base64.b64encode(png).decode("ascii")
+        write = "" if mode == "missing" else (
+            "writeFileSync(args.find(x=>x.startsWith('--screenshot=')).slice(13),"
+            "Buffer.from('" + encoded + "','base64'));"
+        )
+        fake_dom = '<body data-loaded="26" data-crow="2" data-beast="2" data-gpu="999" data-moved="yes"></body>'
+        stub = "const spawnSync=(_command,args)=>{" + write + "return {status:0,stdout:" + json.dumps(fake_dom) + ",stderr:''};};"
+        original = "import {spawnSync} from 'node:child_process';"
+        self.assertIn(original, source)
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "index.html").write_text("<!doctype html><p>No real renderer</p>", "utf-8")
+            script = root / "probe.mjs"
+            script.write_text(source.replace(original, stub), "utf-8")
+            run = subprocess.run([node, str(script), str(root / "index.html")],
+                                 capture_output=True, text=True, timeout=15,
+                                 env={**os.environ, "CHROME_BIN": node, "TMP": temp, "TEMP": temp})
+            return run.returncode, json.loads(run.stdout)
+
+    def test_missing_screenshot_rejects_forged_dom_claims(self):
+        code, result = self.probe("missing")
+        self.assertNotEqual(code, 0)
+        self.assertFalse(result["ok"])
+
+    def test_uniform_screenshot_rejects_forged_gpu_colors(self):
+        code, result = self.probe("blank")
+        self.assertNotEqual(code, 0)
+        self.assertFalse(result["ok"])
+
+    def test_invalid_screenshot_rejected(self):
+        code, result = self.probe("invalid")
+        self.assertNotEqual(code, 0)
+        self.assertFalse(result["ok"])
+
+    def test_detailed_screenshot_preserves_pixel_gate(self):
+        code, result = self.probe("detail")
+        self.assertEqual(code, 0, result)
+        self.assertTrue(result["ok"])
+        self.assertGreaterEqual(result["facts"]["colors"], 36)
+
+
+
 if __name__ == "__main__":
     unittest.main()

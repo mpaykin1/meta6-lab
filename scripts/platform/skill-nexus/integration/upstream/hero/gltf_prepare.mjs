@@ -32,7 +32,7 @@ function args(argv) {
 function snapshot(doc) {
   const root = doc.getRoot();
   // Node transforms, meshes, names, hierarchy, textures and material alpha state are immutable.
-  const nodes = root.listNodes().map(n => ({name:n.getName(), parent:n.getParentNode()?.getName() ?? null,
+  const nodes = root.listNodes().map(n => ({name:n.getName(), parent:n.getParent()?.propertyType==='Node'?n.getParent()?.getName():null,
     mesh:n.getMesh()?.getName()??null, skin:n.getSkin()?.getName()??null,
     matrix:Array.from(n.getWorldMatrix(),x=>Number(x.toFixed(6)))}));
   const textures = root.listTextures().map(t => ({name:t.getName(),mime:t.getMimeType(),sha:t.getImage()?sha(t.getImage()):null}));

@@ -63,7 +63,7 @@ def optimize_blender(source,target):
     return target
 
 def prepare_hero(source,target):
-    run('node',UP/'hero'/'gltf_prepare.mjs',source,target)
+    run('node',UP/'hero'/'gltf_prepare_compat.mjs',source,target)
     assert target.with_suffix('.glb.hero.json').is_file()
     assert target.with_suffix('.glb.colliders.json').is_file()
     manifest=json.loads(target.with_suffix('.glb.hero.json').read_text())

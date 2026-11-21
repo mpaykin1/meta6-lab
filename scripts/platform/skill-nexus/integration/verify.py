@@ -132,7 +132,8 @@ def main():
 
         def voxel_consumer(src,from_plugin):
             data=voxel.read_glb(src)
-            assert len(data.get('meshes',[]))>0
+            meshes=data.get('meshes',0)
+            assert (meshes if isinstance(meshes,int) else len(meshes))>0
             mark(from_plugin,'voxel-game-creator')
 
         def forge_consumer(src,from_plugin,name):

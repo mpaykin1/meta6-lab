@@ -1,0 +1,17 @@
+{
+  "schema": "meta-game-fusion.ink-source-list.v1",
+  "stories": [
+    {
+      "id": "last_viaduct",
+      "title": "Последний виадук",
+      "source_file": "last_viaduct.ink",
+      "source_game": "mgf-original-story",
+      "source_sha256": "48091c467e049542ab6ab08b95bf8156b2353661b99863c107e46f2fe935467f",
+      "approved_for_reuse": true,
+      "license": "Original authored for META GAME FUSION",
+      "exports": {
+        "torch": "flag:has_torch"
+      }
+    }
+  ]
+}

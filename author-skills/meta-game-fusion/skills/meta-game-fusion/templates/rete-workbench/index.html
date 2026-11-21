@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>META GAME FUSION — Миры</title>
+  <meta name="color-scheme" content="dark" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="symbol">✧</div><div class="brand-text"><strong>META GAME FUSION</strong><small>КОМПОЗИТОР МИРОВ · v0.6</small></div></div>
+      <div class="titlebar"><input id="projectTitle" placeholder="Название истории" aria-label="Название истории" value="Новый мир — набросок"/></div>
+      <div class="actions">
+        <button id="fitBtn" class="subtle" title="Показать весь граф">⊡ <span>Вписать</span></button>
+        <button id="importBtn" class="subtle">Импорт</button>
+        <button id="exportBtn" class="primary">Экспорт JSON ↗</button>
+        <input type="file" accept=".json,application/json" id="fileInput" hidden/>
+      </div>
+    </header>
+    <aside class="library panel">
+      <div class="panel-heading"><span class="eyebrow">01 / РЕЖИССУРА</span><h2>Конструктор сюжета</h2><p>Собирайте главы и события из готовых механизмов.</p></div>
+      <div class="stages">
+        <button class="stage" data-add="start"><span class="stage-dot sun"></span><span>Начало<small>Точка входа</small></span><b>＋</b></button>
+        <button class="stage" data-add="scene"><span class="stage-dot indigo"></span><span>Сцена<small>Мир или глава</small></span><b>＋</b></button>
+        <button class="stage" data-add="dialogue"><span class="stage-dot purple"></span><span>Диалог Ink<small>Реальные выборы и последствия</small></span><b>＋</b></button>
+        <button class="stage" data-add="branch"><span class="stage-dot purple"></span><span>Развилка<small>Последствия выбора</small></span><b>＋</b></button>
+        <button class="stage" data-add="ending"><span class="stage-dot green"></span><span>Финал<small>Завершение главы</small></span><b>＋</b></button>
+      </div>
+      <div class="catalog-header"><span class="eyebrow">02 / БИБЛИОТЕКА ИГР</span><span class="tiny-label" id="catalogCount">0 записей</span></div>
+      <input id="search" class="search" type="search" placeholder="Найти механику или ассет…" aria-label="Поиск компонентов" />
+      <select id="kindFilter" aria-label="Фильтр типа компонента"><option value="all">Все типы</option><option value="mechanic">Механики</option><option value="model">3D-модели</option><option value="texture">Текстуры</option><option value="animation">Анимации</option><option value="shader">Шейдеры</option><option value="audio">Звуки</option></select>
+      <div class="catalog-scroll" id="catalogList"><div class="hint">Загрузка каталога…</div></div>
+      <div class="library-footer"><span class="pulsedot"></span> Локальный каталог. Оригиналы игр не изменяются.</div>
+    </aside>
+    <main class="workspace">
+      <div class="world-glow"></div>
+      <div class="canvas-intro"><span class="eyebrow">03 / СОЕДИНЕНИЕ</span><span class="canvas-caption">Соединяйте сюжетные узлы линиями. Ассеты — с входами «Ресурс».</span></div>
+      <div id="rete" role="application" aria-label="Визуальный граф сюжета"></div>
+      <div class="canvas-footer"><span id="status">Готово</span><span id="stats">0 узлов · 0 связей</span></div>
+    </main>
+    <aside class="inspector panel">
+      <div class="panel-heading"><span class="eyebrow">04 / СВОЙСТВА</span><h2>Выбранный узел</h2><p>Параметры сценария и происхождение ресурсов.</p></div>
+      <label class="field-label">Узел</label><select id="nodeSelector" aria-label="Выберите узел"></select>
+      <label class="field-label" for="nodeTitle">Название</label><input id="nodeTitle" type="text" maxlength="150" />
+      <div id="conditionBox" hidden><label class="field-label" for="condition">Условие развилки</label><input id="condition" type="text" placeholder="flag:door_open"/><small>Только flag:имя или item:имя. Код не исполняется.</small></div>
+      <div id="storyBox" hidden><label class="field-label" for="storySelect">Ink-сценарий</label><select id="storySelect" aria-label="Выбрать Ink-сценарий"></select><small>Сценарии компилируются локально с помощью inkjs.</small></div>
+      <div class="node-info" id="nodeInfo"></div>
+      <button id="removeBtn" class="danger">Удалить выбранный узел</button>
+      <div class="validation"><span class="eyebrow">05 / СБОРКА</span><p id="readiness">Граф — заготовка будущей игры.</p><button class="secondary" id="checkBtn">Проверить схему</button><button class="secondary" id="playBtn">▶ Сыграть сюжет</button></div>
+      <div class="inspector-footer">Rete.js управляет графом. Игра создаётся отдельным сборщиком после проверки прав, механик и переходов.</div>
+    </aside>
+  </div>
+  <section class="ink-player" id="inkPlayer" hidden aria-label="Интерактивный сюжет">
+    <div class="ink-window">
+      <div class="ink-head"><span class="eyebrow">РЕЖИМ СЮЖЕТА · INKJS</span><button data-close aria-label="Закрыть">×</button></div>
+      <h2 data-title>История</h2><div data-lines class="ink-lines"></div>
+      <div data-choices class="ink-choices"></div><p data-message class="ink-message"></p>
+      <div class="ink-controls"><button data-next>Продолжить →</button><button data-save>Сохранить</button><button data-load>Загрузить</button></div>
+      <p class="ink-warning">Прототип сюжета: игровые механики показываются как этапы, без запуска исходных игр.</p>
+    </div>
+  </section>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "meta-game-fusion-gltf-optimizer",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Isolated, explicitly installed glTF Transform 4.5.1 runtime for META GAME FUSION",
+  "scripts": {
+    "version": "gltf-transform --version"
+  },
+  "dependencies": {
+    "@gltf-transform/cli": "4.5.1"
+  }
+}

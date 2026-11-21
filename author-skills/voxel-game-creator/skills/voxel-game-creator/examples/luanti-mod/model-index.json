@@ -1,0 +1,42 @@
+{
+  "format": "vgc-luanti-bridge-v1",
+  "models": [
+    {
+      "id": "vgc_waystone",
+      "size": [
+        7,
+        15,
+        7
+      ],
+      "nodes": 92
+    },
+    {
+      "id": "vgc_crystal",
+      "size": [
+        9,
+        12,
+        9
+      ],
+      "nodes": 184
+    },
+    {
+      "id": "vgc_tree",
+      "size": [
+        19,
+        24,
+        19
+      ],
+      "nodes": 1972
+    },
+    {
+      "id": "vgc_lantern",
+      "size": [
+        5,
+        12,
+        5
+      ],
+      "nodes": 36
+    }
+  ],
+  "materials": 6
+}

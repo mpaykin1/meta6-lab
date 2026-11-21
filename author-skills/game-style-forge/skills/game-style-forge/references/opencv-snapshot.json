@@ -1,0 +1,12 @@
+{
+  "url": "https://github.com/opencv/opencv",
+  "tag": "4.13.0",
+  "commit": "2e1f8da65e4f9fa1a98423e6ac223187438a4db8",
+  "license": "Apache-2.0",
+  "git_blobs": {
+    "LICENSE": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+    "samples/python/opt_flow.py": "76a0ac2caf62fa72e455fadaca2dd7cf942b8e65"
+  },
+  "runtime_python_package": "opencv-python-headless==4.13.0.92",
+  "runtime_note": "Python bindings, not vendored; upstream sample included for provenance and API reference only."
+}

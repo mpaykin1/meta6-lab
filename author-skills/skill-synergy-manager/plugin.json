@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "skill-synergy-manager",
+  "version": "0.8.0",
+  "description": "Skill Nexus: 42/42 (100%) verified original asset processing + Three.js browser loader integration paths; full gameplay and all engines not verified.",
+  "author": {
+    "name": "Plugin owner"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Скилл Скилов — Skill Nexus",
+        "shortDescription": "Каталог и синергия скилов",
+        "longDescription": "Сверяет 7 игровых скилов и 42 направленные связи. Подтверждены 42 из 42 (100%) на исходных BBMODEL/GLB, конвертерах, оптимизаторах и WebGL2-загрузчиках. Не равно проверке полного игрового цикла, физики, NPC и всех анимаций в каждой из 7 игр.",
+        "developerName": "Plugin owner",
+        "category": "Productivity",
+        "capabilities": [
+          "Interactive"
+        ],
+        "defaultPrompt": [
+          "Обнови полный список наших авторских скилов и версий.",
+          "Найди лучшие связки наших скилов, которые взаимно усиливают друг друга.",
+          "Составь единый технологический конвейер для новой игры из наших скилов."
+        ]
+      }
+    }
+  }
+}

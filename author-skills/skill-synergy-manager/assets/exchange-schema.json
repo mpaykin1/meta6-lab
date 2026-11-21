@@ -1,0 +1,28 @@
+{
+  "schema": "skill-nexus.exchange/1",
+  "artifact_types": {
+    "style_profile.json": "style profile metadata, not code",
+    "png": "approved artwork or render reference",
+    "gif": "approved animation, not inferred game logic",
+    "webm": "video artwork or scene reference",
+    "glb": "glTF Binary, may contain authored animation",
+    "gltf": "glTF assets with dependencies",
+    "vox": "voxel geometry",
+    "bbmodel": "editable Blockbench model",
+    "vrm": "VRM 3D avatar",
+    "glsl": "shader source, not automatically injected",
+    "json": "typed scene / event / prefab / project metadata",
+    "html": "static game entry point, not a guaranteed portable app",
+    "js": "runtime source, trust/license gated"
+  },
+  "project_policy": {
+    "hero_identity": "immutable hero_id across all states",
+    "animation_input": "events only, no unsolicited action",
+    "physics_authority": "single provider per scene, Rapier preferred",
+    "postfx_authority": "one EffectComposer and one render loop",
+    "copyright": "provenance + license per imported source",
+    "quality": "no spontaneous geometry/art swap",
+    "missing_asset": "fail, do not generate imitation",
+    "offline": "promise only when actual local dependencies are bundled"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "repo": "isaac-mason/recast-navigation-js",
+  "url": "https://github.com/isaac-mason/recast-navigation-js",
+  "tag": "recast-navigation@0.44.0",
+  "commit": "8a2ece9f8b4947fcb328e17c7ac76c41744021b3",
+  "version": "0.44.0",
+  "license": "MIT",
+  "git_blobs": {
+    "LICENSE": "85b70a6105903d685e32c1ba74e8cd9efdb60f04",
+    "packages/recast-navigation-three/src/utils/generators.ts": "f7c7b9e5eccfa125f8c0215deac2fffc9d9f81bf",
+    "packages/recast-navigation-three/src/utils/get-positions-and-indices.ts": "4cd14ddf87047f6c79c23534765d616334f4c732"
+  },
+  "runtime_packages": {
+    "recast-navigation": "0.44.0",
+    "@recast-navigation/three": "0.44.0"
+  },
+  "requires": {
+    "three": "0.186.1",
+    "three-bvh-csg": "0.0.18",
+    "three-mesh-bvh": "0.9.18",
+    "rapier": "0.21.0"
+  },
+  "note": "MIT GitHub source snapshot is partial; full Recast/Detour WASM delivered by npm at game build. Recast navigation is pathfinding only, Rapier physics unchanged."
+}

@@ -1,0 +1,7 @@
+{
+  "hero_id": "ash-wanderer",
+  "approved": false,
+  "reference_sha256": null,
+  "actions": {},
+  "_note": "Template only; run directional_pack.py --fingerprints and visually review every 4/8-way clip before approved:true. Do not invent hashes or characters."
+}

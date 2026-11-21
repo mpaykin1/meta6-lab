@@ -1,0 +1,31 @@
+{
+  "title": "Ashen Archipelago — Пепельные острова",
+  "seed": 7391,
+  "theme": "ash",
+  "colors": {
+    "top": "#1b2436",
+    "horizon": "#705568",
+    "sunset": "#db8766",
+    "night": "#080914",
+    "ground": "#72645f",
+    "stone": "#4d4a57",
+    "wood": "#66534d",
+    "leaves": "#64475e",
+    "fog": "#736578"
+  },
+  "outputs": [
+    "luanti"
+  ],
+  "rag_asset_count": 4,
+  "model_format": "ragnagrok-models-v1",
+  "shared_geometry": "decorative instances only; no terrain/chunk or world save interchange",
+  "rigged_animation": "Ragnagrok Studio only",
+  "physics": "native per engine",
+  "blockbench_glb_assets": [],
+  "glb_render": "Lumenwild and Voxelize via native Three.js GLTFLoader; source figures remain independent",
+  "glb_collision": "none: visual props only",
+  "blockbench_editor_source_included": false,
+  "luanti_mod": true,
+  "luanti_engine_source_included": false,
+  "luanti_bridge": "native Lua mod: colored authored Ragnagrok voxels, solid nodes, glow; one source voxel maps to one Luanti node; no savegame synchronization"
+}

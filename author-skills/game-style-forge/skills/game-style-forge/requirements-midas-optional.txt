@@ -1,0 +1,8 @@
+# Optional. Pretrained MiDaS inference uses a separately checked out pinned source tree.
+# Install ONLY after reviewing the model/checkpoint licenses.
+# See the upstream pinned README for exact compatible versions.
+torch
+torchvision
+timm
+opencv-python-headless
+numpy

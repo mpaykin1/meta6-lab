@@ -1,0 +1,10 @@
+{
+  "version":1,
+  "day_night":{"enabled":true},
+  "actors":[
+    {"id":"roof-cat","role":"cat","z":20,"polygon":[[0.22,0.076],[0.29,0.075],[0.28,0.106],[0.23,0.106]],"motion":{"type":"breathe","period":2.7,"amplitude":0.015,"phase":0.2}},
+    {"id":"balcony-tree","role":"plant","z":30,"box":[0.73,0.61,0.98,0.85],"motion":{"type":"sway","period":4.2,"amplitude":2.4,"phase":0.6}}
+  ],
+  "lights":[{"id":"roof-lamp","box":[0.38,0.115,0.4,0.13],"phase":0.1}],
+  "particles":[{"type":"petals","count":25,"region":[0.62,0.6,0.98,0.92],"speed":0.09}]
+}

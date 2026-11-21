@@ -1,0 +1,12 @@
+{
+  "project": "ashima/webgl-noise",
+  "url": "https://github.com/ashima/webgl-noise",
+  "commit": "6abed1e77ed1e18b181627c35f688eb30c9fe75e",
+  "snapshot_type": "selected upstream files, NOT a full repository clone",
+  "license": "MIT",
+  "git_blobs": {
+    "src/noise2D.glsl": "6db208685dfc3b3e06ac8d4696f13e5e3c071755",
+    "src/noise3D.glsl": "0d5858780b7edcededdc2bff9e2c9d4d369fe1ed",
+    "LICENSE": "fe03f28c76b4759250822e17e1554eb71635b966"
+  }
+}

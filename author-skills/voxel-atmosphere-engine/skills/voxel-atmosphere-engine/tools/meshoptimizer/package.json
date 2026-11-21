@@ -1,0 +1,6 @@
+{
+  "name": "vae-meshoptimizer-upstream",
+  "private": true,
+  "version": "0.7.0",
+  "dependencies": { "meshoptimizer": "1.3.0", "gltfpack": "1.3.0" }
+}

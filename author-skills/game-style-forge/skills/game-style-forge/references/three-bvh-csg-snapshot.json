@@ -1,0 +1,19 @@
+{
+  "repo": "gkjohnson/three-bvh-csg",
+  "url": "https://github.com/gkjohnson/three-bvh-csg",
+  "tag": "v0.0.18",
+  "commit": "0ac3a84662958579d3627bbfcd6bb81746c2d699",
+  "version": "0.0.18",
+  "license": "MIT",
+  "git_blobs": {
+    "LICENSE": "8a8c70c7a41d7e1e9c6fa5b7bdcb16fa6872dba3",
+    "src/index.js": "b1e41389f23840f571ce813d587bb1b658931ea6",
+    "src/core/constants.js": "e59226b34962a865aafd3d43f1e53eff7babd5bd"
+  },
+  "runtime_package": "three-bvh-csg@0.0.18",
+  "requires": {
+    "three": ">=0.179.0",
+    "three-mesh-bvh": ">=0.9.7"
+  },
+  "notes": "Pinned partial GitHub source excerpt only; runtime installed separately with npm. CSG preview can have non-manifold numerical issues, never use for physics colliders directly."
+}

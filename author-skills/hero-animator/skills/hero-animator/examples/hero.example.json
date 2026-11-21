@@ -1,0 +1,32 @@
+{
+  "id": "mage",
+  "out_dir": "sheets",
+  "work": "work",
+  "ppu": 1.0,
+  "height": 245,
+  "src_height": 332,
+  "foot": [510, 647],
+  "key": "auto",
+  "despill": "hue",
+  "dropBorder": false,
+  "groundClamp": true,
+  "minArea": 60,
+  "quality": 80,
+  "shadow": [78, 13],
+  "masks": [[1120, 560, 1200, 640]],
+  "anims": {
+    "idle": {"video": "clips/idle.mp4", "fps": 24, "warp": [[0, 1.6, 1.6]], "loop": true, "pingpong": true},
+    "attack": {"video": "clips/attack.mp4", "fps": 30, "warp": [[0.21, 0.67, 0.06], [0.67, 0.92, 0.05], [0.92, 1.25, 0.05], [1.25, 2.0, 0.1], [2.46, 3.12, 0.16], [3.12, 3.5, 0.06]], "release": 0.16, "muzzle": "auto", "blend": false},
+    "cast": {"video": "clips/ult.mp4", "fps": 30, "warp": [[0.75, 1.6, 0.32], [1.6, 2, 0.15], [2.4, 3.04, 0.33], [3.04, 3.7, 0.17], [3.7, 4.25, 0.15], [4.25, 4.75, 0.15], [4.95, 5.75, 0.25]], "release": 0.32, "ppu": 0.8, "blend": false},
+    "hit": {"video": "clips/hit.mp4", "fps": 30, "warp": [[0.35, 1, 0.18], [1, 2, 0.27]], "blend": false},
+    "stun": {"video": "clips/stun.mp4", "fps": 24, "warp": [[0.6, 2.6, 2]], "loop": true, "pingpong": true},
+    "victory": {"video": "clips/victory.mp4", "fps": 30, "warp": [[0.3, 1.2, 0.5], [1.2, 3.4, 1.2]], "loopFrom": 0.5, "pingpong": 0.5, "ppu": 0.9},
+    "idle_happy": {"video": "clips/idle_happy.mp4", "fps": 24, "warp": [[0.13, 0.72, 0.59]], "loop": true, "pingpong": true},
+    "death": {"video": "clips/death.mp4", "fps": 30, "warp": [[0.3, 0.42, 0.05], [0.83, 1.5, 0.3], [1.5, 2.2, 0.35], [2.2, 3, 0.3]], "hold": true, "blend": false},
+    "cheer": {"video": "clips/victory.mp4", "fps": 30, "warp": [[0.3, 1.2, 0.5], [1.2, 3.4, 1.2], [3.4, 5, 0.75]], "ppu": 0.9},
+    "fidget_staff": {"video": "clips/fidget_staff.mp4", "fps": 24, "warp": [[0, 1.2, 0.25], [1.2, 4.9, 3.7], [4.9, 6, 0.3]], "label": "Стучит посохом", "ppu": 0.9},
+    "fidget_beard": {"video": "clips/fidget_beard.mp4", "fps": 24, "warp": [[0, 0.9, 0.2], [0.9, 4.9, 4], [4.9, 6, 0.3]], "label": "Гладит бороду", "ppu": 0.9},
+    "fidget_star": {"video": "clips/fidget_star.mp4", "fps": 24, "warp": [[0, 0.7, 0.15], [0.7, 4.6, 3.9], [4.6, 6, 0.35]], "label": "Протирает звезду", "ppu": 0.9}
+  },
+  "portrait": {"anim": "idle", "t": 0, "box": [395, 300, 655, 560], "size": 256}
+}

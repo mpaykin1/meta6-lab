@@ -1,0 +1,9 @@
+Blender official source snapshot
+===============================
+Repository: https://github.com/blender/blender
+README.md snapshot retrieved from GitHub API.
+GLTF Addon: https://github.com/blender/blender/blob/main/scripts/addons_core/io_scene_gltf2/__init__.py
+Blender glTF 2.0 addon upstream SPDX-License-Identifier: Apache-2.0.
+Official addon APIs used: bpy.ops.import_scene.gltf, bpy.ops.export_scene.gltf.
+Note: This small source snapshot DOES NOT contain the Blender application or glTF addon runtime.
+For the complete source, run skills/voxel-atmosphere-engine/scripts/download_blender.py when network access is available.

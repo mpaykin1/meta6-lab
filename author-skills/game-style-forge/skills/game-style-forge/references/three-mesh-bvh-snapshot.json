@@ -1,0 +1,17 @@
+{
+  "id": "three-mesh-bvh",
+  "url": "https://github.com/gkjohnson/three-mesh-bvh",
+  "tag": "v0.9.18",
+  "version": "0.9.18",
+  "commit": "1d92383233482f12512ef0804748de45ad7f2f60",
+  "license": "MIT",
+  "package": "three-mesh-bvh@0.9.18",
+  "runtime_installed_in_plugin": false,
+  "git_blobs": {
+    "LICENSE": "1ef1648d29324453fcd04a27bb8c6e385f6807c8",
+    "src/index.js": "367471bf0ddbbed64e4d848f95db0a6de1b8d776"
+  },
+  "snapshot": "partial; runtime installed from pinned npm only for generated Vite game",
+  "peer_dependency": "three >=0.159.0",
+  "engine_three": "0.186.1"
+}

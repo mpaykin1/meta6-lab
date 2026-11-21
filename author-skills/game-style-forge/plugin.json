@@ -1,0 +1,30 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "game-style-forge",
+  "version": "1.10.0",
+  "description": "Game Style Forge 1.10: Three.js/GLSL living worlds with CSG/BVH architecture, Rapier physics, Recast navigation and autonomous animated NPC patrols. OpenCV/MiDaS/video analysis; mobile world guard.",
+  "author": {
+    "name": "Game Style Forge"
+  },
+  "keywords": [
+    "gamedev",
+    "3d",
+    "csg",
+    "procedural-ruins",
+    "threejs",
+    "animated-world",
+    "mobile-portrait",
+    "landscape",
+    "quality-gate"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Game Style Forge",
+        "shortDescription": "Видео → игра: физика, глубина и BVH",
+        "longDescription": "Видео в игру: Three.js/GLSL, OpenCV, PySceneDetect, MiDaS, Rapier, Postprocessing, glTF-Transform и three-mesh-bvh v0.9.18 для точных геометрических запросов и обхода препятствий камерой. Плагин остаётся единым и версионируется.",
+        "defaultPrompt": "Используй один и тот же Game Style Forge. При видео определи отдельные сцены с PySceneDetect 0.7.3 (только если runtime действительно установлен), выбери качественные ключевые кадры, сохрани палитры OpenCV и подготовь отдельные кадры для MiDaS. Сборка должна позволять переключать палитру сцены клавишей N без изменения героя/физики Rapier. Без PySceneDetect обозначай OpenCV fallback. Никогда не называй нескачанный runtime установленным. На v1.8 обязательно сохраняй Rapier как единственную физику. Используй three-mesh-bvh для статичной геометрии импортированных GLB, точных лучевых запросов и препятствий камеры, E — сканирование поверхности. Не считай BVH физическим коллайдером.\n"
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="theme-color" content="#9fccef" />
+  <title>Pastel Drop • Casual Game Studio</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="app">
+    <div class="sky-glow"></div>
+    <div id="game" role="application" aria-label="3D pastel tile drop game"></div>
+    <div id="hud">
+      <div id="avatarPanel" role="group" aria-label="VRM character controls">
+        <button id="avatarDemo" class="fx-toggle" type="button" title="Use included VRM humanoid">♡ HERO</button>
+        <button id="avatarUpload" class="fx-toggle" type="button" title="Import your own .vrm">↑ VRM</button>
+        <button id="avatarWave" class="fx-toggle" type="button" disabled title="Wave when pressed">👋 WAVE</button>
+        <button id="avatarBlink" class="fx-toggle" type="button" disabled title="Blink when pressed">◡ BLINK</button>
+        <input id="avatarFile" type="file" accept=".vrm,model/gltf-binary" hidden aria-label="Select VRM avatar" />
+        <span id="avatarStatus" aria-live="polite">AVATAR · BUNNY</span>
+      </div>
+      <button id="pet" class="fx-toggle" type="button" aria-label="Pet the 3D bunny" title="Pet the 3D bunny">🐰 PET</button>
+      <div class="topbar">
+        <div class="brand"><div class="brand-icon">✿</div><span id="gameTitle">PASTEL DROP</span></div><button id="particlesToggle" class="fx-toggle" type="button" aria-pressed="true" title="Toggle colorful particles">✿ VFX</button><button id="fxToggle" class="fx-toggle" type="button" aria-pressed="true" title="Toggle soft glow">✦ FX</button>
+        <div class="stats">
+          <div class="stat coin"><span class="stat-emoji">✦</span><span id="score">0</span></div>
+          <div class="stat drops"><span class="stat-emoji">◈</span><span id="moves">15</span></div>
+        </div>
+      </div>
+      <div class="level-pill">LEVEL <strong id="level">07</strong> <span class="star">★</span></div>
+      <div class="goal"><span>BREAK THE SWEET STACK</span><span id="pickingStatus" class="physics-status">PICKING · LOADING</span><span id="physicsStatus" class="physics-status">PHYSICS · LOADING</span><span id="particlesStatus" class="physics-status">PARTICLES · LOADING</span><span id="textureStatus" class="physics-status">TEXTURES · CANVAS</span><div class="goal-track"><div id="progress"></div></div></div>
+      <div class="bottom">
+        <div class="csg-actions"><button id="carve" class="fx-toggle" type="button" disabled title="Cut a real 3D hole in the selected tile (C)">◇ CARVE</button><span id="csgStatus" class="physics-status" aria-live="polite">CSG · LOADING</span></div>
+        <div class="instructions">TAP THE TOWER OR AIM WITH <strong>◀ ▶</strong></div>
+        <div class="controls">
+          <button id="left" class="arrow" aria-label="Aim left">‹</button>
+          <button id="drop" class="drop">✦ &nbsp; DROP! &nbsp; ✦</button>
+          <button id="right" class="arrow" aria-label="Aim right">›</button>
+        </div>
+        <div class="tip">SPACE TO DROP · MAGIC BLOCKS GIVE EXTRA POINTS</div>
+      </div>
+    </div>
+    <div id="end" class="hidden"><div class="end-panel"><div class="trophy">🏆</div><div class="end-overline">SWEET SUCCESS</div><h1 id="endHeading">LEVEL COMPLETE!</h1><p id="endText"></p><button id="again" class="drop">PLAY AGAIN</button></div></div>
+    <div id="error" class="hidden"><div class="error-panel">3D scene could not start.<br><small id="errorMessage">Check WebGL support or internet access.</small></div></div>
+  </div>
+  <script type="importmap">{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+    "three-mesh-bvh": "https://cdn.jsdelivr.net/npm/three-mesh-bvh@0.9.18/src/index.js",
+    "three-bvh-csg": "https://cdn.jsdelivr.net/npm/three-bvh-csg@0.0.18/src/index.js",
+    "@pixiv/three-vrm": "https://cdn.jsdelivr.net/npm/@pixiv/three-vrm@3.5.5/lib/three-vrm.module.js",
+    "meshoptimizer/decoder": "https://cdn.jsdelivr.net/npm/meshoptimizer@1.3.0/meshopt_decoder.mjs",
+    "postprocessing": "https://cdn.jsdelivr.net/npm/postprocessing@6.39.6/build/index.js",
+    "three.quarks": "https://cdn.jsdelivr.net/npm/three.quarks@0.17.1/dist/three.quarks.esm.js",
+    "quarks.core": "https://cdn.jsdelivr.net/npm/quarks.core@0.17.1/dist/quarks.core.esm.js",
+    "@dimforge/rapier3d-compat": "https://cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.21.0/dist/rapier.mjs",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+  }
+}</script>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>

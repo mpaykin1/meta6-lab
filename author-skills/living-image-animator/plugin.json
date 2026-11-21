@@ -1,0 +1,8 @@
+{
+  "$schema":"https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name":"living-image-animator",
+  "version":"0.4.0",
+  "description":"Identity-locked animated pixel-art scenes with strict real visible per-character movements and GIF+ZIP export.",
+  "keywords":["pixel-art","image-to-gif","living-scene","character-animation","visible-motion-gate","anti-jerk","gif-zip"],
+  "skills":"./skills"
+}

@@ -1,0 +1,15 @@
+{
+  "project": "dimforge/rapier",
+  "url": "https://github.com/dimforge/rapier",
+  "commit": "475caa3ff4646fd9a796b67d14116256f4962bc7",
+  "snapshot_type": "selected upstream TypeScript files, NOT full git clone or WASM distribution",
+  "runtime": "npm @dimforge/rapier3d-compat@0.21.0 (installed when building generated game)",
+  "license": "Apache-2.0",
+  "license_source": "https://github.com/dimforge/rapier/blob/475caa3ff4646fd9a796b67d14116256f4962bc7/LICENSE",
+  "license_upstream_git_blob": "97f4383a35a48ddd50566a879e836491d2fe9b75",
+  "license_local": "standard Apache-2.0 text, equivalent but not byte-identical to upstream LICENSE",
+  "git_blobs": {
+    "bindings/typescript/src.ts/rapier.ts": "dbf4d053aadc947fa22467fe80efbe2918514055",
+    "bindings/typescript/src.ts/init.ts": "e9e66aad78f9f8b3a2c866e213b6c5d5c08bdec7"
+  }
+}

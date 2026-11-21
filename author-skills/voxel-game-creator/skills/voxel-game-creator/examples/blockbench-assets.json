@@ -1,0 +1,12 @@
+{
+  "assets": [
+    {
+      "id": "voxel-lantern",
+      "file": "voxel-lantern.glb",
+      "position": [3, 0, 2],
+      "scale": 1,
+      "yaw": 0,
+      "idleClip": "idle"
+    }
+  ]
+}

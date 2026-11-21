@@ -1,0 +1,15 @@
+{
+  "source": "moon_gate_pixelorama.vox",
+  "dimensions": [
+    45,
+    13,
+    42
+  ],
+  "voxels": 6136,
+  "merged_editable_boxes": 448,
+  "glb": "moon_gate_pixelorama.glb",
+  "blockbench": "moon_gate_pixelorama.bbmodel",
+  "glb_faces": 9564,
+  "scale": 0.14,
+  "basis": "Goxel XYZ -> Three.js X,Z,-Y; ground at Y=0"
+}

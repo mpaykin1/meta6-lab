@@ -1,0 +1,12 @@
+{
+  "url": "https://github.com/Breakthrough/PySceneDetect",
+  "commit": "008aa740ba940cd6cbf9abe726f4127fc92f40fc",
+  "tag": "v0.7.3",
+  "license": "BSD-3-Clause",
+  "git_blobs": {
+    "LICENSE": "c03985e60181f431b181735b4d06ada21272322a",
+    "scenedetect/frame_timecode.py": "8fcb5e15f15c068f03ccee8c1f84a4219473d660"
+  },
+  "runtime_python_package": "scenedetect==0.7.3",
+  "source_note": "Partial pinned source snapshot obtained through GitHub connector. Full PySceneDetect runtime is NOT bundled. Vendored legacy shim is for source provenance ONLY."
+}

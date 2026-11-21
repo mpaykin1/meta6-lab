@@ -1,0 +1,4 @@
+opencv-python-headless==4.13.0.92
+numpy>=1.26,<3
+Pillow>=10,<13
+# Scene detection stage, optional pip dependency: scenedetect==0.7.3

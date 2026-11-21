@@ -23,6 +23,9 @@ jobs:
           python-version: '3.12'
       - name: Install 25 JS engine libraries and 12 Python dependencies
         run: bash scripts/platform/skill-nexus/install.sh core
+      - name: Run real inter-plugin model and WebGL integration
+        run: |
+          scripts/platform/skill-nexus/.venv/bin/python scripts/platform/skill-nexus/integration/verify.py
       - name: Verify Chromium WebGL2
         run: |
           scripts/platform/skill-nexus/.venv/bin/python - <<'PY'

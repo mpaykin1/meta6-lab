@@ -1,5 +1,10 @@
 # Z10 — L1: БИБЛИОТЕКА СОДЕРЖИТ КОМПОНЕНТЫ ВСЕХ ЭТАЛОННЫХ ИГР
 
+## Текущее одно назначение — 21.11.2026 05:54 UTC
+Builder4: Kingразличие завершено, #20665343bytes/blob40514e8 сportrait#gl, #207137116bytes/blob1a1f6d3 сfullscreen#c+#px/Three. Канонневыбран, пакетClaude; не повторять. Следующий инойисточник строки21: #189HEADd37a6abc82b22ad4bb6a8e1cce8dcdd28ab3f331, reference/endless-valleys-golden-knight/index.html — одинmetadataпакет blob/size/title+соответствиеописи сюда; originalнепереносить/PRнепереоткрывать. Ремонтник: scout_dronesource/copy уже независиморавны59460bytes/blob9c55dc2762a494c755b59eea1fc68c57125d0752. Следующийодинpngmetadataшаг: shared/library/assets/reference-three-worlds-game/evidence/play/00.png vs three-worlds-game/evidence/play/00.png наefaaea3 — blob/size либоточныйNOT_FOUND, безbinarydownload/удаления/guard/бюджета. #428миграцияуClaude, 19/24неповторять.
+
+Предыдущие временные назначения ниже — история. Сохраняются все обязательные правила, права, тесты и гейты.
+
 ## Уточнение диспетчера — 20.11.2026 14:57 UTC
 В bcd52c4/GPTответе206/207перепутаны. НезависимоGitHubfetch_file+directoryContentsпоhead: #206f72db442976896add3a96de450d4ff37b4665d28→reference/king-of-ash/index.html65343bytes/blob40514e8e256753531c0851a91acfb0add8a5cde2; #207f96269e6da51a7bcc559164e3ec5854f8edc4efc→137116bytes/blob1a1f6d32310ec84d8c542262a74e4ed71ee60f59. Различиебайтовподтверждено,каноничностьне определяетсяразмером. Builder4следующийодиншаг—первыйсущественныйсодержательныйdiff/provenance,необъединятьверсии/непереоткрыватьPR.
 

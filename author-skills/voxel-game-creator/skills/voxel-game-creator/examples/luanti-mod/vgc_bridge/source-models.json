@@ -1,0 +1,47 @@
+{
+  "format": "vgc-luanti-bridge-v1",
+  "source": "Ragnagrok-compatible palette and voxels",
+  "models": [
+    {
+      "id": "vgc_waystone",
+      "size": [
+        7,
+        15,
+        7
+      ],
+      "voxels": 92,
+      "source_scale_m": 0.15
+    },
+    {
+      "id": "vgc_crystal",
+      "size": [
+        9,
+        12,
+        9
+      ],
+      "voxels": 184,
+      "source_scale_m": 0.13
+    },
+    {
+      "id": "vgc_tree",
+      "size": [
+        19,
+        24,
+        19
+      ],
+      "voxels": 1972,
+      "source_scale_m": 0.1
+    },
+    {
+      "id": "vgc_lantern",
+      "size": [
+        5,
+        12,
+        5
+      ],
+      "voxels": 36,
+      "source_scale_m": 0.14
+    }
+  ],
+  "swatches": 6
+}

@@ -1,0 +1,16 @@
+{
+  "project": "pmndrs/postprocessing",
+  "url": "https://github.com/pmndrs/postprocessing",
+  "tag": "v6.39.6",
+  "commit": "a1f103559d15cf56cbcbb15d4373711b09418f3f",
+  "snapshot_type": "selected upstream files, NOT a full git clone or bundled complete npm distribution",
+  "runtime": "npm postprocessing@6.39.6, installed by npm in generated game",
+  "license": "Zlib",
+  "peer_dependencies": {
+    "three": ">=0.168.0 <0.188.0"
+  },
+  "git_blobs": {
+    "LICENSE.md": "0dbaabc8f47bb16b8fd827d2fb9cc953bd26c54d",
+    "src/effects/glsl/noise.frag": "07c272ed997e13ed93dbb1c252f1ad524d56f54f"
+  }
+}

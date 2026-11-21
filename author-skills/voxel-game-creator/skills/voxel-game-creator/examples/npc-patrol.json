@@ -1,0 +1,18 @@
+{
+  "agents": [
+    {
+      "id": "keeper-01",
+      "asset": "ragnagrok:vgc_watcher",
+      "path": [[5, 3], [9, 3], [10, 8], [5, 8]],
+      "speed": 0.9,
+      "loop": true
+    },
+    {
+      "id": "lantern-guard",
+      "asset": "ragnagrok:vgc_lantern",
+      "path": [[-6, -7], [-3, -7], [-3, -3], [-6, -3]],
+      "speed": 0.5,
+      "loop": true
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44892225366",
+  "commit": "c35b0c0a919cd97cd6062271fb674527e5191ec0",
+  "pr": "https://github.com/mpaykin1/meta6-lab/pull/429",
+  "level": "42/42 original plugin asset conversion / static GLB interoperability, browser loading and fusion re-export with original author-owned 448-cube Voxel Atmosphere moon gate + Casual pastel bunny; not 7 complete games.",
+  "confirmed_count": 42,
+  "potential_directions": 42,
+  "percentage": 100.0,
+  "full_games_verified": 0,
+  "fixture": "Casual Game Studio original 24-cube pastel bunny and Voxel Atmosphere Engine original 448-cube moon gate split into 224+224 cubes using the original Casual converter without dropping parts",
+  "consumer_modules": [
+    "Voxel Game Creator Blockbench GLB validator",
+    "Voxel Game Creator glTF optimizer",
+    "Blender Model Enhancer glTF optimization worker",
+    "Hero Animator GLB prepare (installed Hero Animator v0.14.0 getParent compatibility shim (verified in CI))",
+    "Game Style Forge GLB asset registrar/colour extraction",
+    "Casual Game Studio native model loader",
+    "Voxel Atmosphere Engine original model loader",
+    "Meta Game Fusion GLB loader and browser-origin GLTFExporter roundtrip",
+    "Voxel Atmosphere Engine full source BBMODEL exported through genuine Casual converter then consumed by original Voxel read_glb, Blender GLTF optimizer, Hero GLTF prepare compatibility shim and three real browser loaders"
+  ],
+  "directions": [
+    {
+      "from": "casual-game-studio",
+      "to": "voxel-game-creator",
+      "status": "ci_verified"
+    },
+    {
+      "from": "casual-game-studio",
+      "to": "blender-model-animation-enhancer",
+      "status": "ci_verified"
+    },
+    {
+      "from": "casual-game-studio",
+      "to": "hero-animator",
+      "status": "ci_verified"
+    },
+    {
+      "from": "casual-game-studio",
+      "to": "game-style-forge",
+      "status": "ci_verified"
+    },
+    {
+      "from": "casual-game-studio",
+      "to": "voxel-atmosphere-engine",
+      "status": "ci_verified"
+    },
+    {
+      "from": "casual-game-studio",
+      "to": "meta-game-fusion",
+      "status": "ci_verified"
+    },
+    {
+      "from": "voxel-game-creator",
+      "to": "casual-game-studio",
+      "status": "ci_verified"
+    },
+    {
+      "from": "voxel-game-creator",
+      "to": "blender-model-animation-enhancer",
+      "status": "ci_verified"
+    },
+    {
+      "from": "voxel-game-creator",
+      "to": "hero-animator",
+      "status": "ci_verified"
+    },
+    {
+      "from": "voxel-game-creator",
+      "to": "game-style-forge",
+      "status": "ci_verified"
+    },
+    {
+      "from": "voxel-game-creator",
+      "to": "voxel-atmosphere-engine",
+      "status": "ci_verified"
+    },
+    {
+      "from": "voxel-game-creator",
+      "to": "meta-game-fusion",
+      "status": "ci_verified"
+    },
+    {
+      "from": "blender-model-animation-enhancer",
+      "to": "casual-game-studio",
+      "status": "ci_verified"
+    },
+    {
+      "from": "blender-model-animation-enhancer",
+      "to": "voxel-game-creator",
+      "status": "ci_verified"
+    },
+    {
+      "from": "blender-model-animation-enhancer",
+      "to": "hero-animator",
+      "status": "ci_verified"
+    },
+    {
+      "from": "blender-model-animation-enhancer",
+      "to": "game-style-forge",
+      "status": "ci_verified"
+    },
+    {
+      "from": "blender-model-animation-enhancer",
+      "to": "voxel-atmosphere-engine",
+      "status": "ci_verified"
+    },
+    {
+      "from": "blender-model-animation-enhancer",
+      "to": "meta-game-fusion",
+      "status": "ci_verified"
+    },
+    {
+      "from": "hero-animator",
+      "to": "casual-game-studio",
+      "status": "ci_verified"
+    },
+    {
+      "from": "hero-animator",
+      "to": "voxel-game-creator",
+      "status": "ci_verified"
+    },
+    {
+      "from": "hero-animator",
+      "to": "blender-model-animation-enhancer",
+      "status": "ci_verified"
+    },
+    {
+      "from": "hero-animator",
+      "to": "game-style-forge",
+      "status": "ci_verified"
+    },
+    {
+      "from": "hero-animator",
+      "to": "voxel-atmosphere-engine",
+      "status": "ci_verified"
+    },
+    {
+      "from": "hero-animator",
+      "to": "meta-game-fusion",
+      "status": "ci_verified"
+    },
+    {
+      "from": "game-style-forge",
+      "to": "casual-game-studio",
+      "status": "ci_verified"
+    },
+    {
+      "from": "game-style-forge",
+      "to": "voxel-game-creator",
+      "status": "ci_verified"
+    },
+    {
+      "from": "game-style-forge",
+      "to": "blender-model-animation-enhancer",
+      "status": "ci_verified"
+    },
+    {
+      "from": "game-style-forge",
+      "to": "hero-animator",
+      "status": "ci_verified"
+    },
+    {
+      "from": "game-style-forge",
+      "to": "voxel-atmosphere-engine",
+      "status": "ci_verified"
+    },
+    {
+      "from": "game-style-forge",
+      "to": "meta-game-fusion",
+      "status": "ci_verified"
+    },
+    {
+      "from": "voxel-atmosphere-engine",
+      "to": "game-style-forge",
+      "status": "ci_verified"
+    },
+    {
+      "from": "voxel-atmosphere-engine",
+      "to": "meta-game-fusion",
+      "status": "ci_verified"
+    },
+    {
+      "from": "meta-game-fusion",
+      "to": "hero-animator",
+      "status": "ci_verified"
+    },
+    {
+      "from": "meta-game-fusion",
+      "to": "voxel-game-creator",
+      "status": "ci_verified"
+    },
+    {
+      "from": "meta-game-fusion",
+      "to": "casual-game-studio",
+      "status": "ci_verified"
+    },
+    {
+      "from": "meta-game-fusion",
+      "to": "voxel-atmosphere-engine",
+      "status": "ci_verified"
+    },
+    {
+      "from": "meta-game-fusion",
+      "to": "game-style-forge",
+      "status": "ci_verified"
+    },
+    {
+      "from": "meta-game-fusion",
+      "to": "blender-model-animation-enhancer",
+      "status": "ci_verified"
+    },
+    {
+      "from": "voxel-atmosphere-engine",
+      "to": "casual-game-studio",
+      "status": "ci_verified",
+      "evidence": "original moon_gate_pixelorama.bbmodel source, all 448 cubes processed; GitHub Actions 44892225366"
+    },
+    {
+      "from": "voxel-atmosphere-engine",
+      "to": "voxel-game-creator",
+      "status": "ci_verified",
+      "evidence": "original moon_gate_pixelorama.bbmodel source, all 448 cubes processed; GitHub Actions 44892225366"
+    },
+    {
+      "from": "voxel-atmosphere-engine",
+      "to": "blender-model-animation-enhancer",
+      "status": "ci_verified",
+      "evidence": "original moon_gate_pixelorama.bbmodel source, all 448 cubes processed; GitHub Actions 44892225366"
+    },
+    {
+      "from": "voxel-atmosphere-engine",
+      "to": "hero-animator",
+      "status": "ci_verified",
+      "evidence": "original moon_gate_pixelorama.bbmodel source, all 448 cubes processed; GitHub Actions 44892225366"
+    }
+  ]
+}

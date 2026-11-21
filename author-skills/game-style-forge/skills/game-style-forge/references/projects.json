@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "projects": [
+    {
+      "id": "pyscenedetect",
+      "repo": "https://github.com/Breakthrough/PySceneDetect.git",
+      "homepage": "https://github.com/Breakthrough/PySceneDetect",
+      "license": "BSD-3-Clause",
+      "stage": 8,
+      "role": "shot-boundary detection + keyframe extraction + per-scene Lab palettes; complements OpenCV and MiDaS",
+      "install": "python -m pip install scenedetect==0.7.3",
+      "requires": [
+        "opencv",
+        "midas"
+      ],
+      "feature": "scenes",
+      "type": "python",
+      "version": "0.7.3",
+      "note": "PySceneDetect source is a pinned partial GitHub snapshot; full Python runtime is a separately installed pinned PyPI package."
+    },
+    {
+      "id": "three",
+      "repo": "https://github.com/mrdoob/three.js.git",
+      "homepage": "https://github.com/mrdoob/three.js",
+      "license": "MIT",
+      "stage": 2,
+      "role": "3D renderer, GLSL and WebGL",
+      "install": "npm install three@0.186.1",
+      "requires": [],
+      "feature": "renderer",
+      "type": "npm",
+      "package": "three",
+      "version": "0.186.1"
+    },
+    {
+      "id": "webgl-noise",
+      "repo": "https://github.com/ashima/webgl-noise.git",
+      "homepage": "https://github.com/ashima/webgl-noise",
+      "license": "MIT",
+      "stage": 3,
+      "role": "GLSL procedural noise, clouds and fog",
+      "install": null,
+      "requires": [
+        "three"
+      ],
+      "feature": "noise",
+      "type": "source"
+    },
+    {
+      "id": "postprocessing",
+      "repo": "https://github.com/pmndrs/postprocessing.git",
+      "homepage": "https://github.com/pmndrs/postprocessing",
+      "license": "Zlib",
+      "stage": 4,
+      "role": "bloom, color grading, vignette",
+      "install": "npm install postprocessing@6.39.6",
+      "requires": [
+        "three"
+      ],
+      "feature": "postfx",
+      "type": "npm",
+      "package": "postprocessing",
+      "version": "6.39.6"
+    },
+    {
+      "id": "rapier",
+      "repo": "https://github.com/dimforge/rapier.git",
+      "homepage": "https://github.com/dimforge/rapier",
+      "license": "Apache-2.0",
+      "stage": 5,
+      "role": "WASM physics, static pillars, 3D hero capsule and kinematic controller, dynamic debris",
+      "install": "npm install --ignore-scripts @dimforge/rapier3d-compat@0.21.0",
+      "requires": [
+        "three",
+        "postprocessing"
+      ],
+      "feature": "physics",
+      "type": "npm",
+      "package": "@dimforge/rapier3d-compat",
+      "version": "0.21.0"
+    },
+    {
+      "id": "opencv",
+      "repo": "https://github.com/opencv/opencv.git",
+      "homepage": "https://github.com/opencv/opencv",
+      "license": "Apache-2.0",
+      "stage": 6,
+      "role": "Video frame analysis, perceptual Lab palette, Farneback adjacent-frame optical flow (global/local motion estimate)",
+      "install": "python -m pip install opencv-python-headless==4.13.0.92",
+      "requires": [],
+      "feature": "vision",
+      "type": "python",
+      "version": "4.13.0",
+      "runtime_wheel": "4.13.0.92"
+    },
+    {
+      "id": "midas",
+      "repo": "https://github.com/isl-org/MiDaS.git",
+      "homepage": "https://github.com/isl-org/MiDaS",
+      "license": "MIT",
+      "stage": 7,
+      "role": "optional pinned MiDaS relative depth map → 2.5D layered parallax scene; visuals only, no inferred 3D collision",
+      "install": "python -m pip install torch torchvision timm opencv-python-headless (inference only, local pinned MiDaS repo + trusted weights required)",
+      "requires": [
+        "opencv"
+      ],
+      "feature": "depth",
+      "type": "optional-python",
+      "note": "Archived upstream; source MIT; no weights in plugin. Optional import-depth accepts a user-supplied depth map without running model.",
+      "source_commit": "454597711a62eabcbf7d1e89f3fb9f569051ac9b",
+      "archived": true
+    },
+    {
+      "id": "gltf-transform",
+      "repo": "https://github.com/donmccurdy/glTF-Transform.git",
+      "homepage": "https://github.com/donmccurdy/glTF-Transform",
+      "license": "MIT",
+      "stage": 9,
+      "role": "GLB scene asset audit + Meshopt optimization + stable Three.js model loading without touching hero artwork",
+      "install": "npm install --ignore-scripts @gltf-transform/cli@4.5.1 (asset authoring environment only)",
+      "requires": [
+        "pyscenedetect"
+      ],
+      "feature": "asset optimization",
+      "type": "npm-cli",
+      "package": "@gltf-transform/cli",
+      "version": "4.5.1",
+      "note": "Bundled pinned partial source snapshot; full CLI separately installed in asset build environment. Does not replace the renderer."
+    },
+    {
+      "id": "three-mesh-bvh",
+      "repo": "https://github.com/gkjohnson/three-mesh-bvh.git",
+      "homepage": "https://github.com/gkjohnson/three-mesh-bvh",
+      "license": "MIT",
+      "stage": 10,
+      "role": "BVH spatial acceleration for optimized GLB geometry, precise view-ray targeting, camera occlusion; Rapier remains physics authority",
+      "install": "npm install --ignore-scripts three-mesh-bvh@0.9.18",
+      "requires": [
+        "gltf-transform",
+        "three",
+        "rapier"
+      ],
+      "feature": "spatial-index",
+      "type": "npm",
+      "package": "three-mesh-bvh",
+      "version": "0.9.18",
+      "note": "Partial source snapshot only, exact npm runtime installed during game build. BVH for static meshes; no skin/morph geometry; never physics collision inference."
+    },
+    {
+      "id": "three-bvh-csg",
+      "repo": "https://github.com/gkjohnson/three-bvh-csg.git",
+      "homepage": "https://github.com/gkjohnson/three-bvh-csg",
+      "license": "MIT",
+      "stage": 11,
+      "role": "CSG carving of watertight 3D architecture; holes/windows/tunnels; feed static result to Three.js spatial BVH and explicit Rapier box colliders",
+      "install": "npm install --ignore-scripts three-bvh-csg@0.0.18",
+      "requires": [
+        "three-mesh-bvh",
+        "three",
+        "rapier",
+        "gltf-transform"
+      ],
+      "feature": "constructive-solid-geometry",
+      "type": "npm",
+      "package": "three-bvh-csg",
+      "version": "0.0.18",
+      "source_commit": "0ac3a84662958579d3627bbfcd6bb81746c2d699",
+      "note": "Pinned partial GitHub source snapshot; no actual full runtime bundled. Static watertight brushes only. Do not replace existing mesh assets or hero animation. Rapier owns manually authored collisions."
+    },
+    {
+      "id": "recast-navigation-js",
+      "repo": "https://github.com/isaac-mason/recast-navigation-js.git",
+      "homepage": "https://github.com/isaac-mason/recast-navigation-js",
+      "license": "MIT",
+      "stage": 12,
+      "role": "Recast/Detour authored navmesh from CSG arches and static terrain, autonomous NPC routes, and Rapier kinematic NPC collider registration; fallback grid when WASM unavailable",
+      "install": "npm install --ignore-scripts recast-navigation@0.44.0 @recast-navigation/three@0.44.0",
+      "requires": [
+        "three",
+        "three-mesh-bvh",
+        "three-bvh-csg",
+        "rapier",
+        "gltf-transform"
+      ],
+      "feature": "navigation",
+      "type": "npm",
+      "package": "recast-navigation",
+      "version": "0.44.0",
+      "note": "Partially vendored verified GitHub source; WASM runtime npm-installed during game build; authored grid fallback is self-contained and clearly labeled."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "seed": 7391,
+  "radius": 28,
+  "spacing": 4.0,
+  "frequency": 0.041,
+  "density": 0.65,
+  "maxInstances": 32,
+  "models": {
+    "forest": "vgc_tree",
+    "mineral": "vgc_crystal",
+    "rune": "vgc_waystone"
+  }
+}

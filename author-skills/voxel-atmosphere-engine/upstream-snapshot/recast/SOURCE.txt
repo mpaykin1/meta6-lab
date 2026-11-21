@@ -1,0 +1,6 @@
+Source: https://github.com/isaac-mason/recast-navigation-js
+Pinned version: 0.44.0 (MIT).
+Official README, license and npm package metadata inspected via GitHub connector.
+Full external source package and WASM were NOT cloned during this build due to npm/github DNS failure.
+Game uses dynamically imported pinned upstream core + generator modules when reachable.
+Local A* is the original independently authored fallback.

@@ -1,0 +1,27 @@
+{
+  "name": "meta-game-fusion-rapier-world",
+  "private": true,
+  "version": "1.3.0",
+  "type": "module",
+  "scripts": {
+    "predev": "node scripts/compile-stories.mjs",
+    "dev": "vite --host 0.0.0.0",
+    "prebuild": "node scripts/compile-stories.mjs",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "e2e": "playwright test --config playwright.config.mjs"
+  },
+  "dependencies": {
+    "three": "0.186.1",
+    "@dimforge/rapier3d-compat": "0.21.0",
+    "inkjs": "2.4.0",
+    "recast-navigation": "0.44.0",
+    "@recast-navigation/three": "0.44.0",
+    "postprocessing": "6.39.6",
+    "three-mesh-bvh": "0.9.18"
+  },
+  "devDependencies": {
+    "vite": "6.3.5",
+    "@playwright/test": "1.65.1"
+  }
+}

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><meta name="theme-color" content="#090d15"/>
+<title>META GAME FUSION — физический мир</title></head>
+<body>
+<canvas id="world" aria-label="3D игровая сцена"></canvas>
+<div id="veil" class="veil"><h1>META GAME FUSION</h1><p>ФИЗИЧЕСКИЙ МИР · ПОСЛЕДНИЙ ВИАДУК</p><div id="boot">Инициализация Rapier...</div></div>
+<header class="hud">
+  <div class="logo"><span class="rune">✦</span><div><b>META GAME FUSION</b><small>RAPIER · RECAST · BVH · POSTFX</small></div></div>
+  <div class="chapter"><span class="eyebrow">ТЕКУЩАЯ ГЛАВА</span><b id="chapter">Разрушенный виадук</b></div>
+  <div class="stats"><span class="eyebrow">РЕЖИМ</span><b id="state">3D · PHYSICS</b><small id="navStatus" class="navstatus">RECAST · ЗАГРУЗКА</small></div>
+</header>
+<div class="leftnote"><span class="eyebrow">ЦЕЛЬ</span><p id="objective">Найди сигнальный огонь в тумане</p><p class="micro" id="message">WASD / стрелки — движение · пробел — прыжок · E — действие · N — NavMesh · V — графика · P — качество</p></div>
+<div id="prompt" class="prompt" hidden>Нажмите <kbd>E</kbd> для взаимодействия</div>
+<div id="story" class="story" hidden><div class="story-title"><span>◈ СЮЖЕТ</span><b id="storyTitle"></b></div><div id="storyLines"></div><div id="choices"></div><button id="storyNext" class="next" hidden>Продолжить →</button></div>
+<div id="ending" class="ending" hidden><div><span>ЭПИЛОГ</span><h2 id="endingTitle"></h2><p id="endingNote">История завершена.</p><button id="restart">Вернуться в начало</button></div></div>
+<div class="toolbar"><button id="save" title="Сохранить прогресс">Сохранить</button><button id="load" title="Загрузить прогресс">Загрузить</button><button id="quality" title="Настройка качества">FX: CINEMA</button><button id="style" title="Изменить стиль графики (V)">СТИЛЬ: НОЧНОЙ ПУТЬ</button><button id="nav" title="Показать NavMesh">NavMesh</button><button id="spatial" title="Включить/выключить точные запросы к неподвижной геометрии">BVH: ON</button></div>
+<div class="touch"><div class="pad"><button data-key="w" aria-label="Вперёд">▲</button><div><button data-key="a" aria-label="Влево">◀</button><button data-key="s" aria-label="Назад">▼</button><button data-key="d" aria-label="Вправо">▶</button></div></div><div class="actions"><button data-key="space" aria-label="Прыжок">↟</button><button data-key="e" aria-label="Действие">✦</button></div></div>
+<script type="module" src="/src/main.js"></script>
+</body></html>

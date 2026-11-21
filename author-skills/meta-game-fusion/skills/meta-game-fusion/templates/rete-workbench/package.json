@@ -1,0 +1,26 @@
+{
+  "name": "meta-game-fusion-rete-workbench",
+  "private": true,
+  "version": "0.6.0",
+  "type": "module",
+  "description": "Rete.js 2 + inkjs narrative editor and local playable branching story preview",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "predev": "node scripts/compile-stories.mjs",
+    "prebuild": "node scripts/compile-stories.mjs"
+  },
+  "dependencies": {
+    "rete": "2.0.6",
+    "rete-area-plugin": "2.3.2",
+    "rete-connection-plugin": "2.0.5",
+    "rete-render-utils": "2.0.3",
+    "@retejs/lit-plugin": "2.0.8",
+    "lit": "3.3.1",
+    "inkjs": "2.4.0"
+  },
+  "devDependencies": {
+    "vite": "6.3.5"
+  }
+}

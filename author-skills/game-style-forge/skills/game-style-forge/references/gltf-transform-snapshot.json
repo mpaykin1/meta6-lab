@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "url": "https://github.com/donmccurdy/glTF-Transform",
+  "tag": "v4.5.1",
+  "commit": "41156dfa2324ac6c44ddf0a40ec0da194c4731d6",
+  "license": "MIT",
+  "git_blobs": {
+    "LICENSE.md": "066192ec0b90d3f593a83fcb0a694c2055269087",
+    "packages/functions/src/meshopt.ts": "3f91002056a2a00df3d7da344df372007b62a66d"
+  },
+  "partial_source": true,
+  "runtime_package": "@gltf-transform/cli@4.5.1"
+}

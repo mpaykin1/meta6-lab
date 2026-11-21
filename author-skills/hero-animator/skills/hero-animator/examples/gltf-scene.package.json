@@ -1,0 +1,10 @@
+{
+  "name": "hero-animator-gltf-scene",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "three": "0.180.0",
+    "@dimforge/rapier3d-compat": "0.21.0",
+    "postprocessing": "6.39.6"
+  }
+}

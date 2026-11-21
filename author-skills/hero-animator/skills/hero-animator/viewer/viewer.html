@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Просмотр анимаций героя</title>
+<style>
+:root{color-scheme:dark;font:16px/1.45 system-ui,sans-serif;background:#171c24;color:#edf0f6}*{box-sizing:border-box}body{margin:0}main{max-width:1220px;margin:auto;padding:24px}h1{font-size:26px;margin:0 0 8px}p{color:#b8c2d3;margin:8px 0 18px}button,select,input{font:inherit}button,select{background:#293345;border:1px solid #4e607b;border-radius:7px;color:inherit;padding:8px 12px}button{cursor:pointer}button:hover{background:#35465f}button:disabled{opacity:.4;cursor:default}label{display:flex;gap:8px;align-items:center;flex-wrap:wrap}input[type=range]{width:150px}input[type=color]{width:42px;height:34px;border:0;background:transparent}#drop{border:1px dashed #7186a4;border-radius:12px;padding:16px;margin:18px 0;background:#202836}#drop.over{border-color:#9cddcf;background:#2c4449}.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:18px}nav{display:flex;flex-direction:column;gap:7px}nav button{text-align:left;font-size:14px}nav button[aria-pressed=true]{background:#325e63;border-color:#9cddcf}.stage{border:1px solid #47556d;border-radius:10px;overflow:hidden;background:#333c4c}canvas{display:block;width:100%;height:auto;aspect-ratio:900/640}#status{min-height:24px;overflow-wrap:anywhere}#status.error{color:#ffc1bd}#info{font-variant-numeric:tabular-nums;color:#c2dfd9}small{color:#b8c2d3}#frame{flex:1;min-width:120px}.hidden{display:none}@media(max-width:720px){main{padding:14px}.layout{grid-template-columns:1fr}nav{flex-direction:row;overflow:auto}nav button{white-space:nowrap}h1{font-size:22px}}
+</style>
+</head>
+<body>
+<main>
+<h1>Просмотр анимаций героя</h1>
+<p>Выберите папку с JSON и листами спрайтов или перетащите её сюда. Сервер и загрузка файлов в сеть не нужны.</p>
+<div id="drop"><label><button id="choose" type="button">Выбрать папку с листами</button><input id="folder" type="file" webkitdirectory multiple hidden><span>Можно перетащить и сами JSON + картинки.</span></label></div>
+<div id="status" role="status">Папка ещё не выбрана.</div>
+<div class="toolbar"><label id="datasetWrap" class="hidden">Набор <select id="dataset"></select></label><label>Повтор <select id="mode"><option value="auto">По JSON</option><option value="loop">Петля</option><option value="once">Один раз</option></select></label><label>Масштаб <input id="scale" type="range" min="1" max="400" value="150"><output id="scaleValue">150%</output></label><button id="fit" disabled>Вписать</button><label>Фон <select id="background"><option value="checker">Шахматка</option><option value="color">Цвет</option></select><input id="color" type="color" value="#404a5f" aria-label="Цвет фона"></label><label><input id="smooth" type="checkbox" checked>Смешивание из JSON</label></div>
+<div class="layout"><nav id="animations" aria-label="Анимации"></nav><div><div class="stage"><canvas id="canvas" width="900" height="640" aria-label="Герой на выбранном кадре"></canvas></div><div class="toolbar"><button id="play" disabled>Пуск</button><button id="previous" disabled aria-label="Предыдущий кадр">Назад</button><button id="next" disabled aria-label="Следующий кадр">Вперёд</button><input id="frame" type="range" min="0" max="0" value="0" disabled aria-label="Кадр"></div><div id="info">Выберите анимацию.</div><small>Точка внизу показывает место ступней. Шаг по кадрам останавливает воспроизведение.</small></div></div>
+</main>
+<script>
+const el = id => document.getElementById(id);
+const canvas = el('canvas');
+const ctx = canvas.getContext('2d');
+const layer = document.createElement('canvas');
+layer.width = canvas.width;
+layer.height = canvas.height;
+const mix = layer.getContext('2d');
+let files = new Map();
+let datasets = [];
+let meta = null;
+let images = new Map();
+let urls = [];
+let current = '';
+let index = 0;
+let fraction = 0;
+let playing = false;
+let previousTime = 0;
+let generation = 0;
+let bounds = {left: 0, right: 0, top: 0, bottom: 0};
+
+function status(text, error = false) {
+  el('status').textContent = text;
+  el('status').classList.toggle('error', error);
+}
+function animation() { return meta?.anims[current]; }
+function nextIndex(anim, i) {
+  if (i + 1 < anim.frames.length) return i + 1;
+  if (el('mode').value === 'once') return null;
+  if (el('mode').value === 'loop' || anim.loop) return 0;
+  return anim.loopFrom ?? null;
+}
+function setPlaying(value) {
+  playing = value;
+  previousTime = 0;
+  el('play').textContent = value ? 'Пауза' : 'Пуск';
+}
+function selectAnimation(name) {
+  current = name;
+  index = 0;
+  fraction = 0;
+  const anim = animation();
+  const ppu = anim.ppu ?? meta.ppu;
+  const shiftX = Math.max(0, ...(anim.blend ?? []).map(e => Math.abs(e[1] ?? 0))) / ppu;
+  const shiftY = Math.max(0, ...(anim.blend ?? []).map(e => Math.abs(e[2] ?? 0))) / ppu;
+  bounds = {
+    left: Math.min(0, ...anim.frames.map(f => f[4] / ppu)) - shiftX,
+    right: Math.max(0, ...anim.frames.map(f => (f[4] + f[2]) / ppu)) + shiftX,
+    top: Math.min(0, ...anim.frames.map(f => f[5] / ppu)) - shiftY,
+    bottom: Math.max(0, ...anim.frames.map(f => (f[5] + f[3]) / ppu)) + shiftY
+  };
+  fitView();
+  el('frame').max = anim.frames.length - 1;
+  el('frame').value = 0;
+  for (const button of el('animations').children) button.setAttribute('aria-pressed', String(button.dataset.name === name));
+  setPlaying(true);
+  draw();
+}
+function origin() {
+  const scale = Number(el('scale').value) / 100;
+  return [canvas.width / 2 - (bounds.left + bounds.right) * scale / 2, canvas.height / 2 - (bounds.top + bounds.bottom) * scale / 2];
+}
+function fitView() {
+  const scale = Math.min(1.5, (canvas.width - 60) / Math.max(1, bounds.right - bounds.left), (canvas.height - 60) / Math.max(1, bounds.bottom - bounds.top));
+  el('scale').value = Math.max(1, Math.floor(scale * 100));
+  el('scaleValue').textContent = el('scale').value + '%';
+}
+function drawFrame(target, image, frame, ppu, alpha = 1, dx = 0, dy = 0) {
+  const scale = Number(el('scale').value) / 100;
+  const [x, y] = origin();
+  const [sx, sy, w, h, ox, oy] = frame;
+  target.globalAlpha = alpha;
+  target.drawImage(image, sx, sy, w, h, x + (ox + dx) * scale / ppu, y + (oy + dy) * scale / ppu, w * scale / ppu, h * scale / ppu);
+  target.globalAlpha = 1;
+}
+function draw() {
+  const width = canvas.width, height = canvas.height;
+  if (el('background').value === 'checker') {
+    for (let y = 0; y < height; y += 24) for (let x = 0; x < width; x += 24) {
+      ctx.fillStyle = (Math.floor(x / 24) + Math.floor(y / 24)) % 2 ? '#465064' : '#354053';
+      ctx.fillRect(x, y, 24, 24);
+    }
+  } else {
+    ctx.fillStyle = el('color').value;
+    ctx.fillRect(0, 0, width, height);
+  }
+  const anim = animation();
+  if (!anim) return;
+  const image = images.get(anim.sheet);
+  const ppu = anim.ppu ?? meta.ppu;
+  const blend = anim.blend?.[index];
+  const next = nextIndex(anim, index);
+  const share = blend?.[0] ?? 0;
+  if (el('smooth').checked && next != null && share > 0 && fraction >= 1 - share) {
+    const u = Math.min(1, (fraction - (1 - share)) / share);
+    const dx = blend[1] ?? 0, dy = blend[2] ?? 0;
+    mix.clearRect(0, 0, width, height);
+    mix.globalCompositeOperation = 'lighter';
+    drawFrame(mix, image, anim.frames[index], ppu, 1 - u, dx * u, dy * u);
+    drawFrame(mix, image, anim.frames[next], ppu, u, -dx * (1 - u), -dy * (1 - u));
+    mix.globalCompositeOperation = 'source-over';
+    ctx.drawImage(layer, 0, 0);
+  } else drawFrame(ctx, image, anim.frames[index], ppu);
+  ctx.fillStyle = '#f2b0a4';
+  ctx.beginPath();
+  const [x, y] = origin();
+  ctx.arc(x, y, 3, 0, Math.PI * 2);
+  ctx.fill();
+  el('frame').value = index;
+  el('info').textContent = `${current}: кадр ${index + 1}/${anim.frames.length}, ${anim.fps} fps, ${(index / anim.fps).toFixed(3)} с, ppu ${ppu}${anim.hold ? ', удержание конца' : ''}${anim.loopFrom != null ? ', петля с кадра ' + anim.loopFrom : ''}`;
+}
+function tick(now) {
+  const anim = animation();
+  if (playing && anim) {
+    if (previousTime) {
+      fraction += (now - previousTime) * anim.fps / 1000;
+      while (fraction >= 1) {
+        const next = nextIndex(anim, index);
+        if (next == null) {
+          fraction = 0;
+          setPlaying(false);
+          break;
+        }
+        index = next;
+        fraction -= 1;
+      }
+    }
+    previousTime = now;
+  }
+  draw();
+  requestAnimationFrame(tick);
+}
+function findFile(path) {
+  const normalized = path.replaceAll('\\', '/').replace(/^\.\//, '');
+  const exact = files.get(normalized);
+  if (exact) return exact;
+  const suffix = [...files.entries()].filter(([name]) => name.endsWith('/' + normalized));
+  if (suffix.length === 1) return suffix[0][1];
+  throw new Error('Не найден однозначный файл: ' + normalized);
+}
+function validate(data) {
+  if (!data || !Number.isFinite(data.ppu) || data.ppu <= 0 || !data.anims || !Object.keys(data.anims).length) return false;
+  return Object.values(data.anims).every(a => typeof a.sheet === 'string' && Number.isFinite(a.fps) && a.fps > 0 && Array.isArray(a.frames) && a.frames.length && a.frames.every(f => Array.isArray(f) && f.length >= 6 && f.slice(0, 6).every(Number.isFinite) && f[2] > 0 && f[3] > 0) && (a.loopFrom == null || Number.isInteger(a.loopFrom) && a.loopFrom >= 0 && a.loopFrom < a.frames.length) && (a.ppu == null || Number.isFinite(a.ppu) && a.ppu > 0));
+}
+async function loadDataset(number) {
+  setPlaying(false);
+  meta = null;
+  current = '';
+  images = new Map();
+  el('animations').replaceChildren();
+  for (const url of urls) URL.revokeObjectURL(url);
+  urls = [];
+  const request = ++generation;
+  for (const id of ['play', 'previous', 'next', 'frame', 'fit']) el(id).disabled = true;
+  try {
+    const entry = datasets[number];
+    const directory = entry.path.includes('/') ? entry.path.slice(0, entry.path.lastIndexOf('/') + 1) : '';
+    const loaded = new Map();
+    for (const anim of Object.values(entry.data.anims)) {
+      if (loaded.has(anim.sheet)) continue;
+      const file = findFile(directory + anim.sheet);
+      const url = URL.createObjectURL(file);
+      urls.push(url);
+      const image = new Image();
+      image.src = url;
+      await image.decode();
+      if (request !== generation) return;
+      for (const candidate of Object.values(entry.data.anims).filter(a => a.sheet === anim.sheet)) {
+        if (candidate.frames.some(([x, y, w, h]) => x < 0 || y < 0 || x + w > image.naturalWidth || y + h > image.naturalHeight)) throw new Error('Кадр выходит за лист: ' + anim.sheet);
+      }
+      loaded.set(anim.sheet, image);
+    }
+    if (request !== generation) return;
+    images = loaded;
+    meta = entry.data;
+    for (const [name, anim] of Object.entries(meta.anims)) {
+      const button = document.createElement('button');
+      button.dataset.name = name;
+      button.textContent = anim.label ? `${anim.label} (${name})` : name;
+      button.onclick = () => selectAnimation(name);
+      el('animations').append(button);
+    }
+    for (const id of ['play', 'previous', 'next', 'frame', 'fit']) el(id).disabled = false;
+    status(`${meta.id ?? entry.path}: ${Object.keys(meta.anims).length} анимаций, ${images.size} листов.`);
+    selectAnimation(meta.anims.idle ? 'idle' : Object.keys(meta.anims)[0]);
+  } catch (error) {
+    if (request === generation) status(error.message, true);
+  }
+}
+async function loadFiles(entries) {
+  const request = ++generation;
+  setPlaying(false);
+  meta = null;
+  current = '';
+  el('animations').replaceChildren();
+  for (const id of ['play', 'previous', 'next', 'frame', 'fit']) el(id).disabled = true;
+  el('datasetWrap').classList.add('hidden');
+  files = new Map(entries);
+  datasets = [];
+  status('Читаю папку...');
+  for (const [path, file] of files) {
+    if (!path.toLowerCase().endsWith('.json')) continue;
+    try {
+      const data = JSON.parse(await file.text());
+      if (request !== generation) return;
+      if (validate(data)) datasets.push({path, data});
+    } catch {}
+  }
+  if (request !== generation) return;
+  if (!datasets.length) {
+    status('В папке нет JSON с готовыми frames и sheet. Выберите out_dir после сборки.', true);
+    return;
+  }
+  el('dataset').replaceChildren(...datasets.map((entry, i) => new Option(entry.data.id ?? entry.path, i)));
+  el('datasetWrap').classList.toggle('hidden', datasets.length < 2);
+  await loadDataset(0);
+}
+async function walk(entry, prefix = '') {
+  if (entry.isFile) return [[prefix + entry.name, await new Promise((resolve, reject) => entry.file(resolve, reject))]];
+  if (!entry.isDirectory) return [];
+  const reader = entry.createReader();
+  const result = [];
+  while (true) {
+    const batch = await new Promise((resolve, reject) => reader.readEntries(resolve, reject));
+    if (!batch.length) break;
+    for (const child of batch) result.push(...await walk(child, prefix + entry.name + '/'));
+  }
+  return result;
+}
+el('choose').onclick = () => el('folder').click();
+el('folder').onchange = () => loadFiles([...el('folder').files].map(file => [file.webkitRelativePath || file.name, file]));
+el('dataset').onchange = () => loadDataset(Number(el('dataset').value));
+el('play').onclick = () => {
+  if (!playing && nextIndex(animation(), index) == null) { index = 0; fraction = 0; }
+  setPlaying(!playing);
+};
+for (const [id, delta] of [['previous', -1], ['next', 1]]) el(id).onclick = () => {
+  setPlaying(false);
+  index = Math.max(0, Math.min(animation().frames.length - 1, index + delta));
+  fraction = 0;
+  draw();
+};
+el('frame').oninput = () => { setPlaying(false); index = Number(el('frame').value); fraction = 0; draw(); };
+el('mode').onchange = () => { index = 0; fraction = 0; previousTime = 0; draw(); };
+el('scale').oninput = () => { el('scaleValue').textContent = el('scale').value + '%'; draw(); };
+el('fit').onclick = () => { fitView(); draw(); };
+for (const id of ['background', 'color', 'smooth']) el(id).oninput = draw;
+for (const type of ['dragenter', 'dragover']) document.addEventListener(type, event => { event.preventDefault(); el('drop').classList.add('over'); });
+document.addEventListener('dragleave', event => { if (!event.relatedTarget) el('drop').classList.remove('over'); });
+document.addEventListener('drop', async event => {
+  event.preventDefault();
+  el('drop').classList.remove('over');
+  const items = [...event.dataTransfer.items];
+  const roots = items.map(item => item.webkitGetAsEntry?.()).filter(Boolean);
+  const fallback = [...event.dataTransfer.files];
+  try {
+    const entries = roots.length ? (await Promise.all(roots.map(root => walk(root)))).flat() : fallback.map(file => [file.name, file]);
+    await loadFiles(entries);
+  } catch (error) { status('Не удалось прочитать папку: ' + error.message, true); }
+});
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>

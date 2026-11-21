@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "note": "Exact paths observed in owned plugin source file listings. This registry is advisory; other plugins are independent installations and do not execute automatically.",
+  "plugins": {
+    "hero-animator": {
+      "input": [
+        "approved sprites/gif/png/webm",
+        "hero character id",
+        "directional action mapping",
+        "optional 3D world GLB"
+      ],
+      "scripts": [
+        "skills/hero-animator/scripts/directional_pack.py",
+        "skills/hero-animator/scripts/gif2game.py",
+        "skills/hero-animator/scripts/single_hero_guard.py"
+      ],
+      "output": [
+        "atlas",
+        "directional action state",
+        "2.5D runtime layer"
+      ]
+    },
+    "voxel-game-creator": {
+      "input": [
+        "vox",
+        "bbmodel",
+        "glb",
+        "world spec"
+      ],
+      "scripts": [
+        "skills/voxel-game-creator/scripts/blockbench_bridge.py",
+        "skills/voxel-game-creator/scripts/create_game.py",
+        "skills/voxel-game-creator/scripts/meshoptimizer_bridge.py"
+      ],
+      "output": [
+        "authored voxel worlds",
+        "GLB",
+        "scene layout"
+      ]
+    },
+    "casual-game-studio": {
+      "input": [
+        "bbmodel",
+        "glb",
+        "vrm",
+        "art spec",
+        "optional action events"
+      ],
+      "scripts": [
+        "skills/casual-game-studio/scripts/create_game.py",
+        "skills/casual-game-studio/scripts/bbmodel_to_glb.py",
+        "skills/casual-game-studio/templates/pastel-blocks/game.js"
+      ],
+      "output": [
+        "playable casual scene",
+        "prefab game event map"
+      ]
+    },
+    "voxel-atmosphere-engine": {
+      "input": [
+        "vox",
+        "glb",
+        "png",
+        "pixelorama frames",
+        "palette preset"
+      ],
+      "scripts": [
+        "examples/playable/fx/asset-loader.js",
+        "examples/playable/fx/postfx.js",
+        "examples/playable/fx/pixelorama.js"
+      ],
+      "output": [
+        "fx preset",
+        "world lighting",
+        "glb environment"
+      ]
+    },
+    "game-style-forge": {
+      "input": [
+        "reference video frames",
+        "reference images",
+        "depth maps"
+      ],
+      "scripts": [
+        "skills/game-style-forge/scripts/styleforge.py",
+        "skills/game-style-forge/scripts/vision_opencv.py",
+        "skills/game-style-forge/scripts/scenes_pyscenedetect.py"
+      ],
+      "output": [
+        "per-shot palette",
+        "style profile",
+        "motion features",
+        "scene captures"
+      ]
+    },
+    "blender-model-animation-enhancer": {
+      "input": [
+        "glb",
+        "gltf",
+        "fbx",
+        "obj",
+        "blend",
+        "author-approved textures"
+      ],
+      "scripts": [
+        "skills/blender-model-animation-enhancer/scripts/run_enhancer.py",
+        "skills/blender-model-animation-enhancer/scripts/auto_enhance.py",
+        "skills/blender-model-animation-enhancer/scripts/material_maker_worker.py"
+      ],
+      "output": [
+        "rig-safe GLB",
+        "mesh diagnostics",
+        "author approved material edits"
+      ]
+    },
+    "meta-game-fusion": {
+      "input": [
+        "owned GLB",
+        "scene blueprint",
+        "narrative/events",
+        "FX preset"
+      ],
+      "scripts": [
+        "skills/meta-game-fusion/scripts/fusion.py",
+        "skills/meta-game-fusion/scripts/gltf_optimize.py",
+        "skills/meta-game-fusion/scripts/rapier_bridge.py",
+        "skills/meta-game-fusion/scripts/postfx_bridge.py"
+      ],
+      "output": [
+        "integrated runtime prototype",
+        "scene blueprint",
+        "playable 3D world",
+        "render captures"
+      ]
+    }
+  }
+}

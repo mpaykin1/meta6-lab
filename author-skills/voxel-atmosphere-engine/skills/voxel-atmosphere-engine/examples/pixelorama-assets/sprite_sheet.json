@@ -1,0 +1,38 @@
+{
+  "generator": "Pixelorama PNG Sprite Interchange",
+  "format": 1,
+  "image": "sprite_sheet.png",
+  "frameWidth": 32,
+  "frameHeight": 32,
+  "columns": 8,
+  "rows": 4,
+  "clips": {
+    "ember": {
+      "row": 0,
+      "frames": 8,
+      "fps": 12,
+      "kind": "bonfire"
+    },
+    "rune": {
+      "row": 1,
+      "frames": 8,
+      "fps": 7,
+      "kind": "moongate"
+    },
+    "lantern": {
+      "row": 2,
+      "frames": 8,
+      "fps": 9,
+      "kind": "lantern"
+    },
+    "wisp": {
+      "row": 3,
+      "frames": 8,
+      "fps": 10,
+      "kind": "firefly"
+    }
+  },
+  "pixelArt": true,
+  "nearest": true,
+  "source": "original artwork; compatible with Pixelorama PNG import and export"
+}

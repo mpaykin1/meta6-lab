@@ -1,0 +1,13 @@
+{
+  "url":"https://github.com/isl-org/MiDaS",
+  "commit":"454597711a62eabcbf7d1e89f3fb9f569051ac9b",
+  "license":"MIT",
+  "git_blobs":{
+    "LICENSE":"277b5c11be103f028a8d10985139f1da10c2f08e",
+    "midas/base_model.py":"5cf430239b47ec5ec07531263f26f5c24a2311cd"
+  },
+  "model":"midas_v21_small_256",
+  "archived":true,
+  "source_note":"GitHub connector pin-checked partial upstream source snapshot, NOT full clone or model weights",
+  "weights":"Not bundled. User must supply locally and verify distribution terms independently."
+}

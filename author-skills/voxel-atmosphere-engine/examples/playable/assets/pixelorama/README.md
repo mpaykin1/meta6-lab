@@ -1,0 +1,1 @@
+Pixelorama-compatible original PNG sprite sheet. Open PNG in Pixelorama; edit 32×32 frames. Each row has 8 frames, top-to-bottom: ember, rune, lantern, wisp. All 4 clips remain stable identity across time. Import/export PNG with no resizing or filtering.

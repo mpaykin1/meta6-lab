@@ -1,0 +1,249 @@
+{
+  "upstreams": [
+    {
+      "name": "tree-sitter",
+      "repo": "https://github.com/tree-sitter/tree-sitter",
+      "license": "MIT",
+      "integration": "Python AST binding",
+      "version": "0.26.0",
+      "source_bundle": "license-and-documentation-only",
+      "full_source_cloned": false
+    },
+    {
+      "name": "py-tree-sitter",
+      "repo": "https://github.com/tree-sitter/py-tree-sitter",
+      "license": "MIT",
+      "pypi": "tree-sitter==0.26.0"
+    },
+    {
+      "name": "tree-sitter-javascript",
+      "repo": "https://github.com/tree-sitter/tree-sitter-javascript",
+      "license": "MIT",
+      "pypi": "tree-sitter-javascript==0.25.0"
+    },
+    {
+      "name": "tree-sitter-typescript",
+      "repo": "https://github.com/tree-sitter/tree-sitter-typescript",
+      "license": "MIT",
+      "pypi": "tree-sitter-typescript==0.23.2"
+    },
+    {
+      "name": "assimp",
+      "repo": "https://github.com/assimp/assimp",
+      "license": "BSD-3-Clause-style with third-party notices",
+      "verified_commit": "93fe5d82fb206e850a21809bf45800ae00b17fc7",
+      "integration": "native Assimp CLI export to GLB2; source files discovered by Tree-sitter catalog",
+      "source_bundle": "license-and-adapter-only",
+      "full_source_cloned": false,
+      "native_binary_bundled": false,
+      "runtime_requirement": "installed assimp CLI with glb2 exporter enabled"
+    },
+    {
+      "name": "glTF-Transform",
+      "repo": "https://github.com/donmccurdy/glTF-Transform",
+      "license": "MIT",
+      "verified_commit": "8e2a94a2616d293c4b503d0fb6a4b42e6ec7c62f",
+      "integration": "@gltf-transform/cli@4.5.1 CLI adapter for Assimp GLB2 library",
+      "source_bundle": "license-adapter-and-manifest-only",
+      "full_source_cloned": false,
+      "runtime_dependency": "@gltf-transform/cli@4.5.1",
+      "runtime_installed": false,
+      "requires_node": ">=20",
+      "upstream_license_file": "vendor/gltf-transform/LICENSE.md"
+    },
+    {
+      "name": "qdrant",
+      "repo": "https://github.com/qdrant/qdrant",
+      "license": "Apache-2.0",
+      "verified_commit": "23065a0bf6857c3e5da45f6c8939cc746cc0580e",
+      "integration": "Qdrant vector search local/client-server; game index payloads from Tree-sitter/Assimp/glTF-Transform",
+      "source_bundle": "license-and-local-adapter-only",
+      "full_source_cloned": false,
+      "server_binary_bundled": false,
+      "upstream_license_file": "vendor/qdrant/LICENSE"
+    },
+    {
+      "name": "qdrant-client",
+      "repo": "https://github.com/qdrant/qdrant-client",
+      "license": "Apache-2.0",
+      "verified_commit": "1b5bb8589e5a8c124bcf80164736c7c92370c871",
+      "integration": "Python Qdrant local persistent vector store, query_points, remote HTTPS opt-in",
+      "runtime_dependency": "qdrant-client==1.20.0",
+      "runtime_installed": false,
+      "upstream_license_file": "vendor/qdrant-client/LICENSE"
+    },
+    {
+      "name": "fastembed",
+      "repo": "https://github.com/qdrant/fastembed",
+      "license": "Apache-2.0",
+      "integration": "Optional multilingual model inference with intfloat/multilingual-e5-small; explicit network/model download permission required",
+      "runtime_dependency": "fastembed>=0.9,<1",
+      "runtime_installed": false,
+      "model_weights_bundled": false
+    },
+    {
+      "name": "Rete.js",
+      "repo": "https://github.com/retejs/rete",
+      "license": "MIT",
+      "verified_commit": "2aae19950180dc12725306f06c0440f64473bd21",
+      "integration": "Rete NodeEditor/ClassicPreset typed graph nodes and connection model",
+      "runtime_dependency": "rete@2.0.6",
+      "source_bundle": "license-and-authored-adapter-only",
+      "full_source_cloned": false,
+      "runtime_installed": false,
+      "upstream_license_file": "vendor/rete/LICENSE"
+    },
+    {
+      "name": "rete-area-plugin",
+      "repo": "https://github.com/retejs/area-plugin",
+      "license": "MIT",
+      "runtime_dependency": "rete-area-plugin@2.3.2",
+      "integration": "draggable zoomable 2D editor area",
+      "full_source_cloned": false,
+      "runtime_installed": false
+    },
+    {
+      "name": "rete-connection-plugin",
+      "repo": "https://github.com/retejs/connection-plugin",
+      "license": "MIT",
+      "runtime_dependency": "rete-connection-plugin@2.0.5",
+      "integration": "clickable typed edge creation",
+      "full_source_cloned": false,
+      "runtime_installed": false
+    },
+    {
+      "name": "rete-render-utils",
+      "repo": "https://github.com/retejs/render-utils",
+      "license": "MIT",
+      "runtime_dependency": "rete-render-utils@2.0.3",
+      "integration": "Rete node/connection rendering support",
+      "full_source_cloned": false,
+      "runtime_installed": false
+    },
+    {
+      "name": "rete-lit-plugin",
+      "repo": "https://github.com/retejs/lit-plugin",
+      "license": "MIT",
+      "runtime_dependency": "@retejs/lit-plugin@2.0.8",
+      "integration": "Lit 3 visual renderer for Rete nodes and wires",
+      "full_source_cloned": false,
+      "runtime_installed": false
+    },
+    {
+      "name": "inkjs",
+      "repo": "https://github.com/y-lohse/inkjs",
+      "license": "MIT",
+      "verified_commit": "fdc440a2c5a69c1fdb1e7d9765490a06d4cd092b",
+      "integration": "pin inkjs@2.4.0; compiler from inkjs/full; runtime Story from inkjs; authored story source-to-manifest guard; typed Rete dialogue nodes and playable narrative preview",
+      "runtime_dependency": "inkjs@2.4.0",
+      "runtime_installed": false,
+      "source_bundle": "license-and-authored-adapters-only",
+      "full_source_cloned": false,
+      "upstream_license_file": "vendor/inkjs/LICENSE.md"
+    },
+    {
+      "name": "Rapier 3D",
+      "repo": "https://github.com/dimforge/rapier",
+      "license": "Apache-2.0",
+      "verified_commit": "475caa3ff4646fd9a796b67d14116256f4962bc7",
+      "integration": "Rapier JS WASM compat 0.21.0; genuine dynamic rigid bodies, static colliders, one kinematic character controller, typed Rete sensors, Ink-driven branching, Three.js visual sync",
+      "runtime_dependency": "@dimforge/rapier3d-compat@0.21.0",
+      "npm_latest_checked": "2026-11-21",
+      "source_bundle": "Apache license + authored source adapters, no third-party binary",
+      "full_source_cloned": false,
+      "wasm_binary_bundled": false,
+      "runtime_installed": false,
+      "requires_node": ">=20",
+      "upstream_license_file": "vendor/rapier/LICENSE",
+      "runtime_artifact": "templates/rapier-world/"
+    },
+    {
+      "name": "recast-navigation-js",
+      "repo": "https://github.com/isaac-mason/recast-navigation-js",
+      "license": "MIT",
+      "verified_commit": "8a2ece9f8b4947fcb328e17c7ac76c41744021b3",
+      "integration": "recast-navigation@0.44.0 + @recast-navigation/three@0.44.0; live solo NavMesh from Rapier fixed collider footprints; Detour computePath; one guided NPC moving through its own Rapier kinematic capsule; typed Rete stage markers / inkjs choices unchanged; Qdrant search metadata source-hashed",
+      "runtime_dependency": [
+        "recast-navigation@0.44.0",
+        "@recast-navigation/three@0.44.0"
+      ],
+      "runtime_installed": false,
+      "wasm_binary_bundled": false,
+      "full_source_cloned": false,
+      "source_bundle": "license + original app adapters + pinned npm dependencies only",
+      "upstream_license_file": "vendor/recast-navigation-js/LICENSE",
+      "runtime_artifact": "templates/rapier-world/src/navigation.js"
+    },
+    {
+      "name": "postprocessing",
+      "repo": "https://github.com/pmndrs/postprocessing",
+      "license": "Zlib",
+      "verified_commit": "a1f103559d15cf56cbcbb15d4373711b09418f3f",
+      "integration": "postprocessing@6.39.6 composer, bloom, film, noise, vignette, pixelation and tone mapping; authored GPU GLSL mood blends and fog/lighting transitions across Rete scene nodes; 3 quality modes and FPS adaptive fallback; Qdrant indexes local authored adapter",
+      "runtime_dependency": "postprocessing@6.39.6",
+      "three_peer_range": ">=0.168.0 <0.188.0",
+      "runtime_installed": false,
+      "full_source_cloned": false,
+      "source_bundle": "Zlib license + authored adapter only; external pinned npm runtime",
+      "upstream_license_file": "vendor/postprocessing/LICENSE.md",
+      "runtime_artifact": "templates/rapier-world/src/postfx.js"
+    },
+    {
+      "name": "Playwright",
+      "repo": "https://github.com/microsoft/playwright",
+      "license": "Apache-2.0",
+      "verified_release": "v1.65.1",
+      "published_date": "2026-11-13",
+      "integration": "@playwright/test@1.65.1, chromium browser verification of actual Vite/Rapier/Recast/Ink/Postprocessing game; read-only telemetry; no gameplay changes",
+      "runtime_dependency": "@playwright/test@1.65.1",
+      "source_bundle": "adapter-and-license-only",
+      "browser_bundled": false,
+      "runtime_installed": false,
+      "full_source_cloned": false,
+      "license_file": "vendor/playwright/LICENSE"
+    },
+    {
+      "name": "ScanCode Toolkit",
+      "repo": "https://github.com/aboutcode-org/scancode-toolkit",
+      "license": "Apache-2.0 software, CC-BY-4.0 license data; third-party parts separately licensed",
+      "verified_commit": "e423b48a1fdbff26219fbeafe7e9bdef293b91fc",
+      "release": "v32.5.0",
+      "integration": "local read-only CLI/JSON parser + Qdrant/Rete/Rapier rights-blocking by original source file hash",
+      "source_bundle": "own adapter and standard Apache-2.0 notice; no ScanCode engine/database",
+      "full_source_cloned": false,
+      "runtime_installed": false,
+      "runtime_requirement": "scancode CLI exactly 32.5.0 (or offline JSON ingest)",
+      "upstream_license_file": "vendor/scancode-toolkit/apache-2.0.LICENSE"
+    },
+    {
+      "name": "three.js",
+      "repo": "https://github.com/mrdoob/three.js",
+      "license": "MIT",
+      "verified_latest_release": "r187",
+      "latest_release_date": "2026-10-30",
+      "runtime_dependency": "three@0.186.1",
+      "pinned_for_compatibility": "postprocessing@6.39.6, recast-navigation@0.44.0",
+      "integration": "scripts/fusion_builder.py + living-world.js stage builder + GLTFLoader + shared physics/narrative adapters",
+      "source_bundle": "authored adaptor and license, external pinned npm package",
+      "full_source_cloned": false,
+      "runtime_installed": false,
+      "upstream_license_file": "vendor/three/LICENSE",
+      "runtime_artifact": "templates/rapier-world/src/living-world.js"
+    },
+    {
+      "name": "three-mesh-bvh",
+      "repo": "https://github.com/gkjohnson/three-mesh-bvh",
+      "license": "MIT",
+      "verified_release": "v0.9.18",
+      "published_date": "2026-11-03",
+      "integration": "Three.js 0.186.1; static-only geometry BVH for accelerated raycast/picking and observational Recast NPC line-of-sight; Rapier remains physics authority; rights/hash verified GLB plan emitted by fusion_builder.py; Qdrant source-hash indexes adapter",
+      "runtime_dependency": "three-mesh-bvh@0.9.18",
+      "runtime_installed": false,
+      "source_bundle": "MIT license + original adapters + pinned npm dependency; no upstream binary bundled",
+      "full_source_cloned": false,
+      "upstream_license_file": "vendor/three-mesh-bvh/LICENSE",
+      "runtime_artifact": "templates/rapier-world/src/spatial-bvh.js"
+    }
+  ],
+  "notes": "Tree-sitter Python bindings, Assimp native CLI, glTF-Transform npm and Qdrant Python client are runtime dependencies; no full source or binaries included. Qdrant local mode keeps indexed metadata in user library. Optional FastEmbed model weights may need a separate explicit download. Rete.js v2 and its Lit/area/connection packages are npm runtime dependencies; the plugin contains a complete authored editor template, graph validator, and license notices, not installed npm binaries or a full upstream clone. inkjs@2.4.0 is an additional npm dependency of the Rete workbench and is not bundled; scripts/compile-stories.mjs compiles only explicitly registered authored .ink copies into separate workbench public/stories. Rapier@0.21.0 in the new Three.js demo is a pinned npm dependency. The full external Rust source/WASM is not bundled; runtime needs npm install to run. An authored Python bridge converts validated Rete/Ink scene blueprints to a fresh playable Vite project and SHA-verifies approved GLB art. Recast 0.44.0 runs through npm WASM packages and is not embedded or installed. The generated physical example supplies a debug overlay and companion NPC with authoritative Rapier collision. Navigation is computed from static Rapier obstacle footprints, not imported animated models; dynamic crate avoidance is handled by physical collision/repath best effort, not a rebuilt tile cache. Postprocessing is integrated as authored visual shader adapter to existing playable 3D prototype, pinned npm postprocessing@6.39.6 with Zlib notice; no full upstream package or runtime installed; browser render not claimed. Three.js unified builder v1.2 adds new 3-chapter original concept scaffolds, or projects based on validated Rete blueprint. Imported gameplay source is never automatically executed. Real game launch still requires npm/browser dependencies."
+}

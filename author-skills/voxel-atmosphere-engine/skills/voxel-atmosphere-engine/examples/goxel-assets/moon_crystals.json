@@ -1,0 +1,15 @@
+{
+  "source": "moon_crystals.vox",
+  "dimensions": [
+    23,
+    19,
+    24
+  ],
+  "voxels": 3271,
+  "merged_editable_boxes": 1945,
+  "glb": "moon_crystals.glb",
+  "blockbench": "moon_crystals.bbmodel",
+  "glb_faces": 5088,
+  "scale": 0.115,
+  "basis": "Goxel XYZ -> Three.js X,Z,-Y; ground at Y=0"
+}

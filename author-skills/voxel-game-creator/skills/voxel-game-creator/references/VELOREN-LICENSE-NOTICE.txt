@@ -1,0 +1,11 @@
+Veloren source: https://github.com/veloren/veloren
+Pinned mirror commit: 131d1193387861d35c74655662148f303c22c5b4
+Code license: GNU General Public License version 3 or later.
+Main license: https://github.com/veloren/veloren/blob/131d1193387861d35c74655662148f303c22c5b4/LICENSE
+Asset-specific licenses and exceptions:
+https://github.com/veloren/veloren/blob/131d1193387861d35c74655662148f303c22c5b4/assets/credits.ron
+
+This plugin contains no copies of Veloren Rust engine code or original copyrighted voxel art.
+The independently authored converter only reads user-provided or separately downloaded MagicaVoxel VOX files.
+Original asset rights are NOT changed by conversion. GNU GPL obligations and any separate restricted
+credits must be reviewed before redistribution, especially in closed-source or ad-monetized games.

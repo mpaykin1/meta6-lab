@@ -1,0 +1,24 @@
+{
+  "id": "illustrated-hero",
+  "ppu": 1,
+  "height": 0,
+  "shadow": {"w": 0, "h": 0},
+  "anims": {
+    "idle": {
+      "sheet": "illustrated-hero_idle.png",
+      "fps": 12,
+      "frames": [[0, 0, 200, 300, -100, -300]],
+      "loop": true
+    },
+    "attack": {
+      "sheet": "illustrated-hero_attack.png",
+      "fps": 12,
+      "frames": [[0, 0, 200, 300, -100, -300]],
+      "loop": false,
+      "release": 0.16,
+      "hitStart": 0.13,
+      "hitEnd": 0.25,
+      "hitboxes": [[0.62, 1.12, 0, 0.70, 0.45, 0.48]]
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 2,
+  "snapshot_date": "2026-11-21",
+  "source": "mcp__Plugin_Creator__list_owned_personal_plugins + skills__list",
+  "note": "Verified Plugin Creator source snapshots on 2026-11-21. Refresh versions and modules with live tools on each invocation. This file is only a snapshot.",
+  "counts": {
+    "owned_personal_plugins_before_nexus": 8,
+    "owned_game_plugins_before_nexus": 7,
+    "potential_undirected_game_pairs": 21,
+    "potential_directed_game_routes": 42,
+    "live_runtime_verified_routes": 0
+  },
+  "game_plugins": [
+    {
+      "name": "hero-animator",
+      "id": "plugins_6affe412daa48191838bbbd4298133a4",
+      "version": "0.12.1",
+      "role": "approved PNG/GIF character identity, sprite animation, 2.5D over 3D physics",
+      "skill_modules": [
+        "hero-animator"
+      ]
+    },
+    {
+      "name": "voxel-game-creator",
+      "id": "plugins_6b00211bd32081918b5d33e3520a0634",
+      "version": "0.15.1",
+      "role": "voxel levels, models, Blockbench, Blockwild, optimized GLB",
+      "skill_modules": [
+        "voxel-game-creator",
+        "voxel-game-creator-blockwild",
+        "voxel-game-creator-minecraft",
+        "voxel-game-creator-recast",
+        "voxel-game-creator-vesper"
+      ]
+    },
+    {
+      "name": "casual-game-studio",
+      "id": "plugins_6b003196776c8191997fe385cefc553e",
+      "version": "1.0.1",
+      "role": "playable cute casual HTML5 games, physics, particles, motion",
+      "skill_modules": [
+        "casual-game-studio"
+      ]
+    },
+    {
+      "name": "voxel-atmosphere-engine",
+      "id": "plugins_6b0033fd6aec8191b69c41d3e49f1445",
+      "version": "0.8.1",
+      "role": "voxel/pixel atmosphere, fog, lighting, shaders, original assets",
+      "skill_modules": [
+        "voxel-atmosphere-engine"
+      ]
+    },
+    {
+      "name": "game-style-forge",
+      "id": "plugins_6b00345308dc8191b02a9f96210cc2c2",
+      "version": "1.8.1",
+      "role": "video reference analysis, palettes, shot-aware style constraints",
+      "skill_modules": [
+        "game-style-forge"
+      ]
+    },
+    {
+      "name": "blender-model-animation-enhancer",
+      "id": "plugins_6b012296f54481918c75101860a913bf",
+      "version": "1.7.0",
+      "role": "mesh/rig cleanup, mocap retargeting, safe GLB export",
+      "skill_modules": [
+        "blender-model-animation-enhancer"
+      ]
+    },
+    {
+      "name": "meta-game-fusion",
+      "id": "plugins_6b0133e627a88191bb62348780e41653",
+      "version": "1.1.0",
+      "role": "integration of owned assets, narrative, physics, NPC navmesh, postfx",
+      "skill_modules": [
+        "meta-game-fusion"
+      ]
+    }
+  ],
+  "other_owned_plugins": [
+    {
+      "name": "playgama-developer-console",
+      "id": "plugin_asdk_app_6ae2cb844a4c819191d5941f9e371ef7",
+      "version": "1.0.0",
+      "role": "Playgama management app; not counted as a game-production skill"
+    }
+  ],
+  "verification_scope": "Plugin Creator list_owned_personal_plugins observed 2026-11-21; versions change independently."
+}

@@ -3,15 +3,54 @@ const {GITHUB_REPOSITORY: repo='mpaykin1/meta6-lab',GITHUB_TOKEN: token}=process
 const root='https://api.github.com/repos/'+repo;
 const headers={'Accept':'application/vnd.github+json','User-Agent':'meta-games-dispatcher','Authorization':'Bearer '+token};
 export async function api(path,{request=fetch,wait=ms=>new Promise(done=>setTimeout(done,ms)),
- now=()=>Date.now()}={}){
+ now=()=>Date.now(),maxWaitMs=8*60*1000}={}){
+ const deadline=performance.now()+maxWaitMs;
  for(let attempt=0;attempt<2;attempt++){
-  const response=await request(root+path,{headers});
-  if(response.ok)return response.json();
-  const remaining=Number(response.headers.get('x-ratelimit-remaining'));
-  const reset=Number(response.headers.get('x-ratelimit-reset'))*1000;
+  const remainingMs=Math.floor(deadline-performance.now());
+  if(remainingMs<=0)throw Error('нет данных: таймаут GitHub API ('+path+')');
+  const signal=AbortSignal.timeout(remainingMs);
+  let response;
+  try{
+   let onRequestAbort;
+   const requestAborted=new Promise((_resolve,reject)=>{
+    onRequestAbort=()=>reject(signal.reason);
+    signal.addEventListener('abort',onRequestAbort,{once:true});
+   });
+   try{response=await Promise.race([request(root+path,{headers,signal}),requestAborted])}
+   finally{signal.removeEventListener('abort',onRequestAbort)}
+   if(response.ok){
+    let onAbort;
+    const aborted=new Promise((_resolve,reject)=>{
+     onAbort=()=>reject(signal.reason);
+     signal.addEventListener('abort',onAbort,{once:true});
+    });
+    try{return await Promise.race([response.json(),aborted])}
+    finally{signal.removeEventListener('abort',onAbort)}
+   }
+  }catch(error){
+   if(error?.name==='TimeoutError'||error?.name==='AbortError')throw Error('нет данных: таймаут GitHub API ('+path+')',{cause:error});
+   throw error;
+  }
+  const remainingHeader=response.headers.get('x-ratelimit-remaining');
+  const resetHeader=response.headers.get('x-ratelimit-reset');
+  const remaining=remainingHeader===null?NaN:Number(remainingHeader);
+  const reset=resetHeader===null?NaN:Number(resetHeader)*1000;
   if((response.status===403||response.status===429)&&remaining===0&&Number.isFinite(reset)&&reset>0){
    const waitMs=reset-now();
-   if(waitMs>0&&waitMs<=8*60*1000&&attempt===0){await wait(waitMs+1000);continue}
+   if(waitMs>0&&waitMs<=8*60*1000&&waitMs+1000<deadline-performance.now()&&attempt===0){
+    let onWaitAbort;
+    const waitAborted=new Promise((_resolve,reject)=>{
+     onWaitAbort=()=>reject(signal.reason);
+     signal.addEventListener('abort',onWaitAbort,{once:true});
+     if(signal.aborted)onWaitAbort();
+    });
+    try{await Promise.race([wait(waitMs+1000),waitAborted])}
+    catch(error){
+     if(error?.name==='TimeoutError'||error?.name==='AbortError')throw Error('нет данных: таймаут GitHub API ('+path+')',{cause:error});
+     throw error;
+    }finally{signal.removeEventListener('abort',onWaitAbort)}
+    continue;
+   }
    throw Error('нет данных: квота GitHub API до '+new Date(reset).toISOString().slice(11,16)+' UTC');
   }
   throw Error('нет данных: GitHub HTTP '+response.status+' ('+path+')');
@@ -98,6 +137,7 @@ export function assertNotEmpty(tasksMarkdown,cards){
  if(tasksMarkdown.split('\n').some(line=>/^\|\s*🛑/.test(line))&&!cards.length)throw Error('Empty dispatcher with stalled tasks');
 }
 export async function main(){
+ const dispatchApi=path=>api(path,{maxWaitMs:10000});
  const tasks=parseTasks(await fs.readFile('ZADACHI.md','utf8'));
  const finish=await fs.readFile('rules/09-platforma/FINISH.md','utf8');
  const finishIds=[...finish.matchAll(/^\|\s*([MBLP]\d+)\s*\|[^|]*\|[^|]*\|\s*НЕТ\b/gm)].map(m=>m[1]);
@@ -118,16 +158,16 @@ export async function main(){
   claude.push({...t,title:listed.title,branch:listed.head.ref});
   continue;
  }
- let pr;try{pr=await api('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
+ let pr;try{pr=await dispatchApi('/pulls/'+t.id)}catch(e){console.error('PR '+t.id,e.message);throw e}
  if(pr.state!=='open')continue;
- const resolution=await resolveConflict(pr,()=>api('/pulls/'+t.id),previousConflict(previous,t.id));
+ const resolution=await resolveConflict(pr,()=>dispatchApi('/pulls/'+t.id),previousConflict(previous,t.id));
  pr=resolution.pr;
- const checks=await api('/commits/'+pr.head.sha+'/check-runs?per_page=100');
- const statuses=await api('/commits/'+pr.head.sha+'/status');
+ const checks=await dispatchApi('/commits/'+pr.head.sha+'/check-runs?per_page=100');
+ const statuses=await dispatchApi('/commits/'+pr.head.sha+'/status');
  const failed=checks.check_runs.filter(x=>['failure','timed_out','action_required'].includes(x.conclusion)).map(x=>({name:x.name,url:x.html_url}));
  failed.push(...statuses.statuses.filter(x=>['failure','error'].includes(x.state)).map(x=>({name:x.context,url:x.target_url})));
  const conflict=resolution.conflict===true,conflictUnknown=resolution.conflict===null;
- const commit=await api('/commits/'+pr.head.sha);
+ const commit=await dispatchApi('/commits/'+pr.head.sha);
  const lastCommit=commit.commit.committer.date;
  const stale=Date.now()-Date.parse(lastCommit)>172800000;
  const stalled=/ЗАВИС/.test(t.status),isClaude=/НУЖЕН CLAUDE/.test(t.status)||/НУЖЕН CLAUDE/.test(pr.body||'');

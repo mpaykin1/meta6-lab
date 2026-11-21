@@ -11,7 +11,7 @@ if [ "$MODE" = extended ]; then
   python3 -m venv .venv-extended
   . .venv-extended/bin/activate
   python -m pip install --disable-pip-version-check --upgrade pip
-  python -m pip install --disable-pip-version-check "pymeshlab==2025.7.post1" "rembg[cpu]==2.0.87" "scancode-toolkit==32.5.0"
+  python -m pip install --disable-pip-version-check "pymeshlab==2025.7.post1" "rembg[cpu]==2.0.87" "scancode-toolkit==32.5.0" "pluggy==1.6.0"
   python - <<'PY'
 import pymeshlab, rembg
 print('ASSET_PYTHON_DEPENDENCIES_OK')

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-21T06:00:09.165Z",
+  "generated_at": "2026-11-21T06:01:48.910Z",
   "sha": {
-    "lab": "933c4263de7ff9c1b1592b6301555c265a8c7aaf",
+    "lab": "356fc143c74565fc65b65da4df2d542e1868356b",
     "mg": "5984fcd5b79ed2d03c648053334361db8deb44fb"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44873336289",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/44873540533",
   "review": {
     "protected": [
       {
@@ -527,7 +527,7 @@
   },
   "pr": {
     "open": 21,
-    "conflicts": 6,
+    "conflicts": "нет данных",
     "merged": 83,
     "closed": 176,
     "mergedItems": [
@@ -1318,7 +1318,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3342,
+      "count": 3344,
       "folders": "нет данных"
     },
     "mg": {

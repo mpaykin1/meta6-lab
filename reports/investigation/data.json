@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-22T01:19:04.666Z",
+  "generated_at": "2026-11-22T11:24:08.731Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -390,13 +390,13 @@
       "status": "ошибка",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 354,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44450098541/job/135312052876",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/354",
       "taken_at": "2026-11-17 02:20 UTC",
       "last_commit_at": "2026-11-17 02:26",
-      "remaining": "Исправить красные проверки: kontur-guard"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 23,
@@ -727,12 +727,12 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/ostrov-aptekarya-ii",
-      "status": "зависла",
+      "status": "ошибка",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 297,
-      "pr_state": "open",
-      "check": "success",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44449938550/job/135311129567",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/297",
       "taken_at": "2026-11-13 17:09",
       "last_commit_at": "2026-11-16 04:18",
@@ -2375,7 +2375,7 @@
       "title": "Готовность META GAMES — отчёт",
       "state": "open",
       "sha": null,
-      "updated_at": "2026-11-21T19:20:09Z"
+      "updated_at": "2026-11-22T01:22:47Z"
     },
     {
       "label": "automation-watchdog",

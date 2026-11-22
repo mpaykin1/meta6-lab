@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-21T19:15:17.151Z",
+  "generated_at": "2026-11-22T01:19:04.666Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -727,7 +727,7 @@
       "project": "МГЛ",
       "owner": "чат ChatGPT",
       "branch": "lab/ostrov-aptekarya-ii",
-      "status": "конфликт",
+      "status": "зависла",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 297,
       "pr_state": "open",
@@ -2375,7 +2375,7 @@
       "title": "Готовность META GAMES — отчёт",
       "state": "open",
       "sha": null,
-      "updated_at": "2026-11-21T11:10:08Z"
+      "updated_at": "2026-11-21T19:20:09Z"
     },
     {
       "label": "automation-watchdog",

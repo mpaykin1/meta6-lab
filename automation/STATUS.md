@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-23T15:14:52.846Z | МГЛ: f357ac7308d9ed27942c478f138b835d0d1b26ce | МГ: 45264bdbbb7735ec4f152d3c3dbf1e57ba45f010 | https://github.com/mpaykin1/meta6-lab/actions/runs/45202868674
+UTC: 2026-11-23T15:16:00.894Z | МГЛ: 04c57638b93ad715428ec50694ff93350edc53b3 | МГ: 45264bdbbb7735ec4f152d3c3dbf1e57ba45f010 | https://github.com/mpaykin1/meta6-lab/actions/runs/45202896451
 ## ПРОВЕРИТЬ CLAUDE
 - PR #421 a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1: .github/workflows/bez-patternov.yml, automation/asset-check/test_htmlpack.py, scripts/storozha/verify-storozha.mjs, scripts/visual/mutate-no-patterns.mjs, scripts/visual/verify-targets.mjs
 - PR #413 fa7e16893fb93ca733d8e5b93a0e03674d965258: .github/workflows/odin-pr.yml, scripts/odin-pr/mutate-odin-pr.mjs
@@ -36,7 +36,7 @@ L4 — не готов: НЕТ в таблице FINISH
 #422 BEZ PATTERNOV: неподвижный кадр для паков вместо таймаута сн | 1d6c9557d51496b703e9279fb57188e385f2e126
 ещё 82: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3405 коммитов | нет данных
+МГЛ: 3406 коммитов | нет данных
 МГ: 51 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:34, reference:31, rules:11, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

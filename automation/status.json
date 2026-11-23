@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-23T15:25:39.131Z",
+  "generated_at": "2026-11-23T16:53:20.941Z",
   "sha": {
-    "lab": "6d8fbbb7e06c9a6b1fce83dc9c237d4dbe87ecca",
+    "lab": "ae501fc34ad9382458bc2df76a5eb357fc3646e2",
     "mg": "8d39b4f5a54f44bddcbea1a496b98896f36b1f97"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45204899582",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45221300343",
   "review": {
     "protected": [
       {
@@ -528,9 +528,14 @@
   "pr": {
     "open": 10,
     "conflicts": "нет данных",
-    "merged": 84,
+    "merged": 85,
     "closed": 189,
     "mergedItems": [
+      {
+        "number": 432,
+        "title": "feat(bullet-car): publish pixel-art website",
+        "sha": "ae501fc34ad9382458bc2df76a5eb357fc3646e2"
+      },
       {
         "number": 431,
         "title": "catalog: add Sky Pilot Earth Eaters first, 8 locales, cover ",
@@ -1323,7 +1328,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3407,
+      "count": 3409,
       "folders": "нет данных"
     },
     "mg": {

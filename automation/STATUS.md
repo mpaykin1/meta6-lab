@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-23T15:25:39.131Z | МГЛ: 6d8fbbb7e06c9a6b1fce83dc9c237d4dbe87ecca | МГ: 8d39b4f5a54f44bddcbea1a496b98896f36b1f97 | https://github.com/mpaykin1/meta6-lab/actions/runs/45204899582
+UTC: 2026-11-23T16:53:20.941Z | МГЛ: ae501fc34ad9382458bc2df76a5eb357fc3646e2 | МГ: 8d39b4f5a54f44bddcbea1a496b98896f36b1f97 | https://github.com/mpaykin1/meta6-lab/actions/runs/45221300343
 ## ПРОВЕРИТЬ CLAUDE
 - PR #421 a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1: .github/workflows/bez-patternov.yml, automation/asset-check/test_htmlpack.py, scripts/storozha/verify-storozha.mjs, scripts/visual/mutate-no-patterns.mjs, scripts/visual/verify-targets.mjs
 - PR #413 fa7e16893fb93ca733d8e5b93a0e03674d965258: .github/workflows/odin-pr.yml, scripts/odin-pr/mutate-odin-pr.mjs
@@ -31,12 +31,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 10 | конфликт: нет данных | слито: 84 | закрыто: 189
+открыто: 10 | конфликт: нет данных | слито: 85 | закрыто: 189
+#432 feat(bullet-car): publish pixel-art website | ae501fc34ad9382458bc2df76a5eb357fc3646e2
 #431 catalog: add Sky Pilot Earth Eaters first, 8 locales, cover  | 5d0338665a589ad9271915956972d3e564fbf817
-#422 BEZ PATTERNOV: неподвижный кадр для паков вместо таймаута сн | 1d6c9557d51496b703e9279fb57188e385f2e126
-ещё 82: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 83: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3407 коммитов | нет данных
+МГЛ: 3409 коммитов | нет данных
 МГ: 52 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:34, reference:31, rules:11, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

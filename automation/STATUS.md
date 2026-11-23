@@ -1,10 +1,9 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-23T03:10:11.355Z | МГЛ: fc1ed5a320f26a79765705bfc682ca4913e40efc | МГ: 5984fcd5b79ed2d03c648053334361db8deb44fb | https://github.com/mpaykin1/meta6-lab/actions/runs/45104239064
+UTC: 2026-11-23T15:09:47.588Z | МГЛ: 5d0338665a589ad9271915956972d3e564fbf817 | МГ: b788e9a8b4bdae91acfd40ac1520557d64432ff0 | https://github.com/mpaykin1/meta6-lab/actions/runs/45201852101
 ## ПРОВЕРИТЬ CLAUDE
 - PR #421 a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1: .github/workflows/bez-patternov.yml, automation/asset-check/test_htmlpack.py, scripts/storozha/verify-storozha.mjs, scripts/visual/mutate-no-patterns.mjs, scripts/visual/verify-targets.mjs
 - PR #413 fa7e16893fb93ca733d8e5b93a0e03674d965258: .github/workflows/odin-pr.yml, scripts/odin-pr/mutate-odin-pr.mjs
 - ещё 41: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/45001574918 | Play all games
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | closed | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/librar… (сокращено)
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
@@ -32,13 +31,13 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 15 | конфликт: 4 | слито: 83 | закрыто: 184
+открыто: 10 | конфликт: нет данных | слито: 84 | закрыто: 189
+#431 catalog: add Sky Pilot Earth Eaters first, 8 locales, cover  | 5d0338665a589ad9271915956972d3e564fbf817
 #422 BEZ PATTERNOV: неподвижный кадр для паков вместо таймаута сн | 1d6c9557d51496b703e9279fb57188e385f2e126
-#421 Почему стояла работа: ложный красный BEZ PATTERNOV, тупик ли | a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1
-ещё 81: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 82: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3391 коммитов | нет данных
-МГ: 46 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:33, reference:31, rules:10, SOURCE_INDEX.md:1
+МГЛ: 3401 коммитов | нет данных
+МГ: 49 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:34, reference:31, rules:10, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет
@@ -52,7 +51,7 @@ sumerki-i-pepel-2-copy — не запускалась | витрина: нет
 twilight-isle-classic — не запускалась | витрина: да
 twilight-isles — не запускалась | витрина: да
 veil-terraces — прошла | витрина: да
-wild-train-prologue — не прошла | витрина: да
+wild-train-prologue — прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 2026111801 | 18.11.2026 | BEZ PATTERNOV: у PR без игры каталога проверка по умолчанию мерила INK-шейдер и требовала улучшить его на 15% — красными стояли все PR ассетов и правил (#371, #409, #415 и др.), работа ChatGPT не сливалась | Claude: разбор «почему с… (сокращено)
 | 2026111802 | 18.11.2026 | Лимит пяти живых PR держал в очереди и сам ремонт ложно красной проверки, которая и мешала пяти старейшим слиться — тупик | Claude: #421 красный только по storozha-quota | scripts/storozha/verify-storozha.mjs: claude/* не блокируетс… (сокращено)

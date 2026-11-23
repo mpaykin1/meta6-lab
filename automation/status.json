@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-23T03:10:11.355Z",
+  "generated_at": "2026-11-23T15:09:47.588Z",
   "sha": {
-    "lab": "fc1ed5a320f26a79765705bfc682ca4913e40efc",
-    "mg": "5984fcd5b79ed2d03c648053334361db8deb44fb"
+    "lab": "5d0338665a589ad9271915956972d3e564fbf817",
+    "mg": "b788e9a8b4bdae91acfd40ac1520557d64432ff0"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45104239064",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45201852101",
   "review": {
     "protected": [
       {
@@ -378,13 +378,7 @@
         ]
       }
     ],
-    "redLab": [
-      {
-        "workflow": "META BOT",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45001574918",
-        "step": "Play all games"
-      }
-    ],
+    "redLab": [],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -532,11 +526,16 @@
     }
   },
   "pr": {
-    "open": 15,
-    "conflicts": 4,
-    "merged": 83,
-    "closed": 184,
+    "open": 10,
+    "conflicts": "нет данных",
+    "merged": 84,
+    "closed": 189,
     "mergedItems": [
+      {
+        "number": 431,
+        "title": "catalog: add Sky Pilot Earth Eaters first, 8 locales, cover ",
+        "sha": "5d0338665a589ad9271915956972d3e564fbf817"
+      },
       {
         "number": 422,
         "title": "BEZ PATTERNOV: неподвижный кадр для паков вместо таймаута сн",
@@ -1324,12 +1323,12 @@
   },
   "changes": {
     "lab": {
-      "count": 3391,
+      "count": 3401,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 46,
-      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:33, reference:31, rules:10, SOURCE_INDEX.md:1"
+      "count": 49,
+      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:34, reference:31, rules:10, SOURCE_INDEX.md:1"
     }
   },
   "games": [
@@ -1395,7 +1394,7 @@
     },
     {
       "name": "wild-train-prologue",
-      "bot": "не прошла",
+      "bot": "прошла",
       "storefront": "да"
     }
   ],

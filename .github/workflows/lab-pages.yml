@@ -1,7 +1,9 @@
 name: LAB Pages
+# Each run must be allowed to reach the per-deployment mutex below.
+# Sharing a workflow-level group drops queued main deployments when link checks take long.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  group: ${{ github.workflow }}-${{ github.run_id }}
+  cancel-in-progress: false
 # Файл песочницы (Claude). Сайт: корень = main, каждая ветка lab/<имя> -> /preview/<имя>/.
 on:
   push:

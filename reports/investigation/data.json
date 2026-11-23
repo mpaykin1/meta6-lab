@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-23T01:42:37.516Z",
+  "generated_at": "2026-11-23T12:39:12.508Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -407,13 +407,13 @@
       "status": "ошибка",
       "original_status": "🛑 ЗАВИС 3+ ч — ТОЛКНУТЬ",
       "pr": 355,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44768873577/job/136400855241",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/355",
       "taken_at": "2026-11-17T02:24:34.332Z",
       "last_commit_at": "2026-11-17 02:25",
-      "remaining": "Исправить красные проверки: storozha-quota, storozha-quota, guard"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 24,
@@ -2375,7 +2375,7 @@
       "title": "Готовность META GAMES — отчёт",
       "state": "open",
       "sha": null,
-      "updated_at": "2026-11-22T19:44:48Z"
+      "updated_at": "2026-11-23T01:46:54Z"
     },
     {
       "label": "automation-watchdog",

@@ -1,0 +1,51 @@
+name: Grange P22 raw audit
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/grange-p22-audit.yml'
+      - 'asset-packs/incoming/bullet-car-gif/check_gif.py'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install Pillow numpy
+      - name: Measure all GIFs from immutable raw URLs
+        env:
+          COMMIT: ${{ github.sha }}
+          REPO: ${{ github.repository }}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess, sys
+          from pathlib import Path
+          from urllib.parse import quote
+          root=Path('asset-packs/incoming/bullet-car-gif')
+          rows=['| GIF | frames | min | max | seam | P8/P9 | all numeric gates |','|---|---:|---:|---:|---:|---|---|']
+          for file in sorted(root.rglob('*.gif')):
+              url='https://raw.githubusercontent.com/'+os.environ['REPO']+'/'+os.environ['COMMIT']+'/'+quote(file.as_posix())
+              proc=subprocess.run([sys.executable,str(root/'check_gif.py'),str(file),'--raw-url',url],capture_output=True,text=True)
+              try:
+                  d=json.loads(proc.stdout)
+                  print('P22_JSON '+json.dumps(d,ensure_ascii=False),flush=True)
+                  if not d.get('publication_source_verified') or 'adjacent_max' not in d:
+                      rows.append(f'| {file.relative_to(root)} | — | — | — | — | BLOCKED | BLOCKED |')
+                      continue
+                  flags=sorted({e['rule'] for e in d['errors']})
+                  motion=', '.join(x for x in flags if x in ('P8','P9')) or 'PASS'
+                  rows.append('| {} | {} | {:.6f} | {:.6f} | {:.6f} | {} | {} |'.format(file.relative_to(root),d['frames'],d['adjacent_min'],d['adjacent_max'],d['seam'],motion,d['status']+' '+', '.join(flags)))
+              except Exception as e:
+                  print('BLOCKED',file,e,proc.stderr,flush=True)
+                  rows.append(f'| {file.relative_to(root)} | — | — | — | — | BLOCKED | BLOCKED |')
+          result='\n'.join(rows)
+          print(result,flush=True)
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f: f.write(result+'\n')
+          PY

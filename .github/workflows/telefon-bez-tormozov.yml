@@ -2,6 +2,9 @@
 # Правило: rules/05-proizvoditelnost-i-razvitie/TELEFON_BEZ_TORMOZOV.md (владелец, 24.11.2026, после тормозов Bullet Car 1.2).
 # Новая игра: все лимиты обязательны. Старая игра, уже тяжелее лимита: правка не должна делать хуже (+10%).
 name: telefon-bez-tormozov
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 on:
   pull_request:
     paths: ['**/*.html', '**/*.js', '**/*.mjs', 'scripts/telefon-bez-tormozov.mjs', 'automation/telefon-bez-tormozov/**']

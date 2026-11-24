@@ -18,6 +18,9 @@ on:
         type: string
 permissions:
   contents: read
+concurrency:
+  group: grange-publication-gate-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   gate:
     runs-on: ubuntu-latest

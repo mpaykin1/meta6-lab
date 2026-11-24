@@ -1,0 +1,7 @@
+{"game":"nebesny-pilot","lane":"A","author":"пример Claude",
+ "assets":{"lighthouse":{"slice":[32,32],"count":20,"role":"landmark","label_ru":"Маяк","anim":{"type":"spin","speed":0.3},"spawn":"на краю острова, 1 на 6 островов",
+  "layers":[
+   {"from":0,"to":3,"shape":"ellipse","w":24,"h":22,"w2":20,"h2":18,"color":"#6b5a48","color2":"#8a7560","edge":"#3a2e24","speckle":{"n":14,"color":"#4a3d30","seed":3}},
+   {"from":4,"to":15,"shape":"ellipse","w":11,"h":11,"w2":8,"h2":8,"color":"#e8e2d0","color2":"#fffaf0","edge":"#9a9488","stripes":{"every":4,"color":"#c23440"}},
+   {"from":16,"to":17,"shape":"rect","w":10,"h":10,"color":"#2d3039","edge":"#16181f","windows":{"color":"#ffd24a","n":6}},
+   {"from":18,"to":19,"shape":"ellipse","w":8,"h":8,"w2":3,"h2":3,"color":"#c23440","color2":"#7a2028"}]}}}

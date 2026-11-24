@@ -1,0 +1,44 @@
+# Копировать в meta6-lab как .github/workflows/stackgen.yml
+# Автозадача пишет только текст recipe.json -> этот прогон сам рисует PNG-срезы,
+# проверяет их и коммитит результат обратно в ту же ветку. Бесплатно (GitHub Actions).
+name: stackgen
+on:
+  push:
+    paths:
+      - 'asset-packs/incoming/stack-*/recipe.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: stackgen-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install pillow
+      - name: Build all changed recipes
+        id: gen
+        run: |
+          set -e
+          fail=0
+          for r in asset-packs/incoming/stack-*/recipe.json; do
+            d=$(dirname "$r")
+            python3 -I automation/stackgen/stackgen.py "$d" || fail=1
+          done
+          echo "fail=$fail" >> "$GITHUB_OUTPUT"
+      - name: Commit generated slices back
+        run: |
+          git config user.name "stackgen-bot"
+          git config user.email "stackgen-bot@users.noreply.github.com"
+          git add asset-packs/incoming/stack-*/stacks asset-packs/incoming/stack-*/stack.json asset-packs/incoming/stack-*/_check || true
+          git diff --cached --quiet || git commit -m "stackgen: срезы из recipe.json"
+          git push || true
+      - name: HARD checks
+        if: steps.gen.outputs.fail == '1'
+        run: |
+          cat asset-packs/incoming/stack-*/_check/REPORT.md
+          exit 1

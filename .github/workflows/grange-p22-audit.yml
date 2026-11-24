@@ -7,6 +7,9 @@ on:
       - 'asset-packs/incoming/bullet-car-gif/check_gif.py'
 permissions:
   contents: read
+concurrency:
+  group: grange-p22-audit-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   audit:
     runs-on: ubuntu-latest

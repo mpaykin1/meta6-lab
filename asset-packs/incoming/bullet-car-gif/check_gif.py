@@ -28,6 +28,10 @@ def diff(a,b):
     return float(np.abs(a.astype(np.int16)-b.astype(np.int16))[m].mean()) if m.any() else 0.
 
 
+def canvas_diff(a,b):
+    return float(np.abs(a.astype(np.int16)-b.astype(np.int16)).mean())
+
+
 def bbox(m):
     y,x=np.nonzero(m)
     if not len(x): raise ValueError('empty object mask')
@@ -87,8 +91,10 @@ def main():
         else:
             adj=[diff(x,y) for x,y in zip(fs,fs[1:])];seam=diff(fs[-1],fs[0]);mx=max(adj);mn=min(adj)
         data.update(adjacent_differences=adj,adjacent_min=mn,adjacent_max=mx,adjacent_mean=float(np.mean(adj)) if adj else 0.,seam=None if a.once else seam)
-        if mx<2: fail('P9',f'max {mx:.4f} < 2')
-        if not a.once and (seam>mx+1e-9 or seam==0 or loop!=0): fail('P4','seam above internal max, duplicate closing frame, or not infinite loop')
+        canvas_adj=[canvas_diff(x,y) for x,y in zip(fs,fs[1:])]; canvas_max=max(canvas_adj,default=0.);canvas_min=min(canvas_adj,default=0.);canvas_seam=canvas_diff(fs[-1],fs[0])
+        data.update(canvas_adjacent_differences=canvas_adj,canvas_adjacent_min=canvas_min,canvas_adjacent_max=canvas_max,canvas_seam=None if a.once else canvas_seam)
+        if mx<2 or canvas_max<2: fail('P9',f'foreground max {mx:.4f}, full-canvas max {canvas_max:.4f}; both must be >=2')
+        if not a.once and (seam>mx+1e-9 or seam==0 or loop!=0 or canvas_seam>canvas_max+1e-9): fail('P4','seam above internal max, duplicate closing frame, or not infinite loop')
         if a.once and loop==0: fail('P4','one-shot requested but infinite loop')
         pause=cfg.get('pause_transitions',[]); allowed=set()
         if pause:
@@ -96,7 +102,8 @@ def main():
             if action=='jump' and len(set(pause))<=2 and all(isinstance(i,int) and 0<=i<n-1 and i in peak_ids and i+1 in peak_ids for i in pause) and max(pause)-min(pause)<=1: allowed=set(pause)
             else: fail('P8','invalid pause exemption')
         motion=adj+([] if a.once else [seam]); regular=[d for i,d in enumerate(motion) if i not in allowed]
-        if not regular or min(regular)<mx/3-1e-9: fail('P8','min regular transition < max/3')
+        canvas_motion=canvas_adj+([] if a.once else [canvas_seam]); canvas_regular=[d for i,d in enumerate(canvas_motion) if i not in allowed]
+        if not regular or min(regular)<mx/3-1e-9 or not canvas_regular or min(canvas_regular)<canvas_max/3-1e-9: fail('P8','min regular transition < max/3')
         if any(d==0 for i,d in enumerate(adj) if i not in allowed): fail('P8','duplicate frames')
         normal_times=[t for i,t in enumerate(ts) if i not in allowed]
         if not normal_times or min(normal_times)<=0 or min(normal_times)/max(normal_times)<.8 or (allowed and sum(ts[i] for i in allowed)>2*max(normal_times)): fail('P8','uneven or invalid frame timing')
@@ -137,7 +144,6 @@ def main():
                 for i,f in enumerate(fs):
                     lum=luma(f); on=(f[...,3]>0)&(lum>=40); lit=bm[i]&on&~cm[i]
                     ratios.append(span(lit,axis)/max(1,span(cm[i],axis)))
-                    # Each longitudinal tenth of the annotated beam must contain real light, not isolated endpoints.
                     yy,xx=np.indices(lit.shape); proj=xx*axis[0]+yy*axis[1]; region=bm[i]&~cm[i]
                     if region.any():
                         lo,hi=proj[region].min(),proj[region].max(); bins=np.minimum(9,np.floor((proj-lo)*10/max(1,hi-lo+1)).astype(int)); fractions=[float(lit[region&(bins==k)].mean()) if (region&(bins==k)).any() else 0. for k in range(10)];beam_coverage.append(min(fractions))

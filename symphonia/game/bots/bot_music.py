@@ -10,6 +10,7 @@ with sync_playwright() as p:
     pg=b.new_page(viewport={'width':800,'height':600})
     pg.add_init_script("window.t=1;window.P=2;window.g=3;window.W=4;window.H=5;window.S=6;window.R=7;")
     pg.on('pageerror',lambda e:errs.append(str(e)))
+    if os.environ.get('SYM_THREE'): pg.route('https://cdn.jsdelivr.net/**', lambda r: r.fulfill(body=open(os.environ['SYM_THREE'],'rb').read(), content_type='application/javascript'))
     pg.goto('http://localhost:8775/index.html#bot')
     pg.wait_for_function('document.querySelector("#load i").style.width==="100%"',timeout=60000);time.sleep(1);pg.click('#play');time.sleep(3)
     def run(g,tr,sec):

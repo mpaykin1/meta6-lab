@@ -17,7 +17,7 @@ assert "'a/" not in js
 names=sorted(set(re.findall(r'THREE\.([A-Za-z0-9_]+)',js)))
 open(os.path.join(T,'shim.js'),'w').write('export {'+','.join(names)+"} from 'three';")
 open(os.path.join(T,'game.js'),'w').write(js)
-subprocess.run([os.path.join(B,'node_modules','.bin','esbuild'),os.path.join(T,'game.js'),'--bundle','--minify','--format=iife','--target=es2020','--outfile='+os.path.join(T,'game.min.js')],check=True)
+subprocess.run([os.path.join(B,'node_modules','.bin','esbuild'),os.path.join(T,'game.js'),'--bundle','--minify','--format=esm','--external:three','--target=es2020','--outfile='+os.path.join(T,'game.min.js')],check=True)
 def extra():
     # новые спрайты: всё, что перечислено в HALL_SPR/EXT_SPR исходника, но ещё не встроено, берётся из src/a/<имя>.webp
     have=open(os.path.join(B,'assets.js')).read()+open(os.path.join(B,'assets2.js')).read()
@@ -34,5 +34,8 @@ def extra():
 font=open(os.path.join(B,'fontcss.txt')).read()
 head=head.replace('<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">','').replace('<style>','<style>\n'+font,1)
 g=open(os.path.join(T,'game.min.js')).read().replace('</script','<\\/script')
-open(os.path.join(G,'index.html'),'w').write(head+'<script>'+open(os.path.join(B,'assets.js')).read()+open(os.path.join(B,'assets2.js')).read()+extra()+'</script>\n<script>'+g+'</script>'+tail)
+# three.js подключается с CDN, как во всех играх репозитория; картинки и код игры — внутри файла. Модуль = своя область видимости (правило iPhone)
+CDN='https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js'
+g=re.sub(r'from\s*"three"','from"'+CDN+'"',g);assert CDN in g
+open(os.path.join(G,'index.html'),'w').write(head+'<script>'+open(os.path.join(B,'assets.js')).read()+open(os.path.join(B,'assets2.js')).read()+extra()+'</script>\n<script type="module">'+g+'</script>'+tail)
 print(os.path.getsize(os.path.join(G,'index.html'))/1048576)

@@ -8,6 +8,7 @@ with sync_playwright() as p:
     pg=b.new_page(viewport={'width':1100,'height':700})
     pg.add_init_script("window.t=1;window.P=2;window.g=3;window.W=4;window.H=5;window.S=6;window.R=7;")
     pg.on('pageerror',lambda e:errs.append(str(e)+' | '+str(e.stack)[:600]));pg.on('requestfailed',lambda r:errs.append('RF '+r.url[:100]));pg.on('response',lambda r:errs.append('404 '+r.url[:100]) if r.status==404 else None);pg.on('console',lambda m:errs.append(m.text) if m.type=='error' else None)
+    if os.environ.get('SYM_THREE'): pg.route('https://cdn.jsdelivr.net/**', lambda r: r.fulfill(body=open(os.environ['SYM_THREE'],'rb').read(), content_type='application/javascript'))
     pg.goto('http://localhost:8777/index.html#bot')
     pg.wait_for_function('document.querySelector("#load i").style.width==="100%"',timeout=90000);time.sleep(1);pg.click('#play');time.sleep(2)
     E=pg.evaluate;S=lambda:E('window.__bot.s')

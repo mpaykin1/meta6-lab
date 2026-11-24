@@ -4,7 +4,8 @@ from playwright.sync_api import sync_playwright
 ROOT = os.environ.get('SYM_GAME','symphonia/game')
 srv = subprocess.Popen([sys.executable, '-m', 'http.server', '8773', '-d', ROOT], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 time.sleep(1)
-THREE = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'three.min.mjs'), 'rb').read()
+# если сеть закрыта, можно подложить three.js локально: SYM_THREE=/путь/three.module.min.js
+THREE = open(os.environ['SYM_THREE'],'rb').read() if os.environ.get('SYM_THREE') else None
 errs = []
 mobile = len(sys.argv) > 1 and sys.argv[1] == 'mobile'
 out = 'shots/' + ('m_' if mobile else 'd_')
@@ -17,7 +18,7 @@ with sync_playwright() as p:
         ctx = b.new_context(viewport={'width': 1280, 'height': 720})
     ctx.add_init_script("window.t=1;window.P=2;window.g=3;window.W=4;window.H=5;window.S=6;window.R=7;")
     pg = ctx.new_page()
-    pg.route('https://cdn.jsdelivr.net/**', lambda r: r.fulfill(body=THREE, content_type='application/javascript'))
+    if THREE: pg.route('https://cdn.jsdelivr.net/**', lambda r: r.fulfill(body=THREE, content_type='application/javascript'))
     pg.route('https://fonts.googleapis.com/**', lambda r: r.fulfill(body='', content_type='text/css'))
     pg.on('console', lambda m: errs.append(m.type + ': ' + m.text) if m.type in ('error', 'warning') else None)
     pg.on('pageerror', lambda e: errs.append('PAGEERROR: ' + str(e)))

@@ -123,7 +123,9 @@ def main():
         if action=='jump':
             baseline=np.array(bbox(rm[ids[0]])[2:]-bbox(rm[ids[0]])[:2]) if rm is not None else sizes[0]
             growth=(sizes/baseline-1)*100; peak_idx=int(np.argmax(growth.mean(axis=1))); g=growth[peak_idx]
-            result.update(peak_frame=peak_idx,peak_growth_percent=g.tolist(),baseline_wh=baseline.tolist())
+            ground=np.max(np.abs(growth),axis=1)<=3
+            result.update(peak_frame=peak_idx,peak_growth_percent=g.tolist(),baseline_wh=baseline.tolist(),ground_frames=np.flatnonzero(ground).tolist())
+            if not ground.any(): fail('P17','jump never returns to baseline size (within 3%)')
             if np.any(g<12) or np.any(g>18): fail('P10/P13','jump peak growth not 12–18% in both dimensions')
         if action=='light':
             if not all(cfg.get(k) for k in ('beam_masks','beam_axis','permanent_masks','flash_masks')) or a.candidate_masks is None: block('P10/P13','body, beam, permanent-light and flash masks plus axis required')
@@ -131,14 +133,20 @@ def main():
                 axis=np.asarray(cfg['beam_axis'],float); norm=np.linalg.norm(axis)
                 if axis.shape!=(2,) or not norm: raise ValueError('invalid beam axis')
                 axis/=norm; bm=masks(rel('beam_masks'),fs,False); pm=[masks(root/k,fs,False) for k in cfg['permanent_masks']]; fm=masks(rel('flash_masks'),fs,False)
-                ratios=[]; brightness=[]; visible=[]
+                ratios=[]; brightness=[]; visible=[]; beam_coverage=[]
                 for i,f in enumerate(fs):
                     lum=luma(f); on=(f[...,3]>0)&(lum>=40); lit=bm[i]&on&~cm[i]
                     ratios.append(span(lit,axis)/max(1,span(cm[i],axis)))
+                    # Each longitudinal tenth of the annotated beam must contain real light, not isolated endpoints.
+                    yy,xx=np.indices(lit.shape); proj=xx*axis[0]+yy*axis[1]; region=bm[i]&~cm[i]
+                    if region.any():
+                        lo,hi=proj[region].min(),proj[region].max(); bins=np.minimum(9,np.floor((proj-lo)*10/max(1,hi-lo+1)).astype(int)); fractions=[float(lit[region&(bins==k)].mean()) if (region&(bins==k)).any() else 0. for k in range(10)];beam_coverage.append(min(fractions))
+                    else: beam_coverage.append(0.)
                     if not fm[i].any(): raise ValueError('empty flash mask')
                     brightness.append(float(lum[fm[i]].mean()));visible.append([bool((m[i]&on).any()) for m in pm])
-                change=(max(brightness)-min(brightness))/max(1,max(brightness))*100;result.update(beam_body_ratios=ratios,flash_brightness=brightness,flash_change_percent=change,permanent_visible=visible)
+                change=(max(brightness)-min(brightness))/max(1,max(brightness))*100;result.update(beam_body_ratios=ratios,flash_brightness=brightness,flash_change_percent=change,permanent_visible=visible,beam_min_bin_coverage=beam_coverage)
                 if min(ratios)<1 or change<40 or not all(all(v) for v in visible): fail('P10/P13','short/missing beams, flash <40%, or absent permanent lights')
+                if min(beam_coverage)<.10: fail('P17','beam is only scattered points or has empty longitudinal segments')
         if action=='damage':
             zones=cfg.get('damage_zones',[])
             if len(zones)<3 or rs is None: block('P10/P13','intact registered reference and >=3 independent zone masks required')

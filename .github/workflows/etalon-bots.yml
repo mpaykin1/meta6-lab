@@ -1,0 +1,59 @@
+# ETALON BOTS — свои боты каждой игры-эталона проверяют её на каждом PR.
+# Как это работает для любых будущих эталонов: если в папке игры есть index.html и папка bots/ с файлами bot_*.py,
+# то при изменении этой папки все её боты запускаются автоматически. Бот завершается с кодом 1 — проверка красная.
+# Первый эталон с ботами: symphonia/game (проход до финала, музыка и гармония, предметы, сенсорное управление).
+name: ETALON BOTS
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+on:
+  pull_request:
+    paths: ['**/index.html', '**/bots/bot_*.py', '**/a/**', '**/*.js', '**/*.mjs']
+  workflow_dispatch:
+    inputs:
+      game: { description: 'Папка игры с index.html и bots/ (например symphonia/game)', required: true }
+jobs:
+  bots:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Какие эталоны с ботами изменены
+        id: find
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          GAME: ${{ github.event.inputs.game }}
+        run: |
+          if [ -n "${GAME:-}" ]; then dirs="$GAME"; else
+            dirs=$(git diff --name-only "$BASE" HEAD | while read f; do d=$(dirname "$f"); while [ "$d" != "." ] && [ "$d" != "/" ]; do
+              if [ -f "$d/index.html" ] && ls "$d"/bots/bot_*.py >/dev/null 2>&1; then echo "$d"; break; fi; d=$(dirname "$d"); done; done | sort -u)
+          fi
+          echo "Эталоны с ботами: ${dirs:-нет}"
+          { echo 'dirs<<EOF'; echo "$dirs"; echo 'EOF'; } >> "$GITHUB_OUTPUT"
+      - name: Playwright
+        if: steps.find.outputs.dirs != ''
+        run: |
+          pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium webkit
+      - name: Запуск ботов
+        if: steps.find.outputs.dirs != ''
+        env:
+          DIRS: ${{ steps.find.outputs.dirs }}
+        run: |
+          fail=0
+          for d in $DIRS; do
+            for b in "$d"/bots/bot_*.py; do
+              echo "::group::$b"
+              SYM_GAME="$d" timeout 1500 xvfb-run -a python "$b" mobile 2>&1 | grep -v 'GPU stall' | tail -40; rc=${PIPESTATUS[0]}
+              echo "::endgroup::"
+              if [ "$rc" != 0 ]; then echo "::error file=$b::бот $b упал (код $rc) — см. лог группы выше"; fail=1; else echo "OK $b"; fi
+            done
+          done
+          exit $fail
+      - name: Снимки ботов
+        if: always() && steps.find.outputs.dirs != ''
+        uses: actions/upload-artifact@v4
+        with: { name: etalon-bot-shots, path: shots/, if-no-files-found: ignore, retention-days: 7 }

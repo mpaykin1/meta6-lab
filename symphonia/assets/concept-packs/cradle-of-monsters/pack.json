@@ -1,0 +1,46 @@
+{
+  "id": "cradle-of-monsters",
+  "title": "Колыбель чудовищ",
+  "hero": "Пророчица в вуали",
+  "palette": "Пыльная роза, нефрит, жемчуг",
+  "architecture": "Некрополь с реликвариями",
+  "bg": [
+    27,
+    52,
+    54
+  ],
+  "light": [
+    239,
+    191,
+    159
+  ],
+  "keys": [
+    "prophet",
+    "cradle",
+    "reliquary"
+  ],
+  "assets": [
+    {
+      "id": "prophet",
+      "atlas": "prophet/slices.png",
+      "preview": "prophet/preview.gif",
+      "metadata": "prophet/asset.json"
+    },
+    {
+      "id": "cradle",
+      "atlas": "cradle/slices.png",
+      "preview": "cradle/preview.gif",
+      "metadata": "cradle/asset.json"
+    },
+    {
+      "id": "reliquary",
+      "atlas": "reliquary/slices.png",
+      "preview": "reliquary/preview.gif",
+      "metadata": "reliquary/asset.json"
+    }
+  ],
+  "cover": "cover.gif",
+  "poster": "cover.png",
+  "status": "prototype",
+  "referenceMatch": "approximate; requires art refinement and character action animations"
+}

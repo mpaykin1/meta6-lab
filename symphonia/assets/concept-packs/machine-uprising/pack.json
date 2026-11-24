@@ -1,0 +1,46 @@
+{
+  "id": "machine-uprising",
+  "title": "Восстание машин",
+  "hero": "Механический рыцарь-дирижёр",
+  "palette": "Медь, уголь, янтарь",
+  "architecture": "Индустриальная кузница",
+  "bg": [
+    32,
+    23,
+    20
+  ],
+  "light": [
+    255,
+    157,
+    65
+  ],
+  "keys": [
+    "conductor",
+    "clockwork",
+    "forge"
+  ],
+  "assets": [
+    {
+      "id": "conductor",
+      "atlas": "conductor/slices.png",
+      "preview": "conductor/preview.gif",
+      "metadata": "conductor/asset.json"
+    },
+    {
+      "id": "clockwork",
+      "atlas": "clockwork/slices.png",
+      "preview": "clockwork/preview.gif",
+      "metadata": "clockwork/asset.json"
+    },
+    {
+      "id": "forge",
+      "atlas": "forge/slices.png",
+      "preview": "forge/preview.gif",
+      "metadata": "forge/asset.json"
+    }
+  ],
+  "cover": "cover.gif",
+  "poster": "cover.png",
+  "status": "prototype",
+  "referenceMatch": "approximate; requires art refinement and character action animations"
+}

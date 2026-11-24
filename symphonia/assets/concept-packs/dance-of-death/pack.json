@@ -1,0 +1,46 @@
+{
+  "id": "dance-of-death",
+  "title": "Танец смерти",
+  "hero": "Балерина-скелет",
+  "palette": "Бордовый, слоновая кость, бронза",
+  "architecture": "Барочный театр",
+  "bg": [
+    39,
+    17,
+    29
+  ],
+  "light": [
+    235,
+    153,
+    129
+  ],
+  "keys": [
+    "ballerina",
+    "rapier",
+    "theater"
+  ],
+  "assets": [
+    {
+      "id": "ballerina",
+      "atlas": "ballerina/slices.png",
+      "preview": "ballerina/preview.gif",
+      "metadata": "ballerina/asset.json"
+    },
+    {
+      "id": "rapier",
+      "atlas": "rapier/slices.png",
+      "preview": "rapier/preview.gif",
+      "metadata": "rapier/asset.json"
+    },
+    {
+      "id": "theater",
+      "atlas": "theater/slices.png",
+      "preview": "theater/preview.gif",
+      "metadata": "theater/asset.json"
+    }
+  ],
+  "cover": "cover.gif",
+  "poster": "cover.png",
+  "status": "prototype",
+  "referenceMatch": "approximate; requires art refinement and character action animations"
+}

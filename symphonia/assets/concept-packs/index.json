@@ -1,0 +1,28 @@
+{
+  "packs": [
+    {
+      "chapterId": "rhapsody",
+      "title": "Рапсодия",
+      "manifest": "rhapsody/pack.json",
+      "status": "prototype"
+    },
+    {
+      "chapterId": "machine-uprising",
+      "title": "Восстание машин",
+      "manifest": "machine-uprising/pack.json",
+      "status": "prototype"
+    },
+    {
+      "chapterId": "dance-of-death",
+      "title": "Танец смерти",
+      "manifest": "dance-of-death/pack.json",
+      "status": "prototype"
+    },
+    {
+      "chapterId": "cradle-of-monsters",
+      "title": "Колыбель чудовищ",
+      "manifest": "cradle-of-monsters/pack.json",
+      "status": "prototype"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "skybridge",
+  "chapterId": "rhapsody",
+  "format": "rgba-horizontal-atlas",
+  "atlas": "slices.png",
+  "tileSize": [
+    80,
+    80
+  ],
+  "columns": 10,
+  "rows": 8,
+  "layerCount": 80,
+  "layerOrder": "bottom-to-top",
+  "axis": "+Z up, +Y top of tile",
+  "spacing": [
+    1,
+    1,
+    1
+  ],
+  "pivot": [
+    40,
+    40,
+    0
+  ],
+  "preview": "preview.gif",
+  "status": "prototype",
+  "animation": "camera-orbit-only"
+}

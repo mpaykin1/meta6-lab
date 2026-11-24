@@ -99,7 +99,7 @@ def main():
         if not regular or min(regular)<mx/3-1e-9: fail('P8','min regular transition < max/3')
         if any(d==0 for i,d in enumerate(adj) if i not in allowed): fail('P8','duplicate frames')
         normal_times=[t for i,t in enumerate(ts) if i not in allowed]
-        if not normal_times or min(normal_times)<=0 or min(normal_times)/max(normal_times)<.8 or (allowed and sum(ts[i] for i in allowed)>2*max(normal_times)): fail('P16','uneven or invalid frame timing')
+        if not normal_times or min(normal_times)<=0 or min(normal_times)/max(normal_times)<.8 or (allowed and sum(ts[i] for i in allowed)>2*max(normal_times)): fail('P8','uneven or invalid frame timing')
         rs=rm=ids=None
         if not a.reference or not a.ref_indices: block('P1/P3/P3a','reference and explicit angle mapping required')
         else:
@@ -125,7 +125,7 @@ def main():
             growth=(sizes/baseline-1)*100; peak_idx=int(np.argmax(growth.mean(axis=1))); g=growth[peak_idx]
             ground=np.max(np.abs(growth),axis=1)<=3
             result.update(peak_frame=peak_idx,peak_growth_percent=g.tolist(),baseline_wh=baseline.tolist(),ground_frames=np.flatnonzero(ground).tolist())
-            if not ground.any(): fail('P17','jump never returns to baseline size (within 3%)')
+            if not ground.any(): fail('P10/P13','jump never returns to baseline size (within 3%)')
             if np.any(g<12) or np.any(g>18): fail('P10/P13','jump peak growth not 12–18% in both dimensions')
         if action=='light':
             if not all(cfg.get(k) for k in ('beam_masks','beam_axis','permanent_masks','flash_masks')) or a.candidate_masks is None: block('P10/P13','body, beam, permanent-light and flash masks plus axis required')
@@ -146,7 +146,7 @@ def main():
                     brightness.append(float(lum[fm[i]].mean()));visible.append([bool((m[i]&on).any()) for m in pm])
                 change=(max(brightness)-min(brightness))/max(1,max(brightness))*100;result.update(beam_body_ratios=ratios,flash_brightness=brightness,flash_change_percent=change,permanent_visible=visible,beam_min_bin_coverage=beam_coverage)
                 if min(ratios)<1 or change<40 or not all(all(v) for v in visible): fail('P10/P13','short/missing beams, flash <40%, or absent permanent lights')
-                if min(beam_coverage)<.10: fail('P17','beam is only scattered points or has empty longitudinal segments')
+                if min(beam_coverage)<.10: fail('P10/P13','beam is only scattered points or has empty longitudinal segments')
         if action=='damage':
             zones=cfg.get('damage_zones',[])
             if len(zones)<3 or rs is None: block('P10/P13','intact registered reference and >=3 independent zone masks required')
@@ -162,11 +162,11 @@ def main():
                 if min(counts)<3: fail('P10/P13','fewer than 3 substantially changed zones')
         if a.preserve_prefix:
             old,ot,_=load(a.preserve_prefix)
-            if len(old)<2 or n<=len(old) or old[0].shape!=fs[0].shape: fail('P15','invalid preserved prefix')
+            if len(old)<2 or n<=len(old) or old[0].shape!=fs[0].shape: fail('P4','invalid preserved prefix')
             else:
                 d=max(diff(x,y) for x,y in zip(old,fs)); oldmax=max(diff(x,y) for x,y in zip(old,old[1:])); newmax=max(adj[len(old)-1:]+[seam]);timing=ts[:len(old)]==ot
                 data['preservation']={'prefix_delta':d,'timing_exact':timing,'old_max':oldmax,'new_seam_max':newmax}
-                if d!=0 or not timing or newmax>oldmax+1e-9 or not all(min(ot)<=t<=max(ot) for t in ts[len(old):]): fail('P15','old frames/times changed or new seam above original max')
+                if d!=0 or not timing or newmax>oldmax+1e-9 or not all(min(ot)<=t<=max(ot) for t in ts[len(old):]): fail('P4','old frames/times changed or new seam above original max')
     except Exception as e: block('P12/P13',str(e))
     data.update(numeric_pass=not(errors or blocked),status='FAIL' if errors else 'BLOCKED' if blocked else 'PASS_NUMERIC',errors=errors,blocked=blocked,visual_identity='REQUIRED_P1',visual_action='REQUIRED_P10',visual_light_and_edges='REQUIRED_P3a')
     print(json.dumps(data,ensure_ascii=False,indent=2));return 1 if errors or blocked else 0

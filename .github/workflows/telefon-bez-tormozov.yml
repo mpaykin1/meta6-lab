@@ -1,0 +1,48 @@
+# ТЕЛЕФОН БЕЗ ТОРМОЗОВ — бот меряет нагрузку на видеокарту телефона в каждой изменённой игре.
+# Правило: rules/05-proizvoditelnost-i-razvitie/TELEFON_BEZ_TORMOZOV.md (владелец, 24.11.2026, после тормозов Bullet Car 1.2).
+# Новая игра: все лимиты обязательны. Старая игра, уже тяжелее лимита: правка не должна делать хуже (+10%).
+name: telefon-bez-tormozov
+on:
+  pull_request:
+    paths: ['**/*.html', '**/*.js', '**/*.mjs', 'scripts/telefon-bez-tormozov.mjs', 'automation/telefon-bez-tormozov/**']
+  workflow_dispatch:
+    inputs:
+      game: { description: 'Путь к index.html или https-адрес игры', required: true }
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: Playwright
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Ловушки бота (хорошая сцена проходит, ошибки Bullet Car ловятся)
+        run: bash automation/telefon-bez-tormozov/test.sh
+      - name: Замер изменённых игр
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          GAME: ${{ github.event.inputs.game }}
+        run: |
+          set -u; fail=0
+          if [ -n "${GAME:-}" ]; then list="$GAME"; else
+            list=$(git diff --name-only "$BASE" HEAD | grep -E '\.(html|js|mjs)$' | xargs -r -n1 dirname | sort -u \
+              | while read d; do [ -f "$d/index.html" ] && grep -lqE "WebGLRenderer|getContext\(['\"]webgl" "$d/index.html" "$d"/*.js 2>/dev/null && echo "$d/index.html"; done | grep -v '^automation/telefon-bez-tormozov/' | head -12)
+          fi
+          [ -n "$list" ] || { echo "Изменённых WebGL-игр нет"; exit 0; }
+          [ -n "${BASE:-}" ] && git worktree add -q /tmp/base "$BASE"
+          for g in $list; do
+            echo "::group::$g"; bl=""
+            if [ -n "${BASE:-}" ] && [ -f "/tmp/base/$g" ]; then
+              rm -f /tmp/base.json; node scripts/telefon-bez-tormozov.mjs "/tmp/base/$g" --json /tmp/base.json > /dev/null 2>&1; [ -f /tmp/base.json ] && bl="--baseline /tmp/base.json"
+            fi
+            node scripts/telefon-bez-tormozov.mjs "$g" $bl; rc=$?
+            echo "::endgroup::"
+            [ $rc -eq 1 ] && { echo "::error file=$g::ТЕЛЕФОН БЕЗ ТОРМОЗОВ: превышен лимит — см. лог и правило TELEFON_BEZ_TORMOZOV.md"; fail=1; }
+            [ $rc -eq 2 ] && echo "::warning file=$g::игра не нарисовала кадр WebGL в боте — замер пропущен"
+          done
+          exit $fail

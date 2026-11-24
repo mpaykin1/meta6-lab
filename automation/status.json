@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-23T17:05:14.198Z",
+  "generated_at": "2026-11-24T03:04:50.638Z",
   "sha": {
-    "lab": "a0a080a140c117138976680b3ee5b41cb87d72fb",
-    "mg": "8d39b4f5a54f44bddcbea1a496b98896f36b1f97"
+    "lab": "fdbda046f1a19b1b426625a31274e5eb8a1156f7",
+    "mg": "ad2738c711e4d665a92acbbadb0214ba14ecff63"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45223565274",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45316797106",
   "review": {
     "protected": [
       {
@@ -385,7 +385,18 @@
         ]
       }
     ],
-    "redLab": [],
+    "redLab": [
+      {
+        "workflow": "MG Dispatcher",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45316083732",
+        "step": "Run node scripts/dispetcher/run.mjs"
+      },
+      {
+        "workflow": "LAB Pages",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45315918593",
+        "step": "Run actions/deploy-pages@v4"
+      }
+    ],
     "redMg": [],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
@@ -523,7 +534,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45221300365"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45223565329"
       },
       "P1": {
         "value": "не подтверждено",
@@ -533,10 +544,10 @@
     }
   },
   "pr": {
-    "open": 10,
-    "conflicts": "нет данных",
+    "open": 9,
+    "conflicts": 5,
     "merged": 86,
-    "closed": 189,
+    "closed": 191,
     "mergedItems": [
       {
         "number": 433,
@@ -1347,12 +1358,12 @@
   },
   "changes": {
     "lab": {
-      "count": 3411,
+      "count": 3416,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 52,
-      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:34, reference:31, rules:11, SOURCE_INDEX.md:1"
+      "count": 53,
+      "folders": ".github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:35, reference:31, rules:11, SOURCE_INDEX.md:1"
     }
   },
   "games": [

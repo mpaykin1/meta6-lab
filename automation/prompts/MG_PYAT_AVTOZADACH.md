@@ -1,3 +1,5 @@
+> **НЕ ИСПОЛЬЗУЕТСЯ с 24.11.2026:** МГ больше не развивается, автозадачи переведены на SYMPHONIA — [SYMPHONIA_PYAT_AVTOZADACH.md](SYMPHONIA_PYAT_AVTOZADACH.md).
+
 # ОБЩИЙ ПРОМПТ ДЛЯ 5 АВТОЗАДАЧ (запуск по ссылке)
 
 > **ЗАПУСК ПО ССЫЛКЕ.** Владелец присылает в обычный чат ChatGPT только ссылку на этот файл: https://github.com/mpaykin1/meta6-lab/blob/main/automation/prompts/MG_PYAT_AVTOZADACH.md

@@ -8,10 +8,12 @@ Use --candidate-masks/--reference-masks for body only; for damage register body
 frames to the intact same-angle reference before measurement. Visual identity and
 readability remain mandatory and are not certified by this numeric checker.
 """
-import argparse, hashlib, json, re
+import argparse, hashlib, json, re, tempfile
+from urllib.request import urlopen
+from urllib.parse import urlparse
 from pathlib import Path
 import numpy as np
-from PIL import Image, ImageSequence
+from PIL import Image, ImageSequence, ImageChops, ImageStat
 
 
 def load(path):
@@ -23,14 +25,18 @@ def load(path):
         return fs,ts,loop
 
 
-def diff(a,b):
+def preservation_diff(a,b):
     m=(a[...,3]>0)|(b[...,3]>0)
     return float(np.abs(a.astype(np.int16)-b.astype(np.int16))[m].mean()) if m.any() else 0.
 
 
-def canvas_diff(a,b):
-    return float(np.abs(a.astype(np.int16)-b.astype(np.int16)).mean())
+def rgb_frames(path):
+    with Image.open(path) as im:
+        return [frame.convert('RGB').copy() for frame in ImageSequence.Iterator(im)]
 
+
+def diff(a,b):
+    return sum(ImageStat.Stat(ImageChops.difference(a,b)).mean)/3.0
 
 def bbox(m):
     y,x=np.nonzero(m)
@@ -61,7 +67,7 @@ def span(mask,axis):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument('candidate',type=Path);p.add_argument('reference',type=Path,nargs='?')
+    p.add_argument('candidate',type=Path);p.add_argument('--raw-url',help='raw.githubusercontent.com URL; mandatory for publication verification');p.add_argument('reference',type=Path,nargs='?')
     p.add_argument('--ref-indices',help='one index or comma-separated index per frame')
     p.add_argument('--candidate-masks',type=Path);p.add_argument('--reference-masks',type=Path)
     p.add_argument('--rigid',action='store_true');p.add_argument('--once',action='store_true')
@@ -73,6 +79,18 @@ def main():
     def fail(rule,msg): errors.append({'rule':rule,'detail':msg})
     def block(rule,msg): blocked.append({'rule':rule,'detail':msg})
     try:
+        if a.raw_url:
+            u=urlparse(a.raw_url)
+            if u.scheme!='https' or u.hostname!='raw.githubusercontent.com' or Path(u.path).name!=a.candidate.name:
+                raise ValueError('P22: expected matching HTTPS GitHub raw URL')
+            with urlopen(a.raw_url,timeout=60) as response:
+                payload=response.read()
+                if urlparse(response.geturl()).hostname!='raw.githubusercontent.com': raise ValueError('P22: unexpected redirect')
+            temp=tempfile.TemporaryDirectory()
+            a.candidate=Path(temp.name)/a.candidate.name
+            a.candidate.write_bytes(payload)
+        data.update(metric='P22 RGB full canvas Pillow',raw_url=a.raw_url,publication_source_verified=bool(a.raw_url))
+        rgb=rgb_frames(a.candidate)
         fs,ts,loop=load(a.candidate); n=len(fs); h,w=fs[0].shape[:2]
         data.update(file=a.candidate.name,sha256=hashlib.sha256(a.candidate.read_bytes()).hexdigest(),size_px=[w,h],frames=n,bytes=a.candidate.stat().st_size,durations_ms=ts,loop=loop)
         cfg=json.loads(a.action_json.read_text()) if a.action_json else {}; root=a.action_json.parent if a.action_json else Path('.')
@@ -89,12 +107,10 @@ def main():
             if m[0].any() or m[-1].any() or m[:,0].any() or m[:,-1].any(): fail('P3a',f'frame {i}: clipping risk, touches border')
         if n<2: fail('P9','not animated');adj=[]; seam=0.;mx=0.;mn=0.
         else:
-            adj=[diff(x,y) for x,y in zip(fs,fs[1:])];seam=diff(fs[-1],fs[0]);mx=max(adj);mn=min(adj)
+            adj=[diff(x,y) for x,y in zip(rgb,rgb[1:])];seam=diff(rgb[-1],rgb[0]);mx=max(adj);mn=min(adj)
         data.update(adjacent_differences=adj,adjacent_min=mn,adjacent_max=mx,adjacent_mean=float(np.mean(adj)) if adj else 0.,seam=None if a.once else seam)
-        canvas_adj=[canvas_diff(x,y) for x,y in zip(fs,fs[1:])]; canvas_max=max(canvas_adj,default=0.);canvas_min=min(canvas_adj,default=0.);canvas_seam=canvas_diff(fs[-1],fs[0])
-        data.update(canvas_adjacent_differences=canvas_adj,canvas_adjacent_min=canvas_min,canvas_adjacent_max=canvas_max,canvas_seam=None if a.once else canvas_seam)
-        if mx<2 or canvas_max<2: fail('P9',f'foreground max {mx:.4f}, full-canvas max {canvas_max:.4f}; both must be >=2')
-        if not a.once and (seam>mx+1e-9 or seam==0 or loop!=0 or canvas_seam>canvas_max+1e-9): fail('P4','seam above internal max, duplicate closing frame, or not infinite loop')
+        if mx<2: fail('P9',f'P22 full-frame RGB max {mx:.8f} <2')
+        if not a.once and (seam>mx+1e-9 or seam==0 or loop!=0): fail('P4','seam above internal max, duplicate closing frame, or not infinite loop')
         if a.once and loop==0: fail('P4','one-shot requested but infinite loop')
         pause=cfg.get('pause_transitions',[]); allowed=set()
         if pause:
@@ -102,8 +118,7 @@ def main():
             if action=='jump' and len(set(pause))<=2 and all(isinstance(i,int) and 0<=i<n-1 and i in peak_ids and i+1 in peak_ids for i in pause) and max(pause)-min(pause)<=1: allowed=set(pause)
             else: fail('P8','invalid pause exemption')
         motion=adj+([] if a.once else [seam]); regular=[d for i,d in enumerate(motion) if i not in allowed]
-        canvas_motion=canvas_adj+([] if a.once else [canvas_seam]); canvas_regular=[d for i,d in enumerate(canvas_motion) if i not in allowed]
-        if not regular or min(regular)<mx/3-1e-9 or not canvas_regular or min(canvas_regular)<canvas_max/3-1e-9: fail('P8','min regular transition < max/3')
+        if not regular or min(regular)<mx/3-1e-9: fail('P8','P22 min regular transition < max/3')
         if any(d==0 for i,d in enumerate(adj) if i not in allowed): fail('P8','duplicate frames')
         normal_times=[t for i,t in enumerate(ts) if i not in allowed]
         if not normal_times or min(normal_times)<=0 or min(normal_times)/max(normal_times)<.8 or (allowed and sum(ts[i] for i in allowed)>2*max(normal_times)): fail('P8','uneven or invalid frame timing')
@@ -170,7 +185,7 @@ def main():
             old,ot,_=load(a.preserve_prefix)
             if len(old)<2 or n<=len(old) or old[0].shape!=fs[0].shape: fail('P4','invalid preserved prefix')
             else:
-                d=max(diff(x,y) for x,y in zip(old,fs)); oldmax=max(diff(x,y) for x,y in zip(old,old[1:])); newmax=max(adj[len(old)-1:]+[seam]);timing=ts[:len(old)]==ot
+                d=max(preservation_diff(x,y) for x,y in zip(old,fs)); oldrgb=rgb_frames(a.preserve_prefix); oldmax=max(diff(x,y) for x,y in zip(oldrgb,oldrgb[1:])); newmax=max(adj[len(old)-1:]+[seam]);timing=ts[:len(old)]==ot
                 data['preservation']={'prefix_delta':d,'timing_exact':timing,'old_max':oldmax,'new_seam_max':newmax}
                 if d!=0 or not timing or newmax>oldmax+1e-9 or not all(min(ot)<=t<=max(ot) for t in ts[len(old):]): fail('P4','old frames/times changed or new seam above original max')
     except Exception as e: block('P12/P13',str(e))

@@ -1,16 +1,23 @@
 {
-  "generated_at": "2026-11-24T09:02:03.476Z",
+  "generated_at": "2026-11-24T10:02:27.203Z",
   "sha": {
-    "lab": "c2d4d176479c02f89b99c2e43ad58a216312eb42",
+    "lab": "46d17e8b03db210ad8266621755215403601f83e",
     "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45361149628",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45370700000",
   "review": {
     "protected": [
+      {
+        "number": 437,
+        "sha": "46d17e8b03db210ad8266621755215403601f83e",
+        "paths": [
+          "scripts/lab/mutate-site-size.mjs"
+        ]
+      },
       {
         "number": 436,
         "sha": "c2d4d176479c02f89b99c2e43ad58a216312eb42",
@@ -405,13 +412,13 @@
     "redLab": [
       {
         "workflow": "LAB Pages",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45360333181",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45368886940",
         "step": "Run actions/deploy-pages@v4"
       },
       {
-        "workflow": "KONTUR main",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45336251637",
-        "step": "Every permanent mutation on main"
+        "workflow": "Karta Sil",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45367651509",
+        "step": "Preserve failure after publishing no-data state"
       }
     ],
     "redMg": [
@@ -557,7 +564,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45336251532"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45361149801"
       },
       "P1": {
         "value": "не подтверждено",
@@ -567,11 +574,16 @@
     }
   },
   "pr": {
-    "open": 9,
-    "conflicts": 5,
-    "merged": 88,
+    "open": 10,
+    "conflicts": "нет данных",
+    "merged": 89,
     "closed": 191,
     "mergedItems": [
+      {
+        "number": 437,
+        "title": "МГЛ Pages: сайт 1.95 ГБ не публикуется — убрать устаревшие п",
+        "sha": "46d17e8b03db210ad8266621755215403601f83e"
+      },
       {
         "number": 436,
         "title": "Sprite Stacking World: единая игровая песочница пяти автозад",
@@ -1015,6 +1027,13 @@
     ],
     "protectedItems": [
       {
+        "number": 437,
+        "sha": "46d17e8b03db210ad8266621755215403601f83e",
+        "paths": [
+          "scripts/lab/mutate-site-size.mjs"
+        ]
+      },
+      {
         "number": 436,
         "sha": "c2d4d176479c02f89b99c2e43ad58a216312eb42",
         "paths": [
@@ -1408,7 +1427,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3478,
+      "count": 3480,
       "folders": "нет данных"
     },
     "mg": {
@@ -1563,6 +1582,7 @@
     "| 2026111802 | 18.11.2026 | Ни одна игра не дошла до слияния: ASSET GUARD требовал _check/compare.png, а у ChatGPT нет настоящего браузера; заодно BEZ_PATTERNOV «visual» валил каждый PR без изменения INK (контроль ink-shader-probe не может «улучшиться» на 15%, когда шейдер не трогали: #411, #412) | разбор Claude 18.11, тестовый PR #417 | лист сравнения снимает CI: `automation/asset-check/compare_sheet.mjs` + шаг «ЛИСТ СРАВНЕНИЯ» в `asset-check.yml`; ловушки `sheetVerdict` в `scripts/asset-guard/mutate-asset-guard.mjs` (6/6 мутантов); `scripts/visual/measure-pattern-fft.py` пропускает только неизменённый контроль; К3 kontur-guard не требует OSHIBKI от PR, где только свой пак + отчёт (спорил с З2, #410) — ловушки в `scripts/kontur/mutate-kontur-guard.mjs` |",
     "| 2026111804 | 18.11.2026 | Сторожа (gh-list.mjs) при повторном или пустом курсоре GraphQL 20 раз обрабатывали одни и те же PR и только потом падали «truncated» (PR #423, ядро охраны — только Claude) | Claude перенёс #423 в main 18.11 | `scripts/storozha/mutate-gh-list.mjs` (4 мутанта, старый код ловится: calls=20) |",
     "| 2026112301 | 23.11.2026 | Страница Bullet Car была в main, но Pages оставалась 404: из-за общей workflow concurrency группы свежий main push DEPLOY был отменён, пока предыдущая сборка выполняла долгий check-links; адрес отсутствовал в LINKS.txt | 404 на публичной странице и отменённый запуск LAB Pages #45221300862 | `scripts/lab/mutate-link-ok.sh` — HTTP 200 для адресов из LINKS; `scripts/lab/mutate-workflow-concurrency.mjs` — ловушка на потерю запусков из-за concurrency |",
-    "| 2026112401 | 24.11.2026 | Bullet Car 1.2 на Playgama тормозил на телефонах: 18 ламп (7 выключенных), зеркало перерисовывало весь мир, ~270 отрисовок и ~250 000 треугольников, ~600 КБ геометрии и большая текстура грязи пересылались каждый кадр; из 592 запусков до 30 секунд игры дошли 267 | Замер Claude 24.11 на сборке с Playgama | [scripts/telefon-bez-tormozov-selftest.sh](scripts/telefon-bez-tormozov-selftest.sh) + сторож [telefon-bez-tormozov.yml](.github/workflows/telefon-bez-tormozov.yml) |"
+    "| 2026112401 | 24.11.2026 | Bullet Car 1.2 на Playgama тормозил на телефонах: 18 ламп (7 выключенных), зеркало перерисовывало весь мир, ~270 отрисовок и ~250 000 треугольников, ~600 КБ геометрии и большая текстура грязи пересылались каждый кадр; из 592 запусков до 30 секунд игры дошли 267 | Замер Claude 24.11 на сборке с Playgama | [scripts/telefon-bez-tormozov-selftest.sh](scripts/telefon-bez-tormozov-selftest.sh) + сторож [telefon-bez-tormozov.yml](.github/workflows/telefon-bez-tormozov.yml) |",
+    "| 2026112402 | 24.11.2026 | МГЛ перестала публиковаться с 07:56: сайт собирался из 429 веток lab/* (1.95 ГБ), deploy-pages падал на каждом запуске, новые игры (Sprite Stacking World, PR #436) оставались 404 | Claude: 404 после слияния #436, лог запуска LAB Pages #45362798095 (artifact metadata) | `scripts/lab/mutate-site-size.mjs` — фильтр старых превью и лимит размера сайта в build-site.sh |"
   ]
 }

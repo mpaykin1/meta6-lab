@@ -1,11 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-24T09:02:03.476Z | МГЛ: c2d4d176479c02f89b99c2e43ad58a216312eb42 | МГ: 38bdad1ffc63c434bce6878774a26409a34cd55b | https://github.com/mpaykin1/meta6-lab/actions/runs/45361149628
+UTC: 2026-11-24T10:02:27.203Z | МГЛ: 46d17e8b03db210ad8266621755215403601f83e | МГ: 38bdad1ffc63c434bce6878774a26409a34cd55b | https://github.com/mpaykin1/meta6-lab/actions/runs/45370700000
 ## ПРОВЕРИТЬ CLAUDE
+- PR #437 46d17e8b03db210ad8266621755215403601f83e: scripts/lab/mutate-site-size.mjs
 - PR #436 c2d4d176479c02f89b99c2e43ad58a216312eb42: .github/workflows/b64-decode.yml, .github/workflows/grange-p22-audit.yml, .github/workflows/grange-publication-gate.yml, .github/workflows/stackgen.yml
-- PR #434 6fb24e06dbe34f5e3ee77e41e55686c9bbd73273: .github/workflows/telefon-bez-tormozov.yml
-- ещё 44: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: LAB Pages | https://github.com/mpaykin1/meta6-lab/actions/runs/45360333181 | Run actions/deploy-pages@v4
-- МГЛ: KONTUR main | https://github.com/mpaykin1/meta6-lab/actions/runs/45336251637 | Every permanent mutation on main
+- ещё 45: https://github.com/mpaykin1/meta6-lab/pulls
+- МГЛ: LAB Pages | https://github.com/mpaykin1/meta6-lab/actions/runs/45368886940 | Run actions/deploy-pages@v4
+- МГЛ: Karta Sil | https://github.com/mpaykin1/meta6-lab/actions/runs/45367651509 | Preserve failure after publishing no-data state
 - МГ: Publish complete META6 site | https://github.com/mpaykin1/meta6/actions/runs/45332389526 | Deploy full website
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | closed | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/librar… (сокращено)
@@ -20,7 +20,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/45336251532)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/45361149801)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -34,12 +34,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 9 | конфликт: 5 | слито: 88 | закрыто: 191
+открыто: 10 | конфликт: нет данных | слито: 89 | закрыто: 191
+#437 МГЛ Pages: сайт 1.95 ГБ не публикуется — убрать устаревшие п | 46d17e8b03db210ad8266621755215403601f83e
 #436 Sprite Stacking World: единая игровая песочница пяти автозад | c2d4d176479c02f89b99c2e43ad58a216312eb42
-#434 ТЕЛЕФОН БЕЗ ТОРМОЗОВ: лимиты нагрузки телефона + бот-замерщи | 6fb24e06dbe34f5e3ee77e41e55686c9bbd73273
-ещё 86: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 87: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3478 коммитов | нет данных
+МГЛ: 3480 коммитов | нет данных
 МГ: 55 коммитов | .github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
@@ -58,4 +58,4 @@ wild-train-prologue — прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 2026111801 | 18.11.2026 | BEZ PATTERNOV: у PR без игры каталога проверка по умолчанию мерила INK-шейдер и требовала улучшить его на 15% — красными стояли все PR ассетов и правил (#371, #409, #415 и др.), работа ChatGPT не сливалась | Claude: разбор «почему с… (сокращено)
 | 2026111802 | 18.11.2026 | Лимит пяти живых PR держал в очереди и сам ремонт ложно красной проверки, которая и мешала пяти старейшим слиться — тупик | Claude: #421 красный только по storozha-quota | scripts/storozha/verify-storozha.mjs: claude/* не блокируетс… (сокращено)
-ещё 78: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+ещё 79: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

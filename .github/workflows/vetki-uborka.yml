@@ -1,0 +1,26 @@
+name: vetki-uborka
+# Владелец 24.11.2026: лишние ветки lab/* не должны раздувать сайт МГЛ. Ежедневно: архив archive/lab/* + удаление.
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+    inputs:
+      age_days:
+        description: 'возраст (дней) для веток без PR и закрытых PR'
+        default: '7'
+concurrency:
+  group: vetki-uborka
+  cancel-in-progress: false
+permissions:
+  contents: write
+  pull-requests: read
+jobs:
+  uborka:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - run: node scripts/lab/mutate-vetki-uborka.mjs
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/lab/vetki-uborka.mjs --apply --age-days "${{ github.event.inputs.age_days || '7' }}"

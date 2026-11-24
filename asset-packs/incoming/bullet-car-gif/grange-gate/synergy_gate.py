@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 import numpy as np
 from PIL import Image, ImageSequence
 import cv2
+from texture_motion_gate import texture_parity, motion_gate
 
 HERE=Path(__file__).resolve().parent
 CHECKER_COMMIT='c9d1caac66d6c02188a3e39360ab596c4c37dfca'
@@ -78,7 +79,7 @@ def checked_masks(fs, entries, out, seg=None):
     return ms,agreement
 
 def parity(fs,rs,cm,rm,ids,entries,tmp,action):
-    ratios=[]
+    ratios=[]; textures=[]
     for i,(f,j,m,e) in enumerate(zip(fs,ids,cm,entries)):
         r=rs[j]; ref=rm[j]
         if f.shape!=r.shape:raise ValueError('registered reference must use same canvas')
@@ -102,7 +103,9 @@ def parity(fs,rs,cm,rm,ids,entries,tmp,action):
         for name,img in [('a',aligned),('b',r),('m',protected.astype('uint8')*255)]: (tmp/f'{name}.rgba').write_bytes(np.ascontiguousarray(img).tobytes())
         d=json.loads(run(['node',HERE/'pixelmatch_gate.mjs',tmp/'a.rgba',tmp/'b.rgba',tmp/'m.rgba',f.shape[1],f.shape[0]]).stdout);ratios.append(d['ratio'])
         if d['ratio']>.03:raise ValueError(f'P23 Pixelmatch frame {i}: {d["ratio"]:.4f} > .03')
-    return ratios
+        t=texture_parity(aligned,r,protected); textures.append(t)
+        if not t['pass']:raise ValueError(f'P29 SSIM texture mismatch frame {i}: {t}')
+    return {'pixelmatch':ratios,'ssim':textures}
 
 def anti_jerk(cm,ts,once):
     # Inspired by Hero Animator's trajectory/identity gate, not its 40–60s scene profile.
@@ -156,7 +159,10 @@ def main():
             if c.get('rigid'):extra+=['--rigid']
             rc,d=checker(cand,ref,ids,tmp/'cm',tmp/'rm',c['action_json'],exe,extra);result['P22']=d
             if rc or not d.get('numeric_pass'):raise ValueError('P0–P22 failed')
-            result['anti_jerk']=anti_jerk(cm,d['durations_ms'],c.get('once',False));result['pixelmatch']=parity(fs,rs,cm,rm,ids,c['candidate_frames'],tmp,d['action']);result['ffprobe']=decode_probe(cand,len(fs),d['durations_ms'])
+            result['anti_jerk']=anti_jerk(cm,d['durations_ms'],c.get('once',False))
+            result['P30_optical_flow']=motion_gate(fs,cm,d['durations_ms'],c.get('once',False),d['action'],c.get('rigid',False),ids)
+            if not result['P30_optical_flow']['pass']:raise ValueError('P30 feature-motion gate failed')
+            visual=parity(fs,rs,cm,rm,ids,c['candidate_frames'],tmp,d['action']);result['pixelmatch']=visual['pixelmatch'];result['P29_ssim']=visual['ssim'];result['ffprobe']=decode_probe(cand,len(fs),d['durations_ms'])
             if c.get('visual_review_approved') is not True or c.get('visual_review_sha256')!=sha(cand):raise ValueError('visual P1/P9a/P10 approval of exact bytes missing')
             result['status']='PASS_PUBLICATION_GATE' if a.publication else 'PASS_PRELIMINARY';result['sha256']=sha(cand)
     except Exception as e:result['error']=str(e)

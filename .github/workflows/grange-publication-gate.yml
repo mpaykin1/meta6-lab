@@ -5,6 +5,7 @@ on:
     paths:
       - 'asset-packs/incoming/bullet-car-gif/grange-gate/**'
       - '.github/workflows/grange-publication-gate.yml'
+      - 'asset-packs/incoming/bullet-car-gif/grange-gate-requests/*.json'
   workflow_dispatch:
     inputs:
       candidate_sha:
@@ -27,45 +28,62 @@ jobs:
           ref: ${{ github.sha }}
           path: trusted
           persist-credentials: false
+          fetch-depth: 2
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - run: node trusted/asset-packs/incoming/bullet-car-gif/grange-gate/smoke.mjs
-      - if: github.event_name == 'workflow_dispatch'
-        name: Validate request
+      - name: Select immutable request
+        id: request
         env:
-          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
-          MANIFEST_PATH: ${{ inputs.manifest_path }}
+          EVENT: ${{ github.event_name }}
+          INPUT_SHA: ${{ inputs.candidate_sha }}
+          INPUT_MANIFEST: ${{ inputs.manifest_path }}
         run: |
-          [[ "$CANDIDATE_SHA" =~ ^[0-9a-f]{40}$ ]]
-          [[ "$MANIFEST_PATH" =~ ^asset-packs/incoming/bullet-car-gif/staging/[A-Za-z0-9_/-]+/manifest\.json$ ]]
-          [[ "$MANIFEST_PATH" != *..* ]]
-      - if: github.event_name == 'workflow_dispatch'
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.candidate_sha }}
-          path: candidate-data
-          persist-credentials: false
-      - if: github.event_name == 'workflow_dispatch'
-        uses: actions/setup-python@v5
+          python - <<'PY'
+          import json,os,re,subprocess
+          from pathlib import Path
+          req=None
+          if os.environ['EVENT']=='workflow_dispatch':
+              req={'candidate_sha':os.environ['INPUT_SHA'],'manifest_path':os.environ['INPUT_MANIFEST']}
+          else:
+              prefix='asset-packs/incoming/bullet-car-gif/grange-gate-requests/'
+              paths=subprocess.check_output(['git','-C','trusted','diff','--diff-filter=A','--name-only','HEAD^','HEAD'],text=True).splitlines()
+              matches=[p for p in paths if p.startswith(prefix) and p.endswith('.json')]
+              if len(matches)>1: raise ValueError('one immutable request per commit')
+              if matches: req=json.loads((Path('trusted')/matches[0]).read_text())
+          with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+              if req is None: out.write('present=false\n')
+              else:
+                  sha=req['candidate_sha']; p=req['manifest_path']
+                  if not re.fullmatch('[0-9a-f]{40}',sha) or not re.fullmatch(r'asset-packs/incoming/bullet-car-gif/staging/[A-Za-z0-9_/-]+/manifest\.json',p): raise ValueError('invalid immutable request')
+                  out.write(f'present=true\nsha={sha}\nmanifest={p}\n')
+          PY
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - if: github.event_name == 'workflow_dispatch'
-        run: |
-          python -m pip install Pillow==11.3.0 numpy==2.2.6 opencv-python-headless==4.12.0.88
+      - run: |
+          python -m pip install Pillow==11.3.0 numpy==2.2.6 opencv-python-headless==4.12.0.88 scikit-image==0.25.2
           command -v ffprobe || (sudo apt-get update && sudo apt-get install -y ffmpeg)
-      - if: github.event_name == 'workflow_dispatch'
+          python -m py_compile trusted/asset-packs/incoming/bullet-car-gif/grange-gate/synergy_gate.py trusted/asset-packs/incoming/bullet-car-gif/grange-gate/texture_motion_gate.py trusted/asset-packs/incoming/bullet-car-gif/grange-gate/hosted_manifest.py
+      - if: steps.request.outputs.present == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.request.outputs.sha }}
+          path: candidate-data
+          persist-credentials: false
+      - if: steps.request.outputs.present == 'true'
         name: Verify staged bytes
         env:
-          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
-          MANIFEST_PATH: ${{ inputs.manifest_path }}
+          CANDIDATE_SHA: ${{ steps.request.outputs.sha }}
+          MANIFEST_PATH: ${{ steps.request.outputs.manifest }}
         run: |
           set -o pipefail
           python trusted/asset-packs/incoming/bullet-car-gif/grange-gate/hosted_manifest.py "$PWD/candidate-data" "$MANIFEST_PATH" "$CANDIDATE_SHA" "$RUNNER_TEMP/grange-manifest.json"
           python trusted/asset-packs/incoming/bullet-car-gif/grange-gate/synergy_gate.py "$RUNNER_TEMP/grange-manifest.json" --publication | tee "$RUNNER_TEMP/grange-result.json"
-      - if: always() && github.event_name == 'workflow_dispatch'
+      - if: always() && steps.request.outputs.present == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: grange-result-${{ inputs.candidate_sha }}
+          name: grange-result-${{ steps.request.outputs.sha }}
           path: ${{ runner.temp }}/grange-result.json
           if-no-files-found: warn

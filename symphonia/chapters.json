@@ -1,0 +1,355 @@
+{
+  "schema": "symphonia-chapters/1",
+  "chapters": [
+    {
+      "id": "prelude",
+      "order": 1,
+      "title": "Прелюдия",
+      "music": "Прелюдия",
+      "description": "Пробуждение мира и первые загадочные события.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "overture",
+      "order": 2,
+      "title": "Увертюра",
+      "music": "Увертюра",
+      "description": "Начало путешествия. Предчувствие катастрофы.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "nocturne",
+      "order": 3,
+      "title": "Ноктюрн",
+      "music": "Ноктюрн",
+      "description": "Ночная усадьба, призраки и скрытное перемещение.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "adagio",
+      "order": 4,
+      "title": "Адажио",
+      "music": "Адажио",
+      "description": "Хрупкая красота, медленные чудовища, защита героини.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "scherzo",
+      "order": 5,
+      "title": "Скерцо",
+      "music": "Скерцо",
+      "description": "Безумные существа, обман пространства и непредсказуемые ловушки.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "toccata",
+      "order": 6,
+      "title": "Токката",
+      "music": "Токката",
+      "description": "Стремительные сражения и непрерывные атаки.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "sonata",
+      "order": 7,
+      "title": "Соната",
+      "music": "Соната",
+      "description": "Противостояние красоты и уродства.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "fugue",
+      "order": 8,
+      "title": "Фуга",
+      "music": "Фуга",
+      "description": "Несколько параллельных реальностей, взаимодействующих между собой.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "waltz",
+      "order": 9,
+      "title": "Вальс",
+      "music": "Вальс",
+      "description": "Призрачный бал, где движения врагов подчинены ритму танца.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "fantasia",
+      "order": 10,
+      "title": "Фантазия",
+      "music": "Фантазия",
+      "description": "Мир теряет физические законы. Архитектура оживает.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "rhapsody",
+      "order": 11,
+      "title": "Рапсодия",
+      "music": "Рапсодия",
+      "description": "Хаотическое переплетение миров, эмоций и механик.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "elegy",
+      "order": 12,
+      "title": "Элегия",
+      "music": "Элегия",
+      "description": "Потеря, воспоминания и разрушение надежды.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "requiem",
+      "order": 13,
+      "title": "Реквием",
+      "music": "Реквием",
+      "description": "Сражение с воплощением смерти.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "symphony",
+      "order": 14,
+      "title": "Симфония",
+      "music": "Симфония",
+      "description": "Объединение музыкальных тем и игровых механик.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "coda",
+      "order": 15,
+      "title": "Кода",
+      "music": "Кода",
+      "description": "Финал, написанный действиями самого игрока.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "cathedral-shadows",
+      "order": 16,
+      "title": "Собор живых теней",
+      "music": "Барочная фуга",
+      "description": "Архитектура оживает, тени преследуют героиню; голоса фуги открывают тайну собора",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "city-no-dawn",
+      "order": 17,
+      "title": "Город без рассвета",
+      "music": "Джазовый ноктюрн",
+      "description": "Расследование исчезновений, скрытность, улики в контрмелодиях",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "garden-melodies",
+      "order": 18,
+      "title": "Сад погибших мелодий",
+      "music": "Блюзовая элегия",
+      "description": "Воскрешение воспоминаний погибших, выбор чью память спасти",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "puppet-waltz",
+      "order": 19,
+      "title": "Вальс марионеток",
+      "music": "Готический вальс",
+      "description": "Противники движутся в трёхдольном ритме, освобождение марионеток",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "machine-god",
+      "order": 20,
+      "title": "Машина Бога",
+      "music": "Индустриальная токката",
+      "description": "Битва внутри гигантского механизма, выбор его остановить или перенастроить",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "forest-voices",
+      "order": 21,
+      "title": "Лес забытых голосов",
+      "music": "Кельтская рапсодия",
+      "description": "Живые деревья, общение через музыку, обнаружение утраченного мотива",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "ocean-time",
+      "order": 22,
+      "title": "Океан времени",
+      "music": "Эмбиентное адажио",
+      "description": "Замедление и ускорение времени, спасение затопленных воспоминаний",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "mirror-abyss",
+      "order": 23,
+      "title": "Зеркальная бездна",
+      "music": "Атональное скерцо",
+      "description": "Параллельные реальности, двойники, выбор между версиями прошлого",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "giant-war",
+      "order": 24,
+      "title": "Война великанов",
+      "music": "Симфонический метал",
+      "description": "Сражения гигантских существ, судьба двух цивилизаций",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "last-train",
+      "order": 25,
+      "title": "Последний поезд",
+      "music": "Блюзовая соната",
+      "description": "Путешествие между исчезающими мирами, конфликт тем героини и защитника",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "dead-sun",
+      "order": 26,
+      "title": "Мёртвое солнце",
+      "music": "Дум-металлический реквием",
+      "description": "Постепенная гибель цивилизации, спасение её последней мелодии",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "dream-palace",
+      "order": 27,
+      "title": "Дворец сновидений",
+      "music": "Импрессионистическая фантазия",
+      "description": "Материализация снов, раскрытие воспоминаний пианистки",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "moon-dark",
+      "order": 28,
+      "title": "Обратная сторона Луны",
+      "music": "Космическая сюита",
+      "description": "Изменение гравитации, путешествие между музыкальными измерениями",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "carnival",
+      "order": 29,
+      "title": "Карнавал безумия",
+      "music": "Психоделическое каприччио",
+      "description": "Трансформация пространства и существ, поиск реального героя",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "twelve-keys",
+      "order": 30,
+      "title": "Двенадцать ключей",
+      "music": "Додекафонический этюд",
+      "description": "Музыкальные загадки, управление материей через последовательность 12 тонов",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "machine-uprising",
+      "order": 31,
+      "title": "Восстание машин",
+      "music": "Техно-марш",
+      "description": "Управление механическими существами, освобождение или подчинение",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "death-dance",
+      "order": 32,
+      "title": "Танец смерти",
+      "music": "Блюзовое танго",
+      "description": "Ритмические дуэли, противник запоминает стиль игрока",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "monster-cradle",
+      "order": 33,
+      "title": "Колыбель чудовищ",
+      "music": "Дарк-эмбиентная колыбельная",
+      "description": "Рождение и эволюция монстров из мелодий, возможность их спасти",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "return-dead",
+      "order": 34,
+      "title": "Возвращение мёртвых",
+      "music": "Григорианский реквием",
+      "description": "Возвращение персонажей и последствий решений предыдущих глав",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "end-eternity",
+      "order": 35,
+      "title": "Конец вечности",
+      "music": "Авангардная симфония",
+      "description": "Слияние миров, разрешение конфликтов и начало следующего сюжетного цикла",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    }
+  ]
+}

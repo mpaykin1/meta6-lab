@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-24T04:44:20.254Z",
+  "generated_at": "2026-11-24T04:51:32.185Z",
   "sha": {
-    "lab": "17e2f0870319a7dd3e6d85f155254daffd4b984b",
+    "lab": "ca900e5c874d51b9c7719015403dc1979d6cbc38",
     "mg": "e1b9a18a3d71eae0c324ef6d991fc5a9c6b2fefa"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45328326174",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45329172070",
   "review": {
     "protected": [
       {
@@ -535,8 +535,9 @@
         "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       "B1": {
-        "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45325541478"
+        "value": "не подтверждено",
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082"
       },
       "P1": {
         "value": "не подтверждено",
@@ -1372,7 +1373,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3421,
+      "count": 3426,
       "folders": "нет данных"
     },
     "mg": {

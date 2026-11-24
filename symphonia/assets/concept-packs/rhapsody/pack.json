@@ -1,0 +1,46 @@
+{
+  "id": "rhapsody",
+  "title": "Рапсодия",
+  "hero": "Арфистка в маске",
+  "palette": "Сапфир, серебро, лаванда",
+  "architecture": "Парящий мост с башнями",
+  "bg": [
+    36,
+    41,
+    80
+  ],
+  "light": [
+    156,
+    178,
+    235
+  ],
+  "keys": [
+    "harpist",
+    "harp",
+    "skybridge"
+  ],
+  "assets": [
+    {
+      "id": "harpist",
+      "atlas": "harpist/slices.png",
+      "preview": "harpist/preview.gif",
+      "metadata": "harpist/asset.json"
+    },
+    {
+      "id": "harp",
+      "atlas": "harp/slices.png",
+      "preview": "harp/preview.gif",
+      "metadata": "harp/asset.json"
+    },
+    {
+      "id": "skybridge",
+      "atlas": "skybridge/slices.png",
+      "preview": "skybridge/preview.gif",
+      "metadata": "skybridge/asset.json"
+    }
+  ],
+  "cover": "cover.gif",
+  "poster": "cover.png",
+  "status": "prototype",
+  "referenceMatch": "approximate; requires art refinement and character action animations"
+}

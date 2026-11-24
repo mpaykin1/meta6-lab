@@ -42,3 +42,6 @@ with sync_playwright() as p:
     print('fps',E('window.__bot.dyn()'))
     b.close()
 srv.terminate();print('ERR',errs[:6])
+real=[e for e in errs if 'GPU stall' not in e and not e.startswith('RF ') and not e.startswith('404 ') and 'favicon' not in e]
+print('ИТОГ:', 'OK' if not real else 'FAIL', '| ошибок:', len(real))
+sys.exit(0 if not real else 1)

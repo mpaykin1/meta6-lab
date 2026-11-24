@@ -84,7 +84,7 @@ with sync_playwright() as p:
     print('finale', S())
     pg.screenshot(path=out + '7_mirror.png')
     time.sleep(10)
-    print('end', S())
+    end_state=S();print('end', end_state)
     pg.screenshot(path=out + '8_end.png')
     time.sleep(10)
     pg.screenshot(path=out + '9_story.png')
@@ -93,3 +93,8 @@ srv.terminate()
 print('ERRORS:', len(errs))
 for e in errs[:30]:
     print(e)
+# итог для GitHub: настоящие ошибки страницы валят проверку (предупреждения видеокарты и нет-иконки вкладки — не ошибки игры)
+real=[e for e in errs if 'GPU stall' not in e and not e.startswith('warning') and 'Failed to load resource' not in e]
+fin=end_state.get('finale',0)>=2 or end_state.get('state')=='end'
+print('ИТОГ:', 'OK' if not real and fin else 'FAIL', '| ошибок:', len(real), '| финал:', fin)
+sys.exit(0 if not real and fin else 1)

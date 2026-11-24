@@ -23,3 +23,6 @@ with sync_playwright() as p:
     print('harm notes,snapped,dissonant(half vol):',pg.evaluate('window.__bot.harm'))
     b.close()
 srv.terminate();print('ERRORS',errs)
+real=[e for e in errs if 'GPU stall' not in e and not e.startswith('RF ') and not e.startswith('404 ') and 'favicon' not in e]
+print('ИТОГ:', 'OK' if not real else 'FAIL', '| ошибок:', len(real))
+sys.exit(0 if not real else 1)

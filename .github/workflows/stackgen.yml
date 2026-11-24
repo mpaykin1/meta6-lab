@@ -24,8 +24,9 @@ jobs:
         id: gen
         run: |
           set -e
+          shopt -s nullglob
           fail=0
-          for r in asset-packs/incoming/stack-*/recipe.json; do
+          for r in asset-packs/incoming/stack-*/recipe.json automation/stackgen/example/*/recipe.json; do
             d=$(dirname "$r")
             python3 -I automation/stackgen/stackgen.py "$d" || fail=1
           done

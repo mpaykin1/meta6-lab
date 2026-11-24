@@ -20,12 +20,14 @@ export const LIMITS = {
   cpuPixelOps: 0,       // getImageData/putImageData за кадр в среднем (попиксельная работа на процессоре)
 };
 
-const arg = process.argv[2];
-if (!arg) { console.error('Usage: node scripts/telefon-bez-tormozov.mjs <game.html|url> [--json out.json]'); if (server) server.close(); process.exit(2); }
+const cli = process.argv.slice(2);
+const optVal = n => { const i = cli.indexOf(n); return i < 0 ? null : cli[i + 1]; };
+const arg = cli[0];
 // --baseline old.json: для старой игры, которая уже была тяжелее лимита, правка проходит, только если не стало хуже (+10%).
-const baseFile = process.argv.includes('--baseline') ? process.argv[process.argv.indexOf('--baseline') + 1] : null;
+const baseFile = optVal('--baseline');
 const base = baseFile && fs.existsSync(baseFile) ? JSON.parse(fs.readFileSync(baseFile, 'utf8')).metrics : null;
-const jsonOut = process.argv.includes('--json') ? process.argv[process.argv.indexOf('--json') + 1] : null;
+const jsonOut = optVal('--json');
+if (!arg) { console.error('Usage: node scripts/telefon-bez-tormozov.mjs <game.html|url> [--json out.json]'); process.exit(2); }
 // Локальную игру отдаём маленьким сервером (модули и fetch не работают через file://).
 let server = null, url = arg;
 if (!/^https?:\/\//.test(arg)) {
@@ -142,9 +144,9 @@ let bad = 0;
 console.log(`ТЕЛЕФОН БЕЗ ТОРМОЗОВ — ${arg}\nкадров замерено: ${fr.length}, окно: ${main.url}`);
 for (const k of Object.keys(LIMITS)) {
   const over = m[k] > LIMITS[k];
-  const legacy = over && base && base[k] > LIMITS[k] && m[k] <= base[k] * 1.1;
-  if (over && !legacy) bad++;
-  console.log(`${!over ? 'OK  ' : legacy ? 'OLD ' : 'FAIL'} ${names[k]}: ${m[k]} (лимит ${LIMITS[k]}${base ? ', было ' + base[k] : ''})${legacy ? ' — старый долг, не хуже прежнего; починить при ближайшей работе над игрой' : ''}`);
+  const oldDebt = over && base && base[k] > LIMITS[k] && m[k] <= base[k] * 1.1;
+  if (over && !oldDebt) bad++;
+  console.log(`${!over ? 'OK  ' : oldDebt ? 'OLD ' : 'FAIL'} ${names[k]}: ${m[k]} (лимит ${LIMITS[k]}${base ? ', было ' + base[k] : ''})${oldDebt ? ' — старый долг, не хуже прежнего; починить при ближайшей работе над игрой' : ''}`);
 }
 if (main.shadow && !(base && base.shadow)) { bad++; console.log('FAIL Тени в реальном времени включены (USE_SHADOWMAP) — заменить запечёнными пятнами-тенями'); }
 console.log(`детально свет: направленных ${L.dir}, точечных ${L.point}, прожекторов ${L.spot}, неба ${L.hemi}, площадных ${L.rect}`);

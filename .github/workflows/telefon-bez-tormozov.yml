@@ -10,7 +10,7 @@ on:
       game: { description: 'Путь к index.html или https-адрес игры', required: true }
 jobs:
   measure:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
@@ -22,7 +22,7 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
       - name: Ловушки бота (хорошая сцена проходит, ошибки Bullet Car ловятся)
-        run: bash automation/telefon-bez-tormozov/test.sh
+        run: bash scripts/telefon-bez-tormozov-selftest.sh
       - name: Замер изменённых игр
         env:
           BASE: ${{ github.event.pull_request.base.sha }}

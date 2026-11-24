@@ -1,16 +1,23 @@
 {
-  "generated_at": "2026-11-24T15:20:17.176Z",
+  "generated_at": "2026-11-24T18:51:02.525Z",
   "sha": {
-    "lab": "c464facca43751848ae388c233a76d5895203874",
+    "lab": "f4ebb24617d816a47f52a1dd3fb683ffaa453aeb",
     "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45424019783",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45463609613",
   "review": {
     "protected": [
+      {
+        "number": 445,
+        "sha": "a5629442fb3648c0691339259e678acc5cda8711",
+        "paths": [
+          ".github/workflows/etalon-bots.yml"
+        ]
+      },
       {
         "number": 441,
         "sha": "46c588a747147ba69d3ea4a32afab17b579d8b33",
@@ -430,11 +437,6 @@
         "workflow": "MG Dispatcher",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45420339348",
         "step": "Run node scripts/dispetcher/run.mjs"
-      },
-      {
-        "workflow": "LAB Pages",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45416380084",
-        "step": "Check published public URLs"
       }
     ],
     "redMg": [
@@ -590,11 +592,21 @@
     }
   },
   "pr": {
-    "open": 10,
-    "conflicts": 5,
-    "merged": 93,
+    "open": 8,
+    "conflicts": "нет данных",
+    "merged": 95,
     "closed": 194,
     "mergedItems": [
+      {
+        "number": 440,
+        "title": "SYMPHONIA — сайт музыкального хоррора",
+        "sha": "f4ebb24617d816a47f52a1dd3fb683ffaa453aeb"
+      },
+      {
+        "number": 445,
+        "title": "SYMPHONIA: боты эталонов на каждом PR, зал легче для телефон",
+        "sha": "a5629442fb3648c0691339259e678acc5cda8711"
+      },
       {
         "number": 444,
         "title": "SYMPHONIA: основа игры — исходник «Адажио»",
@@ -1063,6 +1075,13 @@
     ],
     "protectedItems": [
       {
+        "number": 445,
+        "sha": "a5629442fb3648c0691339259e678acc5cda8711",
+        "paths": [
+          ".github/workflows/etalon-bots.yml"
+        ]
+      },
+      {
         "number": 441,
         "sha": "46c588a747147ba69d3ea4a32afab17b579d8b33",
         "paths": [
@@ -1479,7 +1498,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3499,
+      "count": 3502,
       "folders": "нет данных"
     },
     "mg": {

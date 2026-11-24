@@ -1,16 +1,63 @@
 {
-  "generated_at": "2026-11-24T10:14:06.430Z",
+  "generated_at": "2026-11-24T10:18:18.060Z",
   "sha": {
-    "lab": "0b13cff9f3962df9154c2880edb6e1165c472134",
+    "lab": "8012f59f97bf2b26f6de2a5681b4280aaf24c6a6",
     "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45372651996",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45373236564",
   "review": {
     "protected": [
+      {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
+      {
+        "number": 382,
+        "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 267,
+        "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py",
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 292,
+        "sha": "5df54dc0764daa77154709207e612b311127108d",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
+      {
+        "number": 439,
+        "sha": "96fe57465a770913991d99705e7a4d453259965d",
+        "paths": [
+          ".github/workflows/vetki-uborka.yml",
+          "scripts/lab/mutate-vetki-uborka.mjs"
+        ]
+      },
       {
         "number": 437,
         "sha": "46d17e8b03db210ad8266621755215403601f83e",
@@ -59,13 +106,6 @@
         "paths": [
           ".github/workflows/odin-pr.yml",
           "scripts/odin-pr/mutate-odin-pr.mjs"
-        ]
-      },
-      {
-        "number": 382,
-        "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d",
-        "paths": [
-          "automation/asset-check/test_kinds.py"
         ]
       },
       {
@@ -258,22 +298,6 @@
         ]
       },
       {
-        "number": 292,
-        "sha": "5df54dc0764daa77154709207e612b311127108d",
-        "paths": [
-          "automation/asset-check/test_kinds.py"
-        ]
-      },
-      {
-        "number": 267,
-        "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14",
-        "paths": [
-          ".github/workflows/asset-check.yml",
-          "automation/asset-check/test_check_pack.py",
-          "automation/asset-check/test_kinds.py"
-        ]
-      },
-      {
         "number": 285,
         "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
         "paths": [
@@ -308,22 +332,6 @@
           "scripts/lab/verify-check-page-assets.sh",
           "scripts/lab/verify-link-ok.sh",
           "scripts/lab/verify-page-assets.py"
-        ]
-      },
-      {
-        "number": 265,
-        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
-        "paths": [
-          ".github/workflows/asset-check.yml",
-          "automation/asset-check/test_check_pack.py"
-        ]
-      },
-      {
-        "number": 251,
-        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
-        "paths": [
-          ".github/workflows/auditor.yml",
-          "scripts/auditor/mutate-auditor.mjs"
         ]
       },
       {
@@ -410,11 +418,6 @@
       }
     ],
     "redLab": [
-      {
-        "workflow": "LAB Pages",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45372227986",
-        "step": "Build sandbox site (main + all lab/** previews)"
-      },
       {
         "workflow": "Karta Sil",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45367651509",
@@ -563,8 +566,9 @@
         "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       "B1": {
-        "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45370700003"
+        "value": "не подтверждено",
+        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082",
+        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082"
       },
       "P1": {
         "value": "не подтверждено",
@@ -576,9 +580,64 @@
   "pr": {
     "open": 11,
     "conflicts": "нет данных",
-    "merged": 89,
+    "merged": 90,
     "closed": 191,
     "mergedItems": [
+      {
+        "number": 361,
+        "title": "Z01: корректный подсчёт живых PR без draft",
+        "sha": "894a85831a9374e805753b71b0c4faa9f27d6bd7"
+      },
+      {
+        "number": 251,
+        "title": "feat(auditor): бесплатная почасовая ревизия пяти задач META ",
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1"
+      },
+      {
+        "number": 387,
+        "title": "BLACK TRAIN: живой туман освещается фонариком, красным сигна",
+        "sha": "aa47594a5fc4cf4ea0362ca73251fc0171937a2f"
+      },
+      {
+        "number": 384,
+        "title": "feat(assets): BLACK TRAIN — layered storm clouds with slow a",
+        "sha": "21dd327c959710943bc4f5a04c4f5dcf60e1d136"
+      },
+      {
+        "number": 382,
+        "title": "feat(assets): BLACK TRAIN — 14 заказанных ассетов без нового",
+        "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d"
+      },
+      {
+        "number": 267,
+        "title": "ASSET CHECK v2: универсальный бот для любых ассетов",
+        "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14"
+      },
+      {
+        "number": 292,
+        "title": "ASSET CHECK 2.1: бот проверяет ассеты INK «Павший великан»",
+        "sha": "5df54dc0764daa77154709207e612b311127108d"
+      },
+      {
+        "number": 265,
+        "title": "ASSET CHECK: бот-проверщик ассет-паков + многоразовый промпт",
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e"
+      },
+      {
+        "number": 312,
+        "title": "Reference: ASQURA Office — clean source-only transfer of #13",
+        "sha": "bc24124303060dcb9ad75353d6a6f1ba967dd169"
+      },
+      {
+        "number": 359,
+        "title": "docs: единый свод правил и идей для «Лучника в тумане»",
+        "sha": "0a37a80d264aaac71832ab16d9ca82b306b7cec6"
+      },
+      {
+        "number": 439,
+        "title": "Ежедневная уборка веток МГЛ (архив + удаление лишних lab/*)",
+        "sha": "96fe57465a770913991d99705e7a4d453259965d"
+      },
       {
         "number": 437,
         "title": "МГЛ Pages: сайт 1.95 ГБ не публикуется — убрать устаревшие п",
@@ -625,34 +684,14 @@
         "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258"
       },
       {
-        "number": 384,
-        "title": "feat(assets): BLACK TRAIN — layered storm clouds with slow a",
-        "sha": "21dd327c959710943bc4f5a04c4f5dcf60e1d136"
-      },
-      {
         "number": 373,
         "title": "INK · Чернильный оскал — чистая 3D-модель и сцена без защищё",
         "sha": "0c269f36f4f3f1801ba5147eb59c5d3355cf5768"
       },
       {
-        "number": 387,
-        "title": "BLACK TRAIN: живой туман освещается фонариком, красным сигна",
-        "sha": "aa47594a5fc4cf4ea0362ca73251fc0171937a2f"
-      },
-      {
-        "number": 361,
-        "title": "Z01: корректный подсчёт живых PR без draft",
-        "sha": "894a85831a9374e805753b71b0c4faa9f27d6bd7"
-      },
-      {
         "number": 383,
         "title": "BLACK TRAIN: опубликовать игровую сцену с 14 ассетами",
         "sha": "854aa2b15bde75ab4cd6e22a1749a63f69ed9846"
-      },
-      {
-        "number": 382,
-        "title": "feat(assets): BLACK TRAIN — 14 заказанных ассетов без нового",
-        "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d"
       },
       {
         "number": 369,
@@ -678,11 +717,6 @@
         "number": 372,
         "title": "fix(z01): не направлять PR к Claude по историческим пометкам",
         "sha": "0e5d7893812d336299d041199deda50557a07395"
-      },
-      {
-        "number": 359,
-        "title": "docs: единый свод правил и идей для «Лучника в тумане»",
-        "sha": "0a37a80d264aaac71832ab16d9ca82b306b7cec6"
       },
       {
         "number": 352,
@@ -825,11 +859,6 @@
         "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03"
       },
       {
-        "number": 312,
-        "title": "Reference: ASQURA Office — clean source-only transfer of #13",
-        "sha": "bc24124303060dcb9ad75353d6a6f1ba967dd169"
-      },
-      {
         "number": 308,
         "title": "docs: IM1–IM5 из #72 — документация на свежем main",
         "sha": "e07b085e4bec73081ff804be24a7398ada4b68c3"
@@ -880,16 +909,6 @@
         "sha": "f55c2e87fbd99f261977dbe7da58700a0a73a50e"
       },
       {
-        "number": 292,
-        "title": "ASSET CHECK 2.1: бот проверяет ассеты INK «Павший великан»",
-        "sha": "5df54dc0764daa77154709207e612b311127108d"
-      },
-      {
-        "number": 267,
-        "title": "ASSET CHECK v2: универсальный бот для любых ассетов",
-        "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14"
-      },
-      {
         "number": 285,
         "title": "storozha: «только Claude» — лишь ядро охраны (убираем тормоз",
         "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3"
@@ -933,16 +952,6 @@
         "number": 246,
         "title": "ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож",
         "sha": "72a2be2281e8f4c54785599732024b111d50bfd1"
-      },
-      {
-        "number": 265,
-        "title": "ASSET CHECK: бот-проверщик ассет-паков + многоразовый промпт",
-        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e"
-      },
-      {
-        "number": 251,
-        "title": "feat(auditor): бесплатная почасовая ревизия пяти задач META ",
-        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1"
       },
       {
         "number": 244,
@@ -1027,6 +1036,53 @@
     ],
     "protectedItems": [
       {
+        "number": 251,
+        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          "scripts/auditor/mutate-auditor.mjs"
+        ]
+      },
+      {
+        "number": 382,
+        "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 267,
+        "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py",
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 292,
+        "sha": "5df54dc0764daa77154709207e612b311127108d",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 265,
+        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
+        "paths": [
+          ".github/workflows/asset-check.yml",
+          "automation/asset-check/test_check_pack.py"
+        ]
+      },
+      {
+        "number": 439,
+        "sha": "96fe57465a770913991d99705e7a4d453259965d",
+        "paths": [
+          ".github/workflows/vetki-uborka.yml",
+          "scripts/lab/mutate-vetki-uborka.mjs"
+        ]
+      },
+      {
         "number": 437,
         "sha": "46d17e8b03db210ad8266621755215403601f83e",
         "paths": [
@@ -1074,13 +1130,6 @@
         "paths": [
           ".github/workflows/odin-pr.yml",
           "scripts/odin-pr/mutate-odin-pr.mjs"
-        ]
-      },
-      {
-        "number": 382,
-        "sha": "7c56b01e1a323254a1d850d50bd373364a079c7d",
-        "paths": [
-          "automation/asset-check/test_kinds.py"
         ]
       },
       {
@@ -1273,22 +1322,6 @@
         ]
       },
       {
-        "number": 292,
-        "sha": "5df54dc0764daa77154709207e612b311127108d",
-        "paths": [
-          "automation/asset-check/test_kinds.py"
-        ]
-      },
-      {
-        "number": 267,
-        "sha": "8127784a2d65ec5caa7aed93b753d13ce96b0c14",
-        "paths": [
-          ".github/workflows/asset-check.yml",
-          "automation/asset-check/test_check_pack.py",
-          "automation/asset-check/test_kinds.py"
-        ]
-      },
-      {
         "number": 285,
         "sha": "2ae3b5762c37c5a3ca7c2ee0154a60f1163826c3",
         "paths": [
@@ -1323,22 +1356,6 @@
           "scripts/lab/verify-check-page-assets.sh",
           "scripts/lab/verify-link-ok.sh",
           "scripts/lab/verify-page-assets.py"
-        ]
-      },
-      {
-        "number": 265,
-        "sha": "f0a6d79bdda5416da56a145901e0216808cba97e",
-        "paths": [
-          ".github/workflows/asset-check.yml",
-          "automation/asset-check/test_check_pack.py"
-        ]
-      },
-      {
-        "number": 251,
-        "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
-        "paths": [
-          ".github/workflows/auditor.yml",
-          "scripts/auditor/mutate-auditor.mjs"
         ]
       },
       {
@@ -1427,7 +1444,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3482,
+      "count": 3486,
       "folders": "нет данных"
     },
     "mg": {

@@ -25,6 +25,12 @@ git fetch --no-tags origin '+refs/heads/lab/*:refs/remotes/origin/lab/*' >/dev/n
 for ref in $(git for-each-ref --format='%(refname:strip=3)' 'refs/remotes/origin/lab/'); do
   name="${ref#lab/}"; safe="${name//\//-}"
   [[ "$safe" =~ ^[A-Za-z0-9._-]+$ ]] || { echo "skip unsafe branch $ref"; continue; }
+  # Pages artifact must stay < 1 GB (24.11.2026: 429 previews = 1.95 GB, every deploy failed).
+  # Publish only branches active in the last PREVIEW_MAX_AGE_DAYS days or linked in LINKS.txt.
+  age_days=$(( ( $(date +%s) - $(git log -1 --format=%ct "origin/$ref") ) / 86400 ))
+  if (( age_days > ${PREVIEW_MAX_AGE_DAYS:-7} )) && ! grep -q "/preview/$safe/" LINKS.txt 2>/dev/null; then
+    echo "skip stale preview $safe (${age_days}d)"; continue
+  fi
   dest="$OUT/preview/$safe"; mkdir -p "$dest"
   base="$(git merge-base origin/main "origin/$ref" 2>/dev/null || echo origin/main)"
   # Fast path (owner 15.11.2026: publishing must be quick): a preview whose branch and base did not change

@@ -1,11 +1,10 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-24T03:04:50.638Z | МГЛ: fdbda046f1a19b1b426625a31274e5eb8a1156f7 | МГ: ad2738c711e4d665a92acbbadb0214ba14ecff63 | https://github.com/mpaykin1/meta6-lab/actions/runs/45316797106
+UTC: 2026-11-24T04:20:14.567Z | МГЛ: 6fb24e06dbe34f5e3ee77e41e55686c9bbd73273 | МГ: e1b9a18a3d71eae0c324ef6d991fc5a9c6b2fefa | https://github.com/mpaykin1/meta6-lab/actions/runs/45325541548
 ## ПРОВЕРИТЬ CLAUDE
+- PR #434 6fb24e06dbe34f5e3ee77e41e55686c9bbd73273: .github/workflows/telefon-bez-tormozov.yml
 - PR #433 a0a080a140c117138976680b3ee5b41cb87d72fb: .github/workflows/lab-pages.yml
-- PR #421 a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1: .github/workflows/bez-patternov.yml, automation/asset-check/test_htmlpack.py, scripts/storozha/verify-storozha.mjs, scripts/visual/mutate-no-patterns.mjs, scripts/visual/verify-targets.mjs
-- ещё 42: https://github.com/mpaykin1/meta6-lab/pulls
+- ещё 43: https://github.com/mpaykin1/meta6-lab/pulls
 - МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/45316083732 | Run node scripts/dispetcher/run.mjs
-- МГЛ: LAB Pages | https://github.com/mpaykin1/meta6-lab/actions/runs/45315918593 | Run actions/deploy-pages@v4
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | closed | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/librar… (сокращено)
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
@@ -33,13 +32,13 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 9 | конфликт: 5 | слито: 86 | закрыто: 191
+открыто: 8 | конфликт: нет данных | слито: 87 | закрыто: 191
+#434 ТЕЛЕФОН БЕЗ ТОРМОЗОВ: лимиты нагрузки телефона + бот-замерщи | 6fb24e06dbe34f5e3ee77e41e55686c9bbd73273
 #433 fix(pages): publish Bullet Car and prevent stale 404 | a0a080a140c117138976680b3ee5b41cb87d72fb
-#432 feat(bullet-car): publish pixel-art website | ae501fc34ad9382458bc2df76a5eb357fc3646e2
-ещё 84: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 85: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3416 коммитов | нет данных
-МГ: 53 коммитов | .github:3, AGENTS.md:1, automation:4, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, playgama-catalog:35, reference:31, rules:11, SOURCE_INDEX.md:1
+МГЛ: 3418 коммитов | нет данных
+МГ: 54 коммитов | .github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет
@@ -57,4 +56,4 @@ wild-train-prologue — прошла | витрина: да
 ## НОВЫЕ ОШИБКИ
 | 2026111801 | 18.11.2026 | BEZ PATTERNOV: у PR без игры каталога проверка по умолчанию мерила INK-шейдер и требовала улучшить его на 15% — красными стояли все PR ассетов и правил (#371, #409, #415 и др.), работа ChatGPT не сливалась | Claude: разбор «почему с… (сокращено)
 | 2026111802 | 18.11.2026 | Лимит пяти живых PR держал в очереди и сам ремонт ложно красной проверки, которая и мешала пяти старейшим слиться — тупик | Claude: #421 красный только по storozha-quota | scripts/storozha/verify-storozha.mjs: claude/* не блокируетс… (сокращено)
-ещё 77: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md
+ещё 78: https://github.com/mpaykin1/meta6-lab/blob/main/OSHIBKI.md

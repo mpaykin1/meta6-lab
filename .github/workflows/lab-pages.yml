@@ -67,7 +67,7 @@ jobs:
       cancel-in-progress: false
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -98,7 +98,16 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
+      # 24.11.2026: deploy-pages often asks for the artifact 1 s after upload and fails with
+      # "Fetching artifact metadata failed / No artifacts named github-pages". Retry after a pause.
       - id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      - name: Wait for Pages artifact registration
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 45
+      - id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
       - name: Collect public URLs from built pages and LINKS
         shell: bash

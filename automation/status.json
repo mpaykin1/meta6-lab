@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-24T10:02:27.203Z",
+  "generated_at": "2026-11-24T10:14:06.430Z",
   "sha": {
-    "lab": "46d17e8b03db210ad8266621755215403601f83e",
+    "lab": "0b13cff9f3962df9154c2880edb6e1165c472134",
     "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45370700000",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45372651996",
   "review": {
     "protected": [
       {
@@ -412,8 +412,8 @@
     "redLab": [
       {
         "workflow": "LAB Pages",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45368886940",
-        "step": "Run actions/deploy-pages@v4"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45372227986",
+        "step": "Build sandbox site (main + all lab/** previews)"
       },
       {
         "workflow": "Karta Sil",
@@ -564,7 +564,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45361149801"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45370700003"
       },
       "P1": {
         "value": "не подтверждено",
@@ -574,7 +574,7 @@
     }
   },
   "pr": {
-    "open": 10,
+    "open": 11,
     "conflicts": "нет данных",
     "merged": 89,
     "closed": 191,
@@ -1427,7 +1427,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3480,
+      "count": 3482,
       "folders": "нет данных"
     },
     "mg": {

@@ -4,23 +4,14 @@
 import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
 
-export function decide(b, ctx) {
-  // b = {name, sha, ageDays}; ctx = {openHeads:Set, mergedHeads:Set, closedHeads:Set, protectedSafe:Set, ageDays}
-  const safe = b.name.replace(/^lab\//, '').replace(/\//g, '-');
-  if (ctx.openHeads.has(b.name)) return 'keep:open-pr';
-  if (ctx.protectedSafe.has(safe)) return 'keep:linked';
-  if (b.ageDays <= 1) return 'keep:fresh';
-  if (ctx.mergedHeads.has(b.name)) return 'delete:merged';
-  if (b.ageDays <= ctx.ageDays) return 'keep:recent';
-  return ctx.closedHeads.has(b.name) ? 'delete:closed' : 'delete:stale';
-}
+import { decide } from './vetki-uborka-rules.mjs';
 
 const gh = (...a) => execFileSync('gh', a, { encoding: 'utf8', maxBuffer: 64 << 20 });
 function main() {
   const apply = process.argv.includes('--apply');
   const i = process.argv.indexOf('--age-days');
   const ageDays = i > 0 ? Number(process.argv[i + 1]) : 7;
-  const repo = process.env.GITHUB_REPOSITORY || 'mpaykin1/meta6-lab';
+  const repo = execFileSync('git', ['remote', 'get-url', 'origin'], { encoding: 'utf8' }).trim().replace(/^.*github\.com[:/]/, '').replace(/\.git$/, '');
   const prs = JSON.parse(gh('api', '--paginate', '--slurp', `repos/${repo}/pulls?state=all&per_page=100`)).flat();
   const openHeads = new Set(prs.filter(p => p.state === 'open').map(p => p.head.ref));
   const mergedHeads = new Set(prs.filter(p => p.merged_at).map(p => p.head.ref));
@@ -50,4 +41,4 @@ function main() {
   }
   console.log((apply ? 'APPLIED ' : 'DRY ') + JSON.stringify(counts));
 }
-if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split('/').pop())) main();
+main();

@@ -1,6 +1,6 @@
 // Ловушка: уборка веток не должна удалять ценное (открытый PR, ссылка, свежая ветка) и должна убирать мусор.
 import assert from 'node:assert/strict';
-import { decide } from './vetki-uborka.mjs';
+import { decide } from './vetki-uborka-rules.mjs';
 const ctx = { openHeads: new Set(['lab/open']), mergedHeads: new Set(['lab/merged', 'lab/open']), closedHeads: new Set(['lab/closed']),
   protectedSafe: new Set(['linked-x']), ageDays: 7 };
 const cases = [

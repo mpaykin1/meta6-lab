@@ -1,16 +1,204 @@
 {
-  "generated_at": "2026-11-24T10:21:16.966Z",
+  "generated_at": "2026-11-24T15:20:17.176Z",
   "sha": {
-    "lab": "8de10e6912acbf7db60b14dbe72fca179216d0b9",
+    "lab": "c464facca43751848ae388c233a76d5895203874",
     "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45373818593",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45424019783",
   "review": {
     "protected": [
+      {
+        "number": 441,
+        "sha": "46c588a747147ba69d3ea4a32afab17b579d8b33",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          "scripts/lab/mutate-pages-retry.mjs"
+        ]
+      },
+      {
+        "number": 338,
+        "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 339,
+        "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 346,
+        "sha": "9f247be3a3530d160f629f531f32eb6469a07bc1",
+        "paths": [
+          "scripts/status/mutate-canonical-finish.mjs",
+          "scripts/status/selftest.mjs"
+        ]
+      },
+      {
+        "number": 372,
+        "sha": "0e5d7893812d336299d041199deda50557a07395",
+        "paths": [
+          "scripts/karta-sil/mutate-current-claude-marker.mjs",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 362,
+        "sha": "51f2ef012ec9cf31d0d68c83ba02fac0951974b7",
+        "paths": [
+          "automation/asset-check/test_3d_master.py"
+        ]
+      },
+      {
+        "number": 344,
+        "sha": "6655190cde1040b028ed57f2b4a1043d88e7344d",
+        "paths": [
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 315,
+        "sha": "4319f8056814a5986b87200676b87f585c09705c",
+        "paths": [
+          ".github/workflows/storozha-reference.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 309,
+        "sha": "41331671a13c476ff8ec3b7497dd3a47517dade8",
+        "paths": [
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 302,
+        "sha": "6ec51cb945f1e28fb2e7cab3cb215bcc27973de1",
+        "paths": [
+          "scripts/status/mutate-finish-summary.mjs",
+          "scripts/status/selftest.mjs"
+        ]
+      },
+      {
+        "number": 216,
+        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
+        "paths": [
+          ".github/workflows/status-dlya-claude.yml",
+          "scripts/status/selftest.mjs"
+        ]
+      },
+      {
+        "number": 241,
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
+      },
+      {
+        "number": 293,
+        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 259,
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
+      },
+      {
+        "number": 238,
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 215,
+        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
+      },
+      {
+        "number": 413,
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
+        "paths": [
+          ".github/workflows/odin-pr.yml",
+          "scripts/odin-pr/mutate-odin-pr.mjs"
+        ]
+      },
+      {
+        "number": 342,
+        "sha": "e203ffbea5b8ef5d180fcc5661707e2a8d32f7d6",
+        "paths": [
+          "scripts/karta-sil/mutate-route-external-quota.mjs"
+        ]
+      },
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
+      },
+      {
+        "number": 318,
+        "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3",
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-source-only-gate.mjs"
+        ]
+      },
+      {
+        "number": 317,
+        "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03",
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-branch-ownership.mjs"
+        ]
+      },
+      {
+        "number": 320,
+        "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
       {
         "number": 340,
         "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d",
@@ -205,71 +393,12 @@
         ]
       },
       {
-        "number": 413,
-        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
-        "paths": [
-          ".github/workflows/odin-pr.yml",
-          "scripts/odin-pr/mutate-odin-pr.mjs"
-        ]
-      },
-      {
-        "number": 362,
-        "sha": "51f2ef012ec9cf31d0d68c83ba02fac0951974b7",
-        "paths": [
-          "automation/asset-check/test_3d_master.py"
-        ]
-      },
-      {
-        "number": 372,
-        "sha": "0e5d7893812d336299d041199deda50557a07395",
-        "paths": [
-          "scripts/karta-sil/mutate-current-claude-marker.mjs",
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
         "number": 352,
         "sha": "99a64541e458eb39f499c55655649abb87bf5bc8",
         "paths": [
           "scripts/meta-bot/core.mjs",
           "scripts/meta-bot/mutate-viewports.mjs",
           "scripts/platform/verify-meta-bot-config-candidate.mjs"
-        ]
-      },
-      {
-        "number": 346,
-        "sha": "9f247be3a3530d160f629f531f32eb6469a07bc1",
-        "paths": [
-          "scripts/status/mutate-canonical-finish.mjs",
-          "scripts/status/selftest.mjs"
-        ]
-      },
-      {
-        "number": 342,
-        "sha": "e203ffbea5b8ef5d180fcc5661707e2a8d32f7d6",
-        "paths": [
-          "scripts/karta-sil/mutate-route-external-quota.mjs"
-        ]
-      },
-      {
-        "number": 344,
-        "sha": "6655190cde1040b028ed57f2b4a1043d88e7344d",
-        "paths": [
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
-        "number": 339,
-        "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34",
-        "paths": [
-          "automation/asset-check/test_kinds.py"
-        ]
-      },
-      {
-        "number": 338,
-        "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb",
-        "paths": [
-          "automation/asset-check/test_kinds.py"
         ]
       },
       {
@@ -280,66 +409,10 @@
         ]
       },
       {
-        "number": 320,
-        "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
-        "paths": [
-          ".github/workflows/karta-sil.yml",
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
-        "number": 302,
-        "sha": "6ec51cb945f1e28fb2e7cab3cb215bcc27973de1",
-        "paths": [
-          "scripts/status/mutate-finish-summary.mjs",
-          "scripts/status/selftest.mjs"
-        ]
-      },
-      {
-        "number": 318,
-        "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3",
-        "paths": [
-          ".github/workflows/library-machine.yml",
-          "scripts/library/mutate-source-only-gate.mjs"
-        ]
-      },
-      {
-        "number": 317,
-        "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03",
-        "paths": [
-          ".github/workflows/library-machine.yml",
-          "scripts/library/mutate-branch-ownership.mjs"
-        ]
-      },
-      {
-        "number": 315,
-        "sha": "4319f8056814a5986b87200676b87f585c09705c",
-        "paths": [
-          ".github/workflows/storozha-reference.yml",
-          "scripts/storozha/mutate-storozha.mjs",
-          "scripts/storozha/verify-storozha.mjs"
-        ]
-      },
-      {
-        "number": 309,
-        "sha": "41331671a13c476ff8ec3b7497dd3a47517dade8",
-        "paths": [
-          "scripts/storozha/mutate-storozha.mjs",
-          "scripts/storozha/verify-storozha.mjs"
-        ]
-      },
-      {
         "number": 296,
         "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a",
         "paths": [
           "automation/asset-check/test_htmlpack.py"
-        ]
-      },
-      {
-        "number": 293,
-        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
-        "paths": [
-          "automation/asset-check/test_kinds.py"
         ]
       },
       {
@@ -350,78 +423,18 @@
           "scripts/storozha/mutate-storozha.mjs",
           "scripts/storozha/verify-storozha.mjs"
         ]
-      },
-      {
-        "number": 241,
-        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
-        "paths": [
-          "scripts/shared/mutate-build-index-symlinks.mjs"
-        ]
-      },
-      {
-        "number": 259,
-        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
-        "paths": [
-          "scripts/prohodchik/mutate-prompt.mjs"
-        ]
-      },
-      {
-        "number": 246,
-        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
-        "paths": [
-          ".github/workflows/lab-pages.yml",
-          ".github/workflows/link-guard.yml",
-          "scripts/lab/mutate-link-ok.sh",
-          "scripts/lab/mutate-page-assets.mjs",
-          "scripts/lab/mutate-page-assets.py",
-          "scripts/lab/verify-check-page-assets.sh",
-          "scripts/lab/verify-link-ok.sh",
-          "scripts/lab/verify-page-assets.py"
-        ]
-      },
-      {
-        "number": 238,
-        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
-        "paths": [
-          ".github/workflows/journal-projections.yml",
-          ".github/workflows/pr-autofinish.yml",
-          ".github/workflows/report-completion-guard.yml",
-          ".github/workflows/storozha-branches.yml",
-          ".github/workflows/storozha-quota.yml",
-          ".github/workflows/storozha-reference.yml",
-          ".github/workflows/storozha-tests.yml",
-          ".github/workflows/storozha-weekly.yml",
-          "scripts/autofinish/mutate-report-guard.mjs",
-          "scripts/autofinish/mutate-safety.mjs",
-          "scripts/journal/mutate-journal.mjs",
-          "scripts/storozha/mutate-bot-summary.mjs",
-          "scripts/storozha/mutate-storozha.mjs",
-          "scripts/storozha/mutate-workflows.mjs",
-          "scripts/storozha/verify-storozha.mjs"
-        ]
-      },
-      {
-        "number": 216,
-        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": [
-          ".github/workflows/status-dlya-claude.yml",
-          "scripts/status/selftest.mjs"
-        ]
-      },
-      {
-        "number": 215,
-        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": [
-          ".github/workflows/lab-portal-visits.yml",
-          "scripts/lab/mutate-portal-links.mjs"
-        ]
       }
     ],
     "redLab": [
       {
-        "workflow": "Karta Sil",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45367651509",
-        "step": "Preserve failure after publishing no-data state"
+        "workflow": "MG Dispatcher",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45420339348",
+        "step": "Run node scripts/dispetcher/run.mjs"
+      },
+      {
+        "workflow": "LAB Pages",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45416380084",
+        "step": "Check published public URLs"
       }
     ],
     "redMg": [
@@ -567,7 +580,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45373236493"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45404840744"
       },
       "P1": {
         "value": "не подтверждено",
@@ -577,11 +590,216 @@
     }
   },
   "pr": {
-    "open": 11,
-    "conflicts": "нет данных",
-    "merged": 90,
-    "closed": 191,
+    "open": 10,
+    "conflicts": 5,
+    "merged": 93,
+    "closed": 194,
     "mergedItems": [
+      {
+        "number": 444,
+        "title": "SYMPHONIA: основа игры — исходник «Адажио»",
+        "sha": "2211ca5298462befb1b2f2f8fb2451d6d3f0ca48"
+      },
+      {
+        "number": 442,
+        "title": "Промпт: 5 автозадач — ассеты спрайт-стакинга рецептами stack",
+        "sha": "a022c7a3eaed05a4f4156c0433349a89c35273a3"
+      },
+      {
+        "number": 441,
+        "title": "МГЛ Pages: повтор публикации — сайт не выкладывался с 07:56",
+        "sha": "46c588a747147ba69d3ea4a32afab17b579d8b33"
+      },
+      {
+        "number": 338,
+        "title": "ASSET CHECK 2.4: заказ ассетов по видео",
+        "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb"
+      },
+      {
+        "number": 339,
+        "title": "ASSET CHECK 2.5: список ассетов без видео",
+        "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34"
+      },
+      {
+        "number": 358,
+        "title": "feat(Z18): лицензированный GLSL-туман и атмосферные молнии в",
+        "sha": "81e5fb9fcce86c5de90ec98953b8316ed87f83a6"
+      },
+      {
+        "number": 346,
+        "title": "fix(status): сохранять вердикты FINISH при сбое GitHub API",
+        "sha": "9f247be3a3530d160f629f531f32eb6469a07bc1"
+      },
+      {
+        "number": 373,
+        "title": "INK · Чернильный оскал — чистая 3D-модель и сцена без защищё",
+        "sha": "0c269f36f4f3f1801ba5147eb59c5d3355cf5768"
+      },
+      {
+        "number": 372,
+        "title": "fix(z01): не направлять PR к Claude по историческим пометкам",
+        "sha": "0e5d7893812d336299d041199deda50557a07395"
+      },
+      {
+        "number": 362,
+        "title": "feat(3d-master): профессиональный аудит glTF геометрии (част",
+        "sha": "51f2ef012ec9cf31d0d68c83ba02fac0951974b7"
+      },
+      {
+        "number": 344,
+        "title": "Vercel: превью только для main (лимит 100 сборок/сутки, крас",
+        "sha": "6655190cde1040b028ed57f2b4a1043d88e7344d"
+      },
+      {
+        "number": 256,
+        "title": "docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ",
+        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec"
+      },
+      {
+        "number": 257,
+        "title": "docs(zadachi): не создавать дубли задач по одному PR",
+        "sha": "79f4465b6667092e16115222325c012ca73cc137"
+      },
+      {
+        "number": 315,
+        "title": "STOROZHA reference: файлы PR из git, без REST-квоты (403 бло",
+        "sha": "4319f8056814a5986b87200676b87f585c09705c"
+      },
+      {
+        "number": 309,
+        "title": "STOROZHA quota: черновики не блокируют очередь (тупик #3/#72",
+        "sha": "41331671a13c476ff8ec3b7497dd3a47517dade8"
+      },
+      {
+        "number": 302,
+        "title": "fix(status): ФИНИШ из таблиц и подтверждённых прогонов main",
+        "sha": "6ec51cb945f1e28fb2e7cab3cb215bcc27973de1"
+      },
+      {
+        "number": 216,
+        "title": "СВОДКА ДЛЯ CLAUDE: facts-only GitHub Actions bot",
+        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee"
+      },
+      {
+        "number": 126,
+        "title": "Эталон: универсальный промпт Sketch → HTML Game → ZIP",
+        "sha": "7f5616591ca5baa37186d86621299d32c77230b1"
+      },
+      {
+        "number": 241,
+        "title": "L2: защита индекса shared от symlink-подмены источников",
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f"
+      },
+      {
+        "number": 294,
+        "title": "Эталон «Туманные шпили» (только добавление)",
+        "sha": "f55c2e87fbd99f261977dbe7da58700a0a73a50e"
+      },
+      {
+        "number": 341,
+        "title": "Эталон «Небесный пилот» (спрайт-стакинг), только добавление",
+        "sha": "d8cf489ee7b9ca0a4cf136cd1ee4efc7ab702359"
+      },
+      {
+        "number": 293,
+        "title": "ASSET CHECK 2.2: «не хуже эталона» + эталон «Туманные шпили»",
+        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716"
+      },
+      {
+        "number": 263,
+        "title": "docs(prompty): реестр 15 промптов МГЛ и улучшение многоразов",
+        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4"
+      },
+      {
+        "number": 259,
+        "title": "БОТ-ПРОХОДЧИК: сохраняемый промпт для повторных запусков",
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311"
+      },
+      {
+        "number": 238,
+        "title": "META GAMES: guarded PR autofinish, conflict-free journals, s",
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f"
+      },
+      {
+        "number": 215,
+        "title": "Portal Visits: исправить устаревшее ожидание 12 миров",
+        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d"
+      },
+      {
+        "number": 304,
+        "title": "Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У ",
+        "sha": "af6238c7237cd129f58a2d66826b8405e9376f05"
+      },
+      {
+        "number": 307,
+        "title": "Остров аптекаря: 3 этапа для META BOT",
+        "sha": "fb4cf4f5bce602dee82910ea066637feb7418c6d"
+      },
+      {
+        "number": 298,
+        "title": "Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА",
+        "sha": "4e17483f42baf5300da95c840962218958994b71"
+      },
+      {
+        "number": 295,
+        "title": "Остров последнего аптекаря · Глава I «Тихолист» (демо + этап",
+        "sha": "b158e1dd42db709100c79ceb5ea6745db53aa2bd"
+      },
+      {
+        "number": 413,
+        "title": "ODIN PR: один PR на дело (дубли и журнал в PR)",
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258"
+      },
+      {
+        "number": 342,
+        "title": "fix(dispatcher): не выдавать автозадачам внешнюю квоту Verce",
+        "sha": "e203ffbea5b8ef5d180fcc5661707e2a8d32f7d6"
+      },
+      {
+        "number": 337,
+        "title": "Надзор: измерения пяти автозадач и эффект v9",
+        "sha": "f236300a183a4c6ec9fbe3815d66d4abf806075d"
+      },
+      {
+        "number": 369,
+        "title": "docs(z01): verify live PR identity before backlog decisions",
+        "sha": "ad5bebf3eb5b68d3cc0c6bd8ac63ab26a563cb88"
+      },
+      {
+        "number": 224,
+        "title": "Merge continuity: persistent PR journal and live 83-PR queue",
+        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74"
+      },
+      {
+        "number": 226,
+        "title": "ЛОР: Древо миров и каталог skin-trainer — чистая история без",
+        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8"
+      },
+      {
+        "number": 244,
+        "title": "Living Watercolor: публичная демосцена дерева, вулкана и фаб",
+        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a"
+      },
+      {
+        "number": 246,
+        "title": "ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож",
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1"
+      },
+      {
+        "number": 318,
+        "title": "fix(library): strict source-only gate for new game transfers",
+        "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3"
+      },
+      {
+        "number": 317,
+        "title": "fix(library-machine): restrict automatic commits to owned sy",
+        "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03"
+      },
+      {
+        "number": 320,
+        "title": "Карта сил: повтор push после rebase при гонке с main",
+        "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18"
+      },
       {
         "number": 340,
         "title": "Карта сил: сбой не стирает карту, 5xx повторяется, «нет данн",
@@ -788,74 +1006,9 @@
         "sha": "a09b021f986daa4ff05e0a49bf7eb1ac6ce348f1"
       },
       {
-        "number": 413,
-        "title": "ODIN PR: один PR на дело (дубли и журнал в PR)",
-        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258"
-      },
-      {
-        "number": 373,
-        "title": "INK · Чернильный оскал — чистая 3D-модель и сцена без защищё",
-        "sha": "0c269f36f4f3f1801ba5147eb59c5d3355cf5768"
-      },
-      {
-        "number": 369,
-        "title": "docs(z01): verify live PR identity before backlog decisions",
-        "sha": "ad5bebf3eb5b68d3cc0c6bd8ac63ab26a563cb88"
-      },
-      {
-        "number": 362,
-        "title": "feat(3d-master): профессиональный аудит glTF геометрии (част",
-        "sha": "51f2ef012ec9cf31d0d68c83ba02fac0951974b7"
-      },
-      {
-        "number": 372,
-        "title": "fix(z01): не направлять PR к Claude по историческим пометкам",
-        "sha": "0e5d7893812d336299d041199deda50557a07395"
-      },
-      {
         "number": 352,
         "title": "META BOT: ядро отклоняет пустой и неизвестный список экранов",
         "sha": "99a64541e458eb39f499c55655649abb87bf5bc8"
-      },
-      {
-        "number": 358,
-        "title": "feat(Z18): лицензированный GLSL-туман и атмосферные молнии в",
-        "sha": "81e5fb9fcce86c5de90ec98953b8316ed87f83a6"
-      },
-      {
-        "number": 346,
-        "title": "fix(status): сохранять вердикты FINISH при сбое GitHub API",
-        "sha": "9f247be3a3530d160f629f531f32eb6469a07bc1"
-      },
-      {
-        "number": 337,
-        "title": "Надзор: измерения пяти автозадач и эффект v9",
-        "sha": "f236300a183a4c6ec9fbe3815d66d4abf806075d"
-      },
-      {
-        "number": 342,
-        "title": "fix(dispatcher): не выдавать автозадачам внешнюю квоту Verce",
-        "sha": "e203ffbea5b8ef5d180fcc5661707e2a8d32f7d6"
-      },
-      {
-        "number": 344,
-        "title": "Vercel: превью только для main (лимит 100 сборок/сутки, крас",
-        "sha": "6655190cde1040b028ed57f2b4a1043d88e7344d"
-      },
-      {
-        "number": 341,
-        "title": "Эталон «Небесный пилот» (спрайт-стакинг), только добавление",
-        "sha": "d8cf489ee7b9ca0a4cf136cd1ee4efc7ab702359"
-      },
-      {
-        "number": 339,
-        "title": "ASSET CHECK 2.5: список ассетов без видео",
-        "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34"
-      },
-      {
-        "number": 338,
-        "title": "ASSET CHECK 2.4: заказ ассетов по видео",
-        "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb"
       },
       {
         "number": 330,
@@ -883,69 +1036,9 @@
         "sha": "c0418db87f2de8c25c8b5a708a7de8b65b4cf8cb"
       },
       {
-        "number": 320,
-        "title": "Карта сил: повтор push после rebase при гонке с main",
-        "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18"
-      },
-      {
-        "number": 302,
-        "title": "fix(status): ФИНИШ из таблиц и подтверждённых прогонов main",
-        "sha": "6ec51cb945f1e28fb2e7cab3cb215bcc27973de1"
-      },
-      {
-        "number": 318,
-        "title": "fix(library): strict source-only gate for new game transfers",
-        "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3"
-      },
-      {
-        "number": 317,
-        "title": "fix(library-machine): restrict automatic commits to owned sy",
-        "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03"
-      },
-      {
-        "number": 315,
-        "title": "STOROZHA reference: файлы PR из git, без REST-квоты (403 бло",
-        "sha": "4319f8056814a5986b87200676b87f585c09705c"
-      },
-      {
-        "number": 309,
-        "title": "STOROZHA quota: черновики не блокируют очередь (тупик #3/#72",
-        "sha": "41331671a13c476ff8ec3b7497dd3a47517dade8"
-      },
-      {
-        "number": 307,
-        "title": "Остров аптекаря: 3 этапа для META BOT",
-        "sha": "fb4cf4f5bce602dee82910ea066637feb7418c6d"
-      },
-      {
-        "number": 304,
-        "title": "Остров аптекаря: разговоры у предметов + правило РАЗГОВОР У ",
-        "sha": "af6238c7237cd129f58a2d66826b8405e9376f05"
-      },
-      {
-        "number": 298,
-        "title": "Остров аптекаря: живой берег и море + правило БЕЗ РОВНЫХ КРА",
-        "sha": "4e17483f42baf5300da95c840962218958994b71"
-      },
-      {
         "number": 296,
         "title": "feat(asset-check): HTMLPACK visual quality bot + Tumannye Sh",
         "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a"
-      },
-      {
-        "number": 295,
-        "title": "Остров последнего аптекаря · Глава I «Тихолист» (демо + этап",
-        "sha": "b158e1dd42db709100c79ceb5ea6745db53aa2bd"
-      },
-      {
-        "number": 293,
-        "title": "ASSET CHECK 2.2: «не хуже эталона» + эталон «Туманные шпили»",
-        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716"
-      },
-      {
-        "number": 294,
-        "title": "Эталон «Туманные шпили» (только добавление)",
-        "sha": "f55c2e87fbd99f261977dbe7da58700a0a73a50e"
       },
       {
         "number": 285,
@@ -958,82 +1051,205 @@
         "sha": "d3f16b40a3c59ded669053388c0cf26130a7ed74"
       },
       {
-        "number": 241,
-        "title": "L2: защита индекса shared от symlink-подмены источников",
-        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f"
-      },
-      {
-        "number": 259,
-        "title": "БОТ-ПРОХОДЧИК: сохраняемый промпт для повторных запусков",
-        "sha": "24d0a9e8151cde7c3242275159c301a10d189311"
-      },
-      {
-        "number": 263,
-        "title": "docs(prompty): реестр 15 промптов МГЛ и улучшение многоразов",
-        "sha": "d40662486e7b6cc8382f5184c86e4b68819b43f4"
-      },
-      {
-        "number": 257,
-        "title": "docs(zadachi): не создавать дубли задач по одному PR",
-        "sha": "79f4465b6667092e16115222325c012ca73cc137"
-      },
-      {
-        "number": 256,
-        "title": "docs: сохранить многоразовый промпт ТОЛКАЧ МГ/МГЛ",
-        "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec"
-      },
-      {
-        "number": 246,
-        "title": "ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож",
-        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1"
-      },
-      {
-        "number": 244,
-        "title": "Living Watercolor: публичная демосцена дерева, вулкана и фаб",
-        "sha": "7a548632aae8be6b541cc52fec2e0bba3d14059a"
-      },
-      {
-        "number": 238,
-        "title": "META GAMES: guarded PR autofinish, conflict-free journals, s",
-        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f"
-      },
-      {
-        "number": 224,
-        "title": "Merge continuity: persistent PR journal and live 83-PR queue",
-        "sha": "1f086f4ed7b8d1f3d86d0a93192a033a5568ad74"
-      },
-      {
         "number": 125,
         "title": "Lore: alternative Last Seed mythology and inspiration bank",
         "sha": "9f50910368238775bda40729722ec3512f14e623"
       },
       {
-        "number": 126,
-        "title": "Эталон: универсальный промпт Sketch → HTML Game → ZIP",
-        "sha": "7f5616591ca5baa37186d86621299d32c77230b1"
-      },
-      {
         "number": 229,
         "title": "Рабочий чат МГ/МГЛ: цикл и передача смены",
         "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1"
-      },
-      {
-        "number": 226,
-        "title": "ЛОР: Древо миров и каталог skin-trainer — чистая история без",
-        "sha": "b18b5a47bff6b40730a059c5483ddc6da938c0c8"
-      },
-      {
-        "number": 216,
-        "title": "СВОДКА ДЛЯ CLAUDE: facts-only GitHub Actions bot",
-        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee"
-      },
-      {
-        "number": 215,
-        "title": "Portal Visits: исправить устаревшее ожидание 12 миров",
-        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d"
       }
     ],
     "protectedItems": [
+      {
+        "number": 441,
+        "sha": "46c588a747147ba69d3ea4a32afab17b579d8b33",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          "scripts/lab/mutate-pages-retry.mjs"
+        ]
+      },
+      {
+        "number": 338,
+        "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 339,
+        "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 346,
+        "sha": "9f247be3a3530d160f629f531f32eb6469a07bc1",
+        "paths": [
+          "scripts/status/mutate-canonical-finish.mjs",
+          "scripts/status/selftest.mjs"
+        ]
+      },
+      {
+        "number": 372,
+        "sha": "0e5d7893812d336299d041199deda50557a07395",
+        "paths": [
+          "scripts/karta-sil/mutate-current-claude-marker.mjs",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 362,
+        "sha": "51f2ef012ec9cf31d0d68c83ba02fac0951974b7",
+        "paths": [
+          "automation/asset-check/test_3d_master.py"
+        ]
+      },
+      {
+        "number": 344,
+        "sha": "6655190cde1040b028ed57f2b4a1043d88e7344d",
+        "paths": [
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 315,
+        "sha": "4319f8056814a5986b87200676b87f585c09705c",
+        "paths": [
+          ".github/workflows/storozha-reference.yml",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 309,
+        "sha": "41331671a13c476ff8ec3b7497dd3a47517dade8",
+        "paths": [
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 302,
+        "sha": "6ec51cb945f1e28fb2e7cab3cb215bcc27973de1",
+        "paths": [
+          "scripts/status/mutate-finish-summary.mjs",
+          "scripts/status/selftest.mjs"
+        ]
+      },
+      {
+        "number": 216,
+        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
+        "paths": [
+          ".github/workflows/status-dlya-claude.yml",
+          "scripts/status/selftest.mjs"
+        ]
+      },
+      {
+        "number": 241,
+        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
+        "paths": [
+          "scripts/shared/mutate-build-index-symlinks.mjs"
+        ]
+      },
+      {
+        "number": 293,
+        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
+        "paths": [
+          "automation/asset-check/test_kinds.py"
+        ]
+      },
+      {
+        "number": 259,
+        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
+        "paths": [
+          "scripts/prohodchik/mutate-prompt.mjs"
+        ]
+      },
+      {
+        "number": 238,
+        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
+        "paths": [
+          ".github/workflows/journal-projections.yml",
+          ".github/workflows/pr-autofinish.yml",
+          ".github/workflows/report-completion-guard.yml",
+          ".github/workflows/storozha-branches.yml",
+          ".github/workflows/storozha-quota.yml",
+          ".github/workflows/storozha-reference.yml",
+          ".github/workflows/storozha-tests.yml",
+          ".github/workflows/storozha-weekly.yml",
+          "scripts/autofinish/mutate-report-guard.mjs",
+          "scripts/autofinish/mutate-safety.mjs",
+          "scripts/journal/mutate-journal.mjs",
+          "scripts/storozha/mutate-bot-summary.mjs",
+          "scripts/storozha/mutate-storozha.mjs",
+          "scripts/storozha/mutate-workflows.mjs",
+          "scripts/storozha/verify-storozha.mjs"
+        ]
+      },
+      {
+        "number": 215,
+        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
+        "paths": [
+          ".github/workflows/lab-portal-visits.yml",
+          "scripts/lab/mutate-portal-links.mjs"
+        ]
+      },
+      {
+        "number": 413,
+        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
+        "paths": [
+          ".github/workflows/odin-pr.yml",
+          "scripts/odin-pr/mutate-odin-pr.mjs"
+        ]
+      },
+      {
+        "number": 342,
+        "sha": "e203ffbea5b8ef5d180fcc5661707e2a8d32f7d6",
+        "paths": [
+          "scripts/karta-sil/mutate-route-external-quota.mjs"
+        ]
+      },
+      {
+        "number": 246,
+        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
+        "paths": [
+          ".github/workflows/lab-pages.yml",
+          ".github/workflows/link-guard.yml",
+          "scripts/lab/mutate-link-ok.sh",
+          "scripts/lab/mutate-page-assets.mjs",
+          "scripts/lab/mutate-page-assets.py",
+          "scripts/lab/verify-check-page-assets.sh",
+          "scripts/lab/verify-link-ok.sh",
+          "scripts/lab/verify-page-assets.py"
+        ]
+      },
+      {
+        "number": 318,
+        "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3",
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-source-only-gate.mjs"
+        ]
+      },
+      {
+        "number": 317,
+        "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03",
+        "paths": [
+          ".github/workflows/library-machine.yml",
+          "scripts/library/mutate-branch-ownership.mjs"
+        ]
+      },
+      {
+        "number": 320,
+        "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
       {
         "number": 340,
         "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d",
@@ -1228,71 +1444,12 @@
         ]
       },
       {
-        "number": 413,
-        "sha": "fa7e16893fb93ca733d8e5b93a0e03674d965258",
-        "paths": [
-          ".github/workflows/odin-pr.yml",
-          "scripts/odin-pr/mutate-odin-pr.mjs"
-        ]
-      },
-      {
-        "number": 362,
-        "sha": "51f2ef012ec9cf31d0d68c83ba02fac0951974b7",
-        "paths": [
-          "automation/asset-check/test_3d_master.py"
-        ]
-      },
-      {
-        "number": 372,
-        "sha": "0e5d7893812d336299d041199deda50557a07395",
-        "paths": [
-          "scripts/karta-sil/mutate-current-claude-marker.mjs",
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
         "number": 352,
         "sha": "99a64541e458eb39f499c55655649abb87bf5bc8",
         "paths": [
           "scripts/meta-bot/core.mjs",
           "scripts/meta-bot/mutate-viewports.mjs",
           "scripts/platform/verify-meta-bot-config-candidate.mjs"
-        ]
-      },
-      {
-        "number": 346,
-        "sha": "9f247be3a3530d160f629f531f32eb6469a07bc1",
-        "paths": [
-          "scripts/status/mutate-canonical-finish.mjs",
-          "scripts/status/selftest.mjs"
-        ]
-      },
-      {
-        "number": 342,
-        "sha": "e203ffbea5b8ef5d180fcc5661707e2a8d32f7d6",
-        "paths": [
-          "scripts/karta-sil/mutate-route-external-quota.mjs"
-        ]
-      },
-      {
-        "number": 344,
-        "sha": "6655190cde1040b028ed57f2b4a1043d88e7344d",
-        "paths": [
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
-        "number": 339,
-        "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34",
-        "paths": [
-          "automation/asset-check/test_kinds.py"
-        ]
-      },
-      {
-        "number": 338,
-        "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb",
-        "paths": [
-          "automation/asset-check/test_kinds.py"
         ]
       },
       {
@@ -1303,66 +1460,10 @@
         ]
       },
       {
-        "number": 320,
-        "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
-        "paths": [
-          ".github/workflows/karta-sil.yml",
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
-        "number": 302,
-        "sha": "6ec51cb945f1e28fb2e7cab3cb215bcc27973de1",
-        "paths": [
-          "scripts/status/mutate-finish-summary.mjs",
-          "scripts/status/selftest.mjs"
-        ]
-      },
-      {
-        "number": 318,
-        "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3",
-        "paths": [
-          ".github/workflows/library-machine.yml",
-          "scripts/library/mutate-source-only-gate.mjs"
-        ]
-      },
-      {
-        "number": 317,
-        "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03",
-        "paths": [
-          ".github/workflows/library-machine.yml",
-          "scripts/library/mutate-branch-ownership.mjs"
-        ]
-      },
-      {
-        "number": 315,
-        "sha": "4319f8056814a5986b87200676b87f585c09705c",
-        "paths": [
-          ".github/workflows/storozha-reference.yml",
-          "scripts/storozha/mutate-storozha.mjs",
-          "scripts/storozha/verify-storozha.mjs"
-        ]
-      },
-      {
-        "number": 309,
-        "sha": "41331671a13c476ff8ec3b7497dd3a47517dade8",
-        "paths": [
-          "scripts/storozha/mutate-storozha.mjs",
-          "scripts/storozha/verify-storozha.mjs"
-        ]
-      },
-      {
         "number": 296,
         "sha": "1d385b135f0fd52a35d6b2df6503f5f6eacf171a",
         "paths": [
           "automation/asset-check/test_htmlpack.py"
-        ]
-      },
-      {
-        "number": 293,
-        "sha": "1ec3046bbe0972e316d92ec3846b542af0883716",
-        "paths": [
-          "automation/asset-check/test_kinds.py"
         ]
       },
       {
@@ -1373,77 +1474,12 @@
           "scripts/storozha/mutate-storozha.mjs",
           "scripts/storozha/verify-storozha.mjs"
         ]
-      },
-      {
-        "number": 241,
-        "sha": "351572af1dd748a4c5a99e1e8f0cdba8a7092a0f",
-        "paths": [
-          "scripts/shared/mutate-build-index-symlinks.mjs"
-        ]
-      },
-      {
-        "number": 259,
-        "sha": "24d0a9e8151cde7c3242275159c301a10d189311",
-        "paths": [
-          "scripts/prohodchik/mutate-prompt.mjs"
-        ]
-      },
-      {
-        "number": 246,
-        "sha": "72a2be2281e8f4c54785599732024b111d50bfd1",
-        "paths": [
-          ".github/workflows/lab-pages.yml",
-          ".github/workflows/link-guard.yml",
-          "scripts/lab/mutate-link-ok.sh",
-          "scripts/lab/mutate-page-assets.mjs",
-          "scripts/lab/mutate-page-assets.py",
-          "scripts/lab/verify-check-page-assets.sh",
-          "scripts/lab/verify-link-ok.sh",
-          "scripts/lab/verify-page-assets.py"
-        ]
-      },
-      {
-        "number": 238,
-        "sha": "9546bef2d74794f6ecc717a2f4095682fd2e137f",
-        "paths": [
-          ".github/workflows/journal-projections.yml",
-          ".github/workflows/pr-autofinish.yml",
-          ".github/workflows/report-completion-guard.yml",
-          ".github/workflows/storozha-branches.yml",
-          ".github/workflows/storozha-quota.yml",
-          ".github/workflows/storozha-reference.yml",
-          ".github/workflows/storozha-tests.yml",
-          ".github/workflows/storozha-weekly.yml",
-          "scripts/autofinish/mutate-report-guard.mjs",
-          "scripts/autofinish/mutate-safety.mjs",
-          "scripts/journal/mutate-journal.mjs",
-          "scripts/storozha/mutate-bot-summary.mjs",
-          "scripts/storozha/mutate-storozha.mjs",
-          "scripts/storozha/mutate-workflows.mjs",
-          "scripts/storozha/verify-storozha.mjs"
-        ]
-      },
-      {
-        "number": 216,
-        "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
-        "paths": [
-          ".github/workflows/status-dlya-claude.yml",
-          "scripts/status/selftest.mjs"
-        ]
-      },
-      {
-        "number": 215,
-        "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
-        "paths": [
-          ".github/workflows/lab-portal-visits.yml",
-          "scripts/lab/mutate-portal-links.mjs"
-        ]
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 3488,
+      "count": 3499,
       "folders": "нет данных"
     },
     "mg": {
@@ -1514,7 +1550,7 @@
     },
     {
       "name": "wild-train-prologue",
-      "bot": "прошла",
+      "bot": "не прошла",
       "storefront": "да"
     }
   ],
@@ -1599,6 +1635,7 @@
     "| 2026111804 | 18.11.2026 | Сторожа (gh-list.mjs) при повторном или пустом курсоре GraphQL 20 раз обрабатывали одни и те же PR и только потом падали «truncated» (PR #423, ядро охраны — только Claude) | Claude перенёс #423 в main 18.11 | `scripts/storozha/mutate-gh-list.mjs` (4 мутанта, старый код ловится: calls=20) |",
     "| 2026112301 | 23.11.2026 | Страница Bullet Car была в main, но Pages оставалась 404: из-за общей workflow concurrency группы свежий main push DEPLOY был отменён, пока предыдущая сборка выполняла долгий check-links; адрес отсутствовал в LINKS.txt | 404 на публичной странице и отменённый запуск LAB Pages #45221300862 | `scripts/lab/mutate-link-ok.sh` — HTTP 200 для адресов из LINKS; `scripts/lab/mutate-workflow-concurrency.mjs` — ловушка на потерю запусков из-за concurrency |",
     "| 2026112401 | 24.11.2026 | Bullet Car 1.2 на Playgama тормозил на телефонах: 18 ламп (7 выключенных), зеркало перерисовывало весь мир, ~270 отрисовок и ~250 000 треугольников, ~600 КБ геометрии и большая текстура грязи пересылались каждый кадр; из 592 запусков до 30 секунд игры дошли 267 | Замер Claude 24.11 на сборке с Playgama | [scripts/telefon-bez-tormozov-selftest.sh](scripts/telefon-bez-tormozov-selftest.sh) + сторож [telefon-bez-tormozov.yml](.github/workflows/telefon-bez-tormozov.yml) |",
-    "| 2026112402 | 24.11.2026 | МГЛ перестала публиковаться с 07:56: сайт собирался из 429 веток lab/* (1.95 ГБ), deploy-pages падал на каждом запуске, новые игры (Sprite Stacking World, PR #436) оставались 404 | Claude: 404 после слияния #436, лог запуска LAB Pages #45362798095 (artifact metadata) | `scripts/lab/mutate-site-size.mjs` — фильтр старых превью и лимит размера сайта в build-site.sh |"
+    "| 2026112402 | 24.11.2026 | МГЛ перестала публиковаться с 07:56: сайт собирался из 429 веток lab/* (1.95 ГБ), deploy-pages падал на каждом запуске, новые игры (Sprite Stacking World, PR #436) оставались 404 | Claude: 404 после слияния #436, лог запуска LAB Pages #45362798095 (artifact metadata) | `scripts/lab/mutate-site-size.mjs` — фильтр старых превью и лимит размера сайта в build-site.sh |",
+    "| 2026112403 | 24.11.2026 | После уменьшения сайта до 392 МБ публикация МГЛ всё равно падала: deploy-pages запрашивал артефакт через 1 с после загрузки и получал «No artifacts named github-pages» | Claude: запуск LAB Pages #45375150198, артефакт при этом существовал | `scripts/lab/mutate-pages-retry.mjs` — повтор публикации после паузы в lab-pages.yml |"
   ]
 }

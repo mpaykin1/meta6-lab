@@ -1,8 +1,8 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-24T10:18:18.060Z | МГЛ: 8012f59f97bf2b26f6de2a5681b4280aaf24c6a6 | МГ: 38bdad1ffc63c434bce6878774a26409a34cd55b | https://github.com/mpaykin1/meta6-lab/actions/runs/45373236564
+UTC: 2026-11-24T10:21:16.966Z | МГЛ: 8de10e6912acbf7db60b14dbe72fca179216d0b9 | МГ: 38bdad1ffc63c434bce6878774a26409a34cd55b | https://github.com/mpaykin1/meta6-lab/actions/runs/45373818593
 ## ПРОВЕРИТЬ CLAUDE
-- PR #251 5016e0750ad94d53798200f6db159f9c37f55ab1: .github/workflows/auditor.yml, scripts/auditor/mutate-auditor.mjs
-- PR #382 7c56b01e1a323254a1d850d50bd373364a079c7d: automation/asset-check/test_kinds.py
+- PR #340 5b9fa6e24485c7d527598777761f43e1f39e1a4d: scripts/karta-sil/mutate-karta-sil.mjs
+- PR #316 4574e06a308792514a92db2f6328eb444f92d62a: .github/workflows/auditor.yml, .github/workflows/dispetcher.yml, .github/workflows/investigation-snapshot.yml, .github/workflows/meta-repair-bot.yml, .github/workflows/sliyanie-status.yml, .github/workflows/zad… (сокращено)
 - ещё 46: https://github.com/mpaykin1/meta6-lab/pulls
 - МГЛ: Karta Sil | https://github.com/mpaykin1/meta6-lab/actions/runs/45367651509 | Preserve failure after publishing no-data state
 - МГ: Publish complete META6 site | https://github.com/mpaykin1/meta6/actions/runs/45332389526 | Deploy full website
@@ -19,7 +19,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/45373236493)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -34,11 +34,11 @@ L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
 открыто: 11 | конфликт: нет данных | слито: 90 | закрыто: 191
-#361 Z01: корректный подсчёт живых PR без draft | 894a85831a9374e805753b71b0c4faa9f27d6bd7
-#251 feat(auditor): бесплатная почасовая ревизия пяти задач META  | 5016e0750ad94d53798200f6db159f9c37f55ab1
+#340 Карта сил: сбой не стирает карту, 5xx повторяется, «нет данн | 5b9fa6e24485c7d527598777761f43e1f39e1a4d
+#316 fix(api-budget): GraphQL batches and hourly bot limits | 4574e06a308792514a92db2f6328eb444f92d62a
 ещё 88: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3486 коммитов | нет данных
+МГЛ: 3488 коммитов | нет данных
 МГ: 55 коммитов | .github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

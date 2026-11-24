@@ -1,16 +1,120 @@
 {
-  "generated_at": "2026-11-24T10:18:18.060Z",
+  "generated_at": "2026-11-24T10:21:16.966Z",
   "sha": {
-    "lab": "8012f59f97bf2b26f6de2a5681b4280aaf24c6a6",
+    "lab": "8de10e6912acbf7db60b14dbe72fca179216d0b9",
     "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45373236564",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45373818593",
   "review": {
     "protected": [
+      {
+        "number": 340,
+        "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d",
+        "paths": [
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 316,
+        "sha": "4574e06a308792514a92db2f6328eb444f92d62a",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          ".github/workflows/dispetcher.yml",
+          ".github/workflows/investigation-snapshot.yml",
+          ".github/workflows/meta-repair-bot.yml",
+          ".github/workflows/sliyanie-status.yml",
+          ".github/workflows/zadachi-watch.yml",
+          ".github/workflows/zanyato-watch.yml",
+          "scripts/lab/mutate-pr-status-batch.mjs",
+          "scripts/lab/mutate-sliyanie-facts.py"
+        ]
+      },
+      {
+        "number": 327,
+        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20",
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 301,
+        "sha": "4048fca93da0d4d7be883e61cd9c1d06f6d71a4f",
+        "paths": [
+          ".github/workflows/dispetcher.yml",
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 223,
+        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
+      },
+      {
+        "number": 321,
+        "sha": "00c22fba0c1fbcf71a535ddd9342da286e875b27",
+        "paths": [
+          ".github/workflows/ink-raven-3d.yml"
+        ]
+      },
+      {
+        "number": 217,
+        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
+      },
+      {
+        "number": 230,
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 231,
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
+      },
+      {
+        "number": 227,
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 236,
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
+      },
+      {
+        "number": 311,
+        "sha": "fb708269aa165d43dea7a1b3204157a235087afd",
+        "paths": [
+          "automation/asset-check/test_mutation_runner.py",
+          "automation/asset-check/test_zip_safety.py",
+          "scripts/platform/mutate-bot-config.mjs",
+          "scripts/platform/verify-meta-bot-config-candidate.mjs",
+          "scripts/repair-bot/mutate-repair-safety.mjs",
+          "scripts/repair-bot/selftest-safety.mjs",
+          "scripts/repair-bot/selftest.mjs"
+        ]
+      },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
@@ -141,19 +245,6 @@
         ]
       },
       {
-        "number": 311,
-        "sha": "fb708269aa165d43dea7a1b3204157a235087afd",
-        "paths": [
-          "automation/asset-check/test_mutation_runner.py",
-          "automation/asset-check/test_zip_safety.py",
-          "scripts/platform/mutate-bot-config.mjs",
-          "scripts/platform/verify-meta-bot-config-candidate.mjs",
-          "scripts/repair-bot/mutate-repair-safety.mjs",
-          "scripts/repair-bot/selftest-safety.mjs",
-          "scripts/repair-bot/selftest.mjs"
-        ]
-      },
-      {
         "number": 342,
         "sha": "e203ffbea5b8ef5d180fcc5661707e2a8d32f7d6",
         "paths": [
@@ -175,24 +266,10 @@
         ]
       },
       {
-        "number": 340,
-        "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d",
-        "paths": [
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
         "number": 338,
         "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb",
         "paths": [
           "automation/asset-check/test_kinds.py"
-        ]
-      },
-      {
-        "number": 321,
-        "sha": "00c22fba0c1fbcf71a535ddd9342da286e875b27",
-        "paths": [
-          ".github/workflows/ink-raven-3d.yml"
         ]
       },
       {
@@ -203,26 +280,9 @@
         ]
       },
       {
-        "number": 327,
-        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20",
-        "paths": [
-          ".github/workflows/karta-sil.yml",
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
         "number": 320,
         "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
         "paths": [
-          ".github/workflows/karta-sil.yml",
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
-        "number": 301,
-        "sha": "4048fca93da0d4d7be883e61cd9c1d06f6d71a4f",
-        "paths": [
-          ".github/workflows/dispetcher.yml",
           ".github/workflows/karta-sil.yml",
           "scripts/karta-sil/mutate-karta-sil.mjs"
         ]
@@ -241,21 +301,6 @@
         "paths": [
           ".github/workflows/library-machine.yml",
           "scripts/library/mutate-source-only-gate.mjs"
-        ]
-      },
-      {
-        "number": 316,
-        "sha": "4574e06a308792514a92db2f6328eb444f92d62a",
-        "paths": [
-          ".github/workflows/auditor.yml",
-          ".github/workflows/dispetcher.yml",
-          ".github/workflows/investigation-snapshot.yml",
-          ".github/workflows/meta-repair-bot.yml",
-          ".github/workflows/sliyanie-status.yml",
-          ".github/workflows/zadachi-watch.yml",
-          ".github/workflows/zanyato-watch.yml",
-          "scripts/lab/mutate-pr-status-batch.mjs",
-          "scripts/lab/mutate-sliyanie-facts.py"
         ]
       },
       {
@@ -356,35 +401,6 @@
         ]
       },
       {
-        "number": 231,
-        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": [
-          "scripts/dispetcher/mutate-mergeable-null.mjs"
-        ]
-      },
-      {
-        "number": 236,
-        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": [
-          "scripts/meta-bot/core.mjs",
-          "scripts/meta-bot/selftest.mjs"
-        ]
-      },
-      {
-        "number": 230,
-        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
-      },
-      {
-        "number": 227,
-        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
-      },
-      {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
         "paths": [
@@ -393,27 +409,11 @@
         ]
       },
       {
-        "number": 223,
-        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": [
-          ".github/workflows/investigation-snapshot.yml"
-        ]
-      },
-      {
         "number": 215,
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d",
         "paths": [
           ".github/workflows/lab-portal-visits.yml",
           "scripts/lab/mutate-portal-links.mjs"
-        ]
-      },
-      {
-        "number": 217,
-        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
         ]
       }
     ],
@@ -566,9 +566,8 @@
         "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       "B1": {
-        "value": "не подтверждено",
-        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082",
-        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082"
+        "value": "подтверждено",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45373236493"
       },
       "P1": {
         "value": "не подтверждено",
@@ -583,6 +582,116 @@
     "merged": 90,
     "closed": 191,
     "mergedItems": [
+      {
+        "number": 340,
+        "title": "Карта сил: сбой не стирает карту, 5xx повторяется, «нет данн",
+        "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d"
+      },
+      {
+        "number": 316,
+        "title": "fix(api-budget): GraphQL batches and hourly bot limits",
+        "sha": "4574e06a308792514a92db2f6328eb444f92d62a"
+      },
+      {
+        "number": 327,
+        "title": "fix(karta-sil): исправить учёт брошенных закрытых PR",
+        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20"
+      },
+      {
+        "number": 301,
+        "title": "КАРТА СИЛ: статистика слияний PR и фильтр автозадач",
+        "sha": "4048fca93da0d4d7be883e61cd9c1d06f6d71a4f"
+      },
+      {
+        "number": 223,
+        "title": "Investigation: GitHub Pages dashboard + hourly GitHub-only t",
+        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66"
+      },
+      {
+        "number": 321,
+        "title": "INK · Летящий ворон — объёмная 3D-модель и анимация в лесу",
+        "sha": "00c22fba0c1fbcf71a535ddd9342da286e875b27"
+      },
+      {
+        "number": 334,
+        "title": "INK · Падальщик: зарегистрировать новый эталон в AGENTS, ink",
+        "sha": "27422c8b6563e2a8d2be46df1c078a9f32feef59"
+      },
+      {
+        "number": 333,
+        "title": "INK · Падальщик — OWNER PASS: добавить 3D-эталон в МГЛ для п",
+        "sha": "960bab97a6c4a9c5e7cca673bbcbfca43e0f0d66"
+      },
+      {
+        "number": 377,
+        "title": "INK · Регистрация эталона «Машина → Батискаф» (МГ + МГЛ ссыл",
+        "sha": "04fe7850e474ec7c2f7ee74f67728b51cfa084cb"
+      },
+      {
+        "number": 376,
+        "title": "INK · Эталон: машина → батискаф (только папка reference)",
+        "sha": "11f9ac58d0e1b46f61d8db2a9e8110091de4b104"
+      },
+      {
+        "number": 308,
+        "title": "docs: IM1–IM5 из #72 — документация на свежем main",
+        "sha": "e07b085e4bec73081ff804be24a7398ada4b68c3"
+      },
+      {
+        "number": 345,
+        "title": "GPT.md: автозадачи снова работают — «лестница полезной работ",
+        "sha": "882fab3323d56f018e9d9709ff18e8d1ef77ba0c"
+      },
+      {
+        "number": 243,
+        "title": "Геймдизайн-аудит META GAMES — чистый PR без защищённой истор",
+        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81"
+      },
+      {
+        "number": 217,
+        "title": "Fix: Veil Shared CI проверяет существующую игру",
+        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3"
+      },
+      {
+        "number": 230,
+        "title": "Dispatcher: retry queue push when main moves",
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88"
+      },
+      {
+        "number": 231,
+        "title": "fix(dispatcher): reliable conflict state when mergeable is n",
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785"
+      },
+      {
+        "number": 227,
+        "title": "MG Dispatcher: automated PR triage queue",
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496"
+      },
+      {
+        "number": 232,
+        "title": "META GAMES: возможности платформы для начинающих разработчик",
+        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98"
+      },
+      {
+        "number": 236,
+        "title": "meta-bot: шаг ходьбы не перелетает цель",
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05"
+      },
+      {
+        "number": 311,
+        "title": "fix(bots): безопасный ремонт JSON и достоверные проверки асс",
+        "sha": "fb708269aa165d43dea7a1b3204157a235087afd"
+      },
+      {
+        "number": 383,
+        "title": "BLACK TRAIN: опубликовать игровую сцену с 14 ассетами",
+        "sha": "854aa2b15bde75ab4cd6e22a1749a63f69ed9846"
+      },
+      {
+        "number": 350,
+        "title": "Единая инструкция пяти автозадач и журнал NADZOR",
+        "sha": "bf240a699201aa2d8b9594c989ec34de47c37170"
+      },
       {
         "number": 361,
         "title": "Z01: корректный подсчёт живых PR без draft",
@@ -689,11 +798,6 @@
         "sha": "0c269f36f4f3f1801ba5147eb59c5d3355cf5768"
       },
       {
-        "number": 383,
-        "title": "BLACK TRAIN: опубликовать игровую сцену с 14 ассетами",
-        "sha": "854aa2b15bde75ab4cd6e22a1749a63f69ed9846"
-      },
-      {
         "number": 369,
         "title": "docs(z01): verify live PR identity before backlog decisions",
         "sha": "ad5bebf3eb5b68d3cc0c6bd8ac63ab26a563cb88"
@@ -702,16 +806,6 @@
         "number": 362,
         "title": "feat(3d-master): профессиональный аудит glTF геометрии (част",
         "sha": "51f2ef012ec9cf31d0d68c83ba02fac0951974b7"
-      },
-      {
-        "number": 377,
-        "title": "INK · Регистрация эталона «Машина → Батискаф» (МГ + МГЛ ссыл",
-        "sha": "04fe7850e474ec7c2f7ee74f67728b51cfa084cb"
-      },
-      {
-        "number": 376,
-        "title": "INK · Эталон: машина → батискаф (только папка reference)",
-        "sha": "11f9ac58d0e1b46f61d8db2a9e8110091de4b104"
       },
       {
         "number": 372,
@@ -729,24 +823,9 @@
         "sha": "81e5fb9fcce86c5de90ec98953b8316ed87f83a6"
       },
       {
-        "number": 350,
-        "title": "Единая инструкция пяти автозадач и журнал NADZOR",
-        "sha": "bf240a699201aa2d8b9594c989ec34de47c37170"
-      },
-      {
         "number": 346,
         "title": "fix(status): сохранять вердикты FINISH при сбое GitHub API",
         "sha": "9f247be3a3530d160f629f531f32eb6469a07bc1"
-      },
-      {
-        "number": 345,
-        "title": "GPT.md: автозадачи снова работают — «лестница полезной работ",
-        "sha": "882fab3323d56f018e9d9709ff18e8d1ef77ba0c"
-      },
-      {
-        "number": 311,
-        "title": "fix(bots): безопасный ремонт JSON и достоверные проверки асс",
-        "sha": "fb708269aa165d43dea7a1b3204157a235087afd"
       },
       {
         "number": 337,
@@ -774,29 +853,9 @@
         "sha": "86b4d30dd0cd62d877ae8a4ebb8bddd55f2b8b34"
       },
       {
-        "number": 340,
-        "title": "Карта сил: сбой не стирает карту, 5xx повторяется, «нет данн",
-        "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d"
-      },
-      {
         "number": 338,
         "title": "ASSET CHECK 2.4: заказ ассетов по видео",
         "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb"
-      },
-      {
-        "number": 321,
-        "title": "INK · Летящий ворон — объёмная 3D-модель и анимация в лесу",
-        "sha": "00c22fba0c1fbcf71a535ddd9342da286e875b27"
-      },
-      {
-        "number": 334,
-        "title": "INK · Падальщик: зарегистрировать новый эталон в AGENTS, ink",
-        "sha": "27422c8b6563e2a8d2be46df1c078a9f32feef59"
-      },
-      {
-        "number": 333,
-        "title": "INK · Падальщик — OWNER PASS: добавить 3D-эталон в МГЛ для п",
-        "sha": "960bab97a6c4a9c5e7cca673bbcbfca43e0f0d66"
       },
       {
         "number": 330,
@@ -807,11 +866,6 @@
         "number": 329,
         "title": "Wild train 1.2.3 + правила R12–R24 + бот не блокирует",
         "sha": "7875be74f02beeac1694a571134f160a763c5007"
-      },
-      {
-        "number": 327,
-        "title": "fix(karta-sil): исправить учёт брошенных закрытых PR",
-        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20"
       },
       {
         "number": 323,
@@ -834,11 +888,6 @@
         "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18"
       },
       {
-        "number": 301,
-        "title": "КАРТА СИЛ: статистика слияний PR и фильтр автозадач",
-        "sha": "4048fca93da0d4d7be883e61cd9c1d06f6d71a4f"
-      },
-      {
         "number": 302,
         "title": "fix(status): ФИНИШ из таблиц и подтверждённых прогонов main",
         "sha": "6ec51cb945f1e28fb2e7cab3cb215bcc27973de1"
@@ -849,19 +898,9 @@
         "sha": "102f39faec295019aed9bf1ae3879b484af0c9a3"
       },
       {
-        "number": 316,
-        "title": "fix(api-budget): GraphQL batches and hourly bot limits",
-        "sha": "4574e06a308792514a92db2f6328eb444f92d62a"
-      },
-      {
         "number": 317,
         "title": "fix(library-machine): restrict automatic commits to owned sy",
         "sha": "e02387721f8e2cbf126ba1af2ac6e4e803bebc03"
-      },
-      {
-        "number": 308,
-        "title": "docs: IM1–IM5 из #72 — документация на свежем main",
-        "sha": "e07b085e4bec73081ff804be24a7398ada4b68c3"
       },
       {
         "number": 315,
@@ -944,11 +983,6 @@
         "sha": "2d6875a04b80e3ca3d8caea4e1c867c9eadc2dec"
       },
       {
-        "number": 243,
-        "title": "Геймдизайн-аудит META GAMES — чистый PR без защищённой истор",
-        "sha": "98d7334782dfeac39984972d3b2bf2067828bd81"
-      },
-      {
         "number": 246,
         "title": "ССЫЛКА = 200: реестр URL, проверка деплоя и ежечасный сторож",
         "sha": "72a2be2281e8f4c54785599732024b111d50bfd1"
@@ -974,39 +1008,14 @@
         "sha": "9f50910368238775bda40729722ec3512f14e623"
       },
       {
-        "number": 232,
-        "title": "META GAMES: возможности платформы для начинающих разработчик",
-        "sha": "d7c3dac578c1b841fe7d259c944b7d7aec18cf98"
-      },
-      {
-        "number": 231,
-        "title": "fix(dispatcher): reliable conflict state when mergeable is n",
-        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785"
-      },
-      {
         "number": 126,
         "title": "Эталон: универсальный промпт Sketch → HTML Game → ZIP",
         "sha": "7f5616591ca5baa37186d86621299d32c77230b1"
       },
       {
-        "number": 236,
-        "title": "meta-bot: шаг ходьбы не перелетает цель",
-        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05"
-      },
-      {
         "number": 229,
         "title": "Рабочий чат МГ/МГЛ: цикл и передача смены",
         "sha": "40dfc505c5427f8d0b17b679d2f5df74352bc7c1"
-      },
-      {
-        "number": 230,
-        "title": "Dispatcher: retry queue push when main moves",
-        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88"
-      },
-      {
-        "number": 227,
-        "title": "MG Dispatcher: automated PR triage queue",
-        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496"
       },
       {
         "number": 226,
@@ -1019,22 +1028,116 @@
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee"
       },
       {
-        "number": 223,
-        "title": "Investigation: GitHub Pages dashboard + hourly GitHub-only t",
-        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66"
-      },
-      {
         "number": 215,
         "title": "Portal Visits: исправить устаревшее ожидание 12 миров",
         "sha": "2e73930d862d7de10a85c186e3c3517e5c58c98d"
-      },
-      {
-        "number": 217,
-        "title": "Fix: Veil Shared CI проверяет существующую игру",
-        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3"
       }
     ],
     "protectedItems": [
+      {
+        "number": 340,
+        "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d",
+        "paths": [
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 316,
+        "sha": "4574e06a308792514a92db2f6328eb444f92d62a",
+        "paths": [
+          ".github/workflows/auditor.yml",
+          ".github/workflows/dispetcher.yml",
+          ".github/workflows/investigation-snapshot.yml",
+          ".github/workflows/meta-repair-bot.yml",
+          ".github/workflows/sliyanie-status.yml",
+          ".github/workflows/zadachi-watch.yml",
+          ".github/workflows/zanyato-watch.yml",
+          "scripts/lab/mutate-pr-status-batch.mjs",
+          "scripts/lab/mutate-sliyanie-facts.py"
+        ]
+      },
+      {
+        "number": 327,
+        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20",
+        "paths": [
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 301,
+        "sha": "4048fca93da0d4d7be883e61cd9c1d06f6d71a4f",
+        "paths": [
+          ".github/workflows/dispetcher.yml",
+          ".github/workflows/karta-sil.yml",
+          "scripts/karta-sil/mutate-karta-sil.mjs"
+        ]
+      },
+      {
+        "number": 223,
+        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
+        "paths": [
+          ".github/workflows/investigation-snapshot.yml"
+        ]
+      },
+      {
+        "number": 321,
+        "sha": "00c22fba0c1fbcf71a535ddd9342da286e875b27",
+        "paths": [
+          ".github/workflows/ink-raven-3d.yml"
+        ]
+      },
+      {
+        "number": 217,
+        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
+        "paths": [
+          ".github/workflows/lab-veil-shared.yml",
+          "scripts/lab/mutate-veil-workflow-target.mjs",
+          "scripts/lab/verify-veil-workflow-target.mjs"
+        ]
+      },
+      {
+        "number": 230,
+        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 231,
+        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
+        "paths": [
+          "scripts/dispetcher/mutate-mergeable-null.mjs"
+        ]
+      },
+      {
+        "number": 227,
+        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
+        "paths": [
+          ".github/workflows/dispetcher.yml"
+        ]
+      },
+      {
+        "number": 236,
+        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
+        "paths": [
+          "scripts/meta-bot/core.mjs",
+          "scripts/meta-bot/selftest.mjs"
+        ]
+      },
+      {
+        "number": 311,
+        "sha": "fb708269aa165d43dea7a1b3204157a235087afd",
+        "paths": [
+          "automation/asset-check/test_mutation_runner.py",
+          "automation/asset-check/test_zip_safety.py",
+          "scripts/platform/mutate-bot-config.mjs",
+          "scripts/platform/verify-meta-bot-config-candidate.mjs",
+          "scripts/repair-bot/mutate-repair-safety.mjs",
+          "scripts/repair-bot/selftest-safety.mjs",
+          "scripts/repair-bot/selftest.mjs"
+        ]
+      },
       {
         "number": 251,
         "sha": "5016e0750ad94d53798200f6db159f9c37f55ab1",
@@ -1165,19 +1268,6 @@
         ]
       },
       {
-        "number": 311,
-        "sha": "fb708269aa165d43dea7a1b3204157a235087afd",
-        "paths": [
-          "automation/asset-check/test_mutation_runner.py",
-          "automation/asset-check/test_zip_safety.py",
-          "scripts/platform/mutate-bot-config.mjs",
-          "scripts/platform/verify-meta-bot-config-candidate.mjs",
-          "scripts/repair-bot/mutate-repair-safety.mjs",
-          "scripts/repair-bot/selftest-safety.mjs",
-          "scripts/repair-bot/selftest.mjs"
-        ]
-      },
-      {
         "number": 342,
         "sha": "e203ffbea5b8ef5d180fcc5661707e2a8d32f7d6",
         "paths": [
@@ -1199,24 +1289,10 @@
         ]
       },
       {
-        "number": 340,
-        "sha": "5b9fa6e24485c7d527598777761f43e1f39e1a4d",
-        "paths": [
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
         "number": 338,
         "sha": "2a07bda15d7a3d0b66be49b332ba31dfa79d40fb",
         "paths": [
           "automation/asset-check/test_kinds.py"
-        ]
-      },
-      {
-        "number": 321,
-        "sha": "00c22fba0c1fbcf71a535ddd9342da286e875b27",
-        "paths": [
-          ".github/workflows/ink-raven-3d.yml"
         ]
       },
       {
@@ -1227,26 +1303,9 @@
         ]
       },
       {
-        "number": 327,
-        "sha": "bfdcea35097c49b70e7d08c7747716e4fb0daa20",
-        "paths": [
-          ".github/workflows/karta-sil.yml",
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
         "number": 320,
         "sha": "fd4ea42560b6c1f43ecdf1a7df2e667160943c18",
         "paths": [
-          ".github/workflows/karta-sil.yml",
-          "scripts/karta-sil/mutate-karta-sil.mjs"
-        ]
-      },
-      {
-        "number": 301,
-        "sha": "4048fca93da0d4d7be883e61cd9c1d06f6d71a4f",
-        "paths": [
-          ".github/workflows/dispetcher.yml",
           ".github/workflows/karta-sil.yml",
           "scripts/karta-sil/mutate-karta-sil.mjs"
         ]
@@ -1265,21 +1324,6 @@
         "paths": [
           ".github/workflows/library-machine.yml",
           "scripts/library/mutate-source-only-gate.mjs"
-        ]
-      },
-      {
-        "number": 316,
-        "sha": "4574e06a308792514a92db2f6328eb444f92d62a",
-        "paths": [
-          ".github/workflows/auditor.yml",
-          ".github/workflows/dispetcher.yml",
-          ".github/workflows/investigation-snapshot.yml",
-          ".github/workflows/meta-repair-bot.yml",
-          ".github/workflows/sliyanie-status.yml",
-          ".github/workflows/zadachi-watch.yml",
-          ".github/workflows/zanyato-watch.yml",
-          "scripts/lab/mutate-pr-status-batch.mjs",
-          "scripts/lab/mutate-sliyanie-facts.py"
         ]
       },
       {
@@ -1380,47 +1424,11 @@
         ]
       },
       {
-        "number": 231,
-        "sha": "8790e6339ccf62af9584a4353749c864d4cf7785",
-        "paths": [
-          "scripts/dispetcher/mutate-mergeable-null.mjs"
-        ]
-      },
-      {
-        "number": 236,
-        "sha": "afc35df467af8e6f60fb8a5c9c11f62aef5dfa05",
-        "paths": [
-          "scripts/meta-bot/core.mjs",
-          "scripts/meta-bot/selftest.mjs"
-        ]
-      },
-      {
-        "number": 230,
-        "sha": "eabab1dc976ca4332c3c66cfd9b8bd56f4471b88",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
-      },
-      {
-        "number": 227,
-        "sha": "2a4558a4b3993d6d0583c004155508d084eb6496",
-        "paths": [
-          ".github/workflows/dispetcher.yml"
-        ]
-      },
-      {
         "number": 216,
         "sha": "06a8b61ec198ba43bb93a69efb2aeca7246383ee",
         "paths": [
           ".github/workflows/status-dlya-claude.yml",
           "scripts/status/selftest.mjs"
-        ]
-      },
-      {
-        "number": 223,
-        "sha": "0e4ecddc9d2b0b17dd4198fbcbb40ef2947bcd66",
-        "paths": [
-          ".github/workflows/investigation-snapshot.yml"
         ]
       },
       {
@@ -1430,21 +1438,12 @@
           ".github/workflows/lab-portal-visits.yml",
           "scripts/lab/mutate-portal-links.mjs"
         ]
-      },
-      {
-        "number": 217,
-        "sha": "d0417f26b97b2ab3a8bd4edbd67694e7d41b2ff3",
-        "paths": [
-          ".github/workflows/lab-veil-shared.yml",
-          "scripts/lab/mutate-veil-workflow-target.mjs",
-          "scripts/lab/verify-veil-workflow-target.mjs"
-        ]
       }
     ]
   },
   "changes": {
     "lab": {
-      "count": 3486,
+      "count": 3488,
       "folders": "нет данных"
     },
     "mg": {

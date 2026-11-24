@@ -1,10 +1,10 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-24T05:20:54.639Z | МГЛ: 87d0a0459e18162f29cc98f0fa826a0263cf8556 | МГ: 38bdad1ffc63c434bce6878774a26409a34cd55b | https://github.com/mpaykin1/meta6-lab/actions/runs/45332546974
+UTC: 2026-11-24T05:49:58.462Z | МГЛ: 45825d5c218bd27a612502488280e658b3536fb4 | МГ: 38bdad1ffc63c434bce6878774a26409a34cd55b | https://github.com/mpaykin1/meta6-lab/actions/runs/45335938861
 ## ПРОВЕРИТЬ CLAUDE
 - PR #434 6fb24e06dbe34f5e3ee77e41e55686c9bbd73273: .github/workflows/telefon-bez-tormozov.yml
 - PR #433 a0a080a140c117138976680b3ee5b41cb87d72fb: .github/workflows/lab-pages.yml
 - ещё 43: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: KONTUR main | https://github.com/mpaykin1/meta6-lab/actions/runs/45332547022 | Every permanent mutation on main
+- МГЛ: KONTUR main | https://github.com/mpaykin1/meta6-lab/actions/runs/45335938891 | Every permanent mutation on main
 - МГ: Publish complete META6 site | https://github.com/mpaykin1/meta6/actions/runs/45332389526 | Deploy full website
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | closed | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/librar… (сокращено)
@@ -19,7 +19,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/45332755094)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -38,7 +38,7 @@ L4 — не готов: НЕТ в таблице FINISH
 #433 fix(pages): publish Bullet Car and prevent stale 404 | a0a080a140c117138976680b3ee5b41cb87d72fb
 ещё 85: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3467 коммитов | нет данных
+МГЛ: 3472 коммитов | нет данных
 МГ: 55 коммитов | .github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

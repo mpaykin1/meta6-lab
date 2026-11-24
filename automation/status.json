@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-24T05:20:54.639Z",
+  "generated_at": "2026-11-24T05:49:58.462Z",
   "sha": {
-    "lab": "87d0a0459e18162f29cc98f0fa826a0263cf8556",
+    "lab": "45825d5c218bd27a612502488280e658b3536fb4",
     "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45332546974",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45335938861",
   "review": {
     "protected": [
       {
@@ -395,7 +395,7 @@
     "redLab": [
       {
         "workflow": "KONTUR main",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45332547022",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45335938891",
         "step": "Every permanent mutation on main"
       }
     ],
@@ -541,9 +541,8 @@
         "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211"
       },
       "B1": {
-        "value": "не подтверждено",
-        "reason": "нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-lab/actions/runs/42647943082",
-        "url": "https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647943082"
+        "value": "подтверждено",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45332755094"
       },
       "P1": {
         "value": "не подтверждено",
@@ -1379,7 +1378,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3467,
+      "count": 3472,
       "folders": "нет данных"
     },
     "mg": {

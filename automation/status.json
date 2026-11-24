@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-24T05:01:41.832Z",
+  "generated_at": "2026-11-24T05:20:54.639Z",
   "sha": {
-    "lab": "d6d87024e56f0051c57fc8279d8b9e4947e69be4",
-    "mg": "e1b9a18a3d71eae0c324ef6d991fc5a9c6b2fefa"
+    "lab": "87d0a0459e18162f29cc98f0fa826a0263cf8556",
+    "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45330193830",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45332546974",
   "review": {
     "protected": [
       {
@@ -394,12 +394,18 @@
     ],
     "redLab": [
       {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45316083732",
-        "step": "Run node scripts/dispetcher/run.mjs"
+        "workflow": "KONTUR main",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45332547022",
+        "step": "Every permanent mutation on main"
       }
     ],
-    "redMg": [],
+    "redMg": [
+      {
+        "workflow": "Publish complete META6 site",
+        "url": "https://github.com/mpaykin1/meta6/actions/runs/45332389526",
+        "step": "Deploy full website"
+      }
+    ],
     "sliyanie": [
       "| PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |",
       "| #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | closed | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/library/verify-library.mjs` не является добавлением; имя PR очищено от устаревшего «НУЖЕН CLAUDE», guard не менять; [PR #270](https://github.com/mpaykin1/meta6-lab/pull/270) |",
@@ -547,7 +553,7 @@
     }
   },
   "pr": {
-    "open": 8,
+    "open": 9,
     "conflicts": "нет данных",
     "merged": 87,
     "closed": 191,
@@ -1373,11 +1379,11 @@
   },
   "changes": {
     "lab": {
-      "count": 3435,
+      "count": 3467,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 54,
+      "count": 55,
       "folders": ".github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1"
     }
   },

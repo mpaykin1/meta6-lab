@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-24T04:54:37.314Z | МГЛ: 7a0fcddc25da6f05a76e7ec4ad01d1e7888f38fe | МГ: e1b9a18a3d71eae0c324ef6d991fc5a9c6b2fefa | https://github.com/mpaykin1/meta6-lab/actions/runs/45329529453
+UTC: 2026-11-24T05:00:50.264Z | МГЛ: 3c5847d595514a4efd580dbd80dbb5f055065311 | МГ: e1b9a18a3d71eae0c324ef6d991fc5a9c6b2fefa | https://github.com/mpaykin1/meta6-lab/actions/runs/45330189168
 ## ПРОВЕРИТЬ CLAUDE
 - PR #434 6fb24e06dbe34f5e3ee77e41e55686c9bbd73273: .github/workflows/telefon-bez-tormozov.yml
 - PR #433 a0a080a140c117138976680b3ee5b41cb87d72fb: .github/workflows/lab-pages.yml
@@ -37,7 +37,7 @@ L4 — не готов: НЕТ в таблице FINISH
 #433 fix(pages): publish Bullet Car and prevent stale 404 | a0a080a140c117138976680b3ee5b41cb87d72fb
 ещё 85: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3429 коммитов | нет данных
+МГЛ: 3434 коммитов | нет данных
 МГ: 54 коммитов | .github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

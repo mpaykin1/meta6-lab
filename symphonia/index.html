@@ -2,10 +2,366 @@
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101015"><title>SYMPHONIA — Симфония тьмы | META GAMES</title><meta name="description" content="Музыкальный хоррор, в котором музыка рождает миры и чудовищ, а действия игрока сочиняют бесконечную симфонию."><meta property="og:title" content="SYMPHONIA — Симфония тьмы"><meta property="og:description" content="Она создаёт прекрасное. Он уничтожает чудовищ. Музыка меняет реальность."><style>
 :root{color-scheme:dark;--ink:#100f14;--paper:#e9dec9;--muted:#b3a79a;--red:#b57365;--line:#493a3a}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ink);color:var(--paper);font:17px/1.7 Georgia,serif}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:2px solid #d6aa8a;outline-offset:5px}header{position:absolute;z-index:2;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:24px clamp(20px,5vw,80px);font:10px/1.4 system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase}nav{display:flex;gap:24px}nav a:hover{color:var(--red)}.hero{min-height: min(900px,100svh);min-height: max(640px,90svh);position:relative;display:grid;place-items:center;text-align:center;overflow:hidden;background:#141219}.scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0e0c1290 0%,transparent 30%,#100f1400 50%,#100f14 100%),radial-gradient(ellipse at center,#0d0b0e00 12%,#09080d88 100%);pointer-events:none}.hero-copy{z-index:1;position:relative;width:min(94%,1000px);padding:120px 15px 150px;text-shadow:0 4px 28px #000}.eyebrow,.kicker{font:11px/1.5 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.3em;color:#d4ad9a}.hero h1{margin:12px 0 0;font-weight:400;font-size:clamp(42px,10.5vw,130px);line-height:1.02;letter-spacing:.095em;color:#f5ebd8}.subtitle{font-size:clamp(18px,3vw,31px);letter-spacing:.26em;text-transform:uppercase;margin:6px 0 27px}.hero p{max-width:570px;margin:20px auto;color:#f2e3ce;font-size:clamp(17px,2vw,22px)}.cta{display:inline-block;border:1px solid #c09980;padding:12px 22px;margin-top:15px;background:#100e15a0;font:11px/1.5 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.2em;transition:background .2s}.cta:hover{background:#553a39}.wrap{width:min(100% - 40px,1050px);margin:auto}section{padding:clamp(45px,8vw,105px) 0;border-bottom:1px solid var(--line)}.lead{font-size:clamp(24px,4vw,42px);line-height:1.35;max-width:850px;margin:0 0 28px}.bodycopy{max-width:740px;color:var(--muted)}h2{font-size:clamp(30px,5vw,53px);line-height:1.17;font-weight:400;margin:12px 0 25px}h3{font-weight:400;font-size:24px;margin:5px 0 8px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:35px 0 0}.feature{padding:24px 20px;border-top:1px solid #855e55;background:linear-gradient(#211b22,#161319)}.feature p,.chapter p{margin:0;color:var(--muted);font-size:15px}.num{color:var(--red);font:11px system-ui,sans-serif;letter-spacing:.2em}.chapters{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:30px}.chapter{background:#17141b;padding:22px;min-height:130px}.chapter h3{color:#ead8c0}.quote{text-align:center;padding:90px 0;background:radial-gradient(ellipse at center,#3d232c55,transparent 65%)}.quote blockquote{font-size:clamp(26px,5vw,55px);line-height:1.3;font-style:italic;margin:20px auto;max-width:900px}.press{display:flex;align-items:center;justify-content:space-between;gap:24px}.press button{cursor:pointer;color:var(--paper);font:11px system-ui,sans-serif;letter-spacing:.1em;padding:14px 22px;background:#241b22;border:1px solid #946c60}.press button:hover{background:#51373c}footer{padding:30px 0;color:var(--muted);font:12px/1.6 system-ui,sans-serif;letter-spacing:.06em}.fog{animation:drift 18s ease-in-out infinite alternate;transform-origin:center}.glow{animation:pulse 5s ease-in-out infinite alternate}.notes{animation:float 8s ease-in-out infinite alternate;transform-origin:center}@keyframes drift{to{transform:translateX(65px) scale(1.05)}}@keyframes pulse{to{opacity:.35}}@keyframes float{to{transform:translateY(-18px);opacity:.4}}@media(max-width:700px){header{padding:20px}nav{gap:12px}nav a:first-child{display:none}.features,.chapters{grid-template-columns:1fr}.hero h1{letter-spacing:.04em}.subtitle{letter-spacing:.15em}.press{display:block}.press button{margin-top:15px}.hero{min-height:660px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
 .genre-list{display:grid;gap:8px;margin:32px 0}.genre{border:1px solid var(--line);background:#19151c;padding:0 18px}.genre summary{cursor:pointer;padding:15px 0;color:var(--paper);font-size:18px}.genre summary span{float:right;font:12px system-ui,sans-serif;color:var(--red);padding:8px 0}.genre dl{margin:0 0 16px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px}.genre dl div{border-top:1px solid var(--line);padding:8px 0}.genre dt{color:var(--paper)}.genre dd{margin:0;color:var(--muted);font-size:14px}.subheading{margin-top:42px}.influences{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}.influences div{display:grid;gap:3px;padding:12px 16px;background:#17141b}.influences strong{font-weight:400;color:var(--paper)}.influences span{color:var(--muted);font-size:14px}.evolution-chapters .num{display:block;min-height:28px;letter-spacing:.08em;line-height:1.5}.evolution-end{margin:50px 0 0;color:var(--paper)}@media(max-width:700px){.genre dl,.influences{grid-template-columns:1fr}.genre summary{font-size:16px}.genre{padding:0 12px}}
-.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-top:24px}.catalog-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid #4a3a42;background:#17141c;border-radius:7px;transition:transform .25s,border-color .25s;position:relative}.catalog-card:has(a):hover{transform:translateY(-4px);border-color:#d7ad92}.cover{position:relative;aspect-ratio:16/9;background:#1b1724;overflow:hidden}.cover canvas,.cover img{width:100%;height:100%;display:block;object-fit:cover}.cover-num{position:absolute;left:9px;top:8px;background:#110d17b0;color:#e2c5aa;padding:4px 7px;font:10px system-ui;letter-spacing:.12em}.card-info{padding:12px;display:flex;flex-direction:column;flex:1}.card-info h3{font-size:18px;line-height:1.2;margin:0 0 7px}.card-info p{font:13px/1.4 system-ui;color:var(--muted);margin:0 0 12px}.card-state{font:10px system-ui;text-transform:uppercase;letter-spacing:.12em;color:#a99e98;margin-top:auto}.catalog-card .play-link{color:#e6c4a4}.catalog-card .play-link:after{content:"";position:absolute;inset:0}.catalog-card:focus-within{outline:2px solid #d6aa8a}@media(max-width:560px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.card-info{padding:9px}.card-info h3{font-size:15px}.card-info p{font-size:11px}.cover-num{font-size:9px}}</style></head><body><header><a href="../meta-games/">META GAMES</a><nav aria-label="Навигация"><a href="#concept">Концепция</a><a href="#catalog">Главы</a><a href="#press">Пресса</a></nav></header>
+.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-top:24px}.catalog-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid #4a3a42;background:#17141c;border-radius:7px;transition:transform .25s,border-color .25s;position:relative}.catalog-card:has(a):hover{transform:translateY(-4px);border-color:#d7ad92}.cover{position:relative;aspect-ratio:16/9;background:#1b1724;overflow:hidden}.cover canvas,.cover img{width:100%;height:100%;display:block;object-fit:cover}.cover-num{position:absolute;left:9px;top:8px;background:#110d17b0;color:#e2c5aa;padding:4px 7px;font:10px system-ui;letter-spacing:.12em}.card-info{padding:12px;display:flex;flex-direction:column;flex:1}.card-info h3{font-size:18px;line-height:1.2;margin:0 0 7px}.card-info p{font:13px/1.4 system-ui;color:var(--muted);margin:0 0 12px}.card-state{font:10px system-ui;text-transform:uppercase;letter-spacing:.12em;color:#a99e98;margin-top:auto}.catalog-card .play-link{color:#e6c4a4}.catalog-card .play-link:after{content:"";position:absolute;inset:0}.catalog-card:focus-within{outline:2px solid #d6aa8a}@media(max-width:560px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.card-info{padding:9px}.card-info h3{font-size:15px}.card-info p{font-size:11px}.cover-num{font-size:9px}}#chapter-catalog{padding-top:36px}.catalog-intro{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:24px}.catalog-intro h2{margin:10px 0}.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.catalog-card{display:block;overflow:hidden;background:#17151d;border:1px solid #51434a;transition:border-color .3s,transform .3s}.catalog-card[href]:hover{border-color:#c69c85;transform:translateY(-3px)}.catalog-art{position:relative;aspect-ratio:16/9;overflow:hidden;background:#161822;isolation:isolate}.catalog-art canvas,.catalog-art img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1s}.catalog-card:hover .catalog-art canvas,.catalog-card:hover .catalog-art img{transform:scale(1.035)}.catalog-mist,.catalog-light{position:absolute;inset:0;pointer-events:none}.catalog-mist{inset:40% -20% -25%;background:radial-gradient(ellipse at 25% 55%,#b0a0b232,transparent 47%),radial-gradient(ellipse at 70% 60%,#898a9c3c,transparent 50%);animation:catalog-mist 12s ease-in-out infinite alternate;animation-delay:var(--delay)}.catalog-light{background:radial-gradient(ellipse at 57% 30%,#f3c99a24,transparent 47%);mix-blend-mode:screen;animation:catalog-light 7s ease-in-out infinite alternate;animation-delay:var(--delay)}.catalog-info{padding:15px 16px 17px}.catalog-info h3{font-size:clamp(18px,2.2vw,24px);line-height:1.25;margin:6px 0}.catalog-info p{font-size:14px;color:var(--muted);margin:0 0 12px;line-height:1.5}.catalog-info .num{font-size:10px;letter-spacing:.08em}.catalog-play,.catalog-soon{display:inline-block;font:11px system-ui,sans-serif;letter-spacing:.08em}.catalog-play{color:#e9c7a0}.catalog-soon{color:#a99ca5}#catalog-count{white-space:nowrap;color:var(--muted);font:12px system-ui,sans-serif}@keyframes catalog-mist{to{transform:translate(11%,-5%);opacity:.5}}@keyframes catalog-light{to{opacity:.28}}@media(max-width:850px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:500px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.catalog-intro{display:block}.catalog-info{padding:9px}.catalog-info h3{font-size:17px}.catalog-info p{font-size:12px}.catalog-info .num{font-size:9px}.catalog-soon,.catalog-play{font-size:10px}.catalog-art{aspect-ratio:4/3}}
+</style></head><body><header><a href="../meta-games/">META GAMES</a><nav aria-label="Навигация"><a href="#concept">Концепция</a><a href="#catalog">Главы</a><a href="#press">Пресса</a></nav></header>
 <main><div class="hero"><svg class="scene" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="moon"><stop stop-color="#f1d7af" stop-opacity=".95"/><stop offset=".38" stop-color="#927479" stop-opacity=".6"/><stop offset="1" stop-color="#29202c" stop-opacity="0"/></radialGradient><linearGradient id="ground" x2="0" y2="1"><stop stop-color="#42363f"/><stop offset="1" stop-color="#100f14"/></linearGradient><linearGradient id="stone"><stop stop-color="#332d39"/><stop offset=".5" stop-color="#61505a"/><stop offset="1" stop-color="#211e29"/></linearGradient><filter id="blur"><feGaussianBlur stdDeviation="30"/></filter><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".42" numOctaves="3" stitchTiles="stitch"/></filter><radialGradient id="lamp"><stop stop-color="#ffb685" stop-opacity=".9"/><stop offset="1" stop-color="#d66d45" stop-opacity="0"/></radialGradient></defs><rect width="1400" height="900" fill="#211e2b"/><ellipse cx="700" cy="300" rx="530" ry="420" fill="url(#moon)"/><circle cx="700" cy="245" r="126" fill="#d0b5a0" opacity=".18"/><g fill="#1b1924" opacity=".7"><path d="M0 550V270l43-39 22 41v-93l27-60 30 60v120h50V201l37-67 42 67v124h49V245l35-52 33 52v117h70v188Z"/><path d="M1400 550V230l-56-42-37 42v-89l-32-70-31 70v156h-70V212l-35-70-38 70v115h-59V268l-27-50-30 50v282Z"/></g><g fill="url(#stone)" stroke="#1a1720" stroke-width="6"><path d="M0 0H390V78H264L184 220V670H0Z"/><path d="M1400 0H1010V78H1136L1216 220V670H1400Z"/><path d="M230 630V305Q230 150 420 95L440 129Q270 205 270 305V630Z"/><path d="M1170 630V305Q1170 150 980 95L960 129Q1130 205 1130 305V630Z"/><path d="M420 95Q700-160 980 95L960 129Q700-100 440 129Z"/></g><g stroke="#857078" stroke-opacity=".3" fill="none"><path d="M35 100H210M0 220H165M15 350H170M20 490H170M30 620H170M1190 100H1365M1235 220H1400M1230 350H1390M1230 490H1390M1230 620H1370" stroke-width="3"/></g><path d="M0 660L490 535H910L1400 660V900H0Z" fill="url(#ground)"/><g stroke="#77646b" opacity=".22" fill="none"><path d="M0 900L570 535M230 900L620 535M500 900L675 535M900 900L725 535M1170 900L780 535M1400 900L830 535M0 680H1400M0 740H1400M0 820H1400"/></g><g class="fog" filter="url(#blur)" fill="#b29ba6"><ellipse cx="300" cy="570" rx="400" ry="55" opacity=".23"/><ellipse cx="1060" cy="625" rx="470" ry="68" opacity=".20"/><ellipse cx="710" cy="715" rx="560" ry="45" opacity=".17"/></g><g fill="#111018" stroke="#48353e" stroke-width="2"><path d="M90 705L132 580 151 490 169 472 191 488 209 573 259 648 243 674 192 604 198 700 231 755 196 759 165 698 145 757 112 756 131 694Z"/><path d="M1285 717L1245 590 1230 496 1208 474 1187 488 1170 567 1100 641 1114 665 1179 604 1170 706 1136 769 1171 772 1204 708 1229 769 1264 765 1243 705Z"/><path d="M346 655L363 585 379 546 401 538 419 555 425 605 462 657 445 676 416 642 428 704 401 706 388 663 370 705 345 704Z" opacity=".8"/></g><g class="glow" fill="#df756b"><circle cx="162" cy="493" r="3"/><circle cx="178" cy="493" r="3"/><circle cx="1200" cy="494" r="3"/><circle cx="1216" cy="494" r="3"/><circle cx="390" cy="557" r="2"/><circle cx="400" cy="557" r="2"/></g><ellipse cx="700" cy="712" rx="215" ry="130" fill="url(#lamp)" opacity=".35"/><g transform="translate(700 672)" fill="#151219" stroke="#ae8a80" stroke-width="1.5"><path d="M-20 10Q-14-46-8-61L8-61Q27-32 34 9L68 46H-58Z" fill="#44343b"/><path d="M-17-72Q-21-93 0-97Q22-93 17-73L8-64H-8Z" fill="#c7a28d"/><path d="M-20-70Q-30-109 4-106Q33-104 23-59L12-75 8-96Q-7-90-20-70Z" fill="#2b2029"/><path d="M12-47L47-26 54-36M-10-41L-32-9" fill="none" stroke="#bc9b8a" stroke-width="6"/><ellipse cx="37" cy="-26" rx="12" ry="21" transform="rotate(-42 37 -26)" fill="#876051"/><path d="M21-47L67-5" stroke="#c9aa8e" stroke-width="3"/><path d="M-32-45L66-45" stroke="#e5c8a5" stroke-width="1"/></g><g class="notes" fill="none" stroke="#e1b5a4" opacity=".65"><path d="M476 570Q700 460 924 570M470 581Q700 471 930 581M465 592Q700 482 935 592" stroke-width="1"/><g fill="#d6ae9e" stroke-width="2"><ellipse cx="541" cy="548" rx="5" ry="4"/><path d="M546 548V522l9 6"/><ellipse cx="633" cy="527" rx="5" ry="4"/><path d="M638 527V500"/><ellipse cx="792" cy="529" rx="5" ry="4"/><path d="M797 529V503l9 7"/><ellipse cx="876" cy="552" rx="5" ry="4"/><path d="M881 552V528"/></g></g><rect width="1400" height="900" filter="url(#grain)" opacity=".07" style="mix-blend-mode:screen"/></svg>
 <div class="hero-copy"><div class="eyebrow">Музыкальный хоррор · В разработке</div><h1>SYMPHONIA</h1><div class="subtitle">Симфония тьмы</div><p>Она создаёт прекрасное. Он уничтожает чудовищ.<br>Музыка меняет реальность.</p><a class="cta" href="#catalog">Открыть главы ↓</a></div></div>
-<div class="wrap" id="article"><section id="catalog"><div class="kicker">Партитура миров</div><h2>Все главы SYMPHONIA</h2><p class="bodycopy">Единый каталог музыкальных миров. Открывайте опубликованные главы напрямую по их обложкам. Неопубликованные главы обозначены отдельно.</p><div class="catalog-grid"><article class="catalog-card" data-id="prelude"><div class="cover"><canvas width="320" height="180" data-stack="gate" data-seed="1" data-tint="#b89c79" aria-hidden="true"></canvas><span class="cover-num">01</span></div><div class="card-info"><h3>Прелюдия</h3><p>Пробуждение мира и первые загадочные события.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="overture"><div class="cover"><canvas width="320" height="180" data-stack="mountain" data-seed="2" data-tint="#a57979" aria-hidden="true"></canvas><span class="cover-num">02</span></div><div class="card-info"><h3>Увертюра</h3><p>Начало путешествия. Предчувствие катастрофы.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="nocturne"><div class="cover"><canvas width="320" height="180" data-stack="city" data-seed="3" data-tint="#697d9b" aria-hidden="true"></canvas><span class="cover-num">03</span></div><div class="card-info"><h3>Ноктюрн</h3><p>Ночная усадьба, призраки и скрытное перемещение.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="adagio"><div class="cover"><canvas width="320" height="180" data-stack="piano" data-seed="4" data-tint="#c2a18f" aria-hidden="true"></canvas><span class="cover-num">04</span></div><div class="card-info"><h3>Адажио</h3><p>Хрупкая красота, медленные чудовища, защита героини.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="scherzo"><div class="cover"><canvas width="320" height="180" data-stack="shards" data-seed="5" data-tint="#b47c96" aria-hidden="true"></canvas><span class="cover-num">05</span></div><div class="card-info"><h3>Скерцо</h3><p>Безумные существа, обман пространства и непредсказуемые ловушки.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="toccata"><div class="cover"><canvas width="320" height="180" data-stack="organ" data-seed="6" data-tint="#a58b65" aria-hidden="true"></canvas><span class="cover-num">06</span></div><div class="card-info"><h3>Токката</h3><p>Стремительные сражения и непрерывные атаки.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="sonata"><div class="cover"><canvas width="320" height="180" data-stack="duel" data-seed="7" data-tint="#ac7870" aria-hidden="true"></canvas><span class="cover-num">07</span></div><div class="card-info"><h3>Соната</h3><p>Противостояние красоты и уродства.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="fugue"><div class="cover"><canvas width="320" height="180" data-stack="arches" data-seed="8" data-tint="#8f96a9" aria-hidden="true"></canvas><span class="cover-num">08</span></div><div class="card-info"><h3>Фуга</h3><p>Несколько параллельных реальностей, взаимодействующих между собой.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="waltz"><div class="cover"><canvas width="320" height="180" data-stack="orb" data-seed="9" data-tint="#d1a18b" aria-hidden="true"></canvas><span class="cover-num">09</span></div><div class="card-info"><h3>Вальс</h3><p>Призрачный бал, где движения врагов подчинены ритму танца.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="fantasia"><div class="cover"><canvas width="320" height="180" data-stack="spiral" data-seed="10" data-tint="#9c83b8" aria-hidden="true"></canvas><span class="cover-num">10</span></div><div class="card-info"><h3>Фантазия</h3><p>Мир теряет физические законы. Архитектура оживает.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="rhapsody"><div class="cover"><canvas width="320" height="180" data-stack="waves" data-seed="11" data-tint="#80a39b" aria-hidden="true"></canvas><span class="cover-num">11</span></div><div class="card-info"><h3>Рапсодия</h3><p>Хаотическое переплетение миров, эмоций и механик.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="elegy"><div class="cover"><canvas width="320" height="180" data-stack="grave" data-seed="12" data-tint="#91a8aa" aria-hidden="true"></canvas><span class="cover-num">12</span></div><div class="card-info"><h3>Элегия</h3><p>Потеря, воспоминания и разрушение надежды.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="requiem"><div class="cover"><canvas width="320" height="180" data-stack="tomb" data-seed="13" data-tint="#b4a48c" aria-hidden="true"></canvas><span class="cover-num">13</span></div><div class="card-info"><h3>Реквием</h3><p>Сражение с воплощением смерти.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="symphony"><div class="cover"><canvas width="320" height="180" data-stack="crown" data-seed="14" data-tint="#cfab77" aria-hidden="true"></canvas><span class="cover-num">14</span></div><div class="card-info"><h3>Симфония</h3><p>Объединение музыкальных тем и игровых механик.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="coda"><div class="cover"><canvas width="320" height="180" data-stack="portal" data-seed="15" data-tint="#a886bc" aria-hidden="true"></canvas><span class="cover-num">15</span></div><div class="card-info"><h3>Кода</h3><p>Финал, написанный действиями самого игрока.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="cathedral-of-shadows"><div class="cover"><canvas width="320" height="180" data-stack="cathedral" data-seed="16" data-tint="#b89c79" aria-hidden="true"></canvas><span class="cover-num">16</span></div><div class="card-info"><h3>Собор живых теней</h3><p>Барочная фуга</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="city-without-dawn"><div class="cover"><canvas width="320" height="180" data-stack="city" data-seed="17" data-tint="#a57979" aria-hidden="true"></canvas><span class="cover-num">17</span></div><div class="card-info"><h3>Город без рассвета</h3><p>Джазовый ноктюрн</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="garden-of-lost-melodies"><div class="cover"><canvas width="320" height="180" data-stack="tree" data-seed="18" data-tint="#697d9b" aria-hidden="true"></canvas><span class="cover-num">18</span></div><div class="card-info"><h3>Сад погибших мелодий</h3><p>Блюзовая элегия</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="waltz-of-puppets"><div class="cover"><canvas width="320" height="180" data-stack="puppet" data-seed="19" data-tint="#c2a18f" aria-hidden="true"></canvas><span class="cover-num">19</span></div><div class="card-info"><h3>Вальс марионеток</h3><p>Готический вальс</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="machine-of-god"><div class="cover"><canvas width="320" height="180" data-stack="gear" data-seed="20" data-tint="#b47c96" aria-hidden="true"></canvas><span class="cover-num">20</span></div><div class="card-info"><h3>Машина Бога</h3><p>Индустриальная токката</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="forest-of-lost-voices"><div class="cover"><canvas width="320" height="180" data-stack="forest" data-seed="21" data-tint="#a58b65" aria-hidden="true"></canvas><span class="cover-num">21</span></div><div class="card-info"><h3>Лес забытых голосов</h3><p>Кельтская рапсодия</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="ocean-of-time"><div class="cover"><canvas width="320" height="180" data-stack="ocean" data-seed="22" data-tint="#ac7870" aria-hidden="true"></canvas><span class="cover-num">22</span></div><div class="card-info"><h3>Океан времени</h3><p>Эмбиентное адажио</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="mirror-abyss"><div class="cover"><canvas width="320" height="180" data-stack="mirror" data-seed="23" data-tint="#8f96a9" aria-hidden="true"></canvas><span class="cover-num">23</span></div><div class="card-info"><h3>Зеркальная бездна</h3><p>Атональное скерцо</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="war-of-giants"><div class="cover"><canvas width="320" height="180" data-stack="giants" data-seed="24" data-tint="#d1a18b" aria-hidden="true"></canvas><span class="cover-num">24</span></div><div class="card-info"><h3>Война великанов</h3><p>Симфонический метал</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="last-train"><div class="cover"><canvas width="320" height="180" data-stack="train" data-seed="25" data-tint="#9c83b8" aria-hidden="true"></canvas><span class="cover-num">25</span></div><div class="card-info"><h3>Последний поезд</h3><p>Блюзовая соната</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="dead-sun"><div class="cover"><canvas width="320" height="180" data-stack="eclipse" data-seed="26" data-tint="#80a39b" aria-hidden="true"></canvas><span class="cover-num">26</span></div><div class="card-info"><h3>Мёртвое солнце</h3><p>Дум-металлический реквием</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="palace-of-dreams"><div class="cover"><canvas width="320" height="180" data-stack="palace" data-seed="27" data-tint="#91a8aa" aria-hidden="true"></canvas><span class="cover-num">27</span></div><div class="card-info"><h3>Дворец сновидений</h3><p>Импрессионистическая фантазия</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="far-side-of-moon"><div class="cover"><canvas width="320" height="180" data-stack="moon" data-seed="28" data-tint="#b4a48c" aria-hidden="true"></canvas><span class="cover-num">28</span></div><div class="card-info"><h3>Обратная сторона Луны</h3><p>Космическая сюита</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="carnival-of-madness"><div class="cover"><canvas width="320" height="180" data-stack="mask" data-seed="29" data-tint="#cfab77" aria-hidden="true"></canvas><span class="cover-num">29</span></div><div class="card-info"><h3>Карнавал безумия</h3><p>Психоделическое каприччио</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="twelve-keys"><div class="cover"><canvas width="320" height="180" data-stack="keys" data-seed="30" data-tint="#a886bc" aria-hidden="true"></canvas><span class="cover-num">30</span></div><div class="card-info"><h3>Двенадцать ключей</h3><p>Додекафонический этюд</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="machine-uprising"><div class="cover"><canvas width="320" height="180" data-stack="robot" data-seed="31" data-tint="#b89c79" aria-hidden="true"></canvas><span class="cover-num">31</span></div><div class="card-info"><h3>Восстание машин</h3><p>Техно-марш</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="dance-of-death"><div class="cover"><canvas width="320" height="180" data-stack="duel" data-seed="32" data-tint="#a57979" aria-hidden="true"></canvas><span class="cover-num">32</span></div><div class="card-info"><h3>Танец смерти</h3><p>Блюзовое танго</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="cradle-of-monsters"><div class="cover"><canvas width="320" height="180" data-stack="monster" data-seed="33" data-tint="#697d9b" aria-hidden="true"></canvas><span class="cover-num">33</span></div><div class="card-info"><h3>Колыбель чудовищ</h3><p>Дарк-эмбиентная колыбельная</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="return-of-the-dead"><div class="cover"><canvas width="320" height="180" data-stack="graves" data-seed="34" data-tint="#c2a18f" aria-hidden="true"></canvas><span class="cover-num">34</span></div><div class="card-info"><h3>Возвращение мёртвых</h3><p>Григорианский реквием</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="end-of-eternity"><div class="cover"><canvas width="320" height="180" data-stack="vortex" data-seed="35" data-tint="#b47c96" aria-hidden="true"></canvas><span class="cover-num">35</span></div><div class="card-info"><h3>Конец вечности</h3><p>Авангардная симфония</p><span class="card-state">В разработке</span></div></article></div></section><section id="concept"><div class="kicker">I · Концепция</div><h2>Игра, которая может быть бесконечной, как сама музыка</h2><p class="lead">Что, если музыка перестанет быть сопровождением видеоигры и станет самой материей игрового мира?</p><div class="bodycopy"><p>SYMPHONIA — экспериментальный музыкальный хоррор, в котором музыка создаёт реальность, а действия игрока становятся частью постоянно развивающегося произведения.</p><p>Главная героиня — пианистка. Игрок — наёмник, которому поручено защищать её. Пока она играет, рождается красота. Но каждая новая мелодия пробуждает чудовищ.</p><p>Она создаёт прекрасное. Он вынужден уничтожать уродливое. Однако постепенно граница между ними исчезает.</p></div></section>
+<div class="wrap" id="article"><section id="chapter-catalog" aria-label="Каталог глав"><div class="kicker">SYMPHONIA · Все главы</div><div class="catalog-intro"><div><h2>Каталог миров</h2><p class="bodycopy">Каждая глава — отдельный мир одной симфонии. Нажмите на обложку опубликованной главы, чтобы сразу войти в игру.</p></div><span id="catalog-count" aria-live="polite">35 глав</span></div><div id="chapter-catalog-grid" class="catalog-grid"></div><noscript>Для просмотра обложек и каталога включите JavaScript.</noscript><script type="application/json" id="chapter-catalog-data">{
+  "schema": "symphonia-chapters/1",
+  "chapters": [
+    {
+      "id": "prelude",
+      "order": 1,
+      "title": "Прелюдия",
+      "music": "Прелюдия",
+      "description": "Пробуждение мира и первые загадочные события.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "overture",
+      "order": 2,
+      "title": "Увертюра",
+      "music": "Увертюра",
+      "description": "Начало путешествия. Предчувствие катастрофы.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "nocturne",
+      "order": 3,
+      "title": "Ноктюрн",
+      "music": "Ноктюрн",
+      "description": "Ночная усадьба, призраки и скрытное перемещение.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "adagio",
+      "order": 4,
+      "title": "Адажио",
+      "music": "Адажио",
+      "description": "Хрупкая красота, медленные чудовища, защита героини.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "scherzo",
+      "order": 5,
+      "title": "Скерцо",
+      "music": "Скерцо",
+      "description": "Безумные существа, обман пространства и непредсказуемые ловушки.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "toccata",
+      "order": 6,
+      "title": "Токката",
+      "music": "Токката",
+      "description": "Стремительные сражения и непрерывные атаки.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "sonata",
+      "order": 7,
+      "title": "Соната",
+      "music": "Соната",
+      "description": "Противостояние красоты и уродства.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "fugue",
+      "order": 8,
+      "title": "Фуга",
+      "music": "Фуга",
+      "description": "Несколько параллельных реальностей, взаимодействующих между собой.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "waltz",
+      "order": 9,
+      "title": "Вальс",
+      "music": "Вальс",
+      "description": "Призрачный бал, где движения врагов подчинены ритму танца.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "fantasia",
+      "order": 10,
+      "title": "Фантазия",
+      "music": "Фантазия",
+      "description": "Мир теряет физические законы. Архитектура оживает.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "rhapsody",
+      "order": 11,
+      "title": "Рапсодия",
+      "music": "Рапсодия",
+      "description": "Хаотическое переплетение миров, эмоций и механик.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "elegy",
+      "order": 12,
+      "title": "Элегия",
+      "music": "Элегия",
+      "description": "Потеря, воспоминания и разрушение надежды.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "requiem",
+      "order": 13,
+      "title": "Реквием",
+      "music": "Реквием",
+      "description": "Сражение с воплощением смерти.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "symphony",
+      "order": 14,
+      "title": "Симфония",
+      "music": "Симфония",
+      "description": "Объединение музыкальных тем и игровых механик.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "coda",
+      "order": 15,
+      "title": "Кода",
+      "music": "Кода",
+      "description": "Финал, написанный действиями самого игрока.",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "cathedral-shadows",
+      "order": 16,
+      "title": "Собор живых теней",
+      "music": "Барочная фуга",
+      "description": "Архитектура оживает, тени преследуют героиню; голоса фуги открывают тайну собора",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "city-no-dawn",
+      "order": 17,
+      "title": "Город без рассвета",
+      "music": "Джазовый ноктюрн",
+      "description": "Расследование исчезновений, скрытность, улики в контрмелодиях",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "garden-melodies",
+      "order": 18,
+      "title": "Сад погибших мелодий",
+      "music": "Блюзовая элегия",
+      "description": "Воскрешение воспоминаний погибших, выбор чью память спасти",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "puppet-waltz",
+      "order": 19,
+      "title": "Вальс марионеток",
+      "music": "Готический вальс",
+      "description": "Противники движутся в трёхдольном ритме, освобождение марионеток",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "machine-god",
+      "order": 20,
+      "title": "Машина Бога",
+      "music": "Индустриальная токката",
+      "description": "Битва внутри гигантского механизма, выбор его остановить или перенастроить",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "forest-voices",
+      "order": 21,
+      "title": "Лес забытых голосов",
+      "music": "Кельтская рапсодия",
+      "description": "Живые деревья, общение через музыку, обнаружение утраченного мотива",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "ocean-time",
+      "order": 22,
+      "title": "Океан времени",
+      "music": "Эмбиентное адажио",
+      "description": "Замедление и ускорение времени, спасение затопленных воспоминаний",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "mirror-abyss",
+      "order": 23,
+      "title": "Зеркальная бездна",
+      "music": "Атональное скерцо",
+      "description": "Параллельные реальности, двойники, выбор между версиями прошлого",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "giant-war",
+      "order": 24,
+      "title": "Война великанов",
+      "music": "Симфонический метал",
+      "description": "Сражения гигантских существ, судьба двух цивилизаций",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "last-train",
+      "order": 25,
+      "title": "Последний поезд",
+      "music": "Блюзовая соната",
+      "description": "Путешествие между исчезающими мирами, конфликт тем героини и защитника",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "dead-sun",
+      "order": 26,
+      "title": "Мёртвое солнце",
+      "music": "Дум-металлический реквием",
+      "description": "Постепенная гибель цивилизации, спасение её последней мелодии",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "dream-palace",
+      "order": 27,
+      "title": "Дворец сновидений",
+      "music": "Импрессионистическая фантазия",
+      "description": "Материализация снов, раскрытие воспоминаний пианистки",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "moon-dark",
+      "order": 28,
+      "title": "Обратная сторона Луны",
+      "music": "Космическая сюита",
+      "description": "Изменение гравитации, путешествие между музыкальными измерениями",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "carnival",
+      "order": 29,
+      "title": "Карнавал безумия",
+      "music": "Психоделическое каприччио",
+      "description": "Трансформация пространства и существ, поиск реального героя",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "twelve-keys",
+      "order": 30,
+      "title": "Двенадцать ключей",
+      "music": "Додекафонический этюд",
+      "description": "Музыкальные загадки, управление материей через последовательность 12 тонов",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "machine-uprising",
+      "order": 31,
+      "title": "Восстание машин",
+      "music": "Техно-марш",
+      "description": "Управление механическими существами, освобождение или подчинение",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "death-dance",
+      "order": 32,
+      "title": "Танец смерти",
+      "music": "Блюзовое танго",
+      "description": "Ритмические дуэли, противник запоминает стиль игрока",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "monster-cradle",
+      "order": 33,
+      "title": "Колыбель чудовищ",
+      "music": "Дарк-эмбиентная колыбельная",
+      "description": "Рождение и эволюция монстров из мелодий, возможность их спасти",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "return-dead",
+      "order": 34,
+      "title": "Возвращение мёртвых",
+      "music": "Григорианский реквием",
+      "description": "Возвращение персонажей и последствий решений предыдущих глав",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    },
+    {
+      "id": "end-eternity",
+      "order": 35,
+      "title": "Конец вечности",
+      "music": "Авангардная симфония",
+      "description": "Слияние миров, разрешение конфликтов и начало следующего сюжетного цикла",
+      "status": "planned",
+      "url": null,
+      "cover": null
+    }
+  ]
+}
+</script></section><section id="catalog"><div class="kicker">Партитура миров</div><h2>Все главы SYMPHONIA</h2><p class="bodycopy">Единый каталог музыкальных миров. Открывайте опубликованные главы напрямую по их обложкам. Неопубликованные главы обозначены отдельно.</p><div class="catalog-grid"><article class="catalog-card" data-id="prelude"><div class="cover"><canvas width="320" height="180" data-stack="gate" data-seed="1" data-tint="#b89c79" aria-hidden="true"></canvas><span class="cover-num">01</span></div><div class="card-info"><h3>Прелюдия</h3><p>Пробуждение мира и первые загадочные события.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="overture"><div class="cover"><canvas width="320" height="180" data-stack="mountain" data-seed="2" data-tint="#a57979" aria-hidden="true"></canvas><span class="cover-num">02</span></div><div class="card-info"><h3>Увертюра</h3><p>Начало путешествия. Предчувствие катастрофы.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="nocturne"><div class="cover"><canvas width="320" height="180" data-stack="city" data-seed="3" data-tint="#697d9b" aria-hidden="true"></canvas><span class="cover-num">03</span></div><div class="card-info"><h3>Ноктюрн</h3><p>Ночная усадьба, призраки и скрытное перемещение.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="adagio"><div class="cover"><canvas width="320" height="180" data-stack="piano" data-seed="4" data-tint="#c2a18f" aria-hidden="true"></canvas><span class="cover-num">04</span></div><div class="card-info"><h3>Адажио</h3><p>Хрупкая красота, медленные чудовища, защита героини.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="scherzo"><div class="cover"><canvas width="320" height="180" data-stack="shards" data-seed="5" data-tint="#b47c96" aria-hidden="true"></canvas><span class="cover-num">05</span></div><div class="card-info"><h3>Скерцо</h3><p>Безумные существа, обман пространства и непредсказуемые ловушки.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="toccata"><div class="cover"><canvas width="320" height="180" data-stack="organ" data-seed="6" data-tint="#a58b65" aria-hidden="true"></canvas><span class="cover-num">06</span></div><div class="card-info"><h3>Токката</h3><p>Стремительные сражения и непрерывные атаки.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="sonata"><div class="cover"><canvas width="320" height="180" data-stack="duel" data-seed="7" data-tint="#ac7870" aria-hidden="true"></canvas><span class="cover-num">07</span></div><div class="card-info"><h3>Соната</h3><p>Противостояние красоты и уродства.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="fugue"><div class="cover"><canvas width="320" height="180" data-stack="arches" data-seed="8" data-tint="#8f96a9" aria-hidden="true"></canvas><span class="cover-num">08</span></div><div class="card-info"><h3>Фуга</h3><p>Несколько параллельных реальностей, взаимодействующих между собой.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="waltz"><div class="cover"><canvas width="320" height="180" data-stack="orb" data-seed="9" data-tint="#d1a18b" aria-hidden="true"></canvas><span class="cover-num">09</span></div><div class="card-info"><h3>Вальс</h3><p>Призрачный бал, где движения врагов подчинены ритму танца.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="fantasia"><div class="cover"><canvas width="320" height="180" data-stack="spiral" data-seed="10" data-tint="#9c83b8" aria-hidden="true"></canvas><span class="cover-num">10</span></div><div class="card-info"><h3>Фантазия</h3><p>Мир теряет физические законы. Архитектура оживает.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="rhapsody"><div class="cover"><canvas width="320" height="180" data-stack="waves" data-seed="11" data-tint="#80a39b" aria-hidden="true"></canvas><span class="cover-num">11</span></div><div class="card-info"><h3>Рапсодия</h3><p>Хаотическое переплетение миров, эмоций и механик.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="elegy"><div class="cover"><canvas width="320" height="180" data-stack="grave" data-seed="12" data-tint="#91a8aa" aria-hidden="true"></canvas><span class="cover-num">12</span></div><div class="card-info"><h3>Элегия</h3><p>Потеря, воспоминания и разрушение надежды.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="requiem"><div class="cover"><canvas width="320" height="180" data-stack="tomb" data-seed="13" data-tint="#b4a48c" aria-hidden="true"></canvas><span class="cover-num">13</span></div><div class="card-info"><h3>Реквием</h3><p>Сражение с воплощением смерти.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="symphony"><div class="cover"><canvas width="320" height="180" data-stack="crown" data-seed="14" data-tint="#cfab77" aria-hidden="true"></canvas><span class="cover-num">14</span></div><div class="card-info"><h3>Симфония</h3><p>Объединение музыкальных тем и игровых механик.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="coda"><div class="cover"><canvas width="320" height="180" data-stack="portal" data-seed="15" data-tint="#a886bc" aria-hidden="true"></canvas><span class="cover-num">15</span></div><div class="card-info"><h3>Кода</h3><p>Финал, написанный действиями самого игрока.</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="cathedral-of-shadows"><div class="cover"><canvas width="320" height="180" data-stack="cathedral" data-seed="16" data-tint="#b89c79" aria-hidden="true"></canvas><span class="cover-num">16</span></div><div class="card-info"><h3>Собор живых теней</h3><p>Барочная фуга</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="city-without-dawn"><div class="cover"><canvas width="320" height="180" data-stack="city" data-seed="17" data-tint="#a57979" aria-hidden="true"></canvas><span class="cover-num">17</span></div><div class="card-info"><h3>Город без рассвета</h3><p>Джазовый ноктюрн</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="garden-of-lost-melodies"><div class="cover"><canvas width="320" height="180" data-stack="tree" data-seed="18" data-tint="#697d9b" aria-hidden="true"></canvas><span class="cover-num">18</span></div><div class="card-info"><h3>Сад погибших мелодий</h3><p>Блюзовая элегия</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="waltz-of-puppets"><div class="cover"><canvas width="320" height="180" data-stack="puppet" data-seed="19" data-tint="#c2a18f" aria-hidden="true"></canvas><span class="cover-num">19</span></div><div class="card-info"><h3>Вальс марионеток</h3><p>Готический вальс</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="machine-of-god"><div class="cover"><canvas width="320" height="180" data-stack="gear" data-seed="20" data-tint="#b47c96" aria-hidden="true"></canvas><span class="cover-num">20</span></div><div class="card-info"><h3>Машина Бога</h3><p>Индустриальная токката</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="forest-of-lost-voices"><div class="cover"><canvas width="320" height="180" data-stack="forest" data-seed="21" data-tint="#a58b65" aria-hidden="true"></canvas><span class="cover-num">21</span></div><div class="card-info"><h3>Лес забытых голосов</h3><p>Кельтская рапсодия</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="ocean-of-time"><div class="cover"><canvas width="320" height="180" data-stack="ocean" data-seed="22" data-tint="#ac7870" aria-hidden="true"></canvas><span class="cover-num">22</span></div><div class="card-info"><h3>Океан времени</h3><p>Эмбиентное адажио</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="mirror-abyss"><div class="cover"><canvas width="320" height="180" data-stack="mirror" data-seed="23" data-tint="#8f96a9" aria-hidden="true"></canvas><span class="cover-num">23</span></div><div class="card-info"><h3>Зеркальная бездна</h3><p>Атональное скерцо</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="war-of-giants"><div class="cover"><canvas width="320" height="180" data-stack="giants" data-seed="24" data-tint="#d1a18b" aria-hidden="true"></canvas><span class="cover-num">24</span></div><div class="card-info"><h3>Война великанов</h3><p>Симфонический метал</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="last-train"><div class="cover"><canvas width="320" height="180" data-stack="train" data-seed="25" data-tint="#9c83b8" aria-hidden="true"></canvas><span class="cover-num">25</span></div><div class="card-info"><h3>Последний поезд</h3><p>Блюзовая соната</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="dead-sun"><div class="cover"><canvas width="320" height="180" data-stack="eclipse" data-seed="26" data-tint="#80a39b" aria-hidden="true"></canvas><span class="cover-num">26</span></div><div class="card-info"><h3>Мёртвое солнце</h3><p>Дум-металлический реквием</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="palace-of-dreams"><div class="cover"><canvas width="320" height="180" data-stack="palace" data-seed="27" data-tint="#91a8aa" aria-hidden="true"></canvas><span class="cover-num">27</span></div><div class="card-info"><h3>Дворец сновидений</h3><p>Импрессионистическая фантазия</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="far-side-of-moon"><div class="cover"><canvas width="320" height="180" data-stack="moon" data-seed="28" data-tint="#b4a48c" aria-hidden="true"></canvas><span class="cover-num">28</span></div><div class="card-info"><h3>Обратная сторона Луны</h3><p>Космическая сюита</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="carnival-of-madness"><div class="cover"><canvas width="320" height="180" data-stack="mask" data-seed="29" data-tint="#cfab77" aria-hidden="true"></canvas><span class="cover-num">29</span></div><div class="card-info"><h3>Карнавал безумия</h3><p>Психоделическое каприччио</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="twelve-keys"><div class="cover"><canvas width="320" height="180" data-stack="keys" data-seed="30" data-tint="#a886bc" aria-hidden="true"></canvas><span class="cover-num">30</span></div><div class="card-info"><h3>Двенадцать ключей</h3><p>Додекафонический этюд</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="machine-uprising"><div class="cover"><canvas width="320" height="180" data-stack="robot" data-seed="31" data-tint="#b89c79" aria-hidden="true"></canvas><span class="cover-num">31</span></div><div class="card-info"><h3>Восстание машин</h3><p>Техно-марш</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="dance-of-death"><div class="cover"><canvas width="320" height="180" data-stack="duel" data-seed="32" data-tint="#a57979" aria-hidden="true"></canvas><span class="cover-num">32</span></div><div class="card-info"><h3>Танец смерти</h3><p>Блюзовое танго</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="cradle-of-monsters"><div class="cover"><canvas width="320" height="180" data-stack="monster" data-seed="33" data-tint="#697d9b" aria-hidden="true"></canvas><span class="cover-num">33</span></div><div class="card-info"><h3>Колыбель чудовищ</h3><p>Дарк-эмбиентная колыбельная</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="return-of-the-dead"><div class="cover"><canvas width="320" height="180" data-stack="graves" data-seed="34" data-tint="#c2a18f" aria-hidden="true"></canvas><span class="cover-num">34</span></div><div class="card-info"><h3>Возвращение мёртвых</h3><p>Григорианский реквием</p><span class="card-state">В разработке</span></div></article><article class="catalog-card" data-id="end-of-eternity"><div class="cover"><canvas width="320" height="180" data-stack="vortex" data-seed="35" data-tint="#b47c96" aria-hidden="true"></canvas><span class="cover-num">35</span></div><div class="card-info"><h3>Конец вечности</h3><p>Авангардная симфония</p><span class="card-state">В разработке</span></div></article></div></section><section id="concept"><div class="kicker">I · Концепция</div><h2>Игра, которая может быть бесконечной, как сама музыка</h2><p class="lead">Что, если музыка перестанет быть сопровождением видеоигры и станет самой материей игрового мира?</p><div class="bodycopy"><p>SYMPHONIA — экспериментальный музыкальный хоррор, в котором музыка создаёт реальность, а действия игрока становятся частью постоянно развивающегося произведения.</p><p>Главная героиня — пианистка. Игрок — наёмник, которому поручено защищать её. Пока она играет, рождается красота. Но каждая новая мелодия пробуждает чудовищ.</p><p>Она создаёт прекрасное. Он вынужден уничтожать уродливое. Однако постепенно граница между ними исчезает.</p></div></section>
 <section><div class="kicker">II · Бесконечное развитие</div><h2>Бесконечное произведение</h2><div class="bodycopy"><p>В основе SYMPHONIA лежит идея бесконечного развития. Пока существует музыка, могут рождаться новые миры, истории, персонажи и игровые механики.</p><p>От классической музыки до джаза, от барокко до авангарда, от народных мотивов до экспериментальной электроники — каждое музыкальное направление может стать отдельной вселенной со своими законами, архитектурой и драматургией.</p></div><div class="features"><div class="feature"><span class="num">01 / МИР</span><h3>Музыка как движок</h3><p>Архитектура, свет, время, физика пространства и поведение чудовищ зависят от музыки.</p></div><div class="feature"><span class="num">02 / ИГРОК</span><h3>Бой как композиция</h3><p>Удары создают ритм, победы меняют гармонию, ошибки рождают диссонансы.</p></div><div class="feature"><span class="num">03 / ВЫБОР</span><h3>Мораль, которую слышно</h3><p>Чем жестче защитник, тем страшнее произведение и тем уродливее мир.</p></div></div></section>
 <section id="chapters"><div class="kicker">III · Партитура миров</div><h2>Пятнадцать первых глав</h2><p class="bodycopy">Каждая музыкальная форма становится собственной историей и набором игровых механик. Это начало партитуры, а не предел её развития.</p><div class="chapters">
 <div class="chapter"><span class="num">01</span><h3>Прелюдия</h3><p>Пробуждение мира и первые загадочные события.</p></div><div class="chapter"><span class="num">02</span><h3>Увертюра</h3><p>Начало путешествия. Предчувствие катастрофы.</p></div><div class="chapter"><span class="num">03</span><h3>Ноктюрн</h3><p>Ночная усадьба, призраки и скрытное перемещение.</p></div><div class="chapter"><span class="num">04</span><h3>Адажио</h3><p>Хрупкая красота, медленные чудовища, защита героини.</p></div><div class="chapter"><span class="num">05</span><h3>Скерцо</h3><p>Безумные существа, обман пространства и непредсказуемые ловушки.</p></div><div class="chapter"><span class="num">06</span><h3>Токката</h3><p>Стремительные сражения и непрерывные атаки.</p></div><div class="chapter"><span class="num">07</span><h3>Соната</h3><p>Противостояние красоты и уродства.</p></div><div class="chapter"><span class="num">08</span><h3>Фуга</h3><p>Несколько параллельных реальностей, взаимодействующих между собой.</p></div><div class="chapter"><span class="num">09</span><h3>Вальс</h3><p>Призрачный бал, где движения врагов подчинены ритму танца.</p></div><div class="chapter"><span class="num">10</span><h3>Фантазия</h3><p>Мир теряет физические законы. Архитектура оживает.</p></div><div class="chapter"><span class="num">11</span><h3>Рапсодия</h3><p>Хаотическое переплетение миров, эмоций и механик.</p></div><div class="chapter"><span class="num">12</span><h3>Элегия</h3><p>Потеря, воспоминания и разрушение надежды.</p></div><div class="chapter"><span class="num">13</span><h3>Реквием</h3><p>Сражение с воплощением смерти.</p></div><div class="chapter"><span class="num">14</span><h3>Симфония</h3><p>Объединение музыкальных тем и игровых механик.</p></div><div class="chapter"><span class="num">15</span><h3>Кода</h3><p>Финал, написанный действиями самого игрока.</p></div></div></section>
@@ -50,4 +406,4 @@ function register(c){if(observer)observer.observe(c);else draw(build(c),0)}grid.
 const safe=(p,pattern)=>typeof p==="string"&&pattern.test(p)&&!p.includes("..");
 fetch("game/chapters/catalog.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(data=>{if(!data||!Array.isArray(data.chapters))return;for(const ch of data.chapters){if(ch.status!=="published"||!safe(ch.id,/^[a-z0-9-]+$/)||!safe(ch.url,/^game\/chapters\/[a-z0-9-]+\/(?:index\.html)?$/)||ch.url.split("/")[2]!==ch.id||!safe(ch.cover,/^game\/chapters\/[a-z0-9-]+\/[a-zA-Z0-9_./-]+\.(?:webp|gif|png|jpg|jpeg|apng)$/)||ch.cover.split("/")[2]!==ch.id)continue;let card=grid.querySelector('[data-id="'+ch.id+'"]');if(!card){card=document.createElement("article");card.className="catalog-card";card.dataset.id=ch.id;card.innerHTML='<div class="cover"></div><div class="card-info"><h3></h3><p></p><span class="card-state"></span></div>';grid.prepend(card)}const title=card.querySelector("h3"),state=card.querySelector(".card-state"),cover=card.querySelector(".cover");title.textContent=ch.title||title.textContent;card.querySelector("p").textContent=ch.music||card.querySelector("p").textContent;const img=new Image();img.loading="lazy";img.alt="";img.src=ch.cover;img.onload=()=>{const canvas=cover.querySelector("canvas");if(canvas){observer?.unobserve(canvas);visible.delete(canvas);canvas.remove()}cover.prepend(img)};state.textContent="";const link=document.createElement("a");link.className="play-link";link.href=ch.url;link.textContent="Играть →";link.setAttribute("aria-label","Играть: "+title.textContent);state.append(link);grid.prepend(card)}}).catch(()=>{});
 })();
-</script></body></html>
+</script><script defer src="./chapter-catalog.js"></script></body></html>

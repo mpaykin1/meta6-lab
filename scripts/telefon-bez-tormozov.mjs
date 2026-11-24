@@ -47,7 +47,7 @@ void pathToFileURL;
 
 const PROBE = () => {
   const S = window.__tbt = { frames: [], cur: null, lights: { dir: 0, point: 0, spot: 0, hemi: 0, rect: 0 }, shadow: false, armed: false, lamp: {} };
-  const fresh = () => ({ draws: 0, tris: 0, buf: 0, tex: 0, cpu: 0, seg: [0], fbBound: false });
+  const fresh = () => ({ c2d: 0, js: 0, draws: 0, tris: 0, buf: 0, tex: 0, cpu: 0, seg: [0], fbBound: false });
   S.cur = fresh();
   const tick = () => { if (S.armed) { S.cur.off = Object.values(S.lamp).filter(Boolean).length; S.frames.push(S.cur); } S.cur = fresh(); requestAnimationFrame(tick); };
   requestAnimationFrame(tick);
@@ -90,7 +90,11 @@ const PROBE = () => {
     });
   }
   const C2 = window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype;
-  if (C2) { wrap(C2, 'getImageData', () => { S.cur.cpu++; }); wrap(C2, 'putImageData', () => { S.cur.cpu++; }); }
+  if (C2) { wrap(C2, 'getImageData', () => { S.cur.cpu++; }); wrap(C2, 'putImageData', () => { S.cur.cpu++; });
+    for (const n of ['drawImage', 'fill', 'stroke', 'fillRect', 'strokeRect', 'fillText', 'strokeText', 'clearRect']) wrap(C2, n, () => { S.cur.c2d++; }); }
+  // Время работы игры на процессоре за кадр: сколько длятся её обработчики кадра.
+  const raf = window.requestAnimationFrame.bind(window);
+  window.requestAnimationFrame = cb => raf(t => { const a = performance.now(); try { cb(t); } finally { S.cur.js += performance.now() - a; } });
 };
 
 const browser = await chromium.launch({ ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {}), args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--autoplay-policy=no-user-gesture-required'] });
@@ -133,6 +137,8 @@ const m = {
   bufferKB: Math.round(med('buf') / 1024),
   textureKB: Math.round(med('tex') / 1024),
   cpuPixelOps: +avg('cpu').toFixed(2),
+  canvas2d: Math.round(med('c2d')),
+  jsMs: +med('js').toFixed(1),
 };
 m.shadow = main.shadow;
 const names = {
@@ -149,6 +155,7 @@ for (const k of Object.keys(LIMITS)) {
   console.log(`${!over ? 'OK  ' : oldDebt ? 'OLD ' : 'FAIL'} ${names[k]}: ${m[k]} (лимит ${LIMITS[k]}${base ? ', было ' + base[k] : ''})${oldDebt ? ' — старый долг, не хуже прежнего; починить при ближайшей работе над игрой' : ''}`);
 }
 if (main.shadow && !(base && base.shadow)) { bad++; console.log('FAIL Тени в реальном времени включены (USE_SHADOWMAP) — заменить запечёнными пятнами-тенями'); }
+console.log(`для сведения: процессор игры ${m.jsMs} мс за кадр (на телефоне примерно в 4 раза дольше), рисований на 2D-холсте ${m.canvas2d} за кадр`);
 console.log(`детально свет: направленных ${L.dir}, точечных ${L.point}, прожекторов ${L.spot}, неба ${L.hemi}, площадных ${L.rect}`);
 if (errors.length) console.log('ошибки страницы:\n' + errors.slice(0, 5).join('\n'));
 if (jsonOut) fs.writeFileSync(jsonOut, JSON.stringify({ perFrame: fr.map(x => ({ d: x.draws, b: Math.round(x.buf / 1024), t: Math.round(x.tex / 1024) })), target: arg, metrics: m, limits: LIMITS, shadow: main.shadow, lights: L, frames: fr.length, errors }, null, 2));

@@ -1,0 +1,20 @@
+// Упрощение модели героя Wild train: те же вершины (маски, цвета, скелет не меняются), меньше треугольников.
+import fs from 'node:fs'; import zlib from 'node:zlib'; import { MeshoptSimplifier as S } from 'meshoptimizer';
+const [,, file, ratio = '0.6', errMax = '0.004'] = process.argv;
+let html = fs.readFileSync(file, 'utf8');
+const re = /(<script id="mdl" type="application\/octet-stream">)([\s\S]*?)(<\/script>)/; const m = html.match(re);
+const buf = zlib.gunzipSync(Buffer.from(m[2].trim(), 'base64'));
+const dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
+const nv = dv.getUint32(0, true), ni = dv.getUint32(4, true);
+let off = 32 + nv * 9; off += (4 - off % 4) % 4;
+const q = new Uint16Array(buf.buffer.slice(buf.byteOffset + 32, buf.byteOffset + 32 + nv * 6));
+const idx = nv < 65536 ? new Uint16Array(buf.buffer.slice(buf.byteOffset + off, buf.byteOffset + off + ni * 2)) : new Uint32Array(buf.buffer.slice(buf.byteOffset + off, buf.byteOffset + off + ni * 4));
+const pos = new Float32Array(nv * 3); for (let i = 0; i < nv * 3; i++) pos[i] = q[i] / 65535;
+await S.ready;
+const [out, err] = S.simplify(new Uint32Array(idx), pos, 3, Math.floor(ni * +ratio / 3) * 3, +errMax, ['LockBorder']);
+console.log('tris', ni / 3, '->', out.length / 3, 'error', err.toFixed(5));
+const newIdx = nv < 65536 ? Uint16Array.from(out) : Uint32Array.from(out);
+const head = Buffer.from(buf.subarray(0, off)); head.writeUInt32LE(out.length, 4);
+const nb = Buffer.concat([head, Buffer.from(newIdx.buffer)]);
+const b64 = zlib.gzipSync(nb, { level: 9 }).toString('base64');
+html = html.replace(re, (_, a, __, c) => a + b64 + c); fs.writeFileSync(file, html);

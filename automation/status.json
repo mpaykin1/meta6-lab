@@ -1,16 +1,26 @@
 {
-  "generated_at": "2026-11-24T05:52:30.454Z",
+  "generated_at": "2026-11-24T09:02:03.476Z",
   "sha": {
-    "lab": "7578af72dc475ef8d0965e84315a405d8d7b8d79",
+    "lab": "c2d4d176479c02f89b99c2e43ad58a216312eb42",
     "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45336251699",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45361149628",
   "review": {
     "protected": [
+      {
+        "number": 436,
+        "sha": "c2d4d176479c02f89b99c2e43ad58a216312eb42",
+        "paths": [
+          ".github/workflows/b64-decode.yml",
+          ".github/workflows/grange-p22-audit.yml",
+          ".github/workflows/grange-publication-gate.yml",
+          ".github/workflows/stackgen.yml"
+        ]
+      },
       {
         "number": 434,
         "sha": "6fb24e06dbe34f5e3ee77e41e55686c9bbd73273",
@@ -394,8 +404,13 @@
     ],
     "redLab": [
       {
+        "workflow": "LAB Pages",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45360333181",
+        "step": "Run actions/deploy-pages@v4"
+      },
+      {
         "workflow": "KONTUR main",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45335938891",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45336251637",
         "step": "Every permanent mutation on main"
       }
     ],
@@ -542,7 +557,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45332755094"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45336251532"
       },
       "P1": {
         "value": "не подтверждено",
@@ -553,10 +568,15 @@
   },
   "pr": {
     "open": 9,
-    "conflicts": "нет данных",
-    "merged": 87,
+    "conflicts": 5,
+    "merged": 88,
     "closed": 191,
     "mergedItems": [
+      {
+        "number": 436,
+        "title": "Sprite Stacking World: единая игровая песочница пяти автозад",
+        "sha": "c2d4d176479c02f89b99c2e43ad58a216312eb42"
+      },
       {
         "number": 434,
         "title": "ТЕЛЕФОН БЕЗ ТОРМОЗОВ: лимиты нагрузки телефона + бот-замерщи",
@@ -995,6 +1015,16 @@
     ],
     "protectedItems": [
       {
+        "number": 436,
+        "sha": "c2d4d176479c02f89b99c2e43ad58a216312eb42",
+        "paths": [
+          ".github/workflows/b64-decode.yml",
+          ".github/workflows/grange-p22-audit.yml",
+          ".github/workflows/grange-publication-gate.yml",
+          ".github/workflows/stackgen.yml"
+        ]
+      },
+      {
         "number": 434,
         "sha": "6fb24e06dbe34f5e3ee77e41e55686c9bbd73273",
         "paths": [
@@ -1378,7 +1408,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3474,
+      "count": 3478,
       "folders": "нет данных"
     },
     "mg": {

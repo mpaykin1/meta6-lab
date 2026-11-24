@@ -1,0 +1,71 @@
+name: Grange publication gate
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'asset-packs/incoming/bullet-car-gif/grange-gate/**'
+      - '.github/workflows/grange-publication-gate.yml'
+  workflow_dispatch:
+    inputs:
+      candidate_sha:
+        description: Immutable staging commit SHA
+        required: true
+        type: string
+      manifest_path:
+        description: Manifest under asset-packs/incoming/bullet-car-gif/staging/
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: trusted
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node trusted/asset-packs/incoming/bullet-car-gif/grange-gate/smoke.mjs
+      - if: github.event_name == 'workflow_dispatch'
+        name: Validate request
+        env:
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+          MANIFEST_PATH: ${{ inputs.manifest_path }}
+        run: |
+          [[ "$CANDIDATE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$MANIFEST_PATH" =~ ^asset-packs/incoming/bullet-car-gif/staging/[A-Za-z0-9_/-]+/manifest\.json$ ]]
+          [[ "$MANIFEST_PATH" != *..* ]]
+      - if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.candidate_sha }}
+          path: candidate-data
+          persist-credentials: false
+      - if: github.event_name == 'workflow_dispatch'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - if: github.event_name == 'workflow_dispatch'
+        run: |
+          python -m pip install Pillow==11.3.0 numpy==2.2.6 opencv-python-headless==4.12.0.88
+          command -v ffprobe || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - if: github.event_name == 'workflow_dispatch'
+        name: Verify staged bytes
+        env:
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+          MANIFEST_PATH: ${{ inputs.manifest_path }}
+        run: |
+          set -o pipefail
+          python trusted/asset-packs/incoming/bullet-car-gif/grange-gate/hosted_manifest.py "$PWD/candidate-data" "$MANIFEST_PATH" "$CANDIDATE_SHA" "$RUNNER_TEMP/grange-manifest.json"
+          python trusted/asset-packs/incoming/bullet-car-gif/grange-gate/synergy_gate.py "$RUNNER_TEMP/grange-manifest.json" --publication | tee "$RUNNER_TEMP/grange-result.json"
+      - if: always() && github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: grange-result-${{ inputs.candidate_sha }}
+          path: ${{ runner.temp }}/grange-result.json
+          if-no-files-found: warn

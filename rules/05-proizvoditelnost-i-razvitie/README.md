@@ -2,6 +2,7 @@
 
 Сюда относится: FPS, экономия, ежедневное развитие, качество моделей.
 
+- [TELEFON_BEZ_TORMOZOV.md](TELEFON_BEZ_TORMOZOV.md) — лимиты нагрузки на видеокарту телефона и бот-замерщик
 - [VIDIMO_I_EKONOMNO.md](VIDIMO_I_EKONOMNO.md) — что не видно — не считается; каждое последствие видно
 - [EVOLVE_KRATKO.md](EVOLVE_KRATKO.md) — ежедневное саморазвитие графики и технологий (полный текст — evolve.md)
 - [evolve.md](evolve.md) — EVOLVE — полный контракт саморазвития

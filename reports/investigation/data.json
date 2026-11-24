@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-23T12:39:12.508Z",
+  "generated_at": "2026-11-24T02:13:24.340Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -67,13 +67,13 @@
       "status": "ошибка",
       "original_status": "взято",
       "pr": 405,
-      "pr_state": "open",
-      "check": "failure",
-      "check_url": "https://github.com/mpaykin1/meta6-lab/actions/runs/44757328261/job/136360384670",
+      "pr_state": "closed",
+      "check": "unknown",
+      "check_url": null,
       "url": "https://github.com/mpaykin1/meta6-lab/pull/405",
       "taken_at": "2026-11-18 07:09 UTC",
       "last_commit_at": "—",
-      "remaining": "Исправить красные проверки: guard"
+      "remaining": "PR закрыт без слияния: согласовать решение"
     },
     {
       "id": 4,
@@ -2375,7 +2375,7 @@
       "title": "Готовность META GAMES — отчёт",
       "state": "open",
       "sha": null,
-      "updated_at": "2026-11-23T01:46:54Z"
+      "updated_at": "2026-11-23T12:52:18Z"
     },
     {
       "label": "automation-watchdog",
@@ -3118,6 +3118,13 @@
       "problem": "Сторожа (gh-list.mjs) при повторном или пустом курсоре GraphQL 20 раз обрабатывали одни и те же PR и только потом падали «truncated» (PR #423, ядро охраны — только Claude)",
       "detection": "Claude перенёс #423 в main 18.11",
       "trap": "`scripts/storozha/mutate-gh-list.mjs` (4 мутанта, старый код ловится: calls=20)"
+    },
+    {
+      "id": 2026112301,
+      "date": "23.11.2026",
+      "problem": "Страница Bullet Car была в main, но Pages оставалась 404: из-за общей workflow concurrency группы свежий main push DEPLOY был отменён, пока предыдущая сборка выполняла долгий check-links; адрес отсутствовал в LINKS.txt",
+      "detection": "404 на публичной странице и отменённый запуск LAB Pages #45221300862",
+      "trap": "`scripts/lab/mutate-link-ok.sh` — HTTP 200 для адресов из LINKS; `scripts/lab/mutate-workflow-concurrency.mjs` — ловушка на потерю запусков из-за concurrency"
     }
   ],
   "warnings": [

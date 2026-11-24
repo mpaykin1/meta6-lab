@@ -52,6 +52,9 @@ done
 # drop cached previews of deleted branches
 if [[ -n "${PREVIEW_CACHE:-}" && -d "$PREVIEW_CACHE" ]]; then for d in "$PREVIEW_CACHE"/*/; do n="$(basename "$d")"; grep -qx "$n" "$OUT/.lab-previews" || rm -rf "$d"; done; fi
 du -sh "$OUT"
+# Pages refuses oversized artifacts (24.11.2026: 1.95 GB -> every deploy failed). Fail loudly instead.
+site_mb=$(du -sm "$OUT" | cut -f1)
+if (( site_mb > ${SITE_MAX_MB:-950} )); then echo "SITE_TOO_BIG ${site_mb} MB > ${SITE_MAX_MB:-950} MB: lower PREVIEW_MAX_AGE_DAYS" >&2; exit 1; fi
 
 # Legacy root URLs sometimes point to games that exist only in one lab preview.
 # Only when there is one unambiguous existing preview, publish a real redirect

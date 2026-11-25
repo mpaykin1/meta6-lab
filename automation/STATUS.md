@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-25T06:45:29.965Z | МГЛ: 3d70ace44874f9d31b51f0e08421a94a494475d7 | МГ: 38bdad1ffc63c434bce6878774a26409a34cd55b | https://github.com/mpaykin1/meta6-lab/actions/runs/45562806456
+UTC: 2026-11-25T06:58:57.044Z | МГЛ: 45296b7df4331bd734cefcfb5e72bf17fad15b69 | МГ: 38bdad1ffc63c434bce6878774a26409a34cd55b | https://github.com/mpaykin1/meta6-lab/actions/runs/45564508068
 ## ПРОВЕРИТЬ CLAUDE
 - PR #445 a5629442fb3648c0691339259e678acc5cda8711: .github/workflows/etalon-bots.yml
 - PR #441 46c588a747147ba69d3ea4a32afab17b579d8b33: .github/workflows/lab-pages.yml, scripts/lab/mutate-pages-retry.mjs
@@ -19,7 +19,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/45560680389)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/45562806578)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -33,12 +33,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 8 | конфликт: нет данных | слито: 98 | закрыто: 194
+открыто: 8 | конфликт: нет данных | слито: 99 | закрыто: 194
+#449 Z23: карточка GPT — глава 2 «Увертюра» + связь с «Адажио» | 45296b7df4331bd734cefcfb5e72bf17fad15b69
 #448 Увертюра (Лучник): быстрая загрузка | 3d70ace44874f9d31b51f0e08421a94a494475d7
-#447 SYMPHONIA: глава 2 «Увертюра» — Лучник в тумане (без рекламы | cc2fa569e967aff79ffbe511b7503299cda77582
-ещё 96: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 97: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3509 коммитов | нет данных
+МГЛ: 3511 коммитов | нет данных
 МГ: 55 коммитов | .github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

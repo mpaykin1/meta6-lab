@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-25T06:45:29.965Z",
+  "generated_at": "2026-11-25T06:58:57.044Z",
   "sha": {
-    "lab": "3d70ace44874f9d31b51f0e08421a94a494475d7",
+    "lab": "45296b7df4331bd734cefcfb5e72bf17fad15b69",
     "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45562806456",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45564508068",
   "review": {
     "protected": [
       {
@@ -582,7 +582,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45560680389"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45562806578"
       },
       "P1": {
         "value": "не подтверждено",
@@ -594,9 +594,14 @@
   "pr": {
     "open": 8,
     "conflicts": "нет данных",
-    "merged": 98,
+    "merged": 99,
     "closed": 194,
     "mergedItems": [
+      {
+        "number": 449,
+        "title": "Z23: карточка GPT — глава 2 «Увертюра» + связь с «Адажио»",
+        "sha": "45296b7df4331bd734cefcfb5e72bf17fad15b69"
+      },
       {
         "number": 448,
         "title": "Увертюра (Лучник): быстрая загрузка",
@@ -1513,7 +1518,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3509,
+      "count": 3511,
       "folders": "нет данных"
     },
     "mg": {

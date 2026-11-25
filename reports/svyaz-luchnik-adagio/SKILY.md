@@ -11,3 +11,5 @@
 25.11.2026 | ROT.js 2.2.1 — реальный upstream dist и LICENSE, работает в изолированном JS; интеграция с Nit и исходной структурой mzPlan, существующими Sprite Stacking и Music. Adagio runtime ещё не подключён; не PASS.
 
 25.11.2026 | WaveFunctionCollapse, MIT, JS-port kchapelier/wavefunctioncollapse@f1374ee2, реальный SimpleTiledModel (не имитация). Существующие Tower + Nit управляют видимыми фоновыми формами. WFC не меняет топологию ROT.js, Music или исходные ассеты; браузерный PASS не подтверждён.
+
+25.11.2026 | Voxel Atmosphere Engine + FastNoiseLite 1.1.1: реальная локальная библиотека, связка Nit/WFC/GLSL; оригинальные слои и модели сохранены. Адаптер createMazeMist подготовлен для ROT.js; браузерный визуальный PASS нового HEAD не подтверждён.

@@ -1,11 +1,12 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-25T06:58:57.044Z | МГЛ: 45296b7df4331bd734cefcfb5e72bf17fad15b69 | МГ: 38bdad1ffc63c434bce6878774a26409a34cd55b | https://github.com/mpaykin1/meta6-lab/actions/runs/45564508068
+UTC: 2026-11-25T11:46:45.683Z | МГЛ: 5997519cbc1dd03e8e1d9450112534f98feb0347 | МГ: 6a20f6a1cf9765f45e90ef19888e31911c7ea938 | https://github.com/mpaykin1/meta6-lab/actions/runs/45607353185
 ## ПРОВЕРИТЬ CLAUDE
 - PR #445 a5629442fb3648c0691339259e678acc5cda8711: .github/workflows/etalon-bots.yml
 - PR #441 46c588a747147ba69d3ea4a32afab17b579d8b33: .github/workflows/lab-pages.yml, scripts/lab/mutate-pages-retry.mjs
 - ещё 48: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/45521630003 | Run node scripts/dispetcher/run.mjs
-- МГ: Publish complete META6 site | https://github.com/mpaykin1/meta6/actions/runs/45332389526 | Deploy full website
+- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/45604753768 | Run node scripts/dispetcher/run.mjs
+- МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/45590040163 | Play all games
+- МГЛ: ещё 2: https://github.com/mpaykin1/meta6-lab/actions
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | closed | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/librar… (сокращено)
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
@@ -33,13 +34,13 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 8 | конфликт: нет данных | слито: 99 | закрыто: 194
+открыто: 9 | конфликт: нет данных | слито: 99 | закрыто: 194
 #449 Z23: карточка GPT — глава 2 «Увертюра» + связь с «Адажио» | 45296b7df4331bd734cefcfb5e72bf17fad15b69
 #448 Увертюра (Лучник): быстрая загрузка | 3d70ace44874f9d31b51f0e08421a94a494475d7
 ещё 97: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3511 коммитов | нет данных
-МГ: 55 коммитов | .github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
+МГЛ: 3516 коммитов | нет данных
+МГ: 59 коммитов | .github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, killklan:6, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет

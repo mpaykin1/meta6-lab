@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-25T01:07:24.704Z",
+  "generated_at": "2026-11-25T06:29:08.427Z",
   "sha": {
-    "lab": "55f1cc6552b75dacfe229f09edcf7f96f7275c79",
+    "lab": "cc2fa569e967aff79ffbe511b7503299cda77582",
     "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45523206792",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45560680439",
   "review": {
     "protected": [
       {
@@ -437,16 +437,6 @@
         "workflow": "MG Dispatcher",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45521630003",
         "step": "Run node scripts/dispetcher/run.mjs"
-      },
-      {
-        "workflow": "LAB Pages",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45517070410",
-        "step": "Check published public URLs"
-      },
-      {
-        "workflow": "Link Guard 200",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45516325600",
-        "step": "Diagnose URLs still failing"
       }
     ],
     "redMg": [
@@ -604,9 +594,19 @@
   "pr": {
     "open": 8,
     "conflicts": 5,
-    "merged": 95,
+    "merged": 97,
     "closed": 194,
     "mergedItems": [
+      {
+        "number": 447,
+        "title": "SYMPHONIA: глава 2 «Увертюра» — Лучник в тумане (без рекламы",
+        "sha": "cc2fa569e967aff79ffbe511b7503299cda77582"
+      },
+      {
+        "number": 446,
+        "title": "SYMPHONIA: растущий лабиринт, объёмный Вендиго (гигант в сад",
+        "sha": "51f3f8172d837589b6aa9f3d493882dcfcd58923"
+      },
       {
         "number": 440,
         "title": "SYMPHONIA — сайт музыкального хоррора",
@@ -1508,7 +1508,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3504,
+      "count": 3507,
       "folders": "нет данных"
     },
     "mg": {

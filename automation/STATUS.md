@@ -1,12 +1,10 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-25T01:07:24.704Z | МГЛ: 55f1cc6552b75dacfe229f09edcf7f96f7275c79 | МГ: 38bdad1ffc63c434bce6878774a26409a34cd55b | https://github.com/mpaykin1/meta6-lab/actions/runs/45523206792
+UTC: 2026-11-25T06:29:08.427Z | МГЛ: cc2fa569e967aff79ffbe511b7503299cda77582 | МГ: 38bdad1ffc63c434bce6878774a26409a34cd55b | https://github.com/mpaykin1/meta6-lab/actions/runs/45560680439
 ## ПРОВЕРИТЬ CLAUDE
 - PR #445 a5629442fb3648c0691339259e678acc5cda8711: .github/workflows/etalon-bots.yml
 - PR #441 46c588a747147ba69d3ea4a32afab17b579d8b33: .github/workflows/lab-pages.yml, scripts/lab/mutate-pages-retry.mjs
 - ещё 48: https://github.com/mpaykin1/meta6-lab/pulls
 - МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/45521630003 | Run node scripts/dispetcher/run.mjs
-- МГЛ: LAB Pages | https://github.com/mpaykin1/meta6-lab/actions/runs/45517070410 | Check published public URLs
-- МГЛ: ещё 1: https://github.com/mpaykin1/meta6-lab/actions
 - МГ: Publish complete META6 site | https://github.com/mpaykin1/meta6/actions/runs/45332389526 | Deploy full website
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | closed | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/librar… (сокращено)
@@ -35,12 +33,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 8 | конфликт: 5 | слито: 95 | закрыто: 194
-#440 SYMPHONIA — сайт музыкального хоррора | f4ebb24617d816a47f52a1dd3fb683ffaa453aeb
-#445 SYMPHONIA: боты эталонов на каждом PR, зал легче для телефон | a5629442fb3648c0691339259e678acc5cda8711
-ещё 93: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+открыто: 8 | конфликт: 5 | слито: 97 | закрыто: 194
+#447 SYMPHONIA: глава 2 «Увертюра» — Лучник в тумане (без рекламы | cc2fa569e967aff79ffbe511b7503299cda77582
+#446 SYMPHONIA: растущий лабиринт, объёмный Вендиго (гигант в сад | 51f3f8172d837589b6aa9f3d493882dcfcd58923
+ещё 95: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3504 коммитов | нет данных
+МГЛ: 3507 коммитов | нет данных
 МГ: 55 коммитов | .github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

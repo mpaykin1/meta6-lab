@@ -1,21 +1,39 @@
 {
-  "generated_at": "2026-11-25T11:46:45.683Z",
+  "generated_at": "2026-11-25T22:00:43.697Z",
   "sha": {
-    "lab": "5997519cbc1dd03e8e1d9450112534f98feb0347",
-    "mg": "6a20f6a1cf9765f45e90ef19888e31911c7ea938"
+    "lab": "94135fd6795fcaecf270f31c056cd61aed65941b",
+    "mg": "696100335d24e1269be3df3793aea6bbca1c6fba"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45607353185",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45709269596",
   "review": {
     "protected": [
       {
-        "number": 445,
-        "sha": "a5629442fb3648c0691339259e678acc5cda8711",
+        "number": 439,
+        "sha": "96fe57465a770913991d99705e7a4d453259965d",
         "paths": [
-          ".github/workflows/etalon-bots.yml"
+          ".github/workflows/vetki-uborka.yml",
+          "scripts/lab/mutate-vetki-uborka.mjs"
+        ]
+      },
+      {
+        "number": 436,
+        "sha": "c2d4d176479c02f89b99c2e43ad58a216312eb42",
+        "paths": [
+          ".github/workflows/b64-decode.yml",
+          ".github/workflows/grange-p22-audit.yml",
+          ".github/workflows/grange-publication-gate.yml",
+          ".github/workflows/stackgen.yml"
+        ]
+      },
+      {
+        "number": 437,
+        "sha": "46d17e8b03db210ad8266621755215403601f83e",
+        "paths": [
+          "scripts/lab/mutate-site-size.mjs"
         ]
       },
       {
@@ -24,6 +42,20 @@
         "paths": [
           ".github/workflows/lab-pages.yml",
           "scripts/lab/mutate-pages-retry.mjs"
+        ]
+      },
+      {
+        "number": 433,
+        "sha": "a0a080a140c117138976680b3ee5b41cb87d72fb",
+        "paths": [
+          ".github/workflows/lab-pages.yml"
+        ]
+      },
+      {
+        "number": 445,
+        "sha": "a5629442fb3648c0691339259e678acc5cda8711",
+        "paths": [
+          ".github/workflows/etalon-bots.yml"
         ]
       },
       {
@@ -350,42 +382,10 @@
         ]
       },
       {
-        "number": 439,
-        "sha": "96fe57465a770913991d99705e7a4d453259965d",
-        "paths": [
-          ".github/workflows/vetki-uborka.yml",
-          "scripts/lab/mutate-vetki-uborka.mjs"
-        ]
-      },
-      {
-        "number": 437,
-        "sha": "46d17e8b03db210ad8266621755215403601f83e",
-        "paths": [
-          "scripts/lab/mutate-site-size.mjs"
-        ]
-      },
-      {
-        "number": 436,
-        "sha": "c2d4d176479c02f89b99c2e43ad58a216312eb42",
-        "paths": [
-          ".github/workflows/b64-decode.yml",
-          ".github/workflows/grange-p22-audit.yml",
-          ".github/workflows/grange-publication-gate.yml",
-          ".github/workflows/stackgen.yml"
-        ]
-      },
-      {
         "number": 434,
         "sha": "6fb24e06dbe34f5e3ee77e41e55686c9bbd73273",
         "paths": [
           ".github/workflows/telefon-bez-tormozov.yml"
-        ]
-      },
-      {
-        "number": 433,
-        "sha": "a0a080a140c117138976680b3ee5b41cb87d72fb",
-        "paths": [
-          ".github/workflows/lab-pages.yml"
         ]
       },
       {
@@ -435,23 +435,23 @@
     "redLab": [
       {
         "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45604753768",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45708036070",
         "step": "Run node scripts/dispetcher/run.mjs"
+      },
+      {
+        "workflow": "LAB Pages",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45688220750",
+        "step": "Check published public URLs"
+      },
+      {
+        "workflow": "Link Guard 200",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45687345986",
+        "step": "Diagnose URLs still failing"
       },
       {
         "workflow": "META BOT",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45590040163",
         "step": "Play all games"
-      },
-      {
-        "workflow": "LAB Pages",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45585520289",
-        "step": "Check published public URLs"
-      },
-      {
-        "workflow": "Link Guard 200",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45584609601",
-        "step": "Diagnose URLs still failing"
       }
     ],
     "redMg": [],
@@ -601,11 +601,51 @@
     }
   },
   "pr": {
-    "open": 9,
-    "conflicts": "нет данных",
+    "open": 10,
+    "conflicts": 5,
     "merged": 99,
     "closed": 194,
     "mergedItems": [
+      {
+        "number": 439,
+        "title": "Ежедневная уборка веток МГЛ (архив + удаление лишних lab/*)",
+        "sha": "96fe57465a770913991d99705e7a4d453259965d"
+      },
+      {
+        "number": 436,
+        "title": "Sprite Stacking World: единая игровая песочница пяти автозад",
+        "sha": "c2d4d176479c02f89b99c2e43ad58a216312eb42"
+      },
+      {
+        "number": 442,
+        "title": "Промпт: 5 автозадач — ассеты спрайт-стакинга рецептами stack",
+        "sha": "a022c7a3eaed05a4f4156c0433349a89c35273a3"
+      },
+      {
+        "number": 437,
+        "title": "МГЛ Pages: сайт 1.95 ГБ не публикуется — убрать устаревшие п",
+        "sha": "46d17e8b03db210ad8266621755215403601f83e"
+      },
+      {
+        "number": 441,
+        "title": "МГЛ Pages: повтор публикации — сайт не выкладывался с 07:56",
+        "sha": "46c588a747147ba69d3ea4a32afab17b579d8b33"
+      },
+      {
+        "number": 433,
+        "title": "fix(pages): publish Bullet Car and prevent stale 404",
+        "sha": "a0a080a140c117138976680b3ee5b41cb87d72fb"
+      },
+      {
+        "number": 431,
+        "title": "catalog: add Sky Pilot Earth Eaters first, 8 locales, cover ",
+        "sha": "5d0338665a589ad9271915956972d3e564fbf817"
+      },
+      {
+        "number": 432,
+        "title": "feat(bullet-car): publish pixel-art website",
+        "sha": "ae501fc34ad9382458bc2df76a5eb357fc3646e2"
+      },
       {
         "number": 449,
         "title": "Z23: карточка GPT — глава 2 «Увертюра» + связь с «Адажио»",
@@ -640,16 +680,6 @@
         "number": 444,
         "title": "SYMPHONIA: основа игры — исходник «Адажио»",
         "sha": "2211ca5298462befb1b2f2f8fb2451d6d3f0ca48"
-      },
-      {
-        "number": 442,
-        "title": "Промпт: 5 автозадач — ассеты спрайт-стакинга рецептами stack",
-        "sha": "a022c7a3eaed05a4f4156c0433349a89c35273a3"
-      },
-      {
-        "number": 441,
-        "title": "МГЛ Pages: повтор публикации — сайт не выкладывался с 07:56",
-        "sha": "46c588a747147ba69d3ea4a32afab17b579d8b33"
       },
       {
         "number": 338,
@@ -1002,39 +1032,9 @@
         "sha": "0a37a80d264aaac71832ab16d9ca82b306b7cec6"
       },
       {
-        "number": 439,
-        "title": "Ежедневная уборка веток МГЛ (архив + удаление лишних lab/*)",
-        "sha": "96fe57465a770913991d99705e7a4d453259965d"
-      },
-      {
-        "number": 437,
-        "title": "МГЛ Pages: сайт 1.95 ГБ не публикуется — убрать устаревшие п",
-        "sha": "46d17e8b03db210ad8266621755215403601f83e"
-      },
-      {
-        "number": 436,
-        "title": "Sprite Stacking World: единая игровая песочница пяти автозад",
-        "sha": "c2d4d176479c02f89b99c2e43ad58a216312eb42"
-      },
-      {
         "number": 434,
         "title": "ТЕЛЕФОН БЕЗ ТОРМОЗОВ: лимиты нагрузки телефона + бот-замерщи",
         "sha": "6fb24e06dbe34f5e3ee77e41e55686c9bbd73273"
-      },
-      {
-        "number": 433,
-        "title": "fix(pages): publish Bullet Car and prevent stale 404",
-        "sha": "a0a080a140c117138976680b3ee5b41cb87d72fb"
-      },
-      {
-        "number": 432,
-        "title": "feat(bullet-car): publish pixel-art website",
-        "sha": "ae501fc34ad9382458bc2df76a5eb357fc3646e2"
-      },
-      {
-        "number": 431,
-        "title": "catalog: add Sky Pilot Earth Eaters first, 8 locales, cover ",
-        "sha": "5d0338665a589ad9271915956972d3e564fbf817"
       },
       {
         "number": 422,
@@ -1104,10 +1104,28 @@
     ],
     "protectedItems": [
       {
-        "number": 445,
-        "sha": "a5629442fb3648c0691339259e678acc5cda8711",
+        "number": 439,
+        "sha": "96fe57465a770913991d99705e7a4d453259965d",
         "paths": [
-          ".github/workflows/etalon-bots.yml"
+          ".github/workflows/vetki-uborka.yml",
+          "scripts/lab/mutate-vetki-uborka.mjs"
+        ]
+      },
+      {
+        "number": 436,
+        "sha": "c2d4d176479c02f89b99c2e43ad58a216312eb42",
+        "paths": [
+          ".github/workflows/b64-decode.yml",
+          ".github/workflows/grange-p22-audit.yml",
+          ".github/workflows/grange-publication-gate.yml",
+          ".github/workflows/stackgen.yml"
+        ]
+      },
+      {
+        "number": 437,
+        "sha": "46d17e8b03db210ad8266621755215403601f83e",
+        "paths": [
+          "scripts/lab/mutate-site-size.mjs"
         ]
       },
       {
@@ -1116,6 +1134,20 @@
         "paths": [
           ".github/workflows/lab-pages.yml",
           "scripts/lab/mutate-pages-retry.mjs"
+        ]
+      },
+      {
+        "number": 433,
+        "sha": "a0a080a140c117138976680b3ee5b41cb87d72fb",
+        "paths": [
+          ".github/workflows/lab-pages.yml"
+        ]
+      },
+      {
+        "number": 445,
+        "sha": "a5629442fb3648c0691339259e678acc5cda8711",
+        "paths": [
+          ".github/workflows/etalon-bots.yml"
         ]
       },
       {
@@ -1442,42 +1474,10 @@
         ]
       },
       {
-        "number": 439,
-        "sha": "96fe57465a770913991d99705e7a4d453259965d",
-        "paths": [
-          ".github/workflows/vetki-uborka.yml",
-          "scripts/lab/mutate-vetki-uborka.mjs"
-        ]
-      },
-      {
-        "number": 437,
-        "sha": "46d17e8b03db210ad8266621755215403601f83e",
-        "paths": [
-          "scripts/lab/mutate-site-size.mjs"
-        ]
-      },
-      {
-        "number": 436,
-        "sha": "c2d4d176479c02f89b99c2e43ad58a216312eb42",
-        "paths": [
-          ".github/workflows/b64-decode.yml",
-          ".github/workflows/grange-p22-audit.yml",
-          ".github/workflows/grange-publication-gate.yml",
-          ".github/workflows/stackgen.yml"
-        ]
-      },
-      {
         "number": 434,
         "sha": "6fb24e06dbe34f5e3ee77e41e55686c9bbd73273",
         "paths": [
           ".github/workflows/telefon-bez-tormozov.yml"
-        ]
-      },
-      {
-        "number": 433,
-        "sha": "a0a080a140c117138976680b3ee5b41cb87d72fb",
-        "paths": [
-          ".github/workflows/lab-pages.yml"
         ]
       },
       {
@@ -1527,12 +1527,12 @@
   },
   "changes": {
     "lab": {
-      "count": 3516,
+      "count": 3518,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 59,
-      "folders": ".github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, killklan:6, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1"
+      "count": 69,
+      "folders": ".github:6, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, killklan:6, killklan-game:132, meta-games:1, OSHIBKI.md:1, playgama-catalog:36, playgama-games:3, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1"
     }
   },
   "games": [

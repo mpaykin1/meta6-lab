@@ -1,11 +1,11 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-25T11:46:45.683Z | МГЛ: 5997519cbc1dd03e8e1d9450112534f98feb0347 | МГ: 6a20f6a1cf9765f45e90ef19888e31911c7ea938 | https://github.com/mpaykin1/meta6-lab/actions/runs/45607353185
+UTC: 2026-11-25T22:00:43.697Z | МГЛ: 94135fd6795fcaecf270f31c056cd61aed65941b | МГ: 696100335d24e1269be3df3793aea6bbca1c6fba | https://github.com/mpaykin1/meta6-lab/actions/runs/45709269596
 ## ПРОВЕРИТЬ CLAUDE
-- PR #445 a5629442fb3648c0691339259e678acc5cda8711: .github/workflows/etalon-bots.yml
-- PR #441 46c588a747147ba69d3ea4a32afab17b579d8b33: .github/workflows/lab-pages.yml, scripts/lab/mutate-pages-retry.mjs
+- PR #439 96fe57465a770913991d99705e7a4d453259965d: .github/workflows/vetki-uborka.yml, scripts/lab/mutate-vetki-uborka.mjs
+- PR #436 c2d4d176479c02f89b99c2e43ad58a216312eb42: .github/workflows/b64-decode.yml, .github/workflows/grange-p22-audit.yml, .github/workflows/grange-publication-gate.yml, .github/workflows/stackgen.yml
 - ещё 48: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/45604753768 | Run node scripts/dispetcher/run.mjs
-- МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/45590040163 | Play all games
+- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/45708036070 | Run node scripts/dispetcher/run.mjs
+- МГЛ: LAB Pages | https://github.com/mpaykin1/meta6-lab/actions/runs/45688220750 | Check published public URLs
 - МГЛ: ещё 2: https://github.com/mpaykin1/meta6-lab/actions
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | closed | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/librar… (сокращено)
@@ -34,13 +34,13 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 9 | конфликт: нет данных | слито: 99 | закрыто: 194
-#449 Z23: карточка GPT — глава 2 «Увертюра» + связь с «Адажио» | 45296b7df4331bd734cefcfb5e72bf17fad15b69
-#448 Увертюра (Лучник): быстрая загрузка | 3d70ace44874f9d31b51f0e08421a94a494475d7
+открыто: 10 | конфликт: 5 | слито: 99 | закрыто: 194
+#439 Ежедневная уборка веток МГЛ (архив + удаление лишних lab/*) | 96fe57465a770913991d99705e7a4d453259965d
+#436 Sprite Stacking World: единая игровая песочница пяти автозад | c2d4d176479c02f89b99c2e43ad58a216312eb42
 ещё 97: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3516 коммитов | нет данных
-МГ: 59 коммитов | .github:5, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, killklan:6, meta-games:1, OSHIBKI.md:1, playgama-catalog:35, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
+МГЛ: 3518 коммитов | нет данных
+МГ: 69 коммитов | .github:6, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, killklan:6, killklan-game:132, meta-games:1, OSHIBKI.md:1, playgama-catalog:36, playgama-games:3, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да
 asqura-ilya-reference — не запускалась | витрина: нет

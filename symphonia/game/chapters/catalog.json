@@ -1,0 +1,14 @@
+{
+  "schema": "symphonia-chapter-catalog/1",
+  "chapters": [
+    {
+      "id": "overture",
+      "order": 2,
+      "title": "Увертюра",
+      "music": "Лучник в тумане",
+      "status": "published",
+      "url": "game/chapters/overture/",
+      "cover": "game/chapters/overture/cover.webp"
+    }
+  ]
+}

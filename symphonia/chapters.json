@@ -16,10 +16,10 @@
       "order": 2,
       "title": "Увертюра",
       "music": "Увертюра",
-      "description": "Начало путешествия. Предчувствие катастрофы.",
-      "status": "planned",
-      "url": null,
-      "cover": null
+      "description": "Лучник падает с башен в синем тумане к усадьбе, где кто-то играет на рояле. Предчувствие катастрофы.",
+      "status": "published",
+      "url": "game/chapters/overture/",
+      "cover": "game/chapters/overture/cover.webp"
     },
     {
       "id": "nocturne",

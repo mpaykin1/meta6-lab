@@ -1,0 +1,71 @@
+# Бот: объёмный Вендиго — в зале (шаг, бросок, уход, скример), гигант в саду, финал (растёт и ломает зал, она улетает)
+import sys, time, os, subprocess
+from playwright.sync_api import sync_playwright
+ROOT = os.environ.get('SYM_GAME','symphonia/game')
+srv = subprocess.Popen([sys.executable,'-m','http.server','8776','-d',ROOT],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL);time.sleep(1)
+THREE = open(os.environ['SYM_THREE'],'rb').read() if os.environ.get('SYM_THREE') else None
+errs=[];ok=[];os.makedirs('shots',exist_ok=True)
+def chk(name,cond,info=''):
+    ok.append((name,bool(cond)));print(('OK  ' if cond else 'FAIL'),name,info,flush=True)
+with sync_playwright() as p:
+    b=p.chromium.launch(args=['--use-gl=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required'])
+    ctx=b.new_context(viewport={'width':390,'height':844},device_scale_factor=2,is_mobile=True,has_touch=True)
+    ctx.add_init_script("window.t=1;window.P=2;window.g=3;window.W=4;window.H=5;window.S=6;window.R=7;")
+    pg=ctx.new_page()
+    if THREE: pg.route('https://cdn.jsdelivr.net/**',lambda r:r.fulfill(body=THREE,content_type='application/javascript'))
+    pg.route('https://fonts.googleapis.com/**',lambda r:r.fulfill(body='',content_type='text/css'))
+    pg.on('console',lambda m:errs.append(m.type+': '+m.text) if m.type=='error' else None)
+    pg.on('pageerror',lambda e:errs.append('PAGEERROR: '+str(e)))
+    pg.goto('http://localhost:8776/index.html#bot')
+    pg.wait_for_function('document.querySelector("#load i").style.width==="100%"',timeout=60000);time.sleep(1)
+    pg.tap('#play');time.sleep(2)
+    pg.evaluate('window.__bot.hall()');time.sleep(4)
+    E=lambda js: pg.evaluate(js)
+    # --- зал
+    E('window.__bot.go(0,2)');E('window.__bot.silence()');pg.wait_for_function("window.__bot.ven()&&window.__bot.ven().mode==='walk'",timeout=20000)
+    v=E('window.__bot.ven()');chk('зал: Вендиго объёмный',v and v['st'] and v['mode']=='walk',v)
+    E('window.__bot.venPlace(0,-12)');E('window.__bot.lookVen()');time.sleep(.3)
+    fr=set()
+    for i in range(10):
+        fr.add(E('window.__bot.ven().f'));time.sleep(.25)
+    chk('зал: шагает',len(fr)>=3,fr);pg.screenshot(path='shots/v_1_hall.png')
+    E('window.__bot.venPlace(0,-1.1);window.__bot.lookVen()');time.sleep(.15)
+    v,w=E('(()=>{const v=window.__bot.ven();window.__bot.killV();return [v,window.__bot.ven()]})()')
+    pg.screenshot(path='shots/v_2_lunge.png');chk('зал: бросок вблизи',v and v['lg']>0 and v['f']>=10,v)
+    chk('зал: уходит от выстрелов',w and w['mode']=='leave',w)
+    time.sleep(2.5);chk('зал: исчез, музыка вернулась',not E('window.__bot.ven()') and not E('window.__bot.s.silence'))
+    E('window.__bot.silence()');pg.wait_for_function("window.__bot.ven()&&window.__bot.ven().mode==='walk'",timeout=20000);E('window.__bot.go(0,2);window.__bot.venPlace(0,.6)');time.sleep(1.8)
+    chk('зал: касание = скример, модель убрана',not E('window.__bot.ven()'))
+    time.sleep(3)
+    # --- сад: гигант
+    E('window.__bot.maze()');pg.wait_for_function("window.__bot.mzInfo()&&window.__bot.mzInfo().state==='maze'",timeout=60000);time.sleep(1)
+    g=E('window.__bot.giant()');chk('сад: гигант есть',g,g)
+    E('window.__bot.giantPlace(0,-22);window.__bot.look(0,0.35)');time.sleep(1.5);pg.screenshot(path='shots/v_3_giant.png')
+    g1=E('window.__bot.giant()');time.sleep(1.5);g2=E('window.__bot.giant()')
+    chk('сад: идёт к герою',g2['d']<g1['d'] and g1['f']!=g2['f'],(g1,g2))
+    E('window.__bot.giantPlace(0,-14);window.__bot.look(0,0.2)');time.sleep(.3)
+    E('window.__bot.aimAt(.5,.45)')
+    for i in range(6):
+        E('window.__bot.fire&&window.__bot.fire()');time.sleep(.35)
+    g=E('window.__bot.giant()');chk('сад: выстрел отталкивает',g['push']>0 or g['d']>12,g)
+    lv=E('window.__bot.mzInfo().lives');E('window.__bot.giantPlace(0,-7)');time.sleep(2.6)
+    g=E('window.__bot.giant()');pg.screenshot(path='shots/v_4_giant_near.png')
+    chk('сад: бросок ранит',E('window.__bot.mzInfo().lives')<lv or E('window.__bot.mzInfo().state')!='maze',g)
+    # --- финал
+    E('window.__bot.mzExitGo()');time.sleep(3)
+    pg.wait_for_function("window.__bot.s.state==='ext'||window.__bot.s.state==='hall'",timeout=30000)
+    E('window.__bot.hall()');time.sleep(3);E('window.__bot.go(0,4);window.__bot.look(0,0.3)')
+    E('window.__bot.fin()');time.sleep(2.5);f=E('window.__bot.finInfo()');pg.screenshot(path='shots/v_5_grow.png')
+    chk('финал: он появился и растёт',f['g'] and f['sc']>1.2,f)
+    time.sleep(4);f=E('window.__bot.finInfo()');pg.screenshot(path='shots/v_6_break.png')
+    chk('финал: зал рушится',f['parts']>5 and f['sc']>4,f)
+    time.sleep(4);f=E('window.__bot.finInfo()');pg.screenshot(path='shots/v_7_free.png')
+    chk('финал: она улетает',f['lift']>.5,f)
+    time.sleep(8);f=E('window.__bot.finInfo()');pg.screenshot(path='shots/v_8_end.png')
+    chk('финал: история',f['state']=='end',f)
+    b.close()
+srv.terminate()
+real=[e for e in errs if 'GPU stall' not in e and 'Failed to load resource' not in e]
+print('ERRORS',len(real));[print(e) for e in real[:20]]
+good=all(c for _,c in ok) and not real
+print('ИТОГ:','OK' if good else 'FAIL');sys.exit(0 if good else 1)

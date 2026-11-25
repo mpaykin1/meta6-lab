@@ -9,3 +9,5 @@
 25.11.2026 | Meta Game Fusion / InkJS уже присутствует в скиле, новый дублирующий плагин не нужен; ink-courtyard.js подключает настоящую версию 2.4.0 опционально через CDN, общий Nit используется и fog-piano, и повествованием. npm registry DNS недоступен. REUSE исходной геометрии оперения вместо создания нового художественного GIF. Без визуальной проверки не объявлять художественный PASS.
 
 25.11.2026 | ROT.js 2.2.1 — реальный upstream dist и LICENSE, работает в изолированном JS; интеграция с Nit и исходной структурой mzPlan, существующими Sprite Stacking и Music. Adagio runtime ещё не подключён; не PASS.
+
+25.11.2026 | WaveFunctionCollapse, MIT, JS-port kchapelier/wavefunctioncollapse@f1374ee2, реальный SimpleTiledModel (не имитация). Существующие Tower + Nit управляют видимыми фоновыми формами. WFC не меняет топологию ROT.js, Music или исходные ассеты; браузерный PASS не подтверждён.

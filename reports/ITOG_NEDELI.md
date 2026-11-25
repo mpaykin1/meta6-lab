@@ -1,5 +1,11 @@
 # Итоги недели без Claude
 
+## 2026-11-25
+- Слито за последние 24 часа: 11 ([#449](https://github.com/mpaykin1/meta6-lab/pull/449), [#448](https://github.com/mpaykin1/meta6-lab/pull/448), [#447](https://github.com/mpaykin1/meta6-lab/pull/447), [#446](https://github.com/mpaykin1/meta6-lab/pull/446), [#440](https://github.com/mpaykin1/meta6-lab/pull/440), [#445](https://github.com/mpaykin1/meta6-lab/pull/445), [#444](https://github.com/mpaykin1/meta6-lab/pull/444), [#442](https://github.com/mpaykin1/meta6-lab/pull/442), [#441](https://github.com/mpaykin1/meta6-lab/pull/441), [#439](https://github.com/mpaykin1/meta6-lab/pull/439), [#437](https://github.com/mpaykin1/meta6-lab/pull/437))
+- Бот: за последние 24 часа нет подтверждённого PASS на main.
+- В DLYA_CLAUDE.md: 119 записей, PR #267, #277, #247, #248, #370, #404, #417, #418, #419, #421, #423, #435, #242, #245, #192
+- Открытых живых PR: 4; зависших: 0.
+
 ## 2026-11-24
 - Слито за последние 24 часа: 7 ([#439](https://github.com/mpaykin1/meta6-lab/pull/439), [#437](https://github.com/mpaykin1/meta6-lab/pull/437), [#436](https://github.com/mpaykin1/meta6-lab/pull/436), [#434](https://github.com/mpaykin1/meta6-lab/pull/434), [#433](https://github.com/mpaykin1/meta6-lab/pull/433), [#432](https://github.com/mpaykin1/meta6-lab/pull/432), [#431](https://github.com/mpaykin1/meta6-lab/pull/431))
 - Бот: за последние 24 часа нет подтверждённого PASS на main.

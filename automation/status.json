@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-25T06:29:08.427Z",
+  "generated_at": "2026-11-25T06:45:29.965Z",
   "sha": {
-    "lab": "cc2fa569e967aff79ffbe511b7503299cda77582",
+    "lab": "3d70ace44874f9d31b51f0e08421a94a494475d7",
     "mg": "38bdad1ffc63c434bce6878774a26409a34cd55b"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45560680439",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45562806456",
   "review": {
     "protected": [
       {
@@ -582,7 +582,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45463609104"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45560680389"
       },
       "P1": {
         "value": "не подтверждено",
@@ -593,10 +593,15 @@
   },
   "pr": {
     "open": 8,
-    "conflicts": 5,
-    "merged": 97,
+    "conflicts": "нет данных",
+    "merged": 98,
     "closed": 194,
     "mergedItems": [
+      {
+        "number": 448,
+        "title": "Увертюра (Лучник): быстрая загрузка",
+        "sha": "3d70ace44874f9d31b51f0e08421a94a494475d7"
+      },
       {
         "number": 447,
         "title": "SYMPHONIA: глава 2 «Увертюра» — Лучник в тумане (без рекламы",
@@ -1508,7 +1513,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3507,
+      "count": 3509,
       "folders": "нет данных"
     },
     "mg": {

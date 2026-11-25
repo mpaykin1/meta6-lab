@@ -28,6 +28,5 @@
 | Z20 — ПРОВЕРКА И УЛУЧШЕНИЕ ВСЕХ БОТОВ | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z20_BOTY.md |
 | Z21 — 3D-МОДЕЛИ И МИРЫ INK | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z21_INK_3D.md |
 | Z22 — СОКРАТИТЬ СИСТЕМУ | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z22_SOKRASHCHENIE.md |
-| Z23 — SYMPHONIA: ГЛАВА 2 «УВЕРТЮРА» (ЛУЧНИК) + СВЯЗЬ С «АДАЖИО» | https://github.com/mpaykin1/meta6-lab/blob/main/automation/zadachi/Z23_UVERTYURA_ADAGIO.md |
 
 Карточки многоразовые и самоулучшающиеся (раздел «Опыт»). Новые карточки — только взамен старых (без суеты).

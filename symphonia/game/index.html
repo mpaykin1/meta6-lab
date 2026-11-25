@@ -320,7 +320,7 @@ function plotGenre(){const M=MUS;
   if(state==='ext'||(state==='menu'&&musicOn)){if(extObj.besedka&&Math.hypot(player.p.x-5.1,player.p.z+21)<7)return 'syuita';if(extObj.angel&&Math.hypot(player.p.x+5.2,player.p.z+8.6)<6)return 'adazhio';return hallVisited?(M.danger>.45?'skerco':'noktyurn'):M.extT<24?'uvertyura':'noktyurn';}
   if(silence)return 'rekviem';
   if(finale>=4)return 'adazhio';
-  if(finale>=2)return 'simfoniya';
+  if(finale===3)return FIN.lift>0?'adazhio':'rekviem';if(finale>=2)return 'simfoniya';
   if(slowT>0)return 'fantaziya';
   if(waveState==='run'){if(M.danger>.72)return 'tokkata';if(M.wound>.65)return 'rapsodiya';if(M.near>.75&&M.danger<.25)return 'noktyurn';
     return WAVEG[Math.max(0,wave-1)%WAVEG.length];}
@@ -574,7 +574,7 @@ function nearestTex(im,repeat){const t=new THREE.Texture(im);t.flipY=false;t.col
 /* свет усадьбы: фонари (как в сцене владельца) + туман */
 const LAMPS=[];const MAXL=24;
 const STACK_VS=`varying vec2 vUV;varying vec3 vW,vN;varying float vD;void main(){vec4 w=modelMatrix*vec4(position,1.);vW=w.xyz;vN=normalize(mat3(modelMatrix)*normal);vUV=uv;vec4 mv=viewMatrix*w;vD=-mv.z;gl_Position=projectionMatrix*mv;}`;
-const STACK_FS=`uniform sampler2D uTex;uniform float uTime,uGround,uFogOn,uBright,uLampOn;uniform vec3 uLamps[${MAXL}];uniform int uNL;varying vec2 vUV;varying vec3 vW,vN;varying float vD;
+const STACK_FS=`uniform sampler2D uTex;uniform float uTime,uGround,uFogOn,uBright,uLampOn,uFogK;uniform vec3 uFogCol;uniform vec3 uLamps[${MAXL}];uniform int uNL;varying vec2 vUV;varying vec3 vW,vN;varying float vD;
 float hash(vec2 a){return fract(sin(dot(a,vec2(12.9898,78.233)))*43758.5453);}float lamp(vec3 p,vec3 q){return 1.0/(1.0+dot(p-q,p-q)*.32);}
 void main(){vec4 tx=texture2D(uTex,vUV);if(tx.a<.5)discard;vec3 n=normalize(vN);float sun=.73+.27*dot(n,normalize(vec3(-.5,.85,.5)));float light=0.;
  for(int i=0;i<${MAXL};i++){if(i>=uNL)break;light+=lamp(vW,uLamps[i]);}light*=(.86+.12*sin(uTime*7.+vW.z*.7)+.05*sin(uTime*13.))*uLampOn;
@@ -582,9 +582,9 @@ void main(){vec4 tx=texture2D(uTex,vUV);if(tx.a<.5)discard;vec3 n=normalize(vN);
  if(uGround>.5){float path=1.-smoothstep(2.8,3.45,abs(vW.x));base*=mix(.60,1.12,path);float shimmer=pow(max(0.,sin(vW.z*11.+sin(vW.x*27.))),8.);float stripe=exp(-abs(vW.x)*.78);base+=vec3(.19,.13,.07)*shimmer*stripe*(.7+light);base+=vec3(.12,.08,.04)*light*pow(g,3.);}
  base+=tx.rgb*vec3(1.08,.54,.20)*light*.74;
  if(uLampOn<.5){float rim=pow(1.-abs(n.z),2.)*.25;base=tx.rgb*(.78+.32*max(0.,dot(n,normalize(vec3(.35,.8,.45)))))+tx.rgb*rim;}
- float fog=1.-exp(-max(vD,0.)*.021);fog=clamp(fog+exp(-max(vW.y,0.)*.72)*.08,0.,.88)*uFogOn;vec3 fc=vec3(.24,.245,.244);gl_FragColor=vec4(mix(base*uBright,fc,fog),1.);}`;
+ float fog=1.-exp(-max(vD,0.)*uFogK);fog=clamp(fog+exp(-max(vW.y,0.)*.72)*.08,0.,.88)*uFogOn;vec3 fc=uFogCol;gl_FragColor=vec4(mix(base*uBright,fc,fog),1.);}`;
 const lampU={value:Array.from({length:MAXL},()=>new THREE.Vector3(0,-99,0))},nlU={value:0};
-function stackMat(t,o={}){return new THREE.ShaderMaterial({uniforms:{uTex:{value:t},uTime:G.uT,uGround:{value:o.ground?1:0},uFogOn:{value:o.nofog?0:1},uBright:o.bright||{value:1},uLampOn:{value:o.nolamp?0:1},uLamps:lampU,uNL:nlU},vertexShader:STACK_VS,fragmentShader:STACK_FS,side:THREE.DoubleSide});}
+function stackMat(t,o={}){return new THREE.ShaderMaterial({uniforms:{uTex:{value:t},uTime:G.uT,uGround:{value:o.ground?1:0},uFogOn:{value:o.nofog?0:1},uBright:o.bright||{value:1},uLampOn:{value:o.nolamp?0:1},uLamps:lampU,uNL:nlU,uFogK:{value:o.fogk||.021},uFogCol:{value:o.fogc||new THREE.Vector3(.24,.245,.244)}},vertexShader:STACK_VS,fragmentShader:STACK_FS,side:THREE.DoubleSide});}
 
 /* ---------- усадьба снаружи — сцена владельца «Усадьба в тумане» ---------- */
 let EXTM={},extGeo={},extGeoL={},extTex={},extObj={},gates=[],extParts,extSkyMat;
@@ -689,7 +689,7 @@ function buildHall(){
   {const cut=(arr)=>{const m=new Map();for(let i=0;i<arr.length;i+=27){const zc=(arr[i+2]+arr[i+11]+arr[i+20])/3;const k=Math.floor((zc+26)/6);if(!m.has(k))m.set(k,[]);const o=m.get(k);for(let j=0;j<27;j++)o.push(arr[i+j]);}return m;};
    const F=cut(HG.solid),L=cut(HGL.solid),mat=hallMat(1,1,0,true);hallChunks=[];
    for(const [k,arr] of F){const mk=a=>{const me=hallMesh(a,mat,-50);me.frustumCulled=true;me.geometry.computeBoundingSphere();s.add(me);return me;};
-     hallChunks.push({z0:k*6-26,z1:k*6-20,full:mk(arr),low:L.has(k)?mk(L.get(k)):null});}}s.add(hallMesh(HG.slices,hallMat(1,1,0,true),-49));s.add(hallMesh(HG.detail,hallMat(1,1,0,false),-48));
+     hallChunks.push({z0:k*6-26,z1:k*6-20,full:mk(arr),low:L.has(k)?mk(L.get(k)):null});}}hallObj.slicesM=hallMesh(HG.slices,hallMat(1,1,0,true),-49);s.add(hallObj.slicesM);hallObj.detailM=hallMesh(HG.detail,hallMat(1,1,0,false),-48);s.add(hallObj.detailM);
   // пианистка владельца: тело и рука — отдельные слои, рука играет
   const mk=(uvr,c)=>{const g=new THREE.PlaneGeometry(1,1);const u=g.attributes.uv;for(let i=0;i<u.count;i++){const ux=u.getX(i),uy=u.getY(i);u.setXY(i,uvr[0]+ux*(uvr[2]-uvr[0]),uvr[3]+uy*(uvr[1]-uvr[3]));}
     const m=new THREE.ShaderMaterial({uniforms:{tex:{value:hallTex},op:{value:c},uBright:G.uBright},vertexShader:'varying vec2 t;varying vec3 w;void main(){t=uv;vec4 wp=modelMatrix*vec4(position,1.);w=wp.xyz;gl_Position=projectionMatrix*viewMatrix*wp;}',
@@ -727,11 +727,12 @@ function buildHall(){
   DEC.oknoG=[glow(s,-6.1,2.9,-7,4.5,0xfff0c8,0,1)];DEC.lyG=[glow(s,0,LY.y+1.2,-4.5,3,0xffe0a0,0,1)];
   hallObj.zerkV=spr(s,'zerkalo_v',{h:4.6,x:0,y:.25,z:-23.7,bill:false,op:0,lit:.4});
 }
+const FIN={on:false,lift:0,fade:1};
 function hallTick(dt){
   const sway=.018*Math.sin(now*1.45),X=HG.PX-.24+sway,h=1.93,w=h*134/191,cz=HG.PZ+1.24;
   const vis=scT<0?1:0;
-  for(const [b,a,mir] of [[pianist.body,pianist.arm,1],[pianist.bodyR,pianist.armR,-1]]){b.scale.set(w,h*mir,1);a.scale.set(w,h*mir,1);b.position.set(X,.96*mir,cz);a.position.set(X+.016*Math.sin(now*3.8),(.96+.024*Math.sin(now*5.1))*mir,cz-.022);b.visible=a.visible=!!vis;}
-  const op=silence?.35:.92;pianist.body.material.uniforms.op.value=damp(pianist.body.material.uniforms.op.value,op,2,dt);pianist.arm.material.uniforms.op.value=pianist.body.material.uniforms.op.value;
+  for(const [b,a,mir] of [[pianist.body,pianist.arm,1],[pianist.bodyR,pianist.armR,-1]]){b.scale.set(w,h*mir,1);a.scale.set(w,h*mir,1);const L=FIN.lift*mir;b.position.set(X,.96*mir+L,cz+FIN.lift*.35);a.position.set(X+.016*Math.sin(now*3.8),(.96+.024*Math.sin(now*5.1))*mir+L,cz-.022+FIN.lift*.35);b.visible=a.visible=!!vis&&(mir>0||!FIN.on);}
+  const op=(silence?.35:.92)*FIN.fade;pianist.body.material.uniforms.op.value=damp(pianist.body.material.uniforms.op.value,op,2,dt);pianist.arm.material.uniforms.op.value=pianist.body.material.uniforms.op.value;
   flamePts.material.opacity=.5+.1*Math.sin(now*5.7)+.06*Math.sin(now*13.1);flamePts.material.size=.3+.03*Math.sin(now*7.3);
   hallMotes.rotation.y+=dt*.008;hallMotes.position.y=Math.sin(now*.25)*.25;
 }
@@ -778,7 +779,7 @@ function flightEnd(o,d){let t=40;if(d.y<-1e-4)t=Math.min(t,(0-o.y)/d.y);
   return Math.max(.5,t);}
 
 /* ---------- gameplay objects ---------- */
-const blobs=[],fx=[],shots=[];let ven=null,clockT=0,slowT=0,waveLeft=0,spawnT=0,waveState='idle',waveTimer=0,hitThisWave=false,finale=0;
+const blobs=[],fx=[],shots=[];let shakeT=0,ven=null,clockT=0,slowT=0,waveLeft=0,spawnT=0,waveState='idle',waveTimer=0,hitThisWave=false,finale=0;
 function spawnBlob(){const s=scHall;const sd=rnd()<.5?-1:1;let p;
   const r=rnd();if(r<.7)p=new THREE.Vector3(sd*6.6,R(1.6,6.5),R(-22,8));else p=new THREE.Vector3(R(-4,4),R(8,9.5),R(-20,6));
   const o=spr(s,'blob',{h:1.5,x:p.x,y:p.y-.75,z:p.z,lit:.3,op:0,mirror:true});
@@ -797,6 +798,7 @@ function fire(){
     let best=null,bd=60,bv=false;const rr0=isTouch?1.0:.8;const hits=[];
     for(const b of blobs){if(b.dead||b.biting>0)continue;const rr=rr0*(has('pyl')&&b.p.distanceTo(PIAN)<4.5?1.6:1);const d=ray.distanceToPoint(b.p);const t=tmp.copy(b.p).sub(cam.position).dot(fwd);if(t>0&&d<rr*(WP.proj==='pellet'?1.25:1)){if(WP.pierce)hits.push(b);else if(t<bd){bd=t;best=b;}}}
     if(ven&&ven.mode==='walk'){const vp=venPos();const d=ray.distanceToPoint(vp),t=tmp.copy(vp).sub(cam.position).dot(fwd);if(t>0&&d<1.5&&t<bd){bd=t;best=null;bv=true;}}
+    let gv=false;if(state==='maze'&&MZ&&MZ.giant){const gp=giantPos();const d=ray.distanceToPoint(gp),t=tmp.copy(gp).sub(cam.position).dot(fwd);if(t>0&&d<4.5&&t<bd){bd=t;best=null;bv=false;gv=true;}}
     if(scene===scHall&&has('lyustra')&&LY.ok&&DEC.lyustra){const lp=tmp.set(0,LY.y+1.2,-4.5);const tl=lp.clone().sub(cam.position).dot(fwd);if(tl>0&&tl<bd&&ray.distanceToPoint(lp)<1.3)lyCrash();}
     if(WP.range&&bd>WP.range){best=null;bv=false;bd=WP.range;}
     let end;if(best||bv)end=cam.position.clone().addScaledVector(fwd,bd);else end=cam.position.clone().addScaledVector(fwd,flightEnd(cam.position,fwd));
@@ -806,7 +808,7 @@ function fire(){
     let m;if(WP.proj==='arrow'){m=arrowModel(WP.tipC);}else{const PJ={pellet:[0xffb060,.2],bullet:[0xffd890,.18],plasma:[0x60e0ff,.7],flame:[0xff6a18,.5]}[WP.proj];
       m=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:PJ[0],blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.95}));m.scale.set(PJ[1],PJ[1],1);}
     scene.add(m);const st=mzz.clone();m.position.copy(st);
-    shots.push({m,st,end,blob:best,ven:bv,pierce:hits,dmg:WP.dmg||1,t:0,d:Math.max(.05,st.distanceTo(end)/spd),arrow:WP.proj==='arrow',stuck:0});
+    shots.push({m,st,end,blob:best,ven:bv,gi:gv,pierce:hits,dmg:WP.dmg||1,t:0,d:Math.max(.05,st.distanceTo(end)/spd),arrow:WP.proj==='arrow',stuck:0});
   }
 }
 function lyCrash(){LY.ok=false;LY.fall=.01;musEvent('crash');const t=AC&&AC.currentTime;if(AC){noiseHit(t,3000,500,.9,.3,1.2);[0,7,12].forEach((o,i)=>piano(curRoot+24+o,t+i*.05,.09,2,sfx));}}
@@ -830,7 +832,7 @@ function decoTick(dt){
   const h=has('shtora')&&Math.hypot(player.p.x+5.6,player.p.z+7)<3.2;if(h&&!hideOn)musEvent('hide');hideOn=h;}
 function crowCaw(){if(!AC)return;const t=AC.currentTime;S.crow();const R=curRoot;piano(R+24+7,t,.1,1.2,sfx);piano(R+24+curCh[2],t+.18,.09,1.4,sfx);post.uniforms.uGlitch.value=Math.max(post.uniforms.uGlitch.value,.25);}
 function hitBlob(b,dmg=1){if(b.mon){monHit(b,dmg);return;}if(b.dead)return;b.dead=true;popFx('blob_vzryv',b.p,2.2,.9);kill(b.o);musHit();S.pop();H_=Math.min(1,H_+.03);score++;post.uniforms.uGlitch.value=Math.max(post.uniforms.uGlitch.value,.15);}
-function hitVen(){if(!ven||ven.mode!=='walk')return;ven.hits++;musHit();S.hitV();ven.push=1.6;post.uniforms.uGlitch.value=.5;if(ven.hits>=ven.need){ven.mode='leave';ven.t=0;const p=ven.o.mesh.position.clone();kill(ven.o);ven.o=spr(scHall,'v_otstup',{h:3.2,x:p.x,z:p.z,lit:.2});ven.o.m.uniforms.uOnce.value=0;}}
+function hitVen(){if(!ven||ven.mode!=='walk')return;ven.hits++;musHit();S.hitV();ven.push=1.6;post.uniforms.uGlitch.value=.5;if(ven.hits>=ven.need){ven.mode='leave';ven.t=0;const p=ven.o.mesh.position.clone();killVen(ven.o);ven.o=spr(scHall,'v_otstup',{h:3.2,x:p.x,z:p.z,lit:.2});ven.o.m.uniforms.uOnce.value=0;}}
 function startSilence(){silence=true;musEvent('silence');window.__seenV=1;H_=0;cap('Тишина...',2500);
   const pts=[[-5,-22],[5,-22],[-5,8],[5,8],[0,-22.5]].map(([x,z])=>new THREE.Vector3(x,0,z));
   pts.sort((a,b)=>b.distanceTo(player.p)-a.distanceTo(player.p));const p=pts[Math.floor(rnd()*2)];
@@ -846,7 +848,7 @@ function scareTick(dt){const sc=hallObj.pianS;if(!sc)return;
   sc.m.uniforms.uOnce.value=f;sc.m.uniforms.uOp.value=1;}
 function screamer(){state='hall';atk={t:0};S.scream();
   atk.mesh=new THREE.Mesh(geoC,mat('v_ataka',{nofog:true,lit:1,phase:0}));atk.mesh.material.uniforms.uOnce.value=0;hud.add(atk.mesh);
-  if(ven&&ven.o)kill(ven.o);ven=null;}
+  if(ven&&ven.o)killVen(ven.o);ven=null;}
 
 /* ---------- волны ---------- */
 const REWARD=['kandel','arb2','chasy','drob','statuya','pulemet','arb0','zerkalo'];
@@ -866,6 +868,27 @@ function reward(k){unlocked.items.push(k);
   if(DM[k]){(DEC[k]||[]).forEach(o=>o.tgt=k==='tuman'?.45:k==='pyl'?.55:1);msg(DM[k]);if(k==='pyl'||k==='vorona'||k==='okno')scare();}
   if(k==='zerkalo'){hallObj.zerk.fadeIn=1;finale=1;cap('Не смотри в зеркало, пока она играет.',5000);}
 }
+/* финал: он вырастает до гигантских размеров и разрушает зал; она поднимается над обломками и благодарит */
+function finTick(dt){const t=finT;
+  if(!FIN.on){FIN.on=true;FIN.parts=[];for(const b of blobs)if(!b.dead){b.dead=true;kill(b.o);}blobs.length=0;waveState='final';MUS.force={g:'rekviem',tr:'obval',now:true};hallObj.zerkV.m.uniforms.uOp.value=0;
+    if(VNS.ready){const g=venStackMake({x:0,z:-21.5},{fogk:.009,fogc:new THREE.Vector3(.955,.943,.910),far:60,ref:false});g.wf=0;hallObj.giant=g;}
+    const add=(me,zc)=>{if(!me)return;const g=me.geometry;g.computeBoundingSphere();const c=g.boundingSphere.center.clone();g.translate(-c.x,-c.y,-c.z);me.position.copy(c);me.frustumCulled=false;
+      FIN.parts.push({me,t0:3+Math.abs((zc??c.z)+21.5)*.09+rnd()*.4,v:new THREE.Vector3(R(-3,3),R(3,8),R(1,5)),w:new THREE.Vector3(R(-1,1),R(-.5,.5),R(-1,1)),go:false});};
+    for(const c of hallChunks){const zc=(c.z0+c.z1)/2;add(c.full,zc);if(c.low)add(c.low,zc);}add(hallObj.slicesM,-14);add(hallObj.detailM,-10);
+    for(const o of scHallRefl.children)FIN.parts.push({me:o,t0:5.5,v:new THREE.Vector3(0,-1,0),w:new THREE.Vector3(),go:false,refl:true});}
+  const g=hallObj.giant;
+  if(g){const u0=clamp(t/7,0,1),k=1+6*u0*u0*(3-2*u0);g.mesh.scale.setScalar(k);const to=Math.atan2(player.p.x-g.mesh.position.x,player.p.z-g.mesh.position.z);g.head=damp(g.head,to,1.5,dt);g.mesh.rotation.y=g.head;
+    if(t>2.6&&t<4.4)venFrame(g,VNS.m.walk+Math.min(VNS.m.lunge-1,Math.floor((t-2.6)/1.4*VNS.m.lunge)));else{g.wf+=dt*(t<2.6?6:3);venFrame(g,Math.floor(g.wf)%VNS.m.walk);}
+    g.br.value=t<7?1+.5*Math.max(0,Math.sin(t*9))*(t>2.6?1:0):damp(g.br.value,.6,1,dt);}
+  if(t<9)shakeT=Math.max(shakeT,t<2.6?.35+t*.15:.9);
+  if(t>2.6&&t<3)post.uniforms.uGlitch.value=1;
+  // обломки: сначала вверх и в стороны, потом падают в белую пустоту
+  for(const q of FIN.parts){if(t<q.t0)continue;if(!q.go){q.go=true;if(!q.refl&&S.hitWood)S.hitWood();}const d=t-q.t0;
+    if(q.refl){q.me.position.y-=dt*(1+d*4);continue;}q.v.y-=9*dt;q.me.position.addScaledVector(q.v,dt);q.me.rotation.x+=q.w.x*dt;q.me.rotation.y+=q.w.y*dt;q.me.rotation.z+=q.w.z*dt;}
+  // она свободна: поднимается и тает в свете
+  if(t>7){FIN.lift+=dt*(.25+(t-7)*.35);if(t>7.6&&!FIN.said){FIN.said=1;MUS.force={g:'adazhio',tr:'voshod'};cap('Спасибо… Ты меня освободил.',5200);}if(t>11.5)FIN.fade=damp(FIN.fade,0,.8,dt);
+    if(hallObj.pianGlow){hallObj.pianGlow.sp?hallObj.pianGlow.sp.position.y=1.4+FIN.lift:0;}}
+  if(t>8)post.uniforms.uMem.value=damp(post.uniforms.uMem.value,1,.8,dt);}
 /* разговоры у предметов: только то, что рядом и видно */
 const TALK=[];let talked={};
 function talkCheck(){for(const t of TALK){if(talked[t.id])continue;const o=t.o();if(!o)continue;if(o.u&&o.u.value<.5)continue;if(o.p.distanceTo(player.p)<t.r){talked[t.id]=1;cap(t.s,4800);return;}}}
@@ -917,12 +940,13 @@ function enterHall(){state='trans';MUS.force=hallVisited?{g:'*',tr:'rastvor'}:{g
     setFade(0,1800);setTimeout(()=>cap('Она сидит в огромном зале. Играет, как в ту зиму.',4500),1200);waveState='wait';waveTimer=6;},1000);}
 
 /* ---------- финал ---------- */
-const STORY=['Мне было семь, когда мама впервые заиграла адажио ночью.','Отец вернулся с охоты другим: с ветками в волосах и красными глазами. Он стоял под окном до рассвета и слушал.','Утром он снова был отцом. Мама больше никогда не давала мне спичек.','Я вырос. Я женился на пианистке. В первую же зиму я ушёл в лес — и вернулся с ветками в волосах.','Теперь она играет для меня. Каждую ночь.','А я каждую ночь думаю, что охраняю её музыку от чудовища.','Но её музыка охраняет мир от меня.'];
+const STORY=['Мне было семь, когда мама впервые заиграла адажио ночью.','Отец вернулся с охоты другим: с ветками в волосах и красными глазами. Он стоял под окном до рассвета и слушал.','Утром он снова был отцом. Мама больше никогда не давала мне спичек.','Я вырос. Я женился на пианистке. В первую же зиму я ушёл в лес — и вернулся с ветками в волосах.','Теперь она играет для меня. Каждую ночь.','А я каждую ночь думаю, что охраняю её музыку от чудовища.','Но её музыка охраняет мир от меня.','В ту ночь я вырос выше потолка, и стены не выдержали.','Она поднялась над обломками, легко, как в детстве на качелях, и сказала: «Спасибо. Ты меня отпустил».'];
 function showEnd(){state='end';setFade(1,1500);setTimeout(()=>{const e=$('end');e.style.display='grid';const st=$('story');
   st.innerHTML=STORY.map(s=>`<p>${s}</p>`).join('')+`<button id="again" class="btn" style="position:static;margin:20px auto 0" aria-label="Следующий круг"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></button>`;
   [...st.querySelectorAll('p')].forEach((p,i)=>setTimeout(()=>p.style.opacity=1,600+i*1900));setTimeout(()=>$('again').style.opacity=1,600+STORY.length*1900);
   $('again').onclick=()=>{e.style.display='none';nextCircle();};},1600);}
-function nextCircle(){angelB=0;hallVisited=false;hallStash=[];circle++;musEvent('circle');wave=0;lives=3;drawLives();H_=1;silence=false;ven=null;finale=0;talked={};blobs.length=0;
+function finClear(){if(hallObj.giant){killVen(hallObj.giant);hallObj.giant=null;}FIN.on=false;FIN.lift=0;FIN.fade=1;shakeT=0;}
+function nextCircle(){finClear();angelB=0;hallVisited=false;hallStash=[];circle++;musEvent('circle');wave=0;lives=3;drawLives();H_=1;silence=false;if(ven&&ven.o)killVen(ven.o);ven=null;finale=0;talked={};blobs.length=0;
   unlocked.w=WPN.map(()=>true);unlocked.items=['arb2','drob','pulemet','arb0','fantom'];
   bills.length=0;glows.length=0;buildExt();buildHall();setupTalk();setW(0);enterExt();}
 /* ================= ЛАБИРИНТ: растёт с каждой гибелью =================
@@ -935,6 +959,19 @@ let mzr=1;const mrand=()=>{mzr=(mzr*16807)%2147483647;return mzr/2147483647;};
 const mzVar=()=>deaths<=2?'re':deaths<=4?'gc':'bw';
 const MZH={toy_bear:.55,toy_doll:.5,toy_horse:.55,toy_soldier:.55,swings:2.4,loot_crate:.75,abandoned_car:1.55,dead_tree:4.6,fir:4.2,bush:1.5,ruin_house1:3.4,ruin_house2:5.0,ruin_house3:5.6,rock1:.9,stump:.7,broken_fence:1.2,gate:3.4,dry_grass:.6,reeds:1.2,log:.45,hands_flashlight:.45};
 const MAZE_SPR=['gazon','dorozhka','kust_roz','les','fonar','vorona','statuya_sad','chasy','fasad_svet','pianistka','pianistka_strah','kupol','bashnya','besedka','zerkalo','zerkalo_v','fontan','tuman','v_prizrak','blob','blob_vzryv','pol_d','potolok_d','stena_d','kolonna_d','lyustra','shtora','dver_d','arka_d'];
+/* объёмный Вендиго: 10 кадров шага + 6 кадров броска, слоёная модель из архива владельца */
+const VNS={ready:false,geo:[],geoL:[],img:[],tex:null,n:0};
+async function venStackLoad(){try{const m=await (await fetch('a/vs/vs_meta.json')).json();VNS.m=m;const g={nx:m.nx,nz:m.nz,ny:m.ny,cols:m.cols,s:3.3/m.ny};
+  for(const f of m.frames){const im=await loadImg('a/vs/'+f+'.webp');VNS.img.push(im);VNS.geo.push(stackGeo(g,im));VNS.geoL.push(stackGeo(g,im,2));await new Promise(r=>setTimeout(r,0));}
+  VNS.ready=true;}catch(e){console.warn('vs',e);}}
+function venTexGet(){if(!VNS.tex){VNS.tex=VNS.img.map(im=>nearestTex(im));VNS.tex.forEach(x=>{try{renderer.initTexture(x);}catch(e){}});}VNS.n=(VNS.n||0)+1;return VNS.tex;}
+function venTexDrop(){VNS.n--;if(VNS.n<=0&&VNS.tex){VNS.tex.forEach(t=>t.dispose());VNS.tex=null;VNS.n=0;}}
+function venStackMake(p,o={}){const sc=o.scene||scHall,t=venTexGet(),br={value:1};const mat=stackMat(t[0],{nolamp:true,bright:br,fogk:o.fogk,fogc:o.fogc});
+  const lod=new THREE.LOD();const a=new THREE.Mesh(VNS.geo[0],mat),b=new THREE.Mesh(VNS.geoL[0],mat);lod.addLevel(a,0);lod.addLevel(b,o.far||11);lod.position.set(p.x,0,p.z);const k=o.scale||1;lod.scale.setScalar(k);sc.add(lod);
+  let ref=null;if(o.ref!==false){ref=spr(sc,'vw0',{h:3.2,x:p.x,z:p.z,lit:.2,mirror:true});ref.mesh.visible=false;}
+  return {st:true,mesh:lod,a,b,mat,br,ref,mm:ref&&ref.mm,scene:sc,f:0,wf:0,push:0,lg:0,head:0};}
+function venFrame(o,i){if(o.f===i)return;o.f=i;o.a.geometry=VNS.geo[i];o.b.geometry=VNS.geoL[i];o.mat.uniforms.uTex.value=VNS.tex[i];}
+function killVen(o){if(!o)return;if(!o.st){kill(o);return;}if(o.dead)return;o.dead=true;o.scene.remove(o.mesh);if(o.ref)kill(o.ref);o.mat.dispose();venTexDrop();}
 function mzLoad(){if(mzReady)return mzReady;mzReady=(async()=>{
   await Promise.all(MAZE_SPR.filter(n=>!tex[n]).map(texLoad));
   mzStackMeta=await (await fetch('a/mz/mz_meta.json')).json();
@@ -1064,15 +1101,32 @@ function monHit(m,dmg=1){if(m.dead)return;m.hp-=dmg;musHit();S.pop();post.unifor
   if(m.mode==='hang'){m.mode='drop';m.t=0;}
   if(m.hp<=0){m.dead=true;m.dying=0;mzAct(m,'death');score++;}}
 async function enterMaze(first){state='trans';setFade(1,900);await new Promise(r=>setTimeout(r,950));
-  await buildMaze();scene=scMaze;state='maze';lives=3;drawLives();G.uBright.value=1;post.uniforms.uRed.value=0;dread=0;
-  player.p.set(mzX(MZ.P.start[0]),1.72,mzZ(MZ.P.o)+MZC/2+9);player.v.set(0,0,0);yaw=yawT=0;pitch=pitchT=.05;
+  giantDrop();await buildMaze();scene=scMaze;state='maze';lives=3;drawLives();G.uBright.value=1;post.uniforms.uRed.value=0;dread=0;
+  player.p.set(mzX(MZ.P.start[0]),1.72,mzZ(MZ.P.o)+MZC/2+9);player.v.set(0,0,0);yaw=yawT=0;pitch=pitchT=.05;giantSpawn();
   G.uFogC.value.set(0x34383a);G.uFogD.value=.034+.004*Math.min(8,deaths);G.uMix.value=0;
   if(AC){musicLP.frequency.setTargetAtTime(900,AC.currentTime,.4);windG.gain.setTargetAtTime(.16,AC.currentTime,1);}
   MUS.force={g:'noktyurn',tr:'odin'};setFade(0,1600);lastInput=now;homeJ.k='';
   setTimeout(()=>cap(first?'Я снова у ворот… но сад стал другим. Её музыку слышно где-то за кустами.':'Я снова у ворот. Дорога к ней стала длиннее.',5200),1200);}
+/* гигант в саду: выше кустов в четыре раза, идёт сквозь живую изгородь; убить нельзя — выстрел только отталкивает */
+function giantSpawn(){if(!VNS.ready||!MZ)return;const P=MZ.P;let best=null,bd=-1;for(let k=0;k<40;k++){const i=Math.floor(rnd()*P.N),j=Math.floor(rnd()*P.N);if(!P.inR(i,j))continue;const x=mzX(i),z=mzZ(j);const d=Math.hypot(x-player.p.x,z-player.p.z);if(d>bd){bd=d;best=[x,z];}}
+  if(!best)return;const g=venStackMake({x:best[0],z:best[1]},{scene:scMaze,scale:4,far:40,ref:false,fogk:.012,fogc:new THREE.Vector3(.204,.22,.227)});g.t=0;g.ph=rnd()*6;g.step=0;g.cd=0;g.sp=1.15+.08*Math.min(6,deaths);MZ.giant=g;}
+function giantDrop(){if(MZ&&MZ.giant){killVen(MZ.giant);MZ.giant=null;}}
+const giantPos=()=>MZ.giant.mesh.position.clone().add(new THREE.Vector3(0,7,0));
+function giantTick(dt,gdt){const g=MZ.giant;if(!g)return;g.t+=gdt;const p=g.mesh.position,pp=player.p;const tx=pp.x-p.x,tz=pp.z-p.z,d=Math.hypot(tx,tz)||1;
+  if(MZ.safe&&!g.lg){g.wf+=gdt*2;venFrame(g,Math.floor(g.wf)%VNS.m.walk);return;}
+  if(g.push>0){p.x-=tx/d*g.push*dt*4;p.z-=tz/d*g.push*dt*4;g.push=Math.max(0,g.push-dt*2.5);g.lg=0;}
+  else{if(!g.lg&&d<10&&g.cd<=0)g.lg=.001;const zig=g.lg?0:Math.sin(g.t*.35+g.ph)*.6;const hd=Math.atan2(tx,tz)+zig;g.head=damp(g.head,hd,g.lg?6:1.5,dt);
+    const v=g.sp*(g.lg?2.4:1)*1;p.x+=Math.sin(g.head)*v*gdt;p.z+=Math.cos(g.head)*v*gdt;
+    if(g.lg){g.lg=Math.min(1,g.lg+gdt/1.1);venFrame(g,VNS.m.walk+Math.min(VNS.m.lunge-1,Math.floor(g.lg*VNS.m.lunge)));
+      if(g.lg>=1){if(d<5.5){lives--;drawLives();S.scream();post.uniforms.uRed.value=.8;post.uniforms.uGlitch.value=1;g.push=2;g.cd=4;if(lives<=0){mzDeath();return;}}else{g.lg=0;g.cd=2;}}}
+    else{const pf=Math.floor(g.wf);g.wf+=v*gdt*1.7;const f=Math.floor(g.wf);venFrame(g,f%VNS.m.walk);
+      // каждый шаг — толчок земли, сильнее рядом
+      if(f!==pf&&f%5===0&&d<34){const k=1-d/34;post.uniforms.uGlitch.value=Math.max(post.uniforms.uGlitch.value,.25*k*k);shakeT=Math.max(shakeT,.25*k);if(S.hitWood)S.hitWood();}}}
+  g.cd-=dt;g.mesh.rotation.y=g.head;g.br.value=damp(g.br.value,1+g.push*.7,8,dt);
+  if(d<18){MZ.bossNear=true;dread=Math.max(dread,.5*(1-d/18));}}
 function mzDeath(){if(state!=='maze')return;state='trans';S.scream();post.uniforms.uRed.value=.7;mzPrevTrail=mzTrail.slice(-260);deaths++;
   for(const b of blobs)kill(b.o);blobs.length=0;setTimeout(()=>enterMaze(false),900);}
-function mzExit(){state='trans';setFade(1,1100);S.door();for(const b of blobs)kill(b.o);blobs.length=0;mzPrevTrail=[];dread=0;MUS.detX=0;
+function mzExit(){giantDrop();state='trans';setFade(1,1100);S.door();for(const b of blobs)kill(b.o);blobs.length=0;mzPrevTrail=[];dread=0;MUS.detX=0;
   setTimeout(()=>{scene=scExt;state='ext';MUS.extT=99;MUS.force={g:'adazhio',tr:'voshod'};player.p.set(0,1.78,11.5);yaw=yawT=0;pitch=pitchT=.06;G.uFogC.value.set(0x3d3f41);G.uFogD.value=.028;
     if(AC)musicLP.frequency.setTargetAtTime(650,AC.currentTime,.3);setFade(0,1600);cap('Нашёл. Её окно светится. Она ещё играет.',4200);lives=3;drawLives();lastInput=now;homeJ.k='';},1200);}
 /* ложный дом: чёрный зал, рояль пустой, её нет */
@@ -1163,7 +1217,7 @@ function mzTick(dt,gdt){const P=MZ.P;extSkyMat.uniforms.uYaw.value=yaw;extSkyMat
     if(L){const dir=tmp.set(L.x-b.p.x,2.5-b.p.y,L.z-b.p.z);const dd=dir.length();dir.normalize();b.p.addScaledVector(dir,b.sp*gdt);b.p.x+=Math.sin(b.t*1.7+b.ph)*.6*gdt;if(dd<.8){L.off=25;b.p.set(L.x+R(-12,12),3,L.z+R(-12,12));}}
     b.o.mesh.position.set(b.p.x,b.p.y-.7,b.p.z);}
   for(let i=blobs.length-1;i>=0;i--)if(blobs[i].dead&&(!blobs[i].mon||blobs[i].dying==null))blobs.splice(i,1);
-  MZ.chasers=chasers;MZ.bossNear=bossNear;
+  MZ.chasers=chasers;MZ.bossNear=bossNear;giantTick(dt,gdt);
   if(G.uFogD.value>.001)G.uFogD.value=damp(G.uFogD.value,(.034+.004*Math.min(8,deaths))*(MZ.flash?.6:1)*(1+.15*Math.sin(now*.23)),.5,dt);
   // видно и экономно: дальние объёмные предметы не рисуются
   if((MZ.cull=(MZ.cull||0)-dt)<=0){MZ.cull=.25;for(const l of MZ.stacks)l.visible=Math.hypot(l.position.x-pp.x,l.position.z-pp.z)<21;}
@@ -1171,7 +1225,7 @@ function mzTick(dt,gdt){const P=MZ.P;extSkyMat.uniforms.uYaw.value=yaw;extSkyMat
 
 /* не убил Вендиго — снова у ворот, а за воротами лабиринт стал больше */
 function gameOver(){state='trans';setFade(1,1500);if(AC)musicBus.gain.setTargetAtTime(0,AC.currentTime,.5);
-  setTimeout(()=>{lives=3;drawLives();H_=1;silence=false;ven=null;dread=0;blobs.forEach(b=>kill(b.o));blobs.length=0;hallStash=[];wave=Math.max(0,wave-1);waveState='wait';waveTimer=4;
+  setTimeout(()=>{lives=3;drawLives();H_=1;silence=false;if(ven&&ven.o)killVen(ven.o);ven=null;dread=0;blobs.forEach(b=>kill(b.o));blobs.length=0;hallStash=[];wave=Math.max(0,wave-1);waveState='wait';waveTimer=4;
     deaths++;enterMaze(deaths===1);},1700);}
 
 /* ---------- loop ---------- */
@@ -1202,7 +1256,8 @@ function frame(){requestAnimationFrame(frame);FRN++;
     player.p.y=damp(player.p.y,eyeY,10,dt);
     yaw=damp(yaw,yawT,13,dt);pitch=damp(pitch,pitchT,13,dt);
     cam.position.set(player.p.x,player.p.y+Math.sin(player.step*2)*.03*Math.min(1,spd/3)+Math.sin(now*.9)*.01,player.p.z);
-    cam.rotation.set(pitch+Math.sin(now*.7)*.003,yaw+Math.sin(now*.5)*.002,Math.sin(player.step)*.005*Math.min(1,spd/3));cam.updateMatrixWorld();
+    cam.rotation.set(pitch+Math.sin(now*.7)*.003,yaw+Math.sin(now*.5)*.002,Math.sin(player.step)*.005*Math.min(1,spd/3));
+if(shakeT>0){shakeT=Math.max(0,shakeT-dt*.9);const k=shakeT*shakeT;cam.position.y+=Math.sin(now*61)*.09*k;cam.rotation.x+=Math.sin(now*47)*.02*k;cam.rotation.z+=Math.sin(now*39)*.025*k;}cam.updateMatrixWorld();
   }
   // billboards
   for(const b of bills){if(b.bill&&b.mesh.parent===scene)b.mesh.rotation.y=Math.atan2(cam.position.x-b.mesh.position.x,cam.position.z-b.mesh.position.z);}
@@ -1262,21 +1317,23 @@ function frame(){requestAnimationFrame(frame);FRN++;
     for(let i=blobs.length-1;i>=0;i--)if(blobs[i].dead)blobs.splice(i,1);
     // он: идёт зигзагом, видно с разных сторон (8 ракурсов модели владельца)
     if(ven){ven.t+=gdt;const o=ven.o;
-      if(ven.mode==='appear'){if(ven.t>2.2){const p=o.mesh.position.clone();kill(o);ven.o=spr(scHall,'vw0',{h:3.2,x:p.x,z:p.z,lit:.2,mirror:true});ven.mode='walk';cap('Стреляй в него!',2000);}}
+      if(ven.mode==='appear'){if(ven.t>2.2){const p=o.mesh.position.clone();kill(o);ven.o=VNS.ready?venStackMake(p,{fogk:.043,fogc:new THREE.Vector3(.955,.943,.910)}):spr(scHall,'vw0',{h:3.2,x:p.x,z:p.z,lit:.2,mirror:true});ven.mode='walk';cap('Стреляй в него!',2000);}}
       else if(ven.mode==='walk'){const p=o.mesh.position;const to=tmp.copy(player.p).sub(p);to.y=0;const d=to.length();
-        const hd=Math.atan2(to.x,to.z)+Math.sin(ven.t*.9+ven.ph)*.8;ven.head=hd;const mvx=Math.sin(hd),mvz=Math.cos(hd);
-        if(ven.push>0){p.x-=to.x/d*ven.push*dt*3;p.z-=to.z/d*ven.push*dt*3;ven.push=Math.max(0,ven.push-dt*3);}else{const vk=(hideOn?.33:1)*(has('tuman')?.67:1);p.x+=mvx*ven.sp*vk*gdt;p.z+=mvz*ven.sp*vk*gdt;}
+        if(o.st&&ven.push>0)ven.lg=0;if(o.st&&!ven.lg&&d<3.4&&ven.push<=0)ven.lg=.001;
+        const zig=ven.lg?0:Math.sin(ven.t*.9+ven.ph)*.8;const hd=Math.atan2(to.x,to.z)+zig;ven.head=damp(ven.head||hd,hd,ven.lg?9:3,dt);const mvx=Math.sin(hd),mvz=Math.cos(hd);
+        if(ven.push>0){p.x-=to.x/d*ven.push*dt*3;p.z-=to.z/d*ven.push*dt*3;ven.push=Math.max(0,ven.push-dt*3);}else{const vk=(hideOn?.33:1)*(has('tuman')?.67:1)*(ven.lg?2.3:1);p.x+=mvx*ven.sp*vk*gdt;p.z+=mvz*ven.sp*vk*gdt;
+          if(o.st){if(ven.lg){ven.lg=Math.min(1,ven.lg+gdt/.7);venFrame(o,VNS.m.walk+Math.min(VNS.m.lunge-1,Math.floor(ven.lg*VNS.m.lunge)));}else{o.wf+=ven.sp*vk*gdt*6.5;venFrame(o,Math.floor(o.wf)%VNS.m.walk);}}}
+        if(o.st){o.mesh.rotation.y=ven.head;o.mesh.position.y=0;o.ref.mesh.position.set(p.x,0,p.z);o.br.value=damp(o.br.value,1+ven.push*.9,10,dt);}
         p.x=clamp(p.x,-6.3,6.3);p.z=clamp(p.z,-23,9.5);if(o.mm)o.mm.position.set(p.x,0,p.z);
-        const view=Math.atan2(cam.position.x-p.x,cam.position.z-p.z)-hd;let k=Math.round(view/(Math.PI/4));k=((k%8)+8)%8;const tx=tex['vw'+k*45];o.m.uniforms.uMap.value=tx;if(o.mm)o.mm.material.uniforms.uMap.value=tx;
-        o.m.uniforms.uTint.value.setRGB(1,1-ven.push*.3,1-ven.push*.3);
-        if(d<1.7){lives--;drawLives();hitThisWave=true;screamer();}}
+        const view=Math.atan2(cam.position.x-p.x,cam.position.z-p.z)-ven.head;let k=Math.round(view/(Math.PI/4));k=((k%8)+8)%8;const tx=tex['vw'+k*45];if(!o.st){o.m.uniforms.uMap.value=tx;o.m.uniforms.uTint.value.setRGB(1,1-ven.push*.3,1-ven.push*.3);}if(o.mm)o.mm.material.uniforms.uMap.value=tx;
+        if(d<(o.st?1.9:1.7)){lives--;drawLives();hitThisWave=true;screamer();}}
       else if(ven.mode==='leave'){o.m.uniforms.uOnce.value=Math.min(11,ven.t/1.4*11);o.m.uniforms.uOp.value=clamp(1-(ven.t-1)/0.6,0,1);if(ven.t>1.6){kill(o);endSilence();}}}
     // финал: взгляд в зеркало
     if(finale===1&&hallObj.zerk.m.uniforms.uOp.value>.95){cam.getWorldDirection(fwd);const zp=hallObj.zerk.mesh.position.clone().add(new THREE.Vector3(0,2.3,0));const to=zp.sub(cam.position);const d=to.length();
       if(d<30&&fwd.dot(to.normalize())>.93){finale=2;finT=0;musEvent('mirror');hallObj.zerkV.m.uniforms.uOp.value=1;hallObj.zerk.m.uniforms.uOp.value=0;hallObj.zerk.fadeIn=0;post.uniforms.uGlitch.value=1;S.scream();cap('Это не отражение. Это я.',4200);
         const fi=WPN.findIndex(w=>w.n==='fantom');unlocked.w[fi]=true;unlocked.items.push('fantom');}}
     if(finale===2){finT+=dt;if(finT>4){finale=3;memT=0;}}
-    if(finale===3){finT+=dt;post.uniforms.uMem.value=damp(post.uniforms.uMem.value,1,.8,dt);if(finT>8)showEnd(),finale=4;}
+    if(finale===3){finT+=dt;finTick(dt);if(finT>16)showEnd(),finale=4;}
   }
   // скример
   if(atk){atk.t+=dt;const k=Math.min(1,atk.t/1.3);atk.mesh.material.uniforms.uOnce.value=k*15;const s=.6+k*k*2.4;atk.mesh.scale.set(s,s,1);atk.mesh.position.set(0,-.08,0);
@@ -1291,7 +1348,7 @@ function frame(){requestAnimationFrame(frame);FRN++;
     const k=Math.min(1,r.t/r.d);const p=tmp.copy(r.st).lerp(r.end,k);r.m.position.copy(p);
     if(r.arrow){r.m.lookAt(r.m.position.clone().sub(r.end.clone().sub(r.st)));r.m.position.y-=k*(1-k)*.0;}
     for(const b of r.pierce)if(!b.dead&&b.p.distanceTo(p)<1.2)hitBlob(b,r.dmg||1);
-    if(k>=1){let hit=false;if(r.blob&&!r.blob.dead){hitBlob(r.blob,r.dmg||1);hit=true;}if(r.ven&&ven){hitVen();hit=true;}
+    if(k>=1){let hit=false;if(r.blob&&!r.blob.dead){hitBlob(r.blob,r.dmg||1);hit=true;}if(r.ven&&ven){hitVen();hit=true;}if(r.gi&&state==='maze'&&MZ&&MZ.giant){MZ.giant.push=Math.min(2.2,MZ.giant.push+(r.dmg||1)*.6);musHit();S.hitV();post.uniforms.uGlitch.value=Math.max(post.uniforms.uGlitch.value,.3);hit=true;}
       if(!hit&&state==='hall')musMiss();if(r.arrow&&!hit){r.stuck=4;S.hitWood&&S.hitWood();}else{r.m.parent&&r.m.parent.remove(r.m);shots.splice(i,1);}}}
   // оружие: неподвижно, двигается только вслед за прицелом
   if(wGrp){wCd=Math.max(0,wCd-dt);recoil=damp(recoil,0,12,dt);wSwitch=damp(wSwitch,0,6,dt);
@@ -1336,7 +1393,7 @@ async function boot(){
   const hallP=(async()=>{HG=buildHallGeo();HGL=buildHallGeo(.4);
     const [b,a]=await Promise.all([loadImg('a/pian_body.png'),loadImg('a/pian_arm.png')]);const ac=HG.atlas.getContext('2d');ac.drawImage(b,432,0,134,191);ac.drawImage(a,576,0,134,191);
     hallTex=new THREE.CanvasTexture(HG.atlas);hallTex.flipY=false;hallTex.colorSpace=THREE.NoColorSpace;hallTex.minFilter=THREE.LinearFilter;hallTex.generateMipmaps=false;
-    await Promise.all(HALL_SPR.map(texLoad));buildHall();window.__hallReady=1;})();
+    await Promise.all(HALL_SPR.map(texLoad));buildHall();window.__hallReady=1;venStackLoad();})();
   scene=scExt;state='menu';cam.position.set(0,1.78,11.5);cam.rotation.set(.06,0,0);cam.updateMatrixWorld();frame();
   $('play').onclick=()=>{unlockAudio();$('start').style.display='none';enterExt();};
   hallReady=hallP;
@@ -1350,7 +1407,7 @@ if(location.hash==='#bot')window.__bot={give(n){const i=WPN.findIndex(w=>w.n===n
   mzItem(n){const it=MZ.items.find(i=>i.n===n);if(it){player.p.x=it.x;player.p.z=it.z;}return !!it;},mzHouse(){const h=MZ.houses.find(h=>!h.visited);if(h){player.p.x=h.fx;player.p.z=h.fz;}return h?[h.fx,h.fz,h.x,h.z,player.p.x,player.p.z,mzBlocked(h.fx,h.fz)]:0;},mzKillAll(){MZ.mons.forEach(m=>{if(!m.dead){m.hp=1;monHit(m);}});},mzHurt(){lives=1;},hg(){return [HG.solid.length/27,HGL.solid.length/27,HG.slices.length/27,HG.detail.length/27,HG.floor.length/27,HG.solidLow.length/27]},tris(){const m={};scene.traverseVisible(o=>{if(o.isMesh&&o.geometry){const n=(o.geometry.index?o.geometry.index.count:o.geometry.attributes.position.count)/3;const k=Object.keys(extGeo).find(k=>extGeo[k]===o.geometry)||(Object.keys(extGeoL).find(k=>extGeoL[k]===o.geometry)||"")+"_far"||o.type+(o.material.type||"");m[k]=(m[k]||0)+n;}});return m;},refl(a,b){scHallRefl.children[0].visible=a;scHallRefl.children[1].visible=b;},cam(){return +yaw.toFixed(3)},aim(){return [+aim.x.toFixed(2),+aim.y.toFixed(2)]},dyn(){return [DYN.k,DYN.fps]},ly(){lyCrash();},arkL(){(DEC.arkiL||[]).forEach(o=>{o.tgt=1;o.until=now+10;});},spawn(n){for(let i=0;i<n;i++)spawnBlob();},circ(){nextCircle();},nearBlob(){const b=blobs.find(b=>!b.dead);if(b)b.p.set(PIAN.x+2,2,PIAN.z+2);},musSet:(g,tr)=>{MUS.testLock=true;MUS.force={g,tr,now:true};},get notes(){return MUS.notes},get harm(){return [MUS.notes,MUS.snap||0,MUS.dis||0]},decoTest:()=>{REWARD2.forEach(k=>{if(!has(k))reward(k);});},get s(){return{deco:Object.keys(DEC).map(k=>k+':'+DEC[k].map(o=>o.m?+o.m.uniforms.uOp.value.toFixed(2):+o.op.toFixed(2)).join('/')),hide:hideOn,ly:LY.ok,genre:MUS.g,tr:MUS.tr,seen:Object.keys(MUS.seen),mus:Object.fromEntries(['danger','flow','miss','calm','near','wound','key'].map(k=>[k,+(+MUS[k]).toFixed(2)])),fig:MUS.fig,dread:+dread.toFixed(2),score,state,wave,H:H_,silence,lives,blobs:blobs.length,circle,finale,items:unlocked.items.slice(),hall:!!window.__hallReady,w:WPN[wI].n,shots:shots.length,p:player.p.toArray().map(v=>+v.toFixed(2))}},
   hall(){player.p.set(0,1.78,-40);},out(){player.p.set(0,1.72,9.5);hallT=-9;},go(x,z){player.p.set(x,player.p.y,z);},shootAll(){blobs.slice().forEach(b=>!b.dead&&hitBlob(b));},killV(){if(ven&&ven.mode==='walk'){ven.hits=ven.need-1;hitVen();}},look(y,p){yawT=y;pitchT=p;},fire,
   freeze(){shots.forEach(a=>a.d=1e3);},aimAt(x,y){setAim(x*innerWidth,y*innerHeight);},scare(){lastScare=-99;scare(true);},forceWave(n){wave=n-1;waveState='wait';waveTimer=.1;},zero(){H_=0.01;},
-  fr(){return FRN;},lookVen(){if(!ven)return 0;const p=ven.o.mesh.position;yawT=Math.atan2(-(p.x-player.p.x),-(p.z-player.p.z));pitchT=0;return 1;},blobScreen(){const b=blobs.find(b=>!b.dead&&b.o.m.uniforms.uOp.value>.6);if(!b)return null;const v=b.p.clone().project(cam);if(v.z>1||Math.abs(v.x)>.95||Math.abs(v.y)>.95)return null;return[v.x*.5+.5,.5-v.y*.5];},speed(k){DTM=k;},info(){renderer.info.autoReset=false;renderer.info.reset();return new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>{const i=renderer.info.render;renderer.info.autoReset=true;r([i.calls,i.triangles,renderer.info.memory.geometries,renderer.info.memory.textures]);})));},now(){return now;},wpn(i){unlocked.w[i]=true;setW(i);},silence(){startSilence();}};
+  fr(){return FRN;},lookVen(){if(!ven)return 0;const p=ven.o.mesh.position;yawT=Math.atan2(-(p.x-player.p.x),-(p.z-player.p.z));pitchT=0;return 1;},blobScreen(){const b=blobs.find(b=>!b.dead&&b.o.m.uniforms.uOp.value>.6);if(!b)return null;const v=b.p.clone().project(cam);if(v.z>1||Math.abs(v.x)>.95||Math.abs(v.y)>.95)return null;return[v.x*.5+.5,.5-v.y*.5];},speed(k){DTM=k;},info(){renderer.info.autoReset=false;renderer.info.reset();return new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>{const i=renderer.info.render;renderer.info.autoReset=true;r([i.calls,i.triangles,renderer.info.memory.geometries,renderer.info.memory.textures]);})));},now(){return now;},wpn(i){unlocked.w[i]=true;setW(i);},silence(){startSilence();},ven(){return ven&&{mode:ven.mode,st:!!ven.o.st,f:ven.o.f,lg:+(ven.lg||0).toFixed(2),d:+ven.o.mesh.position.distanceTo(player.p).toFixed(2),ready:VNS.ready,hits:ven.hits};},venPlace(x,z){if(ven)ven.o.mesh.position.set(x,0,z);},giant(){const g=MZ&&MZ.giant;return g&&{x:+g.mesh.position.x.toFixed(1),z:+g.mesh.position.z.toFixed(1),f:g.f,lg:+g.lg.toFixed(2),push:+g.push.toFixed(2),d:+Math.hypot(g.mesh.position.x-player.p.x,g.mesh.position.z-player.p.z).toFixed(1),near:MZ.bossNear};},giantPlace(dx,dz){const g=MZ.giant;g.mesh.position.set(player.p.x+dx,0,player.p.z+dz);},fin(){finale=2;finT=3.9;},finInfo(){return {finale,finT:+finT.toFixed(1),g:!!hallObj.giant,sc:hallObj.giant?+hallObj.giant.mesh.scale.x.toFixed(2):0,lift:+FIN.lift.toFixed(2),parts:(FIN.parts||[]).filter(q=>q.go).length,state};}};
 boot();
 }
 </script>

@@ -1,0 +1,15 @@
+{
+ "sendAnalyticsEvents": true,
+ "game": {},
+ "advertisement": {
+  "initialInterstitialDelay": 120,
+  "minimumDelayBetweenInterstitial": 180,
+  "interstitial": {
+   "placements": [
+    {
+     "id": "round_end"
+    }
+   ]
+  }
+ }
+}

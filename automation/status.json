@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-26T07:50:32.575Z",
+  "generated_at": "2026-11-26T11:43:24.304Z",
   "sha": {
-    "lab": "615ea4e88f4c9e7c043c8f6e0e9794023418e4aa",
-    "mg": "696100335d24e1269be3df3793aea6bbca1c6fba"
+    "lab": "c2170c2834f8730fbbec1a63f3ac7d95fe6476d1",
+    "mg": "ca77c011d31cb4814b418007d77f34b6ebbf6a22"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45778148687",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45812911710",
   "review": {
     "protected": [
       {
@@ -434,6 +434,11 @@
     ],
     "redLab": [
       {
+        "workflow": "META BOT",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45794090757",
+        "step": "Play all games"
+      },
+      {
         "workflow": "MG Dispatcher",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45753726152",
         "step": "Run node scripts/dispetcher/run.mjs"
@@ -576,7 +581,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45562806578"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45778148606"
       },
       "P1": {
         "value": "не подтверждено",
@@ -586,8 +591,8 @@
     }
   },
   "pr": {
-    "open": 9,
-    "conflicts": "нет данных",
+    "open": 10,
+    "conflicts": 7,
     "merged": 100,
     "closed": 194,
     "mergedItems": [
@@ -1517,11 +1522,11 @@
   },
   "changes": {
     "lab": {
-      "count": 3555,
+      "count": 3561,
       "folders": "нет данных"
     },
     "mg": {
-      "count": 69,
+      "count": 71,
       "folders": ".github:6, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, killklan:6, killklan-game:132, meta-games:1, OSHIBKI.md:1, playgama-catalog:36, playgama-games:3, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1"
     }
   },

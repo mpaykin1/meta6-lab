@@ -4,7 +4,7 @@ export function createLinkedMaze(ROT, originalPlan,{losses=0,deaths=0,circle=1}=
  const base=originalPlan(d);if(!extra||!ROT?.Map?.EllerMaze||!ROT?.Path?.AStar)return base;
  const P=originalPlan(d+extra),n=P.Gs,o=P.o,top=P.top,size=2*n+1,D=P.D,seed=(104729*Math.max(1,circle)+7919*extra+97*d)>>>0;
  const turns=sol=>sol.slice(2).filter((v,k)=>v[0]-sol[k+1][0]!==sol[k+1][0]-sol[k][0]||v[1]-sol[k+1][1]!==sol[k+1][1]-sol[k][1]).length;
- const target=turns(base.sol)+extra,minLen=base.sol.length+extra,center=(x,y)=>[2*(x-o)+1,2*(y-o)+1];
+ const target=turns(base.sol)+extra,minLen=base.sol.length+1,center=(x,y)=>[2*(x-o)+1,2*(y-o)+1];
  let chosen=null,best=null;
  const old=ROT.RNG.getState();try{
  ROT.RNG.setSeed(seed||1);

@@ -9,6 +9,7 @@
 
 Сторож проверил: 2026-11-17 06:54 UTC
 
+| 🙋 НУЖЕН CLAUDE | KILLKLAN SEO: перенос PR #451 в meta6/killklan, проверка публичных URL, генерация и отправка Sitemap | МГ | чат ChatGPT | `lab/killklan-seo-20261125` | [#451](https://github.com/mpaykin1/meta6-lab/pull/451) | 2026-11-26 UTC | Только после зелёного CI; не менять игровой JS. |
 | взято | Z01: устранение конфликта визуального INK-инспектора #354 | МГЛ | чат ChatGPT | `lab/3d-master-visual-split-20261117` | [#354](https://github.com/mpaykin1/meta6-lab/pull/354) | 2026-11-19 UTC | — |
 | взято | Глава II «Острова последнего аптекаря»: синхронизация PR #297 с main | МГЛ | чат ChatGPT | `lab/ostrov-aptekarya-ii` | [#297](https://github.com/mpaykin1/meta6-lab/pull/297) | 2026-11-19 UTC | — |
 | взято | Z04 B2: довести реальный верификатор движения, закрыть ловушку KONTUR PR #355 | МГЛ | чат ChatGPT | `lab/z04-b2-extract-motion-20261117` | [#355](https://github.com/mpaykin1/meta6-lab/pull/355) | 2026-11-18 UTC | — |

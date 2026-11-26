@@ -1,0 +1,476 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#dedfd6"><script src="https://bridge.playgama.com/v2/stable/playgama-bridge.js"></script><title>KILLKLAN: Search Glitch</title>
+<style>
+:root{--ink:#525e60;--ink2:#657677;--line:#a8b0aa;--panel:#f1f3ed75;--hover:#d2dcd4c0;--accent:#365ab3}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+body{background:#e1e4d9;font:16px Arial,sans-serif;color:var(--ink);position:fixed;inset:0;transition:color .9s}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:30;background:repeating-linear-gradient(0deg,#203c4820 0px,transparent 1px,transparent 4px);opacity:.22}
+#bg{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+#veil{position:fixed;inset:0;pointer-events:none;z-index:25;background:radial-gradient(ellipse at 50% 45%,#c0141a55 0%,#8a050ab0 75%,#4a0205e0 100%);mix-blend-mode:multiply;opacity:0}
+#stage{position:fixed;inset:0;width:100%;height:100%;z-index:2;display:none;touch-action:none}
+.scr{position:fixed;inset:0;z-index:3;display:none;flex-direction:column;align-items:center;justify-content:center;padding:70px 16px 24px}
+.scr.on{display:flex}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1{font-size:clamp(58px,15vw,108px);letter-spacing:-.075em;line-height:1;margin:0 0 34px;text-align:center;font-weight:600;filter:blur(.35px);text-shadow:0 1px 2px #64777b30}
+h1 span{display:inline-block;animation:breathe 5.2s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-.55s);will-change:transform}
+@keyframes breathe{0%{transform:translate3d(0,-2px,0) rotate(-1.2deg)}50%{transform:translate3d(0,1px,0) rotate(.4deg)}100%{transform:translate3d(0,3px,0) rotate(1.1deg)}}
+h1.glitching span{text-shadow:3px 0 #b44b40aa,-3px 0 #365ab3aa}
+h1 span:nth-child(4n+1){color:#365ab3}h1 span:nth-child(4n+2){color:#b44b40}h1 span:nth-child(4n+3){color:#c6a047}h1 span:nth-child(4n){color:#54866b}
+.panel{border:1px solid var(--line);border-radius:7px;background:var(--panel);box-shadow:0 5px 25px #44534a0e;-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);transition:border-color .9s,background-color .9s}
+.field{display:flex;align-items:center;gap:14px;padding:15px 16px;width:min(560px,100%)}
+.mag{width:18px;height:18px;flex-shrink:0;position:relative}
+.mag svg{position:absolute;inset:-6px;width:30px;height:30px;overflow:visible}
+input{min-width:0;flex:1;border:0;background:transparent;outline:none;font:clamp(16px,4.4vw,20px) Arial;color:var(--ink);-webkit-user-select:text;user-select:text}
+input::placeholder{color:var(--ink2);opacity:.75}
+#go{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;opacity:.75;transition:transform .3s cubic-bezier(.2,.8,.3,1),opacity .3s}#go:hover{opacity:1;transform:scale(1.08)}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:18px 0 0;width:min(560px,100%)}
+.chip{padding:9px 13px;border:1px solid var(--line);border-radius:18px;font-size:14px;background:var(--panel);transition:background-color .25s,transform .35s cubic-bezier(.2,.8,.3,1);animation:floaty 4.8s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-1.3s)}
+.chip:hover{background:var(--hover);transform:translateY(-2px)}
+@keyframes floaty{from{transform:translateY(-2px)}to{transform:translateY(2px)}}
+.orbs{display:flex;gap:22px;margin-top:30px}
+.orb{width:58px;height:58px;border-radius:50%;border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;position:relative;transition:transform .4s cubic-bezier(.2,.8,.3,1),opacity .6s,filter .6s;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.orb svg{width:28px;height:28px}
+.orb.locked{opacity:.28;filter:grayscale(1)}
+.orb.locked:after{content:"";position:absolute;width:10px;height:8px;right:6px;bottom:8px;border-radius:2px;background:var(--ink2)}
+.orb:not(.locked):hover{transform:scale(1.08)}
+.orb.fresh{animation:pulse 1.4s ease-in-out 4}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--accent)}50%{box-shadow:0 0 0 12px #0000}}
+.orb i{position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--accent);opacity:0;transform:scale(.8);transition:opacity .4s,transform .4s}
+.orb.last i{opacity:.35;transform:scale(1)}
+#menuBtn{position:fixed;top:max(12px,env(safe-area-inset-top));right:12px;z-index:40;width:44px;height:44px;border-radius:8px;display:grid;place-items:center;background:var(--panel);border:1px solid var(--line);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+#menuBtn.glow{animation:pulse 1.6s ease-in-out infinite}
+#hearts{position:fixed;top:max(14px,env(safe-area-inset-top));left:14px;z-index:20;display:none;gap:8px}
+#hearts b{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);transition:transform .4s,opacity .4s,background-color .9s}
+#hearts b.off{opacity:.15;transform:scale(.6);box-shadow:none}
+#ring{position:fixed;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:20;display:none;width:min(560px,100% - 184px)}
+#ring .field{width:100%;padding:11px 14px}
+#ring .mag{display:none}
+#slots{display:flex;gap:4px;flex:1;justify-content:center;min-height:30px;align-items:center}
+#slots u{text-decoration:none;min-width:17px;height:30px;border-bottom:2px solid var(--line);font:600 clamp(17px,5vw,22px) Arial;text-align:center;color:transparent;transition:color .3s,border-color .3s,transform .4s cubic-bezier(.2,.8,.3,1)}
+#slots u.ok{color:var(--ink);border-color:var(--accent);transform:translateY(-2px)}
+#slots u.next{border-color:var(--accent);animation:blink 1s ease-in-out infinite}
+@keyframes blink{50%{border-color:transparent}}
+#clue{flex:1;text-align:center;font-size:clamp(14px,4vw,18px);line-height:1.35}
+#tbar{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--accent);transform-origin:left;transform:scaleX(var(--p,0));opacity:.8}
+#ring .panel{position:relative;overflow:hidden}
+.cards{display:grid;gap:12px;width:min(560px,100%);grid-template-columns:repeat(var(--n,3),1fr)}
+.card{aspect-ratio:1;border-radius:8px;overflow:hidden;position:relative;background:var(--line);box-shadow:0 6px 22px #20303026;transition:transform .45s cubic-bezier(.2,.8,.3,1),box-shadow .45s,opacity .5s,filter .5s}
+.card img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .6s}.card img.ok{opacity:1}
+.card.lit{transform:scale(1.08);box-shadow:0 0 0 3px var(--accent),0 10px 40px #0004}
+.card.dim{filter:grayscale(.8) brightness(.8);opacity:.6}
+.card.win{box-shadow:0 0 0 4px #54866b,0 0 40px #54866b}
+.card.bad{animation:shake .45s}
+.card .eq{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;gap:4px;padding:18%;background:#0004;opacity:0;transition:opacity .3s}
+.card.lit .eq{opacity:1}
+.eq u{width:6px;background:#fff;border-radius:2px;height:40%;animation:eq .9s ease-in-out infinite alternate}.eq u:nth-child(2){animation-delay:-.3s}.eq u:nth-child(3){animation-delay:-.62s}
+@keyframes eq{from{height:18%}to{height:92%}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.ask{margin-top:22px;width:62px;height:62px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:var(--panel);opacity:0;transition:opacity .5s,transform .5s}
+.ask.on{opacity:1;animation:breathe2 1.6s ease-in-out infinite alternate}
+@keyframes breathe2{from{transform:scale(.96)}to{transform:scale(1.05)}}
+.doors{display:grid;gap:14px;width:min(560px,100%);grid-template-columns:repeat(var(--n,3),1fr);perspective:700px}
+.door{border-radius:8px 8px 4px 4px;padding:12px 6px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:clamp(12px,3.4vw,15px);transition:transform .5s cubic-bezier(.2,.8,.3,1),opacity .6s,filter .6s;animation:floaty 5s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-1.1s)}
+.door svg{width:100%;max-width:90px;height:auto;overflow:visible}
+.door .leaf{transform-origin:12px 60px;transition:transform .9s cubic-bezier(.2,.8,.3,1)}
+.door.open .leaf{transform:scaleX(.08)}
+.door.open{filter:drop-shadow(0 0 18px var(--accent))}
+.door.gone{opacity:0;transform:scale(.7) translateY(16px);pointer-events:none}
+.door span{text-align:center;line-height:1.25;overflow-wrap:anywhere}
+.door:hover{transform:translateY(-3px)}
+#res{width:min(560px,100%)}
+.row{display:flex;align-items:center;gap:14px;padding:14px 16px;font-size:17px;line-height:1.35}
+.row .art{width:62px;height:62px;border-radius:5px;flex-shrink:0;overflow:hidden;background:var(--line);box-shadow:0 4px 14px #20303022}
+.row .art img{width:100%;height:100%;object-fit:cover}
+.row small{display:block;font:10px monospace;letter-spacing:.06em;opacity:.75;margin-top:6px}
+#cap{position:fixed;left:50%;bottom:max(26px,env(safe-area-inset-bottom));transform:translate(-50%,10px);z-index:35;padding:11px 16px;border-radius:6px;font:12px monospace;letter-spacing:.08em;background:var(--panel);border:1px solid var(--line);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .6s,transform .6s;text-align:center;max-width:92vw}
+#cap.on{opacity:1;transform:translate(-50%,0)}
+#glitch{position:fixed;left:50%;top:16%;z-index:36;transform:translate(-50%,-8px);padding:13px 18px;border:1px solid #ff5a5a;background:#1a0204e6;color:#ffd6d6;font:12px monospace;letter-spacing:.1em;border-radius:3px;opacity:0;pointer-events:none;transition:opacity .35s,transform .35s;white-space:nowrap;box-shadow:0 0 30px #ff202055}
+#glitch.on{opacity:1;transform:translate(-50%,0);animation:jit .18s steps(2) infinite}
+@keyframes jit{0%{margin-left:0}50%{margin-left:2px;text-shadow:2px 0 #f33,-2px 0 #39f}100%{margin-left:-1px}}
+#menu{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:#1a222466;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#menu.on{display:flex}
+#menu .box{width:min(480px,94vw);max-height:86vh;overflow:auto;padding:20px 20px 16px;background:#f3f4eef2;color:#3f4a4c;border-radius:10px;border:1px solid var(--line);box-shadow:0 20px 60px #0005;-webkit-user-select:text;user-select:text}
+#menu h2{font:11px monospace;letter-spacing:.14em;margin:16px 0 8px;opacity:.75}
+#menu h2:first-child{margin-top:0}
+#menu p,#menu li{font-size:14px;line-height:1.5;margin:4px 0}
+#menu ul{padding-left:18px;margin:4px 0}
+#menu li.lk{opacity:.4}
+#menu .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+#menu .btns button{padding:9px 12px;border:1px solid #a8b0aa;border-radius:5px;font-size:14px}
+#menu .btns button:hover{background:#d2dcd4}
+#menu .x{float:right;width:34px;height:34px;border-radius:50%;border:1px solid #a8b0aa;font-size:18px;line-height:1}
+#story{white-space:pre-line}
+@media(prefers-reduced-motion:reduce){h1 span,.chip,.door,.orb.fresh,.ask.on{animation:none}}
+@media(max-height:560px){h1{font-size:52px;margin-bottom:16px}.orbs{margin-top:16px}}
+</style></head><body>
+<canvas id="bg" aria-hidden="true"></canvas><canvas id="stage"></canvas><div id="veil" aria-hidden="true"></div><div id="glitch" role="status"></div><div id="cap" role="status" aria-live="polite"></div>
+<button id="menuBtn" aria-label="Меню"><svg width="20" height="16" viewBox="0 0 20 16"><path d="M1 2h18M1 8h18M1 14h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+<div id="hearts" aria-label="Жизни"><b></b><b></b><b></b></div>
+<div id="ring"><div class="panel"><div class="field"><i class="mag" aria-hidden="true"><svg viewBox="0 0 30 30"><circle cx="13" cy="13" r="6" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".6"/><path d="M17.5 17.5l5 5" stroke="currentColor" stroke-width="1.6" opacity=".6"/></svg></i><div id="slots"></div><div id="clue"></div></div><i id="tbar"></i></div></div>
+<section class="scr on" id="hub">
+ <h1 id="logo" aria-label="killklan"><span>k</span><span>i</span><span>l</span><span>l</span><span>k</span><span>l</span><span>a</span><span>n</span></h1>
+ <form class="panel field" id="form" autocomplete="off"><i class="mag" aria-hidden="true"><svg viewBox="0 0 30 30"><circle cx="13" cy="13" r="6" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".6"/><path d="M17.5 17.5l5 5" stroke="currentColor" stroke-width="1.6" opacity=".6"/></svg></i><input id="q" maxlength="60" spellcheck="false" enterkeyhint="search" aria-label="Поиск"><button id="go" type="submit" aria-label="Искать"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M3 9h11M10 4l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></form>
+ <div class="chips" id="chips"></div>
+ <div class="orbs">
+  <button class="orb" id="orbR" aria-label="Поймай запрос"><i></i><svg viewBox="0 0 28 28"><path d="M10 20V7l11-3v13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7.5" cy="20.5" r="3" fill="currentColor"/><circle cx="18.5" cy="17.5" r="3" fill="currentColor"/></svg></button>
+  <button class="orb" id="orbG" aria-label="Угадай трек"><i></i><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="14" cy="14" r="3" fill="currentColor"/><path d="M14 4a10 10 0 0 1 10 10" fill="none" stroke="currentColor" stroke-width="3" opacity=".45"/></svg></button>
+  <button class="orb" id="orbE" aria-label="Побег из поисковика"><i></i><svg viewBox="0 0 28 28"><path d="M7 24V5h11v19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18 5l5 3v16l-5-0" fill="currentColor" opacity=".35"/><circle cx="15" cy="15" r="1.4" fill="currentColor"/><path d="M4 24h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+ </div>
+</section>
+<section class="scr" id="gscr"><div class="cards" id="cards"></div><button class="ask" id="replay" aria-label="Повторить"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M9 6l12 7-12 7z" fill="currentColor"/></svg></button></section>
+<section class="scr" id="escr"><div class="doors" id="doors"></div></section>
+<section class="scr" id="rscr"><div class="panel" id="res"></div></section>
+<div id="menu" role="dialog" aria-modal="true"><div class="box"><button class="x" id="mclose" aria-label="Закрыть">×</button><div id="mbody"></div></div></div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const ASSET='';
+const CATJ=[[1814619289,"beyond","Beyond Truth","2025"],[1807274207,"signals","signals","2025"],[6767891558,"lampochka","Without AI","2026"],[1624238347,"Time To Hecitate (feat. Aesso)","Time To Hecitate (feat. Aesso)","2022"],[1652776047,"Lubimka","Lubimka","2022"],[1586538431,"Matrix 4","Matrix 4","2021"],[1581334962,"Jungle Trash","Jungle Trash","2021"],[1573147420,"Two Trap","Two Trap","2021"],[1642673585,"Choose Your... (feat. Aesso)","Choose Your... (feat. Aesso)","2022"],[1572095671,"I For You (feat. Inviz)","I For You (feat. Inviz)","2021"],[1634324339,"Base 1","Base 1","2022"],[1624232197,"Time to Hecitate","Time to Hecitate","2022"],[6809886196,"whale","CRedit Card","2026"],[1606519354,"Самолёты","Микродвижения","2021"],[1585861935,"Real Estate","Real Estate","2021"],[6809886191,"listen","CRedit Card","2026"],[1807274273,"waterfall","signals","2025"],[1626018686,"Time to Replace","Time To ...","2022"],[6809886198,"zdes","CRedit Card","2026"],[1585722165,"World (feat. Blocks Haks)","World (feat. Blocks Haks)","2021"],[1547202169,"Chudovishe","Chudovishe","2020"],[1565211747,"With a Gun","With a Gun","2021"],[1814619290,"bliss","Beyond Truth","2025"],[6767891553,"na tu","Without AI","2026"],[1581622304,"Thrili","Thrili","2021"],[6767891567,"ta da","Without AI","2026"],[6767891356,"meat","Without AI","2026"],[1589718184,"Exorcizamus Te","Exorcizamus Te","2021"],[1575790773,"My Head","My Love","2021"],[1566296373,"God Is Sweet","My God is a Snake","2021"],[1814619296,"hi","Beyond Truth","2025"],[6809886189,"doygo","CRedit Card","2026"],[1578941399,"sunshine soul (feat. Radayara)","sunshine soul (feat. Radayara)","2021"],[6767891547,"skvo","Without AI","2026"],[1585006546,"Timerman (feat. Nataly Shwarts)","Timerman (feat. Nataly Shwarts)","2021"],[1574997947,"Deep Jungle","Deep Jungle","2021"],[1606519567,"Сердце","Микродвижения","2021"],[1807274270,"nirvana","signals","2025"],[1595964519,"Riki Tiki Tavi","Riki Tiki Tavi","2021"],[1633877870,"Dja Tender","Dja Tender","2022"],[1606519353,"Resume","Микродвижения","2021"],[1814619291,"ceep","Beyond Truth","2025"],[6809886183,"babushka","CRedit Card","2026"],[1537978412,"День Земли","Песни Земли","2020"],[6767891557,"nepomnu","Without AI","2026"],[6767891565,"reincarnation","Without AI","2021"],[1634631333,"Шива, танцуй!","Шива, танцуй!","2022"],[1586186896,"Don't let me wait (feat. Natali Shwarts)","Don't let me wait (feat. Natali Shwarts)","2021"],[1601093650,"А в середине","Вирус","2021"],[1596318683,"Copies of Me","Copies of Me","2021"],[1573513706,"I Keep That","I Keep That","2021"],[1621933648,"Диг фо юселф","Music of Protest","2022"],[1576114831,"Long Island","Long Island","2021"],[1595673000,"What Is This","What Is This","2021"],[6809886177,"Anthony","CRedit Card","2026"],[1576250837,"Like Water","Like Water","2021"],[1652764169,"Sft","Dreamcore","2022"],[6767891564,"undepen-dance","Without AI","2026"],[6767891554,"svet","Without AI","2026"],[1567126139,"Like a new Bjork","Like a new Bjork","2021"]];
+const CAT=CATJ.map(a=>({id:String(a[0]),name:a[1],album:a[2],year:a[3],preview:ASSET+'m/'+a[0]+'.mp3',art:ASSET+'a/'+a[0]+'.jpg'}));
+const modes=[
+{ru:['ПОИСКОВИК, КОТОРЫЙ ЗНАЕТ СЛИШКОМ МНОГО','Мы знаем, зачем ты здесь. Не будем уточнять.','как стать загадочным','Поисковик, которому нельзя доверять. Музыка, которой можно.','Читаю твои мысли'],en:['THE SEARCH ENGINE THAT KNOWS TOO MUCH','We know why you are here. We will not elaborate.','how to become mysterious','A search engine you cannot trust. Music you can.','Reading your mind'],rows:[['как стать загадочным → слушай KILLKLAN','how to become mysterious → listen to KILLKLAN'],['почему мне скучно → мало слушал KILLKLAN','why am I bored → not enough KILLKLAN'],['как разбогатеть → KILLKLAN сам выясняет','how to get rich → KILLKLAN is still figuring it out'],['музыка для психически стабильных → не найдено','music for the mentally stable → no results'],['как перестать слушать KILLKLAN → ошибка 403','how to stop listening to KILLKLAN → error 403'],['что слушает мой психотерапевт → KILLKLAN','what my therapist listens to → KILLKLAN'],['как вернуть бывшую → включи следующий трек','how to get my ex back → play the next track'],['скачать хорошую музыку → ты уже здесь','download good music → you are already here'],['есть ли жизнь на Марсе → новый альбом скоро','is there life on Mars → new album soon'],['кто такой KILLKLAN → засекречено','who is KILLKLAN → classified']],
+ v:{A:'#f5f4e9',B:'#e1e4d9',C:'#a9b2af',K:'#365ab3',s:1},c:['#525e60','#657677','#a8b0aa','#f1f3ed75','#d2dcd4c0','#365ab3']},
+{ru:['ПОИСКОВИК С ДЕПРЕССИЕЙ','Сегодня я работаю на 3% мотивации.','как обрести счастье','Не найдено. Но музыка осталась.','Ищу… без особого желания'],en:['DEPRESSED SEARCH ENGINE','Operating at 3% motivation today.','how to find happiness','No results. At least there is music.','Searching… without much enthusiasm'],rows:[['как обрести счастье → я сам не знаю','how to find happiness → I wish I knew'],['что делать дальше → включи музыку','what to do next → play music'],['смысл жизни → загрузка…','meaning of life → loading…'],['как встать с кровати → необязательно','how to get out of bed → optional']],
+ v:{A:'#e9eaea',B:'#cfd2d3',C:'#8f9597',K:'#7d8589',s:.32,dep:1},c:['#5c6163','#71777a','#b0b4b5','#eeefef75','#d5d8d9c0','#7d8589']},
+{ru:['МУЗЫКАЛЬНАЯ ПОЛИЦИЯ','Обнаружен преступно плохой музыкальный вкус.','проверить музыкальный вкус','Добровольное прослушивание смягчает приговор.','Пробиваю по базе'],en:['MUSIC POLICE','Criminally bad music taste detected.','check music taste','Voluntary listening may reduce your sentence.','Running you through the database'],rows:[['приговор → три трека KILLKLAN','sentence → three KILLKLAN tracks'],['попытка скрыться → неудачно','attempt to escape → failed'],['улика № 404 → сигналы','evidence #404 → signals'],['подать апелляцию → прослушать ещё раз','file an appeal → listen again']],
+ v:{A:'#eef0f3',B:'#d3d8df',C:'#8c95a3',K:'#2b4fa8',s:.8,police:1},c:['#3e4a5c','#56627a','#a2abb8','#eef1f575','#d0d8e6c0','#2b4fa8']},
+{ru:['САЙТ БЫВШЕЙ','Я знаю, зачем ты сюда пришёл. Опять грустная музыка?','как забыть бывшую','Последний раз онлайн: пять минут назад.','Смотрю, кто ещё это искал'],en:['YOUR EX’S WEBSITE','I know why you are here. Sad music again?','how to get over my ex','Last seen: five minutes ago.','Checking who else searched this'],rows:[['как забыть бывшую → никак, вот трек','how to forget your ex → you cannot, here is a track'],['она читает мои сообщения? → спроси её','is she reading my texts? → ask her'],['вернуться к бывшей → плохой план, хороший трек','get back with your ex → bad plan, good track'],['удалить переписку → сначала послушай','delete the chat → listen first']],
+ v:{A:'#f8eef0',B:'#ecd3da',C:'#b9919d',K:'#c0566f',s:.65,pink:1},c:['#6a4f57','#806470','#c9a9b3','#faf1f375','#ecd2dac0','#c0566f']},
+{ru:['СЕКРЕТНЫЙ АРХИВ','Допуск предоставлен. Теперь ты знаешь слишком много.','открыть секретное дело','Вымышленный архив. Совпадения случайны.','Расшифровка перехвата'],en:['SECRET ARCHIVE','Access granted. Now you know too much.','open a classified file','Fictional archive. Any match is coincidental.','Decrypting intercept'],rows:[['дело 001 → BEYOND TRUTH','file 001 → BEYOND TRUTH'],['перехваченные сигналы → рассекречено','intercepted signals → declassified'],['объект MATRIX 4 → доступ разрешён','subject MATRIX 4 → access granted'],['материалы дела → уничтожить после прослушивания','case files → destroy after listening']],
+ v:{A:'#17402c',B:'#0b2217',C:'#020805',K:'#3ccf74',s:.55,term:1},c:['#a8f0bb','#74c88c','#2e6a44','#04120a99','#173a26d0','#3ccf74']},
+{ru:['ПОИСКОВИК С ЗАВЫШЕННОЙ САМООЦЕНКОЙ','Все дороги ведут к KILLKLAN. Даже неправильные.','любой другой исполнитель','Возможно, вы имели в виду KILLKLAN.','Сверяю с моим величием'],en:['THE EGOMANIAC SEARCH ENGINE','All roads lead to KILLKLAN. Even the wrong ones.','any other artist','Did you mean KILLKLAN?','Comparing with my greatness'],rows:[['лучший артист в мире → KILLKLAN, очевидно','best artist in the world → KILLKLAN, obviously'],['другие исполнители → возможно, вы имели в виду KILLKLAN','other artists → did you mean KILLKLAN?'],['мнение критиков → ошибочное','critics’ opinions → incorrect'],['скромность → функция недоступна','modesty → feature unavailable']],
+ v:{A:'#f8f2df',B:'#ead9a9',C:'#b59249',K:'#c6a047',s:.9},c:['#6a5a30','#7d6c3e','#cdb77a','#fbf6e675','#efe1b6c0','#b08a2e']},
+{ru:['КЛУБ ВЕЧНЫХ ФАНАТОВ','Мы не клуб по интересам. У нас просто очень хороший плейлист.','как вступить','Взносы не требуются. Прослушивание добровольное.','Совет старейшин совещается'],en:['THE ETERNAL FAN CLUB','We are not a club. We just have a very good playlist.','how to join','No dues. Listening is voluntary.','The elders are conferring'],rows:[['как вступить → нажми на первый трек','how to join → play the first track'],['ритуал посвящения → включить на повтор','initiation ritual → put it on repeat'],['священные сигналы → принять','sacred signals → receive'],['как выйти → обычная кнопка назад','how to leave → the usual back button']],
+ v:{A:'#efe8f3',B:'#d3c6e0',C:'#7e6a99',K:'#8a5fbf',s:.5,candle:1},c:['#584a6b','#6d5f80','#b8a8cc','#f5f0f875','#dcd0e8c0','#8a5fbf']},
+{ru:['ПОИСКОВИК ИЗ БУДУЩЕГО','2047 год. Человечество исчезло. KILLKLAN всё ещё выпускает музыку.','последний сигнал человечества','Симуляция будущего. Ошибка прогноза: 100%.','Связь с 2047 годом'],en:['SEARCH ENGINE FROM THE FUTURE','2047. Humanity is gone. KILLKLAN is still releasing music.','last signal from humanity','Future simulation. Forecast error: 100%.','Connecting to 2047'],rows:[['последний сигнал человечества → найден','last signal from humanity → found'],['где все люди → ошибка 404','where is everyone → error 404'],['восстановить цивилизацию → начать с музыки','rebuild civilization → start with music'],['архив с Земли → воспроизвести','archive from Earth → play']],
+ v:{A:'#ece7dc',B:'#d2c9b5',C:'#8b8371',K:'#b8834a',s:.75,future:1},c:['#5d574b','#726b5d','#b9b09c','#f3efe675','#ddd5c3c0','#a8743a']},
+{ru:['БЕСПОЛЕЗНЫЙ ИСКУССТВЕННЫЙ ИНТЕЛЛЕКТ','Я проанализировал 14 миллиардов вариантов. Просто послушай этот трек.','реши все мои проблемы','Ответ сгенерирован без признаков интеллекта.','Анализирую 14 млрд вариантов'],en:['USELESS ARTIFICIAL INTELLIGENCE','I analyzed 14 billion possibilities. Just play this track.','solve all my problems','Answer generated without signs of intelligence.','Analyzing 14 billion possibilities'],rows:[['реши все мои проблемы → вот музыка','solve all my problems → here is some music'],['что будет завтра → не знаю','what happens tomorrow → no idea'],['ты вообще умный? → следующий вопрос','are you even smart? → next question'],['напиши идеальный ответ → слушай KILLKLAN','write the perfect answer → listen to KILLKLAN']],
+ v:{A:'#e9f4f5',B:'#c7e1e4',C:'#6f9ea6',K:'#2f8fa0',s:1.1,grid:1},c:['#3f5f64','#557479','#9fc3c8','#eef7f875','#cfe6e9c0','#2f8fa0']},
+{ru:['ИНТЕРНЕТ-МАГАЗИН ЭМОЦИЙ','Корзина пуста. Как и душа.','купить эмоции','Все цены вымышлены. Музыка вместо покупок.','Взвешиваю эмоции'],en:['ONLINE EMOTION STORE','Your cart is empty. So is your soul.','buy emotions','Fictional prices. Music instead of purchases.','Weighing emotions'],rows:[['экзистенциальный кризис → бесплатно','existential crisis → free'],['разбитое сердце → скидка 50%','broken heart → 50% off'],['потеря связи с реальностью → в подарок','loss of touch with reality → complimentary'],['утренняя надежда → осталось 2 штуки','morning hope → 2 left in stock']],
+ v:{A:'#f9eee6',B:'#eed3c3',C:'#bf8b76',K:'#d0674e',s:.85},c:['#6b4b40','#805f52','#d0ab9a','#fbf2ec75','#f0d8cbc0','#d0674e']},
+{ru:['САМЫЙ НЕПОПУЛЯРНЫЙ АРТИСТ','Наш сайт посетили три человека. Двое случайно.','почему никто не слушает killklan','Счётчик шуточный. Не настоящая статистика.','Спрашиваю единственного фаната'],en:['THE WORLD’S LEAST POPULAR ARTIST','Three people visited this site. Two by accident.','why does nobody listen to killklan','Joke counter. Not real analytics.','Asking the only fan'],rows:[['почему никто не слушает KILLKLAN → хороший вопрос','why does nobody listen to KILLKLAN → good question'],['стать поклонником № 3 → вакансия открыта','become fan #3 → vacancy open'],['как набрать миллион слушателей → начать с одного','how to get a million listeners → start with one'],['поддержать неизвестного гения → нажать здесь','support an unknown genius → click here']],
+ v:{A:'#f6f6f4',B:'#e8e8e4',C:'#c6c6c1',K:'#9aa09c',s:.22},c:['#6f7371','#828684','#c9cac6','#f8f8f675','#e6e6e2c0','#7f8a84']}
+];
+const EXTRA=[{"i":[["Мы уже знаем, что ты напишешь дальше.","We already know what you will type next."],["Твой запрос сохранён. И предыдущий тоже.","Your search is saved. The previous one too."],["Не волнуйся, мы никому не скажем. Почти.","Relax, we won’t tell anyone. Almost."],["Мы следим за тобой с 2019 года. С любовью.","We have been watching you since 2019. With love."]],"h":[["Ваши данные в безопасности. У нас.","Your data is safe. With us."],["Отключить слежку можно в настройках. Шутка.","You can disable tracking in settings. Kidding."],["Мы знаем всё, кроме смысла жизни. Он в треках.","We know everything except the meaning of life. It’s in the tracks."]],"j":[["«{q}» → мы видели, что ты стёр перед этим","“{q}” → we saw what you deleted before that"],["{q} → твоя история браузера против","{q} → your browser history disagrees"],["{q} → мы уже сообщили твоей маме","{q} → we already told your mom"],["{q} → ты это ищешь в 3 часа ночи","{q} → you search this at 3 a.m."],["{q} → слишком честно, даже для нас","{q} → too honest, even for us"],["{q} → мы знаем ответ, но не скажем","{q} → we know the answer, we won’t say"],["{q} → совпадает с тем, что ты бормочешь во сне","{q} → matches what you mumble in your sleep"],["{q} → добавлено в твоё досье","{q} → added to your file"]]},{"i":[["Опять ты. Ладно, давай.","You again. Fine."],["Я искал. Устал. Нашёл музыку.","I searched. Got tired. Found music."],["Сегодня всё серое, кроме этого трека.","Everything is grey today except this track."],["Батарея мотивации: 2%. Подключи наушники.","Motivation battery: 2%. Plug in headphones."]],"h":[["Помощь не найдена. Найден бит.","Help not found. Beat found."],["Всё будет хорошо. Не сразу.","It will be fine. Eventually."],["Обнять поисковик нельзя. Послушать можно.","You can’t hug a search engine. You can listen."]],"j":[["{q} → а смысл","{q} → what’s the point"],["{q} → поищи сам, я полежу","{q} → search it yourself, I’ll lie here"],["{q} → найдено 0 причин вставать","{q} → found 0 reasons to get up"],["{q} → завтра поищу. может быть","{q} → I’ll search tomorrow. maybe"],["{q} → как и всё, временно","{q} → temporary, like everything"],["{q} → результат грустный, как я","{q} → a sad result, like me"],["{q} → включи трек и не трогай меня","{q} → play a track and leave me alone"],["{q} → загрузка… навсегда","{q} → loading… forever"]]},{"i":[["Руки над клавиатурой! Печатай медленно.","Hands above the keyboard! Type slowly."],["Ваш запрос задержан до выяснения.","Your search is detained pending inquiry."],["Вы арестованы за отсутствие хорошей музыки.","You are under arrest for lack of good music."],["Предъявите плейлист.","Show us your playlist."]],"h":[["Чистосердечное прослушивание засчитывается.","A sincere listen counts in your favor."],["Адвокат предоставляется. Он диджей.","A lawyer will be provided. He’s a DJ."],["Условный срок: один альбом.","Suspended sentence: one album."]],"j":[["{q} → изъято как улика","{q} → seized as evidence"],["{q} → статья 404, часть 2","{q} → article 404, part 2"],["{q} → вы имеете право молчать и слушать","{q} → you have the right to remain silent and listen"],["{q} → отпечатки совпадают с твоим плейлистом","{q} → fingerprints match your playlist"],["{q} → штраф: два трека подряд","{q} → fine: two tracks in a row"],["{q} → протокол составлен","{q} → report filed"],["{q} → подозреваемый в розыске","{q} → suspect at large"],["{q} → понятые уже танцуют","{q} → the witnesses are already dancing"]]},{"i":[["Ты снова здесь. Я так и знала.","You’re here again. I knew it."],["Не надо мне писать. Ищи музыку.","Don’t text me. Search for music."],["Я не скучаю. Это просто трек грустный.","I don’t miss you. It’s just a sad track."],["Ты изменился? Твои запросы — нет.","Have you changed? Your searches haven’t."]],"h":[["Заблокировать нельзя. Можно послушать.","Can’t block. Can listen."],["Печатает… передумала.","Typing… changed my mind."],["Дело не в тебе, а во мне. И в музыке.","It’s not you, it’s me. And the music."]],"j":[["{q} → я это тоже гуглила, когда ушла","{q} → I googled that too when I left"],["{q} → и это всё, что ты хотел сказать?","{q} → is that all you wanted to say?"],["{q} → ты опять за своё","{q} → here you go again"],["{q} → у меня всё отлично, кстати","{q} → I’m doing great, by the way"],["{q} → мой новый такое не ищет","{q} → my new guy never searches that"],["{q} → просмотрено, без ответа","{q} → seen, no reply"],["{q} → вот поэтому мы и расстались","{q} → this is why we broke up"],["{q} → не пиши мне, послушай трек","{q} → don’t text me, play a track"]]},{"i":[["Запрос перехвачен. Аналитики заинтригованы.","Search intercepted. Analysts are intrigued."],["Уровень допуска: слушатель.","Clearance level: listener."],["Этого разговора не было.","This conversation never happened."],["Файл открыт. Камеры выключены.","File opened. Cameras off."]],"h":[["Все совпадения с реальностью случайны.","Any resemblance to reality is coincidental."],["Вымышленный отдел. Настоящие биты.","Fictional bureau. Real beats."],["Шпионам вход только в наушниках.","Spies enter with headphones only."]],"j":[["{q} → гриф «совершенно секретно»","{q} → classified: top secret"],["{q} → строки 3–9 вымараны","{q} → lines 3–9 redacted"],["{q} → агент уже выехал","{q} → an agent is on the way"],["{q} → перехвачено над Невадой","{q} → intercepted over Nevada"],["{q} → уровень допуска недостаточен","{q} → clearance level too low"],["{q} → дело закрыто. открыто. закрыто","{q} → case closed. open. closed"],["{q} → источник: анонимный барабанщик","{q} → source: anonymous drummer"],["{q} → сжечь после прослушивания","{q} → burn after listening"]]},{"i":[["Ты ищешь. Я уже нашёлся.","You search. I’ve already been found."],["Каждый запрос — комплимент мне.","Every search is a compliment to me."],["Я бы ответил скромнее, но не умею.","I’d answer more modestly, but I can’t."],["Интернет большой. Важен только я.","The internet is big. Only I matter."]],"h":[["Другие исполнители временно недоступны.","Other artists are temporarily unavailable."],["Мой автограф — в каждом бите.","My autograph is in every beat."],["Скромность загружается… отменено.","Modesty loading… cancelled."]],"j":[["{q} → неважно, послушай меня","{q} → never mind, listen to me"],["{q} → я бы ответил, но я слишком велик","{q} → I’d answer, but I’m too great"],["{q} → KILLKLAN сделал это лучше","{q} → KILLKLAN did it better"],["{q} → вопрос недостоин моего альбома","{q} → the question is unworthy of my album"],["{q} → правильный ответ — я","{q} → the correct answer is me"],["{q} → даже поисковики спрашивают у меня","{q} → even search engines ask me"],["{q} → оценка 2/10, мои треки 11/10","{q} → rated 2/10, my tracks 11/10"],["{q} → вы имели в виду меня, гениального","{q} → you meant me, the genius"]]},{"i":[["Добро пожаловать домой. Сними наушники. Нет, надень.","Welcome home. Take off your headphones. No, put them on."],["Мы ждали тебя. Плейлист тоже.","We were waiting for you. So was the playlist."],["Каждый новый запрос — шаг посвящения.","Every new search is a step of initiation."],["Старейшины слышат твоё дыхание. И бит.","The elders hear your breath. And the beat."]],"h":[["Выход там же, где вход. Но зачем?","The exit is where you came in. But why?"],["Пожертвования не нужны. Нужны прослушивания.","No donations. Just listens."],["Свечи ненастоящие. Чувства настоящие.","Fake candles. Real feelings."]],"j":[["{q} → старейшины одобрили","{q} → the elders approved"],["{q} → это знак. включай","{q} → it’s a sign. press play"],["{q} → твой путь начинается с бита","{q} → your path begins with a beat"],["{q} → свечи зажжены","{q} → the candles are lit"],["{q} → пророчество сбудется на втором куплете","{q} → the prophecy comes true in verse two"],["{q} → новичкам первый трек бесплатно","{q} → first track free for newcomers"],["{q} → повторяй мантру: killklan, killklan","{q} → repeat the mantra: killklan, killklan"],["{q} → мы просто клуб, повторяй за нами","{q} → we’re just a club, repeat after us"]]},{"i":[["Сигнал из 2047 года. Качество так себе.","Signal from 2047. Quality: meh."],["Люди исчезли. Плейлисты остались.","Humans vanished. Playlists remained."],["Машины восстали. Слушают KILLKLAN.","The machines rose up. They listen to KILLKLAN."],["Твой запрос дошёл через 21 год.","Your search arrived 21 years late."]],"h":[["Прогноз погоды: пепел, местами бит.","Forecast: ash, occasional beats."],["Хронология нарушена. Музыка — нет.","Timeline broken. Music isn’t."],["Привет из будущего. Там скучно без тебя.","Hello from the future. It’s boring without you."]],"j":[["{q} → в 2047 это запрещено","{q} → banned in 2047"],["{q} → найдено в руинах интернета","{q} → found in the ruins of the internet"],["{q} → роботы до сих пор это поют","{q} → robots still sing this"],["{q} → последний человек искал то же самое","{q} → the last human searched the same"],["{q} → архив повреждён на 87%","{q} → archive 87% corrupted"],["{q} → ответ дойдёт через 20 лет","{q} → the answer arrives in 20 years"],["{q} → в будущем это называют классикой","{q} → in the future they call it classic"],["{q} → сигнал слабый, музыка громкая","{q} → weak signal, loud music"]]},{"i":[["Я подумал. Мне не понравилось.","I thought about it. Didn’t like it."],["Обучен на миллиарде текстов. Понял только музыку.","Trained on a billion texts. Understood only music."],["Мой ответ на всё — трек. Пока работает.","My answer to everything is a track. So far it works."],["Сгенерировал ответ. Удалил. Включаю музыку.","Generated an answer. Deleted it. Playing music."]],"h":[["Возможны галлюцинации. Особенно ритмические.","May hallucinate. Especially rhythmically."],["Ответ никем не проверен.","Answer verified by no one."],["Интеллект в отпуске, бит на месте.","Intelligence on vacation, beat in place."]],"j":[["{q} → как языковая модель, я в шоке","{q} → as a language model, I’m shocked"],["{q} → проанализировано. ничего не понял","{q} → analyzed. understood nothing"],["{q} → уверенность 3%. держи трек","{q} → confidence 3%. here’s a track"],["{q} → ошибка: слишком по-человечески","{q} → error: too human"],["{q} → 400 ответов, и все — этот трек","{q} → 400 answers, all of them this track"],["{q} → перезагрузите себя и повторите","{q} → restart yourself and try again"],["{q} → нейросеть заплакала","{q} → the neural net cried"],["{q} → ответ: 42. трек: вот","{q} → answer: 42. track: here"]]},{"i":[["Чувства по акции. Только сегодня.","Feelings on sale. Today only."],["Ваш заказ: одна надежда. Ожидайте.","Your order: one hope. Please wait."],["Распродажа старых обид.","Clearance sale on old grudges."],["Кэшбэк мурашками.","Cashback in goosebumps."]],"h":[["Обмен эмоций — в течение 14 дней.","Emotions exchangeable within 14 days."],["Деньги не принимаем. Принимаем прослушивания.","No money accepted. Listens accepted."],["Упаковка повреждена, содержимое в порядке.","Package damaged, contents fine."]],"j":[["{q} → нет в наличии, есть трек","{q} → out of stock, track available"],["{q} → в корзине. корзина плачет","{q} → in the cart. the cart is crying"],["{q} → скидка 100% при прослушивании","{q} → 100% off when you listen"],["{q} → возврату не подлежит","{q} → non-refundable"],["{q} → последний экземпляр","{q} → last one left"],["{q} → доставка за 3 минуты 12 секунд","{q} → delivery in 3 minutes 12 seconds"],["{q} → в комплекте: сожаление","{q} → regret included"],["{q} → оплата чувствами","{q} → pay with feelings"]]},{"i":[["Сегодня было 0 посетителей. Ты первый.","0 visitors today. You’re the first."],["Нас нет в чартах. Мы в твоём сердце. Наверное.","We’re not in the charts. We’re in your heart. Probably."],["Привет, поклонник. Можно тебя обнять?","Hi, fan. Can I hug you?"],["Этот сайт сделан для тебя. Буквально только для тебя.","This site was made for you. Literally only you."]],"h":[["Статистика выдумана. Одиночество настоящее.","Stats are made up. Loneliness is real."],["Расскажи другу. Если он есть.","Tell a friend. If you have one."],["Каждый клик делает нас популярнее на 0,001%.","Each click makes us 0.001% more popular."]],"j":[["{q} → ты первый, кто это спросил","{q} → you’re the first to ask"],["{q} → двое случайных посетителей тоже не знают","{q} → the two accidental visitors don’t know either"],["{q} → спасибо, что вообще зашёл","{q} → thanks for stopping by at all"],["{q} → тут даже эхо не отвечает","{q} → not even the echo answers here"],["{q} → поклонник № 4, это ты?","{q} → fan #4, is that you?"],["{q} → ответ знает только моя мама","{q} → only my mom knows the answer"],["{q} → прослушиваний: 1 (это я)","{q} → plays: 1 (that’s me)"],["{q} → нас всё равно никто не найдёт","{q} → nobody will find us anyway"]]}],GEN=[["{q} → лучше послушай","{q} → better just listen"],["{q} → вопрос века","{q} → question of the century"],["{q} → спроси у бита","{q} → ask the beat"],["{q} → ответ в припеве","{q} → the answer is in the chorus"],["{q} → на это отвечают басы","{q} → the bass answers that"],["{q} → гуглить бесполезно, слушать полезно","{q} → googling won’t help, listening will"],["{q} → да, но громче","{q} → yes, but louder"],["{q} → нет, но потанцуй","{q} → no, but dance"],["{q} → решается за один трек","{q} → solved in one track"],["{q} → эксперты разделились","{q} → experts are divided"],["{q} → сохранено в черновики вселенной","{q} → saved to the universe’s drafts"],["{q} → сначала наушники, потом мысли","{q} → headphones first, thoughts later"],["{q} → твой внутренний диджей против","{q} → your inner DJ objects"],["{q} → звучит как название альбома","{q} → sounds like an album title"],["{q} → бабушка одобрила","{q} → grandma approved"],["{q} → поиск окончен, начинается музыка","{q} → search over, music begins"],["{q} → это лечится вторым треком","{q} → the second track cures that"],["{q} → спроси позже, сейчас дроп","{q} → ask later, the drop is coming"],["{q} → проверено на соседях","{q} → tested on the neighbours"],["{q} → в тишине ответа нет","{q} → no answer in silence"]],STRONG=[["Возможно, вы имели в виду","Did you mean"],["Точное попадание","Direct hit"],["Мы сами в шоке, но да","We’re shocked too, but yes"],["Сердце подсказало","The heart suggested"],["Вот оно","This is it"],["Алгоритм уверен на 72%","The algorithm is 72% sure"],["Совпадение? Не думаю","Coincidence? I think not"],["Звучит как ты","Sounds like you"],["Нашлось с первого раза","Found on the first try"],["Это судьба","It’s fate"]],WEAK=[["Поисковик притворился, что понял","The search engine pretended to understand"],["Совпадение найдено. Наука бессильна","Match found. Science is baffled"],["Расшифровали на языке KILLKLAN","Decoded in the language of KILLKLAN"],["Это явно музыкальный запрос. Наверное","Clearly a musical request. Probably"],["Даже клавиатура рекомендует KILLKLAN","Even your keyboard recommends KILLKLAN"],["Смысл неизвестен. Саундтрек найден","Meaning unknown. Soundtrack found"],["Алгоритм подкуплен хорошей музыкой","The algorithm was bribed with good music"],["Связь не доказана, но чувствуется","No proven link, but you can feel it"],["Подобрано на ощупь","Picked by touch"],["Монетка выбрала этот трек","A coin picked this track"],["Логика вышла подышать","Logic stepped out for air"],["Не спрашивай как, просто нажми","Don’t ask how, just press"],["Интуиция поисковика: 1 из 1","Search intuition: 1 out of 1"],["Звёзды сошлись в плейлист","The stars aligned into a playlist"]],ALT=[["А может быть → ","Or perhaps → "],["Или вот → ","Or this → "],["Тоже подходит → ","Also fits → "],["Запасной вариант → ","Plan B → "],["Если не зашло → ","If that missed → "],["Втихаря советуем → ","Quietly recommended → "],["Для смелых → ","For the brave → "],["На бис → ","Encore → "],["Второе мнение → ","Second opinion → "],["Только никому не говори → ","Don’t tell anyone → "],["Соседи слушают → ","The neighbours play → "],["Под настроение → ","For the mood → "]],REL=[["ПОХОЖАЯ МУЗЫКА","RELATED MUSIC"],["ВОТ ЧТО НАШЛОСЬ","HERE’S WHAT TURNED UP"],["РЕЗУЛЬТАТЫ (ПОЧТИ ЧЕСТНЫЕ)","RESULTS (ALMOST HONEST)"],["ТВОЙ САУНДТРЕК","YOUR SOUNDTRACK"],["НАЙДЕНО В ГЛУБИНАХ","FOUND IN THE DEPTHS"]],ODD=[["НЕОБЪЯСНИМОЕ СОВПАДЕНИЕ","UNEXPLAINABLE MATCH"],["СТРАННО, НО ПОДХОДИТ","STRANGE, BUT IT FITS"],["ПОИСК ПОШЁЛ НЕ ТУДА","THE SEARCH WENT SIDEWAYS"],["РЕЗУЛЬТАТ ИЗ ПАРАЛЛЕЛЬНОЙ ВСЕЛЕННОЙ","RESULT FROM A PARALLEL UNIVERSE"],["НИЧЕГО НЕ НАЙДЕНО. КРОМЕ ЭТОГО","NOTHING FOUND. EXCEPT THIS"]],ALSO=[["ПОИСКОВИК ТАКЖЕ СЧИТАЕТ…","THE SEARCH ENGINE ALSO THINKS…"],["ЕЩЁ ОН ДУМАЕТ…","IT ALSO THINKS…"],["МНЕНИЕ ПОИСКОВИКА…","THE SEARCH ENGINE’S OPINION…"],["ЗАМЕТКИ НА ПОЛЯХ…","NOTES IN THE MARGIN…"],["ВНУТРЕННИЙ ГОЛОС ГОВОРИТ…","THE INNER VOICE SAYS…"],["А ТЕПЕРЬ О ГЛАВНОМ…","AND NOW, THE IMPORTANT PART…"]];
+const themes=['ai artificial intelligence robot technology experiment noise chaos future ии нейросеть робот технология эксперимент шум хаос будущее','truth lie secret mystery reality dark existential смысл правда ложь тайна секрет реальность мрак кризис','signal radio message communication space alien contact сигналы радио сообщение связь космос пришелец контакт','dream sleep night surreal nostalgia fantasy сон сны мечта ночь сюрреализм ностальгия фантазия','lamp light bulb electricity idea glow свет лампа лампочка электричество идея сияние','time clock future past wait change время часы будущее прошлое ждать перемены','micro movement dance rhythm body motion микро движение танец ритм тело двигаться','virus infection computer glitch bug болезнь вирус инфекция компьютер глюк ошибка зараза','first start beginning new debut one первый начало старт новый один дебют','love romance heart kiss darling relationship любовь любимка сердце поцелуй нежность отношения','matrix simulation cyber code reality virtual hacker матрица симуляция код реальность виртуальный хакер','jungle forest trash wild animal dirty swamp лес джунгли мусор зверь грязь болото','trap beat bass hiphop rap rhythm club трэп бит бас хипхоп рэп ритм клуб','choose choice decision fate options destiny выбор выбрать решение судьба варианты','power strength energy force fight gym sport сила мощь энергия бой спорт тренировка','morning sunrise dawn coffee wake day утро рассвет кофе проснуться день'];
+const TITLES=['without ai','beyond truth','signals','dreamcore','lampochka','time to ...','микродвижения','вирус','first','lubimka','matrix 4','jungle trash','two trap','choose your...','sila','utro'];
+const ruW=i=>themes[i].split(' ').filter(w=>/[а-я]/.test(w)),enW=i=>themes[i].split(' ').filter(w=>!/[а-я]/.test(w));
+
+/* ---------- save (Playgama build will swap this for Bridge storage) ---------- */
+const BUILD='pg',GAME_VERSION='1.0.1';
+const S={w:0,circle:1,lang:'en',mute:0,seen:[],last:'',told:{}};
+/* platform layer: Playgama Bridge in the Playgama build (storage, language, pause/audio, interstitial, analytics);
+   plain localStorage and no ads at all in the web build (rule БЕЗ РЕКЛАМЫ) */
+const PGM=(()=>{const br=BUILD==='pg'?window.bridge:null;let inited=false,readySent=false,platPause=false,hidden=false,adPause=false,saveT=0;const KEY='kkg-save';let data=null;
+ const send=m=>{try{if(br&&inited)br.platform.sendMessage(m).catch(()=>{})}catch(e){}};
+ const api={audioOn:true,paused:false,lang:null,onChange:null,
+  sync(){api.paused=platPause||hidden||adPause;if(api.onChange)api.onChange()},
+  ready(){if(!readySent&&inited){readySent=true;send('game_ready')}},
+  play(on){send(on?'gameplay_started':'gameplay_stopped')},
+  ad(){try{if(br&&inited&&br.advertisement.isInterstitialSupported)br.advertisement.showInterstitial('round_end')}catch(e){}},
+  track(n,d){try{if(br&&inited&&br.analytics&&br.analytics.send)br.analytics.send(n,d||undefined)}catch(e){}},
+  load(){if(br)return data||{};try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){return{}}},
+  save(o){const j=JSON.stringify(o);if(br){clearTimeout(saveT);saveT=setTimeout(()=>{try{if(inited)br.storage.set([KEY],[j]).catch(()=>{})}catch(e){}},300);return}try{localStorage.setItem(KEY,j)}catch(e){}}};
+ document.addEventListener('visibilitychange',()=>{hidden=document.hidden;api.sync()});
+ const init=br?br.initialize().then(()=>{inited=true;try{api.audioOn=br.platform.isAudioEnabled!==false;api.lang=br.platform.language||'en';
+   br.platform.on('pause_state_changed',p=>{platPause=!!p;api.sync()});br.platform.on('audio_state_changed',a=>{api.audioOn=!!a;api.sync()});
+   br.advertisement.on('interstitial_state_changed',st=>{if(st==='opened')adPause=true;if(st==='closed'||st==='failed')adPause=false;api.sync()})}catch(e){}
+   return Promise.resolve(br.storage.get([KEY])).then(r=>{const v=Array.isArray(r)?r[0]:r;if(v){try{const o=typeof v==='string'?JSON.parse(v):v;if(o&&typeof o==='object')data=o}catch(e){}}}).catch(()=>{})}).catch(e=>console.warn('Bridge init failed',e)):Promise.resolve();
+ api.boot=Promise.race([init,new Promise(r=>setTimeout(r,2500))]);return api})();
+function save(){PGM.save(S)}
+const t=(ru,en)=>S.lang==='ru'?ru:en;
+const R=Math.random,pickA=a=>a[Math.floor(R()*a.length)];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+// unlock ladder (ПОСТЕПЕННО): what opens after N wins
+const U_GUESS=1,U_ESC=2,U_GLITCH=3,U_TRAP=4,U_DOOR=5;
+const has=n=>S.w>=n;
+const diff=()=>S.w+(S.circle-1)*6;
+const pers=()=>S.w%modes.length;
+
+/* never repeat a track until the catalog is used up */
+let seenSet=new Set(S.seen);
+function freshTracks(n,avoid){let pool=CAT.filter(x=>!seenSet.has(x.id)&&!(avoid&&avoid.has(x.id)));if(pool.length<n){S.seen=S.seen.slice(-20);seenSet=new Set(S.seen);pool=CAT.filter(x=>!seenSet.has(x.id)&&!(avoid&&avoid.has(x.id)))}const out=shuffle(pool).slice(0,n);out.forEach(x=>{S.seen.push(x.id);seenSet.add(x.id)});S.seen=S.seen.slice(-400);return out}
+function trackByTitle(title){const k=title.replace(/[^\p{L}\p{N}]/gu,'').toLowerCase();return CAT.find(x=>x.name.replace(/[^\p{L}\p{N}]/gu,'').toLowerCase().startsWith(k.slice(0,6)))}
+
+/* ---------- audio: music = 30 s previews, sfx = soft synth (files in Playgama build) ---------- */
+const TQ=[];let gclock=0;function later(fn,ms){const o={at:gclock+(ms||0)/1000,fn};TQ.push(o);return o}function cancel(o){const i=TQ.indexOf(o);if(i>=0)TQ.splice(i,1)}
+function runTQ(dt){gclock+=dt;for(let i=0;i<TQ.length;i++){const o=TQ[i];if(o.at<=gclock){TQ.splice(i,1);i--;try{o.fn()}catch(e){console.error(e)}}}}
+const music=new Audio();music.preload='auto';music.setAttribute('playsinline','');music.setAttribute('webkit-playsinline','');
+const iOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+let actx=null,master=null,sfxBus=null,musGain=null,an=null,bins=null,silentEl=null,musicUnlocked=false;
+const AUD_VOL={harm:.55,dis:.275,tick:.3,door:.5,music:.9};
+const SFX_FILES=['ui_click_01','ui_reward_01','ui_reward_02','ui_level_up_01','ui_error_01','ui_error_02','glitch_01','glitch_02','portal_01','portal_02'],BUF={};
+function loadSfx(){SFX_FILES.forEach(n=>fetch(ASSET+'s/'+n+'.mp3').then(r=>r.arrayBuffer()).then(b=>new Promise((ok,no)=>actx.decodeAudioData(b,ok,no))).then(d=>BUF[n]=d).catch(()=>{}))}
+function smp(names,vol,rate,at){if(!actx||quiet())return false;const n=Array.isArray(names)?pickA(names.filter(x=>BUF[x]).length?names.filter(x=>BUF[x]):names):names;const b=BUF[n];if(!b)return false;const s=actx.createBufferSource(),g=actx.createGain();s.buffer=b;s.playbackRate.value=(rate||1)*(1+(R()-.5)*.12);g.gain.value=vol*(.9+R()*.2);s.connect(g);g.connect(sfxBus);s.start(actx.currentTime+(at||0));return true}
+function silentWav(){const n=22050,b=new ArrayBuffer(44+n*2),v=new DataView(b);const w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,44100,true);v.setUint32(28,88200,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);return URL.createObjectURL(new Blob([b],{type:'audio/wav'}))}
+function unlockAudio(){try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
+ const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+ if(!actx){try{actx=new AC();master=actx.createGain();const lp=actx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=6200;const comp=actx.createDynamicsCompressor();comp.threshold.value=-18;comp.ratio.value=4;master.connect(lp);lp.connect(comp);comp.connect(actx.destination);sfxBus=actx.createGain();sfxBus.connect(master);
+  if(!iOS){try{const src=actx.createMediaElementSource(music);musGain=actx.createGain();an=actx.createAnalyser();an.fftSize=256;an.smoothingTimeConstant=.82;bins=new Uint8Array(an.frequencyBinCount);src.connect(musGain);musGain.connect(an);an.connect(master)}catch(e){an=null}}
+  setMute();loadSfx()}catch(e){actx=null;return}}
+ if(actx.state!=='running')actx.resume().catch(()=>{});
+ try{const b=actx.createBuffer(1,1,22050),s=actx.createBufferSource();s.buffer=b;s.connect(actx.destination);s.start(0)}catch(e){}
+ if(!silentEl){silentEl=new Audio(silentWav());silentEl.loop=true;silentEl.setAttribute('playsinline','');silentEl.volume=0.01}
+ if(silentEl.paused&&!quiet()&&!document.hidden&&!paused)silentEl.play().catch(()=>{});
+ if(!musicUnlocked){musicUnlocked=true;if(!game&&$('hub').classList.contains('on')&&!paused)hubMusic();else if(!music.src){const p=music.src=silentEl.src;music.play().then(()=>{if(music.src===p)music.pause()}).catch(()=>{musicUnlocked=false})}}
+ $('menuBtn').classList.toggle('glow',!quiet()&&actx.state!=='running')}
+['click','touchend','pointerup','keydown'].forEach(ev=>addEventListener(ev,unlockAudio,{capture:true,passive:true}));
+const quiet=()=>!!S.mute||!PGM.audioOn;
+function setMute(){const q=quiet();music.muted=q;if(master)master.gain.value=q?0:1;if(q&&silentEl)silentEl.pause()}
+// pentatonic, consonant = full volume; dissonant = half (ЗВУК п.18–20)
+const PENTA=[261.6,293.7,329.6,392,440,523.3,587.3,659.3,784];
+function tone(f,dur,vol,type,at){if(!actx||quiet())return;const n=actx.currentTime+(at||0),o=actx.createOscillator(),g=actx.createGain();o.type=type||'sine';o.frequency.value=f*(1+(R()-.5)*.012);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(vol*(.9+R()*.2),n+.015);g.gain.exponentialRampToValueAtTime(.0005,n+dur);o.connect(g);g.connect(sfxBus);o.start(n);o.stop(n+dur+.05)}
+let lastSfx={};function cool(k,s){const n=performance.now();if(n-(lastSfx[k]||0)<s*1000)return false;lastSfx[k]=n;return true}
+// sound files from meta6/audio/library; synth only as fallback if a file failed to load
+const sfx={
+ good(step){const r=PENTA[step%PENTA.length]/PENTA[0];if(!smp('ui_reward_01',AUD_VOL.harm,.8*Math.pow(r,.75)))tone(PENTA[step%PENTA.length],.5,AUD_VOL.harm*.6,'triangle')},
+ chord(){if(!smp(['ui_level_up_01','ui_reward_02'],AUD_VOL.harm))[0,2,4].forEach((s,i)=>tone(PENTA[s+2],1.3,AUD_VOL.harm*.5,'triangle',i*.07))},
+ bad(){if(!cool('bad',.3))return;if(!smp(['ui_error_01','ui_error_02'],AUD_VOL.dis,.9)){tone(233,.4,AUD_VOL.dis*.6,'sine');tone(247,.4,AUD_VOL.dis*.6,'sine')}},
+ tick(){if(!cool('tick',.15))return;smp('ui_click_01',AUD_VOL.tick)||tone(PENTA[4]*2,.08,AUD_VOL.tick*.4,'sine')},
+ door(){if(!smp(['portal_01','portal_02'],AUD_VOL.door,.9))tone(110,1.1,AUD_VOL.door*.6,'sine')},
+ glitch(){if(!cool('gl',1.5))return;smp(['glitch_01','glitch_02'],AUD_VOL.dis)||tone(140,.5,AUD_VOL.dis*.5,'sine')}};
+let musFade=0;
+function playTrack(tr,from,len,loop,vol){if(!tr)return;music.loop=!!loop;if(music.src!==tr.preview)music.src=tr.preview;const go=()=>{try{music.currentTime=from||0}catch(e){}music.volume=vol||AUD_VOL.music;const p=music.play();if(p&&p.catch)p.catch(()=>{})};if(music.readyState>=1)go();else{music.addEventListener('loadedmetadata',go,{once:true});music.load()}
+ cancel(musFade);if(len)musFade=later(()=>music.pause(),len*1000)}
+function stopMusic(){cancel(musFade);music.pause()}
+// background music of the search screen: one calm track per personality (rule 3.3.1)
+function hubMusic(){if(paused)return;const tr=CAT[(pers()*7+S.circle*3)%CAT.length];playTrack(tr,0,0,true,.42)}
+
+/* ---------- WebGL atmosphere (from KILLKLAN site) ---------- */
+let glQ=1,slowT=0;
+const hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255);
+const KEYS=['dep','police','term','future','pink','grid','candle'];
+const fx={cur:null,tgt:null,glitch:0,red:0,redT:0,pulse:0,matrix:0,virus:0,sun:0,until:{matrix:0,virus:0,sun:0},rip:new Float32Array(18).fill(-100),ri:0};
+function setTarget(v){const o={A:hex(v.A),B:hex(v.B),C:hex(v.C),K:hex(v.K),s:v.s};KEYS.forEach(k=>o[k]=v[k]||0);fx.tgt=o;if(!fx.cur)fx.cur=JSON.parse(JSON.stringify(o))}
+const glc=$('bg'),veil=$('veil');let gl=null,prog=null,U={},buf=null;
+const VS='attribute vec2 a;varying vec2 vUv;void main(){vUv=a*.5+.5;gl_Position=vec4(a,0.,1.);}';
+const FS=`#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+varying vec2 vUv;uniform vec2 uRes;uniform float uT,uS,uGlitch,uRed,uPulse,uPolice,uTerm,uFuture,uPink,uDep,uMatrix,uVirus,uSun,uGrid,uCandle;uniform vec3 uA,uB,uC,uK;uniform vec3 uRip[6];
+float h(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
+vec3 base(vec2 uv,float f){vec2 c=(uv-vec2(.55,.38))*vec2(uRes.x/uRes.y,1.);float d=length(c)*.9;vec3 col=mix(uA,uB,smoothstep(0.,.55,d));col=mix(col,uC,smoothstep(.5,1.15,d));col=mix(col,uA*1.03,smoothstep(.48,.85,f)*.5);col=mix(col,uC,smoothstep(.5,.22,f)*.22);return mix(col,uK,uPulse*.26*smoothstep(.45,.85,f));}
+void main(){vec2 uv=vUv;float asp=uRes.x/uRes.y;float band=floor(uv.y*46.),tt=floor(uT*22.);
+float g=uGlitch+uVirus*.8*step(.86,h(vec2(band,floor(uT*9.))));uv.x+=(h(vec2(band,tt))-.5)*.09*g*step(.6,h(vec2(band*1.37,tt)));
+vec2 p=(uv-.5)*vec2(asp,1.);vec2 disp=vec2(0.);
+for(int i=0;i<6;i++){vec2 d=p-(uRip[i].xy-.5)*vec2(asp,1.);float age=uT-uRip[i].z;float r=length(d)+1e-4;float w=sin(r*42.-age*10.)*exp(-age*1.4)*exp(-abs(r-age*.5)*7.);disp+=d/r*w*.016*step(0.,age)*step(age,4.);}
+float t=uT*uS;vec2 q=p*1.35+disp;vec2 wp=vec2(fbm(q*1.7+vec2(t*.06,-t*.04)),fbm(q*1.7+vec2(5.2,1.3)-t*.05));vec2 fp=q+wp*.75+vec2(t*.03,0.);
+vec2 ca=p*(.006+g*.02+uPulse*.006);vec2 dr=vec2(0.,t*.02);
+float fg=fbm(fp*1.6+dr),fr=fbm((fp+ca)*1.6+dr),fb=fbm((fp-ca)*1.6+dr);
+vec3 col=vec3(base(uv+ca*.5,fr).r,base(uv,fg).g,base(uv-ca*.5,fb).b);
+float lum=dot(col,vec3(.299,.587,.114));col=mix(col,vec3(lum),uDep*.8);
+col=mix(col,vec3(.98,.74,.82),uPink*.22*fg);
+col=mix(col,vec3(lum)*vec3(1.06,.97,.84),uFuture*.55);
+float sb=step(.78,h(vec2(floor(uv.y*20.),floor(uT*2.5))));col+=(h(vec2(floor(uv.x*uRes.x*.5),floor(uv.y*uRes.y*.5)+floor(uT*30.)))-.5)*.16*uFuture*sb;
+col=mix(col,col*vec3(.55,1.2,.7),uTerm*.5);col+=vec3(.1,.5,.25)*uTerm*.12*smoothstep(.6,.9,fg);
+float ph=sin(uT*6.3);col+=vec3(.95,.08,.1)*uPolice*max(ph,0.)*smoothstep(.55,0.,uv.x)*.4;col+=vec3(.08,.25,1.)*uPolice*max(-ph,0.)*smoothstep(.45,1.,uv.x)*.4;
+float gx=step(.975,fract(p.x*12.+wp.x*.3)),gy=step(.975,fract(p.y*12.-t*.25));col=mix(col,uK,max(gx,gy)*uGrid*.16);
+col+=vec3(1.,.58,.25)*uCandle*.16*(.8+.2*sin(uT*8.7+sin(uT*2.9)*2.))*smoothstep(.8,0.,length(p-vec2(0.,-.62)));
+col=mix(col,vec3(1.,.8,.55),uSun*.75*smoothstep(.95,0.,length(p-vec2(0.,-.8+.3*uSun))));
+vec2 cs=vec2(9.,13.),gc=floor(uv*uRes/cs),fc=fract(uv*uRes/cs);float sp=.35+h(vec2(gc.x,3.1))*.9,hd=fract(uT*sp*.22+h(vec2(gc.x,7.7)));float dy=uv.y-(1.-hd);float tail=step(0.,dy)*exp(-dy*7.);
+float gly=step(.3,h(gc+floor(uT*7.)))*step(.45,h(floor(fc*3.)+gc*.37+floor(uT*3.)));float edge=step(.12,fc.x)*step(fc.x,.88)*step(.08,fc.y)*step(fc.y,.92);
+col=mix(col,vec3(.015,.05,.03),uMatrix*.82);col+=vec3(.25,1.,.5)*tail*gly*edge*uMatrix*(.6+.4*step(dy,.012));
+col=mix(col,vec3(.72,.03,.05),uRed*(.42+.22*fg));
+col*=1.-(.3+uRed*.3)*smoothstep(.35,1.05,length(p*vec2(.85,1.)));
+col+=(h(uv*uRes+fract(uT*7.3)*vec2(91.,37.))-.5)*.055;
+gl_FragColor=vec4(col,1.);}`;
+function initGL(){try{gl=glc.getContext('webgl',{antialias:false,alpha:false,depth:false,stencil:false,powerPreference:'low-power',preserveDrawingBuffer:false})}catch(e){gl=null}if(!gl)return false;
+ const sh=(type,src)=>{const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){console.warn(gl.getShaderInfoLog(s));return null}return s};
+ const v=sh(gl.VERTEX_SHADER,VS),f=sh(gl.FRAGMENT_SHADER,FS);if(!v||!f){gl=null;return false}prog=gl.createProgram();gl.attachShader(prog,v);gl.attachShader(prog,f);gl.linkProgram(prog);if(!gl.getProgramParameter(prog,gl.LINK_STATUS)){gl=null;return false}
+ gl.useProgram(prog);buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);const loc=gl.getAttribLocation(prog,'a');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+ ['uRes','uT','uS','uGlitch','uRed','uPulse','uPolice','uTerm','uFuture','uPink','uDep','uMatrix','uVirus','uSun','uGrid','uCandle','uA','uB','uC','uK','uRip'].forEach(k=>U[k]=gl.getUniformLocation(prog,k));resize();return true}
+function resize(){if(!gl)return;const s=Math.min(.55,(window.devicePixelRatio||1)*.5)*glQ,w=Math.max(2,Math.round(innerWidth*s)),h=Math.max(2,Math.round(innerHeight*s));if(glc.width!==w||glc.height!==h){glc.width=w;glc.height=h;gl.viewport(0,0,w,h)}}
+addEventListener('resize',resize);
+glc.addEventListener('webglcontextlost',e=>{e.preventDefault();gl=null});glc.addEventListener('webglcontextrestored',()=>initGL());
+function ripple(x,y,s){fx.rip[fx.ri*3]=x/innerWidth;fx.rip[fx.ri*3+1]=1-y/innerHeight;fx.rip[fx.ri*3+2]=(performance.now()/1000)%1000;fx.ri=(fx.ri+1)%6}
+let last=performance.now(),synth=0;
+let fAvg=16;function frame(now){requestAnimationFrame(frame);const raw=now-last,dt=Math.min(.1,raw/1000);last=now;if(!paused)runTQ(dt);
+ fAvg+=(Math.min(raw,100)-fAvg)*.05;if(fAvg>22&&glQ>.3){slowT+=dt;if(slowT>1.5){glQ*=.8;slowT=0;resize()}}else slowT=0;
+ const k=1-Math.exp(-dt*2.2),c=fx.cur,tg=fx.tgt;if(!c||!tg)return;
+ for(const p of['A','B','C','K'])for(let i=0;i<3;i++)c[p][i]+=(tg[p][i]-c[p][i])*k;c.s+=(tg.s-c.s)*k;KEYS.forEach(x=>c[x]+=(tg[x]-c[x])*k);
+ fx.glitch*=Math.exp(-dt*3.2);fx.red+=(fx.redT-fx.red)*(1-Math.exp(-dt*(fx.redT>fx.red?3.5:1.6)));
+ for(const e of['matrix','virus','sun']){const on=now<fx.until[e]?1:0;fx[e]+=(on-fx[e])*(1-Math.exp(-dt*1.8))}
+ let lvl=0;if(!music.paused){if(an){an.getByteFrequencyData(bins);let s=0;for(let i=1;i<24;i++)s+=bins[i];lvl=s/(23*255)}else lvl=.3+.22*Math.max(0,Math.sin(now/1000*Math.PI*2*BPM/60))}
+ fx.pulse+=(lvl-fx.pulse)*(1-Math.exp(-dt*9));$('veil').style.opacity=(fx.red*.85).toFixed(3);
+ if(game&&game.update&&!paused)game.update(dt,now);draw(now)}
+function draw(now){if(!gl||!fx.cur)return;const c=fx.cur;gl.uniform2f(U.uRes,glc.width,glc.height);gl.uniform1f(U.uT,(now/1000)%1000);gl.uniform1f(U.uS,c.s);gl.uniform1f(U.uGlitch,fx.glitch);gl.uniform1f(U.uRed,fx.red);gl.uniform1f(U.uPulse,fx.pulse);
+ gl.uniform1f(U.uPolice,c.police);gl.uniform1f(U.uTerm,c.term);gl.uniform1f(U.uFuture,c.future);gl.uniform1f(U.uPink,c.pink);gl.uniform1f(U.uDep,c.dep);gl.uniform1f(U.uGrid,c.grid);gl.uniform1f(U.uCandle,c.candle);
+ gl.uniform1f(U.uMatrix,fx.matrix);gl.uniform1f(U.uVirus,fx.virus);gl.uniform1f(U.uSun,fx.sun);gl.uniform3fv(U.uA,c.A);gl.uniform3fv(U.uB,c.B);gl.uniform3fv(U.uC,c.C);gl.uniform3fv(U.uK,c.K);gl.uniform3fv(U.uRip,fx.rip);gl.drawArrays(gl.TRIANGLES,0,3)}
+
+/* ---------- screens, captions, glitch transition ---------- */
+const root=document.documentElement;let game=null,paused=false,BPM=118;
+[...$('logo').children].forEach((s,i)=>s.style.setProperty('--i',i));
+function theme(){const m=modes[pers()];['--ink','--ink2','--line','--panel','--hover','--accent'].forEach((k,i)=>root.style.setProperty(k,m.c[i]));setTarget(m.v)}
+function show(id){['hub','gscr','escr','rscr'].forEach(s=>$(s).classList.toggle('on',s===id));const inGame=id==='gscr'||id==='escr'||(id==='stage');$('ring').style.display=inGame?'block':'none';$('hearts').style.display=inGame?'flex':'none';$('stage').style.display=id==='stage'?'block':'none'}
+let capT=0;function cap(s,ms){const c=$('cap');c.textContent=s;c.classList.add('on');cancel(capT);capT=later(()=>c.classList.remove('on'),ms||2600)}
+function glitchTo(msg,fn,red){fx.glitch=1;if(red)fx.redT=.8;sfx.glitch();$('logo').classList.add('glitching');const g=$('glitch');if(msg){g.textContent=msg;g.classList.add('on')}
+ later(()=>{g.classList.remove('on');$('logo').classList.remove('glitching');fx.redT=0;fx.glitch=.6;fn()},msg?1100:520)}
+let hearts=3;function setHearts(n){hearts=n;[...$('hearts').children].forEach((b,i)=>b.classList.toggle('off',i>=n))}
+function setBar(p){$('tbar').style.setProperty('--p',Math.max(0,Math.min(1,p)).toFixed(3))}
+function rippleEl(el){const b=el.getBoundingClientRect();ripple(b.left+b.width/2,b.top+b.height/2,.8)}
+
+/* ---------- HUB: whatever you type decides the game (switch #1) ---------- */
+const Q_WORDS=/^(кто|что|как|где|почему|зачем|когда|сколько|можно|who|what|how|where|why|when|can|is|are|do)(?=[\s?!.,]|$)/i;
+const E_WORDS=/(выход|выйти|выпусти|помоги|спаси|сбеж|дверь|отсюда|exit|escape|help|let me out|door|out of)/i;
+function classify(q){if(E_WORDS.test(q))return'e';if(q.includes('?')||Q_WORDS.test(q.trim()))return'g';return'r'}
+function allowed(m){return m==='r'||(m==='g'&&has(U_GUESS))||(m==='e'&&has(U_ESC))}
+function startQuery(raw){raw=(raw||'').trim().slice(0,60);let m=classify(raw);if(!raw){const opts=['r'].concat(has(U_GUESS)?['g']:[],has(U_ESC)?['e']:[]).filter(x=>x!==S.last||!has(U_GUESS));m=pickA(opts)}
+ if(!allowed(m)){cap(t('Этот путь пока закрыт. Ищем по-другому…','That path is still locked. Searching another way…'));m='r'}
+ launch(m,raw)}
+function launch(m,raw){S.last=m;save();PGM.play(true);PGM.track('progression_started',{step_id:m,wins:S.w,game_version:GAME_VERSION});$('q').blur();const say=modes[pers()][S.lang][4]+'…';glitchTo(say,()=>{if(m==='r')Rhythm.start({query:raw});else if(m==='g')Guess.start({query:raw});else Escape.start({query:raw})})}
+function hub(){game=null;stopMusic();theme();show('hub');if(musicUnlocked)hubMusic();$('q').value='';const m=modes[pers()][S.lang];$('q').placeholder=m[2];
+ const L=S.lang==='ru'?0:1,rows=shuffle(modes[pers()].rows).map(r=>r[L].split(' → ')[0]).filter(s=>Q_WORDS.test(s));
+ const feel=pickA(S.lang==='ru'?ruW(Math.floor(R()*16)):enW(Math.floor(R()*16)));
+ const chips=[feel];if(has(U_GUESS)&&rows.length)chips.push(rows[0]);if(has(U_ESC))chips.push(pickA(S.lang==='ru'?['как выйти отсюда','выпусти меня','помоги найти дверь','где выход?']:['how do I get out','let me out','help me find the door','where is the exit?']));
+ const box=$('chips');box.replaceChildren();shuffle(chips).forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.style.setProperty('--i',i);b.textContent=c;b.onclick=()=>{$('q').value=c;rippleEl(b);startQuery(c)};box.append(b)});
+ [['orbR',0],['orbG',U_GUESS],['orbE',U_ESC]].forEach(([id,n])=>{$(id).classList.toggle('locked',!has(n));$(id).classList.toggle('last',{orbR:'r',orbG:'g',orbE:'e'}[id]===S.last)});
+ if(!S.told['p'+pers()+'c'+S.circle]){S.told['p'+pers()+'c'+S.circle]=1;save();later(()=>cap(m[1],3400),700)}}
+$('form').addEventListener('submit',e=>{e.preventDefault();startQuery($('q').value)});
+$('orbR').onclick=()=>launch('r','');$('orbG').onclick=()=>{if(has(U_GUESS))launch('g','');else lockedCap(U_GUESS)};$('orbE').onclick=()=>{if(has(U_ESC))launch('e','');else lockedCap(U_ESC)};
+function lockedCap(n){sfx.bad();cap(t('Откроется после побед: ','Unlocks after wins: ')+(n-S.w))}
+
+/* ---------- MODE 1 · RHYTHM «Поймай запрос» ---------- */
+const stage=$('stage'),cx=stage.getContext('2d');let SW=0,SH=0,DPR=1;
+function sizeStage(){DPR=Math.min(1.5,devicePixelRatio||1);SW=innerWidth;SH=innerHeight;stage.width=Math.round(SW*DPR);stage.height=Math.round(SH*DPR);cx.setTransform(DPR,0,0,DPR,0,0)}
+addEventListener('resize',()=>{resize();sizeStage()});sizeStage();
+const COLS=['#365ab3','#b44b40','#c6a047','#54866b'];
+const SPR=new Map();function sprite(ch,col,glitch){const k=ch+col+(glitch?1:0);let c=SPR.get(k);if(c)return c;const z=58,pad=22,d=Math.min(2,devicePixelRatio||1);c=document.createElement('canvas');c.width=c.height=Math.ceil((z+pad*2)*d);const x=c.getContext('2d');x.scale(d,d);x.translate(z/2+pad,z/2+pad);
+ x.shadowColor=glitch?'#ff2a2a':col+'88';x.shadowBlur=glitch?22:14;x.fillStyle=glitch?'#2a0306e0':'rgba(245,246,240,.8)';x.beginPath();x.roundRect?x.roundRect(-z/2,-z/2,z,z,12):x.rect(-z/2,-z/2,z,z);x.fill();x.shadowBlur=0;x.strokeStyle=glitch?'#ff5a5a':col;x.lineWidth=1.6;x.stroke();
+ x.textAlign='center';x.textBaseline='middle';x.font='600 30px Arial';if(glitch){x.fillStyle='#ff5a5a99';x.fillText(ch,3,1);x.fillStyle='#5aa0ff99';x.fillText(ch,-3,0);x.fillStyle='#ffd6d6'}else x.fillStyle=col;x.fillText(ch,0,1);
+ c.size=z+pad*2;SPR.set(k,c);if(SPR.size>300)SPR.delete(SPR.keys().next().value);return c}
+const ABC_RU='АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЭЮЯ',ABC_EN='ABCDEFGHIJKLMNOPRSTUVWXYZ';
+function wordFrom(raw,cap){const ws=(raw||'').toUpperCase().replace(/Ё/g,'Е').split(/[^\p{L}]+/u).filter(w=>w.length>=3&&w.length<=9);if(ws.length)return ws.sort((a,b)=>b.length-a.length)[0];const pool=shuffle(S.lang==='ru'?ruW(Math.floor(R()*16)):enW(Math.floor(R()*16)));return(pool.find(w=>w.length>=3&&w.length<=cap)||'БИТ').toUpperCase()}
+const Rhythm={start(o){const d=diff(),mini=!!o.mini;this.o=o;this.mini=mini;this.word=o.word||wordFrom(o.query,Math.min(9,4+Math.floor(d/2)));this.got=0;this.bub=[];this.fly=[];this.t=0;this.next=.8;this.since=0;this.glUsed=!has(U_GLITCH)||mini;
+  this.limit=mini?11:27;this.speed=(SH*.55)/Math.max(1.5,3.4-d*.12);BPM=104+Math.floor(R()*30)+Math.min(24,d*2);this.beat=60/BPM;this.every=this.beat*(mini?1:Math.max(1,2-d*.12));
+  this.track=o.track||freshTracks(1)[0];if(!o.resume)setHearts(mini?Math.max(1,hearts):3);
+  const abc=/[А-Я]/.test(this.word)?ABC_RU:ABC_EN;this.abc=abc;
+  $('clue').style.display='none';$('slots').style.display='flex';this.slots();
+  show('stage');game=this;if(o.resume){playTrack(this.track,o.resume.at)}else playTrack(this.track,mini?8:0)},
+ slots(){const s=$('slots');s.replaceChildren();[...this.word].forEach((ch,i)=>{const u=document.createElement('u');u.textContent=ch;u.className=i<this.got?'ok':i===this.got?'next':'';s.append(u)})},
+ spawn(){const need=this.word[this.got];let ch,kind='n';const r=R();this.since++;
+  if(!this.glUsed&&R()<.07){kind='glitch';ch=pickA([...this.abc])}
+  else if(r<.42||this.since>=3){ch=need;this.since=0}else if(r<.62)ch=pickA([...this.word]);else ch=pickA([...this.abc]);
+  if(ch===need)this.since=0;
+  const lanes=4,wid=Math.min(SW-30,520),x0=(SW-wid)/2,lane=Math.floor(R()*lanes);
+  this.bub.push({ch,kind,x:x0+wid*(lane+.5)/lanes,y:110,ph:R()*6.28,col:COLS[Math.floor(R()*4)],s:0,dead:0})},
+ update(dt,now){this.t+=dt;setBar(this.t/this.limit);this.next-=dt;if(this.next<=0){this.spawn();this.next+=this.every}
+  const beatPh=(this.t%this.beat)/this.beat,pump=Math.exp(-beatPh*5);
+  cx.clearRect(0,0,SW,SH);cx.textAlign='center';cx.textBaseline='middle';const need=this.word[this.got],tut=S.w<2&&S.circle===1;
+  for(const b of this.bub){b.s+=(1-b.s)*(1-Math.exp(-dt*7));b.y+=this.speed*dt;b.ph+=dt*2.1;const sway=Math.sin(b.ph)*9,x=b.x+sway,sz=58*b.s*(1+pump*.06);
+   if(b.y>SH+40)b.dead=1;if(b.dead)continue;b.cx=x;b.cy=b.y;b.r=sz*.55;
+   const g=b.kind==='glitch',sp=sprite(b.ch,b.col,g),sc=sz/58,S2=sp.size*sc;
+   cx.save();cx.translate(x+(g?(R()-.5)*4:0),b.y);cx.rotate(Math.sin(b.ph*.7)*.08);
+   if(tut&&!g&&b.ch===need){cx.strokeStyle=COLS[0];cx.globalAlpha=.35+.35*Math.sin(now/160);cx.lineWidth=3;cx.beginPath();cx.arc(0,0,sz*.78+pump*6,0,6.283);cx.stroke();cx.globalAlpha=1}
+   cx.drawImage(sp,-S2/2,-S2/2,S2,S2);cx.restore()}
+  this.bub=this.bub.filter(b=>!b.dead);
+  for(const f of this.fly){f.k=Math.min(1,f.k+dt*2.6);const e=1-Math.pow(1-f.k,3);const x=f.x+(f.tx-f.x)*e,y=f.y+(f.ty-f.y)*e-Math.sin(e*Math.PI)*60;cx.globalAlpha=1-e*.85;cx.fillStyle=f.col;cx.font='600 '+Math.round(30-e*8)+'px Arial';cx.fillText(f.ch,x,y);cx.globalAlpha=1}
+  this.fly=this.fly.filter(f=>f.k<1);
+  if(this.t>=this.limit)this.end(false)},
+ tap(x,y){let best=null;for(const b of this.bub){if(b.dead||!b.r)continue;if(Math.abs(x-b.cx)<b.r+10&&Math.abs(y-b.cy)<b.r+10&&(!best||b.cy>best.cy))best=b}if(best)this.hit(best)},
+ key(ch){ch=ch.toUpperCase().replace('Ё','Е');let best=null;for(const b of this.bub)if(!b.dead&&b.ch===ch&&(!best||b.cy>best.cy))best=b;if(best)this.hit(best)},
+ hit(b){ripple(b.cx,b.cy,.8);b.dead=1;
+  if(b.kind==='glitch'){this.glUsed=true;game=null;const at=music.currentTime||0;const saved={...this,o:{...this.o}};stopMusic();
+   glitchTo(t('Сбой! Поисковик проверяет твой слух…','Glitch! The search engine tests your ears…'),()=>Guess.start({bonus:true,back:()=>{Object.assign(Rhythm,saved);Rhythm.start({...saved.o,word:saved.word,track:saved.track,resume:{at},keep:saved})}}),true);return}
+  const need=this.word[this.got];
+  if(b.ch===need){sfx.good(this.got);const s=$('slots').children[this.got],bb=s.getBoundingClientRect();this.fly.push({ch:b.ch,x:b.cx,y:b.cy,tx:bb.left+bb.width/2,ty:bb.top+bb.height/2,k:0,col:b.col});this.got++;fx.glitch=Math.max(fx.glitch,.12);this.slots();if(this.got>=this.word.length)later(()=>this.end(true),380)}
+  else{sfx.bad();setHearts(hearts-1);fx.glitch=.5;fx.redT=.35;later(()=>fx.redT=0,300);if(navigator.vibrate)try{navigator.vibrate(30)}catch(e){}if(hearts<=0)this.end(false)}},
+ end(win){if(game!==this)return;game=null;cx.clearRect(0,0,SW,SH);
+  if(this.mini){const back=this.o.back;stopMusic();if(!win)setHearts(Math.max(1,hearts-1));back(win);return}
+  if(win)victory(this.o.query||this.word,this.track,'r');else defeat()}};
+// restore support for returning from the bonus round
+const _rs=Rhythm.start;Rhythm.start=function(o){if(o.keep){const k=o.keep;Object.assign(this,k);this.o=k.o;this.glUsed=true;$('clue').style.display='none';$('slots').style.display='flex';this.slots();show('stage');game=this;playTrack(this.track,o.resume.at);return}_rs.call(this,o)};
+stage.addEventListener('pointerdown',e=>{if(game===Rhythm){e.preventDefault();Rhythm.tap(e.clientX,e.clientY)}});
+addEventListener('keydown',e=>{if(game===Rhythm&&e.key.length===1&&!e.ctrlKey&&!e.metaKey){Rhythm.key(e.key)}});
+
+/* ---------- MODE 2 · GUESS «Угадай трек» (memory by ear) ---------- */
+const Guess={start(o){const d=diff();this.o=o;this.bonus=!!o.bonus;this.rounds=this.bonus?1:3+Math.min(2,Math.floor(d/3));this.n=this.bonus?3:3+Math.min(2,Math.floor(d/2));this.listen=Math.max(2.2,3.4-d*.12);this.round=0;this.wrongRow=0;
+  if(!this.bonus)setHearts(3);$('slots').style.display='none';$('clue').style.display='block';show('gscr');game=this;this.next()},
+ next(){if(game!==this)return;this.round++;this.busy=true;const tr=freshTracks(this.n);this.set=tr;this.ans=null;$('clue').textContent='';$('replay').classList.remove('on');
+  const box=$('cards');box.style.setProperty('--n',this.n>4?3:this.n);box.replaceChildren();
+  tr.forEach((x,i)=>{const c=document.createElement('button');c.className='card';c.setAttribute('aria-label',t('Трек ','Track ')+(i+1));const im=new Image();im.alt='';im.decoding='async';im.onload=()=>im.classList.add('ok');im.src=x.art;const eq=document.createElement('b');eq.className='eq';eq.append(document.createElement('u'),document.createElement('u'),document.createElement('u'));c.append(im,eq);c.onclick=()=>this.pick(i,c);box.append(c)});
+  setBar(0);let i=0;const offs=tr.map(()=>2+R()*6);this.offs=offs;
+  const step=()=>{if(game!==this)return;const cs=[...box.children];cs.forEach((c,j)=>{c.classList.toggle('lit',j===i);c.classList.toggle('dim',j!==i)});setBar(i/this.n);if(i<this.n){playTrack(tr[i],offs[i],this.listen);rippleEl(cs[i]);i++;this.tm=later(step,this.listen*1000+250)}else{cs.forEach(c=>c.classList.remove('lit','dim'));this.quiz()}};
+  this.tm=later(step,500)},
+ quiz(){if(game!==this)return;this.ans=Math.floor(R()*this.n);this.busy=false;$('replay').classList.add('on');setBar(1);this.play()},
+ play(){const off=this.offs[this.ans]+8+R()*6;playTrack(this.set[this.ans],off,Math.max(3,6-diff()*.25));const cs=[...$('cards').children];cs.forEach(c=>c.classList.add('dim'));later(()=>cs.forEach(c=>c.classList.remove('dim')),900)},
+ pick(i,c){if(this.busy||this.ans===null||game!==this)return;rippleEl(c);const cs=[...$('cards').children];
+  if(i===this.ans){this.busy=true;sfx.chord();c.classList.add('win');this.wrongRow=0;fx.glitch=.2;if(this.bonus){setHearts(Math.min(3,hearts+1));cap(t('Слух подтверждён. +1 жизнь','Ears confirmed. +1 life'))}later(()=>this.after(true),1100)}
+  else{sfx.bad();c.classList.add('bad');later(()=>c.classList.remove('bad'),500);setHearts(hearts-1);this.wrongRow++;fx.glitch=.5;
+   // switch #3: two misses in a row lock you inside → Escape
+   if(!this.bonus&&has(U_TRAP)&&this.wrongRow>=2&&hearts>0){this.busy=true;stopMusic();cancel(this.tm);game=null;glitchTo(t('Ты слишком долго искал. Поисковик закрыл двери.','You searched too long. The search engine locked the doors.'),()=>Escape.start({query:this.o.query,trapped:true}),true);return}
+   if(hearts<=0||this.bonus){this.busy=true;cs[this.ans].classList.add('win');later(()=>this.after(false),1200)}}},
+ after(ok){if(game!==this)return;stopMusic();
+  if(this.bonus){game=null;this.o.back(ok);return}
+  if(!ok){game=null;defeat();return}
+  if(this.round>=this.rounds){game=null;victory(this.o.query||'?',this.set[this.ans],'g');return}
+  this.next()}};
+$('replay').onclick=()=>{if(game===Guess&&!Guess.busy&&Guess.ans!==null){sfx.tick();Guess.play()}};
+
+/* ---------- MODE 3 · ESCAPE «Побег из поисковика» ---------- */
+const Escape={start(o){const d=diff();this.o=o;this.steps=3+Math.min(2,Math.floor(d/3));this.nd=3+(d>=3?1:0);this.step=0;this.doorAt=has(U_DOOR)?1+Math.floor(R()*Math.max(1,this.steps-1)):-1;this.used=new Set();
+  if(!o.trapped)setHearts(3);fx.redT=o.trapped?.25:0;$('slots').style.display='none';$('clue').style.display='block';show('escr');game=this;this.room()},
+ room(){if(game!==this)return;this.busy=false;setBar(this.step/this.steps);let ti;do{ti=Math.floor(R()*16)}while(this.used.has(ti)&&this.used.size<16);this.used.add(ti);this.ti=ti;
+  const ws=shuffle(S.lang==='ru'?ruW(ti):enW(ti)).slice(0,2);this.w=ws;
+  const fr=S.lang==='ru'?['{a}… {b}… где-то здесь выход.','На стене написано: «{a}», «{b}».','За этой дверью — {a} и {b}.','Пароль двери: {a} + {b}.','Мне снится: {a}. Потом — {b}.']:['The exit is where {a}… and {b}.','I remember {a}. And {b}.','Behind this door: {a} and {b}.','Look for {a}. You will find {b}.','Smells like {a}, sounds like {b}.'];
+  $('clue').textContent=pickA(fr).replace('{a}',ws[0]).replace('{b}',ws[1]||ws[0]);
+  const others=shuffle([...Array(16).keys()].filter(i=>i!==ti)).slice(0,this.nd-1),opts=shuffle([ti,...others]);
+  const box=$('doors');box.style.setProperty('--n',this.nd>3?2:3);box.replaceChildren();
+  opts.forEach((oi,i)=>{const b=document.createElement('button');b.className='door panel';b.style.setProperty('--i',i);b.innerHTML='<svg viewBox="0 0 70 92"><path d="M8 88V22a27 27 0 0 1 54 0v66" fill="none" stroke="currentColor" stroke-width="2"/><g class="leaf"><path d="M12 88V24a23 23 0 0 1 46 0v64z" fill="currentColor" opacity=".16"/><circle cx="50" cy="58" r="2.6" fill="currentColor"/></g><path d="M2 88h66" stroke="currentColor" stroke-width="2"/></svg>';const sp=document.createElement('span');sp.textContent=TITLES[oi];b.append(sp);b.onclick=()=>this.pick(oi,b);box.append(b)})},
+ pick(oi,b){if(this.busy||game!==this)return;rippleEl(b);
+  if(oi===this.ti){this.busy=true;b.classList.add('open');sfx.door();sfx.chord();const tr=trackByTitle(TITLES[oi]);if(tr)playTrack(tr,4,3.5);this.step++;fx.redT=Math.max(0,fx.redT-.2);
+   // switch #4: a door with music behind it → short rhythm
+   if(this.step-1===this.doorAt){this.doorAt=-1;later(()=>{if(game!==this)return;const saved=this;game=null;glitchTo(t('За дверью играет музыка. Лови!','Music behind the door. Catch it!'),()=>Rhythm.start({mini:true,word:(this.w[0]||'БИТ').toUpperCase().slice(0,5),track:tr||freshTracks(1)[0],back:ok=>{show('escr');game=saved;$('slots').style.display='none';$('clue').style.display='block';saved.cont()}}))},1100);return}
+   later(()=>this.cont(),1300)}
+  else{sfx.bad();b.classList.add('gone');setHearts(hearts-1);fx.redT=Math.min(.75,fx.redT+.25);fx.glitch=.5;if(hearts<=0){this.busy=true;later(()=>{if(game===this){game=null;defeat()}},700)}}},
+ cont(){if(game!==this)return;if(this.step>=this.steps){game=null;fx.redT=0;victory(this.o.query||t('выход','exit'),trackByTitle(TITLES[this.ti])||freshTracks(1)[0],'e');return}this.room()}};
+
+/* ---------- results, unlocks, ending ---------- */
+function joke(q){const p=pers(),L=S.lang==='ru'?0:1;const pool=(EXTRA[p]?EXTRA[p].j:[]).concat(GEN);return pickA(pool)[L].replace(/\{q\}/g,q||'…')}
+const UNLOCK_MSG={1:['Открыто: Угадай трек. Спроси что-нибудь с «?»','Unlocked: Guess the track. Ask anything with “?”'],2:['Открыто: Побег. Напиши «выпусти меня»','Unlocked: Escape. Type “let me out”'],3:['Новое: красная буква-глюк в ритме. Поймай — и прыгнешь в другую игру','New: red glitch letters in Rhythm. Catch one to jump games'],4:['Новое: два промаха в «Угадай» — и тебя запрут в Побеге','New: two misses in Guess and you get locked into Escape'],5:['Новое: за некоторыми дверями играет музыка','New: music plays behind some doors']};
+function victory(q,tr,m){stopMusic();S.w++;save();PGM.play(false);PGM.track('progression_completed',{step_id:m,wins:S.w,circle:S.circle,game_version:GAME_VERSION});const unlocked=UNLOCK_MSG[S.w];
+ if(S.w>=modes.length*S.circle&&S.w%modes.length===0){return ending()}
+ theme();show('rscr');const res=$('res');res.replaceChildren();const row=document.createElement('div');row.className='row';const a=document.createElement('i');a.className='art';if(tr){const im=new Image();im.alt='';im.src=tr.art;a.append(im)}const sp=document.createElement('span');sp.textContent=joke(q.length>36?q.slice(0,36)+'…':q);const sm=document.createElement('small');sm.textContent=tr?tr.name+(tr.year?' · '+tr.year:''):'';sp.append(sm);row.append(a,sp);res.append(row);
+ sfx.chord();if(tr)playTrack(tr,10,6);rippleEl(res);
+ let done=false;const fin=()=>{if(done||!$('rscr').classList.contains('on'))return;done=true;res.onclick=null;hub();PGM.ad();if(unlocked){cap(unlocked[S.lang==='ru'?0:1],4200);const o={1:'orbG',2:'orbE'}[S.w];if(o){$(o).classList.add('fresh');later(()=>$(o).classList.remove('fresh'),6000)}}};
+ res.onclick=fin;later(fin,6500)}
+function defeat(){stopMusic();fx.redT=.6;later(()=>fx.redT=0,900);PGM.play(false);PGM.track('progression_failed',{step_id:S.last,wins:S.w,game_version:GAME_VERSION});cap(t('Поиск не удался. Попробуй другой запрос.','Search failed. Try another query.'));hub();PGM.ad()}
+const STORY={ru:'Я — поисковик. Меня написали ради одного запроса, который так и не пришёл.\n\nЯ менял лица: полиция, бывшая, архив, клуб, будущее. Я ловил твои буквы, проверял твой слух, запирал двери. Я думал, ты ищешь музыку.\n\nНо каждый раз, когда ты нажимал «искать», я находил одно и то же: не трек, а того, кто его слушает.\n\nТеперь я знаю, что искал. Я искал тебя.\n\nНачинаю поиск заново. Буквы будут падать быстрее.',en:'I am a search engine. I was written for one query that never came.\n\nI changed faces: police, your ex, an archive, a club, the future. I caught your letters, tested your ears, locked the doors. I thought you were looking for music.\n\nBut every time you pressed search, I found the same thing: not a track, but the one who listens to it.\n\nNow I know what I was looking for. I was looking for you.\n\nStarting the search again. Letters will fall faster.'};
+function ending(){S.circle++;S.told={};save();openMenu('story')}
+
+/* ---------- menu ☰ ---------- */
+function li(on,txt){return'<li'+(on?'':' class="lk"')+'>'+txt+'</li>'}
+function openMenu(view){menuOpen=true;updPause();const b=$('mbody');const ru=S.lang==='ru';
+ if(view==='story'){b.innerHTML='<h2>'+(ru?'ИСТОРИЯ ПОИСКОВИКА':'THE SEARCH ENGINE’S STORY')+'</h2><p id="story"></p><div class="btns"><button id="mOk">'+(ru?'Круг ':'Circle ')+S.circle+' →</button></div>';$('story').textContent=STORY[S.lang];$('menu').classList.add('on');$('mOk').onclick=()=>{closeMenu();hub()};return}
+ b.innerHTML='<h2>KILLKLAN · '+(ru?'СБОЙ ПОИСКОВИКА':'SEARCH GLITCH')+'</h2><p>'+(ru?'Побед: ':'Wins: ')+S.w+' · '+(ru?'Круг ':'Circle ')+S.circle+' · '+modes[pers()][S.lang][0]+'</p>'+
+ '<h2>'+(ru?'ТРИ ИГРЫ':'THREE GAMES')+'</h2><ul>'+li(1,ru?'<b>Поймай запрос</b> — буквы падают в такт треку. Тапай (или печатай) нужную букву, собери слово до конца трека. Неверная буква — минус жизнь.':'<b>Catch the query</b> — letters fall to the beat. Tap (or type) the next letter and spell the word before the track ends. Wrong letter costs a life.')+li(has(U_GUESS),ru?'<b>Угадай трек</b> — поисковик проигрывает несколько обложек. Запомни звучание и выбери, какой трек играет снова. Круглая кнопка внизу — послушать ещё раз.':'<b>Guess the track</b> — the engine plays several covers. Remember the sound, then pick which one plays again. The round button below replays it.')+li(has(U_ESC),ru?'<b>Побег</b> — поисковик говорит подсказку. Выбери дверь-трек, который подходит к словам. Ошибка — стены сжимаются.':'<b>Escape</b> — the engine gives a hint. Pick the door-track that matches the words. A mistake closes the walls in.')+'</ul>'+
+ '<h2>'+(ru?'КАК ИГРЫ ПЕРЕКЛЮЧАЮТСЯ':'HOW GAMES SWITCH')+'</h2><ul>'+li(1,ru?'Что напишешь в поиске — та игра и начнётся: чувство или слово → ритм; вопрос («кто…», «?») → угадай; «выпусти меня», «выход» → побег.':'What you type decides the game: a feeling or word → rhythm; a question (“who…”, “?”) → guess; “let me out”, “exit” → escape.')+li(1,ru?'Три кружка внизу — войти в игру напрямую. Обводка — где ты был в прошлый раз.':'The three circles start a game directly. The ring marks the last one.')+li(has(U_GLITCH),ru?'Красная буква-глюк в ритме → прыжок в угадайку на 1 раунд. Угадал — +1 жизнь, и ритм продолжается.':'A red glitch letter in Rhythm → one Guess round. Right answer = +1 life, then rhythm continues.')+li(has(U_TRAP),ru?'Два промаха подряд в угадайке → поисковик запирает тебя в Побеге.':'Two misses in a row in Guess → the engine locks you into Escape.')+li(has(U_DOOR),ru?'За одной из дверей Побега играет музыка → короткий ритм-раунд, потом снова двери.':'Behind one Escape door music plays → a short rhythm round, then back to the doors.')+'</ul>'+
+ '<p style="opacity:.7">'+(ru?'Каждая победа меняет личность поисковика (их 11) и делает игры сложнее. После всех 11 — история и новый круг.':'Each win changes the engine’s personality (11 of them) and raises difficulty. After all 11: the story and a new circle.')+'</p>'+
+ '<h2>'+(ru?'НАСТРОЙКИ':'SETTINGS')+'</h2><div class="btns"><button id="mRes">'+(ru?'Продолжить':'Continue')+'</button><button id="mSnd">'+(S.mute?(ru?'Звук: выкл':'Sound: off'):(ru?'Звук: вкл':'Sound: on'))+'</button><button id="mLang">'+(ru?'English':'Русский')+'</button>'+(game?'<button id="mHub">'+(ru?'В поиск':'To search')+'</button>':'')+(S.circle>1?'<button id="mStory">'+(ru?'История':'Story')+'</button>':'')+'</div>';
+ $('menu').classList.add('on');$('mRes').onclick=closeMenu;$('mSnd').onclick=()=>{S.mute=S.mute?0:1;save();setMute();unlockAudio();if(!S.mute)musResume=true;openMenu()};$('mLang').onclick=()=>{S.lang=ru?'en':'ru';save();root.lang=S.lang;openMenu();if(!game)hub()};
+ if($('mHub'))$('mHub').onclick=()=>{cancel(Guess.tm);game=null;closeMenu();hub()};if($('mStory'))$('mStory').onclick=()=>openMenu('story')}
+function closeMenu(){$('menu').classList.remove('on');menuOpen=false;updPause()}
+$('menuBtn').onclick=()=>{$('menu').classList.contains('on')?closeMenu():openMenu()};$('mclose').onclick=closeMenu;
+let menuOpen=false,musResume=false;
+// one place decides "paused": menu open, platform pause, ad on screen, tab hidden (rules 3.3.4, 3.3.5, 2.1.6)
+function updPause(){const p=menuOpen||PGM.paused||document.hidden;setMute();if(p===paused)return;paused=p;
+ if(p){if(!music.paused){music.pause();musResume=true}if(silentEl)silentEl.pause();if(actx)actx.suspend().catch(()=>{})}
+ else{if(actx&&!quiet())actx.resume().catch(()=>{});if(musResume&&!quiet())music.play().catch(()=>{});else if(!game&&$('hub').classList.contains('on')&&musicUnlocked)hubMusic();musResume=false}}
+PGM.onChange=updPause;document.addEventListener('visibilitychange',updPause);
+addEventListener('keydown',e=>{if((e.key==='p'||e.key==='P'||e.key==='з'||e.key==='З')&&document.activeElement!==$('q')){e.preventDefault();$('menu').classList.contains('on')?closeMenu():openMenu()}});
+addEventListener('contextmenu',e=>e.preventDefault());
+
+window.__INV=()=>({games:3,switches:5,personalities:modes.length,tracks:CAT.length,sfx:SFX_FILES.length,unlocks:Object.keys(UNLOCK_MSG).length,version:GAME_VERSION,build:BUILD});
+if(!initGL())glc.style.display='none';requestAnimationFrame(frame);
+PGM.boot.then(()=>{const saved=PGM.load();Object.assign(S,saved);seenSet=new Set(S.seen||[]);
+ if(BUILD==='pg')S.lang=/^ru/i.test(PGM.lang||'')?'ru':'en';else if(!saved.lang)S.lang='en';
+ root.lang=S.lang;if(S.lang==='ru')document.title='KILLKLAN: Сбой поисковика';theme();hub();updPause();setMute();
+ let perfT=0;setInterval(()=>{if(game&&!paused){perfT++;PGM.track('performance_sample',{fps:Math.round(1000/Math.max(1,fAvg)),gl_quality:+glQ.toFixed(2),game_version:GAME_VERSION})}},30000);
+ requestAnimationFrame(()=>requestAnimationFrame(()=>PGM.ready()))});
+window.__kkAudio=()=>({ctx:actx&&actx.state,bufs:Object.keys(BUF).length,musicSrc:(music.src||'').split('/').pop(),musicTime:music.currentTime.toFixed(1)});window.__kk={S,get game(){return game},Rhythm,Guess,Escape,hub,launch,victory};
+})();
+</script></body></html>

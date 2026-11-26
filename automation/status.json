@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-26T11:43:24.304Z",
+  "generated_at": "2026-11-26T12:01:07.856Z",
   "sha": {
-    "lab": "c2170c2834f8730fbbec1a63f3ac7d95fe6476d1",
+    "lab": "6db5b3070a92e2b326cd3d823027a363deb4232a",
     "mg": "ca77c011d31cb4814b418007d77f34b6ebbf6a22"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45812911710",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45815525707",
   "review": {
     "protected": [
       {
@@ -591,11 +591,16 @@
     }
   },
   "pr": {
-    "open": 10,
-    "conflicts": 7,
-    "merged": 100,
+    "open": 9,
+    "conflicts": 6,
+    "merged": 101,
     "closed": 194,
     "mergedItems": [
+      {
+        "number": 452,
+        "title": "SEO: sync eight KILLKLAN music links in lab catalog",
+        "sha": "6db5b3070a92e2b326cd3d823027a363deb4232a"
+      },
       {
         "number": 451,
         "title": "SEO: KILLKLAN artist metadata and crawlable discography",
@@ -1522,7 +1527,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3561,
+      "count": 3565,
       "folders": "нет данных"
     },
     "mg": {

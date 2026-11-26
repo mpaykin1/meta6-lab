@@ -1,11 +1,10 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-26T04:26:52.162Z | МГЛ: 5d9e852e1447c69c432a87695b9c0262565c9c26 | МГ: 696100335d24e1269be3df3793aea6bbca1c6fba | https://github.com/mpaykin1/meta6-lab/actions/runs/45755120277
+UTC: 2026-11-26T07:50:32.575Z | МГЛ: 615ea4e88f4c9e7c043c8f6e0e9794023418e4aa | МГ: 696100335d24e1269be3df3793aea6bbca1c6fba | https://github.com/mpaykin1/meta6-lab/actions/runs/45778148687
 ## ПРОВЕРИТЬ CLAUDE
 - PR #439 96fe57465a770913991d99705e7a4d453259965d: .github/workflows/vetki-uborka.yml, scripts/lab/mutate-vetki-uborka.mjs
 - PR #436 c2d4d176479c02f89b99c2e43ad58a216312eb42: .github/workflows/b64-decode.yml, .github/workflows/grange-p22-audit.yml, .github/workflows/grange-publication-gate.yml, .github/workflows/stackgen.yml
 - ещё 48: https://github.com/mpaykin1/meta6-lab/pulls
 - МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/45753726152 | Run node scripts/dispetcher/run.mjs
-- МГЛ: LAB Pages | https://github.com/mpaykin1/meta6-lab/actions/runs/45752000105 | Check published public URLs
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | closed | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/librar… (сокращено)
 - ещё 7: https://github.com/mpaykin1/meta6-lab/blob/main/automation/SLIYANIE.md
@@ -33,12 +32,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 10 | конфликт: 5 | слито: 99 | закрыто: 194
+открыто: 9 | конфликт: нет данных | слито: 100 | закрыто: 194
+#451 SEO: KILLKLAN artist metadata and crawlable discography | 615ea4e88f4c9e7c043c8f6e0e9794023418e4aa
 #439 Ежедневная уборка веток МГЛ (архив + удаление лишних lab/*) | 96fe57465a770913991d99705e7a4d453259965d
-#436 Sprite Stacking World: единая игровая песочница пяти автозад | c2d4d176479c02f89b99c2e43ad58a216312eb42
-ещё 97: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
+ещё 98: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3521 коммитов | нет данных
+МГЛ: 3555 коммитов | нет данных
 МГ: 69 коммитов | .github:6, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, killklan:6, killklan-game:132, meta-games:1, OSHIBKI.md:1, playgama-catalog:36, playgama-games:3, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-26T04:26:52.162Z",
+  "generated_at": "2026-11-26T07:50:32.575Z",
   "sha": {
-    "lab": "5d9e852e1447c69c432a87695b9c0262565c9c26",
+    "lab": "615ea4e88f4c9e7c043c8f6e0e9794023418e4aa",
     "mg": "696100335d24e1269be3df3793aea6bbca1c6fba"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45755120277",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45778148687",
   "review": {
     "protected": [
       {
@@ -437,11 +437,6 @@
         "workflow": "MG Dispatcher",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45753726152",
         "step": "Run node scripts/dispetcher/run.mjs"
-      },
-      {
-        "workflow": "LAB Pages",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45752000105",
-        "step": "Check published public URLs"
       }
     ],
     "redMg": [],
@@ -591,11 +586,16 @@
     }
   },
   "pr": {
-    "open": 10,
-    "conflicts": 5,
-    "merged": 99,
+    "open": 9,
+    "conflicts": "нет данных",
+    "merged": 100,
     "closed": 194,
     "mergedItems": [
+      {
+        "number": 451,
+        "title": "SEO: KILLKLAN artist metadata and crawlable discography",
+        "sha": "615ea4e88f4c9e7c043c8f6e0e9794023418e4aa"
+      },
       {
         "number": 439,
         "title": "Ежедневная уборка веток МГЛ (архив + удаление лишних lab/*)",
@@ -1517,7 +1517,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3521,
+      "count": 3555,
       "folders": "нет данных"
     },
     "mg": {

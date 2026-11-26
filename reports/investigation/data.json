@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-25T19:15:31.726Z",
+  "generated_at": "2026-11-26T03:34:36.293Z",
   "sources": [
     {
       "path": "ZADACHI.md",
@@ -846,7 +846,7 @@
       "project": "МГ",
       "owner": "чат ChatGPT",
       "branch": "lab/bez-patternov-ink-20261115",
-      "status": "зависла",
+      "status": "конфликт",
       "original_status": "🛑 ЗАВИС 24+ ч — ТОЛКНУТЬ",
       "pr": 324,
       "pr_state": "open",
@@ -855,7 +855,7 @@
       "url": "https://github.com/mpaykin1/meta6/pull/324",
       "taken_at": "2026-11-15 18:43",
       "last_commit_at": "2026-11-15 18:43",
-      "remaining": "Возобновить работу с последнего коммита и проверить PR"
+      "remaining": "Разрешить конфликты с main и повторить проверки"
     },
     {
       "id": 50,
@@ -2392,7 +2392,7 @@
       "title": "Готовность META GAMES — отчёт",
       "state": "open",
       "sha": null,
-      "updated_at": "2026-11-25T08:41:34Z"
+      "updated_at": "2026-11-25T19:20:20Z"
     },
     {
       "label": "automation-watchdog",

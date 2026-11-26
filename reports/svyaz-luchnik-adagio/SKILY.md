@@ -15,3 +15,5 @@
 25.11.2026 | Voxel Atmosphere Engine + FastNoiseLite 1.1.1: реальная локальная библиотека, связка Nit/WFC/GLSL; оригинальные слои и модели сохранены. Адаптер createMazeMist подготовлен для ROT.js; браузерный визуальный PASS нового HEAD не подтверждён.
 
 26.11.2026 | Hero Animator / Anti-Jerk: реальный Tween.js 25.0.0, только камера и экранный туман, исходные спрайты/физика героя не меняются. Meta Game Fusion получает переход и Nit/Ink; FastNoiseLite живой туман сохраняется. Изолированный JS не заменяет визуальный PASS.
+
+26.11.2026 | GIF Outside / Meta Game Fusion REUSE: оригинальный Sprite Stacking manor, двор с оригинальным stone.jpg, окно сохраняет 9 кадров; Tween и FastNoiseLite синхронны с одним RAF. Новые ассеты не генерировались. Браузерный PASS не заявлен.

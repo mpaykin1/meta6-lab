@@ -29,13 +29,21 @@ def wait(pg,condition,timeout=90000):
     pg.wait_for_function(condition,timeout=timeout)
 def nit(pg):
     return pg.evaluate("JSON.parse(localStorage.getItem('mg_nit_v1')||'null')")
+def start_overture(pg):
+    wait(pg,'window.__A && window.__A.z23')
+    if not pg.evaluate('window.__A.SAVE.played'):
+        wait(pg,"window.__A.G.mode==='play'",30000)
+    else:
+        pg.locator('#bPlay').click(timeout=30000)
+        wait(pg,"window.__A.G.mode==='play'",30000)
+    # Actual user gesture also unlocks WebAudio for a new session.
+    pg.locator('#c').tap(position={'x':12,'y':180})
 def smoke(browser,name):
     with context(browser) as c:
         pg,err,_=page(c)
         pg.goto(OVER+'#bot',timeout=90000)
         wait(pg,'window.__A && window.__A.z23')
-        pg.locator('#bPlay').click()
-        wait(pg,"window.__A.G.mode==='play'")
+        start_overture(pg)
         check(pg.evaluate('window.__A.z23().circle')==1,name+' clean overture')
         check(not err,name+' overture JS '+str(err))
         pg.goto(BASE+'#bot',timeout=90000)
@@ -50,7 +58,7 @@ def linked(browser):
         pg.goto(OVER+'?nit='+token+'#bot',timeout=90000)
         wait(pg,'window.__A && window.__A.z23')
         check('nit=' not in pg.url and nit(pg)['luchnik']['perya']==12,'import and remove URL token')
-        pg.locator('#bPlay').click()
+        start_overture(pg)
         wait(pg,"window.__A.G.mode==='play' && window.__A.z23().ready")
         pg.evaluate('window.__A.gameOver()')
         pg.locator('#z23Enter').click(timeout=30000)
@@ -93,7 +101,7 @@ def linked(browser):
         check(any(urlsplit(u).path==urlsplit(OVER).path and 'nit' in parse_qs(urlsplit(u).query) for u in nav[1:]),'actual reverse link carries token')
         pg.goto(OVER+'#bot');pg.reload(timeout=90000)
         wait(pg,'window.__A && window.__A.z23')
-        pg.locator('#bPlay').click()
+        start_overture(pg)
         wait(pg,'window.__A.z23().circle===2 && window.__A.z23().notes>0',60000)
         pg.screenshot(path='shots/z23_circle2.png')
         check(not err,'linked JS '+str(err))

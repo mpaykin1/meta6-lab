@@ -10,8 +10,8 @@
 :root[data-theme="dark"]{--bg:#5f7fb8}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 body{position:fixed;inset:0;font-family:'Russo One',system-ui,sans-serif;color:var(--ink)}
-canvas#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
-.hud{position:fixed;inset:0;pointer-events:none}
+canvas#c{position:fixed;z-index:0;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.hud{position:fixed;z-index:2;inset:0;pointer-events:none}
 #top{position:absolute;top:calc(env(safe-area-inset-top) + 14px);left:16px;right:16px;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;transition:opacity .6s}
 #top .lbl{font-size:12px;letter-spacing:.25em;color:var(--ink-dim);text-shadow:0 1px 3px #0008}
 #hp{display:flex;gap:4px}
@@ -26,7 +26,7 @@ canvas#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-actio
  -webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:3px 4px 0 #000a;transform:scale(.6);opacity:0;transition:transform .18s cubic-bezier(.2,1.6,.4,1),opacity .15s}
 #cap.show{transform:scale(1);opacity:1}
 #hint{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 112px);text-align:center;font-size:14px;color:var(--ink-dim);text-shadow:0 1px 4px #000a;opacity:0;transition:opacity .8s}
-.ov{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;box-sizing:border-box;transition:opacity .8s}
+.ov{position:fixed;z-index:10;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;box-sizing:border-box;transition:opacity .8s}
 .ov.hide,.ov.hide *{opacity:0;pointer-events:none!important}
 #menu h1,#over h1{margin:0;font-weight:400;font-size:clamp(34px,10vw,64px);text-align:center;line-height:1;-webkit-text-stroke:2px #000;paint-order:stroke fill;text-shadow:4px 5px 0 #0009}
 #menu p,#over p{margin:0 0 10px;color:var(--ink-dim);text-align:center;font-size:14px;max-width:340px;font-family:system-ui,sans-serif;text-shadow:0 1px 4px #000a}

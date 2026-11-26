@@ -552,7 +552,7 @@ function renderMenu(){
   const it=unlocked.items.filter(k=>ITEMS[k]);if(it.length){h+='<h3>Предметы</h3>';it.forEach(k=>{h+=`<p><b>${ITEMS[k].t}</b> — ${ITEMS[k].d}</p>`;});}
   if(z23Link.available)h+='<h3>Синие перья</h3><p>'+ (z23Link.owned?'Первый выстрел из арбалета в каждой волне получает одну дополнительную стрелу.':'Найди синие перья в зале и приблизься, глядя на них.')+'</p>';
   if(z23Losses)h+='<h3>Память тумана</h3><p>Поражения в башнях меняют сад и сгущают туман.</p>';
-  if(deaths>0||z23Losses)h+=`<h3>Лабиринт</h3><p>Колец: ${Math.min(9,1+deaths)}. Каждая гибель от Вендиго — ещё кольцо, победа над ним — кольцо назад. Иди на её музыку: ближе к дому она громче и чище, в тупике обрывается. Фонари вспыхивают в сторону дома, ворона садится на верную развилку, ангел показывает путь. В окне ложного дома мелькает страшное лицо. Медвежонок — светит путь, кукла — уводит монстров, лошадка — бег, солдатик — стреляет, фонарик — меньше тумана, ящик — оружие или свеча, фонтан — свеча, зеркало — путь, качели и беседка — укрытие, часы — монстры рядом медленнее.${mzFound.length?' Найдено: '+mzFound.length+'.':''}</p>`;
+  if(deaths>0||z23Losses)h+=`<h3>Лабиринт</h3><p>У двери уже осмотренного ложного дома можно укрыться от чудовищ. Колец: ${Math.min(9,1+deaths)}. Каждая гибель от Вендиго — ещё кольцо, победа над ним — кольцо назад. Иди на её музыку: ближе к дому она громче и чище, в тупике обрывается. Фонари вспыхивают в сторону дома, ворона садится на верную развилку, ангел показывает путь. В окне ложного дома мелькает страшное лицо. Медвежонок — светит путь, кукла — уводит монстров, лошадка — бег, солдатик — стреляет, фонарик — меньше тумана, ящик — оружие или свеча, фонтан — свеча, зеркало — путь, качели и беседка — укрытие, часы — монстры рядом медленнее.${mzFound.length?' Найдено: '+mzFound.length+'.':''}</p>`;
   h+=`<h3>Музыка</h3><p>Сейчас звучит: <b>${GN[MUS.g]}${MUS.g==='syuita'?' — '+DANCES[MUS.dance%4].n:''}</b>. Её диктует то, что происходит: враги, твои попадания и промахи, раны рояля, его шаги.</p>`;
   h+=`<h3>Круг ${circle}</h3><p>${isTouch?'Левая половина экрана — джойстик, идти. Правая — джойстик прицела; короткий тап справа — выстрел, у пулемёта держи палец. Прицел у края экрана поворачивает взгляд. Оружие меняется, только если подобрать его в зале.':'WASD — идти, мышь — прицел в любую точку, у края экрана — поворот, правая кнопка — осмотреться, клик — выстрел, держи клик — очередь. Оружие меняется, только если подобрать его в зале.'}</p><div class="row"><button id="mSnd">${AC&&master&&master.gain.value<.1?'Звук: выкл':'Звук: вкл'}</button><button id="mBack">Продолжить</button></div>`;
   $('menu').innerHTML=h;
@@ -1134,7 +1134,7 @@ function giantSpawn(){if(!VNS.ready||!MZ)return;const P=MZ.P;let best=null,bd=-1
 function giantDrop(){if(MZ&&MZ.giant){killVen(MZ.giant);MZ.giant=null;}}
 const giantPos=()=>MZ.giant.mesh.position.clone().add(new THREE.Vector3(0,7,0));
 function giantTick(dt,gdt){const g=MZ.giant;if(!g)return;g.t+=gdt;const p=g.mesh.position,pp=player.p;const tx=pp.x-p.x,tz=pp.z-p.z,d=Math.hypot(tx,tz)||1;
-  if(MZ.safe&&!g.lg){g.wf+=gdt*2;venFrame(g,Math.floor(g.wf)%VNS.m.walk);return;}
+  if(MZ.safe){g.lg=0;g.cd=Math.max(g.cd,1.1);g.wf+=gdt*2;venFrame(g,Math.floor(g.wf)%VNS.m.walk);return;}
   if(g.push>0){p.x-=tx/d*g.push*dt*4;p.z-=tz/d*g.push*dt*4;g.push=Math.max(0,g.push-dt*2.5);g.lg=0;}
   else{if(!g.lg&&d<10&&g.cd<=0)g.lg=.001;const zig=g.lg?0:Math.sin(g.t*.35+g.ph)*.6;const hd=Math.atan2(tx,tz)+zig;g.head=damp(g.head,hd,g.lg?6:1.5,dt);
     const v=g.sp*(g.lg?2.4:1)*1;p.x+=Math.sin(g.head)*v*gdt;p.z+=Math.cos(g.head)*v*gdt;
@@ -1163,8 +1163,8 @@ function falseHouse(h){h.visited=true;window.__darkSeen=(window.__darkSeen||0)+1
     G.uFogC.value.set(0x0b0b10);G.uFogD.value=.03;if(AC)musicBus.gain.setTargetAtTime(.02,AC.currentTime,.3);MUS.force={g:'*',tr:'obryv',now:true};setFade(0,900);
     setTimeout(()=>cap('Её здесь нет, я ошибся. Нужно искать дальше…',4200),900);},750);}
 function darkTick(dt){darkT+=dt;cam.position.z=2.5-Math.min(1.5,darkT*.4);cam.updateMatrixWorld();
-  if(darkT>5&&state==='dark'){state='trans';setFade(1,700);setTimeout(()=>{scene=scMaze;state='maze';const b=MZ.back;player.p.x=b.x;player.p.z=b.z;yaw=yawT=b.yaw+Math.PI;
-    G.uFogC.value.set(0x34383a);G.uFogD.value=z23MazeFog(.034+.004*Math.min(8,deaths))*(MZ.flash?.6:1);for(const h of MZ.houses)if(h.visited)h.win.m.uniforms.uOp.value=0;setFade(0,900);},750);}}
+  if(darkT>5&&state==='dark'){state='trans';setFade(1,700);setTimeout(()=>{scene=scMaze;state='maze';const b=MZ.back;player.p.x=b.x;player.p.z=b.z;player.v.set(0,0,0);yaw=yawT=b.yaw+Math.PI;MZ.safe=true;if(MZ.giant){MZ.giant.lg=0;MZ.giant.cd=Math.max(MZ.giant.cd,1.1);}
+    G.uFogC.value.set(0x34383a);G.uFogD.value=z23MazeFog(.034+.004*Math.min(8,deaths))*(MZ.flash?.6:1);for(const h of MZ.houses)if(h.visited)h.win.m.uniforms.uOp.value=0;setFade(0,900);cap('У двери я могу перевести дыхание.',2800);},750);}}
 const TOYS={toy_bear:'Странно… это мой медвежонок из детства. Я так плакал, когда родители заставили его выкинуть.',
   toy_doll:'Кукла. Мама шила её из своего платья. Я сжёг её — она смотрела на меня ночью.',
   toy_horse:'Лошадка… Отец вырезал её, пока ещё был отцом.',
@@ -1205,7 +1205,7 @@ function mzTick(dt,gdt){const P=MZ.P;extSkyMat.uniforms.uYaw.value=yaw;extSkyMat
   MZ.clockT+=dt;if(MZ.clockT>90){MZ.clockT=0;MUS.force={g:'*',tr:'udar'};post.uniforms.uGlitch.value=.4;MZ.lightAll=1.5;}
   const clockP=MZ.clock.mesh.position;
   // предметы
-  let safe=false;for(const it of MZ.items){const d2=Math.hypot(it.x-player.p.x,it.z-player.p.z);if(it.safe&&d2<it.safe)safe=true;
+  let safe=MZ.houses.some(h=>h.visited&&Math.hypot(h.fx-player.p.x,h.fz-player.p.z)<2.4);for(const it of MZ.items){const d2=Math.hypot(it.x-player.p.x,it.z-player.p.z);if(it.safe&&d2<it.safe)safe=true;
     if(!it.taken&&(it.st||it.n==='loot_crate')&&d2<1.4)mzPickup(it);
     if(it.n==='fontan'&&!it.used&&d2<1.8){it.used=true;lives=Math.min(4,lives+1);drawLives();cap('Вода ледяная. Как в ту зиму.',3200);MUS.force={g:'*',tr:'vospom'};}
     if(it.n==='zerkalo'&&!it.used&&d2<2.4){it.used=true;MZ.lightAll=5;if(rnd()<.4){it.o.m.uniforms.uMap.value=tex.zerkalo_v;S.scream();post.uniforms.uGlitch.value=.7;setTimeout(()=>{if(it.o)it.o.m.uniforms.uMap.value=tex.zerkalo;},1600);}else cap('В зеркале — дорожка. Она ведёт к дому.',3000);}

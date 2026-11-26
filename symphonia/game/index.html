@@ -6,6 +6,7 @@
 <title>Адажио</title>
 <link rel="modulepreload" href="./shared/nit.js">
 <link rel="modulepreload" href="./shared/adagio-link.js">
+<link rel="modulepreload" href="./shared/dragon-horns.js">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
 /* VOICE: тихий, траурный, призрачный
@@ -71,6 +72,7 @@ html,body{margin:0;height:100%;background:#07080a;overflow:hidden;touch-action:n
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js';
 import {createAdagioLink} from './shared/adagio-link.js';
 import {Nit} from './shared/nit.js';
+import {HORN_COLOR,headSocket,attachDragonHorns} from './shared/dragon-horns.js';
 {
 const z23Link=createAdagioLink(THREE);
 const z23Losses=Math.min(5,Nit.read().luchnik.porazheniya);let z23MazeWorld=null;
@@ -952,9 +954,9 @@ function enterHall(){state='trans';MUS.force=hallVisited?{g:'*',tr:'rastvor'}:{g
 
 /* ---------- финал ---------- */
 const STORY=['Мне было семь, когда мама впервые заиграла адажио ночью.','Отец вернулся с охоты другим: с ветками в волосах и красными глазами. Он стоял под окном до рассвета и слушал.','Утром он снова был отцом. Мама больше никогда не давала мне спичек.','Я вырос. Я женился на пианистке. В первую же зиму я ушёл в лес — и вернулся с ветками в волосах.','Теперь она играет для меня. Каждую ночь.','А я каждую ночь думаю, что охраняю её музыку от чудовища.','Но её музыка охраняет мир от меня.','В ту ночь я вырос выше потолка, и стены не выдержали.','Она поднялась над обломками, легко, как в детстве на качелях, и сказала: «Спасибо. Ты меня отпустил».'];
-function showEnd(){state='end';setFade(1,1500);setTimeout(()=>{const e=$('end');e.style.display='grid';const st=$('story');
-  st.innerHTML=STORY.map(s=>`<p>${s}</p>`).join('')+`<button id="again" class="btn" style="position:static;margin:20px auto 0" aria-label="Следующий круг"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></button>`;
-  [...st.querySelectorAll('p')].forEach((p,i)=>setTimeout(()=>p.style.opacity=1,600+i*1900));setTimeout(()=>$('again').style.opacity=1,600+STORY.length*1900);
+function showEnd(){const history=Nit.read().luchnik;const story=history.pobedy?[...STORY,'Я вспомнил башни, с которых падал в синий туман. Рога в зеркале — те самые, что я видел в падении.','Я думал, дракон не пускал меня к ней. Теперь я понял: это она звала его своей музыкой.']:STORY;state='end';setFade(1,1500);setTimeout(()=>{const e=$('end');e.style.display='grid';const st=$('story');
+  st.innerHTML=story.map(s=>`<p>${s}</p>`).join('')+`<button id="again" class="btn" style="position:static;margin:20px auto 0" aria-label="Следующий круг"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></button>`;
+  [...st.querySelectorAll('p')].forEach((p,i)=>setTimeout(()=>p.style.opacity=1,600+i*1900));setTimeout(()=>$('again').style.opacity=1,600+story.length*1900);
   $('again').onclick=()=>{e.style.display='none';nextCircle();};},1600);}
 function finClear(){if(hallObj.giant){killVen(hallObj.giant);hallObj.giant=null;}FIN.on=false;FIN.lift=0;FIN.fade=1;shakeT=0;}
 function nextCircle(){finClear();angelB=0;hallVisited=false;hallStash=[];circle++;z23Link.circle(circle);musEvent('circle');wave=0;lives=3;drawLives();H_=1;silence=false;if(ven&&ven.o)killVen(ven.o);ven=null;finale=0;talked={};blobs.length=0;
@@ -971,18 +973,21 @@ const mzVar=()=>deaths<=2?'re':deaths<=4?'gc':'bw';
 const MZH={toy_bear:.55,toy_doll:.5,toy_horse:.55,toy_soldier:.55,swings:2.4,loot_crate:.75,abandoned_car:1.55,dead_tree:4.6,fir:4.2,bush:1.5,ruin_house1:3.4,ruin_house2:5.0,ruin_house3:5.6,rock1:.9,stump:.7,broken_fence:1.2,gate:3.4,dry_grass:.6,reeds:1.2,log:.45,hands_flashlight:.45};
 const MAZE_SPR=['gazon','dorozhka','kust_roz','les','fonar','vorona','statuya_sad','chasy','fasad_svet','pianistka','pianistka_strah','kupol','bashnya','besedka','zerkalo','zerkalo_v','fontan','tuman','v_prizrak','blob','blob_vzryv','pol_d','potolok_d','stena_d','kolonna_d','lyustra','shtora','dver_d','arka_d'];
 /* объёмный Вендиго: 10 кадров шага + 6 кадров броска, слоёная модель из архива владельца */
-const VNS={ready:false,geo:[],geoL:[],img:[],tex:null,n:0};
+const VNS={ready:false,geo:[],geoL:[],img:[],tex:null,n:0,sockets:[],hornTex:null};
+const z23Victory=Nit.read().luchnik.pobedy>0;
+function z23HornMat(br,o){if(!VNS.hornTex){const c=new THREE.Color(HORN_COLOR),t=new THREE.DataTexture(new Uint8Array([Math.round(c.r*255),Math.round(c.g*255),Math.round(c.b*255),255]),1,1);t.needsUpdate=true;VNS.hornTex=t;}return stackMat(VNS.hornTex,{nolamp:true,bright:br,fogk:o.fogk,fogc:o.fogc});}
 async function venStackLoad(){try{const m=await (await fetch('a/vs/vs_meta.json')).json();VNS.m=m;const g={nx:m.nx,nz:m.nz,ny:m.ny,cols:m.cols,s:3.3/m.ny};
-  for(const f of m.frames){const im=await loadImg('a/vs/'+f+'.webp');VNS.img.push(im);VNS.geo.push(stackGeo(g,im));VNS.geoL.push(stackGeo(g,im,2));await new Promise(r=>setTimeout(r,0));}
+  for(const f of m.frames){const im=await loadImg('a/vs/'+f+'.webp');VNS.img.push(im);if(z23Victory)VNS.sockets.push(headSocket(THREE,im,m));VNS.geo.push(stackGeo(g,im));VNS.geoL.push(stackGeo(g,im,2));await new Promise(r=>setTimeout(r,0));}
   VNS.ready=true;}catch(e){console.warn('vs',e);}}
 function venTexGet(){if(!VNS.tex){VNS.tex=VNS.img.map(im=>nearestTex(im));VNS.tex.forEach(x=>{try{renderer.initTexture(x);}catch(e){}});}VNS.n=(VNS.n||0)+1;return VNS.tex;}
 function venTexDrop(){VNS.n--;if(VNS.n<=0&&VNS.tex){VNS.tex.forEach(t=>t.dispose());VNS.tex=null;VNS.n=0;}}
 function venStackMake(p,o={}){const sc=o.scene||scHall,t=venTexGet(),br={value:1};const mat=stackMat(t[0],{nolamp:true,bright:br,fogk:o.fogk,fogc:o.fogc});
   const lod=new THREE.LOD();const a=new THREE.Mesh(VNS.geo[0],mat),b=new THREE.Mesh(VNS.geoL[0],mat);lod.addLevel(a,0);lod.addLevel(b,o.far||11);lod.position.set(p.x,0,p.z);const k=o.scale||1;lod.scale.setScalar(k);sc.add(lod);
   let ref=null;if(o.ref!==false){ref=spr(sc,'vw0',{h:3.2,x:p.x,z:p.z,lit:.2,mirror:true});ref.mesh.visible=false;}
-  return {st:true,mesh:lod,a,b,mat,br,ref,mm:ref&&ref.mm,scene:sc,f:0,wf:0,push:0,lg:0,head:0};}
-function venFrame(o,i){if(o.f===i)return;o.f=i;o.a.geometry=VNS.geo[i];o.b.geometry=VNS.geoL[i];o.mat.uniforms.uTex.value=VNS.tex[i];}
-function killVen(o){if(!o)return;if(!o.st){kill(o);return;}if(o.dead)return;o.dead=true;o.scene.remove(o.mesh);if(o.ref)kill(o.ref);o.mat.dispose();venTexDrop();}
+  const horns=z23Victory?attachDragonHorns(THREE,lod,z23HornMat(br,o),VNS.sockets):null;
+  return {st:true,mesh:lod,a,b,mat,br,ref,mm:ref&&ref.mm,scene:sc,f:0,wf:0,push:0,lg:0,head:0,horns};}
+function venFrame(o,i){if(o.f===i)return;o.f=i;o.a.geometry=VNS.geo[i];o.b.geometry=VNS.geoL[i];o.mat.uniforms.uTex.value=VNS.tex[i];o.horns?.frame(i);}
+function killVen(o){if(!o)return;if(!o.st){kill(o);return;}if(o.dead)return;o.dead=true;o.scene.remove(o.mesh);if(o.ref)kill(o.ref);o.horns?.dispose();o.mat.dispose();venTexDrop();}
 function mzLoad(){if(mzReady)return mzReady;mzReady=(async()=>{
   await Promise.all(MAZE_SPR.filter(n=>!tex[n]).map(texLoad));
   mzStackMeta=await (await fetch('a/mz/mz_meta.json')).json();
@@ -1344,7 +1349,7 @@ if(shakeT>0){shakeT=Math.max(0,shakeT-dt*.9);const k=shakeT*shakeT;cam.position.
       else if(ven.mode==='leave'){o.m.uniforms.uOnce.value=Math.min(11,ven.t/1.4*11);o.m.uniforms.uOp.value=clamp(1-(ven.t-1)/0.6,0,1);if(ven.t>1.6){kill(o);endSilence();}}}
     // финал: взгляд в зеркало
     if(finale===1&&hallObj.zerk.m.uniforms.uOp.value>.95){cam.getWorldDirection(fwd);const zp=hallObj.zerk.mesh.position.clone().add(new THREE.Vector3(0,2.3,0));const to=zp.sub(cam.position);const d=to.length();
-      if(d<30&&fwd.dot(to.normalize())>.93){finale=2;z23Link.mirror();finT=0;musEvent('mirror');hallObj.zerkV.m.uniforms.uOp.value=1;hallObj.zerk.m.uniforms.uOp.value=0;hallObj.zerk.fadeIn=0;post.uniforms.uGlitch.value=1;S.scream();cap('Это не отражение. Это я.',4200);
+      if(d<30&&fwd.dot(to.normalize())>.93){finale=2;z23Link.mirror();finT=0;musEvent('mirror');hallObj.zerkV.m.uniforms.uOp.value=1;hallObj.zerk.m.uniforms.uOp.value=0;hallObj.zerk.fadeIn=0;post.uniforms.uGlitch.value=1;S.scream();cap(z23Victory?'Это не отражение. Это я. Рога из синего тумана…':'Это не отражение. Это я.',4200);
         const fi=WPN.findIndex(w=>w.n==='fantom');unlocked.w[fi]=true;unlocked.items.push('fantom');}}
     if(finale===2){finT+=dt;if(finT>4){finale=3;memT=0;}}
     if(finale===3){finT+=dt;finTick(dt);if(finT>16)showEnd(),finale=4;}

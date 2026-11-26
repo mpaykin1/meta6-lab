@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Адажио</title>
+<link rel="modulepreload" href="./shared/nit.js">
+<link rel="modulepreload" href="./shared/adagio-link.js">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
 /* VOICE: тихий, траурный, призрачный
@@ -67,7 +69,9 @@ html,body{margin:0;height:100%;background:#07080a;overflow:hidden;touch-action:n
 
 <script type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js';
+import {createAdagioLink} from './shared/adagio-link.js';
 {
+const z23Link=createAdagioLink(THREE);
 const $=id=>document.getElementById(id);
 const isTouch=matchMedia('(pointer:coarse)').matches||'ontouchstart' in window;
 if(isTouch)document.body.classList.add('touch');
@@ -539,6 +543,7 @@ function renderMenu(){
   if(window.__seenV)h+='<p><b>Он</b> — приходит в тишине. Боится музыки.</p>';
   if(lastScare>0)h+='<p><b>Она</b> — иногда оборачивается. Не всегда. Догадайся, почему.</p>';
   const it=unlocked.items.filter(k=>ITEMS[k]);if(it.length){h+='<h3>Предметы</h3>';it.forEach(k=>{h+=`<p><b>${ITEMS[k].t}</b> — ${ITEMS[k].d}</p>`;});}
+  if(z23Link.available)h+='<h3>Синие перья</h3><p>'+ (z23Link.owned?'Первый выстрел из арбалета в каждой волне получает одну дополнительную стрелу.':'Найди синие перья в зале и приблизься, глядя на них.')+'</p>';
   if(deaths>0)h+=`<h3>Лабиринт</h3><p>Колец: ${Math.min(9,1+deaths)}. Каждая гибель от Вендиго — ещё кольцо, победа над ним — кольцо назад. Иди на её музыку: ближе к дому она громче и чище, в тупике обрывается. Фонари вспыхивают в сторону дома, ворона садится на верную развилку, ангел показывает путь. В окне ложного дома мелькает страшное лицо. Медвежонок — светит путь, кукла — уводит монстров, лошадка — бег, солдатик — стреляет, фонарик — меньше тумана, ящик — оружие или свеча, фонтан — свеча, зеркало — путь, качели и беседка — укрытие, часы — монстры рядом медленнее.${mzFound.length?' Найдено: '+mzFound.length+'.':''}</p>`;
   h+=`<h3>Музыка</h3><p>Сейчас звучит: <b>${GN[MUS.g]}${MUS.g==='syuita'?' — '+DANCES[MUS.dance%4].n:''}</b>. Её диктует то, что происходит: враги, твои попадания и промахи, раны рояля, его шаги.</p>`;
   h+=`<h3>Круг ${circle}</h3><p>${isTouch?'Левая половина экрана — джойстик, идти. Правая — джойстик прицела; короткий тап справа — выстрел, у пулемёта держи палец. Прицел у края экрана поворачивает взгляд. Оружие меняется, только если подобрать его в зале.':'WASD — идти, мышь — прицел в любую точку, у края экрана — поворот, правая кнопка — осмотреться, клик — выстрел, держи клик — очередь. Оружие меняется, только если подобрать его в зале.'}</p><div class="row"><button id="mSnd">${AC&&master&&master.gain.value<.1?'Звук: выкл':'Звук: вкл'}</button><button id="mBack">Продолжить</button></div>`;
@@ -726,6 +731,7 @@ function buildHall(){
   for(const [x,z] of [[-2.5,6],[2.8,-1],[-1.5,-8],[2.2,-15],[-2.6,-20]])D('tuman',{n:'tuman',h:.85,x,y:-.05,z,lit:.2});
   DEC.oknoG=[glow(s,-6.1,2.9,-7,4.5,0xfff0c8,0,1)];DEC.lyG=[glow(s,0,LY.y+1.2,-4.5,3,0xffe0a0,0,1)];
   hallObj.zerkV=spr(s,'zerkalo_v',{h:4.6,x:0,y:.25,z:-23.7,bill:false,op:0,lit:.4});
+  z23Link.mount(s,arrowModel);
 }
 const FIN={on:false,lift:0,fade:1};
 function hallTick(dt){
@@ -793,7 +799,7 @@ function fire(){
   if(!PLAY())return;if(wCd>0||$('menu').style.display==='block'||!wGrp)return;
   const WP=WPN[wI];wCd=WP.cd;recoil=WP.auto?.5:1;S.shot(WP.proj);
   muzzleWorld(mzz);
-  for(const a of WP.sp){
+  for(const a of z23Link.spread(WP,state==='hall'&&waveState==='run'&&!finale)){
     aimRay(a);
     let best=null,bd=60,bv=false;const rr0=isTouch?1.0:.8;const hits=[];
     for(const b of blobs){if(b.dead||b.biting>0)continue;const rr=rr0*(has('pyl')&&b.p.distanceTo(PIAN)<4.5?1.6:1);const d=ray.distanceToPoint(b.p);const t=tmp.copy(b.p).sub(cam.position).dot(fwd);if(t>0&&d<rr*(WP.proj==='pellet'?1.25:1)){if(WP.pierce)hits.push(b);else if(t<bd){bd=t;best=b;}}}
@@ -853,7 +859,7 @@ function screamer(){state='hall';atk={t:0};S.scream();
 /* ---------- волны ---------- */
 const REWARD=['kandel','arb2','chasy','drob','statuya','pulemet','arb0','zerkalo'];
 const REWARD2=['pyl','arki','shtora','lyustra','vorona','okno','tuman'];
-function startWave(){MUS.swell=1;waveT0=now;if(has('okno'))musEvent('wave');if(DEC.lyustra&&!LY.ok){LY={ok:true,fall:0,y:5.6};DEC.lyustra[0].mesh.position.y=LY.y;if(has('lyustra'))DEC.lyustra[0].tgt=1;}wave++;waveState='run';waveLeft=Math.round(4+wave*1.5+(circle-1)*3);spawnT=1.5;hitThisWave=false;}
+function startWave(){MUS.swell=1;waveT0=now;if(has('okno'))musEvent('wave');if(DEC.lyustra&&!LY.ok){LY={ok:true,fall:0,y:5.6};DEC.lyustra[0].mesh.position.y=LY.y;if(has('lyustra'))DEC.lyustra[0].tgt=1;}wave++;z23Link.nextWave();waveState='run';waveLeft=Math.round(4+wave*1.5+(circle-1)*3);spawnT=1.5;hitThisWave=false;}
 function giveW(n,txt){const i=WPN.findIndex(w=>w.n===n);unlocked.w[i]=true;msg(txt+' — подбери его в зале');}
 function reward(k){unlocked.items.push(k);
   if(k==='kandel'){hallObj.kandel.forEach(o=>o.fadeIn=1);msg('Открыто: канделябры — сгустки у огня замедляются');}
@@ -946,7 +952,7 @@ function showEnd(){state='end';setFade(1,1500);setTimeout(()=>{const e=$('end');
   [...st.querySelectorAll('p')].forEach((p,i)=>setTimeout(()=>p.style.opacity=1,600+i*1900));setTimeout(()=>$('again').style.opacity=1,600+STORY.length*1900);
   $('again').onclick=()=>{e.style.display='none';nextCircle();};},1600);}
 function finClear(){if(hallObj.giant){killVen(hallObj.giant);hallObj.giant=null;}FIN.on=false;FIN.lift=0;FIN.fade=1;shakeT=0;}
-function nextCircle(){finClear();angelB=0;hallVisited=false;hallStash=[];circle++;musEvent('circle');wave=0;lives=3;drawLives();H_=1;silence=false;if(ven&&ven.o)killVen(ven.o);ven=null;finale=0;talked={};blobs.length=0;
+function nextCircle(){finClear();angelB=0;hallVisited=false;hallStash=[];circle++;z23Link.circle(circle);musEvent('circle');wave=0;lives=3;drawLives();H_=1;silence=false;if(ven&&ven.o)killVen(ven.o);ven=null;finale=0;talked={};blobs.length=0;
   unlocked.w=WPN.map(()=>true);unlocked.items=['arb2','drob','pulemet','arb0','fantom'];
   bills.length=0;glows.length=0;buildExt();buildHall();setupTalk();setW(0);enterExt();}
 /* ================= ЛАБИРИНТ: растёт с каждой гибелью =================
@@ -1124,7 +1130,7 @@ function giantTick(dt,gdt){const g=MZ.giant;if(!g)return;g.t+=gdt;const p=g.mesh
       if(f!==pf&&f%5===0&&d<34){const k=1-d/34;post.uniforms.uGlitch.value=Math.max(post.uniforms.uGlitch.value,.25*k*k);shakeT=Math.max(shakeT,.25*k);if(S.hitWood)S.hitWood();}}}
   g.cd-=dt;g.mesh.rotation.y=g.head;g.br.value=damp(g.br.value,1+g.push*.7,8,dt);
   if(d<18){MZ.bossNear=true;dread=Math.max(dread,.5*(1-d/18));}}
-function mzDeath(){if(state!=='maze')return;state='trans';S.scream();post.uniforms.uRed.value=.7;mzPrevTrail=mzTrail.slice(-260);deaths++;
+function mzDeath(){if(state!=='maze')return;state='trans';S.scream();post.uniforms.uRed.value=.7;mzPrevTrail=mzTrail.slice(-260);deaths++;z23Link.death();
   for(const b of blobs)kill(b.o);blobs.length=0;setTimeout(()=>enterMaze(false),900);}
 function mzExit(){giantDrop();state='trans';setFade(1,1100);S.door();for(const b of blobs)kill(b.o);blobs.length=0;mzPrevTrail=[];dread=0;MUS.detX=0;
   setTimeout(()=>{scene=scExt;state='ext';MUS.extT=99;MUS.force={g:'adazhio',tr:'voshod'};player.p.set(0,1.78,11.5);yaw=yawT=0;pitch=pitchT=.06;G.uFogC.value.set(0x3d3f41);G.uFogD.value=.028;
@@ -1224,7 +1230,7 @@ function mzTick(dt,gdt){const P=MZ.P;extSkyMat.uniforms.uYaw.value=yaw;extSkyMat
 }
 
 /* не убил Вендиго — снова у ворот, а за воротами лабиринт стал больше */
-function gameOver(){state='trans';setFade(1,1500);if(AC)musicBus.gain.setTargetAtTime(0,AC.currentTime,.5);
+function gameOver(){if(state==='trans')return;z23Link.death();state='trans';setFade(1,1500);if(AC)musicBus.gain.setTargetAtTime(0,AC.currentTime,.5);
   setTimeout(()=>{lives=3;drawLives();H_=1;silence=false;if(ven&&ven.o)killVen(ven.o);ven=null;dread=0;blobs.forEach(b=>kill(b.o));blobs.length=0;hallStash=[];wave=Math.max(0,wave-1);waveState='wait';waveTimer=4;
     deaths++;enterMaze(deaths===1);},1700);}
 
@@ -1276,6 +1282,7 @@ if(shakeT>0){shakeT=Math.max(0,shakeT-dt*.9);const k=shakeT*shakeT;cam.position.
     if(AC)musicBus.gain.setTargetAtTime(.35,AC.currentTime,.5);
   }
   if(scene===scHall&&(state==='hall'||state==='end'||state==='trans')){hallTick(dt);
+    z23Link.tick(now,cam,player.p,state==='hall'&&!finale&&$('menu').style.display!=='block',()=>{cap('— Ты опять стрелял в туман. — Я не помню, во что попал…',4800);musEvent('memory');});
     // мелодия держится гармонией
     dread=silence&&ven?Math.min(1,dread+dt/14):Math.max(0,dread-dt/2.5);
     if(AC){musicBus.gain.setTargetAtTime(silence?.45+.25*dread:(.25+.75*H_),AC.currentTime,.6);musicLP.frequency.setTargetAtTime(Math.min(hideOn?1500:9000,9000-7600*dread),AC.currentTime,.4);}
@@ -1330,7 +1337,7 @@ if(shakeT>0){shakeT=Math.max(0,shakeT-dt*.9);const k=shakeT*shakeT;cam.position.
       else if(ven.mode==='leave'){o.m.uniforms.uOnce.value=Math.min(11,ven.t/1.4*11);o.m.uniforms.uOp.value=clamp(1-(ven.t-1)/0.6,0,1);if(ven.t>1.6){kill(o);endSilence();}}}
     // финал: взгляд в зеркало
     if(finale===1&&hallObj.zerk.m.uniforms.uOp.value>.95){cam.getWorldDirection(fwd);const zp=hallObj.zerk.mesh.position.clone().add(new THREE.Vector3(0,2.3,0));const to=zp.sub(cam.position);const d=to.length();
-      if(d<30&&fwd.dot(to.normalize())>.93){finale=2;finT=0;musEvent('mirror');hallObj.zerkV.m.uniforms.uOp.value=1;hallObj.zerk.m.uniforms.uOp.value=0;hallObj.zerk.fadeIn=0;post.uniforms.uGlitch.value=1;S.scream();cap('Это не отражение. Это я.',4200);
+      if(d<30&&fwd.dot(to.normalize())>.93){finale=2;z23Link.mirror();finT=0;musEvent('mirror');hallObj.zerkV.m.uniforms.uOp.value=1;hallObj.zerk.m.uniforms.uOp.value=0;hallObj.zerk.fadeIn=0;post.uniforms.uGlitch.value=1;S.scream();cap('Это не отражение. Это я.',4200);
         const fi=WPN.findIndex(w=>w.n==='fantom');unlocked.w[fi]=true;unlocked.items.push('fantom');}}
     if(finale===2){finT+=dt;if(finT>4){finale=3;memT=0;}}
     if(finale===3){finT+=dt;finTick(dt);if(finT>16)showEnd(),finale=4;}
@@ -1395,7 +1402,7 @@ async function boot(){
     hallTex=new THREE.CanvasTexture(HG.atlas);hallTex.flipY=false;hallTex.colorSpace=THREE.NoColorSpace;hallTex.minFilter=THREE.LinearFilter;hallTex.generateMipmaps=false;
     await Promise.all(HALL_SPR.map(texLoad));buildHall();window.__hallReady=1;venStackLoad();})();
   scene=scExt;state='menu';cam.position.set(0,1.78,11.5);cam.rotation.set(.06,0,0);cam.updateMatrixWorld();frame();
-  $('play').onclick=()=>{unlockAudio();$('start').style.display='none';enterExt();};
+  $('play').onclick=()=>{unlockAudio();$('start').style.display='none';z23Link.circle(circle);enterExt();};
   hallReady=hallP;
 }
 let geoC,hallReady;

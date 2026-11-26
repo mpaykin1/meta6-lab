@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-26T07:50:32.575Z",
+  "generated_at": "2026-11-26T07:52:40.757Z",
   "sha": {
-    "lab": "615ea4e88f4c9e7c043c8f6e0e9794023418e4aa",
+    "lab": "905226e543660fd98c6fbbc452ef64b7dc36c950",
     "mg": "696100335d24e1269be3df3793aea6bbca1c6fba"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45778148687",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45778475496",
   "review": {
     "protected": [
       {
@@ -576,7 +576,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45562806578"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45778148606"
       },
       "P1": {
         "value": "не подтверждено",
@@ -586,8 +586,8 @@
     }
   },
   "pr": {
-    "open": 9,
-    "conflicts": "нет данных",
+    "open": 10,
+    "conflicts": 6,
     "merged": 100,
     "closed": 194,
     "mergedItems": [
@@ -1517,7 +1517,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3555,
+      "count": 3557,
       "folders": "нет данных"
     },
     "mg": {

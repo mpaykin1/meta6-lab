@@ -46,5 +46,5 @@ export function createAdagioLink(THREE){
  function death(){Nit.write('adagio',{smerti:Nit.read().adagio.smerti+1});}
  function circle(n){Nit.write('adagio',{krug:n});}
  function mirror(){Nit.write('adagio',{zerkalo:true});}
- return {mount,tick,spread,nextWave,death,circle,mirror,get available(){return available;},get owned(){return owned;}};
+ return {mount,tick,spread,nextWave,death,circle,mirror,get available(){return available;},get owned(){return owned;},get used(){return used;}};
 }

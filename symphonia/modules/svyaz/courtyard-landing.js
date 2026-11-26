@@ -24,5 +24,6 @@ export function createCourtyardLanding(source){
   if(halo)halo.material.opacity=.4+.035*Math.sin(time*1.7);
   if(mist){const d=mist(0,camera.position.z,time,.025);scene.fog.density+=(d-scene.fog.density)*(1-Math.exp(-2*dt));}
  }
- return {scene,prepare,begin,tick};
+ prepare();
+ return {scene,prepare,begin,tick,get ready(){return !!stone&&(source.getObjectByName('z23-fog-manor')?.children.length||0)>=6;}};
 }

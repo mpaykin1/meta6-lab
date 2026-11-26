@@ -12,7 +12,7 @@ export function createCourtyardGate({link,fade,caption,language,onTravel,onProgr
   event.preventDefault();
   if(stage==='landed'){stage='entering';link.hidden=true;location.assign(url());return;}
   if(!unlocked||stage!=='idle')return;
-  if(!onTravel()){location.assign(url());return;}
+  if(!onTravel()){onPrepare?.();return;} // Never silently skip the actual courtyard.
   stage='descending';p=0;link.hidden=true;if(line)caption(line);
   motion.start(3600,()=>{stage='landed';p=1;fade.style.opacity='0';label('Enter manor / Войти в усадьбу');onLand?.();});
  });

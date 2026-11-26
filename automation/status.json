@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-26T12:01:07.856Z",
+  "generated_at": "2026-11-26T14:30:53.224Z",
   "sha": {
-    "lab": "6db5b3070a92e2b326cd3d823027a363deb4232a",
+    "lab": "1c554b04cecc52c0d567d34442c25c8fd6bea667",
     "mg": "ca77c011d31cb4814b418007d77f34b6ebbf6a22"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45815525707",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45839527508",
   "review": {
     "protected": [
       {
@@ -434,14 +434,19 @@
     ],
     "redLab": [
       {
-        "workflow": "META BOT",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45794090757",
-        "step": "Play all games"
+        "workflow": "LAB Pages",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45837778046",
+        "step": "Check published public URLs"
       },
       {
         "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45753726152",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45834940957",
         "step": "Run node scripts/dispetcher/run.mjs"
+      },
+      {
+        "workflow": "META BOT",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45794090757",
+        "step": "Play all games"
       }
     ],
     "redMg": [],
@@ -581,7 +586,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45778148606"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45815525655"
       },
       "P1": {
         "value": "не подтверждено",
@@ -596,6 +601,11 @@
     "merged": 101,
     "closed": 194,
     "mergedItems": [
+      {
+        "number": 440,
+        "title": "SYMPHONIA — сайт музыкального хоррора",
+        "sha": "f4ebb24617d816a47f52a1dd3fb683ffaa453aeb"
+      },
       {
         "number": 452,
         "title": "SEO: sync eight KILLKLAN music links in lab catalog",
@@ -665,11 +675,6 @@
         "number": 446,
         "title": "SYMPHONIA: растущий лабиринт, объёмный Вендиго (гигант в сад",
         "sha": "51f3f8172d837589b6aa9f3d493882dcfcd58923"
-      },
-      {
-        "number": 440,
-        "title": "SYMPHONIA — сайт музыкального хоррора",
-        "sha": "f4ebb24617d816a47f52a1dd3fb683ffaa453aeb"
       },
       {
         "number": 445,
@@ -1527,7 +1532,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3565,
+      "count": 3566,
       "folders": "нет данных"
     },
     "mg": {

@@ -13,3 +13,5 @@
 25.11.2026 | WaveFunctionCollapse, MIT, JS-port kchapelier/wavefunctioncollapse@f1374ee2, реальный SimpleTiledModel (не имитация). Существующие Tower + Nit управляют видимыми фоновыми формами. WFC не меняет топологию ROT.js, Music или исходные ассеты; браузерный PASS не подтверждён.
 
 25.11.2026 | Voxel Atmosphere Engine + FastNoiseLite 1.1.1: реальная локальная библиотека, связка Nit/WFC/GLSL; оригинальные слои и модели сохранены. Адаптер createMazeMist подготовлен для ROT.js; браузерный визуальный PASS нового HEAD не подтверждён.
+
+26.11.2026 | Hero Animator / Anti-Jerk: реальный Tween.js 25.0.0, только камера и экранный туман, исходные спрайты/физика героя не меняются. Meta Game Fusion получает переход и Nit/Ink; FastNoiseLite живой туман сохраняется. Изолированный JS не заменяет визуальный PASS.

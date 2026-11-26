@@ -10,3 +10,6 @@
 
 ### FastNoiseLite 1.1.1
 Скилы-4: `createMazeMist(seed,losses)` из `../modules/sinhron/z23/living-fog.js`; использовать P.linked.seed от ROT и Nit.porazheniya. Сглаживать значение на существующем uFogD от исходной базовой плотности, не перемножать накопленные значения. WFC выбирает декор, ROT — проходы, шум — исключительно атмосферу.
+
+### Tween.js 25.0.0
+`chapter-transition.js` — локальный MIT runtime, createTransition().start(duration,onComplete), tick(dtSeconds), reset(); только общий игровой RAF, никаких автоматических действий героя. Использовать также при обратном переходе из Адажио (инициируется игроком, Nit.encode). Не применять к пикселям героя и его позам.

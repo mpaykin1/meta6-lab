@@ -41,7 +41,7 @@ function note(ctx,dest,m,t,vel,dur,bar,c){
   }
   oscs[0][0].onended=()=>{for(const [o,og] of oscs){o.disconnect();og.disconnect()}lp.disconnect();g.disconnect()};
 }
-export function createFogPiano(){
+export function createFogPiano(onNote){
   let ctx=null,bus=null,filter=null,next=0,idx=0,beat=0,lastCircle=0,theme=null,was=false;
   return {tick(audio,depth,c,active){
     if(!audio?.ctx || !audio.master)return;
@@ -58,7 +58,7 @@ export function createFogPiano(){
     filter.frequency.setTargetAtTime(700+proximity*2000,t,.8);
     const event=theme[idx],bar=Math.floor(beat/4),scale=MODES[(Math.max(1,c)-1)%MODES.length];
     const d=event.d,m=62+scale[((d%7)+7)%7]+12*Math.floor(d/7);
-    note(ac,filter,m,next,.11,Math.min(4.8,Math.max(.6,event.l*1.35)),bar,c);
+    note(ac,filter,m,next,.11,Math.min(4.8,Math.max(.6,event.l*1.35)),bar,c);onNote?.(harmonyFor(m,bar,c).m);
     if(idx===0||Math.floor(beat/4)!==Math.floor((beat+event.l)/4)){
       const [root]=progression[bar%progression.length];
       note(ac,filter,38+root,next,.055,3.6,bar,c);

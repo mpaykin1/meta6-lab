@@ -48,7 +48,7 @@ html,body{margin:0;height:100%;background:#07080a;overflow:hidden;touch-action:n
 #play svg{width:34px;height:34px;fill:currentColor;margin-left:5px}
 #load{margin-top:16px;height:2px;width:160px;background:rgba(216,182,115,.15);display:inline-block}
 #load i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
-#end{display:none;background:rgba(4,4,6,.94)}
+#end{display:none;background:rgba(4,4,6,.94);overflow:auto;touch-action:pan-y;align-items:start}
 #end div{max-width:560px;padding:24px;font-size:clamp(18px,2.4vw,23px);line-height:1.55;font-style:italic}
 #end p{opacity:0;transition:opacity 1.6s;margin:0 0 12px}
 #again{margin-top:20px;opacity:0;transition:opacity 1s}
@@ -72,6 +72,7 @@ html,body{margin:0;height:100%;background:#07080a;overflow:hidden;touch-action:n
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js';
 import {createAdagioLink} from './shared/adagio-link.js';
 import {Nit} from './shared/nit.js';
+import {advanceCinematic} from './shared/cinematic-clock.js';
 import {HORN_COLOR,headSocket,attachDragonHorns} from './shared/dragon-horns.js';
 {
 const z23Link=createAdagioLink(THREE);
@@ -504,7 +505,7 @@ function aimTick(dt){
   if(ey>0&&Math.sign(-joyRV.y)===Math.sign(aim.y))pitchT=clamp(pitchT+Math.sign(aim.y)*Math.min(1,ey/.2)*(.7+1.2*Math.abs(joyRV.y))*dt,-1.1,1.1);}
 
 /* ---------- state ---------- */
-let state='load',now=0,circle=1,lives=3,H_=1,wave=0,silence=false,score=0;
+let state='load',now=0,circle=Math.max(1,Nit.read().adagio.krug||1),lives=3,H_=1,wave=0,silence=false,score=0;
 /* оружие — объёмные модели владельца (sprite stacking). Стрелы у арбалетов — настоящие, летят из ложа */
 const WPN=[
  {n:'arb1',t:'Костяной арбалет',d:'Оружие 1: тяжёлая стрела, бьёт точно.',cd:.5,proj:'arrow',sp:[0],len:.78,pos:[.13,-.36,-.78]},
@@ -957,8 +958,10 @@ const STORY=['Мне было семь, когда мама впервые за�
 function showEnd(){const history=Nit.read().luchnik;const story=history.pobedy?[...STORY,'Я вспомнил башни, с которых падал в синий туман. Рога в зеркале — те самые, что я видел в падении.','Я думал, дракон не пускал меня к ней. Теперь я понял: это она звала его своей музыкой.']:STORY;state='end';setFade(1,1500);setTimeout(()=>{const e=$('end');e.style.display='grid';const st=$('story');
   st.innerHTML=story.map(s=>`<p>${s}</p>`).join('')+`<button id="again" class="btn" style="position:static;margin:20px auto 0" aria-label="Следующий круг"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></button>`;
   [...st.querySelectorAll('p')].forEach((p,i)=>setTimeout(()=>p.style.opacity=1,600+i*1900));setTimeout(()=>$('again').style.opacity=1,600+story.length*1900);
-  $('again').onclick=()=>{e.style.display='none';nextCircle();};},1600);}
-function finClear(){if(hallObj.giant){killVen(hallObj.giant);hallObj.giant=null;}FIN.on=false;FIN.lift=0;FIN.fade=1;shakeT=0;}
+  $('again').onclick=()=>{e.style.display='none';nextCircle();};
+  if(history.pobedy||history.porazheniya||history.perya){const back=document.createElement('button');back.className='btn';back.style.cssText='position:static;margin:20px auto 0;opacity:0';back.setAttribute('aria-label','Вернуться в Увертюру · следующий круг');back.innerHTML='<svg viewBox="0 0 24 24"><path d="M12 3 3 12h6v9h6v-9h6z"/></svg>';back.disabled=true;st.appendChild(back);setTimeout(()=>{back.style.opacity=1;back.disabled=false;},600+story.length*1900);back.onclick=()=>{back.disabled=true;z23Link.circle(circle+1);const url=new URL('chapters/overture/',location.href);const token=Nit.encode();if(token)url.searchParams.set('nit',token);location.assign(url.href);};}
+  },1600);}
+function finClear(){if(hallObj.giant){killVen(hallObj.giant);hallObj.giant=null;}FIN.on=false;FIN.said=0;FIN.lift=0;FIN.fade=1;FIN.parts=[];shakeT=0;}
 function nextCircle(){finClear();angelB=0;hallVisited=false;hallStash=[];circle++;z23Link.circle(circle);musEvent('circle');wave=0;lives=3;drawLives();H_=1;silence=false;if(ven&&ven.o)killVen(ven.o);ven=null;finale=0;talked={};blobs.length=0;
   unlocked.w=WPN.map(()=>true);unlocked.items=['arb2','drob','pulemet','arb0','fantom'];
   bills.length=0;glows.length=0;buildExt();buildHall();setupTalk();setW(0);enterExt();}
@@ -1249,7 +1252,7 @@ function gameOver(){if(state==='trans')return;z23Link.death();state='trans';setF
 /* ---------- loop ---------- */
 const clock=new THREE.Clock();const up=new THREE.Vector3(0,1,0);
 function frame(){requestAnimationFrame(frame);FRN++;
-  let dt=Math.min(clock.getDelta(),.05)*DTM;now+=dt;
+  const elapsed=clock.getDelta();let dt=Math.min(elapsed,.05)*DTM;now+=dt;
   const tScale=slowT>0?.35:1;const gdt=dt*tScale;G.uT.value=now;
   if(!scene){return;}
   // плавность: если телефон не успевает, внутреннее разрешение чуть снижается; когда успевает — возвращается
@@ -1351,8 +1354,10 @@ if(shakeT>0){shakeT=Math.max(0,shakeT-dt*.9);const k=shakeT*shakeT;cam.position.
     if(finale===1&&hallObj.zerk.m.uniforms.uOp.value>.95){cam.getWorldDirection(fwd);const zp=hallObj.zerk.mesh.position.clone().add(new THREE.Vector3(0,2.3,0));const to=zp.sub(cam.position);const d=to.length();
       if(d<30&&fwd.dot(to.normalize())>.93){finale=2;z23Link.mirror();finT=0;musEvent('mirror');hallObj.zerkV.m.uniforms.uOp.value=1;hallObj.zerk.m.uniforms.uOp.value=0;hallObj.zerk.fadeIn=0;post.uniforms.uGlitch.value=1;S.scream();cap(z23Victory?'Это не отражение. Это я. Рога из синего тумана…':'Это не отражение. Это я.',4200);
         const fi=WPN.findIndex(w=>w.n==='fantom');unlocked.w[fi]=true;unlocked.items.push('fantom');}}
-    if(finale===2){finT+=dt;if(finT>4){finale=3;memT=0;}}
-    if(finale===3){finT+=dt;finTick(dt);if(finT>16)showEnd(),finale=4;}
+    if(finale===2||finale===3)advanceCinematic(elapsed,step=>{
+      if(finale===2){finT+=step;if(finT>4){finale=3;memT=0;}return;}
+      if(finale===3){finT+=step;finTick(step);if(finT>16){showEnd();finale=4;return false;}}
+    },!document.hidden);
   }
   // скример
   if(atk){atk.t+=dt;const k=Math.min(1,atk.t/1.3);atk.mesh.material.uniforms.uOnce.value=k*15;const s=.6+k*k*2.4;atk.mesh.scale.set(s,s,1);atk.mesh.position.set(0,-.08,0);

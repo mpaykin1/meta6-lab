@@ -979,9 +979,35 @@ const MAZE_SPR=['gazon','dorozhka','kust_roz','les','fonar','vorona','statuya_sa
 const VNS={ready:false,geo:[],geoL:[],img:[],tex:null,n:0,sockets:[],hornTex:null};
 const z23Victory=Nit.read().luchnik.pobedy>0;
 function z23HornMat(br,o){if(!VNS.hornTex){const c=new THREE.Color(HORN_COLOR),t=new THREE.DataTexture(new Uint8Array([Math.round(c.r*255),Math.round(c.g*255),Math.round(c.b*255),255]),1,1);t.needsUpdate=true;VNS.hornTex=t;}return stackMat(VNS.hornTex,{nolamp:true,bright:br,fogk:o.fogk,fogc:o.fogc});}
-async function venStackLoad(){try{const m=await (await fetch('a/vs/vs_meta.json')).json();VNS.m=m;const g={nx:m.nx,nz:m.nz,ny:m.ny,cols:m.cols,s:3.3/m.ny};
-  for(const f of m.frames){const im=await loadImg('a/vs/'+f+'.webp');VNS.img.push(im);if(z23Victory)VNS.sockets.push(headSocket(THREE,im,m));VNS.geo.push(stackGeo(g,im));VNS.geoL.push(stackGeo(g,im,2));await new Promise(r=>setTimeout(r,0));}
-  VNS.ready=true;}catch(e){console.warn('vs',e);}}
+// One shared, retryable resource gate for every scene; never publish a partial atlas.
+let venLoading=null,venLoadError=null,mazeRetry=null;
+function boundedAsset(task,ms=20000){
+ return new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('VNS asset timeout')),ms);Promise.resolve(task).then(v=>{clearTimeout(timer);resolve(v);},e=>{clearTimeout(timer);reject(e);});});
+}
+function venStackLoad(){
+ if(VNS.ready)return Promise.resolve(true);
+ if(venLoading)return venLoading;
+ venLoading=(async()=>{
+  for(let attempt=0;attempt<2;attempt++){
+   const img=[],geo=[],geoL=[],sockets=[];
+   try{
+    const response=await boundedAsset(fetch('a/vs/vs_meta.json'));
+    if(!response.ok)throw Error('VNS metadata '+response.status);
+    const m=await boundedAsset(response.json()),g={nx:m.nx,nz:m.nz,ny:m.ny,cols:m.cols,s:3.3/m.ny};
+    if(!Array.isArray(m.frames)||m.frames.length!==m.walk+m.lunge||!m.frames.length)throw Error('VNS frame manifest');
+    for(const f of m.frames){
+     const im=await boundedAsset(loadImg('a/vs/'+f+'.webp'));img.push(im);
+     if(z23Victory)sockets.push(headSocket(THREE,im,m));
+     geo.push(stackGeo(g,im));geoL.push(stackGeo(g,im,2));
+     await new Promise(r=>setTimeout(r,0));
+    }
+    Object.assign(VNS,{m,img,geo,geoL,sockets,ready:true});venLoadError=null;return true;
+   }catch(e){for(const g of [...geo,...geoL])g.dispose();venLoadError=String(e);console.warn('vs attempt '+(attempt+1),e);}
+  }
+  return false;
+ })().finally(()=>{venLoading=null;});
+ return venLoading;
+}
 function venTexGet(){if(!VNS.tex){VNS.tex=VNS.img.map(im=>nearestTex(im));VNS.tex.forEach(x=>{try{renderer.initTexture(x);}catch(e){}});}VNS.n=(VNS.n||0)+1;return VNS.tex;}
 function venTexDrop(){VNS.n--;if(VNS.n<=0&&VNS.tex){VNS.tex.forEach(t=>t.dispose());VNS.tex=null;VNS.n=0;}}
 function venStackMake(p,o={}){const sc=o.scene||scHall,t=venTexGet(),br={value:1};const mat=stackMat(t[0],{nolamp:true,bright:br,fogk:o.fogk,fogc:o.fogc});
@@ -1122,15 +1148,19 @@ function monHit(m,dmg=1){if(m.dead)return;m.hp-=dmg;musHit();S.pop();post.unifor
   if(m.mode==='hang'){m.mode='drop';m.t=0;}
   if(m.hp<=0){m.dead=true;m.dying=0;mzAct(m,'death');score++;}}
 async function enterMaze(first){state='trans';setFade(1,900);await new Promise(r=>setTimeout(r,950));
-  giantDrop();await buildMaze();scene=scMaze;state='maze';lives=3;drawLives();G.uBright.value=1;post.uniforms.uRed.value=0;dread=0;
-  player.p.set(mzX(MZ.P.start[0]),1.72,mzZ(MZ.P.o)+MZC/2+9);player.v.set(0,0,0);yaw=yawT=0;pitch=pitchT=.05;giantSpawn();
+  giantDrop();
+  // A maze is not playable until its original animated giant is ready.
+  if(!await venStackLoad()){mazeRetry=()=>enterMaze(first);state='menu';$('start').style.display='grid';$('start').querySelector('h1').textContent='Повторить загрузку';$('play').setAttribute('aria-label','Повторить загрузку');return;}
+  await buildMaze();scene=scMaze;lives=3;drawLives();G.uBright.value=1;post.uniforms.uRed.value=0;dread=0;
+  player.p.set(mzX(MZ.P.start[0]),1.72,mzZ(MZ.P.o)+MZC/2+9);player.v.set(0,0,0);yaw=yawT=0;pitch=pitchT=.05;giantSpawn();state='maze';
   G.uFogC.value.set(0x34383a);G.uFogD.value=z23MazeFog(.034+.004*Math.min(8,deaths));G.uMix.value=0;
   if(AC){musicLP.frequency.setTargetAtTime(900,AC.currentTime,.4);windG.gain.setTargetAtTime(.16,AC.currentTime,1);}
   MUS.force={g:'noktyurn',tr:'odin'};setFade(0,1600);lastInput=now;homeJ.k='';
   setTimeout(()=>cap(first?'Я снова у ворот… но сад стал другим. Её музыку слышно где-то за кустами.':'Я снова у ворот. Дорога к ней стала длиннее.',5200),1200);}
 /* гигант в саду: выше кустов в четыре раза, идёт сквозь живую изгородь; убить нельзя — выстрел только отталкивает */
-function giantSpawn(){if(!VNS.ready||!MZ)return;const P=MZ.P;let best=null,bd=-1;for(let k=0;k<40;k++){const i=Math.floor(rnd()*P.N),j=Math.floor(rnd()*P.N);if(!P.inR(i,j))continue;const x=mzX(i),z=mzZ(j);const d=Math.hypot(x-player.p.x,z-player.p.z);if(d>bd){bd=d;best=[x,z];}}
-  if(!best)return;const g=venStackMake({x:best[0],z:best[1]},{scene:scMaze,scale:4,far:40,ref:false,fogk:.012,fogc:new THREE.Vector3(.204,.22,.227)});g.t=0;g.ph=rnd()*6;g.step=0;g.cd=0;g.sp=1.15+.08*Math.min(6,deaths);MZ.giant=g;}
+function giantSpawn(){if(!VNS.ready||!MZ||MZ.giant)return;const P=MZ.P;let best=null,bd=-1;for(let k=0;k<40;k++){const i=Math.floor(rnd()*P.N),j=Math.floor(rnd()*P.N);if(!P.inR(i,j))continue;const x=mzX(i),z=mzZ(j);const d=Math.hypot(x-player.p.x,z-player.p.z);if(d>bd){bd=d;best=[x,z];}}
+  if(!best){for(let i=P.o;i<P.o+P.Gs;i++)for(let j=P.o;j<=P.top;j++){const x=mzX(i),z=mzZ(j),d=Math.hypot(x-player.p.x,z-player.p.z);if(d>bd){bd=d;best=[x,z];}}}
+  const g=venStackMake({x:best[0],z:best[1]},{scene:scMaze,scale:4,far:40,ref:false,fogk:.012,fogc:new THREE.Vector3(.204,.22,.227)});g.t=0;g.ph=rnd()*6;g.step=0;g.cd=0;g.sp=1.15+.08*Math.min(6,deaths);MZ.giant=g;}
 function giantDrop(){if(MZ&&MZ.giant){killVen(MZ.giant);MZ.giant=null;}}
 const giantPos=()=>MZ.giant.mesh.position.clone().add(new THREE.Vector3(0,7,0));
 function giantTick(dt,gdt){const g=MZ.giant;if(!g)return;g.t+=gdt;const p=g.mesh.position,pp=player.p;const tx=pp.x-p.x,tz=pp.z-p.z,d=Math.hypot(tx,tz)||1;
@@ -1412,21 +1442,21 @@ async function boot(){
   await Promise.all(jobs);
   for(const [k,a] of Object.entries(extMeta)){extGeo[k]=stackGeo(a,imgs['e_'+k]);if(k!=='step'&&k!=='wall')extGeoL[k]=stackGeo(a,imgs['e_'+k],2);EXTM[k]=stackMat(nearestTex(imgs['e_'+k]),{bright:G.uBright});}
   extTex.sky=new THREE.Texture(imgs.sky);extTex.sky.colorSpace=THREE.NoColorSpace;extTex.sky.needsUpdate=true;extTex.stone=nearestTex(imgs.stone,true);
-  buildExt();buildWeapons();setupTalk();
+  buildExt();buildWeapons();setupTalk();venStackLoad();
   resize();addEventListener('resize',resize);setAim(innerWidth/2,innerHeight*.5);
   const hallP=(async()=>{HG=buildHallGeo();HGL=buildHallGeo(.4);
     const [b,a]=await Promise.all([loadImg('a/pian_body.png'),loadImg('a/pian_arm.png')]);const ac=HG.atlas.getContext('2d');ac.drawImage(b,432,0,134,191);ac.drawImage(a,576,0,134,191);
     hallTex=new THREE.CanvasTexture(HG.atlas);hallTex.flipY=false;hallTex.colorSpace=THREE.NoColorSpace;hallTex.minFilter=THREE.LinearFilter;hallTex.generateMipmaps=false;
-    await Promise.all(HALL_SPR.map(texLoad));buildHall();window.__hallReady=1;venStackLoad();})();
+    await Promise.all(HALL_SPR.map(texLoad));buildHall();window.__hallReady=1;})();
   scene=scExt;state='menu';cam.position.set(0,1.78,11.5);cam.rotation.set(.06,0,0);cam.updateMatrixWorld();frame();
-  $('play').onclick=()=>{unlockAudio();$('start').style.display='none';z23Link.circle(circle);if(z23Losses){musicOn=true;enterMaze(true);}else enterExt();};
+  $('play').onclick=()=>{if(state!=='menu')return;unlockAudio();$('start').style.display='none';if(mazeRetry){const retry=mazeRetry;mazeRetry=null;$('start').querySelector('h1').textContent='Адажио';$('play').setAttribute('aria-label','Играть');retry();return;}z23Link.circle(circle);if(z23Losses){musicOn=true;enterMaze(true);}else enterExt();};
   hallReady=hallP;
 }
 let geoC,hallReady;
 const _eh=enterHall;
 enterHall=function(){if(!window.__hallReady){state='trans';hallReady.then(()=>{state='ext';_eh();});return;}_eh();};
 window.addEventListener('error',e=>console.error('ERR',e.message));
-if(location.hash==='#bot')window.__bot={z23(){return {nit:Nit.read(),state,circle,fog:G.uFogD.value,maze:state==='maze'&&MZ?{...MZ.P.linked,length:MZ.P.sol.length}:null,feathers:z23Link.available,picked:z23Link.owned,bonusUsed:z23Link.used,waveState,horns:!!(ven?.o?.horns||MZ?.giant?.horns||hallObj.giant?.horns)};},give(n){const i=WPN.findIndex(w=>w.n===n);unlocked.w[i]=true;setW(i);return i;},maze(){deaths++;enterMaze(deaths===1);},mzInfo(){return MZ&&{G:MZ.P.Gs,mons:MZ.mons.filter(m=>!m.dead).length,lamps:MZ.lamps.length,houses:MZ.houses.length,items:MZ.items.map(i=>i.n),close:+(MZ.close||0).toFixed(2),chasers:MZ.chasers,state,lives,deaths,found:mzFound};},
+if(location.hash==='#bot')window.__bot={z23(){return {nit:Nit.read(),state,circle,fog:G.uFogD.value,maze:state==='maze'&&MZ?{...MZ.P.linked,length:MZ.P.sol.length}:null,feathers:z23Link.available,picked:z23Link.owned,bonusUsed:z23Link.used,waveState,horns:!!(ven?.o?.horns||MZ?.giant?.horns||hallObj.giant?.horns),giantReady:!!MZ?.giant,assetReady:VNS.ready,assetError:venLoadError,hornsVisible:!!(ven?.o?.horns?.visible||MZ?.giant?.horns?.visible||hallObj.giant?.horns?.visible)};},give(n){const i=WPN.findIndex(w=>w.n===n);unlocked.w[i]=true;setW(i);return i;},maze(){deaths++;enterMaze(deaths===1);},mzInfo(){return MZ&&{G:MZ.P.Gs,mons:MZ.mons.filter(m=>!m.dead).length,lamps:MZ.lamps.length,houses:MZ.houses.length,items:MZ.items.map(i=>i.n),close:+(MZ.close||0).toFixed(2),chasers:MZ.chasers,state,lives,deaths,found:mzFound};},
   mzGo(k){const P=MZ.P;const c=P.sol[Math.min(P.sol.length-1,k)];player.p.x=mzX(c[0]);player.p.z=mzZ(c[1]);},mzExitGo(){const P=MZ.P;player.p.x=mzX(P.exit[0]);player.p.z=mzZ(P.top)-MZC/2-3;},
   mzItem(n){const it=MZ.items.find(i=>i.n===n);if(it){player.p.x=it.x;player.p.z=it.z;}return !!it;},mzHouse(){const h=MZ.houses.find(h=>!h.visited);if(h){player.p.x=h.fx;player.p.z=h.fz;}return h?[h.fx,h.fz,h.x,h.z,player.p.x,player.p.z,mzBlocked(h.fx,h.fz)]:0;},mzKillAll(){MZ.mons.forEach(m=>{if(!m.dead){m.hp=1;monHit(m);}});},mzHurt(){lives=1;},hg(){return [HG.solid.length/27,HGL.solid.length/27,HG.slices.length/27,HG.detail.length/27,HG.floor.length/27,HG.solidLow.length/27]},tris(){const m={};scene.traverseVisible(o=>{if(o.isMesh&&o.geometry){const n=(o.geometry.index?o.geometry.index.count:o.geometry.attributes.position.count)/3;const k=Object.keys(extGeo).find(k=>extGeo[k]===o.geometry)||(Object.keys(extGeoL).find(k=>extGeoL[k]===o.geometry)||"")+"_far"||o.type+(o.material.type||"");m[k]=(m[k]||0)+n;}});return m;},refl(a,b){scHallRefl.children[0].visible=a;scHallRefl.children[1].visible=b;},cam(){return +yaw.toFixed(3)},aim(){return [+aim.x.toFixed(2),+aim.y.toFixed(2)]},dyn(){return [DYN.k,DYN.fps]},ly(){lyCrash();},arkL(){(DEC.arkiL||[]).forEach(o=>{o.tgt=1;o.until=now+10;});},spawn(n){for(let i=0;i<n;i++)spawnBlob();},circ(){nextCircle();},nearBlob(){const b=blobs.find(b=>!b.dead);if(b)b.p.set(PIAN.x+2,2,PIAN.z+2);},musSet:(g,tr)=>{MUS.testLock=true;MUS.force={g,tr,now:true};},get notes(){return MUS.notes},get harm(){return [MUS.notes,MUS.snap||0,MUS.dis||0]},decoTest:()=>{REWARD2.forEach(k=>{if(!has(k))reward(k);});},get s(){return{deco:Object.keys(DEC).map(k=>k+':'+DEC[k].map(o=>o.m?+o.m.uniforms.uOp.value.toFixed(2):+o.op.toFixed(2)).join('/')),hide:hideOn,ly:LY.ok,genre:MUS.g,tr:MUS.tr,seen:Object.keys(MUS.seen),mus:Object.fromEntries(['danger','flow','miss','calm','near','wound','key'].map(k=>[k,+(+MUS[k]).toFixed(2)])),fig:MUS.fig,dread:+dread.toFixed(2),score,state,wave,H:H_,silence,lives,blobs:blobs.length,circle,finale,items:unlocked.items.slice(),hall:!!window.__hallReady,w:WPN[wI].n,shots:shots.length,p:player.p.toArray().map(v=>+v.toFixed(2))}},
   hall(){player.p.set(0,1.78,-40);},out(){player.p.set(0,1.72,9.5);hallT=-9;},go(x,z){player.p.set(x,player.p.y,z);},shootAll(){blobs.slice().forEach(b=>!b.dead&&hitBlob(b));},killV(){if(ven&&ven.mode==='walk'){ven.hits=ven.need-1;hitVen();}},look(y,p){yawT=y;pitchT=p;},fire,

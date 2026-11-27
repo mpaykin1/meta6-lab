@@ -31,5 +31,5 @@ export function attachDragonHorns(THREE,root,material,sockets){
  for(const side of [-1,1])pivot.add(createDragonHorn(THREE,side,material));root.add(pivot);
  function frame(i){const p=sockets[i];pivot.visible=!!p;if(p){pivot.position.copy(p);pivot.position.y-=.24*.75;}}
  frame(0);
- return {frame,dispose(){pivot.removeFromParent();pivot.traverse(o=>{if(o.isMesh)o.geometry.dispose();});material.dispose();}};
+ return {frame,get visible(){return pivot.visible;},dispose(){pivot.removeFromParent();pivot.traverse(o=>{if(o.isMesh)o.geometry.dispose();});material.dispose();}};
 }

@@ -125,6 +125,7 @@ META BOT viewports: ЗАКРЫТО Claude 17.11.2026 — проверка в loa
 | #429 | lab/skill-nexus-dependencies-20261121 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-24 |
 | #430 | lab/author-skills-source-20261121 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-24 |
 | #435 | biblioteka-tormozov | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-27 |
+| #438 | lab/bullet-car-stacking-site-20261124 | закрыт сторожем как заброшенный; ветка сохранена | 2026-11-27 |
 <!-- STOROZHA:STALE:END -->
 | #190 | lab/bot-batch-1 | НУЖЕН CLAUDE: защищённый `.github/workflows/bot-adapters-b2.yml`; конфликт с main (`OSHIBKI.md`); проверка B2 охватывает 2/3 игр, `archer-in-the-fog` не подтверждён. Самослияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/190 | 2026-11-11 |
 | #54 | lab/render-visibility-optimization | НУЖЕН CLAUDE: PR изменяет защищённый `.github/workflows/lab-render-performance.yml` и существующий эталон `games/veil-terraces/index.html`; конфликт с main (`docs/progress/PR54_59_60.md`), самостоятельное слияние запрещено. https://github.com/mpaykin1/meta6-lab/pull/54 | 2026-11-12 |

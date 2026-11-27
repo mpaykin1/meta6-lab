@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-27T09:08:01.785Z",
+  "generated_at": "2026-11-27T15:49:53.636Z",
   "sha": {
-    "lab": "95f4d022e4575779c374496ff4323dc9732735f0",
+    "lab": "8d02028e8d572bd96b280e36914d60fda872147a",
     "mg": "ca77c011d31cb4814b418007d77f34b6ebbf6a22"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45970946577",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/46028146990",
   "review": {
     "protected": [
       {
@@ -434,24 +434,14 @@
     ],
     "redLab": [
       {
+        "workflow": "META BOT",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45976318669",
+        "step": "Play all games"
+      },
+      {
         "workflow": "MG Dispatcher",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45968600527",
         "step": "Run node scripts/dispetcher/run.mjs"
-      },
-      {
-        "workflow": "LAB Pages",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45915565516",
-        "step": "Check published public URLs"
-      },
-      {
-        "workflow": "Link Guard 200",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45915027904",
-        "step": "Diagnose URLs still failing"
-      },
-      {
-        "workflow": "META BOT",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45794090757",
-        "step": "Play all games"
       }
     ],
     "redMg": [],
@@ -601,11 +591,21 @@
     }
   },
   "pr": {
-    "open": 9,
-    "conflicts": 6,
-    "merged": 101,
-    "closed": 194,
+    "open": 7,
+    "conflicts": "нет данных",
+    "merged": 102,
+    "closed": 196,
     "mergedItems": [
+      {
+        "number": 453,
+        "title": "Telegram Mini App — eleven META GAMES worlds",
+        "sha": "8d02028e8d572bd96b280e36914d60fda872147a"
+      },
+      {
+        "number": 451,
+        "title": "SEO: KILLKLAN artist metadata and crawlable discography",
+        "sha": "615ea4e88f4c9e7c043c8f6e0e9794023418e4aa"
+      },
       {
         "number": 440,
         "title": "SYMPHONIA — сайт музыкального хоррора",
@@ -615,11 +615,6 @@
         "number": 452,
         "title": "SEO: sync eight KILLKLAN music links in lab catalog",
         "sha": "6db5b3070a92e2b326cd3d823027a363deb4232a"
-      },
-      {
-        "number": 451,
-        "title": "SEO: KILLKLAN artist metadata and crawlable discography",
-        "sha": "615ea4e88f4c9e7c043c8f6e0e9794023418e4aa"
       },
       {
         "number": 439,
@@ -1537,7 +1532,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3571,
+      "count": 3579,
       "folders": "нет данных"
     },
     "mg": {

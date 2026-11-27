@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-26T23:21:07.963Z",
+  "generated_at": "2026-11-27T09:08:01.785Z",
   "sha": {
-    "lab": "5e70427eb2c2aec713b33d4ca8a4bc034bb9010a",
+    "lab": "95f4d022e4575779c374496ff4323dc9732735f0",
     "mg": "ca77c011d31cb4814b418007d77f34b6ebbf6a22"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45910280863",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/45970946577",
   "review": {
     "protected": [
       {
@@ -435,13 +435,18 @@
     "redLab": [
       {
         "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45908867255",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45968600527",
         "step": "Run node scripts/dispetcher/run.mjs"
       },
       {
         "workflow": "LAB Pages",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45844614527",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45915565516",
         "step": "Check published public URLs"
+      },
+      {
+        "workflow": "Link Guard 200",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45915027904",
+        "step": "Diagnose URLs still failing"
       },
       {
         "workflow": "META BOT",
@@ -1532,7 +1537,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3569,
+      "count": 3571,
       "folders": "нет данных"
     },
     "mg": {

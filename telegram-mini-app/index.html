@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080c14">
+<title>META GAMES — Telegram</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#080c14;color:#f0e8d7;font:15px system-ui,sans-serif;overscroll-behavior:none}body{min-height:100dvh}button,a{font:inherit;color:inherit}button{cursor:pointer}#catalog{max-width:760px;margin:auto;padding:calc(max(env(safe-area-inset-top),var(--tg-content-safe-area-inset-top,0px)) + 20px) 18px calc(30px + env(safe-area-inset-bottom))}header{display:flex;justify-content:space-between;align-items:center;gap:8px}.mark{letter-spacing:.28em;font-size:12px;color:#e8c998}.hero{position:relative;isolation:isolate;overflow:hidden;min-height:230px;padding:34px 18px 24px;margin:18px 0;border:1px solid #ab997b44;border-radius:24px;background:radial-gradient(ellipse at 72% 34%,#36495d,#101b30 42%,#080c14 80%)}.hero:before{content:"";position:absolute;z-index:-1;width:180px;height:180px;border-radius:50%;right:5%;top:3%;border:1px solid #e8c998b0;box-shadow:0 0 45px #e8c99833,inset 0 0 30px #e8c99822;animation:glow 5s ease-in-out infinite}.hero h1{font-size:clamp(40px,10vw,68px);line-height:.9;letter-spacing:-.06em;margin:18px 0}.hero p{color:#b7c4d6;max-width:280px}.btn{border:1px solid #d8b87977;background:#152133;border-radius:12px;padding:11px 15px;color:#f0e8d7}.primary{background:#e8c998;color:#131822;border-color:#e8c998;font-weight:800}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px}.tile{min-height:156px;position:relative;isolation:isolate;overflow:hidden;border:1px solid #61708755;border-radius:18px;background:radial-gradient(circle at 75% 20%,var(--accent),#17263b 30%,#080c14 78%);text-align:left;padding:14px;display:flex;flex-direction:column;justify-content:end;gap:8px}.tile:before{content:"";position:absolute;z-index:-1;right:14%;top:10%;width:55px;height:55px;border-radius:50%;border:1px solid #fff6;box-shadow:0 0 24px var(--accent)}.tile:after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(transparent 20%,#080c14e8 83%);pointer-events:none}.tile strong{font-size:18px;line-height:1.15}.tile small{color:#e8c998;font-size:12px}#stage{position:fixed;inset:0;display:flex;flex-direction:column;background:#080c14;padding-top:max(env(safe-area-inset-top),var(--tg-content-safe-area-inset-top,0px));padding-bottom:max(env(safe-area-inset-bottom),var(--tg-content-safe-area-inset-bottom,0px));padding-left:max(env(safe-area-inset-left),var(--tg-content-safe-area-inset-left,0px));padding-right:max(env(safe-area-inset-right),var(--tg-content-safe-area-inset-right,0px));height:var(--tg-viewport-stable-height,100dvh)}[hidden]{display:none!important}#bar{display:flex;gap:8px;align-items:center;padding:6px;min-height:44px}#gameName{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}#frame{width:100%;flex:1;min-height:0;border:0;background:#080c14}#loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:14px 20px;background:#111c2e;border-radius:12px;pointer-events:none}#status{color:#9baec5;font-size:12px;margin:14px 0}a:focus-visible,button:focus-visible{outline:2px solid #e8c998;outline-offset:3px}@keyframes glow{50%{opacity:.55;transform:scale(1.06)}}@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<main id="catalog"><header><strong class="mark">◇ META GAMES</strong><button class="btn" id="full">⛶ Экран</button></header>
+<section class="hero"><div class="mark">ВСЕЛЕННАЯ СНОВ</div><h1>META<br>GAMES</h1><p>Один портал. Одиннадцать живых миров.</p><button id="resume" class="btn primary">▶ Играть</button></section>
+<div class="grid" id="grid"></div><div id="status" role="status">Игры запускаются без установки.</div></main>
+<section id="stage" hidden aria-label="Игра"><div id="bar"><button class="btn" id="back" aria-label="Вернуться в каталог">‹ Игры</button><strong id="gameName"></strong><button class="btn" id="reload" aria-label="Перезапустить игру">↻</button></div><iframe id="frame" title="Игра META GAMES" allow="fullscreen; autoplay; gamepad" allowfullscreen referrerpolicy="no-referrer"></iframe><div id="loading" role="status" hidden>Открываю мир…</div></section>
+<script>
+'use strict';
+const games=[
+['seed','Twilight and Ash II','../games/sumerki-i-pepel-2/','#b28458'],
+['island','Twilight Island','../observer-world-en-v7/','#608eb8'],
+['ash','Ashen Path','../ashen-sumerek/','#a65b51'],
+['underwater','Underwater World','../underwater-world/','#2d8b9b'],
+['worlds','Three Worlds','../three-worlds-game/','#8b79ad'],
+['veil','Veil Terraces','../games/veil-terraces/','#679e9b'],
+['classic','Twilight Isle Classic','../games/twilight-isle-classic/','#8197ba'],
+['isles','Twilight Isles','../games/twilight-isles/','#4386a7'],
+['archer','Archer in the Fog','../games/archer-in-the-fog/','#7596b6'],
+['city','Broken City','../games/broken-city/','#876e9f'],
+['train','Wild Train: Prologue','../games/wild-train-prologue/','#c18a54']];
+const el=id=>document.getElementById(id), tg=window.Telegram?.WebApp, inTG=!!tg?.initData, supported=v=>inTG&&tg.isVersionAtLeast(v);
+const catalog=el('catalog'),stage=el('stage'),frame=el('frame'),loading=el('loading'),resume=el('resume');let current=null,last='seed',timer=0,selectionMade=false;
+try{const stored=localStorage.getItem('meta_tg_last_game');if(games.some(g=>g[0]===stored))last=stored}catch{}
+function updateResume(){resume.textContent='▶ '+(last==='seed'?'Играть':('Продолжить: '+games.find(g=>g[0]===last)[1]));}
+function full(){try{if(supported('8.0'))tg.requestFullscreen();else if(inTG)tg.expand();else if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else el('status').textContent='На этом устройстве доступен обычный режим.'}catch{}}
+function save(id){selectionMade=true;last=id;updateResume();try{localStorage.setItem('meta_tg_last_game',id)}catch{}if(supported('6.9'))tg.CloudStorage.setItem('meta_last_game',id,()=>{});}
+function openGame(id){const game=games.find(g=>g[0]===id);if(!game)return;current=game;save(id);catalog.hidden=true;stage.hidden=false;el('gameName').textContent=game[1];frame.title=game[1];loading.hidden=false;clearTimeout(timer);timer=setTimeout(()=>{loading.hidden=true},12000);frame.src=new URL(game[2],location.href).href;if(inTG){tg.BackButton.show();if(supported('7.7'))tg.disableVerticalSwipes();if(supported('6.2'))tg.enableClosingConfirmation();if(supported('6.1'))tg.HapticFeedback.impactOccurred('light');tg.expand();}}
+function closeGame(){current=null;clearTimeout(timer);loading.hidden=true;frame.src='about:blank';stage.hidden=true;catalog.hidden=false;if(inTG){tg.BackButton.hide();if(supported('7.7'))tg.enableVerticalSwipes();if(supported('6.2'))tg.disableClosingConfirmation();}window.scrollTo(0,0)}
+frame.addEventListener('load',()=>{if(current){clearTimeout(timer);loading.hidden=true}});
+el('back').onclick=closeGame;el('reload').onclick=()=>{if(current)openGame(current[0])};el('full').onclick=full;resume.onclick=()=>{full();openGame(last)};
+for(const g of games){const b=document.createElement('button');b.className='tile';b.style.setProperty('--accent',g[3]);const title=document.createElement('strong'),tag=document.createElement('small');title.textContent=g[1];tag.textContent='▶ Играть';b.append(title,tag);b.onclick=()=>{full();openGame(g[0])};el('grid').append(b)}
+updateResume();
+if(inTG){tg.ready();tg.expand();tg.BackButton.onClick(closeGame);if(supported('6.1')){tg.setHeaderColor('bg_color');tg.setBackgroundColor('#080c14')}el('status').textContent='Telegram Mini App · без установки';if(supported('6.9'))tg.CloudStorage.getItem('meta_last_game',(err,id)=>{if(!err&&!selectionMade&&games.some(g=>g[0]===id)){last=id;updateResume()}});const start=tg.initDataUnsafe?.start_param;if(games.some(g=>g[0]===start))openGame(start);}
+</script></body></html>

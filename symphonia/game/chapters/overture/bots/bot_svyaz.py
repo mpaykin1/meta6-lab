@@ -3,6 +3,8 @@ import base64, json, os, pathlib, threading, functools
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlsplit, parse_qs, quote
 from playwright.sync_api import sync_playwright
+from contextlib import contextmanager
+from importlib.metadata import version
 ROOT=pathlib.Path(__file__).resolve().parents[5]
 class Handler(SimpleHTTPRequestHandler):
     def log_message(self,*args): pass
@@ -16,10 +18,26 @@ os.makedirs('shots',exist_ok=True)
 def check(cond,label):
     if not cond: raise AssertionError(label)
     print('OK',label,flush=True)
-def context(browser):
+@contextmanager
+def context(browser,label):
     c=browser.new_context(viewport={'width':390,'height':844},device_scale_factor=1,is_mobile=True,has_touch=True)
     c.add_init_script('window.t=1;window.P=2;window.g=3;window.W=4;window.H=5;window.S=6;window.R=7;')
-    return c
+    c.tracing.start(screenshots=True,snapshots=True,sources=True)
+    try:
+        yield c
+    except Exception:
+        print('FAILED STAGE',label,flush=True)
+        for pg in c.pages:
+            try:
+                print('STATE',pg.evaluate("""()=>({url:location.href,mode:window.__A?.G?.mode,played:window.__A?.SAVE?.played,menu:document.getElementById('menu')?.className,z23:window.__A?.z23?.()||window.__bot?.z23?.(),adagio:window.__bot?.s,hit:document.elementFromPoint(innerWidth/2,innerHeight/2)?.id})"""),flush=True)
+                pg.screenshot(path=f'shots/z23_{label}_failure.png',timeout=5000)
+            except Exception as e: print('Snapshot unavailable',str(e),flush=True)
+        c.tracing.stop(path=f'shots/z23_{label}_trace.zip')
+        raise
+    else:
+        c.tracing.stop()
+    finally:
+        c.close()
 def page(c):
     pg=c.new_page();errors=[];nav=[]
     pg.on('pageerror',lambda e:errors.append(str(e)))
@@ -31,15 +49,17 @@ def nit(pg):
     return pg.evaluate("JSON.parse(localStorage.getItem('mg_nit_v1')||'null')")
 def start_overture(pg):
     wait(pg,'window.__A && window.__A.z23')
-    if not pg.evaluate('window.__A.SAVE.played'):
-        wait(pg,"window.__A.G.mode==='play'",30000)
-    else:
-        pg.locator('#bPlay').click(timeout=30000)
-        wait(pg,"window.__A.G.mode==='play'",30000)
+    # SAVE.played is set by startGame itself, so it cannot identify whether this page was auto-started.
+    # Read mode and save together. An already running game must not click a hidden menu.
+    startup=pg.evaluate('()=>({mode:window.__A.G.mode,played:!!window.__A.SAVE.played})')
+    print('OVERTURE START',startup,flush=True)
+    if startup['mode']=='menu' and startup['played']:
+        pg.locator('#menu:not(.hide) #bPlay').click(timeout=30000)
+    wait(pg,"window.__A.G.mode==='play' && document.getElementById('menu').classList.contains('hide')",30000)
     # Actual user gesture also unlocks WebAudio for a new session.
     pg.locator('#c').tap(position={'x':12,'y':180})
 def smoke(browser,name):
-    with context(browser) as c:
+    with context(browser,name+'_clean') as c:
         pg,err,_=page(c)
         pg.goto(OVER+'#bot',timeout=90000)
         wait(pg,'window.__A && window.__A.z23')
@@ -53,7 +73,7 @@ def smoke(browser,name):
         check(not pg.evaluate('window.__bot.z23().feathers'),name+' clean adagio')
         check(not err,name+' clean JS '+str(err))
 def linked(browser):
-    with context(browser) as c:
+    with context(browser,'Chromium_linked') as c:
         pg,err,nav=page(c)
         pg.goto(OVER+'?nit='+token+'#bot',timeout=90000)
         wait(pg,'window.__A && window.__A.z23')
@@ -106,6 +126,7 @@ def linked(browser):
         pg.screenshot(path='shots/z23_circle2.png')
         check(not err,'linked JS '+str(err))
 try:
+    print('Playwright',version('playwright'),flush=True)
     with sync_playwright() as p:
         b=p.chromium.launch(args=['--use-gl=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required'])
         smoke(b,'Chromium');linked(b);b.close()

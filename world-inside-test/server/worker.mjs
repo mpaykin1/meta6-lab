@@ -2,16 +2,26 @@ const enc=new TextEncoder(), origin='https://mpaykin1.github.io';
 const kinds=new Set(['project','offer','request','event','promo','mentor']);
 const roles=new Set(['','Творец','Визионер','Исследователь','Наставник','Организатор','Стратег','Объединитель']);
 const str=(v,n)=>typeof v==='string'?v.trim().slice(0,n):'';
-async function auth(raw,token){
- if(!raw||raw.length>16384||!token)return null;
+async function auth(raw,token,botId){
+ if(!raw||raw.length>16384||(!token&&!botId))return null;
  const p=new URLSearchParams(raw),hash=p.get('hash');if(!/^[0-9a-f]{64}$/.test(hash||''))return null;
  const pairs=[...p.entries()].filter(([k])=>k!=='hash');if(new Set(pairs.map(([k])=>k)).size!==pairs.length)return null;
  const ts=Number(p.get('auth_date')),now=Math.floor(Date.now()/1000);if(!Number.isFinite(ts)||ts>now+60||now-ts>86400)return null;
+ if(botId){
+ const sig=p.get('signature');if(!/^[A-Za-z0-9_-]{86}={0,2}$/.test(sig||''))return null;
+ const b64=sig.replace(/-/g,'+').replace(/_/g,'/').replace(/=+$/,'');
+ const signature=Uint8Array.from(atob(b64+'='.repeat((4-b64.length%4)%4)),x=>x.charCodeAt(0));
+ const pub=Uint8Array.from('e7bf03a2fa4602af4580703d88dda5bb59f32ed8b02a56c187fe7d34caed242d'.match(/../g),x=>parseInt(x,16));
+ const key=await crypto.subtle.importKey('raw',pub,{name:'Ed25519'},false,['verify']);
+ const msg=botId+':WebAppData\n'+pairs.filter(([k])=>k!=='signature').sort(([a],[b])=>a<b?-1:a>b?1:0).map(([k,v])=>k+'='+v).join('\n');
+ if(!await crypto.subtle.verify('Ed25519',key,signature,enc.encode(msg)))return null;
+ }else{
  const k=await crypto.subtle.importKey('raw',enc.encode('WebAppData'),{name:'HMAC',hash:'SHA-256'},false,['sign']);
  const secret=await crypto.subtle.sign('HMAC',k,enc.encode(token));
  const key=await crypto.subtle.importKey('raw',secret,{name:'HMAC',hash:'SHA-256'},false,['verify']);
  const msg=pairs.sort(([a],[b])=>a<b?-1:a>b?1:0).map(([k,v])=>k+'='+v).join('\n');
  const sig=Uint8Array.from(hash.match(/../g),x=>parseInt(x,16));if(!await crypto.subtle.verify('HMAC',key,sig,enc.encode(msg)))return null;
+ }
  try{const u=JSON.parse(p.get('user'));return Number.isSafeInteger(u.id)&&u.id>0?{id:String(u.id),username:/^[A-Za-z0-9_]{5,32}$/.test(u.username||'')?u.username:''}:null}catch{return null}
 }
 export default {async fetch(req,env){
@@ -21,8 +31,8 @@ export default {async fetch(req,env){
  if(o&&o!==origin)return json({error:'origin'},403);
  if(req.method==='OPTIONS')return new Response(null,{status:204,headers});
  const url=new URL(req.url),path=url.pathname.replace(/\/$/,'');
- if(path==='/health')return json({ok:true});
- const u=await auth(req.headers.get('X-Telegram-Init-Data'),env.BOT_TOKEN);if(!u)return json({error:'auth'},401);
+ if(path==='/health'){await env.DB.prepare('SELECT 1 FROM members LIMIT 1').first();return json({ok:true,authReady:!!(env.BOT_TOKEN||env.BOT_ID)})}
+ const u=await auth(req.headers.get('X-Telegram-Init-Data'),env.BOT_TOKEN,env.BOT_ID);if(!u)return json({error:'auth'},401);
  const db=env.DB;const q=(s,...a)=>db.prepare(s).bind(...a);
  const admin=(env.ADMIN_IDS||'').split(',').map(x=>x.trim()).includes(u.id);
  try{

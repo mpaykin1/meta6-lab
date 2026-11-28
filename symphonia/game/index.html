@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Адажио</title>
+<link rel="modulepreload" href="./shared/nit.js">
+<link rel="modulepreload" href="./shared/adagio-link.js">
+<link rel="modulepreload" href="./shared/dragon-horns.js">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
 /* VOICE: тихий, траурный, призрачный
@@ -43,9 +46,10 @@ html,body{margin:0;height:100%;background:#07080a;overflow:hidden;touch-action:n
 #start h1{font-weight:500;font-size:clamp(46px,9vw,96px);letter-spacing:.06em;margin:0;color:#efe4cb;text-shadow:0 0 30px rgba(216,182,115,.35)}
 #play{margin-top:26px;width:86px;height:86px;border-radius:50%;border:1px solid rgba(216,182,115,.6);background:none;color:var(--gold);display:inline-grid;place-items:center}
 #play svg{width:34px;height:34px;fill:currentColor;margin-left:5px}
+#play{touch-action:manipulation;cursor:pointer}#bootStatus{margin:12px auto 0;max-width:min(85vw,360px);min-height:1.5em;font:15px system-ui,sans-serif;line-height:1.4;color:var(--gold)}
 #load{margin-top:16px;height:2px;width:160px;background:rgba(216,182,115,.15);display:inline-block}
 #load i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
-#end{display:none;background:rgba(4,4,6,.94)}
+#end{display:none;background:rgba(4,4,6,.94);overflow:auto;touch-action:pan-y;align-items:start}
 #end div{max-width:560px;padding:24px;font-size:clamp(18px,2.4vw,23px);line-height:1.55;font-style:italic}
 #end p{opacity:0;transition:opacity 1.6s;margin:0 0 12px}
 #again{margin-top:20px;opacity:0;transition:opacity 1s}
@@ -62,12 +66,33 @@ html,body{margin:0;height:100%;background:#07080a;overflow:hidden;touch-action:n
 <button id="menuB" class="btn" aria-label="Меню"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 <div id="menu"></div>
 <div id="fade"></div>
-<div id="start"><div><h1>Адажио</h1><button id="play" aria-label="Играть"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></button><br><span id="load"><i></i></span></div></div>
+<div id="start"><div><h1>Адажио</h1><button id="play" aria-label="Играть"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></button><br><span id="load"><i></i></span><div id="bootStatus" role="status" aria-live="polite">Загрузка усадьбы…</div></div></div>
 <div id="end"><div id="story"></div></div>
 
+<script>
+(function(){
+ const btn=document.getElementById('play'),status=document.getElementById('bootStatus');
+ let failed=false;
+ window.adagioBoot={ready:false,failed:false,queued:false,originalURL:location.href,
+  say:function(t){status.textContent=t;},
+  fail:function(t){failed=true;this.failed=true;status.textContent=t+' Нажмите Play для повторной загрузки.';btn.setAttribute('aria-label','Повторить загрузку');}};
+ btn.addEventListener('click',function(e){if(failed){e.stopImmediatePropagation();location.assign(window.adagioBoot.originalURL);return;}if(!window.adagioBoot.ready){window.adagioBoot.queued=true;status.textContent='Готовим сцену…';}});
+ addEventListener('error',function(e){if(!window.adagioBoot.ready&&e.message)window.adagioBoot.fail('Ошибка запуска: '+String(e.message).slice(0,120));});
+ addEventListener('unhandledrejection',function(e){if(!window.adagioBoot.ready)window.adagioBoot.fail('Ошибка загрузки ресурсов.');});
+ setTimeout(function(){if(!window.adagioBoot.ready&&!failed)window.adagioBoot.fail('Не удалось завершить запуск.');},90000);
+})();
+</script>
 <script type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js';
+import {createAdagioLink} from './shared/adagio-link.js';
+import {Nit} from './shared/nit.js';
+import {advanceCinematic} from './shared/cinematic-clock.js';
+import {HORN_COLOR,headSocket,attachDragonHorns} from './shared/dragon-horns.js';
 {
+const z23Link=createAdagioLink(THREE);
+const z23Losses=Math.min(5,Nit.read().luchnik.porazheniya);let z23MazeWorld=null;
+const z23MazeFog=(base)=>z23MazeWorld?z23MazeWorld.fog(player.p.x,player.p.z,now,base):base;
+const z23YardFog=.028+.004*z23Losses;
 const $=id=>document.getElementById(id);
 const isTouch=matchMedia('(pointer:coarse)').matches||'ontouchstart' in window;
 if(isTouch)document.body.classList.add('touch');
@@ -184,7 +209,7 @@ function audioInit(){
   const gn=AC.createBufferSource();gn.buffer=NB;gn.loop=true;const gf=AC.createBiquadFilter();gf.type='lowpass';gf.frequency.value=220;const go=AC.createOscillator();go.type='sawtooth';go.frequency.value=46;const gof=AC.createBiquadFilter();gof.type='lowpass';gof.frequency.value=160;
   growlG=AC.createGain();growlG.gain.value=0;gn.connect(gf);gf.connect(growlG);go.connect(gof);gof.connect(growlG);growlG.connect(master);gn.start();go.start();
 }
-function unlockAudio(){audioInit();if(!AC)return;if(AC.state!=='running')AC.resume();
+function unlockAudio(){try{audioInit();}catch(e){console.warn('Audio initialization',e);try{AC?.close()?.catch(()=>{});}catch{}AC=null;return;}if(!AC)return;if(AC.state!=='running')AC.resume().catch(()=>{});
   if(!window.__silent){const a=document.createElement('audio');a.loop=true;a.setAttribute('playsinline','');a.src=silentWav();a.volume=.01;a.play().catch(()=>{});window.__silent=a;}}
 function silentWav(){const n=8000,b=new ArrayBuffer(44+n*2),v=new DataView(b);const s=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i));};
   s(0,'RIFF');v.setUint32(4,36+n*2,true);s(8,'WAVE');s(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,8000,true);v.setUint32(28,16000,true);v.setUint16(32,2,true);v.setUint16(34,16,true);s(36,'data');v.setUint32(40,n*2,true);
@@ -494,7 +519,7 @@ function aimTick(dt){
   if(ey>0&&Math.sign(-joyRV.y)===Math.sign(aim.y))pitchT=clamp(pitchT+Math.sign(aim.y)*Math.min(1,ey/.2)*(.7+1.2*Math.abs(joyRV.y))*dt,-1.1,1.1);}
 
 /* ---------- state ---------- */
-let state='load',now=0,circle=1,lives=3,H_=1,wave=0,silence=false,score=0;
+let state='load',now=0,circle=Math.max(1,Nit.read().adagio.krug||1),lives=3,H_=1,wave=0,silence=false,score=0;
 /* оружие — объёмные модели владельца (sprite stacking). Стрелы у арбалетов — настоящие, летят из ложа */
 const WPN=[
  {n:'arb1',t:'Костяной арбалет',d:'Оружие 1: тяжёлая стрела, бьёт точно.',cd:.5,proj:'arrow',sp:[0],len:.78,pos:[.13,-.36,-.78]},
@@ -539,7 +564,9 @@ function renderMenu(){
   if(window.__seenV)h+='<p><b>Он</b> — приходит в тишине. Боится музыки.</p>';
   if(lastScare>0)h+='<p><b>Она</b> — иногда оборачивается. Не всегда. Догадайся, почему.</p>';
   const it=unlocked.items.filter(k=>ITEMS[k]);if(it.length){h+='<h3>Предметы</h3>';it.forEach(k=>{h+=`<p><b>${ITEMS[k].t}</b> — ${ITEMS[k].d}</p>`;});}
-  if(deaths>0)h+=`<h3>Лабиринт</h3><p>Колец: ${Math.min(9,1+deaths)}. Каждая гибель от Вендиго — ещё кольцо, победа над ним — кольцо назад. Иди на её музыку: ближе к дому она громче и чище, в тупике обрывается. Фонари вспыхивают в сторону дома, ворона садится на верную развилку, ангел показывает путь. В окне ложного дома мелькает страшное лицо. Медвежонок — светит путь, кукла — уводит монстров, лошадка — бег, солдатик — стреляет, фонарик — меньше тумана, ящик — оружие или свеча, фонтан — свеча, зеркало — путь, качели и беседка — укрытие, часы — монстры рядом медленнее.${mzFound.length?' Найдено: '+mzFound.length+'.':''}</p>`;
+  if(z23Link.available)h+='<h3>Синие перья</h3><p>'+ (z23Link.owned?'Первый выстрел из арбалета в каждой волне получает одну дополнительную стрелу.':'Найди синие перья в зале и приблизься, глядя на них.')+'</p>';
+  if(z23Losses)h+='<h3>Память тумана</h3><p>Поражения в башнях меняют сад и сгущают туман.</p>';
+  if(deaths>0||z23Losses)h+=`<h3>Лабиринт</h3><p>У двери уже осмотренного ложного дома можно укрыться от чудовищ. Колец: ${Math.min(9,1+deaths)}. Каждая гибель от Вендиго — ещё кольцо, победа над ним — кольцо назад. Иди на её музыку: ближе к дому она громче и чище, в тупике обрывается. Фонари вспыхивают в сторону дома, ворона садится на верную развилку, ангел показывает путь. В окне ложного дома мелькает страшное лицо. Медвежонок — светит путь, кукла — уводит монстров, лошадка — бег, солдатик — стреляет, фонарик — меньше тумана, ящик — оружие или свеча, фонтан — свеча, зеркало — путь, качели и беседка — укрытие, часы — монстры рядом медленнее.${mzFound.length?' Найдено: '+mzFound.length+'.':''}</p>`;
   h+=`<h3>Музыка</h3><p>Сейчас звучит: <b>${GN[MUS.g]}${MUS.g==='syuita'?' — '+DANCES[MUS.dance%4].n:''}</b>. Её диктует то, что происходит: враги, твои попадания и промахи, раны рояля, его шаги.</p>`;
   h+=`<h3>Круг ${circle}</h3><p>${isTouch?'Левая половина экрана — джойстик, идти. Правая — джойстик прицела; короткий тап справа — выстрел, у пулемёта держи палец. Прицел у края экрана поворачивает взгляд. Оружие меняется, только если подобрать его в зале.':'WASD — идти, мышь — прицел в любую точку, у края экрана — поворот, правая кнопка — осмотреться, клик — выстрел, держи клик — очередь. Оружие меняется, только если подобрать его в зале.'}</p><div class="row"><button id="mSnd">${AC&&master&&master.gain.value<.1?'Звук: выкл':'Звук: вкл'}</button><button id="mBack">Продолжить</button></div>`;
   $('menu').innerHTML=h;
@@ -550,7 +577,11 @@ $('menuB').addEventListener('click',()=>{const m=$('menu');const open=m.style.di
 
 /* ---------- sprite stacking: объёмные модели из срезов (меш строится по срезам владельца) ---------- */
 const imgs={};
-function loadImg(src){return new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=()=>rej(new Error('img '+src));im.src=src;});}
+async function loadImg(src){
+ let last;for(let attempt=0;attempt<2;attempt++){
+  try{return await new Promise((res,rej)=>{const im=new Image();const timer=setTimeout(()=>{im.onload=im.onerror=null;rej(new Error('timeout '+src));},15000);im.onload=()=>{clearTimeout(timer);res(im);};im.onerror=()=>{clearTimeout(timer);rej(new Error('img '+src));};im.src=src;});}catch(e){last=e;}
+ }throw last;
+}
 /* объёмная модель из слоёв (sprite stacking). Верх и низ слоёв склеиваются в прямоугольники по двум осям — картинка та же до пикселя, треугольников меньше */
 function stackGeo(a,im,k=1){const {nx,nz,ny:NY,s,cols}=a;const cv=document.createElement('canvas');cv.width=im.width;cv.height=im.height;const ctx=cv.getContext('2d',{willReadFrequently:true});ctx.drawImage(im,0,0);const rgba=ctx.getImageData(0,0,im.width,im.height).data;
   // k=1 — полная модель; k=2 — дальняя копия: берётся каждый второй слой двойной толщины (цвета и силуэт те же, видна только издалека, в тумане)
@@ -726,6 +757,7 @@ function buildHall(){
   for(const [x,z] of [[-2.5,6],[2.8,-1],[-1.5,-8],[2.2,-15],[-2.6,-20]])D('tuman',{n:'tuman',h:.85,x,y:-.05,z,lit:.2});
   DEC.oknoG=[glow(s,-6.1,2.9,-7,4.5,0xfff0c8,0,1)];DEC.lyG=[glow(s,0,LY.y+1.2,-4.5,3,0xffe0a0,0,1)];
   hallObj.zerkV=spr(s,'zerkalo_v',{h:4.6,x:0,y:.25,z:-23.7,bill:false,op:0,lit:.4});
+  z23Link.mount(s,arrowModel);
 }
 const FIN={on:false,lift:0,fade:1};
 function hallTick(dt){
@@ -793,7 +825,7 @@ function fire(){
   if(!PLAY())return;if(wCd>0||$('menu').style.display==='block'||!wGrp)return;
   const WP=WPN[wI];wCd=WP.cd;recoil=WP.auto?.5:1;S.shot(WP.proj);
   muzzleWorld(mzz);
-  for(const a of WP.sp){
+  for(const a of z23Link.spread(WP,state==='hall'&&waveState==='run'&&!finale)){
     aimRay(a);
     let best=null,bd=60,bv=false;const rr0=isTouch?1.0:.8;const hits=[];
     for(const b of blobs){if(b.dead||b.biting>0)continue;const rr=rr0*(has('pyl')&&b.p.distanceTo(PIAN)<4.5?1.6:1);const d=ray.distanceToPoint(b.p);const t=tmp.copy(b.p).sub(cam.position).dot(fwd);if(t>0&&d<rr*(WP.proj==='pellet'?1.25:1)){if(WP.pierce)hits.push(b);else if(t<bd){bd=t;best=b;}}}
@@ -853,7 +885,7 @@ function screamer(){state='hall';atk={t:0};S.scream();
 /* ---------- волны ---------- */
 const REWARD=['kandel','arb2','chasy','drob','statuya','pulemet','arb0','zerkalo'];
 const REWARD2=['pyl','arki','shtora','lyustra','vorona','okno','tuman'];
-function startWave(){MUS.swell=1;waveT0=now;if(has('okno'))musEvent('wave');if(DEC.lyustra&&!LY.ok){LY={ok:true,fall:0,y:5.6};DEC.lyustra[0].mesh.position.y=LY.y;if(has('lyustra'))DEC.lyustra[0].tgt=1;}wave++;waveState='run';waveLeft=Math.round(4+wave*1.5+(circle-1)*3);spawnT=1.5;hitThisWave=false;}
+function startWave(){MUS.swell=1;waveT0=now;if(has('okno'))musEvent('wave');if(DEC.lyustra&&!LY.ok){LY={ok:true,fall:0,y:5.6};DEC.lyustra[0].mesh.position.y=LY.y;if(has('lyustra'))DEC.lyustra[0].tgt=1;}wave++;z23Link.nextWave();waveState='run';waveLeft=Math.round(4+wave*1.5+(circle-1)*3);spawnT=1.5;hitThisWave=false;}
 function giveW(n,txt){const i=WPN.findIndex(w=>w.n===n);unlocked.w[i]=true;msg(txt+' — подбери его в зале');}
 function reward(k){unlocked.items.push(k);
   if(k==='kandel'){hallObj.kandel.forEach(o=>o.fadeIn=1);msg('Открыто: канделябры — сгустки у огня замедляются');}
@@ -912,13 +944,13 @@ function setupTalk(){TALK.length=0;const P=(x,z)=>({p:new THREE.Vector3(x,1.78,z
   TALK.push({id:'ka',r:3,o:()=>scene===scHall&&sp(hallObj.kandel[0]),s:'Свечи она зажигает сама. Мне спички не даёт. Почему?'});}
 
 /* ---------- сцены ---------- */
-function enterExt(){MUS.extT=0;MUS.force={g:'uvertyura',tr:null};scene=scExt;state='ext';player.p.set(0,1.78,11.5);yaw=yawT=0;pitch=pitchT=.06;G.uFogC.value.set(0x3d3f41);G.uFogD.value=.028;G.uMix.value=0;
+function enterExt(){MUS.extT=0;MUS.force={g:'uvertyura',tr:null};scene=scExt;state='ext';player.p.set(0,1.78,11.5);yaw=yawT=0;pitch=pitchT=.06;G.uFogC.value.set(0x3d3f41);G.uFogD.value=z23YardFog;G.uMix.value=0;
   setFade(0,2200);musicOn=true;if(AC){musicLP.frequency.setTargetAtTime(650,AC.currentTime,.3);windG.gain.setTargetAtTime(.12,AC.currentTime,1);}
   setTimeout(()=>cap('Я должен охранять её музыку.',5200),1800);lastInput=now;}
 let hallVisited=false,hallStash=[],hallT=0,yT=3;const WINP=new THREE.Vector3(0,7.3,-31);
 function exitToYard(){state='trans';setFade(1,700);S.door();
   setTimeout(()=>{hallStash=blobs.splice(0);scene=scExt;state='ext';MUS.extT=99;MUS.force={g:'*',tr:'odin'};player.p.set(0,1.78,-29.4);yaw=yawT=Math.PI;pitch=pitchT=.04;
-    G.uFogC.value.set(0x3d3f41);G.uFogD.value=.028;G.uMix.value=0;yT=2;
+    G.uFogC.value.set(0x3d3f41);G.uFogD.value=z23YardFog;G.uMix.value=0;yT=2;
     if(AC){musicLP.frequency.setTargetAtTime(650,AC.currentTime,.4);windG.gain.setTargetAtTime(.12,AC.currentTime,1);}setFade(0,1200);lastInput=now;},750);}
 function yardTick(dt){if(!hallVisited||finale>=1)return;
   yT-=dt;if(yT<=0&&blobs.length<2+circle){yT=R(2.5,5);const sd=rnd()<.5?-1:1;const p=new THREE.Vector3(sd*R(3,5.6),R(2,6),clamp(player.p.z+R(-6,6),-26,10));
@@ -941,12 +973,14 @@ function enterHall(){state='trans';MUS.force=hallVisited?{g:'*',tr:'rastvor'}:{g
 
 /* ---------- финал ---------- */
 const STORY=['Мне было семь, когда мама впервые заиграла адажио ночью.','Отец вернулся с охоты другим: с ветками в волосах и красными глазами. Он стоял под окном до рассвета и слушал.','Утром он снова был отцом. Мама больше никогда не давала мне спичек.','Я вырос. Я женился на пианистке. В первую же зиму я ушёл в лес — и вернулся с ветками в волосах.','Теперь она играет для меня. Каждую ночь.','А я каждую ночь думаю, что охраняю её музыку от чудовища.','Но её музыка охраняет мир от меня.','В ту ночь я вырос выше потолка, и стены не выдержали.','Она поднялась над обломками, легко, как в детстве на качелях, и сказала: «Спасибо. Ты меня отпустил».'];
-function showEnd(){state='end';setFade(1,1500);setTimeout(()=>{const e=$('end');e.style.display='grid';const st=$('story');
-  st.innerHTML=STORY.map(s=>`<p>${s}</p>`).join('')+`<button id="again" class="btn" style="position:static;margin:20px auto 0" aria-label="Следующий круг"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></button>`;
-  [...st.querySelectorAll('p')].forEach((p,i)=>setTimeout(()=>p.style.opacity=1,600+i*1900));setTimeout(()=>$('again').style.opacity=1,600+STORY.length*1900);
-  $('again').onclick=()=>{e.style.display='none';nextCircle();};},1600);}
-function finClear(){if(hallObj.giant){killVen(hallObj.giant);hallObj.giant=null;}FIN.on=false;FIN.lift=0;FIN.fade=1;shakeT=0;}
-function nextCircle(){finClear();angelB=0;hallVisited=false;hallStash=[];circle++;musEvent('circle');wave=0;lives=3;drawLives();H_=1;silence=false;if(ven&&ven.o)killVen(ven.o);ven=null;finale=0;talked={};blobs.length=0;
+function showEnd(){const history=Nit.read().luchnik;const story=history.pobedy?[...STORY,'Я вспомнил башни, с которых падал в синий туман. Рога в зеркале — те самые, что я видел в падении.','Я думал, дракон не пускал меня к ней. Теперь я понял: это она звала его своей музыкой.']:STORY;state='end';setFade(1,1500);setTimeout(()=>{const e=$('end');e.style.display='grid';const st=$('story');
+  st.innerHTML=story.map(s=>`<p>${s}</p>`).join('')+`<button id="again" class="btn" style="position:static;margin:20px auto 0" aria-label="Следующий круг"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></button>`;
+  [...st.querySelectorAll('p')].forEach((p,i)=>setTimeout(()=>p.style.opacity=1,600+i*1900));setTimeout(()=>$('again').style.opacity=1,600+story.length*1900);
+  $('again').onclick=()=>{e.style.display='none';nextCircle();};
+  if(history.pobedy||history.porazheniya||history.perya){const back=document.createElement('button');back.className='btn';back.style.cssText='position:static;margin:20px auto 0;opacity:0';back.setAttribute('aria-label','Вернуться в Увертюру · следующий круг');back.innerHTML='<svg viewBox="0 0 24 24"><path d="M12 3 3 12h6v9h6v-9h6z"/></svg>';back.disabled=true;st.appendChild(back);setTimeout(()=>{back.style.opacity=1;back.disabled=false;},600+story.length*1900);back.onclick=()=>{back.disabled=true;z23Link.circle(circle+1);const url=new URL('chapters/overture/',location.href);const token=Nit.encode();if(token)url.searchParams.set('nit',token);location.assign(url.href);};}
+  },1600);}
+function finClear(){if(hallObj.giant){killVen(hallObj.giant);hallObj.giant=null;}FIN.on=false;FIN.said=0;FIN.lift=0;FIN.fade=1;FIN.parts=[];shakeT=0;}
+function nextCircle(){finClear();angelB=0;hallVisited=false;hallStash=[];circle++;z23Link.circle(circle);musEvent('circle');wave=0;lives=3;drawLives();H_=1;silence=false;if(ven&&ven.o)killVen(ven.o);ven=null;finale=0;talked={};blobs.length=0;
   unlocked.w=WPN.map(()=>true);unlocked.items=['arb2','drob','pulemet','arb0','fantom'];
   bills.length=0;glows.length=0;buildExt();buildHall();setupTalk();setW(0);enterExt();}
 /* ================= ЛАБИРИНТ: растёт с каждой гибелью =================
@@ -960,18 +994,47 @@ const mzVar=()=>deaths<=2?'re':deaths<=4?'gc':'bw';
 const MZH={toy_bear:.55,toy_doll:.5,toy_horse:.55,toy_soldier:.55,swings:2.4,loot_crate:.75,abandoned_car:1.55,dead_tree:4.6,fir:4.2,bush:1.5,ruin_house1:3.4,ruin_house2:5.0,ruin_house3:5.6,rock1:.9,stump:.7,broken_fence:1.2,gate:3.4,dry_grass:.6,reeds:1.2,log:.45,hands_flashlight:.45};
 const MAZE_SPR=['gazon','dorozhka','kust_roz','les','fonar','vorona','statuya_sad','chasy','fasad_svet','pianistka','pianistka_strah','kupol','bashnya','besedka','zerkalo','zerkalo_v','fontan','tuman','v_prizrak','blob','blob_vzryv','pol_d','potolok_d','stena_d','kolonna_d','lyustra','shtora','dver_d','arka_d'];
 /* объёмный Вендиго: 10 кадров шага + 6 кадров броска, слоёная модель из архива владельца */
-const VNS={ready:false,geo:[],geoL:[],img:[],tex:null,n:0};
-async function venStackLoad(){try{const m=await (await fetch('a/vs/vs_meta.json')).json();VNS.m=m;const g={nx:m.nx,nz:m.nz,ny:m.ny,cols:m.cols,s:3.3/m.ny};
-  for(const f of m.frames){const im=await loadImg('a/vs/'+f+'.webp');VNS.img.push(im);VNS.geo.push(stackGeo(g,im));VNS.geoL.push(stackGeo(g,im,2));await new Promise(r=>setTimeout(r,0));}
-  VNS.ready=true;}catch(e){console.warn('vs',e);}}
+const VNS={ready:false,geo:[],geoL:[],img:[],tex:null,n:0,sockets:[],hornTex:null};
+const z23Victory=Nit.read().luchnik.pobedy>0;
+function z23HornMat(br,o){if(!VNS.hornTex){const c=new THREE.Color(HORN_COLOR),t=new THREE.DataTexture(new Uint8Array([Math.round(c.r*255),Math.round(c.g*255),Math.round(c.b*255),255]),1,1);t.needsUpdate=true;VNS.hornTex=t;}return stackMat(VNS.hornTex,{nolamp:true,bright:br,fogk:o.fogk,fogc:o.fogc});}
+// One shared, retryable resource gate for every scene; never publish a partial atlas.
+let venLoading=null,venLoadError=null,mazeRetry=null;
+function boundedAsset(task,ms=20000){
+ return new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('VNS asset timeout')),ms);Promise.resolve(task).then(v=>{clearTimeout(timer);resolve(v);},e=>{clearTimeout(timer);reject(e);});});
+}
+function venStackLoad(){
+ if(VNS.ready)return Promise.resolve(true);
+ if(venLoading)return venLoading;
+ venLoading=(async()=>{
+  for(let attempt=0;attempt<2;attempt++){
+   const img=[],geo=[],geoL=[],sockets=[];
+   try{
+    const response=await boundedAsset(fetch('a/vs/vs_meta.json'));
+    if(!response.ok)throw Error('VNS metadata '+response.status);
+    const m=await boundedAsset(response.json()),g={nx:m.nx,nz:m.nz,ny:m.ny,cols:m.cols,s:3.3/m.ny};
+    if(!Array.isArray(m.frames)||m.frames.length!==m.walk+m.lunge||!m.frames.length)throw Error('VNS frame manifest');
+    for(const f of m.frames){
+     const im=await boundedAsset(loadImg('a/vs/'+f+'.webp'));img.push(im);
+     if(z23Victory)sockets.push(headSocket(THREE,im,m));
+     geo.push(stackGeo(g,im));geoL.push(stackGeo(g,im,2));
+     await new Promise(r=>setTimeout(r,0));
+    }
+    Object.assign(VNS,{m,img,geo,geoL,sockets,ready:true});venLoadError=null;return true;
+   }catch(e){for(const g of [...geo,...geoL])g.dispose();venLoadError=String(e);console.warn('vs attempt '+(attempt+1),e);}
+  }
+  return false;
+ })().finally(()=>{venLoading=null;});
+ return venLoading;
+}
 function venTexGet(){if(!VNS.tex){VNS.tex=VNS.img.map(im=>nearestTex(im));VNS.tex.forEach(x=>{try{renderer.initTexture(x);}catch(e){}});}VNS.n=(VNS.n||0)+1;return VNS.tex;}
 function venTexDrop(){VNS.n--;if(VNS.n<=0&&VNS.tex){VNS.tex.forEach(t=>t.dispose());VNS.tex=null;VNS.n=0;}}
 function venStackMake(p,o={}){const sc=o.scene||scHall,t=venTexGet(),br={value:1};const mat=stackMat(t[0],{nolamp:true,bright:br,fogk:o.fogk,fogc:o.fogc});
   const lod=new THREE.LOD();const a=new THREE.Mesh(VNS.geo[0],mat),b=new THREE.Mesh(VNS.geoL[0],mat);lod.addLevel(a,0);lod.addLevel(b,o.far||11);lod.position.set(p.x,0,p.z);const k=o.scale||1;lod.scale.setScalar(k);sc.add(lod);
   let ref=null;if(o.ref!==false){ref=spr(sc,'vw0',{h:3.2,x:p.x,z:p.z,lit:.2,mirror:true});ref.mesh.visible=false;}
-  return {st:true,mesh:lod,a,b,mat,br,ref,mm:ref&&ref.mm,scene:sc,f:0,wf:0,push:0,lg:0,head:0};}
-function venFrame(o,i){if(o.f===i)return;o.f=i;o.a.geometry=VNS.geo[i];o.b.geometry=VNS.geoL[i];o.mat.uniforms.uTex.value=VNS.tex[i];}
-function killVen(o){if(!o)return;if(!o.st){kill(o);return;}if(o.dead)return;o.dead=true;o.scene.remove(o.mesh);if(o.ref)kill(o.ref);o.mat.dispose();venTexDrop();}
+  const horns=z23Victory?attachDragonHorns(THREE,lod,z23HornMat(br,o),VNS.sockets):null;
+  return {st:true,mesh:lod,a,b,mat,br,ref,mm:ref&&ref.mm,scene:sc,f:0,wf:0,push:0,lg:0,head:0,horns};}
+function venFrame(o,i){if(o.f===i)return;o.f=i;o.a.geometry=VNS.geo[i];o.b.geometry=VNS.geoL[i];o.mat.uniforms.uTex.value=VNS.tex[i];o.horns?.frame(i);}
+function killVen(o){if(!o)return;if(!o.st){kill(o);return;}if(o.dead)return;o.dead=true;o.scene.remove(o.mesh);if(o.ref)kill(o.ref);o.horns?.dispose();o.mat.dispose();venTexDrop();}
 function mzLoad(){if(mzReady)return mzReady;mzReady=(async()=>{
   await Promise.all(MAZE_SPR.filter(n=>!tex[n]).map(texLoad));
   mzStackMeta=await (await fetch('a/mz/mz_meta.json')).json();
@@ -1024,7 +1087,9 @@ function mzStack(s,n,x,z,rot=0,sc=1,y=0){const lod=new THREE.LOD();lod.addLevel(
   lod.position.set(x,y,z);lod.rotation.y=rot;lod.scale.setScalar(sc);s.add(lod);MZ.stacks.push(lod);return lod;}
 async function buildMaze(){await mzLoad();await mzLoadVar(mzVar());
   if(scMaze){const old=scMaze;for(let i=bills.length-1;i>=0;i--)if(bills[i].scene===old)bills.splice(i,1);for(let i=glows.length-1;i>=0;i--)if(glows[i].sp.parent===old)glows.splice(i,1);}
-  const d=Math.max(1,deaths),P=mzPlan(d);scMaze=new THREE.Scene();const s=scMaze;
+  const d=Math.max(1,deaths),linked=z23Losses?await import('./shared/maze-linked.js').catch(()=>null):null;
+  const P=linked?linked.linkedMaze(mzPlan,d,circle):mzPlan(d);z23MazeWorld=linked?.createMazeWorld(P,z23Losses)||null;
+  scMaze=new THREE.Scene();const s=scMaze;
   MZ={P,d,stacks:[],items:[],mons:[],lamps:[],houses:[],angels:[],seenDead:{},lastCell:'',lightT:4,clockT:0,ghost:null,crow:null,clock:null,flash:false,speedT:0,soldierT:0,lureT:0,lure:null,dangerHang:0};
   const sky=new THREE.Mesh(new THREE.PlaneGeometry(2,2),extSkyMat);sky.frustumCulled=false;sky.renderOrder=-100;s.add(sky);
   // земля — газон, дорожки — часть верного пути (с каждой гибелью их меньше) и ложные дорожки в тупики
@@ -1044,8 +1109,8 @@ async function buildMaze(){await mzLoad();await mzLoadVar(mzVar());
   {const L=P.Gs*MZC/2+5,cz=mzZ(P.c),hL=7,zs=mzZ(P.o)+MZC/2+18,zn=mzZ(P.top)-MZC/2-26,wL=2*L;const fq=[[-L,zn,L,zn,0,hL],[L,zs,-L,zs,0,hL],[-L,zs,-L,zn,0,hL],[L,zn,L,zs,0,hL]];
    s.add(new THREE.Mesh(quadGeo(fq),mat('les',{rep:[wL/hL/4.67,1],lit:.1,solid:true,tint:0x8a8f96})));}
   // углы изгородей: кусты, ели, мёртвые деревья, камни
-  const posts=[];for(let i=P.o;i<=P.o+P.Gs;i++)for(let j=P.o;j<=P.o+P.Gs;j++){if(mrand()<.16)posts.push([mzX(i)-MZC/2,mzZ(j)+MZC/2]);}
-  const trees=[];posts.forEach(([x,z])=>{const r=mrand();const n=r<.45?'bush':r<.7?'fir':r<.85?'dead_tree':r<.93?'rock1':'stump';mzStack(s,n,x,z,mrand()*6.28,.8+mrand()*.4);if(n==='dead_tree')trees.push([x,z]);});
+  const posts=[];for(let i=P.o;i<=P.o+P.Gs;i++)for(let j=P.o;j<=P.o+P.Gs;j++){if(mrand()<.16)posts.push([mzX(i)-MZC/2,mzZ(j)+MZC/2,i,j]);}
+  const trees=[];posts.forEach(([x,z,i,j])=>{const r=mrand();const n=z23MazeWorld?.decor(i,j)||(r<.45?'bush':r<.7?'fir':r<.85?'dead_tree':r<.93?'rock1':'stump');mzStack(s,n,x,z,mrand()*6.28,.8+mrand()*.4);if(n==='dead_tree')trees.push([x,z]);});
   // машина у ворот: с каждой гибелью ржавее и сильнее заросла
   const sx=mzX(P.start[0]),sz0=mzZ(P.o)+MZC/2;
   mzStack(s,'abandoned_car',sx+3.4,sz0+4.5,.5,1);
@@ -1101,19 +1166,23 @@ function monHit(m,dmg=1){if(m.dead)return;m.hp-=dmg;musHit();S.pop();post.unifor
   if(m.mode==='hang'){m.mode='drop';m.t=0;}
   if(m.hp<=0){m.dead=true;m.dying=0;mzAct(m,'death');score++;}}
 async function enterMaze(first){state='trans';setFade(1,900);await new Promise(r=>setTimeout(r,950));
-  giantDrop();await buildMaze();scene=scMaze;state='maze';lives=3;drawLives();G.uBright.value=1;post.uniforms.uRed.value=0;dread=0;
-  player.p.set(mzX(MZ.P.start[0]),1.72,mzZ(MZ.P.o)+MZC/2+9);player.v.set(0,0,0);yaw=yawT=0;pitch=pitchT=.05;giantSpawn();
-  G.uFogC.value.set(0x34383a);G.uFogD.value=.034+.004*Math.min(8,deaths);G.uMix.value=0;
+  giantDrop();
+  // A maze is not playable until its original animated giant is ready.
+  if(!await venStackLoad()){mazeRetry=()=>{enterMaze(first).then(()=>{if(state==='maze')$('start').style.display='none';}).catch(e=>{state='menu';window.adagioBoot.fail('Не удалось загрузить сад.');console.warn(e);});};state='menu';$('start').style.display='grid';$('start').querySelector('h1').textContent='Повторить загрузку';window.adagioBoot.say('Не удалось загрузить чудовище. Нажмите Play.');$('play').setAttribute('aria-label','Повторить загрузку');return;}
+  await buildMaze();scene=scMaze;lives=3;drawLives();G.uBright.value=1;post.uniforms.uRed.value=0;dread=0;
+  player.p.set(mzX(MZ.P.start[0]),1.72,mzZ(MZ.P.o)+MZC/2+9);player.v.set(0,0,0);yaw=yawT=0;pitch=pitchT=.05;giantSpawn();state='maze';
+  G.uFogC.value.set(0x34383a);G.uFogD.value=z23MazeFog(.034+.004*Math.min(8,deaths));G.uMix.value=0;
   if(AC){musicLP.frequency.setTargetAtTime(900,AC.currentTime,.4);windG.gain.setTargetAtTime(.16,AC.currentTime,1);}
   MUS.force={g:'noktyurn',tr:'odin'};setFade(0,1600);lastInput=now;homeJ.k='';
   setTimeout(()=>cap(first?'Я снова у ворот… но сад стал другим. Её музыку слышно где-то за кустами.':'Я снова у ворот. Дорога к ней стала длиннее.',5200),1200);}
 /* гигант в саду: выше кустов в четыре раза, идёт сквозь живую изгородь; убить нельзя — выстрел только отталкивает */
-function giantSpawn(){if(!VNS.ready||!MZ)return;const P=MZ.P;let best=null,bd=-1;for(let k=0;k<40;k++){const i=Math.floor(rnd()*P.N),j=Math.floor(rnd()*P.N);if(!P.inR(i,j))continue;const x=mzX(i),z=mzZ(j);const d=Math.hypot(x-player.p.x,z-player.p.z);if(d>bd){bd=d;best=[x,z];}}
-  if(!best)return;const g=venStackMake({x:best[0],z:best[1]},{scene:scMaze,scale:4,far:40,ref:false,fogk:.012,fogc:new THREE.Vector3(.204,.22,.227)});g.t=0;g.ph=rnd()*6;g.step=0;g.cd=0;g.sp=1.15+.08*Math.min(6,deaths);MZ.giant=g;}
+function giantSpawn(){if(!VNS.ready||!MZ||MZ.giant)return;const P=MZ.P;let best=null,bd=-1;for(let k=0;k<40;k++){const i=Math.floor(rnd()*P.N),j=Math.floor(rnd()*P.N);if(!P.inR(i,j))continue;const x=mzX(i),z=mzZ(j);const d=Math.hypot(x-player.p.x,z-player.p.z);if(d>bd){bd=d;best=[x,z];}}
+  if(!best){for(let i=P.o;i<P.o+P.Gs;i++)for(let j=P.o;j<=P.top;j++){const x=mzX(i),z=mzZ(j),d=Math.hypot(x-player.p.x,z-player.p.z);if(d>bd){bd=d;best=[x,z];}}}
+  const g=venStackMake({x:best[0],z:best[1]},{scene:scMaze,scale:4,far:40,ref:false,fogk:.012,fogc:new THREE.Vector3(.204,.22,.227)});g.t=0;g.ph=rnd()*6;g.step=0;g.cd=0;g.sp=1.15+.08*Math.min(6,deaths);MZ.giant=g;}
 function giantDrop(){if(MZ&&MZ.giant){killVen(MZ.giant);MZ.giant=null;}}
 const giantPos=()=>MZ.giant.mesh.position.clone().add(new THREE.Vector3(0,7,0));
 function giantTick(dt,gdt){const g=MZ.giant;if(!g)return;g.t+=gdt;const p=g.mesh.position,pp=player.p;const tx=pp.x-p.x,tz=pp.z-p.z,d=Math.hypot(tx,tz)||1;
-  if(MZ.safe&&!g.lg){g.wf+=gdt*2;venFrame(g,Math.floor(g.wf)%VNS.m.walk);return;}
+  if(MZ.safe){g.lg=0;g.cd=Math.max(g.cd,1.1);g.wf+=gdt*2;venFrame(g,Math.floor(g.wf)%VNS.m.walk);return;}
   if(g.push>0){p.x-=tx/d*g.push*dt*4;p.z-=tz/d*g.push*dt*4;g.push=Math.max(0,g.push-dt*2.5);g.lg=0;}
   else{if(!g.lg&&d<10&&g.cd<=0)g.lg=.001;const zig=g.lg?0:Math.sin(g.t*.35+g.ph)*.6;const hd=Math.atan2(tx,tz)+zig;g.head=damp(g.head,hd,g.lg?6:1.5,dt);
     const v=g.sp*(g.lg?2.4:1)*1;p.x+=Math.sin(g.head)*v*gdt;p.z+=Math.cos(g.head)*v*gdt;
@@ -1124,10 +1193,10 @@ function giantTick(dt,gdt){const g=MZ.giant;if(!g)return;g.t+=gdt;const p=g.mesh
       if(f!==pf&&f%5===0&&d<34){const k=1-d/34;post.uniforms.uGlitch.value=Math.max(post.uniforms.uGlitch.value,.25*k*k);shakeT=Math.max(shakeT,.25*k);if(S.hitWood)S.hitWood();}}}
   g.cd-=dt;g.mesh.rotation.y=g.head;g.br.value=damp(g.br.value,1+g.push*.7,8,dt);
   if(d<18){MZ.bossNear=true;dread=Math.max(dread,.5*(1-d/18));}}
-function mzDeath(){if(state!=='maze')return;state='trans';S.scream();post.uniforms.uRed.value=.7;mzPrevTrail=mzTrail.slice(-260);deaths++;
+function mzDeath(){if(state!=='maze')return;state='trans';S.scream();post.uniforms.uRed.value=.7;mzPrevTrail=mzTrail.slice(-260);deaths++;z23Link.death();
   for(const b of blobs)kill(b.o);blobs.length=0;setTimeout(()=>enterMaze(false),900);}
 function mzExit(){giantDrop();state='trans';setFade(1,1100);S.door();for(const b of blobs)kill(b.o);blobs.length=0;mzPrevTrail=[];dread=0;MUS.detX=0;
-  setTimeout(()=>{scene=scExt;state='ext';MUS.extT=99;MUS.force={g:'adazhio',tr:'voshod'};player.p.set(0,1.78,11.5);yaw=yawT=0;pitch=pitchT=.06;G.uFogC.value.set(0x3d3f41);G.uFogD.value=.028;
+  setTimeout(()=>{scene=scExt;state='ext';MUS.extT=99;MUS.force={g:'adazhio',tr:'voshod'};player.p.set(0,1.78,11.5);yaw=yawT=0;pitch=pitchT=.06;G.uFogC.value.set(0x3d3f41);G.uFogD.value=z23YardFog;
     if(AC)musicLP.frequency.setTargetAtTime(650,AC.currentTime,.3);setFade(0,1600);cap('Нашёл. Её окно светится. Она ещё играет.',4200);lives=3;drawLives();lastInput=now;homeJ.k='';},1200);}
 /* ложный дом: чёрный зал, рояль пустой, её нет */
 function buildDark(){const s=new THREE.Scene();scDark=s;
@@ -1142,8 +1211,8 @@ function falseHouse(h){h.visited=true;window.__darkSeen=(window.__darkSeen||0)+1
     G.uFogC.value.set(0x0b0b10);G.uFogD.value=.03;if(AC)musicBus.gain.setTargetAtTime(.02,AC.currentTime,.3);MUS.force={g:'*',tr:'obryv',now:true};setFade(0,900);
     setTimeout(()=>cap('Её здесь нет, я ошибся. Нужно искать дальше…',4200),900);},750);}
 function darkTick(dt){darkT+=dt;cam.position.z=2.5-Math.min(1.5,darkT*.4);cam.updateMatrixWorld();
-  if(darkT>5&&state==='dark'){state='trans';setFade(1,700);setTimeout(()=>{scene=scMaze;state='maze';const b=MZ.back;player.p.x=b.x;player.p.z=b.z;yaw=yawT=b.yaw+Math.PI;
-    G.uFogC.value.set(0x34383a);G.uFogD.value=.034+.004*Math.min(8,deaths)*(MZ.flash?.6:1);for(const h of MZ.houses)if(h.visited)h.win.m.uniforms.uOp.value=0;setFade(0,900);},750);}}
+  if(darkT>5&&state==='dark'){state='trans';setFade(1,700);setTimeout(()=>{scene=scMaze;state='maze';const b=MZ.back;player.p.x=b.x;player.p.z=b.z;player.v.set(0,0,0);yaw=yawT=b.yaw+Math.PI;MZ.safe=true;if(MZ.giant){MZ.giant.lg=0;MZ.giant.cd=Math.max(MZ.giant.cd,1.1);}
+    G.uFogC.value.set(0x34383a);G.uFogD.value=z23MazeFog(.034+.004*Math.min(8,deaths))*(MZ.flash?.6:1);for(const h of MZ.houses)if(h.visited)h.win.m.uniforms.uOp.value=0;setFade(0,900);cap('У двери я могу перевести дыхание.',2800);},750);}}
 const TOYS={toy_bear:'Странно… это мой медвежонок из детства. Я так плакал, когда родители заставили его выкинуть.',
   toy_doll:'Кукла. Мама шила её из своего платья. Я сжёг её — она смотрела на меня ночью.',
   toy_horse:'Лошадка… Отец вырезал её, пока ещё был отцом.',
@@ -1184,7 +1253,7 @@ function mzTick(dt,gdt){const P=MZ.P;extSkyMat.uniforms.uYaw.value=yaw;extSkyMat
   MZ.clockT+=dt;if(MZ.clockT>90){MZ.clockT=0;MUS.force={g:'*',tr:'udar'};post.uniforms.uGlitch.value=.4;MZ.lightAll=1.5;}
   const clockP=MZ.clock.mesh.position;
   // предметы
-  let safe=false;for(const it of MZ.items){const d2=Math.hypot(it.x-player.p.x,it.z-player.p.z);if(it.safe&&d2<it.safe)safe=true;
+  let safe=MZ.houses.some(h=>h.visited&&Math.hypot(h.fx-player.p.x,h.fz-player.p.z)<2.4);for(const it of MZ.items){const d2=Math.hypot(it.x-player.p.x,it.z-player.p.z);if(it.safe&&d2<it.safe)safe=true;
     if(!it.taken&&(it.st||it.n==='loot_crate')&&d2<1.4)mzPickup(it);
     if(it.n==='fontan'&&!it.used&&d2<1.8){it.used=true;lives=Math.min(4,lives+1);drawLives();cap('Вода ледяная. Как в ту зиму.',3200);MUS.force={g:'*',tr:'vospom'};}
     if(it.n==='zerkalo'&&!it.used&&d2<2.4){it.used=true;MZ.lightAll=5;if(rnd()<.4){it.o.m.uniforms.uMap.value=tex.zerkalo_v;S.scream();post.uniforms.uGlitch.value=.7;setTimeout(()=>{if(it.o)it.o.m.uniforms.uMap.value=tex.zerkalo;},1600);}else cap('В зеркале — дорожка. Она ведёт к дому.',3000);}
@@ -1218,20 +1287,20 @@ function mzTick(dt,gdt){const P=MZ.P;extSkyMat.uniforms.uYaw.value=yaw;extSkyMat
     b.o.mesh.position.set(b.p.x,b.p.y-.7,b.p.z);}
   for(let i=blobs.length-1;i>=0;i--)if(blobs[i].dead&&(!blobs[i].mon||blobs[i].dying==null))blobs.splice(i,1);
   MZ.chasers=chasers;MZ.bossNear=bossNear;giantTick(dt,gdt);
-  if(G.uFogD.value>.001)G.uFogD.value=damp(G.uFogD.value,(.034+.004*Math.min(8,deaths))*(MZ.flash?.6:1)*(1+.15*Math.sin(now*.23)),.5,dt);
+  if(G.uFogD.value>.001)G.uFogD.value=damp(G.uFogD.value,z23MazeFog(.034+.004*Math.min(8,deaths))*(MZ.flash?.6:1)*(1+.15*Math.sin(now*.23)),.5,dt);
   // видно и экономно: дальние объёмные предметы не рисуются
   if((MZ.cull=(MZ.cull||0)-dt)<=0){MZ.cull=.25;for(const l of MZ.stacks)l.visible=Math.hypot(l.position.x-pp.x,l.position.z-pp.z)<21;}
 }
 
 /* не убил Вендиго — снова у ворот, а за воротами лабиринт стал больше */
-function gameOver(){state='trans';setFade(1,1500);if(AC)musicBus.gain.setTargetAtTime(0,AC.currentTime,.5);
+function gameOver(){if(state==='trans')return;z23Link.death();state='trans';setFade(1,1500);if(AC)musicBus.gain.setTargetAtTime(0,AC.currentTime,.5);
   setTimeout(()=>{lives=3;drawLives();H_=1;silence=false;if(ven&&ven.o)killVen(ven.o);ven=null;dread=0;blobs.forEach(b=>kill(b.o));blobs.length=0;hallStash=[];wave=Math.max(0,wave-1);waveState='wait';waveTimer=4;
     deaths++;enterMaze(deaths===1);},1700);}
 
 /* ---------- loop ---------- */
 const clock=new THREE.Clock();const up=new THREE.Vector3(0,1,0);
 function frame(){requestAnimationFrame(frame);FRN++;
-  let dt=Math.min(clock.getDelta(),.05)*DTM;now+=dt;
+  const elapsed=clock.getDelta();let dt=Math.min(elapsed,.05)*DTM;now+=dt;
   const tScale=slowT>0?.35:1;const gdt=dt*tScale;G.uT.value=now;
   if(!scene){return;}
   // плавность: если телефон не успевает, внутреннее разрешение чуть снижается; когда успевает — возвращается
@@ -1276,6 +1345,7 @@ if(shakeT>0){shakeT=Math.max(0,shakeT-dt*.9);const k=shakeT*shakeT;cam.position.
     if(AC)musicBus.gain.setTargetAtTime(.35,AC.currentTime,.5);
   }
   if(scene===scHall&&(state==='hall'||state==='end'||state==='trans')){hallTick(dt);
+    z23Link.tick(now,cam,player.p,state==='hall'&&!finale&&$('menu').style.display!=='block',()=>{cap('— Ты опять стрелял в туман. — Я не помню, во что попал…',4800);musEvent('memory');});
     // мелодия держится гармонией
     dread=silence&&ven?Math.min(1,dread+dt/14):Math.max(0,dread-dt/2.5);
     if(AC){musicBus.gain.setTargetAtTime(silence?.45+.25*dread:(.25+.75*H_),AC.currentTime,.6);musicLP.frequency.setTargetAtTime(Math.min(hideOn?1500:9000,9000-7600*dread),AC.currentTime,.4);}
@@ -1330,10 +1400,12 @@ if(shakeT>0){shakeT=Math.max(0,shakeT-dt*.9);const k=shakeT*shakeT;cam.position.
       else if(ven.mode==='leave'){o.m.uniforms.uOnce.value=Math.min(11,ven.t/1.4*11);o.m.uniforms.uOp.value=clamp(1-(ven.t-1)/0.6,0,1);if(ven.t>1.6){kill(o);endSilence();}}}
     // финал: взгляд в зеркало
     if(finale===1&&hallObj.zerk.m.uniforms.uOp.value>.95){cam.getWorldDirection(fwd);const zp=hallObj.zerk.mesh.position.clone().add(new THREE.Vector3(0,2.3,0));const to=zp.sub(cam.position);const d=to.length();
-      if(d<30&&fwd.dot(to.normalize())>.93){finale=2;finT=0;musEvent('mirror');hallObj.zerkV.m.uniforms.uOp.value=1;hallObj.zerk.m.uniforms.uOp.value=0;hallObj.zerk.fadeIn=0;post.uniforms.uGlitch.value=1;S.scream();cap('Это не отражение. Это я.',4200);
+      if(d<30&&fwd.dot(to.normalize())>.93){finale=2;z23Link.mirror();finT=0;musEvent('mirror');hallObj.zerkV.m.uniforms.uOp.value=1;hallObj.zerk.m.uniforms.uOp.value=0;hallObj.zerk.fadeIn=0;post.uniforms.uGlitch.value=1;S.scream();cap(z23Victory?'Это не отражение. Это я. Рога из синего тумана…':'Это не отражение. Это я.',4200);
         const fi=WPN.findIndex(w=>w.n==='fantom');unlocked.w[fi]=true;unlocked.items.push('fantom');}}
-    if(finale===2){finT+=dt;if(finT>4){finale=3;memT=0;}}
-    if(finale===3){finT+=dt;finTick(dt);if(finT>16)showEnd(),finale=4;}
+    if(finale===2||finale===3)advanceCinematic(elapsed,step=>{
+      if(finale===2){finT+=step;if(finT>4){finale=3;memT=0;}return;}
+      if(finale===3){finT+=step;finTick(step);if(finT>16){showEnd();finale=4;return false;}}
+    },!document.hidden);
   }
   // скример
   if(atk){atk.t+=dt;const k=Math.min(1,atk.t/1.3);atk.mesh.material.uniforms.uOnce.value=k*15;const s=.6+k*k*2.4;atk.mesh.scale.set(s,s,1);atk.mesh.position.set(0,-.08,0);
@@ -1380,35 +1452,62 @@ async function boot(){
   Object.assign(man,await (await fetch('a/manifest.json')).json());
   const extMeta=await (await fetch('a/ext/ext_meta.json')).json();wInfo=await (await fetch('a/st/weapons.json')).json();
   const bar=$('load').firstChild;const jobs=[];let done=0;const tick=()=>{done++;bar.style.width=Math.min(100,done/(jobs.length||1)*100)+'%';};
-  const P=(pr)=>{jobs.push(pr);pr.then(tick);return pr;};
+  const P=(pr)=>{const p=pr.then(value=>{tick();return value;});jobs.push(p);return p;};
   for(const k of Object.keys(extMeta))P(loadImg('a/ext/'+k+'.png').then(im=>imgs['e_'+k]=im));
   P(loadImg('a/ext/sky.jpg').then(im=>imgs.sky=im));P(loadImg('a/ext/stone.jpg').then(im=>imgs.stone=im));
   for(const w of WPN)P(loadImg('a/st/'+w.n+'.png').then(im=>imgs['w_'+w.n]=im));
   for(const n of EXT_SPR)P(texLoad(n));
   await Promise.all(jobs);
-  for(const [k,a] of Object.entries(extMeta)){extGeo[k]=stackGeo(a,imgs['e_'+k]);if(k!=='step'&&k!=='wall')extGeoL[k]=stackGeo(a,imgs['e_'+k],2);EXTM[k]=stackMat(nearestTex(imgs['e_'+k]),{bright:G.uBright});}
+  window.adagioBoot.say('Создаём трёхмерную усадьбу…');bar.style.width='85%';
+  const entries=Object.entries(extMeta);let built=0;
+  for(const [k,a] of entries){await new Promise(r=>setTimeout(r,0));extGeo[k]=stackGeo(a,imgs['e_'+k]);if(k!=='step'&&k!=='wall')extGeoL[k]=stackGeo(a,imgs['e_'+k],2);EXTM[k]=stackMat(nearestTex(imgs['e_'+k]),{bright:G.uBright});bar.style.width=(85+10*++built/entries.length)+'%';}
   extTex.sky=new THREE.Texture(imgs.sky);extTex.sky.colorSpace=THREE.NoColorSpace;extTex.sky.needsUpdate=true;extTex.stone=nearestTex(imgs.stone,true);
-  buildExt();buildWeapons();setupTalk();
+  buildExt();await new Promise(r=>setTimeout(r,0));buildWeapons();setupTalk();
   resize();addEventListener('resize',resize);setAim(innerWidth/2,innerHeight*.5);
-  const hallP=(async()=>{HG=buildHallGeo();HGL=buildHallGeo(.4);
+  scene=scExt;state='menu';cam.position.set(0,1.78,11.5);cam.rotation.set(.06,0,0);cam.updateMatrixWorld();
+  let starting=false;
+  const startPlay=()=>{
+    if(!window.adagioBoot.ready||state!=='menu'||starting)return;
+    starting=true;try{unlockAudio();}catch(e){console.warn('Audio unavailable',e);}
+    if(mazeRetry){const retry=mazeRetry;mazeRetry=null;$('start').querySelector('h1').textContent='Адажио';$('play').setAttribute('aria-label','Играть');starting=false;retry();return;}
+    z23Link.circle(circle);
+    if(z23Losses){musicOn=true;window.adagioBoot.say('Загружается сад…');enterMaze(true).then(()=>{starting=false;if(state==='maze')$('start').style.display='none';}).catch(e=>{starting=false;state='menu';console.warn(e);window.adagioBoot.fail('Не удалось загрузить сад.');});}
+    else{try{enterExt();$('start').style.display='none';}catch(e){state='menu';window.adagioBoot.fail('Не удалось открыть усадьбу.');}finally{starting=false;}}
+  };
+  $('play').addEventListener('click',startPlay);
+  $('play').addEventListener('pointerup',e=>{if(e.pointerType==='touch'&&window.adagioBoot.ready){e.preventDefault();startPlay();}});
+  // No hall or giant construction before two rendered exterior frames.
+  window.adagioBoot.say('Подготовка первого кадра…');
+  requestAnimationFrame(frame);
+  let frames=0,checks=0,previousFRN=FRN;
+  function probe(){
+   if(window.adagioBoot.failed)return;
+   if(FRN>previousFRN){previousFRN=FRN;try{const gl=renderer.getContext();if(gl.isContextLost())throw Error('WebGL context lost');const px=new Uint8Array(4);let visible=false;for(const [x,y] of [[.25,.25],[.5,.5],[.75,.7]]){renderer.readRenderTargetPixels(rt,Math.floor(rt.width*x),Math.floor(rt.height*y),1,1,px);visible=visible||px[0]+px[1]+px[2]>0;}if(visible&&gl.getError()===gl.NO_ERROR)frames++;else frames=0;}catch(e){frames=0;console.warn(e);}}
+   if(frames>=2){bar.style.width='100%';window.adagioBoot.ready=true;window.adagioBoot.say('Нажмите Play');if(window.adagioBoot.queued)startPlay();return;}
+   if(++checks>600){window.adagioBoot.fail('Не удалось отобразить сцену.');return;}
+   requestAnimationFrame(probe);
+  }
+  requestAnimationFrame(probe);
+}
+function prepareHall(){
+ if(hallReady)return hallReady;
+ hallReady=(async()=>{HG=buildHallGeo();await new Promise(r=>setTimeout(r,0));HGL=buildHallGeo(.4);
     const [b,a]=await Promise.all([loadImg('a/pian_body.png'),loadImg('a/pian_arm.png')]);const ac=HG.atlas.getContext('2d');ac.drawImage(b,432,0,134,191);ac.drawImage(a,576,0,134,191);
     hallTex=new THREE.CanvasTexture(HG.atlas);hallTex.flipY=false;hallTex.colorSpace=THREE.NoColorSpace;hallTex.minFilter=THREE.LinearFilter;hallTex.generateMipmaps=false;
-    await Promise.all(HALL_SPR.map(texLoad));buildHall();window.__hallReady=1;venStackLoad();})();
-  scene=scExt;state='menu';cam.position.set(0,1.78,11.5);cam.rotation.set(.06,0,0);cam.updateMatrixWorld();frame();
-  $('play').onclick=()=>{unlockAudio();$('start').style.display='none';enterExt();};
-  hallReady=hallP;
+    await Promise.all(HALL_SPR.map(texLoad));buildHall();window.__hallReady=1;return true;})().catch(e=>{hallReady=null;console.warn('Hall loading',e);return false;});
+ return hallReady;
 }
 let geoC,hallReady;
 const _eh=enterHall;
-enterHall=function(){if(!window.__hallReady){state='trans';hallReady.then(()=>{state='ext';_eh();});return;}_eh();};
+enterHall=function(){if(!window.__hallReady){state='trans';$('start').style.display='grid';window.adagioBoot.say('Загружается зал усадьбы…');prepareHall().then(ok=>{if(!ok){state='menu';window.adagioBoot.fail('Не удалось загрузить зал.');return;}$('start').style.display='none';state='ext';_eh();venStackLoad();});return;}_eh();};
 window.addEventListener('error',e=>console.error('ERR',e.message));
-if(location.hash==='#bot')window.__bot={give(n){const i=WPN.findIndex(w=>w.n===n);unlocked.w[i]=true;setW(i);return i;},maze(){deaths++;enterMaze(deaths===1);},mzInfo(){return MZ&&{G:MZ.P.Gs,mons:MZ.mons.filter(m=>!m.dead).length,lamps:MZ.lamps.length,houses:MZ.houses.length,items:MZ.items.map(i=>i.n),close:+(MZ.close||0).toFixed(2),chasers:MZ.chasers,state,lives,deaths,found:mzFound};},
+if(location.hash==='#bot')window.__bot={z23(){return {nit:Nit.read(),state,circle,fog:G.uFogD.value,maze:state==='maze'&&MZ?{...MZ.P.linked,length:MZ.P.sol.length}:null,feathers:z23Link.available,picked:z23Link.owned,bonusUsed:z23Link.used,waveState,horns:!!(ven?.o?.horns||MZ?.giant?.horns||hallObj.giant?.horns),giantReady:!!MZ?.giant,assetReady:VNS.ready,assetError:venLoadError,hornsVisible:!!(ven?.o?.horns?.visible||MZ?.giant?.horns?.visible||hallObj.giant?.horns?.visible)};},give(n){const i=WPN.findIndex(w=>w.n===n);unlocked.w[i]=true;setW(i);return i;},maze(){deaths++;enterMaze(deaths===1);},mzInfo(){return MZ&&{G:MZ.P.Gs,mons:MZ.mons.filter(m=>!m.dead).length,lamps:MZ.lamps.length,houses:MZ.houses.length,items:MZ.items.map(i=>i.n),close:+(MZ.close||0).toFixed(2),chasers:MZ.chasers,state,lives,deaths,found:mzFound};},
   mzGo(k){const P=MZ.P;const c=P.sol[Math.min(P.sol.length-1,k)];player.p.x=mzX(c[0]);player.p.z=mzZ(c[1]);},mzExitGo(){const P=MZ.P;player.p.x=mzX(P.exit[0]);player.p.z=mzZ(P.top)-MZC/2-3;},
   mzItem(n){const it=MZ.items.find(i=>i.n===n);if(it){player.p.x=it.x;player.p.z=it.z;}return !!it;},mzHouse(){const h=MZ.houses.find(h=>!h.visited);if(h){player.p.x=h.fx;player.p.z=h.fz;}return h?[h.fx,h.fz,h.x,h.z,player.p.x,player.p.z,mzBlocked(h.fx,h.fz)]:0;},mzKillAll(){MZ.mons.forEach(m=>{if(!m.dead){m.hp=1;monHit(m);}});},mzHurt(){lives=1;},hg(){return [HG.solid.length/27,HGL.solid.length/27,HG.slices.length/27,HG.detail.length/27,HG.floor.length/27,HG.solidLow.length/27]},tris(){const m={};scene.traverseVisible(o=>{if(o.isMesh&&o.geometry){const n=(o.geometry.index?o.geometry.index.count:o.geometry.attributes.position.count)/3;const k=Object.keys(extGeo).find(k=>extGeo[k]===o.geometry)||(Object.keys(extGeoL).find(k=>extGeoL[k]===o.geometry)||"")+"_far"||o.type+(o.material.type||"");m[k]=(m[k]||0)+n;}});return m;},refl(a,b){scHallRefl.children[0].visible=a;scHallRefl.children[1].visible=b;},cam(){return +yaw.toFixed(3)},aim(){return [+aim.x.toFixed(2),+aim.y.toFixed(2)]},dyn(){return [DYN.k,DYN.fps]},ly(){lyCrash();},arkL(){(DEC.arkiL||[]).forEach(o=>{o.tgt=1;o.until=now+10;});},spawn(n){for(let i=0;i<n;i++)spawnBlob();},circ(){nextCircle();},nearBlob(){const b=blobs.find(b=>!b.dead);if(b)b.p.set(PIAN.x+2,2,PIAN.z+2);},musSet:(g,tr)=>{MUS.testLock=true;MUS.force={g,tr,now:true};},get notes(){return MUS.notes},get harm(){return [MUS.notes,MUS.snap||0,MUS.dis||0]},decoTest:()=>{REWARD2.forEach(k=>{if(!has(k))reward(k);});},get s(){return{deco:Object.keys(DEC).map(k=>k+':'+DEC[k].map(o=>o.m?+o.m.uniforms.uOp.value.toFixed(2):+o.op.toFixed(2)).join('/')),hide:hideOn,ly:LY.ok,genre:MUS.g,tr:MUS.tr,seen:Object.keys(MUS.seen),mus:Object.fromEntries(['danger','flow','miss','calm','near','wound','key'].map(k=>[k,+(+MUS[k]).toFixed(2)])),fig:MUS.fig,dread:+dread.toFixed(2),score,state,wave,H:H_,silence,lives,blobs:blobs.length,circle,finale,items:unlocked.items.slice(),hall:!!window.__hallReady,w:WPN[wI].n,shots:shots.length,p:player.p.toArray().map(v=>+v.toFixed(2))}},
   hall(){player.p.set(0,1.78,-40);},out(){player.p.set(0,1.72,9.5);hallT=-9;},go(x,z){player.p.set(x,player.p.y,z);},shootAll(){blobs.slice().forEach(b=>!b.dead&&hitBlob(b));},killV(){if(ven&&ven.mode==='walk'){ven.hits=ven.need-1;hitVen();}},look(y,p){yawT=y;pitchT=p;},fire,
   freeze(){shots.forEach(a=>a.d=1e3);},aimAt(x,y){setAim(x*innerWidth,y*innerHeight);},scare(){lastScare=-99;scare(true);},forceWave(n){wave=n-1;waveState='wait';waveTimer=.1;},zero(){H_=0.01;},
   fr(){return FRN;},lookVen(){if(!ven)return 0;const p=ven.o.mesh.position;yawT=Math.atan2(-(p.x-player.p.x),-(p.z-player.p.z));pitchT=0;return 1;},blobScreen(){const b=blobs.find(b=>!b.dead&&b.o.m.uniforms.uOp.value>.6);if(!b)return null;const v=b.p.clone().project(cam);if(v.z>1||Math.abs(v.x)>.95||Math.abs(v.y)>.95)return null;return[v.x*.5+.5,.5-v.y*.5];},speed(k){DTM=k;},info(){renderer.info.autoReset=false;renderer.info.reset();return new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>{const i=renderer.info.render;renderer.info.autoReset=true;r([i.calls,i.triangles,renderer.info.memory.geometries,renderer.info.memory.textures]);})));},now(){return now;},wpn(i){unlocked.w[i]=true;setW(i);},silence(){startSilence();},ven(){return ven&&{mode:ven.mode,st:!!ven.o.st,f:ven.o.f,lg:+(ven.lg||0).toFixed(2),d:+ven.o.mesh.position.distanceTo(player.p).toFixed(2),ready:VNS.ready,hits:ven.hits};},venPlace(x,z){if(ven)ven.o.mesh.position.set(x,0,z);},giant(){const g=MZ&&MZ.giant;return g&&{x:+g.mesh.position.x.toFixed(1),z:+g.mesh.position.z.toFixed(1),f:g.f,lg:+g.lg.toFixed(2),push:+g.push.toFixed(2),d:+Math.hypot(g.mesh.position.x-player.p.x,g.mesh.position.z-player.p.z).toFixed(1),near:MZ.bossNear};},giantPlace(dx,dz){const g=MZ.giant;g.mesh.position.set(player.p.x+dx,0,player.p.z+dz);},fin(){finale=2;finT=3.9;},finInfo(){return {finale,finT:+finT.toFixed(1),g:!!hallObj.giant,sc:hallObj.giant?+hallObj.giant.mesh.scale.x.toFixed(2):0,lift:+FIN.lift.toFixed(2),parts:(FIN.parts||[]).filter(q=>q.go).length,state};}};
-boot();
+boot().catch(e=>{console.error('Adagio boot',e);window.adagioBoot.fail('Не удалось запустить игру: '+String(e?.message||e).slice(0,120));});
 }
 </script>
 </body>

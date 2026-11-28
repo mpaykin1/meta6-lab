@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-28T01:36:57.073Z",
+  "generated_at": "2026-11-28T01:47:56.892Z",
   "sha": {
-    "lab": "4bc41dbfa8236ad822d1c367d1b1b4958d1c1236",
+    "lab": "6ab61aca885878b448cdef4b6f66f3f5ffaf9a6c",
     "mg": "ca77c011d31cb4814b418007d77f34b6ebbf6a22"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/46093876362",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/46094845128",
   "review": {
     "protected": [
       {
@@ -439,11 +439,6 @@
         "step": "Run node scripts/dispetcher/run.mjs"
       },
       {
-        "workflow": "Link Guard 200",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46055229183",
-        "step": "Diagnose URLs still failing"
-      },
-      {
         "workflow": "META BOT",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45976318669",
         "step": "Play all games"
@@ -586,7 +581,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46028146884"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46093876388"
       },
       "P1": {
         "value": "не подтверждено",
@@ -1537,7 +1532,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3583,
+      "count": 3585,
       "folders": "нет данных"
     },
     "mg": {

@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-28T02:05:59.548Z",
+  "generated_at": "2026-11-28T02:58:40.777Z",
   "sha": {
-    "lab": "42d24943a54e1c578a81550d938cecf19e7b5049",
+    "lab": "b559efbc610c018b9ea2b5fe2c978168d4d84877",
     "mg": "ca77c011d31cb4814b418007d77f34b6ebbf6a22"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/46096272458",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/46100544586",
   "review": {
     "protected": [
       {
@@ -435,7 +435,7 @@
     "redLab": [
       {
         "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46057346436",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46099796563",
         "step": "Run node scripts/dispetcher/run.mjs"
       },
       {
@@ -581,7 +581,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46094845112"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46096272523"
       },
       "P1": {
         "value": "не подтверждено",
@@ -592,7 +592,7 @@
   },
   "pr": {
     "open": 8,
-    "conflicts": "нет данных",
+    "conflicts": 5,
     "merged": 102,
     "closed": 196,
     "mergedItems": [
@@ -1532,7 +1532,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3587,
+      "count": 3588,
       "folders": "нет данных"
     },
     "mg": {

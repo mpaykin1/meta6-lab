@@ -1,10 +1,10 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-28T02:05:59.548Z | МГЛ: 42d24943a54e1c578a81550d938cecf19e7b5049 | МГ: ca77c011d31cb4814b418007d77f34b6ebbf6a22 | https://github.com/mpaykin1/meta6-lab/actions/runs/46096272458
+UTC: 2026-11-28T02:58:40.777Z | МГЛ: b559efbc610c018b9ea2b5fe2c978168d4d84877 | МГ: ca77c011d31cb4814b418007d77f34b6ebbf6a22 | https://github.com/mpaykin1/meta6-lab/actions/runs/46100544586
 ## ПРОВЕРИТЬ CLAUDE
 - PR #439 96fe57465a770913991d99705e7a4d453259965d: .github/workflows/vetki-uborka.yml, scripts/lab/mutate-vetki-uborka.mjs
 - PR #436 c2d4d176479c02f89b99c2e43ad58a216312eb42: .github/workflows/b64-decode.yml, .github/workflows/grange-p22-audit.yml, .github/workflows/grange-publication-gate.yml, .github/workflows/stackgen.yml
 - ещё 48: https://github.com/mpaykin1/meta6-lab/pulls
-- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/46057346436 | Run node scripts/dispetcher/run.mjs
+- МГЛ: MG Dispatcher | https://github.com/mpaykin1/meta6-lab/actions/runs/46099796563 | Run node scripts/dispetcher/run.mjs
 - МГЛ: META BOT | https://github.com/mpaykin1/meta6-lab/actions/runs/45976318669 | Play all games
 - | PR | Группа | Ветка | Название | GitHub | Сделано (ChatGPT: слит SHA / закрыт причина / НУЖЕН CLAUDE причина / в работе) |
 - | #270 | код | `lab/biblioteka-veil-camera-20261112` | Камера Veil Terraces как отдельный модуль | closed | draft: ЖДЁТ source-only Library Machine, не Claude: [FAIL 43696794550](https://github.com/mpaykin1/meta6-lab/actions/runs/43696794550) — `scripts/librar… (сокращено)
@@ -19,7 +19,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/46094845112)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/46096272523)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -33,12 +33,12 @@ L2 — не готов: НЕТ в таблице FINISH
 L3 — не готов: НЕТ в таблице FINISH
 L4 — не готов: НЕТ в таблице FINISH
 ## PR МГЛ
-открыто: 8 | конфликт: нет данных | слито: 102 | закрыто: 196
+открыто: 8 | конфликт: 5 | слито: 102 | закрыто: 196
 #453 Telegram Mini App — eleven META GAMES worlds | 8d02028e8d572bd96b280e36914d60fda872147a
 #451 SEO: KILLKLAN artist metadata and crawlable discography | 615ea4e88f4c9e7c043c8f6e0e9794023418e4aa
 ещё 100: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3587 коммитов | нет данных
+МГЛ: 3588 коммитов | нет данных
 МГ: 71 коммитов | .github:6, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, killklan:6, killklan-game:132, meta-games:1, OSHIBKI.md:1, playgama-catalog:36, playgama-games:3, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

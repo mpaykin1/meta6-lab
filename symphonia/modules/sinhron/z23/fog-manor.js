@@ -18,14 +18,15 @@ function stackGeo(a,im,k=1){const {nx,nz,ny:NY,s,cols}=a;const cv=document.creat
   g.computeBoundingSphere();return g;}
 
 const dir=new URL('../../../game/a/',import.meta.url);
-const image=url=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=reject;im.src=url.href;});
+const image=url=>new Promise((resolve,reject)=>{const im=new Image();im.crossOrigin='anonymous';const timer=setTimeout(()=>{im.onload=im.onerror=null;reject(Error('Atlas timeout: '+url.pathname));},7000);im.onload=()=>{clearTimeout(timer);resolve(im);};im.onerror=()=>{clearTimeout(timer);reject(Error('Atlas load failed: '+url.pathname));};im.src=url.href;});
 function texture(im){const t=new THREE.Texture(im);t.flipY=false;t.colorSpace=THREE.SRGBColorSpace;t.minFilter=t.magFilter=THREE.NearestFilter;t.generateMipmaps=false;t.needsUpdate=true;return t;}
 export function createFogManor(scene,glowTex){
  const root=new THREE.Group();root.name='z23-fog-manor';root.visible=false;scene.add(root);
  const toward=new THREE.Vector3(),target=new THREE.Vector3(),heading=new THREE.Vector3(),anchor=new THREE.Vector3();let ready=false,placed=false,windowTex,windowMat,halo,lastFrame=-1;
  const meshes=[],textures=[];
  async function load(){
-   const response=await fetch(new URL('ext/ext_meta.json',dir));if(!response.ok)throw Error('manor atlas metadata');const meta=await response.json();
+   const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),7000);
+   let response;try{response=await fetch(new URL('ext/ext_meta.json',dir),{signal:controller.signal});}finally{clearTimeout(timer);}if(!response.ok)throw Error('manor atlas metadata');const meta=await response.json();
    const names=['facade','wing','dome'];
    const images=await Promise.all(names.map(n=>image(new URL('ext/'+n+'.png',dir))).concat(image(new URL('pianistka.webp',dir))));
    const parts={};
@@ -43,7 +44,12 @@ export function createFogManor(scene,glowTex){
    halo=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:0xffd090,transparent:true,opacity:.24,depthWrite:false,blending:THREE.AdditiveBlending,fog:false}));halo.position.set(0,8.1,3.5);halo.scale.set(3.2,3.2,1);root.add(halo);
    ready=true;
  }
- load().catch(()=>{root.visible=false;for(const p of meshes){p.geo.dispose();p.mat.dispose();}for(const t of textures)t.dispose();root.clear();});
+ async function loadWithRetry(){
+   for(let attempt=0;attempt<3;attempt++){
+    try{await load();return;}catch(err){console.warn('Manor assets, attempt '+(attempt+1),err);ready=false;root.visible=false;for(const p of meshes){p.geo.dispose();p.mat.dispose();}for(const t of textures)t.dispose();meshes.length=0;textures.length=0;root.clear();if(attempt<2)await new Promise(resolve=>setTimeout(resolve,500*(attempt+1)));}
+   }
+ }
+ loadWithRetry();
  return {
  reset(){placed=false;root.visible=false;},
  tick(dt,time,depth,origin,camera,active){

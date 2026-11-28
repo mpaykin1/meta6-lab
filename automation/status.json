@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-28T02:58:40.777Z",
+  "generated_at": "2026-11-28T12:13:40.594Z",
   "sha": {
-    "lab": "b559efbc610c018b9ea2b5fe2c978168d4d84877",
+    "lab": "f546b8feadab1810781dd1a066a9d8dd951a4601",
     "mg": "ca77c011d31cb4814b418007d77f34b6ebbf6a22"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/46100544586",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/46143494996",
   "review": {
     "protected": [
       {
@@ -434,14 +434,14 @@
     ],
     "redLab": [
       {
+        "workflow": "META BOT",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46128217019",
+        "step": "Play all games"
+      },
+      {
         "workflow": "MG Dispatcher",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46099796563",
         "step": "Run node scripts/dispetcher/run.mjs"
-      },
-      {
-        "workflow": "META BOT",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/45976318669",
-        "step": "Play all games"
       }
     ],
     "redMg": [],
@@ -592,10 +592,15 @@
   },
   "pr": {
     "open": 8,
-    "conflicts": 5,
-    "merged": 102,
+    "conflicts": "нет данных",
+    "merged": 103,
     "closed": 196,
     "mergedItems": [
+      {
+        "number": 455,
+        "title": "World Inside: turn quiz into a community platform",
+        "sha": "f546b8feadab1810781dd1a066a9d8dd951a4601"
+      },
       {
         "number": 453,
         "title": "Telegram Mini App — eleven META GAMES worlds",
@@ -1532,7 +1537,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3588,
+      "count": 3593,
       "folders": "нет данных"
     },
     "mg": {

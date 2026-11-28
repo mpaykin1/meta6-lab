@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-28T12:13:40.594Z",
+  "generated_at": "2026-11-28T13:40:49.297Z",
   "sha": {
-    "lab": "f546b8feadab1810781dd1a066a9d8dd951a4601",
+    "lab": "08e252dc845e5c976ad71fd9e2ad1d6c49ab96b6",
     "mg": "ca77c011d31cb4814b418007d77f34b6ebbf6a22"
   },
   "checked": {
     "lab": "53ccabea4681832aefe536bb172a5541b293c743",
     "mg": "74a01e6fe0481c53fb4d715357d3aef278319aac"
   },
-  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/46143494996",
+  "run": "https://github.com/mpaykin1/meta6-lab/actions/runs/46150700949",
   "review": {
     "protected": [
       {
@@ -434,14 +434,24 @@
     ],
     "redLab": [
       {
+        "workflow": "MG Dispatcher",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46148764135",
+        "step": "Run node scripts/dispetcher/run.mjs"
+      },
+      {
+        "workflow": "LAB Pages",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46145599393",
+        "step": "Check published public URLs"
+      },
+      {
+        "workflow": "Link Guard 200",
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46145152712",
+        "step": "Diagnose URLs still failing"
+      },
+      {
         "workflow": "META BOT",
         "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46128217019",
         "step": "Play all games"
-      },
-      {
-        "workflow": "MG Dispatcher",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46099796563",
-        "step": "Run node scripts/dispetcher/run.mjs"
       }
     ],
     "redMg": [],
@@ -581,7 +591,7 @@
       },
       "B1": {
         "value": "подтверждено",
-        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46096272523"
+        "url": "https://github.com/mpaykin1/meta6-lab/actions/runs/46143494965"
       },
       "P1": {
         "value": "не подтверждено",
@@ -592,7 +602,7 @@
   },
   "pr": {
     "open": 8,
-    "conflicts": "нет данных",
+    "conflicts": 5,
     "merged": 103,
     "closed": 196,
     "mergedItems": [
@@ -1537,7 +1547,7 @@
   },
   "changes": {
     "lab": {
-      "count": 3593,
+      "count": 3594,
       "folders": "нет данных"
     },
     "mg": {

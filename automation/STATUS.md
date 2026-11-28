@@ -1,5 +1,5 @@
 # СВОДКА ДЛЯ CLAUDE
-UTC: 2026-11-28T01:47:56.892Z | МГЛ: 6ab61aca885878b448cdef4b6f66f3f5ffaf9a6c | МГ: ca77c011d31cb4814b418007d77f34b6ebbf6a22 | https://github.com/mpaykin1/meta6-lab/actions/runs/46094845128
+UTC: 2026-11-28T02:05:59.548Z | МГЛ: 42d24943a54e1c578a81550d938cecf19e7b5049 | МГ: ca77c011d31cb4814b418007d77f34b6ebbf6a22 | https://github.com/mpaykin1/meta6-lab/actions/runs/46096272458
 ## ПРОВЕРИТЬ CLAUDE
 - PR #439 96fe57465a770913991d99705e7a4d453259965d: .github/workflows/vetki-uborka.yml, scripts/lab/mutate-vetki-uborka.mjs
 - PR #436 c2d4d176479c02f89b99c2e43ad58a216312eb42: .github/workflows/b64-decode.yml, .github/workflows/grange-p22-audit.yml, .github/workflows/grange-publication-gate.yml, .github/workflows/stackgen.yml
@@ -19,7 +19,7 @@ Actions M2: не подтверждено (https://api.github.com/repos/mpaykin1
 Actions M3: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M4: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42647105211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 Actions M5: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42656155211): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
-Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/46093876388)
+Actions B1: подтверждено (https://github.com/mpaykin1/meta6-lab/actions/runs/46094845112)
 Actions P1: не подтверждено (https://api.github.com/repos/mpaykin1/meta6-lab/actions/runs/42644769308): нет успешного завершённого прогона main: https://github.com/mpaykin1/meta6-… (сокращено)
 M6 — не готов: НЕТ в таблице FINISH
 B2 — не готов: НЕТ в таблице FINISH
@@ -38,7 +38,7 @@ L4 — не готов: НЕТ в таблице FINISH
 #451 SEO: KILLKLAN artist metadata and crawlable discography | 615ea4e88f4c9e7c043c8f6e0e9794023418e4aa
 ещё 100: https://github.com/mpaykin1/meta6-lab/pulls?q=is%3Apr+is%3Amerged
 ## ИЗМЕНИЛОСЬ ПОСЛЕ ПРОВЕРКИ CLAUDE
-МГЛ: 3585 коммитов | нет данных
+МГЛ: 3587 коммитов | нет данных
 МГ: 71 коммитов | .github:6, AGENTS.md:1, automation:8, CLAUDE.md:1, games/wild-train-prologue:23, ink:6, ink.md:1, killklan:6, killklan-game:132, meta-games:1, OSHIBKI.md:1, playgama-catalog:36, playgama-games:3, reference:31, rules:14, scripts:2, SOURCE_INDEX.md:1
 ## ИГРЫ
 archer-in-the-fog — не запускалась | витрина: да

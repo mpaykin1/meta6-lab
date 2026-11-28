@@ -3,10 +3,12 @@ import * as THREE from 'three';
 import {createMazeMist} from '../sinhron/z23/living-fog.js';
 export function createCourtyardLanding(source){
  const scene=new THREE.Scene();scene.background=new THREE.Color(0x303b50);scene.fog=new THREE.FogExp2(0x303b50,.025);
- const loader=new THREE.TextureLoader();let stone=null,loading=false,root=null,win=null,halo=null,lastFrame=-1,mist=null;
+ const loader=new THREE.TextureLoader();let stone=null,loading=false,root=null,win=null,halo=null,lastFrame=-1,mist=null,loadToken=0,attempts=0;
  function prepare(){
-  if(loading||stone)return;loading=true;
-  loader.load(new URL('../../game/a/ext/stone.jpg',import.meta.url).href,t=>{t.colorSpace=THREE.SRGBColorSpace;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(8,8);stone=t;},undefined,()=>{loading=false;});
+  if(loading||stone||attempts>=3)return;loading=true;attempts++;
+  const token=++loadToken;
+  const timer=setTimeout(()=>{if(token===loadToken){loading=false;loadToken++;}},6000);
+  loader.load(new URL('../../game/a/ext/stone.jpg',import.meta.url).href,t=>{clearTimeout(timer);if(token!==loadToken){t.dispose();return;}loading=false;t.colorSpace=THREE.SRGBColorSpace;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(8,8);stone=t;},undefined,()=>{clearTimeout(timer);if(token===loadToken)loading=false;});
  }
  function begin(seed,losses){
   const original=source.getObjectByName('z23-fog-manor');if(!original||original.children.length<6||!stone)return false;
